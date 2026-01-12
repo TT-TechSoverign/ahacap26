@@ -1,0 +1,117 @@
+﻿docker.exe : --progress is a global compose 
+flag, better use `docker compose --progress xx 
+build ...
+At line:1 char:1
++ & "C:\Program 
+Files\Docker\Docker\resources\bin\docker.exe" 
+compose b ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (-- 
+   progress is a...ss xx build ...:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.00kB done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 624B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:20-alpine
+#3 DONE 11.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/7] FROM docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448
+#5 resolve docker.io/library/node:20-alpine@sha256:658d0f63e501824d6c23e06d4bb95c71e7d704537c9d9272f488ac03a370d448 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 7.99kB done
+#6 DONE 0.0s
+
+#7 [4/7] RUN npm install -g pnpm
+#7 CACHED
+
+#8 [2/7] WORKDIR /app
+#8 CACHED
+
+#9 [3/7] COPY package.json ./
+#9 CACHED
+
+#10 [5/7] COPY . .
+#10 CACHED
+
+#11 [6/7] RUN pnpm install
+#11 CACHED
+
+#12 [7/7] RUN pnpm build
+#12 0.426 
+#12 0.426 > web@1.0.0 build /app
+#12 0.426 > next build
+#12 0.426 
+#12 0.783 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#12 0.784 This information is used to shape Next.js' roadmap and prioritize features.
+#12 0.784 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#12 0.784 https://nextjs.org/telemetry
+#12 0.784 
+#12 0.855   Γû▓ Next.js 14.2.3
+#12 0.855 
+#12 0.869    Creating an optimized production build ...
+#12 7.203  ΓÜá Failed to download the stylesheet for https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200. Skipped optimizing this font.
+#12 7.203  ΓÜá Failed to download the stylesheet for https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@400;700&display=swap. Skipped optimizing this font.
+#12 13.59  Γ£ô Compiled successfully
+#12 13.59    Linting and checking validity of types ...
+#12 15.14 Failed to compile.
+#12 15.14 
+#12 15.14 ./context/CartContext.tsx:51:33
+#12 15.14 Type error: Cannot find name 'Product'.
+#12 15.14 
+#12 15.14 [0m [90m 49 |[39m     [36mconst[39m closeCart [33m=[39m () [33m=>[39m setIsOpen([36mfalse[39m)[33m;[39m[0m
+#12 15.14 [0m [90m 50 |[39m[0m
+#12 15.14 [0m[31m[1m>[22m[39m[90m 51 |[39m     [36mconst[39m addToCart [33m=[39m (product[33m:[39m [33mProduct[39m) [33m=>[39m {[0m
+#12 15.14 [0m [90m    |[39m                                 [31m[1m^[22m[39m[0m
+#12 15.14 [0m [90m 52 |[39m         setItems(current [33m=>[39m {[0m
+#12 15.14 [0m [90m 53 |[39m             [36mconst[39m existing [33m=[39m current[33m.[39mfind(item [33m=>[39m item[33m.[39mid [33m===[39m product[33m.[39mid)[33m;[39m[0m
+#12 15.14 [0m [90m 54 |[39m             [36mif[39m (existing) {[0m
+#12 15.17 ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.
+#12 ERROR: process "/bin/sh -c pnpm build" did not complete successfully: exit code: 1
+------
+ > [7/7] RUN pnpm build:
+15.14 Type error: Cannot find name 'Product'.
+15.14 
+15.14 [0m [90m 49 |[39m     [36mconst[39m closeCart [33m=[39m () [33m=>[39m setIsOpen([36mfalse[39m)[33m;[39m[0m
+15.14 [0m [90m 50 |[39m[0m
+15.14 [0m[31m[1m>[22m[39m[90m 51 |[39m     [36mconst[39m addToCart [33m=[39m (product[33m:[39m [33mProduct[39m) [33m=>[39m {[0m
+15.14 [0m [90m    |[39m                                 [31m[1m^[22m[39m[0m
+15.14 [0m [90m 52 |[39m         setItems(current [33m=>[39m {[0m
+15.14 [0m [90m 53 |[39m             [36mconst[39m existing [33m=[39m current[33m.[39mfind(item [33m=>[39m item[33m.[39mid [33m===[39m product[33m.[39mid)[33m;[39m[0m
+15.14 [0m [90m 54 |[39m             [36mif[39m (existing) {[0m
+15.17 ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.
+------
+Dockerfile:17
+
+--------------------
+
+  15 |     
+
+  16 |     RUN pnpm install
+
+  17 | >>> RUN pnpm build
+
+  18 |     
+
+  19 |     EXPOSE 3000
+
+--------------------
+
+failed to solve: process "/bin/sh -c pnpm 
+build" did not complete successfully: exit 
+code: 1
+

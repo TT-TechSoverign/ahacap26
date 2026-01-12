@@ -1,0 +1,6 @@
+id,name,price,category,stock
+1,LG 8000 BTU Window Air Conditioner,329,WINDOW_UNIT,15
+2,LG 12000 BTU Window Air Conditioner,459,WINDOW_UNIT,8
+3,GE 10000 BTU Window Air Conditioner,399,WINDOW_UNIT,12
+4,Professional Install Service,150,SERVICE,999
+5,AC Tune-Up Service,99,SERVICE,999

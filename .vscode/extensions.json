@@ -1,0 +1,22 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "EditorConfig.EditorConfig",
+        "eamodio.gitlens",
+        "bradlc.vscode-tailwindcss",
+        "dsznajder.es7-react-js-snippets",
+        "yoavbls.pretty-ts-errors",
+        "formulahendry.auto-rename-tag",
+        "quicktype.quicktype",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.isort",
+        "rangav.vscode-thunder-client",
+        "ms-azuretools.vscode-docker",
+        "ckolkman.vscode-postgres",
+        "PKief.material-icon-theme",
+        "usernamehw.errorlens",
+        "Gruntfuggly.todo-tree"
+    ]
+}
