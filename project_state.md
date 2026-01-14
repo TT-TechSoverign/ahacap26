@@ -9,6 +9,7 @@
     - **API**: Fixed critical CVEs in `aiohttp` and `urllib3` (Pinned versions).
     - **Web**: Reduced vulnerabilities via `pnpm audit --fix`.
 - **Features**: Implemented "Discount Code" feature (`CALOHA` = 10% off) using TDD.
+- **Accessibility**: Hardened UI with `aria-label` and `aria-hidden` attributes across Shop & Cart.
 - **Quality**: Enforced Prettier/ESLint in VS Code and confirmed Build Stability (Docker).
 
 ## 2. Broken / WIP

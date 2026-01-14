@@ -18,7 +18,11 @@ const config: Config = {
                 "border-dark": "#2d333b",  // New Shop Border
                 "charcoal": "#1a1f2e",
                 // Keeping legacy matches just in case, but mapped effectively
-                navy: "#0b1120",
+                navy: {
+                    900: "#0f172a",
+                    950: "#020617",
+                    DEFAULT: "#0b1120",
+                },
                 cyan: "#00AEEF",
             },
             fontFamily: {
@@ -34,6 +38,15 @@ const config: Config = {
             },
             boxShadow: {
                 'glow': '0 0 20px rgba(0, 174, 239, 0.15)',
+            },
+            keyframes: {
+                'subtle-pulse': {
+                    '0%, 100%': { opacity: '1' },
+                    '50%': { opacity: '0.85' },
+                }
+            },
+            animation: {
+                'subtle-pulse': 'subtle-pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             }
         },
     },

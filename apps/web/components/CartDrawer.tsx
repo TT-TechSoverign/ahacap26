@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useCart } from '../context/CartContext';
-import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { clsx } from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { useCart } from '../context/CartContext';
+import CheckoutWrapper from './CheckoutForm';
 
 function cn(...inputs: (string | undefined)[]) {
     return twMerge(clsx(inputs));
@@ -97,11 +98,11 @@ export default function CartDrawer() {
                         {/* Header */}
                         <div className="flex items-center justify-between p-6 border-b border-border-dark bg-[#161b22]">
                             <h2 className="text-white text-xl font-black uppercase tracking-wider flex items-center gap-2">
-                                <span className="material-symbols-outlined text-primary">shopping_cart</span>
+                                <span className="material-symbols-outlined text-primary" aria-hidden="true">shopping_cart</span>
                                 Your Order
                             </h2>
-                            <button onClick={closeCart} className="text-slate-400 hover:text-white transition-colors">
-                                <span className="material-symbols-outlined text-3xl">close</span>
+                            <button onClick={closeCart} className="text-slate-400 hover:text-white transition-colors" aria-label="Close Cart">
+                                <span className="material-symbols-outlined text-3xl" aria-hidden="true">close</span>
                             </button>
                         </div>
 
@@ -138,8 +139,9 @@ export default function CartDrawer() {
                                             <button
                                                 onClick={() => removeFromCart(item.id)}
                                                 className="absolute top-4 right-4 text-slate-600 hover:text-red-500 transition-colors"
+                                                aria-label={`Remove ${item.name} from cart`}
                                             >
-                                                <span className="material-symbols-outlined text-lg">delete</span>
+                                                <span className="material-symbols-outlined text-lg" aria-hidden="true">delete</span>
                                             </button>
                                         </motion.div>
                                     ))}
@@ -204,44 +206,17 @@ export default function CartDrawer() {
                                                 </div>
                                             ) : (
                                                 <>
-                                                    <div className="flex items-center justify-between mb-2">
-                                                        <h3 className="text-white text-sm font-bold uppercase">Contact Information</h3>
-                                                        <button onClick={() => setIsCheckout(false)} className="text-slate-500 text-xs hover:text-white">Cancel</button>
+                                                    <div className="flex items-center justify-between mb-4">
+                                                        <h3 className="text-white text-sm font-bold uppercase">Secure Payment</h3>
+                                                        <button onClick={() => setIsCheckout(false)} className="text-slate-500 text-xs hover:text-white">Back</button>
                                                     </div>
-                                                    <input
-                                                        type="email"
-                                                        placeholder="Enter your email"
-                                                        value={email}
-                                                        onChange={(e) => setEmail(e.target.value)}
-                                                        className="w-full bg-surface-dark border border-border-dark rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-primary placeholder:text-slate-600 mb-2 transition-all focus:ring-1 focus:ring-primary"
-                                                        autoFocus
-                                                    />
-                                                    {error && (
-                                                        <div className="bg-red-500/10 border border-red-500/50 rounded p-3 mb-2">
-                                                            <p className="text-red-500 text-xs font-bold flex items-center gap-2">
-                                                                <span className="material-symbols-outlined text-sm">error</span>
-                                                                {error}
-                                                            </p>
-                                                        </div>
-                                                    )}
-                                                    <div className="pt-2">
-                                                        <button
-                                                            onClick={handleCheckout}
-                                                            disabled={loading}
-                                                            className="w-full bg-green-600 hover:bg-green-500 text-white font-black uppercase tracking-widest py-4 rounded-xl transition-all shadow-lg shadow-green-600/20 hover:shadow-none flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                                                        >
-                                                            {loading ? (
-                                                                <span className="size-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                                            ) : (
-                                                                <>
-                                                                    Confirm Order
-                                                                    <span className="material-symbols-outlined">check</span>
-                                                                </>
-                                                            )}
-                                                        </button>
-                                                    </div>
-                                                    <p className="text-center text-[10px] text-slate-500">
-                                                        By confirming, you agree to Pick Up at Aiea Warehouse.
+
+                                                    {/* Stripe Checkout Integrated */}
+                                                    <CheckoutWrapper totalAmount={cartTotal} items={items} />
+
+                                                    <p className="text-center text-[10px] text-slate-500 mt-4">
+                                                        <span className="material-symbols-outlined text-xs align-middle mr-1">lock</span>
+                                                        Encrypted by Stripe. Pickup at Aiea Warehouse.
                                                     </p>
                                                 </>
                                             )}

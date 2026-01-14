@@ -2,9 +2,11 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 
-# Connection URL (Derived from Docker Compose env vars)
-# Using 'db' as the hostname as defined in docker-compose.yml service name
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://user:password@db:5432/ahac_db")
+# Connection URL (Must be provided via env vars)
+# DATABASE_URL should be set in .env or Docker environment
+DATABASE_URL = os.environ.get("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set.")
 
 engine = create_async_engine(DATABASE_URL, echo=True)
 

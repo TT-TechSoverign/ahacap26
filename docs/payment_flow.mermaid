@@ -1,0 +1,39 @@
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant API
+    participant DB
+    participant Stripe
+
+    User->>Frontend: Click "Secure Checkout"
+    Frontend->>Frontend: Generate Idempotency-Key (UUID)
+    Frontend->>API: POST /create-intent (Items, Total, Key)
+
+    rect rgb(20, 20, 20)
+        Note right of API: Price Guardian & State Machine
+        API->>DB: Calculate Server Total
+        alt Price Mismatch
+            API-->>Frontend: 400 Bad Request
+        end
+        API->>DB: Create/Get Order (Status: AWAIT_PAYMENT)
+    end
+
+    API->>Stripe: Create PaymentIntent (Idempotency Key)
+    Stripe-->>API: Intent ID + Client Secret
+    API->>DB: Update Order (Stripe PID)
+    API-->>Frontend: Client Secret
+
+    Frontend->>Stripe: ConfirmPayment (Client Secret)
+    Stripe-->>Frontend: Success/Failure
+
+    par Async Webhook
+        Stripe->>API: POST /webhooks/stripe (Event: succeeded)
+        rect rgb(20, 20, 20)
+            Note right of API: Webhook Warden
+            API->>API: Verify Signature (Raw Body)
+            API-->>Stripe: 200 OK (Immediate)
+        end
+        API->>DB: Background Tasks -> Update Order (PAID)
+    end
+
+    Frontend->>User: Show Success Confetti

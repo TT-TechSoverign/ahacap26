@@ -1,11 +1,18 @@
-import './globals.css';
 import type { Metadata } from 'next';
-import { CartProvider } from '../context/CartContext';
+import { Inter, Oswald } from 'next/font/google';
 import CartDrawer from '../components/CartDrawer';
+import { CartProvider } from '../context/CartContext';
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald', display: 'swap' });
 
 export const metadata: Metadata = {
-    title: 'Affordable Home A/C | Precision HVAC Oahu',
+    title: 'Affordable Home A/C',
     description: 'Premium window and portable air conditioning units for Oahu. Local inventory, expert service, unbeatable prices.',
+    icons: {
+        icon: '/assets/ahac-logo-faviconv1.svg',
+    },
 };
 
 export default function RootLayout({
@@ -18,10 +25,19 @@ export default function RootLayout({
             <head>
                 {/* Material Symbols for UI Icons */}
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-                {/* Fallback Font CDN if needed, or rely on system fonts/tailwind config */}
-                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@400;700&display=swap" rel="stylesheet" />
             </head>
-            <body className={`font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white`}>
+            <body className={`${inter.variable} ${oswald.variable} font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white`}>
+                {/* Temporary Ticker */}
+                {/* Temporary Ticker */}
+                <div className="fixed top-0 w-full z-[60] bg-orange-600 text-white text-xs font-bold py-2 tracking-widest uppercase h-9 shadow-[0_0_20px_rgba(234,88,12,0.5)] overflow-hidden flex items-center">
+                    <div className="animate-marquee whitespace-nowrap flex items-center gap-12">
+                        {Array(10).fill("⚠️ SYSTEM STATUS: Affordable Home A/C IS CALIBRATING A NEW DIGITAL EXPERIENCE • RECHARGING REFRIGERANT • OPTIMIZING USER AIRFLOW • PRECISION COMFORT LOADING SOON ⚠️").map((text, i) => (
+                            <span key={i} className="flex items-center gap-2">
+                                {text}
+                            </span>
+                        ))}
+                    </div>
+                </div>
                 <CartProvider>
                     {children}
                     <CartDrawer />

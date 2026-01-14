@@ -1,0 +1,20 @@
+**Service-Areas-City-ZipCodes:
+Aiea: 96701
+Ewa Beach: 96706
+Haleiwa: 96712
+Hauula: 96717
+Honolulu: 96801-96826, 96828, 96830, 96836-96841, 96843, 96844, 96846-96850, 96853, 96854, 96857-96861, 96863, 96898
+Kaaawa: 96730
+Kahuku: 96731
+Kailua: 96734
+Kaneohe: 96744
+Kapolei: 96707, 96709
+Kunia: 96759
+Laie: 96762
+Mililani: 96789
+Pearl City: 96782
+Wahiawa: 96786
+Waialua: 96791
+Waianae: 96792
+Waimanalo: 96795
+Waipahu: 96797

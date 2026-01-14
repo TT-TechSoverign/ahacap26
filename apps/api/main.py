@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy import insert
+from sqlalchemy import insert, update
 from contextlib import asynccontextmanager
 from pydantic import BaseModel
 from typing import List, Dict, Optional
@@ -12,11 +12,19 @@ import os
 from database import engine, Base, get_db, AsyncSessionLocal
 import models
 # [NEW] Domain Imports
-from domain import orders, catalog, cart
+from domain import orders, catalog, cart, payments
+from cache import init_redis, close_redis, cache_response
+import asyncio
+import random
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import Response
 
 # --- LIFESPAN (Startup/Shutdown) ---
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # 0. Init Redis
+    await init_redis()
+
     # 1. Initialize Tables
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
@@ -51,6 +59,7 @@ async def lifespan(app: FastAPI):
 
     yield
     # Shutdown logic (dispose engine)
+    await close_redis()
     await engine.dispose()
 
 app = FastAPI(lifespan=lifespan)
@@ -64,6 +73,28 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import Response
+from middleware import LogSanitizerMiddleware, ChaosMiddleware, HeaderMiddleware
+
+# ...
+
+app = FastAPI(lifespan=lifespan)
+
+# --- SECURITY & MIDDLEWARE ---
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.add_middleware(LogSanitizerMiddleware)
+app.add_middleware(ChaosMiddleware)
+app.add_middleware(HeaderMiddleware)
 
 @app.get("/api/v1/health")
 async def health_check():
@@ -113,7 +144,141 @@ async def validate_cart(cart_request: OrderRequest):
     # Correction: 'cart' variable shadows module name 'cart'. Renaming variable in function sig to avoid conflict?
     # Or import as 'cart_domain'
 
+class PaymentIntentRequest(BaseModel):
+    items: List[CartItem]
+    client_total_cents: int
+    currency: str = "usd"
+
+from fastapi import Header
+
+@app.post("/api/v1/payments/create-intent")
+async def create_payment_intent(
+    request: PaymentIntentRequest,
+    db: AsyncSession = Depends(get_db),
+    idempotency_key: Optional[str] = Header(None)
+):
+    # 1. Calculate Server-Side Total
+    server_total_cents = await cart.calculate_cart_total(request.items, db)
+
+    # 2. Hard Fail on Mismatch (Price Guardian)
+    if server_total_cents != request.client_total_cents:
+        print(f"PriceMismatch: Client({request.client_total_cents}) != Server({server_total_cents})")
+        raise HTTPException(status_code=400, detail="Price mismatch detected. Please refresh cart.")
+
+    # 3. State Machine: Initialize Order in AWAIT_PAYMENT
+    # Idempotency Check (DB Level)
+    existing_order = None
+    if idempotency_key:
+        result = await db.execute(select(models.Order).where(models.Order.idempotency_key == idempotency_key))
+        existing_order = result.scalars().first()
+
+    if existing_order:
+        # Strict Transition Check
+        if existing_order.status == models.OrderStatus.PAID:
+             # If already paid, client should ideally not be here, but getting the same intent is safe as Stripe won't double charge
+             pass
+        elif existing_order.status != models.OrderStatus.AWAIT_PAYMENT:
+            raise HTTPException(status_code=409, detail=f"Invalid State Transition from {existing_order.status}")
+
+        # Make sure amount hasn't changed?
+        if existing_order.total_cents != server_total_cents:
+             raise HTTPException(status_code=400, detail="Order modified. Please restart checkout.")
+    else:
+        # Create New Order
+        from uuid import uuid4
+        new_order = models.Order(
+            id=str(uuid4()),
+            status=models.OrderStatus.AWAIT_PAYMENT,
+            total_cents=server_total_cents,
+            idempotency_key=idempotency_key
+        )
+        db.add(new_order)
+        await db.commit()
+
+    # 4. Create/Retrieve Intent (Pass Idempotency Key to Stripe)
+    result = await payments.create_payment_intent_service(server_total_cents, request.currency, idempotency_key)
+
+    # Update Order with Stripe PID if new
+    if not existing_order or not existing_order.stripe_pid:
+        # We need to fetch order again if it was just created? No, we have the object if we kept it in scope?
+        # Actually sqlalchemy async session requires refresh usually.
+        # Let's just update strictly if we just created it.
+        # Simplest: Update by idempotency key
+        stmt = (
+            models.update(models.Order)
+            .where(models.Order.idempotency_key == idempotency_key)
+            .values(stripe_pid=result['id'])
+        )
+        await db.execute(stmt)
+        await db.commit()
+
+    return result
+
+# --- WEBHOOKS ---
+from fastapi import Request, BackgroundTasks
+
+async def process_stripe_event(event: dict):
+    """
+    Background Task to process Stripe events asynchronously.
+    Updates DB Order status to PAID.
+    """
+    if event['type'] == 'payment_intent.succeeded':
+        intent = event['data']['object']
+        stripe_pid = intent['id']
+        amount_received = intent['amount_received']
+
+        print(f"Processing Payment Success: {stripe_pid}")
+
+        # New DB Session for Background Task
+        async with AsyncSessionLocal() as session:
+            try:
+                # Find Order
+                result = await session.execute(
+                    select(models.Order).where(models.Order.stripe_pid == stripe_pid)
+                )
+                order = result.scalars().first()
+
+                if order:
+                    if order.status != models.OrderStatus.PAID:
+                        # Verify Amount (Optional paranoid check)
+                        if order.total_cents == amount_received:
+                            order.status = models.OrderStatus.PAID
+                            await session.commit()
+                            print(f"Order {order.id} marked as PAID.")
+                        else:
+                            print("Warning: Amount mismatch in webhook.")
+                    else:
+                         print("Order already PAID.")
+                else:
+                    print(f"Order not found for PID: {stripe_pid}")
+            except Exception as e:
+                print(f"Webhook Processing Error: {e}")
+
+@app.post("/api/webhooks/stripe")
+async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
+    payload = await request.body()
+    sig_header = request.headers.get("Stripe-Signature")
+
+    webhook_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, webhook_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        raise HTTPException(status_code=400, detail="Invalid payload")
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        raise HTTPException(status_code=400, detail="Invalid signature")
+
+    # Async Processing (@EventBuffer)
+    background_tasks.add_task(process_stripe_event, event)
+
+    return {"status": "success"}
+
 @app.get("/api/v1/products", response_model=List[ProductSchema])
+@cache_response(ttl=60, key_prefix="products")
 async def get_products(
     q: Optional[str] = None,
     category: Optional[str] = None,
