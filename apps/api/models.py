@@ -19,6 +19,7 @@ class Product(Base):
     price = Column(Integer)
     category = Column(String, index=True)
     stock = Column(Integer)
+    image_url = Column(String, nullable=True) # [NEW] Support for custom images
 
 class Order(Base):
     __tablename__ = "orders"
@@ -27,5 +28,6 @@ class Order(Base):
     status = Column(String, default=OrderStatus.AWAIT_PAYMENT)
     total_cents = Column(Integer)
     stripe_pid = Column(String, nullable=True)
+    customer_email = Column(String, nullable=True) # [NEW]
     idempotency_key = Column(String, unique=True, index=True, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)

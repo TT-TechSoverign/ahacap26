@@ -40,7 +40,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     const [isSpecModalOpen, setIsSpecModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-    const productImages = product ? getProductImages(product.id) : [];
+    const productImages = product ? [
+        ...(product.image_url ? [product.image_url] : []),
+        ...getProductImages(product.id)
+    ] : [];
     const specs = product ? getProductSpecs(product.id) : null;
 
     // Set initial image
@@ -128,6 +131,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                                         sizes="(max-width: 1024px) 100vw, 50vw"
                                         className="object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
                                         priority
+                                        unoptimized={!!product.image_url && selectedImage === product.image_url}
                                     />
                                 </div>
                             ) : (

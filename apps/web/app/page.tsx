@@ -24,7 +24,7 @@ export default function LandingPage() {
                     </div>
                     <nav className="hidden md:flex items-center gap-8">
                         <Link href="/shop" className="nav-link text-sm tracking-widest hover:text-primary transition-colors">SHOP INVENTORY</Link>
-                        <Link href="/maintenance" className="nav-link text-sm tracking-widest hover:text-primary transition-colors">MAINTENANCE</Link>
+                        <Link href="/maintenance" className="nav-link text-sm tracking-widest hover:text-primary transition-colors">AC CLEANING</Link>
                         <Link href="/mini-splits" className="nav-link text-sm tracking-widest hover:text-primary transition-colors">MINI SPLITS</Link>
                         <Link href="/central-ac" className="nav-link text-sm tracking-widest hover:text-primary transition-colors">CENTRAL AC</Link>
                     </nav>
@@ -85,7 +85,7 @@ export default function LandingPage() {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-header font-bold text-white mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">SHOP INVENTORY</h3>
-                                    <p className="text-slate-400 text-sm leading-relaxed mb-4">Live inventory of window units & portable A/C. Buy online, pickup in Aiea.</p>
+                                    <p className="text-slate-400 text-sm leading-relaxed mb-4">Instant stock of high-efficiency <strong>Window ACs</strong> & <strong>Portable Units</strong> from GE and LG. Beat the heat with same-day <strong>Waipahu pickup</strong>.</p>
                                     <Link href="/shop" className="text-primary flex items-center gap-2 text-xs font-bold tracking-widest group-hover:gap-3 transition-all uppercase">
                                         View Shop <span className="material-symbols-outlined text-base">arrow_forward</span>
                                     </Link>
@@ -98,8 +98,8 @@ export default function LandingPage() {
                                     <span className="material-symbols-outlined text-4xl drop-shadow-[0_0_10px_rgba(57,181,74,0.5)]">engineering</span>
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-header font-bold text-white mb-2 uppercase tracking-wide group-hover:text-accent transition-colors">MAINTENANCE</h3>
-                                    <p className="text-slate-400 text-sm leading-relaxed mb-4">Expert service led by Chris Martinez. Extend equipment life in Hawaii&apos;s salt air.</p>
+                                    <h3 className="text-xl font-header font-bold text-white mb-2 uppercase tracking-wide group-hover:text-accent transition-colors">WINDOW AC CLEANING</h3>
+                                    <p className="text-slate-400 text-sm leading-relaxed mb-4">Combat <strong>Hawaii&apos;s salt air corrosion</strong> with our comprehensive <strong>Anti-Rust Coating</strong> & <strong>Deep Cleaning</strong> services. Led by <strong>Master Technician Chris Martinez</strong>.</p>
                                     <Link href="/maintenance" className="text-accent flex items-center gap-2 text-xs font-bold tracking-widest group-hover:gap-3 transition-all uppercase">
                                         Service Plans <span className="material-symbols-outlined text-base">arrow_forward</span>
                                     </Link>
@@ -113,7 +113,7 @@ export default function LandingPage() {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-header font-bold text-white mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">MINI SPLITS</h3>
-                                    <p className="text-slate-400 text-sm leading-relaxed mb-4">Precision zone cooling. Perfect for individual rooms without invasive ductwork.</p>
+                                    <p className="text-slate-400 text-sm leading-relaxed mb-4">Ultra-quiet <strong>Ductless Mini Splits</strong> for precision <strong>Zone Cooling</strong>. Authorized installer for <strong>Mitsubishi, Fujitsu, & Carrier</strong> high-SEER systems.</p>
                                     <Link href="/mini-splits" className="text-primary flex items-center gap-2 text-xs font-bold tracking-widest group-hover:gap-3 transition-all uppercase">
                                         10-Year Warranty <span className="material-symbols-outlined text-base">arrow_forward</span>
                                     </Link>
@@ -127,7 +127,7 @@ export default function LandingPage() {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-header font-bold text-white mb-2 uppercase tracking-wide group-hover:text-accent transition-colors">CENTRAL AC</h3>
-                                    <p className="text-slate-400 text-sm leading-relaxed mb-4">High-efficiency retrofits handling tropical heatwaves. Full system replacements.</p>
+                                    <p className="text-slate-400 text-sm leading-relaxed mb-4">Expert <strong>Central AC Retrofits</strong> designed for <strong>Tropical Climates</strong>. Upgrade to <strong>High-Efficiency SEER2 Systems</strong> for lower electric bills.</p>
                                     <Link href="/central-ac" className="text-accent flex items-center gap-2 text-xs font-bold tracking-widest group-hover:gap-3 transition-all uppercase">
                                         Retrofit Options <span className="material-symbols-outlined text-base">arrow_forward</span>
                                     </Link>

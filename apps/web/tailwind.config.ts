@@ -17,6 +17,8 @@ const config: Config = {
                 "surface-dark": "#161b22", // New Shop Surface
                 "border-dark": "#2d333b",  // New Shop Border
                 "charcoal": "#1a1f2e",
+                "navy-deep": "#0b1120",
+                "navy-matte": "#0f172a",
                 // Keeping legacy matches just in case, but mapped effectively
                 navy: {
                     900: "#0f172a",

@@ -43,23 +43,45 @@ def cache_response(ttl: int = 60, key_prefix: str = "api"):
             # Warning: args/kwargs must be serializable
             cache_key = f"{key_prefix}:{func.__name__}:{str(args)}:{str(kwargs)}"
 
+            # 1. Try to get from cache
             try:
-                # Check Cache
                 cached = await redis_client.get(cache_key)
                 if cached:
                     return json.loads(cached)
+            except Exception as e:
+                print(f"Cache GET Error: {e}")
 
-                # Execute Function
-                result = await func(*args, **kwargs)
+            # 2. Add header to detect missed cache
+            # (Optional, but useful for debugging)
 
-                # Cache Result
-                # Use jsonable_encoder to convert Pydantic/SQLAlchemy models to JSON-compatible types
+            # 3. Execute Function (Application Logic)
+            # If this fails, let it bubble up. Do NOT catch it as a cache error.
+            result = await func(*args, **kwargs)
+
+            # 4. Try to set cache
+            try:
                 encoded_result = jsonable_encoder(result)
                 await redis_client.setex(cache_key, ttl, json.dumps(encoded_result))
-
-                return result
             except Exception as e:
-                print(f"Cache Error: {e}")
-                return await func(*args, **kwargs)
+                print(f"Cache SET Error: {e}")
+
+            return result
         return wrapper
+
     return decorator
+
+async def invalidate_cache(key_pattern: str):
+    """
+    Invalidate cache keys matching pattern (e.g. 'products:*')
+    """
+    global redis_client
+    if not redis_client:
+        return
+
+    try:
+        keys = await redis_client.keys(key_pattern)
+        if keys:
+            await redis_client.delete(*keys)
+            print(f"Cache: Invalidated {len(keys)} keys for pattern '{key_pattern}'")
+    except Exception as e:
+        print(f"Cache Invalidation Error: {e}")

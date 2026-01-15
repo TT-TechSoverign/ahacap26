@@ -1,4 +1,12 @@
-from fastapi import FastAPI, HTTPException, Depends
+
+from dotenv import load_dotenv
+import os
+
+# 0. Load Env Support
+load_dotenv()
+print(f"DEBUG: STARTUP MAIN.PY. STRIPE_KEY_LEN={len(os.getenv('STRIPE_SECRET_KEY', ''))}")
+
+from fastapi import FastAPI, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -7,17 +15,17 @@ from contextlib import asynccontextmanager
 from pydantic import BaseModel
 from typing import List, Dict, Optional
 import csv
-import os
-
-from database import engine, Base, get_db, AsyncSessionLocal
-import models
-# [NEW] Domain Imports
-from domain import orders, catalog, cart, payments
-from cache import init_redis, close_redis, cache_response
 import asyncio
 import random
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import Response
+
+# Local Imports
+from database import engine, Base, get_db, AsyncSessionLocal
+import models
+from domain import orders, catalog, cart, payments
+from cache import init_redis, close_redis, cache_response, invalidate_cache
+from middleware import LogSanitizerMiddleware, ChaosMiddleware, HeaderMiddleware
 
 # --- LIFESPAN (Startup/Shutdown) ---
 @asynccontextmanager
@@ -26,59 +34,47 @@ async def lifespan(app: FastAPI):
     await init_redis()
 
     # 1. Initialize Tables
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    print("DEBUG: Creating Tables...")
+    try:
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
 
-    # 2. Seed Data if Empty
-    async with AsyncSessionLocal() as session:
-        result = await session.execute(select(models.Product))
-        existing_product = result.scalars().first()
+        # 2. Seed Data if Empty
+        async with AsyncSessionLocal() as session:
+            result = await session.execute(select(models.Product))
+            existing_product = result.scalars().first()
 
-        if not existing_product:
-            print("Database empty. Seeding from inventory.csv...")
-            file_path = os.path.join(os.path.dirname(__file__), "inventory.csv")
-            try:
-                products_to_add = []
-                with open(file_path, mode='r') as csvfile:
-                    reader = csv.DictReader(csvfile)
-                    for row in reader:
-                        products_to_add.append({
-                            "id": int(row['id']),
-                            "name": row['name'],
-                            "price": int(row['price']),
-                            "category": row['category'],
-                            "stock": int(row['stock'])
-                        })
+            if not existing_product:
+                print("Database empty. Seeding from inventory.csv...")
+                file_path = os.path.join(os.path.dirname(__file__), "inventory.csv")
+                try:
+                    products_to_add = []
+                    with open(file_path, mode='r') as csvfile:
+                        reader = csv.DictReader(csvfile)
+                        for row in reader:
+                            products_to_add.append({
+                                "id": int(row['id']),
+                                "name": row['name'],
+                                "price": int(row['price']),
+                                "category": row['category'],
+                                "stock": int(row['stock'])
+                            })
 
-                if products_to_add:
-                    await session.execute(insert(models.Product), products_to_add)
-                    await session.commit()
-                    print(f"Seeded {len(products_to_add)} products.")
-            except FileNotFoundError:
-                print("Warning: inventory.csv not found. Skipping seed.")
+                    if products_to_add:
+                        await session.execute(insert(models.Product), products_to_add)
+                        await session.commit()
+                        print(f"Seeded {len(products_to_add)} products.")
+                except FileNotFoundError:
+                    print("Warning: inventory.csv not found. Skipping seed.")
+    except Exception as e:
+        print(f"WARNING: Database connection failed: {e}")
+        print("Running in NO-DB Mode. Only Mock Endpoints will work.")
 
+    print("DEBUG: Startup Complete.")
     yield
-    # Shutdown logic (dispose engine)
+    # Shutdown
     await close_redis()
     await engine.dispose()
-
-app = FastAPI(lifespan=lifespan)
-
-# --- SECURITY ---
-origins = ["*"]
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import Response
-from middleware import LogSanitizerMiddleware, ChaosMiddleware, HeaderMiddleware
-
-# ...
 
 app = FastAPI(lifespan=lifespan)
 
@@ -95,6 +91,8 @@ app.add_middleware(
 app.add_middleware(LogSanitizerMiddleware)
 app.add_middleware(ChaosMiddleware)
 app.add_middleware(HeaderMiddleware)
+
+# --- ROUTES ---
 
 @app.get("/api/v1/health")
 async def health_check():
@@ -132,24 +130,35 @@ class OrderRequest(BaseModel):
     shipping_method: str = "PICKUP_AIEA"
     discount_code: Optional[str] = None
 
-@app.post("/api/v1/orders")
-async def create_order(order: OrderRequest, db: AsyncSession = Depends(get_db)):
-    # Delegate to Domain Layer
-    return await orders.create_order_service(order, db)
-
-@app.post("/api/v1/cart/validate")
-async def validate_cart(cart_request: OrderRequest):
-    # Delegate to Domain Layer
-    return cart.validate_cart_service(cart_request) # Wait, module is 'cart', function is 'validate_cart_service'
-    # Correction: 'cart' variable shadows module name 'cart'. Renaming variable in function sig to avoid conflict?
-    # Or import as 'cart_domain'
-
 class PaymentIntentRequest(BaseModel):
     items: List[CartItem]
     client_total_cents: int
     currency: str = "usd"
+    customer_email: Optional[str] = None
 
-from fastapi import Header
+class ProductCreateSchema(BaseModel):
+    name: str
+    price: int
+    category: str
+    stock: int
+    image_url: Optional[str] = None
+
+class ProductUpdateSchema(BaseModel):
+    name: Optional[str] = None
+    price: Optional[int] = None
+    category: Optional[str] = None
+    stock: Optional[int] = None
+    image_url: Optional[str] = None
+
+# --- API ENDPOINTS ---
+
+@app.post("/api/v1/orders")
+async def create_order(order: OrderRequest, db: AsyncSession = Depends(get_db)):
+    return await orders.create_order_service(order, db)
+
+@app.post("/api/v1/cart/validate")
+async def validate_cart(cart_request: OrderRequest):
+    return cart.validate_cart_service(cart_request)
 
 @app.post("/api/v1/payments/create-intent")
 async def create_payment_intent(
@@ -157,53 +166,46 @@ async def create_payment_intent(
     db: AsyncSession = Depends(get_db),
     idempotency_key: Optional[str] = Header(None)
 ):
-    # 1. Calculate Server-Side Total
+    print(f"DEBUG: create_payment_intent hit. Email={request.customer_email}")
+    # 1. Total
     server_total_cents = await cart.calculate_cart_total(request.items, db)
 
-    # 2. Hard Fail on Mismatch (Price Guardian)
+    # 2. Check
     if server_total_cents != request.client_total_cents:
-        print(f"PriceMismatch: Client({request.client_total_cents}) != Server({server_total_cents})")
         raise HTTPException(status_code=400, detail="Price mismatch detected. Please refresh cart.")
 
-    # 3. State Machine: Initialize Order in AWAIT_PAYMENT
-    # Idempotency Check (DB Level)
+    # 3. Order Init
     existing_order = None
     if idempotency_key:
         result = await db.execute(select(models.Order).where(models.Order.idempotency_key == idempotency_key))
         existing_order = result.scalars().first()
 
     if existing_order:
-        # Strict Transition Check
         if existing_order.status == models.OrderStatus.PAID:
-             # If already paid, client should ideally not be here, but getting the same intent is safe as Stripe won't double charge
-             pass
+            pass
         elif existing_order.status != models.OrderStatus.AWAIT_PAYMENT:
             raise HTTPException(status_code=409, detail=f"Invalid State Transition from {existing_order.status}")
 
-        # Make sure amount hasn't changed?
-        if existing_order.total_cents != server_total_cents:
-             raise HTTPException(status_code=400, detail="Order modified. Please restart checkout.")
+        if request.customer_email and existing_order.customer_email != request.customer_email:
+             existing_order.customer_email = request.customer_email
+             await db.commit()
     else:
-        # Create New Order
         from uuid import uuid4
         new_order = models.Order(
             id=str(uuid4()),
             status=models.OrderStatus.AWAIT_PAYMENT,
             total_cents=server_total_cents,
-            idempotency_key=idempotency_key
+            idempotency_key=idempotency_key,
+            customer_email=request.customer_email
         )
         db.add(new_order)
         await db.commit()
 
-    # 4. Create/Retrieve Intent (Pass Idempotency Key to Stripe)
+    # 4. Stripe Intent
     result = await payments.create_payment_intent_service(server_total_cents, request.currency, idempotency_key)
 
-    # Update Order with Stripe PID if new
+    # 5. Update Order
     if not existing_order or not existing_order.stripe_pid:
-        # We need to fetch order again if it was just created? No, we have the object if we kept it in scope?
-        # Actually sqlalchemy async session requires refresh usually.
-        # Let's just update strictly if we just created it.
-        # Simplest: Update by idempotency key
         stmt = (
             models.update(models.Order)
             .where(models.Order.idempotency_key == idempotency_key)
@@ -216,23 +218,19 @@ async def create_payment_intent(
 
 # --- WEBHOOKS ---
 from fastapi import Request, BackgroundTasks
+from services import email as email_service
 
 async def process_stripe_event(event: dict):
-    """
-    Background Task to process Stripe events asynchronously.
-    Updates DB Order status to PAID.
-    """
     if event['type'] == 'payment_intent.succeeded':
         intent = event['data']['object']
         stripe_pid = intent['id']
         amount_received = intent['amount_received']
+        receipt_email = intent.get('receipt_email')
 
         print(f"Processing Payment Success: {stripe_pid}")
 
-        # New DB Session for Background Task
         async with AsyncSessionLocal() as session:
             try:
-                # Find Order
                 result = await session.execute(
                     select(models.Order).where(models.Order.stripe_pid == stripe_pid)
                 )
@@ -240,15 +238,20 @@ async def process_stripe_event(event: dict):
 
                 if order:
                     if order.status != models.OrderStatus.PAID:
-                        # Verify Amount (Optional paranoid check)
-                        if order.total_cents == amount_received:
-                            order.status = models.OrderStatus.PAID
-                            await session.commit()
-                            print(f"Order {order.id} marked as PAID.")
-                        else:
-                            print("Warning: Amount mismatch in webhook.")
+                        order.status = models.OrderStatus.PAID
+                        await session.commit()
+                        print(f"Order {order.id} marked as PAID.")
+
+                    target_email = order.customer_email or receipt_email
+                    if target_email:
+                        print(f"Dispatching email to {target_email}...")
+                        await email_service.send_order_confirmation(
+                            target_email,
+                            order.id,
+                            order.total_cents
+                        )
                     else:
-                         print("Order already PAID.")
+                        print("No email found for order confirmation.")
                 else:
                     print(f"Order not found for PID: {stripe_pid}")
             except Exception as e:
@@ -258,24 +261,65 @@ async def process_stripe_event(event: dict):
 async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
     payload = await request.body()
     sig_header = request.headers.get("Stripe-Signature")
-
     webhook_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
 
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, webhook_secret
         )
-    except ValueError as e:
-        # Invalid payload
+    except ValueError:
         raise HTTPException(status_code=400, detail="Invalid payload")
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
+    except stripe.error.SignatureVerificationError:
         raise HTTPException(status_code=400, detail="Invalid signature")
 
-    # Async Processing (@EventBuffer)
     background_tasks.add_task(process_stripe_event, event)
-
     return {"status": "success"}
+
+# --- DEBUG ENDPOINTS (MOCK FLOW) ---
+from services import pdf as pdf_service
+from datetime import datetime
+
+class SimulatePaymentRequest(BaseModel):
+    items: List[CartItem]
+    customer_email: str
+    total_cents: int
+
+@app.post("/api/v1/debug/simulate-payment")
+async def simulate_payment(request: SimulatePaymentRequest, background_tasks: BackgroundTasks):
+    """
+    Generates a PDF receipt and sends real emails to Customer + Owner.
+    Does NOT charge card, but creates records.
+    """
+    print(f"DEBUG: Simulating Payment for {request.customer_email}")
+
+    # 1. Generate Dummy Order ID
+    import uuid
+    order_id = str(uuid.uuid4())
+
+    # 2. Generate PDF
+    # Convert CartItems to dicts for simple PDF generator if needed, or pass as is if PDF supports it.
+    # We kept PDF simple.
+    pdf_bytes = pdf_service.generate_receipt_pdf(
+        order_id,
+        [item.dict() for item in request.items],
+        request.total_cents,
+        datetime.now(),
+        request.customer_email
+    )
+
+    # 3. Send Email (Background)
+    # targeting: authentic customer email + owner + mock copy
+    background_tasks.add_task(
+        email_service.send_order_confirmation,
+        request.customer_email,
+        order_id,
+        request.total_cents,
+        pdf_bytes
+    )
+
+    return {"status": "success", "order_id": order_id}
+
+# --- PRODUCT ROUTES ---
 
 @app.get("/api/v1/products", response_model=List[ProductSchema])
 @cache_response(ttl=60, key_prefix="products")
@@ -286,9 +330,7 @@ async def get_products(
     max_price: Optional[float] = None,
     db: AsyncSession = Depends(get_db)
 ):
-    # Delegate to Domain Layer
     return await catalog.get_products_service(db, q, category, min_price, max_price)
-
 
 @app.get("/api/v1/products/{product_id}", response_model=ProductSchema)
 async def get_product(product_id: int, db: AsyncSession = Depends(get_db)):
@@ -298,6 +340,28 @@ async def get_product(product_id: int, db: AsyncSession = Depends(get_db)):
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
     return product
+
+@app.post("/api/v1/products", response_model=ProductSchema)
+async def create_product(product: ProductCreateSchema, db: AsyncSession = Depends(get_db)):
+    result = await catalog.create_product_service(db, product.dict())
+    await invalidate_cache("products:*")
+    return result
+
+@app.put("/api/v1/products/{product_id}", response_model=ProductSchema)
+async def update_product(product_id: int, product: ProductUpdateSchema, db: AsyncSession = Depends(get_db)):
+    updated_product = await catalog.update_product_service(db, product_id, product.dict(exclude_unset=True))
+    if not updated_product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    await invalidate_cache("products:*")
+    return updated_product
+
+@app.delete("/api/v1/products/{product_id}")
+async def delete_product(product_id: int, db: AsyncSession = Depends(get_db)):
+    success = await catalog.delete_product_service(db, product_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Product not found")
+    await invalidate_cache("products:*")
+    return {"status": "success", "message": "Product deleted"}
 
 @app.get("/api/v1/warranties", response_model=WarrantyMatrix)
 async def get_warranties():
