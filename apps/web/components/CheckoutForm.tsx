@@ -166,9 +166,89 @@ export default function CheckoutWrapper({ totalAmount, items, customerEmail, onS
                 </div>
                 <div className="flex gap-4">
                     <button onClick={() => window.location.reload()} className="text-cyan-400 text-xs uppercase font-bold hover:underline">Retry Connection</button>
+                    {/* Mock Mode Trigger */}
+                    <button
+                        onClick={() => {
+                            setError(null); // Clear error to unblock render
+                            setClientSecret("MOCK_SECRET");
+                            setTheme('night');
+                        }}
+                        className="text-amber-400 text-xs uppercase font-bold hover:underline"
+                    >
+                        Simulate Success
+                    </button>
                 </div>
             </div>
         );
+    }
+
+    // Mock View Logic
+    if (clientSecret === "MOCK_SECRET") {
+        return (
+            <div className="space-y-6">
+                <div className="p-4 border border-amber-500/20 bg-amber-500/5 rounded-lg">
+                    <h3 className="text-amber-400 text-xs font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+                         <span className="material-symbols-outlined text-lg">science</span>
+                         Debug / Mock Mode
+                    </h3>
+                    <p className="text-slate-400 text-xs mb-4">
+                        Stripe connection failed. You are using the simulator to verify the UI flow.
+                    </p>
+
+                    <div className="space-y-4">
+                        <div className="bg-slate-800 p-3 rounded border border-slate-700">
+                             <div className="h-4 w-3/4 bg-slate-700 rounded mb-2 animate-pulse" />
+                             <div className="flex gap-2">
+                                 <div className="h-4 w-1/4 bg-slate-700 rounded animate-pulse" />
+                                 <div className="h-4 w-1/4 bg-slate-700 rounded animate-pulse" />
+                             </div>
+                        </div>
+                         <button
+                            onClick={() => {
+                                // Trigger Backend Simulation First
+                                const payload = {
+                                    items: items.map(i => ({ ...i, product_id: i.id })), // map ID
+                                    customer_email: customerEmail || "mock@example.com",
+                                    total_cents: Math.round(totalAmount * 100)
+                                };
+
+                                // Dynamic URL for Staging/Prod compatibility
+                                const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+                                const apiUrl = `${baseUrl}/debug/simulate-payment`;
+                                console.log('DEBUG: Simulate Payment Triggered. URL:', apiUrl);
+                                console.log('DEBUG: Payload:', payload);
+
+                                fetch(apiUrl, {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify(payload)
+                                })
+                                .then(res => {
+                                    console.log('DEBUG: API Response Status:', res.status);
+                                    if (!res.ok) alert(`Simulation Failed: ${res.status} ${res.statusText}`);
+                                    return res.json();
+                                })
+                                .then(data => console.log('DEBUG: API Data:', data))
+                                .catch(err => {
+                                    console.error('DEBUG: Simulation Error:', err);
+                                    alert(`Network Error: ${err.message}`);
+                                });
+
+                                // Trigger passed success handler UI
+                                if (onSuccess) {
+                                    onSuccess();
+                                } else {
+                                    alert("Mock Payment Successful! (No success handler attached)");
+                                }
+                            }}
+                            className="w-full py-4 rounded-xl font-header font-black tracking-widest transition-all uppercase flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 bg-amber-500 text-black hover:bg-amber-400"
+                        >
+                            Mock Payment ${totalAmount.toFixed(2)} (Staging)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     if (!clientSecret) {
