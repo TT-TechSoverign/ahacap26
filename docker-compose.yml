@@ -9,7 +9,7 @@ services:
     restart: always
     environment:
       - NEXT_PUBLIC_API_URL=/api/v1
-      - API_INTERNAL_URL=http://staging-api:8000
+      - API_INTERNAL_URL=http://api:8000
     depends_on:
       api:
         condition: service_healthy
