@@ -2,10 +2,6 @@
 const nextConfig = {
     output: "standalone",
     reactStrictMode: true,
-    optimizeFonts: false,
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
     typescript: {
         ignoreBuildErrors: true,
     },
