@@ -213,7 +213,8 @@ export default function CheckoutWrapper({ totalAmount, items, customerEmail, onS
                                 };
 
                                 // Dynamic URL for Staging/Prod compatibility
-                                const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/debug/simulate-payment`;
+                                const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+                                const apiUrl = `${baseUrl}/debug/simulate-payment`;
                                 console.log('DEBUG: Simulate Payment Triggered. URL:', apiUrl);
                                 console.log('DEBUG: Payload:', payload);
 
@@ -242,7 +243,7 @@ export default function CheckoutWrapper({ totalAmount, items, customerEmail, onS
                             }}
                             className="w-full py-4 rounded-xl font-header font-black tracking-widest transition-all uppercase flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 bg-amber-500 text-black hover:bg-amber-400"
                         >
-                            Mock Payment ${totalAmount.toFixed(2)}
+                            Mock Payment ${totalAmount.toFixed(2)} (Fix)
                         </button>
                     </div>
                 </div>
