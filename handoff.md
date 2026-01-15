@@ -11,6 +11,11 @@ To make this work on `staging.affordablehome-ac.com` without breaking anything:
 
 1.  **Environment Variables (Crucial)**:
     You MUST set these environment variables on the Staging Server (Backend):
+    *   **Path:** `/home/onjtfnmy/public_html/staging/apps/api/.env`
+    ```bash
+    cd /home/onjtfnmy/public_html/staging/apps/api
+    nano .env
+    ```
     ```bash
     SMTP_SERVER=smtp.gmail.com
     SMTP_PORT=465

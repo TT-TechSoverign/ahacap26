@@ -43,9 +43,9 @@ Use this step-by-step guide to push your current work (Mock Flow + Email Integra
 1.  **Navigate to the API Directory:**
     *   (Assuming standard setup, adjust if your server path is different)
     ```bash
-    cd ~/ahacws26/apps/api
+    cd /home/onjtfnmy/public_html/staging/apps/api
     ```
-    *   *If that fails, try listing folders with `ls` to find where `ahacws26` is.*
+    *   *(We found the project via `ls`!)*
 
 2.  **Open the `.env` file for editing:**
     ```bash
@@ -75,16 +75,27 @@ Use this step-by-step guide to push your current work (Mock Flow + Email Integra
 
 1.  **Navigate back to the Project Root:**
     ```bash
-    cd ~/ahacws26
+    cd /home/onjtfnmy/public_html/staging
     ```
 
-2.  **Pull the latest code:**
+2.  **Initialize Git (First Time Only):**
+    *   Since the folder is empty (or has cgi-bin), we need to set it up. Run these 3 commands:
+    ```bash
+    git init
+    git config --global --add safe.directory /home/onjtfnmy/public_html/staging
+    git remote add origin https://github.com/TT-TechSoverign/ahacap26.git
+    git pull origin main
+    ```
+
+    *(Note: We added `git config` first to prevent permission errors).*
+
+3.  **Regular Updates (Future):**
+    *   Next time, you only need to run:
     ```bash
     git pull origin main
     ```
-    *(If it says "Already up to date" but you just pushed, check if you are on the right branch using `git branch`).*
 
-3.  **Rebuild and Restart (Docker Method)**
+4.  **Rebuild and Restart (Docker Method)**
     *   *System is likely running with Docker Compose.*
     ```bash
     # Rebuild the containers to apply changes (especially for Frontend/Web)
