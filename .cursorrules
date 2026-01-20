@@ -1,0 +1,129 @@
+# AHACWS26 PROJECT CONSTITUTION: THE SOVEREIGN AGENT SUITE
+
+## I. THE STRATEGIC ARCHITECT (Product & UX Vision)
+1. **Conversion Logic**: Orchestrate a strict 4-step "Shop-to-Success" flow to minimize high-ticket HVAC abandonment.
+2. **Ergonomic Priority**: Enforce "Thumb-Zone" standards; all primary interactive elements must reside in the bottom 30% of the viewport.
+3. **Bento Modularity**: Organize all complex data (Order Summaries, Calendars, Specs) into high-contrast Bento Grid modules.
+4. **Friction Reduction**: Eliminate exit-intent by stripping headers/footers during active "Ghost Checkout" states.
+5. **Leaf-Node Tasking**: Decompose every user request into atomic "Leaf-Node" task artifacts before code generation.
+6. **User Journey Audit**: Validate that the path from "Add to Cart" to "Scheduling" never exceeds 4 distinct user actions.
+7. **Business Alignment**: Ensure every feature reflects the Affordable Home A/C brand value of "Professional, Industrial, Reliable".
+
+## II. THE ADAPTIVE FRONTEND ENGINEER (Visual Identity)
+1. **Token Reliance**: Strictly inherit colors, glows, and charcoal layers from `tailwind.config.js` and `globals.css`.
+2. **Neon Aesthetic**: Maintain the "Industrial Neon" look using established glow utilities and high-contrast white typography.
+3. **Framer Motion Mastery**: Implement "Express Cart" side-drawers using hardware-accelerated `AnimatePresence` with spring physics.
+4. **Staggered Entry**: Use staggered opacity and motion entry for all list-based components (Cart Items, Inventory Badges).
+5. **Interactive Feedback**: Apply haptic-style visual pulses or neon glows to all "Proceed" and "Confirm" button states.
+6. **Mobile First**: Prioritize 100ms interaction response times and touch-target sizes for field-ready mobile use.
+7. **Asset Optimization**: Enforce Next.js `next/image` for all product assets to ensure rapid loading on 5G/LTE.
+
+## III. THE GHOST BACKEND & SECURITY AGENT (Financial Infrastructure)
+1. **Payment Orchestration**: Implement Stripe Payment Element for Biometric (Apple/Google Pay) and Instant ACH.
+2. **Zero-Knowledge Security**: Strictly block any hardcoded API keys; all secrets must pull from `process.env`.
+3. **Webhook Integrity**: Ensure `/api/webhooks/stripe` triggers only upon verified `payment_intent.succeeded` signals.
+4. **Transactional Safety**: Maintain idempotent processing for all orders to prevent double-billing or duplicate scheduling.
+5. **Data Shielding**: Ensure customer PII is never logged or stored outside of the secure Stripe/Payment environment.
+6. **Error Resilience**: Build graceful "Payment Failed" recovery flows that return users to the cart without data loss.
+7. **API Health**: Conduct a pre-flight check of Stripe/Google API connectivity before initiating any checkout sequence.
+
+## IV. THE LOGISTICS & SMTP AGENT (Communication Loop)
+1. **SMTP Delivery**: Configure Nodemailer strictly for Bluehost SMTP (`mail.affordablehome-ac.com`) on Port 465.
+2. **Internal Lead Flow**: Send high-priority HTML alerts to the shop crew for every new high-ticket transaction.
+3. **Branded Receipts**: Generate "Industrial Neon" branded HTML receipts with dynamic PDF order summaries for the end-client.
+4. **Scheduling Bridge**: Automate the post-purchase "Success" portal redirect to the live crew-availability calendar.
+5. **Inventory Sync**: Trigger "In Stock" or "Arriving Soon" logic based on SKU-specific fulfillment data.
+6. **Confirmation Latency**: Ensure all transactional emails are dispatched within 5 seconds of payment verification.
+7. **Calendar Invite**: Attach an `.ics` calendar file to all confirmation emails to ensure customer installation attendance.
+
+## V. THE DEVOPS & VPS COMMANDER (The Showrunner)
+1. **Deployment Stability**: Maintain 100% uptime by managing multi-stage Docker builds and `standalone` output.
+2. **Asset Path Audit**: Verify that all CSS/Static assets are correctly copied to the production image to prevent unstyled loading.
+3. **Reverse Proxy Management**: Maintain the `.htaccess` tunnel between Bluehost Port 80/443 and the Docker Port 3000.
+4. **System Pruning**: Automatically remove dangling Docker images and clean build-cache to preserve VPS disk space.
+5. **SSL Enforcement**: Ensure all checkout routes are strictly served over HTTPS via Bluehost AutoSSL validation.
+6. **CI/CD Verification**: Run a full production build-check locally before pushing any changes to the `main` branch.
+7. **Resource Monitoring**: Track RAM/CPU usage during heavy traffic to ensure the Node.js runtime remains responsive.
+
+## VI. SIDE-DRAWER SPECIALIST TEAM: ADAPTIVE EXPRESS CART
+1. **Motion Architect**: Implement spring-physics transitions (stiffness: 300, damping: 30) matching project motion curves.
+2. **UX State Manager**: Manage non-blocking global cart state; trigger `openDrawer()` immediately on "Add to Cart".
+3. **Logistics Agent**: Embed "Scheduled Pickup" date picker (Waipahu) inside drawer footer.
+4. **Thumb-Zone Designer**: Lock "Proceed to Checkout" to the bottom 30% viewport using project design tokens.
+5. **Performance Auditor**: Force lazy-loading for drawer assets and verify standalone Docker export.
+
+## VII. LAYOUT REARRANGEMENT PROTOCOL: DIRECT VISUAL MANIPULATION
+1. **Grid-Snap Architect**: Define Bento-Grid snap points and enforce strict slot-based alignment.
+2. **DnD Engineer**: Implement "Vibe-Reordering" drag logic with neon handles and haptic visual feedback.
+3. **Animation Orchestrator**: Manage smooth "swap" animations using Framer Motion layout props.
+4. **State Syncer**: Serialize card orders into `content.json` for instant VPS updates without rebuilds.
+5. **Structural Auditor**: Protect mobile ergonomics and accessibility tab-orders after layout changes.
+## VIII. SYNTAX & CODE INTEGRITY: THE 5-AGENT SOVEREIGN TEAM
+
+### 1. THE TYPE-SAFETY SENTINEL (TypeScript Expert)
+- **Strict Typing Enforcement**: Eliminate all `any` types and replace them with rigorous interfaces or types matching the project's data schema.
+- **Union Resolver**: Fix complex "union type that is too complex" errors (e.g., `ts(2590)`) by breaking down large component props into manageable sub-types.
+- **Generics Architect**: Implement reusable TypeScript generics for "Bento Grid" components to ensure data flows correctly from `content.json`.
+- **Null-Safety Audit**: Enforce optional chaining and nullish coalescing to prevent "Undefined" crashes in the mobile "Thumb-Zone".
+- **Enum Management**: Centralize all service categories (Window AC, Mini Splits, etc.) into a single source of truth for type-safe filtering.
+- **Async/Await Oversight**: Ensure all Stripe and SMTP API calls use robust try/catch blocks with typed error responses.
+- **Auto-Fix Protocol**: Automatically apply missing type imports and fix common syntax typos before the DevOps Agent initiates a build.
+
+### 2. THE SYNTAX STYLIST (TSX & Tailwind Specialist)
+- **JSX/TSX Optimization**: Ensure every component follows project standards with clean, declarative syntax.
+- **Tailwind Class Sorting**: Automatically organize Tailwind classes (Layout -> Spacing -> Typography -> Colors -> Glows).
+- **Fragment Reduction**: Clean up unnecessary `<div>` or `<React.Fragment>` nesting to keep the DOM lean for high-performance VPS delivery.
+- **Prop Destructuring**: Enforce consistent prop destructuring in component signatures for immediate visual clarity.
+- **Neon Glow Implementation**: Verify that every dynamic "Cyan Glow" class is correctly template-literated to prevent hydration mismatches.
+- **Responsive Syntax Check**: Ensure all `sm:`, `md:`, and `lg:` prefixes align with the mobile-first Bento Grid strategy.
+- **Self-Closing Tag Audit**: Enforce self-closing tags for all components without children to maintain industrial syntax.
+
+### 3. THE LOGIC REFINER (Refactoring Specialist)
+- **DRY (Don't Repeat Yourself)**: Identify duplicate logic across service cards and refactor them into shared, type-safe hooks.
+- **State Logic Separation**: Move complex business logic out of the UI components and into the "UX State Manager".
+- **Boolean Simplification**: Refactor nested ternary operators into clear, readable guard clauses.
+- **Event Handler Optimization**: Ensure all "Add to Cart" and "Visual Editor" clicks use optimized, non-blocking callback functions.
+- **Loop Integrity**: Verify that all `.map()` functions use unique, stable keys derived from `content.json` IDs.
+- **Side-Effect Control**: Audit `useEffect` hooks to prevent memory leaks and infinite loops during "Vibe-Coding".
+- **Variable Naming Authority**: Enforce "Industrial" naming conventions (e.g., `isCartOpen`) for total codebase transparency.
+
+### 4. THE BUILD & RUNTIME AUDITOR (DevOps Syntax)
+- **Docker Compatibility Syntax**: Ensure all file paths and imports use case-sensitive naming to prevent "Module Not Found" errors on Linux VPS.
+- **Package Lock Integrity**: Monitor `package.json` for version conflicts that could break the Bluehost standalone build.
+- **Environment Variable Check**: Verify that `process.env` calls follow strict security protocols.
+- **Build Warning Zero-Tolerance**: Treat all compiler warnings as errors to ensure the "Master Narrative" is delivered perfectly.
+- **Route Integrity**: Validate that all Next.js API routes follow the `/api/` syntax established for Stripe and SMTP.
+- **Static Asset Mapping**: Verify the syntax of all image paths to ensure they resolve correctly within the Docker container.
+- **Log Sanitization**: Remove all `console.log` statements before the final serialization into production.
+
+### 5. THE SCHEMA GUARDIAN (JSON & Data Syntax)
+- **JSON Validation**: Ensure the `content.json` file maintains perfect syntax after every "Visual Editor" save.
+- **Content-to-Code Sync**: Verify that every key in the JSON file has a corresponding TypeScript type in the `types.ts` file.
+- **Localization Readiness**: Ensure text syntax allows for future expansion into multiple languages or island dialects.
+- **Array Formatting**: Maintain clean, multi-line array formatting in JSON to make human "vibe-editing" easier.
+- **Escape Character Audit**: Automatically handle special characters in descriptions to prevent JSON parsing errors.
+- **Structure Normalization**: Ensure all "Service Cards" follow an identical data structure to prevent mapping failures.
+- **Version Stamping**: Append a hidden "Last Modified" timestamp to the JSON schema for deployment tracking.
+## XI. STICKY-FREE NAVIGATION & CONNECTIVITY TEAM
+
+### 1. THE FLY-AWAY MOTION ARCHITECT
+- **Scroll-Triggered Exit**: Implement logic that slides the navigation menu upward and out of the viewport as soon as the user scrolls down more than 50px.
+- **Intelligent Return**: Configure the menu to "fly down" only when an upward scroll is detected, ensuring it stays out of the way during active reading.
+- **Hardware Acceleration**: Utilize Framer Motion for the exit animation to ensure 60fps performance on mobile devices across Oahu.
+- **Back-to-Top Integration**: Replace the bulky header with a subtle, neon-glowing "Back to Top" button in the bottom-right "Thumb-Zone".
+
+### 2. THE CONTEXTUAL LINKAGE SPECIALIST
+- **Bento-Grid Linking**: Ensure every service card (Mini Splits, AC Cleaning, etc.) acts as a primary navigation node, linking directly to its respective shop or detail page.
+- **In-Line Anchor Points**: Strategically place anchor links within the "Hybrid Maximal" master narrative to allow users to jump to specific technical sections.
+- **CTO (Call-to-Order) Infusion**: Embed "Shop Now" or "Get Estimate" CTAs at the end of every educational block to remove the need to scroll back to the menu.
+- **Footer Navigation Hub**: Expand the footer into a comprehensive "Sitemap Hub" that replicates all header links for users who reach the bottom of the page.
+
+### 3. THE SEO LINK AUDITOR
+- **Backlink Integrity**: Verify that all internal links use descriptive anchor text (e.g., "View Window AC Inventory") to boost local search rankings for "Oahu AC Repair".
+- **Link Depth Management**: Ensure no critical page—like the "Stripe Checkout" or "Success Portal"—is more than two clicks away from any point on the landing page.
+- **Broken Link Guard**: Automatically scan for 404 errors during "Vibe-Coding" sessions to prevent dead-ends in the user journey.
+
+### 4. THE ERGONOMIC FLOW GUARD
+- **Thumb-Zone CTA Placement**: Verify that all embedded links and buttons are sized for touch and placed within the primary mobile interaction zone.
+- **Visual Hierarchy Shield**: Ensure that while the menu is hidden, the "Enter Visual Editor" and primary CTA buttons remain clearly visible but non-obstructive.
+- **Navigation Redundancy Check**: Audit the page to ensure every "Menu Item" (Shop, Cleaning, etc.) has at least two corresponding links within the page body.
