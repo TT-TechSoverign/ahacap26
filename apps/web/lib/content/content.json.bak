@@ -1,0 +1,286 @@
+{
+  "landing": {
+    "hero": {
+      "badge": "Est. 2005 • Oahu, HI",
+      "title_line1": "20+ YEARS OF SERVICING ISLAND WIDE",
+      "title_highlight1": "OAHU'S HVAC CONTRACTOR",
+      "title_highlight2": "& AC Specialists",
+      "badges": {
+        "lg": "LG & GE THROUGH THE WALL AC RETAILER",
+        "licensed": "Licensed & Insured",
+        "energy": "Energy Saving Units"
+      },
+      "cta_shop": "SHOP WINDOW AC INVENTORY",
+      "cta_estimate": "REQUEST A QUOTE"
+    },
+    "services": {
+      "subtitle": "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE) CURATED FOR DURABILIT; ULTRA-QUIET DUCTLESS MINI SPLITS DESIGNED FOR PRECISION ZONE COOLING; CENTRAL AC RETROFITS ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND SPECIALIZED WINDOW AC CLEANINGS THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM.",
+      "backlinking": {
+        "part1": "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM ",
+        "link1_text": "HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE)",
+        "part2": " CURATED FOR DURABILITY; ",
+        "link2_text": "ULTRA-QUIET DUCTLESS MINI SPLITS",
+        "part3": " DESIGNED FOR PRECISION ZONE COOLING; ",
+        "link3_text": "CENTRAL AC RETROFITS",
+        "part4": " ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND ",
+        "link4_text": "SPECIALIZED WINDOW AC CLEANINGS",
+        "part5": " THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM."
+      },
+      "grid": [
+        {
+          "id": "minisplits",
+          "title": "MINI SPLITS",
+          "description": "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling for any size of rooms. Whether it’s a new Installation or a Retrofit for an older Oahu home, we offer full Service & Repairs to keep your sanctuary cool and quiet",
+          "link": "MORE INFO",
+          "icon": "ac_unit",
+          "href": "/mini-splits",
+          "color": "primary"
+        },
+        {
+          "id": "inventory",
+          "title": "WINDOW AC SHOP",
+          "description": "Your Local High-Efficiency Resource. Skip the big-box logistics. We stock premium, DIY high-efficiency LG & GE Through-the-Wall units specifically chosen for their durability. Get expert advice on the right BTU for your space and schedule your pick up your unit today at our Waipahu location.",
+          "link": "View Inventory",
+          "icon": "storefront",
+          "href": "/shop",
+          "badge": "In Stock",
+          "color": "primary"
+        },
+        {
+          "id": "central",
+          "title": "CENTRAL AC",
+          "description": "Maximize Whole-Home Comfort. We provide professional Retrofits (Air Handlers & Condensers ONLY), SEER2 Efficiency Upgrades, and Full-Service, Maintenance and Repairs for  your Central AC system(s). Our professionals ensure your system is precisely tuned to handle Hawaii's humidity while lowering your monthly energy costs.",
+          "link": "MORE INFO",
+          "icon": "hvac",
+          "href": "/central-ac",
+          "color": "accent"
+        },
+        {
+          "id": "cleaning",
+          "title": "WINDOW AC CLEANING",
+          "description": "Breathe Cleaner, Save Longer. High humidity and salt air are the leading causes of AC failure in the islands. Our Deep Cleaning window ac cleaning services lead by Technician, Chris Martinez, ensuring to assist with protecting your investment, improve indoor air quality, and prevent expensive breakdowns before they happen.",
+          "link": "WINDOW AC MAINTENANCE",
+          "icon": "cleaning_services",
+          "href": "/maintenance",
+          "color": "accent"
+        }
+      ],
+      "carousel": [
+        {
+          "id": "slide1",
+          "image": "/assets/carousel/project_showcase_1.png",
+          "title": "PRECISION INSTALLATION",
+          "subtitle": "Complete retrofit of a dual-inverter system in a coastal Oahu residence.",
+          "category": "Residential",
+          "location": "Honolulu, HI"
+        },
+        {
+          "id": "slide2",
+          "image": "/assets/carousel/modern_minisplit_installation.png",
+          "title": "MINI-SPLIT SHOWCASE",
+          "subtitle": "Seamless integration of ultra-quiet ductless technology in a modern interior.",
+          "category": "Installation",
+          "location": "Kailua, HI"
+        },
+        {
+          "id": "slide3",
+          "image": "/assets/carousel/industrial_compressor_glow_macro.png",
+          "title": "GOLD-FIN PROTECTION",
+          "subtitle": "Macro detail of our corrosion-resistant coating engineered for Hawaii's salt air.",
+          "category": "Commercial",
+          "location": "Kapolei, HI"
+        }
+      ],
+      "title": "CORE",
+      "title_highlight": "SERVICES",
+      "title_suffix": ""
+    },
+    "sections": [
+      "hero",
+      "services",
+      "video",
+      "partnerships",
+      "service-areas",
+      "warehouse-map"
+    ],
+    "service_areas": {
+      "badge": "Island-Wide Coverage",
+      "title": "Oahu's Premier",
+      "title_highlight": "COOLING NETWORK",
+      "description": "Licensed experts delivering optimal air quality and precision cooling. Trusted by homeowner associations, realtors, property management companies, commercial office spaces and ohana island-wide for quick response times, superior customer service andcraftsmanship.",
+      "backlinking": {
+        "part1": "Licensed experts delivering ",
+        "link1_text": "optimal air quality",
+        "part2": " and ",
+        "link2_text": "precision cooling",
+        "part3": ". Trusted by homeowner associations, realtors, property management companies, commercial office spaces and ohana island-wide for quick response times, superior customer service and craftsmanship."
+      },
+      "regions": [
+        {
+          "id": "central",
+          "title": "Central Oahu",
+          "icon": "warehouse",
+          "cities": [
+            "Aiea",
+            "Pearl City",
+            "Mililani",
+            "Waipio Gentry",
+            "Waikele"
+          ]
+        },
+        {
+          "id": "metro",
+          "title": "Metro Honolulu",
+          "icon": "apartment",
+          "cities": [
+            "Honolulu",
+            "Kalihi",
+            "Manoa",
+            "Kaimuki",
+            "Hawaii Kai",
+            "Salt Lake",
+            "Aina Haina",
+            "Kahala",
+            "McCully",
+            "Makiki"
+          ]
+        },
+        {
+          "id": "leeward",
+          "title": "LEEWARD",
+          "icon": "sunny",
+          "cities": [
+            "Kapolei",
+            "Ewa Beach",
+            "Waipahu",
+            "Kunia"
+          ]
+        },
+        {
+          "id": "windward",
+          "title": "Windward & North",
+          "icon": "waves",
+          "cities": [
+            "Kailua",
+            "Kaneohe",
+            "Kahaluu"
+          ]
+        }
+      ]
+    },
+    "partnerships": {
+      "title": "ELITE BRAND PARTNERSHIPS",
+      "title_highlight": "TECHNOLOGY TO MASTER OAHU'S MICRO-CLIMATES",
+      "backlinking": {
+        "part1": "AFFORDABLE HOME A/C IS PROUD TO MAINTAIN COMPLIANANCE TO PROVIDE YOU WITH THE ",
+        "link1_text": "WORLD'S LEADING HVAC ENGINEERING FIRMS",
+        "part2": ". THESE ",
+        "link2_text": "BRANDS ENABLE US",
+        "part3": " TO DEPLOY SPECIALIZED EQUIPMENT DESIGNED SPECIFICALLY FOR HAWAII'S ",
+        "link3_text": "HIGH-HUMIDITY",
+        "part4": " AND CORROSIVE SALT-AIR MICRO-CLIMATES. OUR LICENSED STATUS ENSURES PRIORITY ACCESS TO THE LATEST ENERGY-EFFICIENT TECHNOLOGIES."
+      },
+      "narrative": "AFFORDABLE HOME A/C IS PROUD TO MAINTAIN COMPLIANANCE TO PROVIDE YOU WITH THE WORLD'S LEADING HVAC ENGINEERING FIRMS. THESE BRANDS ENABLE US TO DEPLOY SPECIALIZED EQUIPMENT DESIGNED SPECIFICALLY FOR HAWAII'S HIGH-HUMIDITY AND CORROSIVE SALT-AIR MICRO-CLIMATES. OUR LICENSED STATUS ENSURES PRIORITY ACCESS TO THE LATEST ENERGY-EFFICIENT TECHNOLOGIES."
+    },
+    "warehouse": {
+      "badge": "Local Pickup Center",
+      "title": "Shop Location",
+      "description": "Our shop is stocked with window units. Order yours today",
+      "address_label": "Address",
+      "address_value": "94-150 Leoleo St. #203\nWaipahu, HI 96797",
+      "directions_label": "Directions",
+      "directions_value": "Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway. Destination is on right with roll up door #203. ",
+      "cta_text": "Get Directions"
+    }
+  },
+  "contact": {
+    "badge": "DISPATCH SERVICE",
+    "title": "CONTACT",
+    "title_highlight": "Our Team",
+    "description": "READY TO EXPERIENCE THE AFFORDABLE HOME A/C DIFFERENCE? FILL OUT THE FORM BELOW TO START YOUR SERVICE REQUEST OR GET AN ESTIMATE ON A NEW SYSTEM.",
+    "direct_contact_title": "Direct Contact",
+    "phone_label": "Phone",
+    "phone_value": "(808) 488-1111",
+    "email_label": "Email",
+    "email_value": "office@affordablehome-ac.com",
+    "address_label": "Shop Address",
+    "address_value": "94-150 Leoleo St. #203\nWaipahu, HI 96797",
+    "calendar": {
+      "title": "Calendar",
+      "split_section_title": "SPLIT / CENTRAL",
+      "split_estimate_label": "NEXT AVAILABLE ESTIMATE DATE",
+      "split_estimate_value": "1-2 DAYS",
+      "split_install_label": "NEXT AVAILABLE INSTALLATION DATE",
+      "split_install_value": "1-2 WEEKS",
+      "window_section_title": "WINDOW AC",
+      "window_estimate_label": "NEXT AVAILABLE ESTIMATE DATE",
+      "window_estimate_value": "1-2 DAYS",
+      "window_install_label": "NEXT AVAILABLE INSTALLATION DATE",
+      "window_install_value": "1-2 WEEKS"
+    },
+    "wizard_title": "CONTACT US",
+    "wizard_subtitle": "DISPATCH TICKET",
+    "wizard_ticket_prefix": "#AHAC162612100",
+    "wizard": {
+      "step1_title": "How can we help?",
+      "step1_subtitle": "Select the specific services you need so we can prepare the right tailored solutions for you.",
+      "step2_title": "When do you need us?",
+      "step2_subtitle": "Help us prioritize your request by telling us your timeline and availability.",
+      "step2_urgency_label": "Urgency Level",
+      "step2_contact_time_label": "Best Contact Time",
+      "step3_title": "Final Details",
+      "step3_subtitle": "Where should our team go? We'll confirm the appointment shortly.",
+      "field_first_name": "First Name",
+      "field_last_name": "Last Name",
+      "field_email": "Email",
+      "field_phone": "Phone",
+      "field_address": "Address",
+      "field_city": "City",
+      "field_zip": "Zip",
+      "field_source": "How did you hear about us?",
+      "field_notes": "Additional Notes",
+      "btn_next_urgency": "Next: Urgency & Timing",
+      "btn_next_contact": "Next: Contact Logistics",
+      "btn_back": "Back",
+      "btn_submit": "Submit Request",
+      "services_list": [
+        "Window AC Installation",
+        "WINDOW AC CLEANING",
+        "Mini Split Estimate (New)",
+        "Mini Split Estimate (Replace)",
+        "Mini Split Maintenance",
+        "Mini Split Diagnosis/Repair",
+        "Central AC Estimate",
+        "Central AC Maintenance",
+        "Central AC Diag/Repair"
+      ]
+    },
+    "hours_title": "BUSINESS HOURS",
+    "hours_mon_fri": "8:00 AM - 5:00 PM",
+    "hours_sat": "BY APPOINTMENT ONLY",
+    "hours_sun": "CLOSED SUNDAYS"
+  },
+  "navigation": {
+    "links": [
+      {
+        "text": "SHOP INVENTORY",
+        "href": "/shop"
+      },
+      {
+        "text": "AC CLEANING",
+        "href": "/maintenance"
+      },
+      {
+        "text": "MINI SPLITS",
+        "href": "/mini-splits"
+      },
+      {
+        "text": "CENTRAL AC",
+        "href": "/central-ac"
+      }
+    ],
+    "contact_btn": "Contact Us",
+    "back_to_home": "Back to Home",
+    "service_center": "Service Center"
+  }
+}
