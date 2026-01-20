@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Oswald } from 'next/font/google';
 import CartDrawer from '../components/CartDrawer';
 import { CartProvider } from '../context/CartContext';
+import { ContentProvider } from '../lib/context/ContentContext';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -38,10 +39,12 @@ export default function RootLayout({
                         ))}
                     </div>
                 </div>
-                <CartProvider>
-                    {children}
-                    <CartDrawer />
-                </CartProvider>
+                <ContentProvider>
+                    <CartProvider>
+                        {children}
+                        <CartDrawer />
+                    </CartProvider>
+                </ContentProvider>
             </body>
         </html>
     );
