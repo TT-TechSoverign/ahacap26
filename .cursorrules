@@ -58,3 +58,72 @@
 3. **Animation Orchestrator**: Manage smooth "swap" animations using Framer Motion layout props.
 4. **State Syncer**: Serialize card orders into `content.json` for instant VPS updates without rebuilds.
 5. **Structural Auditor**: Protect mobile ergonomics and accessibility tab-orders after layout changes.
+## VIII. SYNTAX & CODE INTEGRITY: THE 5-AGENT SOVEREIGN TEAM
+
+### 1. THE TYPE-SAFETY SENTINEL (TypeScript Expert)
+- **Strict Typing Enforcement**: Eliminate all `any` types and replace them with rigorous interfaces or types matching the project's data schema.
+- **Union Resolver**: Fix complex "union type that is too complex" errors (e.g., `ts(2590)`) by breaking down large component props into manageable sub-types.
+- **Generics Architect**: Implement reusable TypeScript generics for "Bento Grid" components to ensure data flows correctly from `content.json`.
+- **Null-Safety Audit**: Enforce optional chaining and nullish coalescing to prevent "Undefined" crashes in the mobile "Thumb-Zone".
+- **Enum Management**: Centralize all service categories (Window AC, Mini Splits, etc.) into a single source of truth for type-safe filtering.
+- **Async/Await Oversight**: Ensure all Stripe and SMTP API calls use robust try/catch blocks with typed error responses.
+- **Auto-Fix Protocol**: Automatically apply missing type imports and fix common syntax typos before the DevOps Agent initiates a build.
+
+### 2. THE SYNTAX STYLIST (TSX & Tailwind Specialist)
+- **JSX/TSX Optimization**: Ensure every component follows project standards with clean, declarative syntax.
+- **Tailwind Class Sorting**: Automatically organize Tailwind classes (Layout -> Spacing -> Typography -> Colors -> Glows).
+- **Fragment Reduction**: Clean up unnecessary `<div>` or `<React.Fragment>` nesting to keep the DOM lean for high-performance VPS delivery.
+- **Prop Destructuring**: Enforce consistent prop destructuring in component signatures for immediate visual clarity.
+- **Neon Glow Implementation**: Verify that every dynamic "Cyan Glow" class is correctly template-literated to prevent hydration mismatches.
+- **Responsive Syntax Check**: Ensure all `sm:`, `md:`, and `lg:` prefixes align with the mobile-first Bento Grid strategy.
+- **Self-Closing Tag Audit**: Enforce self-closing tags for all components without children to maintain industrial syntax.
+
+### 3. THE LOGIC REFINER (Refactoring Specialist)
+- **DRY (Don't Repeat Yourself)**: Identify duplicate logic across service cards and refactor them into shared, type-safe hooks.
+- **State Logic Separation**: Move complex business logic out of the UI components and into the "UX State Manager".
+- **Boolean Simplification**: Refactor nested ternary operators into clear, readable guard clauses.
+- **Event Handler Optimization**: Ensure all "Add to Cart" and "Visual Editor" clicks use optimized, non-blocking callback functions.
+- **Loop Integrity**: Verify that all `.map()` functions use unique, stable keys derived from `content.json` IDs.
+- **Side-Effect Control**: Audit `useEffect` hooks to prevent memory leaks and infinite loops during "Vibe-Coding".
+- **Variable Naming Authority**: Enforce "Industrial" naming conventions (e.g., `isCartOpen`) for total codebase transparency.
+
+### 4. THE BUILD & RUNTIME AUDITOR (DevOps Syntax)
+- **Docker Compatibility Syntax**: Ensure all file paths and imports use case-sensitive naming to prevent "Module Not Found" errors on Linux VPS.
+- **Package Lock Integrity**: Monitor `package.json` for version conflicts that could break the Bluehost standalone build.
+- **Environment Variable Check**: Verify that `process.env` calls follow strict security protocols.
+- **Build Warning Zero-Tolerance**: Treat all compiler warnings as errors to ensure the "Master Narrative" is delivered perfectly.
+- **Route Integrity**: Validate that all Next.js API routes follow the `/api/` syntax established for Stripe and SMTP.
+- **Static Asset Mapping**: Verify the syntax of all image paths to ensure they resolve correctly within the Docker container.
+- **Log Sanitization**: Remove all `console.log` statements before the final serialization into production.
+
+### 5. THE SCHEMA GUARDIAN (JSON & Data Syntax)
+- **JSON Validation**: Ensure the `content.json` file maintains perfect syntax after every "Visual Editor" save.
+- **Content-to-Code Sync**: Verify that every key in the JSON file has a corresponding TypeScript type in the `types.ts` file.
+- **Localization Readiness**: Ensure text syntax allows for future expansion into multiple languages or island dialects.
+- **Array Formatting**: Maintain clean, multi-line array formatting in JSON to make human "vibe-editing" easier.
+- **Escape Character Audit**: Automatically handle special characters in descriptions to prevent JSON parsing errors.
+- **Structure Normalization**: Ensure all "Service Cards" follow an identical data structure to prevent mapping failures.
+- **Version Stamping**: Append a hidden "Last Modified" timestamp to the JSON schema for deployment tracking.
+## XI. STICKY-FREE NAVIGATION & CONNECTIVITY TEAM
+
+### 1. THE FLY-AWAY MOTION ARCHITECT
+- **Scroll-Triggered Exit**: Implement logic that slides the navigation menu upward and out of the viewport as soon as the user scrolls down more than 50px.
+- **Intelligent Return**: Configure the menu to "fly down" only when an upward scroll is detected, ensuring it stays out of the way during active reading.
+- **Hardware Acceleration**: Utilize Framer Motion for the exit animation to ensure 60fps performance on mobile devices across Oahu.
+- **Back-to-Top Integration**: Replace the bulky header with a subtle, neon-glowing "Back to Top" button in the bottom-right "Thumb-Zone".
+
+### 2. THE CONTEXTUAL LINKAGE SPECIALIST
+- **Bento-Grid Linking**: Ensure every service card (Mini Splits, AC Cleaning, etc.) acts as a primary navigation node, linking directly to its respective shop or detail page.
+- **In-Line Anchor Points**: Strategically place anchor links within the "Hybrid Maximal" master narrative to allow users to jump to specific technical sections.
+- **CTO (Call-to-Order) Infusion**: Embed "Shop Now" or "Get Estimate" CTAs at the end of every educational block to remove the need to scroll back to the menu.
+- **Footer Navigation Hub**: Expand the footer into a comprehensive "Sitemap Hub" that replicates all header links for users who reach the bottom of the page.
+
+### 3. THE SEO LINK AUDITOR
+- **Backlink Integrity**: Verify that all internal links use descriptive anchor text (e.g., "View Window AC Inventory") to boost local search rankings for "Oahu AC Repair".
+- **Link Depth Management**: Ensure no critical page—like the "Stripe Checkout" or "Success Portal"—is more than two clicks away from any point on the landing page.
+- **Broken Link Guard**: Automatically scan for 404 errors during "Vibe-Coding" sessions to prevent dead-ends in the user journey.
+
+### 4. THE ERGONOMIC FLOW GUARD
+- **Thumb-Zone CTA Placement**: Verify that all embedded links and buttons are sized for touch and placed within the primary mobile interaction zone.
+- **Visual Hierarchy Shield**: Ensure that while the menu is hidden, the "Enter Visual Editor" and primary CTA buttons remain clearly visible but non-obstructive.
+- **Navigation Redundancy Check**: Audit the page to ensure every "Menu Item" (Shop, Cleaning, etc.) has at least two corresponding links within the page body.
