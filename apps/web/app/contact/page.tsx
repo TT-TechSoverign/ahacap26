@@ -327,7 +327,7 @@ export default function ContactPage() {
                         <div className="space-y-4">
                             <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">Navigation</h4>
                             <div className="flex flex-col gap-2">
-                                <Link href="/ shop" className="text-slate-500 hover:text-primary transition-colors text-[10px] font-black uppercase tracking-[0.2em]">Inventory</Link>
+                                <Link href="/shop" className="text-slate-500 hover:text-primary transition-colors text-[10px] font-black uppercase tracking-[0.2em]">Inventory</Link>
                                 <Link href="/maintenance" className="text-slate-500 hover:text-primary transition-colors text-[10px] font-black uppercase tracking-[0.2em]">Maintenance</Link>
                             </div>
                         </div>
