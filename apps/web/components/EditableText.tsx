@@ -9,20 +9,23 @@ interface EditableTextProps {
   className?: string;
   as?: React.ElementType;
   multiLine?: boolean;
+  defaultValue?: string;
 }
 
 export function EditableText({
   contentKey,
   className,
   as: Component = 'span',
-  multiLine = false
+  multiLine = false,
+  defaultValue = ''
 }: EditableTextProps) {
   const { content, isEditMode, updateContent } = useContent();
   const elementRef = useRef<HTMLElement>(null);
 
   // Helper to get nested value from content object
   const getValue = (path: string, obj: any): string => {
-    return path.split('.').reduce((prev, curr) => prev && prev[curr], obj) as string || '';
+    const value = path.split('.').reduce((prev, curr) => prev && prev[curr], obj) as string;
+    return value || defaultValue;
   };
 
   const textValue = getValue(contentKey, content);

@@ -3,19 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 11, 17, 32;
-  --background-end-rgb: 11, 17, 32;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 11, 17, 32;
+    --background-end-rgb: 11, 17, 32;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -24,26 +21,36 @@ body {
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(0, 174, 239, 0.2);
     }
+
     .industrial-card {
         background: linear-gradient(145deg, #1a2333, #0f172a);
         transition: all 0.3s ease;
     }
+
     .industrial-card:hover {
         box-shadow: 0 0 20px rgba(0, 174, 239, 0.15);
         border-color: #00AEEF;
     }
+
     .neon-glow {
         text-shadow: 0 0 10px rgba(0, 174, 239, 0.5);
     }
+
     .accent-glow {
         text-shadow: 0 0 10px rgba(57, 181, 74, 0.4);
     }
 }
 
 @keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
+
 .animate-marquee {
     display: flex;
     width: 200%;

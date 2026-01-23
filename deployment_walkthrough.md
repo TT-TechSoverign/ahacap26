@@ -105,6 +105,15 @@ Use this step-by-step guide to push your current work (Mock Flow + Email Integra
     docker-compose up -d
     ```
 
+### Troubleshooting: Clearing Disk Space
+*   **"Disk Space Full" (90%+ Usage)**
+    *   **Cause:** Old Docker images and build caches are filling up the VPS.
+    *   **Fix:** Run this surgical pruning command to free up several GBs:
+        ```bash
+        docker system prune -a --volumes -f
+        ```
+        *(Note: This removes unused images and caches but keeps your running database safe).*
+
     **OR** (If running manually without Docker):
     *   **Restart Backend:**
         ```bash

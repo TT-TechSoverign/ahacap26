@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import contentData from '../../content.json';
 
 export default function ContactPage() {
     const { content, isEditMode } = useContent();
@@ -152,7 +153,7 @@ export default function ContactPage() {
                                     <EditableText contentKey="contact.calendar.title" />
                                 </h4>
                                 <span className="font-mono text-[9px] font-black tracking-[0.2em] px-2 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded uppercase">
-                                    System Admin
+                                    {contentData.contact.badge_label}
                                 </span>
                             </div>
 
@@ -234,7 +235,7 @@ export default function ContactPage() {
 
                             <div className="flex flex-col items-center text-center mb-6 border-b border-white/5 pb-6 relative z-10">
                                 <span className="font-mono text-[9px] font-black tracking-[0.5em] uppercase mb-4 text-primary opacity-60">
-                                    Service Ticket Interface
+                                    {contentData.contact.wizard_interface}
                                 </span>
                                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-header font-bold text-white uppercase tracking-tight mb-4">
                                     <EditableText contentKey="contact.wizard_title" />
@@ -286,19 +287,19 @@ export default function ContactPage() {
                             {/* section 4: Business Hours (Integrated Final) */}
                             <div className="mt-12 pt-10 border-t border-white/5 flex flex-col items-center">
                                 <div className="font-mono inline-block px-4 py-1.5 bg-primary/5 border border-primary/20 rounded-full text-primary text-[9px] font-black tracking-[0.4em] uppercase mb-8">
-                                    <EditableText contentKey="contact.hours_title" />
+                                    {contentData.contact.hours.title}
                                 </div>
                                 <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
                                     <div className="flex flex-col items-center">
-                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">Mon - Fri</span>
+                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">{contentData.contact.hours.mon_fri}</span>
                                         <span className="text-white font-black text-xs lg:text-sm tracking-widest transition-colors"><EditableText contentKey="contact.hours_mon_fri" /></span>
                                     </div>
                                     <div className="flex flex-col items-center">
-                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">Saturday</span>
+                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">{contentData.contact.hours.sat}</span>
                                         <span className="text-white font-black text-xs lg:text-sm tracking-widest transition-colors"><EditableText contentKey="contact.hours_sat" /></span>
                                     </div>
                                     <div className="flex flex-col items-center">
-                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-accent transition-colors">Sunday</span>
+                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-accent transition-colors">{contentData.contact.hours.sun}</span>
                                         <span className="text-accent font-black text-xs lg:text-sm tracking-widest transition-colors"><EditableText contentKey="contact.hours_sun" /></span>
                                     </div>
                                 </div>
@@ -325,31 +326,31 @@ export default function ContactPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-4xl mb-16 px-4">
                         <div className="space-y-4">
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">Navigation</h4>
+                            <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">{contentData.common.footer.nav}</h4>
                             <div className="flex flex-col gap-2">
                                 <Link href="/shop" className="text-slate-500 hover:text-primary transition-colors text-[10px] font-black uppercase tracking-[0.2em]">Inventory</Link>
                                 <Link href="/maintenance" className="text-slate-500 hover:text-primary transition-colors text-[10px] font-black uppercase tracking-[0.2em]">Maintenance</Link>
                             </div>
                         </div>
                         <div className="space-y-4">
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">Support</h4>
+                            <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">{contentData.common.footer.support}</h4>
                             <div className="flex flex-col gap-2">
                                 <Link href="/contact" className="text-slate-500 hover:text-primary transition-colors text-[10px] font-black uppercase tracking-[0.2em]">Service Center</Link>
                                 <span className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em]">Warranty Info</span>
                             </div>
                         </div>
                         <div className="space-y-4">
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">Location</h4>
+                            <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">{contentData.common.footer.location}</h4>
                             <div className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed">
-                                94-150 Leoleo St. #203<br />
-                                Waipahu, HI 96797
+                                {contentData.common.address}<br />
+                                {contentData.common.location}
                             </div>
                         </div>
                     </div>
 
                     <div className="pt-12 border-t border-white/5 w-full">
                         <p className="text-slate-600 text-[9px] font-black tracking-[0.4em] uppercase">
-                            © 2024 Affordable Home A/C • Island-Scale Cooling Solutions
+                            {contentData.common.footer.copyright} <Link href="/admin" className="opacity-10 hover:opacity-100 transition-opacity ml-1">.</Link>
                         </p>
                     </div>
                 </div>

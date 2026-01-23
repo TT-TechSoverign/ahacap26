@@ -33,7 +33,7 @@
           "description": "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling for any size of rooms. Whether it’s a new Installation or a Retrofit for an older Oahu home, we offer full Service & Repairs to keep your sanctuary cool and quiet",
           "link": "MORE INFO",
           "icon": "ac_unit",
-          "href": "/mini-splits",
+          "href": "/contact",
           "color": "primary"
         },
         {
@@ -52,7 +52,7 @@
           "description": "Maximize Whole-Home Comfort. We provide professional Retrofits (Air Handlers & Condensers ONLY), SEER2 Efficiency Upgrades, and Full-Service, Maintenance and Repairs for  your Central AC system(s). Our professionals ensure your system is precisely tuned to handle Hawaii's humidity while lowering your monthly energy costs.",
           "link": "MORE INFO",
           "icon": "hvac",
-          "href": "/central-ac",
+          "href": "/contact",
           "color": "accent"
         },
         {
@@ -61,7 +61,7 @@
           "description": "Breathe Cleaner, Save Longer. High humidity and salt air are the leading causes of AC failure in the islands. Our Deep Cleaning window ac cleaning services lead by Technician, Chris Martinez, ensuring to assist with protecting your investment, improve indoor air quality, and prevent expensive breakdowns before they happen.",
           "link": "WINDOW AC MAINTENANCE",
           "icon": "cleaning_services",
-          "href": "/maintenance",
+          "href": "/contact",
           "color": "accent"
         }
       ],
@@ -189,7 +189,7 @@
       "address_label": "Address",
       "address_value": "94-150 Leoleo St. #203\nWaipahu, HI 96797",
       "directions_label": "Directions",
-      "directions_value": "Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway. Destination is on right with roll up door #203. ",
+      "directions_value": "Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway. Destination is on right with roll up door #203. \n",
       "cta_text": "Get Directions"
     }
   },
@@ -260,27 +260,223 @@
     "hours_sat": "BY APPOINTMENT ONLY",
     "hours_sun": "CLOSED SUNDAYS"
   },
+  "shop": {
+    "search_placeholder": "SEARCH INVENTORY...",
+    "hero": {
+      "title_word1": "SHOP",
+      "title_word2": "WINDOW",
+      "title_word3": "AC",
+      "title_word4": "INVENTORY",
+      "subtitle": "IOAHU COOLING INFRASTRUCTURE",
+      "description": "HAWAII'S HIGHEST-RATED INVENTORY OF LG & GE ENERGY-EFFICIENT COOLING SOLUTIONS. ENGINEERED FOR DURABILITY. GUARANTEED FOR COMFORT.",
+      "title_line1": "SHOP WINDOW",
+      "title_line2": "AC INVENTORY"
+    },
+    "sections": [
+      "dual_inverter",
+      "universal_fit",
+      "base",
+      "ge",
+      "casement",
+      "sizing-guide",
+      "rebate",
+      "brand-spotlight",
+      "logistics",
+      "faq",
+      "educational-benefits"
+    ],
+    "dual_inverter": {
+      "title": "DUAL INVERTER TECHNOLOGY",
+      "subtitle": "Extreme Energy Efficiency",
+      "description": "LG’s DUAL Inverter™ technology is engineered for the high-salinity and high-humidity environments of Oahu. By utilizing variable-speed compressors, these units slash energy consumption by up to 40% while operating at whisper-quiet levels. Every model in this section is $45 Hawaii Energy Rebate Qualified."
+    },
+    "universal_fit": {
+      "title": "UNIVERSAL FIT / THRU-THE-WALL",
+      "subtitle": "Seamless Integration",
+      "description": "Designed for existing wall sleeves, these high-performance units provide a clean, professional look without sacrificial window space. Built for Hawaii's salt-air durability."
+    },
+    "base": {
+      "title": "BASE / STANDARD SOLUTIONS",
+      "subtitle": "Reliable Island Cooling",
+      "description": "Our standard LG window units provide dependable cooling with industrial reliability. Built with anti-corrosive coatings for long-term island duty."
+    },
+    "ge": {
+      "title": "GE PERFORMANCE SERIES",
+      "subtitle": "Trusted Dependability",
+      "description": "Engineered for permanent through-the-wall installation, the GE Built-In series provides high-output cooling for Oahu’s most demanding residential environments. These units feature a true universal fit chassis and advanced dehumidification cycles to maintain a crisp, dry interior climate regardless of exterior humidity."
+    },
+    "casement": {
+      "title": "CASEMENT & SLIDER",
+      "subtitle": "Specialized Architecture",
+      "description": "GE 26\" QUICK SNAP SLEEVE. This industrial-grade sleeve is the structural foundation for the GE Built-In series (AJCQ models) and modern LG Universal Fit units. Engineered to ship flat and snap together on-site, it provides a rigid, weather-sealed portal that protects the AC chassis from exterior elements while maintaining a professional, flush-mount appearance in any Hawaii residence. "
+    },
+    "educational_benefits": {
+      "badge": "Technical Resource",
+      "title": "Pro-Coastal",
+      "title_highlight": "Engineering",
+      "subtitle": "Why our units outlast standard ACs",
+      "description": "Hawaii's environment is the ultimate test for AC units. Our curated inventory features technical advantages designed specifically for the tropics.",
+      "grid": [
+        {
+          "title": "Gold-Fin Protection",
+          "description": "Anti-corrosive coating designed for high-salinity island air.",
+          "icon": "shield"
+        },
+        {
+          "title": "Energy Calibration",
+          "description": "Compressors tuned for consistent 80°F+ operation.",
+          "icon": "bolt"
+        },
+        {
+          "title": "Humidity Drainage",
+          "description": "Advanced tray systems to prevent moisture buildup.",
+          "icon": "water_drop"
+        },
+        {
+          "title": "Silent-Cool",
+          "description": "Whisper-quiet performance for island tranquility.",
+          "icon": "quiet_times"
+        }
+      ]
+    },
+    "brand_spotlight": {
+      "title": "Brand",
+      "title_italic": "Spotlight",
+      "badge": "Strategic Partnerships"
+    },
+    "filters": {
+      "title": "Filters",
+      "clear": "Clear All",
+      "category": "Category",
+      "inventory_status": "Showing {count} units in {location}"
+    },
+    "sidebar": {
+      "expert_support_title": "Expert Support",
+      "expert_support_desc": "Unsure about sizing? Call us or verify your room dimensions at the warehouse."
+    },
+    "guide": {
+      "title": "ROOM SIZING GUIDE",
+      "subtitle": "Technical Resource",
+      "description": "Standard sizing charts fail to account for Hawaii’s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles and fails to dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determine the precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don’t guess with your comfort—deploy the correct infrastructure.",
+      "info_title": "High Ceiling / Sun Exposure?",
+      "info_desc": "For rooms with high ceilings (9ft+) or direct afternoon sun, we recommend sizing up by 10% to ensure efficiency."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions"
+    },
+    "bento": {
+      "lg": {
+        "title": "Dual Inverter Technology",
+        "description": "LG's revolutionary Dual Inverter Compressor™ eliminates the noisy stop-and-start cycle, saving up to 40% more energy."
+      },
+      "ge": {
+        "title": "Ultra-Quiet Comfort",
+        "description": "GE Profile™ brings whisper-quiet cooling designed for bedrooms. Built for high-humidity coastal duty."
+      }
+    },
+    "local_authority": {
+      "title_line1": "Don't Buy",
+      "title_italic": "\"Big Box\"",
+      "title_gradient": "Buy Local Expert.",
+      "subtitle": "Oahu Inventory Hub",
+      "description": "Why risk shipping damage or waiting weeks for mainland freight? Affordable Home A/C stocks thousands of units right here in Waipahu, HI. We handle the warranty so you don't have to.",
+      "badge": "Waipahu Distribution Center",
+      "location": "Waipahu, HI"
+    },
+    "rebate": {
+      "badge": "Hawaii Energy Partner",
+      "title": "Cash Rebates",
+      "title_highlight": "ENERGY SAVINGS",
+      "description": "GET UP TO $45 BACK WHEN YOU UPGRADE TO AN ENERGY-EFFICIENT WINDOW AC. WE MAKE THE APPLICATION PROCESS SEAMLESS FOR OAHU RESIDENTS.",
+      "steps": [
+        {
+          "title": "1. Purchase a Qualifying Unit",
+          "description": "Shop our LG Dual Inverter ENERGY STAR® window ACs — available online or in-store.",
+          "icon": "shopping_cart"
+        },
+        {
+          "title": "2. Download & Complete the Form",
+          "description": "Get the official Hawaii Energy rebate form and fill in your purchase details.",
+          "icon": "description"
+        },
+        {
+          "title": "3. Mail It In",
+          "description": "SEND YOUR COMPLETED FORM AND PROOF OF PURCHASE TO HAWAII ENERGY TO RECEIVE YOUR CHECK.",
+          "icon": "mail"
+        }
+      ],
+      "why_matters": {
+        "title": "Energy Efficiency That Pays Off",
+        "title_highlight": "Why It Matters",
+        "description": "ENERGY STAR® certified LG units use up to 15% less energy than standard models — saving you money every month while keeping your home cool and comfortable. Over time, those savings add up for both your wallet and the planet.",
+        "highlights": [
+          {
+            "title": "Up to $45 Mail-In Rebate",
+            "icon": "payments"
+          },
+          {
+            "title": "Save up to $67/year on energy costs",
+            "icon": "eco"
+          },
+          {
+            "title": "Available on Dual Inverter models only",
+            "icon": "star"
+          }
+        ]
+      }
+    },
+    "backlinking": {
+      "logistics": {
+        "link3": "WAIPAHU SHOP.",
+        "part1": "EVERY HOUR OF HEAT COUNTS. OUR ",
+        "link1": "LOCAL WAREHOUSE PICKUP",
+        "part2": " IS YOUR SOLUTION. SCHEDULE YOUR ",
+        "part3": " AT OUR ",
+        "link2": "WINDOW AC PICKUP"
+      }
+    }
+  },
   "navigation": {
     "links": [
       {
-        "text": "SHOP INVENTORY",
+        "text": "MINI SPLIT AC",
+        "href": "/contact"
+      },
+      {
+        "text": "SHOP WINDOW AC INVENTORY",
         "href": "/shop"
       },
       {
-        "text": "AC CLEANING",
-        "href": "/maintenance"
-      },
-      {
-        "text": "MINI SPLITS",
-        "href": "/mini-splits"
-      },
-      {
         "text": "CENTRAL AC",
-        "href": "/central-ac"
+        "href": "/contact"
+      },
+      {
+        "text": "WINDOW AC CLEANING",
+        "href": "/contact"
       }
     ],
     "contact_btn": "Contact Us",
     "back_to_home": "Back to Home",
+    "back_to_inventory": "Back to Inventory",
     "service_center": "Service Center"
+  },
+  "logistics": {
+    "badge": "Fulfillment Infrastructure",
+    "pickup": {
+      "title": "WAIPAHU SHOP PICKUP",
+      "title_highlight": "",
+      "pricing_notice": "Unit pricing reflects local pickup from our Waipahu Distribution Center.",
+      "label": "Deployment Protocol",
+      "process": "Once your order is processed, an Affordable Home A/C Logistics Coordinator will contact you to schedule a specific arrival window.",
+      "warning": "Note: As our facility is an active distribution hub, unscheduled arrivals cannot be accommodated."
+    },
+    "delivery": {
+      "title": "ISLAND-WIDE DELIVERY",
+      "price_label": "Standard Delivery",
+      "price_value": "$50.00",
+      "coverage": "Professional delivery is available for $50.00 to most Oahu residential zones.",
+      "exclusions_label": "Service Exclusions",
+      "exclusions": "Due to logistical constraints, we do not provide delivery to Waialua, North Shore, Kahuku, Waianae, Nanakuli, Waikiki, or Waimanalo."
+    }
   }
 }
