@@ -40,6 +40,7 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
         const parsed = JSON.parse(saved);
 
         // Robust Schema Migration: Merge with initialContent to ensure new keys exist
+        // Merge root level objects
         const migratedContent = {
           ...initialContent,
           // Merge root level objects
@@ -95,6 +96,24 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
           navigation: {
             ...initialContent.navigation,
             ...(parsed.navigation || {})
+          },
+          shop: {
+            ...initialContent.shop,
+            ...(parsed.shop || {}),
+            hero: {
+              ...initialContent.shop.hero,
+              ...(parsed.shop?.hero || {})
+            },
+            guide: {
+              ...initialContent.shop.guide,
+              ...(parsed.shop?.guide || {})
+            },
+            sections: Array.isArray(parsed.shop?.sections)
+              ? [
+                ...parsed.shop.sections.filter((s: string) => initialContent.shop.sections.includes(s)),
+                ...initialContent.shop.sections.filter((s: string) => !parsed.shop.sections.includes(s))
+              ]
+              : initialContent.shop.sections
           }
         };
 

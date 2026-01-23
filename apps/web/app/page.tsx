@@ -1,6 +1,7 @@
 'use client';
 
 import { EditableText } from '@/components/EditableText';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/Button';
 import { useContent } from '@/lib/context/ContentContext';
 import { cn } from '@/lib/utils';
@@ -10,6 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BackToTop } from '@/components/BackToTop';
+import Navbar from '@/components/Navbar';
 
 export default function LandingPage() {
     const { content, isEditMode, setLayoutOrder } = useContent();
@@ -49,116 +51,9 @@ export default function LandingPage() {
     };
 
     // --- Sticky-Free Navigation Logic ---
-    const { scrollY } = useScroll();
-    const [headerVisible, setHeaderVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-    // Lock body scroll when mobile menu is open
-    useEffect(() => {
-        if (mobileMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
-    }, [mobileMenuOpen]);
-
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        const direction = latest > lastScrollY ? "down" : "up";
-        if (latest > 50 && direction === "down" && headerVisible && !mobileMenuOpen) {
-            setHeaderVisible(false);
-        } else if (direction === "up" && !headerVisible) {
-            setHeaderVisible(true);
-        }
-        setLastScrollY(latest);
-    });
-
     return (
         <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white min-h-screen">
-            {/* Header */}
-            <motion.header
-                initial={{ y: 0 }}
-                animate={{ y: (headerVisible || mobileMenuOpen) ? 0 : -400 }}
-                transition={{
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 25,
-                    delay: (headerVisible || mobileMenuOpen) ? 0.1 : 0
-                }}
-                className="fixed top-9 w-full z-50 glass-header flex flex-col"
-            >
-                {/* Top Section: Logo (Centered) */}
-                <div className="w-full border-b border-white/5 flex justify-between md:justify-center items-center py-2 md:py-6 px-6 bg-background-dark/30 backdrop-blur-md">
-                    <div className="w-10 md:hidden"></div> {/* Spacer for symmetry */}
-                    <Link href="/" className="relative h-40 w-40 md:h-48 md:w-48 transition-transform hover:scale-105 active:scale-95 group">
-                        <div className="absolute inset-0 bg-primary/20 rounded-full blur-[80px] md:blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <Image
-                            src="/assets/ahac-logo-bus-500x500xv2.svg"
-                            alt="Affordable Home A/C"
-                            fill
-                            className="object-contain relative z-10"
-                            priority
-                        />
-                    </Link>
-
-                    {/* Mobile Menu Toggle */}
-                    <button
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden text-primary p-2 hover:bg-white/5 rounded-lg transition-colors"
-                        aria-label="Toggle menu"
-                    >
-                        <span className="material-symbols-outlined text-3xl">
-                            {mobileMenuOpen ? 'close' : 'menu'}
-                        </span>
-                    </button>
-                </div>
-
-                {/* Bottom Section: Navigation (Centered) */}
-                <div className={cn(
-                    "w-full bg-background-dark/60 md:bg-background-dark/20 backdrop-blur-xl md:backdrop-blur-sm transition-all duration-300 overflow-hidden",
-                    mobileMenuOpen ? "h-[calc(100vh-100px)] opacity-100" : "h-0 md:h-16 opacity-0 md:opacity-100"
-                )}>
-                    <div className="relative flex flex-col md:flex-row items-center justify-center max-w-7xl h-full mx-auto px-6 py-12 md:py-0">
-                        <nav className="flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16 w-full md:w-auto">
-                            {(content?.navigation?.links || []).map((link, i: number) => (
-                                <Link
-                                    key={i}
-                                    href={isEditMode ? "#" : link.href}
-                                    onClick={(e) => {
-                                        if (isEditMode) e.preventDefault();
-                                        setMobileMenuOpen(false);
-                                    }}
-                                    className="nav-link text-base md:text-[10px] lg:text-[11px] font-black tracking-[0.3em] hover:text-primary transition-all uppercase whitespace-nowrap text-center p-4 md:p-0"
-                                >
-                                    <EditableText contentKey={`navigation.links.${i}.text`} />
-                                </Link>
-                            ))}
-                        </nav>
-
-                        <div className="md:absolute right-6 mt-12 md:mt-0 flex items-center h-full">
-                            <Button
-                                onClick={(e) => {
-                                    if (isEditMode) e.preventDefault();
-                                    setMobileMenuOpen(false);
-                                }}
-                                className="uppercase text-xs md:text-[10px] font-black tracking-widest px-8 md:px-6 h-12 md:h-10 shadow-[0_0_20px_rgba(0,174,239,0.2)] hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] transition-all"
-                                asChild={!isEditMode}
-                            >
-                                {isEditMode ? (
-                                    <EditableText contentKey="navigation.contact_btn" />
-                                ) : (
-                                    <Link href="/contact">
-                                        <EditableText contentKey="navigation.contact_btn" />
-                                    </Link>
-                                )}
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </motion.header>
+            <Navbar />
 
             <main className="pt-[212px] md:pt-[340px]">
                 <Reorder.Group
@@ -188,115 +83,12 @@ export default function LandingPage() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-[#0a0e14] border-t border-white/5 pt-20 pb-12">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                        {/* Brand Column */}
-                        <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
-                            <div className="relative h-32 w-32 -mb-2">
-                                <Image
-                                    src="/assets/ahac-logo-bus-500x500xv2.svg"
-                                    alt="Affordable Home A/C"
-                                    fill
-                                    className="object-contain"
-                                />
-                            </div>
-                            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-                                Oahu&apos;s quality provider of energy-efficient cooling solutions. Specializing in Window Units, Mini-Split AC and Central AC services for island living.
-                            </p>
-                        </div>
-
-                        {/* Services Column */}
-                        <div>
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Services</h4>
-                            <ul className="space-y-4">
-                                {[
-                                    { text: 'Mini Split AC', href: '/contact' },
-                                    { text: 'Window AC Shop', href: '/shop' },
-                                    { text: 'Central AC', href: '/contact' },
-                                    { text: 'Window AC Cleaning', href: '/contact' }
-                                ].map((item) => (
-                                    <li key={item.text}>
-                                        <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
-                                            <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
-                                            {item.text}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Quick Links Column */}
-                        <div>
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Quick Links</h4>
-                            <ul className="space-y-4">
-                                {[
-                                    { text: 'Mini Split AC', href: '/contact' },
-                                    { text: 'Shop Inventory', href: '/shop' },
-                                    { text: 'Central AC', href: '/contact' },
-                                    { text: 'Window AC Cleaning', href: '/contact' },
-                                    { text: 'Service Areas', href: '/contact' },
-                                    { text: 'Contact Us', href: '/contact' }
-                                ].map((item) => (
-                                    <li key={item.text}>
-                                        <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
-                                            <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
-                                            {item.text}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Contact Column */}
-                        <div>
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Contact</h4>
-                            <ul className="space-y-6">
-                                <li className="flex gap-4">
-                                    <span className="material-symbols-outlined text-primary mt-1">location_on</span>
-                                    <div>
-                                        <div className="text-white font-bold text-sm uppercase">Shop Location</div>
-                                        <div className="text-slate-400 text-sm">Waipahu Commercial Center<br />94-150 Leoleo St. #203<br />Waipahu, HI 96797</div>
-                                    </div>
-                                </li>
-                                <li className="flex gap-4">
-                                    <span className="material-symbols-outlined text-primary mt-1">call</span>
-                                    <div>
-                                        <div className="text-white font-bold text-sm uppercase">Phone</div>
-                                        <a href="tel:808-488-1111" className="text-slate-400 text-sm hover:text-white transition-colors">(808) 488-1111</a>
-                                    </div>
-                                </li>
-                                <li className="flex gap-4">
-                                    <span className="material-symbols-outlined text-primary mt-1">mail</span>
-                                    <div>
-                                        <div className="text-white font-bold text-sm uppercase">Email</div>
-                                        <a href="mailto:office@affordablehome-ac.com" className="text-slate-400 text-sm hover:text-white transition-colors">office@affordablehome-ac.com</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-slate-600 text-xs font-bold uppercase tracking-widest">
-                            © 2024 Affordable Home A/C. All rights reserved.
-                        </p>
-                        <div className="flex flex-col md:flex-row items-center gap-6">
-                            <span className="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
-                                <span className="material-symbols-outlined text-sm text-primary">verified</span>
-                                LIC# CT-36775
-                            </span>
-                            <span className="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
-                                <span className="material-symbols-outlined text-sm text-primary">shield</span>
-                                Licensed | Insured | Bonded
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            {/* Footer */}
+            <Footer />
 
             {/* Back to Top (Thumb-Zone Trigger) */}
-            <BackToTop visible={!headerVisible && lastScrollY > 300} />
+            {/* Back to Top (Thumb-Zone Trigger) */}
+            <BackToTop visible={true} />
         </div>
     );
 }

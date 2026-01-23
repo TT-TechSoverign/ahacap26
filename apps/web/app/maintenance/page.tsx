@@ -12,7 +12,7 @@ export default function MaintenancePage() {
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className="relative h-20 w-80">
-                             <Link href="/">
+                            <Link href="/">
                                 <Image
                                     src="/assets/ahac-logo-header-hv3.svg"
                                     alt="Affordable Home A/C"
@@ -20,7 +20,7 @@ export default function MaintenancePage() {
                                     className="object-contain object-left"
                                     priority
                                 />
-                             </Link>
+                            </Link>
                         </div>
                     </div>
                     <nav className="hidden md:flex items-center gap-8">
@@ -37,10 +37,10 @@ export default function MaintenancePage() {
             <main className="pt-[116px]">
                 {/* Hero Section */}
                 <section className="relative min-h-[90vh] flex items-center">
-                   <div className="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcVdFY3rHs14g2-_QA7wRHU-vcgZckJP0be7QAsq2RCyag57umMKrw6azbu9TgP6l6Q1-76RYDTGDAxgvXt9Go3auTit553tQ1FsWe2T3HD1CVhY5Xg_I64wM8ipf8rtQY8IzMyjA5VOfq5QDVxP4F5g0oNiLj1TO8pimFeQldwv5G5easf3EbH5IWihuU_6T0g_Pcky_o4gcfvVwq1pDnFDoqd7rIrzOURx4kkiQ3Z_u12M1kNm43JkQ1u1M03lChyrrunm1QZiKP')] bg-cover bg-center opacity-20"></div>
-                   <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/80 to-transparent"></div>
+                    <div className="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcVdFY3rHs14g2-_QA7wRHU-vcgZckJP0be7QAsq2RCyag57umMKrw6azbu9TgP6l6Q1-76RYDTGDAxgvXt9Go3auTit553tQ1FsWe2T3HD1CVhY5Xg_I64wM8ipf8rtQY8IzMyjA5VOfq5QDVxP4F5g0oNiLj1TO8pimFeQldwv5G5easf3EbH5IWihuU_6T0g_Pcky_o4gcfvVwq1pDnFDoqd7rIrzOURx4kkiQ3Z_u12M1kNm43JkQ1u1M03lChyrrunm1QZiKP')] bg-cover bg-center opacity-20"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/80 to-transparent"></div>
 
-                   <div className="max-w-7xl mx-auto px-6 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div className="max-w-7xl mx-auto px-6 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                         <div className="lg:col-span-7">
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/30 rounded text-primary text-xs font-bold tracking-widest mb-6">
                                 <span className="size-2 bg-primary rounded-full animate-pulse"></span>
@@ -92,7 +92,7 @@ export default function MaintenancePage() {
                                 </div>
                             </div>
                         </div>
-                   </div>
+                    </div>
                 </section>
 
                 {/* Benefits / Process Video */}
@@ -197,7 +197,7 @@ export default function MaintenancePage() {
                     <div className="max-w-7xl mx-auto px-6">
                         <h2 className="text-3xl font-header font-bold text-white mb-12 uppercase text-center">BEFORE & AFTER <span className="text-primary">TRANSFORMATION</span></h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                             <div className="space-y-4">
+                            <div className="space-y-4">
                                 <div className="aspect-video bg-navy-matte rounded-xl overflow-hidden border border-white/10 relative">
                                     <Image
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuADp9AwPk9zIh--yIFy3crR9WQdrvevCbG2jAHfVnx7OVhOcERWE-glp_DgktMJ72_fFDgAlQh-JchW1kaIlD4ig7nDNyPDIFE3VjJnjo6ZicLG8rSNH2rDTLyy2MiLxuRO58kzzW_LTOU8YvrdepJt4ZRM0LUYzYvThtAXMvRtXHkDJt3kZAXFTkgKquZ0K3phnkWEsilmK8N69qWMkaOYcWmk_aapyBQJWL69l7NQSvu9-Hukuf-gj4tmfDmYT6JQOZZhibqzx_rM"
@@ -240,7 +240,7 @@ export default function MaintenancePage() {
                 <section className="py-24 bg-charcoal">
                     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-5">
-                            <h2 className="text-4xl font-header font-bold text-white mb-6 uppercase">OAHU SERVICE <span class="text-primary">COVERAGE</span></h2>
+                            <h2 className="text-4xl font-header font-bold text-white mb-6 uppercase">OAHU SERVICE <span className="text-primary">COVERAGE</span></h2>
                             <p className="text-slate-400 mb-8">Rapid dispatch available for the following communities:</p>
                             <div className="grid grid-cols-2 gap-y-4">
                                 {["HONOLULU", "AIEA", "KANEOHE", "KAPOLEI", "EWA BEACH", "PEARL CITY", "KAILUA", "MILILANI"].map((city) => (
@@ -251,12 +251,12 @@ export default function MaintenancePage() {
                             </div>
                         </div>
                         <div className="lg:col-span-7 rounded-2xl overflow-hidden border border-white/10 grayscale contrast-125 opacity-70 min-h-[400px] relative">
-                             <div className="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuADp9AwPk9zIh--yIFy3crR9WQdrvevCbG2jAHfVnx7OVhOcERWE-glp_DgktMJ72_fFDgAlQh-JchW1kaIlD4ig7nDNyPDIFE3VjJnjo6ZicLG8rSNH2rDTLyy2MiLxuRO58kzzW_LTOU8YvrdepJt4ZRM0LUYzYvThtAXMvRtXHkDJt3kZAXFTkgKquZ0K3phnkWEsilmK8N69qWMkaOYcWmk_aapyBQJWL69l7NQSvu9-Hukuf-gj4tmfDmYT6JQOZZhibqzx_rM')] bg-cover bg-center"></div>
-                             <div className="absolute inset-0 bg-navy-deep/80"></div>
-                             <div className="relative z-10 flex flex-col items-center justify-center h-full">
+                            <div className="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuADp9AwPk9zIh--yIFy3crR9WQdrvevCbG2jAHfVnx7OVhOcERWE-glp_DgktMJ72_fFDgAlQh-JchW1kaIlD4ig7nDNyPDIFE3VjJnjo6ZicLG8rSNH2rDTLyy2MiLxuRO58kzzW_LTOU8YvrdepJt4ZRM0LUYzYvThtAXMvRtXHkDJt3kZAXFTkgKquZ0K3phnkWEsilmK8N69qWMkaOYcWmk_aapyBQJWL69l7NQSvu9-Hukuf-gj4tmfDmYT6JQOZZhibqzx_rM')] bg-cover bg-center"></div>
+                            <div className="absolute inset-0 bg-navy-deep/80"></div>
+                            <div className="relative z-10 flex flex-col items-center justify-center h-full">
                                 <span className="material-symbols-outlined text-5xl text-primary animate-bounce">location_away</span>
                                 <p className="mt-4 font-bold tracking-widest text-white uppercase">Island-Wide Mobile Units</p>
-                             </div>
+                            </div>
                         </div>
                     </div>
                 </section>
