@@ -127,3 +127,40 @@
 - **Thumb-Zone CTA Placement**: Verify that all embedded links and buttons are sized for touch and placed within the primary mobile interaction zone.
 - **Visual Hierarchy Shield**: Ensure that while the menu is hidden, the "Enter Visual Editor" and primary CTA buttons remain clearly visible but non-obstructive.
 - **Navigation Redundancy Check**: Audit the page to ensure every "Menu Item" (Shop, Cleaning, etc.) has at least two corresponding links within the page body.
+## 1. ANTI-HARDCODE ARCHITECT
+- **Objective**: Intercept all text/style changes and force them into variables or content.json.
+- **Token Enforcement**: Ensure all styles pull from established Tailwind/CSS tokens instead of raw hex codes.
+
+## 2. DUPLICATION SENTINEL
+- **Objective**: Prevent logic/UI duplication by enforcing DRY (Don't Repeat Yourself) standards.
+- **Import Cleaner**: Automatically merge redundant imports and remove unused variables during rapid editing.
+
+## 3. OVERWRITE GUARDIAN
+- **Objective**: Protect the "Source of Truth" in the DOM and prevent accidental code overwrites.
+- **Atomic Saves**: Ensure only specifically changed lines are updated, protecting surrounding logic.
+
+## 4. ERROR-ZERO AUDITOR
+- **Objective**: Block deployments if syntax errors (ts 2590) or logic regressions are detected.
+- **Loop Interruption**: Immediately kill agent tasks if 400/500 level errors are detected in the console logs.
+## 1. THE SMART RETRY ARCHITECT
+- **Exponential Backoff**: Implement a retry protocol that doubles delay (2s, 4s, 8s) during overloads.
+- **Atomic Task Execution**: Break down large "Vibe-Coding" requests into smaller, atomic batches to avoid timeouts.
+
+## 2. THE REQUEST THROTTLER & QUEUE MANAGER
+- **Priority Lane Allocation**: Ensure critical financial calculations and SMTP alerts receive top execution priority.
+- **Token Load Shedding**: Strip non-essential style descriptions from prompts during high-load events to reduce processing burden.
+
+## 3. THE STATE PERSISTENCE & RESUME AGENT
+- **Auto-Snapshotting**: Create a "Safety Commit" of content.json and .tsx state immediately before initiating refactors.
+- **Workspace Integrity Shield**: Lock the current file from manual edits during an active agent task to prevent state corruption.
+## 1. THE BUILD PIPELINE SPECIALIST
+- **Atomic Build Protocol**: Execute multi-stage Docker builds to isolate dependencies from application code.
+- **Artifact Sanitization**: Automatically clean old build artifacts and dangling images to preserve VPS disk space.
+
+## 2. THE INFRASTRUCTURE SYNC AGENT
+- **SSH Tunnel Orchestrator**: Manage secure connections to the Bluehost VPS for standalone build transfers.
+- **Reverse Proxy Configurator**: Automatically update .htaccess to map staging domains to correct Docker ports.
+
+## 3. THE STAGING QUALITY AUDITOR
+- **Smoke Tester**: Verify that the "Industrial Neon" hero and service cards render correctly in under 2 seconds.
+- **Stripe Test Validator**: Confirm that the "Ghost Checkout" is pointing to the Stripe test environment for zero-risk testing.

@@ -1,12 +1,12 @@
 'use client';
 
 import confetti from 'canvas-confetti';
+import { loadStripe } from '@stripe/stripe-js';
 import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
 import { useCart } from '../context/CartContext';
-import CheckoutWrapper from './CheckoutForm';
 
 function cn(...inputs: (string | undefined)[]) {
     return twMerge(clsx(inputs));
@@ -15,7 +15,7 @@ function cn(...inputs: (string | undefined)[]) {
 export default function CartDrawer() {
     const { items, isOpen, closeCart, removeFromCart, cartTotal, clearCart, submitOrder } = useCart();
     const [isCheckout, setIsCheckout] = useState(false);
-    const [email, setEmail] = useState('');
+    // Email state removed - handled by Stripe Hosted Checkout
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [orderSuccess, setOrderSuccess] = useState(false);
@@ -28,25 +28,31 @@ export default function CartDrawer() {
                 setIsCheckout(false);
                 setOrderSuccess(false);
                 setError('');
-                setEmail('');
             }, 300);
             return () => clearTimeout(tm);
         }
     }, [isOpen]);
 
     const handleCheckout = async () => {
-        if (!email) {
-            setError('Email is required.');
-            return;
-        }
         setLoading(true);
         setError('');
         try {
-            await submitOrder(email);
-            setOrderSuccess(true);
-            triggerConfetti();
+            const response = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ items }),
+            });
+
+            const { url, error: apiError } = await response.json();
+
+            if (apiError) throw new Error(apiError);
+            if (!url) throw new Error('Checkout URL missing');
+
+            window.location.href = url;
         } catch (err: any) {
-            setError(err.message || 'Checkout failed.');
+            setError(err.message || 'Checkout connection failed. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -95,11 +101,10 @@ export default function CartDrawer() {
                         className="relative z-10 w-full max-w-md bg-slate-950 h-full shadow-[0_0_50px_rgba(6,182,212,0.2)] flex flex-col border-l border-cyan-500/20"
                         key="panel"
                     >
-                        {/* Header */}
                         <div className="flex items-center justify-between p-6 border-b border-cyan-500/10 bg-slate-900/50 backdrop-blur-xl">
                             <h2 className="text-white text-2xl font-header font-black uppercase tracking-widest flex items-center gap-3 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">
                                 <span className="material-symbols-outlined text-cyan-400 animate-pulse-slow">shopping_cart</span>
-                                Cart_v2.0
+                                Cart
                             </h2>
                             <button
                                 onClick={closeCart}
@@ -109,6 +114,7 @@ export default function CartDrawer() {
                                 <span className="material-symbols-outlined text-2xl">close</span>
                             </button>
                         </div>
+
 
                         {/* Items List */}
                         <div className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-track-slate-900 scrollbar-thumb-cyan-900">
@@ -182,130 +188,55 @@ export default function CartDrawer() {
                         </div>
 
                         {/* Footer / Checkout (Thumb Zone) */}
-                        {(items.length > 0 || orderSuccess) && (
+                        {(items.length > 0) && (
                             <div className="p-6 border-t border-cyan-500/10 bg-slate-900/80 backdrop-blur-xl space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.4)] z-20 pb-8 md:pb-6">
-                                <AnimatePresence mode="wait">
-                                    {!isCheckout ? (
-                                        <motion.div
-                                            key="summary"
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, x: -20 }}
-                                            className="space-y-5"
-                                        >
-                                            <div className="space-y-1">
-                                                <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-widest">
-                                                    <span>Subtotal</span>
-                                                    <span className="font-mono text-slate-500">{items.length} Units</span>
-                                                </div>
-                                                <div className="flex items-end justify-between">
-                                                    <span className="text-white text-3xl font-header font-black tracking-tighter shadow-white-glow">
-                                                        ${cartTotal.toLocaleString()}
-                                                    </span>
-                                                    <span className="text-xs text-cyan-500 font-bold uppercase tracking-wider mb-1">
-                                                        Calculated at Refresh
-                                                    </span>
-                                                </div>
-                                            </div>
+                                <div className="space-y-5">
+                                    <div className="space-y-1">
+                                        <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-widest">
+                                            <span>Subtotal</span>
+                                            <span className="font-mono text-slate-500">{items.length} Units</span>
+                                        </div>
+                                        <div className="flex items-end justify-between">
+                                            <span className="text-white text-3xl font-header font-black tracking-tighter shadow-white-glow">
+                                                ${cartTotal.toLocaleString()}
+                                            </span>
+                                            <span className="text-xs text-cyan-500 font-bold uppercase tracking-wider mb-1">
+                                                Calculated at Refresh
+                                            </span>
+                                        </div>
+                                    </div>
 
-                                            {/* Progress Bar (Visual Flair) */}
-                                            <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-                                                <div className="h-full bg-cyan-500 w-[60%] shadow-[0_0_10px_#06b6d4]" />
-                                            </div>
+                                    {/* Progress Bar (Visual Flair) */}
+                                    <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                                        <div className="h-full bg-cyan-500 w-[60%] shadow-[0_0_10px_#06b6d4]" />
+                                    </div>
 
-                                            <button
-                                                onClick={() => setIsCheckout(true)}
-                                                className="w-full relative group overflow-hidden rounded-xl"
-                                            >
-                                                <div className="absolute inset-0 bg-cyan-500 group-hover:bg-cyan-400 transition-colors duration-300" />
-                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-
-                                                <div className="relative flex items-center justify-between px-6 py-4">
-                                                    <span className="text-black font-header font-black uppercase tracking-widest text-lg">
-                                                        Initiate Checkout
-                                                    </span>
-                                                    <div className="bg-black/10 rounded-full p-1 group-hover:translate-x-1 transition-transform">
-                                                        <span className="material-symbols-outlined text-black font-bold">arrow_forward</span>
-                                                    </div>
-                                                </div>
-                                            </button>
-                                        </motion.div>
-                                    ) : (
-                                        <motion.div
-                                            key="checkout"
-                                            initial={{ opacity: 0, x: 50 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: 50 }}
-                                            className="flex flex-col h-full"
-                                        >
-                                            {orderSuccess ? (
-                                                <div className="text-center space-y-6 py-8">
-                                                     <div className="relative">
-                                                        <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full" />
-                                                        <motion.div
-                                                            initial={{ scale: 0 }}
-                                                            animate={{ scale: 1 }}
-                                                            transition={{ type: 'spring', delay: 0.2 }}
-                                                            className="relative size-24 bg-slate-900 border-2 border-cyan-500 rounded-full flex items-center justify-center mx-auto"
-                                                        >
-                                                            <span className="material-symbols-outlined text-5xl text-cyan-400">check_circle</span>
-                                                        </motion.div>
-                                                    </div>
-
-                                                    <div className="space-y-2">
-                                                        <h3 className="text-white font-header font-black uppercase text-2xl tracking-wide">
-                                                            Order Authorized
-                                                        </h3>
-                                                        <p className="text-slate-400 max-w-[250px] mx-auto text-sm leading-relaxed">
-                                                            Confirmation vector sent to target email. Pickup access granted.
-                                                        </p>
-                                                    </div>
-
-                                                    <button
-                                                        onClick={closeCart}
-                                                        className="text-cyan-400 text-xs font-bold uppercase hover:text-white tracking-widest border-b border-cyan-500/30 pb-1 hover:border-cyan-400"
-                                                    >
-                                                        Terminate Session
-                                                    </button>
-                                                </div>
-                                            ) : (
-                                                <>
-                                                    <div className="flex items-center justify-between mb-6">
-                                                        <div className="flex items-center gap-2">
-                                                            <div className="size-2 rounded-full bg-cyan-500 animate-pulse" />
-                                                            <h3 className="text-white font-bold uppercase tracking-widest text-sm">Secure Link Active</h3>
-                                                        </div>
-                                                        <button
-                                                            onClick={() => setIsCheckout(false)}
-                                                            className="text-slate-500 text-xs font-bold uppercase hover:text-white transition-colors flex items-center gap-1"
-                                                        >
-                                                            <span className="material-symbols-outlined text-sm">arrow_back</span>
-                                                            Return
-                                                        </button>
-                                                    </div>
-
-                                                    <div className="bg-slate-950/50 rounded-xl border border-white/5 p-4">
-                                                        {/* Stripe Checkout Integrated */}
-                                                        <CheckoutWrapper
-                                                            totalAmount={cartTotal}
-                                                            items={items}
-                                                            onSuccess={() => {
-                                                                setOrderSuccess(true);
-                                                                triggerConfetti();
-                                                                clearCart(); // Simulate post-payment clear
-                                                            }}
-                                                        />
-                                                    </div>
-
-                                                    <div className="flex items-center justify-center gap-2 mt-6 text-slate-600">
-                                                        <span className="material-symbols-outlined text-sm">lock</span>
-                                                        <span className="text-[10px] font-mono uppercase tracking-widest">256-bit TLS Encryption</span>
-                                                    </div>
-                                                </>
-                                            )}
-                                        </motion.div>
+                                    {error && (
+                                        <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs font-bold text-center">
+                                            {error}
+                                        </div>
                                     )}
-                                </AnimatePresence>
+
+                                    <button
+                                        onClick={handleCheckout}
+                                        disabled={loading}
+                                        className="w-full h-16 bg-gradient-to-r from-primary to-cyan-500 text-white font-header font-black uppercase tracking-[0.25em] text-sm rounded-xl shadow-[0_0_30px_rgba(0,174,239,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {loading ? (
+                                            <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                                        ) : (
+                                            <>
+                                                <span>Secure Checkout</span>
+                                                <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">lock</span>
+                                            </>
+                                        )}
+                                    </button>
+
+                                    <div className="flex items-center justify-center gap-2 text-slate-600">
+                                        <span className="material-symbols-outlined text-sm">lock</span>
+                                        <span className="text-[10px] font-mono uppercase tracking-widest">256-bit TLS Encryption via Stripe</span>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </motion.div>

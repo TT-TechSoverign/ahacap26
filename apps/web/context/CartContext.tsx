@@ -2,14 +2,14 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { CartItem, Product } from '../types';
+import { CartItem, Product } from '../types/inventory';
 
 interface CartContextType {
     items: CartItem[];
     isOpen: boolean;
     openCart: () => void;
     closeCart: () => void;
-    addToCart: (product: any) => void;
+    addToCart: (product: Product) => void;
     removeFromCart: (id: number) => void;
     clearCart: () => void;
     cartTotal: number;
@@ -80,7 +80,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
                 shipping_method: "PICKUP_AIEA"
             };
 
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
             console.log("🛒 Submitting Order:", { apiUrl, orderPayload });
 
             const res = await fetch(`${apiUrl}/orders`, {

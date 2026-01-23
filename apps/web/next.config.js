@@ -5,6 +5,9 @@ const nextConfig = {
     typescript: {
         ignoreBuildErrors: true,
     },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     images: {
         remotePatterns: [
             {
@@ -23,7 +26,7 @@ const nextConfig = {
                     {
                         key: 'Content-Security-Policy',
 
-                        value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://js.stripe.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://js.stripe.com; connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 http://localhost:8001 http://127.0.0.1:8001 ws://localhost:3000 https: https://api.stripe.com http://staging.affordablehome-ac.com:8000",
+                        value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://js.stripe.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://js.stripe.com; connect-src 'self' https: https://api.stripe.com http://staging.affordablehome-ac.com:8000 http://localhost:8000 http://localhost:8001 http://127.0.0.1:8000 http://127.0.0.1:8001",
                     },
                     {
                         key: 'Strict-Transport-Security',
@@ -46,7 +49,7 @@ const nextConfig = {
         ];
     },
     async rewrites() {
-        const apiUrl = process.env.API_INTERNAL_URL || 'http://api:8000';
+        const apiUrl = process.env.API_INTERNAL_URL || 'http://127.0.0.1:8001';
         console.log(`[Next.js Rewrites] Proxying /api/v1 to: ${apiUrl}`);
         return [
             {

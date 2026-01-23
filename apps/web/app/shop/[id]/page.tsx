@@ -6,20 +6,28 @@ import { useEffect, useState } from 'react';
 import { useCart } from '../../../context/CartContext';
 import { getProductImages } from '../../../lib/product-images';
 import { getProductSpecs } from '../../../lib/product-specs';
-import { Product } from '../../../types';
+import { Product } from '../../../types/inventory';
+import { EditableText } from '@/components/EditableText';
+import { useContent } from '@/lib/context/ContentContext';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const { content, isEditMode } = useContent();
 
-    const { addToCart } = useCart();
+    const { addToCart, items, openCart } = useCart();
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [isSpecModalOpen, setIsSpecModalOpen] = useState(false);
 
     useEffect(() => {
         async function fetchProduct() {
             try {
-                // Use relative URL or env var
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
                 const res = await fetch(`${apiUrl}/products/${params.id}`);
 
                 if (!res.ok) throw new Error('Product not found');
@@ -36,9 +44,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             fetchProduct();
         }
     }, [params.id]);
-
-    const [isSpecModalOpen, setIsSpecModalOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     const productImages = product ? [
         ...(product.image_url ? [product.image_url] : []),
@@ -97,274 +102,203 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     );
 
     return (
-        <main className="min-h-screen bg-background-dark text-white pt-10 pb-20 px-4 md:px-10">
-            <div className="max-w-7xl mx-auto">
-                <nav className="flex items-center text-xs uppercase tracking-widest text-slate-500 font-bold mb-8">
-                    <Link href="/shop" className="hover:text-primary cursor-pointer transition-colors flex items-center gap-2 group">
-                        <span className="bg-white/5 p-1 rounded group-hover:bg-white/10 transition-colors">
-                            <span className="material-symbols-outlined text-sm block" aria-hidden="true">arrow_back</span>
-                        </span>
-                        Back to Inventory
-                    </Link>
-                    <span className="material-symbols-outlined text-[10px] mx-3 text-slate-700">chevron_right</span>
-                    <span className="text-white border-b border-white/20 pb-0.5">{product.name}</span>
-                </nav>
+        <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
+            <Navbar />
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-                    {/* Visual Section */}
-                    <div className="relative sticky top-24">
-                        <div className="aspect-square bg-white/[0.05] rounded-2xl border border-primary/20 flex items-center justify-center relative overflow-hidden group shadow-[0_0_50px_rgba(0,174,239,0.05)] mb-4 p-12">
-                            <div className="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent z-10"></div>
-                            <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-60 z-0"></div>
+            <main className="pt-48 md:pt-56 pb-20 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                    {/* Visual Anchor */}
+                    <div className="space-y-8 md:sticky md:top-40">
+                        <div className="aspect-square bg-[#0a0e14] rounded-[2rem] border border-white/5 relative overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.6)] ring-1 ring-white/10 flex items-center justify-center p-6 lg:p-10">
+                            <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
 
-                            {/* Neon Glow Behind */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-2/3 h-2/3 bg-primary/20 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                            </div>
+                            {/* Radial Highlights */}
+                            <div className="absolute -left-20 -top-20 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+                            <div className="absolute -right-20 -bottom-20 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
 
                             {selectedImage ? (
-                                <div className="relative w-full h-full z-20">
+                                <div className="relative w-full h-full z-10">
                                     <Image
                                         src={selectedImage}
                                         alt={product.name}
                                         fill
-                                        sizes="(max-width: 1024px) 100vw, 50vw"
-                                        className="object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                                        className="object-contain drop-shadow-[0_50px_100px_rgba(0,0,0,0.8)] transition-all duration-1000 group-hover:scale-105"
                                         priority
-                                        unoptimized={!!product.image_url && selectedImage === product.image_url}
                                     />
                                 </div>
                             ) : (
-                                <span className="material-symbols-outlined text-[150px] md:text-[240px] text-slate-800 group-hover:text-primary/80 transition-colors duration-500 relative z-20 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]" aria-hidden="true">
-                                    {product.category === 'SERVICE' ? 'home_repair_service' : 'ac_unit'}
-                                </span>
+                                <span className="material-symbols-outlined text-[200px] text-white/5">ac_unit</span>
                             )}
-
-                            {/* Floating Stats */}
-                            <div className="absolute bottom-6 left-6 right-6 z-30 flex gap-3">
-                                <div className="bg-black/60 backdrop-blur-xl border border-white/10 px-4 py-3 rounded-xl flex items-center gap-4 flex-1 shadow-2xl">
-                                    <div className="bg-green-500/20 p-2 rounded-lg text-green-500 border border-green-500/20">
-                                        <span className="material-symbols-outlined block">energy_savings_leaf</span>
-                                    </div>
-                                    <div>
-                                        <div className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-0.5">Energy Rating</div>
-                                        <div className="font-header font-bold text-white text-lg leading-none">SEER 22+</div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                        {/* Thumbnail Gallery */}
+                        {/* Thumbnail Bar */}
                         {productImages.length > 1 && (
-                            <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                            <div className="flex gap-3 overflow-x-auto pb-2 justify-center md:justify-start [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-primary/50 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary">
                                 {productImages.map((img, idx) => (
                                     <button
                                         key={idx}
                                         onClick={() => setSelectedImage(img)}
-                                        className={`aspect-square rounded-lg border overflow-hidden relative transition-all ${selectedImage === img ? 'border-primary shadow-[0_0_10px_rgba(0,174,239,0.5)]' : 'border-white/10 hover:border-white/30 bg-white/[0.02]'}`}
+                                        className={cn(
+                                            "relative w-20 h-20 rounded-xl overflow-hidden border transition-all shrink-0",
+                                            selectedImage === img ? "border-primary ring-2 ring-primary/20 shadow-lg shadow-primary/20" : "border-white/10 hover:border-white/30 grayscale hover:grayscale-0"
+                                        )}
                                     >
-                                        <Image
-                                            src={img}
-                                            alt={`Thumbnail ${idx + 1}`}
-                                            fill
-                                            sizes="(max-width: 640px) 25vw, 10vw"
-                                            className="object-cover"
-                                        />
+                                        <Image src={img} alt="Thumbnail" fill className="object-cover" />
                                     </button>
                                 ))}
                             </div>
                         )}
                     </div>
 
-                    {/* Details Section */}
-                    <div className="flex flex-col h-full pt-4">
-                        <div className="mb-auto">
-                            <div className="flex flex-wrap items-center gap-3 mb-6">
-                                <span className="bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(0,174,239,0.1)]">
+                    {/* Technical Command Center */}
+                    <div className="space-y-12">
+                        <div className="space-y-6">
+                            <div className="flex flex-wrap gap-4 items-center justify-center md:justify-start">
+                                <span className="px-5 py-2 bg-primary/10 border border-primary/20 rounded-lg text-primary text-[11px] font-header font-black uppercase tracking-[0.5em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
                                     {product.category.replace('_', ' ')}
                                 </span>
-                                {product.stock > 0 ? (
-                                    <span className="bg-green-500/10 text-green-500 border border-green-500/20 px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-[pulse_1.5s_infinite]"></div>
-                                        In Stock (Waipahu)
-                                    </span>
-                                ) : (
-                                    <span className="bg-red-500/10 text-red-500 border border-red-500/20 px-3 py-1.5 rounded text-[10px] font-bold uppercase tracking-widest">
-                                        Sold Out
-                                    </span>
-                                )}
+                                <span className="px-5 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 text-[11px] font-header font-black uppercase tracking-[0.5em] flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                                    Operational Inventory
+                                </span>
                             </div>
 
-                            <h1 className="text-4xl md:text-6xl font-header font-bold uppercase leading-none tracking-wide mb-6 text-white drop-shadow-lg">{product.name}</h1>
+                            <h1 className="text-3xl md:text-6xl font-header font-black uppercase leading-[0.9] tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                                {product.name}
+                            </h1>
 
-                            <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-8 mb-10 pb-10 border-b border-white/5">
-                                <div className="flex items-baseline gap-2">
-                                    <span className="text-5xl md:text-6xl font-header font-bold text-primary tracking-tight decoration-slice drop-shadow-[0_0_15px_rgba(0,174,239,0.3)]">${product.price.toLocaleString()}</span>
-                                    <span className="text-lg text-slate-500 font-bold line-through decoration-slate-600 opacity-60">${(product.price * 1.2).toFixed(0).toLocaleString()}</span>
-                                </div>
-                                <div className="md:mb-4 bg-green-500/10 border border-green-500/20 px-3 py-1.5 rounded-lg inline-flex items-center gap-2 text-green-400 text-xs font-bold uppercase tracking-wide w-fit">
-                                    <span className="material-symbols-outlined text-sm">savings</span>
-                                    Save ${(product.price * 0.2).toFixed(0)}
-                                </div>
+                            <div className="flex items-baseline gap-3 pt-2 justify-center md:justify-start">
+                                <span className="text-3xl md:text-5xl font-header font-black text-primary tracking-tight">
+                                    ${product.price.toLocaleString()}
+                                </span>
+                                <span className="text-xl text-red-500/60 line-through font-bold decoration-red-500/30">
+                                    ${(product.price * 1.25).toLocaleString()}
+                                </span>
                             </div>
-
-                            <div className="prose prose-invert prose-p:text-slate-300 prose-p:text-base prose-p:leading-relaxed mb-10 max-w-none">
-                                <p>
-                                    Experience superior climate control with this industrial-grade <strong className="text-white">{product.name}</strong>.
-                                    Engineered for maintaining precise temperatures in high-humidity environments.
-                                    The ultimate solution for residential or commercial cooling in Hawaii.
-                                </p>
-                            </div>
-
-                            <div className="mb-10">
-                                <h3 className="text-white text-lg font-header font-bold uppercase tracking-wide mb-6 flex items-center gap-2">
-                                    <span className="material-symbols-outlined text-primary">settings_applications</span> Technical Specifications
-                                </h3>
-
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                                    <div className="bg-white/[0.03] border border-white/5 p-4 rounded-xl">
-                                        <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Cooling Output</div>
-                                        <div className="text-white font-header font-bold text-xl">{specs?.btu}</div>
-                                    </div>
-                                    <div className="bg-white/[0.03] border border-white/5 p-4 rounded-xl">
-                                        <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Coverage</div>
-                                        <div className="text-white font-header font-bold text-xl text-primary">{specs?.coolingArea}</div>
-                                    </div>
-                                    <div className="bg-white/[0.03] border border-white/5 p-4 rounded-xl">
-                                        <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Efficiency</div>
-                                        <div className="text-white font-header font-bold text-xl">{specs?.eer}</div>
-                                    </div>
-                                    <div className="bg-white/[0.03] border border-white/5 p-4 rounded-xl">
-                                        <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Voltage</div>
-                                        <div className="text-white font-header font-bold text-xl">{specs?.voltage}</div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-white/[0.02] border border-white/5 rounded-xl p-6 mb-6">
-                                    <div className="grid grid-cols-2 gap-y-4 text-sm">
-                                        <div className="flex flex-col">
-                                            <span className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Dimensions (H x W x D)</span>
-                                            <span className="text-slate-300 font-medium mt-1">{specs?.dimensions}</span>
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Net Weight</span>
-                                            <span className="text-slate-300 font-medium mt-1">{specs?.weight}</span>
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Power</span>
-                                            <span className="text-slate-300 font-medium mt-1">{specs?.watts} / {specs?.amps}</span>
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Warranty</span>
-                                            <span className="text-slate-300 font-medium mt-1">{specs?.warranty}</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-wrap gap-2">
-                                    {specs?.features.map((feature, i) => (
-                                         <span key={i} className="bg-primary/5 text-primary border border-primary/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wide flex items-center gap-1.5">
-                                            <span className="material-symbols-outlined text-sm">check_circle</span>
-                                            {feature}
-                                         </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Technical Documents Card */}
-                           {specSheetUrl && (
-                                <div className="bg-white/[0.03] border border-white/5 p-5 rounded-xl hover:border-white/10 transition-colors mb-10">
-                                    <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
-                                        <span className="material-symbols-outlined text-sm text-primary">description</span> Technical Documents
-                                    </div>
-                                    <button
-                                        onClick={() => setIsSpecModalOpen(true)}
-                                        className="w-full flex items-center justify-between bg-white/[0.05] hover:bg-white/[0.08] border border-white/10 p-4 rounded-lg group transition-all"
-                                    >
-                                        <div className="flex items-center gap-3">
-                                             <div className="p-2 bg-red-500/20 rounded text-red-400">
-                                                <span className="material-symbols-outlined block">picture_as_pdf</span>
-                                             </div>
-                                             <div className="text-left">
-                                                <div className="text-white font-bold text-sm uppercase tracking-wide group-hover:text-primary transition-colors">Factory Spec Sheet</div>
-                                                <div className="text-slate-500 text-[10px]">PDF Document • Official Specifications</div>
-                                             </div>
-                                        </div>
-                                        <span className="material-symbols-outlined text-slate-500 group-hover:text-white transition-colors">visibility</span>
-                                    </button>
-                                </div>
-                           )}
                         </div>
 
-                        {/* Action Bar */}
-                        <div className="sticky bottom-4 lg:relative lg:bottom-auto bg-surface-dark/95 lg:bg-transparent backdrop-blur-xl lg:backdrop-blur-none p-4 lg:p-0 rounded-2xl lg:rounded-none border lg:border-none border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] lg:shadow-none mt-4 z-40">
-                            <div className="flex flex-col gap-4">
+                        <div className="h-px bg-gradient-to-r from-white/10 to-transparent w-full"></div>
+
+                        {/* Bento Specifications Grid */}
+                        <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[9px] font-header font-black uppercase tracking-[0.3em] mb-2 group-hover/spec:text-primary">Performance</div>
+                                <div className="text-white font-header font-black text-2xl">{specs?.btu}</div>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[9px] font-header font-black uppercase tracking-[0.3em] mb-2 group-hover/spec:text-primary">Coverage</div>
+                                <div className="text-white font-header font-black text-2xl">{specs?.coolingArea}</div>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[9px] font-header font-black uppercase tracking-[0.3em] mb-2 group-hover/spec:text-primary">Efficiency</div>
+                                <div className="text-white font-header font-black text-2xl">{specs?.eer}</div>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[9px] font-header font-black uppercase tracking-[0.3em] mb-2 group-hover/spec:text-primary">Voltage</div>
+                                <div className="text-white font-header font-black text-2xl">{specs?.voltage}</div>
+                            </div>
+                        </div>
+
+                        {/* Secondary Specifications Hub */}
+                        <div className="bg-[#0a0e14] border border-white/5 rounded-[2.5rem] p-10 ring-1 ring-white/10 shadow-2xl relative overflow-hidden group/details">
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent"></div>
+                            <div className="grid grid-cols-2 gap-y-10 items-start relative z-10 text-sm md:text-left">
+                                <div className="flex flex-col gap-2 items-center md:items-start">
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.4em]">Dimensions (H/W/D)</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-widest text-xs">{specs?.dimensions || 'N/A'}</span>
+                                </div>
+                                <div className="flex flex-col gap-2 items-center md:items-start">
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.4em]">Operational Weight</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-widest text-xs">{specs?.weight || 'N/A'}</span>
+                                </div>
+                                <div className="flex flex-col gap-2 items-center md:items-start">
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.4em]">Manufacturer Warranty</span>
+                                    <span className="text-rose-400 font-header font-black uppercase tracking-widest text-xs">{specs?.warranty || '1 YEAR LIMITED'}</span>
+                                </div>
+                                <div className="flex flex-col gap-2 items-center md:items-start">
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.4em]">Power Specs</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-widest text-xs">{specs?.watts || 'N/A'}W / {specs?.amps || 'N/A'}A</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Educational Architecture (New Section) */}
+                        <div className="space-y-6 border-t border-white/5 pt-8">
+                            <h3 className="text-white font-header font-black uppercase tracking-widest text-sm">Architectural Profile</h3>
+                            <div className="grid grid-cols-1 gap-6">
+                                <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl">
+                                    <div className="text-primary text-[10px] font-header font-black uppercase tracking-[0.3em] mb-2">Target Deployment</div>
+                                    <p className="text-slate-300 text-sm leading-relaxed">{specs?.idealFor || 'General Residential Cooling'}</p>
+                                </div>
+                                <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl">
+                                    <div className="text-emerald-500 text-[10px] font-header font-black uppercase tracking-[0.3em] mb-2">Core Advantage</div>
+                                    <p className="text-slate-300 text-sm leading-relaxed">{specs?.benefits || 'High efficiency cooling performance.'}</p>
+                                </div>
+                                <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl">
+                                    <div className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.3em] mb-2">Acoustic Signature</div>
+                                    <p className="text-slate-300 text-sm leading-relaxed">{specs?.soundProfile || 'Standard Operation'}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* CTA Cluster */}
+                        <div className="space-y-6 pt-6 relative">
+                            <button
+                                onClick={() => addToCart(product)}
+                                className="w-full h-20 bg-gradient-to-r from-primary to-cyan-500 text-white font-header font-black uppercase tracking-[0.5em] text-lg rounded-2xl shadow-[0_20px_50px_rgba(0,174,239,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-4 group"
+                            >
+                                <span className="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+                            {specSheetUrl && (
                                 <button
-                                    onClick={() => addToCart(product)}
-                                    className="w-full bg-primary hover:bg-primary-dark text-white font-header font-bold uppercase tracking-widest text-lg h-16 rounded-lg transition-all shadow-[0_0_30px_rgba(0,174,239,0.3)] hover:shadow-[0_0_50px_rgba(0,174,239,0.5)] hover:scale-[1.01] flex items-center justify-center gap-3 active:scale-[0.98]"
+                                    onClick={() => setIsSpecModalOpen(true)}
+                                    className="w-full h-16 bg-white/[0.03] hover:bg-white/5 border border-white/10 text-slate-400 hover:text-white font-header font-black uppercase tracking-[0.4em] text-xs rounded-2xl transition-all flex items-center justify-center gap-4"
                                 >
-                                    Add to Order
-                                    <span className="material-symbols-outlined text-2xl" aria-hidden="true">add_shopping_cart</span>
+                                    <span className="material-symbols-outlined text-xl">description</span>
+                                    Factory Specs (PDF)
                                 </button>
-                                <div className="flex items-center justify-center gap-2 text-[10px] text-slate-500 uppercase font-bold tracking-widest">
-                                    <span className="material-symbols-outlined text-sm text-green-500">lock</span>
-                                    Secure Checkout • Instant Confirmation
+                            )}
+
+                            <div className="mt-8 bg-[#0f0505] border border-red-500/20 rounded-xl p-6 flex flex-col items-center text-center shadow-[inset_0_0_20px_rgba(239,68,68,0.05)]">
+                                <div className="flex items-center gap-2 mb-3 text-red-500">
+                                    <span className="material-symbols-outlined text-lg">policy</span>
+                                    <h5 className="font-header font-black uppercase tracking-[0.2em] text-xs">All Sales Final</h5>
+                                </div>
+                                <div className="space-y-2">
+                                    <p className="text-red-400/80 text-[10px] font-bold leading-relaxed uppercase tracking-widest">
+                                        No Refunds • No Exchanges
+                                    </p>
+                                    <p className="text-slate-500 text-[10px] leading-relaxed font-medium max-w-[240px] mx-auto">
+                                        All warranty claims & defective units must be processed directly through the manufacturer.
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </main >
 
             {/* Spec Sheet Preview Modal */}
-            {isSpecModalOpen && specSheetUrl && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-surface-dark border border-white/10 w-full h-full md:w-[90vw] md:h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden relative">
-                        {/* Modal Header */}
-                        <div className="flex items-center justify-between p-4 border-b border-white/10 bg-white/[0.02]">
-                            <div className="flex items-center gap-3">
-                                <span className="material-symbols-outlined text-primary">description</span>
-                                <h3 className="font-header font-bold uppercase text-white tracking-wide">Factory Specification Sheet</h3>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <a
-                                    href={specSheetUrl}
-                                    download
-                                    className="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-bold uppercase tracking-widest text-white transition-all"
-                                >
-                                    <span className="material-symbols-outlined text-sm">download</span> Download
-                                </a>
-                                <button
-                                    onClick={() => setIsSpecModalOpen(false)}
-                                    className="p-2 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white transition-colors"
-                                >
-                                    <span className="material-symbols-outlined">close</span>
+            {
+                isSpecModalOpen && specSheetUrl && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/80 backdrop-blur-sm">
+                        <div className="bg-[#0a0e14] border border-white/10 w-full h-full md:w-[90vw] md:h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative ring-1 ring-white/20">
+                            <div className="flex items-center justify-between p-6 border-b border-white/10">
+                                <h3 className="font-header font-black uppercase text-white tracking-widest text-sm">Specification Analysis</h3>
+                                <button onClick={() => setIsSpecModalOpen(false)} className="p-2 text-slate-500 hover:text-primary transition-colors">
+                                    <span className="material-symbols-outlined text-3xl">close</span>
                                 </button>
                             </div>
-                        </div>
-
-                        {/* Modal Content - Iframe for PDF */}
-                        <div className="flex-1 bg-white/5 relative">
-                             <iframe
-                                src={`${specSheetUrl}#toolbar=0`}
-                                className="w-full h-full"
-                                title="Spec Sheet Preview"
-                             />
-
-                             {/* Mobile Fallback / Actions (Always visible on mobile since iframe might be tricky) */}
-                             <div className="md:hidden absolute bottom-6 left-6 right-6 flex gap-3">
-                                 <a
-                                    href={specSheetUrl}
-                                    download
-                                    className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-primary text-white font-bold uppercase tracking-widest rounded-xl shadow-xl"
-                                 >
-                                    <span className="material-symbols-outlined">download</span> Download PDF
-                                 </a>
-                             </div>
+                            <div className="grow bg-white/5 relative">
+                                <iframe src={specSheetUrl} className="w-full h-full" title="Spec Sheet" />
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </main>
+                )
+            }
+            {/* Standard Footer */}
+            <Footer />
+        </div >
     );
 }
