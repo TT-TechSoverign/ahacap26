@@ -1,4 +1,5 @@
 
+from datetime import datetime
 from dotenv import load_dotenv
 import os
 
@@ -57,7 +58,15 @@ async def lifespan(app: FastAPI):
                                 "name": row['name'],
                                 "price": int(row['price']),
                                 "category": row['category'],
-                                "stock": int(row['stock'])
+                                "stock": int(row['stock']),
+                                "image_url": row.get('image_url'),
+                                "btu": int(row['btu']) if row.get('btu') else None,
+                                "voltage": row.get('voltage'),
+                                "coverage": row.get('coverage'),
+                                "performance_specs": row.get('performance_specs'),
+                                "key_spec": row.get('key_spec'),
+                                "noise_level": row.get('noise_level'),
+                                "dehumidification": row.get('dehumidification')
                             })
 
                     if products_to_add:
@@ -79,7 +88,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 # --- SECURITY & MIDDLEWARE ---
-origins = ["*"]
+allowed_origins_raw = os.getenv("ALLOWED_ORIGINS", "*")
+origins = allowed_origins_raw.split(",") if allowed_origins_raw != "*" else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -105,6 +116,14 @@ class ProductSchema(BaseModel):
     price: int
     category: str
     stock: int
+    image_url: Optional[str] = None
+    btu: Optional[int] = None
+    voltage: Optional[str] = None
+    coverage: Optional[str] = None
+    performance_specs: Optional[str] = None
+    key_spec: Optional[str] = None
+    noise_level: Optional[str] = None
+    dehumidification: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -142,6 +161,13 @@ class ProductCreateSchema(BaseModel):
     category: str
     stock: int
     image_url: Optional[str] = None
+    btu: Optional[int] = None
+    voltage: Optional[str] = None
+    coverage: Optional[str] = None
+    performance_specs: Optional[str] = None
+    key_spec: Optional[str] = None
+    noise_level: Optional[str] = None
+    dehumidification: Optional[str] = None
 
 class ProductUpdateSchema(BaseModel):
     name: Optional[str] = None
@@ -149,6 +175,59 @@ class ProductUpdateSchema(BaseModel):
     category: Optional[str] = None
     stock: Optional[int] = None
     image_url: Optional[str] = None
+    btu: Optional[int] = None
+    voltage: Optional[str] = None
+    coverage: Optional[str] = None
+    performance_specs: Optional[str] = None
+    key_spec: Optional[str] = None
+    noise_level: Optional[str] = None
+    dehumidification: Optional[str] = None
+
+class LeadSchema(BaseModel):
+    id: int
+    first_name: str
+    last_name: str
+    email: str
+    phone: str
+    address: str
+    city: str
+    zip: str
+    service_type: str
+    urgency: str
+    notes: Optional[str] = None
+    status: str
+    created_at: datetime
+    class Config:
+        from_attributes = True
+
+class LeadUpdateSchema(BaseModel):
+    status: Optional[str] = None
+    notes: Optional[str] = None
+
+class LeadCreateSchema(BaseModel):
+    first_name: str
+    last_name: str
+    email: str
+    phone: str
+    address: str
+    city: str
+    zip: str
+    service_type: str
+    urgency: str
+    notes: Optional[str] = None
+
+class OrderSchema(BaseModel):
+    id: str
+    status: str
+    total_cents: int
+    customer_email: Optional[str] = None
+    items_json: Optional[str] = None
+    created_at: datetime
+    class Config:
+        from_attributes = True
+
+class OrderUpdateSchema(BaseModel):
+    status: str
 
 # --- API ENDPOINTS ---
 
@@ -191,12 +270,15 @@ async def create_payment_intent(
              await db.commit()
     else:
         from uuid import uuid4
+        import json
+        items_serialized = json.dumps([i.dict() for i in request.items])
         new_order = models.Order(
             id=str(uuid4()),
             status=models.OrderStatus.AWAIT_PAYMENT,
             total_cents=server_total_cents,
             idempotency_key=idempotency_key,
-            customer_email=request.customer_email
+            customer_email=request.customer_email,
+            items_json=items_serialized
         )
         db.add(new_order)
         await db.commit()
@@ -318,6 +400,56 @@ async def simulate_payment(request: SimulatePaymentRequest, background_tasks: Ba
     )
 
     return {"status": "success", "order_id": order_id}
+
+# --- ADMIN ROUTES ---
+
+@app.get("/api/v1/admin/orders", response_model=List[OrderSchema])
+async def get_admin_orders(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Order).order_by(models.Order.created_at.desc()))
+    return result.scalars().all()
+
+@app.put("/api/v1/admin/orders/{order_id}", response_model=OrderSchema)
+async def update_order(order_id: str, order_data: OrderUpdateSchema, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Order).where(models.Order.id == order_id))
+    order = result.scalars().first()
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    order.status = order_data.status
+    await db.commit()
+    await db.refresh(order)
+    return order
+
+@app.get("/api/v1/admin/leads", response_model=List[LeadSchema])
+async def get_admin_leads(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Lead).order_by(models.Lead.created_at.desc()))
+    return result.scalars().all()
+
+@app.put("/api/v1/admin/leads/{lead_id}", response_model=LeadSchema)
+async def update_lead(lead_id: int, lead_data: LeadUpdateSchema, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Lead).where(models.Lead.id == lead_id))
+    lead = result.scalars().first()
+    if not lead:
+        raise HTTPException(status_code=404, detail="Lead not found")
+    
+    if lead_data.status:
+        lead.status = lead_data.status
+    if lead_data.notes is not None:
+        lead.notes = lead_data.notes
+        
+    await db.commit()
+    await db.refresh(lead)
+    return lead
+
+# --- LEAD ROUTES ---
+
+@app.post("/api/v1/leads", response_model=LeadSchema)
+async def create_lead(lead: LeadCreateSchema, db: AsyncSession = Depends(get_db)):
+    new_lead = models.Lead(**lead.dict())
+    db.add(new_lead)
+    await db.commit()
+    await db.refresh(new_lead)
+    return new_lead
 
 # --- PRODUCT ROUTES ---
 

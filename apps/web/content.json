@@ -1,0 +1,238 @@
+{
+    "admin": {
+        "tabs": {
+            "inventory": "Inventory",
+            "orders": "Orders",
+            "leads": "Leads"
+        },
+        "login": {
+            "title": "Sovereign Admin",
+            "subtitle": "Authorized Access Only",
+            "label": "Access PIN",
+            "button": "Initialize Session",
+            "version": "AHAC Executive Terminal v1.1.0",
+            "error": "INVALID ACCESS CODE"
+        },
+        "nav": {
+            "title": "Command Center",
+            "subtitle": "Sovereign Management Hub",
+            "view_shop": "View Shop",
+            "add_product": "Add Product"
+        },
+        "stats": {
+            "inventory": {
+                "total": "Total Units",
+                "value": "Inventory Value"
+            },
+            "orders": {
+                "total": "Total Orders",
+                "revenue": "Revenue"
+            },
+            "leads": {
+                "active": "Active Tickets",
+                "urgent": "Urgent Inquiries"
+            }
+        },
+        "table": {
+            "image": "Image",
+            "name": "Product Name",
+            "category": "Category",
+            "price": "Price",
+            "stock": "Stock",
+            "actions": "Actions"
+        },
+        "orders": {
+            "header": "Order Oversight",
+            "empty": "No orders found.",
+            "columns": {
+                "id": "Order ID",
+                "customer": "Customer",
+                "date": "Date",
+                "status": "Status",
+                "total": "Total"
+            },
+            "modal": {
+                "title": "Order Oversight",
+                "manifest": "Purchase Manifest",
+                "update_status": "Update Manifest",
+                "transition": "Status Transition"
+            }
+        },
+        "leads": {
+            "header": "Lead Lifecycle",
+            "empty": "No leads found.",
+            "columns": {
+                "requestor": "Requestor",
+                "service": "Service Type",
+                "urgency": "Urgency",
+                "status": "Status",
+                "date": "Date"
+            },
+            "modal": {
+                "title": "Service Ticket Details",
+                "notes": "Internal Notes",
+                "update": "Save Changes",
+                "contact_info": "Contact Information",
+                "location": "Project Location",
+                "status": "Ticket Status"
+            }
+        },
+        "products": {
+            "modal": {
+                "new": "New Intake",
+                "edit": "Update Model",
+                "subtitle": "Industrial Inventory Control",
+                "name": "Product Name",
+                "price": "Price (USD)",
+                "stock": "Initial Stock",
+                "category": "Category",
+                "image": "Image URL",
+                "save_new": "Initialize Unit",
+                "save_edit": "Commit Changes",
+                "cancel": "Cancel"
+            }
+        }
+    },
+    "common": {
+        "location": "Waipahu, HI 96797",
+        "address": "94-150 Leoleo St. #203",
+        "warehouse_name": "Waipahu Warehouse",
+        "warehouse_full": "Waipahu Industrial Park",
+        "footer": {
+            "nav": "Navigation",
+            "support": "Support",
+            "location": "Location",
+            "copyright": "© 2024 Affordable Home A/C • LIC# CT-36775 • Island-Scale Cooling Solutions"
+        }
+    },
+    "contact": {
+        "badge_label": "System Admin",
+        "wizard_interface": "Service Ticket Interface",
+        "hours": {
+            "title": "Business Hours",
+            "mon_fri": "Mon - Fri",
+            "sat": "Saturday",
+            "sun": "Sunday"
+        }
+    },
+    "shop": {
+        "search_placeholder": "SEARCH INVENTORY...",
+        "sections": {
+            "window_ac": {
+                "title": "Industrial Window AC Units",
+                "subtitle": "High-Efficiency Tropical Cooling",
+                "description": "Our LG & GE units are specifically selected for Hawaii's high humidity. Each unit features anti-corrosive coating and high-torque compressors designed for continuous operation in island conditions. Verify your room sizing below to ensure optimal energy efficiency."
+            },
+            "service": {
+                "title": "Professional A/C Services",
+                "subtitle": "Certified Islandwide Support",
+                "description": "Don't risk your investment with poor installation. Our certified technicians provide precision calibration and maintenance to extend your unit's lifespan by up to 40%. Scheduled island-wide service for residential and commercial units."
+            }
+        },
+        "bento": {
+            "lg": {
+                "title": "Dual Inverter Infrastructure",
+                "description": "LG'S REVOLUTIONARY DUAL INVERTER COMPRESSOR™ ELIMINATES THE NOISY STOP-AND-START CYCLE, SAVING UP TO 40% MORE ENERGY.",
+                "feature1": "LODECIBEL™ SILENT MODE",
+                "feature2": "THINQ® SMART CONTROL"
+            },
+            "ge": {
+                "title": "Industrial Command Suite",
+                "description": "ENGINEERED FOR STEADY-STATE PERFORMANCE IN HIGH-SALINITY MARITIME ENVIRONMENTS. PRECISION BUILT FOR HAWAII REGIONS.",
+                "feature1": "NIGHT MODE DIMMING",
+                "feature2": "EZ MOUNT CALIBRATION"
+            }
+        },
+        "backlinking": {
+            "dual_inverter": {
+                "part1": "LG’S DUAL INVERTER™ TECHNOLOGY IS ENGINEERED FOR THE ",
+                "link1": "HIGH-SALINITY AND HIGH-HUMIDITY ENVIRONMENTS",
+                "part2": " OF OAHU. BY UTILIZING ",
+                "link2": "VARIABLE-SPEED COMPRESSORS",
+                "part3": ", THESE UNITS SLASH ENERGY CONSUMPTION BY UP TO 40%. EVERY MODEL IN THIS SECTION IS ",
+                "link3": "$45 HAWAII ENERGY REBATE QUALIFIED",
+                "part4": "."
+            },
+            "universal_fit": {
+                "part1": "DESIGNED FOR ",
+                "link1": "EXISTING WALL SLEEVES",
+                "part2": ", THESE HIGH-PERFORMANCE UNITS PROVIDE A ",
+                "link2": "CLEAN, PROFESSIONAL LOOK",
+                "part3": " WITHOUT SACRIFICIAL WINDOW SPACE. BUILT FOR ",
+                "link3": "HAWAII'S SALT-AIR DURABILITY",
+                "part4": "."
+            },
+            "base": {
+                "part1": "OUR ",
+                "link1": "STANDARD LG WINDOW UNITS",
+                "part2": " PROVIDE DEPENDABLE COOLING WITH ",
+                "link2": "INDUSTRIAL RELIABILITY",
+                "part3": ". BUILT WITH ",
+                "link3": "ANTI-CORROSIVE COATINGS",
+                "part4": " FOR LONG-TERM ISLAND DUTY."
+            },
+            "ge": {
+                "part1": "ENGINEERED FOR ",
+                "link1": "PERMANENT THROUGH-THE-WALL INSTALLATION",
+                "part2": ", THE GE BUILT-IN SERIES PROVIDES ",
+                "link2": "HIGH-OUTPUT COOLING",
+                "part3": " FOR OAHU’S MOST DEMANDING RESIDENTIAL ENVIRONMENTS. THESE UNITS FEATURE A ",
+                "link3": "TRUE UNIVERSAL FIT CHASSIS",
+                "part4": " AND ADVANCED DEHUMIDIFICATION CYCLES."
+            },
+            "casement": {
+                "part1": "THE ",
+                "link1": "GE 26\" QUICK SNAP SLEEVE",
+                "part2": " IS THE STRUCTURAL FOUNDATION FOR THE ",
+                "link2": "GE BUILT-IN SERIES",
+                "part3": " (AJCQ MODELS) AND MODERN ",
+                "link3": "LG UNIVERSAL FIT UNITS",
+                "part4": ". IT PROVIDES A RIGID, WEATHER-SEALED PORTAL."
+            },
+            "logistics": {
+                "part1": "OUR ",
+                "link1": "OAHU LOGISTICS HUB",
+                "part2": " ENSURES RAPID DEPLOYMENT. COORDINATE YOUR ",
+                "link2": "DISTRIBUTION PROTOCOLS",
+                "part3": " WITH OUR ",
+                "link3": "WAIPAHU TERMINAL INFRASTRUCTURE",
+                "part4": "."
+            },
+            "bento": {
+                "part1": "OUR STRATEGIC PARTNERSHIPS WITH ",
+                "link1": "LG & GE SOLUTIONS",
+                "part2": " PROVIDE UNSURPASSED ",
+                "link2": "TECHNOLOGICAL REDUNDANCY",
+                "part3": " FOR ",
+                "link3": "ISLAND-WIDE COMFORT",
+                "part4": "."
+            }
+        },
+        "filters": {
+            "title": "Filters",
+            "clear": "Clear All",
+            "category": "Category",
+            "inventory_status": "Showing {count} units in {location}"
+        },
+        "sidebar": {
+            "expert_support_title": "Expert Support",
+            "expert_support_desc": "Unsure about sizing? Call us or verify your room dimensions at the warehouse."
+        },
+        "guide": {
+            "title": "Hawaii Room Sizing Guide",
+            "subtitle": "Technical Resource",
+            "description": "Standard sizing charts fail to account for Hawaii’s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles and fails to dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determine the precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don’t guess with your comfort—deploy the correct infrastructure.",
+            "info_title": "High Ceiling / Sun Exposure?",
+            "info_desc": "For rooms with high ceilings (9ft+) or direct afternoon sun, we recommend sizing up by 10% to ensure efficiency."
+        },
+        "faq": {
+            "title": "Frequently Asked Questions"
+        }
+    },
+    "wizard": {
+        "success": {
+            "title": "Request Transmitted",
+            "subtitle": "Your service ticket has been initialized. An executive technician will contact you shortly to confirm the appointment."
+        }
+    }
+}

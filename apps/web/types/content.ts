@@ -57,6 +57,23 @@ export interface WarehouseContent {
     cta_text: string;
 }
 
+export interface LogisticsContent {
+    pickup: {
+        title: string;
+        pricing_notice: string;
+        process: string;
+        warning: string;
+    };
+    delivery: {
+        title: string;
+        price_label: string;
+        price_value: string;
+        coverage: string;
+        exclusions_label: string;
+        exclusions: string;
+    };
+}
+
 export interface LandingContent {
     hero: HeroContent;
     services: {
@@ -64,6 +81,17 @@ export interface LandingContent {
         title_highlight: string;
         title_suffix: string;
         subtitle: string;
+        backlinking: {
+            part1: string;
+            link1_text: string;
+            part2: string;
+            link2_text: string;
+            part3: string;
+            link3_text: string;
+            part4: string;
+            link4_text: string;
+            part5: string;
+        };
         grid: ServiceItem[];
         carousel: CarouselSlide[];
     };
@@ -156,11 +184,85 @@ export interface NavigationContent {
     }[];
     contact_btn: string;
     back_to_home: string;
+    back_to_inventory: string;
     service_center: string;
+}
+
+export interface ShopSectionContent {
+    title: string;
+    subtitle: string;
+    description: string;
+}
+
+export interface ShopContent {
+    search_placeholder: string;
+    hero: {
+        subtitle: string;
+        title_line1: string;
+        title_line2: string;
+        description: string;
+    };
+    sections: string[];
+    dual_inverter: ShopSectionContent;
+    universal_fit: ShopSectionContent;
+    base: ShopSectionContent;
+    ge: ShopSectionContent;
+    casement: ShopSectionContent;
+    local_authority: {
+        badge: string;
+        title_line1: string;
+        title_italic: string;
+        title_gradient: string;
+        subtitle: string;
+        description: string;
+        location: string;
+    };
+    brand_spotlight: {
+        brand_spotlight?: {
+            title: string;
+            title_italic: string;
+            badge: string;
+        };
+        title?: string;
+        title_italic?: string;
+        badge?: string;
+    };
+    filters: {
+        title: string;
+        clear: string;
+        category: string;
+        inventory_status: string;
+    };
+    sidebar: {
+        expert_support_title: string;
+        expert_support_desc: string;
+    };
+    guide: {
+        subtitle: string;
+        title: string;
+        description: string;
+        info_title: string;
+        info_desc: string;
+    };
+    faq: {
+        title: string;
+    };
+    bento: {
+        lg: {
+            title: string;
+            description: string;
+        };
+        ge: {
+            title: string;
+            description: string;
+        };
+    };
 }
 
 export interface ContentSchema {
     landing: LandingContent;
     contact: ContactContent;
     navigation: NavigationContent;
+    shop: ShopContent;
+    logistics: LogisticsContent;
 }

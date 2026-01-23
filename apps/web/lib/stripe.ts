@@ -1,4 +1,10 @@
-import { loadStripe } from '@stripe/stripe-js';
+import Stripe from 'stripe';
 
-const key = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-export const stripePromise = key ? loadStripe(key) : null;
+if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('STRIPE_SECRET_KEY is missing. Please restart your development server to load the new .env.local values.');
+}
+
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-12-15.clover', // Updated to match installed SDK types
+    typescript: true,
+});

@@ -9,7 +9,16 @@ class OrderStatus(str, enum.Enum):
     LOCK_STOCK = "LOCK_STOCK" # Internal reservation
     AWAIT_PAYMENT = "AWAIT_PAYMENT"
     PAID = "PAID"
-    FULFILLED = "FULFILLED"
+    SHIPPED = "SHIPPED"
+    DELIVERED = "DELIVERED"
+    CANCELLED = "CANCELLED"
+
+class LeadStatus(str, enum.Enum):
+    NEW = "NEW"
+    CONTACTED = "CONTACTED"
+    SCHEDULED = "SCHEDULED"
+    COMPLETED = "COMPLETED"
+    ARCHIVED = "ARCHIVED"
 
 class Product(Base):
     __tablename__ = "products"
@@ -20,6 +29,30 @@ class Product(Base):
     category = Column(String, index=True)
     stock = Column(Integer)
     image_url = Column(String, nullable=True) # [NEW] Support for custom images
+    btu = Column(Integer, nullable=True)
+    voltage = Column(String, nullable=True)
+    coverage = Column(String, nullable=True)
+    performance_specs = Column(String, nullable=True)
+    key_spec = Column(String, nullable=True)
+    noise_level = Column(String, nullable=True)
+    dehumidification = Column(String, nullable=True)
+
+class Lead(Base):
+    __tablename__ = "leads"
+
+    id = Column(Integer, primary_key=True, index=True)
+    first_name = Column(String)
+    last_name = Column(String)
+    email = Column(String, index=True)
+    phone = Column(String)
+    address = Column(String)
+    city = Column(String)
+    zip = Column(String)
+    service_type = Column(String)
+    urgency = Column(String)
+    notes = Column(String, nullable=True)
+    status = Column(String, default=LeadStatus.NEW)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
 class Order(Base):
     __tablename__ = "orders"
@@ -29,5 +62,6 @@ class Order(Base):
     total_cents = Column(Integer)
     stripe_pid = Column(String, nullable=True)
     customer_email = Column(String, nullable=True) # [NEW]
+    items_json = Column(String, nullable=True) # Snapshots of products
     idempotency_key = Column(String, unique=True, index=True, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)

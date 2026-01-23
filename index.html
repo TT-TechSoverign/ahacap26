@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affordable Home A/C | The Evolution of Cool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00AEEF;
+            --accent: #39B54A;
+            --navy-deep: #06080c;
+            --navy-card: #0a0e14;
+            --white: #ffffff;
+            --slate-400: #94A3B8;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--navy-deep);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+        }
+
+        /* --- Global Status Ticker --- */
+        .ticker-wrap {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 174, 239, 0.05);
+            border-bottom: 1px solid rgba(0, 174, 239, 0.2);
+            padding: 12px 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 40px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--primary);
+        }
+
+        .ticker-item span {
+            color: var(--slate-600);
+            margin: 0 15px;
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* --- Convection Atmosphere (3D Spatial) --- */
+        .atmosphere {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #0a0e14 0%, #06080c 100%);
+        }
+
+        .air-current {
+            position: absolute;
+            width: 80vmax;
+            height: 80vmax;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            mix-blend-mode: screen;
+        }
+
+        /* Cool Air Falling (Cyan) */
+        .cool-air {
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            top: -40vmax;
+            left: -20vmax;
+            animation: fall 25s infinite linear;
+        }
+
+        .cool-air:nth-child(2) {
+            left: 40vmax;
+            animation-duration: 35s;
+            animation-delay: -10s;
+            opacity: 0.1;
+        }
+
+        /* Hot Air Rising (Green/Gray) */
+        .hot-air {
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            bottom: -40vmax;
+            right: -20vmax;
+            animation: rise 30s infinite linear;
+            opacity: 0.1;
+        }
+
+        .hot-air:nth-child(4) {
+            right: 40vmax;
+            background: radial-gradient(circle, var(--slate-600) 0%, transparent 70%);
+            animation-duration: 40s;
+            animation-delay: -15s;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.15;
+            }
+
+            80% {
+                opacity: 0.15;
+            }
+
+            100% {
+                transform: translate(20vw, 120vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.12;
+            }
+
+            80% {
+                opacity: 0.12;
+            }
+
+            100% {
+                transform: translate(-20vw, -120vh) scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        /* Ambient spatial drift for the card */
+        .spatial-depth {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(0, 174, 239, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(57, 181, 74, 0.03) 0%, transparent 40%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* --- Technical 3D Hub --- */
+        .card {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            width: 100%;
+            background: var(--navy-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.02);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: entrance 1s forwards cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            /* Contain the internal animations */
+            perspective: 1000px;
+        }
+
+        .hvac-3d-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 140%;
+            height: 140%;
+            transform: translate(-50%, -50%) rotateX(60deg);
+            pointer-events: none;
+            opacity: 0.08;
+            z-index: -1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fan-assembly {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            animation: main-rotate 25s infinite linear;
+            transform-style: preserve-3d;
+        }
+
+        .blade {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 180px;
+            height: 50px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            transform-origin: left center;
+            border-radius: 0 50px 50px 0;
+            opacity: 0.5;
+            filter: blur(1px);
+        }
+
+        .blade:nth-child(1) {
+            transform: rotate(0deg) translateZ(10px);
+        }
+
+        .blade:nth-child(2) {
+            transform: rotate(72deg) translateZ(10px);
+        }
+
+        .blade:nth-child(3) {
+            transform: rotate(144deg) translateZ(10px);
+        }
+
+        .blade:nth-child(4) {
+            transform: rotate(216deg) translateZ(10px);
+        }
+
+        .blade:nth-child(5) {
+            transform: rotate(288deg) translateZ(10px);
+        }
+
+        .fan-hub {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--slate-600) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .thermal-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 174, 239, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 174, 239, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.4;
+            animation: grid-pulse 6s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes main-rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes grid-pulse {
+            from {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes entrance {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-container {
+            width: 180px;
+            margin: 0 auto 40px;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            /* Filter to make it "pop" on dark background if needed, but original is likely fine */
+            filter: drop-shadow(0 0 20px rgba(0, 174, 239, 0.2));
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .status-header {
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+
+        .headline {
+            font-family: 'Oswald', sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 0.95;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .headline span {
+            color: var(--slate-600);
+            display: block;
+            font-size: 0.85em;
+            margin-top: 8px;
+        }
+
+        .operational-message {
+            color: var(--slate-400);
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            font-weight: 500;
+        }
+
+        .status-pills {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 48px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(57, 181, 74, 0.03);
+            border: 1px solid rgba(57, 181, 74, 0.1);
+            border-radius: 100px;
+            padding: 12px 28px;
+            transition: all 0.5s ease;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+            animation: pulse-active 1.5s infinite;
+        }
+
+        @keyframes pulse-active {
+            0% {
+                transform: scale(0.9);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.9);
+                opacity: 0.6;
+            }
+        }
+
+        .pill-text {
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* --- Capabilities Matrix --- */
+        .capabilities {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 48px;
+            text-align: left;
+        }
+
+        .capabilities-title {
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--slate-500);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .capabilities-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        @media (min-width: 600px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .service-item {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.8;
+            letter-spacing: 0.02em;
+        }
+
+        .service-item .check {
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        /* --- Technical Dispatch Suite --- */
+        .dispatch-hub {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 40px;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(0, 174, 239, 0.1) 0%, rgba(0, 174, 239, 0) 100%);
+            border: 1px solid rgba(0, 174, 239, 0.3);
+            color: var(--white);
+            text-decoration: none;
+            padding: 24px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            border-color: var(--primary);
+            background: rgba(0, 174, 239, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 174, 239, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .cta-button span {
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 40px 24px;
+                border-radius: 32px;
+            }
+
+            .headline {
+                font-size: 44px;
+            }
+
+            .ticker-item {
+                padding: 0 10px !important;
+                font-size: 7px !important;
+                letter-spacing: 0.2em !important;
+            }
+
+            .ticker-item span {
+                margin: 0 8px !important;
+            }
+
+            .ticker-wrap {
+                padding: 6px 0 !important;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item">OPERATIONAL STATUS: READY <span>/</span> FIELD OPS: ACTIVE <span>/</span> DISPATCH:
+                STANDING BY <span>/</span> 20+ YEARS OF EXPERTISE</div>
+            <div class="ticker-item">OPERATIONAL STATUS: READY <span>/</span> FIELD OPS: ACTIVE <span>/</span> DISPATCH:
+                STANDING BY <span>/</span> 20+ YEARS OF EXPERTISE</div>
+            <div class="ticker-item">OPERATIONAL STATUS: READY <span>/</span> FIELD OPS: ACTIVE <span>/</span> DISPATCH:
+                STANDING BY <span>/</span> 20+ YEARS OF EXPERTISE</div>
+            <div class="ticker-item">OPERATIONAL STATUS: READY <span>/</span> FIELD OPS: ACTIVE <span>/</span> DISPATCH:
+                STANDING BY <span>/</span> 20+ YEARS OF EXPERTISE</div>
+        </div>
+    </div>
+
+    <div class="atmosphere">
+        <div class="air-current cool-air"></div>
+        <div class="air-current cool-air"></div>
+        <div class="air-current hot-air"></div>
+        <div class="air-current hot-air"></div>
+    </div>
+    <div class="spatial-depth"></div>
+
+    <div class="card">
+        <!-- 3D Technical Interactivity -->
+        <div class="hvac-3d-bg">
+            <div class="fan-assembly">
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="fan-hub"></div>
+            </div>
+        </div>
+        <div class="thermal-grid"></div>
+
+        <!-- AHAC Identity -->
+        <div class="logo-container">
+            <img src="ahac-logo-bus-500x500xv2.svg" alt="Affordable Home A/C Logo">
+        </div>
+
+        <div class="status-header">Engineering Tomorrow's Comfort</div>
+
+        <h1 class="headline">
+            The Evolution
+            <span>of Cool.</span>
+        </h1>
+
+        <p class="operational-message">
+            While we recalibrate our digital infrastructure to provide a world-class user experience, <strong>our
+                licensed field teams remain fully active island-wide.</strong> We are ready to assist with all your HVAC
+            requirements.
+        </p>
+
+        <div class="status-pills">
+            <div class="pill">
+                <div class="dot"></div>
+                <span class="pill-text">Operational Status: Fully Active</span>
+            </div>
+        </div>
+
+        <!-- Capability Matrix -->
+        <div class="capabilities">
+            <h3 class="capabilities-title">Active Field Services</h3>
+            <div class="services-grid">
+                <div class="service-item"><span class="check">✓</span> Window AC Installation</div>
+                <div class="service-item"><span class="check">✓</span> Window AC Cleaning</div>
+                <div class="service-item"><span class="check">✓</span> Mini Split Estimate (New)</div>
+                <div class="service-item"><span class="check">✓</span> Mini Split Estimate (Replace)</div>
+                <div class="service-item"><span class="check">✓</span> Mini Split Maintenance</div>
+                <div class="service-item"><span class="check">✓</span> Mini Split Diagnosis/Repair</div>
+                <div class="service-item"><span class="check">✓</span> Central AC Estimate</div>
+                <div class="service-item"><span class="check">✓</span> Central AC Maintenance</div>
+                <div class="service-item"><span class="check">✓</span> Central AC Diagnosis/Repair</div>
+            </div>
+        </div>
+
+        <div class="dispatch-hub">
+            <a href="tel:8084881111" class="cta-button">
+                <span>(808) 488-1111</span> STANDING BY FOR ASSISTANCE
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
