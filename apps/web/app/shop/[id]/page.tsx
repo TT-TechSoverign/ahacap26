@@ -4,6 +4,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import { useCart } from '../../../context/CartContext';
+import { getProductImages } from '../../../lib/product-images';
+import { getProductSpecs } from '../../../lib/product-specs';
+import { Product } from '../../../types/inventory';
+import { EditableText } from '@/components/EditableText';
+import { useContent } from '@/lib/context/ContentContext';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function ProductDetailPage() {
     const params = useParams();
