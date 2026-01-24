@@ -10,6 +10,9 @@ services:
     environment:
       - NEXT_PUBLIC_API_URL=/api/v1
       - API_INTERNAL_URL=http://api:8000
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
     depends_on:
       api:
         condition: service_healthy
