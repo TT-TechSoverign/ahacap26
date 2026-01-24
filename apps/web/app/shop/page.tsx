@@ -278,7 +278,7 @@ export default function ShopPage() {
                 </div>
 
             </main>
-            <Footer />
+
 
             {/* --- VISUAL EDITOR CONTROL SUITE --- */}
             <AnimatePresence>

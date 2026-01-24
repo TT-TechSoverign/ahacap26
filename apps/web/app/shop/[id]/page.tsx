@@ -326,8 +326,7 @@ export default function ProductDetailPage() {
                     </div>
                 )
             }
-            {/* Standard Footer */}
-            <Footer />
+
         </div >
     );
 }
