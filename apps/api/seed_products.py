@@ -7,8 +7,8 @@ from sqlalchemy import text
 from database import Base, get_db
 import models
 
-# Use localhost for host connection
-DATABASE_URL = "postgresql+asyncpg://user:password@localhost:5432/ahac_db"
+# Use environment variable if available (Docker), else localhost (Local)
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://user:password@localhost:5432/ahac_db")
 
 engine = create_async_engine(DATABASE_URL, echo=True)
 AsyncSessionLocal = sessionmaker(
