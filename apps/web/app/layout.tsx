@@ -3,6 +3,7 @@ import { Inter, Oswald } from 'next/font/google';
 import CartDrawer from '../components/CartDrawer';
 import { CartProvider } from '../context/CartContext';
 import { ContentProvider } from '../lib/context/ContentContext';
+import Footer from '../components/Footer';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
