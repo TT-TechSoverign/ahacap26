@@ -10,8 +10,11 @@ export interface ProductSpec {
     features: string[];
     warranty: string;
     // Educational Fields
+    deploymentHeader: string; // e.g., "Best Placements"
     idealFor: string;
+    featureHeader: string; // e.g., "Control From Anywhere"
     benefits: string;
+    acousticHeader: string; // e.g., "Sleep Soundly & Stay Cool"
     soundProfile: string;
 }
 
@@ -27,8 +30,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '44 lbs',
         features: ['Remote Control', '3 Fan Speeds', 'Eco Mode', 'Easy Mount Kit'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Small Bedrooms (10x12)',
+        featureHeader: 'User-Friendly Control',
         benefits: 'Compact and easier to install in smaller windows.',
+        acousticHeader: 'Consistent Cooling',
         soundProfile: 'Standard Rotary (54dB)'
     },
     'GE_MED': {
@@ -42,8 +48,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '62 lbs',
         features: ['Energy Star', 'Dehumidify Mode', 'WiFi Connect', 'Voice Control'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Medium Bedrooms, Guest Rooms',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Balances performance and size, with smart features for convenience.',
+        acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'Standard Rotary (55dB)'
     },
     'GE_LARGE': {
@@ -57,8 +66,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '128 lbs',
         features: ['Heat/Cool', 'Slide-Out Chassis', '24h Timer', 'Heavy Duty'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Ideal Installation',
         idealFor: 'Large Living Areas, Garages',
+        featureHeader: 'Heavy-Duty Performance',
         benefits: 'High capacity for rapid cooling of large hot spaces.',
+        acousticHeader: 'Industrial Power',
         soundProfile: 'High Capacity (60dB)'
     },
     'LG_DUAL_6K': {
@@ -72,8 +84,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '60 lbs',
         features: ['Dual Inverter', 'LoDecibel™ Quiet', 'Sleep Mode', 'Energy Star®'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Small Bedroom (10x12), Home Office',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Dual Inverter technology reduces energy consumption by up to 40% while operating at library-quiet noise levels.',
+        acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'Ultra-Quiet Mode (44dB) - Similar to a Library'
     },
     'LG_DUAL_8K': {
@@ -87,8 +102,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '63 lbs',
         features: ['Dual Inverter', 'ThinQ® Smart Control', 'Voice Compatible', 'Energy Star®'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Bedroom, Nursery, Home Office',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Integrated ThinQ® smart control allows for remote scheduling and monitoring, perfect for maintaining comfort efficiently.',
+        acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'Ultra-Quiet (44dB) - Whisper Quiet Operation'
     },
     'LG_DUAL_10K': {
@@ -102,8 +120,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '65 lbs',
         features: ['Dual Inverter', 'Energy Star® Most Efficient', 'Auto Restart', 'Sleep Mode'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Master Bedroom, Studio Apartment',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Recognized as ENERGY STAR® Most Efficient, delivering powerful cooling without the high utility costs.',
+        acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'LoDecibel™ (44dB) - Unobtrusive Operation'
     },
     'LG_DUAL_12K': {
@@ -117,8 +138,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '70 lbs',
         features: ['Dual Inverter', 'Gold Fin™ Coating', 'ThinQ® WiFi', '40% Energy Savings'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Master Suite, Living Room',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Gold Fin™ Anti-Corrosive Coating provides essential protection against salt-air oxidation for longevity on the islands.',
+        acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'Ultra-Quiet Sleep Mode (44dB) - Library Quiet'
     },
     'LG_DUAL_15K': {
@@ -132,8 +156,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '98 lbs',
         features: ['Dual Inverter', '4-Way Directional', 'High-Torque Compressor', 'Voice Control'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Large Master, Living Area, Open Plan',
+        featureHeader: 'Control From Anywhere',
         benefits: 'High-Torque compressor cycle designed for rapid moisture removal and quick thermal recovery in large spaces.',
+        acousticHeader: 'Smooth Power',
         soundProfile: 'Quiet Cooling (52dB) - Powerful but Smooth'
     },
     'LG_DUAL_18K': {
@@ -147,8 +174,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '110 lbs',
         features: ['Dual Inverter', 'Maximum Vertical Momentum', 'ThinQ® WiFi', 'Smart Diagnosis'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Ideal Installation',
         idealFor: 'Whole Floor, Large Open Concept',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Engineered with maximum vertical momentum to eliminate hot spots in rooms with vaulted ceilings or complex layouts.',
+        acousticHeader: 'Smooth Power',
         soundProfile: 'Efficient Power (52dB) - Quiet for its Class'
     },
     'LG_DUAL_24K': {
@@ -162,8 +192,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '114 lbs',
         features: ['Dual Inverter', 'Industrial-Grade Cooling', 'Moisture Management', 'WiFi'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Target Deployment',
         idealFor: 'Industrial Scale Open Plan, Large Hall',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Industrial-grade Titan Cooling capacity for maximum moisture management and temperature control in massive spaces.',
+        acousticHeader: 'Industrial Silence',
         soundProfile: 'Power Cooling (53dB) - surprisingly quiet for 24k'
     },
     'LG_SMART_8K': {
@@ -177,8 +210,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '58 lbs',
         features: ['WiFi Enable', 'Auto Restart', 'Clean Filter Alert', 'Energy Saver'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Small Bedrooms, Home Offices',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Smart connectivity allows for remote control and scheduling, perfect for busy professionals.',
+        acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'Standard Operation (52dB) - White Noise'
     },
     // LG UNIVERSAL FIT (Through-The-Wall)
@@ -193,8 +229,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '70 lbs',
         features: ['Dual-Climate (Heat/Cool)', 'Universal Fit', 'Remote Control'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Small Rooms with Wall Sleeves',
+        featureHeader: 'Dual-Climate Comfort',
         benefits: 'Dual-Climate Optimization provides precise 7,000 BTU Heating alongside cooling for year-round comfort.',
+        acousticHeader: 'Quiet Operation',
         soundProfile: 'Standard (53dB)'
     },
     'LG_UNI_18K': {
@@ -208,8 +247,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '120 lbs',
         features: ['Universl Fit', 'ThinQ® Smart Control', 'High-Capacity Moisture Removal'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Ideal Installation',
         idealFor: 'Large Open Plans (Wall Install)',
+        featureHeader: 'Control From Anywhere',
         benefits: 'High-Capacity Moisture Removal (4.8 Pts/Hr) ensures comfort even in humid island conditions.',
+        acousticHeader: 'Powerful Flow',
         soundProfile: 'Powerful (56dB) - White Noise'
     },
     'LG_UNI_24K': {
@@ -223,8 +265,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '135 lbs',
         features: ['Industrial-Grade Cooling', 'Supplemental Heating', 'Universal Fit'],
         warranty: '1 Year Parts & Labor',
+        deploymentHeader: 'Target Deployment',
         idealFor: 'Industrial Scale Spaces',
+        featureHeader: 'Industrial-Grade Cooling',
         benefits: 'Offers supplemental 12,000 BTU electrical heating capacity for versatility in higher altitude or cooler zones.',
+        acousticHeader: 'Heavy Duty',
         soundProfile: 'Heavy Duty (58dB)'
     },
     // LG STANDARD WINDOW
@@ -239,8 +284,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '58 lbs',
         features: ['High-Velocity Airflow', 'Rapid Cool Start', 'Auto-Restart'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Bedroom/Office Budget Retrofit',
+        featureHeader: 'Rapid Cool Start',
         benefits: 'Rapid Cool Start cycle specifically tuned for immediate thermal recovery in high-humidity tropical environments.',
+        acousticHeader: 'Consistent Cooling',
         soundProfile: 'Standard (54dB)'
     },
     'LG_STD_10K': {
@@ -254,8 +302,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '68 lbs',
         features: ['ThinQ® Smart Control', 'Smart Diagnosis™', 'Energy Saver'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Master Bedroom, Studio',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Integrated Smart Diagnosis allows for system verification and longevity.',
+        acousticHeader: 'Consistent Cooling',
         soundProfile: 'Standard (52dB)'
     },
     'LG_STD_12K': {
@@ -269,8 +320,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '75 lbs',
         features: ['Gold Fin™ Coating', 'ThinQ® Smart Control', 'Energy Saver'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Master Suite',
+        featureHeader: 'Control From Anywhere',
         benefits: 'Gold Fin™ Anti-Corrosive Shield protects the condenser from salt-air damages.',
+        acousticHeader: 'Consistent Cooling',
         soundProfile: 'Standard (52dB)'
     },
     // GE PERFORMANCE SERIES (Wall)
@@ -285,8 +339,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '68 lbs',
         features: ['True Universal Fit', 'Remote Control', 'Electronic Touch'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Best Placements',
         idealFor: 'Apartment Wall Sleeve Install',
+        featureHeader: 'True Universal Fit',
         benefits: 'True Universal Fit design allows it to slide directly into existing 26" wall sleeves for professional gap-free installs.',
+        acousticHeader: 'Consistent Cooling',
         soundProfile: 'Standard Rotary (54dB)'
     },
     'GE_PERF_10K': {
@@ -300,8 +357,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '75 lbs',
         features: ['High-Velocity Airflow', 'Six-Way Directional', 'Dehumidify'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Ideal Installation',
         idealFor: 'Medium Room Wall Install',
+        featureHeader: 'High-Velocity Airflow',
         benefits: 'High-torque fans maximize air throw, effectively eliminating hot spots in deep-room configurations.',
+        acousticHeader: 'Consistent Cooling',
         soundProfile: 'Standard Rotary (55dB)'
     },
     'GE_PERF_12K': {
@@ -315,8 +375,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '80 lbs',
         features: ['Power Failure Recovery', 'Universal Fit', 'Energy Saver'],
         warranty: '1 Year Limited',
+        deploymentHeader: 'Ideal Installation',
         idealFor: 'Large Room Wall Install',
+        featureHeader: 'Power Failure Recovery',
         benefits: 'Automatically restarts at previous settings after island power surges, maintaining climate security.',
+        acousticHeader: 'Consistent Cooling',
         soundProfile: 'Standard Rotary (56dB)'
     },
     'GE_RAB26A': {
@@ -330,8 +393,11 @@ const specs: { [key: string]: ProductSpec } = {
         weight: '25 lbs',
         features: ['Baked Enamel Finish', 'Galvanized Steel', 'Quick Snap Assembly'],
         warranty: 'N/A',
+        deploymentHeader: 'Target Deployment',
         idealFor: 'New Wall Installations',
+        featureHeader: 'Structural Integrity',
         benefits: 'Essential structural case for GE built-in units, ensuring weather-tight seal and support.',
+        acousticHeader: 'Build Quality',
         soundProfile: 'N/A'
     },
 
@@ -340,7 +406,9 @@ const specs: { [key: string]: ProductSpec } = {
 const defaultSpecs: ProductSpec = {
     btu: 'N/A', coolingArea: 'N/A', eer: 'N/A', voltage: '115V', amps: 'N/A', watts: 'N/A', dimensions: 'N/A', weight: 'N/A',
     features: [], warranty: 'N/A',
-    idealFor: 'General Cooling', benefits: 'Standard cooling solution.', soundProfile: 'Standard'
+    deploymentHeader: 'General Use', idealFor: 'General Cooling',
+    featureHeader: 'Key Features', benefits: 'Standard cooling solution.',
+    acousticHeader: 'Sound Level', soundProfile: 'Standard'
 };
 
 // Update existing mock objects (GE_SMALL etc) to include new fields if needed to avoid TS errors, 
