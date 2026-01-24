@@ -1,20 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { useCart } from '../../../context/CartContext';
-import { getProductImages } from '../../../lib/product-images';
-import { getProductSpecs } from '../../../lib/product-specs';
-import { Product } from '../../../types/inventory';
-import { EditableText } from '@/components/EditableText';
-import { useContent } from '@/lib/context/ContentContext';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { cn } from '@/lib/utils';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import { useParams } from 'next/navigation';
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default function ProductDetailPage() {
+    const params = useParams();
+    // In Next.js App Router, params are strings. Safe to cast or just use.
+    const id = params?.id as string;
+
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -26,9 +19,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
     useEffect(() => {
         async function fetchProduct() {
+            if (!id) return;
             try {
                 const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
-                const res = await fetch(`${apiUrl}/products/${params.id}`);
+                const res = await fetch(`${apiUrl}/products/${id}`);
 
                 if (!res.ok) throw new Error('Product not found');
                 const data = await res.json();
@@ -40,10 +34,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 setLoading(false);
             }
         }
-        if (params.id) {
-            fetchProduct();
-        }
-    }, [params.id]);
+        fetchProduct();
+    }, [id]);
 
     const productImages = product ? [
         ...(product.image_url ? [product.image_url] : []),
