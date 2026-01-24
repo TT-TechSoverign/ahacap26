@@ -55,7 +55,7 @@ export default function LandingPage() {
         <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white min-h-screen">
             <Navbar />
 
-            <main className="pt-[212px] md:pt-[340px]">
+            <main className="pt-[140px] md:pt-[240px]">
                 <Reorder.Group
                     axis="y"
                     values={sectionOrder}
@@ -152,11 +152,11 @@ function ServicesSection({ isEditMode, services, handleReorder }: { isEditMode: 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="flex flex-col items-center mb-16 gap-8 text-center lg:mb-24">
                     <div className="max-w-4xl">
-                        <h2 className="mb-6 md:mb-10 font-header font-black text-white uppercase tracking-[-.02em] leading-none text-4xl md:text-8xl">
+                        <h2 className="mb-6 md:mb-10 font-header font-black text-white uppercase tracking-[-.02em] leading-none text-4xl md:text-6xl">
                             <EditableText contentKey="landing.services.title" /> <br />
                             <EditableText
                                 contentKey="landing.services.title_highlight"
-                                className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-cyan-400 to-accent drop-shadow-[0_0_30px_rgba(0,174,239,0.3)] inline-block"
+                                className="text-primary neon-glow inline-block"
                             />
                         </h2>
                         <div className="relative px-4">
@@ -307,7 +307,7 @@ function PartnershipsSection() {
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 {/* 1. Header Block */}
                 <div className="text-center mb-16">
-                    <h2 className="text-white font-header font-black text-4xl md:text-8xl mb-4 tracking-[-.02em] leading-none uppercase">
+                    <h2 className="text-white font-header font-black text-4xl md:text-6xl mb-4 tracking-[-.02em] leading-none uppercase">
                         <EditableText contentKey="landing.partnerships.title" />
                     </h2>
                     <h3 className="text-primary font-header font-bold text-lg md:text-2xl uppercase tracking-widest neon-glow drop-shadow-[0_0_20px_rgba(0,174,239,0.5)]">
@@ -443,11 +443,11 @@ function ServiceAreasSection({ isEditMode, content }: { isEditMode: boolean, con
                         <EditableText contentKey="landing.service_areas.badge" />
                     </span>
                 </div>
-                <h2 className="mb-6 md:mb-10 font-header font-black text-white uppercase tracking-[-.02em] leading-none text-4xl md:text-8xl">
+                <h2 className="mb-6 md:mb-10 font-header font-black text-white uppercase tracking-[-.02em] leading-none text-4xl md:text-6xl">
                     <EditableText contentKey="landing.service_areas.title" /> <br />
                     <EditableText
                         contentKey="landing.service_areas.title_highlight"
-                        className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-cyan-400 to-accent drop-shadow-[0_0_30px_rgba(0,174,239,0.3)] inline-block"
+                        className="text-primary neon-glow inline-block"
                     />
                 </h2>
                 <div className="relative max-w-4xl mx-auto mb-16 px-4">
@@ -532,7 +532,7 @@ function WarehouseSection() {
                         </span>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-header font-bold text-white mb-6 uppercase tracking-wide">
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+                        <span className="text-primary neon-glow">
                             <EditableText contentKey="landing.warehouse.title" />
                         </span>
                     </h2>
