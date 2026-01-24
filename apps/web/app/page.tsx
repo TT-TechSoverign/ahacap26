@@ -84,7 +84,7 @@ export default function LandingPage() {
 
             {/* Footer */}
             {/* Footer */}
-            <Footer />
+
 
             {/* Back to Top (Thumb-Zone Trigger) */}
             {/* Back to Top (Thumb-Zone Trigger) */}
