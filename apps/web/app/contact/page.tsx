@@ -311,50 +311,6 @@ export default function ContactPage() {
 
             </main>
 
-            {/* Enhanced Footer */}
-            <footer className="mt-40 bg-[#0a0e14] border-t border-white/5 py-24 relative overflow-hidden">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[300px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-                <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-                    <Link href="/" className="relative h-16 w-16 mb-12 flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity group/footer-logo">
-                        <Image
-                            src="/assets/ahac-logo-faviconv1.svg"
-                            alt="Affordable Home A/C"
-                            fill
-                            className="object-contain relative z-10"
-                        />
-                    </Link>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-4xl mb-16 px-4">
-                        <div className="space-y-4">
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">{contentData.common.footer.nav}</h4>
-                            <div className="flex flex-col gap-2">
-                                <Link href="/shop" className="text-slate-500 hover:text-primary transition-colors text-[10px] font-black uppercase tracking-[0.2em]">Inventory</Link>
-                                <Link href="/maintenance" className="text-slate-500 hover:text-primary transition-colors text-[10px] font-black uppercase tracking-[0.2em]">Maintenance</Link>
-                            </div>
-                        </div>
-                        <div className="space-y-4">
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">{contentData.common.footer.support}</h4>
-                            <div className="flex flex-col gap-2">
-                                <Link href="/contact" className="text-slate-500 hover:text-primary transition-colors text-[10px] font-black uppercase tracking-[0.2em]">Service Center</Link>
-                                <span className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em]">Warranty Info</span>
-                            </div>
-                        </div>
-                        <div className="space-y-4">
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest text-xs">{contentData.common.footer.location}</h4>
-                            <div className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed">
-                                {contentData.common.address}<br />
-                                {contentData.common.location}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="pt-12 border-t border-white/5 w-full">
-                        <p className="text-slate-600 text-[9px] font-black tracking-[0.4em] uppercase">
-                            {contentData.common.footer.copyright} <Link href="/admin" className="opacity-10 hover:opacity-100 transition-opacity ml-1">.</Link>
-                        </p>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    );
+            );
 }
