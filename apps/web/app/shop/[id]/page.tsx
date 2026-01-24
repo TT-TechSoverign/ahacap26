@@ -231,15 +231,15 @@ export default function ProductDetailPage() {
                             <h3 className="text-white font-header font-black uppercase tracking-widest text-sm">At A Glance</h3>
                             <div className="grid grid-cols-1 gap-4">
                                 <div className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
-                                    <div className="text-primary text-xs font-header font-black uppercase tracking-widest mb-2">Best Placements</div>
+                                    <div className="text-primary text-xs font-header font-black uppercase tracking-widest mb-2">{specs?.deploymentHeader}</div>
                                     <p className="text-slate-200 text-base leading-relaxed font-medium">{specs?.idealFor || 'General Residential Cooling'}</p>
                                 </div>
                                 <div className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
-                                    <div className="text-emerald-500 text-xs font-header font-black uppercase tracking-widest mb-2">Control From Anywhere</div>
+                                    <div className="text-emerald-500 text-xs font-header font-black uppercase tracking-widest mb-2">{specs?.featureHeader}</div>
                                     <p className="text-slate-200 text-base leading-relaxed font-medium">{specs?.benefits || 'High efficiency cooling performance.'}</p>
                                 </div>
                                 <div className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
-                                    <div className="text-slate-500 text-xs font-header font-black uppercase tracking-widest mb-2">Sleep Soundly & Stay Cool</div>
+                                    <div className="text-slate-500 text-xs font-header font-black uppercase tracking-widest mb-2">{specs?.acousticHeader}</div>
                                     <p className="text-slate-200 text-base leading-relaxed font-medium">{specs?.soundProfile || 'Standard Operation'}</p>
                                 </div>
                             </div>
