@@ -227,20 +227,45 @@ export default function ProductDetailPage() {
                         </div>
 
                         {/* Lifestyle & Performance Profile (Renamed from Architectural Profile) */}
-                        <div className="space-y-6 border-t border-white/5 pt-8">
-                            <h3 className="text-white font-header font-black uppercase tracking-widest text-sm">At A Glance</h3>
-                            <div className="grid grid-cols-1 gap-4">
-                                <div className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
-                                    <div className="text-primary text-xs font-header font-black uppercase tracking-widest mb-2">{specs?.deploymentHeader}</div>
-                                    <p className="text-slate-200 text-base leading-relaxed font-medium">{specs?.idealFor || 'General Residential Cooling'}</p>
+                        <div className="space-y-8 border-t border-white/5 pt-10">
+                            <div className="flex flex-col items-center md:items-start space-y-2">
+                                <div className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-header font-black uppercase tracking-[0.3em] inline-block shadow-[0_0_20px_rgba(0,174,239,0.1)]">
+                                    Technical Resource
                                 </div>
-                                <div className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
-                                    <div className="text-emerald-500 text-xs font-header font-black uppercase tracking-widest mb-2">{specs?.featureHeader}</div>
-                                    <p className="text-slate-200 text-base leading-relaxed font-medium">{specs?.benefits || 'High efficiency cooling performance.'}</p>
+                                <h3 className="text-white font-header font-black uppercase tracking-widest text-xl md:text-2xl drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                                    At A Glance
+                                </h3>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                {/* Deployment Card */}
+                                <div className="bg-[#0a0e14] border border-white/5 p-6 md:p-8 rounded-3xl hover:border-primary/30 transition-all duration-500 group relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 mb-6 group-hover:shadow-[0_0_20px_rgba(0,174,239,0.2)] transition-shadow">
+                                        <span className="material-symbols-outlined text-primary text-2xl">location_on</span>
+                                    </div>
+                                    <div className="text-primary text-xs font-header font-black uppercase tracking-[0.2em] mb-3">{specs?.deploymentHeader}</div>
+                                    <p className="text-slate-300 text-sm leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.idealFor || 'General Residential Cooling'}</p>
                                 </div>
-                                <div className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
-                                    <div className="text-slate-500 text-xs font-header font-black uppercase tracking-widest mb-2">{specs?.acousticHeader}</div>
-                                    <p className="text-slate-200 text-base leading-relaxed font-medium">{specs?.soundProfile || 'Standard Operation'}</p>
+
+                                {/* Feature Card */}
+                                <div className="bg-[#0a0e14] border border-white/5 p-6 md:p-8 rounded-3xl hover:border-emerald-500/30 transition-all duration-500 group relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mb-6 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-shadow">
+                                        <span className="material-symbols-outlined text-emerald-500 text-2xl">bolt</span>
+                                    </div>
+                                    <div className="text-emerald-500 text-xs font-header font-black uppercase tracking-[0.2em] mb-3">{specs?.featureHeader}</div>
+                                    <p className="text-slate-300 text-sm leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.benefits || 'High efficiency cooling performance.'}</p>
+                                </div>
+
+                                {/* Acoustic Card */}
+                                <div className="bg-[#0a0e14] border border-white/5 p-6 md:p-8 rounded-3xl hover:border-blue-400/30 transition-all duration-500 group relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div className="w-12 h-12 rounded-xl bg-blue-400/10 flex items-center justify-center border border-blue-400/20 mb-6 group-hover:shadow-[0_0_20px_rgba(96,165,250,0.2)] transition-shadow">
+                                        <span className="material-symbols-outlined text-blue-400 text-2xl">graphic_eq</span>
+                                    </div>
+                                    <div className="text-blue-400 text-xs font-header font-black uppercase tracking-[0.2em] mb-3">{specs?.acousticHeader}</div>
+                                    <p className="text-slate-300 text-sm leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.soundProfile || 'Standard Operation'}</p>
                                 </div>
                             </div>
                         </div>
