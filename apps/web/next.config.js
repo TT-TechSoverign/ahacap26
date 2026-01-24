@@ -49,7 +49,7 @@ const nextConfig = {
         ];
     },
     async rewrites() {
-        const apiUrl = process.env.API_INTERNAL_URL || 'http://127.0.0.1:8001';
+        const apiUrl = process.env.API_INTERNAL_URL || 'http://api:8000';
         console.log(`[Next.js Rewrites] Proxying /api/v1 to: ${apiUrl}`);
         return [
             {
