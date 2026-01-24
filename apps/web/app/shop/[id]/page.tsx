@@ -204,43 +204,43 @@ export default function ProductDetailPage() {
                         </div>
 
                         {/* Secondary Specifications Hub */}
-                        <div className="bg-[#0a0e14] border border-white/5 rounded-[2.5rem] p-10 ring-1 ring-white/10 shadow-2xl relative overflow-hidden group/details">
+                        <div className="bg-[#0a0e14] border border-white/5 rounded-[2rem] p-6 md:p-8 ring-1 ring-white/10 shadow-2xl relative overflow-hidden group/details">
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent"></div>
-                            <div className="grid grid-cols-2 gap-y-10 items-start relative z-10 text-sm md:text-left">
+                            <div className="grid grid-cols-2 gap-y-8 gap-x-4 items-start relative z-10 text-sm md:text-left">
                                 <div className="flex flex-col gap-2 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.4em]">Dimensions (H/W/D)</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-widest text-xs">{specs?.dimensions || 'N/A'}</span>
+                                    <span className="text-slate-500 text-xs font-header font-black uppercase tracking-widest">Dimensions</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-sm md:text-base">{specs?.dimensions || 'N/A'}</span>
                                 </div>
                                 <div className="flex flex-col gap-2 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.4em]">Operational Weight</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-widest text-xs">{specs?.weight || 'N/A'}</span>
+                                    <span className="text-slate-500 text-xs font-header font-black uppercase tracking-widest">Weight</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-sm md:text-base">{specs?.weight || 'N/A'}</span>
                                 </div>
                                 <div className="flex flex-col gap-2 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.4em]">Manufacturer Warranty</span>
-                                    <span className="text-rose-400 font-header font-black uppercase tracking-widest text-xs">{specs?.warranty || '1 YEAR LIMITED'}</span>
+                                    <span className="text-slate-500 text-xs font-header font-black uppercase tracking-widest">Warranty Protection</span>
+                                    <span className="text-rose-400 font-header font-black uppercase tracking-wide text-sm md:text-base">{specs?.warranty || '1 YEAR LIMITED'}</span>
                                 </div>
                                 <div className="flex flex-col gap-2 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.4em]">Power Specs</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-widest text-xs">{specs?.watts || 'N/A'}W / {specs?.amps || 'N/A'}A</span>
+                                    <span className="text-slate-500 text-xs font-header font-black uppercase tracking-widest">Power Requirement</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-sm md:text-base">{specs?.watts || 'N/A'}W / {specs?.amps || 'N/A'}A</span>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Educational Architecture (New Section) */}
+                        {/* Lifestyle & Performance Profile (Renamed from Architectural Profile) */}
                         <div className="space-y-6 border-t border-white/5 pt-8">
-                            <h3 className="text-white font-header font-black uppercase tracking-widest text-sm">Architectural Profile</h3>
-                            <div className="grid grid-cols-1 gap-6">
-                                <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl">
-                                    <div className="text-primary text-[10px] font-header font-black uppercase tracking-[0.3em] mb-2">Target Deployment</div>
-                                    <p className="text-slate-300 text-sm leading-relaxed">{specs?.idealFor || 'General Residential Cooling'}</p>
+                            <h3 className="text-white font-header font-black uppercase tracking-widest text-sm">Lifestyle & Performance Fit</h3>
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
+                                    <div className="text-primary text-xs font-header font-black uppercase tracking-widest mb-2">Ideal For</div>
+                                    <p className="text-slate-200 text-base leading-relaxed font-medium">{specs?.idealFor || 'General Residential Cooling'}</p>
                                 </div>
-                                <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl">
-                                    <div className="text-emerald-500 text-[10px] font-header font-black uppercase tracking-[0.3em] mb-2">Core Advantage</div>
-                                    <p className="text-slate-300 text-sm leading-relaxed">{specs?.benefits || 'High efficiency cooling performance.'}</p>
+                                <div className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
+                                    <div className="text-emerald-500 text-xs font-header font-black uppercase tracking-widest mb-2">The "Wow" Factor</div>
+                                    <p className="text-slate-200 text-base leading-relaxed font-medium">{specs?.benefits || 'High efficiency cooling performance.'}</p>
                                 </div>
-                                <div className="bg-white/[0.02] border border-white/5 p-6 rounded-2xl">
-                                    <div className="text-slate-500 text-[10px] font-header font-black uppercase tracking-[0.3em] mb-2">Acoustic Signature</div>
-                                    <p className="text-slate-300 text-sm leading-relaxed">{specs?.soundProfile || 'Standard Operation'}</p>
+                                <div className="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
+                                    <div className="text-slate-500 text-xs font-header font-black uppercase tracking-widest mb-2">Sound Experience</div>
+                                    <p className="text-slate-200 text-base leading-relaxed font-medium">{specs?.soundProfile || 'Standard Operation'}</p>
                                 </div>
                             </div>
                         </div>
