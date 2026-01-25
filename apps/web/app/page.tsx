@@ -603,3 +603,13 @@ function WarehouseSection() {
         </section>
     );
 }
+
+function CalendarSection() {
+    return (
+        <section id="calendar" className="py-16 md:py-24 bg-background-light dark:bg-background-dark border-t border-white/5">
+            <div className="max-w-7xl mx-auto px-6">
+                <AdminCalendar />
+            </div>
+        </section>
+    );
+}
