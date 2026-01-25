@@ -14,6 +14,13 @@ interface Product {
     category: string;
     stock: number;
     image_url?: string;
+    btu?: number;
+    voltage?: string;
+    coverage?: string;
+    performance_specs?: string;
+    key_spec?: string;
+    noise_level?: string;
+    dehumidification?: string;
 }
 
 interface Order {
@@ -660,12 +667,20 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
 }
 
 function ProductModal({ product, onClose, onSave }: { product?: Product, onClose: () => void, onSave: () => void }) {
+    const [activeTab, setActiveTab] = useState<'basic' | 'specs'>('basic');
     const [formData, setFormData] = useState({
         name: product?.name || '',
         price: product?.price || 0,
         category: product?.category || 'WINDOW_AC',
         stock: product?.stock || 0,
-        image_url: product?.image_url || ''
+        image_url: product?.image_url || '',
+        btu: product?.btu || 0,
+        voltage: product?.voltage || '',
+        coverage: product?.coverage || '',
+        performance_specs: product?.performance_specs || '',
+        key_spec: product?.key_spec || '',
+        noise_level: product?.noise_level || '',
+        dehumidification: product?.dehumidification || ''
     });
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -699,7 +714,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="w-full max-w-xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10"
+                className="w-full max-w-2xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 max-h-[90vh] flex flex-col"
             >
                 <div className="p-8 border-b border-white/5 flex items-center justify-between">
                     <div>
@@ -711,71 +726,199 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-8 space-y-6">
-                    <div className="grid grid-cols-2 gap-6">
-                        <div className="col-span-2 space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.name}</label>
-                            <input
-                                type="text"
-                                required
-                                value={formData.name}
-                                onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all placeholder:text-slate-700"
-                                placeholder="e.g. LG 8000 BTU Window Unit"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.price}</label>
-                            <input
-                                type="number"
-                                required
-                                value={formData.price}
-                                min={0}
-                                onChange={e => setFormData({ ...formData, price: parseInt(e.target.value) })}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.stock}</label>
-                            <input
-                                type="number"
-                                required
-                                value={formData.stock}
-                                min={0}
-                                onChange={e => setFormData({ ...formData, stock: parseInt(e.target.value) })}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.category}</label>
-                            <select
-                                value={formData.category}
-                                onChange={e => setFormData({ ...formData, category: e.target.value })}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all appearance-none"
-                            >
-                                <option value="WINDOW_AC">Window AC</option>
-                                <option value="SERVICE">Service</option>
-                            </select>
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.image}</label>
-                            <input
-                                type="text"
-                                value={formData.image_url}
-                                onChange={e => setFormData({ ...formData, image_url: e.target.value })}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all placeholder:text-slate-700"
-                                placeholder="https://..."
-                            />
-                        </div>
-                    </div>
+                {/* Tabs */}
+                <div className="px-8 pt-6 flex gap-4 border-b border-white/5">
+                    <button
+                        onClick={() => setActiveTab('basic')}
+                        className={`pb-4 text-[10px] font-black uppercase tracking-widest transition-all relative ${activeTab === 'basic' ? 'text-white' : 'text-slate-500 hover:text-white'
+                            }`}
+                    >
+                        Basic Info
+                        {activeTab === 'basic' && (
+                            <motion.div layoutId="tab-highlight" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+                        )}
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('specs')}
+                        className={`pb-4 text-[10px] font-black uppercase tracking-widest transition-all relative ${activeTab === 'specs' ? 'text-white' : 'text-slate-500 hover:text-white'
+                            }`}
+                    >
+                        Technical Specs
+                        {activeTab === 'specs' && (
+                            <motion.div layoutId="tab-highlight" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+                        )}
+                    </button>
+                </div>
 
-                    <div className="pt-6 flex gap-4">
-                        <button type="button" onClick={onClose} className="flex-1 border border-white/10 text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-white/5 transition-all">{content.admin.products.modal.cancel}</button>
-                        <button type="submit" className="flex-2 bg-primary text-black font-black uppercase tracking-widest py-4 px-8 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
-                            {product ? content.admin.products.modal.save_edit : content.admin.products.modal.save_new}
-                        </button>
-                    </div>
+                <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-8 space-y-6">
+                    <AnimatePresence mode="wait">
+                        {activeTab === 'basic' ? (
+                            <motion.div
+                                key="basic"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 20 }}
+                                className="space-y-6"
+                            >
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div className="col-span-2 space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.name}</label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={formData.name}
+                                            onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all placeholder:text-slate-700"
+                                            placeholder="e.g. LG 8000 BTU Window Unit"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.price}</label>
+                                        <input
+                                            type="number"
+                                            required
+                                            value={formData.price}
+                                            min={0}
+                                            onChange={e => setFormData({ ...formData, price: parseInt(e.target.value) })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.stock}</label>
+                                        <input
+                                            type="number"
+                                            required
+                                            value={formData.stock}
+                                            min={0}
+                                            onChange={e => setFormData({ ...formData, stock: parseInt(e.target.value) })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.category}</label>
+                                        <select
+                                            value={formData.category}
+                                            onChange={e => setFormData({ ...formData, category: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all appearance-none"
+                                        >
+                                            <option value="WINDOW_AC">Window AC</option>
+                                            <option value="SERVICE">Service</option>
+                                        </select>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.image}</label>
+                                        <input
+                                            type="text"
+                                            value={formData.image_url}
+                                            onChange={e => setFormData({ ...formData, image_url: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all placeholder:text-slate-700"
+                                            placeholder="https://..."
+                                        />
+                                    </div>
+                                    {/* Image Preview */}
+                                    {formData.image_url && (
+                                        <div className="col-span-2 mt-2 bg-black rounded-xl border border-white/10 p-4 flex items-center justify-center relative h-40">
+                                            <Image
+                                                src={formData.image_url}
+                                                alt="Preview"
+                                                fill
+                                                className="object-contain"
+                                                onError={(e) => (e.currentTarget.style.display = 'none')}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="specs"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                className="space-y-6"
+                            >
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Cooling Capacity (BTU)</label>
+                                        <input
+                                            type="number"
+                                            value={formData.btu}
+                                            onChange={e => setFormData({ ...formData, btu: parseInt(e.target.value) })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 8000"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Voltage</label>
+                                        <input
+                                            type="text"
+                                            value={formData.voltage}
+                                            onChange={e => setFormData({ ...formData, voltage: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 115V"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Room Coverage</label>
+                                        <input
+                                            type="text"
+                                            value={formData.coverage}
+                                            onChange={e => setFormData({ ...formData, coverage: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 350 sq ft"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Noise Level</label>
+                                        <input
+                                            type="text"
+                                            value={formData.noise_level}
+                                            onChange={e => setFormData({ ...formData, noise_level: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 52 dBA"
+                                        />
+                                    </div>
+                                    <div className="col-span-2 space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Key Spec (Highlight)</label>
+                                        <input
+                                            type="text"
+                                            value={formData.key_spec}
+                                            onChange={e => setFormData({ ...formData, key_spec: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. Dual Inverter Compressor"
+                                        />
+                                    </div>
+                                    <div className="col-span-2 space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Performance Specs</label>
+                                        <textarea
+                                            value={formData.performance_specs}
+                                            onChange={e => setFormData({ ...formData, performance_specs: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all min-h-[80px]"
+                                            placeholder="e.g. 12.0 CEER / 11.2 EER"
+                                        />
+                                    </div>
+                                    <div className="col-span-2 space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Dehumidification</label>
+                                        <input
+                                            type="text"
+                                            value={formData.dehumidification}
+                                            onChange={e => setFormData({ ...formData, dehumidification: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 2.2 pts/hr"
+                                        />
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </form>
+
+                <div className="p-8 pt-0 flex gap-4 bg-[#0a0e14]">
+                    <button type="button" onClick={onClose} className="flex-1 border border-white/10 text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-white/5 transition-all">{content.admin.products.modal.cancel}</button>
+                    <button type="button" onClick={handleSubmit} className="flex-2 bg-primary text-black font-black uppercase tracking-widest py-4 px-8 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
+                        {product ? content.admin.products.modal.save_edit : content.admin.products.modal.save_new}
+                    </button>
+                </div>
             </motion.div>
         </motion.div>
     );
