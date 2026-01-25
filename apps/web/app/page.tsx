@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BackToTop } from '@/components/BackToTop';
 import Navbar from '@/components/Navbar';
+import { AdminCalendar } from '@/components/AdminCalendar';
 
 export default function LandingPage() {
     const { content, isEditMode, setLayoutOrder } = useContent();
@@ -19,7 +20,7 @@ export default function LandingPage() {
     const services = Array.isArray(gridData) ? gridData : [];
 
     const sectionOrder = content?.landing?.sections || [
-        "hero", "services", "video", "partnerships", "service-areas", "warehouse-map"
+        "hero", "services", "video", "partnerships", "service-areas", "calendar", "warehouse-map"
     ];
 
     const handleReorder = (newOrder: unknown[]) => {
@@ -47,6 +48,7 @@ export default function LandingPage() {
         "video": <VideoSection />,
         "partnerships": <PartnershipsSection />,
         "service-areas": <ServiceAreasSection isEditMode={isEditMode} content={content} />,
+        "calendar": <CalendarSection />,
         "warehouse-map": <WarehouseSection />
     };
 
