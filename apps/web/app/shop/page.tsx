@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils';
 import contentData from '../../content.json';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import { AdminCalendar } from '@/components/AdminCalendar';
 
 export default function ShopPage() {
     const { addToCart, items, openCart } = useCart();
@@ -73,7 +74,7 @@ export default function ShopPage() {
                 />
             </div>
         ),
-        "educational-benefits": <EducationalBenefitsSection />,
+        "educational-benefits": <AdminCalendar />,
         "base": (
             <div id="base" className="relative space-y-12">
                 <SectionHeader
@@ -360,112 +361,7 @@ export default function ShopPage() {
             </AnimatePresence>
 
             {/* Footer */}
-            <footer className="bg-[#0a0e14] border-t border-white/5 pt-20 pb-12">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                        {/* Brand Column */}
-                        <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
-                            <div className="relative h-32 w-32 -mb-2">
-                                <Image
-                                    src="/assets/ahac-logo-bus-500x500xv2.svg"
-                                    alt="Affordable Home A/C"
-                                    fill
-                                    className="object-contain"
-                                />
-                            </div>
-                            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-                                Oahu&apos;s quality provider of energy-efficient cooling solutions. Specializing in Window Units, Mini-Split AC and Central AC services for island living.
-                            </p>
-                        </div>
-
-                        {/* Services Column */}
-                        <div>
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Services</h4>
-                            <ul className="space-y-4">
-                                {[
-                                    { text: 'Mini Split AC', href: '/contact' },
-                                    { text: 'Window AC Shop', href: '/shop' },
-                                    { text: 'Central AC', href: '/contact' },
-                                    { text: 'Window AC Cleaning', href: '/contact' }
-                                ].map((item) => (
-                                    <li key={item.text}>
-                                        <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
-                                            <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
-                                            {item.text}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Quick Links Column */}
-                        <div>
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Quick Links</h4>
-                            <ul className="space-y-4">
-                                {[
-                                    { text: 'Mini Split AC', href: '/contact' },
-                                    { text: 'Shop Inventory', href: '/shop' },
-                                    { text: 'Central AC', href: '/contact' },
-                                    { text: 'Window AC Cleaning', href: '/contact' },
-                                    { text: 'Service Areas', href: '/contact' },
-                                    { text: 'Contact Us', href: '/contact' }
-                                ].map((item) => (
-                                    <li key={item.text}>
-                                        <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
-                                            <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
-                                            {item.text}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Contact Column */}
-                        <div>
-                            <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Contact</h4>
-                            <ul className="space-y-6">
-                                <li className="flex gap-4">
-                                    <span className="material-symbols-outlined text-primary mt-1">location_on</span>
-                                    <div>
-                                        <div className="text-white font-bold text-sm uppercase">Shop Location</div>
-                                        <div className="text-slate-400 text-sm">Waipahu Commercial Center<br />94-150 Leoleo St. #203<br />Waipahu, HI 96797</div>
-                                    </div>
-                                </li>
-                                <li className="flex gap-4">
-                                    <span className="material-symbols-outlined text-primary mt-1">call</span>
-                                    <div>
-                                        <div className="text-white font-bold text-sm uppercase">Phone</div>
-                                        <a href="tel:808-488-1111" className="text-slate-400 text-sm hover:text-white transition-colors">(808) 488-1111</a>
-                                    </div>
-                                </li>
-                                <li className="flex gap-4">
-                                    <span className="material-symbols-outlined text-primary mt-1">mail</span>
-                                    <div>
-                                        <div className="text-white font-bold text-sm uppercase">Email</div>
-                                        <a href="mailto:office@affordablehome-ac.com" className="text-slate-400 text-sm hover:text-white transition-colors">office@affordablehome-ac.com</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-slate-600 text-xs font-bold uppercase tracking-widest">
-                            © 2024 Affordable Home A/C. All rights reserved.
-                        </p>
-                        <div className="flex flex-col md:flex-row items-center gap-6">
-                            <span className="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
-                                <span className="material-symbols-outlined text-sm text-primary">verified</span>
-                                LIC# CT-36775
-                            </span>
-                            <span className="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
-                                <span className="material-symbols-outlined text-sm text-primary">shield</span>
-                                Licensed | Insured | Bonded
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            {/* Footer Removed (Handled by Global Layout) */}
         </div >
     );
 }
@@ -796,497 +692,122 @@ function LogisticsSection() {
     );
 }
 
-function EducationalBenefitsSection() {
-    function EducationalBenefitsSection() {
-        return (
-            <section id="calendar-booking" className="relative py-12 overflow-hidden group">
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
-                <AdminCalendar />
-            </section>
-        );
-    }
 
-    function RebateSection() {
-        return (
-            <section id="rebate" className="relative py-12 md:py-20 overflow-hidden group">
-                {/* Background elements */}
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
-                <div className="absolute inset-0 bg-emerald-500/[0.02] rounded-[2rem] mx-4 md:mx-0"></div>
 
-                <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-16">
-                    {/* Header */}
-                    <div className="text-center space-y-4">
-                        <div className="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-500 text-[10px] font-header font-black tracking-widest uppercase">
-                            <span className="material-symbols-outlined text-sm">eco</span>
-                            <EditableText contentKey="shop.rebate.badge" />
-                        </div>
-                        <h2 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tighter leading-none">
-                            <EditableText contentKey="shop.rebate.title" /><br />
-                            <span className="text-emerald-500 drop-shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-                                <EditableText contentKey="shop.rebate.title_highlight" />
-                            </span>
-                        </h2>
-                        <div className="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed font-medium uppercase tracking-widest opacity-80">
-                            <BacklinkedText narrativeKey="rebate" />
-                        </div>
+function RebateSection() {
+    return (
+        <section id="rebate" className="relative py-12 md:py-20 overflow-hidden group">
+            {/* Background elements */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+            <div className="absolute inset-0 bg-emerald-500/[0.02] rounded-[2rem] mx-4 md:mx-0"></div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-16">
+                {/* Header */}
+                <div className="text-center space-y-4">
+                    <div className="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-500 text-[10px] font-header font-black tracking-widest uppercase">
+                        <span className="material-symbols-outlined text-sm">eco</span>
+                        <EditableText contentKey="shop.rebate.badge" />
                     </div>
+                    <h2 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tighter leading-none">
+                        <EditableText contentKey="shop.rebate.title" /><br />
+                        <span className="text-emerald-500 drop-shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                            <EditableText contentKey="shop.rebate.title_highlight" />
+                        </span>
+                    </h2>
+                    <div className="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed font-medium uppercase tracking-widest opacity-80">
+                        <BacklinkedText narrativeKey="rebate" />
+                    </div>
+                </div>
 
-                    {/* 3-Step Process */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[0, 1, 2].map((i) => {
-                            const isDownload = i === 1;
-                            if (isDownload) {
-                                return (
-                                    <a
-                                        key={i}
-                                        href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="industrial-card p-8 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-6 hover:border-emerald-500/50 transition-all hover:-translate-y-1 block cursor-pointer"
-                                    >
-                                        <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
-                                            <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
-                                                <EditableText contentKey={`shop.rebate.steps.${i}.icon`} />
-                                            </span>
-                                        </div>
-                                        <div className="space-y-3">
-                                            <h3 className="text-white font-header font-black uppercase tracking-widest text-base group-hover/card:text-emerald-400 transition-colors group-hover/card:underline decoration-emerald-500 underline-offset-4">
-                                                <EditableText contentKey={`shop.rebate.steps.${i}.title`} />
-                                            </h3>
-                                            <p className="text-slate-500 text-[11px] leading-relaxed uppercase tracking-widest font-medium group-hover/card:text-slate-400 transition-colors">
-                                                <EditableText contentKey={`shop.rebate.steps.${i}.description`} />
-                                            </p>
-                                        </div>
-                                    </a>
-                                );
-                            }
+                {/* 3-Step Process */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {[0, 1, 2].map((i) => {
+                        const isDownload = i === 1;
+                        if (isDownload) {
                             return (
-                                <div key={i} className="industrial-card p-8 bg-[#0f131a] border border-white/5 rounded-2xl relative group/card flex flex-col items-center text-center space-y-6">
+                                <a
+                                    key={i}
+                                    href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="industrial-card p-8 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-6 hover:border-emerald-500/50 transition-all hover:-translate-y-1 block cursor-pointer"
+                                >
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
                                         <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
                                             <EditableText contentKey={`shop.rebate.steps.${i}.icon`} />
                                         </span>
                                     </div>
                                     <div className="space-y-3">
-                                        <h3 className="text-white font-header font-black uppercase tracking-widest text-base">
+                                        <h3 className="text-white font-header font-black uppercase tracking-widest text-base group-hover/card:text-emerald-400 transition-colors group-hover/card:underline decoration-emerald-500 underline-offset-4">
                                             <EditableText contentKey={`shop.rebate.steps.${i}.title`} />
                                         </h3>
-                                        <p className="text-slate-500 text-[11px] leading-relaxed uppercase tracking-widest font-medium">
+                                        <p className="text-slate-500 text-[11px] leading-relaxed uppercase tracking-widest font-medium group-hover/card:text-slate-400 transition-colors">
                                             <EditableText contentKey={`shop.rebate.steps.${i}.description`} />
                                         </p>
                                     </div>
-                                </div>
+                                </a>
                             );
-                        })}
-                    </div>
-
-                    {/* Why It Matters (Bento Highlights) */}
-                    <div className="bg-[#0f131a]/40 backdrop-blur-3xl border border-white/5 rounded-[2rem] p-8 md:p-12 space-y-10 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-50"></div>
-
-                        <div className="relative z-10 text-center space-y-4">
-                            <h4 className="text-emerald-500 font-header font-black uppercase tracking-[0.4em] text-[10px] md:text-[11px]">
-                                <EditableText contentKey="shop.rebate.why_matters.title" />
-                            </h4>
-                            <h3 className="text-2xl md:text-4xl font-header font-black text-white uppercase tracking-tighter">
-                                <EditableText contentKey="shop.rebate.why_matters.title_highlight" />
-                            </h3>
-                            <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-base leading-relaxed font-medium uppercase tracking-widest opacity-80">
-                                <EditableText contentKey="shop.rebate.why_matters.description" />
-                            </p>
-                        </div>
-
-                        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {[0, 1, 2].map((i) => (
-                                <div key={i} className="flex flex-col items-center gap-4 p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/30 transition-all duration-500 group/item">
-                                    <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-500 group-hover/item:scale-110 transition-transform">
-                                        <span className="material-symbols-outlined text-2xl">
-                                            <EditableText contentKey={`shop.rebate.why_matters.highlights.${i}.icon`} />
-                                        </span>
-                                    </div>
-                                    <span className="text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.2em] text-white/90 text-center">
-                                        <EditableText contentKey={`shop.rebate.why_matters.highlights.${i}.title`} />
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    function BrandSpotlightSection() {
-        return (
-            <section className="relative">
-
-                <motion.div
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    variants={{
-                        hidden: { opacity: 0 },
-                        show: {
-                            opacity: 1,
-                            transition: { staggerChildren: 0.15 }
                         }
-                    }}
-                    className="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-[minmax(380px,auto)]"
-                >
-                    {/* LG Bento Cell (Large/Primary) */}
-                    <motion.div
-                        variants={{
-                            hidden: { opacity: 0, scale: 0.98 },
-                            show: { opacity: 1, scale: 1 }
-                        }}
-                        className="lg:col-span-7 bg-[#0a0e14] border border-white/5 rounded-[2rem] p-6 md:p-10 relative overflow-hidden group/lg ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col justify-between items-center text-center transition-all duration-700 hover:border-rose-500/40"
-                    >
-                        {/* Intensified Luminous LG Backdrop */}
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(211,18,69,0.12)_0%,transparent_60%)] opacity-0 group-hover/lg:opacity-100 transition-opacity duration-1000"></div>
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(211,18,69,0.06)_0%,transparent_50%)] opacity-30 group-hover/lg:opacity-100 transition-opacity duration-1000"></div>
-
-                        {/* LG Industrial Accent */}
-                        <div className="absolute top-0 left-0 w-24 h-[1.5px] bg-gradient-to-r from-rose-600 to-transparent opacity-30 group-hover/lg:w-48 group-hover/lg:opacity-100 transition-all duration-1000"></div>
-
-                        <div className="relative z-10 w-full flex flex-col items-center">
-                            <div className="flex items-center justify-between w-full mb-10">
-                                <div className="relative mb-2 transition-transform duration-700 group-hover/lg:scale-110">
-                                    <span className="text-rose-500 font-sans font-black tracking-tighter text-6xl drop-shadow-xl">LG</span>
+                        return (
+                            <div key={i} className="industrial-card p-8 bg-[#0f131a] border border-white/5 rounded-2xl relative group/card flex flex-col items-center text-center space-y-6">
+                                <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
+                                    <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
+                                        <EditableText contentKey={`shop.rebate.steps.${i}.icon`} />
+                                    </span>
                                 </div>
-                                <span className="px-3 py-1 bg-rose-500/10 border border-rose-500/20 rounded-full text-rose-500 text-[8px] font-header font-black uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(211,18,69,0.1)] group-hover/lg:shadow-[0_0_20px_rgba(211,18,69,0.25)] transition-all">Authorized Dealer</span>
-                            </div>
-                            <h3 className="text-3xl md:text-5xl font-header font-black text-white uppercase leading-[0.9] mb-6 tracking-tighter group-hover/lg:text-rose-50 transition-colors duration-500">
-                                <EditableText contentKey="shop.bento.lg.title" defaultValue="DUAL INVERTER INFRASTRUCTURE" />
-                            </h3>
-                            <p className="text-slate-400 text-sm md:text-lg leading-relaxed max-w-lg mb-10 uppercase tracking-wider [word-spacing:0.1em] opacity-80 group-hover/lg:opacity-100 transition-opacity">
-                                <EditableText contentKey="shop.bento.lg.description" defaultValue="LG'S REVOLUTIONARY DUAL INVERTER COMPRESSOR™ ELIMINATES THE NOISY STOP-AND-START CYCLE, SAVING UP TO 40% MORE ENERGY." />
-                            </p>
-                            <ul className="flex flex-wrap justify-center gap-4 w-full max-w-2xl">
-                                <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-rose-500/40 hover:bg-rose-500/[0.03] transition-all duration-500 group/item">
-                                    <div className="p-2.5 bg-rose-500/10 rounded-lg text-rose-500 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(211,18,69,0.3)] transition-all">
-                                        <span className="material-symbols-outlined text-xl">volume_off</span>
-                                    </div>
-                                    <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
-                                        <EditableText contentKey="shop.bento.lg.feature1" defaultValue="LODECIBEL™ SILENT MODE" />
-                                    </span>
-                                </li>
-                                <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-rose-500/40 hover:bg-rose-500/[0.03] transition-all duration-500 group/item">
-                                    <div className="p-2.5 bg-rose-500/10 rounded-lg text-rose-500 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(211,18,69,0.3)] transition-all">
-                                        <span className="material-symbols-outlined text-xl">wifi</span>
-                                    </div>
-                                    <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
-                                        <EditableText contentKey="shop.bento.lg.feature2" defaultValue="THINQ® SMART CONTROL" />
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <Link href="/shop?brand=LG" className="mt-10 w-full md:w-fit px-10 h-14 bg-white/5 hover:bg-rose-600 border border-white/10 hover:border-rose-500 rounded-xl flex items-center justify-center gap-3 text-white font-header font-black uppercase tracking-[0.4em] text-[10px] transition-all duration-500 hover:shadow-[0_0_30px_rgba(211,18,69,0.25)] active:scale-95 relative overflow-hidden group/btn">
-                            <span className="relative z-10">Explore LG Range</span>
-                            <span className="material-symbols-outlined text-xs relative z-10 group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-                        </Link>
-                    </motion.div>
-
-                    {/* GE Bento Cell (Secondary/Detailed) */}
-                    <motion.div
-                        variants={{
-                            hidden: { opacity: 0, scale: 0.98 },
-                            show: { opacity: 1, scale: 1 }
-                        }}
-                        className="lg:col-span-5 bg-[#0a0e14] border border-white/5 rounded-[2rem] p-6 md:p-10 relative overflow-hidden group/ge ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col items-center text-center transition-all duration-700 hover:border-blue-500/40"
-                    >
-                        {/* Intensified Luminous GE Backdrop */}
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,94,184,0.12)_0%,transparent_60%)] opacity-0 group-hover/ge:opacity-100 transition-opacity duration-1000"></div>
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,94,184,0.06)_0%,transparent_50%)] opacity-30 group-hover/ge:opacity-100 transition-opacity duration-1000"></div>
-
-                        {/* GE Industrial Accent */}
-                        <div className="absolute top-0 right-0 w-24 h-[1.5px] bg-gradient-to-l from-blue-600 to-transparent opacity-30 group-hover/ge:w-48 group-hover/ge:opacity-100 transition-all duration-1000"></div>
-
-                        <div className="relative z-10 flex flex-col items-center h-full w-full">
-                            <div className="flex items-center justify-between w-full mb-10">
-                                <div className="relative mb-2 transition-transform duration-700 group-hover/ge:scale-110">
-                                    <span className="text-blue-400 font-serif font-bold tracking-wide text-3xl drop-shadow-xl">GE APPLIANCES</span>
+                                <div className="space-y-3">
+                                    <h3 className="text-white font-header font-black uppercase tracking-widest text-base">
+                                        <EditableText contentKey={`shop.rebate.steps.${i}.title`} />
+                                    </h3>
+                                    <p className="text-slate-500 text-[11px] leading-relaxed uppercase tracking-widest font-medium">
+                                        <EditableText contentKey={`shop.rebate.steps.${i}.description`} />
+                                    </p>
                                 </div>
-                                <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-[8px] font-header font-black uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,94,184,0.1)] group-hover/ge:shadow-[0_0_20px_rgba(0,94,184,0.25)] transition-all">Island Verified</span>
                             </div>
-                            <h3 className="text-2xl md:text-4xl font-header font-black text-white uppercase leading-[0.9] mb-6 tracking-tighter group-hover/ge:text-blue-50 transition-colors duration-500">
-                                <EditableText contentKey="shop.bento.ge.title" defaultValue="INDUSTRIAL COMMAND SUITE" />
-                            </h3>
-                            <p className="text-slate-400 text-xs md:text-base leading-relaxed mb-10 uppercase tracking-wider opacity-80 max-w-sm group-hover/ge:opacity-100 transition-opacity">
-                                <EditableText contentKey="shop.bento.ge.description" defaultValue="ENGINEERED FOR STEADY-STATE PERFORMANCE IN HIGH-SALINITY MARITIME ENVIRONMENTS. PRECISION BUILT FOR HAWAII REGIONS." />
-                            </p>
-                            <ul className="flex flex-wrap justify-center gap-4 w-full max-w-2xl">
-                                <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/40 hover:bg-blue-500/[0.03] transition-all duration-500 group/item">
-                                    <div className="p-2.5 bg-blue-500/10 rounded-lg text-blue-400 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(0,94,184,0.3)] transition-all">
-                                        <span className="material-symbols-outlined text-xl">dark_mode</span>
-                                    </div>
-                                    <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
-                                        <EditableText contentKey="shop.bento.ge.feature1" defaultValue="NIGHT MODE DIMMING" />
-                                    </span>
-                                </li>
-                                <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/40 hover:bg-blue-500/[0.03] transition-all duration-500 group/item">
-                                    <div className="p-2.5 bg-blue-500/10 rounded-lg text-blue-400 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(0,94,184,0.3)] transition-all">
-                                        <span className="material-symbols-outlined text-xl">install_desktop</span>
-                                    </div>
-                                    <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
-                                        <EditableText contentKey="shop.bento.ge.feature2" defaultValue="EZ MOUNT CALIBRATION" />
-                                    </span>
-                                </li>
-                            </ul>
-                            <Link href="/shop?brand=GE" className="mt-10 w-full md:w-fit px-10 h-14 bg-white/5 hover:bg-blue-700 border border-white/10 hover:border-blue-600 rounded-xl flex items-center justify-center gap-3 text-white font-header font-black uppercase tracking-[0.4em] text-[10px] transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,94,184,0.25)] active:scale-95 relative overflow-hidden group/btn">
-                                <span className="relative z-10">Shop GE Units</span>
-                                <span className="material-symbols-outlined text-xs relative z-10 group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-                            </Link>
-                        </div>
-                    </motion.div>
-                </motion.div>
-            </section>
-        );
-    }
+                        );
+                    })}
+                </div>
 
-    function SizingGuideSection() {
-        const sizingData = [
-            {
-                sq: "100 - 200",
-                btu: "6,000 - 8,000",
-                app: "Small Bedroom / Office",
-                models: [
-                    { name: "LW6023IVSM", link: "#dual_inverter" },
-                    { name: "LW8022IVSM", link: "#dual_inverter" },
-                    { name: "AJCQ08AWJ", link: "#ge" }
-                ]
-            },
-            {
-                sq: "200 - 250",
-                btu: "10,000 - 12,000",
-                app: "Master / Studio",
-                models: [
-                    { name: "LW1022IVSM", link: "#dual_inverter" },
-                    { name: "LW1222IVSM", link: "#dual_inverter" },
-                    { name: "AJCQ10AWJ", link: "#ge" },
-                    { name: "AJCQ12AWJ", link: "#ge" }
-                ]
-            },
-            {
-                sq: "250 - 350",
-                btu: "14,000 - 15,000",
-                app: "Living / Large Master",
-                models: [
-                    { name: "LW1522IVSM", link: "#dual_inverter" }
-                ]
-            },
-            {
-                sq: "400+",
-                btu: "18,000 - 24,000",
-                app: "Whole Floor / Large Open Space",
-                models: [
-                    { name: "LW1822IVSM", link: "#dual_inverter" },
-                    { name: "LW2422IVSM", link: "#dual_inverter" }
-                ]
-            },
-        ];
+                {/* Why It Matters (Bento Highlights) */}
+                <div className="bg-[#0f131a]/40 backdrop-blur-3xl border border-white/5 rounded-[2rem] p-8 md:p-12 space-y-10 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-50"></div>
 
-        return (
-            <section id="sizing-guide" className="scroll-mt-20 px-4">
-                <div className="text-center mb-12 space-y-4">
-                    <div className="inline-block px-5 py-2 bg-white/5 rounded-md border border-white/10 text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.5em] text-primary mb-4 shadow-[0_0_20px_rgba(0,174,239,0.1)]">
-                        <EditableText contentKey="shop.guide.subtitle" />
+                    <div className="relative z-10 text-center space-y-4">
+                        <h4 className="text-emerald-500 font-header font-black uppercase tracking-[0.4em] text-[10px] md:text-[11px]">
+                            <EditableText contentKey="shop.rebate.why_matters.title" />
+                        </h4>
+                        <h3 className="text-2xl md:text-4xl font-header font-black text-white uppercase tracking-tighter">
+                            <EditableText contentKey="shop.rebate.why_matters.title_highlight" />
+                        </h3>
+                        <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-base leading-relaxed font-medium uppercase tracking-widest opacity-80">
+                            <EditableText contentKey="shop.rebate.why_matters.description" />
+                        </p>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-header font-black text-white mb-6 uppercase tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                        <EditableText contentKey="shop.guide.title" />
-                    </h2>
-                    <div className="text-slate-400 max-w-4xl mx-auto text-sm md:text-base leading-relaxed font-medium opacity-80 uppercase tracking-widest [word-spacing:0.12em]">
-                        <BacklinkedText narrativeKey="sizing_guide" />
+
+                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {[0, 1, 2].map((i) => (
+                            <div key={i} className="flex flex-col items-center gap-4 p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/30 transition-all duration-500 group/item">
+                                <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-500 group-hover/item:scale-110 transition-transform">
+                                    <span className="material-symbols-outlined text-2xl">
+                                        <EditableText contentKey={`shop.rebate.why_matters.highlights.${i}.icon`} />
+                                    </span>
+                                </div>
+                                <span className="text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.2em] text-white/90 text-center">
+                                    <EditableText contentKey={`shop.rebate.why_matters.highlights.${i}.title`} />
+                                </span>
+                            </div>
+                        ))}
                     </div>
                 </div>
+            </div>
+        </section>
+    );
+}
 
-                {/* Desktop Table View */}
-                <div className="!hidden md:!block overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-charcoal relative">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-cyan-400 to-primary opacity-80"></div>
-                    <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="bg-white/[0.03] border-b border-white/10">
-                                <th className="p-6 md:p-8 text-xs font-bold text-slate-400 uppercase tracking-widest w-1/4">Coverage Area</th>
-                                <th className="p-6 md:p-8 text-xs font-bold text-primary uppercase tracking-widest w-1/4">Recommended BTU</th>
-                                <th className="p-6 md:p-8 text-xs font-bold text-slate-400 uppercase tracking-widest">Recommended Units</th>
-                                <th className="p-6 md:p-8 text-xs font-bold text-slate-400 uppercase tracking-widest hidden lg:table-cell">Ideal Application</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-white/5 bg-background-dark/50">
-                            {sizingData.map((row, i) => (
-                                <tr key={i} className="hover:bg-primary/[0.03] transition-colors group">
-                                    <td className="p-6 md:p-8 text-white font-black group-hover:text-primary transition-colors border-l-2 border-transparent group-hover:border-primary/50">{row.sq} sq. ft.</td>
-                                    <td className="p-6 md:p-8">
-                                        <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-header font-bold text-lg rounded md:text-xl border border-primary/20 group-hover:bg-primary group-hover:text-white transition-all shadow-[0_0_15px_rgba(0,174,239,0.15)] group-hover:shadow-[0_0_25px_rgba(0,174,239,0.5)] group-hover:scale-105 transform">
-                                            {row.btu}
-                                        </span>
-                                    </td>
-                                    <td className="p-6 md:p-8">
-                                        <div className="flex flex-wrap gap-2">
-                                            {sizingData[i].models.map((m, idx) => (
-                                                <Link
-                                                    key={idx}
-                                                    href={m.link}
-                                                    className="px-3 py-1.5 bg-white/[0.03] border border-white/10 rounded-md text-[9px] font-black text-slate-400 hover:text-white hover:border-primary/50 hover:bg-primary/20 transition-all uppercase tracking-widest flex items-center gap-2 shadow-sm hover:shadow-[0_0_15px_rgba(0,174,239,0.2)]"
-                                                >
-                                                    <span className="w-1 h-1 rounded-full bg-primary/40 group-hover:bg-primary transition-colors"></span>
-                                                    {m.name}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    </td>
-                                    <td className="p-6 md:p-8 text-slate-400 text-xs hidden lg:table-cell font-bold uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-all">{row.app}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+function BrandSpotlightSection() {
+    return (
+        <section className="relative">
 
-                {/* Mobile Card View */}
-                <div className="block md:hidden space-y-4">
-                    {sizingData.map((row, i) => (
-                        <div key={i} className="bg-white/[0.03] border border-white/10 rounded-xl p-6 flex flex-col gap-4 relative overflow-hidden group">
-                            <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-40"></div>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1">Coverage Area</p>
-                                    <h3 className="text-xl font-header font-black text-white uppercase">{row.sq} sq. ft.</h3>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Capacity</p>
-                                    <span className="text-lg font-header font-black text-white">{row.btu} <span className="text-[10px] text-primary">BTU</span></span>
-                                </div>
-                            </div>
-                            <div>
-                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2">Ideal Application</p>
-                                <p className="text-slate-400 text-sm font-medium">{row.app}</p>
-                            </div>
-                            <div className="pt-4 border-t border-white/5 bg-white/[0.01] -mx-6 -mb-6 p-6">
-                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">Recommended Models</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {sizingData[i].models.map((m, idx) => (
-                                        <Link
-                                            key={idx}
-                                            href={m.link}
-                                            className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-[10px] font-black text-white hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center gap-3 flex-1 min-w-[140px] shadow-lg active:scale-95"
-                                        >
-                                            <span className="material-symbols-outlined text-xs text-primary">ac_unit</span>
-                                            {m.name}
-                                            <span className="material-symbols-outlined text-[10px] text-slate-600">north_east</span>
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Advanced Technical Sizing Variables */}
-                <motion.div
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    variants={{
-                        hidden: { opacity: 0 },
-                        show: {
-                            opacity: 1,
-                            transition: { staggerChildren: 0.15 }
-                        }
-                    }}
-                    className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto"
-                >
-                    {[
-                        {
-                            title: "Humidity Load Factor",
-                            icon: "humidity_mid",
-                            desc: <>If the room has <span className="text-primary/90 font-bold">high ceilings (over 8ft)</span> or lacks significant insulation, we recommend <span className="text-white font-bold italic underline decoration-primary/30 underline-offset-4">"sizing up"</span> within these conservative ranges to ensure the unit doesn't run at 100% capacity continuously.</>
-                        },
-                        {
-                            title: "Solar Exposure",
-                            icon: "wb_sunny",
-                            desc: <>For rooms facing west with <span className="text-primary/90 font-bold">heavy afternoon sun</span>, add an <span className="text-primary font-black scale-105 inline-block mx-1">additional 10%</span> to your calculated square footage before selecting a BTU tier.</>
-                        },
-                        {
-                            title: "Inverter Advantage",
-                            icon: "speed",
-                            desc: <>Units in the <span className="text-white font-bold italic">LG DUAL Inverter series</span> can modulate their speed, making them <span className="text-primary/90 font-bold">more forgiving</span> if you slightly "oversize" for a space compared to a standard single-speed unit.</>
-                        }
-                    ].map((factor, idx) => (
-                        <motion.div
-                            key={idx}
-                            variants={{
-                                hidden: { opacity: 0, y: 20 },
-                                show: { opacity: 1, y: 0 }
-                            }}
-                            className="bg-[#0f172a]/40 border border-white/10 rounded-2xl p-7 hover:border-primary/50 hover:bg-[#1e293b]/40 transition-all duration-500 group/factor shadow-lg hover:shadow-[0_0_40px_rgba(0,174,239,0.1)] relative overflow-hidden h-full"
-                        >
-                            {/* Industrial Accent Line */}
-                            <div className="absolute top-0 left-0 w-12 h-[2px] bg-gradient-to-r from-primary to-transparent opacity-40 group-hover/factor:opacity-100 group-hover/factor:w-24 transition-all duration-700"></div>
-
-                            <div className="flex items-center gap-4 mb-5 relative z-10">
-                                <div className="relative">
-                                    <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-0 group-hover/factor:scale-150 transition-transform duration-700"></div>
-                                    <span className="material-symbols-outlined text-primary text-3xl group-hover/factor:scale-110 transition-transform duration-500 relative z-10">{factor.icon}</span>
-                                </div>
-                                <h4 className="text-[11px] font-black uppercase tracking-[0.25em] text-white/90 group-hover/factor:text-primary transition-colors duration-500 text-shadow-sm">{factor.title}</h4>
-                            </div>
-                            <p className="text-slate-400 text-[13px] leading-relaxed font-medium relative z-10">
-                                {factor.desc}
-                            </p>
-
-                            {/* Mesh decoration subtle backdrop */}
-                            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary/5 rounded-full blur-3xl group-hover/factor:bg-primary/10 transition-colors duration-700"></div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </section>
-        );
-    }
-
-    function FAQSection() {
-        return (
-            <section className="mb-20 max-w-4xl mx-auto">
-                <div className="flex flex-col items-center justify-center gap-6 mb-12 text-center">
-                    <span className="text-primary font-header font-black uppercase tracking-[0.6em] text-[10px] md:text-[11px] block opacity-70">
-                        Knowledge Infrastructure
-                    </span>
-                    <h2 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tight drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                        <EditableText contentKey="shop.faq.title" />
-                    </h2>
-                    <div className="h-px w-24 bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
-                </div>
-
-                <div className="grid gap-4">
-                    {[
-                        { q: "Do you offer installation for Window ACs?", a: "Unless specified, Window ACs are cash-and-carry. However, we offer professional installation services for an additional fee, especially for second-story windows or custom mounting requirements." },
-                        { q: "What is your return policy?", a: "Unopened units can be returned within 30 days. Defective units are covered under the manufacturer&apos;s warranty, which we service directly here in Waipahu as an authorized center." },
-                        { q: "How do I know if I have a 115V or 230V outlet?", a: "Standard household plugs are 115V (parallel prongs). 230V outlets are typically larger with horizontal or T-shaped prongs and are required for units 18,000 BTU and above. Check your wall socket before buying!" },
-                    ].map((faq, i) => (
-                        <details key={i} className="group bg-charcoal border border-white/5 rounded-2xl overflow-hidden open:bg-white/[0.02] open:border-primary/40 open:shadow-[0_0_30px_rgba(0,174,239,0.05)] transition-all duration-300 hover:border-white/10">
-                            <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-slate-300 hover:text-white transition-colors select-none text-sm md:text-base uppercase tracking-wide">
-                                {faq.q}
-                                <span className="material-symbols-outlined text-slate-500 group-open:rotate-180 group-open:text-primary transition-all duration-300 bg-white/5 rounded-full p-2 group-hover:bg-white/10">expand_more</span>
-                            </summary>
-                            <div className="px-6 pb-8 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-6 animate-in fade-in slide-in-from-top-2">
-                                {faq.a}
-                            </div>
-                        </details>
-                    ))}
-                </div>
-            </section>
-        );
-    }
-
-    function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; onQuickAdd: (p: Product) => void; rebate?: string }) {
-        if (products.length === 0) {
-            return (
-                <div className="py-12 text-center">
-                    <p className="text-slate-600 text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Section Updating / No Units Matching Filter</p>
-                    <div className="h-px w-12 bg-white/5 mx-auto mt-4"></div>
-                </div>
-            );
-        }
-
-        return (
             <motion.div
                 initial="hidden"
                 whileInView="show"
@@ -1295,153 +816,522 @@ function EducationalBenefitsSection() {
                     hidden: { opacity: 0 },
                     show: {
                         opacity: 1,
-                        transition: { staggerChildren: 0.1 }
+                        transition: { staggerChildren: 0.15 }
                     }
                 }}
-                className="flex flex-wrap justify-center gap-4 md:gap-5"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-[minmax(380px,auto)]"
             >
-                {products.map(product => (
+                {/* LG Bento Cell (Large/Primary) */}
+                <motion.div
+                    variants={{
+                        hidden: { opacity: 0, scale: 0.98 },
+                        show: { opacity: 1, scale: 1 }
+                    }}
+                    className="lg:col-span-7 bg-[#0a0e14] border border-white/5 rounded-[2rem] p-6 md:p-10 relative overflow-hidden group/lg ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col justify-between items-center text-center transition-all duration-700 hover:border-rose-500/40"
+                >
+                    {/* Intensified Luminous LG Backdrop */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(211,18,69,0.12)_0%,transparent_60%)] opacity-0 group-hover/lg:opacity-100 transition-opacity duration-1000"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(211,18,69,0.06)_0%,transparent_50%)] opacity-30 group-hover/lg:opacity-100 transition-opacity duration-1000"></div>
+
+                    {/* LG Industrial Accent */}
+                    <div className="absolute top-0 left-0 w-24 h-[1.5px] bg-gradient-to-r from-rose-600 to-transparent opacity-30 group-hover/lg:w-48 group-hover/lg:opacity-100 transition-all duration-1000"></div>
+
+                    <div className="relative z-10 w-full flex flex-col items-center">
+                        <div className="flex items-center justify-between w-full mb-10">
+                            <div className="relative mb-2 transition-transform duration-700 group-hover/lg:scale-110">
+                                <span className="text-rose-500 font-sans font-black tracking-tighter text-6xl drop-shadow-xl">LG</span>
+                            </div>
+                            <span className="px-3 py-1 bg-rose-500/10 border border-rose-500/20 rounded-full text-rose-500 text-[8px] font-header font-black uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(211,18,69,0.1)] group-hover/lg:shadow-[0_0_20px_rgba(211,18,69,0.25)] transition-all">Authorized Dealer</span>
+                        </div>
+                        <h3 className="text-3xl md:text-5xl font-header font-black text-white uppercase leading-[0.9] mb-6 tracking-tighter group-hover/lg:text-rose-50 transition-colors duration-500">
+                            <EditableText contentKey="shop.bento.lg.title" defaultValue="DUAL INVERTER INFRASTRUCTURE" />
+                        </h3>
+                        <p className="text-slate-400 text-sm md:text-lg leading-relaxed max-w-lg mb-10 uppercase tracking-wider [word-spacing:0.1em] opacity-80 group-hover/lg:opacity-100 transition-opacity">
+                            <EditableText contentKey="shop.bento.lg.description" defaultValue="LG'S REVOLUTIONARY DUAL INVERTER COMPRESSOR™ ELIMINATES THE NOISY STOP-AND-START CYCLE, SAVING UP TO 40% MORE ENERGY." />
+                        </p>
+                        <ul className="flex flex-wrap justify-center gap-4 w-full max-w-2xl">
+                            <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-rose-500/40 hover:bg-rose-500/[0.03] transition-all duration-500 group/item">
+                                <div className="p-2.5 bg-rose-500/10 rounded-lg text-rose-500 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(211,18,69,0.3)] transition-all">
+                                    <span className="material-symbols-outlined text-xl">volume_off</span>
+                                </div>
+                                <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
+                                    <EditableText contentKey="shop.bento.lg.feature1" defaultValue="LODECIBEL™ SILENT MODE" />
+                                </span>
+                            </li>
+                            <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-rose-500/40 hover:bg-rose-500/[0.03] transition-all duration-500 group/item">
+                                <div className="p-2.5 bg-rose-500/10 rounded-lg text-rose-500 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(211,18,69,0.3)] transition-all">
+                                    <span className="material-symbols-outlined text-xl">wifi</span>
+                                </div>
+                                <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
+                                    <EditableText contentKey="shop.bento.lg.feature2" defaultValue="THINQ® SMART CONTROL" />
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <Link href="/shop?brand=LG" className="mt-10 w-full md:w-fit px-10 h-14 bg-white/5 hover:bg-rose-600 border border-white/10 hover:border-rose-500 rounded-xl flex items-center justify-center gap-3 text-white font-header font-black uppercase tracking-[0.4em] text-[10px] transition-all duration-500 hover:shadow-[0_0_30px_rgba(211,18,69,0.25)] active:scale-95 relative overflow-hidden group/btn">
+                        <span className="relative z-10">Explore LG Range</span>
+                        <span className="material-symbols-outlined text-xs relative z-10 group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+                    </Link>
+                </motion.div>
+
+                {/* GE Bento Cell (Secondary/Detailed) */}
+                <motion.div
+                    variants={{
+                        hidden: { opacity: 0, scale: 0.98 },
+                        show: { opacity: 1, scale: 1 }
+                    }}
+                    className="lg:col-span-5 bg-[#0a0e14] border border-white/5 rounded-[2rem] p-6 md:p-10 relative overflow-hidden group/ge ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col items-center text-center transition-all duration-700 hover:border-blue-500/40"
+                >
+                    {/* Intensified Luminous GE Backdrop */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,94,184,0.12)_0%,transparent_60%)] opacity-0 group-hover/ge:opacity-100 transition-opacity duration-1000"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,94,184,0.06)_0%,transparent_50%)] opacity-30 group-hover/ge:opacity-100 transition-opacity duration-1000"></div>
+
+                    {/* GE Industrial Accent */}
+                    <div className="absolute top-0 right-0 w-24 h-[1.5px] bg-gradient-to-l from-blue-600 to-transparent opacity-30 group-hover/ge:w-48 group-hover/ge:opacity-100 transition-all duration-1000"></div>
+
+                    <div className="relative z-10 flex flex-col items-center h-full w-full">
+                        <div className="flex items-center justify-between w-full mb-10">
+                            <div className="relative mb-2 transition-transform duration-700 group-hover/ge:scale-110">
+                                <span className="text-blue-400 font-serif font-bold tracking-wide text-3xl drop-shadow-xl">GE APPLIANCES</span>
+                            </div>
+                            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-[8px] font-header font-black uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,94,184,0.1)] group-hover/ge:shadow-[0_0_20px_rgba(0,94,184,0.25)] transition-all">Island Verified</span>
+                        </div>
+                        <h3 className="text-2xl md:text-4xl font-header font-black text-white uppercase leading-[0.9] mb-6 tracking-tighter group-hover/ge:text-blue-50 transition-colors duration-500">
+                            <EditableText contentKey="shop.bento.ge.title" defaultValue="INDUSTRIAL COMMAND SUITE" />
+                        </h3>
+                        <p className="text-slate-400 text-xs md:text-base leading-relaxed mb-10 uppercase tracking-wider opacity-80 max-w-sm group-hover/ge:opacity-100 transition-opacity">
+                            <EditableText contentKey="shop.bento.ge.description" defaultValue="ENGINEERED FOR STEADY-STATE PERFORMANCE IN HIGH-SALINITY MARITIME ENVIRONMENTS. PRECISION BUILT FOR HAWAII REGIONS." />
+                        </p>
+                        <ul className="flex flex-wrap justify-center gap-4 w-full max-w-2xl">
+                            <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/40 hover:bg-blue-500/[0.03] transition-all duration-500 group/item">
+                                <div className="p-2.5 bg-blue-500/10 rounded-lg text-blue-400 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(0,94,184,0.3)] transition-all">
+                                    <span className="material-symbols-outlined text-xl">dark_mode</span>
+                                </div>
+                                <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
+                                    <EditableText contentKey="shop.bento.ge.feature1" defaultValue="NIGHT MODE DIMMING" />
+                                </span>
+                            </li>
+                            <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/40 hover:bg-blue-500/[0.03] transition-all duration-500 group/item">
+                                <div className="p-2.5 bg-blue-500/10 rounded-lg text-blue-400 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(0,94,184,0.3)] transition-all">
+                                    <span className="material-symbols-outlined text-xl">install_desktop</span>
+                                </div>
+                                <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
+                                    <EditableText contentKey="shop.bento.ge.feature2" defaultValue="EZ MOUNT CALIBRATION" />
+                                </span>
+                            </li>
+                        </ul>
+                        <Link href="/shop?brand=GE" className="mt-10 w-full md:w-fit px-10 h-14 bg-white/5 hover:bg-blue-700 border border-white/10 hover:border-blue-600 rounded-xl flex items-center justify-center gap-3 text-white font-header font-black uppercase tracking-[0.4em] text-[10px] transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,94,184,0.25)] active:scale-95 relative overflow-hidden group/btn">
+                            <span className="relative z-10">Shop GE Units</span>
+                            <span className="material-symbols-outlined text-xs relative z-10 group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+                        </Link>
+                    </div>
+                </motion.div>
+            </motion.div>
+        </section>
+    );
+}
+
+function SizingGuideSection() {
+    const sizingData = [
+        {
+            sq: "100 - 200",
+            btu: "6,000 - 8,000",
+            app: "Small Bedroom / Office",
+            models: [
+                { name: "LW6023IVSM", link: "#dual_inverter" },
+                { name: "LW8022IVSM", link: "#dual_inverter" },
+                { name: "AJCQ08AWJ", link: "#ge" }
+            ]
+        },
+        {
+            sq: "200 - 250",
+            btu: "10,000 - 12,000",
+            app: "Master / Studio",
+            models: [
+                { name: "LW1022IVSM", link: "#dual_inverter" },
+                { name: "LW1222IVSM", link: "#dual_inverter" },
+                { name: "AJCQ10AWJ", link: "#ge" },
+                { name: "AJCQ12AWJ", link: "#ge" }
+            ]
+        },
+        {
+            sq: "250 - 350",
+            btu: "14,000 - 15,000",
+            app: "Living / Large Master",
+            models: [
+                { name: "LW1522IVSM", link: "#dual_inverter" }
+            ]
+        },
+        {
+            sq: "400+",
+            btu: "18,000 - 24,000",
+            app: "Whole Floor / Large Open Space",
+            models: [
+                { name: "LW1822IVSM", link: "#dual_inverter" },
+                { name: "LW2422IVSM", link: "#dual_inverter" }
+            ]
+        },
+    ];
+
+    return (
+        <section id="sizing-guide" className="scroll-mt-20 px-4">
+            <div className="text-center mb-12 space-y-4">
+                <div className="inline-block px-5 py-2 bg-white/5 rounded-md border border-white/10 text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.5em] text-primary mb-4 shadow-[0_0_20px_rgba(0,174,239,0.1)]">
+                    <EditableText contentKey="shop.guide.subtitle" />
+                </div>
+                <h2 className="text-4xl md:text-5xl font-header font-black text-white mb-6 uppercase tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                    <EditableText contentKey="shop.guide.title" />
+                </h2>
+                <div className="text-slate-400 max-w-4xl mx-auto text-sm md:text-base leading-relaxed font-medium opacity-80 uppercase tracking-widest [word-spacing:0.12em]">
+                    <BacklinkedText narrativeKey="sizing_guide" />
+                </div>
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="!hidden md:!block overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-charcoal relative">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-cyan-400 to-primary opacity-80"></div>
+                <table className="w-full text-left border-collapse">
+                    <thead>
+                        <tr className="bg-white/[0.03] border-b border-white/10">
+                            <th className="p-6 md:p-8 text-xs font-bold text-slate-400 uppercase tracking-widest w-1/4">Coverage Area</th>
+                            <th className="p-6 md:p-8 text-xs font-bold text-primary uppercase tracking-widest w-1/4">Recommended BTU</th>
+                            <th className="p-6 md:p-8 text-xs font-bold text-slate-400 uppercase tracking-widest">Recommended Units</th>
+                            <th className="p-6 md:p-8 text-xs font-bold text-slate-400 uppercase tracking-widest hidden lg:table-cell">Ideal Application</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5 bg-background-dark/50">
+                        {sizingData.map((row, i) => (
+                            <tr key={i} className="hover:bg-primary/[0.03] transition-colors group">
+                                <td className="p-6 md:p-8 text-white font-black group-hover:text-primary transition-colors border-l-2 border-transparent group-hover:border-primary/50">{row.sq} sq. ft.</td>
+                                <td className="p-6 md:p-8">
+                                    <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-header font-bold text-lg rounded md:text-xl border border-primary/20 group-hover:bg-primary group-hover:text-white transition-all shadow-[0_0_15px_rgba(0,174,239,0.15)] group-hover:shadow-[0_0_25px_rgba(0,174,239,0.5)] group-hover:scale-105 transform">
+                                        {row.btu}
+                                    </span>
+                                </td>
+                                <td className="p-6 md:p-8">
+                                    <div className="flex flex-wrap gap-2">
+                                        {sizingData[i].models.map((m, idx) => (
+                                            <Link
+                                                key={idx}
+                                                href={m.link}
+                                                className="px-3 py-1.5 bg-white/[0.03] border border-white/10 rounded-md text-[9px] font-black text-slate-400 hover:text-white hover:border-primary/50 hover:bg-primary/20 transition-all uppercase tracking-widest flex items-center gap-2 shadow-sm hover:shadow-[0_0_15px_rgba(0,174,239,0.2)]"
+                                            >
+                                                <span className="w-1 h-1 rounded-full bg-primary/40 group-hover:bg-primary transition-colors"></span>
+                                                {m.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </td>
+                                <td className="p-6 md:p-8 text-slate-400 text-xs hidden lg:table-cell font-bold uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-all">{row.app}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="block md:hidden space-y-4">
+                {sizingData.map((row, i) => (
+                    <div key={i} className="bg-white/[0.03] border border-white/10 rounded-xl p-6 flex flex-col gap-4 relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-40"></div>
+                        <div className="flex justify-between items-start">
+                            <div>
+                                <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1">Coverage Area</p>
+                                <h3 className="text-xl font-header font-black text-white uppercase">{row.sq} sq. ft.</h3>
+                            </div>
+                            <div className="text-right">
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Capacity</p>
+                                <span className="text-lg font-header font-black text-white">{row.btu} <span className="text-[10px] text-primary">BTU</span></span>
+                            </div>
+                        </div>
+                        <div>
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2">Ideal Application</p>
+                            <p className="text-slate-400 text-sm font-medium">{row.app}</p>
+                        </div>
+                        <div className="pt-4 border-t border-white/5 bg-white/[0.01] -mx-6 -mb-6 p-6">
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">Recommended Models</p>
+                            <div className="flex flex-wrap gap-2">
+                                {sizingData[i].models.map((m, idx) => (
+                                    <Link
+                                        key={idx}
+                                        href={m.link}
+                                        className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-[10px] font-black text-white hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center gap-3 flex-1 min-w-[140px] shadow-lg active:scale-95"
+                                    >
+                                        <span className="material-symbols-outlined text-xs text-primary">ac_unit</span>
+                                        {m.name}
+                                        <span className="material-symbols-outlined text-[10px] text-slate-600">north_east</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Advanced Technical Sizing Variables */}
+            <motion.div
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                variants={{
+                    hidden: { opacity: 0 },
+                    show: {
+                        opacity: 1,
+                        transition: { staggerChildren: 0.15 }
+                    }
+                }}
+                className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto"
+            >
+                {[
+                    {
+                        title: "Humidity Load Factor",
+                        icon: "humidity_mid",
+                        desc: <>If the room has <span className="text-primary/90 font-bold">high ceilings (over 8ft)</span> or lacks significant insulation, we recommend <span className="text-white font-bold italic underline decoration-primary/30 underline-offset-4">"sizing up"</span> within these conservative ranges to ensure the unit doesn't run at 100% capacity continuously.</>
+                    },
+                    {
+                        title: "Solar Exposure",
+                        icon: "wb_sunny",
+                        desc: <>For rooms facing west with <span className="text-primary/90 font-bold">heavy afternoon sun</span>, add an <span className="text-primary font-black scale-105 inline-block mx-1">additional 10%</span> to your calculated square footage before selecting a BTU tier.</>
+                    },
+                    {
+                        title: "Inverter Advantage",
+                        icon: "speed",
+                        desc: <>Units in the <span className="text-white font-bold italic">LG DUAL Inverter series</span> can modulate their speed, making them <span className="text-primary/90 font-bold">more forgiving</span> if you slightly "oversize" for a space compared to a standard single-speed unit.</>
+                    }
+                ].map((factor, idx) => (
                     <motion.div
-                        key={product.id}
+                        key={idx}
                         variants={{
                             hidden: { opacity: 0, y: 20 },
                             show: { opacity: 1, y: 0 }
                         }}
-                        className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[calc(25%-1.5rem)] max-w-[360px]"
+                        className="bg-[#0f172a]/40 border border-white/10 rounded-2xl p-7 hover:border-primary/50 hover:bg-[#1e293b]/40 transition-all duration-500 group/factor shadow-lg hover:shadow-[0_0_40px_rgba(0,174,239,0.1)] relative overflow-hidden h-full"
                     >
-                        <ProductCard product={product} onQuickAdd={() => onQuickAdd(product)} rebate={rebate} />
+                        {/* Industrial Accent Line */}
+                        <div className="absolute top-0 left-0 w-12 h-[2px] bg-gradient-to-r from-primary to-transparent opacity-40 group-hover/factor:opacity-100 group-hover/factor:w-24 transition-all duration-700"></div>
+
+                        <div className="flex items-center gap-4 mb-5 relative z-10">
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-0 group-hover/factor:scale-150 transition-transform duration-700"></div>
+                                <span className="material-symbols-outlined text-primary text-3xl group-hover/factor:scale-110 transition-transform duration-500 relative z-10">{factor.icon}</span>
+                            </div>
+                            <h4 className="text-[11px] font-black uppercase tracking-[0.25em] text-white/90 group-hover/factor:text-primary transition-colors duration-500 text-shadow-sm">{factor.title}</h4>
+                        </div>
+                        <p className="text-slate-400 text-[13px] leading-relaxed font-medium relative z-10">
+                            {factor.desc}
+                        </p>
+
+                        {/* Mesh decoration subtle backdrop */}
+                        <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary/5 rounded-full blur-3xl group-hover/factor:bg-primary/10 transition-colors duration-700"></div>
                     </motion.div>
                 ))}
             </motion.div>
-        );
-    }
+        </section>
+    );
+}
 
-    function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuickAdd: () => void; rebate?: string }) {
-        const router = useRouter();
+function FAQSection() {
+    return (
+        <section className="mb-20 max-w-4xl mx-auto">
+            <div className="flex flex-col items-center justify-center gap-6 mb-12 text-center">
+                <span className="text-primary font-header font-black uppercase tracking-[0.6em] text-[10px] md:text-[11px] block opacity-70">
+                    Knowledge Infrastructure
+                </span>
+                <h2 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tight drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                    <EditableText contentKey="shop.faq.title" />
+                </h2>
+                <div className="h-px w-24 bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
+            </div>
 
+            <div className="grid gap-4">
+                {[
+                    { q: "Do you offer installation for Window ACs?", a: "Unless specified, Window ACs are cash-and-carry. However, we offer professional installation services for an additional fee, especially for second-story windows or custom mounting requirements." },
+                    { q: "What is your return policy?", a: "Unopened units can be returned within 30 days. Defective units are covered under the manufacturer&apos;s warranty, which we service directly here in Waipahu as an authorized center." },
+                    { q: "How do I know if I have a 115V or 230V outlet?", a: "Standard household plugs are 115V (parallel prongs). 230V outlets are typically larger with horizontal or T-shaped prongs and are required for units 18,000 BTU and above. Check your wall socket before buying!" },
+                ].map((faq, i) => (
+                    <details key={i} className="group bg-charcoal border border-white/5 rounded-2xl overflow-hidden open:bg-white/[0.02] open:border-primary/40 open:shadow-[0_0_30px_rgba(0,174,239,0.05)] transition-all duration-300 hover:border-white/10">
+                        <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-slate-300 hover:text-white transition-colors select-none text-sm md:text-base uppercase tracking-wide">
+                            {faq.q}
+                            <span className="material-symbols-outlined text-slate-500 group-open:rotate-180 group-open:text-primary transition-all duration-300 bg-white/5 rounded-full p-2 group-hover:bg-white/10">expand_more</span>
+                        </summary>
+                        <div className="px-6 pb-8 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-6 animate-in fade-in slide-in-from-top-2">
+                            {faq.a}
+                        </div>
+                    </details>
+                ))}
+            </div>
+        </section>
+    );
+}
+
+function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; onQuickAdd: (p: Product) => void; rebate?: string }) {
+    if (products.length === 0) {
         return (
-            <div
-                onClick={() => router.push(`/shop/${product.id}`)}
-                className="industrial-card group flex flex-col bg-[#0f131a] border border-white/5 rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,174,239,0.15)] transition-all duration-700 relative h-full ring-1 ring-white/5 active:scale-[0.98] cursor-pointer"
-            >
-                {/* Image Area with Luminous Hover & Immersive Blending */}
-                <div className="w-full aspect-[16/10] bg-[#05070a] relative overflow-hidden transition-all duration-700 border-b border-white/5 p-4 flex items-center justify-center">
-                    {/* Immersive radial depth */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,174,239,0.15)_0%,transparent_75%)] opacity-60 group-hover:opacity-100 transition-all duration-700"></div>
-                    {/* Floor shadow/reflection simulation */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0f131a]/95 to-transparent z-10"></div>
-                    <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                    <div className="absolute inset-0 bg-primary/10 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-0"></div>
-
-                    {rebate && (
-                        <div className="absolute top-0 left-0 z-20 bg-emerald-500 text-white font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-br-2xl uppercase tracking-[0.2em] shadow-[inset_-2px_-2px_10px_rgba(0,0,0,0.2)] border-b border-r border-emerald-400/30">
-                            {rebate}
-                        </div>
-                    )}
-
-                    {/* Stock Badge */}
-                    {/* Stock Badge - Seamless Integration */}
-                    <div className="absolute top-0 right-0 z-20">
-                        {product.stock > 0 ? (
-                            <div className="bg-emerald-500/10 text-emerald-500 border-b border-l border-emerald-500/20 font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-bl-2xl uppercase tracking-[0.2em] backdrop-blur-md">
-                                In Stock
-                            </div>
-                        ) : (
-                            <div className="bg-red-500/10 text-red-500 border-b border-l border-red-500/20 font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-bl-2xl uppercase tracking-[0.2em] backdrop-blur-md">
-                                Out of Stock
-                            </div>
-                        )}
-                    </div>
-
-                    {(() => {
-                        const displayImage = product.image_url || getProductImages(product.id)?.[0];
-                        return displayImage ? (
-                            <Image
-                                src={displayImage}
-                                alt={product.name}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 33vw"
-                                className="object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative z-10 p-4 md:p-6"
-                                unoptimized={!!product.image_url}
-                            />
-                        ) : (
-                            <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-slate-700 relative z-10">
-                                <span className="material-symbols-outlined text-6xl">ac_unit</span>
-                                <span className="text-[8px] font-black tracking-[0.3em] uppercase opacity-40">Industrial Unit [STAGED]</span>
-                            </div>
-                        );
-                    })()}
-                </div>
-
-                {/* Identity & Specs (Centered Axis) */}
-                <div className="p-3 md:p-5 flex flex-col flex-grow items-center text-center relative">
-                    <div className="mb-3 w-full flex flex-col items-center">
-                        <div className="text-primary font-header font-black text-[8px] md:text-[9px] uppercase tracking-[0.4em] mb-1.5 flex items-center gap-2 opacity-80 group-hover:opacity-100 transition-opacity justify-center">
-                            <span className="w-2 h-px bg-primary/30 group-hover:w-4 transition-all"></span>
-                            {product.category || 'AC UNIT'}
-                            <span className="w-2 h-px bg-primary/30 group-hover:w-4 transition-all"></span>
-                        </div>
-                        <h3 className="text-white text-lg md:text-xl font-header font-black leading-tight group-hover:text-primary transition-colors duration-500 uppercase tracking-tight">
-                            {product.name}
-                        </h3>
-                    </div>
-
-                    {/* Technical Specs (2x2 Grid Layout) */}
-                    <div className="grid grid-cols-2 gap-1.5 w-full mb-4">
-                        <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                            <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Cooling</span>
-                            <span className="text-white text-[10px] font-bold font-header">{product.btu ? `${product.btu.toLocaleString()} BTU` : 'N/A'}</span>
-                        </div>
-                        <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                            <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Voltage</span>
-                            <span className="text-white text-[10px] font-bold font-header">{product.voltage || '115V'}</span>
-                        </div>
-                        <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                            <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Noise Level</span>
-                            <span className="text-white text-[10px] font-bold font-header lowercase">{product.noise_level || 'N/A'}</span>
-                        </div>
-                        <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                            <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Dehumidification</span>
-                            <span className="text-white text-[10px] font-bold font-header">{product.dehumidification || 'N/A'}</span>
-                        </div>
-                    </div>
-
-                    {/* Transaction Hub (Centered) */}
-                    <div className="mt-auto pt-3 border-t border-white/5 flex flex-col items-center gap-3 w-full">
-                        <div className="flex items-center gap-2 justify-center">
-                            <div className="text-red-500/60 text-[9px] font-black uppercase tracking-widest line-through decoration-red-500/30 opacity-80">
-                                ${(product.price * 1.15).toLocaleString()}
-                            </div>
-                            <div className="text-xl md:text-2xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors">
-                                ${product.price.toLocaleString()}
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-1.5 w-full">
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    router.push(`/shop/${product.id}`);
-                                }}
-                                className="bg-red-500/10 hover:bg-red-500/20 text-red-500 font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-widest transition-all border border-red-500/20 hover:border-red-500/40 active:scale-95 flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]"
-                            >
-                                <span className="material-symbols-outlined text-[12px]">visibility</span>
-                                SPECS
-                            </button>
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    onQuickAdd();
-                                }}
-                                className="bg-primary text-white font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-[0.2em] transition-all hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] active:scale-95 flex items-center justify-center gap-2"
-                            >
-                                <span className="material-symbols-outlined text-[12px]">add_shopping_cart</span>
-                                SECURE
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div className="py-12 text-center">
+                <p className="text-slate-600 text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Section Updating / No Units Matching Filter</p>
+                <div className="h-px w-12 bg-white/5 mx-auto mt-4"></div>
             </div>
         );
     }
+
+    return (
+        <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{
+                hidden: { opacity: 0 },
+                show: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.1 }
+                }
+            }}
+            className="flex flex-wrap justify-center gap-4 md:gap-5"
+        >
+            {products.map(product => (
+                <motion.div
+                    key={product.id}
+                    variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        show: { opacity: 1, y: 0 }
+                    }}
+                    className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[calc(25%-1.5rem)] max-w-[360px]"
+                >
+                    <ProductCard product={product} onQuickAdd={() => onQuickAdd(product)} rebate={rebate} />
+                </motion.div>
+            ))}
+        </motion.div>
+    );
+}
+
+function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuickAdd: () => void; rebate?: string }) {
+    const router = useRouter();
+
+    return (
+        <div
+            onClick={() => router.push(`/shop/${product.id}`)}
+            className="industrial-card group flex flex-col bg-[#0f131a] border border-white/5 rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,174,239,0.15)] transition-all duration-700 relative h-full ring-1 ring-white/5 active:scale-[0.98] cursor-pointer"
+        >
+            {/* Image Area with Luminous Hover & Immersive Blending */}
+            <div className="w-full aspect-[16/10] bg-[#05070a] relative overflow-hidden transition-all duration-700 border-b border-white/5 p-4 flex items-center justify-center">
+                {/* Immersive radial depth */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,174,239,0.15)_0%,transparent_75%)] opacity-60 group-hover:opacity-100 transition-all duration-700"></div>
+                {/* Floor shadow/reflection simulation */}
+                <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0f131a]/95 to-transparent z-10"></div>
+                <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div className="absolute inset-0 bg-primary/10 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-0"></div>
+
+                {rebate && (
+                    <div className="absolute top-0 left-0 z-20 bg-emerald-500 text-white font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-br-2xl uppercase tracking-[0.2em] shadow-[inset_-2px_-2px_10px_rgba(0,0,0,0.2)] border-b border-r border-emerald-400/30">
+                        {rebate}
+                    </div>
+                )}
+
+                {/* Stock Badge */}
+                {/* Stock Badge - Seamless Integration */}
+                <div className="absolute top-0 right-0 z-20">
+                    {product.stock > 0 ? (
+                        <div className="bg-emerald-500/10 text-emerald-500 border-b border-l border-emerald-500/20 font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-bl-2xl uppercase tracking-[0.2em] backdrop-blur-md">
+                            In Stock
+                        </div>
+                    ) : (
+                        <div className="bg-red-500/10 text-red-500 border-b border-l border-red-500/20 font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-bl-2xl uppercase tracking-[0.2em] backdrop-blur-md">
+                            Out of Stock
+                        </div>
+                    )}
+                </div>
+
+                {(() => {
+                    const displayImage = product.image_url || getProductImages(product.id)?.[0];
+                    return displayImage ? (
+                        <Image
+                            src={displayImage}
+                            alt={product.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            className="object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative z-10 p-4 md:p-6"
+                            unoptimized={!!product.image_url}
+                        />
+                    ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-slate-700 relative z-10">
+                            <span className="material-symbols-outlined text-6xl">ac_unit</span>
+                            <span className="text-[8px] font-black tracking-[0.3em] uppercase opacity-40">Industrial Unit [STAGED]</span>
+                        </div>
+                    );
+                })()}
+            </div>
+
+            {/* Identity & Specs (Centered Axis) */}
+            <div className="p-3 md:p-5 flex flex-col flex-grow items-center text-center relative">
+                <div className="mb-3 w-full flex flex-col items-center">
+                    <div className="text-primary font-header font-black text-[8px] md:text-[9px] uppercase tracking-[0.4em] mb-1.5 flex items-center gap-2 opacity-80 group-hover:opacity-100 transition-opacity justify-center">
+                        <span className="w-2 h-px bg-primary/30 group-hover:w-4 transition-all"></span>
+                        {product.category || 'AC UNIT'}
+                        <span className="w-2 h-px bg-primary/30 group-hover:w-4 transition-all"></span>
+                    </div>
+                    <h3 className="text-white text-lg md:text-xl font-header font-black leading-tight group-hover:text-primary transition-colors duration-500 uppercase tracking-tight">
+                        {product.name}
+                    </h3>
+                </div>
+
+                {/* Technical Specs (2x2 Grid Layout) */}
+                <div className="grid grid-cols-2 gap-1.5 w-full mb-4">
+                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
+                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Cooling</span>
+                        <span className="text-white text-[10px] font-bold font-header">{product.btu ? `${product.btu.toLocaleString()} BTU` : 'N/A'}</span>
+                    </div>
+                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
+                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Voltage</span>
+                        <span className="text-white text-[10px] font-bold font-header">{product.voltage || '115V'}</span>
+                    </div>
+                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
+                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Noise Level</span>
+                        <span className="text-white text-[10px] font-bold font-header lowercase">{product.noise_level || 'N/A'}</span>
+                    </div>
+                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
+                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Dehumidification</span>
+                        <span className="text-white text-[10px] font-bold font-header">{product.dehumidification || 'N/A'}</span>
+                    </div>
+                </div>
+
+                {/* Transaction Hub (Centered) */}
+                <div className="mt-auto pt-3 border-t border-white/5 flex flex-col items-center gap-3 w-full">
+                    <div className="flex items-center gap-2 justify-center">
+                        <div className="text-red-500/60 text-[9px] font-black uppercase tracking-widest line-through decoration-red-500/30 opacity-80">
+                            ${(product.price * 1.15).toLocaleString()}
+                        </div>
+                        <div className="text-xl md:text-2xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors">
+                            ${product.price.toLocaleString()}
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-1.5 w-full">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                router.push(`/shop/${product.id}`);
+                            }}
+                            className="bg-red-500/10 hover:bg-red-500/20 text-red-500 font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-widest transition-all border border-red-500/20 hover:border-red-500/40 active:scale-95 flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]"
+                        >
+                            <span className="material-symbols-outlined text-[12px]">visibility</span>
+                            SPECS
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                onQuickAdd();
+                            }}
+                            className="bg-primary text-white font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-[0.2em] transition-all hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] active:scale-95 flex items-center justify-center gap-2"
+                        >
+                            <span className="material-symbols-outlined text-[12px]">add_shopping_cart</span>
+                            SECURE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+
