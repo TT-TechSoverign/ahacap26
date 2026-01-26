@@ -120,10 +120,10 @@ function CheckoutContent() {
                     </div>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8">
 
                     {/* LEFT COLUMN - FORMS (Bento Grid) */}
-                    <div className="lg:col-span-8 space-y-6">
+                    <div className="contents lg:block lg:col-span-8 lg:space-y-6">
 
 
 
@@ -132,7 +132,7 @@ function CheckoutContent() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="bg-[#0f131a] border border-cyan-500/20 bg-cyan-900/5 p-8 rounded-2xl shadow-xl relative overflow-hidden group ring-1 ring-white/5"
+                            className="bg-[#0f131a] border border-cyan-500/20 bg-cyan-900/5 p-8 rounded-2xl shadow-xl relative overflow-hidden group ring-1 ring-white/5 order-1 lg:order-none"
                         >
                             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 group-hover:scale-110">
                                 <span className="material-symbols-outlined text-9xl text-cyan-400">local_shipping</span>
@@ -240,7 +240,7 @@ function CheckoutContent() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 }}
-                            className={`bg-[#0f131a] border border-emerald-500/20 bg-emerald-900/5 p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all duration-700 ring-1 ring-white/5 ${step === 'payment' ? 'ring-2 ring-emerald-500 border-emerald-500/50' : 'opacity-40 grayscale'}`}
+                            className={`bg-[#0f131a] border border-emerald-500/20 bg-emerald-900/5 p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all duration-700 ring-1 ring-white/5 order-3 lg:order-none ${step === 'payment' ? 'ring-2 ring-emerald-500 border-emerald-500/50' : 'opacity-40 grayscale'}`}
                         >
                             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 group-hover:scale-110">
                                 <span className="material-symbols-outlined text-9xl text-emerald-500">payments</span>
@@ -277,7 +277,7 @@ function CheckoutContent() {
                     </div>
 
                     {/* RIGHT COLUMN - SUMMARY (Sticky) */}
-                    <div className="lg:col-span-4">
+                    <div className="lg:col-span-4 order-2 lg:order-none">
                         <div className="sticky top-28 space-y-6">
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
