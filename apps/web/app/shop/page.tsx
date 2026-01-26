@@ -161,7 +161,7 @@ export default function ShopPage() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
+                const apiUrl = '/api/v1';
 
                 let url = `${apiUrl}/products`;
                 const params = new URLSearchParams();

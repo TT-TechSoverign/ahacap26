@@ -80,7 +80,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
                 shipping_method: "PICKUP_AIEA"
             };
 
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
+            const apiUrl = '/api/v1';
             console.log("🛒 Submitting Order:", { apiUrl, orderPayload });
 
             const res = await fetch(`${apiUrl}/orders`, {
