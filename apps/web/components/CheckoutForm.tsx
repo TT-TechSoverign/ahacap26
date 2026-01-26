@@ -45,7 +45,7 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
             <div className="text-center space-y-2 mb-8">
                 <p className="text-slate-400 text-xs uppercase tracking-widest font-bold">Total Due Now</p>
                 <div className="text-5xl font-header font-black text-white tracking-tighter shadow-cyan-glow">
-                    ${totalAmount.toLocaleString()}
+                    ${totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </div>
                 <p className="text-[10px] text-slate-500 font-mono uppercase">
                     Secure 256-bit Encrypted Connection
