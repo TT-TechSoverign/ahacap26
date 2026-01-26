@@ -61,13 +61,14 @@ export async function POST(req: Request) {
             mode: 'payment',
             payment_method_types: ['card'], // Strict Card Only
             line_items,
-            customer_email: customerEmail, // Pre-fill email in Stripe
+            line_items,
             // FORCE USD ONLY - Disable Dynamic Currency Conversion
             payment_method_options: {
                 card: {
                     request_three_d_secure: 'automatic',
                 },
             },
+            ...(customerEmail && { customer_email: customerEmail }), // Only pre-fill if provided
             // CRITICAL: Pass metadata to PaymentIntent for Backend Webhook (Email Native)
             payment_intent_data: {
                 metadata: {

@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 interface CheckoutFormProps {
     totalAmount: number;
     items: any[];
-    customerEmail: string;
+    customerEmail?: string;
     fulfillmentMode: 'pickup' | 'delivery';
     onSuccess: () => void;
 }
