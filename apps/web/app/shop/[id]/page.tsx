@@ -33,7 +33,7 @@ export default function ProductDetailPage() {
         async function fetchProduct() {
             if (!id) return;
             try {
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
+                const apiUrl = '/api/v1';
                 const res = await fetch(`${apiUrl}/products/${id}`);
 
                 if (!res.ok) throw new Error('Product not found');

@@ -817,8 +817,8 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const url = product
-            ? `${process.env.NEXT_PUBLIC_API_URL || '/api/v1'}/products/${product.id}`
-            : `${process.env.NEXT_PUBLIC_API_URL || '/api/v1'}/products`;
+            ? `/api/v1/products/${product.id}`
+            : `/api/v1/products`;
 
         const method = product ? 'PUT' : 'POST';
 
