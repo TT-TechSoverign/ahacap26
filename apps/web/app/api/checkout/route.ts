@@ -43,6 +43,9 @@ export async function POST(req: Request) {
             });
         }
 
+        // Determine origin with fallbacks
+        const origin = process.env.NEXT_PUBLIC_URL || req.headers.get('origin') || 'https://staging.affordablehome-ac.com';
+
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
             automatic_payment_methods: { enabled: true },
@@ -54,8 +57,8 @@ export async function POST(req: Request) {
                     request_three_d_secure: 'automatic',
                 },
             },
-            success_url: `${req.headers.get('origin')}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.get('origin')}/shop?canceled=true`,
+            success_url: `${origin}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${origin}/shop?canceled=true`,
             shipping_address_collection: {
                 allowed_countries: ['US'], // Restrict to US (Hawaii focus)
             },
