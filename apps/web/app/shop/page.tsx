@@ -1234,14 +1234,14 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                 )}
 
                 {/* Stock Badge */}
-                {/* Stock Badge - Seamless Integration */}
-                <div className="absolute top-0 right-0 z-20">
+                {/* Stock Badge - Seamless Integration (Moved to Bottom Right to avoid overlap) */}
+                <div className="absolute bottom-0 right-0 z-20">
                     {product.stock > 0 ? (
-                        <div className="bg-emerald-500/10 text-emerald-500 border-b border-l border-emerald-500/20 font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-bl-2xl uppercase tracking-[0.2em] backdrop-blur-md">
+                        <div className="bg-emerald-500/10 text-emerald-500 border-t border-l border-emerald-500/20 font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-tl-2xl uppercase tracking-[0.2em] backdrop-blur-md">
                             In Stock
                         </div>
                     ) : (
-                        <div className="bg-red-500/10 text-red-500 border-b border-l border-red-500/20 font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-bl-2xl uppercase tracking-[0.2em] backdrop-blur-md">
+                        <div className="bg-red-500/10 text-red-500 border-t border-l border-red-500/20 font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-tl-2xl uppercase tracking-[0.2em] backdrop-blur-md">
                             Out of Stock
                         </div>
                     )}
