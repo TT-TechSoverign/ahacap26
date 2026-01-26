@@ -37,6 +37,7 @@ import models
 from services import email as email_service
 from cache import init_redis, close_redis
 from middleware import LogSanitizerMiddleware, ChaosMiddleware, HeaderMiddleware
+from routers import catalog, payments
 
 # --- LIFESPAN ---
 @asynccontextmanager
@@ -60,6 +61,10 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, 
 app.add_middleware(LogSanitizerMiddleware)
 app.add_middleware(ChaosMiddleware)
 app.add_middleware(HeaderMiddleware)
+
+# --- ROUTERS ---
+app.include_router(catalog.router, prefix="/api/v1/products", tags=["Catalog"])
+app.include_router(payments.router, prefix="/api/v1/payments", tags=["Payments"])
 
 # --- WEBHOOKS ---
 async def process_stripe_event(event: dict):
