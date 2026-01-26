@@ -189,89 +189,80 @@ export default function CartDrawer() {
 
                         {/* Footer / Checkout (Thumb Zone) */}
                         {(items.length > 0) && (
-    const hasIssue = items.some(item => (item.stock || 0) < item.quantity);
-                            const validTotal = items.reduce((acc, item) => {
-                                if ((item.stock || 0) >= item.quantity) {
-                                    return acc + (item.price * item.quantity);
-                                }
-                        return acc;
-                            }, 0);
-
-                        return (
-                        <div className="p-6 border-t border-cyan-500/10 bg-slate-900/80 backdrop-blur-xl space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.4)] z-20 pb-8 md:pb-6">
-                            <div className="space-y-5">
-                                <div className="space-y-1">
-                                    <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-widest">
-                                        <span>Subtotal {hasIssue && '(In-Stock Only)'}</span>
-                                        <span className="font-mono text-slate-500">{items.length} Units</span>
-                                    </div>
-                                    <div className="flex items-end justify-between">
-                                        <span className={`text-3xl font-header font-black tracking-tighter shadow-white-glow ${hasIssue ? 'text-amber-500' : 'text-white'}`}>
-                                            ${validTotal.toLocaleString()}
-                                        </span>
-                                        <span className="text-xs text-cyan-500 font-bold uppercase tracking-wider mb-1">
-                                            Calculated at Refresh
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Progress Bar (Visual Flair) */}
-                                <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div className={`h-full w-[60%] shadow-[0_0_10px_currentColor] transition-colors ${hasIssue ? 'bg-red-500' : 'bg-cyan-500'}`} />
-                                </div>
-
-                                {/* Critical Inventory Warning */}
-                                {hasIssue && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl relative overflow-hidden group"
-                                    >
-                                        <div className="absolute inset-0 bg-red-500/5 animate-pulse"></div>
-                                        <div className="flex items-start gap-3 relative z-10">
-                                            <span className="material-symbols-outlined text-red-500 animate-bounce">report_problem</span>
-                                            <div className="space-y-1">
-                                                <p className="text-red-400 font-black uppercase text-[10px] tracking-[0.2em]">Action Required</p>
-                                                <p className="text-slate-300 text-xs font-bold leading-relaxed">
-                                                    Out-of-stock items detected. Please remove them to proceed.
-                                                </p>
-                                            </div>
+                            <div className="p-6 border-t border-cyan-500/10 bg-slate-900/80 backdrop-blur-xl space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.4)] z-20 pb-8 md:pb-6">
+                                <div className="space-y-5">
+                                    <div className="space-y-1">
+                                        <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-widest">
+                                            <span>Subtotal {hasIssue && '(In-Stock Only)'}</span>
+                                            <span className="font-mono text-slate-500">{items.length} Units</span>
                                         </div>
-                                    </motion.div>
-                                )}
-
-                                {error && (
-                                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs font-bold text-center">
-                                        {error}
+                                        <div className="flex items-end justify-between">
+                                            <span className={`text-3xl font-header font-black tracking-tighter shadow-white-glow ${hasIssue ? 'text-amber-500' : 'text-white'}`}>
+                                                ${validTotal.toLocaleString()}
+                                            </span>
+                                            <span className="text-xs text-cyan-500 font-bold uppercase tracking-wider mb-1">
+                                                Calculated at Refresh
+                                            </span>
+                                        </div>
                                     </div>
-                                )}
 
-                                <button
-                                    onClick={handleCheckout}
-                                    disabled={loading || hasIssue}
-                                    className={`w-full h-16 text-white font-header font-black uppercase tracking-[0.25em] text-sm rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed ${hasIssue ? 'bg-slate-800 cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-primary to-cyan-500 shadow-[0_0_30px_rgba(0,174,239,0.3)]'}`}
-                                >
-                                    {loading ? (
-                                        <span className="material-symbols-outlined animate-spin">progress_activity</span>
-                                    ) : hasIssue ? (
-                                        <>
-                                            <span className="text-slate-500">Inventory Locked</span>
-                                            <span className="material-symbols-outlined text-xl text-slate-600">lock</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span>Secure Checkout</span>
-                                            <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">lock</span>
-                                        </>
+                                    {/* Progress Bar (Visual Flair) */}
+                                    <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                                        <div className={`h-full w-[60%] shadow-[0_0_10px_currentColor] transition-colors ${hasIssue ? 'bg-red-500' : 'bg-cyan-500'}`} />
+                                    </div>
+
+                                    {/* Critical Inventory Warning */}
+                                    {hasIssue && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl relative overflow-hidden group"
+                                        >
+                                            <div className="absolute inset-0 bg-red-500/5 animate-pulse"></div>
+                                            <div className="flex items-start gap-3 relative z-10">
+                                                <span className="material-symbols-outlined text-red-500 animate-bounce">report_problem</span>
+                                                <div className="space-y-1">
+                                                    <p className="text-red-400 font-black uppercase text-[10px] tracking-[0.2em]">Action Required</p>
+                                                    <p className="text-slate-300 text-xs font-bold leading-relaxed">
+                                                        Out-of-stock items detected. Please remove them to proceed.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </motion.div>
                                     )}
-                                </button>
 
-                                <div className="flex items-center justify-center gap-2 text-slate-600">
-                                    <span className="material-symbols-outlined text-sm">lock</span>
-                                    <span className="text-[10px] font-mono uppercase tracking-widest">256-bit TLS Encryption via Stripe</span>
+                                    {error && (
+                                        <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs font-bold text-center">
+                                            {error}
+                                        </div>
+                                    )}
+
+                                    <button
+                                        onClick={handleCheckout}
+                                        disabled={loading || hasIssue}
+                                        className={`w-full h-16 text-white font-header font-black uppercase tracking-[0.25em] text-sm rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed ${hasIssue ? 'bg-slate-800 cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-primary to-cyan-500 shadow-[0_0_30px_rgba(0,174,239,0.3)]'}`}
+                                    >
+                                        {loading ? (
+                                            <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                                        ) : hasIssue ? (
+                                            <>
+                                                <span className="text-slate-500">Inventory Locked</span>
+                                                <span className="material-symbols-outlined text-xl text-slate-600">lock</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span>Secure Checkout</span>
+                                                <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">lock</span>
+                                            </>
+                                        )}
+                                    </button>
+
+                                    <div className="flex items-center justify-center gap-2 text-slate-600">
+                                        <span className="material-symbols-outlined text-sm">lock</span>
+                                        <span className="text-[10px] font-mono uppercase tracking-widest">256-bit TLS Encryption via Stripe</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         )}
                     </motion.div>
                 </div>
