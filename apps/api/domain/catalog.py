@@ -25,7 +25,13 @@ async def get_products_service(
         query = query.where(models.Product.price <= max_price)
 
     result = await db.execute(query.order_by(models.Product.id))
+    result = await db.execute(query.order_by(models.Product.id))
     return result.scalars().all()
+
+async def get_product_by_id_service(db: AsyncSession, product_id: int):
+    query = select(models.Product).where(models.Product.id == product_id)
+    result = await db.execute(query)
+    return result.scalar_one_or_none()
 
 async def create_product_service(db: AsyncSession, product_data: dict):
     new_product = models.Product(**product_data)
