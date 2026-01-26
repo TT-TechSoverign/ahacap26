@@ -326,8 +326,12 @@ async def process_stripe_event(event: dict):
         stripe_pid = intent['id']
         amount_received = intent['amount_received']
         receipt_email = intent.get('receipt_email')
+        
+        # Extract metadata
+        metadata = intent.get('metadata', {})
+        fulfillment_mode = metadata.get('fulfillment_mode', 'pickup')
 
-        print(f"Processing Payment Success: {stripe_pid}")
+        print(f"Processing Payment Success: {stripe_pid} | Mode: {fulfillment_mode}")
 
         async with AsyncSessionLocal() as session:
             try:
@@ -348,7 +352,8 @@ async def process_stripe_event(event: dict):
                         await email_service.send_order_confirmation(
                             target_email,
                             order.id,
-                            order.total_cents
+                            order.total_cents,
+                            fulfillment_mode=fulfillment_mode
                         )
                     else:
                         print("No email found for order confirmation.")

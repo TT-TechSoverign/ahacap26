@@ -7,10 +7,11 @@ interface CheckoutFormProps {
     totalAmount: number;
     items: any[];
     customerEmail: string;
+    fulfillmentMode: 'pickup' | 'delivery';
     onSuccess: () => void;
 }
 
-export default function CheckoutForm({ totalAmount, items, customerEmail, onSuccess }: CheckoutFormProps) {
+export default function CheckoutForm({ totalAmount, items, customerEmail, fulfillmentMode, onSuccess }: CheckoutFormProps) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -23,7 +24,7 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, onSucc
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ items }),
+                body: JSON.stringify({ items, customerEmail, fulfillmentMode }),
             });
 
             const { url, error: apiError } = await response.json();

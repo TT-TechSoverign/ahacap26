@@ -4,7 +4,7 @@ import { Product } from '../../../types/inventory'; // Adjust path if necessary
 
 export async function POST(req: Request) {
     try {
-        const { items } = await req.json();
+        const { items, customerEmail, fulfillmentMode } = await req.json();
 
         if (!items || items.length === 0) {
             return NextResponse.json({ error: 'No items in cart' }, { status: 400 });
@@ -27,14 +27,35 @@ export async function POST(req: Request) {
             quantity: item.quantity,
         }));
 
+        // ADD DELIVERY FEE IF SELECTED
+        if (fulfillmentMode === 'delivery') {
+            line_items.push({
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: 'Oahu Island-Wide Delivery',
+                        description: 'Flat rate delivery to residential zones (excluding North Shore/Waianae/Waikiki/Waimanalo)',
+                        images: ['https://staging.affordablehome-ac.com/delivery-icon.png'], // Optional icon
+                    },
+                    unit_amount: 5000, // $50.00
+                },
+                quantity: 1,
+            });
+        }
+
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
+            automatic_payment_methods: { enabled: true },
             line_items,
-            success_url: `${req.headers.get('origin')}/shop?success=true&session_id={CHECKOUT_SESSION_ID}`,
+            customer_email: customerEmail, // Pre-fill email in Stripe
+            // FORCE USD ONLY - Disable Dynamic Currency Conversion
+            payment_method_options: {
+                card: {
+                    request_three_d_secure: 'automatic',
+                },
+            },
+            success_url: `${req.headers.get('origin')}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.get('origin')}/shop?canceled=true`,
-            // consent_collection: {
-            //     terms_of_service: 'required',
-            // },
             shipping_address_collection: {
                 allowed_countries: ['US'], // Restrict to US (Hawaii focus)
             },
@@ -48,6 +69,7 @@ export async function POST(req: Request) {
             },
             metadata: {
                 source: 'web_checkout',
+                fulfillment_mode: fulfillmentMode,
             },
             billing_address_collection: 'required',
         });
