@@ -28,7 +28,13 @@ function CheckoutContent() {
     };
 
     useEffect(() => {
+        console.log('CheckoutPage: params check', {
+            val: searchParams.get('success'),
+            hasSucc: searchParams.has('success')
+        });
+
         if (searchParams.get('success') === 'true') {
+            console.log('CheckoutPage: SUCCESS DETECTED -> Triggering Success View');
             handleSuccess();
         }
     }, [searchParams]);

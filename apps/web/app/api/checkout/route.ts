@@ -2,8 +2,12 @@ import { NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { Product } from '../../../types/inventory'; // Adjust path if necessary
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: Request) {
     try {
+        console.log('--- CHECKOUT SESSION START ---');
+        console.log('Headers:', Object.fromEntries(req.headers));
         const { items, customerEmail, fulfillmentMode } = await req.json();
 
         if (!items || items.length === 0) {
@@ -44,7 +48,13 @@ export async function POST(req: Request) {
         }
 
         // Determine origin with fallbacks
-        const origin = process.env.NEXT_PUBLIC_URL || req.headers.get('origin') || 'https://staging.affordablehome-ac.com';
+        const envUrl = process.env.NEXT_PUBLIC_URL;
+        const headerOrigin = req.headers.get('origin');
+        const defaultOrigin = 'https://staging.affordablehome-ac.com';
+
+        const origin = envUrl || headerOrigin || defaultOrigin;
+
+        console.log('Origin Resolution:', { envUrl, headerOrigin, defaultOrigin, finalOrigin: origin });
 
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
@@ -77,6 +87,7 @@ export async function POST(req: Request) {
             billing_address_collection: 'required',
         });
 
+        console.log('Session Created:', { id: session.id, url: session.url, success_url: session.success_url });
         return NextResponse.json({ sessionId: session.id, url: session.url });
     } catch (err: any) {
         console.error('Stripe Checkout Error:', err);
