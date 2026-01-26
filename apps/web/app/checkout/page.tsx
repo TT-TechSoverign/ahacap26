@@ -30,10 +30,8 @@ function CheckoutContent() {
     useEffect(() => {
         if (searchParams.get('success') === 'true') {
             handleSuccess();
-            // Optional: Clean URL
-            router.replace('/checkout', { scroll: false });
         }
-    }, [searchParams, router]);
+    }, [searchParams]);
 
     if (step === 'success') {
         return (
