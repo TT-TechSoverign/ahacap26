@@ -689,8 +689,7 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
     );
 }
 
-    );
-}
+
 
 function AvailabilityManager() {
     const { content, updateContent, saveChanges, isSaving, isDirty } = useContent();
