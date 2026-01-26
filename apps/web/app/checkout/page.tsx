@@ -9,6 +9,8 @@ import { useCart } from '../../context/CartContext';
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Image from 'next/image';
+import { getProductImages } from '../../lib/product-images';
 
 function CheckoutContent() {
     const { items, clearCart, cartTotal } = useCart();
@@ -102,13 +104,15 @@ function CheckoutContent() {
                     className="flex flex-col md:flex-row items-center justify-between gap-6"
                 >
                     <div className="space-y-2 text-center md:text-left">
-                        <span className="text-primary font-header font-black uppercase tracking-[0.6em] text-[10px] block opacity-70">Sovereign Transaction Tunnel</span>
-                        <h1 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] leading-none">
-                            Secure <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">Checkout</span>
+                        <span className="text-red-500 font-header font-black uppercase tracking-[0.6em] text-[10px] block animate-pulse">
+                            YES I'M <span className="italic">HOT!</span>
+                        </span>
+                        <h1 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tighter drop-shadow-[0_0_30px_rgba(6,182,212,0.5)] leading-none">
+                            Checkout
                         </h1>
                     </div>
                     <div className="flex items-center gap-6 text-slate-500 font-header font-black text-[10px] uppercase tracking-[0.3em]">
-                        <span className={step === 'shipping' ? 'text-primary' : 'opacity-40'}>01. Shipping</span>
+                        <span className={step === 'shipping' ? 'text-cyan-400' : 'opacity-40'}>01. Fulfillment</span>
                         <div className="h-px w-8 bg-white/10"></div>
                         <span className={step === 'payment' ? 'text-primary' : 'opacity-40'}>02. Payment</span>
                     </div>
@@ -119,53 +123,21 @@ function CheckoutContent() {
                     {/* LEFT COLUMN - FORMS (Bento Grid) */}
                     <div className="lg:col-span-8 space-y-6">
 
-                        {/* 1. Contact Info Card */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="bg-[#0f131a] border border-white/5 p-8 rounded-2xl shadow-xl relative overflow-hidden group ring-1 ring-white/5"
-                        >
-                            <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 group-hover:scale-110">
-                                <span className="material-symbols-outlined text-9xl text-primary">contact_mail</span>
-                            </div>
 
-                            <h2 className="text-xl font-header font-black text-white uppercase tracking-widest mb-8 flex items-center gap-4">
-                                <span className="flex items-center justify-center size-10 rounded-xl bg-primary/10 text-primary text-sm font-black border border-primary/20 shadow-[0_0_15px_rgba(0,174,239,0.1)]">01</span>
-                                Contact Information
-                            </h2>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-                                <div className="space-y-3">
-                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Email Address</label>
-                                    <input
-                                        type="email"
-                                        placeholder="john@example.com"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full bg-[#05070a] border border-white/5 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-primary/50 transition-all placeholder:text-slate-700 font-medium text-sm"
-                                    />
-                                </div>
-                                <div className="space-y-3">
-                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Phone Number</label>
-                                    <input type="tel" placeholder="(808) 555-0123" className="w-full bg-[#05070a] border border-white/5 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-primary/50 transition-all placeholder:text-slate-700 font-medium text-sm" />
-                                </div>
-                            </div>
-                        </motion.div>
 
                         {/* 2. Fulfillment Selector Card */}
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="bg-[#0f131a] border border-white/5 p-8 rounded-2xl shadow-xl relative overflow-hidden group ring-1 ring-white/5"
+                            className="bg-[#0f131a] border border-cyan-500/20 bg-cyan-900/5 p-8 rounded-2xl shadow-xl relative overflow-hidden group ring-1 ring-white/5"
                         >
                             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 group-hover:scale-110">
                                 <span className="material-symbols-outlined text-9xl text-cyan-400">local_shipping</span>
                             </div>
 
                             <h2 className="text-xl font-header font-black text-white uppercase tracking-widest mb-8 flex items-center gap-4">
-                                <span className="flex items-center justify-center size-10 rounded-xl bg-cyan-400/10 text-cyan-400 text-sm font-black border border-cyan-400/20 shadow-[0_0_15px_rgba(6,182,212,0.1)]">02</span>
+                                <span className="flex items-center justify-center size-10 rounded-xl bg-cyan-400/10 text-cyan-400 text-sm font-black border border-cyan-400/20 shadow-[0_0_15px_rgba(6,182,212,0.1)]">01</span>
                                 Fulfillment Selection
                             </h2>
 
@@ -266,14 +238,14 @@ function CheckoutContent() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 }}
-                            className={`bg-[#0f131a] border border-white/5 p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all duration-700 ring-1 ring-white/5 ${step === 'payment' ? 'ring-2 ring-primary border-primary/50' : 'opacity-40 grayscale'}`}
+                            className={`bg-[#0f131a] border border-emerald-500/20 bg-emerald-900/5 p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all duration-700 ring-1 ring-white/5 ${step === 'payment' ? 'ring-2 ring-emerald-500 border-emerald-500/50' : 'opacity-40 grayscale'}`}
                         >
                             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 group-hover:scale-110">
                                 <span className="material-symbols-outlined text-9xl text-emerald-500">payments</span>
                             </div>
 
                             <h2 className="text-xl font-header font-black text-white uppercase tracking-widest mb-8 flex items-center gap-4">
-                                <span className="flex items-center justify-center size-10 rounded-xl bg-emerald-500/10 text-emerald-400 text-sm font-black border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">03</span>
+                                <span className="flex items-center justify-center size-10 rounded-xl bg-emerald-500/10 text-emerald-400 text-sm font-black border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">02</span>
                                 Secure Payment
                             </h2>
 
@@ -289,8 +261,7 @@ function CheckoutContent() {
                                 ) : (
                                     <button
                                         onClick={() => {
-                                            if (email) setStep('payment');
-                                            else alert('Please enter an email address.');
+                                            setStep('payment');
                                         }}
                                         className="w-full py-5 bg-primary text-white font-header font-black uppercase tracking-[0.3em] text-xs rounded-xl transition-all shadow-lg hover:shadow-primary/40 active:scale-95 flex items-center justify-center gap-3"
                                     >
@@ -319,8 +290,17 @@ function CheckoutContent() {
                                 <div className="space-y-5 mb-8 max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 relative z-10">
                                     {items.map(item => (
                                         <div key={item.id} className="flex gap-4 group/item">
-                                            <div className="size-14 bg-[#05070a] rounded-xl flex items-center justify-center border border-white/5 group-hover/item:border-primary/30 transition-colors">
-                                                <span className="material-symbols-outlined text-slate-700 group-hover/item:text-primary transition-colors">ac_unit</span>
+                                            <div className="size-14 bg-[#05070a] rounded-xl flex items-center justify-center border border-white/5 group-hover/item:border-primary/30 transition-colors relative overflow-hidden">
+                                                {item.image_url || getProductImages(item.id)?.[0] ? (
+                                                    <Image
+                                                        src={item.image_url || getProductImages(item.id)[0]}
+                                                        alt={item.name}
+                                                        fill
+                                                        className="object-contain p-1"
+                                                    />
+                                                ) : (
+                                                    <span className="material-symbols-outlined text-slate-700 group-hover/item:text-primary transition-colors">ac_unit</span>
+                                                )}
                                             </div>
                                             <div className="flex-1">
                                                 <h4 className="text-xs font-black text-white/80 line-clamp-1 uppercase tracking-tighter group-hover/item:text-white transition-colors">{item.name}</h4>
