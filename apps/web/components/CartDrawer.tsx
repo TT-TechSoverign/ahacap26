@@ -33,29 +33,9 @@ export default function CartDrawer() {
         }
     }, [isOpen]);
 
-    const handleCheckout = async () => {
-        setLoading(true);
-        setError('');
-        try {
-            const response = await fetch('/api/checkout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ items }),
-            });
-
-            const { url, error: apiError } = await response.json();
-
-            if (apiError) throw new Error(apiError);
-            if (!url) throw new Error('Checkout URL missing');
-
-            window.location.href = url;
-        } catch (err: any) {
-            setError(err.message || 'Checkout connection failed. Please try again.');
-        } finally {
-            setLoading(false);
-        }
+    const handleCheckout = () => {
+        closeCart();
+        window.location.href = '/checkout';
     };
 
     const triggerConfetti = () => {
