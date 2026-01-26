@@ -237,7 +237,7 @@ export default function ProductDetailPage() {
                                 </h3>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 gap-6">
                                 {/* Deployment Card */}
                                 <div className="bg-[#0a0e14] border border-white/5 p-6 md:p-8 rounded-3xl hover:border-primary/30 transition-all duration-500 group relative overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
