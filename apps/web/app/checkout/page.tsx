@@ -144,17 +144,17 @@ function CheckoutContent() {
                             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <button
                                     onClick={() => setFulfillment('pickup')}
-                                    className={`p-6 rounded-2xl border transition-all duration-500 text-left space-y-4 group/btn relative overflow-hidden ${fulfillment === 'pickup' ? 'bg-primary/10 border-primary shadow-[0_0_30px_rgba(0,174,239,0.15)] ring-1 ring-primary/20' : 'bg-[#05070a] border-white/5 hover:border-primary/30'}`}
+                                    className={`p-8 rounded-3xl border transition-all duration-500 text-center flex flex-col items-center justify-center space-y-6 group/btn relative overflow-hidden ${fulfillment === 'pickup' ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.2)] ring-1 ring-emerald-500/30' : 'bg-[#05070a] border-white/5 hover:border-emerald-500/30'}`}
                                 >
-                                    <div className="flex justify-between items-start relative z-10">
-                                        <div className={`p-3 rounded-xl transition-colors ${fulfillment === 'pickup' ? 'bg-primary/20 text-primary' : 'bg-white/5 text-slate-500 group-hover/btn:text-primary group-hover/btn:bg-primary/10'}`}>
-                                            <span className="material-symbols-outlined text-2xl group-hover/btn:scale-110 transition-transform">warehouse</span>
-                                        </div>
-                                        <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded bg-white/5 ${fulfillment === 'pickup' ? 'text-primary' : 'text-slate-600'}`}>FREE</span>
+                                    <div className={`p-4 rounded-2xl transition-colors mb-2 ${fulfillment === 'pickup' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-slate-500 group-hover/btn:text-emerald-400 group-hover/btn:bg-emerald-500/10'}`}>
+                                        <span className="material-symbols-outlined text-4xl group-hover/btn:scale-110 transition-transform">warehouse</span>
                                     </div>
-                                    <div className="relative z-10">
-                                        <h3 className={`text-base font-header font-black uppercase tracking-tight transition-colors ${fulfillment === 'pickup' ? 'text-white' : 'text-slate-400'}`}>Waipahu Pickup</h3>
-                                        <p className="text-[10px] text-slate-500 leading-relaxed uppercase tracking-widest font-bold mt-1 group-hover/btn:text-slate-400 transition-colors">
+                                    <div className="space-y-2 relative z-10 w-full">
+                                        <div className="flex justify-center">
+                                            <span className={`text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full ${fulfillment === 'pickup' ? 'bg-emerald-500 text-[#05070a]' : 'bg-white/5 text-slate-600'}`}>FREE PICKUP</span>
+                                        </div>
+                                        <h3 className={`text-lg font-header font-black uppercase tracking-wider transition-colors mt-2 ${fulfillment === 'pickup' ? 'text-white' : 'text-slate-400'}`}>Waipahu Center</h3>
+                                        <p className="text-[10px] text-slate-500 leading-relaxed uppercase tracking-widest font-bold group-hover/btn:text-slate-400 transition-colors">
                                             <EditableText contentKey="logistics.pickup.pricing_notice" />
                                         </p>
                                     </div>
@@ -162,17 +162,17 @@ function CheckoutContent() {
 
                                 <button
                                     onClick={() => setFulfillment('delivery')}
-                                    className={`p-6 rounded-2xl border transition-all duration-500 text-left space-y-4 group/btn relative overflow-hidden ${fulfillment === 'delivery' ? 'bg-cyan-400/10 border-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.15)] ring-1 ring-cyan-400/20' : 'bg-[#05070a] border-white/5 hover:border-cyan-400/30'}`}
+                                    className={`p-8 rounded-3xl border transition-all duration-500 text-center flex flex-col items-center justify-center space-y-6 group/btn relative overflow-hidden ${fulfillment === 'delivery' ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.2)] ring-1 ring-emerald-500/30' : 'bg-[#05070a] border-white/5 hover:border-emerald-500/30'}`}
                                 >
-                                    <div className="flex justify-between items-start relative z-10">
-                                        <div className={`p-3 rounded-xl transition-colors ${fulfillment === 'delivery' ? 'bg-cyan-400/20 text-cyan-400' : 'bg-white/5 text-slate-500 group-hover/btn:text-cyan-400 group-hover/btn:bg-cyan-400/10'}`}>
-                                            <span className="material-symbols-outlined text-2xl group-hover/btn:scale-110 transition-transform">local_shipping</span>
-                                        </div>
-                                        <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded bg-white/5 ${fulfillment === 'delivery' ? 'text-cyan-400' : 'text-slate-600'}`}>$50.00</span>
+                                    <div className={`p-4 rounded-2xl transition-colors mb-2 ${fulfillment === 'delivery' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-slate-500 group-hover/btn:text-emerald-400 group-hover/btn:bg-emerald-500/10'}`}>
+                                        <span className="material-symbols-outlined text-4xl group-hover/btn:scale-110 transition-transform">local_shipping</span>
                                     </div>
-                                    <div className="relative z-10">
-                                        <h3 className={`text-base font-header font-black uppercase tracking-tight transition-colors ${fulfillment === 'delivery' ? 'text-white' : 'text-slate-400'}`}>Oahu Delivery</h3>
-                                        <p className="text-[10px] text-slate-500 leading-relaxed uppercase tracking-widest font-bold mt-1 group-hover/btn:text-slate-400 transition-colors">
+                                    <div className="space-y-2 relative z-10 w-full">
+                                        <div className="flex justify-center">
+                                            <span className={`text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full ${fulfillment === 'delivery' ? 'bg-emerald-500 text-[#05070a]' : 'bg-white/5 text-slate-600'}`}>$50.00 FLAT RATE</span>
+                                        </div>
+                                        <h3 className={`text-lg font-header font-black uppercase tracking-wider transition-colors mt-2 ${fulfillment === 'delivery' ? 'text-white' : 'text-slate-400'}`}>Oahu Delivery</h3>
+                                        <p className="text-[10px] text-slate-500 leading-relaxed uppercase tracking-widest font-bold group-hover/btn:text-slate-400 transition-colors">
                                             <EditableText contentKey="logistics.delivery.coverage" />
                                         </p>
                                     </div>
@@ -338,14 +338,18 @@ function CheckoutContent() {
                                 </div>
                             </motion.div>
 
-                            <div className="p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 flex items-start gap-4">
-                                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
-                                    <span className="material-symbols-outlined text-xl">warning</span>
+                            <div className="p-8 rounded-3xl border border-red-900/40 bg-[#0f0505] flex flex-col items-center text-center space-y-4 shadow-lg relative overflow-hidden">
+                                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-900/10 via-transparent to-transparent opacity-50"></div>
+                                <div className="p-3 rounded-xl bg-red-950/50 text-red-500 border border-red-900/50 shadow-inner relative z-10">
+                                    <span className="material-symbols-outlined text-2xl">shield_lock</span>
                                 </div>
-                                <div>
-                                    <h4 className="text-amber-500 font-header font-black uppercase text-[10px] tracking-[0.2em] mb-1">All Sales Final</h4>
-                                    <p className="text-slate-400 text-xs font-medium leading-relaxed">
-                                        Please verify sizing before purchase. Once unit is removed from packaging, return eligibility is voided.
+                                <div className="relative z-10 space-y-2">
+                                    <h4 className="text-red-500 font-header font-black uppercase text-xs tracking-[0.3em]">All Sales Final</h4>
+                                    <p className="text-white font-bold uppercase text-[10px] tracking-widest">
+                                        No Refunds <span className="text-red-800 mx-2">•</span> No Exchanges
+                                    </p>
+                                    <p className="text-slate-500 text-[10px] font-medium leading-relaxed max-w-[250px] mx-auto pt-2 border-t border-red-900/30 mt-2">
+                                        All warranty claims & defective units must be processed directly through the manufacturer.
                                     </p>
                                 </div>
                             </div>
