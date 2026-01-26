@@ -96,7 +96,7 @@ export default function Footer() {
 
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-slate-600 text-xs font-bold uppercase tracking-widest">
-                        © 2024 Affordable Home A/C. All rights reserved.
+                        © 2024 Affordable Home A/C. All rights reserved. <span className="text-primary ml-2">v2.1 (Hotfix Live)</span>
                     </p>
                     <div className="flex flex-col md:flex-row items-center gap-6">
                         <span className="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
