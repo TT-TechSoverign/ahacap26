@@ -62,7 +62,7 @@ function CheckoutContent() {
                             Order <span className="text-cyan-400">Confirmed</span>
                         </h1>
                         <p className="text-slate-400 text-sm leading-relaxed">
-                            Thank you for your business. A confirmation email has been sent to <span className="text-white font-mono">{email}</span>.
+                            Thank you for your business. A confirmation email has been sent to the address provided.
                         </p>
                     </div>
 
