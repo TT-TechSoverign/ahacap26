@@ -688,31 +688,33 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
 
 
 
+
+function AvailabilityInputField({ label, path, placeholder }: { label: string, path: string, placeholder?: string }) {
+    const { content, updateContent } = useContent();
+
+    // Resolve value from deep path
+    const keys = path.split('.');
+    let value = content as any;
+    for (const key of keys) {
+        value = value?.[key];
+    }
+
+    return (
+        <div className="space-y-2">
+            <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block">{label}</label>
+            <input
+                type="text"
+                value={value || ''}
+                onChange={(e) => updateContent(path, e.target.value)}
+                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all font-medium text-sm"
+                placeholder={placeholder}
+            />
+        </div>
+    );
+}
+
 function AvailabilityManager() {
-    const { content, updateContent, saveChanges, isSaving, isDirty } = useContent();
-
-    // Helper to genericize the input field
-    const InputField = ({ label, path, placeholder }: { label: string, path: string, placeholder?: string }) => {
-        // Resolve value from deep path
-        const keys = path.split('.');
-        let value = content as any;
-        for (const key of keys) {
-            value = value?.[key];
-        }
-
-        return (
-            <div className="space-y-2">
-                <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block">{label}</label>
-                <input
-                    type="text"
-                    value={value || ''}
-                    onChange={(e) => updateContent(path, e.target.value)}
-                    className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all font-medium text-sm"
-                    placeholder={placeholder}
-                />
-            </div>
-        );
-    };
+    const { saveChanges, isSaving, isDirty } = useContent();
 
     return (
         <div className="space-y-8">
@@ -740,8 +742,8 @@ function AvailabilityManager() {
                     <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6">
                         <h4 className="text-primary font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/5 pb-2">General Settings</h4>
                         <div className="grid gap-6">
-                            <InputField label="Calendar Title" path="contact.calendar.title" />
-                            <InputField label="Badge Label" path="contact.badge_label" />
+                            <AvailabilityInputField label="Calendar Title" path="contact.calendar.title" />
+                            <AvailabilityInputField label="Badge Label" path="contact.badge_label" />
                         </div>
                     </div>
 
@@ -750,14 +752,14 @@ function AvailabilityManager() {
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] -mr-16 -mt-16 pointer-events-none"></div>
                         <h4 className="text-primary font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/5 pb-2">Split AC Section</h4>
                         <div className="grid gap-6">
-                            <InputField label="Section Title" path="contact.calendar.split_section_title" />
+                            <AvailabilityInputField label="Section Title" path="contact.calendar.split_section_title" />
                             <div className="grid grid-cols-2 gap-4">
-                                <InputField label="Estimate Label" path="contact.calendar.split_estimate_label" />
-                                <InputField label="Estimate Date" path="contact.calendar.split_estimate_value" placeholder="e.g. OCT 14" />
+                                <AvailabilityInputField label="Estimate Label" path="contact.calendar.split_estimate_label" />
+                                <AvailabilityInputField label="Estimate Date" path="contact.calendar.split_estimate_value" placeholder="e.g. OCT 14" />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <InputField label="Install Label" path="contact.calendar.split_install_label" />
-                                <InputField label="Install Date" path="contact.calendar.split_install_value" placeholder="e.g. OCT 21" />
+                                <AvailabilityInputField label="Install Label" path="contact.calendar.split_install_label" />
+                                <AvailabilityInputField label="Install Date" path="contact.calendar.split_install_value" placeholder="e.g. OCT 21" />
                             </div>
                         </div>
                     </div>
@@ -767,14 +769,14 @@ function AvailabilityManager() {
                         <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-[40px] -mr-16 -mt-16 pointer-events-none"></div>
                         <h4 className="text-emerald-500 font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/5 pb-2">Window AC Section</h4>
                         <div className="grid gap-6">
-                            <InputField label="Section Title" path="contact.calendar.window_section_title" />
+                            <AvailabilityInputField label="Section Title" path="contact.calendar.window_section_title" />
                             <div className="grid grid-cols-2 gap-4">
-                                <InputField label="Estimate Label" path="contact.calendar.window_estimate_label" />
-                                <InputField label="Estimate Date" path="contact.calendar.window_estimate_value" placeholder="e.g. OCT 15" />
+                                <AvailabilityInputField label="Estimate Label" path="contact.calendar.window_estimate_label" />
+                                <AvailabilityInputField label="Estimate Date" path="contact.calendar.window_estimate_value" placeholder="e.g. OCT 15" />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <InputField label="Install Label" path="contact.calendar.window_install_label" />
-                                <InputField label="Install Date" path="contact.calendar.window_install_value" placeholder="e.g. OCT 22" />
+                                <AvailabilityInputField label="Install Label" path="contact.calendar.window_install_label" />
+                                <AvailabilityInputField label="Install Date" path="contact.calendar.window_install_value" placeholder="e.g. OCT 22" />
                             </div>
                         </div>
                     </div>
