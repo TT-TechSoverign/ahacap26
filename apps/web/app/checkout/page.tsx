@@ -22,7 +22,9 @@ function CheckoutContent() {
     const router = useRouter();
 
     const deliveryFee = fulfillment === 'delivery' ? 50 : 0;
-    const finalTotal = cartTotal + deliveryFee;
+    const subtotal = cartTotal + deliveryFee;
+    const taxAmount = subtotal * 0.04712; // 4.712% HI Tax
+    const finalTotal = subtotal + taxAmount;
 
     const handleSuccess = () => {
         setStep('success');
@@ -325,15 +327,15 @@ function CheckoutContent() {
                                         </span>
                                     </div>
                                     <div className="flex justify-between text-[11px] text-slate-500 uppercase font-black tracking-widest">
-                                        <span>Tax</span>
-                                        <span className="text-white/80">$0.00</span>
+                                        <span>HI State Tax (4.712%)</span>
+                                        <span className="text-white/80">${taxAmount.toFixed(2)}</span>
                                     </div>
                                 </div>
 
                                 <div className="mt-8 pt-8 border-t border-white/10 flex justify-between items-end relative z-10">
                                     <span className="text-xs font-black text-slate-400 uppercase tracking-[0.3em]">Total</span>
                                     <span className="text-4xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(0,174,239,0.3)]">
-                                        ${finalTotal.toLocaleString()}
+                                        ${finalTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                     </span>
                                 </div>
                             </motion.div>
