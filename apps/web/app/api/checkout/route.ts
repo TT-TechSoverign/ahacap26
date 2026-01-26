@@ -47,6 +47,25 @@ export async function POST(req: Request) {
             });
         }
 
+        // CALCULATE HAWAII STATE TAX (4.712%)
+        // Sum current line items (Products + Delivery)
+        const subtotalCents = line_items.reduce((acc: number, item: any) => acc + (item.price_data.unit_amount * item.quantity), 0);
+        const taxAmountCents = Math.round(subtotalCents * 0.04712);
+
+        if (taxAmountCents > 0) {
+            line_items.push({
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: 'Hawaii State Tax (4.712%)',
+                        description: 'General Excise Tax (GET)',
+                    },
+                    unit_amount: taxAmountCents,
+                },
+                quantity: 1,
+            });
+        }
+
         // Determine origin with fallbacks
         const envUrl = process.env.NEXT_PUBLIC_URL;
         const headerOrigin = req.headers.get('origin');
