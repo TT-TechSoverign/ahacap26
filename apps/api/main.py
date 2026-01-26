@@ -9,9 +9,11 @@ load_dotenv()
 print(f"DEBUG: STARTUP MAIN.PY. STRIPE_KEY_LEN={len(os.getenv('STRIPE_SECRET_KEY', ''))}")
 
 # 0.5 Sentry Initialization
-if os.getenv("SENTRY_DSN"):
+SENTRY_DSN = os.getenv("SENTRY_DSN", "https://858b256e9efd52274d65443901fb2dbd@o4510774207709184.ingest.us.sentry.io/4510774253125632")
+
+if SENTRY_DSN:
     sentry_sdk.init(
-        dsn=os.getenv("SENTRY_DSN"),
+        dsn=SENTRY_DSN,
         # Set traces_sample_rate to 1.0 to capture 100%
         # of transactions for performance monitoring.
         traces_sample_rate=1.0,
