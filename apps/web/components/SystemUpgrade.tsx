@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { Button } from "./ui/Button";
+import { EditableText } from "./EditableText";
 
 export default function SystemUpgrade() {
   return (
@@ -14,26 +15,26 @@ export default function SystemUpgrade() {
         {/* Status Badge */}
         <div className="inline-flex items-center gap-2 mb-8">
           <span className="text-primary font-bold text-xs tracking-[0.2em] uppercase font-sans">
-            System Status: Upgrading
+            <EditableText contentKey="system_upgrade.status_badge" />
           </span>
         </div>
 
         {/* Headline */}
         <h1 className="text-5xl md:text-7xl font-header font-bold text-white leading-tight mb-6 uppercase tracking-wide">
-          The Evolution <br />
-          <span className="text-slate-400">of Cool.</span>
+          <EditableText contentKey="system_upgrade.title_line1" /> <br />
+          <span className="text-slate-400"><EditableText contentKey="system_upgrade.title_line2" /></span>
         </h1>
 
         {/* Subtext */}
         <p className="text-lg text-slate-400 leading-relaxed mb-10 max-w-lg font-sans">
-          Affordable Home A/C is calibrating a new digital experience. Smart. Adaptive. Precise. A higher standard of comfort is loading now.
+          <EditableText contentKey="system_upgrade.description" />
         </p>
 
         {/* Status Pill */}
         <div className="inline-flex items-center gap-3 bg-accent/10 border border-accent/20 rounded-full px-5 py-3 mb-10">
           <div className="w-2.5 h-2.5 bg-accent rounded-full animate-pulse shadow-[0_0_10px_rgba(57,181,74,0.5)]" />
           <span className="text-accent text-xs font-bold tracking-widest uppercase font-sans">
-            Field Operations: Fully Active & Ready to Assist
+            <EditableText contentKey="system_upgrade.status_pill" />
           </span>
         </div>
 
@@ -41,7 +42,7 @@ export default function SystemUpgrade() {
         <div>
           <Button variant="outline" size="lg" className="gap-3 group" asChild>
             <a href="tel:8081234567">
-              <span className="font-sans">Contact Support</span>
+              <span className="font-sans"><EditableText contentKey="system_upgrade.cta_button" /></span>
               <Phone className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors" />
             </a>
           </Button>
@@ -51,7 +52,7 @@ export default function SystemUpgrade() {
 
       {/* Footer / Copyright */}
       <div className="absolute bottom-6 text-slate-600 text-[10px] uppercase tracking-widest font-sans">
-        Authorized Dealer • Serving Oahu Since 2005
+        <EditableText contentKey="system_upgrade.footer" />
       </div>
 
     </main>
