@@ -57,6 +57,10 @@ const nextConfig = {
                 source: '/api/v1/:path*',
                 destination: `${apiUrl}/api/v1/:path*`,
             },
+            {
+                source: '/api/webhooks/stripe',
+                destination: `${apiUrl}/api/webhooks/stripe`,
+            },
         ];
     },
 };
