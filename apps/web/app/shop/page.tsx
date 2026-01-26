@@ -940,7 +940,9 @@ function SizingGuideSection() {
             models: [
                 { name: "LW6023IVSM", link: "#dual_inverter" },
                 { name: "LW8022IVSM", link: "#dual_inverter" },
-                { name: "AJCQ08AWJ", link: "#ge" }
+                { name: "AJCQ08AWJ", link: "#ge" },
+                { name: "LW8023HRSM", link: "#universal_fit" },
+                { name: "LW8024RD", link: "#base" }
             ]
         },
         {
@@ -951,7 +953,9 @@ function SizingGuideSection() {
                 { name: "LW1022IVSM", link: "#dual_inverter" },
                 { name: "LW1222IVSM", link: "#dual_inverter" },
                 { name: "AJCQ10AWJ", link: "#ge" },
-                { name: "AJCQ12AWJ", link: "#ge" }
+                { name: "AJCQ12AWJ", link: "#ge" },
+                { name: "LW1017ERSM1", link: "#base" },
+                { name: "LW1217ERSM1", link: "#base" }
             ]
         },
         {
@@ -968,7 +972,9 @@ function SizingGuideSection() {
             app: "Whole Floor / Large Open Space",
             models: [
                 { name: "LW1822IVSM", link: "#dual_inverter" },
-                { name: "LW2422IVSM", link: "#dual_inverter" }
+                { name: "LW2422IVSM", link: "#dual_inverter" },
+                { name: "LW1823HRSM", link: "#universal_fit" },
+                { name: "LW2423HRSM", link: "#universal_fit" }
             ]
         },
     ];
