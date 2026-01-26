@@ -16,7 +16,7 @@ ARG NEXT_PUBLIC_API_URL
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-ENV CACHE_BUST=124
+ENV CACHE_BUST=125
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
