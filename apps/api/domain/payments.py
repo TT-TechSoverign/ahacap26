@@ -15,8 +15,8 @@ async def create_payment_intent_service(amount: int, currency: str = "usd", idem
         # Idempotency is handled natively by Stripe if key is provided
         intent = stripe.PaymentIntent.create(
             amount=amount,
-            currency=currency,
-            automatic_payment_methods={"enabled": True},
+            currency="usd", # Enforce USD
+            automatic_payment_methods={"enabled": True}, # Delegates control to Dashboard (Enables Apple/Google Pay)
             idempotency_key=idempotency_key
         )
         return {"clientSecret": intent.client_secret, "id": intent.id}

@@ -2,17 +2,22 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { EditableText } from '../../components/EditableText';
 import CheckoutWrapper from '../../components/CheckoutForm';
 import { useCart } from '../../context/CartContext';
 
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-export default function CheckoutPage() {
-    const { items, cartTotal, clearCart } = useCart();
+function CheckoutContent() {
+    const { items, clearCart, cartTotal } = useCart();
     const [step, setStep] = useState<'shipping' | 'payment' | 'success'>('shipping');
     const [email, setEmail] = useState('');
     const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>('pickup');
+
+    const searchParams = useSearchParams();
+    const router = useRouter();
 
     const deliveryFee = fulfillment === 'delivery' ? 50 : 0;
     const finalTotal = cartTotal + deliveryFee;
@@ -21,6 +26,14 @@ export default function CheckoutPage() {
         setStep('success');
         clearCart();
     };
+
+    useEffect(() => {
+        if (searchParams.get('success') === 'true') {
+            handleSuccess();
+            // Optional: Clean URL
+            router.replace('/checkout', { scroll: false });
+        }
+    }, [searchParams, router]);
 
     if (step === 'success') {
         return (
@@ -266,6 +279,7 @@ export default function CheckoutPage() {
                                         totalAmount={finalTotal}
                                         items={items}
                                         customerEmail={email}
+                                        fulfillmentMode={fulfillment}
                                         onSuccess={handleSuccess}
                                     />
                                 ) : (
@@ -371,5 +385,17 @@ export default function CheckoutPage() {
                 </div>
             </div>
         </main>
+    );
+}
+
+export default function CheckoutPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-[#0a0e14] pt-24 pb-12 px-4 md:px-8 flex items-center justify-center">
+                <div className="text-primary font-header font-black uppercase tracking-[0.3em] animate-pulse">Initializing Secure Tunnel...</div>
+            </div>
+        }>
+            <CheckoutContent />
+        </Suspense>
     );
 }
