@@ -15,3 +15,14 @@ async def get_products(
     db: AsyncSession = Depends(get_db)
 ):
     return await catalog.get_products_service(db, q, category, min_price, max_price)
+
+@router.get("/{product_id}")
+async def get_product(
+    product_id: int,
+    db: AsyncSession = Depends(get_db)
+):
+    product = await catalog.get_product_by_id_service(db, product_id)
+    if not product:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="Product not found")
+    return product
