@@ -49,17 +49,13 @@ const nextConfig = {
             },
         ];
     },
-    async rewrites() {
-        const apiUrl = process.env.API_INTERNAL_URL || 'http://api:8000';
-        console.log(`[Next.js Rewrites] Proxying /api/v1 to: ${apiUrl}`);
-        return [
             {
-                source: '/api/v1/:path*',
-                destination: `${apiUrl}/api/v1/:path*`,
+    source: '/api/v1/:path*',
+        destination: 'http://api:8000/api/v1/:path*',
             },
-            {
-                source: '/api/webhooks/stripe',
-                destination: `${apiUrl}/api/webhooks/stripe`,
+{
+    source: '/api/webhooks/stripe',
+        destination: 'http://api:8000/api/webhooks/stripe',
             },
         ];
     },
