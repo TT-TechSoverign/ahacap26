@@ -358,14 +358,14 @@ function CheckoutContent() {
                                 </div>
                             </motion.div>
 
-                            <div className="bg-emerald-500/5 border border-emerald-500/20 p-5 rounded-2xl flex gap-4 items-start shadow-lg">
-                                <div className="p-2 bg-emerald-500/10 rounded-lg">
-                                    <span className="material-symbols-outlined text-emerald-400 text-lg">verified_user</span>
+                            <div className="p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 flex items-start gap-4">
+                                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
+                                    <span className="material-symbols-outlined text-xl">warning</span>
                                 </div>
-                                <div className="space-y-1">
-                                    <h4 className="text-emerald-400 font-header font-black uppercase text-[10px] tracking-[0.2em]">Satisfaction Guaranteed</h4>
-                                    <p className="text-slate-500 text-[10px] leading-relaxed font-bold uppercase tracking-tight">
-                                        Every unit backed by our local Waipahu warranty center. No-hassle returns within 30 days.
+                                <div>
+                                    <h4 className="text-amber-500 font-header font-black uppercase text-[10px] tracking-[0.2em] mb-1">All Sales Final</h4>
+                                    <p className="text-slate-400 text-xs font-medium leading-relaxed">
+                                        Please verify sizing before purchase. Once unit is removed from packaging, return eligibility is voided.
                                     </p>
                                 </div>
                             </div>
