@@ -1152,7 +1152,7 @@ function FAQSection() {
             <div className="grid gap-4">
                 {[
                     { q: "Do you offer installation for Window ACs?", a: "Unless specified, Window ACs are cash-and-carry. However, we offer professional installation services for an additional fee, especially for second-story windows or custom mounting requirements." },
-                    { q: "What is your return policy?", a: "Unopened units can be returned within 30 days. Defective units are covered under the manufacturer&apos;s warranty, which we service directly here in Waipahu as an authorized center." },
+                    { q: "What is your return policy?", a: "All sales are final. Defective units are covered under the manufacturer&apos;s warranty, which we service directly here in Waipahu as an authorized center." },
                     { q: "How do I know if I have a 115V or 230V outlet?", a: "Standard household plugs are 115V (parallel prongs). 230V outlets are typically larger with horizontal or T-shaped prongs and are required for units 18,000 BTU and above. Check your wall socket before buying!" },
                 ].map((faq, i) => (
                     <details key={i} className="group bg-charcoal border border-white/5 rounded-2xl overflow-hidden open:bg-white/[0.02] open:border-primary/40 open:shadow-[0_0_30px_rgba(0,174,239,0.05)] transition-all duration-300 hover:border-white/10">
@@ -1326,12 +1326,20 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                             onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                onQuickAdd();
+                                if (product.stock > 0) onQuickAdd();
                             }}
-                            className="bg-primary text-white font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-[0.2em] transition-all hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] active:scale-95 flex items-center justify-center gap-2"
+                            disabled={product.stock <= 0}
+                            className={cn(
+                                "font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2",
+                                product.stock > 0
+                                    ? "bg-primary text-white hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] active:scale-95"
+                                    : "bg-slate-800 text-slate-500 cursor-not-allowed border border-white/5"
+                            )}
                         >
-                            <span className="material-symbols-outlined text-[12px]">add_shopping_cart</span>
-                            SECURE
+                            <span className="material-symbols-outlined text-[12px]">
+                                {product.stock > 0 ? 'add_shopping_cart' : 'block'}
+                            </span>
+                            {product.stock > 0 ? 'SECURE' : 'SOLD OUT'}
                         </button>
                     </div>
                 </div>
