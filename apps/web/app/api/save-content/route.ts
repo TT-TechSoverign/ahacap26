@@ -3,9 +3,7 @@ import { NextResponse } from 'next/server';
 import path from 'path';
 
 export async function POST(request: Request) {
-  if (process.env.NODE_ENV === 'production') {
-    return NextResponse.json({ error: 'Not allowed in production' }, { status: 403 });
-  }
+
 
   try {
     const content = await request.json();
