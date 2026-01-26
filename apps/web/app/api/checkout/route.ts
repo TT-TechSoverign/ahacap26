@@ -57,49 +57,49 @@ export async function POST(req: Request) {
         console.log('Origin Resolution:', { envUrl, headerOrigin, defaultOrigin, finalOrigin: origin });
 
         const session = await stripe.checkout.sessions.create({
-            const session = await stripe.checkout.sessions.create({
-                mode: 'payment',
-                payment_method_types: ['card'], // Strict Card Only
-                line_items,
-                customer_email: customerEmail, // Pre-fill email in Stripe
-                // FORCE USD ONLY - Disable Dynamic Currency Conversion
-                payment_method_options: {
-                    card: {
-                        request_three_d_secure: 'automatic',
-                    },
-                },
-                // CRITICAL: Pass metadata to PaymentIntent for Backend Webhook (Email Native)
-                payment_intent_data: {
-                    metadata: {
-                        fulfillment_mode: fulfillmentMode,
-                        customer_email: customerEmail,
-                        source: 'web_checkout_v2'
-                    }
-                },
-                success_url: `${origin}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
-                cancel_url: `${origin}/shop?canceled=true`,
-                shipping_address_collection: {
-                    allowed_countries: ['US'], // Restrict to US (Hawaii focus)
-                },
-                custom_text: {
-                    shipping_address: {
-                        message: 'FULFILLMENT NOTICE: Unit pricing reflects Local Pickup at our Waipahu Distribution Center (94-150 Leoleo St. #203). WARNING: Our facility is an active distribution hub; unscheduled arrivals cannot be accommodated. A coordinator will contact you within 24 business hours to schedule a specific window. Optional Island-Wide Delivery is available for a flat $50.00 fee to most residential zones (excluding North Shore, Waianae, Waikiki, and Waimanalo).'
-                    },
-                    submit: {
-                        message: 'By confirming, you agree to the All Sales Final policy.'
-                    }
-                },
-                metadata: {
-                    source: 'web_checkout',
-                    fulfillment_mode: fulfillmentMode,
-                },
-                billing_address_collection: 'required',
-            });
 
-            console.log('Session Created:', { id: session.id, url: session.url, success_url: session.success_url });
-            return NextResponse.json({ sessionId: session.id, url: session.url });
-        } catch (err: any) {
-            console.error('Stripe Checkout Error:', err);
-            return NextResponse.json({ error: err.message }, { status: 500 });
-        }
+            mode: 'payment',
+            payment_method_types: ['card'], // Strict Card Only
+            line_items,
+            customer_email: customerEmail, // Pre-fill email in Stripe
+            // FORCE USD ONLY - Disable Dynamic Currency Conversion
+            payment_method_options: {
+                card: {
+                    request_three_d_secure: 'automatic',
+                },
+            },
+            // CRITICAL: Pass metadata to PaymentIntent for Backend Webhook (Email Native)
+            payment_intent_data: {
+                metadata: {
+                    fulfillment_mode: fulfillmentMode,
+                    customer_email: customerEmail,
+                    source: 'web_checkout_v2'
+                }
+            },
+            success_url: `${origin}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${origin}/shop?canceled=true`,
+            shipping_address_collection: {
+                allowed_countries: ['US'], // Restrict to US (Hawaii focus)
+            },
+            custom_text: {
+                shipping_address: {
+                    message: 'FULFILLMENT NOTICE: Unit pricing reflects Local Pickup at our Waipahu Distribution Center (94-150 Leoleo St. #203). WARNING: Our facility is an active distribution hub; unscheduled arrivals cannot be accommodated. A coordinator will contact you within 24 business hours to schedule a specific window. Optional Island-Wide Delivery is available for a flat $50.00 fee to most residential zones (excluding North Shore, Waianae, Waikiki, and Waimanalo).'
+                },
+                submit: {
+                    message: 'By confirming, you agree to the All Sales Final policy.'
+                }
+            },
+            metadata: {
+                source: 'web_checkout',
+                fulfillment_mode: fulfillmentMode,
+            },
+            billing_address_collection: 'required',
+        });
+
+        console.log('Session Created:', { id: session.id, url: session.url, success_url: session.success_url });
+        return NextResponse.json({ sessionId: session.id, url: session.url });
+    } catch (err: any) {
+        console.error('Stripe Checkout Error:', err);
+        return NextResponse.json({ error: err.message }, { status: 500 });
     }
+}
