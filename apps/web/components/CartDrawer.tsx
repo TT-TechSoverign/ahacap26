@@ -58,6 +58,14 @@ export default function CartDrawer() {
         }, 250);
     };
 
+    const hasIssue = items.some(item => (item.stock || 0) < item.quantity);
+    const validTotal = items.reduce((acc, item) => {
+        if ((item.stock || 0) >= item.quantity) {
+            return acc + (item.price * item.quantity);
+        }
+        return acc;
+    }, 0);
+
     return (
         <AnimatePresence>
             {isOpen && (
