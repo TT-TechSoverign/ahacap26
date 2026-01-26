@@ -48,7 +48,7 @@ export async function POST(req: Request) {
 
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
-            automatic_payment_methods: { enabled: true },
+            payment_method_types: ['card'], // Strict Card Only
             line_items,
             customer_email: customerEmail, // Pre-fill email in Stripe
             // FORCE USD ONLY - Disable Dynamic Currency Conversion
