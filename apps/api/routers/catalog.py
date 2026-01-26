@@ -6,7 +6,7 @@ from domain import catalog
 
 router = APIRouter()
 
-@router.get("/")
+@router.get("")
 async def get_products(
     q: Optional[str] = None,
     category: Optional[str] = None,
