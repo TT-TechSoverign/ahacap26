@@ -455,55 +455,52 @@ export default function AdminPage() {
                                     </table>
                                 </motion.div>
                             )}
-                        </table>
+
+                            {activeTab === 'availability' && (
+                                <motion.div
+                                    key="availability"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
+                                    className="p-8"
+                                >
+                                    <AvailabilityManager />
                                 </motion.div>
                             )}
-
-                {activeTab === 'availability' && (
-                    <motion.div
-                        key="availability"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 10 }}
-                        className="p-8"
-                    >
-                        <AvailabilityManager />
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                        </AnimatePresence>
                     )}
-        </div>
-            </main >
+                </div>
+            </main>
 
-        {/* Modals */ }
-        <AnimatePresence>
-    {
-        (isAdding || editingProduct) && (
-            <ProductModal
-                product={editingProduct || undefined}
-                onClose={() => { setIsAdding(false); setEditingProduct(null); }}
-                onSave={() => { setIsAdding(false); setEditingProduct(null); fetchProducts(); }}
-            />
-        )
-    }
-    {
-        viewingLead && (
-            <LeadDetailModal
-                lead={viewingLead}
-                onClose={() => setViewingLead(null)}
-                onSave={() => { setViewingLead(null); fetchLeads(); }}
-            />
-        )
-    }
-    {
-        viewingOrder && (
-            <OrderDetailModal
-                order={viewingOrder}
-                onClose={() => setViewingOrder(null)}
-                onSave={() => { setViewingOrder(null); fetchOrders(); }}
-            />
-        )
-    }
+            {/* Modals */}
+            <AnimatePresence>
+                {
+                    (isAdding || editingProduct) && (
+                        <ProductModal
+                            product={editingProduct || undefined}
+                            onClose={() => { setIsAdding(false); setEditingProduct(null); }}
+                            onSave={() => { setIsAdding(false); setEditingProduct(null); fetchProducts(); }}
+                        />
+                    )
+                }
+                {
+                    viewingLead && (
+                        <LeadDetailModal
+                            lead={viewingLead}
+                            onClose={() => setViewingLead(null)}
+                            onSave={() => { setViewingLead(null); fetchLeads(); }}
+                        />
+                    )
+                }
+                {
+                    viewingOrder && (
+                        <OrderDetailModal
+                            order={viewingOrder}
+                            onClose={() => setViewingOrder(null)}
+                            onSave={() => { setViewingOrder(null); fetchOrders(); }}
+                        />
+                    )
+                }
             </AnimatePresence >
         </div >
     );
