@@ -2,10 +2,26 @@
 from datetime import datetime
 from dotenv import load_dotenv
 import os
+import sentry_sdk
 
 # 0. Load Env Support
 load_dotenv()
 print(f"DEBUG: STARTUP MAIN.PY. STRIPE_KEY_LEN={len(os.getenv('STRIPE_SECRET_KEY', ''))}")
+
+# 0.5 Sentry Initialization
+if os.getenv("SENTRY_DSN"):
+    sentry_sdk.init(
+        dsn=os.getenv("SENTRY_DSN"),
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        traces_sample_rate=1.0,
+        # Set profiles_sample_rate to 1.0 to profile 100%
+        # of sampled transactions.
+        profiles_sample_rate=1.0,
+    )
+    print("DEBUG: Senty Initialized.")
+else:
+    print("DEBUG: Sentry DSN not found. Skipping Sentry init.")
 
 from fastapi import FastAPI, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
