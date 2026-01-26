@@ -187,21 +187,33 @@ export default function ContactPage() {
                                         <span className="material-symbols-outlined text-2xl">call</span>
                                     </div>
                                     <div className="font-mono text-[9px] uppercase font-black text-slate-500 tracking-[0.4em] mb-3 group-hover:text-primary transition-colors"><EditableText contentKey="contact.phone_label" /></div>
-                                    <div className="text-white font-black text-2xl lg:text-3xl tracking-tight transition-colors group-hover:text-primary"><EditableText contentKey="contact.phone_value" /></div>
+                                    {isEditMode ? (
+                                        <div className="text-white font-black text-2xl lg:text-3xl tracking-tight transition-colors group-hover:text-primary"><EditableText contentKey="contact.phone_value" /></div>
+                                    ) : (
+                                        <a href={`tel:${(content?.contact?.phone_value || '').replace(/[^0-9]/g, '')}`} className="text-white font-black text-2xl lg:text-3xl tracking-tight transition-colors group-hover:text-primary"><EditableText contentKey="contact.phone_value" /></a>
+                                    )}
                                 </div>
                                 <div className="flex flex-col items-center text-center group">
                                     <div className="size-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent border border-accent/20 group-hover:scale-110 group-hover:bg-accent group-hover:text-black transition-all duration-300 mb-4 shadow-lg shadow-accent/5">
                                         <span className="material-symbols-outlined text-2xl">mail</span>
                                     </div>
                                     <div className="font-mono text-[9px] uppercase font-black text-slate-500 tracking-[0.4em] mb-3 group-hover:text-accent transition-colors"><EditableText contentKey="contact.email_label" /></div>
-                                    <div className="text-white font-black text-sm lg:text-lg tracking-tight transition-colors group-hover:text-accent break-all lg:break-normal"><EditableText contentKey="contact.email_value" /></div>
+                                    {isEditMode ? (
+                                        <div className="text-white font-black text-sm lg:text-lg tracking-tight transition-colors group-hover:text-accent break-all lg:break-normal"><EditableText contentKey="contact.email_value" /></div>
+                                    ) : (
+                                        <a href={`mailto:${content?.contact?.email_value || ''}`} className="text-white font-black text-sm lg:text-lg tracking-tight transition-colors group-hover:text-accent break-all lg:break-normal"><EditableText contentKey="contact.email_value" /></a>
+                                    )}
                                 </div>
                                 <div className="flex flex-col items-center text-center group translate-y-1">
                                     <div className="size-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300 mb-4 shadow-lg shadow-primary/5">
                                         <span className="material-symbols-outlined text-2xl">location_on</span>
                                     </div>
                                     <div className="font-mono text-[9px] uppercase font-black text-slate-500 tracking-[0.4em] mb-3 group-hover:text-primary transition-colors"><EditableText contentKey="contact.address_label" /></div>
-                                    <div className="text-white font-black text-xs lg:text-sm leading-relaxed transition-colors group-hover:text-primary max-w-[180px]"><EditableText contentKey="contact.address_value" /></div>
+                                    {isEditMode ? (
+                                        <div className="text-white font-black text-xs lg:text-sm leading-relaxed transition-colors group-hover:text-primary max-w-[180px]"><EditableText contentKey="contact.address_value" /></div>
+                                    ) : (
+                                        <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" rel="noopener noreferrer" className="text-white font-black text-xs lg:text-sm leading-relaxed transition-colors group-hover:text-primary max-w-[180px] block"><EditableText contentKey="contact.address_value" /></a>
+                                    )}
                                 </div>
                             </div>
 
