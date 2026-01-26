@@ -71,7 +71,9 @@ export default function Footer() {
                                 <span className="material-symbols-outlined text-primary mt-1">location_on</span>
                                 <div>
                                     <div className="text-white font-bold text-sm uppercase">Shop Location</div>
-                                    <div className="text-slate-400 text-sm">Waipahu Commercial Center<br />94-150 Leoleo St. #203<br />Waipahu, HI 96797</div>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" rel="noopener noreferrer" className="text-slate-400 text-sm hover:text-white transition-colors block">
+                                        Waipahu Commercial Center<br />94-150 Leoleo St. #203<br />Waipahu, HI 96797
+                                    </a>
                                 </div>
                             </li>
                             <li className="flex gap-4">
