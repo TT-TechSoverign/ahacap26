@@ -259,10 +259,108 @@ export interface ShopContent {
     };
 }
 
+export interface MaintenanceContent {
+    hero: {
+        badge: string;
+        title: string;
+        title_highlight: string;
+        title_suffix: string;
+        description: string;
+        cta_schedule: string;
+        cta_rates: string;
+    };
+    technician: {
+        name: string;
+        title: string;
+        cert1: string;
+        cert2: string;
+        quote: string;
+    };
+    video: {
+        title: string;
+        youtube_id: string;
+        features: {
+            [key: string]: {
+                title: string;
+                sub: string;
+                color: string;
+                icon: string;
+            };
+        };
+    };
+    climate: {
+        title: string;
+        title_highlight: string;
+        title_suffix: string;
+        description_p1: string;
+        description_p2_prefix: string;
+        description_p2_highlight: string;
+        description_p2_suffix: string;
+        description_p3_prefix: string;
+        description_p3_highlight: string;
+        description_p3_suffix: string;
+    };
+    process: {
+        title: string;
+        title_highlight: string;
+        title_suffix: string;
+        subtitle: string;
+        step1_title: string;
+        step1_description: string;
+        step1_point1: string;
+        step1_point2: string;
+        step2: { title: string; desc: string; };
+        step3: { title: string; desc: string; };
+        step4: { title: string; desc: string; };
+        step5: { title: string; desc: string; };
+    };
+    before_after: {
+        title: string;
+        title_highlight: string;
+        label_initial: string;
+        label_pre: string;
+        label_post: string;
+        label_restored: string;
+        badge_mold: string;
+        badge_clean: string;
+    };
+    coverage: {
+        title: string;
+        title_highlight: string;
+        subtitle: string;
+        cities: string[];
+        map_label: string;
+    };
+    tech_hub: {
+        title: string;
+        link1: string;
+        link2: string;
+        link3: string;
+    };
+    faq: {
+        title: string;
+        title_highlight: string;
+        items: { q: string; a: string; }[];
+    };
+    floating_cta: string;
+}
+
+export interface SystemUpgradeContent {
+    status_badge: string;
+    title_line1: string;
+    title_line2: string;
+    description: string;
+    status_pill: string;
+    cta_button: string;
+    footer: string;
+}
+
 export interface ContentSchema {
     landing: LandingContent;
     contact: ContactContent;
     navigation: NavigationContent;
     shop: ShopContent;
     logistics: LogisticsContent;
+    maintenance: MaintenanceContent;
+    system_upgrade: SystemUpgradeContent;
 }

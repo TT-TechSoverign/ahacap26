@@ -3,8 +3,13 @@
 import { Button } from '@/components/ui/Button';
 import Image from 'next/image';
 import Link from 'next/link';
+import { EditableText } from '@/components/EditableText';
+import { useContent } from '@/lib/context/ContentContext';
+import contentData from '../../content.json';
 
 export default function MaintenancePage() {
+    const { content } = useContent();
+
     return (
         <div className="bg-navy-deep text-slate-100 selection:bg-primary selection:text-white min-h-screen font-sans">
             {/* Header */}
@@ -44,21 +49,21 @@ export default function MaintenancePage() {
                         <div className="lg:col-span-7">
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/30 rounded text-primary text-xs font-bold tracking-widest mb-6">
                                 <span className="size-2 bg-primary rounded-full animate-pulse"></span>
-                                EPA-CERTIFIED DEEP CLEANING
+                                <EditableText contentKey="maintenance.hero.badge" />
                             </div>
                             <h1 className="text-5xl lg:text-7xl font-header font-bold leading-tight mb-6 text-white uppercase">
-                                PROFESSIONAL <span className="text-primary neon-glow">WINDOW AC CLEANING</span> & SANITIZATION SERVICES IN OAHU
+                                <EditableText contentKey="maintenance.hero.title" /> <span className="text-primary neon-glow"><EditableText contentKey="maintenance.hero.title_highlight" /></span> <EditableText contentKey="maintenance.hero.title_suffix" />
                             </h1>
                             <p className="text-xl text-slate-300 max-w-2xl mb-10 leading-relaxed font-display">
-                                Eliminate mold, bacteria, and salt-air corrosion with our EPA-certified deep cleaning process. Specialized for Hawaii&apos;s humidity to restore 100% cooling efficiency and peak air quality.
+                                <EditableText contentKey="maintenance.hero.description" />
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <button className="bg-primary text-navy-deep px-8 py-4 rounded font-bold tracking-widest hover:bg-accent transition-all uppercase flex items-center justify-center gap-2">
                                     <span className="material-symbols-outlined">calendar_today</span>
-                                    Schedule Service
+                                    <EditableText contentKey="maintenance.hero.cta_schedule" />
                                 </button>
                                 <button className="border border-white/20 text-white px-8 py-4 rounded font-bold tracking-widest hover:bg-white/10 transition-all uppercase">
-                                    View Local Rates
+                                    <EditableText contentKey="maintenance.hero.cta_rates" />
                                 </button>
                             </div>
                         </div>
@@ -75,20 +80,20 @@ export default function MaintenancePage() {
                                         />
                                     </div>
                                     <div>
-                                        <h4 className="text-white font-bold tracking-tight">Chris Martinez</h4>
-                                        <p className="text-primary text-xs font-bold uppercase tracking-widest">Master HVAC Technician</p>
+                                        <h4 className="text-white font-bold tracking-tight"><EditableText contentKey="maintenance.technician.name" /></h4>
+                                        <p className="text-primary text-xs font-bold uppercase tracking-widest"><EditableText contentKey="maintenance.technician.title" /></p>
                                     </div>
                                 </div>
                                 <div className="space-y-4">
                                     <div className="flex items-center gap-3 text-sm text-slate-300">
                                         <span className="material-symbols-outlined text-accent">verified</span>
-                                        <span>EPA 608 Universal Certified</span>
+                                        <span><EditableText contentKey="maintenance.technician.cert1" /></span>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm text-slate-300">
                                         <span className="material-symbols-outlined text-accent">verified</span>
-                                        <span>NATE Certified Specialist</span>
+                                        <span><EditableText contentKey="maintenance.technician.cert2" /></span>
                                     </div>
-                                    <p className="italic text-slate-400 text-sm">&quot;Our deep clean isn&apos;t just a rinse—it&apos;s a clinical decontamination of your cooling system.&quot;</p>
+                                    <p className="italic text-slate-400 text-sm"><EditableText contentKey="maintenance.technician.quote" /></p>
                                 </div>
                             </div>
                         </div>
@@ -134,11 +139,11 @@ export default function MaintenancePage() {
                 <section className="py-24 bg-navy-deep">
                     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20">
                         <div>
-                            <h2 className="text-4xl font-header font-bold text-white mb-8">WHY HAWAII&apos;S CLIMATE <span className="text-primary">DEMANDS</span> PROFESSIONAL SERVICE</h2>
+                            <h2 className="text-4xl font-header font-bold text-white mb-8"><EditableText contentKey="maintenance.climate.title" /> <span className="text-primary"><EditableText contentKey="maintenance.climate.title_highlight" /></span> <EditableText contentKey="maintenance.climate.title_suffix" /></h2>
                             <div className="space-y-6 text-slate-400 leading-relaxed text-lg">
-                                <p>Oahu&apos;s high humidity and constant exposure to saline trade winds create a &quot;perfect storm&quot; for window A/C units. Unlike drier climates, Honolulu&apos;s air causes rapid condensation buildup within the internal casing of window units, which often goes unnoticed behind the front grill.</p>
-                                <p>This moisture, combined with indoor dust, creates a fertile breeding ground for <span className="text-white font-bold">toxic mold (Aspergillus)</span> and bacteria. Without regular professional sanitization, your window unit becomes a distribution system for allergens, causing &quot;Sick Building Syndrome&quot; symptoms like headaches, fatigue, and respiratory distress.</p>
-                                <p>Furthermore, salt-air corrosion eats away at sensitive aluminum fins and copper tubing. Our deep cleaning process includes a specialized <span className="text-accent font-bold">Corrosion Inhibitor Treatment</span> that neutralizes salt deposits, potentially extending your unit&apos;s lifespan by 3-5 years.</p>
+                                <p><EditableText contentKey="maintenance.climate.description_p1" /></p>
+                                <p><EditableText contentKey="maintenance.climate.description_p2_prefix" /> <span className="text-white font-bold"><EditableText contentKey="maintenance.climate.description_p2_highlight" /></span> <EditableText contentKey="maintenance.climate.description_p2_suffix" /></p>
+                                <p><EditableText contentKey="maintenance.climate.description_p3_prefix" /> <span className="text-accent font-bold"><EditableText contentKey="maintenance.climate.description_p3_highlight" /></span> <EditableText contentKey="maintenance.climate.description_p3_suffix" /></p>
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
@@ -168,11 +173,11 @@ export default function MaintenancePage() {
                             <div className="md:col-span-2 md:row-span-2 industrial-card rounded-2xl p-8 border-l-4 border-l-primary relative overflow-hidden group bg-[#1a2333]">
                                 <div className="absolute -right-10 -top-10 text-[120px] opacity-5 text-white select-none pointer-events-none font-header">01</div>
                                 <span className="material-symbols-outlined text-5xl text-primary mb-6">sanitizer</span>
-                                <h3 className="text-2xl font-bold font-header text-white mb-4">ANTIMICROBIAL COIL FLUSH</h3>
-                                <p className="text-slate-400 leading-relaxed mb-6">We use a non-toxic, hospital-grade antimicrobial solution forced through both evaporator and condenser coils at precise pressure to dissolve biofilm and mold roots that retail sprays can&apos;t reach.</p>
+                                <h3 className="text-2xl font-bold font-header text-white mb-4"><EditableText contentKey="maintenance.process.step1_title" /></h3>
+                                <p className="text-slate-400 leading-relaxed mb-6"><EditableText contentKey="maintenance.process.step1_description" /></p>
                                 <ul className="space-y-3 text-sm text-slate-300">
-                                    <li className="flex items-center gap-2"><span className="size-1.5 bg-primary rounded-full"></span> Deep Tissue Biofilm Removal</li>
-                                    <li className="flex items-center gap-2"><span className="size-1.5 bg-primary rounded-full"></span> EPA-Registered Disinfectant</li>
+                                    <li className="flex items-center gap-2"><span className="size-1.5 bg-primary rounded-full"></span> <EditableText contentKey="maintenance.process.step1_point1" /></li>
+                                    <li className="flex items-center gap-2"><span className="size-1.5 bg-primary rounded-full"></span> <EditableText contentKey="maintenance.process.step1_point2" /></li>
                                 </ul>
                             </div>
 
@@ -264,12 +269,12 @@ export default function MaintenancePage() {
                 {/* Technical Hub */}
                 <section className="py-24 border-y border-white/5">
                     <div className="max-w-7xl mx-auto px-6">
-                        <h2 className="text-xl font-header font-bold text-white mb-8 tracking-widest text-center uppercase">TECHNICAL RESOURCE HUB</h2>
+                        <h2 className="text-xl font-header font-bold text-white mb-8 tracking-widest text-center uppercase"><EditableText contentKey="maintenance.tech_hub.title" /></h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {[
-                                { text: "Energy Star Maintenance Guidelines", icon: "menu_book" },
-                                { text: "EPA Indoor Air Quality Standards", icon: "policy" },
-                                { text: "Official Service Manuals & Diagrams", icon: "support_agent" }
+                                { text: content?.maintenance?.tech_hub?.link1 || "Energy Star Maintenance Guidelines", icon: "menu_book" },
+                                { text: content?.maintenance?.tech_hub?.link2 || "EPA Indoor Air Quality Standards", icon: "policy" },
+                                { text: content?.maintenance?.tech_hub?.link3 || "Official Service Manuals & Diagrams", icon: "support_agent" }
                             ].map((item, i) => (
                                 <a key={i} className="industrial-card p-6 rounded-xl flex items-center gap-4 group bg-[#1a2333]" href="#">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">{item.icon}</span>
@@ -303,7 +308,7 @@ export default function MaintenancePage() {
             {/* Floating Action Button */}
             <div className="fixed bottom-8 right-8 z-50">
                 <button className="bg-primary text-navy-deep p-4 rounded-full shadow-2xl flex items-center gap-3 font-bold hover:scale-105 transition-all group">
-                    <span className="hidden group-hover:inline ml-2 uppercase text-xs tracking-widest">Book Now</span>
+                    <span className="hidden group-hover:inline ml-2 uppercase text-xs tracking-widest"><EditableText contentKey="maintenance.floating_cta" /></span>
                     <span className="material-symbols-outlined">rocket_launch</span>
                 </button>
             </div>
