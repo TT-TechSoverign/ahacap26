@@ -61,7 +61,7 @@ export async function POST(req: Request) {
             mode: 'payment',
             payment_method_types: ['card'], // Strict Card Only
             line_items,
-            line_items,
+
             // FORCE USD ONLY - Disable Dynamic Currency Conversion
             payment_method_options: {
                 card: {
