@@ -9,7 +9,11 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@builder.io/react": "^9.1.0",
+        "@builder.io/sdk": "^6.2.0",
+        "@builder.io/sdk-react": "^5.1.0",
         "@radix-ui/react-slot": "^1.2.4",
+        "@sentry/nextjs": "^7.100.0",
         "@stripe/react-stripe-js": "^5.4.1",
         "@stripe/stripe-js": "^8.6.1",
         "@types/canvas-confetti": "^1.9.0",
@@ -23,16 +27,15 @@
         "react": "^18",
         "react-dom": "^18",
         "resend": "^6.8.0",
-        "stripe": "^20.2.0",
         "tailwind-merge": "^3.4.0",
-        "uuid": "^13.0.0",
-        "@sentry/nextjs": "^7.100.0"
+        "uuid": "^13.0.0"
     },
     "devDependencies": {
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
         "autoprefixer": "^10.4.19",
+        "dotenv": "^17.2.3",
         "eslint": "^8.57.1",
         "eslint-config-next": "^14.2.3",
         "postcss": "^8",
