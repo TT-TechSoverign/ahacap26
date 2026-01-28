@@ -1,6 +1,6 @@
 # dependencies
-/node_modules
-/.pnpm-store
+node_modules
+.pnpm-store
 
 # testing
 /coverage
@@ -27,3 +27,7 @@ pnpm-debug.log*
 .env.development
 .env.test
 .env.production
+
+# python
+__pycache__/
+*.pyc
