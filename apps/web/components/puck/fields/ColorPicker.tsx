@@ -1,3 +1,4 @@
+"use client";
 import { HexColorPicker } from "react-colorful";
 import { useState, useRef, useEffect } from "react";
 import { CustomField } from "@measured/puck";
