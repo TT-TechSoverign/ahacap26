@@ -189,13 +189,18 @@ export const config: Config<{
                 narrativeParam: "All Oahu AC is proud to partner...",
                 brandsWindow: [
                     { name: "LG", colorClass: "text-rose-500", fontClass: "font-sans font-black tracking-tighter text-6xl" },
-                    { name: "GE APPLIANCES", colorClass: "text-blue-400", fontClass: "font-serif font-bold tracking-wide text-3xl" }
+                    { name: "GE APPLIANCES", colorClass: "text-blue-400", fontClass: "font-serif font-bold tracking-wide text-3xl" },
+                    { name: "Hawai'i Energy", colorClass: "text-[#00FFFF]", fontClass: "font-sans font-bold tracking-tight text-4xl" }
                 ],
                 brandsMiniSplit: [
-                    { name: "MITSUBISHI ELECTRIC", colorClass: "text-red-600", fontClass: "font-header font-bold tracking-normal uppercase text-xl" }
+                    { name: "MITSUBISHI ELECTRIC", colorClass: "text-red-600", fontClass: "font-header font-bold tracking-normal uppercase text-xl" },
+                    { name: "FUJITSU", colorClass: "text-red-500", fontClass: "font-sans font-bold italic tracking-widest text-3xl" },
+                    { name: "DAIKIN", colorClass: "text-sky-400", fontClass: "font-header font-medium tracking-widest text-2xl" },
+                    { name: "CARRIER", colorClass: "text-blue-600", fontClass: "font-sans font-extrabold tracking-tighter text-3xl" }
                 ],
                 brandsCentral: [
-                    { name: "RHEEM", colorClass: "text-red-500", fontClass: "font-header font-bold tracking-tight text-5xl" }
+                    { name: "RHEEM", colorClass: "text-red-500", fontClass: "font-header font-bold tracking-tight text-5xl" },
+                    { name: "BOSCH", colorClass: "text-cyan-500", fontClass: "font-mono font-bold tracking-[0.2em] text-3xl" }
                 ]
             },
             render: Partnerships
@@ -237,7 +242,10 @@ export const config: Config<{
                 titleHighlight: "Coverage",
                 description: "Rapid dispatch...",
                 regions: [
-                    { id: "central", title: "Central Oahu", icon: "location_city", cities: [{ text: "Mililani" }, { text: "Wahiawa" }] }
+                    { id: "central", title: "Central Oahu", icon: "location_city", cities: [{ text: "Mililani" }, { text: "Wahiawa" }, { text: "Pearl City" }] },
+                    { id: "metro", title: "Metro Honolulu", icon: "apartment", cities: [{ text: "Honolulu" }, { text: "Waikiki" }, { text: "Kakaako" }] },
+                    { id: "windward", title: "Windward/North", icon: "waves", cities: [{ text: "Kailua" }, { text: "Kaneohe" }, { text: "Haleiwa" }] },
+                    { id: "leeward", title: "Leeward", icon: "sunny", cities: [{ text: "Kapolei" }, { text: "Ewa Beach" }, { text: "Waianae" }] }
                 ]
             },
             render: ServiceAreas

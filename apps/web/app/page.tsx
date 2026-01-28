@@ -34,7 +34,7 @@ export default async function LandingPage() {
                         titleLine1: "Cooling Oahu",
                         titleHighlight1: "One Home",
                         titleHighlight2: "At A Time",
-                        subBadges: ["Authorized LG Dealer", "Licensed & Insured", "Energy Efficient"],
+                        subBadges: [{ text: "Authorized LG Dealer" }, { text: "Licensed & Insured" }, { text: "Energy Efficient" }],
                         ctaShop: { text: "Shop Inventory", href: "/shop", variant: "primary" },
                         ctaEstimate: { text: "Get Estimate", href: "/contact", variant: "outline" }
                     }
@@ -81,10 +81,10 @@ export default async function LandingPage() {
                         titleHighlight: "Coverage",
                         description: "Our dedicated fleet covers the entire island...",
                         regions: [
-                            { id: "central", title: "Central Oahu", icon: "location_city", cities: ["Mililani", "Wahiawa", "Pearl City"] },
-                            { id: "metro", title: "Metro Honolulu", icon: "apartment", cities: ["Honolulu", "Waikiki", "Kakaako"] },
-                            { id: "windward", title: "Windward/North", icon: "waves", cities: ["Kailua", "Kaneohe", "Haleiwa"] },
-                            { id: "leeward", title: "Leeward", icon: "sunny", cities: ["Kapolei", "Ewa Beach", "Waianae"] }
+                            { id: "central", title: "Central Oahu", icon: "location_city", cities: [{ text: "Mililani" }, { text: "Wahiawa" }, { text: "Pearl City" }] },
+                            { id: "metro", title: "Metro Honolulu", icon: "apartment", cities: [{ text: "Honolulu" }, { text: "Waikiki" }, { text: "Kakaako" }] },
+                            { id: "windward", title: "Windward/North", icon: "waves", cities: [{ text: "Kailua" }, { text: "Kaneohe" }, { text: "Haleiwa" }] },
+                            { id: "leeward", title: "Leeward", icon: "sunny", cities: [{ text: "Kapolei" }, { text: "Ewa Beach" }, { text: "Waianae" }] }
                         ]
                     }
                 },
