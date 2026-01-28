@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
-import { Product } from '../../../types/inventory'; // Adjust path if necessary
+import { Product } from '@/types/inventory'; // Adjusted to use alias
 
 export const dynamic = 'force-dynamic';
 
