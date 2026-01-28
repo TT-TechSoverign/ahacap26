@@ -36,24 +36,36 @@ export default async function LandingPage() {
                         titleHighlight2: "& AC Specialists",
                         subBadges: [{ text: "LG & GE THROUGH THE WALL AC RETAILER" }, { text: "Licensed & Insured" }, { text: "Energy Saving Units" }],
                         ctaShop: { text: "SHOP WINDOW AC INVENTORY", href: "/shop", variant: "primary" },
-                        ctaEstimate: { text: "REQUEST A QUOTE", href: "/contact", variant: "outline" }
+                        ctaEstimate: { text: "REQUEST A QUOTE", href: "/contact", variant: "outline" },
+                        styles: { padding: "96px 0px" }
                     }
                 },
                 {
                     type: "Services", props: {
                         title: "CORE",
                         titleHighlight: "SERVICES",
-                        description: "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING...",
-                        backlinks: [],
+                        description: "",
+                        backlinks: [
+                            { text: "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM " },
+                            { text: "HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE)", href: "/shop" },
+                            { text: " CURATED FOR DURABILITY; " },
+                            { text: "ULTRA-QUIET DUCTLESS MINI SPLITS", href: "/contact" },
+                            { text: " DESIGNED FOR PRECISION ZONE COOLING; " },
+                            { text: "CENTRAL AC RETROFITS", href: "/contact" },
+                            { text: " ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND " },
+                            { text: "SPECIALIZED WINDOW AC CLEANINGS", href: "/contact" },
+                            { text: " THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM." }
+                        ],
                         items: [
                             { title: "MINI SPLITS", description: "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling...", icon: "ac_unit", linkText: "MORE INFO", href: "/contact", color: "primary" },
                             { title: "WINDOW AC SHOP", description: "Your Local High-Efficiency Resource. Skip the big-box logistics. We stock premium, DIY high-efficiency LG & GE...", icon: "storefront", linkText: "View Inventory", href: "/shop", color: "primary", badge: "In Stock" },
                             { title: "CENTRAL AC", description: "Maximize Whole-Home Comfort. We provide professional Retrofits (Air Handlers & Condensers ONLY)...", icon: "hvac", linkText: "MORE INFO", href: "/contact", color: "accent" },
                             { title: "WINDOW AC CLEANING", description: "Breathe Cleaner, Save Longer. High humidity and salt air are the leading causes of AC failure...", icon: "cleaning_services", linkText: "WINDOW AC MAINTENANCE", href: "/contact", color: "accent" }
-                        ]
+                        ],
+                        styles: { padding: "96px 0px" }
                     }
                 },
-                { type: "Video", props: { videoUrl: "/hero.mp4" } },
+                { type: "Video", props: { videoUrl: "/hero.mp4", styles: { padding: "64px 0px" } } },
                 {
                     type: "Partnerships", props: {
                         title: "ELITE BRAND PARTNERSHIPS",
@@ -73,7 +85,8 @@ export default async function LandingPage() {
                         brandsCentral: [
                             { name: "RHEEM", colorClass: "text-red-500", fontClass: "font-header font-bold tracking-tight text-5xl" },
                             { name: "BOSCH", colorClass: "text-cyan-500", fontClass: "font-mono font-bold tracking-[0.2em] text-3xl" }
-                        ]
+                        ],
+                        styles: { padding: "96px 0px" }
                     }
                 },
                 {
@@ -87,7 +100,8 @@ export default async function LandingPage() {
                             { id: "metro", title: "Metro Honolulu", icon: "apartment", cities: [{ text: "Honolulu" }, { text: "Kalihi" }, { text: "Manoa" }, { text: "Kaimuki" }, { text: "Hawaii Kai" }, { text: "Salt Lake" }] },
                             { id: "leeward", title: "LEEWARD", icon: "sunny", cities: [{ text: "Kapolei" }, { text: "Ewa Beach" }, { text: "Waipahu" }, { text: "Kunia" }] },
                             { id: "windward", title: "Windward & North", icon: "waves", cities: [{ text: "Kailua" }, { text: "Kaneohe" }, { text: "Kahaluu" }] }
-                        ]
+                        ],
+                        styles: { padding: "96px 0px" }
                     }
                 },
                 { type: "Calendar", props: { title: "Availability" } },
@@ -101,7 +115,8 @@ export default async function LandingPage() {
                         directionsLabel: "Directions",
                         directionsValue: "Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway...",
                         ctaText: "Get Directions",
-                        mapImage: "/assets/ahac-shoplocationv2.svg"
+                        mapImage: "/assets/ahac-shoplocationv2.svg",
+                        styles: { padding: "96px 0px" }
                     }
                 }
             ],
