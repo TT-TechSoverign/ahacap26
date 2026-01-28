@@ -115,8 +115,18 @@ export const config: Config<{
             defaultProps: {
                 title: "CORE",
                 titleHighlight: "SERVICES",
-                description: "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT...",
-                backlinks: [],
+                description: "",
+                backlinks: [
+                    { text: "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM " },
+                    { text: "HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE)", href: "/shop" },
+                    { text: " CURATED FOR DURABILITY; " },
+                    { text: "ULTRA-QUIET DUCTLESS MINI SPLITS", href: "/contact" },
+                    { text: " DESIGNED FOR PRECISION ZONE COOLING; " },
+                    { text: "CENTRAL AC RETROFITS", href: "/contact" },
+                    { text: " ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND " },
+                    { text: "SPECIALIZED WINDOW AC CLEANINGS", href: "/contact" },
+                    { text: " THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM." }
+                ],
                 items: [
                     { title: "MINI SPLITS", description: "Eliminate Hot Spots & High Bills...", icon: "ac_unit", linkText: "MORE INFO", href: "/contact", color: "primary" },
                     { title: "WINDOW AC SHOP", description: "Your Local High-Efficiency Resource...", icon: "storefront", linkText: "View Inventory", href: "/shop", color: "primary", badge: "In Stock" },
