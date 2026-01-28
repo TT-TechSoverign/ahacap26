@@ -1,0 +1,53 @@
+name: Sync Builder.io Content
+
+on:
+  repository_dispatch:
+    types: [builder_publish]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync_content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: apps/web
+
+      - name: Sync Content
+        env:
+          NEXT_PUBLIC_BUILDER_API_KEY: ${{ secrets.NEXT_PUBLIC_BUILDER_API_KEY }}
+        run: |
+          cd apps/web
+          npx tsx scripts/sync-builder-content.ts
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'Builder.io Sync Bot'
+          git config --global user.email 'bot@builder.io'
+          
+          # Check for changes
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "Changes detected. Committing..."
+            git add apps/web/content/builder-dump.json
+            git commit -m "chore(cms): update content from visual editor [skip ci]"
+            git push origin main
+          else
+            echo "No changes detected."
+          fi
