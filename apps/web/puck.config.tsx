@@ -74,13 +74,13 @@ export const config: Config<{
                 }
             },
             defaultProps: {
-                badge: "Est. 2005",
-                titleLine1: "Cooling Oahu",
-                titleHighlight1: "One Home",
-                titleHighlight2: "At A Time",
-                subBadges: [{ text: "Authorized LG Dealer" }, { text: "Licensed & Insured" }, { text: "Energy Efficient" }],
-                ctaShop: { text: "Shop Inventory", href: "/shop", variant: "primary" },
-                ctaEstimate: { text: "Get Estimate", href: "/contact", variant: "outline" },
+                badge: "Est. 2005 • Oahu, HI",
+                titleLine1: "20+ YEARS OF SERVICING ISLAND WIDE",
+                titleHighlight1: "OAHU'S HVAC CONTRACTOR",
+                titleHighlight2: "& AC Specialists",
+                subBadges: [{ text: "LG & GE THROUGH THE WALL AC RETAILER" }, { text: "Licensed & Insured" }, { text: "Energy Saving Units" }],
+                ctaShop: { text: "SHOP WINDOW AC INVENTORY", href: "/shop", variant: "primary" },
+                ctaEstimate: { text: "REQUEST A QUOTE", href: "/contact", variant: "outline" },
                 styles: { padding: "96px 0px" }
             },
             render: Hero
@@ -113,12 +113,15 @@ export const config: Config<{
                 }
             },
             defaultProps: {
-                title: "Elite Cooling",
-                titleHighlight: "Solutions",
-                description: "Specializing in Window AC Units...",
+                title: "CORE",
+                titleHighlight: "SERVICES",
+                description: "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT...",
                 backlinks: [],
                 items: [
-                    { title: "Window AC Sales", description: "LG & GE Units", icon: "ac_unit", linkText: "View Units", href: "/shop", color: "primary" }
+                    { title: "MINI SPLITS", description: "Eliminate Hot Spots & High Bills...", icon: "ac_unit", linkText: "MORE INFO", href: "/contact", color: "primary" },
+                    { title: "WINDOW AC SHOP", description: "Your Local High-Efficiency Resource...", icon: "storefront", linkText: "View Inventory", href: "/shop", color: "primary", badge: "In Stock" },
+                    { title: "CENTRAL AC", description: "Maximize Whole-Home Comfort...", icon: "hvac", linkText: "MORE INFO", href: "/contact", color: "accent" },
+                    { title: "WINDOW AC CLEANING", description: "Breathe Cleaner, Save Longer...", icon: "cleaning_services", linkText: "WINDOW AC MAINTENANCE", href: "/contact", color: "accent" }
                 ],
                 styles: { padding: "96px 0px" }
             },
@@ -184,9 +187,9 @@ export const config: Config<{
                 }
             },
             defaultProps: {
-                title: "Strategic",
-                titleHighlight: "Partnerships",
-                narrativeParam: "All Oahu AC is proud to partner...",
+                title: "ELITE BRAND PARTNERSHIPS",
+                titleHighlight: "TECHNOLOGY TO MASTER OAHU'S MICRO-CLIMATES",
+                narrativeParam: "AFFORDABLE HOME A/C IS PROUD TO MAINTAIN COMPLIANANCE TO PROVIDE YOU WITH THE WORLD'S LEADING HVAC ENGINEERING FIRMS...",
                 brandsWindow: [
                     { name: "LG", colorClass: "text-rose-500", fontClass: "font-sans font-black tracking-tighter text-6xl" },
                     { name: "GE APPLIANCES", colorClass: "text-blue-400", fontClass: "font-serif font-bold tracking-wide text-3xl" },
@@ -237,15 +240,15 @@ export const config: Config<{
                 }
             },
             defaultProps: {
-                badge: "Island-Wide",
-                title: "Oahu Service",
-                titleHighlight: "Coverage",
-                description: "Rapid dispatch...",
+                badge: "Island-Wide Coverage",
+                title: "Oahu's Premier",
+                titleHighlight: "COOLING NETWORK",
+                description: "Licensed experts delivering optimal air quality...",
                 regions: [
-                    { id: "central", title: "Central Oahu", icon: "location_city", cities: [{ text: "Mililani" }, { text: "Wahiawa" }, { text: "Pearl City" }] },
-                    { id: "metro", title: "Metro Honolulu", icon: "apartment", cities: [{ text: "Honolulu" }, { text: "Waikiki" }, { text: "Kakaako" }] },
-                    { id: "windward", title: "Windward/North", icon: "waves", cities: [{ text: "Kailua" }, { text: "Kaneohe" }, { text: "Haleiwa" }] },
-                    { id: "leeward", title: "Leeward", icon: "sunny", cities: [{ text: "Kapolei" }, { text: "Ewa Beach" }, { text: "Waianae" }] }
+                    { id: "central", title: "Central Oahu", icon: "warehouse", cities: [{ text: "Aiea" }, { text: "Pearl City" }, { text: "Mililani" }, { text: "Waipio Gentry" }, { text: "Waikele" }] },
+                    { id: "metro", title: "Metro Honolulu", icon: "apartment", cities: [{ text: "Honolulu" }, { text: "Kalihi" }, { text: "Manoa" }, { text: "Kaimuki" }, { text: "Hawaii Kai" }, { text: "Salt Lake" }] },
+                    { id: "leeward", title: "LEEWARD", icon: "sunny", cities: [{ text: "Kapolei" }, { text: "Ewa Beach" }, { text: "Waipahu" }, { text: "Kunia" }] },
+                    { id: "windward", title: "Windward & North", icon: "waves", cities: [{ text: "Kailua" }, { text: "Kaneohe" }, { text: "Kahaluu" }] }
                 ]
             },
             render: ServiceAreas
@@ -271,13 +274,13 @@ export const config: Config<{
                 }
             },
             defaultProps: {
-                badge: "Waipahu Hub",
-                title: "Warehouse",
-                description: "Distribution center...",
-                addressLabel: "Location",
-                addressValue: "94-150 Leoleo St...",
+                badge: "Local Pickup Center",
+                title: "Shop Location",
+                description: "Our shop is stocked with window units. Order yours today",
+                addressLabel: "Address",
+                addressValue: "94-150 Leoleo St. #203\nWaipahu, HI 96797",
                 directionsLabel: "Directions",
-                directionsValue: "Near the old mill...",
+                directionsValue: "Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses...",
                 ctaText: "Get Directions",
                 mapImage: "/assets/ahac-shoplocationv2.svg"
             },
