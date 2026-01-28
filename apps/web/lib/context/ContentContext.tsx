@@ -4,7 +4,7 @@ import React, { createContext, useCallback, useContext, useEffect, useState } fr
 import { ContentSchema, ServiceItem } from '../../types/content';
 import initialContentJson from '../content/content.json';
 
-const initialContent = initialContentJson as ContentSchema;
+const initialContent = initialContentJson as any;
 
 type ContentUpdate = {
   path: string;
