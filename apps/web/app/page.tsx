@@ -2,7 +2,6 @@ import { Render } from "@measured/puck";
 import config from "../puck.config";
 import Navbar from '@/components/Navbar';
 import { BackToTop } from '@/components/BackToTop';
-import Footer from '@/components/Footer';
 
 // Force dynamic since we fetch fresh content
 export const dynamic = 'force-dynamic';
@@ -132,7 +131,6 @@ export default async function LandingPage() {
                 <Render config={config} data={data} />
             </main>
 
-            <Footer />
             <BackToTop visible={true} />
         </div>
     );
