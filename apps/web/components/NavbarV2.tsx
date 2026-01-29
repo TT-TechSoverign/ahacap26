@@ -67,14 +67,17 @@ export default function NavbarV2() {
                             {/* Placeholder to balance if needed, or just flex-col on mobile */}
                         </div>
 
-                        {/* Left Brands (Desktop Only) */}
-                        <div className="hidden md:flex items-center gap-8 flex-1 justify-end pr-8 opacity-60 hover:opacity-100 transition-opacity">
-                            <span className="font-sans font-black text-2xl text-slate-400">LG</span>
-                            <span className="font-serif font-bold text-xl text-slate-400">GE</span>
+                        {/* Left Brands (Desktop Only: Window & Central Mix) */}
+                        <div className="hidden lg:flex items-center gap-6 flex-1 justify-end pr-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
+                            <span className="text-rose-500 font-sans font-black tracking-tighter text-2xl">LG</span>
+                            <span className="text-blue-600 font-serif font-bold tracking-wide text-lg">GE</span>
+                            <span className="text-cyan-600 font-sans font-bold tracking-tight text-xl">Hawai'i Energy</span>
+                            <span className="text-red-600 font-header font-bold tracking-tight text-2xl">RHEEM</span>
+                            <span className="text-sky-600 font-mono font-bold tracking-[0.2em] text-lg">BOSCH</span>
                         </div>
 
                         {/* Center: Prominent Logo */}
-                        <Link href="/" className="relative h-24 w-48 md:h-32 md:w-64 group shrink-0">
+                        <Link href="/" className="relative h-28 w-56 md:h-36 md:w-72 group shrink-0">
                             {/* Light Mode Logo - Standard */}
                             <Image
                                 src="/assets/ahac-logo-bus-500x500xv2.svg"
@@ -85,10 +88,12 @@ export default function NavbarV2() {
                             />
                         </Link>
 
-                        {/* Right Brands (Desktop Only) */}
-                        <div className="hidden md:flex items-center gap-8 flex-1 justify-start pl-8 opacity-60 hover:opacity-100 transition-opacity">
-                            <span className="font-bold uppercase text-lg text-slate-400 tracking-wider">Mitsubishi</span>
-                            <span className="font-bold italic text-xl text-slate-400">Fujitsu</span>
+                        {/* Right Brands (Desktop Only: Mini Splits) */}
+                        <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
+                            <span className="text-red-600 font-header font-bold tracking-normal uppercase text-sm">MITSUBISHI ELECTRIC</span>
+                            <span className="text-red-600 font-sans font-bold italic tracking-widest text-xl">FUJITSU</span>
+                            <span className="text-sky-500 font-header font-medium tracking-widest text-lg">DAIKIN</span>
+                            <span className="text-blue-700 font-sans font-extrabold tracking-tighter text-xl">CARRIER</span>
                         </div>
 
                         {/* Mobile Hamburger (Absolute Right) */}
