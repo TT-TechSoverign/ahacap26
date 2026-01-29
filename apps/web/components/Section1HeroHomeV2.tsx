@@ -27,7 +27,7 @@ export default function Section1HeroHomeV2() {
 
             {/* Content Container */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col items-start justify-center h-full pt-20">
-                <div className="max-w-3xl flex flex-col gap-6">
+                <div className="max-w-3xl flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-10 duration-1000">
 
                     {/* Header */}
                     <h1 className="font-header font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.9] tracking-tighter uppercase drop-shadow-2xl">
