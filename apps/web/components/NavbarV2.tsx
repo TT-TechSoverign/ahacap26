@@ -259,6 +259,26 @@ export default function NavbarV2() {
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">storefront</span>
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary">Shop</span>
                                 </Link>
+                                <button
+                                    onClick={() => {
+                                        if (isEditMode) saveChanges();
+                                        else setEditMode(true);
+                                        setMobileMenuOpen(false);
+                                    }}
+                                    className={cn(
+                                        "col-span-2 border p-4 rounded-xl flex flex-col items-center gap-2 group transition-all",
+                                        isEditMode
+                                            ? "bg-green-50 border-green-500/50"
+                                            : "bg-slate-50 border-slate-200 hover:border-primary/50"
+                                    )}
+                                >
+                                    <span className={cn("material-symbols-outlined transition-transform group-hover:scale-110", isEditMode ? "text-green-600" : "text-slate-500")}>
+                                        {isEditMode ? 'save' : 'edit'}
+                                    </span>
+                                    <span className={cn("text-[10px] font-black uppercase tracking-widest", isEditMode ? "text-green-600" : "text-slate-500")}>
+                                        {isEditMode ? 'Save Changes' : 'Enable Editing'}
+                                    </span>
+                                </button>
                             </motion.div>
                         </div>
                     </motion.div>

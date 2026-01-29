@@ -2,6 +2,7 @@ import { Render } from "@measured/puck";
 import config from "../../puck.config";
 import NavbarV2 from '@/components/NavbarV2';
 import Section1HeroHomeV2 from '@/components/Section1HeroHomeV2';
+import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
 import Footer from '@/components/Footer';
 import { BackToTop } from '@/components/BackToTop';
 
@@ -144,9 +145,10 @@ export default function HomepageV2() {
     return (
         <div className="bg-white text-slate-900 min-h-screen font-sans">
             <NavbarV2 />
-            <main className="pt-[180px]">
+            <main className="pt-[180px] bg-slate-900">
                 <Section1HeroHomeV2 />
-                <Render config={config} data={v2Data} />
+                <Section2OurServicesV2 />
+                {/* <Render config={config} data={v2Data} /> */}
             </main>
             <Footer />
             <BackToTop visible={true} />
