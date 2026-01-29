@@ -144,6 +144,7 @@ export default function HomepageV2() {
         <div className="bg-white text-slate-900 min-h-screen font-sans">
             <NavbarV2 />
             <main className="pt-[180px]">
+                <Section1HeroHomeV2 />
                 <Render config={config} data={v2Data} />
             </main>
             <Footer />
