@@ -441,6 +441,15 @@
         },
         "floating_cta": "Book Now"
     },
+    "home_v2": {
+        "hero": {
+            "title_line1": "ELITE COOLING",
+            "title_highlight": "PERFORMANCE",
+            "narrative": "Experience the gold standard in climate control. From precision window unit expertise to commercial-grade installations, we engineer comfort that masters Oahu's unique micro-climates.",
+            "cta_shop": "Shop Window AC Units",
+            "cta_quote": "Request A Quote"
+        }
+    },
     "system_upgrade": {
         "status_badge": "System Status: Upgrading",
         "title_line1": "The Evolution",
