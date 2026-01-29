@@ -55,8 +55,8 @@ export default function NavbarV2() {
             }}
             className="fixed top-0 w-full z-50 flex flex-col pointer-events-none"
         >
-            {/* Main Header Container (White Background for V2) */}
-            <div className="pointer-events-auto bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 relative text-slate-900">
+            {/* Main Header Container (Dark Blue Background for V2) */}
+            <div className="pointer-events-auto bg-[#0F172A]/95 backdrop-blur-md shadow-lg border-b border-white/10 relative text-white">
                 <div className="max-w-7xl mx-auto px-6 py-2 flex flex-col gap-2">
 
                     {/* Row 1: Split Header (Brands - Logo - Brands) */}
@@ -69,11 +69,11 @@ export default function NavbarV2() {
 
                         {/* Left Brands (Desktop Only: Window & Central Mix) */}
                         <div className="hidden lg:flex items-center gap-6 flex-1 justify-end pr-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                            <span className="text-rose-500 font-sans font-black tracking-tighter text-2xl relative group cursor-default">
+                            <span className="text-white font-sans font-black tracking-tighter text-2xl relative group cursor-default">
                                 LG
                                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                             </span>
-                            <span className="text-blue-600 font-serif font-bold tracking-wide text-lg relative group cursor-default">
+                            <span className="text-white font-serif font-bold tracking-wide text-lg relative group cursor-default">
                                 GE
                                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                             </span>
@@ -81,11 +81,11 @@ export default function NavbarV2() {
                                 Hawai'i Energy
                                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                             </span>
-                            <span className="text-red-600 font-header font-bold tracking-tight text-2xl relative group cursor-default">
+                            <span className="text-white font-header font-bold tracking-tight text-2xl relative group cursor-default">
                                 RHEEM
                                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                             </span>
-                            <span className="text-sky-600 font-mono font-bold tracking-[0.2em] text-lg relative group cursor-default">
+                            <span className="text-white font-mono font-bold tracking-[0.2em] text-lg relative group cursor-default">
                                 BOSCH
                                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                             </span>
@@ -98,26 +98,26 @@ export default function NavbarV2() {
                                 src="/assets/ahac-logo-bus-500x500xv2.svg"
                                 alt="AHAC Logo"
                                 fill
-                                className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]"
+                                className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)] brightness-0 invert"
                                 priority
                             />
                         </Link>
 
                         {/* Right Brands (Desktop Only: Mini Splits) */}
                         <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                            <span className="text-red-600 font-header font-bold tracking-normal uppercase text-sm relative group cursor-default">
+                            <span className="text-white font-header font-bold tracking-normal uppercase text-sm relative group cursor-default">
                                 MITSUBISHI ELECTRIC
                                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                             </span>
-                            <span className="text-red-600 font-sans font-bold italic tracking-widest text-xl relative group cursor-default">
+                            <span className="text-white font-sans font-bold italic tracking-widest text-xl relative group cursor-default">
                                 FUJITSU
                                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                             </span>
-                            <span className="text-sky-500 font-header font-medium tracking-widest text-lg relative group cursor-default">
+                            <span className="text-[#00B5E2] font-header font-medium tracking-widest text-lg relative group cursor-default">
                                 DAIKIN
                                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                             </span>
-                            <span className="text-blue-700 font-sans font-extrabold tracking-tighter text-xl relative group cursor-default">
+                            <span className="text-white font-sans font-extrabold tracking-tighter text-xl relative group cursor-default">
                                 CARRIER
                                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                             </span>
@@ -127,7 +127,7 @@ export default function NavbarV2() {
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 md:hidden">
                             <button
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                className="text-slate-900 hover:text-primary transition-colors p-2"
+                                className="text-white hover:text-cyan-400 transition-colors p-2"
                             >
                                 <span className="material-symbols-outlined text-3xl">
                                     {mobileMenuOpen ? 'close' : 'menu'}
@@ -137,20 +137,21 @@ export default function NavbarV2() {
                     </div>
 
                     {/* Row 2: Navigation (Centered) + Cart (Right) */}
-                    <div className="hidden md:grid grid-cols-3 items-center border-t border-slate-100 pt-3">
+                    <div className="hidden md:grid grid-cols-3 items-center border-t border-white/10 pt-3">
 
                         {/* Left Col: Spacer (to balance Cart) */}
                         <div className="hidden md:block"></div>
 
                         {/* Center Col: Navigation Links */}
                         <div className="flex justify-center items-center gap-8 md:gap-10">
-                            {links.map((link: any, i: number) => (
+                            {[...links, { href: '/contact', text: 'Contact Us' }].map((link: any, i: number) => (
                                 <Link
                                     key={i}
                                     href={link.href}
-                                    className="text-xs font-black uppercase tracking-[0.2em] text-slate-500 hover:text-primary transition-colors whitespace-nowrap"
+                                    className="text-xs font-black uppercase tracking-[0.2em] text-slate-300 hover:text-cyan-400 transition-colors whitespace-nowrap relative group"
                                 >
-                                    <EditableText contentKey={`navigation.links.${i}.text`} />
+                                    {link.contentKey ? <EditableText contentKey={link.contentKey} /> : link.text}
+                                    <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                                 </Link>
                             ))}
                         </div>
@@ -159,14 +160,14 @@ export default function NavbarV2() {
                         <div className="flex justify-end items-center">
                             <button
                                 onClick={openCart}
-                                className="relative group p-2 hover:bg-slate-100 rounded-lg transition-colors flex items-center gap-2"
+                                className="relative group p-2 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-2"
                                 aria-label="Open Cart"
                             >
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 group-hover:text-primary hidden lg:block">Cart</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-300 group-hover:text-cyan-400 hidden lg:block">Cart</span>
                                 <div className="relative">
-                                    <span className="material-symbols-outlined text-2xl text-slate-900 group-hover:text-primary transition-colors">shopping_cart</span>
+                                    <span className="material-symbols-outlined text-2xl text-white group-hover:text-cyan-400 transition-colors">shopping_cart</span>
                                     {items.length > 0 && (
-                                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-[9px] font-black flex items-center justify-center rounded-full shadow-sm">
+                                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-cyan-400 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm">
                                             {items.length}
                                         </span>
                                     )}
