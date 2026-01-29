@@ -16,6 +16,12 @@ export default function Section1HeroHomeV2() {
                     className="object-cover object-center opacity-80"
                     priority
                 />
+
+                {/* Primary Dark Blue Overlay with Blend Mode for Seamless Reading */}
+                <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-90" />
+
+                {/* Gradient Overlay for Depth and Contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-[#0F172A]/80" />
             </div>
 
             {/* Content Container - Centered and Mobile Optimized */}
