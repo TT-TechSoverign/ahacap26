@@ -57,20 +57,41 @@ export default function NavbarV2() {
         >
             {/* Main Header Container (White Background for V2) */}
             <div className="pointer-events-auto bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 relative text-slate-900">
-                <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+                <div className="max-w-7xl mx-auto px-6 py-2 flex flex-col gap-2">
 
-                    {/* Row 1: Logo (Centered) */}
-                    <div className="flex justify-center items-center relative py-2">
-                        <Link href="/" className="relative h-16 w-32 md:h-20 md:w-40 group">
+                    {/* Row 1: Split Header (Brands - Logo - Brands) */}
+                    <div className="flex justify-between items-center relative py-1">
+
+                        {/* Hidden Mobile Hamburger (Absolute Left for V2 mobile) */}
+                        <div className="md:hidden">
+                            {/* Placeholder to balance if needed, or just flex-col on mobile */}
+                        </div>
+
+                        {/* Left Brands (Desktop Only) */}
+                        <div className="hidden md:flex items-center gap-8 flex-1 justify-end pr-8 opacity-60 hover:opacity-100 transition-opacity">
+                            <span className="font-sans font-black text-2xl text-slate-400">LG</span>
+                            <span className="font-serif font-bold text-xl text-slate-400">GE</span>
+                        </div>
+
+                        {/* Center: Prominent Logo */}
+                        <Link href="/" className="relative h-24 w-48 md:h-32 md:w-64 group shrink-0">
                             {/* Light Mode Logo - Standard */}
                             <Image
                                 src="/assets/ahac-logo-bus-500x500xv2.svg"
                                 alt="AHAC Logo"
                                 fill
-                                className="object-contain relative z-10 drop-shadow-sm"
+                                className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+                                priority
                             />
                         </Link>
-                        {/* Mobile Hamburger (Absolute Right on Top Row) */}
+
+                        {/* Right Brands (Desktop Only) */}
+                        <div className="hidden md:flex items-center gap-8 flex-1 justify-start pl-8 opacity-60 hover:opacity-100 transition-opacity">
+                            <span className="font-bold uppercase text-lg text-slate-400 tracking-wider">Mitsubishi</span>
+                            <span className="font-bold italic text-xl text-slate-400">Fujitsu</span>
+                        </div>
+
+                        {/* Mobile Hamburger (Absolute Right) */}
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 md:hidden">
                             <button
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -84,7 +105,7 @@ export default function NavbarV2() {
                     </div>
 
                     {/* Row 2: Navigation (Centered) + Cart (Right) */}
-                    <div className="hidden md:grid grid-cols-3 items-center border-t border-slate-100 pt-2">
+                    <div className="hidden md:grid grid-cols-3 items-center border-t border-slate-100 pt-3">
 
                         {/* Left Col: Spacer (to balance Cart) */}
                         <div className="hidden md:block"></div>
