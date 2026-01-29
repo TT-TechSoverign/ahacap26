@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { EditableText } from './EditableText';
 
 export default function Section1HeroHomeV2() {
     return (
@@ -15,12 +16,6 @@ export default function Section1HeroHomeV2() {
                     className="object-cover object-center opacity-80"
                     priority
                 />
-
-                {/* Primary Dark Blue Overlay with Blend Mode for Seamless Reading */}
-                <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-90" />
-
-                {/* Gradient Overlay for Depth and Contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-[#0F172A]/80" />
             </div>
 
             {/* Content Container - Centered and Mobile Optimized */}
@@ -29,23 +24,36 @@ export default function Section1HeroHomeV2() {
 
                     {/* Header */}
                     <h1 className="font-header font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.9] tracking-tighter uppercase drop-shadow-2xl">
-                        ELITE COOLING <br />
-                        <span className="text-cyan-400 drop-shadow-[0_0_25px_rgba(34,211,238,0.4)]">PERFORMANCE</span>
+                        <EditableText
+                            contentKey="home_v2.hero.title_line1"
+                            defaultValue="ELITE COOLING"
+                        /> <br />
+                        <span className="text-cyan-400 drop-shadow-[0_0_25px_rgba(0,174,239,0.5)]">
+                            <EditableText
+                                contentKey="home_v2.hero.title_highlight"
+                                defaultValue="PERFORMANCE"
+                            />
+                        </span>
                     </h1>
 
                     {/* Narrative */}
-                    <p className="font-sans text-lg sm:text-xl text-slate-200 font-medium leading-relaxed max-w-2xl drop-shadow-md mx-auto">
-                        Experience the gold standard in climate control. From precision window unit expertise to commercial-grade installations, we engineer comfort that masters Oahu's unique micro-climates.
-                    </p>
+                    <div className="font-sans text-lg sm:text-xl text-slate-200 font-medium leading-relaxed max-w-2xl drop-shadow-md mx-auto">
+                        <EditableText
+                            contentKey="home_v2.hero.narrative"
+                            as="p"
+                            multiLine={true}
+                            defaultValue="Experience the gold standard in climate control. From precision window unit expertise to commercial-grade installations, we engineer comfort that masters Oahu's unique micro-climates."
+                        />
+                    </div>
 
                     {/* Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto justify-center items-center">
                         <Link
                             href="/shop"
-                            className="w-full sm:w-auto group relative overflow-hidden bg-cyan-500 hover:bg-cyan-400 text-white font-header font-black text-xl uppercase tracking-widest py-5 px-10 rounded shadow-[0_10px_30px_rgba(6,182,212,0.3)] transition-all transform hover:-translate-y-1 text-center"
+                            className="w-full sm:w-auto group relative overflow-hidden bg-cyan-500 hover:bg-cyan-400 text-white font-header font-black text-xl uppercase tracking-widest py-5 px-10 rounded shadow-[0_10px_30px_rgba(0,174,239,0.4)] transition-all transform hover:-translate-y-1 text-center"
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
-                                Shop Window AC Units
+                                <EditableText contentKey="home_v2.hero.cta_shop" defaultValue="Shop Window AC Units" />
                                 <span className="material-symbols-outlined text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
                             </span>
                         </Link>
@@ -54,7 +62,9 @@ export default function Section1HeroHomeV2() {
                             href="/contact"
                             className="w-full sm:w-auto group relative overflow-hidden bg-transparent border-2 border-white hover:border-cyan-400 text-white hover:text-cyan-400 font-header font-black text-xl uppercase tracking-widest py-5 px-10 rounded transition-all transform hover:-translate-y-1 backdrop-blur-sm text-center"
                         >
-                            <span className="relative z-10">Request A Quote</span>
+                            <span className="relative z-10">
+                                <EditableText contentKey="home_v2.hero.cta_quote" defaultValue="Request A Quote" />
+                            </span>
                         </Link>
                     </div>
                 </div>
