@@ -42,7 +42,7 @@ export default function Section1HeroHomeV2() {
                             contentKey="home_v2.hero.narrative"
                             as="p"
                             multiLine={true}
-                            defaultValue="We understand that a cool home is a happy home. As your neighbors, we're dedicated to protecting your peace of mind with honest, reliable service that treats you like family."
+                            defaultValue="Building comfort for our community, one project at a time. Whether you're a homeowner, realtor, or contractor, we master the dynamics of residential and commercial cooling—from HOA-compliant upgrades to new construction—so you can focus on what matters most."
                         />
                     </div>
 
