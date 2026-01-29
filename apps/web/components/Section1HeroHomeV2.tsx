@@ -26,12 +26,12 @@ export default function Section1HeroHomeV2() {
                     <h1 className="font-header font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.9] tracking-tighter uppercase drop-shadow-2xl">
                         <EditableText
                             contentKey="home_v2.hero.title_line1"
-                            defaultValue="ELITE COOLING"
+                            defaultValue="COMFORT FOR"
                         /> <br />
                         <span className="text-cyan-400 drop-shadow-[0_0_25px_rgba(0,174,239,0.5)]">
                             <EditableText
                                 contentKey="home_v2.hero.title_highlight"
-                                defaultValue="PERFORMANCE"
+                                defaultValue="YOUR OHANA"
                             />
                         </span>
                     </h1>
@@ -42,7 +42,7 @@ export default function Section1HeroHomeV2() {
                             contentKey="home_v2.hero.narrative"
                             as="p"
                             multiLine={true}
-                            defaultValue="Experience the gold standard in climate control. From precision window unit expertise to commercial-grade installations, we engineer comfort that masters Oahu's unique micro-climates."
+                            defaultValue="We understand that a cool home is a happy home. As your neighbors, we're dedicated to protecting your peace of mind with honest, reliable service that treats you like family."
                         />
                     </div>
 
