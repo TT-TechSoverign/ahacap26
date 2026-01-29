@@ -27,6 +27,7 @@ export const HeroSchema = z.object({
     subBadges: z.array(z.object({ text: z.string() })).describe("List of badges (e.g. Licensed, Insured)"),
     ctaShop: LinkSchema,
     ctaEstimate: LinkSchema,
+    mode: z.enum(['dark', 'light']).optional().default('dark'),
     styles: StyleSchema.optional()
 });
 
@@ -49,6 +50,7 @@ export const ServicesGridSchema = z.object({
         href: z.string().optional(),
     })).describe("Text segments with optional links"),
     items: z.array(ServiceItemSchema),
+    mode: z.enum(['dark', 'light']).optional().default('dark'),
     styles: StyleSchema.optional()
 });
 
