@@ -11,7 +11,7 @@ import { EditableText } from './EditableText';
 
 export default function NavbarV2() {
     const { items, openCart } = useCart();
-    const { content } = useContent();
+    const { content, isEditMode, setEditMode, saveChanges, discardChanges } = useContent();
 
     // --- Sticky-Free Navigation Logic ---
     const { scrollY } = useScroll();
@@ -176,6 +176,38 @@ export default function NavbarV2() {
                                         )}
                                     </div>
                                 </button>
+                            </div>
+
+                            {/* Edit Mode Toggle (Prototype Only) */}
+                            <div className="flex justify-end items-center ml-4 pl-4 border-l border-slate-700">
+                                <button
+                                    onClick={() => isEditMode ? saveChanges() : setEditMode(true)}
+                                    className={cn(
+                                        "flex items-center gap-2 px-3 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all",
+                                        isEditMode
+                                            ? "bg-green-500 text-white hover:bg-green-400 shadow-[0_0_15px_rgba(34,197,94,0.5)]"
+                                            : "bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700"
+                                    )}
+                                >
+                                    <span className="material-symbols-outlined text-lg">
+                                        {isEditMode ? 'save' : 'edit'}
+                                    </span>
+                                    <span>{isEditMode ? 'Save' : 'Edit'}</span>
+                                </button>
+                                {isEditMode && (
+                                    <button
+                                        onClick={() => {
+                                            if (confirm('Discard unsaved changes?')) {
+                                                discardChanges();
+                                                setEditMode(false);
+                                            }
+                                        }}
+                                        className="ml-2 p-1.5 text-slate-400 hover:text-red-400 transition-colors"
+                                        title="Discard Changes"
+                                    >
+                                        <span className="material-symbols-outlined text-lg">close</span>
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>
