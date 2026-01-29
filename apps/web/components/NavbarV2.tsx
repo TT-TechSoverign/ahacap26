@@ -69,11 +69,26 @@ export default function NavbarV2() {
 
                         {/* Left Brands (Desktop Only: Window & Central Mix) */}
                         <div className="hidden lg:flex items-center gap-6 flex-1 justify-end pr-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                            <span className="text-rose-500 font-sans font-black tracking-tighter text-2xl">LG</span>
-                            <span className="text-blue-600 font-serif font-bold tracking-wide text-lg">GE</span>
-                            <span className="text-cyan-600 font-sans font-bold tracking-tight text-xl">Hawai'i Energy</span>
-                            <span className="text-red-600 font-header font-bold tracking-tight text-2xl">RHEEM</span>
-                            <span className="text-sky-600 font-mono font-bold tracking-[0.2em] text-lg">BOSCH</span>
+                            <span className="text-rose-500 font-sans font-black tracking-tighter text-2xl relative group cursor-default">
+                                LG
+                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                            </span>
+                            <span className="text-blue-600 font-serif font-bold tracking-wide text-lg relative group cursor-default">
+                                GE
+                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                            </span>
+                            <span className="text-[#00B5E2] font-sans font-bold tracking-tight text-xl relative group cursor-default">
+                                Hawai'i Energy
+                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                            </span>
+                            <span className="text-red-600 font-header font-bold tracking-tight text-2xl relative group cursor-default">
+                                RHEEM
+                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                            </span>
+                            <span className="text-sky-600 font-mono font-bold tracking-[0.2em] text-lg relative group cursor-default">
+                                BOSCH
+                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                            </span>
                         </div>
 
                         {/* Center: Prominent Logo */}
@@ -83,17 +98,29 @@ export default function NavbarV2() {
                                 src="/assets/ahac-logo-bus-500x500xv2.svg"
                                 alt="AHAC Logo"
                                 fill
-                                className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+                                className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]"
                                 priority
                             />
                         </Link>
 
                         {/* Right Brands (Desktop Only: Mini Splits) */}
                         <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                            <span className="text-red-600 font-header font-bold tracking-normal uppercase text-sm">MITSUBISHI ELECTRIC</span>
-                            <span className="text-red-600 font-sans font-bold italic tracking-widest text-xl">FUJITSU</span>
-                            <span className="text-sky-500 font-header font-medium tracking-widest text-lg">DAIKIN</span>
-                            <span className="text-blue-700 font-sans font-extrabold tracking-tighter text-xl">CARRIER</span>
+                            <span className="text-red-600 font-header font-bold tracking-normal uppercase text-sm relative group cursor-default">
+                                MITSUBISHI ELECTRIC
+                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                            </span>
+                            <span className="text-red-600 font-sans font-bold italic tracking-widest text-xl relative group cursor-default">
+                                FUJITSU
+                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                            </span>
+                            <span className="text-sky-500 font-header font-medium tracking-widest text-lg relative group cursor-default">
+                                DAIKIN
+                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                            </span>
+                            <span className="text-blue-700 font-sans font-extrabold tracking-tighter text-xl relative group cursor-default">
+                                CARRIER
+                                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                            </span>
                         </div>
 
                         {/* Mobile Hamburger (Absolute Right) */}
