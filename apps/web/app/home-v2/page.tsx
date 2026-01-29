@@ -1,6 +1,7 @@
 import { Render } from "@measured/puck";
 import config from "../../puck.config";
 import NavbarV2 from '@/components/NavbarV2';
+import Section1HeroHomeV2 from '@/components/Section1HeroHomeV2';
 import Footer from '@/components/Footer';
 import { BackToTop } from '@/components/BackToTop';
 
