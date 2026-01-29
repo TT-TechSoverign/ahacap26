@@ -1,0 +1,179 @@
+'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { useCart } from '../context/CartContext';
+import { useContent } from '../lib/context/ContentContext';
+import { EditableText } from './EditableText';
+
+export default function NavbarV2() {
+    const { items, openCart } = useCart();
+    const { content } = useContent();
+
+    // --- Sticky-Free Navigation Logic ---
+    const { scrollY } = useScroll();
+    const [headerVisible, setHeaderVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    // Lock body scroll when mobile menu is open
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [mobileMenuOpen]);
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const direction = latest > lastScrollY ? "down" : "up";
+        if (latest > 50 && direction === "down" && headerVisible && !mobileMenuOpen) {
+            setHeaderVisible(false);
+        } else if (direction === "up" && !headerVisible) {
+            setHeaderVisible(true);
+        }
+        setLastScrollY(latest);
+    });
+
+    const links = content?.navigation?.links || [];
+
+    return (
+        <motion.header
+            initial={{ y: 0 }}
+            animate={{ y: (headerVisible || mobileMenuOpen) ? 0 : -400 }}
+            transition={{
+                type: "spring",
+                stiffness: 150,
+                damping: 25,
+                delay: (headerVisible || mobileMenuOpen) ? 0.1 : 0
+            }}
+            className="fixed top-0 w-full z-50 flex flex-col pointer-events-none"
+        >
+            {/* Main Header Container (White Background for V2) */}
+            <div className="pointer-events-auto bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 relative text-slate-900">
+                <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+
+                    {/* Row 1: Logo (Centered) */}
+                    <div className="flex justify-center items-center relative py-2">
+                        <Link href="/" className="relative h-16 w-32 md:h-20 md:w-40 group">
+                            {/* Light Mode Logo - Standard */}
+                            <Image
+                                src="/assets/ahac-logo-bus-500x500xv2.svg"
+                                alt="AHAC Logo"
+                                fill
+                                className="object-contain relative z-10 drop-shadow-sm"
+                            />
+                        </Link>
+                        {/* Mobile Hamburger (Absolute Right on Top Row) */}
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 md:hidden">
+                            <button
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                className="text-slate-900 hover:text-primary transition-colors p-2"
+                            >
+                                <span className="material-symbols-outlined text-3xl">
+                                    {mobileMenuOpen ? 'close' : 'menu'}
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Row 2: Navigation (Centered) + Cart (Right) */}
+                    <div className="hidden md:grid grid-cols-3 items-center border-t border-slate-100 pt-2">
+
+                        {/* Left Col: Spacer (to balance Cart) */}
+                        <div className="hidden md:block"></div>
+
+                        {/* Center Col: Navigation Links */}
+                        <div className="flex justify-center items-center gap-8 md:gap-10">
+                            {links.map((link: any, i: number) => (
+                                <Link
+                                    key={i}
+                                    href={link.href}
+                                    className="text-xs font-black uppercase tracking-[0.2em] text-slate-500 hover:text-primary transition-colors whitespace-nowrap"
+                                >
+                                    <EditableText contentKey={`navigation.links.${i}.text`} />
+                                </Link>
+                            ))}
+                        </div>
+
+                        {/* Right Col: Cart */}
+                        <div className="flex justify-end items-center">
+                            <button
+                                onClick={openCart}
+                                className="relative group p-2 hover:bg-slate-100 rounded-lg transition-colors flex items-center gap-2"
+                                aria-label="Open Cart"
+                            >
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 group-hover:text-primary hidden lg:block">Cart</span>
+                                <div className="relative">
+                                    <span className="material-symbols-outlined text-2xl text-slate-900 group-hover:text-primary transition-colors">shopping_cart</span>
+                                    {items.length > 0 && (
+                                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-[9px] font-black flex items-center justify-center rounded-full shadow-sm">
+                                            {items.length}
+                                        </span>
+                                    )}
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile Menu Overlay (Light Mode) */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                        animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
+                        exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 top-[100px] z-40 bg-white/95 pointer-events-auto md:hidden overflow-hidden flex flex-col"
+                    >
+                        <div className="flex-1 flex flex-col justify-center items-center gap-8 relative z-10 px-6">
+                            {links.map((link: any, i: number) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: i * 0.1 }}
+                                >
+                                    <Link
+                                        href={link.href}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="text-3xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center gap-4 group"
+                                    >
+                                        <EditableText contentKey={`navigation.links.${i}.text`} />
+                                    </Link>
+                                </motion.div>
+                            ))}
+
+                            <div className="w-full h-px bg-slate-200 my-4 max-w-[200px]"></div>
+
+                            {/* Quick Actions */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 }}
+                                className="grid grid-cols-2 gap-4 w-full max-w-xs"
+                            >
+                                <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="bg-slate-50 border border-slate-200 hover:border-primary/50 p-4 rounded-xl flex flex-col items-center gap-2 group transition-all">
+                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">call</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary">Call Us</span>
+                                </Link>
+                                <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="bg-slate-50 border border-slate-200 hover:border-primary/50 p-4 rounded-xl flex flex-col items-center gap-2 group transition-all">
+                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">storefront</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary">Shop</span>
+                                </Link>
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.header>
+    );
+}
