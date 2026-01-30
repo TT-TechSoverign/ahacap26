@@ -60,27 +60,23 @@ export default function Section3AboutQuick() {
                         </div>
                     </div>
 
-                    {/* Right: Image */}
-                    <div className="order-1 lg:order-2 relative group">
-                        <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-transparent rounded-3xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/50">
-                            {/* Placeholder generic image or use content key if we want to make it editable later, 
-                                but hardcoding a nice placeholder for now until user puts in real image */}
-                            <div className="absolute inset-0 bg-slate-800 flex items-center justify-center text-slate-600 font-mono text-xs uppercase tracking-widest">
-                                {/* <span className="z-10 bg-black/50 p-4 rounded backdrop-blur">
-                                    [ <EditableText contentKey="home_v2.about_quick.image_alt" /> ]
-                                </span> */}
+                    {/* Right: Image - Taller Vertical Layout */}
+                    <div className="order-1 lg:order-2 relative group h-[500px] lg:h-[600px] w-full">
+                        <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-transparent rounded-3xl blur-xl opacity-30 group-hover:opacity-80 transition-opacity duration-700"></div>
+                        <div className="relative h-full w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/50">
+
+                            <div className="absolute inset-0 bg-[#0F172A] flex items-center justify-center">
                                 <Image
                                     src="/assets/hero-cards/videoad-screenshot-van1.png"
                                     alt="Historic Service Photo"
                                     fill
-                                    className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 mix-blend-overlay"
+                                    className="object-cover object-center opacity-100 group-hover:scale-105 transition-transform duration-700"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent mix-blend-multiply"></div>
+                                {/* Much lighter gradient at bottom only for text readability if needed, but keeping image clear */}
+                                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0F172A] to-transparent opacity-80 mix-blend-multiply"></div>
                             </div>
 
-                            {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent opacity-60"></div>
+                            {/* Removed heavy full-cover overlays to keep image bright and visible */}
                         </div>
                     </div>
 
