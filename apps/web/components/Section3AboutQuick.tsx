@@ -54,18 +54,18 @@ export default function Section3AboutQuick() {
                             </p>
                         </div>
 
-                        {/* Stats - Vertical Stack on Desktop */}
-                        <div className="flex flex-row md:flex-col gap-8 md:gap-10 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-10">
-                            <div className="flex flex-col">
-                                <span className="text-4xl font-black text-white font-header tracking-tight">
+                        {/* Stats - Grid on Mobile, Vertical Stack on Desktop */}
+                        <div className="grid grid-cols-2 md:flex md:flex-col gap-6 md:gap-10 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-10 w-full md:w-auto">
+                            <div className="flex flex-col text-center md:text-left">
+                                <span className="text-3xl md:text-4xl font-black text-white font-header tracking-tight">
                                     <EditableText contentKey="home_v2.about_quick.stat1_value" />
                                 </span>
                                 <span className="text-[10px] font-black font-mono text-slate-500 uppercase tracking-widest mt-1">
                                     <EditableText contentKey="home_v2.about_quick.stat1_label" />
                                 </span>
                             </div>
-                            <div className="flex flex-col">
-                                <span className="text-4xl font-black text-white font-header tracking-tight">
+                            <div className="flex flex-col text-center md:text-left">
+                                <span className="text-3xl md:text-4xl font-black text-white font-header tracking-tight">
                                     <EditableText contentKey="home_v2.about_quick.stat2_value" />
                                 </span>
                                 <span className="text-[10px] font-black font-mono text-slate-500 uppercase tracking-widest mt-1">
