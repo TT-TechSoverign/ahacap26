@@ -253,7 +253,11 @@
         "Central AC Estimate",
         "Central AC Maintenance",
         "Central AC Diag/Repair"
-      ]
+      ],
+      "success": {
+        "title": "REQUEST RECEIVED",
+        "subtitle": "OUR DISPATCH TEAM WILL REVIEW YOUR TICKET AND CONTACT YOU SHORTLY TO CONFIRM APPOINTMENT DETAILS."
+      }
     },
     "hours_title": "BUSINESS HOURS",
     "hours_mon_fri": "8:00 AM - 5:00 PM",
