@@ -85,9 +85,9 @@ export function DispatchWizard() {
                 <div className="size-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-8 border border-primary/30">
                     <span className="material-symbols-outlined text-primary text-4xl">check_circle</span>
                 </div>
-                <h3 className="text-3xl font-header font-black text-white uppercase tracking-tight mb-4">{contentData.wizard.success.title}</h3>
+                <h3 className="text-3xl font-header font-black text-white uppercase tracking-tight mb-4">{contentData.contact.wizard.success?.title || "SUCCESS"}</h3>
                 <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 max-w-sm mx-auto">
-                    {contentData.wizard.success.subtitle}
+                    {contentData.contact.wizard.success?.subtitle || "YOUR TICKET HAS BEEN CREATED"}
                 </p>
                 <Button onClick={() => { setIsSuccess(false); setStep(1); setFormData({ ...formData, selected_services: [] }); }} className="mt-8 bg-white/5 border border-white/10 hover:bg-white/10 text-white py-3 px-8 text-[10px] font-black uppercase tracking-widest">
                     Submit Another Request

@@ -16,7 +16,7 @@ export function AdminCalendar() {
                         <EditableText contentKey="contact.calendar.title" />
                     </h4>
                     <span className="font-mono text-[9px] font-black tracking-[0.2em] px-2 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded uppercase">
-                        {contentData.contact.badge_label}
+                        {contentData.contact.badge}
                     </span>
                 </div>
 
