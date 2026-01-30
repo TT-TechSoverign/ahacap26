@@ -3,7 +3,6 @@ import config from "../../puck.config";
 import NavbarV2 from '@/components/NavbarV2';
 import Section1HeroHomeV2 from '@/components/Section1HeroHomeV2';
 import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
-import Footer from '@/components/Footer';
 import { BackToTop } from '@/components/BackToTop';
 
 // Force dynamic since we want to ensure fresh rendering
@@ -150,7 +149,6 @@ export default function HomepageV2() {
                 <Section2OurServicesV2 />
                 {/* <Render config={config} data={v2Data} /> */}
             </main>
-            <Footer />
             <BackToTop visible={true} />
         </div>
     );
