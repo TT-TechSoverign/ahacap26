@@ -478,5 +478,286 @@
       "exclusions_label": "Service Exclusions",
       "exclusions": "Due to logistical constraints, we do not provide delivery to Waialua, North Shore, Kahuku, Waianae, Nanakuli, Waikiki, or Waimanalo."
     }
+  },
+  "home_v2": {
+    "hero": {
+      "title_line1": "COMFORT FOR",
+      "title_highlight": "YOUR OHANA",
+      "narrative": "Building comfort for our community, one project at a time. Whether you're a homeowner, realtor, or contractor, we master the dynamics of residential and commercial cooling—from HOA-compliant upgrades to new construction—so you can focus on what matters most.",
+      "cta_shop": "Shop Window AC Units",
+      "cta_quote": "Request A Quote"
+    },
+    "cta_shop": "Shop Window AC Units",
+    "cta_quote": "Request A Quote"
+  },
+  "services_general": {
+    "residential": {
+      "title": "Residential",
+      "description": "Keep your home cool and comfortable with our expert installation and repair services."
+    },
+    "commercial": {
+      "title": "Commercial & HOA",
+      "description": "Reliable climate control solutions for businesses, condos, and managed properties."
+    },
+    "construction": {
+      "title": "New Construction",
+      "description": "Partner with us for seamless HVAC integration in your new build projects."
+    },
+    "property_mgmt": {
+      "title": "Property Management",
+      "description": "Rapid response and reliable maintenance for property managers and landlords."
+    }
+  },
+  "maintenance": {
+    "hero": {
+      "badge": "EPA-CERTIFIED DEEP CLEANING",
+      "title": "PROFESSIONAL",
+      "title_highlight": "WINDOW AC CLEANING",
+      "title_suffix": "& SANITIZATION SERVICES IN OAHU",
+      "description": "Eliminate mold, bacteria, and salt-air corrosion with our EPA-certified deep cleaning process. Specialized for Hawaii's humidity to restore 100% cooling efficiency and peak air quality.",
+      "cta_schedule": "Schedule Service",
+      "cta_rates": "View Local Rates"
+    },
+    "technician": {
+      "name": "Chris Martinez",
+      "title": "Master HVAC Technician",
+      "cert1": "EPA 608 Universal Certified",
+      "cert2": "NATE Certified Specialist",
+      "quote": "\"Our deep clean isn't just a rinse—it's a clinical decontamination of your cooling system.\""
+    },
+    "video": {
+      "title": "ENGINEERING EXCELLENCE",
+      "youtube_id": "dQw4w9WgXcQ",
+      "features": {
+        "feature1": {
+          "title": "MOLD FREE",
+          "sub": "Guaranteed Remediation",
+          "color": "text-primary",
+          "icon": "eco"
+        },
+        "feature2": {
+          "title": "SALT PROTECT",
+          "sub": "Corrosion Barrier",
+          "color": "text-accent",
+          "icon": "thunderstorm"
+        },
+        "feature3": {
+          "title": "30% MORE CFM",
+          "sub": "Efficiency Restored",
+          "color": "text-primary",
+          "icon": "speed"
+        },
+        "feature4": {
+          "title": "HYGIENIC AIR",
+          "sub": "Pathogen Neutralization",
+          "color": "text-accent",
+          "icon": "medical_services"
+        }
+      }
+    },
+    "climate": {
+      "title": "WHY HAWAII'S CLIMATE",
+      "title_highlight": "DEMANDS",
+      "title_suffix": "PROFESSIONAL SERVICE",
+      "description_p1": "Oahu's high humidity and constant exposure to saline trade winds create a \"perfect storm\" for window A/C units. Unlike drier climates, Honolulu's air causes rapid condensation buildup within the internal casing of window units, which often goes unnoticed behind the front grill.",
+      "description_p2_prefix": "This moisture, combined with indoor dust, creates a fertile breeding ground for",
+      "description_p2_highlight": "toxic mold (Aspergillus)",
+      "description_p2_suffix": "and bacteria. Without regular professional sanitization, your window unit becomes a distribution system for allergens, causing \"Sick Building Syndrome\" symptoms like headaches, fatigue, and respiratory distress.",
+      "description_p3_prefix": "Furthermore, salt-air corrosion eats away at sensitive aluminum fins and copper tubing. Our deep cleaning process includes a specialized",
+      "description_p3_highlight": "Corrosion Inhibitor Treatment",
+      "description_p3_suffix": "that neutralizes salt deposits, potentially extending your unit's lifespan by 3-5 years."
+    },
+    "process": {
+      "title": "OUR PROPRIETARY 25-POINT",
+      "title_highlight": "SANITIZATION",
+      "title_suffix": "PROCESS",
+      "subtitle": "Medical-Grade Restoration for Residential Window Units",
+      "step1_title": "ANTIMICROBIAL COIL FLUSH",
+      "step1_description": "We use a non-toxic, hospital-grade antimicrobial solution forced through both evaporator and condenser coils at precise pressure to dissolve biofilm and mold roots that retail sprays can't reach.",
+      "step1_point1": "Deep Tissue Biofilm Removal",
+      "step1_point2": "EPA-Registered Disinfectant",
+      "step2": {
+        "title": "BLOWER WHEEL REBALANCING",
+        "desc": "Removing buildup from fan blades to eliminate vibrations and motor strain."
+      },
+      "step3": {
+        "title": "DRAIN CHANNEL FLUSH",
+        "desc": "Clearing standing water paths to prevent rust and overflow leaks."
+      },
+      "step4": {
+        "title": "FIN COMBING",
+        "desc": "Precision alignment of aluminum fins for maximum thermodynamic exchange."
+      },
+      "step5": {
+        "title": "DELTA T TESTING",
+        "desc": "Digital verification of intake vs. output temps to confirm peak delta performance."
+      }
+    },
+    "before_after": {
+      "title": "BEFORE & AFTER",
+      "title_highlight": "TRANSFORMATION",
+      "label_initial": "Initial Assessment",
+      "label_pre": "Pre-Sanitization",
+      "label_post": "Post-Service",
+      "label_restored": "Efficiency Restored",
+      "badge_mold": "MOLD CONTAMINATION",
+      "badge_clean": "CLINICAL CLEAN"
+    },
+    "coverage": {
+      "title": "OAHU SERVICE",
+      "title_highlight": "COVERAGE",
+      "subtitle": "Rapid dispatch available for the following communities:",
+      "cities": [
+        "HONOLULU",
+        "AIEA",
+        "KANEOHE",
+        "KAPOLEI",
+        "EWA BEACH",
+        "PEARL CITY",
+        "KAILUA",
+        "MILILANI"
+      ],
+      "map_label": "Island-Wide Mobile Units"
+    },
+    "tech_hub": {
+      "title": "TECHNICAL RESOURCE HUB",
+      "link1": "Energy Star Maintenance Guidelines",
+      "link2": "EPA Indoor Air Quality Standards",
+      "link3": "Official Service Manuals & Diagrams"
+    },
+    "faq": {
+      "title": "FREQUENTLY ASKED",
+      "title_highlight": "QUESTIONS",
+      "items": [
+        {
+          "q": "How often should I have my window A/C professionally cleaned in Oahu?",
+          "a": "Due to our high humidity and salt-air concentration, we recommend a deep clinical sanitization every 6-12 months for primary living spaces to prevent mold buildup and corrosion."
+        },
+        {
+          "q": "Does dirty window A/C impact electricity bills?",
+          "a": "Yes. Clogged coils force the compressor to work 30-50% harder to achieve the same cooling effect, leading to significantly higher MECO/HECO bills and premature motor failure."
+        },
+        {
+          "q": "Can I just use a spray bottle from the hardware store?",
+          "a": "Hardware store sprays only treat the surface. Our process involves full teardown and internal decontamination of the blower wheel and drain pan where 90% of mold actually resides."
+        }
+      ]
+    },
+    "floating_cta": "Book Now"
+  },
+  "admin": {
+    "tabs": {
+      "inventory": "Inventory",
+      "orders": "Orders",
+      "leads": "Leads"
+    },
+    "login": {
+      "title": "Sovereign Admin",
+      "subtitle": "Authorized Access Only",
+      "label": "Access PIN",
+      "button": "Initialize Session",
+      "version": "AHAC Executive Terminal v1.1.0",
+      "error": "INVALID ACCESS CODE"
+    },
+    "nav": {
+      "title": "Command Center",
+      "subtitle": "Sovereign Management Hub",
+      "view_shop": "View Shop",
+      "add_product": "Add Product"
+    },
+    "stats": {
+      "inventory": {
+        "total": "Total Units",
+        "value": "Inventory Value"
+      },
+      "orders": {
+        "total": "Total Orders",
+        "revenue": "Revenue"
+      },
+      "leads": {
+        "active": "Active Tickets",
+        "urgent": "Urgent Inquiries"
+      }
+    },
+    "table": {
+      "image": "Image",
+      "name": "Product Name",
+      "category": "Category",
+      "price": "Price",
+      "stock": "Stock",
+      "actions": "Actions"
+    },
+    "orders": {
+      "header": "Order Oversight",
+      "empty": "No orders found.",
+      "columns": {
+        "id": "Order ID",
+        "customer": "Customer",
+        "date": "Date",
+        "status": "Status",
+        "total": "Total"
+      },
+      "modal": {
+        "title": "Order Oversight",
+        "manifest": "Purchase Manifest",
+        "update_status": "Update Manifest",
+        "transition": "Status Transition"
+      }
+    },
+    "leads": {
+      "header": "Lead Lifecycle",
+      "empty": "No leads found.",
+      "columns": {
+        "requestor": "Requestor",
+        "service": "Service Type",
+        "urgency": "Urgency",
+        "status": "Status",
+        "date": "Date"
+      },
+      "modal": {
+        "title": "Service Ticket Details",
+        "notes": "Internal Notes",
+        "update": "Save Changes",
+        "contact_info": "Contact Information",
+        "location": "Project Location",
+        "status": "Ticket Status"
+      }
+    },
+    "products": {
+      "modal": {
+        "new": "New Intake",
+        "edit": "Update Model",
+        "subtitle": "Industrial Inventory Control",
+        "name": "Product Name",
+        "price": "Price (USD)",
+        "stock": "Initial Stock",
+        "category": "Category",
+        "image": "Image URL",
+        "save_new": "Initialize Unit",
+        "save_edit": "Commit Changes",
+        "cancel": "Cancel"
+      }
+    }
+  },
+  "system_upgrade": {
+    "status_badge": "System Status: Upgrading",
+    "title_line1": "The Evolution",
+    "title_line2": "of Cool.",
+    "description": "Affordable Home A/C is calibrating a new digital experience. Smart. Adaptive. Precise. A higher standard of comfort is loading now.",
+    "status_pill": "Field Operations: Fully Active & Ready to Assist",
+    "cta_button": "Contact Support",
+    "footer": "Authorized Dealer • Serving Oahu Since 2005"
+  },
+  "common": {
+    "location": "Waipahu, HI 96797",
+    "address": "94-150 Leoleo St. #203",
+    "warehouse_name": "Waipahu Warehouse",
+    "warehouse_full": "Waipahu Industrial Park",
+    "footer": {
+      "nav": "Navigation",
+      "support": "Support",
+      "location": "Location",
+      "copyright": "© 2024 Affordable Home A/C • LIC# CT-36775 • Island-Scale Cooling Solutions"
+    }
   }
 }
