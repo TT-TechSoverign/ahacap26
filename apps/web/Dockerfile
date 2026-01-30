@@ -25,6 +25,7 @@ RUN npm install -g pnpm && pnpm install --frozen-lockfile
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/apps/web/node_modules ./apps/web/node_modules
 COPY --from=pruner /app/out/full/ .
 
 # Env vars
