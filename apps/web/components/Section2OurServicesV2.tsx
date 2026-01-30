@@ -88,14 +88,14 @@ export default function Section2OurServicesV2() {
                             <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-8 transition-all duration-500">
                                 {/* Title with Cyan Glow & Underline */}
                                 <div className="transform transition-transform duration-500 flex flex-col items-center group-hover:-translate-y-2">
-                                    <h3 className="font-header font-black text-3xl md:text-5xl text-white uppercase tracking-tighter mb-2 drop-shadow-lg transition-all duration-300 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
+                                    <h3 className="font-header font-black text-2xl md:text-4xl text-white uppercase tracking-tighter mb-1 drop-shadow-lg transition-all duration-300 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
                                         <EditableText
                                             contentKey={`home_v2.services.${service.id}.title`}
                                             defaultValue={service.defaultTitle}
                                         />
                                     </h3>
                                     {/* Subtle Animated Underline */}
-                                    <div className="w-12 h-1 bg-cyan-500/0 group-hover:bg-cyan-400 rounded-full mb-4 transition-all duration-500 group-hover:w-24 group-hover:shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+                                    <div className="w-8 h-1 bg-cyan-500/0 group-hover:bg-cyan-400 rounded-full mb-3 transition-all duration-500 group-hover:w-16 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
 
                                     {/* Description - Hidden by default, reveals on hover */}
                                     <div className="max-w-xs mx-auto opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 mb-6">
