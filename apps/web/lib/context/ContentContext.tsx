@@ -43,6 +43,8 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
         // Merge root level objects
         const migratedContent = {
           ...initialContent,
+          // Safely merge any root keys from localStorage that aren't explicitly handled below (e.g. home_v2, services_general)
+          ...(parsed || {}),
           // Merge root level objects
           landing: {
             ...initialContent.landing,

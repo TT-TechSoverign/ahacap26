@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../../context/CartContext';
 import Image from 'next/image';
 import Link from 'next/link';
-import content from '../../content.json';
+import content from '@/lib/content/content.json';
 import { AdminCalendar } from '@/components/AdminCalendar';
 import { useContent } from '@/lib/context/ContentContext';
 

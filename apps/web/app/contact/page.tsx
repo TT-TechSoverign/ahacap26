@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import contentData from '../../content.json';
+import contentData from '@/lib/content/content.json';
 
 export default function ContactPage() {
     const { content, isEditMode } = useContent();
