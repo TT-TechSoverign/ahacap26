@@ -41,43 +41,36 @@ export default function Section2OurServicesV2() {
     ];
 
     return (
-        <section className="relative w-full bg-slate-900 border-t border-slate-800">
-            {/* Header Section */}
-            <div className="relative py-24 px-6 md:px-12 text-center overflow-hidden">
-                <div className="absolute inset-0 z-0 opacity-20">
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-transparent to-slate-900" />
-                    {/* Subtle grid pattern or similar could go here */}
-                </div>
+        <section className="relative w-full bg-white overflow-hidden py-12 md:py-16">
 
-                <div className="relative z-10 max-w-4xl mx-auto">
-                    <h2 className="font-header font-black text-4xl md:text-6xl text-white uppercase tracking-tighter mb-8">
-                        <span className="text-white">
-                            <EditableText contentKey="home_v2.services_header.title" defaultValue="ELITE COOLING" />
-                        </span>
-                        <span className="block text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
-                            <EditableText contentKey="home_v2.services_header.title_highlight" defaultValue="SOLUTIONS" />
-                        </span>
-                    </h2>
+            {/* Header Content */}
+            <div className="relative z-10 max-w-4xl mx-auto text-center mb-10 px-6">
+                <h2 className="font-header font-black text-4xl md:text-6xl text-slate-900 uppercase tracking-tighter mb-4">
+                    <span className="text-slate-900">
+                        <EditableText contentKey="home_v2.services_header.title" defaultValue="ELITE COOLING" />
+                    </span>
+                    <span className="block text-cyan-500 drop-shadow-sm">
+                        <EditableText contentKey="home_v2.services_header.title_highlight" defaultValue="SOLUTIONS" />
+                    </span>
+                </h2>
 
-                    <div className="font-sans text-xl text-slate-300 leading-relaxed font-medium">
-                        <EditableText
-                            contentKey="home_v2.services_header.narrative"
-                            as="p"
-                            multiLine={true}
-                            defaultValue="We don’t just sell ACs—we provide complete climate ecosystems. Whether you need a whisper-quiet mini-split for your bedroom or an industrial fleet for your property, we have the inventory and expertise to keep you cool."
-                        />
-                    </div>
+                <div className="font-sans text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-2xl mx-auto">
+                    <EditableText
+                        contentKey="home_v2.services_header.narrative"
+                        as="p"
+                        multiLine={true}
+                        defaultValue="We don’t just sell ACs—we provide complete climate ecosystems. Whether you need a whisper-quiet mini-split for your bedroom or an industrial fleet for your property, we have the inventory and expertise to keep you cool."
+                    />
                 </div>
             </div>
 
             {/* Interactive Grid */}
-            {/* Interactive Grid */}
-            <div className="container mx-auto px-4 pb-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto md:h-[600px] max-w-6xl mx-auto">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto md:h-[500px] max-w-6xl mx-auto">
                     {services.map((service, index) => (
                         <div
                             key={service.id}
-                            className="relative group h-[300px] md:h-full overflow-hidden rounded-2xl border border-slate-800 shadow-2xl"
+                            className="relative group h-[280px] md:h-full overflow-hidden rounded-2xl shadow-xl border border-slate-100 bg-slate-900"
                         >
                             {/* Background Image */}
                             <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-110">
@@ -85,19 +78,17 @@ export default function Section2OurServicesV2() {
                                     src={service.cleanImage}
                                     alt={service.defaultTitle}
                                     fill
-                                    className="object-cover object-center opacity-50 group-hover:opacity-60 transition-opacity duration-500"
+                                    className="object-cover object-center opacity-70 group-hover:opacity-60 transition-opacity duration-500"
                                 />
-                                {/* Dark Gradient Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-slate-900/30 opacity-90" />
-                                {/* Cyan Hover Glow */}
-                                <div className="absolute inset-0 bg-cyan-500/0 group-hover:bg-cyan-500/20 transition-colors duration-500 mix-blend-overlay" />
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-slate-900/10 opacity-90" />
                             </div>
 
                             {/* Content */}
-                            <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-8 md:p-12 transition-all duration-500">
+                            <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-8 transition-all duration-500">
                                 {/* Title */}
-                                <div className="transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
-                                    <h3 className="font-header font-black text-3xl md:text-4xl text-white uppercase tracking-tighter mb-4 drop-shadow-lg group-hover:text-cyan-400 transition-colors">
+                                <div className="transform transition-transform duration-500 translate-y-2 group-hover:translate-y-0">
+                                    <h3 className="font-header font-black text-3xl md:text-4xl text-white uppercase tracking-tighter mb-3 drop-shadow-lg group-hover:text-cyan-400 transition-colors">
                                         <EditableText
                                             contentKey={`home_v2.services.${service.id}.title`}
                                             defaultValue={service.defaultTitle}
@@ -105,13 +96,13 @@ export default function Section2OurServicesV2() {
                                     </h3>
 
                                     {/* Description */}
-                                    <div className="max-w-sm mx-auto opacity-80 group-hover:opacity-100 transition-opacity duration-500 mb-8">
+                                    <div className="max-w-xs mx-auto opacity-90 group-hover:opacity-100 transition-opacity duration-500 mb-6">
                                         <EditableText
                                             contentKey={`home_v2.services.${service.id}.description`}
                                             as="p"
                                             multiLine={true}
                                             defaultValue={service.defaultDesc}
-                                            className="font-sans text-slate-200 text-lg leading-relaxed"
+                                            className="font-sans text-slate-100 text-base md:text-lg leading-snug drop-shadow-md"
                                         />
                                     </div>
 
@@ -119,13 +110,12 @@ export default function Section2OurServicesV2() {
                                     <Link
                                         href={service.link}
                                         className={cn(
-                                            "inline-flex items-center gap-2 px-8 py-3 bg-transparent border-2 border-slate-400 text-slate-100 font-bold uppercase tracking-widest text-sm rounded-full transition-all duration-300",
-                                            "group-hover:bg-cyan-500 group-hover:border-cyan-500 group-hover:text-black group-hover:scale-105",
+                                            "inline-flex items-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-cyan-500 backdrop-blur-md border border-white/20 hover:border-cyan-500 text-white font-bold uppercase tracking-widest text-xs md:text-sm rounded-full transition-all duration-300 shadow-lg group-hover:shadow-cyan-500/25",
                                             isEditMode ? "pointer-events-none opacity-50" : ""
                                         )}
                                     >
                                         <span>Learn More</span>
-                                        <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                        <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                     </Link>
                                 </div>
                             </div>
