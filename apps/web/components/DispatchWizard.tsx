@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { EditableText } from './EditableText';
 import { useContent } from '@/lib/context/ContentContext';
-import contentData from '../content.json';
+import contentData from '@/lib/content/content.json';
 
 export function DispatchWizard() {
     const { content } = useContent();

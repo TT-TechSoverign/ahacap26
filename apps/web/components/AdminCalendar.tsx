@@ -1,7 +1,7 @@
 'use client';
 
 import { EditableText } from './EditableText';
-import contentData from '../content.json';
+import contentData from '@/lib/content/content.json';
 import { useContent } from '../lib/context/ContentContext';
 
 export function AdminCalendar() {
