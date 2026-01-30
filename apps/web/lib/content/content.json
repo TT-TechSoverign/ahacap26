@@ -483,17 +483,6 @@
       "exclusions": "Due to logistical constraints, we do not provide delivery to Waialua, North Shore, Kahuku, Waianae, Nanakuli, Waikiki, or Waimanalo."
     }
   },
-  "home_v2": {
-    "hero": {
-      "title_line1": "COMFORT FOR",
-      "title_highlight": "YOUR OHANA",
-      "narrative": "Building comfort for our community, one project at a time. Whether you're a homeowner, realtor, or contractor, we master the dynamics of residential and commercial cooling—from HOA-compliant upgrades to new construction—so you can focus on what matters most.",
-      "cta_shop": "Shop Window AC Units",
-      "cta_quote": "Request A Quote"
-    },
-    "cta_shop": "Shop Window AC Units",
-    "cta_quote": "Request A Quote"
-  },
   "services_general": {
     "residential": {
       "title": "Residential",
