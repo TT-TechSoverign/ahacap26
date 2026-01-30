@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
-import contentData from '../../content.json';
+import contentData from '@/lib/content/content.json';
 
 export default function MaintenancePage() {
     const { content } = useContent();

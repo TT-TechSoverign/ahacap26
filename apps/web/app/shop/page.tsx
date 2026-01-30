@@ -12,7 +12,7 @@ import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import contentData from '../../content.json';
+import contentData from '@/lib/content/content.json';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { AdminCalendar } from '@/components/AdminCalendar';
