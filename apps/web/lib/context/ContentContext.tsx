@@ -116,6 +116,18 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
                 ...initialContent.shop.sections.filter((s: string) => !parsed.shop.sections.includes(s))
               ]
               : initialContent.shop.sections
+          },
+          home_v2: {
+            ...initialContent.home_v2,
+            ...(parsed.home_v2 || {}),
+            services_header: {
+              ...initialContent.home_v2?.services_header,
+              ...(parsed.home_v2?.services_header || {})
+            },
+            services: {
+              ...initialContent.home_v2?.services,
+              ...(parsed.home_v2?.services || {})
+            }
           }
         };
 

@@ -345,6 +345,20 @@ export interface MaintenanceContent {
     floating_cta: string;
 }
 
+export interface HomeV2Content {
+    services_header: {
+        title: string;
+        title_highlight: string;
+        narrative: string;
+    };
+    services: {
+        [key: string]: {
+            title: string;
+            description: string;
+        };
+    };
+}
+
 export interface SystemUpgradeContent {
     status_badge: string;
     title_line1: string;
@@ -363,4 +377,5 @@ export interface ContentSchema {
     logistics: LogisticsContent;
     maintenance: MaintenanceContent;
     system_upgrade: SystemUpgradeContent;
+    home_v2?: HomeV2Content;
 }
