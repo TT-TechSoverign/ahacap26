@@ -13,62 +13,65 @@ export default function Section3AboutQuick() {
             <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-                <div className="flex flex-col gap-12 max-w-5xl mx-auto">
+                <div className="flex flex-col gap-16 max-w-5xl mx-auto">
 
-                    {/* Header */}
-                    <div className="text-center md:text-left">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary font-mono text-[10px] font-black uppercase tracking-[0.3em] mb-6 backdrop-blur-sm">
-                            <span className="material-symbols-outlined text-sm">history_edu</span>
-                            <EditableText contentKey="home_v2.about_quick.badge" />
-                        </div>
-                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-header font-bold text-white uppercase tracking-tight leading-none">
-                            <span className="block text-slate-400 opacity-60 text-2xl md:text-3xl mb-2 tracking-widest font-sans font-black">
-                                <EditableText contentKey="home_v2.about_quick.subtitle_prefix" />
-                            </span>
+                    {/* Header: Centered & Decorated */}
+                    <div className="text-center relative">
+                        {/* Removed Top Badge per user request */}
+
+                        <h2 className="relative inline-block text-5xl md:text-6xl lg:text-8xl font-header font-bold text-white uppercase tracking-tight leading-none pb-8">
+                            {/* Removed "THE" subtitle prefix per user request */}
                             <EditableText contentKey="home_v2.about_quick.title" />
                             <span className="text-primary block md:inline md:ml-4">
                                 <EditableText contentKey="home_v2.about_quick.title_highlight" />
                             </span>
+
+                            {/* Cyan Glow Underline */}
+                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.8)] rounded-full"></div>
                         </h2>
                     </div>
 
-                    {/* Image - Embedded & Wide */}
-                    <div className="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-slate-900 group">
+                    {/* Image - Embedded & Wide with Lighter Overlay */}
+                    <div className="relative w-full h-[300px] md:h-[500px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-slate-900 group">
                         <div className="absolute inset-0 bg-slate-900 flex items-center justify-center">
                             <Image
                                 src="/assets/hero-cards/videoad-screenshot-van1.png"
                                 alt="Historic Service Photo"
                                 fill
-                                className="object-cover object-center opacity-80 mix-blend-overlay transition-transform duration-700 group-hover:scale-105"
+                                className="object-cover object-center opacity-100 transition-transform duration-700 group-hover:scale-105"
                             />
-                            {/* Subtle Gradient Overlay for integration */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-[#0F172A]/20 opacity-80 mix-blend-multiply"></div>
+                            {/* Extremely subtle tint for better text contrast if overlaying things, or just unification. 
+                                User asked for "less is more", "subtle blend". */}
+                            <div className="absolute inset-0 bg-[#0F172A]/20 pointer-events-none mix-blend-multiply"></div>
                         </div>
                     </div>
 
                     {/* Narrative & Stats - Split Bottom */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-                        <div className="md:col-span-2 prose prose-lg prose-invert text-slate-300 font-sans leading-relaxed opacity-90">
-                            <p className="text-base md:text-lg lg:text-xl font-light tracking-wide">
-                                <EditableText contentKey="home_v2.about_quick.narrative" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+                        <div className="md:col-span-2 prose prose-lg prose-invert font-sans leading-relaxed">
+                            {/* Professional Web Formatting: Serif-like elegance or sturdy styling */}
+                            <p className="text-xl md:text-2xl font-light text-slate-200 tracking-wide">
+                                <span className="font-semibold text-white">
+                                    <EditableText contentKey="home_v2.about_quick.narrative" />
+                                </span>
                             </p>
                         </div>
 
-                        {/* Stats - Grid on Mobile, Vertical Stack on Desktop */}
-                        <div className="grid grid-cols-2 md:flex md:flex-col gap-6 md:gap-10 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-10 w-full md:w-auto">
+                        {/* Stats - Grid on Mobile, Vertical Stack on Desktop - Cleaned up spacing */}
+                        <div className="grid grid-cols-2 md:flex md:flex-col gap-8 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12 w-full md:w-auto">
                             <div className="flex flex-col text-center md:text-left">
-                                <span className="text-3xl md:text-4xl font-black text-white font-header tracking-tight">
+                                <span className="text-4xl md:text-5xl font-black text-white font-header tracking-tighter">
                                     <EditableText contentKey="home_v2.about_quick.stat1_value" />
                                 </span>
-                                <span className="text-[10px] font-black font-mono text-slate-500 uppercase tracking-widest mt-1">
+                                <span className="text-xs font-bold font-mono text-cyan-400 uppercase tracking-widest mt-2">
                                     <EditableText contentKey="home_v2.about_quick.stat1_label" />
                                 </span>
                             </div>
                             <div className="flex flex-col text-center md:text-left">
-                                <span className="text-3xl md:text-4xl font-black text-white font-header tracking-tight">
+                                <span className="text-4xl md:text-5xl font-black text-white font-header tracking-tighter">
                                     <EditableText contentKey="home_v2.about_quick.stat2_value" />
                                 </span>
-                                <span className="text-[10px] font-black font-mono text-slate-500 uppercase tracking-widest mt-1">
+                                <span className="text-xs font-bold font-mono text-cyan-400 uppercase tracking-widest mt-2">
                                     <EditableText contentKey="home_v2.about_quick.stat2_label" />
                                 </span>
                             </div>
