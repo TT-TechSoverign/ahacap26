@@ -449,32 +449,58 @@
             "cta_shop": "Shop Window AC Units",
             "cta_quote": "Request A Quote"
         },
-        "services": {
-            "residential": {
-                "title": "Residential",
-                "description": "Keep your home cool and comfortable with our expert installation and repair services."
-            },
-            "commercial": {
-                "title": "Commercial & HOA",
-                "description": "Reliable climate control solutions for businesses, condos, and managed properties."
-            },
-            "construction": {
-                "title": "New Construction",
-                "description": "Partner with us for seamless HVAC integration in your new build projects."
-            },
-            "property_mgmt": {
-                "title": "Property Management",
-                "description": "Rapid response and reliable maintenance for property managers and landlords."
-            }
-        }
+        "cta_shop": "Shop Window AC Units",
+        "cta_quote": "Request A Quote"
     },
-    "system_upgrade": {
-        "status_badge": "System Status: Upgrading",
-        "title_line1": "The Evolution",
-        "title_line2": "of Cool.",
-        "description": "Affordable Home A/C is calibrating a new digital experience. Smart. Adaptive. Precise. A higher standard of comfort is loading now.",
-        "status_pill": "Field Operations: Fully Active & Ready to Assist",
-        "cta_button": "Contact Support",
-        "footer": "Authorized Dealer • Serving Oahu Since 2005"
+    "services_header": {
+        "title": "ELITE COOLING",
+        "title_highlight": "SOLUTIONS",
+        "narrative": "We don’t just sell ACs—we provide complete climate ecosystems. Whether you need a whisper-quiet mini-split for your bedroom or an industrial fleet for your property, we have the inventory and expertise to keep you cool."
+    },
+    "services": {
+        "mini_split": {
+            "title": "Mini Split AC",
+            "description": "Whisper-quiet, ductless cooling for ultimate efficient comfort in any room."
+        },
+        "window_shop": {
+            "title": "Window AC Shop",
+            "description": "Browse our massive inventory of LG & GE units, ready for immediate pickup."
+        },
+        "central_ac": {
+            "title": "Central AC",
+            "description": "Complete whole-home climate control systems for new construction and retrofits."
+        },
+        "window_maintenance": {
+            "title": "Window AC Maintenance",
+            "description": "EPA-certified deep cleaning to restore efficiency and air quality."
+        }
     }
+},
+"services_general": {
+    "residential": {
+        "title": "Residential",
+        "description": "Keep your home cool and comfortable with our expert installation and repair services."
+    },
+    "commercial": {
+        "title": "Commercial & HOA",
+        "description": "Reliable climate control solutions for businesses, condos, and managed properties."
+    },
+    "construction": {
+        "title": "New Construction",
+        "description": "Partner with us for seamless HVAC integration in your new build projects."
+    },
+    "property_mgmt": {
+        "title": "Property Management",
+        "description": "Rapid response and reliable maintenance for property managers and landlords."
+    }
+},
+"system_upgrade": {
+    "status_badge": "System Status: Upgrading",
+    "title_line1": "The Evolution",
+    "title_line2": "of Cool.",
+    "description": "Affordable Home A/C is calibrating a new digital experience. Smart. Adaptive. Precise. A higher standard of comfort is loading now.",
+    "status_pill": "Field Operations: Fully Active & Ready to Assist",
+    "cta_button": "Contact Support",
+    "footer": "Authorized Dealer • Serving Oahu Since 2005"
+}
 }
