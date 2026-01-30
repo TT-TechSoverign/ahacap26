@@ -67,21 +67,16 @@ export default function Section3AboutQuick() {
                             {/* Placeholder generic image or use content key if we want to make it editable later, 
                                 but hardcoding a nice placeholder for now until user puts in real image */}
                             <div className="absolute inset-0 bg-slate-800 flex items-center justify-center text-slate-600 font-mono text-xs uppercase tracking-widest">
-                                <span className="z-10 bg-black/50 p-4 rounded backdrop-blur">
+                                {/* <span className="z-10 bg-black/50 p-4 rounded backdrop-blur">
                                     [ <EditableText contentKey="home_v2.about_quick.image_alt" /> ]
-                                </span>
-                                {/* This would be the actual image - using a solid color placeholder for the prompt requirements "utilize a picture" */}
+                                </span> */}
                                 <Image
-                                    src="/assets/ahac-warehouse-v2.jpg" // Assuming this might exist, otherwise it will fail gracefully or we need a real asset. 
-                                    // Actually, let's use a safe placeholder or the existing logo if no photo is available.
-                                    // User said "utilize a picture". I will put a placeholder Div that says "Add Image Here" or use a generic one if available.
-                                    // I'll stick to a placeholder div logic if image missing, or just a colored block.
-                                    // Better: Use a Next.js Image with a fallback logic visually. 
-                                    // For now, let's assume an asset name relevant to context or just a placeholder.
+                                    src="/assets/hero-cards/videoad-screenshot-van1.png"
                                     alt="Historic Service Photo"
                                     fill
-                                    className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                                    className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 mix-blend-overlay"
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent mix-blend-multiply"></div>
                             </div>
 
                             {/* Overlay Gradient */}
