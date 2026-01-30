@@ -65,4 +65,8 @@ ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
 # server.js is located at apps/web/server.js in the standalone output
-CMD ["node", "apps/web/server.js"]
+# Debug: List where server.js actually is to diagnose 503s
+RUN find /app -name "server.js"
+
+# Robust CMD: Try the monorepo path first, fallback to root
+CMD ["sh", "-c", "if [ -f apps/web/server.js ]; then node apps/web/server.js; elif [ -f server.js ]; then node server.js; else echo 'server.js not found' && exit 1; fi"]
