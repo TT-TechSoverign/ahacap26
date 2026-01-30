@@ -752,6 +752,39 @@
     "cta_button": "Contact Support",
     "footer": "Authorized Dealer • Serving Oahu Since 2005"
   },
+  "home_v2": {
+    "services_header": {
+      "title": "PREMIUM",
+      "title_highlight": "COOLING",
+      "narrative": "EXPERIENCE THE DIFFERENCE OF HIGH-EFFICIENCY CLIMATE CONTROL DESIGNED SPECIFICALLY FOR HAWAII'S HOMES."
+    },
+    "services": {
+      "window_ac": {
+        "title": "WINDOW AC SALES",
+        "description": "The largest inventory of LG & GE window units in Waipahu. Pick up today."
+      },
+      "split_systems": {
+        "title": "SPLIT SYSTEMS",
+        "description": "Whisper-quiet, energy-efficient cooling for your entire home."
+      },
+      "maintenance": {
+        "title": "MAINTENANCE",
+        "description": "Protect your investment with professional cleaning and servicing."
+      }
+    },
+    "about_quick": {
+      "badge": "SINCE 2005",
+      "subtitle_prefix": "THE",
+      "title": "EVOLUTION",
+      "title_highlight": "OF COOL",
+      "narrative": "FOR OVER 20 YEARS, AFFORDABLE HOME A/C HAS BEEN KNOWN FOR PREMIER WINDOW AC SERVICES. TODAY, WE HAVE EVOLVED INTO A FULLY LICENSED, INSURED, AND BONDED HVAC CONTRACTOR, EXPANDING OUR EXCELLENCE TO MITSUBISHI MINI-SPLITS AND CENTRAL AIR SYSTEMS. WE BRING INDUSTRIAL DISCIPLINE TO RESIDENTIAL COMFORT.",
+      "stat1_value": "20+",
+      "stat1_label": "YEARS SERVING OAHU",
+      "stat2_value": "100%",
+      "stat2_label": "LICENSED & BONDED",
+      "image_alt": "HISTORIC SHOP PHOTO"
+    }
+  },
   "common": {
     "location": "Waipahu, HI 96797",
     "address": "94-150 Leoleo St. #203",
