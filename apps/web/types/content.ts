@@ -357,6 +357,18 @@ export interface HomeV2Content {
             description: string;
         };
     };
+    about_quick: {
+        badge: string;
+        subtitle_prefix: string;
+        title: string;
+        title_highlight: string;
+        narrative: string;
+        stat1_value: string;
+        stat1_label: string;
+        stat2_value: string;
+        stat2_label: string;
+        image_alt: string;
+    };
 }
 
 export interface SystemUpgradeContent {
