@@ -220,19 +220,19 @@ export default function ContactPage() {
                             {/* section 4: Business Hours (Integrated Final) */}
                             <div className="mt-12 pt-10 border-t border-white/5 flex flex-col items-center">
                                 <div className="font-mono inline-block px-4 py-1.5 bg-primary/5 border border-primary/20 rounded-full text-primary text-[9px] font-black tracking-[0.4em] uppercase mb-8">
-                                    {contentData.contact.hours.title}
+                                    {contentData.contact.hours_title}
                                 </div>
                                 <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
                                     <div className="flex flex-col items-center">
-                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">{contentData.contact.hours.mon_fri}</span>
+                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">{contentData.contact.hours_mon_fri}</span>
                                         <span className="text-white font-black text-xs lg:text-sm tracking-widest transition-colors"><EditableText contentKey="contact.hours_mon_fri" /></span>
                                     </div>
                                     <div className="flex flex-col items-center">
-                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">{contentData.contact.hours.sat}</span>
+                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">{contentData.contact.hours_sat}</span>
                                         <span className="text-white font-black text-xs lg:text-sm tracking-widest transition-colors"><EditableText contentKey="contact.hours_sat" /></span>
                                     </div>
                                     <div className="flex flex-col items-center">
-                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-accent transition-colors">{contentData.contact.hours.sun}</span>
+                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-accent transition-colors">{contentData.contact.hours_sun}</span>
                                         <span className="text-accent font-black text-xs lg:text-sm tracking-widest transition-colors"><EditableText contentKey="contact.hours_sun" /></span>
                                     </div>
                                 </div>
