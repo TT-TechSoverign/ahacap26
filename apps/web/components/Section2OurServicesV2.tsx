@@ -14,28 +14,28 @@ export default function Section2OurServicesV2() {
             id: 'mini_split',
             defaultTitle: 'Mini Split AC',
             defaultDesc: 'Whisper-quiet, ductless cooling for ultimate efficient comfort in any room.',
-            cleanImage: '/assets/yelpphotos/yelp13.jpg', // New placeholder
+            cleanImage: '/assets/yelpphotos/yelp9.jpg',
             link: '/contact'
         },
         {
             id: 'window_shop',
             defaultTitle: 'Window AC Shop',
             defaultDesc: 'Browse our massive inventory of LG & GE units, ready for immediate pickup.',
-            cleanImage: '/assets/yelpphotos/yelp14.jpg',
+            cleanImage: '/assets/hero-cards/unit-lg-plexiglass-installation.jpg',
             link: '/shop'
         },
         {
             id: 'central_ac',
             defaultTitle: 'Central AC',
             defaultDesc: 'Complete whole-home climate control systems for new construction and retrofits.',
-            cleanImage: '/assets/yelpphotos/yelp15.jpg',
+            cleanImage: '/assets/yelpphotos/yelp13.jpg',
             link: '/contact'
         },
         {
             id: 'window_maintenance',
             defaultTitle: 'Window AC Maintenance',
             defaultDesc: 'EPA-certified deep cleaning to restore efficiency and air quality.',
-            cleanImage: '/assets/yelpphotos/yelp16.jpg',
+            cleanImage: '/assets/hero-cards/window-ac-maintenance-foam-front-1.jpg',
             link: '/maintenance'
         }
     ];
