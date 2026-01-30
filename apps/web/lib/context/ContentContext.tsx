@@ -127,6 +127,10 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
             services: {
               ...initialContent.home_v2?.services,
               ...(parsed.home_v2?.services || {})
+            },
+            about_quick: {
+              ...initialContent.home_v2?.about_quick,
+              ...(parsed.home_v2?.about_quick || {})
             }
           }
         };
@@ -204,6 +208,9 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (!response.ok) throw new Error('Failed to save to file');
+
+      // Visual feedback for user
+      alert('Content saved successfully!');
     } catch (error) {
       console.error('Save error:', error);
       alert('Failed to save changes. Please check console or server logs.');

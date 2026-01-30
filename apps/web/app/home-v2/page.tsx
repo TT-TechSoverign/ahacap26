@@ -147,6 +147,7 @@ export default function HomepageV2() {
             <main className="pt-[180px] bg-slate-900">
                 <Section1HeroHomeV2 />
                 <Section2OurServicesV2 />
+                <Section3AboutQuick />
                 {/* <Render config={config} data={v2Data} /> */}
             </main>
             <BackToTop visible={true} />
