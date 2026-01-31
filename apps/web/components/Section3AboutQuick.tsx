@@ -47,13 +47,11 @@ export default function Section3AboutQuick() {
 
                     {/* Narrative & Stats - Compact Split */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start max-w-4xl mx-auto">
-                        <div className="md:col-span-2 prose prose-invert font-sans leading-relaxed">
-                            {/* Matched Section 2 Scale: text-lg md:text-xl */}
-                            <p className="text-lg md:text-xl font-medium text-slate-300 tracking-normal text-center md:text-left">
-                                <span className="text-slate-100">
-                                    <EditableText contentKey="home_v2.about_quick.narrative" />
-                                </span>
-                            </p>
+                        <div className="md:col-span-2 font-sans leading-relaxed">
+                            {/* Matched Section 1 Styling exactly */}
+                            <div className="font-sans text-lg md:text-xl text-slate-200 font-medium leading-relaxed drop-shadow-md text-center md:text-left">
+                                <EditableText contentKey="home_v2.about_quick.narrative" multiLine />
+                            </div>
                         </div>
 
                         {/* Stats - Compact */}
@@ -62,7 +60,7 @@ export default function Section3AboutQuick() {
                                 <span className="text-3xl md:text-4xl font-black text-white font-header tracking-tight">
                                     <EditableText contentKey="home_v2.about_quick.stat1_value" />
                                 </span>
-                                <span className="text-[10px] font-bold font-mono text-cyan-400 uppercase tracking-widest mt-1">
+                                <span className="text-[10px] font-bold font-mono text-white uppercase tracking-widest mt-1 opacity-80">
                                     <EditableText contentKey="home_v2.about_quick.stat1_label" />
                                 </span>
                             </div>
@@ -70,7 +68,7 @@ export default function Section3AboutQuick() {
                                 <span className="text-3xl md:text-4xl font-black text-white font-header tracking-tight">
                                     <EditableText contentKey="home_v2.about_quick.stat2_value" />
                                 </span>
-                                <span className="text-[10px] font-bold font-mono text-cyan-400 uppercase tracking-widest mt-1">
+                                <span className="text-[10px] font-bold font-mono text-white uppercase tracking-widest mt-1 opacity-80">
                                     <EditableText contentKey="home_v2.about_quick.stat2_label" />
                                 </span>
                             </div>
