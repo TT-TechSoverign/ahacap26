@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { EditableText } from './EditableText';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
 
 // Image Data Interface
 interface ProjectImage {
@@ -109,13 +108,13 @@ export default function Section4Projects() {
                     <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 uppercase drop-shadow-sm">
                         <EditableText
                             contentKey="section4-title"
-                            defaultText="OUR RECENT PROJECTS"
+                            defaultValue="OUR RECENT PROJECTS"
                         />
                     </h2>
                     <p className="text-lg text-slate-700 font-medium leading-relaxed drop-shadow-sm max-w-2xl mx-auto">
                         <EditableText
                             contentKey="section4-subtitle"
-                            defaultText="Browse our gallery of recent installations across Oahu. Swipe to explore."
+                            defaultValue="Browse our gallery of recent installations across Oahu. Swipe to explore."
                         />
                     </p>
                 </div>
