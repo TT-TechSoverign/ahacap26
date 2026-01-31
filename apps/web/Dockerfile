@@ -35,8 +35,9 @@ ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Build the project
-RUN npm install -g pnpm && pnpm --filter web build
+# Build the project with cache mounting for faster iteration
+RUN --mount=type=cache,target=/app/apps/web/.next/cache \
+    npm install -g pnpm && pnpm --filter web build
 
 # 4. Production runner
 FROM base AS runner

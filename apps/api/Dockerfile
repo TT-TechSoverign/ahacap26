@@ -1,14 +1,24 @@
 # Stage 1: Builder
 FROM python:3.12-alpine as builder
 
-WORKDIR /app
-
 # Install build dependencies for asyncpg
+# UV requires minimal system deps, but compiling asyncpg/packages might still need gcc
 RUN apk update && apk add --no-cache gcc musl-dev python3-dev libffi-dev
 
-# Install python dependencies to local user directory
+WORKDIR /app
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+# Create virtual environment
+ENV VIRTUAL_ENV=/app/.venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+RUN uv venv
+
+# Install dependencies using uv
 COPY requirements.txt .
-RUN pip install --user --no-cache-dir -r requirements.txt
+# Use uv pip install for speed
+RUN uv pip install --no-cache -r requirements.txt
 
 # Stage 2: Final Runtime
 FROM python:3.12-alpine as runner
@@ -18,17 +28,17 @@ WORKDIR /app
 # Create non-root user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-# Copy installed packages from builder
-COPY --from=builder /root/.local /home/appuser/.local
+# Create virtual environment directory and copy from builder
+ENV VIRTUAL_ENV=/app/.venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+COPY --from=builder /app/.venv /app/.venv
 
 # Copy application code
 COPY . .
 
 # Set ownership
 RUN chown -R appuser:appgroup /app
-
-# Update PATH to include user-installed binaries
-ENV PATH=/home/appuser/.local/bin:$PATH
 
 # Switch to non-root user
 USER appuser
