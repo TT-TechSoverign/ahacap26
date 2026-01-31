@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'; // Added ArrowRight for CTA
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { EditableText } from './EditableText';
 import Link from 'next/link';
 
@@ -14,9 +14,35 @@ interface ProjectImage {
     description: string;
 }
 
-// Full Data Array (50 Images)
-// Generated to cover all assets found in directory.
+// Ordered List of Projects based on User Request
+// Mapped to their actual locations in public/assets
 const PROJECT_IMAGES: ProjectImage[] = [
+    // Hero/Named Projects (from assets/hero-cards/)
+    { src: '/assets/hero-cards/unit-lg-plexiglass-installation.jpg', alt: 'Plexiglass Install', description: 'Custom Plexiglass Installation' },
+    { src: '/assets/hero-cards/pearlhorizons.jpg', alt: 'Pearl Horizons', description: 'Pearl Horizons Project' },
+    { src: '/assets/hero-cards/pearlridge_garden_towers.jpg', alt: 'Pearlridge Gardens', description: 'Pearlridge Garden Towers' },
+    { src: '/assets/hero-cards/pearlridge-square-.jpg', alt: 'Pearlridge Square', description: 'Pearlridge Square Installation' },
+    { src: '/assets/hero-cards/piikoi_atrium.jpg', alt: 'Piikoi Atrium', description: 'Piikoi Atrium HVAC Upgrade' },
+    { src: '/assets/hero-cards/sliding-window.jpg', alt: 'Sliding Window', description: 'Sliding Window Unit Install' },
+    { src: '/assets/hero-cards/thru-wall-below-window.jpg', alt: 'Thru-Wall Unit', description: 'Thru-Wall Below Window Setup' },
+    { src: '/assets/hero-cards/thru-wall.jpg', alt: 'Wall Mount', description: 'Thru-Wall Air Conditioning' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0407.jpg', alt: 'Installation Detail', description: 'Precision Installation Detail' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0413.jpg', alt: 'Unit Setup', description: 'Professional Unit Setup' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0433.jpg', alt: 'AC Maintenance', description: 'Comprehensive AC Maintenance' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0434.jpg', alt: 'System Check', description: 'System Performance Check' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0435.jpg', alt: 'Ventilation', description: 'Ventilation Assessment' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0436.jpg', alt: 'Cooling System', description: 'Efficient Cooling System' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0441.jpg', alt: 'Service Call', description: 'On-Site Service Call' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0444.jpg', alt: 'Unit Inspection', description: 'Detailed Unit Inspection' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0458.jpg', alt: 'Quality Check', description: 'Final Quality Polish' },
+    { src: '/assets/hero-cards/thumbnail_IMG_0460.jpg', alt: 'Happy Client', description: 'Another Successful Project' },
+    { src: '/assets/hero-cards/unit-fredrich-plywood.jpg', alt: 'Custom Fit', description: 'Custom Friedrich Plywood Fit' },
+    { src: '/assets/hero-cards/unit-fredrich-sliding-window-vertical.jpg', alt: 'Vertical Slider', description: 'Vertical Window AC Install' },
+    { src: '/assets/hero-cards/unit-lg-below-window.jpg', alt: 'LG Unit', description: 'LG Below-Window Configuration' },
+    { src: '/assets/hero-cards/unit-lg-condowindow1.jpg', alt: 'Condo AC', description: 'Apartment & Condo Solutions' },
+    { src: '/assets/hero-cards/unit-lg-makakilio-glass-pic.jpg', alt: 'Makakilo Project', description: 'Glass Mount Installation' },
+
+    // Yelp Photos (from assets/yelpphotos/)
     { src: '/assets/yelpphotos/yelp1.jpg', alt: 'Split AC System', description: 'Modern split system installation' },
     { src: '/assets/yelpphotos/yelp2.jpg', alt: 'Rooftop Unit', description: 'Commercial rooftop HVAC unit' },
     { src: '/assets/yelpphotos/yelp3.jpg', alt: 'Ductless Mini-Split', description: 'Energy efficient ductless setup' },
@@ -38,36 +64,6 @@ const PROJECT_IMAGES: ProjectImage[] = [
     { src: '/assets/yelpphotos/yelp19.jpg', alt: 'Heating System', description: 'Heating system maintenance' },
     { src: '/assets/yelpphotos/yelp20.jpg', alt: 'Air Quality', description: 'Indoor air quality improvement' },
     { src: '/assets/yelpphotos/yelp21.jpg', alt: 'Cooling Tower', description: 'Cooling tower maintenance' },
-    { src: '/assets/yelpphotos/yelp22.jpg', alt: 'HVAC Tech', description: 'Professional HVAC technician' },
-    { src: '/assets/yelpphotos/yelp23.jpg', alt: 'Maintenance Plan', description: 'Preventative maintenance plan' },
-    { src: '/assets/yelpphotos/yelp24.jpg', alt: 'Energy Savings', description: 'Energy saving HVAC upgrades' },
-    { src: '/assets/yelpphotos/yelp25.jpg', alt: 'Warranty Service', description: 'Warranty service and repair' },
-    { src: '/assets/yelpphotos/yelp26.jpg', alt: 'Happy Customer', description: 'Satisfied customer with new AC' },
-    { src: '/assets/yelpphotos/yelp27.jpg', alt: 'Efficient Cooling', description: 'Efficient cooling for homes' },
-    { src: '/assets/yelpphotos/yelp28.jpg', alt: 'Reliable Comfort', description: 'Reliable home comfort' },
-    { src: '/assets/yelpphotos/yelp29.jpg', alt: 'Tech at work', description: 'Technician inspecting unit' },
-    { src: '/assets/yelpphotos/yelp30.jpg', alt: 'Completed Job', description: 'Successfully completed job' },
-    // Extended Set (31-50) with generic descriptions
-    { src: '/assets/yelpphotos/yelp31.jpg', alt: 'Quality Install', description: 'High-quality installation standards' },
-    { src: '/assets/yelpphotos/yelp32.jpg', alt: 'Local Experts', description: 'Trusted local HVAC experts' },
-    { src: '/assets/yelpphotos/yelp33.jpg', alt: 'Precision Work', description: 'Precision in every detail' },
-    { src: '/assets/yelpphotos/yelp34.jpg', alt: 'Clean Finish', description: 'Clean and tidy finish' },
-    { src: '/assets/yelpphotos/yelp35.jpg', alt: 'System Upgrade', description: 'Modern system upgrade' },
-    { src: '/assets/yelpphotos/yelp36.jpg', alt: 'Climate Control', description: 'Advanced climate control' },
-    { src: '/assets/yelpphotos/yelp37.jpg', alt: 'Rapid Response', description: 'Quick response time services' },
-    { src: '/assets/yelpphotos/yelp38.jpg', alt: 'Expert Diagnosis', description: 'Accurate system diagnosis' },
-    { src: '/assets/yelpphotos/yelp39.jpg', alt: 'Duca Repair', description: 'Ductwork repair and sealing' },
-    { src: '/assets/yelpphotos/yelp40.jpg', alt: 'Unit Replacement', description: 'Old unit replacement' },
-    { src: '/assets/yelpphotos/yelp41.jpg', alt: 'Safety Check', description: 'Comprehensive safety check' },
-    { src: '/assets/yelpphotos/yelp42.jpg', alt: 'Performance Tuning', description: 'System performance tuning' },
-    { src: '/assets/yelpphotos/yelp43.jpg', alt: 'Smart Home', description: 'Smart home integration' },
-    { src: '/assets/yelpphotos/yelp44.jpg', alt: 'Year-Round Comfort', description: 'Comfort for every season' },
-    { src: '/assets/yelpphotos/yelp45.jpg', alt: 'Eco-Friendly', description: 'Eco-friendly refrigerant solutions' },
-    { src: '/assets/yelpphotos/yelp46.jpg', alt: 'Quiet Operation', description: 'Low-noise system installation' },
-    { src: '/assets/yelpphotos/yelp47.jpg', alt: 'Custom Solution', description: 'Customized HVAC solutions' },
-    { src: '/assets/yelpphotos/yelp48.jpg', alt: 'Professional Team', description: 'Dedicated professional team' },
-    { src: '/assets/yelpphotos/yelp49.jpg', alt: 'Service Excellence', description: 'Commitment to service excellence' },
-    { src: '/assets/yelpphotos/yelp50.jpg', alt: 'Oahu Choice', description: 'The preferred choice in Oahu' },
 ];
 
 export default function Section4Projects() {
@@ -101,12 +97,12 @@ export default function Section4Projects() {
                     className="object-cover opacity-90 pointer-events-none"
                     priority
                 />
-                {/* Updated Gradient: White mixed with Dark Blue hints */}
+                {/* Gradient: White mixed with Dark Blue hints */}
                 <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-slate-900/5 to-white/90" />
             </div>
 
             <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
-                {/* Header - Explicit z-index to ensure visibility */}
+                {/* Header */}
                 <div className="text-center mb-16 max-w-2xl relative z-30">
                     <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 uppercase drop-shadow-sm">
                         <EditableText
@@ -188,7 +184,6 @@ export default function Section4Projects() {
 
                 {/* Controls & CTA */}
                 <div className="flex flex-col items-center gap-8 mt-12 z-30">
-                    {/* Navigation Arrows */}
                     <div className="flex items-center gap-8">
                         <button
                             onClick={handlePrev}
@@ -207,7 +202,6 @@ export default function Section4Projects() {
                         </button>
                     </div>
 
-                    {/* CTA Button */}
                     <Link href="/contact" className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-black transition-all duration-200 bg-cyan-400 rounded-full hover:bg-cyan-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400">
                         <span>REQUEST A QUOTE</span>
                         <ArrowRight className="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:translate-x-1" />
