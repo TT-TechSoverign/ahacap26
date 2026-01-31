@@ -4,6 +4,7 @@ import NavbarV2 from '@/components/NavbarV2';
 import Section1HeroHomeV2 from '@/components/Section1HeroHomeV2';
 import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
 import Section3AboutQuick from '@/components/Section3AboutQuick';
+import Section4Projects from '@/components/Section4Projects';
 import { BackToTop } from '@/components/BackToTop';
 
 // Force dynamic since we want to ensure fresh rendering
@@ -149,6 +150,7 @@ export default function HomepageV2() {
                 <Section1HeroHomeV2 />
                 <Section2OurServicesV2 />
                 <Section3AboutQuick />
+                <Section4Projects />
                 {/* <Render config={config} data={v2Data} /> */}
             </main>
             <BackToTop visible={true} />
