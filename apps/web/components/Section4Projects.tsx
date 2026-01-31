@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { EditableText } from './EditableText';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 // Image Data Interface
 interface ProjectImage {
@@ -14,8 +15,7 @@ interface ProjectImage {
     description: string;
 }
 
-// Ordered List of Projects based on User Request
-// Mapped to their actual locations in public/assets
+// Ordered List of Projects
 const PROJECT_IMAGES: ProjectImage[] = [
     // Hero/Named Projects (from assets/hero-cards/)
     { src: '/assets/hero-cards/unit-lg-plexiglass-installation.jpg', alt: 'Plexiglass Install', description: 'Custom Plexiglass Installation' },
@@ -94,23 +94,25 @@ export default function Section4Projects() {
                     src="/assets/yelpphotos/bg-eastside-view1.webp"
                     alt="Background Pattern"
                     fill
-                    className="object-cover opacity-90 pointer-events-none"
+                    // Opacity reduced to 70% as requested
+                    className="object-cover opacity-70 pointer-events-none"
                     priority
                 />
-                {/* Gradient: White mixed with Dark Blue hints */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-slate-900/5 to-white/90" />
+                {/* Blue/White Gradient Overlay - Added more blue tint (blue-900/10) */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-blue-900/10 to-white/90" />
             </div>
 
             <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
-                {/* Header */}
-                <div className="text-center mb-16 max-w-2xl relative z-30">
+
+                {/* Header - Z-index boosted to 40 and added explicit block display */}
+                <div className="text-center mb-16 max-w-4xl w-full relative z-40 block">
                     <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 uppercase drop-shadow-sm">
                         <EditableText
                             contentKey="section4-title"
                             defaultText="OUR RECENT PROJECTS"
                         />
                     </h2>
-                    <p className="text-lg text-slate-700 font-medium leading-relaxed drop-shadow-sm">
+                    <p className="text-lg text-slate-700 font-medium leading-relaxed drop-shadow-sm max-w-2xl mx-auto">
                         <EditableText
                             contentKey="section4-subtitle"
                             defaultText="Browse our gallery of recent installations across Oahu. Swipe to explore."
