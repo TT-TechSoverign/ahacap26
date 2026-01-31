@@ -146,42 +146,64 @@ export default function Section4Projects() {
                     </div>
                 </div>
 
-                {/* Carousel Stage */}
+                {/* Carousel Stage - Refined: Cyan Glow, Emboss, No-Crop */}
                 <div
-                    className="relative w-full max-w-5xl aspect-[4/3] md:aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl group border-4 border-white ring-1 ring-slate-200"
+                    className="relative w-full max-w-5xl aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden group 
+                    border-[6px] border-white 
+                    shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5),0_0_30px_-5px_rgba(6,182,212,0.4)] 
+                    ring-1 ring-slate-900/5 transform transition-transform duration-500 hover:scale-[1.01]"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentIndex}
-                            initial={{ opacity: 0, scale: 1.05 }}
-                            animate={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.7, ease: "easeOut" }}
-                            className="absolute inset-0 w-full h-full"
+                            transition={{ duration: 0.5 }}
+                            className="absolute inset-0 w-full h-full bg-slate-900"
                         >
+                            {/* Layer 1: Blurred Background (Fills container) */}
                             <Image
                                 src={projects[currentIndex].src}
-                                alt={projects[currentIndex].description}
+                                alt="Background Blur"
                                 fill
-                                className="object-cover object-center"
-                                priority={currentIndex === 0}
+                                className="object-cover opacity-30 blur-2xl scale-110"
                             />
 
-                            {/* Overlay Gradient (Subtle) */}
-                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent pointer-events-none" />
+                            {/* Layer 2: Main Image (No Crop - Contain) */}
+                            <div className="absolute inset-0 flex items-center justify-center p-2">
+                                <div className="relative w-full h-full">
+                                    <Image
+                                        src={projects[currentIndex].src}
+                                        alt={projects[currentIndex].description}
+                                        fill
+                                        className="object-contain drop-shadow-2xl"
+                                        priority={currentIndex === 0}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Overlay Gradient (Subtle, only at bottom for text) */}
+                            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent pointer-events-none" />
 
                             {/* Text Content */}
-                            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 text-center md:text-left z-10 transform transition-transform duration-500 translate-y-2 group-hover:translate-y-0">
-                                <p className="text-white text-lg md:text-2xl font-bold tracking-tight drop-shadow-md">
-                                    {projects[currentIndex].description}
-                                </p>
-                                {projects[currentIndex].location && (
-                                    <p className="text-cyan-400 text-sm md:text-base font-mono uppercase tracking-widest mt-2">
-                                        {projects[currentIndex].location}
+                            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10 text-center md:text-left z-10">
+                                <motion.div
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.2 }}
+                                >
+                                    <p className="text-white text-lg md:text-2xl font-bold tracking-tight drop-shadow-md leading-tight">
+                                        {projects[currentIndex].description}
                                     </p>
-                                )}
+                                    {projects[currentIndex].location && (
+                                        <p className="text-cyan-400 text-sm md:text-base font-mono uppercase tracking-widest mt-2 font-bold">
+                                            {projects[currentIndex].location}
+                                        </p>
+                                    )}
+                                </motion.div>
                             </div>
                         </motion.div>
                     </AnimatePresence>
