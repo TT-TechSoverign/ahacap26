@@ -86,32 +86,32 @@ export default function Section4Projects() {
     ];
 
     return (
-        <section className="relative w-full py-24 overflow-hidden bg-gray-50 h-[900px] flex flex-col justify-center">
+        <section className="relative w-full py-24 overflow-hidden bg-slate-900 h-[900px] flex flex-col justify-center">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
                     src="/assets/yelpphotos/bg-eastside-view1.webp"
                     alt="Background Pattern"
                     fill
-                    // Opacity reduced to 70% as requested
-                    className="object-cover opacity-70 pointer-events-none"
+                    className="object-cover opacity-60 pointer-events-none blur-sm"
                     priority
                 />
-                {/* Blue/White Gradient Overlay - Added more blue tint (blue-900/10) */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-blue-900/10 to-white/90" />
+                {/* Darker Blue Overlay */}
+                <div className="absolute inset-0 bg-slate-900/80 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/40 to-slate-900/90" />
             </div>
 
             <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
 
-                {/* Header - Z-index boosted to 40 and added explicit block display */}
+                {/* Header */}
                 <div className="text-center mb-16 max-w-4xl w-full relative z-40 block">
-                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 uppercase drop-shadow-sm">
+                    <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4 uppercase drop-shadow-lg">
                         <EditableText
                             contentKey="section4-title"
                             defaultValue="OUR RECENT PROJECTS"
                         />
                     </h2>
-                    <p className="text-lg text-slate-700 font-medium leading-relaxed drop-shadow-sm max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-200 font-medium leading-relaxed drop-shadow-md max-w-2xl mx-auto">
                         <EditableText
                             contentKey="section4-subtitle"
                             defaultValue="Browse our gallery of recent installations across Oahu. Swipe to explore."
@@ -146,7 +146,7 @@ export default function Section4Projects() {
                                         rotate: direction === 1 ? -10 : 10
                                     }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                                    className="absolute w-full h-full shadow-2xl rounded-2xl overflow-hidden bg-white border border-gray-100"
+                                    className="absolute w-full h-full shadow-2xl rounded-2xl overflow-hidden bg-slate-800 border-2 border-white/10 backdrop-blur-md"
                                 >
                                     <div className="relative w-full h-full group">
                                         <Image
@@ -160,7 +160,7 @@ export default function Section4Projects() {
 
                                         {/* Glassmorphism Overlay */}
                                         <div className="absolute bottom-0 left-0 right-0 p-6 
-                                            bg-black/40 backdrop-blur-md border-t border-white/10
+                                            bg-slate-900/80 backdrop-blur-md border-t border-white/10
                                             text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                             <p className="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-1 shadow-black/50 drop-shadow-md">
                                                 {project.alt}
@@ -188,24 +188,25 @@ export default function Section4Projects() {
                     <div className="flex items-center gap-8">
                         <button
                             onClick={handlePrev}
-                            className="p-4 rounded-full bg-white shadow-xl hover:bg-gray-50 hover:scale-110 active:scale-95 transition-all border border-gray-100 group"
+                            className="p-4 rounded-full bg-slate-800/80 backdrop-blur-sm shadow-xl hover:bg-slate-700 hover:scale-110 active:scale-95 transition-all border border-white/10 group"
                             aria-label="Previous Project"
                         >
-                            <ChevronLeft className="w-6 h-6 text-slate-700 group-hover:text-black" />
+                            <ChevronLeft className="w-6 h-6 text-white group-hover:text-cyan-400" />
                         </button>
 
                         <button
                             onClick={handleNext}
-                            className="p-4 rounded-full bg-slate-900 shadow-xl shadow-slate-900/20 hover:bg-black hover:scale-110 active:scale-95 transition-all border border-slate-800 group"
+                            className="p-4 rounded-full bg-slate-800/80 backdrop-blur-sm shadow-xl shadow-slate-900/20 hover:bg-slate-700 hover:scale-110 active:scale-95 transition-all border border-white/10 group"
                             aria-label="Next Project"
                         >
-                            <ChevronRight className="w-6 h-6 text-white" />
+                            <ChevronRight className="w-6 h-6 text-white group-hover:text-cyan-400" />
                         </button>
                     </div>
 
-                    <Link href="/contact" className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-black transition-all duration-200 bg-cyan-400 rounded-full hover:bg-cyan-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400">
-                        <span>REQUEST A QUOTE</span>
-                        <ArrowRight className="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:translate-x-1" />
+                    <Link href="/contact" className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-900 transition-all duration-300 bg-cyan-400 rounded-full hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 border border-cyan-300/50 backdrop-blur-sm">
+                        <span className="relative z-10">REQUEST A QUOTE</span>
+                        <ArrowRight className="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:translate-x-1 relative z-10" />
+                        <div className="absolute inset-0 rounded-full bg-white/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </Link>
                 </div>
             </div>
