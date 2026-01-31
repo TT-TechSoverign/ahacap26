@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { EditableText } from './EditableText';
@@ -78,9 +78,44 @@ export default function Section4Projects() {
             .map(({ value }) => value);
 
         setProjects(featured ? [featured, ...shuffled] : shuffled);
+
+        // Initial Center: Scroll to index 0 after render
+        setTimeout(() => scrollToIndex(0), 100);
     }, []);
 
-    // Intersection Observer to detect the centered item
+    // Robust Scroll-To-Center Logic
+    const scrollToIndex = useCallback((index: number) => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        // Clamp index
+        const targetIndex = Math.max(0, Math.min(index, RAW_PROJECTS.length - 1)); // Use RAW_PROJECTS.length is safe or projects.length if set
+
+        // Find the item
+        const items = container.querySelectorAll('[data-carousel-item]');
+        const targetItem = items[targetIndex] as HTMLElement;
+
+        if (targetItem) {
+            // Update Active Index immediately for UI feedback
+            setActiveIndex(targetIndex);
+
+            // Calculate exact center position
+            const containerCenter = container.clientWidth / 2;
+            const itemCenter = targetItem.offsetWidth / 2;
+            const itemLeft = targetItem.offsetLeft;
+
+            // Standard centering formula:
+            // ScrollTarget = ItemLeftPosition - (ContainerHalfWidth) + (ItemHalfWidth)
+            const scrollTo = itemLeft - containerCenter + itemCenter;
+
+            container.scrollTo({
+                left: scrollTo,
+                behavior: 'smooth'
+            });
+        }
+    }, []); // Removed projects dependency to keep stable reference
+
+    // Intersection Observer for Scroll Detection
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
@@ -96,43 +131,39 @@ export default function Section4Projects() {
             },
             {
                 root: container,
-                threshold: 0.6, // Requires 60% visibility to be "active"
+                threshold: 0.5, // 50% visibility
+                rootMargin: '-10% 0px -10% 0px' // Narrow connection
             }
         );
 
-        const items = container.querySelectorAll('.carousel-item');
+        const items = container.querySelectorAll('[data-carousel-item]');
         items.forEach((item) => observer.observe(item));
 
         return () => observer.disconnect();
     }, [projects]);
 
-    const scrollToIndex = (index: number) => {
-        if (!containerRef.current) return;
-        const item = containerRef.current.querySelector(`[data-index="${index}"]`);
-        item?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    };
 
     if (projects.length === 0) return null;
 
     return (
         <section className="relative w-full bg-white py-24 overflow-hidden min-h-[900px] flex flex-col justify-center">
-            {/* Background Image: Eastside View SVG with White Blend */}
+            {/* Background Image: Eastside View SVG */}
             <div className="absolute inset-0 z-0">
                 <Image
                     src="/assets/yelpphotos/bg-eastside-view1-1600x1000.svg"
                     alt="Eastside View Background"
                     fill
                     className="object-cover object-center opacity-40"
+                    priority
                 />
-                {/* Overlay layers */}
                 <div className="absolute inset-0 bg-white/90 backdrop-blur-[2px]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent" />
             </div>
 
-            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 flex flex-col items-center gap-12">
+            <div className="relative z-10 w-full max-w-[1400px] mx-auto flex flex-col items-center gap-12">
 
                 {/* Header */}
-                <div className="text-center max-w-3xl">
+                <div className="text-center max-w-3xl px-6">
                     <h2 className="font-header font-black text-4xl md:text-5xl lg:text-6xl text-slate-900 uppercase tracking-tighter leading-none mb-6">
                         <EditableText contentKey="home_v2.projects.title" defaultValue="OUR RECENT" />
                         <span className="text-cyan-500 block md:inline md:ml-3">
@@ -148,45 +179,84 @@ export default function Section4Projects() {
                     </div>
                 </div>
 
-                {/* CSS Scroll Snap Carousel */}
+                {/* CSS Scroll Snap Carousel - Redesigned for Gaps & Centering */}
                 <div className="relative w-full">
-                    {/* The Scroll Container */}
+
+                    {/* The Scroll Container 
+                        - gap-6 (24px) for consistency
+                        - Padding Logic:
+                          - To center the FIRST item: padding-left = 50% of container - 50% of item width
+                          - To center the LAST item: padding-right = 50% of container - 50% of item width
+                        - We use calc() in CSS or tailwind arbitrarily.
+                        - Container width: 100vw usually.
+                        - Item width: 280px (mobile), 350px (md), 400px (lg)
+                    */}
                     <div
                         ref={containerRef}
                         className="
-                            flex overflow-x-auto gap-0 py-12 px-[50%] 
+                            flex overflow-x-auto items-center py-12 gap-8
                             snap-x snap-mandatory scroll-smooth
                             no-scrollbar
                             w-full
+                            px-[50vw] // Fallback, will be overridden by style for precision?
+                            // Actually, let's use a safe padding approach: 
+                            // box-border with massive padding is tricky.
+                            // Better: spacer divs? No.
+                            // Let's rely on the JS scrollTo for the initial center, and use CSS for spacing.
+                            // If we want pure CSS snap center for first item, we DO need padding.
+                            // Let's use `px-[calc(50%-140px)]` for mobile (280/2), `md:px-[calc(50%-175px)]`...
                         "
-                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Hide scrollbar
+                        style={{
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                        }}
                     >
+                        {/* We use padding on the container to facilitate "first item in center" */}
+                        {/* Tailwind arbitrary values work well here */}
+                        <style jsx>{`
+                              div[class*="overflow-x-auto"] {
+                                  padding-left: calc(50vw - 140px);
+                                  padding-right: calc(50vw - 140px);
+                              }
+                              @media (min-width: 768px) {
+                                  div[class*="overflow-x-auto"] {
+                                      padding-left: calc(50% - 175px);
+                                      padding-right: calc(50% - 175px);
+                                  }
+                              }
+                              @media (min-width: 1024px) {
+                                  div[class*="overflow-x-auto"] {
+                                      padding-left: calc(50% - 200px);
+                                      padding-right: calc(50% - 200px);
+                                  }
+                              }
+                        `}</style>
+
                         {projects.map((project, index) => {
                             const isActive = index === activeIndex;
                             return (
                                 <div
                                     key={index}
                                     data-index={index}
+                                    data-carousel-item
                                     className={`
-                                        carousel-item
                                         flex-shrink-0 relative
                                         snap-center
                                         transition-all duration-500 ease-out
                                         w-[280px] md:w-[350px] lg:w-[400px]
                                         aspect-[3/4]
-                                        mx-4
-                                        group
-                                        ${isActive ? 'scale-100 opacity-100 z-20' : 'scale-75 opacity-50 z-10 blur-[1px] grayscale-[0.5]'}
+                                        cursor-pointer
+                                        ${isActive ? 'scale-100 opacity-100 z-20' : 'scale-[0.85] opacity-60 z-10 blur-[0.5px] grayscale-[0.3]'}
                                     `}
                                     onClick={() => scrollToIndex(index)}
                                 >
-                                    {/* Image Wrapper with Shadow/Glow */}
+                                    {/* Image Wrapper */}
                                     <div className={`
-                                        relative w-full h-full rounded-3xl overflow-hidden
-                                        border-[6px] border-white
-                                        shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)]
+                                        relative w-full h-full rounded-2xl overflow-hidden
+                                        border-[4px] md:border-[6px] border-white
+                                        shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)]
                                         transition-all duration-500
-                                        ${isActive ? 'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5),0_0_40px_-5px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/20' : ''}
+                                        ${isActive ? 'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5),0_0_40px_-5px_rgba(6,182,212,0.6)] ring-1 ring-cyan-400/30' : ''}
                                     `}>
                                         <Image
                                             src={project.src}
@@ -196,9 +266,9 @@ export default function Section4Projects() {
                                             sizes="(max-width: 768px) 280px, 400px"
                                         />
 
-                                        {/* Overlay Gradient (Always Visible on Active) */}
+                                        {/* Overlay Gradient */}
                                         <div className={`
-                                            absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-transparent pointer-events-none
+                                            absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent pointer-events-none
                                             transition-opacity duration-300
                                             ${isActive ? 'opacity-100' : 'opacity-0'}
                                         `} />
@@ -207,7 +277,7 @@ export default function Section4Projects() {
                                         <div className={`
                                             absolute bottom-0 left-0 right-0 p-6 text-center
                                             transition-all duration-500 delay-100
-                                            ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}
+                                            ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}
                                         `}>
                                             <h3 className="text-white font-bold text-lg leading-tight mb-2 drop-shadow-md">
                                                 {project.description}
@@ -227,15 +297,17 @@ export default function Section4Projects() {
                     {/* Navigation Buttons */}
                     <button
                         onClick={() => scrollToIndex(activeIndex - 1)}
-                        className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 z-30 bg-slate-900/10 hover:bg-slate-900 text-slate-900 hover:text-white p-4 rounded-full backdrop-blur-md transition-all duration-300 border border-slate-900/10 shadow-lg hidden md:block"
+                        className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 z-30 bg-white/80 hover:bg-white text-slate-900 p-4 rounded-full backdrop-blur-md transition-all duration-300 border border-slate-200 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed hidden md:block"
                         disabled={activeIndex === 0}
+                        aria-label="Previous"
                     >
                         <ChevronLeft size={32} />
                     </button>
                     <button
                         onClick={() => scrollToIndex(activeIndex + 1)}
-                        className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-30 bg-slate-900/10 hover:bg-slate-900 text-slate-900 hover:text-white p-4 rounded-full backdrop-blur-md transition-all duration-300 border border-slate-900/10 shadow-lg hidden md:block"
+                        className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-30 bg-white/80 hover:bg-white text-slate-900 p-4 rounded-full backdrop-blur-md transition-all duration-300 border border-slate-200 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed hidden md:block"
                         disabled={activeIndex === projects.length - 1}
+                        aria-label="Next"
                     >
                         <ChevronRight size={32} />
                     </button>
