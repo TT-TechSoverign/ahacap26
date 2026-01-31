@@ -38,6 +38,7 @@ const RAW_PROJECTS: ProjectImage[] = [
     { src: '/assets/hero-cards/unit-lg-below-window.jpg', description: 'Low-profile LG unit installation.' },
     { src: '/assets/hero-cards/unit-lg-condowindow1.jpg', description: 'Condo-approved LG window unit setup.' },
     { src: '/assets/hero-cards/unit-lg-makakilio-glass-pic.jpg', description: 'Makakilo glass mounting for unobstructed views.' },
+    { src: '/assets/yelpphotos/yelp30.jpg', description: 'Showcase installation demonstrating our premium finish qualities.', location: 'East Oahu' },
     { src: '/assets/yelpphotos/yelp1.jpg', description: 'Commercial-grade reliability for residential comfort.' },
     { src: '/assets/yelpphotos/yelp2.jpg', description: 'Expert technician ensuring perfect calibration.' },
     { src: '/assets/yelpphotos/yelp3.jpg', description: 'Precision mounting for vibration-free operation.' },
@@ -67,13 +68,23 @@ export default function Section4Projects() {
     const [isHovered, setIsHovered] = useState(false);
     const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
-    // Shuffle on mount
+    // Shuffle on mount, but keep yelp30.jpg first
     useEffect(() => {
-        const shuffled = [...RAW_PROJECTS]
+        const featuredImage = '/assets/yelpphotos/yelp30.jpg';
+
+        // Filter out the featured image from the shuffle pool
+        const shufflable = RAW_PROJECTS.filter(p => p.src !== featuredImage);
+
+        // Find the featured image object
+        const featured = RAW_PROJECTS.find(p => p.src === featuredImage);
+
+        const shuffled = shufflable
             .map(value => ({ value, sort: Math.random() }))
             .sort((a, b) => a.sort - b.sort)
             .map(({ value }) => value);
-        setProjects(shuffled);
+
+        // Prepend featured image if found, otherwise just show shuffled
+        setProjects(featured ? [featured, ...shuffled] : shuffled);
     }, []);
 
     const nextSlide = useCallback(() => {
@@ -102,8 +113,21 @@ export default function Section4Projects() {
     if (projects.length === 0) return null; // Wait for hydration
 
     return (
-        <section className="w-full bg-white py-24 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-12">
+        <section className="relative w-full bg-white py-24 overflow-hidden">
+            {/* Background Image: Eastside View with White Blend */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/assets/yelpphotos/bg-eastside-view1.webp"
+                    alt="Eastside View Background"
+                    fill
+                    className="object-cover object-center opacity-40"
+                />
+                {/* Heavy White Overlay to keep 'Light Theme' */}
+                <div className="absolute inset-0 bg-white/95 backdrop-blur-[2px]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent" />
+            </div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col items-center gap-12">
 
                 {/* Header */}
                 <div className="text-center max-w-3xl">
