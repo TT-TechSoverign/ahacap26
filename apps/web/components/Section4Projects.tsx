@@ -146,7 +146,7 @@ export default function Section4Projects() {
                                         rotate: direction === 1 ? -10 : 10
                                     }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                                    className="absolute w-full h-full shadow-2xl rounded-2xl overflow-hidden bg-slate-800 border-2 border-white/10 backdrop-blur-md"
+                                    className="absolute w-full h-full shadow-2xl rounded-2xl overflow-hidden bg-white border-2 border-slate-200/50 backdrop-blur-md"
                                 >
                                     <div className="relative w-full h-full group">
                                         <Image
