@@ -89,13 +89,13 @@ export default function Section4Projects() {
                 <div className="text-center mb-16 max-w-2xl">
                     <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-4 uppercase">
                         <EditableText
-                            id="section4-title"
+                            contentKey="section4-title"
                             defaultText="OUR RECENT PROJECTS"
                         />
                     </h2>
                     <p className="text-lg text-gray-600 font-medium leading-relaxed">
                         <EditableText
-                            id="section4-subtitle"
+                            contentKey="section4-subtitle"
                             defaultText="Browse our gallery of recent installations across Oahu. Swipe to explore."
                         />
                     </p>
