@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { EditableText } from './EditableText';
 
@@ -64,18 +63,13 @@ const RAW_PROJECTS: ProjectImage[] = [
 
 export default function Section4Projects() {
     const [projects, setProjects] = useState<ProjectImage[]>([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
-    const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
 
     // Shuffle on mount, but keep yelp30.jpg first
     useEffect(() => {
         const featuredImage = '/assets/yelpphotos/yelp30.jpg';
-
-        // Filter out the featured image from the shuffle pool
         const shufflable = RAW_PROJECTS.filter(p => p.src !== featuredImage);
-
-        // Find the featured image object
         const featured = RAW_PROJECTS.find(p => p.src === featuredImage);
 
         const shuffled = shufflable
@@ -83,51 +77,59 @@ export default function Section4Projects() {
             .sort((a, b) => a.sort - b.sort)
             .map(({ value }) => value);
 
-        // Prepend featured image if found, otherwise just show shuffled
         setProjects(featured ? [featured, ...shuffled] : shuffled);
     }, []);
 
-    const nextSlide = useCallback(() => {
-        setCurrentIndex((prev) => (prev + 1) % projects.length);
-    }, [projects.length]);
-
-    const prevSlide = useCallback(() => {
-        setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
-    }, [projects.length]);
-
-    // Autoplay Logic: ONLY when hovered
+    // Intersection Observer to detect the centered item
     useEffect(() => {
-        if (isHovered) {
-            autoplayRef.current = setInterval(() => {
-                nextSlide();
-            }, 3000); // 3 seconds per slide on hover
-        } else {
-            if (autoplayRef.current) clearInterval(autoplayRef.current);
-        }
+        const container = containerRef.current;
+        if (!container) return;
 
-        return () => {
-            if (autoplayRef.current) clearInterval(autoplayRef.current);
-        };
-    }, [isHovered, nextSlide]);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = Number(entry.target.getAttribute('data-index'));
+                        setActiveIndex(index);
+                    }
+                });
+            },
+            {
+                root: container,
+                threshold: 0.6, // Requires 60% visibility to be "active"
+            }
+        );
 
-    if (projects.length === 0) return null; // Wait for hydration
+        const items = container.querySelectorAll('.carousel-item');
+        items.forEach((item) => observer.observe(item));
+
+        return () => observer.disconnect();
+    }, [projects]);
+
+    const scrollToIndex = (index: number) => {
+        if (!containerRef.current) return;
+        const item = containerRef.current.querySelector(`[data-index="${index}"]`);
+        item?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    };
+
+    if (projects.length === 0) return null;
 
     return (
-        <section className="relative w-full bg-white py-24 overflow-hidden">
-            {/* Background Image: Eastside View with White Blend */}
+        <section className="relative w-full bg-white py-24 overflow-hidden min-h-[900px] flex flex-col justify-center">
+            {/* Background Image: Eastside View SVG with White Blend */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/yelpphotos/bg-eastside-view1.webp"
+                    src="/assets/yelpphotos/bg-eastside-view1-1600x1000.svg"
                     alt="Eastside View Background"
                     fill
                     className="object-cover object-center opacity-40"
                 />
-                {/* Heavy White Overlay to keep 'Light Theme' */}
-                <div className="absolute inset-0 bg-white/95 backdrop-blur-[2px]" />
+                {/* Overlay layers */}
+                <div className="absolute inset-0 bg-white/90 backdrop-blur-[2px]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent" />
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col items-center gap-12">
+            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 flex flex-col items-center gap-12">
 
                 {/* Header */}
                 <div className="text-center max-w-3xl">
@@ -140,114 +142,120 @@ export default function Section4Projects() {
                     <div className="font-sans text-lg md:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
                         <EditableText
                             contentKey="home_v2.projects.narrative"
-                            defaultValue="Browse our gallery of recent installations across Oahu. From condo upgrades to full home retrofits, see the difference quality craftsmanship makes."
+                            defaultValue="Browse our gallery of recent installations across Oahu. Swipe to explore."
                             multiLine
                         />
                     </div>
                 </div>
 
-                {/* Carousel Stage - Refined: Cyan Glow, Emboss, No-Crop */}
-                <div
-                    className="relative w-full max-w-5xl aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden group 
-                    border-[6px] border-white 
-                    shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5),0_0_30px_-5px_rgba(6,182,212,0.4)] 
-                    ring-1 ring-slate-900/5 transform transition-transform duration-500 hover:scale-[1.01]"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                >
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={currentIndex}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.5 }}
-                            className="absolute inset-0 w-full h-full bg-slate-900"
-                        >
-                            {/* Layer 1: Blurred Background (Fills container) */}
-                            <Image
-                                src={projects[currentIndex].src}
-                                alt="Background Blur"
-                                fill
-                                className="object-cover opacity-30 blur-2xl scale-110"
-                            />
-
-                            {/* Layer 2: Main Image (No Crop - Contain) */}
-                            <div className="absolute inset-0 flex items-center justify-center p-2">
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src={projects[currentIndex].src}
-                                        alt={projects[currentIndex].description}
-                                        fill
-                                        className="object-contain drop-shadow-2xl"
-                                        priority={currentIndex === 0}
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Overlay Gradient (Subtle, only at bottom for text) */}
-                            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent pointer-events-none" />
-
-                            {/* Text Content */}
-                            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10 text-center md:text-left z-10">
-                                <motion.div
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.2 }}
+                {/* CSS Scroll Snap Carousel */}
+                <div className="relative w-full">
+                    {/* The Scroll Container */}
+                    <div
+                        ref={containerRef}
+                        className="
+                            flex overflow-x-auto gap-0 py-12 px-[50%] 
+                            snap-x snap-mandatory scroll-smooth
+                            no-scrollbar
+                            w-full
+                        "
+                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Hide scrollbar
+                    >
+                        {projects.map((project, index) => {
+                            const isActive = index === activeIndex;
+                            return (
+                                <div
+                                    key={index}
+                                    data-index={index}
+                                    className={`
+                                        carousel-item
+                                        flex-shrink-0 relative
+                                        snap-center
+                                        transition-all duration-500 ease-out
+                                        w-[280px] md:w-[350px] lg:w-[400px]
+                                        aspect-[3/4]
+                                        mx-4
+                                        group
+                                        ${isActive ? 'scale-100 opacity-100 z-20' : 'scale-75 opacity-50 z-10 blur-[1px] grayscale-[0.5]'}
+                                    `}
+                                    onClick={() => scrollToIndex(index)}
                                 >
-                                    <p className="text-white text-lg md:text-2xl font-bold tracking-tight drop-shadow-md leading-tight">
-                                        {projects[currentIndex].description}
-                                    </p>
-                                    {projects[currentIndex].location && (
-                                        <p className="text-cyan-400 text-sm md:text-base font-mono uppercase tracking-widest mt-2 font-bold">
-                                            {projects[currentIndex].location}
-                                        </p>
-                                    )}
-                                </motion.div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
+                                    {/* Image Wrapper with Shadow/Glow */}
+                                    <div className={`
+                                        relative w-full h-full rounded-3xl overflow-hidden
+                                        border-[6px] border-white
+                                        shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)]
+                                        transition-all duration-500
+                                        ${isActive ? 'shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5),0_0_40px_-5px_rgba(6,182,212,0.5)] ring-2 ring-cyan-400/20' : ''}
+                                    `}>
+                                        <Image
+                                            src={project.src}
+                                            alt={project.description}
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 768px) 280px, 400px"
+                                        />
 
-                    {/* Navigation Arrows (Visible on Hover or Mobile Focus) */}
-                    <button
-                        onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/90 text-white hover:text-cyan-600 p-3 rounded-full backdrop-blur-md transition-all duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100 shadow-lg border border-white/20 hover:border-white hover:scale-110 z-20"
-                        aria-label="Previous Project"
-                    >
-                        <ChevronLeft size={32} strokeWidth={3} />
-                    </button>
+                                        {/* Overlay Gradient (Always Visible on Active) */}
+                                        <div className={`
+                                            absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-transparent pointer-events-none
+                                            transition-opacity duration-300
+                                            ${isActive ? 'opacity-100' : 'opacity-0'}
+                                        `} />
 
-                    <button
-                        onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/90 text-white hover:text-cyan-600 p-3 rounded-full backdrop-blur-md transition-all duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100 shadow-lg border border-white/20 hover:border-white hover:scale-110 z-20"
-                        aria-label="Next Project"
-                    >
-                        <ChevronRight size={32} strokeWidth={3} />
-                    </button>
-
-                    {/* Progress Indicator */}
-                    <div className="absolute top-6 right-6 flex gap-1.5 z-20 bg-black/30 p-2 rounded-full backdrop-blur-sm border border-white/10">
-                        {projects.map((_, idx) => (
-                            <div
-                                key={idx}
-                                className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentIndex ? 'w-8 bg-cyan-400' : 'w-1.5 bg-white/30'
-                                    }`}
-                            // Only show limited dots if list is huge? No, user has 40 images. Displaying 40 dots is too much.
-                            // Rendering 40 dots might be clutter. Let's hide this or make it a counter?
-                            // Switched to minimal counter or just current active bar?
-                            // Let's keep it simple: No dots for 40 items. Maybe just a counter.
-                            />
-                        ))}
+                                        {/* Content */}
+                                        <div className={`
+                                            absolute bottom-0 left-0 right-0 p-6 text-center
+                                            transition-all duration-500 delay-100
+                                            ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}
+                                        `}>
+                                            <h3 className="text-white font-bold text-lg leading-tight mb-2 drop-shadow-md">
+                                                {project.description}
+                                            </h3>
+                                            {project.location && (
+                                                <p className="text-cyan-400 text-xs font-mono uppercase tracking-widest font-bold">
+                                                    {project.location}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
 
-                    {/* Clean Counter instead of 40 dots */}
-                    <div className="absolute top-6 right-6 px-4 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/10 text-white font-mono text-xs tracking-widest z-20">
-                        {currentIndex + 1} / {projects.length}
+                    {/* Navigation Buttons */}
+                    <button
+                        onClick={() => scrollToIndex(activeIndex - 1)}
+                        className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 z-30 bg-slate-900/10 hover:bg-slate-900 text-slate-900 hover:text-white p-4 rounded-full backdrop-blur-md transition-all duration-300 border border-slate-900/10 shadow-lg hidden md:block"
+                        disabled={activeIndex === 0}
+                    >
+                        <ChevronLeft size={32} />
+                    </button>
+                    <button
+                        onClick={() => scrollToIndex(activeIndex + 1)}
+                        className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-30 bg-slate-900/10 hover:bg-slate-900 text-slate-900 hover:text-white p-4 rounded-full backdrop-blur-md transition-all duration-300 border border-slate-900/10 shadow-lg hidden md:block"
+                        disabled={activeIndex === projects.length - 1}
+                    >
+                        <ChevronRight size={32} />
+                    </button>
+
+                    {/* Counter */}
+                    <div className="absolute top-4 right-4 md:right-20 px-4 py-2 bg-white/80 backdrop-blur-md rounded-full border border-slate-200 text-slate-900 font-mono text-xs font-bold shadow-sm z-30">
+                        {activeIndex + 1} / {projects.length}
                     </div>
                 </div>
-
-                {/* Thumbnails Row (Optional - maybe too heavy for 40 images? Let's skip for now per "flow" request and stick to carousel) */}
             </div>
+
+            <style jsx global>{`
+                .no-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+                .no-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            `}</style>
         </section>
     );
 }
