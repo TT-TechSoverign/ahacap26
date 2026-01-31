@@ -9,8 +9,19 @@ export default function Section3AboutQuick() {
 
     return (
         <section className="relative py-20 lg:py-32 bg-[#0F172A] overflow-hidden">
-            {/* Background Texture/Glow */}
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+            {/* Background Image: Honolulu Skyline */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/assets/hero-cards/bg-honolulu_skyline.jpg"
+                    alt="Honolulu Skyline"
+                    fill
+                    className="object-cover object-center"
+                    priority
+                />
+                {/* Dark Overlay (80% opacity) */}
+                <div className="absolute inset-0 bg-[#0F172A]/80 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/50 to-[#0F172A]/80" />
+            </div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="flex flex-col gap-12 max-w-4xl mx-auto">
