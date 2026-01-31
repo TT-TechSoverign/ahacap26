@@ -213,24 +213,7 @@ export default function Section4Projects() {
                     >
                         {/* We use padding on the container to facilitate "first item in center" */}
                         {/* Tailwind arbitrary values work well here */}
-                        <style jsx>{`
-                              div[class*="overflow-x-auto"] {
-                                  padding-left: calc(50vw - 140px);
-                                  padding-right: calc(50vw - 140px);
-                              }
-                              @media (min-width: 768px) {
-                                  div[class*="overflow-x-auto"] {
-                                      padding-left: calc(50% - 175px);
-                                      padding-right: calc(50% - 175px);
-                                  }
-                              }
-                              @media (min-width: 1024px) {
-                                  div[class*="overflow-x-auto"] {
-                                      padding-left: calc(50% - 200px);
-                                      padding-right: calc(50% - 200px);
-                                  }
-                              }
-                        `}</style>
+                        {/* Padding logic moved to global styles */}
 
                         {projects.map((project, index) => {
                             const isActive = index === activeIndex;
@@ -326,6 +309,23 @@ export default function Section4Projects() {
                 .no-scrollbar {
                     -ms-overflow-style: none;
                     scrollbar-width: none;
+                }
+                /* Dynamic Padding for Centering */
+                [data-carousel-container] {
+                    padding-left: calc(50vw - 140px);
+                    padding-right: calc(50vw - 140px);
+                }
+                @media (min-width: 768px) {
+                    [data-carousel-container] {
+                        padding-left: calc(50% - 175px);
+                        padding-right: calc(50% - 175px);
+                    }
+                }
+                @media (min-width: 1024px) {
+                    [data-carousel-container] {
+                        padding-left: calc(50% - 200px);
+                        padding-right: calc(50% - 200px);
+                    }
                 }
             `}</style>
         </section>
