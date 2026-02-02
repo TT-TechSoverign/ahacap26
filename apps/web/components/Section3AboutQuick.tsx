@@ -1,8 +1,10 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { EditableText } from './EditableText';
 import { useContent } from '../lib/context/ContentContext';
+import { ArrowRight } from 'lucide-react';
 
 export default function Section3AboutQuick() {
     const { content } = useContent();
@@ -56,34 +58,18 @@ export default function Section3AboutQuick() {
                         </div>
                     </div>
 
-                    {/* Narrative & Stats - Compact Split */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start max-w-4xl mx-auto">
-                        <div className="md:col-span-2 font-sans leading-relaxed">
-                            {/* Matched Section 1 Styling exactly */}
-                            <div className="font-sans text-lg md:text-xl text-slate-200 font-medium leading-relaxed drop-shadow-md text-center md:text-left">
-                                <EditableText contentKey="home_v2.about_quick.narrative" multiLine />
-                            </div>
+                    {/* Narrative & CTA - Centered */}
+                    <div className="flex flex-col items-center text-center max-w-3xl mx-auto gap-8">
+                        <div className="font-sans text-lg md:text-xl text-slate-200 font-medium leading-relaxed drop-shadow-md">
+                            <EditableText contentKey="home_v2.about_quick.narrative" multiLine />
                         </div>
 
-                        {/* Stats - Compact */}
-                        <div className="grid grid-cols-2 md:flex md:flex-col gap-6 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8 w-full md:w-auto">
-                            <div className="flex flex-col text-center md:text-left">
-                                <span className="text-3xl md:text-4xl font-black text-white font-header tracking-tight">
-                                    <EditableText contentKey="home_v2.about_quick.stat1_value" />
-                                </span>
-                                <span className="text-[10px] font-bold font-mono text-white uppercase tracking-widest mt-1 opacity-80">
-                                    <EditableText contentKey="home_v2.about_quick.stat1_label" />
-                                </span>
-                            </div>
-                            <div className="flex flex-col text-center md:text-left">
-                                <span className="text-3xl md:text-4xl font-black text-white font-header tracking-tight">
-                                    <EditableText contentKey="home_v2.about_quick.stat2_value" />
-                                </span>
-                                <span className="text-[10px] font-bold font-mono text-white uppercase tracking-widest mt-1 opacity-80">
-                                    <EditableText contentKey="home_v2.about_quick.stat2_label" />
-                                </span>
-                            </div>
-                        </div>
+                        {/* Glassmorphism CTA Button */}
+                        <Link href="/contact" className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-900 transition-all duration-300 bg-cyan-400 rounded-full hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 border border-cyan-300/50 backdrop-blur-sm">
+                            <span className="relative z-10">CONTACT US</span>
+                            <ArrowRight className="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:translate-x-1 relative z-10" />
+                            <div className="absolute inset-0 rounded-full bg-white/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </Link>
                     </div>
 
                 </div>
