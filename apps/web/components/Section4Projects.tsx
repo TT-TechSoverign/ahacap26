@@ -86,7 +86,7 @@ export default function Section4Projects() {
     ];
 
     return (
-        <section className="relative w-full py-24 overflow-hidden bg-slate-50 h-[700px] flex flex-col justify-center">
+        <section className="relative w-full py-12 overflow-hidden bg-slate-50 h-[700px] flex flex-col justify-center">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -104,8 +104,8 @@ export default function Section4Projects() {
             <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
 
                 {/* Header */}
-                <div className="text-center mb-16 max-w-4xl w-full relative z-40 block">
-                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 uppercase drop-shadow-sm">
+                <div className="text-center mb-10 max-w-4xl w-full relative z-40 block">
+                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-2 uppercase drop-shadow-sm">
                         <EditableText
                             contentKey="section4-title"
                             defaultValue="OUR RECENT PROJECTS"
@@ -119,8 +119,8 @@ export default function Section4Projects() {
                     </p>
                 </div>
 
-                {/* Stack Carousel Container */}
-                <div className="relative w-full max-w-[300px] xs:max-w-sm md:max-w-lg lg:max-w-xl h-[400px] md:h-[500px] flex items-center justify-center perspective-1000 z-20 mt-8 mb-8">
+                {/* Stack Carousel Container - Resized to fit 700px */}
+                <div className="relative w-full max-w-[260px] xs:max-w-[320px] md:max-w-md h-[280px] md:h-[360px] flex items-center justify-center perspective-1000 z-20 mt-4 mb-6">
                     <AnimatePresence mode='popLayout' custom={direction}>
                         {visibleImages.map((project, index) => {
                             const isFront = index === 0;
