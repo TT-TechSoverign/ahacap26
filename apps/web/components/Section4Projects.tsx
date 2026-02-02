@@ -66,6 +66,7 @@ const PROJECT_IMAGES: ProjectImage[] = [
 ];
 
 export default function Section4Projects() {
+    // v2.5 Refinement
     const [activeIndex, setActiveIndex] = useState(0);
     const [direction, setDirection] = useState(0);
 

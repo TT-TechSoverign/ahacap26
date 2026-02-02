@@ -8,6 +8,7 @@ import Section4Projects from '@/components/Section4Projects';
 import { BackToTop } from '@/components/BackToTop';
 
 // Force dynamic since we want to ensure fresh rendering
+// v2.5 Visual Refinements Force Rebuild
 export const dynamic = 'force-dynamic';
 
 export default function HomepageV2() {
