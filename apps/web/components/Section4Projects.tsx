@@ -86,32 +86,32 @@ export default function Section4Projects() {
     ];
 
     return (
-        <section className="relative w-full py-24 overflow-hidden bg-slate-900 h-[900px] flex flex-col justify-center">
+        <section className="relative w-full py-24 overflow-hidden bg-slate-50 h-[900px] flex flex-col justify-center">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
                     src="/assets/yelpphotos/bg-eastside-view1.webp"
                     alt="Background Pattern"
                     fill
-                    className="object-cover opacity-60 pointer-events-none blur-sm"
+                    className="object-cover opacity-30 pointer-events-none blur-sm"
                     priority
                 />
-                {/* Darker Blue Overlay */}
-                <div className="absolute inset-0 bg-slate-900/80 mix-blend-multiply" />
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/40 to-slate-900/90" />
+                {/* Subtle Blue/Dark Overlay - Just a tint, not a full wash */}
+                <div className="absolute inset-0 bg-slate-900/10 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white/80" />
             </div>
 
             <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
 
                 {/* Header */}
                 <div className="text-center mb-16 max-w-4xl w-full relative z-40 block">
-                    <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4 uppercase drop-shadow-lg">
+                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 uppercase drop-shadow-sm">
                         <EditableText
                             contentKey="section4-title"
                             defaultValue="OUR RECENT PROJECTS"
                         />
                     </h2>
-                    <p className="text-lg text-slate-200 font-medium leading-relaxed drop-shadow-md max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-600 font-medium leading-relaxed drop-shadow-sm max-w-2xl mx-auto">
                         <EditableText
                             contentKey="section4-subtitle"
                             defaultValue="Browse our gallery of recent installations across Oahu. Swipe to explore."
@@ -160,7 +160,7 @@ export default function Section4Projects() {
 
                                         {/* Glassmorphism Overlay */}
                                         <div className="absolute bottom-0 left-0 right-0 p-6 
-                                            bg-slate-900/80 backdrop-blur-md border-t border-white/10
+                                            bg-black/40 backdrop-blur-md border-t border-white/10
                                             text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                             <p className="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-1 shadow-black/50 drop-shadow-md">
                                                 {project.alt}
@@ -188,15 +188,15 @@ export default function Section4Projects() {
                     <div className="flex items-center gap-8">
                         <button
                             onClick={handlePrev}
-                            className="p-4 rounded-full bg-slate-800/80 backdrop-blur-sm shadow-xl hover:bg-slate-700 hover:scale-110 active:scale-95 transition-all border border-white/10 group"
+                            className="p-4 rounded-full bg-white shadow-xl hover:bg-gray-50 hover:scale-110 active:scale-95 transition-all border border-slate-200 group"
                             aria-label="Previous Project"
                         >
-                            <ChevronLeft className="w-6 h-6 text-white group-hover:text-cyan-400" />
+                            <ChevronLeft className="w-6 h-6 text-slate-900 group-hover:text-cyan-600" />
                         </button>
 
                         <button
                             onClick={handleNext}
-                            className="p-4 rounded-full bg-slate-800/80 backdrop-blur-sm shadow-xl shadow-slate-900/20 hover:bg-slate-700 hover:scale-110 active:scale-95 transition-all border border-white/10 group"
+                            className="p-4 rounded-full bg-slate-900 shadow-xl shadow-slate-900/20 hover:bg-black hover:scale-110 active:scale-95 transition-all border border-slate-800 group"
                             aria-label="Next Project"
                         >
                             <ChevronRight className="w-6 h-6 text-white group-hover:text-cyan-400" />
