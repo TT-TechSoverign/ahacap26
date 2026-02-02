@@ -184,7 +184,7 @@ export default function Section4Projects() {
                 </div>
 
                 {/* Controls & CTA */}
-                <div className="flex flex-col items-center gap-8 mt-12 z-30">
+                <div className="flex flex-col items-center gap-6 mt-6 z-30">
                     <div className="flex items-center gap-8">
                         <button
                             onClick={handlePrev}
