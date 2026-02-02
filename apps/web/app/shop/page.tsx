@@ -1280,32 +1280,20 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                     </h3>
                 </div>
 
-                {/* Technical Specs (2x2 Grid Layout) */}
+                {/* Technical Specs (Noise & Voltage Only) */}
                 <div className="grid grid-cols-2 gap-1.5 w-full mb-4">
-                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Cooling</span>
-                        <span className="text-white text-[10px] font-bold font-header">{product.btu ? `${product.btu.toLocaleString()} BTU` : 'N/A'}</span>
-                    </div>
-                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Voltage</span>
-                        <span className="text-white text-[10px] font-bold font-header">{product.voltage || '115V'}</span>
-                    </div>
                     <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
                         <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Noise Level</span>
                         <span className="text-white text-[10px] font-bold font-header lowercase">{product.noise_level || 'N/A'}</span>
                     </div>
                     <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Dehumidification</span>
-                        <span className="text-white text-[10px] font-bold font-header">{product.dehumidification || 'N/A'}</span>
+                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Voltage</span>
+                        <span className="text-white text-[10px] font-bold font-header">{product.voltage || '115V'}</span>
                     </div>
                 </div>
 
-                {/* Transaction Hub (Centered) */}
                 <div className="mt-auto pt-3 border-t border-white/5 flex flex-col items-center gap-3 w-full">
                     <div className="flex items-center gap-2 justify-center">
-                        <div className="text-red-500/60 text-[9px] font-black uppercase tracking-widest line-through decoration-red-500/30 opacity-80">
-                            ${(product.price * 1.15).toLocaleString()}
-                        </div>
                         <div className="text-xl md:text-2xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors">
                             ${product.price.toLocaleString()}
                         </div>
