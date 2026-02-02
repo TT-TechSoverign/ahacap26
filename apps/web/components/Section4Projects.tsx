@@ -120,7 +120,7 @@ export default function Section4Projects() {
                 </div>
 
                 {/* Stack Carousel Container */}
-                <div className="relative w-full max-w-md h-[400px] md:h-[500px] flex items-center justify-center perspective-1000 z-20">
+                <div className="relative w-full max-w-[280px] xs:max-w-sm md:max-w-md h-[400px] md:h-[450px] flex items-center justify-center perspective-1000 z-20 mt-8 mb-8">
                     <AnimatePresence mode='popLayout' custom={direction}>
                         {visibleImages.map((project, index) => {
                             const isFront = index === 0;
