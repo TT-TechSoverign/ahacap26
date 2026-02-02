@@ -6,7 +6,7 @@ import { EditableText } from './EditableText';
 
 export default function Section1HeroHomeV2() {
     return (
-        <section className="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-slate-900">
+        <section className="relative w-full h-[700px] min-h-[500px] flex items-center justify-center overflow-hidden bg-slate-900">
             {/* Background Layer */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -34,11 +34,13 @@ export default function Section1HeroHomeV2() {
                             contentKey="home_v2.hero.title_line1"
                             defaultValue="COMFORT FOR"
                         /> <br />
-                        <span className="text-cyan-400 drop-shadow-[0_0_25px_rgba(0,174,239,0.5)]">
+                        <span className="relative inline-block text-cyan-400 drop-shadow-[0_0_25px_rgba(0,174,239,0.5)]">
                             <EditableText
                                 contentKey="home_v2.hero.title_highlight"
                                 defaultValue="YOUR OHANA"
                             />
+                            {/* Glow Underline */}
+                            <div className="absolute -bottom-2 left-0 w-full h-1 bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.8)] rounded-full" />
                         </span>
                     </h1>
 

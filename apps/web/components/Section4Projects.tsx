@@ -86,7 +86,7 @@ export default function Section4Projects() {
     ];
 
     return (
-        <section className="relative w-full py-24 overflow-hidden bg-slate-50 h-[900px] flex flex-col justify-center">
+        <section className="relative w-full py-24 overflow-hidden bg-slate-50 h-[700px] flex flex-col justify-center">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
