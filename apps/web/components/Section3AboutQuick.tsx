@@ -65,7 +65,7 @@ export default function Section3AboutQuick() {
                         </div>
 
                         {/* Glassmorphism CTA Button */}
-                        <Link href="/contact" className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-900 transition-all duration-300 bg-cyan-400 rounded-full hover:bg-white hover:text-slate-900 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 border border-cyan-300/50 backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.4)]">
+                        <Link href="/contact" className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-900 transition-all duration-300 bg-cyan-400 rounded-full hover:bg-white hover:text-slate-900 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 border border-cyan-300/50 shadow-[0_0_15px_rgba(34,211,238,0.4)] z-20">
                             <span className="relative z-10">CONTACT US</span>
                             <ArrowRight className="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:translate-x-1 relative z-10" />
                             <div className="absolute inset-0 rounded-full bg-white/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
