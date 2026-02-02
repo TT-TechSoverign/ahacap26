@@ -45,15 +45,16 @@ export default function Section2OurServicesV2() {
 
             {/* Header Content */}
             <div className="relative z-10 max-w-4xl mx-auto text-center mb-10 px-6">
-                <h2 className="font-header font-black text-4xl md:text-6xl text-slate-900 uppercase tracking-tighter mb-4">
+                <h2 className="relative inline-block font-header font-black text-4xl md:text-6xl text-slate-900 uppercase tracking-tighter mb-4 pb-6">
                     <span className="text-slate-900">
                         <EditableText contentKey="home_v2.services_header.title" defaultValue="ELITE COOLING" />
                     </span>{" "}
-                    <span className="relative inline-block text-cyan-500 drop-shadow-sm">
+                    <span className="text-cyan-500 drop-shadow-sm">
                         <EditableText contentKey="home_v2.services_header.title_highlight" defaultValue="SOLUTIONS" />
-                        {/* Glow Underline */}
-                        <div className="absolute -bottom-1 left-0 w-full h-1 bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.6)] rounded-full" />
                     </span>
+
+                    {/* Glow Underline - Centered & Matches Section 3 */}
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.6)] rounded-full" />
                 </h2>
 
                 <div className="font-sans text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-2xl mx-auto">
