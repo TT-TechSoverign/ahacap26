@@ -219,6 +219,7 @@
             "window_install_value": "1-2 WEEKS"
         },
         "wizard_title": "CONTACT US",
+        "wizard_interface": "INTERFACE",
         "wizard_subtitle": "DISPATCH TICKET",
         "wizard_ticket_prefix": "#AHAC162612100",
         "wizard": {

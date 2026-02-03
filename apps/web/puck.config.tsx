@@ -64,6 +64,13 @@ export const config: Config<{
                         variant: { type: "select", options: [{ label: "Primary", value: "primary" }, { label: "Outline", value: "outline" }] }
                     }
                 },
+                mode: {
+                    type: "radio",
+                    options: [
+                        { label: "Dark", value: "dark" },
+                        { label: "Light", value: "light" }
+                    ]
+                },
                 styles: {
                     type: "object",
                     objectFields: {
@@ -81,6 +88,7 @@ export const config: Config<{
                 subBadges: [{ text: "LG & GE THROUGH THE WALL AC RETAILER" }, { text: "Licensed & Insured" }, { text: "Energy Saving Units" }],
                 ctaShop: { text: "SHOP WINDOW AC INVENTORY", href: "/shop", variant: "primary" },
                 ctaEstimate: { text: "REQUEST A QUOTE", href: "/contact", variant: "outline" },
+                mode: "dark",
                 styles: { padding: "96px 0px" }
             },
             render: Hero
@@ -110,6 +118,13 @@ export const config: Config<{
                         color: { type: "select", options: [{ label: "Primary", value: "primary" }, { label: "Accent", value: "accent" }] },
                         badge: { type: "text" }
                     }
+                },
+                mode: {
+                    type: "radio",
+                    options: [
+                        { label: "Dark", value: "dark" },
+                        { label: "Light", value: "light" }
+                    ]
                 }
             },
             defaultProps: {
@@ -133,6 +148,7 @@ export const config: Config<{
                     { title: "CENTRAL AC", description: "Maximize Whole-Home Comfort...", icon: "hvac", linkText: "MORE INFO", href: "/contact", color: "accent" },
                     { title: "WINDOW AC CLEANING", description: "Breathe Cleaner, Save Longer...", icon: "cleaning_services", linkText: "WINDOW AC MAINTENANCE", href: "/contact", color: "accent" }
                 ],
+                mode: "dark",
                 styles: { padding: "96px 0px" }
             },
             render: Services
