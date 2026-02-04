@@ -23,9 +23,9 @@ export default function Section2OurServicesV2() {
             link: '/contact'
         },
         {
-            id: 'central_ac',
-            defaultTitle: 'Central AC',
-            defaultDesc: 'Complete whole-home climate control systems for new construction and retrofits.',
+            id: 'mini_split_maintenance',
+            defaultTitle: 'Mini Split AC Maintenance',
+            defaultDesc: 'Deep cleaning and professional service to keep your ductless system mold-free and efficient.',
             cleanImage: '/assets/yelpphotos/yelp13.jpg',
             link: '/contact'
         },
@@ -45,10 +45,10 @@ export default function Section2OurServicesV2() {
             <div className="relative z-10 max-w-4xl mx-auto text-center mb-10 px-6">
                 <h2 className="relative inline-block font-header font-black text-4xl md:text-6xl text-slate-900 uppercase tracking-tighter mb-4 pb-6">
                     <span className="text-slate-900">
-                        {contentData.home_v2?.services_header?.title || "ELITE COOLING"}
+                        Premium Cooling
                     </span>{" "}
                     <span className="text-cyan-500 drop-shadow-sm">
-                        {contentData.home_v2?.services_header?.title_highlight || "SOLUTIONS"}
+                        Solutions
                     </span>
 
                     {/* Glow Underline - Centered & Matches Section 3 */}
