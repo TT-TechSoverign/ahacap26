@@ -11,7 +11,7 @@ import { EditableText } from './EditableText';
 
 export default function NavbarV2() {
     const { items, openCart } = useCart();
-    const { content, isEditMode, setEditMode, saveChanges, discardChanges } = useContent();
+    const { content } = useContent();
 
     // --- Sticky-Free Navigation Logic ---
     const { scrollY } = useScroll();
@@ -153,7 +153,8 @@ export default function NavbarV2() {
                                         href={link.href}
                                         className="text-xs font-black uppercase tracking-[0.2em] text-slate-300 hover:text-cyan-400 transition-colors whitespace-nowrap relative group"
                                     >
-                                        {link.contentKey ? <EditableText contentKey={link.contentKey} /> : link.text}
+                                        {/* @ts-ignore */}
+                                        {link.text}
                                         <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                                     </Link>
                                 ))}
@@ -178,37 +179,7 @@ export default function NavbarV2() {
                                 </button>
                             </div>
 
-                            {/* Edit Mode Toggle (Prototype Only) */}
-                            <div className="flex justify-end items-center ml-4 pl-4 border-l border-slate-700">
-                                <button
-                                    onClick={() => isEditMode ? saveChanges() : setEditMode(true)}
-                                    className={cn(
-                                        "flex items-center gap-2 px-3 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all",
-                                        isEditMode
-                                            ? "bg-green-500 text-white hover:bg-green-400 shadow-[0_0_15px_rgba(34,197,94,0.5)]"
-                                            : "bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700"
-                                    )}
-                                >
-                                    <span className="material-symbols-outlined text-lg">
-                                        {isEditMode ? 'save' : 'edit'}
-                                    </span>
-                                    <span>{isEditMode ? 'Save' : 'Edit'}</span>
-                                </button>
-                                {isEditMode && (
-                                    <button
-                                        onClick={() => {
-                                            if (confirm('Discard unsaved changes?')) {
-                                                discardChanges();
-                                                setEditMode(false);
-                                            }
-                                        }}
-                                        className="ml-2 p-1.5 text-slate-400 hover:text-red-400 transition-colors"
-                                        title="Discard Changes"
-                                    >
-                                        <span className="material-symbols-outlined text-lg">close</span>
-                                    </button>
-                                )}
-                            </div>
+                            {/* Edit Mode Toggle Removed */}
                         </div>
                     </div>
                 </div>
@@ -237,7 +208,7 @@ export default function NavbarV2() {
                                         onClick={() => setMobileMenuOpen(false)}
                                         className="text-3xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center gap-4 group"
                                     >
-                                        <EditableText contentKey={`navigation.links.${i}.text`} />
+                                        {link.text}
                                     </Link>
                                 </motion.div>
                             ))}
@@ -259,26 +230,7 @@ export default function NavbarV2() {
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">storefront</span>
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary">Shop</span>
                                 </Link>
-                                <button
-                                    onClick={() => {
-                                        if (isEditMode) saveChanges();
-                                        else setEditMode(true);
-                                        setMobileMenuOpen(false);
-                                    }}
-                                    className={cn(
-                                        "col-span-2 border p-4 rounded-xl flex flex-col items-center gap-2 group transition-all",
-                                        isEditMode
-                                            ? "bg-green-50 border-green-500/50"
-                                            : "bg-slate-50 border-slate-200 hover:border-primary/50"
-                                    )}
-                                >
-                                    <span className={cn("material-symbols-outlined transition-transform group-hover:scale-110", isEditMode ? "text-green-600" : "text-slate-500")}>
-                                        {isEditMode ? 'save' : 'edit'}
-                                    </span>
-                                    <span className={cn("text-[10px] font-black uppercase tracking-widest", isEditMode ? "text-green-600" : "text-slate-500")}>
-                                        {isEditMode ? 'Save Changes' : 'Enable Editing'}
-                                    </span>
-                                </button>
+                                {/* Edit Button Removed */}
                             </motion.div>
                         </div>
                     </motion.div>

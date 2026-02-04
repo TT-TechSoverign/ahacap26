@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-import { EditableText } from './EditableText';
 import Link from 'next/link';
 
 // Image Data Interface
@@ -107,16 +106,10 @@ export default function Section4Projects() {
                 {/* Header */}
                 <div className="text-center mb-10 max-w-4xl w-full relative z-40 block">
                     <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-2 uppercase drop-shadow-sm">
-                        <EditableText
-                            contentKey="section4-title"
-                            defaultValue="OUR RECENT PROJECTS"
-                        />
+                        OUR RECENT PROJECTS
                     </h2>
                     <p className="text-lg text-slate-600 font-medium leading-relaxed drop-shadow-sm max-w-2xl mx-auto">
-                        <EditableText
-                            contentKey="section4-subtitle"
-                            defaultValue="Browse our gallery of recent installations across Oahu. Swipe to explore."
-                        />
+                        Browse our gallery of recent installations across Oahu. Swipe to explore.
                     </p>
                 </div>
 
