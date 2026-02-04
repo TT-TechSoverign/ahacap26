@@ -2,12 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { EditableText } from './EditableText';
+import contentData from '../lib/content/content.json';
 import { cn } from '@/lib/utils';
-import { useContent } from '../lib/context/ContentContext';
 
 export default function Section2OurServicesV2() {
-    const { isEditMode } = useContent();
 
     const services = [
         {
@@ -47,24 +45,19 @@ export default function Section2OurServicesV2() {
             <div className="relative z-10 max-w-4xl mx-auto text-center mb-10 px-6">
                 <h2 className="relative inline-block font-header font-black text-4xl md:text-6xl text-slate-900 uppercase tracking-tighter mb-4 pb-6">
                     <span className="text-slate-900">
-                        <EditableText contentKey="home_v2.services_header.title" defaultValue="ELITE COOLING" />
+                        {contentData.home_v2?.services_header?.title || "ELITE COOLING"}
                     </span>{" "}
                     <span className="text-cyan-500 drop-shadow-sm">
-                        <EditableText contentKey="home_v2.services_header.title_highlight" defaultValue="SOLUTIONS" />
+                        {contentData.home_v2?.services_header?.title_highlight || "SOLUTIONS"}
                     </span>
 
                     {/* Glow Underline - Centered & Matches Section 3 */}
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.6)] rounded-full" />
                 </h2>
 
-                <div className="font-sans text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-2xl mx-auto">
-                    <EditableText
-                        contentKey="home_v2.services_header.narrative"
-                        as="p"
-                        multiLine={true}
-                        defaultValue="We don’t just sell ACs—we provide complete climate ecosystems. Whether you need a whisper-quiet mini-split for your bedroom or an industrial fleet for your property, we have the inventory and expertise to keep you cool."
-                    />
-                </div>
+                <p className="font-sans text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-2xl mx-auto">
+                    {contentData.home_v2?.services_header?.narrative || "We don’t just sell ACs—we provide complete climate ecosystems. Whether you need a whisper-quiet mini-split for your bedroom or an industrial fleet for your property, we have the inventory and expertise to keep you cool."}
+                </p>
             </div>
 
             {/* Interactive Grid */}
@@ -92,23 +85,18 @@ export default function Section2OurServicesV2() {
                                 {/* Title with Cyan Glow & Underline */}
                                 <div className="transform transition-transform duration-500 flex flex-col items-center group-hover:-translate-y-2">
                                     <h3 className="font-header font-black text-2xl md:text-4xl text-white uppercase tracking-tighter mb-1 drop-shadow-lg transition-all duration-300 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
-                                        <EditableText
-                                            contentKey={`home_v2.services.${service.id}.title`}
-                                            defaultValue={service.defaultTitle}
-                                        />
+                                        {/* @ts-ignore */}
+                                        {contentData.home_v2?.services?.[service.id]?.title || service.defaultTitle}
                                     </h3>
                                     {/* Subtle Animated Underline */}
                                     <div className="w-8 h-1 bg-cyan-500/0 group-hover:bg-cyan-400 rounded-full mb-3 transition-all duration-500 group-hover:w-16 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
 
                                     {/* Description - Hidden by default, reveals on hover */}
                                     <div className="max-w-xs mx-auto opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 mb-6">
-                                        <EditableText
-                                            contentKey={`home_v2.services.${service.id}.description`}
-                                            as="p"
-                                            multiLine={true}
-                                            defaultValue={service.defaultDesc}
-                                            className="font-sans text-slate-100 text-base md:text-lg leading-snug drop-shadow-md font-medium"
-                                        />
+                                        <p className="font-sans text-slate-100 text-base md:text-lg leading-snug drop-shadow-md font-medium">
+                                            {/* @ts-ignore */}
+                                            {contentData.home_v2?.services?.[service.id]?.description || service.defaultDesc}
+                                        </p>
                                     </div>
 
                                     {/* CTA Button - Hidden by default, reveals on hover */}
@@ -116,8 +104,7 @@ export default function Section2OurServicesV2() {
                                         <Link
                                             href={service.link}
                                             className={cn(
-                                                "inline-flex items-center gap-2 px-6 py-2.5 border-2 border-white/30 hover:border-cyan-400 text-white hover:text-cyan-400 font-black uppercase tracking-widest text-xs md:text-sm rounded-full transition-all duration-300 hover:bg-slate-900/80 backdrop-blur-sm",
-                                                isEditMode ? "pointer-events-none opacity-50" : ""
+                                                "inline-flex items-center gap-2 px-6 py-2.5 border-2 border-white/30 hover:border-cyan-400 text-white hover:text-cyan-400 font-black uppercase tracking-widest text-xs md:text-sm rounded-full transition-all duration-300 hover:bg-slate-900/80 backdrop-blur-sm"
                                             )}
                                         >
                                             <span>Learn More</span>
