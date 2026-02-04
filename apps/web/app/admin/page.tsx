@@ -50,7 +50,7 @@ interface Lead {
     created_at: string;
 }
 
-type Tab = 'inventory' | 'orders' | 'leads';
+type Tab = 'inventory' | 'orders' | 'leads' | 'schedule';
 
 export default function AdminPage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -209,13 +209,14 @@ export default function AdminPage() {
 
                         {/* Tabs */}
                         <nav className="flex items-center bg-black/40 p-1 rounded-xl border border-white/5">
-                            {(['inventory', 'orders', 'leads'] as Tab[]).map((tab) => (
+                            {(['inventory', 'orders', 'leads', 'schedule'] as const).map((tab) => (
                                 <button
                                     key={tab}
+                                    //@ts-ignore
                                     onClick={() => setActiveTab(tab)}
                                     className={`px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-white text-black shadow-lg' : 'text-slate-500 hover:text-white'}`}
                                 >
-                                    {content.admin.tabs[tab as keyof typeof content.admin.tabs]}
+                                    {tab === 'schedule' ? 'Schedule' : content.admin.tabs[tab as keyof typeof content.admin.tabs]}
                                 </button>
                             ))}
                         </nav>
@@ -280,7 +281,7 @@ export default function AdminPage() {
 
                 {/* Content Views */}
                 <div className="bg-[#0a0e14] border border-white/5 rounded-2xl overflow-hidden min-h-[400px]">
-                    {loading ? (
+                    {loading && activeTab !== 'schedule' ? (
                         <div className="flex items-center justify-center h-64">
                             <div className="animate-spin size-8 border-2 border-primary border-t-transparent rounded-full" />
                         </div>
@@ -456,11 +457,16 @@ export default function AdminPage() {
                                 </motion.div>
                             )}
 
+                            {activeTab === 'schedule' && (
+                                <ScheduleManager />
+                            )}
+
 
                         </AnimatePresence>
                     )}
                 </div>
             </main>
+
 
             {/* Modals */}
             <AnimatePresence>
@@ -936,6 +942,184 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                     </button>
                 </div>
             </motion.div>
+        </motion.div>
+    );
+}
+
+function ScheduleManager() {
+    const { content } = useContent();
+    const [formData, setFormData] = useState(content.footer_schedule || {
+        mini_split_label: "",
+        window_ac_label: "",
+        mini_split_estimate_date: "",
+        mini_split_install_date: "",
+        window_ac_estimate_date: "",
+        window_ac_install_date: "",
+        general_availability_range: ""
+    });
+    const [saving, setSaving] = useState(false);
+    const [success, setSuccess] = useState(false);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSave = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setSaving(true);
+        setSuccess(false);
+        try {
+            const res = await fetch('/api/v1/admin/schedule', {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            if (res.ok) {
+                setSuccess(true);
+                setTimeout(() => setSuccess(false), 3000);
+            }
+        } catch (err) {
+            console.error('Failed to save schedule', err);
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    return (
+        <motion.div
+            key="schedule"
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 10 }}
+            className="p-8"
+        >
+            <div className="mb-8">
+                <h3 className="text-white font-header font-black uppercase text-xl tracking-widest mb-2">Footer Schedule Availability</h3>
+                <p className="text-slate-500 text-xs">Update the availability dates displayed in the footer for customers.</p>
+            </div>
+
+            <form onSubmit={handleSave} className="max-w-4xl space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Mini Split Section */}
+                    <div className="space-y-4 p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
+                        <div className="flex items-center gap-2 mb-2">
+                            <div className="w-1 h-4 bg-primary rounded-full"></div>
+                            <h4 className="text-white font-bold uppercase tracking-wider text-sm">Mini Split Column</h4>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Label</label>
+                            <input
+                                name="mini_split_label"
+                                value={formData.mini_split_label}
+                                onChange={handleChange}
+                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Estimate Date</label>
+                            <input
+                                name="mini_split_estimate_date"
+                                value={formData.mini_split_estimate_date}
+                                onChange={handleChange}
+                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Install Date</label>
+                            <input
+                                name="mini_split_install_date"
+                                value={formData.mini_split_install_date}
+                                onChange={handleChange}
+                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Window AC Section */}
+                    <div className="space-y-4 p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
+                        <div className="flex items-center gap-2 mb-2">
+                            <div className="w-1 h-4 bg-primary rounded-full"></div>
+                            <h4 className="text-white font-bold uppercase tracking-wider text-sm">Window AC Column</h4>
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Label</label>
+                            <input
+                                name="window_ac_label"
+                                value={formData.window_ac_label}
+                                onChange={handleChange}
+                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Estimate Date</label>
+                            <input
+                                name="window_ac_estimate_date"
+                                value={formData.window_ac_estimate_date}
+                                onChange={handleChange}
+                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Install Date</label>
+                            <input
+                                name="window_ac_install_date"
+                                value={formData.window_ac_install_date}
+                                onChange={handleChange}
+                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* General Range */}
+                <div className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl space-y-4">
+                    <div className="flex items-center gap-2 mb-2">
+                        <div className="w-1 h-4 bg-primary rounded-full"></div>
+                        <h4 className="text-white font-bold uppercase tracking-wider text-sm">General Booking Window</h4>
+                    </div>
+                    <div className="space-y-2">
+                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Weekly Range Text</label>
+                        <input
+                            name="general_availability_range"
+                            value={formData.general_availability_range}
+                            onChange={handleChange}
+                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                            placeholder="e.g. Scheduling for week of February 2-9, 2026"
+                        />
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-4 pt-4">
+                    <button
+                        type="submit"
+                        disabled={saving}
+                        className="bg-primary text-black font-black uppercase tracking-[0.2em] px-8 py-4 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                    >
+                        {saving ? (
+                            <>
+                                <div className="animate-spin size-4 border-2 border-black border-t-transparent rounded-full" />
+                                Saving...
+                            </>
+                        ) : (
+                            <>
+                                <span className="material-symbols-outlined text-lg">save</span>
+                                Save Updates
+                            </>
+                        )}
+                    </button>
+                    {success && (
+                        <motion.div
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="text-emerald-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2"
+                        >
+                            <span className="material-symbols-outlined">check_circle</span>
+                            Schedule Updated
+                        </motion.div>
+                    )}
+                </div>
+            </form>
         </motion.div>
     );
 }

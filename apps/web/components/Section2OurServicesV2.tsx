@@ -33,7 +33,7 @@ export default function Section2OurServicesV2() {
             id: 'window_maintenance',
             defaultTitle: 'Window AC Maintenance',
             defaultDesc: 'EPA-certified deep cleaning to restore efficiency and air quality.',
-            cleanImage: '/assets/window-unit-images/window-ac-maintenance-hero-bg-1.svg',
+            cleanImage: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.svg',
             link: '/contact'
         }
     ];

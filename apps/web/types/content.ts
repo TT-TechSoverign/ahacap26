@@ -381,6 +381,16 @@ export interface SystemUpgradeContent {
     footer: string;
 }
 
+export interface FooterScheduleContent {
+    mini_split_label: string;
+    window_ac_label: string;
+    mini_split_estimate_date: string;
+    mini_split_install_date: string;
+    window_ac_estimate_date: string;
+    window_ac_install_date: string;
+    general_availability_range: string;
+}
+
 export interface ContentSchema {
     landing: LandingContent;
     contact: ContactContent;
@@ -390,4 +400,5 @@ export interface ContentSchema {
     maintenance: MaintenanceContent;
     system_upgrade: SystemUpgradeContent;
     home_v2?: HomeV2Content;
+    footer_schedule?: FooterScheduleContent;
 }

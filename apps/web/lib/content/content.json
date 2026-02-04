@@ -786,5 +786,14 @@
       "location": "Location",
       "copyright": "© 2024 Affordable Home A/C • LIC# CT-36775 • Island-Scale Cooling Solutions"
     }
+  },
+  "footer_schedule": {
+    "mini_split_label": "MINI SPLIT AC",
+    "window_ac_label": "WINDOW AC / SERVICE",
+    "mini_split_estimate_date": "Next Available Estimate: Feb 6",
+    "mini_split_install_date": "Next Available Install: Feb 12",
+    "window_ac_estimate_date": "Next Available Estimate: Feb 5",
+    "window_ac_install_date": "Next Available Install: Feb 8",
+    "general_availability_range": "Scheduling bookings for week of: February 2-9, 2026"
   }
 }
