@@ -7,7 +7,8 @@ import { cn } from '@/lib/utils';
 import { useContent } from '../lib/context/ContentContext';
 
 export default function SectionServicesGeneral() {
-    const { isEditMode } = useContent();
+    // const { isEditMode } = useContent(); // Removed
+
 
     const services = [
         {
@@ -86,7 +87,7 @@ export default function SectionServicesGeneral() {
                                         href={service.link}
                                         className={cn(
                                             "inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest text-white border-b-2 border-transparent hover:border-cyan-400 pb-1 transition-all",
-                                            isEditMode ? "pointer-events-none opacity-50" : ""
+                                            ""
                                         )}
                                     >
                                         <span className="group-hover:text-cyan-400 transition-colors">Learn More</span>

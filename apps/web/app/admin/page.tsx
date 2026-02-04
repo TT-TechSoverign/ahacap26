@@ -50,7 +50,7 @@ interface Lead {
     created_at: string;
 }
 
-type Tab = 'inventory' | 'orders' | 'leads' | 'availability';
+type Tab = 'inventory' | 'orders' | 'leads';
 
 export default function AdminPage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -209,13 +209,13 @@ export default function AdminPage() {
 
                         {/* Tabs */}
                         <nav className="flex items-center bg-black/40 p-1 rounded-xl border border-white/5">
-                            {(['inventory', 'orders', 'leads', 'availability'] as Tab[]).map((tab) => (
+                            {(['inventory', 'orders', 'leads'] as Tab[]).map((tab) => (
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
                                     className={`px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-white text-black shadow-lg' : 'text-slate-500 hover:text-white'}`}
                                 >
-                                    {tab === 'availability' ? 'AVAILABILITY' : content.admin.tabs[tab as keyof typeof content.admin.tabs]}
+                                    {content.admin.tabs[tab as keyof typeof content.admin.tabs]}
                                 </button>
                             ))}
                         </nav>
@@ -456,17 +456,7 @@ export default function AdminPage() {
                                 </motion.div>
                             )}
 
-                            {activeTab === 'availability' && (
-                                <motion.div
-                                    key="availability"
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: 10 }}
-                                    className="p-8"
-                                >
-                                    <AvailabilityManager />
-                                </motion.div>
-                            )}
+
                         </AnimatePresence>
                     )}
                 </div>
@@ -689,113 +679,8 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
 
 
 
-function AvailabilityInputField({ label, path, placeholder }: { label: string, path: string, placeholder?: string }) {
-    const { content, updateContent } = useContent();
+// AvailabilityManager removed
 
-    // Resolve value from deep path
-    const keys = path.split('.');
-    let value = content as any;
-    for (const key of keys) {
-        value = value?.[key];
-    }
-
-    return (
-        <div className="space-y-2">
-            <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block">{label}</label>
-            <input
-                type="text"
-                value={value || ''}
-                onChange={(e) => updateContent(path, e.target.value)}
-                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all font-medium text-sm"
-                placeholder={placeholder}
-            />
-        </div>
-    );
-}
-
-function AvailabilityManager() {
-    const { saveChanges, isSaving, isDirty } = useContent();
-
-    return (
-        <div className="space-y-8">
-            <div className="flex items-center justify-between">
-                <div>
-                    <h3 className="text-white font-header font-black text-2xl uppercase tracking-tighter">Calendar Availability</h3>
-                    <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Manage estimated service dates</p>
-                </div>
-                {isDirty && (
-                    <button
-                        onClick={saveChanges}
-                        disabled={isSaving}
-                        className="bg-primary text-black px-8 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest shadow-[0_0_20px_rgba(0,174,239,0.3)] hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                    >
-                        {isSaving ? <div className="size-4 border-2 border-black border-t-transparent rounded-full animate-spin" /> : <span className="material-symbols-outlined text-sm">save</span>}
-                        Save Changes
-                    </button>
-                )}
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                {/* Editor Column */}
-                <div className="space-y-8">
-                    {/* General */}
-                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6">
-                        <h4 className="text-primary font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/5 pb-2">General Settings</h4>
-                        <div className="grid gap-6">
-                            <AvailabilityInputField label="Calendar Title" path="contact.calendar.title" />
-                            <AvailabilityInputField label="Badge Label" path="contact.badge_label" />
-                        </div>
-                    </div>
-
-                    {/* Split AC */}
-                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] -mr-16 -mt-16 pointer-events-none"></div>
-                        <h4 className="text-primary font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/5 pb-2">Split AC Section</h4>
-                        <div className="grid gap-6">
-                            <AvailabilityInputField label="Section Title" path="contact.calendar.split_section_title" />
-                            <div className="grid grid-cols-2 gap-4">
-                                <AvailabilityInputField label="Estimate Label" path="contact.calendar.split_estimate_label" />
-                                <AvailabilityInputField label="Estimate Date" path="contact.calendar.split_estimate_value" placeholder="e.g. OCT 14" />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <AvailabilityInputField label="Install Label" path="contact.calendar.split_install_label" />
-                                <AvailabilityInputField label="Install Date" path="contact.calendar.split_install_value" placeholder="e.g. OCT 21" />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Window AC */}
-                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-[40px] -mr-16 -mt-16 pointer-events-none"></div>
-                        <h4 className="text-emerald-500 font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/5 pb-2">Window AC Section</h4>
-                        <div className="grid gap-6">
-                            <AvailabilityInputField label="Section Title" path="contact.calendar.window_section_title" />
-                            <div className="grid grid-cols-2 gap-4">
-                                <AvailabilityInputField label="Estimate Label" path="contact.calendar.window_estimate_label" />
-                                <AvailabilityInputField label="Estimate Date" path="contact.calendar.window_estimate_value" placeholder="e.g. OCT 15" />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <AvailabilityInputField label="Install Label" path="contact.calendar.window_install_label" />
-                                <AvailabilityInputField label="Install Date" path="contact.calendar.window_install_value" placeholder="e.g. OCT 22" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Preview Column */}
-                <div className="lg:sticky lg:top-32 h-fit">
-                    <div className="flex items-center justify-between mb-4 px-2">
-                        <span className="text-slate-500 text-[10px] font-black uppercase tracking-widest">Live Preview</span>
-                        <span className="text-slate-500 text-[9px] font-mono opacity-50">AdminCalendar.tsx</span>
-                    </div>
-                    <div className="opacity-90 pointer-events-none select-none transform scale-95 origin-top">
-                        <AdminCalendar />
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
 
 function ProductModal({ product, onClose, onSave }: { product?: Product, onClose: () => void, onSave: () => void }) {
     const [activeTab, setActiveTab] = useState<'basic' | 'specs'>('basic');

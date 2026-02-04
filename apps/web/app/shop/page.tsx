@@ -23,21 +23,15 @@ export default function ShopPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
-    const { content, isEditMode, setEditMode, isDirty, isSaving, saveChanges, discardChanges, setLayoutOrder } = useContent();
+    const { content } = useContent();
 
     const sectionOrder = content?.shop?.sections || [
         "dual_inverter", "universal_fit", "base", "ge", "casement", "logistics", "brand-spotlight", "sizing-guide", "faq"
     ];
 
-    const moveSection = (index: number, direction: 'up' | 'down') => {
-        const newOrder = [...sectionOrder];
-        const targetIndex = direction === 'up' ? index - 1 : index + 1;
 
-        if (targetIndex < 0 || targetIndex >= newOrder.length) return;
 
-        [newOrder[index], newOrder[targetIndex]] = [newOrder[targetIndex], newOrder[index]];
-        setLayoutOrder('shop.sections', newOrder);
-    };
+    // const moveSection = ... (Removed)
 
     const sectionMap: Record<string, React.ReactNode> = {
         "dual_inverter": (
@@ -237,42 +231,7 @@ export default function ShopPage() {
                             className="relative group/section"
                         >
                             {/* Section Control Suite (Edit Mode) */}
-                            {isEditMode && (
-                                <div className="absolute -top-12 right-0 z-[60] flex items-center gap-3">
-                                    {/* Move Controls */}
-                                    <div className="flex items-center bg-[#0f131a]/90 backdrop-blur-xl border border-white/10 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
-                                        <button
-                                            onClick={() => moveSection(index, 'up')}
-                                            disabled={index === 0}
-                                            className={cn(
-                                                "p-2.5 flex items-center justify-center transition-all",
-                                                index === 0 ? "text-slate-700 cursor-not-allowed" : "text-primary hover:bg-primary/10 active:scale-90"
-                                            )}
-                                            title="Move Up"
-                                        >
-                                            <span className="material-symbols-outlined text-sm">arrow_upward</span>
-                                        </button>
-                                        <div className="w-px h-4 bg-white/10"></div>
-                                        <button
-                                            onClick={() => moveSection(index, 'down')}
-                                            disabled={index === sectionOrder.length - 1}
-                                            className={cn(
-                                                "p-2.5 flex items-center justify-center transition-all",
-                                                index === sectionOrder.length - 1 ? "text-slate-700 cursor-not-allowed" : "text-primary hover:bg-primary/10 active:scale-90"
-                                            )}
-                                            title="Move Down"
-                                        >
-                                            <span className="material-symbols-outlined text-sm">arrow_downward</span>
-                                        </button>
-                                    </div>
-
-                                    {/* Section Badge */}
-                                    <div className="bg-[#0f131a] border border-primary/30 px-3 py-2 rounded-lg shadow-[0_0_20px_rgba(0,174,239,0.2)] opacity-0 group-hover/section:opacity-100 transition-all duration-500 ring-1 ring-primary/20 flex items-center gap-3">
-                                        <span className="material-symbols-outlined text-primary text-[10px] animate-pulse">settings_input_component</span>
-                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary/70">{sectionId.replace(/[-_]/g, ' ')}</span>
-                                    </div>
-                                </div>
-                            )}
+                            {/* Section Control Suite Removed */}
                             {sectionMap[sectionId] || null}
                         </div>
                     ))}
@@ -281,84 +240,7 @@ export default function ShopPage() {
             </main>
 
 
-            {/* --- VISUAL EDITOR CONTROL SUITE --- */}
-            <AnimatePresence>
-                {/* Floating Edit Toggle (Executive Style) */}
-                {!isEditMode && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="fixed bottom-8 right-8 z-[100]"
-                    >
-                        <button
-                            onClick={() => setEditMode(true)}
-                            className="bg-[#0f131a] border border-primary/30 p-4 rounded-full shadow-[0_0_30px_rgba(0,174,239,0.3)] hover:shadow-[0_0_50px_rgba(0,174,239,0.5)] hover:border-primary transition-all group"
-                        >
-                            <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">edit_note</span>
-                        </button>
-                    </motion.div>
-                )}
-
-                {/* Persistent Persistence Bar */}
-                {isEditMode && (
-                    <motion.div
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: 100, opacity: 0 }}
-                        className="fixed bottom-0 inset-x-0 z-[100] p-6 flex justify-center"
-                    >
-                        <div className="bg-[#0f131a]/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 flex items-center gap-6 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
-                            <div className="flex items-center gap-3 px-4 border-r border-white/10">
-                                <div className={cn(
-                                    "w-2 h-2 rounded-full animate-pulse",
-                                    isDirty ? "bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.8)]" : "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"
-                                )}></div>
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">
-                                    {isDirty ? 'UNSAVED CHANGES' : 'ALL SYNCED'}
-                                </span>
-                            </div>
-
-                            <div className="flex items-center gap-3">
-                                <button
-                                    onClick={discardChanges}
-                                    className="px-6 py-2.5 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white rounded-lg text-[9px] font-black uppercase tracking-widest transition-all"
-                                >
-                                    DISCARD
-                                </button>
-                                <button
-                                    onClick={saveChanges}
-                                    disabled={!isDirty || isSaving}
-                                    className={cn(
-                                        "px-8 py-2.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2",
-                                        isDirty
-                                            ? "bg-primary text-white shadow-[0_0_20px_rgba(0,174,239,0.4)] hover:shadow-[0_0_30px_rgba(0,174,239,0.6)]"
-                                            : "bg-white/5 text-slate-600 cursor-not-allowed"
-                                    )}
-                                >
-                                    {isSaving ? (
-                                        <>
-                                            <span className="animate-spin material-symbols-outlined text-xs">sync</span>
-                                            SAVING...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span className="material-symbols-outlined text-xs">save</span>
-                                            SAVE CHANGES
-                                        </>
-                                    )}
-                                </button>
-                                <button
-                                    onClick={() => setEditMode(false)}
-                                    className="p-2.5 text-slate-600 hover:text-white transition-colors"
-                                >
-                                    <span className="material-symbols-outlined text-sm">close</span>
-                                </button>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* --- VISUAL EDITOR CONTROL SUITE REMOVED --- */}
 
             {/* Footer */}
             {/* Footer Removed (Handled by Global Layout) */}
