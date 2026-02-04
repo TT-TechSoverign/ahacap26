@@ -1,7 +1,21 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useContent } from '@/lib/context/ContentContext';
 
 export default function Footer() {
+    const { content } = useContent();
+    const schedule = content.footer_schedule || {
+        mini_split_label: "MINI SPLIT AC",
+        window_ac_label: "WINDOW AC",
+        mini_split_estimate_date: "Next Available Estimate: Feb 6",
+        mini_split_install_date: "Next Available Install: Feb 12",
+        window_ac_estimate_date: "Next Available Estimate: Feb 5",
+        window_ac_install_date: "Next Available Install: Feb 8",
+        general_availability_range: "Scheduling for week of February 2-9, 2026"
+    };
+
     return (
         <footer className="bg-[#0a0e14] border-t border-white/5 pt-20 pb-12">
             <div className="max-w-7xl mx-auto px-6">
@@ -91,6 +105,48 @@ export default function Footer() {
                                 </div>
                             </li>
                         </ul>
+                    </div>
+                </div>
+
+                {/* Availability Schedule Section */}
+                <div className="border-t border-white/5 py-8 mb-8">
+                    <div className="flex flex-col gap-6 text-center">
+                        {/* Line 1: Columns */}
+                        <div className="grid grid-cols-2 max-w-4xl mx-auto w-full">
+                            <h5 className="text-white font-header font-black uppercase tracking-widest text-lg md:text-xl">
+                                {schedule.mini_split_label}
+                            </h5>
+                            <h5 className="text-white font-header font-black uppercase tracking-widest text-lg md:text-xl">
+                                {schedule.window_ac_label}
+                            </h5>
+                        </div>
+
+                        {/* Line 2: Specific Dates */}
+                        <div className="grid grid-cols-2 max-w-4xl mx-auto w-full gap-y-4">
+                            <div className="flex flex-col gap-1 items-center">
+                                <p className="text-primary font-bold uppercase tracking-wider text-xs md:text-sm">
+                                    {schedule.mini_split_estimate_date}
+                                </p>
+                                <p className="text-slate-400 font-bold uppercase tracking-wider text-xs md:text-sm">
+                                    {schedule.mini_split_install_date}
+                                </p>
+                            </div>
+                            <div className="flex flex-col gap-1 items-center">
+                                <p className="text-primary font-bold uppercase tracking-wider text-xs md:text-sm">
+                                    {schedule.window_ac_estimate_date}
+                                </p>
+                                <p className="text-slate-400 font-bold uppercase tracking-wider text-xs md:text-sm">
+                                    {schedule.window_ac_install_date}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Line 3: General Range */}
+                        <div className="pt-4 border-t border-white/5 w-full max-w-2xl mx-auto">
+                            <p className="text-slate-500 font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs">
+                                {schedule.general_availability_range}
+                            </p>
+                        </div>
                     </div>
                 </div>
 
