@@ -1,21 +1,28 @@
 #!/bin/bash
 
-echo "🔥 Initiating Force Redeploy Protocol..."
+# Force Redeploy Protocol (Nuclear Option for Disk Space)
+echo "🔥 Initiating Force Redeploy (Nuclear Mode)..."
 
 # 1. Pull latest changes
 echo "📥 Pulling latest from staging..."
 git pull origin staging
 
-# 2. Force Rebuild Web Container (No Cache)
-echo "🏗️  Rebuilding 'web' container (Cache Busted)..."
-docker compose build --no-cache web
+# 2. Stop all running containers to release image locks
+echo "🛑 Stopping all containers..."
+docker compose down
 
-# 3. Restart Services
-echo "🚀 Restarting services..."
-docker compose up -d
+# 3. Prune EVERYTHING except volumes (Images, Containers, Networks)
+# This is critical for the "No space left on device" error
+echo "🧹 Pruning system (Images, Containers, Networks)..."
+echo "build cache..."
+docker builder prune -af
+echo "system..."
+docker system prune -af
 
-# 4. Cleanup
-echo "🧹 Pruning dangling images..."
-docker image prune -f
+# 4. Rebuild and Start
+echo "🏗️  Rebuilding and Starting..."
+docker compose up -d --build
 
-echo "✅ Force Redeploy Complete!"
+# 5. Final Status
+echo "✅ Redeploy Complete!"
+docker ps
