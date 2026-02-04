@@ -19,21 +19,21 @@ export default function Section2OurServicesV2() {
             id: 'window_shop',
             defaultTitle: 'Window AC Shop',
             defaultDesc: 'Browse our massive inventory of LG & GE units, ready for immediate pickup.',
-            cleanImage: '/assets/hero-cards/unit-lg-plexiglass-installation.jpg',
+            cleanImage: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-herobg-solutions.svg',
             link: '/contact'
         },
         {
             id: 'mini_split_maintenance',
             defaultTitle: 'Mini Split AC Maintenance',
             defaultDesc: 'Deep cleaning and professional service to keep your ductless system mold-free and efficient.',
-            cleanImage: '/assets/yelpphotos/yelp13.jpg',
+            cleanImage: '/assets/yelpphotos/mini-split-blowerwheel-dirty-clean-1.svg',
             link: '/contact'
         },
         {
             id: 'window_maintenance',
             defaultTitle: 'Window AC Maintenance',
             defaultDesc: 'EPA-certified deep cleaning to restore efficiency and air quality.',
-            cleanImage: '/assets/hero-cards/window-ac-maintenance-foam-front-1.jpg',
+            cleanImage: '/assets/window-unit-images/window-ac-maintenance-hero-bg-1.svg',
             link: '/contact'
         }
     ];
