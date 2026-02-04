@@ -11,7 +11,7 @@ import { EditableText } from './EditableText';
 
 export default function Navbar() {
     const { items, openCart } = useCart();
-    const { content, isEditMode } = useContent();
+    const { content } = useContent();
 
     // --- Sticky-Free Navigation Logic ---
     const { scrollY } = useScroll();

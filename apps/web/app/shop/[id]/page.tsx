@@ -23,7 +23,7 @@ export default function ProductDetailPage() {
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const { content, isEditMode } = useContent();
+    const { content } = useContent();
 
     const { addToCart, items, openCart } = useCart();
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
