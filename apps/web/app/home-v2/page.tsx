@@ -145,7 +145,7 @@ export default function HomepageV2() {
     return (
         <div className="bg-white text-slate-900 min-h-screen font-sans">
             <NavbarV2 />
-            <main className="pt-[180px] bg-slate-900">
+            <main className="pt-[220px] bg-slate-900">
                 <Section2OurServicesV2 />
                 <Section4Projects />
                 {/* <Render config={config} data={v2Data} /> */}
