@@ -101,8 +101,10 @@ async def update_product(
         print(f"DEBUG: DB Update Success. Persisting to JSON...")
         
         # Persist to seed file
-        # FIX: Use jsonable_encoder because updated_product is a SQLAlchemy object, not Pydantic
-        persist_product_changes(jsonable_encoder(updated_product))
+        # FIX: Explicitly convert ORM -> Pydantic -> Dict to guarantee JSON serializability
+        # This prevents any recursive loop or relationship loading issues with jsonable_encoder
+        product_pydantic = schemas.Product.from_orm(updated_product)
+        persist_product_changes(product_pydantic.dict())
         
         return updated_product
     except Exception as e:
