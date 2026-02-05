@@ -61,10 +61,19 @@ export default function NavbarV2() {
                 {/* Row 1: Logo & Brands (White Background) */}
                 <div className="bg-white/95 backdrop-blur-md border-b border-slate-100 text-slate-900 z-20 relative">
                     <div className="max-w-7xl mx-auto px-6 py-2 flex flex-col gap-2">
-                        <div className="flex justify-between items-center relative py-1">
+                        <div className="flex justify-between items-center relative py-1 min-h-[100px] md:min-h-0">
 
-                            {/* Hidden Mobile Hamburger (Absolute Left for V2 mobile) */}
-                            <div className="md:hidden"></div>
+                            {/* Mobile Hamburger (Absolute Left) */}
+                            <div className="md:hidden absolute left-0 top-1/2 -translate-y-1/2 z-30">
+                                <button
+                                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                    className="text-slate-900 hover:text-primary transition-colors p-2"
+                                >
+                                    <span className="material-symbols-outlined text-3xl">
+                                        {mobileMenuOpen ? 'close' : 'menu'}
+                                    </span>
+                                </button>
+                            </div>
 
                             {/* Left Brands (Desktop Only: Window & Central Mix) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-end pr-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
@@ -83,16 +92,18 @@ export default function NavbarV2() {
                             </div>
 
                             {/* Center: Prominent Logo */}
-                            <Link href="/" className="relative h-32 w-64 md:h-44 md:w-80 group shrink-0">
-                                {/* Light Mode Logo - Standard */}
-                                <Image
-                                    src="/assets/ahac-logo-bus-500x500xv2.svg"
-                                    alt="AHAC Logo"
-                                    fill
-                                    className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
-                                    priority
-                                />
-                            </Link>
+                            {/* Mobile: Absolute Center. Desktop: Relative Center */}
+                            <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 md:flex md:justify-center z-20">
+                                <Link href="/" className="block relative h-24 w-48 md:h-44 md:w-80 group shrink-0">
+                                    <Image
+                                        src="/assets/ahac-logo-bus-500x500xv2.svg"
+                                        alt="AHAC Logo"
+                                        fill
+                                        className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+                                        priority
+                                    />
+                                </Link>
+                            </div>
 
                             {/* Right Brands (Desktop Only: Mini Splits) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
@@ -114,15 +125,18 @@ export default function NavbarV2() {
                                 </span>
                             </div>
 
-                            {/* Mobile Hamburger (Absolute Right) */}
-                            <div className="absolute right-0 top-1/2 -translate-y-1/2 md:hidden">
+                            {/* Mobile Cart (Absolute Right) */}
+                            <div className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 z-30">
                                 <button
-                                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                    className="text-slate-900 hover:text-primary transition-colors p-2"
+                                    onClick={openCart}
+                                    className="text-slate-900 hover:text-primary transition-colors p-2 relative"
                                 >
-                                    <span className="material-symbols-outlined text-3xl">
-                                        {mobileMenuOpen ? 'close' : 'menu'}
-                                    </span>
+                                    <span className="material-symbols-outlined text-3xl">shopping_cart</span>
+                                    {items.length > 0 && (
+                                        <span className="absolute top-0 right-0 w-4 h-4 bg-cyan-400 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm">
+                                            {items.length}
+                                        </span>
+                                    )}
                                 </button>
                             </div>
                         </div>
@@ -130,16 +144,16 @@ export default function NavbarV2() {
                 </div>
 
                 {/* Row 2: Navigation (Dark Blue Background) */}
-                <div className="bg-[#0F172A] text-white z-10 relative border-t border-slate-800">
+                <div className="bg-[#0F172A] text-white z-10 relative border-t border-slate-800 hidden md:block">
                     <div className="max-w-7xl mx-auto px-6 w-full">
-                        <div className="hidden md:grid grid-cols-3 items-center py-3">
+                        <div className="grid grid-cols-[1fr_auto_1fr] items-center py-3">
 
-                            {/* Left Col: Spacer (to balance Cart) */}
-                            <div className="hidden md:block"></div>
+                            {/* Left Col: Spacer */}
+                            <div></div>
 
-                            {/* Center Col: Navigation Links */}
+                            {/* Center Col: Navigation Links + Contact Us */}
                             <div className="flex justify-center items-center gap-8 md:gap-10">
-                                {[...links, { href: '/contact', text: 'Contact Us' }].map((link: any, i: number) => (
+                                {links.map((link: any, i: number) => (
                                     <Link
                                         key={i}
                                         href={link.href}
@@ -150,6 +164,18 @@ export default function NavbarV2() {
                                         <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
                                     </Link>
                                 ))}
+
+                                {/* Vertical Separator */}
+                                <div className="h-4 w-px bg-slate-700 mx-2"></div>
+
+                                {/* Contact Us Link */}
+                                <Link
+                                    href="/contact"
+                                    className="text-xs font-black uppercase tracking-[0.2em] text-slate-300 hover:text-cyan-400 transition-colors whitespace-nowrap relative group"
+                                >
+                                    Contact Us
+                                    <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                                </Link>
                             </div>
 
                             {/* Right Col: Cart */}
@@ -170,8 +196,6 @@ export default function NavbarV2() {
                                     </div>
                                 </button>
                             </div>
-
-                            {/* Edit Mode Toggle Removed */}
                         </div>
                     </div>
                 </div>
@@ -205,6 +229,20 @@ export default function NavbarV2() {
                                 </motion.div>
                             ))}
 
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: links.length * 0.1 }}
+                            >
+                                <Link
+                                    href="/contact"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="text-3xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center gap-4 group"
+                                >
+                                    Contact Us
+                                </Link>
+                            </motion.div>
+
                             <div className="w-full h-px bg-slate-200 my-4 max-w-[200px]"></div>
 
                             {/* Quick Actions */}
@@ -222,7 +260,6 @@ export default function NavbarV2() {
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">storefront</span>
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary">Shop</span>
                                 </Link>
-                                {/* Edit Button Removed */}
                             </motion.div>
                         </div>
                     </motion.div>
