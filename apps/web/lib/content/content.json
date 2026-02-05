@@ -39,7 +39,7 @@
         {
           "id": "inventory",
           "title": "WINDOW AC SHOP",
-          "description": "Your Local High-Efficiency Resource. Skip the big-box logistics. We stock premium, DIY high-efficiency LG & GE Through-the-Wall units specifically chosen for their durability. Get expert advice on the right BTU for your space and schedule your pick up your unit today at our Waipahu location.",
+          "description": "Browse our massive inventory of LG & GE units",
           "link": "View Inventory",
           "icon": "storefront",
           "href": "/shop",
@@ -58,7 +58,7 @@
         {
           "id": "cleaning",
           "title": "WINDOW AC CLEANING",
-          "description": "Breathe Cleaner, Save Longer. High humidity and salt air are the leading causes of AC failure in the islands. Our Deep Cleaning window ac cleaning services lead by Technician, Chris Martinez, ensuring to assist with protecting your investment, improve indoor air quality, and prevent expensive breakdowns before they happen.",
+          "description": "Deep cleaning to restore efficiency and air quality.",
           "link": "WINDOW AC MAINTENANCE",
           "icon": "cleaning_services",
           "href": "/contact",

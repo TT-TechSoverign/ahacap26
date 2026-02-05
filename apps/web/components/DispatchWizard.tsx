@@ -67,16 +67,12 @@ export function DispatchWizard() {
         }
     };
 
-    const services = content?.contact?.wizard?.services_list || [
-        "Window AC Installation",
+    "Window AC Installation",
         "Window AC Cleaning",
         "Mini Split Estimate (New)",
         "Mini Split Estimate (Replace)",
         "Mini Split Maintenance",
-        "Mini Split Diagnosis/Repair",
-        "Central AC Estimate",
-        "Central AC Maintenance",
-        "Central AC Diag/Repair"
+        "Mini Split Diagnosis/Repair"
     ];
 
     if (isSuccess) {

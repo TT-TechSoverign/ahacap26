@@ -57,9 +57,9 @@ export default async function LandingPage() {
                         ],
                         items: [
                             { title: "MINI SPLITS", description: "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling...", icon: "ac_unit", linkText: "MORE INFO", href: "/contact", color: "primary" },
-                            { title: "WINDOW AC SHOP", description: "Your Local High-Efficiency Resource. Skip the big-box logistics. We stock premium, DIY high-efficiency LG & GE...", icon: "storefront", linkText: "View Inventory", href: "/shop", color: "primary", badge: "In Stock" },
+                            { title: "WINDOW AC SHOP", description: "Browse our massive inventory of LG & GE units", icon: "storefront", linkText: "View Inventory", href: "/shop", color: "primary", badge: "In Stock" },
                             { title: "CENTRAL AC", description: "Maximize Whole-Home Comfort. We provide professional Retrofits (Air Handlers & Condensers ONLY)...", icon: "hvac", linkText: "MORE INFO", href: "/contact", color: "accent" },
-                            { title: "WINDOW AC CLEANING", description: "Breathe Cleaner, Save Longer. High humidity and salt air are the leading causes of AC failure...", icon: "cleaning_services", linkText: "WINDOW AC MAINTENANCE", href: "/contact", color: "accent" }
+                            { title: "WINDOW AC CLEANING", description: "Deep cleaning to restore efficiency and air quality.", icon: "cleaning_services", linkText: "WINDOW AC MAINTENANCE", href: "/contact", color: "accent" }
                         ],
                         styles: { padding: "96px 0px" }
                     }

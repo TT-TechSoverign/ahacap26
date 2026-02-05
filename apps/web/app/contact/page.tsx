@@ -1,7 +1,7 @@
 'use client';
 
 import { DispatchWizard } from '@/components/DispatchWizard';
-import { AdminCalendar } from '@/components/AdminCalendar';
+
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import Image from 'next/image';
@@ -143,11 +143,8 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex flex-col gap-8 lg:gap-12">
-                    {/* section 1: Admin Calendar (Top) */}
-                    <AdminCalendar />
-
-                    {/* section 2: Wizard Container (Middle) */}
-                    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+                    {/* section 2: Dispatch Wizard - Main Section */}
+                    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <div className="bg-background-dark/50 border border-white/10 p-6 lg:p-8 rounded-2xl shadow-[0_0_100px_rgba(0,0,0,0.6)] relative overflow-hidden backdrop-blur-md group max-w-5xl mx-auto">
                             {/* Decorative Elements */}
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_30px_rgba(0,174,239,0.3)]"></div>
@@ -170,61 +167,7 @@ export default function ContactPage() {
                         </div>
                     </div>
 
-                    {/* section 3: Contact Info Container (Bottom) */}
-                    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 delay-400">
-                        <div className="industrial-card p-6 lg:p-8 border border-white/10 rounded-2xl bg-white/[0.02] relative overflow-hidden group/card shadow-2xl max-w-5xl mx-auto backdrop-blur-md">
-                            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-                            <h4 className="font-mono text-white text-[10px] font-black uppercase tracking-[0.4em] mb-6 flex items-center justify-center gap-4 opacity-60">
-                                <span className="w-3 h-[1px] bg-primary"></span>
-                                <EditableText contentKey="contact.direct_contact_title" />
-                                <span className="w-3 h-[1px] bg-primary"></span>
-                            </h4>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-                                <div className="flex flex-col items-center text-center group translate-y-1">
-                                    <div className="size-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300 mb-4 shadow-lg shadow-primary/5">
-                                        <span className="material-symbols-outlined text-2xl">call</span>
-                                    </div>
-                                    <div className="font-mono text-[9px] uppercase font-black text-slate-500 tracking-[0.4em] mb-3 group-hover:text-primary transition-colors"><EditableText contentKey="contact.phone_label" /></div>
-                                    <a href={`tel:${(content?.contact?.phone_value || '').replace(/[^0-9]/g, '')}`} className="text-white font-black text-2xl lg:text-3xl tracking-tight transition-colors group-hover:text-primary"><EditableText contentKey="contact.phone_value" /></a>
-                                </div>
-                                <div className="flex flex-col items-center text-center group">
-                                    <div className="size-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent border border-accent/20 group-hover:scale-110 group-hover:bg-accent group-hover:text-black transition-all duration-300 mb-4 shadow-lg shadow-accent/5">
-                                        <span className="material-symbols-outlined text-2xl">mail</span>
-                                    </div>
-                                    <div className="font-mono text-[9px] uppercase font-black text-slate-500 tracking-[0.4em] mb-3 group-hover:text-accent transition-colors"><EditableText contentKey="contact.email_label" /></div>
-                                    <a href={`mailto:${content?.contact?.email_value || ''}`} className="text-white font-black text-sm lg:text-lg tracking-tight transition-colors group-hover:text-accent break-all lg:break-normal"><EditableText contentKey="contact.email_value" /></a>
-                                </div>
-                                <div className="flex flex-col items-center text-center group translate-y-1">
-                                    <div className="size-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300 mb-4 shadow-lg shadow-primary/5">
-                                        <span className="material-symbols-outlined text-2xl">location_on</span>
-                                    </div>
-                                    <div className="font-mono text-[9px] uppercase font-black text-slate-500 tracking-[0.4em] mb-3 group-hover:text-primary transition-colors"><EditableText contentKey="contact.address_label" /></div>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" rel="noopener noreferrer" className="text-white font-black text-xs lg:text-sm leading-relaxed transition-colors group-hover:text-primary max-w-[180px] block"><EditableText contentKey="contact.address_value" /></a>
-                                </div>
-                            </div>
 
-                            {/* section 4: Business Hours (Integrated Final) */}
-                            <div className="mt-12 pt-10 border-t border-white/5 flex flex-col items-center">
-                                <div className="font-mono inline-block px-4 py-1.5 bg-primary/5 border border-primary/20 rounded-full text-primary text-[9px] font-black tracking-[0.4em] uppercase mb-8">
-                                    {contentData.contact.hours_title}
-                                </div>
-                                <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
-                                    <div className="flex flex-col items-center">
-                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">{contentData.contact.hours_mon_fri}</span>
-                                        <span className="text-white font-black text-xs lg:text-sm tracking-widest transition-colors"><EditableText contentKey="contact.hours_mon_fri" /></span>
-                                    </div>
-                                    <div className="flex flex-col items-center">
-                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-slate-300 transition-colors">{contentData.contact.hours_sat}</span>
-                                        <span className="text-white font-black text-xs lg:text-sm tracking-widest transition-colors"><EditableText contentKey="contact.hours_sat" /></span>
-                                    </div>
-                                    <div className="flex flex-col items-center">
-                                        <span className="font-mono text-[9px] font-black text-slate-500 tracking-[0.3em] uppercase mb-2 group-hover:text-accent transition-colors">{contentData.contact.hours_sun}</span>
-                                        <span className="text-accent font-black text-xs lg:text-sm tracking-widest transition-colors"><EditableText contentKey="contact.hours_sun" /></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
