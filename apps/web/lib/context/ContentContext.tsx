@@ -26,8 +26,9 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
     try {
       const res = await fetch('/api/v1/content', { cache: 'no-store' });
       if (res.ok) {
-        const data = await res.json();
-        setContent(data);
+        const response = await res.json();
+        // API returns { data: {}, path: "" }, so we need to unwrap it if present
+        setContent(response.data || response);
       }
     } catch (error) {
       console.error('Failed to refresh content:', error);
