@@ -21,9 +21,14 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto px-6">
                 {/* Availability Schedule Section */}
                 <div className="border-b border-white/5 pb-12 mb-12">
-                    <p className="text-primary font-bold uppercase tracking-[0.2em] text-xs mb-8 text-center bg-primary/10 py-2 rounded-full w-fit mx-auto px-6 border border-primary/20">SCHEDULING / AVAILABILITY</p>
+                    {/* Glassmorphic Header Pill */}
+                    <div className="flex justify-center mb-10">
+                        <div className="bg-white/5 backdrop-blur-md border border-white/10 px-8 py-2 rounded-full">
+                            <p className="text-primary font-bold uppercase tracking-[0.2em] text-xs">SCHEDULING / AVAILABILITY</p>
+                        </div>
+                    </div>
 
-                    <div className="flex flex-col gap-6 text-center">
+                    <div className="flex flex-col gap-8 text-center">
                         {/* Line 1: Columns */}
                         <div className="grid grid-cols-2 max-w-4xl mx-auto w-full">
                             <h5 className="text-white font-header font-black uppercase tracking-widest text-lg md:text-xl">
@@ -34,31 +39,37 @@ export default function Footer() {
                             </h5>
                         </div>
 
-                        {/* Line 2: Specific Dates */}
+                        {/* Line 2: Specific Dates - Mobile Optimized (Stacked) */}
                         <div className="grid grid-cols-2 max-w-4xl mx-auto w-full gap-y-4">
-                            <div className="flex flex-col gap-1 items-center">
-                                <p className="text-primary font-bold uppercase tracking-wider text-xs md:text-sm">
-                                    {schedule.mini_split_estimate_date}
+                            <div className="flex flex-col gap-2 items-center">
+                                <p className="text-primary font-bold uppercase tracking-wider text-xs md:text-sm flex flex-col md:block">
+                                    <span className="opacity-80 mr-0 md:mr-2">Next Available Estimate:</span>
+                                    <span>{schedule.mini_split_estimate_date.split(':').pop()?.trim()}</span>
                                 </p>
-                                <p className="text-slate-400 font-bold uppercase tracking-wider text-xs md:text-sm">
-                                    {schedule.mini_split_install_date}
+                                <p className="text-slate-400 font-bold uppercase tracking-wider text-xs md:text-sm flex flex-col md:block">
+                                    <span className="opacity-80 mr-0 md:mr-2">Next Available Install:</span>
+                                    <span>{schedule.mini_split_install_date.split(':').pop()?.trim()}</span>
                                 </p>
                             </div>
-                            <div className="flex flex-col gap-1 items-center">
-                                <p className="text-primary font-bold uppercase tracking-wider text-xs md:text-sm">
-                                    {schedule.window_ac_estimate_date}
+                            <div className="flex flex-col gap-2 items-center">
+                                <p className="text-primary font-bold uppercase tracking-wider text-xs md:text-sm flex flex-col md:block">
+                                    <span className="opacity-80 mr-0 md:mr-2">Next Available Estimate:</span>
+                                    <span>{schedule.window_ac_estimate_date.split(':').pop()?.trim()}</span>
                                 </p>
-                                <p className="text-slate-400 font-bold uppercase tracking-wider text-xs md:text-sm">
-                                    {schedule.window_ac_install_date}
+                                <p className="text-slate-400 font-bold uppercase tracking-wider text-xs md:text-sm flex flex-col md:block">
+                                    <span className="opacity-80 mr-0 md:mr-2">Next Available Install:</span>
+                                    <span>{schedule.window_ac_install_date.split(':').pop()?.trim()}</span>
                                 </p>
                             </div>
                         </div>
 
-                        {/* Line 3: General Range */}
-                        <div className="pt-4 border-t border-white/5 w-full max-w-2xl mx-auto">
-                            <p className="text-slate-500 font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs">
-                                {schedule.general_availability_range.replace(/^Scheduling bookings for week of:\s*/i, '')}
-                            </p>
+                        {/* Line 3: CTA Button (Replaces old date range) */}
+                        <div className="pt-4 w-full flex justify-center">
+                            <Link href="/contact" className="group">
+                                <div className="bg-white/5 backdrop-blur-md border border-white/10 px-8 py-3 rounded-full group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
+                                    <p className="text-white font-bold uppercase tracking-[0.2em] text-xs group-hover:text-primary transition-colors">SCHEDULE APPOINTMENT</p>
+                                </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
