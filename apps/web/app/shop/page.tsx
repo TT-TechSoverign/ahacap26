@@ -120,7 +120,7 @@ export default function ShopPage() {
         ),
 
         "logistics": (
-            <div id="logistics_container" className="space-y-12">
+            <div id="logistics_container" className="space-y-4">
                 <SectionHeader
                     contentKey="shop.logistics"
                     icon="local_shipping"
@@ -218,7 +218,7 @@ export default function ShopPage() {
                 </div>
 
                 {/* Dynamic Reorderable Sections */}
-                <div className="space-y-16 md:space-y-24">
+                <div className="space-y-12 md:space-y-16">
                     {sectionOrder.map((sectionId, index) => (
                         <div
                             key={sectionId}
@@ -478,11 +478,11 @@ function LogisticsSection() {
 
     return (
 
-        <section id="logistics" className="relative py-8 md:py-12 group">
+        <section id="logistics" className="relative group">
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 space-y-8 md:space-y-12">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 space-y-6 md:space-y-8">
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch relative">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch relative">
                     {/* Inner Container Glow - Intensified */}
                     <div className="absolute inset-0 bg-orange-500/10 blur-[120px] rounded-full opacity-60 pointer-events-none -z-10 mix-blend-screen"></div>
 
@@ -570,12 +570,12 @@ function LogisticsSection() {
 
 function RebateSection() {
     return (
-        <section id="rebate" className="relative py-4 md:py-8 overflow-hidden group">
+        <section id="rebate" className="relative py-4 md:py-6 overflow-hidden group">
             {/* Background elements */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
             <div className="absolute inset-0 bg-emerald-500/[0.02] rounded-[2rem] mx-4 md:mx-0"></div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-8 md:space-y-12">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-6 md:space-y-8">
                 {/* Header */}
                 <SectionHeader
                     contentKey="shop.rebate"
