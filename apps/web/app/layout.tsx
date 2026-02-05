@@ -5,6 +5,7 @@ import CartDrawer from '../components/CartDrawer';
 import { CartProvider } from '../context/CartContext';
 import { ContentProvider } from '../lib/context/ContentContext';
 import Footer from '../components/Footer';
+import NavbarV2 from '../components/NavbarV2';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -25,6 +26,7 @@ export default function RootLayout({
                 <Ticker />
                 <ContentProvider>
                     <CartProvider>
+                        <NavbarV2 />
                         {children}
                         <CartDrawer />
                         <Footer />
