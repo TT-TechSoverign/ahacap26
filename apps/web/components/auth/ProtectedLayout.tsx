@@ -46,7 +46,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                             <span className="material-symbols-outlined text-blue-500 text-3xl">shield_lock</span>
                         </div>
                         <h1 className="text-2xl font-bold text-white uppercase tracking-wider">Restricted Area</h1>
-                        <p className="text-slate-400 text-sm mt-2">Sovereign Content Management System</p>
+                        <p className="text-slate-400 text-sm mt-2">AHAC Management Hub</p>
                     </div>
 
                     <form onSubmit={handleLogin} className="space-y-6">
@@ -59,7 +59,6 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                                 value={pin}
                                 onChange={(e) => setPin(e.target.value)}
                                 className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 text-white text-center text-2xl tracking-[0.5em] py-4 rounded-lg outline-none transition-all placeholder:tracking-normal placeholder:text-slate-700 font-mono"
-                                placeholder="••••"
                                 maxLength={4}
                                 autoFocus
                             />

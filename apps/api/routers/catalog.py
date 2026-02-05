@@ -4,6 +4,36 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional, List
 from dependencies import get_db
 from domain import catalog
+import json
+import os
+
+def persist_product_changes(product_data, action='update'):
+    """
+    Updates the products_seed.json file with the new product data.
+    action: 'update' (create/update) or 'delete'
+    """
+    json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'content', 'products_seed.json')
+    try:
+        with open(json_path, 'r') as f:
+            products = json.load(f)
+        
+        if action == 'delete':
+            products = [p for p in products if p['id'] != product_data['id']]
+        else:
+            # Update or Append
+            # Check if exists
+            existing_index = next((index for (index, d) in enumerate(products) if d["id"] == product_data['id']), None)
+            if existing_index is not None:
+                products[existing_index] = product_data
+            else:
+                products.append(product_data)
+        
+        with open(json_path, 'w') as f:
+            json.dump(products, f, indent=4)
+            
+    except Exception as e:
+        print(f"Failed to persist product changes: {e}")
+
 
 router = APIRouter()
 
@@ -33,7 +63,12 @@ async def create_product(
     product: schemas.ProductCreate,
     db: AsyncSession = Depends(get_db)
 ):
-    return await catalog.create_product_service(db, product.dict())
+    new_product = await catalog.create_product_service(db, product.dict())
+    
+    # Persist to seed file
+    persist_product_changes(new_product.dict())
+    
+    return new_product
 
 @router.put("/{product_id}", response_model=schemas.Product)
 async def update_product(
@@ -48,6 +83,10 @@ async def update_product(
     if not updated_product:
         from fastapi import HTTPException
         raise HTTPException(status_code=404, detail="Product not found")
+        
+    # Persist to seed file
+    persist_product_changes(updated_product.dict())
+    
     return updated_product
 
 @router.delete("/{product_id}")
@@ -59,4 +98,11 @@ async def delete_product(
     if not success:
         from fastapi import HTTPException
         raise HTTPException(status_code=404, detail="Product not found")
+
+    # Persist deletion
+    persist_product_changes({'id': product_id}, action='delete')
+    
     return {"status": "success"}
+
+    # Persist deletion
+    persist_product_changes({'id': product_id}, action='delete')

@@ -172,7 +172,6 @@ export default function AdminPage() {
                                 value={pin}
                                 onChange={(e) => setPin(e.target.value)}
                                 className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-4 text-white text-center text-2xl tracking-[1em] focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all"
-                                placeholder="••••"
                                 maxLength={4}
                                 autoFocus
                             />
