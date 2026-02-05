@@ -68,21 +68,30 @@ export default function Section4Projects() {
     // v2.5 Refinement
     const [activeIndex, setActiveIndex] = useState(0);
     const [direction, setDirection] = useState(0);
+    const [shuffledImages, setShuffledImages] = useState<ProjectImage[]>([]);
+
+    useEffect(() => {
+        setShuffledImages([...PROJECT_IMAGES].sort(() => 0.5 - Math.random()));
+    }, []);
 
     const handleNext = () => {
+        if (shuffledImages.length === 0) return;
         setDirection(1);
-        setActiveIndex((prev) => (prev + 1) % PROJECT_IMAGES.length);
+        setActiveIndex((prev) => (prev + 1) % shuffledImages.length);
     };
 
     const handlePrev = () => {
+        if (shuffledImages.length === 0) return;
         setDirection(-1);
-        setActiveIndex((prev) => (prev - 1 + PROJECT_IMAGES.length) % PROJECT_IMAGES.length);
+        setActiveIndex((prev) => (prev - 1 + shuffledImages.length) % shuffledImages.length);
     };
 
+    if (shuffledImages.length === 0) return <section className="w-full h-[700px] bg-slate-50" />;
+
     const visibleImages = [
-        PROJECT_IMAGES[activeIndex % PROJECT_IMAGES.length],
-        PROJECT_IMAGES[(activeIndex + 1) % PROJECT_IMAGES.length],
-        PROJECT_IMAGES[(activeIndex + 2) % PROJECT_IMAGES.length],
+        shuffledImages[activeIndex % shuffledImages.length],
+        shuffledImages[(activeIndex + 1) % shuffledImages.length],
+        shuffledImages[(activeIndex + 2) % shuffledImages.length],
     ];
 
     return (
@@ -118,9 +127,10 @@ export default function Section4Projects() {
                     <AnimatePresence mode='popLayout' custom={direction}>
                         {visibleImages.map((project, index) => {
                             const isFront = index === 0;
+                            // Using activeIndex + index ensures uniqueness even if projects are duplicates in small list
                             const uniqueKey = isFront
                                 ? `front-${activeIndex}`
-                                : `stack-${(activeIndex + index) % PROJECT_IMAGES.length}`;
+                                : `stack-${(activeIndex + index) % shuffledImages.length}`;
 
                             return (
                                 <motion.div
@@ -132,6 +142,7 @@ export default function Section4Projects() {
                                         zIndex: 30 - index * 10,
                                         scale: 1 - index * 0.05,
                                         y: index * -15,
+                                        rotate: index === 0 ? 0 : (index % 2 === 0 ? 6 : -6), // Slight rotation for stacked cards
                                         opacity: 1 - index * 0.2,
                                     }}
                                     exit={{
@@ -152,7 +163,8 @@ export default function Section4Projects() {
                                             priority={isFront}
                                         />
 
-                                        {/* Glassmorphism Overlay */}
+                                        {/* Glassmorphism Overlay - HIDDEN FOR NOW */}
+                                        {/* 
                                         <div className="absolute bottom-0 left-0 right-0 p-6 
                                             bg-black/40 backdrop-blur-md border-t border-white/10
                                             text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
@@ -163,12 +175,13 @@ export default function Section4Projects() {
                                                 {project.description}
                                             </p>
                                         </div>
+                                        */}
                                     </div>
 
                                     {/* Number Badge */}
                                     {isFront && (
                                         <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                                            {activeIndex + 1} / {PROJECT_IMAGES.length}
+                                            {activeIndex + 1} / {shuffledImages.length}
                                         </div>
                                     )}
                                 </motion.div>
