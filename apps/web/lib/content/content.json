@@ -441,30 +441,6 @@
       }
     }
   },
-  "navigation": {
-    "links": [
-      {
-        "text": "MINI SPLIT AC",
-        "href": "/contact"
-      },
-      {
-        "text": "SHOP WINDOW AC INVENTORY",
-        "href": "/shop"
-      },
-      {
-        "text": "CENTRAL AC",
-        "href": "/contact"
-      },
-      {
-        "text": "WINDOW AC CLEANING",
-        "href": "/contact"
-      }
-    ],
-    "contact_btn": "Contact Us",
-    "back_to_home": "Back to Home",
-    "back_to_inventory": "Back to Inventory",
-    "service_center": "Service Center"
-  },
   "logistics": {
     "badge": "Fulfillment Infrastructure",
     "pickup": {
