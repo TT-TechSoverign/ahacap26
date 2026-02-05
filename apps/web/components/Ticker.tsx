@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation';
 export default function Ticker() {
     const pathname = usePathname();
 
-    // Hide ticker on Puck editor pages and Helper V2 Home
-    if (pathname?.startsWith('/puck') || pathname === '/home-v2') {
+    // Hide ticker on Puck editor pages
+    if (pathname?.startsWith('/puck')) {
         return null;
     }
 

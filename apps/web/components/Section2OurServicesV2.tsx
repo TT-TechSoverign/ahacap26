@@ -68,7 +68,7 @@ export default function Section2OurServicesV2() {
                 </h2>
 
                 <p className="font-sans text-lg md:text-xl text-slate-300 leading-relaxed font-medium max-w-2xl mx-auto drop-shadow-md">
-                    {contentData.home_v2?.services_header?.narrative || "We don’t just sell ACs—we provide complete climate ecosystems. Whether you need a whisper-quiet mini-split for your bedroom or an industrial fleet for your property, we have the inventory and expertise to keep you cool."}
+                    {contentData.landing?.services_header?.narrative || "We don’t just sell ACs—we provide complete climate ecosystems. Whether you need a whisper-quiet mini-split for your bedroom or an industrial fleet for your property, we have the inventory and expertise to keep you cool."}
                 </p>
             </div>
 
@@ -98,7 +98,7 @@ export default function Section2OurServicesV2() {
                                 {/* Title with Cyan Glow & Underline */}
                                 <h3 className="font-header font-black text-2xl md:text-4xl text-white uppercase tracking-tighter mb-2 drop-shadow-lg transition-all duration-300 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
                                     {/* @ts-ignore */}
-                                    {contentData.home_v2?.services?.[service.id]?.title || service.defaultTitle}
+                                    {contentData.landing?.services?.[service.id]?.title || service.defaultTitle}
                                 </h3>
                                 {/* Subtle Animated Underline */}
                                 <div className="w-12 h-1 bg-cyan-500/0 group-hover:bg-cyan-400 rounded-full mb-0 transition-all duration-500 group-hover:w-20 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.8)] group-hover:mb-4" />
@@ -107,7 +107,7 @@ export default function Section2OurServicesV2() {
                                 <div className="max-h-0 opacity-0 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)] group-hover:max-h-[300px] group-hover:opacity-100 flex flex-col items-center">
                                     <p className="font-sans text-slate-100 text-base md:text-lg leading-snug drop-shadow-md font-medium mb-6 max-w-xs">
                                         {/* @ts-ignore */}
-                                        {contentData.home_v2?.services?.[service.id]?.description || service.defaultDesc}
+                                        {contentData.landing?.services?.[service.id]?.description || service.defaultDesc}
                                     </p>
 
                                     <Link
