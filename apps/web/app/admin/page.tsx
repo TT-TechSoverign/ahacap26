@@ -219,7 +219,7 @@ export default function AdminPage() {
                     damping: 25,
                     delay: headerVisible ? 0.1 : 0
                 }}
-                className="fixed top-[106px] md:top-[236px] left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
+                className="fixed top-[120px] md:top-[240px] left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
             >
                 <div className="max-w-[1440px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-8">
@@ -959,179 +959,178 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                             </motion.div>
                         )}
                     </AnimatePresence>
-                </form>
 
-                <div className="p-8 pt-0 flex gap-4 bg-[#0a0e14]">
-                    <button type="button" onClick={onClose} className="flex-1 border border-white/10 text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-white/5 transition-all">{content.admin.products.modal.cancel}</button>
-                    <button type="submit" form="product-form" className="flex-2 bg-primary text-black font-black uppercase tracking-widest py-4 px-8 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
-                        {product ? content.admin.products.modal.save_edit : content.admin.products.modal.save_new}
-                    </button>
-                </div>
+                    <div className="pt-6 flex gap-4">
+                        <button type="button" onClick={onClose} className="flex-1 border border-white/10 text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-white/5 transition-all">{content.admin.products.modal.cancel}</button>
+                        <button type="submit" className="flex-2 bg-primary text-black font-black uppercase tracking-widest py-4 px-8 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
+                            {product ? content.admin.products.modal.save_edit : content.admin.products.modal.save_new}
+                        </button>
+                    </div>
+                </form>
             </motion.div>
-        </motion.div>
-    );
+            );
 }
 
 
-function ScheduleManager() {
-    const { content, refreshContent } = useContent();
-    const [formData, setFormData] = useState(content.footer_schedule || {
-        mini_split_label: "",
-        window_ac_label: "",
-        mini_split_estimate_date: "",
-        mini_split_install_date: "",
-        window_ac_estimate_date: "",
-        window_ac_install_date: "",
-        general_availability_range: ""
+            function ScheduleManager() {
+    const {content, refreshContent} = useContent();
+            const [formData, setFormData] = useState(content.footer_schedule || {
+                mini_split_label: "",
+            window_ac_label: "",
+            mini_split_estimate_date: "",
+            mini_split_install_date: "",
+            window_ac_estimate_date: "",
+            window_ac_install_date: "",
+            general_availability_range: ""
     });
-    const [saving, setSaving] = useState(false);
-    const [success, setSuccess] = useState(false);
+            const [saving, setSaving] = useState(false);
+            const [success, setSuccess] = useState(false);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+            const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+                setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSave = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setSaving(true);
-        setSuccess(false);
-        try {
+                    e.preventDefault();
+                setSaving(true);
+                setSuccess(false);
+                try {
             const res = await fetch('/api/v1/admin/schedule', {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
+                    method: 'PATCH',
+                headers: {'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             });
-            if (res.ok) {
-                await refreshContent();
+                if (res.ok) {
+                    await refreshContent();
                 setSuccess(true);
                 setTimeout(() => setSuccess(false), 3000);
             }
         } catch (err) {
-            console.error('Failed to save schedule', err);
+                    console.error('Failed to save schedule', err);
         } finally {
-            setSaving(false);
+                    setSaving(false);
         }
     };
 
-    return (
-        <motion.div
-            key="schedule"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 10 }}
-            className="p-8"
-        >
-            <div className="mb-8">
-                <h3 className="text-white font-header font-black uppercase text-xl tracking-widest mb-2">Footer Schedule Availability</h3>
-                <p className="text-slate-500 text-xs">Update the availability dates displayed in the footer for customers.</p>
-            </div>
-
-            <form onSubmit={handleSave} className="max-w-4xl space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Mini Split Section */}
-                    <div className="space-y-4 p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
-                        <div className="flex items-center gap-2 mb-2">
-                            <div className="w-1 h-4 bg-primary rounded-full"></div>
-                            <h4 className="text-white font-bold uppercase tracking-wider text-sm">Mini Split Column</h4>
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Label</label>
-                            <input
-                                name="mini_split_label"
-                                value={formData.mini_split_label}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Estimate Date</label>
-                            <input
-                                name="mini_split_estimate_date"
-                                value={formData.mini_split_estimate_date}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Install Date</label>
-                            <input
-                                name="mini_split_install_date"
-                                value={formData.mini_split_install_date}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
+                return (
+                <motion.div
+                    key="schedule"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 10 }}
+                    className="p-8"
+                >
+                    <div className="mb-8">
+                        <h3 className="text-white font-header font-black uppercase text-xl tracking-widest mb-2">Footer Schedule Availability</h3>
+                        <p className="text-slate-500 text-xs">Update the availability dates displayed in the footer for customers.</p>
                     </div>
 
-                    {/* Window AC Section */}
-                    <div className="space-y-4 p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
-                        <div className="flex items-center gap-2 mb-2">
-                            <div className="w-1 h-4 bg-primary rounded-full"></div>
-                            <h4 className="text-white font-bold uppercase tracking-wider text-sm">Window AC Column</h4>
+                    <form onSubmit={handleSave} className="max-w-4xl space-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {/* Mini Split Section */}
+                            <div className="space-y-4 p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <div className="w-1 h-4 bg-primary rounded-full"></div>
+                                    <h4 className="text-white font-bold uppercase tracking-wider text-sm">Mini Split Column</h4>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Label</label>
+                                    <input
+                                        name="mini_split_label"
+                                        value={formData.mini_split_label}
+                                        onChange={handleChange}
+                                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Estimate Date</label>
+                                    <input
+                                        name="mini_split_estimate_date"
+                                        value={formData.mini_split_estimate_date}
+                                        onChange={handleChange}
+                                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Install Date</label>
+                                    <input
+                                        name="mini_split_install_date"
+                                        value={formData.mini_split_install_date}
+                                        onChange={handleChange}
+                                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Window AC Section */}
+                            <div className="space-y-4 p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <div className="w-1 h-4 bg-primary rounded-full"></div>
+                                    <h4 className="text-white font-bold uppercase tracking-wider text-sm">Window AC Column</h4>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Label</label>
+                                    <input
+                                        name="window_ac_label"
+                                        value={formData.window_ac_label}
+                                        onChange={handleChange}
+                                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Estimate Date</label>
+                                    <input
+                                        name="window_ac_estimate_date"
+                                        value={formData.window_ac_estimate_date}
+                                        onChange={handleChange}
+                                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Install Date</label>
+                                    <input
+                                        name="window_ac_install_date"
+                                        value={formData.window_ac_install_date}
+                                        onChange={handleChange}
+                                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                    />
+                                </div>
+                            </div>
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Label</label>
-                            <input
-                                name="window_ac_label"
-                                value={formData.window_ac_label}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Estimate Date</label>
-                            <input
-                                name="window_ac_estimate_date"
-                                value={formData.window_ac_estimate_date}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Install Date</label>
-                            <input
-                                name="window_ac_install_date"
-                                value={formData.window_ac_install_date}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
-                    </div>
-                </div>
 
 
 
-                <div className="flex items-center gap-4 pt-4">
-                    <button
-                        type="submit"
-                        disabled={saving}
-                        className="bg-primary text-black font-black uppercase tracking-[0.2em] px-8 py-4 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                    >
-                        {saving ? (
-                            <>
-                                <div className="animate-spin size-4 border-2 border-black border-t-transparent rounded-full" />
-                                Saving...
-                            </>
-                        ) : (
-                            <>
-                                <span className="material-symbols-outlined text-lg">save</span>
-                                Save Updates
-                            </>
-                        )}
-                    </button>
-                    {success && (
-                        <motion.div
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="text-emerald-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2"
-                        >
-                            <span className="material-symbols-outlined">check_circle</span>
-                            Schedule Updated
-                        </motion.div>
-                    )}
-                </div>
-            </form>
-        </motion.div>
-    );
+                        <div className="flex items-center gap-4 pt-4">
+                            <button
+                                type="submit"
+                                disabled={saving}
+                                className="bg-primary text-black font-black uppercase tracking-[0.2em] px-8 py-4 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                            >
+                                {saving ? (
+                                    <>
+                                        <div className="animate-spin size-4 border-2 border-black border-t-transparent rounded-full" />
+                                        Saving...
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className="material-symbols-outlined text-lg">save</span>
+                                        Save Updates
+                                    </>
+                                )}
+                            </button>
+                            {success && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    className="text-emerald-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2"
+                                >
+                                    <span className="material-symbols-outlined">check_circle</span>
+                                    Schedule Updated
+                                </motion.div>
+                            )}
+                        </div>
+                    </form>
+                </motion.div>
+                );
 }
