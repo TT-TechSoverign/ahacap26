@@ -742,6 +742,30 @@
     "cta_button": "Contact Support",
     "footer": "Authorized Dealer • Serving Oahu Since 2005"
   },
+  "navigation": {
+    "links": [
+      {
+        "text": "MINI SPLIT AC",
+        "href": "/contact"
+      },
+      {
+        "text": "MINI SPLIT AC CLEANING",
+        "href": "/contact"
+      },
+      {
+        "text": "SHOP WINDOW AC INVENTORY",
+        "href": "/shop"
+      },
+      {
+        "text": "WINDOW AC CLEANING",
+        "href": "/contact"
+      },
+      {
+        "text": "SERVICE AREAS",
+        "href": "/contact"
+      }
+    ]
+  },
   "home_v2": {
     "services_header": {
       "title": "PREMIUM",
