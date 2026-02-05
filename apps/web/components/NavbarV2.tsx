@@ -80,18 +80,10 @@ export default function NavbarV2() {
                                     Hawai'i Energy
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-200 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
-                                <span className="text-red-600 font-header font-bold tracking-tight text-2xl relative group cursor-default">
-                                    RHEEM
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-200 transition-all duration-300 group-hover:w-full"></span>
-                                </span>
-                                <span className="text-sky-600 font-mono font-bold tracking-[0.2em] text-lg relative group cursor-default">
-                                    BOSCH
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-sky-200 transition-all duration-300 group-hover:w-full"></span>
-                                </span>
                             </div>
 
                             {/* Center: Prominent Logo */}
-                            <Link href="/" className="relative h-28 w-56 md:h-36 md:w-72 group shrink-0">
+                            <Link href="/" className="relative h-32 w-64 md:h-44 md:w-80 group shrink-0">
                                 {/* Light Mode Logo - Standard */}
                                 <Image
                                     src="/assets/ahac-logo-bus-500x500xv2.svg"
