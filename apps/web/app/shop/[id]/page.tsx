@@ -175,9 +175,7 @@ export default function ProductDetailPage() {
                                 <span className="text-3xl md:text-5xl font-header font-black text-primary tracking-tight">
                                     ${product.price.toLocaleString()}
                                 </span>
-                                <span className="text-xl text-red-500/60 line-through font-bold decoration-red-500/30">
-                                    ${(product.price * 1.25).toLocaleString()}
-                                </span>
+
                             </div>
                         </div>
 
