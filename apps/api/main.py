@@ -43,7 +43,12 @@ from routers import catalog, payments
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_redis()
-    print("DEBUG: Creating Tables...")
+    print("DEBUG: Creating Tables & Checking Schema...")
+    
+    # Run Schema Fixes
+    from fix_db_schema import fix_schema
+    await fix_schema()
+
     try:
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
