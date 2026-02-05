@@ -164,6 +164,16 @@ async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
     background_tasks.add_task(process_stripe_event, event)
     return {"status": "success"}
 
+    background_tasks.add_task(process_stripe_event, event)
+    return {"status": "success"}
+
+# --- MAINTENANCE ---
+from seed_products import seed
+@app.post("/api/v1/maintenance/seed_products")
+async def seed_products_endpoint(background_tasks: BackgroundTasks):
+    background_tasks.add_task(seed)
+    return {"status": "seeding_started"}
+
 @app.get("/api/v1/health")
 async def health_check():
     return {"status": "ok"}

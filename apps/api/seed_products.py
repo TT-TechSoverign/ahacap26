@@ -7,15 +7,11 @@ from sqlalchemy import text
 from database import Base, get_db
 import models
 
-# Use environment variable if available (Docker), else localhost (Local)
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://user:password@localhost:5432/ahac_db")
+from sqlalchemy import text
+from database import Base, get_db, AsyncSessionLocal, engine
+import models
 
-engine = create_async_engine(DATABASE_URL, echo=True)
-AsyncSessionLocal = sessionmaker(
-    bind=engine,
-    class_=AsyncSession,
-    expire_on_commit=False
-)
+# Product Data configuration...
 
 products = [
     # LG Dual Inverter (Premium)
