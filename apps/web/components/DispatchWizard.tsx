@@ -67,7 +67,8 @@ export function DispatchWizard() {
         }
     };
 
-    "Window AC Installation",
+    const services = content?.contact?.wizard?.services_list || [
+        "Window AC Installation",
         "Window AC Cleaning",
         "Mini Split Estimate (New)",
         "Mini Split Estimate (Replace)",
