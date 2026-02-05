@@ -87,19 +87,30 @@ async def update_product(
     product_update: schemas.ProductUpdate,
     db: AsyncSession = Depends(get_db)
 ):
-    # Filter out None values to allow partial updates
-    update_data = {k: v for k, v in product_update.dict().items() if v is not None}
-    
-    updated_product = await catalog.update_product_service(db, product_id, update_data)
-    if not updated_product:
-        from fastapi import HTTPException
-        raise HTTPException(status_code=404, detail="Product not found")
+    try:
+        print(f"DEBUG: Receiving Update for {product_id}: {product_update.dict()}")
         
-    # Persist to seed file
-    # FIX: Use jsonable_encoder because updated_product is a SQLAlchemy object, not Pydantic
-    persist_product_changes(jsonable_encoder(updated_product))
-    
-    return updated_product
+        # Filter out None values to allow partial updates
+        update_data = {k: v for k, v in product_update.dict().items() if v is not None}
+        
+        updated_product = await catalog.update_product_service(db, product_id, update_data)
+        if not updated_product:
+            from fastapi import HTTPException
+            raise HTTPException(status_code=404, detail="Product not found")
+            
+        print(f"DEBUG: DB Update Success. Persisting to JSON...")
+        
+        # Persist to seed file
+        # FIX: Use jsonable_encoder because updated_product is a SQLAlchemy object, not Pydantic
+        persist_product_changes(jsonable_encoder(updated_product))
+        
+        return updated_product
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"CRITICAL API FAILURE IN UPDATE_PRODUCT: {e}")
+        from fastapi import HTTPException
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 @router.delete("/{product_id}")
 async def delete_product(
