@@ -26,7 +26,7 @@ export default function ShopPage() {
     const { content } = useContent();
 
     const sectionOrder = content?.shop?.sections || [
-        "dual_inverter", "universal_fit", "base", "ge", "casement", "logistics", "brand-spotlight", "sizing-guide"
+        "dual_inverter", "universal_fit", "base", "ge", "casement", "logistics", "sizing-guide"
     ];
 
 
@@ -118,18 +118,7 @@ export default function ShopPage() {
                 />
             </div>
         ),
-        "brand-spotlight": (
-            <div id="brand-spotlight-container" className="space-y-12">
-                <SectionHeader
-                    contentKey="shop.bento"
-                    icon="verified"
-                    narrativeKey="bento"
-                    contentKeyOverride="shop.brand_spotlight"
-                    subtitleKey="shop.brand_spotlight.badge"
-                />
-                <BrandSpotlightSection />
-            </div>
-        ),
+
         "logistics": (
             <div id="logistics_container" className="space-y-12">
                 <SectionHeader
@@ -481,9 +470,8 @@ function LogisticsSection() {
     if (!logistics) return null;
 
     return (
+    return (
         <section id="logistics" className="relative py-12 md:py-20 group">
-            <div className="absolute inset-0 bg-[#0f131a] rounded-[2rem] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,0.5)] ring-1 ring-white/10 mx-4 md:mx-0"></div>
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 space-y-16">
 
@@ -603,6 +591,32 @@ function RebateSection() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[0, 1, 2].map((i) => {
                         const isDownload = i === 1;
+                        const isDualInverterLink = i === 0;
+
+                        if (isDualInverterLink) {
+                            return (
+                                <Link
+                                    key={i}
+                                    href="#dual_inverter"
+                                    className="industrial-card p-8 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-6 hover:border-emerald-500/50 transition-all hover:-translate-y-1 block cursor-pointer"
+                                >
+                                    <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
+                                        <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
+                                            <EditableText contentKey={`shop.rebate.steps.${i}.icon`} />
+                                        </span>
+                                    </div>
+                                    <div className="space-y-3">
+                                        <h3 className="text-white font-header font-black uppercase tracking-widest text-base group-hover/card:text-emerald-400 transition-colors group-hover/card:underline decoration-emerald-500 underline-offset-4">
+                                            <EditableText contentKey={`shop.rebate.steps.${i}.title`} />
+                                        </h3>
+                                        <p className="text-slate-500 text-[11px] leading-relaxed uppercase tracking-widest font-medium group-hover/card:text-slate-400 transition-colors">
+                                            <EditableText contentKey={`shop.rebate.steps.${i}.description`} />
+                                        </p>
+                                    </div>
+                                </Link>
+                            );
+                        }
+
                         if (isDownload) {
                             return (
                                 <a
@@ -654,132 +668,7 @@ function RebateSection() {
     );
 }
 
-function BrandSpotlightSection() {
-    return (
-        <section className="relative">
 
-            <motion.div
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={{
-                    hidden: { opacity: 0 },
-                    show: {
-                        opacity: 1,
-                        transition: { staggerChildren: 0.15 }
-                    }
-                }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-[minmax(380px,auto)]"
-            >
-                {/* LG Bento Cell (Large/Primary) */}
-                <motion.div
-                    variants={{
-                        hidden: { opacity: 0, scale: 0.98 },
-                        show: { opacity: 1, scale: 1 }
-                    }}
-                    className="lg:col-span-7 bg-[#0a0e14] border border-white/5 rounded-[2rem] p-6 md:p-10 relative overflow-hidden group/lg ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col justify-between items-center text-center transition-all duration-700 hover:border-rose-500/40"
-                >
-                    {/* Intensified Luminous LG Backdrop */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(211,18,69,0.12)_0%,transparent_60%)] opacity-0 group-hover/lg:opacity-100 transition-opacity duration-1000"></div>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(211,18,69,0.06)_0%,transparent_50%)] opacity-30 group-hover/lg:opacity-100 transition-opacity duration-1000"></div>
-
-                    {/* LG Industrial Accent */}
-                    <div className="absolute top-0 left-0 w-24 h-[1.5px] bg-gradient-to-r from-rose-600 to-transparent opacity-30 group-hover/lg:w-48 group-hover/lg:opacity-100 transition-all duration-1000"></div>
-
-                    <div className="relative z-10 w-full flex flex-col items-center">
-                        <div className="flex items-center justify-between w-full mb-10">
-                            <div className="relative mb-2 transition-transform duration-700 group-hover/lg:scale-110">
-                                <span className="text-rose-500 font-sans font-black tracking-tighter text-6xl drop-shadow-xl">LG</span>
-                            </div>
-                            <span className="px-3 py-1 bg-rose-500/10 border border-rose-500/20 rounded-full text-rose-500 text-[8px] font-header font-black uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(211,18,69,0.1)] group-hover/lg:shadow-[0_0_20px_rgba(211,18,69,0.25)] transition-all">Authorized Dealer</span>
-                        </div>
-                        <h3 className="text-3xl md:text-5xl font-header font-black text-white uppercase leading-[0.9] mb-6 tracking-tighter group-hover/lg:text-rose-50 transition-colors duration-500">
-                            <EditableText contentKey="shop.bento.lg.title" defaultValue="DUAL INVERTER INFRASTRUCTURE" />
-                        </h3>
-                        <p className="text-slate-400 text-sm md:text-lg leading-relaxed max-w-lg mb-10 uppercase tracking-wider [word-spacing:0.1em] opacity-80 group-hover/lg:opacity-100 transition-opacity">
-                            <EditableText contentKey="shop.bento.lg.description" defaultValue="LG'S REVOLUTIONARY DUAL INVERTER COMPRESSOR™ ELIMINATES THE NOISY STOP-AND-START CYCLE, SAVING UP TO 40% MORE ENERGY." />
-                        </p>
-                        <ul className="flex flex-wrap justify-center gap-4 w-full max-w-2xl">
-                            <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-rose-500/40 hover:bg-rose-500/[0.03] transition-all duration-500 group/item">
-                                <div className="p-2.5 bg-rose-500/10 rounded-lg text-rose-500 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(211,18,69,0.3)] transition-all">
-                                    <span className="material-symbols-outlined text-xl">volume_off</span>
-                                </div>
-                                <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
-                                    <EditableText contentKey="shop.bento.lg.feature1" defaultValue="LODECIBEL™ SILENT MODE" />
-                                </span>
-                            </li>
-                            <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-rose-500/40 hover:bg-rose-500/[0.03] transition-all duration-500 group/item">
-                                <div className="p-2.5 bg-rose-500/10 rounded-lg text-rose-500 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(211,18,69,0.3)] transition-all">
-                                    <span className="material-symbols-outlined text-xl">wifi</span>
-                                </div>
-                                <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
-                                    <EditableText contentKey="shop.bento.lg.feature2" defaultValue="THINQ® SMART CONTROL" />
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                    <Link href="/shop?brand=LG" className="mt-10 w-full md:w-fit px-10 h-14 bg-white/5 hover:bg-rose-600 border border-white/10 hover:border-rose-500 rounded-xl flex items-center justify-center gap-3 text-white font-header font-black uppercase tracking-[0.4em] text-[10px] transition-all duration-500 hover:shadow-[0_0_30px_rgba(211,18,69,0.25)] active:scale-95 relative overflow-hidden group/btn">
-                        <span className="relative z-10">Explore LG Range</span>
-                        <span className="material-symbols-outlined text-xs relative z-10 group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-                    </Link>
-                </motion.div>
-
-                {/* GE Bento Cell (Secondary/Detailed) */}
-                <motion.div
-                    variants={{
-                        hidden: { opacity: 0, scale: 0.98 },
-                        show: { opacity: 1, scale: 1 }
-                    }}
-                    className="lg:col-span-5 bg-[#0a0e14] border border-white/5 rounded-[2rem] p-6 md:p-10 relative overflow-hidden group/ge ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col items-center text-center transition-all duration-700 hover:border-blue-500/40"
-                >
-                    {/* Intensified Luminous GE Backdrop */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,94,184,0.12)_0%,transparent_60%)] opacity-0 group-hover/ge:opacity-100 transition-opacity duration-1000"></div>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,94,184,0.06)_0%,transparent_50%)] opacity-30 group-hover/ge:opacity-100 transition-opacity duration-1000"></div>
-
-                    {/* GE Industrial Accent */}
-                    <div className="absolute top-0 right-0 w-24 h-[1.5px] bg-gradient-to-l from-blue-600 to-transparent opacity-30 group-hover/ge:w-48 group-hover/ge:opacity-100 transition-all duration-1000"></div>
-
-                    <div className="relative z-10 flex flex-col items-center h-full w-full">
-                        <div className="flex items-center justify-between w-full mb-10">
-                            <div className="relative mb-2 transition-transform duration-700 group-hover/ge:scale-110">
-                                <span className="text-blue-400 font-serif font-bold tracking-wide text-3xl drop-shadow-xl">GE APPLIANCES</span>
-                            </div>
-                            <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-[8px] font-header font-black uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,94,184,0.1)] group-hover/ge:shadow-[0_0_20px_rgba(0,94,184,0.25)] transition-all">Island Verified</span>
-                        </div>
-                        <h3 className="text-2xl md:text-4xl font-header font-black text-white uppercase leading-[0.9] mb-6 tracking-tighter group-hover/ge:text-blue-50 transition-colors duration-500">
-                            <EditableText contentKey="shop.bento.ge.title" defaultValue="INDUSTRIAL COMMAND SUITE" />
-                        </h3>
-                        <p className="text-slate-400 text-xs md:text-base leading-relaxed mb-10 uppercase tracking-wider opacity-80 max-w-sm group-hover/ge:opacity-100 transition-opacity">
-                            <EditableText contentKey="shop.bento.ge.description" defaultValue="ENGINEERED FOR STEADY-STATE PERFORMANCE IN HIGH-SALINITY MARITIME ENVIRONMENTS. PRECISION BUILT FOR HAWAII REGIONS." />
-                        </p>
-                        <ul className="flex flex-wrap justify-center gap-4 w-full max-w-2xl">
-                            <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/40 hover:bg-blue-500/[0.03] transition-all duration-500 group/item">
-                                <div className="p-2.5 bg-blue-500/10 rounded-lg text-blue-400 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(0,94,184,0.3)] transition-all">
-                                    <span className="material-symbols-outlined text-xl">dark_mode</span>
-                                </div>
-                                <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
-                                    <EditableText contentKey="shop.bento.ge.feature1" defaultValue="NIGHT MODE DIMMING" />
-                                </span>
-                            </li>
-                            <li className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-blue-500/40 hover:bg-blue-500/[0.03] transition-all duration-500 group/item">
-                                <div className="p-2.5 bg-blue-500/10 rounded-lg text-blue-400 group-hover/item:scale-110 group-hover/item:shadow-[0_0_12px_rgba(0,94,184,0.3)] transition-all">
-                                    <span className="material-symbols-outlined text-xl">install_desktop</span>
-                                </div>
-                                <span className="text-[10px] font-header font-black uppercase tracking-widest text-white/70 group-hover/item:text-white transition-colors">
-                                    <EditableText contentKey="shop.bento.ge.feature2" defaultValue="EZ MOUNT CALIBRATION" />
-                                </span>
-                            </li>
-                        </ul>
-                        <Link href="/shop?brand=GE" className="mt-10 w-full md:w-fit px-10 h-14 bg-white/5 hover:bg-blue-700 border border-white/10 hover:border-blue-600 rounded-xl flex items-center justify-center gap-3 text-white font-header font-black uppercase tracking-[0.4em] text-[10px] transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,94,184,0.25)] active:scale-95 relative overflow-hidden group/btn">
-                            <span className="relative z-10">Shop GE Units</span>
-                            <span className="material-symbols-outlined text-xs relative z-10 group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-                        </Link>
-                    </div>
-                </motion.div>
-            </motion.div>
-        </section>
-    );
-}
 
 function SizingGuideSection() {
     const sizingData = [
