@@ -570,12 +570,12 @@ function LogisticsSection() {
 
 function RebateSection() {
     return (
-        <section id="rebate" className="relative py-4 md:py-6 overflow-hidden group">
+        <section id="rebate" className="relative py-2 md:py-4 overflow-hidden group">
             {/* Background elements */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
             <div className="absolute inset-0 bg-emerald-500/[0.02] rounded-[2rem] mx-4 md:mx-0"></div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-6 md:space-y-8">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-4 md:space-y-6">
                 {/* Header */}
                 <SectionHeader
                     contentKey="shop.rebate"
@@ -593,7 +593,7 @@ function RebateSection() {
                 />
 
                 {/* 3-Step Process */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                     {[0, 1, 2].map((i) => {
                         const isDownload = i === 1;
                         const isDualInverterLink = i === 0;
@@ -603,7 +603,7 @@ function RebateSection() {
                                 <Link
                                     key={i}
                                     href="#dual_inverter"
-                                    className="industrial-card p-8 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-6 hover:border-emerald-500/50 transition-all hover:-translate-y-1 block cursor-pointer"
+                                    className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 block cursor-pointer"
                                 >
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
                                         <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
@@ -624,12 +624,13 @@ function RebateSection() {
 
                         if (isDownload) {
                             return (
+                            return (
                                 <a
                                     key={i}
                                     href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="industrial-card p-8 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-6 hover:border-emerald-500/50 transition-all hover:-translate-y-1 block cursor-pointer"
+                                    className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 block cursor-pointer"
                                 >
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
                                         <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
@@ -648,7 +649,7 @@ function RebateSection() {
                             );
                         }
                         return (
-                            <div key={i} className="industrial-card p-8 bg-[#0f131a] border border-white/5 rounded-2xl relative group/card flex flex-col items-center text-center space-y-6">
+                            <div key={i} className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative group/card flex flex-col items-center text-center space-y-4">
                                 <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
                                     <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
                                         <EditableText contentKey={`shop.rebate.steps.${i}.icon`} />
