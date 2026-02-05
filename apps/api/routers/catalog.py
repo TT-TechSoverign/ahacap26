@@ -76,7 +76,8 @@ async def create_product(
     new_product = await catalog.create_product_service(db, product.dict())
     
     # Persist to seed file
-    persist_product_changes(new_product.dict())
+    # FIX: Use jsonable_encoder because new_product is a SQLAlchemy object, not Pydantic
+    persist_product_changes(jsonable_encoder(new_product))
     
     return new_product
 
@@ -95,7 +96,8 @@ async def update_product(
         raise HTTPException(status_code=404, detail="Product not found")
         
     # Persist to seed file
-    persist_product_changes(updated_product.dict())
+    # FIX: Use jsonable_encoder because updated_product is a SQLAlchemy object, not Pydantic
+    persist_product_changes(jsonable_encoder(updated_product))
     
     return updated_product
 
