@@ -97,7 +97,7 @@ export default function Footer() {
                             {[
                                 { text: 'Mini Split AC', href: '/contact' },
                                 { text: 'Window AC Shop', href: '/shop' },
-                                { text: 'Central AC', href: '/contact' },
+                                { text: 'Mini Split AC Maintenance', href: '/contact' },
                                 { text: 'Window AC Cleaning', href: '/contact' }
                             ].map((item) => (
                                 <li key={item.text}>
@@ -117,7 +117,7 @@ export default function Footer() {
                             {[
                                 { text: 'Mini Split AC', href: '/contact' },
                                 { text: 'Shop Inventory', href: '/shop' },
-                                { text: 'Central AC', href: '/contact' },
+                                { text: 'Mini Split AC Maintenance', href: '/contact' },
                                 { text: 'Window AC Cleaning', href: '/contact' },
                                 { text: 'Service Areas', href: '/contact' },
                                 { text: 'Contact Us', href: '/contact' }

@@ -402,6 +402,8 @@ function SectionHeader({
     titleHighlightKey?: string;
     subtitleKey?: string;
     topElement?: React.ReactNode;
+    noBlur?: boolean;
+    forceBreak?: boolean;
 }) {
     const { content } = useContent();
 
@@ -434,8 +436,11 @@ function SectionHeader({
                     <EditableText contentKey={`${effectiveKey}.title`} />
                     {hasHighlight ? (
                         <>
-                            <br className="md:hidden" />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400 neon-glow">
+                            <br className={forceBreak ? "" : "md:hidden"} />
+                            <span className={cn(
+                                "text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400",
+                                noBlur ? "" : "neon-glow"
+                            )}>
                                 <EditableText contentKey={titleHighlightKey} />
                             </span>
                         </>
@@ -471,9 +476,9 @@ function LogisticsSection() {
 
     return (
 
-        <section id="logistics" className="relative py-12 md:py-20 group">
+        <section id="logistics" className="relative py-8 md:py-12 group">
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 space-y-16">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 space-y-8 md:space-y-12">
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch relative">
                     {/* Inner Container Glow - Intensified */}
@@ -564,18 +569,20 @@ function LogisticsSection() {
 
 function RebateSection() {
     return (
-        <section id="rebate" className="relative py-12 md:py-20 overflow-hidden group">
+        <section id="rebate" className="relative py-8 md:py-12 overflow-hidden group">
             {/* Background elements */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
             <div className="absolute inset-0 bg-emerald-500/[0.02] rounded-[2rem] mx-4 md:mx-0"></div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-16">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-8 md:space-y-12">
                 {/* Header */}
                 <SectionHeader
                     contentKey="shop.rebate"
                     icon="eco"
                     narrativeKey="rebate"
                     titleHighlightKey="shop.rebate.title_highlight"
+                    noBlur={true}
+                    forceBreak={true}
                     topElement={
                         <div className="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-500 text-[10px] font-header font-black tracking-widest uppercase mb-2">
                             <span className="material-symbols-outlined text-sm">eco</span>
