@@ -1074,23 +1074,7 @@ function ScheduleManager() {
                     </div>
                 </div>
 
-                {/* General Range */}
-                <div className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl space-y-4">
-                    <div className="flex items-center gap-2 mb-2">
-                        <div className="w-1 h-4 bg-primary rounded-full"></div>
-                        <h4 className="text-white font-bold uppercase tracking-wider text-sm">General Booking Window</h4>
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Weekly Range Text</label>
-                        <input
-                            name="general_availability_range"
-                            value={formData.general_availability_range}
-                            onChange={handleChange}
-                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            placeholder="e.g. Scheduling for week of February 2-9, 2026"
-                        />
-                    </div>
-                </div>
+
 
                 <div className="flex items-center gap-4 pt-4">
                     <button
