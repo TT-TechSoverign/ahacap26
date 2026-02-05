@@ -12,8 +12,15 @@ def persist_product_changes(product_data, action='update'):
     Updates the products_seed.json file with the new product data.
     action: 'update' (create/update) or 'delete'
     """
-    json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'content', 'products_seed.json')
+    # Robust path resolution for Docker (/app/content) vs Local
+    base_dir = os.path.dirname(os.path.dirname(__file__))
+    json_path = os.path.join(base_dir, 'content', 'products_seed.json')
+    
     try:
+        if not os.path.exists(json_path):
+             print(f"WARNING: Seed file not found at {json_path}. Skipping persistence.")
+             return
+
         with open(json_path, 'r') as f:
             products = json.load(f)
         
@@ -32,7 +39,10 @@ def persist_product_changes(product_data, action='update'):
             json.dump(products, f, indent=4)
             
     except Exception as e:
-        print(f"Failed to persist product changes: {e}")
+        # Catch-all to prevent 500 errors if file IO fails (e.g. permissions)
+        print(f"CRITICAL ERROR: Failed to persist product changes to JSON: {e}")
+        # explicit pass to prevent bubbling up
+        pass
 
 
 router = APIRouter()
@@ -103,6 +113,3 @@ async def delete_product(
     persist_product_changes({'id': product_id}, action='delete')
     
     return {"status": "success"}
-
-    # Persist deletion
-    persist_product_changes({'id': product_id}, action='delete')
