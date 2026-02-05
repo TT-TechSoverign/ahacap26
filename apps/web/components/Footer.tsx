@@ -21,6 +21,8 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto px-6">
                 {/* Availability Schedule Section */}
                 <div className="border-b border-white/5 pb-12 mb-12">
+                    <p className="text-primary font-bold uppercase tracking-[0.2em] text-xs mb-8 text-center bg-primary/10 py-2 rounded-full w-fit mx-auto px-6 border border-primary/20">SCHEDULING / AVAILABILITY</p>
+
                     <div className="flex flex-col gap-6 text-center">
                         {/* Line 1: Columns */}
                         <div className="grid grid-cols-2 max-w-4xl mx-auto w-full">
@@ -154,7 +156,7 @@ export default function Footer() {
 
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-slate-600 text-xs font-bold uppercase tracking-widest">
-                        © 2024 Affordable Home A/C. All rights reserved. <span className="text-primary ml-2">v2.1 (Hotfix Live)</span>
+                        © 2026 Affordable Home A/C. All rights reserved.
                     </p>
                     <div className="flex flex-col md:flex-row items-center gap-6">
                         <span className="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
