@@ -168,7 +168,6 @@ export default function AdminPage() {
 
     if (!isAuthenticated) {
         return (
-        return (
             <div className="min-h-screen bg-black text-white font-sans selection:bg-primary/30 flex items-center justify-center">
                 {/* Navbar Removed for Clean Login */}
 
