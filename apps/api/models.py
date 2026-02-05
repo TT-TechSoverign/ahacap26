@@ -27,6 +27,7 @@ class Product(Base):
     name = Column(String, index=True)
     price = Column(Integer)
     category = Column(String, index=True)
+    subcategory = Column(String, index=True, nullable=True) # [NEW] For clearer filtering (e.g. 'dual_inverter', 'universal_fit')
     stock = Column(Integer)
     image_url = Column(String, nullable=True) # [NEW] Support for custom images
     btu = Column(Integer, nullable=True)

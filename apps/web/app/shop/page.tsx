@@ -44,10 +44,7 @@ export default function ShopPage() {
                     hideDescription={true}
                 />
                 <ProductGrid
-                    products={products.filter(p => {
-                        const name = p.name || '';
-                        return name.includes('Dual Inverter') || name.includes('IVSM');
-                    })}
+                    products={products.filter(p => p.subcategory === 'dual_inverter')}
                     onQuickAdd={addToCart}
                     rebate="$45 Hawaii Energy Rebate"
                 />
@@ -62,10 +59,7 @@ export default function ShopPage() {
                     hideDescription={true}
                 />
                 <ProductGrid
-                    products={products.filter(p => {
-                        const name = p.name || '';
-                        return (name.includes('LT') || name.includes('Universal Fit')) && !name.includes('Dual Inverter');
-                    })}
+                    products={products.filter(p => p.subcategory === 'universal_fit')}
                     onQuickAdd={addToCart}
                 />
             </div>
@@ -80,11 +74,7 @@ export default function ShopPage() {
                     hideDescription={true}
                 />
                 <ProductGrid
-                    products={products.filter(p => {
-                        const name = p.name || '';
-                        return (name.includes('LW8024RD') || name.includes('LW1017ERSM1') || name.includes('LW1217ERSM1')) &&
-                            !name.includes('Universal Fit');
-                    })}
+                    products={products.filter(p => p.subcategory === 'base')}
                     onQuickAdd={addToCart}
                 />
             </div>
@@ -99,7 +89,7 @@ export default function ShopPage() {
                     hideDescription={true}
                 />
                 <ProductGrid
-                    products={products.filter(p => p.name.includes('AJCQ'))}
+                    products={products.filter(p => p.subcategory === 'ge')}
                     onQuickAdd={addToCart}
                 />
             </div>
@@ -113,7 +103,7 @@ export default function ShopPage() {
                     hideDescription={true}
                 />
                 <ProductGrid
-                    products={products.filter(p => p.name.includes('RAB26A'))}
+                    products={products.filter(p => p.subcategory === 'casement')}
                     onQuickAdd={addToCart}
                 />
             </div>
