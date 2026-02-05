@@ -390,7 +390,9 @@ function SectionHeader({
     contentKeyOverride,
     titleHighlightKey,
     subtitleKey,
-    topElement
+    topElement,
+    noBlur,
+    forceBreak
 }: {
     contentKey: string;
     icon: string;
