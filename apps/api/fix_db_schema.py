@@ -13,12 +13,23 @@ async def fix_schema():
         
         logger.info("Starting Schema Validation...")
         
+        # Detect Dialect
+        dialect = conn.dialect.name
+        logger.info(f"Detected Database Dialect: {dialect}")
+
         # Helper to check column existence
         async def check_column(table, column):
-            result = await conn.execute(text(
-                f"SELECT column_name FROM information_schema.columns WHERE table_name='{table}' AND column_name='{column}'"
-            ))
-            return result.scalar() is not None
+            if dialect == 'sqlite':
+                # SQLite Introspection
+                result = await conn.execute(text(f"PRAGMA table_info({table})"))
+                columns = [row.name for row in result.fetchall()]
+                return column in columns
+            else:
+                # Postgres (and others) Introspection
+                result = await conn.execute(text(
+                    f"SELECT column_name FROM information_schema.columns WHERE table_name='{table}' AND column_name='{column}'"
+                ))
+                return result.scalar() is not None
 
         # Helper to add column
         async def add_column(table, column, type_def):
