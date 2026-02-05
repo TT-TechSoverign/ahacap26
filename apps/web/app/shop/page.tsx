@@ -571,21 +571,18 @@ function RebateSection() {
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-16">
                 {/* Header */}
-                <div className="text-center space-y-4">
-                    <div className="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-500 text-[10px] font-header font-black tracking-widest uppercase">
-                        <span className="material-symbols-outlined text-sm">eco</span>
-                        <EditableText contentKey="shop.rebate.badge" />
-                    </div>
-                    <h2 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tighter leading-none">
-                        <EditableText contentKey="shop.rebate.title" /><br />
-                        <span className="text-emerald-500 drop-shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-                            <EditableText contentKey="shop.rebate.title_highlight" />
-                        </span>
-                    </h2>
-                    <div className="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed font-medium uppercase tracking-widest opacity-80">
-                        <BacklinkedText narrativeKey="rebate" />
-                    </div>
-                </div>
+                <SectionHeader
+                    contentKey="shop.rebate"
+                    icon="eco"
+                    narrativeKey="rebate"
+                    titleHighlightKey="shop.rebate.title_highlight"
+                    topElement={
+                        <div className="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-500 text-[10px] font-header font-black tracking-widest uppercase mb-2">
+                            <span className="material-symbols-outlined text-sm">eco</span>
+                            <EditableText contentKey="shop.rebate.badge" />
+                        </div>
+                    }
+                />
 
                 {/* 3-Step Process */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -720,17 +717,16 @@ function SizingGuideSection() {
 
     return (
         <section id="sizing-guide" className="scroll-mt-20 px-4">
-            <div className="text-center mb-12 space-y-4">
-                <div className="inline-block px-5 py-2 bg-white/5 rounded-md border border-white/10 text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.5em] text-primary mb-4 shadow-[0_0_20px_rgba(0,174,239,0.1)]">
-                    <EditableText contentKey="shop.guide.subtitle" />
-                </div>
-                <h2 className="text-4xl md:text-5xl font-header font-black text-white mb-6 uppercase tracking-tighter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                    <EditableText contentKey="shop.guide.title" />
-                </h2>
-                <div className="text-slate-400 max-w-4xl mx-auto text-sm md:text-base leading-relaxed font-medium opacity-80 uppercase tracking-widest [word-spacing:0.12em]">
-                    <BacklinkedText narrativeKey="sizing_guide" />
-                </div>
-            </div>
+            <SectionHeader
+                contentKey="shop.guide"
+                icon="straighten"
+                narrativeKey="sizing_guide"
+                topElement={
+                    <div className="inline-block px-5 py-2 bg-white/5 rounded-md border border-white/10 text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.5em] text-primary mb-4 shadow-[0_0_20px_rgba(0,174,239,0.1)]">
+                        <EditableText contentKey="shop.guide.subtitle" />
+                    </div>
+                }
+            />
 
             {/* Desktop Table View */}
             <div className="!hidden md:!block overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-charcoal relative">
