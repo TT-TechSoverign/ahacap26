@@ -1,5 +1,5 @@
 {
-  "landing": {
+  "landing_legacy": {
     "hero": {
       "badge": "Est. 2005 • Oahu, HI",
       "title_line1": "20+ YEARS OF SERVICING ISLAND WIDE",
@@ -742,7 +742,7 @@
       }
     ]
   },
-  "home_v2": {
+  "landing": {
     "services_header": {
       "title": "PREMIUM",
       "title_highlight": "COOLING",

@@ -1,136 +1,154 @@
 import { Render } from "@measured/puck";
 import config from "../puck.config";
 
+import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
+import Section4Projects from '@/components/Section4Projects';
 import { BackToTop } from '@/components/BackToTop';
 
-// Force dynamic since we fetch fresh content
+// Force dynamic since we want to ensure fresh rendering
+// v2.5 Visual Refinements Force Rebuild
 export const dynamic = 'force-dynamic';
 
-export default async function LandingPage() {
-    const API_INTERNAL_URL = process.env.API_INTERNAL_URL || 'http://localhost:8000';
-    let data = null;
-
-    try {
-        // Fetch PUBLISHED data (no draft param)
-        const res = await fetch(`${API_INTERNAL_URL}/api/v1/content/`, {
-            cache: 'no-store'
-        });
-        if (res.ok) {
-            const json = await res.json();
-            data = json.data;
-        }
-    } catch (e) {
-        console.error("Failed to load content:", e);
-    }
-
-    // Default Data (Legacy Content Migration)
-    if (!data || Object.keys(data).length === 0) {
-        data = {
-            content: [
-                {
-                    type: "Hero", props: {
-                        badge: "Est. 2005 • Oahu, HI",
-                        titleLine1: "20+ YEARS OF SERVICING ISLAND WIDE",
-                        titleHighlight1: "OAHU'S HVAC CONTRACTOR",
-                        titleHighlight2: "& AC Specialists",
-                        subBadges: [{ text: "LG & GE THROUGH THE WALL AC RETAILER" }, { text: "Licensed & Insured" }, { text: "Energy Saving Units" }],
-                        ctaShop: { text: "SHOP WINDOW AC INVENTORY", href: "/shop", variant: "primary" },
-                        ctaEstimate: { text: "REQUEST A QUOTE", href: "/contact", variant: "outline" },
-                        styles: { padding: "96px 0px" }
-                    }
-                },
-                {
-                    type: "Services", props: {
-                        title: "CORE",
-                        titleHighlight: "SERVICES",
-                        description: "",
-                        backlinks: [
-                            { text: "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM " },
-                            { text: "HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE)", href: "/shop" },
-                            { text: " CURATED FOR DURABILITY; " },
-                            { text: "ULTRA-QUIET DUCTLESS MINI SPLITS", href: "/contact" },
-                            { text: " DESIGNED FOR PRECISION ZONE COOLING; " },
-                            { text: "CENTRAL AC RETROFITS", href: "/contact" },
-                            { text: " ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND " },
-                            { text: "SPECIALIZED WINDOW AC CLEANINGS", href: "/contact" },
-                            { text: " THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM." }
-                        ],
-                        items: [
-                            { title: "MINI SPLITS", description: "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling...", icon: "ac_unit", linkText: "MORE INFO", href: "/contact", color: "primary" },
-                            { title: "WINDOW AC SHOP", description: "Browse our massive inventory of LG & GE units", icon: "storefront", linkText: "View Inventory", href: "/shop", color: "primary", badge: "In Stock" },
-                            { title: "CENTRAL AC", description: "Maximize Whole-Home Comfort. We provide professional Retrofits (Air Handlers & Condensers ONLY)...", icon: "hvac", linkText: "MORE INFO", href: "/contact", color: "accent" },
-                            { title: "WINDOW AC CLEANING", description: "Deep cleaning to restore efficiency and air quality.", icon: "cleaning_services", linkText: "WINDOW AC MAINTENANCE", href: "/contact", color: "accent" }
-                        ],
-                        styles: { padding: "96px 0px" }
-                    }
-                },
-                { type: "Video", props: { videoUrl: "/hero.mp4", styles: { padding: "64px 0px" } } },
-                {
-                    type: "Partnerships", props: {
-                        title: "ELITE BRAND PARTNERSHIPS",
-                        titleHighlight: "TECHNOLOGY TO MASTER OAHU'S MICRO-CLIMATES",
-                        narrativeParam: "AFFORDABLE HOME A/C IS PROUD TO MAINTAIN COMPLIANANCE TO PROVIDE YOU WITH THE WORLD'S LEADING HVAC ENGINEERING FIRMS...",
-                        brandsWindow: [
-                            { name: "LG", colorClass: "text-rose-500", fontClass: "font-sans font-black tracking-tighter text-6xl" },
-                            { name: "GE APPLIANCES", colorClass: "text-blue-400", fontClass: "font-serif font-bold tracking-wide text-3xl" },
-                            { name: "Hawai'i Energy", colorClass: "text-[#00FFFF]", fontClass: "font-sans font-bold tracking-tight text-4xl" }
-                        ],
-                        brandsMiniSplit: [
-                            { name: "MITSUBISHI ELECTRIC", colorClass: "text-red-600", fontClass: "font-header font-bold tracking-normal uppercase text-xl" },
-                            { name: "FUJITSU", colorClass: "text-red-500", fontClass: "font-sans font-bold italic tracking-widest text-3xl" },
-                            { name: "DAIKIN", colorClass: "text-sky-400", fontClass: "font-header font-medium tracking-widest text-2xl" },
-                            { name: "CARRIER", colorClass: "text-blue-600", fontClass: "font-sans font-extrabold tracking-tighter text-3xl" }
-                        ],
-                        brandsCentral: [
-                            { name: "RHEEM", colorClass: "text-red-500", fontClass: "font-header font-bold tracking-tight text-5xl" },
-                            { name: "BOSCH", colorClass: "text-cyan-500", fontClass: "font-mono font-bold tracking-[0.2em] text-3xl" }
-                        ],
-                        styles: { padding: "96px 0px" }
-                    }
-                },
-                {
-                    type: "ServiceAreas", props: {
-                        badge: "Island-Wide Coverage",
-                        title: "Oahu's Premier",
-                        titleHighlight: "COOLING NETWORK",
-                        description: "Licensed experts delivering optimal air quality and precision cooling. Trusted by homeowner associations...",
-                        regions: [
-                            { id: "central", title: "Central Oahu", icon: "warehouse", cities: [{ text: "Aiea" }, { text: "Pearl City" }, { text: "Mililani" }, { text: "Waipio Gentry" }, { text: "Waikele" }] },
-                            { id: "metro", title: "Metro Honolulu", icon: "apartment", cities: [{ text: "Honolulu" }, { text: "Kalihi" }, { text: "Manoa" }, { text: "Kaimuki" }, { text: "Hawaii Kai" }, { text: "Salt Lake" }] },
-                            { id: "leeward", title: "LEEWARD", icon: "sunny", cities: [{ text: "Kapolei" }, { text: "Ewa Beach" }, { text: "Waipahu" }, { text: "Kunia" }] },
-                            { id: "windward", title: "Windward & North", icon: "waves", cities: [{ text: "Kailua" }, { text: "Kaneohe" }, { text: "Kahaluu" }] }
-                        ],
-                        styles: { padding: "96px 0px" }
-                    }
-                },
-                { type: "Calendar", props: { title: "Availability" } },
-                {
-                    type: "Warehouse", props: {
-                        badge: "Local Pickup Center",
-                        title: "Shop Location",
-                        description: "Our shop is stocked with window units. Order yours today",
-                        addressLabel: "Address",
-                        addressValue: "94-150 Leoleo St. #203\nWaipahu, HI 96797",
-                        directionsLabel: "Directions",
-                        directionsValue: "Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway...",
-                        ctaText: "Get Directions",
-                        mapImage: "/assets/ahac-shoplocationv2.svg",
-                        styles: { padding: "96px 0px" }
+export default function Homepage() {
+    const v2Data = {
+        content: [
+            {
+                type: "Hero",
+                props: {
+                    badge: "Authorized Dealer",
+                    titleLine1: "Cooling Hawaii",
+                    titleHighlight1: "Affordably",
+                    titleHighlight2: "& Efficiently",
+                    subBadges: [
+                        { text: "Est. 2005" },
+                        { text: "Licensed & Insured" },
+                        { text: "Locally Owned" }
+                    ],
+                    ctaShop: { text: "Shop Units", href: "/shop", variant: "primary" },
+                    ctaEstimate: { text: "Get Quote", href: "/contact", variant: "secondary" },
+                    mode: "light",
+                    styles: {
+                        backgroundColor: "#ffffff",
+                        padding: "128px 0px"
                     }
                 }
-            ],
-            root: { props: { title: "Landing Page" } }
-        };
-    }
+            },
+            {
+                type: "Services",
+                props: {
+                    title: "Premium",
+                    titleHighlight: "Cooling",
+                    description: "Experience the difference of high-efficiency climate control designed specifically for Hawaii's homes.",
+                    backlinks: [
+                        { text: "We specialize in ", href: "" },
+                        { text: "Window AC Sales", href: "/shop" },
+                        { text: ", ", href: "" },
+                        { text: "Split System Installation", href: "/contact" },
+                        { text: ", and ", href: "" },
+                        { text: "Maintenance Services", href: "/contact" },
+                        { text: ".", href: "" }
+                    ],
+                    items: [
+                        {
+                            title: "Window AC Sales",
+                            description: "The largest inventory of LG & GE window units in Waipahu. Pick up today.",
+                            icon: "storefront",
+                            linkText: "Browse Shop",
+                            href: "/shop",
+                            color: "primary",
+                            badge: "In Stock"
+                        },
+                        {
+                            title: "Split Systems",
+                            description: "Whisper-quiet, energy-efficient cooling for your entire home.",
+                            icon: "ac_unit",
+                            linkText: "Get Estimate",
+                            href: "/contact",
+                            color: "accent"
+                        },
+                        {
+                            title: "Maintenance",
+                            description: "Protect your investment with professional cleaning and servicing.",
+                            icon: "cleaning_services",
+                            linkText: "Schedule Service",
+                            href: "/contact",
+                            color: "accent"
+                        }
+                    ],
+                    mode: "light",
+                    styles: {
+                        backgroundColor: "#f8fafc", // slate-50
+                        padding: "96px 0px"
+                    }
+                }
+            },
+            {
+                type: "Partnerships",
+                props: {
+                    title: "Trusted Brands",
+                    titleHighlight: "For Island Living",
+                    narrativeParam: "We only carry and install equipment proven to withstand Hawaii's salt-air environment.",
+                    brandsWindow: [
+                        { name: "LG", colorClass: "text-slate-800", fontClass: "font-sans font-black text-5xl" },
+                        { name: "GE", colorClass: "text-slate-600", fontClass: "font-serif font-bold text-3xl" }
+                    ],
+                    brandsMiniSplit: [
+                        { name: "Mitsubishi", colorClass: "text-red-600", fontClass: "font-bold uppercase text-2xl" },
+                        { name: "Fujitsu", colorClass: "text-red-500", fontClass: "font-bold italic text-3xl" }
+                    ],
+                    brandsCentral: [
+                        { name: "Rheem", colorClass: "text-red-600", fontClass: "font-bold text-4xl" }
+                    ],
+                    styles: {
+                        backgroundColor: "#ffffff",
+                        padding: "96px 0px"
+                    }
+                }
+            },
+            {
+                type: "ServiceAreas",
+                props: {
+                    badge: "Island Coverage",
+                    title: "Serving All",
+                    titleHighlight: "Oahu",
+                    description: "From Honolulu to the North Shore, our team is ready to deploy.",
+                    regions: [
+                        { id: "central", title: "Central", icon: "location_on", cities: [{ text: "Mililani" }, { text: "Wahiawa" }] },
+                        { id: "town", title: "Town", icon: "apartment", cities: [{ text: "Honolulu" }, { text: "Waikiki" }] }
+                    ],
+                    styles: {
+                        // ServiceAreas is hardcoded dark, so we leave it dark as a 'contrast' section or refactor later.
+                        // For now letting it be standard dark.
+                        padding: "96px 0px"
+                    }
+                }
+            },
+            {
+                type: "Warehouse",
+                props: {
+                    badge: "Visit Us",
+                    title: "Waipahu",
+                    description: "Come see our showroom and pick up your unit today.",
+                    addressLabel: "Location",
+                    addressValue: "94-150 Leoleo St, Waipahu",
+                    directionsLabel: "Hours",
+                    directionsValue: "Mon-Fri: 8am - 4pm\nSat: Closed",
+                    ctaText: "Get Directions",
+                    mapImage: "/assets/ahac-shoplocationv2.svg",
+                    styles: { padding: "96px 0px" }
+                }
+            }
+        ],
+        root: { props: { title: "Homepage" } }
+    };
 
     return (
-        <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white min-h-screen">
-
-
-            <main className="pt-[140px] md:pt-[240px]">
-                <Render config={config} data={data} />
+        <div className="bg-white text-slate-900 min-h-screen font-sans">
+            <main className="pt-[220px] bg-slate-900">
+                <Section2OurServicesV2 />
+                <Section4Projects />
+                {/* <Render config={config} data={v2Data} /> */}
             </main>
-
             <BackToTop visible={true} />
         </div>
     );
