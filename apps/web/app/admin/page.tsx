@@ -172,37 +172,42 @@ export default function AdminPage() {
                 <NavbarV2 />
 
                 <div className="container mx-auto px-6 max-h-[60vh] flex flex-col items-center justify-center">
-                    <div className="w-full max-w-md">
-                        <div className="text-center mb-12">
-                            <div className="size-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-primary/20 shadow-[0_0_30px_rgba(0,174,239,0.2)]">
-                                <span className="material-symbols-outlined text-4xl text-primary">lock</span>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="w-full max-w-md p-8 bg-[#0a0e14] border border-white/5 rounded-3xl shadow-2xl shadow-primary/5"
+                    >
+                        <div className="text-center mb-10">
+                            <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-primary/20 shadow-[0_0_20px_rgba(0,174,239,0.15)]">
+                                <span className="material-symbols-outlined text-3xl text-primary">lock</span>
                             </div>
-                            <h1 className="text-3xl font-header font-black uppercase tracking-tight mb-2">AHAC Admin</h1>
-                            <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Authorized Access Only</p>
+                            <h1 className="text-2xl font-header font-black uppercase tracking-tight mb-2 text-white">AHAC Admin</h1>
+                            <p className="font-mono text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Authorized Access Only</p>
                         </div>
 
                         <form onSubmit={handleLogin} className="space-y-6">
                             <div className="space-y-2">
-                                <label className="text-slate-500 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.login.label}</label>
+                                <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest ml-1">{content.admin.login.label}</label>
                                 <input
                                     type="password"
                                     value={pin}
                                     onChange={(e) => setPin(e.target.value)}
-                                    className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-4 text-center text-2xl tracking-[1em] text-white focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                                    className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-center text-xl tracking-[1em] text-white focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all placeholder-transparent"
                                     maxLength={4}
                                     autoFocus
+                                    placeholder="••••"
                                 />
                             </div>
-                            {error && <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest text-center animate-pulse">{error}</p>}
-                            <button className="w-full bg-primary text-black font-black uppercase tracking-[0.2em] py-4 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
+                            {error && <p className="text-red-500 text-[9px] font-bold uppercase tracking-widest text-center animate-pulse">{error}</p>}
+                            <button className="w-full bg-primary text-black font-black uppercase tracking-[0.2em] py-4 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20 text-xs">
                                 {content.admin.login.button}
                             </button>
                         </form>
 
-                        <div className="mt-12 text-center text-[9px] text-slate-700 font-bold uppercase tracking-widest">
+                        <div className="mt-8 text-center text-[9px] text-slate-700 font-bold uppercase tracking-widest border-t border-white/5 pt-4">
                             {content.admin.login.version}
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         );
