@@ -91,9 +91,9 @@ export default function Footer() {
                     </div>
 
                     {/* Services Column */}
-                    <div>
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Services</h4>
-                        <ul className="space-y-4">
+                        <ul className="space-y-4 w-full">
                             {[
                                 { text: 'Mini Split AC', href: '/contact' },
                                 { text: 'Window AC Shop', href: '/shop' },
@@ -101,7 +101,7 @@ export default function Footer() {
                                 { text: 'Window AC Cleaning', href: '/contact' }
                             ].map((item) => (
                                 <li key={item.text}>
-                                    <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
+                                    <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
                                         <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
                                         {item.text}
                                     </Link>
@@ -111,9 +111,9 @@ export default function Footer() {
                     </div>
 
                     {/* Quick Links Column */}
-                    <div>
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Quick Links</h4>
-                        <ul className="space-y-4">
+                        <ul className="space-y-4 w-full">
                             {[
                                 { text: 'Mini Split AC', href: '/contact' },
                                 { text: 'Shop Inventory', href: '/shop' },
@@ -123,7 +123,7 @@ export default function Footer() {
                                 { text: 'Contact Us', href: '/contact' }
                             ].map((item) => (
                                 <li key={item.text}>
-                                    <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
+                                    <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
                                         <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
                                         {item.text}
                                     </Link>
@@ -133,11 +133,11 @@ export default function Footer() {
                     </div>
 
                     {/* Contact Column */}
-                    <div>
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Contact</h4>
-                        <ul className="space-y-6">
-                            <li className="flex gap-4">
-                                <span className="material-symbols-outlined text-primary mt-1">location_on</span>
+                        <ul className="space-y-6 w-full">
+                            <li className="flex gap-4 justify-center md:justify-start text-left">
+                                <span className="material-symbols-outlined text-primary mt-1 shrink-0">location_on</span>
                                 <div>
                                     <div className="text-white font-bold text-sm uppercase">Shop Location</div>
                                     <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" rel="noopener noreferrer" className="text-slate-400 text-sm hover:text-white transition-colors block">
@@ -145,15 +145,15 @@ export default function Footer() {
                                     </a>
                                 </div>
                             </li>
-                            <li className="flex gap-4">
-                                <span className="material-symbols-outlined text-primary mt-1">call</span>
+                            <li className="flex gap-4 justify-center md:justify-start text-left">
+                                <span className="material-symbols-outlined text-primary mt-1 shrink-0">call</span>
                                 <div>
                                     <div className="text-white font-bold text-sm uppercase">Phone</div>
                                     <a href="tel:808-488-1111" className="text-slate-400 text-sm hover:text-white transition-colors">(808) 488-1111</a>
                                 </div>
                             </li>
-                            <li className="flex gap-4">
-                                <span className="material-symbols-outlined text-primary mt-1">mail</span>
+                            <li className="flex gap-4 justify-center md:justify-start text-left">
+                                <span className="material-symbols-outlined text-primary mt-1 shrink-0">mail</span>
                                 <div>
                                     <div className="text-white font-bold text-sm uppercase">Email</div>
                                     <a href="mailto:office@affordablehome-ac.com" className="text-slate-400 text-sm hover:text-white transition-colors">office@affordablehome-ac.com</a>
