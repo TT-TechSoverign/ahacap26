@@ -168,10 +168,11 @@ export default function AdminPage() {
 
     if (!isAuthenticated) {
         return (
-            <div className="min-h-screen bg-black pt-[150px] md:pt-[200px] text-white font-sans selection:bg-primary/30">
+        return (
+            <div className="min-h-screen bg-black text-white font-sans selection:bg-primary/30 flex items-center justify-center">
                 {/* Navbar Removed for Clean Login */}
 
-                <div className="container mx-auto px-6 max-h-[60vh] flex flex-col items-center justify-center">
+                <div className="container mx-auto px-6 flex flex-col items-center justify-center">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -214,8 +215,8 @@ export default function AdminPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[120px] md:pt-[250px]">
-            {/* Admin Header - Fixed below global Navbar */}
+        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-32">
+            {/* Admin Header - Fixed at top */}
             <motion.header
                 initial={{ y: 0 }}
                 animate={{ y: headerVisible ? 0 : -400 }}
@@ -225,7 +226,7 @@ export default function AdminPage() {
                     damping: 25,
                     delay: headerVisible ? 0.1 : 0
                 }}
-                className="fixed top-[130px] md:top-[260px] left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
+                className="fixed top-0 left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
             >
                 <div className="max-w-[1440px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-8">
