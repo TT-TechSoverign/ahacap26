@@ -946,8 +946,9 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
     );
 }
 
+
 function ScheduleManager() {
-    const { content } = useContent();
+    const { content, refreshContent } = useContent();
     const [formData, setFormData] = useState(content.footer_schedule || {
         mini_split_label: "",
         window_ac_label: "",
@@ -975,6 +976,7 @@ function ScheduleManager() {
                 body: JSON.stringify(formData)
             });
             if (res.ok) {
+                await refreshContent();
                 setSuccess(true);
                 setTimeout(() => setSuccess(false), 3000);
             }

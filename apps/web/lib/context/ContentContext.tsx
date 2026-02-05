@@ -9,20 +9,38 @@ const initialContent = initialContentJson as any;
 type ContentUpdate = {
   path: string;
   value: string;
+  section?: string;
 };
 
 interface ContentContextType {
   content: ContentSchema;
+  refreshContent: () => Promise<void>;
 }
 
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
 export function ContentProvider({ children }: { children: React.ReactNode }) {
-  const [content] = useState<ContentSchema>(initialContent);
+  const [content, setContent] = useState<ContentSchema>(initialContent);
 
-  // Read-only provider
+  const refreshContent = useCallback(async () => {
+    try {
+      const res = await fetch('/api/v1/content', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        setContent(data);
+      }
+    } catch (error) {
+      console.error('Failed to refresh content:', error);
+    }
+  }, []);
+
+  // Fetch fresh content on mount to ensure we have the latest server-side edits
+  useEffect(() => {
+    refreshContent();
+  }, [refreshContent]);
+
   return (
-    <ContentContext.Provider value={{ content }}>
+    <ContentContext.Provider value={{ content, refreshContent }}>
       {children}
     </ContentContext.Provider>
   );
