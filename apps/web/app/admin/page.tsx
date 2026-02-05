@@ -167,349 +167,365 @@ export default function AdminPage() {
 
     if (!isAuthenticated) {
         return (
-            type = "password"
-                                value = { pin }
-        onChange = {(e) => setPin(e.target.value)
-    }
-    className = "w-full bg-black/50 border border-white/10 rounded-xl px-4 py-4 text-white text-center text-2xl tracking-[1em] focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all"
-    maxLength = { 4}
-    autoFocus
-        />
-                        </div >
-        { error && <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest text-center animate-pulse">{content.admin.login.error}</p>
-}
-<button className="w-full bg-primary text-black font-black uppercase tracking-[0.2em] py-4 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
-    {content.admin.login.button}
-</button>
-                    </form >
+            <div className="min-h-screen bg-black pt-[150px] md:pt-[200px] text-white font-sans selection:bg-primary/30">
+                <NavbarV2 />
 
-    <div className="mt-8 text-center text-[9px] text-slate-700 font-bold uppercase tracking-widest">
-        {content.admin.login.version}
-    </div>
-                </motion.div >
-            </div >
+                <div className="container mx-auto px-6 max-h-[60vh] flex flex-col items-center justify-center">
+                    <div className="w-full max-w-md">
+                        <div className="text-center mb-12">
+                            <div className="size-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-primary/20 shadow-[0_0_30px_rgba(0,174,239,0.2)]">
+                                <span className="material-symbols-outlined text-4xl text-primary">lock</span>
+                            </div>
+                            <h1 className="text-3xl font-header font-black uppercase tracking-tight mb-2">AHAC Admin</h1>
+                            <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Authorized Access Only</p>
+                        </div>
+
+                        <form onSubmit={handleLogin} className="space-y-6">
+                            <div className="space-y-2">
+                                <label className="text-slate-500 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.login.label}</label>
+                                <input
+                                    type="password"
+                                    value={pin}
+                                    onChange={(e) => setPin(e.target.value)}
+                                    className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-4 text-center text-2xl tracking-[1em] text-white focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                                    maxLength={4}
+                                    autoFocus
+                                />
+                            </div>
+                            {error && <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest text-center animate-pulse">{error}</p>}
+                            <button className="w-full bg-primary text-black font-black uppercase tracking-[0.2em] py-4 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
+                                {content.admin.login.button}
+                            </button>
+                        </form>
+
+                        <div className="mt-12 text-center text-[9px] text-slate-700 font-bold uppercase tracking-widest">
+                            {content.admin.login.version}
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 
-return (
-    <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[120px] md:pt-[250px]">
-        {/* Admin Header - Fixed below global Navbar */}
-        <motion.header
-            initial={{ y: 0 }}
-            animate={{ y: headerVisible ? 0 : -400 }}
-            transition={{
-                type: "spring",
-                stiffness: 150,
-                damping: 25,
-                delay: headerVisible ? 0.1 : 0
-            }}
-            className="fixed top-[130px] md:top-[260px] left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
-        >
-            <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-                <div className="flex items-center gap-8">
+    return (
+        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[120px] md:pt-[250px]">
+            {/* Admin Header - Fixed below global Navbar */}
+            <motion.header
+                initial={{ y: 0 }}
+                animate={{ y: headerVisible ? 0 : -400 }}
+                transition={{
+                    type: "spring",
+                    stiffness: 150,
+                    damping: 25,
+                    delay: headerVisible ? 0.1 : 0
+                }}
+                className="fixed top-[130px] md:top-[260px] left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
+            >
+                <div className="max-w-[1440px] mx-auto flex items-center justify-between">
+                    <div className="flex items-center gap-8">
+                        <div className="flex items-center gap-4">
+                            <div className="size-10 bg-primary rounded-lg flex items-center justify-center">
+                                <span className="material-symbols-outlined text-black font-bold">settings_suggest</span>
+                            </div>
+                            <div className="hidden sm:block">
+                                <h2 className="text-white font-header font-black tracking-widest uppercase text-lg leading-none">{content.admin.nav.title}</h2>
+                                <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">{content.admin.nav.subtitle}</p>
+                            </div>
+                        </div>
+
+                        {/* Tabs */}
+                        <nav className="flex items-center bg-black/40 p-1 rounded-xl border border-white/5">
+                            {(['inventory', 'orders', 'leads', 'schedule'] as const).map((tab) => (
+                                <button
+                                    key={tab}
+                                    //@ts-ignore
+                                    onClick={() => setActiveTab(tab)}
+                                    className={`px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-white text-black shadow-lg' : 'text-slate-500 hover:text-white'}`}
+                                >
+                                    {tab === 'schedule' ? 'Schedule' : content.admin.tabs[tab as keyof typeof content.admin.tabs]}
+                                </button>
+                            ))}
+                        </nav>
+                    </div>
                     <div className="flex items-center gap-4">
-                        <div className="size-10 bg-primary rounded-lg flex items-center justify-center">
-                            <span className="material-symbols-outlined text-black font-bold">settings_suggest</span>
-                        </div>
-                        <div className="hidden sm:block">
-                            <h2 className="text-white font-header font-black tracking-widest uppercase text-lg leading-none">{content.admin.nav.title}</h2>
-                            <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">{content.admin.nav.subtitle}</p>
-                        </div>
-                    </div>
-
-                    {/* Tabs */}
-                    <nav className="flex items-center bg-black/40 p-1 rounded-xl border border-white/5">
-                        {(['inventory', 'orders', 'leads', 'schedule'] as const).map((tab) => (
-                            <button
-                                key={tab}
-                                //@ts-ignore
-                                onClick={() => setActiveTab(tab)}
-                                className={`px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-white text-black shadow-lg' : 'text-slate-500 hover:text-white'}`}
-                            >
-                                {tab === 'schedule' ? 'Schedule' : content.admin.tabs[tab as keyof typeof content.admin.tabs]}
-                            </button>
-                        ))}
-                    </nav>
-                </div>
-                <div className="flex items-center gap-4">
-                    {activeTab === 'inventory' && (
-                        <button
-                            onClick={() => setIsAdding(true)}
-                            className="bg-white text-black px-6 py-2 rounded-lg font-black uppercase text-[10px] tracking-widest hover:bg-primary transition-all flex items-center gap-2"
-                        >
-                            <span className="material-symbols-outlined text-sm">add</span> {content.admin.nav.add_product}
-                        </button>
-                    )}
-                    <Link href="/shop" className="text-slate-500 hover:text-white transition-colors text-[10px] font-bold uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg hidden md:block">{content.admin.nav.view_shop}</Link>
-                    <button onClick={() => setIsAuthenticated(false)} className="text-red-500/50 hover:text-red-500 transition-colors">
-                        <span className="material-symbols-outlined">power_settings_new</span>
-                    </button>
-                </div>
-            </div>
-        </motion.header>
-
-        <main className="max-w-[1440px] mx-auto px-6 pt-12">
-            {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-                {activeTab === 'inventory' && (
-                    <>
-                        <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                            <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.inventory.total}</p>
-                            <p className="text-3xl text-white font-header font-bold">{products.length}</p>
-                        </div>
-                        <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                            <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.inventory.value}</p>
-                            <p className="text-3xl text-primary font-header font-bold">${products.reduce((acc, p) => acc + (p.price * p.stock), 0).toLocaleString()}</p>
-                        </div>
-                    </>
-                )}
-                {activeTab === 'orders' && (
-                    <>
-                        <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                            <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.orders.total}</p>
-                            <p className="text-3xl text-white font-header font-bold">{orders.length}</p>
-                        </div>
-                        <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                            <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.orders.revenue}</p>
-                            <p className="text-3xl text-emerald-500 font-header font-bold">${orders.reduce((acc, o) => acc + (o.total_cents / 100), 0).toLocaleString()}</p>
-                        </div>
-                    </>
-                )}
-                {activeTab === 'leads' && (
-                    <>
-                        <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                            <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.leads.active}</p>
-                            <p className="text-3xl text-white font-header font-bold">{leads.length}</p>
-                        </div>
-                        <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                            <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.leads.urgent}</p>
-                            <p className="text-3xl text-red-500 font-header font-bold">{leads.filter(l => l.urgency === 'ASAP').length}</p>
-                        </div>
-                    </>
-                )}
-            </div>
-
-            {/* Content Views */}
-            <div className="bg-[#0a0e14] border border-white/5 rounded-2xl overflow-hidden min-h-[400px]">
-                {loading && activeTab !== 'schedule' ? (
-                    <div className="flex items-center justify-center h-64">
-                        <div className="animate-spin size-8 border-2 border-primary border-t-transparent rounded-full" />
-                    </div>
-                ) : (
-                    <AnimatePresence mode="wait">
                         {activeTab === 'inventory' && (
-                            <motion.div
-                                key="inventory"
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 10 }}
+                            <button
+                                onClick={() => setIsAdding(true)}
+                                className="bg-white text-black px-6 py-2 rounded-lg font-black uppercase text-[10px] tracking-widest hover:bg-primary transition-all flex items-center gap-2"
                             >
-                                <table className="w-full text-left border-collapse">
-                                    <thead>
-                                        <tr className="bg-white/5 text-slate-400 text-[10px] font-black uppercase tracking-widest">
-                                            <th className="px-8 py-4">Image</th>
-                                            <th className="px-8 py-4">Product Name</th>
-                                            <th className="px-8 py-4 text-center">Category</th>
-                                            <th className="px-8 py-4 text-right">Price</th>
-                                            <th className="px-8 py-4 text-center">Stock</th>
-                                            <th className="px-8 py-4 text-right">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-white/5">
-                                        {products.map(product => (
-                                            <tr key={product.id} className="hover:bg-white/[0.02] transition-colors group">
-                                                <td className="px-8 py-6">
-                                                    <div className="size-20 bg-black rounded-lg border border-white/10 overflow-hidden relative">
-                                                        {product.image_url ? (
-                                                            <Image src={product.image_url} alt={product.name} fill className="object-contain p-2" />
-                                                        ) : (
-                                                            <div className="absolute inset-0 flex items-center justify-center text-slate-800">
-                                                                <span className="material-symbols-outlined text-4xl">image</span>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </td>
-                                                <td className="px-8 py-6">
-                                                    <div className="text-white font-bold uppercase tracking-wide">{product.name}</div>
-                                                    <div className="text-slate-500 text-[9px] font-black tracking-widest uppercase mt-1">ID: {product.id}</div>
-                                                </td>
-                                                <td className="px-8 py-6 text-center">
-                                                    <span className="px-3 py-1 bg-white/5 rounded-full text-[9px] font-black text-slate-400 uppercase tracking-widest border border-white/10">{product.category}</span>
-                                                </td>
-                                                <td className="px-8 py-6 text-right font-header font-bold text-lg text-white">${product.price}</td>
-                                                <td className="px-8 py-6 text-center">
-                                                    <div className="flex flex-col items-center gap-1">
-                                                        <div className={`text-sm font-bold ${product.stock < 5 ? 'text-red-500' : 'text-slate-400'}`}>{product.stock}</div>
-                                                        <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${product.stock > 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'}`}>
-                                                            {product.stock > 0 ? 'In Stock' : 'Out Of Stock'}
+                                <span className="material-symbols-outlined text-sm">add</span> {content.admin.nav.add_product}
+                            </button>
+                        )}
+                        <Link href="/shop" className="text-slate-500 hover:text-white transition-colors text-[10px] font-bold uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg hidden md:block">{content.admin.nav.view_shop}</Link>
+                        <button onClick={() => setIsAuthenticated(false)} className="text-red-500/50 hover:text-red-500 transition-colors">
+                            <span className="material-symbols-outlined">power_settings_new</span>
+                        </button>
+                    </div>
+                </div>
+            </motion.header>
+
+            <main className="max-w-[1440px] mx-auto px-6 pt-12">
+                {/* Stats Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                    {activeTab === 'inventory' && (
+                        <>
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
+                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.inventory.total}</p>
+                                <p className="text-3xl text-white font-header font-bold">{products.length}</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
+                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.inventory.value}</p>
+                                <p className="text-3xl text-primary font-header font-bold">${products.reduce((acc, p) => acc + (p.price * p.stock), 0).toLocaleString()}</p>
+                            </div>
+                        </>
+                    )}
+                    {activeTab === 'orders' && (
+                        <>
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
+                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.orders.total}</p>
+                                <p className="text-3xl text-white font-header font-bold">{orders.length}</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
+                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.orders.revenue}</p>
+                                <p className="text-3xl text-emerald-500 font-header font-bold">${orders.reduce((acc, o) => acc + (o.total_cents / 100), 0).toLocaleString()}</p>
+                            </div>
+                        </>
+                    )}
+                    {activeTab === 'leads' && (
+                        <>
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
+                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.leads.active}</p>
+                                <p className="text-3xl text-white font-header font-bold">{leads.length}</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
+                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.leads.urgent}</p>
+                                <p className="text-3xl text-red-500 font-header font-bold">{leads.filter(l => l.urgency === 'ASAP').length}</p>
+                            </div>
+                        </>
+                    )}
+                </div>
+
+                {/* Content Views */}
+                <div className="bg-[#0a0e14] border border-white/5 rounded-2xl overflow-hidden min-h-[400px]">
+                    {loading && activeTab !== 'schedule' ? (
+                        <div className="flex items-center justify-center h-64">
+                            <div className="animate-spin size-8 border-2 border-primary border-t-transparent rounded-full" />
+                        </div>
+                    ) : (
+                        <AnimatePresence mode="wait">
+                            {activeTab === 'inventory' && (
+                                <motion.div
+                                    key="inventory"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
+                                >
+                                    <table className="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr className="bg-white/5 text-slate-400 text-[10px] font-black uppercase tracking-widest">
+                                                <th className="px-8 py-4">Image</th>
+                                                <th className="px-8 py-4">Product Name</th>
+                                                <th className="px-8 py-4 text-center">Category</th>
+                                                <th className="px-8 py-4 text-right">Price</th>
+                                                <th className="px-8 py-4 text-center">Stock</th>
+                                                <th className="px-8 py-4 text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-white/5">
+                                            {products.map(product => (
+                                                <tr key={product.id} className="hover:bg-white/[0.02] transition-colors group">
+                                                    <td className="px-8 py-6">
+                                                        <div className="size-20 bg-black rounded-lg border border-white/10 overflow-hidden relative">
+                                                            {product.image_url ? (
+                                                                <Image src={product.image_url} alt={product.name} fill className="object-contain p-2" />
+                                                            ) : (
+                                                                <div className="absolute inset-0 flex items-center justify-center text-slate-800">
+                                                                    <span className="material-symbols-outlined text-4xl">image</span>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-8 py-6">
+                                                        <div className="text-white font-bold uppercase tracking-wide">{product.name}</div>
+                                                        <div className="text-slate-500 text-[9px] font-black tracking-widest uppercase mt-1">ID: {product.id}</div>
+                                                    </td>
+                                                    <td className="px-8 py-6 text-center">
+                                                        <span className="px-3 py-1 bg-white/5 rounded-full text-[9px] font-black text-slate-400 uppercase tracking-widest border border-white/10">{product.category}</span>
+                                                    </td>
+                                                    <td className="px-8 py-6 text-right font-header font-bold text-lg text-white">${product.price}</td>
+                                                    <td className="px-8 py-6 text-center">
+                                                        <div className="flex flex-col items-center gap-1">
+                                                            <div className={`text-sm font-bold ${product.stock < 5 ? 'text-red-500' : 'text-slate-400'}`}>{product.stock}</div>
+                                                            <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${product.stock > 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'}`}>
+                                                                {product.stock > 0 ? 'In Stock' : 'Out Of Stock'}
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-8 py-6 text-right">
+                                                        <div className="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                            <button onClick={() => setEditingProduct(product)} className="size-10 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-black transition-all flex items-center justify-center">
+                                                                <span className="material-symbols-outlined text-sm">edit</span>
+                                                            </button>
+                                                            <button onClick={() => handleDelete(product.id)} className="size-10 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
+                                                                <span className="material-symbols-outlined text-sm">delete</span>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </motion.div>
+                            )}
+
+                            {activeTab === 'orders' && (
+                                <motion.div
+                                    key="orders"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
+                                >
+                                    <table className="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr className="bg-white/5 text-slate-400 text-[10px] font-black uppercase tracking-widest">
+                                                <th className="px-8 py-4">Order ID</th>
+                                                <th className="px-8 py-4">Customer</th>
+                                                <th className="px-8 py-4 text-center">Date</th>
+                                                <th className="px-8 py-4 text-center">Status</th>
+                                                <th className="px-8 py-4 text-right">Total</th>
+                                                <th className="px-8 py-4 text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-white/5">
+                                            {orders.map(order => (
+                                                <tr key={order.id} className="hover:bg-white/[0.02] transition-colors group">
+                                                    <td className="px-8 py-6 font-mono text-[10px] text-primary">{order.id}</td>
+                                                    <td className="px-8 py-6">
+                                                        <div className="text-white font-bold">{order.customer_email || 'N/A'}</div>
+                                                    </td>
+                                                    <td className="px-8 py-6 text-center text-[10px] text-slate-500">
+                                                        {new Date(order.created_at).toLocaleDateString()}
+                                                    </td>
+                                                    <td className="px-8 py-6 text-center">
+                                                        <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${order.status === 'PAID' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
+                                                            order.status === 'SHIPPED' ? 'bg-primary/10 text-primary border-primary/20' :
+                                                                order.status === 'DELIVERED' ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' :
+                                                                    order.status === 'CANCELLED' ? 'bg-red-500/10 text-red-500 border-red-500/20' :
+                                                                        'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                                                            }`}>
+                                                            {order.status}
                                                         </span>
-                                                    </div>
-                                                </td>
-                                                <td className="px-8 py-6 text-right">
-                                                    <div className="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                        <button onClick={() => setEditingProduct(product)} className="size-10 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-black transition-all flex items-center justify-center">
-                                                            <span className="material-symbols-outlined text-sm">edit</span>
+                                                    </td>
+                                                    <td className="px-8 py-6 text-right font-header font-bold text-white">${(order.total_cents / 100).toLocaleString()}</td>
+                                                    <td className="px-8 py-6 text-right">
+                                                        <button onClick={() => setViewingOrder(order)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center ml-auto">
+                                                            <span className="material-symbols-outlined text-sm">visibility</span>
                                                         </button>
-                                                        <button onClick={() => handleDelete(product.id)} className="size-10 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
-                                                            <span className="material-symbols-outlined text-sm">delete</span>
-                                                        </button>
-                                                    </div>
-                                                </td>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </motion.div>
+                            )}
+
+                            {activeTab === 'leads' && (
+                                <motion.div
+                                    key="leads"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
+                                >
+                                    <table className="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr className="bg-white/5 text-slate-400 text-[10px] font-black uppercase tracking-widest">
+                                                <th className="px-8 py-4">Requestor</th>
+                                                <th className="px-8 py-4">Service Type</th>
+                                                <th className="px-8 py-4 text-center">Urgency</th>
+                                                <th className="px-8 py-4 text-center">Status</th>
+                                                <th className="px-8 py-4 text-right">Date</th>
+                                                <th className="px-8 py-4 text-right">Actions</th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </motion.div>
-                        )}
+                                        </thead>
+                                        <tbody className="divide-y divide-white/5">
+                                            {leads.map(lead => (
+                                                <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors group">
+                                                    <td className="px-8 py-6">
+                                                        <div className="text-white font-bold uppercase tracking-wide">{lead.first_name} {lead.last_name}</div>
+                                                        <div className="text-slate-500 text-[9px] font-black tracking-widest mt-1">{lead.email}</div>
+                                                        <div className="text-primary text-[9px] font-mono mt-0.5">{lead.phone}</div>
+                                                    </td>
+                                                    <td className="px-8 py-6">
+                                                        <div className="text-slate-300 text-xs max-w-[200px] truncate">{lead.service_type}</div>
+                                                    </td>
+                                                    <td className="px-8 py-6 text-center">
+                                                        <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${lead.status === 'NEW' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.2)]' :
+                                                            lead.status === 'CONTACTED' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
+                                                                lead.status === 'SCHEDULED' ? 'bg-primary/10 text-primary border-primary/20' :
+                                                                    lead.status === 'COMPLETED' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
+                                                                        'bg-slate-500/10 text-slate-500 border-white/10'
+                                                            }`}>
+                                                            {lead.status || 'NEW'}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-8 py-6 text-right text-[10px] text-slate-500">
+                                                        <div className="flex items-center justify-end gap-3">
+                                                            <span className="font-mono">{new Date(lead.created_at).toLocaleDateString()}</span>
+                                                            <button onClick={() => setViewingLead(lead)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center">
+                                                                <span className="material-symbols-outlined text-sm">manage_accounts</span>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </motion.div>
+                            )}
 
-                        {activeTab === 'orders' && (
-                            <motion.div
-                                key="orders"
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 10 }}
-                            >
-                                <table className="w-full text-left border-collapse">
-                                    <thead>
-                                        <tr className="bg-white/5 text-slate-400 text-[10px] font-black uppercase tracking-widest">
-                                            <th className="px-8 py-4">Order ID</th>
-                                            <th className="px-8 py-4">Customer</th>
-                                            <th className="px-8 py-4 text-center">Date</th>
-                                            <th className="px-8 py-4 text-center">Status</th>
-                                            <th className="px-8 py-4 text-right">Total</th>
-                                            <th className="px-8 py-4 text-right">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-white/5">
-                                        {orders.map(order => (
-                                            <tr key={order.id} className="hover:bg-white/[0.02] transition-colors group">
-                                                <td className="px-8 py-6 font-mono text-[10px] text-primary">{order.id}</td>
-                                                <td className="px-8 py-6">
-                                                    <div className="text-white font-bold">{order.customer_email || 'N/A'}</div>
-                                                </td>
-                                                <td className="px-8 py-6 text-center text-[10px] text-slate-500">
-                                                    {new Date(order.created_at).toLocaleDateString()}
-                                                </td>
-                                                <td className="px-8 py-6 text-center">
-                                                    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${order.status === 'PAID' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
-                                                        order.status === 'SHIPPED' ? 'bg-primary/10 text-primary border-primary/20' :
-                                                            order.status === 'DELIVERED' ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' :
-                                                                order.status === 'CANCELLED' ? 'bg-red-500/10 text-red-500 border-red-500/20' :
-                                                                    'bg-amber-500/10 text-amber-500 border-amber-500/20'
-                                                        }`}>
-                                                        {order.status}
-                                                    </span>
-                                                </td>
-                                                <td className="px-8 py-6 text-right font-header font-bold text-white">${(order.total_cents / 100).toLocaleString()}</td>
-                                                <td className="px-8 py-6 text-right">
-                                                    <button onClick={() => setViewingOrder(order)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center ml-auto">
-                                                        <span className="material-symbols-outlined text-sm">visibility</span>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </motion.div>
-                        )}
-
-                        {activeTab === 'leads' && (
-                            <motion.div
-                                key="leads"
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 10 }}
-                            >
-                                <table className="w-full text-left border-collapse">
-                                    <thead>
-                                        <tr className="bg-white/5 text-slate-400 text-[10px] font-black uppercase tracking-widest">
-                                            <th className="px-8 py-4">Requestor</th>
-                                            <th className="px-8 py-4">Service Type</th>
-                                            <th className="px-8 py-4 text-center">Urgency</th>
-                                            <th className="px-8 py-4 text-center">Status</th>
-                                            <th className="px-8 py-4 text-right">Date</th>
-                                            <th className="px-8 py-4 text-right">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-white/5">
-                                        {leads.map(lead => (
-                                            <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors group">
-                                                <td className="px-8 py-6">
-                                                    <div className="text-white font-bold uppercase tracking-wide">{lead.first_name} {lead.last_name}</div>
-                                                    <div className="text-slate-500 text-[9px] font-black tracking-widest mt-1">{lead.email}</div>
-                                                    <div className="text-primary text-[9px] font-mono mt-0.5">{lead.phone}</div>
-                                                </td>
-                                                <td className="px-8 py-6">
-                                                    <div className="text-slate-300 text-xs max-w-[200px] truncate">{lead.service_type}</div>
-                                                </td>
-                                                <td className="px-8 py-6 text-center">
-                                                    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${lead.status === 'NEW' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.2)]' :
-                                                        lead.status === 'CONTACTED' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
-                                                            lead.status === 'SCHEDULED' ? 'bg-primary/10 text-primary border-primary/20' :
-                                                                lead.status === 'COMPLETED' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
-                                                                    'bg-slate-500/10 text-slate-500 border-white/10'
-                                                        }`}>
-                                                        {lead.status || 'NEW'}
-                                                    </span>
-                                                </td>
-                                                <td className="px-8 py-6 text-right text-[10px] text-slate-500">
-                                                    <div className="flex items-center justify-end gap-3">
-                                                        <span className="font-mono">{new Date(lead.created_at).toLocaleDateString()}</span>
-                                                        <button onClick={() => setViewingLead(lead)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center">
-                                                            <span className="material-symbols-outlined text-sm">manage_accounts</span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </motion.div>
-                        )}
-
-                        {activeTab === 'schedule' && (
-                            <ScheduleManager />
-                        )}
+                            {activeTab === 'schedule' && (
+                                <ScheduleManager />
+                            )}
 
 
-                    </AnimatePresence>
-                )}
-            </div>
-        </main>
+                        </AnimatePresence>
+                    )}
+                </div>
+            </main>
 
 
-        {/* Modals */}
-        <AnimatePresence>
-            {
-                (isAdding || editingProduct) && (
-                    <ProductModal
-                        product={editingProduct || undefined}
-                        onClose={() => { setIsAdding(false); setEditingProduct(null); }}
-                        onSave={() => { setIsAdding(false); setEditingProduct(null); fetchProducts(); }}
-                    />
-                )
-            }
-            {
-                viewingLead && (
-                    <LeadDetailModal
-                        lead={viewingLead}
-                        onClose={() => setViewingLead(null)}
-                        onSave={() => { setViewingLead(null); fetchLeads(); }}
-                    />
-                )
-            }
-            {
-                viewingOrder && (
-                    <OrderDetailModal
-                        order={viewingOrder}
-                        onClose={() => setViewingOrder(null)}
-                        onSave={() => { setViewingOrder(null); fetchOrders(); }}
-                    />
-                )
-            }
-        </AnimatePresence >
-    </div >
-);
+            {/* Modals */}
+            <AnimatePresence>
+                {
+                    (isAdding || editingProduct) && (
+                        <ProductModal
+                            product={editingProduct || undefined}
+                            onClose={() => { setIsAdding(false); setEditingProduct(null); }}
+                            onSave={() => { setIsAdding(false); setEditingProduct(null); fetchProducts(); }}
+                        />
+                    )
+                }
+                {
+                    viewingLead && (
+                        <LeadDetailModal
+                            lead={viewingLead}
+                            onClose={() => setViewingLead(null)}
+                            onSave={() => { setViewingLead(null); fetchLeads(); }}
+                        />
+                    )
+                }
+                {
+                    viewingOrder && (
+                        <OrderDetailModal
+                            order={viewingOrder}
+                            onClose={() => setViewingOrder(null)}
+                            onSave={() => { setViewingOrder(null); fetchOrders(); }}
+                        />
+                    )
+                }
+            </AnimatePresence >
+        </div >
+    );
 }
 
 function LeadDetailModal({ lead, onClose, onSave }: { lead: Lead, onClose: () => void, onSave: () => void }) {
