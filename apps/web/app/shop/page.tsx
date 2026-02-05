@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
 
 
-import { AdminCalendar } from '@/components/AdminCalendar';
+
 
 export default function ShopPage() {
     const { addToCart, items, openCart } = useCart();
@@ -26,7 +26,7 @@ export default function ShopPage() {
     const { content } = useContent();
 
     const sectionOrder = content?.shop?.sections || [
-        "dual_inverter", "universal_fit", "base", "ge", "casement", "logistics", "brand-spotlight", "sizing-guide", "faq"
+        "dual_inverter", "universal_fit", "base", "ge", "casement", "logistics", "brand-spotlight", "sizing-guide"
     ];
 
 
@@ -41,6 +41,7 @@ export default function ShopPage() {
                     icon="energy_savings_leaf"
                     badge="$45 Hawaii Energy Rebate"
                     narrativeKey="dual_inverter"
+                    hideDescription={true}
                 />
                 <ProductGrid
                     products={products.filter(p => {
@@ -58,6 +59,7 @@ export default function ShopPage() {
                     contentKey="shop.universal_fit"
                     icon="settings_overscan"
                     narrativeKey="universal_fit"
+                    hideDescription={true}
                 />
                 <ProductGrid
                     products={products.filter(p => {
@@ -68,13 +70,14 @@ export default function ShopPage() {
                 />
             </div>
         ),
-        "educational-benefits": <AdminCalendar />,
+
         "base": (
             <div id="base" className="relative space-y-12">
                 <SectionHeader
                     contentKey="shop.base"
                     icon="ac_unit"
                     narrativeKey="base"
+                    hideDescription={true}
                 />
                 <ProductGrid
                     products={products.filter(p => {
@@ -93,6 +96,7 @@ export default function ShopPage() {
                     icon="token"
                     narrativeKey="ge"
                     narrativeColor="accent"
+                    hideDescription={true}
                 />
                 <ProductGrid
                     products={products.filter(p => p.name.includes('AJCQ'))}
@@ -106,6 +110,7 @@ export default function ShopPage() {
                     contentKey="shop.casement"
                     icon="vertical_split"
                     narrativeKey="casement"
+                    hideDescription={true}
                 />
                 <ProductGrid
                     products={products.filter(p => p.name.includes('RAB26A'))}
@@ -148,7 +153,7 @@ export default function ShopPage() {
         ),
         "sizing-guide": <SizingGuideSection />,
         "rebate": <RebateSection />,
-        "faq": <FAQSection />
+
     };
 
     // Fetch Products from API
@@ -464,14 +469,7 @@ function SectionHeader({
                     )}
                 </div>
             )}
-            <div className="flex flex-col md:flex-row gap-6 items-center justify-center pt-3">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent max-w-[60px] hidden md:block"></div>
-                <Link href="#sizing-guide" className="text-[8px] font-black uppercase tracking-[0.4em] text-slate-500 hover:text-white transition-all flex items-center gap-2 active:scale-95 group-hover/section:text-primary">
-                    <span className="material-symbols-outlined text-base">straighten</span>
-                    Verify Room Sizing
-                </Link>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent max-w-[60px] hidden md:block"></div>
-            </div>
+
         </div>
     );
 }
@@ -650,37 +648,7 @@ function RebateSection() {
                     })}
                 </div>
 
-                {/* Why It Matters (Bento Highlights) */}
-                <div className="bg-[#0f131a]/40 backdrop-blur-3xl border border-white/5 rounded-[2rem] p-8 md:p-12 space-y-10 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-50"></div>
 
-                    <div className="relative z-10 text-center space-y-4">
-                        <h4 className="text-emerald-500 font-header font-black uppercase tracking-[0.4em] text-[10px] md:text-[11px]">
-                            <EditableText contentKey="shop.rebate.why_matters.title" />
-                        </h4>
-                        <h3 className="text-2xl md:text-4xl font-header font-black text-white uppercase tracking-tighter">
-                            <EditableText contentKey="shop.rebate.why_matters.title_highlight" />
-                        </h3>
-                        <p className="text-slate-400 max-w-3xl mx-auto text-sm md:text-base leading-relaxed font-medium uppercase tracking-widest opacity-80">
-                            <EditableText contentKey="shop.rebate.why_matters.description" />
-                        </p>
-                    </div>
-
-                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {[0, 1, 2].map((i) => (
-                            <div key={i} className="flex flex-col items-center gap-4 p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/30 transition-all duration-500 group/item">
-                                <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-500 group-hover/item:scale-110 transition-transform">
-                                    <span className="material-symbols-outlined text-2xl">
-                                        <EditableText contentKey={`shop.rebate.why_matters.highlights.${i}.icon`} />
-                                    </span>
-                                </div>
-                                <span className="text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.2em] text-white/90 text-center">
-                                    <EditableText contentKey={`shop.rebate.why_matters.highlights.${i}.title`} />
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
             </div>
         </section>
     );
@@ -1018,39 +986,7 @@ function SizingGuideSection() {
     );
 }
 
-function FAQSection() {
-    return (
-        <section className="mb-20 max-w-4xl mx-auto">
-            <div className="flex flex-col items-center justify-center gap-6 mb-12 text-center">
-                <span className="text-primary font-header font-black uppercase tracking-[0.6em] text-[10px] md:text-[11px] block opacity-70">
-                    Knowledge Infrastructure
-                </span>
-                <h2 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tight drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                    <EditableText contentKey="shop.faq.title" />
-                </h2>
-                <div className="h-px w-24 bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
-            </div>
 
-            <div className="grid gap-4">
-                {[
-                    { q: "Do you offer installation for Window ACs?", a: "Unless specified, Window ACs are cash-and-carry. However, we offer professional installation services for an additional fee, especially for second-story windows or custom mounting requirements." },
-                    { q: "What is your return policy?", a: "All sales are final. Defective units are covered under the manufacturer&apos;s warranty, which we service directly here in Waipahu as an authorized center." },
-                    { q: "How do I know if I have a 115V or 230V outlet?", a: "Standard household plugs are 115V (parallel prongs). 230V outlets are typically larger with horizontal or T-shaped prongs and are required for units 18,000 BTU and above. Check your wall socket before buying!" },
-                ].map((faq, i) => (
-                    <details key={i} className="group bg-charcoal border border-white/5 rounded-2xl overflow-hidden open:bg-white/[0.02] open:border-primary/40 open:shadow-[0_0_30px_rgba(0,174,239,0.05)] transition-all duration-300 hover:border-white/10">
-                        <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-slate-300 hover:text-white transition-colors select-none text-sm md:text-base uppercase tracking-wide">
-                            {faq.q}
-                            <span className="material-symbols-outlined text-slate-500 group-open:rotate-180 group-open:text-primary transition-all duration-300 bg-white/5 rounded-full p-2 group-hover:bg-white/10">expand_more</span>
-                        </summary>
-                        <div className="px-6 pb-8 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-6 animate-in fade-in slide-in-from-top-2">
-                            {faq.a}
-                        </div>
-                    </details>
-                ))}
-            </div>
-        </section>
-    );
-}
 
 function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; onQuickAdd: (p: Product) => void; rebate?: string }) {
     if (products.length === 0) {
