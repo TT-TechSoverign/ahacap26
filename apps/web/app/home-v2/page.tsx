@@ -1,6 +1,6 @@
 import { Render } from "@measured/puck";
 import config from "../../puck.config";
-import NavbarV2 from '@/components/NavbarV2';
+
 import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
 import Section4Projects from '@/components/Section4Projects';
 import { BackToTop } from '@/components/BackToTop';
@@ -144,7 +144,7 @@ export default function HomepageV2() {
 
     return (
         <div className="bg-white text-slate-900 min-h-screen font-sans">
-            <NavbarV2 />
+
             <main className="pt-[220px] bg-slate-900">
                 <Section2OurServicesV2 />
                 <Section4Projects />

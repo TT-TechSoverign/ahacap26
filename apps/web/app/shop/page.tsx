@@ -13,8 +13,8 @@ import { useContent } from '@/lib/context/ContentContext';
 import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
+
+
 import { AdminCalendar } from '@/components/AdminCalendar';
 
 export default function ShopPage() {
@@ -191,7 +191,7 @@ export default function ShopPage() {
 
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
-            <Navbar />
+
             <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[180px] md:pt-[300px] pb-32 flex-grow">
                 {/* Hero Branding Section (Centered Vertical Axis) */}
                 <div className="flex flex-col items-center text-center gap-3 md:gap-6 mb-6 md:mb-10 border-b border-white/5 pb-6 md:pb-10 relative">

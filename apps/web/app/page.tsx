@@ -1,6 +1,6 @@
 import { Render } from "@measured/puck";
 import config from "../puck.config";
-import Navbar from '@/components/Navbar';
+
 import { BackToTop } from '@/components/BackToTop';
 
 // Force dynamic since we fetch fresh content
@@ -125,7 +125,7 @@ export default async function LandingPage() {
 
     return (
         <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 selection:bg-primary selection:text-white min-h-screen">
-            <Navbar />
+
 
             <main className="pt-[140px] md:pt-[240px]">
                 <Render config={config} data={data} />

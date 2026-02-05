@@ -12,8 +12,8 @@ import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+
+
 
 export default function ProductDetailPage() {
     const params = useParams();
@@ -107,7 +107,7 @@ export default function ProductDetailPage() {
 
     return (
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
-            <Navbar />
+
 
             <main className="pt-48 md:pt-56 pb-20 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
