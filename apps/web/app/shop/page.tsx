@@ -624,7 +624,6 @@ function RebateSection() {
 
                         if (isDownload) {
                             return (
-                            return (
                                 <a
                                     key={i}
                                     href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
