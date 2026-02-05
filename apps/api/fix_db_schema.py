@@ -8,65 +8,51 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("db_fix")
 
 async def fix_schema():
-    async with engine.begin() as conn:
-        logger.info("Attempting to add 'items_json' column to 'orders' table...")
-        try:
-            # Add items_json column
-            await conn.execute(text("ALTER TABLE orders ADD COLUMN IF NOT EXISTS items_json TEXT;"))
-            logger.info("Successfully added 'items_json' column.")
-            
-            # Add customer_email column if missing (just in case)
-            await conn.execute(text("ALTER TABLE orders ADD COLUMN IF NOT EXISTS customer_email VARCHAR;"))
-            logger.info("Successfully checked 'customer_email' column.")
+    async with engine.connect() as conn:
+        await conn.execute(text("COMMIT")) # Ensure we are not in a failed transaction state
+        
+        logger.info("Starting Schema Validation...")
+        
+        # Helper to check column existence
+        async def check_column(table, column):
+            result = await conn.execute(text(
+                f"SELECT column_name FROM information_schema.columns WHERE table_name='{table}' AND column_name='{column}'"
+            ))
+            return result.scalar() is not None
 
-            # --- PRODUCT SCHEMA UPDATES ---
-            # Add new product columns
-            product_cols = [
-                ("image_url", "VARCHAR"),
-                ("btu", "INTEGER"),
-                ("voltage", "VARCHAR"),
-                ("coverage", "VARCHAR"),
-                ("performance_specs", "VARCHAR"),
-                ("key_spec", "VARCHAR"),
-                ("noise_level", "VARCHAR"),
-                ("dehumidification", "VARCHAR")
-            ]
-
-            for col_name, col_type in product_cols:
+        # Helper to add column
+        async def add_column(table, column, type_def):
+            if not await check_column(table, column):
+                logger.info(f"Adding missing column: {table}.{column}")
                 try:
-                    await conn.execute(text(f"ALTER TABLE products ADD COLUMN IF NOT EXISTS {col_name} {col_type};"))
-                    logger.info(f"Verified column: products.{col_name}")
+                    await conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {type_def}"))
+                    await conn.execute(text("COMMIT"))
                 except Exception as e:
-                    # SQLite might complain about syntax or something, but usually fine.
-                    # Postgres supports IF NOT EXISTS in newer versions.
-                    # Detailed catch to avoid stopping on one failure
-                    logger.warning(f"Note on {col_name}: {e}")
+                    logger.error(f"Failed to add {column}: {e}")
+                    await conn.execute(text("ROLLBACK"))
+            else:
+                logger.info(f"Column exists: {table}.{column}")
 
-            # --- PRODUCT SCHEMA UPDATES ---
-            # Add new product columns
-            product_cols = [
-                ("image_url", "VARCHAR"),
-                ("btu", "INTEGER"),
-                ("voltage", "VARCHAR"),
-                ("coverage", "VARCHAR"),
-                ("performance_specs", "VARCHAR"),
-                ("key_spec", "VARCHAR"),
-                ("noise_level", "VARCHAR"),
-                ("dehumidification", "VARCHAR")
-            ]
+        # 1. Orders Table
+        await add_column("orders", "items_json", "TEXT")
+        await add_column("orders", "customer_email", "VARCHAR")
 
-            for col_name, col_type in product_cols:
-                try:
-                    await conn.execute(text(f"ALTER TABLE products ADD COLUMN IF NOT EXISTS {col_name} {col_type};"))
-                    logger.info(f"Verified column: products.{col_name}")
-                except Exception as e:
-                    # SQLite might complain about syntax or something, but usually fine.
-                    # Postgres supports IF NOT EXISTS in newer versions.
-                    # Detailed catch to avoid stopping on one failure
-                    logger.warning(f"Note on {col_name}: {e}")
+        # 2. Products Table
+        product_cols = [
+            ("image_url", "VARCHAR"),
+            ("btu", "INTEGER"),
+            ("voltage", "VARCHAR"),
+            ("coverage", "VARCHAR"),
+            ("performance_specs", "VARCHAR"),
+            ("key_spec", "VARCHAR"),
+            ("noise_level", "VARCHAR"),
+            ("dehumidification", "VARCHAR")
+        ]
 
-        except Exception as e:
-            logger.error(f"Error updating schema: {e}")
+        for col, dtype in product_cols:
+            await add_column("products", col, dtype)
+
+        logger.info("Schema Validation Complete.")
 
 if __name__ == "__main__":
     asyncio.run(fix_schema())
