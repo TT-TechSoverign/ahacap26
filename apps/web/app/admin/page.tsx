@@ -100,7 +100,7 @@ export default function AdminPage() {
     const fetchProducts = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await fetch(`/api/v1/products`);
+            const res = await fetch(`/api/v1/products`, { cache: 'no-store' });
             if (res.ok) {
                 const data = await res.json();
                 setProducts(data);
@@ -115,7 +115,7 @@ export default function AdminPage() {
     const fetchOrders = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await fetch(`/api/v1/admin/orders`);
+            const res = await fetch(`/api/v1/admin/orders`, { cache: 'no-store' });
             if (res.ok) {
                 const data = await res.json();
                 setOrders(data);
@@ -130,7 +130,7 @@ export default function AdminPage() {
     const fetchLeads = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await fetch(`/api/v1/admin/leads`);
+            const res = await fetch(`/api/v1/admin/leads`, { cache: 'no-store' });
             if (res.ok) {
                 const data = await res.json();
                 setLeads(data);
@@ -169,7 +169,7 @@ export default function AdminPage() {
     if (!isAuthenticated) {
         return (
             <div className="min-h-screen bg-black pt-[150px] md:pt-[200px] text-white font-sans selection:bg-primary/30">
-                <NavbarV2 />
+                {/* Navbar Removed for Clean Login */}
 
                 <div className="container mx-auto px-6 max-h-[60vh] flex flex-col items-center justify-center">
                     <motion.div

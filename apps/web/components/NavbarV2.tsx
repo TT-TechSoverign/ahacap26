@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
@@ -42,6 +43,9 @@ export default function NavbarV2() {
     });
 
     const links = content?.navigation?.links || [];
+    const pathname = usePathname();
+
+    if (pathname?.startsWith('/admin')) return null;
 
     return (
         <motion.header
