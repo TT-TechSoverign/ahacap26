@@ -798,7 +798,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-8 space-y-6">
+                <form id="product-form" onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-8 space-y-6">
                     <AnimatePresence mode="wait">
                         {activeTab === 'basic' ? (
                             <motion.div
@@ -963,7 +963,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
 
                 <div className="p-8 pt-0 flex gap-4 bg-[#0a0e14]">
                     <button type="button" onClick={onClose} className="flex-1 border border-white/10 text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-white/5 transition-all">{content.admin.products.modal.cancel}</button>
-                    <button type="submit" className="flex-2 bg-primary text-black font-black uppercase tracking-widest py-4 px-8 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
+                    <button type="submit" form="product-form" className="flex-2 bg-primary text-black font-black uppercase tracking-widest py-4 px-8 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
                         {product ? content.admin.products.modal.save_edit : content.admin.products.modal.save_new}
                     </button>
                 </div>
