@@ -146,7 +146,7 @@ export default function Homepage() {
         <div className="bg-white text-slate-900 min-h-screen font-sans">
             <main className="pt-[220px] bg-slate-900">
                 <Section2OurServicesV2 />
-                <Section4Projects />
+                {/* <Section4Projects /> */}
                 {/* <Render config={config} data={v2Data} /> */}
             </main>
             <BackToTop visible={true} />
