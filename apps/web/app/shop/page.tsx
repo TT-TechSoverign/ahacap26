@@ -570,12 +570,12 @@ function LogisticsSection() {
 
 function RebateSection() {
     return (
-        <section id="rebate" className="relative py-2 md:py-4 overflow-hidden group">
+        <section id="rebate" className="relative pb-8 pt-0 overflow-hidden group">
             {/* Background elements */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
             <div className="absolute inset-0 bg-emerald-500/[0.02] rounded-[2rem] mx-4 md:mx-0"></div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-4 md:space-y-6">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-2 md:space-y-4">
                 {/* Header */}
                 <SectionHeader
                     contentKey="shop.rebate"
