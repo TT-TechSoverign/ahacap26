@@ -440,7 +440,7 @@ function SectionHeader({
                         <>
                             <br className={forceBreak ? "" : "md:hidden"} />
                             <span className={cn(
-                                "text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400",
+                                noBlur ? "text-cyan-400" : "text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400",
                                 noBlur ? "" : "neon-glow"
                             )}>
                                 <EditableText contentKey={titleHighlightKey} />
@@ -568,10 +568,9 @@ function LogisticsSection() {
 }
 
 
-
 function RebateSection() {
     return (
-        <section id="rebate" className="relative py-8 md:py-12 overflow-hidden group">
+        <section id="rebate" className="relative py-4 md:py-8 overflow-hidden group">
             {/* Background elements */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
             <div className="absolute inset-0 bg-emerald-500/[0.02] rounded-[2rem] mx-4 md:mx-0"></div>
@@ -586,7 +585,7 @@ function RebateSection() {
                     noBlur={true}
                     forceBreak={true}
                     topElement={
-                        <div className="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-500 text-[10px] font-header font-black tracking-widest uppercase mb-2">
+                        <div className="inline-flex items-center gap-2 px-4 py-1 bg-cyan-500 border border-cyan-500 rounded-full text-white text-[10px] font-header font-black tracking-widest uppercase mb-2">
                             <span className="material-symbols-outlined text-sm">eco</span>
                             <EditableText contentKey="shop.rebate.badge" />
                         </div>
