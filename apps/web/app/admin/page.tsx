@@ -8,7 +8,7 @@ import Link from 'next/link';
 import content from '@/lib/content/content.json';
 import { AdminCalendar } from '@/components/AdminCalendar';
 import { useContent } from '@/lib/context/ContentContext';
-import { NavbarV2 } from '@/components/NavbarV2';
+import NavbarV2 from '@/components/NavbarV2';
 
 interface Product {
     id: number;
