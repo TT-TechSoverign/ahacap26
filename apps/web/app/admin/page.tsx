@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useCart } from '../../context/CartContext';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -67,6 +67,23 @@ export default function AdminPage() {
     const [viewingOrder, setViewingOrder] = useState<Order | null>(null);
 
     const MASTER_PIN = '8081'; // Discrete PIN
+
+    // --- Scroll Sync Logic (Matches NavbarV2) ---
+    const { scrollY } = useScroll();
+    const [headerVisible, setHeaderVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    // Sync header visibility with scroll direction
+    // calculate direction and toggle visibility
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const direction = latest > lastScrollY ? "down" : "up";
+        if (latest > 50 && direction === "down" && headerVisible) {
+            setHeaderVisible(false);
+        } else if (direction === "up" && !headerVisible) {
+            setHeaderVisible(true);
+        }
+        setLastScrollY(latest);
+    });
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
@@ -191,9 +208,19 @@ export default function AdminPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-0">
-            {/* Admin Header */}
-            <header className="sticky top-0 z-50 w-full bg-[#0a0e14]/80 backdrop-blur-xl border-b border-white/5 px-6 py-4">
+        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[120px] md:pt-[250px]">
+            {/* Admin Header - Fixed below global Navbar */}
+            <motion.header
+                initial={{ y: 0 }}
+                animate={{ y: headerVisible ? 0 : -400 }}
+                transition={{
+                    type: "spring",
+                    stiffness: 150,
+                    damping: 25,
+                    delay: headerVisible ? 0.1 : 0
+                }}
+                className="fixed top-[106px] md:top-[236px] left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
+            >
                 <div className="max-w-[1440px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-8">
                         <div className="flex items-center gap-4">
@@ -235,7 +262,7 @@ export default function AdminPage() {
                         </button>
                     </div>
                 </div>
-            </header>
+            </motion.header>
 
             <main className="max-w-[1440px] mx-auto px-6 pt-12">
                 {/* Stats Grid */}
