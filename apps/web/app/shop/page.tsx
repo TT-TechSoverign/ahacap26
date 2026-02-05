@@ -738,7 +738,7 @@ function SizingGuideSection() {
             />
 
             {/* Desktop Table View */}
-            <div className="!hidden md:!block overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-charcoal relative">
+            <div className="!hidden md:!block mt-8 md:mt-12 overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-charcoal relative">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-cyan-400 to-primary opacity-80"></div>
                 <table className="w-full text-left border-collapse">
                     <thead>
