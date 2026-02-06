@@ -30,15 +30,30 @@ chmod -R 777 apps/web/storage
 echo "🛑 Stopping all containers..."
 docker compose down
 
-# 3. AGGRESSIVE PRUNE
-# -a: Remove all unused images not just dangling ones
-# -f: Force
-echo "🧹 Pruning System (Images, Containers, Networks)..."
-docker system prune -a -f
+# 3. SMART PRUNE LOGIC
+# Check available space on / (root) in 1K blocks
+AVAILABLE_SPACE=$(df -P / | awk 'NR==2 {print $4}')
+# Threshold: 2GB in 1K blocks = 2097152
+THRESHOLD=2097152
 
-# 4. PRUNE BUILD CACHE (Critical for Space Issues)
-echo "🧹 Pruning Build Cache..."
-docker builder prune -a -f
+if [[ "$1" == "--nuclear" ]]; then
+    echo "☢️ NUCLEAR MODE REQUESTED via flag. Wiping everything..."
+    echo "🧹 Pruning System (Images, Containers, Networks)..."
+    docker system prune -a -f
+    echo "🧹 Pruning Build Cache..."
+    docker builder prune -a -f
+elif [ "$AVAILABLE_SPACE" -lt "$THRESHOLD" ]; then
+    echo "⚠️ LOW DISK SPACE DETECTED (<2GB). Engaging Nuclear Prune to prevent ENOSPC..."
+    echo "🧹 Pruning System (Images, Containers, Networks)..."
+    docker system prune -a -f
+    echo "🧹 Pruning Build Cache..."
+    docker builder prune -a -f
+else
+    echo "✨ HEALTHY DISK SPACE DETECTED. Using SMART PRUNE (Preserving Build Cache)..."
+    echo "   Only removing stopped containers and dangling images."
+    # Only remove Stopped containers and Dangling images. KEEP build cache.
+    docker system prune -f 
+fi
 
 # 5. Check Disk Space (Log it)
 echo "💾 Disk Space Check:"
