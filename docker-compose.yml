@@ -17,6 +17,7 @@ services:
       - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
     volumes:
       - ./apps/web/lib/content:/app/apps/web/lib/content
+      - ./apps/web/storage:/app/apps/web/storage
     depends_on:
       api:
         condition: service_healthy

@@ -9,40 +9,50 @@ export async function PATCH(request: Request) {
     try {
         const updates = await request.json();
 
-        console.log('[API] PATCH /admin/schedule - Start');
+        console.log('[API] PATCH /admin/schedule - Twin-Path Write');
         console.log('[API] CWD:', process.cwd());
 
-        // Try multiple paths to handle local vs docker contexts
-        const possiblePaths = [
+        // Paths
+        const persistenceDir = path.join(process.cwd(), 'apps/web/storage');
+        const persistencePath = path.join(persistenceDir, 'content.json');
+
+        const defaultPaths = [
             path.join(process.cwd(), 'apps/web/lib/content/content.json'), // Docker/Root
             path.join(process.cwd(), 'lib/content/content.json')           // App Dir
         ];
 
-        console.log('[API] Checking paths:', possiblePaths);
-
-        const filePath = possiblePaths.find(p => fs.existsSync(p));
-
-        if (!filePath) {
-            console.error('[API] Content file not found in paths:', possiblePaths);
-            return NextResponse.json({ error: 'Content file not found', checkedPaths: possiblePaths }, { status: 404 });
+        // 1. Resolve Current State (Read Priority: Persistence -> Default)
+        let currentContent;
+        if (fs.existsSync(persistencePath)) {
+            console.log('[API] Reading existing persistence:', persistencePath);
+            currentContent = JSON.parse(fs.readFileSync(persistencePath, 'utf8'));
+        } else {
+            console.log('[API] No persistence found. Reading factory default to seed.');
+            const defaultPath = defaultPaths.find(p => fs.existsSync(p));
+            if (!defaultPath) {
+                console.error('[API] Critical: Factory default missing.');
+                return NextResponse.json({ error: 'Factory default missing' }, { status: 500 });
+            }
+            currentContent = JSON.parse(fs.readFileSync(defaultPath, 'utf8'));
         }
 
-        console.log('[API] Selected File Path:', filePath);
-
-        const fileContent = fs.readFileSync(filePath, 'utf8');
-        const content = JSON.parse(fileContent);
-
-        // Update footer_schedule
-        content.footer_schedule = {
-            ...content.footer_schedule,
+        // 2. Apply Updates
+        currentContent.footer_schedule = {
+            ...currentContent.footer_schedule,
             ...updates
         };
 
-        // Write back to file
-        fs.writeFileSync(filePath, JSON.stringify(content, null, 4));
-        console.log('[API] Write successful to:', filePath);
+        // 3. Ensure Persistence Directory Exists
+        if (!fs.existsSync(persistenceDir)) {
+            console.log('[API] Creating persistence directory:', persistenceDir);
+            fs.mkdirSync(persistenceDir, { recursive: true });
+        }
 
-        return NextResponse.json({ success: true, data: content, debug_path: filePath });
+        // 4. Write to Persistence Layer
+        fs.writeFileSync(persistencePath, JSON.stringify(currentContent, null, 4));
+        console.log('[API] Write confirmed to persistence layer:', persistencePath);
+
+        return NextResponse.json({ success: true, data: currentContent, debug_path: persistencePath });
     } catch (error) {
         console.error('[API] Failed to update schedule:', error);
         return NextResponse.json({ error: 'Failed to update schedule' }, { status: 500 });
