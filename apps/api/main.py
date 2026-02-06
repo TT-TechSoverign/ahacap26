@@ -55,6 +55,10 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"WARNING: Database connection failed: {e}")
     print("DEBUG: Startup Complete.")
+    
+    # Verify Email
+    email_service.verify_connection()
+
     yield
     await close_redis()
     await engine.dispose()
