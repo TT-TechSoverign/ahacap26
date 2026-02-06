@@ -161,10 +161,6 @@ export default function ProductDetailPage() {
                                 <span className="px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-md text-primary text-[9px] font-header font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
                                     {product.category.replace('_', ' ')}
                                 </span>
-                                <span className="px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-md text-emerald-400 text-[9px] font-header font-black uppercase tracking-[0.4em] flex items-center gap-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                                    Operational Inventory
-                                </span>
                             </div>
 
                             <h1 className="text-3xl md:text-5xl font-header font-black uppercase leading-[0.9] tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
