@@ -176,16 +176,14 @@ export default function ShopPage() {
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
 
-            <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[160px] md:pt-[240px] pb-20 flex-grow">
+            <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[200px] md:pt-[340px] pb-20 flex-grow">
                 {/* Hero Branding Section (Centered Vertical Axis) */}
                 <div className="flex flex-col items-center text-center gap-2 md:gap-4 mb-6 md:mb-8 border-b border-white/5 pb-6 md:pb-8 relative">
                     <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full -z-10 opacity-30"></div>
                     <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
 
                     <div className="space-y-2 w-full max-w-7xl mx-auto flex flex-col items-center">
-                        <span className="text-primary font-header font-black uppercase tracking-[0.6em] text-[8px] md:text-[9px] block animate-pulse">
-                            <EditableText contentKey="shop.hero.subtitle" />
-                        </span>
+
                         <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-header font-black leading-[0.9] tracking-tighter uppercase px-4 neon-glow">
                             <span className="text-white">
                                 <EditableText contentKey="shop.hero.title_word1" />
