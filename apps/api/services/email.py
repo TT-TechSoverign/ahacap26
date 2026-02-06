@@ -309,3 +309,111 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     
     # Run synchronous SMTP code in thread pool
     await asyncio.get_event_loop().run_in_executor(executor, send_raw_email, to_email, subject, html_body)
+
+async def send_inquiry_notification(lead):
+    """
+    Sends an Admin Notification when a new lead/inquiry comes in via the Contact Wizard.
+    """
+    try:
+        logger.info(f"Preparing Inquiry Notification for Lead ID: {lead.id}")
+
+        subject = f"🔔 New Inquiry: {lead.first_name} {lead.last_name} ({lead.service_type})"
+        
+        # --- HTML BODY ---
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                body {{ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 0; }}
+                .container {{ max-width: 600px; margin: 0 auto; background-color: #1e1e1e; border: 1px solid #333; }}
+                .header {{ background-color: #000000; padding: 20px; text-align: center; border-bottom: 2px solid #00aeef; }}
+                .logo {{ max-width: 200px; }}
+                .content {{ padding: 30px; }}
+                h1 {{ color: #ffffff; font-size: 24px; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; }}
+                .highlight {{ color: #00aeef; font-weight: bold; }}
+                .section {{ margin-bottom: 25px; background-color: #252525; padding: 15px; border-left: 4px solid #00aeef; }}
+                .label {{ font-size: 11px; text-transform: uppercase; color: #888; letter-spacing: 1px; margin-bottom: 5px; display: block; }}
+                .value {{ font-size: 16px; color: #fff; font-weight: 500; display: block; }}
+                .meta-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }}
+                .footer {{ background-color: #000000; padding: 20px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #333; }}
+                a.btn {{ display: inline-block; background-color: #00aeef; color: #000000; padding: 12px 25px; text-decoration: none; font-weight: bold; text-transform: uppercase; border-radius: 4px; margin-top: 10px; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <img src="data:image/png;base64,{LOGO_B64}" alt="AHAC Logo" class="logo">
+                </div>
+                <div class="content">
+                    <h1>New <span class="highlight">Service Inquiry</span></h1>
+                    <p>You have received a new request from the website Dispatch Wizard.</p>
+
+                    <div class="section">
+                        <span class="label">Customer</span>
+                        <span class="value">{lead.first_name} {lead.last_name}</span>
+                        <br>
+                        <div class="meta-grid">
+                            <div>
+                                <span class="label">Phone</span>
+                                <a href="tel:{lead.phone}" style="color: #00aeef; text-decoration: none;">{lead.phone}</a>
+                            </div>
+                            <div>
+                                <span class="label">Email</span>
+                                <a href="mailto:{lead.email}" style="color: #00aeef; text-decoration: none;">{lead.email}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <span class="label">Service Requested</span>
+                        <span class="value" style="color: #00aeef;">{lead.service_type}</span>
+                        <br>
+                        <span class="label">Urgency / Timing</span>
+                        <span class="value">{lead.urgency}</span>
+                    </div>
+
+                    <div class="section">
+                        <span class="label">Location</span>
+                        <span class="value">{lead.address}</span>
+                        <span class="value">{lead.city}, {lead.zip}</span>
+                    </div>
+
+                    <div class="section">
+                        <span class="label">Notes / Preferences</span>
+                        <span class="value">{lead.notes or "No additional notes."}</span>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="mailto:{lead.email}?subject=Re: Your AHAC Service Request - {lead.service_type}" class="btn">Reply to Customer</a>
+                    </div>
+                </div>
+                <div class="footer">
+                    &copy; 2026 Affordable Home AC & Heating.<br>
+                    Internal Notification System.
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+
+        message = MIMEMultipart("alternative")
+        message["Subject"] = subject
+        message["From"] = f"AHAC Notifications <{SMTP_USER}>"
+        message["To"] = ADMIN_EMAIL
+        
+        # Attach parts
+        message.attach(MIMEText(html_content, "html"))
+
+        # Send
+        logger.info(f"Connecting to SMTP {SMTP_SERVER}...")
+        async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
+            await smtp.login(SMTP_USER, SMTP_PASSWORD)
+            await smtp.send_message(message)
+            
+        logger.info("✅ Inquiry Notification Sent Successfully.")
+
+    except Exception as e:
+        logger.error(f"❌ Failed to send inquiry notification: {e}")
+        import traceback
+        traceback.print_exc()

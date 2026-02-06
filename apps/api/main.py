@@ -84,6 +84,9 @@ app.include_router(snippets.router, prefix="/api/v1/content/snippets", tags=["Sn
 from routers import admin
 app.include_router(admin.router, prefix="/api/v1/admin", tags=["Admin"])
 
+from routers import leads
+app.include_router(leads.router, prefix="/api/v1/leads", tags=["Leads"])
+
 # --- WEBHOOKS ---
 async def process_stripe_event(event: dict):
     stripe_pid = None
