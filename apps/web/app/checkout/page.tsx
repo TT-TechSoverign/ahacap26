@@ -96,7 +96,7 @@ function CheckoutContent() {
     }
 
     return (
-        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8" style={{ paddingTop: '280px' }}>
+        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[180px] md:pt-[260px]">
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}
@@ -110,7 +110,7 @@ function CheckoutContent() {
                             YES I'M <span className="italic">HOT!</span>
                         </span>
                         <h1 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tighter drop-shadow-[0_0_30px_rgba(6,182,212,0.5)] leading-none">
-                            Checkout v3
+                            Checkout
                         </h1>
                     </div>
                     <div className="flex items-center gap-6 text-slate-500 font-header font-black text-[10px] uppercase tracking-[0.3em]">
@@ -241,7 +241,7 @@ function CheckoutContent() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 }}
-                            className={`bg-[#0f131a] border border-emerald-500/20 bg-emerald-900/5 p-4 md:p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all duration-700 ring-1 ring-white/5 order-3 lg:order-none ${step === 'payment' ? 'ring-2 ring-emerald-500 border-emerald-500/50' : 'opacity-40 grayscale'}`}
+                            className={`bg-[#0f131a] border border-emerald-500/20 bg-emerald-900/5 p-4 md:p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all duration-700 ring-1 ring-white/5 order-3 lg:order-none ${step === 'payment' ? 'ring-2 ring-emerald-500 border-emerald-500/50' : ''}`}
                         >
                             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 group-hover:scale-110">
                                 <span className="material-symbols-outlined text-6xl md:text-9xl text-emerald-500">payments</span>
@@ -267,10 +267,9 @@ function CheckoutContent() {
                                             setStep('payment');
                                         }}
                                         className="w-full py-4 md:py-5 bg-cyan-500 hover:bg-cyan-400 text-[#05070a] font-header font-black uppercase tracking-[0.3em] text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] active:scale-95 flex items-center justify-center gap-3"
-                                        style={{ backgroundColor: '#06b6d4', boxShadow: '0 0 20px rgba(6,182,212,0.3)' }}
                                     >
-                                        <span className="hidden md:inline">Next Phase: Payment Architecture</span>
-                                        <span className="md:hidden">Proceed to Payment</span>
+                                        <span className="hidden md:inline">Proceed To Secure Checkout VIA Stripe</span>
+                                        <span className="md:hidden">Proceed To Secure Checkout</span>
                                         <span className="material-symbols-outlined text-sm">arrow_forward</span>
                                     </button>
                                 )}
