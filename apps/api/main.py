@@ -91,21 +91,36 @@ async def process_stripe_event(event: dict):
     receipt_email = None
     amount_received = 0
     items_data = []
+    
+    # New Data Containers
+    customer_info = {}
+    payment_info = {"brand": "Credit Card", "last4": ""}
 
     try:
+        obj = event['data']['object']
+        
+        # Determine Source
         if event['type'] == 'payment_intent.succeeded':
-            obj = event['data']['object']
             stripe_pid = obj['id']
             receipt_email = obj.get('receipt_email')
             amount_received = obj.get('amount_received')
             metadata = obj.get('metadata', {})
             
         elif event['type'] == 'checkout.session.completed':
-            obj = event['data']['object']
             stripe_pid = obj.get('payment_intent')
+            # Extract main email
             receipt_email = obj.get('customer_details', {}).get('email')
             amount_received = obj.get('amount_total')
             metadata = obj.get('metadata', {})
+            
+            # --- Extract Expanded Customer/Billing Info ---
+            cust = obj.get('customer_details', {})
+            customer_info = {
+                "name": cust.get('name', 'Valued Customer'),
+                "email": cust.get('email', receipt_email),
+                "phone": cust.get('phone', ''),
+                "address": cust.get('address', {}) 
+            }
             
             # Retrieve line items
             try:
@@ -119,6 +134,24 @@ async def process_stripe_event(event: dict):
                     })
             except Exception as e:
                 print(f"Error fetching line items: {e}")
+
+        # --- Extract Payment Method Info (Brand/Last4) ---
+        if stripe_pid:
+            try:
+                # Expand payment_method to get card details
+                pi = stripe.PaymentIntent.retrieve(stripe_pid, expand=['payment_method'])
+                if pi.payment_method:
+                    # Check if it's a dict (expanded) or string (ID) - retrieve expanding ensures it's dict usually
+                    pm = pi.payment_method
+                    if isinstance(pm, dict) and pm.get('card'):
+                        card = pm.get('card')
+                        payment_info = {
+                            "brand": card.get('brand', 'Card').title(),
+                            "last4": card.get('last4', '****')
+                        }
+            except Exception as e:
+                print(f"Error fetching Payment Method details: {e}")
+
 
         if stripe_pid:
             fulfillment_mode = metadata.get('fulfillment_mode', 'pickup')
@@ -155,10 +188,16 @@ async def process_stripe_event(event: dict):
                 target_email = order.customer_email or receipt_email
                 if target_email:
                     print(f"Dispatching email to {target_email}...")
+                    
+                    # Call updated service with new args
                     await email_service.send_order_confirmation(
-                        target_email, order.id, order.total_cents, 
+                        target_email, 
+                        order.id, 
+                        order.total_cents, 
                         fulfillment_mode=fulfillment_mode,
-                        items=items_data
+                        items=items_data,
+                        customer_info=customer_info,
+                        payment_info=payment_info
                     )
                 else:
                     print("No email found for order confirmation.")
@@ -166,6 +205,7 @@ async def process_stripe_event(event: dict):
         print(f"CRITICAL: Webhook Processing Error: {e}")
         import traceback
         traceback.print_exc()
+
 
 @app.post("/api/webhooks/stripe")
 async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
