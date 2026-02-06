@@ -39,7 +39,14 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN --mount=type=cache,target=/app/apps/web/.next/cache \
     npm install -g pnpm && pnpm --filter web build
 
-# 4. Production runner
+# 4. Production dependencies (Pruned for size)
+FROM base AS prod-deps
+WORKDIR /app
+COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+RUN npm install -g pnpm && pnpm install --prod --frozen-lockfile
+
+# 5. Production runner
 FROM base AS runner
 WORKDIR /app
 
@@ -65,6 +72,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./public
 
 # Ensure content.json is available
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/lib/content
+
+# Fallback: Copy ONLY production node_modules to ensure 'next' and other deps are found
+# This fixes the "Cannot find module next" error while keeping image size small
+COPY --from=prod-deps --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --from=prod-deps --chown=nextjs:nodejs /app/apps/web/node_modules ./apps/web/node_modules
 
 USER nextjs
 
