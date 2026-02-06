@@ -1,6 +1,8 @@
 
 import smtplib
 import smtplib
+import base64
+import base64
 try:
     import aiosmtplib
     HAS_SMTP = True
@@ -105,6 +107,50 @@ def verify_connection():
             print("✅ SMTP Connection Verified Successfully")
     except Exception as e:
         print(f"❌ SMTP Connection FAILED: {e}")
+
+
+def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None, images=None):
+    """
+    Sends a synchronous email with optional BCC and embedded CID images.
+    images: list of dicts {'content_id':Str, 'data':Bytes, 'filename':Str}
+    """
+    try:
+        msg = MIMEMultipart("related")
+        msg["Subject"] = subject
+        msg["From"] = f"Affordable Home A/C <{SMTP_USER}>"
+        msg["To"] = to_email
+        
+        recipients = [to_email]
+        if bcc_emails:
+            if isinstance(bcc_emails, str):
+                bcc_emails = [bcc_emails]
+            # Filter out None/Empty
+            bcc_emails = [e for e in bcc_emails if e]
+            recipients.extend(bcc_emails)
+        
+        msg.attach(MIMEText(html_content, "html"))
+        
+        if images:
+            for img in images:
+                try:
+                    img_part = MIMEImage(img['data'])
+                    img_part.add_header('Content-ID', f"<{img['content_id']}>")
+                    img_part.add_header('Content-Disposition', 'inline', filename=img['filename'])
+                    msg.attach(img_part)
+                except Exception as ie:
+                    logger.error(f"Failed to attach image {img.get('filename')}: {ie}")
+                
+        logger.info(f"Sending email to {to_email} (BCC: {bcc_emails})...")
+        # Use SMTP_SSL for 465
+        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.sendmail(SMTP_USER, recipients, msg.as_string())
+        logger.info("✅ Email sent successfully.")
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to send email: {e}")
+        import traceback
+        traceback.print_exc()
 
 
 async def send_order_confirmation(to_email: str, order_id: str, total_cents: int, fulfillment_mode: str = "pickup", items: list = None, customer_info: dict = None, payment_info: dict = None):
@@ -233,7 +279,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
         <div class="container">
             <!-- 1. Header -->
             <div class="header">
-                 <img src="data:image/png;base64,{LOGO_B64}" style="width: 100%; height: auto; display: block;" alt="Affordable Home A/C" />
+                 <img src="cid:logo_img" style="width: 100%; height: auto; display: block;" alt="Affordable Home A/C" />
             </div>
 
             <!-- 2. Main Body -->
@@ -309,7 +355,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
 
                     <!-- EMBEDDED MAP IMAGE -->
                     <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" style="display: block;">
-                         <img src="data:image/png;base64,{MAP_B64}" style="width: 100%; height: auto; display: block;" alt="Map to Waipahu Warehouse" />
+                         <img src="cid:map_img" style="width: 100%; height: auto; display: block;" alt="Map to Waipahu Warehouse" />
                     </a>
                 </div>
 
@@ -355,8 +401,26 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     </html>
     """
     
+    # Decrypt Logo/Map
+    images = []
+    try:
+        if LOGO_B64:
+            logo_data = base64.b64decode(LOGO_B64)
+            images.append({'content_id': 'logo_img', 'data': logo_data, 'filename': 'logo.png'})
+    except Exception as e:
+        logger.error(f"Logo decode error: {e}")
+
+    try:
+        if not is_delivery and MAP_B64:
+             map_data = base64.b64decode(MAP_B64)
+             images.append({'content_id': 'map_img', 'data': map_data, 'filename': 'map.png'})
+    except:
+        pass
+
+    bcc_list = [ADMIN_EMAIL, "irasmussenjobs@gmail.com"]
+    
     # Run synchronous SMTP code in thread pool
-    await asyncio.get_event_loop().run_in_executor(executor, send_raw_email, to_email, subject, html_body)
+    await asyncio.get_event_loop().run_in_executor(None, send_email_with_attachments, to_email, subject, html_body, bcc_list, images)
 
 async def send_inquiry_notification(lead):
     """

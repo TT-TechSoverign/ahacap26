@@ -11,6 +11,9 @@ export function DispatchWizard() {
     const [step, setStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    // Split state for better UX
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -19,11 +22,13 @@ export function DispatchWizard() {
         address: '',
         city: '',
         zip: '',
-        service_type: '',
         urgency: '',
-        notes: '',
-        selected_services: [] as string[]
+        user_notes: '', // User typed notes
+        source: '',     // Dropdown selection
     });
+
+    const [selectedServices, setSelectedServices] = useState<string[]>([]);
+    const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -31,37 +36,57 @@ export function DispatchWizard() {
     };
 
     const handleServiceToggle = (service: string) => {
-        setFormData(prev => {
-            const current = prev.selected_services;
-            const next = current.includes(service)
-                ? current.filter(s => s !== service)
-                : [...current, service];
-            return { ...prev, selected_services: next };
-        });
+        setSelectedServices(prev =>
+            prev.includes(service) ? prev.filter(s => s !== service) : [...prev, service]
+        );
+    };
+
+    const handlePreferenceToggle = (pref: string) => {
+        setSelectedPreferences(prev =>
+            prev.includes(pref) ? prev.filter(p => p !== pref) : [...prev, pref]
+        );
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setErrorMessage('');
+
         try {
+            // Combine all notes/metadata into one string for the backend
+            const combinedNotesParts = [];
+            if (formData.source) combinedNotesParts.push(`Source: ${formData.source}`);
+            if (selectedPreferences.length > 0) combinedNotesParts.push(`Preferences: ${selectedPreferences.join(', ')}`);
+            if (formData.user_notes) combinedNotesParts.push(`Note: ${formData.user_notes}`);
+
             const payload = {
-                ...formData,
-                service_type: formData.selected_services.join(', ') || 'N/A'
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                email: formData.email,
+                phone: formData.phone,
+                address: formData.address,
+                city: formData.city,
+                zip: formData.zip,
+                urgency: formData.urgency,
+                service_type: selectedServices.join(', ') || 'General Inquiry',
+                notes: combinedNotesParts.join('\n') || 'No additional notes provided.'
             };
-            // Remove the helper field before sending
-            const { selected_services, ...apiPayload } = payload;
 
             const res = await fetch(`/api/v1/leads`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(apiPayload)
+                body: JSON.stringify(payload)
             });
 
             if (res.ok) {
                 setIsSuccess(true);
+            } else {
+                const errData = await res.json().catch(() => ({}));
+                setErrorMessage(errData.detail || 'Transmission failed. Please try again.');
             }
         } catch (err) {
             console.error('Lead submission failed', err);
+            setErrorMessage('Network error. Please check your connection.');
         } finally {
             setIsSubmitting(false);
         }
@@ -86,7 +111,16 @@ export function DispatchWizard() {
                 <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 max-w-sm mx-auto">
                     {contentData.contact.wizard.success?.subtitle || "YOUR TICKET HAS BEEN CREATED"}
                 </p>
-                <Button onClick={() => { setIsSuccess(false); setStep(1); setFormData({ ...formData, selected_services: [] }); }} className="mt-8 bg-white/5 border border-white/10 hover:bg-white/10 text-white py-3 px-8 text-[10px] font-black uppercase tracking-widest">
+                <Button onClick={() => {
+                    setIsSuccess(false);
+                    setStep(1);
+                    setFormData({
+                        first_name: '', last_name: '', email: '', phone: '',
+                        address: '', city: '', zip: '', urgency: '', user_notes: '', source: ''
+                    });
+                    setSelectedServices([]);
+                    setSelectedPreferences([]);
+                }} className="mt-8 bg-white/5 border border-white/10 hover:bg-white/10 text-white py-3 px-8 text-[10px] font-black uppercase tracking-widest">
                     Submit Another Request
                 </Button>
             </div>
@@ -133,7 +167,7 @@ export function DispatchWizard() {
                                 <input
                                     type="checkbox"
                                     className="peer hidden"
-                                    checked={formData.selected_services.includes(service)}
+                                    checked={selectedServices.includes(service)}
                                     onChange={() => handleServiceToggle(service)}
                                 />
                                 <div className="flex items-center gap-4 p-5 lg:p-6 border border-white/10 rounded-xl bg-white/[0.03] transition-all duration-300 hover:bg-white/[0.08] hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary/20 peer-checked:shadow-[0_0_25px_rgba(0,174,239,0.15)] h-full group-active:scale-[0.98]">
@@ -150,7 +184,7 @@ export function DispatchWizard() {
                     <Button
                         type="button"
                         onClick={() => setStep(2)}
-                        disabled={formData.selected_services.length === 0}
+                        disabled={selectedServices.length === 0}
                         className="w-full mt-6 py-4 uppercase font-bold tracking-widest text-sm hover:scale-[1.02] shadow-[0_0_20px_rgba(0,174,239,0.2)] disabled:opacity-50"
                     >
                         <EditableText contentKey="contact.wizard.btn_next_urgency" /> <span className="material-symbols-outlined ml-2 text-lg">arrow_forward</span>
@@ -210,16 +244,8 @@ export function DispatchWizard() {
                                     <input
                                         type="checkbox"
                                         className="peer hidden"
-                                        checked={formData.notes.includes(`Prefers: ${time}`)}
-                                        onChange={(e) => {
-                                            const notePart = `Prefers: ${time}`;
-                                            setFormData(prev => ({
-                                                ...prev,
-                                                notes: e.target.checked
-                                                    ? prev.notes ? `${prev.notes}; ${notePart}` : notePart
-                                                    : prev.notes.replace(`; ${notePart}`, '').replace(notePart, '')
-                                            }));
-                                        }}
+                                        checked={selectedPreferences.includes(time)}
+                                        onChange={() => handlePreferenceToggle(time)}
                                     />
                                     <div className="text-center py-4 px-6 border border-white/10 rounded-lg bg-white/[0.03] text-slate-500 font-mono text-[9px] font-black uppercase tracking-[0.3em] transition-all duration-300 hover:bg-white/[0.08] hover:text-white peer-checked:border-primary peer-checked:bg-primary/20 peer-checked:text-white peer-checked:shadow-[0_0_20px_rgba(0,174,239,0.1)]">
                                         {time}
@@ -360,16 +386,18 @@ export function DispatchWizard() {
                     </div>
 
                     {/* Source & Other */}
-                    <div className="space-y-4 pt-4 border-t border-white/5 max-h-[150px] overflow-y-auto pr-2 custom-scrollbar flex flex-col">
+                    <div className="space-y-4 pt-4 border-t border-white/5 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar flex flex-col">
                         <div className="space-y-2 flex flex-col items-center">
                             <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black text-center mb-4">
                                 <EditableText contentKey="contact.wizard.field_source" />
                             </label>
                             <select
-                                name="notes"
-                                onChange={(e) => setFormData(prev => ({ ...prev, notes: prev.notes + `; Source: ${e.target.value}` }))}
+                                name="source"
+                                value={formData.source}
+                                onChange={handleChange}
                                 className="w-full max-w-md bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-2 text-slate-300 text-center"
                             >
+                                <option value="">Select a source</option>
                                 <option value="Google">Google</option>
                                 <option value="Social Media">Social Media</option>
                                 <option value="Referral">Referral</option>
@@ -381,14 +409,21 @@ export function DispatchWizard() {
                                 <EditableText contentKey="contact.wizard.field_notes" />
                             </label>
                             <textarea
-                                name="notes"
-                                value={formData.notes}
+                                name="user_notes"
+                                value={formData.user_notes}
                                 onChange={handleChange}
                                 className="w-full max-w-2xl bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-3 text-white placeholder-slate-600 transition-all hover:border-white/20 text-center"
-                                rows={1}
+                                rows={4}
+                                placeholder="Any access codes, gate info, or specific details we should know?"
                             ></textarea>
                         </div>
                     </div>
+
+                    {errorMessage && (
+                        <div className="text-red-500 text-xs font-bold text-center bg-red-500/10 p-3 rounded-lg border border-red-500/20">
+                            {errorMessage}
+                        </div>
+                    )}
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-8">
                         <Button variant="ghost" type="button" onClick={() => setStep(2)} className="w-full sm:flex-1 py-4 lg:py-5 uppercase font-black tracking-[0.3em] text-[10px] border border-white/10 hover:bg-white/5 text-slate-500 hover:text-white transition-all rounded-xl order-2 sm:order-1">
