@@ -900,7 +900,7 @@ function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; on
                         hidden: { opacity: 0, y: 20 },
                         show: { opacity: 1, y: 0 }
                     }}
-                    className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1rem)] max-w-[320px]"
+                    className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-[360px]"
                 >
                     <ProductCard product={product} onQuickAdd={() => onQuickAdd(product)} rebate={rebate} />
                 </motion.div>
