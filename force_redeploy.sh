@@ -44,6 +44,10 @@ docker builder prune -a -f
 echo "💾 Disk Space Check:"
 df -h
 
+# 5.5 VERIFICATION: Check file content on host
+echo "🔍 VERIFYING FILE CONTENT ON HOST:"
+grep -C 2 "pt-\[" apps/web/app/checkout/page.tsx || echo "❌ PATTERN NOT FOUND ON HOST"
+
 # 6. Rebuild and Start
 echo "🚀 Rebuilding and Starting..."
 docker compose up -d --build

@@ -96,7 +96,7 @@ function CheckoutContent() {
     }
 
     return (
-        <main className="min-h-screen bg-[#0a0e14] pt-[140px] md:pt-[220px] pb-12 px-4 md:px-8">
+        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8" style={{ paddingTop: '280px' }}>
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}
@@ -110,7 +110,7 @@ function CheckoutContent() {
                             YES I'M <span className="italic">HOT!</span>
                         </span>
                         <h1 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tighter drop-shadow-[0_0_30px_rgba(6,182,212,0.5)] leading-none">
-                            Checkout
+                            Checkout v3
                         </h1>
                     </div>
                     <div className="flex items-center gap-6 text-slate-500 font-header font-black text-[10px] uppercase tracking-[0.3em]">
@@ -267,6 +267,7 @@ function CheckoutContent() {
                                             setStep('payment');
                                         }}
                                         className="w-full py-4 md:py-5 bg-cyan-500 hover:bg-cyan-400 text-[#05070a] font-header font-black uppercase tracking-[0.3em] text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] active:scale-95 flex items-center justify-center gap-3"
+                                        style={{ backgroundColor: '#06b6d4', boxShadow: '0 0 20px rgba(6,182,212,0.3)' }}
                                     >
                                         <span className="hidden md:inline">Next Phase: Payment Architecture</span>
                                         <span className="md:hidden">Proceed to Payment</span>
