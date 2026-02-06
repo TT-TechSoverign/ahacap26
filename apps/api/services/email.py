@@ -43,6 +43,17 @@ def send_raw_email(to_email: str, subject: str, html_body: str):
         logger.error(f"Failed to send email: {e}")
         print(f"❌ SMTP Error: {e}")
 
+def verify_connection():
+    """Checks if SMTP credentials are valid on startup."""
+    try:
+        print(f"DEBUG: Verifying SMTP Connection to {SMTP_SERVER}:{SMTP_PORT}...")
+        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+            server.login(SMTP_USER, SMTP_PASSWORD)
+            print("✅ SMTP Connection Verified Successfully")
+    except Exception as e:
+        print(f"❌ SMTP Connection FAILED: {e}")
+
+
 async def send_order_confirmation(to_email: str, order_id: str, total_cents: int, fulfillment_mode: str = "pickup"):
     subject = f"Order Confirmation {order_id} - Affordable Home A/C"
     
