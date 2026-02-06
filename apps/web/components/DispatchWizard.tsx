@@ -72,7 +72,8 @@ export function DispatchWizard() {
                 notes: combinedNotesParts.join('\n') || 'No additional notes provided.'
             };
 
-            const res = await fetch(`/api/v1/leads`, {
+            // Add trailing slash to prevent 307 redirect from FastAPI
+            const res = await fetch(`/api/v1/leads/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -210,7 +211,7 @@ export function DispatchWizard() {
                             <EditableText contentKey="contact.wizard.step2_urgency_label" /> <span className="text-primary">*</span>
                         </label>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-3xl">
-                            {["ASAP", "Within 30 days", "No rush, shopping"].map((time, i) => (
+                            {["ASAP", "Within 30 days", "No rush, just shopping"].map((time, i) => (
                                 <label key={i} className="cursor-pointer group">
                                     <input
                                         type="radio"
