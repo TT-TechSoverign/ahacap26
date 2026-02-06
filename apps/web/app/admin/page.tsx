@@ -214,8 +214,8 @@ export default function AdminPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-32">
-            {/* Admin Header - Fixed at top */}
+        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[120px] md:pt-[250px]">
+            {/* Admin Header - Fixed below global Navbar */}
             <motion.header
                 initial={{ y: 0 }}
                 animate={{ y: headerVisible ? 0 : -400 }}
@@ -225,7 +225,7 @@ export default function AdminPage() {
                     damping: 25,
                     delay: headerVisible ? 0.1 : 0
                 }}
-                className="fixed top-0 left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
+                className="fixed top-[130px] md:top-[260px] left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
             >
                 <div className="max-w-[1440px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-8">
