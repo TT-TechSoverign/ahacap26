@@ -1,5 +1,6 @@
 
 import smtplib
+import aiosmtplib
 import logging
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -20,6 +21,15 @@ SMTP_PORT = 465
 SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "office@affordablehome-ac.com")
+
+async def verify_connection():
+    try:
+        logger.info(f"🔌 Testing SMTP Connection to {SMTP_SERVER}:{SMTP_PORT}...")
+        async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
+            await smtp.login(SMTP_USER, SMTP_PASSWORD)
+            logger.info("✅ SMTP Connection Verified.")
+    except Exception as e:
+        logger.error(f"❌ SMTP Connection FAILED: {e}")
 
 # Helper to load logo
 def get_logo_attachment():
