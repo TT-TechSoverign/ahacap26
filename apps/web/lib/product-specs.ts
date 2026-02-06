@@ -16,6 +16,7 @@ export interface ProductSpec {
     benefits: string;
     acousticHeader: string; // e.g., "Sleep Soundly & Stay Cool"
     soundProfile: string;
+    keyFeature: string; // Replaces Power Requirement in UI
 }
 
 const specs: { [key: string]: ProductSpec } = {
@@ -35,7 +36,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'User-Friendly Control',
         benefits: 'Compact and easier to install in smaller windows.',
         acousticHeader: 'Consistent Cooling',
-        soundProfile: 'Standard Rotary (54dB)'
+        soundProfile: 'Standard Rotary (54dB)',
+        keyFeature: 'Easy Mount Kit'
     },
     'GE_MED': {
         btu: '10,000 BTU',
@@ -53,7 +55,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Balances performance and size, with smart features for convenience.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
-        soundProfile: 'Standard Rotary (55dB)'
+        soundProfile: 'Standard Rotary (55dB)',
+        keyFeature: 'WiFi Connect'
     },
     'GE_LARGE': {
         btu: '24,000 BTU',
@@ -71,7 +74,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Heavy-Duty Performance',
         benefits: 'High capacity for rapid cooling of large hot spaces.',
         acousticHeader: 'Industrial Power',
-        soundProfile: 'High Capacity (60dB)'
+        soundProfile: 'High Capacity (60dB)',
+        keyFeature: 'Slide-Out Chassis'
     },
     'LG_DUAL_6K': {
         btu: '6,000 BTU',
@@ -89,7 +93,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Dual Inverter technology reduces energy consumption by up to 40% while operating at library-quiet noise levels.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
-        soundProfile: 'Ultra-Quiet Mode (44dB) - Similar to a Library'
+        soundProfile: 'Ultra-Quiet Mode (44dB) - Similar to a Library',
+        keyFeature: 'Dual Inverter Compressor'
     },
     'LG_DUAL_8K': {
         btu: '8,000 BTU',
@@ -107,7 +112,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Integrated ThinQ® smart control allows for remote scheduling and monitoring, perfect for maintaining comfort efficiently.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
-        soundProfile: 'Ultra-Quiet (44dB) - Whisper Quiet Operation'
+        soundProfile: 'Ultra-Quiet (44dB) - Whisper Quiet Operation',
+        keyFeature: 'Dual Inverter Compressor'
     },
     'LG_DUAL_10K': {
         btu: '10,000 BTU',
@@ -125,7 +131,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Recognized as ENERGY STAR® Most Efficient, delivering powerful cooling without the high utility costs.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
-        soundProfile: 'LoDecibel™ (44dB) - Unobtrusive Operation'
+        soundProfile: 'LoDecibel™ (44dB) - Unobtrusive Operation',
+        keyFeature: 'Energy Star® Most Efficient'
     },
     'LG_DUAL_12K': {
         btu: '12,000 BTU',
@@ -143,7 +150,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Gold Fin™ Anti-Corrosive Coating provides essential protection against salt-air oxidation for longevity on the islands.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
-        soundProfile: 'Ultra-Quiet Sleep Mode (44dB) - Library Quiet'
+        soundProfile: 'Ultra-Quiet Sleep Mode (44dB) - Library Quiet',
+        keyFeature: 'Gold Fin™ Anti-Corrosion'
     },
     'LG_DUAL_15K': {
         btu: '15,000 BTU',
@@ -161,7 +169,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'High-Torque compressor cycle designed for rapid moisture removal and quick thermal recovery in large spaces.',
         acousticHeader: 'Smooth Power',
-        soundProfile: 'Quiet Cooling (52dB) - Powerful but Smooth'
+        soundProfile: 'Quiet Cooling (52dB) - Powerful but Smooth',
+        keyFeature: 'High-Torque Compressor'
     },
     'LG_DUAL_18K': {
         btu: '18,000 BTU',
@@ -179,7 +188,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Engineered with maximum vertical momentum to eliminate hot spots in rooms with vaulted ceilings or complex layouts.',
         acousticHeader: 'Smooth Power',
-        soundProfile: 'Efficient Power (52dB) - Quiet for its Class'
+        soundProfile: 'Efficient Power (52dB) - Quiet for its Class',
+        keyFeature: 'Vertical Airflow Control'
     },
     'LG_DUAL_24K': {
         btu: '23,500 BTU',
@@ -197,7 +207,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Industrial-grade Titan Cooling capacity for maximum moisture management and temperature control in massive spaces.',
         acousticHeader: 'Industrial Silence',
-        soundProfile: 'Power Cooling (53dB) - surprisingly quiet for 24k'
+        soundProfile: 'Power Cooling (53dB) - surprisingly quiet for 24k',
+        keyFeature: 'Industrial-Grade Cooling'
     },
     'LG_SMART_8K': {
         btu: '8,000 BTU',
@@ -215,7 +226,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Smart connectivity allows for remote control and scheduling, perfect for busy professionals.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
-        soundProfile: 'Standard Operation (52dB) - White Noise'
+        soundProfile: 'Standard Operation (52dB) - White Noise',
+        keyFeature: 'Smart WiFi Control'
     },
     // LG UNIVERSAL FIT (Through-The-Wall)
     'LG_UNI_8K': {
@@ -234,7 +246,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Dual-Climate Comfort',
         benefits: 'Dual-Climate Optimization provides precise 7,000 BTU Heating alongside cooling for year-round comfort.',
         acousticHeader: 'Quiet Operation',
-        soundProfile: 'Standard (53dB)'
+        soundProfile: 'Standard (53dB)',
+        keyFeature: '4-in-1 Operation'
     },
     'LG_UNI_18K': {
         btu: '18,000 BTU',
@@ -252,7 +265,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'High-Capacity Moisture Removal (4.8 Pts/Hr) ensures comfort even in humid island conditions.',
         acousticHeader: 'Powerful Flow',
-        soundProfile: 'Powerful (56dB) - White Noise'
+        soundProfile: 'Powerful (56dB) - White Noise',
+        keyFeature: '4-in-1 Operation'
     },
     'LG_UNI_24K': {
         btu: '23,500 BTU',
@@ -270,7 +284,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Industrial-Grade Cooling',
         benefits: 'Offers supplemental 12,000 BTU electrical heating capacity for versatility in higher altitude or cooler zones.',
         acousticHeader: 'Heavy Duty',
-        soundProfile: 'Heavy Duty (58dB)'
+        soundProfile: 'Heavy Duty (58dB)',
+        keyFeature: '4-in-1 Operation'
     },
     // LG STANDARD WINDOW
     'LG_STD_8K': {
@@ -289,7 +304,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Rapid Cool Start',
         benefits: 'Rapid Cool Start cycle specifically tuned for immediate thermal recovery in high-humidity tropical environments.',
         acousticHeader: 'Consistent Cooling',
-        soundProfile: 'Standard (54dB)'
+        soundProfile: 'Standard (54dB)',
+        keyFeature: 'Rapid Cool Start'
     },
     'LG_STD_10K': {
         btu: '10,000 BTU',
@@ -307,7 +323,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Integrated Smart Diagnosis allows for system verification and longevity.',
         acousticHeader: 'Consistent Cooling',
-        soundProfile: 'Standard (52dB)'
+        soundProfile: 'Standard (52dB)',
+        keyFeature: 'Smart Diagnosis™'
     },
     'LG_STD_12K': {
         btu: '12,000 BTU',
@@ -325,7 +342,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Control From Anywhere',
         benefits: 'Gold Fin™ Anti-Corrosive Shield protects the condenser from salt-air damages.',
         acousticHeader: 'Consistent Cooling',
-        soundProfile: 'Standard (52dB)'
+        soundProfile: 'Standard (52dB)',
+        keyFeature: 'Gold Fin™ Coating'
     },
     // GE PERFORMANCE SERIES (Wall)
     'GE_PERF_8K': {
@@ -344,7 +362,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'True Universal Fit',
         benefits: 'True Universal Fit design allows it to slide directly into existing 26" wall sleeves for professional gap-free installs.',
         acousticHeader: 'Consistent Cooling',
-        soundProfile: 'Standard Rotary (54dB)'
+        soundProfile: 'Standard Rotary (54dB)',
+        keyFeature: 'True Universal Fit'
     },
     'GE_PERF_10K': {
         btu: '10,000 BTU',
@@ -362,7 +381,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'High-Velocity Airflow',
         benefits: 'High-torque fans maximize air throw, effectively eliminating hot spots in deep-room configurations.',
         acousticHeader: 'Consistent Cooling',
-        soundProfile: 'Standard Rotary (55dB)'
+        soundProfile: 'Standard Rotary (55dB)',
+        keyFeature: 'Six-Way Airflow'
     },
     'GE_PERF_12K': {
         btu: '12,000 BTU',
@@ -380,7 +400,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Power Failure Recovery',
         benefits: 'Automatically restarts at previous settings after island power surges, maintaining climate security.',
         acousticHeader: 'Consistent Cooling',
-        soundProfile: 'Standard Rotary (56dB)'
+        soundProfile: 'Standard Rotary (56dB)',
+        keyFeature: 'Power Failure Recovery'
     },
     'GE_RAB26A': {
         btu: 'N/A',
@@ -398,7 +419,8 @@ const specs: { [key: string]: ProductSpec } = {
         featureHeader: 'Structural Integrity',
         benefits: 'Essential structural case for GE built-in units, ensuring weather-tight seal and support.',
         acousticHeader: 'Build Quality',
-        soundProfile: 'N/A'
+        soundProfile: 'N/A',
+        keyFeature: 'Galvanized Steel'
     },
 
 };
@@ -408,7 +430,8 @@ const defaultSpecs: ProductSpec = {
     features: [], warranty: 'N/A',
     deploymentHeader: 'General Use', idealFor: 'General Cooling',
     featureHeader: 'Key Features', benefits: 'Standard cooling solution.',
-    acousticHeader: 'Sound Level', soundProfile: 'Standard'
+    acousticHeader: 'Sound Level', soundProfile: 'Standard',
+    keyFeature: 'Standard Fit'
 };
 
 // Update existing mock objects (GE_SMALL etc) to include new fields if needed to avoid TS errors, 
