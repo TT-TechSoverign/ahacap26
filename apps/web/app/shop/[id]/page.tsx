@@ -109,7 +109,7 @@ export default function ProductDetailPage() {
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
 
 
-            <main className="pt-48 md:pt-60 pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
+            <main className="pt-[200px] md:pt-[340px] pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     {/* Visual Anchor */}
                     <div className="space-y-6 md:sticky md:top-36">
@@ -154,21 +154,21 @@ export default function ProductDetailPage() {
                         )}
                     </div>
 
-                    {/* Technical Command Center */}
-                    <div className="space-y-8 md:space-y-10">
-                        <div className="space-y-4">
+                    {/* Technical Command Center - Compacted */}
+                    <div className="space-y-6 md:space-y-8">
+                        <div className="space-y-3">
                             <div className="flex flex-wrap gap-3 items-center justify-center md:justify-start">
-                                <span className="px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-md text-primary text-[9px] font-header font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
+                                <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-md text-primary text-[8px] font-header font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
                                     {product.category.replace('_', ' ')}
                                 </span>
                             </div>
 
-                            <h1 className="text-3xl md:text-5xl font-header font-black uppercase leading-[0.9] tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-header font-black uppercase leading-[0.95] tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
                                 {product.name}
                             </h1>
 
                             <div className="flex items-baseline gap-3 pt-1 justify-center md:justify-start">
-                                <span className="text-2xl md:text-4xl font-header font-black text-primary tracking-tight">
+                                <span className="text-xl md:text-3xl font-header font-black text-primary tracking-tight">
                                     ${product.price.toLocaleString()}
                                 </span>
 
@@ -177,51 +177,51 @@ export default function ProductDetailPage() {
 
                         <div className="h-px bg-gradient-to-r from-white/10 to-transparent w-full"></div>
 
-                        {/* Bento Specifications Grid */}
-                        <div className="grid grid-cols-2 gap-2.5">
-                            <div className="bg-[#0a0e14] border border-white/5 p-4 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1.5 group-hover/spec:text-primary">Performance</div>
-                                <div className="text-white font-header font-black text-lg md:text-xl">{specs?.btu}</div>
+                        {/* Bento Specifications Grid - Condensed */}
+                        <div className="grid grid-cols-2 gap-2">
+                            <div className="bg-[#0a0e14] border border-white/5 p-3 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Performance</div>
+                                <div className="text-white font-header font-black text-base md:text-lg">{specs?.btu}</div>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-4 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1.5 group-hover/spec:text-primary">Coverage</div>
-                                <div className="text-white font-header font-black text-lg md:text-xl">{specs?.coolingArea}</div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-3 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Coverage</div>
+                                <div className="text-white font-header font-black text-base md:text-lg">{specs?.coolingArea}</div>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-4 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1.5 group-hover/spec:text-primary">Efficiency</div>
-                                <div className="text-white font-header font-black text-lg md:text-xl">{specs?.eer}</div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-3 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Efficiency</div>
+                                <div className="text-white font-header font-black text-base md:text-lg">{specs?.eer}</div>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-4 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1.5 group-hover/spec:text-primary">Voltage</div>
-                                <div className="text-white font-header font-black text-lg md:text-xl">{specs?.voltage}</div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-3 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Voltage</div>
+                                <div className="text-white font-header font-black text-base md:text-lg">{specs?.voltage}</div>
                             </div>
                         </div>
 
-                        {/* Secondary Specifications Hub */}
-                        <div className="bg-[#0a0e14] border border-white/5 rounded-2xl p-5 md:p-6 ring-1 ring-white/10 shadow-xl relative overflow-hidden group/details">
+                        {/* Secondary Specifications Hub - Compacted */}
+                        <div className="bg-[#0a0e14] border border-white/5 rounded-2xl p-4 md:p-5 ring-1 ring-white/10 shadow-xl relative overflow-hidden group/details">
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent"></div>
-                            <div className="grid grid-cols-2 gap-y-6 gap-x-4 items-start relative z-10 text-xs md:text-left">
-                                <div className="flex flex-col gap-1.5 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Dimensions</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.dimensions || 'N/A'}</span>
+                            <div className="grid grid-cols-2 gap-y-4 gap-x-4 items-start relative z-10 text-xs md:text-left">
+                                <div className="flex flex-col gap-1 items-center md:items-start">
+                                    <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Dimensions</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.dimensions || 'N/A'}</span>
                                 </div>
-                                <div className="flex flex-col gap-1.5 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Weight</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.weight || 'N/A'}</span>
+                                <div className="flex flex-col gap-1 items-center md:items-start">
+                                    <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Weight</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.weight || 'N/A'}</span>
                                 </div>
-                                <div className="flex flex-col gap-1.5 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Manufacturer Warranty</span>
-                                    <span className="text-rose-400 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.warranty || '1 YEAR LIMITED'}</span>
+                                <div className="flex flex-col gap-1 items-center md:items-start">
+                                    <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Manufacturer Warranty</span>
+                                    <span className="text-rose-400 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.warranty || '1 YEAR LIMITED'}</span>
                                 </div>
-                                <div className="flex flex-col gap-1.5 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Primary Feature</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-xs md:text-sm text-primary">{specs?.keyFeature || 'Standard Cooling'}</span>
+                                <div className="flex flex-col gap-1 items-center md:items-start">
+                                    <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Primary Feature</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs text-primary">{specs?.keyFeature || 'Standard Cooling'}</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* CTA Cluster */}
-                        <div className="space-y-4 pt-4 relative">
+                        <div className="space-y-3 pt-2 relative">
                             <button
                                 onClick={() => addToCart(product)}
                                 className="w-full h-16 bg-gradient-to-r from-primary to-cyan-500 text-white font-header font-black uppercase tracking-[0.4em] text-sm rounded-xl shadow-[0_20px_50px_rgba(0,174,239,0.2)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 group"
