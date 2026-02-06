@@ -109,10 +109,10 @@ export default function ProductDetailPage() {
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
 
 
-            <main className="pt-40 md:pt-48 pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
+            <main className="pt-48 md:pt-60 pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     {/* Visual Anchor */}
-                    <div className="space-y-6 md:sticky md:top-32">
+                    <div className="space-y-6 md:sticky md:top-36">
                         <div className="aspect-square bg-[#0a0e14] rounded-[2rem] border border-white/5 relative overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.6)] ring-1 ring-white/10 flex items-center justify-center p-6 lg:p-8">
                             <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
 
@@ -214,56 +214,12 @@ export default function ProductDetailPage() {
                                     <span className="text-slate-200 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.weight || 'N/A'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1.5 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Warranty Protection</span>
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Manufacturer Warranty</span>
                                     <span className="text-rose-400 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.warranty || '1 YEAR LIMITED'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1.5 items-center md:items-start">
-                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Power Requirement</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.watts || 'N/A'}W / {specs?.amps || 'N/A'}A</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Lifestyle & Performance Profile (Renamed from Architectural Profile) */}
-                        <div className="space-y-6 border-t border-white/5 pt-8">
-                            <div className="flex flex-col items-center md:items-start space-y-2">
-                                <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[9px] font-header font-black uppercase tracking-[0.3em] inline-block shadow-[0_0_20px_rgba(0,174,239,0.1)]">
-                                    Technical Resource
-                                </div>
-                                <h3 className="text-white font-header font-black uppercase tracking-widest text-lg md:text-xl drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                                    At A Glance
-                                </h3>
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-4">
-                                {/* Deployment Card */}
-                                <div className="bg-[#0a0e14] border border-white/5 p-5 md:p-6 rounded-2xl hover:border-primary/30 transition-all duration-500 group relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20 mb-4 group-hover:shadow-[0_0_20px_rgba(0,174,239,0.2)] transition-shadow">
-                                        <span className="material-symbols-outlined text-primary text-xl">location_on</span>
-                                    </div>
-                                    <div className="text-primary text-[10px] font-header font-black uppercase tracking-[0.2em] mb-2">{specs?.deploymentHeader}</div>
-                                    <p className="text-slate-300 text-xs leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.idealFor || 'General Residential Cooling'}</p>
-                                </div>
-
-                                {/* Feature Card */}
-                                <div className="bg-[#0a0e14] border border-white/5 p-5 md:p-6 rounded-2xl hover:border-emerald-500/30 transition-all duration-500 group relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mb-4 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-shadow">
-                                        <span className="material-symbols-outlined text-emerald-500 text-xl">bolt</span>
-                                    </div>
-                                    <div className="text-emerald-500 text-[10px] font-header font-black uppercase tracking-[0.2em] mb-2">{specs?.featureHeader}</div>
-                                    <p className="text-slate-300 text-xs leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.benefits || 'High efficiency cooling performance.'}</p>
-                                </div>
-
-                                {/* Acoustic Card */}
-                                <div className="bg-[#0a0e14] border border-white/5 p-5 md:p-6 rounded-2xl hover:border-blue-400/30 transition-all duration-500 group relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    <div className="w-10 h-10 rounded-lg bg-blue-400/10 flex items-center justify-center border border-blue-400/20 mb-4 group-hover:shadow-[0_0_20px_rgba(96,165,250,0.2)] transition-shadow">
-                                        <span className="material-symbols-outlined text-blue-400 text-xl">graphic_eq</span>
-                                    </div>
-                                    <div className="text-blue-400 text-[10px] font-header font-black uppercase tracking-[0.2em] mb-2">{specs?.acousticHeader}</div>
-                                    <p className="text-slate-300 text-xs leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.soundProfile || 'Standard Operation'}</p>
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Primary Feature</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-xs md:text-sm text-primary">{specs?.keyFeature || 'Standard Cooling'}</span>
                                 </div>
                             </div>
                         </div>
