@@ -5,7 +5,9 @@ import os
 import sentry_sdk
 import stripe
 import logging
+import logging
 import sys
+import json
 
 # 0. Load Env Support
 load_dotenv()
@@ -88,6 +90,7 @@ async def process_stripe_event(event: dict):
     metadata = {}
     receipt_email = None
     amount_received = 0
+    items_data = []
 
     try:
         if event['type'] == 'payment_intent.succeeded':
@@ -103,6 +106,19 @@ async def process_stripe_event(event: dict):
             receipt_email = obj.get('customer_details', {}).get('email')
             amount_received = obj.get('amount_total')
             metadata = obj.get('metadata', {})
+            
+            # Retrieve line items
+            try:
+                line_items = stripe.checkout.Session.list_line_items(obj['id'], limit=100)
+                for item in line_items.data:
+                    items_data.append({
+                        "description": item.description,
+                        "quantity": item.quantity,
+                        "amount_total": item.amount_total,
+                        "currency": item.currency
+                    })
+            except Exception as e:
+                print(f"Error fetching line items: {e}")
 
         if stripe_pid:
             fulfillment_mode = metadata.get('fulfillment_mode', 'pickup')
@@ -122,6 +138,7 @@ async def process_stripe_event(event: dict):
                         total_cents=amount_received or 0,
                         customer_email=receipt_email,
                         status=models.OrderStatus.PAID,
+                        items_json=json.dumps(items_data) if items_data else None,
                         created_at=datetime.utcnow()
                     )
                     session.add(order)
@@ -130,6 +147,8 @@ async def process_stripe_event(event: dict):
 
                 if order.status != models.OrderStatus.PAID:
                     order.status = models.OrderStatus.PAID
+                    if items_data and not order.items_json:
+                        order.items_json = json.dumps(items_data)
                     await session.commit()
                     print(f"Order {order.id} marked as PAID.")
 
@@ -137,7 +156,9 @@ async def process_stripe_event(event: dict):
                 if target_email:
                     print(f"Dispatching email to {target_email}...")
                     await email_service.send_order_confirmation(
-                        target_email, order.id, order.total_cents, fulfillment_mode=fulfillment_mode
+                        target_email, order.id, order.total_cents, 
+                        fulfillment_mode=fulfillment_mode,
+                        items=items_data
                     )
                 else:
                     print("No email found for order confirmation.")
