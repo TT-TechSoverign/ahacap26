@@ -109,16 +109,16 @@ export default function ProductDetailPage() {
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
 
 
-            <main className="pt-48 md:pt-56 pb-20 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+            <main className="pt-40 md:pt-48 pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     {/* Visual Anchor */}
-                    <div className="space-y-8 md:sticky md:top-40">
-                        <div className="aspect-square bg-[#0a0e14] rounded-[2rem] border border-white/5 relative overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.6)] ring-1 ring-white/10 flex items-center justify-center p-6 lg:p-10">
+                    <div className="space-y-6 md:sticky md:top-32">
+                        <div className="aspect-square bg-[#0a0e14] rounded-[2rem] border border-white/5 relative overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.6)] ring-1 ring-white/10 flex items-center justify-center p-6 lg:p-8">
                             <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
 
                             {/* Radial Highlights */}
-                            <div className="absolute -left-20 -top-20 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
-                            <div className="absolute -right-20 -bottom-20 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+                            <div className="absolute -left-20 -top-20 w-[300px] h-[300px] bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+                            <div className="absolute -right-20 -bottom-20 w-[300px] h-[300px] bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
 
                             {selectedImage ? (
                                 <div className="relative w-full h-full z-10">
@@ -131,19 +131,19 @@ export default function ProductDetailPage() {
                                     />
                                 </div>
                             ) : (
-                                <span className="material-symbols-outlined text-[200px] text-white/5">ac_unit</span>
+                                <span className="material-symbols-outlined text-[150px] text-white/5">ac_unit</span>
                             )}
                         </div>
 
                         {/* Thumbnail Bar */}
                         {productImages.length > 1 && (
-                            <div className="flex gap-3 overflow-x-auto pb-2 justify-center md:justify-start [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-primary/50 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary">
+                            <div className="flex gap-3 overflow-x-auto pb-2 justify-center md:justify-start [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-primary/50 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary">
                                 {productImages.map((img, idx) => (
                                     <button
                                         key={idx}
                                         onClick={() => setSelectedImage(img)}
                                         className={cn(
-                                            "relative w-20 h-20 rounded-xl overflow-hidden border transition-all shrink-0",
+                                            "relative w-16 h-16 rounded-lg overflow-hidden border transition-all shrink-0",
                                             selectedImage === img ? "border-primary ring-2 ring-primary/20 shadow-lg shadow-primary/20" : "border-white/10 hover:border-white/30 grayscale hover:grayscale-0"
                                         )}
                                     >
@@ -155,24 +155,24 @@ export default function ProductDetailPage() {
                     </div>
 
                     {/* Technical Command Center */}
-                    <div className="space-y-12">
-                        <div className="space-y-6">
-                            <div className="flex flex-wrap gap-4 items-center justify-center md:justify-start">
-                                <span className="px-5 py-2 bg-primary/10 border border-primary/20 rounded-lg text-primary text-[11px] font-header font-black uppercase tracking-[0.5em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
+                    <div className="space-y-8 md:space-y-10">
+                        <div className="space-y-4">
+                            <div className="flex flex-wrap gap-3 items-center justify-center md:justify-start">
+                                <span className="px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-md text-primary text-[9px] font-header font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
                                     {product.category.replace('_', ' ')}
                                 </span>
-                                <span className="px-5 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 text-[11px] font-header font-black uppercase tracking-[0.5em] flex items-center gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                                <span className="px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-md text-emerald-400 text-[9px] font-header font-black uppercase tracking-[0.4em] flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
                                     Operational Inventory
                                 </span>
                             </div>
 
-                            <h1 className="text-3xl md:text-6xl font-header font-black uppercase leading-[0.9] tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                            <h1 className="text-3xl md:text-5xl font-header font-black uppercase leading-[0.9] tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
                                 {product.name}
                             </h1>
 
-                            <div className="flex items-baseline gap-3 pt-2 justify-center md:justify-start">
-                                <span className="text-3xl md:text-5xl font-header font-black text-primary tracking-tight">
+                            <div className="flex items-baseline gap-3 pt-1 justify-center md:justify-start">
+                                <span className="text-2xl md:text-4xl font-header font-black text-primary tracking-tight">
                                     ${product.price.toLocaleString()}
                                 </span>
 
@@ -182,121 +182,121 @@ export default function ProductDetailPage() {
                         <div className="h-px bg-gradient-to-r from-white/10 to-transparent w-full"></div>
 
                         {/* Bento Specifications Grid */}
-                        <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-500 text-[9px] font-header font-black uppercase tracking-[0.3em] mb-2 group-hover/spec:text-primary">Performance</div>
-                                <div className="text-white font-header font-black text-2xl">{specs?.btu}</div>
+                        <div className="grid grid-cols-2 gap-2.5">
+                            <div className="bg-[#0a0e14] border border-white/5 p-4 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1.5 group-hover/spec:text-primary">Performance</div>
+                                <div className="text-white font-header font-black text-lg md:text-xl">{specs?.btu}</div>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-500 text-[9px] font-header font-black uppercase tracking-[0.3em] mb-2 group-hover/spec:text-primary">Coverage</div>
-                                <div className="text-white font-header font-black text-2xl">{specs?.coolingArea}</div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-4 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1.5 group-hover/spec:text-primary">Coverage</div>
+                                <div className="text-white font-header font-black text-lg md:text-xl">{specs?.coolingArea}</div>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-500 text-[9px] font-header font-black uppercase tracking-[0.3em] mb-2 group-hover/spec:text-primary">Efficiency</div>
-                                <div className="text-white font-header font-black text-2xl">{specs?.eer}</div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-4 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1.5 group-hover/spec:text-primary">Efficiency</div>
+                                <div className="text-white font-header font-black text-lg md:text-xl">{specs?.eer}</div>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-500 text-[9px] font-header font-black uppercase tracking-[0.3em] mb-2 group-hover/spec:text-primary">Voltage</div>
-                                <div className="text-white font-header font-black text-2xl">{specs?.voltage}</div>
+                            <div className="bg-[#0a0e14] border border-white/5 p-4 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1.5 group-hover/spec:text-primary">Voltage</div>
+                                <div className="text-white font-header font-black text-lg md:text-xl">{specs?.voltage}</div>
                             </div>
                         </div>
 
                         {/* Secondary Specifications Hub */}
-                        <div className="bg-[#0a0e14] border border-white/5 rounded-[2rem] p-6 md:p-8 ring-1 ring-white/10 shadow-2xl relative overflow-hidden group/details">
+                        <div className="bg-[#0a0e14] border border-white/5 rounded-2xl p-5 md:p-6 ring-1 ring-white/10 shadow-xl relative overflow-hidden group/details">
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent"></div>
-                            <div className="grid grid-cols-2 gap-y-8 gap-x-4 items-start relative z-10 text-sm md:text-left">
-                                <div className="flex flex-col gap-2 items-center md:items-start">
-                                    <span className="text-slate-500 text-xs font-header font-black uppercase tracking-widest">Dimensions</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-sm md:text-base">{specs?.dimensions || 'N/A'}</span>
+                            <div className="grid grid-cols-2 gap-y-6 gap-x-4 items-start relative z-10 text-xs md:text-left">
+                                <div className="flex flex-col gap-1.5 items-center md:items-start">
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Dimensions</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.dimensions || 'N/A'}</span>
                                 </div>
-                                <div className="flex flex-col gap-2 items-center md:items-start">
-                                    <span className="text-slate-500 text-xs font-header font-black uppercase tracking-widest">Weight</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-sm md:text-base">{specs?.weight || 'N/A'}</span>
+                                <div className="flex flex-col gap-1.5 items-center md:items-start">
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Weight</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.weight || 'N/A'}</span>
                                 </div>
-                                <div className="flex flex-col gap-2 items-center md:items-start">
-                                    <span className="text-slate-500 text-xs font-header font-black uppercase tracking-widest">Warranty Protection</span>
-                                    <span className="text-rose-400 font-header font-black uppercase tracking-wide text-sm md:text-base">{specs?.warranty || '1 YEAR LIMITED'}</span>
+                                <div className="flex flex-col gap-1.5 items-center md:items-start">
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Warranty Protection</span>
+                                    <span className="text-rose-400 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.warranty || '1 YEAR LIMITED'}</span>
                                 </div>
-                                <div className="flex flex-col gap-2 items-center md:items-start">
-                                    <span className="text-slate-500 text-xs font-header font-black uppercase tracking-widest">Power Requirement</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-sm md:text-base">{specs?.watts || 'N/A'}W / {specs?.amps || 'N/A'}A</span>
+                                <div className="flex flex-col gap-1.5 items-center md:items-start">
+                                    <span className="text-slate-500 text-[10px] font-header font-black uppercase tracking-widest">Power Requirement</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-xs md:text-sm">{specs?.watts || 'N/A'}W / {specs?.amps || 'N/A'}A</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Lifestyle & Performance Profile (Renamed from Architectural Profile) */}
-                        <div className="space-y-8 border-t border-white/5 pt-10">
+                        <div className="space-y-6 border-t border-white/5 pt-8">
                             <div className="flex flex-col items-center md:items-start space-y-2">
-                                <div className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-header font-black uppercase tracking-[0.3em] inline-block shadow-[0_0_20px_rgba(0,174,239,0.1)]">
+                                <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[9px] font-header font-black uppercase tracking-[0.3em] inline-block shadow-[0_0_20px_rgba(0,174,239,0.1)]">
                                     Technical Resource
                                 </div>
-                                <h3 className="text-white font-header font-black uppercase tracking-widest text-xl md:text-2xl drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                                <h3 className="text-white font-header font-black uppercase tracking-widest text-lg md:text-xl drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                                     At A Glance
                                 </h3>
                             </div>
 
-                            <div className="grid grid-cols-1 gap-6">
+                            <div className="grid grid-cols-1 gap-4">
                                 {/* Deployment Card */}
-                                <div className="bg-[#0a0e14] border border-white/5 p-6 md:p-8 rounded-3xl hover:border-primary/30 transition-all duration-500 group relative overflow-hidden">
+                                <div className="bg-[#0a0e14] border border-white/5 p-5 md:p-6 rounded-2xl hover:border-primary/30 transition-all duration-500 group relative overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 mb-6 group-hover:shadow-[0_0_20px_rgba(0,174,239,0.2)] transition-shadow">
-                                        <span className="material-symbols-outlined text-primary text-2xl">location_on</span>
+                                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20 mb-4 group-hover:shadow-[0_0_20px_rgba(0,174,239,0.2)] transition-shadow">
+                                        <span className="material-symbols-outlined text-primary text-xl">location_on</span>
                                     </div>
-                                    <div className="text-primary text-xs font-header font-black uppercase tracking-[0.2em] mb-3">{specs?.deploymentHeader}</div>
-                                    <p className="text-slate-300 text-sm leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.idealFor || 'General Residential Cooling'}</p>
+                                    <div className="text-primary text-[10px] font-header font-black uppercase tracking-[0.2em] mb-2">{specs?.deploymentHeader}</div>
+                                    <p className="text-slate-300 text-xs leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.idealFor || 'General Residential Cooling'}</p>
                                 </div>
 
                                 {/* Feature Card */}
-                                <div className="bg-[#0a0e14] border border-white/5 p-6 md:p-8 rounded-3xl hover:border-emerald-500/30 transition-all duration-500 group relative overflow-hidden">
+                                <div className="bg-[#0a0e14] border border-white/5 p-5 md:p-6 rounded-2xl hover:border-emerald-500/30 transition-all duration-500 group relative overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mb-6 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-shadow">
-                                        <span className="material-symbols-outlined text-emerald-500 text-2xl">bolt</span>
+                                    <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mb-4 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-shadow">
+                                        <span className="material-symbols-outlined text-emerald-500 text-xl">bolt</span>
                                     </div>
-                                    <div className="text-emerald-500 text-xs font-header font-black uppercase tracking-[0.2em] mb-3">{specs?.featureHeader}</div>
-                                    <p className="text-slate-300 text-sm leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.benefits || 'High efficiency cooling performance.'}</p>
+                                    <div className="text-emerald-500 text-[10px] font-header font-black uppercase tracking-[0.2em] mb-2">{specs?.featureHeader}</div>
+                                    <p className="text-slate-300 text-xs leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.benefits || 'High efficiency cooling performance.'}</p>
                                 </div>
 
                                 {/* Acoustic Card */}
-                                <div className="bg-[#0a0e14] border border-white/5 p-6 md:p-8 rounded-3xl hover:border-blue-400/30 transition-all duration-500 group relative overflow-hidden">
+                                <div className="bg-[#0a0e14] border border-white/5 p-5 md:p-6 rounded-2xl hover:border-blue-400/30 transition-all duration-500 group relative overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                    <div className="w-12 h-12 rounded-xl bg-blue-400/10 flex items-center justify-center border border-blue-400/20 mb-6 group-hover:shadow-[0_0_20px_rgba(96,165,250,0.2)] transition-shadow">
-                                        <span className="material-symbols-outlined text-blue-400 text-2xl">graphic_eq</span>
+                                    <div className="w-10 h-10 rounded-lg bg-blue-400/10 flex items-center justify-center border border-blue-400/20 mb-4 group-hover:shadow-[0_0_20px_rgba(96,165,250,0.2)] transition-shadow">
+                                        <span className="material-symbols-outlined text-blue-400 text-xl">graphic_eq</span>
                                     </div>
-                                    <div className="text-blue-400 text-xs font-header font-black uppercase tracking-[0.2em] mb-3">{specs?.acousticHeader}</div>
-                                    <p className="text-slate-300 text-sm leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.soundProfile || 'Standard Operation'}</p>
+                                    <div className="text-blue-400 text-[10px] font-header font-black uppercase tracking-[0.2em] mb-2">{specs?.acousticHeader}</div>
+                                    <p className="text-slate-300 text-xs leading-relaxed font-medium group-hover:text-white transition-colors">{specs?.soundProfile || 'Standard Operation'}</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* CTA Cluster */}
-                        <div className="space-y-6 pt-6 relative">
+                        <div className="space-y-4 pt-4 relative">
                             <button
                                 onClick={() => addToCart(product)}
-                                className="w-full h-20 bg-gradient-to-r from-primary to-cyan-500 text-white font-header font-black uppercase tracking-[0.5em] text-lg rounded-2xl shadow-[0_20px_50px_rgba(0,174,239,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-4 group"
+                                className="w-full h-16 bg-gradient-to-r from-primary to-cyan-500 text-white font-header font-black uppercase tracking-[0.4em] text-sm rounded-xl shadow-[0_20px_50px_rgba(0,174,239,0.2)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 group"
                             >
-                                <span className="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform">add_shopping_cart</span>
+                                <span className="material-symbols-outlined text-xl group-hover:rotate-12 transition-transform">add_shopping_cart</span>
                                 Add to Cart
                             </button>
                             {specSheetUrl && (
                                 <button
                                     onClick={() => setIsSpecModalOpen(true)}
-                                    className="w-full h-16 bg-white/[0.03] hover:bg-white/5 border border-white/10 text-slate-400 hover:text-white font-header font-black uppercase tracking-[0.4em] text-xs rounded-2xl transition-all flex items-center justify-center gap-4"
+                                    className="w-full h-12 bg-white/[0.03] hover:bg-white/5 border border-white/10 text-slate-400 hover:text-white font-header font-black uppercase tracking-[0.3em] text-[10px] rounded-xl transition-all flex items-center justify-center gap-3"
                                 >
-                                    <span className="material-symbols-outlined text-xl">description</span>
+                                    <span className="material-symbols-outlined text-lg">description</span>
                                     Factory Specs (PDF)
                                 </button>
                             )}
 
-                            <div className="mt-8 bg-[#0f0505] border border-red-500/20 rounded-xl p-6 flex flex-col items-center text-center shadow-[inset_0_0_20px_rgba(239,68,68,0.05)]">
-                                <div className="flex items-center gap-2 mb-3 text-red-500">
-                                    <span className="material-symbols-outlined text-lg">policy</span>
-                                    <h5 className="font-header font-black uppercase tracking-[0.2em] text-xs">All Sales Final</h5>
+                            <div className="mt-6 bg-[#0f0505] border border-red-500/20 rounded-xl p-4 flex flex-col items-center text-center shadow-[inset_0_0_20px_rgba(239,68,68,0.05)]">
+                                <div className="flex items-center gap-2 mb-2 text-red-500">
+                                    <span className="material-symbols-outlined text-base">policy</span>
+                                    <h5 className="font-header font-black uppercase tracking-[0.2em] text-[10px]">All Sales Final</h5>
                                 </div>
-                                <div className="space-y-2">
-                                    <p className="text-red-400/80 text-[10px] font-bold leading-relaxed uppercase tracking-widest">
+                                <div className="space-y-1">
+                                    <p className="text-red-400/80 text-[9px] font-bold leading-relaxed uppercase tracking-widest">
                                         No Refunds • No Exchanges
                                     </p>
-                                    <p className="text-slate-500 text-[10px] leading-relaxed font-medium max-w-[240px] mx-auto">
+                                    <p className="text-slate-500 text-[9px] leading-relaxed font-medium max-w-[200px] mx-auto">
                                         All warranty claims & defective units must be processed directly through the manufacturer.
                                     </p>
                                 </div>
