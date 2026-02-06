@@ -8,8 +8,26 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("db_fix")
 
 async def fix_schema():
+    max_retries = 5
+    retry_delay = 5
+    
+    for attempt in range(max_retries):
+        try:
+            async with engine.connect() as conn:
+                await conn.execute(text("COMMIT")) # Ensure we are not in a failed transaction state
+                break
+        except Exception as e:
+            if attempt < max_retries - 1:
+                logger.warning(f"Database connection failed ({e}). Retrying in {retry_delay}s...")
+                await asyncio.sleep(retry_delay)
+            else:
+                logger.error("Max retries reached. Database unavailable.")
+                raise e
+
     async with engine.connect() as conn:
-        await conn.execute(text("COMMIT")) # Ensure we are not in a failed transaction state
+        # We already committed above, just re-establish for the work below
+        await conn.execute(text("COMMIT")) 
+
         
         logger.info("Starting Schema Validation...")
         
