@@ -59,8 +59,39 @@ def verify_connection():
         print(f"❌ SMTP Connection FAILED: {e}")
 
 
-async def send_order_confirmation(to_email: str, order_id: str, total_cents: int, fulfillment_mode: str = "pickup", items: list = None):
+async def send_order_confirmation(to_email: str, order_id: str, total_cents: int, fulfillment_mode: str = "pickup", items: list = None, customer_info: dict = None, payment_info: dict = None):
     subject = f"Order Confirmation #{order_id} - Affordable Home A/C"
+    
+    # Defaults
+    if not items: items = []
+    if not customer_info: customer_info = {}
+    if not payment_info: payment_info = {}
+
+    # Customer Data Extraction
+    c_name = customer_info.get('name', 'Valued Customer')
+    c_email = customer_info.get('email', to_email)
+    c_phone = customer_info.get('phone', 'N/A')
+    
+    addr = customer_info.get('address', {})
+    if addr:
+        line1 = addr.get('line1', '')
+        line2 = addr.get('line2', '')
+        city = addr.get('city', '')
+        state = addr.get('state', '')
+        zip_code = addr.get('postal_code', '')
+        c_address_html = f"{line1}<br>"
+        if line2: c_address_html += f"{line2}<br>"
+        c_address_html += f"{city}, {state} {zip_code}"
+    else:
+        c_address_html = "Address not provided"
+
+    # Payment Data Extraction
+    p_brand = payment_info.get('brand', 'Card')
+    p_last4 = payment_info.get('last4', '****')
+    if p_last4:
+        payment_method_text = f"{p_brand} ending in {p_last4}"
+    else:
+        payment_method_text = "Credit Card"
 
     # --- Verification & Content Logic ---
     is_delivery = (fulfillment_mode.lower() == "delivery")
@@ -120,14 +151,13 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             
             /* Premium Header */
             .header {{ background-color: #0a0e14; padding: 0 0; text-align: center; border-bottom: 1px solid #1e293b; }}
-            /* Logo is now an image, padding adjusted to let it fit nicely. 
-               The user sent a 600x400 image. We'll let it fill width or contain. */
             
             /* Content Area */
             .content {{ padding: 40px 32px; background-color: #ffffff; }}
             
             /* Typography */
             h1 {{ color: #0f172a; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.025em; margin: 0 0 8px 0; }}
+            h2 {{ color: #334155; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 12px 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }}
             .order-badge {{ display: inline-block; background-color: #ecfeff; color: #0891b2; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 24px; }}
             
             /* Table */
@@ -142,14 +172,19 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             .disclaimer-box {{ border: 1px solid #7f1d1d; background-color: #450a0a; color: #fecaca; padding: 20px; text-align: center; margin-bottom: 30px; border-radius: 4px; }}
             
             .map-container {{ display: {map_display}; margin-bottom: 32px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }}
+
+            /* Customer Info Grid */
+            .info-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }}
+            .info-item p.label {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin: 0 0 4px 0; font-weight: 700; }}
+            .info-item p.value {{ font-size: 13px; color: #334155; margin: 0; line-height: 1.4; }}
+            
         </style>
     </head>
     <body>
         <div style="height: 40px;"></div>
         <div class="container">
-            <!-- 1. Header (Logo Image Restored) -->
+            <!-- 1. Header -->
             <div class="header">
-                 <!-- 600px wide image, we let it be 100% width of container (which is 600px) -->
                  <img src="data:image/png;base64,{LOGO_B64}" style="width: 100%; height: auto; display: block;" alt="Affordable Home A/C" />
             </div>
 
@@ -160,7 +195,27 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                     <span class="order-badge">Ref: #{order_id}</span>
                 </div>
 
+                <!-- Customer Information -->
+                <h2>Customer Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <p class="label">Billed To</p>
+                        <p class="value">
+                            <strong>{c_name}</strong><br>
+                            {c_address_html}
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <p class="label">Contact</p>
+                        <p class="value">
+                            {c_email}<br>
+                            {c_phone}
+                        </p>
+                    </div>
+                </div>
+
                 <!-- Line Items -->
+                <h2>Order Details</h2>
                 <table style="width: 100%; border-collapse: collapse; margin-bottom: 32px;">
                     <thead>
                         <tr style="border-bottom: 2px solid #f1f5f9;">
@@ -174,13 +229,13 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                     </tbody>
                 </table>
 
-                <!-- Info Cards -->
+                <!-- Summary Cards -->
                 <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 24px; margin-bottom: 24px;">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="padding-bottom: 16px; vertical-align: top;">
-                                <p style="margin: 0; color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Method</p>
-                                <p style="margin: 4px 0 0 0; color: #0f172a; font-weight: 600;">{mode_title}</p>
+                            <td style="padding-bottom: 16px; valign: top;">
+                                <p style="margin: 0; color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Payment Method</p>
+                                <p style="margin: 4px 0 0 0; color: #0f172a; font-weight: 600;">{payment_method_text}</p>
                             </td>
                             <td style="padding-bottom: 16px; text-align: right; vertical-align: top;">
                                 <p style="margin: 0; color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Total Paid</p>
