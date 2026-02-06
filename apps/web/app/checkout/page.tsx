@@ -266,7 +266,7 @@ function CheckoutContent() {
                                         onClick={() => {
                                             setStep('payment');
                                         }}
-                                        className="w-full py-4 md:py-5 bg-cyan-500 hover:bg-cyan-400 text-[#05070a] font-header font-black uppercase tracking-[0.3em] text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] active:scale-95 flex items-center justify-center gap-3"
+                                        className="w-full py-4 md:py-5 bg-cyan-500 hover:bg-cyan-400 text-white font-header font-black uppercase tracking-[0.3em] text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] active:scale-95 flex items-center justify-center gap-3"
                                     >
                                         <span className="hidden md:inline">Proceed To Secure Checkout VIA Stripe</span>
                                         <span className="md:hidden">Proceed To Secure Checkout</span>
