@@ -13,6 +13,19 @@ docker image prune -f || true
 echo "📥 Pulling latest from staging..."
 git pull origin staging
 
+# 1.5. Fix Permissions (Crucial for Content Persistence)
+# Ensure the content directory is owned by the container user (UID 1001)
+# or is world-writable so the container can update it.
+echo "🔧 Fixing permissions for apps/web/lib/content..."
+mkdir -p apps/web/lib/content
+chown -R 1001:1001 apps/web/lib/content || echo "⚠️  Could not chown (might need root). Trying chmod..."
+chmod -R 777 apps/web/lib/content
+
+echo "🔧 Fixing permissions for apps/web/storage..."
+mkdir -p apps/web/storage
+chown -R 1001:1001 apps/web/storage || echo "⚠️  Could not chown (might need root). Trying chmod..."
+chmod -R 777 apps/web/storage
+
 # 2. Stop all running containers
 echo "🛑 Stopping all containers..."
 docker compose down
