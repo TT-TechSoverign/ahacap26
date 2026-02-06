@@ -8,34 +8,6 @@ import contentData from '@/lib/content/content.json';
 export default function ContactPage() {
     const { content } = useContent();
 
-    // --- Sticky-Free Navigation Logic ---
-    const { scrollY } = useScroll();
-    const [headerVisible, setHeaderVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-    // Lock body scroll when mobile menu is open
-    useEffect(() => {
-        if (mobileMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
-    }, [mobileMenuOpen]);
-
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        const direction = latest > lastScrollY ? "down" : "up";
-        if (latest > 50 && direction === "down" && headerVisible && !mobileMenuOpen) {
-            setHeaderVisible(false);
-        } else if (direction === "up" && !headerVisible) {
-            setHeaderVisible(true);
-        }
-        setLastScrollY(latest);
-    });
-
     return (
         <div className="bg-background-dark min-h-screen text-white selection:bg-primary selection:text-white pb-12 lg:pb-32">
             <main className="max-w-7xl mx-auto px-6 pt-[150px] md:pt-[250px]">
