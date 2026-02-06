@@ -266,7 +266,7 @@ function CheckoutContent() {
                                         onClick={() => {
                                             setStep('payment');
                                         }}
-                                        className="w-full py-4 md:py-5 bg-primary text-white font-header font-black uppercase tracking-[0.3em] text-xs rounded-xl transition-all shadow-lg hover:shadow-primary/40 active:scale-95 flex items-center justify-center gap-3"
+                                        className="w-full py-4 md:py-5 bg-cyan-500 hover:bg-cyan-400 text-[#05070a] font-header font-black uppercase tracking-[0.3em] text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] active:scale-95 flex items-center justify-center gap-3"
                                     >
                                         <span className="hidden md:inline">Next Phase: Payment Architecture</span>
                                         <span className="md:hidden">Proceed to Payment</span>
@@ -356,20 +356,6 @@ function CheckoutContent() {
                                         All warranty claims & defective units must be processed directly through the manufacturer.
                                     </p>
                                 </div>
-                            </div>
-
-                            <div className="bg-[#0f131a] border border-white/5 p-4 md:p-6 rounded-2xl relative overflow-hidden group">
-                                <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-40 group-hover:opacity-100 transition-opacity"></div>
-                                <h4 className="text-slate-500 font-header font-black uppercase text-[8px] md:text-[9px] tracking-[0.3em] mb-2 md:mb-3 flex items-center gap-2">
-                                    <span className="material-symbols-outlined text-[10px] md:text-xs">local_shipping</span>
-                                    Logistics Protocol
-                                </h4>
-                                <p className="text-[8px] md:text-[9px] text-slate-600 leading-relaxed uppercase tracking-widest font-bold group-hover:text-slate-400 transition-colors">
-                                    <EditableText contentKey="logistics.pickup.warning" />
-                                    <span className="block mt-1 text-primary opacity-60">
-                                        <EditableText contentKey="logistics.delivery.price_label" />: <EditableText contentKey="logistics.delivery.price_value" />
-                                    </span>
-                                </p>
                             </div>
                         </div>
                     </div>
