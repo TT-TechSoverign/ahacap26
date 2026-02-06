@@ -45,6 +45,9 @@ from routers import catalog, payments
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_redis()
+    # 0. Verify SMTP
+    asyncio.create_task(email_service.verify_connection())
+
     print("DEBUG: Creating Tables & Checking Schema...")
     
     # Run Schema Fixes
