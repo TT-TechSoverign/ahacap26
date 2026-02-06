@@ -1,6 +1,14 @@
 
 import smtplib
-import aiosmtplib
+import smtplib
+try:
+    import aiosmtplib
+    HAS_SMTP = True
+except ImportError:
+    # Fallback for when dependency fails to install (prevents crash)
+    aiosmtplib = None
+    HAS_SMTP = False
+    print("CRITICAL WARNING: aiosmtplib not installed. Email verification will be disabled.")
 import logging
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -23,6 +31,10 @@ SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "office@affordablehome-ac.com")
 
 async def verify_connection():
+    if not HAS_SMTP:
+        logger.error("❌ SMTP Verification Skipped: 'aiosmtplib' is missing.")
+        return
+
     try:
         logger.info(f"🔌 Testing SMTP Connection to {SMTP_SERVER}:{SMTP_PORT}...")
         async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
