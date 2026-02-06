@@ -45,8 +45,15 @@ from routers import catalog, payments
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_redis()
-    # 0. Verify SMTP
-    asyncio.create_task(email_service.verify_connection())
+    # 0. Verify SMTP (Defensive)
+    try:
+        smtp_check = email_service.verify_connection()
+        if asyncio.iscoroutine(smtp_check):
+            asyncio.create_task(smtp_check)
+        else:
+            print(f"DEBUG: SMTP Check ran synchronously (Returned: {type(smtp_check)})")
+    except Exception as e:
+        print(f"WARNING: SMTP Check Failed entirely: {e}")
 
     print("DEBUG: Creating Tables & Checking Schema...")
     
