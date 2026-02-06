@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 # Environment Variables
 SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 465
+SMTP_PORT = int(os.getenv("SMTP_PORT", 465))
 SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "office@affordablehome-ac.com")
