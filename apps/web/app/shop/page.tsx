@@ -176,17 +176,17 @@ export default function ShopPage() {
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
 
-            <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[180px] md:pt-[300px] pb-32 flex-grow">
+            <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[160px] md:pt-[240px] pb-20 flex-grow">
                 {/* Hero Branding Section (Centered Vertical Axis) */}
-                <div className="flex flex-col items-center text-center gap-3 md:gap-6 mb-6 md:mb-10 border-b border-white/5 pb-6 md:pb-10 relative">
+                <div className="flex flex-col items-center text-center gap-2 md:gap-4 mb-6 md:mb-8 border-b border-white/5 pb-6 md:pb-8 relative">
                     <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full -z-10 opacity-30"></div>
                     <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
 
-                    <div className="space-y-3 w-full max-w-7xl mx-auto flex flex-col items-center">
+                    <div className="space-y-2 w-full max-w-7xl mx-auto flex flex-col items-center">
                         <span className="text-primary font-header font-black uppercase tracking-[0.6em] text-[8px] md:text-[9px] block animate-pulse">
                             <EditableText contentKey="shop.hero.subtitle" />
                         </span>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-header font-black leading-[0.85] tracking-tighter uppercase px-4 neon-glow">
+                        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-header font-black leading-[0.9] tracking-tighter uppercase px-4 neon-glow">
                             <span className="text-white">
                                 <EditableText contentKey="shop.hero.title_word1" />
                             </span>{" "}
@@ -201,14 +201,14 @@ export default function ShopPage() {
                                 <EditableText contentKey="shop.hero.title_word4" />
                             </span>
                         </h1>
-                        <p className="text-slate-400 max-w-2xl mx-auto font-medium tracking-wide text-xs md:text-base leading-relaxed uppercase [word-spacing:0.15em] opacity-80 px-4">
+                        <p className="text-slate-400 max-w-2xl mx-auto font-medium tracking-wide text-[10px] md:text-sm leading-relaxed uppercase [word-spacing:0.15em] opacity-80 px-4">
                             <EditableText contentKey="shop.hero.description" />
                         </p>
                     </div>
                 </div>
 
                 {/* Dynamic Reorderable Sections */}
-                <div className="space-y-12 md:space-y-16">
+                <div className="space-y-8 md:space-y-10">
                     {sectionOrder.map((sectionId, index) => (
                         <div
                             key={sectionId}
@@ -424,7 +424,7 @@ function SectionHeader({
                     </p>
                 )}
 
-                <h2 className="text-2xl md:text-4xl font-header font-black text-white uppercase tracking-tight leading-[0.95] transition-colors duration-500 drop-shadow-[0_0_40px_rgba(0,174,239,0.25)] group-hover/section:text-primary">
+                <h2 className="text-xl md:text-3xl font-header font-black text-white uppercase tracking-tight leading-[0.95] transition-colors duration-500 drop-shadow-[0_0_40px_rgba(0,174,239,0.25)] group-hover/section:text-primary">
                     <EditableText contentKey={`${effectiveKey}.title`} />
                     {hasHighlight ? (
                         <>
@@ -893,7 +893,7 @@ function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; on
                     transition: { staggerChildren: 0.1 }
                 }
             }}
-            className="flex flex-wrap justify-center gap-4 md:gap-5"
+            className="flex flex-wrap justify-center gap-3 md:gap-4"
         >
             {products.map(product => (
                 <motion.div
@@ -902,7 +902,7 @@ function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; on
                         hidden: { opacity: 0, y: 20 },
                         show: { opacity: 1, y: 0 }
                     }}
-                    className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[calc(25%-1.5rem)] max-w-[360px]"
+                    className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1rem)] max-w-[320px]"
                 >
                     <ProductCard product={product} onQuickAdd={() => onQuickAdd(product)} rebate={rebate} />
                 </motion.div>
@@ -976,7 +976,7 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                         {product.category || 'AC UNIT'}
                         <span className="w-2 h-px bg-primary/30 group-hover:w-4 transition-all"></span>
                     </div>
-                    <h3 className="text-white text-lg md:text-xl font-header font-black leading-tight group-hover:text-primary transition-colors duration-500 uppercase tracking-tight">
+                    <h3 className="text-white text-base md:text-lg font-header font-black leading-tight group-hover:text-primary transition-colors duration-500 uppercase tracking-tight">
                         {product.name}
                     </h3>
                 </div>

@@ -10,19 +10,19 @@ export default function ContactPage() {
 
     return (
         <div className="bg-background-dark min-h-screen text-white selection:bg-primary selection:text-white pb-12 lg:pb-32">
-            <main className="max-w-7xl mx-auto px-6 pt-[150px] md:pt-[250px]">
-                <div className="text-center mb-12 lg:mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                    <div className="inline-flex items-center gap-3 px-6 py-2 bg-primary/5 border border-primary/20 rounded-md text-primary font-mono text-[10px] lg:text-[11px] font-black tracking-[0.4em] uppercase mb-10 shadow-[0_0_20px_rgba(0,174,239,0.1)] backdrop-blur-sm relative overflow-hidden group/badge">
+            <main className="max-w-7xl mx-auto px-6 pt-[140px] md:pt-[200px]">
+                <div className="text-center mb-8 lg:mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <div className="inline-flex items-center gap-3 px-6 py-2 bg-primary/5 border border-primary/20 rounded-md text-primary font-mono text-[9px] lg:text-[10px] font-black tracking-[0.4em] uppercase mb-6 shadow-[0_0_20px_rgba(0,174,239,0.1)] backdrop-blur-sm relative overflow-hidden group/badge">
                         <div className="absolute inset-0 bg-primary/5 -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000"></div>
                         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(0,174,239,0.5)]"></span>
                         <EditableText contentKey="contact.badge" />
                     </div>
-                    <h1 className="text-4xl md:text-7xl lg:text-8xl font-header font-bold uppercase tracking-tight mb-8">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-header font-bold uppercase tracking-tight mb-6">
                         <EditableText contentKey="contact.title" /> <span className="text-primary italic font-black shadow-primary/20 drop-shadow-2xl">
                             <EditableText contentKey="contact.title_highlight" />
                         </span>
                     </h1>
-                    <p className="font-mono text-[11px] md:text-[12px] lg:text-[13px] font-black tracking-[0.3em] uppercase text-slate-500 max-w-3xl mx-auto leading-relaxed opacity-80">
+                    <p className="font-mono text-[10px] md:text-[11px] lg:text-[12px] font-black tracking-[0.3em] uppercase text-slate-500 max-w-3xl mx-auto leading-relaxed opacity-80">
                         <EditableText contentKey="contact.description" />
                     </p>
                 </div>
