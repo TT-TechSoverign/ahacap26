@@ -27,6 +27,7 @@ class LeadCreate(BaseModel):
     urgency: str
     notes: Optional[str] = None
 
+@router.post("", status_code=201, include_in_schema=False)
 @router.post("/", status_code=201)
 async def create_lead(
     lead_data: LeadCreate, 
