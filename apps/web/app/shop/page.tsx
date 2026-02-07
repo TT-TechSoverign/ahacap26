@@ -769,11 +769,11 @@ function SizingGuideSection() {
             {/* Mobile Card View */}
             <div className="block md:hidden space-y-4">
                 {sizingData.map((row, i) => (
-                    <div key={i} className="bg-white/[0.03] border border-white/10 rounded-xl p-6 flex flex-col gap-4 relative overflow-hidden group">
+                    <div key={i} className="bg-white/[0.03] border border-white/10 rounded-xl p-4 flex flex-col gap-2 relative overflow-hidden group">
                         <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-40"></div>
                         <div className="flex justify-between items-start">
                             <div>
-                                <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1">Coverage Area</p>
+                                <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1">Coverage</p>
                                 <h3 className="text-xl font-header font-black text-white uppercase">{row.sq} sq. ft.</h3>
                             </div>
                             <div className="text-right">
@@ -782,17 +782,17 @@ function SizingGuideSection() {
                             </div>
                         </div>
                         <div>
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2">Ideal Application</p>
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Application</p>
                             <p className="text-slate-400 text-sm font-medium">{row.app}</p>
                         </div>
-                        <div className="pt-4 border-t border-white/5 bg-white/[0.01] -mx-6 -mb-6 p-6">
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">Recommended Models</p>
+                        <div className="pt-3 border-t border-white/5 bg-white/[0.01] -mx-4 -mb-4 p-4">
+                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-3">Recommended Models</p>
                             <div className="flex flex-wrap gap-2">
                                 {sizingData[i].models.map((m, idx) => (
                                     <Link
                                         key={idx}
                                         href={m.link}
-                                        className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-[10px] font-black text-white hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center gap-3 flex-1 min-w-[140px] shadow-lg active:scale-95"
+                                        className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-[10px] font-black text-white hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center gap-2 flex-1 min-w-[100px] shadow-lg active:scale-95"
                                     >
                                         <span className="material-symbols-outlined text-xs text-primary">ac_unit</span>
                                         {m.name}

@@ -94,7 +94,7 @@ export default function NavbarV2() {
                             {/* Center: Prominent Logo */}
                             {/* Mobile: Absolute Center. Desktop: Relative Center */}
                             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 md:flex md:justify-center z-20">
-                                <Link href="/" className="block relative h-24 w-48 md:h-44 md:w-80 group shrink-0">
+                                <Link href="/" className="block relative h-32 w-64 md:h-44 md:w-80 group shrink-0">
                                     <Image
                                         src="/assets/ahac-logo-bus-500x500xv2.svg"
                                         alt="AHAC Logo"
@@ -222,7 +222,7 @@ export default function NavbarV2() {
                                     <Link
                                         href={link.href}
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="text-3xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center gap-4 group"
+                                        className="text-2xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center justify-center gap-4 group"
                                     >
                                         {link.text}
                                     </Link>
@@ -237,7 +237,7 @@ export default function NavbarV2() {
                                 <Link
                                     href="/contact"
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="text-3xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center gap-4 group"
+                                    className="text-2xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center justify-center gap-4 group"
                                 >
                                     Contact Us
                                 </Link>
