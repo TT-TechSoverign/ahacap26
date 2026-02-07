@@ -17,7 +17,7 @@ export default function Section2OurServicesV2() {
         },
         {
             id: 'window_shop',
-            defaultTitle: 'Window AC Shop',
+            defaultTitle: 'Window AC Store',
             defaultDesc: 'Browse our massive inventory of LG & GE units, ready for immediate pickup.',
             cleanImage: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-herobg-solutions.svg',
             link: '/shop'
