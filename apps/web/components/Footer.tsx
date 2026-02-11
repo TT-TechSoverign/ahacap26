@@ -67,7 +67,7 @@ export default function Footer() {
                         <div className="pt-2 w-full flex justify-center">
                             <Link href="/contact" className="group">
                                 <div className="bg-white/5 backdrop-blur-md border border-white/10 px-8 py-2 rounded-full group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
-                                    <p className="text-white font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs group-hover:text-primary transition-colors">SCHEDULE APPOINTMENT</p>
+                                    <p className="text-white font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs group-hover:text-primary transition-colors">CONTACT US TO SET APPOINTMENT</p>
                                 </div>
                             </Link>
                         </div>

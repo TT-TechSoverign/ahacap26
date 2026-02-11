@@ -746,9 +746,9 @@
       "narrative": "We don't just sell ACs; we curate high-efficiency solutions specifically for the 'Ohana, ensuring your family stays cool, quiet, and protected for years to come."
     },
     "services": {
-      "window_ac": {
-        "title": "WINDOW AC SALES",
-        "description": "The largest inventory of LG & GE window units in Waipahu. Pick up today."
+      "window_shop": {
+        "title": "WINDOW AC STORE",
+        "description": "Browse our massive inventory of LG & GE units."
       },
       "split_systems": {
         "title": "SPLIT SYSTEMS",

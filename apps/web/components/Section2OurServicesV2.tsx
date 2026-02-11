@@ -18,7 +18,7 @@ export default function Section2OurServicesV2() {
         {
             id: 'window_shop',
             defaultTitle: 'Window AC Store',
-            defaultDesc: 'Browse our massive inventory of LG & GE units, ready for immediate pickup.',
+            defaultDesc: 'Browse our massive inventory of LG & GE units.',
             cleanImage: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-herobg-solutions.svg',
             link: '/shop'
         },
@@ -97,7 +97,7 @@ export default function Section2OurServicesV2() {
 
                                 {/* Title with Cyan Glow & Underline */}
                                 <h3 className="font-header font-black text-2xl md:text-4xl text-white uppercase tracking-tighter mb-2 drop-shadow-lg transition-all duration-300 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
-                                    {(service.id === 'window_shop' ? service.defaultTitle : (contentData.landing?.services?.[service.id as keyof typeof contentData.landing.services]?.title || service.defaultTitle))}
+                                    {(contentData.landing?.services?.[service.id as keyof typeof contentData.landing.services]?.title || service.defaultTitle)}
                                 </h3>
                                 {/* Subtle Animated Underline */}
                                 <div className="w-12 h-1 bg-cyan-500/0 group-hover:bg-cyan-400 rounded-full mb-0 transition-all duration-500 group-hover:w-20 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.8)] group-hover:mb-4" />
@@ -106,7 +106,7 @@ export default function Section2OurServicesV2() {
                                 <div className="max-h-0 opacity-0 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)] group-hover:max-h-[300px] group-hover:opacity-100 flex flex-col items-center">
                                     <p className="font-sans text-slate-100 text-base md:text-lg leading-snug drop-shadow-md font-medium mb-6 max-w-xs">
                                         {/* Force local content effectively for Shop to ensure link/title integrity */}
-                                        {(service.id === 'window_shop' ? service.defaultDesc : (contentData.landing?.services?.[service.id as keyof typeof contentData.landing.services]?.description || service.defaultDesc))}
+                                        {(contentData.landing?.services?.[service.id as keyof typeof contentData.landing.services]?.description || service.defaultDesc)}
                                     </p>
 
                                     <Link
