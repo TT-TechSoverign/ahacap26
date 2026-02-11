@@ -39,7 +39,7 @@ export default function Section2OurServicesV2() {
     ];
 
     return (
-        <section className="relative w-full bg-slate-950 overflow-hidden py-12 md:py-16">
+        <section className="relative w-full bg-slate-950 overflow-hidden pb-12 md:pb-16 pt-0">
 
             {/* Background Image with Frosted Dark Overlay */}
             <div className="absolute inset-0 z-0">
