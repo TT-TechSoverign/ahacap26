@@ -109,6 +109,9 @@ export async function POST(req: Request) {
                     message: 'By confirming, you agree to the All Sales Final policy.'
                 }
             },
+            phone_number_collection: {
+                enabled: true,
+            },
             metadata: {
                 source: 'web_checkout',
                 fulfillment_mode: fulfillmentMode,
