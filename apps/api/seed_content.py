@@ -48,7 +48,6 @@ async def seed_content():
                 path=GLOBAL_PATH,
                 data=json_str,
                 draft_data=json_str,
-                draft_data=json_str,
                 updated_at=datetime.utcnow()
             )
             session.add(page)
