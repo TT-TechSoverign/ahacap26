@@ -24,13 +24,13 @@
         "link3_text": "CENTRAL AC RETROFITS",
         "part4": " ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND ",
         "link4_text": "SPECIALIZED WINDOW AC CLEANINGS",
-        "part5": " THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM."
+        "part5": " THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THELONG TERM."
       },
       "grid": [
         {
           "id": "minisplits",
           "title": "MINI SPLITS",
-          "description": "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling for any size of rooms. Whether it’s a new Installation or a Retrofit for an older Oahu home, we offer full Service & Repairs to keep your sanctuary cool and quiet",
+          "description": "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling for any size of rooms. Whether it’s a new Installation or a Retrofit for an older Oahu home, weoffer full Service & Repairs to keep your sanctuary cool and quiet",
           "link": "MORE INFO",
           "icon": "ac_unit",
           "href": "/contact",
@@ -49,7 +49,7 @@
         {
           "id": "central",
           "title": "MINI SPLIT AC MAINTENANCE",
-          "description": "Maximize Whole-Home Comfort. We provide professional Retrofits (Air Handlers & Condensers ONLY), SEER2 Efficiency Upgrades, and Full-Service, Maintenance and Repairs for  your Central AC system(s). Our professionals ensure your system is precisely tuned to handle Hawaii's humidity while lowering your monthly energy costs.",
+          "description": "Maximize Whole-Home Comfort. We provide professional Retrofits (Air Handlers & Condensers ONLY), SEER2 Efficiency Upgrades, and Full-Service, Maintenance and Repairs for  your Central AC system(s). Our professionals ensure your system is precisely tuned to handle Hawaii's humidity while lowering your monthly energy costs.",
           "link": "MORE INFO",
           "icon": "hvac",
           "href": "/contact",
@@ -359,7 +359,7 @@
     "guide": {
       "title": "ROOM SIZING GUIDE",
       "subtitle": "Technical Resource",
-      "description": "Standard sizing charts fail to account for Hawaii’s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles and fails to dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determine the precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don’t guess with your comfort—deploy the correct infrastructure.",
+      "description": "Standard sizing charts fail to account for Hawaii’s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles andfails to dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determinethe precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don’t guess with your comfort—deploy the correct infrastructure.",
       "info_title": "High Ceiling / Sun Exposure?",
       "info_desc": "For rooms with high ceilings (9ft+) or direct afternoon sun, we recommend sizing up by 10% to ensure efficiency."
     },
@@ -430,10 +430,10 @@
     "backlinking": {
       "logistics": {
         "link3": "WAIPAHU SHOP.",
-        "part1": "EVERY HOUR OF HEAT COUNTS. OUR ",
+        "part1": "EVERY HOUR OF HEAT COUNTS. OUR ",
         "link1": "LOCAL WAREHOUSE PICKUP",
-        "part2": " IS YOUR SOLUTION. SCHEDULE YOUR ",
-        "part3": " AT OUR ",
+        "part2": " IS YOUR SOLUTION. SCHEDULE YOUR ",
+        "part3": " AT OUR ",
         "link2": "WINDOW AC PICKUP"
       }
     }
@@ -444,8 +444,8 @@
       "title": "WAIPAHU SHOP PICKUP",
       "title_highlight": "",
       "pricing_notice": "Unit pricing reflects local pickup from our Waipahu Distribution Center.",
-      "label": "Scheduling/Pick Up Instructions",
-      "process": "Once your order is processed, an Affordable Home A/C Representative will contact you to schedule a specific pick up date and time.",
+      "label": "Deployment Protocol",
+      "process": "Once your order is processed, an Affordable Home A/C Logistics Coordinator will contact you to schedule a specific arrival window.",
       "warning": "Note: As our facility is an active distribution hub, unscheduled arrivals cannot be accommodated."
     },
     "delivery": {
@@ -529,7 +529,7 @@
       "description_p1": "Oahu's high humidity and constant exposure to saline trade winds create a \"perfect storm\" for window A/C units. Unlike drier climates, Honolulu's air causes rapid condensation buildup within the internal casing of window units, which often goes unnoticed behind the front grill.",
       "description_p2_prefix": "This moisture, combined with indoor dust, creates a fertile breeding ground for",
       "description_p2_highlight": "toxic mold (Aspergillus)",
-      "description_p2_suffix": "and bacteria. Without regular professional sanitization, your window unit becomes a distribution system for allergens, causing \"Sick Building Syndrome\" symptoms like headaches, fatigue, and respiratory distress.",
+      "description_p2_suffix": "and bacteria. Without regular professional sanitization, your window unit becomes a distribution system for allergens, causing \"Sick Building Syndrome\" symptoms like headaches, fatigue, andrespiratory distress.",
       "description_p3_prefix": "Furthermore, salt-air corrosion eats away at sensitive aluminum fins and copper tubing. Our deep cleaning process includes a specialized",
       "description_p3_highlight": "Corrosion Inhibitor Treatment",
       "description_p3_suffix": "that neutralizes salt deposits, potentially extending your unit's lifespan by 3-5 years."
@@ -786,10 +786,10 @@
   },
   "footer_schedule": {
     "mini_split_label": "MINI SPLIT AC",
-    "window_ac_label": "WINDOW AC / SERVICE",
-    "mini_split_estimate_date": "Next Available Estimate: Feb 6",
-    "mini_split_install_date": "Next Available Install: Feb 12",
-    "window_ac_estimate_date": "Next Available Estimate: Feb 5",
-    "window_ac_install_date": "Next Available Install: Feb 8"
+    "window_ac_label": "WINDOW AC",
+    "mini_split_estimate_date": "Next Available Estimate: Feb 9-13, 2026",
+    "mini_split_install_date": "Next Available Install: Feb 9-13, 2026",
+    "window_ac_estimate_date": "Next Available Estimate: Feb 9-13, 2026",
+    "window_ac_install_date": "Next Available Install: Feb 9-13, 2026"
   }
 }
