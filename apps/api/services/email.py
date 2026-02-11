@@ -426,84 +426,110 @@ async def send_inquiry_notification(lead):
     """
     Sends an Admin Notification when a new lead/inquiry comes in via the Contact Wizard.
     """
+    if not HAS_SMTP:
+        logger.warning(f"Skipping inquiry email for lead {lead.id}: SMTP not active.")
+        return
+
     try:
         logger.info(f"Preparing Inquiry Notification for Lead ID: {lead.id}")
-
-        subject = f"🔔 New Inquiry: {lead.first_name} {lead.last_name} ({lead.service_type})"
         
-        # --- HTML BODY ---
+        subject = f"🔔 New Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}"
+        
+        # New Premium Template
         html_content = f"""
         <!DOCTYPE html>
         <html>
         <head>
             <style>
-                body {{ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 0; }}
-                .container {{ max-width: 600px; margin: 0 auto; background-color: #1e1e1e; border: 1px solid #333; }}
-                .header {{ background-color: #000000; padding: 20px; text-align: center; border-bottom: 2px solid #00aeef; }}
-                .logo {{ max-width: 200px; }}
-                .content {{ padding: 30px; }}
-                h1 {{ color: #ffffff; font-size: 24px; margin-top: 0; text-transform: uppercase; letter-spacing: 1px; }}
-                .highlight {{ color: #00aeef; font-weight: bold; }}
-                .section {{ margin-bottom: 25px; background-color: #252525; padding: 15px; border-left: 4px solid #00aeef; }}
-                .label {{ font-size: 11px; text-transform: uppercase; color: #888; letter-spacing: 1px; margin-bottom: 5px; display: block; }}
-                .value {{ font-size: 16px; color: #fff; font-weight: 500; display: block; }}
-                .meta-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }}
-                .footer {{ background-color: #000000; padding: 20px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #333; }}
-                a.btn {{ display: inline-block; background-color: #00aeef; color: #000000; padding: 12px 25px; text-decoration: none; font-weight: bold; text-transform: uppercase; border-radius: 4px; margin-top: 10px; }}
+                body {{ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 0; color: #1e293b; }}
+                .container {{ max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }}
+                .header {{ background: #0f172a; padding: 30px; text-align: center; border-bottom: 4px solid #06b6d4; }}
+                .header img {{ max-width: 180px; height: auto; }}
+                .content {{ padding: 35px 40px; }}
+                .content h1 {{ color: #0f172a; font-size: 24px; margin-bottom: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; text-align: center; }}
+                .content p.subtitle {{ text-align: center; color: #64748b; font-size: 14px; margin-top: 0; margin-bottom: 30px; }}
+                
+                .data-table {{ width: 100%; border-collapse: collapse; margin-bottom: 25px; }}
+                .data-table td {{ padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 15px; vertical-align: top; }}
+                .data-table td.label {{ width: 35%; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; padding-top: 14px; }}
+                .data-table td.value {{ width: 65%; color: #0f172a; font-weight: 500; }}
+                
+                .notes-box {{ background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; font-size: 14px; line-height: 1.6; color: #334155; margin-top: 10px; }}
+                
+                .actions {{ text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px dashed #e2e8f0; }}
+                .btn {{ display: inline-block; padding: 12px 24px; background: #06b6d4; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px; margin: 0 10px; box-shadow: 0 2px 10px rgba(6, 182, 212, 0.2); transition: all 0.2s; }}
+                .btn:hover {{ background: #0891b2; box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3); }}
+                .btn.secondary {{ background: #e2e8f0; color: #475569; box-shadow: none; }}
+                .btn.secondary:hover {{ background: #cbd5e1; color: #1e293b; }}
+
+                .footer {{ background: #f8fafc; padding: 20px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e2e8f0; }}
+                
+                /* Print Styles */
+                @media print {{
+                    body {{ background-color: white; }}
+                    .container {{ box-shadow: none; border: none; margin: 0; max-width: 100%; }}
+                    .actions {{ display: none; }}
+                    .footer {{ display: none; }}
+                    .header {{ padding: 20px 0; background: none; border-bottom: 2px solid #0f172a; }}
+                    /* Force Logo to Black for clearer print if needed, or keep color */
+                    .header img {{ filter: invert(0%); }} 
+                }}
             </style>
         </head>
         <body>
             <div class="container">
                 <div class="header">
-                    <!-- CID Reference for Logo -->
-                    <img src="cid:logo_paramount" alt="AHAC Logo" class="logo">
+                    <img src="cid:logo_paramount" alt="AHAC Logo">
                 </div>
                 <div class="content">
-                    <h1>New <span class="highlight">Service Inquiry</span></h1>
-                    <p>You have received a new request from the website Dispatch Wizard.</p>
-
-                    <div class="section">
-                        <span class="label">Customer</span>
-                        <span class="value">{lead.first_name} {lead.last_name}</span>
-                        <br>
-                        <div class="meta-grid">
-                            <div>
-                                <span class="label">Phone</span>
-                                <a href="tel:{lead.phone}" style="color: #00aeef; text-decoration: none;">{lead.phone}</a>
-                            </div>
-                            <div>
-                                <span class="label">Email</span>
-                                <a href="mailto:{lead.email}" style="color: #00aeef; text-decoration: none;">{lead.email}</a>
-                            </div>
-                        </div>
+                    <h1>New Lead Received</h1>
+                    <p class="subtitle">Ref: {lead.id} &bull; {lead.created_at.strftime('%m/%d/%Y %I:%M %p')}</p>
+                    
+                    <table class="data-table">
+                        <tr>
+                            <td class="label">Customer Name</td>
+                            <td class="value">{lead.first_name} {lead.last_name}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Priority</td>
+                            <td class="value" style="color: {'#ef4444' if lead.urgency == 'emergency' else '#0f172a'}; font-weight: 700;">
+                                {lead.urgency.upper()}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label">Service Type</td>
+                            <td class="value">{lead.service_type}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Phone</td>
+                            <td class="value"><a href="tel:{lead.phone}" style="color: #06b6d4; text-decoration: none;">{lead.phone}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Email</td>
+                            <td class="value"><a href="mailto:{lead.email}" style="color: #06b6d4; text-decoration: none;">{lead.email}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Address</td>
+                            <td class="value">
+                                {lead.address}<br>
+                                {lead.city or ''} {lead.zip or ''}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <div style="font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Customer Notes</div>
+                    <div class="notes-box">
+                        {lead.notes or "No additional notes provided."}
                     </div>
-
-                    <div class="section">
-                        <span class="label">Service Requested</span>
-                        <span class="value" style="color: #00aeef;">{lead.service_type}</span>
-                        <br>
-                        <span class="label">Urgency / Timing</span>
-                        <span class="value">{lead.urgency}</span>
-                    </div>
-
-                    <div class="section">
-                        <span class="label">Location</span>
-                        <span class="value">{lead.address}</span>
-                        <span class="value">{lead.city}, {lead.zip}</span>
-                    </div>
-
-                    <div class="section">
-                        <span class="label">Notes / Preferences</span>
-                        <span class="value">{lead.notes or "No additional notes."}</span>
-                    </div>
-
-                    <div style="text-align: center; margin-top: 30px;">
+                    
+                    <div class="actions">
                         <a href="mailto:{lead.email}?subject=Re: Your AHAC Service Request - {lead.service_type}" class="btn">Reply to Customer</a>
+                        <a href="javascript:window.print()" onclick="window.print(); return false;" class="btn secondary">🖨️ Print Lead</a>
                     </div>
                 </div>
                 <div class="footer">
                     &copy; 2026 Affordable Home AC & Heating.<br>
-                    Internal Notification System.
+                    Internal Dispatch System.
                 </div>
             </div>
         </body>
@@ -514,7 +540,10 @@ async def send_inquiry_notification(lead):
         msg = MIMEMultipart("related")
         msg["Subject"] = subject
         msg["From"] = f"AHAC Notifications <{SMTP_USER}>"
-        msg["To"] = ADMIN_EMAIL
+        
+        # Recipients List
+        recipients = [ADMIN_EMAIL, "irasmussenjobs@gmail.com"]
+        msg["To"] = ", ".join(recipients)
         
         # Attach HTML
         msg.attach(MIMEText(html_content, "html"))
@@ -530,7 +559,7 @@ async def send_inquiry_notification(lead):
             await smtp.login(SMTP_USER, SMTP_PASSWORD)
             await smtp.send_message(msg)
             
-        logger.info("✅ Inquiry Notification Sent Successfully.")
+        logger.info(f"✅ Inquiry Notification Sent to {len(recipients)} recipients.")
 
     except Exception as e:
         logger.error(f"❌ Failed to send inquiry notification: {e}")

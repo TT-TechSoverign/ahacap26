@@ -1,5 +1,5 @@
 {
-  "landing": {
+  "landing_legacy": {
     "hero": {
       "badge": "Est. 2005 • Oahu, HI",
       "title_line1": "20+ YEARS OF SERVICING ISLAND WIDE",
@@ -14,7 +14,7 @@
       "cta_estimate": "REQUEST A QUOTE"
     },
     "services": {
-      "subtitle": "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE) CURATED FOR DURABILIT; ULTRA-QUIET DUCTLESS MINI SPLITS DESIGNED FOR PRECISION ZONE COOLING; CENTRAL AC RETROFITS ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND SPECIALIZED WINDOW AC CLEANINGS THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM.",
+      "subtitle": "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE) CURATED FOR DURABILIT; ULTRA-QUIET DUCTLESS MINI SPLITS DESIGNED FOR PRECISION ZONE COOLING; CENTRAL AC RETROFITS ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND SPECIALIZED WINDOW AC CLEANINGS THAT DEFEND AGAINST HAWAII'S RELENTLESSSALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM.",
       "backlinking": {
         "part1": "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM ",
         "link1_text": "HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE)",
@@ -39,7 +39,7 @@
         {
           "id": "inventory",
           "title": "WINDOW AC SHOP",
-          "description": "Your Local High-Efficiency Resource. Skip the big-box logistics. We stock premium, DIY high-efficiency LG & GE Through-the-Wall units specifically chosen for their durability. Get expert advice on the right BTU for your space and schedule your pick up your unit today at our Waipahu location.",
+          "description": "Browse our massive inventory of LG & GE units",
           "link": "View Inventory",
           "icon": "storefront",
           "href": "/shop",
@@ -48,8 +48,8 @@
         },
         {
           "id": "central",
-          "title": "CENTRAL AC",
-          "description": "Maximize Whole-Home Comfort. We provide professional Retrofits (Air Handlers & Condensers ONLY), SEER2 Efficiency Upgrades, and Full-Service, Maintenance and Repairs for  your Central AC system(s). Our professionals ensure your system is precisely tuned to handle Hawaii's humidity while lowering your monthly energy costs.",
+          "title": "MINI SPLIT AC MAINTENANCE",
+          "description": "Maximize Whole-Home Comfort. We provide professional Retrofits (Air Handlers & Condensers ONLY), SEER2 Efficiency Upgrades, and Full-Service, Maintenance and Repairs for  your Central AC system(s). Our professionals ensure your system is precisely tuned to handle Hawaii's humidity while lowering your monthly energy costs.",
           "link": "MORE INFO",
           "icon": "hvac",
           "href": "/contact",
@@ -58,7 +58,7 @@
         {
           "id": "cleaning",
           "title": "WINDOW AC CLEANING",
-          "description": "Breathe Cleaner, Save Longer. High humidity and salt air are the leading causes of AC failure in the islands. Our Deep Cleaning window ac cleaning services lead by Technician, Chris Martinez, ensuring to assist with protecting your investment, improve indoor air quality, and prevent expensive breakdowns before they happen.",
+          "description": "Deep cleaning to restore efficiency and air quality.",
           "link": "WINDOW AC MAINTENANCE",
           "icon": "cleaning_services",
           "href": "/contact",
@@ -219,6 +219,7 @@
       "window_install_value": "1-2 WEEKS"
     },
     "wizard_title": "CONTACT US",
+    "wizard_interface": "INTERFACE",
     "wizard_subtitle": "DISPATCH TICKET",
     "wizard_ticket_prefix": "#AHAC162612100",
     "wizard": {
@@ -249,11 +250,12 @@
         "Mini Split Estimate (New)",
         "Mini Split Estimate (Replace)",
         "Mini Split Maintenance",
-        "Mini Split Diagnosis/Repair",
-        "Central AC Estimate",
-        "Central AC Maintenance",
-        "Central AC Diag/Repair"
-      ]
+        "Mini Split Diagnosis/Repair"
+      ],
+      "success": {
+        "title": "REQUEST RECEIVED",
+        "subtitle": "OUR DISPATCH TEAM WILL REVIEW YOUR TICKET AND CONTACT YOU SHORTLY TO CONFIRM APPOINTMENT DETAILS."
+      }
     },
     "hours_title": "BUSINESS HOURS",
     "hours_mon_fri": "8:00 AM - 5:00 PM",
@@ -279,11 +281,11 @@
       "ge",
       "casement",
       "sizing-guide",
+      "logistics",
       "rebate",
       "brand-spotlight",
-      "logistics",
-      "faq",
-      "educational-benefits"
+      "educational-benefits",
+      "faq"
     ],
     "dual_inverter": {
       "title": "DUAL INVERTER TECHNOLOGY",
@@ -291,22 +293,22 @@
       "description": "LG’s DUAL Inverter™ technology is engineered for the high-salinity and high-humidity environments of Oahu. By utilizing variable-speed compressors, these units slash energy consumption by up to 40% while operating at whisper-quiet levels. Every model in this section is $45 Hawaii Energy Rebate Qualified."
     },
     "universal_fit": {
-      "title": "UNIVERSAL FIT / THRU-THE-WALL",
+      "title": "Perfect Fit For Older Panasonic & Fredrich Units",
       "subtitle": "Seamless Integration",
       "description": "Designed for existing wall sleeves, these high-performance units provide a clean, professional look without sacrificial window space. Built for Hawaii's salt-air durability."
     },
     "base": {
-      "title": "BASE / STANDARD SOLUTIONS",
+      "title": "BASE / STANDARD UNITS",
       "subtitle": "Reliable Island Cooling",
       "description": "Our standard LG window units provide dependable cooling with industrial reliability. Built with anti-corrosive coatings for long-term island duty."
     },
     "ge": {
-      "title": "GE PERFORMANCE SERIES",
+      "title": "Thru Wall / Flush Mount Units",
       "subtitle": "Trusted Dependability",
       "description": "Engineered for permanent through-the-wall installation, the GE Built-In series provides high-output cooling for Oahu’s most demanding residential environments. These units feature a true universal fit chassis and advanced dehumidification cycles to maintain a crisp, dry interior climate regardless of exterior humidity."
     },
     "casement": {
-      "title": "CASEMENT & SLIDER",
+      "title": "CASEMENT",
       "subtitle": "Specialized Architecture",
       "description": "GE 26\" QUICK SNAP SLEEVE. This industrial-grade sleeve is the structural foundation for the GE Built-In series (AJCQ models) and modern LG Universal Fit units. Engineered to ship flat and snap together on-site, it provides a rigid, weather-sealed portal that protects the AC chassis from exterior elements while maintaining a professional, flush-mount appearance in any Hawaii residence. "
     },
@@ -357,7 +359,7 @@
     "guide": {
       "title": "ROOM SIZING GUIDE",
       "subtitle": "Technical Resource",
-      "description": "Standard sizing charts fail to account for Hawaii’s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles and fails to dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determine the precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don’t guess with your comfort—deploy the correct infrastructure.",
+      "description": "Standard sizing charts fail to account for Hawaii’s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles and failsto dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determine the precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don’t guess with your comfort—deploy the correct infrastructure.",
       "info_title": "High Ceiling / Sun Exposure?",
       "info_desc": "For rooms with high ceilings (9ft+) or direct afternoon sun, we recommend sizing up by 10% to ensure efficiency."
     },
@@ -428,37 +430,13 @@
     "backlinking": {
       "logistics": {
         "link3": "WAIPAHU SHOP.",
-        "part1": "EVERY HOUR OF HEAT COUNTS. OUR ",
+        "part1": "EVERY HOUR OF HEAT COUNTS. OUR ",
         "link1": "LOCAL WAREHOUSE PICKUP",
-        "part2": " IS YOUR SOLUTION. SCHEDULE YOUR ",
-        "part3": " AT OUR ",
+        "part2": " IS YOUR SOLUTION. SCHEDULE YOUR ",
+        "part3": " AT OUR ",
         "link2": "WINDOW AC PICKUP"
       }
     }
-  },
-  "navigation": {
-    "links": [
-      {
-        "text": "MINI SPLIT AC",
-        "href": "/contact"
-      },
-      {
-        "text": "SHOP WINDOW AC INVENTORY",
-        "href": "/shop"
-      },
-      {
-        "text": "CENTRAL AC",
-        "href": "/contact"
-      },
-      {
-        "text": "WINDOW AC CLEANING",
-        "href": "/contact"
-      }
-    ],
-    "contact_btn": "Contact Us",
-    "back_to_home": "Back to Home",
-    "back_to_inventory": "Back to Inventory",
-    "service_center": "Service Center"
   },
   "logistics": {
     "badge": "Fulfillment Infrastructure",
@@ -466,8 +444,8 @@
       "title": "WAIPAHU SHOP PICKUP",
       "title_highlight": "",
       "pricing_notice": "Unit pricing reflects local pickup from our Waipahu Distribution Center.",
-      "label": "Deployment Protocol",
-      "process": "Once your order is processed, an Affordable Home A/C Logistics Coordinator will contact you to schedule a specific arrival window.",
+      "label": "Scheduling/Pick Up Instructions",
+      "process": "Once your order is processed, an Affordable Home A/C Representative will contact you to schedule a specific pick up date and time.",
       "warning": "Note: As our facility is an active distribution hub, unscheduled arrivals cannot be accommodated."
     },
     "delivery": {
@@ -478,5 +456,340 @@
       "exclusions_label": "Service Exclusions",
       "exclusions": "Due to logistical constraints, we do not provide delivery to Waialua, North Shore, Kahuku, Waianae, Nanakuli, Waikiki, or Waimanalo."
     }
+  },
+  "services_general": {
+    "residential": {
+      "title": "Residential",
+      "description": "Keep your home cool and comfortable with our expert installation and repair services."
+    },
+    "commercial": {
+      "title": "Commercial & HOA",
+      "description": "Reliable climate control solutions for businesses, condos, and managed properties."
+    },
+    "construction": {
+      "title": "New Construction",
+      "description": "Partner with us for seamless HVAC integration in your new build projects."
+    },
+    "property_mgmt": {
+      "title": "Property Management",
+      "description": "Rapid response and reliable maintenance for property managers and landlords."
+    }
+  },
+  "maintenance": {
+    "hero": {
+      "badge": "EPA-CERTIFIED DEEP CLEANING",
+      "title": "PROFESSIONAL",
+      "title_highlight": "WINDOW AC CLEANING",
+      "title_suffix": "& SANITIZATION SERVICES IN OAHU",
+      "description": "Eliminate mold, bacteria, and salt-air corrosion with our EPA-certified deep cleaning process. Specialized for Hawaii's humidity to restore 100% cooling efficiency and peak air quality.",
+      "cta_schedule": "Schedule Service",
+      "cta_rates": "View Local Rates"
+    },
+    "technician": {
+      "name": "Chris Martinez",
+      "title": "Master HVAC Technician",
+      "cert1": "EPA 608 Universal Certified",
+      "cert2": "NATE Certified Specialist",
+      "quote": "\"Our deep clean isn't just a rinse—it's a clinical decontamination of your cooling system.\""
+    },
+    "video": {
+      "title": "ENGINEERING EXCELLENCE",
+      "youtube_id": "dQw4w9WgXcQ",
+      "features": {
+        "feature1": {
+          "title": "MOLD FREE",
+          "sub": "Guaranteed Remediation",
+          "color": "text-primary",
+          "icon": "eco"
+        },
+        "feature2": {
+          "title": "SALT PROTECT",
+          "sub": "Corrosion Barrier",
+          "color": "text-accent",
+          "icon": "thunderstorm"
+        },
+        "feature3": {
+          "title": "30% MORE CFM",
+          "sub": "Efficiency Restored",
+          "color": "text-primary",
+          "icon": "speed"
+        },
+        "feature4": {
+          "title": "HYGIENIC AIR",
+          "sub": "Pathogen Neutralization",
+          "color": "text-accent",
+          "icon": "medical_services"
+        }
+      }
+    },
+    "climate": {
+      "title": "WHY HAWAII'S CLIMATE",
+      "title_highlight": "DEMANDS",
+      "title_suffix": "PROFESSIONAL SERVICE",
+      "description_p1": "Oahu's high humidity and constant exposure to saline trade winds create a \"perfect storm\" for window A/C units. Unlike drier climates, Honolulu's air causes rapid condensation buildup within the internal casing of window units, which often goes unnoticed behind the front grill.",
+      "description_p2_prefix": "This moisture, combined with indoor dust, creates a fertile breeding ground for",
+      "description_p2_highlight": "toxic mold (Aspergillus)",
+      "description_p2_suffix": "and bacteria. Without regular professional sanitization, your window unit becomes a distribution system for allergens, causing \"Sick Building Syndrome\" symptoms like headaches, fatigue, and respiratory distress.",
+      "description_p3_prefix": "Furthermore, salt-air corrosion eats away at sensitive aluminum fins and copper tubing. Our deep cleaning process includes a specialized",
+      "description_p3_highlight": "Corrosion Inhibitor Treatment",
+      "description_p3_suffix": "that neutralizes salt deposits, potentially extending your unit's lifespan by 3-5 years."
+    },
+    "process": {
+      "title": "OUR PROPRIETARY 25-POINT",
+      "title_highlight": "SANITIZATION",
+      "title_suffix": "PROCESS",
+      "subtitle": "Medical-Grade Restoration for Residential Window Units",
+      "step1_title": "ANTIMICROBIAL COIL FLUSH",
+      "step1_description": "We use a non-toxic, hospital-grade antimicrobial solution forced through both evaporator and condenser coils at precise pressure to dissolve biofilm and mold roots that retail sprays can't reach.",
+      "step1_point1": "Deep Tissue Biofilm Removal",
+      "step1_point2": "EPA-Registered Disinfectant",
+      "step2": {
+        "title": "BLOWER WHEEL REBALANCING",
+        "desc": "Removing buildup from fan blades to eliminate vibrations and motor strain."
+      },
+      "step3": {
+        "title": "DRAIN CHANNEL FLUSH",
+        "desc": "Clearing standing water paths to prevent rust and overflow leaks."
+      },
+      "step4": {
+        "title": "FIN COMBING",
+        "desc": "Precision alignment of aluminum fins for maximum thermodynamic exchange."
+      },
+      "step5": {
+        "title": "DELTA T TESTING",
+        "desc": "Digital verification of intake vs. output temps to confirm peak delta performance."
+      }
+    },
+    "before_after": {
+      "title": "BEFORE & AFTER",
+      "title_highlight": "TRANSFORMATION",
+      "label_initial": "Initial Assessment",
+      "label_pre": "Pre-Sanitization",
+      "label_post": "Post-Service",
+      "label_restored": "Efficiency Restored",
+      "badge_mold": "MOLD CONTAMINATION",
+      "badge_clean": "CLINICAL CLEAN"
+    },
+    "coverage": {
+      "title": "OAHU SERVICE",
+      "title_highlight": "COVERAGE",
+      "subtitle": "Rapid dispatch available for the following communities:",
+      "cities": [
+        "HONOLULU",
+        "AIEA",
+        "KANEOHE",
+        "KAPOLEI",
+        "EWA BEACH",
+        "PEARL CITY",
+        "KAILUA",
+        "MILILANI"
+      ],
+      "map_label": "Island-Wide Mobile Units"
+    },
+    "tech_hub": {
+      "title": "TECHNICAL RESOURCE HUB",
+      "link1": "Energy Star Maintenance Guidelines",
+      "link2": "EPA Indoor Air Quality Standards",
+      "link3": "Official Service Manuals & Diagrams"
+    },
+    "faq": {
+      "title": "FREQUENTLY ASKED",
+      "title_highlight": "QUESTIONS",
+      "items": [
+        {
+          "q": "How often should I have my window A/C professionally cleaned in Oahu?",
+          "a": "Due to our high humidity and salt-air concentration, we recommend a deep clinical sanitization every 6-12 months for primary living spaces to prevent mold buildup and corrosion."
+        },
+        {
+          "q": "Does dirty window A/C impact electricity bills?",
+          "a": "Yes. Clogged coils force the compressor to work 30-50% harder to achieve the same cooling effect, leading to significantly higher MECO/HECO bills and premature motor failure."
+        },
+        {
+          "q": "Can I just use a spray bottle from the hardware store?",
+          "a": "Hardware store sprays only treat the surface. Our process involves full teardown and internal decontamination of the blower wheel and drain pan where 90% of mold actually resides."
+        }
+      ]
+    },
+    "floating_cta": "Book Now"
+  },
+  "admin": {
+    "tabs": {
+      "inventory": "Inventory",
+      "orders": "Orders",
+      "leads": "Leads"
+    },
+    "login": {
+      "title": "Sovereign Admin",
+      "subtitle": "Authorized Access Only",
+      "label": "Access PIN",
+      "button": "Initialize Session",
+      "version": "AHAC Executive Terminal v1.1.0",
+      "error": "INVALID ACCESS CODE"
+    },
+    "nav": {
+      "title": "Command Center",
+      "subtitle": "AHAC Management Hub",
+      "view_shop": "View Shop",
+      "add_product": "Add Product"
+    },
+    "stats": {
+      "inventory": {
+        "total": "Total Units",
+        "value": "Inventory Value"
+      },
+      "orders": {
+        "total": "Total Orders",
+        "revenue": "Revenue"
+      },
+      "leads": {
+        "active": "Active Tickets",
+        "urgent": "Urgent Inquiries"
+      }
+    },
+    "table": {
+      "image": "Image",
+      "name": "Product Name",
+      "category": "Category",
+      "price": "Price",
+      "stock": "Stock",
+      "actions": "Actions"
+    },
+    "orders": {
+      "header": "Order Oversight",
+      "empty": "No orders found.",
+      "columns": {
+        "id": "Order ID",
+        "customer": "Customer",
+        "date": "Date",
+        "status": "Status",
+        "total": "Total"
+      },
+      "modal": {
+        "title": "Order Oversight",
+        "manifest": "Purchase Manifest",
+        "update_status": "Update Manifest",
+        "transition": "Status Transition"
+      }
+    },
+    "leads": {
+      "header": "Lead Lifecycle",
+      "empty": "No leads found.",
+      "columns": {
+        "requestor": "Requestor",
+        "service": "Service Type",
+        "urgency": "Urgency",
+        "status": "Status",
+        "date": "Date"
+      },
+      "modal": {
+        "title": "Service Ticket Details",
+        "notes": "Internal Notes",
+        "update": "Save Changes",
+        "contact_info": "Contact Information",
+        "location": "Project Location",
+        "status": "Ticket Status"
+      }
+    },
+    "products": {
+      "modal": {
+        "new": "New Intake",
+        "edit": "Update Model",
+        "subtitle": "Industrial Inventory Control",
+        "name": "Product Name",
+        "price": "Price (USD)",
+        "stock": "Initial Stock",
+        "category": "Category",
+        "image": "Image URL",
+        "save_new": "Initialize Unit",
+        "save_edit": "Commit Changes",
+        "cancel": "Cancel"
+      }
+    }
+  },
+  "system_upgrade": {
+    "status_badge": "System Status: Upgrading",
+    "title_line1": "The Evolution",
+    "title_line2": "of Cool.",
+    "description": "Affordable Home A/C is calibrating a new digital experience. Smart. Adaptive. Precise. A higher standard of comfort is loading now.",
+    "status_pill": "Field Operations: Fully Active & Ready to Assist",
+    "cta_button": "Contact Support",
+    "footer": "Authorized Dealer • Serving Oahu Since 2005"
+  },
+  "navigation": {
+    "links": [
+      {
+        "text": "MINI SPLIT AC",
+        "href": "/contact"
+      },
+      {
+        "text": "MINI SPLIT AC CLEANING",
+        "href": "/contact"
+      },
+      {
+        "text": "SHOP WINDOW AC INVENTORY",
+        "href": "/shop"
+      },
+      {
+        "text": "WINDOW AC CLEANING",
+        "href": "/contact"
+      },
+      {
+        "text": "SERVICE AREAS",
+        "href": "/contact"
+      }
+    ]
+  },
+  "landing": {
+    "services_header": {
+      "title": "PREMIUM",
+      "title_highlight": "COOLING",
+      "narrative": "We don't just sell ACs; we curate high-efficiency solutions specifically for the 'Ohana, ensuring your family stays cool, quiet, and protected for years to come."
+    },
+    "services": {
+      "window_ac": {
+        "title": "WINDOW AC SALES",
+        "description": "The largest inventory of LG & GE window units in Waipahu. Pick up today."
+      },
+      "split_systems": {
+        "title": "SPLIT SYSTEMS",
+        "description": "Whisper-quiet, energy-efficient cooling for your entire home."
+      },
+      "maintenance": {
+        "title": "MAINTENANCE",
+        "description": "Protect your investment with professional cleaning and servicing."
+      }
+    },
+    "about_quick": {
+      "badge": "SINCE 2005",
+      "subtitle_prefix": "THE",
+      "title": "EVOLUTION",
+      "title_highlight": "OF COOL",
+      "narrative": "FOR OVER 20 YEARS, AFFORDABLE HOME A/C HAS BEEN KNOWN FOR PREMIER WINDOW AC SERVICES. TODAY, WE HAVE EVOLVED INTO A FULLY LICENSED, INSURED, AND BONDED HVAC CONTRACTOR, EXPANDING OUR EXCELLENCE TO MITSUBISHI MINI-SPLITS AND CENTRAL AIR SYSTEMS. WE BRING INDUSTRIAL DISCIPLINE TO RESIDENTIAL COMFORT.",
+      "stat1_value": "20+",
+      "stat1_label": "YEARS SERVING OAHU",
+      "stat2_value": "100%",
+      "stat2_label": "LICENSED & BONDED",
+      "image_alt": "HISTORIC SHOP PHOTO"
+    }
+  },
+  "common": {
+    "location": "Waipahu, HI 96797",
+    "address": "94-150 Leoleo St. #203",
+    "warehouse_name": "Waipahu Warehouse",
+    "warehouse_full": "Waipahu Industrial Park",
+    "footer": {
+      "nav": "Navigation",
+      "support": "Support",
+      "location": "Location",
+      "copyright": "© 2024 Affordable Home A/C • LIC# CT-36775 • Island-Scale Cooling Solutions"
+    }
+  },
+  "footer_schedule": {
+    "mini_split_label": "MINI SPLIT AC",
+    "window_ac_label": "WINDOW AC / SERVICE",
+    "mini_split_estimate_date": "Next Available Estimate: Feb 6",
+    "mini_split_install_date": "Next Available Install: Feb 12",
+    "window_ac_estimate_date": "Next Available Estimate: Feb 5",
+    "window_ac_install_date": "Next Available Install: Feb 8"
   }
 }
