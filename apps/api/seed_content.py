@@ -24,7 +24,8 @@ async def seed_content():
         content_data = json.load(f)
     
     # We will store the entire content blob under a special global path
-    GLOBAL_PATH = "/global"
+    # We will store the entire content blob under a special global path
+    GLOBAL_PATH = "/"
     
     # Convert back to string for storage (since our model matches what saves)
     json_str = json.dumps(content_data)
