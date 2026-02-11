@@ -33,8 +33,13 @@ else
     echo "✅ Disk usage is safe ($USAGE%). Proceeding with standard update..."
 fi
 
-echo "📥 [2/6] Pulling Latest Code..."
-git pull origin staging
+echo "📥 [2/6] Syncing Code (Hard Reset)..."
+# Fetch latest changes
+git fetch origin staging
+
+# Force reset to match remote (Destructive but necessary for verified deployment)
+# This prevents "merge conflict" errors if files were touched on the server
+git reset --hard origin/staging
 
 echo "🔧 [3/6] Fixing Permissions (Persistence Layer)..."
 mkdir -p apps/web/lib/content
