@@ -143,8 +143,8 @@ export default function Homepage() {
     };
 
     return (
-        <div className="bg-slate-900 text-slate-50 min-h-screen font-sans">
-            <main className="pt-[220px] bg-slate-900">
+        <div className="bg-[#0F172A] text-slate-100 min-h-screen font-sans">
+            <main className="pt-[160px] bg-[#0F172A]">
                 <Section2OurServicesV2 />
                 {/* <Section4Projects /> */}
                 {/* <Render config={config} data={v2Data} /> */}

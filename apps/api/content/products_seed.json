@@ -4,6 +4,7 @@
         "name": "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
         "price": 540,
         "category": "WINDOW_AC",
+        "subcategory": "dual_inverter",
         "stock": 30,
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
         "btu": 6000,

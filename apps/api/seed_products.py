@@ -15,37 +15,19 @@ def load_products():
 async def seed():
     print("🌱 Checking Product Seeding Status...")
     
-    # 1. Check if data exists
-    async with AsyncSessionLocal() as session:
-        try:
-            # Check if table exists and has data
-            result = await session.execute(text("SELECT count(*) FROM products"))
-            count = result.scalar()
-            if count and count > 0:
-                print(f"✅ Found {count} existing products. Skipping seed to PRESERVE DATA.")
-                print("   (To force reset, manually drop the table or use a flag)")
-                return
-        except Exception as e:
-            print(f"   Table check failed (likely doesn't exist): {e}")
-            print("   Proceeding to create tables...")
-
-    # 2. Create Tables (Safe, won't overwrite if exists unless dropped)
-    print("   Ensuring schema exists...")
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-
-    # 3. Insert Data (Only if we didn't return above)
+    # 3. Insert/Update Data (Upsert)
     async with AsyncSessionLocal() as session:
         products = load_products()
-        print(f"   Seeding {len(products)} products from JSON...")
+        print(f"   Seeding/Updating {len(products)} products from JSON...")
         
         for p in products:
-            # Filter out any keys that don't match the model if necessary
-            new_product = models.Product(**p)
-            session.add(new_product)
+            # Create instance from dict
+            model_instance = models.Product(**p)
+            # Use merge to update if ID exists, or insert if not
+            await session.merge(model_instance)
 
         await session.commit()
-        print("✅ Seeding Complete!")
+        print("✅ Seeding Complete! (Upsert Performed)")
 
 if __name__ == "__main__":
     if os.name == 'nt':
