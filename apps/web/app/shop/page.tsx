@@ -199,9 +199,12 @@ export default function ShopPage() {
                                 <EditableText contentKey="shop.hero.title_word4" />
                             </span>
                         </h1>
-                        <p className="text-slate-400 max-w-2xl mx-auto font-medium tracking-wide text-[10px] md:text-sm leading-relaxed uppercase [word-spacing:0.15em] opacity-80 px-4">
-                            <EditableText contentKey="shop.hero.description" />
-                        </p>
+                        {/* Only render description if it exists (allows full removal via JSON) */}
+                        {!!content?.shop?.hero?.description && (
+                            <p className="text-slate-400 max-w-2xl mx-auto font-medium tracking-wide text-[10px] md:text-sm leading-relaxed uppercase [word-spacing:0.15em] opacity-80 px-4">
+                                <EditableText contentKey="shop.hero.description" />
+                            </p>
+                        )}
                     </div>
                 </div>
 

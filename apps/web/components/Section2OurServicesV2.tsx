@@ -68,7 +68,7 @@ export default function Section2OurServicesV2() {
                 </h2>
 
                 <p className="font-sans text-lg md:text-xl text-slate-300 leading-relaxed font-medium max-w-2xl mx-auto drop-shadow-md">
-                    {contentData.landing?.services_header?.narrative || "We don’t just sell ACs—we provide complete climate ecosystems. Whether you need a whisper-quiet mini-split for your bedroom or an industrial fleet for your property, we have the inventory and expertise to keep you cool."}
+                    {contentData.landing?.services_header?.narrative}
                 </p>
             </div>
 

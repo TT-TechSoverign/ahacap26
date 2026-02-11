@@ -270,7 +270,7 @@
       "title_word3": "AC",
       "title_word4": "INVENTORY",
       "subtitle": "IOAHU COOLING INFRASTRUCTURE",
-      "description": "HAWAII'S HIGHEST-RATED INVENTORY OF LG & GE ENERGY-EFFICIENT COOLING SOLUTIONS. ENGINEERED FOR DURABILITY. GUARANTEED FOR COMFORT.",
+      "description": "",
       "title_line1": "SHOP WINDOW",
       "title_line2": "AC INVENTORY"
     },
@@ -293,7 +293,7 @@
       "description": "LG’s DUAL Inverter™ technology is engineered for the high-salinity and high-humidity environments of Oahu. By utilizing variable-speed compressors, these units slash energy consumption by up to 40% while operating at whisper-quiet levels. Every model in this section is $45 Hawaii Energy Rebate Qualified."
     },
     "universal_fit": {
-      "title": "Perfect Fit For Older Panasonic & Fredrich Units",
+      "title": "Perfect Fit For Older Panasonic & FRIEDRICH Units",
       "subtitle": "Seamless Integration",
       "description": "Designed for existing wall sleeves, these high-performance units provide a clean, professional look without sacrificial window space. Built for Hawaii's salt-air durability."
     },
@@ -308,7 +308,7 @@
       "description": "Engineered for permanent through-the-wall installation, the GE Built-In series provides high-output cooling for Oahu’s most demanding residential environments. These units feature a true universal fit chassis and advanced dehumidification cycles to maintain a crisp, dry interior climate regardless of exterior humidity."
     },
     "casement": {
-      "title": "CASEMENT",
+      "title": "WALL CASEMENT",
       "subtitle": "Specialized Architecture",
       "description": "GE 26\" QUICK SNAP SLEEVE. This industrial-grade sleeve is the structural foundation for the GE Built-In series (AJCQ models) and modern LG Universal Fit units. Engineered to ship flat and snap together on-site, it provides a rigid, weather-sealed portal that protects the AC chassis from exterior elements while maintaining a professional, flush-mount appearance in any Hawaii residence. "
     },
@@ -743,7 +743,7 @@
     "services_header": {
       "title": "PREMIUM",
       "title_highlight": "COOLING",
-      "narrative": "We don't just sell ACs; we curate high-efficiency solutions specifically for the 'Ohana, ensuring your family stays cool, quiet, and protected for years to come."
+      "narrative": ""
     },
     "services": {
       "window_shop": {
