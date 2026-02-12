@@ -17,8 +17,12 @@ async def seed():
     
     # 3. Insert/Update Data (Upsert)
     async with AsyncSessionLocal() as session:
+        # 1. Truncate Table (Clear old data to prevent duplicates)
+        print("   🗑️  Clearing existing products...")
+        await session.execute(text("TRUNCATE TABLE products RESTART IDENTITY CASCADE"))
+        
         products = load_products()
-        print(f"   Seeding/Updating {len(products)} products from JSON...")
+        print(f"   Seeding {len(products)} products from JSON...")
         
         for p in products:
             # Create instance from dict
