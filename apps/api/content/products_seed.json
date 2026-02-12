@@ -1,6 +1,6 @@
 [
     {
-        "id": 4,
+        "id": 1,
         "name": "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
         "price": 540,
         "category": "WINDOW_AC",
@@ -16,7 +16,7 @@
         "dehumidification": "2.3 Pts/Hr"
     },
     {
-        "id": 5,
+        "id": 2,
         "name": "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
         "price": 575,
         "category": "WINDOW_AC",
@@ -32,7 +32,7 @@
         "dehumidification": "2.8 Pts/Hr"
     },
     {
-        "id": 6,
+        "id": 3,
         "name": "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
         "price": 625,
         "category": "WINDOW_AC",
@@ -48,7 +48,7 @@
         "dehumidification": "3.3 Pts/Hr"
     },
     {
-        "id": 7,
+        "id": 4,
         "name": "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
         "price": 700,
         "category": "WINDOW_AC",
@@ -64,14 +64,14 @@
         "dehumidification": "3.8 Pts/Hr"
     },
     {
-        "id": 8,
-        "name": "LG Dual Inverter 15,000 BTU (LW1522IVSM)",
+        "id": 5,
+        "name": "LG Dual Inverter 14,000 BTU (LW1522IVSM)",
         "price": 750,
         "category": "WINDOW_AC",
         "subcategory": "dual_inverter",
         "stock": 50,
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-        "btu": 15000,
+        "btu": 14000,
         "voltage": "115V / 15 Amp",
         "coverage": "250–350 sq. ft. (Living / Large Master)",
         "performance_specs": "4-Way Air Directional Control",
@@ -80,7 +80,7 @@
         "dehumidification": "4.4 Pts/Hr"
     },
     {
-        "id": 9,
+        "id": 6,
         "name": "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
         "price": 875,
         "category": "WINDOW_AC",
@@ -96,8 +96,8 @@
         "dehumidification": "5.5 Pts/Hr"
     },
     {
-        "id": 10,
-        "name": "LG Dual Inverter 24,000 BTU (LW2422IVSM)",
+        "id": 7,
+        "name": "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
         "price": 975,
         "category": "WINDOW_AC",
         "subcategory": "dual_inverter",
@@ -112,14 +112,14 @@
         "dehumidification": "7.1 Pts/Hr"
     },
     {
-        "id": 11,
-        "name": "LG Universal Fit / Through The Wall 8,000 BTU (LW8023HRSM)",
+        "id": 8,
+        "name": "LG 7,600 BTU (LW8023HRSM)",
         "price": 650,
         "category": "WINDOW_AC",
         "subcategory": "universal_fit",
         "stock": 40,
         "image_url": "/assets/window-unit-images/lg-universal-fit-unit-photos-1600x1000/LW8023HRSM.svg",
-        "btu": 8000,
+        "btu": 7600,
         "voltage": "115V / 15 Amp",
         "coverage": "100–200 sq. ft. (Small Bedroom/Office)",
         "performance_specs": "Dual-Climate",
@@ -128,14 +128,14 @@
         "dehumidification": "2.1 Pts/Hr"
     },
     {
-        "id": 12,
-        "name": "LG Universal Fit / Through The Wall 18,000 BTU (LW1823HRSM)",
+        "id": 9,
+        "name": "LG 17,500 BTU (LW1823HRSM)",
         "price": 875,
         "category": "WINDOW_AC",
         "subcategory": "universal_fit",
         "stock": 25,
         "image_url": "/assets/window-unit-images/lg-universal-fit-unit-photos-1600x1000/LW1823HRSM.svg",
-        "btu": 18000,
+        "btu": 17500,
         "voltage": "208/230V / 20 Amp",
         "coverage": "400+ sq. ft. (Open Floor Plan)",
         "performance_specs": "ThinQ® Smart Control",
@@ -144,14 +144,14 @@
         "dehumidification": "4.8 Pts/Hr"
     },
     {
-        "id": 13,
-        "name": "LG Universal Fit / Through The Wall 24,000 BTU (LW2423HRSM)",
+        "id": 10,
+        "name": "LG 23,000 BTU (LW2423HRSM)",
         "price": 975,
         "category": "WINDOW_AC",
         "subcategory": "universal_fit",
         "stock": 20,
         "image_url": "/assets/window-unit-images/lg-universal-fit-unit-photos-1600x1000/LW2423HRSM.svg",
-        "btu": 23500,
+        "btu": 23000,
         "voltage": "208/230V / 20 Amp",
         "coverage": "400+ sq. ft. (Industrial Scale Open Plan)",
         "performance_specs": "Industrial-Grade Cooling & Heating",
@@ -160,7 +160,7 @@
         "dehumidification": "6.8 Pts/Hr"
     },
     {
-        "id": 14,
+        "id": 11,
         "name": "LG 8,000 BTU (LW8024RD)",
         "price": 395,
         "category": "WINDOW_AC",
@@ -176,23 +176,7 @@
         "dehumidification": "2.1 Pts/Hr"
     },
     {
-        "id": 15,
-        "name": "LG 10,000 BTU (LW1017ERSM1)",
-        "price": 525,
-        "category": "WINDOW_AC",
-        "subcategory": "base",
-        "stock": 20,
-        "image_url": "/assets/window-unit-images/lg-base-standard-units/lg-base-standard-lw8024rd-front-1600x1000.svg",
-        "btu": 10000,
-        "voltage": "115V / 15 Amp",
-        "coverage": "200–250 sq. ft. (Master/Studio)",
-        "performance_specs": "ThinQ® Smart Control",
-        "key_spec": "Smart Diagnosis™: Integrated system verification.",
-        "noise_level": "52 / 59 dB",
-        "dehumidification": "3.0 Pts/Hr"
-    },
-    {
-        "id": 16,
+        "id": 12,
         "name": "LG 12,000 BTU (LW1217ERSM1)",
         "price": 600,
         "category": "WINDOW_AC",
@@ -208,14 +192,14 @@
         "dehumidification": "3.8 Pts/Hr"
     },
     {
-        "id": 17,
-        "name": "GE Performance 8,000 BTU (AJCQ08AWJ)",
+        "id": 13,
+        "name": "GE 8,200 BTU (AJCQ08AWJ)",
         "price": 1000,
         "category": "WINDOW_AC",
         "subcategory": "ge",
         "stock": 15,
         "image_url": "/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.svg",
-        "btu": 8000,
+        "btu": 8200,
         "voltage": "115V / 15 Amp",
         "coverage": "100–200 sq. ft.",
         "performance_specs": "True Universal Fit",
@@ -224,8 +208,8 @@
         "dehumidification": "2.1 Pts/Hr"
     },
     {
-        "id": 18,
-        "name": "GE Performance 10,000 BTU (AJCQ10AWJ)",
+        "id": 14,
+        "name": "GE 10,000 BTU (AJCQ10AWJ)",
         "price": 1100,
         "category": "WINDOW_AC",
         "subcategory": "ge",
@@ -240,7 +224,7 @@
         "dehumidification": "2.7 Pts/Hr"
     },
     {
-        "id": 19,
+        "id": 15,
         "name": "GE Performance 12,000 BTU (AJCQ12AWJ)",
         "price": 1200,
         "category": "WINDOW_AC",
@@ -256,11 +240,11 @@
         "dehumidification": "3.4 Pts/Hr"
     },
     {
-        "id": 21,
+        "id": 16,
         "name": "GE RAB26A Wall Case",
         "price": 225,
         "category": "WINDOW_AC",
-        "subcategory": "casement",
+        "subcategory": "Wall Casement",
         "stock": 25,
         "image_url": "/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A.svg",
         "btu": 0,
