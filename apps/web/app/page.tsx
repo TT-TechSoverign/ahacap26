@@ -13,7 +13,7 @@ import Image from 'next/image';
 
 export default function Homepage() {
     return (
-        <div className="relative min-h-screen font-sans bg-slate-950">
+        <div className="relative font-sans bg-slate-950">
             {/* Global Background Image with Overlay */}
             <div className="fixed inset-0 z-0">
                 <Image
@@ -26,7 +26,7 @@ export default function Homepage() {
                 <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-[2px]" />
             </div>
 
-            <main className="relative z-10 pt-[180px]">
+            <main className="relative z-10 pt-[140px]">
                 <Section2OurServicesV2 />
                 {/* <Section4Projects /> */}
                 {/* <Render config={config} data={v2Data} /> */}
