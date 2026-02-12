@@ -28,7 +28,10 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
       if (res.ok) {
         const response = await res.json();
         // API returns { data: {}, path: "" }, so we need to unwrap it if present
-        setContent(response.data || response);
+        const incomingData = response.data || response;
+        console.log('Content loaded:', { incomingData, merged: { ...initialContent, ...incomingData } });
+        // Merge with initial content to ensure we don't lose defaults if API returns partial data
+        setContent(prev => ({ ...initialContent, ...incomingData }));
       }
     } catch (error) {
       console.error('Failed to refresh content:', error);

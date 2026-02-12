@@ -6,14 +6,15 @@ import { useContent } from '@/lib/context/ContentContext';
 
 export default function Footer() {
     const { content } = useContent();
-    const schedule = content.footer_schedule || {
+    const schedule = content?.footer_schedule || {
         mini_split_label: "MINI SPLIT AC",
         window_ac_label: "WINDOW AC",
         mini_split_estimate_date: "Next Available Estimate: Feb 6",
         mini_split_install_date: "Next Available Install: Feb 12",
         window_ac_estimate_date: "Next Available Estimate: Feb 5",
         window_ac_install_date: "Next Available Install: Feb 8",
-        general_availability_range: "Scheduling for week of February 2-9, 2026"
+        general_availability_range: "Scheduling for week of February 2-9, 2026",
+        ...content?.contact?.calendar // Fallback to contact calendar if available
     };
 
     return (
@@ -44,21 +45,21 @@ export default function Footer() {
                             <div className="flex flex-col gap-1 items-center">
                                 <p className="text-primary font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Estimate:</span>
-                                    <span>{schedule.mini_split_estimate_date.split(':').pop()?.trim()}</span>
+                                    <span>{schedule?.mini_split_estimate_date?.split(':').pop()?.trim() || 'Call for availability'}</span>
                                 </p>
                                 <p className="text-slate-400 font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Install:</span>
-                                    <span>{schedule.mini_split_install_date.split(':').pop()?.trim()}</span>
+                                    <span>{schedule?.mini_split_install_date?.split(':').pop()?.trim() || 'Call for availability'}</span>
                                 </p>
                             </div>
                             <div className="flex flex-col gap-1 items-center">
                                 <p className="text-primary font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Estimate:</span>
-                                    <span>{schedule.window_ac_estimate_date.split(':').pop()?.trim()}</span>
+                                    <span>{schedule?.window_ac_estimate_date?.split(':').pop()?.trim() || 'Call for availability'}</span>
                                 </p>
                                 <p className="text-slate-400 font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Install:</span>
-                                    <span>{schedule.window_ac_install_date.split(':').pop()?.trim()}</span>
+                                    <span>{schedule?.window_ac_install_date?.split(':').pop()?.trim() || 'Call for availability'}</span>
                                 </p>
                             </div>
                         </div>
