@@ -23,7 +23,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-[#0a0e14] border-t border-white/5 pt-12 pb-8">
+        <footer className="relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-8">
             <div className="max-w-7xl mx-auto px-6">
                 {/* Availability Schedule Section */}
                 <div className="border-b border-white/5 pb-6 mb-6">
@@ -38,10 +38,10 @@ export default function Footer() {
                         {/* Line 1: Columns */}
                         <div className="grid grid-cols-2 max-w-4xl mx-auto w-full">
                             <h5 className="text-white font-header font-black uppercase tracking-widest text-base md:text-lg">
-                                {schedule.mini_split_label}
+                                {schedule?.mini_split_label || defaults.mini_split_label}
                             </h5>
                             <h5 className="text-white font-header font-black uppercase tracking-widest text-base md:text-lg">
-                                {schedule.window_ac_label}
+                                {schedule?.window_ac_label || defaults.window_ac_label}
                             </h5>
                         </div>
 
@@ -50,21 +50,21 @@ export default function Footer() {
                             <div className="flex flex-col gap-1 items-center">
                                 <p className="text-primary font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Estimate:</span>
-                                    <span>{schedule?.mini_split_estimate_date?.split(':').pop()?.trim() || 'Call for availability'}</span>
+                                    <span>{(schedule?.mini_split_estimate_date || defaults.mini_split_estimate_date).split(':').pop()?.trim()}</span>
                                 </p>
                                 <p className="text-slate-400 font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Install:</span>
-                                    <span>{schedule?.mini_split_install_date?.split(':').pop()?.trim() || 'Call for availability'}</span>
+                                    <span>{(schedule?.mini_split_install_date || defaults.mini_split_install_date).split(':').pop()?.trim()}</span>
                                 </p>
                             </div>
                             <div className="flex flex-col gap-1 items-center">
                                 <p className="text-primary font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Estimate:</span>
-                                    <span>{schedule?.window_ac_estimate_date?.split(':').pop()?.trim() || 'Call for availability'}</span>
+                                    <span>{(schedule?.window_ac_estimate_date || defaults.window_ac_estimate_date).split(':').pop()?.trim()}</span>
                                 </p>
                                 <p className="text-slate-400 font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Install:</span>
-                                    <span>{schedule?.window_ac_install_date?.split(':').pop()?.trim() || 'Call for availability'}</span>
+                                    <span>{(schedule?.window_ac_install_date || defaults.window_ac_install_date).split(':').pop()?.trim()}</span>
                                 </p>
                             </div>
                         </div>
