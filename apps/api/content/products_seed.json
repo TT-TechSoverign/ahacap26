@@ -225,7 +225,7 @@
     },
     {
         "id": 15,
-        "name": "GE Performance 12,000 BTU (AJCQ12AWJ)",
+        "name": "GE 12,000 BTU (AJCQ12AWJ)",
         "price": 1200,
         "category": "WINDOW_AC",
         "subcategory": "ge",
@@ -242,7 +242,7 @@
     {
         "id": 16,
         "name": "GE RAB26A Wall Case",
-        "price": 225,
+        "price": 275,
         "category": "WINDOW_AC",
         "subcategory": "casement",
         "stock": 25,
