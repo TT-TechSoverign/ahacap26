@@ -26,7 +26,7 @@ export default function Homepage() {
                 <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-[2px]" />
             </div>
 
-            <main className="relative z-10 pt-[180px]">
+            <main className="relative z-10 pt-[220px]">
                 <Section2OurServicesV2 />
                 {/* <Section4Projects /> */}
                 {/* <Render config={config} data={v2Data} /> */}
