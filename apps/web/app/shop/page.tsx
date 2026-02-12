@@ -791,15 +791,15 @@ function SizingGuideSection() {
                         </div>
                         <div className="pt-3 border-t border-white/5 bg-white/[0.01] -mx-4 -mb-4 p-4">
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-3">Recommended Models</p>
-                            <div className="flex flex-wrap gap-2">
+                            <div className="grid grid-cols-2 gap-2">
                                 {sizingData[i].models.map((m, idx) => (
                                     <Link
                                         key={idx}
                                         href={m.link}
-                                        className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-[10px] font-black text-white hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center gap-2 flex-1 min-w-[100px] shadow-lg active:scale-95"
+                                        className="px-2 py-2.5 bg-white/5 border border-white/10 rounded-lg text-[9px] font-black text-white hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center gap-1.5 shadow-lg active:scale-95"
                                     >
-                                        <span className="material-symbols-outlined text-xs text-primary">ac_unit</span>
-                                        {m.name}
+                                        <span className="material-symbols-outlined text-[10px] text-primary">ac_unit</span>
+                                        <span className="truncate">{m.name}</span>
                                         <span className="material-symbols-outlined text-[10px] text-slate-600">north_east</span>
                                     </Link>
                                 ))}
