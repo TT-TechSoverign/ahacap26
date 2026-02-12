@@ -9,142 +9,24 @@ import { BackToTop } from '@/components/BackToTop';
 // v2.5 Visual Refinements Force Rebuild
 export const dynamic = 'force-dynamic';
 
-export default function Homepage() {
-    const v2Data = {
-        content: [
-            {
-                type: "Hero",
-                props: {
-                    badge: "Authorized Dealer",
-                    titleLine1: "Cooling Hawaii",
-                    titleHighlight1: "Affordably",
-                    titleHighlight2: "& Efficiently",
-                    subBadges: [
-                        { text: "Est. 2005" },
-                        { text: "Licensed & Insured" },
-                        { text: "Locally Owned" }
-                    ],
-                    ctaShop: { text: "Shop Units", href: "/shop", variant: "primary" },
-                    ctaEstimate: { text: "Get Quote", href: "/contact", variant: "secondary" },
-                    mode: "light",
-                    styles: {
-                        backgroundColor: "#ffffff",
-                        padding: "128px 0px"
-                    }
-                }
-            },
-            {
-                type: "Services",
-                props: {
-                    title: "Premium",
-                    titleHighlight: "Cooling",
-                    description: "Experience the difference of high-efficiency climate control designed specifically for Hawaii's homes.",
-                    backlinks: [
-                        { text: "We specialize in ", href: "" },
-                        { text: "Window AC Sales", href: "/shop" },
-                        { text: ", ", href: "" },
-                        { text: "Split System Installation", href: "/contact" },
-                        { text: ", and ", href: "" },
-                        { text: "Maintenance Services", href: "/contact" },
-                        { text: ".", href: "" }
-                    ],
-                    items: [
-                        {
-                            title: "Window AC Sales",
-                            description: "The largest inventory of LG & GE window units in Waipahu. Pick up today.",
-                            icon: "storefront",
-                            linkText: "Browse Shop",
-                            href: "/shop",
-                            color: "primary",
-                            badge: "In Stock"
-                        },
-                        {
-                            title: "Split Systems",
-                            description: "Whisper-quiet, energy-efficient cooling for your entire home.",
-                            icon: "ac_unit",
-                            linkText: "Get Estimate",
-                            href: "/contact",
-                            color: "accent"
-                        },
-                        {
-                            title: "Maintenance",
-                            description: "Protect your investment with professional cleaning and servicing.",
-                            icon: "cleaning_services",
-                            linkText: "Schedule Service",
-                            href: "/contact",
-                            color: "accent"
-                        }
-                    ],
-                    mode: "light",
-                    styles: {
-                        backgroundColor: "#f8fafc", // slate-50
-                        padding: "96px 0px"
-                    }
-                }
-            },
-            {
-                type: "Partnerships",
-                props: {
-                    title: "Trusted Brands",
-                    titleHighlight: "For Island Living",
-                    narrativeParam: "We only carry and install equipment proven to withstand Hawaii's salt-air environment.",
-                    brandsWindow: [
-                        { name: "LG", colorClass: "text-slate-800", fontClass: "font-sans font-black text-5xl" },
-                        { name: "GE", colorClass: "text-slate-600", fontClass: "font-serif font-bold text-3xl" }
-                    ],
-                    brandsMiniSplit: [
-                        { name: "Mitsubishi", colorClass: "text-red-600", fontClass: "font-bold uppercase text-2xl" },
-                        { name: "Fujitsu", colorClass: "text-red-500", fontClass: "font-bold italic text-3xl" }
-                    ],
-                    brandsCentral: [
-                        { name: "Rheem", colorClass: "text-red-600", fontClass: "font-bold text-4xl" }
-                    ],
-                    styles: {
-                        backgroundColor: "#ffffff",
-                        padding: "96px 0px"
-                    }
-                }
-            },
-            {
-                type: "ServiceAreas",
-                props: {
-                    badge: "Island Coverage",
-                    title: "Serving All",
-                    titleHighlight: "Oahu",
-                    description: "From Honolulu to the North Shore, our team is ready to deploy.",
-                    regions: [
-                        { id: "central", title: "Central", icon: "location_on", cities: [{ text: "Mililani" }, { text: "Wahiawa" }] },
-                        { id: "town", title: "Town", icon: "apartment", cities: [{ text: "Honolulu" }, { text: "Waikiki" }] }
-                    ],
-                    styles: {
-                        // ServiceAreas is hardcoded dark, so we leave it dark as a 'contrast' section or refactor later.
-                        // For now letting it be standard dark.
-                        padding: "96px 0px"
-                    }
-                }
-            },
-            {
-                type: "Warehouse",
-                props: {
-                    badge: "Visit Us",
-                    title: "Waipahu",
-                    description: "Come see our showroom and pick up your unit today.",
-                    addressLabel: "Location",
-                    addressValue: "94-150 Leoleo St, Waipahu",
-                    directionsLabel: "Hours",
-                    directionsValue: "Mon-Fri: 8am - 4pm\nSat: Closed",
-                    ctaText: "Get Directions",
-                    mapImage: "/assets/ahac-shoplocationv2.svg",
-                    styles: { padding: "96px 0px" }
-                }
-            }
-        ],
-        root: { props: { title: "Homepage" } }
-    };
+import Image from 'next/image';
 
+export default function Homepage() {
     return (
-        <div className="bg-slate-950 text-slate-100 min-h-screen font-sans">
-            <main className="pt-[110px] bg-slate-950">
+        <div className="relative min-h-screen font-sans bg-slate-950">
+            {/* Global Background Image with Overlay */}
+            <div className="fixed inset-0 z-0">
+                <Image
+                    src="/assets/hero-cards/bg-honolulu_skyline.jpg"
+                    alt="Honolulu Skyline"
+                    fill
+                    className="object-cover object-center translate-y-[-10%] scale-110" // Slight shift to align visually
+                    priority
+                />
+                <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-[2px]" />
+            </div>
+
+            <main className="relative z-10 pt-[180px]">
                 <Section2OurServicesV2 />
                 {/* <Section4Projects /> */}
                 {/* <Render config={config} data={v2Data} /> */}

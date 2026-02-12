@@ -39,19 +39,9 @@ export default function Section2OurServicesV2() {
     ];
 
     return (
-        <section className="relative w-full bg-slate-950 overflow-hidden pb-12 md:pb-16 pt-0">
+        <section className="relative w-full bg-transparent pb-12 md:pb-16 pt-0">
 
-            {/* Background Image with Frosted Dark Overlay */}
-            <div className="absolute inset-0 z-0">
-                <Image
-                    src="/assets/hero-cards/bg-honolulu_skyline.jpg"
-                    alt="Honolulu Skyline"
-                    fill
-                    className="object-cover object-center"
-                    priority
-                />
-                <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-[2px]" />
-            </div>
+            {/* Background Image Removed - Now Global in page.tsx */}
 
             {/* Header Content */}
             <div className="relative z-10 max-w-4xl mx-auto text-center mb-10 px-6">
