@@ -720,6 +720,7 @@ function SizingGuideSection() {
                 contentKey="shop.guide"
                 icon="straighten"
                 narrativeKey="sizing_guide"
+                hideDescription={true}
                 topElement={
                     <div className="inline-block px-5 py-2 bg-white/5 rounded-md border border-white/10 text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.5em] text-primary mb-4 shadow-[0_0_20px_rgba(0,174,239,0.1)]">
                         <EditableText contentKey="shop.guide.subtitle" />
