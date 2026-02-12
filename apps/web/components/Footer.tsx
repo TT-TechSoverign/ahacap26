@@ -6,7 +6,7 @@ import { useContent } from '@/lib/context/ContentContext';
 
 export default function Footer() {
     const { content } = useContent();
-    const schedule = content?.footer_schedule || {
+    const defaults = {
         mini_split_label: "MINI SPLIT AC",
         window_ac_label: "WINDOW AC",
         mini_split_estimate_date: "Next Available Estimate: Feb 6",
@@ -14,6 +14,11 @@ export default function Footer() {
         window_ac_estimate_date: "Next Available Estimate: Feb 5",
         window_ac_install_date: "Next Available Install: Feb 8",
         general_availability_range: "Scheduling for week of February 2-9, 2026",
+    };
+
+    const schedule = {
+        ...defaults,
+        ...(content?.footer_schedule || {}),
         ...content?.contact?.calendar // Fallback to contact calendar if available
     };
 
