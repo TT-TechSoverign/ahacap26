@@ -45,7 +45,7 @@ export default function Section2OurServicesV2() {
 
             {/* Header Content */}
             <div className="relative z-10 max-w-4xl mx-auto text-center mb-10 px-6">
-                <h2 className="relative inline-block font-header font-black text-4xl md:text-6xl text-white uppercase tracking-tighter mb-4 pb-6">
+                <h2 className="relative inline-block font-header font-black text-3xl md:text-5xl text-white uppercase tracking-tighter mb-4 pb-6">
                     <span className="text-white">
                         Premium Cooling
                     </span>{" "}
@@ -64,7 +64,7 @@ export default function Section2OurServicesV2() {
 
             {/* Interactive Grid */}
             <div className="container mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-auto md:h-[500px] max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-auto md:h-[420px] max-w-5xl mx-auto">
                     {services.map((service, index) => (
                         <div
                             key={service.id}
@@ -86,7 +86,7 @@ export default function Section2OurServicesV2() {
                             <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-8">
 
                                 {/* Title with Cyan Glow & Underline */}
-                                <h3 className="font-header font-black text-2xl md:text-4xl text-white uppercase tracking-tighter mb-2 drop-shadow-lg transition-all duration-300 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
+                                <h3 className="font-header font-black text-xl md:text-3xl text-white uppercase tracking-tighter mb-2 drop-shadow-lg transition-all duration-300 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
                                     {(contentData.landing?.services?.[service.id as keyof typeof contentData.landing.services]?.title || service.defaultTitle)}
                                 </h3>
                                 {/* Subtle Animated Underline */}
