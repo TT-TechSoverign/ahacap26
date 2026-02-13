@@ -47,7 +47,7 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - ADMIN_EMAIL=${ADMIN_EMAIL}
     volumes:
-      - ./apps/api/content:/app/apps/api/content
+      - ./apps/api/content:/app/content
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips "*"
     depends_on:
       db:
