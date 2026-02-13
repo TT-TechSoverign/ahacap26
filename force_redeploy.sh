@@ -16,6 +16,12 @@ echo "🔍 [1/6] Checking Disk Space..."
 USAGE=$(df / | grep / | awk '{ print $5 }' | sed 's/%//g')
 THRESHOLD=80
 
+# Check for --nuclear flag
+if [[ "$1" == "--nuclear" ]]; then
+    echo "☢️  NUCLEAR MODE ACTIVATED: Forcing aggressive cleanup..."
+    USAGE=100  # Force the cleanup logic to run
+fi
+
 if [ "$USAGE" -gt "$THRESHOLD" ]; then
     echo "⚠️  Disk usage is HIGH ($USAGE%). Initiating CLEAN RELEASE Protocol..."
     
@@ -33,6 +39,7 @@ else
     echo "✅ Disk usage is safe ($USAGE%). Proceeding with standard update..."
 fi
 
+echo "📥 [2/6] Pulling Latest Code..."
 echo "📥 [2/6] Syncing Code (Hard Reset)..."
 # Fetch latest changes
 git fetch origin staging
