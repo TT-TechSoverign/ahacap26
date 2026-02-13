@@ -115,6 +115,7 @@ export default function ShopPage() {
                     contentKey="shop.logistics"
                     icon="local_shipping"
                     narrativeKey="logistics"
+                    hideDescription={true}
                     contentKeyOverride="logistics.pickup"
                     titleHighlightKey="logistics.pickup.title_highlight"
                     topElement={
