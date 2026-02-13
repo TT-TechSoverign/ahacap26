@@ -514,9 +514,8 @@ async def send_inquiry_notification(lead):
             </style>
         </head>
         <body>
-            <div class="container">
                 <div class="header">
-                    <img src="cid:logo_paramount" alt="AHAC Logo">
+                    <img src="{WEBSITE_URL}/logo-new.png" alt="AHAC Logo">
                 </div>
                 <div class="content">
                     <h1>New Lead Received</h1>
@@ -556,12 +555,15 @@ async def send_inquiry_notification(lead):
                     
                     <div style="font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Customer Notes</div>
                     <div class="notes-box">
-                        {lead.notes or "No additional notes provided."}
+                        {(lead.notes or "No additional notes provided.").replace('Source:', '<strong>Source:</strong>').replace('Preferences:', '<br><strong>Preferences:</strong>').replace('Note:', '<br><strong>Note:</strong>')}
                     </div>
                     
                     <div class="actions">
                         <a href="mailto:{lead.email}?subject=Re: Your AHAC Service Request - {lead.service_type}" class="btn">Reply to Customer</a>
-                        <a href="javascript:window.print()" onclick="window.print(); return false;" class="btn secondary">🖨️ Print Lead</a>
+                        <div style="margin-top: 15px; font-size: 12px; color: #94a3b8; font-style: italic;">
+                            To print, use your browser or email client's Print function (Ctrl+P).<br>
+                            This email is optimized for single-page printing.
+                        </div>
                     </div>
                 </div>
                 <div class="footer">
