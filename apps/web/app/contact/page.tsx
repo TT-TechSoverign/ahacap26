@@ -22,7 +22,7 @@ export default function ContactPage() {
                             <EditableText contentKey="contact.title_highlight" />
                         </span>
                     </h1>
-                    <p className="font-mono text-[10px] md:text-[11px] lg:text-[12px] font-black tracking-[0.3em] uppercase text-slate-500 max-w-3xl mx-auto leading-relaxed opacity-80">
+                    <p className="font-mono text-[10px] md:text-[11px] lg:text-[12px] font-black tracking-[0.3em] uppercase text-white max-w-3xl mx-auto leading-relaxed opacity-90">
                         <EditableText contentKey="contact.description" />
                     </p>
                 </div>
@@ -41,7 +41,7 @@ export default function ContactPage() {
                                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-header font-bold text-white uppercase tracking-tight mb-4">
                                     <EditableText contentKey="contact.wizard_title" />
                                 </h2>
-                                <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase italic opacity-50 text-slate-500">
+                                <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase italic text-white opacity-80">
                                     <EditableText contentKey="contact.wizard_subtitle" />
                                 </p>
                             </div>

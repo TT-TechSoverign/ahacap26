@@ -140,10 +140,10 @@ export function DispatchWizard() {
 
                 {[1, 2, 3].map((s) => (
                     <div key={s} className="flex flex-col items-center gap-3 cursor-pointer relative z-10 group/step" onClick={() => setStep(s)}>
-                        <div className={`size-10 lg:size-12 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all duration-500 ${step >= s ? 'bg-primary border-primary text-black shadow-[0_0_20px_rgba(0,174,239,0.4)]' : 'bg-background-dark border-white/10 text-slate-600 group-hover/step:border-white/20'}`}>
+                        <div className={`size-10 lg:size-12 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all duration-500 ${step >= s ? 'bg-primary border-primary text-black shadow-[0_0_20px_rgba(0,174,239,0.4)]' : 'bg-background-dark border-white/10 text-slate-300 group-hover/step:border-white/20'}`}>
                             {s === 1 ? <span className="material-symbols-outlined text-base lg:text-lg font-black">settings</span> : s === 2 ? <span className="material-symbols-outlined text-base lg:text-lg font-black">schedule</span> : <span className="material-symbols-outlined text-base lg:text-lg font-black">person</span>}
                         </div>
-                        <span className={`font-mono text-[9px] lg:text-[10px] uppercase tracking-[0.3em] font-black transition-colors duration-300 ${step >= s ? 'text-white' : 'text-slate-600 group-hover/step:text-slate-400'}`}>
+                        <span className={`font-mono text-[9px] lg:text-[10px] uppercase tracking-[0.3em] font-black transition-colors duration-300 ${step >= s ? 'text-white' : 'text-slate-300 group-hover/step:text-slate-400'}`}>
                             {s === 1 ? 'Service' : s === 2 ? 'Urgency' : 'Details'}
                         </span>
                     </div>
@@ -157,7 +157,7 @@ export function DispatchWizard() {
                         <h3 className="text-2xl lg:text-3xl font-header font-black text-white uppercase tracking-tight mb-4">
                             <EditableText contentKey="contact.wizard.step1_title" />
                         </h3>
-                        <p className="font-mono text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] text-slate-500 opacity-60">
+                        <p className="font-mono text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] text-white opacity-90">
                             <EditableText contentKey="contact.wizard.step1_subtitle" />
                         </p>
                     </div>
@@ -200,7 +200,7 @@ export function DispatchWizard() {
                         <h3 className="text-2xl lg:text-3xl font-header font-black text-white uppercase tracking-tight mb-4">
                             <EditableText contentKey="contact.wizard.step2_title" />
                         </h3>
-                        <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 opacity-60">
+                        <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-white opacity-90">
                             <EditableText contentKey="contact.wizard.step2_subtitle" />
                         </p>
                     </div>
@@ -279,7 +279,7 @@ export function DispatchWizard() {
                         <h3 className="text-2xl lg:text-3xl font-header font-black text-white uppercase tracking-tight mb-4">
                             <EditableText contentKey="contact.wizard.step3_title" />
                         </h3>
-                        <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 opacity-60">
+                        <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-white opacity-90">
                             <EditableText contentKey="contact.wizard.step3_subtitle" />
                         </p>
                     </div>
