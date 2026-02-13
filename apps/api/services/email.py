@@ -497,25 +497,31 @@ async def send_inquiry_notification(lead):
                     .btn.secondary:hover {{ background-color: #475569 !important; }}
                 }}
                 
-                /* Print Styles */
-                @media print {{
-                    body {{ background-color: white !important; font-size: 12pt; }}
-                    .container {{ box-shadow: none !important; border: none !important; margin: 0 !important; max-width: 100% !important; border-radius: 0 !important; width: 100% !important; }}
-                    .actions {{ display: none !important; }}
-                    .footer {{ display: none !important; }}
-                    .header {{ padding: 10px 0 !important; background: none !important; border-bottom: 2px solid #000 !important; }}
-                    /* Force Logo to Black for clearer print if needed, or keep color */
-                    .header img {{ filter: grayscale(100%); max-width: 150px !important; }} 
-                    .content {{ padding: 0 !important; }}
-                    .notes-box {{ border: 1px solid #ccc !important; background: none !important; }}
-                    /* Hide URL in hrefs for print if desired, or keep default */
-                    a {{ text-decoration: none !important; color: black !important; }}
-                }}
+                /* Print Styles - Optimized for Maximum Readability & Page Use */
+                @media print {
+                    @page { margin: 1cm; size: auto; }
+                    body { background-color: white !important; font-size: 14pt !important; color: black !important; -webkit-print-color-adjust: exact; }
+                    .container { width: 100% !important; max-width: 100% !important; margin: 0 !important; border: none !important; box-shadow: none !important; }
+                    .header { background: none !important; border-bottom: 2px solid #000 !important; padding: 10px 0 !important; }
+                    .header p { color: #000 !important; text-shadow: none !important; font-size: 20pt !important; }
+                    .content { padding: 10px 0 !important; }
+                    .content h1 { font-size: 24pt !important; color: #000 !important; margin-bottom: 5px !important; }
+                    .content p.subtitle { font-size: 12pt !important; color: #444 !important; margin-bottom: 20px !important; }
+                    
+                    .data-table td { font-size: 13pt !important; padding: 8px 0 !important; border-bottom: 1px solid #ccc !important; }
+                    .data-table td.label { width: 30% !important; color: #444 !important; font-weight: 700 !important; }
+                    .data-table td.value { width: 70% !important; color: #000 !important; }
+                    
+                    .notes-box { font-size: 13pt !important; border: 2px solid #000 !important; padding: 15px !important; margin-top: 20px !important; background: none !important; }
+                    
+                    .actions, .footer { display: none !important; }
+                    a { text-decoration: none !important; color: black !important; }
+                }
             </style>
         </head>
         <body>
                 <div class="header">
-                    <img src="{WEBSITE_URL}/logo-new.png" alt="AHAC Logo">
+                    <p style="color: #ffffff; font-size: 26px; font-weight: 900; letter-spacing: 0.1em; margin: 0; text-transform: uppercase; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Affordable Home A/C</p>
                 </div>
                 <div class="content">
                     <h1>New Lead Received</h1>
@@ -561,8 +567,7 @@ async def send_inquiry_notification(lead):
                     <div class="actions">
                         <a href="mailto:{lead.email}?subject=Re: Your AHAC Service Request - {lead.service_type}" class="btn">Reply to Customer</a>
                         <div style="margin-top: 15px; font-size: 12px; color: #94a3b8; font-style: italic;">
-                            To print, use your browser or email client's Print function (Ctrl+P).<br>
-                            This email is optimized for single-page printing.
+                            <!-- Print Hint Removed by Request -->
                         </div>
                     </div>
                 </div>
