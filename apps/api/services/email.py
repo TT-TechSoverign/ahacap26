@@ -15,7 +15,7 @@ import logging
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import asyncio
 import os
 from dotenv import load_dotenv
@@ -31,6 +31,7 @@ SMTP_PORT = int(os.getenv("SMTP_PORT", 465))
 SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "office@affordablehome-ac.com")
+WEBSITE_URL = os.getenv("WEBSITE_URL", "https://affordablehome-ac.com")
 
 async def verify_connection():
     if not HAS_SMTP:
@@ -435,12 +436,28 @@ async def send_inquiry_notification(lead):
         
         subject = f"🔔 New Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}"
         
+        
+        # Timezone Correction: Convert lead.created_at (UTC/Naive) to HST (UTC-10)
+        # Assuming lead.created_at is datetime object. If naive, assume it's UTC or server time.
+        # HST is UTC-10
+        hst_offset = timezone(timedelta(hours=-10))
+        if lead.created_at.tzinfo is None:
+             # If naive, assume UTC then convert
+             created_at_utc = lead.created_at.replace(tzinfo=timezone.utc)
+             created_at_hst = created_at_utc.astimezone(hst_offset)
+        else:
+             created_at_hst = lead.created_at.astimezone(hst_offset)
+             
+        date_str = created_at_hst.strftime('%m/%d/%Y %I:%M %p')
+
         # New Premium Template
         html_content = f"""
         <!DOCTYPE html>
         <html>
         <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
+                /* Base Styles (Light Mode) */
                 body {{ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 0; color: #1e293b; }}
                 .container {{ max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }}
                 .header {{ background: #0f172a; padding: 30px; text-align: center; border-bottom: 4px solid #06b6d4; }}
@@ -457,22 +474,42 @@ async def send_inquiry_notification(lead):
                 .notes-box {{ background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; font-size: 14px; line-height: 1.6; color: #334155; margin-top: 10px; }}
                 
                 .actions {{ text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px dashed #e2e8f0; }}
-                .btn {{ display: inline-block; padding: 12px 24px; background: #06b6d4; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px; margin: 0 10px; box-shadow: 0 2px 10px rgba(6, 182, 212, 0.2); transition: all 0.2s; }}
+                .btn {{ display: inline-block; padding: 12px 24px; background: #06b6d4; color: #ffffff !important; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px; margin: 0 10px; box-shadow: 0 2px 10px rgba(6, 182, 212, 0.2); transition: all 0.2s; }}
                 .btn:hover {{ background: #0891b2; box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3); }}
-                .btn.secondary {{ background: #e2e8f0; color: #475569; box-shadow: none; }}
-                .btn.secondary:hover {{ background: #cbd5e1; color: #1e293b; }}
+                .btn.secondary {{ background: #e2e8f0; color: #475569 !important; box-shadow: none; }}
+                .btn.secondary:hover {{ background: #cbd5e1; color: #1e293b !important; }}
 
                 .footer {{ background: #f8fafc; padding: 20px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e2e8f0; }}
                 
+                /* Dark Mode Support */
+                @media (prefers-color-scheme: dark) {{
+                    body {{ background-color: #0f172a !important; color: #f1f5f9 !important; }}
+                    .container {{ background-color: #1e293b !important; border-color: #334155 !important; box-shadow: none !important; }}
+                    .content h1 {{ color: #f1f5f9 !important; }}
+                    .content p.subtitle {{ color: #94a3b8 !important; }}
+                    .data-table td {{ border-bottom-color: #334155 !important; }}
+                    .data-table td.label {{ color: #94a3b8 !important; }}
+                    .data-table td.value {{ color: #f1f5f9 !important; }}
+                    .notes-box {{ background-color: #0f172a !important; border-color: #334155 !important; color: #cbd5e1 !important; }}
+                    .actions {{ border-top-color: #334155 !important; }}
+                    .footer {{ background-color: #0f172a !important; border-top-color: #334155 !important; color: #64748b !important; }}
+                    .btn.secondary {{ background-color: #334155 !important; color: #f1f5f9 !important; }}
+                    .btn.secondary:hover {{ background-color: #475569 !important; }}
+                }}
+                
                 /* Print Styles */
                 @media print {{
-                    body {{ background-color: white; }}
-                    .container {{ box-shadow: none; border: none; margin: 0; max-width: 100%; }}
-                    .actions {{ display: none; }}
-                    .footer {{ display: none; }}
-                    .header {{ padding: 20px 0; background: none; border-bottom: 2px solid #0f172a; }}
+                    body {{ background-color: white !important; font-size: 12pt; }}
+                    .container {{ box-shadow: none !important; border: none !important; margin: 0 !important; max-width: 100% !important; border-radius: 0 !important; width: 100% !important; }}
+                    .actions {{ display: none !important; }}
+                    .footer {{ display: none !important; }}
+                    .header {{ padding: 10px 0 !important; background: none !important; border-bottom: 2px solid #000 !important; }}
                     /* Force Logo to Black for clearer print if needed, or keep color */
-                    .header img {{ filter: invert(0%); }} 
+                    .header img {{ filter: grayscale(100%); max-width: 150px !important; }} 
+                    .content {{ padding: 0 !important; }}
+                    .notes-box {{ border: 1px solid #ccc !important; background: none !important; }}
+                    /* Hide URL in hrefs for print if desired, or keep default */
+                    a {{ text-decoration: none !important; color: black !important; }}
                 }}
             </style>
         </head>
@@ -483,7 +520,7 @@ async def send_inquiry_notification(lead):
                 </div>
                 <div class="content">
                     <h1>New Lead Received</h1>
-                    <p class="subtitle">Ref: {lead.id} &bull; {lead.created_at.strftime('%m/%d/%Y %I:%M %p')}</p>
+                    <p class="subtitle">Ref: {lead.id} &bull; {date_str} (HST)</p>
                     
                     <table class="data-table">
                         <tr>
@@ -492,7 +529,7 @@ async def send_inquiry_notification(lead):
                         </tr>
                         <tr>
                             <td class="label">Priority</td>
-                            <td class="value" style="color: {'#ef4444' if lead.urgency == 'emergency' else '#0f172a'}; font-weight: 700;">
+                            <td class="value" style="color: {'#ef4444' if lead.urgency == 'emergency' else 'inherit'}; font-weight: 700;">
                                 {lead.urgency.upper()}
                             </td>
                         </tr>
