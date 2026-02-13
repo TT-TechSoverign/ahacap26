@@ -498,25 +498,25 @@ async def send_inquiry_notification(lead):
                 }}
                 
                 /* Print Styles - Optimized for Maximum Readability & Page Use */
-                @media print {
-                    @page { margin: 1cm; size: auto; }
-                    body { background-color: white !important; font-size: 14pt !important; color: black !important; -webkit-print-color-adjust: exact; }
-                    .container { width: 100% !important; max-width: 100% !important; margin: 0 !important; border: none !important; box-shadow: none !important; }
-                    .header { background: none !important; border-bottom: 2px solid #000 !important; padding: 10px 0 !important; }
-                    .header p { color: #000 !important; text-shadow: none !important; font-size: 20pt !important; }
-                    .content { padding: 10px 0 !important; }
-                    .content h1 { font-size: 24pt !important; color: #000 !important; margin-bottom: 5px !important; }
-                    .content p.subtitle { font-size: 12pt !important; color: #444 !important; margin-bottom: 20px !important; }
+                @media print {{
+                    @page {{ margin: 1cm; size: auto; }}
+                    body {{ background-color: white !important; font-size: 14pt !important; color: black !important; -webkit-print-color-adjust: exact; }}
+                    .container {{ width: 100% !important; max-width: 100% !important; margin: 0 !important; border: none !important; box-shadow: none !important; }}
+                    .header {{ background: none !important; border-bottom: 2px solid #000 !important; padding: 10px 0 !important; }}
+                    .header p {{ color: #000 !important; text-shadow: none !important; font-size: 20pt !important; }}
+                    .content {{ padding: 10px 0 !important; }}
+                    .content h1 {{ font-size: 24pt !important; color: #000 !important; margin-bottom: 5px !important; }}
+                    .content p.subtitle {{ font-size: 12pt !important; color: #444 !important; margin-bottom: 20px !important; }}
                     
-                    .data-table td { font-size: 13pt !important; padding: 8px 0 !important; border-bottom: 1px solid #ccc !important; }
-                    .data-table td.label { width: 30% !important; color: #444 !important; font-weight: 700 !important; }
-                    .data-table td.value { width: 70% !important; color: #000 !important; }
+                    .data-table td {{ font-size: 13pt !important; padding: 8px 0 !important; border-bottom: 1px solid #ccc !important; }}
+                    .data-table td.label {{ width: 30% !important; color: #444 !important; font-weight: 700 !important; }}
+                    .data-table td.value {{ width: 70% !important; color: #000 !important; }}
                     
-                    .notes-box { font-size: 13pt !important; border: 2px solid #000 !important; padding: 15px !important; margin-top: 20px !important; background: none !important; }
+                    .notes-box {{ font-size: 13pt !important; border: 2px solid #000 !important; padding: 15px !important; margin-top: 20px !important; background: none !important; }}
                     
-                    .actions, .footer { display: none !important; }
-                    a { text-decoration: none !important; color: black !important; }
-                }
+                    .actions, .footer {{ display: none !important; }}
+                    a {{ text-decoration: none !important; color: black !important; }}
+                }}
             </style>
         </head>
         <body>
