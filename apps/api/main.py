@@ -79,8 +79,12 @@ async def lifespan(app: FastAPI):
             
             if not first_product:
                 print("⚠️  Database Empty! Seeding Initial Products...")
+                # IMPORTANT: Close this session first to release any locks before seeding
+                await session.commit() 
+                
                 import seed_products
-                await seed_products.seed(cleanup=True)
+                # cleanup=False prevents TRUNCATE, avoiding Deadlocks
+                await seed_products.seed(cleanup=False)
                 
                 # Also seed content pages if empty
                 import seed_content
