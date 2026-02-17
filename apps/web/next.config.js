@@ -50,7 +50,7 @@ const nextConfig = {
         ];
     },
     async rewrites() {
-        const apiUrl = process.env.API_INTERNAL_URL || 'http://api:8000';
+        const apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
         console.log(`[Next.js Rewrites] Proxying to ${apiUrl}`);
         return [
             {
