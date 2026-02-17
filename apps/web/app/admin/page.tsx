@@ -724,7 +724,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
     const [activeTab, setActiveTab] = useState<'basic' | 'specs'>('basic');
     const [formData, setFormData] = useState({
         name: product?.name || '',
-        price: product?.price || 0,
+        price: (product?.price || 0) / 100, // Convert cents to dollars for display
         category: product?.category || 'WINDOW_AC',
         stock: product?.stock || 0,
         image_url: product?.image_url || '',
@@ -745,11 +745,17 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
 
         const method = product ? 'PUT' : 'POST';
 
+        // Prepare payload: Convert price back to cents
+        const payload = {
+            ...formData,
+            price: Math.round(formData.price * 100)
+        };
+
         try {
             const res = await fetch(url, {
                 method,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(payload)
             });
             if (res.ok) onSave();
         } catch (err) {
@@ -833,7 +839,8 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                                             required
                                             value={formData.price}
                                             min={0}
-                                            onChange={e => setFormData({ ...formData, price: parseInt(e.target.value) })}
+                                            step="0.01"
+                                            onChange={e => setFormData({ ...formData, price: parseFloat(e.target.value) })}
                                             className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
                                         />
                                     </div>
