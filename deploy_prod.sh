@@ -14,12 +14,16 @@ cd "$(dirname "$0")"
 # 1. Fetch Latest Code from Main
 echo "Fetching latest changes from origin/main..."
 git fetch origin main
-git checkout main
-git pull origin main
-
 # 1.5. Prune Unused Images (Save Space BEFORE Build)
 echo "Cleaning up old images to free space..."
+# CRITICAL: Stop containers first so images can be deleted
+docker compose -f docker-compose.prod.yml -p ahac_prod down --remove-orphans || true
 docker system prune -a -f --volumes
+docker builder prune -f
+
+# 1.75. Pull Latest Code (Now that we have space)
+git checkout main
+git pull origin main
 
 # 2. Fix Permissions (Crucial for scripts)
 echo "Fixing permissions..."
