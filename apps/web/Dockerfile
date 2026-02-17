@@ -66,21 +66,16 @@ RUN chown nextjs:nodejs .next
 
 # Automatically leverage output traces to reduce image size
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
-# Fix: Copy static assets to BOTH locations (relative to app and relative to root) 
-# This handles ambiguity in where 'server.js' expects to find them
+# Fix: Copy static assets (relative to app)
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
 
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./public
 
 # Ensure content.json is available
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/lib/content
 
-# Fallback: Copy ONLY production node_modules to ensure 'next' and other deps are found
-# This fixes the "Cannot find module next" error while keeping image size small
-COPY --from=prod-deps --chown=nextjs:nodejs /app/node_modules ./node_modules
-COPY --from=prod-deps --chown=nextjs:nodejs /app/apps/web/node_modules ./apps/web/node_modules
+# Note: Standalone mode should include necessary dependencies. 
+# Removing explicit node_modules copy to save disk space.
 
 USER nextjs
 
