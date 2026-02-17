@@ -43,6 +43,10 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN --mount=type=cache,target=/app/apps/web/.next/cache \
     npm install -g pnpm && pnpm --filter web build
 
+# Fix: Create a true static copy (dereference symlinks)
+# cp -rL ensures all pnpm symlinks are converted to real files
+# RUN cp -rL /app/apps/web/.next/standalone /app/standalone_output
+
 # 4. Production dependencies (Pruned for size)
 FROM base AS prod-deps
 WORKDIR /app
@@ -60,22 +64,21 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
-# Fix: Copy static assets (relative to app)
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
-
+# Fix: Copy keys checks
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
-
 # Ensure content.json is available
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/lib/content
 
-# Note: Standalone mode should include necessary dependencies. 
-# Removing explicit node_modules copy to save disk space.
+# Copy standalone build (minimal size)
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+
+# Fix: Force remove broken pnpm symlinks before installing real modules
+RUN rm -rf node_modules/next node_modules/react node_modules/react-dom
+
+# Fix: Manually install next.js and react to ensure they exist as real files
+# This matches the version in package.json and prevents ENOSPC by not copying all node_modules
+RUN npm install next@14.2.3 react@18.3.1 react-dom@18.3.1 --no-save
 
 USER nextjs
 
@@ -84,12 +87,9 @@ EXPOSE 3000
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
-# server.js is located at apps/web/server.js in the standalone output
-# Debug: List full file structure to diagnose missing modules
-RUN ls -R /app
-
-# Fix: Ensure Node can find modules in potential locations
+# Fix: Clean env vars
 ENV NODE_PATH=/app/node_modules:/app/apps/web/node_modules
 
-# Robust CMD: Try the monorepo path first, fallback to root
-CMD ["sh", "-c", "if [ -f apps/web/server.js ]; then node apps/web/server.js; elif [ -f server.js ]; then node server.js; else echo 'server.js not found' && exit 1; fi"]
+WORKDIR /app
+# Standalone entrypoint
+CMD ["node", "server.js"]
