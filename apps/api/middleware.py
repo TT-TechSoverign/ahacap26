@@ -34,8 +34,14 @@ class LogSanitizerMiddleware(BaseHTTPMiddleware):
 
         logger.info(f"{request.method} {request.url.path}?{sanitized_query}")
 
-        response = await call_next(request)
-        return response
+        try:
+            response = await call_next(request)
+            return response
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            logger.error(f"CRITICAL API ERROR: {e}")
+            raise e
 
 class ChaosMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
