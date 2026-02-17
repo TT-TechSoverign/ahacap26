@@ -65,13 +65,13 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Fix: Copy keys checks
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./public
 # Ensure content.json is available
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/lib/content
 
 # Copy standalone build (minimal size)
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
 
 # Fix: Force remove broken pnpm symlinks before installing real modules
 RUN rm -rf node_modules/next node_modules/react node_modules/react-dom
