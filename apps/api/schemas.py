@@ -5,6 +5,7 @@ class ProductBase(BaseModel):
     name: str
     price: int
     category: str
+    subcategory: Optional[str] = None # Added to match DB model
     stock: int
     image_url: Optional[str] = None
     btu: Optional[int] = None
