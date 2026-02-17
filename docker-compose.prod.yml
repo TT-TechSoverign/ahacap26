@@ -37,7 +37,7 @@ services:
       - "8001:8000"
     restart: always
     environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@prod-db:5432/${POSTGRES_DB}
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@prod-db:5432/${POSTGRES_DB}
       - REDIS_URL=redis://prod-redis:6379
       - CHAOS_MODE=False
       - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY_PROD}
