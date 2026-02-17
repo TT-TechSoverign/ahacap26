@@ -12,14 +12,17 @@ def load_products():
     with open(json_path, 'r') as f:
         return json.load(f)
 
-async def seed():
+async def seed(cleanup: bool = True):
     print("🌱 Checking Product Seeding Status...")
     
     # 3. Insert/Update Data (Upsert)
     async with AsyncSessionLocal() as session:
         # 1. Truncate Table (Clear old data to prevent duplicates)
-        print("   🗑️  Clearing existing products...")
-        await session.execute(text("TRUNCATE TABLE products RESTART IDENTITY CASCADE"))
+        if cleanup:
+            print("   🗑️  Clearing existing products...")
+            await session.execute(text("TRUNCATE TABLE products RESTART IDENTITY CASCADE"))
+        else:
+            print("   ℹ️  Skipping Truncate (Cleanup=False)...")
         
         products = load_products()
         print(f"   Seeding {len(products)} products from JSON...")

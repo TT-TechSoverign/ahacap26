@@ -71,6 +71,25 @@ async def lifespan(app: FastAPI):
     # Verify Email
     email_service.verify_connection()
 
+    # 3. Auto-Seed (If Empty)
+    try:
+        async with AsyncSessionLocal() as session:
+            result = await session.execute(select(models.Product))
+            first_product = result.scalars().first()
+            
+            if not first_product:
+                print("⚠️  Database Empty! Seeding Initial Products...")
+                import seed_products
+                await seed_products.seed(cleanup=True)
+                
+                # Also seed content pages if empty
+                import seed_content
+                await seed_content.seed_content()
+            else:
+                print("✅ Products found. Skipping Seed.")
+    except Exception as e:
+        print(f"WARNING: Product Seed Check Failed: {e}")
+
     yield
     await close_redis()
     await engine.dispose()
