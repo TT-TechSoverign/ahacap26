@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, Query
+from fastapi.encoders import jsonable_encoder
 import schemas
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional, List
