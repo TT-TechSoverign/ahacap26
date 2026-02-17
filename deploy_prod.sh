@@ -17,6 +17,10 @@ git fetch origin main
 git checkout main
 git pull origin main
 
+# 1.5. Prune Unused Images (Save Space BEFORE Build)
+echo "Cleaning up old images to free space..."
+docker system prune -a -f --volumes
+
 # 2. Fix Permissions (Crucial for scripts)
 echo "Fixing permissions..."
 chmod +x deploy_prod.sh
