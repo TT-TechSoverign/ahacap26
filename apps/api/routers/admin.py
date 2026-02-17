@@ -34,14 +34,17 @@ async def update_schedule(
     result = await db.execute(select(models.ContentPage).where(models.ContentPage.path == path))
     page = result.scalars().first()
 
-    if not page:
-        # If no page exists, we can't patch it easily without a base. 
-        # But for this system, we assume seed or generic structure exists.
-        # Ideally, we should create it if missing, but let's error for safety or create stub.
-        # Better: Create stub.
-        current_data = {}
-    else:
-        current_data = json.loads(page.data) if page.data else {}
+    current_data = {}
+    if page and page.data:
+        try:
+            current_data = json.loads(page.data)
+        except json.JSONDecodeError:
+            print("WARNING: ContentPage JSON Corrupt! Resetting to empty.")
+            current_data = {}
+    
+    # Ensure footer_schedule exists
+    if 'footer_schedule' not in current_data:
+        current_data['footer_schedule'] = {}
 
     # 2. Update footer_schedule
     # We explicitly update the node.
