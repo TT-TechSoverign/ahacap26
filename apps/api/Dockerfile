@@ -28,6 +28,9 @@ WORKDIR /app
 # Create non-root user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
+# Install curl for healthcheck
+RUN apk add --no-cache curl
+
 # Create virtual environment directory and copy from builder
 ENV VIRTUAL_ENV=/app/.venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
