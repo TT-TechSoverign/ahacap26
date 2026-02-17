@@ -47,7 +47,7 @@ def persist_product_changes(product_data, action='update'):
 
 router = APIRouter()
 
-@router.get("")
+@router.get("", response_model=List[schemas.Product])
 async def get_products(
     q: Optional[str] = None,
     category: Optional[str] = None,
