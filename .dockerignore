@@ -6,3 +6,5 @@ build.log
 build_v2.log
 .DS_Store
 **/.DS_Store
+apps/web/storage
+apps/web/lib/content
