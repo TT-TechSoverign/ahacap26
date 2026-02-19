@@ -78,7 +78,7 @@ RUN rm -rf node_modules/next node_modules/react node_modules/react-dom
 
 # Fix: Manually install next.js and react to ensure they exist as real files
 # This matches the version in package.json and prevents ENOSPC by not copying all node_modules
-RUN npm install next@14.2.3 react@18.3.1 react-dom@18.3.1 --no-save
+RUN npm install next@14.2.3 react@18.3.1 react-dom@18.3.1 --no-save && npm cache clean --force
 
 USER nextjs
 
