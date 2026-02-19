@@ -80,6 +80,9 @@ RUN rm -rf node_modules/next node_modules/react node_modules/react-dom
 # This matches the version in package.json and prevents ENOSPC by not copying all node_modules
 RUN npm install next@14.2.3 react@18.3.1 react-dom@18.3.1 --no-save && npm cache clean --force
 
+# Fix: Create cache directory with correct permissions
+RUN mkdir -p .next/cache && chown -R nextjs:nodejs .next/cache
+
 USER nextjs
 
 EXPOSE 3000
