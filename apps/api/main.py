@@ -218,6 +218,12 @@ async def process_stripe_event(event: dict):
                     order.status = models.OrderStatus.PAID
                     if items_data and not order.items_json:
                         order.items_json = json.dumps(items_data)
+                    
+                    # Update email if missing (crucial for PaymentIntent -> CheckoutSession race conditions)
+                    if not order.customer_email and receipt_email:
+                        print(f"Updating Order {order.id} with email {receipt_email}")
+                        order.customer_email = receipt_email
+                        
                     await session.commit()
                     print(f"Order {order.id} marked as PAID.")
 

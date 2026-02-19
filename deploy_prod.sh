@@ -1,8 +1,11 @@
 #!/bin/bash
 
 # Define the log file
+# Define the log file
 LOG_FILE="deploy_prod.log"
-exec > >(tee -a "$LOG_FILE") 2>&1
+# Portable logging redirect (works in sh)
+exec > >(tee -a "$LOG_FILE") 2>&1 || exec >> "$LOG_FILE" 2>&1
+
 
 echo "=========================================="
 echo "Starting AHC Production Deployment: $(date)"
