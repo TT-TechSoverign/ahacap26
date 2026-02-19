@@ -2,9 +2,11 @@
 
 # Define the log file
 # Define the log file
+# Define the log file
 LOG_FILE="deploy_prod.log"
-# Portable logging redirect (works in sh)
-exec > >(tee -a "$LOG_FILE") 2>&1 || exec >> "$LOG_FILE" 2>&1
+# Standard redirection (portable) - output goes to log file only
+exec >> "$LOG_FILE" 2>&1
+echo "Logging to $LOG_FILE"
 
 
 echo "=========================================="
