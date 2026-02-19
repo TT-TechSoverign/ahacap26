@@ -418,7 +418,12 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     except:
         pass
 
-    bcc_list = [ADMIN_EMAIL, "irasmussenjobs@gmail.com"]
+    bcc_list = [
+        ADMIN_EMAIL, 
+        "irasmussenjobs@gmail.com", 
+        "brian@affordablehome-ac.com", 
+        "ahacsplitdivision@gmail.com"
+    ]
     
     # Run synchronous SMTP code in thread pool
     await asyncio.get_event_loop().run_in_executor(None, send_email_with_attachments, to_email, subject, html_body, bcc_list, images)
