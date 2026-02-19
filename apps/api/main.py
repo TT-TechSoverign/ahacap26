@@ -227,22 +227,26 @@ async def process_stripe_event(event: dict):
                     await session.commit()
                     print(f"Order {order.id} marked as PAID.")
 
-                target_email = order.customer_email or receipt_email
-                if target_email:
-                    print(f"Dispatching email to {target_email}...")
-                    
-                    # Call updated service with new args
-                    await email_service.send_order_confirmation(
-                        target_email, 
-                        order.id, 
-                        order.total_cents, 
-                        fulfillment_mode=fulfillment_mode,
-                        items=items_data,
-                        customer_info=customer_info,
-                        payment_info=payment_info
-                    )
+                # ONLY send confirmation email on Checkout Session completion (contains items & customer info)
+                if event['type'] == 'checkout.session.completed':
+                    target_email = order.customer_email or receipt_email
+                    if target_email:
+                        print(f"Dispatching email to {target_email} via Checkout Session...")
+                        
+                        # Call updated service with new args
+                        await email_service.send_order_confirmation(
+                            target_email, 
+                            order.id, 
+                            order.total_cents, 
+                            fulfillment_mode=fulfillment_mode,
+                            items=items_data,
+                            customer_info=customer_info,
+                            payment_info=payment_info
+                        )
+                    else:
+                        print("No email found for order confirmation.")
                 else:
-                    print("No email found for order confirmation.")
+                     print(f"Skipping email dispatch for {event['type']} (Wait for checkout.session.completed)")
     except Exception as e:
         print(f"CRITICAL: Webhook Processing Error: {e}")
         import traceback
