@@ -28,9 +28,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 2. Fetch Dynamic Product Routes
     let productRoutes: MetadataRoute.Sitemap = [];
     try {
-        // STRATEGY: Try fetch, if fail, return empty list (don't break build).
-        // Default to internal orchestration URL for server-side fetch
-        const apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000/api/v1';
+        // STRATEGY: Robustly determine API URL.
+        // Env var might be 'http://prod-api:8000' (no suffix) or '.../api/v1'.
+        // We ensure we target the /api/v1/products endpoint.
+        let apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
+        if (!apiUrl.endsWith('/api/v1')) {
+            apiUrl = `${apiUrl}/api/v1`;
+        }
 
         console.log(`[Sitemap] Fetching products from: ${apiUrl}`);
 
