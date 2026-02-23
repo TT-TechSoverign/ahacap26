@@ -234,8 +234,81 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
         </tr>
         """
 
-    # --- Premium 10/10 Layout with Map & Disclaimers ---
-    html_body = f"""
+    def build_email_html(is_admin=False):
+        header_html = ""
+        if not is_admin:
+            header_html = """
+            <!-- 1. Header -->
+            <div class="header">
+                 <img src="cid:logo_img" style="width: 100%; height: auto; display: block;" alt="Affordable Home A/C" />
+            </div>
+            """
+        else:
+            header_html = """
+            <!-- 1. Admin Header -->
+            <div class="header" style="padding: 20px;">
+                 <h1 style="color: #ffffff; margin: 0; font-size: 20px;">AHAC Admin Copy</h1>
+            </div>
+            """
+            
+        map_block_html = ""
+        if not is_admin:
+            map_block_html = f"""
+                <!-- 3. Directions & Map (Hidden on Delivery) -->
+                <div class="map-container" style="display: {map_display}; margin-bottom: 32px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #0f172a; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Directions to Warehouse</h3>
+                    
+                    <p style="color: #475569; font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
+                        Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway. Destination is on right with roll up door #203.
+                    </p>
+
+                    <!-- EMBEDDED MAP IMAGE -->
+                    <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" style="display: block;">
+                         <img src="cid:map_img" style="width: 100%; height: auto; display: block;" alt="Map to Waipahu Warehouse" />
+                    </a>
+                </div>
+
+                <div style="margin-top: 24px; text-align: center;">
+                     <p style="color: #f59e0b; font-size: 12px; font-weight: 500; background-color: #fffbeb; padding: 12px; border-radius: 4px; display: inline-block;">
+                        {warning_text}
+                    </p>
+                </div>
+            """
+            
+        footer_html = ""
+        if not is_admin:
+             footer_html = f"""
+            <!-- 4. Premium Footer with Disclaimers -->
+            <div class="footer">
+                <!-- Disclaimer Box -->
+                <div class="disclaimer-box">
+                     <p style="margin: 0 0 8px 0; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; color: #f87171;">All Sales Final</p>
+                     <p style="margin: 0; font-size: 11px; color: #fecaca;">No Refunds • No Exchanges</p>
+                     <p style="margin: 8px 0 0 0; font-size: 10px; color: #fca5a5; padding-top: 8px; border-top: 1px solid #7f1d1d;">All warranty claims & defective units must be processed directly through the manufacturer.</p>
+                </div>
+
+                <p style="color: #ffffff; font-weight: 700; margin: 0 0 4px 0; letter-spacing: 0.05em;">WAIPAHU COMMERCIAL CENTER</p>
+                <p style="margin: 0 0 16px 0; font-size: 13px; color: #94a3b8;">94-150 Leoleo St. #203, Waipahu, HI 96797</p>
+                
+                <div style="margin-bottom: 24px;">
+                    <a href="tel:8084881111" class="footer-link" style="color: #06b6d4; font-weight: 600;">(808) 488-1111</a>
+                    <span style="color: #1e293b; margin: 0 10px;">|</span>
+                    <a href="mailto:office@affordablehome-ac.com" class="footer-link">office@affordablehome-ac.com</a>
+                </div>
+
+                <div style="border-top: 1px solid #1e293b; margin: 0 auto; width: 60%;"></div>
+                
+                <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #475569; font-weight: 700; margin-top: 20px; display: block;">
+                    LIC# CT-36775 <span style="color: #06b6d4; margin: 0 8px;">•</span> Licensed <span style="color: #1e293b;">|</span> Insured <span style="color: #1e293b;">|</span> Bonded
+                </span>
+                
+                <p style="margin-top: 12px; font-size: 11px; color: #334155;">
+                    &copy; {datetime.now().year} Affordable Home A/C. All rights reserved.
+                </p>
+            </div>
+             """
+             
+        return f"""
     <!DOCTYPE html>
     <html>
     <head>
@@ -248,7 +321,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             .header {{ background-color: #0a0e14; padding: 0 0; text-align: center; border-bottom: 1px solid #1e293b; }}
             
             /* Content Area */
-            .content {{ padding: 40px 32px; background-color: #ffffff; }}
+            .content {{ padding: 20px 32px; background-color: #ffffff; }}
             
             /* Typography */
             h1 {{ color: #0f172a; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.025em; margin: 0 0 8px 0; }}
@@ -266,22 +339,16 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             /* Disclaimer Box */
             .disclaimer-box {{ border: 1px solid #7f1d1d; background-color: #450a0a; color: #fecaca; padding: 20px; text-align: center; margin-bottom: 30px; border-radius: 4px; }}
             
-            .map-container {{ display: {map_display}; margin-bottom: 32px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }}
-
             /* Customer Info Grid */
             .info-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }}
             .info-item p.label {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin: 0 0 4px 0; font-weight: 700; }}
             .info-item p.value {{ font-size: 13px; color: #334155; margin: 0; line-height: 1.4; }}
-            
         </style>
     </head>
     <body>
-        <div style="height: 40px;"></div>
+        <div style="height: 20px;"></div>
         <div class="container">
-            <!-- 1. Header -->
-            <div class="header">
-                 <img src="cid:logo_img" style="width: 100%; height: auto; display: block;" alt="Affordable Home A/C" />
-            </div>
+            {header_html}
 
             <!-- 2. Main Body -->
             <div class="content">
@@ -346,63 +413,21 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                     </table>
                 </div>
 
-                <!-- 3. Directions & Map (Hidden on Delivery) -->
-                <div class="map-container">
-                    <h3 style="color: #0f172a; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Directions to Warehouse</h3>
-                    
-                    <p style="color: #475569; font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
-                        Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway. Destination is on right with roll up door #203.
-                    </p>
-
-                    <!-- EMBEDDED MAP IMAGE -->
-                    <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" style="display: block;">
-                         <img src="cid:map_img" style="width: 100%; height: auto; display: block;" alt="Map to Waipahu Warehouse" />
-                    </a>
-                </div>
-
-                <div style="margin-top: 24px; text-align: center;">
-                     <p style="color: #f59e0b; font-size: 12px; font-weight: 500; background-color: #fffbeb; padding: 12px; border-radius: 4px; display: inline-block;">
-                        {warning_text}
-                    </p>
-                </div>
+                {map_block_html}
             </div>
 
-            <!-- 4. Premium Footer with Disclaimers -->
-            <div class="footer">
-                
-                <!-- Disclaimer Box -->
-                <div class="disclaimer-box">
-                     <p style="margin: 0 0 8px 0; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; color: #f87171;">All Sales Final</p>
-                     <p style="margin: 0; font-size: 11px; color: #fecaca;">No Refunds • No Exchanges</p>
-                     <p style="margin: 8px 0 0 0; font-size: 10px; color: #fca5a5; padding-top: 8px; border-top: 1px solid #7f1d1d;">All warranty claims & defective units must be processed directly through the manufacturer.</p>
-                </div>
-
-                <p style="color: #ffffff; font-weight: 700; margin: 0 0 4px 0; letter-spacing: 0.05em;">WAIPAHU COMMERCIAL CENTER</p>
-                <p style="margin: 0 0 16px 0; font-size: 13px; color: #94a3b8;">94-150 Leoleo St. #203, Waipahu, HI 96797</p>
-                
-                <div style="margin-bottom: 24px;">
-                    <a href="tel:8084881111" class="footer-link" style="color: #06b6d4; font-weight: 600;">(808) 488-1111</a>
-                    <span style="color: #1e293b; margin: 0 10px;">|</span>
-                    <a href="mailto:office@affordablehome-ac.com" class="footer-link">office@affordablehome-ac.com</a>
-                </div>
-
-                <div style="border-top: 1px solid #1e293b; margin: 0 auto; width: 60%;"></div>
-                
-                <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #475569; font-weight: 700; margin-top: 20px; display: block;">
-                    LIC# CT-36775 <span style="color: #06b6d4; margin: 0 8px;">•</span> Licensed <span style="color: #1e293b;">|</span> Insured <span style="color: #1e293b;">|</span> Bonded
-                </span>
-                
-                <p style="margin-top: 12px; font-size: 11px; color: #334155;">
-                    &copy; {datetime.now().year} Affordable Home A/C. All rights reserved.
-                </p>
-            </div>
+            {footer_html}
         </div>
-        <div style="height: 40px;"></div>
+        <div style="height: 20px;"></div>
     </body>
     </html>
     """
+
+    # Generate the two HTML variants
+    client_html_body = build_email_html(is_admin=False)
+    admin_html_body = build_email_html(is_admin=True)
     
-    # Decrypt Logo/Map
+    # Decrypt Logo/Map for CLIENT email only
     images = []
     try:
         if LOGO_B64:
@@ -418,15 +443,23 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     except:
         pass
 
-    bcc_list = [
+    admin_bcc_list = [
         ADMIN_EMAIL, 
         "irasmussenjobs@gmail.com", 
         "brian@affordablehome-ac.com", 
         "ahacsplitdivision@gmail.com"
     ]
     
-    # Run synchronous SMTP code in thread pool
-    await asyncio.get_event_loop().run_in_executor(None, send_email_with_attachments, to_email, subject, html_body, bcc_list, images)
+    # Send Client Email (Synchronously in thread pool)
+    await asyncio.get_event_loop().run_in_executor(
+        None, send_email_with_attachments, to_email, subject, client_html_body, None, images
+    )
+
+    # Send Admin Email (Synchronously in thread pool)
+    admin_subject = f"[INTERNAL] {subject}"
+    await asyncio.get_event_loop().run_in_executor(
+        None, send_email_with_attachments, admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None
+    )
 
 async def send_inquiry_notification(lead):
     """
