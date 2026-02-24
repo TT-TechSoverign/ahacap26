@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import { useCart } from '../../../context/CartContext';
 import { getProductImages } from '../../../lib/product-images';
@@ -49,10 +49,12 @@ export default function ProductDetailPage() {
         fetchProduct();
     }, [id]);
 
-    const productImages = product ? [
-        ...(product.image_url ? [product.image_url] : []),
-        ...getProductImages(product.id)
-    ] : [];
+    const productImages = useMemo(() => {
+        return product ? [
+            ...(product.image_url ? [product.image_url] : []),
+            ...getProductImages(product.id)
+        ] : [];
+    }, [product]);
     const specs = product ? getProductSpecs(product.id) : null;
 
     // Set initial image
@@ -215,7 +217,7 @@ export default function ProductDetailPage() {
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Primary Feature</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs text-primary">{specs?.keyFeature || 'Standard Cooling'}</span>
+                                    <span className="font-header font-black uppercase tracking-wide text-[10px] md:text-xs text-primary">{specs?.keyFeature || 'Standard Cooling'}</span>
                                 </div>
                             </div>
                         </div>
