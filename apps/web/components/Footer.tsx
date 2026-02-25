@@ -101,7 +101,7 @@ export default function Footer() {
                         <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Services</h4>
                         <ul className="space-y-4 w-full">
                             {[
-                                { text: 'Mini Split AC', href: '/contact' },
+                                { text: 'Mini Split AC', href: '/mini_split_ac' },
                                 { text: 'Window AC Shop', href: '/shop' },
                                 { text: 'Mini Split AC Maintenance', href: '/contact' },
                                 { text: 'Window AC Cleaning', href: '/contact' }
@@ -121,7 +121,7 @@ export default function Footer() {
                         <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Quick Links</h4>
                         <ul className="space-y-4 w-full">
                             {[
-                                { text: 'Mini Split AC', href: '/contact' },
+                                { text: 'Mini Split AC', href: '/mini_split_ac' },
                                 { text: 'Shop Inventory', href: '/shop' },
                                 { text: 'Mini Split AC Maintenance', href: '/contact' },
                                 { text: 'Window AC Cleaning', href: '/contact' },
