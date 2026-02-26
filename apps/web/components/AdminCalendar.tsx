@@ -9,7 +9,7 @@ export function AdminCalendar() {
 
     return (
         <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
-            <div className="industrial-card p-6 lg:p-8 border border-white/10 rounded-2xl bg-white/[0.02] relative overflow-hidden group/card shadow-2xl border-primary/20 bg-primary/[0.03] max-w-5xl mx-auto backdrop-blur-md">
+            <div className="industrial-card p-6 lg:p-8 border rounded-2xl relative overflow-hidden group/card shadow-2xl border-primary/20 bg-primary/[0.03] max-w-5xl mx-auto backdrop-blur-md">
                 <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-4 relative z-10">
                     <h4 className="text-white font-black uppercase tracking-[0.2em] text-[10px] flex items-center gap-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(0,174,239,0.5)]"></span>

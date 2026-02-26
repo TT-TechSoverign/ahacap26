@@ -18,7 +18,7 @@ cd "$(dirname "$0")"
 
 # 1. Fetch Latest Code from Main
 echo "Fetching latest changes from origin/main..."
-git fetch origin main
+git fetch
 echo "🔍 [1/5] Checking Disk Space..."
 USAGE=$(df / | awk 'NR==2 {print $5}' | sed 's/%//g')
 THRESHOLD=80
@@ -41,7 +41,7 @@ else
 fi
 
 # 1.75. Pull Latest Code (Now that we have space)
-git fetch origin main
+git fetch
 git checkout main
 git reset --hard origin/main
 

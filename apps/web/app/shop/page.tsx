@@ -595,7 +595,7 @@ function RebateSection() {
                                 <Link
                                     key={i}
                                     href="#dual_inverter"
-                                    className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 block cursor-pointer"
+                                    className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 cursor-pointer"
                                 >
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
                                         <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
@@ -621,7 +621,7 @@ function RebateSection() {
                                     href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 block cursor-pointer"
+                                    className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 cursor-pointer"
                                 >
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
                                         <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
@@ -828,7 +828,7 @@ function SizingGuideSection() {
                     {
                         title: "Humidity Load Factor",
                         icon: "humidity_mid",
-                        desc: <>If the room has <span className="text-primary/90 font-bold">high ceilings (over 8ft)</span> or lacks significant insulation, we recommend <span className="text-white font-bold italic underline decoration-primary/30 underline-offset-4">"sizing up"</span> within these conservative ranges to ensure the unit doesn't run at 100% capacity continuously.</>
+                        desc: <>If the room has <span className="text-primary/90 font-bold">high ceilings (over 8ft)</span> or lacks significant insulation, we recommend <span className="text-white font-bold italic underline decoration-primary/30 underline-offset-4">&quot;sizing up&quot;</span> within these conservative ranges to ensure the unit doesn&apos;t run at 100% capacity continuously.</>
                     },
                     {
                         title: "Solar Exposure",
@@ -838,7 +838,7 @@ function SizingGuideSection() {
                     {
                         title: "Inverter Advantage",
                         icon: "speed",
-                        desc: <>Units in the <span className="text-white font-bold italic">LG DUAL Inverter series</span> can modulate their speed, making them <span className="text-primary/90 font-bold">more forgiving</span> if you slightly "oversize" for a space compared to a standard single-speed unit.</>
+                        desc: <>Units in the <span className="text-white font-bold italic">LG DUAL Inverter series</span> can modulate their speed, making them <span className="text-primary/90 font-bold">more forgiving</span> if you slightly &quot;oversize&quot; for a space compared to a standard single-speed unit.</>
                     }
                 ].map((factor, idx) => (
                     <motion.div
