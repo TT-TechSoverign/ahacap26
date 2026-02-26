@@ -3,6 +3,7 @@ import SectionServicesGeneral from '../../components/SectionServicesGeneral';
 
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function MiniSplitsPage() {
     const brands = [
@@ -13,7 +14,8 @@ export default function MiniSplitsPage() {
             airHandlerImg: "/assets/minisplitacphotos/mini-split-fujitsu-air-handler.png",
             condenserImg: "/assets/minisplitacphotos/mini-split-fujitsu-condenser.png",
             airHandlerScale: "scale-100",
-            condenserScale: "scale-100"
+            condenserScale: "scale-100",
+            buttonClass: "bg-red-600 text-white hover:bg-red-500 shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_25px_rgba(220,38,38,0.5)] border border-red-500/50"
         },
         {
             name: "MITSUBISHI ELECTRIC",
@@ -22,7 +24,8 @@ export default function MiniSplitsPage() {
             airHandlerImg: "/assets/minisplitacphotos/mini-split-mitsubishi-air-handler.png",
             condenserImg: "/assets/minisplitacphotos/mini-split-mitsubishi-condenser.png",
             airHandlerScale: "scale-[1.5]",
-            condenserScale: "scale-[1.1]"
+            condenserScale: "scale-[1.1]",
+            buttonClass: "bg-red-700 text-white hover:bg-red-600 shadow-[0_0_15px_rgba(185,28,28,0.3)] hover:shadow-[0_0_25px_rgba(185,28,28,0.5)] border border-red-600/50"
         },
         {
             name: "DAIKIN",
@@ -31,7 +34,8 @@ export default function MiniSplitsPage() {
             airHandlerImg: "/assets/minisplitacphotos/mini-split-daikin-air-handler.png",
             condenserImg: "/assets/minisplitacphotos/mini-split-daikin-condenser.png",
             airHandlerScale: "scale-[1.4]",
-            condenserScale: "scale-[1.4]"
+            condenserScale: "scale-[1.4]",
+            buttonClass: "bg-sky-500 text-slate-950 hover:bg-sky-400 shadow-[0_0_15px_rgba(14,165,233,0.3)] hover:shadow-[0_0_25px_rgba(14,165,233,0.5)] border border-sky-400/50"
         },
         {
             name: "CARRIER",
@@ -40,7 +44,8 @@ export default function MiniSplitsPage() {
             airHandlerImg: "/assets/minisplitacphotos/mini-split-carrier-air-handler.png",
             condenserImg: "/assets/minisplitacphotos/mini-split-carrier-condenser.png",
             airHandlerScale: "scale-[1.6]",
-            condenserScale: "scale-100"
+            condenserScale: "scale-100",
+            buttonClass: "bg-blue-600 text-white hover:bg-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)] border border-blue-500/50"
         }
     ];
 
@@ -67,9 +72,15 @@ export default function MiniSplitsPage() {
                                 <div className="mb-6 bg-slate-900/80 px-8 py-4 rounded-xl shadow-inner border border-slate-700/50 inline-block">
                                     <span className={brand.className}>{brand.name}</span>
                                 </div>
-                                <p className="text-slate-300 text-lg leading-relaxed max-w-2xl">
+                                <p className="text-slate-300 text-lg leading-relaxed max-w-2xl mb-8">
                                     {brand.description}
                                 </p>
+                                <Link 
+                                    href="/contact" 
+                                    className={`inline-flex items-center justify-center px-8 py-3.5 font-header font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-all duration-300 ${brand.buttonClass}`}
+                                >
+                                    Get a Quote
+                                </Link>
                             </div>
 
                             {/* Image Collage */}
