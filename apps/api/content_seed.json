@@ -723,7 +723,7 @@
       },
       {
         "text": "MINI SPLIT AC CLEANING",
-        "href": "/contact"
+        "href": "/mini_split_ac_maintenance"
       },
       {
         "text": "SHOP WINDOW AC INVENTORY",
@@ -738,6 +738,48 @@
         "href": "/contact"
       }
     ]
+  },
+  "mini_split_ac_maintenance": {
+    "hero_basic": {
+      "title": "Basic Mini Split AC Service",
+      "description": "This is our routine check-up. We wash the filters and the outside coils to keep the air cold. We also flush the drains and check the system heat and pressure. It is a great way to keep your unit running well.",
+      "checklist": [
+        "Clean/Wash air filters, housings, louvers, vanes, and condenser coil",
+        "Blow/Flush condensate drain",
+        "Clean/Wipe down evaporator coil",
+        "Check pressures and temps",
+        "Run and test system"
+      ]
+    },
+    "hero_premium": {
+      "title": "Premium Mini Split AC Service",
+      "description": "This is our deepest clean. We wash every part, including the blower wheel and the drain pans. This service removes more dirt and helps your AC last much longer. It is the best choice for very fresh air.",
+      "checklist": [
+        "Clean/Wash air filters, housings, louvers, vanes, air scoop, blower wheel, condenser coils, and condensate pans",
+        "Wipe down evaporator coil",
+        "Blow/Flush condensate drains",
+        "Check pressures and temps",
+        "Full system operation check"
+      ]
+    },
+    "sections": {
+      "deep_clean": {
+        "title": "Our Deep Clean Process",
+        "description": "We take the unit apart to wash the coils, blower wheel, and drain pans. We clean every piece until it looks new. This removes years of dirt and grime to restore full cooling power."
+      },
+      "energy": {
+        "title": "Saving on Energy",
+        "description": "A clean AC unit works less hard to cool your home. When the coils and filters are free of dust, the system uses less power. This helps to lower your electric bill every month."
+      },
+      "air_quality": {
+        "title": "Better Air Quality",
+        "description": "Dust and mold can build up inside an AC over time. A clean system blows fresh, healthy air into your home. It keeps your family breathing easy and feeling safe."
+      },
+      "local": {
+        "title": "Hawaii Salt & Dust",
+        "description": "Island breezes carry salt and fine dust into your AC. This salt can rust parts if left unwashed. Regular deep cleaning stops the damage and keeps your unit running strong in Hawaii."
+      }
+    }
   },
   "landing": {
     "services_header": {
