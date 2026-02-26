@@ -13,7 +13,7 @@ export default function MiniSplitsPage() {
             description: "Fujitsu units are like the quiet heroes of your home. They work very hard to keep you cool without making a lot of noise. These systems are great because they save a lot of energy, which means your power bill stays low. We love them because they last a long time and are very easy to use every single day.",
             airHandlerImg: "/assets/minisplitacphotos/mini-split-fujitsu-air-handler.png",
             condenserImg: "/assets/minisplitacphotos/mini-split-fujitsu-condenser.png",
-            airHandlerScale: "scale-100",
+            airHandlerScale: "scale-[1.4]",
             condenserScale: "scale-100",
             buttonClass: "bg-red-600 text-white hover:bg-red-500 shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_25px_rgba(220,38,38,0.5)] border border-red-500/50"
         },
@@ -24,7 +24,7 @@ export default function MiniSplitsPage() {
             airHandlerImg: "/assets/minisplitacphotos/mini-split-mitsubishi-air-handler.png",
             condenserImg: "/assets/minisplitacphotos/mini-split-mitsubishi-condenser.png",
             airHandlerScale: "scale-[1.5]",
-            condenserScale: "scale-[1.1]",
+            condenserScale: "scale-[1.5]",
             buttonClass: "bg-red-700 text-white hover:bg-red-600 shadow-[0_0_15px_rgba(185,28,28,0.3)] hover:shadow-[0_0_25px_rgba(185,28,28,0.5)] border border-red-600/50"
         },
         {
