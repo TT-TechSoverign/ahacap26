@@ -33,8 +33,8 @@ export default function MiniSplitsPage() {
             description: "Daikin makes some of the smartest AC units in the world. They focus on making sure the air in your house feels just right, never too hot and never too cold. These systems are very good for the planet because they use less power to do a big job. They are a wonderful choice if you want a reliable system that is simple to take care of.",
             airHandlerImg: "/assets/minisplitacphotos/mini-split-daikin-condenser.png",
             condenserImg: "/assets/minisplitacphotos/mini-split-daikin-air-handler.png",
-            airHandlerScale: "scale-[1.4]",
-            condenserScale: "scale-[1.4]",
+            airHandlerScale: "scale-100",
+            condenserScale: "scale-[1.3]",
             buttonClass: "bg-sky-500 text-slate-950 hover:bg-sky-400 shadow-[0_0_15px_rgba(14,165,233,0.3)] hover:shadow-[0_0_25px_rgba(14,165,233,0.5)] border border-sky-400/50"
         },
         {
