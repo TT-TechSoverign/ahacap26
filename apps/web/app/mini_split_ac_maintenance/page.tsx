@@ -120,31 +120,32 @@ export default function MiniSplitACMaintenancePage() {
                     </div>
                 </div>
 
-                {/* Vertical Service Sections */}
-                <div className="space-y-16">
-                    {Object.entries(data.sections).map(([key, section]: [string, any], index: number) => (
-                        <div key={key} className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 group`}>
-                            {/* Visual Placeholder (1200x800px) */}
-                            <div className="flex-1 w-full relative aspect-[3/2] overflow-hidden rounded-2xl border border-slate-800 shadow-xl bg-slate-800">
-                                <Image 
-                                    src={`https://placehold.co/1200x800/222222/666666?text=${encodeURIComponent(section.title)}`}
-                                    alt={section.title}
-                                    fill
-                                    className="object-cover scale-[1.2] transition-transform duration-700 group-hover:scale-[1.25]"
-                                />
-                            </div>
-                            
-                            {/* Content */}
-                            <div className="flex-1 space-y-4">
-                                <h3 className="text-3xl md:text-4xl font-black font-oswald uppercase tracking-tight text-primary">
+                {/* 2x2 Service Badges */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {Object.entries(data.sections).map(([key, section]: [string, any]) => {
+                        // Map specific keys to relevant material symbols
+                        const iconMap: Record<string, string> = {
+                            deep_clean: 'cleaning_services',
+                            energy: 'bolt',
+                            air_quality: 'air',
+                            salt_dust: 'water_drop',
+                        };
+                        const icon = iconMap[key] || 'verified_user';
+
+                        return (
+                            <div key={key} className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 lg:p-10 shadow-xl flex flex-col items-center text-center group hover:bg-slate-800/80 hover:border-slate-700 transition-all duration-300">
+                                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <span className="material-symbols-outlined text-4xl text-primary">{icon}</span>
+                                </div>
+                                <h3 className="text-2xl md:text-3xl font-black font-oswald uppercase tracking-tight text-white mb-4">
                                     {section.title}
                                 </h3>
-                                <p className="text-slate-300 text-lg leading-relaxed max-w-xl">
+                                <p className="text-slate-300 text-lg leading-relaxed">
                                     {section.description}
                                 </p>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </div>
