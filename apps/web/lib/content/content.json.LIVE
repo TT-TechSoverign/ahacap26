@@ -678,6 +678,48 @@
             { "text": "SERVICE AREAS", "href": "/contact" }
         ]
     },
+    "mini_split_ac_maintenance": {
+        "hero_basic": {
+        "title": "Basic Mini Split AC Service",
+        "description": "This is our routine check-up. We wash the filters and the outside coils to keep the air cold. We also flush the drains and check the system heat and pressure. It is a great way to keep your unit running well.",
+        "checklist": [
+            "Clean/Wash air filters, housings, louvers, vanes, and condenser coil",
+            "Blow/Flush condensate drain",
+            "Clean/Wipe down evaporator coil",
+            "Check pressures and temps",
+            "Run and test system"
+        ]
+        },
+        "hero_premium": {
+        "title": "Premium Mini Split AC Service",
+        "description": "This is our deepest clean. We wash every part, including the blower wheel and the drain pans. This service removes more dirt and helps your AC last much longer. It is the best choice for very fresh air.",
+        "checklist": [
+            "Clean/Wash air filters, housings, louvers, vanes, air scoop, blower wheel, condenser coils, and condensate pans",
+            "Wipe down evaporator coil",
+            "Blow/Flush condensate drains",
+            "Check pressures and temps",
+            "Run and test system"
+        ]
+        },
+        "sections": {
+        "deep_clean": {
+            "title": "Our Deep Clean Process",
+            "description": "Dirt and dust can hide deep inside your AC unit, making it work harder and blowing dirty air into your home. Our deep clean process removes this hidden dirt, ensuring your unit runs efficiently and provides you with the cleanest air possible."
+        },
+        "energy": {
+            "title": "Saving on Energy",
+            "description": "A clean AC unit doesn't have to work as hard to cool your home, which means it uses less energy. Regular maintenance, especially our premium service, can significantly lower your electricity bills and help your AC unit last longer without needing repairs."
+        },
+        "air_quality": {
+            "title": "Better Air Quality",
+            "description": "Your AC unit circulates the air you breathe every day. If it's dirty, you're breathing in dust, mold, and allergens. Our thorough cleaning services remove these pollutants, improving the indoor air quality of your home and keeping your family healthy."
+        },
+        "salt_dust": {
+            "title": "Hawaii Salt & Dust",
+            "description": "Living in Hawaii means dealing with salt air and dust that can quickly corrode and clog your AC unit. Our specialized cleaning services target these specific issues, protecting your investment and ensuring your unit can withstand the unique challenges of our island environment."
+        }
+        }
+    },
     "landing": {
         "services_header": { "title": "PREMIUM", "title_highlight": "COOLING", "narrative": "" },
         "services": {
