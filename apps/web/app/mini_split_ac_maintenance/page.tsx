@@ -23,13 +23,34 @@ export default function MiniSplitACMaintenancePage() {
                 <div className="flex flex-col md:flex-row gap-8 mb-24">
                     {/* Basic Service */}
                     <div className="flex-1 bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                        <div className="relative w-full aspect-square overflow-hidden bg-slate-800">
+                        <div className="relative w-full aspect-square overflow-hidden bg-slate-800 group/image">
                             <Image 
-                                src="https://placehold.co/800x800/222222/666666?text=Basic+Service" 
-                                alt="Basic Mini Split AC Service" 
+                                src="/assets/minisplitacphotos/mini-split-basic-maintenance.png" 
+                                alt="Basic Mini Split AC Service Before and After" 
                                 fill 
-                                className="object-cover scale-[1.2] transition-transform duration-700 hover:scale-[1.25]"
+                                className="object-cover transition-transform duration-700 group-hover/image:scale-105"
                             />
+                            {/* Blend Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent pointer-events-none"></div>
+                            
+                            {/* Center Divider Line */}
+                            <div className="absolute inset-y-0 left-1/2 w-[2px] bg-white/10 pointer-events-none"></div>
+
+                            {/* Before/After Labels */}
+                            <div className="absolute inset-0 flex pointer-events-none">
+                                <div className="w-1/2 flex items-end justify-center pb-6">
+                                    <div className="bg-slate-900/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700/50 flex items-center shadow-xl">
+                                        <span className="w-2 h-2 rounded-full bg-red-500 mr-2 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+                                        <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-200">Before</span>
+                                    </div>
+                                </div>
+                                <div className="w-1/2 flex items-end justify-center pb-6">
+                                    <div className="bg-slate-900/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700/50 flex items-center shadow-xl">
+                                        <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+                                        <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-200">After</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="p-8">
                             <h2 className="text-3xl font-black font-oswald uppercase tracking-tight text-primary mb-4">
