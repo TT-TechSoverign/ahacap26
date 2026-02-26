@@ -41,9 +41,9 @@ else
 fi
 
 # 1.75. Pull Latest Code (Now that we have space)
-# git fetch origin main
-# git checkout main
-# git reset --hard origin/main
+git fetch origin main
+git checkout main
+git reset --hard origin/main
 
 # 2. Fix Permissions (Crucial for scripts)
 echo "Fixing permissions..."
