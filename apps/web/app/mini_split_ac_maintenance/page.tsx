@@ -15,7 +15,7 @@ export default function MiniSplitACMaintenancePage() {
             <div className="pt-[140px] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-black font-oswald uppercase tracking-tight text-white mb-4">
-                        Mini Split AC Maintenance
+                        Mini Split AC Cleaning
                     </h1>
                 </div>
 
@@ -53,7 +53,7 @@ export default function MiniSplitACMaintenancePage() {
                             </div>
                         </div>
                         <div className="p-8 flex-1">
-                            <h2 className="text-3xl font-black font-oswald uppercase tracking-tight text-primary mb-4">
+                            <h2 className="text-3xl font-black font-oswald uppercase tracking-tight text-primary mb-4 text-center">
                                 {data.hero_basic.title}
                             </h2>
                             <p className="text-slate-300 text-lg mb-6 leading-relaxed">
@@ -75,7 +75,7 @@ export default function MiniSplitACMaintenancePage() {
                                 <div className="absolute -top-[17px] -left-[49px] w-8 h-8 rounded-full bg-background-dark border-r-2 border-slate-700/50 pointer-events-none z-10"></div>
                                 <div className="absolute -top-[17px] -right-[49px] w-8 h-8 rounded-full bg-background-dark border-l-2 border-slate-700/50 pointer-events-none z-10"></div>
 
-                                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+                                <div className="flex flex-col items-center justify-center mb-6">
                                     <div className="flex items-end gap-2">
                                         <span className="text-4xl md:text-5xl font-black font-oswald text-white tracking-tight">$175</span>
                                         <span className="text-slate-400 font-medium mb-1.5 object-bottom tracking-wide">/ unit</span>
@@ -121,7 +121,7 @@ export default function MiniSplitACMaintenancePage() {
                             </div>
                         </div>
                         <div className="p-8 flex-1">
-                            <h2 className="text-3xl font-black font-oswald uppercase tracking-tight text-primary mb-4">
+                            <h2 className="text-3xl font-black font-oswald uppercase tracking-tight text-primary mb-4 text-center">
                                 {data.hero_premium.title}
                             </h2>
                             <p className="text-slate-300 text-lg mb-6 leading-relaxed">
@@ -143,7 +143,7 @@ export default function MiniSplitACMaintenancePage() {
                                 <div className="absolute -top-[17px] -left-[49px] w-8 h-8 rounded-full bg-background-dark border-r-2 border-slate-700/50 pointer-events-none z-10"></div>
                                 <div className="absolute -top-[17px] -right-[49px] w-8 h-8 rounded-full bg-background-dark border-l-2 border-slate-700/50 pointer-events-none z-10"></div>
 
-                                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+                                <div className="flex flex-col items-center justify-center mb-6">
                                     <div className="flex items-end gap-2">
                                         <span className="text-4xl md:text-5xl font-black font-oswald text-white tracking-tight">$275</span>
                                         <span className="text-slate-400 font-medium mb-1.5 tracking-wide">/ unit</span>
