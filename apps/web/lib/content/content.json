@@ -1,7 +1,7 @@
 {
     "landing_legacy": {
         "hero": {
-            "badge": "Est. 2005 • Oahu, HI",
+            "badge": "Est. 2005 \u2022 Oahu, HI",
             "title_line1": "20+ YEARS OF SERVICING ISLAND WIDE",
             "title_highlight1": "OAHU'S HVAC CONTRACTOR",
             "title_highlight2": "& AC Specialists",
@@ -30,7 +30,7 @@
                 {
                     "id": "minisplits",
                     "title": "MINI SPLITS",
-                    "description": "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling for any size of rooms. Whether it’s a new Installation or a Retrofit for an older Oahu home, weoffer full Service & Repairs to keep your sanctuary cool and quiet",
+                    "description": "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling for any size of rooms. Whether it\u2019s a new Installation or a Retrofit for an older Oahu home, weoffer full Service & Repairs to keep your sanctuary cool and quiet",
                     "link": "MORE INFO",
                     "icon": "ac_unit",
                     "href": "/contact",
@@ -95,7 +95,14 @@
             "title_highlight": "SERVICES",
             "title_suffix": ""
         },
-        "sections": ["hero", "services", "video", "partnerships", "service-areas", "warehouse-map"],
+        "sections": [
+            "hero",
+            "services",
+            "video",
+            "partnerships",
+            "service-areas",
+            "warehouse-map"
+        ],
         "service_areas": {
             "badge": "Island-Wide Coverage",
             "title": "Oahu's Premier",
@@ -113,7 +120,13 @@
                     "id": "central",
                     "title": "Central Oahu",
                     "icon": "warehouse",
-                    "cities": ["Aiea", "Pearl City", "Mililani", "Waipio Gentry", "Waikele"]
+                    "cities": [
+                        "Aiea",
+                        "Pearl City",
+                        "Mililani",
+                        "Waipio Gentry",
+                        "Waikele"
+                    ]
                 },
                 {
                     "id": "metro",
@@ -136,13 +149,22 @@
                     "id": "leeward",
                     "title": "LEEWARD",
                     "icon": "sunny",
-                    "cities": ["Kapolei", "Ewa Beach", "Waipahu", "Kunia"]
+                    "cities": [
+                        "Kapolei",
+                        "Ewa Beach",
+                        "Waipahu",
+                        "Kunia"
+                    ]
                 },
                 {
                     "id": "windward",
                     "title": "Windward & North",
                     "icon": "waves",
-                    "cities": ["Kailua", "Kaneohe", "Kahaluu"]
+                    "cities": [
+                        "Kailua",
+                        "Kaneohe",
+                        "Kahaluu"
+                    ]
                 }
             ]
         },
@@ -268,7 +290,7 @@
         "dual_inverter": {
             "title": "DUAL INVERTER TECHNOLOGY",
             "subtitle": "Extreme Energy Efficiency",
-            "description": "LG’s DUAL Inverter™ technology is engineered for the high-salinity and high-humidity environments of Oahu. By utilizing variable-speed compressors, these units slash energy consumption by up to 40% while operating at whisper-quiet levels. Every model in this section is $45 Hawaii Energy Rebate Qualified."
+            "description": "LG\u2019s DUAL Inverter\u2122 technology is engineered for the high-salinity and high-humidity environments of Oahu. By utilizing variable-speed compressors, these units slash energy consumption by up to 40% while operating at whisper-quiet levels. Every model in this section is $45 Hawaii Energy Rebate Qualified."
         },
         "universal_fit": {
             "title": "Perfect Fit For Older Panasonic & FRIEDRICH Units",
@@ -283,7 +305,7 @@
         "ge": {
             "title": "Thru Wall / Flush Mount Units",
             "subtitle": "Trusted Dependability",
-            "description": "Engineered for permanent through-the-wall installation, the GE Built-In series provides high-output cooling for Oahu’s most demanding residential environments. These units feature a true universal fit chassis and advanced dehumidification cycles to maintain a crisp, dry interior climate regardless of exterior humidity."
+            "description": "Engineered for permanent through-the-wall installation, the GE Built-In series provides high-output cooling for Oahu\u2019s most demanding residential environments. These units feature a true universal fit chassis and advanced dehumidification cycles to maintain a crisp, dry interior climate regardless of exterior humidity."
         },
         "casement": {
             "title": "WALL CASEMENT",
@@ -304,7 +326,7 @@
                 },
                 {
                     "title": "Energy Calibration",
-                    "description": "Compressors tuned for consistent 80°F+ operation.",
+                    "description": "Compressors tuned for consistent 80\u00b0F+ operation.",
                     "icon": "bolt"
                 },
                 {
@@ -337,19 +359,21 @@
         "guide": {
             "title": "ROOM SIZING GUIDE",
             "subtitle": "Technical Resource",
-            "description": "Standard sizing charts fail to account for Hawaii’s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles andfails to dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determinethe precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don’t guess with your comfort—deploy the correct infrastructure.",
+            "description": "Standard sizing charts fail to account for Hawaii\u2019s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles andfails to dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determinethe precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don\u2019t guess with your comfort\u2014deploy the correct infrastructure.",
             "info_title": "High Ceiling / Sun Exposure?",
             "info_desc": "For rooms with high ceilings (9ft+) or direct afternoon sun, we recommend sizing up by 10% to ensure efficiency."
         },
-        "faq": { "title": "Frequently Asked Questions" },
+        "faq": {
+            "title": "Frequently Asked Questions"
+        },
         "bento": {
             "lg": {
                 "title": "Dual Inverter Technology",
-                "description": "LG's revolutionary Dual Inverter Compressor™ eliminates the noisy stop-and-start cycle, saving up to 40% more energy."
+                "description": "LG's revolutionary Dual Inverter Compressor\u2122 eliminates the noisy stop-and-start cycle, saving up to 40% more energy."
             },
             "ge": {
                 "title": "Ultra-Quiet Comfort",
-                "description": "GE Profile™ brings whisper-quiet cooling designed for bedrooms. Built for high-humidity coastal duty."
+                "description": "GE Profile\u2122 brings whisper-quiet cooling designed for bedrooms. Built for high-humidity coastal duty."
             }
         },
         "local_authority": {
@@ -369,7 +393,7 @@
             "steps": [
                 {
                     "title": "1. Purchase a Qualifying Unit",
-                    "description": "Shop our LG Dual Inverter ENERGY STAR® window ACs — available online or in-store.",
+                    "description": "Shop our LG Dual Inverter ENERGY STAR\u00ae window ACs \u2014 available online or in-store.",
                     "icon": "shopping_cart"
                 },
                 {
@@ -386,11 +410,20 @@
             "why_matters": {
                 "title": "Energy Efficiency That Pays Off",
                 "title_highlight": "Why It Matters",
-                "description": "ENERGY STAR® certified LG units use up to 15% less energy than standard models — saving you money every month while keeping your home cool and comfortable. Over time, those savings add up for both your wallet and the planet.",
+                "description": "ENERGY STAR\u00ae certified LG units use up to 15% less energy than standard models \u2014 saving you money every month while keeping your home cool and comfortable. Over time, those savings add up for both your wallet and the planet.",
                 "highlights": [
-                    { "title": "Up to $45 Mail-In Rebate", "icon": "payments" },
-                    { "title": "Save up to $67/year on energy costs", "icon": "eco" },
-                    { "title": "Available on Dual Inverter models only", "icon": "star" }
+                    {
+                        "title": "Up to $45 Mail-In Rebate",
+                        "icon": "payments"
+                    },
+                    {
+                        "title": "Save up to $67/year on energy costs",
+                        "icon": "eco"
+                    },
+                    {
+                        "title": "Available on Dual Inverter models only",
+                        "icon": "star"
+                    }
                 ]
             }
         },
@@ -457,7 +490,7 @@
             "title": "Master HVAC Technician",
             "cert1": "EPA 608 Universal Certified",
             "cert2": "NATE Certified Specialist",
-            "quote": "\"Our deep clean isn't just a rinse—it's a clinical decontamination of your cooling system.\""
+            "quote": "\"Our deep clean isn't just a rinse\u2014it's a clinical decontamination of your cooling system.\""
         },
         "video": {
             "title": "ENGINEERING EXCELLENCE",
@@ -580,7 +613,11 @@
         "floating_cta": "Book Now"
     },
     "admin": {
-        "tabs": { "inventory": "Inventory", "orders": "Orders", "leads": "Leads" },
+        "tabs": {
+            "inventory": "Inventory",
+            "orders": "Orders",
+            "leads": "Leads"
+        },
         "login": {
             "title": "Sovereign Admin",
             "subtitle": "Authorized Access Only",
@@ -596,9 +633,18 @@
             "add_product": "Add Product"
         },
         "stats": {
-            "inventory": { "total": "Total Units", "value": "Inventory Value" },
-            "orders": { "total": "Total Orders", "revenue": "Revenue" },
-            "leads": { "active": "Active Tickets", "urgent": "Urgent Inquiries" }
+            "inventory": {
+                "total": "Total Units",
+                "value": "Inventory Value"
+            },
+            "orders": {
+                "total": "Total Orders",
+                "revenue": "Revenue"
+            },
+            "leads": {
+                "active": "Active Tickets",
+                "urgent": "Urgent Inquiries"
+            }
         },
         "table": {
             "image": "Image",
@@ -667,61 +713,80 @@
         "description": "Affordable Home A/C is calibrating a new digital experience. Smart. Adaptive. Precise. A higher standard of comfort is loading now.",
         "status_pill": "Field Operations: Fully Active & Ready to Assist",
         "cta_button": "Contact Support",
-        "footer": "Authorized Dealer • Serving Oahu Since 2005"
+        "footer": "Authorized Dealer \u2022 Serving Oahu Since 2005"
     },
     "navigation": {
         "links": [
-            { "text": "MINI SPLIT AC", "href": "/mini_split_ac" },
-            { "text": "MINI SPLIT AC CLEANING", "href": "/mini_split_ac_maintenance" },
-            { "text": "SHOP WINDOW AC INVENTORY", "href": "/shop" },
-            { "text": "WINDOW AC CLEANING", "href": "/window_ac_maintenance" },
-            { "text": "SERVICE AREAS", "href": "/contact" }
+            {
+                "text": "MINI SPLIT AC",
+                "href": "/mini_split_ac"
+            },
+            {
+                "text": "MINI SPLIT AC CLEANING",
+                "href": "/mini_split_ac_maintenance"
+            },
+            {
+                "text": "SHOP WINDOW AC INVENTORY",
+                "href": "/shop"
+            },
+            {
+                "text": "WINDOW AC CLEANING",
+                "href": "/window_ac_maintenance"
+            },
+            {
+                "text": "SERVICE AREAS",
+                "href": "/contact"
+            }
         ]
     },
     "mini_split_ac_maintenance": {
         "hero_basic": {
-        "title": "Basic Mini Split AC Cleaning",
-        "description": "This is our routine check-up. We wash the filters and the outside coils to keep the air cold. We also flush the drains and check the system heat and pressure. It is a great way to keep your unit running well.",
-        "checklist": [
-            "Clean/Wash air filters, housings, louvers, vanes, and condenser coil",
-            "Blow/Flush condensate drain",
-            "Clean/Wipe down evaporator coil",
-            "Check pressures and temps",
-            "Run and test system"
-        ]
+            "title": "Basic Mini Split AC Cleaning",
+            "description": "This is our routine check-up. We wash the filters and the outside coils to keep the air cold. We also flush the drains and check the system heat and pressure. It is a great way to keep your unit running well.",
+            "checklist": [
+                "Clean/Wash air filters, housings, louvers, vanes, and condenser coil",
+                "Blow/Flush condensate drain",
+                "Clean/Wipe down evaporator coil",
+                "Check pressures and temps",
+                "Run and test system"
+            ]
         },
         "hero_premium": {
-        "title": "Premium Mini Split AC Cleaning",
-        "description": "This is our deepest clean. We wash every part, including the blower wheel and the drain pans. This service removes more dirt and helps your AC last much longer. It is the best choice for very fresh air.",
-        "checklist": [
-            "Everything in Basic Service, PLUS:",
-            "Deep Clean Air Scoop & Blower Wheel",
-            "Deep Clean & Flush Condensate Pans",
-            "Disassemble unit to access hidden dirt",
-            "Maximized energy efficiency & lifespan"
-        ]
+            "title": "Premium Mini Split AC Cleaning",
+            "description": "This is our deepest clean. We wash every part, including the blower wheel and the drain pans. This service removes more dirt and helps your AC last much longer. It is the best choice for very fresh air.",
+            "checklist": [
+                "Everything in Basic Service, PLUS:",
+                "Deep Clean Air Scoop & Blower Wheel",
+                "Deep Clean & Flush Condensate Pans",
+                "Disassemble unit to access hidden dirt",
+                "Maximized energy efficiency & lifespan"
+            ]
         },
         "sections": {
-        "deep_clean": {
-            "title": "Our Deep Clean Process",
-            "description": "Dirt and dust can hide deep inside your AC unit, making it work harder and blowing dirty air into your home. Our deep clean process removes this hidden dirt, ensuring your unit runs efficiently and provides you with the cleanest air possible."
-        },
-        "energy": {
-            "title": "Saving on Energy",
-            "description": "A clean AC unit doesn't have to work as hard to cool your home, which means it uses less energy. Regular maintenance, especially our premium service, can significantly lower your electricity bills and help your AC unit last longer without needing repairs."
-        },
-        "air_quality": {
-            "title": "Better Air Quality",
-            "description": "Your AC unit circulates the air you breathe every day. If it's dirty, you're breathing in dust, mold, and allergens. Our thorough cleaning services remove these pollutants, improving the indoor air quality of your home and keeping your family healthy."
-        },
-        "salt_dust": {
-            "title": "Hawaii Salt & Dust",
-            "description": "Living in Hawaii means dealing with salt air and dust that can quickly corrode and clog your AC unit. Our specialized cleaning services target these specific issues, protecting your investment and ensuring your unit can withstand the unique challenges of our island environment."
-        }
+            "deep_clean": {
+                "title": "Our Deep Clean Process",
+                "description": "Dirt and dust can hide deep inside your AC unit, making it work harder and blowing dirty air into your home. Our deep clean process removes this hidden dirt, ensuring your unit runs efficiently and provides you with the cleanest air possible."
+            },
+            "energy": {
+                "title": "Saving on Energy",
+                "description": "A clean AC unit doesn't have to work as hard to cool your home, which means it uses less energy. Regular maintenance, especially our premium service, can significantly lower your electricity bills and help your AC unit last longer without needing repairs."
+            },
+            "air_quality": {
+                "title": "Better Air Quality",
+                "description": "Your AC unit circulates the air you breathe every day. If it's dirty, you're breathing in dust, mold, and allergens. Our thorough cleaning services remove these pollutants, improving the indoor air quality of your home and keeping your family healthy."
+            },
+            "salt_dust": {
+                "title": "Hawaii Salt & Dust",
+                "description": "Living in Hawaii means dealing with salt air and dust that can quickly corrode and clog your AC unit. Our specialized cleaning services target these specific issues, protecting your investment and ensuring your unit can withstand the unique challenges of our island environment."
+            }
         }
     },
     "landing": {
-        "services_header": { "title": "PREMIUM", "title_highlight": "COOLING", "narrative": "" },
+        "services_header": {
+            "title": "PREMIUM",
+            "title_highlight": "COOLING",
+            "narrative": ""
+        },
         "services": {
             "window_shop": {
                 "title": "WINDOW AC STORE",
@@ -758,7 +823,7 @@
             "nav": "Navigation",
             "support": "Support",
             "location": "Location",
-            "copyright": "© 2024 Affordable Home A/C • LIC# CT-36775 • Island-Scale Cooling Solutions"
+            "copyright": "\u00a9 2024 Affordable Home A/C \u2022 LIC# CT-36775 \u2022 Island-Scale Cooling Solutions"
         }
     },
     "footer_schedule": {
@@ -768,5 +833,47 @@
         "mini_split_install_date": "Next Available Install: Feb 23-27, 2026",
         "window_ac_estimate_date": "Next Available Estimate: Feb 23-27, 2026",
         "window_ac_install_date": "Next Available Install: Feb 23-27, 2026"
+    },
+    "window_ac": {
+        "hero_basic": {
+            "title": "Basic Window AC Cleaning",
+            "description": "This is our routine check-up. We wash the filters and the outside coils to keep the air cold. We also flush the drains and check the system heat and pressure. It is a great way to keep your unit running well.",
+            "checklist": [
+                "Clean/Wash air filters, housings, louvers, vanes, and condenser coil",
+                "Blow/Flush condensate drain",
+                "Clean/Wipe down evaporator coil",
+                "Check pressures and temps",
+                "Run and test system"
+            ]
+        },
+        "hero_premium": {
+            "title": "Premium Window AC Cleaning",
+            "description": "This is our deepest clean. We wash every part, including the blower wheel and the drain pans. This service removes more dirt and helps your AC last much longer. It is the best choice for very fresh air.",
+            "checklist": [
+                "Everything in Basic Service, PLUS:",
+                "Deep Clean Air Scoop & Blower Wheel",
+                "Deep Clean & Flush Condensate Pans",
+                "Disassemble unit to access hidden dirt",
+                "Maximized energy efficiency & lifespan"
+            ]
+        },
+        "sections": {
+            "deep_clean": {
+                "title": "Our Deep Clean Process",
+                "description": "Dirt and dust can hide deep inside your AC unit, making it work harder and blowing dirty air into your home. Our deep clean process removes this hidden dirt, ensuring your unit runs efficiently and provides you with the cleanest air possible."
+            },
+            "energy": {
+                "title": "Saving on Energy",
+                "description": "A clean AC unit doesn't have to work as hard to cool your home, which means it uses less energy. Regular maintenance, especially our premium service, can significantly lower your electricity bills and help your AC unit last longer without needing repairs."
+            },
+            "air_quality": {
+                "title": "Better Air Quality",
+                "description": "Your AC unit circulates the air you breathe every day. If it's dirty, you're breathing in dust, mold, and allergens. Our thorough cleaning services remove these pollutants, improving the indoor air quality of your home and keeping your family healthy."
+            },
+            "salt_dust": {
+                "title": "Hawaii Salt & Dust",
+                "description": "Living in Hawaii means dealing with salt air and dust that can quickly corrode and clog your AC unit. Our specialized cleaning services target these specific issues, protecting your investment and ensuring your unit can withstand the unique challenges of our island environment."
+            }
+        }
     }
 }
