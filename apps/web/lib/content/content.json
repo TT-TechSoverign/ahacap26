@@ -680,7 +680,7 @@
     },
     "mini_split_ac_maintenance": {
         "hero_basic": {
-        "title": "Basic Mini Split AC Service",
+        "title": "Basic Mini Split AC Cleaning",
         "description": "This is our routine check-up. We wash the filters and the outside coils to keep the air cold. We also flush the drains and check the system heat and pressure. It is a great way to keep your unit running well.",
         "checklist": [
             "Clean/Wash air filters, housings, louvers, vanes, and condenser coil",
@@ -691,7 +691,7 @@
         ]
         },
         "hero_premium": {
-        "title": "Premium Mini Split AC Service",
+        "title": "Premium Mini Split AC Cleaning",
         "description": "This is our deepest clean. We wash every part, including the blower wheel and the drain pans. This service removes more dirt and helps your AC last much longer. It is the best choice for very fresh air.",
         "checklist": [
             "Everything in Basic Service, PLUS:",
