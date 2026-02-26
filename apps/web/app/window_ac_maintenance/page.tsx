@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useContent } from '@/lib/context/ContentContext';
 
 export default function WindowAcMaintenancePage() {
@@ -37,12 +36,10 @@ export default function WindowAcMaintenancePage() {
                     {/* Right image block */}
                     <div className="flex-1 w-full min-h-[350px] md:min-h-full relative overflow-hidden group">
                         {/* Fake placeholder data logic: since the JSON doesn't map to real placehold.co images easily locally, hardcoding realistic unpkg paths or placehold via absolute URL */}
-                        <Image 
+                        <img 
                             src="https://placehold.co/800x800/1e293b/00e5ff?text=Hero+Before+After+800x800"
                             alt={data.hero.title}
-                            fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
-                            unoptimized={true}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                         {/* Corner overlay detail to match industrial vibe */}
                         <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-background-dark/80 to-transparent z-10 hidden md:block"></div>
@@ -66,12 +63,10 @@ export default function WindowAcMaintenancePage() {
                                 
                                 {/* Image Container */}
                                 <div className="flex-1 w-full relative h-[300px] md:h-[500px] group">
-                                    <Image
+                                    <img
                                         src={`https://placehold.co/1200x800/1e293b/cbd5e1?text=Phase+${index + 1}+Process+1200x800`}
                                         alt={phase.title}
-                                        fill
-                                        className="object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
-                                        unoptimized={true}
+                                        className="w-full h-full object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
                                     />
                                 </div>
 
