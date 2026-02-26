@@ -11,11 +11,11 @@ export default function MiniSplitACMaintenancePage() {
 
     return (
         <div className="bg-background-dark min-h-screen text-white font-sans">
-            {/* Using pt-[140px] to match the global header offset seen in other pages, and ensure it clears over the header. */}
-            <div className="pt-[140px] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-                <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black font-oswald uppercase tracking-tight text-white mb-4">
-                        Mini Split AC Cleaning
+            {/* Adjusted padding to match shop page logic more closely and scaled down container */}
+            <div className="pt-[140px] md:pt-[180px] max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+                <div className="text-center mb-10 border-b border-white/5 pb-6">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-header font-black uppercase tracking-widest text-white mb-2 neon-glow">
+                        Mini Split AC <span className="text-primary">Cleaning</span>
                     </h1>
                 </div>
 
@@ -52,36 +52,36 @@ export default function MiniSplitACMaintenancePage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="p-8 flex-1">
-                            <h2 className="text-3xl font-black font-oswald uppercase tracking-tight text-primary mb-4 text-center">
+                        <div className="p-6 flex-1">
+                            <h2 className="text-xl md:text-2xl font-header font-black uppercase tracking-widest text-primary mb-3 text-center drop-shadow-md">
                                 {data.hero_basic.title}
                             </h2>
-                            <p className="text-slate-300 text-lg mb-6 leading-relaxed">
+                            <p className="text-slate-400 text-sm mb-5 leading-relaxed font-medium">
                                 {data.hero_basic.description}
                             </p>
-                            <ul className="space-y-3">
+                            <ul className="space-y-2">
                                 {data.hero_basic.checklist.map((item: string, i: number) => (
                                     <li key={i} className="flex items-start gap-3">
-                                        <span className="material-symbols-outlined text-primary mt-1 shrink-0">check_circle</span>
-                                        <span className="text-slate-300">{item}</span>
+                                        <span className="material-symbols-outlined text-primary mt-0.5 shrink-0 text-sm">check_circle</span>
+                                        <span className="text-slate-300 text-sm">{item}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                         {/* Cutout Price & CTA Section */}
-                        <div className="px-8 pb-8 mt-auto">
-                            <div className="border-t-2 border-dashed border-slate-700/50 relative pt-8 mt-2">
+                        <div className="px-6 pb-6 mt-auto">
+                            <div className="border-t border-dashed border-slate-700/50 relative pt-6 mt-2">
                                 {/* Side Cutouts */}
-                                <div className="absolute -top-[17px] -left-[49px] w-8 h-8 rounded-full bg-background-dark border-r-2 border-slate-700/50 pointer-events-none z-10"></div>
-                                <div className="absolute -top-[17px] -right-[49px] w-8 h-8 rounded-full bg-background-dark border-l-2 border-slate-700/50 pointer-events-none z-10"></div>
+                                <div className="absolute -top-[13px] -left-[37px] w-6 h-6 rounded-full bg-background-dark border-r border-slate-700/50 pointer-events-none z-10"></div>
+                                <div className="absolute -top-[13px] -right-[37px] w-6 h-6 rounded-full bg-background-dark border-l border-slate-700/50 pointer-events-none z-10"></div>
 
-                                <div className="flex flex-col items-center justify-center mb-6">
-                                    <div className="flex items-end gap-2">
-                                        <span className="text-4xl md:text-5xl font-black font-oswald text-white tracking-tight">$175</span>
-                                        <span className="text-slate-400 font-medium mb-1.5 object-bottom tracking-wide">/ unit</span>
+                                <div className="flex flex-col items-center justify-center mb-4">
+                                    <div className="flex items-end gap-1.5">
+                                        <span className="text-3xl md:text-4xl font-header font-black text-white tracking-tighter">$175</span>
+                                        <span className="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1.5 object-bottom">/ unit</span>
                                     </div>
                                 </div>
-                                <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-4 px-6 bg-primary hover:bg-primary/90 text-black font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_25px_rgba(14,165,233,0.5)]">
+                                <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary hover:bg-primary/90 text-black text-sm font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
                                     Schedule Basic Service
                                     <span className="material-symbols-outlined transform transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
                                 </a>
@@ -120,36 +120,36 @@ export default function MiniSplitACMaintenancePage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="p-8 flex-1">
-                            <h2 className="text-3xl font-black font-oswald uppercase tracking-tight text-primary mb-4 text-center">
+                        <div className="p-6 flex-1">
+                            <h2 className="text-xl md:text-2xl font-header font-black uppercase tracking-widest text-primary mb-3 text-center drop-shadow-md">
                                 {data.hero_premium.title}
                             </h2>
-                            <p className="text-slate-300 text-lg mb-6 leading-relaxed">
+                            <p className="text-slate-400 text-sm mb-5 leading-relaxed font-medium">
                                 {data.hero_premium.description}
                             </p>
-                            <ul className="space-y-3">
+                            <ul className="space-y-2">
                                 {data.hero_premium.checklist.map((item: string, i: number) => (
                                     <li key={i} className="flex items-start gap-3">
-                                        <span className="material-symbols-outlined text-primary mt-1 shrink-0">check_circle</span>
-                                        <span className="text-slate-300">{item}</span>
+                                        <span className="material-symbols-outlined text-primary mt-0.5 shrink-0 text-sm">check_circle</span>
+                                        <span className="text-slate-300 text-sm">{item}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                         {/* Cutout Price & CTA Section */}
-                        <div className="px-8 pb-8 mt-auto">
-                            <div className="border-t-2 border-dashed border-slate-700/50 relative pt-8 mt-2">
+                        <div className="px-6 pb-6 mt-auto">
+                            <div className="border-t border-dashed border-slate-700/50 relative pt-6 mt-2">
                                 {/* Side Cutouts */}
-                                <div className="absolute -top-[17px] -left-[49px] w-8 h-8 rounded-full bg-background-dark border-r-2 border-slate-700/50 pointer-events-none z-10"></div>
-                                <div className="absolute -top-[17px] -right-[49px] w-8 h-8 rounded-full bg-background-dark border-l-2 border-slate-700/50 pointer-events-none z-10"></div>
+                                <div className="absolute -top-[13px] -left-[37px] w-6 h-6 rounded-full bg-background-dark border-r border-slate-700/50 pointer-events-none z-10"></div>
+                                <div className="absolute -top-[13px] -right-[37px] w-6 h-6 rounded-full bg-background-dark border-l border-slate-700/50 pointer-events-none z-10"></div>
 
-                                <div className="flex flex-col items-center justify-center mb-6">
-                                    <div className="flex items-end gap-2">
-                                        <span className="text-4xl md:text-5xl font-black font-oswald text-white tracking-tight">$275</span>
-                                        <span className="text-slate-400 font-medium mb-1.5 tracking-wide">/ unit</span>
+                                <div className="flex flex-col items-center justify-center mb-4">
+                                    <div className="flex items-end gap-1.5">
+                                        <span className="text-3xl md:text-4xl font-header font-black text-white tracking-tighter">$275</span>
+                                        <span className="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1.5">/ unit</span>
                                     </div>
                                 </div>
-                                <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-4 px-6 bg-primary hover:bg-primary/90 text-black font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_25px_rgba(14,165,233,0.5)]">
+                                <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary hover:bg-primary/90 text-black text-sm font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
                                     Schedule Premium Service
                                     <span className="material-symbols-outlined transform transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
                                 </a>
