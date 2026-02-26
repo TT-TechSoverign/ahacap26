@@ -11,28 +11,36 @@ export default function MiniSplitsPage() {
             className: "font-sans font-bold italic tracking-widest text-3xl text-red-500",
             description: "Fujitsu units are like the quiet heroes of your home. They work very hard to keep you cool without making a lot of noise. These systems are great because they save a lot of energy, which means your power bill stays low. We love them because they last a long time and are very easy to use every single day.",
             airHandlerImg: "/assets/minisplitacphotos/mini-split-fujitsu-air-handler.png",
-            condenserImg: "/assets/minisplitacphotos/mini-split-fujitsu-condenser.png"
+            condenserImg: "/assets/minisplitacphotos/mini-split-fujitsu-condenser.png",
+            airHandlerScale: "scale-100",
+            condenserScale: "scale-100"
         },
         {
             name: "MITSUBISHI ELECTRIC",
             className: "font-header font-bold tracking-normal uppercase text-xl text-red-600",
             description: "Mitsubishi is a name people really trust for keeping their air perfect. These units use smart technology to find the hot spots in a room and fix them right away. They are built to be very tough, so you do not have to worry about them breaking down. When you pick this brand, you are picking a system that stays strong for years.",
             airHandlerImg: "/assets/minisplitacphotos/mini-split-mitsubishi-air-handler.png",
-            condenserImg: "/assets/minisplitacphotos/mini-split-mitsubishi-condenser.png"
+            condenserImg: "/assets/minisplitacphotos/mini-split-mitsubishi-condenser.png",
+            airHandlerScale: "scale-[1.5]",
+            condenserScale: "scale-[1.1]"
         },
         {
             name: "DAIKIN",
             className: "font-header font-medium tracking-widest text-2xl text-sky-400",
             description: "Daikin makes some of the smartest AC units in the world. They focus on making sure the air in your house feels just right, never too hot and never too cold. These systems are very good for the planet because they use less power to do a big job. They are a wonderful choice if you want a reliable system that is simple to take care of.",
             airHandlerImg: "/assets/minisplitacphotos/mini-split-daikin-air-handler.png",
-            condenserImg: "/assets/minisplitacphotos/mini-split-daikin-condenser.png"
+            condenserImg: "/assets/minisplitacphotos/mini-split-daikin-condenser.png",
+            airHandlerScale: "scale-[1.4]",
+            condenserScale: "scale-[1.4]"
         },
         {
             name: "CARRIER",
             className: "font-sans font-extrabold tracking-tighter text-3xl text-blue-600",
             description: "Carrier is the brand that started it all, and they are still great today. Their mini split units are powerful and can cool down a room very fast. They are designed to fit perfectly into any home without taking up too much space. If you want a system that is simple, strong, and classic, this is the one for you.",
             airHandlerImg: "/assets/minisplitacphotos/mini-split-carrier-air-handler.png",
-            condenserImg: "/assets/minisplitacphotos/mini-split-carrier-condenser.png"
+            condenserImg: "/assets/minisplitacphotos/mini-split-carrier-condenser.png",
+            airHandlerScale: "scale-[1.6]",
+            condenserScale: "scale-100"
         }
     ];
 
@@ -72,7 +80,7 @@ export default function MiniSplitsPage() {
                                         src={brand.airHandlerImg}
                                         alt={`${brand.name} Air Handler`}
                                         fill
-                                        className="object-contain"
+                                        className={`object-contain ${brand.airHandlerScale}`}
                                     />
                                 </div>
 
@@ -82,7 +90,7 @@ export default function MiniSplitsPage() {
                                         src={brand.condenserImg}
                                         alt={`${brand.name} Condenser`}
                                         fill
-                                        className="object-contain"
+                                        className={`object-contain ${brand.condenserScale}`}
                                     />
                                 </div>
                                 
