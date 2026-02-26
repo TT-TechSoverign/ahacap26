@@ -12,7 +12,7 @@ export default function MiniSplitACMaintenancePage() {
     return (
         <div className="bg-background-dark min-h-screen text-white font-sans">
             {/* Using pt-[140px] to match the global header offset seen in other pages, and ensure it clears over the header. */}
-            <div className="pt-[140px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+            <div className="pt-[140px] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
                 <div className="text-center mb-16">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-black font-oswald uppercase tracking-tight text-white mb-4">
                         Mini Split AC Maintenance
