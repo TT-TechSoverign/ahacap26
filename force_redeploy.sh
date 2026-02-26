@@ -81,9 +81,10 @@ if [ $COUNT -eq $MAX_RETRIES ]; then
     exit 1
 fi
 
-echo "🌱 [6/6] Seeding Product Data..."
-# Run the seeder inside the container
+echo "🌱 [6/6] Seeding Product & Content Data..."
+# Run the seeders inside the container
 docker compose exec api python seed_products.py
+docker compose exec api python seed_content.py
 
 echo "🎉 DEPLOYMENT COMPLETE & VERIFIED!"
 echo "   - Code Updated"
