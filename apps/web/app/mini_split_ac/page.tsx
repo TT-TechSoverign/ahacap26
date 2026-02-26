@@ -33,8 +33,8 @@ export default function MiniSplitsPage() {
             description: "Daikin makes some of the smartest AC units in the world. They focus on making sure the air in your house feels just right, never too hot and never too cold. These systems are very good for the planet because they use less power to do a big job. They are a wonderful choice if you want a reliable system that is simple to take care of.",
             airHandlerImg: "/assets/minisplitacphotos/mini-split-daikin-condenser.png",
             condenserImg: "/assets/minisplitacphotos/mini-split-daikin-air-handler.png",
-            airHandlerScale: "scale-100",
-            condenserScale: "scale-[1.3]",
+            airHandlerScale: "scale-[1.8]",
+            condenserScale: "scale-100",
             buttonClass: "bg-sky-500 text-slate-950 hover:bg-sky-400 shadow-[0_0_15px_rgba(14,165,233,0.3)] hover:shadow-[0_0_25px_rgba(14,165,233,0.5)] border border-sky-400/50"
         },
         {
@@ -43,8 +43,8 @@ export default function MiniSplitsPage() {
             description: "Carrier is the brand that started it all, and they are still great today. Their mini split units are powerful and can cool down a room very fast. They are designed to fit perfectly into any home without taking up too much space. If you want a system that is simple, strong, and classic, this is the one for you.",
             airHandlerImg: "/assets/minisplitacphotos/mini-split-carrier-air-handler.png",
             condenserImg: "/assets/minisplitacphotos/mini-split-carrier-condenser.png",
-            airHandlerScale: "scale-[1.6]",
-            condenserScale: "scale-100",
+            airHandlerScale: "scale-[1.8]",
+            condenserScale: "scale-[1.1]",
             buttonClass: "bg-blue-600 text-white hover:bg-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)] border border-blue-500/50"
         }
     ];
