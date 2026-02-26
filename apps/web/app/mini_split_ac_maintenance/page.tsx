@@ -171,14 +171,14 @@ export default function MiniSplitACMaintenancePage() {
                         const icon = iconMap[key] || 'verified_user';
 
                         return (
-                            <div key={key} className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 lg:p-10 shadow-xl flex flex-col items-center text-center group hover:bg-slate-800/80 hover:border-slate-700 transition-all duration-300">
-                                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                    <span className="material-symbols-outlined text-4xl text-primary">{icon}</span>
+                            <div key={key} className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 lg:p-8 shadow-xl flex flex-col items-center text-center group hover:bg-slate-800/80 hover:border-slate-700 transition-all duration-300">
+                                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <span className="material-symbols-outlined text-2xl text-primary">{icon}</span>
                                 </div>
-                                <h3 className="text-2xl md:text-3xl font-black font-oswald uppercase tracking-tight text-white mb-4">
+                                <h3 className="text-lg md:text-xl font-header font-black uppercase tracking-widest text-primary mb-3 drop-shadow-md">
                                     {section.title}
                                 </h3>
-                                <p className="text-slate-300 text-lg leading-relaxed">
+                                <p className="text-slate-400 text-sm leading-relaxed font-medium">
                                     {section.description}
                                 </p>
                             </div>
