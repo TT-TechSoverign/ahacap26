@@ -22,7 +22,7 @@ export default function MiniSplitACMaintenancePage() {
                 {/* Hero Cards (Comparison) - side-by-side flex layout (md:flex-row) */}
                 <div className="flex flex-col md:flex-row gap-8 mb-24">
                     {/* Basic Service */}
-                    <div className="flex-1 bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                    <div className="flex-1 bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col">
                         <div className="relative w-full aspect-square overflow-hidden bg-slate-800 group/image">
                             <Image 
                                 src="/assets/minisplitacphotos/mini-split-basic-maintenance.png" 
@@ -52,7 +52,7 @@ export default function MiniSplitACMaintenancePage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="p-8">
+                        <div className="p-8 flex-1">
                             <h2 className="text-3xl font-black font-oswald uppercase tracking-tight text-primary mb-4">
                                 {data.hero_basic.title}
                             </h2>
@@ -68,10 +68,29 @@ export default function MiniSplitACMaintenancePage() {
                                 ))}
                             </ul>
                         </div>
+                        {/* Cutout Price & CTA Section */}
+                        <div className="px-8 pb-8 mt-auto">
+                            <div className="border-t-2 border-dashed border-slate-700/50 relative pt-8 mt-2">
+                                {/* Side Cutouts */}
+                                <div className="absolute -top-[17px] -left-[49px] w-8 h-8 rounded-full bg-background-dark border-r-2 border-slate-700/50 pointer-events-none z-10"></div>
+                                <div className="absolute -top-[17px] -right-[49px] w-8 h-8 rounded-full bg-background-dark border-l-2 border-slate-700/50 pointer-events-none z-10"></div>
+
+                                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+                                    <div className="flex items-end gap-2">
+                                        <span className="text-4xl md:text-5xl font-black font-oswald text-white tracking-tight">$175</span>
+                                        <span className="text-slate-400 font-medium mb-1.5 object-bottom tracking-wide">/ unit</span>
+                                    </div>
+                                </div>
+                                <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-4 px-6 bg-primary hover:bg-primary/90 text-black font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_25px_rgba(14,165,233,0.5)]">
+                                    Schedule Basic Service
+                                    <span className="material-symbols-outlined transform transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Premium Service */}
-                    <div className="flex-1 bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                    <div className="flex-1 bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col">
                         <div className="relative w-full aspect-square overflow-hidden bg-slate-800 group/image">
                             <Image 
                                 src="/assets/minisplitacphotos/mini-split-premium-maintenance-before-after-800x800.png" 
@@ -101,7 +120,7 @@ export default function MiniSplitACMaintenancePage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="p-8">
+                        <div className="p-8 flex-1">
                             <h2 className="text-3xl font-black font-oswald uppercase tracking-tight text-primary mb-4">
                                 {data.hero_premium.title}
                             </h2>
@@ -116,6 +135,25 @@ export default function MiniSplitACMaintenancePage() {
                                     </li>
                                 ))}
                             </ul>
+                        </div>
+                        {/* Cutout Price & CTA Section */}
+                        <div className="px-8 pb-8 mt-auto">
+                            <div className="border-t-2 border-dashed border-slate-700/50 relative pt-8 mt-2">
+                                {/* Side Cutouts */}
+                                <div className="absolute -top-[17px] -left-[49px] w-8 h-8 rounded-full bg-background-dark border-r-2 border-slate-700/50 pointer-events-none z-10"></div>
+                                <div className="absolute -top-[17px] -right-[49px] w-8 h-8 rounded-full bg-background-dark border-l-2 border-slate-700/50 pointer-events-none z-10"></div>
+
+                                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+                                    <div className="flex items-end gap-2">
+                                        <span className="text-4xl md:text-5xl font-black font-oswald text-white tracking-tight">$275</span>
+                                        <span className="text-slate-400 font-medium mb-1.5 tracking-wide">/ unit</span>
+                                    </div>
+                                </div>
+                                <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-4 px-6 bg-primary hover:bg-primary/90 text-black font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_25px_rgba(14,165,233,0.5)]">
+                                    Schedule Premium Service
+                                    <span className="material-symbols-outlined transform transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
