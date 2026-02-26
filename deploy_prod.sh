@@ -52,6 +52,8 @@ chmod +x apps/api/entrypoint.sh 2>/dev/null || true
 
 # 3. Build and Deploy Production Containers
 echo "Building and deploying production containers..."
+# Force kill any conflicting containers that might be orphaned from other projects
+docker rm -f prod-redis prod-db prod-api prod-web 2>/dev/null || true
 docker compose -f docker-compose.prod.yml -p ahac_prod up -d --build --remove-orphans
 
 # 4. Prune Unused Images to Save Space
