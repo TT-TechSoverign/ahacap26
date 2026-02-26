@@ -79,7 +79,7 @@ export default function MiniSplitsPage() {
                                     href="/contact" 
                                     className={`inline-flex items-center justify-center px-8 py-3.5 font-header font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-all duration-300 ${brand.buttonClass}`}
                                 >
-                                    Get a Quote
+                                    Schedule Free In-Home Estimate
                                 </Link>
                             </div>
 
