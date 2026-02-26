@@ -44,6 +44,10 @@ docker compose -f docker-compose.prod.yml -p ahac_prod up -d --build --remove-or
 echo "Cleaning up old images..."
 docker image prune -a -f --filter "until=24h"
 
+# 5. Seed Content Database
+echo "Seeding Production Content Database..."
+docker compose -f docker-compose.prod.yml -p ahac_prod exec -T api python seed_content.py
+
 echo "=========================================="
 echo "Production Deployment Complete: $(date)"
 echo "App running on Port 3001"
