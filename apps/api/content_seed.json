@@ -835,45 +835,36 @@
         "window_ac_install_date": "Next Available Install: Feb 9-13, 2026"
     },
     "window_ac": {
-        "hero_basic": {
-            "title": "Basic Window AC Cleaning",
-            "description": "This is our routine check-up. We wash the filters and the outside coils to keep the air cold. We also flush the drains and check the system heat and pressure. It is a great way to keep your unit running well.",
-            "checklist": [
-                "Clean/Wash air filters, housings, louvers, vanes, and condenser coil",
-                "Blow/Flush condensate drain",
-                "Clean/Wipe down evaporator coil",
-                "Check pressures and temps",
-                "Run and test system"
-            ]
+        "hero": {
+            "title": "Full Deep Cleaning",
+            "description": "This complete service covers every part of a window unit. Deep cleaning removes hidden dirt and mold to keep the air fresh. A clean machine runs better and feels like new again.",
+            "image": "/assets/placeholder-800x800.png"
         },
-        "hero_premium": {
-            "title": "Premium Window AC Cleaning",
-            "description": "This is our deepest clean. We wash every part, including the blower wheel and the drain pans. This service removes more dirt and helps your AC last much longer. It is the best choice for very fresh air.",
-            "checklist": [
-                "Everything in Basic Service, PLUS:",
-                "Deep Clean Air Scoop & Blower Wheel",
-                "Deep Clean & Flush Condensate Pans",
-                "Disassemble unit to access hidden dirt",
-                "Maximized energy efficiency & lifespan"
-            ]
-        },
-        "sections": {
-            "deep_clean": {
-                "title": "Our Deep Clean Process",
-                "description": "We take the unit apart to wash the coils, blower wheel, and drain pans. We clean every piece until it looks new. This removes years of dirt and grime to restore full cooling power."
+        "phases": [
+            {
+                "id": "phase1",
+                "title": "Phase 1: Removal and Disassembly",
+                "description": "Safe removal from the window casing starts the process. Technicians take off the metal shell to reach the internal coils and fan. Every wire stays covered or disconnected to keep the electrical parts dry and safe.",
+                "image": "/assets/placeholder-1200x800.png"
             },
-            "energy": {
-                "title": "Saving on Energy",
-                "description": "A clean AC unit works less hard to cool your home. When the coils and filters are free of dust, the system uses less power. This helps to lower your electric bill every month."
+            {
+                "id": "phase2",
+                "title": "Phase 2: Deep Cleaning",
+                "description": "A specialized soap breaks down stubborn grease and dirt on the coils. Scrubbing the fan assembly gets rid of dust and mold. Fresh water and a germ-killing spray leave the entire unit clean and healthy.",
+                "image": "/assets/placeholder-1200x800.png"
             },
-            "air_quality": {
-                "title": "Better Air Quality",
-                "description": "Dust and mold can build up inside an AC over time. A clean system blows fresh, healthy air into your home. It keeps your family breathing easy and feeling safe."
+            {
+                "id": "phase3",
+                "title": "Phase 3: Drainage and Clearing",
+                "description": "Clear drain holes prevent water from leaking into the home. Cleaning the bottom pan removes all hidden dirt and clogs.",
+                "image": "/assets/placeholder-1200x800.png"
             },
-            "local": {
-                "title": "Hawaii Salt & Dust",
-                "description": "Island breezes carry salt and fine dust into your AC. This salt can rust parts if left unwashed. Regular deep cleaning stops the damage and keeps your unit running strong in Hawaii."
+            {
+                "id": "phase4",
+                "title": "Phase 4: Testing and Re-Install",
+                "description": "Every part gets dried before the unit goes back together. A full test makes sure the fan and drains work perfectly. The AC then returns to the window for a secure fit.",
+                "image": "/assets/placeholder-1200x800.png"
             }
-        }
+        ]
     }
 }
