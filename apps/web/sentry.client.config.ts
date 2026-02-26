@@ -17,9 +17,9 @@ Sentry.init({
     // in development and sample at a lower rate in production
     replaysSessionSampleRate: 0.1,
 
-    // You can remove this option if you're not planning to use the Sentry Session Replay feature:
     integrations: [
-        Sentry.replayIntegration({
+        // @ts-expect-error - Replay exists in v7 runtime but TypeScript definition may be incomplete here
+        new Sentry.Replay({
             // Additional Replay configuration goes here,
             maskAllText: true,
             blockAllMedia: true,

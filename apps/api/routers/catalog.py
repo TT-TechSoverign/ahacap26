@@ -1,5 +1,4 @@
-from fastapi import APIRouter, Depends, Query, HTTPException
-from fastapi.encoders import jsonable_encoder
+from fastapi import APIRouter, Depends, Query
 import schemas
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional, List
@@ -48,7 +47,7 @@ def persist_product_changes(product_data, action='update'):
 
 router = APIRouter()
 
-@router.get("", response_model=List[schemas.Product])
+@router.get("")
 async def get_products(
     q: Optional[str] = None,
     category: Optional[str] = None,

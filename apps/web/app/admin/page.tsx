@@ -15,6 +15,7 @@ interface Product {
     name: string;
     price: number;
     category: string;
+    subcategory?: string;
     stock: number;
     image_url?: string;
     btu?: number;
@@ -724,8 +725,9 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
     const [activeTab, setActiveTab] = useState<'basic' | 'specs'>('basic');
     const [formData, setFormData] = useState({
         name: product?.name || '',
-        price: (product?.price || 0) / 100, // Convert cents to dollars for display
+        price: product?.price ? (product.price / 100).toString() : '',
         category: product?.category || 'WINDOW_AC',
+        subcategory: product?.subcategory || 'dual_inverter',
         stock: product?.stock || 0,
         image_url: product?.image_url || '',
         btu: product?.btu || 0,
@@ -748,7 +750,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         // Prepare payload: Convert price back to cents
         const payload = {
             ...formData,
-            price: Math.round(formData.price * 100)
+            price: Math.round(parseFloat(formData.price || '0') * 100)
         };
 
         try {
@@ -840,7 +842,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                                             value={formData.price}
                                             min={0}
                                             step="0.01"
-                                            onChange={e => setFormData({ ...formData, price: parseFloat(e.target.value) })}
+                                            onChange={e => setFormData({ ...formData, price: e.target.value })}
                                             className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
                                         />
                                     </div>
@@ -864,6 +866,20 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                                         >
                                             <option value="WINDOW_AC">Window AC</option>
                                             <option value="SERVICE">Service</option>
+                                        </select>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Subcategory</label>
+                                        <select
+                                            value={formData.subcategory}
+                                            onChange={e => setFormData({ ...formData, subcategory: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all appearance-none"
+                                        >
+                                            <option value="dual_inverter">Dual Inverter</option>
+                                            <option value="universal_fit">Universal Fit</option>
+                                            <option value="base">Base</option>
+                                            <option value="ge">GE</option>
+                                            <option value="casement">Casement</option>
                                         </select>
                                     </div>
                                     <div className="space-y-2">
