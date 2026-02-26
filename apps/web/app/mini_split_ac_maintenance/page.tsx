@@ -38,13 +38,13 @@ export default function MiniSplitACMaintenancePage() {
 
                             {/* Before/After Labels */}
                             <div className="absolute inset-0 flex pointer-events-none">
-                                <div className="w-1/2 flex items-end justify-center pb-6">
+                                <div className="w-1/2 flex items-end justify-end pr-4 pb-4 md:pr-6 md:pb-6">
                                     <div className="bg-slate-900/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700/50 flex items-center shadow-xl">
                                         <span className="w-2 h-2 rounded-full bg-red-500 mr-2 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
                                         <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-200">Before</span>
                                     </div>
                                 </div>
-                                <div className="w-1/2 flex items-end justify-center pb-6">
+                                <div className="w-1/2 flex items-end justify-start pl-4 pb-4 md:pl-6 md:pb-6">
                                     <div className="bg-slate-900/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700/50 flex items-center shadow-xl">
                                         <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
                                         <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-200">After</span>
@@ -106,13 +106,13 @@ export default function MiniSplitACMaintenancePage() {
 
                             {/* Before/After Labels */}
                             <div className="absolute inset-0 flex pointer-events-none">
-                                <div className="w-1/2 flex items-end justify-center pb-6">
+                                <div className="w-1/2 flex items-end justify-end pr-4 pb-4 md:pr-6 md:pb-6">
                                     <div className="bg-slate-900/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700/50 flex items-center shadow-xl">
                                         <span className="w-2 h-2 rounded-full bg-red-500 mr-2 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
                                         <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-200">Before</span>
                                     </div>
                                 </div>
-                                <div className="w-1/2 flex items-end justify-center pb-6">
+                                <div className="w-1/2 flex items-end justify-start pl-4 pb-4 md:pl-6 md:pb-6">
                                     <div className="bg-slate-900/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700/50 flex items-center shadow-xl">
                                         <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
                                         <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-200">After</span>
