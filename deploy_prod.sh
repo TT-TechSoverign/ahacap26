@@ -19,12 +19,26 @@ cd "$(dirname "$0")"
 # 1. Fetch Latest Code from Main
 echo "Fetching latest changes from origin/main..."
 git fetch origin main
-# 1.5. Prune Unused Images (Save Space BEFORE Build)
-echo "Cleaning up old images to free space..."
-# CRITICAL: Stop containers first so images can be deleted
-docker compose -f docker-compose.prod.yml -p ahac_prod down --remove-orphans || true
-docker system prune -a -f --volumes
-docker builder prune -f
+echo "🔍 [1/5] Checking Disk Space..."
+USAGE=$(df / | awk 'NR==2 {print $5}' | sed 's/%//g')
+THRESHOLD=80
+
+if [[ "$1" == "--nuclear" ]]; then
+    echo "☢️  NUCLEAR MODE ACTIVATED: Forcing aggressive cleanup..."
+    USAGE=100
+fi
+
+if [ "$USAGE" -gt "$THRESHOLD" ]; then
+    echo "⚠️  Disk usage is HIGH ($USAGE%). Initiating CLEAN RELEASE Protocol..."
+    echo "🛑 [1.1] Stopping Containers to Release Locks..."
+    docker compose -f docker-compose.prod.yml -p ahac_prod down --remove-orphans || true
+    echo "🧹 [1.2] Pruning ALL Images & Build Cache..."
+    docker system prune -a -f
+    docker builder prune -a -f
+    echo "✅ Disk Space Reclaimed."
+else
+    echo "✅ Disk usage is safe ($USAGE%). Proceeding with standard update..."
+fi
 
 # 1.75. Pull Latest Code (Now that we have space)
 git checkout main
