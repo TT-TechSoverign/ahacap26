@@ -29,13 +29,8 @@ export default function ServiceAreasPage() {
             {/* Header Section */}
             <div className="relative z-10 pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto">
                 <div className="flex flex-col items-center text-center space-y-6">
-                    <div className="inline-block border border-[#00E5FF]/30 bg-[#00E5FF]/10 px-4 py-1.5 rounded-sm">
-                        <span className="text-[#00E5FF] font-bold tracking-widest text-xs uppercase shadow-sm">
-                            {serviceAreas.badge || "Island-Wide Coverage"}
-                        </span>
-                    </div>
                     <h1 className="text-4xl md:text-6xl font-header font-black tracking-widest text-white uppercase drop-shadow-lg">
-                        {serviceAreas.title} <span className="text-[#00E5FF]">{serviceAreas.title_highlight}</span>
+                        {serviceAreas.title} <span className="text-[#00E5FF]">ISLAND-WIDE SERVICE</span>
                     </h1>
                     <div className="w-24 h-1 bg-[#00E5FF] mx-auto shadow-[0_0_10px_rgba(0,229,255,0.5)]"></div>
                     <p className="max-w-3xl mx-auto text-slate-300 md:text-lg tracking-wide leading-relaxed font-light">
@@ -56,12 +51,12 @@ export default function ServiceAreasPage() {
                     return (
                         <div key={region.id} className="scroll-mt-32" id={region.id}>
                             {/* Region Header */}
-                            <div className="flex items-center gap-4 mb-8">
-                                <RegionIcon className="w-8 h-8 text-[#00E5FF]" />
+                            <div className="flex flex-col items-center text-center gap-4 mb-10">
+                                <RegionIcon className="w-10 h-10 text-[#00E5FF] mb-2" strokeWidth={1.5} />
                                 <h2 className="text-3xl md:text-4xl font-header font-bold tracking-wider text-white uppercase">
                                     {region.title}
                                 </h2>
-                                <div className="flex-1 h-px bg-slate-800 ml-4 hidden md:block"></div>
+                                <div className="w-16 h-px bg-slate-800"></div>
                             </div>
 
                             {/* City Cards Grid */}
@@ -77,14 +72,14 @@ export default function ServiceAreasPage() {
                                     return (
                                         <div 
                                             key={cityIndex} 
-                                            className="group bg-slate-900 border border-slate-800 rounded-sm p-6 md:p-8 hover:border-[#00E5FF]/40 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all duration-300 flex flex-col h-full relative overflow-hidden"
+                                            className="group bg-slate-900 border border-slate-800 rounded-sm p-6 md:p-8 hover:border-[#00E5FF]/40 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all duration-300 flex flex-col items-center text-center h-full relative overflow-hidden"
                                         >
                                             {/* Top right decorative accent */}
                                             <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                                            <div className="flex items-start gap-4 mb-6">
-                                                <div className="p-3 bg-slate-950 border border-slate-800 rounded-sm text-[#00E5FF] group-hover:bg-[#00E5FF]/10 transition-colors duration-300">
-                                                    <CityIcon className="w-6 h-6" strokeWidth={1.5} />
+                                            <div className="flex flex-col items-center gap-4 mb-6">
+                                                <div className="p-4 bg-slate-950 border border-slate-800 rounded-sm text-[#00E5FF] group-hover:bg-[#00E5FF]/10 transition-colors duration-300">
+                                                    <CityIcon className="w-8 h-8" strokeWidth={1.5} />
                                                 </div>
                                                 <h3 className="text-xl font-header font-bold text-white tracking-widest uppercase mt-2">
                                                     {city.name}
@@ -95,10 +90,13 @@ export default function ServiceAreasPage() {
                                                 {city.description}
                                             </p>
 
-                                            <div className="mt-8 pt-6 border-t border-slate-800/50 flex justify-between items-center opacity-40 group-hover:opacity-100 transition-opacity">
-                                                <span className="text-[10px] text-[#00E5FF] uppercase tracking-widest font-bold">Available Now</span>
+                                            <a 
+                                                href="/contact"
+                                                className="mt-8 pt-6 w-full border-t border-slate-800/50 flex justify-center items-center gap-3 opacity-60 group-hover:opacity-100 transition-opacity hover:text-[#00E5FF] cursor-pointer"
+                                            >
+                                                <span className="text-[10px] text-[#00E5FF] uppercase tracking-widest font-bold">Contact us to schedule appointment</span>
                                                 <LucideIcons.ArrowRight className="w-4 h-4 text-[#00E5FF]" />
-                                            </div>
+                                            </a>
                                         </div>
                                     );
                                 })}
