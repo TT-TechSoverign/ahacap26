@@ -33,8 +33,8 @@ export default function WindowAcMaintenancePage() {
                             {data.hero.description}
                         </p>
                         
-                        <div className="mt-10 overflow-hidden max-w-full">
-                            <Link href="/contact" className="inline-flex items-center gap-2 border-2 border-[#00E5FF] text-[#00E5FF] font-bold font-header tracking-wider uppercase px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-sm hover:bg-[#00E5FF] hover:text-background-dark transition-colors duration-300 whitespace-nowrap text-[10px] sm:text-xs md:text-sm">
+                        <div className="mt-10 max-w-full">
+                            <Link href="/contact" className="inline-flex items-center gap-1.5 md:gap-2 border-2 border-[#00E5FF] text-[#00E5FF] font-bold font-header tracking-widest uppercase px-3 sm:px-4 md:px-6 py-3 rounded-sm hover:bg-[#00E5FF] hover:text-background-dark transition-colors duration-300 whitespace-nowrap text-[9px] sm:text-[10px] lg:text-xs">
                                 Contact Us To Schedule Window AC Deep Cleaning
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -84,8 +84,8 @@ export default function WindowAcMaintenancePage() {
                                     </p>
                                     
                                     {index === 3 && (
-                                        <div className="pt-6 relative z-10 overflow-hidden max-w-full">
-                                            <Link href="/contact" className="inline-flex items-center gap-2 border-2 border-[#00E5FF] text-[#00E5FF] font-bold font-header tracking-wider uppercase px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-sm hover:bg-[#00E5FF] hover:text-background-dark transition-colors duration-300 whitespace-nowrap text-[10px] sm:text-xs md:text-sm">
+                                        <div className="pt-6 relative z-10 max-w-full">
+                                            <Link href="/contact" className="inline-flex items-center gap-1.5 md:gap-2 border-2 border-[#00E5FF] text-[#00E5FF] font-bold font-header tracking-widest uppercase px-3 sm:px-4 md:px-6 py-3 rounded-sm hover:bg-[#00E5FF] hover:text-background-dark transition-colors duration-300 whitespace-nowrap text-[9px] sm:text-[10px] lg:text-xs">
                                                 Contact Us To Schedule Window AC Deep Cleaning
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                                                     <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
