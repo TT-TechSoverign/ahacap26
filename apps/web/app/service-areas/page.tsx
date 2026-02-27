@@ -8,7 +8,7 @@ import { BackToTop } from '@/components/BackToTop';
 export const dynamic = 'force-dynamic';
 
 export default function ServiceAreasPage() {
-    const serviceAreas = data.service_areas;
+    const serviceAreas = (data as any).service_areas;
 
     if (!serviceAreas || !serviceAreas.regions) {
         return (
