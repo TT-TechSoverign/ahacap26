@@ -24,7 +24,7 @@ export default function WindowAcMaintenancePage() {
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
                 <div className="flex flex-col md:flex-row bg-[#0F172A] border border-slate-800 rounded-sm overflow-hidden shadow-2xl relative">
                     {/* Left text block */}
-                    <div className="flex-1 p-8 md:p-14 lg:p-20 flex flex-col justify-center relative z-10">
+                    <div className="w-full md:w-[45%] lg:w-[42%] p-6 md:p-10 lg:p-12 flex flex-col justify-center relative z-10 shrink-0">
                         <div className="w-12 h-1 bg-[#00E5FF] mb-6"></div>
                         <h2 className="text-3xl md:text-5xl font-header font-black tracking-widest text-white mb-6 uppercase leading-tight drop-shadow-sm">
                             {data.hero.title}
