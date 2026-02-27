@@ -401,4 +401,7 @@ export interface ContentSchema {
     system_upgrade: SystemUpgradeContent;
     home_v2?: HomeV2Content;
     footer_schedule?: FooterScheduleContent;
+    window_ac?: any;
+    mini_split_ac_maintenance?: any;
+    service_areas?: any;
 }
