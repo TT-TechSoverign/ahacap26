@@ -12,7 +12,7 @@ export default function MiniSplitACMaintenancePage() {
     return (
         <div className="bg-background-dark min-h-screen text-white font-sans">
             {/* Adjusted padding to match shop page logic more closely and scaled down container */}
-            <div className="pt-[140px] md:pt-[180px] max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div className="pt-[140px] md:pt-[350px] lg:pt-[380px] max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
                 <div className="text-center mb-10 border-b border-white/5 pb-6">
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-header font-black uppercase tracking-widest text-white mb-2 neon-glow">
                         Mini Split AC <span className="text-primary">Cleaning</span>
