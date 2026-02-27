@@ -1,6 +1,7 @@
 'use client';
 
 import { useContent } from '@/lib/context/ContentContext';
+import Link from 'next/link';
 
 export default function WindowAcMaintenancePage() {
     const { content } = useContent();
@@ -31,6 +32,15 @@ export default function WindowAcMaintenancePage() {
                         <p className="text-slate-300 text-lg md:text-xl leading-relaxed max-w-lg font-light">
                             {data.hero.description}
                         </p>
+                        
+                        <div className="mt-10">
+                            <Link href="/contact" className="inline-flex items-center gap-2 bg-[#00E5FF] text-background-dark font-bold font-header tracking-wider uppercase px-8 py-4 rounded-sm hover:bg-white transition-colors duration-300">
+                                Contact Us To Schedule Window AC Deep Cleaning
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            </Link>
+                        </div>
                     </div>
                     
                     {/* Right image block */}
@@ -81,6 +91,17 @@ export default function WindowAcMaintenancePage() {
                                     <p className="text-slate-300 text-lg leading-relaxed relative z-10 font-light">
                                         {phase.description}
                                     </p>
+                                    
+                                    {index === 3 && (
+                                        <div className="pt-6 relative z-10">
+                                            <Link href="/contact" className="inline-flex items-center gap-2 border-2 border-[#00E5FF] text-[#00E5FF] font-bold font-header tracking-wider uppercase px-8 py-4 rounded-sm hover:bg-[#00E5FF] hover:text-background-dark transition-colors duration-300">
+                                                Contact Us To Schedule Window AC Deep Cleaning
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                </svg>
+                                            </Link>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         );
