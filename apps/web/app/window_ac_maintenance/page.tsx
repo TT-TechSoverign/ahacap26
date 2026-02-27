@@ -100,7 +100,7 @@ export default function WindowAcMaintenancePage() {
                                     <img
                                         src={phase.image}
                                         alt={phase.title}
-                                        className="w-full h-full object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
+                                        className="w-full h-full object-cover shadow-[0_0_30px_rgba(0,229,255,0.15)] border border-[#00E5FF]/20 transition-transform duration-500 group-hover:scale-[1.02]"
                                     />
                                 </div>
                             </div>
