@@ -1,14 +1,14 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
-import data from '@/lib/content/content.json';
+import { useContent } from '@/lib/context/ContentContext';
 import * as LucideIcons from 'lucide-react';
 import { BackToTop } from '@/components/BackToTop';
 
-// Force dynamic re-renders for the static DB modifications
-export const dynamic = 'force-dynamic';
-
 export default function ServiceAreasPage() {
-    const serviceAreas = (data as any).service_areas;
+    const { content } = useContent();
+    const serviceAreas = (content as any)?.landing?.service_areas;
 
     if (!serviceAreas || !serviceAreas.regions) {
         return (
