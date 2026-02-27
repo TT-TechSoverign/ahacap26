@@ -2,6 +2,7 @@
 
 import { useContent } from '@/lib/context/ContentContext';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function WindowAcMaintenancePage() {
     const { content } = useContent();
@@ -45,10 +46,11 @@ export default function WindowAcMaintenancePage() {
                     
                     {/* Right image block */}
                     <div className="flex-1 w-full min-h-[350px] md:min-h-full relative overflow-hidden group">
-                        <img 
+                        <Image 
                             src={data.hero.image}
                             alt={data.hero.title}
-                            className="w-full h-full object-cover object-[75%_center] transition-transform duration-700 group-hover:scale-105"
+                            fill
+                            className="object-cover object-[75%_center] transition-transform duration-700 group-hover:scale-105"
                         />
                         {/* Corner overlay detail to match industrial vibe */}
                         <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-background-dark/80 to-transparent z-10 hidden md:block"></div>
@@ -97,10 +99,11 @@ export default function WindowAcMaintenancePage() {
 
                                 {/* Image Container */}
                                 <div className="flex-1 w-full relative h-[300px] md:h-[500px] group">
-                                    <img
+                                    <Image
                                         src={phase.image}
                                         alt={phase.title}
-                                        className="w-full h-full object-cover shadow-[0_0_30px_rgba(0,229,255,0.15)] border border-[#00E5FF]/20 transition-transform duration-500 group-hover:scale-[1.02]"
+                                        fill
+                                        className="object-cover shadow-[0_0_30px_rgba(0,229,255,0.15)] border border-[#00E5FF]/20 transition-transform duration-500 group-hover:scale-[1.02]"
                                     />
                                 </div>
                             </div>
