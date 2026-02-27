@@ -8,7 +8,7 @@ import { BackToTop } from '@/components/BackToTop';
 
 export default function ServiceAreasPage() {
     const { content } = useContent();
-    const serviceAreas = (content as any)?.landing?.service_areas;
+    const serviceAreas = (content as any)?.landing_legacy?.service_areas;
 
     if (!serviceAreas || !serviceAreas.regions) {
         return (
