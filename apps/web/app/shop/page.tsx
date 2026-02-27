@@ -11,6 +11,7 @@ import { Product } from '../../types/inventory';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { BackToTop } from '@/components/BackToTop';
 import { cn } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
 
@@ -230,6 +231,7 @@ export default function ShopPage() {
 
             {/* Footer */}
             {/* Footer Removed (Handled by Global Layout) */}
+            <BackToTop visible={true} />
         </div >
     );
 }
