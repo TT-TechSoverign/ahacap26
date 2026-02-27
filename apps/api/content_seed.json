@@ -105,9 +105,9 @@
         ],
         "service_areas": {
             "badge": "Island-Wide Coverage",
-            "title": "Oahu's Premier",
+            "title": "",
             "title_highlight": "COOLING NETWORK",
-            "description": "Licensed experts delivering optimal air quality and precision cooling. Trusted by homeowner associations, realtors, property management companies, commercial office spaces and ohana island-wide for quick response times, superior customer service andcraftsmanship.",
+            "description": "Licensed experts delivering optimal air quality and precision cooling. Trusted by homeowner associations, realtors, property management companies, commercial office spaces and ohana island-wide.",
             "backlinking": {
                 "part1": "Licensed experts delivering ",
                 "link1_text": "optimal air quality",
@@ -234,7 +234,7 @@
                 },
                 {
                     "id": "windward",
-                    "title": "Windward & North",
+                    "title": "Windward",
                     "icon": "Wind",
                     "cities": [
                         {

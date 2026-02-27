@@ -29,8 +29,8 @@ export default function ServiceAreasPage() {
             {/* Header Section */}
             <div className="relative z-10 pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto">
                 <div className="flex flex-col items-center text-center space-y-6">
-                    <h1 className="text-4xl md:text-6xl font-header font-black tracking-widest text-white uppercase drop-shadow-lg">
-                        {serviceAreas.title} <span className="text-[#00E5FF]">ISLAND-WIDE SERVICE</span>
+                    <h1 className="text-4xl md:text-6xl font-header font-black tracking-widest text-[#00E5FF] uppercase drop-shadow-lg">
+                        ISLAND-WIDE SERVICE
                     </h1>
                     <div className="w-24 h-1 bg-[#00E5FF] mx-auto shadow-[0_0_10px_rgba(0,229,255,0.5)]"></div>
                     <p className="max-w-3xl mx-auto text-slate-300 md:text-lg tracking-wide leading-relaxed font-light">
@@ -60,7 +60,7 @@ export default function ServiceAreasPage() {
                             </div>
 
                             {/* City Cards Grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                            <div className="flex flex-wrap justify-center items-stretch gap-6 md:gap-8">
                                 {region.cities && region.cities.map((city: any, cityIndex: number) => {
                                     
                                     // Safe dynamic icon rendering for city cards
@@ -72,7 +72,7 @@ export default function ServiceAreasPage() {
                                     return (
                                         <div 
                                             key={cityIndex} 
-                                            className="group bg-slate-900 border border-slate-800 rounded-sm p-6 md:p-8 hover:border-[#00E5FF]/40 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all duration-300 flex flex-col items-center text-center h-full relative overflow-hidden"
+                                            className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] group bg-slate-900 border border-slate-800 rounded-sm p-6 md:p-8 hover:border-[#00E5FF]/40 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden"
                                         >
                                             {/* Top right decorative accent */}
                                             <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
