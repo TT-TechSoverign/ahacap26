@@ -15,8 +15,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '',
         '/shop',
         '/contact',
+        '/mini_split_ac',
+        '/mini_split_ac_maintenance',
+        '/window_ac_maintenance',
+        '/service-areas',
         '/maintenance',
-        '/mini-splits',
         '/central-ac',
     ].map((route) => ({
         url: `${baseUrl}${route}`,
