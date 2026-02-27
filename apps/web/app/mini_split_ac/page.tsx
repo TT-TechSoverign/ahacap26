@@ -55,11 +55,11 @@ export default function MiniSplitsPage() {
             
             {/* Header / Intro could go here. The existing pt-[140px] handles navbar overlap. */}
             <div className="pt-[140px] md:pt-[350px] lg:pt-[380px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-header font-bold text-slate-100 mb-4">
-                        Premium Mini Splits
+                <div className="text-center mb-10 border-b border-white/5 pb-6">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-header font-black uppercase tracking-widest text-white mb-2 neon-glow">
+                        Mini Split <span className="text-primary">AC</span>
                     </h1>
-                    <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+                    <p className="text-slate-400 text-lg max-w-2xl mx-auto mt-4">
                         Discover the perfect cooling solution for your home with our top-rated brands.
                     </p>
                 </div>
