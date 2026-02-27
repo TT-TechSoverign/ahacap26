@@ -21,7 +21,7 @@ export default function WindowAcMaintenancePage() {
             </div>
 
             {/* Task 1: Full Deep Cleaning Hero Section */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
                 <div className="flex flex-col md:flex-row bg-[#0F172A] border border-slate-800 rounded-sm overflow-hidden shadow-2xl relative">
                     {/* Left text block */}
                     <div className="flex-1 p-8 md:p-14 lg:p-20 flex flex-col justify-center relative z-10">
@@ -57,7 +57,7 @@ export default function WindowAcMaintenancePage() {
             </div>
 
             {/* Task 2: 4-Phase Scaffolding Layout */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
                 <div className="mb-16 text-center">
                     <h2 className="text-xl md:text-2xl font-header font-medium tracking-[0.3em] text-slate-400 uppercase">
                         The Cleaning Process
