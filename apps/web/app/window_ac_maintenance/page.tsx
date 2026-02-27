@@ -73,7 +73,7 @@ export default function WindowAcMaintenancePage() {
                             <div key={phase.id} className={`flex flex-col ${!isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-10 md:gap-20`}>
                                 
                                 {/* Text Container */}
-                                <div className="flex-1 space-y-6 relative">
+                                <div className="w-full md:w-1/2 space-y-6 relative">
                                     <div className="absolute -left-4 -top-8 text-7xl font-sans font-black text-slate-800/20 select-none hidden md:block">
                                         0{index + 1}
                                     </div>
@@ -98,7 +98,7 @@ export default function WindowAcMaintenancePage() {
                                 </div>
 
                                 {/* Image Container */}
-                                <div className="flex-1 w-full relative h-[300px] md:h-[500px] group">
+                                <div className="w-full md:w-1/2 relative h-[300px] md:h-[500px] group">
                                     <Image
                                         src={phase.image}
                                         alt={phase.title}
