@@ -119,6 +119,7 @@ export default function MiniSplitsPage() {
                 <SectionServicesGeneral />
             </div>
 
+            <BackToTop visible={true} />
         </div>
     );
 }
