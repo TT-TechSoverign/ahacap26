@@ -3,6 +3,7 @@
 import { useContent } from '@/lib/context/ContentContext';
 import Link from 'next/link';
 import Image from 'next/image';
+import { BackToTop } from '@/components/BackToTop';
 
 export default function WindowAcMaintenancePage() {
     const { content } = useContent();
@@ -112,6 +113,7 @@ export default function WindowAcMaintenancePage() {
                 </div>
             </div>
             
+            <BackToTop visible={true} />
         </div>
     );
 }

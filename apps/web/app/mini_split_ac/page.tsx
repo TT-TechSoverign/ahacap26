@@ -4,6 +4,7 @@ import SectionServicesGeneral from '../../components/SectionServicesGeneral';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { BackToTop } from '@/components/BackToTop';
 
 export default function MiniSplitsPage() {
     const brands = [
