@@ -126,7 +126,7 @@ new_regions = [
     },
     {
         "id": "windward",
-        "title": "Windward & North",
+        "title": "Windward",
         "icon": "Wind",
         "cities": [
             {
@@ -156,6 +156,8 @@ for file_path in files:
             
             if 'landing_legacy' in data and 'service_areas' in data['landing_legacy']:
                 data['landing_legacy']['service_areas']['regions'] = new_regions
+                data['landing_legacy']['service_areas']['title'] = ""
+                data['landing_legacy']['service_areas']['description'] = "Licensed experts delivering optimal air quality and precision cooling. Trusted by homeowner associations, realtors, property management companies, commercial office spaces and ohana island-wide."
                 
                 # Check if navigation links exist and append Service Areas if missing
                 if 'navigation' in data and 'links' in data['navigation']:
