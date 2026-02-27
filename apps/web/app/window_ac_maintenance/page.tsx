@@ -35,9 +35,8 @@ export default function WindowAcMaintenancePage() {
                     
                     {/* Right image block */}
                     <div className="flex-1 w-full min-h-[350px] md:min-h-full relative overflow-hidden group">
-                        {/* Fake placeholder data logic: since the JSON doesn't map to real placehold.co images easily locally, hardcoding realistic unpkg paths or placehold via absolute URL */}
                         <img 
-                            src="https://placehold.co/800x800/1e293b/00e5ff?text=Hero+Before+After+800x800"
+                            src={data.hero.image}
                             alt={data.hero.title}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
@@ -64,7 +63,7 @@ export default function WindowAcMaintenancePage() {
                                 {/* Image Container */}
                                 <div className="flex-1 w-full relative h-[300px] md:h-[500px] group">
                                     <img
-                                        src={`https://placehold.co/1200x800/1e293b/cbd5e1?text=Phase+${index + 1}+Process+1200x800`}
+                                        src={phase.image}
                                         alt={phase.title}
                                         className="w-full h-full object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
                                     />
