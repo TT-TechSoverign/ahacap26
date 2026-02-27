@@ -86,7 +86,7 @@ export default function ServiceAreasPage() {
                                                 </h3>
                                             </div>
                                             
-                                            <p className="text-slate-400 text-sm leading-relaxed font-light flex-grow">
+                                            <p className="text-white text-sm leading-relaxed font-light flex-grow">
                                                 {city.description}
                                             </p>
 
