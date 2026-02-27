@@ -27,7 +27,7 @@ export default function ServiceAreasPage() {
             </div>
 
             {/* Header Section */}
-            <div className="relative z-10 pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto">
+            <div className="relative z-10 pt-32 md:pt-48 lg:pt-56 pb-16 px-6 md:px-12 max-w-7xl mx-auto">
                 <div className="flex flex-col items-center text-center space-y-6">
                     <h1 className="text-4xl md:text-6xl font-header font-black tracking-widest text-[#00E5FF] uppercase drop-shadow-lg">
                         ISLAND-WIDE SERVICE
