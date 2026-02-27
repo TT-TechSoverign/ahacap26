@@ -103,7 +103,7 @@ export default function Footer() {
                             {[
                                 { text: 'Mini Split AC', href: '/mini_split_ac' },
                                 { text: 'Window AC Shop', href: '/shop' },
-                                { text: 'Mini Split AC Maintenance', href: '/contact' },
+                                { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
                                 { text: 'Window AC Cleaning', href: '/window_ac_maintenance' }
                             ].map((item) => (
                                 <li key={item.text}>
@@ -123,9 +123,9 @@ export default function Footer() {
                             {[
                                 { text: 'Mini Split AC', href: '/mini_split_ac' },
                                 { text: 'Shop Inventory', href: '/shop' },
-                                { text: 'Mini Split AC Maintenance', href: '/contact' },
+                                { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
                                 { text: 'Window AC Cleaning', href: '/window_ac_maintenance' },
-                                { text: 'Service Areas', href: '/contact' },
+                                { text: 'Service Areas', href: '/service-areas' },
                                 { text: 'Contact Us', href: '/contact' }
                             ].map((item) => (
                                 <li key={item.text}>
