@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useContent } from '@/lib/context/ContentContext';
+import { BackToTop } from '@/components/BackToTop';
 
 export default function MiniSplitACMaintenancePage() {
     const { content } = useContent();
@@ -186,6 +187,7 @@ export default function MiniSplitACMaintenancePage() {
                     })}
                 </div>
             </div>
+            <BackToTop visible={true} />
         </div>
     );
 }
