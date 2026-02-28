@@ -19,8 +19,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/mini_split_ac_maintenance',
         '/window_ac_maintenance',
         '/service-areas',
-        '/maintenance',
-        '/central-ac',
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
