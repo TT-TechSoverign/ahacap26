@@ -397,7 +397,7 @@
         },
         "casement": {
             "title": "WALL CASEMENT",
-            "subtitle": "Specialized Architecture",
+            "subtitle": "Through-the-Wall Architecture",
             "description": "GE 26\" QUICK SNAP SLEEVE. This industrial-grade sleeve is the structural foundation for the GE Built-In series (AJCQ models) and modern LG Universal Fit units. Engineered to ship flat and snap together on-site, it provides a rigid, weather-sealed portal that protects the AC chassis from exterior elements while maintaining a professional, flush-mount appearance in any Hawaii residence. "
         },
         "educational_benefits": {
@@ -853,19 +853,19 @@
         "sections": {
             "deep_clean": {
                 "title": "Our Deep Clean Process",
-                "description": "We take the unit apart to wash the coils, blower wheel, and drain pans. We clean every piece until it looks new. This removes years of dirt and grime to restore full cooling power."
+                "description": "Dirt and dust can hide deep inside your AC unit, making it work harder and blowing dirty air into your home. Our deep clean process removes this hidden dirt, ensuring your unit runs efficiently and provides you with the cleanest air possible."
             },
             "energy": {
                 "title": "Saving on Energy",
-                "description": "A clean AC unit works less hard to cool your home. When the coils and filters are free of dust, the system uses less power. This helps to lower your electric bill every month."
+                "description": "A clean AC unit doesn't have to work as hard to cool your home, which means it uses less energy. Regular maintenance, especially our premium service, can significantly lower your electricity bills and help your AC unit last longer without needing repairs."
             },
             "air_quality": {
                 "title": "Better Air Quality",
-                "description": "Dust and mold can build up inside an AC over time. A clean system blows fresh, healthy air into your home. It keeps your family breathing easy and feeling safe."
+                "description": "Your AC unit circulates the air you breathe every day. If it's dirty, you're breathing in dust, mold, and allergens. Our thorough cleaning services remove these pollutants, improving the indoor air quality of your home and keeping your family healthy."
             },
-            "local": {
+            "salt_dust": {
                 "title": "Hawaii Salt & Dust",
-                "description": "Island breezes carry salt and fine dust into your AC. This salt can rust parts if left unwashed. Regular deep cleaning stops the damage and keeps your unit running strong in Hawaii."
+                "description": "Living in Hawaii means dealing with salt air and dust that can quickly corrode and clog your AC unit. Our specialized cleaning services target these specific issues, protecting your investment and ensuring your unit can withstand the unique challenges of our island environment."
             }
         }
     },
@@ -917,10 +917,10 @@
     "footer_schedule": {
         "mini_split_label": "MINI SPLIT AC",
         "window_ac_label": "WINDOW AC",
-        "mini_split_estimate_date": "Next Available Estimate: Feb 9-13, 2026",
-        "mini_split_install_date": "Next Available Install: Feb 9-13, 2026",
-        "window_ac_estimate_date": "Next Available Estimate: Feb 9-13, 2026",
-        "window_ac_install_date": "Next Available Install: Feb 9-13, 2026"
+        "mini_split_estimate_date": "Next Available Estimate: Feb 23-27, 2026",
+        "mini_split_install_date": "Next Available Install: Feb 23-27, 2026",
+        "window_ac_estimate_date": "Next Available Estimate: Feb 23-27, 2026",
+        "window_ac_install_date": "Next Available Install: Feb 23-27, 2026"
     },
     "window_ac": {
         "hero": {
