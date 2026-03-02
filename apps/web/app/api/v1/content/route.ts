@@ -19,12 +19,12 @@ export async function GET() {
             path.join(process.cwd(), 'lib/content/content.json')           // App Dir
         ];
 
-        // 1. Check Persistence (DISABLED - Reverting to Factory Default Priority)
-        // if (fs.existsSync(persistencePath)) {
-        //     console.log('[API] Serving from Persistence:', persistencePath);
-        //     const fileContent = fs.readFileSync(persistencePath, 'utf8');
-        //     return NextResponse.json(JSON.parse(fileContent));
-        // }
+        // 1. Check Persistence (Prioritize runtime edits over factory defaults)
+        if (fs.existsSync(persistencePath)) {
+            console.log('[API] Serving from Persistence:', persistencePath);
+            const fileContent = fs.readFileSync(persistencePath, 'utf8');
+            return NextResponse.json(JSON.parse(fileContent));
+        }
 
         // 2. Fallback to Default
         const defaultPath = defaultPaths.find(p => fs.existsSync(p));
