@@ -13,7 +13,7 @@ export default function Section2OurServicesV2() {
             defaultTitle: 'Mini Split AC',
             defaultDesc: 'Whisper-quiet, ductless cooling for ultimate efficient comfort in any room.',
             cleanImage: '/assets/yelpphotos/yelp9.jpg',
-            link: '/contact'
+            link: '/mini_split_ac'
         },
         {
             id: 'window_shop',
@@ -27,14 +27,14 @@ export default function Section2OurServicesV2() {
             defaultTitle: 'Mini Split AC Maintenance',
             defaultDesc: 'Deep cleaning and professional service to keep your ductless system mold-free and efficient.',
             cleanImage: '/assets/yelpphotos/mini-split-blowerwheel-dirty-clean-1.svg',
-            link: '/contact'
+            link: '/mini_split_ac_maintenance'
         },
         {
             id: 'window_maintenance',
             defaultTitle: 'Window AC Maintenance',
             defaultDesc: 'Cleaning to restore efficiency and air quality.',
             cleanImage: '/assets/yelpphotos/window-ac-maintenance-card-bg.svg',
-            link: '/contact'
+            link: '/window_ac_maintenance'
         }
     ];
 

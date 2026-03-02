@@ -16,7 +16,7 @@ export default function SectionServicesGeneral() {
             defaultTitle: 'Residential',
             defaultDesc: 'Keep your home cool and comfortable with our expert installation and repair services.',
             cleanImage: '/assets/yelpphotos/yelp1.jpg',
-            link: '/contact'
+            link: '/mini_split_ac'
         },
         {
             id: 'commercial',
