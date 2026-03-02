@@ -21,19 +21,24 @@ export async function PATCH(request: Request) {
             path.join(process.cwd(), 'lib/content/content.json')           // App Dir
         ];
 
-        // 1. Resolve Current State (Read Priority: Persistence -> Default)
-        let currentContent;
+        // 1. Resolve Current State (Read Priority: Factory Default -> Persistence)
+        const defaultPath = defaultPaths.find(p => fs.existsSync(p));
+        if (!defaultPath) {
+            console.error('[API] Critical: Factory default missing.');
+            return NextResponse.json({ error: 'Factory default missing' }, { status: 500 });
+        }
+        let currentContent = JSON.parse(fs.readFileSync(defaultPath, 'utf8'));
+
+        // Overlay existing persistence if it exists (so we don't lose other fields if they exist)
         if (fs.existsSync(persistencePath)) {
-            console.log('[API] Reading existing persistence:', persistencePath);
-            currentContent = JSON.parse(fs.readFileSync(persistencePath, 'utf8'));
-        } else {
-            console.log('[API] No persistence found. Reading factory default to seed.');
-            const defaultPath = defaultPaths.find(p => fs.existsSync(p));
-            if (!defaultPath) {
-                console.error('[API] Critical: Factory default missing.');
-                return NextResponse.json({ error: 'Factory default missing' }, { status: 500 });
+            try {
+                const persistenceContent = JSON.parse(fs.readFileSync(persistencePath, 'utf8'));
+                if (persistenceContent.footer_schedule) {
+                    currentContent.footer_schedule = persistenceContent.footer_schedule;
+                }
+            } catch (err) {
+                console.error('[API] Failed to parse existing persistence layer:', err);
             }
-            currentContent = JSON.parse(fs.readFileSync(defaultPath, 'utf8'));
         }
 
         // 2. Apply Updates
@@ -48,8 +53,12 @@ export async function PATCH(request: Request) {
             fs.mkdirSync(persistenceDir, { recursive: true });
         }
 
-        // 4. Write to Persistence Layer
-        fs.writeFileSync(persistencePath, JSON.stringify(currentContent, null, 4));
+        // 4. Write ONLY the dynamic data to the Persistence Layer
+        // This prevents the persistence file from turning into an ancient, bloated snapshot of the entire site structure.
+        const persistenceData = {
+            footer_schedule: currentContent.footer_schedule
+        };
+        fs.writeFileSync(persistencePath, JSON.stringify(persistenceData, null, 4));
         console.log('[API] Write confirmed to persistence layer:', persistencePath);
 
         return NextResponse.json({ success: true, data: currentContent, debug_path: persistencePath });
