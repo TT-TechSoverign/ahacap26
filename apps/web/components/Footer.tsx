@@ -126,6 +126,7 @@ export default function Footer() {
                                 { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
                                 { text: 'Window AC Cleaning', href: '/window_ac_maintenance' },
                                 { text: 'Service Areas', href: '/service-areas' },
+                                { text: 'Sitemap', href: '/sitemap' },
                                 { text: 'Contact Us', href: '/contact' }
                             ].map((item) => (
                                 <li key={item.text}>
