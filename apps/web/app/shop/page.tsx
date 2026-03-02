@@ -12,7 +12,7 @@ import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { BackToTop } from '@/components/BackToTop';
-import { cn } from '@/lib/utils';
+import { cn, generateProductSlug } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
 
 
@@ -921,7 +921,7 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
 
     return (
         <div
-            onClick={() => router.push(`/shop/${product.id}`)}
+            onClick={() => router.push(`/shop/${generateProductSlug(product.id, product.name)}`)}
             className="industrial-card group flex flex-col bg-[#0f131a] border border-white/5 rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,174,239,0.15)] transition-all duration-700 relative h-full ring-1 ring-white/5 active:scale-[0.98] cursor-pointer"
         >
             {/* Image Area with Luminous Hover & Immersive Blending */}
@@ -1009,7 +1009,7 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                         <button
                             onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(`/shop/${product.id}`);
+                                router.push(`/shop/${generateProductSlug(product.id, product.name)}`);
                             }}
                             className="bg-red-500/10 hover:bg-red-500/20 text-red-500 font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-widest transition-all border border-red-500/20 hover:border-red-500/40 active:scale-95 flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]"
                         >

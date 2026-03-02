@@ -18,7 +18,10 @@ import { cn } from '@/lib/utils';
 export default function ProductDetailPage() {
     const params = useParams();
     // In Next.js App Router, params are strings. Safe to cast or just use.
-    const id = params?.id as string;
+    const slug = params?.slug as string;
+    
+    // Extract ID (everything before the first hyphen)
+    const id = slug ? slug.split('-')[0] : null;
 
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
