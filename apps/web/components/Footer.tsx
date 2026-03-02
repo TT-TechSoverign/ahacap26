@@ -18,8 +18,7 @@ export default function Footer() {
 
     const schedule = {
         ...defaults,
-        ...(content?.footer_schedule || {}),
-        ...content?.contact?.calendar // Fallback to contact calendar if available
+        ...(content?.footer_schedule || {})
     };
 
     return (
