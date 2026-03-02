@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { Product } from '@/types/inventory';
+import { generateProductSlug } from '@/lib/utils';
 
 // Robust Sitemap Generation
 // This ensures the build never fails even if the API is down.
@@ -53,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         if (res.ok) {
             const products: Product[] = await res.json();
             productRoutes = products.map((product) => ({
-                url: `${baseUrl}/shop/${product.id}`,
+                url: `${baseUrl}/shop/${generateProductSlug(product.id, product.name)}`,
                 lastModified: new Date(),
                 changeFrequency: 'weekly' as const,
                 priority: 0.6,
