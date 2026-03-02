@@ -13,15 +13,15 @@ export default function Section1HeroHomeV2() {
                     src="/assets/yelpphotos/svg-yelp-photos/section1v2-bg-1600x1000.svg"
                     alt="Expert HVAC Installation by Affordable Home A/C"
                     fill
-                    className="object-cover object-center opacity-80"
+                    className="object-cover object-center opacity-90"
                     priority
                 />
 
                 {/* Primary Dark Blue Overlay with Blend Mode for Seamless Reading */}
-                <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-90" />
+                <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-60" />
 
                 {/* Gradient Overlay for Depth and Contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-[#0F172A]/80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-[#0F172A]/60" />
             </div>
 
             {/* Content Container - Centered and Mobile Optimized */}
