@@ -17,13 +17,13 @@ export default function Homepage() {
             {/* Global Background Image with Overlay */}
             <div className="fixed inset-0 z-0">
                 <Image
-                    src="/assets/hero-cards/bg-honolulu_skyline.jpg"
-                    alt="Honolulu Skyline"
+                    src="/assets/hero-cards/ahac-hero-background-2.png"
+                    alt="Expert HVAC Installation by Affordable Home A/C"
                     fill
                     className="object-cover object-center translate-y-[-10%] scale-110" // Slight shift to align visually
                     priority
                 />
-                <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]" />
+                <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[2px]" />
             </div>
 
             <main className="relative z-10 pt-[280px]">
