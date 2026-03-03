@@ -39,9 +39,8 @@ ARG STRIPE_SECRET_KEY
 ENV STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Build the project with cache mounting for faster iteration
-RUN --mount=type=cache,target=/app/apps/web/.next/cache \
-    npm install -g pnpm && pnpm --filter web build
+# Build the project (disabled cache mount to prevent Server Action desync)
+RUN npm install -g pnpm && pnpm --filter web build
 
 # Fix: Create a true static copy (dereference symlinks)
 # cp -rL ensures all pnpm symlinks are converted to real files
