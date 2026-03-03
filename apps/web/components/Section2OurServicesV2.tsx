@@ -79,7 +79,7 @@ export default function Section2OurServicesV2() {
                                     className="object-cover object-center opacity-80 group-hover:opacity-60 group-hover:blur-[2px] transition-all duration-700"
                                 />
                                 {/* Refined Gradient: Stronger at bottom/center for text readability, but transparent enough to see image */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent mix-blend-multiply transition-opacity duration-500 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-slate-900/20 to-transparent mix-blend-multiply transition-opacity duration-500 group-hover:opacity-100" />
                             </div>
 
                             {/* Content Wrapper - Centered Vertically */}
