@@ -39,9 +39,22 @@ async def seed_content():
 
         if page:
             print("Updating existing global content...")
-            page.data = json_str
-            page.draft_data = json_str # Ensure draft is synced
-            page.updated_at = datetime.utcnow()
+            # Preserve dynamic data managed via Admin UI (e.g., footer_schedule)
+            if page.data:
+                try:
+                    existing_data = json.loads(page.data)
+                    if "footer_schedule" in existing_data:
+                        print("Preserving existing live footer_schedule...")
+                        content_data["footer_schedule"] = existing_data["footer_schedule"]
+                except Exception as e:
+                    print(f"Warning: Could not parse existing data to preserve footer_schedule: {e}")
+            
+            merged_json_str = json.dumps(content_data)
+            page.data = merged_json_str
+            page.draft_data = merged_json_str # Ensure draft is synced
+            # Note: datetime.utcnow() is deprecated, using timezone-aware UTC
+            from datetime import timezone
+            page.updated_at = datetime.now(timezone.utc)
         else:
             print("Creating new global content record...")
             page = models.ContentPage(
