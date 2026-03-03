@@ -41,6 +41,7 @@ function CheckoutContent() {
             console.log('CheckoutPage: SUCCESS DETECTED -> Triggering Success View');
             handleSuccess();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams]);
 
     if (step === 'success') {
@@ -107,7 +108,7 @@ function CheckoutContent() {
                 >
                     <div className="space-y-2 text-center md:text-left">
                         <span className="text-red-500 font-header font-black uppercase tracking-[0.6em] text-[10px] block animate-pulse">
-                            YES I'M <span className="italic">HOT!</span>
+                            YES I&apos;M <span className="italic">HOT!</span>
                         </span>
                         <h1 className="text-4xl md:text-6xl font-header font-black text-white uppercase tracking-tighter drop-shadow-[0_0_30px_rgba(6,182,212,0.5)] leading-none">
                             Checkout
