@@ -52,9 +52,9 @@ async def seed_content():
             merged_json_str = json.dumps(content_data)
             page.data = merged_json_str
             page.draft_data = merged_json_str # Ensure draft is synced
-            # Note: datetime.utcnow() is deprecated, using timezone-aware UTC
+            # Fix: Database column is TIMESTAMP WITHOUT TIME ZONE (offset-naive)
             from datetime import timezone
-            page.updated_at = datetime.now(timezone.utc)
+            page.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)
         else:
             print("Creating new global content record...")
             page = models.ContentPage(
