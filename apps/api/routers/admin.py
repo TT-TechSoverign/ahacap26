@@ -47,8 +47,9 @@ async def update_schedule(
         current_data['footer_schedule'] = {}
 
     # 2. Update footer_schedule
-    # We explicitly update the node.
-    current_data['footer_schedule'] = schedule.dict()
+    # We update the dictionary fields with the new user input, rather than destroying existing keys or corrupting format
+    for k, v in schedule.dict(exclude_unset=True).items():
+        current_data['footer_schedule'][k] = v
 
     # 3. Save back (Draft + Publish for immediate effect as per user expectation)
     updated_json = json.dumps(current_data)
@@ -56,7 +57,8 @@ async def update_schedule(
     if page:
         page.data = updated_json
         page.draft_data = updated_json
-        page.updated_at = datetime.utcnow()
+        from datetime import timezone
+        page.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)
     else:
         page = models.ContentPage(
             path=path,
