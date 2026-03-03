@@ -10,19 +10,19 @@ export default function Section1HeroHomeV2() {
             {/* Background Layer */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/yelpphotos/svg-yelp-photos/section1v2-bg-1600x1000.svg"
+                    src="/assets/hero-cards/ahac-hero-background-2.png"
                     alt="Expert HVAC Installation by Affordable Home A/C"
                     fill
                     className="object-cover object-center opacity-90"
                     priority
                 />
 
-                {/* Primary Dark Blue Overlay with Blend Mode for Seamless Reading */}
-                <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-60" />
+        {/* Primary Dark Blue Overlay with Blend Mode for Seamless Reading */}
+        <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-20" />
 
-                {/* Gradient Overlay for Depth and Contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-[#0F172A]/60" />
-            </div>
+        {/* Gradient Overlay for Depth and Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/20 to-transparent" />
+    </div>
 
             {/* Content Container - Centered and Mobile Optimized */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col items-center justify-center h-full pt-10 text-center">
