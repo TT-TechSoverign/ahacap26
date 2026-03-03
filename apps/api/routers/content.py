@@ -13,8 +13,10 @@ router = APIRouter()
 class ContentPayload(BaseModel):
     data: Dict[str, Any]
 
+@router.get("")
+@router.get("/")
 @router.get("/{path:path}")
-async def get_content(path: str, draft: bool = False, db: AsyncSession = Depends(get_db)):
+async def get_content(path: str = "/", draft: bool = False, db: AsyncSession = Depends(get_db)):
     """
     Get content for a specific path.
     If draft=True, return draft_data, else return published data.
