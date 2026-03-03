@@ -23,6 +23,8 @@ export default function Homepage() {
                     className="object-cover object-center translate-y-[-10%] scale-110" // Slight shift to align visually
                     priority
                 />
+                <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-20" />
+                {/* Secondary subtle blur & darkening */}
                 <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[2px]" />
             </div>
 
