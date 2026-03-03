@@ -86,7 +86,7 @@ export default function NavbarV2() {
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-200 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
                                 <span className="text-[#00B5E2] font-sans font-bold tracking-tight text-xl relative group cursor-default">
-                                    Hawai'i Energy
+                                    Hawai&apos;i Energy
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-200 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
                             </div>
