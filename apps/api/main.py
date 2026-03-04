@@ -114,6 +114,9 @@ app.include_router(content.router, prefix="/api/v1/content", tags=["Content"])
 from routers import snippets
 app.include_router(snippets.router, prefix="/api/v1/content/snippets", tags=["Snippets"])
 
+from routers import khon2
+app.include_router(khon2.router, prefix="/api/v1/khon2-portal", tags=["KHON2 Portal"])
+
 from routers import admin
 app.include_router(admin.router, prefix="/api/v1/admin", tags=["Admin"])
 
