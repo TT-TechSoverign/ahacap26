@@ -51,7 +51,13 @@ export default function KHON2SEOPortal() {
                         Papa.parse(text, {
                             header: true,
                             skipEmptyLines: true,
-                            complete: (results) => resolve({ filename, data: results.data }),
+                            complete: (results) => {
+                                // Filter out rows that contain only empty strings
+                                const cleanedData = results.data.filter((row: any) => {
+                                    return Object.values(row).some(v => typeof v === 'string' && v.trim() !== '');
+                                });
+                                resolve({ filename, data: cleanedData });
+                            },
                         });
                     });
                 })
@@ -139,24 +145,24 @@ export default function KHON2SEOPortal() {
 
     return (
         <div className="min-h-screen bg-[#05070a] text-slate-200">
-            {/* Top Navigation Bar */}
-            <div className="sticky top-0 z-50 bg-[#05070a]/90 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
-                        <LucideIcons.Database className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                        <h1 className="text-lg font-header font-black text-white uppercase tracking-widest">
-                            SEO Optimization Portal
-                        </h1>
-                        <p className="text-xs text-emerald-400 uppercase tracking-widest font-bold">
-                            Isolated Secure Environment - KHON2 Client
-                        </p>
+            <main className="pt-[220px] md:pt-[280px] lg:pt-[330px] pb-24 max-w-[1600px] mx-auto p-6 md:p-8">
+                {/* Portal Header */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+                            <LucideIcons.Database className="w-6 h-6 text-primary" />
+                        </div>
+                        <div>
+                            <h1 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-widest">
+                                SEO Optimization Portal
+                            </h1>
+                            <p className="text-xs md:text-sm text-emerald-400 uppercase tracking-widest font-bold">
+                                Isolated Secure Environment - KHON2 Client
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <main className="max-w-[1600px] mx-auto p-6 md:p-8">
                 {isLoading ? (
                     <div className="flex flex-col items-center justify-center py-32 gap-4">
                         <LucideIcons.Loader2 className="w-8 h-8 text-primary animate-spin" />
