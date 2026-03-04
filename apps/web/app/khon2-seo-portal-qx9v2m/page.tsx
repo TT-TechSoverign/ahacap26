@@ -215,46 +215,51 @@ export default function KHON2SEOPortal() {
                                 </button>
                             </div>
 
-                            {/* Actual Table */}
-                            <div className="overflow-x-auto">
-                                <table className="w-full text-left border-collapse">
-                                    <thead>
-                                        <tr className="bg-black/40 border-b border-white/10">
-                                            {Object.keys(csvData[activeTab].data[0] || {}).map((header, idx) => (
-                                                <th key={idx} className="p-4 text-xs font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap">
-                                                    {header}
-                                                </th>
-                                            ))}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {csvData[activeTab].data.map((row, rowIndex) => (
-                                            <tr key={rowIndex} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors group">
-                                                {Object.keys(row).map((key, colIndex) => {
-                                                    // Determine if field should be editable
-                                                    const isEditable = key.includes('SEO') || key.includes('Notes') || key.includes('Optimized');
-                                                    
-                                                    return (
-                                                        <td key={colIndex} className="p-3 min-w-[200px] align-top">
-                                                            {isEditable ? (
-                                                                <textarea 
-                                                                    value={row[key] || ""}
-                                                                    onChange={(e) => handleCellChange(activeTab, rowIndex, key, e.target.value)}
-                                                                    className="w-full min-h-[160px] bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-emerald-400 font-medium placeholder-slate-700 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all resize-y text-sm"
-                                                                    placeholder={`Enter ${key}...`}
-                                                                />
-                                                            ) : (
-                                                                <div className="px-4 py-3 text-sm text-slate-300 font-light leading-relaxed">
-                                                                    {row[key] || <span className="text-slate-700 italic">Empty</span>}
-                                                                </div>
-                                                            )}
-                                                        </td>
-                                                    );
-                                                })}
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                            {/* Actual Data Cards */}
+                            <div className="p-4 md:p-6 space-y-6">
+                                {csvData[activeTab].data.map((row, rowIndex) => {
+                                    const keys = Object.keys(row);
+                                    const readOnlyKeys = keys.filter(key => !key.includes('SEO') && !key.includes('Notes') && !key.includes('Optimized'));
+                                    const editableKeys = keys.filter(key => key.includes('SEO') || key.includes('Notes') || key.includes('Optimized'));
+
+                                    return (
+                                        <div key={rowIndex} className="bg-black/20 border border-white/5 hover:border-white/10 rounded-2xl p-6 transition-all duration-300 group">
+                                            
+                                            {/* Top Row: Context Information */}
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                                                {readOnlyKeys.map((key, colIndex) => (
+                                                    <div key={colIndex}>
+                                                        <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+                                                            {key}
+                                                        </h3>
+                                                        <div className="text-sm text-slate-300 font-light leading-relaxed bg-white/[0.02] border border-white/5 rounded-xl p-4 min-h-[80px]">
+                                                            {row[key] || <span className="text-slate-700 italic">Empty</span>}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            {/* Bottom Row: KHON2 Editable Inputs */}
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/10">
+                                                {editableKeys.map((key, colIndex) => (
+                                                    <div key={colIndex}>
+                                                        <h3 className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest flex items-center gap-2 mb-2">
+                                                            <LucideIcons.Edit3 className="w-3 h-3" />
+                                                            {key}
+                                                        </h3>
+                                                        <textarea 
+                                                            value={row[key] || ""}
+                                                            onChange={(e) => handleCellChange(activeTab, rowIndex, key, e.target.value)}
+                                                            className="w-full min-h-[120px] bg-black/40 border border-white/10 hover:border-white/20 rounded-xl px-4 py-3 text-emerald-400 font-medium placeholder-slate-700 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all resize-y text-sm"
+                                                            placeholder={`Enter ${key}...`}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
