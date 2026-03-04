@@ -190,10 +190,10 @@ export default function KHON2SEOPortal() {
                         </div>
                         <div>
                             <h1 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-widest">
-                                SEO Optimization Portal
+                                KHON2 Portal
                             </h1>
                             <p className="text-xs md:text-sm text-emerald-400 uppercase tracking-widest font-bold">
-                                Isolated Secure Environment - KHON2 Client
+                                Secured Isolated Environment
                             </p>
                         </div>
                     </div>
@@ -238,7 +238,7 @@ export default function KHON2SEOPortal() {
                                         {csvData[activeTab].filename.replace('AHAC_KHON2_CONTENTS - ', '').replace('.csv', '')}
                                     </h2>
                                     <p className="text-xs font-mono text-slate-500 mt-1">
-                                        Rows: {csvData[activeTab].data.length} | Status: Local Draft
+                                        Rows: {csvData[activeTab].data.length}
                                     </p>
                                 </div>
                                 
