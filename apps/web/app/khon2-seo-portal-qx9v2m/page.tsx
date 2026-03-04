@@ -240,7 +240,7 @@ export default function KHON2SEOPortal() {
                                                                 <textarea 
                                                                     value={row[key] || ""}
                                                                     onChange={(e) => handleCellChange(activeTab, rowIndex, key, e.target.value)}
-                                                                    className="w-full min-h-[80px] bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-emerald-400 font-medium placeholder-slate-700 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all resize-y text-sm"
+                                                                    className="w-full min-h-[160px] bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-emerald-400 font-medium placeholder-slate-700 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all resize-y text-sm"
                                                                     placeholder={`Enter ${key}...`}
                                                                 />
                                                             ) : (
