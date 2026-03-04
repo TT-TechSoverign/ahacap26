@@ -66,7 +66,7 @@ export default function MiniSplitsPage() {
 
                 <div className="flex flex-col gap-16 mb-20">
                     {brands.map((brand) => (
-                        <div key={brand.name} className="bg-slate-950/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-800 shadow-xl flex flex-col md:flex-row items-center gap-12 group even:md:flex-row-reverse">
+                        <div key={brand.name} id={brand.name.toLowerCase().replace(/\s+/g, '-')} className="bg-slate-950/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-slate-800 shadow-xl flex flex-col md:flex-row items-center gap-12 group even:md:flex-row-reverse">
                             
                             {/* Text Content */}
                             <div className="flex-1 text-center md:text-left flex flex-col items-center md:items-start">
