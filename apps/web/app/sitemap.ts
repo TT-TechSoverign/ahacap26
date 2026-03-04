@@ -32,8 +32,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticRoutes = [
         '',
         '/shop',
+        '/shop#dual_inverter',    // LG
+        '/shop#ge',               // GE
+        '/shop#rebate',           // Hawaii Energy
         '/contact',
         '/mini_split_ac',
+        '/mini_split_ac#mitsubishi-electric',
+        '/mini_split_ac#fujitsu',
+        '/mini_split_ac#daikin',
+        '/mini_split_ac#carrier',
         '/mini_split_ac_maintenance',
         '/window_ac_maintenance',
         '/service-areas',
