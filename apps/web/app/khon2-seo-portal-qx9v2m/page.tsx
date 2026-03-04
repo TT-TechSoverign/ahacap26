@@ -21,15 +21,30 @@ export default function KHON2SEOPortal() {
         if (passwordInput === KHON2_PASSWORD) {
             setIsAuthenticated(true);
             setError("");
-            loadCSVData();
+            loadData();
         } else {
             setError("Invalid Access Code. Access Denied.");
         }
     };
 
-    const loadCSVData = async () => {
+    const loadData = async () => {
         setIsLoading(true);
         try {
+            // 1. Fetch the absolute latest global drafts from the remote server
+            let globalDrafts: { filename: string, data: any[] }[] = [];
+            try {
+                const draftRes = await fetch('/api/v1/khon2-portal/drafts');
+                if (draftRes.ok) {
+                    const json = await draftRes.json();
+                    if (json.data && Array.isArray(json.data)) {
+                        globalDrafts = json.data;
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to fetch global drafts from server", err);
+            }
+
+            // 2. Load the base CSV files
             const files = [
                 'AHAC_KHON2_CONTENTS - HomePage.csv',
                 'AHAC_KHON2_CONTENTS - Mini Split AC Maintenance Page.csv',
@@ -41,7 +56,6 @@ export default function KHON2SEOPortal() {
 
             const loadedData = await Promise.all(
                 files.map(async (filename) => {
-                    // Next.js static asset fetching from the public directory
                     const response = await fetch(`/content/seo-drafts/${filename}`);
                     if (!response.ok) {
                         console.error(`Failed to load ${filename}`);
@@ -54,32 +68,23 @@ export default function KHON2SEOPortal() {
                             header: true,
                             skipEmptyLines: true,
                             complete: (results) => {
-                                // Filter out rows that contain only empty strings
                                 const cleanedData = results.data.filter((row: any) => {
                                     return Object.values(row).some(v => typeof v === 'string' && v.trim() !== '');
                                 });
 
-                                // Merge with localStorage Draft
-                                const savedDraftsStr = localStorage.getItem(STORAGE_KEY);
-                                if (savedDraftsStr) {
-                                    try {
-                                        const drafts = JSON.parse(savedDraftsStr);
-                                        const draftFile = drafts.find((d: any) => d.filename === filename);
-                                        if (draftFile && draftFile.data) {
-                                            cleanedData.forEach((row: any, i: number) => {
-                                                if (draftFile.data[i]) {
-                                                    Object.keys(row).forEach(key => {
-                                                        const isEditable = key.includes('SEO') || key.includes('Notes') || key.includes('Optimized');
-                                                        if (isEditable && draftFile.data[i][key]) {
-                                                            row[key] = draftFile.data[i][key];
-                                                        }
-                                                    });
+                                // 3. Merge with Global Server Drafts
+                                const draftFile = globalDrafts.find(d => d.filename === filename);
+                                if (draftFile && draftFile.data) {
+                                    cleanedData.forEach((row: any, i: number) => {
+                                        if (draftFile.data[i]) {
+                                            Object.keys(row).forEach(key => {
+                                                const isEditable = key.includes('SEO') || key.includes('Notes') || key.includes('Optimized');
+                                                if (isEditable && draftFile.data[i][key]) {
+                                                    row[key] = draftFile.data[i][key];
                                                 }
                                             });
                                         }
-                                    } catch (e) {
-                                        console.error('Failed to parse drafts', e);
-                                    }
+                                    });
                                 }
 
                                 resolve({ filename, data: cleanedData });
@@ -91,8 +96,8 @@ export default function KHON2SEOPortal() {
 
             setCsvData(loadedData.filter(d => d.data.length > 0));
         } catch (err) {
-            console.error("Error loading CSVs:", err);
-            setError("Failed to load CSV data files. Please contact administrator.");
+            console.error("Error loading data:", err);
+            setError("Failed to load portal configuration. Please try again.");
         } finally {
             setIsLoading(false);
         }
@@ -104,13 +109,27 @@ export default function KHON2SEOPortal() {
         setCsvData(newData);
     };
 
-    const saveProgress = () => {
+    const [isSaving, setIsSaving] = useState(false);
+
+    const saveProgress = async () => {
+        setIsSaving(true);
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(csvData));
-            alert("✅ Progress Saved! You can safely close this page or log out. Your changes will be here when you return.");
+            const res = await fetch('/api/v1/khon2-portal/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ data: csvData })
+            });
+
+            if (res.ok) {
+                alert("✅ Progress Saved Globally! Any authorized user will now see your latest edits.");
+            } else {
+                throw new Error("Server rejected save request.");
+            }
         } catch (e) {
-            console.error("Failed to save progress", e);
-            alert("❌ Failed to save progress. Please try again.");
+            console.error("Failed to save progress globally", e);
+            alert("❌ Failed to save progress to server. Ensure connection is stable.");
+        } finally {
+            setIsSaving(false);
         }
     };
 
@@ -245,10 +264,15 @@ export default function KHON2SEOPortal() {
                                 <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                                     <button 
                                         onClick={saveProgress}
-                                        className="flex items-center justify-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border border-blue-500/50 px-6 py-2 rounded-xl transition-all duration-300 group flex-1 md:flex-none"
+                                        disabled={isSaving}
+                                        className="flex items-center justify-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border border-blue-500/50 px-6 py-2 rounded-xl transition-all duration-300 group flex-1 md:flex-none disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        <LucideIcons.Save className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                                        <span className="text-xs font-bold uppercase tracking-widest">Save Progress</span>
+                                        {isSaving ? (
+                                            <LucideIcons.Loader2 className="w-4 h-4 animate-spin" />
+                                        ) : (
+                                            <LucideIcons.Save className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                        )}
+                                        <span className="text-xs font-bold uppercase tracking-widest">{isSaving ? 'Saving...' : 'Save Progress'}</span>
                                     </button>
 
                                     <button 
@@ -322,10 +346,15 @@ export default function KHON2SEOPortal() {
                                 <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                                     <button 
                                         onClick={saveProgress}
-                                        className="flex items-center justify-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border border-blue-500/50 px-6 py-2 md:py-3 rounded-xl transition-all duration-300 group flex-1 md:flex-none"
+                                        disabled={isSaving}
+                                        className="flex items-center justify-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border border-blue-500/50 px-6 py-2 md:py-3 rounded-xl transition-all duration-300 group flex-1 md:flex-none disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        <LucideIcons.Save className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                                        <span className="text-sm font-bold uppercase tracking-widest">Save Progress</span>
+                                        {isSaving ? (
+                                            <LucideIcons.Loader2 className="w-5 h-5 animate-spin" />
+                                        ) : (
+                                            <LucideIcons.Save className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                        )}
+                                        <span className="text-sm font-bold uppercase tracking-widest">{isSaving ? 'Saving...' : 'Save Progress'}</span>
                                     </button>
 
                                     <button 
