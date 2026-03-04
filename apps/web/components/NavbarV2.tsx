@@ -85,9 +85,9 @@ export default function NavbarV2() {
                                     GE
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-200 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/shop#rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-xl relative group cursor-pointer block">
+                                <Link href="/shop#rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-xl relative group cursor-pointer block pb-1">
                                     Hawai&apos;i Energy
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                             </div>
 
@@ -115,9 +115,9 @@ export default function NavbarV2() {
                                     FUJITSU
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-200 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#daikin" className="text-[#00B5E2] font-header font-medium tracking-widest text-lg relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#daikin" className="text-[#00B5E2] font-header font-medium tracking-widest text-lg relative group cursor-pointer block pb-1">
                                     DAIKIN
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-cyan-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                                 <Link href="/mini_split_ac#carrier" className="text-blue-700 font-sans font-extrabold tracking-tighter text-xl relative group cursor-pointer block">
                                     CARRIER
