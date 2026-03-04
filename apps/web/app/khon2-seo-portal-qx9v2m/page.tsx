@@ -315,7 +315,7 @@ export default function KHON2SEOPortal() {
                                         End of Document
                                     </h3>
                                     <p className="text-xs text-slate-500">
-                                        Don't forget to save or download your changes.
+                                        Don&apos;t forget to save or download your changes.
                                     </p>
                                 </div>
                                 
@@ -341,7 +341,7 @@ export default function KHON2SEOPortal() {
                     </div>
                 )}
             </main>
-            <BackToTop />
+            <BackToTop visible={true} />
         </div>
     );
 }
