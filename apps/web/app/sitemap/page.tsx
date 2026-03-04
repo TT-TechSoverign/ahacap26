@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Product } from '@/types/inventory';
 import { generateProductSlug } from '@/lib/utils';
 import { BackToTop } from '@/components/BackToTop';
+import contentData from '@/lib/content/content.json';
 
 // Revalidate occasionally, or force dynamic if needed, to match sitemap.ts
 export const dynamic = 'force-dynamic';
@@ -36,9 +37,21 @@ export default async function SitemapPage() {
         { name: 'Contact Us', path: '/contact' },
     ];
 
+    const content = contentData as any;
+    const regions = content?.landing_legacy?.service_areas?.regions || [];
+    const cityRoutes: { name: string, path: string }[] = [];
+    regions.forEach((region: any) => {
+        if (region.cities) {
+            region.cities.forEach((city: any) => {
+                const citySlug = city.name.toLowerCase().replace(/ /g, '-');
+                cityRoutes.push({ name: city.name, path: `/service-areas/${citySlug}` });
+            });
+        }
+    });
+
     return (
         <div className="bg-[#05070a] min-h-screen text-slate-200">
-            <main className="pt-[200px] md:pt-[350px] lg:pt-[380px] pb-24 px-4 md:px-8 max-w-5xl mx-auto">
+            <main className="pt-[200px] md:pt-[350px] lg:pt-[380px] pb-24 px-4 md:px-8 max-w-7xl mx-auto">
                 {/* Header Sequence */}
                 <div className="text-center md:text-left mb-16 space-y-4 relative">
                     {/* Decorative Elements */}
@@ -58,7 +71,7 @@ export default async function SitemapPage() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
                     {/* Core Navigation Column */}
                     <div className="space-y-6">
                         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
@@ -84,7 +97,7 @@ export default async function SitemapPage() {
                     <div className="space-y-6">
                         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
                             <span className="material-symbols-outlined text-emerald-500 text-2xl">inventory_2</span>
-                            <h2 className="text-2xl font-header font-black uppercase tracking-widest text-white">Inventory index</h2>
+                            <h2 className="text-2xl font-header font-black uppercase tracking-widest text-white">Inventory Index</h2>
                         </div>
                         {products.length > 0 ? (
                             <ul className="space-y-3">
@@ -110,6 +123,28 @@ export default async function SitemapPage() {
                             </div>
                         )}
                     </div>
+
+                    {/* Service Areas Column */}
+                    <div className="space-y-6">
+                        <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                            <span className="material-symbols-outlined text-blue-400 text-2xl">pin_drop</span>
+                            <h2 className="text-xl md:text-2xl font-header font-black uppercase tracking-widest text-white">Local Areas</h2>
+                        </div>
+                        <ul className="space-y-3">
+                            {cityRoutes.map((link, idx) => (
+                                <li key={idx}>
+                                    <Link 
+                                        href={link.path}
+                                        className="group flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all duration-300"
+                                    >
+                                        <span className="material-symbols-outlined text-sm text-slate-500 group-hover:text-blue-400 transition-colors">arrow_forward</span>
+                                        <span className="font-header font-bold uppercase tracking-widest text-xs md:text-sm group-hover:text-white transition-colors">{link.name}</span>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
                 </div>
             </main>
             <BackToTop visible={true} />
