@@ -49,6 +49,9 @@ export default async function SitemapPage() {
         }
     });
 
+    // Sort alphabetically by city name
+    cityRoutes.sort((a, b) => a.name.localeCompare(b.name));
+
     return (
         <div className="bg-[#05070a] min-h-screen text-slate-200">
             <main className="pt-[200px] md:pt-[350px] lg:pt-[380px] pb-24 px-4 md:px-8 max-w-7xl mx-auto">
@@ -128,7 +131,7 @@ export default async function SitemapPage() {
                     <div className="space-y-6">
                         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
                             <span className="material-symbols-outlined text-blue-400 text-2xl">pin_drop</span>
-                            <h2 className="text-xl md:text-2xl font-header font-black uppercase tracking-widest text-white">Local Areas</h2>
+                            <h2 className="text-xl md:text-2xl font-header font-black uppercase tracking-widest text-white">Service Areas (A-Z)</h2>
                         </div>
                         <ul className="space-y-3">
                             {cityRoutes.map((link, idx) => (

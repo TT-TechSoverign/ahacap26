@@ -25,6 +25,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
     });
 
+    // Sort alphabetically
+    cityRoutes.sort((a, b) => a.localeCompare(b));
+
     // 1. Define Static Routes (Always included)
     const staticRoutes = [
         '',
