@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import * as LucideIcons from 'lucide-react';
+import { BackToTop } from '@/components/BackToTop';
 
 const KHON2_PASSWORD = "KHON2X7V9K2PQ8A4"; // Requirement: 16-character alphanumeric password, all caps
+const STORAGE_KEY = 'khon2_seo_portal_drafts';
 
 export default function KHON2SEOPortal() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -56,6 +58,30 @@ export default function KHON2SEOPortal() {
                                 const cleanedData = results.data.filter((row: any) => {
                                     return Object.values(row).some(v => typeof v === 'string' && v.trim() !== '');
                                 });
+
+                                // Merge with localStorage Draft
+                                const savedDraftsStr = localStorage.getItem(STORAGE_KEY);
+                                if (savedDraftsStr) {
+                                    try {
+                                        const drafts = JSON.parse(savedDraftsStr);
+                                        const draftFile = drafts.find((d: any) => d.filename === filename);
+                                        if (draftFile && draftFile.data) {
+                                            cleanedData.forEach((row: any, i: number) => {
+                                                if (draftFile.data[i]) {
+                                                    Object.keys(row).forEach(key => {
+                                                        const isEditable = key.includes('SEO') || key.includes('Notes') || key.includes('Optimized');
+                                                        if (isEditable && draftFile.data[i][key]) {
+                                                            row[key] = draftFile.data[i][key];
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    } catch (e) {
+                                        console.error('Failed to parse drafts', e);
+                                    }
+                                }
+
                                 resolve({ filename, data: cleanedData });
                             },
                         });
@@ -76,6 +102,16 @@ export default function KHON2SEOPortal() {
         const newData = [...csvData];
         newData[fileIndex].data[rowIndex][field] = value;
         setCsvData(newData);
+    };
+
+    const saveProgress = () => {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(csvData));
+            alert("✅ Progress Saved! You can safely close this page or log out. Your changes will be here when you return.");
+        } catch (e) {
+            console.error("Failed to save progress", e);
+            alert("❌ Failed to save progress. Please try again.");
+        }
     };
 
     const exportToCSV = (fileIndex: number) => {
@@ -206,13 +242,23 @@ export default function KHON2SEOPortal() {
                                     </p>
                                 </div>
                                 
-                                <button 
-                                    onClick={() => exportToCSV(activeTab)}
-                                    className="flex items-center gap-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/50 px-6 py-2 rounded-xl transition-all duration-300 group"
-                                >
-                                    <LucideIcons.Download className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
-                                    <span className="text-xs font-bold uppercase tracking-widest">Download Updated CSV</span>
-                                </button>
+                                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                                    <button 
+                                        onClick={saveProgress}
+                                        className="flex items-center justify-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border border-blue-500/50 px-6 py-2 rounded-xl transition-all duration-300 group flex-1 md:flex-none"
+                                    >
+                                        <LucideIcons.Save className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                        <span className="text-xs font-bold uppercase tracking-widest">Save Progress</span>
+                                    </button>
+
+                                    <button 
+                                        onClick={() => exportToCSV(activeTab)}
+                                        className="flex items-center justify-center gap-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/50 px-6 py-2 rounded-xl transition-all duration-300 group flex-1 md:flex-none"
+                                    >
+                                        <LucideIcons.Download className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+                                        <span className="text-xs font-bold uppercase tracking-widest">Download Updated CSV</span>
+                                    </button>
+                                </div>
                             </div>
 
                             {/* Actual Data Cards */}
@@ -261,10 +307,41 @@ export default function KHON2SEOPortal() {
                                     );
                                 })}
                             </div>
+
+                            {/* Bottom Action Bar */}
+                            <div className="bg-white/5 px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-white/10 mt-4">
+                                <div>
+                                    <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest">
+                                        End of Document
+                                    </h3>
+                                    <p className="text-xs text-slate-500">
+                                        Don't forget to save or download your changes.
+                                    </p>
+                                </div>
+                                
+                                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                                    <button 
+                                        onClick={saveProgress}
+                                        className="flex items-center justify-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border border-blue-500/50 px-6 py-2 md:py-3 rounded-xl transition-all duration-300 group flex-1 md:flex-none"
+                                    >
+                                        <LucideIcons.Save className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                        <span className="text-sm font-bold uppercase tracking-widest">Save Progress</span>
+                                    </button>
+
+                                    <button 
+                                        onClick={() => exportToCSV(activeTab)}
+                                        className="flex items-center justify-center gap-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/50 px-6 py-2 md:py-3 rounded-xl transition-all duration-300 group flex-1 md:flex-none shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                                    >
+                                        <LucideIcons.Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+                                        <span className="text-sm font-bold uppercase tracking-widest">Download Updated CSV</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}
             </main>
+            <BackToTop />
         </div>
     );
 }
