@@ -20,9 +20,6 @@ def update_env_file(path):
         if line.lstrip().startswith("STRIPE_WEBHOOK_SECRET="):
             new_lines.append("STRIPE_WEBHOOK_SECRET=whsec_896053b7532ddfb186dc7c1ea0715a053848519470c9bf59aaefd21ec3d09ca0\n")
             stripe_updated = True
-        elif line.lstrip().startswith("SMTP_PASSWORD="):
-            new_lines.append("SMTP_PASSWORD=jzpo rqbd tvtm pxlv\n")
-            smtp_updated = True
         else:
             new_lines.append(line)
             
@@ -31,8 +28,6 @@ def update_env_file(path):
     
     if stripe_updated:
         print(f"  - Updated STRIPE_WEBHOOK_SECRET")
-    if smtp_updated:
-        print(f"  - Updated SMTP_PASSWORD")
 
 def run_command(command):
     try:
