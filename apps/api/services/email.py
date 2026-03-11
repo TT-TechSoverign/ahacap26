@@ -110,10 +110,11 @@ def verify_connection():
         print(f"❌ SMTP Connection FAILED: {e}")
 
 
-def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None, images=None):
+def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None, images=None, server=None):
     """
     Sends a synchronous email with optional BCC and embedded CID images.
-    images: list of dicts {'content_id':Str, 'data':Bytes, 'filename':Str}
+    If 'server' is provided, it uses the existing SMTP connection.
+    Otherwise, it creates a new connection.
     """
     try:
         msg = MIMEMultipart("related")
@@ -142,14 +143,18 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
                     logger.error(f"Failed to attach image {img.get('filename')}: {ie}")
                 
         logger.info(f"Sending email to {to_email} (BCC: {bcc_emails})...")
-        # Use SMTP_SSL for 465
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
-            server.login(SMTP_USER, SMTP_PASSWORD)
+        
+        if server:
             server.sendmail(SMTP_USER, recipients, msg.as_string())
-        logger.info("✅ Email sent successfully.")
+        else:
+            with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as new_server:
+                new_server.login(SMTP_USER, SMTP_PASSWORD)
+                new_server.sendmail(SMTP_USER, recipients, msg.as_string())
+                
+        logger.info(f"✅ Email to {to_email} sent successfully.")
         
     except Exception as e:
-        logger.error(f"❌ Failed to send email: {e}")
+        logger.error(f"❌ Failed to send email to {to_email}: {e}")
         import traceback
         traceback.print_exc()
 
@@ -450,16 +455,23 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
         "ahacsplitdivision@gmail.com"
     ]
     
-    # Send Client Email (Synchronously in thread pool)
-    await asyncio.get_event_loop().run_in_executor(
-        None, send_email_with_attachments, to_email, subject, client_html_body, None, images
-    )
-
-    # Send Admin Email (Synchronously in thread pool)
     admin_subject = f"[INTERNAL] {subject}"
-    await asyncio.get_event_loop().run_in_executor(
-        None, send_email_with_attachments, admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None
-    )
+
+    def _send_both_emails():
+        try:
+            with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+                server.login(SMTP_USER, SMTP_PASSWORD)
+                # Send Client Email
+                send_email_with_attachments(to_email, subject, client_html_body, None, images, server=server)
+                # Send Admin Email
+                send_email_with_attachments(admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None, server=server)
+        except Exception as e:
+            logger.error(f"❌ SMTP Connection failed for order {order_id}: {e}")
+            import traceback
+            traceback.print_exc()
+
+    # Send both emails synchronously in thread pool
+    await asyncio.get_event_loop().run_in_executor(None, _send_both_emails)
 
 async def send_inquiry_notification(lead):
     """
