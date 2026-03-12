@@ -204,11 +204,7 @@ export default function ProductDetailPage() {
                                 <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Coverage</div>
                                 <div className="text-white font-header font-black text-base md:text-lg">{specs?.coolingArea}</div>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-3 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Efficiency</div>
-                                <div className="text-white font-header font-black text-base md:text-lg">{specs?.eer}</div>
-                            </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-3 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                            <div className="col-span-2 bg-[#0a0e14] border border-white/5 p-3 rounded-xl ring-1 ring-white/10 shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
                                 <div className="text-slate-500 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Voltage</div>
                                 <div className="text-white font-header font-black text-base md:text-lg">{specs?.voltage}</div>
                             </div>
