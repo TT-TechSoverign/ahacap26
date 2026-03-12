@@ -71,3 +71,47 @@ async def update_schedule(
     await db.refresh(page)
 
     return {"status": "success", "schedule": schedule.dict()}
+
+# --- ADMIN ORDERS & LEADS ---
+
+class OrderUpdate(BaseModel):
+    status: str
+
+class LeadUpdate(BaseModel):
+    status: str
+    notes: Optional[str] = None
+
+@router.get("/orders")
+async def get_all_orders(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Order).order_by(models.Order.created_at.desc()))
+    return result.scalars().all()
+
+@router.put("/orders/{order_id}")
+async def update_order_status(order_id: str, payload: OrderUpdate, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Order).where(models.Order.id == order_id))
+    order = result.scalars().first()
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    order.status = payload.status
+    await db.commit()
+    return {"status": "success"}
+
+@router.get("/leads")
+async def get_all_leads(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Lead).order_by(models.Lead.created_at.desc()))
+    return result.scalars().all()
+
+@router.put("/leads/{lead_id}")
+async def update_lead_status(lead_id: int, payload: LeadUpdate, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Lead).where(models.Lead.id == lead_id))
+    lead = result.scalars().first()
+    if not lead:
+        raise HTTPException(status_code=404, detail="Lead not found")
+    
+    lead.status = payload.status
+    if payload.notes is not None:
+        lead.notes = payload.notes
+        
+    await db.commit()
+    return {"status": "success"}

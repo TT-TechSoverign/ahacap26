@@ -63,6 +63,9 @@ class Order(Base):
     total_cents = Column(Integer)
     stripe_pid = Column(String, nullable=True)
     customer_email = Column(String, nullable=True) # [NEW]
+    customer_name = Column(String, nullable=True) # [NEW] Comprehensive Detail
+    customer_phone = Column(String, nullable=True) # [NEW] Comprehensive Detail
+    customer_address = Column(String, nullable=True) # [NEW] Comprehensive Detail (JSON or String formatting of the Stripe Address object)
     items_json = Column(String, nullable=True) # Snapshots of products
     idempotency_key = Column(String, unique=True, index=True, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
