@@ -58,7 +58,19 @@ export default function ProductDetailPage() {
             ...getProductImages(product.id)
         ] : [];
     }, [product]);
-    const specs = product ? getProductSpecs(product.id) : null;
+    const baseSpecs = product ? getProductSpecs(product.id) : null;
+    const specs = useMemo(() => {
+        if (!baseSpecs || !product) return null;
+        return {
+            ...baseSpecs,
+            btu: product.btu ? `${product.btu.toLocaleString()} BTU` : baseSpecs.btu,
+            coolingArea: product.coverage || baseSpecs.coolingArea,
+            eer: product.performance_specs || baseSpecs.eer,
+            voltage: product.voltage || baseSpecs.voltage,
+            soundProfile: product.noise_level || baseSpecs.soundProfile,
+            keyFeature: product.key_spec || baseSpecs.keyFeature
+        };
+    }, [baseSpecs, product]);
 
     // Set initial image
     useEffect(() => {
@@ -222,6 +234,12 @@ export default function ProductDetailPage() {
                                     <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Primary Feature</span>
                                     <span className="font-header font-black uppercase tracking-wide text-[10px] md:text-xs text-primary">{specs?.keyFeature || 'Standard Cooling'}</span>
                                 </div>
+                                {product.dehumidification && (
+                                    <div className="flex flex-col gap-1 items-center md:items-start">
+                                        <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Dehumidification</span>
+                                        <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dehumidification}</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
 
