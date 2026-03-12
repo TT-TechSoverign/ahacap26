@@ -11,6 +11,8 @@ export interface Product {
     coverage?: string;
     noise_level?: string;
     dehumidification?: string;
+    performance_specs?: string;
+    key_spec?: string;
 }
 
 export interface CartItem extends Product {
