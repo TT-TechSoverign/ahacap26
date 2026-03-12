@@ -32,6 +32,9 @@ interface Order {
     status: string;
     total_cents: number;
     customer_email?: string;
+    customer_name?: string;
+    customer_phone?: string;
+    customer_address?: string;
     items_json?: string;
     created_at: string;
 }
@@ -629,6 +632,16 @@ function LeadDetailModal({ lead, onClose, onSave }: { lead: Lead, onClose: () =>
 function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: () => void, onSave: () => void }) {
     const [status, setStatus] = useState(order.status);
     const items = order.items_json ? JSON.parse(order.items_json) : [];
+    
+    // Parse the saved address JSON string if it exists
+    let address = null;
+    try {
+        if (order.customer_address) {
+            address = JSON.parse(order.customer_address);
+        }
+    } catch (e) {
+        console.error("Failed to parse customer address", e);
+    }
 
     const handleUpdate = async () => {
         try {
@@ -645,8 +658,8 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-6">
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="w-full max-w-2xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10">
-                <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="w-full max-w-2xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 max-h-[90vh] overflow-y-auto">
+                <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02] sticky top-0 z-10 backdrop-blur-lg">
                     <div>
                         <h2 className="text-white font-header font-black text-2xl uppercase tracking-tighter">{content.admin.orders.modal.title}</h2>
                         <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">Order ID: {order.id}</p>
@@ -657,9 +670,39 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
                 </div>
                 <div className="p-8 space-y-8">
                     <div className="grid grid-cols-2 gap-8">
-                        <div>
-                            <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">Customer</label>
-                            <div className="text-white font-bold">{order.customer_email || 'Anonymous'}</div>
+                        <div className="space-y-6">
+                            <div>
+                                <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">Customer Details</label>
+                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-3">
+                                    <div className="flex items-center gap-3">
+                                        <span className="material-symbols-outlined text-primary text-lg">person</span>
+                                        <span className="text-white font-bold">{order.customer_name || 'Anonymous User'}</span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span className="material-symbols-outlined text-slate-500 text-lg">mail</span>
+                                        <span className="text-slate-300 text-sm">{order.customer_email || 'No email provided'}</span>
+                                    </div>
+                                    {order.customer_phone && (
+                                        <div className="flex items-center gap-3">
+                                            <span className="material-symbols-outlined text-slate-500 text-lg">call</span>
+                                            <span className="text-slate-300 text-sm font-mono">{order.customer_phone}</span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {address && address.line1 && (
+                                <div>
+                                    <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">Shipping / Service Address</label>
+                                    <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 flex items-center gap-3">
+                                        <span className="material-symbols-outlined text-slate-500 text-lg">location_on</span>
+                                        <div className="text-slate-300 text-sm">
+                                            <div>{address.line1} {address.line2}</div>
+                                            <div>{address.city}, {address.state} {address.postal_code}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         <div>
                             <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">{content.admin.orders.modal.transition}</label>

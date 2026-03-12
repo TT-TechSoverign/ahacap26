@@ -208,7 +208,10 @@ async def process_stripe_event(event: dict):
                         id=new_order_id,
                         stripe_pid=stripe_pid,
                         total_cents=amount_received or 0,
-                        customer_email=receipt_email,
+                        customer_email=customer_info.get('email', receipt_email),
+                        customer_name=customer_info.get('name', ''),
+                        customer_phone=customer_info.get('phone', ''),
+                        customer_address=json.dumps(customer_info.get('address', {})),
                         status=models.OrderStatus.PAID,
                         items_json=json.dumps(items_data) if items_data else None,
                         created_at=datetime.utcnow()
@@ -222,13 +225,16 @@ async def process_stripe_event(event: dict):
                     if items_data and not order.items_json:
                         order.items_json = json.dumps(items_data)
                     
-                    # Update email if missing (crucial for PaymentIntent -> CheckoutSession race conditions)
-                    if not order.customer_email and receipt_email:
-                        print(f"Updating Order {order.id} with email {receipt_email}")
-                        order.customer_email = receipt_email
+                    # Update email and customer details if missing (crucial for PaymentIntent -> CheckoutSession race conditions)
+                    # When checkout.session.completed fires, it has the rich data. We update the model.
+                    if event['type'] == 'checkout.session.completed':
+                        order.customer_email = customer_info.get('email', order.customer_email)
+                        order.customer_name = customer_info.get('name', order.customer_name)
+                        order.customer_phone = customer_info.get('phone', order.customer_phone)
+                        order.customer_address = json.dumps(customer_info.get('address', {}))
                         
                     await session.commit()
-                    print(f"Order {order.id} marked as PAID.")
+                    print(f"Order {order.id} marked as PAID with comprehensive details.")
 
                 # ONLY send confirmation email on Checkout Session completion (contains items & customer info)
                 if event['type'] == 'checkout.session.completed':
