@@ -44,6 +44,25 @@ def persist_product_changes(product_data, action='update'):
         # explicit pass to prevent bubbling up
         pass
 
+    try:
+        import urllib.request
+        import urllib.parse
+        
+        # Determine internal host. Standard Docker network is 'http://web:3000'
+        # Fallback to localhost if running outside Docker
+        frontend_url = os.environ.get("FRONTEND_INTERNAL_URL", "http://web:3000")
+        hook_url = f"{frontend_url}/api/revalidate"
+        
+        req = urllib.request.Request(
+            hook_url, 
+            data=json.dumps({"secret": "internal_ahac_revalidate_777", "path": "/shop"}).encode('utf-8'),
+            headers={'Content-Type': 'application/json'}
+        )
+        with urllib.request.urlopen(req, timeout=3) as response:
+             print(f"DEBUG: Next.js Shop Revalidation Triggered: {response.getcode()}")
+    except Exception as e:
+        print(f"WARNING: Failed to trigger Next.js cache revalidation: {e}")
+
 
 router = APIRouter()
 
