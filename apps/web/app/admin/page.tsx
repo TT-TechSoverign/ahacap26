@@ -411,7 +411,8 @@ export default function AdminPage() {
                                                 <tr key={order.id} className="hover:bg-white/[0.02] transition-colors group">
                                                     <td className="px-8 py-6 font-mono text-[10px] text-primary">{order.id}</td>
                                                     <td className="px-8 py-6">
-                                                        <div className="text-white font-bold">{order.customer_email || 'N/A'}</div>
+                                                        <div className="text-white font-bold">{order.customer_name || 'Anonymous User'}</div>
+                                                        <div className="text-slate-500 text-[9px] font-black tracking-widest mt-1">{order.customer_email || 'No email provided'}</div>
                                                     </td>
                                                     <td className="px-8 py-6 text-center text-[10px] text-slate-500">
                                                         {new Date(order.created_at).toLocaleDateString()}
@@ -453,7 +454,7 @@ export default function AdminPage() {
                                                 <th className="px-8 py-4">Service Type</th>
                                                 <th className="px-8 py-4 text-center">Urgency</th>
                                                 <th className="px-8 py-4 text-center">Status</th>
-                                                <th className="px-8 py-4 text-right">Date</th>
+                                                <th className="px-8 py-4 text-center">Date</th>
                                                 <th className="px-8 py-4 text-right">Actions</th>
                                             </tr>
                                         </thead>
@@ -469,6 +470,11 @@ export default function AdminPage() {
                                                         <div className="text-slate-300 text-xs max-w-[200px] truncate">{lead.service_type}</div>
                                                     </td>
                                                     <td className="px-8 py-6 text-center">
+                                                        <span className={`px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border border-white/20 text-white/50 bg-white/5`}>
+                                                            {lead.urgency || 'STANDARD'}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-8 py-6 text-center">
                                                         <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${lead.status === 'NEW' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.2)]' :
                                                             lead.status === 'CONTACTED' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
                                                                 lead.status === 'SCHEDULED' ? 'bg-primary/10 text-primary border-primary/20' :
@@ -478,13 +484,13 @@ export default function AdminPage() {
                                                             {lead.status || 'NEW'}
                                                         </span>
                                                     </td>
-                                                    <td className="px-8 py-6 text-right text-[10px] text-slate-500">
-                                                        <div className="flex items-center justify-end gap-3">
-                                                            <span className="font-mono">{new Date(lead.created_at).toLocaleDateString()}</span>
-                                                            <button onClick={() => setViewingLead(lead)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center">
-                                                                <span className="material-symbols-outlined text-sm">manage_accounts</span>
-                                                            </button>
-                                                        </div>
+                                                    <td className="px-8 py-6 text-center text-[10px] text-slate-500">
+                                                        <span className="font-mono">{new Date(lead.created_at).toLocaleDateString()}</span>
+                                                    </td>
+                                                    <td className="px-8 py-6 text-right">
+                                                        <button onClick={() => setViewingLead(lead)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center ml-auto">
+                                                            <span className="material-symbols-outlined text-sm">manage_accounts</span>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -567,8 +573,27 @@ function LeadDetailModal({ lead, onClose, onSave }: { lead: Lead, onClose: () =>
                         <span className="material-symbols-outlined">close</span>
                     </button>
                 </div>
-                <div className="p-8 grid grid-cols-2 gap-8">
-                    <div className="space-y-6">
+                <div className="p-8 flex flex-col gap-8">
+                    {/* Status Top Row */}
+                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 shadow-inner">
+                        <label className="text-primary text-[10px] font-black uppercase tracking-widest block mb-3 text-center sm:text-left">{content.admin.leads.modal.status}</label>
+                        <div className="relative">
+                            <select
+                                value={status}
+                                onChange={(e) => setStatus(e.target.value)}
+                                className="w-full bg-black/80 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-primary/50 outline-none appearance-none font-bold uppercase tracking-widest text-xs shadow-lg"
+                            >
+                                <option value="NEW">NEW</option>
+                                <option value="CONTACTED">CONTACTED</option>
+                                <option value="SCHEDULED">SCHEDULED</option>
+                                <option value="COMPLETED">COMPLETED</option>
+                                <option value="ARCHIVED">ARCHIVED</option>
+                            </select>
+                            <span className="material-symbols-outlined absolute right-5 top-1/2 -translate-y-1/2 text-primary pointer-events-none">expand_more</span>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div>
                             <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2 text-center sm:text-left">{content.admin.leads.modal.contact_info}</label>
                             <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-3">
@@ -588,36 +613,21 @@ function LeadDetailModal({ lead, onClose, onSave }: { lead: Lead, onClose: () =>
                         </div>
                         <div>
                             <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2 text-center sm:text-left">{content.admin.leads.modal.location}</label>
-                            <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 flex items-center gap-3">
+                            <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 flex items-center gap-3 h-[calc(100%-24px)]">
                                 <span className="material-symbols-outlined text-slate-500 text-lg">location_on</span>
-                                <span className="text-slate-300 text-sm">{lead.address}, {lead.city}, {lead.zip}</span>
+                                <span className="text-slate-300 text-sm leading-relaxed">{lead.address}, {lead.city}, {lead.zip}</span>
                             </div>
                         </div>
                     </div>
-                    <div className="space-y-6">
-                        <div className="space-y-2">
-                            <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block text-center sm:text-left">{content.admin.leads.modal.status}</label>
-                            <select
-                                value={status}
-                                onChange={(e) => setStatus(e.target.value)}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none appearance-none font-bold uppercase tracking-widest text-[10px]"
-                            >
-                                <option value="NEW">NEW</option>
-                                <option value="CONTACTED">CONTACTED</option>
-                                <option value="SCHEDULED">SCHEDULED</option>
-                                <option value="COMPLETED">COMPLETED</option>
-                                <option value="ARCHIVED">ARCHIVED</option>
-                            </select>
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block text-center sm:text-left">{content.admin.leads.modal.notes}</label>
-                            <textarea
-                                value={notes}
-                                onChange={(e) => setNotes(e.target.value)}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none min-h-[120px] text-sm"
-                                placeholder="..."
-                            ></textarea>
-                        </div>
+
+                    <div className="flex-1 flex flex-col pt-2 border-t border-white/5 min-h-[300px]">
+                        <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-3 text-center sm:text-left">{content.admin.leads.modal.notes}</label>
+                        <textarea
+                            value={notes}
+                            onChange={(e) => setNotes(e.target.value)}
+                            className="flex-1 w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:border-primary/50 outline-none text-sm leading-relaxed resize-y min-h-[250px] shadow-inner"
+                            placeholder="Add your internal notes, tracking IDs, or service updates here..."
+                        ></textarea>
                     </div>
                 </div>
                 <div className="p-8 border-t border-white/5 bg-white/[0.01] flex gap-4">
