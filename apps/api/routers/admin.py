@@ -115,3 +115,68 @@ async def update_lead_status(lead_id: int, payload: LeadUpdate, db: AsyncSession
         
     await db.commit()
     return {"status": "success"}
+
+@router.get("/orders/backfill")
+async def backfill_historical_orders(
+    pin: str,
+    db: AsyncSession = Depends(get_db)
+):
+    if not verify_pin(pin):
+        raise HTTPException(status_code=401, detail="Invalid PIN")
+
+    import stripe
+    import json
+    
+    stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
+    
+    result = await db.execute(select(models.Order).where(models.Order.customer_name.is_(None)))
+    orders = result.scalars().all()
+    
+    count = 0
+    errors = []
+    
+    if not orders:
+         return {"status": "success", "message": "No legacy orders found missing customer data."}
+
+    for order in orders:
+         if not order.stripe_pid:
+             continue
+         try:
+             sessions = stripe.checkout.Session.list(payment_intent=order.stripe_pid, limit=1)
+             if not sessions.data:
+                 continue
+                 
+             session = sessions.data[0]
+             cust = session.customer_details or {}
+             order.customer_name = cust.get('name', 'Valued Customer')
+             order.customer_email = cust.get('email', order.customer_email)
+             order.customer_phone = cust.get('phone', '')
+             if cust.get('address'):
+                 order.customer_address = json.dumps(cust.get('address'))
+                 
+             line_items_res = stripe.checkout.Session.list_line_items(session.id, limit=100)
+             items_data = []
+             for item in line_items_res.data:
+                 items_data.append({
+                     'description': item.description,
+                     'name': item.description,
+                     'quantity': item.quantity,
+                     'amount_total': item.amount_total,
+                     'price': item.amount_total / max(1, item.quantity),
+                     'currency': item.currency
+                 })
+                 
+             if items_data:
+                 order.items_json = json.dumps(items_data)
+                 
+             count += 1
+         except Exception as e:
+             errors.append(f"Failed Order {order.id}: {str(e)}")
+             
+    await db.commit()
+    
+    return {
+        "status": "success", 
+        "updated_rows": count,
+        "errors": errors
+    }
