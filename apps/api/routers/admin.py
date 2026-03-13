@@ -130,7 +130,11 @@ async def backfill_historical_orders(
     
     stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
     
-    result = await db.execute(select(models.Order).where(models.Order.customer_name.is_(None)))
+    result = await db.execute(select(models.Order).where(
+        (models.Order.items_json.is_(None)) | 
+        (models.Order.customer_name == "") | 
+        (models.Order.customer_name.is_(None))
+    ))
     orders = result.scalars().all()
     
     count = 0
