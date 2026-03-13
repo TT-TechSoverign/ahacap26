@@ -6,7 +6,9 @@ from typing import Dict, Any, Optional
 import models
 from database import get_db
 import json
+import os
 from datetime import datetime
+from auth import verify_pin
 
 router = APIRouter()
 
