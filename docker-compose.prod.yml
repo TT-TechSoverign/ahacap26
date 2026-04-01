@@ -16,9 +16,11 @@ services:
       - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY_PROD}
       - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET_PROD}
       - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD}
+      - REVALIDATE_SECRET=${REVALIDATE_SECRET}
     volumes:
       - ./apps/web/lib/content:/app/apps/web/lib/content
       - ./apps/web/storage/prod:/app/apps/web/storage
+      - prod_next_cache:/app/apps/web/.next/cache
     depends_on:
       prod-api:
         condition: service_healthy
@@ -49,7 +51,7 @@ services:
       - ADMIN_EMAIL=${ADMIN_EMAIL}
     volumes:
       - ./apps/api/content:/app/content
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips "*"
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4 --proxy-headers --forwarded-allow-ips "*"
     depends_on:
       prod-db:
         condition: service_healthy
@@ -96,3 +98,4 @@ services:
 
 volumes:
   prod_postgres_data:
+  prod_next_cache:

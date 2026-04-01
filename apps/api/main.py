@@ -101,7 +101,19 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 # --- MIDDLEWARE ---
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",                 # Local frontend
+        "http://staging.affordablehome-ac.com",  # Staging frontend
+        "https://staging.affordablehome-ac.com", # Staging frontend HTTPS
+        "http://affordablehome-ac.com",          # Live frontend
+        "https://affordablehome-ac.com"          # Live frontend HTTPS
+    ],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["*"],
+)
 app.add_middleware(LogSanitizerMiddleware)
 app.add_middleware(ChaosMiddleware)
 app.add_middleware(HeaderMiddleware)
