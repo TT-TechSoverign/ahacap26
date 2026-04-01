@@ -8,7 +8,8 @@ export async function POST(req: NextRequest) {
         const path = body.path || '/shop';
 
         // Internal hardened token matching the FastAPI backend
-        if (secret !== "internal_ahac_revalidate_777") {
+        const VALID_SECRET = process.env.REVALIDATE_SECRET || "internal_ahac_revalidate_777";
+        if (secret !== VALID_SECRET) {
             return NextResponse.json({ error: "Invalid token" }, { status: 401 });
         }
 
