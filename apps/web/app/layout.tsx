@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Oswald } from 'next/font/google';
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 import TickerWrapper from '../components/TickerWrapper';
 import CartDrawer from '../components/CartDrawer';
 import { CartProvider } from '../context/CartContext';
@@ -18,6 +19,8 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className="dark">
+            <GoogleTagManager gtmId="GTM-KTZ58FJX" />
+            <GoogleAnalytics gaId="G-MYJZTZFXQV" />
             <head>
                 {/* Material Symbols for UI Icons */}
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
