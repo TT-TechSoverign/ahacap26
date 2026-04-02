@@ -22,8 +22,6 @@ export default function RootLayout({
             <head>
                 {/* Material Symbols for UI Icons */}
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
-            </head>
-            <body className={`${inter.variable} ${oswald.variable} font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white`}>
                 <Script id="gtm" strategy="afterInteractive">
                     {`
                     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -42,6 +40,8 @@ export default function RootLayout({
                     gtag('config', 'G-MYJZTZFXQV');
                     `}
                 </Script>
+            </head>
+            <body className={`${inter.variable} ${oswald.variable} font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white`}>
                 {/* <TickerWrapper /> */}
                 <ContentProvider>
                     <CartProvider>
