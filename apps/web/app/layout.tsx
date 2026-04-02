@@ -19,8 +19,6 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className="dark">
-            <GoogleTagManager gtmId="GTM-KTZ58FJX" />
-            <GoogleAnalytics gaId="G-MYJZTZFXQV" />
             <head>
                 {/* Material Symbols for UI Icons */}
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
@@ -36,6 +34,8 @@ export default function RootLayout({
                     </CartProvider>
                 </ContentProvider>
             </body>
+            <GoogleTagManager gtmId="GTM-KTZ58FJX" />
+            <GoogleAnalytics gaId="G-MYJZTZFXQV" />
         </html>
     );
 }
