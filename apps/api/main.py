@@ -255,15 +255,21 @@ async def process_stripe_event(event: dict):
                         print(f"Dispatching email to {target_email} via Checkout Session...")
                         
                         # Call updated service with new args
-                        await email_service.send_order_confirmation(
-                            target_email, 
-                            order.id, 
-                            order.total_cents, 
-                            fulfillment_mode=fulfillment_mode,
-                            items=items_data,
-                            customer_info=customer_info,
-                            payment_info=payment_info
-                        )
+                        try:
+                            await email_service.send_order_confirmation(
+                                target_email, 
+                                order.id, 
+                                order.total_cents, 
+                                fulfillment_mode=fulfillment_mode,
+                                items=items_data,
+                                customer_info=customer_info,
+                                payment_info=payment_info
+                            )
+                            print(f"✅ Email Pipeline Completed Successfully for order {order.id}.")
+                        except Exception as e:
+                            print(f"❌ FATAL: Email Pipeline failed permanently after all retries for order {order.id}: {e}")
+                            import traceback
+                            traceback.print_exc()
                     else:
                         print("No email found for order confirmation.")
                 else:

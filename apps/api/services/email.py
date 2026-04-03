@@ -19,6 +19,7 @@ from datetime import datetime, timedelta, timezone
 import asyncio
 import os
 from dotenv import load_dotenv
+from tenacity import retry, stop_after_attempt, wait_exponential
 
 load_dotenv()
 
@@ -457,6 +458,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     
     admin_subject = f"[INTERNAL] {subject}"
 
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
     def _send_both_emails():
         try:
             with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
@@ -466,13 +468,15 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                 # Send Admin Email
                 send_email_with_attachments(admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None, server=server)
         except Exception as e:
-            logger.error(f"❌ SMTP Connection failed for order {order_id}: {e}")
+            logger.error(f"❌ SMTP Connection failed for order {order_id}: {e} - Retrying due to tenacity exception...")
             import traceback
             traceback.print_exc()
+            raise
 
     # Send both emails synchronously in thread pool
     await asyncio.get_event_loop().run_in_executor(None, _send_both_emails)
 
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
 async def send_inquiry_notification(lead):
     """
     Sends an Admin Notification when a new lead/inquiry comes in via the Contact Wizard.
@@ -656,6 +660,7 @@ async def send_inquiry_notification(lead):
         logger.info(f"✅ Inquiry Notification Sent to {len(recipients)} recipients.")
 
     except Exception as e:
-        logger.error(f"❌ Failed to send inquiry notification: {e}")
+        logger.error(f"❌ Failed to send inquiry notification: {e} - Retrying due to tenacity exception...")
         import traceback
         traceback.print_exc()
+        raise
