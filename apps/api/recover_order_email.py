@@ -5,8 +5,8 @@ import json
 import stripe
 from dotenv import load_dotenv
 
-# Define Path to API
-API_PATH = os.path.join(os.getcwd(), 'apps', 'api')
+# Let's assume script runs within the API root (/app in Docker or apps/api locally)
+API_PATH = os.getcwd()
 sys.path.append(API_PATH)
 
 # Load Server Env
