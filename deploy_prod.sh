@@ -1,13 +1,14 @@
 #!/bin/bash
-# V3 Enterprise Deployment Script for Affordable Home A/C
+# V4.1 Enterprise Deployment Script for Affordable Home A/C
 # Strict execution flags to prevent cascading failures
 set -eEuo pipefail
 
 # Dynamically resolve absolute path
 BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 LOG_FILE="${BASE_DIR}/deploy_staging.log"
-TARGET_BRANCH="${TARGET_BRANCH:-staging}"
+TARGET_BRANCH="${TARGET_BRANCH:-main}"
 DOCKER_PROJECT="ahac_staging"
+CPANEL_USER="onjtfnmy"
 
 cd "$BASE_DIR"
 
@@ -31,10 +32,10 @@ echo "Environment: ${TARGET_BRANCH} | Project: ${DOCKER_PROJECT}"
 echo "=========================================="
 
 # 1. Source Code Sync
-echo "📥 [1/4] Synchronizing Codebase with $TARGET_BRANCH..."
-git fetch origin "$TARGET_BRANCH"
-git checkout "$TARGET_BRANCH"
-git reset --hard "origin/$TARGET_BRANCH"
+echo "📥 [1/4] Synchronizing Codebase with $TARGET_BRANCH (as $CPANEL_USER)..."
+su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git fetch origin \"$TARGET_BRANCH\""
+su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git checkout \"$TARGET_BRANCH\""
+su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git reset --hard \"origin/$TARGET_BRANCH\""
 
 chmod 700 deploy_prod.sh force_redeploy.sh 2>/dev/null || true
 chmod 700 apps/api/entrypoint.sh 2>/dev/null || true
