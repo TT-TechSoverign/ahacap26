@@ -34,3 +34,8 @@ __pycache__/
 
 # persistence
 apps/web/storage/
+
+# cPanel Server Configurations
+.htaccess
+php.ini
+.user.ini

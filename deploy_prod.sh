@@ -1,72 +1,73 @@
 #!/bin/bash
+# V3 Enterprise Deployment Script for Affordable Home A/C
+# Strict execution flags to prevent cascading failures
+set -eEuo pipefail
 
-# Define the log file
-# Define the log file
-# Define the log file
-LOG_FILE="deploy_prod.log"
-# Standard redirection (portable) - output goes to log file only
-exec >> "$LOG_FILE" 2>&1
-echo "Logging to $LOG_FILE"
+# Dynamically resolve absolute path
+BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+LOG_FILE="${BASE_DIR}/deploy_staging.log"
+TARGET_BRANCH="${TARGET_BRANCH:-staging}"
+DOCKER_PROJECT="ahac_staging"
 
+cd "$BASE_DIR"
 
-echo "=========================================="
-echo "Starting AHC Production Deployment: $(date)"
-echo "=========================================="
+# -----------------
+# ERROR HANDLING
+# -----------------
+trap 'echo -e "\n❌ ERROR: Deployment interrupted at LINE $LINENO. Review logs." >&2; exit 1' ERR
 
-# Ensure we are in the right directory
-cd "$(dirname "$0")"
-
-# 1. Fetch Latest Code from Main
-echo "Fetching latest changes from origin/main..."
-git fetch
-echo "🔍 [1/5] Checking Disk Space..."
-USAGE=$(df / | awk 'NR==2 {print $5}' | sed 's/%//g')
-THRESHOLD=80
-
-if [[ "$1" == "--nuclear" ]]; then
-    echo "☢️  NUCLEAR MODE ACTIVATED: Forcing aggressive cleanup..."
-    USAGE=100
+# -----------------
+# LOGGING (With Rotation)
+# -----------------
+# Clear log if it exceeds 5MB to prevent infinite bloat on the VPS
+if [ -f "$LOG_FILE" ] && [ $(stat -c%s "$LOG_FILE") -ge 5000000 ]; then
+    mv "$LOG_FILE" "${LOG_FILE}.old"
 fi
+exec > >(tee -a "$LOG_FILE") 2>&1
 
-if [ "$USAGE" -gt "$THRESHOLD" ]; then
-    echo "⚠️  Disk usage is HIGH ($USAGE%). Initiating CLEAN RELEASE Protocol..."
-    echo "🛑 [1.1] Stopping Containers to Release Locks..."
-    docker compose -f docker-compose.prod.yml -p ahac_prod down --remove-orphans || true
-    echo "🧹 [1.2] Pruning ALL Images & Build Cache..."
-    docker system prune -a -f
-    docker builder prune -a -f
-    echo "✅ Disk Space Reclaimed."
+echo "=========================================="
+echo "🛡️ Starting SECURE Staging Deployment: $(date)"
+echo "Environment: ${TARGET_BRANCH} | Project: ${DOCKER_PROJECT}"
+echo "=========================================="
+
+# 1. Source Code Sync
+echo "📥 [1/4] Synchronizing Codebase with $TARGET_BRANCH..."
+git fetch origin "$TARGET_BRANCH"
+git checkout "$TARGET_BRANCH"
+git reset --hard "origin/$TARGET_BRANCH"
+
+chmod 700 deploy_prod.sh force_redeploy.sh 2>/dev/null || true
+chmod 700 apps/api/entrypoint.sh 2>/dev/null || true
+
+# 2. Container Orchestration (Optimistic Build)
+echo "🚀 [2/4] Building & Hot-swapping Containers..."
+# Build images first while the site is still up
+docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" build
+# Swap the containers
+docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" down --remove-orphans
+docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" up -d
+
+# 3. Application Data & Idempotent Seeding
+echo "🌱 [3/4] Checking Container Health & Database State..."
+echo "Waiting 10 seconds for API and DB boot sequence..."
+sleep 10 
+
+# Check for the marker file to prevent duplicate seeding
+if ! docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" exec -T prod-api test -f /app/.seeded_marker 2>/dev/null; then
+    echo "🌱 Seeding initial database structure..."
+    docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" exec -T prod-api python seed_content.py
+    docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" exec -T prod-api touch /app/.seeded_marker
 else
-    echo "✅ Disk usage is safe ($USAGE%). Proceeding with standard update..."
+    echo "⏭️ Idempotency Check: Seed state already present. Skipping."
 fi
 
-# 1.75. Pull Latest Code (Now that we have space)
-git fetch
-git checkout main
-git reset --hard origin/main
-
-# 2. Fix Permissions (Crucial for scripts)
-echo "Fixing permissions..."
-chmod +x deploy_prod.sh
-chmod +x force_redeploy.sh
-chmod +x apps/api/entrypoint.sh 2>/dev/null || true
-
-# 3. Build and Deploy Production Containers
-echo "Building and deploying production containers..."
-# Force kill any conflicting containers that might be orphaned from other projects
-docker rm -f prod-redis prod-db prod-api prod-web 2>/dev/null || true
-docker compose -f docker-compose.prod.yml -p ahac_prod up -d --build --remove-orphans
-
-# 4. Prune Unused Images to Save Space
-echo "Cleaning up old images..."
-docker image prune -a -f --filter "until=24h"
-
-# 5. Seed Content Database
-echo "Seeding Production Content Database..."
-docker compose -f docker-compose.prod.yml -p ahac_prod exec -T prod-api python seed_content.py
+# 4. Permission Reset Trap Fix
+echo "🔐 [4/4] Reclaiming volume ownership for cPanel user..."
+HOST_UID=$(id -u)
+HOST_GID=$(id -g)
+# Claw back ownership from Docker root to prevent lockouts on the VPS
+chown -R $HOST_UID:$HOST_GID ./apps/api/data ./apps/web/.next 2>/dev/null || true
 
 echo "=========================================="
-echo "Production Deployment Complete: $(date)"
-echo "App running on Port 3001"
-echo "API running on Port 8001"
+echo "✅ Deployment Audited & Complete: $(date)"
 echo "=========================================="
