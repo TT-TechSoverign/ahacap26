@@ -1,0 +1,54 @@
+// ... imports
+import fs from 'fs';
+import { NextResponse } from 'next/server';
+import path from 'path';
+
+export const dynamic = 'force-dynamic';
+
+export async function GET() {
+    try {
+        console.log('[API] GET /content - Persistence Check');
+
+        // Twin-Path Persistence:
+        // 1. Persistence Layer (User Edits)
+        // 2. Factory Default (Source Code)
+
+        const persistencePath = path.join(process.cwd(), 'apps/web/storage/content.json');
+        const defaultPaths = [
+            path.join(process.cwd(), 'apps/web/lib/content/content.json'), // Docker/Root
+            path.join(process.cwd(), 'lib/content/content.json')           // App Dir
+        ];
+
+        // 1. Load Factory Default First (Source of Truth for Structure/Links)
+        const defaultPath = defaultPaths.find(p => fs.existsSync(p));
+        
+        if (!defaultPath) {
+            console.error('[API] Critical: No content file found in any layer.', { persistencePath, defaultPaths });
+            return NextResponse.json({ error: 'Content file not found' }, { status: 404 });
+        }
+
+        console.log('[API] Serving from Factory Default:', defaultPath);
+        let content = JSON.parse(fs.readFileSync(defaultPath, 'utf8'));
+
+        // 2. Overlay User-Edited Data from Persistence Layer
+        // Only merge specific dynamic sections to avoid freezing structural elements (like links) in ancient snapshots
+        if (fs.existsSync(persistencePath)) {
+            try {
+                console.log('[API] Overlaying dynamic data from Persistence:', persistencePath);
+                const persistenceContent = JSON.parse(fs.readFileSync(persistencePath, 'utf8'));
+                
+                if (persistenceContent.footer_schedule) {
+                    content.footer_schedule = persistenceContent.footer_schedule;
+                }
+            } catch (err) {
+                console.error('[API] Failed to parse persistence layer, using factory defaults:', err);
+            }
+        }
+
+        return NextResponse.json(content);
+
+    } catch (error) {
+        console.error('[API] Failed to fetch content:', error);
+        return NextResponse.json({ error: 'Failed to fetch content' }, { status: 500 });
+    }
+}
