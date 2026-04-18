@@ -8,7 +8,7 @@ services:
         - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY_PROD}
     container_name: prod-web
     ports:
-      - "3001:3000"
+      - "3000:3000"
     restart: always
     environment:
       - NEXT_PUBLIC_API_URL=https://affordablehome-ac.com/api/v1
