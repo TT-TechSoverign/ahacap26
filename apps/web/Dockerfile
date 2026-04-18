@@ -78,11 +78,12 @@ RUN rm -rf node_modules/next node_modules/react node_modules/react-dom
 # Fix: Manually install next.js and react to ensure they exist as real files
 # This matches the version in package.json and prevents ENOSPC by not copying all node_modules
 RUN npm config set fetch-retries 5 && npm config set fetch-retry-mintimeout 20000 && npm config set fetch-retry-maxtimeout 120000 && \
-    npm install next@14.2.35 react@18.3.1 react-dom@18.3.1 --no-save && \
+    npm install next@14.2.24 react@18.3.1 react-dom@18.3.1 --no-save && \
     npm cache clean --force
 
 # Fix: Create cache directory with correct permissions
-RUN mkdir -p .next/cache && chown -R nextjs:nodejs .next/cache
+RUN mkdir -p .next/cache && chown -R nextjs:nodejs .next/cache && \
+    mkdir -p apps/web/.next/cache && chown -R nextjs:nodejs apps/web/.next/cache
 
 USER nextjs
 
@@ -98,4 +99,4 @@ WORKDIR /app
 # Standalone entrypoint
 ENV PORT 3000
 ENV HOSTNAME="0.0.0.0"
-CMD ["sh", "-c", "HOSTNAME=0.0.0.0 PORT=3000 node server.js"]
+CMD ["sh", "-c", "if [ -f server.js ]; then HOSTNAME=0.0.0.0 PORT=3000 node server.js; else HOSTNAME=0.0.0.0 PORT=3000 node apps/web/server.js; fi"]
