@@ -792,6 +792,46 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         dehumidification: product?.dehumidification || ''
     });
 
+    const [displayPrice, setDisplayPrice] = useState<string>(
+        product?.price ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price / 100) : ''
+    );
+
+    const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const rawVal = e.target.value;
+        const cleanNumStr = rawVal.replace(/[^0-9.]/g, '');
+        const parts = cleanNumStr.split('.');
+        let sanitized = parts[0];
+        if (parts.length > 1) {
+            sanitized += '.' + parts[1].slice(0, 2);
+        }
+
+        if (!sanitized) {
+            setDisplayPrice('');
+        } else {
+            const splitSanitized = sanitized.split('.');
+            const formattedInt = new Intl.NumberFormat('en-US').format(Number(splitSanitized[0]));
+            let visualValue = '$' + formattedInt;
+            if (splitSanitized[1] !== undefined) {
+                visualValue += '.' + splitSanitized[1];
+            } else if (sanitized.endsWith('.')) {
+                visualValue += '.';
+            }
+            setDisplayPrice(visualValue);
+        }
+        setFormData({ ...formData, price: sanitized });
+    };
+
+    const handlePriceBlur = () => {
+        const numericVal = parseFloat(formData.price) || 0;
+        if (numericVal > 0 || formData.price !== '') {
+            setDisplayPrice(
+                new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(numericVal)
+            );
+        } else {
+            setDisplayPrice('');
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const url = product
@@ -890,12 +930,11 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                                     <div className="space-y-2">
                                         <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.price}</label>
                                         <input
-                                            type="number"
+                                            type="text"
                                             required
-                                            value={formData.price}
-                                            min={0}
-                                            step="0.01"
-                                            onChange={e => setFormData({ ...formData, price: e.target.value })}
+                                            value={displayPrice}
+                                            onChange={handlePriceChange}
+                                            onBlur={handlePriceBlur}
                                             className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
                                         />
                                     </div>

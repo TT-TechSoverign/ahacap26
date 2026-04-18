@@ -1,0 +1,1552 @@
+Logging to deploy_prod.log
+==========================================
+Starting AHC Production Deployment: Wed, Feb 25, 2026 10:10:02 PM
+==========================================
+Fetching latest changes from origin/main...
+From https://github.com/TT-TechSoverign/ahacap26
+ * branch              main       -> FETCH_HEAD
+🔍 [1/5] Checking Disk Space...
+☢️  NUCLEAR MODE ACTIVATED: Forcing aggressive cleanup...
+⚠️  Disk usage is HIGH (100%). Initiating CLEAN RELEASE Protocol...
+🛑 [1.1] Stopping Containers to Release Locks...
+time="2026-02-25T22:10:04-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:04-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:04-10:00" level=warning msg="The \"ADMIN_EMAIL\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:04-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:04-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:04-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:04-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:04-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/containers/json?all=1&filters=%7B%22label%22%3A%7B%22com.docker.compose.config-hash%22%3Atrue%2C%22com.docker.compose.project%3Dahac_prod%22%3Atrue%7D%7D": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+🧹 [1.2] Pruning ALL Images & Build Cache...
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+ERROR: error during connect: Head "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/_ping": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+✅ Disk Space Reclaimed.
+Fixing permissions...
+Building and deploying production containers...
+time="2026-02-25T22:10:05-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:05-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:05-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:05-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:05-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:05-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:05-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:10:05-10:00" level=warning msg="The \"ADMIN_EMAIL\" variable is not set. Defaulting to a blank string."
+unable to get image 'ahac_prod-prod-web': error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/images/ahac_prod-prod-web/json": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+Cleaning up old images...
+failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+Seeding Production Content Database...
+error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/containers/json?filters=%7B%22label%22%3A%7B%22com.docker.compose.config-hash%22%3Atrue%2C%22com.docker.compose.project%3Dahac_prod%22%3Atrue%2C%22com.docker.compose.service%3Dprod-api%22%3Atrue%7D%7D": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+==========================================
+Production Deployment Complete: Wed, Feb 25, 2026 10:10:06 PM
+App running on Port 3001
+API running on Port 8001
+==========================================
+Logging to deploy_prod.log
+==========================================
+Starting AHC Production Deployment: Wed, Feb 25, 2026 10:11:45 PM
+==========================================
+Fetching latest changes from origin/main...
+From https://github.com/TT-TechSoverign/ahacap26
+ * branch              main       -> FETCH_HEAD
+🔍 [1/5] Checking Disk Space...
+☢️  NUCLEAR MODE ACTIVATED: Forcing aggressive cleanup...
+⚠️  Disk usage is HIGH (100%). Initiating CLEAN RELEASE Protocol...
+🛑 [1.1] Stopping Containers to Release Locks...
+time="2026-02-25T22:11:46-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:46-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:46-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:46-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:46-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:46-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:46-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:46-10:00" level=warning msg="The \"ADMIN_EMAIL\" variable is not set. Defaulting to a blank string."
+🧹 [1.2] Pruning ALL Images & Build Cache...
+Deleted build cache objects:
+yxgvikk9fmemwaeywf5prvw34
+mid6so8mle8pivdj33ogne1oh
+5bsot87qsi7bie8epiby3hn0b
+9c4d4cgyhk7y3eez4fuaausz9
+0r0jiienx5qd05utdn925oizl
+xyr1xxrdnhkvgh8up7pqeh3e3
+7cjjw6b81rtdbtfv544dmfn3q
+wvpndmpsjdzqurad7x5zfbhbu
+mvugnw3s9akodkqbqcx51enmc
+bntegf1zgfwsjeqmihc4dyq3v
+cvwnuwareghhfzk3650tpjkbx
+ks736v3zjfaa9sip1dg4eazgw
+fbq0pht4gem7y6z2tybfvqanz
+uonnrmblu637m8s0nshg537p0
+vezyutct1rvzxo7eaxywezhaj
+w0m0bfm57is883ugq9p2oeg6m
+y0pkrgi2ce38hj554ylzp6if3
+l0o6x17kn6u1g3scrbh9vzhhi
+arzk2zwtaymt8bs2uwr0i87fg
+4imzkdrawkbsc5ekbo1izxcoy
+hdfjzjymofq8jlbbk87t32c86
+ff9r5pad9cyaogmuztfxzpxwi
+0g8eqv9uivcwj73i1emhqg2z3
+6rwhzdoec3c2wtxdnm7o4rhfl
+y2htzcslbkjbpxr0z0df2d0bg
+zd2lnrtz5mtbiyr656662kqma
+r0jmq2b6mtiudn5e4hlid09rq
+t53n1xo821soc5w0ufvb62ze1
+pddmpzdajhx54xso52dd5tllb
+t48wlx56nltphf1e2r9ux2ess
+5q4si8ravg0iekbd08s8txh0p
+s2am01947whlrop5sdbxibl5v
+ook694zn1dkimcgayd9ny3ofy
+e88c8z4vdxjnnhoi78q5ee2wz
+yunaw9n3t0zixpmttal2p9ndm
+gdf9g075cjthd2rx01t5kpped
+qrtbw6bcrdjss8cauap6ipr7q
+s6lar931ibaauuaaawxra3jrm
+uf905w88v4e43yt5rdn35bl58
+8cugswtb9v0xd8k05o9zh4j2e
+swrkmrp6xfiplk0fpjr01pn9h
+wjvx55kxc2nr7vamy4331r6m8
+3xta7ozwrkmkdrtqrkleljrbo
+uohhicrtxakjzv3er6t05r6fi
+pbheh3ywrg6zjdyb2o1x6g1k6
+nr2869epnfc55jbl9nn17c1v6
+9s3mlz959578fn6qknf9qqpnt
+19pctxya5wrpcka4u2ffx3p1n
+x0vzqr1srltqfibxjwo2x69a3
+lwnatnztyc379z8xu5b5urdgz
+mz7yshnjlf2hi8rqsrrhdjq0d
+2it32rht78128n4prak53uu0a
+she9z8o2f82j81vj0a37ijx3g
+tqn79vy9fi8xplegx2hq7w8pk
+34h8zl5vbysqrpjrpftb1vp36
+njz9ao8fg7oi6pe2ujgdijowf
+m8t9mcbki3g69929mjcudntbz
+u9l6il3qnpixgzpfh4o2p5vxf
+xevr5bddqs3wu30o1jw1k5xmb
+yb1u85jmrv4agloob003azui3
+otkttij7ic8iyjxu1ykubthsq
+5wpkn2a656fx3odi9pkbp2sc6
+c3azzzskrp5vdd89ktl1kbk3r
+n8w05wrpjpdbn122p6qiunpz7
+0e7vzqkibfdmqsgk13ieli6z7
+e7rwxeg7658thv8wbd4qi0i15
+j2l3l44qg6blzvmoh4q90r9fs
+klsraan0olx9e7o9ee0bunc3g
+r2j6v1i4po4o5uc3z1j6u4r8u
+wjz8qy6tpyvtt8q6djogsgy11
+
+Total reclaimed space: 6.091GB
+Total:	0B
+✅ Disk Space Reclaimed.
+Fixing permissions...
+Building and deploying production containers...
+time="2026-02-25T22:11:51-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:51-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:51-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:51-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:51-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:51-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:51-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-25T22:11:51-10:00" level=warning msg="The \"ADMIN_EMAIL\" variable is not set. Defaulting to a blank string."
+ Image ahac_prod-prod-api Building 
+ Image ahac_prod-prod-web Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.16kB done
+#1 DONE 0.0s
+
+#2 [prod-web internal] load build definition from Dockerfile
+#2 transferring dockerfile: 3.38kB 0.0s done
+#2 DONE 0.1s
+
+#3 [prod-api internal] load build definition from Dockerfile
+#3 transferring dockerfile: 1.27kB done
+#3 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)
+#3 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 24)
+#3 DONE 0.1s
+
+#4 [prod-api internal] load metadata for docker.io/library/python:3.12-alpine
+#4 ...
+
+#5 [auth] library/node:pull token for registry-1.docker.io
+#5 DONE 0.0s
+
+#6 [auth] library/python:pull token for registry-1.docker.io
+#6 DONE 0.0s
+
+#7 [prod-api internal] load metadata for ghcr.io/astral-sh/uv:latest
+#7 DONE 1.8s
+
+#8 [prod-web internal] load metadata for docker.io/library/node:20-alpine
+#8 DONE 2.2s
+
+#4 [prod-api internal] load metadata for docker.io/library/python:3.12-alpine
+#4 DONE 2.2s
+
+#9 [prod-web internal] load .dockerignore
+#9 transferring context: 171B 0.0s done
+#9 DONE 0.0s
+
+#10 [prod-api internal] load .dockerignore
+#10 transferring context: 2B done
+#10 DONE 0.0s
+
+#11 [prod-api internal] load build context
+#11 DONE 0.0s
+
+#12 [prod-api builder 1/7] FROM docker.io/library/python:3.12-alpine@sha256:2d91681153dd4b8cdb52d4fd34a17b9edbafa4dd3086143cfd4b6c3a84c1acb0
+#12 resolve docker.io/library/python:3.12-alpine@sha256:2d91681153dd4b8cdb52d4fd34a17b9edbafa4dd3086143cfd4b6c3a84c1acb0 0.0s done
+#12 DONE 0.0s
+
+#13 [prod-web base 1/1] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 resolve docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8 0.0s done
+#13 ...
+
+#14 [prod-api] FROM ghcr.io/astral-sh/uv:latest@sha256:2f2ccd27bbf953ec7a9e3153a4563705e41c852a5e1912b438fc44d88d6cb52c
+#14 resolve ghcr.io/astral-sh/uv:latest@sha256:2f2ccd27bbf953ec7a9e3153a4563705e41c852a5e1912b438fc44d88d6cb52c 0.0s done
+#14 DONE 0.2s
+
+#11 [prod-api internal] load build context
+#11 transferring context: 1.75MB 0.2s done
+#11 DONE 0.2s
+
+#13 [prod-web base 1/1] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 sha256:e31b2016552274339ed88ed4a438d78bf37e0f6bdf328d02207b2a598c1ef86d 0B / 445B 0.2s
+#13 sha256:e31b2016552274339ed88ed4a438d78bf37e0f6bdf328d02207b2a598c1ef86d 445B / 445B 0.3s done
+#13 sha256:eb87f4721c91769ed5206f34a9ab6ec98fc1d5235c12c2fc956665b1155e9ecb 0B / 1.26MB 0.2s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 0B / 42.78MB 0.2s
+#13 sha256:eb87f4721c91769ed5206f34a9ab6ec98fc1d5235c12c2fc956665b1155e9ecb 1.26MB / 1.26MB 0.4s done
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 5.24MB / 42.78MB 0.8s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 8.39MB / 42.78MB 0.9s
+#13 ...
+
+#14 [prod-api] FROM ghcr.io/astral-sh/uv:latest@sha256:2f2ccd27bbf953ec7a9e3153a4563705e41c852a5e1912b438fc44d88d6cb52c
+#14 sha256:08298e2d5568a6016de22d9387dd51ed070ba4ebe543a11ddaaf1a8c190b63e4 98B / 98B 0.3s done
+#14 sha256:ad2b03a35819fedf207b190f5b14c4ffce0e283c38257be0f0ca0e311bdcfd76 23.12MB / 23.12MB 1.6s done
+#14 extracting sha256:ad2b03a35819fedf207b190f5b14c4ffce0e283c38257be0f0ca0e311bdcfd76 0.2s done
+#14 extracting sha256:08298e2d5568a6016de22d9387dd51ed070ba4ebe543a11ddaaf1a8c190b63e4 0.0s done
+#14 DONE 2.0s
+
+#13 [prod-web base 1/1] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 12.58MB / 42.78MB 1.1s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 16.78MB / 42.78MB 1.2s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 20.97MB / 42.78MB 1.4s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 26.21MB / 42.78MB 1.7s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 29.36MB / 42.78MB 2.0s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 33.55MB / 42.78MB 2.1s
+#13 ...
+
+#12 [prod-api builder 1/7] FROM docker.io/library/python:3.12-alpine@sha256:2d91681153dd4b8cdb52d4fd34a17b9edbafa4dd3086143cfd4b6c3a84c1acb0
+#12 sha256:77e59d578b52ba7be2dcd4414d9ef235af6ea92f56d54f7b90bfdbd5d0355561 247B / 247B 0.4s done
+#12 sha256:4e18f69996e78732b37aff52d0d056f1513dfe14ab5822126ebde5478ae9f1a1 13.74MB / 13.74MB 2.6s done
+#12 sha256:aca07fe076f12b62834e15448c6ec1858845fe8029d75d7ba1d1f6e7940ee649 460.94kB / 460.94kB 0.7s done
+#12 sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 3.86MB / 3.86MB 1.1s done
+#12 extracting sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 0.1s done
+#12 extracting sha256:aca07fe076f12b62834e15448c6ec1858845fe8029d75d7ba1d1f6e7940ee649 0.1s done
+#12 extracting sha256:4e18f69996e78732b37aff52d0d056f1513dfe14ab5822126ebde5478ae9f1a1 0.3s done
+#12 extracting sha256:77e59d578b52ba7be2dcd4414d9ef235af6ea92f56d54f7b90bfdbd5d0355561 0.0s done
+#12 DONE 3.1s
+
+#15 [prod-web internal] load build context
+#15 ...
+
+#16 [prod-api runner 2/7] WORKDIR /app
+#16 DONE 0.2s
+
+#15 [prod-web internal] load build context
+#15 ...
+
+#17 [prod-api runner 3/7] RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+#17 DONE 0.4s
+
+#15 [prod-web internal] load build context
+#15 ...
+
+#13 [prod-web base 1/1] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 42.78MB / 42.78MB 2.5s done
+#13 extracting sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 0.6s done
+#13 extracting sha256:eb87f4721c91769ed5206f34a9ab6ec98fc1d5235c12c2fc956665b1155e9ecb 0.0s done
+#13 extracting sha256:e31b2016552274339ed88ed4a438d78bf37e0f6bdf328d02207b2a598c1ef86d 0.0s done
+#13 DONE 4.1s
+
+#15 [prod-web internal] load build context
+#15 ...
+
+#18 [prod-web builder 1/5] WORKDIR /app
+#18 DONE 0.1s
+
+#15 [prod-web internal] load build context
+#15 ...
+
+#19 [prod-web runner  2/11] RUN addgroup --system --gid 1001 nodejs
+#19 DONE 0.3s
+
+#15 [prod-web internal] load build context
+#15 ...
+
+#20 [prod-web pruner 1/5] RUN apk add --no-cache libc6-compat
+#20 0.646 (1/3) Installing musl-obstack (1.2.3-r2)
+#20 0.660 (2/3) Installing libucontext (1.3.3-r0)
+#20 0.682 (3/3) Installing gcompat (1.1.0-r4)
+#20 0.699 OK: 11.0 MiB in 21 packages
+#20 DONE 0.8s
+
+#21 [prod-web pruner 2/5] WORKDIR /app
+#21 DONE 0.1s
+
+#15 [prod-web internal] load build context
+#15 ...
+
+#22 [prod-web runner  3/11] RUN adduser --system --uid 1001 nextjs
+#22 DONE 0.4s
+
+#15 [prod-web internal] load build context
+#15 ...
+
+#23 [prod-api runner 4/7] RUN apk add --no-cache curl
+#23 1.047 ( 1/10) Installing brotli-libs (1.2.0-r0)
+#23 1.114 ( 2/10) Installing c-ares (1.34.6-r0)
+#23 1.137 ( 3/10) Installing libunistring (1.4.1-r0)
+#23 1.194 ( 4/10) Installing libidn2 (2.3.8-r0)
+#23 1.217 ( 5/10) Installing nghttp2-libs (1.68.0-r0)
+#23 1.235 ( 6/10) Installing nghttp3 (1.13.1-r0)
+#23 1.256 ( 7/10) Installing libpsl (0.21.5-r3)
+#23 1.275 ( 8/10) Installing zstd-libs (1.5.7-r2)
+#23 1.320 ( 9/10) Installing libcurl (8.17.0-r1)
+#23 1.354 (10/10) Installing curl (8.17.0-r1)
+#23 1.379 Executing busybox-1.37.0-r30.trigger
+#23 1.384 OK: 18.6 MiB in 48 packages
+#23 DONE 1.4s
+
+#15 [prod-web internal] load build context
+#15 transferring context: 99.85MB 5.2s
+#15 ...
+
+#24 [prod-web pruner 3/5] RUN npm install -g turbo
+#24 3.721 
+#24 3.721 added 2 packages in 3s
+#24 3.722 npm notice
+#24 3.722 npm notice New major version of npm available! 10.8.2 -> 11.11.0
+#24 3.722 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#24 3.722 npm notice To update run: npm install -g npm@11.11.0
+#24 3.722 npm notice
+#24 DONE 3.9s
+
+#15 [prod-web internal] load build context
+#15 transferring context: 208.68MB 10.2s
+#15 ...
+
+#25 [prod-api builder 2/7] RUN apk update && apk add --no-cache gcc musl-dev python3-dev libffi-dev
+#25 2.231 v3.23.3-188-g0ddab105b7f [https://dl-cdn.alpinelinux.org/alpine/v3.23/main]
+#25 2.231 v3.23.3-188-g0ddab105b7f [https://dl-cdn.alpinelinux.org/alpine/v3.23/community]
+#25 2.231 OK: 27574 distinct packages available
+#25 2.841 ( 1/23) Installing libgcc (15.2.0-r2)
+#25 2.858 ( 2/23) Installing jansson (2.14.1-r0)
+#25 2.874 ( 3/23) Installing libstdc++ (15.2.0-r2)
+#25 2.920 ( 4/23) Installing zstd-libs (1.5.7-r2)
+#25 2.954 ( 5/23) Installing binutils (2.45.1-r0)
+#25 3.125 ( 6/23) Installing libgomp (15.2.0-r2)
+#25 3.151 ( 7/23) Installing libatomic (15.2.0-r2)
+#25 3.164 ( 8/23) Installing gmp (6.3.0-r4)
+#25 3.192 ( 9/23) Installing isl26 (0.26-r1)
+#25 3.257 (10/23) Installing mpfr4 (4.2.2-r0)
+#25 3.283 (11/23) Installing mpc1 (1.3.1-r1)
+#25 3.299 (12/23) Installing gcc (15.2.0-r2)
+#25 5.994 (13/23) Installing linux-headers (6.16.12-r0)
+#25 6.145 (14/23) Installing pkgconf (2.5.1-r0)
+#25 6.163 (15/23) Installing libffi-dev (3.5.2-r0)
+#25 6.186 (16/23) Installing musl-dev (1.2.5-r21)
+#25 6.436 (17/23) Installing libexpat (2.7.4-r0)
+#25 6.452 (18/23) Installing mpdecimal (4.0.1-r0)
+#25 6.472 (19/23) Installing python3 (3.12.12-r0)
+#25 7.494 (20/23) Installing python3-pycache-pyc0 (3.12.12-r0)
+#25 7.812 (21/23) Installing pyc (3.12.12-r0)
+#25 7.812 (22/23) Installing python3-pyc (3.12.12-r0)
+#25 7.812 (23/23) Installing python3-dev (3.12.12-r0)
+#25 9.468 Executing busybox-1.37.0-r30.trigger
+#25 9.472 OK: 286.2 MiB in 61 packages
+#25 DONE 9.6s
+
+#26 [prod-api builder 3/7] WORKDIR /app
+#26 DONE 0.1s
+
+#15 [prod-web internal] load build context
+#15 ...
+
+#27 [prod-api builder 4/7] COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+#27 DONE 0.1s
+
+#15 [prod-web internal] load build context
+#15 transferring context: 253.53MB 13.1s done
+#15 DONE 13.2s
+
+#28 [prod-api builder 5/7] RUN uv venv
+#28 0.392 Using CPython 3.12.12 interpreter at: /usr/local/bin/python
+#28 0.392 Creating virtual environment at: .venv
+#28 DONE 0.4s
+
+#29 [prod-api builder 6/7] COPY requirements.txt .
+#29 DONE 0.1s
+
+#30 [prod-web pruner 4/5] COPY . .
+#30 DONE 0.4s
+
+#31 [prod-api builder 7/7] RUN uv pip install --no-cache -r requirements.txt
+#31 ...
+
+#32 [prod-web pruner 5/5] RUN turbo prune web --docker
+#32 0.269  WARNING  No locally installed `turbo` found in your repository. Using globally installed version (2.8.11), which can cause unexpected behavior.
+#32 0.269 
+#32 0.269 Installing the version in your repository (^2.8.1) before calling `turbo` will result in more predictable behavior across environments.
+#32 0.273 
+#32 0.273 Attention:
+#32 0.273 Turborepo now collects completely anonymous telemetry regarding usage.
+#32 0.273 This information is used to shape the Turborepo roadmap and prioritize features.
+#32 0.273 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#32 0.273 https://turborepo.dev/docs/telemetry
+#32 0.273 
+#32 0.273 • turbo 2.8.11
+#32 0.287 Generating pruned monorepo for web in /app/out
+#32 0.380  - Added web
+#32 DONE 1.0s
+
+#33 [prod-web deps 3/5] COPY --from=pruner /app/out/json/ .
+#33 DONE 0.0s
+
+#34 [prod-web deps 4/5] COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+#34 DONE 0.0s
+
+#31 [prod-api builder 7/7] RUN uv pip install --no-cache -r requirements.txt
+#31 1.276 Resolved 37 packages in 859ms
+#31 1.306 Downloading asyncpg (3.3MiB)
+#31 1.323 Downloading aiohttp (1.6MiB)
+#31 1.324 Downloading pydantic-core (2.2MiB)
+#31 1.725 Downloading pillow (6.8MiB)
+#31 1.725 Downloading reportlab (1.9MiB)
+#31 1.726 Downloading greenlet (1.6MiB)
+#31 1.726 Downloading sqlalchemy (3.2MiB)
+#31 1.726 Downloading stripe (2.0MiB)
+#31 2.164  Downloaded aiohttp
+#31 2.252  Downloaded pydantic-core
+#31 2.422  Downloaded greenlet
+#31 2.446  Downloaded reportlab
+#31 2.601  Downloaded stripe
+#31 2.602  Downloaded asyncpg
+#31 2.788  Downloaded sqlalchemy
+#31 3.207  Downloaded pillow
+#31 3.207 Prepared 37 packages in 1.92s
+#31 3.264 Installed 37 packages in 56ms
+#31 3.264  + aiohappyeyeballs==2.6.1
+#31 3.264  + aiohttp==3.13.3
+#31 3.264  + aiosignal==1.4.0
+#31 3.264  + aiosmtplib==5.1.0
+#31 3.264  + annotated-doc==0.0.4
+#31 3.264  + annotated-types==0.7.0
+#31 3.264  + anyio==4.12.1
+#31 3.264  + asyncpg==0.31.0
+#31 3.264  + attrs==25.4.0
+#31 3.264  + certifi==2026.2.25
+#31 3.264  + charset-normalizer==3.4.4
+#31 3.264  + click==8.3.1
+#31 3.264  + fastapi==0.133.1
+#31 3.264  + frozenlist==1.8.0
+#31 3.264  + greenlet==3.3.2
+#31 3.264  + h11==0.16.0
+#31 3.264  + idna==3.11
+#31 3.264  + multidict==6.7.1
+#31 3.264  + pillow==12.1.1
+#31 3.264  + propcache==0.4.1
+#31 3.264  + pydantic==2.12.5
+#31 3.264  + pydantic-core==2.41.5
+#31 3.264  + pypdf==6.7.3
+#31 3.264  + python-dotenv==1.2.1
+#31 3.264  + python-multipart==0.0.22
+#31 3.264  + redis==7.2.1
+#31 3.264  + reportlab==4.4.10
+#31 3.264  + requests==2.32.5
+#31 3.264  + sentry-sdk==2.53.0
+#31 3.264  + sqlalchemy==2.0.47
+#31 3.264  + starlette==0.52.1
+#31 3.264  + stripe==14.4.0
+#31 3.264  + typing-extensions==4.15.0
+#31 3.264  + typing-inspection==0.4.2
+#31 3.264  + urllib3==2.6.3
+#31 3.264  + uvicorn==0.41.0
+#31 3.264  + yarl==1.22.0
+#31 DONE 3.4s
+
+#35 [prod-web deps 5/5] RUN npm install -g pnpm && pnpm install --frozen-lockfile
+#35 1.480 
+#35 1.480 added 1 package in 1s
+#35 1.480 
+#35 1.480 1 package is looking for funding
+#35 1.480   run `npm fund` for details
+#35 1.482 npm notice
+#35 1.482 npm notice New major version of npm available! 10.8.2 -> 11.11.0
+#35 1.482 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#35 1.482 npm notice To update run: npm install -g npm@11.11.0
+#35 1.482 npm notice
+#35 ...
+
+#36 [prod-api runner 5/7] COPY --from=builder /app/.venv /app/.venv
+#36 DONE 0.3s
+
+#37 [prod-api runner 6/7] COPY . .
+#37 DONE 0.1s
+
+#38 [prod-api runner 7/7] RUN chown -R appuser:appgroup /app
+#38 ...
+
+#35 [prod-web deps 5/5] RUN npm install -g pnpm && pnpm install --frozen-lockfile
+#35 3.035 apps/web                                 |  WARN  The field "pnpm" was found in /app/apps/web/package.json. This will not take effect. You should configure "pnpm" at the root of the workspace instead.
+#35 3.043 Scope: all 2 workspace projects
+#35 3.073 Lockfile is up to date, resolution step is skipped
+#35 3.100 Progress: resolved 1, reused 0, downloaded 0, added 0
+#35 3.268 Packages: +461
+#35 3.268 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#35 4.101 Progress: resolved 461, reused 0, downloaded 89, added 88
+#35 5.100 Progress: resolved 461, reused 0, downloaded 304, added 304
+#35 6.096 Progress: resolved 461, reused 0, downloaded 457, added 457
+#35 7.096 Progress: resolved 461, reused 0, downloaded 459, added 459
+#35 8.097 Progress: resolved 461, reused 0, downloaded 460, added 460
+#35 8.950 Progress: resolved 461, reused 0, downloaded 461, added 461, done
+#35 9.071 .../node_modules/unrs-resolver postinstall$ napi-postinstall unrs-resolver 1.11.1 check
+#35 9.085 .../node_modules/@sentry/cli install$ node ./scripts/install.js
+#35 9.112 .../node_modules/unrs-resolver postinstall: Done
+#35 9.134 .../node_modules/@sentry/cli install: [sentry-cli] Downloading from https://downloads.sentry-cdn.com/sentry-cli/1.77.3/sentry-cli-Linux-x86_64
+#35 9.633 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 1%
+#35 9.665 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 2%
+#35 9.689 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 3%
+#35 9.712 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 4%
+#35 9.731 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 5%
+#35 9.757 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 6%
+#35 9.784 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 7%
+#35 9.802 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 8%
+#35 9.821 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 9%
+#35 9.843 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 10%
+#35 9.858 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 11%
+#35 9.871 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 12%
+#35 9.882 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 13%
+#35 9.898 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 14%
+#35 9.915 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 15%
+#35 9.927 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 16%
+#35 9.941 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 17%
+#35 9.955 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 18%
+#35 9.972 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 19%
+#35 9.985 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 20%
+#35 9.996 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 21%
+#35 10.01 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 22%
+#35 10.02 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 23%
+#35 10.04 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 24%
+#35 10.05 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 25%
+#35 10.06 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 26%
+#35 10.07 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 27%
+#35 10.08 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 28%
+#35 10.10 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 29%
+#35 10.11 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 30%
+#35 10.12 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 31%
+#35 10.12 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 32%
+#35 10.14 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 33%
+#35 10.15 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 34%
+#35 10.16 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 35%
+#35 10.17 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 36%
+#35 10.18 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 37%
+#35 10.19 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 38%
+#35 10.20 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 39%
+#35 10.21 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 40%
+#35 10.22 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 41%
+#35 10.23 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 42%
+#35 10.24 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 43%
+#35 10.25 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 44%
+#35 10.26 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 45%
+#35 10.27 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 46%
+#35 10.28 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 47%
+#35 10.29 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 48%
+#35 10.29 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 49%
+#35 10.30 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 50%
+#35 10.31 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 51%
+#35 10.32 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 52%
+#35 10.34 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 53%
+#35 10.34 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 54%
+#35 10.35 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 55%
+#35 10.37 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 56%
+#35 10.37 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 57%
+#35 10.38 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 58%
+#35 10.38 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 59%
+#35 10.39 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 60%
+#35 10.40 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 61%
+#35 10.41 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 62%
+#35 10.42 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 63%
+#35 10.43 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 64%
+#35 10.44 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 65%
+#35 10.44 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 66%
+#35 10.45 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 67%
+#35 10.47 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 68%
+#35 10.47 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 69%
+#35 10.48 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 70%
+#35 10.49 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 71%
+#35 10.49 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 72%
+#35 10.50 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 73%
+#35 10.51 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 74%
+#35 10.52 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 75%
+#35 10.52 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 76%
+#35 10.53 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 77%
+#35 10.54 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 78%
+#35 10.55 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 79%
+#35 10.55 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 80%
+#35 10.56 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 81%
+#35 10.57 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 82%
+#35 10.58 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 83%
+#35 10.58 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 84%
+#35 10.60 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 85%
+#35 10.60 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 86%
+#35 10.61 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 87%
+#35 10.61 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 88%
+#35 10.62 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 89%
+#35 10.63 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 90%
+#35 10.63 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 91%
+#35 10.64 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 92%
+#35 10.65 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 93%
+#35 10.66 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 94%
+#35 10.67 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 95%
+#35 10.67 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 96%
+#35 10.68 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 97%
+#35 10.69 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 98%
+#35 10.69 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 99%
+#35 10.70 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 100%
+#35 10.72 .../node_modules/@sentry/cli install: [sentry-cli] Checksum validation passed.
+#35 10.75 .../node_modules/@sentry/cli install: Done
+#35 10.83 
+#35 10.83 devDependencies:
+#35 10.83 + turbo 2.8.1
+#35 10.83 
+#35 10.85 Done in 8s
+#35 DONE 11.6s
+
+#38 [prod-api runner 7/7] RUN chown -R appuser:appgroup /app
+#38 ...
+
+#39 [prod-web builder 2/5] COPY --from=deps /app/node_modules ./node_modules
+#39 ...
+
+#38 [prod-api runner 7/7] RUN chown -R appuser:appgroup /app
+#38 DONE 10.5s
+
+#40 [prod-api] exporting to image
+#40 exporting layers
+#40 ...
+
+#39 [prod-web builder 2/5] COPY --from=deps /app/node_modules ./node_modules
+#39 DONE 1.7s
+
+#41 [prod-web builder 3/5] COPY --from=deps /app/apps/web/node_modules ./apps/web/node_modules
+#41 DONE 0.1s
+
+#40 [prod-api] exporting to image
+#40 ...
+
+#42 [prod-web builder 4/5] COPY --from=pruner /app/out/full/ .
+#42 DONE 0.2s
+
+#43 [prod-web builder 5/5] RUN --mount=type=cache,target=/app/apps/web/.next/cache     npm install -g pnpm && pnpm --filter web build
+#43 1.388 
+#43 1.388 added 1 package in 1s
+#43 1.388 
+#43 1.388 1 package is looking for funding
+#43 1.388   run `npm fund` for details
+#43 1.389 npm notice
+#43 1.389 npm notice New major version of npm available! 10.8.2 -> 11.11.0
+#43 1.389 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#43 1.389 npm notice To update run: npm install -g npm@11.11.0
+#43 1.389 npm notice
+#43 ...
+
+#40 [prod-api] exporting to image
+#40 exporting layers 2.0s done
+#40 exporting manifest sha256:d4ae1920fbc794d0164c01da7f4a82e2e83df53ef24f4a64d2f6522ff83b9296 0.0s done
+#40 exporting config sha256:28e0e905aaa9aba134a8fc135f147df1f1cf839b6635771fbc7025b93843008d 0.0s done
+#40 exporting attestation manifest sha256:0a2c33024eb5df0fd5d046fc6108ac057d73efb7e747a1be786ed0cb6d6631ad 0.0s done
+#40 exporting manifest list sha256:f5af3cedb4a7e7f791398d75ac7a4aab724ed1a0a21402080f4f72c24ae201fb 0.0s done
+#40 naming to docker.io/library/ahac_prod-prod-api:latest done
+#40 unpacking to docker.io/library/ahac_prod-prod-api:latest 1.0s done
+#40 DONE 3.1s
+
+#44 [prod-api] resolving provenance for metadata file
+#44 DONE 0.0s
+
+#43 [prod-web builder 5/5] RUN --mount=type=cache,target=/app/apps/web/.next/cache     npm install -g pnpm && pnpm --filter web build
+#43 2.952 apps/web                                 |  WARN  The field "pnpm" was found in /app/apps/web/package.json. This will not take effect. You should configure "pnpm" at the root of the workspace instead.
+#43 2.963 
+#43 2.963 > web@1.0.0 build /app/apps/web
+#43 2.963 > next build
+#43 2.963 
+#43 3.322 [Next.js Rewrites] Proxying to http://prod-api:8000
+#43 3.354   ▲ Next.js 14.2.3
+#43 3.354   - Environments: .env.local
+#43 3.355 
+#43 3.367    Creating an optimized production build ...
+#43 12.61 
+#43 12.61 warn - The class `ease-[cubic-bezier(0.25,0.8,0.25,1)]` is ambiguous and matches multiple utilities.
+#43 12.61 warn - If this is content and not a class, replace it with `ease-&lsqb;cubic-bezier(0.25,0.8,0.25,1)&rsqb;` to silence this warning.
+#43 17.26  ✓ Compiled successfully
+#43 17.26    Skipping validation of types
+#43 17.26    Skipping linting
+#43 17.42    Collecting page data ...
+#43 18.39    Generating static pages (0/16) ...
+#43 18.63    Generating static pages (4/16) 
+#43 18.63    Generating static pages (8/16) 
+#43 18.69    Generating static pages (12/16) 
+#43 18.70  ✓ Generating static pages (16/16)
+#43 18.77    Finalizing page optimization ...
+#43 18.77    Collecting build traces ...
+#43 18.85 
+#43 18.86 Route (app)                              Size     First Load JS
+#43 18.86 ┌ ƒ /                                    4.05 kB         161 kB
+#43 18.86 ├ ○ /_not-found                          873 B          87.9 kB
+#43 18.86 ├ ○ /admin                               7.32 kB         161 kB
+#43 18.86 ├ ƒ /api/checkout                        0 B                0 B
+#43 18.86 ├ ƒ /api/puck                            0 B                0 B
+#43 18.86 ├ ƒ /api/save-content                    0 B                0 B
+#43 18.86 ├ ƒ /api/v1/admin/schedule               0 B                0 B
+#43 18.86 ├ ƒ /api/v1/content                      0 B                0 B
+#43 18.86 ├ ○ /central-ac                          705 B          98.3 kB
+#43 18.86 ├ ○ /checkout                            6.43 kB         155 kB
+#43 18.86 ├ ○ /contact                             6.3 kB          112 kB
+#43 18.86 ├ ○ /icon.png                            0 B                0 B
+#43 18.86 ├ ○ /maintenance                         7.51 kB         125 kB
+#43 18.86 ├ ○ /mini_split_ac                       1.94 kB         120 kB
+#43 18.86 ├ ○ /mini_split_ac_maintenance           1.53 kB         104 kB
+#43 18.86 ├ ƒ /puck/[...path]                      101 kB          219 kB
+#43 18.86 ├ ○ /shop                                10.8 kB         168 kB
+#43 18.86 ├ ƒ /shop/[id]                           8.34 kB         126 kB
+#43 18.86 └ ƒ /sitemap.xml                         0 B                0 B
+#43 18.86 + First Load JS shared by all            87.1 kB
+#43 18.86   ├ chunks/65d48fa5-d3b5387dc8ba794e.js  53.6 kB
+#43 18.86   ├ chunks/801-be2658a4db41c97f.js       31.4 kB
+#43 18.86   └ other shared chunks (total)          1.97 kB
+#43 18.86 
+#43 18.86 
+#43 18.86 ○  (Static)   prerendered as static content
+#43 18.86 ƒ  (Dynamic)  server-rendered on demand
+#43 18.86 
+#43 DONE 19.0s
+
+#45 [prod-web runner  4/11] COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./public
+#45 DONE 0.2s
+
+#46 [prod-web runner  5/11] COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/lib/content
+#46 DONE 0.0s
+
+#47 [prod-web runner  6/11] COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+#47 DONE 0.1s
+
+#48 [prod-web runner  7/11] COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
+#48 DONE 0.1s
+
+#49 [prod-web runner  8/11] RUN rm -rf node_modules/next node_modules/react node_modules/react-dom
+#49 DONE 0.2s
+
+#50 [prod-web runner  9/11] RUN npm install next@14.2.3 react@18.3.1 react-dom@18.3.1 --no-save && npm cache clean --force
+#50 43.65 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#50 44.10 npm warn deprecated glob@8.1.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#50 44.39 npm warn deprecated deep-diff@1.0.2: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+#50 44.71 npm warn deprecated @measured/puck@0.20.2: Puck has moved. Please use @puckeditor/core instead: https://www.npmjs.com/package/@puckeditor/core
+#50 48.33 npm warn deprecated next@14.2.3: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/security-update-2025-12-11 for more details.
+#50 71.48 
+#50 71.48 added 200 packages, and audited 201 packages in 1m
+#50 71.48 
+#50 71.48 31 packages are looking for funding
+#50 71.48   run `npm fund` for details
+#50 71.53 
+#50 71.53 3 vulnerabilities (2 high, 1 critical)
+#50 71.53 
+#50 71.53 To address all issues (including breaking changes), run:
+#50 71.53   npm audit fix --force
+#50 71.53 
+#50 71.53 Run `npm audit` for details.
+#50 71.53 npm notice
+#50 71.53 npm notice New major version of npm available! 10.8.2 -> 11.11.0
+#50 71.53 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#50 71.53 npm notice To update run: npm install -g npm@11.11.0
+#50 71.53 npm notice
+#50 71.61 npm warn using --force Recommended protections disabled.
+#50 DONE 72.0s
+
+#51 [prod-web runner 10/11] RUN mkdir -p .next/cache && chown -R nextjs:nodejs .next/cache
+#51 DONE 0.3s
+
+#52 [prod-web runner 11/11] WORKDIR /app
+#52 DONE 0.1s
+
+#53 [prod-web] exporting to image
+#53 exporting layers
+#53 exporting layers 7.6s done
+#53 exporting manifest sha256:b0b108253051577281f2b81db387734f89b62cef28944f53635f39df9046306d 0.0s done
+#53 exporting config sha256:2b7a2f62c881827f4c24dfa815994fc1040f5d3bccf24e1b3cf44a1bceae489f 0.0s done
+#53 exporting attestation manifest sha256:70efac312de88fedee99aa595c6cc9a74a146d2b6171824a7149a1e25db4db5a 0.0s done
+#53 exporting manifest list sha256:ffc9e15b2c55bb5605c3b9d53d1edb1edcb30fe7340bcb5d1a22d6c6fc170b95 0.0s done
+#53 naming to docker.io/library/ahac_prod-prod-web:latest done
+#53 unpacking to docker.io/library/ahac_prod-prod-web:latest
+#53 unpacking to docker.io/library/ahac_prod-prod-web:latest 2.7s done
+#53 DONE 10.4s
+
+#54 [prod-web] resolving provenance for metadata file
+#54 DONE 0.0s
+ Image ahac_prod-prod-api Built 
+ Image ahac_prod-prod-web Built 
+ Network ahac_prod_default Creating 
+ Network ahac_prod_default Created 
+ Volume ahac_prod_prod_postgres_data Creating 
+ Volume ahac_prod_prod_postgres_data Created 
+ Container prod-redis Creating 
+ Container prod-db Creating 
+ Container prod-redis Created 
+ Container prod-db Created 
+ Container prod-api Creating 
+ Container prod-api Created 
+ Container prod-web Creating 
+ Container prod-web Created 
+ Container prod-db Starting 
+ Container prod-redis Starting 
+ Container prod-redis Started 
+ Container prod-db Started 
+ Container prod-db Waiting 
+ Container prod-redis Waiting 
+ Container prod-redis Healthy 
+ Container prod-db Healthy 
+ Container prod-api Starting 
+ Container prod-api Started 
+ Container prod-api Waiting 
+ Container prod-api Healthy 
+ Container prod-web Starting 
+ Container prod-web Started 
+Cleaning up old images...
+Total reclaimed space: 0B
+Seeding Production Content Database...
+Checking for existing content at /...
+2026-02-26 08:14:19,450 INFO sqlalchemy.engine.Engine select pg_catalog.version()
+2026-02-26 08:14:19,450 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-26 08:14:19,451 INFO sqlalchemy.engine.Engine select current_schema()
+2026-02-26 08:14:19,451 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-26 08:14:19,453 INFO sqlalchemy.engine.Engine show standard_conforming_strings
+2026-02-26 08:14:19,453 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-02-26 08:14:19,454 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-02-26 08:14:19,457 INFO sqlalchemy.engine.Engine SELECT content_pages.path, content_pages.data, content_pages.draft_data, content_pages.updated_at 
+FROM content_pages 
+WHERE content_pages.path = $1::VARCHAR
+2026-02-26 08:14:19,457 INFO sqlalchemy.engine.Engine [generated in 0.00014s] ('/',)
+/app/seed_content.py:44: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  page.updated_at = datetime.utcnow()
+Updating existing global content...
+2026-02-26 08:14:19,460 INFO sqlalchemy.engine.Engine UPDATE content_pages SET updated_at=$1::TIMESTAMP WITHOUT TIME ZONE WHERE content_pages.path = $2::VARCHAR
+2026-02-26 08:14:19,461 INFO sqlalchemy.engine.Engine [generated in 0.00010s] (datetime.datetime(2026, 2, 26, 8, 14, 19, 460140), '/')
+2026-02-26 08:14:19,461 INFO sqlalchemy.engine.Engine COMMIT
+Content Seeding Complete.
+==========================================
+Production Deployment Complete: Wed, Feb 25, 2026 10:14:19 PM
+App running on Port 3001
+API running on Port 8001
+==========================================
+Logging to deploy_prod.log
+==========================================
+Starting AHC Production Deployment: Thu, Feb 26, 2026 10:11:41 AM
+==========================================
+Fetching latest changes from origin/main...
+🔍 [1/5] Checking Disk Space...
+☢️  NUCLEAR MODE ACTIVATED: Forcing aggressive cleanup...
+⚠️  Disk usage is HIGH (100%). Initiating CLEAN RELEASE Protocol...
+🛑 [1.1] Stopping Containers to Release Locks...
+time="2026-02-26T10:11:42-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:42-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:42-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:42-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:42-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:42-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:42-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:42-10:00" level=warning msg="The \"ADMIN_EMAIL\" variable is not set. Defaulting to a blank string."
+ Container prod-web Stopping 
+ Container prod-web Stopped 
+ Container prod-web Removing 
+ Container prod-web Removed 
+ Container prod-api Stopping 
+ Container prod-api Stopped 
+ Container prod-api Removing 
+ Container prod-api Removed 
+ Container prod-db Stopping 
+ Container prod-redis Stopping 
+ Container prod-db Stopped 
+ Container prod-db Removing 
+ Container prod-db Removed 
+ Container prod-redis Stopped 
+ Container prod-redis Removing 
+ Container prod-redis Removed 
+ Network ahac_prod_default Removing 
+ Network ahac_prod_default Removed 
+🧹 [1.2] Pruning ALL Images & Build Cache...
+Deleted Images:
+untagged: ahac_prod-prod-web:latest
+deleted: sha256:ffc9e15b2c55bb5605c3b9d53d1edb1edcb30fe7340bcb5d1a22d6c6fc170b95
+deleted: sha256:b0b108253051577281f2b81db387734f89b62cef28944f53635f39df9046306d
+deleted: sha256:70efac312de88fedee99aa595c6cc9a74a146d2b6171824a7149a1e25db4db5a
+untagged: ahac_prod-prod-api:latest
+deleted: sha256:f5af3cedb4a7e7f791398d75ac7a4aab724ed1a0a21402080f4f72c24ae201fb
+deleted: sha256:d4ae1920fbc794d0164c01da7f4a82e2e83df53ef24f4a64d2f6522ff83b9296
+deleted: sha256:0a2c33024eb5df0fd5d046fc6108ac057d73efb7e747a1be786ed0cb6d6631ad
+
+Deleted build cache objects:
+v308zdav070gvaqfmvt64gl5g
+2zoa90vqcpzs52drqsc68kbnl
+93ksj9bmmxbmty2b40a62nqdg
+ntwzvkou6ovvut9jkz40abc8o
+35n8acmrgx8wdyylipzzriiqe
+69lu3cuvkdbvu3lmvo34e71x7
+muc6iub7im6vfr2p3ic402m7m
+qt5mvao7dabnmxwp7ycgm50at
+i59me0r1mtwnhvs7xgdl996lq
+ujgxlubmug6n2gm2870464kjk
+8gla22wjxxi8v9s046eznki6v
+z8pyr15vj428qtc3z7m23zfv0
+90o1tirt09uyt52wjwx9m2s8a
+gg6208zwea7mrce00i6thg341
+1u7ra9ld67qe5jyscq1odm5a1
+mrv713rpr055xqlgy63pr0wpu
+s496orn7gln600wnuhgg03mba
+kgxrne9vr2l8aqfoiokvct1ag
+45oqs05ahjhxg61cffvjlt8x2
+m7ikuih5l45u0syq6pg6aft4p
+mxdmsoxmck6msfzlzcxiyg12e
+es4fkrzz9863gf3j8sqs82g5p
+28dxxc4bszmm4w0c8qbvp7fva
+jf82bgi1epe3fnpgw97fhc32f
+twadpy6adznoorni4oedc9tqd
+sksk7koo374qfhm43okst0l1a
+19hyxv33uu13zp43wmb8yr5du
+n10qugeg9ohr6zxjausty0rz8
+osp41m1kivf2iui96c6ma16j4
+j6w02weunvozezmxe0v52t63l
+3sse7xfm981i9eiekyi9wnucs
+shwu9xu9ud9x885jlo2znv8gy
+ntduu2kfdgzkj7cay9zyvmi8g
+fmw0fp9h0k3rzxvj1lx5ql3wp
+rcc99vx3ftzqegt7qttvte0fe
+zgvbi8q2j5ks0itj11i4hvhhu
+xlvrd6x1succl1lp7h1bsoiyv
+fo412024lxx409nfetv41xjrm
+urknk9pv5osu9i9jfmj2tvhvq
+qr8sv8ro7n6jfepqx8zq6oevt
+juke3eeonklym36yxoxo51oo8
+wr3h35hyxxsaxp23e1vifb8s5
+c1ifyo9ziu7v3zkeln7y27m5x
+46bp0h6vxrxn2apw69egvbf3i
+uzxksxapg05pb3ydquqc4po2g
+2fnwvd8d84xgfzbxhbw5hvc6t
+1s3fd40tr2a7nxhexmghk8gh5
+chctk79mxwm797eu5kyr2vxkf
+d6zlfgf06jry2u1ds4phzn6te
+no6wo79eozzg7qzqbecxe9q6s
+iep8wcgam9iw7c5zhb3i3xc3e
+
+Total reclaimed space: 4.529GB
+Total:	0B
+✅ Disk Space Reclaimed.
+Your branch is up to date with 'origin/main'.
+Switched to branch 'main'
+HEAD is now at abf0e4d7 Merge staging into main with responsive UI scale fix
+Fixing permissions...
+Building and deploying production containers...
+time="2026-02-26T10:11:51-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:51-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:51-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:51-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:51-10:00" level=warning msg="The \"NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:51-10:00" level=warning msg="The \"STRIPE_SECRET_KEY_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:51-10:00" level=warning msg="The \"STRIPE_WEBHOOK_SECRET_PROD\" variable is not set. Defaulting to a blank string."
+time="2026-02-26T10:11:51-10:00" level=warning msg="The \"ADMIN_EMAIL\" variable is not set. Defaulting to a blank string."
+ Image ahac_prod-prod-api Building 
+ Image ahac_prod-prod-web Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.16kB done
+#1 DONE 0.0s
+
+#2 [prod-web internal] load build definition from Dockerfile
+#2 transferring dockerfile: 3.52kB done
+#2 DONE 0.0s
+
+#3 [prod-api internal] load build definition from Dockerfile
+#3 transferring dockerfile: 1.27kB done
+#3 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)
+#3 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 24)
+#3 DONE 0.0s
+
+#4 [prod-api internal] load metadata for ghcr.io/astral-sh/uv:latest
+#4 ...
+
+#5 [auth] library/python:pull token for registry-1.docker.io
+#5 DONE 0.0s
+
+#6 [auth] library/node:pull token for registry-1.docker.io
+#6 DONE 0.0s
+
+#7 [prod-api internal] load metadata for docker.io/library/python:3.12-alpine
+#7 DONE 1.7s
+
+#8 [prod-web internal] load metadata for docker.io/library/node:20-alpine
+#8 ...
+
+#4 [prod-api internal] load metadata for ghcr.io/astral-sh/uv:latest
+#4 DONE 1.8s
+
+#9 [prod-api internal] load .dockerignore
+#9 transferring context: 2B done
+#9 DONE 0.0s
+
+#8 [prod-web internal] load metadata for docker.io/library/node:20-alpine
+#8 DONE 1.9s
+
+#10 [prod-api builder 1/7] FROM docker.io/library/python:3.12-alpine@sha256:2d91681153dd4b8cdb52d4fd34a17b9edbafa4dd3086143cfd4b6c3a84c1acb0
+#10 resolve docker.io/library/python:3.12-alpine@sha256:2d91681153dd4b8cdb52d4fd34a17b9edbafa4dd3086143cfd4b6c3a84c1acb0 0.0s done
+#10 ...
+
+#11 [prod-web internal] load .dockerignore
+#11 transferring context: 171B done
+#11 DONE 0.1s
+
+#12 [prod-api internal] load build context
+#12 transferring context: 1.75MB 0.1s done
+#12 DONE 0.2s
+
+#13 [prod-web base 1/1] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 resolve docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8 0.0s done
+#13 sha256:e31b2016552274339ed88ed4a438d78bf37e0f6bdf328d02207b2a598c1ef86d 0B / 445B 0.2s
+#13 sha256:e31b2016552274339ed88ed4a438d78bf37e0f6bdf328d02207b2a598c1ef86d 445B / 445B 0.3s done
+#13 sha256:eb87f4721c91769ed5206f34a9ab6ec98fc1d5235c12c2fc956665b1155e9ecb 0B / 1.26MB 0.2s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 0B / 42.78MB 0.2s
+#13 sha256:eb87f4721c91769ed5206f34a9ab6ec98fc1d5235c12c2fc956665b1155e9ecb 1.26MB / 1.26MB 0.5s done
+#13 ...
+
+#10 [prod-api builder 1/7] FROM docker.io/library/python:3.12-alpine@sha256:2d91681153dd4b8cdb52d4fd34a17b9edbafa4dd3086143cfd4b6c3a84c1acb0
+#10 sha256:77e59d578b52ba7be2dcd4414d9ef235af6ea92f56d54f7b90bfdbd5d0355561 247B / 247B 0.3s done
+#10 sha256:4e18f69996e78732b37aff52d0d056f1513dfe14ab5822126ebde5478ae9f1a1 13.74MB / 13.74MB 1.2s done
+#10 sha256:aca07fe076f12b62834e15448c6ec1858845fe8029d75d7ba1d1f6e7940ee649 460.94kB / 460.94kB 0.6s done
+#10 sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 3.86MB / 3.86MB 1.0s done
+#10 extracting sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 0.1s done
+#10 extracting sha256:aca07fe076f12b62834e15448c6ec1858845fe8029d75d7ba1d1f6e7940ee649 0.1s done
+#10 extracting sha256:4e18f69996e78732b37aff52d0d056f1513dfe14ab5822126ebde5478ae9f1a1 0.3s done
+#10 extracting sha256:77e59d578b52ba7be2dcd4414d9ef235af6ea92f56d54f7b90bfdbd5d0355561 0.0s done
+#10 DONE 1.7s
+
+#14 [prod-api runner 2/7] WORKDIR /app
+#14 DONE 0.1s
+
+#13 [prod-web base 1/1] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 6.29MB / 42.78MB 0.9s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 9.44MB / 42.78MB 1.1s
+#13 ...
+
+#15 [prod-api] FROM ghcr.io/astral-sh/uv:latest@sha256:2f2ccd27bbf953ec7a9e3153a4563705e41c852a5e1912b438fc44d88d6cb52c
+#15 resolve ghcr.io/astral-sh/uv:latest@sha256:2f2ccd27bbf953ec7a9e3153a4563705e41c852a5e1912b438fc44d88d6cb52c 0.0s done
+#15 sha256:08298e2d5568a6016de22d9387dd51ed070ba4ebe543a11ddaaf1a8c190b63e4 98B / 98B 0.3s done
+#15 sha256:ad2b03a35819fedf207b190f5b14c4ffce0e283c38257be0f0ca0e311bdcfd76 23.12MB / 23.12MB 1.6s done
+#15 extracting sha256:ad2b03a35819fedf207b190f5b14c4ffce0e283c38257be0f0ca0e311bdcfd76 0.2s done
+#15 extracting sha256:08298e2d5568a6016de22d9387dd51ed070ba4ebe543a11ddaaf1a8c190b63e4 0.0s done
+#15 DONE 1.9s
+
+#13 [prod-web base 1/1] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 ...
+
+#16 [prod-api runner 3/7] RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+#16 DONE 0.4s
+
+#13 [prod-web base 1/1] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 13.63MB / 42.78MB 1.4s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 17.83MB / 42.78MB 1.7s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 23.07MB / 42.78MB 2.0s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 28.31MB / 42.78MB 2.3s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 33.55MB / 42.78MB 2.4s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 37.75MB / 42.78MB 2.6s
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 40.89MB / 42.78MB 2.7s
+#13 ...
+
+#17 [prod-api runner 4/7] RUN apk add --no-cache curl
+#17 1.133 ( 1/10) Installing brotli-libs (1.2.0-r0)
+#17 1.191 ( 2/10) Installing c-ares (1.34.6-r0)
+#17 1.217 ( 3/10) Installing libunistring (1.4.1-r0)
+#17 1.265 ( 4/10) Installing libidn2 (2.3.8-r0)
+#17 1.284 ( 5/10) Installing nghttp2-libs (1.68.0-r0)
+#17 1.299 ( 6/10) Installing nghttp3 (1.13.1-r0)
+#17 1.320 ( 7/10) Installing libpsl (0.21.5-r3)
+#17 1.337 ( 8/10) Installing zstd-libs (1.5.7-r2)
+#17 1.366 ( 9/10) Installing libcurl (8.17.0-r1)
+#17 1.401 (10/10) Installing curl (8.17.0-r1)
+#17 1.421 Executing busybox-1.37.0-r30.trigger
+#17 1.425 OK: 18.6 MiB in 48 packages
+#17 DONE 1.5s
+
+#13 [prod-web base 1/1] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 42.78MB / 42.78MB 2.8s done
+#13 extracting sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80
+#13 extracting sha256:ad6d96c196e3198e14ea37df8bba4f54bf92fb525eb65e49fa4027c7dee13f80 0.7s done
+#13 extracting sha256:eb87f4721c91769ed5206f34a9ab6ec98fc1d5235c12c2fc956665b1155e9ecb
+#13 extracting sha256:eb87f4721c91769ed5206f34a9ab6ec98fc1d5235c12c2fc956665b1155e9ecb 0.0s done
+#13 extracting sha256:e31b2016552274339ed88ed4a438d78bf37e0f6bdf328d02207b2a598c1ef86d 0.0s done
+#13 DONE 4.3s
+
+#18 [prod-web pruner 1/5] RUN apk add --no-cache libc6-compat
+#18 ...
+
+#19 [prod-web builder 1/5] WORKDIR /app
+#19 DONE 0.1s
+
+#20 [prod-web internal] load build context
+#20 ...
+
+#21 [prod-web runner  2/11] RUN addgroup --system --gid 1001 nodejs
+#21 DONE 0.3s
+
+#20 [prod-web internal] load build context
+#20 ...
+
+#22 [prod-web runner  3/11] RUN adduser --system --uid 1001 nextjs
+#22 DONE 0.3s
+
+#18 [prod-web pruner 1/5] RUN apk add --no-cache libc6-compat
+#18 0.616 (1/3) Installing musl-obstack (1.2.3-r2)
+#18 0.629 (2/3) Installing libucontext (1.3.3-r0)
+#18 0.638 (3/3) Installing gcompat (1.1.0-r4)
+#18 0.650 OK: 11.0 MiB in 21 packages
+#18 DONE 0.7s
+
+#20 [prod-web internal] load build context
+#20 ...
+
+#23 [prod-web pruner 2/5] WORKDIR /app
+#23 DONE 0.0s
+
+#20 [prod-web internal] load build context
+#20 transferring context: 74.93MB 5.0s
+#20 ...
+
+#24 [prod-web pruner 3/5] RUN npm install -g turbo
+#24 2.333 
+#24 2.333 added 2 packages in 2s
+#24 2.335 npm notice
+#24 2.335 npm notice New major version of npm available! 10.8.2 -> 11.11.0
+#24 2.335 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#24 2.335 npm notice To update run: npm install -g npm@11.11.0
+#24 2.335 npm notice
+#24 DONE 2.4s
+
+#20 [prod-web internal] load build context
+#20 transferring context: 155.02MB 10.1s
+#20 ...
+
+#25 [prod-api builder 2/7] RUN apk update && apk add --no-cache gcc musl-dev python3-dev libffi-dev
+#25 1.675 v3.23.3-190-gc53ea6debd3 [https://dl-cdn.alpinelinux.org/alpine/v3.23/main]
+#25 1.675 v3.23.3-188-g0ddab105b7f [https://dl-cdn.alpinelinux.org/alpine/v3.23/community]
+#25 1.675 OK: 27574 distinct packages available
+#25 2.029 ( 1/23) Installing libgcc (15.2.0-r2)
+#25 2.050 ( 2/23) Installing jansson (2.14.1-r0)
+#25 2.065 ( 3/23) Installing libstdc++ (15.2.0-r2)
+#25 2.156 ( 4/23) Installing zstd-libs (1.5.7-r2)
+#25 2.198 ( 5/23) Installing binutils (2.45.1-r0)
+#25 2.410 ( 6/23) Installing libgomp (15.2.0-r2)
+#25 2.435 ( 7/23) Installing libatomic (15.2.0-r2)
+#25 2.445 ( 8/23) Installing gmp (6.3.0-r4)
+#25 2.478 ( 9/23) Installing isl26 (0.26-r1)
+#25 2.558 (10/23) Installing mpfr4 (4.2.2-r0)
+#25 2.597 (11/23) Installing mpc1 (1.3.1-r1)
+#25 2.614 (12/23) Installing gcc (15.2.0-r2)
+#25 6.201 (13/23) Installing linux-headers (6.16.12-r0)
+#25 6.357 (14/23) Installing pkgconf (2.5.1-r0)
+#25 6.376 (15/23) Installing libffi-dev (3.5.2-r0)
+#25 6.397 (16/23) Installing musl-dev (1.2.5-r21)
+#25 6.660 (17/23) Installing libexpat (2.7.4-r0)
+#25 6.676 (18/23) Installing mpdecimal (4.0.1-r0)
+#25 6.694 (19/23) Installing python3 (3.12.12-r0)
+#25 7.283 (20/23) Installing python3-pycache-pyc0 (3.12.12-r0)
+#25 7.593 (21/23) Installing pyc (3.12.12-r0)
+#25 7.593 (22/23) Installing python3-pyc (3.12.12-r0)
+#25 7.593 (23/23) Installing python3-dev (3.12.12-r0)
+#25 8.693 Executing busybox-1.37.0-r30.trigger
+#25 8.697 OK: 286.2 MiB in 61 packages
+#25 DONE 8.8s
+
+#20 [prod-web internal] load build context
+#20 ...
+
+#26 [prod-api builder 3/7] WORKDIR /app
+#26 DONE 0.1s
+
+#27 [prod-api builder 4/7] COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+#27 DONE 0.1s
+
+#20 [prod-web internal] load build context
+#20 ...
+
+#28 [prod-api builder 5/7] RUN uv venv
+#28 0.418 Using CPython 3.12.12 interpreter at: /usr/local/bin/python
+#28 0.418 Creating virtual environment at: .venv
+#28 DONE 0.4s
+
+#20 [prod-web internal] load build context
+#20 ...
+
+#29 [prod-api builder 6/7] COPY requirements.txt .
+#29 DONE 0.1s
+
+#20 [prod-web internal] load build context
+#20 ...
+
+#30 [prod-api builder 7/7] RUN uv pip install --no-cache -r requirements.txt
+#30 0.981 Resolved 37 packages in 586ms
+#30 0.989 Downloading reportlab (1.9MiB)
+#30 1.023 Downloading pillow (6.8MiB)
+#30 1.023 Downloading stripe (2.0MiB)
+#30 1.023 Downloading pydantic-core (2.2MiB)
+#30 1.023 Downloading greenlet (1.6MiB)
+#30 1.024 Downloading sqlalchemy (3.2MiB)
+#30 1.024 Downloading asyncpg (3.3MiB)
+#30 1.029 Downloading aiohttp (1.6MiB)
+#30 2.104  Downloaded reportlab
+#30 2.108  Downloaded greenlet
+#30 2.140  Downloaded aiohttp
+#30 2.210  Downloaded stripe
+#30 2.260  Downloaded pydantic-core
+#30 2.518  Downloaded sqlalchemy
+#30 2.667  Downloaded asyncpg
+#30 2.836  Downloaded pillow
+#30 2.836 Prepared 37 packages in 1.85s
+#30 2.901 Installed 37 packages in 64ms
+#30 2.901  + aiohappyeyeballs==2.6.1
+#30 2.901  + aiohttp==3.13.3
+#30 2.901  + aiosignal==1.4.0
+#30 2.901  + aiosmtplib==5.1.0
+#30 2.901  + annotated-doc==0.0.4
+#30 2.901  + annotated-types==0.7.0
+#30 2.901  + anyio==4.12.1
+#30 2.901  + asyncpg==0.31.0
+#30 2.901  + attrs==25.4.0
+#30 2.901  + certifi==2026.2.25
+#30 2.901  + charset-normalizer==3.4.4
+#30 2.901  + click==8.3.1
+#30 2.901  + fastapi==0.133.1
+#30 2.901  + frozenlist==1.8.0
+#30 2.901  + greenlet==3.3.2
+#30 2.902  + h11==0.16.0
+#30 2.902  + idna==3.11
+#30 2.902  + multidict==6.7.1
+#30 2.902  + pillow==12.1.1
+#30 2.902  + propcache==0.4.1
+#30 2.902  + pydantic==2.12.5
+#30 2.902  + pydantic-core==2.41.5
+#30 2.902  + pypdf==6.7.3
+#30 2.902  + python-dotenv==1.2.1
+#30 2.902  + python-multipart==0.0.22
+#30 2.902  + redis==7.2.1
+#30 2.902  + reportlab==4.4.10
+#30 2.902  + requests==2.32.5
+#30 2.902  + sentry-sdk==2.53.0
+#30 2.902  + sqlalchemy==2.0.47
+#30 2.902  + starlette==0.52.1
+#30 2.902  + stripe==14.4.0
+#30 2.902  + typing-extensions==4.15.0
+#30 2.902  + typing-inspection==0.4.2
+#30 2.902  + urllib3==2.6.3
+#30 2.902  + uvicorn==0.41.0
+#30 2.902  + yarl==1.22.0
+#30 DONE 3.0s
+
+#20 [prod-web internal] load build context
+#20 ...
+
+#31 [prod-api runner 5/7] COPY --from=builder /app/.venv /app/.venv
+#31 DONE 0.2s
+
+#20 [prod-web internal] load build context
+#20 ...
+
+#32 [prod-api runner 6/7] COPY . .
+#32 DONE 0.1s
+
+#20 [prod-web internal] load build context
+#20 transferring context: 229.47MB 15.2s
+#20 transferring context: 256.44MB 17.0s done
+#20 DONE 17.1s
+
+#33 [prod-web pruner 4/5] COPY . .
+#33 DONE 0.3s
+
+#34 [prod-api runner 7/7] RUN chown -R appuser:appgroup /app
+#34 ...
+
+#35 [prod-web pruner 5/5] RUN turbo prune web --docker
+#35 0.199  WARNING  No locally installed `turbo` found in your repository. Using globally installed version (2.8.11), which can cause unexpected behavior.
+#35 0.199 
+#35 0.199 Installing the version in your repository (^2.8.1) before calling `turbo` will result in more predictable behavior across environments.
+#35 0.203 
+#35 0.203 Attention:
+#35 0.203 Turborepo now collects completely anonymous telemetry regarding usage.
+#35 0.203 This information is used to shape the Turborepo roadmap and prioritize features.
+#35 0.203 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#35 0.203 https://turborepo.dev/docs/telemetry
+#35 0.203 
+#35 0.203 • turbo 2.8.11
+#35 0.214 Generating pruned monorepo for web in /app/out
+#35 0.310  - Added web
+#35 DONE 0.9s
+
+#36 [prod-web deps 3/5] COPY --from=pruner /app/out/json/ .
+#36 DONE 0.0s
+
+#37 [prod-web deps 4/5] COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+#37 DONE 0.1s
+
+#38 [prod-web deps 5/5] RUN npm install -g pnpm && pnpm install --frozen-lockfile
+#38 1.267 
+#38 1.267 added 1 package in 1s
+#38 1.267 
+#38 1.267 1 package is looking for funding
+#38 1.267   run `npm fund` for details
+#38 1.268 npm notice
+#38 1.268 npm notice New major version of npm available! 10.8.2 -> 11.11.0
+#38 1.268 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#38 1.268 npm notice To update run: npm install -g npm@11.11.0
+#38 1.268 npm notice
+#38 ...
+
+#34 [prod-api runner 7/7] RUN chown -R appuser:appgroup /app
+#34 DONE 6.8s
+
+#39 [prod-api] exporting to image
+#39 exporting layers
+#39 exporting layers 2.3s done
+#39 exporting manifest sha256:be8fb8e701b0622fd5e562f9cd57dd216664e658bc5f84038c64daaa7d4e14f1 0.0s done
+#39 exporting config sha256:c2c580568ca7a12f07761a37ce38ea3c626bde2de2b98285859c0ef3a036762c 0.0s done
+#39 exporting attestation manifest sha256:78db7244fda2f3dac925361193cc03a74fef9e77195ed9d55e1a55a66a2c78b4 0.0s done
+#39 exporting manifest list sha256:0674d0ccee52e56f70922482f34ddf84b8531aa8e5665fd4503bfa4d2f7de665 0.0s done
+#39 naming to docker.io/library/ahac_prod-prod-api:latest
+#39 naming to docker.io/library/ahac_prod-prod-api:latest done
+#39 unpacking to docker.io/library/ahac_prod-prod-api:latest
+#39 unpacking to docker.io/library/ahac_prod-prod-api:latest 1.1s done
+#39 DONE 3.6s
+
+#40 [prod-api] resolving provenance for metadata file
+#40 DONE 0.0s
+
+#38 [prod-web deps 5/5] RUN npm install -g pnpm && pnpm install --frozen-lockfile
+#38 2.846 apps/web                                 |  WARN  The field "pnpm" was found in /app/apps/web/package.json. This will not take effect. You should configure "pnpm" at the root of the workspace instead.
+#38 2.854 Scope: all 2 workspace projects
+#38 2.888 Lockfile is up to date, resolution step is skipped
+#38 2.917 Progress: resolved 1, reused 0, downloaded 0, added 0
+#38 3.093 Packages: +461
+#38 3.093 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#38 3.916 Progress: resolved 461, reused 0, downloaded 69, added 69
+#38 4.916 Progress: resolved 461, reused 0, downloaded 289, added 289
+#38 5.916 Progress: resolved 461, reused 0, downloaded 457, added 457
+#38 6.917 Progress: resolved 461, reused 0, downloaded 459, added 459
+#38 8.379 Progress: resolved 461, reused 0, downloaded 460, added 459
+#38 8.981 Progress: resolved 461, reused 0, downloaded 461, added 461, done
+#38 9.104 .../node_modules/unrs-resolver postinstall$ napi-postinstall unrs-resolver 1.11.1 check
+#38 9.117 .../node_modules/@sentry/cli install$ node ./scripts/install.js
+#38 9.144 .../node_modules/unrs-resolver postinstall: Done
+#38 9.164 .../node_modules/@sentry/cli install: [sentry-cli] Downloading from https://downloads.sentry-cdn.com/sentry-cli/1.77.3/sentry-cli-Linux-x86_64
+#38 9.359 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 1%
+#38 9.364 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 2%
+#38 9.368 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 3%
+#38 9.373 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 4%
+#38 9.378 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 5%
+#38 9.383 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 6%
+#38 9.388 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 7%
+#38 9.392 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 8%
+#38 9.399 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 9%
+#38 9.404 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 10%
+#38 9.408 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 11%
+#38 9.413 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 12%
+#38 9.418 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 13%
+#38 9.423 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 14%
+#38 9.428 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 15%
+#38 9.433 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 16%
+#38 9.438 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 17%
+#38 9.443 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 18%
+#38 9.449 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 19%
+#38 9.454 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 20%
+#38 9.458 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 21%
+#38 9.463 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 22%
+#38 9.469 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 23%
+#38 9.474 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 24%
+#38 9.479 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 25%
+#38 9.483 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 26%
+#38 9.488 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 27%
+#38 9.494 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 28%
+#38 9.498 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 29%
+#38 9.503 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 30%
+#38 9.507 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 31%
+#38 9.512 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 32%
+#38 9.517 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 33%
+#38 9.522 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 34%
+#38 9.526 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 35%
+#38 9.531 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 36%
+#38 9.536 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 37%
+#38 9.541 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 38%
+#38 9.545 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 39%
+#38 9.550 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 40%
+#38 9.555 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 41%
+#38 9.557 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 42%
+#38 9.561 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 43%
+#38 9.566 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 44%
+#38 9.570 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 45%
+#38 9.576 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 46%
+#38 9.580 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 47%
+#38 9.585 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 48%
+#38 9.589 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 49%
+#38 9.594 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 50%
+#38 9.599 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 51%
+#38 9.604 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 52%
+#38 9.608 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 53%
+#38 9.613 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 54%
+#38 9.619 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 55%
+#38 9.624 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 56%
+#38 9.629 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 57%
+#38 9.633 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 58%
+#38 9.637 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 59%
+#38 9.643 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 60%
+#38 9.648 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 61%
+#38 9.652 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 62%
+#38 9.657 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 63%
+#38 9.662 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 64%
+#38 9.667 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 65%
+#38 9.671 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 66%
+#38 9.676 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 67%
+#38 9.680 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 68%
+#38 9.686 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 69%
+#38 9.691 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 70%
+#38 9.695 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 71%
+#38 9.700 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 72%
+#38 9.704 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 73%
+#38 9.710 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 74%
+#38 9.714 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 75%
+#38 9.718 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 76%
+#38 9.723 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 77%
+#38 9.729 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 78%
+#38 9.734 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 79%
+#38 9.738 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 80%
+#38 9.742 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 81%
+#38 9.746 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 82%
+#38 9.752 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 83%
+#38 9.756 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 84%
+#38 9.760 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 85%
+#38 9.765 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 86%
+#38 9.771 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 87%
+#38 9.775 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 88%
+#38 9.780 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 89%
+#38 9.784 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 90%
+#38 9.789 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 91%
+#38 9.794 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 92%
+#38 9.798 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 93%
+#38 9.803 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 94%
+#38 9.807 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 95%
+#38 9.813 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 96%
+#38 9.817 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 97%
+#38 9.822 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 98%
+#38 9.826 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 99%
+#38 9.831 .../node_modules/@sentry/cli install: fetching sentry-cli-Linux-x86_64 100%
+#38 9.848 .../node_modules/@sentry/cli install: [sentry-cli] Checksum validation passed.
+#38 9.872 .../node_modules/@sentry/cli install: Done
+#38 9.947 
+#38 9.947 devDependencies:
+#38 9.947 + turbo 2.8.1
+#38 9.947 
+#38 9.961 Done in 7.3s
+#38 DONE 10.3s
+
+#41 [prod-web builder 2/5] COPY --from=deps /app/node_modules ./node_modules
+#41 DONE 1.8s
+
+#42 [prod-web builder 3/5] COPY --from=deps /app/apps/web/node_modules ./apps/web/node_modules
+#42 DONE 0.1s
+
+#43 [prod-web builder 4/5] COPY --from=pruner /app/out/full/ .
+#43 DONE 0.2s
+
+#44 [prod-web builder 5/5] RUN --mount=type=cache,target=/app/apps/web/.next/cache     npm install -g pnpm && pnpm --filter web build
+#44 1.312 
+#44 1.312 added 1 package in 1s
+#44 1.312 
+#44 1.312 1 package is looking for funding
+#44 1.312   run `npm fund` for details
+#44 1.314 npm notice
+#44 1.314 npm notice New major version of npm available! 10.8.2 -> 11.11.0
+#44 1.314 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#44 1.314 npm notice To update run: npm install -g npm@11.11.0
+#44 1.314 npm notice
+#44 2.925 apps/web                                 |  WARN  The field "pnpm" was found in /app/apps/web/package.json. This will not take effect. You should configure "pnpm" at the root of the workspace instead.
+#44 2.936 
+#44 2.936 > web@1.0.0 build /app/apps/web
+#44 2.936 > next build
+#44 2.936 
+#44 3.283 [Next.js Rewrites] Proxying to http://prod-api:8000
+#44 3.317   ▲ Next.js 14.2.3
+#44 3.317   - Environments: .env.local
+#44 3.317 
+#44 3.328    Creating an optimized production build ...
+#44 12.59 
+#44 12.59 warn - The class `ease-[cubic-bezier(0.25,0.8,0.25,1)]` is ambiguous and matches multiple utilities.
+#44 12.59 warn - If this is content and not a class, replace it with `ease-&lsqb;cubic-bezier(0.25,0.8,0.25,1)&rsqb;` to silence this warning.
+#44 17.23  ✓ Compiled successfully
+#44 17.23    Skipping validation of types
+#44 17.23    Skipping linting
+#44 17.39    Collecting page data ...
+#44 18.37    Generating static pages (0/16) ...
+#44 18.60    Generating static pages (4/16) 
+#44 18.60    Generating static pages (8/16) 
+#44 18.66    Generating static pages (12/16) 
+#44 18.69  ✓ Generating static pages (16/16)
+#44 18.74    Finalizing page optimization ...
+#44 18.74    Collecting build traces ...
+#44 18.83 
+#44 18.84 Route (app)                              Size     First Load JS
+#44 18.84 ┌ ƒ /                                    4.05 kB         162 kB
+#44 18.84 ├ ○ /_not-found                          873 B          87.9 kB
+#44 18.84 ├ ○ /admin                               7.32 kB         162 kB
+#44 18.84 ├ ƒ /api/checkout                        0 B                0 B
+#44 18.84 ├ ƒ /api/puck                            0 B                0 B
+#44 18.84 ├ ƒ /api/save-content                    0 B                0 B
+#44 18.84 ├ ƒ /api/v1/admin/schedule               0 B                0 B
+#44 18.84 ├ ƒ /api/v1/content                      0 B                0 B
+#44 18.84 ├ ○ /central-ac                          704 B          99.1 kB
+#44 18.84 ├ ○ /checkout                            6.43 kB         156 kB
+#44 18.84 ├ ○ /contact                             6.3 kB          113 kB
+#44 18.84 ├ ○ /icon.png                            0 B                0 B
+#44 18.84 ├ ○ /maintenance                         7.51 kB         126 kB
+#44 18.84 ├ ○ /mini_split_ac                       1.94 kB         121 kB
+#44 18.84 ├ ○ /mini_split_ac_maintenance           2.3 kB          106 kB
+#44 18.84 ├ ƒ /puck/[...path]                      101 kB          220 kB
+#44 18.84 ├ ○ /shop                                10.8 kB         169 kB
+#44 18.84 ├ ƒ /shop/[id]                           8.34 kB         127 kB
+#44 18.84 └ ƒ /sitemap.xml                         0 B                0 B
+#44 18.84 + First Load JS shared by all            87.1 kB
+#44 18.84   ├ chunks/65d48fa5-d3b5387dc8ba794e.js  53.6 kB
+#44 18.84   ├ chunks/801-be2658a4db41c97f.js       31.4 kB
+#44 18.84   └ other shared chunks (total)          1.97 kB
+#44 18.84 
+#44 18.84 
+#44 18.84 ○  (Static)   prerendered as static content
+#44 18.84 ƒ  (Dynamic)  server-rendered on demand
+#44 18.84 
+#44 DONE 18.9s
+
+#45 [prod-web runner  4/11] COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./public
+#45 DONE 0.1s
+
+#46 [prod-web runner  5/11] COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/lib/content
+#46 DONE 0.0s
+
+#47 [prod-web runner  6/11] COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+#47 DONE 0.1s
+
+#48 [prod-web runner  7/11] COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
+#48 DONE 0.1s
+
+#49 [prod-web runner  8/11] RUN rm -rf node_modules/next node_modules/react node_modules/react-dom
+#49 DONE 0.2s
+
+#50 [prod-web runner  9/11] RUN npm config set fetch-retries 5 && npm config set fetch-retry-mintimeout 20000 && npm config set fetch-retry-maxtimeout 120000 &&     npm install next@14.2.3 react@18.3.1 react-dom@18.3.1 --no-save &&     npm cache clean --force
+
