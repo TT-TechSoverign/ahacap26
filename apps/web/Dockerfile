@@ -88,12 +88,14 @@ USER nextjs
 
 EXPOSE 3000
 
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
+
 
 # Fix: Clean env vars
 ENV NODE_PATH=/app/node_modules:/app/apps/web/node_modules
 
 WORKDIR /app
+
 # Standalone entrypoint
+ENV PORT 3000
+ENV HOSTNAME="0.0.0.0"
 CMD ["node", "server.js"]
