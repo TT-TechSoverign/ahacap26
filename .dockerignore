@@ -13,3 +13,6 @@ apps/api/data
 npm-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+apps/web/public
+*.mp4
+*.svg
