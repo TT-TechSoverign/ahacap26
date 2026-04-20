@@ -1,10 +1,15 @@
 **/node_modules
 **/.next
+**/.next/cache
 .git
 .env.local
-build.log
-build_v2.log
+*.log
 .DS_Store
 **/.DS_Store
 apps/web/storage
 public/uploads
+apps/api/data
+.pnpm-store
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*

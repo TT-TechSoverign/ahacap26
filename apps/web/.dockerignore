@@ -1,8 +1,12 @@
 node_modules
 .next
+.next/cache
 .git
 .env*
 dist
 build
 storage
 public/uploads
+*.log
+.DS_Store
+.pnpm-store
