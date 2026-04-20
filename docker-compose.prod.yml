@@ -20,6 +20,7 @@ services:
     volumes:
       - ./apps/web/lib/content:/app/apps/web/lib/content
       - ./apps/web/storage/prod:/app/apps/web/storage
+      - ./apps/web/public:/app/public:ro
     depends_on:
       prod-api:
         condition: service_healthy
