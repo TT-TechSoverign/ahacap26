@@ -31,21 +31,24 @@ echo "🛡️ Starting SECURE Staging Deployment: $(date)"
 echo "Environment: ${TARGET_BRANCH} | Project: ${DOCKER_PROJECT}"
 echo "=========================================="
 
-# 1. Source Code Sync
-echo "📥 [1/4] Synchronizing Codebase with $TARGET_BRANCH (as $CPANEL_USER)..."
+# 0. Nuke Stale WHM Backups (SOP Step 3.3)
+echo "🗑️ [1/6] Purging bloated WHM backups to unlock host storage..."
+rm -rf /backup/cpbackup/* 2>/dev/null || true
+
+# 1. Pre-Build Deep Cleaning
+echo "🧹 [2/6] Purging Docker Cache & Dangling Images..."
+# Aggressively prune build cache and ALL unused images from today's failed builds
+docker system prune -a -f
+docker builder prune -a -f
+
+# 2. Source Code Sync
+echo "📥 [2/5] Synchronizing Codebase with $TARGET_BRANCH (as $CPANEL_USER)..."
 su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git fetch origin \"$TARGET_BRANCH\""
 su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git checkout \"$TARGET_BRANCH\""
 su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git reset --hard \"origin/$TARGET_BRANCH\""
 
 chmod 700 deploy_prod.sh force_redeploy.sh 2>/dev/null || true
 chmod 700 apps/api/entrypoint.sh 2>/dev/null || true
-
-# 2. Pre-Build Deep Cleaning
-echo "🧹 [2/5] Purging Docker Cache & Dangling Images..."
-# Aggressively prune build cache to prevent Next.js .next/cache bloat from filling the disk
-docker builder prune -a -f
-# Prune dangling/old images (older than 24h) but guard live DB volumes
-docker image prune -a -f --filter "until=24h"
 
 # 3. Container Orchestration (Clean Build)
 echo "🚀 [3/5] Building & Hot-swapping Containers..."

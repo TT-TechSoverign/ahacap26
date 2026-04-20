@@ -64,7 +64,9 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Fix: Copy keys checks
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./public
+# NOTE (Hotfix v4.1): We NO LONGER copy the public directory here! 
+# We explicitly bypass it to prevent ENOSPC (No Space Left On Device) crashes caused by massive SVG and PDF specs.
+# It is now mapped directly from the host filesystem in docker-compose.prod.yml
 # Ensure content.json is available
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/lib/content
 
