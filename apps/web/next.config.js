@@ -8,6 +8,15 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+    webpack: (config, { dev }) => {
+        // [HOTFIX for ENOSPC - Server Storage Critical]
+        // Explicitly disable Webpack's disk cache layer on the production build 
+        // to prevent Bluehost's 30GB VPS from maxing out during PackFileCacheStrategy.
+        if (!dev) {
+            config.cache = false;
+        }
+        return config;
+    },
 
     images: {
         remotePatterns: [
