@@ -40,16 +40,23 @@ su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git reset --hard \"origin/$TARGET_BR
 chmod 700 deploy_prod.sh force_redeploy.sh 2>/dev/null || true
 chmod 700 apps/api/entrypoint.sh 2>/dev/null || true
 
-# 2. Container Orchestration (Optimistic Build)
-echo "🚀 [2/4] Building & Hot-swapping Containers..."
-# Build images first while the site is still up
-docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" build
+# 2. Pre-Build Deep Cleaning
+echo "🧹 [2/5] Purging Docker Cache & Dangling Images..."
+# Aggressively prune build cache to prevent Next.js .next/cache bloat from filling the disk
+docker builder prune -a -f
+# Prune dangling/old images (older than 24h) but guard live DB volumes
+docker image prune -a -f --filter "until=24h"
+
+# 3. Container Orchestration (Clean Build)
+echo "🚀 [3/5] Building & Hot-swapping Containers..."
+# Force a clean build to prevent corrupted Next.js caches
+docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" build --no-cache
 # Swap the containers
 docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" down --remove-orphans
 docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" up -d
 
-# 3. Application Data & Idempotent Seeding
-echo "🌱 [3/4] Checking Container Health & Database State..."
+# 4. Application Data & Idempotent Seeding
+echo "🌱 [4/5] Checking Container Health & Database State..."
 echo "Waiting 10 seconds for API and DB boot sequence..."
 sleep 10 
 
@@ -62,8 +69,8 @@ else
     echo "⏭️ Idempotency Check: Seed state already present. Skipping."
 fi
 
-# 4. Permission Reset Trap Fix
-echo "🔐 [4/4] Reclaiming volume ownership for cPanel user..."
+# 5. Permission Reset Trap Fix
+echo "🔐 [5/5] Reclaiming volume ownership for cPanel user..."
 HOST_UID=$(id -u)
 HOST_GID=$(id -g)
 # Claw back ownership from Docker root to prevent lockouts on the VPS
