@@ -778,7 +778,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
     const [activeTab, setActiveTab] = useState<'basic' | 'specs'>('basic');
     const [formData, setFormData] = useState({
         name: product?.name || '',
-        price: product?.price ? (product.price / 100).toString() : '',
+        price: product?.price ? product.price.toString() : '',
         category: product?.category || 'WINDOW_AC',
         subcategory: product?.subcategory || 'dual_inverter',
         stock: product?.stock || 0,
@@ -793,7 +793,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
     });
 
     const [displayPrice, setDisplayPrice] = useState<string>(
-        product?.price ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price / 100) : ''
+        product?.price ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price) : ''
     );
 
     const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -840,10 +840,10 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
 
         const method = product ? 'PUT' : 'POST';
 
-        // Prepare payload: Convert price back to cents
+        // Prepare payload
         const payload = {
             ...formData,
-            price: Math.round(parseFloat(formData.price || '0') * 100)
+            price: Math.round(parseFloat(formData.price || '0'))
         };
 
         try {
