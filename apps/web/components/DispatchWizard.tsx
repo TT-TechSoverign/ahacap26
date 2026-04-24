@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { EditableText } from './EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
+import { sendGAEvent } from '@next/third-parties/google';
 
 export function DispatchWizard() {
     const { content } = useContent();
@@ -80,6 +81,7 @@ export function DispatchWizard() {
             });
 
             if (res.ok) {
+                sendGAEvent('event', 'generate_lead', { event_category: 'Lead', event_label: 'Dispatch Wizard Form' });
                 setIsSuccess(true);
             } else {
                 const errData = await res.json().catch(() => ({}));

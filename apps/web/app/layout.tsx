@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Oswald } from 'next/font/google';
 import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import TickerWrapper from '../components/TickerWrapper';
 import CartDrawer from '../components/CartDrawer';
 import { CartProvider } from '../context/CartContext';
@@ -31,17 +32,9 @@ export default function RootLayout({
                     })(window,document,'script','dataLayer','GTM-KTZ58FJX');
                     `}
                 </Script>
-                <Script src="https://www.googletagmanager.com/gtag/js?id=G-MYJZTZFXQV" strategy="afterInteractive" />
-                <Script id="ga4" strategy="afterInteractive">
-                    {`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', 'G-MYJZTZFXQV');
-                    `}
-                </Script>
             </head>
             <body className={`${inter.variable} ${oswald.variable} font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white`}>
+                <GoogleAnalytics gaId="G-MYJZTZFXQV" />
                 {/* <TickerWrapper /> */}
                 <ContentProvider>
                     <CartProvider>
