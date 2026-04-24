@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useContent } from '@/lib/context/ContentContext';
+import { TrackedPhoneLink } from './TrackedPhoneLink';
 
 export default function Footer() {
     const { content } = useContent();
@@ -156,7 +157,7 @@ export default function Footer() {
                                 <span className="material-symbols-outlined text-primary mt-1 shrink-0">call</span>
                                 <div>
                                     <div className="text-white font-bold text-sm uppercase">Phone</div>
-                                    <a href="tel:808-488-1111" className="text-slate-400 text-sm hover:text-white transition-colors">(808) 488-1111</a>
+                                    <TrackedPhoneLink phone="808-488-1111" display="(808) 488-1111" className="text-slate-400 text-sm hover:text-white transition-colors" />
                                 </div>
                             </li>
                             <li className="flex gap-4 justify-center md:justify-start text-left">
