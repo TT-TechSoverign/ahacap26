@@ -74,14 +74,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/l
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
 
-# Fix: Force remove broken pnpm symlinks before installing real modules
-RUN rm -rf node_modules/next node_modules/react node_modules/react-dom
-
-# Fix: Manually install next.js and react to ensure they exist as real files
-# This matches the version in package.json and prevents ENOSPC by not copying all node_modules
-RUN npm config set fetch-retries 5 && npm config set fetch-retry-mintimeout 20000 && npm config set fetch-retry-maxtimeout 120000 && \
-    npm install next@14.2.24 react@18.3.1 react-dom@18.3.1 --no-save && \
-    npm cache clean --force
+# Removed: Force remove broken pnpm symlinks hack
+# Removed: Manually install next.js and react hack
+# With outputFileTracingRoot in next.config.js, the standalone build traces correctly.
 
 # Fix: Create cache directory with correct permissions
 RUN mkdir -p .next/cache && chown -R nextjs:nodejs .next/cache && \
