@@ -74,7 +74,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/l
 
 # Copy standalone build (minimal size)
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
 
 # Removed: Force remove broken pnpm symlinks hack
 # Removed: Manually install next.js and react hack
