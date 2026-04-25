@@ -40,6 +40,8 @@ ENV STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY
 ENV NEXT_TELEMETRY_DISABLED 1
 
 # Build the project (disabled cache mount to prevent Server Action desync)
+# [HOTFIX] Explicitly limit Node.js heap memory to 1GB to prevent VPS OOM (Out of Memory) crashes during Next.js minification
+ENV NODE_OPTIONS="--max-old-space-size=1024"
 RUN npm install -g pnpm && pnpm --filter web build
 
 # Fix: Create a true static copy (dereference symlinks)

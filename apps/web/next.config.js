@@ -5,6 +5,9 @@ const nextConfig = {
     output: "standalone",
     experimental: {
         outputFileTracingRoot: path.join(__dirname, '../../'),
+        cpus: 1,
+        workerThreads: false,
+        memoryBasedWorkersCount: true,
     },
     reactStrictMode: true,
     typescript: {
