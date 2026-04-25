@@ -1105,6 +1105,15 @@ function ScheduleManager() {
         window_ac_install_date: "",
         general_availability_range: ""
     });
+
+    // FIX: The Hydration Trap Synchronization
+    // Sync local form state when the global ContentContext fetches the live DB data.
+    // This prevents stale build-time initialContentJson from clobbering the live database when saving.
+    useEffect(() => {
+        if (content.footer_schedule) {
+            setFormData(content.footer_schedule);
+        }
+    }, [content.footer_schedule]);
     const [saving, setSaving] = useState(false);
     const [success, setSuccess] = useState(false);
 
