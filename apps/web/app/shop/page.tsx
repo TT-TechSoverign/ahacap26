@@ -212,16 +212,25 @@ export default function ShopPage() {
 
                 {/* Dynamic Reorderable Sections */}
                 <div className="space-y-8 md:space-y-10">
-                    {sectionOrder.map((sectionId, index) => (
-                        <div
-                            key={sectionId}
-                            className="relative group/section"
-                        >
-                            {/* Section Control Suite (Edit Mode) */}
-                            {/* Section Control Suite Removed */}
-                            {sectionMap[sectionId] || null}
+                    {error ? (
+                        <div className="py-20 text-center space-y-4 max-w-lg mx-auto bg-red-500/5 border border-red-500/20 rounded-2xl p-8">
+                            <span className="material-symbols-outlined text-red-500 text-5xl">warning</span>
+                            <h2 className="text-xl font-header font-black text-red-400 tracking-widest uppercase">Live Connection Failure</h2>
+                            <p className="text-slate-400 text-xs tracking-widest uppercase font-bold">{error}</p>
+                            <p className="text-slate-500 text-[10px] tracking-widest uppercase mt-4">Review the backend API container health.</p>
                         </div>
-                    ))}
+                    ) : (
+                        sectionOrder.map((sectionId, index) => (
+                            <div
+                                key={sectionId}
+                                className="relative group/section"
+                            >
+                                {/* Section Control Suite (Edit Mode) */}
+                                {/* Section Control Suite Removed */}
+                                {sectionMap[sectionId] || null}
+                            </div>
+                        ))
+                    )}
                 </div>
 
             </main>
