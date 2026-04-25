@@ -56,6 +56,11 @@ echo "🚀 [3/5] Building & Hot-swapping Containers..."
 docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" build --no-cache
 # Swap the containers
 docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" down --remove-orphans
+
+# [HOTFIX] Clear stale PostgreSQL PID files caused by sudden ENOSPC crashes
+echo "🧹 Clearing stale PostgreSQL locks..."
+docker run --rm -v ${DOCKER_PROJECT}_prod_postgres_data:/var/lib/postgresql/data alpine rm -f /var/lib/postgresql/data/postmaster.pid 2>/dev/null || true
+
 docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" up -d
 
 # 4. Application Data & Idempotent Seeding
