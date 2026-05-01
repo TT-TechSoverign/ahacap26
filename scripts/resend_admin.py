@@ -22,7 +22,7 @@ async def resend_admin_email_for_order(stripe_pid: str, target_email: str):
     print(f"Manually constructing order details for: {stripe_pid}...")
     
     customer_info = {
-        "name": "Geoff Oshiro",
+        "name": "TESTING POST MAJOR UPDATE. MOCK GEOFF OSHIRO",
         "email": "geoffoshiro@example.com", # Exact email isn't critical for the admin copy
         "phone": "Customer Phone Not Provided",
         "address": {}
@@ -41,7 +41,7 @@ async def resend_admin_email_for_order(stripe_pid: str, target_email: str):
         "amount_total": 91623,
     }]
     
-    order_id = f"ORD-{stripe_pid[-6:].upper()}"
+    order_id = f"TEST-ORD-{stripe_pid[-6:].upper()}"
     total_cents = 91623
     customer_email = customer_info["email"]
 
