@@ -705,7 +705,7 @@ async def send_inquiry_notification(lead):
         msg["From"] = f"AHAC Notifications <{SMTP_USER}>"
         
         # Recipients List
-        recipients = [ADMIN_EMAIL, "irasmussenjobs@gmail.com"]
+        recipients = ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com"]
         msg["To"] = ", ".join(recipients)
         
         # Attach HTML
