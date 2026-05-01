@@ -60,7 +60,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                 {/* Educational Block 2: Hitting Clusters 4 & 5 (Products, Split Systems, Inverters) */}
                 <div className="space-y-6">
                     <p className="font-sans text-lg text-slate-300 leading-relaxed font-medium">
-                        At Affordable Home A/C, we don't just sell boxes from an <strong>ac shop</strong>; we deploy specialized cooling infrastructure. Whether you need a premium <strong>dual inverter air conditioner</strong> for a bedroom window, or professional <strong>split ac installation Oahu</strong> homes require for whole-house zoning, we utilize {context.techFocus} so your system is equipped to {context.benefit}
+                        At Affordable Home A/C, we don't just sell boxes from a local <strong>ac shop</strong>; we deploy specialized cooling infrastructure. When island residents look for the most efficient <strong>split ac units Hawaii</strong> has to offer, they trust our expertise. Whether you need a premium <strong>dual inverter air conditioner</strong> for a single room, or the professional <strong>split ac installation Oahu</strong> homes require for whole-house <strong>ductless air conditioning</strong>, we utilize {context.techFocus} so your system is equipped to {context.benefit}
                     </p>
                 </div>
 
