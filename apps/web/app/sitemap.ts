@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next';
 import { Product } from '@/types/inventory';
 import { generateProductSlug } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
+import fs from 'fs';
+import path from 'path';
 
 // Robust Sitemap Generation
 // This ensures the build never fails even if the API is down.
@@ -12,8 +14,19 @@ export const dynamic = 'force-dynamic';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://affordablehome-ac.com';
 
+    let data = contentData;
+    try {
+        const livePath = path.join(process.cwd(), 'lib/content/content.json.LIVE');
+        if (fs.existsSync(livePath)) {
+            const raw = fs.readFileSync(livePath, 'utf8');
+            data = JSON.parse(raw);
+        }
+    } catch (e) {
+        console.warn('[Sitemap] Failed to read .LIVE content, falling back to static build-time content.');
+    }
+
     // Extract service area cities
-    const content = contentData as any;
+    const content = data as any;
     const regions = content?.landing_legacy?.service_areas?.regions || [];
     const cityRoutes: string[] = [];
     regions.forEach((region: any) => {

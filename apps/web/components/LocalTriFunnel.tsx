@@ -86,7 +86,7 @@ export default function LocalTriFunnel({ city }: LocalTriFunnelProps) {
                     </div>
 
                     <Link 
-                        href="/contact"
+                        href="/window_ac_maintenance"
                         onClick={() => sendGAEvent('event', 'generate_lead', { 
                             event_category: 'Window Cleaning', 
                             event_label: `${city} Page` 

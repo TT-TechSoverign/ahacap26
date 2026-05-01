@@ -9,9 +9,24 @@ interface Props {
     params: { city: string };
 }
 
+import fs from 'fs';
+import path from 'path';
+
 // Helper to extract cities AND their regional context for anti-duplicate content
 function getValidCities() {
-    const regions = contentData.landing_legacy?.service_areas?.regions || [];
+    let data = contentData;
+    try {
+        const livePath = path.join(process.cwd(), 'lib/content/content.json.LIVE');
+        if (fs.existsSync(livePath)) {
+            const raw = fs.readFileSync(livePath, 'utf8');
+            data = JSON.parse(raw);
+        }
+    } catch (e) {
+        // Fallback to static import
+        console.warn('[Local SEO] Failed to read .LIVE content, falling back to static build-time content.');
+    }
+
+    const regions = (data as any).landing_legacy?.service_areas?.regions || [];
     const validCities: { slug: string; name: string; regionId: string; regionTitle: string }[] = [];
     
     regions.forEach((region: any) => {
@@ -54,6 +69,9 @@ export function generateMetadata({ params }: Props): Metadata {
             siteName: 'Affordable Home A/C',
             locale: 'en_US',
             type: 'website',
+        },
+        alternates: {
+            canonical: `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`,
         },
     };
 }
