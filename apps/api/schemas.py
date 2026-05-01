@@ -15,6 +15,9 @@ class ProductBase(BaseModel):
     key_spec: Optional[str] = None
     noise_level: Optional[str] = None
     dehumidification: Optional[str] = None
+    dimensions: Optional[str] = None
+    weight: Optional[str] = None
+    warranty: Optional[str] = None
 
 class ProductCreate(ProductBase):
     pass
@@ -32,6 +35,9 @@ class ProductUpdate(BaseModel):
     key_spec: Optional[str] = None
     noise_level: Optional[str] = None
     dehumidification: Optional[str] = None
+    dimensions: Optional[str] = None
+    weight: Optional[str] = None
+    warranty: Optional[str] = None
 
 class Product(ProductBase):
     id: int

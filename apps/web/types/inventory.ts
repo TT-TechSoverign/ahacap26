@@ -13,6 +13,9 @@ export interface Product {
     dehumidification?: string;
     performance_specs?: string;
     key_spec?: string;
+    dimensions?: string;
+    weight?: string;
+    warranty?: string;
 }
 
 export interface CartItem extends Product {

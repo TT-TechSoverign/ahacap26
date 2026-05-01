@@ -32,7 +32,11 @@ export async function GET() {
       if (product.coverage) descParts.push(`Coverage: ${product.coverage}`);
       if (product.noise_level) descParts.push(`Noise Level: ${product.noise_level}`);
       if (product.dehumidification) descParts.push(`Dehumidification: ${product.dehumidification}`);
+      if (product.dimensions) descParts.push(`Dimensions: ${product.dimensions}`);
+      if (product.warranty) descParts.push(`Warranty: ${product.warranty}`);
       const description = descParts.length > 0 ? descParts.join('. ') + '.' : product.name;
+
+      const shippingWeight = product.weight ? `<g:shipping_weight>${product.weight} lb</g:shipping_weight>` : '';
 
       return `
         <item>
@@ -46,6 +50,7 @@ export async function GET() {
           <g:availability>${availability}</g:availability>
           <g:price>${product.price}.00 USD</g:price>
           <g:brand>${escapeXml(brand)}</g:brand>
+          ${shippingWeight}
           <g:identifier_exists>no</g:identifier_exists>
         </item>
       `;

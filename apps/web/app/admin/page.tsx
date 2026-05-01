@@ -25,6 +25,9 @@ interface Product {
     key_spec?: string;
     noise_level?: string;
     dehumidification?: string;
+    dimensions?: string;
+    weight?: string;
+    warranty?: string;
 }
 
 interface Order {
@@ -789,7 +792,10 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         performance_specs: product?.performance_specs || '',
         key_spec: product?.key_spec || '',
         noise_level: product?.noise_level || '',
-        dehumidification: product?.dehumidification || ''
+        dehumidification: product?.dehumidification || '',
+        dimensions: product?.dimensions || '',
+        weight: product?.weight || '',
+        warranty: product?.warranty || ''
     });
 
     const [displayPrice, setDisplayPrice] = useState<string>(
@@ -1074,6 +1080,36 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                                             onChange={e => setFormData({ ...formData, dehumidification: e.target.value })}
                                             className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
                                             placeholder="e.g. 2.2 pts/hr"
+                                        />
+                                    </div>
+                                    <div className="col-span-2 space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Dimensions</label>
+                                        <input
+                                            type="text"
+                                            value={formData.dimensions}
+                                            onChange={e => setFormData({ ...formData, dimensions: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 23.6 x 14.9 x 24.8"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Weight</label>
+                                        <input
+                                            type="text"
+                                            value={formData.weight}
+                                            onChange={e => setFormData({ ...formData, weight: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 89"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Warranty</label>
+                                        <input
+                                            type="text"
+                                            value={formData.warranty}
+                                            onChange={e => setFormData({ ...formData, warranty: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 1 YEAR LIMITED"
                                         />
                                     </div>
                                 </div>
