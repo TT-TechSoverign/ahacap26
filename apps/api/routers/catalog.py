@@ -87,6 +87,18 @@ async def get_product(
         raise HTTPException(status_code=404, detail="Product not found")
     return product
 
+@router.post("/validate", response_model=schemas.InventoryValidationResponse)
+async def validate_inventory(
+    validation_request: schemas.InventoryValidationRequest,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Validates multiple products' inventory and returns canonical pricing.
+    Bypasses caching to ensure real-time accuracy.
+    """
+    items_data = [item.dict() for item in validation_request.items]
+    return await catalog.validate_inventory_service(db, items_data)
+
 @router.post("", response_model=schemas.Product)
 async def create_product(
     product: schemas.ProductCreate,

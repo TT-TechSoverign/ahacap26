@@ -67,6 +67,8 @@ class Order(Base):
     customer_phone = Column(String, nullable=True) # [NEW] Comprehensive Detail
     customer_address = Column(String, nullable=True) # [NEW] Comprehensive Detail (JSON or String formatting of the Stripe Address object)
     items_json = Column(String, nullable=True) # Snapshots of products
+    fulfillment_mode = Column(String, nullable=True) # pickup or delivery
+    inventory_deducted = Column(Boolean, default=False) # Webhook idempotency guard
     idempotency_key = Column(String, unique=True, index=True, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 

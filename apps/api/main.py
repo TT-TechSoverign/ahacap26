@@ -175,9 +175,15 @@ async def process_stripe_event(event: dict):
             
             # Retrieve line items
             try:
-                line_items = stripe.checkout.Session.list_line_items(obj['id'], limit=100)
+                line_items = stripe.checkout.Session.list_line_items(obj['id'], limit=100, expand=['data.price.product'])
                 for item in line_items.data:
+                    product_id_str = None
+                    if getattr(item, 'price', None) and getattr(item.price, 'product', None):
+                        if hasattr(item.price.product, 'metadata'):
+                            product_id_str = item.price.product.metadata.get('product_id')
+
                     items_data.append({
+                        "product_id": int(product_id_str) if product_id_str else None,
                         "description": item.description,
                         "quantity": item.quantity,
                         "amount_total": item.amount_total,
@@ -226,6 +232,7 @@ async def process_stripe_event(event: dict):
                         customer_address=json.dumps(customer_info.get('address', {})),
                         status=models.OrderStatus.PAID,
                         items_json=json.dumps(items_data) if items_data else None,
+                        fulfillment_mode=fulfillment_mode,
                         created_at=datetime.utcnow()
                     )
                     session.add(order)
@@ -244,7 +251,26 @@ async def process_stripe_event(event: dict):
                         order.customer_name = customer_info.get('name', order.customer_name)
                         order.customer_phone = customer_info.get('phone', order.customer_phone)
                         order.customer_address = json.dumps(customer_info.get('address', {}))
+                        order.fulfillment_mode = fulfillment_mode
                         
+                        # Idempotency lock for stock deduction
+                        if not order.inventory_deducted:
+                            order.inventory_deducted = True
+                            from routers.catalog import persist_product_changes
+                            import schemas
+                            for item in items_data:
+                                p_id = item.get("product_id")
+                                qty = item.get("quantity", 0)
+                                if p_id and qty > 0:
+                                    db_product = await session.execute(select(models.Product).where(models.Product.id == p_id))
+                                    p_obj = db_product.scalar_one_or_none()
+                                    if p_obj:
+                                        p_obj.stock = max(0, p_obj.stock - qty)
+                                        # Write back to JSON
+                                        p_dict = schemas.Product.from_orm(p_obj).dict()
+                                        persist_product_changes(p_dict)
+                                        print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
+
                     await session.commit()
                     print(f"Order {order.id} marked as PAID with comprehensive details.")
 

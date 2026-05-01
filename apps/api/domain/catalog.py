@@ -62,3 +62,41 @@ async def delete_product_service(db: AsyncSession, product_id: int):
         await db.commit()
         return True
     return False
+
+async def validate_inventory_service(db: AsyncSession, validation_items: List[dict]):
+    """
+    Validates multiple products' inventory and returns canonical pricing.
+    """
+    results = []
+    all_valid = True
+    for item in validation_items:
+        query = select(models.Product).where(models.Product.id == item['product_id'])
+        result = await db.execute(query)
+        product = result.scalar_one_or_none()
+        
+        if not product:
+            results.append({
+                "product_id": item['product_id'],
+                "name": "Unknown Product",
+                "price": 0,
+                "requested_quantity": item['requested_quantity'],
+                "available_stock": 0,
+                "is_available": False
+            })
+            all_valid = False
+            continue
+            
+        is_available = product.stock >= item['requested_quantity']
+        if not is_available:
+            all_valid = False
+            
+        results.append({
+            "product_id": product.id,
+            "name": product.name,
+            "price": product.price,
+            "requested_quantity": item['requested_quantity'],
+            "available_stock": product.stock,
+            "is_available": is_available
+        })
+        
+    return {"valid": all_valid, "results": results}
