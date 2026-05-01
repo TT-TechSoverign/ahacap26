@@ -13,6 +13,21 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald', display: 'swap' });
 
+export const metadata: Metadata = {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com'),
+    title: {
+        template: '%s | Affordable Home A/C',
+        default: 'Affordable Home A/C | Ductless Mini Split & Air Conditioning Hawaii',
+    },
+    description: 'We provide affordable air conditioning, ductless mini split installation, and window AC cleaning services across Oahu, Hawaii.',
+    openGraph: {
+        type: 'website',
+        locale: 'en_US',
+        url: '/',
+        siteName: 'Affordable Home A/C',
+    },
+};
+
 export default function RootLayout({
     children,
 }: {

@@ -12,7 +12,7 @@ import path from 'path';
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://affordablehome-ac.com';
+    const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com';
 
     let data = contentData;
     try {
@@ -42,18 +42,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     cityRoutes.sort((a, b) => a.localeCompare(b));
 
     // 1. Define Static Routes (Always included)
+    // NOTE: Routes with hash fragments (e.g., /shop#dual_inverter) have been removed 
+    // to comply with Google Sitemap protocol and avoid "Crawled - currently not indexed" bloat.
     const staticRoutes = [
         '',
         '/shop',
-        '/shop#dual_inverter',    // LG
-        '/shop#ge',               // GE
-        '/shop#rebate',           // Hawaii Energy
         '/contact',
         '/mini_split_ac',
-        '/mini_split_ac#mitsubishi-electric',
-        '/mini_split_ac#fujitsu',
-        '/mini_split_ac#daikin',
-        '/mini_split_ac#carrier',
         '/mini_split_ac_maintenance',
         '/window_ac_maintenance',
         '/service-areas',

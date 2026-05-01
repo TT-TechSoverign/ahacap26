@@ -18,7 +18,6 @@ Sentry.init({
     replaysSessionSampleRate: 0.1,
 
     integrations: [
-        // @ts-expect-error - Replay exists in v7 runtime but TypeScript definition may be incomplete here
         new Sentry.Replay({
             // Additional Replay configuration goes here,
             maskAllText: true,
