@@ -223,15 +223,15 @@ export default function ProductDetailPage() {
                             <div className="grid grid-cols-2 gap-y-4 gap-x-4 items-start relative z-10 text-xs md:text-left">
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Dimensions</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.dimensions || 'N/A'}</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dimensions || specs?.dimensions || 'N/A'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Weight</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.weight || 'N/A'}</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.weight ? `${product.weight} LBS` : specs?.weight || 'N/A'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-500 text-[9px] font-header font-black uppercase tracking-widest">Manufacturer Warranty</span>
-                                    <span className="text-rose-400 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.warranty || '1 YEAR LIMITED'}</span>
+                                    <span className="text-rose-400 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.warranty || specs?.warranty || '1 YEAR LIMITED'}</span>
                                 </div>
                                 {product.dehumidification && (
                                     <div className="flex flex-col gap-1 items-center md:items-start">

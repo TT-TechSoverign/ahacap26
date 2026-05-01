@@ -81,7 +81,10 @@ async def fix_schema():
             ("performance_specs", "VARCHAR"),
             ("key_spec", "VARCHAR"),
             ("noise_level", "VARCHAR"),
-            ("dehumidification", "VARCHAR")
+            ("dehumidification", "VARCHAR"),
+            ("dimensions", "VARCHAR"),
+            ("weight", "VARCHAR"),
+            ("warranty", "VARCHAR")
         ]
 
         for col, dtype in product_cols:

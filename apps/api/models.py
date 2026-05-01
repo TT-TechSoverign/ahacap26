@@ -37,6 +37,9 @@ class Product(Base):
     key_spec = Column(String, nullable=True)
     noise_level = Column(String, nullable=True)
     dehumidification = Column(String, nullable=True)
+    dimensions = Column(String, nullable=True)
+    weight = Column(String, nullable=True)
+    warranty = Column(String, nullable=True)
 
 class Lead(Base):
     __tablename__ = "leads"

@@ -13,7 +13,10 @@
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "44dB Ultra-Quiet Mode",
-        "dehumidification": "2.3 Pts/Hr"
+        "dehumidification": "2.3 Pts/Hr",
+        "dimensions": "11.7 x 19.4 x 19.4",
+        "weight": "44.1",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -29,7 +32,10 @@
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "ThinQ\u00ae Smart Control",
-        "dehumidification": "2.8 Pts/Hr"
+        "dehumidification": "2.8 Pts/Hr",
+        "dimensions": "11.7 x 19.4 x 19.4",
+        "weight": "55.1",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -45,7 +51,10 @@
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "2024 ENERGY STAR\u00ae Most Efficient",
-        "dehumidification": "3.3 Pts/Hr"
+        "dehumidification": "3.3 Pts/Hr",
+        "dimensions": "11.7 x 19.4 x 19.4",
+        "weight": "58.4",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -61,7 +70,10 @@
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "Gold Fin\u2122 Anti-Corrosive Coating",
-        "dehumidification": "3.8 Pts/Hr"
+        "dehumidification": "3.8 Pts/Hr",
+        "dimensions": "11.7 x 19.4 x 19.4",
+        "weight": "63.1",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -77,7 +89,10 @@
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "4-Way Air Directional Control",
-        "dehumidification": "4.4 Pts/Hr"
+        "dehumidification": "4.4 Pts/Hr",
+        "dimensions": "14.9 x 23.6 x 24.8",
+        "weight": "89",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -93,7 +108,10 @@
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
         "voltage": "208/230V / 20 Amp",
         "performance_specs": "High-Capacity Moisture Removal",
-        "dehumidification": "5.5 Pts/Hr"
+        "dehumidification": "5.5 Pts/Hr",
+        "dimensions": "14.9 x 23.6 x 24.8",
+        "weight": "99",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -109,7 +127,10 @@
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
         "voltage": "208/230V / 20 Amp",
         "performance_specs": "Industrial-Grade Titan Cooling",
-        "dehumidification": "7.1 Pts/Hr"
+        "dehumidification": "7.1 Pts/Hr",
+        "dimensions": "17.7 x 25.9 x 28.1",
+        "weight": "112",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -125,7 +146,10 @@
         "image_url": "/assets/window-unit-images/lg-universal-fit-unit-photos-1600x1000/LW8023HRSM.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "Dual-Climate",
-        "dehumidification": "2.1 Pts/Hr"
+        "dehumidification": "2.1 Pts/Hr",
+        "dimensions": "14.4 x 23.6 x 22.2",
+        "weight": "74",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -141,7 +165,10 @@
         "image_url": "/assets/window-unit-images/lg-universal-fit-unit-photos-1600x1000/LW1823HRSM.svg",
         "voltage": "208/230V / 20 Amp",
         "performance_specs": "ThinQ\u00ae Smart Control",
-        "dehumidification": "4.8 Pts/Hr"
+        "dehumidification": "4.8 Pts/Hr",
+        "dimensions": "16.8 x 25.9 x 25.4",
+        "weight": "115",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -157,7 +184,10 @@
         "image_url": "/assets/window-unit-images/lg-universal-fit-unit-photos-1600x1000/LW2423HRSM.svg",
         "voltage": "208/230V / 20 Amp",
         "performance_specs": "Industrial-Grade Cooling & Heating",
-        "dehumidification": "6.8 Pts/Hr"
+        "dehumidification": "6.8 Pts/Hr",
+        "dimensions": "16.8 x 25.9 x 25.4",
+        "weight": "129",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -173,7 +203,10 @@
         "image_url": "/assets/window-unit-images/lg-base-standard-units/lg-base-standard-lw8024rd-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "High-Velocity Airflow",
-        "dehumidification": "2.1 Pts/Hr"
+        "dehumidification": "2.1 Pts/Hr",
+        "dimensions": "12.2 x 18.2 x 15",
+        "weight": "49",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -189,7 +222,10 @@
         "image_url": "/assets/window-unit-images/lg-base-standard-units/lg-base-standard-lw8024rd-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "ThinQ\u00ae Smart Control",
-        "dehumidification": "3.8 Pts/Hr"
+        "dehumidification": "3.8 Pts/Hr",
+        "dimensions": "15.0 x 23.6 x 22.2",
+        "weight": "82",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -205,7 +241,10 @@
         "image_url": "/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "True Universal Fit",
-        "dehumidification": "2.1 Pts/Hr"
+        "dehumidification": "2.1 Pts/Hr",
+        "dimensions": "15.6 x 26 x 21.8",
+        "weight": "72",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -221,7 +260,10 @@
         "image_url": "/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "High-Velocity Airflow",
-        "dehumidification": "2.7 Pts/Hr"
+        "dehumidification": "2.7 Pts/Hr",
+        "dimensions": "15.6 x 26 x 21.8",
+        "weight": "77",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -237,7 +279,10 @@
         "image_url": "/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
         "performance_specs": "Power Failure Recovery",
-        "dehumidification": "3.4 Pts/Hr"
+        "dehumidification": "3.4 Pts/Hr",
+        "dimensions": "15.6 x 26 x 21.8",
+        "weight": "81",
+        "warranty": "1 YEAR LIMITED"
     },
     {
         "category": "WINDOW_AC",
@@ -253,6 +298,9 @@
         "image_url": "/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A.svg",
         "voltage": "N/A",
         "performance_specs": "Quick Snap Assembly",
-        "dehumidification": "N/A"
+        "dehumidification": "N/A",
+        "dimensions": "15.8 x 26.0 x 16.9",
+        "weight": "16",
+        "warranty": "1 YEAR LIMITED"
     }
 ]
