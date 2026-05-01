@@ -51,7 +51,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                 
                 <div className="text-center mb-4">
                     <h2 className="font-header font-black text-3xl md:text-4xl text-white uppercase tracking-tight drop-shadow-lg">
-                        Engineering Comfort for <span className="text-[#00E5FF] drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]">{city}</span> Homes
+                        Dedicated AC Services for <span className="text-[#00E5FF] drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]">{city}</span> Homes
                     </h2>
                 </div>
 
@@ -59,25 +59,41 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                     {/* Educational Block 1: Hitting Clusters 1, 2 & 3 (Affordability, Local, Oahu Broad) */}
                     <div className="p-8 rounded-sm bg-slate-900 border border-slate-800 hover:border-[#00E5FF]/40 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all duration-300 relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <h3 className="font-header font-black text-xl md:text-2xl text-white uppercase mb-4 flex items-center gap-3 tracking-widest relative z-10">
+                        <h3 className="font-header font-black text-xl md:text-2xl text-white uppercase mb-6 flex items-center gap-3 tracking-widest relative z-10">
                             <LucideIcons.ThermometerSun className="w-6 h-6 text-[#00E5FF]" />
                             Climate Adaptation
                         </h3>
-                        <p className="font-sans text-sm text-slate-300 leading-relaxed font-light relative z-10">
-                            When residents search for reliable, <Link href="/contact" className="font-bold text-[#00E5FF] hover:underline">affordable air conditioning</Link> built for the islands, they quickly realize that standard off-the-shelf units won&apos;t survive. In {city}, your HVAC system is constantly battling {context.climateChallenge}. This unique micro-climate forces standard compressors to overwork, leading to high electricity bills and the inevitable need for <Link href="/contact" className="font-bold text-[#00E5FF] hover:underline">ac repair near me</Link>. Instead of gambling with unvetted contractors, trust the established authority for <Link href="/" className="font-bold text-[#00E5FF] hover:underline">air conditioning Oahu</Link> relies on.
-                        </p>
+                        <div className="font-sans text-sm md:text-base text-slate-300 leading-relaxed font-light relative z-10 space-y-4">
+                            <p>
+                                When residents search for reliable, <Link href="/contact" className="font-bold text-[#00E5FF] hover:underline">affordable air conditioning</Link> built for the islands, they quickly realize that standard off-the-shelf units won&apos;t survive. 
+                            </p>
+                            <p>
+                                In {city}, your HVAC system is constantly battling <strong>{context.climateChallenge}</strong>. This unique micro-climate forces standard compressors to overwork, leading to high electricity bills and the inevitable need for <Link href="/contact" className="font-bold text-[#00E5FF] hover:underline">ac repair near me</Link>.
+                            </p>
+                            <p>
+                                Instead of gambling with unvetted contractors, trust the established authority for <Link href="/" className="font-bold text-[#00E5FF] hover:underline">air conditioning Oahu</Link> relies on.
+                            </p>
+                        </div>
                     </div>
 
                     {/* Educational Block 2: Hitting Clusters 4 & 5 (Products, Split Systems, Inverters) */}
                     <div className="p-8 rounded-sm bg-slate-900 border border-slate-800 hover:border-[#00E5FF]/40 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all duration-300 relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <h3 className="font-header font-black text-xl md:text-2xl text-white uppercase mb-4 flex items-center gap-3 tracking-widest relative z-10">
+                        <h3 className="font-header font-black text-xl md:text-2xl text-white uppercase mb-6 flex items-center gap-3 tracking-widest relative z-10">
                             <LucideIcons.Settings className="w-6 h-6 text-[#00E5FF]" />
                             Specialized Cooling
                         </h3>
-                        <p className="font-sans text-sm text-slate-300 leading-relaxed font-light relative z-10">
-                            At Affordable Home A/C, we don&apos;t just sell boxes from a local <Link href="/shop" className="font-bold text-[#00E5FF] hover:underline">ac shop</Link>; we deploy specialized cooling infrastructure. When island residents look for the most efficient <Link href="/mini_split_ac" className="font-bold text-[#00E5FF] hover:underline">split ac units Hawaii</Link> has to offer, they trust our dedicated team. Whether you need a premium <Link href="/shop#dual_inverter" className="font-bold text-[#00E5FF] hover:underline">dual inverter air conditioner</Link> for a single room, or the seamless <Link href={`/contact?city=${city}&service=Mini+Split+Estimate+(New)`} className="font-bold text-[#00E5FF] hover:underline">split ac installation Oahu</Link> homes require for whole-house cooling, we utilize {context.techFocus} so your system is equipped to {context.benefit}
-                        </p>
+                        <div className="font-sans text-sm md:text-base text-slate-300 leading-relaxed font-light relative z-10 space-y-4">
+                            <p>
+                                At Affordable Home A/C, we don&apos;t just sell boxes from a local <Link href="/shop" className="font-bold text-[#00E5FF] hover:underline">ac shop</Link>; we deploy specialized cooling infrastructure designed to last.
+                            </p>
+                            <p>
+                                When island residents look for the most efficient <Link href="/mini_split_ac" className="font-bold text-[#00E5FF] hover:underline">split ac units Hawaii</Link> has to offer, they trust our dedicated team. Whether you need a premium <Link href="/shop#dual_inverter" className="font-bold text-[#00E5FF] hover:underline">dual inverter air conditioner</Link> for a single room, or the seamless <Link href={`/contact?city=${city}&service=Mini+Split+Estimate+(New)`} className="font-bold text-[#00E5FF] hover:underline">split ac installation Oahu</Link> homes require for whole-house cooling.
+                            </p>
+                            <p>
+                                We utilize <strong>{context.techFocus}</strong> so your system is equipped to {context.benefit}
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -85,13 +101,21 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                 <div className="p-8 rounded-sm bg-slate-900 border border-slate-800 hover:border-[#00E5FF]/40 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all duration-300 relative overflow-hidden group mt-4">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#00E5FF]/5 to-transparent blur-[30px] pointer-events-none transition-opacity duration-300 opacity-50 group-hover:opacity-100" />
                     
-                    <h3 className="font-header font-black text-xl md:text-2xl text-white uppercase mb-4 flex items-center gap-3 tracking-widest relative z-10">
+                    <h3 className="font-header font-black text-xl md:text-2xl text-white uppercase mb-6 flex items-center gap-3 tracking-widest relative z-10">
                         <LucideIcons.AlertTriangle className="w-6 h-6 text-[#00E5FF]" />
                         The Silent Threat: Salt Air & Mold
                     </h3>
-                    <p className="font-sans text-sm md:text-base text-slate-300 leading-relaxed font-light relative z-10">
-                        Did you know that the humidity in {city} can cause toxic mold to grow deep inside your unit? Combined with silent salt-air corrosion, an unmaintained system quickly becomes a health hazard and leads to unexpected breakdowns. Whether you need urgent <Link href="/contact" className="font-bold text-[#00E5FF] hover:underline">air conditioning repair Oahu</Link> homeowners trust, routine <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">affordable ac maintenance</Link>, or a comprehensive <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">split ac service</Link>, our licensed technicians are ready. Our intensive <Link href="/window_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">window ac cleaning service</Link> and ductless sanitization protocols destroy mold at the root and apply specialized corrosion inhibitors to extend the life of your equipment.
-                    </p>
+                    <div className="font-sans text-sm md:text-base text-slate-300 leading-relaxed font-light relative z-10 space-y-4">
+                        <p>
+                            Did you know that the humidity in {city} can cause toxic mold to grow deep inside your unit? Combined with silent salt-air corrosion, an unmaintained system quickly becomes a health hazard and leads to unexpected breakdowns. 
+                        </p>
+                        <p>
+                            Whether you need urgent <Link href="/contact" className="font-bold text-[#00E5FF] hover:underline">air conditioning repair Oahu</Link> homeowners trust, routine <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">affordable ac maintenance</Link>, or a comprehensive <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">split ac service</Link>, our licensed technicians are ready. 
+                        </p>
+                        <p>
+                            Our intensive <Link href="/window_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">window ac cleaning service</Link> and ductless sanitization protocols destroy mold at the root and apply specialized corrosion inhibitors to extend the life of your equipment.
+                        </p>
+                    </div>
                 </div>
 
                 {/* Trust & Guarantee Section: Reinforcing the Local Entity */}
