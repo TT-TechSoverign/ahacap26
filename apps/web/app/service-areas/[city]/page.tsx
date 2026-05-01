@@ -50,7 +50,7 @@ export function generateMetadata({ params }: Props): Metadata {
         openGraph: {
             title: `Reliable Air Conditioning Services in ${cityData.name}`,
             description: `Need AC repair or a new unit in ${cityData.name}? We provide premium ductless mini-splits and window units across Oahu.`,
-            url: `https://www.affordablehomeac.com/service-areas/${params.city}`,
+            url: `https://www.affordablehome-ac.com/service-areas/${params.city}`,
             siteName: 'Affordable Home A/C',
             locale: 'en_US',
             type: 'website',
@@ -97,7 +97,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                     </h1>
                     
                     <p className="font-sans text-lg md:text-xl text-slate-300 font-medium max-w-2xl leading-relaxed">
-                        From ultra-quiet mini-splits to premium window units, we engineer cooling systems specifically designed to handle Hawaii's extreme humidity and coastal air.
+                        From ultra-quiet mini-splits to premium window units, we engineer cooling systems specifically designed to handle Hawaii&apos;s extreme humidity and coastal air.
                     </p>
                 </div>
             </section>
@@ -116,8 +116,8 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         "@context": "https://schema.org",
                         "@type": "HVACBusiness",
                         "name": "Affordable Home A/C",
-                        "image": "https://www.affordablehomeac.com/assets/logo.png",
-                        "url": "https://www.affordablehomeac.com",
+                        "image": "https://www.affordablehome-ac.com/assets/logo.png",
+                        "url": "https://www.affordablehome-ac.com",
                         "areaServed": {
                             "@type": "City",
                             "name": cityData.name,
