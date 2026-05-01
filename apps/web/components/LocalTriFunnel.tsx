@@ -16,7 +16,7 @@ export default function LocalTriFunnel({ city }: LocalTriFunnelProps) {
             
             <div className="relative z-10 max-w-7xl mx-auto px-6 mb-12 text-center">
                 <h2 className="font-header font-black text-3xl md:text-5xl text-white uppercase tracking-tighter mb-4">
-                    Expert AC Services in <span className="text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">{city}</span>
+                    Reliable AC Services in <span className="text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">{city}</span>
                 </h2>
                 <div className="w-24 h-1 bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.6)] rounded-full mx-auto" />
             </div>
