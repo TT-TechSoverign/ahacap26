@@ -45,10 +45,10 @@ export function generateMetadata({ params }: Props): Metadata {
     if (!cityData) return { title: 'Service Area Not Found' };
 
     return {
-        title: `Expert Air Conditioning Services in ${cityData.name}, Oahu | Affordable Home A/C`,
+        title: `Reliable Air Conditioning Services in ${cityData.name}, Oahu | Affordable Home A/C`,
         description: `Top-rated Mini-Split Installation, Window AC Sales, and Deep Cleaning services for ${cityData.name} residents. Local ${cityData.regionTitle} inventory available.`,
         openGraph: {
-            title: `Expert Air Conditioning Services in ${cityData.name}`,
+            title: `Reliable Air Conditioning Services in ${cityData.name}`,
             description: `Need AC repair or a new unit in ${cityData.name}? We provide premium ductless mini-splits and window units across Oahu.`,
             url: `https://www.affordablehomeac.com/service-areas/${params.city}`,
             siteName: 'Affordable Home A/C',
