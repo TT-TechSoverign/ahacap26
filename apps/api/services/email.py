@@ -41,9 +41,14 @@ async def verify_connection():
 
     try:
         logger.info(f"🔌 Testing SMTP Connection to {SMTP_SERVER}:{SMTP_PORT}...")
-        async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
-            await smtp.login(SMTP_USER, SMTP_PASSWORD)
-            logger.info("✅ SMTP Connection Verified.")
+        if SMTP_PORT == 587:
+            async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, start_tls=True) as smtp:
+                await smtp.login(SMTP_USER, SMTP_PASSWORD)
+                logger.info("✅ SMTP Connection Verified (STARTTLS).")
+        else:
+            async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
+                await smtp.login(SMTP_USER, SMTP_PASSWORD)
+                logger.info("✅ SMTP Connection Verified (SSL).")
     except Exception as e:
         logger.error(f"❌ SMTP Connection FAILED: {e}")
 
@@ -461,12 +466,21 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
     def _send_both_emails():
         try:
-            with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
-                server.login(SMTP_USER, SMTP_PASSWORD)
-                # Send Client Email
-                send_email_with_attachments(to_email, subject, client_html_body, None, images, server=server)
-                # Send Admin Email
-                send_email_with_attachments(admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None, server=server)
+            if SMTP_PORT == 587:
+                with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+                    server.starttls()
+                    server.login(SMTP_USER, SMTP_PASSWORD)
+                    # Send Client Email
+                    send_email_with_attachments(to_email, subject, client_html_body, None, images, server=server)
+                    # Send Admin Email
+                    send_email_with_attachments(admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None, server=server)
+            else:
+                with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+                    server.login(SMTP_USER, SMTP_PASSWORD)
+                    # Send Client Email
+                    send_email_with_attachments(to_email, subject, client_html_body, None, images, server=server)
+                    # Send Admin Email
+                    send_email_with_attachments(admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None, server=server)
         except Exception as e:
             logger.error(f"❌ SMTP Connection failed for order {order_id}: {e} - Retrying due to tenacity exception...")
             import traceback
@@ -653,9 +667,14 @@ async def send_inquiry_notification(lead):
 
         # Send
         logger.info(f"Connecting to SMTP {SMTP_SERVER}...")
-        async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
-            await smtp.login(SMTP_USER, SMTP_PASSWORD)
-            await smtp.send_message(msg)
+        if SMTP_PORT == 587:
+            async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, start_tls=True) as smtp:
+                await smtp.login(SMTP_USER, SMTP_PASSWORD)
+                await smtp.send_message(msg)
+        else:
+            async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
+                await smtp.login(SMTP_USER, SMTP_PASSWORD)
+                await smtp.send_message(msg)
             
         logger.info(f"✅ Inquiry Notification Sent to {len(recipients)} recipients.")
 
