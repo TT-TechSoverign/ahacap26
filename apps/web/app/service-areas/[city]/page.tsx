@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import LocalTriFunnel from '@/components/LocalTriFunnel';
+import LocalServiceFunnel from '@/components/LocalServiceFunnel';
 import LocalizedSEOBody from '@/components/LocalizedSEOBody';
 import contentData from '@/lib/content/content.json';
 import Image from 'next/image';
@@ -60,12 +60,12 @@ export function generateMetadata({ params }: Props): Metadata {
     if (!cityData) return { title: 'Service Area Not Found' };
 
     return {
-        title: `Reliable Air Conditioning Services in ${cityData.name}, Oahu | Affordable Home A/C`,
-        description: `Top-rated Mini-Split Installation, Window AC Sales, and Deep Cleaning services for ${cityData.name} residents. Local ${cityData.regionTitle} inventory available.`,
+        title: `Affordable Air Conditioning & Split AC Installation in ${cityData.name}, Oahu`,
+        description: `Need AC repair near me in ${cityData.name}? We provide affordable air conditioning, split AC installation, and window AC cleaning services across Oahu.`,
         openGraph: {
-            title: `Reliable Air Conditioning Services in ${cityData.name}`,
-            description: `Need AC repair or a new unit in ${cityData.name}? We provide premium ductless mini-splits and window units across Oahu.`,
-            url: `https://www.affordablehome-ac.com/service-areas/${params.city}`,
+            title: `Affordable Air Conditioning in ${cityData.name}`,
+            description: `Looking for split ac units Hawaii? We provide premium ductless mini-splits and window ac cleaning services in ${cityData.name}.`,
+            url: `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`,
             siteName: 'Affordable Home A/C',
             locale: 'en_US',
             type: 'website',
@@ -120,8 +120,8 @@ export default function LocalServiceAreaPage({ params }: Props) {
                 </div>
             </section>
 
-            {/* 2. TRI-CONVERSION FUNNEL */}
-            <LocalTriFunnel city={cityData.name} />
+            {/* 2. QUAD-CONVERSION FUNNEL */}
+            <LocalServiceFunnel city={cityData.name} />
 
             {/* 3. DYNAMIC EDUCATIONAL SEO BODY */}
             <LocalizedSEOBody city={cityData.name} regionId={cityData.regionId} />
@@ -144,7 +144,48 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 "name": "Hawaii"
                             }
                         },
-                        "priceRange": "$$"
+                        "priceRange": "$$",
+                        "hasOfferCatalog": {
+                            "@type": "OfferCatalog",
+                            "name": "Air Conditioning Services",
+                            "itemListElement": [
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Affordable Air Conditioning" } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Split AC Installation Oahu" } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC Cleaning Service" } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AC Repair Near Me" } }
+                            ]
+                        }
+                    })
+                }}
+            />
+
+            {/* 5. DYNAMIC BREADCRUMB SCHEMA.ORG */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://www.affordablehome-ac.com"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Service Areas",
+                                "item": "https://www.affordablehome-ac.com/service-areas"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": cityData.name,
+                                "item": `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`
+                            }
+                        ]
                     })
                 }}
             />
