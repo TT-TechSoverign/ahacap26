@@ -88,19 +88,19 @@ export default function ProductDetailPage() {
 
     // Spec Sheet Mapping
     const specSheetMap: { [key: number]: string } = {
-        1: '/assets/specsheets/ge/GE-AJCQ08AWJ-spec-sheet.pdf',
-        2: '/assets/specsheets/ge/GE-AJCQ10AWJ-spec-sheet.pdf',
-        3: '/assets/specsheets/ge/GE-AJCQ12AWJ-spec-sheet.pdf',
-        4: '/assets/specsheets/lg-dual-inverter+wifi/LW6023IVSM_spec_sheet-1.pdf',
-        5: '/assets/specsheets/lg-dual-inverter+wifi/LW8022IVSM-Spec-Sheet.pdf',
-        6: '/assets/specsheets/lg-dual-inverter+wifi/LW1022IVSM-Spec-Sheet.pdf',
-        7: '/assets/specsheets/lg-dual-inverter+wifi/LW1222IVSM-Spec-Sheet.pdf',
-        8: '/assets/specsheets/lg-dual-inverter+wifi/LW1522IVSM-Spec-Sheet-1.pdf',
-        9: '/assets/specsheets/lg-dual-inverter+wifi/LW1822IVSM-Spec-Sheet-1.pdf',
-        10: '/assets/specsheets/lg-dual-inverter+wifi/LW2422IVSM-Spec-Sheet-1.pdf',
-        11: '/assets/specsheets/lg-universal-fit+wifi/LW8023HRSM_spec_sheet.pdf',
-        12: '/assets/specsheets/lg-universal-fit+wifi/LW1823HRSM_spec_sheet.pdf',
-        13: '/assets/specsheets/lg-universal-fit+wifi/LW2423HRSM_spec_sheet.pdf',
+        1: '/assets/specsheets/lg-dual-inverter+wifi/LW6023IVSM_spec_sheet-1.pdf',
+        2: '/assets/specsheets/lg-dual-inverter+wifi/LW8022IVSM-Spec-Sheet.pdf',
+        3: '/assets/specsheets/lg-dual-inverter+wifi/LW1022IVSM-Spec-Sheet.pdf',
+        4: '/assets/specsheets/lg-dual-inverter+wifi/LW1222IVSM-Spec-Sheet.pdf',
+        5: '/assets/specsheets/lg-dual-inverter+wifi/LW1522IVSM-Spec-Sheet-1.pdf',
+        6: '/assets/specsheets/lg-dual-inverter+wifi/LW1822IVSM-Spec-Sheet-1.pdf',
+        7: '/assets/specsheets/lg-dual-inverter+wifi/LW2422IVSM-Spec-Sheet-1.pdf',
+        8: '/assets/specsheets/lg-universal-fit+wifi/LW8023HRSM_spec_sheet.pdf',
+        9: '/assets/specsheets/lg-universal-fit+wifi/LW1823HRSM_spec_sheet.pdf',
+        10: '/assets/specsheets/lg-universal-fit+wifi/LW2423HRSM_spec_sheet.pdf',
+        13: '/assets/specsheets/ge/GE-AJCQ08AWJ-spec-sheet.pdf',
+        14: '/assets/specsheets/ge/GE-AJCQ10AWJ-spec-sheet.pdf',
+        15: '/assets/specsheets/ge/GE-AJCQ12AWJ-spec-sheet.pdf',
     };
 
     const specSheetUrl = product ? specSheetMap[product.id] : null;
