@@ -73,7 +73,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                         The Silent Threat: Salt Air & Mold
                     </h3>
                     <p className="font-sans text-base text-slate-400 leading-relaxed">
-                        Did you know that the humidity in {city} can cause toxic mold to grow deep inside your unit? Combined with silent salt-air corrosion, an unmaintained unit quickly becomes a health hazard. That is why our professional <strong>window ac cleaning service</strong> completely sanitizes your system, destroying mold at the root and applying specialized corrosion inhibitors to extend the life of your equipment.
+                        Did you know that the humidity in {city} can cause toxic mold to grow deep inside your unit? Combined with silent salt-air corrosion, an unmaintained system quickly becomes a health hazard and leads to unexpected breakdowns. Whether you need urgent <strong>air conditioning repair Oahu</strong> homeowners trust, routine <strong>affordable ac maintenance</strong>, or a specialized <strong>split ac service</strong>, our licensed technicians are ready. Our comprehensive <strong>window ac cleaning service</strong> and ductless sanitization protocols destroy mold at the root and apply specialized corrosion inhibitors to extend the life of your equipment.
                     </p>
                 </div>
 
