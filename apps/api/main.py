@@ -148,7 +148,10 @@ async def process_stripe_event(event: dict):
     payment_info = {"brand": "Credit Card", "last4": ""}
 
     try:
-        obj = event['data']['object']
+        # Parse raw payload as standard dict to safely use .get() and bypass StripeObject wrapper
+        import json
+        payload_data = json.loads(payload)
+        obj = payload_data['data']['object']
         
         # Determine Source
         if event['type'] == 'payment_intent.succeeded':
