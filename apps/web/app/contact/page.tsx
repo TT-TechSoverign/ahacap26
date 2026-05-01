@@ -4,6 +4,7 @@ import { DispatchWizard } from '@/components/DispatchWizard';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
+import { Suspense } from 'react';
 
 export default function ContactPage() {
     const { content } = useContent();
@@ -47,7 +48,9 @@ export default function ContactPage() {
                             </div>
 
                             <div className="relative z-10 px-0 md:px-4">
-                                <DispatchWizard />
+                                <Suspense fallback={<div className="p-8 text-center text-primary font-mono text-[10px] uppercase tracking-widest animate-pulse">Loading Wizard Interface...</div>}>
+                                    <DispatchWizard />
+                                </Suspense>
                             </div>
                         </div>
                     </div>

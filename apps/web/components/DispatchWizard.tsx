@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { EditableText } from './EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
 import { sendGAEvent } from '@next/third-parties/google';
+import { useSearchParams } from 'next/navigation';
 
 export function DispatchWizard() {
     const { content } = useContent();
@@ -13,6 +14,7 @@ export function DispatchWizard() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const searchParams = useSearchParams();
 
     // Split state for better UX
     const [formData, setFormData] = useState({
@@ -35,6 +37,19 @@ export function DispatchWizard() {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
+
+    // Auto-fill from search params
+    useEffect(() => {
+        const cityParam = searchParams?.get('city');
+        const serviceParam = searchParams?.get('service');
+
+        if (cityParam && !formData.city) {
+            setFormData(prev => ({ ...prev, city: cityParam }));
+        }
+        if (serviceParam && !selectedServices.includes(serviceParam)) {
+            setSelectedServices(prev => [...prev, serviceParam]);
+        }
+    }, [searchParams]);
 
     const handleServiceToggle = (service: string) => {
         setSelectedServices(prev =>
