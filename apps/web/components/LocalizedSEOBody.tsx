@@ -47,21 +47,34 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
         <section className="relative w-full bg-[#05070A] py-20 px-6 border-t border-white/5">
             <div className="max-w-4xl mx-auto flex flex-col gap-12">
                 
-                {/* Educational Block 1: Hitting Clusters 1, 2 & 3 (Affordability, Local, Oahu Broad) */}
-                <div className="space-y-6">
+                <div className="text-center mb-4">
                     <h2 className="font-header font-black text-3xl md:text-4xl text-white uppercase tracking-tight">
                         Engineering Comfort for <span className="text-cyan-500">{city}</span> Homes
                     </h2>
-                    <p className="font-sans text-lg text-slate-300 leading-relaxed font-medium">
-                        When residents search for reliable, <strong>affordable air conditioning</strong> built for the islands, they quickly realize that standard off-the-shelf units won&apos;t survive. In {city}, your HVAC system is constantly battling {context.climateChallenge}. This unique micro-climate forces standard compressors to overwork, leading to high electricity bills and the inevitable need for <strong>ac repair near me</strong>. Instead of gambling with unvetted contractors, trust the established authority for <strong>air conditioning Oahu</strong> relies on.
-                    </p>
                 </div>
 
-                {/* Educational Block 2: Hitting Clusters 4 & 5 (Products, Split Systems, Inverters) */}
-                <div className="space-y-6">
-                    <p className="font-sans text-lg text-slate-300 leading-relaxed font-medium">
-                        At Affordable Home A/C, we don&apos;t just sell boxes from a local <strong>ac shop</strong>; we deploy specialized cooling infrastructure. When island residents look for the most efficient <strong>split ac units Hawaii</strong> has to offer, they trust our dedicated team. Whether you need a premium <strong>dual inverter air conditioner</strong> for a single room, or the seamless <strong>split ac installation Oahu</strong> homes require for whole-house cooling, we utilize {context.techFocus} so your system is equipped to {context.benefit}
-                    </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Educational Block 1: Hitting Clusters 1, 2 & 3 (Affordability, Local, Oahu Broad) */}
+                    <div className="p-8 rounded-xl bg-white/[0.02] border border-white/10 hover:border-cyan-500/30 transition-all">
+                        <h3 className="font-header font-black text-2xl text-white uppercase mb-4 flex items-center gap-3">
+                            <span className="material-symbols-outlined text-cyan-400">thermostat</span>
+                            Climate Adaptation
+                        </h3>
+                        <p className="font-sans text-sm text-slate-400 leading-relaxed font-medium">
+                            When residents search for reliable, <strong>affordable air conditioning</strong> built for the islands, they quickly realize that standard off-the-shelf units won&apos;t survive. In {city}, your HVAC system is constantly battling {context.climateChallenge}. This unique micro-climate forces standard compressors to overwork, leading to high electricity bills and the inevitable need for <strong>ac repair near me</strong>. Instead of gambling with unvetted contractors, trust the established authority for <strong>air conditioning Oahu</strong> relies on.
+                        </p>
+                    </div>
+
+                    {/* Educational Block 2: Hitting Clusters 4 & 5 (Products, Split Systems, Inverters) */}
+                    <div className="p-8 rounded-xl bg-white/[0.02] border border-white/10 hover:border-cyan-500/30 transition-all">
+                        <h3 className="font-header font-black text-2xl text-white uppercase mb-4 flex items-center gap-3">
+                            <span className="material-symbols-outlined text-cyan-400">precision_manufacturing</span>
+                            Specialized Cooling
+                        </h3>
+                        <p className="font-sans text-sm text-slate-400 leading-relaxed font-medium">
+                            At Affordable Home A/C, we don&apos;t just sell boxes from a local <strong>ac shop</strong>; we deploy specialized cooling infrastructure. When island residents look for the most efficient <strong>split ac units Hawaii</strong> has to offer, they trust our dedicated team. Whether you need a premium <strong>dual inverter air conditioner</strong> for a single room, or the seamless <strong>split ac installation Oahu</strong> homes require for whole-house cooling, we utilize {context.techFocus} so your system is equipped to {context.benefit}
+                        </p>
+                    </div>
                 </div>
 
                 {/* Educational Block 3: The Deep Cleaning Necessity (Maintenance Intent) */}

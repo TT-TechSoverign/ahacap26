@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useContent } from '@/lib/context/ContentContext';
 import * as LucideIcons from 'lucide-react';
+import Link from 'next/link';
 import { BackToTop } from '@/components/BackToTop';
 
 export default function ServiceAreasPage() {
@@ -90,13 +91,13 @@ export default function ServiceAreasPage() {
                                                 {city.description}
                                             </p>
 
-                                            <a 
-                                                href="/contact"
+                                            <Link 
+                                                href={`/service-areas/${city.name.toLowerCase().replace(/ /g, '-')}`}
                                                 className="mt-8 pt-6 w-full border-t border-slate-800/50 flex justify-center items-center gap-3 opacity-60 group-hover:opacity-100 transition-opacity hover:text-[#00E5FF] cursor-pointer"
                                             >
-                                                <span className="text-[10px] text-[#00E5FF] uppercase tracking-widest font-bold">Contact us to schedule appointment</span>
+                                                <span className="text-[10px] text-[#00E5FF] uppercase tracking-widest font-bold">View Local Services</span>
                                                 <LucideIcons.ArrowRight className="w-4 h-4 text-[#00E5FF]" />
-                                            </a>
+                                            </Link>
                                         </div>
                                     );
                                 })}
