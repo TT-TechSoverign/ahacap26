@@ -221,31 +221,62 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
         warning_text = "Note: As our facility is an active distribution hub, unscheduled arrivals cannot be accommodated."
         map_display = "block"
 
-    # --- Item Rows Generation ---
-    rows_html = ""
-    if items:
-        for item in items:
-            name = item.get('description', 'Item')
-            qty = item.get('quantity', 1)
-            amount = item.get('amount_total', 0) / 100.0
-            
-            rows_html += f"""
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 16px 8px; color: #334155;">{name}</td>
-                <td style="padding: 16px 8px; text-align: center; color: #64748b;">{qty}</td>
-                <td style="padding: 16px 8px; text-align: right; color: #0f172a; font-weight: 500;">${amount:,.2f}</td>
-            </tr>
-            """
-    else:
-        rows_html = """
-        <tr>
-            <td colspan="3" style="padding: 24px; text-align: center; color: #94a3b8; font-style: italic;">
-                Order details not available.
-            </td>
-        </tr>
-        """
+    # rows_html moved inside build_email_html for dynamic styling
 
     def build_email_html(is_admin=False):
+        # Dynamic Styling
+        c_main = "#000000" if is_admin else "#0f172a"
+        c_sub = "#000000" if is_admin else "#334155"
+        c_muted = "#000000" if is_admin else "#64748b"
+        c_label = "#000000" if is_admin else "#94a3b8"
+        bg_body = "#ffffff" if is_admin else "#f1f5f9"
+        
+        pad_cont = "12px 16px" if is_admin else "20px 32px"
+        h1_size = "20px" if is_admin else "24px"
+        h2_mar = "14px 0 6px 0" if is_admin else "24px 0 12px 0"
+        h2_pad = "4px" if is_admin else "8px"
+        badge_mar = "8px" if is_admin else "24px"
+        td_pad = "6px 4px" if is_admin else "16px 8px"
+        gap_grid = "10px" if is_admin else "20px"
+        mar_grid = "12px" if is_admin else "24px"
+        
+        print_css = ""
+        if is_admin:
+            print_css = """
+            @media print {
+                body, .container, .content { background: white !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; }
+                h1, h2, p, th, td, span, strong { color: black !important; }
+                .content { padding: 0 !important; }
+                .header { display: none !important; }
+                table { margin-bottom: 8px !important; }
+                .order-badge { border: 1px solid black; background: white !important; color: black !important; }
+            }
+            """
+
+        # --- Item Rows Generation ---
+        rows_html = ""
+        if items:
+            for item in items:
+                name = item.get('description', 'Item')
+                qty = item.get('quantity', 1)
+                amount = item.get('amount_total', 0) / 100.0
+                
+                rows_html += f"""
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: {td_pad}; color: {c_sub};">{name}</td>
+                    <td style="padding: {td_pad}; text-align: center; color: {c_muted};">{qty}</td>
+                    <td style="padding: {td_pad}; text-align: right; color: {c_main}; font-weight: 500;">${amount:,.2f}</td>
+                </tr>
+                """
+        else:
+            rows_html = f"""
+            <tr>
+                <td colspan="3" style="padding: {td_pad}; text-align: center; color: {c_label}; font-style: italic;">
+                    Order details not available.
+                </td>
+            </tr>
+            """
+
         header_html = ""
         if not is_admin:
             header_html = """
@@ -257,8 +288,8 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
         else:
             header_html = """
             <!-- 1. Admin Header -->
-            <div class="header" style="padding: 20px;">
-                 <h1 style="color: #ffffff; margin: 0; font-size: 20px;">AHAC Admin Copy</h1>
+            <div class="header" style="padding: 12px;">
+                 <h1 style="color: #ffffff; margin: 0; font-size: 16px;">AHAC Admin Copy</h1>
             </div>
             """
             
@@ -325,22 +356,22 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f1f5f9; }}
+            body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: {bg_body}; }}
             .container {{ max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 1px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }}
             
             /* Premium Header */
             .header {{ background-color: #0a0e14; padding: 0 0; text-align: center; border-bottom: 1px solid #1e293b; }}
             
             /* Content Area */
-            .content {{ padding: 20px 32px; background-color: #ffffff; }}
+            .content {{ padding: {pad_cont}; background-color: #ffffff; }}
             
             /* Typography */
-            h1 {{ color: #0f172a; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.025em; margin: 0 0 8px 0; }}
-            h2 {{ color: #334155; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 12px 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }}
-            .order-badge {{ display: inline-block; background-color: #ecfeff; color: #0891b2; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 24px; }}
+            h1 {{ color: {c_main}; font-size: {h1_size}; font-weight: 800; text-transform: uppercase; letter-spacing: -0.025em; margin: 0 0 8px 0; }}
+            h2 {{ color: {c_sub}; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: {h2_mar}; border-bottom: 2px solid #e2e8f0; padding-bottom: {h2_pad}; }}
+            .order-badge {{ display: inline-block; background-color: #ecfeff; color: #0891b2; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: {badge_mar}; }}
             
             /* Table */
-            th {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #64748b; font-weight: 700; padding-bottom: 12px; }}
+            th {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: {c_muted}; font-weight: 700; padding-bottom: 8px; }}
             
             /* Footer */
             .footer {{ background-color: #0a0e14; padding: 40px 20px; text-align: center; border-top: 1px solid #1e293b; color: #94a3b8; }}
@@ -351,9 +382,11 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             .disclaimer-box {{ border: 1px solid #7f1d1d; background-color: #450a0a; color: #fecaca; padding: 20px; text-align: center; margin-bottom: 30px; border-radius: 4px; }}
             
             /* Customer Info Grid */
-            .info-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }}
-            .info-item p.label {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin: 0 0 4px 0; font-weight: 700; }}
-            .info-item p.value {{ font-size: 13px; color: #334155; margin: 0; line-height: 1.4; }}
+            .info-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: {gap_grid}; margin-bottom: {mar_grid}; }}
+            .info-item p.label {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: {c_label}; margin: 0 0 4px 0; font-weight: 700; }}
+            .info-item p.value {{ font-size: 13px; color: {c_sub}; margin: 0; line-height: 1.4; }}
+            
+            {print_css}
         </style>
     </head>
     <body>
@@ -389,7 +422,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
 
                 <!-- Line Items -->
                 <h2>Order Details</h2>
-                <table style="width: 100%; border-collapse: collapse; margin-bottom: 32px;">
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: {'12px' if is_admin else '32px'};">
                     <thead>
                         <tr style="border-bottom: 2px solid #f1f5f9;">
                             <th style="text-align: left;">Item</th>
@@ -403,22 +436,22 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                 </table>
 
                 <!-- Summary Cards -->
-                <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 24px; margin-bottom: 24px;">
+                <div style="background-color: {'#ffffff' if is_admin else '#f8fafc'}; border: 1px solid {'#000000' if is_admin else '#e2e8f0'}; border-radius: 4px; padding: {'12px' if is_admin else '24px'}; margin-bottom: {mar_grid};">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="padding-bottom: 16px; valign: top;">
-                                <p style="margin: 0; color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Payment Method</p>
-                                <p style="margin: 4px 0 0 0; color: #0f172a; font-weight: 600;">{payment_method_text}</p>
+                            <td style="padding-bottom: {'8px' if is_admin else '16px'}; valign: top;">
+                                <p style="margin: 0; color: {c_label}; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Payment Method</p>
+                                <p style="margin: 4px 0 0 0; color: {c_main}; font-weight: 600;">{payment_method_text}</p>
                             </td>
-                            <td style="padding-bottom: 16px; text-align: right; vertical-align: top;">
-                                <p style="margin: 0; color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Total Paid</p>
+                            <td style="padding-bottom: {'8px' if is_admin else '16px'}; text-align: right; vertical-align: top;">
+                                <p style="margin: 0; color: {c_label}; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Total Paid</p>
                                 <p style="margin: 4px 0 0 0; color: #06b6d4; font-weight: 700; font-size: 18px;">${(total_cents/100):.2f}</p>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="border-top: 1px solid #e2e8f0; padding-top: 16px;">
-                                <p style="margin: 0; color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">{instructions_title}</p>
-                                <p style="margin: 8px 0 0 0; color: #334155; font-size: 13px; line-height: 1.6;">{instructions_text}</p>
+                            <td colspan="2" style="border-top: 1px solid #e2e8f0; padding-top: {'8px' if is_admin else '16px'};">
+                                <p style="margin: 0; color: {c_label}; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">{instructions_title}</p>
+                                <p style="margin: 8px 0 0 0; color: {c_sub}; font-size: 13px; line-height: 1.6;">{instructions_text}</p>
                             </td>
                         </tr>
                     </table>
