@@ -33,7 +33,7 @@ export default function CartDrawer() {
             }, 300);
             return () => clearTimeout(tm);
         }
-    }, [isOpen]);
+    }, [isOpen, syncInventory]);
 
     const handleCheckout = () => {
         closeCart();
