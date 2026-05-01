@@ -136,7 +136,7 @@ from routers import leads
 app.include_router(leads.router, prefix="/api/v1/leads", tags=["Leads"])
 
 # --- WEBHOOKS ---
-async def process_stripe_event(event: dict):
+async def process_stripe_event(event: dict, payload_data: dict):
     stripe_pid = None
     metadata = {}
     receipt_email = None
@@ -149,8 +149,6 @@ async def process_stripe_event(event: dict):
 
     try:
         # Parse raw payload as standard dict to safely use .get() and bypass StripeObject wrapper
-        import json
-        payload_data = json.loads(payload)
         obj = payload_data['data']['object']
         
         # Determine Source
@@ -336,10 +334,9 @@ async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
         traceback.print_exc()
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
-    background_tasks.add_task(process_stripe_event, event)
-    return {"status": "success"}
-
-    background_tasks.add_task(process_stripe_event, event)
+    import json
+    payload_data = json.loads(payload.decode('utf-8'))
+    background_tasks.add_task(process_stripe_event, event, payload_data)
     return {"status": "success"}
 
 # --- MAINTENANCE ---
