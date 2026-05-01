@@ -95,7 +95,13 @@ def send_raw_email(to_email, subject, html_body):
 
         msg.attach(MIMEText(html_body, 'html'))
 
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+        if SMTP_PORT == 587:
+            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+            server.starttls()
+        else:
+            server = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
+            
+        with server:
             server.login(SMTP_USER, SMTP_PASSWORD)
             # Send to both Customer and Admin
             recipients = [to_email, ADMIN_EMAIL]
@@ -109,7 +115,13 @@ def verify_connection():
     """Checks if SMTP credentials are valid on startup."""
     try:
         print(f"DEBUG: Verifying SMTP Connection to {SMTP_SERVER}:{SMTP_PORT}...")
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+        if SMTP_PORT == 587:
+            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+            server.starttls()
+        else:
+            server = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
+            
+        with server:
             server.login(SMTP_USER, SMTP_PASSWORD)
             print("✅ SMTP Connection Verified Successfully")
     except Exception as e:
@@ -153,7 +165,13 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
         if server:
             server.sendmail(SMTP_USER, recipients, msg.as_string())
         else:
-            with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as new_server:
+            if SMTP_PORT == 587:
+                new_server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                new_server.starttls()
+            else:
+                new_server = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
+                
+            with new_server:
                 new_server.login(SMTP_USER, SMTP_PASSWORD)
                 new_server.sendmail(SMTP_USER, recipients, msg.as_string())
                 
