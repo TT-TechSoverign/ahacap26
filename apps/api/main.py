@@ -177,30 +177,34 @@ async def process_stripe_event(event: dict, payload_data: dict):
             # Retrieve line items
             try:
                 line_items = stripe.checkout.Session.list_line_items(obj['id'], limit=100, expand=['data.price.product'])
-                for item in line_items.data:
+                for item_obj in line_items.data:
+                    item = item_obj.to_dict() if hasattr(item_obj, 'to_dict') else dict(item_obj)
                     product_id_str = None
-                    if getattr(item, 'price', None) and getattr(item.price, 'product', None):
-                        if hasattr(item.price.product, 'metadata'):
-                            product_id_str = item.price.product.metadata.get('product_id')
+                    
+                    price = item.get('price') or {}
+                    product = price.get('product') or {}
+                    if isinstance(product, dict):
+                        prod_meta = product.get('metadata') or {}
+                        product_id_str = prod_meta.get('product_id')
 
                     items_data.append({
                         "product_id": int(product_id_str) if product_id_str else None,
-                        "description": item.description,
-                        "quantity": item.quantity,
-                        "amount_total": item.amount_total,
-                        "currency": item.currency
+                        "description": item.get('description'),
+                        "quantity": item.get('quantity'),
+                        "amount_total": item.get('amount_total'),
+                        "currency": item.get('currency')
                     })
             except Exception as e:
                 print(f"Error fetching line items: {e}")
 
-        # --- Extract Payment Method Info (Brand/Last4) ---
         if stripe_pid:
             try:
                 # Expand payment_method to get card details
-                pi = stripe.PaymentIntent.retrieve(stripe_pid, expand=['payment_method'])
-                if pi.payment_method:
-                    # Check if it's a dict (expanded) or string (ID) - retrieve expanding ensures it's dict usually
-                    pm = pi.payment_method
+                pi_obj = stripe.PaymentIntent.retrieve(stripe_pid, expand=['payment_method'])
+                pi = pi_obj.to_dict() if hasattr(pi_obj, 'to_dict') else dict(pi_obj)
+                
+                if pi.get('payment_method'):
+                    pm = pi.get('payment_method')
                     if isinstance(pm, dict) and pm.get('card'):
                         card = pm.get('card')
                         payment_info = {
