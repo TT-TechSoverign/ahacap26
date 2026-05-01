@@ -14,22 +14,51 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'No items in cart' }, { status: 400 });
         }
 
-        const line_items = items.map((item: Product & { quantity: number }) => ({
-            price_data: {
-                currency: 'usd',
-                product_data: {
-                    name: item.name,
-                    images: item.image_url && item.image_url.startsWith('http') ? [item.image_url] : undefined,
-                    metadata: {
-                        model_number: item.name.match(/\(([^)]+)\)/)?.[1] || 'N/A', // Extract model from name e.g. (LW6023IVSM)
-                        btu: item.btu?.toString() || 'N/A',
-                        category: item.category,
+        // 1. HARD GUARDRAIL: Real-Time Inventory Validation
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+        const payload = {
+            items: items.map((item: any) => ({
+                product_id: item.id,
+                requested_quantity: item.quantity
+            }))
+        };
+
+        const validateRes = await fetch(`${apiUrl}/api/v1/products/validate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (!validateRes.ok) {
+            return NextResponse.json({ error: 'Failed to validate inventory' }, { status: 500 });
+        }
+
+        const validationData = await validateRes.json();
+        
+        if (!validationData.valid) {
+            return NextResponse.json({ error: 'out_of_stock' }, { status: 409 });
+        }
+
+        // Use Canonical Pricing from validation response
+        const line_items = items.map((clientItem: Product & { quantity: number }) => {
+            const canonicalItem = validationData.results.find((r: any) => r.product_id === clientItem.id);
+            return {
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: canonicalItem.name, // Use backend name
+                        images: clientItem.image_url && clientItem.image_url.startsWith('http') ? [clientItem.image_url] : undefined,
+                        metadata: {
+                            product_id: canonicalItem.product_id.toString(), // CRITICAL FOR WEBHOOK IDEMPOTENCY
+                            model_number: canonicalItem.name.match(/\(([^)]+)\)/)?.[1] || 'N/A', 
+                            category: clientItem.category,
+                        },
                     },
+                    unit_amount: Math.round(canonicalItem.price * 100), // CANONICAL PRICE
                 },
-                unit_amount: Math.round(item.price * 100), // Stripe expects cents
-            },
-            quantity: item.quantity,
-        }));
+                quantity: clientItem.quantity,
+            };
+        });
 
         // ADD DELIVERY FEE IF SELECTED
         if (fulfillmentMode === 'delivery') {
@@ -75,11 +104,14 @@ export async function POST(req: Request) {
 
         console.log('Origin Resolution:', { envUrl, headerOrigin, defaultOrigin, finalOrigin: origin });
 
+        const expiresAt = Math.floor(Date.now() / 1000) + (30 * 60); // 30 minutes lock
+
         const session = await stripe.checkout.sessions.create({
 
             mode: 'payment',
             payment_method_types: ['card'], // Strict Card Only
             line_items,
+            expires_at: expiresAt,
 
             // FORCE USD ONLY - Disable Dynamic Currency Conversion
             payment_method_options: {

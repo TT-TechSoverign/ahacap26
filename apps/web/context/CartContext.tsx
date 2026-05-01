@@ -14,7 +14,7 @@ interface CartContextType {
     clearCart: () => void;
     cartTotal: number;
     cartCount: number;
-    submitOrder: (email: string) => Promise<any>;
+    syncInventory: () => Promise<void>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -67,46 +67,42 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const cartTotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
     const cartCount = items.reduce((count, item) => count + item.quantity, 0);
 
-    const submitOrder = async (email: string) => {
+    const syncInventory = async () => {
+        if (items.length === 0) return;
         try {
-            const orderPayload = {
+            const payload = {
                 items: items.map(item => ({
                     product_id: item.id,
-                    name: item.name,
-                    category: item.category,
-                    quantity: item.quantity
-                })),
-                customer_email: email,
-                shipping_method: "PICKUP_AIEA"
+                    requested_quantity: item.quantity
+                }))
             };
-
-            const apiUrl = '/api/v1';
-            console.log("🛒 Submitting Order:", { apiUrl, orderPayload });
-
-            const res = await fetch(`${apiUrl}/orders`, {
+            const res = await fetch('/api/v1/products/validate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderPayload)
+                body: JSON.stringify(payload)
             });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.detail || 'Order submission failed');
+            if (res.ok) {
+                const data = await res.json();
+                setItems(current => current.map(item => {
+                    const validation = data.results.find((r: any) => r.product_id === item.id);
+                    if (validation) {
+                        return { 
+                            ...item, 
+                            stock: validation.available_stock,
+                            price: validation.price // Also sync the canonical price
+                        };
+                    }
+                    return item;
+                }));
             }
-
-            // Success
-            setItems([]); // Clear cart
-            return data;
         } catch (error) {
-            console.error("Checkout Error:", error);
-            throw error;
+            console.error("Failed to sync inventory", error);
         }
     };
 
     return (
         <CartContext.Provider value={{
-            items, isOpen, openCart, closeCart, addToCart, removeFromCart, clearCart, cartTotal, cartCount, submitOrder
+            items, isOpen, openCart, closeCart, addToCart, removeFromCart, clearCart, cartTotal, cartCount, syncInventory
         }}>
             {children}
         </CartContext.Provider>

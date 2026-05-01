@@ -38,3 +38,22 @@ class Product(ProductBase):
 
     class Config:
         from_attributes = True
+
+class InventoryValidationItem(BaseModel):
+    product_id: int
+    requested_quantity: int
+
+class InventoryValidationRequest(BaseModel):
+    items: list[InventoryValidationItem]
+
+class ValidationResult(BaseModel):
+    product_id: int
+    name: str
+    price: int
+    requested_quantity: int
+    available_stock: int
+    is_available: bool
+
+class InventoryValidationResponse(BaseModel):
+    valid: bool
+    results: list[ValidationResult]

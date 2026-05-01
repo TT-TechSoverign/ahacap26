@@ -39,3 +39,7 @@ apps/web/storage/
 .htaccess
 php.ini
 .user.ini
+
+# Ignore local analytics data
+_analytics_data/
+*.csv

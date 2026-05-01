@@ -13,16 +13,18 @@ function cn(...inputs: (string | undefined)[]) {
 }
 
 export default function CartDrawer() {
-    const { items, isOpen, closeCart, removeFromCart, cartTotal, clearCart, submitOrder } = useCart();
+    const { items, isOpen, closeCart, removeFromCart, cartTotal, clearCart, syncInventory } = useCart();
     const [isCheckout, setIsCheckout] = useState(false);
     // Email state removed - handled by Stripe Hosted Checkout
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [orderSuccess, setOrderSuccess] = useState(false);
 
-    // Reset state on close
+    // Sync Inventory / Reset state
     useEffect(() => {
-        if (!isOpen) {
+        if (isOpen) {
+            syncInventory();
+        } else {
             // Slight delay to allow animation to finish before resetting state logic
             const tm = setTimeout(() => {
                 setIsCheckout(false);

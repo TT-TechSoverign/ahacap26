@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useCart } from '../context/CartContext';
 
 interface CheckoutFormProps {
     totalAmount: number;
@@ -12,6 +13,7 @@ interface CheckoutFormProps {
 }
 
 export default function CheckoutForm({ totalAmount, items, customerEmail, fulfillmentMode, onSuccess }: CheckoutFormProps) {
+    const { syncInventory } = useCart();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -35,7 +37,13 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
             // Redirect to Stripe Hosted Checkout
             window.location.href = url;
         } catch (err: any) {
-            setError(err.message || 'Checkout connection failed. Please try again.');
+            if (err.message === 'out_of_stock') {
+                setError('INVENTORY ALERT: An item in your cart was just sold to another customer. Please close this checkout drawer to review the updated availability.');
+                // Trigger a sync so the parent drawer UI immediately reflects the dead stock
+                syncInventory();
+            } else {
+                setError(err.message || 'Checkout connection failed. Please try again.');
+            }
             setLoading(false);
         }
     };

@@ -37,7 +37,14 @@ export default function ProductDetailPage() {
             if (!id) return;
             try {
                 const apiUrl = '/api/v1';
-                const res = await fetch(`${apiUrl}/products/${id}`);
+                const timestamp = new Date().getTime();
+                const res = await fetch(`${apiUrl}/products/${id}?_t=${timestamp}`, {
+                    cache: 'no-store',
+                    headers: {
+                        'Pragma': 'no-cache',
+                        'Cache-Control': 'no-cache'
+                    }
+                });
 
                 if (!res.ok) throw new Error('Product not found');
                 const data = await res.json();
