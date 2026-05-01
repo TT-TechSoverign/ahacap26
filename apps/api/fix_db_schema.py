@@ -68,6 +68,9 @@ async def fix_schema():
         await add_column("orders", "customer_name", "VARCHAR")
         await add_column("orders", "customer_phone", "VARCHAR")
         await add_column("orders", "customer_address", "VARCHAR")
+        await add_column("orders", "fulfillment_mode", "VARCHAR(50)")
+        await add_column("orders", "inventory_deducted", "BOOLEAN")
+        await add_column("orders", "idempotency_key", "VARCHAR")
 
         # 2. Products Table
         product_cols = [
