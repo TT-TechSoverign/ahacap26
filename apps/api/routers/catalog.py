@@ -100,7 +100,7 @@ async def validate_inventory(
     items_data = [item.dict() for item in validation_request.items]
     return await catalog.validate_inventory_service(db, items_data)
 
-@router.post("", response_model=schemas.Product)
+@router.post("")
 async def create_product(
     product: schemas.ProductCreate,
     db: AsyncSession = Depends(get_db)
@@ -130,9 +130,9 @@ async def create_product(
     }
     persist_product_changes(product_dict)
     
-    return new_product
+    return product_dict
 
-@router.put("/{product_id}", response_model=schemas.Product)
+@router.put("/{product_id}")
 async def update_product(
     product_id: int,
     product_update: schemas.ProductUpdate,
@@ -174,7 +174,7 @@ async def update_product(
         }
         persist_product_changes(product_dict)
         
-        return updated_product
+        return product_dict
     except Exception as e:
         import traceback
         traceback.print_exc()
