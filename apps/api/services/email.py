@@ -399,8 +399,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             /* Disclaimer Box */
             .disclaimer-box {{ border: 1px solid #7f1d1d; background-color: #450a0a; color: #fecaca; padding: 20px; text-align: center; margin-bottom: 30px; border-radius: 4px; }}
             
-            /* Customer Info Grid */
-            .info-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: {gap_grid}; margin-bottom: {mar_grid}; }}
+            /* Customer Info Table */
             .info-item p.label {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: {c_label}; margin: 0 0 4px 0; font-weight: 700; }}
             .info-item p.value {{ font-size: 13px; color: {c_sub}; margin: 0; line-height: 1.4; }}
             
@@ -421,22 +420,24 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
 
                 <!-- Customer Information -->
                 <h2>Customer Information</h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <p class="label">Billed To</p>
-                        <p class="value">
-                            <strong>{c_name}</strong><br>
-                            {c_address_html}
-                        </p>
-                    </div>
-                    <div class="info-item">
-                        <p class="label">Contact</p>
-                        <p class="value">
-                            {c_email}<br>
-                            {c_phone}
-                        </p>
-                    </div>
-                </div>
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: {mar_grid}; table-layout: fixed;">
+                    <tr>
+                        <td style="width: 50%; vertical-align: top; padding-right: {gap_grid};" class="info-item">
+                            <p class="label">Billed To</p>
+                            <p class="value">
+                                <strong>{c_name}</strong><br>
+                                {c_address_html}
+                            </p>
+                        </td>
+                        <td style="width: 50%; vertical-align: top; padding-left: {gap_grid};" class="info-item">
+                            <p class="label">Contact</p>
+                            <p class="value">
+                                {c_email}<br>
+                                {c_phone}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
 
                 <!-- Line Items -->
                 <h2>Order Details</h2>
@@ -457,7 +458,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                 <div style="background-color: {'#ffffff' if is_admin else '#f8fafc'}; border: 1px solid {'#000000' if is_admin else '#e2e8f0'}; border-radius: 4px; padding: {'12px' if is_admin else '24px'}; margin-bottom: {mar_grid};">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="padding-bottom: {'8px' if is_admin else '16px'}; valign: top;">
+                            <td style="padding-bottom: {'8px' if is_admin else '16px'}; vertical-align: top;">
                                 <p style="margin: 0; color: {c_label}; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Payment Method</p>
                                 <p style="margin: 4px 0 0 0; color: {c_main}; font-weight: 600;">{payment_method_text}</p>
                             </td>
@@ -512,7 +513,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
         "ahacsplitdivision@gmail.com"
     ]
     
-    admin_subject = f"[INTERNAL] {subject}"
+    admin_subject = f"New Order Alert: {order_id} (Admin Copy)"
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
     def _send_both_emails():

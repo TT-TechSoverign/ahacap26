@@ -33,7 +33,8 @@ export default function CartDrawer() {
             }, 300);
             return () => clearTimeout(tm);
         }
-    }, [isOpen, syncInventory]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen]);
 
     const handleCheckout = () => {
         closeCart();
