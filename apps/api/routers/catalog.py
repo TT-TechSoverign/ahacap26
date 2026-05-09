@@ -108,9 +108,27 @@ async def create_product(
     new_product = await catalog.create_product_service(db, product.dict())
     
     # Persist to seed file
-    # FIX: Explicitly convert ORM -> Pydantic -> Dict to guarantee JSON serializability
-    product_pydantic = schemas.Product.model_validate(new_product)
-    persist_product_changes(product_pydantic.model_dump())
+    # FIX: Bypass Pydantic V2 model_validate completely to prevent Rust/musl panics on Alpine
+    product_dict = {
+        "id": new_product.id,
+        "name": new_product.name,
+        "price": new_product.price,
+        "category": new_product.category,
+        "subcategory": new_product.subcategory,
+        "stock": new_product.stock,
+        "image_url": new_product.image_url,
+        "btu": new_product.btu,
+        "voltage": new_product.voltage,
+        "coverage": new_product.coverage,
+        "performance_specs": new_product.performance_specs,
+        "key_spec": new_product.key_spec,
+        "noise_level": new_product.noise_level,
+        "dehumidification": new_product.dehumidification,
+        "dimensions": new_product.dimensions,
+        "weight": new_product.weight,
+        "warranty": new_product.warranty
+    }
+    persist_product_changes(product_dict)
     
     return new_product
 
@@ -134,10 +152,27 @@ async def update_product(
         print(f"DEBUG: DB Update Success. Persisting to JSON...")
         
         # Persist to seed file
-        # FIX: Explicitly convert ORM -> Pydantic -> Dict to guarantee JSON serializability
-        # This prevents any recursive loop or relationship loading issues with jsonable_encoder
-        product_pydantic = schemas.Product.model_validate(updated_product)
-        persist_product_changes(product_pydantic.model_dump())
+        # FIX: Bypass Pydantic V2 model_validate completely to prevent Rust/musl panics on Alpine
+        product_dict = {
+            "id": updated_product.id,
+            "name": updated_product.name,
+            "price": updated_product.price,
+            "category": updated_product.category,
+            "subcategory": updated_product.subcategory,
+            "stock": updated_product.stock,
+            "image_url": updated_product.image_url,
+            "btu": updated_product.btu,
+            "voltage": updated_product.voltage,
+            "coverage": updated_product.coverage,
+            "performance_specs": updated_product.performance_specs,
+            "key_spec": updated_product.key_spec,
+            "noise_level": updated_product.noise_level,
+            "dehumidification": updated_product.dehumidification,
+            "dimensions": updated_product.dimensions,
+            "weight": updated_product.weight,
+            "warranty": updated_product.warranty
+        }
+        persist_product_changes(product_dict)
         
         return updated_product
     except Exception as e:
