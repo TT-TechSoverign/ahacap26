@@ -21,7 +21,7 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
         setLoading(true);
         setError('');
         try {
-            const response = await fetch('/api/checkout', {
+            const response = await fetch('/create-checkout-session', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
