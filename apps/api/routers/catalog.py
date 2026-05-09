@@ -108,8 +108,9 @@ async def create_product(
     new_product = await catalog.create_product_service(db, product.dict())
     
     # Persist to seed file
-    # FIX: Use jsonable_encoder because new_product is a SQLAlchemy object, not Pydantic
-    persist_product_changes(jsonable_encoder(new_product))
+    # FIX: Explicitly convert ORM -> Pydantic -> Dict to guarantee JSON serializability
+    product_pydantic = schemas.Product.from_orm(new_product)
+    persist_product_changes(product_pydantic.dict())
     
     return new_product
 
