@@ -100,6 +100,20 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+from fastapi.responses import JSONResponse
+import traceback
+from fastapi import Request
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    error_msg = str(exc)
+    tb = traceback.format_exc()
+    print(f"GLOBAL ERROR: {error_msg}\n{tb}")
+    return JSONResponse(
+        status_code=500,
+        content={"message": "Internal Server Error", "detail": error_msg, "traceback": tb}
+    )
+
 # --- MIDDLEWARE ---
 app.add_middleware(
     CORSMiddleware,
