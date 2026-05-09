@@ -15,7 +15,7 @@ export async function POST(req: Request) {
         }
 
         // 1. HARD GUARDRAIL: Real-Time Inventory Validation
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+        const apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
         const payload = {
             items: items.map((item: any) => ({
                 product_id: item.id,
