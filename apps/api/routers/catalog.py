@@ -109,8 +109,8 @@ async def create_product(
     
     # Persist to seed file
     # FIX: Explicitly convert ORM -> Pydantic -> Dict to guarantee JSON serializability
-    product_pydantic = schemas.Product.from_orm(new_product)
-    persist_product_changes(product_pydantic.dict())
+    product_pydantic = schemas.Product.model_validate(new_product)
+    persist_product_changes(product_pydantic.model_dump())
     
     return new_product
 
@@ -136,8 +136,8 @@ async def update_product(
         # Persist to seed file
         # FIX: Explicitly convert ORM -> Pydantic -> Dict to guarantee JSON serializability
         # This prevents any recursive loop or relationship loading issues with jsonable_encoder
-        product_pydantic = schemas.Product.from_orm(updated_product)
-        persist_product_changes(product_pydantic.dict())
+        product_pydantic = schemas.Product.model_validate(updated_product)
+        persist_product_changes(product_pydantic.model_dump())
         
         return updated_product
     except Exception as e:
