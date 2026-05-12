@@ -97,14 +97,13 @@ export function middleware(request: NextRequest) {
         });
 
         // 4. Execute 301 Permanent Redirect
-        if (destinationPath.includes('#')) {
-            const [path, hash] = destinationPath.split('#');
-            url.pathname = path;
-            url.hash = hash;
-        } else {
-            url.pathname = destinationPath;
-        }
-        return NextResponse.redirect(url, 301);
+        const finalUrl = new URL(destinationPath, request.url);
+        // Preserve any surviving search parameters (e.g. ?gclid)
+        url.searchParams.forEach((value, key) => {
+            finalUrl.searchParams.append(key, value);
+        });
+        
+        return NextResponse.redirect(finalUrl, 301);
     }
 
     const response = NextResponse.next();
