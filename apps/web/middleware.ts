@@ -97,7 +97,13 @@ export function middleware(request: NextRequest) {
         });
 
         // 4. Execute 301 Permanent Redirect
-        url.pathname = destinationPath;
+        if (destinationPath.includes('#')) {
+            const [path, hash] = destinationPath.split('#');
+            url.pathname = path;
+            url.hash = hash;
+        } else {
+            url.pathname = destinationPath;
+        }
         return NextResponse.redirect(url, 301);
     }
 
