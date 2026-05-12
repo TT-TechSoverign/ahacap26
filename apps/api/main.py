@@ -150,6 +150,59 @@ from routers import leads
 app.include_router(leads.router, prefix="/api/v1/leads", tags=["Leads"])
 
 # --- WEBHOOKS ---
+async def fire_ga4_purchase_event(order_id, ga_client_id, ga_session_id, items_data, amount_total, amount_tax=0, amount_shipping=0):
+    measurement_id = os.getenv("GA4_MEASUREMENT_ID")
+    api_secret = os.getenv("GA4_API_SECRET")
+    
+    if not measurement_id or not api_secret or not ga_client_id:
+        print("DEBUG: Skipping GA4 event. Missing env vars or client_id.")
+        return
+        
+    url = f"https://www.google-analytics.com/mp/collect?measurement_id={measurement_id}&api_secret={api_secret}"
+    
+    # Exclude tax and shipping from true revenue
+    true_revenue = (amount_total - amount_tax - amount_shipping) / 100.0
+    tax_dollars = amount_tax / 100.0
+    shipping_dollars = amount_shipping / 100.0
+
+    ga_items = []
+    for item in items_data:
+        desc = item.get("description", "")
+        # Filter out tax and shipping line items from the product array
+        if "Tax" in desc or "Delivery" in desc:
+            continue
+            
+        ga_items.append({
+            "item_id": str(item.get("product_id")) if item.get("product_id") else "UNKNOWN",
+            "item_name": desc,
+            "price": (item.get("amount_total", 0) / 100.0) / (item.get("quantity") or 1) if item.get("quantity") else 0,
+            "quantity": item.get("quantity", 1)
+        })
+
+    payload = {
+        "client_id": ga_client_id,
+        "events": [{
+            "name": "purchase",
+            "params": {
+                "currency": "USD",
+                "transaction_id": order_id,
+                "value": true_revenue,
+                "tax": tax_dollars,
+                "shipping": shipping_dollars,
+                "items": ga_items,
+                "session_id": ga_session_id
+            }
+        }]
+    }
+
+    try:
+        import aiohttp
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, json=payload) as response:
+                print(f"GA4 Measurement Protocol Response: {response.status}")
+    except Exception as e:
+        print(f"GA4 MP Error: {e}")
+
 async def process_stripe_event(event: dict, payload_data: dict):
     stripe_pid = None
     metadata = {}
@@ -178,6 +231,13 @@ async def process_stripe_event(event: dict, payload_data: dict):
             receipt_email = obj.get('customer_details', {}).get('email')
             amount_received = obj.get('amount_total')
             metadata = obj.get('metadata', {})
+            
+            # Extract GA4 Pipeline Data
+            total_details = obj.get('total_details', {})
+            amount_tax = total_details.get('amount_tax', 0)
+            amount_shipping = total_details.get('amount_shipping', 0)
+            ga_client_id = metadata.get('ga_client_id')
+            ga_session_id = metadata.get('ga_session_id')
             
             # --- Extract Expanded Customer/Billing Info ---
             cust = obj.get('customer_details', {})
@@ -285,10 +345,24 @@ async def process_stripe_event(event: dict, payload_data: dict):
                                     p_obj = db_product.scalar_one_or_none()
                                     if p_obj:
                                         p_obj.stock = max(0, p_obj.stock - qty)
-                                        # Write back to JSON
                                         p_dict = schemas.Product.from_orm(p_obj).dict()
                                         persist_product_changes(p_dict)
                                         print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
+
+                        # Trigger GA4 Purchase Event async within the Idempotency Lock
+                        if ga_client_id:
+                            print(f"Triggering GA4 Pipeline for Order {order.id}")
+                            asyncio.create_task(
+                                fire_ga4_purchase_event(
+                                    order_id=order.id,
+                                    ga_client_id=ga_client_id,
+                                    ga_session_id=ga_session_id,
+                                    items_data=items_data,
+                                    amount_total=amount_received,
+                                    amount_tax=amount_tax,
+                                    amount_shipping=amount_shipping
+                                )
+                            )
 
                     await session.commit()
                     print(f"Order {order.id} marked as PAID with comprehensive details.")

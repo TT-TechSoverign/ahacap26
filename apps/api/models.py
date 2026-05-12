@@ -90,3 +90,40 @@ class ContentSnippet(Base):
     name = Column(String, unique=True, index=True)
     data = Column(String, nullable=False) # JSON string of component data
     created_at = Column(DateTime, default=datetime.utcnow)
+
+class Customer(Base):
+    __tablename__ = "customers"
+    id = Column(String, primary_key=True, index=True) # UUID
+    name = Column(String)
+    phone = Column(String, nullable=True)
+    email = Column(String, nullable=True, index=True)
+    address = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class Equipment(Base):
+    __tablename__ = "equipment"
+    id = Column(String, primary_key=True, index=True) # UUID
+    customer_id = Column(String, ForeignKey("customers.id"))
+    order_id = Column(String, ForeignKey("orders.id"), nullable=True)
+    model_number = Column(String, nullable=True)
+    serial_number = Column(String, nullable=True)
+    install_date = Column(DateTime, nullable=True)
+    warranty_expiration = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class VendorInvoice(Base):
+    __tablename__ = "vendor_invoices"
+    id = Column(String, primary_key=True, index=True) # UUID
+    vendor_name = Column(String, index=True)
+    amount_cents = Column(Integer)
+    file_url = Column(String, nullable=True)
+    status = Column(String, default="PENDING")
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class AdminUser(Base):
+    __tablename__ = "admin_users"
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)

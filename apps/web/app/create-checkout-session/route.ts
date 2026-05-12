@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     try {
         console.log('--- CHECKOUT SESSION START ---');
         console.log('Headers:', Object.fromEntries(req.headers));
-        const { items, customerEmail, fulfillmentMode } = await req.json();
+        const { items, customerEmail, fulfillmentMode, gaClientId, gaSessionId } = await req.json();
 
         if (!items || items.length === 0) {
             return NextResponse.json({ error: 'No items in cart' }, { status: 400 });
@@ -125,7 +125,9 @@ export async function POST(req: Request) {
                 metadata: {
                     fulfillment_mode: fulfillmentMode,
                     customer_email: customerEmail,
-                    source: 'web_checkout_v2'
+                    source: 'web_checkout_v2',
+                    ...(gaClientId && { ga_client_id: gaClientId }),
+                    ...(gaSessionId && { ga_session_id: gaSessionId }),
                 }
             },
             success_url: `${origin}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
@@ -147,6 +149,8 @@ export async function POST(req: Request) {
             metadata: {
                 source: 'web_checkout',
                 fulfillment_mode: fulfillmentMode,
+                ...(gaClientId && { ga_client_id: gaClientId }),
+                ...(gaSessionId && { ga_session_id: gaSessionId }),
             },
             billing_address_collection: 'required',
         });

@@ -14,6 +14,25 @@ const LEGACY_ID_TO_SLUG: Record<string, string> = {
     '2924': '7-lg-dual-inverter-24000-btu-lw2422ivsm', // Approx 23500/24000
 };
 
+
+
+
+const CITIES = [
+    'honolulu', 'pearl-city', 'waipahu', 'mililani', 'kaneohe', 'kailua',
+    'ewa-beach', 'kapolei', 'aiea', 'wahiawa', 'makakilo', 'halawa',
+    'waimalu', 'hickam-housing', 'ocean-pointe', 'schofield-barracks',
+    'royal-kunia', 'village-park', 'nanaikapono', 'mailikukahi', 'kalaeloa', 'waipio'
+];
+
+function getCitySiphon(urlPath: string): string {
+    let hash = 5381;
+    for (let i = 0; i < urlPath.length; i++) {
+        hash = ((hash << 5) + hash) + urlPath.charCodeAt(i);
+    }
+    const index = Math.abs(hash) % CITIES.length;
+    return `/service-areas/${CITIES[index]}`;
+}
+
 export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     
@@ -22,26 +41,44 @@ export function middleware(request: NextRequest) {
         url.pathname.startsWith('/product-category/') || 
         url.pathname.startsWith('/product-tag/')) {
         
-        let destinationPath = '/shop'; // Safe Fallback
+        let destinationPath = '/shop'; // Default Fallback
+        let isSpecificMatch = false;
         
         // 2a. Category Fallback Mapping (Preserve Category-Level PageRank)
         const pathLower = url.pathname.toLowerCase();
         if (pathLower.includes('dual-inverter') || pathLower.includes('/lg/dual-inverter')) {
             destinationPath = '/shop#dual_inverter';
+            isSpecificMatch = true;
         } else if (pathLower.includes('universal-fit')) {
             destinationPath = '/shop#universal_fit';
+            isSpecificMatch = true;
         } else if (pathLower.includes('/ge/')) {
             destinationPath = '/shop#ge';
+            isSpecificMatch = true;
         } else if (pathLower.includes('casement')) {
             destinationPath = '/shop#casement';
+            isSpecificMatch = true;
         } else if (pathLower.includes('/lg/') || pathLower.includes('/window/')) {
             destinationPath = '/shop#dual_inverter';
+            isSpecificMatch = true;
         }
         
         // 2b. Prevent Soft-404: Resolve specific product mapping
         const legacyId = url.searchParams.get('add-to-cart');
         if (legacyId && LEGACY_ID_TO_SLUG[legacyId]) {
             destinationPath = `/shop/${LEGACY_ID_TO_SLUG[legacyId]}`;
+            isSpecificMatch = true;
+        }
+
+        // 2c. Service/Contact Mapping
+        if (!isSpecificMatch && (pathLower.includes('repair') || pathLower.includes('maintenance') || pathLower.includes('cleaning'))) {
+            destinationPath = '/window_ac_maintenance';
+            isSpecificMatch = true;
+        }
+
+        // 2d. The Authority Siphon (Hash Distribution for Unmapped "Junk" Legacy URLs)
+        if (!isSpecificMatch) {
+            destinationPath = getCitySiphon(url.pathname);
         }
         
         // 3. Prevent Telemetry Bleed: Selective Parameter Deletion

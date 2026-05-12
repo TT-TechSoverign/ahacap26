@@ -49,12 +49,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const title = `${product.name} | Affordable Home A/C`;
     const description = `Buy the ${product.name} at Affordable Home A/C. Professional installation and affordable prices in Oahu, Hawaii.`;
-    
+    const domain = process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com';
+
     return {
         title,
         description,
         alternates: {
-            canonical: `/shop/${params.slug}`,
+            canonical: `${domain}/shop/${params.slug}`,
         },
         openGraph: {
             title,
