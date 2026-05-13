@@ -142,15 +142,18 @@ export default function Footer() {
                     {/* Service Areas Column */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Service Areas</h4>
-                        <ul className="space-y-4 w-full">
+                        <ul className="grid grid-cols-2 gap-x-4 gap-y-3 w-full">
                             {[
-                                'Honolulu', 'Pearl City', 'Waipahu', 'Mililani', 
-                                'Kaneohe', 'Kailua', 'Kapolei', 'Ewa Beach'
+                                'Aiea', 'Pearl City', 'Mililani', 'Waipio Gentry', 'Waikele',
+                                'Honolulu', 'Kalihi', 'Manoa', 'Kaimuki', 'Hawaii Kai', 
+                                'Salt Lake', 'Aina Haina', 'Kahala', 'McCully', 'Makiki',
+                                'Kapolei', 'Ewa Beach', 'Waipahu', 'Kunia',
+                                'Kailua', 'Kaneohe', 'Kahaluu'
                             ].map((city) => (
                                 <li key={city}>
-                                    <Link href={`/service-areas/${city.toLowerCase().replace(/ /g, '-')}`} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
-                                        <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
-                                        {city}
+                                    <Link href={`/service-areas/${city.toLowerCase().replace(/ /g, '-')}`} className="text-slate-400 hover:text-primary transition-colors text-xs flex items-center justify-center md:justify-start gap-1.5 group">
+                                        <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors shrink-0"></span>
+                                        <span className="truncate">{city}</span>
                                     </Link>
                                 </li>
                             ))}
