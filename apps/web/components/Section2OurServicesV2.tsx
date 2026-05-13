@@ -45,6 +45,7 @@ export default function Section2OurServicesV2() {
 
             {/* Header Content */}
             <div className="relative z-10 max-w-4xl mx-auto text-center mb-6 px-6">
+                <h1 className="sr-only">Affordable Air Conditioning & Ductless Mini Split Installation in Hawaii</h1>
                 <h2 className="relative inline-block font-header font-black text-3xl md:text-5xl text-white uppercase tracking-tighter mb-4 pb-6">
                     <span className="text-white">
                         Our Core

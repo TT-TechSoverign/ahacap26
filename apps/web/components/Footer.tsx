@@ -80,7 +80,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
                     {/* Brand Column */}
                     <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
                         <div className="relative h-32 w-32 -mb-2">
@@ -133,6 +133,24 @@ export default function Footer() {
                                     <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
                                         <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
                                         {item.text}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Service Areas Column */}
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                        <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Service Areas</h4>
+                        <ul className="space-y-4 w-full">
+                            {[
+                                'Honolulu', 'Pearl City', 'Waipahu', 'Mililani', 
+                                'Kaneohe', 'Kailua', 'Kapolei', 'Ewa Beach'
+                            ].map((city) => (
+                                <li key={city}>
+                                    <Link href={`/service-areas/${city.toLowerCase().replace(/ /g, '-')}`} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
+                                        <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
+                                        {city}
                                     </Link>
                                 </li>
                             ))}

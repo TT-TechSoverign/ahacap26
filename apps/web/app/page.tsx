@@ -7,7 +7,7 @@ import { BackToTop } from '@/components/BackToTop';
 
 // Force dynamic since we want to ensure fresh rendering
 // v2.5 Visual Refinements Force Rebuild
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic'; // Removed to unlock SSG Edge Caching
 
 import Image from 'next/image';
 

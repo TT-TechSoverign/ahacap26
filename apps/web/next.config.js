@@ -26,8 +26,8 @@ const nextConfig = {
         return config;
     },
 
+    trailingSlash: false,
     images: {
-        unoptimized: true,
         dangerouslyAllowSVG: true,
         contentDispositionType: 'attachment',
         contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

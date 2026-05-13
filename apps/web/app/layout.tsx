@@ -26,6 +26,9 @@ export const metadata: Metadata = {
         url: '/',
         siteName: 'Affordable Home A/C',
     },
+    alternates: {
+        canonical: '/',
+    },
 };
 
 export default function RootLayout({
@@ -52,6 +55,25 @@ export default function RootLayout({
             <body className={`${inter.variable} ${oswald.variable} font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white`}>
                 <GoogleAnalytics gaId="G-MYJZTZFXQV" />
                 {/* <TickerWrapper /> */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": ["LocalBusiness", "HVACBusiness", "Organization"],
+                            "name": "Affordable Home A/C",
+                            "image": "https://www.affordablehome-ac.com/assets/logo.png",
+                            "url": "https://www.affordablehome-ac.com",
+                            "areaServed": [
+                                {
+                                    "@type": "State",
+                                    "name": "Hawaii"
+                                }
+                            ],
+                            "priceRange": "$$"
+                        })
+                    }}
+                />
                 <ContentProvider>
                     <CartProvider>
                         <NavbarV2 />
