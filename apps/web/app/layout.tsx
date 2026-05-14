@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Oswald } from 'next/font/google';
 import Script from 'next/script';
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -8,10 +8,18 @@ import { CartProvider } from '../context/CartContext';
 import { ContentProvider } from '../lib/context/ContentContext';
 import Footer from '../components/Footer';
 import NavbarV2 from '../components/NavbarV2';
+import MobileStickyHeader from '../components/MobileStickyHeader';
+import MobileStickyBottomBar from '../components/MobileStickyBottomBar';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald', display: 'swap' });
+
+export const viewport: Viewport = {
+    themeColor: '#0F172A',
+    width: 'device-width',
+    initialScale: 1,
+};
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com'),
@@ -76,10 +84,12 @@ export default function RootLayout({
                 />
                 <ContentProvider>
                     <CartProvider>
+                        <MobileStickyHeader />
                         <NavbarV2 />
                         {children}
                         <CartDrawer />
                         <Footer />
+                        <MobileStickyBottomBar />
                     </CartProvider>
                 </ContentProvider>
             </body>

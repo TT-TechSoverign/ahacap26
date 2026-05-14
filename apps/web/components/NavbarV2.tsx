@@ -53,7 +53,7 @@ export default function NavbarV2() {
                 damping: 25,
                 delay: (headerVisible || mobileMenuOpen) ? 0.1 : 0
             }}
-            className="fixed top-0 w-full z-50 flex flex-col pointer-events-none"
+            className="fixed top-0 w-full z-50 hidden md:flex flex-col pointer-events-none"
         >
             {/* Split Header Container */}
             <div className="pointer-events-auto shadow-md relative flex flex-col">
@@ -201,70 +201,6 @@ export default function NavbarV2() {
                 </div>
             </div>
 
-            {/* Mobile Menu Overlay (Light Mode) */}
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                        animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
-                        exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 top-[100px] z-40 bg-white/95 pointer-events-auto md:hidden overflow-hidden flex flex-col"
-                    >
-                        <div className="flex-1 flex flex-col justify-center items-center gap-8 relative z-10 px-6">
-                            {links.map((link: any, i: number) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.1 }}
-                                >
-                                    <Link
-                                        href={link.href}
-                                        onClick={() => setMobileMenuOpen(false)}
-                                        className="text-2xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center justify-center gap-4 group"
-                                    >
-                                        {link.text}
-                                    </Link>
-                                </motion.div>
-                            ))}
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: links.length * 0.1 }}
-                            >
-                                <Link
-                                    href="/contact"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="text-2xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center justify-center gap-4 group"
-                                >
-                                    Contact Us
-                                </Link>
-                            </motion.div>
-
-                            <div className="w-full h-px bg-slate-200 my-4 max-w-[200px]"></div>
-
-                            {/* Quick Actions */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5 }}
-                                className="grid grid-cols-2 gap-4 w-full max-w-xs"
-                            >
-                                <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="bg-slate-50 border border-slate-200 hover:border-primary/50 p-4 rounded-xl flex flex-col items-center gap-2 group transition-all">
-                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">call</span>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary">Call Us</span>
-                                </Link>
-                                <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="bg-slate-50 border border-slate-200 hover:border-primary/50 p-4 rounded-xl flex flex-col items-center gap-2 group transition-all">
-                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">storefront</span>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary">Shop</span>
-                                </Link>
-                            </motion.div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </motion.header>
     );
 }

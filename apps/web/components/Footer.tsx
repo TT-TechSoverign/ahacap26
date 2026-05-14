@@ -22,6 +22,24 @@ export default function Footer() {
         ...(content?.footer_schedule || {})
     };
 
+    const regions = content?.landing_legacy?.service_areas?.regions || [];
+    const dynamicCities: string[] = [];
+    regions.forEach((region: any) => {
+        if (region.cities) {
+            region.cities.forEach((city: any) => {
+                dynamicCities.push(city.name);
+            });
+        }
+    });
+
+    const serviceAreas = dynamicCities.length > 0 ? dynamicCities : [
+        'Aiea', 'Pearl City', 'Mililani', 'Waipio Gentry', 'Waikele',
+        'Honolulu', 'Kalihi', 'Manoa', 'Kaimuki', 'Hawaii Kai', 
+        'Salt Lake', 'Aina Haina', 'Kahala', 'McCully', 'Makiki',
+        'Kapolei', 'Ewa Beach', 'Waipahu', 'Kunia',
+        'Kailua', 'Kaneohe', 'Kahaluu'
+    ];
+
     return (
         <footer className="relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-8">
             <div className="max-w-7xl mx-auto px-6">
@@ -143,13 +161,7 @@ export default function Footer() {
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Service Areas</h4>
                         <ul className="grid grid-cols-2 gap-x-4 gap-y-3 w-full">
-                            {[
-                                'Aiea', 'Pearl City', 'Mililani', 'Waipio Gentry', 'Waikele',
-                                'Honolulu', 'Kalihi', 'Manoa', 'Kaimuki', 'Hawaii Kai', 
-                                'Salt Lake', 'Aina Haina', 'Kahala', 'McCully', 'Makiki',
-                                'Kapolei', 'Ewa Beach', 'Waipahu', 'Kunia',
-                                'Kailua', 'Kaneohe', 'Kahaluu'
-                            ].map((city) => (
+                            {serviceAreas.map((city) => (
                                 <li key={city}>
                                     <Link href={`/service-areas/${city.toLowerCase().replace(/ /g, '-')}`} className="text-slate-400 hover:text-primary transition-colors text-xs flex items-center justify-center md:justify-start gap-1.5 group">
                                         <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors shrink-0"></span>
