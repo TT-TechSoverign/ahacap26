@@ -72,6 +72,14 @@ def get_logo_attachment():
                     image.add_header('Content-Disposition', 'inline', filename='logo.png')
                     return image
         
+        # Fallback to inline base64 logo if no file is found
+        if LOGO_B64:
+            img_data = base64.b64decode(LOGO_B64)
+            image = MIMEImage(img_data)
+            image.add_header('Content-ID', '<logo_paramount>')
+            image.add_header('Content-Disposition', 'inline', filename='logo.png')
+            return image
+            
         return None
     except Exception as e:
         logger.error(f"Error loading logo: {e}")
