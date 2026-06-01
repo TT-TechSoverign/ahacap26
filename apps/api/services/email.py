@@ -324,9 +324,9 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             map_block_html = f"""
                 <!-- 3. Directions & Map (Hidden on Delivery) -->
                 <div class="map-container" style="display: {map_display}; margin-bottom: 32px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                    <h3 style="color: #0f172a; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Directions to Warehouse</h3>
+                    <h3 style="color: #f8fafc; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; margin-bottom: 12px; border-bottom: 2px solid #1e293b; padding-bottom: 8px;">Directions to Warehouse</h3>
                     
-                    <p style="color: #475569; font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
+                    <p style="color: #cbd5e1; font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
                         Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway. Destination is on right with roll up door #203.
                     </p>
 
@@ -337,7 +337,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                 </div>
 
                 <div style="margin-top: 24px; text-align: center;">
-                     <p style="color: #f59e0b; font-size: 12px; font-weight: 500; background-color: #fffbeb; padding: 12px; border-radius: 4px; display: inline-block;">
+                     <p style="color: #fef08a; font-size: 12px; font-weight: 500; background-color: #422006; border: 1px solid #713f12; padding: 12px; border-radius: 4px; display: inline-block;">
                         {warning_text}
                     </p>
                 </div>
@@ -366,11 +366,11 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
 
                 <div style="border-top: 1px solid #1e293b; margin: 0 auto; width: 60%;"></div>
                 
-                <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #475569; font-weight: 700; margin-top: 20px; display: block;">
+                <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; font-weight: 700; margin-top: 20px; display: block;">
                     LIC# CT-36775 <span style="color: #06b6d4; margin: 0 8px;">•</span> Licensed <span style="color: #1e293b;">|</span> Insured <span style="color: #1e293b;">|</span> Bonded
                 </span>
                 
-                <p style="margin-top: 12px; font-size: 11px; color: #334155;">
+                <p style="margin-top: 12px; font-size: 11px; color: #64748b;">
                     &copy; {datetime.now().year} Affordable Home A/C. All rights reserved.
                 </p>
             </div>
