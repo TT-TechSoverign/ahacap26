@@ -308,7 +308,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             header_html = """
             <!-- 1. Header -->
             <div class="header">
-                 <img src="cid:logo_img" style="width: 100%; height: auto; display: block;" alt="Affordable Home A/C" />
+                 <img src="cid:logo_img" style="width: 200px; max-width: 80%; height: auto; margin: 0 auto; display: block;" alt="Affordable Home A/C" />
             </div>
             """
         else:
@@ -386,7 +386,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             .container {{ max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 1px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }}
             
             /* Premium Header */
-            .header {{ background-color: #0a0e14; padding: 0 0; text-align: center; border-bottom: 1px solid #1e293b; }}
+            .header {{ background-color: #0a0e14; padding: 24px 0; text-align: center; border-bottom: 1px solid #1e293b; }}
             
             /* Content Area */
             .content {{ padding: {pad_cont}; background-color: #ffffff; }}
