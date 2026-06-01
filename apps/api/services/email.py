@@ -236,7 +236,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
             "A logistics coordinator will contact you within 24 business hours to schedule your specific delivery window."
         )
         warning_text = "Note: We do not deliver to Waialua, North Shore, Kahuku, Waianae, Nanakuli, Waikiki, or Waimanalo."
-        map_display = "none" # Hide map for delivery orders
+        map_display = "block" # Always show map for customer convenience
     else:
         # Pickup Default
         mode_title = "WAIPAHU SHOP PICKUP"
@@ -250,12 +250,12 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     # rows_html moved inside build_email_html for dynamic styling
 
     def build_email_html(is_admin=False):
-        # Dynamic Styling
-        c_main = "#000000" if is_admin else "#0f172a"
-        c_sub = "#000000" if is_admin else "#334155"
-        c_muted = "#000000" if is_admin else "#64748b"
-        c_label = "#000000" if is_admin else "#94a3b8"
-        bg_body = "#ffffff" if is_admin else "#f1f5f9"
+        # Dynamic Styling - Modern Unified Premium Dark Theme
+        c_main = "#f8fafc"
+        c_sub = "#cbd5e1"
+        c_muted = "#94a3b8"
+        c_label = "#64748b"
+        bg_body = "#0b0f19"
         
         pad_cont = "12px 16px" if is_admin else "20px 32px"
         h1_size = "20px" if is_admin else "24px"
@@ -288,7 +288,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                 amount = item.get('amount_total', 0) / 100.0
                 
                 rows_html += f"""
-                <tr style="border-bottom: 1px solid #e2e8f0;">
+                <tr style="border-bottom: 1px solid #1e293b;">
                     <td style="padding: {td_pad}; color: {c_sub};">{name}</td>
                     <td style="padding: {td_pad}; text-align: center; color: {c_muted};">{qty}</td>
                     <td style="padding: {td_pad}; text-align: right; color: {c_main}; font-weight: 500;">${amount:,.2f}</td>
@@ -383,24 +383,24 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: {bg_body}; }}
-            .container {{ max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 1px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }}
+            .container {{ max-width: 600px; margin: 0 auto; background-color: #0f172a; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3); border: 1px solid #1e293b; }}
             
             /* Premium Header */
-            .header {{ background-color: #0a0e14; padding: 24px 0; text-align: center; border-bottom: 1px solid #1e293b; }}
+            .header {{ background-color: #0f172a; padding: 24px 0; text-align: center; border-bottom: 1px solid #1e293b; }}
             
             /* Content Area */
-            .content {{ padding: {pad_cont}; background-color: #ffffff; }}
+            .content {{ padding: {pad_cont}; background-color: #0f172a; }}
             
             /* Typography */
             h1 {{ color: {c_main}; font-size: {h1_size}; font-weight: 800; text-transform: uppercase; letter-spacing: -0.025em; margin: 0 0 8px 0; }}
-            h2 {{ color: {c_sub}; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: {h2_mar}; border-bottom: 2px solid #e2e8f0; padding-bottom: {h2_pad}; }}
-            .order-badge {{ display: inline-block; background-color: #ecfeff; color: #0891b2; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: {badge_mar}; }}
+            h2 {{ color: {c_sub}; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: {h2_mar}; border-bottom: 2px solid #1e293b; padding-bottom: {h2_pad}; }}
+            .order-badge {{ display: inline-block; background-color: #0c4a6e; color: #06b6d4; border: 1px solid #0891b2; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: {badge_mar}; }}
             
             /* Table */
             th {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: {c_muted}; font-weight: 700; padding-bottom: 8px; }}
             
             /* Footer */
-            .footer {{ background-color: #0a0e14; padding: 40px 20px; text-align: center; border-top: 1px solid #1e293b; color: #94a3b8; }}
+            .footer {{ background-color: #0b0f19; padding: 40px 20px; text-align: center; border-top: 1px solid #1e293b; color: #94a3b8; }}
             .footer-link {{ color: #64748b; text-decoration: none; font-size: 12px; transition: color 0.2s; }}
             .footer-link:hover {{ color: #ffffff; }}
             
@@ -451,7 +451,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                 <h2>Order Details</h2>
                 <table style="width: 100%; border-collapse: collapse; margin-bottom: {'12px' if is_admin else '32px'};">
                     <thead>
-                        <tr style="border-bottom: 2px solid #f1f5f9;">
+                        <tr style="border-bottom: 2px solid #1e293b;">
                             <th style="text-align: left;">Item</th>
                             <th style="text-align: center;">Qty</th>
                             <th style="text-align: right;">Price</th>
@@ -463,7 +463,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                 </table>
 
                 <!-- Summary Cards -->
-                <div style="background-color: {'#ffffff' if is_admin else '#f8fafc'}; border: 1px solid {'#000000' if is_admin else '#e2e8f0'}; border-radius: 4px; padding: {'12px' if is_admin else '24px'}; margin-bottom: {mar_grid};">
+                <div style="background-color: #1e293b; border: 1px solid #334155; border-radius: 4px; padding: {'12px' if is_admin else '24px'}; margin-bottom: {mar_grid};">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
                             <td style="padding-bottom: {'8px' if is_admin else '16px'}; vertical-align: top;">
@@ -476,7 +476,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="border-top: 1px solid #e2e8f0; padding-top: {'8px' if is_admin else '16px'};">
+                            <td colspan="2" style="border-top: 1px solid #334155; padding-top: {'8px' if is_admin else '16px'};">
                                 <p style="margin: 0; color: {c_label}; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">{instructions_title}</p>
                                 <p style="margin: 8px 0 0 0; color: {c_sub}; font-size: 13px; line-height: 1.6;">{instructions_text}</p>
                             </td>
@@ -508,7 +508,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
         logger.error(f"Logo decode error: {e}")
 
     try:
-        if not is_delivery and MAP_B64:
+        if MAP_B64:
              map_data = base64.b64decode(MAP_B64)
              images.append({'content_id': 'map_img', 'data': map_data, 'filename': 'map.png'})
     except:
