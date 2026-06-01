@@ -96,7 +96,7 @@ export default function NavbarV2() {
                             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 md:flex md:justify-center z-20">
                                 <Link href="/" className="block relative h-32 w-64 md:h-44 md:w-80 group shrink-0">
                                     <Image
-                                        src="/assets/ahac-logo-bus-500x500xv2.svg"
+                                        src="/assets/ahac-logo-updated-businfo.png"
                                         alt="AHAC Logo"
                                         fill
                                         className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"

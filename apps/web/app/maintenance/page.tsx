@@ -19,7 +19,7 @@ export default function MaintenancePage() {
                         <div className="relative h-20 w-80">
                             <Link href="/">
                                 <Image
-                                    src="/assets/ahac-logo-header-hv3.svg"
+                                    src="/assets/ahac-logo-updated-businfo.png"
                                     alt="Affordable Home A/C"
                                     fill
                                     className="object-contain object-left"

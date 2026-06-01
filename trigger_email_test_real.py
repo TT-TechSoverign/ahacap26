@@ -49,7 +49,7 @@ async def test_realistic_email():
     order_id = "ORD-TEST-REAL-808"
     
     # Target Email (Admin)
-    target_email = os.getenv("ADMIN_EMAIL", "irasmussenjobs@gmail.com")
+    target_email = os.getenv("ADMIN_EMAIL") or "irasmussenjobs@gmail.com"
     
     print(f"📧 Sending Order {order_id} to {target_email}...")
     print(f"💰 Total Value: ${total_cents/100:.2f}")

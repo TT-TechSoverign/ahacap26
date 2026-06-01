@@ -103,7 +103,7 @@ export default function Footer() {
                     <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
                         <div className="relative h-32 w-32 -mb-2">
                             <Image
-                                src="/assets/ahac-logo-bus-500x500xv2.svg"
+                                src="/assets/ahac-logo-updated-businfo.png"
                                 alt="Affordable Home A/C"
                                 fill
                                 className="object-contain"
