@@ -318,54 +318,57 @@ async def process_stripe_event(event: dict, payload_data: dict):
                     await session.commit()
                     print(f"Created/Recovered Order {new_order_id} from Webhook.")
 
+                # 1. Update Status to PAID if not already set
                 if order.status != models.OrderStatus.PAID:
                     order.status = models.OrderStatus.PAID
                     if items_data and not order.items_json:
                         order.items_json = json.dumps(items_data)
+
+                # 2. Enrich, deduct stock, and trigger GA4 on checkout.session.completed (Always runs, avoiding race condition skips)
+                if event['type'] == 'checkout.session.completed':
+                    order.customer_email = customer_info.get('email', order.customer_email)
+                    order.customer_name = customer_info.get('name', order.customer_name)
+                    order.customer_phone = customer_info.get('phone', order.customer_phone)
+                    order.customer_address = json.dumps(customer_info.get('address', {}))
+                    order.fulfillment_mode = fulfillment_mode
                     
-                    # Update email and customer details if missing (crucial for PaymentIntent -> CheckoutSession race conditions)
-                    # When checkout.session.completed fires, it has the rich data. We update the model.
-                    if event['type'] == 'checkout.session.completed':
-                        order.customer_email = customer_info.get('email', order.customer_email)
-                        order.customer_name = customer_info.get('name', order.customer_name)
-                        order.customer_phone = customer_info.get('phone', order.customer_phone)
-                        order.customer_address = json.dumps(customer_info.get('address', {}))
-                        order.fulfillment_mode = fulfillment_mode
-                        
-                        # Idempotency lock for stock deduction
-                        if not order.inventory_deducted:
-                            order.inventory_deducted = True
-                            from routers.catalog import persist_product_changes
-                            import schemas
-                            for item in items_data:
-                                p_id = item.get("product_id")
-                                qty = item.get("quantity", 0)
-                                if p_id and qty > 0:
-                                    db_product = await session.execute(select(models.Product).where(models.Product.id == p_id))
-                                    p_obj = db_product.scalar_one_or_none()
-                                    if p_obj:
-                                        p_obj.stock = max(0, p_obj.stock - qty)
-                                        p_dict = schemas.Product.from_orm(p_obj).dict()
-                                        persist_product_changes(p_dict)
-                                        print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
+                    if items_data and not order.items_json:
+                        order.items_json = json.dumps(items_data)
+                    
+                    # Idempotency lock for stock deduction
+                    if not order.inventory_deducted:
+                        order.inventory_deducted = True
+                        from routers.catalog import persist_product_changes
+                        import schemas
+                        for item in items_data:
+                            p_id = item.get("product_id")
+                            qty = item.get("quantity", 0)
+                            if p_id and qty > 0:
+                                db_product = await session.execute(select(models.Product).where(models.Product.id == p_id))
+                                p_obj = db_product.scalar_one_or_none()
+                                if p_obj:
+                                    p_obj.stock = max(0, p_obj.stock - qty)
+                                    p_dict = schemas.Product.from_orm(p_obj).dict()
+                                    persist_product_changes(p_dict)
+                                    print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
 
-                        # Trigger GA4 Purchase Event async within the Idempotency Lock
-                        if ga_client_id:
-                            print(f"Triggering GA4 Pipeline for Order {order.id}")
-                            asyncio.create_task(
-                                fire_ga4_purchase_event(
-                                    order_id=order.id,
-                                    ga_client_id=ga_client_id,
-                                    ga_session_id=ga_session_id,
-                                    items_data=items_data,
-                                    amount_total=amount_received,
-                                    amount_tax=amount_tax,
-                                    amount_shipping=amount_shipping
-                                )
+                    # Trigger GA4 Purchase Event async within the Idempotency Lock
+                    if ga_client_id:
+                        print(f"Triggering GA4 Pipeline for Order {order.id}")
+                        asyncio.create_task(
+                            fire_ga4_purchase_event(
+                                order_id=order.id,
+                                ga_client_id=ga_client_id,
+                                ga_session_id=ga_session_id,
+                                items_data=items_data,
+                                amount_total=amount_received,
+                                amount_tax=amount_tax,
+                                amount_shipping=amount_shipping
                             )
+                        )
 
-                    await session.commit()
-                    print(f"Order {order.id} marked as PAID with comprehensive details.")
+                await session.commit()
+                print(f"Order {order.id} marked as PAID with comprehensive details.")ils.")
 
                 # ONLY send confirmation email on Checkout Session completion (contains items & customer info)
                 if event['type'] == 'checkout.session.completed':
