@@ -18,10 +18,11 @@ const LEGACY_ID_TO_SLUG: Record<string, string> = {
 
 
 const CITIES = [
-    'honolulu', 'pearl-city', 'waipahu', 'mililani', 'kaneohe', 'kailua',
-    'ewa-beach', 'kapolei', 'aiea', 'wahiawa', 'makakilo', 'halawa',
-    'waimalu', 'hickam-housing', 'ocean-pointe', 'schofield-barracks',
-    'royal-kunia', 'village-park', 'nanaikapono', 'mailikukahi', 'kalaeloa', 'waipio'
+    'aiea', 'pearl-city', 'mililani', 'waipio-gentry', 'waikele',
+    'honolulu', 'kalihi', 'manoa', 'kaimuki', 'hawaii-kai',
+    'salt-lake', 'aina-haina', 'kahala', 'mccully', 'makiki',
+    'kapolei', 'ewa-beach', 'waipahu', 'kunia',
+    'kailua', 'kaneohe', 'kahaluu'
 ];
 
 function getCitySiphon(urlPath: string): string {

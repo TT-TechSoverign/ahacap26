@@ -27,9 +27,53 @@ function CheckoutContent() {
     const finalTotal = subtotal + taxAmount;
 
     const handleSuccess = () => {
+        // Retrieve session_id for transaction alignment
+        const sessionId = searchParams.get('session_id') || `AHAC-${Math.floor(Math.random() * 90000) + 10000}`;
+
+        // GTM E-Commerce purchase push
+        if (typeof window !== 'undefined' && (window as any).dataLayer) {
+            (window as any).dataLayer.push({
+                event: 'purchase',
+                ecommerce: {
+                    transaction_id: sessionId,
+                    value: finalTotal,
+                    tax: taxAmount,
+                    shipping: deliveryFee,
+                    currency: 'USD',
+                    items: items.map((item, index) => ({
+                        item_id: String(item.id),
+                        item_name: item.name,
+                        price: item.price,
+                        quantity: item.quantity,
+                        index: index
+                    }))
+                }
+            });
+        }
+
         setStep('success');
         clearCart();
     };
+
+    // Track begin_checkout
+    useEffect(() => {
+        if (items.length > 0 && typeof window !== 'undefined' && (window as any).dataLayer) {
+            (window as any).dataLayer.push({
+                event: 'begin_checkout',
+                ecommerce: {
+                    value: cartTotal,
+                    currency: 'USD',
+                    items: items.map((item, index) => ({
+                        item_id: String(item.id),
+                        item_name: item.name,
+                        price: item.price,
+                        quantity: item.quantity,
+                        index: index
+                    }))
+                }
+            });
+        }
+    }, [items, cartTotal]);
 
     useEffect(() => {
         console.log('CheckoutPage: params check', {

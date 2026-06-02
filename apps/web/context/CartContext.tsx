@@ -53,11 +53,51 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             }
             return [...current, { ...product, quantity: 1 }];
         });
+
+        // GTM E-Commerce add_to_cart push
+        if (typeof window !== 'undefined' && (window as any).dataLayer) {
+            (window as any).dataLayer.push({
+                event: 'add_to_cart',
+                ecommerce: {
+                    currency: 'USD',
+                    value: product.price,
+                    items: [
+                        {
+                            item_id: String(product.id),
+                            item_name: product.name,
+                            price: product.price,
+                            quantity: 1
+                        }
+                    ]
+                }
+            });
+        }
+
         setIsOpen(true);
     };
 
     const removeFromCart = (id: number) => {
+        const itemToRemove = items.find(item => item.id === id);
         setItems(current => current.filter(item => item.id !== id));
+
+        // GTM E-Commerce remove_from_cart push
+        if (itemToRemove && typeof window !== 'undefined' && (window as any).dataLayer) {
+            (window as any).dataLayer.push({
+                event: 'remove_from_cart',
+                ecommerce: {
+                    currency: 'USD',
+                    value: itemToRemove.price * itemToRemove.quantity,
+                    items: [
+                        {
+                            item_id: String(itemToRemove.id),
+                            item_name: itemToRemove.name,
+                            price: itemToRemove.price,
+                            quantity: itemToRemove.quantity
+                        }
+                    ]
+                }
+            });
+        }
     };
 
     const clearCart = () => {

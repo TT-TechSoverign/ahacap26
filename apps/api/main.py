@@ -357,7 +357,7 @@ async def process_stripe_event(event: dict, payload_data: dict):
                         print(f"Triggering GA4 Pipeline for Order {order.id}")
                         asyncio.create_task(
                             fire_ga4_purchase_event(
-                                order_id=order.id,
+                                order_id=obj['id'], # Stripe Session ID alignment for GTM deduplication
                                 ga_client_id=ga_client_id,
                                 ga_session_id=ga_session_id,
                                 items_data=items_data,
