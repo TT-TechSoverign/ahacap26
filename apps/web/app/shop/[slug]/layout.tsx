@@ -154,16 +154,13 @@ export default async function ProductLayout({ params, children }: Props) {
                 "@type": "Organization",
                 "name": "Affordable Home A/C"
             },
-            // Resolves GSC "Missing hasMerchantReturnPolicy" warning
+            // Resolves GSC "Missing hasMerchantReturnPolicy" warning with strict CEO-mandated "All Sales Final" policy
             "hasMerchantReturnPolicy": {
                 "@type": "MerchantReturnPolicy",
                 "applicableCountry": "US",
-                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnPeriod",
-                "merchantReturnDays": 30,
-                "returnMethod": "https://schema.org/ReturnInStore",
-                "returnFees": "https://schema.org/FreeReturn",
-                "name": "30-Day Oahu Return Policy",
-                "description": "30-day Oahu return policy for unused and unopened AC units. Returns must be physically made in original packaging to our Waipahu Distribution Center."
+                "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+                "name": "All Sales Final",
+                "description": "All sales are final. No refunds, returns, or exchanges are accepted. All warranty claims and defective units must be processed directly through the manufacturer."
             },
             // Resolves GSC "Missing shippingDetails" warning
             "shippingDetails": [
