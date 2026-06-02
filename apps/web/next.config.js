@@ -2,7 +2,7 @@
 const path = require('path');
 
 const nextConfig = {
-    output: "standalone",
+    output: process.platform === 'win32' ? undefined : 'standalone',
     experimental: {
         outputFileTracingRoot: path.join(__dirname, '../../'),
         cpus: 1,
