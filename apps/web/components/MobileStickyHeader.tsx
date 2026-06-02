@@ -32,7 +32,7 @@ export default function MobileStickyHeader() {
         <>
             <header className="fixed top-0 w-full z-[60] flex md:hidden flex-col pointer-events-none">
                 <div 
-                    className="pointer-events-auto bg-[#0F172A]/95 backdrop-blur-md border-b border-slate-800 text-white relative transition-all duration-300 shadow-md"
+                    className="pointer-events-auto bg-[#0a0e14]/95 backdrop-blur-md border-b border-slate-800 text-white relative transition-all duration-300 shadow-md"
                     style={{ padding: isScrolled ? '0.5rem 0' : '1rem 0' }}
                 >
                     <div className="px-6 flex justify-between items-center relative">

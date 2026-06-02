@@ -59,7 +59,7 @@ export default function NavbarV2() {
             <div className="pointer-events-auto shadow-md relative flex flex-col">
 
                 {/* Row 1: Logo & Brands (White Background) */}
-                <div className="bg-white/95 backdrop-blur-md border-b border-slate-100 text-slate-900 z-20 relative">
+                <div className="bg-[#0a0e14]/95 backdrop-blur-md border-b border-slate-800/80 text-white z-20 relative">
                     <div className="max-w-7xl mx-auto px-6 py-2 flex flex-col gap-2">
                         <div className="flex justify-between items-center relative py-1 min-h-[100px] md:min-h-0">
 
@@ -67,7 +67,7 @@ export default function NavbarV2() {
                             <div className="md:hidden absolute left-0 top-1/2 -translate-y-1/2 z-30">
                                 <button
                                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                    className="text-slate-900 hover:text-primary transition-colors p-2"
+                                    className="text-white hover:text-cyan-400 transition-colors p-2"
                                 >
                                     <span className="material-symbols-outlined text-3xl">
                                         {mobileMenuOpen ? 'close' : 'menu'}
@@ -77,13 +77,13 @@ export default function NavbarV2() {
 
                             {/* Left Brands (Desktop Only: Window & Central Mix) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-end pr-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link href="/shop" className="text-rose-500 font-sans font-black tracking-tighter text-2xl relative group cursor-pointer block">
+                                <Link href="/shop" className="text-rose-400 font-sans font-black tracking-tighter text-2xl relative group cursor-pointer block">
                                     LG
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/shop" className="text-blue-600 font-serif font-bold tracking-wide text-lg relative group cursor-pointer block">
+                                <Link href="/shop" className="text-blue-400 font-serif font-bold tracking-wide text-lg relative group cursor-pointer block">
                                     GE
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                                 <Link href="/shop#rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-xl relative group cursor-pointer block pb-1">
                                     Hawai&apos;i Energy
@@ -107,21 +107,21 @@ export default function NavbarV2() {
 
                             {/* Right Brands (Desktop Only: Mini Splits) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link href="/mini_split_ac#mitsubishi-electric" className="text-red-600 font-header font-bold tracking-normal uppercase text-sm relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#mitsubishi-electric" className="text-red-500 font-header font-bold tracking-normal uppercase text-sm relative group cursor-pointer block">
                                     MITSUBISHI ELECTRIC
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#fujitsu" className="text-red-600 font-sans font-bold italic tracking-widest text-xl relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#fujitsu" className="text-red-500 font-sans font-bold italic tracking-widest text-xl relative group cursor-pointer block">
                                     FUJITSU
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                                 <Link href="/mini_split_ac#daikin" className="text-[#00B5E2] font-header font-medium tracking-widest text-lg relative group cursor-pointer block pb-1">
                                     DAIKIN
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#carrier" className="text-blue-700 font-sans font-extrabold tracking-tighter text-xl relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#carrier" className="text-blue-400 font-sans font-extrabold tracking-tighter text-xl relative group cursor-pointer block">
                                     CARRIER
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                             </div>
 
@@ -129,7 +129,7 @@ export default function NavbarV2() {
                             <div className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 z-30">
                                 <button
                                     onClick={openCart}
-                                    className="text-slate-900 hover:text-primary transition-colors p-2 relative"
+                                    className="text-white hover:text-cyan-400 transition-colors p-2 relative"
                                 >
                                     <span className="material-symbols-outlined text-3xl">shopping_cart</span>
                                     {items.length > 0 && (
