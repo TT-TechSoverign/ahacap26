@@ -67,9 +67,10 @@ export default function Section2OurServicesV2() {
             <div className="container mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-auto md:h-[420px] max-w-5xl mx-auto">
                     {services.map((service, index) => (
-                        <div
+                        <Link
                             key={service.id}
-                            className="relative group h-[280px] md:h-full overflow-hidden rounded-2xl shadow-2xl border border-white/20 bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
+                            href={service.link}
+                            className="block relative group h-[280px] md:h-full overflow-hidden rounded-2xl shadow-2xl border border-white/20 bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
                         >
                             {/* Background Image - Restored Visibility */}
                             <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
@@ -77,7 +78,7 @@ export default function Section2OurServicesV2() {
                                     src={service.cleanImage}
                                     alt={service.defaultTitle}
                                     fill
-                                    className="object-cover object-center opacity-80 group-hover:opacity-60 group-hover:blur-[2px] transition-all duration-700"
+                                    className="object-cover object-center opacity-80 group-hover:opacity-60 md:group-hover:blur-[2px] transition-all duration-700"
                                 />
                                 {/* Primary Dark Blue Overlay (Fixed 20%) */}
                                 <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-20" />
@@ -96,25 +97,24 @@ export default function Section2OurServicesV2() {
                                 {/* Subtle Animated Underline */}
                                 <div className="w-12 h-1 bg-cyan-500/0 group-hover:bg-cyan-400 rounded-full mb-0 transition-all duration-500 group-hover:w-20 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.8)] group-hover:mb-4" />
 
-                                {/* Expandable Content (Description & CTA) - Hidden by default for perfect centering */}
-                                <div className="max-h-0 opacity-0 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)] group-hover:max-h-[300px] group-hover:opacity-100 flex flex-col items-center">
+                                {/* Expandable Content (Description & CTA) - Fully visible on mobile, expandable hover on desktop */}
+                                <div className="max-h-[300px] opacity-100 md:max-h-0 md:opacity-0 md:overflow-hidden md:transition-all md:duration-700 md:ease-[cubic-bezier(0.25,0.8,0.25,1)] md:group-hover:max-h-[300px] md:group-hover:opacity-100 flex flex-col items-center">
                                     <p className="font-sans text-slate-100 text-base md:text-lg leading-snug drop-shadow-md font-medium mb-6 max-w-xs">
                                         {/* Force local content effectively for Shop to ensure link/title integrity */}
                                         {(contentData.landing?.services?.[service.id as keyof typeof contentData.landing.services]?.description || service.defaultDesc)}
                                     </p>
 
-                                    <Link
-                                        href={service.link}
+                                    <div
                                         className={cn(
-                                            "inline-flex items-center gap-2 px-6 py-2.5 border-2 border-white/20 hover:border-cyan-400 text-white hover:text-cyan-400 font-black uppercase tracking-widest text-xs md:text-sm rounded-full transition-all duration-300 hover:bg-slate-900/80 backdrop-blur-sm"
+                                            "inline-flex items-center gap-2 px-6 py-2.5 border-2 border-white/20 group-hover:border-cyan-400 text-white group-hover:text-cyan-400 font-black uppercase tracking-widest text-xs md:text-sm rounded-full transition-all duration-300 group-hover:bg-slate-900/80 backdrop-blur-sm"
                                         )}
                                     >
                                         <span>Learn More</span>
                                         <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                                    </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
