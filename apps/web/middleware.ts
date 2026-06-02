@@ -37,6 +37,16 @@ function getCitySiphon(urlPath: string): string {
 export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     
+    // Direct permanent redirect for /index.html to / to merge domain authority and eliminate duplicate canonical split
+    if (url.pathname === '/index.html' || url.pathname.startsWith('/index.html/')) {
+        const finalUrl = new URL('/', request.url);
+        // Preserve any surviving search parameters (e.g. ?gclid, ?utm_source) for analytics attribution
+        url.searchParams.forEach((value, key) => {
+            finalUrl.searchParams.append(key, value);
+        });
+        return NextResponse.redirect(finalUrl, 301);
+    }
+
     // 1. Legacy Route Interception
     if (url.pathname.startsWith('/product/') || 
         url.pathname.startsWith('/product-category/') || 

@@ -16,13 +16,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     let data = contentData;
     try {
-        const livePath = path.join(process.cwd(), 'lib/content/content.json.LIVE');
-        if (fs.existsSync(livePath)) {
-            const raw = fs.readFileSync(livePath, 'utf8');
+        // Monorepo-aware path resolution
+        const pathsToTry = [
+            path.join(process.cwd(), 'lib/content/content.json.LIVE'),
+            path.join(process.cwd(), 'apps/web/lib/content/content.json.LIVE'),
+        ];
+        
+        let resolvedPath = '';
+        for (const p of pathsToTry) {
+            if (fs.existsSync(p)) {
+                resolvedPath = p;
+                break;
+            }
+        }
+
+        if (resolvedPath) {
+            const raw = fs.readFileSync(resolvedPath, 'utf8');
             data = JSON.parse(raw);
+            console.log(`[Sitemap] Successfully read live content from ${resolvedPath}`);
+        } else {
+            console.warn('[Sitemap] content.json.LIVE not found in known paths, falling back to static build-time content.');
         }
     } catch (e) {
-        console.warn('[Sitemap] Failed to read .LIVE content, falling back to static build-time content.');
+        console.warn('[Sitemap] Failed to read live content, falling back to static content.', e);
     }
 
     // Extract service area cities
