@@ -52,7 +52,7 @@ export default function MobileStickyHeader() {
                         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20">
                             <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 ${isScrolled ? 'h-10 w-24' : 'h-16 w-36'}`}>
                                 <Image
-                                    src="/assets/ahac-logo-updated-businfo.png"
+                                    src="/assets/logo.svg"
                                     alt="AHAC Logo"
                                     fill
                                     className="object-contain"
