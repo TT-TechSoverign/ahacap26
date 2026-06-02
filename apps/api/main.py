@@ -368,7 +368,7 @@ async def process_stripe_event(event: dict, payload_data: dict):
                         )
 
                 await session.commit()
-                print(f"Order {order.id} marked as PAID with comprehensive details.")ils.")
+                print(f"Order {order.id} marked as PAID with comprehensive details.")
 
                 # ONLY send confirmation email on Checkout Session completion (contains items & customer info)
                 if event['type'] == 'checkout.session.completed':
