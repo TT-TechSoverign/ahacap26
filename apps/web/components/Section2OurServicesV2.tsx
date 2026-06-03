@@ -11,17 +11,27 @@ const MotionLink = motion(Link);
 
 export default function Section2OurServicesV2() {
     const [expandedCard, setExpandedCard] = useState<string | null>(null);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        
         const handleOutsideClick = () => {
             setExpandedCard(null);
         };
         window.addEventListener('click', handleOutsideClick);
-        return () => window.removeEventListener('click', handleOutsideClick);
+        
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            window.removeEventListener('click', handleOutsideClick);
+        };
     }, []);
 
     const handleCardClick = (e: React.MouseEvent, serviceId: string) => {
-        const isMobile = window.innerWidth < 768;
         if (isMobile) {
             if (expandedCard !== serviceId) {
                 e.preventDefault();
@@ -75,9 +85,9 @@ export default function Section2OurServicesV2() {
                 }}
                 className={cn(
                     "block relative group h-[280px] md:h-[400px] overflow-hidden rounded-2xl border transition-all duration-500",
-                    isExpanded 
-                        ? "border-cyan-500/30 shadow-[0_0_30px_rgba(6,182,212,0.15)]" 
-                        : "border-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.1)] md:border-white/20 md:shadow-2xl md:hover:border-cyan-500/30 md:hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
+                    isMobile
+                        ? (isExpanded ? "border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.2)]" : "border-white/20 shadow-2xl")
+                        : "border-white/20 shadow-2xl md:hover:border-cyan-500/30 md:hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
                 )}
             >
                 {/* Background Image */}
@@ -101,8 +111,8 @@ export default function Section2OurServicesV2() {
                     {/* Title with Cyan Glow & Underline */}
                     <h3 className={cn(
                         "font-header font-black text-xl md:text-3xl uppercase tracking-tighter mb-2 drop-shadow-lg transition-all duration-300",
-                        isExpanded 
-                            ? "text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]" 
+                        isMobile 
+                            ? (isExpanded ? "text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]" : "text-white")
                             : "text-white md:group-hover:text-cyan-400 md:group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]"
                     )}>
                         {(contentData.landing?.services?.[service.id as keyof typeof contentData.landing.services]?.title || service.defaultTitle)}
@@ -111,18 +121,25 @@ export default function Section2OurServicesV2() {
                     {/* Subtle Animated Underline */}
                     <div className={cn(
                         "rounded-full transition-all duration-500",
-                        isExpanded 
-                            ? "w-20 h-1 bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] mb-4" 
+                        isMobile
+                            ? (isExpanded ? "w-20 h-1 bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] mb-4" : "w-12 h-1 bg-cyan-500/0 mb-0")
                             : "w-12 h-1 bg-cyan-500/0 mb-0 md:group-hover:bg-cyan-400 md:group-hover:w-20 md:group-hover:shadow-[0_0_8px_rgba(34,211,238,0.8)] md:group-hover:mb-4"
                     )} />
 
                     {/* Expandable Content (Description & CTA) */}
-                    <div className={cn(
-                        "overflow-hidden flex flex-col items-center transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]",
-                        isExpanded 
-                            ? "max-h-[300px] opacity-100 mt-2" 
-                            : "max-h-0 opacity-0 md:max-h-0 md:opacity-0 md:overflow-hidden md:group-hover:max-h-[300px] md:group-hover:opacity-100"
-                    )}>
+                    <div
+                        className={cn(
+                            "overflow-hidden flex flex-col items-center transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]",
+                            isMobile 
+                                ? "" 
+                                : "max-h-0 opacity-0 md:max-h-0 md:opacity-0 md:overflow-hidden md:group-hover:max-h-[300px] md:group-hover:opacity-100"
+                        )}
+                        style={isMobile ? {
+                            maxHeight: isExpanded ? '300px' : '0px',
+                            opacity: isExpanded ? 1 : 0,
+                            marginTop: isExpanded ? '8px' : '0px'
+                        } : undefined}
+                    >
                         <p className="font-sans text-slate-100 text-base md:text-lg leading-snug drop-shadow-md font-medium mb-6 max-w-xs">
                             {(contentData.landing?.services?.[service.id as keyof typeof contentData.landing.services]?.description || service.defaultDesc)}
                         </p>
@@ -130,8 +147,8 @@ export default function Section2OurServicesV2() {
                         <div
                             className={cn(
                                 "inline-flex items-center gap-2 px-6 py-2.5 border-2 rounded-full transition-all duration-300",
-                                isExpanded 
-                                    ? "border-cyan-400 text-cyan-400 bg-slate-900/80 backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.2)]" 
+                                isMobile
+                                    ? (isExpanded ? "border-cyan-400 text-cyan-400 bg-slate-900/80 backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.2)]" : "border-white/20 text-white")
                                     : "border-white/20 text-white md:bg-transparent md:group-hover:border-cyan-400 md:group-hover:text-cyan-400 md:group-hover:bg-slate-900/80 md:group-hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]"
                             )}
                         >
