@@ -2,8 +2,11 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import contentData from '../lib/content/content.json';
 import { cn } from '@/lib/utils';
+
+const MotionLink = motion(Link);
 
 export default function Section2OurServicesV2() {
 
@@ -67,10 +70,12 @@ export default function Section2OurServicesV2() {
             <div className="container mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-auto md:h-[420px] max-w-5xl mx-auto">
                     {services.map((service, index) => (
-                        <Link
+                        <MotionLink
                             key={service.id}
                             href={service.link}
-                            className="block relative group h-[280px] md:h-full overflow-hidden rounded-2xl shadow-2xl border border-white/20 bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
+                            whileHover={{ y: -6, scale: 1.015 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="block relative group h-[280px] md:h-full overflow-hidden rounded-2xl border border-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.1)] md:border-white/20 md:shadow-2xl md:hover:border-cyan-500/30 md:hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-500"
                         >
                             {/* Background Image - Restored Visibility */}
                             <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
@@ -91,11 +96,11 @@ export default function Section2OurServicesV2() {
                             <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-8">
 
                                 {/* Title with Cyan Glow & Underline */}
-                                <h3 className="font-header font-black text-xl md:text-3xl text-white uppercase tracking-tighter mb-2 drop-shadow-lg transition-all duration-300 group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
+                                <h3 className="font-header font-black text-xl md:text-3xl text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.6)] md:text-white uppercase tracking-tighter mb-2 drop-shadow-lg transition-all duration-300 md:group-hover:text-cyan-400 md:group-hover:drop-shadow-[0_0_15px_rgba(34,211,238,0.6)]">
                                     {(contentData.landing?.services?.[service.id as keyof typeof contentData.landing.services]?.title || service.defaultTitle)}
                                 </h3>
                                 {/* Subtle Animated Underline */}
-                                <div className="w-12 h-1 bg-cyan-500/0 group-hover:bg-cyan-400 rounded-full mb-0 transition-all duration-500 group-hover:w-20 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.8)] group-hover:mb-4" />
+                                <div className="w-20 h-1 bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] mb-4 md:w-12 md:bg-cyan-500/0 md:mb-0 md:group-hover:bg-cyan-400 rounded-full transition-all duration-500 md:group-hover:w-20 md:group-hover:shadow-[0_0_8px_rgba(34,211,238,0.8)] md:group-hover:mb-4" />
 
                                 {/* Expandable Content (Description & CTA) - Fully visible on mobile, expandable hover on desktop */}
                                 <div className="max-h-[300px] opacity-100 md:max-h-0 md:opacity-0 md:overflow-hidden md:transition-all md:duration-700 md:ease-[cubic-bezier(0.25,0.8,0.25,1)] md:group-hover:max-h-[300px] md:group-hover:opacity-100 flex flex-col items-center">
@@ -106,7 +111,7 @@ export default function Section2OurServicesV2() {
 
                                     <div
                                         className={cn(
-                                            "inline-flex items-center gap-2 px-6 py-2.5 border-2 border-white/20 group-hover:border-cyan-400 text-white group-hover:text-cyan-400 font-black uppercase tracking-widest text-xs md:text-sm rounded-full transition-all duration-300 group-hover:bg-slate-900/80 backdrop-blur-sm"
+                                            "inline-flex items-center gap-2 px-6 py-2.5 border-2 border-cyan-400/85 text-cyan-300 font-black uppercase tracking-widest text-xs md:text-sm rounded-full bg-slate-900/80 backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.2)] md:border-white/20 md:text-white md:bg-transparent md:shadow-none md:group-hover:border-cyan-400 md:group-hover:text-cyan-400 md:group-hover:bg-slate-900/80 md:group-hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-300"
                                         )}
                                     >
                                         <span>Learn More</span>
@@ -114,7 +119,7 @@ export default function Section2OurServicesV2() {
                                     </div>
                                 </div>
                             </div>
-                        </Link>
+                        </MotionLink>
                     ))}
                 </div>
             </div>
