@@ -43,3 +43,5 @@ php.ini
 # Ignore local analytics data
 _analytics_data/
 *.csv
+*.json.json
+local_backup_*

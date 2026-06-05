@@ -22,7 +22,7 @@ SENTRY_DSN = os.getenv("SENTRY_DSN")
 if SENTRY_DSN:
     sentry_sdk.init(dsn=SENTRY_DSN, traces_sample_rate=1.0, profiles_sample_rate=1.0)
 
-from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
+from fastapi import FastAPI, HTTPException, Request, BackgroundTasks, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -447,10 +447,39 @@ async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
 
 # --- MAINTENANCE ---
 from seed_products import seed
-@app.post("/api/v1/maintenance/seed_products")
+from dependencies import verify_admin_token
+
+@app.post("/api/v1/maintenance/seed_products", dependencies=[Depends(verify_admin_token)])
 async def seed_products_endpoint(background_tasks: BackgroundTasks):
     background_tasks.add_task(seed)
     return {"status": "seeding_started"}
+
+@app.post("/api/v1/admin/login")
+async def admin_login(payload: dict):
+    pin = payload.get("pin")
+    if not pin:
+        raise HTTPException(status_code=400, detail="Missing PIN")
+    expected_pin = os.getenv("ADMIN_PIN", "8081")
+    if pin != expected_pin:
+        raise HTTPException(status_code=401, detail="Invalid PIN")
+    from dependencies import create_signed_token
+    signed_token = create_signed_token("admin")
+    response = JSONResponse(content={"token": f"Bearer {signed_token}"})
+    response.set_cookie(
+        key="admin_session",
+        value=f"Bearer {signed_token}",
+        httponly=True,
+        samesite="strict",
+        secure=True,
+        max_age=86400
+    )
+    return response
+
+@app.post("/api/v1/admin/logout")
+async def admin_logout():
+    response = JSONResponse(content={"status": "success"})
+    response.delete_cookie("admin_session")
+    return response
 
 @app.get("/api/v1/health")
 async def health_check():

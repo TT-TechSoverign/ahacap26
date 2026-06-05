@@ -3,7 +3,7 @@ from fastapi.encoders import jsonable_encoder
 import schemas
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional, List
-from dependencies import get_db
+from dependencies import get_db, verify_admin_token
 from domain import catalog
 import json
 import os
@@ -54,9 +54,10 @@ def persist_product_changes(product_data, action='update'):
         frontend_url = os.environ.get("FRONTEND_INTERNAL_URL", "http://web:3000")
         hook_url = f"{frontend_url}/api/revalidate"
         
+        revalidate_secret = os.environ.get("REVALIDATE_SECRET", "internal_ahac_revalidate_777")
         req = urllib.request.Request(
             hook_url, 
-            data=json.dumps({"secret": "internal_ahac_revalidate_777", "path": "/shop"}).encode('utf-8'),
+            data=json.dumps({"secret": revalidate_secret, "path": "/shop"}).encode('utf-8'),
             headers={'Content-Type': 'application/json'}
         )
         with urllib.request.urlopen(req, timeout=3) as response:
@@ -100,7 +101,7 @@ async def validate_inventory(
     items_data = [item.dict() for item in validation_request.items]
     return await catalog.validate_inventory_service(db, items_data)
 
-@router.post("")
+@router.post("", dependencies=[Depends(verify_admin_token)])
 async def create_product(
     product: schemas.ProductCreate,
     db: AsyncSession = Depends(get_db)
@@ -132,7 +133,7 @@ async def create_product(
     
     return product_dict
 
-@router.put("/{product_id}")
+@router.put("/{product_id}", dependencies=[Depends(verify_admin_token)])
 async def update_product(
     product_id: int,
     product_update: schemas.ProductUpdate,
@@ -182,7 +183,7 @@ async def update_product(
         from fastapi import HTTPException
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
-@router.delete("/{product_id}")
+@router.delete("/{product_id}", dependencies=[Depends(verify_admin_token)])
 async def delete_product(
     product_id: int,
     db: AsyncSession = Depends(get_db)

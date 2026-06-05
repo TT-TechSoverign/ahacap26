@@ -9,7 +9,7 @@ services:
         - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     container_name: staging-web
     ports:
-      - "3002:3000"
+      - "127.0.0.1:3002:3000"
     restart: always
     env_file:
       - .env.staging
@@ -35,13 +35,13 @@ services:
       context: ./apps/api
     container_name: staging-api
     ports:
-      - "8002:8000"
+      - "127.0.0.1:8002:8000"
     restart: always
     env_file:
       - .env.staging
     environment:
       - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@staging-db:5432/${POSTGRES_DB}
-      - REDIS_URL=redis://staging-redis:6379
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@staging-redis:6379
       - CHAOS_MODE=False
     volumes:
       - ./apps/api/content:/app/content:ro
@@ -62,7 +62,7 @@ services:
     image: postgres:16-alpine
     container_name: staging-db
     ports:
-      - "5434:5432"
+      - "127.0.0.1:5434:5432"
     restart: always
     env_file:
       - .env.staging
@@ -80,7 +80,8 @@ services:
     container_name: staging-redis
     restart: always
     ports:
-      - "6381:6379"
+      - "127.0.0.1:6381:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s

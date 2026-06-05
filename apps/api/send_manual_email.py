@@ -12,7 +12,7 @@ from services import email as email_service
 async def manual_send():
     load_dotenv()
     
-    target_email = "dtmasaki6@gmail.com"
+    target_email = "customer@example.com"
     order_id = "ORD-DNMK0AA"
     total_cents = 56544
     fulfillment_mode = "pickup"
@@ -23,10 +23,10 @@ async def manual_send():
     ]
     
     customer_info = {
-        "name": "Dave T Masaki",
+        "name": "John Doe",
         "email": target_email,
-        "phone": "(808) 216-5211",
-        "address": {"city": "Pearl City", "line1": "2278 Aupaka St", "postal_code": "96782", "state": "HI", "country": "US"}
+        "phone": "(808) 555-0199",
+        "address": {"city": "Honolulu", "line1": "123 Main St", "postal_code": "96814", "state": "HI", "country": "US"}
     }
     
     payment_info = {

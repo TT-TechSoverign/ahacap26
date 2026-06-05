@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException, Body
+from fastapi import APIRouter, HTTPException, Body, Request
 from pydantic import BaseModel
 from domain import payments
+from cache import check_rate_limit
 
 router = APIRouter()
 
@@ -9,7 +10,11 @@ class PaymentIntentRequest(BaseModel):
     idempotencyKey: str
 
 @router.post("/create-intent")
-async def create_payment_intent(payload: PaymentIntentRequest):
+async def create_payment_intent(request: Request, payload: PaymentIntentRequest):
+    ip = request.client.host if request.client else "unknown"
+    if not await check_rate_limit(ip, "payments", limit=10, period=3600):
+        raise HTTPException(status_code=429, detail="Too many payment requests. Please try again later.")
+        
     try:
         return await payments.create_payment_intent_service(
             amount=payload.amount,

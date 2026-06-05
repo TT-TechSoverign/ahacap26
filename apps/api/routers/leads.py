@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, Request
 from sqlalchemy.ext.asyncio import AsyncSession
+from cache import check_rate_limit
 from sqlalchemy.future import select
 from pydantic import BaseModel
 from typing import Optional
@@ -27,14 +28,21 @@ class LeadCreate(BaseModel):
     urgency: str
     notes: Optional[str] = None
 
+
+
 @router.post("", status_code=201, include_in_schema=False)
 @router.post("/", status_code=201)
 async def create_lead(
     lead_data: LeadCreate, 
     background_tasks: BackgroundTasks,
+    request: Request,
     db: AsyncSession = Depends(get_db)
 ):
     try:
+        ip = request.client.host if request.client else "unknown"
+        if not await check_rate_limit(ip, "leads", limit=5, period=3600):
+            raise HTTPException(status_code=429, detail="Too many inquiries. Please try again later.")
+
         # 1. Create DB Model
         new_lead = models.Lead(
             first_name=lead_data.first_name,

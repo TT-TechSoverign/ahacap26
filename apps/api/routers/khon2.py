@@ -1,9 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import json
 import os
 import logging
+from dependencies import verify_admin_token
 
 router = APIRouter()
 logger = logging.getLogger("khon2")
@@ -33,7 +34,7 @@ async def get_khon2_drafts():
         logger.error(f"Failed to read KHON2 drafts: {e}")
         return {"data": []}
 
-@router.post("/save")
+@router.post("/save", dependencies=[Depends(verify_admin_token)])
 async def save_khon2_drafts(payload: Khon2DraftPayload):
     """
     Saves the entire KHON2 portal state to a persistent JSON file.
