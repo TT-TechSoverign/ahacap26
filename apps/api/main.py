@@ -204,6 +204,17 @@ async def fire_ga4_purchase_event(order_id, ga_client_id, ga_session_id, items_d
         print(f"GA4 MP Error: {e}")
 
 async def process_stripe_event(event: dict, payload_data: dict):
+    # Two-Way Webhook Filtering (Strategy 2)
+    # Skip CRM invoice events early to prevent side-effects on storefront
+    try:
+        obj = payload_data.get('data', {}).get('object', {})
+        metadata = obj.get('metadata', {}) or {}
+        if metadata.get('invoice_id') or metadata.get('source') == 'crm':
+            print(f"[Storefront API Webhook] Skipping CRM invoice transaction (invoice_id={metadata.get('invoice_id')}, source={metadata.get('source')}).")
+            return
+    except Exception as e:
+        print(f"[Storefront API Webhook Error] Pre-filtering failed: {e}")
+
     stripe_pid = None
     metadata = {}
     receipt_email = None
