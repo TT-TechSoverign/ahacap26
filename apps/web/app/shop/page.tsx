@@ -930,7 +930,7 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
     const isPromo = product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0;
     
     const borderClass = isPromo 
-        ? "border-red-500/40 shadow-[0_0_20px_rgba(239,68,68,0.15),_inset_0_0_15px_rgba(59,130,246,0.1)] hover:border-red-500/70 hover:shadow-[0_0_35px_rgba(239,68,68,0.3),_inset_0_0_25px_rgba(59,130,246,0.2)]"
+        ? "animate-patriotic-glow"
         : "border-white/5 hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,174,239,0.15)]";
 
     return (

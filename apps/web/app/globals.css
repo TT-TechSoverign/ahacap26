@@ -56,3 +56,43 @@ body {
     width: 200%;
     animation: scroll 30s linear infinite;
 }
+
+@keyframes waving-patriotic-glow {
+    0%, 100% {
+        border-color: rgba(239, 68, 68, 0.4);
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.15), inset 0 0 10px rgba(59, 130, 246, 0.05);
+    }
+    33% {
+        border-color: rgba(226, 232, 240, 0.4);
+        box-shadow: 0 0 15px rgba(226, 232, 240, 0.15), inset 0 0 10px rgba(239, 68, 68, 0.05);
+    }
+    66% {
+        border-color: rgba(59, 130, 246, 0.4);
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.15), inset 0 0 10px rgba(226, 232, 240, 0.05);
+    }
+}
+
+.animate-patriotic-glow {
+    animation: waving-patriotic-glow 6s linear infinite;
+    border-width: 1px;
+    border-style: solid;
+}
+
+@keyframes waving-patriotic-glow-hover {
+    0%, 100% {
+        border-color: rgba(239, 68, 68, 0.8);
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.35), inset 0 0 15px rgba(59, 130, 246, 0.2);
+    }
+    33% {
+        border-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.35), inset 0 0 15px rgba(239, 68, 68, 0.2);
+    }
+    66% {
+        border-color: rgba(59, 130, 246, 0.8);
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+}
+
+.animate-patriotic-glow:hover {
+    animation: waving-patriotic-glow-hover 3s linear infinite;
+}
