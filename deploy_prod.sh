@@ -68,6 +68,14 @@ echo "🌱 [4/5] Checking Container Health & Database State..."
 echo "Waiting 10 seconds for API and DB boot sequence..."
 sleep 10 
 
+# Run database schema migrations
+echo "⚙️ Running database schema migrations..."
+docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api python fix_db_schema.py
+
+# Run product seeding
+echo "🍎 Seeding products table..."
+docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api python seed_products.py
+
 # Check for the marker file to prevent duplicate seeding
 if ! docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api test -f /app/.seeded_marker 2>/dev/null; then
     echo "🌱 Seeding initial database structure..."

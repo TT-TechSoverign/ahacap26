@@ -18,11 +18,19 @@ export default function FourthOfJulyBanner() {
     const [mounted, setMounted] = useState(false);
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
     const [particles, setParticles] = useState<Particle[]>([]);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
+    const [tiltStyle, setTiltStyle] = useState({});
+    
     const bannerRef = useRef<HTMLDivElement>(null);
     const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
 
     useEffect(() => {
         setMounted(true);
+        setIsTouchDevice(
+            'ontouchstart' in window || 
+            navigator.maxTouchPoints > 0 || 
+            window.matchMedia('(pointer: coarse)').matches
+        );
 
         const timer = setInterval(() => {
             const now = new Date();
@@ -71,10 +79,11 @@ export default function FourthOfJulyBanner() {
         const clickX = e.clientX - rect.left;
         const clickY = e.clientY - rect.top;
 
-        // Generate firework particles
+        // Generate firework particles (denser, high-density spark bursts)
         const colors = ['#EF4444', '#FFFFFF', '#3B82F6', '#F59E0B', '#10B981'];
-        const newParticles: Particle[] = Array.from({ length: 15 }).map((_, i) => {
-            const angle = (Math.PI * 2 * i) / 15 + (Math.random() - 0.5) * 0.5;
+        const numSparks = isTouchDevice ? 10 : 25;
+        const newParticles: Particle[] = Array.from({ length: numSparks }).map((_, i) => {
+            const angle = (Math.PI * 2 * i) / numSparks + (Math.random() - 0.5) * 0.5;
             const speed = 2 + Math.random() * 4;
             return {
                 id: Date.now() + Math.random(),
@@ -87,7 +96,36 @@ export default function FourthOfJulyBanner() {
             };
         });
 
-        setParticles(prev => [...prev, ...newParticles].slice(-60)); // Cap particles
+        setParticles(prev => [...prev, ...newParticles].slice(-120)); // Cap particles at 120
+    };
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        // Trigger firework sparks
+        handleInteraction(e);
+
+        if (isTouchDevice || !bannerRef.current) return;
+        const rect = bannerRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        // Subtle 3D tilt (capped at 4 degrees)
+        const rotateX = ((centerY - y) / centerY) * 4;
+        const rotateY = ((x - centerX) / centerX) * 4;
+
+        setTiltStyle({
+            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`,
+            transition: 'transform 0.1s ease-out',
+        });
+    };
+
+    const handleMouseLeave = () => {
+        if (isTouchDevice) return;
+        setTiltStyle({
+            transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+            transition: 'transform 0.5s ease',
+        });
     };
 
     if (!mounted) return null;
@@ -98,8 +136,10 @@ export default function FourthOfJulyBanner() {
     return (
         <div 
             ref={bannerRef}
-            onMouseMove={handleInteraction}
-            className="w-full relative bg-slate-950 border border-red-500/30 rounded-3xl p-6 md:p-12 overflow-hidden shadow-[0_0_50px_rgba(239,68,68,0.1)] group"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={tiltStyle}
+            className="w-full relative bg-slate-950 border border-red-500/30 rounded-3xl p-6 md:p-12 overflow-hidden shadow-[0_0_50px_rgba(239,68,68,0.1)] group card-hover-trigger"
         >
             {/* Dynamic Grid Background with Glow */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30"></div>
@@ -156,7 +196,7 @@ export default function FourthOfJulyBanner() {
                         </span>
                     </div>
 
-                    <h2 className="text-4xl md:text-6xl font-header font-black uppercase tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] leading-none">
+                    <h2 className="text-4xl md:text-6xl font-header font-black uppercase tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] leading-none chrome-heading-shimmer">
                         Celebrating <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-white to-blue-400">America</span>
                     </h2>
                     

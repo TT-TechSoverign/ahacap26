@@ -106,8 +106,9 @@ export async function POST(req: Request) {
 
         const expiresAt = Math.floor(Date.now() / 1000) + (30 * 60); // 30 minutes lock
 
-        // Check if checkout contains any promo items
-        const hasPromoItem = items.some((item: any) => item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0);
+        // Check if checkout contains any promo items and the promo is active
+        const isPromoActive = Date.now() <= 1785578399000; // July 31st, 2026 23:59:59 HST
+        const hasPromoItem = isPromoActive && items.some((item: any) => item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0);
 
         const session = await stripe.checkout.sessions.create({
 

@@ -20,6 +20,12 @@ export default function PatrioticBackgroundGlow() {
     useEffect(() => {
         setMounted(true);
         
+        const now = new Date();
+        const isActive = now.getTime() <= targetDate.getTime();
+        if (isActive) {
+            document.body.classList.add('promo-active');
+        }
+        
         // Generate soft star-like background spark particles
         const colors = ['rgba(239, 68, 68, 0.15)', 'rgba(255, 255, 255, 0.1)', 'rgba(59, 130, 246, 0.15)'];
         const list: Star[] = Array.from({ length: 24 }).map((_, i) => ({
@@ -32,6 +38,10 @@ export default function PatrioticBackgroundGlow() {
             color: colors[Math.floor(Math.random() * colors.length)]
         }));
         setStars(list);
+
+        return () => {
+            document.body.classList.remove('promo-active');
+        };
     }, []);
 
     if (!mounted) return null;

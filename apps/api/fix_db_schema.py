@@ -79,6 +79,7 @@ async def fix_schema():
 
         # 2. Products Table
         product_cols = [
+            ("subcategory", "VARCHAR"),
             ("image_url", "VARCHAR"),
             ("btu", "INTEGER"),
             ("voltage", "VARCHAR"),

@@ -70,7 +70,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
         // GTM E-Commerce add_to_cart push
         if (typeof window !== 'undefined' && (window as any).dataLayer) {
-            const activePrice = product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0 ? product.promo_price : product.price;
+            const isCampaignActive = new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime();
+            const activePrice = (isCampaignActive && product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0) ? product.promo_price : product.price;
             (window as any).dataLayer.push({
                 event: 'add_to_cart',
                 ecommerce: {
@@ -97,7 +98,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
         // GTM E-Commerce remove_from_cart push
         if (itemToRemove && typeof window !== 'undefined' && (window as any).dataLayer) {
-            const activePrice = itemToRemove.promo_price !== undefined && itemToRemove.promo_price !== null && itemToRemove.promo_price > 0 ? itemToRemove.promo_price : itemToRemove.price;
+            const isCampaignActive = new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime();
+            const activePrice = (isCampaignActive && itemToRemove.promo_price !== undefined && itemToRemove.promo_price !== null && itemToRemove.promo_price > 0) ? itemToRemove.promo_price : itemToRemove.price;
             (window as any).dataLayer.push({
                 event: 'remove_from_cart',
                 ecommerce: {
@@ -121,7 +123,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     };
 
     const cartTotal = items.reduce((total, item) => {
-        const activePrice = item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0 ? item.promo_price : item.price;
+        const isCampaignActive = new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime();
+        const activePrice = (isCampaignActive && item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0) ? item.promo_price : item.price;
         return total + (activePrice * item.quantity);
     }, 0);
     const cartCount = items.reduce((count, item) => count + item.quantity, 0);
