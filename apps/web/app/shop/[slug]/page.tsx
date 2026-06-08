@@ -188,6 +188,7 @@ export default function ProductDetailPage() {
     };
 
     const specSheetUrl = product ? specSheetMap[product.id] : null;
+    const targetDate = useMemo(() => new Date("2026-08-01T09:59:59Z"), []); // July 31st, 2026 23:59:59 HST
 
     if (loading) return (
         <div className="min-h-screen bg-background-dark text-white pt-32 pb-20 px-4 flex items-center justify-center">
@@ -213,7 +214,6 @@ export default function ProductDetailPage() {
         </div>
     );
 
-        const targetDate = useMemo(() => new Date("2026-08-01T09:59:59Z"), []); // July 31st, 2026 23:59:59 HST
     const isCampaignActive = mounted && (new Date().getTime() <= targetDate.getTime());
     const isPromo = isCampaignActive && !!product && !!product.promo_price && product.promo_price > 0;
 
@@ -221,7 +221,7 @@ export default function ProductDetailPage() {
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
 
 
-            <main className="pt-[110px] md:pt-[190px] pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
+            <main className="pt-[120px] md:pt-[190px] pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     {/* Visual Anchor */}
                     <div className="space-y-6 md:sticky md:top-36">

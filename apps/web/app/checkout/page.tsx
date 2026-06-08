@@ -147,7 +147,7 @@ END:VCALENDAR`;
 
     if (step === 'success') {
         return (
-            <main className="min-h-screen bg-[#0f172a] pt-[110px] md:pt-[190px] pb-12 px-4 md:px-8 flex items-center justify-center">
+            <main className="min-h-screen bg-[#0f172a] pt-[120px] md:pt-[190px] pb-12 px-4 md:px-8 flex items-center justify-center">
                 <div className="max-w-md w-full text-center space-y-8 p-8 border border-cyan-500/20 rounded-2xl bg-slate-900/50 backdrop-blur shadow-[0_0_50px_rgba(6,182,212,0.1)]">
                     <div className="relative">
                         <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full" />
@@ -219,7 +219,7 @@ END:VCALENDAR`;
     }
 
     return (
-        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[110px] md:pt-[190px]">
+        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[120px] md:pt-[190px]">
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}

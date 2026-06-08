@@ -99,7 +99,7 @@ export default function NavbarV2() {
                             {/* Center: Prominent Logo */}
                             {/* Mobile: Absolute Center. Desktop: Relative Center */}
                             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 md:flex md:justify-center z-20">
-                                <Link href="/" className="block relative h-20 w-40 md:h-24 md:w-48 group shrink-0 logo-promo-glow">
+                                <Link href="/" className="block relative h-12 w-28 md:h-16 md:w-36 group shrink-0 logo-promo-glow">
                                     <Image
                                         src="/assets/logo.svg"
                                         alt="AHAC Logo"
@@ -156,7 +156,7 @@ export default function NavbarV2() {
                 {/* Row 2: Navigation (Dark Blue Background) */}
                 <div className="bg-[#0F172A] text-white z-10 relative border-t border-slate-800 hidden md:block">
                     <div className="max-w-7xl mx-auto px-6 w-full">
-                        <div className="grid grid-cols-[1fr_auto_1fr] items-center py-3">
+                        <div className="grid grid-cols-[1fr_auto_1fr] items-center py-2">
 
                             {/* Left Col: Spacer */}
                             <div></div>
@@ -192,7 +192,7 @@ export default function NavbarV2() {
                             <div className="flex justify-end items-center">
                                 <button
                                     onClick={openCart}
-                                    className="relative group p-2 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-2"
+                                    className="relative group p-1 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-2"
                                     aria-label="Open Cart"
                                 >
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-300 group-hover:text-cyan-400 hidden lg:block">Cart</span>
