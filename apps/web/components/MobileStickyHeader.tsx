@@ -39,7 +39,7 @@ export default function MobileStickyHeader() {
             <header className="fixed top-0 w-full z-[60] flex md:hidden flex-col pointer-events-none">
                 <div 
                     className="pointer-events-auto bg-[#0a0e14]/95 backdrop-blur-md border-b border-slate-800 text-white relative transition-all duration-300 shadow-md"
-                    style={{ padding: isScrolled ? '0.35rem 0' : '0.65rem 0' }}
+                    style={{ padding: isScrolled ? '0.3rem 0' : '0.5rem 0' }}
                 >
                     <div className="px-6 flex justify-between items-center relative">
                         {/* Hamburger */}
@@ -56,7 +56,7 @@ export default function MobileStickyHeader() {
 
                         {/* Center Logo */}
                         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20">
-                            <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 logo-promo-glow ${isScrolled ? 'h-8 w-20' : 'h-12 w-28'}`}>
+                            <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 logo-promo-glow ${isScrolled ? 'h-10 w-24' : 'h-14 w-32'}`}>
                                 <Image
                                     src="/assets/logo.svg"
                                     alt="AHAC Logo"

@@ -154,14 +154,14 @@ export default function PromoHeroShowcase() {
     if (!mounted || !isCampaignActive) return null;
 
     return (
-        <div className="w-full max-w-6xl mx-auto px-4 py-8">
+        <div className="w-full max-w-5xl mx-auto px-4 py-6">
             <div
                 ref={cardRef}
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 style={{ ...tiltStyle, transformStyle: 'preserve-3d' }}
-                className="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 p-8 md:p-12 shadow-2xl transition-all duration-300 card-hover-trigger btn-promo-glow"
+                className="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 p-6 md:p-8 shadow-2xl transition-all duration-300 card-hover-trigger btn-promo-glow"
             >
                 {/* 3D Reflective Glare Overlay */}
                 <div 
@@ -256,14 +256,14 @@ export default function PromoHeroShowcase() {
                             <span className="chrome-heading-shimmer">Celebrating America Promo</span>
                         </div>
 
-                        <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight text-white">
+                        <h2 className="text-2xl md:text-4xl font-black tracking-tight leading-tight text-white">
                             Breathe Free & Cool <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-white to-blue-500">
                                 This Summer Season
                             </span>
                         </h2>
 
-                        <p className="text-slate-400 text-base md:text-lg max-w-xl leading-relaxed">
+                        <p className="text-slate-400 text-sm md:text-base max-w-xl leading-relaxed">
                             Save up to <strong className="text-white">$1,000</strong> on high-efficiency central A/C and mini-split installations. Guaranteed premium comfort with local professional service.
                         </p>
 
@@ -293,7 +293,7 @@ export default function PromoHeroShowcase() {
                         <div className="flex flex-col sm:flex-row sm:items-center gap-6 pt-4">
                             <Link
                                 href="/contact"
-                                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold tracking-wide transition-all shadow-lg hover:shadow-blue-500/20 btn-shimmer active:scale-95 group"
+                                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold tracking-wide transition-all shadow-lg hover:shadow-blue-500/20 btn-shimmer active:scale-95 group text-sm"
                             >
                                 Claim Savings
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -334,7 +334,7 @@ export default function PromoHeroShowcase() {
                             transition: 'transform 0.4s ease'
                         }}
                     >
-                        <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full border border-slate-800 bg-slate-900/50 flex items-center justify-center p-6 shadow-inner group-hover:border-blue-500/30 transition-colors">
+                        <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full border border-slate-800 bg-slate-900/50 flex items-center justify-center p-4 shadow-inner group-hover:border-blue-500/30 transition-colors">
                             
                             {/* Blue/Cyan Cool Air Flow Expansion Ring */}
                             <div className="absolute inset-2 rounded-full border border-dashed border-cyan-500/20 air-vapor-ring pointer-events-none" />
@@ -344,7 +344,7 @@ export default function PromoHeroShowcase() {
                             
                             {/* Animated spinning fan overlay */}
                             <div className={`relative transition-all duration-700 ${isHovered ? 'fan-spin-fast text-cyan-400' : 'fan-spin-idle text-slate-600'}`}>
-                                <Fan className="w-40 h-40 md:w-48 md:h-48 stroke-[1]" />
+                                <Fan className="w-32 h-32 md:w-40 md:h-40 stroke-[1]" />
                             </div>
 
                             {/* Center HVAC badge */}

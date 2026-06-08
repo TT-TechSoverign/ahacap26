@@ -61,7 +61,7 @@ export default async function SitemapPage() {
 
     return (
         <div className="bg-[#05070a] min-h-screen text-slate-200">
-            <main className="pt-[160px] md:pt-[190px] lg:pt-[210px] pb-24 px-4 md:px-8 max-w-7xl mx-auto">
+            <main className="pt-[140px] md:pt-[165px] lg:pt-[175px] pb-24 px-4 md:px-8 max-w-7xl mx-auto">
                 {/* Header Sequence */}
                 <div className="text-center md:text-left mb-16 space-y-4 relative">
                     {/* Decorative Elements */}

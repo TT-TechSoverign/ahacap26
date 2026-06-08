@@ -144,7 +144,7 @@ function BentoSubCard({ title, description, icon, themeColor }: BentoSubCardProp
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={{ ...tiltStyle, transformStyle: 'preserve-3d' }}
-            className={`bg-[#0c121d]/90 border border-white/5 p-5 rounded-2xl relative overflow-hidden group/item transition-all duration-300 card-hover-trigger cursor-pointer ${themeStyles.borderClass}`}
+            className={`bg-[#0c121d]/90 border border-white/5 p-4 rounded-2xl relative overflow-hidden group/item transition-all duration-300 card-hover-trigger cursor-pointer ${themeStyles.borderClass}`}
         >
             {/* Soft Radial Ambient Glow */}
             <div 
@@ -308,25 +308,25 @@ export default function PromoBentoCard() {
     if (now.getTime() > targetDate.getTime()) return null;
 
     return (
-        <div className="w-full bg-[#0a0e14]/90 backdrop-blur-md border border-white/5 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden animate-patriotic-glow mb-12">
+        <div className="w-full bg-[#0a0e14]/90 backdrop-blur-md border border-white/5 rounded-3xl p-5 md:p-6 shadow-2xl relative overflow-hidden animate-patriotic-glow mb-8">
             {/* Ambient gradients */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-red-500/5 blur-[80px] rounded-full"></div>
             <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-500/5 blur-[80px] rounded-full"></div>
-
-            <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6 border-b border-white/5 pb-6 mb-6">
+ 
+            <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-white/5 pb-4 mb-4">
                 <div className="text-center md:text-left">
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-500 bg-red-950/40 border border-red-500/20 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-2.5">
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-red-500 bg-red-950/40 border border-red-500/20 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-2">
                         <span className="size-1 bg-red-500 rounded-full animate-ping"></span>
                         Limited-Time Event
                     </span>
-                    <h3 className="text-xl md:text-2xl font-header font-black uppercase tracking-tight text-white">
+                    <h3 className="text-lg md:text-xl font-header font-black uppercase tracking-tight text-white">
                         Celebrating <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-white to-blue-400">America</span> Promo
                     </h3>
                     <p className="text-xs text-slate-400 mt-1">Get 10% off any air conditioner, schedule installation for July.</p>
                 </div>
                 
                 {/* Live Countdown */}
-                <div className="flex items-center gap-2.5 bg-slate-950 border border-white/10 px-4 py-2 rounded-2xl shadow-inner">
+                <div className="flex items-center gap-2 bg-slate-950 border border-white/10 px-3 py-1.5 rounded-xl shadow-inner">
                     <span className="text-[9px] font-black uppercase text-slate-500 tracking-wider">Ends In:</span>
                     <div className="flex items-center gap-1.5 font-mono text-[11px] md:text-xs font-black text-cyan-400">
                         <span>{timeLeft.days}d</span>
@@ -339,9 +339,9 @@ export default function PromoBentoCard() {
                     </div>
                 </div>
             </div>
-
+ 
             {/* Bento Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 relative z-10">
                 <BentoSubCard 
                     title="10% OFF all AC Units"
                     description="Automatic promo discount is applied on checkout to all mini splits and window AC inventory."

@@ -179,7 +179,7 @@ export default function ShopPage() {
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
 
-            <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[160px] md:pt-[190px] pb-20 flex-grow">
+            <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[140px] md:pt-[165px] pb-20 flex-grow">
                 {/* Hero Branding Section (Centered Vertical Axis) */}
                 <div className="flex flex-col items-center text-center gap-2 md:gap-4 mb-6 md:mb-8 border-b border-white/5 pb-6 md:pb-8 relative">
                     <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full -z-10 opacity-30"></div>

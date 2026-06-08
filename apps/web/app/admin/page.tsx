@@ -259,7 +259,7 @@ export default function AdminPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[160px] md:pt-[190px]">
+        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[140px] md:pt-[165px]">
             {/* Admin Header - Fixed below global Navbar */}
             <motion.header
                 initial={{ y: 0 }}
