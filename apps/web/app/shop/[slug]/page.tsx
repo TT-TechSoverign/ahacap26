@@ -129,6 +129,8 @@ export default function ProductDetailPage() {
         </div>
     );
 
+    const isPromo = !!product && !!product.promo_price && product.promo_price > 0;
+
     return (
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
 
@@ -137,12 +139,20 @@ export default function ProductDetailPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     {/* Visual Anchor */}
                     <div className="space-y-6 md:sticky md:top-36">
-                        <div className="aspect-square bg-[#0a0e14] rounded-[2rem] border border-white/5 relative overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.6)] ring-1 ring-white/10 flex items-center justify-center p-6 lg:p-8">
+                        <div className={cn(
+                            "aspect-square bg-[#0a0e14] rounded-[2rem] relative overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.6)] flex items-center justify-center p-6 lg:p-8",
+                            isPromo ? "animate-patriotic-glow" : "border border-white/5 ring-1 ring-white/10"
+                        )}>
                             <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
 
                             {/* Radial Highlights */}
                             <div className="absolute -left-20 -top-20 w-[300px] h-[300px] bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
                             <div className="absolute -right-20 -bottom-20 w-[300px] h-[300px] bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+                            {/* Patriotic radial glow behind promo product images */}
+                            {isPromo && (
+                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08)_0%,rgba(59,130,246,0.08)_60%,transparent_100%)] opacity-80 group-hover:opacity-100 transition-all duration-700 pointer-events-none"></div>
+                            )}
 
                             {selectedImage ? (
                                 <div className="relative w-full h-full z-10">
