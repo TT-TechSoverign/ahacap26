@@ -8,14 +8,14 @@ export async function POST(req: Request) {
     try {
         console.log('--- CHECKOUT SESSION START ---');
         console.log('Headers:', Object.fromEntries(req.headers));
-        const { items, customerEmail, fulfillmentMode, gaClientId, gaSessionId, utmSource, utmMedium, utmCampaign } = await req.json();
+        const { items, customerEmail, fulfillmentMode } = await req.json();
 
         if (!items || items.length === 0) {
             return NextResponse.json({ error: 'No items in cart' }, { status: 400 });
         }
 
         // 1. HARD GUARDRAIL: Real-Time Inventory Validation
-        const apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
         const payload = {
             items: items.map((item: any) => ({
                 product_id: item.id,
@@ -106,10 +106,6 @@ export async function POST(req: Request) {
 
         const expiresAt = Math.floor(Date.now() / 1000) + (30 * 60); // 30 minutes lock
 
-        // Check if checkout contains any promo items and the promo is active
-        const isPromoActive = Date.now() <= 1785578399000; // July 31st, 2026 23:59:59 HST
-        const hasPromoItem = isPromoActive && items.some((item: any) => item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0);
-
         const session = await stripe.checkout.sessions.create({
 
             mode: 'payment',
@@ -124,19 +120,12 @@ export async function POST(req: Request) {
                 },
             },
             ...(customerEmail && { customer_email: customerEmail }), // Only pre-fill if provided
-
             // CRITICAL: Pass metadata to PaymentIntent for Backend Webhook (Email Native)
             payment_intent_data: {
                 metadata: {
                     fulfillment_mode: fulfillmentMode,
                     customer_email: customerEmail,
-                    source: 'web_checkout_v2',
-                    ...(gaClientId && { ga_client_id: gaClientId }),
-                    ...(gaSessionId && { ga_session_id: gaSessionId }),
-                    ...(utmSource && { utm_source: utmSource }),
-                    ...(utmMedium && { utm_medium: utmMedium }),
-                    ...(utmCampaign && { utm_campaign: utmCampaign }),
-                    ...(hasPromoItem && { campaign: '4th_of_july_2026' }),
+                    source: 'web_checkout_v2'
                 }
             },
             success_url: `${origin}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
@@ -158,12 +147,6 @@ export async function POST(req: Request) {
             metadata: {
                 source: 'web_checkout',
                 fulfillment_mode: fulfillmentMode,
-                ...(gaClientId && { ga_client_id: gaClientId }),
-                ...(gaSessionId && { ga_session_id: gaSessionId }),
-                ...(utmSource && { utm_source: utmSource }),
-                ...(utmMedium && { utm_medium: utmMedium }),
-                ...(utmCampaign && { utm_campaign: utmCampaign }),
-                ...(hasPromoItem && { campaign: '4th_of_july_2026' }),
             },
             billing_address_collection: 'required',
         });

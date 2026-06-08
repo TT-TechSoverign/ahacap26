@@ -90,7 +90,10 @@ async def validate_inventory_service(db: AsyncSession, validation_items: List[di
         if not is_available:
             all_valid = False
             
-        price = product.promo_price if product.promo_price is not None and product.promo_price > 0 else product.price
+        import time
+        # 1785578399 seconds represents July 31st, 2026 23:59:59 HST
+        is_promo_active = time.time() <= 1785578399
+        price = product.promo_price if (is_promo_active and product.promo_price is not None and product.promo_price > 0) else product.price
         results.append({
             "product_id": product.id,
             "name": product.name,

@@ -29,7 +29,7 @@ export default function Homepage() {
                 <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[2px]" />
             </div>
 
-            <main className="relative z-10 pt-[220px] md:pt-[260px]">
+            <main className="relative z-10 pt-[160px] md:pt-[190px]">
                 <div className="max-w-7xl mx-auto px-6 mb-12">
                     <FourthOfJulyBanner />
                 </div>

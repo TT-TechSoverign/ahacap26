@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { useCart } from '../context/CartContext';
 import { useContent } from '../lib/context/ContentContext';
 import { EditableText } from './EditableText';
+import PromoStickyBar from './PromoStickyBar';
 
 export default function NavbarV2() {
     const pathname = usePathname();
@@ -81,15 +82,15 @@ export default function NavbarV2() {
 
                             {/* Left Brands (Desktop Only: Window & Central Mix) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-end pr-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link href="/shop" className="text-rose-400 font-sans font-black tracking-tighter text-2xl relative group cursor-pointer block">
+                                <Link href="/shop" className="text-rose-400 font-sans font-black tracking-tighter text-lg relative group cursor-pointer block">
                                     LG
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/shop" className="text-blue-400 font-serif font-bold tracking-wide text-lg relative group cursor-pointer block">
+                                <Link href="/shop" className="text-blue-400 font-serif font-bold tracking-wide text-xs relative group cursor-pointer block">
                                     GE
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/shop#rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-xl relative group cursor-pointer block pb-1">
+                                <Link href="/shop#rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-sm relative group cursor-pointer block pb-1">
                                     Hawai&apos;i Energy
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -98,7 +99,7 @@ export default function NavbarV2() {
                             {/* Center: Prominent Logo */}
                             {/* Mobile: Absolute Center. Desktop: Relative Center */}
                             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 md:flex md:justify-center z-20">
-                                <Link href="/" className="block relative h-32 w-64 md:h-44 md:w-80 group shrink-0">
+                                <Link href="/" className="block relative h-12 w-28 md:h-16 md:w-36 group shrink-0 logo-promo-glow">
                                     <Image
                                         src="/assets/logo.svg"
                                         alt="AHAC Logo"
@@ -111,19 +112,19 @@ export default function NavbarV2() {
 
                             {/* Right Brands (Desktop Only: Mini Splits) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link href="/mini_split_ac#mitsubishi-electric" className="text-red-500 font-header font-bold tracking-normal uppercase text-sm relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#mitsubishi-electric" className="text-red-500 font-header font-bold tracking-normal uppercase text-[10px] relative group cursor-pointer block">
                                     MITSUBISHI ELECTRIC
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#fujitsu" className="text-red-500 font-sans font-bold italic tracking-widest text-xl relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#fujitsu" className="text-red-500 font-sans font-bold italic tracking-widest text-xs relative group cursor-pointer block">
                                     FUJITSU
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#daikin" className="text-[#00B5E2] font-header font-medium tracking-widest text-lg relative group cursor-pointer block pb-1">
+                                <Link href="/mini_split_ac#daikin" className="text-[#00B5E2] font-header font-medium tracking-widest text-xs relative group cursor-pointer block pb-1">
                                     DAIKIN
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#carrier" className="text-blue-400 font-sans font-extrabold tracking-tighter text-xl relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#carrier" className="text-blue-400 font-sans font-extrabold tracking-tighter text-xs relative group cursor-pointer block">
                                     CARRIER
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -137,7 +138,12 @@ export default function NavbarV2() {
                                 >
                                     <span className="material-symbols-outlined text-3xl">shopping_cart</span>
                                     {items.length > 0 && (
-                                        <span className="absolute top-0 right-0 w-4 h-4 bg-cyan-400 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm">
+                                        <span className={cn(
+                                            "absolute top-0 right-0 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
+                                            (new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime() && items.some(item => item.promo_price && item.promo_price > 0))
+                                                ? "cart-promo-badge-pulse text-white"
+                                                : "bg-cyan-400 text-black"
+                                        )}>
                                             {items.length}
                                         </span>
                                     )}
@@ -150,7 +156,7 @@ export default function NavbarV2() {
                 {/* Row 2: Navigation (Dark Blue Background) */}
                 <div className="bg-[#0F172A] text-white z-10 relative border-t border-slate-800 hidden md:block">
                     <div className="max-w-7xl mx-auto px-6 w-full">
-                        <div className="grid grid-cols-[1fr_auto_1fr] items-center py-3">
+                        <div className="grid grid-cols-[1fr_auto_1fr] items-center py-2">
 
                             {/* Left Col: Spacer */}
                             <div></div>
@@ -186,14 +192,19 @@ export default function NavbarV2() {
                             <div className="flex justify-end items-center">
                                 <button
                                     onClick={openCart}
-                                    className="relative group p-2 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-2"
+                                    className="relative group p-1 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-2"
                                     aria-label="Open Cart"
                                 >
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-300 group-hover:text-cyan-400 hidden lg:block">Cart</span>
                                     <div className="relative">
                                         <span className="material-symbols-outlined text-2xl text-white group-hover:text-cyan-400 transition-colors">shopping_cart</span>
                                         {items.length > 0 && (
-                                            <span className="absolute -top-1 -right-1 w-4 h-4 bg-cyan-400 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm">
+                                            <span className={cn(
+                                                "absolute -top-1 -right-1 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
+                                                (new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime() && items.some(item => item.promo_price && item.promo_price > 0))
+                                                    ? "cart-promo-badge-pulse text-white"
+                                                    : "bg-cyan-400 text-black"
+                                            )}>
                                                 {items.length}
                                             </span>
                                         )}
@@ -203,6 +214,10 @@ export default function NavbarV2() {
                         </div>
                     </div>
                 </div>
+                
+                {/* Row 3: Promo Sticky Bar */}
+                <PromoStickyBar />
+                <div className="navbar-promo-accent w-full" />
             </div>
 
         </motion.header>

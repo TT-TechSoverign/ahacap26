@@ -7,6 +7,8 @@ import { usePathname } from 'next/navigation';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import MobileDrawerMenu from './MobileDrawerMenu';
+import PromoStickyBar from './PromoStickyBar';
+import { cn } from '@/lib/utils';
 
 export default function MobileStickyHeader() {
     const pathname = usePathname();
@@ -37,7 +39,7 @@ export default function MobileStickyHeader() {
             <header className="fixed top-0 w-full z-[60] flex md:hidden flex-col pointer-events-none">
                 <div 
                     className="pointer-events-auto bg-[#0a0e14]/95 backdrop-blur-md border-b border-slate-800 text-white relative transition-all duration-300 shadow-md"
-                    style={{ padding: isScrolled ? '0.5rem 0' : '1rem 0' }}
+                    style={{ padding: isScrolled ? '0.35rem 0' : '0.65rem 0' }}
                 >
                     <div className="px-6 flex justify-between items-center relative">
                         {/* Hamburger */}
@@ -54,7 +56,7 @@ export default function MobileStickyHeader() {
 
                         {/* Center Logo */}
                         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20">
-                            <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 ${isScrolled ? 'h-10 w-24' : 'h-16 w-36'}`}>
+                            <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 logo-promo-glow ${isScrolled ? 'h-8 w-20' : 'h-12 w-28'}`}>
                                 <Image
                                     src="/assets/logo.svg"
                                     alt="AHAC Logo"
@@ -73,13 +75,22 @@ export default function MobileStickyHeader() {
                             >
                                 <span className="material-symbols-outlined text-3xl">shopping_cart</span>
                                 {items.length > 0 && (
-                                    <span className="absolute top-1 right-0 w-4 h-4 bg-cyan-400 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm">
+                                    <span className={cn(
+                                        "absolute top-1 right-0 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
+                                        (new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime() && items.some(item => item.promo_price && item.promo_price > 0))
+                                            ? "cart-promo-badge-pulse text-white"
+                                            : "bg-cyan-400 text-black"
+                                    )}>
                                         {items.length}
                                     </span>
                                 )}
                             </button>
                         </div>
                     </div>
+                </div>
+                <div className="pointer-events-auto">
+                    <PromoStickyBar />
+                    <div className="navbar-promo-accent w-full" />
                 </div>
             </header>
 

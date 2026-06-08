@@ -72,7 +72,8 @@ END:VCALENDAR`;
         const sessionId = searchParams.get('session_id') || `AHAC-${Math.floor(Math.random() * 90000) + 10000}`;
 
         // Check if cart contains promotional items before clearing
-        const hasPromo = items.some(item => item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0);
+        const isCampaignActive = new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime();
+        const hasPromo = isCampaignActive && items.some(item => item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0);
         if (hasPromo) {
             setHadPromoItems(true);
             sessionStorage.setItem('had_promo', 'true');
@@ -89,7 +90,8 @@ END:VCALENDAR`;
                     shipping: deliveryFee,
                     currency: 'USD',
                     items: items.map((item, index) => {
-                        const activePrice = item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0 ? item.promo_price : item.price;
+                        const isCampaignActive = new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime();
+                        const activePrice = (isCampaignActive && item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0) ? item.promo_price : item.price;
                         return {
                             item_id: String(item.id),
                             item_name: item.name,
@@ -115,7 +117,8 @@ END:VCALENDAR`;
                     value: cartTotal,
                     currency: 'USD',
                     items: items.map((item, index) => {
-                        const activePrice = item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0 ? item.promo_price : item.price;
+                        const isCampaignActive = new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime();
+                        const activePrice = (isCampaignActive && item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0) ? item.promo_price : item.price;
                         return {
                             item_id: String(item.id),
                             item_name: item.name,
@@ -144,7 +147,7 @@ END:VCALENDAR`;
 
     if (step === 'success') {
         return (
-            <main className="min-h-screen bg-[#0f172a] pt-24 md:pt-[180px] pb-12 px-4 md:px-8 flex items-center justify-center">
+            <main className="min-h-screen bg-[#0f172a] pt-[160px] md:pt-[190px] pb-12 px-4 md:px-8 flex items-center justify-center">
                 <div className="max-w-md w-full text-center space-y-8 p-8 border border-cyan-500/20 rounded-2xl bg-slate-900/50 backdrop-blur shadow-[0_0_50px_rgba(6,182,212,0.1)]">
                     <div className="relative">
                         <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full" />
@@ -216,7 +219,7 @@ END:VCALENDAR`;
     }
 
     return (
-        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[180px] md:pt-[260px]">
+        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[160px] md:pt-[190px]">
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}
@@ -430,7 +433,7 @@ END:VCALENDAR`;
                                                 <h4 className="text-[10px] md:text-xs font-black text-white/80 line-clamp-1 uppercase tracking-tighter group-hover/item:text-white transition-colors">{item.name}</h4>
                                                 <div className="flex items-center justify-between mt-1">
                                                     <span className="text-[9px] md:text-[10px] text-slate-500 font-bold uppercase tracking-widest">Qty: {item.quantity}</span>
-                                                    {item.promo_price && item.promo_price > 0 ? (
+                                                    {(new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime() && item.promo_price && item.promo_price > 0) ? (
                                                         <div className="flex items-center gap-1.5">
                                                             <span className="text-[10px] text-red-500 line-through font-bold opacity-60">
                                                                 ${item.price.toLocaleString()}

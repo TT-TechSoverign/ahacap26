@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 // Fix import path: go up two levels to 'web', then into 'context'
 import { useCart } from '../../context/CartContext';
 import { getProductImages } from '../../lib/product-images';
@@ -14,6 +14,7 @@ import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from
 import { BackToTop } from '@/components/BackToTop';
 import { cn, generateProductSlug } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
+import PromoBentoCard from '../../components/PromoBentoCard';
 
 
 
@@ -178,7 +179,7 @@ export default function ShopPage() {
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
 
-            <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[200px] md:pt-[340px] pb-20 flex-grow">
+            <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[160px] md:pt-[190px] pb-20 flex-grow">
                 {/* Hero Branding Section (Centered Vertical Axis) */}
                 <div className="flex flex-col items-center text-center gap-2 md:gap-4 mb-6 md:mb-8 border-b border-white/5 pb-6 md:pb-8 relative">
                     <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full -z-10 opacity-30"></div>
@@ -209,6 +210,8 @@ export default function ShopPage() {
                         )}
                     </div>
                 </div>
+
+                <PromoBentoCard />
 
                 {/* Dynamic Reorderable Sections */}
                 <div className="space-y-8 md:space-y-10">
@@ -927,32 +930,185 @@ function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; on
 
 function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuickAdd: () => void; rebate?: string }) {
     const router = useRouter();
-    const isPromo = product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0;
-    
+    const [mounted, setMounted] = useState(false);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const [tiltStyle, setTiltStyle] = useState({});
+    const [glareStyle, setGlareStyle] = useState({ opacity: 0, transform: 'translate(-50%, -50%)' });
+    const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+    const [sparks, setSparks] = useState<{ id: number; left: string; delay: string; duration: string; drift: string; color: string }[]>([]);
+
+    const cardRef = useRef<HTMLDivElement>(null);
+    const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
+    const isCampaignActive = mounted && (new Date().getTime() <= targetDate.getTime());
+    const isPromo = isCampaignActive && product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0;
+
+    useEffect(() => {
+        setMounted(true);
+        // Detect touch device
+        setIsTouchDevice(
+            'ontouchstart' in window || 
+            navigator.maxTouchPoints > 0 || 
+            window.matchMedia('(pointer: coarse)').matches
+        );
+
+        // Generate static properties for sparks
+        const colors = ['#EF4444', '#FFFFFF', '#3B82F6'];
+        const list = Array.from({ length: 8 }).map((_, i) => ({
+            id: i,
+            left: `${15 + Math.random() * 70}%`,
+            delay: `${Math.random() * -3}s`,
+            duration: `${1.5 + Math.random() * 2}s`,
+            drift: `${(Math.random() - 0.5) * 60}px`,
+            color: colors[i % colors.length]
+        }));
+        setSparks(list);
+    }, []);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isTouchDevice || !cardRef.current) return;
+
+        const card = cardRef.current;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        setCursorPos({ x, y });
+
+        // Calculate rotation angles (capped at 6 degrees for premium subtlety)
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((centerY - y) / centerY) * 6;
+        const rotateY = ((x - centerX) / centerX) * 6;
+
+        setTiltStyle({
+            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`,
+            transition: 'transform 0.1s ease-out',
+        });
+
+        // Dynamic glare position
+        const glareX = (x / rect.width) * 100;
+        const glareY = (y / rect.height) * 100;
+
+        setGlareStyle({
+            opacity: 0.15,
+            background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.35) 0%, transparent 60%)`,
+            transform: 'scale(1.3)',
+            transition: 'opacity 0.2s ease',
+        } as any);
+    };
+
+    const handleMouseEnter = () => {
+        if (isTouchDevice) return;
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+        setTiltStyle({
+            transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+            transition: 'transform 0.5s ease',
+        });
+        setGlareStyle({
+            opacity: 0,
+            transform: 'scale(1)',
+            transition: 'opacity 0.5s ease',
+        } as any);
+    };
+
     const borderClass = isPromo 
         ? "animate-patriotic-glow"
         : "border-white/5 hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,174,239,0.15)]";
 
     return (
         <div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={tiltStyle}
             onClick={() => router.push(`/shop/${generateProductSlug(product.id, product.name)}`)}
             className={cn(
-                "industrial-card group flex flex-col bg-[#0f131a] rounded-2xl overflow-hidden transition-all duration-700 relative h-full ring-1 ring-white/5 active:scale-[0.98] cursor-pointer",
+                "industrial-card group flex flex-col bg-[#0f131a] rounded-2xl overflow-hidden transition-all duration-700 relative h-full ring-1 ring-white/5 active:scale-[0.98] cursor-pointer card-hover-trigger",
                 borderClass
             )}
         >
+            {/* Liquid Neon Cursor-Follow Glow */}
+            {isPromo && isHovered && !isTouchDevice && (
+                <div 
+                    className="absolute inset-[-1px] rounded-2xl pointer-events-none z-0"
+                    style={{
+                        background: `radial-gradient(circle 120px at ${cursorPos.x}px ${cursorPos.y}px, rgba(239, 68, 68, 0.8), rgba(255, 255, 255, 0.5), rgba(59, 130, 246, 0.8), transparent 70%)`,
+                        padding: '1px',
+                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                        WebkitMaskComposite: 'xor',
+                        maskComposite: 'exclude'
+                    }}
+                />
+            )}
+
+            {/* 3D Reflective Glare Overlay */}
+            <div 
+                className="absolute inset-0 pointer-events-none z-20"
+                style={glareStyle as any}
+            />
+
+            {/* Micro-Spark Cascade (Hover Particle Effect) */}
+            {isPromo && isHovered && !isTouchDevice && (
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+                    {sparks.map(spark => (
+                        <div
+                            key={spark.id}
+                            className="absolute w-1 h-1 rounded-full animate-spark"
+                            style={{
+                                left: spark.left,
+                                top: '-5px',
+                                backgroundColor: spark.color,
+                                boxShadow: `0 0 6px ${spark.color}`,
+                                animationDelay: spark.delay,
+                                animationDuration: spark.duration,
+                                '--drift-x': spark.drift,
+                                opacity: 0.8
+                            } as any}
+                        />
+                    ))}
+                </div>
+            )}
+
             {/* Image Area with Luminous Hover & Immersive Blending */}
             <div className="w-full aspect-[16/10] bg-[#05070a] relative overflow-hidden transition-all duration-700 border-b border-white/5 p-4 flex items-center justify-center">
                 {/* Immersive radial depth */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,174,239,0.15)_0%,transparent_75%)] opacity-60 group-hover:opacity-100 transition-all duration-700"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,174,239,0.15)_0%,transparent_75%)] opacity-60 group-hover:opacity-100 transition-all duration-700 z-10"></div>
+                
+                {/* Patriotic radial glow behind promo product images */}
+                {isPromo && (
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08)_0%,rgba(59,130,246,0.08)_60%,transparent_100%)] opacity-80 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-10"></div>
+                )}
+
+                {/* Spinning HVAC Fan Background with Radial Blur */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] group-hover:opacity-[0.09] transition-opacity duration-500 z-0 overflow-hidden">
+                    <div className={cn(
+                        "w-48 h-48 transition-all duration-700",
+                        isHovered ? "fan-spin-fast text-cyan-400 blur-[0.5px]" : "fan-spin-idle text-slate-500"
+                    )}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-full h-full">
+                            <path d="M12 2v20M2 12h20M12 12a4 4 0 100-8 4 4 0 000 8z" />
+                            <path d="M7 7l10 10M17 7L7 10" />
+                        </svg>
+                    </div>
+                </div>
+
+                {/* Cool Air AC Vapor & Thermal Glow ring on hover */}
+                <div className="absolute w-36 h-36 rounded-full border border-dashed border-cyan-500/20 air-vapor-ring pointer-events-none z-0" />
+
                 {/* Floor shadow/reflection simulation */}
                 <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0f131a]/95 to-transparent z-10"></div>
-                <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10"></div>
                 <div className="absolute inset-0 bg-primary/10 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-0"></div>
 
                 {isPromo && (
-                    <div className="absolute top-0 left-0 z-20 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 text-white font-header font-black text-[8px] md:text-[9px] px-3 py-1.5 rounded-br-2xl uppercase tracking-[0.2em] shadow-lg border-b border-r border-white/10 animate-pulse-slow">
-                        🇺🇸 Celebrating America
+                    <div className="absolute bottom-0 left-0 z-20 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 text-white font-header font-black text-[9px] sm:text-[10px] md:text-[11px] px-3 py-2 sm:px-4 sm:py-2.5 rounded-tr-2xl uppercase tracking-[0.2em] shadow-lg border-t border-r border-white/10 animate-pulse-slow">
+                        🇺🇸 CELEBRATING AMERICA 10% OFF
                     </div>
                 )}
 
@@ -996,7 +1152,7 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
             </div>
 
             {/* Identity & Specs (Centered Axis) */}
-            <div className="p-3 md:p-5 flex flex-col flex-grow items-center text-center relative">
+            <div className="p-3 md:p-5 flex flex-col flex-grow items-center text-center relative z-10">
                 <div className="mb-3 w-full flex flex-col items-center">
                     <div className="text-primary font-header font-black text-[8px] md:text-[9px] uppercase tracking-[0.4em] mb-1.5 flex items-center gap-2 opacity-80 group-hover:opacity-100 transition-opacity justify-center">
                         <span className="w-2 h-px bg-primary/30 group-hover:w-4 transition-all"></span>
@@ -1021,18 +1177,23 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                 </div>
 
                 <div className="mt-auto pt-3 border-t border-white/5 flex flex-col items-center gap-3 w-full">
-                    <div className="flex items-center gap-2 justify-center">
+                    <div className="flex items-center gap-2 justify-center w-full">
                         {isPromo ? (
-                            <div className="flex flex-col items-center gap-0.5">
-                                <span className="text-[10px] text-red-500 font-bold line-through decoration-red-500/80">
-                                    ${product.price.toLocaleString()}
-                                </span>
-                                <div className="text-xl md:text-2xl font-header font-black text-cyan-400 tracking-tighter drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">
-                                    ${product.promo_price?.toLocaleString()}
+                            <div className="flex flex-col items-center gap-1.5 w-full">
+                                <div className="flex items-baseline gap-2.5 justify-center">
+                                    <span className="text-xs md:text-sm text-slate-500 line-through decoration-red-500 decoration-[1.5px] font-medium">
+                                        ${product.price.toLocaleString()}
+                                    </span>
+                                    <span className="text-2xl md:text-3xl font-header font-black text-cyan-400 tracking-tighter drop-shadow-[0_0_15px_rgba(34,211,238,0.35)]">
+                                        ${product.promo_price?.toLocaleString()}
+                                    </span>
                                 </div>
+                                <span className="text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full shadow-inner animate-pulse-slow">
+                                    SAVE ${(product.price - (product.promo_price || 0)).toLocaleString()}
+                                </span>
                             </div>
                         ) : (
-                            <div className="text-xl md:text-2xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors">
+                            <div className="text-2xl md:text-3xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors py-4">
                                 ${product.price.toLocaleString()}
                             </div>
                         )}
@@ -1071,6 +1232,27 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                     </div>
                 </div>
             </div>
+
+            {/* Encapsulated micro-spark animation styles */}
+            <style jsx>{`
+                @keyframes spark-fall {
+                    0% {
+                        transform: translateY(-20px) translateX(0) scale(1);
+                        opacity: 1;
+                    }
+                    50% {
+                        transform: translateY(120px) translateX(var(--drift-x)) scale(0.8);
+                        opacity: 0.8;
+                    }
+                    100% {
+                        transform: translateY(240px) translateX(calc(var(--drift-x) * 2)) scale(0.4);
+                        opacity: 0;
+                    }
+                }
+                .animate-spark {
+                    animation: spark-fall var(--fall-duration, 2.5s) linear infinite;
+                }
+            `}</style>
         </div>
     );
 }

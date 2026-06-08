@@ -6,6 +6,7 @@ import { useContent } from '@/lib/context/ContentContext';
 import * as LucideIcons from 'lucide-react';
 import Link from 'next/link';
 import { BackToTop } from '@/components/BackToTop';
+import PromoRibbonCallout from '@/components/PromoRibbonCallout';
 
 export default function ServiceAreasPage() {
     const { content } = useContent();
@@ -28,7 +29,7 @@ export default function ServiceAreasPage() {
             </div>
 
             {/* Header Section */}
-            <div className="relative z-10 pt-32 md:pt-[350px] lg:pt-[380px] pb-16 px-6 md:px-12 max-w-7xl mx-auto">
+            <div className="relative z-10 pt-[160px] md:pt-[190px] lg:pt-[210px] pb-16 px-6 md:px-12 max-w-7xl mx-auto">
                 <div className="flex flex-col items-center text-center space-y-6">
                     <h1 className="text-4xl md:text-6xl font-header font-black tracking-widest text-[#00E5FF] uppercase drop-shadow-lg">
                         ISLAND-WIDE SERVICE
@@ -38,6 +39,11 @@ export default function ServiceAreasPage() {
                         {serviceAreas.description}
                     </p>
                 </div>
+            </div>
+
+            {/* Promo Ribbon Injection */}
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 mb-12">
+                <PromoRibbonCallout />
             </div>
 
             {/* Regions Layout */}

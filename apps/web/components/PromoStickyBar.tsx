@@ -50,14 +50,33 @@ export default function PromoStickyBar() {
 
     return (
         <div className="relative z-[9999] w-full bg-gradient-to-r from-red-600 via-white to-blue-600 p-[1.5px] shadow-[0_4px_30px_rgba(239,68,68,0.2)] animate-pulse-slow">
-            <Link href="/shop" className="block w-full bg-slate-950/95 hover:bg-slate-950/80 transition-colors py-2.5 px-4 text-center text-white relative group overflow-hidden">
+            <Link href="/shop" className="block w-full bg-slate-950/95 hover:bg-slate-950/80 transition-colors py-2 px-4 text-center text-white relative group overflow-hidden">
                 {/* Wavy background glow overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-blue-500/10 opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
                 
                 <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-xs md:text-sm font-header uppercase tracking-wider relative z-10">
-                    <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-slate-100 to-blue-400 animate-shimmer">
-                        🇺🇸 Celebrating America Sale: 10% OFF all AC units!
-                    </span>
+                    <div className="flex items-center gap-2 justify-center">
+                        {/* Mini Waving CSS Flag */}
+                        <div className="flex gap-[1px] h-3.5 w-5 shrink-0 overflow-hidden rounded-[1px] border border-white/10 relative bg-slate-900 shadow-md">
+                            {/* Blue canton with stars */}
+                            <div className="w-2.5 h-2 bg-blue-700 relative flex flex-wrap gap-[0.5px] p-[0.5px] shrink-0 z-10">
+                                {Array.from({ length: 6 }).map((_, i) => (
+                                    <div key={i} className="size-[0.8px] bg-white rounded-full animate-pulse-slow" style={{ animationDelay: `${i * 100}ms` }} />
+                                ))}
+                            </div>
+                            {/* Stripes */}
+                            <div className="absolute inset-0 flex flex-col">
+                                {Array.from({ length: 5 }).map((_, i) => (
+                                    <div key={i} className="w-full h-[8%] bg-red-600" style={{ marginTop: i === 0 ? '0' : '12%' }} />
+                                ))}
+                            </div>
+                            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent mix-blend-overlay animate-wave" />
+                        </div>
+
+                        <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-slate-100 to-blue-400 animate-shimmer">
+                            Celebrating America Sale: 10% OFF all AC units!
+                        </span>
+                    </div>
                     
                     <div className="flex items-center gap-2 bg-slate-900/90 border border-white/10 px-3 py-1 rounded-full text-[10px] md:text-xs font-mono font-black text-cyan-400 shadow-inner">
                         <span>HURRY, ENDS IN:</span>
@@ -70,6 +89,17 @@ export default function PromoStickyBar() {
                         <span>{timeLeft.seconds.toString().padStart(2, '0')}S</span>
                     </div>
                 </div>
+
+                <style jsx>{`
+                    @keyframes wave-flag {
+                        0% { transform: skewY(-1deg) translateY(0); }
+                        50% { transform: skewY(1deg) translateY(-2px); }
+                        100% { transform: skewY(-1deg) translateY(0); }
+                    }
+                    .animate-wave {
+                        animation: wave-flag 2.5s ease-in-out infinite;
+                    }
+                `}</style>
 
                 <button 
                     onClick={handleDismiss}
