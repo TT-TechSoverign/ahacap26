@@ -5,11 +5,12 @@ from pydantic import BaseModel
 from typing import Dict, Any, Optional
 import models
 from database import get_db
+from dependencies import verify_admin_token
 import json
 import os
 from datetime import datetime
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(verify_admin_token)])
 
 class ScheduleUpdate(BaseModel):
     mini_split_label: str
@@ -119,12 +120,8 @@ async def update_lead_status(lead_id: int, payload: LeadUpdate, db: AsyncSession
 
 @router.get("/orders/backfill")
 async def backfill_historical_orders(
-    pin: str,
     db: AsyncSession = Depends(get_db)
 ):
-    if pin != "8081":
-        raise HTTPException(status_code=401, detail="Invalid PIN")
-
     import stripe
     import json
     

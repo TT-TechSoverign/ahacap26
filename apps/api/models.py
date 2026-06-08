@@ -40,6 +40,8 @@ class Product(Base):
     dimensions = Column(String, nullable=True)
     weight = Column(String, nullable=True)
     warranty = Column(String, nullable=True)
+    promo_price = Column(Integer, nullable=True)
+    discount_percent = Column(Integer, nullable=True)
 
 class Lead(Base):
     __tablename__ = "leads"
@@ -73,6 +75,62 @@ class Order(Base):
     fulfillment_mode = Column(String, nullable=True) # pickup or delivery
     inventory_deducted = Column(Boolean, default=False) # Webhook idempotency guard
     idempotency_key = Column(String, unique=True, index=True, nullable=True)
+    utm_source = Column(String, nullable=True)
+    utm_medium = Column(String, nullable=True)
+    utm_campaign = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class ContentPage(Base):
+    __tablename__ = "content_pages"
+
+    path = Column(String, primary_key=True, index=True)
+    data = Column(String, nullable=True) # JSON String (Published)
+    draft_data = Column(String, nullable=True) # JSON String (Draft)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class ContentSnippet(Base):
+    __tablename__ = "content_snippets"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, unique=True, index=True)
+    data = Column(String, nullable=False) # JSON string of component data
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class Customer(Base):
+    __tablename__ = "customers"
+    id = Column(String, primary_key=True, index=True) # UUID
+    name = Column(String)
+    phone = Column(String, nullable=True)
+    email = Column(String, nullable=True, index=True)
+    address = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class Equipment(Base):
+    __tablename__ = "equipment"
+    id = Column(String, primary_key=True, index=True) # UUID
+    customer_id = Column(String, ForeignKey("customers.id"))
+    order_id = Column(String, ForeignKey("orders.id"), nullable=True)
+    model_number = Column(String, nullable=True)
+    serial_number = Column(String, nullable=True)
+    install_date = Column(DateTime, nullable=True)
+    warranty_expiration = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class VendorInvoice(Base):
+    __tablename__ = "vendor_invoices"
+    id = Column(String, primary_key=True, index=True) # UUID
+    vendor_name = Column(String, index=True)
+    amount_cents = Column(Integer)
+    file_url = Column(String, nullable=True)
+    status = Column(String, default="PENDING")
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class AdminUser(Base):
+    __tablename__ = "admin_users"
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 class ContentPage(Base):

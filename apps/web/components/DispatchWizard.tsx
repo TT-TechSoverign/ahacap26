@@ -310,8 +310,9 @@ export function DispatchWizard() {
                                 name="first_name"
                                 value={formData.first_name}
                                 onChange={handleChange}
-                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
                                 type="text"
+                                autoComplete="given-name"
                                 required
                             />
                         </div>
@@ -323,8 +324,9 @@ export function DispatchWizard() {
                                 name="last_name"
                                 value={formData.last_name}
                                 onChange={handleChange}
-                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
                                 type="text"
+                                autoComplete="family-name"
                                 required
                             />
                         </div>
@@ -339,8 +341,10 @@ export function DispatchWizard() {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
                                 type="email"
+                                autoComplete="email"
+                                inputMode="email"
                                 required
                             />
                         </div>
@@ -352,8 +356,10 @@ export function DispatchWizard() {
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handleChange}
-                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
                                 type="tel"
+                                autoComplete="tel"
+                                inputMode="numeric"
                                 required
                             />
                         </div>
@@ -369,8 +375,9 @@ export function DispatchWizard() {
                                     name="address"
                                     value={formData.address}
                                     onChange={handleChange}
-                                    className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                    className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
                                     type="text"
+                                    autoComplete="street-address"
                                     required
                                 />
                             </div>
@@ -383,8 +390,9 @@ export function DispatchWizard() {
                                         name="city"
                                         value={formData.city}
                                         onChange={handleChange}
-                                        className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                        className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
                                         type="text"
+                                        autoComplete="address-level2"
                                     />
                                 </div>
                                 <div className="space-y-2 group">
@@ -395,8 +403,10 @@ export function DispatchWizard() {
                                         name="zip"
                                         value={formData.zip}
                                         onChange={handleChange}
-                                        className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                        className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
                                         type="text"
+                                        autoComplete="postal-code"
+                                        inputMode="numeric"
                                     />
                                 </div>
                             </div>
@@ -413,7 +423,7 @@ export function DispatchWizard() {
                                 name="source"
                                 value={formData.source}
                                 onChange={handleChange}
-                                className="w-full max-w-md bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-2 text-slate-300 text-center"
+                                className="w-full max-w-md bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-2 text-slate-300 text-center"
                             >
                                 <option value="">Select a source</option>
                                 <option value="Google">Google</option>
@@ -430,7 +440,7 @@ export function DispatchWizard() {
                                 name="user_notes"
                                 value={formData.user_notes}
                                 onChange={handleChange}
-                                className="w-full max-w-2xl bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-sm p-3 text-white placeholder-slate-600 transition-all hover:border-white/20 text-center"
+                                className="w-full max-w-2xl bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20 text-center"
                                 rows={4}
                                 placeholder="Any access codes, gate info, or specific details we should know?"
                             ></textarea>

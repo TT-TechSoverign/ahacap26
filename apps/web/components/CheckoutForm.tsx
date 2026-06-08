@@ -21,12 +21,47 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
         setLoading(true);
         setError('');
         try {
-            const response = await fetch('/api/checkout', {
+            // Extract GA4 cookies for server-side telemetry stitching
+            const getCookie = (name: string) => {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop()?.split(';').shift();
+                return null;
+            };
+
+            const getGaSessionCookie = () => {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith('_ga_')) {
+                        return cookie.split('=')[1];
+                    }
+                }
+                return null;
+            };
+
+            const gaClientId = getCookie('_ga');
+            const gaSessionId = getGaSessionCookie();
+
+            const utmSource = sessionStorage.getItem('utm_source');
+            const utmMedium = sessionStorage.getItem('utm_medium');
+            const utmCampaign = sessionStorage.getItem('utm_campaign');
+
+            const response = await fetch('/create-checkout-session', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ items, customerEmail, fulfillmentMode }),
+                body: JSON.stringify({ 
+                    items, 
+                    customerEmail, 
+                    fulfillmentMode,
+                    gaClientId,
+                    gaSessionId,
+                    utmSource,
+                    utmMedium,
+                    utmCampaign
+                }),
             });
 
             const { url, error: apiError } = await response.json();

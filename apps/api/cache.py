@@ -85,3 +85,24 @@ async def invalidate_cache(key_pattern: str):
             print(f"Cache: Invalidated {len(keys)} keys for pattern '{key_pattern}'")
     except Exception as e:
         print(f"Cache Invalidation Error: {e}")
+
+async def check_rate_limit(ip: str, key_prefix: str, limit: int, period: int) -> bool:
+    """
+    IP-based rate limiter using Redis
+    """
+    global redis_client
+    if not redis_client:
+        return True
+    key = f"rate_limit:{key_prefix}:{ip}"
+    try:
+        count = await redis_client.get(key)
+        if count is not None and int(count) >= limit:
+            return False
+        if count is None:
+            await redis_client.set(key, 1, ex=period)
+        else:
+            await redis_client.incr(key)
+        return True
+    except Exception as e:
+        print(f"Rate Limiter Error: {e}")
+        return True

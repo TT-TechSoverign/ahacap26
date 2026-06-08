@@ -6,7 +6,7 @@ Sentry.init({
     dsn: SENTRY_DSN,
 
     // Adjust this value in production, or use tracesSampler for greater control
-    tracesSampleRate: 1,
+    tracesSampleRate: 0.05,
 
     // Setting this option to true will print useful information to the console while you're setting up Sentry.
     debug: false,
@@ -18,7 +18,6 @@ Sentry.init({
     replaysSessionSampleRate: 0.1,
 
     integrations: [
-        // @ts-expect-error - Replay exists in v7 runtime but TypeScript definition may be incomplete here
         new Sentry.Replay({
             // Additional Replay configuration goes here,
             maskAllText: true,

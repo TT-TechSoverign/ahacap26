@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import LocalServiceFunnel from '@/components/LocalServiceFunnel';
 import LocalizedSEOBody from '@/components/LocalizedSEOBody';
+import { BackToTop } from '@/components/BackToTop';
 import contentData from '@/lib/content/content.json';
 import Image from 'next/image';
 
@@ -189,6 +190,8 @@ export default function LocalServiceAreaPage({ params }: Props) {
                     })
                 }}
             />
+            
+            <BackToTop visible={true} />
         </main>
     );
 }

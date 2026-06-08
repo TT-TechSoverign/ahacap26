@@ -81,7 +81,7 @@ export default function Navbar() {
                         <Link href="/" className="relative h-12 w-12 md:h-32 md:w-32 group">
                             <div className="absolute inset-0 bg-primary/40 rounded-full blur-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <Image
-                                src="/assets/ahac-logo-bus-500x500xv2.svg"
+                                src="/assets/ahac-logo-updated-businfo.png"
                                 alt="AHAC Logo"
                                 fill
                                 className="object-contain relative z-10"

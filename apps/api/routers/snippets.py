@@ -18,11 +18,13 @@ class SnippetPayload(BaseModel):
 # Let's assume we will add it to models.py in next step.
 # For now, I will write the router logic assuming models.ContentSnippet exists.
 
+import json
+
 @router.get("/")
 async def list_snippets(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.ContentSnippet))
     snippets = result.scalars().all()
-    return [{"id": s.id, "name": s.name, "data": eval(s.data)} for s in snippets]
+    return [{"id": s.id, "name": s.name, "data": json.loads(s.data) if s.data else {}} for s in snippets]
 
 @router.post("/")
 async def create_snippet(payload: SnippetPayload, db: AsyncSession = Depends(get_db)):

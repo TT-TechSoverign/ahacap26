@@ -185,6 +185,11 @@ export default function ProductDetailPage() {
                                 <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-md text-primary text-[8px] font-header font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
                                     {product.category.replace('_', ' ')}
                                 </span>
+                                {product.promo_price && product.promo_price > 0 && (
+                                    <span className="px-3 py-1 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 border border-white/10 rounded-md text-white text-[8px] font-header font-black uppercase tracking-[0.2em] shadow-lg">
+                                        🇺🇸 4th of July Promo
+                                    </span>
+                                )}
                             </div>
 
                             <h1 className="text-2xl md:text-3xl lg:text-4xl font-header font-black uppercase leading-[0.95] tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
@@ -192,10 +197,20 @@ export default function ProductDetailPage() {
                             </h1>
 
                             <div className="flex items-baseline gap-3 pt-1 justify-center md:justify-start">
-                                <span className="text-xl md:text-3xl font-header font-black text-primary tracking-tight">
-                                    ${product.price.toLocaleString()}
-                                </span>
-
+                                {product.promo_price && product.promo_price > 0 ? (
+                                    <div className="flex flex-col items-center md:items-start gap-1">
+                                        <span className="text-xs text-red-500 font-bold line-through decoration-red-500/80">
+                                            ${product.price.toLocaleString()}
+                                        </span>
+                                        <span className="text-2xl md:text-4xl font-header font-black text-cyan-400 tracking-tight drop-shadow-[0_0_20px_rgba(34,211,238,0.3)] animate-pulse-slow">
+                                            ${product.promo_price.toLocaleString()}
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <span className="text-xl md:text-3xl font-header font-black text-primary tracking-tight">
+                                        ${product.price.toLocaleString()}
+                                    </span>
+                                )}
                             </div>
                         </div>
 

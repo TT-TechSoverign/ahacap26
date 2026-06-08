@@ -1,4 +1,6 @@
 import asyncio
+from dotenv import load_dotenv
+load_dotenv()
 from database import engine
 from sqlalchemy import text
 import logging
@@ -71,6 +73,9 @@ async def fix_schema():
         await add_column("orders", "fulfillment_mode", "VARCHAR(50)")
         await add_column("orders", "inventory_deducted", "BOOLEAN")
         await add_column("orders", "idempotency_key", "VARCHAR")
+        await add_column("orders", "utm_source", "VARCHAR")
+        await add_column("orders", "utm_medium", "VARCHAR")
+        await add_column("orders", "utm_campaign", "VARCHAR")
 
         # 2. Products Table
         product_cols = [
@@ -84,7 +89,9 @@ async def fix_schema():
             ("dehumidification", "VARCHAR"),
             ("dimensions", "VARCHAR"),
             ("weight", "VARCHAR"),
-            ("warranty", "VARCHAR")
+            ("warranty", "VARCHAR"),
+            ("promo_price", "INTEGER"),
+            ("discount_percent", "INTEGER")
         ]
 
         for col, dtype in product_cols:

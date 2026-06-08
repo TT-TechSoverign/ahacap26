@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from typing import Optional, Dict, Any
 import models
 from database import get_db
+from dependencies import verify_admin_token
 from datetime import datetime
 
 router = APIRouter()
@@ -41,7 +42,7 @@ async def get_content(path: str = "/", draft: bool = False, db: AsyncSession = D
     # If asking for published
     return {"data": json.loads(page.data) if page.data else {}, "path": path}
 
-@router.post("/{path:path}")
+@router.post("/{path:path}", dependencies=[Depends(verify_admin_token)])
 async def save_draft(path: str, payload: ContentPayload, db: AsyncSession = Depends(get_db)):
     """
     Save content to draft_data.
@@ -70,7 +71,7 @@ async def save_draft(path: str, payload: ContentPayload, db: AsyncSession = Depe
     await db.commit()
     return {"status": "saved", "path": path}
 
-@router.put("/{path:path}/publish")
+@router.put("/{path:path}/publish", dependencies=[Depends(verify_admin_token)])
 async def publish_content(path: str, db: AsyncSession = Depends(get_db)):
     """
     Promote draft_data to data.

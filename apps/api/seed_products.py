@@ -1,6 +1,8 @@
 import asyncio
 import os
 import json
+from dotenv import load_dotenv
+load_dotenv()
 from sqlalchemy import text
 from database import AsyncSessionLocal, engine, Base
 import models

@@ -22,7 +22,7 @@ SENTRY_DSN = os.getenv("SENTRY_DSN")
 if SENTRY_DSN:
     sentry_sdk.init(dsn=SENTRY_DSN, traces_sample_rate=1.0, profiles_sample_rate=1.0)
 
-from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
+from fastapi import FastAPI, HTTPException, Request, BackgroundTasks, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -100,6 +100,20 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+from fastapi.responses import JSONResponse
+import traceback
+from fastapi import Request
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    error_msg = str(exc)
+    tb = traceback.format_exc()
+    print(f"GLOBAL ERROR: {error_msg}\n{tb}")
+    return JSONResponse(
+        status_code=500,
+        content={"message": "Internal Server Error", "detail": error_msg, "traceback": tb}
+    )
+
 # --- MIDDLEWARE ---
 app.add_middleware(
     CORSMiddleware,
@@ -136,7 +150,71 @@ from routers import leads
 app.include_router(leads.router, prefix="/api/v1/leads", tags=["Leads"])
 
 # --- WEBHOOKS ---
+async def fire_ga4_purchase_event(order_id, ga_client_id, ga_session_id, items_data, amount_total, amount_tax=0, amount_shipping=0):
+    measurement_id = os.getenv("GA4_MEASUREMENT_ID")
+    api_secret = os.getenv("GA4_API_SECRET")
+    
+    if not measurement_id or not api_secret or not ga_client_id:
+        print("DEBUG: Skipping GA4 event. Missing env vars or client_id.")
+        return
+        
+    url = f"https://www.google-analytics.com/mp/collect?measurement_id={measurement_id}&api_secret={api_secret}"
+    
+    # Exclude tax and shipping from true revenue
+    true_revenue = (amount_total - amount_tax - amount_shipping) / 100.0
+    tax_dollars = amount_tax / 100.0
+    shipping_dollars = amount_shipping / 100.0
+
+    ga_items = []
+    for item in items_data:
+        desc = item.get("description", "")
+        # Filter out tax and shipping line items from the product array
+        if "Tax" in desc or "Delivery" in desc:
+            continue
+            
+        ga_items.append({
+            "item_id": str(item.get("product_id")) if item.get("product_id") else "UNKNOWN",
+            "item_name": desc,
+            "price": (item.get("amount_total", 0) / 100.0) / (item.get("quantity") or 1) if item.get("quantity") else 0,
+            "quantity": item.get("quantity", 1)
+        })
+
+    payload = {
+        "client_id": ga_client_id,
+        "events": [{
+            "name": "purchase",
+            "params": {
+                "currency": "USD",
+                "transaction_id": order_id,
+                "value": true_revenue,
+                "tax": tax_dollars,
+                "shipping": shipping_dollars,
+                "items": ga_items,
+                "session_id": ga_session_id
+            }
+        }]
+    }
+
+    try:
+        import aiohttp
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, json=payload) as response:
+                print(f"GA4 Measurement Protocol Response: {response.status}")
+    except Exception as e:
+        print(f"GA4 MP Error: {e}")
+
 async def process_stripe_event(event: dict, payload_data: dict):
+    # Two-Way Webhook Filtering (Strategy 2)
+    # Skip CRM invoice events early to prevent side-effects on storefront
+    try:
+        obj = payload_data.get('data', {}).get('object', {})
+        metadata = obj.get('metadata', {}) or {}
+        if metadata.get('invoice_id') or metadata.get('source') == 'crm':
+            print(f"[Storefront API Webhook] Skipping CRM invoice transaction (invoice_id={metadata.get('invoice_id')}, source={metadata.get('source')}).")
+            return
+    except Exception as e:
+        print(f"[Storefront API Webhook Error] Pre-filtering failed: {e}")
+
     stripe_pid = None
     metadata = {}
     receipt_email = None
@@ -164,6 +242,13 @@ async def process_stripe_event(event: dict, payload_data: dict):
             receipt_email = obj.get('customer_details', {}).get('email')
             amount_received = obj.get('amount_total')
             metadata = obj.get('metadata', {})
+            
+            # Extract GA4 Pipeline Data
+            total_details = obj.get('total_details', {})
+            amount_tax = total_details.get('amount_tax', 0)
+            amount_shipping = total_details.get('amount_shipping', 0)
+            ga_client_id = metadata.get('ga_client_id')
+            ga_session_id = metadata.get('ga_session_id')
             
             # --- Extract Expanded Customer/Billing Info ---
             cust = obj.get('customer_details', {})
@@ -238,46 +323,95 @@ async def process_stripe_event(event: dict, payload_data: dict):
                         status=models.OrderStatus.PAID,
                         items_json=json.dumps(items_data) if items_data else None,
                         fulfillment_mode=fulfillment_mode,
+                        utm_source=metadata.get('utm_source'),
+                        utm_medium=metadata.get('utm_medium'),
+                        utm_campaign=metadata.get('utm_campaign'),
                         created_at=datetime.utcnow()
                     )
                     session.add(order)
                     await session.commit()
                     print(f"Created/Recovered Order {new_order_id} from Webhook.")
 
+                # 1. Update Status to PAID if not already set
                 if order.status != models.OrderStatus.PAID:
                     order.status = models.OrderStatus.PAID
                     if items_data and not order.items_json:
                         order.items_json = json.dumps(items_data)
-                    
-                    # Update email and customer details if missing (crucial for PaymentIntent -> CheckoutSession race conditions)
-                    # When checkout.session.completed fires, it has the rich data. We update the model.
-                    if event['type'] == 'checkout.session.completed':
-                        order.customer_email = customer_info.get('email', order.customer_email)
-                        order.customer_name = customer_info.get('name', order.customer_name)
-                        order.customer_phone = customer_info.get('phone', order.customer_phone)
-                        order.customer_address = json.dumps(customer_info.get('address', {}))
-                        order.fulfillment_mode = fulfillment_mode
-                        
-                        # Idempotency lock for stock deduction
-                        if not order.inventory_deducted:
-                            order.inventory_deducted = True
-                            from routers.catalog import persist_product_changes
-                            import schemas
-                            for item in items_data:
-                                p_id = item.get("product_id")
-                                qty = item.get("quantity", 0)
-                                if p_id and qty > 0:
-                                    db_product = await session.execute(select(models.Product).where(models.Product.id == p_id))
-                                    p_obj = db_product.scalar_one_or_none()
-                                    if p_obj:
-                                        p_obj.stock = max(0, p_obj.stock - qty)
-                                        # Write back to JSON
-                                        p_dict = schemas.Product.from_orm(p_obj).dict()
-                                        persist_product_changes(p_dict)
-                                        print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
+                    if not order.utm_source:
+                        order.utm_source = metadata.get('utm_source')
+                    if not order.utm_medium:
+                        order.utm_medium = metadata.get('utm_medium')
+                    if not order.utm_campaign:
+                        order.utm_campaign = metadata.get('utm_campaign')
 
-                    await session.commit()
-                    print(f"Order {order.id} marked as PAID with comprehensive details.")
+                # 2. Enrich, deduct stock, and trigger GA4 on checkout.session.completed (Always runs, avoiding race condition skips)
+                if event['type'] == 'checkout.session.completed':
+                    order.customer_email = customer_info.get('email', order.customer_email)
+                    order.customer_name = customer_info.get('name', order.customer_name)
+                    order.customer_phone = customer_info.get('phone', order.customer_phone)
+                    order.customer_address = json.dumps(customer_info.get('address', {}))
+                    order.fulfillment_mode = fulfillment_mode
+                    order.utm_source = metadata.get('utm_source', order.utm_source)
+                    order.utm_medium = metadata.get('utm_medium', order.utm_medium)
+                    order.utm_campaign = metadata.get('utm_campaign', order.utm_campaign)
+                    
+                    if items_data and not order.items_json:
+                        order.items_json = json.dumps(items_data)
+                    
+                    # Idempotency lock for stock deduction
+                    if not order.inventory_deducted:
+                        order.inventory_deducted = True
+                        from routers.catalog import persist_product_changes
+                        import schemas
+                        for item in items_data:
+                            p_id = item.get("product_id")
+                            qty = item.get("quantity", 0)
+                            if p_id and qty > 0:
+                                db_product = await session.execute(select(models.Product).where(models.Product.id == p_id))
+                                p_obj = db_product.scalar_one_or_none()
+                                if p_obj:
+                                    p_obj.stock = max(0, p_obj.stock - qty)
+                                    p_dict = {
+                                        "id": p_obj.id,
+                                        "name": p_obj.name,
+                                        "price": p_obj.price,
+                                        "category": p_obj.category,
+                                        "subcategory": p_obj.subcategory,
+                                        "stock": p_obj.stock,
+                                        "image_url": p_obj.image_url,
+                                        "btu": p_obj.btu,
+                                        "voltage": p_obj.voltage,
+                                        "coverage": p_obj.coverage,
+                                        "performance_specs": p_obj.performance_specs,
+                                        "key_spec": p_obj.key_spec,
+                                        "noise_level": p_obj.noise_level,
+                                        "dehumidification": p_obj.dehumidification,
+                                        "dimensions": p_obj.dimensions,
+                                        "weight": p_obj.weight,
+                                        "warranty": p_obj.warranty,
+                                        "promo_price": p_obj.promo_price,
+                                        "discount_percent": p_obj.discount_percent
+                                    }
+                                    persist_product_changes(p_dict)
+                                    print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
+
+                    # Trigger GA4 Purchase Event async within the Idempotency Lock
+                    if ga_client_id:
+                        print(f"Triggering GA4 Pipeline for Order {order.id}")
+                        asyncio.create_task(
+                            fire_ga4_purchase_event(
+                                order_id=obj['id'], # Stripe Session ID alignment for GTM deduplication
+                                ga_client_id=ga_client_id,
+                                ga_session_id=ga_session_id,
+                                items_data=items_data,
+                                amount_total=amount_received,
+                                amount_tax=amount_tax,
+                                amount_shipping=amount_shipping
+                            )
+                        )
+
+                await session.commit()
+                print(f"Order {order.id} marked as PAID with comprehensive details.")
 
                 # ONLY send confirmation email on Checkout Session completion (contains items & customer info)
                 if event['type'] == 'checkout.session.completed':
@@ -345,10 +479,39 @@ async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
 
 # --- MAINTENANCE ---
 from seed_products import seed
-@app.post("/api/v1/maintenance/seed_products")
+from dependencies import verify_admin_token
+
+@app.post("/api/v1/maintenance/seed_products", dependencies=[Depends(verify_admin_token)])
 async def seed_products_endpoint(background_tasks: BackgroundTasks):
     background_tasks.add_task(seed)
     return {"status": "seeding_started"}
+
+@app.post("/api/v1/admin/login")
+async def admin_login(payload: dict):
+    pin = payload.get("pin")
+    if not pin:
+        raise HTTPException(status_code=400, detail="Missing PIN")
+    expected_pin = os.getenv("ADMIN_PIN", "8081")
+    if pin != expected_pin:
+        raise HTTPException(status_code=401, detail="Invalid PIN")
+    from dependencies import create_signed_token
+    signed_token = create_signed_token("admin")
+    response = JSONResponse(content={"token": f"Bearer {signed_token}"})
+    response.set_cookie(
+        key="admin_session",
+        value=f"Bearer {signed_token}",
+        httponly=True,
+        samesite="strict",
+        secure=True,
+        max_age=86400
+    )
+    return response
+
+@app.post("/api/v1/admin/logout")
+async def admin_logout():
+    response = JSONResponse(content={"status": "success"})
+    response.delete_cookie("admin_session")
+    return response
 
 @app.get("/api/v1/health")
 async def health_check():

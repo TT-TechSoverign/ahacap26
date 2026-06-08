@@ -16,6 +16,8 @@ export interface Product {
     dimensions?: string;
     weight?: string;
     warranty?: string;
+    promo_price?: number;
+    discount_percent?: number;
 }
 
 export interface CartItem extends Product {

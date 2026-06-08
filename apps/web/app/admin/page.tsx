@@ -74,7 +74,15 @@ export default function AdminPage() {
     const [viewingLead, setViewingLead] = useState<Lead | null>(null);
     const [viewingOrder, setViewingOrder] = useState<Order | null>(null);
 
-    const MASTER_PIN = '8081'; // Discrete PIN
+    const adminFetch = useCallback(async (url: string, options: RequestInit = {}) => {
+        const token = typeof window !== 'undefined' ? sessionStorage.getItem('admin_token') : null;
+        const headers = {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': token } : {}),
+            ...options.headers,
+        };
+        return fetch(url, { ...options, headers });
+    }, []);
 
     // --- Scroll Sync Logic (Matches NavbarV2) ---
     const { scrollY } = useScroll();
@@ -93,16 +101,46 @@ export default function AdminPage() {
         setLastScrollY(latest);
     });
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (pin === MASTER_PIN) {
-            setIsAuthenticated(true);
-            setError('');
-        } else {
-            setError('INVALID ACCESS CODE');
+        try {
+            const res = await fetch('/api/v1/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pin })
+            });
+            if (res.ok) {
+                const data = await res.json();
+                if (data.token) {
+                    sessionStorage.setItem('admin_token', data.token);
+                }
+                setIsAuthenticated(true);
+                setError('');
+            } else {
+                setError('INVALID ACCESS CODE');
+                setPin('');
+            }
+        } catch (err) {
+            setError('CONNECTION ERROR');
             setPin('');
         }
     };
+
+    const handleLogout = async () => {
+        try {
+            await fetch('/api/v1/admin/logout', { method: 'POST' });
+        } catch (err) {}
+        sessionStorage.removeItem('admin_token');
+        setIsAuthenticated(false);
+    };
+
+    // Auto-check session on mount
+    useEffect(() => {
+        const token = sessionStorage.getItem('admin_token');
+        if (token) {
+            setIsAuthenticated(true);
+        }
+    }, []);
 
     const fetchProducts = useCallback(async () => {
         setLoading(true);
@@ -122,7 +160,7 @@ export default function AdminPage() {
     const fetchOrders = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await fetch(`/api/v1/admin/orders`, { cache: 'no-store' });
+            const res = await adminFetch(`/api/v1/admin/orders`, { cache: 'no-store' });
             if (res.ok) {
                 const data = await res.json();
                 setOrders(data);
@@ -132,12 +170,12 @@ export default function AdminPage() {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [adminFetch]);
 
     const fetchLeads = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await fetch(`/api/v1/admin/leads`, { cache: 'no-store' });
+            const res = await adminFetch(`/api/v1/admin/leads`, { cache: 'no-store' });
             if (res.ok) {
                 const data = await res.json();
                 setLeads(data);
@@ -147,7 +185,7 @@ export default function AdminPage() {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [adminFetch]);
 
     const refreshData = useCallback(() => {
         if (activeTab === 'inventory') fetchProducts();
@@ -164,7 +202,7 @@ export default function AdminPage() {
     const handleDelete = async (id: number) => {
         if (!confirm('Are you sure you want to delete this product?')) return;
         try {
-            const res = await fetch(`/api/v1/products/${id}`, {
+            const res = await adminFetch(`/api/v1/products/${id}`, {
                 method: 'DELETE',
             });
             if (res.ok) fetchProducts();
@@ -270,7 +308,7 @@ export default function AdminPage() {
                             </button>
                         )}
                         <Link href="/shop" className="text-slate-500 hover:text-white transition-colors text-[10px] font-bold uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg hidden md:block">{content.admin.nav.view_shop}</Link>
-                        <button onClick={() => setIsAuthenticated(false)} className="text-red-500/50 hover:text-red-500 transition-colors">
+                        <button onClick={handleLogout} className="text-red-500/50 hover:text-red-500 transition-colors">
                             <span className="material-symbols-outlined">power_settings_new</span>
                         </button>
                     </div>
@@ -553,9 +591,13 @@ function LeadDetailModal({ lead, onClose, onSave }: { lead: Lead, onClose: () =>
 
     const handleUpdate = async () => {
         try {
+            const token = sessionStorage.getItem('admin_token');
             const res = await fetch(`/api/v1/admin/leads/${lead.id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': token } : {})
+                },
                 body: JSON.stringify({ status, notes })
             });
             if (res.ok) onSave();
@@ -658,9 +700,13 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
 
     const handleUpdate = async () => {
         try {
+            const token = sessionStorage.getItem('admin_token');
             const res = await fetch(`/api/v1/admin/orders/${order.id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': token } : {})
+                },
                 body: JSON.stringify({ status })
             });
             if (res.ok) onSave();
@@ -795,11 +841,17 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         dehumidification: product?.dehumidification || '',
         dimensions: product?.dimensions || '',
         weight: product?.weight || '',
-        warranty: product?.warranty || ''
+        warranty: product?.warranty || '',
+        promo_price: product?.promo_price ? product.promo_price.toString() : '',
+        discount_percent: product?.discount_percent ? product.discount_percent.toString() : ''
     });
 
     const [displayPrice, setDisplayPrice] = useState<string>(
         product?.price ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price) : ''
+    );
+
+    const [displayPromoPrice, setDisplayPromoPrice] = useState<string>(
+        product?.promo_price ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.promo_price) : ''
     );
 
     const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -838,6 +890,42 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         }
     };
 
+    const handlePromoPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const rawVal = e.target.value;
+        const cleanNumStr = rawVal.replace(/[^0-9.]/g, '');
+        const parts = cleanNumStr.split('.');
+        let sanitized = parts[0];
+        if (parts.length > 1) {
+            sanitized += '.' + parts[1].slice(0, 2);
+        }
+
+        if (!sanitized) {
+            setDisplayPromoPrice('');
+        } else {
+            const splitSanitized = sanitized.split('.');
+            const formattedInt = new Intl.NumberFormat('en-US').format(Number(splitSanitized[0]));
+            let visualValue = '$' + formattedInt;
+            if (splitSanitized[1] !== undefined) {
+                visualValue += '.' + splitSanitized[1];
+            } else if (sanitized.endsWith('.')) {
+                visualValue += '.';
+            }
+            setDisplayPromoPrice(visualValue);
+        }
+        setFormData({ ...formData, promo_price: sanitized });
+    };
+
+    const handlePromoPriceBlur = () => {
+        const numericVal = parseFloat(formData.promo_price) || 0;
+        if (numericVal > 0 || formData.promo_price !== '') {
+            setDisplayPromoPrice(
+                new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(numericVal)
+            );
+        } else {
+            setDisplayPromoPrice('');
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const url = product
@@ -849,13 +937,19 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         // Prepare payload
         const payload = {
             ...formData,
-            price: Math.round(parseFloat(formData.price || '0'))
+            price: Math.round(parseFloat(formData.price || '0')),
+            promo_price: formData.promo_price ? Math.round(parseFloat(formData.promo_price)) : null,
+            discount_percent: formData.discount_percent ? parseInt(formData.discount_percent) : null
         };
 
         try {
+            const token = sessionStorage.getItem('admin_token');
             const res = await fetch(url, {
                 method,
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': token } : {})
+                },
                 body: JSON.stringify(payload)
             });
             if (res.ok) onSave();
@@ -942,6 +1036,29 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                                             onChange={handlePriceChange}
                                             onBlur={handlePriceBlur}
                                             className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Promotion Price (USD)</label>
+                                        <input
+                                            type="text"
+                                            value={displayPromoPrice}
+                                            onChange={handlePromoPriceChange}
+                                            onBlur={handlePromoPriceBlur}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. $899.00"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Discount Percent (%)</label>
+                                        <input
+                                            type="number"
+                                            value={formData.discount_percent}
+                                            min={0}
+                                            max={100}
+                                            onChange={e => setFormData({ ...formData, discount_percent: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 10"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -1162,9 +1279,13 @@ function ScheduleManager() {
         setSaving(true);
         setSuccess(false);
         try {
+            const token = sessionStorage.getItem('admin_token');
             const res = await fetch('/api/v1/admin/schedule', {
                 method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': token } : {})
+                },
                 body: JSON.stringify(formData)
             });
             if (res.ok) {

@@ -2,10 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useContent } from '@/lib/context/ContentContext';
 import { TrackedPhoneLink } from './TrackedPhoneLink';
 
 export default function Footer() {
+    const pathname = usePathname();
+    if (pathname && pathname.startsWith('/checkout')) return null;
+
     const { content } = useContent();
     const defaults = {
         mini_split_label: "MINI SPLIT AC",
@@ -21,6 +25,24 @@ export default function Footer() {
         ...defaults,
         ...(content?.footer_schedule || {})
     };
+
+    const regions = content?.landing_legacy?.service_areas?.regions || [];
+    const dynamicCities: string[] = [];
+    regions.forEach((region: any) => {
+        if (region.cities) {
+            region.cities.forEach((city: any) => {
+                dynamicCities.push(city.name);
+            });
+        }
+    });
+
+    const serviceAreas = dynamicCities.length > 0 ? dynamicCities : [
+        'Aiea', 'Pearl City', 'Mililani', 'Waipio Gentry', 'Waikele',
+        'Honolulu', 'Kalihi', 'Manoa', 'Kaimuki', 'Hawaii Kai', 
+        'Salt Lake', 'Aina Haina', 'Kahala', 'McCully', 'Makiki',
+        'Kapolei', 'Ewa Beach', 'Waipahu', 'Kunia',
+        'Kailua', 'Kaneohe', 'Kahaluu'
+    ];
 
     return (
         <footer className="relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-8">
@@ -80,12 +102,12 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
                     {/* Brand Column */}
                     <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
                         <div className="relative h-32 w-32 -mb-2">
                             <Image
-                                src="/assets/ahac-logo-bus-500x500xv2.svg"
+                                src="/assets/logo.svg"
                                 alt="Affordable Home A/C"
                                 fill
                                 className="object-contain"
@@ -133,6 +155,21 @@ export default function Footer() {
                                     <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
                                         <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
                                         {item.text}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Service Areas Column */}
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                        <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Service Areas</h4>
+                        <ul className="grid grid-cols-2 gap-x-4 gap-y-3 w-full">
+                            {serviceAreas.map((city) => (
+                                <li key={city}>
+                                    <Link href={`/service-areas/${city.toLowerCase().replace(/ /g, '-')}`} className="text-slate-400 hover:text-primary transition-colors text-xs flex items-center justify-center md:justify-start gap-1.5 group">
+                                        <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors shrink-0"></span>
+                                        <span className="truncate">{city}</span>
                                     </Link>
                                 </li>
                             ))}

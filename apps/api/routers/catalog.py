@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, Query
+from fastapi.encoders import jsonable_encoder
 import schemas
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional, List
-from dependencies import get_db
+from dependencies import get_db, verify_admin_token
 from domain import catalog
 import json
 import os
@@ -53,9 +54,10 @@ def persist_product_changes(product_data, action='update'):
         frontend_url = os.environ.get("FRONTEND_INTERNAL_URL", "http://web:3000")
         hook_url = f"{frontend_url}/api/revalidate"
         
+        revalidate_secret = os.environ.get("REVALIDATE_SECRET", "internal_ahac_revalidate_777")
         req = urllib.request.Request(
             hook_url, 
-            data=json.dumps({"secret": "internal_ahac_revalidate_777", "path": "/shop"}).encode('utf-8'),
+            data=json.dumps({"secret": revalidate_secret, "path": "/shop"}).encode('utf-8'),
             headers={'Content-Type': 'application/json'}
         )
         with urllib.request.urlopen(req, timeout=3) as response:
@@ -99,7 +101,7 @@ async def validate_inventory(
     items_data = [item.dict() for item in validation_request.items]
     return await catalog.validate_inventory_service(db, items_data)
 
-@router.post("", response_model=schemas.Product)
+@router.post("", dependencies=[Depends(verify_admin_token)])
 async def create_product(
     product: schemas.ProductCreate,
     db: AsyncSession = Depends(get_db)
@@ -107,12 +109,33 @@ async def create_product(
     new_product = await catalog.create_product_service(db, product.dict())
     
     # Persist to seed file
-    # FIX: Use jsonable_encoder because new_product is a SQLAlchemy object, not Pydantic
-    persist_product_changes(jsonable_encoder(new_product))
+    # FIX: Bypass Pydantic V2 model_validate completely to prevent Rust/musl panics on Alpine
+    product_dict = {
+        "id": new_product.id,
+        "name": new_product.name,
+        "price": new_product.price,
+        "category": new_product.category,
+        "subcategory": new_product.subcategory,
+        "stock": new_product.stock,
+        "image_url": new_product.image_url,
+        "btu": new_product.btu,
+        "voltage": new_product.voltage,
+        "coverage": new_product.coverage,
+        "performance_specs": new_product.performance_specs,
+        "key_spec": new_product.key_spec,
+        "noise_level": new_product.noise_level,
+        "dehumidification": new_product.dehumidification,
+        "dimensions": new_product.dimensions,
+        "weight": new_product.weight,
+        "warranty": new_product.warranty,
+        "promo_price": new_product.promo_price,
+        "discount_percent": new_product.discount_percent
+    }
+    persist_product_changes(product_dict)
     
-    return new_product
+    return product_dict
 
-@router.put("/{product_id}", response_model=schemas.Product)
+@router.put("/{product_id}", dependencies=[Depends(verify_admin_token)])
 async def update_product(
     product_id: int,
     product_update: schemas.ProductUpdate,
@@ -132,12 +155,31 @@ async def update_product(
         print(f"DEBUG: DB Update Success. Persisting to JSON...")
         
         # Persist to seed file
-        # FIX: Explicitly convert ORM -> Pydantic -> Dict to guarantee JSON serializability
-        # This prevents any recursive loop or relationship loading issues with jsonable_encoder
-        product_pydantic = schemas.Product.from_orm(updated_product)
-        persist_product_changes(product_pydantic.dict())
+        # FIX: Bypass Pydantic V2 model_validate completely to prevent Rust/musl panics on Alpine
+        product_dict = {
+            "id": updated_product.id,
+            "name": updated_product.name,
+            "price": updated_product.price,
+            "category": updated_product.category,
+            "subcategory": updated_product.subcategory,
+            "stock": updated_product.stock,
+            "image_url": updated_product.image_url,
+            "btu": updated_product.btu,
+            "voltage": updated_product.voltage,
+            "coverage": updated_product.coverage,
+            "performance_specs": updated_product.performance_specs,
+            "key_spec": updated_product.key_spec,
+            "noise_level": updated_product.noise_level,
+            "dehumidification": updated_product.dehumidification,
+            "dimensions": updated_product.dimensions,
+            "weight": updated_product.weight,
+            "warranty": updated_product.warranty,
+            "promo_price": updated_product.promo_price,
+            "discount_percent": updated_product.discount_percent
+        }
+        persist_product_changes(product_dict)
         
-        return updated_product
+        return product_dict
     except Exception as e:
         import traceback
         traceback.print_exc()
@@ -145,7 +187,7 @@ async def update_product(
         from fastapi import HTTPException
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
-@router.delete("/{product_id}")
+@router.delete("/{product_id}", dependencies=[Depends(verify_admin_token)])
 async def delete_product(
     product_id: int,
     db: AsyncSession = Depends(get_db)

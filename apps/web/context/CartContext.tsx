@@ -23,6 +23,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
     const [isOpen, setIsOpen] = useState(false);
 
+    // Capture and persist UTM tracking parameters site-wide
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            const utmSource = params.get('utm_source');
+            const utmMedium = params.get('utm_medium');
+            const utmCampaign = params.get('utm_campaign');
+
+            if (utmSource) sessionStorage.setItem('utm_source', utmSource);
+            if (utmMedium) sessionStorage.setItem('utm_medium', utmMedium);
+            if (utmCampaign) sessionStorage.setItem('utm_campaign', utmCampaign);
+        }
+    }, []);
+
     // Load from LocalStorage
     useEffect(() => {
         const saved = localStorage.getItem('ahac_cart');
@@ -53,18 +67,63 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             }
             return [...current, { ...product, quantity: 1 }];
         });
+
+        // GTM E-Commerce add_to_cart push
+        if (typeof window !== 'undefined' && (window as any).dataLayer) {
+            const activePrice = product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0 ? product.promo_price : product.price;
+            (window as any).dataLayer.push({
+                event: 'add_to_cart',
+                ecommerce: {
+                    currency: 'USD',
+                    value: activePrice,
+                    items: [
+                        {
+                            item_id: String(product.id),
+                            item_name: product.name,
+                            price: activePrice,
+                            quantity: 1
+                        }
+                    ]
+                }
+            });
+        }
+
         setIsOpen(true);
     };
 
     const removeFromCart = (id: number) => {
+        const itemToRemove = items.find(item => item.id === id);
         setItems(current => current.filter(item => item.id !== id));
+
+        // GTM E-Commerce remove_from_cart push
+        if (itemToRemove && typeof window !== 'undefined' && (window as any).dataLayer) {
+            const activePrice = itemToRemove.promo_price !== undefined && itemToRemove.promo_price !== null && itemToRemove.promo_price > 0 ? itemToRemove.promo_price : itemToRemove.price;
+            (window as any).dataLayer.push({
+                event: 'remove_from_cart',
+                ecommerce: {
+                    currency: 'USD',
+                    value: activePrice * itemToRemove.quantity,
+                    items: [
+                        {
+                            item_id: String(itemToRemove.id),
+                            item_name: itemToRemove.name,
+                            price: activePrice,
+                            quantity: itemToRemove.quantity
+                        }
+                    ]
+                }
+            });
+        }
     };
 
     const clearCart = () => {
         setItems([]);
     };
 
-    const cartTotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const cartTotal = items.reduce((total, item) => {
+        const activePrice = item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0 ? item.promo_price : item.price;
+        return total + (activePrice * item.quantity);
+    }, 0);
     const cartCount = items.reduce((count, item) => count + item.quantity, 0);
 
     const syncInventory = async () => {

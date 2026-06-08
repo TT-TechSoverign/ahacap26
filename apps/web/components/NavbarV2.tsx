@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useCart } from '../context/CartContext';
@@ -10,6 +11,9 @@ import { useContent } from '../lib/context/ContentContext';
 import { EditableText } from './EditableText';
 
 export default function NavbarV2() {
+    const pathname = usePathname();
+    if (pathname && pathname.startsWith('/checkout')) return null;
+
     const { items, openCart } = useCart();
     const { content } = useContent();
 
@@ -53,13 +57,13 @@ export default function NavbarV2() {
                 damping: 25,
                 delay: (headerVisible || mobileMenuOpen) ? 0.1 : 0
             }}
-            className="fixed top-0 w-full z-50 flex flex-col pointer-events-none"
+            className="fixed top-0 w-full z-50 hidden md:flex flex-col pointer-events-none"
         >
             {/* Split Header Container */}
             <div className="pointer-events-auto shadow-md relative flex flex-col">
 
                 {/* Row 1: Logo & Brands (White Background) */}
-                <div className="bg-white/95 backdrop-blur-md border-b border-slate-100 text-slate-900 z-20 relative">
+                <div className="bg-[#0a0e14]/95 backdrop-blur-md border-b border-slate-800/80 text-white z-20 relative">
                     <div className="max-w-7xl mx-auto px-6 py-2 flex flex-col gap-2">
                         <div className="flex justify-between items-center relative py-1 min-h-[100px] md:min-h-0">
 
@@ -67,7 +71,7 @@ export default function NavbarV2() {
                             <div className="md:hidden absolute left-0 top-1/2 -translate-y-1/2 z-30">
                                 <button
                                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                    className="text-slate-900 hover:text-primary transition-colors p-2"
+                                    className="text-white hover:text-cyan-400 transition-colors p-2"
                                 >
                                     <span className="material-symbols-outlined text-3xl">
                                         {mobileMenuOpen ? 'close' : 'menu'}
@@ -77,13 +81,13 @@ export default function NavbarV2() {
 
                             {/* Left Brands (Desktop Only: Window & Central Mix) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-end pr-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link href="/shop" className="text-rose-500 font-sans font-black tracking-tighter text-2xl relative group cursor-pointer block">
+                                <Link href="/shop" className="text-rose-400 font-sans font-black tracking-tighter text-2xl relative group cursor-pointer block">
                                     LG
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/shop" className="text-blue-600 font-serif font-bold tracking-wide text-lg relative group cursor-pointer block">
+                                <Link href="/shop" className="text-blue-400 font-serif font-bold tracking-wide text-lg relative group cursor-pointer block">
                                     GE
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                                 <Link href="/shop#rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-xl relative group cursor-pointer block pb-1">
                                     Hawai&apos;i Energy
@@ -96,7 +100,7 @@ export default function NavbarV2() {
                             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 md:flex md:justify-center z-20">
                                 <Link href="/" className="block relative h-32 w-64 md:h-44 md:w-80 group shrink-0">
                                     <Image
-                                        src="/assets/ahac-logo-bus-500x500xv2.svg"
+                                        src="/assets/logo.svg"
                                         alt="AHAC Logo"
                                         fill
                                         className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
@@ -107,21 +111,21 @@ export default function NavbarV2() {
 
                             {/* Right Brands (Desktop Only: Mini Splits) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link href="/mini_split_ac#mitsubishi-electric" className="text-red-600 font-header font-bold tracking-normal uppercase text-sm relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#mitsubishi-electric" className="text-red-500 font-header font-bold tracking-normal uppercase text-sm relative group cursor-pointer block">
                                     MITSUBISHI ELECTRIC
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#fujitsu" className="text-red-600 font-sans font-bold italic tracking-widest text-xl relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#fujitsu" className="text-red-500 font-sans font-bold italic tracking-widest text-xl relative group cursor-pointer block">
                                     FUJITSU
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                                 <Link href="/mini_split_ac#daikin" className="text-[#00B5E2] font-header font-medium tracking-widest text-lg relative group cursor-pointer block pb-1">
                                     DAIKIN
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#carrier" className="text-blue-700 font-sans font-extrabold tracking-tighter text-xl relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#carrier" className="text-blue-400 font-sans font-extrabold tracking-tighter text-xl relative group cursor-pointer block">
                                     CARRIER
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-200 transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                             </div>
 
@@ -129,7 +133,7 @@ export default function NavbarV2() {
                             <div className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 z-30">
                                 <button
                                     onClick={openCart}
-                                    className="text-slate-900 hover:text-primary transition-colors p-2 relative"
+                                    className="text-white hover:text-cyan-400 transition-colors p-2 relative"
                                 >
                                     <span className="material-symbols-outlined text-3xl">shopping_cart</span>
                                     {items.length > 0 && (
@@ -201,70 +205,6 @@ export default function NavbarV2() {
                 </div>
             </div>
 
-            {/* Mobile Menu Overlay (Light Mode) */}
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                        animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
-                        exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 top-[100px] z-40 bg-white/95 pointer-events-auto md:hidden overflow-hidden flex flex-col"
-                    >
-                        <div className="flex-1 flex flex-col justify-center items-center gap-8 relative z-10 px-6">
-                            {links.map((link: any, i: number) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.1 }}
-                                >
-                                    <Link
-                                        href={link.href}
-                                        onClick={() => setMobileMenuOpen(false)}
-                                        className="text-2xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center justify-center gap-4 group"
-                                    >
-                                        {link.text}
-                                    </Link>
-                                </motion.div>
-                            ))}
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: links.length * 0.1 }}
-                            >
-                                <Link
-                                    href="/contact"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="text-2xl font-header font-black uppercase tracking-widest text-slate-900 hover:text-primary transition-all flex items-center justify-center gap-4 group"
-                                >
-                                    Contact Us
-                                </Link>
-                            </motion.div>
-
-                            <div className="w-full h-px bg-slate-200 my-4 max-w-[200px]"></div>
-
-                            {/* Quick Actions */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5 }}
-                                className="grid grid-cols-2 gap-4 w-full max-w-xs"
-                            >
-                                <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="bg-slate-50 border border-slate-200 hover:border-primary/50 p-4 rounded-xl flex flex-col items-center gap-2 group transition-all">
-                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">call</span>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary">Call Us</span>
-                                </Link>
-                                <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="bg-slate-50 border border-slate-200 hover:border-primary/50 p-4 rounded-xl flex flex-col items-center gap-2 group transition-all">
-                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">storefront</span>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary">Shop</span>
-                                </Link>
-                            </motion.div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </motion.header>
     );
 }
