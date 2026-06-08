@@ -5,10 +5,24 @@ set -eEuo pipefail
 
 # Dynamically resolve absolute path
 BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-LOG_FILE="${BASE_DIR}/deploy_staging.log"
 TARGET_BRANCH="${TARGET_BRANCH:-main}"
-DOCKER_PROJECT="ahac_staging"
 CPANEL_USER="onjtfnmy"
+
+if [ "$TARGET_BRANCH" = "staging" ]; then
+    DOCKER_PROJECT="ahac_staging"
+    COMPOSE_FILE="docker-compose.staging.yml"
+    API_SERVICE="staging-api"
+    DB_VOLUME="${DOCKER_PROJECT}_staging_postgres_data"
+    LOG_FILE="${BASE_DIR}/deploy_staging.log"
+    DEPTYPE="Staging"
+else
+    DOCKER_PROJECT="ahacap26"
+    COMPOSE_FILE="docker-compose.prod.yml"
+    API_SERVICE="prod-api"
+    DB_VOLUME="${DOCKER_PROJECT}_prod_postgres_data"
+    LOG_FILE="${BASE_DIR}/deploy_prod.log"
+    DEPTYPE="Production"
+fi
 
 cd "$BASE_DIR"
 
@@ -27,7 +41,7 @@ fi
 exec > >(tee -a "$LOG_FILE") 2>&1
 
 echo "=========================================="
-echo "🛡️ Starting SECURE Staging Deployment: $(date)"
+echo "🛡️ Starting SECURE ${DEPTYPE} Deployment: $(date)"
 echo "Environment: ${TARGET_BRANCH} | Project: ${DOCKER_PROJECT}"
 echo "=========================================="
 
@@ -53,15 +67,15 @@ chmod 700 apps/api/entrypoint.sh 2>/dev/null || true
 # 3. Container Orchestration (Clean Build)
 echo "🚀 [3/5] Building & Hot-swapping Containers..."
 # Force a clean build to prevent corrupted Next.js caches
-docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" build --no-cache
+docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" build --no-cache
 # Swap the containers
-docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" down --remove-orphans
+docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" down --remove-orphans
 
 # [HOTFIX] Clear stale PostgreSQL PID files caused by sudden ENOSPC crashes
 echo "🧹 Clearing stale PostgreSQL locks..."
-docker run --rm -v ${DOCKER_PROJECT}_staging_postgres_data:/var/lib/postgresql/data alpine rm -f /var/lib/postgresql/data/postmaster.pid 2>/dev/null || true
+docker run --rm -v "$DB_VOLUME":/var/lib/postgresql/data alpine rm -f /var/lib/postgresql/data/postmaster.pid 2>/dev/null || true
 
-docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" up -d
+docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" up -d
 
 # 4. Application Data & Idempotent Seeding
 echo "🌱 [4/5] Checking Container Health & Database State..."
@@ -70,17 +84,17 @@ sleep 10
 
 # Run database schema migrations
 echo "⚙️ Running database schema migrations..."
-docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api python fix_db_schema.py
+docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" python fix_db_schema.py
 
 # Run product seeding
 echo "🍎 Seeding products table..."
-docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api python seed_products.py
+docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" python seed_products.py
 
 # Check for the marker file to prevent duplicate seeding
-if ! docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api test -f /app/.seeded_marker 2>/dev/null; then
+if ! docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" test -f /app/.seeded_marker 2>/dev/null; then
     echo "🌱 Seeding initial database structure..."
-    docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api python seed_content.py
-    docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api touch /app/.seeded_marker
+    docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" python seed_content.py
+    docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" touch /app/.seeded_marker
 else
     echo "⏭️ Idempotency Check: Seed state already present. Skipping."
 fi
