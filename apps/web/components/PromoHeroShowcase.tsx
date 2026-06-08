@@ -4,6 +4,29 @@ import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { Fan, ShieldCheck, Flame, Gift, ArrowRight } from 'lucide-react';
 
+const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string }) => (
+    <div 
+        className={`pointer-events-none transition-all duration-700 select-none ${className}`}
+        style={{ 
+            perspective: '200px',
+            opacity: isHovered ? 0.35 : 0.12,
+            transform: isHovered ? 'scale(1.15) rotate(10deg)' : 'scale(1)'
+        }}
+    >
+        <svg 
+            viewBox="0 0 24 24" 
+            className={`star-3d-y ${sizeClass}`}
+            style={{ 
+                color,
+                filter: `drop-shadow(0 0 6px ${color})`,
+                animationDuration: isHovered ? '1.5s' : duration
+            }}
+        >
+            <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192z" fill="currentColor" />
+        </svg>
+    </div>
+);
+
 export default function PromoHeroShowcase() {
     const [mounted, setMounted] = useState(false);
     const [isCampaignActive, setIsCampaignActive] = useState(true);
@@ -184,6 +207,11 @@ export default function PromoHeroShowcase() {
                         />
                     </svg>
                 </div>
+
+                {/* 3D Spinning Stars (Patriotic Red/White/Blue) */}
+                <Star3D color="#EF4444" duration="8s" isHovered={isHovered} className="absolute left-[40%] top-[25%] z-0" sizeClass="size-5" />
+                <Star3D color="#FFFFFF" duration="10s" isHovered={isHovered} className="absolute left-[52%] bottom-[20%] z-0" sizeClass="size-3.5" />
+                <Star3D color="#3B82F6" duration="7s" isHovered={isHovered} className="absolute right-[45%] top-[15%] z-0" sizeClass="size-4.5" />
 
                 {/* Drifting Horizontal Sparks */}
                 {isHovered && !isTouchDevice && (

@@ -337,4 +337,30 @@ body.promo-active .cart-promo-badge-pulse {
 }
 .bento-spark-horizontal {
     animation: bento-spark-drift-horizontal 4s linear infinite;
+}
+
+/* 12. 3D Spinning Stars */
+@keyframes spin-3d-star-y {
+    0% {
+        transform: rotateY(0deg) rotateX(15deg);
+    }
+    100% {
+        transform: rotateY(360deg) rotateX(15deg);
+    }
+}
+@keyframes spin-3d-star-x {
+    0% {
+        transform: rotateX(0deg) rotateY(15deg);
+    }
+    100% {
+        transform: rotateX(360deg) rotateY(15deg);
+    }
+}
+.star-3d-y {
+    transform-style: preserve-3d;
+    animation: spin-3d-star-y 6s linear infinite;
+}
+.star-3d-x {
+    transform-style: preserve-3d;
+    animation: spin-3d-star-x 8s linear infinite;
 }
