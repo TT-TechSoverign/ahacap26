@@ -85,7 +85,6 @@ export default function RootLayout({
                 />
                 <ContentProvider>
                     <CartProvider>
-                        <PromoStickyBar />
                         <MobileStickyHeader />
                         <NavbarV2 />
                         {children}

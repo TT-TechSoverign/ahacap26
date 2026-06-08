@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useContent } from '@/lib/context/ContentContext';
 import { BackToTop } from '@/components/BackToTop';
+import PromoRibbonCallout from '@/components/PromoRibbonCallout';
 
 export default function MiniSplitACMaintenancePage() {
     const { content } = useContent();
@@ -19,6 +20,8 @@ export default function MiniSplitACMaintenancePage() {
                         Mini Split AC <span className="text-primary">Cleaning</span>
                     </h1>
                 </div>
+
+                <PromoRibbonCallout />
 
                 {/* Hero Cards (Comparison) - side-by-side flex layout (md:flex-row) */}
                 <div className="flex flex-col md:flex-row gap-8 mb-24">

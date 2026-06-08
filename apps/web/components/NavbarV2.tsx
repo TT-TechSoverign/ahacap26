@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { useCart } from '../context/CartContext';
 import { useContent } from '../lib/context/ContentContext';
 import { EditableText } from './EditableText';
+import PromoStickyBar from './PromoStickyBar';
 
 export default function NavbarV2() {
     const pathname = usePathname();
@@ -203,6 +204,9 @@ export default function NavbarV2() {
                         </div>
                     </div>
                 </div>
+                
+                {/* Row 3: Promo Sticky Bar */}
+                <PromoStickyBar />
             </div>
 
         </motion.header>

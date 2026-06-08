@@ -50,7 +50,7 @@ export default function PromoStickyBar() {
 
     return (
         <div className="relative z-[9999] w-full bg-gradient-to-r from-red-600 via-white to-blue-600 p-[1.5px] shadow-[0_4px_30px_rgba(239,68,68,0.2)] animate-pulse-slow">
-            <Link href="/shop" className="block w-full bg-slate-950/95 hover:bg-slate-950/80 transition-colors py-2.5 px-4 text-center text-white relative group overflow-hidden">
+            <Link href="/shop" className="block w-full bg-slate-950/95 hover:bg-slate-950/80 transition-colors py-2 px-4 text-center text-white relative group overflow-hidden">
                 {/* Wavy background glow overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-transparent to-blue-500/10 opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
                 

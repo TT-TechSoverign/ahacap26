@@ -5,6 +5,7 @@ import SectionServicesGeneral from '../../components/SectionServicesGeneral';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BackToTop } from '@/components/BackToTop';
+import PromoBentoCard from '../../components/PromoBentoCard';
 
 export default function MiniSplitsPage() {
     const brands = [
@@ -63,6 +64,8 @@ export default function MiniSplitsPage() {
                         Discover the perfect cooling solution for your home with our top-rated brands.
                     </p>
                 </div>
+
+                <PromoBentoCard />
 
                 <div className="flex flex-col gap-16 mb-20">
                     {brands.map((brand) => (

@@ -14,6 +14,7 @@ import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from
 import { BackToTop } from '@/components/BackToTop';
 import { cn, generateProductSlug } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
+import PromoBentoCard from '../../components/PromoBentoCard';
 
 
 
@@ -209,6 +210,8 @@ export default function ShopPage() {
                         )}
                     </div>
                 </div>
+
+                <PromoBentoCard />
 
                 {/* Dynamic Reorderable Sections */}
                 <div className="space-y-8 md:space-y-10">

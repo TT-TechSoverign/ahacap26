@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import MobileDrawerMenu from './MobileDrawerMenu';
+import PromoStickyBar from './PromoStickyBar';
 
 export default function MobileStickyHeader() {
     const pathname = usePathname();
@@ -80,6 +81,9 @@ export default function MobileStickyHeader() {
                             </button>
                         </div>
                     </div>
+                </div>
+                <div className="pointer-events-auto">
+                    <PromoStickyBar />
                 </div>
             </header>
 
