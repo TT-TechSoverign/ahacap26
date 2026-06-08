@@ -3,13 +3,14 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string }) => (
+const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className, style }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string; style?: React.CSSProperties }) => (
     <div 
         className={`pointer-events-none transition-all duration-700 select-none ${className}`}
         style={{ 
             perspective: '200px',
             opacity: isHovered ? 0.35 : 0.12,
-            transform: isHovered ? 'scale(1.15) rotate(10deg)' : 'scale(1)'
+            transform: isHovered ? 'translateZ(45px) scale(1.15) rotate(10deg)' : 'translateZ(0px) scale(1) rotate(0deg)',
+            ...style
         }}
     >
         <svg 
@@ -138,7 +139,7 @@ export default function PromoRibbonCallout() {
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            style={tiltStyle}
+            style={{ ...tiltStyle, transformStyle: 'preserve-3d' }}
             className="w-full bg-[#0a0e14]/90 backdrop-blur-md border border-white/5 rounded-2xl p-5 md:p-6 shadow-xl relative overflow-hidden animate-patriotic-glow mb-10 flex flex-col md:flex-row items-center justify-between gap-4 card-hover-trigger cursor-pointer"
         >
             {/* 3D Reflective Glare Overlay */}
@@ -152,7 +153,13 @@ export default function PromoRibbonCallout() {
             <div className="absolute top-0 right-0 w-32 h-full bg-blue-500/5 blur-[50px] rounded-full pointer-events-none z-0"></div>
 
             {/* Animated Cool Air Currents (Wind currents flowing horizontally) */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            <div 
+                className="absolute inset-0 pointer-events-none overflow-hidden z-0"
+                style={{
+                    transform: isHovered ? 'translateZ(-15px) scale(1.02)' : 'translateZ(0px)',
+                    transition: 'transform 0.5s ease'
+                }}
+            >
                 <svg 
                     viewBox="0 0 400 60" 
                     className="absolute inset-0 w-full h-full opacity-[0.05] text-white"
@@ -214,7 +221,13 @@ export default function PromoRibbonCallout() {
                 </div>
             )}
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left relative z-10">
+            <div 
+                className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left relative z-10"
+                style={{
+                    transform: isHovered ? 'translateZ(20px)' : 'translateZ(0px)',
+                    transition: 'transform 0.3s ease'
+                }}
+            >
                 {/* Dynamic Icon Shroud: Spins on Hover */}
                 <div className="size-10 rounded-xl bg-gradient-to-br from-red-600 via-slate-900 to-blue-600 flex items-center justify-center text-white shrink-0 shadow-lg border border-white/10 overflow-hidden relative group/icon">
                     <div className={`absolute inset-0 bg-black/20 opacity-0 group-hover/icon:opacity-100 transition-opacity pointer-events-none`} />
@@ -230,7 +243,13 @@ export default function PromoRibbonCallout() {
                 </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto shrink-0 relative z-10">
+            <div 
+                className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto shrink-0 relative z-10"
+                style={{
+                    transform: isHovered ? 'translateZ(25px)' : 'translateZ(0px)',
+                    transition: 'transform 0.3s ease'
+                }}
+            >
                 {/* Live Countdown */}
                 <div className="flex items-center gap-2 bg-slate-950 border border-white/10 px-3 py-1.5 rounded-full text-[10px] font-mono font-black text-cyan-400 shadow-inner">
                     <span className="text-slate-500 text-[8px] uppercase tracking-widest">Ends In:</span>

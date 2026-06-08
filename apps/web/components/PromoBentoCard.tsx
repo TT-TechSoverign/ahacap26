@@ -3,13 +3,14 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string }) => (
+const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className, style }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string; style?: React.CSSProperties }) => (
     <div 
         className={`pointer-events-none transition-all duration-700 select-none ${className}`}
         style={{ 
             perspective: '200px',
             opacity: isHovered ? 0.35 : 0.12,
-            transform: isHovered ? 'scale(1.15) rotate(10deg)' : 'scale(1)'
+            transform: isHovered ? 'translateZ(45px) scale(1.15) rotate(10deg)' : 'translateZ(0px) scale(1) rotate(0deg)',
+            ...style
         }}
     >
         <svg 
@@ -142,7 +143,7 @@ function BentoSubCard({ title, description, icon, themeColor }: BentoSubCardProp
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            style={tiltStyle}
+            style={{ ...tiltStyle, transformStyle: 'preserve-3d' }}
             className={`bg-[#0c121d]/90 border border-white/5 p-5 rounded-2xl relative overflow-hidden group/item transition-all duration-300 card-hover-trigger cursor-pointer ${themeStyles.borderClass}`}
         >
             {/* Soft Radial Ambient Glow */}
@@ -162,7 +163,13 @@ function BentoSubCard({ title, description, icon, themeColor }: BentoSubCardProp
             {/* Animated HVAC Background */}
             {themeColor === 'white' ? (
                 /* White Card: Cool Air Currents (Wind currents flowing) */
-                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                <div 
+                    className="absolute inset-0 pointer-events-none overflow-hidden z-0"
+                    style={{
+                        transform: isHovered ? 'translateZ(-15px) scale(1.05)' : 'translateZ(0px)',
+                        transition: 'transform 0.5s ease'
+                    }}
+                >
                     <svg 
                         viewBox="0 0 120 80" 
                         className="absolute inset-0 w-full h-full opacity-[0.06] text-white"
@@ -198,7 +205,13 @@ function BentoSubCard({ title, description, icon, themeColor }: BentoSubCardProp
                 </div>
             ) : (
                 /* Red/Blue Cards: Spinning HVAC Fan Vectors */
-                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                <div 
+                    className="absolute inset-0 pointer-events-none overflow-hidden z-0"
+                    style={{
+                        transform: isHovered ? 'translateZ(-15px) scale(1.05)' : 'translateZ(0px)',
+                        transition: 'transform 0.5s ease'
+                    }}
+                >
                     <svg 
                         viewBox="0 0 100 100" 
                         className={`absolute bottom-[-15px] right-[-15px] size-28 opacity-[0.05] transition-all duration-1000 ${
@@ -246,7 +259,13 @@ function BentoSubCard({ title, description, icon, themeColor }: BentoSubCardProp
             )}
 
             {/* Card Content */}
-            <div className="relative z-10">
+            <div 
+                className="relative z-10"
+                style={{
+                    transform: isHovered ? 'translateZ(25px)' : 'translateZ(0px)',
+                    transition: 'transform 0.3s ease'
+                }}
+            >
                 <div className={`size-8 rounded-lg ${themeStyles.iconBg} flex items-center justify-center mb-3 shadow-inner`}>
                     <span className="material-symbols-outlined text-lg">{icon}</span>
                 </div>

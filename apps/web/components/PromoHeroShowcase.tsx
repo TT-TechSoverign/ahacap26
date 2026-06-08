@@ -4,13 +4,14 @@ import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { Fan, ShieldCheck, Flame, Gift, ArrowRight } from 'lucide-react';
 
-const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string }) => (
+const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className, style }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string; style?: React.CSSProperties }) => (
     <div 
         className={`pointer-events-none transition-all duration-700 select-none ${className}`}
         style={{ 
             perspective: '200px',
             opacity: isHovered ? 0.35 : 0.12,
-            transform: isHovered ? 'scale(1.15) rotate(10deg)' : 'scale(1)'
+            transform: isHovered ? 'translateZ(45px) scale(1.15) rotate(10deg)' : 'translateZ(0px) scale(1) rotate(0deg)',
+            ...style
         }}
     >
         <svg 
@@ -159,7 +160,7 @@ export default function PromoHeroShowcase() {
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                style={tiltStyle}
+                style={{ ...tiltStyle, transformStyle: 'preserve-3d' }}
                 className="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 p-8 md:p-12 shadow-2xl transition-all duration-300 card-hover-trigger btn-promo-glow"
             >
                 {/* 3D Reflective Glare Overlay */}
@@ -173,7 +174,13 @@ export default function PromoHeroShowcase() {
                 <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-600/10 blur-[100px] rounded-full pointer-events-none z-0" />
 
                 {/* Animated Cool Air Currents (Wind currents flowing horizontally) */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                <div 
+                    className="absolute inset-0 pointer-events-none overflow-hidden z-0"
+                    style={{
+                        transform: isHovered ? 'translateZ(-15px) scale(1.03)' : 'translateZ(0px)',
+                        transition: 'transform 0.5s ease'
+                    }}
+                >
                     <svg 
                         viewBox="0 0 500 100" 
                         className="absolute inset-0 w-full h-full opacity-[0.03] text-white"
@@ -229,13 +236,19 @@ export default function PromoHeroShowcase() {
                                     animationDuration: spark.duration,
                                     '--drift-y': spark.driftY,
                                     opacity: 0.7
-                                } as any}
+                                }}
                             />
                         ))}
                     </div>
                 )}
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-20">
+                <div 
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-20"
+                    style={{
+                        transform: isHovered ? 'translateZ(20px)' : 'translateZ(0px)',
+                        transition: 'transform 0.3s ease'
+                    }}
+                >
                     {/* Left Column: Promotion Info */}
                     <div className="lg:col-span-7 space-y-6 text-left">
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-semibold tracking-wider text-blue-400 uppercase">
@@ -314,7 +327,13 @@ export default function PromoHeroShowcase() {
                     </div>
 
                     {/* Right Column: Animated HVAC Vent Frame & Fan */}
-                    <div className="lg:col-span-5 flex justify-center items-center">
+                    <div 
+                        className="lg:col-span-5 flex justify-center items-center"
+                        style={{
+                            transform: isHovered ? 'translateZ(30px) scale(1.02)' : 'translateZ(0px)',
+                            transition: 'transform 0.4s ease'
+                        }}
+                    >
                         <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full border border-slate-800 bg-slate-900/50 flex items-center justify-center p-6 shadow-inner group-hover:border-blue-500/30 transition-colors">
                             
                             {/* Blue/Cyan Cool Air Flow Expansion Ring */}
