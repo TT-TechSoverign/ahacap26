@@ -6,6 +6,7 @@ services:
       args:
         - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_PROD}
         - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY_PROD}
+        - NEXT_PUBLIC_API_URL=https://affordablehome-ac.com/api/v1
     container_name: prod-web
     ports:
       - "127.0.0.1:3001:3000"

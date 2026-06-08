@@ -18,6 +18,15 @@ export function isCampaignActive(): boolean {
     const isPastDate = new Date().getTime() > targetDate.getTime();
     if (isPastDate) return false;
 
+    // Client-side runtime domain check (failsafe guardrail)
+    if (typeof window !== "undefined") {
+        const hostname = window.location.hostname;
+        const isProdDomain = hostname.includes("affordablehome-ac.com") && !hostname.includes("staging");
+        if (isProdDomain) {
+            return false;
+        }
+    }
+
     // Check if we are running in a production environment (which should NOT show the promo)
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
     const isProdEnv = apiUrl.includes("affordablehome-ac.com") && !apiUrl.includes("staging");
