@@ -8,7 +8,7 @@ import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import MobileDrawerMenu from './MobileDrawerMenu';
 import PromoStickyBar from './PromoStickyBar';
-import { cn } from '@/lib/utils';
+import { cn, isCampaignActive } from '@/lib/utils';
 
 export default function MobileStickyHeader() {
     const pathname = usePathname();
@@ -77,7 +77,7 @@ export default function MobileStickyHeader() {
                                 {items.length > 0 && (
                                     <span className={cn(
                                         "absolute top-1 right-0 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
-                                        (new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime() && items.some(item => item.promo_price && item.promo_price > 0))
+                                        (isCampaignActive() && items.some(item => item.promo_price && item.promo_price > 0))
                                             ? "cart-promo-badge-pulse text-white"
                                             : "bg-cyan-400 text-black"
                                     )}>

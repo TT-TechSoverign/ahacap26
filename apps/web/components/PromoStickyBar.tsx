@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+import { isCampaignActive } from '../lib/utils';
+
 export default function PromoStickyBar() {
     const [mounted, setMounted] = useState(false);
     const [dismissed, setDismissed] = useState(true);
@@ -39,7 +41,7 @@ export default function PromoStickyBar() {
     const now = new Date();
     const isExpired = now.getTime() > targetDate.getTime();
 
-    if (dismissed || isExpired) return null;
+    if (dismissed || isExpired || !isCampaignActive()) return null;
 
     const handleDismiss = (e: React.MouseEvent) => {
         e.stopPropagation();

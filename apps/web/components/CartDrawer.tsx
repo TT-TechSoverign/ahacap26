@@ -7,6 +7,7 @@ import { twMerge } from 'tailwind-merge';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { isCampaignActive } from '../lib/utils';
 
 function cn(...inputs: (string | undefined)[]) {
     return twMerge(clsx(inputs));
@@ -44,8 +45,8 @@ export default function CartDrawer() {
     const triggerConfetti = () => {
         const duration = 3 * 1000;
         const animationEnd = Date.now() + duration;
-        const isCampaignActive = Date.now() <= new Date("2026-08-01T09:59:59Z").getTime();
-        const colors = isCampaignActive ? ['#EF4444', '#FFFFFF', '#3B82F6'] : undefined;
+        const campaignActive = isCampaignActive();
+        const colors = campaignActive ? ['#EF4444', '#FFFFFF', '#3B82F6'] : undefined;
         const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 200, colors };
 
         const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
@@ -66,8 +67,8 @@ export default function CartDrawer() {
     const hasIssue = items.some(item => (item.stock || 0) < item.quantity);
     const validTotal = items.reduce((acc, item) => {
         if ((item.stock || 0) >= item.quantity) {
-            const isCampaignActive = Date.now() <= new Date("2026-08-01T09:59:59Z").getTime();
-            const activePrice = (isCampaignActive && item.promo_price && item.promo_price > 0) ? item.promo_price : item.price;
+            const campaignActive = isCampaignActive();
+            const activePrice = (campaignActive && item.promo_price && item.promo_price > 0) ? item.promo_price : item.price;
             return acc + (activePrice * item.quantity);
         }
         return acc;
@@ -153,7 +154,7 @@ export default function CartDrawer() {
                                             <div className="flex-1 relative z-10">
                                                 <h4 className="text-slate-200 font-bold leading-tight mb-1 line-clamp-2 md:line-clamp-1">{item.name}</h4>
                                                 <div className="flex items-baseline gap-2">
-                                                    {(new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime() && item.promo_price && item.promo_price > 0) ? (
+                                                    {(isCampaignActive() && item.promo_price && item.promo_price > 0) ? (
                                                         <div className="flex items-center gap-1.5">
                                                             <span className="text-xs text-red-500 line-through font-bold opacity-60">
                                                                 ${item.price.toLocaleString()}

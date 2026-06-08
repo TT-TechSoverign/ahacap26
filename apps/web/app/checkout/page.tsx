@@ -11,6 +11,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { getProductImages } from '../../lib/product-images';
+import { isCampaignActive } from '../../lib/utils';
 
 function CheckoutContent() {
     const { items, clearCart, cartTotal } = useCart();
@@ -72,8 +73,8 @@ END:VCALENDAR`;
         const sessionId = searchParams.get('session_id') || `AHAC-${Math.floor(Math.random() * 90000) + 10000}`;
 
         // Check if cart contains promotional items before clearing
-        const isCampaignActive = new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime();
-        const hasPromo = isCampaignActive && items.some(item => item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0);
+        const campaignActive = isCampaignActive();
+        const hasPromo = campaignActive && items.some(item => item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0);
         if (hasPromo) {
             setHadPromoItems(true);
             sessionStorage.setItem('had_promo', 'true');
@@ -90,8 +91,8 @@ END:VCALENDAR`;
                     shipping: deliveryFee,
                     currency: 'USD',
                     items: items.map((item, index) => {
-                        const isCampaignActive = new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime();
-                        const activePrice = (isCampaignActive && item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0) ? item.promo_price : item.price;
+                        const campaignActive = isCampaignActive();
+                        const activePrice = (campaignActive && item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0) ? item.promo_price : item.price;
                         return {
                             item_id: String(item.id),
                             item_name: item.name,
@@ -117,8 +118,8 @@ END:VCALENDAR`;
                     value: cartTotal,
                     currency: 'USD',
                     items: items.map((item, index) => {
-                        const isCampaignActive = new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime();
-                        const activePrice = (isCampaignActive && item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0) ? item.promo_price : item.price;
+                        const campaignActive = isCampaignActive();
+                        const activePrice = (campaignActive && item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0) ? item.promo_price : item.price;
                         return {
                             item_id: String(item.id),
                             item_name: item.name,
@@ -433,7 +434,7 @@ END:VCALENDAR`;
                                                 <h4 className="text-[10px] md:text-xs font-black text-white/80 line-clamp-1 uppercase tracking-tighter group-hover/item:text-white transition-colors">{item.name}</h4>
                                                 <div className="flex items-center justify-between mt-1">
                                                     <span className="text-[9px] md:text-[10px] text-slate-500 font-bold uppercase tracking-widest">Qty: {item.quantity}</span>
-                                                    {(new Date().getTime() <= new Date("2026-08-01T09:59:59Z").getTime() && item.promo_price && item.promo_price > 0) ? (
+                                                    {(isCampaignActive() && item.promo_price && item.promo_price > 0) ? (
                                                         <div className="flex items-center gap-1.5">
                                                             <span className="text-[10px] text-red-500 line-through font-bold opacity-60">
                                                                 ${item.price.toLocaleString()}

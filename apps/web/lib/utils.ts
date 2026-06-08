@@ -12,3 +12,19 @@ export function generateProductSlug(id: number | string, name: string): string {
         .replace(/(^-|-$)+/g, '');   // Remove leading/trailing hyphens
     return `${id}-${slugifiedName}`;
 }
+
+export function isCampaignActive(): boolean {
+    const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
+    const isPastDate = new Date().getTime() > targetDate.getTime();
+    if (isPastDate) return false;
+
+    // Check if we are running in a production environment (which should NOT show the promo)
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+    const isProdEnv = apiUrl.includes("affordablehome-ac.com") && !apiUrl.includes("staging");
+
+    if (isProdEnv) {
+        return false;
+    }
+
+    return true;
+}

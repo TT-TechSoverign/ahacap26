@@ -28,9 +28,11 @@ const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className, s
     </div>
 );
 
+import { isCampaignActive } from '../lib/utils';
+
 export default function PromoHeroShowcase() {
     const [mounted, setMounted] = useState(false);
-    const [isCampaignActive, setIsCampaignActive] = useState(true);
+    const [isCampaignActiveState, setIsCampaignActive] = useState(true);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
     const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
     const [isHovered, setIsHovered] = useState(false);
@@ -56,8 +58,7 @@ export default function PromoHeroShowcase() {
 
         // Check if campaign is active
         const checkActive = () => {
-            const now = new Date();
-            const active = now.getTime() <= targetDate.getTime();
+            const active = isCampaignActive();
             setIsCampaignActive(active);
             return active;
         };

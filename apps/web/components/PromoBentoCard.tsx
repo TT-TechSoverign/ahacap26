@@ -276,6 +276,8 @@ function BentoSubCard({ title, description, icon, themeColor }: BentoSubCardProp
     );
 }
 
+import { isCampaignActive } from '../lib/utils';
+
 export default function PromoBentoCard() {
     const [mounted, setMounted] = useState(false);
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -304,8 +306,7 @@ export default function PromoBentoCard() {
 
     if (!mounted) return null;
 
-    const now = new Date();
-    if (now.getTime() > targetDate.getTime()) return null;
+    if (!isCampaignActive()) return null;
 
     return (
         <div className="w-full bg-[#0a0e14]/90 backdrop-blur-md border border-white/5 rounded-3xl p-5 md:p-6 shadow-2xl relative overflow-hidden animate-patriotic-glow mb-8">

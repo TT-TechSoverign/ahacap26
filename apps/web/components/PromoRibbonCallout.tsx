@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { isCampaignActive } from '../lib/utils';
 
 const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className, style }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string; style?: React.CSSProperties }) => (
     <div 
@@ -130,8 +131,7 @@ export default function PromoRibbonCallout() {
 
     if (!mounted) return null;
 
-    const now = new Date();
-    if (now.getTime() > targetDate.getTime()) return null;
+    if (!isCampaignActive()) return null;
 
     return (
         <div 

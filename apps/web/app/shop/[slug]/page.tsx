@@ -11,7 +11,7 @@ import { Product } from '../../../types/inventory';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { cn, isCampaignActive as isCampaignActiveChecker } from '@/lib/utils';
 
 
 
@@ -214,7 +214,7 @@ export default function ProductDetailPage() {
         </div>
     );
 
-    const isCampaignActive = mounted && (new Date().getTime() <= targetDate.getTime());
+    const isCampaignActive = mounted && isCampaignActiveChecker();
     const isPromo = isCampaignActive && !!product && !!product.promo_price && product.promo_price > 0;
 
     return (

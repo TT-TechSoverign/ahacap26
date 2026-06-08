@@ -14,6 +14,8 @@ interface Particle {
     vy: number;
 }
 
+import { isCampaignActive } from '../lib/utils';
+
 export default function FourthOfJulyBanner() {
     const [mounted, setMounted] = useState(false);
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -130,8 +132,7 @@ export default function FourthOfJulyBanner() {
 
     if (!mounted) return null;
 
-    const now = new Date();
-    if (now.getTime() > targetDate.getTime()) return null;
+    if (!isCampaignActive()) return null;
 
     return (
         <div 

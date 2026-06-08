@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { isCampaignActive } from '../lib/utils';
 
 interface Star {
     id: number;
@@ -16,13 +17,11 @@ export default function PatrioticBackgroundGlow() {
     const [mounted, setMounted] = useState(false);
     const [stars, setStars] = useState<Star[]>([]);
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
 
     useEffect(() => {
         setMounted(true);
         
-        const now = new Date();
-        const isActive = now.getTime() <= targetDate.getTime();
+        const isActive = isCampaignActive();
         if (isActive) {
             document.body.classList.add('promo-active');
         } else {
@@ -158,8 +157,7 @@ export default function PatrioticBackgroundGlow() {
 
     if (!mounted) return null;
 
-    const now = new Date();
-    if (now.getTime() > targetDate.getTime()) return null;
+    if (!isCampaignActive()) return null;
 
     return (
         <>
