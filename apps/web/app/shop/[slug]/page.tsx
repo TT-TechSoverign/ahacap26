@@ -186,8 +186,8 @@ export default function ProductDetailPage() {
                                     {product.category.replace('_', ' ')}
                                 </span>
                                 {product.promo_price && product.promo_price > 0 && (
-                                    <span className="px-3 py-1 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 border border-white/10 rounded-md text-white text-[8px] font-header font-black uppercase tracking-[0.2em] shadow-lg">
-                                        🇺🇸 4th of July Promo
+                                    <span className="px-3 py-1 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 border border-white/10 rounded-md text-white text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.2em] shadow-lg animate-pulse-slow">
+                                        🇺🇸 CELEBRATING AMERICA 10% OFF
                                     </span>
                                 )}
                             </div>
@@ -198,16 +198,21 @@ export default function ProductDetailPage() {
 
                             <div className="flex items-baseline gap-3 pt-1 justify-center md:justify-start">
                                 {product.promo_price && product.promo_price > 0 ? (
-                                    <div className="flex flex-col items-center md:items-start gap-1">
-                                        <span className="text-xs text-red-500 font-bold line-through decoration-red-500/80">
-                                            ${product.price.toLocaleString()}
-                                        </span>
-                                        <span className="text-2xl md:text-4xl font-header font-black text-cyan-400 tracking-tight drop-shadow-[0_0_20px_rgba(34,211,238,0.3)] animate-pulse-slow">
-                                            ${product.promo_price.toLocaleString()}
+                                    <div className="flex flex-col items-center md:items-start gap-1.5">
+                                        <div className="flex items-baseline gap-2.5 justify-center md:justify-start">
+                                            <span className="text-sm md:text-base text-slate-500 line-through decoration-red-500 decoration-[1.5px] font-medium">
+                                                ${product.price.toLocaleString()}
+                                            </span>
+                                            <span className="text-3xl md:text-4xl font-header font-black text-cyan-400 tracking-tighter drop-shadow-[0_0_15px_rgba(34,211,238,0.35)] animate-pulse-slow">
+                                                ${product.promo_price.toLocaleString()}
+                                            </span>
+                                        </div>
+                                        <span className="text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full shadow-inner animate-pulse-slow">
+                                            SAVE ${(product.price - product.promo_price).toLocaleString()}
                                         </span>
                                     </div>
                                 ) : (
-                                    <span className="text-xl md:text-3xl font-header font-black text-primary tracking-tight">
+                                    <span className="text-2xl md:text-3xl font-header font-black text-primary tracking-tight">
                                         ${product.price.toLocaleString()}
                                     </span>
                                 )}

@@ -951,8 +951,8 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                 <div className="absolute inset-0 bg-primary/10 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-0"></div>
 
                 {isPromo && (
-                    <div className="absolute top-0 left-0 z-20 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 text-white font-header font-black text-[8px] md:text-[9px] px-3 py-1.5 rounded-br-2xl uppercase tracking-[0.2em] shadow-lg border-b border-r border-white/10 animate-pulse-slow">
-                        🇺🇸 Celebrating America
+                    <div className="absolute bottom-0 left-0 z-20 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 text-white font-header font-black text-[9px] sm:text-[10px] md:text-[11px] px-3 py-2 sm:px-4 sm:py-2.5 rounded-tr-2xl uppercase tracking-[0.2em] shadow-lg border-t border-r border-white/10 animate-pulse-slow">
+                        🇺🇸 CELEBRATING AMERICA 10% OFF
                     </div>
                 )}
 
@@ -1021,18 +1021,23 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                 </div>
 
                 <div className="mt-auto pt-3 border-t border-white/5 flex flex-col items-center gap-3 w-full">
-                    <div className="flex items-center gap-2 justify-center">
+                    <div className="flex items-center gap-2 justify-center w-full">
                         {isPromo ? (
-                            <div className="flex flex-col items-center gap-0.5">
-                                <span className="text-[10px] text-red-500 font-bold line-through decoration-red-500/80">
-                                    ${product.price.toLocaleString()}
-                                </span>
-                                <div className="text-xl md:text-2xl font-header font-black text-cyan-400 tracking-tighter drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">
-                                    ${product.promo_price?.toLocaleString()}
+                            <div className="flex flex-col items-center gap-1.5 w-full">
+                                <div className="flex items-baseline gap-2.5 justify-center">
+                                    <span className="text-xs md:text-sm text-slate-500 line-through decoration-red-500 decoration-[1.5px] font-medium">
+                                        ${product.price.toLocaleString()}
+                                    </span>
+                                    <span className="text-2xl md:text-3xl font-header font-black text-cyan-400 tracking-tighter drop-shadow-[0_0_15px_rgba(34,211,238,0.35)]">
+                                        ${product.promo_price?.toLocaleString()}
+                                    </span>
                                 </div>
+                                <span className="text-[9px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full shadow-inner animate-pulse-slow">
+                                    SAVE ${(product.price - (product.promo_price || 0)).toLocaleString()}
+                                </span>
                             </div>
                         ) : (
-                            <div className="text-xl md:text-2xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors">
+                            <div className="text-2xl md:text-3xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors py-4">
                                 ${product.price.toLocaleString()}
                             </div>
                         )}
