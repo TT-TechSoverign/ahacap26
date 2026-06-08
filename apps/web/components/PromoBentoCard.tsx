@@ -1,7 +1,229 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+
+interface BentoSubCardProps {
+    title: string;
+    description: string;
+    icon: string;
+    themeColor: 'red' | 'white' | 'blue';
+}
+
+function BentoSubCard({ title, description, icon, themeColor }: BentoSubCardProps) {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
+    const [tiltStyle, setTiltStyle] = useState({});
+    const [glareStyle, setGlareStyle] = useState({ opacity: 0, transform: 'translate(-50%, -50%)' });
+    const [sparks, setSparks] = useState<{ id: number; left: string; delay: string; duration: string; drift: string }[]>([]);
+
+    useEffect(() => {
+        setIsTouchDevice(
+            'ontouchstart' in window || 
+            navigator.maxTouchPoints > 0 || 
+            window.matchMedia('(pointer: coarse)').matches
+        );
+
+        // Generate static properties for sparks
+        const list = Array.from({ length: 6 }).map((_, i) => ({
+            id: i,
+            left: `${15 + Math.random() * 70}%`,
+            delay: `${Math.random() * -3}s`,
+            duration: `${1.8 + Math.random() * 1.5}s`,
+            drift: `${(Math.random() - 0.5) * 45}px`
+        }));
+        setSparks(list);
+    }, []);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isTouchDevice || !cardRef.current) return;
+
+        const card = cardRef.current;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Calculate rotation angles (capped at 5 degrees for premium subtlety)
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((centerY - y) / centerY) * 5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+
+        setTiltStyle({
+            transform: `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`,
+            transition: 'transform 0.1s ease-out',
+        });
+
+        // Dynamic glare position
+        const glareX = (x / rect.width) * 100;
+        const glareY = (y / rect.height) * 100;
+
+        setGlareStyle({
+            opacity: 0.12,
+            background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.4) 0%, transparent 60%)`,
+            transform: 'scale(1.2)',
+            transition: 'opacity 0.2s ease',
+        } as any);
+    };
+
+    const handleMouseEnter = () => {
+        if (isTouchDevice) return;
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+        setTiltStyle({
+            transform: 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+            transition: 'transform 0.5s ease',
+        });
+        setGlareStyle({
+            opacity: 0,
+            transform: 'scale(1)',
+            transition: 'opacity 0.5s ease',
+        } as any);
+    };
+
+    // Color theme mappings
+    const themeStyles = {
+        red: {
+            borderClass: "hover:border-red-500/30",
+            iconBg: "bg-red-950/40 border-red-500/20 text-red-500",
+            glowColor: "rgba(239, 68, 68, 0.08)",
+            glowColorHover: "rgba(239, 68, 68, 0.16)",
+            sparkColor: "#EF4444",
+            ambientGlow: "bg-red-500/5"
+        },
+        white: {
+            borderClass: "hover:border-white/30",
+            iconBg: "bg-slate-850 border-white/10 text-white",
+            glowColor: "rgba(255, 255, 255, 0.05)",
+            glowColorHover: "rgba(255, 255, 255, 0.12)",
+            sparkColor: "#FFFFFF",
+            ambientGlow: "bg-slate-500/5"
+        },
+        blue: {
+            borderClass: "hover:border-blue-500/30",
+            iconBg: "bg-blue-950/40 border-blue-500/20 text-blue-400",
+            glowColor: "rgba(59, 130, 246, 0.08)",
+            glowColorHover: "rgba(59, 130, 246, 0.16)",
+            sparkColor: "#3B82F6",
+            ambientGlow: "bg-blue-500/5"
+        }
+    }[themeColor];
+
+    return (
+        <div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={tiltStyle}
+            className={`bg-[#0c121d]/90 border border-white/5 p-5 rounded-2xl relative overflow-hidden group/item transition-all duration-300 card-hover-trigger cursor-pointer ${themeStyles.borderClass}`}
+        >
+            {/* Soft Radial Ambient Glow */}
+            <div 
+                className="absolute inset-0 transition-opacity duration-700 pointer-events-none z-0"
+                style={{
+                    background: `radial-gradient(circle at 50% 50%, ${isHovered ? themeStyles.glowColorHover : themeStyles.glowColor} 0%, transparent 70%)`
+                }}
+            />
+
+            {/* 3D Reflective Glare */}
+            <div 
+                className="absolute inset-0 pointer-events-none z-20"
+                style={glareStyle as any}
+            />
+
+            {/* Animated HVAC Background */}
+            {themeColor === 'white' ? (
+                /* White Card: Cool Air Currents (Wind currents flowing) */
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                    <svg 
+                        viewBox="0 0 120 80" 
+                        className="absolute inset-0 w-full h-full opacity-[0.06] text-white"
+                        preserveAspectRatio="none"
+                    >
+                        <path 
+                            d="M-20,20 Q20,35 60,20 T140,25" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="1.5" 
+                            strokeDasharray="10 10" 
+                            className={`wind-flow-line ${isHovered ? 'wind-flow-line-fast' : ''}`}
+                        />
+                        <path 
+                            d="M-20,40 Q30,20 70,50 T140,35" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="2" 
+                            strokeDasharray="12 8" 
+                            className={`wind-flow-line ${isHovered ? 'wind-flow-line-fast' : ''}`}
+                            style={{ animationDelay: '-1.5s', animationDirection: 'reverse' } as any}
+                        />
+                        <path 
+                            d="M-20,60 Q10,45 50,65 T140,50" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="1" 
+                            strokeDasharray="8 12" 
+                            className={`wind-flow-line ${isHovered ? 'wind-flow-line-fast' : ''}`}
+                            style={{ animationDelay: '-3s' } as any}
+                        />
+                    </svg>
+                </div>
+            ) : (
+                /* Red/Blue Cards: Spinning HVAC Fan Vectors */
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                    <svg 
+                        viewBox="0 0 100 100" 
+                        className={`absolute bottom-[-15px] right-[-15px] size-28 opacity-[0.05] transition-all duration-1000 ${
+                            themeColor === 'red' ? 'text-red-500' : 'text-blue-500'
+                        } ${isHovered ? 'fan-spin-fast' : 'fan-spin-idle'}`}
+                    >
+                        <circle cx="50" cy="50" r="8" fill="currentColor" />
+                        <path d="M50,50 Q40,20 50,10 Q60,20 50,50 Z" fill="currentColor" />
+                        <path d="M50,50 Q80,40 90,50 Q80,60 50,50 Z" fill="currentColor" />
+                        <path d="M50,50 Q60,80 50,90 Q40,80 50,50 Z" fill="currentColor" />
+                        <path d="M50,50 Q20,60 10,50 Q20,40 50,50 Z" fill="currentColor" />
+                    </svg>
+                </div>
+            )}
+
+            {/* Hover Floating Sparks (Patriotic themed) */}
+            {isHovered && !isTouchDevice && (
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
+                    {sparks.map(spark => (
+                        <div
+                            key={spark.id}
+                            className="absolute w-1 h-1 rounded-full bento-spark"
+                            style={{
+                                left: spark.left,
+                                bottom: '-5px',
+                                backgroundColor: themeStyles.sparkColor,
+                                boxShadow: `0 0 6px ${themeStyles.sparkColor}`,
+                                animationDelay: spark.delay,
+                                animationDuration: spark.duration,
+                                '--drift-x': spark.drift,
+                                opacity: 0.7
+                            } as any}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {/* Card Content */}
+            <div className="relative z-10">
+                <div className={`size-8 rounded-lg ${themeStyles.iconBg} flex items-center justify-center mb-3 shadow-inner`}>
+                    <span className="material-symbols-outlined text-lg">{icon}</span>
+                </div>
+                <h4 className="text-xs font-black uppercase tracking-wider text-slate-200 mb-1">{title}</h4>
+                <p className="text-[11px] text-slate-400 leading-relaxed font-medium">{description}</p>
+            </div>
+        </div>
+    );
+}
 
 export default function PromoBentoCard() {
     const [mounted, setMounted] = useState(false);
@@ -69,29 +291,24 @@ export default function PromoBentoCard() {
 
             {/* Bento Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 relative z-10">
-                <div className="bg-slate-900/40 border border-white/5 p-4 rounded-2xl relative overflow-hidden group/item hover:border-red-500/20 transition-all">
-                    <div className="size-8 rounded-lg bg-red-950/40 border border-red-500/20 flex items-center justify-center text-red-500 mb-3 shadow-inner">
-                        <span className="material-symbols-outlined text-lg">local_offer</span>
-                    </div>
-                    <h4 className="text-xs font-black uppercase tracking-wider text-slate-200 mb-1">10% OFF all AC Units</h4>
-                    <p className="text-[11px] text-slate-400 leading-relaxed font-medium">Automatic promo discount is applied on checkout to all mini splits and window AC inventory.</p>
-                </div>
-
-                <div className="bg-slate-900/40 border border-white/5 p-4 rounded-2xl relative overflow-hidden group/item hover:border-slate-500/20 transition-all">
-                    <div className="size-8 rounded-lg bg-slate-850 border border-white/10 flex items-center justify-center text-white mb-3 shadow-inner">
-                        <span className="material-symbols-outlined text-lg">calendar_today</span>
-                    </div>
-                    <h4 className="text-xs font-black uppercase tracking-wider text-slate-200 mb-1">July Install Window</h4>
-                    <p className="text-[11px] text-slate-400 leading-relaxed font-medium">Schedule your installation appointment for July to secure your discount lock-in.</p>
-                </div>
-
-                <div className="bg-slate-900/40 border border-white/5 p-4 rounded-2xl relative overflow-hidden group/item hover:border-blue-500/20 transition-all">
-                    <div className="size-8 rounded-lg bg-blue-950/40 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-3 shadow-inner">
-                        <span className="material-symbols-outlined text-lg">payments</span>
-                    </div>
-                    <h4 className="text-xs font-black uppercase tracking-wider text-slate-200 mb-1">Down Payment Guard</h4>
-                    <p className="text-[11px] text-slate-400 leading-relaxed font-medium">Coordinate a small holding down payment with our representatives after checkout booking.</p>
-                </div>
+                <BentoSubCard 
+                    title="10% OFF all AC Units"
+                    description="Automatic promo discount is applied on checkout to all mini splits and window AC inventory."
+                    icon="local_offer"
+                    themeColor="red"
+                />
+                <BentoSubCard 
+                    title="July Install Window"
+                    description="Schedule your installation appointment for July to secure your discount lock-in."
+                    icon="calendar_today"
+                    themeColor="white"
+                />
+                <BentoSubCard 
+                    title="Down Payment Guard"
+                    description="Coordinate a small holding down payment with our representatives after checkout booking."
+                    icon="payments"
+                    themeColor="blue"
+                />
             </div>
 
             <div className="flex justify-center relative z-10">
