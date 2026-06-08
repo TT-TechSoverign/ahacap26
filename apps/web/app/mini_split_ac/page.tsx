@@ -55,7 +55,7 @@ export default function MiniSplitsPage() {
         <div className="bg-slate-900 min-h-screen">
             
             {/* Header / Intro could go here. The existing pt-[140px] handles navbar overlap. */}
-            <div className="pt-[140px] md:pt-[350px] lg:pt-[380px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="pt-[120px] md:pt-[190px] lg:pt-[210px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-10 border-b border-white/5 pb-6">
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-header font-black uppercase tracking-widest text-white mb-2 neon-glow">
                         Mini Split <span className="text-primary">AC</span>

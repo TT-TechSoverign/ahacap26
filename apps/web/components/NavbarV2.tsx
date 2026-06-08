@@ -82,15 +82,15 @@ export default function NavbarV2() {
 
                             {/* Left Brands (Desktop Only: Window & Central Mix) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-end pr-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link href="/shop" className="text-rose-400 font-sans font-black tracking-tighter text-2xl relative group cursor-pointer block">
+                                <Link href="/shop" className="text-rose-400 font-sans font-black tracking-tighter text-lg relative group cursor-pointer block">
                                     LG
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/shop" className="text-blue-400 font-serif font-bold tracking-wide text-lg relative group cursor-pointer block">
+                                <Link href="/shop" className="text-blue-400 font-serif font-bold tracking-wide text-xs relative group cursor-pointer block">
                                     GE
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/shop#rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-xl relative group cursor-pointer block pb-1">
+                                <Link href="/shop#rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-sm relative group cursor-pointer block pb-1">
                                     Hawai&apos;i Energy
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -99,7 +99,7 @@ export default function NavbarV2() {
                             {/* Center: Prominent Logo */}
                             {/* Mobile: Absolute Center. Desktop: Relative Center */}
                             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 md:flex md:justify-center z-20">
-                                <Link href="/" className="block relative h-32 w-64 md:h-44 md:w-80 group shrink-0 logo-promo-glow">
+                                <Link href="/" className="block relative h-20 w-40 md:h-24 md:w-48 group shrink-0 logo-promo-glow">
                                     <Image
                                         src="/assets/logo.svg"
                                         alt="AHAC Logo"
@@ -112,19 +112,19 @@ export default function NavbarV2() {
 
                             {/* Right Brands (Desktop Only: Mini Splits) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link href="/mini_split_ac#mitsubishi-electric" className="text-red-500 font-header font-bold tracking-normal uppercase text-sm relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#mitsubishi-electric" className="text-red-500 font-header font-bold tracking-normal uppercase text-[10px] relative group cursor-pointer block">
                                     MITSUBISHI ELECTRIC
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#fujitsu" className="text-red-500 font-sans font-bold italic tracking-widest text-xl relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#fujitsu" className="text-red-500 font-sans font-bold italic tracking-widest text-xs relative group cursor-pointer block">
                                     FUJITSU
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#daikin" className="text-[#00B5E2] font-header font-medium tracking-widest text-lg relative group cursor-pointer block pb-1">
+                                <Link href="/mini_split_ac#daikin" className="text-[#00B5E2] font-header font-medium tracking-widest text-xs relative group cursor-pointer block pb-1">
                                     DAIKIN
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link href="/mini_split_ac#carrier" className="text-blue-400 font-sans font-extrabold tracking-tighter text-xl relative group cursor-pointer block">
+                                <Link href="/mini_split_ac#carrier" className="text-blue-400 font-sans font-extrabold tracking-tighter text-xs relative group cursor-pointer block">
                                     CARRIER
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>

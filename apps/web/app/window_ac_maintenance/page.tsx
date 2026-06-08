@@ -15,7 +15,7 @@ export default function WindowAcMaintenancePage() {
     return (
         <div className="bg-background-dark min-h-screen text-white font-sans">
             {/* Page Header */}
-            <div className="pt-[140px] md:pt-[350px] lg:pt-[380px] max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div className="pt-[120px] md:pt-[190px] lg:pt-[210px] max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
                 <div className="text-center mb-10 border-b border-white/5 pb-6">
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-header font-black uppercase tracking-widest text-white mb-2 neon-glow">
                         Window AC <span className="text-primary">Cleaning</span>

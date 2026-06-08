@@ -200,7 +200,7 @@ export default function KHON2SEOPortal() {
 
     return (
         <div className="min-h-screen bg-[#05070a] text-slate-200">
-            <main className="pt-[220px] md:pt-[280px] lg:pt-[330px] pb-24 max-w-[1600px] mx-auto p-6 md:p-8">
+            <main className="pt-[120px] md:pt-[190px] lg:pt-[210px] pb-24 max-w-[1600px] mx-auto p-6 md:p-8">
                 {/* Portal Header */}
                 <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
