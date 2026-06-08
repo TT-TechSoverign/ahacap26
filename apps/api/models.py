@@ -133,18 +133,3 @@ class AdminUser(Base):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-class ContentPage(Base):
-    __tablename__ = "content_pages"
-
-    path = Column(String, primary_key=True, index=True)
-    data = Column(String, nullable=True) # JSON String (Published)
-    draft_data = Column(String, nullable=True) # JSON String (Draft)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
-class ContentSnippet(Base):
-    __tablename__ = "content_snippets"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
-    data = Column(String, nullable=False) # JSON string of component data
-    created_at = Column(DateTime, default=datetime.utcnow)
