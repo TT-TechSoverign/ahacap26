@@ -316,4 +316,25 @@ body.promo-active .cart-promo-badge-pulse {
 }
 .bento-spark {
     animation: bento-spark-float 2.5s linear infinite;
+}
+
+/* 11. Horizontal drifting sparks for ribbon and hero */
+@keyframes bento-spark-drift-horizontal {
+    0% {
+        transform: translateX(0) translateY(0) scale(0.6);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(-180px) translateY(var(--drift-y, 0px)) scale(1.2);
+        opacity: 0;
+    }
+}
+.bento-spark-horizontal {
+    animation: bento-spark-drift-horizontal 4s linear infinite;
 }

@@ -12,6 +12,7 @@ export default function PromoHeroShowcase() {
     const [isHovered, setIsHovered] = useState(false);
     const [tiltStyle, setTiltStyle] = useState({});
     const [glareStyle, setGlareStyle] = useState({ opacity: 0, transform: 'translate(-50%, -50%)' });
+    const [sparks, setSparks] = useState<{ id: number; left: string; top: string; delay: string; duration: string; driftY: string; color: string }[]>([]);
     
     const cardRef = useRef<HTMLDivElement>(null);
     const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
@@ -60,6 +61,20 @@ export default function PromoHeroShowcase() {
 
         updateTimer();
         const interval = setInterval(updateTimer, 1000);
+
+        // Generate sparks distributed across the hero
+        const colors = ['#EF4444', '#FFFFFF', '#3B82F6'];
+        const list = Array.from({ length: 12 }).map((_, i) => ({
+            id: i,
+            left: `${60 + Math.random() * 35}%`, // Cluster near the right/center
+            top: `${15 + Math.random() * 70}%`,
+            delay: `${Math.random() * -3}s`,
+            duration: `${3.5 + Math.random() * 2}s`,
+            driftY: `${(Math.random() - 0.5) * 40}px`,
+            color: colors[i % colors.length]
+        }));
+        setSparks(list);
+
         return () => clearInterval(interval);
     }, []);
 
@@ -131,8 +146,66 @@ export default function PromoHeroShowcase() {
                 />
 
                 {/* Ambient Glowing Background Elements */}
-                <div className="absolute -left-20 -top-20 w-80 h-80 bg-red-600/10 blur-[100px] rounded-full pointer-events-none" />
-                <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
+                <div className="absolute -left-20 -top-20 w-80 h-80 bg-red-600/10 blur-[100px] rounded-full pointer-events-none z-0" />
+                <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-600/10 blur-[100px] rounded-full pointer-events-none z-0" />
+
+                {/* Animated Cool Air Currents (Wind currents flowing horizontally) */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                    <svg 
+                        viewBox="0 0 500 100" 
+                        className="absolute inset-0 w-full h-full opacity-[0.03] text-white"
+                        preserveAspectRatio="none"
+                    >
+                        <path 
+                            d="M-20,25 Q120,40 250,25 T520,30" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="1.5" 
+                            strokeDasharray="12 12" 
+                            className={`wind-flow-line ${isHovered ? 'wind-flow-line-fast' : ''}`}
+                        />
+                        <path 
+                            d="M-20,55 Q150,30 280,65 T520,50" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="2" 
+                            strokeDasharray="15 10" 
+                            className={`wind-flow-line ${isHovered ? 'wind-flow-line-fast' : ''}`}
+                            style={{ animationDelay: '-1s', animationDirection: 'reverse' } as any}
+                        />
+                        <path 
+                            d="M-20,80 Q90,65 220,85 T520,70" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="1" 
+                            strokeDasharray="10 15" 
+                            className={`wind-flow-line ${isHovered ? 'wind-flow-line-fast' : ''}`}
+                            style={{ animationDelay: '-2s' } as any}
+                        />
+                    </svg>
+                </div>
+
+                {/* Drifting Horizontal Sparks */}
+                {isHovered && !isTouchDevice && (
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
+                        {sparks.map(spark => (
+                            <div
+                                key={spark.id}
+                                className="absolute w-1 h-1 rounded-full bento-spark-horizontal"
+                                style={{
+                                    left: spark.left,
+                                    top: spark.top,
+                                    backgroundColor: spark.color,
+                                    boxShadow: `0 0 6px ${spark.color}`,
+                                    animationDelay: spark.delay,
+                                    animationDuration: spark.duration,
+                                    '--drift-y': spark.driftY,
+                                    opacity: 0.7
+                                } as any}
+                            />
+                        ))}
+                    </div>
+                )}
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-20">
                     {/* Left Column: Promotion Info */}
