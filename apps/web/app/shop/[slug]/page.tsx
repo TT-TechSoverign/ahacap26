@@ -221,7 +221,7 @@ export default function ProductDetailPage() {
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
 
 
-            <main className="pt-[120px] md:pt-[190px] pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
+            <main className="pt-[160px] md:pt-[190px] pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     {/* Visual Anchor */}
                     <div className="space-y-6 md:sticky md:top-36">

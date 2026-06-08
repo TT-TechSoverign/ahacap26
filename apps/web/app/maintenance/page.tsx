@@ -40,7 +40,7 @@ export default function MaintenancePage() {
                     </Button>
                 </div>
             </header>
-            <main className="pt-[120px]">
+            <main className="pt-[160px]">
                 <PromoHeroShowcase />
                 {/* Hero Section */}
                 <section className="relative min-h-[90vh] flex items-center">

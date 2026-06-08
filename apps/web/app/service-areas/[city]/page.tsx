@@ -89,7 +89,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
         <main className="min-h-screen bg-slate-950 flex flex-col">
             
             {/* 1. LOCALIZED HERO SECTION */}
-            <section className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden pt-[120px] pb-16">
+            <section className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden pt-[160px] pb-16">
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/assets/hero-cards/ahac-hero-background-2.png"
