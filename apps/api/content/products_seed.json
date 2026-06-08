@@ -16,7 +16,9 @@
         "dehumidification": "2.3 Pts/Hr",
         "dimensions": "11.7 x 19.4 x 19.4",
         "weight": "44.1",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 504,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -56,7 +58,9 @@
         "dehumidification": "3.3 Pts/Hr",
         "dimensions": "11.7 x 19.4 x 19.4",
         "weight": "58.4",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 585,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -90,7 +94,7 @@
         "subcategory": "dual_inverter",
         "id": 5,
         "price": 785,
-        "promo_price": 705,
+        "promo_price": 706,
         "discount_percent": 10,
         "image_url": "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
         "voltage": "115V / 15 Amp",
@@ -117,7 +121,9 @@
         "dehumidification": "5.5 Pts/Hr",
         "dimensions": "14.9 x 23.6 x 24.8",
         "weight": "99",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 832,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -136,7 +142,9 @@
         "dehumidification": "7.1 Pts/Hr",
         "dimensions": "17.7 x 25.9 x 28.1",
         "weight": "112",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 922,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -155,7 +163,9 @@
         "dehumidification": "2.1 Pts/Hr",
         "dimensions": "14.4 x 23.6 x 22.2",
         "weight": "74",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 585,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -174,7 +184,9 @@
         "dehumidification": "4.8 Pts/Hr",
         "dimensions": "16.8 x 25.9 x 25.4",
         "weight": "115",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 832,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -193,7 +205,9 @@
         "dehumidification": "6.8 Pts/Hr",
         "dimensions": "16.8 x 25.9 x 25.4",
         "weight": "129",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 922,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -212,7 +226,9 @@
         "dehumidification": "2.1 Pts/Hr",
         "dimensions": "12.2 x 18.2 x 15",
         "weight": "49",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 355,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -231,7 +247,9 @@
         "dehumidification": "3.8 Pts/Hr",
         "dimensions": "15.0 x 23.6 x 22.2",
         "weight": "82",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 562,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -250,7 +268,9 @@
         "dehumidification": "2.1 Pts/Hr",
         "dimensions": "15.6 x 26 x 21.8",
         "weight": "72",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 900,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -269,7 +289,9 @@
         "dehumidification": "2.7 Pts/Hr",
         "dimensions": "15.6 x 26 x 21.8",
         "weight": "77",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 990,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -288,7 +310,9 @@
         "dehumidification": "3.4 Pts/Hr",
         "dimensions": "15.6 x 26 x 21.8",
         "weight": "81",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 1080,
+        "discount_percent": 10
     },
     {
         "category": "WINDOW_AC",
@@ -307,6 +331,8 @@
         "dehumidification": "N/A",
         "dimensions": "15.8 x 26.0 x 16.9",
         "weight": "16",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "1 YEAR LIMITED",
+        "promo_price": 247,
+        "discount_percent": 10
     }
 ]
