@@ -43,6 +43,10 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
             const gaClientId = getCookie('_ga');
             const gaSessionId = getGaSessionCookie();
 
+            const utmSource = sessionStorage.getItem('utm_source');
+            const utmMedium = sessionStorage.getItem('utm_medium');
+            const utmCampaign = sessionStorage.getItem('utm_campaign');
+
             const response = await fetch('/create-checkout-session', {
                 method: 'POST',
                 headers: {
@@ -53,7 +57,10 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
                     customerEmail, 
                     fulfillmentMode,
                     gaClientId,
-                    gaSessionId
+                    gaSessionId,
+                    utmSource,
+                    utmMedium,
+                    utmCampaign
                 }),
             });
 

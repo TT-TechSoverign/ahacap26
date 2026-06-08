@@ -90,10 +90,11 @@ async def validate_inventory_service(db: AsyncSession, validation_items: List[di
         if not is_available:
             all_valid = False
             
+        price = product.promo_price if product.promo_price is not None and product.promo_price > 0 else product.price
         results.append({
             "product_id": product.id,
             "name": product.name,
-            "price": product.price,
+            "price": price,
             "requested_quantity": item['requested_quantity'],
             "available_stock": product.stock,
             "is_available": is_available

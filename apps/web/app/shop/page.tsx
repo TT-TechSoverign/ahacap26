@@ -927,11 +927,19 @@ function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; on
 
 function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuickAdd: () => void; rebate?: string }) {
     const router = useRouter();
+    const isPromo = product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0;
+    
+    const borderClass = isPromo 
+        ? "border-red-500/40 shadow-[0_0_20px_rgba(239,68,68,0.15),_inset_0_0_15px_rgba(59,130,246,0.1)] hover:border-red-500/70 hover:shadow-[0_0_35px_rgba(239,68,68,0.3),_inset_0_0_25px_rgba(59,130,246,0.2)]"
+        : "border-white/5 hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,174,239,0.15)]";
 
     return (
         <div
             onClick={() => router.push(`/shop/${generateProductSlug(product.id, product.name)}`)}
-            className="industrial-card group flex flex-col bg-[#0f131a] border border-white/5 rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,174,239,0.15)] transition-all duration-700 relative h-full ring-1 ring-white/5 active:scale-[0.98] cursor-pointer"
+            className={cn(
+                "industrial-card group flex flex-col bg-[#0f131a] rounded-2xl overflow-hidden transition-all duration-700 relative h-full ring-1 ring-white/5 active:scale-[0.98] cursor-pointer",
+                borderClass
+            )}
         >
             {/* Image Area with Luminous Hover & Immersive Blending */}
             <div className="w-full aspect-[16/10] bg-[#05070a] relative overflow-hidden transition-all duration-700 border-b border-white/5 p-4 flex items-center justify-center">
@@ -942,14 +950,19 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                 <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                 <div className="absolute inset-0 bg-primary/10 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-0"></div>
 
+                {isPromo && (
+                    <div className="absolute top-0 left-0 z-20 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 text-white font-header font-black text-[8px] md:text-[9px] px-3 py-1.5 rounded-br-2xl uppercase tracking-[0.2em] shadow-lg border-b border-r border-white/10 animate-pulse-slow">
+                        🇺🇸 Celebrating America
+                    </div>
+                )}
+
                 {rebate && (
-                    <div className="absolute top-0 left-0 z-20 bg-emerald-500 text-white font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-br-2xl uppercase tracking-[0.2em] shadow-[inset_-2px_-2px_10px_rgba(0,0,0,0.2)] border-b border-r border-emerald-400/30">
+                    <div className="absolute top-0 right-0 z-20 bg-emerald-500 text-white font-header font-black text-[8px] md:text-[9px] px-3 py-1.5 rounded-bl-2xl uppercase tracking-[0.2em] shadow-lg border-b border-l border-emerald-400/30">
                         {rebate}
                     </div>
                 )}
 
                 {/* Stock Badge */}
-                {/* Stock Badge - Seamless Integration (Moved to Bottom Right to avoid overlap) */}
                 <div className="absolute bottom-0 right-0 z-20">
                     {product.stock > 0 ? (
                         <div className="bg-emerald-500/10 text-emerald-500 border-t border-l border-emerald-500/20 font-header font-black text-[8px] md:text-[9px] px-4 py-2 rounded-tl-2xl uppercase tracking-[0.2em] backdrop-blur-md">
@@ -1009,9 +1022,20 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
 
                 <div className="mt-auto pt-3 border-t border-white/5 flex flex-col items-center gap-3 w-full">
                     <div className="flex items-center gap-2 justify-center">
-                        <div className="text-xl md:text-2xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors">
-                            ${product.price.toLocaleString()}
-                        </div>
+                        {isPromo ? (
+                            <div className="flex flex-col items-center gap-0.5">
+                                <span className="text-[10px] text-red-500 font-bold line-through decoration-red-500/80">
+                                    ${product.price.toLocaleString()}
+                                </span>
+                                <div className="text-xl md:text-2xl font-header font-black text-cyan-400 tracking-tighter drop-shadow-[0_0_20px_rgba(34,211,238,0.3)]">
+                                    ${product.promo_price?.toLocaleString()}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="text-xl md:text-2xl font-header font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:text-primary transition-colors">
+                                ${product.price.toLocaleString()}
+                            </div>
+                        )}
                     </div>
 
                     <div className="grid grid-cols-2 gap-1.5 w-full">

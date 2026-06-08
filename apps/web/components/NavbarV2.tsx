@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useCart } from '../context/CartContext';
@@ -10,6 +11,9 @@ import { useContent } from '../lib/context/ContentContext';
 import { EditableText } from './EditableText';
 
 export default function NavbarV2() {
+    const pathname = usePathname();
+    if (pathname && pathname.startsWith('/checkout')) return null;
+
     const { items, openCart } = useCart();
     const { content } = useContent();
 

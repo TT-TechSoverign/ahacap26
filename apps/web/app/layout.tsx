@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 import NavbarV2 from '../components/NavbarV2';
 import MobileStickyHeader from '../components/MobileStickyHeader';
 import MobileStickyBottomBar from '../components/MobileStickyBottomBar';
+import PromoStickyBar from '../components/PromoStickyBar';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -84,6 +85,7 @@ export default function RootLayout({
                 />
                 <ContentProvider>
                     <CartProvider>
+                        <PromoStickyBar />
                         <MobileStickyHeader />
                         <NavbarV2 />
                         {children}

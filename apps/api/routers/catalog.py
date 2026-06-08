@@ -127,7 +127,9 @@ async def create_product(
         "dehumidification": new_product.dehumidification,
         "dimensions": new_product.dimensions,
         "weight": new_product.weight,
-        "warranty": new_product.warranty
+        "warranty": new_product.warranty,
+        "promo_price": new_product.promo_price,
+        "discount_percent": new_product.discount_percent
     }
     persist_product_changes(product_dict)
     
@@ -171,7 +173,9 @@ async def update_product(
             "dehumidification": updated_product.dehumidification,
             "dimensions": updated_product.dimensions,
             "weight": updated_product.weight,
-            "warranty": updated_product.warranty
+            "warranty": updated_product.warranty,
+            "promo_price": updated_product.promo_price,
+            "discount_percent": updated_product.discount_percent
         }
         persist_product_changes(product_dict)
         

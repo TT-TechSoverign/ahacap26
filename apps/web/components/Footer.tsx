@@ -2,10 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useContent } from '@/lib/context/ContentContext';
 import { TrackedPhoneLink } from './TrackedPhoneLink';
 
 export default function Footer() {
+    const pathname = usePathname();
+    if (pathname && pathname.startsWith('/checkout')) return null;
+
     const { content } = useContent();
     const defaults = {
         mini_split_label: "MINI SPLIT AC",

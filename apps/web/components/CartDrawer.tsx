@@ -64,7 +64,8 @@ export default function CartDrawer() {
     const hasIssue = items.some(item => (item.stock || 0) < item.quantity);
     const validTotal = items.reduce((acc, item) => {
         if ((item.stock || 0) >= item.quantity) {
-            return acc + (item.price * item.quantity);
+            const activePrice = item.promo_price && item.promo_price > 0 ? item.promo_price : item.price;
+            return acc + (activePrice * item.quantity);
         }
         return acc;
     }, 0);
@@ -149,9 +150,20 @@ export default function CartDrawer() {
                                             <div className="flex-1 relative z-10">
                                                 <h4 className="text-slate-200 font-bold leading-tight mb-1 line-clamp-2 md:line-clamp-1">{item.name}</h4>
                                                 <div className="flex items-baseline gap-2">
-                                                    <span className={`font-header font-black text-lg tracking-wide ${item.quantity > (item.stock || 0) ? 'text-red-500 line-through opacity-60' : 'text-cyan-400 shadow-cyan-glow'}`}>
-                                                        ${item.price.toLocaleString()}
-                                                    </span>
+                                                    {item.promo_price && item.promo_price > 0 ? (
+                                                        <div className="flex items-center gap-1.5">
+                                                            <span className="text-xs text-red-500 line-through font-bold opacity-60">
+                                                                ${item.price.toLocaleString()}
+                                                            </span>
+                                                            <span className="font-header font-black text-lg tracking-wide text-cyan-400 shadow-cyan-glow">
+                                                                ${item.promo_price.toLocaleString()}
+                                                            </span>
+                                                        </div>
+                                                    ) : (
+                                                        <span className={`font-header font-black text-lg tracking-wide ${item.quantity > (item.stock || 0) ? 'text-red-500 line-through opacity-60' : 'text-cyan-400 shadow-cyan-glow'}`}>
+                                                            ${item.price.toLocaleString()}
+                                                        </span>
+                                                    )}
                                                     <span className="text-[10px] text-slate-500 font-mono uppercase">USD</span>
                                                 </div>
 

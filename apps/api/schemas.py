@@ -18,6 +18,8 @@ class ProductBase(BaseModel):
     dimensions: Optional[str] = None
     weight: Optional[str] = None
     warranty: Optional[str] = None
+    promo_price: Optional[int] = None
+    discount_percent: Optional[int] = None
 
 class ProductCreate(ProductBase):
     pass
@@ -38,6 +40,8 @@ class ProductUpdate(BaseModel):
     dimensions: Optional[str] = None
     weight: Optional[str] = None
     warranty: Optional[str] = None
+    promo_price: Optional[int] = None
+    discount_percent: Optional[int] = None
 
 class Product(ProductBase):
     id: int

@@ -4,6 +4,7 @@ import config from "../puck.config";
 import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
 import Section4Projects from '@/components/Section4Projects';
 import { BackToTop } from '@/components/BackToTop';
+import FourthOfJulyBanner from '@/components/FourthOfJulyBanner';
 
 // Force dynamic since we want to ensure fresh rendering
 // v2.5 Visual Refinements Force Rebuild
@@ -28,7 +29,10 @@ export default function Homepage() {
                 <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[2px]" />
             </div>
 
-            <main className="relative z-10 pt-[280px]">
+            <main className="relative z-10 pt-[220px] md:pt-[260px]">
+                <div className="max-w-7xl mx-auto px-6 mb-12">
+                    <FourthOfJulyBanner />
+                </div>
                 <Section2OurServicesV2 />
                 {/* <Section4Projects /> */}
                 {/* <Render config={config} data={v2Data} /> */}

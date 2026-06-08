@@ -45,3 +45,11 @@ _analytics_data/
 *.csv
 *.json.json
 local_backup_*
+
+# Ignore local scratch and custom scripts
+scratch/
+scripts/
+*.txt
+*.py
+!apps/api/**/*.py
+!*.sh

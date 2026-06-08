@@ -323,6 +323,9 @@ async def process_stripe_event(event: dict, payload_data: dict):
                         status=models.OrderStatus.PAID,
                         items_json=json.dumps(items_data) if items_data else None,
                         fulfillment_mode=fulfillment_mode,
+                        utm_source=metadata.get('utm_source'),
+                        utm_medium=metadata.get('utm_medium'),
+                        utm_campaign=metadata.get('utm_campaign'),
                         created_at=datetime.utcnow()
                     )
                     session.add(order)
@@ -334,6 +337,12 @@ async def process_stripe_event(event: dict, payload_data: dict):
                     order.status = models.OrderStatus.PAID
                     if items_data and not order.items_json:
                         order.items_json = json.dumps(items_data)
+                    if not order.utm_source:
+                        order.utm_source = metadata.get('utm_source')
+                    if not order.utm_medium:
+                        order.utm_medium = metadata.get('utm_medium')
+                    if not order.utm_campaign:
+                        order.utm_campaign = metadata.get('utm_campaign')
 
                 # 2. Enrich, deduct stock, and trigger GA4 on checkout.session.completed (Always runs, avoiding race condition skips)
                 if event['type'] == 'checkout.session.completed':
@@ -342,6 +351,9 @@ async def process_stripe_event(event: dict, payload_data: dict):
                     order.customer_phone = customer_info.get('phone', order.customer_phone)
                     order.customer_address = json.dumps(customer_info.get('address', {}))
                     order.fulfillment_mode = fulfillment_mode
+                    order.utm_source = metadata.get('utm_source', order.utm_source)
+                    order.utm_medium = metadata.get('utm_medium', order.utm_medium)
+                    order.utm_campaign = metadata.get('utm_campaign', order.utm_campaign)
                     
                     if items_data and not order.items_json:
                         order.items_json = json.dumps(items_data)
@@ -359,7 +371,27 @@ async def process_stripe_event(event: dict, payload_data: dict):
                                 p_obj = db_product.scalar_one_or_none()
                                 if p_obj:
                                     p_obj.stock = max(0, p_obj.stock - qty)
-                                    p_dict = schemas.Product.from_orm(p_obj).dict()
+                                    p_dict = {
+                                        "id": p_obj.id,
+                                        "name": p_obj.name,
+                                        "price": p_obj.price,
+                                        "category": p_obj.category,
+                                        "subcategory": p_obj.subcategory,
+                                        "stock": p_obj.stock,
+                                        "image_url": p_obj.image_url,
+                                        "btu": p_obj.btu,
+                                        "voltage": p_obj.voltage,
+                                        "coverage": p_obj.coverage,
+                                        "performance_specs": p_obj.performance_specs,
+                                        "key_spec": p_obj.key_spec,
+                                        "noise_level": p_obj.noise_level,
+                                        "dehumidification": p_obj.dehumidification,
+                                        "dimensions": p_obj.dimensions,
+                                        "weight": p_obj.weight,
+                                        "warranty": p_obj.warranty,
+                                        "promo_price": p_obj.promo_price,
+                                        "discount_percent": p_obj.discount_percent
+                                    }
                                     persist_product_changes(p_dict)
                                     print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
 

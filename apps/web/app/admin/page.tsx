@@ -841,11 +841,17 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         dehumidification: product?.dehumidification || '',
         dimensions: product?.dimensions || '',
         weight: product?.weight || '',
-        warranty: product?.warranty || ''
+        warranty: product?.warranty || '',
+        promo_price: product?.promo_price ? product.promo_price.toString() : '',
+        discount_percent: product?.discount_percent ? product.discount_percent.toString() : ''
     });
 
     const [displayPrice, setDisplayPrice] = useState<string>(
         product?.price ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price) : ''
+    );
+
+    const [displayPromoPrice, setDisplayPromoPrice] = useState<string>(
+        product?.promo_price ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.promo_price) : ''
     );
 
     const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -884,6 +890,42 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         }
     };
 
+    const handlePromoPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const rawVal = e.target.value;
+        const cleanNumStr = rawVal.replace(/[^0-9.]/g, '');
+        const parts = cleanNumStr.split('.');
+        let sanitized = parts[0];
+        if (parts.length > 1) {
+            sanitized += '.' + parts[1].slice(0, 2);
+        }
+
+        if (!sanitized) {
+            setDisplayPromoPrice('');
+        } else {
+            const splitSanitized = sanitized.split('.');
+            const formattedInt = new Intl.NumberFormat('en-US').format(Number(splitSanitized[0]));
+            let visualValue = '$' + formattedInt;
+            if (splitSanitized[1] !== undefined) {
+                visualValue += '.' + splitSanitized[1];
+            } else if (sanitized.endsWith('.')) {
+                visualValue += '.';
+            }
+            setDisplayPromoPrice(visualValue);
+        }
+        setFormData({ ...formData, promo_price: sanitized });
+    };
+
+    const handlePromoPriceBlur = () => {
+        const numericVal = parseFloat(formData.promo_price) || 0;
+        if (numericVal > 0 || formData.promo_price !== '') {
+            setDisplayPromoPrice(
+                new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(numericVal)
+            );
+        } else {
+            setDisplayPromoPrice('');
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const url = product
@@ -895,7 +937,9 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         // Prepare payload
         const payload = {
             ...formData,
-            price: Math.round(parseFloat(formData.price || '0'))
+            price: Math.round(parseFloat(formData.price || '0')),
+            promo_price: formData.promo_price ? Math.round(parseFloat(formData.promo_price)) : null,
+            discount_percent: formData.discount_percent ? parseInt(formData.discount_percent) : null
         };
 
         try {
@@ -992,6 +1036,29 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                                             onChange={handlePriceChange}
                                             onBlur={handlePriceBlur}
                                             className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Promotion Price (USD)</label>
+                                        <input
+                                            type="text"
+                                            value={displayPromoPrice}
+                                            onChange={handlePromoPriceChange}
+                                            onBlur={handlePromoPriceBlur}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. $899.00"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Discount Percent (%)</label>
+                                        <input
+                                            type="number"
+                                            value={formData.discount_percent}
+                                            min={0}
+                                            max={100}
+                                            onChange={e => setFormData({ ...formData, discount_percent: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            placeholder="e.g. 10"
                                         />
                                     </div>
                                     <div className="space-y-2">

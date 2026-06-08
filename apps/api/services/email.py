@@ -136,7 +136,7 @@ def verify_connection():
         print(f"❌ SMTP Connection FAILED: {e}")
 
 
-def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None, images=None, server=None):
+def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None, images=None, calendar_invite=None, server=None):
     """
     Sends a synchronous email with optional BCC and embedded CID images.
     If 'server' is provided, it uses the existing SMTP connection.
@@ -167,6 +167,20 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
                     msg.attach(img_part)
                 except Exception as ie:
                     logger.error(f"Failed to attach image {img.get('filename')}: {ie}")
+
+        if calendar_invite:
+            try:
+                from email.mime.base import MIMEBase
+                from email import encoders
+                cal_part = MIMEBase('text', 'calendar', method='REQUEST', name='invite.ics')
+                cal_part.set_payload(calendar_invite)
+                encoders.encode_base64(cal_part)
+                cal_part.add_header('Content-Class', 'urn:content-classes:calendarmessage')
+                cal_part.add_header('Content-Disposition', 'attachment; filename="invite.ics"')
+                msg.attach(cal_part)
+                logger.info("Attached calendar invite to email.")
+            except Exception as ce:
+                logger.error(f"Failed to attach calendar invite: {ce}")
                 
         logger.info(f"Sending email to {to_email} (BCC: {bcc_emails})...")
         
@@ -190,7 +204,6 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
         import traceback
         traceback.print_exc()
 
-
 async def send_order_confirmation(to_email: str, order_id: str, total_cents: int, fulfillment_mode: str = "pickup", items: list = None, customer_info: dict = None, payment_info: dict = None):
     subject = f"Order Confirmation #{order_id} - Affordable Home A/C"
     
@@ -198,6 +211,50 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     if not items: items = []
     if not customer_info: customer_info = {}
     if not payment_info: payment_info = {}
+
+    # Check if there is any promo item in the order
+    is_promo = False
+    try:
+        from database import AsyncSessionLocal
+        from sqlalchemy.future import select
+        import models
+
+        async with AsyncSessionLocal() as session:
+            for item in items:
+                p_id = item.get("product_id")
+                if p_id:
+                    res = await session.execute(select(models.Product).where(models.Product.id == p_id))
+                    prod = res.scalar_one_or_none()
+                    if prod and prod.promo_price is not None and prod.promo_price > 0:
+                        is_promo = True
+                        break
+    except Exception as e:
+        logger.error(f"Error checking promo items in DB: {e}")
+
+    calendar_invite_bytes = None
+    if fulfillment_mode:
+        try:
+            dtstamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+            invite_content = f"""BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Affordable Home A/C//Celebrating America Promo//EN
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VEVENT
+UID:promo_installation_window_2026_{order_id}
+DTSTAMP:{dtstamp}
+DTSTART:20260701T080000
+DTEND:20260701T170000
+SUMMARY:Affordable Home A/C Installation Window
+DESCRIPTION:Celebrating America Promo: To lock in your 10% discount, please schedule your installation window for July and coordinate your down payment with the representative.
+LOCATION:Affordable Home A/C Waipahu shop or your residence
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR"""
+            calendar_invite_bytes = invite_content.encode('utf-8')
+        except Exception as e:
+            logger.error(f"Error generating calendar invite: {e}")
 
     # Customer Data Extraction
     c_name = customer_info.get('name', 'Valued Customer')
@@ -277,6 +334,15 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                 table { margin-bottom: 8px !important; }
                 .order-badge { border: 1px solid black; background: white !important; color: black !important; }
             }
+            """
+
+        promo_banner_html = ""
+        if not is_admin and is_promo:
+            promo_banner_html = """
+            <div style="background-color: #0d1e36; border: 1px dashed #ef4444; border-radius: 6px; padding: 16px; margin-top: 16px; margin-bottom: 24px; text-align: center;">
+                <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.2em; color: #ef4444; text-transform: uppercase; display: block; margin-bottom: 6px;">★ 4th of July Promo Applied ★</span>
+                <p style="margin: 0; font-size: 13px; color: #f8fafc; font-weight: bold; line-height: 1.4;">Thank you for celebrating with us! Your 10% promotional pricing has been locked in for this order.</p>
+            </div>
             """
 
         # --- Item Rows Generation ---
@@ -426,6 +492,8 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                     <span class="order-badge">Ref: #{order_id}</span>
                 </div>
 
+                {promo_banner_html}
+
                 <!-- Customer Information -->
                 <h2>Customer Information</h2>
                 <table style="width: 100%; border-collapse: collapse; margin-bottom: {mar_grid}; table-layout: fixed;">
@@ -522,6 +590,8 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     ]
     
     admin_subject = f"New Order Alert: {order_id} (Admin Copy)"
+    if is_promo:
+        admin_subject = f"[PROMO - 4TH OF JULY] {admin_subject}"
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
     def _send_both_emails():
@@ -531,14 +601,14 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
                     server.starttls()
                     server.login(SMTP_USER, SMTP_PASSWORD)
                     # Send Client Email
-                    send_email_with_attachments(to_email, subject, client_html_body, None, images, server=server)
+                    send_email_with_attachments(to_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
                     # Send Admin Email
                     send_email_with_attachments(admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None, server=server)
             else:
                 with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
                     server.login(SMTP_USER, SMTP_PASSWORD)
                     # Send Client Email
-                    send_email_with_attachments(to_email, subject, client_html_body, None, images, server=server)
+                    send_email_with_attachments(to_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
                     # Send Admin Email
                     send_email_with_attachments(admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None, server=server)
         except Exception as e:

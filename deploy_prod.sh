@@ -42,10 +42,10 @@ docker system prune -a -f
 docker builder prune -a -f
 
 # 2. Source Code Sync
-echo "📥 [2/5] Synchronizing Codebase with $TARGET_BRANCH (as $CPANEL_USER)..."
-su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git fetch origin \"$TARGET_BRANCH\""
-su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git checkout \"$TARGET_BRANCH\""
-su - "$CPANEL_USER" -c "cd \"$BASE_DIR\" && git reset --hard \"origin/$TARGET_BRANCH\""
+echo "📥 [2/5] Synchronizing Codebase with $TARGET_BRANCH..."
+git fetch origin "$TARGET_BRANCH"
+git checkout "$TARGET_BRANCH"
+git reset --hard "origin/$TARGET_BRANCH"
 
 chmod 700 deploy_prod.sh force_redeploy.sh 2>/dev/null || true
 chmod 700 apps/api/entrypoint.sh 2>/dev/null || true
@@ -53,15 +53,15 @@ chmod 700 apps/api/entrypoint.sh 2>/dev/null || true
 # 3. Container Orchestration (Clean Build)
 echo "🚀 [3/5] Building & Hot-swapping Containers..."
 # Force a clean build to prevent corrupted Next.js caches
-docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" build --no-cache
+docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" build --no-cache
 # Swap the containers
-docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" down --remove-orphans
+docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" down --remove-orphans
 
 # [HOTFIX] Clear stale PostgreSQL PID files caused by sudden ENOSPC crashes
 echo "🧹 Clearing stale PostgreSQL locks..."
-docker run --rm -v ${DOCKER_PROJECT}_prod_postgres_data:/var/lib/postgresql/data alpine rm -f /var/lib/postgresql/data/postmaster.pid 2>/dev/null || true
+docker run --rm -v ${DOCKER_PROJECT}_staging_postgres_data:/var/lib/postgresql/data alpine rm -f /var/lib/postgresql/data/postmaster.pid 2>/dev/null || true
 
-docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" up -d
+docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" up -d
 
 # 4. Application Data & Idempotent Seeding
 echo "🌱 [4/5] Checking Container Health & Database State..."
@@ -69,10 +69,10 @@ echo "Waiting 10 seconds for API and DB boot sequence..."
 sleep 10 
 
 # Check for the marker file to prevent duplicate seeding
-if ! docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" exec -T prod-api test -f /app/.seeded_marker 2>/dev/null; then
+if ! docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api test -f /app/.seeded_marker 2>/dev/null; then
     echo "🌱 Seeding initial database structure..."
-    docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" exec -T prod-api python seed_content.py
-    docker compose -f docker-compose.prod.yml -p "$DOCKER_PROJECT" exec -T prod-api touch /app/.seeded_marker
+    docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api python seed_content.py
+    docker compose -f docker-compose.staging.yml -p "$DOCKER_PROJECT" exec -T staging-api touch /app/.seeded_marker
 else
     echo "⏭️ Idempotency Check: Seed state already present. Skipping."
 fi

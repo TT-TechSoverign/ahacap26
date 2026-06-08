@@ -40,6 +40,8 @@ class Product(Base):
     dimensions = Column(String, nullable=True)
     weight = Column(String, nullable=True)
     warranty = Column(String, nullable=True)
+    promo_price = Column(Integer, nullable=True)
+    discount_percent = Column(Integer, nullable=True)
 
 class Lead(Base):
     __tablename__ = "leads"
@@ -73,6 +75,9 @@ class Order(Base):
     fulfillment_mode = Column(String, nullable=True) # pickup or delivery
     inventory_deducted = Column(Boolean, default=False) # Webhook idempotency guard
     idempotency_key = Column(String, unique=True, index=True, nullable=True)
+    utm_source = Column(String, nullable=True)
+    utm_medium = Column(String, nullable=True)
+    utm_campaign = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 class ContentPage(Base):

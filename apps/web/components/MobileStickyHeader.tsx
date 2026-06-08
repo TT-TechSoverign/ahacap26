@@ -3,11 +3,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import MobileDrawerMenu from './MobileDrawerMenu';
 
 export default function MobileStickyHeader() {
+    const pathname = usePathname();
+    if (pathname && pathname.startsWith('/checkout')) return null;
+
     const { items, openCart, isOpen: isCartOpen, closeCart } = useCart();
     const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
