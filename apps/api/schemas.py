@@ -28,6 +28,7 @@ class ProductUpdate(BaseModel):
     name: Optional[str] = None
     price: Optional[int] = None
     category: Optional[str] = None
+    subcategory: Optional[str] = None
     stock: Optional[int] = None
     image_url: Optional[str] = None
     btu: Optional[int] = None

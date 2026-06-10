@@ -22,7 +22,7 @@ SENTRY_DSN = os.getenv("SENTRY_DSN")
 if SENTRY_DSN:
     sentry_sdk.init(dsn=SENTRY_DSN, traces_sample_rate=1.0, profiles_sample_rate=1.0)
 
-from fastapi import FastAPI, HTTPException, Request, BackgroundTasks, Depends
+from fastapi import FastAPI, HTTPException, Request, BackgroundTasks, Depends, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -482,9 +482,9 @@ from seed_products import seed
 from dependencies import verify_admin_token
 
 @app.post("/api/v1/maintenance/seed_products", dependencies=[Depends(verify_admin_token)])
-async def seed_products_endpoint(background_tasks: BackgroundTasks):
-    background_tasks.add_task(seed)
-    return {"status": "seeding_started"}
+async def seed_products_endpoint(background_tasks: BackgroundTasks, force: bool = Query(False)):
+    background_tasks.add_task(seed, force=force)
+    return {"status": "seeding_started", "force": force}
 
 @app.post("/api/v1/admin/login")
 async def admin_login(payload: dict):

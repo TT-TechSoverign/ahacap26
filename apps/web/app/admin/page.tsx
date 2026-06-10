@@ -28,6 +28,8 @@ interface Product {
     dimensions?: string;
     weight?: string;
     warranty?: string;
+    promo_price?: number;
+    discount_percent?: number;
 }
 
 interface Order {
@@ -825,6 +827,7 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
 
 function ProductModal({ product, onClose, onSave }: { product?: Product, onClose: () => void, onSave: () => void }) {
     const [activeTab, setActiveTab] = useState<'basic' | 'specs'>('basic');
+    const [error, setError] = useState<string>('');
     const [formData, setFormData] = useState({
         name: product?.name || '',
         price: product?.price ? product.price.toString() : '',
@@ -928,6 +931,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError('');
         const url = product
             ? `/api/v1/products/${product.id}`
             : `/api/v1/products`;
@@ -952,9 +956,15 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                 },
                 body: JSON.stringify(payload)
             });
-            if (res.ok) onSave();
+            if (res.ok) {
+                onSave();
+            } else {
+                const data = await res.json().catch(() => ({}));
+                setError(data.detail || 'Failed to save product changes. Please check inputs.');
+            }
         } catch (err) {
             console.error('Save failed', err);
+            setError('Connection error. Failed to reach the server.');
         }
     };
 
@@ -1233,6 +1243,12 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
                             </motion.div>
                         )}
                     </AnimatePresence>
+
+                    {error && (
+                        <div className="text-red-500 text-xs font-bold uppercase tracking-wide bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
+                            {error}
+                        </div>
+                    )}
 
                     <div className="pt-6 flex gap-4">
                         <button type="button" onClick={onClose} className="flex-1 border border-white/10 text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-white/5 transition-all">{content.admin.products.modal.cancel}</button>

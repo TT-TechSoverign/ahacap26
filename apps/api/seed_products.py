@@ -14,11 +14,19 @@ def load_products():
     with open(json_path, 'r') as f:
         return json.load(f)
 
-async def seed(cleanup: bool = True):
+async def seed(cleanup: bool = True, force: bool = False):
     print("🌱 Checking Product Seeding Status...")
     
     # 3. Insert/Update Data (Upsert)
     async with AsyncSessionLocal() as session:
+        if not force:
+            # Check if products already exist in database
+            result = await session.execute(text("SELECT COUNT(*) FROM products"))
+            count = result.scalar()
+            if count > 0:
+                print(f"   ℹ️  Products already exist in database ({count} found). Skipping seeding to preserve runtime modifications.")
+                return
+
         # 1. Truncate Table (Clear old data to prevent duplicates)
         if cleanup:
             print("   🗑️  Clearing existing products...")
@@ -39,6 +47,8 @@ async def seed(cleanup: bool = True):
         print("✅ Seeding Complete! (Upsert Performed)")
 
 if __name__ == "__main__":
+    import sys
+    force = "--force" in sys.argv
     if os.name == 'nt':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(seed())
+    asyncio.run(seed(force=force))

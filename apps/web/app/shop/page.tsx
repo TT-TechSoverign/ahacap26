@@ -146,7 +146,7 @@ export default function ShopPage() {
 
                 let url = `${apiUrl}/products`;
                 const params = new URLSearchParams();
-                if (searchQuery) params.append('name', searchQuery);
+                if (searchQuery) params.append('q', searchQuery);
                 // Add cache-buster to ensure we get fresh data after seeding
                 params.append('_t', Date.now().toString());
                 if (params.toString()) url += `?${params.toString()}`;
