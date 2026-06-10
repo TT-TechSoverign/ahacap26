@@ -83,7 +83,17 @@ export default function AdminPage() {
             ...(token ? { 'Authorization': token } : {}),
             ...options.headers,
         };
-        return fetch(url, { ...options, headers });
+        try {
+            const res = await fetch(url, { ...options, headers });
+            if (res.status === 401) {
+                sessionStorage.removeItem('admin_token');
+                setIsAuthenticated(false);
+            }
+            return res;
+        } catch (err) {
+            console.error('Fetch error:', err);
+            throw err;
+        }
     }, []);
 
     // --- Scroll Sync Logic (Matches NavbarV2) ---
@@ -272,46 +282,83 @@ export default function AdminPage() {
                     damping: 25,
                     delay: headerVisible ? 0.1 : 0
                 }}
-                className="fixed top-[130px] md:top-[260px] left-0 right-0 z-40 bg-[#0a0e14]/95 backdrop-blur-xl border-b border-white/5 px-6 py-4 shadow-2xl"
+                className="fixed top-[130px] md:top-[260px] left-0 right-0 z-40 bg-[#06090e]/80 backdrop-blur-md border-b border-white/10 px-6 py-4 shadow-lg shadow-black/50"
             >
-                <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-                    <div className="flex items-center gap-8">
+                <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto">
                         <div className="flex items-center gap-4">
-                            <div className="size-10 bg-primary rounded-lg flex items-center justify-center">
-                                <span className="material-symbols-outlined text-black font-bold">settings_suggest</span>
+                            <div className="relative group">
+                                <motion.div 
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                                    className="size-11 bg-gradient-to-tr from-primary to-[#00f3ff] rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 border border-primary/30"
+                                >
+                                    <span className="material-symbols-outlined text-black font-bold">settings_suggest</span>
+                                </motion.div>
+                                <div className="absolute inset-0 bg-primary/20 blur-md rounded-xl -z-10 group-hover:bg-primary/40 transition-all duration-300" />
                             </div>
                             <div className="hidden sm:block">
-                                <h2 className="text-white font-header font-black tracking-widest uppercase text-lg leading-none">{content.admin.nav.title}</h2>
-                                <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">{content.admin.nav.subtitle}</p>
+                                <h2 className="text-white font-header font-black tracking-widest uppercase text-lg leading-none flex items-center gap-2">
+                                    {content.admin.nav.title}
+                                    <span className="inline-block size-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_#10b981]" />
+                                </h2>
+                                <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1 font-mono">{content.admin.nav.subtitle}</p>
                             </div>
                         </div>
 
                         {/* Tabs */}
-                        <nav className="flex items-center bg-black/40 p-1 rounded-xl border border-white/5">
-                            {(['inventory', 'orders', 'leads', 'schedule'] as const).map((tab) => (
-                                <button
-                                    key={tab}
-                                    //@ts-ignore
-                                    onClick={() => setActiveTab(tab)}
-                                    className={`px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-white text-black shadow-lg' : 'text-slate-500 hover:text-white'}`}
-                                >
-                                    {tab === 'schedule' ? 'Schedule' : content.admin.tabs[tab as keyof typeof content.admin.tabs]}
-                                </button>
-                            ))}
+                        <nav className="flex items-center bg-black/50 p-1.5 rounded-xl border border-white/5 relative w-full sm:w-auto justify-center sm:justify-start">
+                            {(['inventory', 'orders', 'leads', 'schedule'] as const).map((tab) => {
+                                const isActive = activeTab === tab;
+                                return (
+                                    <button
+                                        key={tab}
+                                        //@ts-ignore
+                                        onClick={() => setActiveTab(tab)}
+                                        className={`relative px-5 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-colors z-10 flex items-center gap-1.5 ${
+                                            isActive ? 'text-black font-extrabold' : 'text-slate-400 hover:text-white'
+                                        }`}
+                                    >
+                                        {isActive && (
+                                            <motion.div
+                                                layoutId="active-admin-tab"
+                                                className="absolute inset-0 bg-white rounded-lg -z-10 shadow-lg shadow-white/10"
+                                                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                                            />
+                                        )}
+                                        <span className="material-symbols-outlined text-sm">
+                                            {tab === 'inventory' ? 'inventory_2' : 
+                                             tab === 'orders' ? 'receipt_long' : 
+                                             tab === 'leads' ? 'group' : 'calendar_month'}
+                                        </span>
+                                        {tab === 'schedule' ? 'Schedule' : content.admin.tabs[tab as keyof typeof content.admin.tabs]}
+                                    </button>
+                                );
+                            })}
                         </nav>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 w-full sm:w-auto justify-end">
                         {activeTab === 'inventory' && (
                             <button
                                 onClick={() => setIsAdding(true)}
-                                className="bg-white text-black px-6 py-2 rounded-lg font-black uppercase text-[10px] tracking-widest hover:bg-primary transition-all flex items-center gap-2"
+                                className="bg-white text-black px-6 py-2.5 rounded-lg font-black uppercase text-[10px] tracking-widest hover:bg-primary hover:text-black transition-all flex items-center gap-2 shadow-lg shadow-white/5 hover:shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0"
                             >
                                 <span className="material-symbols-outlined text-sm">add</span> {content.admin.nav.add_product}
                             </button>
                         )}
-                        <Link href="/shop" className="text-slate-500 hover:text-white transition-colors text-[10px] font-bold uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg hidden md:block">{content.admin.nav.view_shop}</Link>
-                        <button onClick={handleLogout} className="text-red-500/50 hover:text-red-500 transition-colors">
-                            <span className="material-symbols-outlined">power_settings_new</span>
+                        <Link 
+                            href="/shop" 
+                            className="text-slate-300 hover:text-white transition-all text-[10px] font-bold uppercase tracking-widest border border-white/10 px-5 py-2.5 rounded-lg hidden md:flex items-center gap-1.5 bg-white/5 hover:bg-white/10 hover:border-white/20 hover:-translate-y-0.5 active:translate-y-0"
+                        >
+                            <span className="material-symbols-outlined text-sm">shopping_bag</span>
+                            {content.admin.nav.view_shop}
+                        </Link>
+                        <button 
+                            onClick={handleLogout} 
+                            className="size-11 flex items-center justify-center rounded-xl border border-red-500/20 text-red-500/60 hover:text-red-500 hover:bg-red-500/10 hover:border-red-500/40 transition-all hover:scale-105 active:scale-95"
+                            title="Logout"
+                        >
+                            <span className="material-symbols-outlined text-xl">power_settings_new</span>
                         </button>
                     </div>
                 </div>
@@ -543,7 +590,7 @@ export default function AdminPage() {
                             )}
 
                             {activeTab === 'schedule' && (
-                                <ScheduleManager />
+                                <ScheduleManager adminFetch={adminFetch} />
                             )}
 
 
@@ -559,6 +606,7 @@ export default function AdminPage() {
                     (isAdding || editingProduct) && (
                         <ProductModal
                             product={editingProduct || undefined}
+                            adminFetch={adminFetch}
                             onClose={() => { setIsAdding(false); setEditingProduct(null); }}
                             onSave={() => { setIsAdding(false); setEditingProduct(null); fetchProducts(); }}
                         />
@@ -568,6 +616,7 @@ export default function AdminPage() {
                     viewingLead && (
                         <LeadDetailModal
                             lead={viewingLead}
+                            adminFetch={adminFetch}
                             onClose={() => setViewingLead(null)}
                             onSave={() => { setViewingLead(null); fetchLeads(); }}
                         />
@@ -577,6 +626,7 @@ export default function AdminPage() {
                     viewingOrder && (
                         <OrderDetailModal
                             order={viewingOrder}
+                            adminFetch={adminFetch}
                             onClose={() => setViewingOrder(null)}
                             onSave={() => { setViewingOrder(null); fetchOrders(); }}
                         />
@@ -587,24 +637,27 @@ export default function AdminPage() {
     );
 }
 
-function LeadDetailModal({ lead, onClose, onSave }: { lead: Lead, onClose: () => void, onSave: () => void }) {
+function LeadDetailModal({ lead, adminFetch, onClose, onSave }: { lead: Lead, adminFetch: any, onClose: () => void, onSave: () => void }) {
     const [status, setStatus] = useState(lead.status);
     const [notes, setNotes] = useState(lead.notes || '');
+    const [error, setError] = useState('');
 
     const handleUpdate = async () => {
+        setError('');
         try {
-            const token = sessionStorage.getItem('admin_token');
-            const res = await fetch(`/api/v1/admin/leads/${lead.id}`, {
+            const res = await adminFetch(`/api/v1/admin/leads/${lead.id}`, {
                 method: 'PUT',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    ...(token ? { 'Authorization': token } : {})
-                },
                 body: JSON.stringify({ status, notes })
             });
-            if (res.ok) onSave();
+            if (res.ok) {
+                onSave();
+            } else {
+                const data = await res.json().catch(() => ({}));
+                setError(data.detail || 'Failed to update lead details.');
+            }
         } catch (err) {
             console.error('Update failed', err);
+            setError('Connection error. Failed to reach the server.');
         }
     };
 
@@ -677,6 +730,11 @@ function LeadDetailModal({ lead, onClose, onSave }: { lead: Lead, onClose: () =>
                         ></textarea>
                     </div>
                 </div>
+                {error && (
+                    <div className="mx-8 mb-4 text-red-500 text-xs font-bold uppercase tracking-wide bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
+                        {error}
+                    </div>
+                )}
                 <div className="p-8 border-t border-white/5 bg-white/[0.01] flex gap-4">
                     <button onClick={onClose} className="flex-1 py-4 border border-white/10 text-slate-400 font-bold uppercase tracking-widest text-[10px] rounded-xl hover:bg-white/5">Close</button>
                     <button onClick={handleUpdate} className="flex-1 py-4 bg-primary text-black font-black uppercase tracking-widest text-[10px] rounded-xl shadow-lg shadow-primary/20 hover:bg-white transition-all">{content.admin.leads.modal.update}</button>
@@ -686,8 +744,9 @@ function LeadDetailModal({ lead, onClose, onSave }: { lead: Lead, onClose: () =>
     );
 }
 
-function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: () => void, onSave: () => void }) {
+function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order, adminFetch: any, onClose: () => void, onSave: () => void }) {
     const [status, setStatus] = useState(order.status);
+    const [error, setError] = useState('');
     const items = order.items_json ? JSON.parse(order.items_json) : [];
     
     // Parse the saved address JSON string if it exists
@@ -701,19 +760,21 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
     }
 
     const handleUpdate = async () => {
+        setError('');
         try {
-            const token = sessionStorage.getItem('admin_token');
-            const res = await fetch(`/api/v1/admin/orders/${order.id}`, {
+            const res = await adminFetch(`/api/v1/admin/orders/${order.id}`, {
                 method: 'PUT',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    ...(token ? { 'Authorization': token } : {})
-                },
                 body: JSON.stringify({ status })
             });
-            if (res.ok) onSave();
+            if (res.ok) {
+                onSave();
+            } else {
+                const data = await res.json().catch(() => ({}));
+                setError(data.detail || 'Failed to update order status.');
+            }
         } catch (err) {
             console.error('Update failed', err);
+            setError('Connection error. Failed to reach the server.');
         }
     };
 
@@ -810,6 +871,11 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
                         </div>
                     </div>
                 </div>
+                {error && (
+                    <div className="mx-8 mb-4 text-red-500 text-xs font-bold uppercase tracking-wide bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
+                        {error}
+                    </div>
+                )}
                 <div className="p-8 border-t border-white/5 bg-white/[0.01] flex gap-4">
                     <button onClick={onClose} className="flex-1 py-4 border border-white/10 text-slate-400 font-bold uppercase tracking-widest text-[10px] rounded-xl hover:bg-white/5">Dismiss</button>
                     <button onClick={handleUpdate} className="flex-1 py-4 bg-primary text-black font-black uppercase tracking-widest text-[10px] rounded-xl shadow-lg shadow-primary/20 hover:bg-white transition-all">{content.admin.orders.modal.update_status}</button>
@@ -825,7 +891,7 @@ function OrderDetailModal({ order, onClose, onSave }: { order: Order, onClose: (
 // AvailabilityManager removed
 
 
-function ProductModal({ product, onClose, onSave }: { product?: Product, onClose: () => void, onSave: () => void }) {
+function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Product, adminFetch: any, onClose: () => void, onSave: () => void }) {
     const [activeTab, setActiveTab] = useState<'basic' | 'specs'>('basic');
     const [error, setError] = useState<string>('');
     const [formData, setFormData] = useState({
@@ -947,13 +1013,8 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
         };
 
         try {
-            const token = sessionStorage.getItem('admin_token');
-            const res = await fetch(url, {
+            const res = await adminFetch(url, {
                 method,
-                headers: { 
-                    'Content-Type': 'application/json',
-                    ...(token ? { 'Authorization': token } : {})
-                },
                 body: JSON.stringify(payload)
             });
             if (res.ok) {
@@ -1263,7 +1324,7 @@ function ProductModal({ product, onClose, onSave }: { product?: Product, onClose
 }
 
 
-function ScheduleManager() {
+function ScheduleManager({ adminFetch }: { adminFetch: any }) {
     const { content, refreshContent } = useContent();
     const [formData, setFormData] = useState(content.footer_schedule || {
         mini_split_label: "",
@@ -1285,6 +1346,7 @@ function ScheduleManager() {
     }, [content.footer_schedule]);
     const [saving, setSaving] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [error, setError] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -1294,23 +1356,23 @@ function ScheduleManager() {
         e.preventDefault();
         setSaving(true);
         setSuccess(false);
+        setError('');
         try {
-            const token = sessionStorage.getItem('admin_token');
-            const res = await fetch('/api/v1/admin/schedule', {
+            const res = await adminFetch('/api/v1/admin/schedule', {
                 method: 'PATCH',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    ...(token ? { 'Authorization': token } : {})
-                },
                 body: JSON.stringify(formData)
             });
             if (res.ok) {
                 await refreshContent();
                 setSuccess(true);
                 setTimeout(() => setSuccess(false), 3000);
+            } else {
+                const data = await res.json().catch(() => ({}));
+                setError(data.detail || 'Failed to save schedule updates.');
             }
         } catch (err) {
             console.error('Failed to save schedule', err);
+            setError('Connection error. Failed to reach the server.');
         } finally {
             setSaving(false);
         }
@@ -1403,7 +1465,11 @@ function ScheduleManager() {
                     </div>
                 </div>
 
-
+                {error && (
+                    <div className="text-red-500 text-xs font-bold uppercase tracking-wide bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
+                        {error}
+                    </div>
+                )}
 
                 <div className="flex items-center gap-4 pt-4">
                     <button
