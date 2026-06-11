@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Oswald } from 'next/font/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import TickerWrapper from '../components/TickerWrapper';
 import CartDrawer from '../components/CartDrawer';
 import { CartProvider } from '../context/CartContext';
@@ -49,20 +49,26 @@ export default function RootLayout({
     return (
         <html lang="en" className="dark">
             <head>
-                {/* Material Symbols for UI Icons */}
-                {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
-                <Script id="gtm" strategy="afterInteractive">
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link rel="preconnect" href="https://558690.tctm.co" />
+                <noscript>
+                    <link
+                        rel="stylesheet"
+                        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+                    />
+                </noscript>
+                <Script id="load-material-symbols" strategy="lazyOnload">
                     {`
-                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                    })(window,document,'script','dataLayer','GTM-KTZ58FJX');
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap';
+                    document.head.appendChild(link);
                     `}
                 </Script>
             </head>
             <body className={`${inter.variable} ${oswald.variable} font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white`}>
+                <GoogleTagManager gtmId="GTM-KTZ58FJX" />
                 <GoogleAnalytics gaId="G-MYJZTZFXQV" />
                 {/* <TickerWrapper /> */}
                 <script

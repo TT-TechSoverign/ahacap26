@@ -59,12 +59,12 @@ export default function Footer() {
                     <div className="flex flex-col gap-4 text-center">
                         {/* Line 1: Columns */}
                         <div className="grid grid-cols-2 max-w-4xl mx-auto w-full">
-                            <h5 className="text-white font-header font-black uppercase tracking-widest text-base md:text-lg">
+                            <h3 className="text-white font-header font-black uppercase tracking-widest text-base md:text-lg text-center">
                                 {schedule?.mini_split_label || defaults.mini_split_label}
-                            </h5>
-                            <h5 className="text-white font-header font-black uppercase tracking-widest text-base md:text-lg">
+                            </h3>
+                            <h3 className="text-white font-header font-black uppercase tracking-widest text-base md:text-lg text-center">
                                 {schedule?.window_ac_label || defaults.window_ac_label}
-                            </h5>
+                            </h3>
                         </div>
 
                         {/* Line 2: Specific Dates - Mobile Optimized (Stacked) */}
@@ -120,7 +120,7 @@ export default function Footer() {
 
                     {/* Services Column */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                        <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Services</h4>
+                        <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Services</h3>
                         <ul className="space-y-4 w-full">
                             {[
                                 { text: 'Mini Split AC', href: '/mini_split_ac' },
@@ -140,7 +140,7 @@ export default function Footer() {
 
                     {/* Quick Links Column */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                        <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Quick Links</h4>
+                        <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Quick Links</h3>
                         <ul className="space-y-4 w-full">
                             {[
                                 { text: 'Mini Split AC', href: '/mini_split_ac' },
@@ -163,7 +163,7 @@ export default function Footer() {
 
                     {/* Service Areas Column */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                        <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Service Areas</h4>
+                        <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Service Areas</h3>
                         <ul className="grid grid-cols-2 gap-x-4 gap-y-3 w-full">
                             {serviceAreas.map((city) => (
                                 <li key={city}>
@@ -178,7 +178,7 @@ export default function Footer() {
 
                     {/* Contact Column */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                        <h4 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Contact</h4>
+                        <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Contact</h3>
                         <ul className="space-y-6 w-full">
                             <li className="flex gap-4 justify-center md:justify-start text-left">
                                 <span className="material-symbols-outlined text-primary mt-1 shrink-0">location_on</span>
@@ -211,15 +211,15 @@ export default function Footer() {
                 {/* Availability Schedule Section Moved to Top */}
 
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-slate-600 text-xs font-bold uppercase tracking-widest">
+                    <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">
                         © 2026 Affordable Home A/C. All rights reserved.
                     </p>
                     <div className="flex flex-col md:flex-row items-center gap-6">
-                        <span className="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
+                        <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
                             <span className="material-symbols-outlined text-sm text-primary">verified</span>
                             LIC# CT-36775
                         </span>
-                        <span className="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
+                        <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
                             <span className="material-symbols-outlined text-sm text-primary">shield</span>
                             Licensed | Insured | Bonded
                         </span>

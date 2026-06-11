@@ -1140,7 +1140,7 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                             fill
                             sizes="(max-width: 768px) 100vw, 33vw"
                             className="object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative z-10 p-4 md:p-6"
-                            unoptimized={!!product.image_url}
+                            unoptimized={product.image_url?.endsWith('.svg')}
                         />
                     ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-slate-700 relative z-10">

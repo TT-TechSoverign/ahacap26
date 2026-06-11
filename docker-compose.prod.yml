@@ -53,9 +53,14 @@ services:
       - GA4_MEASUREMENT_ID=${GA4_MEASUREMENT_ID}
       - GA4_API_SECRET=${GA4_API_SECRET}
       - FRONTEND_INTERNAL_URL=http://prod-web:3000
+      - PROMO_ENABLED=False
     volumes:
       - ./apps/api/content:/app/content
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4 --proxy-headers --forwarded-allow-ips "*"
+    command: >
+      sh -c "python fix_db_schema.py && 
+             python seed_products.py && 
+             python seed_content.py && 
+             uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4 --proxy-headers --forwarded-allow-ips '*'"
     depends_on:
       prod-db:
         condition: service_healthy

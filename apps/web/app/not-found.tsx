@@ -6,9 +6,10 @@ export default function NotFound() {
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-[#0F172A] px-6 text-center relative overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/assets/hero-cards/ahac-hero-background-2.png"
+          src="/assets/hero-cards/ahac-hero-background-2.webp"
           alt="Background"
           fill
+          sizes="100vw"
           className="object-cover opacity-20 blur-sm"
         />
         <div className="absolute inset-0 bg-slate-950/80 mix-blend-multiply" />

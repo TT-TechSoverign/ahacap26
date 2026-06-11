@@ -44,9 +44,14 @@ services:
       - REDIS_URL=redis://:${REDIS_PASSWORD}@staging-redis:6379
       - CHAOS_MODE=False
       - FRONTEND_INTERNAL_URL=http://staging-web:3000
+      - PROMO_ENABLED=True
     volumes:
       - ./apps/api/content:/app/content:ro
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4 --proxy-headers --forwarded-allow-ips "*"
+    command: >
+      sh -c "python fix_db_schema.py && 
+             python seed_products.py && 
+             python seed_content.py && 
+             uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4 --proxy-headers --forwarded-allow-ips '*'"
     depends_on:
       staging-db:
         condition: service_healthy

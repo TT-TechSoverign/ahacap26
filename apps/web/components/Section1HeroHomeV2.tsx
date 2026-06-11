@@ -10,9 +10,10 @@ export default function Section1HeroHomeV2() {
             {/* Background Layer */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/hero-cards/ahac-hero-background-2.png"
+                    src="/assets/hero-cards/ahac-hero-background-2.webp"
                     alt="Expert HVAC Installation by Affordable Home A/C"
                     fill
+                    sizes="100vw"
                     className="object-cover object-center opacity-90"
                     priority
                 />

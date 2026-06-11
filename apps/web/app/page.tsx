@@ -1,5 +1,3 @@
-import { Render } from "@measured/puck";
-import config from "../puck.config";
 
 import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
 import Section4Projects from '@/components/Section4Projects';
@@ -18,9 +16,10 @@ export default function Homepage() {
             {/* Global Background Image with Overlay */}
             <div className="fixed inset-0 z-0">
                 <Image
-                    src="/assets/hero-cards/ahac-hero-background-2.png"
+                    src="/assets/hero-cards/ahac-hero-background-2.webp"
                     alt="Expert HVAC Installation by Affordable Home A/C"
                     fill
+                    sizes="100vw"
                     className="object-cover object-center translate-y-[-10%] scale-110" // Slight shift to align visually
                     priority
                 />
@@ -30,6 +29,7 @@ export default function Homepage() {
             </div>
 
             <main className="relative z-10 pt-[140px] md:pt-[165px]">
+                <h1 className="sr-only">Affordable Air Conditioning & Ductless Mini Split Installation in Hawaii</h1>
                 <div className="max-w-7xl mx-auto px-6 mb-12">
                     <FourthOfJulyBanner />
                 </div>

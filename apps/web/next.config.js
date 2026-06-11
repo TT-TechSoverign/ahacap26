@@ -31,6 +31,7 @@ const nextConfig = {
         dangerouslyAllowSVG: true,
         contentDispositionType: 'attachment',
         contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+        formats: ['image/avif', 'image/webp'],
         remotePatterns: [
             {
                 protocol: 'https',
@@ -42,6 +43,15 @@ const nextConfig = {
     },
     async headers() {
         return [
+            {
+                source: '/assets/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    },
+                ],
+            },
             {
                 source: '/:path*',
                 headers: [

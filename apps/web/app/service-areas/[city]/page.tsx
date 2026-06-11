@@ -92,9 +92,10 @@ export default function LocalServiceAreaPage({ params }: Props) {
             <section className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden pt-[140px] pb-16">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/assets/hero-cards/ahac-hero-background-2.png"
+                        src="/assets/hero-cards/ahac-hero-background-2.webp"
                         alt={`HVAC Services in ${cityData.name}`}
                         fill
+                        sizes="100vw"
                         className="object-cover object-center opacity-60 scale-105"
                         priority
                     />

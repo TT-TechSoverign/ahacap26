@@ -55,45 +55,6 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"WARNING: SMTP Check Failed entirely: {e}")
 
-    print("DEBUG: Creating Tables & Checking Schema...")
-    
-    # Run Schema Fixes
-    from fix_db_schema import fix_schema
-    await fix_schema()
-
-    try:
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
-    except Exception as e:
-        print(f"WARNING: Database connection failed: {e}")
-    print("DEBUG: Startup Complete.")
-    
-    # Verify Email
-    email_service.verify_connection()
-
-    # 3. Auto-Seed (If Empty)
-    try:
-        async with AsyncSessionLocal() as session:
-            result = await session.execute(select(models.Product))
-            first_product = result.scalars().first()
-            
-            if not first_product:
-                print("⚠️  Database Empty! Seeding Initial Products...")
-                # IMPORTANT: Close this session first to release any locks before seeding
-                await session.commit() 
-                
-                import seed_products
-                # cleanup=False prevents TRUNCATE, avoiding Deadlocks
-                await seed_products.seed(cleanup=False)
-                
-                # Also seed content pages if empty
-                import seed_content
-                await seed_content.seed_content()
-            else:
-                print("✅ Products found. Skipping Seed.")
-    except Exception as e:
-        print(f"WARNING: Product Seed Check Failed: {e}")
-
     yield
     await close_redis()
     await engine.dispose()

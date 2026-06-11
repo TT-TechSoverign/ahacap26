@@ -52,21 +52,21 @@ export default function Section2OurServicesV2() {
             id: 'window_shop',
             defaultTitle: 'Window AC Store',
             defaultDesc: 'Browse our massive inventory of LG & GE units.',
-            cleanImage: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-herobg-solutions.svg',
+            cleanImage: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg_dual_inverter_thinq_front_herobg_solutions.webp',
             link: '/shop'
         },
         {
             id: 'mini_split_maintenance',
             defaultTitle: 'Mini Split AC Maintenance',
             defaultDesc: 'Deep cleaning and professional service to keep your ductless system mold-free and efficient.',
-            cleanImage: '/assets/yelpphotos/mini-split-blowerwheel-dirty-clean-1.svg',
+            cleanImage: '/assets/yelpphotos/mini_split_blowerwheel_dirty_clean_1.webp',
             link: '/mini_split_ac_maintenance'
         },
         {
             id: 'window_maintenance',
             defaultTitle: 'Window AC Maintenance',
             defaultDesc: 'Cleaning to restore efficiency and air quality.',
-            cleanImage: '/assets/yelpphotos/window-ac-maintenance-card-bg.svg',
+            cleanImage: '/assets/yelpphotos/window_ac_maintenance_card_bg.webp',
             link: '/window_ac_maintenance'
         }
     ];
@@ -97,6 +97,7 @@ export default function Section2OurServicesV2() {
                         src={service.cleanImage}
                         alt={service.defaultTitle}
                         fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover object-center opacity-80 group-hover:opacity-60 md:group-hover:blur-[2px] transition-all duration-700"
                     />
                     {/* Primary Dark Blue Overlay (Fixed 20%) */}
@@ -159,7 +160,6 @@ export default function Section2OurServicesV2() {
         <section className="relative w-full bg-transparent pb-12 md:pb-16 pt-0">
             {/* Header Content */}
             <div className="relative z-10 max-w-4xl mx-auto text-center mb-6 px-6">
-                <h1 className="sr-only">Affordable Air Conditioning & Ductless Mini Split Installation in Hawaii</h1>
                 <h2 className="relative inline-block font-header font-black text-3xl md:text-5xl text-white uppercase tracking-tighter mb-4 pb-6">
                     <span className="text-white">
                         Our Core

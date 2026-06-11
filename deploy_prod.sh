@@ -62,42 +62,20 @@ git checkout "$TARGET_BRANCH"
 git reset --hard "origin/$TARGET_BRANCH"
 
 chmod 700 deploy_prod.sh force_redeploy.sh 2>/dev/null || true
-chmod 700 apps/api/entrypoint.sh 2>/dev/null || true
 
 # 3. Container Orchestration (Clean Build)
 echo "🚀 [3/5] Building & Hot-swapping Containers..."
 # Force a clean build to prevent corrupted Next.js caches
 docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" build --no-cache
-# Swap the containers
-docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" down --remove-orphans
 
-# [HOTFIX] Clear stale PostgreSQL PID files caused by sudden ENOSPC crashes
-echo "🧹 Clearing stale PostgreSQL locks..."
-docker run --rm -v "$DB_VOLUME":/var/lib/postgresql/data alpine rm -f /var/lib/postgresql/data/postmaster.pid 2>/dev/null || true
-
-docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" up -d
-
-# 4. Application Data & Idempotent Seeding
-echo "🌱 [4/5] Checking Container Health & Database State..."
-echo "Waiting 10 seconds for API and DB boot sequence..."
-sleep 10 
-
-# Run database schema migrations
-echo "⚙️ Running database schema migrations..."
-docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" python fix_db_schema.py
-
-# Run product seeding
-echo "🍎 Seeding products table..."
-docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" python seed_products.py
-
-# Check for the marker file to prevent duplicate seeding
-if ! docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" test -f /app/.seeded_marker 2>/dev/null; then
-    echo "🌱 Seeding initial database structure..."
-    docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" python seed_content.py
-    docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" exec -T "$API_SERVICE" touch /app/.seeded_marker
-else
-    echo "⏭️ Idempotency Check: Seed state already present. Skipping."
+# [HOTFIX] Clear stale PostgreSQL PID files only if DB is not running
+if ! docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" ps | grep -q "prod-db.*Up"; then
+    echo "🧹 Clearing stale PostgreSQL locks..."
+    docker run --rm -v "$DB_VOLUME":/var/lib/postgresql/data alpine rm -f /var/lib/postgresql/data/postmaster.pid 2>/dev/null || true
 fi
+
+# Bring up the services (Docker will hot-swap the changed API/Web containers)
+docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" up -d
 
 # 5. Permission Reset Trap Fix
 echo "🔐 [5/5] Reclaiming volume ownership for cPanel user..."
