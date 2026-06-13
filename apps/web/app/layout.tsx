@@ -49,12 +49,25 @@ export default function RootLayout({
             <head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link
-                    rel="stylesheet"
-                    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap"
-                    media="print"
-                    onLoad="this.media='all'"
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            (function() {
+                                var link = document.createElement('link');
+                                link.rel = 'stylesheet';
+                                link.href = 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap';
+                                link.media = 'all';
+                                document.head.appendChild(link);
+                            })();
+                        `
+                    }}
                 />
+                <noscript>
+                    <link
+                        rel="stylesheet"
+                        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&display=swap"
+                    />
+                </noscript>
                 {/* Global GA/GTM queueing stub to capture events before scripts load */}
                 <script
                     dangerouslySetInnerHTML={{
