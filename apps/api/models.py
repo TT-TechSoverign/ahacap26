@@ -114,6 +114,11 @@ class Equipment(Base):
     serial_number = Column(String, nullable=True)
     install_date = Column(DateTime, nullable=True)
     warranty_expiration = Column(DateTime, nullable=True)
+    name = Column(String, nullable=True)
+    type = Column(String, nullable=True)
+    location = Column(String, nullable=True)
+    service_date = Column(DateTime, nullable=True)
+    photo_url = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 class VendorInvoice(Base):
