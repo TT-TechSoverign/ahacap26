@@ -60,6 +60,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                             <Link
                                 key={i}
                                 href={link.href}
+                                prefetch={false}
                                 onClick={() => setIsOpen(false)}
                                 className="text-xl font-header font-black uppercase tracking-widest text-white hover:text-primary transition-all group"
                             >
@@ -68,6 +69,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                         ))}
                         <Link
                             href="/contact"
+                            prefetch={false}
                             onClick={() => setIsOpen(false)}
                             className="text-xl font-header font-black uppercase tracking-widest text-white hover:text-primary transition-all group"
                         >
@@ -85,6 +87,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                                 <Link 
                                     key={city} 
                                     href={`/service-areas/${city.toLowerCase().replace(/ /g, '-')}`} 
+                                    prefetch={false}
                                     onClick={() => setIsOpen(false)}
                                     className="text-slate-400 hover:text-primary transition-colors text-xs flex items-center gap-1.5"
                                 >
@@ -99,11 +102,11 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                 {/* Quick Actions */}
                 <div className="p-6 border-t border-white/5 bg-slate-950/50 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
                     <div className="grid grid-cols-2 gap-4">
-                        <Link href="/contact" onClick={() => setIsOpen(false)} className="bg-white/5 border border-white/10 hover:border-primary/50 p-3 rounded-xl flex flex-col items-center gap-2 group transition-all">
+                        <Link href="/contact" prefetch={false} onClick={() => setIsOpen(false)} className="bg-white/5 border border-white/10 hover:border-primary/50 p-3 rounded-xl flex flex-col items-center gap-2 group transition-all">
                             <Phone className="text-primary size-6 group-hover:scale-110 transition-transform" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-primary">Call Us</span>
                         </Link>
-                        <Link href="/shop" onClick={() => setIsOpen(false)} className="bg-white/5 border border-white/10 hover:border-primary/50 p-3 rounded-xl flex flex-col items-center gap-2 group transition-all">
+                        <Link href="/shop" prefetch={false} onClick={() => setIsOpen(false)} className="bg-white/5 border border-white/10 hover:border-primary/50 p-3 rounded-xl flex flex-col items-center gap-2 group transition-all">
                             <Store className="text-primary size-6 group-hover:scale-110 transition-transform" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-primary">Shop</span>
                         </Link>

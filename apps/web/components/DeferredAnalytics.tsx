@@ -71,8 +71,8 @@ export default function DeferredAnalytics() {
         window.addEventListener('touchstart', loadAnalytics, { passive: true });
         window.addEventListener('keydown', loadAnalytics, { passive: true });
 
-        // Fallback timeout to load analytics after 3.5 seconds if no interaction
-        const timeoutId = setTimeout(loadAnalytics, 3500);
+        // Fallback timeout to load analytics after 10 seconds if no interaction
+        const timeoutId = setTimeout(loadAnalytics, 10000);
 
         return () => {
             clearTimeout(timeoutId);

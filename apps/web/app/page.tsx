@@ -22,6 +22,7 @@ export default function Homepage() {
                     sizes="(max-width: 768px) 250px, 100vw"
                     className="object-cover object-center translate-y-[-10%] scale-110" // Slight shift to align visually
                     priority
+                    quality={65}
                 />
                 <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-20" />
                 {/* Secondary subtle blur & darkening */}
