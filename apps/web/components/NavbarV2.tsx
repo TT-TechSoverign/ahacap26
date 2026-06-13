@@ -10,6 +10,7 @@ import { useCart } from '../context/CartContext';
 import { useContent } from '../lib/context/ContentContext';
 import { EditableText } from './EditableText';
 import PromoStickyBar from './PromoStickyBar';
+import { Menu, X, ShoppingCart } from 'lucide-react';
 
 export default function NavbarV2() {
     const pathname = usePathname();
@@ -73,10 +74,13 @@ export default function NavbarV2() {
                                 <button
                                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                                     className="text-white hover:text-cyan-400 transition-colors p-2"
+                                    aria-label="Toggle Menu"
                                 >
-                                    <span className="material-symbols-outlined text-3xl">
-                                        {mobileMenuOpen ? 'close' : 'menu'}
-                                    </span>
+                                    {mobileMenuOpen ? (
+                                        <X className="size-8" />
+                                    ) : (
+                                        <Menu className="size-8" />
+                                    )}
                                 </button>
                             </div>
 
@@ -135,8 +139,9 @@ export default function NavbarV2() {
                                 <button
                                     onClick={openCart}
                                     className="text-white hover:text-cyan-400 transition-colors p-2 relative"
+                                    aria-label="Open Cart"
                                 >
-                                    <span className="material-symbols-outlined text-3xl">shopping_cart</span>
+                                    <ShoppingCart className="size-8" />
                                     {items.length > 0 && (
                                         <span className={cn(
                                             "absolute top-0 right-0 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
@@ -196,8 +201,8 @@ export default function NavbarV2() {
                                     aria-label="Open Cart"
                                 >
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-300 group-hover:text-cyan-400 hidden lg:block">Cart</span>
-                                    <div className="relative">
-                                        <span className="material-symbols-outlined text-2xl text-white group-hover:text-cyan-400 transition-colors">shopping_cart</span>
+                                    <div className="relative flex items-center">
+                                        <ShoppingCart className="size-6 text-white group-hover:text-cyan-400 transition-colors" />
                                         {items.length > 0 && (
                                             <span className={cn(
                                                 "absolute -top-1 -right-1 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",

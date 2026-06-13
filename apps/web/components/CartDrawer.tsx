@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { isCampaignActive } from '../lib/utils';
+import { ShoppingCart, X, Snowflake, AlertCircle, Warehouse, Trash2, AlertTriangle, Loader2, Lock } from 'lucide-react';
 
 function cn(...inputs: (string | undefined)[]) {
     return twMerge(clsx(inputs));
@@ -99,7 +100,7 @@ export default function CartDrawer() {
                     >
                         <div className="flex items-center justify-between p-6 border-b border-cyan-500/10 bg-slate-900/50 backdrop-blur-xl">
                             <h2 className="text-white text-2xl font-header font-black uppercase tracking-widest flex items-center gap-3 drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">
-                                <span className="material-symbols-outlined text-cyan-400 animate-pulse-slow">shopping_cart</span>
+                                <ShoppingCart className="size-6 text-cyan-400 animate-pulse-slow" />
                                 Cart
                             </h2>
                             <button
@@ -107,7 +108,7 @@ export default function CartDrawer() {
                                 className="size-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-cyan-500/20 text-slate-400 hover:text-cyan-400 transition-all active:scale-90"
                                 aria-label="Close Cart"
                             >
-                                <span className="material-symbols-outlined text-2xl">close</span>
+                                <X className="size-6" />
                             </button>
                         </div>
 
@@ -117,7 +118,7 @@ export default function CartDrawer() {
                             {items.length === 0 && !orderSuccess ? (
                                 <div className="h-full flex flex-col items-center justify-center text-slate-600 space-y-6">
                                     <div className="size-24 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center shadow-inner">
-                                        <span className="material-symbols-outlined text-6xl opacity-20 text-cyan-500">production_quantity_limits</span>
+                                        <ShoppingCart className="size-16 opacity-20 text-cyan-500" />
                                     </div>
                                     <div className="text-center space-y-2">
                                         <p className="font-header font-bold uppercase tracking-[0.2em] text-lg text-slate-400">System Empty</p>
@@ -146,7 +147,7 @@ export default function CartDrawer() {
 
                                             <div className="relative size-20 bg-black/40 rounded-lg flex items-center justify-center text-slate-600 border border-white/5 overflow-hidden">
                                                 {/* Fallback Icon */}
-                                                <span className="material-symbols-outlined text-3xl z-0">ac_unit</span>
+                                                <Snowflake className="size-8 z-0 text-slate-600" />
                                                 {/* Image Support (Future Proofing) */}
                                                 {/* <img src={...} className="absolute inset-0 w-full h-full object-cover z-10" /> */}
                                             </div>
@@ -181,12 +182,12 @@ export default function CartDrawer() {
 
                                                     {item.quantity > (item.stock || 0) ? (
                                                         <span className="text-red-500 font-bold uppercase text-[10px] tracking-wider flex items-center gap-1 animate-pulse">
-                                                            <span className="material-symbols-outlined text-[12px]">error</span>
+                                                            <AlertCircle className="size-3" />
                                                             Sold Out
                                                         </span>
                                                     ) : (
                                                         <span className="text-amber-500/90 font-bold uppercase text-[10px] tracking-wider flex items-center gap-1">
-                                                            <span className="material-symbols-outlined text-[10px]">warehouse</span>
+                                                            <Warehouse className="size-2.5" />
                                                             Pickup
                                                         </span>
                                                     )}
@@ -198,7 +199,7 @@ export default function CartDrawer() {
                                                 className="absolute top-2 right-2 z-20 p-2 text-slate-600 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
                                                 aria-label={`Remove ${item.name}`}
                                             >
-                                                <span className="material-symbols-outlined text-lg">delete</span>
+                                                <Trash2 className="size-4" />
                                             </button>
                                         </motion.div>
                                     ))}
@@ -239,7 +240,7 @@ export default function CartDrawer() {
                                         >
                                             <div className="absolute inset-0 bg-red-500/5 animate-pulse"></div>
                                             <div className="flex items-start gap-3 relative z-10">
-                                                <span className="material-symbols-outlined text-red-500 animate-bounce">report_problem</span>
+                                                <AlertTriangle className="size-5 text-red-500 animate-bounce" />
                                                 <div className="space-y-1">
                                                     <p className="text-red-400 font-black uppercase text-[10px] tracking-[0.2em]">Action Required</p>
                                                     <p className="text-slate-300 text-xs font-bold leading-relaxed">
@@ -262,22 +263,22 @@ export default function CartDrawer() {
                                         className={`w-full h-16 text-white font-header font-black uppercase tracking-[0.25em] text-sm rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed ${hasIssue ? 'bg-slate-800 cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-primary to-cyan-500 shadow-[0_0_30px_rgba(0,174,239,0.3)]'}`}
                                     >
                                         {loading ? (
-                                            <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                                            <Loader2 className="size-5 animate-spin" />
                                         ) : hasIssue ? (
                                             <>
                                                 <span className="text-slate-500">Inventory Locked</span>
-                                                <span className="material-symbols-outlined text-xl text-slate-600">lock</span>
+                                                <Lock className="size-5 text-slate-600" />
                                             </>
                                         ) : (
                                             <>
                                                 <span>Secure Checkout</span>
-                                                <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">lock</span>
+                                                <Lock className="size-5 group-hover:translate-x-1 transition-transform" />
                                             </>
                                         )}
                                     </button>
 
                                     <div className="flex items-center justify-center gap-2 text-slate-600">
-                                        <span className="material-symbols-outlined text-sm">lock</span>
+                                        <Lock className="size-3.5 inline-block" />
                                         <span className="text-[10px] font-mono uppercase tracking-widest">256-bit TLS Encryption via Stripe</span>
                                     </div>
                                 </div>

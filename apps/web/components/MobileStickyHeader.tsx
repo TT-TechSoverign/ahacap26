@@ -9,6 +9,7 @@ import { useCart } from '../context/CartContext';
 import MobileDrawerMenu from './MobileDrawerMenu';
 import PromoStickyBar from './PromoStickyBar';
 import { cn, isCampaignActive } from '@/lib/utils';
+import { Menu, X, ShoppingCart } from 'lucide-react';
 
 export default function MobileStickyHeader() {
     const pathname = usePathname();
@@ -48,9 +49,11 @@ export default function MobileStickyHeader() {
                                 onClick={handleToggleMenu}
                                 className="text-white hover:text-primary transition-colors py-2 pr-4 pl-0"
                             >
-                                <span className="material-symbols-outlined text-3xl">
-                                    {mobileMenuOpen ? 'close' : 'menu'}
-                                </span>
+                                {mobileMenuOpen ? (
+                                    <X className="size-8" />
+                                ) : (
+                                    <Menu className="size-8" />
+                                )}
                             </button>
                         </div>
 
@@ -73,7 +76,7 @@ export default function MobileStickyHeader() {
                                 onClick={handleOpenCart}
                                 className="text-white hover:text-primary transition-colors py-2 pl-4 pr-0 relative"
                             >
-                                <span className="material-symbols-outlined text-3xl">shopping_cart</span>
+                                <ShoppingCart className="size-8" />
                                 {items.length > 0 && (
                                     <span className={cn(
                                         "absolute top-1 right-0 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { sendGAEvent } from '@next/third-parties/google';
+import { Phone, Calendar } from 'lucide-react';
 
 export default function MobileStickyBottomBar() {
     const pathname = usePathname();
@@ -40,7 +41,7 @@ export default function MobileStickyBottomBar() {
                             onClick={() => sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Call' })}
                             className="ctm-track-number flex-1 bg-slate-800 hover:bg-slate-700 text-white font-black uppercase tracking-widest text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors border border-slate-700"
                         >
-                            <span className="material-symbols-outlined text-lg text-primary">call</span>
+                            <Phone className="size-4 text-primary" />
                             Call Now
                         </a>
                         
@@ -50,7 +51,7 @@ export default function MobileStickyBottomBar() {
                             onClick={() => sendGAEvent('event', 'click_to_book', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Book' })}
                             className="flex-1 bg-primary hover:bg-cyan-300 text-slate-900 font-black uppercase tracking-widest text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors btn-promo-glow btn-shimmer"
                         >
-                            <span className="material-symbols-outlined text-lg">calendar_month</span>
+                            <Calendar className="size-4" />
                             Book Online
                         </Link>
                     </div>

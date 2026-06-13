@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContent } from '../lib/context/ContentContext';
+import { X, Phone, Store } from 'lucide-react';
 
 export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val: boolean) => void }) {
     const { content } = useContent();
@@ -50,7 +51,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                     >
                         <div className="flex justify-end p-4 border-b border-white/5 pt-[max(env(safe-area-inset-top,1rem),1rem)]">
                             <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white p-2">
-                                <span className="material-symbols-outlined text-3xl">close</span>
+                                <X className="size-8" />
                             </button>
                         </div>
 
@@ -102,11 +103,11 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                         <div className="p-6 border-t border-white/5 bg-slate-950/50 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
                             <div className="grid grid-cols-2 gap-4">
                                 <Link href="/contact" onClick={() => setIsOpen(false)} className="bg-white/5 border border-white/10 hover:border-primary/50 p-3 rounded-xl flex flex-col items-center gap-2 group transition-all">
-                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">call</span>
+                                    <Phone className="text-primary size-6 group-hover:scale-110 transition-transform" />
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-primary">Call Us</span>
                                 </Link>
                                 <Link href="/shop" onClick={() => setIsOpen(false)} className="bg-white/5 border border-white/10 hover:border-primary/50 p-3 rounded-xl flex flex-col items-center gap-2 group transition-all">
-                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">storefront</span>
+                                    <Store className="text-primary size-6 group-hover:scale-110 transition-transform" />
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-primary">Shop</span>
                                 </Link>
                             </div>

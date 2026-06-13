@@ -226,6 +226,7 @@ export default function AdminPage() {
     if (!isAuthenticated) {
         return (
             <div className="min-h-screen bg-black text-white font-sans selection:bg-primary/30 flex items-center justify-center">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
                 {/* Navbar Removed for Clean Login */}
 
                 <div className="container mx-auto px-6 flex flex-col items-center justify-center">
@@ -272,6 +273,7 @@ export default function AdminPage() {
 
     return (
         <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[140px] md:pt-[165px]">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
             {/* Admin Header - Fixed below global Navbar */}
             <motion.header
                 initial={{ y: 0 }}

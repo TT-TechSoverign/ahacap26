@@ -13,6 +13,7 @@ export default function MaintenancePage() {
 
     return (
         <div className="bg-navy-deep text-slate-100 selection:bg-primary selection:text-white min-h-screen font-sans">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
             {/* Header */}
             <header className="fixed top-9 w-full z-50 glass-header">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">

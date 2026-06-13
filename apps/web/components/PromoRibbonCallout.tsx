@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { isCampaignActive } from '../lib/utils';
+import { Snowflake } from 'lucide-react';
 
 const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className, style }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string; style?: React.CSSProperties }) => (
     <div 
@@ -231,9 +232,7 @@ export default function PromoRibbonCallout() {
                 {/* Dynamic Icon Shroud: Spins on Hover */}
                 <div className="size-10 rounded-xl bg-gradient-to-br from-red-600 via-slate-900 to-blue-600 flex items-center justify-center text-white shrink-0 shadow-lg border border-white/10 overflow-hidden relative group/icon">
                     <div className={`absolute inset-0 bg-black/20 opacity-0 group-hover/icon:opacity-100 transition-opacity pointer-events-none`} />
-                    <span className={`material-symbols-outlined text-lg ${isHovered ? 'fan-spin-fast text-cyan-400' : 'animate-pulse-slow'}`}>
-                        ac_unit
-                    </span>
+                    <Snowflake className={`size-5 ${isHovered ? 'fan-spin-fast text-cyan-400' : 'animate-pulse-slow'}`} />
                 </div>
                 <div>
                     <h4 className="text-sm md:text-base font-header font-black uppercase tracking-wider text-white">

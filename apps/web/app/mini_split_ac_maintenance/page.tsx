@@ -13,6 +13,7 @@ export default function MiniSplitACMaintenancePage() {
 
     return (
         <div className="bg-background-dark min-h-screen text-white font-sans">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
             {/* Adjusted padding to match shop page logic more closely and scaled down container */}
             <div className="pt-[140px] md:pt-[165px] lg:pt-[175px] max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
                 <div className="text-center mb-10 border-b border-white/5 pb-6">

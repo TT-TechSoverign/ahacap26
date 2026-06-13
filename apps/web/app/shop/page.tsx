@@ -178,6 +178,7 @@ export default function ShopPage() {
 
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
 
             <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[140px] md:pt-[165px] pb-20 flex-grow">
                 {/* Hero Branding Section (Centered Vertical Axis) */}

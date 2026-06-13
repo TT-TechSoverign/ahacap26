@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { ArrowUp } from 'lucide-react';
 
 interface BackToTopProps {
     visible: boolean;
@@ -55,9 +56,7 @@ export function BackToTop({ visible }: BackToTopProps) {
                     <div className="absolute inset-0 bg-primary/20 animate-pulse opacity-50"></div>
 
                     {/* Industrial Icon */}
-                    <span className="material-symbols-outlined text-2xl md:text-3xl relative z-10 font-bold group-hover:-translate-y-1 transition-transform">
-                        vertical_align_top
-                    </span>
+                    <ArrowUp className="size-6 md:size-8 relative z-10 font-bold group-hover:-translate-y-1 transition-transform" />
 
                     {/* Glass Reflection */}
                     <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>

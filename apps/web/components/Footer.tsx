@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useContent } from '@/lib/context/ContentContext';
 import { TrackedPhoneLink } from './TrackedPhoneLink';
+import { MapPin, Phone, Mail, CheckCircle2, Shield } from 'lucide-react';
 
 export default function Footer() {
     const pathname = usePathname();
@@ -181,7 +182,7 @@ export default function Footer() {
                         <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Contact</h3>
                         <ul className="space-y-6 w-full">
                             <li className="flex gap-4 justify-center md:justify-start text-left">
-                                <span className="material-symbols-outlined text-primary mt-1 shrink-0">location_on</span>
+                                <MapPin className="text-primary size-5 mt-1 shrink-0" />
                                 <div>
                                     <div className="text-white font-bold text-sm uppercase">Shop Location</div>
                                     <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" rel="noopener noreferrer" className="text-slate-400 text-sm hover:text-white transition-colors block">
@@ -191,14 +192,14 @@ export default function Footer() {
                                 </div>
                             </li>
                             <li className="flex gap-4 justify-center md:justify-start text-left">
-                                <span className="material-symbols-outlined text-primary mt-1 shrink-0">call</span>
+                                <Phone className="text-primary size-5 mt-1 shrink-0" />
                                 <div>
                                     <div className="text-white font-bold text-sm uppercase">Phone</div>
                                     <TrackedPhoneLink phone="808-488-1111" display="(808) 488-1111" className="text-slate-400 text-sm hover:text-white transition-colors" />
                                 </div>
                             </li>
                             <li className="flex gap-4 justify-center md:justify-start text-left">
-                                <span className="material-symbols-outlined text-primary mt-1 shrink-0">mail</span>
+                                <Mail className="text-primary size-5 mt-1 shrink-0" />
                                 <div>
                                     <div className="text-white font-bold text-sm uppercase">Email</div>
                                     <a href="mailto:office@affordablehome-ac.com" className="text-slate-400 text-sm hover:text-white transition-colors">office@affordablehome-ac.com</a>
@@ -216,11 +217,11 @@ export default function Footer() {
                     </p>
                     <div className="flex flex-col md:flex-row items-center gap-6">
                         <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
-                            <span className="material-symbols-outlined text-sm text-primary">verified</span>
+                            <CheckCircle2 className="size-4 text-primary" />
                             LIC# CT-36775
                         </span>
                         <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
-                            <span className="material-symbols-outlined text-sm text-primary">shield</span>
+                            <Shield className="size-4 text-primary" />
                             Licensed | Insured | Bonded
                         </span>
                     </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { Tag, Calendar, CreditCard } from 'lucide-react';
 
 const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className, style }: { color: string; duration: string; isHovered: boolean; sizeClass?: string; className: string; style?: React.CSSProperties }) => (
     <div 
@@ -30,11 +31,16 @@ const Star3D = ({ color, duration, isHovered, sizeClass = "size-5", className, s
 interface BentoSubCardProps {
     title: string;
     description: string;
-    icon: string;
+    icon: 'local_offer' | 'calendar_today' | 'payments';
     themeColor: 'red' | 'white' | 'blue';
 }
 
 function BentoSubCard({ title, description, icon, themeColor }: BentoSubCardProps) {
+    const IconComponent = {
+        local_offer: Tag,
+        calendar_today: Calendar,
+        payments: CreditCard,
+    }[icon] || Tag;
     const cardRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -267,7 +273,7 @@ function BentoSubCard({ title, description, icon, themeColor }: BentoSubCardProp
                 }}
             >
                 <div className={`size-8 rounded-lg ${themeStyles.iconBg} flex items-center justify-center mb-3 shadow-inner`}>
-                    <span className="material-symbols-outlined text-lg">{icon}</span>
+                    <IconComponent className="size-5" />
                 </div>
                 <h4 className="text-xs font-black uppercase tracking-wider text-slate-200 mb-1">{title}</h4>
                 <p className="text-[11px] text-slate-400 leading-relaxed font-medium">{description}</p>

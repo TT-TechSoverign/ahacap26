@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 interface Particle {
     id: number;
@@ -230,7 +231,7 @@ export default function FourthOfJulyBanner() {
                         {/* Shimmer light bar */}
                         <div className="absolute inset-0 bg-white/20 -skew-x-12 translate-x-[-150%] group-hover/btn:translate-x-[150%] transition-transform duration-1000"></div>
                         Shop Sale Units
-                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                        <ArrowRight className="size-4" />
                     </Link>
                 </div>
 
