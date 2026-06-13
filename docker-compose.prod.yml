@@ -54,6 +54,8 @@ services:
       - GA4_API_SECRET=${GA4_API_SECRET}
       - FRONTEND_INTERNAL_URL=http://prod-web:3000
       - PROMO_ENABLED=False
+      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_PIN=${ADMIN_PIN}
     volumes:
       - ./apps/api/content:/app/content
     command: >

@@ -3,17 +3,27 @@ import { NextRequest, NextResponse } from 'next/server';
 const API_INTERNAL_URL = process.env.API_INTERNAL_URL || 'http://localhost:8000'; // Default to localhost if internal not set
 
 // Common function for fetching from FastAPI
-async function proxyToApi(path: string, method: string, body?: any) {
+async function proxyToApi(req: NextRequest, path: string, method: string, body?: any) {
     const url = `${API_INTERNAL_URL}/api/v1/content${path}`;
     console.log(`[Puck Proxy] ${method} ${url}`);
 
-    // Pass draft/publish params
+    const authHeader = req.headers.get('Authorization');
+    const adminSessionCookie = req.cookies.get('admin_session')?.value;
+
+    const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+    };
+
+    if (authHeader) {
+        headers['Authorization'] = authHeader;
+    } else if (adminSessionCookie) {
+        headers['Authorization'] = adminSessionCookie.startsWith('Bearer ') ? adminSessionCookie : `Bearer ${adminSessionCookie}`;
+    }
+
     try {
         const res = await fetch(url, {
             method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers,
             body: body ? JSON.stringify(body) : undefined,
             cache: 'no-store'
         });
@@ -52,7 +62,7 @@ export async function GET(req: NextRequest) {
     const draft = req.nextUrl.searchParams.get('draft') === 'true';
     const query = draft ? '?draft=true' : '';
 
-    return proxyToApi(`${path}${query}`, 'GET');
+    return proxyToApi(req, `${path}${query}`, 'GET');
 }
 
 export async function POST(req: NextRequest) {
@@ -62,12 +72,12 @@ export async function POST(req: NextRequest) {
     // Standard Puck `onPublish` (data) => void.
     // We will wrap it to send path.
 
-    return proxyToApi(path, 'POST', { data });
+    return proxyToApi(req, path, 'POST', { data });
 }
 
 export async function PUT(req: NextRequest) {
     const body = await req.json();
     const { path } = body;
     // For manual "Publish" action
-    return proxyToApi(`${path}/publish`, 'PUT');
+    return proxyToApi(req, `${path}/publish`, 'PUT');
 }

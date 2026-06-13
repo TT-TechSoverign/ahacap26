@@ -182,3 +182,11 @@ async def backfill_historical_orders(
         "updated_rows": count,
         "errors": errors
     }
+
+@router.get("/verify")
+async def verify_admin_get():
+    return {"status": "authorized"}
+
+@router.post("/verify")
+async def verify_admin_post():
+    return {"status": "authorized"}

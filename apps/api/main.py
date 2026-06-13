@@ -37,7 +37,7 @@ import asyncio
 from database import engine, Base, AsyncSessionLocal
 import models
 from services import email as email_service
-from cache import init_redis, close_redis
+from cache import init_redis, close_redis, check_rate_limit
 from middleware import LogSanitizerMiddleware, ChaosMiddleware, HeaderMiddleware
 from routers import catalog, payments
 
@@ -73,6 +73,16 @@ async def global_exception_handler(request: Request, exc: Exception):
     error_msg = str(exc)
     tb = traceback.format_exc()
     print(f"GLOBAL ERROR: {error_msg}\n{tb}")
+    
+    # Hide details in production/staging environments
+    database_url = os.getenv("DATABASE_URL", "")
+    is_prod_or_staging = "db:" in database_url or "staging-db:" in database_url or "prod-db:" in database_url
+    
+    if is_prod_or_staging:
+        return JSONResponse(
+            status_code=500,
+            content={"message": "Internal Server Error"}
+        )
     return JSONResponse(
         status_code=500,
         content={"message": "Internal Server Error", "detail": error_msg, "traceback": tb}
@@ -86,7 +96,9 @@ app.add_middleware(
         "http://staging.affordablehome-ac.com",  # Staging frontend
         "https://staging.affordablehome-ac.com", # Staging frontend HTTPS
         "http://affordablehome-ac.com",          # Live frontend
-        "https://affordablehome-ac.com"          # Live frontend HTTPS
+        "https://affordablehome-ac.com",         # Live frontend HTTPS
+        "http://www.affordablehome-ac.com",      # Live frontend WWW
+        "https://www.affordablehome-ac.com"      # Live frontend WWW HTTPS
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
@@ -451,7 +463,11 @@ async def seed_products_endpoint(background_tasks: BackgroundTasks, force: bool 
     return {"status": "seeding_started", "force": force}
 
 @app.post("/api/v1/admin/login")
-async def admin_login(payload: dict):
+async def admin_login(payload: dict, request: Request):
+    ip = request.client.host if request.client else "unknown"
+    if not await check_rate_limit(ip, "admin_login", limit=5, period=300):
+        raise HTTPException(status_code=429, detail="Too many attempts. Please try again later.")
+
     pin = payload.get("pin")
     if not pin:
         raise HTTPException(status_code=400, detail="Missing PIN")

@@ -4,14 +4,12 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 
-// PIN 8081 (Abstracted)
-const MASTER_PIN = '8081';
-
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [pin, setPin] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
         // Check session storage on mount
@@ -22,16 +20,39 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
         setLoading(false);
     }, []);
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
+        setSubmitting(true);
 
-        if (pin === MASTER_PIN) {
-            sessionStorage.setItem('puck_auth', 'true');
-            setIsAuthenticated(true);
-        } else {
-            setError('INVALID ACCESS CODE');
-            // Shake effect or visual feedback could be added here
+        try {
+            const res = await fetch('/api/v1/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pin })
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                if (data.token) {
+                    sessionStorage.setItem('admin_token', data.token);
+                    sessionStorage.setItem('puck_auth', 'true');
+                    document.cookie = `admin_session=${encodeURIComponent(data.token)}; path=/; max-age=86400; SameSite=Strict${window.location.protocol === 'https:' ? '; Secure' : ''}`;
+                }
+                setIsAuthenticated(true);
+            } else {
+                if (res.status === 429) {
+                    setError('TOO MANY LOGIN ATTEMPTS. PLEASE TRY AGAIN LATER.');
+                } else {
+                    setError('INVALID ACCESS CODE');
+                }
+                setPin('');
+            }
+        } catch (err) {
+            setError('CONNECTION ERROR');
+            setPin('');
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -60,6 +81,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                                 onChange={(e) => setPin(e.target.value)}
                                 className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 text-white text-center text-2xl tracking-[0.5em] py-4 rounded-lg outline-none transition-all placeholder:tracking-normal placeholder:text-slate-700 font-mono"
                                 maxLength={4}
+                                disabled={submitting}
                                 autoFocus
                             />
                         </div>
@@ -70,8 +92,8 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                             </div>
                         )}
 
-                        <Button type="submit" className="w-full h-12 bg-blue-600 hover:bg-blue-500 text-white hover:scale-[1.02] transition-all uppercase font-bold tracking-widest text-sm">
-                            Authenticate
+                        <Button type="submit" disabled={submitting} className="w-full h-12 bg-blue-600 hover:bg-blue-500 text-white hover:scale-[1.02] transition-all uppercase font-bold tracking-widest text-sm">
+                            {submitting ? 'Authenticating...' : 'Authenticate'}
                         </Button>
                     </form>
 
