@@ -8,6 +8,7 @@ const nextConfig = {
         cpus: 1,
         workerThreads: false,
         memoryBasedWorkersCount: true,
+        optimizeCss: true,
     },
     reactStrictMode: true,
     typescript: {
