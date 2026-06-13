@@ -1,5 +1,5 @@
 from database import AsyncSessionLocal
-from typing import AsyncGenerator
+from typing import AsyncGenerator, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 import hmac
 import hashlib
