@@ -31,9 +31,9 @@ const config: Config = {
                 cyan: "#00AEEF",
             },
             fontFamily: {
-                "display": ["var(--font-inter)", "sans-serif"],
-                "header": ["var(--font-oswald)", "sans-serif"],
-                "sans": ["var(--font-inter)", "sans-serif"], // Default fallback
+                "display": ["Inter", "sans-serif"],
+                "header": ["Oswald", "sans-serif"],
+                "sans": ["Inter", "sans-serif"], // Default fallback
             },
             borderRadius: {
                 "DEFAULT": "0.25rem",
