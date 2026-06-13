@@ -7,7 +7,15 @@ import os
 import time
 from fastapi import Request, HTTPException, status
 
-SECRET_KEY = os.getenv("JWT_SECRET", "super-secret-key-change-me")
+SECRET_KEY = os.getenv("JWT_SECRET")
+database_url = os.getenv("DATABASE_URL", "")
+is_prod_or_staging = "db:" in database_url or "staging-db:" in database_url or "prod-db:" in database_url
+
+if not SECRET_KEY:
+    if is_prod_or_staging:
+        raise RuntimeError("CRITICAL STARTUP ERROR: JWT_SECRET environment variable is missing on staging/production!")
+    else:
+        SECRET_KEY = "super-secret-key-change-me"
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     async with AsyncSessionLocal() as session:
@@ -19,26 +27,30 @@ def create_signed_token(data: str) -> str:
     signature = hmac.new(SECRET_KEY.encode(), payload.encode(), hashlib.sha256).hexdigest()
     return f"{payload}.{signature}"
 
-def verify_signed_token(token: str) -> bool:
+def decode_signed_token_role(token: str) -> Optional[str]:
     try:
         if not token:
-            return False
+            return None
         parts = token.rsplit(".", 1)
         if len(parts) != 2:
-            return False
+            return None
         payload, signature = parts
         expected_signature = hmac.new(SECRET_KEY.encode(), payload.encode(), hashlib.sha256).hexdigest()
         if not hmac.compare_digest(signature, expected_signature):
-            return False
+            return None
         
         # Check expiry
         data, expiry_str = payload.rsplit(":", 1)
         expiry = int(expiry_str)
         if time.time() > expiry:
-            return False
-        return True
+            return None
+        return data  # Returns "admin", "khon2", etc.
     except Exception:
-        return False
+        return None
+
+def verify_signed_token(token: str) -> bool:
+    role = decode_signed_token_role(token)
+    return role is not None
 
 async def verify_admin_token(request: Request):
     auth_header = request.headers.get("Authorization")
@@ -51,9 +63,34 @@ async def verify_admin_token(request: Request):
         if token and token.startswith("Bearer "):
             token = token.split(" ")[1]
             
-    if not token or not verify_signed_token(token):
+    if not token or decode_signed_token_role(token) != "admin":
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Unauthorized access"
         )
     return True
+
+async def verify_khon2_or_admin_token(request: Request):
+    auth_header = request.headers.get("Authorization")
+    token = None
+    if auth_header and auth_header.startswith("Bearer "):
+        token = auth_header.split(" ")[1]
+    
+    if not token:
+        token = request.cookies.get("admin_session")
+        if token and token.startswith("Bearer "):
+            token = token.split(" ")[1]
+            
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Unauthorized access: missing token"
+        )
+        
+    role = decode_signed_token_role(token)
+    if role not in ("admin", "khon2"):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Unauthorized access: invalid token"
+        )
+    return role

@@ -16,14 +16,48 @@ export default function KHON2SEOPortal() {
     const [csvData, setCsvData] = useState<{ filename: string, data: any[] }[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const checkAuth = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (passwordInput === KHON2_PASSWORD) {
+    useEffect(() => {
+        const token = sessionStorage.getItem('khon2_token');
+        if (token) {
             setIsAuthenticated(true);
-            setError("");
             loadData();
         } else {
-            setError("Invalid Access Code. Access Denied.");
+            setIsLoading(false);
+        }
+    }, []);
+
+    const checkAuth = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError("");
+        setIsLoading(true);
+
+        try {
+            const res = await fetch('/api/v1/khon2-portal/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: passwordInput })
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                if (data.token) {
+                    sessionStorage.setItem('khon2_token', data.token);
+                    document.cookie = `admin_session=${encodeURIComponent(data.token)}; path=/; max-age=86400; SameSite=Strict${window.location.protocol === 'https:' ? '; Secure' : ''}`;
+                }
+                setIsAuthenticated(true);
+                setError("");
+                setTimeout(() => loadData(), 50);
+            } else {
+                if (res.status === 429) {
+                    setError("Too many login attempts. Please try again later.");
+                } else {
+                    setError("Invalid Access Code. Access Denied.");
+                }
+            }
+        } catch (err) {
+            setError("Connection Error. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -33,7 +67,12 @@ export default function KHON2SEOPortal() {
             // 1. Fetch the absolute latest global drafts from the remote server
             let globalDrafts: { filename: string, data: any[] }[] = [];
             try {
-                const draftRes = await fetch('/api/v1/khon2-portal/drafts');
+                const token = sessionStorage.getItem('khon2_token');
+                const draftRes = await fetch('/api/v1/khon2-portal/drafts', {
+                    headers: {
+                        ...(token ? { 'Authorization': token } : {})
+                    }
+                });
                 if (draftRes.ok) {
                     const json = await draftRes.json();
                     if (json.data && Array.isArray(json.data)) {
@@ -114,9 +153,13 @@ export default function KHON2SEOPortal() {
     const saveProgress = async () => {
         setIsSaving(true);
         try {
+            const token = sessionStorage.getItem('khon2_token');
             const res = await fetch('/api/v1/khon2-portal/save', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': token } : {})
+                },
                 body: JSON.stringify({ data: csvData })
             });
 

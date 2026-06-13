@@ -5,10 +5,11 @@ from sqlalchemy import Column, String, Integer, JSON
 from pydantic import BaseModel
 from typing import Dict, Any, List
 from database import get_db, Base
+from dependencies import verify_admin_token
 import models # We need to add Snippet model to models.py first, but can define here for speed if circular import avoided
 # Better to put model in models.py. I will create migration script first.
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(verify_admin_token)])
 
 class SnippetPayload(BaseModel):
     name: str

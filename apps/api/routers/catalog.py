@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Request
 from fastapi.encoders import jsonable_encoder
 import schemas
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional, List
 from dependencies import get_db, verify_admin_token
 from domain import catalog
+from cache import check_rate_limit
 import json
 import os
 
@@ -91,6 +92,7 @@ async def get_product(
 
 @router.post("/validate", response_model=schemas.InventoryValidationResponse)
 async def validate_inventory(
+    request: Request,
     validation_request: schemas.InventoryValidationRequest,
     db: AsyncSession = Depends(get_db)
 ):
@@ -98,6 +100,11 @@ async def validate_inventory(
     Validates multiple products' inventory and returns canonical pricing.
     Bypasses caching to ensure real-time accuracy.
     """
+    ip = request.client.host if request.client else "unknown"
+    if not await check_rate_limit(ip, "inventory_validate", limit=60, period=60):
+        from fastapi import HTTPException
+        raise HTTPException(status_code=429, detail="Too many validation requests. Please try again later.")
+
     items_data = [item.dict() for item in validation_request.items]
     return await catalog.validate_inventory_service(db, items_data)
 

@@ -4,7 +4,7 @@ from typing import List, Dict, Any
 import json
 import os
 import logging
-from dependencies import verify_admin_token
+from dependencies import verify_khon2_or_admin_token
 
 router = APIRouter()
 logger = logging.getLogger("khon2")
@@ -18,7 +18,7 @@ class Khon2DraftPayload(BaseModel):
     # [{filename: string, data: any[]}]
     data: List[Dict[str, Any]]
 
-@router.get("/drafts")
+@router.get("/drafts", dependencies=[Depends(verify_khon2_or_admin_token)])
 async def get_khon2_drafts():
     """
     Returns the current state of the globally saved KHON2 drafts.
@@ -34,7 +34,7 @@ async def get_khon2_drafts():
         logger.error(f"Failed to read KHON2 drafts: {e}")
         return {"data": []}
 
-@router.post("/save", dependencies=[Depends(verify_admin_token)])
+@router.post("/save", dependencies=[Depends(verify_khon2_or_admin_token)])
 async def save_khon2_drafts(payload: Khon2DraftPayload):
     """
     Saves the entire KHON2 portal state to a persistent JSON file.

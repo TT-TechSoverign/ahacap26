@@ -56,6 +56,7 @@ services:
       - PROMO_ENABLED=False
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_PIN=${ADMIN_PIN}
+      - KHON2_PORTAL_PASSWORD=${KHON2_PORTAL_PASSWORD}
     volumes:
       - ./apps/api/content:/app/content
     command: >

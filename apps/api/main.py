@@ -477,12 +477,16 @@ async def admin_login(payload: dict, request: Request):
     from dependencies import create_signed_token
     signed_token = create_signed_token("admin")
     response = JSONResponse(content={"token": f"Bearer {signed_token}"})
+    database_url = os.getenv("DATABASE_URL", "")
+    is_prod_or_staging = "db:" in database_url or "staging-db:" in database_url or "prod-db:" in database_url
+    
     response.set_cookie(
         key="admin_session",
         value=f"Bearer {signed_token}",
         httponly=True,
         samesite="strict",
-        secure=True,
+        secure=is_prod_or_staging,
+        path="/",
         max_age=86400
     )
     return response
@@ -491,6 +495,39 @@ async def admin_login(payload: dict, request: Request):
 async def admin_logout():
     response = JSONResponse(content={"status": "success"})
     response.delete_cookie("admin_session")
+    return response
+
+@app.post("/api/v1/khon2-portal/login")
+async def khon2_login(payload: dict, request: Request):
+    ip = request.client.host if request.client else "unknown"
+    if not await check_rate_limit(ip, "khon2_login", limit=5, period=300):
+        raise HTTPException(status_code=429, detail="Too many attempts. Please try again later.")
+
+    password = payload.get("password")
+    if not password:
+        raise HTTPException(status_code=400, detail="Missing password")
+        
+    expected_password = os.getenv("KHON2_PORTAL_PASSWORD", "KHON2X7V9K2PQ8A4")
+    if password != expected_password:
+        raise HTTPException(status_code=401, detail="Invalid password")
+        
+    from dependencies import create_signed_token
+    signed_token = create_signed_token("khon2")
+    
+    response = JSONResponse(content={"token": f"Bearer {signed_token}"})
+    
+    database_url = os.getenv("DATABASE_URL", "")
+    is_prod_or_staging = "db:" in database_url or "staging-db:" in database_url or "prod-db:" in database_url
+    
+    response.set_cookie(
+        key="admin_session",
+        value=f"Bearer {signed_token}",
+        httponly=True,
+        samesite="strict",
+        secure=is_prod_or_staging,
+        path="/",
+        max_age=86400
+    )
     return response
 
 @app.get("/api/v1/health")
