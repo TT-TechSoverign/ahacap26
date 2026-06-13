@@ -130,8 +130,6 @@ export default function PromoRibbonCallout() {
         } as any);
     };
 
-    if (!mounted) return null;
-
     if (!isCampaignActive()) return null;
 
     return (
@@ -250,7 +248,7 @@ export default function PromoRibbonCallout() {
                 }}
             >
                 {/* Live Countdown */}
-                <div className="flex items-center gap-2 bg-slate-950 border border-white/10 px-3 py-1.5 rounded-full text-[10px] font-mono font-black text-cyan-400 shadow-inner">
+                <div className="flex items-center gap-2 bg-slate-950 border border-white/10 px-3 py-1.5 rounded-full text-[10px] font-mono font-black text-cyan-400 shadow-inner" suppressHydrationWarning>
                     <span className="text-slate-500 text-[8px] uppercase tracking-widest">Ends In:</span>
                     <span>{timeLeft.days}D</span>
                     <span>:</span>

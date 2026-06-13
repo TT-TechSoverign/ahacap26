@@ -152,7 +152,7 @@ export default function PromoHeroShowcase() {
         } as any);
     };
 
-    if (!mounted || !isCampaignActive) return null;
+    if (!isCampaignActiveState) return null;
 
     return (
         <div className="w-full max-w-5xl mx-auto px-4 py-6">
@@ -302,7 +302,7 @@ export default function PromoHeroShowcase() {
 
                             <div className="flex flex-col">
                                 <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Offer expires in:</span>
-                                <div className="flex items-center gap-2 mt-1">
+                                <div className="flex items-center gap-2 mt-1" suppressHydrationWarning>
                                     <div className="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1 min-w-[36px] text-center">
                                         <span className="text-sm font-bold text-white block">{String(countdown.days).padStart(2, '0')}</span>
                                         <span className="text-[9px] text-slate-400 uppercase tracking-tight block">Days</span>

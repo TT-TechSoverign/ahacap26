@@ -310,8 +310,6 @@ export default function PromoBentoCard() {
         return () => clearInterval(timer);
     }, []);
 
-    if (!mounted) return null;
-
     if (!isCampaignActive()) return null;
 
     return (
@@ -335,7 +333,7 @@ export default function PromoBentoCard() {
                 {/* Live Countdown */}
                 <div className="flex items-center gap-2 bg-slate-950 border border-white/10 px-3 py-1.5 rounded-xl shadow-inner">
                     <span className="text-[9px] font-black uppercase text-slate-500 tracking-wider">Ends In:</span>
-                    <div className="flex items-center gap-1.5 font-mono text-[11px] md:text-xs font-black text-cyan-400">
+                    <div className="flex items-center gap-1.5 font-mono text-[11px] md:text-xs font-black text-cyan-400" suppressHydrationWarning>
                         <span>{timeLeft.days}d</span>
                         <span>:</span>
                         <span>{timeLeft.hours.toString().padStart(2, '0')}h</span>

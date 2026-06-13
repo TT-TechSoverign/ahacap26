@@ -131,8 +131,6 @@ export default function FourthOfJulyBanner() {
         });
     };
 
-    if (!mounted) return null;
-
     if (!isCampaignActive()) return null;
 
     return (
@@ -218,7 +216,7 @@ export default function FourthOfJulyBanner() {
                         ].map((t, idx) => (
                             <div key={idx} className="bg-slate-900/90 border border-white/5 p-3 rounded-2xl min-w-[70px] md:min-w-[85px] shadow-xl relative overflow-hidden group/card">
                                 <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-red-500 to-blue-500 opacity-30 group-hover/card:opacity-100 transition-opacity"></div>
-                                <span className="block text-2xl md:text-3xl font-header font-black text-white">{t.val.toString().padStart(2, '0')}</span>
+                                <span className="block text-2xl md:text-3xl font-header font-black text-white" suppressHydrationWarning>{t.val.toString().padStart(2, '0')}</span>
                                 <span className="block text-[8px] md:text-[9px] font-black uppercase tracking-widest text-slate-500 mt-1">{t.label}</span>
                             </div>
                         ))}
