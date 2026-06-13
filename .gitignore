@@ -53,3 +53,4 @@ scripts/
 *.py
 !apps/api/**/*.py
 !*.sh
+*.tsbuildinfo
