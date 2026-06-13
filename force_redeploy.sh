@@ -26,7 +26,7 @@ if [ "$USAGE" -gt "$THRESHOLD" ]; then
     echo "⚠️  Disk usage is HIGH ($USAGE%). Initiating CLEAN RELEASE Protocol..."
     
     echo "🛑 [1.1] Stopping Containers to Release Locks..."
-    docker compose down
+    docker compose -f docker-compose.staging.yml -p ahac_staging down
     
     echo "🧹 [1.2] Pruning ALL Images & Build Cache (Protecting Volumes)..."
     # -a: All unused images
@@ -57,14 +57,14 @@ chmod -R 777 apps/web/storage
 echo "🏗️  [4/6] Building & Starting Containers..."
 # --build: Always force build to pick up new code
 # -d: Detached mode
-docker compose up -d --build
+docker compose -f docker-compose.staging.yml -p ahac_staging up -d --build
 
 echo "⏳ [5/6] Waiting for API Healthcheck..."
 # Wait for API to be ready before seeding
 # Simple retry loop
 MAX_RETRIES=30
 COUNT=0
-URL="http://localhost:8000/api/v1/health"
+URL="http://localhost:8002/api/v1/health"
 
 while [ $COUNT -lt $MAX_RETRIES ]; do
     if curl -s "$URL" | grep -q "ok"; then
@@ -77,14 +77,14 @@ while [ $COUNT -lt $MAX_RETRIES ]; do
 done
 
 if [ $COUNT -eq $MAX_RETRIES ]; then
-    echo "❌ API failed to start in time. Check logs: docker compose logs api"
+    echo "❌ API failed to start in time. Check logs: docker compose -f docker-compose.staging.yml -p ahac_staging logs staging-api"
     exit 1
 fi
 
 echo "🌱 [6/6] Seeding Product & Content Data..."
 # Run the seeders inside the container
-docker compose exec api python seed_products.py
-docker compose exec api python seed_content.py
+docker compose -f docker-compose.staging.yml -p ahac_staging exec -T staging-api python seed_products.py
+docker compose -f docker-compose.staging.yml -p ahac_staging exec -T staging-api python seed_content.py
 
 echo "🎉 DEPLOYMENT COMPLETE & VERIFIED!"
 echo "   - Code Updated"

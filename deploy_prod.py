@@ -47,10 +47,7 @@ update_env_file(".env")
 update_env_file("apps/api/.env")
 
 print("3. Triggering Application Restart...")
-os.makedirs("tmp", exist_ok=True)
-with open("tmp/restart.txt", "w") as f:
-    f.write("restart")
-print("   Created tmp/restart.txt")
+run_command("docker compose -f docker-compose.prod.yml up -d --build --no-deps prod-api")
 
 print("--- Deployment Complete! ---")
 print("The server should now be handling webhooks correctly.")
