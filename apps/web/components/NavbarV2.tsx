@@ -109,7 +109,7 @@ export default function NavbarV2() {
                                         alt="AHAC Logo"
                                         fill
                                         className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
-                                        priority
+                                        unoptimized
                                     />
                                 </Link>
                             </div>

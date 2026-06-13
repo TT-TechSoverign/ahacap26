@@ -48,6 +48,7 @@ export default function MobileStickyBottomBar() {
                         {/* Book Online */}
                         <Link 
                             href="/contact"
+                            prefetch={false}
                             onClick={() => sendGAEvent('event', 'click_to_book', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Book' })}
                             className="flex-1 bg-primary hover:bg-cyan-300 text-slate-900 font-black uppercase tracking-widest text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors btn-promo-glow btn-shimmer"
                         >

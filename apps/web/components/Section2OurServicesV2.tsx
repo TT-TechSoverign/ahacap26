@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import contentData from '../lib/content/content.json';
 import { cn } from '@/lib/utils';
 
@@ -77,6 +78,7 @@ export default function Section2OurServicesV2() {
             <MotionLink
                 key={service.id}
                 href={service.link}
+                prefetch={false}
                 whileHover={{ y: -6, scale: 1.015 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={(e) => {
@@ -97,7 +99,7 @@ export default function Section2OurServicesV2() {
                         src={service.cleanImage}
                         alt={service.defaultTitle}
                         fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        sizes="(max-width: 768px) 250px, 50vw"
                         className="object-cover object-center opacity-80 group-hover:opacity-60 md:group-hover:blur-[2px] transition-all duration-700"
                     />
                     {/* Primary Dark Blue Overlay (Fixed 20%) */}
@@ -148,7 +150,7 @@ export default function Section2OurServicesV2() {
                             )}
                         >
                             <span>Learn More</span>
-                            <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform inline-block" />
                         </div>
                     </div>
                 </div>

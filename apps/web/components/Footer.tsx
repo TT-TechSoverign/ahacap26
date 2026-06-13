@@ -94,7 +94,7 @@ export default function Footer() {
 
                         {/* Line 3: CTA Button (Replaces old date range) */}
                         <div className="pt-2 w-full flex justify-center">
-                            <Link href="/contact" className="group">
+                            <Link href="/contact" className="group" prefetch={false}>
                                 <div className="bg-white/5 backdrop-blur-md border border-white/10 px-8 py-2 rounded-full group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
                                     <p className="text-white font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs group-hover:text-primary transition-colors">CONTACT US TO SET APPOINTMENT</p>
                                 </div>
@@ -112,6 +112,7 @@ export default function Footer() {
                                 alt="Affordable Home A/C"
                                 fill
                                 className="object-contain"
+                                unoptimized
                             />
                         </div>
                         <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
@@ -130,7 +131,7 @@ export default function Footer() {
                                 { text: 'Window AC Cleaning', href: '/window_ac_maintenance' }
                             ].map((item) => (
                                 <li key={item.text}>
-                                    <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
+                                    <Link href={item.href} prefetch={false} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
                                         <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
                                         {item.text}
                                     </Link>
@@ -153,7 +154,7 @@ export default function Footer() {
                                 { text: 'Contact Us', href: '/contact' }
                             ].map((item) => (
                                 <li key={item.text}>
-                                    <Link href={item.href} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
+                                    <Link href={item.href} prefetch={false} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
                                         <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors"></span>
                                         {item.text}
                                     </Link>
@@ -168,7 +169,7 @@ export default function Footer() {
                         <ul className="grid grid-cols-2 gap-x-4 gap-y-3 w-full">
                             {serviceAreas.map((city) => (
                                 <li key={city}>
-                                    <Link href={`/service-areas/${city.toLowerCase().replace(/ /g, '-')}`} className="text-slate-400 hover:text-primary transition-colors text-xs flex items-center justify-center md:justify-start gap-1.5 group">
+                                    <Link href={`/service-areas/${city.toLowerCase().replace(/ /g, '-')}`} prefetch={false} className="text-slate-400 hover:text-primary transition-colors text-xs flex items-center justify-center md:justify-start gap-1.5 group">
                                         <span className="w-1 h-1 rounded-full bg-primary/50 group-hover:bg-primary transition-colors shrink-0"></span>
                                         <span className="truncate">{city}</span>
                                     </Link>

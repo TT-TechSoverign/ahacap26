@@ -81,6 +81,7 @@ export function Warehouse({
                             alt="Waipahu Shop Location"
                             fill
                             className="object-contain p-4 transition-all duration-1000"
+                            unoptimized
                         />
 
                         <div className="absolute bottom-8 left-8 right-8 max-w-md mx-auto">

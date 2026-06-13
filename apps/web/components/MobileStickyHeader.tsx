@@ -48,6 +48,7 @@ export default function MobileStickyHeader() {
                             <button
                                 onClick={handleToggleMenu}
                                 className="text-white hover:text-primary transition-colors py-2 pr-4 pl-0"
+                                aria-label="Toggle Menu"
                             >
                                 {mobileMenuOpen ? (
                                     <X className="size-8" />
@@ -65,7 +66,7 @@ export default function MobileStickyHeader() {
                                     alt="AHAC Logo"
                                     fill
                                     className="object-contain"
-                                    priority
+                                    unoptimized
                                 />
                             </Link>
                         </div>
@@ -75,6 +76,7 @@ export default function MobileStickyHeader() {
                             <button
                                 onClick={handleOpenCart}
                                 className="text-white hover:text-primary transition-colors py-2 pl-4 pr-0 relative"
+                                aria-label="Open Cart"
                             >
                                 <ShoppingCart className="size-8" />
                                 {items.length > 0 && (

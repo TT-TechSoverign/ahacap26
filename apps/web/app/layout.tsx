@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Oswald } from 'next/font/google';
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
-import Script from 'next/script';
 import TickerWrapper from '../components/TickerWrapper';
 import CartDrawer from '../components/CartDrawer';
 import { CartProvider } from '../context/CartContext';
@@ -12,6 +10,7 @@ import MobileStickyHeader from '../components/MobileStickyHeader';
 import MobileStickyBottomBar from '../components/MobileStickyBottomBar';
 import PromoStickyBar from '../components/PromoStickyBar';
 import PatrioticBackgroundGlow from '../components/PatrioticBackgroundGlow';
+import DeferredAnalytics from '../components/DeferredAnalytics';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -49,14 +48,18 @@ export default function RootLayout({
     return (
         <html lang="en" className="dark">
             <head>
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link rel="preconnect" href="https://558690.tctm.co" />
-
+                {/* Global GA/GTM queueing stub to capture events before scripts load */}
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            window.gtag = window.gtag || function() { window.dataLayer.push(arguments); };
+                        `
+                    }}
+                />
             </head>
             <body className={`${inter.variable} ${oswald.variable} font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white`}>
-                <GoogleTagManager gtmId="GTM-KTZ58FJX" />
-                <GoogleAnalytics gaId="G-MYJZTZFXQV" />
+                <DeferredAnalytics />
                 {/* <TickerWrapper /> */}
                 <script
                     type="application/ld+json"

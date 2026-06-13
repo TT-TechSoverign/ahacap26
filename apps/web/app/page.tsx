@@ -19,7 +19,7 @@ export default function Homepage() {
                     src="/assets/hero-cards/ahac-hero-background-2.webp"
                     alt="Expert HVAC Installation by Affordable Home A/C"
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 768px) 250px, 100vw"
                     className="object-cover object-center translate-y-[-10%] scale-110" // Slight shift to align visually
                     priority
                 />
