@@ -73,9 +73,15 @@ body {
 }
 
 .animate-patriotic-glow {
-    animation: waving-patriotic-glow 6s linear infinite;
     border-width: 1px;
     border-style: solid;
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+@media (min-width: 1024px) {
+    .animate-patriotic-glow {
+        animation: waving-patriotic-glow 6s linear infinite;
+    }
 }
 
 @keyframes waving-patriotic-glow-hover {
@@ -107,7 +113,12 @@ body.promo-active .navbar-promo-accent {
     height: 3px;
     background: linear-gradient(90deg, #ef4444, #ffffff, #3b82f6, #ef4444);
     background-size: 300% 100%;
-    animation: shifting-neon-stripe 4s linear infinite;
+}
+
+@media (min-width: 1024px) {
+    body.promo-active .navbar-promo-accent {
+        animation: shifting-neon-stripe 4s linear infinite;
+    }
 }
 
 @keyframes shifting-neon-stripe {
@@ -127,7 +138,13 @@ body.promo-active .logo-promo-glow::after {
     filter: blur(8px);
     z-index: -1;
     border-radius: 50%;
-    animation: logo-breath-glow 4s ease-in-out infinite alternate;
+    opacity: 0.6;
+}
+
+@media (min-width: 1024px) {
+    body.promo-active .logo-promo-glow::after {
+        animation: logo-breath-glow 4s ease-in-out infinite alternate;
+    }
 }
 
 @keyframes logo-breath-glow {
@@ -162,9 +179,15 @@ body.promo-active .btn-promo-glow::before {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-    animation: shifting-neon-stripe 4s linear infinite;
     border-radius: inherit;
 }
+
+@media (min-width: 1024px) {
+    body.promo-active .btn-promo-glow::before {
+        animation: shifting-neon-stripe 4s linear infinite;
+    }
+}
+
 body.promo-active .btn-promo-glow:hover {
     box-shadow: 0 0 15px rgba(59, 130, 246, 0.4), 0 0 5px rgba(239, 68, 68, 0.4);
 }
@@ -178,7 +201,7 @@ body.promo-active .btn-promo-glow:hover {
     content: '';
     position: absolute;
     top: -50%;
-    left: -60%;
+    left: 0;
     width: 30%;
     height: 200%;
     background: linear-gradient(
@@ -189,14 +212,19 @@ body.promo-active .btn-promo-glow:hover {
         rgba(255, 255, 255, 0.13) 70%,
         rgba(255, 255, 255, 0) 100%
     );
-    transform: rotate(30deg);
+    transform: rotate(30deg) translateX(-200%);
     pointer-events: none;
-    animation: glass-shimmer 6s ease-in-out infinite;
+}
+
+@media (min-width: 1024px) {
+    .btn-shimmer::after {
+        animation: glass-shimmer 6s ease-in-out infinite;
+    }
 }
 
 @keyframes glass-shimmer {
-    0% { left: -60%; }
-    15%, 100% { left: 160%; }
+    0% { transform: rotate(30deg) translateX(-200%); }
+    15%, 100% { transform: rotate(30deg) translateX(500%); }
 }
 
 /* 5. Metallic Chrome Heading Shimmer */
@@ -215,7 +243,12 @@ body.promo-active .chrome-heading-shimmer {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    animation: chrome-shine 5s linear infinite;
+}
+
+@media (min-width: 1024px) {
+    body.promo-active .chrome-heading-shimmer {
+        animation: chrome-shine 5s linear infinite;
+    }
 }
 
 @keyframes chrome-shine {

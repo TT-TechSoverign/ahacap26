@@ -44,6 +44,9 @@ from routers import catalog, payments
 # --- LIFESPAN ---
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Dispose the inherited engine connection pool from parent process fork
+    # to ensure each worker process initializes its own fresh pool.
+    await engine.dispose()
     await init_redis()
     # 0. Verify SMTP (Defensive)
     try:
