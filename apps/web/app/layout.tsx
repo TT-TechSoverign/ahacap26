@@ -1,17 +1,19 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Oswald } from 'next/font/google';
 import TickerWrapper from '../components/TickerWrapper';
-import CartDrawer from '../components/CartDrawer';
 import { CartProvider } from '../context/CartContext';
 import { ContentProvider } from '../lib/context/ContentContext';
 import Footer from '../components/Footer';
 import NavbarV2 from '../components/NavbarV2';
 import MobileStickyHeader from '../components/MobileStickyHeader';
-import MobileStickyBottomBar from '../components/MobileStickyBottomBar';
 import PromoStickyBar from '../components/PromoStickyBar';
-import PatrioticBackgroundGlow from '../components/PatrioticBackgroundGlow';
 import DeferredAnalytics from '../components/DeferredAnalytics';
 import './globals.css';
+import dynamic from 'next/dynamic';
+
+const CartDrawer = dynamic(() => import('../components/CartDrawer'), { ssr: false });
+const MobileStickyBottomBar = dynamic(() => import('../components/MobileStickyBottomBar'), { ssr: false });
+const PatrioticBackgroundGlow = dynamic(() => import('../components/PatrioticBackgroundGlow'), { ssr: false });
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald', display: 'swap' });

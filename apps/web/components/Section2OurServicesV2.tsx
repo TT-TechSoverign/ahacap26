@@ -3,12 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import contentData from '../lib/content/content.json';
 import { cn } from '@/lib/utils';
-
-const MotionLink = motion(Link);
 
 export default function Section2OurServicesV2() {
     const [expandedCard, setExpandedCard] = useState<string | null>(null);
@@ -75,18 +72,16 @@ export default function Section2OurServicesV2() {
     const renderCard = (service: typeof services[0]) => {
         const isExpanded = expandedCard === service.id;
         return (
-            <MotionLink
+            <Link
                 key={service.id}
                 href={service.link}
                 prefetch={false}
-                whileHover={{ y: -6, scale: 1.015 }}
-                whileTap={{ scale: 0.98 }}
                 onClick={(e) => {
                     e.stopPropagation();
                     handleCardClick(e, service.id);
                 }}
                 className={cn(
-                    "block relative group h-[280px] md:h-[400px] overflow-hidden rounded-2xl border transition-all duration-500",
+                    "block relative group h-[280px] md:h-[400px] overflow-hidden rounded-2xl border transition-all duration-500 transform hover:-translate-y-1.5 hover:scale-[1.015] active:scale-[0.98]",
                     isExpanded
                         ? "border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.2)]"
                         : "border-white/20 shadow-2xl",
@@ -154,7 +149,7 @@ export default function Section2OurServicesV2() {
                         </div>
                     </div>
                 </div>
-            </MotionLink>
+            </Link>
         );
     };
 

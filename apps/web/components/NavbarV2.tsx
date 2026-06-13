@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { cn, isCampaignActive } from '@/lib/utils';
 import { useCart } from '../context/CartContext';
 import { useContent } from '../lib/context/ContentContext';
@@ -20,7 +19,6 @@ export default function NavbarV2() {
     const { content } = useContent();
 
     // --- Sticky-Free Navigation Logic ---
-    const { scrollY } = useScroll();
     const [headerVisible, setHeaderVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -37,27 +35,29 @@ export default function NavbarV2() {
         };
     }, [mobileMenuOpen]);
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        const direction = latest > lastScrollY ? "down" : "up";
-        if (latest > 50 && direction === "down" && headerVisible && !mobileMenuOpen) {
-            setHeaderVisible(false);
-        } else if (direction === "up" && !headerVisible) {
-            setHeaderVisible(true);
-        }
-        setLastScrollY(latest);
-    });
+    useEffect(() => {
+        const handleScroll = () => {
+            const latest = window.scrollY;
+            const direction = latest > lastScrollY ? "down" : "up";
+            if (latest > 50 && direction === "down" && headerVisible && !mobileMenuOpen) {
+                setHeaderVisible(false);
+            } else if (direction === "up" && !headerVisible) {
+                setHeaderVisible(true);
+            }
+            setLastScrollY(latest);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollY, headerVisible, mobileMenuOpen]);
 
     const links = content?.navigation?.links || [];
 
     return (
-        <motion.header
-            initial={{ y: 0 }}
-            animate={{ y: (headerVisible || mobileMenuOpen) ? 0 : -400 }}
-            transition={{
-                type: "spring",
-                stiffness: 150,
-                damping: 25,
-                delay: (headerVisible || mobileMenuOpen) ? 0.1 : 0
+        <header
+            style={{
+                transform: (headerVisible || mobileMenuOpen) ? 'translateY(0)' : 'translateY(-400px)',
+                transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                transitionDelay: (headerVisible || mobileMenuOpen) ? '0.1s' : '0s'
             }}
             className="fixed top-0 w-full z-50 hidden md:flex flex-col pointer-events-none"
         >
@@ -224,7 +224,6 @@ export default function NavbarV2() {
                 <PromoStickyBar />
                 <div className="navbar-promo-accent w-full" />
             </div>
-
-        </motion.header>
+        </header>
     );
 }

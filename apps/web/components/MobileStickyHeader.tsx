@@ -2,9 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import MobileDrawerMenu from './MobileDrawerMenu';
 import PromoStickyBar from './PromoStickyBar';
@@ -16,14 +15,18 @@ export default function MobileStickyHeader() {
     if (pathname && pathname.startsWith('/checkout')) return null;
 
     const { items, openCart, isOpen: isCartOpen, closeCart } = useCart();
-    const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        if (latest > 50 && !isScrolled) setIsScrolled(true);
-        if (latest <= 50 && isScrolled) setIsScrolled(false);
-    });
+    useEffect(() => {
+        const handleScroll = () => {
+            const latest = window.scrollY;
+            if (latest > 50 && !isScrolled) setIsScrolled(true);
+            if (latest <= 50 && isScrolled) setIsScrolled(false);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isScrolled]);
 
     const handleOpenCart = () => {
         if (mobileMenuOpen) setMobileMenuOpen(false); // Mutual Exclusion
