@@ -47,7 +47,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                 )}
             >
                 <div className="flex justify-end p-4 border-b border-white/5 pt-[max(env(safe-area-inset-top,1rem),1rem)]">
-                    <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white p-2">
+                    <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white p-2" aria-label="Close menu">
                         <X className="size-8" />
                     </button>
                 </div>
