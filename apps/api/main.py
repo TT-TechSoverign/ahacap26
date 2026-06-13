@@ -111,10 +111,10 @@ app.add_middleware(HeaderMiddleware)
 # --- ROUTERS ---
 app.include_router(catalog.router, prefix="/api/v1/products", tags=["Catalog"])
 app.include_router(payments.router, prefix="/api/v1/payments", tags=["Payments"])
-from routers import content
-app.include_router(content.router, prefix="/api/v1/content", tags=["Content"])
 from routers import snippets
 app.include_router(snippets.router, prefix="/api/v1/content/snippets", tags=["Snippets"])
+from routers import content
+app.include_router(content.router, prefix="/api/v1/content", tags=["Content"])
 
 from routers import khon2
 app.include_router(khon2.router, prefix="/api/v1/khon2-portal", tags=["KHON2 Portal"])
