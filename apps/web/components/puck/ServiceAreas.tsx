@@ -1,4 +1,21 @@
 import { cn } from '@/lib/utils';
+import { Map, Building2, Sun, Wind, AlertTriangle } from 'lucide-react';
+
+const LucideIconMap: Record<string, React.ComponentType<any>> = {
+    Map,
+    Building2,
+    Sun,
+    Wind,
+};
+
+function DynamicIcon({ name, className }: { name: string; className?: string }) {
+    const IconComponent = LucideIconMap[name];
+    if (!IconComponent) {
+        console.warn(`Icon ${name} not found in LucideIconMap`);
+        return <AlertTriangle className={className} />;
+    }
+    return <IconComponent className={className} />;
+}
 import Link from 'next/link';
 import type { ServiceAreasProps } from '@/types/puck';
 
@@ -61,10 +78,10 @@ export function ServiceAreas({
                                     "mb-8 flex items-center justify-center gap-4 transition-transform duration-500 group-hover:scale-105",
                                     region.id === 'central' || region.id === 'leeward' ? "text-primary" : "text-accent"
                                 )}>
-                                    <span className={cn(
-                                        "material-symbols-outlined text-4xl",
+                                    <DynamicIcon name={region.icon || 'Map'} className={cn(
+                                        "size-9",
                                         region.id === 'central' || region.id === 'leeward' ? "drop-shadow-[0_0_10px_rgba(0,174,239,0.5)]" : "drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]"
-                                    )}>{region.icon}</span>
+                                    )} />
                                     <h3 className="text-2xl font-header font-black text-white uppercase tracking-wider transition-colors">
                                         {region.title}
                                     </h3>

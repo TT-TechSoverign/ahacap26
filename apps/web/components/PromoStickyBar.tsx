@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { X } from 'lucide-react';
 
 import { isCampaignActive } from '../lib/utils';
 
@@ -108,7 +109,7 @@ export default function PromoStickyBar() {
                     className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-white transition-colors duration-200"
                     title="Dismiss alert"
                 >
-                    <span className="material-symbols-outlined text-base md:text-lg">close</span>
+                    <X className="size-4 md:size-4.5" />
                 </button>
             </Link>
         </div>

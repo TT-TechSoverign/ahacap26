@@ -23,6 +23,7 @@ async def test_realistic_email():
     # Real Product Data from seed
     items = [
         {
+            "product_id": 1,
             "description": "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
             "quantity": 1,
             "amount_total": 62500,  # $625.00

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { MapPin, Navigation, Map } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import type { WarehouseProps } from '@/types/puck';
@@ -47,7 +48,7 @@ export function Warehouse({
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="flex items-start gap-4 p-8 rounded-2xl bg-white/[0.02] border border-white/5 group hover:border-primary/30 transition-all duration-500">
                             <div className="bg-primary/20 p-4 rounded-xl text-primary group-hover:scale-110 transition-transform">
-                                <span className="material-symbols-outlined text-3xl">location_on</span>
+                                <MapPin className="size-8" />
                             </div>
                             <div>
                                 <h4 className="text-white font-bold uppercase tracking-wider mb-2">
@@ -61,7 +62,7 @@ export function Warehouse({
 
                         <div className="flex items-start gap-4 p-8 rounded-2xl bg-white/[0.02] border border-white/5 group hover:border-accent/30 transition-all duration-500">
                             <div className="bg-accent/20 p-4 rounded-xl text-accent group-hover:scale-110 transition-transform">
-                                <span className="material-symbols-outlined text-3xl">directions</span>
+                                <Navigation className="size-8" />
                             </div>
                             <div className="flex-1">
                                 <h4 className="text-white font-bold uppercase tracking-wider mb-2">
@@ -92,7 +93,7 @@ export function Warehouse({
                                 className="block w-full"
                             >
                                 <Button className="w-full h-14 bg-white text-background-dark hover:bg-primary hover:text-white uppercase font-black tracking-[0.2em] shadow-2xl transition-all duration-300">
-                                    <span className="material-symbols-outlined mr-3">map</span>
+                                    <Map className="mr-3 size-5" />
                                     {ctaText}
                                 </Button>
                             </Link>

@@ -7,13 +7,40 @@ import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
 import PromoHeroShowcase from '@/components/PromoHeroShowcase';
+import { 
+    Calendar, ShieldCheck, Leaf, CloudLightning, Gauge, HeartPulse, Sparkles, Wrench, 
+    Waves, Shield, Thermometer, MapPin, Navigation, BookOpen, FileWarning, PhoneCall, Rocket,
+    AlertTriangle 
+} from 'lucide-react';
+
+const LucideIconMap: Record<string, React.ComponentType<any>> = {
+    eco: Leaf,
+    thunderstorm: CloudLightning,
+    speed: Gauge,
+    medical_services: HeartPulse,
+    settings_suggest: Wrench,
+    waves: Waves,
+    shield: Shield,
+    thermostat: Thermometer,
+    menu_book: BookOpen,
+    policy: FileWarning,
+    support_agent: PhoneCall,
+};
+
+function DynamicIcon({ name, className }: { name: string; className?: string }) {
+    const IconComponent = LucideIconMap[name];
+    if (!IconComponent) {
+        console.warn(`Icon ${name} not found in LucideIconMap`);
+        return <AlertTriangle className={className} />;
+    }
+    return <IconComponent className={className} />;
+}
 
 export default function MaintenancePage() {
     const { content } = useContent();
 
     return (
         <div className="bg-navy-deep text-slate-100 selection:bg-primary selection:text-white min-h-screen font-sans">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
             {/* Header */}
             <header className="fixed top-9 w-full z-50 glass-header">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -62,7 +89,7 @@ export default function MaintenancePage() {
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <button className="bg-primary text-navy-deep px-8 py-4 rounded font-bold tracking-widest hover:bg-accent transition-all uppercase flex items-center justify-center gap-2">
-                                    <span className="material-symbols-outlined">calendar_today</span>
+                                    <Calendar className="size-5" />
                                     <EditableText contentKey="maintenance.hero.cta_schedule" />
                                 </button>
                                 <button className="border border-white/20 text-white px-8 py-4 rounded font-bold tracking-widest hover:bg-white/10 transition-all uppercase">
@@ -89,11 +116,11 @@ export default function MaintenancePage() {
                                 </div>
                                 <div className="space-y-4">
                                     <div className="flex items-center gap-3 text-sm text-slate-300">
-                                        <span className="material-symbols-outlined text-accent">verified</span>
+                                        <ShieldCheck className="size-4.5 text-accent" />
                                         <span><EditableText contentKey="maintenance.technician.cert1" /></span>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm text-slate-300">
-                                        <span className="material-symbols-outlined text-accent">verified</span>
+                                        <ShieldCheck className="size-4.5 text-accent" />
                                         <span><EditableText contentKey="maintenance.technician.cert2" /></span>
                                     </div>
                                     <p className="italic text-slate-400 text-sm"><EditableText contentKey="maintenance.technician.quote" /></p>
@@ -127,7 +154,7 @@ export default function MaintenancePage() {
                                 { icon: "medical_services", title: "HYGIENIC AIR", sub: "Pathogen Neutralization", color: "text-accent" },
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-4">
-                                    <span className={`material-symbols-outlined text-4xl ${item.color}`}>{item.icon}</span>
+                                    <DynamicIcon name={item.icon} className={`size-9 ${item.color}`} />
                                     <div>
                                         <p className="text-white font-header text-xl">{item.title}</p>
                                         <p className="text-[10px] text-slate-500 uppercase tracking-widest">{item.sub}</p>
@@ -175,7 +202,7 @@ export default function MaintenancePage() {
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                             <div className="md:col-span-2 md:row-span-2 industrial-card rounded-2xl p-8 border-l-4 border-l-primary relative overflow-hidden group bg-[#1a2333]">
                                 <div className="absolute -right-10 -top-10 text-[120px] opacity-5 text-white select-none pointer-events-none font-header">01</div>
-                                <span className="material-symbols-outlined text-5xl text-primary mb-6">sanitizer</span>
+                                <Sparkles className="size-12 text-primary mb-6" />
                                 <h3 className="text-2xl font-bold font-header text-white mb-4"><EditableText contentKey="maintenance.process.step1_title" /></h3>
                                 <p className="text-slate-400 leading-relaxed mb-6"><EditableText contentKey="maintenance.process.step1_description" /></p>
                                 <ul className="space-y-3 text-sm text-slate-300">
@@ -191,7 +218,7 @@ export default function MaintenancePage() {
                                 { title: "DELTA T TESTING", desc: "Digital verification of intake vs. output temps to confirm peak delta performance.", icon: "thermostat", color: "text-primary", border: "border-b-4 border-b-primary" },
                             ].map((step, i) => (
                                 <div key={i} className={`industrial-card rounded-2xl p-6 bg-[#1a2333] ${step.border}`}>
-                                    <span className={`material-symbols-outlined text-3xl mb-4 ${step.color}`}>{step.icon}</span>
+                                    <DynamicIcon name={step.icon} className={`size-8 mb-4 ${step.color}`} />
                                     <h3 className="font-bold font-header text-white mb-2">{step.title}</h3>
                                     <p className="text-xs text-slate-400">{step.desc}</p>
                                 </div>
@@ -253,7 +280,7 @@ export default function MaintenancePage() {
                             <div className="grid grid-cols-2 gap-y-4">
                                 {["HONOLULU", "AIEA", "KANEOHE", "KAPOLEI", "EWA BEACH", "PEARL CITY", "KAILUA", "MILILANI"].map((city) => (
                                     <a key={city} className="text-slate-300 hover:text-primary transition-colors flex items-center gap-2" href="#">
-                                        <span className="material-symbols-outlined text-sm">location_on</span> {city}
+                                        <MapPin className="size-4 text-primary" /> {city}
                                     </a>
                                 ))}
                             </div>
@@ -262,7 +289,7 @@ export default function MaintenancePage() {
                             <div className="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuADp9AwPk9zIh--yIFy3crR9WQdrvevCbG2jAHfVnx7OVhOcERWE-glp_DgktMJ72_fFDgAlQh-JchW1kaIlD4ig7nDNyPDIFE3VjJnjo6ZicLG8rSNH2rDTLyy2MiLxuRO58kzzW_LTOU8YvrdepJt4ZRM0LUYzYvThtAXMvRtXHkDJt3kZAXFTkgKquZ0K3phnkWEsilmK8N69qWMkaOYcWmk_aapyBQJWL69l7NQSvu9-Hukuf-gj4tmfDmYT6JQOZZhibqzx_rM')] bg-cover bg-center"></div>
                             <div className="absolute inset-0 bg-navy-deep/80"></div>
                             <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                                <span className="material-symbols-outlined text-5xl text-primary animate-bounce">location_away</span>
+                                <Navigation className="size-12 text-primary animate-bounce" />
                                 <p className="mt-4 font-bold tracking-widest text-white uppercase">Island-Wide Mobile Units</p>
                             </div>
                         </div>
@@ -280,7 +307,7 @@ export default function MaintenancePage() {
                                 { text: content?.maintenance?.tech_hub?.link3 || "Official Service Manuals & Diagrams", icon: "support_agent" }
                             ].map((item, i) => (
                                 <a key={i} className="industrial-card p-6 rounded-xl flex items-center gap-4 group bg-[#1a2333]" href="#">
-                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">{item.icon}</span>
+                                    <DynamicIcon name={item.icon} className="text-primary group-hover:scale-110 transition-transform size-6" />
                                     <span className="text-sm font-bold tracking-tight text-slate-300 group-hover:text-primary">{item.text}</span>
                                 </a>
                             ))}
@@ -312,7 +339,7 @@ export default function MaintenancePage() {
             <div className="fixed bottom-8 right-8 z-50">
                 <button className="bg-primary text-navy-deep p-4 rounded-full shadow-2xl flex items-center gap-3 font-bold hover:scale-105 transition-all group">
                     <span className="hidden group-hover:inline ml-2 uppercase text-xs tracking-widest"><EditableText contentKey="maintenance.floating_cta" /></span>
-                    <span className="material-symbols-outlined">rocket_launch</span>
+                    <Rocket className="size-6" />
                 </button>
             </div>
         </div>

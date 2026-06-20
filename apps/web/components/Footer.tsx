@@ -9,9 +9,9 @@ import { MapPin, Phone, Mail, CheckCircle2, Shield } from 'lucide-react';
 
 export default function Footer() {
     const pathname = usePathname();
+    const { content } = useContent();
     if (pathname && pathname.startsWith('/checkout')) return null;
 
-    const { content } = useContent();
     const defaults = {
         mini_split_label: "MINI SPLIT AC",
         window_ac_label: "WINDOW AC",

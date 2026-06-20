@@ -9,6 +9,37 @@ import content from '@/lib/content/content.json';
 import { AdminCalendar } from '@/components/AdminCalendar';
 import { useContent } from '@/lib/context/ContentContext';
 import NavbarV2 from '@/components/NavbarV2';
+import { 
+    Lock, 
+    Settings, 
+    Package, 
+    Receipt, 
+    Users, 
+    Calendar, 
+    Plus, 
+    ShoppingBag, 
+    LogOut, 
+    Image as ImageIcon, 
+    Edit, 
+    Trash2, 
+    Eye, 
+    UserCog, 
+    X, 
+    ChevronDown, 
+    User, 
+    Mail, 
+    Phone, 
+    MapPin, 
+    Save, 
+    CheckCircle2 
+} from 'lucide-react';
+
+const TabIconMap = {
+    inventory: Package,
+    orders: Receipt,
+    leads: Users,
+    schedule: Calendar,
+};
 
 interface Product {
     id: number;
@@ -226,7 +257,6 @@ export default function AdminPage() {
     if (!isAuthenticated) {
         return (
             <div className="min-h-screen bg-black text-white font-sans selection:bg-primary/30 flex items-center justify-center">
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
                 {/* Navbar Removed for Clean Login */}
 
                 <div className="container mx-auto px-6 flex flex-col items-center justify-center">
@@ -237,7 +267,7 @@ export default function AdminPage() {
                     >
                         <div className="text-center mb-10">
                             <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-primary/20 shadow-[0_0_20px_rgba(0,174,239,0.15)]">
-                                <span className="material-symbols-outlined text-3xl text-primary">lock</span>
+                                <Lock className="size-8 text-primary" />
                             </div>
                             <h1 className="text-2xl font-header font-black uppercase tracking-tight mb-2 text-white">AHAC Admin</h1>
                             <p className="font-mono text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">Authorized Access Only</p>
@@ -273,7 +303,6 @@ export default function AdminPage() {
 
     return (
         <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[140px] md:pt-[165px]">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
             {/* Admin Header - Fixed below global Navbar */}
             <motion.header
                 initial={{ y: 0 }}
@@ -295,7 +324,7 @@ export default function AdminPage() {
                                     transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
                                     className="size-11 bg-gradient-to-tr from-primary to-[#00f3ff] rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 border border-primary/30"
                                 >
-                                    <span className="material-symbols-outlined text-black font-bold">settings_suggest</span>
+                                    <Settings className="size-5 text-black" strokeWidth={2.5} />
                                 </motion.div>
                                 <div className="absolute inset-0 bg-primary/20 blur-md rounded-xl -z-10 group-hover:bg-primary/40 transition-all duration-300" />
                             </div>
@@ -312,6 +341,7 @@ export default function AdminPage() {
                         <nav className="flex items-center bg-black/50 p-1.5 rounded-xl border border-white/5 relative w-full sm:w-auto justify-center sm:justify-start">
                             {(['inventory', 'orders', 'leads', 'schedule'] as const).map((tab) => {
                                 const isActive = activeTab === tab;
+                                const TabIcon = TabIconMap[tab];
                                 return (
                                     <button
                                         key={tab}
@@ -328,11 +358,7 @@ export default function AdminPage() {
                                                 transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                                             />
                                         )}
-                                        <span className="material-symbols-outlined text-sm">
-                                            {tab === 'inventory' ? 'inventory_2' : 
-                                             tab === 'orders' ? 'receipt_long' : 
-                                             tab === 'leads' ? 'group' : 'calendar_month'}
-                                        </span>
+                                        <TabIcon className="size-4" />
                                         {tab === 'schedule' ? 'Schedule' : content.admin.tabs[tab as keyof typeof content.admin.tabs]}
                                     </button>
                                 );
@@ -345,14 +371,14 @@ export default function AdminPage() {
                                 onClick={() => setIsAdding(true)}
                                 className="bg-white text-black px-6 py-2.5 rounded-lg font-black uppercase text-[10px] tracking-widest hover:bg-primary hover:text-black transition-all flex items-center gap-2 shadow-lg shadow-white/5 hover:shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0"
                             >
-                                <span className="material-symbols-outlined text-sm">add</span> {content.admin.nav.add_product}
+                                <Plus className="size-4" /> {content.admin.nav.add_product}
                             </button>
                         )}
                         <Link 
                             href="/shop" 
                             className="text-slate-300 hover:text-white transition-all text-[10px] font-bold uppercase tracking-widest border border-white/10 px-5 py-2.5 rounded-lg hidden md:flex items-center gap-1.5 bg-white/5 hover:bg-white/10 hover:border-white/20 hover:-translate-y-0.5 active:translate-y-0"
                         >
-                            <span className="material-symbols-outlined text-sm">shopping_bag</span>
+                            <ShoppingBag className="size-4" />
                             {content.admin.nav.view_shop}
                         </Link>
                         <button 
@@ -360,7 +386,7 @@ export default function AdminPage() {
                             className="size-11 flex items-center justify-center rounded-xl border border-red-500/20 text-red-500/60 hover:text-red-500 hover:bg-red-500/10 hover:border-red-500/40 transition-all hover:scale-105 active:scale-95"
                             title="Logout"
                         >
-                            <span className="material-symbols-outlined text-xl">power_settings_new</span>
+                            <LogOut className="size-5" />
                         </button>
                     </div>
                 </div>
@@ -442,7 +468,7 @@ export default function AdminPage() {
                                                                 <Image src={product.image_url} alt={product.name} fill className="object-contain p-2" />
                                                             ) : (
                                                                 <div className="absolute inset-0 flex items-center justify-center text-slate-800">
-                                                                    <span className="material-symbols-outlined text-4xl">image</span>
+                                                                    <ImageIcon className="size-10" />
                                                                 </div>
                                                             )}
                                                         </div>
@@ -466,10 +492,10 @@ export default function AdminPage() {
                                                     <td className="px-8 py-6 text-right">
                                                         <div className="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
                                                             <button onClick={() => setEditingProduct(product)} className="size-10 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-black transition-all flex items-center justify-center">
-                                                                <span className="material-symbols-outlined text-sm">edit</span>
+                                                                <Edit className="size-4" />
                                                             </button>
                                                             <button onClick={() => handleDelete(product.id)} className="size-10 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
-                                                                <span className="material-symbols-outlined text-sm">delete</span>
+                                                                <Trash2 className="size-4" />
                                                             </button>
                                                         </div>
                                                     </td>
@@ -522,7 +548,7 @@ export default function AdminPage() {
                                                     <td className="px-8 py-6 text-right font-header font-bold text-white">${(order.total_cents / 100).toLocaleString()}</td>
                                                     <td className="px-8 py-6 text-right">
                                                         <button onClick={() => setViewingOrder(order)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center ml-auto">
-                                                            <span className="material-symbols-outlined text-sm">visibility</span>
+                                                            <Eye className="size-4" />
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -581,7 +607,7 @@ export default function AdminPage() {
                                                     </td>
                                                     <td className="px-8 py-6 text-right">
                                                         <button onClick={() => setViewingLead(lead)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center ml-auto">
-                                                            <span className="material-symbols-outlined text-sm">manage_accounts</span>
+                                                            <UserCog className="size-4" />
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -672,7 +698,7 @@ function LeadDetailModal({ lead, adminFetch, onClose, onSave }: { lead: Lead, ad
                         <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">Lead ID: {lead.id}</p>
                     </div>
                     <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
-                        <span className="material-symbols-outlined">close</span>
+                        <X className="size-5" />
                     </button>
                 </div>
                 <div className="p-8 flex flex-col gap-8">
@@ -691,7 +717,7 @@ function LeadDetailModal({ lead, adminFetch, onClose, onSave }: { lead: Lead, ad
                                 <option value="COMPLETED">COMPLETED</option>
                                 <option value="ARCHIVED">ARCHIVED</option>
                             </select>
-                            <span className="material-symbols-outlined absolute right-5 top-1/2 -translate-y-1/2 text-primary pointer-events-none">expand_more</span>
+                            <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-primary pointer-events-none size-5" />
                         </div>
                     </div>
 
@@ -700,15 +726,15 @@ function LeadDetailModal({ lead, adminFetch, onClose, onSave }: { lead: Lead, ad
                             <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2 text-center sm:text-left">{content.admin.leads.modal.contact_info}</label>
                             <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-3">
                                 <div className="flex items-center gap-3">
-                                    <span className="material-symbols-outlined text-primary text-lg">person</span>
+                                    <User className="text-primary size-5" />
                                     <span className="text-white font-bold">{lead.first_name} {lead.last_name}</span>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <span className="material-symbols-outlined text-slate-500 text-lg">mail</span>
+                                    <Mail className="text-slate-500 size-5" />
                                     <span className="text-slate-300 text-sm">{lead.email}</span>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <span className="material-symbols-outlined text-slate-500 text-lg">call</span>
+                                    <Phone className="text-slate-500 size-5" />
                                     <span className="text-slate-300 text-sm font-mono">{lead.phone}</span>
                                 </div>
                             </div>
@@ -716,7 +742,7 @@ function LeadDetailModal({ lead, adminFetch, onClose, onSave }: { lead: Lead, ad
                         <div>
                             <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2 text-center sm:text-left">{content.admin.leads.modal.location}</label>
                             <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 flex items-center gap-3 h-[calc(100%-24px)]">
-                                <span className="material-symbols-outlined text-slate-500 text-lg">location_on</span>
+                                <MapPin className="text-slate-500 size-5" />
                                 <span className="text-slate-300 text-sm leading-relaxed">{lead.address}, {lead.city}, {lead.zip}</span>
                             </div>
                         </div>
@@ -789,7 +815,7 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
                         <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">Order ID: {order.id}</p>
                     </div>
                     <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
-                        <span className="material-symbols-outlined">close</span>
+                        <X className="size-5" />
                     </button>
                 </div>
                 <div className="p-8 space-y-8">
@@ -799,16 +825,16 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
                                 <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">Customer Details</label>
                                 <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-3">
                                     <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined text-primary text-lg">person</span>
+                                        <User className="text-primary size-5" />
                                         <span className="text-white font-bold">{order.customer_name || 'Anonymous User'}</span>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <span className="material-symbols-outlined text-slate-500 text-lg">mail</span>
+                                        <Mail className="text-slate-500 size-5" />
                                         <span className="text-slate-300 text-sm">{order.customer_email || 'No email provided'}</span>
                                     </div>
                                     {order.customer_phone && (
                                         <div className="flex items-center gap-3">
-                                            <span className="material-symbols-outlined text-slate-500 text-lg">call</span>
+                                            <Phone className="text-slate-500 size-5" />
                                             <span className="text-slate-300 text-sm font-mono">{order.customer_phone}</span>
                                         </div>
                                     )}
@@ -819,7 +845,7 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
                                 <div>
                                     <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">Shipping / Service Address</label>
                                     <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 flex items-center gap-3">
-                                        <span className="material-symbols-outlined text-slate-500 text-lg">location_on</span>
+                                        <MapPin className="text-slate-500 size-5" />
                                         <div className="text-slate-300 text-sm">
                                             <div>{address.line1} {address.line2}</div>
                                             <div>{address.city}, {address.state} {address.postal_code}</div>
@@ -1050,7 +1076,7 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                         <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">{content.admin.products.modal.subtitle}</p>
                     </div>
                     <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
-                        <span className="material-symbols-outlined">close</span>
+                        <X className="size-5" />
                     </button>
                 </div>
 
@@ -1486,7 +1512,7 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
                             </>
                         ) : (
                             <>
-                                <span className="material-symbols-outlined text-lg">save</span>
+                                <Save className="size-5" />
                                 Save Updates
                             </>
                         )}
@@ -1497,7 +1523,7 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
                             animate={{ opacity: 1, x: 0 }}
                             className="text-emerald-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2"
                         >
-                            <span className="material-symbols-outlined">check_circle</span>
+                            <CheckCircle2 className="size-4" />
                             Schedule Updated
                         </motion.div>
                     )}

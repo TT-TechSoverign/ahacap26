@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
+import { Lock } from 'lucide-react';
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -64,7 +65,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                 <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
                     <div className="text-center mb-8">
                         <div className="inline-block p-3 rounded-full bg-blue-500/10 mb-4">
-                            <span className="material-symbols-outlined text-blue-500 text-3xl">shield_lock</span>
+                            <Lock className="text-blue-500 size-8" />
                         </div>
                         <h1 className="text-2xl font-bold text-white uppercase tracking-wider">Restricted Area</h1>
                         <p className="text-slate-400 text-sm mt-2">AHAC Management Hub</p>

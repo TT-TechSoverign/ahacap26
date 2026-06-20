@@ -214,39 +214,46 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
 
     # Check if there is any promo item in the order
     is_promo = False
-    try:
-        from database import AsyncSessionLocal
-        from sqlalchemy.future import select
-        import models
+    import time
+    import os
+    is_promo_active = (time.time() <= 1785578399) and (os.environ.get("PROMO_ENABLED", "true").lower() == "true")
+    if is_promo_active:
+        try:
+            from database import AsyncSessionLocal
+            from sqlalchemy.future import select
+            import models
 
-        async with AsyncSessionLocal() as session:
-            for item in items:
-                p_id = item.get("product_id")
-                if p_id:
-                    res = await session.execute(select(models.Product).where(models.Product.id == p_id))
-                    prod = res.scalar_one_or_none()
-                    if prod and prod.promo_price is not None and prod.promo_price > 0:
-                        is_promo = True
-                        break
-    except Exception as e:
-        logger.error(f"Error checking promo items in DB: {e}")
+            async with AsyncSessionLocal() as session:
+                for item in items:
+                    p_id = item.get("product_id")
+                    if p_id:
+                        res = await session.execute(select(models.Product).where(models.Product.id == p_id))
+                        prod = res.scalar_one_or_none()
+                        if prod and prod.promo_price is not None and prod.promo_price > 0:
+                            is_promo = True
+                            break
+        except Exception as e:
+            logger.error(f"Error checking promo items in DB: {e}")
 
     calendar_invite_bytes = None
     if fulfillment_mode:
         try:
             dtstamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+            invite_desc = "Celebrating America Promo: To lock in your 10% discount, please schedule your installation window for July and coordinate your down payment with the representative." if is_promo else "Thank you for your order! Please coordinate your pick up or delivery window with our representative."
+            invite_prodid = "-//Affordable Home A/C//Celebrating America Promo//EN" if is_promo else "-//Affordable Home A/C//Order Fulfillment//EN"
+            invite_uid = f"promo_installation_window_2026_{order_id}" if is_promo else f"installation_window_2026_{order_id}"
             invite_content = f"""BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Affordable Home A/C//Celebrating America Promo//EN
+PRODID:{invite_prodid}
 CALSCALE:GREGORIAN
 METHOD:REQUEST
 BEGIN:VEVENT
-UID:promo_installation_window_2026_{order_id}
+UID:{invite_uid}
 DTSTAMP:{dtstamp}
 DTSTART:20260701T080000
 DTEND:20260701T170000
 SUMMARY:Affordable Home A/C Installation Window
-DESCRIPTION:Celebrating America Promo: To lock in your 10% discount, please schedule your installation window for July and coordinate your down payment with the representative.
+DESCRIPTION:{invite_desc}
 LOCATION:Affordable Home A/C Waipahu shop or your residence
 STATUS:CONFIRMED
 SEQUENCE:0

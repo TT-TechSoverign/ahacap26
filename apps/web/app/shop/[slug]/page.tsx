@@ -12,6 +12,7 @@ import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn, isCampaignActive as isCampaignActiveChecker } from '@/lib/utils';
+import { Fan, AlertCircle, Snowflake, ShoppingCart, FileText, ShieldAlert, X } from 'lucide-react';
 
 
 
@@ -193,7 +194,7 @@ export default function ProductDetailPage() {
     if (loading) return (
         <div className="min-h-screen bg-background-dark text-white pt-32 pb-20 px-4 flex items-center justify-center">
             <div className="flex flex-col items-center gap-6 animate-pulse">
-                <span className="material-symbols-outlined text-8xl text-primary/50 animate-[spin_3s_linear_infinite]" aria-hidden="true">mode_fan</span>
+                <Fan className="size-24 text-primary/50 animate-[spin_3s_linear_infinite]" aria-hidden="true" />
                 <p className="font-header font-bold uppercase tracking-widest text-lg text-slate-500">Loading Specifications...</p>
             </div>
         </div>
@@ -203,7 +204,7 @@ export default function ProductDetailPage() {
         <div className="min-h-screen bg-background-dark text-white pt-32 pb-20 px-4 flex items-center justify-center">
             <div className="text-center space-y-6 flex flex-col items-center">
                 <div className="w-24 h-24 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
-                    <span className="material-symbols-outlined text-5xl text-red-500" aria-hidden="true">error_outline</span>
+                    <AlertCircle className="size-12 text-red-500" aria-hidden="true" />
                 </div>
                 <div>
                     <h1 className="text-3xl font-header font-bold uppercase mb-2">Product Not Found</h1>
@@ -300,7 +301,7 @@ export default function ProductDetailPage() {
                                     />
                                 </div>
                             ) : (
-                                <span className="material-symbols-outlined text-[150px] text-white/5 z-10">ac_unit</span>
+                                <Snowflake className="size-36 text-white/5 z-10" />
                             )}
 
                             {/* Celebrating America Badge Overlay on Main Image */}
@@ -441,7 +442,7 @@ export default function ProductDetailPage() {
                                 onClick={() => addToCart(product)}
                                 className="w-full h-16 bg-gradient-to-r from-primary to-cyan-500 text-white font-header font-black uppercase tracking-[0.4em] text-sm rounded-xl shadow-[0_20px_50px_rgba(0,174,239,0.2)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 group"
                             >
-                                <span className="material-symbols-outlined text-xl group-hover:rotate-12 transition-transform">add_shopping_cart</span>
+                                <ShoppingCart className="size-5 group-hover:rotate-12 transition-transform" />
                                 Add to Cart
                             </button>
                             {specSheetUrl && (
@@ -449,14 +450,14 @@ export default function ProductDetailPage() {
                                     onClick={() => setIsSpecModalOpen(true)}
                                     className="w-full h-12 bg-white/[0.03] hover:bg-white/5 border border-white/10 text-slate-400 hover:text-white font-header font-black uppercase tracking-[0.3em] text-[10px] rounded-xl transition-all flex items-center justify-center gap-3"
                                 >
-                                    <span className="material-symbols-outlined text-lg">description</span>
+                                    <FileText className="size-4.5" />
                                     Factory Specs (PDF)
                                 </button>
                             )}
 
                             <div className="mt-6 bg-[#0f0505] border border-red-500/20 rounded-xl p-4 flex flex-col items-center text-center shadow-[inset_0_0_20px_rgba(239,68,68,0.05)]">
                                 <div className="flex items-center gap-2 mb-2 text-red-500">
-                                    <span className="material-symbols-outlined text-base">policy</span>
+                                    <ShieldAlert className="size-4" />
                                     <h5 className="font-header font-black uppercase tracking-[0.2em] text-[10px]">All Sales Final</h5>
                                 </div>
                                 <div className="space-y-1">
@@ -481,7 +482,7 @@ export default function ProductDetailPage() {
                             <div className="flex items-center justify-between p-6 border-b border-white/10">
                                 <h3 className="font-header font-black uppercase text-white tracking-widest text-sm">Specification Analysis</h3>
                                 <button onClick={() => setIsSpecModalOpen(false)} className="p-2 text-slate-500 hover:text-primary transition-colors">
-                                    <span className="material-symbols-outlined text-3xl">close</span>
+                                    <X className="size-8" />
                                 </button>
                             </div>
                             <div className="grow bg-white/5 relative">

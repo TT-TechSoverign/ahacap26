@@ -7,6 +7,7 @@ import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
 import { sendGAEvent } from '@next/third-parties/google';
 import { useSearchParams } from 'next/navigation';
+import { CheckCircle, Settings, Calendar, User, Check, ArrowRight, Zap, ShoppingBag, ArrowLeft } from 'lucide-react';
 
 export function DispatchWizard() {
     const { content } = useContent();
@@ -123,7 +124,7 @@ export function DispatchWizard() {
         return (
             <div className="py-20 text-center animate-in fade-in zoom-in duration-700">
                 <div className="size-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-8 border border-primary/30">
-                    <span className="material-symbols-outlined text-primary text-4xl">check_circle</span>
+                    <CheckCircle className="size-10 text-primary" />
                 </div>
                 <h3 className="text-3xl font-header font-black text-white uppercase tracking-tight mb-4">{contentData.contact.wizard.success?.title || "SUCCESS"}</h3>
                 <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 max-w-sm mx-auto">
@@ -158,7 +159,7 @@ export function DispatchWizard() {
                 {[1, 2, 3].map((s) => (
                     <div key={s} className="flex flex-col items-center gap-3 cursor-pointer relative z-10 group/step" onClick={() => setStep(s)}>
                         <div className={`size-10 lg:size-12 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all duration-500 ${step >= s ? 'bg-primary border-primary text-black shadow-[0_0_20px_rgba(0,174,239,0.4)]' : 'bg-background-dark border-white/10 text-slate-300 group-hover/step:border-white/20'}`}>
-                            {s === 1 ? <span className="material-symbols-outlined text-base lg:text-lg font-black">settings</span> : s === 2 ? <span className="material-symbols-outlined text-base lg:text-lg font-black">schedule</span> : <span className="material-symbols-outlined text-base lg:text-lg font-black">person</span>}
+                            {s === 1 ? <Settings className="size-4.5 lg:size-5" /> : s === 2 ? <Calendar className="size-4.5 lg:size-5" /> : <User className="size-4.5 lg:size-5" />}
                         </div>
                         <span className={`font-mono text-[9px] lg:text-[10px] uppercase tracking-[0.3em] font-black transition-colors duration-300 ${step >= s ? 'text-white' : 'text-slate-300 group-hover/step:text-slate-400'}`}>
                             {s === 1 ? 'Service' : s === 2 ? 'Urgency' : 'Details'}
@@ -190,7 +191,7 @@ export function DispatchWizard() {
                                 />
                                 <div className="flex items-center gap-4 p-5 lg:p-6 border border-white/10 rounded-xl bg-white/[0.03] transition-all duration-300 hover:bg-white/[0.08] hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary/20 peer-checked:shadow-[0_0_25px_rgba(0,174,239,0.15)] h-full group-active:scale-[0.98]">
                                     <div className="size-5 rounded-full border-2 border-slate-600 flex items-center justify-center transition-all peer-checked:border-primary peer-checked:bg-primary">
-                                        <span className="material-symbols-outlined text-[12px] text-black font-black opacity-0 peer-checked:opacity-100 transition-opacity">check</span>
+                                        <Check className="size-3 text-black stroke-[3px] opacity-0 peer-checked:opacity-100 transition-opacity" />
                                     </div>
                                     <span className="text-sm lg:text-base font-black text-slate-300 peer-checked:text-white uppercase tracking-tight leading-tight group-hover:text-white transition-colors">
                                         <EditableText contentKey={`contact.wizard.services_list.${i}`} />
@@ -205,7 +206,7 @@ export function DispatchWizard() {
                         disabled={selectedServices.length === 0}
                         className="w-full mt-6 py-4 uppercase font-bold tracking-widest text-sm hover:scale-[1.02] shadow-[0_0_20px_rgba(0,174,239,0.2)] disabled:opacity-50"
                     >
-                        <EditableText contentKey="contact.wizard.btn_next_urgency" /> <span className="material-symbols-outlined ml-2 text-lg">arrow_forward</span>
+                        <EditableText contentKey="contact.wizard.btn_next_urgency" /> <ArrowRight className="ml-2 size-5" />
                     </Button>
                 </div>
             )}
@@ -240,9 +241,13 @@ export function DispatchWizard() {
                                     />
                                     <div className="flex flex-col items-center justify-center p-6 lg:p-8 border border-white/10 rounded-xl bg-white/[0.03] text-center transition-all duration-300 hover:bg-white/[0.08] hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary/20 peer-checked:shadow-[0_0_25px_rgba(0,174,239,0.15)] h-full group-active:scale-[0.98]">
                                         <div className={`size-14 rounded-full mb-4 flex items-center justify-center border border-white/10 transition-all duration-300 group-hover:border-primary/30 peer-checked:border-primary/50 shadow-inner ${i === 0 ? 'text-primary bg-primary/5' : i === 1 ? 'text-accent bg-accent/5' : 'text-slate-400 bg-white/5'}`}>
-                                            <span className="material-symbols-outlined text-2xl lg:text-3xl group-hover:scale-110 transition-transform">
-                                                {i === 0 ? 'bolt' : i === 1 ? 'calendar_month' : 'shopping_bag'}
-                                            </span>
+                                            {i === 0 ? (
+                                                <Zap className="size-6 lg:size-7 group-hover:scale-110 transition-transform" />
+                                            ) : i === 1 ? (
+                                                <Calendar className="size-6 lg:size-7 group-hover:scale-110 transition-transform" />
+                                            ) : (
+                                                <ShoppingBag className="size-6 lg:size-7 group-hover:scale-110 transition-transform" />
+                                            )}
                                         </div>
                                         <span className="text-[10px] lg:text-[11px] font-mono font-black text-slate-300 peer-checked:text-white uppercase tracking-[0.3em] group-hover:text-white transition-colors">{time}</span>
                                     </div>
@@ -283,7 +288,7 @@ export function DispatchWizard() {
                             disabled={!formData.urgency}
                             className="flex-[2] py-4 uppercase font-bold tracking-widest text-sm hover:scale-[1.02] shadow-[0_0_20px_rgba(0,174,239,0.2)] disabled:opacity-50"
                         >
-                            <EditableText contentKey="contact.wizard.btn_next_contact" /> <span className="material-symbols-outlined ml-2 text-lg">arrow_forward</span>
+                            <EditableText contentKey="contact.wizard.btn_next_contact" /> <ArrowRight className="ml-2 size-5" />
                         </Button>
                     </div>
                 </div>
@@ -455,7 +460,7 @@ export function DispatchWizard() {
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-8">
                         <Button variant="ghost" type="button" onClick={() => setStep(2)} className="w-full sm:flex-1 py-4 lg:py-5 uppercase font-black tracking-[0.3em] text-[10px] border border-white/10 hover:bg-white/5 text-slate-500 hover:text-white transition-all rounded-xl order-2 sm:order-1">
-                            <span className="material-symbols-outlined mr-2 text-sm transition-transform group-hover:-translate-x-1">arrow_back</span>
+                            <ArrowLeft className="mr-2 size-4 transition-transform group-hover:-translate-x-1" />
                             <EditableText contentKey="contact.wizard.btn_back" />
                         </Button>
                         <Button

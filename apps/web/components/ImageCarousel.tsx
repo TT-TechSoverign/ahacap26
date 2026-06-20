@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { EditableText } from './EditableText';
+import { MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface CarouselSlide {
     id: string;
@@ -161,7 +162,7 @@ export function ImageCarousel({ slides }: ImageCarouselProps) {
                                             <EditableText contentKey={`landing.services.carousel.${currentIndex}.category`} />
                                         </span>
                                         <span className="text-white/60 font-bold text-[10px] uppercase tracking-[0.2em] flex items-center gap-1.5 bg-white/5 backdrop-blur-md px-3 py-1 rounded border border-white/5">
-                                            <span className="material-symbols-outlined text-[14px]">location_on</span>
+                                            <MapPin className="size-3.5" />
                                             <EditableText contentKey={`landing.services.carousel.${currentIndex}.location`} />
                                         </span>
                                     </div>
@@ -209,10 +210,10 @@ export function ImageCarousel({ slides }: ImageCarouselProps) {
                     {/* Navigation Arrows (Large Screen - Subtle corners) */}
                     <div className="absolute top-8 right-8 z-30 hidden md:flex items-center gap-3">
                         <button onClick={prevSlide} className="size-12 rounded-full border border-white/10 bg-black/40 text-white flex items-center justify-center hover:bg-primary hover:text-black transition-all backdrop-blur-xl group/btn active:scale-95">
-                            <span className="material-symbols-outlined text-2xl group-hover/btn:-translate-x-0.5 transition-transform">chevron_left</span>
+                            <ChevronLeft className="size-6 group-hover/btn:-translate-x-0.5 transition-transform" />
                         </button>
                         <button onClick={nextSlide} className="size-12 rounded-full border border-white/10 bg-black/40 text-white flex items-center justify-center hover:bg-primary hover:text-black transition-all backdrop-blur-xl group/btn active:scale-95">
-                            <span className="material-symbols-outlined text-2xl group-hover/btn:translate-x-0.5 transition-transform">chevron_right</span>
+                            <ChevronRight className="size-6 group-hover/btn:translate-x-0.5 transition-transform" />
                         </button>
                     </div>
 
@@ -234,10 +235,10 @@ export function ImageCarousel({ slides }: ImageCarouselProps) {
                     </div>
                     <div className="flex gap-2">
                         <button onClick={prevSlide} className="size-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white active:bg-primary transition-all">
-                            <span className="material-symbols-outlined text-2xl">chevron_left</span>
+                            <ChevronLeft className="size-6" />
                         </button>
                         <button onClick={nextSlide} className="size-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white active:bg-primary transition-all">
-                            <span className="material-symbols-outlined text-2xl">chevron_right</span>
+                            <ChevronRight className="size-6" />
                         </button>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { EditableText } from './EditableText';
 import { cn } from '@/lib/utils';
+import { ArrowRight } from 'lucide-react';
 import { useContent } from '../lib/context/ContentContext';
 
 export default function SectionServicesGeneral() {
@@ -91,7 +92,7 @@ export default function SectionServicesGeneral() {
                                         )}
                                     >
                                         <span className="group-hover:text-cyan-400 transition-colors">Learn More</span>
-                                        <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform group-hover:text-cyan-400">arrow_forward</span>
+                                        <ArrowRight className="size-4.5 group-hover:translate-x-1 transition-transform group-hover:text-cyan-400" />
                                     </Link>
                                 </div>
                             </div>

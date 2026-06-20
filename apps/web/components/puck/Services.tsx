@@ -1,4 +1,21 @@
 import { cn } from '@/lib/utils';
+import { Snowflake, Store, Wind, Brush, ArrowRight, AlertTriangle } from 'lucide-react';
+
+const LucideIconMap: Record<string, React.ComponentType<any>> = {
+    ac_unit: Snowflake,
+    storefront: Store,
+    hvac: Wind,
+    cleaning_services: Brush,
+};
+
+function DynamicIcon({ name, className }: { name: string; className?: string }) {
+    const IconComponent = LucideIconMap[name];
+    if (!IconComponent) {
+        console.warn(`Icon ${name} not found in LucideIconMap`);
+        return <AlertTriangle className={className} />;
+    }
+    return <IconComponent className={className} />;
+}
 import Link from 'next/link';
 import type { ServicesGridProps } from '@/types/puck';
 
@@ -99,12 +116,12 @@ export function Services({
                                     "transition-transform duration-500 group-hover:scale-110",
                                     item.color === 'primary' ? "text-primary" : "text-accent"
                                 )}>
-                                    <span className={cn(
-                                        "material-symbols-outlined text-4xl lg:text-5xl",
+                                    <DynamicIcon name={item.icon || 'ac_unit'} className={cn(
+                                        "size-12",
                                         item.color === 'primary'
                                             ? (isLight ? "drop-shadow-sm" : "drop-shadow-[0_0_10px_rgba(0,174,239,0.5)]")
                                             : (isLight ? "drop-shadow-sm" : "drop-shadow-[0_0_10px_rgba(57,181,74,0.5)]")
-                                    )}>{item.icon}</span>
+                                    )} />
                                 </div>
 
                                 <div className="flex-1 flex flex-col items-center">
@@ -126,7 +143,7 @@ export function Services({
                                         isLight ? "border-slate-100" : "border-white/5",
                                         item.color === 'primary' ? "text-primary" : "text-accent"
                                     )}>
-                                        {item.linkText} <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                                        {item.linkText} <ArrowRight className="size-3.5" />
                                     </div>
                                 </div>
                             </div>

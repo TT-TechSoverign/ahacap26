@@ -324,9 +324,9 @@ export default function PromoBentoCard() {
                         <span className="size-1 bg-red-500 rounded-full animate-ping"></span>
                         Limited-Time Event
                     </span>
-                    <h3 className="text-lg md:text-xl font-header font-black uppercase tracking-tight text-white">
+                    <h2 className="text-lg md:text-xl font-header font-black uppercase tracking-tight text-white">
                         Celebrating <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-white to-blue-400">America</span> Promo
-                    </h3>
+                    </h2>
                     <p className="text-xs text-slate-400 mt-1">Get 10% off any air conditioner, schedule installation for July.</p>
                 </div>
                 

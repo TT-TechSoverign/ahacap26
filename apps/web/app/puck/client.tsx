@@ -6,6 +6,7 @@ import config from "../../puck.config";
 import { Button } from "@/components/ui/Button";
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { Save, Eye } from 'lucide-react';
 
 export function PuckEditor({ path, initialData }: { path: string, initialData: Data }) {
     const router = useRouter();
@@ -73,7 +74,7 @@ export function PuckEditor({ path, initialData }: { path: string, initialData: D
                             }}
                             className="bg-slate-800 text-white border-slate-700 hover:bg-slate-700"
                         >
-                            <span className="material-symbols-outlined text-sm mr-1">save</span>
+                            <Save className="size-4 mr-1.5" />
                             Save Library
                         </Button>
                         <Button
@@ -82,7 +83,7 @@ export function PuckEditor({ path, initialData }: { path: string, initialData: D
                             onClick={() => window.open(path, '_blank')}
                             className="bg-slate-800 text-white border-slate-700 hover:bg-slate-700"
                         >
-                            <span className="material-symbols-outlined text-sm mr-1">visibility</span>
+                            <Eye className="size-4 mr-1.5" />
                             Live View
                         </Button>
                     </div>

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { ShoppingCart, Menu, X, Phone, Store } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useContent } from '../lib/context/ContentContext';
 import { EditableText } from './EditableText';
@@ -110,7 +111,7 @@ export default function Navbar() {
                             className="relative group p-2 hover:bg-white/5 rounded-lg transition-colors"
                             aria-label="Open Cart"
                         >
-                            <span className="material-symbols-outlined text-2xl text-white group-hover:text-primary transition-colors">shopping_cart</span>
+                            <ShoppingCart className="size-6 text-white group-hover:text-primary transition-colors" />
                             {items.length > 0 && (
                                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-[9px] font-black flex items-center justify-center rounded-full shadow-[0_0_10px_rgba(0,174,239,0.5)]">
                                     {items.length}
@@ -122,10 +123,13 @@ export default function Navbar() {
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="md:hidden text-white hover:text-primary transition-colors p-2"
+                            aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
                         >
-                            <span className="material-symbols-outlined text-3xl">
-                                {mobileMenuOpen ? 'close' : 'menu'}
-                            </span>
+                            {mobileMenuOpen ? (
+                                <X className="size-8" />
+                            ) : (
+                                <Menu className="size-8" />
+                            )}
                         </button>
                     </div>
                 </div>
@@ -182,11 +186,11 @@ export default function Navbar() {
                                 className="grid grid-cols-2 gap-4 w-full max-w-xs"
                             >
                                 <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="bg-white/5 border border-white/10 hover:border-primary/50 p-4 rounded-xl flex flex-col items-center gap-2 group transition-all">
-                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">call</span>
+                                    <Phone className="text-primary group-hover:scale-110 transition-transform size-6" />
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-white">Call Us</span>
                                 </Link>
                                 <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="bg-white/5 border border-white/10 hover:border-accent/50 p-4 rounded-xl flex flex-col items-center gap-2 group transition-all">
-                                    <span className="material-symbols-outlined text-accent group-hover:scale-110 transition-transform">storefront</span>
+                                    <Store className="text-accent group-hover:scale-110 transition-transform size-6" />
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-white">Shop</span>
                                 </Link>
                             </motion.div>

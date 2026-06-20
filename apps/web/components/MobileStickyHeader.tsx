@@ -12,8 +12,6 @@ import { Menu, X, ShoppingCart } from 'lucide-react';
 
 export default function MobileStickyHeader() {
     const pathname = usePathname();
-    if (pathname && pathname.startsWith('/checkout')) return null;
-
     const { items, openCart, isOpen: isCartOpen, closeCart } = useCart();
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,6 +25,8 @@ export default function MobileStickyHeader() {
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, [isScrolled]);
+
+    if (pathname && pathname.startsWith('/checkout')) return null;
 
     const handleOpenCart = () => {
         if (mobileMenuOpen) setMobileMenuOpen(false); // Mutual Exclusion

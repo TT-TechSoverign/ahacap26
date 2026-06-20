@@ -12,6 +12,9 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import { getProductImages } from '../../lib/product-images';
 import { isCampaignActive } from '../../lib/utils';
+import { 
+    CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, Snowflake, Lock 
+} from 'lucide-react';
 
 function CheckoutContent() {
     const { items, clearCart, cartTotal } = useCart();
@@ -149,7 +152,6 @@ END:VCALENDAR`;
     if (step === 'success') {
         return (
             <main className="min-h-screen bg-[#0f172a] pt-[140px] md:pt-[165px] pb-12 px-4 md:px-8 flex items-center justify-center">
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
                 <div className="max-w-md w-full text-center space-y-8 p-8 border border-cyan-500/20 rounded-2xl bg-slate-900/50 backdrop-blur shadow-[0_0_50px_rgba(6,182,212,0.1)]">
                     <div className="relative">
                         <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full" />
@@ -159,7 +161,7 @@ END:VCALENDAR`;
                             transition={{ type: 'spring', delay: 0.2 }}
                             className="relative size-24 bg-slate-900 border-2 border-cyan-500 rounded-full flex items-center justify-center mx-auto"
                         >
-                            <span className="material-symbols-outlined text-5xl text-cyan-400">check_circle</span>
+                            <CheckCircle className="size-12 text-cyan-400" />
                         </motion.div>
                     </div>
 
@@ -175,7 +177,7 @@ END:VCALENDAR`;
                     <div className="bg-[#0a0e14]/80 backdrop-blur-2xl border border-primary/30 p-4 rounded-xl text-left space-y-3 relative overflow-hidden group">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-50"></div>
                         <h4 className="text-primary font-header font-black uppercase text-xs tracking-widest flex items-center gap-2 relative z-10">
-                            <span className="material-symbols-outlined text-sm animate-pulse">info</span>
+                            <Info className="size-4 animate-pulse" />
                             <EditableText contentKey="logistics.pickup.label" />
                         </h4>
                         <p className="text-slate-300 text-[11px] leading-relaxed uppercase font-bold tracking-tight relative z-10">
@@ -195,7 +197,7 @@ END:VCALENDAR`;
                         <div className="space-y-4">
                             <div className="bg-red-950/40 border border-red-500/30 p-4 rounded-xl text-left space-y-2 relative overflow-hidden">
                                 <h4 className="text-red-500 font-header font-black uppercase text-xs tracking-widest flex items-center gap-2">
-                                    <span className="material-symbols-outlined text-sm animate-pulse">star</span>
+                                    <Star className="size-4 animate-pulse" />
                                     Celebrating America Promo
                                 </h4>
                                 <p className="text-slate-300 text-[11px] leading-relaxed uppercase font-bold tracking-tight">
@@ -206,7 +208,7 @@ END:VCALENDAR`;
                                 onClick={downloadCalendarInvite}
                                 className="w-full py-4 bg-gradient-to-r from-red-600 to-blue-600 hover:from-red-500 hover:to-blue-500 text-white font-header font-black uppercase tracking-[0.2em] text-xs rounded-xl transition-all shadow-lg active:scale-95 text-center flex items-center justify-center gap-2"
                             >
-                                <span className="material-symbols-outlined text-sm">calendar_today</span>
+                                <Calendar className="size-4" />
                                 Download Calendar Invite
                             </button>
                         </div>
@@ -222,7 +224,6 @@ END:VCALENDAR`;
 
     return (
         <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[140px] md:pt-[165px]">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}
@@ -261,7 +262,7 @@ END:VCALENDAR`;
                             className="bg-[#0f131a] border border-cyan-500/20 bg-cyan-900/5 p-4 md:p-8 rounded-2xl shadow-xl relative overflow-hidden group ring-1 ring-white/5 order-1 lg:order-none"
                         >
                             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 group-hover:scale-110">
-                                <span className="material-symbols-outlined text-6xl md:text-9xl text-cyan-400">local_shipping</span>
+                                <Truck className="size-32 text-cyan-400" />
                             </div>
 
                             <h2 className="text-lg md:text-xl font-header font-black text-white uppercase tracking-widest mb-6 md:mb-8 flex items-center gap-3 md:gap-4">
@@ -275,7 +276,7 @@ END:VCALENDAR`;
                                     className={`p-4 md:p-8 rounded-3xl border transition-all duration-500 text-center flex flex-col items-center justify-center space-y-4 md:space-y-6 group/btn relative overflow-hidden ${fulfillment === 'pickup' ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.2)] ring-1 ring-emerald-500/30' : 'bg-[#05070a] border-white/5 hover:border-emerald-500/30'}`}
                                 >
                                     <div className={`p-3 md:p-4 rounded-2xl transition-colors mb-2 ${fulfillment === 'pickup' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-slate-500 group-hover/btn:text-emerald-400 group-hover/btn:bg-emerald-500/10'}`}>
-                                        <span className="material-symbols-outlined text-3xl md:text-4xl group-hover/btn:scale-110 transition-transform">warehouse</span>
+                                        <Warehouse className="size-9 group-hover/btn:scale-110 transition-transform" />
                                     </div>
                                     <div className="space-y-1 md:space-y-2 relative z-10 w-full">
                                         <div className="flex justify-center">
@@ -293,7 +294,7 @@ END:VCALENDAR`;
                                     className={`p-4 md:p-8 rounded-3xl border transition-all duration-500 text-center flex flex-col items-center justify-center space-y-4 md:space-y-6 group/btn relative overflow-hidden ${fulfillment === 'delivery' ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.2)] ring-1 ring-emerald-500/30' : 'bg-[#05070a] border-white/5 hover:border-emerald-500/30'}`}
                                 >
                                     <div className={`p-3 md:p-4 rounded-2xl transition-colors mb-2 ${fulfillment === 'delivery' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/5 text-slate-500 group-hover/btn:text-emerald-400 group-hover/btn:bg-emerald-500/10'}`}>
-                                        <span className="material-symbols-outlined text-3xl md:text-4xl group-hover/btn:scale-110 transition-transform">local_shipping</span>
+                                        <Truck className="size-9 group-hover/btn:scale-110 transition-transform" />
                                     </div>
                                     <div className="space-y-1 md:space-y-2 relative z-10 w-full">
                                         <div className="flex justify-center">
@@ -314,7 +315,7 @@ END:VCALENDAR`;
                                     className="mt-4 md:mt-6 p-4 md:p-5 rounded-xl border border-orange-500/20 bg-orange-500/5 text-orange-500/80"
                                 >
                                     <div className="flex gap-3 md:gap-4 items-start">
-                                        <span className="material-symbols-outlined text-sm pt-0.5 animate-pulse">warning</span>
+                                        <AlertTriangle className="text-orange-500 size-4 pt-0.5 animate-pulse" />
                                         <p className="text-[9px] md:text-[10px] font-black uppercase tracking-widest leading-relaxed">
                                             <EditableText contentKey="logistics.pickup.warning" />
                                         </p>
@@ -329,7 +330,7 @@ END:VCALENDAR`;
                                             <label className="text-[9px] md:text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1 flex items-center justify-between">
                                                 Street Address
                                                 <span className="text-cyan-500 flex items-center gap-2 animate-pulse">
-                                                    <span className="material-symbols-outlined text-xs">location_on</span>
+                                                    <MapPin className="size-3" />
                                                     <span className="hidden md:inline">Island Coverage Check</span>
                                                     <span className="md:hidden">verify</span>
                                                 </span>
@@ -351,7 +352,7 @@ END:VCALENDAR`;
 
                                     <div className="p-4 md:p-5 bg-red-500/5 border border-red-500/10 rounded-xl">
                                         <h4 className="text-red-400 font-black uppercase text-[10px] tracking-[0.2em] mb-2 md:mb-3 flex items-center gap-3">
-                                            <span className="material-symbols-outlined text-sm">block</span>
+                                            <Ban className="size-4" />
                                             <span className="truncate"><EditableText contentKey="logistics.delivery.exclusions_label" /></span>
                                         </h4>
                                         <p className="text-[9px] md:text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-loose ml-1">
@@ -370,7 +371,7 @@ END:VCALENDAR`;
                             className={`bg-[#0f131a] border border-emerald-500/20 bg-emerald-900/5 p-4 md:p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all duration-700 ring-1 ring-white/5 order-3 lg:order-none ${step === 'payment' ? 'ring-2 ring-emerald-500 border-emerald-500/50' : ''}`}
                         >
                             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 group-hover:scale-110">
-                                <span className="material-symbols-outlined text-6xl md:text-9xl text-emerald-500">payments</span>
+                                <CreditCard className="size-32 text-emerald-500" />
                             </div>
 
                             <h2 className="text-lg md:text-xl font-header font-black text-white uppercase tracking-widest mb-6 md:mb-8 flex items-center gap-3 md:gap-4">
@@ -396,7 +397,7 @@ END:VCALENDAR`;
                                     >
                                         <span className="hidden md:inline">Proceed To Secure Checkout VIA Stripe</span>
                                         <span className="md:hidden">Proceed To Secure Checkout</span>
-                                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                                        <ArrowRight className="size-4" />
                                     </button>
                                 )}
                             </div>
@@ -429,7 +430,7 @@ END:VCALENDAR`;
                                                         className="object-contain p-1"
                                                     />
                                                 ) : (
-                                                    <span className="material-symbols-outlined text-slate-700 group-hover/item:text-primary transition-colors">ac_unit</span>
+                                                    <Snowflake className="text-slate-700 group-hover/item:text-primary transition-colors size-6" />
                                                 )}
                                             </div>
                                             <div className="flex-1 min-w-0">
@@ -482,7 +483,7 @@ END:VCALENDAR`;
                             <div className="p-4 md:p-8 rounded-3xl border border-red-900/40 bg-[#0f0505] flex flex-col items-center text-center space-y-3 md:space-y-4 shadow-lg relative overflow-hidden">
                                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-900/10 via-transparent to-transparent opacity-50"></div>
                                 <div className="p-2 md:p-3 rounded-xl bg-red-950/50 text-red-500 border border-red-900/50 shadow-inner relative z-10">
-                                    <span className="material-symbols-outlined text-xl md:text-2xl">shield_lock</span>
+                                    <Lock className="size-6" />
                                 </div>
                                 <div className="relative z-10 space-y-1 md:space-y-2">
                                     <h4 className="text-red-500 font-header font-black uppercase text-[10px] md:text-xs tracking-[0.3em]">All Sales Final</h4>

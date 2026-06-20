@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { EditableText } from './EditableText';
+import { ArrowRight } from 'lucide-react';
 
 export default function Section1HeroHomeV2() {
     return (
@@ -63,7 +64,7 @@ export default function Section1HeroHomeV2() {
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 <EditableText contentKey="home_v2.hero.cta_shop" defaultValue="Shop Window AC Units" />
-                                <span className="material-symbols-outlined text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                <ArrowRight className="size-6 group-hover:translate-x-1 transition-transform" />
                             </span>
                         </Link>
 

@@ -13,8 +13,6 @@ import { Menu, X, ShoppingCart } from 'lucide-react';
 
 export default function NavbarV2() {
     const pathname = usePathname();
-    if (pathname && pathname.startsWith('/checkout')) return null;
-
     const { items, openCart } = useCart();
     const { content } = useContent();
 
@@ -49,6 +47,8 @@ export default function NavbarV2() {
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, [lastScrollY, headerVisible, mobileMenuOpen]);
+
+    if (pathname && pathname.startsWith('/checkout')) return null;
 
     const links = content?.navigation?.links || [];
 

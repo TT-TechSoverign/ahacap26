@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
+import { Loader2, Lock } from 'lucide-react';
 
 interface CheckoutFormProps {
     totalAmount: number;
@@ -107,17 +108,17 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
                 className="w-full py-5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-header font-black uppercase tracking-[0.25em] text-sm rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 {loading ? (
-                    <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                    <Loader2 className="size-5 animate-spin" />
                 ) : (
                     <>
                         <span>Confirm & Pay</span>
-                        <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">lock_person</span>
+                        <Lock className="size-5 group-hover:translate-x-1 transition-transform" />
                     </>
                 )}
             </button>
 
             <div className="flex items-center justify-center gap-2 text-slate-600 mt-4">
-                <span className="material-symbols-outlined text-sm">lock</span>
+                <Lock className="size-3.5" />
                 <span className="text-[10px] font-mono uppercase tracking-widest">Processed securely by Stripe</span>
             </div>
         </div>

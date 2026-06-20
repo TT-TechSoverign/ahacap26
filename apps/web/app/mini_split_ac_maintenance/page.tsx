@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useContent } from '@/lib/context/ContentContext';
 import { BackToTop } from '@/components/BackToTop';
 import PromoRibbonCallout from '@/components/PromoRibbonCallout';
+import { CheckCircle, ArrowRight, Wrench, Zap, Wind, Droplets, ShieldCheck } from 'lucide-react';
 
 export default function MiniSplitACMaintenancePage() {
     const { content } = useContent();
@@ -13,7 +14,6 @@ export default function MiniSplitACMaintenancePage() {
 
     return (
         <div className="bg-background-dark min-h-screen text-white font-sans">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
             {/* Adjusted padding to match shop page logic more closely and scaled down container */}
             <div className="pt-[140px] md:pt-[165px] lg:pt-[175px] max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
                 <div className="text-center mb-10 border-b border-white/5 pb-6">
@@ -67,7 +67,7 @@ export default function MiniSplitACMaintenancePage() {
                             <ul className="space-y-2">
                                 {data.hero_basic.checklist.map((item: string, i: number) => (
                                     <li key={i} className="flex items-start gap-3">
-                                        <span className="material-symbols-outlined text-primary mt-0.5 shrink-0 text-sm">check_circle</span>
+                                        <CheckCircle className="text-primary mt-0.5 shrink-0 size-4" />
                                         <span className="text-slate-300 text-sm">{item}</span>
                                     </li>
                                 ))}
@@ -88,7 +88,7 @@ export default function MiniSplitACMaintenancePage() {
                                 </div>
                                 <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary hover:bg-primary/90 text-black text-sm font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
                                     Schedule Basic Service
-                                    <span className="material-symbols-outlined transform transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                                    <ArrowRight className="transform transition-transform group-hover/btn:translate-x-1 size-4" />
                                 </a>
                             </div>
                         </div>
@@ -135,7 +135,7 @@ export default function MiniSplitACMaintenancePage() {
                             <ul className="space-y-2">
                                 {data.hero_premium.checklist.map((item: string, i: number) => (
                                     <li key={i} className="flex items-start gap-3">
-                                        <span className="material-symbols-outlined text-primary mt-0.5 shrink-0 text-sm">check_circle</span>
+                                        <CheckCircle className="text-primary mt-0.5 shrink-0 size-4" />
                                         <span className="text-slate-300 text-sm">{item}</span>
                                     </li>
                                 ))}
@@ -156,7 +156,7 @@ export default function MiniSplitACMaintenancePage() {
                                 </div>
                                 <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary hover:bg-primary/90 text-black text-sm font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
                                     Schedule Premium Service
-                                    <span className="material-symbols-outlined transform transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                                    <ArrowRight className="transform transition-transform group-hover/btn:translate-x-1 size-4" />
                                 </a>
                             </div>
                         </div>
@@ -166,19 +166,19 @@ export default function MiniSplitACMaintenancePage() {
                 {/* 2x2 Service Badges */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {Object.entries(data.sections).map(([key, section]: [string, any]) => {
-                        // Map specific keys to relevant material symbols
-                        const iconMap: Record<string, string> = {
-                            deep_clean: 'cleaning_services',
-                            energy: 'bolt',
-                            air_quality: 'air',
-                            salt_dust: 'water_drop',
+                        // Map specific keys to relevant Lucide icons
+                        const iconMap: Record<string, React.ComponentType<any>> = {
+                            deep_clean: Wrench,
+                            energy: Zap,
+                            air_quality: Wind,
+                            salt_dust: Droplets,
                         };
-                        const icon = iconMap[key] || 'verified_user';
+                        const IconComponent = iconMap[key] || ShieldCheck;
 
                         return (
                             <div key={key} className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 lg:p-8 shadow-xl flex flex-col items-center text-center group hover:bg-slate-800/80 hover:border-slate-700 transition-all duration-300">
                                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                                    <span className="material-symbols-outlined text-2xl text-primary">{icon}</span>
+                                    <IconComponent className="size-6 text-primary" />
                                 </div>
                                 <h3 className="text-lg md:text-xl font-header font-black uppercase tracking-widest text-primary mb-3 drop-shadow-md">
                                     {section.title}

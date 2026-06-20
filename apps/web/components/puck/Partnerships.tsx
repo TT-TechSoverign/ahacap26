@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Snowflake, Fan, Wind } from 'lucide-react';
 import type { PartnershipsProps } from '@/types/puck';
 
 export function Partnerships({
@@ -44,7 +45,7 @@ export function Partnerships({
 
                         <div className="relative z-10 pb-6 border-b border-white/5 text-center">
                             <div className="flex items-center justify-center gap-3 mb-2 text-primary group-hover:scale-110 transition-transform duration-500">
-                                <span className="material-symbols-outlined text-3xl">ac_unit</span>
+                                <Snowflake className="size-8" />
                                 <h3 className="font-header font-bold text-2xl uppercase tracking-wide">Window AC</h3>
                             </div>
                             <div className="h-0.5 w-12 mx-auto bg-primary/30 rounded-full group-hover:w-24 transition-all duration-500"></div>
@@ -68,7 +69,7 @@ export function Partnerships({
 
                         <div className="relative z-10 pb-6 border-b border-white/5 text-center">
                             <div className="flex items-center justify-center gap-3 mb-2 text-accent group-hover:scale-110 transition-transform duration-500">
-                                <span className="material-symbols-outlined text-3xl">mode_fan</span>
+                                <Fan className="size-8" />
                                 <h3 className="font-header font-bold text-2xl uppercase tracking-wide">Mini Splits</h3>
                             </div>
                             <div className="h-0.5 w-12 mx-auto bg-accent/30 rounded-full group-hover:w-24 transition-all duration-500"></div>
@@ -92,7 +93,7 @@ export function Partnerships({
 
                         <div className="relative z-10 pb-6 border-b border-white/5 text-center">
                             <div className="flex items-center justify-center gap-3 mb-2 text-primary group-hover:scale-110 transition-transform duration-500">
-                                <span className="material-symbols-outlined text-3xl">hvac</span>
+                                <Wind className="size-8" />
                                 <h3 className="font-header font-bold text-2xl uppercase tracking-wide">Central AC</h3>
                             </div>
                             <div className="h-0.5 w-12 mx-auto bg-primary/30 rounded-full group-hover:w-24 transition-all duration-500"></div>

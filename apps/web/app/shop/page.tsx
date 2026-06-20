@@ -15,9 +15,41 @@ import { BackToTop } from '@/components/BackToTop';
 import { cn, generateProductSlug, isCampaignActive as isCampaignActiveChecker } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
 import PromoBentoCard from '../../components/PromoBentoCard';
+import { 
+    AlertTriangle, Warehouse, Truck, Ban, Leaf, Wind, ArrowUpRight, Eye, Check, X,
+    Maximize2, Snowflake, Cpu, LayoutGrid, ShoppingCart, FileText, Mail, Droplets, Sun, Gauge
+} from 'lucide-react';
 
+const LucideIconMap: Record<string, React.ComponentType<any>> = {
+    energy_savings_leaf: Leaf,
+    settings_overscan: Maximize2,
+    ac_unit: Snowflake,
+    token: Cpu,
+    vertical_split: LayoutGrid,
+    local_shipping: Truck,
+    warehouse: Warehouse,
+    warning: AlertTriangle,
+    block: Ban,
+    eco: Leaf,
+    shopping_cart: ShoppingCart,
+    description: FileText,
+    mail: Mail,
+    north_east: ArrowUpRight,
+    humidity_mid: Droplets,
+    wb_sunny: Sun,
+    speed: Gauge,
+    visibility: Eye,
+    add_shopping_cart: ShoppingCart,
+};
 
-
+function DynamicIcon({ name, className }: { name: string; className?: string }) {
+    const IconComponent = LucideIconMap[name];
+    if (!IconComponent) {
+        console.warn(`Icon ${name} not found in LucideIconMap`);
+        return <AlertTriangle className={className} />;
+    }
+    return <IconComponent className={className} />;
+}
 
 export default function ShopPage() {
     const { addToCart, items, openCart } = useCart();
@@ -178,7 +210,6 @@ export default function ShopPage() {
 
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
 
             <main className="max-w-[1600px] mx-auto w-full px-6 md:px-12 pt-[140px] md:pt-[165px] pb-20 flex-grow">
                 {/* Hero Branding Section (Centered Vertical Axis) */}
@@ -218,7 +249,7 @@ export default function ShopPage() {
                 <div className="space-y-8 md:space-y-10">
                     {error ? (
                         <div className="py-20 text-center space-y-4 max-w-lg mx-auto bg-red-500/5 border border-red-500/20 rounded-2xl p-8">
-                            <span className="material-symbols-outlined text-red-500 text-5xl">warning</span>
+                            <AlertTriangle className="text-red-500 size-12 mx-auto mb-2" />
                             <h2 className="text-xl font-header font-black text-red-400 tracking-widest uppercase">Live Connection Failure</h2>
                             <p className="text-slate-400 text-xs tracking-widest uppercase font-bold">{error}</p>
                             <p className="text-slate-500 text-[10px] tracking-widest uppercase mt-4">Review the backend API container health.</p>
@@ -436,7 +467,7 @@ function SectionHeader({
                     topElement
                 ) : (
                     <p className="text-primary font-header font-black text-[9px] md:text-[10px] uppercase tracking-[0.5em] mb-2 flex items-center justify-center gap-2">
-                        <span className="material-symbols-outlined text-[12px]">{icon}</span>
+                        <DynamicIcon name={icon} className="size-3" />
                         <EditableText contentKey={subtitleKey || `${effectiveKey}.subtitle`} />
                     </p>
                 )}
@@ -500,11 +531,11 @@ function LogisticsSection() {
 
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity"></div>
                         <div className="absolute top-0 right-0 p-4 opacity-5 group-hover/item:opacity-20 transition-all duration-700 group-hover/item:scale-110">
-                            <span className="material-symbols-outlined text-9xl text-primary">warehouse</span>
+                            <Warehouse className="size-32 text-primary" />
                         </div>
                         <div className="flex items-center gap-4 text-primary relative z-10">
                             <div className="p-3 bg-primary/10 rounded-xl border border-primary/20 group-hover/item:bg-primary/20 transition-colors">
-                                <span className="material-symbols-outlined text-3xl group-hover/item:scale-110 transition-transform">warehouse</span>
+                                <Warehouse className="size-8 group-hover/item:scale-110 transition-transform" />
                             </div>
                             <h3 className="text-xl font-header font-black uppercase tracking-widest text-white group-hover/item:text-primary transition-colors">
                                 <EditableText contentKey="logistics.pickup.title" />
@@ -520,7 +551,7 @@ function LogisticsSection() {
                                 </p>
                             </div>
                             <div className="p-4 bg-orange-500/5 border border-orange-500/10 rounded-lg flex gap-3 items-start hover:border-orange-500/30 transition-all duration-500">
-                                <span className="material-symbols-outlined text-orange-500 text-sm pt-0.5 animate-pulse">warning</span>
+                                <AlertTriangle className="text-orange-500 size-4 pt-0.5 animate-pulse" />
                                 <p className="text-[10px] text-orange-500/70 font-bold uppercase tracking-widest leading-relaxed">
                                     <EditableText contentKey="logistics.pickup.warning" />
                                 </p>
@@ -535,11 +566,11 @@ function LogisticsSection() {
 
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity"></div>
                         <div className="absolute top-0 right-0 p-4 opacity-5 group-hover/item:opacity-20 transition-all duration-700 group-hover/item:scale-110">
-                            <span className="material-symbols-outlined text-9xl text-primary">local_shipping</span>
+                                <Truck className="size-32 text-primary" />
                         </div>
                         <div className="flex items-center gap-4 text-primary relative z-10">
                             <div className="p-3 bg-primary/10 rounded-xl border border-primary/20 group-hover/item:bg-primary/20 transition-colors">
-                                <span className="material-symbols-outlined text-3xl group-hover/item:scale-110 transition-transform">local_shipping</span>
+                                <Truck className="size-8 group-hover/item:scale-110 transition-transform" />
                             </div>
                             <h3 className="text-xl font-header font-black uppercase tracking-widest text-white group-hover/item:text-primary transition-colors">
                                 <EditableText contentKey="logistics.delivery.title" />
@@ -559,7 +590,7 @@ function LogisticsSection() {
                             </p>
                             <div className="p-4 bg-red-500/5 border border-red-500/10 rounded-lg hover:border-red-500/20 transition-all duration-500">
                                 <h4 className="text-red-400 font-bold uppercase text-[10px] tracking-widest mb-2 flex items-center gap-2">
-                                    <span className="material-symbols-outlined text-sm">block</span>
+                                    <Ban className="size-4" />
                                     <EditableText contentKey="logistics.delivery.exclusions_label" />
                                 </h4>
                                 <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest leading-loose">
@@ -576,6 +607,7 @@ function LogisticsSection() {
 
 
 function RebateSection() {
+    const { content } = useContent();
     return (
         <section id="rebate" className="relative pb-8 pt-0 overflow-hidden group">
             {/* Background elements */}
@@ -593,7 +625,7 @@ function RebateSection() {
                     forceBreak={true}
                     topElement={
                         <div className="inline-flex items-center gap-2 px-4 py-1 bg-cyan-500 border border-cyan-500 rounded-full text-white text-[10px] font-header font-black tracking-widest uppercase mb-2">
-                            <span className="material-symbols-outlined text-sm">eco</span>
+                            <Leaf className="size-4" />
                             <EditableText contentKey="shop.rebate.badge" />
                         </div>
                     }
@@ -604,6 +636,7 @@ function RebateSection() {
                     {[0, 1, 2].map((i) => {
                         const isDownload = i === 1;
                         const isDualInverterLink = i === 0;
+                        const stepIconName = content?.shop?.rebate?.steps?.[i]?.icon || contentData.shop.rebate.steps[i].icon;
 
                         if (isDualInverterLink) {
                             return (
@@ -613,9 +646,7 @@ function RebateSection() {
                                     className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 cursor-pointer"
                                 >
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
-                                        <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
-                                            <EditableText contentKey={`shop.rebate.steps.${i}.icon`} />
-                                        </span>
+                                        <DynamicIcon name={stepIconName} className="text-emerald-500 size-8 group-hover/card:scale-110 transition-transform" />
                                     </div>
                                     <div className="space-y-3">
                                         <h3 className="text-white font-header font-black uppercase tracking-widest text-base group-hover/card:text-emerald-400 transition-colors group-hover/card:underline decoration-emerald-500 underline-offset-4">
@@ -639,9 +670,7 @@ function RebateSection() {
                                     className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 cursor-pointer"
                                 >
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
-                                        <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
-                                            <EditableText contentKey={`shop.rebate.steps.${i}.icon`} />
-                                        </span>
+                                        <DynamicIcon name={stepIconName} className="text-emerald-500 size-8 group-hover/card:scale-110 transition-transform" />
                                     </div>
                                     <div className="space-y-3">
                                         <h3 className="text-white font-header font-black uppercase tracking-widest text-base group-hover/card:text-emerald-400 transition-colors group-hover/card:underline decoration-emerald-500 underline-offset-4">
@@ -657,9 +686,7 @@ function RebateSection() {
                         return (
                             <div key={i} className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative group/card flex flex-col items-center text-center space-y-4">
                                 <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
-                                    <span className="material-symbols-outlined text-emerald-500 text-3xl group-hover/card:scale-110 transition-transform">
-                                        <EditableText contentKey={`shop.rebate.steps.${i}.icon`} />
-                                    </span>
+                                    <DynamicIcon name={stepIconName} className="text-emerald-500 size-8 group-hover/card:scale-110 transition-transform" />
                                 </div>
                                 <div className="space-y-3">
                                     <h3 className="text-white font-header font-black uppercase tracking-widest text-base">
@@ -814,9 +841,9 @@ function SizingGuideSection() {
                                         href={m.link}
                                         className="px-2 py-2.5 bg-white/5 border border-white/10 rounded-lg text-[9px] font-black text-white hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center gap-1.5 shadow-lg active:scale-95"
                                     >
-                                        <span className="material-symbols-outlined text-[10px] text-primary">ac_unit</span>
+                                        <Snowflake className="size-2.5 text-primary" />
                                         <span className="truncate">{m.name}</span>
-                                        <span className="material-symbols-outlined text-[10px] text-slate-600">north_east</span>
+                                        <ArrowUpRight className="size-2.5 text-slate-600" />
                                     </Link>
                                 ))}
                             </div>
@@ -870,7 +897,7 @@ function SizingGuideSection() {
                         <div className="flex items-center gap-4 mb-5 relative z-10">
                             <div className="relative">
                                 <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-0 group-hover/factor:scale-150 transition-transform duration-700"></div>
-                                <span className="material-symbols-outlined text-primary text-3xl group-hover/factor:scale-110 transition-transform duration-500 relative z-10">{factor.icon}</span>
+                                <DynamicIcon name={factor.icon} className="text-primary size-8 group-hover/factor:scale-110 transition-transform duration-500 relative z-10" />
                             </div>
                             <h4 className="text-[11px] font-black uppercase tracking-[0.25em] text-white/90 group-hover/factor:text-primary transition-colors duration-500 text-shadow-sm">{factor.title}</h4>
                         </div>
@@ -1141,11 +1168,11 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                             fill
                             sizes="(max-width: 768px) 100vw, 33vw"
                             className="object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative z-10 p-4 md:p-6"
-                            unoptimized={product.image_url?.endsWith('.svg')}
+                            unoptimized={displayImage?.endsWith('.svg')}
                         />
                     ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-slate-700 relative z-10">
-                            <span className="material-symbols-outlined text-6xl">ac_unit</span>
+                            <Snowflake className="size-16" />
                             <span className="text-[8px] font-black tracking-[0.3em] uppercase opacity-40">Industrial Unit [STAGED]</span>
                         </div>
                     );
@@ -1208,7 +1235,7 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                             }}
                             className="bg-red-500/10 hover:bg-red-500/20 text-red-500 font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-widest transition-all border border-red-500/20 hover:border-red-500/40 active:scale-95 flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]"
                         >
-                            <span className="material-symbols-outlined text-[12px]">visibility</span>
+                            <Eye className="size-3" />
                             SPECS
                         </button>
                         <button
@@ -1225,9 +1252,11 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                                     : "bg-slate-800 text-slate-500 cursor-not-allowed border border-white/5"
                             )}
                         >
-                            <span className="material-symbols-outlined text-[12px]">
-                                {product.stock > 0 ? 'add_shopping_cart' : 'block'}
-                            </span>
+                            {product.stock > 0 ? (
+                                <ShoppingCart className="size-3" />
+                            ) : (
+                                <Ban className="size-3" />
+                            )}
                             {product.stock > 0 ? 'SECURE' : 'SOLD OUT'}
                         </button>
                     </div>

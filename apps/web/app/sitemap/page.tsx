@@ -3,6 +3,7 @@ import { Product } from '@/types/inventory';
 import { generateProductSlug } from '@/lib/utils';
 import { BackToTop } from '@/components/BackToTop';
 import contentData from '@/lib/content/content.json';
+import { Navigation, ArrowRight, Package, AlertCircle, MapPin } from 'lucide-react';
 
 // Revalidate occasionally, or force dynamic if needed, to match sitemap.ts
 export const dynamic = 'force-dynamic';
@@ -85,7 +86,7 @@ export default async function SitemapPage() {
                     {/* Core Navigation Column */}
                     <div className="space-y-6">
                         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                            <span className="material-symbols-outlined text-primary text-2xl">route</span>
+                            <Navigation className="text-primary size-6" />
                             <h2 className="text-2xl font-header font-black uppercase tracking-widest text-white">Core Navigation</h2>
                         </div>
                         <ul className="space-y-3">
@@ -95,7 +96,7 @@ export default async function SitemapPage() {
                                         href={link.path}
                                         className="group flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all duration-300"
                                     >
-                                        <span className="material-symbols-outlined text-sm text-slate-500 group-hover:text-primary transition-colors">arrow_forward</span>
+                                        <ArrowRight className="size-3.5 text-slate-500 group-hover:text-primary transition-colors" />
                                         <span className="font-header font-bold uppercase tracking-widest text-xs md:text-sm group-hover:text-white transition-colors">{link.name}</span>
                                     </Link>
                                 </li>
@@ -106,7 +107,7 @@ export default async function SitemapPage() {
                     {/* Product Inventory Column */}
                     <div className="space-y-6">
                         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                            <span className="material-symbols-outlined text-emerald-500 text-2xl">inventory_2</span>
+                            <Package className="text-emerald-500 size-6" />
                             <h2 className="text-2xl font-header font-black uppercase tracking-widest text-white">Inventory Index</h2>
                         </div>
                         {products.length > 0 ? (
@@ -118,7 +119,7 @@ export default async function SitemapPage() {
                                             className="group flex flex-col gap-1 p-3 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all duration-300"
                                         >
                                             <div className="flex items-center gap-3">
-                                                <span className="material-symbols-outlined text-sm text-slate-500 group-hover:text-emerald-500 transition-colors">arrow_forward</span>
+                                                <ArrowRight className="size-3.5 text-slate-500 group-hover:text-emerald-500 transition-colors" />
                                                 <span className="font-header font-bold uppercase tracking-widest text-[10px] md:text-xs text-slate-400 group-hover:text-white transition-colors line-clamp-1">{product.name}</span>
                                             </div>
                                             <span className="pl-7 text-[9px] font-mono text-slate-600 uppercase tracking-widest block">{product.category.replace('_', ' ')}</span>
@@ -128,7 +129,7 @@ export default async function SitemapPage() {
                             </ul>
                         ) : (
                             <div className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl flex flex-col items-center justify-center text-center gap-3">
-                                <span className="material-symbols-outlined text-3xl text-slate-600">sync_problem</span>
+                                <AlertCircle className="size-8 text-slate-600" />
                                 <p className="text-xs uppercase tracking-widest font-bold text-slate-500">Live inventory temporarily unavailable.</p>
                             </div>
                         )}
@@ -137,7 +138,7 @@ export default async function SitemapPage() {
                     {/* Service Areas Column */}
                     <div className="space-y-6">
                         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                            <span className="material-symbols-outlined text-blue-400 text-2xl">pin_drop</span>
+                            <MapPin className="text-blue-400 size-6" />
                             <h2 className="text-xl md:text-2xl font-header font-black uppercase tracking-widest text-white">Service Areas (A-Z)</h2>
                         </div>
                         <ul className="space-y-3">
@@ -147,7 +148,7 @@ export default async function SitemapPage() {
                                         href={link.path}
                                         className="group flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all duration-300"
                                     >
-                                        <span className="material-symbols-outlined text-sm text-slate-500 group-hover:text-blue-400 transition-colors">arrow_forward</span>
+                                        <ArrowRight className="size-3.5 text-slate-500 group-hover:text-blue-400 transition-colors" />
                                         <span className="font-header font-bold uppercase tracking-widest text-xs md:text-sm group-hover:text-white transition-colors">{link.name}</span>
                                     </Link>
                                 </li>
