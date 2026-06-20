@@ -54,3 +54,7 @@ scripts/
 !apps/api/**/*.py
 !*.sh
 *.tsbuildinfo
+
+# Ignore local WebP image backups
+*_original.webp
+*_transparent_test.webp
