@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Calculator, CheckCircle2, AlertTriangle, ArrowRight, Sun, Sparkles } from 'lucide-react';
+import { Calculator, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
 
 interface ACCalculatorProps {
     productBtu: number;
@@ -11,6 +11,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
     const [length, setLength] = useState<number>(15);
     const [ceilHeight, setCeilHeight] = useState<'standard' | 'high' | 'vaulted'>('standard');
     const [sunExposure, setSunExposure] = useState<'shaded' | 'moderate' | 'sunny'>('moderate');
+    const [region, setRegion] = useState<'standard' | 'leeward' | 'windward' | 'urban'>('standard');
     const [insulation, setInsulation] = useState<'good' | 'poor'>('good');
     const [isKitchen, setIsKitchen] = useState<boolean>(false);
     const [occupants, setOccupants] = useState<number>(2);
@@ -19,12 +20,28 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
         const area = width * length;
         let baseBtu = area * 20; // 20 BTU per sq ft baseline
 
+        // Ceiling Height Load Modifier
         if (ceilHeight === 'high') baseBtu *= 1.10;
         if (ceilHeight === 'vaulted') baseBtu *= 1.20;
+
+        // Sun Exposure Modifier
         if (sunExposure === 'shaded') baseBtu *= 0.90;
         if (sunExposure === 'sunny') baseBtu *= 1.10;
+
+        // Oahu Micro-climate Region Modifier
+        let regionModifier = 1.0;
+        if (region === 'leeward') regionModifier = 1.15; // +15% for Kapolei, Ewa Beach, Waianae (intense sun & heat)
+        if (region === 'windward') regionModifier = 0.95; // -5% for Kailua, Kaneohe (cooling trade winds)
+        if (region === 'urban') regionModifier = 1.10;    // +10% for Honolulu Metro (urban heat island effect)
+        baseBtu *= regionModifier;
+
+        // Insulation Modifier
         if (insulation === 'poor') baseBtu *= 1.15;
+
+        // Kitchen cooking load adjustment
         if (isKitchen) baseBtu += 4000;
+
+        // Occupant heat load adjustment
         if (occupants > 2) baseBtu += (occupants - 2) * 600;
 
         const recommendedBtu = Math.round(baseBtu);
@@ -36,7 +53,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
         else if (diffPercent > 0.25) compatibility = 'OVERSIZED';
 
         return { area, recommendedBtu, compatibility };
-    }, [width, length, ceilHeight, sunExposure, insulation, isKitchen, occupants, productBtu]);
+    }, [width, length, ceilHeight, sunExposure, region, insulation, isKitchen, occupants, productBtu]);
 
     const sizingStatus = useMemo(() => {
         const { compatibility, recommendedBtu } = calculations;
@@ -106,7 +123,18 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <select 
+                            value={region} 
+                            onChange={(e) => setRegion(e.target.value as any)} 
+                            className="bg-[#0b1120] border border-border-dark text-slate-200 rounded-xl px-3 py-2 text-xs focus:border-primary/50 outline-none transition-all cursor-pointer"
+                            title="Oahu Micro-Climate Region"
+                        >
+                            <option value="standard">Standard Oahu</option>
+                            <option value="leeward">Leeward (Ewa/Kapolei)</option>
+                            <option value="windward">Windward (Kailua/Kaneohe)</option>
+                            <option value="urban">Honolulu / Urban</option>
+                        </select>
                         <select 
                             value={ceilHeight} 
                             onChange={(e) => setCeilHeight(e.target.value as any)} 
