@@ -83,6 +83,22 @@ export default function RootLayout({
                             "name": "Affordable Home A/C",
                             "image": "https://www.affordablehome-ac.com/assets/logo.png",
                             "url": "https://www.affordablehome-ac.com",
+                            "logo": "https://www.affordablehome-ac.com/assets/logo.png",
+                            "telephone": "+1-808-488-1111",
+                            "email": "office@affordablehome-ac.com",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "94-150 Leoleo St. #203",
+                                "addressLocality": "Waipahu",
+                                "addressRegion": "HI",
+                                "postalCode": "96797",
+                                "addressCountry": "US"
+                            },
+                            "geo": {
+                                "@type": "GeoCoordinates",
+                                "latitude": "21.3833",
+                                "longitude": "-158.0167"
+                            },
                             "areaServed": [
                                 {
                                     "@type": "State",

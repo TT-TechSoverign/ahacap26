@@ -1,12 +1,6 @@
-
 import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
-import Section4Projects from '@/components/Section4Projects';
 import { BackToTop } from '@/components/BackToTop';
 import FourthOfJulyBanner from '@/components/FourthOfJulyBanner';
-
-// Force dynamic since we want to ensure fresh rendering
-// v2.5 Visual Refinements Force Rebuild
-// export const dynamic = 'force-dynamic'; // Removed to unlock SSG Edge Caching
 
 import Image from 'next/image';
 
@@ -19,7 +13,7 @@ export default function Homepage() {
                     src="/assets/hero-cards/ahac-hero-background-2.webp"
                     alt="Expert HVAC Installation by Affordable Home A/C"
                     fill
-                    sizes="(max-width: 768px) 250px, 100vw"
+                    sizes="100vw"
                     className="object-cover object-center translate-y-[-10%] scale-110" // Slight shift to align visually
                     priority
                     quality={65}
@@ -35,8 +29,6 @@ export default function Homepage() {
                     <FourthOfJulyBanner />
                 </div>
                 <Section2OurServicesV2 />
-                {/* <Section4Projects /> */}
-                {/* <Render config={config} data={v2Data} /> */}
             </main>
             <BackToTop visible={true} />
         </div>

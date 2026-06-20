@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Product } from '@/types/inventory';
-import { generateProductSlug } from '@/lib/utils';
-import reviewsDb from '@/lib/content/reviews_db.json';
+import { generateProductSlug, isCampaignActive } from '@/lib/utils';
+import { getProductFaqs } from '@/lib/product-faq';
+import { getSelectedReviews } from '@/lib/product-reviews';
+import { getProductSpecs } from '@/lib/product-specs';
 
 // We must use force-dynamic because this depends on the backend API being up,
 // and we don't want the build to fail if the API container is restarting.
@@ -48,9 +50,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     }
 
-    const title = `${product.name} | Affordable Home A/C`;
-    const description = `Buy the ${product.name} at Affordable Home A/C. Professional installation and affordable prices in Oahu, Hawaii.`;
-    const domain = process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com';
+    const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
+    const activePrice = isPromo ? product.promo_price : product.price;
+    const priceText = activePrice.toFixed(2);
+    const coverageText = product.coverage ? ` Coverage: ${product.coverage}.` : '';
+
+    const title = `Buy ${product.name} | Window AC Oahu`;
+    const description = `Buy the ${product.name} at Affordable Home A/C. Price: $${priceText}.${isPromo ? ' (10% Off Applied).' : ''}${coverageText} Professional installation & pickup in Waipahu, Honolulu, and all 22 Oahu cities, Hawaii.`;
+    const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');
 
     return {
         title,
@@ -65,7 +72,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             siteName: 'Affordable Home A/C',
             images: product.image_url ? [
                 {
-                    url: product.image_url,
+                    url: product.image_url.replace('.svg', '.webp'),
                     width: 800,
                     height: 600,
                     alt: product.name,
@@ -73,6 +80,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             ] : undefined,
             type: 'website', 
         },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: product.image_url ? [product.image_url.replace('.svg', '.webp')] : undefined,
+        }
     };
 }
 
@@ -83,35 +96,19 @@ export default async function ProductLayout({ params, children }: Props) {
         notFound();
     }
 
-    // Prepare JSON-LD Product & Breadcrumb Schemas
-    // CRITICAL FIX: Database stores price in DOLLARS, not cents. Do not divide by 100.
-    const priceInDollars = product.price.toFixed(2);
-    const domain = process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com';
-    const absoluteImageUrl = product.image_url ? `${domain}${product.image_url}` : `${domain}/assets/logo.png`;
+    const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');
+    const absoluteImageUrl = product.image_url 
+        ? `${domain}${product.image_url.replace('.svg', '.webp')}` 
+        : `${domain}/assets/logo.png`;
     
-    // Deterministic stable mapping of real, scraped Yelp reviews from Affordable Home A/C Waipahu
-    const idHash = Array.from(product.id.toString()).reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const brandName = product.name.split(' ')[0] || 'Affordable Home A/C';
+    const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
+    const activePriceInDollars = isPromo ? product.promo_price.toFixed(2) : product.price.toFixed(2);
     const ratingValue = "4.8"; // Scraped local average
     
-    const allAhacReviews = reviewsDb.affordable_home_ac || [];
-    const reviewCount = allAhacReviews.length || 4;
-    
-    // Select 5 deterministic reviews based on the product.id hash
-    const selectedReviews = [];
-    if (allAhacReviews.length > 0) {
-        for (let i = 0; i < Math.min(5, allAhacReviews.length); i++) {
-            const reviewIdx = (idHash + i) % allAhacReviews.length;
-            selectedReviews.push(allAhacReviews[reviewIdx]);
-        }
-    } else {
-        // Fallback reviews if database is empty
-        selectedReviews.push(
-            { author: "Joyce T.", rating: 5, text: "Brian came over for a free estimate and guided us to the better recommendation for our situation. I appreciate his professional opinion and honest advice. Mahalo!" },
-            { author: "Mermaid S.", rating: 5, text: "They were very professional and had a new AC installed in less than an hour. Very energy efficient unit." },
-            { author: "Tommylynn B.", rating: 5, text: "I replaced two window ac units, called on Wednesday and Brian came out the next day. Professional, timely and installation was flawless! Mahalo Brian!" },
-            { author: "Tim B.", rating: 5, text: "I am giving Affordable Home Air Conditioning in Waipahu my highest recommendation to other Yelp users in the Honolulu area. Brian Borges and his team were quick, thorough and cost effective." }
-        );
-    }
+    const selectedReviews = getSelectedReviews(product.id);
+    const reviewCount = selectedReviews.length || 4;
+    const idHash = Array.from(product.id.toString()).reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
     const schema = {
         "@context": "https://schema.org/",
@@ -123,7 +120,7 @@ export default async function ProductLayout({ params, children }: Props) {
         "mpn": `AHAC-${product.id}`, // Resolves GSC "Missing MPN" warning
         "brand": {
             "@type": "Brand",
-            "name": "Affordable Home A/C"
+            "name": brandName
         },
         "aggregateRating": {
             "@type": "AggregateRating",
@@ -163,7 +160,7 @@ export default async function ProductLayout({ params, children }: Props) {
             "@type": "Offer",
             "url": `${domain}/shop/${params.slug}`,
             "priceCurrency": "USD",
-            "price": priceInDollars,
+            "price": activePriceInDollars,
             "priceValidUntil": "2027-12-31", // Resolves GSC "Missing priceValidUntil" warning
             "itemCondition": "https://schema.org/NewCondition",
             "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
@@ -171,7 +168,7 @@ export default async function ProductLayout({ params, children }: Props) {
                 "@type": "Organization",
                 "name": "Affordable Home A/C"
             },
-            // Resolves GSC "Missing hasMerchantReturnPolicy" warning with strict CEO-mandated "All Sales Final" policy
+            // Resolves GSC "Missing hasMerchantReturnPolicy" warning
             "hasMerchantReturnPolicy": {
                 "@type": "MerchantReturnPolicy",
                 "applicableCountry": "US",
@@ -268,6 +265,20 @@ export default async function ProductLayout({ params, children }: Props) {
         ]
     };
 
+    const faqs = getProductFaqs(product.name);
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.q,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.a
+            }
+        }))
+    };
+
     return (
         <>
             {/* Inject JSON-LD Product Schema */}
@@ -279,6 +290,11 @@ export default async function ProductLayout({ params, children }: Props) {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            {/* Inject JSON-LD FAQPage Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
             {/* Render the Client Component Page */}
             {children}
