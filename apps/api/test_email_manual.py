@@ -44,7 +44,9 @@ async def main():
     # 2. Test Connection
     print("\n[2] Testing SMTP Connection (verify_connection)...")
     try:
-        await email.verify_connection()
+        res = email.verify_connection()
+        if asyncio.iscoroutine(res) or asyncio.iscoroutinefunction(email.verify_connection):
+            await res
     except Exception as e:
         print(f"❌ verify_connection FAILED: {e}")
         return
