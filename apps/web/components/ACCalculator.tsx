@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Calculator, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
 
 interface ACCalculatorProps {
@@ -16,9 +16,42 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
     const [isKitchen, setIsKitchen] = useState<boolean>(false);
     const [occupants, setOccupants] = useState<number>(2);
 
+    // Load from sessionStorage if available to persist user sizing selections cross-page
+    useEffect(() => {
+        try {
+            const saved = sessionStorage.getItem('ahac_sizing_session');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (parsed.width) setWidth(Number(parsed.width));
+                if (parsed.length) setLength(Number(parsed.length));
+                if (parsed.ceilHeight) setCeilHeight(parsed.ceilHeight);
+                if (parsed.sunExposure) setSunExposure(parsed.sunExposure);
+                if (parsed.region) setRegion(parsed.region);
+                if (parsed.insulation) setInsulation(parsed.insulation);
+                if (parsed.isKitchen !== undefined) setIsKitchen(Boolean(parsed.isKitchen));
+                if (parsed.occupants) setOccupants(Number(parsed.occupants));
+            }
+        } catch (e) {
+            console.error("Failed to load sizing session in ACCalculator", e);
+        }
+    }, []);
+
     const calculations = useMemo(() => {
         const area = width * length;
-        let baseBtu = area * 20; // 20 BTU per sq ft baseline
+        
+        // Piecewise interpolation formula aligned directly to the shop page sizing table
+        let baseBtu = 6000;
+        if (area >= 100 && area <= 200) {
+            baseBtu = 6000 + ((area - 100) / 100) * 2000;
+        } else if (area > 200 && area <= 250) {
+            baseBtu = 10000 + ((area - 200) / 50) * 2000;
+        } else if (area > 250 && area <= 350) {
+            baseBtu = 14000 + ((area - 250) / 100) * 1000;
+        } else if (area > 350 && area <= 400) {
+            baseBtu = 15000 + ((area - 350) / 50) * 3000;
+        } else if (area > 400) {
+            baseBtu = 18000 + ((area - 400) / 200) * 6000;
+        }
 
         // Ceiling Height Load Modifier
         if (ceilHeight === 'high') baseBtu *= 1.10;

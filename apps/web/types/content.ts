@@ -196,6 +196,7 @@ export interface ShopSectionContent {
 
 export interface ShopContent {
     search_placeholder: string;
+    rebate?: any;
     hero: {
         subtitle: string;
         title_line1: string;
@@ -393,6 +394,7 @@ export interface FooterScheduleContent {
 
 export interface ContentSchema {
     landing: LandingContent;
+    landing_legacy?: any;
     contact: ContactContent;
     navigation: NavigationContent;
     shop: ShopContent;

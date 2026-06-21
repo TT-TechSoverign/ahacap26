@@ -237,7 +237,7 @@ export default function PromoHeroShowcase() {
                                     animationDuration: spark.duration,
                                     '--drift-y': spark.driftY,
                                     opacity: 0.7
-                                }}
+                                } as any}
                             />
                         ))}
                     </div>

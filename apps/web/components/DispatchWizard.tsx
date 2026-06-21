@@ -43,12 +43,16 @@ export function DispatchWizard() {
     useEffect(() => {
         const cityParam = searchParams?.get('city');
         const serviceParam = searchParams?.get('service');
+        const notesParam = searchParams?.get('notes');
 
         if (cityParam && !formData.city) {
             setFormData(prev => ({ ...prev, city: cityParam }));
         }
         if (serviceParam && !selectedServices.includes(serviceParam)) {
             setSelectedServices(prev => [...prev, serviceParam]);
+        }
+        if (notesParam && !formData.user_notes) {
+            setFormData(prev => ({ ...prev, user_notes: notesParam }));
         }
     }, [searchParams]);
 

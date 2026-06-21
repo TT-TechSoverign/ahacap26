@@ -38,7 +38,7 @@ const RelatedProducts = dynamic(() => import('@/components/RelatedProducts').the
 });
 
 // Progressive Skeleton UI Loader to guarantee 0 CLS during data hydration
-export function ProductPageSkeleton() {
+function ProductPageSkeleton() {
     return (
         <div className="bg-background-dark min-h-screen pt-[140px] md:pt-[165px] pb-12 px-4 md:px-8 max-w-6xl mx-auto animate-pulse">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">

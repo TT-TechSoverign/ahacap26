@@ -245,6 +245,35 @@ export default function ShopPage() {
 
                 <PromoBentoCard />
 
+                {/* Sizing Funnel CTA Banner */}
+                <div className="mt-8 mb-10 max-w-7xl mx-auto px-4">
+                    <div className="bg-[#0b1120]/60 border border-primary/20 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden backdrop-blur-md shadow-lg shadow-primary/5 group">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none z-0" />
+                        <div className="absolute top-0 left-0 w-12 h-[2px] bg-gradient-to-r from-primary to-transparent opacity-50 group-hover:w-24 transition-all duration-500"></div>
+
+                        <div className="space-y-2 relative z-10 text-center md:text-left flex-1">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-[9px] font-mono uppercase tracking-widest">
+                                <span className="relative flex h-1.5 w-1.5">
+                                    <span className="animate-ping absolute h-full w-full rounded-full bg-primary opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></span>
+                                </span>
+                                Calibrated Oahu Sizing Matrix
+                            </div>
+                            <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">Not Sure What AC Size You Need?</h3>
+                            <p className="font-sans text-xs text-slate-400 max-w-xl">
+                                Skip the guesswork. Run our interactive, step-by-step sizing wizard calibrated for Hawaii humidity and Oahu micro-climates. Zero typing required.
+                            </p>
+                        </div>
+
+                        <Link 
+                            href="/sizing"
+                            className="w-full md:w-auto px-8 py-3.5 bg-primary hover:bg-primary/95 text-black font-black uppercase text-[10px] tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.2)] hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] hover:scale-[1.02] flex items-center justify-center gap-2 shrink-0 group active:scale-98 relative z-10"
+                        >
+                            Launch Sizing Wizard <ArrowUpRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </Link>
+                    </div>
+                </div>
+
                 {/* Dynamic Reorderable Sections */}
                 <div className="space-y-8 md:space-y-10">
                     {error ? (
@@ -770,6 +799,24 @@ function SizingGuideSection() {
                     </div>
                 }
             />
+
+            {/* Interactive Funnel Launcher */}
+            <div className="mt-6 mb-8 max-w-4xl mx-auto">
+                <div className="bg-primary/5 border border-primary/20 rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left relative overflow-hidden">
+                    <div className="space-y-1">
+                        <h4 className="font-header font-black text-sm uppercase tracking-wider text-white">Oahu Interactive Sizing Funnel</h4>
+                        <p className="font-sans text-xs text-slate-400">
+                            Have high ceilings, sun-facing windows, or multiple occupants? Get an exact calibrated BTU recommendation.
+                        </p>
+                    </div>
+                    <Link
+                        href="/sizing"
+                        className="px-6 py-2.5 bg-primary hover:bg-primary/95 text-black font-black uppercase text-[10px] tracking-widest rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-1.5 shrink-0 group"
+                    >
+                        Start Funnel <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </Link>
+                </div>
+            </div>
 
             {/* Desktop Table View */}
             <div className="!hidden md:!block mt-8 md:mt-12 overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-charcoal relative">
