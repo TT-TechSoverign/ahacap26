@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# Dynamically resolve absolute path
+BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+cd "$BASE_DIR"
+
+
 # ==========================================
 # 🚀 AHAC Safe-Redeploy Protocol (V3)
 # ==========================================
