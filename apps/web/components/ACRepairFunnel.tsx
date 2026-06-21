@@ -19,7 +19,8 @@ import {
 
 export default function ACRepairFunnel() {
     const [step, setStep] = useState<number>(1);
-    const [systemType, setSystemType] = useState<'Mini Split' | 'Window AC' | null>(null);
+    // Default to 'Mini Split' since we only troubleshoot/repair mini split systems (window AC is cleaning only)
+    const [systemType] = useState<'Mini Split' | 'Window AC' | null>('Mini Split');
     const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
     const [customNotes, setCustomNotes] = useState<string>('');
 
@@ -40,9 +41,7 @@ export default function ACRepairFunnel() {
     };
 
     const getContactLink = () => {
-        const service = systemType === 'Mini Split' 
-            ? 'Mini Split Diagnosis/Repair' 
-            : 'Window AC Diagnosis/Repair';
+        const service = 'Mini Split Diagnosis/Repair';
         
         let notes = `Selected Symptoms: ${selectedSymptoms.join(', ')}.`;
         if (customNotes.trim()) {
@@ -68,7 +67,7 @@ export default function ACRepairFunnel() {
                     SYSTEM DIAGNOSTIC WIZARD
                 </span>
                 <span className="font-mono text-[9px] font-black text-slate-400">
-                    STEP {step} OF 3
+                    STEP {step} OF 2
                 </span>
             </div>
 
@@ -85,68 +84,10 @@ export default function ACRepairFunnel() {
                         >
                             <div className="text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-wider">
-                                    What system needs repair?
-                                </h3>
-                                <p className="text-xs text-slate-400 font-sans mt-1">
-                                    Select your system type to calibrate the diagnostic routine.
-                                </p>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {[
-                                    { type: 'Mini Split' as const, label: 'Ductless Mini Split', desc: 'Wall-mounted unit with outdoor condenser' },
-                                    { type: 'Window AC' as const, label: 'Window / Sleeve AC', desc: 'Unit mounted in window frame or wall sleeve' }
-                                ].map((sys) => (
-                                    <button
-                                        key={sys.type}
-                                        type="button"
-                                        onClick={() => setSystemType(sys.type)}
-                                        className={`p-6 rounded-2xl border text-left flex flex-col justify-between transition-all duration-300 h-32 active:scale-[0.98] ${systemType === sys.type ? 'bg-[#00E5FF]/5 border-[#00E5FF]/40 shadow-[0_0_15px_rgba(0,229,255,0.1)]' : 'bg-white/[0.01] border-white/5 hover:border-white/10 hover:bg-white/[0.02]'}`}
-                                        aria-label={`Select ${sys.label}`}
-                                    >
-                                        <div className="flex justify-between items-center w-full">
-                                            <span className="font-header font-black text-sm uppercase tracking-widest text-white">{sys.label}</span>
-                                            {systemType === sys.type && (
-                                                <div className="w-5 h-5 rounded-full bg-[#00E5FF]/20 flex items-center justify-center border border-[#00E5FF]/40 text-[#00E5FF]">
-                                                    <Check className="w-3 h-3" />
-                                                </div>
-                                            )}
-                                        </div>
-                                        <p className="text-xs text-slate-400 mt-2 font-sans font-light leading-relaxed">{sys.desc}</p>
-                                    </button>
-                                ))}
-                            </div>
-
-                            <div className="flex justify-end pt-4">
-                                <button
-                                    type="button"
-                                    disabled={!systemType}
-                                    onClick={() => setStep(2)}
-                                    className="px-6 py-3 bg-[#00E5FF] hover:bg-[#00E5FF]/90 text-slate-950 font-header font-black uppercase text-[10px] tracking-widest rounded-lg flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(0,229,255,0.2)]"
-                                    aria-label="Proceed to symptoms selection"
-                                >
-                                    Select Symptoms
-                                    <ArrowRight className="w-4 h-4" />
-                                </button>
-                            </div>
-                        </motion.div>
-                    )}
-
-                    {step === 2 && (
-                        <motion.div
-                            key="step2"
-                            initial="enter"
-                            animate="center"
-                            exit="exit"
-                            variants={variants}
-                            className="space-y-6"
-                        >
-                            <div className="text-center md:text-left">
-                                <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-wider">
                                     What symptoms are you experiencing?
                                 </h3>
                                 <p className="text-xs text-slate-400 font-sans mt-1">
-                                    Select all that apply to help us prepare the right parts for your dispatch.
+                                    Select all that apply to help us prepare the right parts for your service.
                                 </p>
                             </div>
 
@@ -176,20 +117,11 @@ export default function ACRepairFunnel() {
                                 })}
                             </div>
 
-                            <div className="flex justify-between pt-4 gap-4">
-                                <button
-                                    type="button"
-                                    onClick={() => setStep(1)}
-                                    className="px-6 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-300 font-header font-black uppercase text-[10px] tracking-widest rounded-lg flex items-center gap-2 transition-all"
-                                    aria-label="Go back to system type selection"
-                                >
-                                    <ArrowLeft className="w-4 h-4" />
-                                    Back
-                                </button>
+                            <div className="flex justify-end pt-4">
                                 <button
                                     type="button"
                                     disabled={selectedSymptoms.length === 0}
-                                    onClick={() => setStep(3)}
+                                    onClick={() => setStep(2)}
                                     className="px-6 py-3 bg-[#00E5FF] hover:bg-[#00E5FF]/90 text-slate-950 font-header font-black uppercase text-[10px] tracking-widest rounded-lg flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(0,229,255,0.2)]"
                                     aria-label="Proceed to confirmation notes"
                                 >
@@ -200,9 +132,9 @@ export default function ACRepairFunnel() {
                         </motion.div>
                     )}
 
-                    {step === 3 && (
+                    {step === 2 && (
                         <motion.div
-                            key="step3"
+                            key="step2"
                             initial="enter"
                             animate="center"
                             exit="exit"
@@ -239,7 +171,7 @@ export default function ACRepairFunnel() {
                             <div className="flex justify-between pt-4 gap-4">
                                 <button
                                     type="button"
-                                    onClick={() => setStep(2)}
+                                    onClick={() => setStep(1)}
                                     className="px-6 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-300 font-header font-black uppercase text-[10px] tracking-widest rounded-lg flex items-center gap-2 transition-all"
                                     aria-label="Go back to symptoms selection"
                                 >

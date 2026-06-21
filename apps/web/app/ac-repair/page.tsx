@@ -66,7 +66,7 @@ export default function ACRepairPage() {
     const repairFaqs = [
         {
             q: 'How quickly can a technician be dispatched for a repair?',
-            a: 'We offer prompt scheduling across Oahu. We typically schedule technicians within 24-48 hours depending on volume. Schedule online using our diagnostic wizard for prompt service.'
+            a: 'We offer scheduling across Oahu based on our soonest availability. Depending on seasonal volume, we may be booked out several weeks. Use our online diagnostic wizard to check availability and schedule your request.'
         },
         {
             q: 'What is your diagnostic service fee?',
@@ -78,7 +78,7 @@ export default function ACRepairPage() {
         },
         {
             q: 'Is there a warranty on your repair work?',
-            a: 'Yes! We stand behind our quality of service. All repair work includes a 1-year warranty on parts replaced by our team and our standard craftsmanship guarantee.'
+            a: 'Yes! We stand behind our quality of service. All repair work includes a 14-day warranty on parts and craftsmanship.'
         }
     ];
 
@@ -109,74 +109,71 @@ export default function ACRepairPage() {
                     <div className="w-24 h-1 bg-primary shadow-[0_0_10px_rgba(0,174,239,0.5)]"></div>
                     
                     <p className="max-w-2xl text-slate-300 text-sm md:text-base leading-relaxed font-light">
-                        Don&apos;t let Hawaii&apos;s humidity take over. From quick window AC troubleshooting to complete ductless mini-split diagnostics, our licensed HVAC technicians restore comfort fast.
+                        Don&apos;t let Hawaii&apos;s humidity take over. With complete ductless mini-split diagnostics, our licensed HVAC technicians restore comfort fast.
                     </p>
                 </div>
             </section>
 
-            {/* 2. SOLUTIONS & DIAGNOSTIC WIZARD GRID */}
-            <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8 items-start">
-                
-                {/* Left Side: Services List & Trust Badges */}
-                <div className="lg:col-span-6 space-y-12">
-                    <div className="space-y-4">
-                        <h2 className="text-2xl md:text-3xl font-header font-black uppercase tracking-wider text-white">
-                            Common A/C Failures We Solve
-                        </h2>
-                        <p className="text-xs text-slate-400 font-sans leading-relaxed">
-                            Hawaii&apos;s heavy salt air and heat accelerate wear. We target and resolve these common cooling system issues:
-                        </p>
-                    </div>
+            {/* 2. COMMON A/C FAILURES WE SOLVE SECTION */}
+            <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 mt-8">
+                <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                    <h2 className="text-3xl md:text-4xl font-header font-black uppercase tracking-wider text-white">
+                        Common A/C Failures We Solve
+                    </h2>
+                    <div className="w-16 h-1 bg-primary mx-auto shadow-[0_0_10px_rgba(0,174,239,0.5)]"></div>
+                    <p className="text-sm text-slate-400 font-sans leading-relaxed">
+                        Hawaii&apos;s heavy salt air and heat accelerate wear. We target and resolve these common cooling system issues:
+                    </p>
+                </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {repairSolutions.map((sol, index) => {
-                            const Icon = sol.icon;
-                            return (
-                                <div key={index} className="p-6 bg-surface-dark/60 border border-border-dark rounded-2xl group hover:border-primary/20 hover:shadow-[0_0_20px_rgba(0,174,239,0.05)] transition-all duration-300">
-                                    <div className="w-10 h-10 rounded-xl bg-background-dark border border-border-dark flex items-center justify-center text-primary mb-4 group-hover:bg-primary/10 transition-colors">
-                                        <Icon className="w-5 h-5" />
-                                    </div>
-                                    <h3 className="font-header font-black text-sm uppercase text-white mb-2 tracking-wider">
-                                        {sol.title}
-                                    </h3>
-                                    <p className="text-xs text-slate-400 leading-relaxed font-sans font-light">
-                                        {sol.desc}
-                                    </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {repairSolutions.map((sol, index) => {
+                        const Icon = sol.icon;
+                        return (
+                            <div key={index} className="p-6 bg-surface-dark/60 border border-border-dark rounded-2xl group hover:border-primary/20 hover:shadow-[0_0_20px_rgba(0,174,239,0.05)] transition-all duration-300">
+                                <div className="w-10 h-10 rounded-xl bg-background-dark border border-border-dark flex items-center justify-center text-primary mb-4 group-hover:bg-primary/10 transition-colors">
+                                    <Icon className="w-5 h-5" />
                                 </div>
-                            );
-                        })}
-                    </div>
+                                <h3 className="font-header font-black text-sm uppercase text-white mb-2 tracking-wider">
+                                    {sol.title}
+                                </h3>
+                                <p className="text-xs text-slate-400 leading-relaxed font-sans font-light">
+                                    {sol.desc}
+                                </p>
+                            </div>
+                        );
+                    })}
+                </div>
 
-                    {/* Trust Badges */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-border-dark">
-                        <div className="flex gap-3 items-center">
-                            <Truck className="w-8 h-8 text-primary shrink-0" />
-                            <div>
-                                <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">Fast Dispatch</h4>
-                                <p className="text-[9px] text-slate-400 font-sans">Island-wide fleet ready</p>
-                            </div>
+                {/* Trust Badges */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-12 mt-12 border-t border-border-dark max-w-4xl mx-auto">
+                    <div className="flex gap-3 items-center">
+                        <Truck className="w-8 h-8 text-primary shrink-0" />
+                        <div>
+                            <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">Soonest Availability</h4>
+                            <p className="text-[9px] text-slate-400 font-sans">Flexible booking options</p>
                         </div>
-                        <div className="flex gap-3 items-center">
-                            <ShieldCheck className="w-8 h-8 text-primary shrink-0" />
-                            <div>
-                                <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">Licensed Pros</h4>
-                                <p className="text-[9px] text-slate-400 font-sans">Fully bonded & insured</p>
-                            </div>
+                    </div>
+                    <div className="flex gap-3 items-center">
+                        <ShieldCheck className="w-8 h-8 text-primary shrink-0" />
+                        <div>
+                            <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">Licensed Pros</h4>
+                            <p className="text-[9px] text-slate-400 font-sans">Fully bonded & insured</p>
                         </div>
-                        <div className="flex gap-3 items-center">
-                            <Clock className="w-8 h-8 text-primary shrink-0" />
-                            <div>
-                                <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">1-Yr Warranty</h4>
-                                <p className="text-[9px] text-slate-400 font-sans">All repair work covered</p>
-                            </div>
+                    </div>
+                    <div className="flex gap-3 items-center">
+                        <Clock className="w-8 h-8 text-primary shrink-0" />
+                        <div>
+                            <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">14-Day Warranty</h4>
+                            <p className="text-[9px] text-slate-400 font-sans">All workmanship covered</p>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                {/* Right Side: Interactive Diagnostics Wizard */}
-                <div className="lg:col-span-6">
-                    <ACRepairFunnel />
-                </div>
+            {/* 3. SYSTEM DIAGNOSTIC WIZARD SECTION */}
+            <section className="relative z-10 max-w-4xl mx-auto px-6 mt-24">
+                <ACRepairFunnel />
             </section>
 
             {/* 3. FAQ SECTION */}
