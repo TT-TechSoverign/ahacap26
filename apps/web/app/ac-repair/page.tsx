@@ -1,7 +1,10 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
-import ACRepairFunnel from '@/components/ACRepairFunnel';
+import dynamic from 'next/dynamic';
+const ACRepairFunnel = dynamic(() => import('@/components/ACRepairFunnel'), {
+    ssr: false,
+    loading: () => <div className="min-h-[400px] bg-slate-900/40 border border-white/5 rounded-3xl p-8 flex items-center justify-center text-slate-400 font-mono text-xs uppercase tracking-widest animate-pulse">Loading System Diagnostic Wizard...</div>
+});
 import { BackToTop } from '@/components/BackToTop';
 import { 
     Wrench, 
@@ -83,7 +86,7 @@ export default function ACRepairPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-background-dark font-sans text-white pb-24 relative overflow-hidden">
+        <main className="min-h-screen bg-background-dark font-sans text-white pb-24 relative overflow-hidden">
             {/* Ambient Background Grid */}
             <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" 
                  style={{ backgroundImage: 'radial-gradient(#334155 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
@@ -228,6 +231,6 @@ export default function ACRepairPage() {
             </section>
 
             <BackToTop visible={true} />
-        </div>
+        </main>
     );
 }
