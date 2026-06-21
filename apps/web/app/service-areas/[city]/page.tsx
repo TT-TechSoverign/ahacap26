@@ -122,7 +122,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                 </div>
             </section>
 
-            {/* 2. QUAD-CONVERSION FUNNEL */}
+            {/* 2. SYSTEM DIAGNOSTIC SCHEDULER */}
             <LocalServiceFunnel city={cityData.name} />
 
             {/* 3. DYNAMIC EDUCATIONAL SEO BODY */}

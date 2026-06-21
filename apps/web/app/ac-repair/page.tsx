@@ -66,7 +66,7 @@ export default function ACRepairPage() {
     const repairFaqs = [
         {
             q: 'How quickly can a technician be dispatched for a repair?',
-            a: 'We offer prompt scheduling across Oahu. For emergency repair situations, we dispatch technicians within 24-48 hours depending on volume. Schedule online using our symptom funnel for fastest dispatch.'
+            a: 'We offer prompt scheduling across Oahu. We typically schedule technicians within 24-48 hours depending on volume. Schedule online using our diagnostic wizard for prompt service.'
         },
         {
             q: 'What is your diagnostic service fee?',
@@ -98,7 +98,7 @@ export default function ACRepairPage() {
                 <div className="flex flex-col items-center text-center space-y-6">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-[0.2em]">
                         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                        Emergency AC Diagnostics
+                        Expert AC Diagnostics
                     </div>
                     
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-header font-black tracking-tight uppercase leading-none max-w-4xl">
@@ -114,7 +114,7 @@ export default function ACRepairPage() {
                 </div>
             </section>
 
-            {/* 2. SOLUTIONS & FUNNEL GRID */}
+            {/* 2. SOLUTIONS & DIAGNOSTIC WIZARD GRID */}
             <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8 items-start">
                 
                 {/* Left Side: Services List & Trust Badges */}

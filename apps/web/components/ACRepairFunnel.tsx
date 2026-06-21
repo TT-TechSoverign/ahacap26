@@ -65,7 +65,7 @@ export default function ACRepairFunnel() {
 
             <div className="flex justify-between items-center mb-6 pb-4 border-b border-white/5 relative z-10">
                 <span className="font-mono text-[9px] font-black uppercase tracking-[0.4em] text-[#00E5FF]/70">
-                    DIAGNOSTIC FUNNEL WIZARD
+                    SYSTEM DIAGNOSTIC WIZARD
                 </span>
                 <span className="font-mono text-[9px] font-black text-slate-400">
                     STEP {step} OF 3

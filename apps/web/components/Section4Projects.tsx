@@ -56,7 +56,7 @@ const PROJECT_IMAGES: ProjectImage[] = [
     { src: '/assets/yelpphotos/yelp13.jpg', alt: 'New Installation', description: 'Brand new AC installation' },
     { src: '/assets/yelpphotos/yelp14.jpg', alt: 'System Check', description: 'Routine system checkup' },
     { src: '/assets/yelpphotos/yelp15.jpg', alt: 'Filter Replacement', description: 'Air filter replacement' },
-    { src: '/assets/yelpphotos/yelp16.jpg', alt: 'Emergency Service', description: 'Emergency HVAC service' },
+    { src: '/assets/yelpphotos/yelp16.jpg', alt: 'Professional Service', description: 'Professional HVAC service' },
     { src: '/assets/yelpphotos/yelp17.jpg', alt: 'Commercial HVAC', description: 'Commercial HVAC solutions' },
     { src: '/assets/yelpphotos/yelp18.jpg', alt: 'Residential cooling', description: 'Residential cooling solutions' },
     { src: '/assets/yelpphotos/yelp19.jpg', alt: 'Heating System', description: 'Heating system maintenance' },

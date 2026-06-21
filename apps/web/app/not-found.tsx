@@ -31,7 +31,7 @@ export default function NotFound() {
             Shop Window ACs
           </Link>
           <Link href="/contact" className="w-full md:w-auto px-8 py-4 bg-transparent border border-cyan-500/50 hover:border-cyan-400 text-cyan-400 font-black uppercase tracking-widest text-sm rounded-full transition-all">
-            Request Emergency Service
+            Request Service
           </Link>
         </div>
       </div>
