@@ -74,7 +74,7 @@ export default function ACRepairPage() {
         },
         {
             q: 'Do you repair all AC brands?',
-            a: 'Yes, our licensed technicians are trained to repair all major brands, including Fujitsu, Mitsubishi, Daikin, Carrier, LG, and GE, for both ductless mini-split and window systems.'
+            a: 'Yes, our licensed technicians are trained to repair all major brands, including Fujitsu, Mitsubishi, Daikin, and Carrier for ductless mini-split systems.'
         },
         {
             q: 'Is there a warranty on your repair work?',
