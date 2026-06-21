@@ -526,7 +526,7 @@ export default function ProductDetailPage() {
                             <div className="mt-6 bg-[#0f0505] border border-red-500/20 rounded-xl p-4 flex flex-col items-center text-center shadow-[inset_0_0_20px_rgba(239,68,68,0.05)] font-sans">
                                 <div className="flex items-center gap-2 mb-2 text-red-500">
                                     <ShieldAlert className="size-4" />
-                                    <h5 className="font-header font-black uppercase tracking-[0.2em] text-[10px]">Manufacturer Warranty Coverage</h5>
+                                    <span className="font-header font-black uppercase tracking-[0.2em] text-[10px]">Manufacturer Warranty Coverage</span>
                                 </div>
                                 <div className="space-y-1">
                                     <p className="text-red-400/80 text-[9px] font-bold leading-relaxed uppercase tracking-widest">

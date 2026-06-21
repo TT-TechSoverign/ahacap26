@@ -6,12 +6,12 @@ import type { NextRequest } from 'next/server';
 const LEGACY_ID_TO_SLUG: Record<string, string> = {
     '2853': '4-lg-dual-inverter-12-000-btu-lw1222ivsm', // 12000 BTU
     '3700': '2-lg-dual-inverter-8-000-btu-lw8022ivsm', // 8000 BTU
-    '2909': '7-lg-dual-inverter-24-000-btu-lw2422ivsm', // Approx 23000/24000 BTU
+    '2909': '7-lg-dual-inverter-23-500-btu-lw2422ivsm', // Approx 23500 BTU
     '3512': '3-lg-dual-inverter-10-000-btu-lw1022ivsm', // Approx 10000
     '2463': '1-lg-dual-inverter-6-000-btu-lw6023ivsm', // Approx 6000
     '2923': '5-lg-dual-inverter-14-000-btu-lw1522ivsm', // Approx 14000
     '2427': '6-lg-dual-inverter-18-000-btu-lw1822ivsm', // Approx 18000
-    '2924': '7-lg-dual-inverter-24-000-btu-lw2422ivsm', // Approx 23500/24000
+    '2924': '7-lg-dual-inverter-23-500-btu-lw2422ivsm', // Approx 23500
 };
 
 
@@ -85,7 +85,11 @@ export function middleware(request: NextRequest) {
 
         // 2c. Service/Contact Mapping
         if (!isSpecificMatch && (pathLower.includes('repair') || pathLower.includes('maintenance') || pathLower.includes('cleaning'))) {
-            destinationPath = '/window_ac_maintenance';
+            if (pathLower.includes('mini-split') || pathLower.includes('split-ac') || pathLower.includes('split_ac')) {
+                destinationPath = '/mini_split_ac_maintenance';
+            } else {
+                destinationPath = '/window_ac_maintenance';
+            }
             isSpecificMatch = true;
         }
 

@@ -311,6 +311,7 @@ export function ACSelectorWizard() {
                                             value={width} 
                                             onChange={(e) => setWidth(Number(e.target.value))} 
                                             className="flex-1 accent-primary h-1 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                                            aria-label="Room Width in Feet"
                                         />
                                         <button 
                                             type="button"
@@ -343,6 +344,7 @@ export function ACSelectorWizard() {
                                             value={length} 
                                             onChange={(e) => setLength(Number(e.target.value))} 
                                             className="flex-1 accent-primary h-1 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                                            aria-label="Room Length in Feet"
                                         />
                                         <button 
                                             type="button"
@@ -405,7 +407,7 @@ export function ACSelectorWizard() {
                             <div className="space-y-8 max-w-xl mx-auto">
                                 {/* Ceiling Height Options */}
                                 <div className="space-y-3">
-                                    <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black block">Ceiling Height</label>
+                                    <label className="font-mono text-[9px] text-slate-400 uppercase tracking-widest font-black block">Ceiling Height</label>
                                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                         {[
                                             { key: 'standard', label: 'Standard (8ft)', desc: 'Standard residential scale', factor: 'x 1.0' },
@@ -420,7 +422,7 @@ export function ACSelectorWizard() {
                                             >
                                                 <div className="flex justify-between items-start w-full">
                                                     <span className="font-header font-black text-xs uppercase tracking-wider text-white">{item.label}</span>
-                                                    <span className={`font-mono text-[8px] font-bold px-2 py-0.5 rounded ${ceilHeight === item.key ? 'bg-primary/20 text-primary' : 'bg-white/5 text-slate-500'}`}>{item.factor}</span>
+                                                    <span className={`font-mono text-[8px] font-bold px-2 py-0.5 rounded ${ceilHeight === item.key ? 'bg-primary/20 text-primary' : 'bg-white/5 text-slate-400'}`}>{item.factor}</span>
                                                 </div>
                                                 <span className="font-sans text-[10px] text-slate-400 mt-2 leading-relaxed">{item.desc}</span>
                                             </button>
@@ -430,7 +432,7 @@ export function ACSelectorWizard() {
 
                                 {/* Insulation Quality Options */}
                                 <div className="space-y-3">
-                                    <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black block">Insulation Status</label>
+                                    <label className="font-mono text-[9px] text-slate-400 uppercase tracking-widest font-black block">Insulation Status</label>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                         {[
                                             { key: 'good', label: 'Well-Insulated / Modern', desc: 'Double-pane windows, sealed gaps, solid insulation panels.', factor: 'x 1.0' },
@@ -444,7 +446,7 @@ export function ACSelectorWizard() {
                                             >
                                                 <div className="flex justify-between items-start w-full">
                                                     <span className="font-header font-black text-xs uppercase tracking-wider text-white">{item.label}</span>
-                                                    <span className={`font-mono text-[8px] font-bold px-2 py-0.5 rounded ${insulation === item.key ? 'bg-primary/20 text-primary' : 'bg-white/5 text-slate-500'}`}>{item.factor}</span>
+                                                    <span className={`font-mono text-[8px] font-bold px-2 py-0.5 rounded ${insulation === item.key ? 'bg-primary/20 text-primary' : 'bg-white/5 text-slate-400'}`}>{item.factor}</span>
                                                 </div>
                                                 <span className="font-sans text-[10px] text-slate-400 mt-2 leading-relaxed">{item.desc}</span>
                                             </button>
@@ -491,7 +493,7 @@ export function ACSelectorWizard() {
                             <div className="space-y-8 max-w-xl mx-auto">
                                 {/* Oahu Region */}
                                 <div className="space-y-3">
-                                    <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black block">Oahu Micro-Climate Region</label>
+                                    <label className="font-mono text-[9px] text-slate-400 uppercase tracking-widest font-black block">Oahu Micro-Climate Region</label>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                         {[
                                             { key: 'standard', label: 'Standard Oahu', desc: 'Central Oahu, Mililani, standard climate loads.', factor: 'x 1.0' },
@@ -507,7 +509,7 @@ export function ACSelectorWizard() {
                                             >
                                                 <div className="flex justify-between items-start w-full">
                                                     <span className="font-header font-black text-xs uppercase tracking-wider text-white">{item.label}</span>
-                                                    <span className={`font-mono text-[8px] font-bold px-2 py-0.5 rounded ${region === item.key ? 'bg-primary/20 text-primary' : 'bg-white/5 text-slate-500'}`}>{item.factor}</span>
+                                                    <span className={`font-mono text-[8px] font-bold px-2 py-0.5 rounded ${region === item.key ? 'bg-primary/20 text-primary' : 'bg-white/5 text-slate-400'}`}>{item.factor}</span>
                                                 </div>
                                                 <span className="font-sans text-[10px] text-slate-400 mt-2 leading-relaxed">{item.desc}</span>
                                             </button>
@@ -517,7 +519,7 @@ export function ACSelectorWizard() {
 
                                 {/* Sun Exposure */}
                                 <div className="space-y-3">
-                                    <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black block">Daytime Solar Exposure</label>
+                                    <label className="font-mono text-[9px] text-slate-400 uppercase tracking-widest font-black block">Daytime Solar Exposure</label>
                                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                         {[
                                             { key: 'shaded', label: 'Heavy Shaded / North', desc: 'Heavily shaded, North facing windows.', factor: '-10% load' },
@@ -532,7 +534,7 @@ export function ACSelectorWizard() {
                                             >
                                                 <div className="flex justify-between items-start w-full">
                                                     <span className="font-header font-black text-xs uppercase tracking-wider text-white">{item.label}</span>
-                                                    <span className={`font-mono text-[8px] font-bold px-2 py-0.5 rounded ${sunExposure === item.key ? 'bg-primary/20 text-primary' : 'bg-white/5 text-slate-500'}`}>{item.factor}</span>
+                                                    <span className={`font-mono text-[8px] font-bold px-2 py-0.5 rounded ${sunExposure === item.key ? 'bg-primary/20 text-primary' : 'bg-white/5 text-slate-400'}`}>{item.factor}</span>
                                                 </div>
                                                 <span className="font-sans text-[10px] text-slate-400 mt-2 leading-relaxed">{item.desc}</span>
                                             </button>
@@ -580,7 +582,7 @@ export function ACSelectorWizard() {
                                 <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-center space-y-6">
                                     <div>
                                         <span className="font-header font-black text-sm uppercase tracking-widest text-slate-400 block mb-1">Daily Room Occupants</span>
-                                        <p className="font-sans text-[10px] text-slate-500">Calculations include a baseline of 2 people. Each additional occupant adds +600 BTU demand.</p>
+                                        <p className="font-sans text-[10px] text-slate-400">Calculations include a baseline of 2 people. Each additional occupant adds +600 BTU demand.</p>
                                     </div>
 
                                     <div className="text-5xl font-header font-black text-primary py-2">{occupants} <span className="text-xs uppercase text-slate-400 font-bold tracking-wider">People</span></div>
@@ -647,7 +649,7 @@ export function ACSelectorWizard() {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 items-center">
                                     <div className="space-y-3 text-center md:text-left">
-                                        <p className="font-mono text-[9px] font-black text-slate-500 uppercase tracking-widest">Calculated Load Demand</p>
+                                        <p className="font-mono text-[9px] font-black text-slate-400 uppercase tracking-widest">Calculated Load Demand</p>
                                         <h2 className="text-4xl lg:text-5xl font-header font-black text-white leading-none">
                                             {calculation.recommendedBtu.toLocaleString()} <span className="text-lg text-primary uppercase font-bold">BTU</span>
                                         </h2>
@@ -674,7 +676,7 @@ export function ACSelectorWizard() {
                             <div className="space-y-6 max-w-5xl mx-auto">
                                 <div className="flex justify-between items-center border-b border-white/5 pb-4">
                                     <span className="font-header font-black text-xs uppercase tracking-widest text-slate-400">Perfect & Safe Matches</span>
-                                    <span className="font-mono text-[9px] text-slate-500 uppercase tracking-widest">Found {matches.length} matching units</span>
+                                    <span className="font-mono text-[9px] text-slate-400 uppercase tracking-widest">Found {matches.length} matching units</span>
                                 </div>
 
                                 {loadingProducts ? (

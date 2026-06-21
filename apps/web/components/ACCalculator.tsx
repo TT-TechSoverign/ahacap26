@@ -122,7 +122,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
             
             <div className="flex items-center gap-2 mb-4 relative z-10">
                 <Calculator className="size-5 text-primary animate-pulse" />
-                <h4 className="font-header font-black uppercase text-sm tracking-wider text-white">Hawaii BTU Sizing Matrix</h4>
+                <h2 className="font-header font-black uppercase text-sm tracking-wider text-white">Hawaii BTU Sizing Matrix</h2>
             </div>
 
             <p className="text-slate-400 text-xs leading-relaxed mb-6 font-sans">
@@ -144,6 +144,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                                 value={width} 
                                 onChange={(e) => setWidth(Number(e.target.value))} 
                                 className="w-full accent-primary cursor-pointer"
+                                aria-label="Room Width in Feet"
                             />
                             <input 
                                 type="range" 
@@ -152,6 +153,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                                 value={length} 
                                 onChange={(e) => setLength(Number(e.target.value))} 
                                 className="w-full accent-primary cursor-pointer"
+                                aria-label="Room Length in Feet"
                             />
                         </div>
                     </div>
@@ -162,6 +164,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                             onChange={(e) => setRegion(e.target.value as any)} 
                             className="bg-[#0b1120] border border-border-dark text-slate-200 rounded-xl px-3 py-2 text-xs focus:border-primary/50 outline-none transition-all cursor-pointer"
                             title="Oahu Micro-Climate Region"
+                            aria-label="Oahu Micro-Climate Region"
                         >
                             <option value="standard">Standard Oahu</option>
                             <option value="leeward">Leeward (Ewa/Kapolei)</option>
@@ -172,6 +175,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                             value={ceilHeight} 
                             onChange={(e) => setCeilHeight(e.target.value as any)} 
                             className="bg-[#0b1120] border border-border-dark text-slate-200 rounded-xl px-3 py-2 text-xs focus:border-primary/50 outline-none transition-all cursor-pointer"
+                            aria-label="Room Ceiling Height"
                         >
                             <option value="standard">8ft Ceilings</option>
                             <option value="high">9-11ft Ceilings</option>
@@ -181,6 +185,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                             value={sunExposure} 
                             onChange={(e) => setSunExposure(e.target.value as any)} 
                             className="bg-[#0b1120] border border-border-dark text-slate-200 rounded-xl px-3 py-2 text-xs focus:border-primary/50 outline-none transition-all cursor-pointer"
+                            aria-label="Room Sun Exposure"
                         >
                             <option value="shaded">North / Shaded</option>
                             <option value="moderate">Moderate Sun</option>
@@ -195,6 +200,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                                 checked={isKitchen} 
                                 onChange={(e) => setIsKitchen(e.target.checked)} 
                                 className="rounded border-border-dark text-primary focus:ring-0 accent-primary" 
+                                aria-label="Is this room a kitchen?"
                             /> 
                             Is Kitchen (+4,000 BTU)
                         </label>
@@ -207,6 +213,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                                 value={occupants} 
                                 onChange={(e) => setOccupants(Math.max(1, Number(e.target.value)))} 
                                 className="w-10 bg-[#0b1120] text-center border border-border-dark rounded p-0.5 text-xs text-white" 
+                                aria-label="Number of regular occupants"
                             />
                         </div>
                     </div>
@@ -214,7 +221,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
 
                 <div className="flex flex-col justify-between border-t md:border-t-0 md:border-l border-border-dark/50 pt-4 md:pt-0 md:pl-6 text-center md:text-left">
                     <div>
-                        <div className="text-[9px] font-header font-black uppercase tracking-wider text-slate-500">Calculated Demand</div>
+                        <div className="text-[9px] font-header font-black uppercase tracking-wider text-slate-400">Calculated Demand</div>
                         <div className="text-3xl font-header font-black text-white mt-1">
                             {calculations.recommendedBtu.toLocaleString()} <span className="text-[10px] text-primary font-bold">BTU</span>
                         </div>

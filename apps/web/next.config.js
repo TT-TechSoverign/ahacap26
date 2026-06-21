@@ -94,6 +94,50 @@ const nextConfig = {
             },
         ];
     },
+    async redirects() {
+        return [
+            {
+                source: '/make-an-appointment',
+                destination: '/contact',
+                permanent: true,
+            },
+            {
+                source: '/make-an-appointment/',
+                destination: '/contact',
+                permanent: true,
+            },
+            {
+                source: '/cleaning-and-maintenance',
+                destination: '/maintenance',
+                permanent: true,
+            },
+            {
+                source: '/cleaning-and-maintenance/',
+                destination: '/maintenance',
+                permanent: true,
+            },
+            {
+                source: '/hawaii-energy-rebate',
+                destination: '/shop#rebate',
+                permanent: true,
+            },
+            {
+                source: '/hawaii-energy-rebate/',
+                destination: '/shop#rebate',
+                permanent: true,
+            },
+            {
+                source: '/product-tag/:path*',
+                destination: '/shop',
+                permanent: true,
+            },
+            {
+                source: '/product-category/:path*',
+                destination: '/shop',
+                permanent: true,
+            },
+        ];
+    },
 };
 
 // const { withSentryConfig } = require("@sentry/nextjs");

@@ -46,9 +46,9 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-baseline border-b border-border-dark/50 pb-4">
-        <h3 className="font-header font-black uppercase text-lg text-white leading-none tracking-wide">
+        <h2 className="font-header font-black uppercase text-lg text-white leading-none tracking-wide">
           Compare Similar Models
-        </h3>
+        </h2>
         <Link 
           href="/shop" 
           className="text-primary hover:text-white text-[10px] font-header font-black uppercase tracking-widest flex items-center gap-1 transition-all"
@@ -77,7 +77,7 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
                       className="object-contain p-2 group-hover:scale-105 transition-transform duration-500" 
                     />
                   ) : (
-                    <div className="text-[10px] text-slate-500 uppercase tracking-widest font-header">No Image</div>
+                    <div className="text-[10px] text-slate-400 uppercase tracking-widest font-header">No Image</div>
                   )}
                 </div>
 
@@ -85,15 +85,15 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
                   <span className="text-[8px] font-header font-black text-primary uppercase tracking-[0.25em]">
                     {prod.subcategory?.replace('_', ' ') || 'WINDOW AC'}
                   </span>
-                  <h4 className="font-header font-black uppercase text-sm text-slate-100 line-clamp-1 group-hover:text-primary transition-colors">
+                  <h3 className="font-header font-black uppercase text-sm text-slate-100 line-clamp-1 group-hover:text-primary transition-colors">
                     {prod.name}
-                  </h4>
+                  </h3>
                 </div>
               </div>
 
               <div className="flex justify-between items-center mt-6 pt-4 border-t border-border-dark/50">
                 <div>
-                  <span className="block text-[8px] font-header font-black text-slate-500 uppercase tracking-widest">Pricing</span>
+                  <span className="block text-[8px] font-header font-black text-slate-400 uppercase tracking-widest">Pricing</span>
                   <span className="text-sm font-header font-black text-white">${prod.price.toLocaleString()}</span>
                 </div>
                 <Link 

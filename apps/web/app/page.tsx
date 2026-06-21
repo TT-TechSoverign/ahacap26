@@ -1,8 +1,23 @@
 import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
 import { BackToTop } from '@/components/BackToTop';
 import FourthOfJulyBanner from '@/components/FourthOfJulyBanner';
-
+import { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+    title: 'Ductless Mini Split & AC Installation Oahu | Affordable Home A/C',
+    description: 'Affordable home air conditioning, expert AC installation Oahu, and reliable AC repair Oahu. Your local HVAC Oahu cooling experts for split and window units.',
+    alternates: {
+        canonical: '/',
+    },
+    openGraph: {
+        title: 'Ductless Mini Split & AC Installation Oahu | Affordable Home A/C',
+        description: 'Affordable home air conditioning, expert AC installation Oahu, and reliable AC repair Oahu. Your local HVAC Oahu cooling experts for split and window units.',
+        url: '/',
+        siteName: 'Affordable Home A/C',
+        type: 'website',
+    }
+};
 
 export default function Homepage() {
     return (

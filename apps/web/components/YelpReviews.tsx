@@ -21,8 +21,8 @@ export function YelpReviews({ productId }: YelpReviewsProps) {
             <Star className="size-5 text-red-500 fill-red-500" />
           </div>
           <div>
-            <h3 className="font-header font-black uppercase text-lg text-white leading-none tracking-wide">YELP VERIFIED REVIEWS</h3>
-            <p className="text-[10px] font-header font-black text-slate-500 uppercase tracking-widest mt-1">AFFORDABLE HOME A/C WAIPAHU</p>
+            <h2 className="font-header font-black uppercase text-lg text-white leading-none tracking-wide">YELP VERIFIED REVIEWS</h2>
+            <p className="text-[10px] font-header font-black text-slate-400 uppercase tracking-widest mt-1">AFFORDABLE HOME A/C WAIPAHU</p>
           </div>
         </div>
 

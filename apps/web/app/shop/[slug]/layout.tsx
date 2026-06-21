@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { Product } from '@/types/inventory';
 import { generateProductSlug, isCampaignActive } from '@/lib/utils';
 import { getProductFaqs } from '@/lib/product-faq';
@@ -24,25 +24,50 @@ function getApiUrl() {
     return apiUrl;
 }
 
-async function getProduct(slug: string): Promise<Product | null> {
+async function fetchProducts(): Promise<Product[]> {
     try {
         const res = await fetch(`${getApiUrl()}/products`, {
             next: { revalidate: 3600 }, // Cache for 1 hour to prevent TTFB latency and backend crash
         });
-        if (!res.ok) return null;
-        
-        const products: Product[] = await res.json();
-        // Find the product matching the slug
-        const product = products.find(p => generateProductSlug(p.id, p.name) === slug);
-        return product || null;
+        if (!res.ok) return [];
+        return await res.json();
     } catch (e) {
         console.error('[SEO Layout] Failed to fetch products:', e);
-        return null;
+        return [];
     }
 }
 
+function resolveProduct(slug: string, products: Product[]): Product | null {
+    // 1. Try exact match
+    const exactMatch = products.find(p => generateProductSlug(p.id, p.name) === slug);
+    if (exactMatch) return exactMatch;
+
+    // 2. Try ID prefix match (e.g. "1-lg-..." -> ID is "1")
+    const idParts = slug.split('-');
+    const parsedId = parseInt(idParts[0], 10);
+    if (!isNaN(parsedId)) {
+        const idMatch = products.find(p => p.id === parsedId);
+        if (idMatch) return idMatch;
+    }
+
+    // 3. Try slugified name match (without ID prefix)
+    const normalizedRequestedSlug = slug.replace(/^\d+-/, ''); // Remove leading ID prefix if any
+    const nameMatch = products.find(p => {
+        const productSlugName = p.name
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)+/g, '');
+        return productSlugName === normalizedRequestedSlug;
+    });
+
+    if (nameMatch) return nameMatch;
+
+    return null;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const product = await getProduct(params.slug);
+    const products = await fetchProducts();
+    const product = resolveProduct(params.slug, products);
     
     if (!product) {
         return {
@@ -50,6 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     }
 
+    const canonicalSlug = generateProductSlug(product.id, product.name);
     const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
     const activePrice = isPromo ? product.promo_price : product.price;
     const priceText = activePrice.toFixed(2);
@@ -63,12 +89,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title,
         description,
         alternates: {
-            canonical: `${domain}/shop/${params.slug}`,
+            canonical: `${domain}/shop/${canonicalSlug}`,
         },
         openGraph: {
             title,
             description,
-            url: `/shop/${params.slug}`,
+            url: `/shop/${canonicalSlug}`,
             siteName: 'Affordable Home A/C',
             images: product.image_url ? [
                 {
@@ -90,10 +116,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductLayout({ params, children }: Props) {
-    const product = await getProduct(params.slug);
+    const products = await fetchProducts();
+    const product = resolveProduct(params.slug, products);
 
     if (!product) {
         notFound();
+    }
+
+    const canonicalSlug = generateProductSlug(product.id, product.name);
+    if (params.slug !== canonicalSlug) {
+        permanentRedirect(`/shop/${canonicalSlug}`);
     }
 
     const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');

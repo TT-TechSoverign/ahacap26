@@ -21,7 +21,7 @@ export function FAQAccordion({ productName }: FAQAccordionProps) {
     <div className="bg-surface-dark border border-border-dark rounded-3xl p-6 shadow-xl relative overflow-hidden">
       <div className="flex items-center gap-2 mb-6">
         <HelpCircle className="size-5 text-primary" />
-        <h4 className="font-header font-black uppercase text-sm tracking-wider text-white">Frequently Asked Questions</h4>
+        <h2 className="font-header font-black uppercase text-sm tracking-wider text-white">Frequently Asked Questions</h2>
       </div>
 
       <div className="space-y-3">

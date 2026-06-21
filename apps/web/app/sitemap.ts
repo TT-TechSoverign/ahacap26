@@ -64,6 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '',
         '/shop',
         '/contact',
+        '/ac-repair',
         '/mini_split_ac',
         '/mini_split_ac_maintenance',
         '/window_ac_maintenance',

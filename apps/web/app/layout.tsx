@@ -33,10 +33,24 @@ export const metadata: Metadata = {
         locale: 'en_US',
         url: '/',
         siteName: 'Affordable Home A/C',
+        images: [
+            {
+                url: '/assets/logo.png',
+                width: 800,
+                height: 600,
+                alt: 'Affordable Home A/C Logo',
+            }
+        ]
     },
     alternates: {
         canonical: '/',
     },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Affordable Home A/C | Ductless Mini Split & Air Conditioning Hawaii',
+        description: 'We provide affordable air conditioning, ductless mini split installation, and window AC cleaning services across Oahu, Hawaii.',
+        images: ['/assets/logo.png'],
+    }
 };
 
 export default function RootLayout({

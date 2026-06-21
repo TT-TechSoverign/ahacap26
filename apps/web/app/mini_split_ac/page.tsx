@@ -1,11 +1,24 @@
 import SectionServicesGeneral from '../../components/SectionServicesGeneral';
-
-
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { BackToTop } from '@/components/BackToTop';
 import PromoBentoCard from '../../components/PromoBentoCard';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Split AC Units Hawaii & Installation Oahu | Affordable Home A/C',
+    description: 'Looking for a split air conditioner Hawaii? We provide premium Fujitsu air conditioning Hawaii, Mitsubishi, and Daikin split ac installation Oahu.',
+    alternates: {
+        canonical: '/mini_split_ac',
+    },
+    openGraph: {
+        title: 'Split AC Units Hawaii & Installation Oahu | Affordable Home A/C',
+        description: 'Looking for a split air conditioner Hawaii? We provide premium Fujitsu air conditioning Hawaii, Mitsubishi, and Daikin split ac installation Oahu.',
+        url: '/mini_split_ac',
+        siteName: 'Affordable Home A/C',
+        type: 'website',
+    }
+};
 
 export default function MiniSplitsPage() {
     const brands = [

@@ -15,6 +15,7 @@ if [ "$TARGET_BRANCH" = "staging" ]; then
     DB_VOLUME="${DOCKER_PROJECT}_staging_postgres_data"
     LOG_FILE="${BASE_DIR}/deploy_staging.log"
     DEPTYPE="Staging"
+    ENV_FILE_ARG="--env-file .env.staging"
 else
     DOCKER_PROJECT="ahacap26"
     COMPOSE_FILE="docker-compose.prod.yml"
@@ -22,6 +23,7 @@ else
     DB_VOLUME="${DOCKER_PROJECT}_prod_postgres_data"
     LOG_FILE="${BASE_DIR}/deploy_prod.log"
     DEPTYPE="Production"
+    ENV_FILE_ARG="--env-file .env"
 fi
 
 cd "$BASE_DIR"
@@ -66,16 +68,16 @@ chmod 700 deploy_prod.sh force_redeploy.sh 2>/dev/null || true
 # 3. Container Orchestration (Clean Build)
 echo "🚀 [3/5] Building & Hot-swapping Containers..."
 # Force a clean build to prevent corrupted Next.js caches
-docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" build --no-cache
+docker compose $ENV_FILE_ARG -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" build --no-cache
 
 # [HOTFIX] Clear stale PostgreSQL PID files only if DB is not running
-if ! docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" ps | grep -q "prod-db.*Up"; then
+if ! docker compose $ENV_FILE_ARG -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" ps | grep -q "db.*Up"; then
     echo "🧹 Clearing stale PostgreSQL locks..."
     docker run --rm -v "$DB_VOLUME":/var/lib/postgresql/data alpine rm -f /var/lib/postgresql/data/postmaster.pid 2>/dev/null || true
 fi
 
 # Bring up the services (Docker will hot-swap the changed API/Web containers)
-docker compose -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" up -d
+docker compose $ENV_FILE_ARG -f "$COMPOSE_FILE" -p "$DOCKER_PROJECT" up -d
 
 # 5. Permission Reset Trap Fix
 echo "🔐 [5/5] Reclaiming volume ownership for cPanel user..."
