@@ -385,7 +385,7 @@ export default function ProductDetailPage() {
 
                         {/* Thumbnail Bar */}
                         {productImages.length > 1 && (
-                            <div className="flex gap-3 overflow-x-auto pb-2 justify-center md:justify-start [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-primary/50 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary">
+                            <div className="flex gap-3 overflow-x-auto pb-2 justify-start md:justify-start [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-primary/50 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary">
                                 {productImages.map((img, idx) => (
                                     <button
                                         key={idx}

@@ -88,6 +88,27 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
         return { area, recommendedBtu, compatibility };
     }, [width, length, ceilHeight, sunExposure, region, insulation, isKitchen, occupants, productBtu]);
 
+    // Write changes back to sessionStorage key 'ahac_sizing_session' when the calculator state updates
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            try {
+                sessionStorage.setItem('ahac_sizing_session', JSON.stringify({
+                    width,
+                    length,
+                    ceilHeight,
+                    sunExposure,
+                    region,
+                    insulation,
+                    isKitchen,
+                    occupants,
+                    recommendedBtu: calculations.recommendedBtu
+                }));
+            } catch (e) {
+                console.error("Failed to save sizing session in ACCalculator", e);
+            }
+        }
+    }, [width, length, ceilHeight, sunExposure, region, insulation, isKitchen, occupants, calculations.recommendedBtu]);
+
     const sizingStatus = useMemo(() => {
         const { compatibility, recommendedBtu } = calculations;
         if (compatibility === 'UNDERSIZED') {
@@ -158,7 +179,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
                         <select 
                             value={region} 
                             onChange={(e) => setRegion(e.target.value as any)} 
@@ -190,6 +211,15 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                             <option value="shaded">North / Shaded</option>
                             <option value="moderate">Moderate Sun</option>
                             <option value="sunny">Sunny / West Oahu</option>
+                        </select>
+                        <select 
+                            value={insulation} 
+                            onChange={(e) => setInsulation(e.target.value as any)} 
+                            className="bg-[#0b1120] border border-border-dark text-slate-200 rounded-xl px-3 py-2 text-xs focus:border-primary/50 outline-none transition-all cursor-pointer"
+                            aria-label="Room Insulation Quality"
+                        >
+                            <option value="good">Well-Insulated</option>
+                            <option value="poor">Poor Insulation</option>
                         </select>
                     </div>
 

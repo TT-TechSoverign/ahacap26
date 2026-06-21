@@ -93,7 +93,8 @@ export default function RootLayout({
                     dangerouslySetInnerHTML={{
                         __html: JSON.stringify({
                             "@context": "https://schema.org",
-                            "@type": ["LocalBusiness", "HVACBusiness", "Organization"],
+                            "@type": "HVACBusiness",
+                            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                             "name": "Affordable Home A/C",
                             "image": "https://www.affordablehome-ac.com/assets/logo.png",
                             "url": "https://www.affordablehome-ac.com",

@@ -135,9 +135,20 @@ export default function LocalServiceAreaPage({ params }: Props) {
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "HVACBusiness",
+                        "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                         "name": "Affordable Home A/C",
                         "image": "https://www.affordablehome-ac.com/assets/logo.png",
+                        "logo": "https://www.affordablehome-ac.com/assets/logo.png",
                         "url": "https://www.affordablehome-ac.com",
+                        "telephone": "+1-808-488-1111",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "94-150 Leoleo St. #203",
+                            "addressLocality": "Waipahu",
+                            "addressRegion": "HI",
+                            "postalCode": "96797",
+                            "addressCountry": "US"
+                        },
                         "areaServed": {
                             "@type": "City",
                             "name": cityData.name,

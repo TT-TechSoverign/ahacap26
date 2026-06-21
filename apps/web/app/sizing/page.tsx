@@ -9,6 +9,30 @@ import { Suspense } from 'react';
 export const metadata: Metadata = {
     title: 'Hawaii AC Sizing Wizard & Calculator | Affordable Home A/C',
     description: 'Find the perfect BTU window air conditioner for your Oahu home. Calibrated room load calculations for Kapolei, Kailua, Kaneohe, and Honolulu micro-climates.',
+    alternates: {
+        canonical: 'https://www.affordablehome-ac.com/sizing',
+    },
+    openGraph: {
+        title: 'Hawaii AC Sizing Wizard & Calculator | Affordable Home A/C',
+        description: 'Find the perfect BTU window air conditioner for your Oahu home. Calibrated room load calculations for Kapolei, Kailua, Kaneohe, and Honolulu micro-climates.',
+        url: '/sizing',
+        siteName: 'Affordable Home A/C',
+        type: 'website',
+        images: [
+            {
+                url: '/assets/logo.png',
+                width: 800,
+                height: 600,
+                alt: 'Affordable Home A/C Logo',
+            }
+        ]
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Hawaii AC Sizing Wizard & Calculator | Affordable Home A/C',
+        description: 'Find the perfect BTU window air conditioner for your Oahu home. Calibrated room load calculations for Kapolei, Kailua, Kaneohe, and Honolulu micro-climates.',
+        images: ['/assets/logo.png'],
+    }
 };
 
 export default function SizingPage() {

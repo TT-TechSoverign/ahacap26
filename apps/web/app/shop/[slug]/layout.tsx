@@ -156,10 +156,10 @@ export default async function ProductLayout({ params, children }: Props) {
         },
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": ratingValue,
-            "reviewCount": reviewCount.toString(),
-            "bestRating": "5",
-            "worstRating": "1"
+            "ratingValue": parseFloat(ratingValue),
+            "reviewCount": reviewCount,
+            "bestRating": 5,
+            "worstRating": 1
         },
         "review": selectedReviews.map((r, i) => {
             const years = [2023, 2024, 2025, 2026];
@@ -182,9 +182,9 @@ export default async function ProductLayout({ params, children }: Props) {
                 "reviewBody": r.text,
                 "reviewRating": {
                     "@type": "Rating",
-                    "ratingValue": r.rating.toString(),
-                    "bestRating": "5",
-                    "worstRating": "1"
+                    "ratingValue": r.rating,
+                    "bestRating": 5,
+                    "worstRating": 1
                 }
             };
         }),
@@ -263,7 +263,8 @@ export default async function ProductLayout({ params, children }: Props) {
                         },
                         "transitTime": {
                             "@type": "QuantitativeValue",
-                            "value": 0,
+                            "minValue": 0,
+                            "maxValue": 0,
                             "unitCode": "DAY"
                         }
                     }

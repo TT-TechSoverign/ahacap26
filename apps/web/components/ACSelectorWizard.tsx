@@ -801,17 +801,17 @@ export function ACSelectorWizard() {
                                 <p className="font-sans text-xs text-slate-400 leading-relaxed">
                                     Want our certified technicians to inspect your window framing, electrical panels, or recommend a mini-split setup? We can pre-fill our dispatch ticket with your room sizing calculations instantly.
                                 </p>
-                                <div className="pt-2 flex justify-center gap-3">
+                                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                                     <Link 
                                         href={`/contact?service=Window+AC+Installation&notes=${encodeURIComponent(getDispatchNotes())}`}
                                         onClick={handleProHelpClick}
-                                        className="px-8 py-3 bg-white/5 border border-white/10 hover:border-primary/50 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2"
+                                        className="w-full sm:w-auto px-8 py-3 bg-white/5 border border-white/10 hover:border-primary/50 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2"
                                     >
                                         Pre-fill & Route to Dispatch <Wrench className="size-3.5 text-primary" />
                                     </Link>
                                     <button 
                                         onClick={() => setStep(1)}
-                                        className="px-6 py-3 bg-transparent hover:bg-white/5 text-slate-400 font-mono text-[9px] uppercase tracking-widest rounded-xl transition-all"
+                                        className="w-full sm:w-auto px-6 py-3 bg-transparent hover:bg-white/5 text-slate-400 font-mono text-[9px] uppercase tracking-widest rounded-xl transition-all"
                                     >
                                         Start Over
                                     </button>

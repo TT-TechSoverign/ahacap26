@@ -83,7 +83,7 @@ export default function ACRepairPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-slate-950 font-sans text-white pb-24 relative overflow-hidden">
+        <div className="min-h-screen bg-background-dark font-sans text-white pb-24 relative overflow-hidden">
             {/* Ambient Background Grid */}
             <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" 
                  style={{ backgroundImage: 'radial-gradient(#334155 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
@@ -91,22 +91,22 @@ export default function ACRepairPage() {
 
             {/* Glowing Orbs */}
             <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
-            <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+            <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
 
             {/* 1. HERO SECTION */}
             <section className="relative z-10 pt-[140px] md:pt-[165px] lg:pt-[175px] pb-12 px-6 max-w-7xl mx-auto">
                 <div className="flex flex-col items-center text-center space-y-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#00E5FF] text-xs font-mono uppercase tracking-[0.2em]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-[0.2em]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
                         Emergency AC Diagnostics
                     </div>
                     
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-header font-black tracking-tight uppercase leading-none max-w-4xl">
                         Expert A/C Repair <br />
-                        <span className="text-[#00E5FF] drop-shadow-[0_0_15px_rgba(0,229,255,0.4)]">Island-wide Oahu</span>
+                        <span className="text-primary drop-shadow-[0_0_15px_rgba(0,174,239,0.4)]">Island-wide Oahu</span>
                     </h1>
                     
-                    <div className="w-24 h-1 bg-[#00E5FF] shadow-[0_0_10px_rgba(0,229,255,0.5)]"></div>
+                    <div className="w-24 h-1 bg-primary shadow-[0_0_10px_rgba(0,174,239,0.5)]"></div>
                     
                     <p className="max-w-2xl text-slate-300 text-sm md:text-base leading-relaxed font-light">
                         Don&apos;t let Hawaii&apos;s humidity take over. From quick window AC troubleshooting to complete ductless mini-split diagnostics, our licensed HVAC technicians restore comfort fast.
@@ -132,8 +132,8 @@ export default function ACRepairPage() {
                         {repairSolutions.map((sol, index) => {
                             const Icon = sol.icon;
                             return (
-                                <div key={index} className="p-6 bg-slate-900/60 border border-white/5 rounded-2xl group hover:border-[#00E5FF]/20 hover:shadow-[0_0_20px_rgba(0,229,255,0.05)] transition-all duration-300">
-                                    <div className="w-10 h-10 rounded-xl bg-slate-950 border border-white/5 flex items-center justify-center text-[#00E5FF] mb-4 group-hover:bg-[#00E5FF]/10 transition-colors">
+                                <div key={index} className="p-6 bg-surface-dark/60 border border-border-dark rounded-2xl group hover:border-primary/20 hover:shadow-[0_0_20px_rgba(0,174,239,0.05)] transition-all duration-300">
+                                    <div className="w-10 h-10 rounded-xl bg-background-dark border border-border-dark flex items-center justify-center text-primary mb-4 group-hover:bg-primary/10 transition-colors">
                                         <Icon className="w-5 h-5" />
                                     </div>
                                     <h3 className="font-header font-black text-sm uppercase text-white mb-2 tracking-wider">
@@ -148,23 +148,23 @@ export default function ACRepairPage() {
                     </div>
 
                     {/* Trust Badges */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/5">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-border-dark">
                         <div className="flex gap-3 items-center">
-                            <Truck className="w-8 h-8 text-[#00E5FF] shrink-0" />
+                            <Truck className="w-8 h-8 text-primary shrink-0" />
                             <div>
                                 <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">Fast Dispatch</h4>
                                 <p className="text-[9px] text-slate-400 font-sans">Island-wide fleet ready</p>
                             </div>
                         </div>
                         <div className="flex gap-3 items-center">
-                            <ShieldCheck className="w-8 h-8 text-[#00E5FF] shrink-0" />
+                            <ShieldCheck className="w-8 h-8 text-primary shrink-0" />
                             <div>
                                 <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">Licensed Pros</h4>
                                 <p className="text-[9px] text-slate-400 font-sans">Fully bonded & insured</p>
                             </div>
                         </div>
                         <div className="flex gap-3 items-center">
-                            <Clock className="w-8 h-8 text-[#00E5FF] shrink-0" />
+                            <Clock className="w-8 h-8 text-primary shrink-0" />
                             <div>
                                 <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">1-Yr Warranty</h4>
                                 <p className="text-[9px] text-slate-400 font-sans">All repair work covered</p>
@@ -185,14 +185,14 @@ export default function ACRepairPage() {
                     <h2 className="text-2xl md:text-3xl font-header font-black uppercase tracking-wider text-white">
                         Repair FAQ
                     </h2>
-                    <div className="w-16 h-0.5 bg-[#00E5FF] mx-auto mt-3 shadow-[0_0_8px_rgba(0,229,255,0.4)]"></div>
+                    <div className="w-16 h-0.5 bg-primary mx-auto mt-3 shadow-[0_0_8px_rgba(0,174,239,0.4)]"></div>
                 </div>
 
                 <div className="space-y-4">
                     {repairFaqs.map((faq, index) => (
-                        <div key={index} className="p-6 bg-slate-900/40 border border-white/5 rounded-2xl space-y-2">
+                        <div key={index} className="p-6 bg-surface-dark/40 border border-border-dark rounded-2xl space-y-2">
                             <h3 className="font-header font-black text-xs uppercase tracking-wider text-white flex items-center gap-2">
-                                <HelpCircle className="w-4 h-4 text-[#00E5FF] shrink-0" />
+                                <HelpCircle className="w-4 h-4 text-primary shrink-0" />
                                 {faq.q}
                             </h3>
                             <p className="text-xs text-slate-400 leading-relaxed font-sans font-light pl-6">
@@ -204,9 +204,9 @@ export default function ACRepairPage() {
             </section>
 
             {/* 4. GEOGRAPHICAL COVERAGE (22 CITIES) */}
-            <section className="relative z-10 max-w-5xl mx-auto px-6 mt-24 border-t border-white/5 pt-16">
+            <section className="relative z-10 max-w-5xl mx-auto px-6 mt-24 border-t border-border-dark pt-16">
                 <div className="text-center mb-10">
-                    <h2 className="text-xl md:text-2xl font-header font-black uppercase tracking-widest text-[#00E5FF]">
+                    <h2 className="text-xl md:text-2xl font-header font-black uppercase tracking-widest text-primary">
                         Oahu Coverage Areas
                     </h2>
                     <p className="text-[10px] text-slate-400 uppercase tracking-widest font-mono mt-1">
@@ -219,10 +219,10 @@ export default function ACRepairPage() {
                         <li key={city}>
                             <Link 
                                 href={`/service-areas/${city.toLowerCase().replace(/ /g, '-')}`}
-                                className="p-3 bg-slate-900/50 border border-white/5 rounded-xl flex items-center gap-2 text-xs text-slate-300 hover:border-[#00E5FF]/40 hover:text-white transition-all group cursor-pointer"
+                                className="p-3 bg-surface-dark/50 border border-border-dark rounded-xl flex items-center gap-2 text-xs text-slate-300 hover:border-primary/40 hover:text-white transition-all group cursor-pointer"
                                 aria-label={`AC repair services in ${city}`}
                             >
-                                <MapPin className="w-3.5 h-3.5 text-slate-500 group-hover:text-[#00E5FF] transition-colors shrink-0" />
+                                <MapPin className="w-3.5 h-3.5 text-slate-500 group-hover:text-primary transition-colors shrink-0" />
                                 <span className="truncate">{city}</span>
                             </Link>
                         </li>

@@ -41,7 +41,7 @@ export default function SystemUpgrade() {
         {/* Action Button */}
         <div>
           <Button variant="outline" size="lg" className="gap-3 group" asChild>
-            <a href="tel:8081234567">
+            <a href="tel:8084881111">
               <span className="font-sans"><EditableText contentKey="system_upgrade.cta_button" /></span>
               <Phone className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors" />
             </a>

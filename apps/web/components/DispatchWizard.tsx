@@ -118,6 +118,7 @@ export function DispatchWizard() {
     const services = content?.contact?.wizard?.services_list || [
         "Window AC Installation",
         "Window AC Cleaning",
+        "Window AC Diagnosis/Repair",
         "Mini Split Estimate (New)",
         "Mini Split Estimate (Replace)",
         "Mini Split Maintenance",
