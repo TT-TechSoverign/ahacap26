@@ -91,7 +91,7 @@ export function ACSelectorWizard() {
         fetchProducts();
         
         // Track wizard start event in GA4
-        sendGAEvent('event', 'sizing_wizard_start', { event_category: 'Funnel', event_label: 'AC Sizing Funnel Opened' });
+        sendGAEvent('event', 'sizing_wizard_start', { event_category: 'Sizing', event_label: 'AC Sizing Wizard Opened' });
     }, []);
 
     // Load previously calculated session on mount
@@ -206,7 +206,7 @@ export function ACSelectorWizard() {
     useEffect(() => {
         if (step === 5) {
             sendGAEvent('event', 'sizing_wizard_complete', {
-                event_category: 'Funnel',
+                event_category: 'Sizing',
                 event_label: 'AC Sizing Calculation Shown',
                 value: calculation.recommendedBtu,
                 custom_area: calculation.area,
@@ -230,7 +230,7 @@ export function ACSelectorWizard() {
             region === 'windward' ? 'Windward Oahu (Kailua/Kaneohe)' :
             region === 'urban' ? 'Honolulu / Urban Metro' : 'Standard Oahu';
 
-        return `Oahu Sizing Funnel Result: Room size is ${width}x${length} ft (${calculation.area} sq ft). Calculated load is ${calculation.recommendedBtu.toLocaleString()} BTU. Ceiling: ${ceilHeight}, Insulation: ${insulation}, Exposure: ${sunExposure}, Kitchen: ${isKitchen ? 'Yes' : 'No'}, Occupants: ${occupants}, Region: ${activeRegionLabel}.`;
+        return `Oahu Sizing Wizard Result: Room size is ${width}x${length} ft (${calculation.area} sq ft). Calculated load is ${calculation.recommendedBtu.toLocaleString()} BTU. Ceiling: ${ceilHeight}, Insulation: ${insulation}, Exposure: ${sunExposure}, Kitchen: ${isKitchen ? 'Yes' : 'No'}, Occupants: ${occupants}, Region: ${activeRegionLabel}.`;
     };
 
     // Animations config

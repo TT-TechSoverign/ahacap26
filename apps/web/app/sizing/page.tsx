@@ -33,7 +33,7 @@ export default function SizingPage() {
                     </div>
 
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-header font-bold uppercase tracking-tight mb-6">
-                        Oahu A/C <span className="text-primary italic font-black shadow-primary/20 drop-shadow-2xl">Sizing Funnel</span>
+                        Oahu A/C <span className="text-primary italic font-black shadow-primary/20 drop-shadow-2xl">Sizing Wizard</span>
                     </h1>
                     
                     <p className="font-mono text-[10px] md:text-[11px] lg:text-[12px] font-black tracking-[0.3em] uppercase text-white max-w-3xl mx-auto leading-relaxed opacity-90">

@@ -245,7 +245,7 @@ export default function ShopPage() {
 
                 <PromoBentoCard />
 
-                {/* Sizing Funnel CTA Banner */}
+                {/* Sizing Wizard CTA Banner */}
                 <div className="mt-8 mb-10 max-w-7xl mx-auto px-4">
                     <div className="bg-[#0b1120]/60 border border-primary/20 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden backdrop-blur-md shadow-lg shadow-primary/5 group">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none z-0" />
@@ -800,11 +800,11 @@ function SizingGuideSection() {
                 }
             />
 
-            {/* Interactive Funnel Launcher */}
+            {/* Interactive Sizing Wizard Launcher */}
             <div className="mt-6 mb-8 max-w-4xl mx-auto">
                 <div className="bg-primary/5 border border-primary/20 rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left relative overflow-hidden">
                     <div className="space-y-1">
-                        <h4 className="font-header font-black text-sm uppercase tracking-wider text-white">Oahu Interactive Sizing Funnel</h4>
+                        <h4 className="font-header font-black text-sm uppercase tracking-wider text-white">Oahu Interactive Sizing Tool</h4>
                         <p className="font-sans text-xs text-slate-400">
                             Have high ceilings, sun-facing windows, or multiple occupants? Get an exact calibrated BTU recommendation.
                         </p>
@@ -813,7 +813,7 @@ function SizingGuideSection() {
                         href="/sizing"
                         className="px-6 py-2.5 bg-primary hover:bg-primary/95 text-black font-black uppercase text-[10px] tracking-widest rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-1.5 shrink-0 group"
                     >
-                        Start Funnel <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        Start Wizard <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                 </div>
             </div>
