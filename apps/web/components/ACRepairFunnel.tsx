@@ -54,7 +54,7 @@ export default function ACRepairFunnel() {
 
     const variants = {
         enter: { opacity: 0, x: 20 },
-        center: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+        center: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' as const } },
         exit: { opacity: 0, x: -20, transition: { duration: 0.3 } }
     };
 
