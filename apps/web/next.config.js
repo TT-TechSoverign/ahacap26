@@ -126,16 +126,6 @@ const nextConfig = {
                 destination: '/shop#rebate',
                 permanent: true,
             },
-            {
-                source: '/product-tag/:path*',
-                destination: '/shop',
-                permanent: true,
-            },
-            {
-                source: '/product-category/:path*',
-                destination: '/shop',
-                permanent: true,
-            },
         ];
     },
 };
