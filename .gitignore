@@ -58,3 +58,6 @@ scripts/
 # Ignore local WebP image backups
 *_original.webp
 *_transparent_test.webp
+
+# Ignore local brain folder exports
+brain_exports_*/

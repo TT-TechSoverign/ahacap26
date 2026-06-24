@@ -56,8 +56,8 @@ git reset --hard origin/staging
 echo "🔧 [3/6] Fixing Permissions (Persistence Layer)..."
 mkdir -p apps/web/lib/content
 mkdir -p apps/web/storage
-chmod -R 777 apps/web/lib/content
-chmod -R 777 apps/web/storage
+chmod -R 755 apps/web/lib/content
+chmod -R 755 apps/web/storage
 
 echo "🏗️  [4/6] Building & Starting Containers..."
 # --build: Always force build to pick up new code

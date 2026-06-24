@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import NavbarV2 from '../components/NavbarV2';
 import MobileStickyHeader from '../components/MobileStickyHeader';
 import PromoStickyBar from '../components/PromoStickyBar';
-import DeferredAnalytics from '../components/DeferredAnalytics';
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import dynamic from 'next/dynamic';
 
@@ -86,7 +86,17 @@ export default function RootLayout({
                 />
             </head>
             <body className="font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white">
-                <DeferredAnalytics />
+                <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KTZ58FJX'} />
+                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-MYJZTZFXQV'} />
+                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GT_ID || 'GT-PLTZM3FV'} />
+                <noscript>
+                    <iframe 
+                        src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KTZ58FJX'}`}
+                        height="0" 
+                        width="0" 
+                        style={{ display: 'none', visibility: 'hidden' }}
+                    />
+                </noscript>
                 {/* <TickerWrapper /> */}
                 <script
                     type="application/ld+json"
