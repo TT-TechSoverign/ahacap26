@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Calculator, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 interface ACCalculatorProps {
     productBtu: number;
@@ -148,7 +149,12 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
     }, [calculations.recommendedBtu]);
 
     return (
-        <div className="bg-slate-900/90 border border-slate-700/60 rounded-3xl p-6 relative overflow-hidden group shadow-xl backdrop-blur-sm">
+        <div className={cn(
+            "bg-slate-900/90 border rounded-3xl p-6 relative overflow-hidden group shadow-xl backdrop-blur-sm transition-all duration-500",
+            calculations.compatibility === 'UNDERSIZED' ? "border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.1)]" :
+            calculations.compatibility === 'OVERSIZED' ? "border-amber-500/30 shadow-[0_0_30px_rgba(245,158,11,0.1)]" :
+            "border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.1)]"
+        )}>
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none z-0" />
             
             <div className="flex items-center gap-2 mb-4 relative z-10">
@@ -193,7 +199,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         <select 
                             value={region} 
                             onChange={(e) => setRegion(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all cursor-pointer min-h-[44px] w-full"
+                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
                             title="Oahu Micro-Climate Region"
                             aria-label="Oahu Micro-Climate Region"
                         >
@@ -205,7 +211,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         <select 
                             value={ceilHeight} 
                             onChange={(e) => setCeilHeight(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all cursor-pointer min-h-[44px] w-full"
+                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
                             aria-label="Room Ceiling Height"
                         >
                             <option value="standard">8ft Ceilings</option>
@@ -215,7 +221,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         <select 
                             value={sunExposure} 
                             onChange={(e) => setSunExposure(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all cursor-pointer min-h-[44px] w-full"
+                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
                             aria-label="Room Sun Exposure"
                         >
                             <option value="shaded">North / Shaded</option>
@@ -225,7 +231,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         <select 
                             value={insulation} 
                             onChange={(e) => setInsulation(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all cursor-pointer min-h-[44px] w-full"
+                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
                             aria-label="Room Insulation Quality"
                         >
                             <option value="good">Well-Insulated</option>
@@ -246,7 +252,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         </label>
                         <div className="text-xs md:text-sm text-slate-200 flex items-center gap-3 py-1">
                             <span>Occupants:</span>
-                            <div className="flex items-center border border-slate-700/80 bg-slate-950 rounded-xl overflow-hidden min-h-[44px]">
+                            <div className="flex items-center border border-slate-700/80 bg-slate-950 rounded-xl overflow-hidden min-h-[48px]">
                                 <button 
                                     type="button"
                                     onClick={() => setOccupants(prev => Math.max(1, prev - 1))}
@@ -301,21 +307,21 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                             <div className="flex flex-col gap-2 w-full">
                                 <Link 
                                     href={recommendedShopLink} 
-                                    className="w-full text-center bg-primary hover:bg-cyan-400 text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[44px]"
+                                    className="w-full text-center bg-primary hover:bg-cyan-400 text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[48px]"
                                 >
                                     <span>Shop {calculations.recommendedBtu.toLocaleString()} BTU Units</span>
                                     <ArrowRight className="size-4 animate-pulse" />
                                 </Link>
                                 <Link 
                                     href="/contact" 
-                                    className="w-full text-center bg-transparent border border-slate-600 hover:border-primary text-slate-200 hover:text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center min-h-[44px]"
+                                    className="w-full text-center bg-transparent border border-slate-600 hover:border-primary text-slate-200 hover:text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center min-h-[48px]"
                                 >
                                     Request Custom Mini-Split Quote
                                 </Link>
                             </div>
                         ) : (
                             <div className="w-full">
-                                <div className="w-full text-center bg-emerald-600/80 border border-emerald-500/30 text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 min-h-[44px]">
+                                <div className="w-full text-center bg-emerald-600/80 border border-emerald-500/30 text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 min-h-[48px]">
                                     <CheckCircle2 className="size-4" />
                                     <span>Perfect Sizing Match - Ready to Order</span>
                                 </div>

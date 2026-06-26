@@ -58,7 +58,10 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
         </Link>
       </div>
 
-      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-primary/30 [&::-webkit-scrollbar-thumb]:rounded-full">
+      <div 
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-primary/30 [&::-webkit-scrollbar-thumb]:rounded-full"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
         {products.map((prod) => {
           const slug = generateProductSlug(prod.id, prod.name);
           return (

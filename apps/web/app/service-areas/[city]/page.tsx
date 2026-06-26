@@ -60,8 +60,18 @@ export function generateMetadata({ params }: Props): Metadata {
     
     if (!cityData) return { title: 'Service Area Not Found' };
  
-    const title = `AC Repair & HVAC Services in ${cityData.name}, Oahu`;
-    const description = `AC broken in ${cityData.name}? Get expert AC repair, split AC installation, and window AC cleaning from licensed local technicians. Flat-rate diagnostics & 100% satisfaction.`;
+    const title = `${cityData.name} Split AC Repair & HVAC | Affordable Home A/C`;
+    
+    let description = `AC broken in ${cityData.name}? Get licensed HVAC technicians for split AC installation, window AC cleaning, and $150 mini-split diagnostics.`;
+    if (cityData.regionId === 'windward') {
+        description = `Salt-air rust protection. Expert split AC installation, window AC cleaning & $150 mini-split diagnostics in ${cityData.name}, Oahu. Licensed HVAC technicians.`;
+    } else if (cityData.regionId === 'leeward') {
+        description = `Local heat relief. Expert split AC installation, window AC cleaning & $150 mini-split diagnostics in ${cityData.name}, Oahu. Licensed HVAC technicians.`;
+    } else if (cityData.regionId === 'metro') {
+        description = `Quiet operation cooling. Expert split AC installation, window AC cleaning & $150 mini-split diagnostics in ${cityData.name}, Oahu. Licensed HVAC technicians.`;
+    } else if (cityData.regionId === 'central') {
+        description = `Valley dehumidification cooling. Expert split AC installation, window AC cleaning & $150 mini-split diagnostics in ${cityData.name}, Oahu. Licensed HVAC technicians.`;
+    }
  
     return {
         title,
@@ -73,6 +83,20 @@ export function generateMetadata({ params }: Props): Metadata {
             siteName: 'Affordable Home A/C',
             locale: 'en_US',
             type: 'website',
+            images: [
+                {
+                    url: 'https://www.affordablehome-ac.com/assets/logo.png',
+                    width: 800,
+                    height: 600,
+                    alt: 'Affordable Home A/C Logo',
+                }
+            ]
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: ['https://www.affordablehome-ac.com/assets/logo.png'],
         },
         alternates: {
             canonical: `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`,

@@ -109,7 +109,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             siteName: 'Affordable Home A/C',
             images: product.image_url ? [
                 {
-                    url: product.image_url.replace('.svg', '.webp'),
+                    url: `${domain}${product.image_url.replace('.svg', '.webp')}`,
                     width: 800,
                     height: 600,
                     alt: product.name,
@@ -121,7 +121,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             card: 'summary_large_image',
             title,
             description,
-            images: product.image_url ? [product.image_url.replace('.svg', '.webp')] : undefined,
+            images: product.image_url ? [`${domain}${product.image_url.replace('.svg', '.webp')}`] : undefined,
         }
     };
 }
@@ -164,7 +164,8 @@ export default async function ProductLayout({ params, children }: Props) {
         "mpn": `AHAC-${product.id}`, // Resolves GSC "Missing MPN" warning
         "brand": {
             "@type": "Brand",
-            "name": brandName
+            "name": brandName,
+            "logo": `${domain}/assets/logo.png`
         },
         "additionalProperty": [
             {
@@ -327,7 +328,7 @@ export default async function ProductLayout({ params, children }: Props) {
                 "@type": "ListItem",
                 "position": 3,
                 "name": product.name,
-                "item": `${domain}/shop/${params.slug}`
+                "item": `${domain}/shop/${canonicalSlug}`
             }
         ]
     };
@@ -359,10 +360,12 @@ export default async function ProductLayout({ params, children }: Props) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {/* Inject JSON-LD FAQPage Schema */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-            />
+            {faqs.length > 0 && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+            )}
             {/* Render the Client Component Page */}
             {children}
         </>
