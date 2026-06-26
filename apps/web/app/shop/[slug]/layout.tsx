@@ -89,8 +89,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const cleanCoverage = product.coverage ? product.coverage.split(' (')[0] : '';
     const coverageTextDesc = cleanCoverage ? ` Cools ${cleanCoverage}.` : '';
 
-    const title = `Buy ${product.name} | ${stockStatusTitle}`;
-    const description = `${stockStatusDesc} Buy ${product.name} for $${priceText}${discountText}.${coverageTextDesc} Free pickup / $50 delivery + 1-Yr warranty.`;
+    const firstIdeal = specs?.idealFor ? specs.idealFor.split(',')[0].trim() : '';
+    const cleanFirstIdeal = firstIdeal.replace('window A/C', 'AC').replace('window AC', 'AC');
+
+    const title = `Buy ${product.name} ${cleanFirstIdeal ? `(${cleanFirstIdeal})` : ''} | ${stockStatusTitle}`;
+    const description = `${stockStatusDesc} Buy ${product.name} for $${priceText}${discountText}. Free Waipahu pickup / $50 delivery + 1-Yr warranty.${coverageTextDesc} ${specs.benefits || ''}`;
     const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');
 
     return {
