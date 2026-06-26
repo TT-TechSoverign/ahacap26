@@ -205,6 +205,43 @@ export default function LocalServiceAreaPage({ params }: Props) {
                     })
                 }}
             />
+
+            {/* 6. DYNAMIC FAQ PAGE SCHEMA.ORG */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        "mainEntity": [
+                            {
+                                "@type": "Question",
+                                "name": `What is the most efficient AC unit for ${cityData.name}'s high humidity?`,
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": `For ${cityData.name}'s tropical climate, we highly recommend systems with variable-speed inverter compressors, such as the LG Dual Inverter window AC or a Mitsubishi mini-split. These systems adjust cooling capacity dynamically, which keeps energy bills low while continuously pulling moisture out of the air to maintain a dry, comfortable indoor environment.`
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": `How often do window and split AC systems need cleaning in ${cityData.name}?`,
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": `Due to ${cityData.name}'s salt-air exposure and humidity, we recommend a professional deep clean every 6 to 12 months. Regular maintenance cleanings remove accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30% and extending your system's life.`
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": `Does Affordable Home A/C deliver products and dispatch technicians to ${cityData.name}?`,
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": `Yes! We provide full dispatch of licensed technicians for split AC estimates and window AC cleanings directly to ${cityData.name}. For window AC purchases, we offer Oahu flat-rate delivery for $50, or you can opt for free local pickup from our Waipahu Distribution Center.`
+                                }
+                            }
+                        ]
+                    })
+                }}
+            />
             
             <BackToTop visible={true} />
         </main>

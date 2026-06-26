@@ -137,6 +137,46 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                     </div>
                 </div>
 
+                {/* Localized FAQ Accordion Block */}
+                <div className="pt-12 border-t border-slate-800/50 mt-4">
+                    <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 md:p-8">
+                        <div className="flex items-center gap-2 mb-6">
+                            <LucideIcons.HelpCircle className="size-5 text-[#00E5FF]" />
+                            <h3 className="font-header font-black uppercase text-sm tracking-wider text-white">Frequently Asked Questions for {city} Residents</h3>
+                        </div>
+
+                        <div className="space-y-4 font-sans">
+                            {[
+                                {
+                                    q: `What is the most efficient AC unit for ${city}'s high humidity?`,
+                                    a: `For ${city}'s tropical climate, we highly recommend systems with variable-speed inverter compressors, such as the LG Dual Inverter window AC or a Mitsubishi mini-split. These systems adjust cooling capacity dynamically, which keeps energy bills low while continuously pulling moisture out of the air to maintain a dry, comfortable indoor environment.`
+                                },
+                                {
+                                    q: `How often do window and split AC systems need cleaning in ${city}?`,
+                                    a: `Due to ${city}'s salt-air exposure and humidity, we recommend a professional deep clean every 6 to 12 months. Regular maintenance cleanings remove accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30% and extending your system's life.`
+                                },
+                                {
+                                    q: `Does Affordable Home A/C deliver products and dispatch technicians to ${city}?`,
+                                    a: `Yes! We provide full dispatch of licensed technicians for split AC estimates and window AC cleanings directly to ${city}. For window AC purchases, we offer Oahu flat-rate delivery for $50, or you can opt for free local pickup from our Waipahu Distribution Center.`
+                                }
+                            ].map((faq, idx) => (
+                                <details 
+                                    key={idx} 
+                                    className="group border-b border-slate-800 last:border-0 pb-4 last:pb-0"
+                                >
+                                    <summary className="flex items-center justify-between text-left font-header font-black uppercase text-xs md:text-sm text-slate-200 tracking-wider hover:text-[#00E5FF] transition-colors cursor-pointer list-none py-2 select-none focus:outline-none">
+                                        <span>{faq.q}</span>
+                                        <LucideIcons.ChevronDown className="size-4 text-slate-400 group-open:rotate-180 group-open:text-[#00E5FF] transition-transform duration-300 shrink-0 ml-4" />
+                                    </summary>
+                                    <p className="text-slate-300 text-xs md:text-sm leading-relaxed font-sans pt-2 pl-1 max-w-4xl">
+                                        {faq.a}
+                                    </p>
+                                </details>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     );
