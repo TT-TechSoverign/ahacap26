@@ -94,7 +94,7 @@ export default function Section2OurServicesV2() {
                         src={service.cleanImage}
                         alt={service.defaultTitle}
                         fill
-                        sizes="(max-width: 768px) 250px, 50vw"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover object-center opacity-80 group-hover:opacity-60 md:group-hover:blur-[2px] transition-all duration-700"
                     />
                     {/* Primary Dark Blue Overlay (Fixed 20%) */}
@@ -154,7 +154,7 @@ export default function Section2OurServicesV2() {
     };
 
     return (
-        <section className="relative w-full bg-transparent pb-12 md:pb-16 pt-0">
+        <section id="services" className="scroll-mt-24 relative w-full bg-transparent pb-12 md:pb-16 pt-0">
             {/* Header Content */}
             <div className="relative z-10 max-w-4xl mx-auto text-center mb-6 px-6">
                 <h2 className="relative inline-block font-header font-black text-3xl md:text-5xl text-white uppercase tracking-tighter mb-4 pb-6">

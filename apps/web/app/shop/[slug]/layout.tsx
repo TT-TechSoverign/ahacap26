@@ -79,10 +79,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
     const activePrice = isPromo ? product.promo_price : product.price;
     const priceText = activePrice.toFixed(2);
-    const coverageText = product.coverage ? ` Coverage: ${product.coverage}.` : '';
+    const specs = getProductSpecs(product.id);
 
-    const title = `Buy ${product.name} | Window AC Oahu`;
-    const description = `Buy the ${product.name} at Affordable Home A/C. Price: $${priceText}.${isPromo ? ' (10% Off Applied).' : ''}${coverageText} Professional installation & pickup in Waipahu, Honolulu, and all 22 Oahu cities, Hawaii.`;
+    const isOutOfStock = product.stock <= 0;
+    const stockStatusTitle = isOutOfStock ? 'Order Oahu' : 'In-Stock Waipahu, Oahu';
+    const stockStatusDesc = isOutOfStock ? 'Order online for Oahu.' : 'In-Stock Waipahu, Oahu!';
+    const discountText = isPromo && product.discount_percent ? ` (${product.discount_percent}% off)` : '';
+    
+    const cleanCoverage = product.coverage ? product.coverage.split(' (')[0] : '';
+    const coverageTextDesc = cleanCoverage ? ` Cools ${cleanCoverage}.` : '';
+
+    const title = `Buy ${product.name} | ${stockStatusTitle}`;
+    const description = `${stockStatusDesc} Buy ${product.name} for $${priceText}${discountText}.${coverageTextDesc} Free pickup / $50 delivery + 1-Yr warranty.`;
     const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');
 
     return {
@@ -141,19 +149,42 @@ export default async function ProductLayout({ params, children }: Props) {
     const selectedReviews = getSelectedReviews(product.id);
     const reviewCount = selectedReviews.length || 4;
     const idHash = Array.from(product.id.toString()).reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const specs = getProductSpecs(product.id);
 
     const schema = {
         "@context": "https://schema.org/",
         "@type": "Product",
         "name": product.name,
         "image": [absoluteImageUrl],
-        "description": `Buy the ${product.name} at Affordable Home A/C. Professional installation and affordable prices in Oahu, Hawaii.`,
+        "description": `Buy the ${product.name} at Affordable Home A/C. ${specs.benefits ? `${specs.benefits} ` : ''}Professional installation and affordable prices in Oahu, Hawaii.`,
         "sku": `AHAC-${product.id}`,
         "mpn": `AHAC-${product.id}`, // Resolves GSC "Missing MPN" warning
         "brand": {
             "@type": "Brand",
             "name": brandName
         },
+        "additionalProperty": [
+            {
+                "@type": "PropertyValue",
+                "name": "BTU Capacity",
+                "value": specs.btu
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Cooling Area",
+                "value": specs.coolingArea
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Ideal Deployment",
+                "value": specs.idealFor
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Performance Benefits",
+                "value": specs.benefits
+            }
+        ],
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": parseFloat(ratingValue),

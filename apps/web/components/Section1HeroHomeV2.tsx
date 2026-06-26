@@ -1,30 +1,14 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { EditableText } from './EditableText';
 import { ArrowRight } from 'lucide-react';
 
 export default function Section1HeroHomeV2() {
     return (
-        <section className="relative w-full h-[700px] min-h-[500px] flex items-center justify-center overflow-hidden bg-slate-900">
-            {/* Background Layer */}
-            <div className="absolute inset-0 z-0">
-                <Image
-                    src="/assets/hero-cards/ahac-hero-background-2.webp"
-                    alt="Expert HVAC Installation by Affordable Home A/C"
-                    fill
-                    sizes="100vw"
-                    className="object-cover object-center opacity-90"
-                    priority
-                />
-
-        {/* Primary Dark Blue Overlay with Blend Mode for Seamless Reading */}
-        <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-20" />
-
-        {/* Gradient Overlay for Depth and Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/20 to-transparent" />
-    </div>
+        <section className="relative w-full h-[650px] min-h-[500px] flex items-center justify-center overflow-hidden bg-transparent">
+            {/* Readability Overlay over global background */}
+            <div className="absolute inset-0 z-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/70 pointer-events-none" />
 
             {/* Content Container - Centered and Mobile Optimized */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col items-center justify-center h-full pt-10 text-center">

@@ -89,9 +89,9 @@ const specs: { [key: string]: ProductSpec } = {
         features: ['Dual Inverter', 'LoDecibel™ Quiet', 'Sleep Mode', 'Energy Star®'],
         warranty: '1 Year Parts & Labor',
         deploymentHeader: 'Best Placements',
-        idealFor: 'Small Bedroom (10x12), Home Office',
+        idealFor: 'bedroom window A/C, Small Room (10x12), Home Office',
         featureHeader: 'Control From Anywhere',
-        benefits: 'Dual Inverter technology reduces energy consumption by up to 40% while operating at library-quiet noise levels.',
+        benefits: 'This energy-efficient bedroom window A/C features Dual Inverter technology, reducing electricity usage by up to 40% while running at library-quiet noise levels.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'Ultra-Quiet Mode (44dB) - Similar to a Library',
         keyFeature: 'Dual Inverter Compressor'
@@ -108,9 +108,9 @@ const specs: { [key: string]: ProductSpec } = {
         features: ['Dual Inverter', 'ThinQ® Smart Control', 'Voice Compatible', 'Energy Star®'],
         warranty: '1 Year Parts & Labor',
         deploymentHeader: 'Best Placements',
-        idealFor: 'Bedroom, Nursery, Home Office',
+        idealFor: 'bedroom window A/C, Nursery, Home Office',
         featureHeader: 'Control From Anywhere',
-        benefits: 'Integrated ThinQ® smart control allows for remote scheduling and monitoring, perfect for maintaining comfort efficiently.',
+        benefits: 'An ultra-quiet bedroom window A/C with ThinQ® smart control for remote scheduling, maintaining optimal comfort with maximum energy savings.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'Ultra-Quiet (44dB) - Whisper Quiet Operation',
         keyFeature: 'Dual Inverter Compressor'
@@ -127,9 +127,9 @@ const specs: { [key: string]: ProductSpec } = {
         features: ['Dual Inverter', 'Energy Star® Most Efficient', 'Auto Restart', 'Sleep Mode'],
         warranty: '1 Year Parts & Labor',
         deploymentHeader: 'Best Placements',
-        idealFor: 'Master Bedroom, Studio Apartment',
+        idealFor: 'mid-size window AC, Master Bedroom, Studio Apartment',
         featureHeader: 'Control From Anywhere',
-        benefits: 'Recognized as ENERGY STAR® Most Efficient, delivering powerful cooling without the high utility costs.',
+        benefits: 'This high-performance mid-size window AC is recognized as ENERGY STAR® Most Efficient, delivering powerful zone cooling without high utility costs.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'LoDecibel™ (44dB) - Unobtrusive Operation',
         keyFeature: 'Energy Star® Most Efficient'
@@ -146,9 +146,9 @@ const specs: { [key: string]: ProductSpec } = {
         features: ['Dual Inverter', 'Gold Fin™ Coating', 'ThinQ® WiFi', '40% Energy Savings'],
         warranty: '1 Year Parts & Labor',
         deploymentHeader: 'Best Placements',
-        idealFor: 'Master Suite, Living Room',
+        idealFor: 'mid-size window AC, Master Suite, Living Room',
         featureHeader: 'Control From Anywhere',
-        benefits: 'Gold Fin™ Anti-Corrosive Coating provides essential protection against salt-air oxidation for longevity on the islands.',
+        benefits: 'A durable mid-size window AC with Gold Fin™ anti-corrosive coating, defending against coastal salt air for long-lasting cooling.',
         acousticHeader: 'Sleep Soundly & Stay Cool',
         soundProfile: 'Ultra-Quiet Sleep Mode (44dB) - Library Quiet',
         keyFeature: 'Gold Fin™ Anti-Corrosion'
@@ -165,9 +165,9 @@ const specs: { [key: string]: ProductSpec } = {
         features: ['Dual Inverter', '4-Way Directional', 'High-Torque Compressor', 'Voice Control'],
         warranty: '1 Year Parts & Labor',
         deploymentHeader: 'Best Placements',
-        idealFor: 'Large Master, Living Area, Open Plan',
+        idealFor: 'large room window A/C, Living Area, Open Floor Plan',
         featureHeader: 'Control From Anywhere',
-        benefits: 'High-Torque compressor cycle designed for rapid moisture removal and quick thermal recovery in large spaces.',
+        benefits: 'A high-capacity large room window A/C engineered with a high-torque compressor for rapid dehumidification and cooling in open spaces.',
         acousticHeader: 'Smooth Power',
         soundProfile: 'Quiet Cooling (52dB) - Powerful but Smooth',
         keyFeature: 'High-Torque Compressor'
@@ -184,9 +184,9 @@ const specs: { [key: string]: ProductSpec } = {
         features: ['Dual Inverter', 'Maximum Vertical Momentum', 'ThinQ® WiFi', 'Smart Diagnosis'],
         warranty: '1 Year Parts & Labor',
         deploymentHeader: 'Ideal Installation',
-        idealFor: 'Whole Floor, Large Open Concept',
+        idealFor: 'large room window A/C, Whole Floor, Open Concept',
         featureHeader: 'Control From Anywhere',
-        benefits: 'Engineered with maximum vertical momentum to eliminate hot spots in rooms with vaulted ceilings or complex layouts.',
+        benefits: 'Powerful large room window A/C utilizing maximum vertical air momentum to eliminate hot spots in rooms with vaulted ceilings.',
         acousticHeader: 'Smooth Power',
         soundProfile: 'Efficient Power (52dB) - Quiet for its Class',
         keyFeature: 'Vertical Airflow Control'
@@ -203,9 +203,9 @@ const specs: { [key: string]: ProductSpec } = {
         features: ['Dual Inverter', 'Industrial-Grade Cooling', 'Moisture Management', 'WiFi'],
         warranty: '1 Year Parts & Labor',
         deploymentHeader: 'Target Deployment',
-        idealFor: 'Industrial Scale Open Plan, Large Hall',
+        idealFor: 'large room window A/C, Multi-room Space, Commercial Hall',
         featureHeader: 'Control From Anywhere',
-        benefits: 'Industrial-grade Titan Cooling capacity for maximum moisture management and temperature control in massive spaces.',
+        benefits: 'Industrial-grade large room window A/C with Titan Cooling capacity, delivering maximum moisture management and temperature control for massive areas.',
         acousticHeader: 'Industrial Silence',
         soundProfile: 'Power Cooling (53dB) - surprisingly quiet for 24k',
         keyFeature: 'Industrial-Grade Cooling'
@@ -439,8 +439,8 @@ const defaultSpecs: ProductSpec = {
 specs['GE_SMALL'] = { ...specs['GE_SMALL'], idealFor: 'Small Bedrooms (10x12)', benefits: 'Compact and easier to install in smaller windows.', soundProfile: 'Standard Rotary (54dB)' };
 specs['GE_MED'] = { ...specs['GE_MED'], idealFor: 'Medium Bedrooms, Guest Rooms', benefits: 'Balances performance and size, with smart features for convenience.', soundProfile: 'Standard Rotary (55dB)' };
 specs['GE_LARGE'] = { ...specs['GE_LARGE'], idealFor: 'Large Living Areas, Garages', benefits: 'High capacity for rapid cooling of large hot spaces.', soundProfile: 'High Capacity (60dB)' };
-specs['LG_DUAL_SMALL'] = { ...specs['LG_DUAL_SMALL'], idealFor: 'Bedrooms, Home Offices', benefits: 'Inverter technology provides whisper-quiet operation perfect for sleeping or working.', soundProfile: 'LoDecibel™ (44dB) - Very Quiet' };
-specs['LG_DUAL_LARGE'] = { ...specs['LG_DUAL_LARGE'], idealFor: 'Large Spaces', benefits: 'High efficiency cooling.', soundProfile: 'Quiet (50dB)' }; // Fallback for the old key if used
+specs['LG_DUAL_SMALL'] = { ...specs['LG_DUAL_SMALL'], idealFor: 'bedroom window A/C, Bedrooms, Home Offices', benefits: 'Whisper-quiet bedroom window A/C featuring LG inverter technology for energy savings and library-quiet operation.', soundProfile: 'LoDecibel™ (44dB) - Very Quiet' };
+specs['LG_DUAL_LARGE'] = { ...specs['LG_DUAL_LARGE'], idealFor: 'large room window A/C, Large Spaces', benefits: 'High-efficiency large room window A/C designed for maximum cooling in large spaces.', soundProfile: 'Quiet (50dB)' }; // Fallback for the old key if used
 
 export const getProductSpecs = (id: number): ProductSpec => {
     // LG Dual Inverter Series (1-7)

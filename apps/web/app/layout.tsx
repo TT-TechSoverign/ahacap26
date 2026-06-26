@@ -106,9 +106,9 @@ export default function RootLayout({
                             "@type": "HVACBusiness",
                             "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                             "name": "Affordable Home A/C",
-                            "image": "https://www.affordablehome-ac.com/assets/logo.png",
+                            "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
                             "url": "https://www.affordablehome-ac.com",
-                            "logo": "https://www.affordablehome-ac.com/assets/logo.png",
+                            "logo": "https://www.affordablehome-ac.com/assets/logo.svg",
                             "telephone": "+1-808-488-1111",
                             "email": "office@affordablehome-ac.com",
                             "address": {
@@ -121,9 +121,25 @@ export default function RootLayout({
                             },
                             "geo": {
                                 "@type": "GeoCoordinates",
-                                "latitude": "21.3833",
-                                "longitude": "-158.0167"
+                                "latitude": "21.3855",
+                                "longitude": "-158.0076"
                             },
+                            "contactPoint": [
+                                {
+                                    "@type": "ContactPoint",
+                                    "telephone": "+1-808-488-1111",
+                                    "contactType": "customer service",
+                                    "areaServed": "US-HI",
+                                    "availableLanguage": "English"
+                                },
+                                {
+                                    "@type": "ContactPoint",
+                                    "telephone": "+1-808-425-4554",
+                                    "contactType": "warehouse preorder",
+                                    "areaServed": "US-HI",
+                                    "availableLanguage": "English"
+                                }
+                            ],
                             "areaServed": [
                                 {
                                     "@type": "State",

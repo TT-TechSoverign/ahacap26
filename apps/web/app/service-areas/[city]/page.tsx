@@ -59,13 +59,16 @@ export function generateMetadata({ params }: Props): Metadata {
     const cityData = validCities.find(c => c.slug === params.city.toLowerCase());
     
     if (!cityData) return { title: 'Service Area Not Found' };
-
+ 
+    const title = `AC Repair & HVAC Services in ${cityData.name}, Oahu`;
+    const description = `AC broken in ${cityData.name}? Get expert AC repair, split AC installation, and window AC cleaning from licensed local technicians. Flat-rate diagnostics & 100% satisfaction.`;
+ 
     return {
-        title: `Affordable Air Conditioning & Split AC Installation in ${cityData.name}, Oahu`,
-        description: `Need AC repair near me in ${cityData.name}? We provide affordable air conditioning, split AC installation, and window AC cleaning services across Oahu.`,
+        title,
+        description,
         openGraph: {
-            title: `Affordable Air Conditioning in ${cityData.name}`,
-            description: `Looking for split ac units Hawaii? We provide premium ductless mini-splits and window ac cleaning services in ${cityData.name}.`,
+            title,
+            description,
             url: `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`,
             siteName: 'Affordable Home A/C',
             locale: 'en_US',
