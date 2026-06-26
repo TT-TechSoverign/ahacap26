@@ -74,7 +74,7 @@ export function generateMetadata({ params }: Props): Metadata {
     }
  
     return {
-        title,
+        title: { absolute: title },
         description,
         openGraph: {
             title,

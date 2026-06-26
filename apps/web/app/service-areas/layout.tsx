@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Oahu AC Repair & HVAC Service Areas | Affordable Home A/C',
+    title: {
+        absolute: 'Oahu AC Repair & HVAC Service Areas | Affordable Home A/C',
+    },
     description: 'Affordable Home A/C serves all of Oahu with expert AC repair, split AC installation, and window AC cleaning. View our service areas from Honolulu to Waipahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/service-areas',
