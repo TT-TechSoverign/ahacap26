@@ -443,32 +443,31 @@ specs['LG_DUAL_SMALL'] = { ...specs['LG_DUAL_SMALL'], idealFor: 'bedroom window 
 specs['LG_DUAL_LARGE'] = { ...specs['LG_DUAL_LARGE'], idealFor: 'large room window A/C, Large Spaces', benefits: 'High-efficiency large room window A/C designed for maximum cooling in large spaces.', soundProfile: 'Quiet (50dB)' }; // Fallback for the old key if used
 
 export const getProductSpecs = (id: number): ProductSpec => {
-    // LG Dual Inverter Series (4-10)
-    if (id === 4) return specs['LG_DUAL_6K'];
-    if (id === 5) return specs['LG_DUAL_8K'];
-    if (id === 6) return specs['LG_DUAL_10K'];
-    if (id === 7) return specs['LG_DUAL_12K'];
-    if (id === 8) return specs['LG_DUAL_15K']; 
-    if (id === 9) return specs['LG_DUAL_18K'];
-    if (id === 10) return specs['LG_DUAL_24K'];
+    // LG Dual Inverter Series (1-7)
+    if (id === 1) return specs['LG_DUAL_6K'];
+    if (id === 2) return specs['LG_DUAL_8K'];
+    if (id === 3) return specs['LG_DUAL_10K'];
+    if (id === 4) return specs['LG_DUAL_12K'];
+    if (id === 5) return specs['LG_DUAL_15K']; 
+    if (id === 6) return specs['LG_DUAL_18K'];
+    if (id === 7) return specs['LG_DUAL_24K'];
 
-    // LG Universal Fit (11-13)
-    if (id === 11) return specs['LG_UNI_8K'];
-    if (id === 12) return specs['LG_UNI_18K'];
-    if (id === 13) return specs['LG_UNI_24K'];
+    // LG Universal Fit (8-10)
+    if (id === 8) return specs['LG_UNI_8K'];
+    if (id === 9) return specs['LG_UNI_18K'];
+    if (id === 10) return specs['LG_UNI_24K'];
 
-    // LG Standard (14-16)
-    if (id === 14) return specs['LG_STD_8K'];
-    if (id === 15) return specs['LG_STD_10K'];
-    if (id === 16) return specs['LG_STD_12K'];
+    // LG Standard (11-12)
+    if (id === 11) return specs['LG_STD_8K'];
+    if (id === 12) return specs['LG_STD_12K'];
 
-    // GE Performance (17-19)
-    if (id === 17) return specs['GE_PERF_8K'];
-    if (id === 18) return specs['GE_PERF_10K'];
-    if (id === 19) return specs['GE_PERF_12K'];
+    // GE Performance (13-15)
+    if (id === 13) return specs['GE_PERF_8K'];
+    if (id === 14) return specs['GE_PERF_10K'];
+    if (id === 15) return specs['GE_PERF_12K'];
 
     // Accessories
-    if (id === 21) return specs['GE_RAB26A'];
+    if (id === 16) return specs['GE_RAB26A'];
 
     return { ...specs['GE_MED'], idealFor: 'General Use', benefits: 'Reliable cooling.', soundProfile: 'Standard' }; // Default fallback
 };
