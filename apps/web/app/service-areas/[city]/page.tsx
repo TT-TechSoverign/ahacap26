@@ -85,7 +85,7 @@ export function generateMetadata({ params }: Props): Metadata {
             type: 'website',
             images: [
                 {
-                    url: 'https://www.affordablehome-ac.com/assets/logo.png',
+                    url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
                     width: 800,
                     height: 600,
                     alt: 'Affordable Home A/C Logo',
@@ -96,7 +96,7 @@ export function generateMetadata({ params }: Props): Metadata {
             card: 'summary_large_image',
             title,
             description,
-            images: ['https://www.affordablehome-ac.com/assets/logo.png'],
+            images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
         },
         alternates: {
             canonical: `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`,
@@ -164,8 +164,8 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         "@type": "HVACBusiness",
                         "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                         "name": "Affordable Home A/C",
-                        "image": "https://www.affordablehome-ac.com/assets/logo.png",
-                        "logo": "https://www.affordablehome-ac.com/assets/logo.png",
+                        "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
+                        "logo": "https://www.affordablehome-ac.com/assets/logo.svg",
                         "url": "https://www.affordablehome-ac.com",
                         "telephone": "+1-808-488-1111",
                         "address": {

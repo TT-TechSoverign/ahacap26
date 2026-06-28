@@ -196,10 +196,10 @@ export default function CartDrawer() {
 
                                             <button
                                                 onClick={() => removeFromCart(item.id)}
-                                                className="absolute top-2 right-2 z-20 p-2 text-slate-600 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
+                                                className="absolute top-2 right-2 z-20 size-11 flex items-center justify-center rounded-full text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-red-500/50"
                                                 aria-label={`Remove ${item.name}`}
                                             >
-                                                <Trash2 className="size-4" />
+                                                <Trash2 className="size-5" />
                                             </button>
                                         </motion.div>
                                     ))}

@@ -5,7 +5,6 @@ import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
 import { Suspense } from 'react';
-import PromoRibbonCallout from '@/components/PromoRibbonCallout';
 
 export default function ContactPage() {
     const { content } = useContent();
@@ -29,7 +28,6 @@ export default function ContactPage() {
                     </p>
                 </div>
 
-                <PromoRibbonCallout />
 
                 <div className="flex flex-col gap-8 lg:gap-12">
                     {/* section 2: Dispatch Wizard - Main Section */}

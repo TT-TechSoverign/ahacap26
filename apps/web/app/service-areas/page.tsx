@@ -6,7 +6,6 @@ import { useContent } from '@/lib/context/ContentContext';
 import * as LucideIcons from 'lucide-react';
 import Link from 'next/link';
 import { BackToTop } from '@/components/BackToTop';
-import PromoRibbonCallout from '@/components/PromoRibbonCallout';
 
 export default function ServiceAreasPage() {
     const { content } = useContent();
@@ -41,10 +40,7 @@ export default function ServiceAreasPage() {
                 </div>
             </div>
 
-            {/* Promo Ribbon Injection */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 mb-12">
-                <PromoRibbonCallout />
-            </div>
+
 
             {/* Regions Layout */}
             <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 space-y-20">

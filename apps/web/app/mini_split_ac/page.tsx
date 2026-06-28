@@ -2,7 +2,6 @@ import SectionServicesGeneral from '../../components/SectionServicesGeneral';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BackToTop } from '@/components/BackToTop';
-import PromoBentoCard from '../../components/PromoBentoCard';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -78,7 +77,6 @@ export default function MiniSplitsPage() {
                     </p>
                 </div>
 
-                <PromoBentoCard />
 
                 <div className="flex flex-col gap-16 mb-20">
                     {brands.map((brand) => (

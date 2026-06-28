@@ -14,7 +14,7 @@ import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from
 import { BackToTop } from '@/components/BackToTop';
 import { cn, generateProductSlug, isCampaignActive as isCampaignActiveChecker } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
-import PromoBentoCard from '../../components/PromoBentoCard';
+
 import { 
     AlertTriangle, Warehouse, Truck, Ban, Leaf, Wind, ArrowUpRight, Eye, Check, X,
     Maximize2, Snowflake, Cpu, LayoutGrid, ShoppingCart, FileText, Mail, Droplets, Sun, Gauge
@@ -243,7 +243,6 @@ export default function ShopPage() {
                     </div>
                 </div>
 
-                <PromoBentoCard />
 
                 {/* Sizing Wizard CTA Banner */}
                 <div className="mt-8 mb-10 max-w-7xl mx-auto px-4">
@@ -1015,7 +1014,7 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
 
     const cardRef = useRef<HTMLDivElement>(null);
     const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
-    const isCampaignActive = mounted && isCampaignActiveChecker();
+    const isCampaignActive = isCampaignActiveChecker();
     const isPromo = isCampaignActive && product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0;
 
     useEffect(() => {

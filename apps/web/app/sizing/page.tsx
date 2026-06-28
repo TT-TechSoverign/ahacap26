@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { ACSelectorWizard } from '@/components/ACSelectorWizard';
 import { EditableText } from '@/components/EditableText';
-import PromoRibbonCallout from '@/components/PromoRibbonCallout';
 import Link from 'next/link';
 import { ArrowLeft, Calculator } from 'lucide-react';
 import { Suspense } from 'react';
@@ -65,7 +64,6 @@ export default function SizingPage() {
                     </p>
                 </div>
 
-                <PromoRibbonCallout />
 
                 {/* Sizing Wizard - Main Container */}
                 <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 mt-8">

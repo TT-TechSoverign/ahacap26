@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useContent } from '@/lib/context/ContentContext';
 import { BackToTop } from '@/components/BackToTop';
-import PromoRibbonCallout from '@/components/PromoRibbonCallout';
 import { CheckCircle, ArrowRight, Wrench, Zap, Wind, Droplets, ShieldCheck } from 'lucide-react';
 
 export default function MiniSplitACMaintenancePage() {
@@ -22,7 +21,6 @@ export default function MiniSplitACMaintenancePage() {
                     </h1>
                 </div>
 
-                <PromoRibbonCallout />
 
                 {/* Hero Cards (Comparison) - side-by-side flex layout (md:flex-row) */}
                 <div className="flex flex-col md:flex-row gap-8 mb-24">

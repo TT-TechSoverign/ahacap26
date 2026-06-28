@@ -162,7 +162,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                 <h2 className="font-header font-black uppercase text-sm tracking-wider text-white">Hawaii BTU Sizing Matrix</h2>
             </div>
 
-            <p className="text-slate-300 text-xs leading-relaxed mb-6 font-sans">
+            <p className="text-slate-200 text-xs leading-relaxed mb-6 font-sans">
                 Standard sizing models ignore Hawaii&apos;s humidity. Calculate your room load calibrated for Oahu&apos;s micro-climates.
             </p>
 
@@ -199,7 +199,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         <select 
                             value={region} 
                             onChange={(e) => setRegion(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
+                            className="bg-slate-950 border border-slate-500 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
                             title="Oahu Micro-Climate Region"
                             aria-label="Oahu Micro-Climate Region"
                         >
@@ -211,7 +211,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         <select 
                             value={ceilHeight} 
                             onChange={(e) => setCeilHeight(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
+                            className="bg-slate-950 border border-slate-500 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
                             aria-label="Room Ceiling Height"
                         >
                             <option value="standard">8ft Ceilings</option>
@@ -221,7 +221,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         <select 
                             value={sunExposure} 
                             onChange={(e) => setSunExposure(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
+                            className="bg-slate-950 border border-slate-500 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
                             aria-label="Room Sun Exposure"
                         >
                             <option value="shaded">North / Shaded</option>
@@ -231,7 +231,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         <select 
                             value={insulation} 
                             onChange={(e) => setInsulation(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-700/80 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
+                            className="bg-slate-950 border border-slate-500 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
                             aria-label="Room Insulation Quality"
                         >
                             <option value="good">Well-Insulated</option>
@@ -240,23 +240,23 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                     </div>
 
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
-                        <label className="text-xs md:text-sm text-slate-200 flex items-center gap-2.5 cursor-pointer select-none py-1.5">
+                        <label className="text-xs md:text-sm text-slate-200 flex items-center gap-2.5 cursor-pointer select-none py-2 min-h-[48px]">
                             <input 
                                 type="checkbox" 
                                 checked={isKitchen} 
                                 onChange={(e) => setIsKitchen(e.target.checked)} 
-                                className="size-5 rounded border-slate-700/80 bg-slate-950 text-primary focus:ring-1 focus:ring-primary focus:ring-offset-0 accent-primary cursor-pointer" 
+                                className="size-5 rounded border-slate-500 bg-slate-950 text-primary focus:ring-1 focus:ring-primary focus:ring-offset-0 accent-primary cursor-pointer" 
                                 aria-label="Is this room a kitchen?"
                             /> 
                             Is Kitchen (+4,000 BTU)
                         </label>
                         <div className="text-xs md:text-sm text-slate-200 flex items-center gap-3 py-1">
                             <span>Occupants:</span>
-                            <div className="flex items-center border border-slate-700/80 bg-slate-950 rounded-xl overflow-hidden min-h-[48px]">
+                            <div className="flex items-center border border-slate-500 bg-slate-950 rounded-xl overflow-hidden min-h-[48px]">
                                 <button 
                                     type="button"
                                     onClick={() => setOccupants(prev => Math.max(1, prev - 1))}
-                                    className="px-3 h-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors text-sm font-bold"
+                                    className="w-12 h-full hover:bg-slate-800 text-slate-200 hover:text-white transition-colors text-sm font-bold"
                                     aria-label="Decrease occupant count"
                                 >
                                     -
@@ -273,7 +273,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                                 <button 
                                     type="button"
                                     onClick={() => setOccupants(prev => Math.min(10, prev + 1))}
-                                    className="px-3 h-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors text-sm font-bold"
+                                    className="w-12 h-full hover:bg-slate-800 text-slate-200 hover:text-white transition-colors text-sm font-bold"
                                     aria-label="Increase occupant count"
                                 >
                                     +
@@ -283,13 +283,13 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                     </div>
                 </div>
  
-                <div className="flex flex-col justify-between border-t md:border-t-0 md:border-l border-slate-700/40 pt-6 md:pt-0 md:pl-6 text-center md:text-left">
+                <div className="flex flex-col justify-between border-t md:border-t-0 md:border-l border-slate-500/40 pt-6 md:pt-0 md:pl-6 text-center md:text-left">
                     <div>
-                        <div className="text-xs font-header font-black uppercase tracking-wider text-slate-300">Calculated Demand</div>
+                        <div className="text-xs font-header font-black uppercase tracking-wider text-slate-100">Calculated Demand</div>
                         <div className="text-3xl font-header font-black text-white mt-1">
                             {calculations.recommendedBtu.toLocaleString()} <span className="text-[10px] text-primary font-bold">BTU</span>
                         </div>
-                        <div className="text-xs text-slate-300 font-sans mt-1">Area: {calculations.area} sq. ft.</div>
+                        <div className="text-xs text-slate-200 font-sans mt-1">Area: {calculations.area} sq. ft.</div>
                     </div>
  
                     <div className="flex flex-col gap-3 mt-4">
@@ -314,17 +314,27 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                                 </Link>
                                 <Link 
                                     href="/contact" 
-                                    className="w-full text-center bg-transparent border border-slate-600 hover:border-primary text-slate-200 hover:text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center min-h-[48px]"
+                                    className="w-full text-center bg-transparent border border-slate-400 hover:border-primary text-slate-100 hover:text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center min-h-[48px]"
                                 >
                                     Request Custom Mini-Split Quote
                                 </Link>
                             </div>
                         ) : (
                             <div className="w-full">
-                                <div className="w-full text-center bg-emerald-600/80 border border-emerald-500/30 text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 min-h-[48px]">
+                                <button 
+                                    onClick={() => {
+                                        const el = document.getElementById('product-purchase-section');
+                                        if (el) {
+                                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                        } else {
+                                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        }
+                                    }}
+                                    className="w-full text-center bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[48px]"
+                                >
                                     <CheckCircle2 className="size-4" />
-                                    <span>Perfect Sizing Match - Ready to Order</span>
-                                </div>
+                                    <span>Perfect Sizing Match - Add to Cart</span>
+                                </button>
                             </div>
                         )}
                     </div>

@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
-import PromoHeroShowcase from '@/components/PromoHeroShowcase';
 import { 
     Calendar, ShieldCheck, Leaf, CloudLightning, Gauge, HeartPulse, Sparkles, Wrench, 
     Waves, Shield, Thermometer, MapPin, Navigation, BookOpen, FileWarning, PhoneCall, Rocket,
@@ -69,7 +68,6 @@ export default function MaintenancePage() {
                 </div>
             </header>
             <main className="pt-[140px]">
-                <PromoHeroShowcase />
                 {/* Hero Section */}
                 <section className="relative min-h-[90vh] flex items-center">
                     <div className="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcVdFY3rHs14g2-_QA7wRHU-vcgZckJP0be7QAsq2RCyag57umMKrw6azbu9TgP6l6Q1-76RYDTGDAxgvXt9Go3auTit553tQ1FsWe2T3HD1CVhY5Xg_I64wM8ipf8rtQY8IzMyjA5VOfq5QDVxP4F5g0oNiLj1TO8pimFeQldwv5G5easf3EbH5IWihuU_6T0g_Pcky_o4gcfvVwq1pDnFDoqd7rIrzOURx4kkiQ3Z_u12M1kNm43JkQ1u1M03lChyrrunm1QZiKP')] bg-cover bg-center opacity-20"></div>

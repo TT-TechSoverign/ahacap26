@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import MobileDrawerMenu from './MobileDrawerMenu';
-import PromoStickyBar from './PromoStickyBar';
 import { cn, isCampaignActive } from '@/lib/utils';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 
@@ -97,8 +96,7 @@ export default function MobileStickyHeader() {
                     </div>
                 </div>
                 <div className="pointer-events-auto">
-                    <PromoStickyBar />
-                    <div className="navbar-promo-accent w-full" />
+
                 </div>
             </header>
 

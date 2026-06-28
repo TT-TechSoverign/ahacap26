@@ -24,6 +24,26 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: ['/admin/', '/checkout/', '/maintenance/'],
             },
             {
+                userAgent: 'GPTBot',
+                disallow: '/',
+            },
+            {
+                userAgent: 'ClaudeBot',
+                disallow: '/',
+            },
+            {
+                userAgent: 'CCBot',
+                disallow: '/',
+            },
+            {
+                userAgent: 'AhrefsBot',
+                disallow: '/',
+            },
+            {
+                userAgent: 'SemrushBot',
+                disallow: '/',
+            },
+            {
                 userAgent: 'PetalBot',
                 disallow: '/',
             },

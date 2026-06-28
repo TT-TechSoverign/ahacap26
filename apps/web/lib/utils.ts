@@ -14,26 +14,5 @@ export function generateProductSlug(id: number | string, name: string): string {
 }
 
 export function isCampaignActive(): boolean {
-    const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
-    const isPastDate = new Date().getTime() > targetDate.getTime();
-    if (isPastDate) return false;
-
-    // Client-side runtime domain check (failsafe guardrail)
-    if (typeof window !== "undefined") {
-        const hostname = window.location.hostname;
-        const isProdDomain = hostname.includes("affordablehome-ac.com") && !hostname.includes("staging");
-        if (isProdDomain) {
-            return false;
-        }
-    }
-
-    // Check if we are running in a production environment (which should NOT show the promo)
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
-    const isProdEnv = apiUrl.includes("affordablehome-ac.com") && !apiUrl.includes("staging");
-
-    if (isProdEnv) {
-        return false;
-    }
-
-    return true;
+    return false;
 }

@@ -5,14 +5,12 @@ import { ContentProvider } from '../lib/context/ContentContext';
 import Footer from '../components/Footer';
 import NavbarV2 from '../components/NavbarV2';
 import MobileStickyHeader from '../components/MobileStickyHeader';
-import PromoStickyBar from '../components/PromoStickyBar';
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import dynamic from 'next/dynamic';
 
 const CartDrawer = dynamic(() => import('../components/CartDrawer'), { ssr: false });
 const MobileStickyBottomBar = dynamic(() => import('../components/MobileStickyBottomBar'), { ssr: false });
-const PatrioticBackgroundGlow = dynamic(() => import('../components/PatrioticBackgroundGlow'), { ssr: false });
 
 
 export const viewport: Viewport = {
@@ -152,7 +150,6 @@ export default function RootLayout({
                 />
                 <ContentProvider>
                     <CartProvider>
-                        <PatrioticBackgroundGlow />
                         <MobileStickyHeader />
                         <NavbarV2 />
                         {children}

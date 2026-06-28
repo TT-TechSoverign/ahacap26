@@ -2,7 +2,6 @@ import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
 import Section1HeroHomeV2 from '@/components/Section1HeroHomeV2';
 import { QuickJumpBanner } from '@/components/QuickJumpBanner';
 import { BackToTop } from '@/components/BackToTop';
-import FourthOfJulyBanner from '@/components/FourthOfJulyBanner';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -30,7 +29,7 @@ export default function Homepage() {
                     src="/assets/hero-cards/ahac-hero-background-2.webp"
                     alt="Expert HVAC Installation by Affordable Home A/C"
                     fill
-                    sizes="(max-width: 768px) 100vw, 100vw"
+                    sizes="(max-width: 768px) 180vh, 100vw"
                     className="object-cover object-center translate-y-0 scale-100 md:translate-y-[-10%] md:scale-110 [transform:translateZ(0)]" // Disable zoom/translate on mobile to prevent blurriness
                     priority
                     quality={85} // Higher quality to avoid compression artifacts
@@ -44,9 +43,7 @@ export default function Homepage() {
                 <h1 className="sr-only">Affordable Air Conditioning & Ductless Mini Split Installation in Hawaii</h1>
                 <Section1HeroHomeV2 />
                 <QuickJumpBanner />
-                <div className="max-w-7xl mx-auto px-6 mb-12">
-                    <FourthOfJulyBanner />
-                </div>
+
                 <Section2OurServicesV2 />
             </main>
             <BackToTop visible={true} />

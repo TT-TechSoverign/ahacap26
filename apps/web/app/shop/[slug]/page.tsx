@@ -493,7 +493,7 @@ export default function ProductDetailPage() {
                         </div>
 
                         {/* CTA Cluster */}
-                        <div className="space-y-3 pt-2 relative font-header">
+                        <div id="product-purchase-section" className="space-y-3 pt-2 relative font-header">
                             {product.stock > 0 ? (
                                 <button
                                     onClick={() => {

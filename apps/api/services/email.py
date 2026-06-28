@@ -214,9 +214,7 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
 
     # Check if there is any promo item in the order
     is_promo = False
-    import time
-    import os
-    is_promo_active = (time.time() <= 1785578399) and (os.environ.get("PROMO_ENABLED", "true").lower() == "true")
+    is_promo_active = False
     if is_promo_active:
         try:
             from database import AsyncSessionLocal

@@ -8,7 +8,6 @@ import { cn, isCampaignActive } from '@/lib/utils';
 import { useCart } from '../context/CartContext';
 import { useContent } from '../lib/context/ContentContext';
 import { EditableText } from './EditableText';
-import PromoStickyBar from './PromoStickyBar';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 
 export default function NavbarV2() {
@@ -220,9 +219,7 @@ export default function NavbarV2() {
                     </div>
                 </div>
                 
-                {/* Row 3: Promo Sticky Bar */}
-                <PromoStickyBar />
-                <div className="navbar-promo-accent w-full" />
+
             </div>
         </header>
     );

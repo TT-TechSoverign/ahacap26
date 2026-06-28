@@ -11,7 +11,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { getProductImages } from '../../lib/product-images';
-import { isCampaignActive } from '../../lib/utils';
+
 import { 
     CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, Snowflake, Lock 
 } from 'lucide-react';
@@ -21,7 +21,7 @@ function CheckoutContent() {
     const [step, setStep] = useState<'shipping' | 'payment' | 'success'>('shipping');
     const [email, setEmail] = useState('');
     const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>('pickup');
-    const [hadPromoItems, setHadPromoItems] = useState(false);
+
 
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -31,57 +31,15 @@ function CheckoutContent() {
     const taxAmount = subtotal * 0.04712; // 4.712% HI Tax
     const finalTotal = subtotal + taxAmount;
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const stored = sessionStorage.getItem('had_promo') === 'true';
-            if (stored) {
-                setHadPromoItems(true);
-            }
-        }
-    }, []);
 
-    const downloadCalendarInvite = () => {
-        const orderId = searchParams.get('session_id') || '4TH-OF-JULY-PROMO';
-        const dtstamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-        const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Affordable Home A/C//Celebrating America Promo//EN
-CALSCALE:GREGORIAN
-METHOD:REQUEST
-BEGIN:VEVENT
-UID:promo_installation_window_2026_${orderId}
-DTSTAMP:${dtstamp}
-DTSTART:20260701T080000
-DTEND:20260701T170000
-SUMMARY:Affordable Home A/C Installation Window
-DESCRIPTION:Celebrating America Promo: To lock in your 10% discount, please schedule your installation window for July and coordinate your down payment with the representative.
-LOCATION:Affordable Home A/C Waipahu shop or your residence
-STATUS:CONFIRMED
-SEQUENCE:0
-END:VEVENT
-END:VCALENDAR`;
 
-        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', `affordable_home_ac_invite.ics`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
+
 
     const handleSuccess = () => {
         // Retrieve session_id for transaction alignment
         const sessionId = searchParams.get('session_id') || `AHAC-${Math.floor(Math.random() * 90000) + 10000}`;
 
-        // Check if cart contains promotional items before clearing
-        const campaignActive = isCampaignActive();
-        const hasPromo = campaignActive && items.some(item => item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0);
-        if (hasPromo) {
-            setHadPromoItems(true);
-            sessionStorage.setItem('had_promo', 'true');
-        }
+
 
         // GTM E-Commerce purchase push
         if (typeof window !== 'undefined' && (window as any).dataLayer) {
@@ -94,12 +52,10 @@ END:VCALENDAR`;
                     shipping: deliveryFee,
                     currency: 'USD',
                     items: items.map((item, index) => {
-                        const campaignActive = isCampaignActive();
-                        const activePrice = (campaignActive && item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0) ? item.promo_price : item.price;
                         return {
                             item_id: String(item.id),
                             item_name: item.name,
-                            price: activePrice,
+                            price: item.price,
                             quantity: item.quantity,
                             index: index
                         };
@@ -121,12 +77,10 @@ END:VCALENDAR`;
                     value: cartTotal,
                     currency: 'USD',
                     items: items.map((item, index) => {
-                        const campaignActive = isCampaignActive();
-                        const activePrice = (campaignActive && item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0) ? item.promo_price : item.price;
                         return {
                             item_id: String(item.id),
                             item_name: item.name,
-                            price: activePrice,
+                            price: item.price,
                             quantity: item.quantity,
                             index: index
                         };
@@ -193,26 +147,7 @@ END:VCALENDAR`;
                         <p className="text-primary text-center font-black">{crypto.randomUUID().slice(0, 18).toUpperCase()}</p>
                     </div>
 
-                    {hadPromoItems && (
-                        <div className="space-y-4">
-                            <div className="bg-red-950/40 border border-red-500/30 p-4 rounded-xl text-left space-y-2 relative overflow-hidden">
-                                <h4 className="text-red-500 font-header font-black uppercase text-xs tracking-widest flex items-center gap-2">
-                                    <Star className="size-4 animate-pulse" />
-                                    Celebrating America Promo
-                                </h4>
-                                <p className="text-slate-300 text-[11px] leading-relaxed uppercase font-bold tracking-tight">
-                                    To lock in your 10% discount, please schedule your installation window for July and coordinate your down payment with the representative.
-                                </p>
-                            </div>
-                            <button
-                                onClick={downloadCalendarInvite}
-                                className="w-full py-4 bg-gradient-to-r from-red-600 to-blue-600 hover:from-red-500 hover:to-blue-500 text-white font-header font-black uppercase tracking-[0.2em] text-xs rounded-xl transition-all shadow-lg active:scale-95 text-center flex items-center justify-center gap-2"
-                            >
-                                <Calendar className="size-4" />
-                                Download Calendar Invite
-                            </button>
-                        </div>
-                    )}
+
 
                     <Link href="/shop" className="block w-full py-4 bg-white/5 hover:bg-primary border border-white/10 hover:border-primary text-white font-header font-black uppercase tracking-[0.2em] text-xs rounded-xl transition-all shadow-lg active:scale-95 text-center">
                         Return to Shop

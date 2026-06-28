@@ -4,7 +4,6 @@ import { useContent } from '@/lib/context/ContentContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BackToTop } from '@/components/BackToTop';
-import PromoRibbonCallout from '@/components/PromoRibbonCallout';
 
 export default function WindowAcMaintenancePage() {
     const { content } = useContent();
@@ -22,7 +21,7 @@ export default function WindowAcMaintenancePage() {
                     </h1>
                 </div>
 
-                <PromoRibbonCallout />
+
             </div>
 
             {/* Task 1: Full Deep Cleaning Hero Section */}

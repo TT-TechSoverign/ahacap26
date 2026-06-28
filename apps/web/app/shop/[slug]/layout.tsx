@@ -90,10 +90,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const coverageTextDesc = cleanCoverage ? ` Cools ${cleanCoverage}.` : '';
 
     const firstIdeal = specs?.idealFor ? specs.idealFor.split(',')[0].trim() : '';
-    const cleanFirstIdeal = firstIdeal.replace('window A/C', 'AC').replace('window AC', 'AC');
+    const cleanFirstIdeal = firstIdeal; // Keep exact phrase intact for title SEO
 
-    const title = `Buy ${product.name} ${cleanFirstIdeal ? `(${cleanFirstIdeal})` : ''} | ${stockStatusTitle}`;
-    const description = `${stockStatusDesc} Buy ${product.name} for $${priceText}${discountText}. Free Waipahu pickup / $50 delivery + 1-Yr warranty.${coverageTextDesc} ${specs.benefits || ''}`;
+    let title = `Buy ${product.name} ${cleanFirstIdeal ? `(${cleanFirstIdeal})` : ''} | ${stockStatusTitle}`;
+    let description = `${stockStatusDesc} Buy ${product.name} for $${priceText}${discountText}. Ideal for ${specs.idealFor || 'general cooling'}. Free Waipahu pickup / $50 delivery + 1-Yr warranty.${coverageTextDesc} ${specs.benefits || ''}`;
+
+    if (product.name.toLowerCase().includes('lg dual inverter')) {
+        const btuStr = specs.btu.replace(',000', 'k').replace(' BTU', '');
+        const modelMatch = product.name.match(/\(([^)]+)\)/);
+        const modelCode = modelMatch ? modelMatch[1] : '';
+        
+        title = `LG ${btuStr} Dual Inverter AC ${modelCode} | ${stockStatusTitle}`;
+        
+        const techBenefit = product.id === 1 ? 'Quiet & saves up to 40% energy.' 
+            : product.id === 2 ? 'Smart ThinQ WiFi remote control.' 
+            : product.id === 3 ? '2024 ENERGY STAR Most Efficient.'
+            : product.id === 4 ? 'Anti-corrosive Gold Fin coating.'
+            : product.id === 5 ? 'High-torque large space cooling.'
+            : product.id === 6 ? 'Ideal for vaulted open ceilings.'
+            : product.id === 7 ? 'Industrial titan-grade cooling.'
+            : 'Ultra-quiet energy saver.';
+
+        description = `${isOutOfStock ? 'Order for Oahu!' : 'Oahu In-Stock!'} Buy LG Dual Inverter ${btuStr} AC ${modelCode} for $${priceText}${discountText}. Free Waipahu pickup / $50 delivery + 1-Yr Warranty. ${techBenefit}`;
+    }
+
     const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');
 
     return {
@@ -142,7 +162,7 @@ export default async function ProductLayout({ params, children }: Props) {
     const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');
     const absoluteImageUrl = product.image_url 
         ? `${domain}${product.image_url.replace('.svg', '.webp')}` 
-        : `${domain}/assets/logo.png`;
+        : `${domain}/assets/logo-new.png`;
     
     const brandName = product.name.split(' ')[0] || 'Affordable Home A/C';
     const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
@@ -159,13 +179,13 @@ export default async function ProductLayout({ params, children }: Props) {
         "@type": "Product",
         "name": product.name,
         "image": [absoluteImageUrl],
-        "description": `Buy the ${product.name} at Affordable Home A/C. ${specs.benefits ? `${specs.benefits} ` : ''}Professional installation and affordable prices in Oahu, Hawaii.`,
+        "description": `Buy the ${product.name} at Affordable Home A/C. ${specs.idealFor ? `Ideal for ${specs.idealFor}. ` : ''}${specs.benefits ? `${specs.benefits} ` : ''}Professional installation and affordable prices in Oahu, Hawaii.`,
         "sku": `AHAC-${product.id}`,
         "mpn": `AHAC-${product.id}`, // Resolves GSC "Missing MPN" warning
         "brand": {
             "@type": "Brand",
             "name": brandName,
-            "logo": `${domain}/assets/logo.png`
+            "logo": `${domain}/assets/logo.svg`
         },
         "additionalProperty": [
             {
