@@ -11,6 +11,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { getProductImages } from '../../lib/product-images';
+import { isCampaignActive } from '../../lib/utils';
 
 import { 
     CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, Snowflake, Lock 
