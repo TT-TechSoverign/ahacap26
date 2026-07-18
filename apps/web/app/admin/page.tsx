@@ -1474,7 +1474,7 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 10 }}
-            className="p-8"
+            className="p-8 pb-[300px]"
         >
             <div className="mb-8">
                 <h3 className="text-white font-header font-black uppercase text-xl tracking-widest mb-2">Footer Schedule Availability</h3>
