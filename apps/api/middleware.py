@@ -45,6 +45,9 @@ class LogSanitizerMiddleware(BaseHTTPMiddleware):
 
 class ChaosMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
+        if request.url.path == "/api/webhooks/stripe":
+            return await call_next(request)
+            
         if os.getenv("CHAOS_MODE", "false").lower() == "true":
             # 10% chance of 500 Error
             if random.random() < 0.1:

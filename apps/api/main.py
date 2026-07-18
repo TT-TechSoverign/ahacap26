@@ -70,6 +70,9 @@ from fastapi import Request
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
+    if isinstance(exc, HTTPException):
+        raise exc
+
     error_msg = str(exc)
     tb = traceback.format_exc()
     print(f"GLOBAL ERROR: {error_msg}\n{tb}")
@@ -433,9 +436,15 @@ async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
     print(f"DEBUG: Sig Header: {sig_header}")
     print(f"DEBUG: Secret Present: {bool(webhook_secret)}")
 
+    if not webhook_secret:
+        print("ERROR: STRIPE_WEBHOOK_SECRET is not set")
+        raise HTTPException(status_code=400, detail="Webhook secret not configured")
+
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, webhook_secret)
         print(f"DEBUG: Event Constructed: {event['type']}")
+        import json
+        payload_data = json.loads(payload.decode('utf-8'))
     except ValueError as e:
         print(f"ERROR: Invalid Payload: {e}")
         raise HTTPException(status_code=400, detail="Invalid payload")
@@ -448,8 +457,6 @@ async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
         traceback.print_exc()
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
-    import json
-    payload_data = json.loads(payload.decode('utf-8'))
     background_tasks.add_task(process_stripe_event, event, payload_data)
     return {"status": "success"}
 
