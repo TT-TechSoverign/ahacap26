@@ -127,22 +127,7 @@ export default function AdminPage() {
         }
     }, []);
 
-    // --- Scroll Sync Logic (Matches NavbarV2) ---
-    const { scrollY } = useScroll();
-    const [headerVisible, setHeaderVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-
-    // Sync header visibility with scroll direction
-    // calculate direction and toggle visibility
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        const direction = latest > lastScrollY ? "down" : "up";
-        if (latest > 50 && direction === "down" && headerVisible) {
-            setHeaderVisible(false);
-        } else if (direction === "up" && !headerVisible) {
-            setHeaderVisible(true);
-        }
-        setLastScrollY(latest);
-    });
+    // --- Scroll Sync Logic Removed ---
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -302,18 +287,10 @@ export default function AdminPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[140px] md:pt-[165px]">
-            {/* Admin Header - Fixed below global Navbar */}
-            <motion.header
-                initial={{ y: 0 }}
-                animate={{ y: headerVisible ? 0 : -400 }}
-                transition={{
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 25,
-                    delay: headerVisible ? 0.1 : 0
-                }}
-                className="fixed top-[130px] md:top-[260px] left-0 right-0 z-40 bg-[#06090e]/80 backdrop-blur-md border-b border-white/10 px-6 py-4 shadow-lg shadow-black/50"
+        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[40px]">
+            {/* Admin Header - Static */}
+            <header
+                className="w-full bg-[#06090e]/80 backdrop-blur-md border-b border-white/10 px-6 py-4 shadow-lg shadow-black/50 relative z-40 mb-8"
             >
                 <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto">
@@ -390,9 +367,9 @@ export default function AdminPage() {
                         </button>
                     </div>
                 </div>
-            </motion.header>
+            </header>
 
-            <main className="max-w-[1440px] mx-auto px-6 pt-12">
+            <main className="max-w-[1440px] mx-auto px-6 pt-4">
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
                     {activeTab === 'inventory' && (
@@ -1352,6 +1329,91 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
 }
 
 
+function DateRangeInput({ label, name, value, onChange }: { label: string, name: string, value: string, onChange: (e: any) => void }) {
+    const [showPicker, setShowPicker] = useState(false);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
+    const handleApply = () => {
+        if (!startDate || !endDate) return;
+        
+        const start = new Date(startDate + "T00:00:00");
+        const end = new Date(endDate + "T00:00:00");
+        
+        const startMonth = start.toLocaleString('default', { month: 'short' });
+        const startDay = start.getDate();
+        const startYear = start.getFullYear();
+        
+        const endMonth = end.toLocaleString('default', { month: 'short' });
+        const endDay = end.getDate();
+        const endYear = end.getFullYear();
+        
+        let formatted = '';
+        if (startYear === endYear) {
+            if (startMonth === endMonth) {
+                formatted = `${startMonth} ${startDay}-${endDay}, ${startYear}`;
+            } else {
+                formatted = `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${startYear}`;
+            }
+        } else {
+            formatted = `${startMonth} ${startDay}, ${startYear} - ${endMonth} ${endDay}, ${endYear}`;
+        }
+        
+        onChange({ target: { name, value: formatted } });
+        setShowPicker(false);
+    };
+
+    return (
+        <div className="space-y-2">
+            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{label}</label>
+            <div className="relative flex items-center gap-2">
+                <input
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    className="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                    placeholder="e.g. July 6-10, 2026"
+                />
+                <button
+                    type="button"
+                    onClick={() => setShowPicker(!showPicker)}
+                    className="size-11 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl hover:bg-primary/20 hover:text-primary transition-all text-slate-400 shrink-0"
+                    title="Select Date Range"
+                >
+                    <Calendar className="size-5" />
+                </button>
+
+                <AnimatePresence>
+                    {showPicker && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                            className="absolute top-14 right-0 z-50 bg-[#0a0e14] border border-white/10 p-4 rounded-xl shadow-2xl shadow-black w-72"
+                        >
+                            <div className="flex justify-between items-center mb-4">
+                                <span className="text-xs font-bold uppercase tracking-wider text-white">Select Dates</span>
+                                <button type="button" onClick={() => setShowPicker(false)} className="text-slate-500 hover:text-white"><X className="size-4" /></button>
+                            </div>
+                            <div className="space-y-3">
+                                <div>
+                                    <label className="text-[9px] text-slate-500 uppercase font-black block mb-1">Start Date</label>
+                                    <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full bg-black/50 border border-white/10 rounded-lg p-2 text-sm text-white focus:border-primary outline-none [color-scheme:dark]" />
+                                </div>
+                                <div>
+                                    <label className="text-[9px] text-slate-500 uppercase font-black block mb-1">End Date</label>
+                                    <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-full bg-black/50 border border-white/10 rounded-lg p-2 text-sm text-white focus:border-primary outline-none [color-scheme:dark]" />
+                                </div>
+                                <button type="button" onClick={handleApply} className="w-full mt-2 bg-primary text-black font-black uppercase text-[10px] tracking-wider py-2 rounded-lg hover:bg-white transition-all shadow-lg shadow-primary/20">Apply Range</button>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </div>
+    );
+}
+
 function ScheduleManager({ adminFetch }: { adminFetch: any }) {
     const { content, refreshContent } = useContent();
     const [formData, setFormData] = useState(content.footer_schedule || {
@@ -1437,24 +1499,18 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
                                 className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
                             />
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Estimate Date</label>
-                            <input
-                                name="mini_split_estimate_date"
-                                value={formData.mini_split_estimate_date}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Install Date</label>
-                            <input
-                                name="mini_split_install_date"
-                                value={formData.mini_split_install_date}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
+                        <DateRangeInput
+                            label="Next Available Estimate"
+                            name="mini_split_estimate_date"
+                            value={formData.mini_split_estimate_date}
+                            onChange={handleChange}
+                        />
+                        <DateRangeInput
+                            label="Next Available Install"
+                            name="mini_split_install_date"
+                            value={formData.mini_split_install_date}
+                            onChange={handleChange}
+                        />
                     </div>
 
                     {/* Window AC Section */}
@@ -1472,24 +1528,18 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
                                 className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
                             />
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Estimate Date</label>
-                            <input
-                                name="window_ac_estimate_date"
-                                value={formData.window_ac_estimate_date}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Install Date</label>
-                            <input
-                                name="window_ac_install_date"
-                                value={formData.window_ac_install_date}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
+                        <DateRangeInput
+                            label="Next Available Estimate"
+                            name="window_ac_estimate_date"
+                            value={formData.window_ac_estimate_date}
+                            onChange={handleChange}
+                        />
+                        <DateRangeInput
+                            label="Next Available Install"
+                            name="window_ac_install_date"
+                            value={formData.window_ac_install_date}
+                            onChange={handleChange}
+                        />
                     </div>
                 </div>
 
