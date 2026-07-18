@@ -290,7 +290,7 @@ export default function AdminPage() {
         <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[40px]">
             {/* Admin Header - Static */}
             <header
-                className="w-full bg-[#06090e]/80 backdrop-blur-md border-b border-white/10 px-6 py-4 shadow-lg shadow-black/50 relative z-40 mb-8"
+                className="w-full bg-[#06090e]/80 backdrop-blur-md border-b border-white/10 px-6 py-4 shadow-lg shadow-black/50 sticky top-0 z-40 mb-8"
             >
                 <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto">
