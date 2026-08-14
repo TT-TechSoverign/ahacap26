@@ -148,6 +148,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
                     if (validation) {
                         return { 
                             ...item, 
+                            name: validation.name || item.name,
                             stock: validation.available_stock,
                             price: validation.price // Also sync the canonical price
                         };
