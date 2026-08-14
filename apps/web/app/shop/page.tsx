@@ -769,7 +769,7 @@ function SizingGuideSection() {
             btu: "14,000 - 15,000",
             app: "Living / Large Master",
             models: [
-                { name: "LW1522IVSM", link: "#dual_inverter" }
+                { name: "LW1522FVSM", link: "#dual_inverter" }
             ]
         },
         {

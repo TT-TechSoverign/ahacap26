@@ -9,7 +9,7 @@ const LEGACY_ID_TO_SLUG: Record<string, string> = {
     '2909': '7-lg-dual-inverter-23-500-btu-lw2422ivsm', // Approx 23500 BTU
     '3512': '3-lg-dual-inverter-10-000-btu-lw1022ivsm', // Approx 10000
     '2463': '1-lg-dual-inverter-6-000-btu-lw6023ivsm', // Approx 6000
-    '2923': '5-lg-dual-inverter-14-000-btu-lw1522ivsm', // Approx 14000
+    '2923': '5-lg-dual-inverter-14-000-btu-lw1522fvsm', // Approx 14000
     '2427': '6-lg-dual-inverter-18-000-btu-lw1822ivsm', // Approx 18000
     '2924': '7-lg-dual-inverter-23-500-btu-lw2422ivsm', // Approx 23500
 };
