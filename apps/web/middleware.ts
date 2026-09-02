@@ -169,7 +169,13 @@ export function middleware(request: NextRequest) {
     const response = NextResponse.next();
 
     // 5. X-Robots-Tag: noindex for Internal/Secure Routes
-    const noIndexPaths = ['/admin', '/checkout', '/maintenance'];
+    const noIndexPaths = [
+        '/admin', 
+        '/checkout', 
+        '/maintenance', 
+        '/khon2-seo-portal-qx9v2m', 
+        '/puck'
+    ];
     const isNoIndex = noIndexPaths.some(path => url.pathname.startsWith(path));
 
     if (isNoIndex) {

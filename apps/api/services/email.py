@@ -312,37 +312,210 @@ END:VCALENDAR"""
     # rows_html moved inside build_email_html for dynamic styling
 
     def build_email_html(is_admin=False):
-        # Dynamic Styling - Modern Unified Premium Dark Theme
+        if is_admin:
+            # High-Contrast Pure Black & White Admin Print-Ready Layout (Guaranteed 1-Page Print)
+            print_css = """
+            @media print {
+                @page {
+                    size: letter portrait;
+                    margin: 0.3in 0.4in;
+                }
+                html, body {
+                    background: #ffffff !important;
+                    background-color: #ffffff !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                }
+                .container {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    border: 1.5px solid #000000 !important;
+                    box-shadow: none !important;
+                    margin: 0 !important;
+                    background: #ffffff !important;
+                    background-color: #ffffff !important;
+                    page-break-inside: avoid !important;
+                    break-inside: avoid !important;
+                }
+                .content {
+                    padding: 6px 10px !important;
+                    background: #ffffff !important;
+                    background-color: #ffffff !important;
+                }
+                h1, h2, h3, p, th, td, span, strong, a, div {
+                    color: #000000 !important;
+                    background-color: transparent !important;
+                    text-shadow: none !important;
+                    box-shadow: none !important;
+                }
+                .order-badge {
+                    border: 1px solid #000000 !important;
+                    background: #ffffff !important;
+                    color: #000000 !important;
+                }
+                table, tr {
+                    page-break-inside: avoid !important;
+                    break-inside: avoid !important;
+                }
+            }
+            """
+
+            # Admin Rows
+            admin_rows_html = ""
+            if items:
+                for item in items:
+                    name = item.get('description', 'Item')
+                    qty = item.get('quantity', 1)
+                    amount = item.get('amount_total', 0) / 100.0
+                    admin_rows_html += f"""
+                    <tr style="border-bottom: 1px solid #000000;">
+                        <td style="padding: 4px 6px; color: #000000; font-size: 12px; font-weight: 500;">{name}</td>
+                        <td style="padding: 4px 6px; text-align: center; color: #000000; font-size: 12px; font-weight: 600;">{qty}</td>
+                        <td style="padding: 4px 6px; text-align: right; color: #000000; font-size: 12px; font-weight: 700;">${amount:,.2f}</td>
+                    </tr>
+                    """
+            else:
+                admin_rows_html = """
+                <tr>
+                    <td colspan="3" style="padding: 6px; text-align: center; color: #000000; font-style: italic; font-size: 12px;">
+                        Order details not available.
+                    </td>
+                </tr>
+                """
+
+            return f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #ffffff; color: #000000; }}
+            .container {{ max-width: 650px; margin: 0 auto; background-color: #ffffff; border: 1.5px solid #000000; border-radius: 4px; box-shadow: none; overflow: hidden; page-break-inside: avoid; }}
+            .content {{ padding: 10px 14px; background-color: #ffffff; }}
+            h1 {{ color: #000000; font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 4px 0; }}
+            h2 {{ color: #000000; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin: 8px 0 4px 0; border-bottom: 1.5px solid #000000; padding-bottom: 2px; }}
+            .order-badge {{ display: inline-block; background-color: #ffffff; color: #000000; border: 1.5px solid #000000; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 6px; }}
+            th {{ font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #000000; font-weight: 800; padding: 4px 6px; border-bottom: 1.5px solid #000000; }}
+            .info-item p.label {{ font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; color: #000000; margin: 0 0 2px 0; font-weight: 800; }}
+            .info-item p.value {{ font-size: 12px; color: #000000; margin: 0; line-height: 1.35; font-weight: normal; }}
+            {print_css}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- 1. Admin Header Banner -->
+            <div style="background-color: #ffffff; padding: 8px 12px; text-align: center; border-bottom: 2px solid #000000;">
+                 <div style="font-size: 11px; font-weight: 900; letter-spacing: 0.1em; color: #000000; text-transform: uppercase;">AFFORDABLE HOME A/C &bull; ADMIN ORDER COPY</div>
+            </div>
+
+            <!-- 2. Main Body -->
+            <div class="content">
+                <div style="text-align: center; margin-bottom: 6px;">
+                    <h1>Order Confirmed</h1>
+                    <span class="order-badge">Ref: #{order_id}</span>
+                </div>
+
+                <!-- Customer Information -->
+                <h2>Customer Information</h2>
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 8px; table-layout: fixed;">
+                    <tr>
+                        <td style="width: 50%; vertical-align: top; padding-right: 8px;" class="info-item">
+                            <p class="label">Billed To</p>
+                            <p class="value">
+                                <strong style="color: #000000; font-size: 13px;">{c_name}</strong><br>
+                                <span style="color: #000000;">{c_address_html}</span>
+                            </p>
+                        </td>
+                        <td style="width: 50%; vertical-align: top; padding-left: 8px;" class="info-item">
+                            <p class="label">Contact</p>
+                            <p class="value">
+                                <span style="color: #000000;">{c_email}</span><br>
+                                <span style="color: #000000; font-weight: bold;">{c_phone}</span>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Line Items -->
+                <h2>Order Details</h2>
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 8px;">
+                    <thead>
+                        <tr style="border-bottom: 1.5px solid #000000;">
+                            <th style="text-align: left;">Item</th>
+                            <th style="text-align: center;">Qty</th>
+                            <th style="text-align: right;">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {admin_rows_html}
+                    </tbody>
+                </table>
+
+                <!-- Summary Box -->
+                <div style="background-color: #ffffff; border: 1.5px solid #000000; border-radius: 4px; padding: 8px 10px; margin-bottom: 6px;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding-bottom: 6px; vertical-align: top;">
+                                <p style="margin: 0; color: #000000; font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Payment Method</p>
+                                <p style="margin: 2px 0 0 0; color: #000000; font-weight: 700; font-size: 12px;">{payment_method_text}</p>
+                            </td>
+                            <td style="padding-bottom: 6px; text-align: right; vertical-align: top;">
+                                <p style="margin: 0; color: #000000; font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Total Paid</p>
+                                <p style="margin: 2px 0 0 0; color: #000000; font-weight: 900; font-size: 16px;">${(total_cents/100):.2f}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="border-top: 1px solid #000000; padding-top: 6px;">
+                                <p style="margin: 0; color: #000000; font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">{instructions_title}</p>
+                                <p style="margin: 4px 0 0 0; color: #000000; font-size: 11px; line-height: 1.35;">{instructions_text}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+
+        # Client / Customer Email Styling (Premium Dark Theme + Print Optimizations)
         c_main = "#f8fafc"
         c_sub = "#cbd5e1"
         c_muted = "#94a3b8"
         c_label = "#64748b"
         bg_body = "#0b0f19"
         
-        pad_cont = "12px 16px" if is_admin else "20px 32px"
-        h1_size = "20px" if is_admin else "24px"
-        h2_mar = "14px 0 6px 0" if is_admin else "24px 0 12px 0"
-        h2_pad = "4px" if is_admin else "8px"
-        badge_mar = "8px" if is_admin else "24px"
-        td_pad = "6px 4px" if is_admin else "16px 8px"
-        gap_grid = "10px" if is_admin else "20px"
-        mar_grid = "12px" if is_admin else "24px"
+        pad_cont = "20px 32px"
+        h1_size = "24px"
+        h2_mar = "24px 0 12px 0"
+        h2_pad = "8px"
+        badge_mar = "24px"
+        td_pad = "16px 8px"
+        gap_grid = "20px"
+        mar_grid = "24px"
         
-        print_css = ""
-        if is_admin:
-            print_css = """
-            @media print {
-                body, .container, .content { background: white !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; }
-                h1, h2, p, th, td, span, strong { color: black !important; }
-                .content { padding: 0 !important; }
-                .header { display: none !important; }
-                table { margin-bottom: 8px !important; }
-                .order-badge { border: 1px solid black; background: white !important; color: black !important; }
+        print_css = """
+        @media print {
+            @page { size: letter portrait; margin: 0.4in; }
+            html, body, .container, .content, .header, .footer, .disclaimer-box, .map-container {
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                box-shadow: none !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
-            """
+            h1, h2, h3, p, th, td, span, strong, a, div { color: #000000 !important; }
+            .container { border: 1px solid #000000 !important; max-width: 100% !important; page-break-inside: avoid !important; }
+            .order-badge { border: 1px solid #000000 !important; background: #ffffff !important; color: #000000 !important; }
+            .map-container, .disclaimer-box, .footer { display: none !important; }
+        }
+        """
 
         promo_banner_html = ""
-        if not is_admin and is_promo:
+        if is_promo:
             promo_banner_html = """
             <div style="background-color: #0d1e36; border: 1px dashed #ef4444; border-radius: 6px; padding: 16px; margin-top: 16px; margin-bottom: 24px; text-align: center;">
                 <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.2em; color: #ef4444; text-transform: uppercase; display: block; margin-bottom: 6px;">★ 4th of July Promo Applied ★</span>
@@ -374,78 +547,65 @@ END:VCALENDAR"""
             </tr>
             """
 
-        header_html = ""
-        if not is_admin:
-            header_html = """
-            <!-- 1. Header -->
-            <div class="header">
-                 <img src="cid:logo_img" style="width: 200px; max-width: 80%; height: auto; margin: 0 auto; display: block;" alt="Affordable Home A/C" />
-            </div>
-            """
-        else:
-            header_html = """
-            <!-- 1. Admin Header -->
-            <div class="header" style="padding: 12px;">
-                 <h1 style="color: #ffffff; margin: 0; font-size: 16px;">AHAC Admin Copy</h1>
-            </div>
-            """
+        header_html = """
+        <!-- 1. Header -->
+        <div class="header">
+             <img src="cid:logo_img" style="width: 200px; max-width: 80%; height: auto; margin: 0 auto; display: block;" alt="Affordable Home A/C" />
+        </div>
+        """
             
-        map_block_html = ""
-        if not is_admin:
-            map_block_html = f"""
-                <!-- 3. Directions & Map (Hidden on Delivery) -->
-                <div class="map-container" style="display: {map_display}; margin-bottom: 32px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                    <h3 style="color: #f8fafc; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; margin-bottom: 12px; border-bottom: 2px solid #1e293b; padding-bottom: 8px;">Directions to Warehouse</h3>
-                    
-                    <p style="color: #cbd5e1; font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
-                        Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway. Destination is on right with roll up door #203.
-                    </p>
-
-                    <!-- EMBEDDED MAP IMAGE -->
-                    <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" style="display: block;">
-                         <img src="cid:map_img" style="width: 100%; height: auto; display: block;" alt="Map to Waipahu Warehouse" />
-                    </a>
-                </div>
-
-                <div style="margin-top: 24px; text-align: center;">
-                     <p style="color: #fef08a; font-size: 12px; font-weight: 500; background-color: #422006; border: 1px solid #713f12; padding: 12px; border-radius: 4px; display: inline-block;">
-                        {warning_text}
-                    </p>
-                </div>
-            """
-            
-        footer_html = ""
-        if not is_admin:
-             footer_html = f"""
-            <!-- 4. Premium Footer with Disclaimers -->
-            <div class="footer">
-                <!-- Disclaimer Box -->
-                <div class="disclaimer-box">
-                     <p style="margin: 0 0 8px 0; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; color: #f87171;">All Sales Final</p>
-                     <p style="margin: 0; font-size: 11px; color: #fecaca;">No Refunds • No Exchanges</p>
-                     <p style="margin: 8px 0 0 0; font-size: 10px; color: #fca5a5; padding-top: 8px; border-top: 1px solid #7f1d1d;">All warranty claims & defective units must be processed directly through the manufacturer.</p>
-                </div>
-
-                <p style="color: #ffffff; font-weight: 700; margin: 0 0 4px 0; letter-spacing: 0.05em;">WAIPAHU COMMERCIAL CENTER</p>
-                <p style="margin: 0 0 16px 0; font-size: 13px; color: #94a3b8;">94-150 Leoleo St. #203, Waipahu, HI 96797</p>
+        map_block_html = f"""
+            <!-- 3. Directions & Map (Hidden on Delivery) -->
+            <div class="map-container" style="display: {map_display}; margin-bottom: 32px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #f8fafc; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; margin-bottom: 12px; border-bottom: 2px solid #1e293b; padding-bottom: 8px;">Directions to Warehouse</h3>
                 
-                <div style="margin-bottom: 24px;">
-                    <a href="tel:8084881111" class="footer-link" style="color: #06b6d4; font-weight: 600;">(808) 488-1111</a>
-                    <span style="color: #1e293b; margin: 0 10px;">|</span>
-                    <a href="mailto:office@affordablehome-ac.com" class="footer-link">office@affordablehome-ac.com</a>
-                </div>
+                <p style="color: #cbd5e1; font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
+                    Arrive at Waipahu Commercial Center. Enter one-way drive in lane and continue towards the back warehouses. Make a left and continue down towards end of driveway. Destination is on right with roll up door #203.
+                </p>
 
-                <div style="border-top: 1px solid #1e293b; margin: 0 auto; width: 60%;"></div>
-                
-                <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; font-weight: 700; margin-top: 20px; display: block;">
-                    LIC# CT-36775 <span style="color: #06b6d4; margin: 0 8px;">•</span> Licensed <span style="color: #1e293b;">|</span> Insured <span style="color: #1e293b;">|</span> Bonded
-                </span>
-                
-                <p style="margin-top: 12px; font-size: 11px; color: #64748b;">
-                    &copy; {datetime.now().year} Affordable Home A/C. All rights reserved.
+                <!-- EMBEDDED MAP IMAGE -->
+                <a href="https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797" target="_blank" style="display: block;">
+                     <img src="cid:map_img" style="width: 100%; height: auto; display: block;" alt="Map to Waipahu Warehouse" />
+                </a>
+            </div>
+
+            <div style="margin-top: 24px; text-align: center;">
+                 <p style="color: #fef08a; font-size: 12px; font-weight: 500; background-color: #422006; border: 1px solid #713f12; padding: 12px; border-radius: 4px; display: inline-block;">
+                    {warning_text}
                 </p>
             </div>
-             """
+        """
+            
+        footer_html = f"""
+        <!-- 4. Premium Footer with Disclaimers -->
+        <div class="footer">
+            <!-- Disclaimer Box -->
+            <div class="disclaimer-box">
+                 <p style="margin: 0 0 8px 0; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; color: #f87171;">All Sales Final</p>
+                 <p style="margin: 0; font-size: 11px; color: #fecaca;">No Refunds • No Exchanges</p>
+                 <p style="margin: 8px 0 0 0; font-size: 10px; color: #fca5a5; padding-top: 8px; border-top: 1px solid #7f1d1d;">All warranty claims & defective units must be processed directly through the manufacturer.</p>
+            </div>
+
+            <p style="color: #ffffff; font-weight: 700; margin: 0 0 4px 0; letter-spacing: 0.05em;">WAIPAHU COMMERCIAL CENTER</p>
+            <p style="margin: 0 0 16px 0; font-size: 13px; color: #94a3b8;">94-150 Leoleo St. #203, Waipahu, HI 96797</p>
+            
+            <div style="margin-bottom: 24px;">
+                <a href="tel:8084881111" class="footer-link" style="color: #06b6d4; font-weight: 600;">(808) 488-1111</a>
+                <span style="color: #1e293b; margin: 0 10px;">|</span>
+                <a href="mailto:office@affordablehome-ac.com" class="footer-link">office@affordablehome-ac.com</a>
+            </div>
+
+            <div style="border-top: 1px solid #1e293b; margin: 0 auto; width: 60%;"></div>
+            
+            <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; font-weight: 700; margin-top: 20px; display: block;">
+                LIC# CT-36775 <span style="color: #06b6d4; margin: 0 8px;">•</span> Licensed <span style="color: #1e293b;">|</span> Insured <span style="color: #1e293b;">|</span> Bonded
+            </span>
+            
+            <p style="margin-top: 12px; font-size: 11px; color: #64748b;">
+                &copy; {datetime.now().year} Affordable Home A/C. All rights reserved.
+            </p>
+        </div>
+        """
              
         return f"""
     <!DOCTYPE html>
@@ -522,7 +682,7 @@ END:VCALENDAR"""
 
                 <!-- Line Items -->
                 <h2>Order Details</h2>
-                <table style="width: 100%; border-collapse: collapse; margin-bottom: {'12px' if is_admin else '32px'};">
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 32px;">
                     <thead>
                         <tr style="border-bottom: 2px solid #1e293b;">
                             <th style="text-align: left;">Item</th>
@@ -536,20 +696,20 @@ END:VCALENDAR"""
                 </table>
 
                 <!-- Summary Cards -->
-                <div style="background-color: #1e293b; border: 1px solid #334155; border-radius: 4px; padding: {'12px' if is_admin else '24px'}; margin-bottom: {mar_grid};">
+                <div style="background-color: #1e293b; border: 1px solid #334155; border-radius: 4px; padding: 24px; margin-bottom: {mar_grid};">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="padding-bottom: {'8px' if is_admin else '16px'}; vertical-align: top;">
+                            <td style="padding-bottom: 16px; vertical-align: top;">
                                 <p style="margin: 0; color: {c_label}; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Payment Method</p>
                                 <p style="margin: 4px 0 0 0; color: {c_main}; font-weight: 600;">{payment_method_text}</p>
                             </td>
-                            <td style="padding-bottom: {'8px' if is_admin else '16px'}; text-align: right; vertical-align: top;">
+                            <td style="padding-bottom: 16px; text-align: right; vertical-align: top;">
                                 <p style="margin: 0; color: {c_label}; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Total Paid</p>
                                 <p style="margin: 4px 0 0 0; color: #06b6d4; font-weight: 700; font-size: 18px;">${(total_cents/100):.2f}</p>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="border-top: 1px solid #334155; padding-top: {'8px' if is_admin else '16px'};">
+                            <td colspan="2" style="border-top: 1px solid #334155; padding-top: 16px;">
                                 <p style="margin: 0; color: {c_label}; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">{instructions_title}</p>
                                 <p style="margin: 8px 0 0 0; color: {c_sub}; font-size: 13px; line-height: 1.6;">{instructions_text}</p>
                             </td>

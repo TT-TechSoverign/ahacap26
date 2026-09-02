@@ -21,7 +21,13 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/admin/', '/checkout/', '/maintenance/'],
+                disallow: [
+                    '/admin/', 
+                    '/checkout/', 
+                    '/maintenance/',
+                    '/khon2-seo-portal-qx9v2m/',
+                    '/puck/'
+                ],
             },
             {
                 userAgent: 'GPTBot',

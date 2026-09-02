@@ -5,7 +5,7 @@ import Papa from 'papaparse';
 import * as LucideIcons from 'lucide-react';
 import { BackToTop } from '@/components/BackToTop';
 
-const KHON2_PASSWORD = "KHON2X7V9K2PQ8A4"; // Requirement: 16-character alphanumeric password, all caps
+// Authentication is strictly verified server-side via /api/v1/khon2-portal/login
 const STORAGE_KEY = 'khon2_seo_portal_drafts';
 
 export default function KHON2SEOPortal() {
@@ -95,7 +95,10 @@ export default function KHON2SEOPortal() {
 
             const loadedData = await Promise.all(
                 files.map(async (filename) => {
-                    const response = await fetch(`/content/seo-drafts/${filename}`);
+                    const token = sessionStorage.getItem('khon2_token');
+                    const response = await fetch(`/api/khon2-drafts?file=${encodeURIComponent(filename)}`, {
+                        headers: token ? { 'Authorization': token } : {}
+                    });
                     if (!response.ok) {
                         console.error(`Failed to load ${filename}`);
                         return { filename, data: [] };
