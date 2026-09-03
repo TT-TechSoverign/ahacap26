@@ -23,8 +23,8 @@ export default function LocalServiceFunnel({ city }: LocalServiceFunnelProps) {
             title: 'Mini-Split Installs',
             description: `Whisper-quiet, highly efficient ductless cooling designed specifically for your home in ${city}.`,
             icon: LucideIcons.Fan,
-            ctaText: 'GET A FREE QUOTE',
-            route: `/contact?city=${encodeURIComponent(city)}&service=Mini+Split+Estimate+(New)`,
+            ctaText: 'BUILD YOUR SYSTEM',
+            route: `/mini_split_ac?city=${encodeURIComponent(city)}#system-builder`,
             gaCategory: 'Split Service',
             ariaLabel: `Get a free quote for mini-split installation in ${city}`
         },

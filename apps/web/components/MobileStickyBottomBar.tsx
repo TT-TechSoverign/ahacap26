@@ -27,6 +27,8 @@ export default function MobileStickyBottomBar() {
 
     if (isExcluded) return null;
 
+    const isMiniSplitPage = pathname === '/mini_split_ac';
+
     return (
         <div
             style={{
@@ -47,16 +49,27 @@ export default function MobileStickyBottomBar() {
                     Call Now
                 </a>
                 
-                {/* Book Online */}
-                <Link 
-                    href="/contact"
-                    prefetch={false}
-                    onClick={() => sendGAEvent('event', 'click_to_book', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Book' })}
-                    className="flex-1 bg-primary hover:bg-cyan-300 text-slate-900 font-black uppercase tracking-widest text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors btn-promo-glow btn-shimmer"
-                >
-                    <Calendar className="size-4" />
-                    Book Online
-                </Link>
+                {/* Action CTA: Dynamic for Mini Split */}
+                {isMiniSplitPage ? (
+                    <a 
+                        href="#system-builder"
+                        onClick={() => sendGAEvent('event', 'click_to_estimate', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Mini Split Builder' })}
+                        className="flex-1 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-widest text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(34,211,238,0.4)]"
+                    >
+                        <Calendar className="size-4" />
+                        Free Survey
+                    </a>
+                ) : (
+                    <Link 
+                        href="/contact"
+                        prefetch={false}
+                        onClick={() => sendGAEvent('event', 'click_to_book', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Book' })}
+                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-900 font-black uppercase tracking-widest text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors btn-promo-glow btn-shimmer"
+                    >
+                        <Calendar className="size-4" />
+                        Book Online
+                    </Link>
+                )}
             </div>
         </div>
     );
