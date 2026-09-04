@@ -35,7 +35,7 @@ export default function WindowAcMaintenancePage() {
                         Window AC <span className="text-cyan-400 drop-shadow-[0_0_25px_rgba(34,211,238,0.5)]">Deep Cleaning</span>
                     </h1>
                     <p className="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-                        Restore factory airflow and eliminate musty salt-air odors. Our EPA-certified chemical immersion dissolves corrosive salt spray and toxic black mold.
+                        Restore factory airflow and eliminate musty salt-air odors. Our specialized commercial-grade chemical immersion dissolves corrosive salt spray, stubborn grime, and deep-seated black mold (subject to initial phone consultation and technician review).
                     </p>
 
                     {/* Pricing & CTA Banner */}
@@ -43,14 +43,14 @@ export default function WindowAcMaintenancePage() {
                         <div className="text-center sm:text-left">
                             <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block mb-1">Flat Rate Service</span>
                             <div className="flex items-baseline justify-center sm:justify-start gap-1.5">
-                                <span className="text-4xl font-header font-black text-white">$149</span>
-                                <span className="text-xs text-slate-400 font-medium">/ unit (Drop-off)</span>
+                                <span className="text-4xl font-header font-black text-white">$275</span>
+                                <span className="text-xs text-slate-400 font-medium">/ unit (Waipahu Drop-off)</span>
                             </div>
-                            <span className="text-[11px] text-slate-400 block mt-1">Optional $50 Island-Wide Roundtrip Pickup</span>
+                            <span className="text-[11px] text-slate-400 block mt-1">Subject to initial phone call & drop-off scheduling</span>
                         </div>
                         <div className="flex flex-col gap-2.5 w-full sm:w-auto">
                             <Link 
-                                href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$149"
+                                href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275"
                                 className="px-6 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all flex items-center justify-center gap-1.5 text-center"
                             >
                                 Schedule Cleaning <ArrowRight className="size-3.5" />

@@ -566,18 +566,18 @@
     },
     "maintenance": {
         "hero": {
-            "badge": "EPA-CERTIFIED DEEP CLEANING",
+            "badge": "COMMERCIAL CHEMICAL DEEP CLEANING",
             "title": "PROFESSIONAL",
             "title_highlight": "WINDOW AC CLEANING",
             "title_suffix": "& SANITIZATION SERVICES IN OAHU",
-            "description": "Eliminate mold, bacteria, and salt-air corrosion with our EPA-certified deep cleaning process. Specialized for Hawaii's humidity to restore 100% cooling efficiency and peak air quality.",
+            "description": "Eliminate mold, bacteria, and salt-air corrosion with our commercial-grade chemical deep cleaning process. Specialized for Hawaii's humidity to restore 100% cooling efficiency and peak air quality.",
             "cta_schedule": "Schedule Service",
             "cta_rates": "View Local Rates"
         },
         "technician": {
             "name": "Chris Martinez",
             "title": "Master HVAC Technician",
-            "cert1": "EPA 608 Universal Certified",
+            "cert1": "CT-36775 Licensed Contractor",
             "cert2": "NATE Certified Specialist",
             "quote": "\"Our deep clean isn't just a rinse\u2014it's a clinical decontamination of your cooling system.\""
         },
@@ -631,7 +631,7 @@
             "step1_title": "ANTIMICROBIAL COIL FLUSH",
             "step1_description": "We use a non-toxic, hospital-grade antimicrobial solution forced through both evaporator and condenser coils at precise pressure to dissolve biofilm and mold roots that retail sprays can't reach.",
             "step1_point1": "Deep Tissue Biofilm Removal",
-            "step1_point2": "EPA-Registered Disinfectant",
+            "step1_point2": "Hospital-Grade Disinfectant",
             "step2": {
                 "title": "BLOWER WHEEL REBALANCING",
                 "desc": "Removing buildup from fan blades to eliminate vibrations and motor strain."

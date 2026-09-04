@@ -74,8 +74,8 @@ export default function ACRepairPage() {
             a: 'We offer diagnostic dispatch across Oahu based on our soonest availability (subject to current scheduling, technician availability, and seasonal demand). Peak summer volume may result in booking queues several weeks out. Use our online diagnostic wizard to submit your request and secure the next open slot.'
         },
         {
-            q: 'What is your diagnostic service fee and does it apply to repairs?',
-            a: 'We charge a flat-rate diagnostic fee to cover technician dispatch, travel time, and a comprehensive electrical and mechanical inspection. When you proceed with recommended repairs on the same visit, this fee is credited toward your approved repair invoice (subject to scope of work, customer approval, and parts availability).'
+            q: 'What does your diagnostic service fee cover?',
+            a: 'We charge a flat-rate diagnostic fee that covers our licensed technician\'s on-site dispatch, dedicated travel time, and a comprehensive electrical and mechanical inspection to pinpoint the exact root cause of your system failure (subject to technician scheduling and on-site physical inspection). Our technician provides an upfront, itemized repair estimate before any repair work begins so you have complete cost transparency with zero surprises.'
         },
         {
             q: 'Do you repair all ductless mini-split brands?',
@@ -87,7 +87,7 @@ export default function ACRepairPage() {
         },
         {
             q: 'Do you repair window air conditioners or central AC systems?',
-            a: 'Our repair and diagnostic services are dedicated specifically to ductless mini-split heat pumps and air handlers. For window AC units, we provide full chemical teardown cleaning and rust-inhibitor servicing at our Waipahu warehouse, but we do not perform sealed-refrigerant or compressor rebuilds on window units. All service acceptances are subject to detailed scope of work, physical equipment inspection, and management approval to accept.'
+            a: 'Our repair and diagnostic services are dedicated specifically to ductless mini-split heat pumps and air handlers. For window AC units, we provide full chemical teardown cleaning and rust-inhibitor servicing ($275 flat rate) at our Waipahu warehouse, but we do not perform sealed-refrigerant or compressor rebuilds on window units. All service acceptances are subject to an initial phone consultation, detailed scope of work, and management approval to accept.'
         },
         {
             q: 'Can every mini-split problem be resolved on the initial diagnostic visit?',

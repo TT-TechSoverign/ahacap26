@@ -26,7 +26,7 @@ const windowAcFaqSchema = {
             "name": "How much does window AC deep cleaning cost in Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our professional chemical teardown and coil sanitization service is a flat rate of $149 per unit with drop-off at our Waipahu warehouse, or convenient $50 round-trip island-wide pickup and delivery."
+                "text": "Our professional chemical teardown and coil sanitization service is a flat rate of $275 per unit with drop-off at our Waipahu warehouse (subject to initial phone consultation and drop-off scheduling)."
             }
         },
         {
