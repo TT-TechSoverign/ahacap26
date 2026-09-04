@@ -7,13 +7,21 @@ import { BackToTop } from '@/components/BackToTop';
 import { 
     Sparkles, 
     Droplets, 
-    ShieldCheck, 
-    Wrench, 
     Clock, 
     Phone, 
     ArrowRight, 
     CheckCircle2, 
-    Zap 
+    Zap,
+    Wind,
+    VolumeX,
+    DollarSign,
+    Shield,
+    Check,
+    X,
+    HelpCircle,
+    ChevronDown,
+    ThermometerSnowflake,
+    ShieldCheck
 } from 'lucide-react';
 
 export default function WindowAcMaintenancePage() {
@@ -22,26 +30,123 @@ export default function WindowAcMaintenancePage() {
 
     if (!data) return null;
 
+    const conversionBenefits = [
+        {
+            icon: Wind,
+            title: "Ice-Cold Airflow Restored",
+            stat: "Up to +30% CFM",
+            description: "Caked-on dirt, pet hair, and salt crust choke aluminum coil fins, cutting airflow by up to 40%. Our deep pressurized flush frees every fin passage to restore maximum CFM and blast icy-cold air in minutes."
+        },
+        {
+            icon: Sparkles,
+            title: "100% Black Mold & Odor Purge",
+            stat: "Odor-Free Air",
+            description: "Hawaii's 80%+ humidity turns damp blower wheels into breeding grounds for black mold and mildew. We completely extract and sanitize the blower assembly, eliminating musty smells so your family breathes pure, clean air."
+        },
+        {
+            icon: DollarSign,
+            title: "Lower Hawaii Electric Bills",
+            stat: "~44¢/kWh Savings",
+            description: "When coils are blocked, your compressor runs overtime just to cool the room. Restoring heat exchange efficiency reduces compressor workload and slashes wasteful power draw on Oahu's costly electric grid."
+        },
+        {
+            icon: VolumeX,
+            title: "Whisper-Quiet Restful Sleep",
+            stat: "Zero Rattles",
+            description: "Uneven mold and grime buildup unbalances the squirrel-cage blower fan, causing annoying vibrations and motor droning. Thorough descaling restores smooth, quiet rotation for silent nighttime comfort."
+        },
+        {
+            icon: Shield,
+            title: "Salt-Air Rust Protection",
+            stat: "Extended Lifespan",
+            description: "Coastal trade winds deposit corrosive salt spray that eats through aluminum fins and causes expensive refrigerant leaks. Our deep wash neutralizes salt crust and applies an anti-corrosion barrier."
+        },
+        {
+            icon: Droplets,
+            title: "Clean Off-Site Warehouse Care",
+            stat: "24-48hr Turnaround",
+            description: "Never worry about water pooling on your floors or harsh chemical smells lingering in your bedroom. Drop off your unit at our Waipahu facility for a complete, mess-free teardown and test."
+        }
+    ];
+
+    const comparisonItems = [
+        {
+            feature: "Reaches Hidden Blower Fan & Wheel",
+            diy: false,
+            teardown: true,
+            detail: "DIY spray only touches the front; 90% of mold lives on the internal blower wheel."
+        },
+        {
+            feature: "Dual-Direction Pressurized Coil Bath",
+            diy: false,
+            teardown: true,
+            detail: "Sprays push grime deeper into coils; teardown flushes dirt out from the reverse side."
+        },
+        {
+            feature: "100% Safe Electrical Isolation",
+            diy: false,
+            teardown: true,
+            detail: "Chassis removal completely isolates circuit boards and motor from moisture."
+        },
+        {
+            feature: "Drain Pan Slime & Mold Flush",
+            diy: false,
+            teardown: true,
+            detail: "Clears algae and biofilm buildup in the bottom pan to prevent indoor overflow leaks."
+        },
+        {
+            feature: "Anti-Corrosion Salt-Air Shield",
+            diy: false,
+            teardown: true,
+            detail: "Applies a protective barrier to neutralize Hawaii's aggressive ocean trade winds."
+        },
+        {
+            feature: "Digital Airflow & Delta-T Performance Test",
+            diy: false,
+            teardown: true,
+            detail: "Digital verification that intake vs. output temps achieve peak 20°F+ cooling split."
+        }
+    ];
+
+    const faqs = [
+        {
+            q: "Why does a window AC require a full teardown instead of a quick surface clean?",
+            a: "Over 80% of mold, bacteria, and salt crust accumulates inside the dark blower wheel and inner condenser coils—areas completely inaccessible from the outside. Spraying foam from the front merely drives surface grime deeper into the coil fins. Our full teardown extracts the internal chassis to wash the unit from the inside out."
+        },
+        {
+            q: "How do I know if my window AC has black mold inside?",
+            a: "If you notice a sour, musty smell when first turning on the AC, see black speckles on the front louvers, or hear weaker airflow despite a clean filter, black mold has almost certainly colonized the blower wheel and drain pan. A professional teardown permanently eliminates these spores."
+        },
+        {
+            q: "How does this service help lower my Hawaiian Electric bill?",
+            a: "Oahu electricity is among the most expensive in the nation at ~44¢/kWh. When coils are caked with grime and salt, heat cannot transfer properly, forcing your compressor to run almost continuously. Clearing the coils restores thermodynamic efficiency, allowing the unit to reach your set temperature much faster with lower wattage draw."
+        },
+        {
+            q: "How does the Waipahu warehouse drop-off process work?",
+            a: "Give our office a quick call or submit our cleaning form to schedule your drop-off window. Bring your window AC to our Waipahu Distribution Center (94-150 Leoleo St. #203). Our technicians perform a full teardown, deep sanitization, and bench test, with turnaround typically within 24 to 48 hours."
+        }
+    ];
+
     return (
         <div className="bg-slate-950 min-h-screen text-white font-sans selection:bg-cyan-500 selection:text-slate-950">
             {/* HERO SECTION */}
             <div className="pt-[140px] md:pt-[165px] lg:pt-[175px] max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
                 <div className="text-center mb-12 border-b border-white/5 pb-8">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono uppercase tracking-[0.2em] mb-4 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
-                        <Droplets className="size-3.5 text-cyan-400" />
-                        Oahu Chemical Teardown & Mold Sanitization
+                        <ThermometerSnowflake className="size-3.5 text-cyan-400" />
+                        Oahu Window AC Deep Teardown • Like-New Restoration
                     </div>
                     <h1 className="text-3xl sm:text-5xl md:text-6xl font-header font-black uppercase tracking-widest text-white mb-4">
                         Window AC <span className="text-cyan-400 drop-shadow-[0_0_25px_rgba(34,211,238,0.5)]">Deep Cleaning</span>
                     </h1>
                     <p className="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-                        Restore factory airflow and eliminate musty salt-air odors. Our specialized commercial-grade chemical immersion dissolves corrosive salt spray, stubborn grime, and deep-seated black mold (subject to initial phone consultation and technician review).
+                        Restore ice-cold airflow, eliminate sour musty odors, and lower your energy bill. Our complete teardown deep clean strips away hidden black mold, clears trade-wind salt crust, and restores whisper-quiet factory performance—making your window AC feel and smell brand new again (subject to initial phone consultation and drop-off scheduling).
                     </p>
 
                     {/* Pricing & CTA Banner */}
                     <div className="max-w-xl mx-auto bg-slate-900/80 border border-cyan-500/30 rounded-2xl p-6 shadow-xl mb-6 flex flex-col sm:flex-row items-center justify-between gap-6">
                         <div className="text-center sm:text-left">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block mb-1">Flat Rate Service</span>
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block mb-1">Complete Teardown & Sanitization</span>
                             <div className="flex items-baseline justify-center sm:justify-start gap-1.5">
                                 <span className="text-4xl font-header font-black text-white">$275</span>
                                 <span className="text-xs text-slate-400 font-medium">/ unit (Waipahu Drop-off)</span>
@@ -64,11 +169,118 @@ export default function WindowAcMaintenancePage() {
                         </div>
                     </div>
 
-                    {/* Micro Trust Signals */}
-                    <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 font-medium pt-2">
-                        <span className="flex items-center gap-1.5"><ShieldCheck className="size-4 text-cyan-400" /> CT-36775 Licensed & Insured</span>
-                        <span className="flex items-center gap-1.5"><Zap className="size-4 text-cyan-400" /> Rust Inhibitor Coating</span>
-                        <span className="flex items-center gap-1.5"><Clock className="size-4 text-cyan-400" /> 24-48hr Turnaround</span>
+                    {/* Micro Benefit Signals */}
+                    <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-slate-300 font-medium pt-2">
+                        <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                            <Wind className="size-3.5 text-cyan-400" /> Ice-Cold Airflow Restored
+                        </span>
+                        <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                            <Sparkles className="size-3.5 text-cyan-400" /> 100% Mold & Odor Purge
+                        </span>
+                        <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                            <Zap className="size-3.5 text-cyan-400" /> Lower Power Draw
+                        </span>
+                        <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                            <Clock className="size-3.5 text-cyan-400" /> 24-48hr Turnaround
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            {/* KEY CONVERSION BENEFITS GRID */}
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+                <div className="text-center max-w-3xl mx-auto mb-14">
+                    <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest block mb-2">Proven Results</span>
+                    <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-wide">
+                        Why Oahu Homeowners Choose <span className="text-cyan-400">Full Teardown Cleaning</span>
+                    </h2>
+                    <p className="text-slate-400 text-sm sm:text-base mt-3 font-light">
+                        Surface sprays only wash the outside. Our full teardown restores factory cooling and purges mold colonies from the inside out.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {conversionBenefits.map((benefit, idx) => {
+                        const Icon = benefit.icon;
+                        return (
+                            <div 
+                                key={idx}
+                                className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-7 hover:border-cyan-500/40 transition-all duration-300 flex flex-col justify-between group hover:shadow-[0_0_25px_rgba(6,182,212,0.1)]"
+                            >
+                                <div>
+                                    <div className="flex items-center justify-between mb-4">
+                                        <div className="size-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all duration-300">
+                                            <Icon className="size-6" />
+                                        </div>
+                                        <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/20">
+                                            {benefit.stat}
+                                        </span>
+                                    </div>
+                                    <h3 className="text-lg font-header font-black tracking-wide text-white uppercase mb-2 group-hover:text-cyan-400 transition-colors">
+                                        {benefit.title}
+                                    </h3>
+                                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
+                                        {benefit.description}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+
+            {/* FULL TEARDOWN VS DIY COMPARISON SECTION */}
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+                <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
+                    <div className="text-center max-w-2xl mx-auto mb-10">
+                        <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest block mb-2">The Difference</span>
+                        <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-wide">
+                            Full Warehouse Teardown <span className="text-cyan-400">vs.</span> DIY Retail Sprays
+                        </h2>
+                        <p className="text-slate-400 text-xs sm:text-sm mt-2 font-light">
+                            Store-bought cans cannot reach the blower wheel and risk destroying your electronics. Here is why professional teardown is essential:
+                        </p>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse">
+                            <thead>
+                                <tr className="border-b border-white/10 text-xs font-header font-black tracking-wider uppercase">
+                                    <th className="py-3 px-4 text-slate-300">Restoration Feature</th>
+                                    <th className="py-3 px-4 text-rose-400 text-center w-36">DIY Store Spray</th>
+                                    <th className="py-3 px-4 text-cyan-400 text-center w-44 bg-cyan-500/5 rounded-t-xl">AHAC Teardown ($275)</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5 text-xs sm:text-sm">
+                                {comparisonItems.map((item, idx) => (
+                                    <tr key={idx} className="hover:bg-white/[0.02] transition-colors">
+                                        <td className="py-3.5 px-4">
+                                            <span className="font-semibold text-white block">{item.feature}</span>
+                                            <span className="text-[11px] text-slate-400 font-light hidden sm:block">{item.detail}</span>
+                                        </td>
+                                        <td className="py-3.5 px-4 text-center">
+                                            <div className="inline-flex items-center justify-center size-6 rounded-full bg-rose-500/10 text-rose-400">
+                                                <X className="size-4" />
+                                            </div>
+                                        </td>
+                                        <td className="py-3.5 px-4 text-center bg-cyan-500/5 font-semibold text-cyan-300">
+                                            <div className="inline-flex items-center justify-center size-6 rounded-full bg-cyan-500/20 text-cyan-400">
+                                                <Check className="size-4" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="mt-8 text-center">
+                        <Link 
+                            href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275"
+                            className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all"
+                        >
+                            Book Your $275 Teardown Service <ArrowRight className="size-4" />
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -88,7 +300,7 @@ export default function WindowAcMaintenancePage() {
                         
                         <div className="flex flex-col sm:flex-row items-center gap-4">
                             <Link 
-                                href="/contact?service=Window+AC+Cleaning" 
+                                href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275" 
                                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black tracking-wider uppercase px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.4)] text-xs"
                             >
                                 Book Your Teardown Cleaning
@@ -112,7 +324,7 @@ export default function WindowAcMaintenancePage() {
             </div>
 
             {/* 4-PHASE CLEANING PROCESS */}
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">
                 <div className="mb-16 text-center">
                     <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest block mb-2">Our Method</span>
                     <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-wide">
@@ -156,6 +368,60 @@ export default function WindowAcMaintenancePage() {
                             </div>
                         );
                     })}
+                </div>
+            </div>
+
+            {/* FREQUENTLY ASKED QUESTIONS */}
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+                <div className="text-center mb-12">
+                    <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest block mb-2">Got Questions?</span>
+                    <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-wide">
+                        Window AC Cleaning <span className="text-cyan-400">FAQ</span>
+                    </h2>
+                </div>
+
+                <div className="space-y-4">
+                    {faqs.map((faq, idx) => (
+                        <details 
+                            key={idx}
+                            className="group bg-slate-900/60 border border-slate-800 rounded-2xl p-6 transition-all duration-300 hover:border-cyan-500/30"
+                        >
+                            <summary className="flex items-center justify-between text-left font-header font-black uppercase text-sm sm:text-base text-white tracking-wide cursor-pointer list-none select-none">
+                                <span className="flex items-center gap-2.5">
+                                    <HelpCircle className="size-4 text-cyan-400 shrink-0" />
+                                    {faq.q}
+                                </span>
+                                <ChevronDown className="size-4 text-slate-400 group-open:rotate-180 group-open:text-cyan-400 transition-transform duration-300 shrink-0 ml-4" />
+                            </summary>
+                            <p className="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-light pl-6.5 border-t border-white/5 pt-4">
+                                {faq.a}
+                            </p>
+                        </details>
+                    ))}
+                </div>
+
+                {/* Final CTA Strip */}
+                <div className="mt-14 bg-gradient-to-r from-cyan-950/40 via-slate-900/60 to-cyan-950/40 border border-cyan-500/30 rounded-2xl p-8 text-center">
+                    <h3 className="text-xl sm:text-2xl font-header font-black uppercase tracking-wide text-white mb-2">
+                        Ready for Ice-Cold, Odor-Free Air?
+                    </h3>
+                    <p className="text-slate-400 text-xs sm:text-sm max-w-md mx-auto mb-6 font-light">
+                        Drop off your window AC at our Waipahu warehouse. Flat rate $275 per unit with fast 24-48hr turnaround.
+                    </p>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <Link 
+                            href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275"
+                            className="w-full sm:w-auto px-8 py-3.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all flex items-center justify-center gap-1.5"
+                        >
+                            Schedule Drop-Off <ArrowRight className="size-3.5" />
+                        </Link>
+                        <a 
+                            href="tel:808-488-1111"
+                            className="w-full sm:w-auto px-6 py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 transition-colors"
+                        >
+                            <Phone className="size-3.5 text-cyan-400" /> Call (808) 488-1111
+                        </a>
+                    </div>
                 </div>
             </div>
             

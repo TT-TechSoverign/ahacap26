@@ -42,7 +42,7 @@ const miniSplitFaqSchema = {
             "name": "Does professional cleaning remove black mold from mini-split blower wheels?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. We use specialized indoor catchment wash-bags and commercial-grade botanical sanitizers to thoroughly power-wash the squirrel-cage blower wheel, evaporator coils, and drain pan with zero water mess inside your home."
+                "text": "Yes. We use specialized indoor catchment wash-bags and deep-cleansing, odor-neutralizing solutions to power-wash hidden black mold, biofilm, and salt buildup from the blower wheel, evaporator coils, and drain pan—restoring crisp, icy airflow with zero water mess inside your home."
             }
         },
         {

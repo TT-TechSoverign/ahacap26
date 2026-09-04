@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Cleaning Service Oahu | Chemical Teardown & Rust Eradication | Affordable Home A/C'
+        absolute: 'Window AC Cleaning Service Oahu | Teardown & Mold Sanitization | Affordable Home A/C'
     },
-    description: 'Specialized window AC chemical teardown and deep sanitization service on Oahu. Eradicate black mold, trade-wind salt corrosion, and restore icy cooling airflow.',
+    description: 'Professional window AC teardown deep cleaning on Oahu. Eradicate black mold, restore icy-cold cooling airflow, and protect against salt-air rust with fast 24-48hr turnaround.',
     alternates: {
         canonical: '/window_ac_maintenance',
     },
     openGraph: {
-        title: 'Window AC Cleaning Service Oahu | Chemical Teardown & Rust Eradication | Affordable Home A/C',
-        description: 'Specialized window AC chemical teardown and deep sanitization service on Oahu. Eradicate black mold, trade-wind salt corrosion, and restore icy cooling airflow.',
+        title: 'Window AC Cleaning Service Oahu | Teardown & Mold Sanitization | Affordable Home A/C',
+        description: 'Professional window AC teardown deep cleaning on Oahu. Eradicate black mold, restore icy-cold cooling airflow, and protect against salt-air rust with fast 24-48hr turnaround.',
         url: '/window_ac_maintenance',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ const windowAcFaqSchema = {
             "name": "How much does window AC deep cleaning cost in Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our professional chemical teardown and coil sanitization service is a flat rate of $275 per unit with drop-off at our Waipahu warehouse (subject to initial phone consultation and drop-off scheduling)."
+                "text": "Our complete window AC teardown cleaning and sanitization service is a flat rate of $275 per unit with drop-off at our Waipahu warehouse. Restores ice-cold airflow, eliminates black mold, and lowers energy strain (subject to initial phone consultation and drop-off scheduling)."
             }
         },
         {
@@ -34,7 +34,7 @@ const windowAcFaqSchema = {
             "name": "Why does my window AC smell musty and blow weak air?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Hawaii's humidity promotes rapid black mold growth inside the blower wheel, while ocean trade winds deposit corrosive salt on the condenser coils. A specialized chemical teardown removes these deposits, restoring clean air and maximum cooling."
+                "text": "Hawaii's humidity traps black mold and dirt deep inside the blower wheel and coils, while ocean trade winds coat aluminum fins with salt. Our complete chassis teardown flushes these blockages from both sides, restoring crisp, icy-cold airflow and eliminating musty odors."
             }
         },
         {
@@ -42,7 +42,7 @@ const windowAcFaqSchema = {
             "name": "What is included in your window AC chemical teardown?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We completely extract the chassis, isolate sensitive electronics, power-wash the evaporator and condenser coils with coil-brightening chemical wash, sanitize the fan wheel, treat rust, and test cooling performance."
+                "text": "We completely extract the chassis, isolate sensitive electrical components, power-wash both evaporator and condenser coils, descale the blower wheel, clear drain channels, apply an anti-corrosion salt barrier, and digitally test cooling performance before pickup."
             }
         },
         {

@@ -157,7 +157,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                 },
                                 {
                                     q: `Does Affordable Home A/C deliver products and dispatch technicians to ${city}?`,
-                                    a: `Yes! We provide full dispatch of licensed technicians for split AC estimates and window AC cleanings directly to ${city}. For window AC purchases, we offer Oahu flat-rate delivery for $50, or you can opt for free local pickup from our Waipahu Distribution Center.`
+                                    a: `Yes! We provide full on-site dispatch of licensed technicians for ductless split AC installations, sizing estimates, and mini-split cleaning directly to ${city}. For window AC units, we provide professional full teardown cleaning ($275 flat rate) at our Waipahu warehouse, as well as Oahu flat-rate $50 delivery or free local pickup on new window AC purchases.`
                                 }
                             ].map((faq, idx) => (
                                 <details 

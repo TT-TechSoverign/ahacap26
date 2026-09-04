@@ -566,20 +566,20 @@
     },
     "maintenance": {
         "hero": {
-            "badge": "COMMERCIAL CHEMICAL DEEP CLEANING",
+            "badge": "RESTORE LIKE-NEW COOLING & FRESH AIR",
             "title": "PROFESSIONAL",
             "title_highlight": "WINDOW AC CLEANING",
             "title_suffix": "& SANITIZATION SERVICES IN OAHU",
-            "description": "Eliminate mold, bacteria, and salt-air corrosion with our commercial-grade chemical deep cleaning process. Specialized for Hawaii's humidity to restore 100% cooling efficiency and peak air quality.",
+            "description": "Eliminate stubborn black mold, musty odors, and salt-air corrosion. Our complete teardown deep clean restores 100% icy cooling airflow, lowers your electric bill, and ensures your family breathes pure, fresh air.",
             "cta_schedule": "Schedule Service",
             "cta_rates": "View Local Rates"
         },
         "technician": {
             "name": "Chris Martinez",
             "title": "Master HVAC Technician",
-            "cert1": "CT-36775 Licensed Contractor",
+            "cert1": "Certified Cooling Specialist",
             "cert2": "NATE Certified Specialist",
-            "quote": "\"Our deep clean isn't just a rinse\u2014it's a clinical decontamination of your cooling system.\""
+            "quote": "\"A surface rinse can't reach the blower wheel. We completely teardown the chassis so your unit runs icy-cold, whisper-quiet, and odor-free.\""
         },
         "video": {
             "title": "ENGINEERING EXCELLENCE",
@@ -627,11 +627,11 @@
             "title": "OUR PROPRIETARY 25-POINT",
             "title_highlight": "SANITIZATION",
             "title_suffix": "PROCESS",
-            "subtitle": "Medical-Grade Restoration for Residential Window Units",
-            "step1_title": "ANTIMICROBIAL COIL FLUSH",
-            "step1_description": "We use a non-toxic, hospital-grade antimicrobial solution forced through both evaporator and condenser coils at precise pressure to dissolve biofilm and mold roots that retail sprays can't reach.",
-            "step1_point1": "Deep Tissue Biofilm Removal",
-            "step1_point2": "Hospital-Grade Disinfectant",
+            "subtitle": "Complete Teardown Restoration for Maximum Cooling & Odor-Free Air",
+            "step1_title": "DEEP COIL & MOLD FLUSH",
+            "step1_description": "We force pressurized foaming agents through both evaporator and condenser coils to dissolve deep-seated black mold, biofilm, and salt crust that retail sprays can never reach.",
+            "step1_point1": "Deep Mold & Biofilm Dissolution",
+            "step1_point2": "Long-Lasting Odor Neutralizer",
             "step2": {
                 "title": "BLOWER WHEEL REBALANCING",
                 "desc": "Removing buildup from fan blades to eliminate vibrations and motor strain."
@@ -933,33 +933,33 @@
     },
     "window_ac": {
         "hero": {
-            "title": "Deep Cleaning",
-            "description": "This complete service covers every part of a window unit. Deep cleaning removes hidden dirt and mold to keep the air fresh. A clean machine runs better and feels like new again.",
+            "title": "Complete Teardown Restoration",
+            "description": "Don't let a clogged AC blow stale, lukewarm air into your bedroom. Our technicians fully extract the internal chassis to power-wash both coil banks, descale the blower fan, and clear the drain pan. Your unit cools faster, runs quieter, and smells crisp and fresh.",
             "image": "/assets/hero-cards/window-ac-cleaning-ba-1.png"
         },
         "phases": [
             {
                 "id": "phase1",
-                "title": "Phase 1: Removal and Disassembly",
-                "description": "Safe removal from the window casing starts the process. Technicians take off the metal shell to reach the internal coils and fan. Every wire stays covered or disconnected to keep the electrical parts dry and safe.",
+                "title": "Phase 1: Safe Teardown & Electronics Isolation",
+                "description": "We carefully extract the internal chassis from the outer sleeve and isolate the sensitive control board, sensors, and motor—guaranteeing 100% dry electrical protection before any washing begins.",
                 "image": "/assets/hero-cards/window-ac-removal-casing-schematic.jpg"
             },
             {
                 "id": "phase2",
-                "title": "Phase 2: Deep Cleaning",
-                "description": "A specialized soap breaks down stubborn grease and dirt on the coils. Scrubbing the fan assembly gets rid of dust and mold. Fresh water and a germ-killing spray leave the entire unit clean and healthy.",
+                "title": "Phase 2: Deep Coil & Blower Wheel Wash",
+                "description": "High-pressure, non-acidic foaming action penetrates both evaporator and condenser coils to dissolve stubborn mold roots, grime, and salt deposits, followed by a full 360° scrubbing of the blower wheel.",
                 "image": "/assets/hero-cards/window-ac-cleaning-foam-800x800.png"
             },
             {
                 "id": "phase3",
-                "title": "Phase 3: Drainage and Clearing",
-                "description": "Thoroughly cleaning the blower wheel, compressor, motor, and evaporator coil restores peak efficiency. Clear drain holes prevent water from leaking into the home, while cleaning the bottom pan removes all hidden dirt and clogs.",
+                "title": "Phase 3: Drain Clearing & Salt-Air Rust Shield",
+                "description": "We flush out standing condensate sludge and clogs to prevent indoor water leaks, and coat the bottom pan and metal surfaces with an anti-corrosion barrier against trade-wind ocean salt.",
                 "image": "/assets/hero-cards/window-ac-drain-pan-blower-wheel-cleaning-800x800x.png"
             },
             {
                 "id": "phase4",
-                "title": "Phase 4: Testing and Re-Install",
-                "description": "Every part gets dried before the unit goes back together. A full test makes sure the fan and drains work perfectly. The AC then returns to the window for a secure fit.",
+                "title": "Phase 4: Full Drying & Delta-T Performance Testing",
+                "description": "Every component is thoroughly dried and reassembled. We conduct digital airflow and Delta-T temperature testing to confirm your AC blows icy-cold air at factory CFM before pickup.",
                 "image": "/assets/hero-cards/window-ac-drain-pan-blower-wheel-cleaning-800x800x-2.png"
             }
         ]
