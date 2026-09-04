@@ -16,18 +16,20 @@ import {
     Clock, 
     CheckCircle,
     MapPin,
-    HelpCircle
+    HelpCircle,
+    Phone,
+    ArrowRight
 } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: 'Oahu AC Repair & Diagnostic Services | Affordable Home A/C',
-    description: 'Need AC repair near me in Honolulu, Pearl City, or Kapolei? We provide expert troubleshooting, leak repairs, and diagnostic services across Oahu, Hawaii.',
+    description: 'Expert ductless mini-split AC repair & diagnostic troubleshooting across Oahu, Hawaii. CT-36775 licensed HVAC technicians. Fast island dispatch (subject to scheduling availability).',
     alternates: {
         canonical: '/ac-repair',
     },
     openGraph: {
         title: 'Oahu AC Repair & Diagnostic Services | Affordable Home A/C',
-        description: 'Need AC repair near me in Honolulu, Pearl City, or Kapolei? We provide expert troubleshooting, leak repairs, and diagnostic services across Oahu, Hawaii.',
+        description: 'Expert ductless mini-split AC repair & diagnostic troubleshooting across Oahu, Hawaii. CT-36775 licensed HVAC technicians. Fast island dispatch (subject to scheduling availability).',
         url: '/ac-repair',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -68,20 +70,28 @@ export default function ACRepairPage() {
 
     const repairFaqs = [
         {
-            q: 'How quickly can a technician be dispatched for a repair?',
-            a: 'We offer scheduling across Oahu based on our soonest availability. Depending on seasonal volume, we may be booked out several weeks. Use our online diagnostic wizard to check availability and schedule your request.'
+            q: 'How quickly can a technician be dispatched for an AC repair on Oahu?',
+            a: 'We offer diagnostic dispatch across Oahu based on our soonest availability (subject to current scheduling, technician availability, and seasonal demand). Peak summer volume may result in booking queues several weeks out. Use our online diagnostic wizard to submit your request and secure the next open slot.'
         },
         {
-            q: 'What is your diagnostic service fee?',
-            a: 'We charge a flat-rate diagnostic fee to cover the trip charge and complete system inspection. This fee is credited towards any approved repair solutions we perform.'
+            q: 'What is your diagnostic service fee and does it apply to repairs?',
+            a: 'We charge a flat-rate diagnostic fee to cover technician dispatch, travel time, and a comprehensive electrical and mechanical inspection. When you proceed with recommended repairs on the same visit, this fee is credited toward your approved repair invoice (subject to scope of work, customer approval, and parts availability).'
         },
         {
-            q: 'Do you repair all AC brands?',
-            a: 'Yes, our licensed technicians are trained to repair all major brands, including Fujitsu, Mitsubishi, Daikin, and Carrier for ductless mini-split systems.'
+            q: 'Do you repair all ductless mini-split brands?',
+            a: 'Yes. Our CT-36775 licensed technicians are trained to diagnose and repair all major ductless mini-split brands on Oahu, including Mitsubishi Electric, Fujitsu Halcyon, Daikin, and Carrier (subject to manufacturer OEM parts availability, unit age, and overall equipment condition).'
         },
         {
             q: 'Is there a warranty on your repair work?',
-            a: 'Yes! We stand behind our quality of service. All repair work includes a 14-day warranty on parts and craftsmanship.'
+            a: 'Yes! We stand behind our workmanship. All qualifying repair work includes a 14-day warranty on labor craftsmanship and newly installed replacement parts (subject to normal residential operating conditions, pre-existing system defects, and manufacturer component terms).'
+        },
+        {
+            q: 'Do you repair window air conditioners or central AC systems?',
+            a: 'Our repair and diagnostic services are dedicated specifically to ductless mini-split heat pumps and air handlers. For window AC units, we provide full chemical teardown cleaning and rust-inhibitor servicing at our Waipahu warehouse, but we do not perform sealed-refrigerant or compressor rebuilds on window units. All service acceptances are subject to detailed scope of work, physical equipment inspection, and management approval to accept.'
+        },
+        {
+            q: 'Can every mini-split problem be resolved on the initial diagnostic visit?',
+            a: 'Many common issues—such as clogged condensate lines, electrical contactors, run capacitors, or sensor calibration—can often be resolved during the initial visit. More extensive repairs requiring specialized OEM inverter circuit boards, proprietary electronic expansion valves, or replacement condenser coils are subject to manufacturer factory parts delivery and follow-up crew scheduling.'
         }
     ];
 
@@ -117,7 +127,7 @@ export default function ACRepairPage() {
             }
         },
         "areaServed": "Oahu",
-        "description": "Expert air conditioning troubleshooting, refrigerant leak detection, and electrical diagnostics across Oahu."
+        "description": "Expert air conditioning troubleshooting, refrigerant leak detection, and electrical diagnostics across Oahu (subject to scheduling and parts availability)."
     };
 
     return (
@@ -146,7 +156,7 @@ export default function ACRepairPage() {
                 <div className="flex flex-col items-center text-center space-y-6">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-[0.2em]">
                         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                        Expert AC Diagnostics
+                        Expert AC Diagnostics • CT-36775 Licensed
                     </div>
                     
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-header font-black tracking-tight uppercase leading-none max-w-4xl">
@@ -157,8 +167,23 @@ export default function ACRepairPage() {
                     <div className="w-24 h-1 bg-primary shadow-[0_0_10px_rgba(0,174,239,0.5)]"></div>
                     
                     <p className="max-w-2xl text-slate-300 text-sm md:text-base leading-relaxed font-light">
-                        Don&apos;t let Hawaii&apos;s humidity take over. With complete ductless mini-split diagnostics, our licensed HVAC technicians restore comfort fast.
+                        Don&apos;t let Hawaii&apos;s humidity take over. Our CT-36775 licensed HVAC specialists provide complete ductless mini-split diagnostics and troubleshooting across Oahu, restoring cool comfort fast (subject to technician scheduling and crew availability).
                     </p>
+
+                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto pt-2">
+                        <a
+                            href="#diagnostic-wizard"
+                            className="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_25px_rgba(0,174,239,0.4)] hover:shadow-[0_0_35px_rgba(0,174,239,0.6)] transition-all flex items-center justify-center gap-2"
+                        >
+                            Start Diagnostic Wizard <Wrench className="size-4" />
+                        </a>
+                        <a
+                            href="tel:808-488-1111"
+                            className="w-full sm:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition-colors"
+                        >
+                            <Phone className="size-4 text-primary" /> (808) 488-1111
+                        </a>
+                    </div>
                 </div>
             </section>
 
@@ -170,7 +195,7 @@ export default function ACRepairPage() {
                     </h2>
                     <div className="w-16 h-1 bg-primary mx-auto shadow-[0_0_10px_rgba(0,174,239,0.5)]"></div>
                     <p className="text-sm text-slate-400 font-sans leading-relaxed">
-                        Hawaii&apos;s heavy salt air and heat accelerate wear. We target and resolve these common cooling system issues:
+                        Hawaii&apos;s heavy salt air and heat accelerate wear. We target and resolve these common cooling system issues (all repairs subject to on-site physical diagnostic inspection and scope of work):
                     </p>
                 </div>
 
@@ -199,28 +224,28 @@ export default function ACRepairPage() {
                         <Truck className="w-8 h-8 text-primary shrink-0" />
                         <div>
                             <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">Soonest Availability</h4>
-                            <p className="text-[9px] text-slate-400 font-sans">Flexible booking options</p>
+                            <p className="text-[9px] text-slate-400 font-sans">Subject to scheduling & crew capacity</p>
                         </div>
                     </div>
                     <div className="flex gap-3 items-center">
                         <ShieldCheck className="w-8 h-8 text-primary shrink-0" />
                         <div>
                             <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">Licensed Pros</h4>
-                            <p className="text-[9px] text-slate-400 font-sans">Fully bonded & insured</p>
+                            <p className="text-[9px] text-slate-400 font-sans">CT-36775 Licensed, bonded & insured</p>
                         </div>
                     </div>
                     <div className="flex gap-3 items-center">
                         <Clock className="w-8 h-8 text-primary shrink-0" />
                         <div>
                             <h4 className="font-header font-black text-[10px] uppercase text-white tracking-widest">14-Day Warranty</h4>
-                            <p className="text-[9px] text-slate-400 font-sans">All workmanship covered</p>
+                            <p className="text-[9px] text-slate-400 font-sans">Subject to qualifying repair terms</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* 3. SYSTEM DIAGNOSTIC WIZARD SECTION */}
-            <section className="relative z-10 max-w-4xl mx-auto px-6 mt-24">
+            <section id="diagnostic-wizard" className="relative z-10 max-w-4xl mx-auto px-6 mt-24">
                 <ACRepairFunnel />
             </section>
 

@@ -87,7 +87,7 @@ export default function ACRepairFunnel() {
                                     What symptoms are you experiencing?
                                 </h3>
                                 <p className="text-xs text-slate-400 font-sans mt-1">
-                                    Select all that apply to help us prepare the right parts for your service.
+                                    Select all that apply to help us prepare the right parts for your service (diagnostics & repairs subject to technician scheduling and on-site physical inspection).
                                 </p>
                             </div>
 
@@ -100,17 +100,17 @@ export default function ACRepairFunnel() {
                                             key={sym.id}
                                             type="button"
                                             onClick={() => toggleSymptom(sym.text)}
-                                            className={`w-full p-4 rounded-xl border flex items-center justify-between transition-all duration-300 text-left active:scale-[0.99] ${isSelected ? 'bg-[#00E5FF]/5 border-[#00E5FF]/40 shadow-[0_0_10px_rgba(0,229,255,0.05)]' : 'bg-white/[0.01] border-white/5 hover:border-white/10'}`}
+                                            className={`w-full p-4 rounded-xl border flex items-center justify-between transition-all duration-300 text-left active:scale-[0.99] ${isSelected ? 'bg-primary/10 border-primary/40 shadow-[0_0_10px_rgba(0,174,239,0.1)]' : 'bg-white/[0.01] border-white/5 hover:border-white/10'}`}
                                             aria-label={`Symptom: ${sym.text}`}
                                         >
                                             <div className="flex items-center gap-3">
-                                                <div className={`p-2 rounded-lg border ${isSelected ? 'bg-[#00E5FF]/10 border-[#00E5FF]/30 text-[#00E5FF]' : 'bg-slate-950 border-white/5 text-slate-400'}`}>
+                                                <div className={`p-2 rounded-lg border ${isSelected ? 'bg-primary/20 border-primary/40 text-primary' : 'bg-slate-950 border-white/5 text-slate-400'}`}>
                                                     <Icon className="w-4 h-4" />
                                                 </div>
                                                 <span className="font-header font-bold text-xs uppercase tracking-wider text-white">{sym.text}</span>
                                             </div>
-                                            <div className={`w-5 h-5 rounded border flex items-center justify-center ${isSelected ? 'bg-[#00E5FF]/20 border-[#00E5FF]/40 text-[#00E5FF]' : 'border-white/10'}`}>
-                                                {isSelected && <Check className="w-3 h-3" />}
+                                            <div className={`w-5 h-5 rounded border flex items-center justify-center ${isSelected ? 'bg-primary border-primary text-slate-950' : 'border-white/10'}`}>
+                                                {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                                             </div>
                                         </button>
                                     );
@@ -122,7 +122,7 @@ export default function ACRepairFunnel() {
                                     type="button"
                                     disabled={selectedSymptoms.length === 0}
                                     onClick={() => setStep(2)}
-                                    className="px-6 py-3 bg-[#00E5FF] hover:bg-[#00E5FF]/90 text-slate-950 font-header font-black uppercase text-[10px] tracking-widest rounded-lg flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(0,229,255,0.2)]"
+                                    className="px-6 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(0,174,239,0.3)]"
                                     aria-label="Proceed to confirmation notes"
                                 >
                                     Add Notes
@@ -146,7 +146,7 @@ export default function ACRepairFunnel() {
                                     Any additional details?
                                 </h3>
                                 <p className="text-xs text-slate-400 font-sans mt-1">
-                                    Describe any specific notes (brand of unit, error codes, height of installation).
+                                    Describe any specific notes (brand of unit, error codes, height of installation). Service dispatch is subject to scheduling availability and scope of work approval.
                                 </p>
                             </div>
 
@@ -154,13 +154,13 @@ export default function ACRepairFunnel() {
                                 <textarea
                                     value={customNotes}
                                     onChange={(e) => setCustomNotes(e.target.value)}
-                                    className="w-full h-32 bg-slate-950 border border-white/10 rounded-xl p-4 text-sm text-white focus:border-[#00E5FF]/50 outline-none transition-colors font-sans resize-none placeholder:text-slate-600"
+                                    className="w-full h-32 bg-slate-950 border border-white/10 rounded-xl p-4 text-sm text-white focus:border-primary/50 outline-none transition-colors font-sans resize-none placeholder:text-slate-600"
                                     placeholder="Examples: unit is a Fujitsu model, flashing green light on display, installed on the second floor wall..."
                                     aria-label="Additional diagnostic notes"
                                 />
 
                                 <div className="p-4 bg-slate-950/60 border border-white/5 rounded-xl text-left space-y-2">
-                                    <h4 className="font-header font-black uppercase text-[10px] tracking-widest text-[#00E5FF]">Symptom Summary</h4>
+                                    <h4 className="font-header font-black uppercase text-[10px] tracking-widest text-primary">Symptom Summary</h4>
                                     <p className="text-xs text-slate-300 leading-relaxed font-light">
                                         <strong>System:</strong> {systemType}<br/>
                                         <strong>Symptoms Selected:</strong> {selectedSymptoms.join(', ')}
@@ -168,24 +168,29 @@ export default function ACRepairFunnel() {
                                 </div>
                             </div>
 
-                            <div className="flex justify-between pt-4 gap-4">
-                                <button
-                                    type="button"
-                                    onClick={() => setStep(1)}
-                                    className="px-6 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-300 font-header font-black uppercase text-[10px] tracking-widest rounded-lg flex items-center gap-2 transition-all"
-                                    aria-label="Go back to symptoms selection"
-                                >
-                                    <ArrowLeft className="w-4 h-4" />
-                                    Back
-                                </button>
-                                <Link
-                                    href={getContactLink()}
-                                    className="px-8 py-3 bg-gradient-to-r from-[#00E5FF] to-cyan-500 hover:scale-[1.02] text-slate-950 font-header font-black uppercase text-[10px] tracking-widest rounded-lg flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(0,229,255,0.3)]"
-                                    aria-label="Book Diagnostic Appointment"
-                                >
-                                    Book Diagnostic Appointment
-                                    <Sparkles className="w-4 h-4 text-slate-950" />
-                                </Link>
+                            <div className="flex flex-col gap-3 pt-4">
+                                <div className="flex justify-between items-center gap-4">
+                                    <button
+                                        type="button"
+                                        onClick={() => setStep(1)}
+                                        className="px-6 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-300 font-header font-black uppercase text-xs tracking-wider rounded-xl flex items-center gap-2 transition-all"
+                                        aria-label="Go back to symptoms selection"
+                                    >
+                                        <ArrowLeft className="w-4 h-4" />
+                                        Back
+                                    </button>
+                                    <Link
+                                        href={getContactLink()}
+                                        className="px-8 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(0,174,239,0.4)]"
+                                        aria-label="Book Diagnostic Appointment"
+                                    >
+                                        Book Diagnostic Appointment
+                                        <Sparkles className="w-4 h-4 text-slate-950" />
+                                    </Link>
+                                </div>
+                                <p className="text-[10px] text-slate-400 text-center font-sans">
+                                    Diagnostic appointments and repairs are subject to technician availability, physical site inspection, and scope of work approval.
+                                </p>
                             </div>
                         </motion.div>
                     )}
