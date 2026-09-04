@@ -54,7 +54,7 @@ export default function MobileStickyBottomBar() {
                     <a 
                         href="#system-builder"
                         onClick={() => sendGAEvent('event', 'click_to_estimate', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Mini Split Builder' })}
-                        className="flex-1 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-widest text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(34,211,238,0.4)]"
+                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-widest text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)]"
                     >
                         <Calendar className="size-4" />
                         Free Survey

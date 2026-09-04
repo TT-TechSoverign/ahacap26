@@ -28,7 +28,6 @@ const config: Config = {
                     950: "#020617",
                     DEFAULT: "#0b1120",
                 },
-                cyan: "#00AEEF",
             },
             fontFamily: {
                 "display": ["Inter", "sans-serif"],

@@ -51,7 +51,7 @@ export default function WindowAcMaintenancePage() {
                         <div className="flex flex-col gap-2.5 w-full sm:w-auto">
                             <Link 
                                 href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$149"
-                                className="px-6 py-3 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all flex items-center justify-center gap-1.5 text-center"
+                                className="px-6 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all flex items-center justify-center gap-1.5 text-center"
                             >
                                 Schedule Cleaning <ArrowRight className="size-3.5" />
                             </Link>
@@ -89,7 +89,7 @@ export default function WindowAcMaintenancePage() {
                         <div className="flex flex-col sm:flex-row items-center gap-4">
                             <Link 
                                 href="/contact?service=Window+AC+Cleaning" 
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold font-header tracking-wider uppercase px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] text-xs"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black tracking-wider uppercase px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.4)] text-xs"
                             >
                                 Book Your Teardown Cleaning
                                 <ArrowRight className="size-4" />

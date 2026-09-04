@@ -36,8 +36,11 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
     const [timeline, setTimeline] = useState('asap');
     
     // Form fields
-    const [fullName, setFullName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
     const [city, setCity] = useState(cityParam);
     const [notes, setNotes] = useState('');
     
@@ -136,16 +139,16 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                 `Brand Preference: ${selectedBrandObj?.name || brandPreference}`,
                 `Contact Preference: ${contactPref === 'text' ? 'TEXT MESSAGE PREFERRED' : 'PHONE CALL PREFERRED'}`,
                 `Project Timeline: ${timeline === 'asap' ? 'Immediate / Hot Weather' : timeline === '30days' ? 'Next 30 Days' : 'Planning / Renovation'}`,
-                `Oahu City: ${city || 'Oahu (Unspecified)'}`,
+                `Oahu Address: ${address.trim()}, ${city.trim() || 'Oahu'}, HI`,
                 notes ? `Customer Notes: ${notes}` : null
             ].filter(Boolean).join('\n');
 
             const payload = {
-                first_name: fullName.trim().split(' ')[0] || fullName.trim(),
-                last_name: fullName.trim().split(' ').slice(1).join(' ') || '',
+                first_name: firstName.trim(),
+                last_name: lastName.trim(),
+                email: email.trim(),
                 phone: phone.trim(),
-                email: 'sales@affordablehome-ac.com', // fallback internal routing
-                address: city.trim() ? `${city.trim()}, Oahu, HI` : 'Oahu, HI',
+                address: address.trim(),
                 city: city.trim() || 'Oahu',
                 service_type: 'Mini Split Installation (New)',
                 urgency: timeline === 'asap' ? 'immediate' : 'standard',
@@ -266,7 +269,7 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                                 <button
                                     type="button"
                                     onClick={() => setStep(2)}
-                                    className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl flex items-center gap-2 transition-all"
+                                    className="px-6 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase tracking-wider text-xs rounded-xl flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)]"
                                 >
                                     Next: Property Type <ArrowRight className="size-4" />
                                 </button>
@@ -334,7 +337,7 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                                 <button
                                     type="button"
                                     onClick={() => setStep(3)}
-                                    className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl flex items-center gap-2 transition-all"
+                                    className="px-6 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase tracking-wider text-xs rounded-xl flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)]"
                                 >
                                     Next: Brand Preference <ArrowRight className="size-4" />
                                 </button>
@@ -395,7 +398,7 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                                 <button
                                     type="button"
                                     onClick={() => setStep(4)}
-                                    className="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl flex items-center gap-2 transition-all"
+                                    className="px-6 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase tracking-wider text-xs rounded-xl flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)]"
                                 >
                                     Next: Get Free Survey <ArrowRight className="size-4" />
                                 </button>
@@ -452,16 +455,30 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-semibold text-slate-300 mb-1">Your Name *</label>
+                                    <label className="block text-xs font-semibold text-slate-300 mb-1">First Name *</label>
                                     <input
                                         type="text"
                                         required
-                                        value={fullName}
-                                        onChange={(e) => setFullName(e.target.value)}
-                                        placeholder="First & Last Name"
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        placeholder="First Name"
                                         className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
                                     />
                                 </div>
+                                <div>
+                                    <label className="block text-xs font-semibold text-slate-300 mb-1">Last Name *</label>
+                                    <input
+                                        type="text"
+                                        required
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        placeholder="Last Name"
+                                        className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-xs font-semibold text-slate-300 mb-1">Phone Number (Oahu) *</label>
                                     <input
@@ -473,9 +490,31 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                                         className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
                                     />
                                 </div>
+                                <div>
+                                    <label className="block text-xs font-semibold text-slate-300 mb-1">Email Address *</label>
+                                    <input
+                                        type="email"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        placeholder="your.email@example.com"
+                                        className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                                    />
+                                </div>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-xs font-semibold text-slate-300 mb-1">Street Address in Oahu *</label>
+                                    <input
+                                        type="text"
+                                        required
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
+                                        placeholder="e.g. 94-150 Leoleo St"
+                                        className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                                    />
+                                </div>
                                 <div>
                                     <label className="block text-xs font-semibold text-slate-300 mb-1">City / Oahu Neighborhood *</label>
                                     <input
@@ -487,18 +526,19 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                                         className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
                                     />
                                 </div>
-                                <div>
-                                    <label className="block text-xs font-semibold text-slate-300 mb-1">Project Timeline</label>
-                                    <select
-                                        value={timeline}
-                                        onChange={(e) => setTimeline(e.target.value)}
-                                        className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
-                                    >
-                                        <option value="asap">Immediate / Hot Weather Relief</option>
-                                        <option value="30days">Within the Next 30 Days</option>
-                                        <option value="planning">Planning / Renovation Phase</option>
-                                    </select>
-                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-semibold text-slate-300 mb-1">Project Timeline</label>
+                                <select
+                                    value={timeline}
+                                    onChange={(e) => setTimeline(e.target.value)}
+                                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+                                >
+                                    <option value="asap">Immediate / Hot Weather Relief</option>
+                                    <option value="30days">Within the Next 30 Days</option>
+                                    <option value="planning">Planning / Renovation Phase</option>
+                                </select>
                             </div>
 
                             {errorMessage && (
@@ -523,7 +563,7 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="px-8 py-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-sm sm:text-base uppercase tracking-wider rounded-xl shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:shadow-[0_0_35px_rgba(34,211,238,0.6)] transition-all flex items-center gap-2 disabled:opacity-50"
+                                    className="px-8 py-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-sm sm:text-base uppercase tracking-wider rounded-xl shadow-[0_0_25px_rgba(0,174,239,0.4)] hover:shadow-[0_0_35px_rgba(0,174,239,0.6)] transition-all flex items-center gap-2 disabled:opacity-50"
                                 >
                                     {isSubmitting ? 'Transmitting Request...' : 'Claim Free Sizing Survey'}
                                     <ArrowRight className="size-4" />
@@ -543,14 +583,14 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                         <CheckCircle2 className="size-10" />
                     </div>
                     <h3 className="text-2xl sm:text-3xl font-header font-black text-white uppercase tracking-wide">
-                        Mahalo, {fullName || 'Neighbor'}!
+                        Mahalo, {firstName || 'Neighbor'}!
                     </h3>
                     <p className="text-slate-300 text-sm sm:text-base max-w-lg mx-auto">
                         Your <span className="text-cyan-400 font-bold">{zones} Zone Mini-Split</span> sizing request has been transmitted directly to our Waipahu dispatch office.
                     </p>
                     <div className="p-4 bg-slate-900/80 border border-slate-800 rounded-2xl max-w-md mx-auto text-xs text-slate-400 space-y-1">
                         <p className="text-white font-semibold">What happens next?</p>
-                        <p>A licensed CT-36775 technician will {contactPref === 'text' ? 'send you a text' : 'give you a quick call'} to confirm your {city || 'Oahu'} address and lock in your free in-home load & electrical survey.</p>
+                        <p>A licensed CT-36775 technician will {contactPref === 'text' ? 'send you a text' : 'give you a quick call'} to confirm your address ({address ? `${address}, ${city || 'Oahu'}` : (city || 'Oahu')}) and lock in your free in-home load & electrical survey.</p>
                     </div>
 
                     <div className="pt-4">

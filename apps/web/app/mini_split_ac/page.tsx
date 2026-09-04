@@ -90,11 +90,11 @@ export default function MiniSplitsPage() {
     const faqs = [
         {
             q: "How fast can you install a mini-split on Oahu?",
-            a: "Because we maintain local inventory in our Waipahu warehouse, we do not make homeowners wait 4 to 8 weeks for mainland container shipping. Once your free in-home sizing survey is completed and equipment is selected, installation is typically completed within 3 to 5 business days."
+            a: "Because we maintain local inventory in our Waipahu warehouse, we do not make homeowners wait 4 to 8 weeks for mainland container shipping. Once your free in-home sizing survey is completed and equipment is selected, installation is typically completed within 3 to 5 business days (subject to scheduling and crew availability)."
         },
         {
             q: "What is Blue Fin coastal protection and why is it essential in Hawaii?",
-            a: "Oahu's continuous trade winds carry microscopic ocean salt particles that quickly corrode and pit uncoated aluminum cooling fins within 2 to 4 years. Factory Blue Fin treatment applies a durable acrylic resin and hydrophilic film to the condenser coils, preventing galvanic corrosion, shedding salt spray, and extending system lifespan by 3 to 5+ years."
+            a: "Oahu's continuous trade winds carry microscopic ocean salt particles that quickly corrode and pit uncoated aluminum cooling fins within 2 to 4 years. Factory Blue Fin treatment applies a durable acrylic resin and hydrophilic film to the condenser coils, preventing galvanic corrosion, shedding salt spray, and extending system lifespan."
         },
         {
             q: "Will a mini-split work with my older Oahu home's electrical panel?",
@@ -102,7 +102,7 @@ export default function MiniSplitsPage() {
         },
         {
             q: "Can I install mini-splits in an Oahu townhouse or condo with strict HOA rules?",
-            a: "Absolutely. We specialize in HOA-compliant installations across planned communities like Mililani Mauka, Ewa Beach, Kapolei, and Hawaii Kai. We install color-matched, UV-resistant architectural line-hide conduits that neatly enclose all refrigerant pipes, wiring, and drain lines flush against your exterior walls to pass HOA architectural review."
+            a: "Yes, subject to detailed scope of work, property inspection, and management approval to accept. We specialize in HOA-compliant installations across planned communities like Mililani Mauka, Ewa Beach, Kapolei, and Hawaii Kai. We install color-matched, UV-resistant architectural line-hide conduits that neatly enclose all refrigerant pipes, wiring, and drain lines flush against your exterior walls to pass HOA architectural review."
         },
         {
             q: "Do your mini-splits comply with Honolulu residential noise ordinances?",
@@ -184,7 +184,7 @@ export default function MiniSplitsPage() {
                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
                         <a
                             href="#system-builder"
-                            className="w-full sm:w-auto px-8 py-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-base uppercase tracking-wider rounded-xl shadow-[0_0_30px_rgba(34,211,238,0.4)] hover:shadow-[0_0_40px_rgba(34,211,238,0.6)] transition-all flex items-center justify-center gap-2"
+                            className="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-base uppercase tracking-wider rounded-xl shadow-[0_0_30px_rgba(0,174,239,0.4)] hover:shadow-[0_0_40px_rgba(0,174,239,0.6)] transition-all flex items-center justify-center gap-2"
                         >
                             Build Your System (Free Survey) <ArrowRight className="size-5" />
                         </a>
