@@ -22,17 +22,33 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Oahu AC Repair & Diagnostic Services | Affordable Home A/C',
-    description: 'Expert ductless mini-split AC repair & diagnostic troubleshooting across Oahu, Hawaii. CT-36775 licensed HVAC technicians. Fast island dispatch (subject to scheduling availability).',
+    title: {
+        absolute: 'Mini Split AC Repair Oahu | Diagnostic Troubleshooting | CT-36775 Licensed | Affordable Home A/C'
+    },
+    description: 'Fast diagnostic troubleshooting & repairs for ductless mini splits across Oahu. Licensed CT-36775 HVAC technicians pinpoint compressor faults, leaks, and sensor codes. Call (808) 488-1111.',
     alternates: {
-        canonical: '/ac-repair',
+        canonical: 'https://www.affordablehome-ac.com/ac-repair',
     },
     openGraph: {
-        title: 'Oahu AC Repair & Diagnostic Services | Affordable Home A/C',
-        description: 'Expert ductless mini-split AC repair & diagnostic troubleshooting across Oahu, Hawaii. CT-36775 licensed HVAC technicians. Fast island dispatch (subject to scheduling availability).',
-        url: '/ac-repair',
+        title: 'Mini Split AC Repair Oahu | Diagnostic Troubleshooting | CT-36775 Licensed | Affordable Home A/C',
+        description: 'Fast diagnostic troubleshooting & repairs for ductless mini splits across Oahu. Licensed CT-36775 HVAC technicians pinpoint compressor faults, leaks, and sensor codes. Call (808) 488-1111.',
+        url: 'https://www.affordablehome-ac.com/ac-repair',
         siteName: 'Affordable Home A/C',
         type: 'website',
+        images: [
+            {
+                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
+                width: 800,
+                height: 600,
+                alt: 'Oahu Mini Split AC Repair and Diagnostics',
+            }
+        ]
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Mini Split AC Repair Oahu | Diagnostic Troubleshooting | CT-36775 Licensed | Affordable Home A/C',
+        description: 'Fast diagnostic troubleshooting & repairs for ductless mini splits across Oahu. Licensed CT-36775 HVAC technicians pinpoint compressor faults, leaks, and sensor codes. Call (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
 
@@ -130,9 +146,32 @@ export default function ACRepairPage() {
         "description": "Expert air conditioning troubleshooting, refrigerant leak detection, and electrical diagnostics across Oahu (subject to scheduling and parts availability)."
     };
 
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.affordablehome-ac.com"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "AC Repair & Diagnostics",
+                "item": "https://www.affordablehome-ac.com/ac-repair"
+            }
+        ]
+    };
+
     return (
         <main className="min-h-screen bg-background-dark font-sans text-white pb-24 relative overflow-hidden">
             {/* Schema.org Structured Data */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(repairFaqSchema) }}

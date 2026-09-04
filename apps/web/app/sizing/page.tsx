@@ -6,37 +6,77 @@ import { ArrowLeft, Calculator } from 'lucide-react';
 import { Suspense } from 'react';
 
 export const metadata: Metadata = {
-    title: 'Hawaii AC Sizing Wizard & Calculator | Affordable Home A/C',
-    description: 'Find the perfect BTU window air conditioner for your Oahu home. Calibrated room load calculations for Kapolei, Kailua, Kaneohe, and Honolulu micro-climates.',
+    title: {
+        absolute: 'Oahu AC Sizing Calculator & BTU Sizing Wizard | Affordable Home A/C'
+    },
+    description: 'Calculate the exact BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sizing',
     },
     openGraph: {
-        title: 'Hawaii AC Sizing Wizard & Calculator | Affordable Home A/C',
-        description: 'Find the perfect BTU window air conditioner for your Oahu home. Calibrated room load calculations for Kapolei, Kailua, Kaneohe, and Honolulu micro-climates.',
-        url: '/sizing',
+        title: 'Oahu AC Sizing Calculator & BTU Sizing Wizard | Affordable Home A/C',
+        description: 'Calculate the exact BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
+        url: 'https://www.affordablehome-ac.com/sizing',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: '/assets/logo.png',
+                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
                 width: 800,
                 height: 600,
-                alt: 'Affordable Home A/C Logo',
+                alt: 'Hawaii AC Sizing Wizard & Calculator',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Hawaii AC Sizing Wizard & Calculator | Affordable Home A/C',
-        description: 'Find the perfect BTU window air conditioner for your Oahu home. Calibrated room load calculations for Kapolei, Kailua, Kaneohe, and Honolulu micro-climates.',
-        images: ['/assets/logo.png'],
+        title: 'Oahu AC Sizing Calculator & BTU Sizing Wizard | Affordable Home A/C',
+        description: 'Calculate the exact BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
+        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
+};
+
+const sizingAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Oahu AC Sizing Calculator",
+    "url": "https://www.affordablehome-ac.com/sizing",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript",
+    "description": "Interactive room BTU sizing wizard calibrated for Hawaii humidity and Oahu micro-climates."
+};
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "AC Sizing Wizard",
+            "item": "https://www.affordablehome-ac.com/sizing"
+        }
+    ]
 };
 
 export default function SizingPage() {
     return (
         <div className="bg-background-dark min-h-screen text-white selection:bg-primary selection:text-white pb-12 lg:pb-32">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(sizingAppSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
             <main className="max-w-4xl mx-auto px-6 pt-[140px] md:pt-[165px]">
                 {/* Header branding */}
                 <div className="text-center mb-8 lg:mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">

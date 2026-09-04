@@ -2,19 +2,52 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Cleaning Service Oahu | Teardown & Mold Sanitization | Affordable Home A/C'
+        absolute: 'Window AC Cleaning Oahu | $275 Full Warehouse Teardown | Affordable Home A/C'
     },
-    description: 'Professional window AC teardown deep cleaning on Oahu. Eradicate black mold, restore icy-cold cooling airflow, and protect against salt-air rust with fast 24-48hr turnaround.',
+    description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Waipahu warehouse drop-off with 24-48hr turnaround. Call (808) 488-1111.',
     alternates: {
-        canonical: '/window_ac_maintenance',
+        canonical: 'https://www.affordablehome-ac.com/window_ac_maintenance',
     },
     openGraph: {
-        title: 'Window AC Cleaning Service Oahu | Teardown & Mold Sanitization | Affordable Home A/C',
-        description: 'Professional window AC teardown deep cleaning on Oahu. Eradicate black mold, restore icy-cold cooling airflow, and protect against salt-air rust with fast 24-48hr turnaround.',
-        url: '/window_ac_maintenance',
+        title: 'Window AC Cleaning Oahu | $275 Full Warehouse Teardown | Affordable Home A/C',
+        description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Waipahu warehouse drop-off with 24-48hr turnaround. Call (808) 488-1111.',
+        url: 'https://www.affordablehome-ac.com/window_ac_maintenance',
         siteName: 'Affordable Home A/C',
         type: 'website',
+        images: [
+            {
+                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
+                width: 800,
+                height: 600,
+                alt: 'Window AC Teardown Cleaning Service Oahu',
+            }
+        ]
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Window AC Cleaning Oahu | $275 Full Warehouse Teardown | Affordable Home A/C',
+        description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Waipahu warehouse drop-off with 24-48hr turnaround. Call (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
+};
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Cleaning",
+            "item": "https://www.affordablehome-ac.com/window_ac_maintenance"
+        }
+    ]
 };
 
 const windowAcFaqSchema = {
@@ -75,12 +108,29 @@ const hvacServiceSchema = {
         }
     },
     "areaServed": "Oahu",
-    "description": "Professional window air conditioner deep chemical teardown, mold eradication, and anti-corrosion maintenance in Oahu, Hawaii."
+    "description": "Professional window air conditioner deep chemical teardown, mold eradication, and anti-corrosion maintenance in Oahu, Hawaii.",
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Window AC Cleaning Service",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "name": "Window AC Teardown Deep Cleaning (Waipahu Drop-Off)",
+                "price": "275.00",
+                "priceCurrency": "USD",
+                "description": "Complete chassis extraction, pressurized dual-side coil flush, blower wheel descaling, drain flush, and anti-corrosion salt barrier."
+            }
+        ]
+    }
 };
 
 export default function WindowAcMaintenanceLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(windowAcFaqSchema) }}

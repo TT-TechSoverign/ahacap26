@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useContent } from '@/lib/context/ContentContext';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,21 +13,28 @@ import {
     ArrowRight, 
     CheckCircle2, 
     Zap,
-    Wind,
-    VolumeX,
-    DollarSign,
-    Shield,
-    Check,
-    X,
-    HelpCircle,
-    ChevronDown,
-    ThermometerSnowflake,
-    ShieldCheck
+    Wind, 
+    VolumeX, 
+    DollarSign, 
+    Shield, 
+    Check, 
+    X, 
+    HelpCircle, 
+    ChevronDown, 
+    ThermometerSnowflake, 
+    ShieldCheck,
+    Calendar,
+    MapPin,
+    Warehouse,
+    Info
 } from 'lucide-react';
 
 export default function WindowAcMaintenancePage() {
     const { content } = useContent();
     const data = content?.window_ac;
+
+    const [selectedBtu, setSelectedBtu] = useState<string>('10k-12k');
+    const [dropoffTiming, setDropoffTiming] = useState<string>('morning');
 
     if (!data) return null;
 
@@ -319,6 +327,125 @@ export default function WindowAcMaintenancePage() {
                             className="object-cover object-[75%_center] transition-transform duration-700 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none"></div>
+                    </div>
+                </div>
+            </div>
+
+            {/* INTERACTIVE WAIPAHU DROP-OFF ESTIMATOR */}
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+                <div className="bg-gradient-to-r from-slate-900/80 via-slate-950 to-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+                    <div className="text-center max-w-2xl mx-auto mb-8">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">
+                            <Clock className="size-4" /> Drop-Off Turnaround Calculator
+                        </div>
+                        <h3 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-wide">
+                            Waipahu Warehouse <span className="text-cyan-400">Drop-Off Readiness</span>
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-400 mt-2">
+                            Select your window AC capacity to view turnaround estimates and drop-off guidelines.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        {/* BTU Selector */}
+                        <div className="lg:col-span-7 space-y-6">
+                            <div>
+                                <label className="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-3">
+                                    Select Your Unit Size / BTU Class:
+                                </label>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    {[
+                                        { id: '6k-8k', title: '6,000 – 8,000 BTU', desc: 'Small bedroom / studio', weight: '~45 lbs' },
+                                        { id: '10k-12k', title: '10,000 – 12,000 BTU', desc: 'Master bedroom / living room', weight: '~65 lbs' },
+                                        { id: '14k-18k', title: '14,000 – 18,000 BTU', desc: 'Large open living area', weight: '~85 lbs' },
+                                        { id: '24k+', title: '24,000+ BTU Heavy-Duty', desc: 'Commercial / whole floor', weight: '~115 lbs' },
+                                    ].map((opt) => (
+                                        <button
+                                            key={opt.id}
+                                            type="button"
+                                            onClick={() => setSelectedBtu(opt.id)}
+                                            className={`p-4 rounded-xl border text-left transition-all ${
+                                                selectedBtu === opt.id
+                                                    ? 'bg-cyan-950/40 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
+                                                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                                            }`}
+                                        >
+                                            <div className="flex items-center justify-between mb-1">
+                                                <span className="font-header font-bold text-white text-sm">{opt.title}</span>
+                                                <span className="text-[10px] font-mono text-cyan-400 font-semibold">{opt.weight}</span>
+                                            </div>
+                                            <p className="text-[11px] text-slate-400">{opt.desc}</p>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Drop-off guidelines checklist */}
+                            <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 space-y-2.5 text-xs text-slate-300">
+                                <div className="flex items-center gap-2 text-cyan-300 font-bold uppercase tracking-wider text-[11px] mb-1">
+                                    <Warehouse className="size-4 text-cyan-400" /> Waipahu Drop-Off Instructions
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <Check className="size-4 text-emerald-400 mt-0.5 shrink-0" />
+                                    <span>Bring the complete AC chassis with intact power cord.</span>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <Check className="size-4 text-emerald-400 mt-0.5 shrink-0" />
+                                    <span>Remote controls, exterior mounting brackets, and side accordion curtains are not needed.</span>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <MapPin className="size-4 text-cyan-400 mt-0.5 shrink-0" />
+                                    <span>Warehouse Facility: <strong>94-150 Leoleo St. #203, Waipahu, HI 96797</strong> (subject to phone scheduling).</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Summary & Booking Card */}
+                        <div className="lg:col-span-5 bg-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
+                            <div>
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400 block mb-1">
+                                    Fixed Warehouse Rate
+                                </span>
+                                <div className="flex items-baseline gap-2 mb-4">
+                                    <span className="text-4xl sm:text-5xl font-header font-black text-white">$275</span>
+                                    <span className="text-slate-400 text-xs font-semibold">/ unit flat rate</span>
+                                </div>
+
+                                <div className="space-y-2.5 py-4 border-y border-slate-800 text-xs text-slate-300">
+                                    <div className="flex justify-between">
+                                        <span className="text-slate-400">Selected Capacity:</span>
+                                        <span className="font-bold text-white uppercase">{selectedBtu} BTU</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-slate-400">Standard Turnaround:</span>
+                                        <span className="font-bold text-cyan-400">24 – 48 Hours</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-slate-400">Service Scope:</span>
+                                        <span className="font-bold text-emerald-400">Full Teardown & Rust Barrier</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-slate-400">Delta-T Performance Test:</span>
+                                        <span className="font-bold text-white">Included Before Pickup</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-6">
+                                <Link
+                                    href={`/contact?service=Window+AC+Cleaning&unitSize=${encodeURIComponent(selectedBtu)}&notes=Waipahu+Warehouse+Teardown+$275`}
+                                    className="w-full py-3.5 px-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2"
+                                >
+                                    Schedule {selectedBtu} Drop-Off ($275) <ArrowRight className="size-4" />
+                                </Link>
+                                <div className="text-center mt-2.5">
+                                    <a href="tel:808-488-1111" className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors">
+                                        Or call (808) 488-1111 to coordinate drop-off
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

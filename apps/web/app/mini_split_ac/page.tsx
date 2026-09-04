@@ -1,6 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { BackToTop } from '@/components/BackToTop';
 import MiniSplitEstimator from '@/components/MiniSplitEstimator';
@@ -15,148 +17,99 @@ import {
     Waves, 
     Phone, 
     ArrowRight,
-    Sparkles
+    Sparkles,
+    ChevronDown,
+    Filter
 } from 'lucide-react';
 
-export const metadata: Metadata = {
-    title: {
-        absolute: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Affordable Home A/C'
+const brands = [
+    {
+        id: "mitsubishi",
+        name: "MITSUBISHI ELECTRIC",
+        badge: "Diamond Precision",
+        className: "font-header font-bold tracking-normal uppercase text-xl text-red-500",
+        description: "Mitsubishi Electric is the gold standard for whisper-quiet comfort on Oahu. Operating at sound levels as low as 19 dBA (quieter than a human whisper), their smart 3D i-See Sensor detects room hot spots in real time. Features factory Blue Fin anti-corrosion coil treatment to stand up to Hawaii trade winds.",
+        airHandlerImg: "/assets/minisplitacphotos/mini-split-mitsubishi-air-handler.png",
+        condenserImg: "/assets/minisplitacphotos/mini-split-mitsubishi-condenser.png",
+        airHandlerScale: "scale-[1.5]",
+        condenserScale: "scale-[1.5]",
+        warranty: "10–12 Year Compressor & Parts Warranty",
+        buttonClass: "bg-red-600 text-white hover:bg-red-500 border border-red-500/50"
     },
-    description: 'Ductless mini split AC installation in Oahu. In-stock at our Waipahu warehouse for fast island installation. CT-36775 licensed. Free $250 in-home sizing & electrical survey.',
-    alternates: {
-        canonical: '/mini_split_ac',
+    {
+        id: "fujitsu",
+        name: "FUJITSU HALCYON",
+        badge: "Tropical High Efficiency",
+        className: "font-sans font-bold italic tracking-widest text-2xl text-red-400",
+        description: "Engineered specifically for extreme tropical humidity, Fujitsu Halcyon systems offer industry-leading SEER2 efficiency that dramatically slashes monthly HECO power bills. Equipped with factory Blue Fin hydrophilic coil coating and high-capacity inverter scroll compressors designed for years of uninterrupted island cooling.",
+        airHandlerImg: "/assets/minisplitacphotos/mini-split-fujitsu-air-handler.png",
+        condenserImg: "/assets/minisplitacphotos/mini-split-fujitsu-condenser.png",
+        airHandlerScale: "scale-[1.4]",
+        condenserScale: "scale-100",
+        warranty: "10–12 Year Factory Warranty",
+        buttonClass: "bg-red-600 text-white hover:bg-red-500 border border-red-500/50"
     },
-    openGraph: {
-        title: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Affordable Home A/C',
-        description: 'Ductless mini split AC installation in Oahu. In-stock at our Waipahu warehouse for fast island installation. CT-36775 licensed. Free in-home sizing survey.',
-        url: '/mini_split_ac',
-        siteName: 'Affordable Home A/C',
-        type: 'website',
+    {
+        id: "daikin",
+        name: "DAIKIN INVERTER",
+        badge: "Smart Inverter Value",
+        className: "font-header font-medium tracking-widest text-2xl text-sky-400",
+        description: "Daikin is the global pioneer in variable-speed inverter air conditioning. Their outdoor condensers feature proprietary anti-corrosion acrylic resin Blue Fin heat exchangers tested against ASTM B117 salt spray standards for coastal longevity. Perfect for multi-zone residential cooling across Oahu.",
+        airHandlerImg: "/assets/minisplitacphotos/mini-split-daikin-condenser.png",
+        condenserImg: "/assets/minisplitacphotos/mini-split-daikin-air-handler.png",
+        airHandlerScale: "scale-[1.8]",
+        condenserScale: "scale-100",
+        warranty: "10–12 Year Unit Replacement Warranty",
+        buttonClass: "bg-sky-500 text-slate-950 hover:bg-sky-400 border border-sky-400/50"
+    },
+    {
+        id: "carrier",
+        name: "CARRIER DUCTLESS",
+        badge: "Heavy-Duty Heritage",
+        className: "font-sans font-extrabold tracking-tighter text-3xl text-blue-500",
+        description: "Carrier invented modern air conditioning, and their ductless mini splits pack heavy-duty cooling power into sleek, compact air handlers. Featuring Golden Fin hydrophilic condenser coatings that prevent salt deposits and microbial buildup, Carrier systems deliver rapid temperature pull-down for large, sunny living spaces.",
+        airHandlerImg: "/assets/minisplitacphotos/mini-split-carrier-air-handler.png",
+        condenserImg: "/assets/minisplitacphotos/mini-split-carrier-condenser.png",
+        airHandlerScale: "scale-[1.8]",
+        condenserScale: "scale-[1.1]",
+        warranty: "10 Year Compressor Warranty",
+        buttonClass: "bg-blue-600 text-white hover:bg-blue-500 border border-blue-500/50"
     }
-};
+];
+
+const faqs = [
+    {
+        q: "How fast can you install a mini-split on Oahu?",
+        a: "Because we maintain local inventory in our Waipahu warehouse, we do not make homeowners wait 4 to 8 weeks for mainland container shipping. Once your free in-home sizing survey is completed and equipment is selected, installation is typically completed within 3 to 5 business days (subject to scheduling and crew availability)."
+    },
+    {
+        q: "What is Blue Fin coastal protection and why is it essential in Hawaii?",
+        a: "Oahu's continuous trade winds carry microscopic ocean salt particles that quickly corrode and pit uncoated aluminum cooling fins within 2 to 4 years. Factory Blue Fin treatment applies a durable acrylic resin and hydrophilic film to the condenser coils, preventing galvanic corrosion, shedding salt spray, and extending system lifespan."
+    },
+    {
+        q: "Will a mini-split work with my older Oahu home's electrical panel?",
+        a: "Yes. Many older homes in Kailua, Kaneohe, Pearl City, and Kaimuki have 60A or 100A main panels. During your free $250 in-home survey, our licensed CT-36775 technicians calculate your breaker load and identify subpanel capacity to ensure your installation proceeds smoothly with zero surprise electrician bills."
+    },
+    {
+        q: "Can I install mini-splits in an Oahu townhouse or condo with strict HOA rules?",
+        a: "Yes, subject to detailed scope of work, property inspection, and management approval to accept. We specialize in HOA-compliant installations across planned communities like Mililani Mauka, Ewa Beach, Kapolei, and Hawaii Kai. We install color-matched, UV-resistant architectural line-hide conduits that neatly enclose all refrigerant pipes, wiring, and drain lines flush against your exterior walls to pass HOA architectural review."
+    },
+    {
+        q: "Do your mini-splits comply with Honolulu residential noise ordinances?",
+        a: "Yes. In dense Oahu neighborhoods and zero-lot-line communities, neighbor noise complaints can be an issue. Our Mitsubishi Electric and Fujitsu inverter systems operate as low as 19 dBA indoors and under 50 dBA outdoors, comfortably surpassing Honolulu Department of Health Title 11 boundary noise standards."
+    }
+];
 
 export default function MiniSplitsPage() {
-    const brands = [
-        {
-            name: "MITSUBISHI ELECTRIC",
-            badge: "Diamond Precision",
-            className: "font-header font-bold tracking-normal uppercase text-xl text-red-500",
-            description: "Mitsubishi Electric is the gold standard for whisper-quiet comfort on Oahu. Operating at sound levels as low as 19 dBA (quieter than a human whisper), their smart 3D i-See Sensor detects room hot spots in real time. Features factory Blue Fin anti-corrosion coil treatment to stand up to Hawaii trade winds.",
-            airHandlerImg: "/assets/minisplitacphotos/mini-split-mitsubishi-air-handler.png",
-            condenserImg: "/assets/minisplitacphotos/mini-split-mitsubishi-condenser.png",
-            airHandlerScale: "scale-[1.5]",
-            condenserScale: "scale-[1.5]",
-            warranty: "10–12 Year Compressor & Parts Warranty",
-            buttonClass: "bg-red-600 text-white hover:bg-red-500 border border-red-500/50"
-        },
-        {
-            name: "FUJITSU HALCYON",
-            badge: "Tropical High Efficiency",
-            className: "font-sans font-bold italic tracking-widest text-2xl text-red-400",
-            description: "Engineered specifically for extreme tropical humidity, Fujitsu Halcyon systems offer industry-leading SEER2 efficiency that dramatically slashes monthly HECO power bills. Equipped with factory Blue Fin hydrophilic coil coating and high-capacity inverter scroll compressors designed for years of uninterrupted island cooling.",
-            airHandlerImg: "/assets/minisplitacphotos/mini-split-fujitsu-air-handler.png",
-            condenserImg: "/assets/minisplitacphotos/mini-split-fujitsu-condenser.png",
-            airHandlerScale: "scale-[1.4]",
-            condenserScale: "scale-100",
-            warranty: "10–12 Year Factory Warranty",
-            buttonClass: "bg-red-600 text-white hover:bg-red-500 border border-red-500/50"
-        },
-        {
-            name: "DAIKIN INVERTER",
-            badge: "Smart Inverter Value",
-            className: "font-header font-medium tracking-widest text-2xl text-sky-400",
-            description: "Daikin is the global pioneer in variable-speed inverter air conditioning. Their outdoor condensers feature proprietary anti-corrosion acrylic resin Blue Fin heat exchangers tested against ASTM B117 salt spray standards for coastal longevity. Perfect for multi-zone residential cooling across Oahu.",
-            airHandlerImg: "/assets/minisplitacphotos/mini-split-daikin-condenser.png",
-            condenserImg: "/assets/minisplitacphotos/mini-split-daikin-air-handler.png",
-            airHandlerScale: "scale-[1.8]",
-            condenserScale: "scale-100",
-            warranty: "10–12 Year Unit Replacement Warranty",
-            buttonClass: "bg-sky-500 text-slate-950 hover:bg-sky-400 border border-sky-400/50"
-        },
-        {
-            name: "CARRIER DUCTLESS",
-            badge: "Heavy-Duty Heritage",
-            className: "font-sans font-extrabold tracking-tighter text-3xl text-blue-500",
-            description: "Carrier invented modern air conditioning, and their ductless mini splits pack heavy-duty cooling power into sleek, compact air handlers. Featuring Golden Fin hydrophilic condenser coatings that prevent salt deposits and microbial buildup, Carrier systems deliver rapid temperature pull-down for large, sunny living spaces.",
-            airHandlerImg: "/assets/minisplitacphotos/mini-split-carrier-air-handler.png",
-            condenserImg: "/assets/minisplitacphotos/mini-split-carrier-condenser.png",
-            airHandlerScale: "scale-[1.8]",
-            condenserScale: "scale-[1.1]",
-            warranty: "10 Year Compressor Warranty",
-            buttonClass: "bg-blue-600 text-white hover:bg-blue-500 border border-blue-500/50"
-        }
-    ];
+    const [selectedBrand, setSelectedBrand] = useState<string>('all');
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-    const faqs = [
-        {
-            q: "How fast can you install a mini-split on Oahu?",
-            a: "Because we maintain local inventory in our Waipahu warehouse, we do not make homeowners wait 4 to 8 weeks for mainland container shipping. Once your free in-home sizing survey is completed and equipment is selected, installation is typically completed within 3 to 5 business days (subject to scheduling and crew availability)."
-        },
-        {
-            q: "What is Blue Fin coastal protection and why is it essential in Hawaii?",
-            a: "Oahu's continuous trade winds carry microscopic ocean salt particles that quickly corrode and pit uncoated aluminum cooling fins within 2 to 4 years. Factory Blue Fin treatment applies a durable acrylic resin and hydrophilic film to the condenser coils, preventing galvanic corrosion, shedding salt spray, and extending system lifespan."
-        },
-        {
-            q: "Will a mini-split work with my older Oahu home's electrical panel?",
-            a: "Yes. Many older homes in Kailua, Kaneohe, Pearl City, and Kaimuki have 60A or 100A main panels. During your free $250 in-home survey, our licensed CT-36775 technicians calculate your breaker load and identify subpanel capacity to ensure your installation proceeds smoothly with zero surprise electrician bills."
-        },
-        {
-            q: "Can I install mini-splits in an Oahu townhouse or condo with strict HOA rules?",
-            a: "Yes, subject to detailed scope of work, property inspection, and management approval to accept. We specialize in HOA-compliant installations across planned communities like Mililani Mauka, Ewa Beach, Kapolei, and Hawaii Kai. We install color-matched, UV-resistant architectural line-hide conduits that neatly enclose all refrigerant pipes, wiring, and drain lines flush against your exterior walls to pass HOA architectural review."
-        },
-        {
-            q: "Do your mini-splits comply with Honolulu residential noise ordinances?",
-            a: "Yes. In dense Oahu neighborhoods and zero-lot-line communities, neighbor noise complaints can be an issue. Our Mitsubishi Electric and Fujitsu inverter systems operate as low as 19 dBA indoors and under 50 dBA outdoors, comfortably surpassing Honolulu Department of Health Title 11 boundary noise standards."
-        }
-    ];
-
-    const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": faqs.map(f => ({
-            "@type": "Question",
-            "name": f.q,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": f.a
-            }
-        }))
-    };
-
-    const serviceSchema = {
-        "@context": "https://schema.org",
-        "@type": "HVACService",
-        "name": "Ductless Mini Split AC Installation Oahu",
-        "provider": {
-            "@type": "HVACBusiness",
-            "name": "Affordable Home A/C",
-            "telephone": "+1-808-488-1111",
-            "licenseNumber": "CT-36775",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "94-150 Leoleo St. #203",
-                "addressLocality": "Waipahu",
-                "addressRegion": "HI",
-                "postalCode": "96797",
-                "addressCountry": "US"
-            }
-        },
-        "areaServed": "Oahu",
-        "description": "Professional ductless mini-split AC installation in Oahu. In-stock units in Waipahu warehouse with 10-12 year warranties and factory Blue Fin coastal salt protection."
-    };
+    const filteredBrands = selectedBrand === 'all' 
+        ? brands 
+        : brands.filter(b => b.id === selectedBrand);
 
     return (
         <div className="bg-slate-950 min-h-screen text-white selection:bg-cyan-500 selection:text-slate-950">
-            {/* Inject Structured Data for Rich Snippets */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-            />
-
             {/* HERO SECTION */}
             <section className="relative pt-[140px] md:pt-[175px] pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
                 <div className="text-center max-w-4xl mx-auto flex flex-col items-center">
@@ -290,15 +243,42 @@ export default function MiniSplitsPage() {
 
             {/* BRAND SHOWCASE WITH DIRECT ACTIONS */}
             <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                <div className="text-center mb-12">
+                <div className="text-center mb-8">
                     <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest block mb-2">Factory-Authorized Equipment</span>
-                    <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-wide">
+                    <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-wide mb-4">
                         Premium Ductless Brands <span className="text-cyan-400">Stocked on Oahu</span>
                     </h2>
+                    <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto">
+                        In-stock in our Waipahu warehouse for same-week installation. Filter by brand below:
+                    </p>
+                </div>
+
+                {/* Interactive Brand Filter Tabs */}
+                <div className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
+                    {[
+                        { id: 'all', label: 'All Brands (4)' },
+                        { id: 'mitsubishi', label: 'Mitsubishi Electric' },
+                        { id: 'fujitsu', label: 'Fujitsu Halcyon' },
+                        { id: 'daikin', label: 'Daikin Inverter' },
+                        { id: 'carrier', label: 'Carrier Ductless' }
+                    ].map((tab) => (
+                        <button
+                            key={tab.id}
+                            type="button"
+                            onClick={() => setSelectedBrand(tab.id)}
+                            className={`px-4 py-2 rounded-xl text-xs font-header font-bold uppercase tracking-wider transition-all ${
+                                selectedBrand === tab.id
+                                    ? 'bg-primary text-slate-950 shadow-[0_0_15px_rgba(0,174,239,0.4)] scale-105'
+                                    : 'bg-slate-900/80 text-slate-300 border border-slate-800 hover:border-slate-700 hover:text-white'
+                            }`}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
                 </div>
 
                 <div className="flex flex-col gap-12 mb-16">
-                    {brands.map((brand) => (
+                    {filteredBrands.map((brand) => (
                         <div 
                             key={brand.name} 
                             id={brand.name.toLowerCase().replace(/\s+/g, '-')} 
@@ -354,7 +334,7 @@ export default function MiniSplitsPage() {
                 </div>
             </section>
 
-            {/* OAHU INSTALLATION FAQ ACCORDION */}
+            {/* OAHU INSTALLATION FAQ ACCORDION (INTERACTIVE) */}
             <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-slate-900">
                 <div className="text-center mb-10">
                     <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest block mb-2">Got Questions?</span>
@@ -363,21 +343,36 @@ export default function MiniSplitsPage() {
                     </h2>
                 </div>
 
-                <div className="space-y-4">
-                    {faqs.map((faq, idx) => (
-                        <div 
-                            key={idx} 
-                            className="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors"
-                        >
-                            <h3 className="font-header font-bold text-base sm:text-lg text-white mb-2 flex items-start gap-2">
-                                <span className="text-cyan-400 font-mono">Q:</span>
-                                {faq.q}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed pl-6">
-                                {faq.a}
-                            </p>
-                        </div>
-                    ))}
+                <div className="space-y-3.5">
+                    {faqs.map((faq, idx) => {
+                        const isOpen = openFaq === idx;
+                        return (
+                            <div 
+                                key={idx} 
+                                className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden transition-colors hover:border-slate-700"
+                            >
+                                <button
+                                    type="button"
+                                    onClick={() => setOpenFaq(isOpen ? null : idx)}
+                                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-header font-bold text-white text-base sm:text-lg"
+                                >
+                                    <span className="flex items-start gap-2.5">
+                                        <span className="text-cyan-400 font-mono text-sm">Q:</span>
+                                        {faq.q}
+                                    </span>
+                                    <ChevronDown className={`size-5 text-cyan-400 shrink-0 transition-transform duration-300 ${
+                                        isOpen ? 'rotate-180' : ''
+                                    }`} />
+                                </button>
+
+                                {isOpen && (
+                                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/60 pl-10">
+                                        {faq.a}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
             </section>
 

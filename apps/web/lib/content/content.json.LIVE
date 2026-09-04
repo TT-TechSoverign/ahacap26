@@ -33,7 +33,7 @@
                     "description": "Eliminate Hot Spots & High Bills. > Our ultra-quiet ductless mini splits provide targeted cooling for any size of rooms. Whether it\u2019s a new Installation or a Retrofit for an older Oahu home, weoffer full Service & Repairs to keep your sanctuary cool and quiet",
                     "link": "MORE INFO",
                     "icon": "ac_unit",
-                    "href": "/contact",
+                    "href": "/mini_split_ac",
                     "color": "primary"
                 },
                 {
@@ -621,7 +621,7 @@
             "description_p2_suffix": "and bacteria. Without regular professional sanitization, your window unit becomes a distribution system for allergens, causing \"Sick Building Syndrome\" symptoms like headaches, fatigue, andrespiratory distress.",
             "description_p3_prefix": "Furthermore, salt-air corrosion eats away at sensitive aluminum fins and copper tubing. Our deep cleaning process includes a specialized",
             "description_p3_highlight": "Corrosion Inhibitor Treatment",
-            "description_p3_suffix": "that neutralizes salt deposits, potentially extending your unit's lifespan by 3-5 years."
+            "description_p3_suffix": "that neutralizes salt deposits and helps protect your unit from premature coastal corrosion failure."
         },
         "process": {
             "title": "OUR PROPRIETARY 25-POINT",

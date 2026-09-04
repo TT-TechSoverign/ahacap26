@@ -2,19 +2,58 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Ductless Mini Split AC Cleaning Oahu | Deep Mold Sanitization | Affordable Home A/C'
+        absolute: 'Mini Split AC Deep Cleaning Oahu | $175-$275 Mold Sanitization | Affordable Home A/C'
     },
-    description: 'Expert ductless mini split cleaning service in Oahu. Eradicate black mold, salt-air buildup, and musty odors with our $175-$225 professional deep sanitization.',
+    description: 'Expert ductless mini split deep cleaning in Oahu. Eradicate black mold, salt-air buildup, and musty odors with our $175 Basic or $275 Full Teardown deep sanitization. Zero indoor water mess. Call (808) 488-1111.',
     alternates: {
-        canonical: '/mini_split_ac_maintenance',
+        canonical: 'https://www.affordablehome-ac.com/mini_split_ac_maintenance',
     },
     openGraph: {
-        title: 'Ductless Mini Split AC Cleaning Oahu | Deep Mold Sanitization | Affordable Home A/C',
-        description: 'Expert ductless mini split cleaning service in Oahu. Eradicate black mold, salt-air buildup, and musty odors with our $175-$225 professional deep sanitization.',
-        url: '/mini_split_ac_maintenance',
+        title: 'Mini Split AC Deep Cleaning Oahu | $175-$275 Mold Sanitization | Affordable Home A/C',
+        description: 'Eradicate black mold, salt-air buildup, and musty odors with our $175 Basic or $275 Full Teardown deep sanitization. Zero indoor water mess. Call (808) 488-1111.',
+        url: 'https://www.affordablehome-ac.com/mini_split_ac_maintenance',
         siteName: 'Affordable Home A/C',
         type: 'website',
+        images: [
+            {
+                url: 'https://www.affordablehome-ac.com/assets/minisplitacphotos/mini-split-premium-maintenance-before-after-800x800.png',
+                width: 800,
+                height: 800,
+                alt: 'Mini Split AC Deep Cleaning Before and After',
+            }
+        ]
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Mini Split AC Deep Cleaning Oahu | $175-$275 Mold Sanitization | Affordable Home A/C',
+        description: 'Eradicate black mold, salt-air buildup, and musty odors with our $175 Basic or $275 Full Teardown deep sanitization. Zero indoor water mess. Call (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/minisplitacphotos/mini-split-premium-maintenance-before-after-800x800.png'],
     }
+};
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Mini Split AC",
+            "item": "https://www.affordablehome-ac.com/mini_split_ac"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Mini Split AC Cleaning",
+            "item": "https://www.affordablehome-ac.com/mini_split_ac_maintenance"
+        }
+    ]
 };
 
 const miniSplitFaqSchema = {
@@ -26,7 +65,7 @@ const miniSplitFaqSchema = {
             "name": "How much does ductless mini-split cleaning cost in Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our basic mini-split sanitization is $175 per unit, and our full clinical deep chemical teardown is $225 per unit. Multi-unit residential discounts are available."
+                "text": "Our routine basic mini-split sanitization is $175 per unit, and our full clinical deep chemical teardown is $275 per unit. Multi-unit residential scheduling is available across Oahu."
             }
         },
         {
@@ -52,6 +91,14 @@ const miniSplitFaqSchema = {
                 "@type": "Answer",
                 "text": "Yes. Mold and dust choking the blower wheel and coil restrict airflow, forcing your inverter compressor to run at higher wattage and increasing monthly power consumption by 20% to 30%."
             }
+        },
+        {
+            "@type": "Question",
+            "name": "Will the chemical cleaning make a mess or leave chemical fumes in my house?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Our technicians install an airtight catchment wash-bag with a sealed drain hose directly beneath your wall unit. All dirty water, mold slurry, and chemical rinse flow directly into our containment buckets with zero water splashing on your floors or drywall."
+            }
         }
     ]
 };
@@ -75,12 +122,36 @@ const hvacServiceSchema = {
         }
     },
     "areaServed": "Oahu",
-    "description": "Professional ductless mini-split cleaning and chemical sanitization service across all Oahu neighborhoods."
+    "description": "Professional ductless mini-split cleaning and chemical sanitization service across all Oahu neighborhoods. Restores ice-cold airflow, eliminates black mold, and prevents water leaks.",
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Mini Split Cleaning Services",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "name": "Basic Mini Split AC Cleaning",
+                "price": "175.00",
+                "priceCurrency": "USD",
+                "description": "Coil wipe-down, filter wash, pressure check, and drain line flush."
+            },
+            {
+                "@type": "Offer",
+                "name": "Premium Chemical Teardown Deep Cleaning",
+                "price": "275.00",
+                "priceCurrency": "USD",
+                "description": "Full clinical indoor teardown, blower wheel deep power flush, microbial mold purge, and coil descaling."
+            }
+        ]
+    }
 };
 
 export default function MiniSplitAcMaintenanceLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(miniSplitFaqSchema) }}

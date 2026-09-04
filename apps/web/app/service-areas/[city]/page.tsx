@@ -62,15 +62,15 @@ export function generateMetadata({ params }: Props): Metadata {
  
     const title = `${cityData.name} Split AC Repair & HVAC | Affordable Home A/C`;
     
-    let description = `AC broken in ${cityData.name}? Get licensed HVAC technicians for split AC installation, window AC cleaning, and $150 mini-split diagnostics.`;
+    let description = `AC issues in ${cityData.name}? Licensed HVAC technicians for split AC installation, $275 window AC teardown drop-off, and diagnostic troubleshooting.`;
     if (cityData.regionId === 'windward') {
-        description = `Salt-air rust protection. Expert split AC installation, window AC cleaning & $150 mini-split diagnostics in ${cityData.name}, Oahu. Licensed HVAC technicians.`;
+        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Licensed HVAC technicians for ductless split AC installation, $275 window AC cleaning & diagnostic repair.`;
     } else if (cityData.regionId === 'leeward') {
-        description = `Local heat relief. Expert split AC installation, window AC cleaning & $150 mini-split diagnostics in ${cityData.name}, Oahu. Licensed HVAC technicians.`;
+        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Ductless split AC installation, $275 window AC teardown cleaning, and expert HVAC diagnostic troubleshooting.`;
     } else if (cityData.regionId === 'metro') {
-        description = `Quiet operation cooling. Expert split AC installation, window AC cleaning & $150 mini-split diagnostics in ${cityData.name}, Oahu. Licensed HVAC technicians.`;
+        description = `Whisper-quiet zoned cooling in ${cityData.name}, Oahu. Licensed technicians for mini-split AC installation, $275 window AC cleaning & diagnostic repair.`;
     } else if (cityData.regionId === 'central') {
-        description = `Valley dehumidification cooling. Expert split AC installation, window AC cleaning & $150 mini-split diagnostics in ${cityData.name}, Oahu. Licensed HVAC technicians.`;
+        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock mini-split installation, $275 window AC teardown cleaning & expert diagnostic troubleshooting.`;
     }
  
     return {
