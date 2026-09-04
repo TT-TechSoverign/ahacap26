@@ -40,34 +40,7 @@ export default function MaintenancePage() {
 
     return (
         <div className="bg-navy-deep text-slate-100 selection:bg-primary selection:text-white min-h-screen font-sans">
-            {/* Header */}
-            <header className="fixed top-9 w-full z-50 glass-header">
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="relative h-20 w-80">
-                            <Link href="/">
-                                <Image
-                                    src="/assets/ahac-logo-updated-businfo.png"
-                                    alt="Affordable Home A/C"
-                                    fill
-                                    className="object-contain object-left"
-                                    priority
-                                />
-                            </Link>
-                        </div>
-                    </div>
-                    <nav className="hidden md:flex items-center gap-8">
-                        <Link href="/shop" className="nav-link text-sm tracking-widest hover:text-primary transition-colors">SHOP INVENTORY</Link>
-                        <Link href="/maintenance" className="nav-link text-sm tracking-widest hover:text-primary transition-colors text-primary">AC CLEANING</Link>
-                        <Link href="/mini-splits" className="nav-link text-sm tracking-widest hover:text-primary transition-colors">MINI SPLITS</Link>
-                        <Link href="/central-ac" className="nav-link text-sm tracking-widest hover:text-primary transition-colors">CENTRAL AC</Link>
-                    </nav>
-                    <Button className="uppercase">
-                        Contact Us
-                    </Button>
-                </div>
-            </header>
-            <main className="pt-[140px]">
+            <main className="pt-[140px] md:pt-[175px]">
                 {/* Hero Section */}
                 <section className="relative min-h-[90vh] flex items-center">
                     <div className="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcVdFY3rHs14g2-_QA7wRHU-vcgZckJP0be7QAsq2RCyag57umMKrw6azbu9TgP6l6Q1-76RYDTGDAxgvXt9Go3auTit553tQ1FsWe2T3HD1CVhY5Xg_I64wM8ipf8rtQY8IzMyjA5VOfq5QDVxP4F5g0oNiLj1TO8pimFeQldwv5G5easf3EbH5IWihuU_6T0g_Pcky_o4gcfvVwq1pDnFDoqd7rIrzOURx4kkiQ3Z_u12M1kNm43JkQ1u1M03lChyrrunm1QZiKP')] bg-cover bg-center opacity-20"></div>

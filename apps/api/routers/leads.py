@@ -18,10 +18,10 @@ router = APIRouter()
 # Pydantic Model for Incoming Lead
 class LeadCreate(BaseModel):
     first_name: str
-    last_name: str
+    last_name: Optional[str] = ""
     email: str
     phone: str
-    address: str
+    address: Optional[str] = "Oahu, HI"
     city: Optional[str] = None
     zip: Optional[str] = None
     service_type: str

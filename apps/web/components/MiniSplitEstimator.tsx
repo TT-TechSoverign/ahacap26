@@ -145,6 +145,7 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                 last_name: fullName.trim().split(' ').slice(1).join(' ') || '',
                 phone: phone.trim(),
                 email: 'sales@affordablehome-ac.com', // fallback internal routing
+                address: city.trim() ? `${city.trim()}, Oahu, HI` : 'Oahu, HI',
                 city: city.trim() || 'Oahu',
                 service_type: 'Mini Split Installation (New)',
                 urgency: timeline === 'asap' ? 'immediate' : 'standard',

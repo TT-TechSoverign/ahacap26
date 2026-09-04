@@ -85,8 +85,53 @@ export default function ACRepairPage() {
         }
     ];
 
+    const repairFaqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": repairFaqs.map(f => ({
+            "@type": "Question",
+            "name": f.q,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+            }
+        }))
+    };
+
+    const repairServiceSchema = {
+        "@context": "https://schema.org",
+        "@type": "HVACService",
+        "name": "Oahu AC Repair & Diagnostic Services",
+        "provider": {
+            "@type": "HVACBusiness",
+            "name": "Affordable Home A/C",
+            "telephone": "+1-808-488-1111",
+            "licenseNumber": "CT-36775",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "94-150 Leoleo St. #203",
+                "addressLocality": "Waipahu",
+                "addressRegion": "HI",
+                "postalCode": "96797",
+                "addressCountry": "US"
+            }
+        },
+        "areaServed": "Oahu",
+        "description": "Expert air conditioning troubleshooting, refrigerant leak detection, and electrical diagnostics across Oahu."
+    };
+
     return (
         <main className="min-h-screen bg-background-dark font-sans text-white pb-24 relative overflow-hidden">
+            {/* Schema.org Structured Data */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(repairFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(repairServiceSchema) }}
+            />
+
             {/* Ambient Background Grid */}
             <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" 
                  style={{ backgroundImage: 'radial-gradient(#334155 1px, transparent 1px)', backgroundSize: '32px 32px' }}>

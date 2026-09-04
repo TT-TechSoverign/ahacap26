@@ -1,9 +1,10 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useContent } from '@/lib/context/ContentContext';
 import { BackToTop } from '@/components/BackToTop';
-import { CheckCircle, ArrowRight, Wrench, Zap, Wind, Droplets, ShieldCheck } from 'lucide-react';
+import { CheckCircle, ArrowRight, Wrench, Zap, Wind, Droplets, ShieldCheck, Phone } from 'lucide-react';
 
 export default function MiniSplitACMaintenancePage() {
     const { content } = useContent();
@@ -13,12 +14,33 @@ export default function MiniSplitACMaintenancePage() {
 
     return (
         <div className="bg-background-dark min-h-screen text-white font-sans">
-            {/* Adjusted padding to match shop page logic more closely and scaled down container */}
-            <div className="pt-[140px] md:pt-[165px] lg:pt-[175px] max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            {/* Adjusted padding and expanded container for world-class breathing room */}
+            <div className="pt-[140px] md:pt-[165px] lg:pt-[175px] max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
                 <div className="text-center mb-10 border-b border-white/5 pb-6">
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-header font-black uppercase tracking-widest text-white mb-2 neon-glow">
-                        Mini Split AC <span className="text-primary">Cleaning</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-[0.2em] mb-4">
+                        <ShieldCheck className="size-3.5 text-primary" />
+                        Clinical Mold Eradication & Sanitization
+                    </div>
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-header font-black uppercase tracking-widest text-white mb-4 neon-glow">
+                        Mini Split AC <span className="text-primary">Deep Cleaning</span>
                     </h1>
+                    <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-6">
+                        Eliminate black mold, musty trade-wind odors, and salt-air buildup. Restores 100% cooling capacity and airflow efficiency.
+                    </p>
+                    <div className="flex flex-wrap items-center justify-center gap-4">
+                        <Link 
+                            href="/contact?service=Mini+Split+Maintenance"
+                            className="px-6 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.3)] transition-all"
+                        >
+                            Book Oahu Cleaning
+                        </Link>
+                        <a 
+                            href="tel:808-488-1111"
+                            className="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl border border-slate-700 flex items-center gap-2 transition-colors"
+                        >
+                            <Phone className="size-3.5 text-primary" /> Call (808) 488-1111
+                        </a>
+                    </div>
                 </div>
 
 
@@ -84,10 +106,10 @@ export default function MiniSplitACMaintenancePage() {
                                         <span className="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1.5 object-bottom">/ unit</span>
                                     </div>
                                 </div>
-                                <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary hover:bg-primary/90 text-black text-sm font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
+                                <Link href="/contact?service=Mini+Split+Maintenance&notes=Basic+Cleaning+$175" className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary hover:bg-primary/90 text-black text-sm font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
                                     Schedule Basic Service
                                     <ArrowRight className="transform transition-transform group-hover/btn:translate-x-1 size-4" />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -152,10 +174,10 @@ export default function MiniSplitACMaintenancePage() {
                                         <span className="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1.5">/ unit</span>
                                     </div>
                                 </div>
-                                <a href="/contact" className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary hover:bg-primary/90 text-black text-sm font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
+                                <Link href="/contact?service=Mini+Split+Maintenance&notes=Premium+Chemical+Teardown+$275" className="group/btn flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary hover:bg-primary/90 text-black text-sm font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.2)] hover:shadow-[0_0_20px_rgba(14,165,233,0.4)]">
                                     Schedule Premium Service
                                     <ArrowRight className="transform transition-transform group-hover/btn:translate-x-1 size-4" />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

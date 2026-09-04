@@ -68,6 +68,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/mini_split_ac',
         '/mini_split_ac_maintenance',
         '/window_ac_maintenance',
+        '/sizing',
         '/service-areas',
         ...cityRoutes
     ].map((route) => ({
