@@ -88,6 +88,15 @@ async def get_all_orders(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.Order).order_by(models.Order.created_at.desc()))
     return result.scalars().all()
 
+@router.post("/orders/reconcile")
+async def trigger_order_reconciliation():
+    """
+    Manually triggers Stripe order reconciliation to check recent Stripe sessions
+    and automatically recover any missing orders into the database.
+    """
+    from services.reconciliation import reconcile_unrecorded_stripe_orders
+    return await reconcile_unrecorded_stripe_orders(limit=30)
+
 @router.put("/orders/{order_id}")
 async def update_order_status(order_id: str, payload: OrderUpdate, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.Order).where(models.Order.id == order_id))

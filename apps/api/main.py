@@ -58,7 +58,18 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"WARNING: SMTP Check Failed entirely: {e}")
 
+    # 1. Start Self-Healing Order Reconciliation Background Task
+    reconciliation_task = None
+    try:
+        from services.reconciliation import periodic_reconciliation_runner
+        reconciliation_task = asyncio.create_task(periodic_reconciliation_runner(interval_seconds=600))
+        print("INFO: [Auto-Reconciliation] Background service registered in lifespan.")
+    except Exception as e:
+        print(f"WARNING: Failed to start periodic reconciliation runner: {e}")
+
     yield
+    if reconciliation_task:
+        reconciliation_task.cancel()
     await close_redis()
     await engine.dispose()
 
