@@ -109,10 +109,10 @@ async def fix_schema():
                         details_json TEXT,
                         ip_address VARCHAR(100),
                         created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT (NOW() AT TIME ZONE 'UTC')
-                    );
-                    CREATE INDEX IF NOT EXISTS ix_dev_os_audit_log_action ON dev_os_audit_log(action);
-                    CREATE INDEX IF NOT EXISTS ix_dev_os_audit_log_created_at ON dev_os_audit_log(created_at);
+                    )
                 """))
+                await conn.execute(text("CREATE INDEX IF NOT EXISTS ix_dev_os_audit_log_action ON dev_os_audit_log(action)"))
+                await conn.execute(text("CREATE INDEX IF NOT EXISTS ix_dev_os_audit_log_created_at ON dev_os_audit_log(created_at)"))
                 await conn.execute(text("COMMIT"))
                 logger.info("Table verified: dev_os_audit_log")
         except Exception as e:
