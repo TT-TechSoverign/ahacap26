@@ -6,6 +6,7 @@ import { useCart } from '../context/CartContext';
 import { isCampaignActive } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { sendGAEvent } from '@next/third-parties/google';
+import { trackFunnelEvent } from '@/lib/tracking';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -212,14 +213,26 @@ export function ACSelectorWizard() {
                 custom_area: calculation.area,
                 custom_region: region
             });
+            trackFunnelEvent('sizing_load_calculated', {
+                btu: calculation.recommendedBtu,
+                area: calculation.area,
+                region: region,
+                room_width: width,
+                room_length: length,
+            });
         }
-    }, [step, calculation.recommendedBtu, calculation.area, region]);
+    }, [step, calculation.recommendedBtu, calculation.area, region, width, length]);
 
     // Handle pro help dispatch click
     const handleProHelpClick = () => {
         sendGAEvent('event', 'sizing_wizard_pro_lead', {
             event_category: 'Lead',
             event_label: 'AC Sizing Redirected to Dispatch'
+        });
+        trackFunnelEvent('sizing_pro_lead_click', {
+            btu: calculation.recommendedBtu,
+            area: calculation.area,
+            region: region,
         });
     };
 
@@ -775,7 +788,15 @@ export function ACSelectorWizard() {
                                                     {/* CTA Actions */}
                                                     <div className="flex gap-3 pt-6 mt-4 border-t border-white/5">
                                                         <button
-                                                            onClick={() => addToCart(product)}
+                                                            onClick={() => {
+                                                                addToCart(product);
+                                                                trackFunnelEvent('sizing_add_to_cart', {
+                                                                    product_id: product.id,
+                                                                    name: product.name,
+                                                                    price: activePrice,
+                                                                    btu: product.btu
+                                                                });
+                                                            }}
                                                             disabled={product.stock === 0}
                                                             className="flex-1 py-3 bg-primary hover:bg-primary/95 hover:scale-[1.02] disabled:opacity-50 text-black font-black uppercase text-[10px] tracking-wider rounded-xl transition-all shadow-[0_0_15px_rgba(0,174,239,0.15)] flex items-center justify-center gap-1"
                                                         >

@@ -58,7 +58,7 @@ services:
       - PROMO_ENABLED=False
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_PIN=${ADMIN_PIN}
-      - KHON2_PORTAL_PASSWORD=${KHON2_PORTAL_PASSWORD}
+      - DEV_OS_MASTER_PASSWORD=${DEV_OS_MASTER_PASSWORD}
       - REVALIDATE_SECRET=${REVALIDATE_SECRET:-internal_ahac_revalidate_777}
     volumes:
       - ./apps/api/content:/app/content

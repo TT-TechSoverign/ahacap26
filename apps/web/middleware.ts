@@ -173,7 +173,7 @@ export function middleware(request: NextRequest) {
         '/admin', 
         '/checkout', 
         '/maintenance', 
-        '/khon2-seo-portal-qx9v2m', 
+        '/dev-os', 
         '/puck'
     ];
     const isNoIndex = noIndexPaths.some(path => url.pathname.startsWith(path));

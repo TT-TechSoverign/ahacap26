@@ -21,6 +21,7 @@ import {
     ChevronDown,
     Filter
 } from 'lucide-react';
+import { trackFunnelEvent } from '@/lib/tracking';
 
 const brands = [
     {
@@ -137,12 +138,14 @@ export default function MiniSplitsPage() {
                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
                         <a
                             href="#system-builder"
+                            onClick={() => trackFunnelEvent('installation_survey_click', { source: 'hero_cta' })}
                             className="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-base uppercase tracking-wider rounded-xl shadow-[0_0_30px_rgba(0,174,239,0.4)] hover:shadow-[0_0_40px_rgba(0,174,239,0.6)] transition-all flex items-center justify-center gap-2"
                         >
                             Build Your System (Free Survey) <ArrowRight className="size-5" />
                         </a>
                         <a
                             href="tel:808-488-1111"
+                            onClick={() => trackFunnelEvent('click_to_call', { source: 'mini_split_hero' })}
                             className="w-full sm:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold text-base rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition-colors"
                         >
                             <Phone className="size-5 text-cyan-400" /> (808) 488-1111
@@ -265,7 +268,10 @@ export default function MiniSplitsPage() {
                         <button
                             key={tab.id}
                             type="button"
-                            onClick={() => setSelectedBrand(tab.id)}
+                            onClick={() => {
+                                setSelectedBrand(tab.id);
+                                trackFunnelEvent('brand_filter_click', { brand: tab.id, label: tab.label });
+                            }}
                             className={`px-4 py-2 rounded-xl text-xs font-header font-bold uppercase tracking-wider transition-all ${
                                 selectedBrand === tab.id
                                     ? 'bg-primary text-slate-950 shadow-[0_0_15px_rgba(0,174,239,0.4)] scale-105'

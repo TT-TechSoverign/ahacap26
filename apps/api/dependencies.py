@@ -44,7 +44,7 @@ def decode_signed_token_role(token: str) -> Optional[str]:
         expiry = int(expiry_str)
         if time.time() > expiry:
             return None
-        return data  # Returns "admin", "khon2", etc.
+        return data  # Returns "admin", "dev_os_master:irasmussenjobs@gmail.com", etc.
     except Exception:
         return None
 
@@ -70,27 +70,29 @@ async def verify_admin_token(request: Request):
         )
     return True
 
-async def verify_khon2_or_admin_token(request: Request):
+async def verify_dev_os_session(request: Request):
     auth_header = request.headers.get("Authorization")
     token = None
     if auth_header and auth_header.startswith("Bearer "):
         token = auth_header.split(" ")[1]
     
     if not token:
-        token = request.cookies.get("admin_session")
+        token = request.cookies.get("dev_os_session")
         if token and token.startswith("Bearer "):
             token = token.split(" ")[1]
+        elif token:
+            token = token.strip()
             
     if not token:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized access: missing token"
+            detail="Dev OS Master Authentication Required"
         )
         
-    role = decode_signed_token_role(token)
-    if role not in ("admin", "khon2"):
+    role_data = decode_signed_token_role(token)
+    if not role_data or (role_data != "dev_os_master:irasmussenjobs@gmail.com" and role_data != "admin"):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized access: invalid token"
+            detail="Unauthorized: Dev OS Master credentials required"
         )
-    return role
+    return role_data

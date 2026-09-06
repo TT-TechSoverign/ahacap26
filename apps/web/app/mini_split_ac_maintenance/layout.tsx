@@ -81,7 +81,7 @@ const miniSplitFaqSchema = {
             "name": "Does professional cleaning remove black mold from mini-split blower wheels?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. We use specialized indoor catchment wash-bags and deep-cleansing, odor-neutralizing solutions to power-wash hidden black mold, biofilm, and salt buildup from the blower wheel, evaporator coils, and drain pan—restoring crisp, icy airflow with zero water mess inside your home."
+                "text": "Yes. We use multi-point clinical teardowns, full surface and wall protective shielding, and deep-cleansing, odor-neutralizing solutions to power-wash hidden black mold, biofilm, and salt buildup from the blower wheel, evaporator coils, and drain pan—restoring crisp, icy airflow with zero water mess inside your home."
             }
         },
         {
@@ -97,7 +97,7 @@ const miniSplitFaqSchema = {
             "name": "Will the chemical cleaning make a mess or leave chemical fumes in my house?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Our technicians install an airtight catchment wash-bag with a sealed drain hose directly beneath your wall unit. All dirty water, mold slurry, and chemical rinse flow directly into our containment buckets with zero water splashing on your floors or drywall."
+                "text": "No. Our technicians deploy heavy-duty floor and wall protective coverings and high-volume containment buckets directly beneath your unit. All dirty water, mold slurry, and chemical rinse are safely isolated with zero water splashing on your floors or drywall."
             }
         }
     ]

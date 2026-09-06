@@ -28,6 +28,7 @@ import {
     Warehouse,
     Info
 } from 'lucide-react';
+import { trackFunnelEvent } from '@/lib/tracking';
 
 export default function WindowAcMaintenancePage() {
     const { content } = useContent();
@@ -363,7 +364,10 @@ export default function WindowAcMaintenancePage() {
                                         <button
                                             key={opt.id}
                                             type="button"
-                                            onClick={() => setSelectedBtu(opt.id)}
+                                            onClick={() => {
+                                                setSelectedBtu(opt.id);
+                                                trackFunnelEvent('window_ac_btu_select', { btu: opt.id, weight: opt.weight });
+                                            }}
                                             className={`p-4 rounded-xl border text-left transition-all ${
                                                 selectedBtu === opt.id
                                                     ? 'bg-cyan-950/40 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
@@ -434,12 +438,17 @@ export default function WindowAcMaintenancePage() {
                             <div className="mt-6">
                                 <Link
                                     href={`/contact?service=Window+AC+Cleaning&unitSize=${encodeURIComponent(selectedBtu)}&notes=Waipahu+Warehouse+Teardown+$275`}
+                                    onClick={() => trackFunnelEvent('window_ac_dropoff_book_click', { btu: selectedBtu, price: 275 })}
                                     className="w-full py-3.5 px-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2"
                                 >
                                     Schedule {selectedBtu} Drop-Off ($275) <ArrowRight className="size-4" />
                                 </Link>
                                 <div className="text-center mt-2.5">
-                                    <a href="tel:808-488-1111" className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors">
+                                    <a
+                                        href="tel:808-488-1111"
+                                        onClick={() => trackFunnelEvent('click_to_call', { source: 'window_ac_dropoff_calc' })}
+                                        className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors"
+                                    >
                                         Or call (808) 488-1111 to coordinate drop-off
                                     </a>
                                 </div>

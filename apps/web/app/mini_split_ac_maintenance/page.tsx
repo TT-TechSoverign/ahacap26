@@ -21,6 +21,7 @@ import {
     Check,
     CheckCircle2
 } from 'lucide-react';
+import { trackFunnelEvent } from '@/lib/tracking';
 
 export default function MiniSplitACMaintenancePage() {
     const { content } = useContent();
@@ -79,11 +80,16 @@ export default function MiniSplitACMaintenancePage() {
     ];
 
     const toggleSymptom = (id: string) => {
-        if (selectedSymptoms.includes(id)) {
-            setSelectedSymptoms(selectedSymptoms.filter(s => s !== id));
-        } else {
-            setSelectedSymptoms([...selectedSymptoms, id]);
-        }
+        const isAdding = !selectedSymptoms.includes(id);
+        const nextSymptoms = isAdding
+            ? [...selectedSymptoms, id]
+            : selectedSymptoms.filter(s => s !== id);
+        setSelectedSymptoms(nextSymptoms);
+        trackFunnelEvent('symptom_checked', {
+            symptom_id: id,
+            checked: isAdding,
+            total_selected: nextSymptoms.length
+        });
     };
 
     const totalSeverity = selectedSymptoms.reduce((acc, curr) => {
@@ -102,7 +108,7 @@ export default function MiniSplitACMaintenancePage() {
         },
         {
             q: "Does professional cleaning remove black mold from the internal blower wheel?",
-            a: "Yes! Over 90% of mold lives deep inside the cylindrical squirrel-cage blower fan. Our specialized indoor catchment wash-bags and deep-cleansing chemical flushes dissolve and extract mold and biofilm completely—restoring clean, icy-cold airflow."
+            a: "Yes! Over 90% of mold lives deep inside the cylindrical squirrel-cage blower fan. Our specialized multi-point teardown, high-precision rinse systems, and deep-cleansing sanitizing flushes dissolve and extract mold and biofilm completely—restoring clean, icy-cold airflow."
         },
         {
             q: "Can a dirty mini-split AC increase my HECO power bill?",
@@ -110,7 +116,7 @@ export default function MiniSplitACMaintenancePage() {
         },
         {
             q: "Will the chemical cleaning make a water mess inside my home?",
-            a: "Zero water mess. Our technicians mount a custom, sealed catchment wash-bag with a dedicated drain tube directly beneath your wall air handler. All pressurized rinse water and mold residue empty safely into our containment bucket with no splashing on your floors or drywall."
+            a: "Zero water mess. Our technicians thoroughly shield and protect all surrounding floors, walls, and furnishings with heavy-duty drop-cloth coverings and high-volume containment systems. All pressurized rinse water and dislodged mold slurry are safely extracted with zero splashing on your floors or drywall."
         }
     ];
 
@@ -315,7 +321,10 @@ export default function MiniSplitACMaintenancePage() {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <button
                                         type="button"
-                                        onClick={() => setCalcTier('basic')}
+                                        onClick={() => {
+                                            setCalcTier('basic');
+                                            trackFunnelEvent('maintenance_tier_toggle', { tier: 'basic', price: 175 });
+                                        }}
                                         className={`p-4 rounded-xl border text-left transition-all ${
                                             calcTier === 'basic'
                                                 ? 'bg-cyan-950/40 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
@@ -331,7 +340,10 @@ export default function MiniSplitACMaintenancePage() {
 
                                     <button
                                         type="button"
-                                        onClick={() => setCalcTier('premium')}
+                                        onClick={() => {
+                                            setCalcTier('premium');
+                                            trackFunnelEvent('maintenance_tier_toggle', { tier: 'premium', price: 275 });
+                                        }}
                                         className={`p-4 rounded-xl border text-left transition-all ${
                                             calcTier === 'premium'
                                                 ? 'bg-cyan-950/40 border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
@@ -357,7 +369,14 @@ export default function MiniSplitACMaintenancePage() {
                                         <button
                                             key={num}
                                             type="button"
-                                            onClick={() => setCalcUnits(num)}
+                                            onClick={() => {
+                                                setCalcUnits(num);
+                                                trackFunnelEvent('maintenance_units_select', {
+                                                    units: num,
+                                                    tier: calcTier,
+                                                    total: (calcTier === 'basic' ? 175 : 275) * num
+                                                });
+                                            }}
                                             className={`py-3.5 rounded-xl border font-header font-black text-center transition-all ${
                                                 calcUnits === num
                                                     ? 'bg-primary text-slate-950 border-cyan-300 shadow-[0_0_15px_rgba(0,174,239,0.4)]'
@@ -400,11 +419,15 @@ export default function MiniSplitACMaintenancePage() {
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-slate-400">Indoor Protection:</span>
-                                        <span className="font-bold text-emerald-400">Sealed Catchment Bag (Zero Mess)</span>
+                                        <span className="font-bold text-emerald-400">Full Floor & Wall Shielding (Zero Mess)</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-slate-400">Estimated Duration:</span>
-                                        <span className="font-bold text-white">{calcUnits * 45}–{calcUnits * 60} mins total</span>
+                                        <span className="font-bold text-white">
+                                            {calcTier === 'premium'
+                                                ? (calcUnits === 1 ? '~1.5 Hours (90 mins)' : `~${calcUnits * 1.5} Hours Total`)
+                                                : (calcUnits === 1 ? '~1.0 Hour (60 mins)' : `~${calcUnits} Hours Total`)}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -412,12 +435,22 @@ export default function MiniSplitACMaintenancePage() {
                             <div className="mt-6">
                                 <Link
                                     href={`/contact?service=Mini+Split+Maintenance&tier=${encodeURIComponent(tierName)}&units=${calcUnits}&total=$${totalPrice}`}
+                                    onClick={() => trackFunnelEvent('maintenance_book_click', {
+                                        tier: calcTier,
+                                        units: calcUnits,
+                                        total: totalPrice,
+                                        source: 'calculator'
+                                    })}
                                     className="w-full py-3.5 px-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2"
                                 >
                                     Book {calcUnits} {calcUnits === 1 ? 'Unit' : 'Units'} (${totalPrice}) <ArrowRight className="size-4" />
                                 </Link>
                                 <div className="text-center mt-2.5">
-                                    <a href="tel:808-488-1111" className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors">
+                                    <a
+                                        href="tel:808-488-1111"
+                                        onClick={() => trackFunnelEvent('click_to_call', { source: 'mini_split_calculator' })}
+                                        className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors"
+                                    >
                                         Or call (808) 488-1111 to schedule directly
                                     </a>
                                 </div>
@@ -521,6 +554,11 @@ export default function MiniSplitACMaintenancePage() {
                             <div className="mt-6">
                                 <Link
                                     href={`/contact?service=Mini+Split+Maintenance&notes=${encodeURIComponent(`Diagnostic: ${selectedSymptoms.join(', ')} (Severity: ${totalSeverity})`)}`}
+                                    onClick={() => trackFunnelEvent('symptom_diagnosis_book_click', {
+                                        symptoms: selectedSymptoms,
+                                        severity: totalSeverity,
+                                        recommendation: totalSeverity > 4 ? 'teardown' : 'basic'
+                                    })}
                                     className="w-full py-3.5 px-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2"
                                 >
                                     Book Recommended Clean <ArrowRight className="size-4" />

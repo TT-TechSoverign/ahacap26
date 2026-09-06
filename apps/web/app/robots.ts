@@ -25,7 +25,7 @@ export default function robots(): MetadataRoute.Robots {
                     '/admin/', 
                     '/checkout/', 
                     '/maintenance/',
-                    '/khon2-seo-portal-qx9v2m/',
+                    '/dev-os/',
                     '/puck/'
                 ],
             },
