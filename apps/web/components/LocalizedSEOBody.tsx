@@ -118,7 +118,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                     </div>
                 </div>
 
-                {/* Trust & Guarantee Section: Reinforcing the Local Entity */}
+                {/* Trust & Standards Section: Reinforcing the Local Entity */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 border-t border-slate-800/50 mt-4">
                     <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 group">
                         <LucideIcons.Truck className="w-10 h-10 text-[#00E5FF] opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" strokeWidth={1.5} />

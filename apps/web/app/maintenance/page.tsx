@@ -119,7 +119,7 @@ export default function MaintenancePage() {
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                             {[
-                                { icon: "eco", title: "MOLD FREE", sub: "Guaranteed Remediation", color: "text-primary" },
+                                { icon: "eco", title: "MOLD FREE", sub: "Clinical Remediation", color: "text-primary" },
                                 { icon: "thunderstorm", title: "SALT PROTECT", sub: "Corrosion Barrier", color: "text-accent" },
                                 { icon: "speed", title: "30% MORE CFM", sub: "Efficiency Restored", color: "text-primary" },
                                 { icon: "medical_services", title: "HYGIENIC AIR", sub: "Pathogen Neutralization", color: "text-accent" },

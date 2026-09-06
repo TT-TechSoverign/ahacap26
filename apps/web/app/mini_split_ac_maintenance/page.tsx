@@ -393,7 +393,7 @@ export default function MiniSplitACMaintenancePage() {
                             </div>
 
                             <p className="text-[11px] text-slate-400 italic">
-                                * Multi-unit appointments serviced in a single scheduled visit across Oahu. Zero water mess guaranteed.
+                                * Multi-unit appointments serviced in a single scheduled visit across Oahu. Zero water mess protocol.
                             </p>
                         </div>
 

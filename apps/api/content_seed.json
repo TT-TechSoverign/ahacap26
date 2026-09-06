@@ -469,7 +469,7 @@
             "title_italic": "\"Big Box\"",
             "title_gradient": "Buy Local Expert.",
             "subtitle": "Oahu Inventory Hub",
-            "description": "Why risk shipping damage or waiting weeks for mainland freight? Affordable Home A/C stocks thousands of units right here in Waipahu, HI. We handle the warranty so you don't have to.",
+            "description": "Why risk shipping damage or waiting weeks for mainland freight? Affordable Home A/C stocks thousands of units right here in Waipahu, HI for immediate local pickup.",
             "badge": "Waipahu Distribution Center",
             "location": "Waipahu, HI"
         },
@@ -586,7 +586,7 @@
             "features": {
                 "feature1": {
                     "title": "MOLD FREE",
-                    "sub": "Guaranteed Remediation",
+                    "sub": "Clinical Remediation",
                     "color": "text-primary",
                     "icon": "eco"
                 },
