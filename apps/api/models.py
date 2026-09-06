@@ -138,3 +138,13 @@ class AdminUser(Base):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
+class DevOsAuditLog(Base):
+    __tablename__ = "dev_os_audit_log"
+    id = Column(Integer, primary_key=True, index=True)
+    action = Column(String, index=True)
+    actor = Column(String, default="dev_os_master")
+    details_json = Column(String, nullable=True)
+    ip_address = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+
+

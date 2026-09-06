@@ -98,6 +98,27 @@ async def fix_schema():
         for col, dtype in product_cols:
             await add_column("products", col, dtype)
 
+        # 3. Dev OS Audit Log Table
+        try:
+            if dialect != 'sqlite':
+                await conn.execute(text("""
+                    CREATE TABLE IF NOT EXISTS dev_os_audit_log (
+                        id SERIAL PRIMARY KEY,
+                        action VARCHAR(255) NOT NULL,
+                        actor VARCHAR(255) DEFAULT 'dev_os_master',
+                        details_json TEXT,
+                        ip_address VARCHAR(100),
+                        created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT (NOW() AT TIME ZONE 'UTC')
+                    );
+                    CREATE INDEX IF NOT EXISTS ix_dev_os_audit_log_action ON dev_os_audit_log(action);
+                    CREATE INDEX IF NOT EXISTS ix_dev_os_audit_log_created_at ON dev_os_audit_log(created_at);
+                """))
+                await conn.execute(text("COMMIT"))
+                logger.info("Table verified: dev_os_audit_log")
+        except Exception as e:
+            logger.warning(f"Audit log table check notice: {e}")
+            await conn.execute(text("ROLLBACK"))
+
         logger.info("Schema Validation Complete.")
 
 if __name__ == "__main__":

@@ -48,7 +48,10 @@ local_backup_*
 
 # Ignore local scratch and custom scripts
 scratch/
-scripts/
+apps/web/scripts/
+scripts/*
+!scripts/dev-os.*
+!scripts/scan-secrets.*
 *.txt
 *.py
 !apps/api/**/*.py
