@@ -116,7 +116,7 @@ export default function MiniSplitACMaintenancePage() {
         },
         {
             q: "Will the chemical cleaning make a water mess inside my home?",
-            a: "Zero water mess. Our technicians thoroughly shield and protect all surrounding floors, walls, and furnishings with heavy-duty drop-cloth coverings and high-volume containment systems. All pressurized rinse water and dislodged mold slurry are safely extracted with zero splashing on your floors or drywall."
+            a: "Zero water mess. Our technicians lay down clean, heavy-duty floor drop cloths directly beneath your unit and use precision rinses. All dirty water and mold slurry are safely contained and removed from your home with zero water mess on your floors."
         }
     ];
 
@@ -419,7 +419,7 @@ export default function MiniSplitACMaintenancePage() {
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-slate-400">Indoor Protection:</span>
-                                        <span className="font-bold text-emerald-400">Full Floor & Wall Shielding (Zero Mess)</span>
+                                        <span className="font-bold text-emerald-400">Floor Drop-Cloth Protection (Zero Mess)</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-slate-400">Estimated Duration:</span>

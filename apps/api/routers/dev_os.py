@@ -422,9 +422,9 @@ async def get_cro_metadata_recommendations():
             "current_title": "Mini Split AC Deep Cleaning Oahu ($175) | Affordable Home A/C",
             "optimized_title": "Ductless Mini Split AC Cleaning Oahu | Basic $175 • Teardown $275",
             "current_meta_desc": "Professional ductless mini split deep cleaning and sanitization across all Oahu neighborhoods.",
-            "optimized_meta_desc": "Restore ice-cold airflow! Clinical multi-point teardown, full floor & wall shielding (zero mess), and botanical sanitization. ~1-1.5 hrs per unit. CT-36775 licensed.",
+            "optimized_meta_desc": "Restore ice-cold airflow! Clinical multi-point teardown, floor drop-cloth protection (zero mess), and botanical sanitization. ~1-1.5 hrs per unit. CT-36775 licensed.",
             "intent_hooks": [
-                "Full Surface, Floor & Wall Shielding (Zero Mess)",
+                "Floor Drop-Cloth Protection (Zero Mess)",
                 "Basic Maintenance $175 (~1.0 Hr/unit)",
                 "Clinical Chemical Teardown $275 (~1.5 Hrs/unit)",
                 "CT-36775 Licensed & Insured"
