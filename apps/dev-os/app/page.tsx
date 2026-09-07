@@ -28,6 +28,8 @@ import {
     Copy,
     ExternalLink,
     ChevronRight,
+    ChevronDown,
+    ChevronUp,
     Sparkles,
     BarChart3,
     ArrowUpRight,
@@ -52,6 +54,7 @@ import {
     Shield,
     CheckCircle2
 } from 'lucide-react';
+import { SOVEREIGN_SOPS, SopDossier, SopStep } from './sopsData';
 
 // --- TYPES & INTERFACES ---
 
@@ -77,6 +80,7 @@ interface SubMasterMeta {
     lifecycle: 'DORMANT' | 'ACTIVE';
     agents: string[];
     child_agents?: AgentMeta[];
+    sop?: SopDossier;
 }
 
 interface AgentMeta {
@@ -89,6 +93,7 @@ interface AgentMeta {
     lifecycle: 'DORMANT' | 'ACTIVE';
     last_audit?: any;
     last_run_at: string;
+    sop?: SopDossier;
 }
 
 interface OrderItem {
@@ -141,7 +146,7 @@ export default function DevOsEagleEyePage() {
     const [brainData, setBrainData] = useState<any>(null);
     const [inspectTarget, setInspectTarget] = useState<any>(null);
     const [inspectModalOpen, setInspectModalOpen] = useState<boolean>(false);
-    const [modalTab, setModalTab] = useState<'synapse' | 'directives' | 'execution' | 'audit'>('synapse');
+    const [modalTab, setModalTab] = useState<'synapse' | 'directives' | 'execution' | 'audit' | 'sop'>('synapse');
     const [modalRunning, setModalRunning] = useState<boolean>(false);
     const [modalExecutionResult, setModalExecutionResult] = useState<any>(null);
     const [agentFilter, setAgentFilter] = useState<string>('');
@@ -150,6 +155,15 @@ export default function DevOsEagleEyePage() {
     const [timelineData, setTimelineData] = useState<any[]>([]);
     const [injectingHistory, setInjectingHistory] = useState<boolean>(false);
     const [timelineOpen, setTimelineOpen] = useState<boolean>(true);
+
+    // --- AGENT STANDARD OPERATING PROCEDURES (SOPS) STATE ---
+    const [sops, setSops] = useState<Record<string, SopDossier>>(SOVEREIGN_SOPS);
+    const [sopDomainFilter, setSopDomainFilter] = useState<string>('ALL');
+    const [sopSearchQuery, setSopSearchQuery] = useState<string>('');
+    const [expandedSopId, setExpandedSopId] = useState<string | null>(null);
+    const [allSopsExpanded, setAllSopsExpanded] = useState<boolean>(false);
+    const [cardRunResult, setCardRunResult] = useState<Record<string, any>>({});
+    const [cardRunningId, setCardRunningId] = useState<string | null>(null);
 
     // --- CLUSTERS & NODES LAYOUT ---
     const [nodes, setNodes] = useState<NodePosition[]>([
@@ -214,7 +228,7 @@ export default function DevOsEagleEyePage() {
     const fetchAllData = useCallback(async () => {
         if (!isAuthenticated) return;
         try {
-            const [treeRes, ordRes, finRes, infRes, telRes, croRes, audRes, brainRes] = await Promise.all([
+            const [treeRes, ordRes, finRes, infRes, telRes, croRes, audRes, brainRes, sopsRes] = await Promise.all([
                 fetch('/api/v1/dev-os/agents/tree').then(r => r.ok ? r.json() : null),
                 fetch('/api/v1/dev-os/orders').then(r => r.ok ? r.json() : null),
                 fetch('/api/v1/dev-os/financials').then(r => r.ok ? r.json() : null),
@@ -223,7 +237,8 @@ export default function DevOsEagleEyePage() {
                 fetch('/api/v1/dev-os/cro/metadata').then(r => r.ok ? r.json() : null),
                 fetch('/api/v1/dev-os/audit-logs').then(r => r.ok ? r.json() : null),
                 fetch('/api/v1/dev-os/brain/status').then(r => r.ok ? r.json() : null),
-                fetch('/api/v1/dev-os/brain/timeline').then(r => r.ok ? r.json() : null)
+                fetch('/api/v1/dev-os/brain/timeline').then(r => r.ok ? r.json() : null),
+                fetch('/api/v1/dev-os/agents/sops').then(r => r.ok ? r.json() : null)
             ]);
 
             if (treeRes?.submasters) {
@@ -243,6 +258,7 @@ export default function DevOsEagleEyePage() {
             if (audRes?.logs) setAuditLogs(audRes.logs);
             if (brainRes?.brain) setBrainData(brainRes.brain);
             if (brainRes?.timeline || treeRes?.timeline) setTimelineData(brainRes?.timeline || treeRes?.timeline);
+            if (sopsRes?.sops) setSops(prev => ({ ...prev, ...sopsRes.sops }));
             const timelineRes = await fetch('/api/v1/dev-os/brain/timeline').then(r => r.ok ? r.json() : null).catch(() => null);
             if (timelineRes?.timeline) setTimelineData(timelineRes.timeline);
         } catch (e: any) {
@@ -257,6 +273,38 @@ export default function DevOsEagleEyePage() {
         setModalExecutionResult(null);
         setInspectModalOpen(true);
         appendLog(`Opened Visual Synapse Inspector for [${target.name || target.id}]`);
+    };
+
+    const openInspectorSop = (target: any) => {
+        setInspectTarget(target);
+        setModalTab('sop');
+        setModalExecutionResult(null);
+        setInspectModalOpen(true);
+        appendLog(`Opened SOP Protocol Dossier for [${target.name || target.id}]`);
+    };
+
+    const executeSopFromCard = async (id: string, isSubmaster: boolean) => {
+        setCardRunningId(id);
+        appendLog(`⚡ Executing [${id}] via SOP visual card...`);
+        try {
+            if (isSubmaster) {
+                const res = await fetch(`/api/v1/dev-os/agents/submasters/run/${id}`, { method: 'POST' });
+                const data = await res.json();
+                setCardRunResult(prev => ({ ...prev, [id]: data.results || data }));
+                appendLog(`✅ Submaster [${id}] executed via SOP card.`);
+            } else {
+                const res = await fetch(`/api/v1/dev-os/agents/run/${id}`, { method: 'POST' });
+                const data = await res.json();
+                setCardRunResult(prev => ({ ...prev, [id]: data.result || data }));
+                appendLog(`✅ Agent [${id}] executed via SOP card.`);
+            }
+            fetchAllData();
+        } catch (e: any) {
+            setCardRunResult(prev => ({ ...prev, [id]: { error: e.message } }));
+            appendLog(`❌ Execution error for [${id}]: ${e.message}`);
+        } finally {
+            setCardRunningId(null);
+        }
     };
 
     const runTargetFromModal = async () => {
@@ -785,7 +833,7 @@ export default function DevOsEagleEyePage() {
                                     className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 font-mono text-xs font-black text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50"
                                 >
                                     <Zap className="size-4" />
-                                    {fleetRunning ? 'Executing 17 Agents...' : 'Execute Fleet Swarm (17)'}
+                                    {fleetRunning ? 'Executing 21 Agents...' : 'Execute Fleet Swarm (21)'}
                                 </button>
                             </div>
                         </div>
@@ -809,7 +857,7 @@ export default function DevOsEagleEyePage() {
                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                 <span className="text-slate-400 text-[10px] uppercase">Specialized Agents</span>
                                 <div className="mt-1 flex items-baseline gap-2">
-                                    <span className="text-xl font-bold text-emerald-400">{agents.length || 17}</span>
+                                    <span className="text-xl font-bold text-emerald-400">{agents.length || 21}</span>
                                     <span className="text-[10px] text-slate-400">Active</span>
                                 </div>
                             </div>
@@ -1132,6 +1180,299 @@ export default function DevOsEagleEyePage() {
                         </div>
                     </div>
 
+                    {/* STANDARD OPERATING PROCEDURES (SOPS) VISUAL MATRIX (27 FLEET ENTITIES) */}
+                    <div className="rounded-2xl border border-purple-500/30 bg-slate-900/90 p-6 shadow-2xl backdrop-blur-xl space-y-6">
+                        {/* Header with Title, Badges & Expand All Button */}
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+                            <div className="flex items-center gap-4">
+                                <div className="flex size-12 items-center justify-center rounded-2xl border border-purple-500/40 bg-purple-500/10 text-purple-400 shadow-lg shadow-purple-500/20">
+                                    <FileText className="size-6" />
+                                </div>
+                                <div>
+                                    <div className="flex items-center gap-2">
+                                        <h2 className="text-lg font-black tracking-tight text-white font-mono uppercase">
+                                            Standard Operating Procedures (SOP) Visual Matrix
+                                        </h2>
+                                        <span className="rounded-full border border-purple-500/40 bg-purple-500/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-purple-300">
+                                            {Object.keys(sops).length} Total Protocols
+                                        </span>
+                                    </div>
+                                    <p className="mt-1 font-mono text-xs text-slate-400">
+                                        Authoritative Step-by-Step Execution Protocols, Token-Efficiency Constraints &amp; Oahu Local Grounding across all 27 Fleet Entities
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                                <button
+                                    onClick={() => setAllSopsExpanded(prev => !prev)}
+                                    className="flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-800 px-3.5 py-2 font-mono text-xs font-bold text-slate-200 transition hover:bg-slate-700 hover:text-white"
+                                >
+                                    {allSopsExpanded ? <ChevronUp className="size-3.5" /> : <ChevronDown className="size-3.5" />}
+                                    {allSopsExpanded ? 'Collapse All Dossiers' : 'Fully Expand All Dossiers'}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Controls Toolbar: Domain Filter Pills & Search */}
+                        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                            {/* Domain Filter Pills */}
+                            <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs">
+                                {[
+                                    { key: 'ALL', label: 'All Protocols', count: Object.keys(sops).length },
+                                    { key: 'Infrastructure', label: 'Infrastructure', count: Object.values(sops).filter(s => s.domain === 'Infrastructure').length },
+                                    { key: 'Security', label: 'Security', count: Object.values(sops).filter(s => s.domain === 'Security').length },
+                                    { key: 'Commerce', label: 'Commerce', count: Object.values(sops).filter(s => s.domain === 'Commerce').length },
+                                    { key: 'Growth', label: 'Growth', count: Object.values(sops).filter(s => s.domain === 'Growth').length },
+                                    { key: 'Operations', label: 'Operations', count: Object.values(sops).filter(s => s.domain === 'Operations').length },
+                                    { key: 'Deployment', label: 'Deployment', count: Object.values(sops).filter(s => s.domain === 'Deployment').length },
+                                ].map(tab => (
+                                    <button
+                                        key={tab.key}
+                                        onClick={() => setSopDomainFilter(tab.key)}
+                                        className={`rounded-xl px-3 py-1.5 transition ${sopDomainFilter === tab.key ? 'bg-purple-600 text-white font-bold shadow-md shadow-purple-600/20' : 'bg-slate-950 text-slate-400 border border-slate-800 hover:text-slate-200'}`}
+                                    >
+                                        {tab.label} <span className="opacity-70">({tab.count})</span>
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Search Input */}
+                            <div className="relative">
+                                <Search className="absolute left-3 top-2.5 size-3.5 text-slate-500" />
+                                <input
+                                    type="text"
+                                    placeholder="Search SOP by code, mandate, step, or Oahu location..."
+                                    value={sopSearchQuery}
+                                    onChange={e => setSopSearchQuery(e.target.value)}
+                                    className="h-9 w-80 rounded-xl border border-slate-800 bg-slate-950 pl-9 pr-3 font-mono text-xs text-white placeholder-slate-500 focus:border-purple-500 focus:outline-none"
+                                />
+                                {sopSearchQuery && (
+                                    <button
+                                        onClick={() => setSopSearchQuery('')}
+                                        className="absolute right-2.5 top-2 text-xs text-slate-400 hover:text-white"
+                                    >
+                                        ×
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* SOP Dossier Cards List */}
+                        <div className="space-y-4">
+                            {Object.values(sops)
+                                .filter(sop => {
+                                    if (sopDomainFilter !== 'ALL' && sop.domain !== sopDomainFilter) return false;
+                                    if (!sopSearchQuery) return true;
+                                    const q = sopSearchQuery.toLowerCase();
+                                    return (
+                                        sop.code.toLowerCase().includes(q) ||
+                                        sop.title.toLowerCase().includes(q) ||
+                                        sop.mandate.toLowerCase().includes(q) ||
+                                        sop.oahu_grounding.toLowerCase().includes(q) ||
+                                        sop.token_efficiency_policy.toLowerCase().includes(q) ||
+                                        sop.execution_steps.some(st => st.title.toLowerCase().includes(q) || st.description.toLowerCase().includes(q))
+                                    );
+                                })
+                                .map(sop => {
+                                    const isExpanded = allSopsExpanded || expandedSopId === sop.id;
+                                    const isSubmaster = sop.id.startsWith('submaster_');
+                                    const runResult = cardRunResult[sop.id];
+                                    const isRunning = cardRunningId === sop.id;
+
+                                    return (
+                                        <div
+                                            key={sop.id}
+                                            className={`rounded-2xl border transition-all ${isExpanded ? 'border-purple-500/50 bg-slate-950/90 shadow-xl shadow-purple-500/5' : 'border-slate-800/80 bg-slate-950/50 hover:border-slate-700'}`}
+                                        >
+                                            {/* Header / Click-to-Expand Bar */}
+                                            <div
+                                                onClick={() => setExpandedSopId(expandedSopId === sop.id ? null : sop.id)}
+                                                className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 cursor-pointer select-none"
+                                            >
+                                                <div className="flex items-center gap-3">
+                                                    <span className="rounded-lg bg-purple-500/20 border border-purple-500/40 px-2.5 py-1 font-mono text-xs font-bold text-purple-300">
+                                                        {sop.code}
+                                                    </span>
+                                                    <div>
+                                                        <div className="flex items-center gap-2">
+                                                            <h3 className="font-mono text-sm font-bold text-white">
+                                                                {sop.title}
+                                                            </h3>
+                                                            {isSubmaster && (
+                                                                <span className="rounded bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 font-mono text-[9px] font-bold text-cyan-400">
+                                                                    SUPERVISOR
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <p className="mt-0.5 font-mono text-[11px] text-slate-400">
+                                                            ID: <span className="text-slate-300">{sop.id}</span> • Domain: <span className="text-purple-400">{sop.domain}</span> • Supervisor: <span className="text-slate-300">{sop.supervisor}</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center gap-2" onClick={e => e.stopPropagation()}>
+                                                    <button
+                                                        onClick={() => openInspectorSop(sop)}
+                                                        className="flex items-center gap-1 rounded-lg border border-slate-700 bg-slate-800/80 px-2.5 py-1 font-mono text-xs text-slate-300 hover:border-purple-400 hover:text-purple-300 transition"
+                                                    >
+                                                        <Eye className="size-3" />
+                                                        Inspect
+                                                    </button>
+                                                    <button
+                                                        onClick={() => executeSopFromCard(sop.id, isSubmaster)}
+                                                        disabled={isRunning}
+                                                        className="flex items-center gap-1 rounded-lg bg-purple-600/80 hover:bg-purple-500 px-3 py-1 font-mono text-xs font-bold text-white transition disabled:opacity-50"
+                                                    >
+                                                        <Zap className="size-3" />
+                                                        {isRunning ? 'Running...' : 'Run On-Demand'}
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setExpandedSopId(expandedSopId === sop.id ? null : sop.id)}
+                                                        className="p-1 text-slate-400 hover:text-white"
+                                                    >
+                                                        {isExpanded ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            {/* Fully Expanded Dossier Details */}
+                                            {isExpanded && (
+                                                <div className="border-t border-slate-800/80 p-5 space-y-4">
+                                                    {/* Mandate Box */}
+                                                    <div className="rounded-xl border border-purple-500/30 bg-purple-950/20 p-4">
+                                                        <div className="flex items-center gap-2 mb-1">
+                                                            <Workflow className="size-4 text-purple-400" />
+                                                            <span className="font-mono text-xs font-bold uppercase tracking-wider text-purple-300">
+                                                                Operational Mandate
+                                                            </span>
+                                                        </div>
+                                                        <p className="text-xs text-slate-200 leading-relaxed font-sans">
+                                                            {sop.mandate}
+                                                        </p>
+                                                    </div>
+
+                                                    {/* 2-Col: Token Policy & Oahu Grounding */}
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
+                                                        <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4">
+                                                            <div className="flex items-center gap-2 text-emerald-400 font-bold mb-1.5">
+                                                                <ShieldCheck className="size-4" />
+                                                                <span className="uppercase tracking-wider text-[11px]">Token Efficiency Policy (Zero-Waste)</span>
+                                                            </div>
+                                                            <p className="text-slate-300 text-[11px] leading-relaxed">
+                                                                {sop.token_efficiency_policy}
+                                                            </p>
+                                                        </div>
+
+                                                        <div className="rounded-xl border border-amber-500/30 bg-amber-950/20 p-4">
+                                                            <div className="flex items-center gap-2 text-amber-400 font-bold mb-1.5">
+                                                                <Compass className="size-4" />
+                                                                <span className="uppercase tracking-wider text-[11px]">Oahu Island Grounding</span>
+                                                            </div>
+                                                            <p className="text-slate-300 text-[11px] leading-relaxed">
+                                                                {sop.oahu_grounding}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Step-by-Step Execution Protocol Stepper */}
+                                                    <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+                                                        <div className="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+                                                            <div className="flex items-center gap-2">
+                                                                <GitCommit className="size-4 text-cyan-400" />
+                                                                <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-200">
+                                                                    Sequential Execution Protocol ({sop.execution_steps.length} Steps)
+                                                                </span>
+                                                            </div>
+                                                            <span className="font-mono text-[10px] text-slate-500">
+                                                                Deterministic Operational Flow
+                                                            </span>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                            {sop.execution_steps.map((st: SopStep) => (
+                                                                <div key={st.step} className="rounded-xl border border-slate-800 bg-slate-950/70 p-3.5 space-y-1.5 font-mono text-xs">
+                                                                    <div className="flex items-center gap-2">
+                                                                        <span className="flex size-5 items-center justify-center rounded-full bg-cyan-500/20 text-[10px] font-bold text-cyan-400 border border-cyan-500/30">
+                                                                            {st.step}
+                                                                        </span>
+                                                                        <span className="font-bold text-slate-200 text-xs">{st.title}</span>
+                                                                    </div>
+                                                                    <p className="text-[11px] text-slate-400 pl-7 leading-relaxed">
+                                                                        {st.description}
+                                                                    </p>
+                                                                    <div className="mt-1.5 pl-7 flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                                                                        <CheckCircle2 className="size-3 shrink-0" />
+                                                                        <span>Check: {st.verification}</span>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Inputs & Outputs Data Matrix */}
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
+                                                        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
+                                                            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Inputs Consumed</span>
+                                                            <div className="mt-2 flex flex-wrap gap-1.5">
+                                                                {sop.inputs.map((inp: string, i: number) => (
+                                                                    <span key={i} className="rounded-md border border-slate-800 bg-slate-950 px-2 py-1 text-[10px] text-slate-300">
+                                                                        {inp}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
+                                                            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Outputs Emitted</span>
+                                                            <div className="mt-2 flex flex-wrap gap-1.5">
+                                                                {sop.outputs.map((out: string, i: number) => (
+                                                                    <span key={i} className="rounded-md border border-purple-500/20 bg-purple-950/30 px-2 py-1 text-[10px] text-purple-300">
+                                                                        {out}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Contingency Protocol */}
+                                                    <div className="rounded-xl border border-rose-500/30 bg-rose-950/20 p-4 font-mono text-xs">
+                                                        <div className="flex items-center gap-2 text-rose-400 font-bold mb-1">
+                                                            <ShieldAlert className="size-4" />
+                                                            <span className="uppercase tracking-wider text-[11px]">Contingency &amp; Incident Recovery Protocol</span>
+                                                        </div>
+                                                        <p className="text-slate-300 text-[11px] leading-relaxed">
+                                                            {sop.contingency_protocol}
+                                                        </p>
+                                                    </div>
+
+                                                    {/* Live Execution Output (if executed from card) */}
+                                                    {runResult && (
+                                                        <div className="rounded-xl border border-cyan-500/30 bg-slate-950 p-4 font-mono text-xs">
+                                                            <div className="flex items-center justify-between border-b border-slate-800 pb-2 mb-2">
+                                                                <span className="font-bold text-cyan-400 uppercase">
+                                                                    Live On-Demand Execution Telemetry Response
+                                                                </span>
+                                                                <button
+                                                                    onClick={() => setCardRunResult(prev => { const copy = { ...prev }; delete copy[sop.id]; return copy; })}
+                                                                    className="text-slate-500 hover:text-white text-xs"
+                                                                >
+                                                                    Dismiss
+                                                                </button>
+                                                            </div>
+                                                            <pre className="max-h-56 overflow-y-auto rounded-lg bg-slate-900 p-3 text-cyan-300 text-[11px]">
+                                                                {JSON.stringify(runResult, null, 2)}
+                                                            </pre>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    </div>
+
                     {/* Cognitive Thought Stream & Directives Transmitter */}
                     <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-xl">
                         <div className="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -1373,7 +1714,7 @@ export default function DevOsEagleEyePage() {
                                             <div className="flex items-center justify-between border-b border-slate-800 pb-2">
                                                 <div>
                                                     <span className="font-mono text-[11px] font-bold text-white">Hierarchical Agent Org Tree</span>
-                                                    <p className="text-[10px] text-slate-400">6 Category Sub-Masters • 17 Specialized Agents • 100% On-Demand</p>
+                                                    <p className="text-[10px] text-slate-400">6 Category Sub-Masters • 21 Specialized Agents • 100% On-Demand</p>
                                                 </div>
                                                 <div className="flex items-center gap-1.5">
                                                     <button
@@ -1390,11 +1731,11 @@ export default function DevOsEagleEyePage() {
                                             <div className="space-y-3 max-h-[530px] overflow-y-auto pr-1">
                                                 {(submasters.length > 0 ? submasters : [
                                                     { id: 'submaster_infrastructure', name: 'Infrastructure & Storage Sub-Master', scope: 'VPS Host Headroom, Containers, Volume Quotas & Anti-Flooding', tier: 'Infrastructure', lifecycle: 'DORMANT', agents: ['agent_host_sentinel', 'agent_container_sentinel', 'agent_db_guardian', 'agent_storage_sentinel'] },
-                                                    { id: 'submaster_security_compliance', name: 'Cybersecurity & Compliance Sub-Master', scope: 'Loopback Isolation, Git Leaks, SHA-256 HMAC & PII Shield', tier: 'Security', lifecycle: 'DORMANT', agents: ['agent_security_shield', 'agent_commit_sentinel', 'agent_compliance_auditor'] },
+                                                    { id: 'submaster_security_compliance', name: 'Cybersecurity & Compliance Sub-Master', scope: 'Loopback Isolation, Git Leaks, SHA-256 HMAC & PII Shield', tier: 'Security', lifecycle: 'DORMANT', agents: ['agent_security_shield', 'agent_commit_sentinel', 'agent_compliance_auditor', 'agent_perimeter_auditor'] },
                                                     { id: 'submaster_commerce_telemetry', name: 'Commerce & Telemetry Sub-Master', scope: 'By Appointment First Waterfall, Circular Buffer, Oahu CRO', tier: 'Commerce', lifecycle: 'DORMANT', agents: ['agent_funnel_telemetry', 'agent_cro_optimizer', 'agent_revenue_reconciler'] },
-                                                    { id: 'submaster_growth_grounding', name: 'Growth & Market Intelligence Sub-Master', scope: 'Google SERP, 22 Oahu Cities, HECO ~44¢/kWh & Market Rates', tier: 'Growth', lifecycle: 'DORMANT', agents: ['agent_seo_metadata', 'agent_oahu_grounding', 'agent_market_research'] },
-                                                    { id: 'submaster_crm_operations', name: 'Customer Operations & CRM Sub-Master', scope: 'Lead Dispatch Tickets, Waipahu Turnaround, Maintenance Recalls', tier: 'CRM', lifecycle: 'DORMANT', agents: ['agent_crm_dispatch', 'agent_customer_lifecycle'] },
-                                                    { id: 'submaster_deployment_quality', name: 'Deployment & Quality Swarm Sub-Master', scope: 'Zero-Downtime VPS Reload, Next.js Build Health, Route Contracts', tier: 'Deployment', lifecycle: 'DORMANT', agents: ['agent_deployment_guardian', 'agent_build_qa'] }
+                                                    { id: 'submaster_growth_grounding', name: 'Growth & Market Intelligence Sub-Master', scope: 'Google SERP, 22 Oahu Cities, HECO ~44¢/kWh & Hawaii Energy Rebates', tier: 'Growth', lifecycle: 'DORMANT', agents: ['agent_seo_metadata', 'agent_oahu_grounding', 'agent_market_research', 'agent_heco_rebate_strategist'] },
+                                                    { id: 'submaster_crm_operations', name: 'Customer Operations & CRM Sub-Master', scope: 'Lead Dispatch Tickets, Waipahu Turnaround, Symptom Triage, Maintenance Recalls', tier: 'CRM', lifecycle: 'DORMANT', agents: ['agent_crm_dispatch', 'agent_customer_lifecycle', 'agent_intake_triage'] },
+                                                    { id: 'submaster_deployment_quality', name: 'Deployment & Quality Swarm Sub-Master', scope: 'Zero-Downtime VPS Reload, Next.js Build Health, Non-Regression Guard', tier: 'Deployment', lifecycle: 'DORMANT', agents: ['agent_deployment_guardian', 'agent_build_qa', 'agent_regression_sentinel'] }
                                                 ]).map((sm: any) => {
                                                     const childAgents = agents.filter(a => (sm.agents || []).includes(a.id));
                                                     return (
@@ -1408,13 +1749,20 @@ export default function DevOsEagleEyePage() {
                                                                         <p className="text-[9px] text-slate-400">{sm.scope}</p>
                                                                     </div>
                                                                 </div>
-                                                                <div className="flex items-center gap-2">
+                                                                <div className="flex items-center gap-1.5">
                                                                     <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[8px] font-mono uppercase text-slate-300">
                                                                         {sm.lifecycle || 'DORMANT'}
                                                                     </span>
                                                                     <button
-                                                                        onClick={() => openInspector(sm)}
+                                                                        onClick={() => openInspectorSop(sm)}
                                                                         className="rounded bg-purple-500/20 border border-purple-500/40 px-2 py-0.5 text-[9px] font-mono text-purple-300 hover:bg-purple-500 hover:text-white transition flex items-center gap-1"
+                                                                    >
+                                                                        <FileText className="size-2.5" />
+                                                                        SOP
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={() => openInspector(sm)}
+                                                                        className="rounded bg-slate-800 border border-slate-700 px-2 py-0.5 text-[9px] font-mono text-slate-300 hover:border-cyan-400 hover:text-cyan-400 transition flex items-center gap-1"
                                                                     >
                                                                         <Eye className="size-2.5" />
                                                                         Inspect
@@ -1430,7 +1778,7 @@ export default function DevOsEagleEyePage() {
                                                             </div>
 
                                                             {/* Supervised Child Agents */}
-                                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-1.5 pt-1">
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-1.5 pt-1">
                                                                 {(childAgents.length > 0 ? childAgents : sm.agents.map((aid: string) => ({ id: aid, name: aid.replace('agent_', '').replace(/_/g, ' ').toUpperCase(), scope: 'Specialized Agent', lifecycle: 'DORMANT' }))).map((ag: any) => (
                                                                     <div key={ag.id} className="rounded-lg border border-slate-800/50 bg-slate-900/60 p-2 flex flex-col justify-between">
                                                                         <div>
@@ -1441,13 +1789,20 @@ export default function DevOsEagleEyePage() {
                                                                             <p className="mt-0.5 text-[8px] text-slate-400 line-clamp-1">{ag.scope}</p>
                                                                         </div>
                                                                         <div className="mt-2 flex items-center justify-between border-t border-slate-800/40 pt-1">
-                                                                            <button
-                                                                                onClick={() => openInspector(ag)}
-                                                                                className="rounded bg-slate-800 px-1.5 py-0.5 text-[8px] font-mono text-purple-400 hover:bg-purple-500 hover:text-white transition flex items-center gap-0.5"
-                                                                            >
-                                                                                <Eye className="size-2" />
-                                                                                Inspect
-                                                                            </button>
+                                                                            <div className="flex items-center gap-1">
+                                                                                <button
+                                                                                    onClick={() => openInspectorSop(ag)}
+                                                                                    className="rounded bg-slate-800 px-1 py-0.5 text-[8px] font-mono text-purple-300 hover:bg-purple-600 hover:text-white transition"
+                                                                                >
+                                                                                    SOP
+                                                                                </button>
+                                                                                <button
+                                                                                    onClick={() => openInspector(ag)}
+                                                                                    className="rounded bg-slate-800 px-1 py-0.5 text-[8px] font-mono text-slate-400 hover:text-white transition"
+                                                                                >
+                                                                                    Inspect
+                                                                                </button>
+                                                                            </div>
                                                                             <button
                                                                                 onClick={() => runSingleAgent(ag.id)}
                                                                                 disabled={runningAgentId === ag.id}
@@ -1944,6 +2299,13 @@ export default function DevOsEagleEyePage() {
                                 Directives & Grounding
                             </button>
                             <button
+                                onClick={() => setModalTab('sop')}
+                                className={`flex items-center gap-1.5 border-b-2 px-3 pb-3 transition ${modalTab === 'sop' ? 'border-purple-400 font-bold text-purple-400' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
+                            >
+                                <FileText className="size-3.5" />
+                                SOP Protocol Dossier
+                            </button>
+                            <button
                                 onClick={() => setModalTab('execution')}
                                 className={`flex items-center gap-1.5 border-b-2 px-3 pb-3 transition ${modalTab === 'execution' ? 'border-cyan-400 font-bold text-cyan-400' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
                             >
@@ -2088,6 +2450,132 @@ export default function DevOsEagleEyePage() {
                                     </div>
                                 </div>
                             )}
+
+                            {modalTab === 'sop' && (
+                                <div className="space-y-4">
+                                    {(() => {
+                                        const targetSop = inspectTarget?.sop || sops[inspectTarget?.id];
+                                        if (!targetSop) {
+                                            return (
+                                                <div className="rounded-xl border border-slate-800 bg-slate-950 p-6 text-center text-slate-400 font-mono text-xs">
+                                                    No Standard Operating Procedure registered for {inspectTarget?.id}
+                                                </div>
+                                            );
+                                        }
+                                        return (
+                                            <div className="space-y-4">
+                                                {/* SOP Header */}
+                                                <div className="rounded-xl border border-purple-500/30 bg-purple-950/20 p-4">
+                                                    <div className="flex flex-wrap items-center justify-between gap-2">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="rounded bg-purple-500/20 border border-purple-500/40 px-2.5 py-1 font-mono text-xs font-bold text-purple-300">
+                                                                {targetSop.code}
+                                                            </span>
+                                                            <h4 className="font-mono text-sm font-bold text-white">
+                                                                {targetSop.title}
+                                                            </h4>
+                                                        </div>
+                                                        <span className="rounded-full bg-slate-800 px-2.5 py-0.5 font-mono text-[10px] text-slate-300">
+                                                            Domain: {targetSop.domain}
+                                                        </span>
+                                                    </div>
+                                                    <p className="mt-2 text-xs text-slate-200 leading-relaxed font-sans">
+                                                        <strong>Mandate:</strong> {targetSop.mandate}
+                                                    </p>
+                                                </div>
+
+                                                {/* Token Policy & Oahu Grounding */}
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-xs">
+                                                    <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-3.5">
+                                                        <div className="flex items-center gap-1.5 text-emerald-400 font-bold mb-1">
+                                                            <ShieldCheck className="size-3.5" />
+                                                            <span className="uppercase tracking-wider text-[10px]">Token Efficiency Policy</span>
+                                                        </div>
+                                                        <p className="text-slate-300 text-[11px] leading-relaxed">
+                                                            {targetSop.token_efficiency_policy}
+                                                        </p>
+                                                    </div>
+                                                    <div className="rounded-xl border border-amber-500/30 bg-amber-950/20 p-3.5">
+                                                        <div className="flex items-center gap-1.5 text-amber-400 font-bold mb-1">
+                                                            <Compass className="size-3.5" />
+                                                            <span className="uppercase tracking-wider text-[10px]">Oahu Local Grounding</span>
+                                                        </div>
+                                                        <p className="text-slate-300 text-[11px] leading-relaxed">
+                                                            {targetSop.oahu_grounding}
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Step-by-Step Execution Stepper */}
+                                                <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
+                                                    <div className="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+                                                        <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-300">
+                                                            Sequential Execution Protocol ({targetSop.execution_steps.length} Steps)
+                                                        </span>
+                                                        <span className="font-mono text-[10px] text-purple-400">
+                                                            Strict Deterministic Checklist
+                                                        </span>
+                                                    </div>
+                                                    <div className="space-y-2.5">
+                                                        {targetSop.execution_steps.map((st: SopStep) => (
+                                                            <div key={st.step} className="rounded-lg border border-slate-800/80 bg-slate-900/60 p-3 font-mono text-xs">
+                                                                <div className="flex items-center gap-2">
+                                                                    <span className="flex size-5 items-center justify-center rounded-full bg-purple-500/20 text-[10px] font-bold text-purple-400 border border-purple-500/30">
+                                                                        {st.step}
+                                                                    </span>
+                                                                    <span className="font-bold text-slate-200">{st.title}</span>
+                                                                </div>
+                                                                <p className="mt-1.5 text-[11px] text-slate-400 pl-7 leading-relaxed">
+                                                                    {st.description}
+                                                                </p>
+                                                                <div className="mt-2 pl-7 flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                                                                    <CheckCircle2 className="size-3 shrink-0" />
+                                                                    <span>Verification: {st.verification}</span>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                                {/* Inputs & Outputs */}
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-xs">
+                                                    <div className="rounded-xl border border-slate-800 bg-slate-950 p-3.5">
+                                                        <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Inputs Consumed</span>
+                                                        <div className="mt-2 flex flex-wrap gap-1.5">
+                                                            {targetSop.inputs.map((inp: string, i: number) => (
+                                                                <span key={i} className="rounded border border-slate-800 bg-slate-900 px-2 py-0.5 text-[10px] text-slate-300">
+                                                                    {inp}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <div className="rounded-xl border border-slate-800 bg-slate-950 p-3.5">
+                                                        <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Outputs Emitted</span>
+                                                        <div className="mt-2 flex flex-wrap gap-1.5">
+                                                            {targetSop.outputs.map((out: string, i: number) => (
+                                                                <span key={i} className="rounded border border-purple-500/30 bg-purple-950/40 px-2 py-0.5 text-[10px] text-purple-300">
+                                                                    {out}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Contingency Protocol */}
+                                                <div className="rounded-xl border border-rose-500/30 bg-rose-950/20 p-4 font-mono text-xs">
+                                                    <div className="flex items-center gap-2 text-rose-400 font-bold mb-1">
+                                                        <ShieldAlert className="size-4" />
+                                                        <span className="uppercase tracking-wider text-[10px]">Contingency &amp; Fail-Safe Protocol</span>
+                                                    </div>
+                                                    <p className="text-slate-300 text-[11px] leading-relaxed">
+                                                        {targetSop.contingency_protocol}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })()}
+                                </div>
+                            )}
                         </div>
 
                         {/* Modal Footer */}
@@ -2136,7 +2624,14 @@ export default function DevOsEagleEyePage() {
                                 className="flex items-center justify-between rounded-lg p-2 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 cursor-pointer"
                             >
                                 <span>&gt; Execute Full Fleet Audit</span>
-                                <span className="text-[10px] text-slate-500">17 Agents</span>
+                                <span className="text-[10px] text-slate-500">21 Agents</span>
+                            </div>
+                            <div 
+                                onClick={() => { setActiveViewMode('agent_os'); setAllSopsExpanded(true); setCommandPaletteOpen(false); }}
+                                className="flex items-center justify-between rounded-lg p-2 text-slate-300 hover:bg-slate-800 hover:text-purple-400 cursor-pointer"
+                            >
+                                <span>&gt; View Agent SOP Protocols</span>
+                                <span className="text-[10px] text-slate-500">27 Dossiers</span>
                             </div>
                             <div 
                                 onClick={() => { handleReconcileStripe(); setCommandPaletteOpen(false); }}

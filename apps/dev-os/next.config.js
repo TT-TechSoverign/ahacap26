@@ -23,7 +23,7 @@ const nextConfig = {
                 headers: [
                     {
                         key: 'X-Robots-Tag',
-                        value: 'noindex, nofollow',
+                        value: 'noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex',
                     },
                     {
                         key: 'X-Frame-Options',
@@ -32,6 +32,14 @@ const nextConfig = {
                     {
                         key: 'X-Content-Type-Options',
                         value: 'nosniff',
+                    },
+                    {
+                        key: 'Referrer-Policy',
+                        value: 'strict-origin-when-cross-origin',
+                    },
+                    {
+                        key: 'Cache-Control',
+                        value: 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
                     },
                 ],
             },

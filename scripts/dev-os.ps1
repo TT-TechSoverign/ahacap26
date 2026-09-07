@@ -53,11 +53,11 @@ switch ($Command.ToLower()) {
         if (-not $Target) {
             Write-Host "[!] Usage: .\scripts\dev-os.ps1 run-agent <agent_id>" -ForegroundColor Red
             Write-Host "   Infra:      agent_host_sentinel, agent_container_sentinel, agent_db_guardian, agent_storage_sentinel" -ForegroundColor Yellow
-            Write-Host "   Security:   agent_security_shield, agent_commit_sentinel, agent_compliance_auditor" -ForegroundColor Yellow
+            Write-Host "   Security:   agent_security_shield, agent_commit_sentinel, agent_compliance_auditor, agent_perimeter_auditor" -ForegroundColor Yellow
             Write-Host "   Commerce:   agent_funnel_telemetry, agent_cro_optimizer, agent_revenue_reconciler" -ForegroundColor Yellow
-            Write-Host "   Growth:     agent_seo_metadata, agent_oahu_grounding, agent_market_research" -ForegroundColor Yellow
-            Write-Host "   CRM:        agent_crm_dispatch, agent_customer_lifecycle" -ForegroundColor Yellow
-            Write-Host "   Deployment: agent_deployment_guardian, agent_build_qa" -ForegroundColor Yellow
+            Write-Host "   Growth:     agent_seo_metadata, agent_oahu_grounding, agent_market_research, agent_heco_rebate_strategist" -ForegroundColor Yellow
+            Write-Host "   CRM:        agent_crm_dispatch, agent_customer_lifecycle, agent_intake_triage" -ForegroundColor Yellow
+            Write-Host "   Deployment: agent_deployment_guardian, agent_build_qa, agent_regression_sentinel" -ForegroundColor Yellow
             return
         }
         Write-Host "[*] Triggering Agent: $Target on Server..." -ForegroundColor Yellow
@@ -71,7 +71,7 @@ switch ($Command.ToLower()) {
     }
 
     "run-fleet" {
-        Write-Host "[*] Dispatching full fleet: Running All 17 Specialized Agents sequentially..." -ForegroundColor Yellow
+        Write-Host "[*] Dispatching full fleet: Running All 21 Specialized Agents sequentially..." -ForegroundColor Yellow
         try {
             $resp = Invoke-RestMethod -Uri "$ServerUrl/agents/run-all" -Method POST -Headers $headers
             Write-Host "[OK] Fleet Audit Completed at $($resp.executed_at) (All Healthy: $($resp.all_healthy)):" -ForegroundColor Green
@@ -330,6 +330,63 @@ switch ($Command.ToLower()) {
         }
     }
 
+    "sops" {
+        Write-Host "[*] Querying Standard Operating Procedures (SOPs) from Server..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/agents/sops" -Method GET -Headers $headers
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            Write-Host "  SOVEREIGN TIER STANDARD OPERATING PROCEDURES (SOPS)" -ForegroundColor Cyan
+            Write-Host "  Total Registered SOPs: $($resp.total_sops)" -ForegroundColor Green
+            Write-Host "========================================================" -ForegroundColor Magenta
+
+            if ($Target) {
+                $targetKey = $Target.ToLower()
+                if ($resp.sops.PSObject.Properties.Name -contains $targetKey) {
+                    $sop = $resp.sops.$targetKey
+                    Write-Host "`n  [$($sop.code)] $($sop.title)" -ForegroundColor Yellow
+                    Write-Host "  Domain: $($sop.domain) | Supervisor: $($sop.supervisor)" -ForegroundColor Cyan
+                    Write-Host "  Mandate: $($sop.mandate)" -ForegroundColor White
+                    Write-Host "`n  TOKEN EFFICIENCY POLICY:" -ForegroundColor Green
+                    Write-Host "    $($sop.token_efficiency_policy)" -ForegroundColor DarkGray
+                    Write-Host "`n  OAHU GROUNDING:" -ForegroundColor Yellow
+                    Write-Host "    $($sop.oahu_grounding)" -ForegroundColor DarkCyan
+                    Write-Host "`n  EXECUTION STEPS:" -ForegroundColor White
+                    foreach ($st in $sop.execution_steps) {
+                        Write-Host "    [$($st.step)] $($st.title)" -ForegroundColor Cyan
+                        Write-Host "        $($st.description)" -ForegroundColor DarkGray
+                        Write-Host "        Verification: $($st.verification)" -ForegroundColor Green
+                    }
+                    Write-Host "`n  INPUTS:  $($sop.inputs -join '; ')" -ForegroundColor DarkGray
+                    Write-Host "  OUTPUTS: $($sop.outputs -join '; ')" -ForegroundColor DarkGray
+                    Write-Host "`n  CONTINGENCY PROTOCOL:" -ForegroundColor Red
+                    Write-Host "    $($sop.contingency_protocol)" -ForegroundColor Yellow
+                } else {
+                    Write-Host "[!] SOP not found for target: $Target" -ForegroundColor Red
+                }
+            } else {
+                Write-Host "`nSUB-MASTER SOPS (6):" -ForegroundColor Magenta
+                foreach ($prop in $resp.sops.PSObject.Properties) {
+                    if ($prop.Name -like "submaster_*") {
+                        $s = $prop.Value
+                        Write-Host "  - [$($s.code)] $($s.title) ($($s.domain))" -ForegroundColor Yellow
+                        Write-Host "      Mandate: $($s.mandate)" -ForegroundColor DarkGray
+                    }
+                }
+                Write-Host "`nSPECIALIZED AGENT SOPS (21):" -ForegroundColor Magenta
+                foreach ($prop in $resp.sops.PSObject.Properties) {
+                    if ($prop.Name -notlike "submaster_*") {
+                        $s = $prop.Value
+                        Write-Host "  - [$($s.code)] $($s.title) [Domain: $($s.domain)]" -ForegroundColor Cyan
+                        Write-Host "      Token Policy: $($s.token_efficiency_policy)" -ForegroundColor DarkGray
+                    }
+                }
+                Write-Host "`nTip: Run '.\scripts\dev-os.ps1 sops <id>' to view full step-by-step dossier." -ForegroundColor DarkCyan
+            }
+        } catch {
+            Write-Host "[ERR] Failed to query SOPs: $_" -ForegroundColor Red
+        }
+    }
+
     "scan-secrets" {
         powershell -ExecutionPolicy Bypass -File .\scripts\scan-secrets.ps1
     }
@@ -342,11 +399,12 @@ switch ($Command.ToLower()) {
         Write-Host "  inject-history             - Dispatch swarm memory injection into Master Brain"
         Write-Host "  brain-sync [thought]       - Client-initiated outbound push of directive/thought to Master Brain"
         Write-Host "  inspect [id]               - Deep inspection of sub-master or agent synapse and security perimeter"
-        Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (6 Sub-Masters, 17 Agents)"
+        Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (6 Sub-Masters, 21 Agents)"
         Write-Host "  status                     - Query fleet status and active agents"
+        Write-Host "  sops [id]                  - View Standard Operating Procedures (all 27 dossiers or specific agent)"
         Write-Host "  run-submaster [name]       - Dispatch a Category Sub-Master suite (infra, security, commerce, growth, crm, deploy)"
         Write-Host "  run-agent [agent_id]       - Trigger a single on-demand agent"
-        Write-Host "  run-fleet                  - Sequentially execute all 17 agents"
+        Write-Host "  run-fleet                  - Sequentially execute all 21 agents"
         Write-Host "  waterfall                  - Display 5-stage By Appointment First conversion waterfall"
         Write-Host "  reconcile                  - Trigger on-demand Stripe auto-reconciliation"
         Write-Host "  verify-live                - Run 3-stage live deployment swarm check"
