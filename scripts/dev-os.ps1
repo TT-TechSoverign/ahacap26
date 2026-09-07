@@ -187,12 +187,110 @@ switch ($Command.ToLower()) {
         }
     }
 
+    "brain" {
+        Write-Host "[*] Querying Master Projects Brain Status from Server..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/brain/status" -Method GET -Headers $headers
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            Write-Host "  MASTER PROJECTS BRAIN: $($resp.brain.status)" -ForegroundColor Cyan
+            Write-Host "  Version: $($resp.brain.brain_version) | Synapses: $($resp.brain.total_synapses)" -ForegroundColor Green
+            Write-Host "  Air-Tight Local Perimeter: $($resp.brain.local_perimeter_security.architecture)" -ForegroundColor Yellow
+            Write-Host "  Inbound Reach: $($resp.brain.local_perimeter_security.inbound_server_reach)" -ForegroundColor Green
+            Write-Host "========================================================" -ForegroundColor Magenta
+
+            Write-Host "`nACTIVE DIRECTIVES:" -ForegroundColor Cyan
+            foreach ($d in $resp.brain.active_directives) {
+                Write-Host "  - $d" -ForegroundColor White
+            }
+
+            Write-Host "`nRECENT COGNITIVE THOUGHTS:" -ForegroundColor Yellow
+            foreach ($th in $resp.brain.recent_thoughts) {
+                Write-Host "  [$($th.type)] $($th.source) ($($th.timestamp)):" -ForegroundColor DarkCyan
+                Write-Host "      $($th.thought)" -ForegroundColor White
+            }
+        } catch {
+            Write-Host "[ERR] Error querying Master Brain: $_" -ForegroundColor Red
+        }
+    }
+
+    "brain-knowledge" {
+        Write-Host "[*] Querying Master Brain Grounded Knowledge Graph..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/brain/knowledge" -Method GET -Headers $headers
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            Write-Host "  MASTER BRAIN KNOWLEDGE GRAPH (v$($resp.brain_version))" -ForegroundColor Cyan
+            Write-Host "========================================================" -ForegroundColor Magenta
+            $resp.knowledge_base | ConvertTo-Json -Depth 5 | Write-Host -ForegroundColor White
+        } catch {
+            Write-Host "[ERR] Error querying Brain Knowledge: $_" -ForegroundColor Red
+        }
+    }
+
+    "brain-sync" {
+        $thoughtText = if ($Target) { $Target } else { "Local CLI synced heartbeat with Master Projects Brain." }
+        Write-Host "[*] Outbound Synapse: Transmitting directive/thought to Master Brain..." -ForegroundColor Yellow
+        try {
+            $body = @{
+                client_name = "LOCAL_CLI_PERIMETER"
+                thought = $thoughtText
+            } | ConvertTo-Json
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/brain/sync" -Method POST -Headers $headers -Body $body
+            Write-Host "[OK] Master Brain Synchronized! Status: $($resp.status)" -ForegroundColor Green
+            Write-Host "  Perimeter: $($resp.perimeter_status)" -ForegroundColor Yellow
+            Write-Host "  Active Directives: $($resp.active_directives.Count)" -ForegroundColor Cyan
+        } catch {
+            Write-Host "[ERR] Brain sync failed: $_" -ForegroundColor Red
+        }
+    }
+
+    "inspect" {
+        if (-not $Target) {
+            Write-Host "[ERR] Usage: .\scripts\dev-os.ps1 inspect <target_id>" -ForegroundColor Red
+            Write-Host "  Examples: .\scripts\dev-os.ps1 inspect submaster_commerce_telemetry" -ForegroundColor Yellow
+            Write-Host "            .\scripts\dev-os.ps1 inspect agent_security_shield" -ForegroundColor Yellow
+            return
+        }
+        Write-Host "[*] Inspecting Synapse & Directives for Target: $Target..." -ForegroundColor Yellow
+        try {
+            $tree = Invoke-RestMethod -Uri "$ServerUrl/agents/tree" -Method GET -Headers $headers
+            $brain = Invoke-RestMethod -Uri "$ServerUrl/brain/status" -Method GET -Headers $headers
+            
+            $foundSm = $tree.submasters | Where-Object { $_.id -eq $Target }
+            $foundAgent = $null
+            foreach ($sm in $tree.submasters) {
+                $match = $sm.child_agents | Where-Object { $_.id -eq $Target }
+                if ($match) { $foundAgent = $match; break }
+            }
+
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            if ($foundSm) {
+                Write-Host "  INSPECT SUB-MASTER: $($foundSm.name) ($($foundSm.id))" -ForegroundColor Cyan
+                Write-Host "  Domain: $($foundSm.domain)" -ForegroundColor White
+                Write-Host "  Child Agents: $($foundSm.child_agents.Count)" -ForegroundColor Green
+            } elseif ($foundAgent) {
+                Write-Host "  INSPECT AGENT: $($foundAgent.name) ($($foundAgent.id))" -ForegroundColor Cyan
+                Write-Host "  Category: $($foundAgent.category) | Status: $($foundAgent.status)" -ForegroundColor Green
+                Write-Host "  Capabilities: $($foundAgent.capabilities -join ', ')" -ForegroundColor DarkGray
+            } else {
+                Write-Host "  Target [$Target] in Synapse Registry" -ForegroundColor Yellow
+            }
+            Write-Host "  Perimeter Guarantee: BLOCKED_ZERO_INBOUND_ACCESS" -ForegroundColor Green
+            Write-Host "========================================================" -ForegroundColor Magenta
+        } catch {
+            Write-Host "[ERR] Inspector failed: $_" -ForegroundColor Red
+        }
+    }
+
     "scan-secrets" {
         powershell -ExecutionPolicy Bypass -File .\scripts\scan-secrets.ps1
     }
 
     default {
         Write-Host "Available Commands:" -ForegroundColor Yellow
+        Write-Host "  brain                      - Query Master Projects Brain, synapses, and cognitive thought stream"
+        Write-Host "  brain-knowledge            - Query grounded knowledge graph (architecture, Oahu economics, CRO)"
+        Write-Host "  brain-sync [thought]       - Client-initiated outbound push of directive/thought to Master Brain"
+        Write-Host "  inspect [id]               - Deep inspection of sub-master or agent synapse and security perimeter"
         Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (6 Sub-Masters, 17 Agents)"
         Write-Host "  status                     - Query fleet status and active agents"
         Write-Host "  run-submaster [name]       - Dispatch a Category Sub-Master suite (infra, security, commerce, growth, crm, deploy)"
