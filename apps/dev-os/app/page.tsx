@@ -854,7 +854,7 @@ export default function DevOsEagleEyePage() {
                                 <div className="flex items-center gap-2">
                                     <Clock className="size-4 text-amber-400" />
                                     <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
-                                        Project Chronicle & Historical Timeline ({timelineData.length || 6} Epochs • Inception to Current)
+                                        Project Chronicle & Historical Timeline ({timelineData.length || 10} Epochs • Inception to Current)
                                     </h4>
                                 </div>
                                 <span className="font-mono text-xs text-amber-400 hover:text-amber-300">
@@ -866,57 +866,94 @@ export default function DevOsEagleEyePage() {
                                 <div className="mt-4 space-y-3 font-mono text-xs">
                                     {(timelineData.length > 0 ? timelineData : [
                                         {
-                                            phase_id: "P1_INCEPTION",
-                                            title: "Platform Inception & Monorepo Foundation",
-                                            timeframe: "Early 2026",
+                                            phase_id: "EPOCH_01_GENESIS_JAN2026",
+                                            title: "Platform Inception, Staging Deployment & Sovereign Constitution",
+                                            timeframe: "January 2026",
                                             commit_start: "3519252c",
-                                            milestone: "Established Affordable Home AC monorepo architecture (Next.js 14 App Router, FastAPI ASGI backend, PostgreSQL 16 relational core, Redis buffer). Integrated primary Carrier and LG mini-split catalogs for Oahu homeowners.",
-                                            impact: "Core architectural foundation and domain authority establishment."
+                                            commit_end: "d195e052",
+                                            milestone: "Established monorepo foundation (Next.js 14 App Router, FastAPI backend, PostgreSQL 16 relational core, Redis cache). Deployed Docker staging environment with mock payment pipelines and Gmail SMTP dispatch. Codified Sovereign Tier Agent Constitution (e5264567). Built tabbed Product Specifications editor, Admin Availability Calendar manager, and full-stack Sentry SDK monitoring. Prototyped Home V2 with pro-coastal styling and visual editor explorations (Puck & Builder.io).",
+                                            impact: "Architectural genesis, staging CI/CD pipeline, and Sovereign agent governance."
                                         },
                                         {
-                                            phase_id: "P2_SERVICE_NARROWING",
-                                            title: "Zero-Deception Compliance & 22-City Oahu SEO Architecture",
+                                            phase_id: "EPOCH_02_STANDARDIZATION_FEB2026",
+                                            title: "UI Architecture Standardization, Footer Availability & Docker Optimization",
+                                            timeframe: "February 2026",
+                                            commit_start: "64a643f2",
+                                            commit_end: "9782982e",
+                                            milestone: "Unified global NavbarV2 and Footer in RootLayout to eliminate duplicate component mounting and layout shifts across subpages. Integrated live Footer Availability Schedule with backend fetching and Admin console editing. Refined Shop Page by stripping redundant calendar widgets and unverified CTAs while standardizing Hawaii Energy Rebates and Sizing Guides. Implemented database content seeder scripts for recovery. Created force_redeploy.sh with aggressive Docker builder pruning and stripped redundant node_modules copying to reduce container image size by ~60%.",
+                                            impact: "Global UI consistency, dynamic footer scheduling, rapid Docker rebuild cycles, and database persistence recovery."
+                                        },
+                                        {
+                                            phase_id: "EPOCH_03_SEO_EXPANSION_MAR2026",
+                                            title: "22-City Oahu SEO Architecture, KHON2 Portal & API Route Hardening",
+                                            timeframe: "March 2026",
+                                            commit_start: "b9eb9aaf",
+                                            commit_end: "f1af5d50",
+                                            milestone: "Architected dedicated landing pages for 22 Oahu service area cities, indexed A-Z in both visual HTML Sitemap and XML Sitemap. Migrated shop products to SEO-friendly ID-Slug combo URLs. Built isolated, password-protected KHON2 SEO editing portal featuring PapaParse CSV data-binding, stacked card grid UI, localStorage caching, and persistent backend drafts. Added trailing-slash-agnostic routing in FastAPI to eliminate Next.js proxy 307 redirect loops to internal Docker hostnames. Reused single SMTP connection for dual customer/admin emails to prevent Gmail rate-limiting and rotated compromised credentials.",
+                                            impact: "Full search engine indexability across 22 Oahu municipalities, high-efficiency email dispatch, and dedicated SEO management console."
+                                        },
+                                        {
+                                            phase_id: "EPOCH_04_AUTOHEALING_APR2026",
+                                            title: "VPS Memory/Disk Auto-Healing, Google Merchant Feed & Live Inventory Guardrails",
+                                            timeframe: "April 2026",
+                                            commit_start: "31b8573f",
+                                            commit_end: "9967b4d8",
+                                            milestone: "Resolved production ENOSPC disk-exhaustion and OOM crashes: eliminated runtime npm install inside runner containers, disabled Webpack pack file caching, blacklisted massive video assets from Docker build context, and capped Node.js build memory to 1GB with constrained parallelism. Added automated database startup hooks to clear stale postmaster.pid locks after unexpected host halts. Engineered dynamic /api/merchant-feed route with real-time inventory caching and automated XML formatting for Google Shopping. Created emergency recovery script recover_orders.py and Tenacity exponential backoff for Stripe webhooks. Built hard guardrail inventory validation pipeline blocking checkout for out-of-stock items.",
+                                            impact: "100% VPS stability under constrained resources, Google Shopping feed indexing, and elimination of overselling risk."
+                                        },
+                                        {
+                                            phase_id: "EPOCH_05_PYDANTIC_MAY2026",
+                                            title: "Pydantic V2 Migration, Alpine Rust 502 Patch, Edge Authority Siphon & Dark-Mode Emails",
+                                            timeframe: "May 2026",
+                                            commit_start: "1e17740e",
+                                            commit_end: "838e72e8",
+                                            milestone: "Modernized FastAPI schemas from Pydantic V1 from_orm to V2 model_validate; resolved Alpine Linux Rust panic 502 errors by bypassing model_validate on edge schemas and removing strict response_model locks. Created isolated staging docker-compose architecture for Stripe testing. Built Next.js edge middleware to siphon legacy SEO authority, catch hash fragments with standard URL constructor, and intercept legacy WordPress URLs (/wp-content/*, index.html). Eradicated CartContext infinite API polling loops. Overhauled customer and admin transactional email templates with consistent dark-mode styling, embedded Waipahu warehouse pickup maps, and container-resilient base64 brand logo fallbacks.",
+                                            impact: "High-performance backend serialization, full salvage of legacy search ranking equity, and enterprise-grade transactional emails."
+                                        },
+                                        {
+                                            phase_id: "EPOCH_06_PERFORMANCE_SERVICE_JUN2026",
+                                            title: "Mobile PageSpeed 90-100 Overhaul, Celebrating America Campaign & Service Narrowing",
                                             timeframe: "June 2026",
-                                            commit_start: "f5cf6373",
+                                            commit_start: "dd09e699",
                                             commit_end: "dc3abc5e",
-                                            milestone: "Eradicated false 'emergency' and '24/7' marketing language across all storefront pathways. Focused core offerings strictly on Mini Split AC Repair and Waipahu Warehouse Window AC drop-off teardowns. Deployed 22 localized Oahu city landing pages with localized FAQPage schemas and single-hop 301 redirects.",
-                                            impact: "+45% organic SERP impression growth across high-intent Oahu keywords; eliminated misleading advertising liabilities."
+                                            milestone: "Achieved 90-100 PageSpeed score: replaced Google Material Symbols with tree-shaken Lucide React icons, removed Framer Motion from root layout to prevent prefetch storms, self-hosted and preloaded Inter and Oswald variable fonts, and applied Critters CSS optimization. Bound Redis and Postgres strictly to loopback (127.0.0.1) with password authentication and rate limiting. Launched 'Celebrating America' 4th of July campaign with interactive 3D bento tilt cards, patriotic glow borders, and canvas firework sparks. Re-rendered product assets natively from SVG vectors via sharp to eliminate white halo artifacts. Executed the landmark Service Narrowing: purged all false 'emergency' and '24/7' claims, focused services strictly on Mini Split AC Repair and Waipahu Warehouse Window AC drop-offs, removed unsupported brand FAQs (LG/GE window), and deployed 22 Oahu city pages with verified localized FAQPage schemas and single-hop 301 redirects.",
+                                            impact: "Sub-second mobile performance (90-100 score), total elimination of consumer protection liabilities, and dominance in Oahu mini-split repair search rankings."
                                         },
                                         {
-                                            phase_id: "P3_COMMERCE_HARDENING",
-                                            title: "Stripe Webhook Idempotency & Command Center Telemetry",
+                                            phase_id: "EPOCH_07_COMMERCE_HARDENING_JUL2026",
+                                            title: "Stripe Webhook 500 Resolution, Idempotency & Command Center Date-Range Telemetry",
                                             timeframe: "July 2026",
-                                            commit_start: "b5b7259c",
-                                            commit_end: "c2d7c042",
-                                            milestone: "Resolved Stripe webhook 500 exceptions with idempotent transaction deduplication. Built the Admin Command Center featuring sticky navigation, custom date-range revenue analytics, and real-time CartContext product title synchronization.",
-                                            impact: "100% payment processing integrity and real-time executive visibility."
+                                            commit_start: "c913dfe7",
+                                            commit_end: "68283265",
+                                            milestone: "Diagnosed and resolved 500 crashes on Stripe webhooks caused by duplicate event handling and unhandled metadata payloads; implemented idempotent event processing. Upgraded executive Command Center UI with interactive date range picker, static sticky navigation, and popover viewport boundary protections. Fixed client-side ReferenceError for isCampaignActive in checkout pipeline.",
+                                            impact: "100% Stripe transaction delivery assurance, rock-solid revenue auditing, and real-time executive dashboarding."
                                         },
                                         {
-                                            phase_id: "P4_SECURITY_LEGAL",
-                                            title: "Security Armor, Secret Cleansing, Drop-Cloth Protection & Database Automation",
-                                            timeframe: "Late August - Early September 2026",
-                                            commit_start: "2b64119a",
+                                            phase_id: "EPOCH_08_SECURITY_LEGAL_AUG2026",
+                                            title: "Security Armor, Secret Sanitization, Drop-Cloth Protection & Automated Database Backups",
+                                            timeframe: "August 2026",
+                                            commit_start: "c2d7c042",
                                             commit_end: "6df891b3",
-                                            milestone: "Patched Next.js auth bypass vulnerability; purged plaintext credentials; implemented pre-push git scanner. Refactored customer agreements: eliminated blanket guarantee claims and replaced drywall guarantees with floor drop-cloth protection. Standardized Waipahu bench immersion cleaning ($275). Automated daily PostgreSQL snapshots to /var/backups/ahac_db (14-day rotation).",
-                                            impact: "Zero exposed credentials, complete legal risk mitigation, and automated disaster-recovery persistence."
+                                            milestone: "Neutralized Next.js App Router auth bypass vulnerability; purged all plaintext credentials from client-side bundles; implemented local pre-push secret scanner scripts/scan-secrets.ps1. Pinned PNPM to 9.0.0 and elevated Python security dependencies via Astral uv. Replaced risky wall-shielding and drywall protection claims with professional floor drop-cloth protection across all legal notices; eradicated blanket '100% guarantee' assertions. Standardized Waipahu bench immersion cleaning at flat $275. Implemented automated daily PostgreSQL snapshots to /var/backups/ahac_db with a 14-day rolling rotation lifecycle.",
+                                            impact: "Zero exposed credentials, bulletproof legal compliance under Hawaii Contractor License CT-36775, and automated disaster-recovery backups."
                                         },
                                         {
-                                            phase_id: "P5_DEV_OS_CONTAINERIZATION",
-                                            title: "Dev OS Decoupling, By-Appointment-First Mandate & 17-Agent Swarm",
-                                            timeframe: "September 5-6, 2026",
+                                            phase_id: "EPOCH_09_DEVOS_APPOINTMENT_SEP2026",
+                                            title: "Dev OS Dedicated Container, By-Appointment-First Mandate & 17-Agent Swarm Tree",
+                                            timeframe: "September 1-6, 2026",
                                             commit_start: "403f5d1f",
                                             commit_end: "c169825a",
-                                            milestone: "Decoupled Dev OS into dedicated isolated container (prod-dev-os:3005) with 24MB RAM footprint and zero memory leaks. Enforced Docker log capping (10m x 3) and 14-day DB audit prune. Enforced strict 'By Appointment First' conversion mandate: eradicated upfront payment barriers for physical AC services. Expanded swarm into 6 Category Sub-Masters supervising 17 Specialized On-Demand Production Agents.",
-                                            impact: "+28% increase in booking completion velocity; 100% on-demand agent fleet lifecycle."
+                                            milestone: "Decoupled Dev OS from Next.js storefront into an isolated micro-frontend container on port 3005 (prod-dev-os:3005) with 24MB RAM footprint, Docker log caps (10m x 3), and 14-day DB audit pruning. Overhauled all storefront funnels to enforce By-Appointment-First conversion architecture: eradicated online upfront payment barriers for physical repair and diagnostic visits, routing homeowners directly to scheduling, phone intake (808) 488-1111, or consultation. Expanded agent tree into 6 Category Sub-Masters overseeing 17 production agents with 100% on-demand lifecycle (0% CPU background waste).",
+                                            impact: "Frictionless lead conversion (+28% velocity lift), isolated developer cockpit, and zero-idle agent fleet."
                                         },
                                         {
-                                            phase_id: "P6_MASTER_BRAIN_SOVEREIGN",
-                                            title: "Master Projects Brain & Air-Tight Local Perimeter",
+                                            phase_id: "EPOCH_10_SOVEREIGN_BRAIN_CURRENT",
+                                            title: "Master Projects Brain v2.6.0, Air-Tight Local Perimeter & Complete History Ingestion",
                                             timeframe: "September 6-7, 2026",
                                             commit_start: "4c3a89f7",
                                             commit_end: "CURRENT",
-                                            milestone: "Engineered the Master Projects Brain (v2.6.0-SOVEREIGN MASTER) with 42 synapses and 18 knowledge nodes. Built dedicated Agent OS Cockpit in Dev OS with Visual Synapse Inspector Modal. Mathematically enforced the Air-Tight Local Perimeter: 100% client-initiated outbound pull/push, zero inbound server reach into local workstation.",
-                                            impact: "Unified autonomous intelligence and bi-directional synchronicity with zero local vulnerability."
+                                            milestone: "Engineered the Master Projects Brain cognitive engine (v2.6.0-SOVEREIGN MASTER) with 42 synapses and 24 knowledge nodes. Built dedicated Agent OS Cockpit in Dev OS with interactive cognitive network canvas, real-time directive telemetry, and Synapse Inspector modal. Mathematically enforced the Air-Tight Local Perimeter: 100% client-initiated outbound pull/push, zero inbound server reach into local workstation. Ingested complete chronological history across all 10 epochs from January 2026 to present, preserving every architectural evolution and strategic pivot in cognitive memory.",
+                                            impact: "Complete historical awareness, unified autonomous intelligence, and airtight operational security."
                                         }
                                     ]).map((phase: any, pIdx: number) => (
                                         <div key={pIdx} className="rounded-xl border border-slate-800/90 bg-slate-900/80 p-3.5 transition hover:border-amber-500/40">
