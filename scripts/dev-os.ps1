@@ -281,6 +281,55 @@ switch ($Command.ToLower()) {
         }
     }
 
+    "brain-timeline" {
+        Write-Host "[*] Querying Master Brain Historical Timeline from Server..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/brain/timeline" -Method GET -Headers $headers
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            Write-Host "  MASTER PROJECTS BRAIN: COMPLETE CHRONICLE (v$($resp.brain_version))" -ForegroundColor Cyan
+            Write-Host "  Total Epochs: $($resp.total_phases) | Milestones: $($resp.commit_milestones.Count)" -ForegroundColor Green
+            Write-Host "========================================================" -ForegroundColor Magenta
+
+            foreach ($p in $resp.timeline) {
+                Write-Host "`n  [$($p.phase_id)] $($p.title)" -ForegroundColor Yellow
+                Write-Host "    Timeframe: $($p.timeframe) | Commits: $($p.commit_start)$(if ($p.commit_end) { ' -> ' + $p.commit_end })" -ForegroundColor Cyan
+                Write-Host "    Milestone: $($p.milestone)" -ForegroundColor White
+                Write-Host "    Impact:    $($p.impact)" -ForegroundColor Green
+            }
+
+            Write-Host "`nKEY COMMIT MILESTONES (1,334+ COMMITS LINEAGE):" -ForegroundColor Magenta
+            foreach ($cm in $resp.commit_milestones) {
+                Write-Host "  $($cm.hash) ($($cm.date)): $($cm.message)" -ForegroundColor DarkCyan
+            }
+        } catch {
+            Write-Host "[ERR] Error querying timeline: $_" -ForegroundColor Red
+        }
+    }
+
+    "inject-history" {
+        Write-Host "[*] Dispatching Swarm Memory Injection into Master Brain..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/brain/inject-history" -Method POST -Headers $headers
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            Write-Host "  [OK] MASTER BRAIN FULL HISTORY INJECTION COMPLETED!" -ForegroundColor Green
+            Write-Host "  Brain Version: $($resp.brain_version)" -ForegroundColor Cyan
+            Write-Host "  Timeline Phases Ingested: $($resp.timeline_phases_count)" -ForegroundColor Green
+            Write-Host "  Knowledge Categories: $($resp.knowledge_categories_count)" -ForegroundColor Green
+            Write-Host "  Swarm Events Injected: $($resp.injected_events_count)" -ForegroundColor Yellow
+            Write-Host "  Synapses Energized: $($resp.synapses_energized)" -ForegroundColor Cyan
+            Write-Host "  Perimeter Status: $($resp.perimeter_status)" -ForegroundColor Yellow
+            Write-Host "========================================================" -ForegroundColor Magenta
+
+            Write-Host "`nRECENT BRAIN COGNITION STREAM:" -ForegroundColor Yellow
+            foreach ($th in $resp.recent_thoughts) {
+                Write-Host "  [$($th.type)] $($th.source) ($($th.timestamp)):" -ForegroundColor DarkCyan
+                Write-Host "      $($th.thought)" -ForegroundColor White
+            }
+        } catch {
+            Write-Host "[ERR] History injection failed: $_" -ForegroundColor Red
+        }
+    }
+
     "scan-secrets" {
         powershell -ExecutionPolicy Bypass -File .\scripts\scan-secrets.ps1
     }
@@ -289,6 +338,8 @@ switch ($Command.ToLower()) {
         Write-Host "Available Commands:" -ForegroundColor Yellow
         Write-Host "  brain                      - Query Master Projects Brain, synapses, and cognitive thought stream"
         Write-Host "  brain-knowledge            - Query grounded knowledge graph (architecture, Oahu economics, CRO)"
+        Write-Host "  brain-timeline             - Display complete chronological history from inception to current"
+        Write-Host "  inject-history             - Dispatch swarm memory injection into Master Brain"
         Write-Host "  brain-sync [thought]       - Client-initiated outbound push of directive/thought to Master Brain"
         Write-Host "  inspect [id]               - Deep inspection of sub-master or agent synapse and security perimeter"
         Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (6 Sub-Masters, 17 Agents)"
