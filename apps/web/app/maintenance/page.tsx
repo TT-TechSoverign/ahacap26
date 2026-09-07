@@ -59,13 +59,20 @@ export default function MaintenancePage() {
                                 <EditableText contentKey="maintenance.hero.description" />
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <button className="bg-primary text-navy-deep px-8 py-4 rounded font-bold tracking-widest hover:bg-accent transition-all uppercase flex items-center justify-center gap-2">
+                                <Link 
+                                    href="/contact?service=AC+Maintenance" 
+                                    className="bg-primary text-navy-deep px-8 py-4 rounded-xl font-bold tracking-widest hover:bg-accent transition-all uppercase flex items-center justify-center gap-2"
+                                >
                                     <Calendar className="size-5" />
-                                    <EditableText contentKey="maintenance.hero.cta_schedule" />
-                                </button>
-                                <button className="border border-white/20 text-white px-8 py-4 rounded font-bold tracking-widest hover:bg-white/10 transition-all uppercase">
-                                    <EditableText contentKey="maintenance.hero.cta_rates" />
-                                </button>
+                                    Schedule Appointment First
+                                </Link>
+                                <a 
+                                    href="tel:808-488-1111" 
+                                    className="border border-white/20 text-white px-8 py-4 rounded-xl font-bold tracking-widest hover:bg-white/10 transition-all uppercase flex items-center justify-center gap-2"
+                                >
+                                    <PhoneCall className="size-5 text-primary" />
+                                    Call (808) 488-1111
+                                </a>
                             </div>
                         </div>
 
@@ -306,12 +313,14 @@ export default function MaintenancePage() {
                 </section>
             </main>
 
-            {/* Floating Action Button */}
             <div className="fixed bottom-8 right-8 z-50">
-                <button className="bg-primary text-navy-deep p-4 rounded-full shadow-2xl flex items-center gap-3 font-bold hover:scale-105 transition-all group">
-                    <span className="hidden group-hover:inline ml-2 uppercase text-xs tracking-widest"><EditableText contentKey="maintenance.floating_cta" /></span>
+                <Link 
+                    href="/contact?service=AC+Maintenance"
+                    className="bg-primary text-navy-deep p-4 rounded-full shadow-2xl flex items-center gap-3 font-bold hover:scale-105 transition-all group"
+                >
+                    <span className="hidden group-hover:inline ml-2 uppercase text-xs tracking-widest font-header font-black">Schedule Appointment</span>
                     <Rocket className="size-6" />
-                </button>
+                </Link>
             </div>
         </div>
     );

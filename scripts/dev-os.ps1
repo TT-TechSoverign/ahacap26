@@ -52,7 +52,12 @@ switch ($Command.ToLower()) {
     "run-agent" {
         if (-not $Target) {
             Write-Host "[!] Usage: .\scripts\dev-os.ps1 run-agent <agent_id>" -ForegroundColor Red
-            Write-Host "   Available: agent_host_sentinel, agent_container_sentinel, agent_db_guardian, agent_revenue_reconciler, agent_funnel_telemetry, agent_seo_metadata, agent_security_shield, agent_deployment_guardian" -ForegroundColor Yellow
+            Write-Host "   Infra:      agent_host_sentinel, agent_container_sentinel, agent_db_guardian, agent_storage_sentinel" -ForegroundColor Yellow
+            Write-Host "   Security:   agent_security_shield, agent_commit_sentinel, agent_compliance_auditor" -ForegroundColor Yellow
+            Write-Host "   Commerce:   agent_funnel_telemetry, agent_cro_optimizer, agent_revenue_reconciler" -ForegroundColor Yellow
+            Write-Host "   Growth:     agent_seo_metadata, agent_oahu_grounding, agent_market_research" -ForegroundColor Yellow
+            Write-Host "   CRM:        agent_crm_dispatch, agent_customer_lifecycle" -ForegroundColor Yellow
+            Write-Host "   Deployment: agent_deployment_guardian, agent_build_qa" -ForegroundColor Yellow
             return
         }
         Write-Host "[*] Triggering Agent: $Target on Server..." -ForegroundColor Yellow
@@ -66,7 +71,7 @@ switch ($Command.ToLower()) {
     }
 
     "run-fleet" {
-        Write-Host "[*] Dispatching full fleet: Running All 8 Monitoring Agents sequentially..." -ForegroundColor Yellow
+        Write-Host "[*] Dispatching full fleet: Running All 17 Specialized Agents sequentially..." -ForegroundColor Yellow
         try {
             $resp = Invoke-RestMethod -Uri "$ServerUrl/agents/run-all" -Method POST -Headers $headers
             Write-Host "[OK] Fleet Audit Completed at $($resp.executed_at) (All Healthy: $($resp.all_healthy)):" -ForegroundColor Green
@@ -108,32 +113,35 @@ switch ($Command.ToLower()) {
             Write-Host "========================================================" -ForegroundColor Magenta
 
             foreach ($sm in $resp.submasters) {
+                $smCol = if ($sm.lifecycle -eq "ACTIVE") { "Green" } else { "Gray" }
                 Write-Host "`n  [SUB-MASTER] $($sm.name) ($($sm.id))" -ForegroundColor Yellow
                 Write-Host "    Scope: $($sm.scope)" -ForegroundColor DarkGray
-                Write-Host "    Lifecycle: [$($sm.lifecycle)]" -ForegroundColor $(if ($sm.lifecycle -eq "ACTIVE") { "Green" } else { "Gray" })
+                Write-Host "    Lifecycle: [$($sm.lifecycle)]" -ForegroundColor $smCol
                 Write-Host "    Supervised Agents:" -ForegroundColor White
                 foreach ($ca in $sm.child_agents) {
                     $cCol = if ($ca.lifecycle -eq "ACTIVE") { "Green" } else { "DarkGray" }
-                    Write-Host "      └─ [$($ca.lifecycle)] $($ca.name) ($($ca.id))" -ForegroundColor $cCol
+                    Write-Host "      - [$($ca.lifecycle)] $($ca.name) ($($ca.id))" -ForegroundColor $cCol
                     Write-Host "           Scope: $($ca.scope)" -ForegroundColor DarkGray
                     Write-Host "           Last Run: $($ca.last_run_at)" -ForegroundColor DarkGray
                 }
             }
         } catch {
-            Write-Host "[!] Error querying agent tree: $_" -ForegroundColor Red
+            Write-Host "[ERR] Error querying agent tree: $_" -ForegroundColor Red
         }
     }
 
     "run-submaster" {
         if (-not $Target) {
-            Write-Host "[!] Usage: .\scripts\dev-os.ps1 run-submaster <commerce|infra|growth|security>" -ForegroundColor Red
+            Write-Host "[ERR] Usage: .\scripts\dev-os.ps1 run-submaster [infra|security|commerce|growth|crm|deploy]" -ForegroundColor Red
             return
         }
         $targetMap = @{
-            "commerce" = "submaster_commerce_telemetry"
-            "infra" = "submaster_infrastructure"
-            "growth" = "submaster_growth_grounding"
-            "security" = "submaster_security_deployment"
+            "infra"      = "submaster_infrastructure"
+            "security"   = "submaster_security_compliance"
+            "commerce"   = "submaster_commerce_telemetry"
+            "growth"     = "submaster_growth_grounding"
+            "crm"        = "submaster_crm_operations"
+            "deploy"     = "submaster_deployment_quality"
         }
         $smId = if ($targetMap.ContainsKey($Target.ToLower())) { $targetMap[$Target.ToLower()] } else { $Target }
         Write-Host "[*] Dispatching Category Sub-Master: $smId on Server..." -ForegroundColor Yellow
@@ -142,21 +150,27 @@ switch ($Command.ToLower()) {
             Write-Host "[OK] Sub-Master Execution Completed for $($resp.submaster_name):" -ForegroundColor Green
             $resp.results | ConvertTo-Json -Depth 5 | Write-Host -ForegroundColor White
         } catch {
-            Write-Host "[!] Sub-master run failed: $_" -ForegroundColor Red
+            Write-Host "[ERR] Sub-master run failed: $_" -ForegroundColor Red
         }
     }
 
     "waterfall" {
-        Write-Host "[*] Querying Multi-Funnel Visual Conversion Waterfall..." -ForegroundColor Yellow
+        Write-Host "[*] Querying Multi-Funnel Visual Conversion Waterfall (By Appointment First)..." -ForegroundColor Yellow
         try {
             $resp = Invoke-RestMethod -Uri "$ServerUrl/analytics/overview" -Method GET -Headers $headers
             Write-Host "`n========================================================" -ForegroundColor Cyan
-            Write-Host "  MULTI-FUNNEL REAL-WORLD CONVERSION WATERFALL" -ForegroundColor Cyan
+            Write-Host "  MULTI-FUNNEL REAL-WORLD CONVERSION WATERFALL (BY APPOINTMENT FIRST)" -ForegroundColor Cyan
             Write-Host "========================================================" -ForegroundColor Cyan
             foreach ($step in $resp.waterfall) {
+                $wfCol = if ($step.step -eq 5) { "Green" } elseif ($step.step -eq 4) { "Yellow" } else { "Cyan" }
                 Write-Host "`n  Step $($step.step): $($step.name)" -ForegroundColor White
                 Write-Host "    $($step.desc)" -ForegroundColor DarkGray
-                Write-Host "    Volume: $($step.count) | Retention: $($step.retention_pct)% | Drop-off: $($step.dropoff_pct)%" -ForegroundColor $(if ($step.step -eq 5) { "Green" } else { "Cyan" })
+                Write-Host "    Volume: $($step.count) | Retention: $($step.retention_pct)% | Drop-off: $($step.dropoff_pct)%" -ForegroundColor $wfCol
+            }
+            if ($resp.efficiency.verified_leads -ne $null) {
+                Write-Host "`nLEADS & APPOINTMENTS:" -ForegroundColor Green
+                Write-Host "  Verified Leads Count: $($resp.efficiency.verified_leads)"
+                Write-Host "  Verified Orders Count: $($resp.efficiency.verified_orders)"
             }
             Write-Host "`nEFFICIENCY METRICS:" -ForegroundColor Yellow
             Write-Host "  Beacon Ingestion Latency: $($resp.efficiency.beacon_ingestion_latency_ms)ms"
@@ -169,7 +183,7 @@ switch ($Command.ToLower()) {
                 Write-Host "      $($p.detail)" -ForegroundColor DarkGray
             }
         } catch {
-            Write-Host "[!] Error querying waterfall: $_" -ForegroundColor Red
+            Write-Host "[ERR] Error querying waterfall: $_" -ForegroundColor Red
         }
     }
 
@@ -179,12 +193,12 @@ switch ($Command.ToLower()) {
 
     default {
         Write-Host "Available Commands:" -ForegroundColor Yellow
-        Write-Host "  tree                       - Display complete hierarchical Agent Org Tree"
+        Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (6 Sub-Masters, 17 Agents)"
         Write-Host "  status                     - Query fleet status and active agents"
-        Write-Host "  run-submaster <name>       - Dispatch a Category Sub-Master suite (commerce, infra, growth, security)"
-        Write-Host "  run-agent <agent_id>       - Trigger a single on-demand agent"
-        Write-Host "  run-fleet                  - Sequentially execute all 10 agents"
-        Write-Host "  waterfall                  - Display 5-stage visual conversion waterfall"
+        Write-Host "  run-submaster [name]       - Dispatch a Category Sub-Master suite (infra, security, commerce, growth, crm, deploy)"
+        Write-Host "  run-agent [agent_id]       - Trigger a single on-demand agent"
+        Write-Host "  run-fleet                  - Sequentially execute all 17 agents"
+        Write-Host "  waterfall                  - Display 5-stage By Appointment First conversion waterfall"
         Write-Host "  reconcile                  - Trigger on-demand Stripe auto-reconciliation"
         Write-Host "  verify-live                - Run 3-stage live deployment swarm check"
         Write-Host "  scan-secrets               - Run local git repository secret scanner"

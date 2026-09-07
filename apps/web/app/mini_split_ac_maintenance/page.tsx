@@ -148,7 +148,7 @@ export default function MiniSplitACMaintenancePage() {
                             href="/contact?service=Mini+Split+Maintenance"
                             className="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl border border-slate-700 flex items-center gap-2 transition-colors"
                         >
-                            Book Oahu Service
+                            Schedule Appointment
                         </Link>
                         <a 
                             href="tel:808-488-1111"
@@ -214,13 +214,13 @@ export default function MiniSplitACMaintenancePage() {
                                         <span className="text-3xl font-header font-black text-white">$175</span>
                                         <span className="text-slate-500 text-xs font-bold uppercase">/ unit</span>
                                     </div>
-                                    <span className="text-[10px] text-slate-400">Routine Tune-Up</span>
+                                    <span className="text-[10px] text-cyan-400 font-semibold block">By Appointment First</span>
                                 </div>
                                 <Link 
-                                    href="/contact?service=Mini+Split+Maintenance&notes=Basic+Cleaning+$175" 
+                                    href="/contact?service=Mini+Split+Maintenance&notes=Basic+Cleaning+$175+(By+Appointment+First)" 
                                     className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors border border-slate-700 flex items-center gap-1.5"
                                 >
-                                    Book Basic <ArrowRight className="size-3.5 text-primary" />
+                                    Schedule Basic <ArrowRight className="size-3.5 text-primary" />
                                 </Link>
                             </div>
                         </div>
@@ -281,13 +281,13 @@ export default function MiniSplitACMaintenancePage() {
                                         <span className="text-3xl font-header font-black text-cyan-400">$275</span>
                                         <span className="text-slate-400 text-xs font-bold uppercase">/ unit</span>
                                     </div>
-                                    <span className="text-[10px] text-cyan-300">Complete Chemical Flush</span>
+                                    <span className="text-[10px] text-cyan-300 font-semibold block">By Appointment First</span>
                                 </div>
                                 <Link 
-                                    href="/contact?service=Mini+Split+Maintenance&notes=Premium+Chemical+Teardown+$275" 
+                                    href="/contact?service=Mini+Split+Maintenance&notes=Premium+Chemical+Teardown+$275+(By+Appointment+First)" 
                                     className="px-5 py-2.5 bg-primary hover:bg-cyan-300 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)] flex items-center gap-1.5"
                                 >
-                                    Book Premium <ArrowRight className="size-3.5" />
+                                    Schedule Premium <ArrowRight className="size-3.5" />
                                 </Link>
                             </div>
                         </div>
@@ -443,13 +443,16 @@ export default function MiniSplitACMaintenancePage() {
                                     })}
                                     className="w-full py-3.5 px-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2"
                                 >
-                                    Book {calcUnits} {calcUnits === 1 ? 'Unit' : 'Units'} (${totalPrice}) <ArrowRight className="size-4" />
+                                    Schedule Cleaning Appointment (${totalPrice} est.) <ArrowRight className="size-4" />
                                 </Link>
-                                <div className="text-center mt-2.5">
+                                <div className="text-center mt-2.5 space-y-1">
+                                    <p className="text-[10px] text-cyan-400 font-semibold tracking-wider uppercase">
+                                        By Appointment First • Zero Online Payment Required
+                                    </p>
                                     <a
                                         href="tel:808-488-1111"
                                         onClick={() => trackFunnelEvent('click_to_call', { source: 'mini_split_calculator' })}
-                                        className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors"
+                                        className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors block"
                                     >
                                         Or call (808) 488-1111 to schedule directly
                                     </a>

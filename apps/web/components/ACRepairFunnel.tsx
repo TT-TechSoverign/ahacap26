@@ -182,15 +182,20 @@ export default function ACRepairFunnel() {
                                     <Link
                                         href={getContactLink()}
                                         className="px-8 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(0,174,239,0.4)]"
-                                        aria-label="Book Diagnostic Appointment"
+                                        aria-label="Schedule Diagnostic Appointment"
                                     >
-                                        Book Diagnostic Appointment
+                                        Schedule Diagnostic Appointment
                                         <Sparkles className="w-4 h-4 text-slate-950" />
                                     </Link>
                                 </div>
-                                <p className="text-[10px] text-slate-400 text-center font-sans">
-                                    Diagnostic appointments and repairs are subject to technician availability, physical site inspection, and scope of work approval.
-                                </p>
+                                <div className="space-y-1 text-center">
+                                    <p className="text-[10px] text-cyan-400 font-semibold tracking-wider uppercase">
+                                        By Appointment First • Zero Online Payment Required
+                                    </p>
+                                    <p className="text-[10px] text-slate-400 font-sans">
+                                        Diagnostic appointments and repairs are scheduled by appointment first and subject to technician availability, physical site inspection, and scope of work approval.
+                                    </p>
+                                </div>
                             </div>
                         </motion.div>
                     )}

@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCart } from '../context/CartContext';
 import { isCampaignActive } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { sendGAEvent } from '@next/third-parties/google';
@@ -18,7 +17,7 @@ import {
     ArrowRight, 
     ArrowLeft, 
     Zap, 
-    ShoppingBag, 
+    Phone, 
     Sparkles, 
     Wrench, 
     Wind, 
@@ -54,8 +53,6 @@ interface Product {
 }
 
 export function ACSelectorWizard() {
-    const { addToCart } = useCart();
-    
     // Step state
     const [step, setStep] = useState(1);
     
@@ -731,7 +728,16 @@ export function ACSelectorWizard() {
                                     </div>
                                 ) : (
                                     /* Recommendations list */
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="space-y-6">
+                                        <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 flex items-start gap-3">
+                                            <Shield className="size-5 text-primary shrink-0 mt-0.5" />
+                                            <div className="text-left text-xs">
+                                                <span className="font-header font-black text-white uppercase tracking-wider block">By Appointment First — Zero Upfront Payment</span>
+                                                <span className="text-slate-300 text-[11px] leading-relaxed">All equipment sizing, installation recommendations, and in-home assessments are scheduled by appointment first. Submit your room details below or call our office at (808) 488-1111 to schedule your consultation window with zero online payment required.</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {matches.map((product) => {
                                             const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
                                             const activePrice = isPromo ? product.promo_price! : product.price;
@@ -785,33 +791,47 @@ export function ACSelectorWizard() {
                                                         </div>
                                                     </div>
 
-                                                    {/* CTA Actions */}
-                                                    <div className="flex gap-3 pt-6 mt-4 border-t border-white/5">
-                                                        <button
-                                                            onClick={() => {
-                                                                addToCart(product);
-                                                                trackFunnelEvent('sizing_add_to_cart', {
-                                                                    product_id: product.id,
-                                                                    name: product.name,
-                                                                    price: activePrice,
-                                                                    btu: product.btu
-                                                                });
-                                                            }}
-                                                            disabled={product.stock === 0}
-                                                            className="flex-1 py-3 bg-primary hover:bg-primary/95 hover:scale-[1.02] disabled:opacity-50 text-black font-black uppercase text-[10px] tracking-wider rounded-xl transition-all shadow-[0_0_15px_rgba(0,174,239,0.15)] flex items-center justify-center gap-1"
-                                                        >
-                                                            <ShoppingBag className="size-3.5" /> {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
-                                                        </button>
-                                                        <Link
-                                                            href={`/shop/${product.id}-${product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}
-                                                            className="px-4 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-mono text-[9px] uppercase tracking-widest rounded-xl transition-all flex items-center justify-center"
-                                                        >
-                                                            Specs
-                                                        </Link>
+                                                    {/* CTA Actions - Strictly By Appointment First */}
+                                                    <div className="space-y-2 pt-6 mt-4 border-t border-white/5">
+                                                        <div className="flex gap-2">
+                                                            <Link
+                                                                href={`/contact?service=AC+Sizing+Consultation&notes=${encodeURIComponent(getDispatchNotes())}%20Recommended%20Unit:%20${encodeURIComponent(product.name)}`}
+                                                                onClick={() => {
+                                                                    trackFunnelEvent('sizing_appointment_intent', {
+                                                                        product_id: product.id,
+                                                                        name: product.name,
+                                                                        price: activePrice,
+                                                                        btu: product.btu
+                                                                    });
+                                                                }}
+                                                                className="flex-1 py-3 px-3 bg-primary hover:bg-cyan-300 hover:scale-[1.02] text-slate-950 font-header font-black uppercase text-[10px] tracking-wider rounded-xl transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)] flex items-center justify-center gap-1.5 text-center"
+                                                            >
+                                                                Schedule Consultation <ArrowRight className="size-3" />
+                                                            </Link>
+                                                            <Link
+                                                                href={`/shop/${product.id}-${product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}
+                                                                className="px-3.5 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-mono text-[9px] uppercase tracking-widest rounded-xl transition-all flex items-center justify-center shrink-0"
+                                                            >
+                                                                Specs
+                                                            </Link>
+                                                        </div>
+                                                        <div className="flex items-center justify-between text-[9px] text-slate-400 px-1 pt-1">
+                                                            <span className="text-cyan-400 font-semibold flex items-center gap-1">
+                                                                <Check className="size-2.5" /> By Appointment First
+                                                            </span>
+                                                            <a 
+                                                                href="tel:808-488-1111" 
+                                                                className="hover:text-primary transition-colors flex items-center gap-1 font-mono text-slate-300"
+                                                                onClick={() => trackFunnelEvent('click_to_call', { source: 'sizing_card' })}
+                                                            >
+                                                                <Phone className="size-2.5 text-primary" /> (808) 488-1111
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             );
                                         })}
+                                        </div>
                                     </div>
                                 )}
                             </div>

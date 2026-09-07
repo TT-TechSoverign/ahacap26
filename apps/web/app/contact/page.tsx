@@ -29,7 +29,20 @@ export default function ContactPage() {
                 </div>
 
 
-                <div className="flex flex-col gap-8 lg:gap-12">
+                <div className="flex flex-col gap-6 lg:gap-8">
+                    {/* By Appointment First Trust Banner */}
+                    <div className="max-w-5xl mx-auto w-full bg-primary/10 border border-primary/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                        <div className="flex items-center gap-3">
+                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                            <span className="text-slate-200 font-sans">
+                                <strong className="text-white">By Appointment First:</strong> Submit your request below or call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>. Zero online payment required to schedule.
+                            </span>
+                        </div>
+                        <span className="font-mono text-[10px] uppercase tracking-widest text-primary bg-primary/10 border border-primary/30 px-3 py-1 rounded-full shrink-0">
+                            Oahu Dispatch Active
+                        </span>
+                    </div>
+
                     {/* section 2: Dispatch Wizard - Main Section */}
                     <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <div className="bg-background-dark/50 border border-white/10 p-6 lg:p-8 rounded-2xl shadow-[0_0_100px_rgba(0,0,0,0.6)] relative overflow-hidden backdrop-blur-md group max-w-5xl mx-auto">

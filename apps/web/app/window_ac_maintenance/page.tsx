@@ -155,19 +155,19 @@ export default function WindowAcMaintenancePage() {
                     {/* Pricing & CTA Banner */}
                     <div className="max-w-xl mx-auto bg-slate-900/80 border border-cyan-500/30 rounded-2xl p-6 shadow-xl mb-6 flex flex-col sm:flex-row items-center justify-between gap-6">
                         <div className="text-center sm:text-left">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block mb-1">Complete Teardown & Sanitization</span>
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block mb-1">Waipahu Warehouse Drop-Off — By Appointment First</span>
                             <div className="flex items-baseline justify-center sm:justify-start gap-1.5">
                                 <span className="text-4xl font-header font-black text-white">$275</span>
                                 <span className="text-xs text-slate-400 font-medium">/ unit (Waipahu Drop-off)</span>
                             </div>
-                            <span className="text-[11px] text-slate-400 block mt-1">Subject to initial phone call & drop-off scheduling</span>
+                            <span className="text-[11px] text-slate-400 block mt-1">Zero online prepayment required. Schedule appointment before arriving.</span>
                         </div>
                         <div className="flex flex-col gap-2.5 w-full sm:w-auto">
                             <Link 
-                                href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275"
+                                href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275+(By+Appointment+First)"
                                 className="px-6 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all flex items-center justify-center gap-1.5 text-center"
                             >
-                                Schedule Cleaning <ArrowRight className="size-3.5" />
+                                Schedule Drop-Off Appointment <ArrowRight className="size-3.5" />
                             </Link>
                             <a 
                                 href="tel:808-488-1111"
@@ -285,10 +285,10 @@ export default function WindowAcMaintenancePage() {
 
                     <div className="mt-8 text-center">
                         <Link 
-                            href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275"
+                            href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275+(By+Appointment+First)"
                             className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all"
                         >
-                            Book Your $275 Teardown Service <ArrowRight className="size-4" />
+                            Schedule Drop-Off Appointment ($275 est.) <ArrowRight className="size-4" />
                         </Link>
                     </div>
                 </div>
@@ -309,10 +309,10 @@ export default function WindowAcMaintenancePage() {
                         
                         <div className="flex flex-col sm:flex-row items-center gap-4">
                             <Link 
-                                href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275" 
+                                href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275+(By+Appointment+First)" 
                                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black tracking-wider uppercase px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.4)] text-xs"
                             >
-                                Book Your Teardown Cleaning
+                                Schedule Drop-Off Appointment
                                 <ArrowRight className="size-4" />
                             </Link>
                         </div>
@@ -437,19 +437,22 @@ export default function WindowAcMaintenancePage() {
 
                             <div className="mt-6">
                                 <Link
-                                    href={`/contact?service=Window+AC+Cleaning&unitSize=${encodeURIComponent(selectedBtu)}&notes=Waipahu+Warehouse+Teardown+$275`}
+                                    href={`/contact?service=Window+AC+Cleaning&unitSize=${encodeURIComponent(selectedBtu)}&notes=Waipahu+Warehouse+Teardown+$275+(By+Appointment+First)`}
                                     onClick={() => trackFunnelEvent('window_ac_dropoff_book_click', { btu: selectedBtu, price: 275 })}
                                     className="w-full py-3.5 px-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2"
                                 >
-                                    Schedule {selectedBtu} Drop-Off ($275) <ArrowRight className="size-4" />
+                                    Schedule {selectedBtu} Drop-Off Appointment <ArrowRight className="size-4" />
                                 </Link>
-                                <div className="text-center mt-2.5">
+                                <div className="text-center mt-2.5 space-y-1">
+                                    <p className="text-[10px] text-cyan-400 font-semibold tracking-wider uppercase">
+                                        By Appointment First • Zero Online Payment Required
+                                    </p>
                                     <a
                                         href="tel:808-488-1111"
                                         onClick={() => trackFunnelEvent('click_to_call', { source: 'window_ac_dropoff_calc' })}
-                                        className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors"
+                                        className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors block"
                                     >
-                                        Or call (808) 488-1111 to coordinate drop-off
+                                        Or call (808) 488-1111 to coordinate drop-off window
                                     </a>
                                 </div>
                             </div>
@@ -546,10 +549,10 @@ export default function WindowAcMaintenancePage() {
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                         <Link 
-                            href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275"
+                            href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275+(By+Appointment+First)"
                             className="w-full sm:w-auto px-8 py-3.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all flex items-center justify-center gap-1.5"
                         >
-                            Schedule Drop-Off <ArrowRight className="size-3.5" />
+                            Schedule Drop-Off Appointment <ArrowRight className="size-3.5" />
                         </Link>
                         <a 
                             href="tel:808-488-1111"
