@@ -341,8 +341,18 @@ switch ($Command.ToLower()) {
 
             if ($Target) {
                 $targetKey = $Target.ToLower()
+                $sop = $null
                 if ($resp.sops.PSObject.Properties.Name -contains $targetKey) {
                     $sop = $resp.sops.$targetKey
+                } else {
+                    foreach ($prop in $resp.sops.PSObject.Properties) {
+                        if ($prop.Value.code -and $prop.Value.code.ToLower() -eq $targetKey) {
+                            $sop = $prop.Value
+                            break
+                        }
+                    }
+                }
+                if ($sop) {
                     Write-Host "`n  [$($sop.code)] $($sop.title)" -ForegroundColor Yellow
                     Write-Host "  Domain: $($sop.domain) | Supervisor: $($sop.supervisor)" -ForegroundColor Cyan
                     Write-Host "  Mandate: $($sop.mandate)" -ForegroundColor White
