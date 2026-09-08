@@ -360,6 +360,50 @@ class AnalyticsSwarmEngine:
                 "rationale": "Side-by-side room sq ft, voltage, and HECO operating cost comparison for 6k, 8k, 10k, 12k, 14k, 18k, and 23.5k with direct Stripe buttons.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+38% Multi-Model Conversion"
+            },
+            {
+                "id": "CRO-REC-10",
+                "priority": "CRITICAL",
+                "cluster": "Emergency Oahu AC Repair (GSC Rank 5.5, 2.3k Impr)",
+                "title": "Emergency AC Repair Oahu Diagnostic & Triage Funnel",
+                "target_path": "/ac-repair-oahu",
+                "target_funnel": "Emergency Repair Lead & In-Stock Replacement Bridge",
+                "rationale": "Captures top GSC search query 'ac repair near me' (Rank 5.5) with interactive triage wizard, flat-rate fee transparency, and immediate replacement gateway.",
+                "status": "DEPLOYED",
+                "estimated_impact": "+55% Diagnostic Lead Velocity"
+            },
+            {
+                "id": "CRO-REC-11",
+                "priority": "HIGH",
+                "cluster": "AC Mold Cleaning & Hydro-Bag Sanitization (2.4k Impr)",
+                "title": "Clinical AC Cleaning & Coil Sanitization Oahu",
+                "target_path": "/ac-cleaning-oahu",
+                "target_funnel": "Tier 1 Window AC Teardown & Tier 2 Mini-Split Hydro Clean",
+                "rationale": "Targets salt-air mold/mildew queries with transparent pricing ($275 window teardown, $175/$275 mini-split hydro-bag) and 24-48 hr warehouse turnaround.",
+                "status": "DEPLOYED",
+                "estimated_impact": "+45% Maintenance Booking Lift"
+            },
+            {
+                "id": "CRO-REC-12",
+                "priority": "CRITICAL",
+                "cluster": "In-Stock Oahu AC Warehouse / Beat Mainland Wait (1.1k Impr)",
+                "title": "In-Stock Oahu Window AC Warehouse Hub",
+                "target_path": "/shop/oahu-window-ac-warehouse",
+                "target_funnel": "1-Click Stripe Sales, Free Waipahu Pickup & $50 Delivery",
+                "rationale": "Directly eliminates 14-21 day mainland barge transit anxiety. Real-time Waipahu stock badges, $45 rebate form included, and professional installation add-on.",
+                "status": "DEPLOYED",
+                "estimated_impact": "+50% Window AC Direct Cart Conversion"
+            },
+            {
+                "id": "CRO-REC-13",
+                "priority": "HIGH",
+                "cluster": "Multi-Zone Ductless Contractor Pricing (625 Impr)",
+                "title": "Turnkey Ductless Mini-Split Installation Oahu",
+                "target_path": "/ductless-mini-split-installation-oahu",
+                "target_funnel": "1-to-4 Zone Estimates, 60A/100A Panel Audit & $0 Deposit Intake",
+                "rationale": "Demystifies multi-zone contractor pricing ($3.8k to $13.5k turnkey), clarifies 0% rebate truth, and solves older Oahu electrical panel compatibility.",
+                "status": "DEPLOYED",
+                "estimated_impact": "+40% Qualified Mini-Split In-Home Quotes"
             }
         ]
 

@@ -68,7 +68,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/shop/large-room-window-ac-oahu',
         '/shop/lg-dual-inverter-8000-btu-oahu',
         '/window-ac-vs-mini-split-oahu',
-        '/shop/lg-dual-inverter-guide'
+        '/shop/lg-dual-inverter-guide',
+        '/ac-repair-oahu',
+        '/ac-cleaning-oahu',
+        '/shop/oahu-window-ac-warehouse',
+        '/ductless-mini-split-installation-oahu'
     ];
 
     const staticRoutes = [
