@@ -60,6 +60,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 1. Define Static Routes (Always included)
     // NOTE: Routes with hash fragments (e.g., /shop#dual_inverter) have been removed 
     // to comply with Google Sitemap protocol and avoid "Crawled - currently not indexed" bloat.
+    const highYieldRoutes = [
+        '/clean-vs-replace-window-ac',
+        '/window-ac-installation',
+        '/shop/window-ac-plug-guide',
+        '/mini-split-estimate',
+        '/shop/large-room-window-ac-oahu',
+        '/shop/lg-dual-inverter-8000-btu-oahu',
+        '/window-ac-vs-mini-split-oahu',
+        '/shop/lg-dual-inverter-guide'
+    ];
+
     const staticRoutes = [
         '',
         '/shop',
@@ -70,12 +81,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/window_ac_maintenance',
         '/sizing',
         '/service-areas',
+        ...highYieldRoutes,
         ...cityRoutes
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
         changeFrequency: 'daily' as const,
-        priority: route === '' ? 1.0 : (route.startsWith('/service-areas/') ? 0.7 : 0.8),
+        priority: route === '' ? 1.0 : (highYieldRoutes.includes(route) ? 0.9 : (route.startsWith('/service-areas/') ? 0.7 : 0.8)),
     }));
 
     // 2. Fetch Dynamic Product Routes

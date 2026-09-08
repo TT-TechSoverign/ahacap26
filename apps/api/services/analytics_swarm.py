@@ -316,6 +316,50 @@ class AnalyticsSwarmEngine:
                 "rationale": "The 8,000 BTU unit is only $31 more than the 6,000 BTU model ($535 vs $504) while offering +33% more cooling capacity and ThinQ Smart WiFi.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+30% Model Upgrade Velocity"
+            },
+            {
+                "id": "CRO-REC-06",
+                "priority": "CRITICAL",
+                "cluster": "High-Capacity Living Room Cooling",
+                "title": "Large Room 18k & 23.5k Window AC Landing Page",
+                "target_path": "/shop/large-room-window-ac-oahu",
+                "target_funnel": "Stripe Direct Sales (LW1822IVSM & LW2422IVSM)",
+                "rationale": "Positions 18k and 23.5k units as saving $4,500+ vs multi-zone mini split for open layouts. Resolves 208/230V outlet questions.",
+                "status": "DEPLOYED",
+                "estimated_impact": "+40% High-Capacity Sales"
+            },
+            {
+                "id": "CRO-REC-07",
+                "priority": "HIGH",
+                "cluster": "Master Bedroom Quiet Sizing",
+                "title": "Dedicated 8,000 BTU Bedroom Sweet Spot Funnel",
+                "target_path": "/shop/lg-dual-inverter-8000-btu-oahu",
+                "target_funnel": "Stripe Direct Sales (LW8022IVSM)",
+                "rationale": "Captures quiet bedroom AC searches; executes $31 upgrade anchor from 6k with 44dB acoustics and ThinQ WiFi.",
+                "status": "DEPLOYED",
+                "estimated_impact": "+35% 8k Velocity"
+            },
+            {
+                "id": "CRO-REC-08",
+                "priority": "HIGH",
+                "cluster": "Window AC vs Mini Split Decision",
+                "title": "Oahu Climate & HECO Financial Comparison Tool",
+                "target_path": "/window-ac-vs-mini-split-oahu",
+                "target_funnel": "Dual Conversion (Window AC Sale OR Mini Split Lead)",
+                "rationale": "Addresses 1,500+ monthly searches comparing systems under 44.2¢/kWh HECO rate; bridges to both Stripe and estimate booking.",
+                "status": "DEPLOYED",
+                "estimated_impact": "+32% Lead & Sale Capture"
+            },
+            {
+                "id": "CRO-REC-09",
+                "priority": "HIGH",
+                "cluster": "All-Model Inventory Liquidation",
+                "title": "Complete Oahu LG Dual Inverter Sizing Matrix",
+                "target_path": "/shop/lg-dual-inverter-guide",
+                "target_funnel": "Unified Storefront (All 7 LG Inverter Sizes)",
+                "rationale": "Side-by-side room sq ft, voltage, and HECO operating cost comparison for 6k, 8k, 10k, 12k, 14k, 18k, and 23.5k with direct Stripe buttons.",
+                "status": "DEPLOYED",
+                "estimated_impact": "+38% Multi-Model Conversion"
             }
         ]
 
