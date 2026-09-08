@@ -178,7 +178,7 @@ export default function WindowAcPlugGuidePage() {
                         115V vs. 230V <span className="text-primary">Window AC Plug</span> Matcher
                     </h1>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Don&apos;t let outlet confusion hold you back from living room cooling. Identify your wall plug in 10 seconds and unlock high-power 18k and 23.5k Dual Inverters ready for same-day Waipahu pickup.
+                        Don&apos;t let outlet confusion hold you back from living room cooling. Identify your wall plug in 10 seconds and unlock high-power 18k and 23.5k Dual Inverters ready for Waipahu warehouse pickup (subject to scheduling &amp; availability by appointment) or $50 flat island delivery.
                     </p>
                 </div>
 
@@ -297,7 +297,7 @@ export default function WindowAcPlugGuidePage() {
                                 {selectedPlug === '230v' ? 'In-Stock 230V High-Capacity Dual Inverters' : 'In-Stock 115V Standard Plug Dual Inverters'}
                             </h2>
                             <p className="text-slate-400 text-xs sm:text-sm mt-1">
-                                Available immediately for same-day Waipahu pickup or island-wide Oahu delivery.
+                                Available for Waipahu warehouse pickup (subject to scheduling &amp; inventory availability by appointment) or $50 flat island-wide Oahu delivery.
                             </p>
                         </div>
                         <div className="flex gap-2">
