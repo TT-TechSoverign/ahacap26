@@ -65,7 +65,7 @@ export default function WindowAcInstallationPage() {
             const payload = {
                 service: 'WINDOW_AC_INSTALLATION',
                 window_type: windowType,
-                include_bracket: includeBracket ? 'YES (+$65 Optional Add-on)' : 'NO (Customer has bracket/deep sill)',
+                include_bracket: includeBracket ? 'YES (Cantilever Bracket Kit - Subject to Initial Contact)' : 'NO (Existing Sill / Customer Hardware)',
                 unit_status: unitStatus,
                 btu: selectedBtu,
                 city,
@@ -73,7 +73,7 @@ export default function WindowAcInstallationPage() {
                 phone,
                 email,
                 address,
-                notes: `Bracket Option: ${includeBracket ? '+$65 Heavy-Duty Bracket Kit' : 'No Bracket Added'} | ${notes}`,
+                notes: `Bracket Option: ${includeBracket ? 'Cantilever Bracket Kit (Subject to Initial Contact)' : 'No Bracket Added'} | All window AC installation options subject to initial contact | ${notes}`,
             };
 
             await fetch('/api/v1/leads', {
@@ -99,8 +99,8 @@ export default function WindowAcInstallationPage() {
             a: "Over 60% of homes across Honolulu, Kailua, Kaneohe, and Waipahu feature jalousie louver windows. Our licensed CT-36775 technicians safely remove only the necessary glass louvers, precision-cut and seal custom marine-grade clear acrylic baffles with anti-vibration gaskets, and anchor the installation so zero mechanical stress is placed on the fragile aluminum jalousie tracks."
         },
         {
-            q: "Is an exterior support bracket included, or is it an optional add-on for additional pricing?",
-            a: "The heavy-duty cantilever exterior support bracket is an OPTIONAL add-on for additional pricing (+$65.00). If you already have a sturdy sill or existing bracket, you pay zero hardware markup. However, for jalousie windows, second-story installs, or heavier units (10,000 to 23,500 BTU weighing 75 to 99 lbs), our powder-coated steel cantilever bracket kit is strongly recommended to transfer weight directly to the building framing and prevent sill sagging."
+            q: "Is an exterior support bracket included, or is it subject to initial contact?",
+            a: "The heavy-duty cantilever exterior support bracket and all window AC installation options are subject to initial contact and site evaluation. If you already have a sturdy sill or existing bracket, no additional bracket is needed. For jalousie windows, second-story installs, or heavier units (10,000 to 23,500 BTU weighing 75 to 99 lbs), our technicians evaluate whether a powder-coated steel cantilever bracket kit is recommended to transfer weight directly to building framing during your initial phone or in-home consultation."
         },
         {
             q: "Why is 3/8-inch trade-wind leveling pitch critical in Hawaii's climate?",
@@ -133,7 +133,7 @@ export default function WindowAcInstallationPage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Licensed Hawaii Contractor CT-36775 specializing in professional window AC installation, jalousie window custom acrylic mounting, optional heavy-duty exterior support brackets, and trade-wind leveling across Honolulu, Waipahu, and all Oahu."
+                "description": "Licensed Hawaii Contractor CT-36775 specializing in professional window AC installation, jalousie window custom acrylic mounting, optional exterior support brackets (subject to initial contact), and trade-wind leveling across Honolulu, Waipahu, and all Oahu."
             },
             {
                 "@type": "FAQPage",
@@ -171,7 +171,7 @@ export default function WindowAcInstallationPage() {
                         Jalousie Window AC Mounting Honolulu &amp; Island-Wide
                     </p>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Precision jalousie louver acrylic retrofits, optional heavy-duty exterior support brackets, and laser-calibrated 3/8&quot; trade-wind pitch leveling. Zero drafts, zero indoor water leaks, and 100% CT-36775 licensed workmanship.
+                        Precision jalousie louver acrylic retrofits, exterior cantilever support bracket options (all installation options subject to initial contact), and laser-calibrated 3/8&quot; trade-wind pitch leveling. Zero drafts, zero indoor water leaks, and 100% CT-36775 licensed workmanship.
                     </p>
 
                     {/* Dual Action Top Nav Buttons */}
@@ -201,8 +201,8 @@ export default function WindowAcInstallationPage() {
                         },
                         {
                             icon: Layers,
-                            title: "Heavy-Duty Cantilever Bracket Option",
-                            desc: "Modern Dual Inverters weigh up to 99 lbs. Our heavy-duty exterior cantilever support bracket (optional add-on for +$65) anchors into exterior building studs, preventing fragile jalousie tracks from bending or collapsing."
+                            title: "Cantilever Support Bracket Option",
+                            desc: "Modern Dual Inverters weigh up to 99 lbs. Exterior cantilever support brackets (subject to initial contact & site assessment) anchor into exterior building studs, preventing fragile jalousie tracks from bending or collapsing."
                         },
                         {
                             icon: Droplets,
@@ -235,16 +235,20 @@ export default function WindowAcInstallationPage() {
                                 Book Installation Appointment
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                                Already own your AC? Have our certified technicians safely mount, level, and seal your unit. Zero upfront deposit required to schedule—pay upon completed testing.
+                                Already own your AC? Have our certified technicians safely mount, level, and seal your unit. Zero upfront deposit required to schedule—pay upon completed testing. All options confirmed on initial contact.
                             </p>
                             <ul className="space-y-2 text-xs text-slate-400">
                                 <li className="flex items-center gap-2">
                                     <Check className="size-3.5 text-emerald-400 shrink-0" />
-                                    <span>Custom jalousie, hung, or sliding window mount</span>
+                                    <span>Custom jalousie, hung, or sliding window mount (subject to initial contact)</span>
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <Check className="size-3.5 text-emerald-400 shrink-0" />
-                                    <span>Optional +$65 Heavy-Duty Cantilever Bracket upgrade</span>
+                                    <span>Optional Cantilever Support Bracket (subject to initial contact)</span>
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <Check className="size-3.5 text-emerald-400 shrink-0" />
+                                    <span>All installation options &amp; custom sizing confirmed upon initial contact</span>
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <Check className="size-3.5 text-emerald-400 shrink-0" />
@@ -298,6 +302,13 @@ export default function WindowAcInstallationPage() {
                         
                         {/* Selector & Specs */}
                         <div className="lg:col-span-7 space-y-6">
+                            <div className="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-start gap-2.5 text-xs text-cyan-200">
+                                <AlertCircle className="size-4 shrink-0 text-cyan-400 mt-0.5" />
+                                <span>
+                                    <strong>Transparent Installation Policy:</strong> All window AC installation options, custom jalousie acrylic baffling, and exterior cantilever support bracket requirements are <strong>subject to initial contact</strong> and site assessment with our dispatch team.
+                                </span>
+                            </div>
+
                             <h2 className="text-xl font-header font-black uppercase tracking-wider text-white flex items-center gap-2.5">
                                 <span className="flex items-center justify-center size-7 rounded-lg bg-primary/20 text-primary text-xs font-mono">01</span>
                                 Configure Your Window AC Installation
@@ -305,9 +316,12 @@ export default function WindowAcInstallationPage() {
 
                             {/* Window Type */}
                             <div className="space-y-2">
-                                <label className="text-xs font-mono uppercase tracking-widest text-slate-400">
-                                    Window Architecture
-                                </label>
+                                <div className="flex items-center justify-between">
+                                    <label className="text-xs font-mono uppercase tracking-widest text-slate-400">
+                                        Window Architecture
+                                    </label>
+                                    <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase">Subject to Initial Contact</span>
+                                </div>
                                 <div className="grid grid-cols-3 gap-2">
                                     {[
                                         { id: 'jalousie', label: 'Jalousie Slat', desc: 'Custom acrylic baffle' },
@@ -331,13 +345,13 @@ export default function WindowAcInstallationPage() {
                                 </div>
                             </div>
 
-                            {/* BRACKET OPTION (CRITICAL TRANSPARENCY CARD) */}
+                            {/* BRACKET OPTION (SUBJECT TO INITIAL CONTACT) */}
                             <div className="space-y-2">
                                 <div className="flex items-center justify-between">
                                     <label className="text-xs font-mono uppercase tracking-widest text-slate-400">
                                         Exterior Support Bracket Option
                                     </label>
-                                    <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase">Hardware Upgrade Option</span>
+                                    <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase">Subject to Initial Contact</span>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -353,17 +367,17 @@ export default function WindowAcInstallationPage() {
                                         <div className="flex items-center justify-between mb-1.5">
                                             <span className="font-header font-bold text-sm text-white flex items-center gap-1.5">
                                                 <Layers className="size-4 text-primary" />
-                                                Add Cantilever Bracket
+                                                Cantilever Bracket Option
                                             </span>
-                                            <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                                                +$65.00
+                                            <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+                                                Subject to Initial Contact
                                             </span>
                                         </div>
                                         <p className="text-[11px] text-slate-400 leading-relaxed">
-                                            Heavy-duty corrosion-resistant powder-coated steel bracket with dual legs. Anchors directly to building framing to protect fragile jalousie tracks from 64–99 lb unit weight.
+                                            Heavy-duty corrosion-resistant powder-coated steel bracket with dual legs. Anchors directly to building framing to protect fragile jalousie tracks from 64–99 lb unit weight. Bracket requirement and options confirmed during initial contact.
                                         </p>
                                         <div className="mt-2 text-[10px] text-cyan-300 font-mono flex items-center gap-1">
-                                            <Sparkles className="size-3" /> Recommended for Jalousie &amp; 10k–24k Units
+                                            <Sparkles className="size-3" /> Recommended for Jalousie &amp; 10k–24k Units &bull; Subject to Initial Contact
                                         </div>
                                     </div>
 
@@ -379,17 +393,17 @@ export default function WindowAcInstallationPage() {
                                         <div className="flex items-center justify-between mb-1.5">
                                             <span className="font-header font-bold text-sm text-white flex items-center gap-1.5">
                                                 <Wrench className="size-4 text-slate-400" />
-                                                No Bracket Needed
+                                                Existing Sill / No Bracket
                                             </span>
                                             <span className="text-xs font-mono font-bold text-slate-400 bg-white/5 px-2 py-0.5 rounded">
-                                                $0.00
+                                                Standard Sill
                                             </span>
                                         </div>
                                         <p className="text-[11px] text-slate-400 leading-relaxed">
-                                            Select this option if you already have an existing exterior bracket or a deep concrete sill that safely supports the unit weight without window frame stress.
+                                            Select this option if you already have an existing exterior bracket or a deep concrete sill that safely supports the unit weight without window frame stress. Confirmed upon initial contact.
                                         </p>
                                         <div className="mt-2 text-[10px] text-slate-500 font-mono">
-                                            Applies to standard hung sills or customer-supplied hardware
+                                            Applies to standard hung sills or customer hardware &bull; Subject to Initial Contact
                                         </div>
                                     </div>
                                 </div>
@@ -397,9 +411,12 @@ export default function WindowAcInstallationPage() {
 
                             {/* Unit Status */}
                             <div className="space-y-2">
-                                <label className="text-xs font-mono uppercase tracking-widest text-slate-400">
-                                    Equipment Source
-                                </label>
+                                <div className="flex items-center justify-between">
+                                    <label className="text-xs font-mono uppercase tracking-widest text-slate-400">
+                                        Equipment Source
+                                    </label>
+                                    <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase">Subject to Initial Contact</span>
+                                </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <button
                                         type="button"
@@ -426,7 +443,7 @@ export default function WindowAcInstallationPage() {
                                     >
                                         <div className="font-header font-bold text-sm">I Already Own a Unit</div>
                                         <div className="text-[11px] text-slate-400 mt-1">
-                                            Installation labor, laser pitch leveling, and custom window baffling only.
+                                            Installation labor, laser pitch leveling, and custom window baffling (subject to initial contact).
                                         </div>
                                     </button>
                                 </div>
@@ -487,7 +504,8 @@ export default function WindowAcInstallationPage() {
                                     </p>
                                     <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 text-left text-xs space-y-1.5 font-mono">
                                         <div className="text-slate-400">Selected Window: <span className="text-white font-bold uppercase">{windowType}</span></div>
-                                        <div className="text-slate-400">Bracket Option: <span className="text-cyan-400 font-bold">{includeBracket ? '+$65 Heavy-Duty Bracket Kit' : 'Customer Hardware / Deep Sill'}</span></div>
+                                        <div className="text-slate-400">Bracket Option: <span className="text-cyan-400 font-bold">{includeBracket ? 'Cantilever Bracket Kit (Subject to Initial Contact)' : 'Existing Sill / Customer Hardware'}</span></div>
+                                        <div className="text-slate-400">Install Options: <span className="text-cyan-300 font-bold">Subject to Initial Contact</span></div>
                                         <div className="text-slate-400">Deposit Due: <span className="text-emerald-400 font-bold">$0.00 (Zero Upfront)</span></div>
                                     </div>
                                     <div className="pt-4">
@@ -504,7 +522,7 @@ export default function WindowAcInstallationPage() {
                                 <form onSubmit={handleSubmit} className="space-y-4">
                                     <div className="border-b border-white/10 pb-3 mb-2">
                                         <h3 className="text-lg font-header font-black uppercase text-white">Schedule Installation Service</h3>
-                                        <p className="text-slate-400 text-xs">Zero upfront deposit. Pay technician only after completion.</p>
+                                        <p className="text-slate-400 text-xs">Zero upfront deposit. All installation options and bracket hardware subject to initial contact. Pay technician only after completion.</p>
                                     </div>
 
                                     {/* Summary Pill */}
@@ -515,7 +533,11 @@ export default function WindowAcInstallationPage() {
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-slate-400">Exterior Bracket:</span>
-                                            <span className="text-cyan-400 font-mono font-bold">{includeBracket ? '+$65 Cantilever Kit' : 'None ($0)'}</span>
+                                            <span className="text-cyan-400 font-mono font-bold">{includeBracket ? 'Cantilever Kit (Subject to Initial Contact)' : 'Standard Sill'}</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-slate-400">All Install Options:</span>
+                                            <span className="text-cyan-300 font-mono font-bold">Subject to Initial Contact</span>
                                         </div>
                                         <div className="flex justify-between border-t border-white/10 pt-1">
                                             <span className="text-slate-400">Upfront Booking Deposit:</span>

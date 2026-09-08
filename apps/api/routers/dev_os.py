@@ -1361,17 +1361,17 @@ async def run_agent_cro_optimizer(db: AsyncSession) -> Dict[str, Any]:
         "status": "ACTIVE_OPTIMIZING",
         "primary_friction": "Drop-off between Sizing/Specs (Stage 2) and Add-to-Cart (Stage 4)",
         "pickup_preference_rate": f"{pickup_share}% Oahu Warehouse Pickup (Subject to scheduling & availability by appointment)",
-        "bracket_option_architecture": "Heavy-duty cantilever bracket decoupled as optional add-on (+$65) for jalousie/flush windows",
+        "bracket_option_architecture": "Cantilever bracket and all window AC installation options subject to initial contact and site evaluation",
         "fulfillment_matrix": {
             "warehouse_pickup": "Free at Waipahu Central Warehouse (Subject to scheduling & inventory availability by appointment)",
             "island_delivery": "$50 flat island-wide delivery across all 22 Oahu municipalities",
-            "installation_bundle": "1-Click installation service add-on with $0 upfront deposit booking option"
+            "installation_bundle": "1-Click installation service add-on with $0 upfront deposit booking option (options subject to initial contact)"
         },
         "grounded_playbook": [
             {
                 "funnel": "Window AC Installation & Bundling",
                 "tactic": "Dual-Action Service vs Equipment Bridge",
-                "action": "Offer $0 upfront deposit appointment booking OR direct in-stock LG Dual Inverter purchase with optional +$65 bracket",
+                "action": "Offer $0 upfront deposit appointment booking OR direct in-stock LG Dual Inverter purchase with bracket & installation options subject to initial contact",
                 "lift_est": "+34% Installation Funnel Conversion"
             },
             {
@@ -1393,7 +1393,7 @@ async def run_agent_cro_optimizer(db: AsyncSession) -> Dict[str, Any]:
                 "lift_est": "+19% Sizing Add-to-Cart"
             }
         ],
-        "details": "Grounded CRO strategies active across all customer touchpoints with strict scheduling and bracket transparency."
+        "details": "Grounded CRO strategies active across all customer touchpoints with strict scheduling and initial contact assessment."
     }
 
 async def run_agent_seo_metadata() -> Dict[str, Any]:
@@ -1421,10 +1421,11 @@ async def run_agent_oahu_grounding() -> Dict[str, Any]:
             "mini_split_basic": "$175 (~1.0 hr)",
             "mini_split_premium": "$275 (~1.5 hrs chemical teardown & flush)",
             "window_ac_teardown": "$275 (Full immersion tank sanitization by appointment)",
-            "exterior_bracket_option": "+$65.00 (Heavy-duty cantilever bracket kit & structural anchor)",
+            "exterior_bracket_option": "Cantilever bracket kit & hardware (Subject to initial contact)",
+            "all_window_ac_options": "Subject to initial contact and site evaluation",
             "island_flat_delivery": "$50 Oahu-wide flat delivery"
         },
-        "details": "Real-time Oahu market parameters synchronized with bracket options and scheduling disclosures."
+        "details": "Real-time Oahu market parameters synchronized with bracket options and all installation options subject to initial contact."
     }
 
 async def run_agent_security_shield() -> Dict[str, Any]:
@@ -1500,11 +1501,11 @@ async def run_agent_market_research() -> Dict[str, Any]:
                 "island_delivery_driver": "$50 flat delivery is preferred by customers without trucks/SUVs (saving H-1 transit and lifting 64-99 lb heavy boxes).",
                 "warehouse_pickup_driver": "Free Waipahu pickup preferred by contractors/DIYers when staged by appointment to eliminate waiting."
             },
-            "bracket_pricing_transparency": "Decoupling the heavy-duty cantilever bracket as an optional +$65 upgrade prevents customer overcharge feelings for standard hung windows while providing essential safety for jalousie louvers.",
+            "bracket_pricing_transparency": "Framing the cantilever bracket and all window AC installation options as subject to initial contact eliminates surprise fees while ensuring customized site evaluation for jalousie louvers and multi-story framing.",
             "instant_rebate_anchor": "The official pre-approved $45 Hawaii Energy cash rebate PDF lowers effective cost ($535 8k becomes $490).",
             "zero_risk_service_intake": "$0 upfront payment for installation appointments removes credit card resistance and establishes instant contractor trust."
         },
-        "details": "Market research synthesizes 5 core psychological and operational conversion catalysts for Oahu window AC sales and installations."
+        "details": "Market research synthesizes 5 core psychological and operational conversion catalysts for Oahu window AC sales and installations with all options subject to initial contact."
     }
 
 async def run_agent_crm_dispatch(db: AsyncSession) -> Dict[str, Any]:
