@@ -1664,7 +1664,7 @@ async def run_agent_high_intent_planner(db: AsyncSession) -> Dict[str, Any]:
         {"slug": "/shop/lg-dual-inverter-8000-btu-oahu", "title": "LG Dual Inverter 8,000 BTU Master Bedroom Sweet Spot", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "8k Model Upgrade from 6k ($31 diff)", "expected_lift": "+35% 8k sales"},
         {"slug": "/window-ac-vs-mini-split-oahu", "title": "Window AC vs Mini Split Oahu: Cost & HECO ROI Tool", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "Dual Conversion (Window AC Sale OR Mini Split Lead)", "expected_lift": "+32% conversion"},
         {"slug": "/shop/lg-dual-inverter-guide", "title": "Complete Oahu LG Dual Inverter Sizing & Buyer's Guide", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "Multi-Model Storefront Conversion (All 7 Models)", "expected_lift": "+38% conversion"},
-        {"slug": "/ac-repair-oahu", "title": "Emergency AC Repair Oahu Diagnostic & Triage Funnel", "status": "DEVELOPED", "priority": "CRITICAL", "target_funnel": "Emergency Repair Leads & Replacement Gateway", "expected_lift": "+55% diagnostic leads"},
+        {"slug": "/ac-repair-oahu", "title": "Oahu AC Repair Diagnostic & Triage Funnel", "status": "DEVELOPED", "priority": "CRITICAL", "target_funnel": "Repair Diagnostics & Replacement Gateway", "expected_lift": "+55% diagnostic leads"},
         {"slug": "/ac-cleaning-oahu", "title": "Clinical AC Cleaning & Coil Sanitization Oahu", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "Window AC Teardown ($275) & Mini-Split Deep Clean ($175/$275)", "expected_lift": "+45% cleaning bookings"},
         {"slug": "/shop/oahu-window-ac-warehouse", "title": "In-Stock Oahu Window AC Warehouse Hub", "status": "DEVELOPED", "priority": "CRITICAL", "target_funnel": "Direct Stripe Checkout, Waipahu Pickup & $50 Delivery", "expected_lift": "+50% direct cart conversion"},
         {"slug": "/ductless-mini-split-installation-oahu", "title": "Turnkey Ductless Mini-Split Installation Oahu", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "1-to-4 Zone Configurations (Subject to On-Site Estimate)", "expected_lift": "+40% qualified estimates"}
@@ -1689,7 +1689,7 @@ async def run_agent_high_intent_planner(db: AsyncSession) -> Dict[str, Any]:
             "bedroom_8k_upgrade": "ACTIVE (/shop/lg-dual-inverter-8000-btu-oahu)",
             "window_vs_minisplit_financial": "ACTIVE (/window-ac-vs-mini-split-oahu)",
             "all_models_guide": "ACTIVE (/shop/lg-dual-inverter-guide)",
-            "emergency_ac_repair": "ACTIVE (/ac-repair-oahu)",
+            "oahu_ac_repair": "ACTIVE (/ac-repair-oahu)",
             "deep_coil_cleaning": "ACTIVE (/ac-cleaning-oahu)",
             "in_stock_warehouse_hub": "ACTIVE (/shop/oahu-window-ac-warehouse)",
             "turnkey_mini_split_pricing": "ACTIVE (/ductless-mini-split-installation-oahu)"

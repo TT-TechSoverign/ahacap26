@@ -94,7 +94,7 @@ export default function AcCleaningOahuPage() {
     const faqItems = [
         {
             q: "Why is a full teardown cleaning required for window ACs instead of spraying it in the window?",
-            a: "Spraying cleaner into an installed window AC only pushes dust and mold deeper into the center of the coil sandwich. True mold eradication requires pulling the unit, disassembling the exterior casing, shielding electrical components, and submerging/flushing both the evaporator and condenser coils with specialized biodegradable Hawaiian foam cleaner. We complete this in our Waipahu warehouse immersion tank with a 24–48 hour turnaround."
+            a: "Spraying cleaner into an installed window AC only pushes dust and mold deeper into the center of the coil sandwich. True mold eradication requires pulling the unit, disassembling the exterior casing, shielding electrical components, and submerging/flushing both the evaporator and condenser coils with specialized biodegradable Hawaiian foam cleaner. We complete this in our Waipahu warehouse immersion tank with a reliable, scheduled turnaround."
         },
         {
             q: "What does the Mini-Split Chemical Deep Clean include?",
@@ -237,7 +237,7 @@ export default function AcCleaningOahuPage() {
                                     <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
                                         <div className="text-white font-bold uppercase flex items-center gap-2">
                                             <CheckCircle2 className="size-4 text-emerald-400" />
-                                            3. 24–48 Hr Bench Test &amp; Pick-Up
+                                            3. Thorough Bench Test &amp; Pick-Up
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
                                             Unit is reassembled, laser-calibrated, and run through a 30-minute amp-draw and temperature delta test before you pick it up.
@@ -466,7 +466,7 @@ export default function AcCleaningOahuPage() {
                         Breathe Clean, Mold-Free Air in Your Home
                     </h4>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
-                        Book your drop-off or on-site cleaning today. Fast 24–48 hour turnarounds at our Waipahu warehouse.
+                        Book your drop-off or on-site cleaning today. Fast, reliable turnarounds at our Waipahu warehouse.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <a 

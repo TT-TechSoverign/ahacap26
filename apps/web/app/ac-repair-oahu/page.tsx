@@ -75,7 +75,7 @@ export default function AcRepairOahuPage() {
                 city: city.trim() || 'Oahu',
                 zip: '',
                 service_type: equipmentType === 'mini_split' ? 'Mini Split Diagnosis/Repair' : 'Window AC Diagnosis/Repair',
-                urgency: 'immediate',
+                urgency: 'flexible',
                 notes: `Symptom: ${selectedSymptom.toUpperCase()} | Equipment: ${equipmentType.toUpperCase()} | Estimated Age: ${unitAge} Years | Customer Notes: ${notes.trim() || 'None'}`
             };
 
@@ -99,8 +99,8 @@ export default function AcRepairOahuPage() {
 
     const faqItems = [
         {
-            q: "How quickly can a technician be dispatched for emergency AC repair on Oahu?",
-            a: "We prioritize emergency diagnostic dispatch for homes with non-functioning air conditioning based on our soonest availability across all 22 Oahu municipalities. Booking through this form immediately alerts our dispatch team without any upfront deposit required."
+            q: "How quickly can a technician be scheduled for AC repair on Oahu?",
+            a: "We schedule diagnostic appointments based on our earliest technician availability across all 22 Oahu municipalities. Booking through this form allows our dispatch team to coordinate a convenient appointment window with zero upfront deposit required."
         },
         {
             q: "How much is the diagnostic service fee?",
@@ -121,7 +121,7 @@ export default function AcRepairOahuPage() {
         "@graph": [
             {
                 "@type": "HVACBusiness",
-                "name": "Affordable Home AC - Oahu AC Repair & Emergency Diagnostic Dispatch",
+                "name": "Affordable Home AC - Oahu AC Repair & Diagnostic Troubleshooting",
                 "telephone": "+1-808-724-4328",
                 "priceRange": "$$",
                 "address": {
@@ -133,7 +133,7 @@ export default function AcRepairOahuPage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Licensed Hawaii Contractor CT-36775 providing diagnostic troubleshooting and emergency repair for ductless mini-splits and window air conditioners across Honolulu, Waipahu, and all Oahu."
+                "description": "Licensed Hawaii Contractor CT-36775 providing diagnostic troubleshooting and repair for ductless mini-splits and window air conditioners across Honolulu, Waipahu, and all Oahu."
             },
             {
                 "@type": "FAQPage",
@@ -159,18 +159,18 @@ export default function AcRepairOahuPage() {
             <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-[130px] md:pt-[150px] pb-24">
                 {/* Hero Header */}
                 <div className="text-center max-w-4xl mx-auto space-y-4 mb-14">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-mono uppercase tracking-widest">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono uppercase tracking-widest">
                         <Clock className="size-3.5" />
-                        Priority Diagnostic Dispatch &bull; Licensed Hawaii CT-36775
+                        Prompt Diagnostic Scheduling &bull; Licensed Hawaii CT-36775
                     </div>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-header font-black tracking-tight uppercase leading-[0.95] text-white">
-                        Emergency <span className="text-primary">AC Repair</span> Oahu
+                        Professional <span className="text-primary">AC Repair</span> Oahu
                     </h1>
                     <p className="text-slate-300 font-header font-bold text-base sm:text-lg uppercase tracking-wide text-cyan-400">
                         Mini Split &amp; Window AC Diagnostic Troubleshooting
                     </p>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Fast diagnostic inspection for ductless mini-splits and window units across Honolulu, Pearl City, Waipahu, and all Oahu. Zero upfront booking deposit. Upfront itemized estimates with 100% CT-36775 contractor workmanship guarantee.
+                        Accurate diagnostic inspection for ductless mini-splits and window units across Honolulu, Pearl City, Waipahu, and all Oahu. Zero upfront booking deposit. Upfront itemized estimates with 100% CT-36775 contractor workmanship guarantee.
                     </p>
                 </div>
 
@@ -457,10 +457,10 @@ export default function AcRepairOahuPage() {
                     ))}
                 </div>
 
-                {/* Bottom Emergency Help Banner */}
+                {/* Bottom Help Banner */}
                 <div className="p-8 rounded-3xl bg-slate-900/50 border border-white/10 text-center space-y-4">
                     <h4 className="text-xl font-header font-black uppercase text-white">
-                        Need Immediate Phone Assistance with Your Oahu AC?
+                        Need Phone Assistance with Your Oahu AC?
                     </h4>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
                         Speak directly with our local Waipahu dispatch team for real-time scheduling and technician availability.

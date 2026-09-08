@@ -364,10 +364,10 @@ class AnalyticsSwarmEngine:
             {
                 "id": "CRO-REC-10",
                 "priority": "CRITICAL",
-                "cluster": "Emergency Oahu AC Repair (GSC Rank 5.5, 2.3k Impr)",
-                "title": "Emergency AC Repair Oahu Diagnostic & Triage Funnel",
+                "cluster": "Oahu AC Repair & Diagnostic Triage (GSC Rank 5.5, 2.3k Impr)",
+                "title": "Oahu AC Repair Diagnostic & Triage Funnel",
                 "target_path": "/ac-repair-oahu",
-                "target_funnel": "Emergency Repair Lead & In-Stock Replacement Bridge",
+                "target_funnel": "Repair Lead & In-Stock Replacement Bridge",
                 "rationale": "Captures top GSC search query 'ac repair near me' (Rank 5.5) with interactive triage wizard, flat-rate fee transparency, and immediate replacement gateway.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+55% Diagnostic Lead Velocity"
@@ -379,7 +379,7 @@ class AnalyticsSwarmEngine:
                 "title": "Clinical AC Cleaning & Coil Sanitization Oahu",
                 "target_path": "/ac-cleaning-oahu",
                 "target_funnel": "Tier 1 Window AC Teardown & Tier 2 Mini-Split Deep Clean",
-                "rationale": "Targets salt-air mold/mildew queries with transparent pricing ($275 window teardown, $175/$275 mini-split deep clean) and 24-48 hr warehouse turnaround.",
+                "rationale": "Targets salt-air mold/mildew queries with transparent pricing ($275 window teardown, $175/$275 mini-split deep clean) and scheduled warehouse turnaround.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+45% Maintenance Booking Lift"
             },
