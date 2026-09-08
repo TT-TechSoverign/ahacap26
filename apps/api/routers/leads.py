@@ -15,20 +15,22 @@ logger = logging.getLogger("api.leads")
 
 router = APIRouter()
 
-# Pydantic Model for Incoming Lead
+# Pydantic Model for Incoming Lead with flexible intake
 class LeadCreate(BaseModel):
-    first_name: str
-    last_name: str
-    email: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    customer_name: Optional[str] = None
+    full_name: Optional[str] = None
+    email: Optional[str] = None
     phone: str
-    address: str
+    address: Optional[str] = "Oahu, HI"
     city: Optional[str] = None
     zip: Optional[str] = None
-    service_type: str
-    urgency: str
+    service_type: Optional[str] = None
+    service: Optional[str] = None
+    urgency: Optional[str] = "standard"
     notes: Optional[str] = None
-
-
+    is_test: Optional[bool] = False
 
 @router.post("", status_code=201, include_in_schema=False)
 @router.post("/", status_code=201)
@@ -39,22 +41,45 @@ async def create_lead(
     db: AsyncSession = Depends(get_db)
 ):
     try:
+        email_addr = (lead_data.email or "").strip() or "inquiry@affordablehome-ac.com"
+        
+        # Parse names gracefully
+        first = (lead_data.first_name or "").strip()
+        last = (lead_data.last_name or "").strip()
+        raw_full = (lead_data.customer_name or lead_data.full_name or "").strip()
+        
+        if not first and raw_full:
+            parts = raw_full.split(maxsplit=1)
+            first = parts[0]
+            last = parts[1] if len(parts) > 1 else "Customer"
+        elif not first:
+            first = "Valued"
+            last = last or "Customer"
+        elif not last:
+            last = "Customer"
+
+        svc = (lead_data.service_type or lead_data.service or "Window AC Installation").strip()
+        urgency_val = (lead_data.urgency or "standard").strip().lower()
+        addr = (lead_data.address or "").strip() or "Oahu, HI"
+
+        # Check rate limit (bypass for master test account)
         ip = request.client.host if request.client else "unknown"
-        if not await check_rate_limit(ip, "leads", limit=5, period=3600):
-            raise HTTPException(status_code=429, detail="Too many inquiries. Please try again later.")
+        if email_addr.lower() != "irasmussenjobs@gmail.com":
+            if not await check_rate_limit(ip, "leads", limit=10, period=3600):
+                raise HTTPException(status_code=429, detail="Too many inquiries. Please try again later.")
 
         # 1. Create DB Model
         new_lead = models.Lead(
-            first_name=lead_data.first_name,
-            last_name=lead_data.last_name,
-            email=lead_data.email,
-            phone=lead_data.phone,
-            address=lead_data.address,
-            city=lead_data.city,
-            zip=lead_data.zip,
-            service_type=lead_data.service_type,
-            urgency=lead_data.urgency,
-            notes=lead_data.notes,
+            first_name=first,
+            last_name=last,
+            email=email_addr,
+            phone=lead_data.phone.strip(),
+            address=addr,
+            city=lead_data.city or "Oahu",
+            zip=lead_data.zip or "",
+            service_type=svc,
+            urgency=urgency_val,
+            notes=lead_data.notes or "No additional notes provided.",
             status=models.LeadStatus.NEW,
             created_at=datetime.utcnow()
         )
@@ -64,7 +89,7 @@ async def create_lead(
         await db.commit()
         await db.refresh(new_lead)
         
-        logger.info(f"Lead Created: {new_lead.id} | {new_lead.email}")
+        logger.info(f"Lead Created: {new_lead.id} | {new_lead.email} | Service: {new_lead.service_type}")
 
         # 3. Queue Email Notification
         background_tasks.add_task(
@@ -74,6 +99,8 @@ async def create_lead(
 
         return {"status": "success", "lead_id": new_lead.id, "message": "Inquiry received."}
 
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error creating lead: {e}")
         import traceback

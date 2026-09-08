@@ -943,13 +943,26 @@ async def send_inquiry_notification(lead):
         </html>
         """
 
+        # Smart Routing: Route test leads EXCLUSIVELY to irasmussenjobs@gmail.com with zero CEO impact
+        lead_text = f"{lead.first_name or ''} {lead.last_name or ''} {lead.email or ''} {lead.notes or ''}".lower()
+        is_test = (
+            "test" in lead_text
+            or "diagnostic" in lead_text
+            or (lead.email or "").lower() == "irasmussenjobs@gmail.com"
+            or getattr(lead, "is_test", False)
+        )
+
+        if is_test:
+            recipients = ["irasmussenjobs@gmail.com"]
+            subject = f"[SYSTEM TEST - NO CEO NOTIFICATION] 🔔 Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}"
+            logger.info(f"🧪 Test lead detected ({lead.id}). Routing EXCLUSIVELY to {recipients} without CEO alert.")
+        else:
+            recipients = ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com", "irasmussenjobs@gmail.com"]
+
         # Create MIMEMultipart related
         msg = MIMEMultipart("related")
         msg["Subject"] = subject
         msg["From"] = f"AHAC Notifications <{SMTP_USER}>"
-        
-        # Recipients List
-        recipients = ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com"]
         msg["To"] = ", ".join(recipients)
         
         # Attach HTML
