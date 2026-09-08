@@ -17,7 +17,8 @@ import contentData from '@/lib/content/content.json';
 
 import { 
     AlertTriangle, Warehouse, Truck, Ban, Leaf, Wind, ArrowUpRight, Eye, Check, X,
-    Maximize2, Snowflake, Cpu, LayoutGrid, ShoppingCart, FileText, Mail, Droplets, Sun, Gauge
+    Maximize2, Snowflake, Cpu, LayoutGrid, ShoppingCart, FileText, Mail, Droplets, Sun, Gauge,
+    Plug, Wrench, Sparkles, RotateCcw
 } from 'lucide-react';
 
 const LucideIconMap: Record<string, React.ComponentType<any>> = {
@@ -59,17 +60,26 @@ export default function ShopPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const { content } = useContent();
 
+    const [dualInverterVoltage, setDualInverterVoltage] = useState<'ALL' | '115V' | '230V'>('ALL');
+    const [dualInverterCapacity, setDualInverterCapacity] = useState<'ALL' | 'BEDROOM' | 'MASTER' | 'LIVING'>('ALL');
+
+    const filteredDualInverters = products.filter(p => {
+        if (p.subcategory !== 'dual_inverter') return false;
+        if (dualInverterVoltage === '115V' && p.voltage && !p.voltage.includes('115V')) return false;
+        if (dualInverterVoltage === '230V' && p.voltage && !p.voltage.includes('230V') && !p.voltage.includes('208')) return false;
+        if (dualInverterCapacity === 'BEDROOM' && p.btu && p.btu > 8500) return false;
+        if (dualInverterCapacity === 'MASTER' && p.btu && (p.btu < 9500 || p.btu > 14000)) return false;
+        if (dualInverterCapacity === 'LIVING' && p.btu && p.btu < 15000) return false;
+        return true;
+    });
+
     const sectionOrder = content?.shop?.sections || [
         "dual_inverter", "universal_fit", "base", "ge", "casement", "logistics", "sizing-guide"
     ];
 
-
-
-    // const moveSection = ... (Removed)
-
     const sectionMap: Record<string, React.ReactNode> = {
         "dual_inverter": (
-            <div id="dual_inverter" className="relative space-y-12">
+            <div id="dual_inverter" className="relative space-y-8">
                 <SectionHeader
                     contentKey="shop.dual_inverter"
                     icon="energy_savings_leaf"
@@ -77,8 +87,105 @@ export default function ShopPage() {
                     narrativeKey="dual_inverter"
                     hideDescription={true}
                 />
+
+                {/* Sizing & Voltage Interactive Filter Bar */}
+                <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-4 md:p-6 backdrop-blur-md space-y-4">
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                        
+                        {/* Capacity Filters */}
+                        <div className="space-y-1.5">
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Room Sizer</span>
+                            <div className="flex flex-wrap gap-1.5">
+                                {[
+                                    { id: 'ALL', label: 'All Capacities' },
+                                    { id: 'BEDROOM', label: 'Bedrooms (6k–8k)' },
+                                    { id: 'MASTER', label: 'Master/Studio (10k–12k)' },
+                                    { id: 'LIVING', label: 'Great Rooms (18k–24k)' },
+                                ].map(f => (
+                                    <button
+                                        key={f.id}
+                                        onClick={() => setDualInverterCapacity(f.id as any)}
+                                        className={cn(
+                                            "px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all",
+                                            dualInverterCapacity === f.id
+                                                ? "bg-primary text-white font-bold shadow-[0_0_15px_rgba(0,174,239,0.3)]"
+                                                : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
+                                        )}
+                                    >
+                                        {f.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Voltage Filter & Plug Guide Link */}
+                        <div className="space-y-1.5">
+                            <div className="flex items-center justify-between">
+                                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Wall Plug Voltage</span>
+                                <Link 
+                                    href="/shop/window-ac-plug-guide" 
+                                    className="text-[10px] text-primary hover:underline font-mono uppercase flex items-center gap-1"
+                                >
+                                    <Plug className="size-3" />
+                                    115V vs 230V Guide &rarr;
+                                </Link>
+                            </div>
+                            <div className="flex gap-1.5">
+                                {[
+                                    { id: 'ALL', label: 'All Plugs' },
+                                    { id: '115V', label: '115V Standard (6k-12k)' },
+                                    { id: '230V', label: '230V Heavy Duty (18k-24k)' },
+                                ].map(v => (
+                                    <button
+                                        key={v.id}
+                                        onClick={() => setDualInverterVoltage(v.id as any)}
+                                        className={cn(
+                                            "px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all",
+                                            dualInverterVoltage === v.id
+                                                ? "bg-emerald-500 text-slate-950 font-bold shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                                                : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
+                                        )}
+                                    >
+                                        {v.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Conversion Quick Bridges */}
+                    <div className="pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
+                        <div className="flex flex-wrap items-center gap-3">
+                            <Link 
+                                href="/window-ac-installation" 
+                                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-white/[0.03] px-3 py-1.5 rounded-lg border border-white/10 hover:border-primary/40 transition-colors"
+                            >
+                                <Wrench className="size-3 text-primary" />
+                                Need Installation? Jalousie & Bracket Service
+                            </Link>
+                            <Link 
+                                href="/clean-vs-replace-window-ac" 
+                                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-white/[0.03] px-3 py-1.5 rounded-lg border border-white/10 hover:border-cyan-400/40 transition-colors"
+                            >
+                                <RotateCcw className="size-3 text-cyan-400" />
+                                Clean vs Replace Calculator
+                            </Link>
+                        </div>
+                        <a 
+                            href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-mono text-[11px] font-bold"
+                        >
+                            <FileText className="size-3.5" />
+                            $45 Hawaii Energy Rebate Form PDF &rarr;
+                        </a>
+                    </div>
+                </div>
+
                 <ProductGrid
-                    products={products.filter(p => p.subcategory === 'dual_inverter')}
+                    products={filteredDualInverters}
                     onQuickAdd={addToCart}
                     rebate="$45 Hawaii Energy Rebate"
                 />
@@ -1239,7 +1346,7 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                 </div>
 
                 {/* Technical Specs (Noise & Voltage Only) */}
-                <div className="grid grid-cols-2 gap-1.5 w-full mb-4">
+                <div className="grid grid-cols-2 gap-1.5 w-full mb-3">
                     <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
                         <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Noise Level</span>
                         <span className="text-white text-[10px] font-bold font-header lowercase">{product.noise_level || 'N/A'}</span>
@@ -1249,6 +1356,30 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                         <span className="text-white text-[10px] font-bold font-header">{product.voltage || '115V'}</span>
                     </div>
                 </div>
+
+                {/* High-Intent Conversion Catalysts */}
+                {product.btu === 8000 && (
+                    <div className="w-full mb-3 px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/25 text-amber-300 font-mono text-[9px] font-bold text-center uppercase tracking-wider">
+                        ⚡ Sweet Spot: +$31 over 6k (+33% power)
+                    </div>
+                )}
+                {product.btu === 10000 && (
+                    <div className="w-full mb-3 px-2 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-mono text-[9px] font-bold text-center uppercase tracking-wider">
+                        🌿 Energy Star 2024 Efficiency Champion
+                    </div>
+                )}
+                {(product.voltage?.includes('230V') || (product.btu && product.btu >= 18000)) && (
+                    <div className="w-full mb-3 px-2 py-1 rounded-lg bg-sky-500/10 border border-sky-500/25 text-sky-300 font-mono text-[9px] font-bold text-center uppercase tracking-wider flex items-center justify-center gap-1.5">
+                        <span>230V Living Room Power</span>
+                        <Link 
+                            href="/shop/window-ac-plug-guide" 
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-white underline hover:text-cyan-300 ml-1"
+                        >
+                            Plug Guide &rarr;
+                        </Link>
+                    </div>
+                )}
 
                 <div className="mt-auto pt-3 border-t border-white/5 flex flex-col items-center gap-3 w-full">
                     <div className="flex items-center gap-2 justify-center w-full">

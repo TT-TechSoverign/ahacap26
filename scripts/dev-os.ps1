@@ -55,7 +55,7 @@ switch ($Command.ToLower()) {
             Write-Host "   Infra:      agent_host_sentinel, agent_container_sentinel, agent_db_guardian, agent_storage_sentinel" -ForegroundColor Yellow
             Write-Host "   Security:   agent_security_shield, agent_commit_sentinel, agent_compliance_auditor, agent_perimeter_auditor" -ForegroundColor Yellow
             Write-Host "   Commerce:   agent_funnel_telemetry, agent_cro_optimizer, agent_revenue_reconciler" -ForegroundColor Yellow
-            Write-Host "   Growth:     agent_seo_metadata, agent_oahu_grounding, agent_market_research, agent_heco_rebate_strategist" -ForegroundColor Yellow
+            Write-Host "   Growth:     agent_seo_metadata, agent_oahu_grounding, agent_market_research, agent_heco_rebate_strategist, agent_gsc_ga4_analytics, agent_schema_metadata_engine, agent_high_intent_planner" -ForegroundColor Yellow
             Write-Host "   CRM:        agent_crm_dispatch, agent_customer_lifecycle, agent_intake_triage" -ForegroundColor Yellow
             Write-Host "   Deployment: agent_deployment_guardian, agent_build_qa, agent_regression_sentinel" -ForegroundColor Yellow
             return
@@ -71,7 +71,7 @@ switch ($Command.ToLower()) {
     }
 
     "run-fleet" {
-        Write-Host "[*] Dispatching full fleet: Running All 21 Specialized Agents sequentially..." -ForegroundColor Yellow
+        Write-Host "[*] Dispatching full fleet: Running All 24 Specialized Agents sequentially..." -ForegroundColor Yellow
         try {
             $resp = Invoke-RestMethod -Uri "$ServerUrl/agents/run-all" -Method POST -Headers $headers
             Write-Host "[OK] Fleet Audit Completed at $($resp.executed_at) (All Healthy: $($resp.all_healthy)):" -ForegroundColor Green
@@ -184,6 +184,104 @@ switch ($Command.ToLower()) {
             }
         } catch {
             Write-Host "[ERR] Error querying waterfall: $_" -ForegroundColor Red
+        }
+    }
+
+    "analytics" {
+        Write-Host "[*] Querying GSC + GA4 Continuous Analytics Telemetry from Server..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/analytics/gsc-ga4" -Method GET -Headers $headers
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            Write-Host "  SEARCH CONSOLE & GA4 CONTINUOUS TELEMETRY" -ForegroundColor Cyan
+            Write-Host "  Period: $($resp.reporting_period) | Updated: $($resp.timestamp)" -ForegroundColor Green
+            Write-Host "========================================================" -ForegroundColor Magenta
+
+            Write-Host "`nSEARCH CONSOLE HIGH-IMPRESSION QUERY CLUSTERS:" -ForegroundColor Yellow
+            foreach ($q in $resp.gsc_clusters) {
+                Write-Host "  - '$($q.query)' [Category: $($q.category)]" -ForegroundColor White
+                Write-Host "      Impressions: $($q.monthly_impressions) | Clicks: $($q.monthly_clicks) | CTR: $($q.ctr_percent)% | Avg Rank: $($q.avg_position)" -ForegroundColor Cyan
+                Write-Host "      Diagnosis:   $($q.diagnosis)" -ForegroundColor DarkGray
+                Write-Host "      Target Page: $($q.target_page)" -ForegroundColor Green
+            }
+
+            Write-Host "`nGA4 STORE & SERVICE FUNNEL TELEMETRY:" -ForegroundColor Yellow
+            Write-Host "  Sessions: $($resp.ga4_funnel.total_sessions) | Bounce Rate: $($resp.ga4_funnel.bounce_rate_pct)%" -ForegroundColor White
+            Write-Host "  Shop Product Views: $($resp.ga4_funnel.shop_views)" -ForegroundColor White
+            Write-Host "  Drop-off at Model/Voltage Selection: $($resp.ga4_funnel.voltage_model_dropoff_pct)% (Root Cause: 230V outlet hesitation)" -ForegroundColor Red
+            Write-Host "  Cart Additions: $($resp.ga4_funnel.add_to_cart_count)" -ForegroundColor Cyan
+            Write-Host "  Checkout Starts: $($resp.ga4_funnel.checkout_starts) | Completed Orders: $($resp.ga4_funnel.completed_orders)" -ForegroundColor Green
+            Write-Host "  Online Shop Conversion Rate: $($resp.ga4_funnel.shop_conversion_rate_pct)%" -ForegroundColor Green
+
+            Write-Host "`nREVENUE IMPACT OPPORTUNITY:" -ForegroundColor Magenta
+            Write-Host "  $($resp.revenue_opportunity.detail)" -ForegroundColor Green
+            Write-Host "  Estimated Monthly Revenue Unlock: $($resp.revenue_opportunity.monthly_unlock_potential)" -ForegroundColor Yellow
+        } catch {
+            Write-Host "[ERR] Failed to query analytics: $_" -ForegroundColor Red
+        }
+    }
+
+    "recommendations" {
+        Write-Host "[*] Streaming Continuous CRO & Landing Page Optimization Recommendations..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/analytics/recommendations" -Method GET -Headers $headers
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            Write-Host "  CONTINUOUS CRO OPTIMIZATION STREAM (ACTIVE RECOMMENDATIONS)" -ForegroundColor Cyan
+            Write-Host "  Active Recommendations: $($resp.total_recommendations) | Target Engine: Continuous CRO Loop" -ForegroundColor Green
+            Write-Host "========================================================" -ForegroundColor Magenta
+
+            foreach ($rec in $resp.recommendations) {
+                $priorityColor = if ($rec.priority -eq "CRITICAL") { "Red" } elseif ($rec.priority -eq "HIGH") { "Yellow" } else { "Cyan" }
+                Write-Host "`n  [$($rec.priority)] $($rec.title) (ID: $($rec.id))" -ForegroundColor $priorityColor
+                Write-Host "    Target URL: $($rec.target_route)" -ForegroundColor White
+                Write-Host "    Problem:    $($rec.problem)" -ForegroundColor DarkGray
+                Write-Host "    Action:     $($rec.action)" -ForegroundColor Green
+                Write-Host "    Expected Impact: $($rec.expected_impact)" -ForegroundColor Yellow
+                Write-Host "    Status:     $($rec.status)" -ForegroundColor Cyan
+            }
+        } catch {
+            Write-Host "[ERR] Failed to query recommendations: $_" -ForegroundColor Red
+        }
+    }
+
+    "high-intent-pages" {
+        Write-Host "[*] Querying High-Intent Landing Page Catalog from Server..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/agents/high-intent-pages" -Method GET -Headers $headers
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            Write-Host "  HIGH-INTENT SEO & CRO LANDING PAGE CATALOG" -ForegroundColor Cyan
+            Write-Host "  Total Deployed/Planned Pages: $($resp.total_pages)" -ForegroundColor Green
+            Write-Host "========================================================" -ForegroundColor Magenta
+
+            foreach ($pg in $resp.pages) {
+                $statusColor = if ($pg.status -eq "PRODUCTION") { "Green" } elseif ($pg.status -eq "IN_DEVELOPMENT") { "Yellow" } else { "Cyan" }
+                Write-Host "`n  [$($pg.status)] $($pg.title)" -ForegroundColor $statusColor
+                Write-Host "    Route:        $($pg.route)" -ForegroundColor White
+                Write-Host "    Search Intent:$($pg.target_intent)" -ForegroundColor DarkGray
+                Write-Host "    Conversion:   $($pg.conversion_bridge)" -ForegroundColor Green
+                Write-Host "    Schema:       $($pg.schema_types -join ', ')" -ForegroundColor DarkCyan
+                Write-Host "    Projected CVR:$($pg.projected_cvr)" -ForegroundColor Yellow
+            }
+        } catch {
+            Write-Host "[ERR] Failed to query high-intent pages: $_" -ForegroundColor Red
+        }
+    }
+
+    "schema-catalog" {
+        Write-Host "[*] Querying Google Rich Results Schema Catalog from Server..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/analytics/schema-catalog" -Method GET -Headers $headers
+            Write-Host "`n========================================================" -ForegroundColor Magenta
+            Write-Host "  STRUCTURED SCHEMA & RICH SERP CATALOG" -ForegroundColor Cyan
+            Write-Host "  Total Schemas: $($resp.total_schemas) | Rich Results Compliance: $($resp.rich_results_ready)" -ForegroundColor Green
+            Write-Host "========================================================" -ForegroundColor Magenta
+
+            foreach ($sc in $resp.schemas) {
+                Write-Host "`n  - $($sc.route) ($($sc.schema_type))" -ForegroundColor Yellow
+                Write-Host "      Name:        $($sc.name)" -ForegroundColor White
+                Write-Host "      SERP Badge:  $($sc.rich_snippet_benefit)" -ForegroundColor Green
+            }
+        } catch {
+            Write-Host "[ERR] Failed to query schema catalog: $_" -ForegroundColor Red
         }
     }
 
@@ -382,7 +480,7 @@ switch ($Command.ToLower()) {
                         Write-Host "      Mandate: $($s.mandate)" -ForegroundColor DarkGray
                     }
                 }
-                Write-Host "`nSPECIALIZED AGENT SOPS (21):" -ForegroundColor Magenta
+                Write-Host "`nSPECIALIZED AGENT SOPS (24):" -ForegroundColor Magenta
                 foreach ($prop in $resp.sops.PSObject.Properties) {
                     if ($prop.Name -notlike "submaster_*") {
                         $s = $prop.Value
@@ -409,12 +507,16 @@ switch ($Command.ToLower()) {
         Write-Host "  inject-history             - Dispatch swarm memory injection into Master Brain"
         Write-Host "  brain-sync [thought]       - Client-initiated outbound push of directive/thought to Master Brain"
         Write-Host "  inspect [id]               - Deep inspection of sub-master or agent synapse and security perimeter"
-        Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (6 Sub-Masters, 21 Agents)"
+        Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (6 Sub-Masters, 24 Agents)"
         Write-Host "  status                     - Query fleet status and active agents"
-        Write-Host "  sops [id]                  - View Standard Operating Procedures (all 27 dossiers or specific agent)"
+        Write-Host "  sops [id]                  - View Standard Operating Procedures (all 30 dossiers or specific agent)"
         Write-Host "  run-submaster [name]       - Dispatch a Category Sub-Master suite (infra, security, commerce, growth, crm, deploy)"
         Write-Host "  run-agent [agent_id]       - Trigger a single on-demand agent"
-        Write-Host "  run-fleet                  - Sequentially execute all 21 agents"
+        Write-Host "  run-fleet                  - Sequentially execute all 24 agents"
+        Write-Host "  analytics                  - Display Google Search Console & GA4 continuous telemetry & conversion drop-offs"
+        Write-Host "  recommendations            - Stream active continuous CRO, schema, and UI/content optimization suggestions"
+        Write-Host "  high-intent-pages          - Inspect high-converting landing pages catalog and deployment status"
+        Write-Host "  schema-catalog             - Inspect Google rich result schemas across all production routes"
         Write-Host "  waterfall                  - Display 5-stage By Appointment First conversion waterfall"
         Write-Host "  reconcile                  - Trigger on-demand Stripe auto-reconciliation"
         Write-Host "  verify-live                - Run 3-stage live deployment swarm check"

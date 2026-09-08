@@ -391,17 +391,71 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Hawaii Energy Rebate & HECO Economics Strategist",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Model Hawaiian Electric (HECO) utility economics and calculate Hawaii Energy cash rebates ($150-$500) to prove customer ROI.",
+        "mandate": "Model Hawaiian Electric (HECO 44.2¢/kWh) utility economics and verify AHAC's official $45 Hawaii Energy Rebate Form for Window ACs (Zero mini split rebate participation).",
         "token_efficiency_policy": "Deterministic mathematical formulas; executed synchronously in < 1ms with zero token waste.",
         "oahu_grounding": "Hawaiian Electric (HECO) residential baseline tariff (44.2¢/kWh) — highest electricity rates in the nation.",
-        "inputs": ["HECO residential electric tariff", "Hawaii Energy Clean Energy rebate tiers", "SEER2 efficiency curves"],
+        "inputs": ["HECO residential electric tariff", "Hawaii Energy Window AC rebate application PDF", "SEER2 efficiency curves"],
         "execution_steps": [
-            {"step": 1, "title": "Power Consumption Modeling", "description": "Calculate annual kilowatt-hour load for baseline 10 SEER vs 18+ SEER2 inverter mini-split on Oahu.", "verification": "Annual consumption modeled at ~3,200 kWh/yr."},
-            {"step": 2, "title": "Rebate Tier Qualification", "description": "Determine eligibility for Hawaii Energy $150 (SEER2 >= 16) and $350 (SEER2 >= 18) instant cash rebates.", "verification": "Rebate tiers verified active."},
-            {"step": 3, "title": "Payback Period Computation", "description": "Compute annual electricity savings ($424.32/yr) and payback period (~9.4 months).", "verification": "Payback period calculated and verified."}
+            {"step": 1, "title": "Power Consumption Modeling", "description": "Calculate annual kilowatt-hour load for baseline 10 SEER vs 18+ SEER2 inverter units on Oahu.", "verification": "Annual consumption modeled at ~3,200 kWh/yr."},
+            {"step": 2, "title": "Rebate Policy Enforcement", "description": "Verify zero rebate claims on Mini Split division (straight CT-36775 contractor pricing) and verify official AHAC $45 rebate form availability for Window ACs.", "verification": "Mini split zero-rebate enforced; Window AC $45 form verified."},
+            {"step": 3, "title": "Payback Period Computation", "description": "Compute annual electricity savings ($424.32/yr) and payback period (~9.4 months) under HECO 44.2¢/kWh rate.", "verification": "Payback period calculated and verified."}
         ],
-        "outputs": ["Rebate status (REBATE_GROUNDED)", "Electricity savings estimate ($424/yr)", "Instant cash rebate schedule ($150-$500)"],
+        "outputs": ["Rebate status (REBATE_GROUNDED)", "Electricity savings estimate ($424/yr)", "Window AC $45 AHAC Form (ACTIVE)", "Mini Split Rebate Policy (HONEST_ZERO_REBATE)"],
         "contingency_protocol": "Recalculate savings model when HECO announces fuel surcharge adjustments or tariff changes."
+    },
+    "agent_gsc_ga4_analytics": {
+        "id": "agent_gsc_ga4_analytics",
+        "code": "SOP-GRO-05",
+        "title": "Search Console & GA4 Performance Analytics Sentinel",
+        "domain": "Growth",
+        "supervisor": "submaster_growth_grounding",
+        "mandate": "Ingest and analyze Google Search Console query impressions and GA4 funnel telemetry to detect high-impression / low-CTR bottlenecks.",
+        "token_efficiency_policy": "On-demand execution with cached aggregation; executes in < 4ms without external polling overhead.",
+        "oahu_grounding": "Tracks localized Oahu search queries across Honolulu, Waipahu, Kailua, Kapolei, Ewa Beach, and Mililani.",
+        "inputs": ["Google Search Console query performance data", "GA4 user session telemetry", "Funnel stage drop-off logs"],
+        "execution_steps": [
+            {"step": 1, "title": "GSC Query Cluster Audit", "description": "Scan Search Console impressions for high-volume keywords with CTR < 3.0% (e.g., window ac installation oahu, ac mold cleaning).", "verification": "High-impression opportunity queries identified."},
+            {"step": 2, "title": "GA4 Funnel Drop-off Analysis", "description": "Track session progression from landing page to product view, lead wizard, and Stripe checkout.", "verification": "Stage drop-off rates quantified."},
+            {"step": 3, "title": "Opportunity Matrix Generation", "description": "Correlate search impressions with conversion barriers to recommend targeted landing pages and copy adjustments.", "verification": "Analytics opportunity report compiled."}
+        ],
+        "outputs": ["GSC query cluster report", "GA4 funnel efficiency index", "Underperforming route alerts"],
+        "contingency_protocol": "Alert growth sub-master when any high-volume query cluster experiences > 20% CTR drop."
+    },
+    "agent_schema_metadata_engine": {
+        "id": "agent_schema_metadata_engine",
+        "code": "SOP-GRO-06",
+        "title": "Structured Data Schema & Dynamic SERP Enhancer",
+        "domain": "Growth",
+        "supervisor": "submaster_growth_grounding",
+        "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas and dynamic metadata to boost organic search CTR.",
+        "token_efficiency_policy": "Deterministic schema generation using static templates; executes in < 2ms with zero runtime LLM overhead.",
+        "oahu_grounding": "Embeds Hawaii CT-36775 license, Waipahu warehouse geographic coordinates, and GET tax compliance across all schemas.",
+        "inputs": ["Route metadata registry", "Product catalog pricing/stock", "Customer FAQ dataset", "CT-36775 licensing data"],
+        "execution_steps": [
+            {"step": 1, "title": "Schema Integrity Audit", "description": "Validate existing JSON-LD schemas (Product, LocalBusiness, FAQPage, HowTo) for zero schema.org errors.", "verification": "100% valid schema markup across all routes."},
+            {"step": 2, "title": "SERP Rich Snippet Injection", "description": "Ensure dynamic prices ($504-$1025), stock availability, and CT-36775 license appear in structured output.", "verification": "Rich snippet attributes verified."},
+            {"step": 3, "title": "Metadata Optimization", "description": "Generate high-CTR title tags and meta descriptions tailored to high-impression search keywords.", "verification": "SERP metadata optimized."}
+        ],
+        "outputs": ["Schema catalog status (VALID)", "Rich snippet coverage rate", "Dynamic metadata templates"],
+        "contingency_protocol": "Flag and automatically repair any invalid JSON-LD schema markup upon route deployment."
+    },
+    "agent_high_intent_planner": {
+        "id": "agent_high_intent_planner",
+        "code": "SOP-GRO-07",
+        "title": "High-Intent SEO & CRO Planning Sentinel",
+        "domain": "Growth",
+        "supervisor": "submaster_growth_grounding",
+        "mandate": "Supervise high-intent landing page roadmaps, cross-funnel bridges, and stream continuous CRO recommendations to hold conversion rates steady.",
+        "token_efficiency_policy": "On-demand execution with memory-mapped recommendation catalog; completes in < 3ms.",
+        "oahu_grounding": "Bridges Oahu search intents: Waipahu bench teardowns ($275), LG Dual Inverter warehouse inventory, and CT-36775 licensed installations.",
+        "inputs": ["GSC opportunity queries", "Shop inventory ledger (including 18k and 23.5k stock)", "Lead dispatch logs"],
+        "execution_steps": [
+            {"step": 1, "title": "High-Intent Page Roadmap Review", "description": "Audit production status of high-intent conversion pages (/clean-vs-replace, /installation, /plug-guide, /estimate).", "verification": "All active pages tracked in catalog."},
+            {"step": 2, "title": "Cross-Funnel Bridge Verification", "description": "Verify that maintenance pages offer unit replacements, shop pages offer installation, and contact pages offer equipment.", "verification": "Cross-funnel CTAs verified active."},
+            {"step": 3, "title": "Continuous CRO Recommendation Stream", "description": "Generate prioritized UI, content, and CTA adjustments based on real-time funnel telemetry to stream conversion gains.", "verification": "Active recommendations published to Dev OS."}
+        ],
+        "outputs": ["High-intent page roadmap (12 routes)", "Cross-funnel bridge status (ACTIVE)", "Streaming CRO recommendations"],
+        "contingency_protocol": "Immediately flag any disconnected commercial touchpoint or unaddressed high-volume search query."
     },
 
     # --- Customer Operations & CRM (3 Agents) ---

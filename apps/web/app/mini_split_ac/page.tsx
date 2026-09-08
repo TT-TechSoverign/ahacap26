@@ -96,6 +96,10 @@ const faqs = [
         a: "Yes, subject to detailed scope of work, property inspection, and management approval to accept. We specialize in HOA-compliant installations across planned communities like Mililani Mauka, Ewa Beach, Kapolei, and Hawaii Kai. We install color-matched, UV-resistant architectural line-hide conduits that neatly enclose all refrigerant pipes, wiring, and drain lines flush against your exterior walls to pass HOA architectural review."
     },
     {
+        q: "Does Affordable Home AC participate in Hawaii Energy rebates for mini-splits?",
+        a: "No. Affordable Home AC does not participate in Hawaii Energy rebates for our mini split division. Rebate programs often require contractors to artificially inflate base retail equipment prices, restrict unit selections, and subject homeowners to months of bureaucratic voucher approvals. Instead, we offer direct, honest Hawaii Contractor CT-36775 pricing—delivering genuine upfront savings with zero red tape."
+    },
+    {
         q: "Do your mini-splits comply with Honolulu residential noise ordinances?",
         a: "Yes. In dense Oahu neighborhoods and zero-lot-line communities, neighbor noise complaints can be an issue. Our Mitsubishi Electric and Fujitsu inverter systems operate as low as 19 dBA indoors and under 50 dBA outdoors, comfortably surpassing Honolulu Department of Health Title 11 boundary noise standards."
     }
@@ -143,13 +147,12 @@ export default function MiniSplitsPage() {
                         >
                             Build Your System (Free Survey) <ArrowRight className="size-5" />
                         </a>
-                        <a
-                            href="tel:808-488-1111"
-                            onClick={() => trackFunnelEvent('click_to_call', { source: 'mini_split_hero' })}
-                            className="w-full sm:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold text-base rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition-colors"
+                        <Link
+                            href="/mini-split-estimate"
+                            className="w-full sm:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-cyan-500/40 font-bold text-base rounded-xl flex items-center justify-center gap-2 transition-colors"
                         >
-                            <Phone className="size-5 text-cyan-400" /> (808) 488-1111
-                        </a>
+                            <Zap className="size-5" /> Instant Sizing & Panel Assessment
+                        </Link>
                     </div>
 
                     {/* Micro Trust Strip */}
@@ -157,6 +160,7 @@ export default function MiniSplitsPage() {
                         <span className="flex items-center gap-1.5"><ShieldCheck className="size-4 text-cyan-400" /> CT-36775 Licensed & Insured</span>
                         <span className="flex items-center gap-1.5"><CheckCircle className="size-4 text-cyan-400" /> 10–12 Year Warranties</span>
                         <span className="flex items-center gap-1.5"><VolumeX className="size-4 text-cyan-400" /> 19 dBA Whisper-Quiet</span>
+                        <span className="flex items-center gap-1.5 text-emerald-400 font-bold"><CheckCircle className="size-4" /> Honest Direct Contractor Pricing</span>
                     </div>
                 </div>
             </section>

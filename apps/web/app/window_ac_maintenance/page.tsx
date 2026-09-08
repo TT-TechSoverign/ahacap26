@@ -539,8 +539,27 @@ export default function WindowAcMaintenancePage() {
                     ))}
                 </div>
 
+                {/* Clean vs Replace Decision Bridge */}
+                <div className="mt-12 bg-gradient-to-r from-emerald-950/30 via-slate-900/60 to-slate-900 border border-emerald-500/30 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div className="space-y-1 text-center sm:text-left">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">Unsure If Your Unit Is Worth Cleaning?</span>
+                        <h3 className="text-xl sm:text-2xl font-header font-black uppercase text-white">
+                            Try the Clean vs. Replace Decision Matrix
+                        </h3>
+                        <p className="text-slate-400 text-xs max-w-xl">
+                            If your unit is 5+ years old or rusted, an LG Dual Inverter may save you over $424/year in HECO power and qualifies for a $45 Hawaii Energy rebate.
+                        </p>
+                    </div>
+                    <Link
+                        href="/clean-vs-replace-window-ac"
+                        className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-xs uppercase tracking-wider shrink-0 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.3)]"
+                    >
+                        Launch Decision Tool <ArrowRight className="size-3.5" />
+                    </Link>
+                </div>
+
                 {/* Final CTA Strip */}
-                <div className="mt-14 bg-gradient-to-r from-cyan-950/40 via-slate-900/60 to-cyan-950/40 border border-cyan-500/30 rounded-2xl p-8 text-center">
+                <div className="mt-10 bg-gradient-to-r from-cyan-950/40 via-slate-900/60 to-cyan-950/40 border border-cyan-500/30 rounded-2xl p-8 text-center">
                     <h3 className="text-xl sm:text-2xl font-header font-black uppercase tracking-wide text-white mb-2">
                         Ready for Ice-Cold, Odor-Free Air?
                     </h3>
