@@ -375,11 +375,11 @@ class AnalyticsSwarmEngine:
             {
                 "id": "CRO-REC-11",
                 "priority": "HIGH",
-                "cluster": "AC Mold Cleaning & Hydro-Bag Sanitization (2.4k Impr)",
+                "cluster": "AC Mold Cleaning & Coil Sanitization (2.4k Impr)",
                 "title": "Clinical AC Cleaning & Coil Sanitization Oahu",
                 "target_path": "/ac-cleaning-oahu",
-                "target_funnel": "Tier 1 Window AC Teardown & Tier 2 Mini-Split Hydro Clean",
-                "rationale": "Targets salt-air mold/mildew queries with transparent pricing ($275 window teardown, $175/$275 mini-split hydro-bag) and 24-48 hr warehouse turnaround.",
+                "target_funnel": "Tier 1 Window AC Teardown & Tier 2 Mini-Split Deep Clean",
+                "rationale": "Targets salt-air mold/mildew queries with transparent pricing ($275 window teardown, $175/$275 mini-split deep clean) and 24-48 hr warehouse turnaround.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+45% Maintenance Booking Lift"
             },
@@ -397,11 +397,11 @@ class AnalyticsSwarmEngine:
             {
                 "id": "CRO-REC-13",
                 "priority": "HIGH",
-                "cluster": "Multi-Zone Ductless Contractor Pricing (625 Impr)",
+                "cluster": "Multi-Zone Ductless Sizing & Custom Estimates (625 Impr)",
                 "title": "Turnkey Ductless Mini-Split Installation Oahu",
                 "target_path": "/ductless-mini-split-installation-oahu",
-                "target_funnel": "1-to-4 Zone Estimates, 60A/100A Panel Audit & $0 Deposit Intake",
-                "rationale": "Demystifies multi-zone contractor pricing ($3.8k to $13.5k turnkey), clarifies 0% rebate truth, and solves older Oahu electrical panel compatibility.",
+                "target_funnel": "1-to-4 Zone Configurations, 60A/100A Panel Audit & $0 Deposit Intake",
+                "rationale": "Clarifies multi-zone configurations, explains installations are subject to on-site estimate ($0 upfront deposit), clarifies 0% rebate truth, and audits older Oahu electrical panel compatibility.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+40% Qualified Mini-Split In-Home Quotes"
             }

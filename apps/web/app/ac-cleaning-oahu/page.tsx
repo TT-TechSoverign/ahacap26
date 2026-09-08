@@ -98,7 +98,7 @@ export default function AcCleaningOahuPage() {
         },
         {
             q: "What does the Mini-Split Chemical Deep Clean include?",
-            a: "Our technicians install a custom waterproof hydro-bag around your indoor wall unit to shield your drywall and flooring. We disassemble the casing, treat the evaporator coils and internal blower barrel with non-toxic antimicrobial foam, high-pressure rinse with pressurized water, vacuum-clear the condensate drain line, and test supply air temperatures."
+            a: "Our technicians carefully protect your walls and surrounding living space, fully disassemble the front facia and directional louvers, treat the indoor evaporator coils and blower wheel with clinical-grade non-toxic antimicrobial foam, execute a precision pressurized coil rinse, vacuum-clear the condensate drain line, and bench-test airflow output and temperature differential."
         },
         {
             q: "Do I have to pay upfront when booking a cleaning appointment?",
@@ -189,7 +189,7 @@ export default function AcCleaningOahuPage() {
                                     : 'text-slate-400 hover:text-white'
                             }`}
                         >
-                            Mini-Split Hydro-Bag Flush ($175 / $275)
+                            Mini-Split Deep Clean & Sanitization ($175 / $275)
                         </button>
                     </div>
                 </div>
@@ -268,7 +268,7 @@ export default function AcCleaningOahuPage() {
                                         On-Site In-Home Service &bull; All Oahu
                                     </div>
                                     <h2 className="text-2xl font-header font-black uppercase text-white mt-1">
-                                        Ductless Mini-Split Hydro-Bag Deep Clean
+                                        Ductless Mini-Split Clinical Deep Clean
                                     </h2>
                                     <div className="flex items-center gap-3 mt-3">
                                         <button
@@ -300,7 +300,7 @@ export default function AcCleaningOahuPage() {
                                     <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5 flex items-start gap-3">
                                         <CheckCircle2 className="size-4 text-purple-400 shrink-0 mt-0.5" />
                                         <div>
-                                            <strong className="text-white">Waterproof Hydro-Bag Enclosure:</strong> Zero mess or water splatter on your home walls or hardwood floors.
+                                            <strong className="text-white">Comprehensive Wall &amp; Floor Shielding:</strong> Precision teardown and surface isolation ensures zero mess, chemical splatter, or moisture on your drywall or floors.
                                         </div>
                                     </div>
                                     <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5 flex items-start gap-3">

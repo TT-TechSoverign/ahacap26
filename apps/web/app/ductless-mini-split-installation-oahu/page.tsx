@@ -50,7 +50,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
             id: '1_zone',
             name: '1-Zone Primary Room',
             idealFor: 'Master Bedroom, Studio, or Detached ADU / Lanai',
-            priceRange: '$3,800 – $4,500',
+            pricingStatus: 'Subject to On-Site Estimate',
             zones: '1 Indoor Head + 1 Inverter Condenser',
             electrical: 'Single 15A or 20A dedicated circuit (115V or 230V)',
             popular: false
@@ -59,7 +59,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
             id: '2_zone',
             name: '2-Zone Split Comfort',
             idealFor: 'Main Living Area + Primary Master Bedroom',
-            priceRange: '$5,800 – $6,800',
+            pricingStatus: 'Subject to On-Site Estimate',
             zones: '2 Indoor Heads + 1 Multi-Zone Condenser',
             electrical: 'Dedicated 20A–25A 230V circuit',
             popular: true
@@ -68,7 +68,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
             id: '3_zone',
             name: '3-Zone Whole-Home',
             idealFor: 'Living Room + Master Suite + 2nd Bedroom / Office',
-            priceRange: '$8,200 – $9,500',
+            pricingStatus: 'Subject to On-Site Estimate',
             zones: '3 Indoor Heads + 1 High-Efficiency Multi-Condenser',
             electrical: 'Dedicated 30A 230V circuit',
             popular: false
@@ -77,7 +77,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
             id: '4_zone',
             name: '4-Zone Multi-Level',
             idealFor: 'Full 3-4 Bedroom Oahu Residence or Two-Story Home',
-            priceRange: '$11,500 – $13,500',
+            pricingStatus: 'Subject to On-Site Estimate',
             zones: '4 Indoor Heads + Dual Condensers or Titan Multi-Port',
             electrical: 'Dedicated 35A–45A 230V circuit',
             popular: false
@@ -146,8 +146,8 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
             a: "We install top-tier marine-grade ductless systems engineered for Hawaii's coastal climate, including Mitsubishi Electric (Hyper-Heating & Diamond certified systems), Daikin, Fujitsu, and Carrier. All outdoor units are treated with anti-corrosive coil coatings to resist Pacific salt air breakdown."
         },
         {
-            q: "What is included in your turnkey installation price?",
-            a: "Turnkey means complete, code-compliant, and ready to cool on day one. Our quotes include the outdoor inverter condenser with anti-vibration ground pad or stainless wall brackets, indoor whisper-quiet wall units, factory-insulated copper refrigerant line sets, architectural UV-resistant SlimDuct line hide, dedicated electrical disconnect box with surge protection, professional nitrogen pressure testing to 500 PSI, triple micron vacuum dehydration, refrigerant trim charging, and Honolulu permit assistance."
+            q: "How does the mini-split installation estimate process work?",
+            a: "Because every home's copper line run length, electrical panel capacity, and mounting locations differ, all mini-split installations are subject to a free on-site estimate. Our Hawaii Licensed HVAC technicians (CT-36775) survey your property, perform a complimentary electrical panel load audit, map architectural line-hide routing, and provide a clear, guaranteed fixed-price proposal with zero upfront deposit."
         },
         {
             q: "Can I install mini-splits in an Oahu condominium or townhouse?",
@@ -193,7 +193,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                             "name": tier.name,
                             "description": tier.idealFor
                         },
-                        "price": tier.priceRange
+                        "price": tier.pricingStatus
                     }))
                 }
             },
@@ -242,13 +242,13 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                 <div className="max-w-6xl mx-auto text-center relative z-10">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs md:text-sm font-semibold mb-6">
                         <Sparkles className="w-4 h-4 text-cyan-400" />
-                        <span>Honest Contractor Pricing • $0 Upfront Deposit Quote</span>
+                        <span>Honest Contractor Workmanship • $0 Upfront Deposit Estimate</span>
                     </div>
 
                     <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight md:leading-[1.15]">
                         Ductless Mini-Split Installation Oahu <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">
-                            Transparent Turnkey Sizing, Pricing & Engineering
+                            Custom Multi-Zone Sizing, On-Site Estimates & Turnkey Engineering
                         </span>
                     </h1>
 
@@ -261,8 +261,8 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                     <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
                         <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
                             <div className="text-cyan-400 font-bold text-xs uppercase tracking-wider">Pricing</div>
-                            <div className="text-white font-extrabold text-sm md:text-base mt-1">Honest Turnkey</div>
-                            <div className="text-slate-400 text-xs mt-0.5">No hidden add-ons</div>
+                            <div className="text-white font-extrabold text-sm md:text-base mt-1">Subject to Estimate</div>
+                            <div className="text-slate-400 text-xs mt-0.5">Free on-site quote</div>
                         </div>
                         <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
                             <div className="text-emerald-400 font-bold text-xs uppercase tracking-wider">Electric Panel</div>
@@ -305,14 +305,13 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                     <div className="text-center max-w-3xl mx-auto mb-12">
                         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-2">
                             <SlidersHorizontal className="w-3.5 h-3.5" />
-                            <span>Turnkey Investment Clarity</span>
+                            <span>Zoned System Architecture</span>
                         </div>
                         <h2 className="text-3xl md:text-4xl font-black text-white">
-                            What Does Ductless Mini-Split Installation Actually Cost on Oahu?
+                            Oahu Ductless Mini-Split Configuration &amp; Sizing Options
                         </h2>
                         <p className="text-slate-400 text-sm md:text-base mt-2">
-                            Unlike mainland estimates that omit electrical and permitting, our numbers reflect 
-                            complete turnkey installations on Oahu.
+                            Every Oahu home is unique—copper line run distance, electrical panel load capacity, and exterior mounting requirements determine exact project needs. All installations are <strong className="text-white">subject to a free on-site estimate</strong> with $0 upfront deposit.
                         </p>
                     </div>
 
@@ -338,13 +337,13 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                                 </div>
 
                                 <div className="my-5 py-4 border-t border-b border-slate-800">
-                                    <div className="text-xs text-slate-400 uppercase font-bold tracking-wider">Turnkey Range</div>
-                                    <div className="text-2xl font-black text-cyan-400 mt-1 font-mono">
-                                        {tier.priceRange}
+                                    <div className="text-xs text-slate-400 uppercase font-bold tracking-wider">Installation Pricing</div>
+                                    <div className="text-lg font-black text-cyan-400 mt-1">
+                                        {tier.pricingStatus}
                                     </div>
                                     <div className="text-[11px] text-emerald-400 mt-1 font-medium flex items-center gap-1">
                                         <Check className="w-3 h-3 stroke-[3]" />
-                                        <span>Includes Equipment & Labor</span>
+                                        <span>Free On-Site Survey ($0 Deposit)</span>
                                     </div>
                                 </div>
 
@@ -371,7 +370,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                                             : 'bg-slate-800 hover:bg-slate-700 text-white'
                                     }`}
                                 >
-                                    <span>Select {tier.name}</span>
+                                    <span>Request Free Estimate</span>
                                     <ChevronRight className="w-3.5 h-3.5" />
                                 </button>
                             </div>
