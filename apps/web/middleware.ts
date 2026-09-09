@@ -147,20 +147,20 @@ export function middleware(request: NextRequest) {
         // Product URLs: /product/...
         if (pathLower.startsWith('/product/')) {
             const productSlug = pathLower.replace('/product/', '');
-            if (productSlug.includes('8021') || productSlug.includes('7500') || productSlug.includes('8000') || productSlug.includes('8022')) {
-                destination = '/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm';
+            if (productSlug.includes('2421') || productSlug.includes('23000') || productSlug.includes('23500') || productSlug.includes('2422') || productSlug.includes('2423')) {
+                destination = '/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm';
             } else if (productSlug.includes('1822') || productSlug.includes('18000') || productSlug.includes('1823')) {
                 destination = '/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm';
-            } else if (productSlug.includes('2421') || productSlug.includes('23000') || productSlug.includes('23500') || productSlug.includes('2422') || productSlug.includes('2423')) {
-                destination = '/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm';
-            } else if (productSlug.includes('6023') || productSlug.includes('6000')) {
-                destination = '/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm';
-            } else if (productSlug.includes('1022') || productSlug.includes('10000')) {
-                destination = '/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm';
-            } else if (productSlug.includes('1222') || productSlug.includes('12000')) {
-                destination = '/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm';
             } else if (productSlug.includes('1522') || productSlug.includes('14000')) {
                 destination = '/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm';
+            } else if (productSlug.includes('1222') || productSlug.includes('12000')) {
+                destination = '/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm';
+            } else if (productSlug.includes('1022') || productSlug.includes('10000')) {
+                destination = '/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm';
+            } else if (productSlug.includes('8021') || productSlug.includes('7500') || productSlug.includes('8000') || productSlug.includes('8022') || productSlug.includes('8024')) {
+                destination = '/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm';
+            } else if (productSlug.includes('6023') || productSlug.includes('6000')) {
+                destination = '/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm';
             } else {
                 destination = '/shop';
             }
