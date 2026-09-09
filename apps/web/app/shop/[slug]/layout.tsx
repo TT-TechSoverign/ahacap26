@@ -164,7 +164,9 @@ export default async function ProductLayout({ params, children }: Props) {
         ? `${domain}${product.image_url.replace('.svg', '.webp')}` 
         : `${domain}/assets/logo-new.png`;
     
-    const brandName = product.name.split(' ')[0] || 'Affordable Home A/C';
+    const matchInParens = product.name.match(/\(([^)]+)\)/);
+    const manufacturerMpn = matchInParens ? matchInParens[1].trim() : `AHAC-${product.id}`;
+    const brandName = product.name.startsWith('GE') ? 'GE Appliances' : 'LG';
     const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
     const activePriceInDollars = isPromo ? product.promo_price.toFixed(2) : product.price.toFixed(2);
     const ratingValue = "4.8"; // Scraped local average
@@ -181,7 +183,7 @@ export default async function ProductLayout({ params, children }: Props) {
         "image": [absoluteImageUrl],
         "description": `Buy the ${product.name} at Affordable Home A/C. ${specs.idealFor ? `Ideal for ${specs.idealFor}. ` : ''}${specs.benefits ? `${specs.benefits} ` : ''}Professional installation and affordable prices in Oahu, Hawaii.`,
         "sku": `AHAC-${product.id}`,
-        "mpn": `AHAC-${product.id}`, // Resolves GSC "Missing MPN" warning
+        "mpn": manufacturerMpn, // Real manufacturer MPN for Google Shopping matching
         "brand": {
             "@type": "Brand",
             "name": brandName,

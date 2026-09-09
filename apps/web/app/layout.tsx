@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         siteName: 'Affordable Home A/C',
         images: [
             {
-                url: '/assets/logo.png',
+                url: '/assets/logo-new.png',
                 width: 800,
                 height: 600,
                 alt: 'Affordable Home A/C Logo',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'Affordable Home A/C | Ductless Mini Split & Air Conditioning Hawaii',
         description: 'We provide affordable air conditioning, ductless mini split installation, and window AC cleaning services across Oahu, Hawaii.',
-        images: ['/assets/logo.png'],
+        images: ['/assets/logo-new.png'],
     }
 };
 
@@ -104,11 +104,17 @@ export default function RootLayout({
                             "@type": "HVACBusiness",
                             "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                             "name": "Affordable Home A/C",
+                            "alternateName": "Affordable Home Air Conditioning",
                             "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
                             "url": "https://www.affordablehome-ac.com",
                             "logo": "https://www.affordablehome-ac.com/assets/logo.svg",
                             "telephone": "+1-808-488-1111",
                             "email": "office@affordablehome-ac.com",
+                            "hasMap": "https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797",
+                            "sameAs": [
+                                "https://www.yelp.com/biz/affordable-home-air-conditioning-waipahu",
+                                "https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797"
+                            ],
                             "address": {
                                 "@type": "PostalAddress",
                                 "streetAddress": "94-150 Leoleo St. #203",
@@ -122,6 +128,42 @@ export default function RootLayout({
                                 "latitude": "21.3855",
                                 "longitude": "-158.0076"
                             },
+                            "openingHoursSpecification": [
+                                {
+                                    "@type": "OpeningHoursSpecification",
+                                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                                    "opens": "08:00",
+                                    "closes": "17:00"
+                                },
+                                {
+                                    "@type": "OpeningHoursSpecification",
+                                    "dayOfWeek": ["Saturday"],
+                                    "opens": "09:00",
+                                    "closes": "14:00"
+                                }
+                            ],
+                            "aggregateRating": {
+                                "@type": "AggregateRating",
+                                "ratingValue": "4.9",
+                                "reviewCount": "142",
+                                "bestRating": "5",
+                                "worstRating": "1"
+                            },
+                            "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover",
+                            "currenciesAccepted": "USD",
+                            "priceRange": "$$",
+                            "license": "CT-36775",
+                            "knowsAbout": [
+                                "Window Air Conditioners",
+                                "LG Dual Inverter AC",
+                                "Ductless Mini Split Installation",
+                                "Window AC Cleaning",
+                                "AC Deep Cleaning",
+                                "AC Maintenance",
+                                "AC Repair",
+                                "Hawaii Energy Cash Rebates",
+                                "Oahu Air Conditioning"
+                            ],
                             "contactPoint": [
                                 {
                                     "@type": "ContactPoint",
@@ -139,12 +181,18 @@ export default function RootLayout({
                                 }
                             ],
                             "areaServed": [
-                                {
-                                    "@type": "State",
-                                    "name": "Hawaii"
-                                }
-                            ],
-                            "priceRange": "$$"
+                                { "@type": "AdministrativeArea", "name": "Honolulu County" },
+                                { "@type": "City", "name": "Waipahu" },
+                                { "@type": "City", "name": "Honolulu" },
+                                { "@type": "City", "name": "Pearl City" },
+                                { "@type": "City", "name": "Aiea" },
+                                { "@type": "City", "name": "Kapolei" },
+                                { "@type": "City", "name": "Ewa Beach" },
+                                { "@type": "City", "name": "Mililani" },
+                                { "@type": "City", "name": "Kailua" },
+                                { "@type": "City", "name": "Kaneohe" },
+                                { "@type": "State", "name": "Hawaii" }
+                            ]
                         })
                     }}
                 />

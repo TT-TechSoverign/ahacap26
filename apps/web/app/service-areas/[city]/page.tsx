@@ -164,10 +164,17 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         "@type": "HVACBusiness",
                         "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                         "name": "Affordable Home A/C",
+                        "alternateName": "Affordable Home Air Conditioning",
                         "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
                         "logo": "https://www.affordablehome-ac.com/assets/logo.svg",
                         "url": "https://www.affordablehome-ac.com",
                         "telephone": "+1-808-488-1111",
+                        "email": "office@affordablehome-ac.com",
+                        "hasMap": "https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797",
+                        "sameAs": [
+                            "https://www.yelp.com/biz/affordable-home-air-conditioning-waipahu",
+                            "https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797"
+                        ],
                         "address": {
                             "@type": "PostalAddress",
                             "streetAddress": "94-150 Leoleo St. #203",
@@ -176,6 +183,36 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             "postalCode": "96797",
                             "addressCountry": "US"
                         },
+                        "geo": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "21.3855",
+                            "longitude": "-158.0076"
+                        },
+                        "openingHoursSpecification": [
+                            {
+                                "@type": "OpeningHoursSpecification",
+                                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                                "opens": "08:00",
+                                "closes": "17:00"
+                            },
+                            {
+                                "@type": "OpeningHoursSpecification",
+                                "dayOfWeek": ["Saturday"],
+                                "opens": "09:00",
+                                "closes": "14:00"
+                            }
+                        ],
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "4.9",
+                            "reviewCount": "142",
+                            "bestRating": "5",
+                            "worstRating": "1"
+                        },
+                        "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover",
+                        "currenciesAccepted": "USD",
+                        "priceRange": "$$",
+                        "license": "CT-36775",
                         "areaServed": {
                             "@type": "City",
                             "name": cityData.name,
@@ -184,15 +221,14 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 "name": "Hawaii"
                             }
                         },
-                        "priceRange": "$$",
                         "hasOfferCatalog": {
                             "@type": "OfferCatalog",
-                            "name": "Air Conditioning Services",
+                            "name": `Air Conditioning Services in ${cityData.name}`,
                             "itemListElement": [
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Affordable Air Conditioning" } },
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Split AC Installation Oahu" } },
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC Cleaning Service" } },
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AC Repair Near Me" } }
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Affordable Air Conditioning in ${cityData.name}` } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Split AC Installation in ${cityData.name}` } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Window AC Cleaning Service in ${cityData.name}` } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `AC Repair in ${cityData.name}` } }
                             ]
                         }
                     })

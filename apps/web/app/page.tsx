@@ -40,6 +40,31 @@ export default function Homepage() {
             </div>
 
             <main className="relative z-10 pt-[110px] md:pt-[130px]">
+                {/* Google WebSite & Sitelinks Search Box Schema */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebSite",
+                            "@id": "https://www.affordablehome-ac.com/#website",
+                            "url": "https://www.affordablehome-ac.com",
+                            "name": "Affordable Home A/C",
+                            "description": "Affordable window air conditioner installation, split AC installation, and window AC cleaning services across Oahu, Hawaii.",
+                            "publisher": {
+                                "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
+                            },
+                            "potentialAction": {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://www.affordablehome-ac.com/shop?q={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        })
+                    }}
+                />
                 <h1 className="sr-only">Affordable Air Conditioning & Ductless Mini Split Installation in Hawaii</h1>
                 <Section1HeroHomeV2 />
                 <QuickJumpBanner />
