@@ -42,27 +42,30 @@ export default function MobileStickyHeader() {
             <header className="fixed top-0 w-full z-[60] flex md:hidden flex-col pointer-events-none">
                 <div 
                     className="pointer-events-auto bg-[#0a0e14]/95 backdrop-blur-md border-b border-slate-800 text-white relative transition-all duration-300 shadow-md"
-                    style={{ padding: isScrolled ? '0.3rem 0' : '0.5rem 0' }}
+                    style={{ 
+                        paddingBottom: isScrolled ? '0.35rem' : '0.5rem', 
+                        paddingTop: isScrolled ? 'calc(env(safe-area-inset-top, 0px) + 0.35rem)' : 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' 
+                    }}
                 >
-                    <div className="px-6 flex justify-between items-center relative">
-                        {/* Hamburger */}
+                    <div className="px-4 sm:px-6 flex justify-between items-center relative">
+                        {/* Hamburger Button (Accessible Touch Target) */}
                         <div className="z-30">
                             <button
                                 onClick={handleToggleMenu}
-                                className="text-white hover:text-primary transition-colors py-2 pr-4 pl-0"
+                                className="text-white hover:text-primary transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center -ml-2 rounded-lg active:bg-white/5"
                                 aria-label="Toggle Menu"
                             >
                                 {mobileMenuOpen ? (
-                                    <X className="size-8" />
+                                    <X className="size-7" />
                                 ) : (
-                                    <Menu className="size-8" />
+                                    <Menu className="size-7" />
                                 )}
                             </button>
                         </div>
 
                         {/* Center Logo */}
                         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20">
-                            <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 logo-promo-glow ${isScrolled ? 'h-10 w-24' : 'h-14 w-32'}`}>
+                            <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 logo-promo-glow ${isScrolled ? 'h-9 w-24' : 'h-12 w-28 sm:h-14 sm:w-32'}`}>
                                 <Image
                                     src="/assets/logo.svg"
                                     alt="AHAC Logo"
@@ -73,17 +76,17 @@ export default function MobileStickyHeader() {
                             </Link>
                         </div>
 
-                        {/* Cart */}
+                        {/* Cart Button (Accessible Touch Target) */}
                         <div className="z-30">
                             <button
                                 onClick={handleOpenCart}
-                                className="text-white hover:text-primary transition-colors py-2 pl-4 pr-0 relative"
+                                className="text-white hover:text-primary transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 relative rounded-lg active:bg-white/5"
                                 aria-label="Open Cart"
                             >
-                                <ShoppingCart className="size-8" />
+                                <ShoppingCart className="size-7" />
                                 {items.length > 0 && (
                                     <span className={cn(
-                                        "absolute top-1 right-0 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
+                                        "absolute top-1 right-1 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
                                         (isCampaignActive() && items.some(item => item.promo_price && item.promo_price > 0))
                                             ? "cart-promo-badge-pulse text-white"
                                             : "bg-cyan-400 text-black"

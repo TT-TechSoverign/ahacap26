@@ -22,11 +22,25 @@ export default function CartDrawer() {
     const [error, setError] = useState('');
     const [orderSuccess, setOrderSuccess] = useState(false);
 
-    // Sync Inventory / Reset state
+    // Sync Inventory / Reset state & Body Scroll Lock
     useEffect(() => {
         if (isOpen) {
             syncInventory();
+            document.body.style.overflow = 'hidden';
+            document.body.style.touchAction = 'none';
+
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'Escape') closeCart();
+            };
+            window.addEventListener('keydown', handleKeyDown);
+            return () => {
+                window.removeEventListener('keydown', handleKeyDown);
+                document.body.style.overflow = '';
+                document.body.style.touchAction = '';
+            };
         } else {
+            document.body.style.overflow = '';
+            document.body.style.touchAction = '';
             // Slight delay to allow animation to finish before resetting state logic
             const tm = setTimeout(() => {
                 setIsCheckout(false);
@@ -95,7 +109,7 @@ export default function CartDrawer() {
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
                         transition={{ type: 'spring', damping: 28, stiffness: 300, mass: 0.8 }}
-                        className="relative z-10 w-full max-w-md bg-slate-950 h-full shadow-[0_0_50px_rgba(6,182,212,0.2)] flex flex-col border-l border-cyan-500/20"
+                        className="relative z-10 w-full max-w-md bg-slate-950 h-[100dvh] shadow-[0_0_50px_rgba(6,182,212,0.2)] flex flex-col border-l border-cyan-500/20"
                         key="panel"
                     >
                         <div className="flex items-center justify-between p-6 border-b border-cyan-500/10 bg-slate-900/50 backdrop-blur-xl">
@@ -209,7 +223,10 @@ export default function CartDrawer() {
 
                         {/* Footer / Checkout (Thumb Zone) */}
                         {(items.length > 0) && (
-                            <div className="p-6 border-t border-cyan-500/10 bg-slate-900/80 backdrop-blur-xl space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.4)] z-20 pb-8 md:pb-6">
+                            <div 
+                                style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 1.5rem)' }}
+                                className="p-6 border-t border-cyan-500/10 bg-slate-900/80 backdrop-blur-xl space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.4)] z-20"
+                            >
                                 <div className="space-y-5">
                                     <div className="space-y-1">
                                         <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-widest">

@@ -125,16 +125,17 @@ export default function MobileStickyBottomBar() {
             style={{
                 transform: isVisible ? 'translateY(0)' : 'translateY(100%)',
                 opacity: isVisible ? 1 : 0,
-                transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease'
+                transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
+                paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 8px)'
             }}
-            className="fixed bottom-0 left-0 w-full z-50 flex md:hidden pb-[env(safe-area-inset-bottom)] bg-slate-900 border-t border-slate-800 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]"
+            className="fixed bottom-0 left-0 w-full z-50 flex md:hidden bg-slate-900 border-t border-slate-800 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]"
         >
             <div className="flex w-full p-2 gap-2">
                 {/* Call Now (DNI Tracking) */}
                 <a 
                     href="tel:808-488-1111"
                     onClick={() => sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Call' })}
-                    className="ctm-track-number flex-1 bg-slate-800 hover:bg-slate-700 text-white font-black uppercase tracking-wider text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors border border-slate-700 active:scale-95"
+                    className="ctm-track-number flex-1 bg-slate-800 hover:bg-slate-700 text-white font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors border border-slate-700 active:scale-95"
                 >
                     <Phone className="size-4 text-primary shrink-0" />
                     <span>Call Now</span>
@@ -152,7 +153,7 @@ export default function MobileStickyBottomBar() {
                             }
                             sendGAEvent('event', cta.gaEvent, { event_category: 'Mobile Conversion', event_label: cta.gaLabel });
                         }}
-                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95 btn-promo-glow btn-shimmer"
+                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95 btn-promo-glow btn-shimmer"
                     >
                         <cta.icon className="size-4 shrink-0" />
                         <span className="truncate">{cta.text}</span>
@@ -162,7 +163,7 @@ export default function MobileStickyBottomBar() {
                         href={cta.href}
                         prefetch={false}
                         onClick={() => sendGAEvent('event', cta.gaEvent, { event_category: 'Mobile Conversion', event_label: cta.gaLabel })}
-                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95 btn-promo-glow btn-shimmer"
+                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95 btn-promo-glow btn-shimmer"
                     >
                         <cta.icon className="size-4 shrink-0" />
                         <span className="truncate">{cta.text}</span>

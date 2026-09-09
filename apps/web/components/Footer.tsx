@@ -46,7 +46,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-8">
+        <footer className="relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-28 md:pb-8">
             <div className="max-w-7xl mx-auto px-6">
                 {/* Availability Schedule Section */}
                 <div className="border-b border-white/5 pb-6 mb-6">
