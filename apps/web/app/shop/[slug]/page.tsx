@@ -40,10 +40,10 @@ const RelatedProducts = dynamic(() => import('@/components/RelatedProducts').the
 // Progressive Skeleton UI Loader to guarantee 0 CLS during data hydration
 function ProductPageSkeleton() {
     return (
-        <div className="bg-background-dark min-h-screen pt-[140px] md:pt-[165px] pb-12 px-4 md:px-8 max-w-6xl mx-auto animate-pulse">
+        <div className="bg-background-dark min-h-screen pt-[140px] md:pt-[165px] pb-12 px-4 md:px-8 max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Image Placeholder */}
-                <div className="space-y-6">
+                <div className="space-y-6 animate-pulse">
                     <div className="aspect-square bg-slate-900 rounded-[2rem] w-full" />
                     <div className="flex gap-3 justify-center md:justify-start">
                         {[1, 2, 3].map((n) => (
@@ -53,21 +53,46 @@ function ProductPageSkeleton() {
                 </div>
                 {/* Details Placeholder */}
                 <div className="space-y-6">
-                    <div className="space-y-3">
+                    <div className="space-y-3 animate-pulse">
                         <div className="h-6 w-32 bg-slate-900 rounded" />
                         <div className="h-10 w-3/4 bg-slate-900 rounded" />
                         <div className="h-8 w-1/3 bg-slate-900 rounded" />
                     </div>
                     <div className="h-px bg-white/10 w-full" />
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-2 animate-pulse">
                         {[1, 2, 3, 4].map((n) => (
                             <div key={n} className="h-16 bg-slate-900 rounded-xl" />
                         ))}
                     </div>
-                    <div className="h-28 bg-slate-900 rounded-2xl" />
-                    <div className="space-y-3">
+                    <div className="h-28 bg-slate-900 rounded-2xl animate-pulse" />
+                    <div className="space-y-3 animate-pulse">
                         <div className="h-16 bg-slate-900 rounded-xl w-full" />
                         <div className="h-12 bg-slate-900 rounded-xl w-full" />
+                    </div>
+
+                    {/* Island Trust & Fulfillment Microcopy Chips - SSR Instant */}
+                    <div className="pt-2 pb-1 grid grid-cols-1 sm:grid-cols-2 gap-2 text-left font-sans text-xs">
+                        <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                            <Check className="size-4 text-emerald-400 shrink-0" />
+                            <span className="font-medium text-[11px] leading-tight">Waipahu Warehouse Pickup by Appt</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                            <Check className="size-4 text-emerald-400 shrink-0" />
+                            <span className="font-medium text-[11px] leading-tight">$50 Flat Island-Wide Delivery</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                            <Check className="size-4 text-emerald-400 shrink-0" />
+                            <span className="font-medium text-[11px] leading-tight">$45 Hawaii Energy Rebate Form</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                            <Check className="size-4 text-emerald-400 shrink-0" />
+                            <span className="font-medium text-[11px] leading-tight">Zero Upfront Estimate Fee</span>
+                        </div>
+                    </div>
+                    <div className="text-center pt-2">
+                        <a href="tel:808-488-1111" className="text-xs text-slate-400 hover:text-primary font-medium tracking-wide">
+                            Questions? Call Waipahu Warehouse: <span className="text-white font-bold">(808) 488-1111</span>
+                        </a>
                     </div>
                 </div>
             </div>
