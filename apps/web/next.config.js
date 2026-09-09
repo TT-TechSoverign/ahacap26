@@ -27,6 +27,7 @@ const nextConfig = {
     },
 
     trailingSlash: false,
+    skipTrailingSlashRedirect: true,
     images: {
         dangerouslyAllowSVG: true,
         contentDispositionType: 'attachment',
@@ -95,38 +96,7 @@ const nextConfig = {
         ];
     },
     async redirects() {
-        return [
-            {
-                source: '/make-an-appointment',
-                destination: '/contact',
-                permanent: true,
-            },
-            {
-                source: '/make-an-appointment/',
-                destination: '/contact',
-                permanent: true,
-            },
-            {
-                source: '/cleaning-and-maintenance',
-                destination: '/maintenance',
-                permanent: true,
-            },
-            {
-                source: '/cleaning-and-maintenance/',
-                destination: '/maintenance',
-                permanent: true,
-            },
-            {
-                source: '/hawaii-energy-rebate',
-                destination: '/shop#rebate',
-                permanent: true,
-            },
-            {
-                source: '/hawaii-energy-rebate/',
-                destination: '/shop#rebate',
-                permanent: true,
-            },
-        ];
+        return [];
     },
 };
 

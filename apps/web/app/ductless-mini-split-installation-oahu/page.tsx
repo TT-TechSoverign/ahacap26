@@ -212,7 +212,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
     };
 
     return (
-        <main className="min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500/30">
+        <main className="min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500/30 pt-[140px] md:pt-[165px]">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}

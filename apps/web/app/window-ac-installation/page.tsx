@@ -188,7 +188,7 @@ export default function WindowAcInstallationPage() {
                             Book Installation ($0 Upfront Deposit) <ArrowRight className="size-3.5" />
                         </a>
                         <Link 
-                            href="/shop#dual_inverter"
+                            href="/shop"
                             className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-header font-bold text-xs uppercase tracking-wider border border-white/10 transition-all flex items-center gap-2"
                         >
                             <Warehouse className="size-3.5 text-primary" /> Bundle In-Stock LG Dual Inverter
@@ -292,7 +292,7 @@ export default function WindowAcInstallationPage() {
                                 </div>
                             </div>
                             <Link 
-                                href="/shop#dual_inverter"
+                                href="/shop"
                                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-xs uppercase tracking-wider transition-all"
                             >
                                 Shop In-Stock Dual Inverters <ArrowRight className="size-3.5" />
@@ -635,7 +635,7 @@ export default function WindowAcInstallationPage() {
 
                                     <div className="text-center pt-2">
                                         <span className="text-[10px] text-slate-500">
-                                            Need a unit right away? <Link href="/shop#dual_inverter" className="text-primary hover:underline">Shop In-Stock LG Inverters with Stripe</Link>
+                                            Need a unit right away? <Link href="/shop" className="text-primary hover:underline">Shop In-Stock LG Inverters with Stripe</Link>
                                         </span>
                                     </div>
                                 </form>
@@ -719,7 +719,7 @@ export default function WindowAcInstallationPage() {
 
                                 <div className="pt-6 space-y-2">
                                     <Link
-                                        href="/shop#dual_inverter"
+                                        href="/shop"
                                         className="w-full py-2.5 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
                                     >
                                         Purchase on Shop <ArrowRight className="size-3.5" />

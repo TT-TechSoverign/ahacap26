@@ -108,6 +108,36 @@ export default function ServiceAreasPage() {
                         </div>
                     );
                 })}
+
+                {/* Island-Wide Conversion Callout */}
+                <div className="bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/30 rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto space-y-6 shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono uppercase tracking-widest">
+                        <LucideIcons.ShieldCheck className="size-3.5" />
+                        Licensed Hawaii HVAC Contractor CT-36775
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-header font-black text-white uppercase tracking-wide">
+                        Don&apos;t See Your Neighborhood Listed?
+                    </h3>
+                    <p className="text-slate-300 max-w-2xl mx-auto text-sm md:text-base leading-relaxed font-light">
+                        We dispatch licensed technicians across all Oahu residential communities from Hawaii Kai to Haleiwa. Call our Waipahu office directly or request a consultation with zero upfront payment.
+                    </p>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                        <a 
+                            href="tel:808-488-1111" 
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-cyan-500 text-slate-950 font-header font-bold text-sm tracking-wider uppercase hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20"
+                        >
+                            <LucideIcons.Phone className="size-4" />
+                            Call (808) 488-1111
+                        </a>
+                        <Link 
+                            href="/contact" 
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-slate-800 border border-slate-700 text-white font-header font-bold text-sm tracking-wider uppercase hover:bg-slate-700 hover:border-cyan-500/40 transition-all"
+                        >
+                            Schedule Consultation
+                            <LucideIcons.ArrowRight className="size-4" />
+                        </Link>
+                    </div>
+                </div>
             </div>
 
             <BackToTop visible={true} />

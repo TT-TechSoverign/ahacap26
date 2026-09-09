@@ -301,7 +301,7 @@ export default function CleanVsReplacePage() {
 
                                         <div className="space-y-2 pt-2">
                                             <Link
-                                                href="/shop#dual_inverter"
+                                                href="/shop"
                                                 onClick={() => trackFunnelEvent('decision_matrix_cta_shop', { choice: 'replace', age, condition })}
                                                 className="w-full py-3.5 px-6 rounded-xl bg-primary hover:bg-primary/90 text-white font-header font-black text-sm uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,174,239,0.35)] transition-all"
                                             >
@@ -492,7 +492,7 @@ export default function CleanVsReplacePage() {
                                 Download Form PDF
                             </a>
                             <Link
-                                href="/shop#dual_inverter"
+                                href="/shop/lg-dual-inverter-guide"
                                 className="px-6 py-3.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/10 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
                             >
                                 View Eligible Models
@@ -554,7 +554,7 @@ export default function CleanVsReplacePage() {
                                 <ArrowRight className="size-4" />
                             </Link>
                             <Link
-                                href="/shop#dual_inverter"
+                                href="/shop"
                                 className="px-8 py-4 rounded-xl bg-primary hover:bg-primary/90 text-white font-header font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,174,239,0.3)] transition-all"
                             >
                                 Shop In-Stock Dual Inverters

@@ -142,10 +142,10 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
     // Get recommended shop link based on BTU mapping
     const recommendedShopLink = useMemo(() => {
         const btu = calculations.recommendedBtu;
-        if (btu <= 8500) return "/shop#dual_inverter";
-        if (btu <= 13000) return "/shop#dual_inverter"; // 10-12K units
-        if (btu <= 17000) return "/shop#dual_inverter"; // 14K units
-        return "/shop#universal_fit"; // 18-24K high capacity
+        if (btu <= 8500) return "/shop/lg-dual-inverter-8000-btu-oahu";
+        if (btu <= 13000) return "/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm";
+        if (btu <= 17000) return "/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm";
+        return "/shop/large-room-window-ac-oahu"; // 18-24K high capacity
     }, [calculations.recommendedBtu]);
 
     return (
