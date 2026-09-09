@@ -132,7 +132,7 @@ export default function RootLayout({
                                 },
                                 {
                                     "@type": "ContactPoint",
-                                    "telephone": "+1-808-425-4554",
+                                    "telephone": "+1-808-488-1111",
                                     "contactType": "warehouse preorder",
                                     "areaServed": "US-HI",
                                     "availableLanguage": "English"

@@ -116,11 +116,11 @@ export default function AcCleaningOahuPage() {
             {
                 "@type": "HVACBusiness",
                 "name": "Affordable Home AC - Oahu AC Deep Cleaning & Mold Sanitization",
-                "telephone": "+1-808-724-4328",
+                "telephone": "+1-808-488-1111",
                 "priceRange": "$$",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leokane St",
+                    "streetAddress": "94-150 Leoleo St. #203",
                     "addressLocality": "Waipahu",
                     "addressRegion": "HI",
                     "postalCode": "96797",
@@ -128,6 +128,37 @@ export default function AcCleaningOahuPage() {
                 },
                 "areaServed": "Oahu, Hawaii",
                 "description": "Licensed Hawaii Contractor CT-36775 specializing in window AC immersion tank teardown sanitization ($275) and ductless mini-split chemical coil flushes ($175–$275) across Honolulu and Oahu."
+            },
+            {
+                "@type": "Service",
+                "name": "Window AC Deep Cleaning Oahu ($275 Bench Teardown)",
+                "serviceType": "HVAC Sanitization & Coil Pressure Wash",
+                "provider": {
+                    "@type": "HVACBusiness",
+                    "name": "Affordable Home AC"
+                },
+                "areaServed": "Oahu, Hawaii",
+                "description": "Complete ultrasonic coil pressure washing, squirrel cage mold removal, and bench-test sanitization in Waipahu, Oahu.",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "275.00",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock"
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "128",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+                    { "@type": "ListItem", "position": 2, "name": "AC Cleaning Oahu", "item": "https://www.affordablehome-ac.com/ac-cleaning-oahu" }
+                ]
             },
             {
                 "@type": "FAQPage",
@@ -346,10 +377,10 @@ export default function AcCleaningOahuPage() {
                                     </p>
                                     <div className="pt-4">
                                         <a 
-                                            href="tel:8087244328" 
+                                            href="tel:808-488-1111" 
                                             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 text-cyan-400 hover:bg-white/15 text-xs font-bold font-sans"
                                         >
-                                            <Phone className="size-3.5" /> Dispatch Phone: (808) 724-4328
+                                            <Phone className="size-3.5" /> Dispatch Phone: (808) 488-1111
                                         </a>
                                     </div>
                                 </div>
@@ -470,11 +501,11 @@ export default function AcCleaningOahuPage() {
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <a 
-                            href="tel:8087244328"
+                            href="tel:808-488-1111"
                             className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 flex items-center gap-2"
                         >
                             <Phone className="size-4" />
-                            Call Dispatch: (808) 724-4328
+                            Call Warehouse: (808) 488-1111
                         </a>
                         <Link 
                             href="/shop"

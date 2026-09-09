@@ -169,10 +169,10 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                 "provider": {
                     "@type": "HVACContractor",
                     "name": "Affordable Home AC",
-                    "telephone": "+1-808-725-3375",
+                    "telephone": "+1-808-488-1111",
                     "address": {
                         "@type": "PostalAddress",
-                        "streetAddress": "Waipahu Industrial Center",
+                        "streetAddress": "94-150 Leoleo St. #203",
                         "addressLocality": "Waipahu",
                         "addressRegion": "HI",
                         "postalCode": "96797",
@@ -182,6 +182,13 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                 "areaServed": {
                     "@type": "State",
                     "name": "Hawaii"
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "135",
+                    "bestRating": "5",
+                    "worstRating": "1"
                 },
                 "hasOfferCatalog": {
                     "@type": "OfferCatalog",
@@ -196,6 +203,13 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                         "price": tier.pricingStatus
                     }))
                 }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+                    { "@type": "ListItem", "position": 2, "name": "Mini-Split Installation Oahu", "item": "https://www.affordablehome-ac.com/ductless-mini-split-installation-oahu" }
+                ]
             },
             {
                 "@type": "FAQPage",
@@ -289,11 +303,11 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                             Request $0 Upfront On-Site Estimate
                         </a>
                         <a
-                            href="tel:8087253375"
+                            href="tel:808-488-1111"
                             className="w-full sm:w-auto px-7 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-sm border border-slate-700 transition-colors flex items-center justify-center gap-2"
                         >
                             <Phone className="w-4 h-4 text-cyan-400" />
-                            <span>(808) 725-3375</span>
+                            <span>(808) 488-1111</span>
                         </a>
                     </div>
                 </div>
@@ -487,10 +501,10 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                             </p>
                             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <a
-                                    href="tel:8087253375"
+                                    href="tel:808-488-1111"
                                     className="px-6 py-3 bg-cyan-500 text-slate-950 font-bold rounded-xl text-sm"
                                 >
-                                    Call Direct: (808) 725-3375
+                                    Call Direct: (808) 488-1111
                                 </a>
                                 <Link
                                     href="/window-ac-vs-mini-split-oahu"

@@ -55,11 +55,11 @@ export default function MiniSplitEstimatePage() {
             {
                 "@type": "HVACBusiness",
                 "name": "Affordable Home AC - Mini Split Installation Oahu",
-                "telephone": "+1-808-724-4328",
+                "telephone": "+1-808-488-1111",
                 "priceRange": "$$$",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leokane St",
+                    "streetAddress": "94-150 Leoleo St. #203",
                     "addressLocality": "Waipahu",
                     "addressRegion": "HI",
                     "postalCode": "96797",
@@ -67,6 +67,31 @@ export default function MiniSplitEstimatePage() {
                 },
                 "areaServed": "Oahu, Hawaii",
                 "description": "Hawaii Contractor CT-36775 providing honest, transparent ductless mini split installation, electrical panel assessment, and multi-zone climate design across Oahu."
+            },
+            {
+                "@type": "Service",
+                "name": "Ductless Mini Split On-Site Estimate Oahu",
+                "serviceType": "HVAC Estimate & Load Calculation",
+                "provider": {
+                    "@type": "HVACBusiness",
+                    "name": "Affordable Home AC"
+                },
+                "areaServed": "Oahu, Hawaii",
+                "description": "On-site ductless mini-split installation estimate, room BTU heat load calculation, and electrical panel inspection on Oahu.",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "108",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+                    { "@type": "ListItem", "position": 2, "name": "Mini-Split Estimate", "item": "https://www.affordablehome-ac.com/mini-split-estimate" }
+                ]
             },
             {
                 "@type": "FAQPage",
@@ -223,7 +248,7 @@ export default function MiniSplitEstimatePage() {
 
                                 <div className="pt-4 mt-4 border-t border-white/5">
                                     <a
-                                        href="tel:8087244328"
+                                        href="tel:808-488-1111"
                                         className="w-full py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-white font-header font-bold text-xs uppercase flex items-center justify-center gap-1.5 border border-white/10 transition-all"
                                     >
                                         <Phone className="size-3 text-primary" />
@@ -277,11 +302,11 @@ export default function MiniSplitEstimatePage() {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
                             <a
-                                href="tel:8087244328"
+                                href="tel:808-488-1111"
                                 className="px-8 py-4 rounded-xl bg-primary hover:bg-primary/90 text-white font-header font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,174,239,0.3)] transition-all"
                             >
                                 <Phone className="size-4" />
-                                Call Our Estimator: (808) 724-4328
+                                Call Our Estimator: (808) 488-1111
                             </a>
                             <Link
                                 href="/mini_split_ac"

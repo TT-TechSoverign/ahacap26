@@ -120,16 +120,30 @@ export default function WindowAcVsMiniSplitPage() {
             {
                 "@type": "HVACBusiness",
                 "name": "Affordable Home AC",
-                "telephone": "+1-808-724-4328",
+                "telephone": "+1-808-488-1111",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leokane St",
+                    "streetAddress": "94-150 Leoleo St. #203",
                     "addressLocality": "Waipahu",
                     "addressRegion": "HI",
                     "postalCode": "96797",
                     "addressCountry": "US"
                 },
-                "areaServed": "Oahu, Hawaii"
+                "areaServed": "Oahu, Hawaii",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "122",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+                    { "@type": "ListItem", "position": 2, "name": "Window AC vs Mini-Split", "item": "https://www.affordablehome-ac.com/window-ac-vs-mini-split-oahu" }
+                ]
             },
             {
                 "@type": "FAQPage",

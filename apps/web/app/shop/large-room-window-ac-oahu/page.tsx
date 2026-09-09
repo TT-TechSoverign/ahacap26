@@ -102,7 +102,7 @@ export default function LargeRoomWindowAcPage() {
         },
         {
             q: "How fast can I get one of these units on Oahu?",
-            a: "Both models are currently in stock at our Waipahu Central Warehouse (94-150 Leokane St). You can select Free Waipahu Warehouse Pickup (by appointment, subject to scheduling & inventory availability) OR $50 Flat Island-Wide Delivery directly to your doorstep across all 22 Oahu municipalities."
+            a: "Both models are currently in stock at our Waipahu Central Warehouse (94-150 Leoleo St. #203). You can select Free Waipahu Warehouse Pickup (by appointment, subject to scheduling & inventory availability) OR $50 Flat Island-Wide Delivery directly to your doorstep across all 22 Oahu municipalities."
         },
         {
             q: "Do these high-capacity models qualify for the Hawaii Energy cash rebate?",
@@ -116,11 +116,11 @@ export default function LargeRoomWindowAcPage() {
             {
                 "@type": "HVACBusiness",
                 "name": "Affordable Home AC - High-Capacity Window AC Sales Oahu",
-                "telephone": "+1-808-724-4328",
+                "telephone": "+1-808-488-1111",
                 "priceRange": "$$",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leokane St",
+                    "streetAddress": "94-150 Leoleo St. #203",
                     "addressLocality": "Waipahu",
                     "addressRegion": "HI",
                     "postalCode": "96797",
@@ -133,13 +133,23 @@ export default function LargeRoomWindowAcPage() {
                 "@type": "Product",
                 "name": "LG Dual Inverter 18,000 BTU Window Air Conditioner (LW1822IVSM)",
                 "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-                "description": "High-capacity 18,000 BTU Dual Inverter window AC for large rooms and open-concept layouts. 208/230V NEMA 6-20P.",
+                "description": "High-capacity 18,000 BTU Dual Inverter window AC for large rooms and open-concept layouts. 208/230V NEMA 6-20P. $45 Hawaii Energy Rebate eligible.",
                 "brand": { "@type": "Brand", "name": "LG" },
+                "sku": "LW1822IVSM",
+                "mpn": "LW1822IVSM",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "92",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
                 "offers": {
                     "@type": "Offer",
                     "url": "https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu",
                     "priceCurrency": "USD",
                     "price": "832.00",
+                    "priceValidUntil": "2026-12-31",
                     "availability": "https://schema.org/InStock",
                     "itemCondition": "https://schema.org/NewCondition"
                 }
@@ -148,16 +158,49 @@ export default function LargeRoomWindowAcPage() {
                 "@type": "Product",
                 "name": "LG Dual Inverter 23,500 BTU Window Air Conditioner (LW2422IVSM)",
                 "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-                "description": "Titan-grade 23,500 BTU Dual Inverter window AC for whole-home open areas up to 1,500 sq ft. 208/230V NEMA 6-20P.",
+                "description": "Titan-grade 23,500 BTU Dual Inverter window AC for whole-home open areas up to 1,500 sq ft. 208/230V NEMA 6-20P. $45 Hawaii Energy Rebate eligible.",
                 "brand": { "@type": "Brand", "name": "LG" },
+                "sku": "LW2422IVSM",
+                "mpn": "LW2422IVSM",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "78",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
                 "offers": {
                     "@type": "Offer",
                     "url": "https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu",
                     "priceCurrency": "USD",
                     "price": "922.00",
+                    "priceValidUntil": "2026-12-31",
                     "availability": "https://schema.org/InStock",
                     "itemCondition": "https://schema.org/NewCondition"
                 }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.affordablehome-ac.com"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Shop",
+                        "item": "https://www.affordablehome-ac.com/shop"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "Large Room Window AC Oahu",
+                        "item": "https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu"
+                    }
+                ]
             },
             {
                 "@type": "FAQPage",
@@ -504,11 +547,11 @@ export default function LargeRoomWindowAcPage() {
                             Order In-Stock Unit Now
                         </button>
                         <a 
-                            href="tel:8087244328"
+                            href="tel:808-488-1111"
                             className="px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-mono text-xs font-bold hover:bg-white/10 transition-all flex items-center gap-2"
                         >
                             <Phone className="size-3.5 text-cyan-400" />
-                            Call Dispatch: (808) 724-4328
+                            Call Warehouse: (808) 488-1111
                         </a>
                     </div>
                 </div>

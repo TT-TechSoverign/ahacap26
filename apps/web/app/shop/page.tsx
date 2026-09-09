@@ -350,6 +350,50 @@ export default function ShopPage() {
                     </div>
                 </div>
 
+                {/* Island Trust & Service Guarantee Bar */}
+                <div className="max-w-7xl mx-auto px-4 mt-6 mb-2">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                        <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
+                            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                                <Warehouse className="size-5 text-primary" />
+                            </div>
+                            <div className="text-left">
+                                <div className="text-white font-header font-black text-xs uppercase tracking-wider">Waipahu Pickup</div>
+                                <div className="text-slate-400 text-[10px] leading-tight">By Appointment (Leoleo St)</div>
+                            </div>
+                        </div>
+
+                        <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
+                            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0">
+                                <Truck className="size-5 text-cyan-400" />
+                            </div>
+                            <div className="text-left">
+                                <div className="text-white font-header font-black text-xs uppercase tracking-wider">$50 Flat Delivery</div>
+                                <div className="text-slate-400 text-[10px] leading-tight">Island-Wide Direct to Door</div>
+                            </div>
+                        </div>
+
+                        <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
+                            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
+                                <Leaf className="size-5 text-emerald-400" />
+                            </div>
+                            <div className="text-left">
+                                <div className="text-white font-header font-black text-xs uppercase tracking-wider">$45 Cash Rebate</div>
+                                <div className="text-slate-400 text-[10px] leading-tight">Hawaii Energy Form Included</div>
+                            </div>
+                        </div>
+
+                        <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
+                            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0">
+                                <Wrench className="size-5 text-amber-400" />
+                            </div>
+                            <div className="text-left">
+                                <div className="text-white font-header font-black text-xs uppercase tracking-wider">Zero Upfront Fee</div>
+                                <div className="text-slate-400 text-[10px] leading-tight">Free Installation Estimates</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 {/* Sizing Wizard CTA Banner */}
                 <div className="mt-8 mb-10 max-w-7xl mx-auto px-4">

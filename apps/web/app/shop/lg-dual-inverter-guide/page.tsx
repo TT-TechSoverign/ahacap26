@@ -190,7 +190,7 @@ export default function LgDualInverterGuidePage() {
         },
         {
             q: "Where is your warehouse located for local pickup?",
-            a: "Our central warehouse is located at 94-150 Leokane St in Waipahu. Warehouse pickup is free and available by appointment (subject to scheduling & inventory availability). We also offer $50 Flat Island-Wide Delivery directly to your doorstep."
+            a: "Our central warehouse is located at 94-150 Leoleo St. #203 in Waipahu. Warehouse pickup is free and available by appointment (subject to scheduling & inventory availability). We also offer $50 Flat Island-Wide Delivery directly to your doorstep."
         }
     ];
 
@@ -200,16 +200,46 @@ export default function LgDualInverterGuidePage() {
             {
                 "@type": "HVACBusiness",
                 "name": "Affordable Home AC - LG Dual Inverter Oahu Guide & Store",
-                "telephone": "+1-808-724-4328",
+                "telephone": "+1-808-488-1111",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leokane St",
+                    "streetAddress": "94-150 Leoleo St. #203",
                     "addressLocality": "Waipahu",
                     "addressRegion": "HI",
                     "postalCode": "96797",
                     "addressCountry": "US"
                 },
-                "areaServed": "Oahu, Hawaii"
+                "areaServed": "Oahu, Hawaii",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "112",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.affordablehome-ac.com"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Shop",
+                        "item": "https://www.affordablehome-ac.com/shop"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "LG Dual Inverter Guide",
+                        "item": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-guide"
+                    }
+                ]
             },
             {
                 "@type": "FAQPage",
@@ -471,11 +501,11 @@ export default function LgDualInverterGuidePage() {
                             Schedule Installation ($0 Upfront)
                         </Link>
                         <a 
-                            href="tel:8087244328"
+                            href="tel:808-488-1111"
                             className="px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-mono text-xs font-bold hover:bg-white/10 transition-all flex items-center gap-2"
                         >
                             <Phone className="size-3.5 text-cyan-400" />
-                            Call Dispatch: (808) 724-4328
+                            Call Warehouse: (808) 488-1111
                         </a>
                     </div>
                 </div>

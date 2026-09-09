@@ -122,11 +122,11 @@ export default function AcRepairOahuPage() {
             {
                 "@type": "HVACBusiness",
                 "name": "Affordable Home AC - Oahu AC Repair & Diagnostic Troubleshooting",
-                "telephone": "+1-808-724-4328",
+                "telephone": "+1-808-488-1111",
                 "priceRange": "$$",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leokane St",
+                    "streetAddress": "94-150 Leoleo St. #203",
                     "addressLocality": "Waipahu",
                     "addressRegion": "HI",
                     "postalCode": "96797",
@@ -134,6 +134,31 @@ export default function AcRepairOahuPage() {
                 },
                 "areaServed": "Oahu, Hawaii",
                 "description": "Licensed Hawaii Contractor CT-36775 providing diagnostic troubleshooting and repair for ductless mini-splits and window air conditioners across Honolulu, Waipahu, and all Oahu."
+            },
+            {
+                "@type": "Service",
+                "name": "AC Repair & Diagnostics Oahu",
+                "serviceType": "HVAC Repair & Troubleshooting",
+                "provider": {
+                    "@type": "HVACBusiness",
+                    "name": "Affordable Home AC"
+                },
+                "areaServed": "Oahu, Hawaii",
+                "description": "Professional AC diagnostic troubleshooting and repairs for ductless mini-splits and window air conditioners in Honolulu, Waipahu, and island-wide Oahu.",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "119",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+                    { "@type": "ListItem", "position": 2, "name": "AC Repair Oahu", "item": "https://www.affordablehome-ac.com/ac-repair-oahu" }
+                ]
             },
             {
                 "@type": "FAQPage",
@@ -310,10 +335,10 @@ export default function AcRepairOahuPage() {
                                     </p>
                                     <div className="pt-4">
                                         <a 
-                                            href="tel:8087244328" 
+                                            href="tel:808-488-1111" 
                                             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 text-cyan-400 hover:bg-white/15 text-xs font-bold"
                                         >
-                                            <Phone className="size-3.5" /> Call Dispatch Now: (808) 724-4328
+                                            <Phone className="size-3.5" /> Call Dispatch Now: (808) 488-1111
                                         </a>
                                     </div>
                                 </div>
@@ -362,7 +387,7 @@ export default function AcRepairOahuPage() {
                                             type="text"
                                             value={address}
                                             onChange={e => setAddress(e.target.value)}
-                                            placeholder="e.g. 94-150 Leokane St"
+                                            placeholder="e.g. 94-150 Leoleo St. #203"
                                             className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                                         />
                                     </div>
@@ -467,11 +492,11 @@ export default function AcRepairOahuPage() {
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <a 
-                            href="tel:8087244328"
+                            href="tel:808-488-1111"
                             className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 flex items-center gap-2"
                         >
                             <Phone className="size-4" />
-                            Call Dispatch: (808) 724-4328
+                            Call Dispatch: (808) 488-1111
                         </a>
                         <Link 
                             href="/shop"

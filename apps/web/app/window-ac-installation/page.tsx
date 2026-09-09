@@ -127,11 +127,11 @@ export default function WindowAcInstallationPage() {
             {
                 "@type": "HVACBusiness",
                 "name": "Affordable Home AC - Professional Window AC Installation Oahu",
-                "telephone": "+1-808-724-4328",
+                "telephone": "+1-808-488-1111",
                 "priceRange": "$$",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leokane St",
+                    "streetAddress": "94-150 Leoleo St. #203",
                     "addressLocality": "Waipahu",
                     "addressRegion": "HI",
                     "postalCode": "96797",
@@ -139,6 +139,31 @@ export default function WindowAcInstallationPage() {
                 },
                 "areaServed": "Oahu, Hawaii",
                 "description": "Licensed Hawaii Contractor CT-36775 specializing in professional window AC installation, custom jalousie acrylic baffle retrofits, cantilever exterior support brackets, and trade-wind leveling across Honolulu, Waipahu, and all Oahu."
+            },
+            {
+                "@type": "Service",
+                "name": "Professional Window AC Installation Oahu",
+                "serviceType": "HVAC Installation",
+                "provider": {
+                    "@type": "HVACBusiness",
+                    "name": "Affordable Home AC"
+                },
+                "areaServed": "Oahu, Hawaii",
+                "description": "Licensed CT-36775 window air conditioner installation, custom plexiglass / acrylic jalousie window kits, and exterior bracket mounting on Oahu.",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "142",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+                    { "@type": "ListItem", "position": 2, "name": "Window AC Installation Oahu", "item": "https://www.affordablehome-ac.com/window-ac-installation" }
+                ]
             },
             {
                 "@type": "FAQPage",
@@ -519,11 +544,11 @@ export default function WindowAcInstallationPage() {
                                     </div>
                                     <div className="pt-4">
                                         <a
-                                            href="tel:8087244328"
+                                            href="tel:808-488-1111"
                                             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase"
                                         >
                                             <Phone className="size-3.5" />
-                                            Call Dispatch Now: (808) 724-4328
+                                            Call Dispatch Now: (808) 488-1111
                                         </a>
                                     </div>
                                 </div>

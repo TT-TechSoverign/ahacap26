@@ -79,6 +79,34 @@ export default function CleanVsReplacePage() {
         "@context": "https://schema.org",
         "@graph": [
             {
+                "@type": "HVACBusiness",
+                "name": "Affordable Home AC - Clean vs Replace Diagnostics Oahu",
+                "telephone": "+1-808-488-1111",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "94-150 Leoleo St. #203",
+                    "addressLocality": "Waipahu",
+                    "addressRegion": "HI",
+                    "postalCode": "96797",
+                    "addressCountry": "US"
+                },
+                "areaServed": "Oahu, Hawaii",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "115",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+                    { "@type": "ListItem", "position": 2, "name": "Clean vs Replace Guide", "item": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac" }
+                ]
+            },
+            {
                 "@type": "HowTo",
                 "name": "How to Decide Whether to Clean or Replace Your Window AC on Oahu",
                 "description": "Step-by-step diagnostic guide to evaluate window air conditioner age, coil condition, mold severity, and HECO electric power consumption to decide between a $275 bench teardown or upgrading to an LG Dual Inverter.",
@@ -362,11 +390,11 @@ export default function CleanVsReplacePage() {
                                                 <ArrowRight className="size-4" />
                                             </Link>
                                             <a
-                                                href="tel:8087244328"
+                                                href="tel:808-488-1111"
                                                 className="w-full py-2.5 px-4 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 font-mono text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 border border-white/10 transition-all"
                                             >
                                                 <Phone className="size-3.5 text-primary" />
-                                                Call Warehouse: (808) 724-4328
+                                                Call Warehouse: (808) 488-1111
                                             </a>
                                         </div>
                                     </div>

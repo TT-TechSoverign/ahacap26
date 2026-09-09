@@ -12,7 +12,7 @@ import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { cn, isCampaignActive as isCampaignActiveChecker } from '@/lib/utils';
-import { Fan, AlertCircle, Snowflake, ShoppingCart, FileText, ShieldAlert, X, Phone } from 'lucide-react';
+import { Fan, AlertCircle, Snowflake, ShoppingCart, FileText, ShieldAlert, X, Phone, Check } from 'lucide-react';
 import { StockBadge } from '@/components/StockBadge';
 import dynamic from 'next/dynamic';
 
@@ -506,8 +506,8 @@ export default function ProductDetailPage() {
                                     Add to Cart
                                 </button>
                             ) : (
-                                <a
-                                    href="tel:8084254554"
+                                <a 
+                                    href="tel:808-488-1111"
                                     className="w-full h-16 bg-gradient-to-r from-red-600 to-amber-600 text-white font-black uppercase tracking-[0.3em] text-xs rounded-xl shadow-[0_20px_50px_rgba(220,38,38,0.2)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 group"
                                 >
                                     <Phone className="size-5 group-hover:animate-bounce" />
@@ -515,6 +515,26 @@ export default function ProductDetailPage() {
                                 </a>
                             )}
                             
+                            {/* Island Trust & Fulfillment Microcopy Chips */}
+                            <div className="pt-2 pb-1 grid grid-cols-1 sm:grid-cols-2 gap-2 text-left font-sans text-xs">
+                                <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                                    <Check className="size-4 text-emerald-400 shrink-0" />
+                                    <span className="font-medium text-[11px] leading-tight">Waipahu Warehouse Pickup by Appt</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                                    <Check className="size-4 text-emerald-400 shrink-0" />
+                                    <span className="font-medium text-[11px] leading-tight">$50 Flat Island-Wide Delivery</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                                    <Check className="size-4 text-emerald-400 shrink-0" />
+                                    <span className="font-medium text-[11px] leading-tight">$45 Hawaii Energy Rebate Form</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                                    <Check className="size-4 text-emerald-400 shrink-0" />
+                                    <span className="font-medium text-[11px] leading-tight">Zero Upfront Estimate Fee</span>
+                                </div>
+                            </div>
+
                             {specSheetUrl && (
                                 <button
                                     onClick={() => setIsSpecModalOpen(true)}

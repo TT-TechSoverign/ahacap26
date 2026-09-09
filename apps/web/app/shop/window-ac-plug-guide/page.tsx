@@ -129,6 +129,35 @@ export default function WindowAcPlugGuidePage() {
         "@context": "https://schema.org",
         "@graph": [
             {
+                "@type": "HVACBusiness",
+                "name": "Affordable Home AC - Oahu Electrical & Window AC Matching",
+                "telephone": "+1-808-488-1111",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "94-150 Leoleo St. #203",
+                    "addressLocality": "Waipahu",
+                    "addressRegion": "HI",
+                    "postalCode": "96797",
+                    "addressCountry": "US"
+                },
+                "areaServed": "Oahu, Hawaii",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "104",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+                    { "@type": "ListItem", "position": 2, "name": "Shop", "item": "https://www.affordablehome-ac.com/shop" },
+                    { "@type": "ListItem", "position": 3, "name": "Window AC Plug Guide", "item": "https://www.affordablehome-ac.com/shop/window-ac-plug-guide" }
+                ]
+            },
+            {
                 "@type": "HowTo",
                 "name": "How to Identify 115V vs 230V Window AC Plug Types in Hawaii",
                 "description": "Visual guide to identify NEMA 5-15P 115V plugs and NEMA 6-20P 230V outlets before purchasing 18,000 or 23,500 BTU LG Dual Inverter window air conditioners.",
@@ -137,6 +166,11 @@ export default function WindowAcPlugGuidePage() {
                         "@type": "HowToStep",
                         "name": "Look at the Wall Receptacle Blades",
                         "text": "Check your outlet. Two vertical slots indicate a standard 115V 15A outlet. One horizontal slot and one vertical or T-slot indicates a 230V 20A circuit."
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "name": "Confirm Dedicated Circuit Breaker",
+                        "text": "Check your main electrical panel. A single-pole 15A or 20A breaker powers 115V. A double-pole tandem breaker powering both bus bars indicates 230V."
                     },
                     {
                         "@type": "HowToStep",
@@ -427,7 +461,7 @@ export default function WindowAcPlugGuidePage() {
                                 View 12,000 BTU 115V Champion
                             </Link>
                             <a
-                                href="tel:8087244328"
+                                href="tel:808-488-1111"
                                 className="px-6 py-3.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/10 font-header font-bold text-xs uppercase tracking-wider text-center transition-all"
                             >
                                 Consult an AC Specialist

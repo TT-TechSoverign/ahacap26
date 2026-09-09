@@ -85,7 +85,7 @@ export default function Lg8000BtuOahuPage() {
         },
         {
             q: "Can I pick this unit up today in Waipahu?",
-            a: "Yes! We currently have 10 units in stock at our Waipahu Central Warehouse (94-150 Leokane St). Free warehouse pickup is available by appointment (subject to scheduling & inventory availability), or you can select $50 Flat Island-Wide Delivery directly to your home."
+            a: "Yes! We currently have 10 units in stock at our Waipahu Central Warehouse (94-150 Leoleo St. #203). Free warehouse pickup is available by appointment (subject to scheduling & inventory availability), or you can select $50 Flat Island-Wide Delivery directly to your home."
         }
     ];
 
@@ -95,11 +95,11 @@ export default function Lg8000BtuOahuPage() {
             {
                 "@type": "HVACBusiness",
                 "name": "Affordable Home AC - LG Dual Inverter 8,000 BTU Oahu",
-                "telephone": "+1-808-724-4328",
+                "telephone": "+1-808-488-1111",
                 "priceRange": "$$",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leokane St",
+                    "streetAddress": "94-150 Leoleo St. #203",
                     "addressLocality": "Waipahu",
                     "addressRegion": "HI",
                     "postalCode": "96797",
@@ -112,16 +112,49 @@ export default function Lg8000BtuOahuPage() {
                 "@type": "Product",
                 "name": "LG Dual Inverter 8,000 BTU Window Air Conditioner (LW8022IVSM)",
                 "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-                "description": "Ultra-quiet 8,000 BTU Dual Inverter window air conditioner with smart ThinQ WiFi control. Perfect for Oahu master bedrooms and home offices.",
+                "description": "Ultra-quiet 8,000 BTU Dual Inverter window air conditioner with smart ThinQ WiFi control. Perfect for Oahu master bedrooms and home offices. Eligible for $45 Hawaii Energy cash rebate.",
                 "brand": { "@type": "Brand", "name": "LG" },
+                "sku": "LW8022IVSM",
+                "mpn": "LW8022IVSM",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "84",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
                 "offers": {
                     "@type": "Offer",
                     "url": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-8000-btu-oahu",
                     "priceCurrency": "USD",
                     "price": "535.00",
+                    "priceValidUntil": "2026-12-31",
                     "availability": "https://schema.org/InStock",
                     "itemCondition": "https://schema.org/NewCondition"
                 }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.affordablehome-ac.com"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Shop",
+                        "item": "https://www.affordablehome-ac.com/shop"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "LG 8,000 BTU Dual Inverter",
+                        "item": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-8000-btu-oahu"
+                    }
+                ]
             },
             {
                 "@type": "FAQPage",
@@ -436,11 +469,11 @@ export default function Lg8000BtuOahuPage() {
                             Buy LG 8,000 BTU ($535)
                         </button>
                         <a 
-                            href="tel:8087244328"
+                            href="tel:808-488-1111"
                             className="px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-mono text-xs font-bold hover:bg-white/10 transition-all flex items-center gap-2"
                         >
                             <Phone className="size-3.5 text-cyan-400" />
-                            Call Dispatch: (808) 724-4328
+                            Call Warehouse: (808) 488-1111
                         </a>
                     </div>
                 </div>

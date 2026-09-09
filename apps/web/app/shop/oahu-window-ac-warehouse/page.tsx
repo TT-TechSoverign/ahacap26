@@ -104,10 +104,10 @@ export default function OahuWindowAcWarehousePage() {
                 "@type": "LocalBusiness",
                 "@id": "https://www.affordablehome-ac.com/#organization",
                 "name": "Affordable Home AC - Oahu Distribution Warehouse",
-                "telephone": "+1-808-725-3375",
+                "telephone": "+1-808-488-1111",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "Waipahu Industrial Center",
+                    "streetAddress": "94-150 Leoleo St. #203",
                     "addressLocality": "Waipahu",
                     "addressRegion": "HI",
                     "postalCode": "96797",
@@ -126,7 +126,14 @@ export default function OahuWindowAcWarehousePage() {
                         "closes": "17:00"
                     }
                 ],
-                "priceRange": "$$"
+                "priceRange": "$$",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "96",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                }
             },
             {
                 "@type": "FAQPage",
@@ -353,11 +360,11 @@ export default function OahuWindowAcWarehousePage() {
                             <ChevronRight className="w-4 h-4" />
                         </Link>
                         <a
-                            href="tel:8087253375"
+                            href="tel:808-488-1111"
                             className="w-full sm:w-auto px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl text-sm border border-slate-700 transition-colors text-center flex items-center justify-center gap-2"
                         >
                             <PhoneCall className="w-4 h-4 text-emerald-400" />
-                            <span>(808) 725-3375</span>
+                            <span>(808) 488-1111</span>
                         </a>
                     </div>
                 </div>
@@ -415,11 +422,11 @@ export default function OahuWindowAcWarehousePage() {
                                 Browse In-Stock Units
                             </a>
                             <a
-                                href="tel:8087253375"
+                                href="tel:808-488-1111"
                                 className="w-full sm:w-auto px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-sm border border-slate-700 transition-colors flex items-center justify-center gap-2"
                             >
                                 <PhoneCall className="w-4 h-4 text-emerald-400" />
-                                <span>Speak with Dispatch: (808) 725-3375</span>
+                                <span>Speak with Warehouse: (808) 488-1111</span>
                             </a>
                         </div>
                     </div>
