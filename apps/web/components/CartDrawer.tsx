@@ -275,17 +275,17 @@ export default function CartDrawer() {
                                         </div>
                                     )}
 
-                                    {/* Zero Online Payment Required Alternative */}
+                                    {/* Free Sizing Estimates & Direct Dispatch Alternative */}
                                     <div className="p-3.5 bg-slate-950/80 border border-emerald-500/30 rounded-xl space-y-2 text-left shadow-inner">
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-1.5 text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">
                                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                                By Appt First • Zero Online Payment
+                                                By Appt First • Free Sizing Estimates
                                             </div>
-                                            <span className="text-[9px] text-cyan-400 font-mono uppercase">Better Phone Cost</span>
+                                            <span className="text-[9px] text-cyan-400 font-mono uppercase">Direct Dispatch</span>
                                         </div>
                                         <p className="text-slate-300 text-[11px] font-sans leading-relaxed">
-                                            Want to confirm electrical fit or get better package rates before paying? Set up your appointment with zero upfront online payment.
+                                            Want to confirm window sizing, 115V vs 230V electrical fit, or pickup details before purchasing? Call our office or submit an appointment inquiry ($0 for estimates).
                                         </p>
                                         <div className="grid grid-cols-2 gap-2 pt-1">
                                             <a 

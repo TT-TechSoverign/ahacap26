@@ -137,6 +137,7 @@ export default function LargeRoomWindowAcPage() {
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW1822IVSM",
                 "mpn": "LW1822IVSM",
+                "gtin12": "048231605908",
                 "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "4.9",
@@ -162,6 +163,7 @@ export default function LargeRoomWindowAcPage() {
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW2422IVSM",
                 "mpn": "LW2422IVSM",
+                "gtin12": "048231605915",
                 "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "4.9",

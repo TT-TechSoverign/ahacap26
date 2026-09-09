@@ -540,21 +540,21 @@ export default function ProductDetailPage() {
                                 </a>
                             )}
 
-                            {/* By Appointment First • Conversion & Better Cost Callout */}
+                            {/* By Appointment First • Free Sizing Estimates & Dispatch Callout */}
                             <div className="bg-gradient-to-br from-primary/15 via-slate-900/90 to-slate-900 border border-primary/30 rounded-2xl p-4 sm:p-5 space-y-3 shadow-xl text-left">
                                 <div className="flex flex-wrap items-center justify-between gap-2">
                                     <div className="flex items-center gap-2">
                                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                                         <span className="font-header font-black text-xs uppercase tracking-wider text-emerald-300">
-                                            By Appointment First • Zero Online Payment Required
+                                            By Appointment First • Free Estimates ($0 to Book)
                                         </span>
                                     </div>
                                     <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-0.5 rounded-full">
-                                        Better Cost via Phone
+                                        Free Sizing Estimate
                                     </span>
                                 </div>
                                 <p className="text-slate-200 text-xs font-sans leading-relaxed">
-                                    Prefer to verify your room sizing, electrical compatibility, or discuss package discounts before ordering? We are often able to <strong className="text-white font-bold">give you a better cost after an initial phone consultation</strong>. Call us, email us, or submit the form below to set up your appointment with <strong className="text-cyan-300 font-bold">zero upfront online payment</strong>!
+                                    Prefer to verify your room sizing, electrical compatibility (115V vs 230V), or installation requirements before purchasing? It is <strong className="text-white font-bold">zero cost to book an appointment for estimates</strong> on new or replacement installations! Call us, email us, or submit the form below to reserve your appointment window.
                                 </p>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                                     <a
@@ -574,11 +574,11 @@ export default function ProductDetailPage() {
                                 </div>
                                 <div className="text-center pt-1">
                                     <a 
-                                        href={`mailto:info@affordablehome-ac.com?subject=${encodeURIComponent('Appointment Inquiry: ' + product.name)}`}
+                                        href={`mailto:office@affordablehome-ac.com?subject=${encodeURIComponent('Appointment Inquiry: ' + product.name)}`}
                                         className="text-[11px] text-slate-400 hover:text-cyan-300 font-mono tracking-wide underline inline-flex items-center gap-1.5 transition-colors"
                                     >
                                         <Mail className="size-3.5" />
-                                        Email Dispatch: info@affordablehome-ac.com
+                                        Email Dispatch: office@affordablehome-ac.com
                                     </a>
                                 </div>
                             </div>

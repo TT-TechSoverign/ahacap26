@@ -109,23 +109,23 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
 
                 {/* Body Links */}
                 <div className="flex-1 flex flex-col p-6 gap-6 overflow-y-auto">
-                    {/* By Appointment First • Conversion Hook Card */}
+                    {/* Free Estimates ($0) & Transparent Pricing Hook Card */}
                     <div className="p-4 rounded-2xl bg-gradient-to-br from-primary/15 via-slate-900/90 to-slate-900 border border-primary/30 space-y-3 text-left shadow-lg">
                         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[9px] font-black uppercase tracking-wider">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            By Appt First • Zero Online Payment
+                            Free Estimates ($0) • Transparent Pricing
                         </div>
                         <div className="space-y-1">
                             <p className="text-white font-header font-bold text-xs uppercase tracking-wide">
-                                Better Cost After Initial Phone Call
+                                $0 Cost to Book In-Home Estimates
                             </p>
                             <p className="text-slate-300 text-[11px] font-sans leading-relaxed">
-                                Call, email, or fill out our contact form to set up your appointment. We review your layout and provide tailored package pricing with zero upfront payment.
+                                Zero cost to book estimates on new or replacement mini split and window AC installations. Upfront flat rates: $175 mini split diagnosis, $175 basic cleaning, $275 premium cleaning, $275 window AC cleaning.
                             </p>
                         </div>
                         <div className="grid grid-cols-2 gap-2 pt-1">
                             <a 
-                                href="tel:808-488-1111"
+                                href="tel:808-488-1111" 
                                 onClick={() => {
                                     sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Drawer Top Call' });
                                     setIsOpen(false);
@@ -136,7 +136,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                                 <span>Call Now</span>
                             </a>
                             <Link 
-                                href="/contact"
+                                href="/contact" 
                                 onClick={() => setIsOpen(false)}
                                 className="p-2.5 bg-slate-800 hover:bg-slate-700 border border-white/15 text-white font-header font-bold text-[11px] uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-1.5 active:scale-95"
                             >
@@ -146,11 +146,11 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                         </div>
                         <div className="text-center pt-0.5">
                             <a 
-                                href="mailto:info@affordablehome-ac.com?subject=Appointment%20Inquiry%20-%20Affordable%20Home%20AC"
+                                href="mailto:office@affordablehome-ac.com?subject=Appointment%20Inquiry%20-%20Affordable%20Home%20AC"
                                 className="text-[10px] text-slate-400 hover:text-cyan-300 font-mono tracking-wide underline inline-flex items-center gap-1"
                             >
                                 <Mail className="size-3" />
-                                Email: info@affordablehome-ac.com
+                                Email: office@affordablehome-ac.com
                             </a>
                         </div>
                     </div>
@@ -233,7 +233,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                 <div className="p-4 border-t border-white/10 bg-slate-900/90 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
                     <div className="text-[10px] font-mono uppercase tracking-widest text-slate-400 text-center mb-2.5 flex items-center justify-center gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        Zero Online Payment Required
+                        Zero Cost for Estimates • By Appt
                     </div>
                     <div className="grid grid-cols-2 gap-2.5">
                         <a 
@@ -246,7 +246,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                         >
                             <Phone className="text-emerald-400 size-4 group-hover:scale-110 transition-transform shrink-0" />
                             <div className="text-left">
-                                <div className="text-[8px] font-mono uppercase tracking-wider text-emerald-400">Better Phone Cost</div>
+                                <div className="text-[8px] font-mono uppercase tracking-wider text-emerald-400">Direct Dispatch</div>
                                 <div className="text-xs font-black text-white font-header tracking-wider">(808) 488-1111</div>
                             </div>
                         </a>
@@ -258,7 +258,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                         >
                             <Calendar className="text-primary size-4 group-hover:scale-110 transition-transform shrink-0" />
                             <div className="text-left">
-                                <div className="text-[8px] font-mono uppercase tracking-wider text-primary">Zero $ Online</div>
+                                <div className="text-[8px] font-mono uppercase tracking-wider text-primary">Free Estimates</div>
                                 <div className="text-xs font-black text-white font-header tracking-wider">Book Appt Form</div>
                             </div>
                         </Link>

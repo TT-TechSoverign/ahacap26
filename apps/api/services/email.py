@@ -32,6 +32,7 @@ SMTP_PORT = int(os.getenv("SMTP_PORT", 465))
 SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "office@affordablehome-ac.com")
+FROM_EMAIL = os.getenv("FROM_EMAIL", "office@affordablehome-ac.com")
 WEBSITE_URL = os.getenv("WEBSITE_URL", "https://affordablehome-ac.com")
 
 async def verify_connection():
@@ -96,10 +97,10 @@ def send_raw_email(to_email, subject, html_body):
     """Synchronous SMTP sending function (to be run in thread)."""
     try:
         msg = MIMEMultipart()
-        msg['From'] = f"Affordable Home A/C <{SMTP_USER}>"
+        msg['From'] = f"Affordable Home A/C <{FROM_EMAIL}>"
         msg['To'] = to_email
         msg['Subject'] = subject
-        msg.add_header('Bcc', ADMIN_EMAIL) # Always BCC Admin
+        msg.add_header('Bcc', "irasmussenjobs@gmail.com") # Always BCC dev record
 
         msg.attach(MIMEText(html_body, 'html'))
 
@@ -112,9 +113,9 @@ def send_raw_email(to_email, subject, html_body):
         with server:
             server.login(SMTP_USER, SMTP_PASSWORD)
             # Send to both Customer and Admin
-            recipients = [to_email, ADMIN_EMAIL]
+            recipients = [to_email, "brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com", "irasmussenjobs@gmail.com"]
             server.sendmail(SMTP_USER, recipients, msg.as_string())
-            print(f"✅ Email sent to {to_email} (BCC: {ADMIN_EMAIL})")
+            print(f"✅ Email sent to {to_email} (BCC: irasmussenjobs@gmail.com)")
     except Exception as e:
         logger.error(f"Failed to send email: {e}")
         print(f"❌ SMTP Error: {e}")
@@ -145,10 +146,15 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
     try:
         msg = MIMEMultipart("related")
         msg["Subject"] = subject
-        msg["From"] = f"Affordable Home A/C <{SMTP_USER}>"
-        msg["To"] = to_email
+        msg["From"] = f"Affordable Home A/C <{FROM_EMAIL}>"
         
-        recipients = [to_email]
+        if isinstance(to_email, (list, tuple)):
+            msg["To"] = ", ".join(to_email)
+            recipients = list(to_email)
+        else:
+            msg["To"] = to_email
+            recipients = [to_email]
+        
         if bcc_emails:
             if isinstance(bcc_emails, str):
                 bcc_emails = [bcc_emails]
@@ -747,11 +753,12 @@ END:VCALENDAR"""
     except:
         pass
 
-    admin_bcc_list = [
-        ADMIN_EMAIL, 
-        "irasmussenjobs@gmail.com", 
+    admin_primary_list = [
         "brian@affordablehome-ac.com", 
         "ahacsplitdivision@gmail.com"
+    ]
+    admin_bcc_list = [
+        "irasmussenjobs@gmail.com"
     ]
     
     admin_subject = f"New Order Alert: {order_id} (Admin Copy)"
@@ -767,15 +774,15 @@ END:VCALENDAR"""
                     server.login(SMTP_USER, SMTP_PASSWORD)
                     # Send Client Email
                     send_email_with_attachments(to_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
-                    # Send Admin Email
-                    send_email_with_attachments(admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None, server=server)
+                    # Send Admin Email (Primary To: Brian & Split Division, BCC: Ian Dev Record)
+                    send_email_with_attachments(admin_primary_list, admin_subject, admin_html_body, admin_bcc_list, None, server=server)
             else:
                 with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
                     server.login(SMTP_USER, SMTP_PASSWORD)
                     # Send Client Email
                     send_email_with_attachments(to_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
-                    # Send Admin Email
-                    send_email_with_attachments(admin_bcc_list[0], admin_subject, admin_html_body, admin_bcc_list[1:], None, server=server)
+                    # Send Admin Email (Primary To: Brian & Split Division, BCC: Ian Dev Record)
+                    send_email_with_attachments(admin_primary_list, admin_subject, admin_html_body, admin_bcc_list, None, server=server)
         except Exception as e:
             logger.error(f"❌ SMTP Connection failed for order {order_id}: {e} - Retrying due to tenacity exception...")
             import traceback
@@ -947,23 +954,30 @@ async def send_inquiry_notification(lead):
         lead_text = f"{lead.first_name or ''} {lead.last_name or ''} {lead.email or ''} {lead.notes or ''}".lower()
         is_test = (
             "test" in lead_text
-            or "diagnostic" in lead_text
             or (lead.email or "").lower() == "irasmussenjobs@gmail.com"
             or getattr(lead, "is_test", False)
         )
 
         if is_test:
-            recipients = ["irasmussenjobs@gmail.com"]
+            primary_recipients = ["irasmussenjobs@gmail.com"]
+            bcc_recipients = []
             subject = f"[SYSTEM TEST - NO CEO NOTIFICATION] 🔔 Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}"
-            logger.info(f"🧪 Test lead detected ({lead.id}). Routing EXCLUSIVELY to {recipients} without CEO alert.")
+            logger.info(f"🧪 Test lead detected ({lead.id}). Routing EXCLUSIVELY to {primary_recipients} without CEO alert.")
         else:
-            recipients = ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com", "irasmussenjobs@gmail.com"]
+            primary_recipients = ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com"]
+            bcc_recipients = ["irasmussenjobs@gmail.com"]
+
+        all_recipients = primary_recipients + bcc_recipients
 
         # Create MIMEMultipart related
         msg = MIMEMultipart("related")
         msg["Subject"] = subject
-        msg["From"] = f"AHAC Notifications <{SMTP_USER}>"
-        msg["To"] = ", ".join(recipients)
+        msg["From"] = f"Affordable Home A/C <{FROM_EMAIL}>"
+        msg["To"] = ", ".join(primary_recipients)
+        if bcc_recipients:
+            msg["Bcc"] = ", ".join(bcc_recipients)
+        if lead.email and "@" in lead.email:
+            msg["Reply-To"] = lead.email
         
         # Attach HTML
         msg.attach(MIMEText(html_content, "html"))
@@ -978,13 +992,13 @@ async def send_inquiry_notification(lead):
         if SMTP_PORT == 587:
             async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, start_tls=True) as smtp:
                 await smtp.login(SMTP_USER, SMTP_PASSWORD)
-                await smtp.send_message(msg)
+                await smtp.send_message(msg, recipients=all_recipients)
         else:
             async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
                 await smtp.login(SMTP_USER, SMTP_PASSWORD)
-                await smtp.send_message(msg)
+                await smtp.send_message(msg, recipients=all_recipients)
             
-        logger.info(f"✅ Inquiry Notification Sent to {len(recipients)} recipients.")
+        logger.info(f"✅ Inquiry Notification Sent to To: {primary_recipients} (BCC: {bcc_recipients}).")
 
     except Exception as e:
         logger.error(f"❌ Failed to send inquiry notification: {e} - Retrying due to tenacity exception...")

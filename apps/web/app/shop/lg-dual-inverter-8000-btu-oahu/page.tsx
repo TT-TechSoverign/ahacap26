@@ -116,6 +116,7 @@ export default function Lg8000BtuOahuPage() {
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW8022IVSM",
                 "mpn": "LW8022IVSM",
+                "gtin12": "048231605861",
                 "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "4.9",

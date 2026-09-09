@@ -103,7 +103,7 @@ export default function ACRepairPage() {
         },
         {
             q: 'Do you repair window air conditioners or central AC systems?',
-            a: 'Our repair and diagnostic services are dedicated specifically to ductless mini-split heat pumps and air handlers. For window AC units, we provide full chemical teardown cleaning and rust-inhibitor servicing ($275 flat rate) at our Waipahu warehouse, but we do not perform sealed-refrigerant or compressor rebuilds on window units. All service acceptances are subject to an initial phone consultation, detailed scope of work, and management approval to accept.'
+            a: 'Our diagnostic and repair services are dedicated specifically to ductless mini-split heat pumps and air handlers ($175 diagnostic appointment). For window AC units, we provide precision on-site chemical teardown cleaning and rust-inhibitor servicing ($275 flat rate by scheduled appointment), but we do not perform sealed-refrigerant or compressor rebuilds on window units. In-home estimates for new and replacement installations are zero cost ($0 to book).'
         },
         {
             q: 'Can every mini-split problem be resolved on the initial diagnostic visit?',

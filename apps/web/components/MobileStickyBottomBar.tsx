@@ -128,21 +128,21 @@ export default function MobileStickyBottomBar() {
             }}
             className="fixed bottom-0 left-0 w-full z-50 flex flex-col md:hidden bg-slate-900 border-t border-slate-800 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]"
         >
-            {/* By Appointment First • Friction-Free Trust Banner */}
+            {/* Free Estimates ($0) • Transparent Pricing Trust Banner */}
             <div className="w-full bg-slate-950/95 border-b border-white/10 px-3 py-1 flex items-center justify-between text-[10px] text-slate-300">
                 <div className="flex items-center gap-1.5 font-medium truncate">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-                    <span className="text-emerald-400 font-bold uppercase tracking-wider text-[9px]">By Appt First</span>
+                    <span className="text-emerald-400 font-bold uppercase tracking-wider text-[9px]">Free Estimates</span>
                     <span className="text-slate-500">•</span>
-                    <span className="truncate text-slate-200">Zero Online Payment Required</span>
+                    <span className="truncate text-slate-200">$0 to Book New / Replacements</span>
                 </div>
                 <span className="text-cyan-400 font-mono text-[9px] uppercase tracking-wider shrink-0 pl-1">
-                    Better Phone Cost
+                    Direct Dispatch
                 </span>
             </div>
 
             <div className="flex w-full p-2 gap-2">
-                {/* Call Now (DNI Tracking & Better Cost Framing) */}
+                {/* Call Now (DNI Tracking & Direct Dispatch Framing) */}
                 <a 
                     href="tel:808-488-1111"
                     onClick={() => sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Call' })}
@@ -150,7 +150,7 @@ export default function MobileStickyBottomBar() {
                 >
                     <div className="flex items-center gap-1.5">
                         <Phone className="size-3.5 text-primary shrink-0" />
-                        <span>Call (Best Cost)</span>
+                        <span>Call Office</span>
                     </div>
                     <span className="text-[9px] text-cyan-300 font-normal normal-case tracking-normal">(808) 488-1111</span>
                 </a>

@@ -59,7 +59,7 @@ const windowAcFaqSchema = {
             "name": "How much does window AC deep cleaning cost in Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our complete window AC teardown cleaning and sanitization service is a flat rate of $275 per unit scheduled by appointment. Restores ice-cold airflow, eliminates black mold, and lowers energy strain (subject to initial phone consultation)."
+                "text": "Our complete window AC teardown cleaning and sanitization service is a transparent flat rate of $275 per unit scheduled by appointment ($0 to book replacement estimates). Restores ice-cold airflow, eliminates black mold, and lowers energy strain."
             }
         },
         {

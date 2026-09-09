@@ -41,7 +41,7 @@ async def create_lead(
     db: AsyncSession = Depends(get_db)
 ):
     try:
-        email_addr = (lead_data.email or "").strip() or "inquiry@affordablehome-ac.com"
+        email_addr = (lead_data.email or "").strip() or "office@affordablehome-ac.com"
         
         # Parse names gracefully
         first = (lead_data.first_name or "").strip()

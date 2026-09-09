@@ -402,13 +402,13 @@ export default function ShopPage() {
                         <div className="space-y-2 text-center lg:text-left flex-1">
                             <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">
                                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                By Appointment First • Zero Online Payment Required
+                                By Appointment First • Free Installation & Replacement Estimates
                             </div>
                             <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">
-                                Want Better Package Pricing or Sizing Advice?
+                                Need Professional Sizing or Installation Advice?
                             </h3>
                             <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                                We are able to give you a <strong className="text-white">better cost after an initial phone consultation</strong>! Call our Waipahu warehouse directly, email us, or submit the appointment form below with zero upfront online payment required.
+                                It is <strong className="text-white">zero cost to book an appointment for estimates</strong> on new or replacement mini split and window AC installations! Call our office directly at <a href="tel:808-488-1111" className="text-cyan-300 font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-cyan-300 font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the appointment form below.
                             </p>
                         </div>
 

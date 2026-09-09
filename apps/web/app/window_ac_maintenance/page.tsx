@@ -149,7 +149,7 @@ export default function WindowAcMaintenancePage() {
                         Window AC <span className="text-cyan-400 drop-shadow-[0_0_25px_rgba(34,211,238,0.5)]">Deep Cleaning</span>
                     </h1>
                     <p className="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-                        Restore ice-cold airflow, eliminate sour musty odors, and lower your energy bill. Our complete teardown deep clean strips away hidden black mold, clears trade-wind salt crust, and restores whisper-quiet factory performance—making your window AC feel and smell brand new again (subject to initial phone consultation and appointment scheduling).
+                        Restore ice-cold airflow, eliminate sour musty odors, and lower your energy bill. Our complete teardown deep clean strips away hidden black mold, clears trade-wind salt crust, and restores whisper-quiet factory performance—making your window AC feel and smell brand new again (scheduled by appointment).
                     </p>
 
                     {/* Pricing & CTA Banner */}
@@ -446,10 +446,10 @@ export default function WindowAcMaintenancePage() {
                                 <div className="text-center mt-2.5 space-y-1">
                                     <p className="text-[11px] text-emerald-400 font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5">
                                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                        By Appointment First • Zero Online Payment Required
+                                        $275 Flat-Rate Teardown Cleaning • By Appointment
                                     </p>
                                     <p className="text-[11px] text-slate-300">
-                                        Able to give better cost after initial phone call. Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> or email <a href="mailto:info@affordablehome-ac.com" className="text-primary font-bold hover:underline">info@affordablehome-ac.com</a>.
+                                        Transparent flat-rate pricing ($0 to book estimates on replacement units). Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> or email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>.
                                     </p>
                                 </div>
                             </div>
@@ -561,7 +561,7 @@ export default function WindowAcMaintenancePage() {
                         Ready for Ice-Cold, Odor-Free Air?
                     </h3>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-md mx-auto mb-6 font-light">
-                        Professional window AC teardown &amp; sanitization scheduled across Oahu. Flat rate $275 per unit with zero online payment required.
+                        Professional window AC teardown &amp; sanitization scheduled across Oahu. Transparent flat rate $275 per unit scheduled by appointment ($0 to book replacement estimates).
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                         <Link 

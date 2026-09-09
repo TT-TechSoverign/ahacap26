@@ -69,7 +69,7 @@ export default function WindowAcInstallationPage() {
             const payload = {
                 first_name: firstName,
                 last_name: lastName,
-                email: email.trim() || 'inquiry@affordablehome-ac.com',
+                email: email.trim() || 'office@affordablehome-ac.com',
                 phone: phone.trim(),
                 address: address.trim() || 'Oahu, HI',
                 city: city.trim() || 'Oahu',

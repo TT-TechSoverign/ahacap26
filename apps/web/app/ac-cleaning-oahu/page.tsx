@@ -63,7 +63,7 @@ export default function AcCleaningOahuPage() {
             const payload = {
                 first_name: firstName,
                 last_name: lastName,
-                email: email.trim() || 'inquiry@affordablehome-ac.com',
+                email: email.trim() || 'office@affordablehome-ac.com',
                 phone: phone.trim(),
                 address: address.trim() || 'Oahu, HI',
                 city: city.trim() || 'Oahu',
@@ -357,13 +357,13 @@ export default function AcCleaningOahuPage() {
                             <div className="border-b border-white/10 pb-4 mb-4">
                                 <div className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full mb-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                    By Appointment First • Zero Online Payment Required
+                                    Transparent Upfront Pricing • By Appointment First
                                 </div>
                                 <h3 className="text-xl font-header font-black uppercase text-white">
                                     Book Cleaning Service
                                 </h3>
                                 <p className="text-slate-300 text-xs mt-1 leading-relaxed">
-                                    Better package rates for multiple units after initial phone consultation! Submit the intake below, call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, or email <a href="mailto:info@affordablehome-ac.com" className="text-primary font-bold hover:underline">info@affordablehome-ac.com</a>.
+                                    $175 Basic Mini Split Cleaning • $275 Premium Mini Split Deep Clean • $275 Window AC Teardown ($0 to book estimates on replacement units). Submit the intake below, call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, or email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>.
                                 </p>
                             </div>
 
