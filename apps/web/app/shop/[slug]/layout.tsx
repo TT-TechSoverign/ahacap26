@@ -5,6 +5,7 @@ import { generateProductSlug, isCampaignActive } from '@/lib/utils';
 import { getProductFaqs } from '@/lib/product-faq';
 import { getSelectedReviews } from '@/lib/product-reviews';
 import { getProductSpecs } from '@/lib/product-specs';
+import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 
 // We must use force-dynamic because this depends on the backend API being up,
 // and we don't want the build to fail if the API container is restarting.
@@ -164,9 +165,10 @@ export default async function ProductLayout({ params, children }: Props) {
         ? `${domain}${product.image_url.replace('.svg', '.webp')}` 
         : `${domain}/assets/logo-new.png`;
     
-    const matchInParens = product.name.match(/\(([^)]+)\)/);
-    const manufacturerMpn = matchInParens ? matchInParens[1].trim() : `AHAC-${product.id}`;
-    const brandName = product.name.startsWith('GE') ? 'GE Appliances' : 'LG';
+    const identifier = PRODUCT_IDENTIFIERS[product.id];
+    const brandName = identifier?.brand || (product.name.startsWith('GE') ? 'GE Appliances' : 'LG');
+    const manufacturerMpn = identifier?.mpn || (product.name.match(/\(([^)]+)\)/)?.[1]?.trim()) || `AHAC-${product.id}`;
+    const gtin12 = identifier?.gtin12 || '';
     const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
     const activePriceInDollars = isPromo ? product.promo_price.toFixed(2) : product.price.toFixed(2);
     const ratingValue = "4.8"; // Scraped local average
@@ -184,6 +186,7 @@ export default async function ProductLayout({ params, children }: Props) {
         "description": `Buy the ${product.name} at Affordable Home A/C. ${specs.idealFor ? `Ideal for ${specs.idealFor}. ` : ''}${specs.benefits ? `${specs.benefits} ` : ''}Professional installation and affordable prices in Oahu, Hawaii.`,
         "sku": `AHAC-${product.id}`,
         "mpn": manufacturerMpn, // Real manufacturer MPN for Google Shopping matching
+        ...(gtin12 ? { "gtin12": gtin12 } : {}),
         "brand": {
             "@type": "Brand",
             "name": brandName,

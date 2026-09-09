@@ -70,7 +70,7 @@ export default function AcCleaningOahuPage() {
                 zip: '',
                 service_type: serviceName,
                 urgency: 'standard',
-                notes: `Service: ${serviceName} | Location: ${city} | Delivery/Pickup: ${serviceTier === 'window' ? 'Waipahu Warehouse Drop-Off' : 'On-Site Home Service'} | Notes: ${notes.trim() || 'None'}`
+                notes: `Service: ${serviceName} | Location: ${city} | Service Type: ${serviceTier === 'window' ? 'Window AC Teardown (By Appointment)' : 'On-Site Home Service'} | Notes: ${notes.trim() || 'None'}`
             };
 
             const res = await fetch('/api/v1/leads/', {
@@ -94,7 +94,7 @@ export default function AcCleaningOahuPage() {
     const faqItems = [
         {
             q: "Why is a full teardown cleaning required for window ACs instead of spraying it in the window?",
-            a: "Spraying cleaner into an installed window AC only pushes dust and mold deeper into the center of the coil sandwich. True mold eradication requires pulling the unit, disassembling the exterior casing, shielding electrical components, and submerging/flushing both the evaporator and condenser coils with specialized biodegradable Hawaiian foam cleaner. We complete this in our Waipahu warehouse immersion tank with a reliable, scheduled turnaround."
+            a: "Spraying cleaner into an installed window AC only pushes dust and mold deeper into the center of the coil sandwich. True mold eradication requires pulling the unit, disassembling the exterior casing, shielding electrical components, and submerging/flushing both the evaporator and condenser coils with specialized biodegradable Hawaiian foam cleaner. Our technicians perform a meticulous teardown and thorough flush for maximum cooling power."
         },
         {
             q: "What does the Mini-Split Chemical Deep Clean include?",
@@ -102,7 +102,7 @@ export default function AcCleaningOahuPage() {
         },
         {
             q: "Do I have to pay upfront when booking a cleaning appointment?",
-            a: "No! Affordable Home AC requires zero upfront payment. You book your preferred window AC drop-off appointment or mini-split in-home service with $0 deposit, and you pay only after the cleaning is finished and tested."
+            a: "No! Affordable Home AC requires zero upfront payment. You book your preferred window AC teardown appointment or mini-split in-home service with $0 deposit, and you pay only after the cleaning is finished and tested."
         },
         {
             q: "How often should ACs be cleaned on Oahu?",
@@ -233,10 +233,10 @@ export default function AcCleaningOahuPage() {
                             <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-white/10 shadow-2xl space-y-6">
                                 <div className="border-b border-white/10 pb-4">
                                     <div className="text-xs font-mono text-cyan-400 uppercase font-bold tracking-widest">
-                                        Waipahu Warehouse Drop-Off by Appointment
+                                        Scheduled Window AC Teardown — By Appointment First
                                     </div>
                                     <h2 className="text-2xl font-header font-black uppercase text-white mt-1">
-                                        Window AC Full Teardown &amp; Immersion Tank Sanitization
+                                        Window AC Full Teardown &amp; Pressurized Coil Sanitization
                                     </h2>
                                     <div className="flex items-baseline gap-3 mt-2">
                                         <span className="text-3xl font-black text-emerald-400 font-mono">$275.00</span>
@@ -258,7 +258,7 @@ export default function AcCleaningOahuPage() {
                                     <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
                                         <div className="text-white font-bold uppercase flex items-center gap-2">
                                             <CheckCircle2 className="size-4 text-emerald-400" />
-                                            2. Chemical Dip Tank &amp; Pressure Wash
+                                            2. Foaming Coil Wash &amp; Pressure Flush
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
                                             Evaporator and condenser coils receive foaming antimicrobial wash, dislodging deep-seated black mold spores and salt-air crust.
@@ -268,10 +268,10 @@ export default function AcCleaningOahuPage() {
                                     <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
                                         <div className="text-white font-bold uppercase flex items-center gap-2">
                                             <CheckCircle2 className="size-4 text-emerald-400" />
-                                            3. Thorough Bench Test &amp; Pick-Up
+                                            3. Digital Delta-T Calibration &amp; Verification
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
-                                            Unit is reassembled, laser-calibrated, and run through a 30-minute amp-draw and temperature delta test before you pick it up.
+                                            Unit is reassembled, calibrated, and run through a 30-minute amp-draw and temperature delta test to guarantee peak cooling performance.
                                         </p>
                                     </div>
                                 </div>
@@ -374,7 +374,7 @@ export default function AcCleaningOahuPage() {
                                     </div>
                                     <div className="text-sm text-white font-bold uppercase">Cleaning Request Confirmed!</div>
                                     <p className="text-xs text-slate-300 font-sans">
-                                        Our dispatch team has scheduled your cleaning intake for {city}. We will reach out shortly to confirm drop-off or service timing.
+                                        Our dispatch team has scheduled your cleaning intake for {city}. We will reach out shortly to confirm appointment details and service timing.
                                     </p>
                                     <div className="pt-4">
                                         <a 
@@ -441,7 +441,7 @@ export default function AcCleaningOahuPage() {
                                             rows={2}
                                             value={notes}
                                             onChange={e => setNotes(e.target.value)}
-                                            placeholder="Preferred drop-off time, unit brand/model..."
+                                            placeholder="Preferred service timing, unit brand/model..."
                                             className="w-full px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                                         />
                                     </div>
@@ -498,7 +498,7 @@ export default function AcCleaningOahuPage() {
                         Breathe Clean, Mold-Free Air in Your Home
                     </h4>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
-                        Book your drop-off or on-site cleaning today. Fast, reliable turnarounds at our Waipahu warehouse.
+                        Book your professional AC cleaning today. Fast, reliable scheduling across Oahu.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <a 
@@ -506,7 +506,7 @@ export default function AcCleaningOahuPage() {
                             className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 flex items-center gap-2"
                         >
                             <Phone className="size-4" />
-                            Call Warehouse: (808) 488-1111
+                            Call Dispatch: (808) 488-1111
                         </a>
                         <Link 
                             href="/shop"

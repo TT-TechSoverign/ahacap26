@@ -62,7 +62,7 @@ export function generateMetadata({ params }: Props): Metadata {
  
     const title = `${cityData.name} Split AC Repair & HVAC | Affordable Home A/C`;
     
-    let description = `AC issues in ${cityData.name}? Licensed HVAC technicians for split AC installation, $275 window AC teardown drop-off, and diagnostic troubleshooting.`;
+    let description = `AC issues in ${cityData.name}? Licensed HVAC technicians for split AC installation, $275 window AC teardown cleaning, and diagnostic troubleshooting.`;
     if (cityData.regionId === 'windward') {
         description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Licensed HVAC technicians for ductless split AC installation, $275 window AC cleaning & diagnostic repair.`;
     } else if (cityData.regionId === 'leeward') {

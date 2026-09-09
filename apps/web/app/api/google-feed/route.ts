@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { Product } from '@/types/inventory';
 import { generateProductSlug } from '@/lib/utils';
 import { getProductImages } from '@/lib/product-images';
+import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 
 export const dynamic = 'force-dynamic';
 
@@ -41,17 +42,21 @@ export async function GET() {
         return `<g:additional_image_link>${fullImg}</g:additional_image_link>`;
       }).join('\n          ');
 
-      // Brand & Manufacturer MPN Extraction
-      const brand = product.name.startsWith('GE') ? 'GE Appliances' : 'LG';
-      let mpn = '';
-      const matchInParens = product.name.match(/\(([^)]+)\)/);
-      if (matchInParens) {
-        mpn = matchInParens[1].trim();
-      } else {
-        const words = product.name.split(' ');
-        const modelWord = words.find(w => /^[A-Z0-9]{4,12}$/i.test(w) && !['DUAL', 'WALL', 'BASE', 'CASEMENT'].includes(w.toUpperCase()));
-        if (modelWord) {
-          mpn = modelWord.trim();
+      // Brand, GTIN-12 UPC, & Manufacturer MPN Extraction
+      const identifier = PRODUCT_IDENTIFIERS[product.id];
+      const brand = identifier?.brand || (product.name.startsWith('GE') ? 'GE Appliances' : 'LG');
+      const gtin = identifier?.gtin12 || '';
+      let mpn = identifier?.mpn || '';
+      if (!mpn) {
+        const matchInParens = product.name.match(/\(([^)]+)\)/);
+        if (matchInParens) {
+          mpn = matchInParens[1].trim();
+        } else {
+          const words = product.name.split(' ');
+          const modelWord = words.find(w => /^[A-Z0-9]{4,12}$/i.test(w) && !['DUAL', 'WALL', 'BASE', 'CASEMENT'].includes(w.toUpperCase()));
+          if (modelWord) {
+            mpn = modelWord.trim();
+          }
         }
       }
 
@@ -112,8 +117,9 @@ export async function GET() {
           <g:availability>${availability}</g:availability>
           <g:price>${product.price}.00 USD</g:price>
           <g:brand>${escapeXml(brand)}</g:brand>
+          ${gtin ? `<g:gtin>${gtin}</g:gtin>` : ''}
           ${mpn ? `<g:mpn>${escapeXml(mpn)}</g:mpn>` : ''}
-          <g:identifier_exists>${mpn ? 'yes' : 'no'}</g:identifier_exists>
+          <g:identifier_exists>${(gtin || mpn) ? 'yes' : 'no'}</g:identifier_exists>
           ${itemGroupIdXml}
           ${shippingWeight}
           <g:shipping>

@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Cleaning Oahu | $275 Full Warehouse Teardown | Affordable Home A/C'
+        absolute: 'Window AC Cleaning Oahu | $275 Full Teardown & Sanitization | Affordable Home A/C'
     },
-    description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Waipahu warehouse drop-off with 24-48hr turnaround. Call (808) 488-1111.',
+    description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Scheduled by appointment across Oahu with zero online prepayment required. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window_ac_maintenance',
     },
     openGraph: {
-        title: 'Window AC Cleaning Oahu | $275 Full Warehouse Teardown | Affordable Home A/C',
-        description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Waipahu warehouse drop-off with 24-48hr turnaround. Call (808) 488-1111.',
+        title: 'Window AC Cleaning Oahu | $275 Full Teardown & Sanitization | Affordable Home A/C',
+        description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Scheduled by appointment across Oahu with zero online prepayment required. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window_ac_maintenance',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Cleaning Oahu | $275 Full Warehouse Teardown | Affordable Home A/C',
-        description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Waipahu warehouse drop-off with 24-48hr turnaround. Call (808) 488-1111.',
+        title: 'Window AC Cleaning Oahu | $275 Full Teardown & Sanitization | Affordable Home A/C',
+        description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Scheduled by appointment across Oahu with zero online prepayment required. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -59,7 +59,7 @@ const windowAcFaqSchema = {
             "name": "How much does window AC deep cleaning cost in Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our complete window AC teardown cleaning and sanitization service is a flat rate of $275 per unit with drop-off at our Waipahu warehouse. Restores ice-cold airflow, eliminates black mold, and lowers energy strain (subject to initial phone consultation and drop-off scheduling)."
+                "text": "Our complete window AC teardown cleaning and sanitization service is a flat rate of $275 per unit scheduled by appointment. Restores ice-cold airflow, eliminates black mold, and lowers energy strain (subject to initial phone consultation)."
             }
         },
         {
@@ -115,7 +115,7 @@ const hvacServiceSchema = {
         "itemListElement": [
             {
                 "@type": "Offer",
-                "name": "Window AC Teardown Deep Cleaning (Waipahu Drop-Off)",
+                "name": "Window AC Teardown Deep Cleaning (By Appointment)",
                 "price": "275.00",
                 "priceCurrency": "USD",
                 "description": "Complete chassis extraction, pressurized dual-side coil flush, blower wheel descaling, drain flush, and anti-corrosion salt barrier."

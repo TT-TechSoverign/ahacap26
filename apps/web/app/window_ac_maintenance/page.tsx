@@ -35,7 +35,7 @@ export default function WindowAcMaintenancePage() {
     const data = content?.window_ac;
 
     const [selectedBtu, setSelectedBtu] = useState<string>('10k-12k');
-    const [dropoffTiming, setDropoffTiming] = useState<string>('morning');
+    const [serviceTiming, setServiceTiming] = useState<string>('morning');
 
     if (!data) return null;
 
@@ -72,9 +72,9 @@ export default function WindowAcMaintenancePage() {
         },
         {
             icon: Droplets,
-            title: "Clean Off-Site Warehouse Care",
-            stat: "24-48hr Turnaround",
-            description: "Never worry about water pooling on your floors or harsh chemical smells lingering in your bedroom. Drop off your unit at our Waipahu facility for a complete, mess-free teardown and test."
+            title: "Precision Scheduled Teardown Care",
+            stat: "Full Restoration",
+            description: "Never worry about water pooling on your floors or harsh chemical smells lingering in your home. Our licensed technicians perform a complete, mess-free teardown, coil flush, and digital calibration by appointment."
         }
     ];
 
@@ -131,8 +131,8 @@ export default function WindowAcMaintenancePage() {
             a: "Oahu electricity is among the most expensive in the nation at ~44¢/kWh. When coils are caked with grime and salt, heat cannot transfer properly, forcing your compressor to run almost continuously. Clearing the coils restores thermodynamic efficiency, allowing the unit to reach your set temperature much faster with lower wattage draw."
         },
         {
-            q: "How does the Waipahu warehouse drop-off process work?",
-            a: "Give our office a quick call or submit our cleaning form to schedule your drop-off window. Bring your window AC to our Waipahu Distribution Center (94-150 Leoleo St. #203). Our technicians perform a full teardown, deep sanitization, and bench test, with turnaround typically within 24 to 48 hours."
+            q: "How does the window AC teardown appointment process work?",
+            a: "Give our office a quick call or submit our online intake form to schedule your appointment. Our team coordinates your service details in advance so your unit receives a complete teardown, deep sanitization, and cooling performance calibration without unexpected surprises or upfront payment."
         }
     ];
 
@@ -149,16 +149,16 @@ export default function WindowAcMaintenancePage() {
                         Window AC <span className="text-cyan-400 drop-shadow-[0_0_25px_rgba(34,211,238,0.5)]">Deep Cleaning</span>
                     </h1>
                     <p className="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-                        Restore ice-cold airflow, eliminate sour musty odors, and lower your energy bill. Our complete teardown deep clean strips away hidden black mold, clears trade-wind salt crust, and restores whisper-quiet factory performance—making your window AC feel and smell brand new again (subject to initial phone consultation and drop-off scheduling).
+                        Restore ice-cold airflow, eliminate sour musty odors, and lower your energy bill. Our complete teardown deep clean strips away hidden black mold, clears trade-wind salt crust, and restores whisper-quiet factory performance—making your window AC feel and smell brand new again (subject to initial phone consultation and appointment scheduling).
                     </p>
 
                     {/* Pricing & CTA Banner */}
                     <div className="max-w-xl mx-auto bg-slate-900/80 border border-cyan-500/30 rounded-2xl p-6 shadow-xl mb-6 flex flex-col sm:flex-row items-center justify-between gap-6">
                         <div className="text-center sm:text-left">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block mb-1">Waipahu Warehouse Drop-Off — By Appointment First</span>
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block mb-1">Window AC Teardown — By Appointment First</span>
                             <div className="flex items-baseline justify-center sm:justify-start gap-1.5">
                                 <span className="text-4xl font-header font-black text-white">$275</span>
-                                <span className="text-xs text-slate-400 font-medium">/ unit (Waipahu Drop-off)</span>
+                                <span className="text-xs text-slate-400 font-medium">/ unit (By Appointment)</span>
                             </div>
                             <span className="text-[11px] text-slate-400 block mt-1">Zero online prepayment required. Schedule appointment before arriving.</span>
                         </div>
@@ -167,7 +167,7 @@ export default function WindowAcMaintenancePage() {
                                 href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275+(By+Appointment+First)"
                                 className="px-6 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all flex items-center justify-center gap-1.5 text-center"
                             >
-                                Schedule Drop-Off Appointment <ArrowRight className="size-3.5" />
+                                Schedule Teardown Appointment <ArrowRight className="size-3.5" />
                             </Link>
                             <a 
                                 href="tel:808-488-1111"
@@ -190,7 +190,7 @@ export default function WindowAcMaintenancePage() {
                             <Zap className="size-3.5 text-cyan-400" /> Lower Power Draw
                         </span>
                         <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                            <Clock className="size-3.5 text-cyan-400" /> 24-48hr Turnaround
+                            <CheckCircle2 className="size-3.5 text-cyan-400" /> Precision Restoration
                         </span>
                     </div>
                 </div>
@@ -244,7 +244,7 @@ export default function WindowAcMaintenancePage() {
                     <div className="text-center max-w-2xl mx-auto mb-10">
                         <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest block mb-2">The Difference</span>
                         <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-wide">
-                            Full Warehouse Teardown <span className="text-cyan-400">vs.</span> DIY Retail Sprays
+                            Full Teardown Restoration <span className="text-cyan-400">vs.</span> DIY Retail Sprays
                         </h2>
                         <p className="text-slate-400 text-xs sm:text-sm mt-2 font-light">
                             Store-bought cans cannot reach the blower wheel and risk destroying your electronics. Here is why professional teardown is essential:
@@ -288,7 +288,7 @@ export default function WindowAcMaintenancePage() {
                             href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275+(By+Appointment+First)"
                             className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all"
                         >
-                            Schedule Drop-Off Appointment ($275 est.) <ArrowRight className="size-4" />
+                            Schedule Teardown Appointment ($275 est.) <ArrowRight className="size-4" />
                         </Link>
                     </div>
                 </div>
@@ -312,7 +312,7 @@ export default function WindowAcMaintenancePage() {
                                 href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275+(By+Appointment+First)" 
                                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black tracking-wider uppercase px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.4)] text-xs"
                             >
-                                Schedule Drop-Off Appointment
+                                Schedule Teardown Appointment
                                 <ArrowRight className="size-4" />
                             </Link>
                         </div>
@@ -332,18 +332,18 @@ export default function WindowAcMaintenancePage() {
                 </div>
             </div>
 
-            {/* INTERACTIVE WAIPAHU DROP-OFF ESTIMATOR */}
+            {/* INTERACTIVE TEARDOWN SIZING & SCOPE */}
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
                 <div className="bg-gradient-to-r from-slate-900/80 via-slate-950 to-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-md">
                     <div className="text-center max-w-2xl mx-auto mb-8">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">
-                            <Clock className="size-4" /> Drop-Off Turnaround Calculator
+                            <ThermometerSnowflake className="size-4" /> Teardown Scope Calculator
                         </div>
                         <h3 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-wide">
-                            Waipahu Warehouse <span className="text-cyan-400">Drop-Off Readiness</span>
+                            Window AC Teardown <span className="text-cyan-400">Sizing &amp; Scope</span>
                         </h3>
                         <p className="text-xs sm:text-sm text-slate-400 mt-2">
-                            Select your window AC capacity to view turnaround estimates and drop-off guidelines.
+                            Select your window AC capacity to review service preparation and scope guidelines.
                         </p>
                     </div>
 
@@ -384,14 +384,14 @@ export default function WindowAcMaintenancePage() {
                                 </div>
                             </div>
 
-                            {/* Drop-off guidelines checklist */}
+                            {/* Service preparation guidelines */}
                             <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 space-y-2.5 text-xs text-slate-300">
                                 <div className="flex items-center gap-2 text-cyan-300 font-bold uppercase tracking-wider text-[11px] mb-1">
-                                    <Warehouse className="size-4 text-cyan-400" /> Waipahu Drop-Off Instructions
+                                    <ShieldCheck className="size-4 text-cyan-400" /> Service Preparation Guidelines
                                 </div>
                                 <div className="flex items-start gap-2">
                                     <Check className="size-4 text-emerald-400 mt-0.5 shrink-0" />
-                                    <span>Bring the complete AC chassis with intact power cord.</span>
+                                    <span>Chassis and power cord should be accessible for our technicians.</span>
                                 </div>
                                 <div className="flex items-start gap-2">
                                     <Check className="size-4 text-emerald-400 mt-0.5 shrink-0" />
@@ -399,7 +399,7 @@ export default function WindowAcMaintenancePage() {
                                 </div>
                                 <div className="flex items-start gap-2">
                                     <MapPin className="size-4 text-cyan-400 mt-0.5 shrink-0" />
-                                    <span>Warehouse Facility: <strong>94-150 Leoleo St. #203, Waipahu, HI 96797</strong> (subject to phone scheduling).</span>
+                                    <span>All window AC teardown services scheduled by appointment with zero online prepayment required.</span>
                                 </div>
                             </div>
                         </div>
@@ -408,7 +408,7 @@ export default function WindowAcMaintenancePage() {
                         <div className="lg:col-span-5 bg-slate-950 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
                             <div>
                                 <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400 block mb-1">
-                                    Fixed Warehouse Rate
+                                    Flat Teardown Rate
                                 </span>
                                 <div className="flex items-baseline gap-2 mb-4">
                                     <span className="text-4xl sm:text-5xl font-header font-black text-white">$275</span>
@@ -421,27 +421,27 @@ export default function WindowAcMaintenancePage() {
                                         <span className="font-bold text-white uppercase">{selectedBtu} BTU</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span className="text-slate-400">Standard Turnaround:</span>
-                                        <span className="font-bold text-cyan-400">24 – 48 Hours</span>
+                                        <span className="text-slate-400">Service Scope:</span>
+                                        <span className="font-bold text-emerald-400">Full Teardown &amp; Rust Barrier</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span className="text-slate-400">Service Scope:</span>
-                                        <span className="font-bold text-emerald-400">Full Teardown & Rust Barrier</span>
+                                        <span className="text-slate-400">Sanitization Bath:</span>
+                                        <span className="font-bold text-cyan-400">Dual-Direction Pressurized Flush</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-slate-400">Delta-T Performance Test:</span>
-                                        <span className="font-bold text-white">Included Before Pickup</span>
+                                        <span className="font-bold text-white">Included Before Completion</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="mt-6">
                                 <Link
-                                    href={`/contact?service=Window+AC+Cleaning&unitSize=${encodeURIComponent(selectedBtu)}&notes=Waipahu+Warehouse+Teardown+$275+(By+Appointment+First)`}
-                                    onClick={() => trackFunnelEvent('window_ac_dropoff_book_click', { btu: selectedBtu, price: 275 })}
+                                    href={`/contact?service=Window+AC+Cleaning&unitSize=${encodeURIComponent(selectedBtu)}&notes=Window+AC+Teardown+$275+(By+Appointment+First)`}
+                                    onClick={() => trackFunnelEvent('window_ac_teardown_book_click', { btu: selectedBtu, price: 275 })}
                                     className="w-full py-3.5 px-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2"
                                 >
-                                    Schedule {selectedBtu} Drop-Off Appointment <ArrowRight className="size-4" />
+                                    Schedule {selectedBtu} Teardown Appointment <ArrowRight className="size-4" />
                                 </Link>
                                 <div className="text-center mt-2.5 space-y-1">
                                     <p className="text-[11px] text-emerald-400 font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5">
@@ -561,14 +561,14 @@ export default function WindowAcMaintenancePage() {
                         Ready for Ice-Cold, Odor-Free Air?
                     </h3>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-md mx-auto mb-6 font-light">
-                        Drop off your window AC at our Waipahu warehouse. Flat rate $275 per unit with fast 24-48hr turnaround.
+                        Professional window AC teardown &amp; sanitization scheduled across Oahu. Flat rate $275 per unit with zero online payment required.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                         <Link 
                             href="/contact?service=Window+AC+Cleaning&notes=Chemical+Teardown+$275+(By+Appointment+First)"
                             className="w-full sm:w-auto px-8 py-3.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(0,174,239,0.4)] transition-all flex items-center justify-center gap-1.5"
                         >
-                            Schedule Drop-Off Appointment <ArrowRight className="size-3.5" />
+                            Schedule Teardown Appointment <ArrowRight className="size-3.5" />
                         </Link>
                         <a 
                             href="tel:808-488-1111"

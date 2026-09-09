@@ -8,6 +8,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useCart } from '../../context/CartContext';
 import { getProductImages } from '../../lib/product-images';
 import { Product } from '../../types/inventory';
+import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
@@ -1437,28 +1438,41 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                 </div>
 
                 {/* High-Intent Conversion Catalysts */}
-                {product.btu === 8000 && (
-                    <div className="w-full mb-3 px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/25 text-amber-300 font-mono text-[9px] font-bold text-center uppercase tracking-wider">
-                        ⚡ Sweet Spot: +$31 over 6k (+33% power)
-                    </div>
-                )}
-                {product.btu === 10000 && (
-                    <div className="w-full mb-3 px-2 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 font-mono text-[9px] font-bold text-center uppercase tracking-wider">
-                        🌿 Energy Star 2024 Efficiency Champion
-                    </div>
-                )}
-                {(product.voltage?.includes('230V') || (product.btu && product.btu >= 18000)) && (
-                    <div className="w-full mb-3 px-2 py-1 rounded-lg bg-sky-500/10 border border-sky-500/25 text-sky-300 font-mono text-[9px] font-bold text-center uppercase tracking-wider flex items-center justify-center gap-1.5">
-                        <span>230V Living Room Power</span>
-                        <Link 
-                            href="/shop/window-ac-plug-guide" 
-                            onClick={(e) => e.stopPropagation()}
-                            className="text-white underline hover:text-cyan-300 ml-1"
-                        >
-                            Plug Guide &rarr;
-                        </Link>
-                    </div>
-                )}
+                {(() => {
+                    const identifier = PRODUCT_IDENTIFIERS[product.id];
+                    const badge = identifier?.catalystBadge;
+                    const is230V = product.voltage?.includes('230V') || (product.btu && product.btu >= 18000);
+                    return (
+                        <div className="w-full mb-3 space-y-1.5">
+                            {badge && (
+                                <div className={cn(
+                                    "w-full px-2 py-1 rounded-lg font-mono text-[9px] font-bold text-center uppercase tracking-wider",
+                                    product.id === 1 ? "bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.15)]" :
+                                    product.id === 2 ? "bg-amber-500/10 border border-amber-500/30 text-amber-300" :
+                                    product.id === 3 ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-300" :
+                                    product.id === 4 ? "bg-blue-500/10 border border-blue-500/30 text-blue-300" :
+                                    product.id === 5 ? "bg-purple-500/10 border border-purple-500/30 text-purple-300" :
+                                    is230V ? "bg-sky-500/10 border border-sky-500/30 text-sky-300" :
+                                    "bg-white/[0.04] border border-white/10 text-slate-300"
+                                )}>
+                                    {badge}
+                                </div>
+                            )}
+                            {is230V && (
+                                <div className="w-full px-2 py-0.5 rounded bg-sky-950/40 border border-sky-500/20 text-sky-300 font-mono text-[8px] flex items-center justify-center gap-1.5">
+                                    <span>Requires 230V Heavy-Duty Outlet</span>
+                                    <Link 
+                                        href="/shop/window-ac-plug-guide" 
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="text-white underline hover:text-cyan-300"
+                                    >
+                                        Plug Guide &rarr;
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+                    );
+                })()}
 
                 <div className="mt-auto pt-3 border-t border-white/5 flex flex-col items-center gap-3 w-full">
                     <div className="flex items-center gap-2 justify-center w-full">
