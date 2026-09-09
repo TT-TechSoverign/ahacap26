@@ -446,16 +446,13 @@ export default function MiniSplitACMaintenancePage() {
                                     Schedule Cleaning Appointment (${totalPrice} est.) <ArrowRight className="size-4" />
                                 </Link>
                                 <div className="text-center mt-2.5 space-y-1">
-                                    <p className="text-[10px] text-cyan-400 font-semibold tracking-wider uppercase">
+                                    <p className="text-[11px] text-emerald-400 font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                                         By Appointment First • Zero Online Payment Required
                                     </p>
-                                    <a
-                                        href="tel:808-488-1111"
-                                        onClick={() => trackFunnelEvent('click_to_call', { source: 'mini_split_calculator' })}
-                                        className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors block"
-                                    >
-                                        Or call (808) 488-1111 to schedule directly
-                                    </a>
+                                    <p className="text-[11px] text-slate-300">
+                                        Able to give better cost after initial phone call. Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> or email <a href="mailto:info@affordablehome-ac.com" className="text-primary font-bold hover:underline">info@affordablehome-ac.com</a>.
+                                    </p>
                                 </div>
                             </div>
                         </div>

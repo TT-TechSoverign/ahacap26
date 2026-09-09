@@ -355,14 +355,15 @@ export default function AcCleaningOahuPage() {
                     <div className="lg:col-span-5">
                         <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-white/10 shadow-2xl sticky top-28">
                             <div className="border-b border-white/10 pb-4 mb-4">
-                                <div className="inline-flex items-center gap-1 text-[10px] font-mono font-bold uppercase text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded mb-2">
-                                    $0 Upfront Booking Deposit
+                                <div className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full mb-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    By Appointment First • Zero Online Payment Required
                                 </div>
                                 <h3 className="text-xl font-header font-black uppercase text-white">
                                     Book Cleaning Service
                                 </h3>
-                                <p className="text-slate-400 text-xs mt-1">
-                                    Pay only after cleaning is complete and cooling cold.
+                                <p className="text-slate-300 text-xs mt-1 leading-relaxed">
+                                    Better package rates for multiple units after initial phone consultation! Submit the intake below, call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, or email <a href="mailto:info@affordablehome-ac.com" className="text-primary font-bold hover:underline">info@affordablehome-ac.com</a>.
                                 </p>
                             </div>
 

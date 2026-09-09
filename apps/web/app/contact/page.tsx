@@ -31,15 +31,15 @@ export default function ContactPage() {
 
                 <div className="flex flex-col gap-6 lg:gap-8">
                     {/* By Appointment First Trust Banner */}
-                    <div className="max-w-5xl mx-auto w-full bg-primary/10 border border-primary/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-                        <div className="flex items-center gap-3">
-                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-                            <span className="text-slate-200 font-sans">
-                                <strong className="text-white">By Appointment First:</strong> Submit your request below or call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>. Zero online payment required to schedule.
+                    <div className="max-w-5xl mx-auto w-full bg-slate-900/90 border border-primary/30 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs shadow-lg">
+                        <div className="flex items-start sm:items-center gap-3">
+                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0 mt-1 sm:mt-0"></span>
+                            <span className="text-slate-200 font-sans leading-relaxed">
+                                <strong className="text-white">By Appointment First • Zero Online Payment Required:</strong> Fill out the form below, call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, or email <a href="mailto:info@affordablehome-ac.com" className="text-primary font-bold hover:underline">info@affordablehome-ac.com</a>. We are able to give you a <strong className="text-cyan-300">better cost after an initial phone consultation</strong>!
                             </span>
                         </div>
-                        <span className="font-mono text-[10px] uppercase tracking-widest text-primary bg-primary/10 border border-primary/30 px-3 py-1 rounded-full shrink-0">
-                            Oahu Dispatch Active
+                        <span className="font-mono text-[10px] uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full shrink-0">
+                            Zero $ Upfront
                         </span>
                     </div>
 

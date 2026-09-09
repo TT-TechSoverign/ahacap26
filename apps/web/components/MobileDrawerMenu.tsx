@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useContent } from '../lib/context/ContentContext';
-import { X, Phone, Store, Calendar, Sparkles, Wrench, Compass, ShieldCheck, MapPin } from 'lucide-react';
+import { X, Phone, Store, Calendar, Sparkles, Wrench, Compass, ShieldCheck, MapPin, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { sendGAEvent } from '@next/third-parties/google';
 
@@ -109,6 +109,52 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
 
                 {/* Body Links */}
                 <div className="flex-1 flex flex-col p-6 gap-6 overflow-y-auto">
+                    {/* By Appointment First • Conversion Hook Card */}
+                    <div className="p-4 rounded-2xl bg-gradient-to-br from-primary/15 via-slate-900/90 to-slate-900 border border-primary/30 space-y-3 text-left shadow-lg">
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[9px] font-black uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            By Appt First • Zero Online Payment
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-white font-header font-bold text-xs uppercase tracking-wide">
+                                Better Cost After Initial Phone Call
+                            </p>
+                            <p className="text-slate-300 text-[11px] font-sans leading-relaxed">
+                                Call, email, or fill out our contact form to set up your appointment. We review your layout and provide tailored package pricing with zero upfront payment.
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 pt-1">
+                            <a 
+                                href="tel:808-488-1111"
+                                onClick={() => {
+                                    sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Drawer Top Call' });
+                                    setIsOpen(false);
+                                }}
+                                className="p-2.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-1.5 shadow-md active:scale-95"
+                            >
+                                <Phone className="size-3.5 shrink-0" />
+                                <span>Call Now</span>
+                            </a>
+                            <Link 
+                                href="/contact"
+                                onClick={() => setIsOpen(false)}
+                                className="p-2.5 bg-slate-800 hover:bg-slate-700 border border-white/15 text-white font-header font-bold text-[11px] uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-1.5 active:scale-95"
+                            >
+                                <Calendar className="size-3.5 text-cyan-400 shrink-0" />
+                                <span>Book Form</span>
+                            </Link>
+                        </div>
+                        <div className="text-center pt-0.5">
+                            <a 
+                                href="mailto:info@affordablehome-ac.com?subject=Appointment%20Inquiry%20-%20Affordable%20Home%20AC"
+                                className="text-[10px] text-slate-400 hover:text-cyan-300 font-mono tracking-wide underline inline-flex items-center gap-1"
+                            >
+                                <Mail className="size-3" />
+                                Email: info@affordablehome-ac.com
+                            </a>
+                        </div>
+                    </div>
+
                     {navSections.map((section, sIdx) => (
                         <div key={sIdx} className="flex flex-col gap-2.5">
                             <h3 className="text-slate-500 font-mono font-bold uppercase tracking-widest text-[10px]">{section.title}</h3>
@@ -183,33 +229,37 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                     </div>
                 </div>
                 
-                {/* Bottom Quick Actions (Direct Dial & Catalog) */}
-                <div className="p-4 border-t border-white/10 bg-slate-900/80 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
-                    <div className="grid grid-cols-2 gap-3">
+                {/* Bottom Quick Actions (Direct Dial & Contact Form) */}
+                <div className="p-4 border-t border-white/10 bg-slate-900/90 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-slate-400 text-center mb-2.5 flex items-center justify-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Zero Online Payment Required
+                    </div>
+                    <div className="grid grid-cols-2 gap-2.5">
                         <a 
                             href="tel:808-488-1111" 
                             onClick={() => {
                                 sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Drawer Call Button' });
                                 setIsOpen(false);
                             }} 
-                            className="bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 p-3 rounded-xl flex items-center justify-center gap-2 group transition-all"
+                            className="bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 p-2.5 rounded-xl flex items-center justify-center gap-2 group transition-all"
                         >
-                            <Phone className="text-emerald-400 size-5 group-hover:scale-110 transition-transform shrink-0" />
+                            <Phone className="text-emerald-400 size-4 group-hover:scale-110 transition-transform shrink-0" />
                             <div className="text-left">
-                                <div className="text-[9px] font-mono uppercase tracking-wider text-emerald-400">Call Dispatch</div>
+                                <div className="text-[8px] font-mono uppercase tracking-wider text-emerald-400">Better Phone Cost</div>
                                 <div className="text-xs font-black text-white font-header tracking-wider">(808) 488-1111</div>
                             </div>
                         </a>
                         <Link 
-                            href="/shop" 
+                            href="/contact" 
                             prefetch={false} 
                             onClick={() => setIsOpen(false)} 
-                            className="bg-primary/10 border border-primary/30 hover:bg-primary/20 p-3 rounded-xl flex items-center justify-center gap-2 group transition-all"
+                            className="bg-primary/10 border border-primary/30 hover:bg-primary/20 p-2.5 rounded-xl flex items-center justify-center gap-2 group transition-all"
                         >
-                            <Store className="text-primary size-5 group-hover:scale-110 transition-transform shrink-0" />
+                            <Calendar className="text-primary size-4 group-hover:scale-110 transition-transform shrink-0" />
                             <div className="text-left">
-                                <div className="text-[9px] font-mono uppercase tracking-wider text-primary">In-Stock ACs</div>
-                                <div className="text-xs font-black text-white font-header tracking-wider">Shop Now</div>
+                                <div className="text-[8px] font-mono uppercase tracking-wider text-primary">Zero $ Online</div>
+                                <div className="text-xs font-black text-white font-header tracking-wider">Book Appt Form</div>
                             </div>
                         </Link>
                     </div>

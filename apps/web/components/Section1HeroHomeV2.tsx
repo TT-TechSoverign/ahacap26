@@ -61,6 +61,18 @@ export default function Section1HeroHomeV2() {
                             </span>
                         </Link>
                     </div>
+
+                    {/* By Appointment First Trust Badge */}
+                    <div className="inline-flex flex-col sm:flex-row items-center gap-2 px-4 py-2 bg-slate-900/80 border border-cyan-500/30 rounded-2xl backdrop-blur-md shadow-lg mt-4">
+                        <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            By Appointment First • Zero Online Payment Required
+                        </div>
+                        <span className="hidden sm:inline text-slate-500">•</span>
+                        <span className="text-slate-300 text-xs font-sans">
+                            Better cost after initial phone call: <a href="tel:808-488-1111" className="text-cyan-300 font-bold hover:underline">(808) 488-1111</a>
+                        </span>
+                    </div>
                 </div>
             </div>
         </section>

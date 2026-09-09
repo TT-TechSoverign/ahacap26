@@ -18,7 +18,7 @@ import contentData from '@/lib/content/content.json';
 import { 
     AlertTriangle, Warehouse, Truck, Ban, Leaf, Wind, ArrowUpRight, Eye, Check, X,
     Maximize2, Snowflake, Cpu, LayoutGrid, ShoppingCart, FileText, Mail, Droplets, Sun, Gauge,
-    Plug, Wrench, Sparkles, RotateCcw
+    Plug, Wrench, Sparkles, RotateCcw, Phone, Calendar
 } from 'lucide-react';
 
 const LucideIconMap: Record<string, React.ComponentType<any>> = {
@@ -395,8 +395,43 @@ export default function ShopPage() {
                     </div>
                 </div>
 
+                {/* By Appointment First • Conversion Trust Banner */}
+                <div className="mt-6 mb-4 max-w-7xl mx-auto px-4">
+                    <div className="bg-gradient-to-r from-slate-900 via-primary/10 to-slate-900 border border-primary/30 rounded-3xl p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_30px_rgba(0,174,239,0.1)]">
+                        <div className="space-y-2 text-center lg:text-left flex-1">
+                            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                By Appointment First • Zero Online Payment Required
+                            </div>
+                            <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">
+                                Want Better Package Pricing or Sizing Advice?
+                            </h3>
+                            <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+                                We are able to give you a <strong className="text-white">better cost after an initial phone consultation</strong>! Call our Waipahu warehouse directly, email us, or submit the appointment form below with zero upfront online payment required.
+                            </p>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
+                            <a 
+                                href="tel:808-488-1111"
+                                className="w-full sm:w-auto px-6 py-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] hover:scale-[1.02] flex items-center justify-center gap-2"
+                            >
+                                <Phone className="size-4 shrink-0" />
+                                <span>Call (808) 488-1111</span>
+                            </a>
+                            <Link 
+                                href="/contact"
+                                className="w-full sm:w-auto px-6 py-4 bg-slate-800 hover:bg-slate-700 border border-white/10 text-white font-header font-bold uppercase text-xs tracking-wider rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+                            >
+                                <Calendar className="size-4 text-cyan-400 shrink-0" />
+                                <span>Book Appt Form</span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Sizing Wizard CTA Banner */}
-                <div className="mt-8 mb-10 max-w-7xl mx-auto px-4">
+                <div className="mt-4 mb-10 max-w-7xl mx-auto px-4">
                     <div className="bg-[#0b1120]/60 border border-primary/20 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden backdrop-blur-md shadow-lg shadow-primary/5 group">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none z-0" />
                         <div className="absolute top-0 left-0 w-12 h-[2px] bg-gradient-to-r from-primary to-transparent opacity-50 group-hover:w-24 transition-all duration-500"></div>

@@ -476,6 +476,16 @@ export function DispatchWizard() {
                             {isSubmitting ? 'Transmitting...' : <EditableText contentKey="contact.wizard.btn_submit" />}
                         </Button>
                     </div>
+
+                    <div className="pt-4 text-center space-y-1 border-t border-white/5">
+                        <div className="inline-flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            By Appointment First • Zero Online Payment Required
+                        </div>
+                        <p className="text-slate-400 text-[11px] leading-relaxed max-w-lg mx-auto">
+                            Submitting this request reserves your appointment window with zero upfront payment. We follow up by phone to confirm specifications and offer our best tailored cost!
+                        </p>
+                    </div>
                 </div>
             )}
         </form>

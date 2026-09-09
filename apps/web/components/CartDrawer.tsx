@@ -6,9 +6,10 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import { isCampaignActive } from '../lib/utils';
-import { ShoppingCart, X, Snowflake, AlertCircle, Warehouse, Trash2, AlertTriangle, Loader2, Lock } from 'lucide-react';
+import { ShoppingCart, X, Snowflake, AlertCircle, Warehouse, Trash2, AlertTriangle, Loader2, Lock, Phone, Calendar } from 'lucide-react';
 
 function cn(...inputs: (string | undefined)[]) {
     return twMerge(clsx(inputs));
@@ -273,6 +274,37 @@ export default function CartDrawer() {
                                             {error}
                                         </div>
                                     )}
+
+                                    {/* Zero Online Payment Required Alternative */}
+                                    <div className="p-3.5 bg-slate-950/80 border border-emerald-500/30 rounded-xl space-y-2 text-left shadow-inner">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-1.5 text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                                By Appt First • Zero Online Payment
+                                            </div>
+                                            <span className="text-[9px] text-cyan-400 font-mono uppercase">Better Phone Cost</span>
+                                        </div>
+                                        <p className="text-slate-300 text-[11px] font-sans leading-relaxed">
+                                            Want to confirm electrical fit or get better package rates before paying? Set up your appointment with zero upfront online payment.
+                                        </p>
+                                        <div className="grid grid-cols-2 gap-2 pt-1">
+                                            <a 
+                                                href="tel:808-488-1111"
+                                                className="py-2 px-2.5 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 font-bold text-[10px] uppercase tracking-wider rounded-lg border border-emerald-500/30 text-center flex items-center justify-center gap-1.5 active:scale-95 transition-all"
+                                            >
+                                                <Phone className="size-3 text-emerald-400 shrink-0" />
+                                                <span>Call (808) 488-1111</span>
+                                            </a>
+                                            <Link 
+                                                href="/contact?service=window_ac_purchase"
+                                                onClick={closeCart}
+                                                className="py-2 px-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold text-[10px] uppercase tracking-wider rounded-lg border border-white/10 text-center flex items-center justify-center gap-1.5 active:scale-95 transition-all"
+                                            >
+                                                <Calendar className="size-3 text-cyan-400 shrink-0" />
+                                                <span>Book via Form</span>
+                                            </Link>
+                                        </div>
+                                    </div>
 
                                     <button
                                         onClick={handleCheckout}

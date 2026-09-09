@@ -32,24 +32,22 @@ export default function MobileStickyBottomBar() {
         // 1. Specific Product Detail & Product Landing Pages
         if (pathname.startsWith('/shop/') && !pathname.endsWith('/window-ac-plug-guide') && !pathname.endsWith('/lg-dual-inverter-guide')) {
             return {
-                text: 'Order In-Stock AC',
-                icon: ShoppingCart,
-                scrollTarget: 'product-purchase-section',
-                href: '/shop',
-                gaEvent: 'click_to_order',
-                gaLabel: 'Sticky Bottom Product Order'
+                text: 'Book Appt (Zero $)',
+                icon: Calendar,
+                href: '/contact?service=window_ac_purchase',
+                gaEvent: 'click_to_book_product',
+                gaLabel: 'Sticky Bottom Product Appt'
             };
         }
 
         // 2. Main Shop Catalog
         if (pathname === '/shop') {
             return {
-                text: 'Shop In-Stock ACs',
-                icon: ShoppingCart,
-                scrollTarget: 'dual_inverter',
-                href: '/shop',
-                gaEvent: 'click_to_shop',
-                gaLabel: 'Sticky Bottom Shop Catalog'
+                text: 'Book Appt Form',
+                icon: Calendar,
+                href: '/contact',
+                gaEvent: 'click_to_book_catalog',
+                gaLabel: 'Sticky Bottom Catalog Appt'
             };
         }
 
@@ -78,7 +76,7 @@ export default function MobileStickyBottomBar() {
         // 5. Mini Split Pages
         if (pathname === '/mini_split_ac') {
             return {
-                text: 'Free Survey',
+                text: 'Free Survey (Zero $)',
                 icon: Calendar,
                 scrollTarget: 'system-builder',
                 href: '/mini_split_ac#system-builder',
@@ -89,7 +87,7 @@ export default function MobileStickyBottomBar() {
 
         if (pathname.includes('mini-split')) {
             return {
-                text: 'Request Estimate',
+                text: 'Free Survey (Zero $)',
                 icon: Calendar,
                 href: '/mini-split-estimate',
                 gaEvent: 'click_to_estimate',
@@ -100,17 +98,17 @@ export default function MobileStickyBottomBar() {
         // 6. Sizing, Comparisons & Guides
         if (pathname === '/sizing' || pathname.includes('guide') || pathname.includes('vs')) {
             return {
-                text: 'Find Your AC',
-                icon: ArrowRight,
-                href: '/shop',
-                gaEvent: 'click_to_shop',
-                gaLabel: 'Sticky Bottom Sizing Shop'
+                text: 'Book Consultation',
+                icon: Calendar,
+                href: '/contact',
+                gaEvent: 'click_to_book_consult',
+                gaLabel: 'Sticky Bottom Guide Consult'
             };
         }
 
         // 7. Default Site-Wide CTA
         return {
-            text: 'Book Online',
+            text: 'Book Appt (Zero $)',
             icon: Calendar,
             href: '/contact',
             gaEvent: 'click_to_book',
@@ -128,17 +126,33 @@ export default function MobileStickyBottomBar() {
                 transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
                 paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 8px)'
             }}
-            className="fixed bottom-0 left-0 w-full z-50 flex md:hidden bg-slate-900 border-t border-slate-800 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]"
+            className="fixed bottom-0 left-0 w-full z-50 flex flex-col md:hidden bg-slate-900 border-t border-slate-800 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]"
         >
+            {/* By Appointment First • Friction-Free Trust Banner */}
+            <div className="w-full bg-slate-950/95 border-b border-white/10 px-3 py-1 flex items-center justify-between text-[10px] text-slate-300">
+                <div className="flex items-center gap-1.5 font-medium truncate">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                    <span className="text-emerald-400 font-bold uppercase tracking-wider text-[9px]">By Appt First</span>
+                    <span className="text-slate-500">•</span>
+                    <span className="truncate text-slate-200">Zero Online Payment Required</span>
+                </div>
+                <span className="text-cyan-400 font-mono text-[9px] uppercase tracking-wider shrink-0 pl-1">
+                    Better Phone Cost
+                </span>
+            </div>
+
             <div className="flex w-full p-2 gap-2">
-                {/* Call Now (DNI Tracking) */}
+                {/* Call Now (DNI Tracking & Better Cost Framing) */}
                 <a 
                     href="tel:808-488-1111"
                     onClick={() => sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Call' })}
-                    className="ctm-track-number flex-1 bg-slate-800 hover:bg-slate-700 text-white font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors border border-slate-700 active:scale-95"
+                    className="ctm-track-number flex-1 bg-slate-800 hover:bg-slate-700 text-white font-black uppercase tracking-wider text-xs py-2 min-h-[48px] rounded-lg flex flex-col items-center justify-center transition-colors border border-slate-700 active:scale-95 leading-tight"
                 >
-                    <Phone className="size-4 text-primary shrink-0" />
-                    <span>Call Now</span>
+                    <div className="flex items-center gap-1.5">
+                        <Phone className="size-3.5 text-primary shrink-0" />
+                        <span>Call (Best Cost)</span>
+                    </div>
+                    <span className="text-[9px] text-cyan-300 font-normal normal-case tracking-normal">(808) 488-1111</span>
                 </a>
                 
                 {/* Dynamic Context Action CTA */}

@@ -732,8 +732,8 @@ export function ACSelectorWizard() {
                                         <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 flex items-start gap-3">
                                             <Shield className="size-5 text-primary shrink-0 mt-0.5" />
                                             <div className="text-left text-xs">
-                                                <span className="font-header font-black text-white uppercase tracking-wider block">By Appointment First — Zero Upfront Payment</span>
-                                                <span className="text-slate-300 text-[11px] leading-relaxed">All equipment sizing, installation recommendations, and in-home assessments are scheduled by appointment first. Submit your room details below or call our office at (808) 488-1111 to schedule your consultation window with zero online payment required.</span>
+                                                <span className="font-header font-black text-white uppercase tracking-wider block">By Appointment First • Zero Online Payment Required</span>
+                                                <span className="text-slate-300 text-[11px] leading-relaxed">All equipment sizing, installation recommendations, and in-home assessments are scheduled by appointment first. We are able to give you a better cost after an initial phone consultation! Submit your room details below, email <a href="mailto:info@affordablehome-ac.com" className="text-primary font-bold hover:underline">info@affordablehome-ac.com</a>, or call our office at <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> to schedule your consultation window with zero online payment required.</span>
                                             </div>
                                         </div>
 

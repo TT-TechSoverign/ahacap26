@@ -189,11 +189,12 @@ export default function ACRepairFunnel() {
                                     </Link>
                                 </div>
                                 <div className="space-y-1 text-center">
-                                    <p className="text-[10px] text-cyan-400 font-semibold tracking-wider uppercase">
+                                    <p className="text-[11px] text-emerald-400 font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                                         By Appointment First • Zero Online Payment Required
                                     </p>
-                                    <p className="text-[10px] text-slate-400 font-sans">
-                                        Diagnostic appointments and repairs are scheduled by appointment first and subject to technician availability, physical site inspection, and scope of work approval.
+                                    <p className="text-[11px] text-slate-300 font-sans">
+                                        Able to give better cost after initial phone call. Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:info@affordablehome-ac.com" className="text-primary font-bold hover:underline">info@affordablehome-ac.com</a>, or submit the form above to reserve your appointment window.
                                     </p>
                                 </div>
                             </div>

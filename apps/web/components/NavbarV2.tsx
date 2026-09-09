@@ -162,8 +162,17 @@ export default function NavbarV2() {
                     <div className="max-w-7xl mx-auto px-6 w-full">
                         <div className="grid grid-cols-[1fr_auto_1fr] items-center py-1.5">
 
-                            {/* Left Col: Spacer */}
-                            <div></div>
+                            {/* Left Col: Trust Badge & Direct Call */}
+                            <div className="flex items-center gap-2">
+                                <a 
+                                    href="tel:808-488-1111" 
+                                    className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-mono font-bold tracking-wider hover:text-emerald-300 transition-colors"
+                                    title="Call Dispatch for Best Pricing"
+                                >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    <span>By Appt First • (808) 488-1111</span>
+                                </a>
+                            </div>
 
                             {/* Center Col: Navigation Links + Contact Us */}
                             <div className="flex justify-center items-center gap-8 md:gap-10">
