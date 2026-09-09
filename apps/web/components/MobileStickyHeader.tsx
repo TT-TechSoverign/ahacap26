@@ -76,19 +76,11 @@ export default function MobileStickyHeader() {
                             </Link>
                         </div>
 
-                        {/* Right Actions: Direct Call & Cart */}
-                        <div className="z-30 flex items-center gap-1">
-                            <a
-                                href="tel:808-488-1111"
-                                className="text-emerald-400 hover:text-emerald-300 transition-colors p-2 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-lg active:bg-white/5"
-                                aria-label="Call Dispatch (808) 488-1111"
-                                title="Call Dispatch (808) 488-1111"
-                            >
-                                <Phone className="size-5 text-emerald-400 animate-pulse-slow" />
-                            </a>
+                        {/* Right Action: Cart (Symmetrically Balanced with Left Hamburger) */}
+                        <div className="z-30">
                             <button
                                 onClick={handleOpenCart}
-                                className="text-white hover:text-primary transition-colors p-2 min-w-[40px] min-h-[40px] flex items-center justify-center -mr-2 relative rounded-lg active:bg-white/5"
+                                className="text-white hover:text-cyan-400 transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 relative rounded-lg active:bg-white/5"
                                 aria-label="Open Cart"
                             >
                                 <ShoppingCart className="size-6" />
@@ -97,7 +89,7 @@ export default function MobileStickyHeader() {
                                         "absolute top-1 right-0 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
                                         (isCampaignActive() && items.some(item => item.promo_price && item.promo_price > 0))
                                             ? "cart-promo-badge-pulse text-white"
-                                             : "bg-cyan-400 text-black"
+                                            : "bg-cyan-400 text-black"
                                     )}>
                                         {items.length}
                                     </span>

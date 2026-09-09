@@ -24,44 +24,46 @@ export function QuickJumpBanner() {
                         Call Office: <a href="tel:808-488-1111" className="text-cyan-400 font-bold hover:underline">(808) 488-1111</a> or <Link href="/contact" className="text-primary hover:underline font-bold">Book Form</Link>
                     </span>
                 </div>
-                <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 md:gap-8 lg:gap-12 pt-1 border-t border-white/5">
-                    <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.25em] text-cyan-400 font-bold flex items-center gap-1.5">
+                <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 pt-1 border-t border-white/5">
+                    <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.25em] text-cyan-400 font-bold flex items-center gap-1.5 shrink-0">
                         <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
                         Quick Pathways:
                     </span>
                     
-                    <a 
-                        href="#services" 
-                        onClick={(e) => handleScroll(e, 'services')}
-                        className="group flex items-center gap-2 text-white hover:text-cyan-400 font-header font-bold text-sm md:text-base uppercase tracking-wider transition-colors min-h-[44px] px-3 py-1.5 rounded cursor-pointer"
-                    >
-                        <ShieldCheck className="size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
-                        <span>Our Services</span>
-                    </a>
+                    <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2 md:gap-4 lg:gap-8 w-full sm:w-auto">
+                        <a 
+                            href="#services" 
+                            onClick={(e) => handleScroll(e, 'services')}
+                            className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent cursor-pointer"
+                        >
+                            <ShieldCheck className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
+                            <span>Our Services</span>
+                        </a>
 
-                    <Link 
-                        href="/shop" 
-                        className="group flex items-center gap-2 text-white hover:text-cyan-400 font-header font-bold text-sm md:text-base uppercase tracking-wider transition-colors min-h-[48px] px-4 py-2 rounded"
-                    >
-                        <ShoppingBag className="size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
-                        <span>Shop Window AC</span>
-                    </Link>
+                        <Link 
+                            href="/shop" 
+                            className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent"
+                        >
+                            <ShoppingBag className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
+                            <span>Shop Window AC</span>
+                        </Link>
 
-                    <Link 
-                        href="/sizing" 
-                        className="group flex items-center gap-2 text-white hover:text-cyan-400 font-header font-bold text-sm md:text-base uppercase tracking-wider transition-colors min-h-[48px] px-4 py-2 rounded"
-                    >
-                        <Calculator className="size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
-                        <span>BTU Calculator</span>
-                    </Link>
+                        <Link 
+                            href="/sizing" 
+                            className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent"
+                        >
+                            <Calculator className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
+                            <span>BTU Calculator</span>
+                        </Link>
 
-                    <Link 
-                        href="/contact" 
-                        className="group flex items-center gap-2 text-white hover:text-cyan-400 font-header font-bold text-sm md:text-base uppercase tracking-wider transition-colors min-h-[44px] px-3 py-1.5 rounded"
-                    >
-                        <ClipboardList className="size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
-                        <span>Book Appt (Zero $)</span>
-                    </Link>
+                        <Link 
+                            href="/contact" 
+                            className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent"
+                        >
+                            <ClipboardList className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
+                            <span>Book Appt ($0)</span>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

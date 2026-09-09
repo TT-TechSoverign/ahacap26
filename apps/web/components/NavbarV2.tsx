@@ -165,12 +165,15 @@ export default function NavbarV2() {
                     </div>
                 </div>
 
-                {/* Row 2: Navigation Menu Bar */}
+                {/* Row 2: Navigation Menu Bar - Symmetrically Centered & Evenly Spaced */}
                 <div className="bg-[#0B1120]/95 backdrop-blur-md text-white z-10 relative border-t border-slate-800/80 shadow-md">
                     <div className="max-w-7xl mx-auto px-4 lg:px-6 w-full flex items-center justify-between py-1.5">
 
-                        {/* Navigation Items (Interactive Nav Pills with Icons & Active Highlights) */}
-                        <nav className="flex items-center gap-1 lg:gap-1.5 xl:gap-2">
+                        {/* Left Balance Spacer */}
+                        <div className="w-10 hidden xl:block shrink-0"></div>
+
+                        {/* Centered Navigation Flow (Evenly Distributed Nav Pills + Integrated CTA) */}
+                        <nav className="flex-1 flex items-center justify-center gap-1.5 lg:gap-2 xl:gap-3 overflow-x-auto no-scrollbar">
                             {links.map((link: any, i: number) => {
                                 const Icon = getNavIcon(link.href, link.text);
                                 const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
@@ -197,45 +200,41 @@ export default function NavbarV2() {
                                     </Link>
                                 );
                             })}
-                        </nav>
 
-                        {/* Right Actions: High-Converting CTA Button & Cart */}
-                        <div className="flex items-center gap-3 shrink-0">
-                            {/* Contact / Free Estimate CTA Button */}
+                            {/* Contact / Free Estimate CTA Nav Pill (Evenly Spaced) */}
                             <Link
                                 prefetch={false}
                                 href="/contact"
                                 className={cn(
-                                    "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shadow-sm active:scale-95",
+                                    "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shadow-sm active:scale-95 ml-0.5",
                                     pathname === '/contact'
                                         ? "bg-cyan-400 text-slate-950 font-black shadow-[0_0_15px_rgba(0,174,239,0.6)]"
-                                        : "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-[0_0_12px_rgba(0,174,239,0.3)] hover:shadow-[0_0_18px_rgba(0,174,239,0.5)]"
+                                        : "bg-cyan-500/15 hover:bg-cyan-500 text-cyan-300 hover:text-slate-950 border border-cyan-500/35 hover:border-cyan-400 shadow-[0_0_10px_rgba(0,174,239,0.15)]"
                                 )}
                             >
                                 <Calendar className="size-3.5 shrink-0" />
                                 <span>Free Estimate ($0)</span>
                             </Link>
+                        </nav>
 
-                            {/* Cart Button */}
+                        {/* Right: Cart Button (Subtle, balanced, matching the left spacer) */}
+                        <div className="w-10 flex items-center justify-end shrink-0">
                             <button
                                 onClick={openCart}
-                                className="relative group p-1.5 hover:bg-white/5 rounded-lg transition-colors flex items-center gap-1.5 text-slate-300 hover:text-cyan-400"
+                                className="relative group p-1.5 hover:bg-white/5 rounded-lg transition-colors flex items-center text-slate-300 hover:text-cyan-400"
                                 aria-label="Open Cart"
                             >
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-300 group-hover:text-cyan-400 hidden xl:block">Cart</span>
-                                <div className="relative flex items-center">
-                                    <ShoppingCart className="size-5 text-white group-hover:text-cyan-400 transition-colors" />
-                                    {items.length > 0 && (
-                                        <span className={cn(
-                                            "absolute -top-1.5 -right-2 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
-                                            (isCampaignActive() && items.some(item => item.promo_price && item.promo_price > 0))
-                                                ? "cart-promo-badge-pulse text-white"
-                                                : "bg-cyan-400 text-black"
-                                        )}>
-                                            {items.length}
-                                        </span>
-                                    )}
-                                </div>
+                                <ShoppingCart className="size-5 text-white group-hover:text-cyan-400 transition-colors" />
+                                {items.length > 0 && (
+                                    <span className={cn(
+                                        "absolute -top-1 -right-1 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
+                                        (isCampaignActive() && items.some(item => item.promo_price && item.promo_price > 0))
+                                            ? "cart-promo-badge-pulse text-white"
+                                            : "bg-cyan-400 text-black"
+                                    )}>
+                                        {items.length}
+                                    </span>
+                                )}
                             </button>
                         </div>
                     </div>

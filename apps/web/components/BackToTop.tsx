@@ -45,7 +45,7 @@ export function BackToTop({ visible }: BackToTopProps) {
                 active 
                     ? "opacity-100 scale-100 translate-y-0 pointer-events-auto" 
                     : "opacity-0 scale-50 translate-y-5 pointer-events-none",
-                hasBottomBar ? "bottom-24 md:bottom-8" : "bottom-6 md:bottom-8"
+                hasBottomBar ? "bottom-[120px] md:bottom-8" : "bottom-6 md:bottom-8"
             )}
             style={{
                 boxShadow: active ? '0 0 20px rgba(0, 174, 239, 0.15)' : 'none'

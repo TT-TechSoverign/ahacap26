@@ -81,11 +81,11 @@ export default function Section2OurServicesV2() {
                     handleCardClick(e, service.id);
                 }}
                 className={cn(
-                    "block relative group h-[280px] md:h-[400px] overflow-hidden rounded-2xl border transition-all duration-500 transform hover:-translate-y-1.5 hover:scale-[1.015] active:scale-[0.98]",
+                    "block relative group overflow-hidden rounded-2xl border transition-all duration-500 transform hover:-translate-y-1.5 hover:scale-[1.015] active:scale-[0.98]",
                     isExpanded
-                        ? "border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.2)]"
-                        : "border-white/20 shadow-2xl",
-                    "md:border-white/20 md:shadow-2xl md:hover:border-cyan-500/30 md:hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
+                        ? "min-h-[360px] border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.2)]"
+                        : "h-[280px] border-white/20 shadow-2xl",
+                    "md:h-[400px] md:min-h-0 md:border-white/20 md:shadow-2xl md:hover:border-cyan-500/30 md:hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
                 )}
             >
                 {/* Background Image */}

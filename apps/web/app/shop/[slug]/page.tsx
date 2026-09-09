@@ -40,7 +40,7 @@ const RelatedProducts = dynamic(() => import('@/components/RelatedProducts').the
 // Progressive Skeleton UI Loader to guarantee 0 CLS during data hydration
 function ProductPageSkeleton() {
     return (
-        <div className="bg-background-dark min-h-screen pt-[140px] md:pt-[165px] pb-12 px-4 md:px-8 max-w-6xl mx-auto">
+        <div className="bg-background-dark min-h-screen pt-[85px] md:pt-[165px] pb-36 md:pb-16 px-4 md:px-8 max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Image Placeholder */}
                 <div className="space-y-6 animate-pulse">
@@ -367,7 +367,7 @@ export default function ProductDetailPage() {
 
     return (
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
-            <main className="pt-[140px] md:pt-[165px] pb-12 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
+            <main className="pt-[85px] md:pt-[165px] pb-36 md:pb-16 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     {/* Visual Anchor */}
                     <div className="space-y-6 md:sticky md:top-36">

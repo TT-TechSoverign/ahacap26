@@ -39,7 +39,7 @@ export default function Homepage() {
                 <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[2px]" />
             </div>
 
-            <main className="relative z-10 pt-[110px] md:pt-[130px]">
+            <main className="relative z-10 pt-[80px] md:pt-[130px]">
                 {/* Google WebSite & Sitelinks Search Box Schema */}
                 <script
                     type="application/ld+json"
