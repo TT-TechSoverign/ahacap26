@@ -169,11 +169,11 @@ export default function NavbarV2() {
                 <div className="bg-[#0B1120]/95 backdrop-blur-md text-white z-10 relative border-t border-slate-800/80 shadow-md">
                     <div className="max-w-7xl mx-auto px-4 lg:px-6 w-full flex items-center justify-between py-1.5">
 
-                        {/* Left Balance Spacer */}
-                        <div className="w-10 hidden xl:block shrink-0"></div>
+                        {/* Left Balance Spacer (Matches right cart w-10 for exact mathematical centering) */}
+                        <div className="w-10 hidden md:block shrink-0" aria-hidden="true" />
 
                         {/* Centered Navigation Flow (Evenly Distributed Nav Pills + Integrated CTA) */}
-                        <nav className="flex-1 flex items-center justify-center gap-1.5 lg:gap-2 xl:gap-3 overflow-x-auto no-scrollbar">
+                        <nav className="flex-1 flex items-center justify-center gap-1 lg:gap-1.5 xl:gap-2.5 overflow-hidden">
                             {links.map((link: any, i: number) => {
                                 const Icon = getNavIcon(link.href, link.text);
                                 const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
@@ -183,7 +183,7 @@ export default function NavbarV2() {
                                         prefetch={false}
                                         href={link.href}
                                         className={cn(
-                                            "inline-flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap relative group",
+                                            "inline-flex items-center gap-1.5 px-2 lg:px-2.5 xl:px-3 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap relative group shrink-0",
                                             isActive 
                                                 ? "text-cyan-400 bg-cyan-500/10 border border-cyan-500/25 shadow-[0_0_10px_rgba(0,174,239,0.15)]" 
                                                 : "text-slate-300 hover:text-white hover:bg-slate-800/80"
@@ -206,7 +206,7 @@ export default function NavbarV2() {
                                 prefetch={false}
                                 href="/contact"
                                 className={cn(
-                                    "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shadow-sm active:scale-95 ml-0.5",
+                                    "inline-flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap shadow-sm active:scale-95 ml-0.5 shrink-0",
                                     pathname === '/contact'
                                         ? "bg-cyan-400 text-slate-950 font-black shadow-[0_0_15px_rgba(0,174,239,0.6)]"
                                         : "bg-cyan-500/15 hover:bg-cyan-500 text-cyan-300 hover:text-slate-950 border border-cyan-500/35 hover:border-cyan-400 shadow-[0_0_10px_rgba(0,174,239,0.15)]"
