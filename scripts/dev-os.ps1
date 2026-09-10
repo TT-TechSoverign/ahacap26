@@ -341,6 +341,30 @@ switch ($Command.ToLower()) {
         }
     }
 
+    "session-sync" {
+        $summary = if ($Target) { $Target } else { "Chat session completed tasks and synchronized improvements with Master Brain." }
+        Write-Host "[*] Transmitting Cross-Session Learning to Master Projects Brain..." -ForegroundColor Yellow
+        try {
+            $body = @{
+                session_id = "antigravity_session"
+                epoch = "EPOCH_11"
+                summary = $summary
+                author = "SOVEREIGN_MASTER_AGENT"
+                achievements = @(
+                    "Live Sovereign Neural Swarm visualizer active in Dev OS",
+                    "Multi-worker Redis synchronization live on prod-api",
+                    "3-stage deployment verification pipeline VERIFIED_CLEAN"
+                )
+            } | ConvertTo-Json
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/brain/session-sync" -Method POST -Headers $headers -Body $body
+            Write-Host "[OK] Master Brain Session Learning Synced! Status: $($resp.status)" -ForegroundColor Green
+            Write-Host "  Epoch: $($resp.epoch)" -ForegroundColor Cyan
+            Write-Host "  Recorded: $($resp.recorded_thought)" -ForegroundColor White
+        } catch {
+            Write-Host "[ERR] Session sync failed: $_" -ForegroundColor Red
+        }
+    }
+
     "inspect" {
         if (-not $Target) {
             Write-Host "[ERR] Usage: .\scripts\dev-os.ps1 inspect <target_id>" -ForegroundColor Red
@@ -506,6 +530,7 @@ switch ($Command.ToLower()) {
         Write-Host "  brain-timeline             - Display complete chronological history from inception to current"
         Write-Host "  inject-history             - Dispatch swarm memory injection into Master Brain"
         Write-Host "  brain-sync [thought]       - Client-initiated outbound push of directive/thought to Master Brain"
+        Write-Host "  session-sync [summary]     - Push cross-session learning and milestones to Master Brain"
         Write-Host "  inspect [id]               - Deep inspection of sub-master or agent synapse and security perimeter"
         Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (6 Sub-Masters, 24 Agents)"
         Write-Host "  status                     - Query fleet status and active agents"

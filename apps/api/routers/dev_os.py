@@ -61,6 +61,14 @@ class BrainThoughtRequest(BaseModel):
     thought: str
     thought_type: Optional[str] = "COGNITION"
 
+class SessionSyncRequest(BaseModel):
+    session_id: Optional[str] = "chat_session"
+    epoch: Optional[str] = "EPOCH_11"
+    summary: str
+    achievements: Optional[List[str]] = None
+    learnings: Optional[List[str]] = None
+    author: Optional[str] = "SOVEREIGN_MASTER_AGENT"
+
 # --- MASTER PROJECTS BRAIN STATE & MEMORY STORE ---
 MASTER_BRAIN_STATE: Dict[str, Any] = {
     "status": "ARMED_AND_SYNAPSED",
@@ -2370,16 +2378,11 @@ async def sync_brain_state(payload: BrainSyncRequest, request: Request, db: Asyn
                 MASTER_BRAIN_STATE["active_directives"].append(d)
 
     if payload.thought:
-        new_th = {
-            "id": f"th_{int(time.time()*1000)}",
-            "timestamp": now_iso,
-            "source": payload.client_name or "LOCAL_CLI",
-            "thought": payload.thought,
-            "type": "DIRECTIVE"
-        }
-        MASTER_BRAIN_STATE["recent_thoughts"].append(new_th)
-        if len(MASTER_BRAIN_STATE["recent_thoughts"]) > 50:
-            MASTER_BRAIN_STATE["recent_thoughts"].pop(0)
+        record_brain_cognitive_event(
+            source=payload.client_name or "LOCAL_CLI",
+            thought=payload.thought,
+            event_type="DIRECTIVE"
+        )
 
     await log_dev_os_audit(
         db,
@@ -2403,6 +2406,41 @@ async def record_brain_thought(payload: BrainThoughtRequest):
     """Records a cognitive reflection or operational observation into the brain."""
     record_brain_cognitive_event(source=payload.source, thought=payload.thought, event_type=payload.thought_type or "COGNITION")
     return {"status": "recorded", "recent_count": len(MASTER_BRAIN_STATE["recent_thoughts"])}
+
+@router.post("/brain/session-sync", dependencies=[Depends(verify_dev_os_session)])
+async def record_session_sync(payload: SessionSyncRequest, request: Request, db: AsyncSession = Depends(get_db)):
+    """Registers cross-session continuous learning, achievements, and improvements into Master Brain memory."""
+    ip = request.client.host if request.client else "127.0.0.1"
+    now_iso = datetime.utcnow().isoformat()
+
+    thought_msg = f"[{payload.epoch}] Session Sync: {payload.summary}"
+    record_brain_cognitive_event(
+        source=payload.author or "SOVEREIGN_MASTER_AGENT",
+        thought=thought_msg,
+        event_type="SESSION_SYNC"
+    )
+
+    await log_dev_os_audit(
+        db,
+        action="SESSION_LEARNING_SYNC",
+        details={
+            "session_id": payload.session_id,
+            "epoch": payload.epoch,
+            "summary": payload.summary,
+            "achievements": payload.achievements or [],
+            "learnings": payload.learnings or [],
+            "synced_at": now_iso
+        },
+        ip=ip
+    )
+
+    return {
+        "status": "synchronized",
+        "epoch": payload.epoch,
+        "recorded_thought": thought_msg,
+        "synced_at": now_iso,
+        "brain_version": MASTER_BRAIN_STATE["brain_version"]
+    }
 
 @router.get("/brain/timeline", dependencies=[Depends(verify_dev_os_session)])
 async def get_brain_timeline():

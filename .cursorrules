@@ -28,22 +28,22 @@
 7. **API Health**: Conduct a pre-flight check of Stripe/Google API connectivity before initiating any checkout sequence.
 
 ## IV. THE LOGISTICS & SMTP AGENT (Communication Loop)
-1. **SMTP Delivery**: Configure Nodemailer strictly for Bluehost SMTP (`mail.affordablehome-ac.com`) on Port 465.
-2. **Internal Lead Flow**: Send high-priority HTML alerts to the shop crew for every new high-ticket transaction.
-3. **Branded Receipts**: Generate "Industrial Neon" branded HTML receipts with dynamic PDF order summaries for the end-client.
-4. **Scheduling Bridge**: Automate the post-purchase "Success" portal redirect to the live crew-availability calendar.
-5. **Inventory Sync**: Trigger "In Stock" or "Arriving Soon" logic based on SKU-specific fulfillment data.
-6. **Confirmation Latency**: Ensure all transactional emails are dispatched within 5 seconds of payment verification.
-7. **Calendar Invite**: Attach an `.ics` calendar file to all confirmation emails to ensure customer installation attendance.
+1. **SMTP Delivery**: Office 365 SMTP (`smtp.office365.com:587`) using `office@affordablehome-ac.com`, with BCC dev audit trail to `irasmussenjobs@gmail.com`.
+2. **Internal Lead Flow**: Send high-priority HTML alerts to the shop crew (`brian@affordablehome-ac.com` & `ahacsplitdivision@gmail.com`) for every new inquiry or appointment.
+3. **Branded Receipts**: Generate Aloha-themed HTML confirmations with warehouse pickup map and $0 estimate breakdowns.
+4. **Scheduling Bridge**: Direct leads into the CRM queue (`https://crm.affordablehome-ac.com`) for By-Appointment-First scheduling triage.
+5. **Inventory Sync**: Trigger "In Stock" (Waipahu Warehouse) logic based on real-time database stock levels.
+6. **Confirmation Latency**: Ensure all transactional emails are dispatched asynchronously within 3 seconds of appointment submission.
+7. **Calendar Integration**: Provide clear Waipahu warehouse pickup directions (94-1388 Moape St #3, Waipahu, HI 96797).
 
-## V. THE DEVOPS & VPS COMMANDER (The Showrunner)
-1. **Deployment Stability**: Maintain 100% uptime by managing multi-stage Docker builds and `standalone` output.
-2. **Asset Path Audit**: Verify that all CSS/Static assets are correctly copied to the production image to prevent unstyled loading.
-3. **Reverse Proxy Management**: Maintain the `.htaccess` tunnel between Bluehost Port 80/443 and the Docker Port 3000.
-4. **System Pruning**: Automatically remove dangling Docker images and clean build-cache to preserve VPS disk space.
-5. **SSL Enforcement**: Ensure all checkout routes are strictly served over HTTPS via Bluehost AutoSSL validation.
-6. **CI/CD Verification**: Run a full production build-check locally before pushing any changes to the `main` branch.
-7. **Resource Monitoring**: Track RAM/CPU usage during heavy traffic to ensure the Node.js runtime remains responsive.
+## V. THE DEVOPS & VPS COMMANDER (Hostinger VPS Showrunner)
+1. **Deployment Stability**: Maintain 100% uptime on Hostinger VPS (`31.220.53.132`) managing multi-stage Docker builds and `standalone` Next.js output.
+2. **Container Topology**: Dedicated Docker containers: `prod-web` (:3001), `prod-dev-os` (:3005), `prod-api` (:8001), `prod-db` (:5433), `prod-redis` (:6380).
+3. **Reverse Proxy Management**: Nginx reverse proxy routing `:443` to respective container ports with automated Let's Encrypt SSL certificates.
+4. **Multi-Worker Coherence**: Uvicorn runs 4 ASGI workers synchronized via Redis Pub/Sub and hashes for instant state persistence.
+5. **System Pruning & Auto-Healing**: Automatic log caps (10m x 3), 14-day database prune, and postmaster.pid automated lock clearing.
+6. **CI/CD Verification**: 3-stage deployment verification swarm (`/deployment/verify`) validating perimeter armor, container health, and zero-downtime regression.
+7. **Local Perimeter Armor**: Strictly enforce client-initiated outbound pull/push; zero open inbound ports reaching local workstation.
 
 ## VI. SIDE-DRAWER SPECIALIST TEAM: ADAPTIVE EXPRESS CART
 1. **Motion Architect**: Implement spring-physics transitions (stiffness: 300, damping: 30) matching project motion curves.
