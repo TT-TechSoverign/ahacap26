@@ -2211,7 +2211,7 @@ async def verify_deployment_swarm(request: Request, db: AsyncSession = Depends(g
     perim = await run_agent_perimeter_auditor()
     await sync_save_agent_last_run("agent_perimeter_auditor", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": perim})
     
-    stage1_passed = all(r.get("status") in ["ARMED", "CLEAN", "HEALTHY", "ARMORED", "ARMORED_AIRTIGHT"] for r in [sec, git, db_chk, perim])
+    stage1_passed = all(r.get("status") in ["ARMED", "CLEAN", "HEALTHY", "ARMORED", "ARMORED_AIRTIGHT", "SECURED"] for r in [sec, git, db_chk, perim])
 
     # --- STAGE 2: Build QA, Containers & Schema Engine ---
     build = await run_agent_build_qa()
@@ -2223,7 +2223,7 @@ async def verify_deployment_swarm(request: Request, db: AsyncSession = Depends(g
     schema = await run_agent_schema_metadata_engine()
     await sync_save_agent_last_run("agent_schema_metadata_engine", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": schema})
     
-    stage2_passed = all(r.get("status") in ["VERIFIED", "HEALTHY", "OPTIMIZED"] for r in [build, containers, schema])
+    stage2_passed = all(r.get("status") in ["VERIFIED", "HEALTHY", "OPTIMIZED", "SCHEMA_OPTIMIZED"] for r in [build, containers, schema])
 
     # --- STAGE 3: Zero-Downtime Host & Non-Regression Guard ---
     host = await run_agent_host_sentinel()
