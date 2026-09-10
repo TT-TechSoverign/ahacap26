@@ -176,21 +176,30 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "impact": "Frictionless lead conversion (+28% velocity lift), isolated developer cockpit, and zero-idle agent fleet."
         },
         {
-            "phase_id": "EPOCH_10_SOVEREIGN_BRAIN_CURRENT",
+            "phase_id": "EPOCH_10_SOVEREIGN_BRAIN_SEP2026",
             "title": "Master Projects Brain v2.6.0, Air-Tight Local Perimeter & Complete History Ingestion",
             "timeframe": "September 6-7, 2026",
             "commit_start": "4c3a89f7",
-            "commit_end": "CURRENT",
+            "commit_end": "f90df2aa",
             "milestone": "Engineered the Master Projects Brain cognitive engine (v2.6.0-SOVEREIGN MASTER) with 42 synapses and 24 knowledge nodes. Built dedicated Agent OS Cockpit in Dev OS with interactive cognitive network canvas, real-time directive telemetry, and Synapse Inspector modal. Mathematically enforced the Air-Tight Local Perimeter: 100% client-initiated outbound pull/push, zero inbound server reach into local workstation. Ingested complete chronological history across all 10 epochs from January 2026 to present, preserving every architectural evolution and strategic pivot in cognitive memory.",
             "impact": "Complete historical awareness, unified autonomous intelligence, and airtight operational security."
+        },
+        {
+            "phase_id": "EPOCH_11_CRM_CRO_SYMMETRY_SEP2026",
+            "title": "CRM Overhaul, Zero-Cost Estimates Calibration, Schema Validation & Navigation Symmetry",
+            "timeframe": "September 8-10, 2026",
+            "commit_start": "b968fa3b",
+            "commit_end": "CURRENT",
+            "milestone": "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations, $175 mini-split diagnosis, $175 basic mini-split cleaning, $275 premium cleaning, and $275 window AC cleaning (only estimates are zero-cost). Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to irasmussenjobs@gmail.com. Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
+            "impact": "Seamless lead conversion velocity, synchronized storefront & CRM pricing, and real-time Master Brain visual telemetry across sessions."
         }
     ],
     "knowledge_base": {
         "system_architecture": {
             "vps_host": "Hostinger VPS (31.220.53.132)",
             "os": "Ubuntu Linux 24.04 LTS (x86_64)",
-            "containers": ["prod-web", "prod-api", "prod-dev-os", "prod-db", "prod-redis"],
-            "ports_loopback": "All production services strictly bound to 127.0.0.1 (3001, 3005, 8001, 5433, 6380)",
+            "containers": ["prod-web", "prod-api", "prod-dev-os", "prod-db", "prod-redis", "ahac-crm-frontend", "ahac-crm-api"],
+            "ports_loopback": "All production services strictly bound to 127.0.0.1 (3001, 3005, 8001, 5433, 6380, 8080, 3004)",
             "nginx_reverse_proxy": "SSL termination with Let's Encrypt auto-renewal via certbot",
             "local_perimeter": "Air-tight isolation. Server has ZERO inbound access into local machine.",
             "resource_allocations": "Hostinger VPS with ~158 GB free SSD headroom, 16 GB RAM (13.2+ GB available)",
@@ -206,12 +215,19 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "mold_biofilm_pathology": "74% average relative humidity fosters Cladosporium & Aspergillus biofilm in indoor mini-split blower wheels within 6-12 months"
         },
         "service_pricing_matrix": {
+            "installation_replacement_estimates": "$0 (Free in-person or phone estimate for new or replacement mini-split and window AC installations)",
+            "mini_split_diagnosis": "$175 (Comprehensive on-site diagnostic inspection, electrical & refrigerant check)",
             "mini_split_cleaning_basic": "$175 (~1.0 hr deep chemical coil spray and blower wipe)",
             "mini_split_cleaning_premium": "$275 (~1.5 hrs full chemical flush & pressure wash with drain pan biofilm extraction)",
-            "window_ac_full_teardown": "$275 (Waipahu warehouse drop-off bench immersion tank cleaning & sanitization)",
-            "diagnostic_consultation": "$150-$250 (On-site diagnostic inspection, refrigerant leak check, electrical panel verification)",
+            "window_ac_cleaning": "$275 (Waipahu warehouse drop-off bench immersion tank cleaning, sanitization & testing)",
+            "zero_cost_policy": "The only $0 service is for new or replacement estimates; all diagnostic visits are $175, cleaning starts at $175/$275.",
             "island_flat_delivery": "$50 flat Oahu-wide delivery fee for window and mini-split units",
             "warehouse_pickup": "$0 (Free customer pickup at 94-1388 Moape St, Waipahu)"
+        },
+        "email_routing_architecture": {
+            "outgoing_sender": "office@affordablehome-ac.com (Primary outbound transactional & dispatch sender)",
+            "incoming_inboxes": ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com"],
+            "dev_compliance_bcc": "irasmussenjobs@gmail.com (Automated BCC audit trail for record keeping on dev end)"
         },
         "conversion_playbook": {
             "mandate": "By Appointment First — Zero Upfront Payment Barrier",
@@ -1763,9 +1779,15 @@ async def get_agent_org_tree():
             meta = next((a for a in AGENT_REGISTRY if a["id"] == aid), None)
             if meta:
                 last = AGENT_LAST_RUNS.get(aid)
+                is_active = False
+                if last:
+                    last_status = last.get("result", {}).get("status", "")
+                    time_diff = time.time() - last.get("timestamp_epoch", 0)
+                    if last_status != "ERROR" and time_diff < 86400:
+                        is_active = True
                 child_agents.append({
                     **meta,
-                    "lifecycle": "ACTIVE" if last and (time.time() - last.get("timestamp_epoch", 0)) < 120 else "DORMANT",
+                    "lifecycle": "ACTIVE" if is_active else "DORMANT",
                     "last_audit": last.get("result") if last else None,
                     "last_run_at": last.get("timestamp_iso") if last else "Not yet triggered (Dormant)",
                     "sop": AGENT_SOPS.get(aid)
@@ -1801,9 +1823,15 @@ async def get_agents_status():
     for meta in AGENT_REGISTRY:
         aid = meta["id"]
         last = AGENT_LAST_RUNS.get(aid)
+        is_active = False
+        if last:
+            last_status = last.get("result", {}).get("status", "")
+            time_diff = time.time() - last.get("timestamp_epoch", 0)
+            if last_status != "ERROR" and time_diff < 86400:
+                is_active = True
         agents_output.append({
             **meta,
-            "lifecycle": "ACTIVE" if last and (time.time() - last.get("timestamp_epoch", 0)) < 120 else "DORMANT",
+            "lifecycle": "ACTIVE" if is_active else "DORMANT",
             "last_audit": last.get("result") if last else None,
             "last_run_at": last.get("timestamp_iso") if last else "Not yet triggered (Dormant)",
             "sop": AGENT_SOPS.get(aid)
@@ -2077,7 +2105,13 @@ async def run_all_agents(request: Request, db: AsyncSession = Depends(get_db)):
                 "result": res
             }
         except Exception as e:
-            results[aid] = {"status": "ERROR", "error": str(e)}
+            err_res = {"status": "ERROR", "error": str(e)}
+            results[aid] = err_res
+            AGENT_LAST_RUNS[aid] = {
+                "timestamp_epoch": time.time(),
+                "timestamp_iso": now_iso,
+                "result": err_res
+            }
 
     await log_dev_os_audit(db, action="FLEET_AUDIT_RUN_ALL", details={"agents_audited": len(results)}, ip=ip)
 
@@ -2274,7 +2308,8 @@ async def inject_brain_history(request: Request, db: AsyncSession = Depends(get_
         ("submaster_security_compliance", "EPOCH 8 (Aug 2026) Security Armor & Backups: Next.js auth bypass patched, zero plaintext tokens, pre-push secret scanner activated. Drop-cloth legal mandate codified (no drywall claims). Automated daily PostgreSQL snapshots (14-day retention).", "HISTORY_INGEST"),
         ("submaster_crm_operations", "EPOCH 9 (Sep 1-6, 2026) By-Appointment-First & 17-Agent Swarm: Decoupled Dev OS into prod-dev-os:3005. Eradicated upfront checkout payment barriers for physical AC services (+28% velocity). 6 Sub-Masters and 17 Specialized Agents armed.", "HISTORY_INGEST"),
         ("submaster_security_compliance", "EPOCH 10 (Sep 6-7, 2026) Master Brain & Air-Tight Perimeter: Master Projects Brain v2.6.0 established with 42 synapses and 24 knowledge nodes. Air-Tight Local Perimeter mathematically enforced: 100% client-initiated outbound, zero inbound server access.", "HISTORY_INGEST"),
-        ("SOVEREIGN_MASTER", "FULL SPECTRUM TIMELINE SYNCHRONIZED: Master Projects Brain fully charged with entire chronological lineage from January 11, 2026 (commit 3519252c) to current Sovereign Master state across all 10 Epochs.", "TIMELINE_EPOCH")
+        ("submaster_crm_operations", "EPOCH 11 (Sep 8-10, 2026) CRM Overhaul, Zero-Cost Estimates & UI Symmetry: Aloha EmailComposerModal, direct SMTP dispatch, 3.5% fee calibration, and BCC dev audit trail. Storefront pricing calibrated: $0 estimates, $175 diagnosis/basic, $275 premium/window cleaning. Product schemas validated. Symmetrical navbar layout deployed.", "HISTORY_INGEST"),
+        ("SOVEREIGN_MASTER", "FULL SPECTRUM TIMELINE SYNCHRONIZED: Master Projects Brain fully charged with entire chronological lineage from January 11, 2026 (commit 3519252c) to current Sovereign Master state across all 11 Epochs.", "TIMELINE_EPOCH")
     ]
 
     for source, thought, event_type in historical_injections:

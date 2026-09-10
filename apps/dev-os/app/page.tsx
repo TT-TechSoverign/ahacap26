@@ -155,6 +155,7 @@ export default function DevOsEagleEyePage() {
     const [timelineData, setTimelineData] = useState<any[]>([]);
     const [injectingHistory, setInjectingHistory] = useState<boolean>(false);
     const [timelineOpen, setTimelineOpen] = useState<boolean>(true);
+    const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
     // --- AGENT STANDARD OPERATING PROCEDURES (SOPS) STATE ---
     const [sops, setSops] = useState<Record<string, SopDossier>>(SOVEREIGN_SOPS);
@@ -407,11 +408,25 @@ export default function DevOsEagleEyePage() {
         }
     };
 
+    const handleManualRefresh = async () => {
+        setIsRefreshing(true);
+        appendLog('🔄 Live Visual Sync initiated by Master Operator...');
+        await fetchAllData();
+        appendLog('✅ Live Visuals, Agent Statuses & Master Brain Synapses synchronized.');
+        setTimeout(() => setIsRefreshing(false), 500);
+    };
+
     useEffect(() => {
-        if (isAuthenticated) {
+        if (!isAuthenticated) return;
+        fetchAllData();
+        appendLog('Initialized World-Class Eagle Eye 6-Cluster Constellation.');
+
+        // Live visual polling every 20 seconds to keep thoughts, agent statuses, and audits fresh
+        const intervalId = setInterval(() => {
             fetchAllData();
-            appendLog('Initialized World-Class Eagle Eye 6-Cluster Constellation.');
-        }
+        }, 20000);
+
+        return () => clearInterval(intervalId);
     }, [isAuthenticated, fetchAllData]);
 
     // --- 3. MASTER AUTHENTICATION HANDLERS ---
@@ -749,8 +764,27 @@ export default function DevOsEagleEyePage() {
                     </button>
                 </div>
 
-                {/* Right Actions: Full Fleet Audit & Logout */}
-                <div className="flex items-center gap-3">
+                {/* Right Actions: Live Sync, Refresh Visuals, Full Fleet Audit & Logout */}
+                <div className="flex items-center gap-2 sm:gap-3">
+                    {/* Live Sync Status indicator */}
+                    <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-lg border border-emerald-500/20 bg-emerald-950/40 text-emerald-400 text-xs font-mono">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <span>Live Sync Active</span>
+                    </div>
+
+                    <button
+                        onClick={handleManualRefresh}
+                        disabled={isRefreshing}
+                        className="flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-850 px-3 py-1.5 text-xs font-medium text-slate-200 hover:border-cyan-500/50 hover:bg-slate-800 hover:text-white transition shadow-sm disabled:opacity-50"
+                        title="Refresh all visuals, live agent statuses, and Master Brain telemetries"
+                    >
+                        <RefreshCw className={`size-3.5 text-cyan-400 ${isRefreshing ? 'animate-spin' : ''}`} />
+                        <span>{isRefreshing ? 'Syncing...' : 'Refresh Visuals'}</span>
+                    </button>
+
                     <button
                         onClick={() => setCommandPaletteOpen(true)}
                         className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-3 py-1.5 text-xs text-slate-400 hover:border-slate-700 hover:text-white"
@@ -1005,13 +1039,22 @@ export default function DevOsEagleEyePage() {
                                             impact: "Frictionless lead conversion (+28% velocity lift), isolated developer cockpit, and zero-idle agent fleet."
                                         },
                                         {
-                                            phase_id: "EPOCH_10_SOVEREIGN_BRAIN_CURRENT",
+                                            phase_id: "EPOCH_10_SOVEREIGN_BRAIN_SEP2026",
                                             title: "Master Projects Brain v2.6.0, Air-Tight Local Perimeter & Complete History Ingestion",
                                             timeframe: "September 6-7, 2026",
                                             commit_start: "4c3a89f7",
-                                            commit_end: "CURRENT",
+                                            commit_end: "f90df2aa",
                                             milestone: "Engineered the Master Projects Brain cognitive engine (v2.6.0-SOVEREIGN MASTER) with 42 synapses and 24 knowledge nodes. Built dedicated Agent OS Cockpit in Dev OS with interactive cognitive network canvas, real-time directive telemetry, and Synapse Inspector modal. Mathematically enforced the Air-Tight Local Perimeter: 100% client-initiated outbound pull/push, zero inbound server reach into local workstation. Ingested complete chronological history across all 10 epochs from January 2026 to present, preserving every architectural evolution and strategic pivot in cognitive memory.",
                                             impact: "Complete historical awareness, unified autonomous intelligence, and airtight operational security."
+                                        },
+                                        {
+                                            phase_id: "EPOCH_11_CRM_CRO_SYMMETRY_SEP2026",
+                                            title: "CRM Overhaul, Zero-Cost Estimates Calibration, Schema Validation & Navigation Symmetry",
+                                            timeframe: "September 8-10, 2026",
+                                            commit_start: "b968fa3b",
+                                            commit_end: "CURRENT",
+                                            milestone: "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations, $175 mini-split diagnosis, $175 basic mini-split cleaning, $275 premium cleaning, and $275 window AC cleaning (only estimates are zero-cost). Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to irasmussenjobs@gmail.com. Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
+                                            impact: "Seamless lead conversion velocity, synchronized storefront & CRM pricing, and real-time Master Brain visual telemetry across sessions."
                                         }
                                     ]).map((phase: any, pIdx: number) => (
                                         <div key={pIdx} className="rounded-xl border border-slate-800/90 bg-slate-900/80 p-3.5 transition hover:border-amber-500/40">
