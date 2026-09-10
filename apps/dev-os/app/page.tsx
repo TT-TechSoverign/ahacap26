@@ -55,6 +55,7 @@ import {
     CheckCircle2
 } from 'lucide-react';
 import { SOVEREIGN_SOPS, SopDossier, SopStep } from './sopsData';
+import LiveSwarmVisualizer from './LiveSwarmVisualizer';
 
 // --- TYPES & INTERFACES ---
 
@@ -81,6 +82,8 @@ interface SubMasterMeta {
     agents: string[];
     child_agents?: AgentMeta[];
     sop?: SopDossier;
+    status?: string;
+    domain?: string;
 }
 
 interface AgentMeta {
@@ -94,6 +97,10 @@ interface AgentMeta {
     last_audit?: any;
     last_run_at: string;
     sop?: SopDossier;
+    category?: string;
+    status?: string;
+    capabilities?: string[];
+    description?: string;
 }
 
 interface OrderItem {
@@ -134,7 +141,7 @@ export default function DevOsEagleEyePage() {
     const [startPan, setStartPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
     // --- ACTIVE WORKSPACE & TILING STATE ---
-    const [activeViewMode, setActiveViewMode] = useState<'eagle_eye' | 'free' | 'tiled' | 'agent_os'>('free');
+    const [activeViewMode, setActiveViewMode] = useState<'eagle_eye' | 'free' | 'tiled' | 'agent_os' | 'swarm'>('free');
     const [tiledNodes, setTiledNodes] = useState<[string, string]>(['node_agents', 'node_revenue']);
     const [activeTerminalTab, setActiveTerminalTab] = useState<'output' | 'audit_log'>('output');
     const [terminalOpen, setTerminalOpen] = useState<boolean>(false);
@@ -587,6 +594,10 @@ export default function DevOsEagleEyePage() {
                 setActiveViewMode('agent_os');
                 appendLog('Dedicated Agent OS Command Center engaged (Key A).');
             }
+            if ((e.key === 's' || e.key === 'S') && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
+                setActiveViewMode('swarm');
+                appendLog('Live Sovereign Neural Swarm engaged (Key S).');
+            }
             if (e.key === 'Escape') {
                 setInspectModalOpen(false);
                 setCommandPaletteOpen(false);
@@ -749,6 +760,14 @@ export default function DevOsEagleEyePage() {
                         Agent OS [A]
                     </button>
                     <button
+                        onClick={() => { setActiveViewMode('swarm'); appendLog('Live Sovereign Neural Swarm engaged.'); }}
+                        className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono font-bold transition ${activeViewMode === 'swarm' ? 'bg-gradient-to-r from-cyan-400 to-teal-400 text-slate-950 shadow-md shadow-cyan-500/30' : 'text-slate-300 hover:bg-slate-800'}`}
+                        title="Live Neural Swarm & Deployment Command Visualizer (Key S)"
+                    >
+                        <Zap className="size-3.5 text-amber-400" />
+                        Live Swarm ⚡ [S]
+                    </button>
+                    <button
                         onClick={() => resetFocus()}
                         className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono font-bold transition ${activeViewMode === 'free' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300 hover:bg-slate-800'}`}
                     >
@@ -812,8 +831,19 @@ export default function DevOsEagleEyePage() {
                 </div>
             </header>
 
-            {/* Conditional View: Dedicated Agent OS Section vs Canvas Viewport */}
-            {activeViewMode === 'agent_os' ? (
+            {/* Conditional View: Swarm vs Dedicated Agent OS vs Canvas Viewport */}
+            {activeViewMode === 'swarm' ? (
+                <div className="relative h-full w-full overflow-y-auto bg-slate-950 pt-16 px-6 pb-20 space-y-6">
+                    <LiveSwarmVisualizer
+                        brainData={brainData}
+                        agents={agents}
+                        submasters={submasters}
+                        onRefresh={fetchAllData}
+                        onLog={appendLog}
+                        onInspectAgent={openInspector}
+                    />
+                </div>
+            ) : activeViewMode === 'agent_os' ? (
                 <div className="relative h-full w-full overflow-y-auto bg-slate-950 pt-16 px-6 pb-20 space-y-8">
                     {/* Top Hero: Master Projects Brain & Air-Tight Perimeter */}
                     <div className="rounded-2xl border border-cyan-500/30 bg-slate-900/90 p-6 shadow-2xl backdrop-blur-xl">
@@ -1085,6 +1115,16 @@ export default function DevOsEagleEyePage() {
                             )}
                         </div>
                     </div>
+
+                    {/* Live Neural Swarm & 3-Stage Deployment Verification Visualizer */}
+                    <LiveSwarmVisualizer
+                        brainData={brainData}
+                        agents={agents}
+                        submasters={submasters}
+                        onRefresh={fetchAllData}
+                        onLog={appendLog}
+                        onInspectAgent={openInspector}
+                    />
 
                     {/* Category Sub-Masters Constellation */}
                     <div>
@@ -2373,7 +2413,7 @@ export default function DevOsEagleEyePage() {
             )}
 
             {/* Radar Minimap (Bottom Left) */}
-            {activeViewMode !== 'agent_os' && (
+            {activeViewMode !== 'agent_os' && activeViewMode !== 'swarm' && (
                 <div className="absolute bottom-4 left-4 z-30 flex flex-col gap-1.5 rounded-2xl border border-slate-800 bg-slate-950/90 p-3 shadow-2xl backdrop-blur-md">
                     <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
                         <span>RADAR VIEWPORT</span>

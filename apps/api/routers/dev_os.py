@@ -2193,29 +2193,100 @@ async def run_all_agents(request: Request, db: AsyncSession = Depends(get_db)):
 
 @router.post("/deployment/verify", dependencies=[Depends(verify_dev_os_session)])
 async def verify_deployment_swarm(request: Request, db: AsyncSession = Depends(get_db)):
-    """Executes the complete 3-stage Deployment Swarm Verification protocol."""
+    """Executes the complete 3-stage Deployment Swarm Verification protocol with full telemetry."""
     ip = request.client.host if request.client else "127.0.0.1"
+    start_time = time.time()
+    now_iso = datetime.utcnow().isoformat()
     
-    # 1. Pre-deploy checks
+    # --- STAGE 1: Pre-Deploy Perimeter & Security Armor ---
     sec = await run_agent_security_shield()
-    host = await run_agent_host_sentinel()
+    await sync_save_agent_last_run("agent_security_shield", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": sec})
+    
+    git = await run_agent_commit_sentinel()
+    await sync_save_agent_last_run("agent_commit_sentinel", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": git})
+    
     db_chk = await run_agent_db_guardian(db)
+    await sync_save_agent_last_run("agent_db_guardian", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": db_chk})
     
-    # 2. Containers check
+    perim = await run_agent_perimeter_auditor()
+    await sync_save_agent_last_run("agent_perimeter_auditor", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": perim})
+    
+    stage1_passed = all(r.get("status") in ["ARMED", "CLEAN", "HEALTHY", "ARMORED", "ARMORED_AIRTIGHT"] for r in [sec, git, db_chk, perim])
+
+    # --- STAGE 2: Build QA, Containers & Schema Engine ---
+    build = await run_agent_build_qa()
+    await sync_save_agent_last_run("agent_build_qa", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": build})
+    
     containers = await run_agent_container_sentinel(db)
+    await sync_save_agent_last_run("agent_container_sentinel", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": containers})
     
-    # 3. Post-deploy route checks
-    seo = await run_agent_seo_metadata()
-    rev = await run_agent_revenue_reconciler(db)
+    schema = await run_agent_schema_metadata_engine()
+    await sync_save_agent_last_run("agent_schema_metadata_engine", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": schema})
+    
+    stage2_passed = all(r.get("status") in ["VERIFIED", "HEALTHY", "OPTIMIZED"] for r in [build, containers, schema])
+
+    # --- STAGE 3: Zero-Downtime Host & Non-Regression Guard ---
+    host = await run_agent_host_sentinel()
+    await sync_save_agent_last_run("agent_host_sentinel", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": host})
+    
+    regress = await run_agent_regression_sentinel()
+    await sync_save_agent_last_run("agent_regression_sentinel", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": regress})
+    
     tel = await run_agent_funnel_telemetry()
+    await sync_save_agent_last_run("agent_funnel_telemetry", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": tel})
     
+    crm = await run_agent_crm_dispatch(db)
+    await sync_save_agent_last_run("agent_crm_dispatch", {"timestamp_epoch": time.time(), "timestamp_iso": now_iso, "result": crm})
+    
+    stage3_passed = all(r.get("status") in ["HEALTHY", "NON_REGRESSIVE", "STREAMING", "DISPATCH_READY", "NON_REGRESSION_VERIFIED"] for r in [host, regress, tel, crm])
+
+    overall_passed = stage1_passed and stage2_passed and stage3_passed
+    elapsed_ms = int((time.time() - start_time) * 1000)
+
     verification = {
-        "stage_1_pre_deploy": {"security": sec, "host": host, "database": db_chk},
-        "stage_2_containers": containers,
-        "stage_3_post_deploy": {"seo": seo, "revenue": rev, "telemetry": tel},
-        "overall_status": "VERIFIED_CLEAN",
-        "verified_at": datetime.utcnow().isoformat()
+        "status": "success",
+        "overall_status": "VERIFIED_CLEAN" if overall_passed else "FLAGGED_REVIEW",
+        "all_stages_passed": overall_passed,
+        "elapsed_ms": elapsed_ms,
+        "verified_at": now_iso,
+        "stages": {
+            "stage_1_pre_deploy": {
+                "name": "Stage 1: Perimeter Armor & Git Security",
+                "passed": stage1_passed,
+                "agents": {
+                    "agent_security_shield": sec,
+                    "agent_commit_sentinel": git,
+                    "agent_db_guardian": db_chk,
+                    "agent_perimeter_auditor": perim
+                }
+            },
+            "stage_2_build_containers": {
+                "name": "Stage 2: Build QA, Containers & Schema Engine",
+                "passed": stage2_passed,
+                "agents": {
+                    "agent_build_qa": build,
+                    "agent_container_sentinel": containers,
+                    "agent_schema_metadata_engine": schema
+                }
+            },
+            "stage_3_host_regression": {
+                "name": "Stage 3: Zero-Downtime Host & Non-Regression",
+                "passed": stage3_passed,
+                "agents": {
+                    "agent_host_sentinel": host,
+                    "agent_regression_sentinel": regress,
+                    "agent_funnel_telemetry": tel,
+                    "agent_crm_dispatch": crm
+                }
+            }
+        }
     }
+
+    record_brain_cognitive_event(
+        source="submaster_deployment_quality",
+        thought=f"Deployment Swarm Verification 3-Stage Protocol completed in {elapsed_ms}ms. Status: {verification['overall_status']}.",
+        event_type="DEPLOY_VERIFY"
+    )
 
     await log_dev_os_audit(db, action="DEPLOYMENT_SWARM_VERIFY", details=verification, ip=ip)
     return verification
