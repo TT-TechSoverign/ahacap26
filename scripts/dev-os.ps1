@@ -103,6 +103,29 @@ switch ($Command.ToLower()) {
         }
     }
 
+    "update-password" {
+        $userEmail = if ($Target) { $Target } else { "irasmussenjobs@gmail.com" }
+        $userPass = $args[0]
+        if (-not $userPass) {
+            Write-Host "[*] Enter password for $userEmail..." -ForegroundColor Yellow
+            $sec = Read-Host -Prompt "Password" -AsSecureString
+            $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($sec)
+            $userPass = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
+        }
+        Write-Host "[*] Updating credentials for $userEmail on server PostgreSQL..." -ForegroundColor Yellow
+        $body = @{
+            email = $userEmail
+            password = $userPass
+        } | ConvertTo-Json
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/auth/update-admin-user" -Method POST -Headers $headers -Body $body
+            Write-Host "[OK] Credentials successfully updated in PostgreSQL database!" -ForegroundColor Green
+            $resp | ConvertTo-Json -Depth 3 | Write-Host -ForegroundColor White
+        } catch {
+            Write-Host "[!] Failed to update user credentials: $_" -ForegroundColor Red
+        }
+    }
+
     "tree" {
         Write-Host "[*] Querying Complete Hierarchical Agent Org Tree from Server..." -ForegroundColor Yellow
         try {

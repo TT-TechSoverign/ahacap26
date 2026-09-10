@@ -2503,5 +2503,46 @@ async def inject_brain_history(request: Request, db: AsyncSession = Depends(get_
         "injected_at": now_iso
     }
 
+class AdminUserPasswordUpdateRequest(BaseModel):
+    email: str
+    password: str
+    name: Optional[str] = None
+    role: Optional[str] = None
+
+@router.post("/auth/update-admin-user", dependencies=[Depends(verify_dev_os_session)])
+async def update_admin_user_credentials(payload: AdminUserPasswordUpdateRequest, db: AsyncSession = Depends(get_db)):
+    """Securely hashes password with bcrypt and updates or inserts into admin_users table in PostgreSQL."""
+    from passlib.context import CryptContext
+    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+    hashed_pwd = pwd_context.hash(payload.password)
+    
+    email = payload.email.strip()
+    role = payload.role or ("developer" if "irasmussen" in email else "client_owner")
+    name = payload.name or ("Tai Rasmussen" if "irasmussen" in email else "AHAC Split Division")
+    
+    from sqlalchemy import text
+    await db.execute(text("CREATE EXTENSION IF NOT EXISTS pgcrypto;"))
+    await db.execute(text("""
+        CREATE TABLE IF NOT EXISTS admin_users (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            email VARCHAR UNIQUE NOT NULL,
+            password_hash VARCHAR NOT NULL,
+            role VARCHAR DEFAULT 'superadmin',
+            name VARCHAR DEFAULT '',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    """))
+    await db.execute(text("ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS role VARCHAR DEFAULT 'superadmin';"))
+    await db.execute(text("ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS name VARCHAR DEFAULT '';"))
+    
+    await db.execute(text("""
+        INSERT INTO admin_users (id, email, password_hash, role, name)
+        VALUES (gen_random_uuid(), :email, :pwd, :role, :name)
+        ON CONFLICT (email) DO UPDATE SET password_hash = :pwd, role = :role, name = :name;
+    """), {"email": email, "pwd": hashed_pwd, "role": role, "name": name})
+    await db.commit()
+    
+    return {"status": "success", "email": email, "role": role, "name": name, "message": "User credentials successfully updated in database."}
+
 
 
