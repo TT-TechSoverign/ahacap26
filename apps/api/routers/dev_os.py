@@ -418,6 +418,52 @@ def record_brain_cognitive_event(source: str, thought: str, event_type: str = "C
     if len(MASTER_BRAIN_STATE["recent_thoughts"]) > 50:
         MASTER_BRAIN_STATE["recent_thoughts"].pop(0)
 
+    try:
+        from cache import redis_client
+        if redis_client:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                asyncio.create_task(redis_client.rpush("dev_os:brain:thoughts", json.dumps(th)))
+                asyncio.create_task(redis_client.ltrim("dev_os:brain:thoughts", -50, -1))
+    except Exception:
+        pass
+
+async def get_brain_thoughts_sync() -> List[Dict[str, Any]]:
+    try:
+        from cache import redis_client
+        if redis_client:
+            items = await redis_client.lrange("dev_os:brain:thoughts", 0, -1)
+            if items:
+                return [json.loads(x) for x in items]
+    except Exception:
+        pass
+    return MASTER_BRAIN_STATE["recent_thoughts"]
+
+async def sync_save_agent_last_run(aid: str, data: Dict[str, Any]):
+    AGENT_LAST_RUNS[aid] = data
+    try:
+        from cache import redis_client
+        if redis_client:
+            await redis_client.hset("dev_os:agent_last_runs", aid, json.dumps(data))
+    except Exception:
+        pass
+
+async def sync_get_agent_last_runs() -> Dict[str, Dict[str, Any]]:
+    runs = dict(AGENT_LAST_RUNS)
+    try:
+        from cache import redis_client
+        if redis_client:
+            raw = await redis_client.hgetall("dev_os:agent_last_runs")
+            if raw:
+                for k, v in raw.items():
+                    try:
+                        runs[k] = json.loads(v)
+                    except Exception:
+                        pass
+    except Exception:
+        pass
+    return runs
+
 # --- AUTHENTICATION ---
 
 @router.post("/auth/login")
@@ -1773,12 +1819,13 @@ async def get_agent_org_tree():
     Includes full SOP protocols and operational dossiers.
     """
     submasters_output = []
+    last_runs = await sync_get_agent_last_runs()
     for sm in SUBMASTER_REGISTRY:
         child_agents = []
         for aid in sm["agents"]:
             meta = next((a for a in AGENT_REGISTRY if a["id"] == aid), None)
             if meta:
-                last = AGENT_LAST_RUNS.get(aid)
+                last = last_runs.get(aid)
                 is_active = False
                 if last:
                     last_status = last.get("result", {}).get("status", "")
@@ -1820,9 +1867,10 @@ async def get_agent_org_tree():
 async def get_agents_status():
     """Returns the fleet status, metadata, last audit timestamps, and SOP dossiers for all agents."""
     agents_output = []
+    last_runs = await sync_get_agent_last_runs()
     for meta in AGENT_REGISTRY:
         aid = meta["id"]
-        last = AGENT_LAST_RUNS.get(aid)
+        last = last_runs.get(aid)
         is_active = False
         if last:
             last_status = last.get("result", {}).get("status", "")
@@ -2012,13 +2060,19 @@ async def run_submaster_suite(submaster_id: str, request: Request, db: AsyncSess
                 else:
                     res = await runner()
                 results[aid] = res
-                AGENT_LAST_RUNS[aid] = {
+                await sync_save_agent_last_run(aid, {
                     "timestamp_epoch": time.time(),
                     "timestamp_iso": now_iso,
                     "result": res
-                }
+                })
             except Exception as e:
-                results[aid] = {"status": "ERROR", "error": str(e)}
+                err_res = {"status": "ERROR", "error": str(e)}
+                results[aid] = err_res
+                await sync_save_agent_last_run(aid, {
+                    "timestamp_epoch": time.time(),
+                    "timestamp_iso": now_iso,
+                    "result": err_res
+                })
 
     await log_dev_os_audit(
         db, 
@@ -2061,11 +2115,11 @@ async def run_single_agent(agent_id: str, request: Request, db: AsyncSession = D
         result = {"status": "ERROR", "error": str(e)}
 
     now_iso = datetime.utcnow().isoformat()
-    AGENT_LAST_RUNS[agent_id] = {
+    await sync_save_agent_last_run(agent_id, {
         "timestamp_epoch": time.time(),
         "timestamp_iso": now_iso,
         "result": result
-    }
+    })
 
     # Log action to audit trail
     await log_dev_os_audit(db, action=f"AGENT_RUN:{agent_id}", details=result, ip=ip)
@@ -2099,19 +2153,19 @@ async def run_all_agents(request: Request, db: AsyncSession = Depends(get_db)):
             else:
                 res = await runner()
             results[aid] = res
-            AGENT_LAST_RUNS[aid] = {
+            await sync_save_agent_last_run(aid, {
                 "timestamp_epoch": time.time(),
                 "timestamp_iso": now_iso,
                 "result": res
-            }
+            })
         except Exception as e:
             err_res = {"status": "ERROR", "error": str(e)}
             results[aid] = err_res
-            AGENT_LAST_RUNS[aid] = {
+            await sync_save_agent_last_run(aid, {
                 "timestamp_epoch": time.time(),
                 "timestamp_iso": now_iso,
                 "result": err_res
-            }
+            })
 
     await log_dev_os_audit(db, action="FLEET_AUDIT_RUN_ALL", details={"agents_audited": len(results)}, ip=ip)
 
@@ -2119,7 +2173,8 @@ async def run_all_agents(request: Request, db: AsyncSession = Depends(get_db)):
         "HEALTHY", "RECONCILED", "STREAMING", "OPTIMIZED", "ARMORED", "SYNCED", 
         "ACTIVE_OPTIMIZING", "GROUNDED", "SECURED", "COMPLIANT", "MONITORED", 
         "DISPATCH_READY", "TRACKING", "VERIFIED", "ARMORED_AIRTIGHT", 
-        "REBATE_GROUNDED", "TRIAGE_ACTIVE", "NON_REGRESSION_VERIFIED"
+        "REBATE_GROUNDED", "TRIAGE_ACTIVE", "NON_REGRESSION_VERIFIED",
+        "NON_REGRESSIVE", "CLEAN"
     ]
     all_healthy = all(r.get("status") in valid_statuses for r in results.values())
 
@@ -2202,6 +2257,7 @@ async def get_audit_logs(db: AsyncSession = Depends(get_db), limit: int = 50):
 @router.get("/brain/status", dependencies=[Depends(verify_dev_os_session)])
 async def get_brain_status():
     """Returns real-time Master Projects Brain health, active synapses, and cognitive thought stream."""
+    thoughts = await get_brain_thoughts_sync()
     return {
         "status": "success",
         "brain": {
@@ -2212,7 +2268,7 @@ async def get_brain_status():
             "total_synapses": len(MASTER_BRAIN_STATE["synapses"]),
             "synapses": MASTER_BRAIN_STATE["synapses"],
             "active_directives": MASTER_BRAIN_STATE["active_directives"],
-            "recent_thoughts": MASTER_BRAIN_STATE["recent_thoughts"][-15:],
+            "recent_thoughts": thoughts[-15:],
             "knowledge_nodes_count": len(MASTER_BRAIN_STATE["knowledge_base"]),
             "timestamp": datetime.utcnow().isoformat()
         }
