@@ -63,9 +63,6 @@ function ShopPageContent() {
     const [searchQuery, setSearchQuery] = useState('');
     const { content } = useContent();
 
-    const [dualInverterVoltage, setDualInverterVoltage] = useState<'ALL' | '115V' | '230V'>('ALL');
-    const [dualInverterCapacity, setDualInverterCapacity] = useState<'ALL' | 'BEDROOM' | 'MASTER' | 'LIVING'>('ALL');
-
     // Multi-tier filter states
     const [selectedCategory, setSelectedCategory] = useState<'ALL' | 'dual_inverter' | 'base' | 'casement' | 'ge' | 'universal_fit'>('ALL');
     const [selectedCapacity, setSelectedCapacity] = useState<'ALL' | 'BEDROOM' | 'MASTER' | 'LIVING'>('ALL');
@@ -191,16 +188,6 @@ function ShopPageContent() {
         { id: 'universal_fit', label: 'Universal Fit (Sleeve)', count: products.filter(p => p.subcategory === 'universal_fit').length },
     ];
 
-    const filteredDualInverters = useMemo(() => products.filter(p => {
-        if (p.subcategory !== 'dual_inverter') return false;
-        if (dualInverterVoltage === '115V' && p.voltage && !p.voltage.includes('115V')) return false;
-        if (dualInverterVoltage === '230V' && p.voltage && !p.voltage.includes('230V') && !p.voltage.includes('208')) return false;
-        if (dualInverterCapacity === 'BEDROOM' && p.btu && p.btu > 8500) return false;
-        if (dualInverterCapacity === 'MASTER' && p.btu && (p.btu < 9500 || p.btu > 14000)) return false;
-        if (dualInverterCapacity === 'LIVING' && p.btu && p.btu < 15000) return false;
-        return true;
-    }), [products, dualInverterVoltage, dualInverterCapacity]);
-
     const sectionOrder = content?.shop?.sections || [
         "dual_inverter", "universal_fit", "base", "ge", "casement", "logistics", "sizing-guide"
     ];
@@ -216,106 +203,41 @@ function ShopPageContent() {
                     hideDescription={true}
                 />
 
-                {/* Sizing & Voltage Interactive Filter Bar */}
-                <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-4 md:p-6 backdrop-blur-md space-y-4">
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                        
-                        {/* Capacity Filters */}
-                        <div className="space-y-1.5">
-                            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Room Sizer</span>
-                            <div className="flex flex-wrap gap-1.5">
-                                {[
-                                    { id: 'ALL', label: 'All Capacities' },
-                                    { id: 'BEDROOM', label: 'Bedrooms (6k–8k)' },
-                                    { id: 'MASTER', label: 'Master/Studio (10k–12k)' },
-                                    { id: 'LIVING', label: 'Great Rooms (18k–24k)' },
-                                ].map(f => (
-                                    <button
-                                        key={f.id}
-                                        onClick={() => setDualInverterCapacity(f.id as any)}
-                                        className={cn(
-                                            "px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all",
-                                            dualInverterCapacity === f.id
-                                                ? "bg-primary text-white font-bold shadow-[0_0_15px_rgba(0,174,239,0.3)]"
-                                                : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
-                                        )}
-                                    >
-                                        {f.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Voltage Filter & Plug Guide Link */}
-                        <div className="space-y-1.5">
-                            <div className="flex items-center justify-between">
-                                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Wall Plug Voltage</span>
-                                <Link 
-                                    href="/shop/window-ac-plug-guide" 
-                                    className="text-[10px] text-primary hover:underline font-mono uppercase flex items-center gap-1"
-                                >
-                                    <Plug className="size-3" />
-                                    115V vs 230V Guide &rarr;
-                                </Link>
-                            </div>
-                            <div className="flex gap-1.5">
-                                {[
-                                    { id: 'ALL', label: 'All Plugs' },
-                                    { id: '115V', label: '115V Standard (6k-12k)' },
-                                    { id: '230V', label: '230V Heavy Duty (18k-24k)' },
-                                ].map(v => (
-                                    <button
-                                        key={v.id}
-                                        onClick={() => setDualInverterVoltage(v.id as any)}
-                                        className={cn(
-                                            "px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all",
-                                            dualInverterVoltage === v.id
-                                                ? "bg-emerald-500 text-slate-950 font-bold shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-                                                : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
-                                        )}
-                                    >
-                                        {v.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {/* Conversion Quick Bridges */}
-                    <div className="pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
-                        <div className="flex flex-wrap items-center gap-3">
-                            <Link 
-                                href="/window-ac-installation" 
-                                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-white/[0.03] px-3 py-1.5 rounded-lg border border-white/10 hover:border-primary/40 transition-colors"
-                            >
-                                <Wrench className="size-3 text-primary" />
-                                Need Installation? Jalousie & Bracket Service
-                            </Link>
-                            <Link 
-                                href="/clean-vs-replace-window-ac" 
-                                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-white/[0.03] px-3 py-1.5 rounded-lg border border-white/10 hover:border-cyan-400/40 transition-colors"
-                            >
-                                <RotateCcw className="size-3 text-cyan-400" />
-                                Clean vs Replace Calculator
-                            </Link>
-                        </div>
-                        <a 
-                            href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-mono text-[11px] font-bold"
+                {/* Conversion Quick Bridges */}
+                <div className="max-w-4xl mx-auto bg-slate-900/40 border border-white/5 rounded-2xl p-3.5 backdrop-blur-md flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <div className="flex flex-wrap items-center gap-2.5">
+                        <Link 
+                            href="/window-ac-installation" 
+                            className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-white/[0.04] px-3 py-1.5 rounded-lg border border-white/10 hover:border-primary/40 transition-colors"
                         >
-                            <FileText className="size-3.5" />
-                            $45 Hawaii Energy Rebate Form PDF &rarr;
-                        </a>
+                            <Wrench className="size-3 text-primary" />
+                            <span>Need Installation? Jalousie & Bracket Service</span>
+                        </Link>
+                        <Link 
+                            href="/clean-vs-replace-window-ac" 
+                            className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-white/[0.04] px-3 py-1.5 rounded-lg border border-white/10 hover:border-cyan-400/40 transition-colors"
+                        >
+                            <RotateCcw className="size-3 text-cyan-400" />
+                            <span>Clean vs Replace Calculator</span>
+                        </Link>
                     </div>
+                    <a 
+                        href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-mono text-[11px] font-bold hover:underline"
+                    >
+                        <FileText className="size-3.5" />
+                        <span>$45 Hawaii Energy Rebate Form PDF &rarr;</span>
+                    </a>
                 </div>
 
                 <ProductGrid
-                    products={filteredDualInverters}
+                    products={products.filter(p => p.subcategory === 'dual_inverter')}
                     onQuickAdd={addToCart}
                     rebate="$45 Hawaii Energy Rebate"
+                    compareList={compareList}
+                    onToggleCompare={handleToggleCompare}
                 />
             </div>
         ),
@@ -330,6 +252,8 @@ function ShopPageContent() {
                 <ProductGrid
                     products={products.filter(p => p.subcategory === 'universal_fit')}
                     onQuickAdd={addToCart}
+                    compareList={compareList}
+                    onToggleCompare={handleToggleCompare}
                 />
             </div>
         ),
@@ -345,6 +269,8 @@ function ShopPageContent() {
                 <ProductGrid
                     products={products.filter(p => p.subcategory === 'base')}
                     onQuickAdd={addToCart}
+                    compareList={compareList}
+                    onToggleCompare={handleToggleCompare}
                 />
             </div>
         ),
@@ -360,6 +286,8 @@ function ShopPageContent() {
                 <ProductGrid
                     products={products.filter(p => p.subcategory === 'ge')}
                     onQuickAdd={addToCart}
+                    compareList={compareList}
+                    onToggleCompare={handleToggleCompare}
                 />
             </div>
         ),
@@ -374,6 +302,8 @@ function ShopPageContent() {
                 <ProductGrid
                     products={products.filter(p => p.subcategory === 'casement')}
                     onQuickAdd={addToCart}
+                    compareList={compareList}
+                    onToggleCompare={handleToggleCompare}
                 />
             </div>
         ),
