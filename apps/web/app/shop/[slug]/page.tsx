@@ -305,6 +305,26 @@ export default function ProductDetailPage() {
                 if (!res.ok) throw new Error('Product not found');
                 const data = await res.json();
                 setProduct(data);
+
+                // GTM E-Commerce view_item push
+                if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    const activePrice = (data.promo_price && data.promo_price > 0) ? data.promo_price : data.price;
+                    (window as any).dataLayer.push({
+                        event: 'view_item',
+                        ecommerce: {
+                            currency: 'USD',
+                            value: activePrice,
+                            items: [
+                                {
+                                    item_id: String(data.id),
+                                    item_name: data.name,
+                                    price: activePrice,
+                                    item_brand: data.category?.replace('_', ' ') || 'Window AC',
+                                }
+                            ]
+                        }
+                    });
+                }
             } catch (err) {
                 console.error("Product Fetch Error:", err);
                 setError('Unable to load product details.');

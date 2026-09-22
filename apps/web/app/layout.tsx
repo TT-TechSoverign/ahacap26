@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import NavbarV2 from '../components/NavbarV2';
 import MobileStickyHeader from '../components/MobileStickyHeader';
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
+import { GTMRouteTracker } from '../components/GTMRouteTracker';
 import './globals.css';
 import dynamic from 'next/dynamic';
 
@@ -71,12 +72,20 @@ export default function RootLayout({
                     type="font/woff2"
                     crossOrigin="anonymous"
                 />
-                {/* Global GA/GTM queueing stub to capture events before scripts load */}
+                {/* Global GA/GTM queueing stub & Google Consent Mode V2 */}
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `
                             window.dataLayer = window.dataLayer || [];
-                            window.gtag = window.gtag || function() { window.dataLayer.push(arguments); };
+                            function gtag(){window.dataLayer.push(arguments);}
+                            window.gtag = gtag;
+                            gtag('consent', 'default', {
+                                'ad_storage': 'granted',
+                                'analytics_storage': 'granted',
+                                'ad_user_data': 'granted',
+                                'ad_personalization': 'granted'
+                            });
+                            gtag('js', new Date());
                         `
                     }}
                 />
@@ -85,6 +94,7 @@ export default function RootLayout({
                 <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KTZ58FJX'} />
                 <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-MYJZTZFXQV'} />
                 <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GT_ID || 'GT-PLTZM3FV'} />
+                <GTMRouteTracker />
                 <noscript>
                     <iframe 
                         src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KTZ58FJX'}`}

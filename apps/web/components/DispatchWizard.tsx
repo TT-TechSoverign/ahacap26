@@ -101,6 +101,17 @@ export function DispatchWizard() {
             });
 
             if (res.ok) {
+                // GTM Standard Custom Event Object for Lead Conversion
+                if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                        event: 'generate_lead',
+                        lead_type: selectedServices.join(', ') || 'Service Inquiry',
+                        form_name: 'Dispatch Wizard Form',
+                        city: formData.city || 'Oahu',
+                        currency: 'USD',
+                        value: 0
+                    });
+                }
                 sendGAEvent('event', 'generate_lead', { event_category: 'Lead', event_label: 'Dispatch Wizard Form' });
                 setIsSuccess(true);
             } else {

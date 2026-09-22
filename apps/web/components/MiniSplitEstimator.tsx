@@ -162,6 +162,18 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
             });
 
             if (res.ok) {
+                // GTM Standard Custom Event Object for Lead Conversion
+                if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                    (window as any).dataLayer.push({
+                        event: 'generate_lead',
+                        lead_type: 'Mini Split Installation',
+                        zones: parseInt(zones) || 1,
+                        form_name: 'Mini Split Estimator',
+                        city: city.trim() || 'Oahu',
+                        currency: 'USD',
+                        value: (parseInt(zones) || 1) * 1500
+                    });
+                }
                 sendGAEvent('event', 'generate_lead', {
                     event_category: 'Mini Split Funnel',
                     event_label: `Step 4 Completed - ${zones} Zones - ${city}`,

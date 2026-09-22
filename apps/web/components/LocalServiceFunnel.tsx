@@ -11,6 +11,14 @@ interface LocalServiceFunnelProps {
 
 export default function LocalServiceFunnel({ city }: LocalServiceFunnelProps) {
     const fireAnalytics = (category: string) => {
+        if (typeof window !== 'undefined' && (window as any).dataLayer) {
+            (window as any).dataLayer.push({
+                event: 'select_promotion',
+                service_category: category,
+                city: city,
+                form_name: 'Local Service Funnel'
+            });
+        }
         sendGAEvent('event', 'generate_lead', {
             event_category: category,
             event_label: `${city} Page`

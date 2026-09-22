@@ -30,6 +30,24 @@ export default function CartDrawer() {
             document.body.style.overflow = 'hidden';
             document.body.style.touchAction = 'none';
 
+            // GTM E-Commerce view_cart push
+            if (items.length > 0 && typeof window !== 'undefined' && (window as any).dataLayer) {
+                (window as any).dataLayer.push({
+                    event: 'view_cart',
+                    ecommerce: {
+                        currency: 'USD',
+                        value: cartTotal,
+                        items: items.map((item, index) => ({
+                            item_id: String(item.id),
+                            item_name: item.name,
+                            price: item.price,
+                            quantity: item.quantity,
+                            index: index
+                        }))
+                    }
+                });
+            }
+
             const handleKeyDown = (e: KeyboardEvent) => {
                 if (e.key === 'Escape') closeCart();
             };
