@@ -28,6 +28,13 @@ interface WarehouseProduct extends Product {
     hecoMonthly: string;
     badge?: string;
     rebateAmount: number;
+    coverageAham?: string;
+    coverageOahu?: string;
+    minWindowHeight?: string;
+    minWindowWidth?: string;
+    maxWindowWidth?: string;
+    chassisType?: string;
+    netWeight?: string;
 }
 
 const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
@@ -43,7 +50,14 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         subcategory: "dual_inverter",
         btu: 6000,
         voltage: "115V / 15 Amp",
-        coverage: "100–200 sq. ft.",
+        coverage: "Up to 250 sq. ft. (AHAM) • 100–180 sq. ft. (Island)",
+        coverageAham: "Up to 250 sq. ft.",
+        coverageOahu: "100–180 sq. ft.",
+        minWindowHeight: '13.0"',
+        minWindowWidth: '22"',
+        maxWindowWidth: '36"',
+        chassisType: "Top-Mount Fixed",
+        netWeight: "60 lbs",
         noise_level: "44 / 56 dB",
         dehumidification: "2.3 Pts/Hr",
         idealFor: "Small Bedroom / Nursery / Home Office",
@@ -65,7 +79,14 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         subcategory: "dual_inverter",
         btu: 8000,
         voltage: "115V / 15 Amp",
-        coverage: "100–350 sq. ft.",
+        coverage: "Up to 350 sq. ft. (AHAM) • 150–250 sq. ft. (Island)",
+        coverageAham: "Up to 350 sq. ft.",
+        coverageOahu: "150–250 sq. ft.",
+        minWindowHeight: '13.0"',
+        minWindowWidth: '22"',
+        maxWindowWidth: '36"',
+        chassisType: "Top-Mount Fixed",
+        netWeight: "63 lbs",
         noise_level: "44 / 58 dB",
         dehumidification: "2.8 Pts/Hr",
         idealFor: "Master Bedroom / Standard Suite",
@@ -87,7 +108,14 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         subcategory: "dual_inverter",
         btu: 10000,
         voltage: "115V / 15 Amp",
-        coverage: "200–250 sq. ft.",
+        coverage: "Up to 450 sq. ft. (AHAM) • 200–320 sq. ft. (Island)",
+        coverageAham: "Up to 450 sq. ft.",
+        coverageOahu: "200–320 sq. ft.",
+        minWindowHeight: '13.0"',
+        minWindowWidth: '22"',
+        maxWindowWidth: '36"',
+        chassisType: "Top-Mount Fixed",
+        netWeight: "65 lbs",
         noise_level: "44 / 58 dB",
         dehumidification: "3.2 Pts/Hr",
         idealFor: "Studio Apartment / Large Master Suite",
@@ -109,7 +137,14 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         subcategory: "dual_inverter",
         btu: 12000,
         voltage: "115V / 15 Amp",
-        coverage: "200–250 sq. ft.",
+        coverage: "Up to 550 sq. ft. (AHAM) • 250–380 sq. ft. (Island)",
+        coverageAham: "Up to 550 sq. ft.",
+        coverageOahu: "250–380 sq. ft.",
+        minWindowHeight: '16.0"',
+        minWindowWidth: '27"',
+        maxWindowWidth: '39"',
+        chassisType: "Slide In-Out",
+        netWeight: "85 lbs",
         noise_level: "44 / 59 dB",
         dehumidification: "3.8 Pts/Hr",
         idealFor: "Living Room / Open Lanai Enclosure",
@@ -131,7 +166,14 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         subcategory: "dual_inverter",
         btu: 14000,
         voltage: "115V / 15 Amp",
-        coverage: "250–350 sq. ft.",
+        coverage: "Up to 700 sq. ft. (AHAM) • 350–500 sq. ft. (Island)",
+        coverageAham: "Up to 700 sq. ft.",
+        coverageOahu: "350–500 sq. ft.",
+        minWindowHeight: '16.0"',
+        minWindowWidth: '27"',
+        maxWindowWidth: '39"',
+        chassisType: "Slide In-Out",
+        netWeight: "89 lbs",
         noise_level: "52 / 62 dB",
         dehumidification: "4.4 Pts/Hr",
         idealFor: "Large Living Area / Open Kitchen",
@@ -153,7 +195,14 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         subcategory: "dual_inverter",
         btu: 18000,
         voltage: "208/230V / 20 Amp",
-        coverage: "400+ sq. ft.",
+        coverage: "Up to 1,000 sq. ft. (AHAM) • 500–750 sq. ft. (Island)",
+        coverageAham: "Up to 1,000 sq. ft.",
+        coverageOahu: "500–750 sq. ft.",
+        minWindowHeight: '19.0"',
+        minWindowWidth: '29"',
+        maxWindowWidth: '41"',
+        chassisType: "Slide In-Out",
+        netWeight: "99 lbs",
         noise_level: "52 / 63 dB",
         dehumidification: "5.5 Pts/Hr",
         idealFor: "Open Concept / Vaulted Ceilings",
@@ -175,7 +224,14 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         subcategory: "dual_inverter",
         btu: 23500,
         voltage: "208/230V / 20 Amp",
-        coverage: "550–1,500 sq. ft.",
+        coverage: "Up to 1,450 sq. ft. (AHAM) • 650–1,050 sq. ft. (Island)",
+        coverageAham: "Up to 1,450 sq. ft.",
+        coverageOahu: "650–1,050 sq. ft.",
+        minWindowHeight: '19.0"',
+        minWindowWidth: '29"',
+        maxWindowWidth: '41"',
+        chassisType: "Slide In-Out",
+        netWeight: "115 lbs",
         noise_level: "53 / 64 dB",
         dehumidification: "7.1 Pts/Hr",
         idealFor: "Commercial Space / Multi-Room Great Room",
@@ -228,27 +284,29 @@ export function WarehouseInventoryGrid() {
 
     return (
         <div className="space-y-8">
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap items-center justify-center gap-2 max-w-2xl mx-auto">
-                {[
-                    { id: 'all', label: 'All In-Stock Units' },
-                    { id: 'bedroom', label: 'Bedrooms & Offices (6k–10k)' },
-                    { id: 'living', label: 'Living Rooms (12k–14k)' },
-                    { id: '115v', label: 'Standard 115V Outlets' },
-                    { id: '230v', label: 'Heavy Duty 230V' }
-                ].map(tab => (
-                    <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id as any)}
-                        className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                            activeTab === tab.id
-                                ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                                : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
-                        }`}
-                    >
-                        {tab.label}
-                    </button>
-                ))}
+            {/* Filter Tabs - Mobile Horizontal Scroll Track & Desktop Centered */}
+            <div className="w-full max-w-3xl mx-auto">
+                <div className="flex items-center gap-2 overflow-x-auto pb-2 px-2 scrollbar-none snap-x sm:justify-center">
+                    {[
+                        { id: 'all', label: 'All In-Stock Units' },
+                        { id: 'bedroom', label: 'Bedrooms & Offices (6k–10k)' },
+                        { id: 'living', label: 'Living Rooms (12k–14k)' },
+                        { id: '115v', label: 'Standard 115V Outlets' },
+                        { id: '230v', label: 'Heavy Duty 230V' }
+                    ].map(tab => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id as any)}
+                            className={`min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all snap-start shrink-0 flex items-center justify-center ${
+                                activeTab === tab.id
+                                    ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+                                    : 'bg-slate-900 text-slate-300 hover:text-white border border-slate-800'
+                            }`}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
+                </div>
             </div>
 
             {/* Inventory Grid */}
@@ -297,23 +355,42 @@ export function WarehouseInventoryGrid() {
                                 </p>
                             </div>
 
-                            {/* Specs Matrix */}
-                            <div className="px-5 py-3 mx-4 rounded-xl bg-slate-950/70 border border-slate-800/80 grid grid-cols-2 gap-2.5 text-xs text-slate-300">
-                                <div className="flex items-center gap-2">
-                                    <Maximize2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                                    <span>{product.coverage}</span>
+                            {/* Dual Sizing & Spatial Fit Specs Matrix */}
+                            <div className="px-5 py-3 mx-4 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-2.5 text-xs text-slate-300">
+                                {/* Dual Coverage Header */}
+                                <div className="flex items-start justify-between gap-2 pb-2 border-b border-slate-800/70">
+                                    <div className="flex items-center gap-1.5 text-slate-400">
+                                        <Maximize2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                                        <span className="text-[11px] font-semibold">Dual Sizing:</span>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="text-[11px] font-bold text-emerald-400">
+                                            {product.coverageAham || product.coverage} <span className="text-[9px] font-normal text-slate-400">(AHAM)</span>
+                                        </div>
+                                        <div className="text-[10px] text-amber-300 font-semibold">
+                                            {product.coverageOahu || 'Calibrated'} <span className="text-[9px] font-normal text-slate-400">(Island Standard)</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <Volume2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                                    <span>{product.noise_level}</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <Zap className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                                    <span>{product.voltage}</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-[10px] uppercase font-bold text-slate-400">HECO Est:</span>
-                                    <span className="text-emerald-300 font-semibold">{product.hecoMonthly}</span>
+
+                                {/* Caliper Opening & Electrical Grid */}
+                                <div className="grid grid-cols-2 gap-2 text-xs text-slate-300">
+                                    <div className="flex items-center gap-1.5">
+                                        <SlidersHorizontal className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                                        <span>Min Fit: <strong className="text-white">{product.minWindowHeight || '16"'} H</strong></span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                        <Zap className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                                        <span>{product.voltage?.split('/')[0]}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                        <Volume2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                                        <span>{product.noise_level}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                        <span className="text-[10px] uppercase font-bold text-slate-400">HECO:</span>
+                                        <span className="text-emerald-300 font-semibold">{product.hecoMonthly}</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -364,7 +441,7 @@ export function WarehouseInventoryGrid() {
                                         className="w-full py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2"
                                     >
                                         {addedId === product.id ? (
-                                            <>
+                                             <>
                                                 <Check className="w-4 h-4 text-slate-950 stroke-[3]" />
                                                 <span>Added to Order!</span>
                                             </>
@@ -380,7 +457,7 @@ export function WarehouseInventoryGrid() {
                                         href={`/shop/${product.slug}`}
                                         className="w-full py-2 text-center text-xs font-semibold text-slate-400 hover:text-emerald-400 transition-colors flex items-center justify-center gap-1"
                                     >
-                                        <span>Full Specs & PDF Dimensions</span>
+                                        <span>📐 3D Fit, Sizing & Factory Specs</span>
                                         <ChevronRight className="w-3.5 h-3.5" />
                                     </Link>
                                 </div>

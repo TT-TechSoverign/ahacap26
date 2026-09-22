@@ -568,5 +568,42 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         ],
         "outputs": ["Regression status (NON_REGRESSION_VERIFIED)", "By-Appointment-First status (ENFORCED)", "Drop-cloth legal protection (ACTIVE)"],
         "contingency_protocol": "Immediately flag any PR or commit that introduces upfront credit card requirements for service scheduling."
+    },
+    "agent_catalog_auditor": {
+        "id": "agent_catalog_auditor",
+        "code": "SOP-COM-04",
+        "title": "Catalog & Specification Integrity Sentinel",
+        "domain": "Commerce",
+        "supervisor": "submaster_commerce_telemetry",
+        "mandate": "Audit all 16 warehouse catalog products against factory spec sheets, guaranteeing zero specification drift and mathematical alignment between AHAM and Island Microclimate Dual Sizing.",
+        "token_efficiency_policy": "Zero external API calls. Runs in-memory audit against products_seed.json and PostgreSQL catalog with sub-5ms execution time.",
+        "oahu_grounding": "Protects Oahu homeowners from purchasing undersized AC units for single-wall redwood homes or mismatched window opening dimensions.",
+        "inputs": ["products_seed.json", "PostgreSQL products table", "Factory PDF specification sheets"],
+        "execution_steps": [
+            {"step": 1, "title": "Dual-Sizing Verification", "description": "Verify every model has both certified AHAM square footage and Oahu Island single-wall calibrated square footage.", "verification": "Dual-coverage present on all 16 models."},
+            {"step": 2, "title": "Window Opening Caliper Check", "description": "Verify minimum window height and width spans match factory specifications (e.g. LW1222IVSM 16.0\" H x 27\"-39\" W).", "verification": "Window dimensions match engineering drawings."},
+            {"step": 3, "title": "Chassis & Weight Verification", "description": "Verify chassis architecture (Slide In-Out vs Top-Mount Fixed) and exact net/shipping weights.", "verification": "Weight and chassis type verified."},
+            {"step": 4, "title": "Target Model Audit", "description": "Verify LW1222IVSM reflects 12,000 BTU, 550 sq. ft. AHAM, 250-380 sq. ft. Island, and 85 lbs net weight.", "verification": "LW1222IVSM 100% verified with zero drift."}
+        ],
+        "outputs": ["Catalog audit status (CATALOG_AUDITED)", "Models verified (16)", "Target model verification (VERIFIED)"],
+        "contingency_protocol": "Immediately flag drift and trigger automated catalog reseed via /dev-os/catalog/migrate-and-reseed."
+    },
+    "agent_spatial_visualizer": {
+        "id": "agent_spatial_visualizer",
+        "code": "SOP-DEP-04",
+        "title": "3D Spatial Caliper & Cutaway Engine",
+        "domain": "Deployment",
+        "supervisor": "submaster_deployment_quality",
+        "mandate": "Supervise Blender 4.1 raytraced isometric window cutaway generation, PIL caliper compositing, and spatial fit certainty badges for all window AC units.",
+        "token_efficiency_policy": "Decoupled headless execution; Blender raytraces raw 3D scene geometry, system Python overlays 2D calipers; outputs optimized WebP (< 90KB).",
+        "oahu_grounding": "Visualizes window sill and jalousie frame fit directly for Hawaii homeowners, eliminating dimension ambiguity prior to dispatch.",
+        "inputs": ["Raw Blender 3D cutaway passes", "Product caliper dimension coordinates", "Production asset directory"],
+        "execution_steps": [
+            {"step": 1, "title": "Cutaway Asset Check", "description": "Verify existence of lw1222ivsm-window-fit-cutaway.webp, compact-window-fit-cutaway.webp, and heavy-duty-window-fit-cutaway.webp.", "verification": "All 3D assets exist with size > 50KB."},
+            {"step": 2, "title": "Caliper Overlay Integrity", "description": "Verify caliper boundary offsets, dimension leader lines, and typography compliance.", "verification": "0 graphic clipping, high-DPI contrast."},
+            {"step": 3, "title": "Spatial Fit Resolution", "description": "Verify 1600x1000 WebP asset resolution and responsive image scaling on mobile.", "verification": "Zero CLS, responsive srcset verified."}
+        ],
+        "outputs": ["Spatial engine status (SPATIAL_VERIFIED)", "Rendered cutaway count (3)", "Caliper accuracy (CONFIRMED)"],
+        "contingency_protocol": "Trigger local python scripts/generate_window_3d_render.py and scripts/apply_caliper_overlay.py if asset checksum fails."
     }
 }

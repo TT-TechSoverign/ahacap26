@@ -8,7 +8,7 @@ This document defines the agent architecture, roles, execution protocols, and op
 
 - **Sovereign Master**: Central cognitive intelligence overseeing all autonomous operations.
 - **Category Sub-Masters (6)**: Autonomous domain supervisors governing specific functional areas.
-- **Specialized Satellite Agents (24)**: On-demand diagnostic and execution units.
+- **Specialized Satellite Agents (26)**: On-demand diagnostic and execution units.
 
 ```
                          [ MASTER PROJECTS BRAIN ]
@@ -16,7 +16,7 @@ This document defines the agent architecture, roles, execution protocols, and op
     +-----------------+--------------+--------------+-----------------+
     |                 |              |              |                 |
 [Infrastructure] [Cybersecurity] [Commerce]     [Growth & SEO]   [Customer & CRM]  [Deployment QA]
-  (4 Agents)       (4 Agents)    (3 Agents)       (7 Agents)       (3 Agents)        (3 Agents)
+  (4 Agents)       (4 Agents)    (4 Agents)       (7 Agents)       (3 Agents)        (4 Agents)
 ```
 
 ---
@@ -40,11 +40,12 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_perimeter_auditor`: Mathematically validates 0 inbound workstation reach (outbound pull/push).
 
 ### Sub-Master 3: Commerce & Telemetry (`submaster_commerce_telemetry`)
-- **Scope**: Funnel tracking, appointment velocity, Stripe payments, Hawaii GET tax.
+- **Scope**: Funnel tracking, appointment velocity, Stripe payments, Hawaii GET tax, catalog specifications.
 - **Agents**:
   - `agent_funnel_telemetry`: Ingests micro-conversion events across all 4 appointment funnels.
   - `agent_cro_optimizer`: Analyzes zero-upfront payment velocity and mobile thumb-zone layout.
   - `agent_revenue_reconciler`: Reconciles Stripe charges, customer receipts, and 4.712% Oahu GET tax.
+  - `agent_catalog_auditor`: Audits all 16 catalog models for AHAM & Island dual-coverage compliance and zero spec drift.
 
 ### Sub-Master 4: Growth & Market Grounding (`submaster_growth_grounding`)
 - **Scope**: Search engine visibility, 22-city Oahu coverage, climate economics, HECO rates.
@@ -65,11 +66,12 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_intake_triage`: Analyzes HVAC symptom reports (e.g. blinking lights, refrigerant leaks).
 
 ### Sub-Master 6: Deployment & Quality Swarm (`submaster_deployment_quality`)
-- **Scope**: Pre-flight checks, build QA, zero-downtime container swaps, non-regression verification.
+- **Scope**: Pre-flight checks, build QA, zero-downtime container swaps, non-regression verification, 3D spatial graphics.
 - **Agents**:
   - `agent_deployment_guardian`: Coordinates zero-downtime Docker deployments on Hostinger VPS.
   - `agent_build_qa`: Verifies TypeScript compilation and Next.js static asset bundling.
   - `agent_regression_sentinel`: Validates By-Appointment-First rules and prevents upfront pay gates.
+  - `agent_spatial_visualizer`: Supervise Blender 4.1 headless raytracing, caliper overlays, and 3D window cutaways.
 
 ---
 

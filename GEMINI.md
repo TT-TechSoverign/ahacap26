@@ -47,7 +47,7 @@ Every conversation session inherits the knowledge, directives, historical timeli
 
 ## IV. SOVEREIGN AGENT REGISTRY (6 SUB-MASTERS • 24 AGENTS)
 
-The platform is monitored and driven by 6 Category Sub-Masters and 24 specialized satellite agents:
+The platform is monitored and driven by 6 Category Sub-Masters and 26 specialized satellite agents:
 
 1. **Infrastructure & Storage Sub-Master** (`submaster_infrastructure`):
    - `agent_host_sentinel` (VPS disk, memory, SSL, firewall)
@@ -63,6 +63,7 @@ The platform is monitored and driven by 6 Category Sub-Masters and 24 specialize
    - `agent_funnel_telemetry` (Real-time micro-conversion beacon ingestion)
    - `agent_cro_optimizer` (Zero-upfront funnel velocity & heuristic CRO)
    - `agent_revenue_reconciler` (Stripe automated order reconciliation & GET tax)
+   - `agent_catalog_auditor` (16-model specification drift & AHAM/Island dual-coverage auditor)
 4. **Growth & Market Grounding Sub-Master** (`submaster_growth_grounding`):
    - `agent_seo_metadata` (22 Oahu city pages, canonicals, sitemaps)
    - `agent_oahu_grounding` (Island weather, HECO ~44.2¢/kWh power rates)
@@ -79,6 +80,7 @@ The platform is monitored and driven by 6 Category Sub-Masters and 24 specialize
    - `agent_deployment_guardian` (Deployment gatekeeper & Docker orchestrator)
    - `agent_build_qa` (Next.js & FastAPI build verification)
    - `agent_regression_sentinel` (Zero upfront payment & booking non-regression)
+   - `agent_spatial_visualizer` (Blender 4.1 headless raytracing & engineering caliper engine)
 
 ---
 
@@ -99,6 +101,12 @@ The platform is monitored and driven by 6 Category Sub-Masters and 24 specialize
   - Multi-worker Redis synchronization across all 4 Uvicorn ASGI processes.
   - Symmetrical desktop and mobile navigation headers; mobile layout collision fixes.
   - Aloha EmailComposerModal with direct SMTP dispatch & dev BCC audit trail.
+- **Epoch 12 (Sep 21-22, 2026) 3D Spatial Caliper, Dual-Sizing & Catalog Guard**:
+  - Root-caused and resolved catalog specification failure on 12,000 BTU LG Dual Inverter (LW1222IVSM) and across all 16 catalog models.
+  - Implemented Dual-Sizing Architecture pairing AHAM Factory Certified rating with Island Microclimate Calibration™ for Hawaii single-wall redwood & jalousie louvers.
+  - Integrated Blender 4.1 headless raytracing with PIL engineering caliper overlay for isometric window cutaway renders.
+  - Expanded Sovereign Fleet to 26 agents: `agent_catalog_auditor` (Agent #25) and `agent_spatial_visualizer` (Agent #26) wired into 3-stage live verification pipeline.
+  - Responsive horizontal mobile filter track (44px touch targets) and zero CLS verified.
 
 ---
 

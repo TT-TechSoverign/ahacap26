@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Calculator, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Calculator, CheckCircle2, AlertTriangle, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -14,9 +14,10 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
     const [ceilHeight, setCeilHeight] = useState<'standard' | 'high' | 'vaulted'>('standard');
     const [sunExposure, setSunExposure] = useState<'shaded' | 'moderate' | 'sunny'>('moderate');
     const [region, setRegion] = useState<'standard' | 'leeward' | 'windward' | 'urban'>('standard');
-    const [insulation, setInsulation] = useState<'good' | 'poor'>('good');
+    const [homeType, setHomeType] = useState<'single_wall' | 'jalousie' | 'modern'>('single_wall');
     const [isKitchen, setIsKitchen] = useState<boolean>(false);
     const [occupants, setOccupants] = useState<number>(2);
+    const [showGuide, setShowGuide] = useState<boolean>(false);
 
     // Load from sessionStorage if available to persist user sizing selections cross-page
     useEffect(() => {
@@ -29,7 +30,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                 if (parsed.ceilHeight) setCeilHeight(parsed.ceilHeight);
                 if (parsed.sunExposure) setSunExposure(parsed.sunExposure);
                 if (parsed.region) setRegion(parsed.region);
-                if (parsed.insulation) setInsulation(parsed.insulation);
+                if (parsed.homeType) setHomeType(parsed.homeType);
                 if (parsed.isKitchen !== undefined) setIsKitchen(Boolean(parsed.isKitchen));
                 if (parsed.occupants) setOccupants(Number(parsed.occupants));
             }
@@ -41,45 +42,55 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
     const calculations = useMemo(() => {
         const area = width * length;
         
-        // Piecewise interpolation formula aligned directly to the shop page sizing table
-        let baseBtu = 6000;
-        if (area >= 100 && area <= 200) {
-            baseBtu = 6000 + ((area - 100) / 100) * 2000;
-        } else if (area > 200 && area <= 250) {
-            baseBtu = 10000 + ((area - 200) / 50) * 2000;
-        } else if (area > 250 && area <= 350) {
-            baseBtu = 14000 + ((area - 250) / 100) * 1000;
-        } else if (area > 350 && area <= 400) {
-            baseBtu = 15000 + ((area - 350) / 50) * 3000;
-        } else if (area > 400) {
-            baseBtu = 18000 + ((area - 400) / 200) * 6000;
-        }
+        // 1. Factory AHAM / Energy Star Baseline (Modern Insulated Standard)
+        let ahamBaseBtu = 6000;
+        if (area <= 150) ahamBaseBtu = 5000;
+        else if (area <= 250) ahamBaseBtu = 6000;
+        else if (area <= 350) ahamBaseBtu = 8000;
+        else if (area <= 450) ahamBaseBtu = 10000;
+        else if (area <= 550) ahamBaseBtu = 12000;
+        else if (area <= 700) ahamBaseBtu = 14000;
+        else if (area <= 1000) ahamBaseBtu = 18000;
+        else ahamBaseBtu = 23500;
+
+        // 2. Island Microclimate Calibration™ Base (Oahu Field Standard)
+        let islandBaseBtu = 6000;
+        if (area <= 180) islandBaseBtu = 6000;
+        else if (area <= 250) islandBaseBtu = 8000;
+        else if (area <= 320) islandBaseBtu = 10000;
+        else if (area <= 380) islandBaseBtu = 12000;
+        else if (area <= 500) islandBaseBtu = 14000;
+        else if (area <= 750) islandBaseBtu = 18000;
+        else islandBaseBtu = 23500;
+
+        let workingBtu = homeType === 'modern' ? ahamBaseBtu : islandBaseBtu;
 
         // Ceiling Height Load Modifier
-        if (ceilHeight === 'high') baseBtu *= 1.10;
-        if (ceilHeight === 'vaulted') baseBtu *= 1.20;
+        if (ceilHeight === 'high') workingBtu *= 1.10;
+        if (ceilHeight === 'vaulted') workingBtu *= 1.20;
 
         // Sun Exposure Modifier
-        if (sunExposure === 'shaded') baseBtu *= 0.90;
-        if (sunExposure === 'sunny') baseBtu *= 1.10;
+        if (sunExposure === 'shaded') workingBtu *= 0.90;
+        if (sunExposure === 'sunny') workingBtu *= 1.10;
 
         // Oahu Micro-climate Region Modifier
         let regionModifier = 1.0;
-        if (region === 'leeward') regionModifier = 1.15; // +15% for Kapolei, Ewa Beach, Waianae (intense sun & heat)
+        if (region === 'leeward') regionModifier = 1.15; // +15% for Kapolei, Ewa Beach, Waianae (intense solar radiation)
         if (region === 'windward') regionModifier = 0.95; // -5% for Kailua, Kaneohe (cooling trade winds)
         if (region === 'urban') regionModifier = 1.10;    // +10% for Honolulu Metro (urban heat island effect)
-        baseBtu *= regionModifier;
+        workingBtu *= regionModifier;
 
-        // Insulation Modifier
-        if (insulation === 'poor') baseBtu *= 1.15;
+        // Home Construction Modifier
+        if (homeType === 'single_wall') workingBtu *= 1.15; // Single-wall redwood heat conduction
+        if (homeType === 'jalousie') workingBtu *= 1.25;    // Jalousie louver air infiltration
 
         // Kitchen cooking load adjustment
-        if (isKitchen) baseBtu += 4000;
+        if (isKitchen) workingBtu += 4000;
 
         // Occupant heat load adjustment
-        if (occupants > 2) baseBtu += (occupants - 2) * 600;
+        if (occupants > 2) workingBtu += (occupants - 2) * 600;
 
-        const recommendedBtu = Math.round(baseBtu);
+        const recommendedBtu = Math.round(workingBtu);
 
         // Sizing Compatibility Check
         const diffPercent = (productBtu - recommendedBtu) / recommendedBtu;
@@ -87,10 +98,10 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
         if (diffPercent < -0.15) compatibility = 'UNDERSIZED';
         else if (diffPercent > 0.25) compatibility = 'OVERSIZED';
 
-        return { area, recommendedBtu, compatibility };
-    }, [width, length, ceilHeight, sunExposure, region, insulation, isKitchen, occupants, productBtu]);
+        return { area, recommendedBtu, ahamBaseBtu, compatibility };
+    }, [width, length, ceilHeight, sunExposure, region, homeType, isKitchen, occupants, productBtu]);
 
-    // Write changes back to sessionStorage key 'ahac_sizing_session' when the calculator state updates
+    // Write changes back to sessionStorage key 'ahac_sizing_session'
     useEffect(() => {
         if (typeof window !== 'undefined') {
             try {
@@ -100,7 +111,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                     ceilHeight,
                     sunExposure,
                     region,
-                    insulation,
+                    homeType,
                     isKitchen,
                     occupants,
                     recommendedBtu: calculations.recommendedBtu
@@ -109,43 +120,43 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                 console.error("Failed to save sizing session in ACCalculator", e);
             }
         }
-    }, [width, length, ceilHeight, sunExposure, region, insulation, isKitchen, occupants, calculations.recommendedBtu]);
+    }, [width, length, ceilHeight, sunExposure, region, homeType, isKitchen, occupants, calculations.recommendedBtu]);
 
     const sizingStatus = useMemo(() => {
         const { compatibility, recommendedBtu } = calculations;
         if (compatibility === 'UNDERSIZED') {
             return {
                 color: 'text-red-400 border-red-500/25 bg-red-500/5',
-                title: 'Unit is Under-powered',
-                desc: `This ${productBtu.toLocaleString()} BTU unit will struggle to cool this room. It may run continuously, increasing electricity bills. Sizing up is recommended.`,
+                title: 'Unit is Undersized for This Room',
+                desc: `This ${productBtu.toLocaleString()} BTU unit will struggle to overcome heat gain in this ${calculations.area} sq. ft. space, especially with Oahu sun exposure. Sizing up is recommended.`,
                 icon: AlertTriangle
             };
         } else if (compatibility === 'OVERSIZED') {
             return {
                 color: 'text-amber-400 border-amber-500/25 bg-amber-500/5',
                 title: 'Unit is Oversized',
-                desc: `This ${productBtu.toLocaleString()} BTU unit is larger than needed. A standard AC that is too large will short-cycle, leading to high wear and humidity retention.`,
+                desc: `This ${productBtu.toLocaleString()} BTU unit exceeds the ${recommendedBtu.toLocaleString()} BTU requirement. With LG Dual Inverters, variable compressor speed reduces short-cycling risk, but sizing accurately saves upfront cost.`,
                 icon: AlertTriangle
             };
         } else {
             return {
                 color: 'text-emerald-400 border-emerald-500/25 bg-emerald-500/5',
                 title: 'Perfect Sizing Match!',
-                desc: `Matches your space's calculated cooling demand of ${recommendedBtu.toLocaleString()} BTU.`,
+                desc: `Matches your space's calculated cooling demand of ${recommendedBtu.toLocaleString()} BTU under Island Microclimate conditions.`,
                 icon: CheckCircle2
             };
         }
-    }, [calculations, productBtu, calculations.recommendedBtu]);
+    }, [calculations, productBtu]);
 
     const StatusIcon = sizingStatus.icon;
 
     // Get recommended shop link based on BTU mapping
     const recommendedShopLink = useMemo(() => {
         const btu = calculations.recommendedBtu;
-        if (btu <= 8500) return "/shop/lg-dual-inverter-8000-btu-oahu";
+        if (btu <= 8500) return "/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm";
         if (btu <= 13000) return "/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm";
-        if (btu <= 17000) return "/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm";
-        return "/shop/large-room-window-ac-oahu"; // 18-24K high capacity
+        if (btu <= 16000) return "/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm";
+        return "/shop/oahu-window-ac-warehouse";
     }, [calculations.recommendedBtu]);
 
     return (
@@ -157,14 +168,39 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
         )}>
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none z-0" />
             
-            <div className="flex items-center gap-2 mb-4 relative z-10">
-                <Calculator className="size-5 text-primary animate-pulse" />
-                <h2 className="font-header font-black uppercase text-sm tracking-wider text-white">Hawaii BTU Sizing Matrix</h2>
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-3 relative z-10">
+                <div className="flex items-center gap-2">
+                    <Calculator className="size-5 text-primary animate-pulse" />
+                    <h2 className="font-header font-black uppercase text-sm tracking-wider text-white">Hawaii BTU Sizing Matrix</h2>
+                </div>
+                <button 
+                    onClick={() => setShowGuide(!showGuide)}
+                    className="text-[11px] font-mono text-cyan-400 hover:text-white flex items-center gap-1 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-1 rounded-full transition-colors"
+                >
+                    <HelpCircle className="size-3.5" />
+                    <span>Dual-Sizing Guide</span>
+                </button>
             </div>
 
-            <p className="text-slate-200 text-xs leading-relaxed mb-6 font-sans">
-                Standard sizing models ignore Hawaii&apos;s humidity. Calculate your room load calibrated for Oahu&apos;s micro-climates.
+            <p className="text-slate-300 text-xs leading-relaxed mb-4 font-sans">
+                Standard mainland sizing charts ignore Hawaii&apos;s humidity and single-wall thermal bleed. Calculate your exact BTU load calibrated for Oahu microclimates.
             </p>
+
+            {/* Expandable Dual Sizing Doctrine Explanation */}
+            {showGuide && (
+                <div className="mb-6 p-4 rounded-2xl bg-slate-950/80 border border-cyan-500/30 text-xs text-slate-300 space-y-2">
+                    <div className="font-bold text-cyan-400 flex items-center gap-1.5">
+                        <ShieldCheck className="size-4 text-emerald-400" />
+                        <span>Why We Display Dual Sizing Ratings on Oahu:</span>
+                    </div>
+                    <p className="leading-relaxed">
+                        • <strong className="text-white">AHAM Certified Baseline</strong>: Factory rating tested in sealed, insulated mainland laboratories with double-pane glass.
+                    </p>
+                    <p className="leading-relaxed">
+                        • <strong className="text-white">Island Microclimate Calibration™</strong>: Field-tested standard for Hawaii single-wall redwood construction, unsealed jalousie windows, and intense Leeward / Honolulu solar heat gain. Sizing up by 25–35% prevents continuous compressor strain and keeps electric bills low.
+                    </p>
+                </div>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 relative z-10">
                 <div className="space-y-4">
@@ -195,85 +231,81 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <select 
+                            value={homeType} 
+                            onChange={(e) => setHomeType(e.target.value as any)} 
+                            className="bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2.5 text-xs focus:border-cyan-400 outline-none transition-all cursor-pointer min-h-[44px] w-full"
+                            title="Hawaii Home Construction"
+                            aria-label="Hawaii Home Construction"
+                        >
+                            <option value="single_wall">Single-Wall Redwood (+20%)</option>
+                            <option value="jalousie">Single-Wall + Jalousies (+30%)</option>
+                            <option value="modern">Modern Insulated / Condo (1.0x)</option>
+                        </select>
                         <select 
                             value={region} 
                             onChange={(e) => setRegion(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-500 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
+                            className="bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2.5 text-xs focus:border-cyan-400 outline-none transition-all cursor-pointer min-h-[44px] w-full"
                             title="Oahu Micro-Climate Region"
                             aria-label="Oahu Micro-Climate Region"
                         >
                             <option value="standard">Standard Oahu</option>
-                            <option value="leeward">Leeward (Ewa/Kapolei)</option>
-                            <option value="windward">Windward (Kailua/Kaneohe)</option>
-                            <option value="urban">Honolulu / Urban</option>
+                            <option value="leeward">Leeward (Ewa/Kapolei +15%)</option>
+                            <option value="urban">Honolulu Urban (+10%)</option>
+                            <option value="windward">Windward Trade Winds (-5%)</option>
                         </select>
                         <select 
                             value={ceilHeight} 
                             onChange={(e) => setCeilHeight(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-500 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
+                            className="bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2.5 text-xs focus:border-cyan-400 outline-none transition-all cursor-pointer min-h-[44px] w-full"
                             aria-label="Room Ceiling Height"
                         >
-                            <option value="standard">8ft Ceilings</option>
-                            <option value="high">9-11ft Ceilings</option>
-                            <option value="vaulted">12ft+ Ceilings</option>
+                            <option value="standard">8ft Standard Ceilings</option>
+                            <option value="high">9-11ft High Ceilings</option>
+                            <option value="vaulted">12ft+ Vaulted Ceilings</option>
                         </select>
                         <select 
                             value={sunExposure} 
                             onChange={(e) => setSunExposure(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-500 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
+                            className="bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2.5 text-xs focus:border-cyan-400 outline-none transition-all cursor-pointer min-h-[44px] w-full"
                             aria-label="Room Sun Exposure"
                         >
-                            <option value="shaded">North / Shaded</option>
-                            <option value="moderate">Moderate Sun</option>
-                            <option value="sunny">Sunny / West Oahu</option>
-                        </select>
-                        <select 
-                            value={insulation} 
-                            onChange={(e) => setInsulation(e.target.value as any)} 
-                            className="bg-slate-950 border border-slate-500 text-white rounded-xl px-4 py-3 text-sm focus:border-[#00E5FF] focus:ring-2 focus:ring-[#00E5FF]/20 focus:shadow-[0_0_10px_rgba(0,229,255,0.25)] outline-none transition-all cursor-pointer min-h-[48px] w-full"
-                            aria-label="Room Insulation Quality"
-                        >
-                            <option value="good">Well-Insulated</option>
-                            <option value="poor">Poor Insulation</option>
+                            <option value="moderate">Moderate Sun Exposure</option>
+                            <option value="sunny">Intense Afternoon Sun</option>
+                            <option value="shaded">North-Facing / Shaded</option>
                         </select>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
-                        <label className="text-xs md:text-sm text-slate-200 flex items-center gap-2.5 cursor-pointer select-none py-2 min-h-[48px]">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-1">
+                        <label className="text-xs text-slate-200 flex items-center gap-2 cursor-pointer select-none py-1">
                             <input 
                                 type="checkbox" 
                                 checked={isKitchen} 
                                 onChange={(e) => setIsKitchen(e.target.checked)} 
-                                className="size-5 rounded border-slate-500 bg-slate-950 text-primary focus:ring-1 focus:ring-primary focus:ring-offset-0 accent-primary cursor-pointer" 
+                                className="size-4 rounded border-slate-700 bg-slate-950 text-primary focus:ring-1 focus:ring-primary accent-primary cursor-pointer" 
                                 aria-label="Is this room a kitchen?"
                             /> 
-                            Is Kitchen (+4,000 BTU)
+                            Kitchen Area (+4,000 BTU)
                         </label>
-                        <div className="text-xs md:text-sm text-slate-200 flex items-center gap-3 py-1">
+                        <div className="text-xs text-slate-200 flex items-center gap-2">
                             <span>Occupants:</span>
-                            <div className="flex items-center border border-slate-500 bg-slate-950 rounded-xl overflow-hidden min-h-[48px]">
+                            <div className="flex items-center border border-slate-700 bg-slate-950 rounded-lg overflow-hidden h-9">
                                 <button 
                                     type="button"
                                     onClick={() => setOccupants(prev => Math.max(1, prev - 1))}
-                                    className="w-12 h-full hover:bg-slate-800 text-slate-200 hover:text-white transition-colors text-sm font-bold"
+                                    className="w-8 h-full hover:bg-slate-800 text-slate-200 transition-colors text-xs font-bold"
                                     aria-label="Decrease occupant count"
                                 >
                                     -
                                 </button>
-                                <input 
-                                    type="number" 
-                                    min="1" 
-                                    max="10" 
-                                    value={occupants} 
-                                    onChange={(e) => setOccupants(Math.max(1, Number(e.target.value)))} 
-                                    className="w-10 bg-transparent text-center border-none focus:ring-0 text-sm text-white font-bold outline-none" 
-                                    aria-label="Number of regular occupants"
-                                />
+                                <span className="w-8 text-center text-xs text-white font-bold">
+                                    {occupants}
+                                </span>
                                 <button 
                                     type="button"
                                     onClick={() => setOccupants(prev => Math.min(10, prev + 1))}
-                                    className="w-12 h-full hover:bg-slate-800 text-slate-200 hover:text-white transition-colors text-sm font-bold"
+                                    className="w-8 h-full hover:bg-slate-800 text-slate-200 transition-colors text-xs font-bold"
                                     aria-label="Increase occupant count"
                                 >
                                     +
@@ -283,21 +315,23 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                     </div>
                 </div>
  
-                <div className="flex flex-col justify-between border-t md:border-t-0 md:border-l border-slate-500/40 pt-6 md:pt-0 md:pl-6 text-center md:text-left">
+                <div className="flex flex-col justify-between border-t md:border-t-0 md:border-l border-slate-700/50 pt-5 md:pt-0 md:pl-6 text-center md:text-left">
                     <div>
-                        <div className="text-xs font-header font-black uppercase tracking-wider text-slate-100">Calculated Demand</div>
+                        <div className="text-[11px] font-header font-black uppercase tracking-wider text-slate-400">Calculated Demand ({calculations.area} sq. ft.)</div>
                         <div className="text-3xl font-header font-black text-white mt-1">
-                            {calculations.recommendedBtu.toLocaleString()} <span className="text-[10px] text-primary font-bold">BTU</span>
+                            {calculations.recommendedBtu.toLocaleString()} <span className="text-[11px] text-cyan-400 font-bold">BTU (Island)</span>
                         </div>
-                        <div className="text-xs text-slate-200 font-sans mt-1">Area: {calculations.area} sq. ft.</div>
+                        <div className="text-xs text-slate-400 font-sans mt-0.5">
+                            Factory AHAM Baseline: <span className="text-slate-300 font-semibold">{calculations.ahamBaseBtu.toLocaleString()} BTU</span>
+                        </div>
                     </div>
  
                     <div className="flex flex-col gap-3 mt-4">
-                        <div className={`p-4 rounded-2xl border flex flex-col gap-1 text-left ${sizingStatus.color}`}>
-                            <div className="flex items-center gap-1.5 font-header font-black uppercase tracking-wider text-xs md:text-sm">
-                                <StatusIcon className="size-4" /> {sizingStatus.title}
+                        <div className={`p-3.5 rounded-2xl border flex flex-col gap-1 text-left ${sizingStatus.color}`}>
+                            <div className="flex items-center gap-1.5 font-header font-black uppercase tracking-wider text-xs">
+                                <StatusIcon className="size-4 shrink-0" /> {sizingStatus.title}
                             </div>
-                            <p className="text-xs leading-relaxed text-slate-200 font-sans mt-1">
+                            <p className="text-xs leading-relaxed text-slate-300 font-sans mt-0.5">
                                 {sizingStatus.desc}
                             </p>
                         </div>
@@ -307,16 +341,16 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                             <div className="flex flex-col gap-2 w-full">
                                 <Link 
                                     href={recommendedShopLink} 
-                                    className="w-full text-center bg-primary hover:bg-cyan-400 text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[48px]"
+                                    className="w-full text-center bg-primary hover:bg-cyan-400 text-slate-950 text-xs font-header font-black uppercase tracking-widest py-3 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[44px]"
                                 >
-                                    <span>Shop {calculations.recommendedBtu.toLocaleString()} BTU Units</span>
-                                    <ArrowRight className="size-4 animate-pulse" />
+                                    <span>Browse {calculations.recommendedBtu.toLocaleString()} BTU In-Stock Units</span>
+                                    <ArrowRight className="size-3.5" />
                                 </Link>
                                 <Link 
                                     href="/contact" 
-                                    className="w-full text-center bg-transparent border border-slate-400 hover:border-primary text-slate-100 hover:text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center min-h-[48px]"
+                                    className="w-full text-center bg-transparent border border-slate-600 hover:border-primary text-slate-300 hover:text-white text-xs font-header font-black uppercase tracking-widest py-2.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center min-h-[40px]"
                                 >
-                                    Request Custom Mini-Split Quote
+                                    Free In-Home Sizing Assessment ($0)
                                 </Link>
                             </div>
                         ) : (
@@ -330,10 +364,10 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                                             window.scrollTo({ top: 0, behavior: 'smooth' });
                                         }
                                     }}
-                                    className="w-full text-center bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[48px]"
+                                    className="w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[44px]"
                                 >
-                                    <CheckCircle2 className="size-4" />
-                                    <span>Perfect Sizing Match - Add to Cart</span>
+                                    <CheckCircle2 className="size-4 text-slate-950" />
+                                    <span>Perfect Sizing Match - Reserve Unit</span>
                                 </button>
                             </div>
                         )}

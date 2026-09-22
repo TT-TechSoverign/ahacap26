@@ -12,7 +12,29 @@ import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { cn, isCampaignActive as isCampaignActiveChecker } from '@/lib/utils';
-import { Fan, AlertCircle, Snowflake, ShoppingCart, FileText, ShieldAlert, X, Phone, Check, Calendar, Mail } from 'lucide-react';
+import { 
+    Fan, 
+    AlertCircle, 
+    Snowflake, 
+    ShoppingCart, 
+    FileText, 
+    ShieldAlert, 
+    X, 
+    Phone, 
+    Check, 
+    Calendar, 
+    Mail,
+    Ruler,
+    ShieldCheck,
+    ChevronDown,
+    ChevronUp,
+    Layers,
+    Info,
+    Maximize2,
+    Zap,
+    SlidersHorizontal,
+    Sparkles
+} from 'lucide-react';
 import { StockBadge } from '@/components/StockBadge';
 import dynamic from 'next/dynamic';
 
@@ -312,12 +334,45 @@ export default function ProductDetailPage() {
             ...baseSpecs,
             btu: product.btu ? `${product.btu.toLocaleString()} BTU` : baseSpecs.btu,
             coolingArea: product.coverage || baseSpecs.coolingArea,
+            coolingAreaAham: product.coverage_aham || baseSpecs.coolingAreaAham || 'Up to 550 sq. ft.',
+            coolingAreaOahu: product.coverage_oahu || baseSpecs.coolingAreaOahu || '250–380 sq. ft.',
+            sizingNotes: product.sizing_notes || baseSpecs.sizingNotes,
+            minWindowHeight: product.min_window_height || baseSpecs.windowFit?.minHeight || '16.0"',
+            minWindowWidth: product.min_window_width || baseSpecs.windowFit?.minWidth || '27"',
+            maxWindowWidth: product.max_window_width || baseSpecs.windowFit?.maxWidth || '39"',
+            chassisType: product.chassis_type || baseSpecs.chassisType || 'Slide In-Out',
+            shippingWeight: product.shipping_weight || baseSpecs.shippingWeight || '96 lbs',
+            ceerRating: product.ceer_rating || baseSpecs.ceerRating || '15.0',
+            dryAirFlowCfm: product.dry_air_flow_cfm || baseSpecs.dryAirFlowCfm,
+            plugType: baseSpecs.plugType || (product.voltage?.includes('230V') ? 'NEMA 6-20P (208/230V)' : 'NEMA 5-15P (Standard 115V)'),
             eer: product.performance_specs || baseSpecs.eer,
             voltage: product.voltage || baseSpecs.voltage,
             soundProfile: product.noise_level || baseSpecs.soundProfile,
             keyFeature: product.key_spec || baseSpecs.keyFeature
         };
     }, [baseSpecs, product]);
+
+    const [mediaView, setMediaView] = useState<'photos' | 'cutaway' | 'specs'>('photos');
+    const [isSizingExplainerOpen, setIsSizingExplainerOpen] = useState(false);
+
+    // High-Resolution 3D Spatial Window Fit Cutaway Mapping
+    const cutawayImageMap: { [key: number]: string } = {
+        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp'
+    };
+    const cutawayImageUrl = product ? (cutawayImageMap[product.id] || '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp') : null;
 
     // Set initial image
     useEffect(() => {
@@ -369,10 +424,65 @@ export default function ProductDetailPage() {
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
             <main className="pt-[85px] md:pt-[165px] pb-36 md:pb-16 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-                    {/* Visual Anchor */}
-                    <div className="space-y-6 md:sticky md:top-36">
+                    {/* Visual Anchor & 3D Spatial Center */}
+                    <div className="space-y-4 md:sticky md:top-36">
+                        {/* Media View Tab Switcher */}
+                        <div className="flex items-center gap-1.5 p-1 bg-surface-dark/90 border border-border-dark rounded-xl text-xs font-header font-bold uppercase tracking-wider shadow-md">
+                            <button
+                                onClick={() => setMediaView('photos')}
+                                className={cn(
+                                    "flex-1 min-h-[40px] py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all text-[11px]",
+                                    mediaView === 'photos'
+                                        ? "bg-primary text-slate-950 font-black shadow-md shadow-primary/20"
+                                        : "text-slate-400 hover:text-white"
+                                )}
+                            >
+                                <span>📷 Studio Photos</span>
+                            </button>
+                            <button
+                                onClick={() => setMediaView('cutaway')}
+                                className={cn(
+                                    "flex-1 min-h-[40px] py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all text-[11px]",
+                                    mediaView === 'cutaway'
+                                        ? "bg-emerald-400 text-slate-950 font-black shadow-md shadow-emerald-500/20"
+                                        : "text-slate-400 hover:text-white"
+                                )}
+                            >
+                                <Ruler className="size-3.5" />
+                                <span>📐 3D Window Fit</span>
+                            </button>
+                            {specSheetUrl && (
+                                <button
+                                    onClick={() => setIsSpecModalOpen(true)}
+                                    className="flex-1 min-h-[40px] py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 text-slate-400 hover:text-white transition-all text-[11px]"
+                                >
+                                    <FileText className="size-3.5" />
+                                    <span>Specs PDF</span>
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Interactive Main Visual Display */}
                         <TiltCard isPromo={isPromo} isTouchDevice={isTouchDevice}>
-                            {selectedImage ? (
+                            {mediaView === 'cutaway' && cutawayImageUrl ? (
+                                <div className="relative w-full h-full z-10 flex flex-col items-center justify-center">
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={cutawayImageUrl}
+                                            alt={`${product.name} 3D Spatial Window Opening Fit`}
+                                            fill
+                                            className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.9)] transition-all duration-700"
+                                            priority
+                                        />
+                                    </div>
+                                    <div className="absolute top-2 left-2 z-20 px-2.5 py-1 rounded-md bg-emerald-500/90 text-slate-950 text-[9px] font-header font-black uppercase tracking-wider shadow-md">
+                                        Blender 4.1 Caliper Raytrace
+                                    </div>
+                                    <div className="absolute bottom-2 right-2 z-20 px-2.5 py-1 rounded-md bg-slate-950/85 border border-emerald-500/30 text-emerald-300 text-[9px] font-mono font-bold shadow-md">
+                                        Min Opening: {specs?.minWindowHeight || '16.0"'} H
+                                    </div>
+                                </div>
+                            ) : selectedImage ? (
                                 <div className="relative w-full h-full z-10">
                                     <Image
                                         src={selectedImage}
@@ -408,8 +518,33 @@ export default function ProductDetailPage() {
                             }
                         `}</style>
 
-                        {/* Thumbnail Bar */}
-                        {productImages.length > 1 && (
+                        {/* Mode-Dependent Sub-Bar */}
+                        {mediaView === 'cutaway' ? (
+                            <div className="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/30 shadow-lg text-left text-xs space-y-2">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-[10px] font-header font-black uppercase tracking-widest text-emerald-400 flex items-center gap-1.5">
+                                        <Ruler className="size-3.5" />
+                                        Spatial Fit Guarantee
+                                    </span>
+                                    <span className="text-[9px] font-mono text-slate-400 uppercase">
+                                        {specs?.chassisType || 'Slide-Out Chassis'}
+                                    </span>
+                                </div>
+                                <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-300">
+                                    <div className="p-2 rounded-lg bg-surface-dark border border-border-dark">
+                                        <div className="text-[9px] text-slate-400 uppercase font-mono">Min Window Height</div>
+                                        <div className="text-white font-bold text-xs">{specs?.minWindowHeight || '16.0"'}</div>
+                                    </div>
+                                    <div className="p-2 rounded-lg bg-surface-dark border border-border-dark">
+                                        <div className="text-[9px] text-slate-400 uppercase font-mono">Window Width Span</div>
+                                        <div className="text-white font-bold text-xs">{specs?.minWindowWidth || '27"'} – {specs?.maxWindowWidth || '39"'}</div>
+                                    </div>
+                                </div>
+                                <p className="text-[10px] text-slate-400 font-sans leading-tight pt-1">
+                                    ✓ Calibrated for Hawaii jalousie louver replacement frames & standard double-hung sashes.
+                                </p>
+                            </div>
+                        ) : productImages.length > 1 && (
                             <div 
                                 className="flex gap-3 overflow-x-auto pb-2 justify-start md:justify-start [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-primary/50 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary"
                                 style={{ WebkitOverflowScrolling: 'touch' }}
@@ -476,19 +611,97 @@ export default function ProductDetailPage() {
 
                         <div className="h-px bg-gradient-to-r from-white/10 to-transparent w-full"></div>
 
-                        {/* Bento Specifications Grid - Standardized to design tokens */}
+                        {/* Dual-Sizing Bento Specifications Grid */}
                         <div className="grid grid-cols-2 gap-2 font-sans">
+                            {/* Performance Card */}
                             <div className="bg-surface-dark border border-border-dark p-3 rounded-xl shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
                                 <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Performance</div>
                                 <div className="text-white font-header font-black text-base md:text-lg">{specs?.btu}</div>
+                                {specs?.ceerRating && (
+                                    <span className="text-[10px] font-mono text-emerald-400 mt-0.5">{specs.ceerRating} CEER</span>
+                                )}
                             </div>
+
+                            {/* Dual Coverage Card */}
+                            <div className="bg-surface-dark border border-border-dark p-3 rounded-xl shadow-lg group/spec hover:border-emerald-500/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-emerald-400">Dual Sizing</div>
+                                <div className="text-emerald-300 font-header font-black text-xs md:text-sm">{specs?.coolingAreaAham} <span className="text-[9px] font-normal text-slate-400 font-mono">(AHAM)</span></div>
+                                <div className="text-amber-300 font-header font-black text-xs md:text-sm">{specs?.coolingAreaOahu} <span className="text-[9px] font-normal text-slate-400 font-mono">(Island)</span></div>
+                            </div>
+
+                            {/* Voltage & Circuit Card */}
                             <div className="bg-surface-dark border border-border-dark p-3 rounded-xl shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Coverage</div>
-                                <div className="text-white font-header font-black text-base md:text-lg">{specs?.coolingArea}</div>
+                                <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Electrical Circuit</div>
+                                <div className="text-white font-header font-black text-xs md:text-sm">{specs?.voltage}</div>
+                                <span className="text-[10px] font-mono text-cyan-300 truncate max-w-full">{specs?.plugType}</span>
                             </div>
-                            <div className="col-span-2 bg-surface-dark border border-border-dark p-3 rounded-xl shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Voltage</div>
-                                <div className="text-white font-header font-black text-base md:text-lg">{specs?.voltage}</div>
+
+                            {/* Min Window Fit Card */}
+                            <div className="bg-surface-dark border border-border-dark p-3 rounded-xl shadow-lg group/spec hover:border-cyan-500/50 transition-all duration-500 flex flex-col items-center md:items-start">
+                                <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-cyan-400">Window Opening Fit</div>
+                                <div className="text-white font-header font-black text-xs md:text-sm">Min {specs?.minWindowHeight} H</div>
+                                <span className="text-[10px] font-mono text-slate-300">{specs?.minWindowWidth}–{specs?.maxWindowWidth} Width Span</span>
+                            </div>
+                        </div>
+
+                        {/* Expandable Dual-Sizing Advisory Accordion */}
+                        <div className="bg-slate-950/70 border border-slate-800 rounded-xl overflow-hidden font-sans">
+                            <button
+                                onClick={() => setIsSizingExplainerOpen(!isSizingExplainerOpen)}
+                                className="w-full p-3 flex items-center justify-between text-left text-xs font-semibold text-slate-300 hover:text-white transition-colors"
+                            >
+                                <span className="flex items-center gap-2">
+                                    <Info className="size-3.5 text-amber-400 shrink-0" />
+                                    <span>Why Two Sizing Standards? (Island Microclimate Advisory)</span>
+                                </span>
+                                {isSizingExplainerOpen ? <ChevronUp className="size-4 text-slate-400 shrink-0" /> : <ChevronDown className="size-4 text-slate-400 shrink-0" />}
+                            </button>
+                            {isSizingExplainerOpen && (
+                                <div className="px-4 pb-3.5 pt-1 text-[11px] text-slate-400 space-y-2 border-t border-slate-800/80 leading-relaxed">
+                                    <p>
+                                        <strong className="text-emerald-400 font-bold">1. AHAM Factory Rating ({specs?.coolingAreaAham}):</strong> The certified mainland baseline for modern, insulated construction with double-pane glass and zero air infiltration.
+                                    </p>
+                                    <p>
+                                        <strong className="text-amber-400 font-bold">2. Island Microclimate Calibration™ ({specs?.coolingAreaOahu}):</strong> Hawaii homes frequently feature uninsulated single-wall redwood and louvered jalousie windows that increase infiltration heat load by 35–45%. Our Island standard guarantees rapid pull-down without continuous compressor burnout or inflated HECO electric bills.
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* 3-Point Pre-Purchase Confidence Checklist */}
+                        <div className="bg-surface-dark border border-border-dark rounded-2xl p-4 md:p-5 shadow-xl font-sans space-y-3">
+                            <div className="flex items-center justify-between border-b border-border-dark pb-2">
+                                <span className="font-header font-black uppercase text-xs tracking-wider text-white flex items-center gap-1.5">
+                                    <ShieldCheck className="size-4 text-emerald-400" />
+                                    Pre-Purchase Fit Checklist
+                                </span>
+                                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
+                                    Guaranteed Compatibility
+                                </span>
+                            </div>
+
+                            <div className="space-y-2.5 text-xs">
+                                <div className="flex items-start gap-2.5">
+                                    <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                    <div>
+                                        <strong className="text-slate-200 font-bold block">1. Window Opening Clearance:</strong>
+                                        <span className="text-slate-400 text-[11px]">Requires minimum <strong className="text-white">{specs?.minWindowHeight}</strong> vertical height and <strong className="text-white">{specs?.minWindowWidth} to {specs?.maxWindowWidth}</strong> width span. Compatible with jalousies, sliders, and double-hung frames.</span>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-2.5">
+                                    <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                    <div>
+                                        <strong className="text-slate-200 font-bold block">2. Electrical Outlet Matching:</strong>
+                                        <span className="text-slate-400 text-[11px]">Powered by <strong className="text-white">{specs?.voltage}</strong> using <strong className="text-cyan-300">{specs?.plugType}</strong>. Verify your wall outlet receptacle before ordering.</span>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-2.5">
+                                    <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                    <div>
+                                        <strong className="text-slate-200 font-bold block">3. Chassis Handling & Safety:</strong>
+                                        <span className="text-slate-400 text-[11px]"><strong className="text-white">{specs?.chassisType}</strong> chassis architecture ({product.weight ? `${product.weight} lbs net` : specs?.weight || '85 lbs net'}). Outer mounting sleeve installs into window first for secure handling.</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -497,23 +710,21 @@ export default function ProductDetailPage() {
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent"></div>
                             <div className="grid grid-cols-2 gap-y-4 gap-x-4 items-start relative z-10 text-xs md:text-left">
                                 <div className="flex flex-col gap-1 items-center md:items-start">
-                                    <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Dimensions</span>
+                                    <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Unit Dimensions</span>
                                     <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dimensions || specs?.dimensions || 'N/A'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
-                                    <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Weight</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.weight ? `${product.weight} LBS` : specs?.weight || 'N/A'}</span>
+                                    <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Weight (Net / Ship)</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.weight ? `${product.weight} lbs` : specs?.weight || '85 lbs'} / {specs?.shippingWeight || '96 lbs'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Manufacturer Warranty</span>
                                     <span className="text-rose-400 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.warranty || specs?.warranty || '1 YEAR LIMITED'}</span>
                                 </div>
-                                {product.dehumidification && (
-                                    <div className="flex flex-col gap-1 items-center md:items-start">
-                                        <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Dehumidification</span>
-                                        <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dehumidification}</span>
-                                    </div>
-                                )}
+                                <div className="flex flex-col gap-1 items-center md:items-start">
+                                    <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Dehumidification</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dehumidification || specs?.dehumidification || '3.8 Pts/Hr'}</span>
+                                </div>
                             </div>
                         </div>
 
