@@ -625,6 +625,12 @@ export default function ProductDetailPage() {
                                     </span>
                                 )}
                             </div>
+
+                            {/* HECO Island Electricity Savings Callout */}
+                            <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-950/40 border border-emerald-500/30 rounded-lg text-emerald-300 text-xs font-sans w-fit mx-auto md:mx-0 shadow-sm">
+                                <Zap className="size-3.5 text-amber-400 shrink-0 animate-pulse" />
+                                <span>Inverter efficiency saves up to <strong className="text-white font-bold">$424/year</strong> under HECO ~44.2¢/kWh rates</span>
+                            </div>
                         </div>
 
                         <div className="h-px bg-gradient-to-r from-white/10 to-transparent w-full"></div>
@@ -746,19 +752,38 @@ export default function ProductDetailPage() {
                             </div>
                         </div>
 
-                        {/* CTA Cluster */}
+                        {/* Dual-Action Purchase & Appointment Hub */}
                         <div id="product-purchase-section" className="space-y-3 pt-2 relative font-header">
                             {product.stock > 0 ? (
-                                <button
-                                    onClick={() => {
-                                        addToCart(product);
-                                        openCart();
-                                    }}
-                                    className="w-full h-16 bg-gradient-to-r from-primary to-cyan-500 text-white font-black uppercase tracking-[0.4em] text-sm rounded-xl shadow-[0_20px_50px_rgba(0,174,239,0.2)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 group"
-                                >
-                                    <ShoppingCart className="size-5 group-hover:rotate-12 transition-transform" />
-                                    Add to Cart
-                                </button>
+                                <div className="space-y-2.5">
+                                    {/* Primary Action: Direct Hardware Purchase (Waipahu Warehouse Pickup or Delivery) */}
+                                    <button
+                                        onClick={() => {
+                                            addToCart(product);
+                                            openCart();
+                                        }}
+                                        className="w-full h-15 py-4 bg-gradient-to-r from-primary to-cyan-500 text-white font-black uppercase tracking-[0.25em] text-xs sm:text-sm rounded-xl shadow-[0_20px_50px_rgba(0,174,239,0.25)] hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 group"
+                                    >
+                                        <ShoppingCart className="size-5 group-hover:rotate-12 transition-transform shrink-0" />
+                                        <span>Buy Now & Pick Up in Waipahu</span>
+                                    </button>
+                                    <div className="flex items-center justify-between px-1 text-[11px] text-slate-400 font-sans">
+                                        <span>Free Waipahu Warehouse Pickup</span>
+                                        <span>$50 Flat Island Delivery</span>
+                                    </div>
+
+                                    {/* Secondary Action: $0 In-Home Estimate & Professional Installation */}
+                                    <Link
+                                        href={`/contact?service=window_ac_purchase&notes=Inquiry%20for%20${encodeURIComponent(product.name)}`}
+                                        className="w-full h-13 py-3 px-4 bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/40 hover:border-cyan-400 text-cyan-300 hover:text-white font-header font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg active:scale-[0.99] text-center"
+                                    >
+                                        <Calendar className="size-4 text-cyan-400 shrink-0" />
+                                        <span>Request $0 In-Home Fit Assessment & Installation</span>
+                                    </Link>
+                                    <div className="text-center text-[10px] font-mono text-emerald-400">
+                                        Zero Upfront Deposit • Hawaii CT-36775 Licensed Installation
+                                    </div>
+                                </div>
                             ) : (
                                 <a 
                                     href="tel:808-488-1111"
@@ -822,10 +847,18 @@ export default function ProductDetailPage() {
                                     <Check className="size-4 text-emerald-400 shrink-0" />
                                     <span className="font-medium text-[11px] leading-tight">$50 Flat Island-Wide Delivery</span>
                                 </div>
-                                <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                                <a 
+                                    href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-slate-300 hover:text-cyan-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 rounded-xl p-2.5 shadow-inner transition-colors group cursor-pointer"
+                                >
                                     <Check className="size-4 text-emerald-400 shrink-0" />
-                                    <span className="font-medium text-[11px] leading-tight">$45 Hawaii Energy Rebate Form</span>
-                                </div>
+                                    <span className="font-medium text-[11px] leading-tight flex items-center gap-1">
+                                        <span>$45 Hawaii Energy Rebate Form</span>
+                                        <span className="text-[9px] font-mono text-cyan-400 uppercase tracking-wider group-hover:underline">(PDF)</span>
+                                    </span>
+                                </a>
                                 <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
                                     <Check className="size-4 text-emerald-400 shrink-0" />
                                     <span className="font-medium text-[11px] leading-tight">Zero Upfront Estimate Fee</span>
@@ -954,6 +987,47 @@ export default function ProductDetailPage() {
                                 <div className="text-sm font-bold font-mono text-emerald-400 mt-0.5">{product.coverage_oahu || 'Calibrated'}</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Mobile Floating Quick-Action Dock (Fixed Bottom on Mobile Viewports) */}
+            {product && (
+                <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur-lg border-t border-cyan-500/20 px-3.5 py-2.5 shadow-2xl flex items-center justify-between gap-2.5">
+                    <div className="flex flex-col min-w-0 pr-1">
+                        <span className="text-[10px] font-mono text-slate-400 truncate max-w-[110px]">
+                            {product.name}
+                        </span>
+                        <span className="text-base font-header font-black text-cyan-400">
+                            ${(product.promo_price || product.price).toLocaleString()}
+                        </span>
+                    </div>
+                    <div className="flex items-center gap-2 grow justify-end">
+                        {product.stock > 0 ? (
+                            <button
+                                onClick={() => {
+                                    addToCart(product);
+                                    openCart();
+                                }}
+                                className="h-11 px-3.5 bg-gradient-to-r from-primary to-cyan-500 text-white font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-lg active:scale-95 flex items-center justify-center gap-1.5 grow max-w-[150px]"
+                            >
+                                <ShoppingCart className="size-4 shrink-0" />
+                                <span>Buy Now</span>
+                            </button>
+                        ) : null}
+                        <Link
+                            href={`/contact?service=window_ac_purchase&notes=Inquiry%20for%20${encodeURIComponent(product.name)}`}
+                            className="h-11 px-3 bg-slate-900 border border-cyan-500/40 text-cyan-300 font-header font-bold text-xs uppercase tracking-wider rounded-xl active:scale-95 flex items-center justify-center gap-1 shrink-0"
+                        >
+                            <span>$0 Estimate</span>
+                        </Link>
+                        <a
+                            href="tel:808-488-1111"
+                            className="h-11 w-11 shrink-0 bg-slate-800 border border-white/10 text-white rounded-xl flex items-center justify-center active:scale-95"
+                            aria-label="Call Waipahu Warehouse Dispatch"
+                        >
+                            <Phone className="size-4 text-cyan-400" />
+                        </a>
                     </div>
                 </div>
             )}
