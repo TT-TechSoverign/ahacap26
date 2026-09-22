@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import LocalServiceFunnel from '@/components/LocalServiceFunnel';
 import LocalizedSEOBody from '@/components/LocalizedSEOBody';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { getReviewsByCity } from '@/lib/product-reviews';
 import { BackToTop } from '@/components/BackToTop';
 import contentData from '@/lib/content/content.json';
 import Image from 'next/image';
@@ -155,6 +157,16 @@ export default function LocalServiceAreaPage({ params }: Props) {
             {/* 3. DYNAMIC EDUCATIONAL SEO BODY */}
             <LocalizedSEOBody city={cityData.name} regionId={cityData.regionId} />
             
+            {/* 3b. LOCALIZED ISLAND REVIEWS */}
+            <section className="max-w-6xl mx-auto px-4 sm:px-6 my-16">
+                <ReviewsPavilion 
+                    variant="compact"
+                    reviews={getReviewsByCity(cityData.name, 3)}
+                    title={`${cityData.name} Verified Reviews`}
+                    subtitle={`Customer Feedback from Homeowners in ${cityData.name}, Oahu`}
+                />
+            </section>
+
             {/* 4. DYNAMIC SCHEMA.ORG MARKUP */}
             <script
                 type="application/ld+json"

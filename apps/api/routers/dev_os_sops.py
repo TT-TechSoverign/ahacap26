@@ -769,5 +769,96 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         ],
         "outputs": ["Core Web Vitals status (VITALS_OPTIMAL)", "LCP target (< 2.0s)", "CLS (0.00)"],
         "contingency_protocol": "Alert Sovereign Master on any asset addition causing layout shift or bundle bloat."
+    },
+    # =========================================================================
+    # SUB-MASTER 9: CREATIVE AI & SPATIAL MEDIA STUDIO
+    # =========================================================================
+    "submaster_creative_studio": {
+        "id": "submaster_creative_studio",
+        "code": "SOP-SUB-09",
+        "title": "Creative AI & Spatial Media Studio Sub-Master",
+        "domain": "Creative Studio",
+        "supervisor": "Sovereign Master Orchestrator",
+        "mandate": "Supervise local workstation ComfyUI orchestration on RTX 4090, Oahu customer portrait matrices, 3D golden review medallions, and sub-80KB WebP production pipelines.",
+        "token_efficiency_policy": "Triggered on-demand via scripts/comfyui_studio_bridge.py or Dev OS. Zero persistent daemon GPU idle waste. Enforces SVG/CSS offline fallback.",
+        "oahu_grounding": "Grounds customer portraits in authentic Hawaii demographics, casual aloha attire, natural trade-wind indoor lighting, and Waipahu warehouse trust.",
+        "inputs": ["RTX 4090 VRAM headroom", "ComfyUI /system_stats endpoint", "D:\\Studio\\v266 workflow definitions", "Review metadata database"],
+        "execution_steps": [
+            {"step": 1, "title": "GPU & Bridge Probe", "description": "Trigger agent_comfyui_bridge to verify RTX 4090 (24GB VRAM) and ComfyUI server port 8188.", "verification": "VRAM free > 16GB, bridge armed."},
+            {"step": 2, "title": "Demographic Matrix Formulation", "description": "Trigger agent_avatar_portrait_crafter to synthesize non-stereotyped Oahu resident prompt matrices.", "verification": "Prompts match authentic island residential contexts."},
+            {"step": 3, "title": "Trust Medallion Forging", "description": "Trigger agent_trust_medallion_forge to forge 3D golden review medallions and CT-36775 shields.", "verification": "Golden medallions rendered in SVG and WebP."},
+            {"step": 4, "title": "Asset Optimization & CLS Guard", "description": "Trigger agent_asset_optimizer_sentinel to compress WebP assets (< 80KB) and verify zero-CLS layout boxes.", "verification": "WebP sizes < 80KB, CLS impact = 0.00."}
+        ],
+        "outputs": ["Creative studio status (STUDIO_ARMED)", "Hardware report", "Optimized review assets"],
+        "contingency_protocol": "If ComfyUI server is offline, deploy high-aesthetic Polynesian SVG/CSS gradient avatars so storefront renders without broken images."
+    },
+    # --- Under Sub-Master: Creative AI & Spatial Media Studio ---
+    "agent_comfyui_bridge": {
+        "id": "agent_comfyui_bridge",
+        "code": "SOP-STU-01",
+        "title": "ComfyUI Studio Bridge Sentinel",
+        "domain": "Creative Studio",
+        "supervisor": "submaster_creative_studio",
+        "mandate": "Audit workstation RTX 4090 GPU VRAM headroom and interface with local ComfyUI instance on D:\\Studio\\v266\\App\\ComfyUI.",
+        "token_efficiency_policy": "Zero token waste; queries local nvidia-smi and HTTP loopback on port 8188 strictly on demand.",
+        "oahu_grounding": "Coordinates workstation raytracing and diffusion models without placing load on live Hostinger VPS storefront.",
+        "inputs": ["nvidia-smi stdout", "http://127.0.0.1:8188/system_stats", "scripts/comfyui_studio_bridge.py"],
+        "execution_steps": [
+            {"step": 1, "title": "VRAM Headroom Audit", "description": "Query nvidia-smi for total and free VRAM on RTX 4090.", "verification": "VRAM free > 16,000 MB."},
+            {"step": 2, "title": "Studio Directory Verification", "description": "Confirm D:\\Studio\\v266\\App\\ComfyUI directory and models exist.", "verification": "Studio directory verified."}
+        ],
+        "outputs": ["Bridge status (STUDIO_BRIDGE_ARMED)", "VRAM stats", "GPU model"],
+        "contingency_protocol": "Log warning and route to SVG fallback generation if ComfyUI loopback is unreachable."
+    },
+    "agent_avatar_portrait_crafter": {
+        "id": "agent_avatar_portrait_crafter",
+        "code": "SOP-STU-02",
+        "title": "Oahu Avatar Portrait Crafter",
+        "domain": "Creative Studio",
+        "supervisor": "submaster_creative_studio",
+        "mandate": "Formulate demographic prompt matrices for authentic Oahu customer avatars reflecting genuine local homeowners in Kailua, Waipahu, Honolulu, and Ewa Beach.",
+        "token_efficiency_policy": "In-memory prompt matrix generation; zero runtime GPU polling.",
+        "oahu_grounding": "Grounds imagery in authentic island residential settings: lanais, jalousie window backgrounds, aloha shirts, and clean indoor AC splits.",
+        "inputs": ["OAHU_AVATAR_PROMPTS matrix", "Customer review neighborhood distributions"],
+        "execution_steps": [
+            {"step": 1, "title": "Demographic Archetype Audit", "description": "Verify coverage across Oahu communities (Windward, Leeward, Central, Metro).", "verification": "4 distinct regional archetypes active."},
+            {"step": 2, "title": "Negative Prompt Shielding", "description": "Ensure negative prompt matrix strips uncanny artifacts, oversaturated colors, and artificial skin.", "verification": "Negative prompt verified."}
+        ],
+        "outputs": ["Portrait matrix status (PORTRAIT_MATRIX_ACTIVE)", "Active archetypes count (4)"],
+        "contingency_protocol": "Fall back to Polynesian geometric gradient avatars if generation fails QC."
+    },
+    "agent_trust_medallion_forge": {
+        "id": "agent_trust_medallion_forge",
+        "code": "SOP-STU-03",
+        "title": "Trust Medallion Forge Sentinel",
+        "domain": "Creative Studio",
+        "supervisor": "submaster_creative_studio",
+        "mandate": "Forge 3D golden review medallions, Waipahu Warehouse Verified badges, and CT-36775 contractor shields.",
+        "token_efficiency_policy": "Vector SVG and pre-rendered WebP assets; 0Hz runtime CPU cost.",
+        "oahu_grounding": "Embeds Waipahu local warehouse proof and Hawaii CT-36775 license directly into trust assets.",
+        "inputs": ["apps/web/public/assets/reviews/trust_medallion_gold.svg", "CT-36775 license registry"],
+        "execution_steps": [
+            {"step": 1, "title": "Medallion Vector Verification", "description": "Verify gold medallion SVG renders with gold gradient and CT-36775 engraving.", "verification": "trust_medallion_gold.svg verified."},
+            {"step": 2, "title": "Resolution Scaling Audit", "description": "Confirm vector scalability without raster pixelation on high-DPI mobile screens.", "verification": "Scalable SVG verified."}
+        ],
+        "outputs": ["Medallions status (MEDALLIONS_FORGED)", "Available badge formats (SVG, WebP)"],
+        "contingency_protocol": "Regenerate medallion vector from scripts/comfyui_studio_bridge.py --generate-fallbacks if asset missing."
+    },
+    "agent_asset_optimizer_sentinel": {
+        "id": "agent_asset_optimizer_sentinel",
+        "code": "SOP-STU-04",
+        "title": "Asset Optimizer & CLS Sentinel",
+        "domain": "Creative Studio",
+        "supervisor": "submaster_creative_studio",
+        "mandate": "Enforce strict WebP compression under 80KB, zero Cumulative Layout Shift (CLS = 0.00), and offline SVG fallback resilience.",
+        "token_efficiency_policy": "File size and layout inspector; sub-2ms disk check.",
+        "oahu_grounding": "Guarantees rapid initial page loads on Oahu LTE cellular networks without layout jumping.",
+        "inputs": ["apps/web/public/assets/reviews/*", "ReviewsPavilion aspect-ratio wrappers"],
+        "execution_steps": [
+            {"step": 1, "title": "File Weight Audit", "description": "Check that all review avatars and badges are under 80KB.", "verification": "All review assets < 80KB."},
+            {"step": 2, "title": "Fallback Asset Verification", "description": "Verify all 6 Polynesian SVG fallback avatars exist in public assets.", "verification": "6/6 SVG fallbacks verified."}
+        ],
+        "outputs": ["Asset optimization status (ASSETS_OPTIMIZED)", "CLS impact (0.00)", "Fallback state (ACTIVE)"],
+        "contingency_protocol": "Auto-generate fallback SVGs if any raster image exceeds 80KB or fails to load."
     }
 }

@@ -7,17 +7,17 @@ This document defines the agent architecture, roles, execution protocols, and op
 ## 1. SOVEREIGN MASTER & FLEET STRUCTURE
 
 - **Sovereign Master**: Central cognitive intelligence overseeing all autonomous operations.
-- **Category Sub-Masters (8)**: Autonomous domain supervisors governing specific functional areas.
-- **Specialized Satellite Agents (33)**: On-demand diagnostic and execution units.
+- **Category Sub-Masters (9)**: Autonomous domain supervisors governing specific functional areas.
+- **Specialized Satellite Agents (37)**: On-demand diagnostic and execution units.
 - **Strict Anti-Upsell Mandate**: No accessory upsells, add-on modals, or bundle friction in checkout.
 
 ```
                                         [ MASTER PROJECTS BRAIN ]
                                                     |
-    +---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
-    |               |               |               |               |               |               |               |               |
-[Infrastructure] [Cybersecurity] [Commerce]      [Growth & SEO]  [Customer & CRM] [Deployment QA] [SERP Acq.]     [Conversion]
-  (4 Agents)      (4 Agents)     (4 Agents)        (7 Agents)      (3 Agents)       (4 Agents)     (3 Agents)       (4 Agents)
+    +---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+    |               |               |               |               |               |               |               |               |               |
+[Infrastructure] [Cybersecurity] [Commerce]      [Growth & SEO]  [Customer & CRM] [Deployment QA] [SERP Acq.]     [Conversion]    [Creative Studio]
+  (4 Agents)      (4 Agents)     (4 Agents)        (7 Agents)      (3 Agents)       (4 Agents)     (3 Agents)       (4 Agents)       (4 Agents)
 ```
 
 ---
@@ -89,6 +89,14 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_zero_friction_navigator`: Ensures zero checkout dead-ends, instant filter resets, and dispatch phone bridges.
   - `agent_speed_core_vital_sentinel`: Enforces mobile sub-100ms response, zero CLS, and universal zero-cache headers.
 
+### Sub-Master 9: Creative AI & Spatial Media Studio (`submaster_creative_studio`)
+- **Scope**: Local ComfyUI RTX 4090 orchestration, Oahu customer portrait matrices, 3D review medallions, sub-80KB WebP optimization.
+- **Agents**:
+  - `agent_comfyui_bridge`: Manages workstation RTX 4090 GPU (24GB VRAM) and ComfyUI API queue at 127.0.0.1:8188.
+  - `agent_avatar_portrait_crafter`: Synthesizes demographic prompt matrices for authentic Oahu homeowner portraits.
+  - `agent_trust_medallion_forge`: Generates 3D golden review medallions, Waipahu warehouse proof, and CT-36775 shields.
+  - `agent_asset_optimizer_sentinel`: Post-processes outputs (< 80KB WebP, zero CLS bounds) and manages Polynesian SVG/CSS fallbacks.
+
 ---
 
 ## 3. CLI BRIDGE EXECUTION CHEATSHEET
@@ -97,14 +105,14 @@ The local PowerShell CLI bridge (`.\scripts\dev-os.ps1`) allows immediate intera
 
 ```powershell
 # Fleet Health & Tree
-.\scripts\dev-os.ps1 status                  # Query all 33 agents' lifecycle and last run
+.\scripts\dev-os.ps1 status                  # Query all 37 agents' lifecycle and last run
 .\scripts\dev-os.ps1 tree                    # Display hierarchical agent tree
 .\scripts\dev-os.ps1 inspect <agent_id>      # Deep inspect an individual agent synapse
 
 # On-Demand Execution
 .\scripts\dev-os.ps1 run-agent <agent_id>    # Trigger a single satellite agent
 .\scripts\dev-os.ps1 run-submaster <id>      # Execute an entire category sub-master suite
-.\scripts\dev-os.ps1 run-fleet               # Sequentially execute all 33 agents
+.\scripts\dev-os.ps1 run-fleet               # Sequentially execute all 37 agents
 
 # Master Brain & Continuous Learning
 .\scripts\dev-os.ps1 brain                   # Query Master Brain status & live cognitive thoughts

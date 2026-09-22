@@ -13,6 +13,7 @@ import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { BackToTop } from '@/components/BackToTop';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { cn, generateProductSlug, isCampaignActive as isCampaignActiveChecker } from '@/lib/utils';
 import contentData from '@/lib/content/content.json';
 
@@ -915,6 +916,15 @@ function ShopPageContent() {
                             </div>
                         ))
                     )}
+                </div>
+
+                {/* Island Social Proof Marquee */}
+                <div className="mt-12 border-t border-white/5 pt-8">
+                    <ReviewsPavilion 
+                        variant="marquee" 
+                        title="Oahu Verified Customer Stories"
+                        subtitle="Read feedback from homeowners who upgraded to whisper-quiet window ACs in Waipahu, Honolulu, and Kailua."
+                    />
                 </div>
 
             </main>

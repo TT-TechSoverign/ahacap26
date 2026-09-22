@@ -2,6 +2,7 @@ import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
 import Section1HeroHomeV2 from '@/components/Section1HeroHomeV2';
 import { QuickJumpBanner } from '@/components/QuickJumpBanner';
 import { BackToTop } from '@/components/BackToTop';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -70,6 +71,15 @@ export default function Homepage() {
                 <QuickJumpBanner />
 
                 <Section2OurServicesV2 />
+
+                {/* Island Social Proof Section */}
+                <div className="border-t border-slate-800/80 bg-[#070b12]/90 backdrop-blur-sm">
+                    <ReviewsPavilion 
+                        variant="marquee" 
+                        title="Island Verified Customer Stories"
+                        subtitle="Hear how Oahu homeowners beat the humidity with whisper-quiet ductless mini-splits and energy-efficient window ACs."
+                    />
+                </div>
             </main>
             <BackToTop visible={true} />
         </div>

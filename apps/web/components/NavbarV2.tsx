@@ -86,9 +86,14 @@ export default function NavbarV2() {
                 <div className="bg-[#05080e] border-b border-slate-800/80 text-[11px] font-mono text-slate-300 py-1.5 px-6">
                     <div className="max-w-7xl mx-auto flex justify-between items-center">
                         <div className="flex items-center gap-2.5 text-slate-400">
-                            <span className="text-amber-400 font-bold flex items-center gap-1">
+                            <Link 
+                                href="/reviews" 
+                                prefetch={false}
+                                className="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 transition-colors group cursor-pointer hover:underline decoration-amber-400/50 underline-offset-2"
+                                title="Read 142+ Verified Customer Reviews"
+                            >
                                 ⭐ <span>4.9/5 Rating (142+ Reviews)</span>
-                            </span>
+                            </Link>
                             <span className="text-slate-600">•</span>
                             <span>Licensed Oahu Contractor CT-36775</span>
                             <span className="text-slate-600">•</span>

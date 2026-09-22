@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="goldShine" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="45%" stop-color="#F59E0B"/>
+      <stop offset="85%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </radialGradient>
+  </defs>
+  <circle cx="128" cy="128" r="116" fill="url(#goldShine)" stroke="#FDE047" stroke-width="4"/>
+  <circle cx="128" cy="128" r="102" fill="#0B1120" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4 2"/>
+  <path d="M 128 50 L 137 78 L 166 78 L 142 96 L 151 124 L 128 106 L 105 124 L 114 96 L 90 78 L 119 78 Z" fill="#FBBF24"/>
+  <text x="128" y="152" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">4.9 ★</text>
+  <text x="128" y="174" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="700" font-size="12" fill="#38BDF8" text-anchor="middle" letter-spacing="2">OAHU VERIFIED</text>
+  <text x="128" y="192" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="600" font-size="10" fill="#94A3B8" text-anchor="middle">CT-36775</text>
+</svg>

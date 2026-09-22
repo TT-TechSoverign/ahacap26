@@ -150,6 +150,7 @@ export default function Footer() {
                                 { text: 'Shop Inventory', href: '/shop' },
                                 { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
                                 { text: 'Window AC Cleaning', href: '/window_ac_maintenance' },
+                                { text: 'Customer Reviews (142+)', href: '/reviews' },
                                 { text: 'Service Areas', href: '/service-areas' },
                                 { text: 'Sitemap', href: '/sitemap' },
                                 { text: 'Contact Us', href: '/contact' }

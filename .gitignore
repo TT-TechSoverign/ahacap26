@@ -107,7 +107,11 @@ apps/web/scripts/
 scripts/*
 !scripts/dev-os.*
 !scripts/scan-secrets.*
+!scripts/comfyui_studio_bridge.py
+!scripts/enrich_reviews.py
 *.txt
 *.py
 !apps/api/**/*.py
+!scripts/comfyui_studio_bridge.py
+!scripts/enrich_reviews.py
 !*.sh

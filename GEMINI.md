@@ -45,9 +45,9 @@ Every conversation session inherits the knowledge, directives, historical timeli
 
 ---
 
-## IV. SOVEREIGN AGENT REGISTRY (6 SUB-MASTERS • 24 AGENTS)
+## IV. SOVEREIGN AGENT REGISTRY (9 SUB-MASTERS • 37 AGENTS)
 
-The platform is monitored and driven by 8 Category Sub-Masters and 33 specialized satellite agents:
+The platform is monitored and driven by 9 Category Sub-Masters and 37 specialized satellite agents:
 
 1. **Infrastructure & Storage Sub-Master** (`submaster_infrastructure`):
    - `agent_host_sentinel` (VPS disk, memory, SSL, firewall)
@@ -90,6 +90,11 @@ The platform is monitored and driven by 8 Category Sub-Masters and 33 specialize
    - `agent_trust_authority_grounder` (Waipahu inventory proof, 1-year warranty badges, CT-36775 license)
    - `agent_zero_friction_navigator` (Zero dead-ends, smooth filter resets, 1-tap phone bridges)
    - `agent_speed_core_vital_sentinel` (Mobile Core Web Vitals: LCP < 2.0s, CLS = 0, zero-cache delivery)
+9. **Creative AI & Spatial Media Studio Sub-Master** (`submaster_creative_studio`):
+   - `agent_comfyui_bridge` (RTX 4090 24GB VRAM lifecycle, headless queue, checkpoint warm-up)
+   - `agent_avatar_portrait_crafter` (Photorealistic aloha technician & customer persona portraits)
+   - `agent_trust_medallion_forge` (3D golden review medallions, Waipahu warehouse proof, and CT-36775 shields)
+   - `agent_asset_optimizer_sentinel` (WebP compression, zero CLS web delivery, responsive WebP/SVG fallback integrity)
 
 *(Strict Anti-Upsell Protocol: No accessory upsells, add-on modals, or bundle friction permitted in checkout).*
 
@@ -118,6 +123,12 @@ The platform is monitored and driven by 8 Category Sub-Masters and 33 specialize
   - Integrated Blender 4.1 headless raytracing with PIL engineering caliper overlay for isometric window cutaway renders.
   - Expanded Sovereign Fleet to 26 agents: `agent_catalog_auditor` (Agent #25) and `agent_spatial_visualizer` (Agent #26) wired into 3-stage live verification pipeline.
   - Responsive horizontal mobile filter track (44px touch targets) and zero CLS verified.
+- **Epoch 13 (Sep 22, 2026) Island Reviews Pavilion, ComfyUI Studio Bridge & 37-Agent Fleet Governance**:
+  - Enriched and unlocked all 142 authentic 5-star customer reviews across `apps/web/lib/content/reviews_db.json` and `apps/api/content/reviews_db.json` with Oahu neighborhood tags, technician credits, and verified customer identifiers.
+  - Architected `<ReviewsPavilion />` (`full`, `compact`, `marquee` variants) featuring dark glassmorphic Polynesian styling, gold star clusters, technician aloha spotlight filters (`Brian`, `Chris`, `Makoa`, `Omar`), Oahu neighborhood badges, and "Leave an Aloha Review" Google/Yelp flywheel CTAs.
+  - Integrated Pavilion across `/reviews` (new standalone SEO powerhouse route with `HVACBusiness` `AggregateRating` 4.9★, 142 reviews), `/shop/[slug]` (model-matched reviews), `/shop` (proof marquee), `/` (social proof), all 22 `/service-areas/[city]` localized landing pages, `NavbarV2`, `MobileDrawerMenu`, and `Footer`.
+  - Built `scripts/comfyui_studio_bridge.py` connecting to local ComfyUI Studio on `D:\Studio\v266\App\ComfyUI` powered by NVIDIA RTX 4090 24GB VRAM, with zero-broken-image SVG/CSS Polynesian fallback avatars.
+  - Expanded Sovereign Fleet to 9 Sub-Masters and 37 specialized satellite agents, chartering Sub-Master 9 (`submaster_creative_studio`) with 4 dedicated agents (`agent_comfyui_bridge`, `agent_avatar_portrait_crafter`, `agent_trust_medallion_forge`, `agent_asset_optimizer_sentinel`) and 46 total SOP dossiers.
 
 ---
 

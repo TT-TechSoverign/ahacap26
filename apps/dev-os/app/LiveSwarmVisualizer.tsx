@@ -25,7 +25,8 @@ import {
     Eye,
     Maximize2,
     Minimize2,
-    Radio
+    Radio,
+    Palette
 } from 'lucide-react';
 
 export interface LiveSwarmProps {
@@ -119,6 +120,12 @@ export default function LiveSwarmVisualizer({
                 return { color: 'text-rose-400', border: 'border-rose-500/40', bg: 'bg-rose-500/10', glow: 'shadow-rose-500/20', icon: Users };
             case 'submaster_deployment_quality':
                 return { color: 'text-blue-400', border: 'border-blue-500/40', bg: 'bg-blue-500/10', glow: 'shadow-blue-500/20', icon: Rocket };
+            case 'submaster_serp_acquisition':
+                return { color: 'text-sky-400', border: 'border-sky-500/40', bg: 'bg-sky-500/10', glow: 'shadow-sky-500/20', icon: Search };
+            case 'submaster_conversion_velocity':
+                return { color: 'text-teal-400', border: 'border-teal-500/40', bg: 'bg-teal-500/10', glow: 'shadow-teal-500/20', icon: Zap };
+            case 'submaster_creative_studio':
+                return { color: 'text-fuchsia-400', border: 'border-fuchsia-500/40', bg: 'bg-fuchsia-500/10', glow: 'shadow-fuchsia-500/20', icon: Palette };
             default:
                 return { color: 'text-cyan-400', border: 'border-cyan-500/40', bg: 'bg-cyan-500/10', glow: 'shadow-cyan-500/20', icon: Cpu };
         }

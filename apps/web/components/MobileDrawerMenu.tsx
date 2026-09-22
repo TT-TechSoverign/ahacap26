@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useContent } from '../lib/context/ContentContext';
-import { X, Phone, Store, Calendar, Sparkles, Wrench, Compass, ShieldCheck, MapPin, Mail } from 'lucide-react';
+import { X, Phone, Store, Calendar, Sparkles, Wrench, Compass, ShieldCheck, MapPin, Mail, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { sendGAEvent } from '@next/third-parties/google';
 
@@ -69,6 +69,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
         {
             title: 'Tools & Guides',
             links: [
+                { text: 'Verified Reviews (142+)', href: '/reviews', icon: Star, badge: '4.9 ★' },
                 { text: 'Room AC Sizing Wizard', href: '/sizing', icon: Compass },
                 { text: 'Clean vs. Replace Guide', href: '/clean-vs-replace-window-ac', icon: Compass },
                 { text: 'Island Service Areas', href: '/service-areas', icon: MapPin },

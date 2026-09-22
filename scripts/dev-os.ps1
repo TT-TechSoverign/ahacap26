@@ -60,6 +60,7 @@ switch ($Command.ToLower()) {
             Write-Host "   Deployment: agent_deployment_guardian, agent_build_qa, agent_regression_sentinel, agent_spatial_visualizer" -ForegroundColor Yellow
             Write-Host "   SERP:       agent_serp_intent_harvester, agent_ctr_title_craftsman, agent_merchant_feed_sentinel" -ForegroundColor Yellow
             Write-Host "   Conversion: agent_mobile_checkout_sentinel, agent_trust_authority_grounder, agent_zero_friction_navigator, agent_speed_core_vital_sentinel" -ForegroundColor Yellow
+            Write-Host "   Studio:     agent_comfyui_bridge, agent_avatar_portrait_crafter, agent_trust_medallion_forge, agent_asset_optimizer_sentinel" -ForegroundColor Yellow
             return
         }
         Write-Host "[*] Triggering Agent: $Target on Server..." -ForegroundColor Yellow
@@ -73,7 +74,7 @@ switch ($Command.ToLower()) {
     }
 
     "run-fleet" {
-        Write-Host "[*] Dispatching full fleet: Running All 33 Specialized Agents sequentially..." -ForegroundColor Yellow
+        Write-Host "[*] Dispatching full fleet: Running All 37 Specialized Agents sequentially..." -ForegroundColor Yellow
         try {
             $resp = Invoke-RestMethod -Uri "$ServerUrl/agents/run-all" -Method POST -Headers $headers
             Write-Host "[OK] Fleet Audit Completed at $($resp.executed_at) (All Healthy: $($resp.all_healthy)):" -ForegroundColor Green
@@ -157,7 +158,7 @@ switch ($Command.ToLower()) {
 
     "run-submaster" {
         if (-not $Target) {
-            Write-Host "[ERR] Usage: .\scripts\dev-os.ps1 run-submaster [infra|security|commerce|growth|crm|deploy|serp|conversion]" -ForegroundColor Red
+            Write-Host "[ERR] Usage: .\scripts\dev-os.ps1 run-submaster [infra|security|commerce|growth|crm|deploy|serp|conversion|studio]" -ForegroundColor Red
             return
         }
         $targetMap = @{
@@ -169,6 +170,7 @@ switch ($Command.ToLower()) {
             "deploy"     = "submaster_deployment_quality"
             "serp"       = "submaster_serp_acquisition"
             "conversion" = "submaster_conversion_velocity"
+            "studio"     = "submaster_creative_studio"
         }
         $smId = if ($targetMap.ContainsKey($Target.ToLower())) { $targetMap[$Target.ToLower()] } else { $Target }
         Write-Host "[*] Dispatching Category Sub-Master: $smId on Server..." -ForegroundColor Yellow

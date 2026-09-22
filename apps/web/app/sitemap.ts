@@ -72,7 +72,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/ac-repair-oahu',
         '/ac-cleaning-oahu',
         '/shop/oahu-window-ac-warehouse',
-        '/ductless-mini-split-installation-oahu'
+        '/ductless-mini-split-installation-oahu',
+        '/reviews'
     ];
 
     const staticRoutes = [

@@ -30,6 +30,7 @@ export default async function SitemapPage() {
 
     const staticLinks = [
         { name: 'Home', path: '/' },
+        { name: 'Verified Customer Reviews (142+)', path: '/reviews' },
         { name: 'Shop / Inventory', path: '/shop' },
         { name: '└ LG Dual Inverter Window AC Guide', path: '/shop/lg-dual-inverter-guide' },
         { name: '└ Large Room Window AC (18K & 23.5K)', path: '/shop/large-room-window-ac-oahu' },
