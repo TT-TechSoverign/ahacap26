@@ -354,6 +354,7 @@ export default function ProductDetailPage() {
 
     const [mediaView, setMediaView] = useState<'photos' | 'cutaway' | 'specs'>('photos');
     const [isSizingExplainerOpen, setIsSizingExplainerOpen] = useState(false);
+    const [isCaliperLightboxOpen, setIsCaliperLightboxOpen] = useState(false);
 
     // High-Resolution 3D Spatial Window Fit Cutaway Mapping
     const cutawayImageMap: { [key: number]: string } = {
@@ -367,6 +368,8 @@ export default function ProductDetailPage() {
         8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
         9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
         10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
         13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
         14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
         15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
@@ -465,19 +468,34 @@ export default function ProductDetailPage() {
                         {/* Interactive Main Visual Display */}
                         <TiltCard isPromo={isPromo} isTouchDevice={isTouchDevice}>
                             {mediaView === 'cutaway' && cutawayImageUrl ? (
-                                <div className="relative w-full h-full z-10 flex flex-col items-center justify-center">
+                                <div 
+                                    onClick={() => setIsCaliperLightboxOpen(true)}
+                                    className="relative w-full h-full z-10 flex flex-col items-center justify-center cursor-zoom-in group/cutaway"
+                                >
                                     <div className="relative w-full h-full">
                                         <Image
                                             src={cutawayImageUrl}
                                             alt={`${product.name} 3D Spatial Window Opening Fit`}
                                             fill
-                                            className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.9)] transition-all duration-700"
+                                            className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.9)] transition-all duration-700 group-hover/cutaway:scale-105"
                                             priority
                                         />
                                     </div>
                                     <div className="absolute top-2 left-2 z-20 px-2.5 py-1 rounded-md bg-emerald-500/90 text-slate-950 text-[9px] font-header font-black uppercase tracking-wider shadow-md">
                                         Blender 4.1 Caliper Raytrace
                                     </div>
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setIsCaliperLightboxOpen(true);
+                                        }}
+                                        className="absolute top-2 right-2 z-30 px-2 py-1 rounded-md bg-black/80 hover:bg-black text-cyan-300 hover:text-white border border-white/20 text-[9px] font-header font-bold uppercase tracking-wider flex items-center gap-1 transition-all shadow-md active:scale-95"
+                                        title="Expand Fullscreen 3D Calipers & Geometry"
+                                    >
+                                        <Maximize2 className="size-3" />
+                                        <span>Expand Calipers</span>
+                                    </button>
                                     <div className="absolute bottom-2 right-2 z-20 px-2.5 py-1 rounded-md bg-slate-950/85 border border-emerald-500/30 text-emerald-300 text-[9px] font-mono font-bold shadow-md">
                                         Min Opening: {specs?.minWindowHeight || '16.0"'} H
                                     </div>
@@ -879,6 +897,62 @@ export default function ProductDetailPage() {
                         </div>
                         <div className="grow bg-white/5 relative">
                             <iframe src={specSheetUrl} className="w-full h-full" title="Product Specifications PDF" />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* 3D Caliper Lightbox Modal */}
+            {isCaliperLightboxOpen && cutawayImageUrl && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md">
+                    <div className="bg-[#0a0e14] border border-cyan-500/30 w-full max-w-5xl rounded-3xl shadow-2xl flex flex-col overflow-hidden relative ring-1 ring-cyan-500/20">
+                        <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/10 bg-surface-dark/90">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                                    <Ruler className="size-5" />
+                                </div>
+                                <div>
+                                    <h3 className="font-header font-black uppercase text-white tracking-widest text-sm md:text-base">
+                                        3D Spatial Fit &amp; Dimension Calipers
+                                    </h3>
+                                    <p className="text-[10px] text-cyan-400 font-mono">
+                                        {product.name} • Blender 4.1 Cycles Raytracing
+                                    </p>
+                                </div>
+                            </div>
+                            <button 
+                                onClick={() => setIsCaliperLightboxOpen(false)} 
+                                className="p-2 text-slate-400 hover:text-white transition-colors rounded-xl bg-white/5 hover:bg-white/10"
+                            >
+                                <X className="size-6" />
+                            </button>
+                        </div>
+                        <div className="relative w-full aspect-[16/10] max-h-[65vh] bg-[#05070a] p-4 flex items-center justify-center overflow-hidden">
+                            <Image 
+                                src={cutawayImageUrl} 
+                                alt={`${product.name} 3D Caliper Dimensions`} 
+                                fill 
+                                className="object-contain p-2 md:p-4" 
+                                priority
+                            />
+                        </div>
+                        <div className="p-4 md:p-6 border-t border-white/10 bg-surface-dark/90 grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                            <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                                <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Min Window Height</div>
+                                <div className="text-sm font-bold font-mono text-white mt-0.5">{specs?.minWindowHeight || '16.0"'} H</div>
+                            </div>
+                            <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                                <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Window Width Span</div>
+                                <div className="text-sm font-bold font-mono text-white mt-0.5">{specs?.minWindowWidth || '27"'} – {specs?.maxWindowWidth || '39"'}</div>
+                            </div>
+                            <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                                <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Chassis Type</div>
+                                <div className="text-sm font-bold font-header text-cyan-300 mt-0.5">{specs?.chassisType || 'Slide-Out Chassis'}</div>
+                            </div>
+                            <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                                <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Oahu Sizing Standard</div>
+                                <div className="text-sm font-bold font-mono text-emerald-400 mt-0.5">{product.coverage_oahu || 'Calibrated'}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -41,6 +41,16 @@ interface Product {
     btu?: number;
     voltage?: string;
     coverage?: string;
+    coverage_aham?: string;
+    coverage_oahu?: string;
+    sizing_notes?: string;
+    min_window_height?: string;
+    min_window_width?: string;
+    max_window_width?: string;
+    chassis_type?: string;
+    shipping_weight?: string;
+    ceer_rating?: string;
+    dry_air_flow_cfm?: string;
     noise_level?: string;
     dehumidification?: string;
     performance_specs?: string;
@@ -774,6 +784,27 @@ export function ACSelectorWizard() {
                                                                     ${activePrice}
                                                                 </p>
                                                             </div>
+                                                        </div>
+
+                                                        {/* Dual-Sizing & Window Clearance Badge */}
+                                                        <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 space-y-1 text-left">
+                                                            <div className="flex items-center justify-between text-[9px] font-mono">
+                                                                <span className="text-slate-400 uppercase">AHAM Factory:</span>
+                                                                <span className="text-white font-bold">{product.coverage_aham || product.coverage || 'Factory Rated'}</span>
+                                                            </div>
+                                                            <div className="flex items-center justify-between text-[9px] font-mono">
+                                                                <span className="text-cyan-400 uppercase flex items-center gap-1">
+                                                                    <span className="size-1 rounded-full bg-cyan-400 animate-pulse"></span>
+                                                                    Island Sizing:
+                                                                </span>
+                                                                <span className="text-cyan-300 font-bold">{product.coverage_oahu || 'Calibrated'}</span>
+                                                            </div>
+                                                            {product.min_window_height && (
+                                                                <div className="flex items-center justify-between text-[9px] font-mono pt-1 border-t border-white/5">
+                                                                    <span className="text-slate-400 uppercase">Min Window Opening:</span>
+                                                                    <span className="text-emerald-400 font-bold">{product.min_window_height} H × {product.min_window_width || '27"'} W</span>
+                                                                </div>
+                                                            )}
                                                         </div>
 
                                                         {/* Specs Grid */}

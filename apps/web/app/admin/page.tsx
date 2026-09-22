@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useCart } from '../../context/CartContext';
 import Image from 'next/image';
@@ -9,6 +9,7 @@ import content from '@/lib/content/content.json';
 import { AdminCalendar } from '@/components/AdminCalendar';
 import { useContent } from '@/lib/context/ContentContext';
 import NavbarV2 from '@/components/NavbarV2';
+import { cn } from '@/lib/utils';
 import { 
     Lock, 
     Settings, 
@@ -31,7 +32,20 @@ import {
     Phone, 
     MapPin, 
     Save, 
-    CheckCircle2 
+    CheckCircle2,
+    Search,
+    FileSpreadsheet,
+    Download,
+    RefreshCw,
+    ExternalLink,
+    Copy,
+    Check,
+    Truck,
+    Ruler,
+    Maximize2,
+    Filter,
+    AlertTriangle,
+    Clock
 } from 'lucide-react';
 
 const TabIconMap = {
@@ -52,6 +66,16 @@ interface Product {
     btu?: number;
     voltage?: string;
     coverage?: string;
+    coverage_aham?: string;
+    coverage_oahu?: string;
+    sizing_notes?: string;
+    min_window_height?: string;
+    min_window_width?: string;
+    max_window_width?: string;
+    chassis_type?: string;
+    shipping_weight?: string;
+    ceer_rating?: string;
+    dry_air_flow_cfm?: string;
     performance_specs?: string;
     key_spec?: string;
     noise_level?: string;
@@ -72,6 +96,7 @@ interface Order {
     customer_phone?: string;
     customer_address?: string;
     items_json?: string;
+    fulfillment_mode?: string;
     created_at: string;
 }
 
@@ -106,6 +131,19 @@ export default function AdminPage() {
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
     const [viewingLead, setViewingLead] = useState<Lead | null>(null);
     const [viewingOrder, setViewingOrder] = useState<Order | null>(null);
+
+    // Search and filter states
+    const [inventorySearch, setInventorySearch] = useState('');
+    const [inventoryCategory, setInventoryCategory] = useState<string>('ALL');
+
+    const [orderSearch, setOrderSearch] = useState('');
+    const [orderStatusFilter, setOrderStatusFilter] = useState<string>('ALL');
+    const [isReconciling, setIsReconciling] = useState(false);
+    const [reconcileMessage, setReconcileMessage] = useState('');
+
+    const [leadSearch, setLeadSearch] = useState('');
+    const [leadStatusFilter, setLeadStatusFilter] = useState<string>('ALL');
+    const [leadUrgencyFilter, setLeadUrgencyFilter] = useState<string>('ALL');
 
     const adminFetch = useCallback(async (url: string, options: RequestInit = {}) => {
         const token = typeof window !== 'undefined' ? sessionStorage.getItem('admin_token') : null;
@@ -260,13 +298,16 @@ export default function AdminPage() {
 
                         <form onSubmit={handleLogin} className="space-y-6">
                             <div className="space-y-2">
-                                <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest ml-1">{content.admin.login.label}</label>
+                                <label className="text-slate-400 text-[9px] font-black uppercase tracking-widest ml-1">4-Digit PIN or Master Password</label>
                                 <input
                                     type="password"
                                     value={pin}
                                     onChange={(e) => setPin(e.target.value)}
-                                    className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-center text-xl tracking-[1em] text-white focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all placeholder-transparent"
-                                    maxLength={4}
+                                    className={cn(
+                                        "w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-center text-white focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all placeholder:text-slate-700",
+                                        pin.length <= 4 ? "text-xl tracking-[1em]" : "text-sm font-mono tracking-wider"
+                                    )}
+                                    maxLength={64}
                                     autoFocus
                                     placeholder="••••"
                                 />
@@ -342,7 +383,15 @@ export default function AdminPage() {
                             })}
                         </nav>
                     </div>
-                    <div className="flex items-center gap-4 w-full sm:w-auto justify-end">
+                    <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
+                        <Link 
+                            href="/dev-os" 
+                            target="_blank"
+                            className="text-cyan-400 hover:text-white transition-all text-[10px] font-mono font-bold uppercase tracking-widest border border-cyan-500/20 px-3.5 py-2.5 rounded-lg flex items-center gap-1.5 bg-cyan-500/10 hover:bg-cyan-500/20 hover:border-cyan-500/40"
+                            title="Open Dev OS Autonomous Brain & Swarm Fleet"
+                        >
+                            <span>Dev OS ↗</span>
+                        </Link>
                         {activeTab === 'inventory' && (
                             <button
                                 onClick={() => setIsAdding(true)}
@@ -425,40 +474,88 @@ export default function AdminPage() {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 10 }}
                                 >
-                                    <table className="w-full text-left border-collapse">
+                                    {/* Inventory Search & Category Controls */}
+                                    <div className="p-4 md:p-6 border-b border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 bg-white/[0.01]">
+                                        <div className="relative w-full md:w-80">
+                                            <Search className="size-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                                            <input 
+                                                type="text"
+                                                placeholder="Search model, BTU, specs..."
+                                                value={inventorySearch}
+                                                onChange={(e) => setInventorySearch(e.target.value)}
+                                                className="w-full pl-10 pr-4 py-2 bg-black/40 border border-white/10 rounded-xl text-xs text-white placeholder-slate-500 focus:border-primary/50 focus:outline-none"
+                                            />
+                                        </div>
+                                        <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+                                            {['ALL', 'dual_inverter', 'universal_fit', 'base', 'ge', 'casement'].map(cat => (
+                                                <button
+                                                    key={cat}
+                                                    type="button"
+                                                    onClick={() => setInventoryCategory(cat)}
+                                                    className={cn(
+                                                        "px-3 py-1.5 rounded-lg text-[9px] font-header font-black uppercase tracking-wider transition-all whitespace-nowrap",
+                                                        inventoryCategory === cat 
+                                                            ? "bg-primary text-black font-black shadow-sm" 
+                                                            : "bg-white/5 text-slate-400 hover:text-white"
+                                                    )}
+                                                >
+                                                    {cat === 'ALL' ? 'All Models' : cat.replace('_', ' ')}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Desktop Table View */}
+                                    <table className="w-full text-left border-collapse hidden md:table">
                                         <thead>
                                             <tr className="bg-white/5 text-slate-400 text-[10px] font-black uppercase tracking-widest">
-                                                <th className="px-8 py-4">Image</th>
-                                                <th className="px-8 py-4">Product Name</th>
-                                                <th className="px-8 py-4 text-center">Category</th>
-                                                <th className="px-8 py-4 text-right">Price</th>
-                                                <th className="px-8 py-4 text-center">Stock</th>
-                                                <th className="px-8 py-4 text-right">Actions</th>
+                                                <th className="px-6 py-4">Image</th>
+                                                <th className="px-6 py-4">Product Name &amp; Sizing</th>
+                                                <th className="px-6 py-4 text-center">Category</th>
+                                                <th className="px-6 py-4 text-right">Price</th>
+                                                <th className="px-6 py-4 text-center">Stock</th>
+                                                <th className="px-6 py-4 text-right">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-white/5">
-                                            {products.map(product => (
+                                            {filteredProducts.map(product => (
                                                 <tr key={product.id} className="hover:bg-white/[0.02] transition-colors group">
-                                                    <td className="px-8 py-6">
-                                                        <div className="size-20 bg-black rounded-lg border border-white/10 overflow-hidden relative">
+                                                    <td className="px-6 py-5">
+                                                        <div className="size-16 bg-black rounded-lg border border-white/10 overflow-hidden relative">
                                                             {product.image_url ? (
                                                                 <Image src={product.image_url} alt={product.name} fill className="object-contain p-2" />
                                                             ) : (
                                                                 <div className="absolute inset-0 flex items-center justify-center text-slate-800">
-                                                                    <ImageIcon className="size-10" />
+                                                                    <ImageIcon className="size-8" />
                                                                 </div>
                                                             )}
                                                         </div>
                                                     </td>
-                                                    <td className="px-8 py-6">
-                                                        <div className="text-white font-bold uppercase tracking-wide">{product.name}</div>
-                                                        <div className="text-slate-500 text-[9px] font-black tracking-widest uppercase mt-1">ID: {product.id}</div>
+                                                    <td className="px-6 py-5">
+                                                        <div className="text-white font-bold uppercase tracking-wide text-sm">{product.name}</div>
+                                                        <div className="flex flex-wrap items-center gap-2 text-[9px] font-mono mt-1">
+                                                            <span className="text-slate-500">ID: {product.id}</span>
+                                                            <span className="text-slate-400">• AHAM: {product.coverage_aham || product.coverage || 'Rated'}</span>
+                                                            <span className="text-cyan-400">• Island: {product.coverage_oahu || 'Calibrated'}</span>
+                                                            {product.min_window_height && (
+                                                                <span className="text-emerald-400">• Min Win: {product.min_window_height} H</span>
+                                                            )}
+                                                        </div>
                                                     </td>
-                                                    <td className="px-8 py-6 text-center">
-                                                        <span className="px-3 py-1 bg-white/5 rounded-full text-[9px] font-black text-slate-400 uppercase tracking-widest border border-white/10">{product.category}</span>
+                                                    <td className="px-6 py-5 text-center">
+                                                        <span className="px-2.5 py-1 bg-white/5 rounded-full text-[9px] font-black text-slate-400 uppercase tracking-widest border border-white/10">
+                                                            {product.subcategory || product.category}
+                                                        </span>
                                                     </td>
-                                                    <td className="px-8 py-6 text-right font-header font-bold text-lg text-white">${product.price}</td>
-                                                    <td className="px-8 py-6 text-center">
+                                                    <td className="px-6 py-5 text-right font-header font-bold text-base text-white">
+                                                        ${product.price.toFixed(2)}
+                                                        {product.promo_price ? (
+                                                            <div className="text-[10px] font-mono text-cyan-400 font-normal">
+                                                                Promo: ${product.promo_price.toFixed(2)}
+                                                            </div>
+                                                        ) : null}
+                                                    </td>
+                                                    <td className="px-6 py-5 text-center">
                                                         <div className="flex flex-col items-center gap-1">
                                                             <div className={`text-sm font-bold ${product.stock < 5 ? 'text-red-500' : 'text-slate-400'}`}>{product.stock}</div>
                                                             <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${product.stock > 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'}`}>
@@ -466,12 +563,12 @@ export default function AdminPage() {
                                                             </span>
                                                         </div>
                                                     </td>
-                                                    <td className="px-8 py-6 text-right">
-                                                        <div className="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                            <button onClick={() => setEditingProduct(product)} className="size-10 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-black transition-all flex items-center justify-center">
+                                                    <td className="px-6 py-5 text-right">
+                                                        <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                            <button onClick={() => setEditingProduct(product)} className="size-9 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-black transition-all flex items-center justify-center" title="Edit Product Specs">
                                                                 <Edit className="size-4" />
                                                             </button>
-                                                            <button onClick={() => handleDelete(product.id)} className="size-10 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
+                                                            <button onClick={() => handleDelete(product.id)} className="size-9 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all flex items-center justify-center" title="Delete Product">
                                                                 <Trash2 className="size-4" />
                                                             </button>
                                                         </div>
@@ -480,6 +577,52 @@ export default function AdminPage() {
                                             ))}
                                         </tbody>
                                     </table>
+
+                                    {/* Mobile Stacked Card View */}
+                                    <div className="md:hidden divide-y divide-white/5">
+                                        {filteredProducts.map(product => (
+                                            <div key={product.id} className="p-4 space-y-3">
+                                                <div className="flex items-start gap-3">
+                                                    <div className="size-16 bg-black rounded-lg border border-white/10 overflow-hidden relative shrink-0">
+                                                        {product.image_url ? (
+                                                            <Image src={product.image_url} alt={product.name} fill className="object-contain p-1" />
+                                                        ) : (
+                                                            <div className="absolute inset-0 flex items-center justify-center text-slate-800">
+                                                                <ImageIcon className="size-6" />
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className="text-white font-bold text-xs uppercase truncate">{product.name}</div>
+                                                        <div className="text-primary font-header font-bold text-sm mt-0.5">
+                                                            ${product.price.toFixed(2)}
+                                                        </div>
+                                                        <div className="flex items-center gap-2 mt-1">
+                                                            <span className={`text-[8px] font-black uppercase px-2 py-0.5 rounded-full ${product.stock > 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500'}`}>
+                                                                {product.stock} In Stock
+                                                            </span>
+                                                            <span className="text-[9px] font-mono text-slate-500">ID: {product.id}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center gap-1.5 shrink-0">
+                                                        <button onClick={() => setEditingProduct(product)} className="size-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center">
+                                                            <Edit className="size-3.5" />
+                                                        </button>
+                                                        <button onClick={() => handleDelete(product.id)} className="size-8 bg-red-500/10 text-red-500 rounded-lg flex items-center justify-center">
+                                                            <Trash2 className="size-3.5" />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/5 text-[9px] font-mono space-y-0.5">
+                                                    <div className="text-slate-400">AHAM: <span className="text-white">{product.coverage_aham || product.coverage || 'Rated'}</span></div>
+                                                    <div className="text-cyan-400">Island: <span className="text-cyan-300 font-bold">{product.coverage_oahu || 'Calibrated'}</span></div>
+                                                    {product.min_window_height && (
+                                                        <div className="text-emerald-400">Min Win: <span className="text-emerald-300">{product.min_window_height} H</span></div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </motion.div>
                             )}
 
@@ -490,48 +633,159 @@ export default function AdminPage() {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 10 }}
                                 >
-                                    <table className="w-full text-left border-collapse">
+                                    {/* Orders Search, Filter & Action Bar */}
+                                    <div className="p-4 md:p-6 border-b border-white/5 space-y-4 bg-white/[0.01]">
+                                        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                                            <div className="relative w-full md:w-80">
+                                                <Search className="size-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                                                <input 
+                                                    type="text"
+                                                    placeholder="Search customer, email, order ID..."
+                                                    value={orderSearch}
+                                                    onChange={(e) => setOrderSearch(e.target.value)}
+                                                    className="w-full pl-10 pr-4 py-2 bg-black/40 border border-white/10 rounded-xl text-xs text-white placeholder-slate-500 focus:border-primary/50 focus:outline-none"
+                                                />
+                                            </div>
+                                            <div className="flex items-center gap-2 w-full md:w-auto justify-end">
+                                                <button
+                                                    type="button"
+                                                    onClick={handleReconcileStripe}
+                                                    disabled={isReconciling}
+                                                    className="px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-xl text-xs font-header font-black uppercase tracking-wider flex items-center gap-1.5 transition-all disabled:opacity-50"
+                                                    title="Reconcile unrecorded orders with Stripe API"
+                                                >
+                                                    <RefreshCw className={cn("size-3.5", isReconciling && "animate-spin")} />
+                                                    <span>{isReconciling ? 'Reconciling...' : 'Reconcile Stripe'}</span>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={handleExportOrdersCsv}
+                                                    className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl text-xs font-header font-black uppercase tracking-wider flex items-center gap-1.5 transition-all"
+                                                    title="Export Orders CSV for Oahu GET Tax accounting"
+                                                >
+                                                    <Download className="size-3.5" />
+                                                    <span>Export CSV</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {reconcileMessage && (
+                                            <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400 text-xs font-medium flex items-center justify-between">
+                                                <span>✓ {reconcileMessage}</span>
+                                                <button onClick={() => setReconcileMessage('')} className="text-emerald-500 hover:text-white">✕</button>
+                                            </div>
+                                        )}
+
+                                        {/* Status Filter Pills */}
+                                        <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+                                            {['ALL', 'PAID', 'AWAIT_PAYMENT', 'SHIPPED', 'DELIVERED', 'CANCELLED'].map(st => (
+                                                <button
+                                                    key={st}
+                                                    type="button"
+                                                    onClick={() => setOrderStatusFilter(st)}
+                                                    className={cn(
+                                                        "px-3 py-1.5 rounded-lg text-[9px] font-header font-black uppercase tracking-wider transition-all whitespace-nowrap",
+                                                        orderStatusFilter === st 
+                                                            ? "bg-white text-black font-black shadow-sm" 
+                                                            : "bg-white/5 text-slate-400 hover:text-white"
+                                                    )}
+                                                >
+                                                    {st === 'ALL' ? 'All Orders' : st.replace('_', ' ')}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Desktop Table */}
+                                    <table className="w-full text-left border-collapse hidden md:table">
                                         <thead>
                                             <tr className="bg-white/5 text-slate-400 text-[10px] font-black uppercase tracking-widest">
-                                                <th className="px-8 py-4">Order ID</th>
-                                                <th className="px-8 py-4">Customer</th>
-                                                <th className="px-8 py-4 text-center">Date</th>
-                                                <th className="px-8 py-4 text-center">Status</th>
-                                                <th className="px-8 py-4 text-right">Total</th>
-                                                <th className="px-8 py-4 text-right">Actions</th>
+                                                <th className="px-6 py-4">Order ID</th>
+                                                <th className="px-6 py-4">Customer &amp; Fulfillment</th>
+                                                <th className="px-6 py-4 text-center">Date</th>
+                                                <th className="px-6 py-4 text-center">Status</th>
+                                                <th className="px-6 py-4 text-right">Total &amp; GET Tax</th>
+                                                <th className="px-6 py-4 text-right">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-white/5">
-                                            {orders.map(order => (
-                                                <tr key={order.id} className="hover:bg-white/[0.02] transition-colors group">
-                                                    <td className="px-8 py-6 font-mono text-[10px] text-primary">{order.id}</td>
-                                                    <td className="px-8 py-6">
-                                                        <div className="text-white font-bold">{order.customer_name || 'Anonymous User'}</div>
-                                                        <div className="text-slate-500 text-[9px] font-black tracking-widest mt-1">{order.customer_email || 'No email provided'}</div>
-                                                    </td>
-                                                    <td className="px-8 py-6 text-center text-[10px] text-slate-500">
-                                                        {new Date(order.created_at).toLocaleDateString()}
-                                                    </td>
-                                                    <td className="px-8 py-6 text-center">
-                                                        <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${order.status === 'PAID' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
-                                                            order.status === 'SHIPPED' ? 'bg-primary/10 text-primary border-primary/20' :
-                                                                order.status === 'DELIVERED' ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' :
-                                                                    order.status === 'CANCELLED' ? 'bg-red-500/10 text-red-500 border-red-500/20' :
-                                                                        'bg-amber-500/10 text-amber-500 border-amber-500/20'
-                                                            }`}>
-                                                            {order.status}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-8 py-6 text-right font-header font-bold text-white">${(order.total_cents / 100).toLocaleString()}</td>
-                                                    <td className="px-8 py-6 text-right">
-                                                        <button onClick={() => setViewingOrder(order)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center ml-auto">
-                                                            <Eye className="size-4" />
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            ))}
+                                            {filteredOrders.map(order => {
+                                                const total = order.total_cents / 100;
+                                                const getTax = (total * 0.04712 / 1.04712).toFixed(2);
+                                                return (
+                                                    <tr key={order.id} className="hover:bg-white/[0.02] transition-colors group">
+                                                        <td className="px-6 py-5 font-mono text-[10px] text-primary">{order.id}</td>
+                                                        <td className="px-6 py-5">
+                                                            <div className="text-white font-bold">{order.customer_name || 'Anonymous User'}</div>
+                                                            <div className="text-slate-500 text-[9px] font-black tracking-widest mt-0.5">{order.customer_email || 'No email provided'}</div>
+                                                            <div className="mt-1.5">
+                                                                {order.fulfillment_mode === 'delivery' ? (
+                                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                                                                        🚚 Oahu Delivery ($50)
+                                                                    </span>
+                                                                ) : (
+                                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                                                        📦 Waipahu Pickup ($0)
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </td>
+                                                        <td className="px-6 py-5 text-center text-[10px] text-slate-500 font-mono">
+                                                            {new Date(order.created_at).toLocaleDateString()}
+                                                        </td>
+                                                        <td className="px-6 py-5 text-center">
+                                                            <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${order.status === 'PAID' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
+                                                                order.status === 'SHIPPED' ? 'bg-primary/10 text-primary border-primary/20' :
+                                                                    order.status === 'DELIVERED' ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' :
+                                                                        order.status === 'CANCELLED' ? 'bg-red-500/10 text-red-500 border-red-500/20' :
+                                                                            'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                                                                }`}>
+                                                                {order.status}
+                                                            </span>
+                                                        </td>
+                                                        <td className="px-6 py-5 text-right font-header font-bold text-white">
+                                                            <div>${total.toFixed(2)}</div>
+                                                            <div className="text-[9px] font-mono text-slate-500 font-normal">GET: ${getTax}</div>
+                                                        </td>
+                                                        <td className="px-6 py-5 text-right">
+                                                            <button onClick={() => setViewingOrder(order)} className="size-9 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center ml-auto" title="View Manifest & Receipt">
+                                                                <Eye className="size-4" />
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
                                         </tbody>
                                     </table>
+
+                                    {/* Mobile Stacked Card View */}
+                                    <div className="md:hidden divide-y divide-white/5">
+                                        {filteredOrders.map(order => {
+                                            const total = order.total_cents / 100;
+                                            return (
+                                                <div key={order.id} className="p-4 space-y-2.5">
+                                                    <div className="flex items-start justify-between gap-2">
+                                                        <div>
+                                                            <div className="text-white font-bold text-xs">{order.customer_name || 'Anonymous User'}</div>
+                                                            <div className="text-[9px] font-mono text-primary">{order.id}</div>
+                                                        </div>
+                                                        <div className="text-right">
+                                                            <div className="text-white font-header font-bold text-sm">${total.toFixed(2)}</div>
+                                                            <span className={`text-[8px] font-black uppercase px-2 py-0.5 rounded-full border ${order.status === 'PAID' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' : 'bg-white/5 text-slate-400'}`}>
+                                                                {order.status}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between text-[9px] pt-1">
+                                                        <span className="text-slate-400">{order.customer_email || 'No email'}</span>
+                                                        <button onClick={() => setViewingOrder(order)} className="px-2.5 py-1 bg-white/5 hover:bg-white/10 text-cyan-400 font-mono rounded text-[9px] flex items-center gap-1">
+                                                            <Eye className="size-3" /> Manifest
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
                                 </motion.div>
                             )}
 
@@ -542,34 +796,80 @@ export default function AdminPage() {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 10 }}
                                 >
-                                    <table className="w-full text-left border-collapse">
+                                    {/* Leads Search & Filter Controls */}
+                                    <div className="p-4 md:p-6 border-b border-white/5 space-y-4 bg-white/[0.01]">
+                                        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                                            <div className="relative w-full md:w-80">
+                                                <Search className="size-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                                                <input 
+                                                    type="text"
+                                                    placeholder="Search customer, phone, city, notes..."
+                                                    value={leadSearch}
+                                                    onChange={(e) => setLeadSearch(e.target.value)}
+                                                    className="w-full pl-10 pr-4 py-2 bg-black/40 border border-white/10 rounded-xl text-xs text-white placeholder-slate-500 focus:border-primary/50 focus:outline-none"
+                                                />
+                                            </div>
+                                            <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+                                                {['ALL', 'ASAP', 'NEW', 'CONTACTED', 'SCHEDULED', 'COMPLETED'].map(st => (
+                                                    <button
+                                                        key={st}
+                                                        type="button"
+                                                        onClick={() => {
+                                                            if (st === 'ASAP') {
+                                                                setLeadUrgencyFilter(leadUrgencyFilter === 'ASAP' ? 'ALL' : 'ASAP');
+                                                            } else {
+                                                                setLeadStatusFilter(st);
+                                                            }
+                                                        }}
+                                                        className={cn(
+                                                            "px-3 py-1.5 rounded-lg text-[9px] font-header font-black uppercase tracking-wider transition-all whitespace-nowrap",
+                                                            (st === 'ASAP' && leadUrgencyFilter === 'ASAP') || (st !== 'ASAP' && leadStatusFilter === st && leadUrgencyFilter !== 'ASAP')
+                                                                ? st === 'ASAP' ? "bg-red-500 text-white font-black" : "bg-primary text-black font-black shadow-sm"
+                                                                : "bg-white/5 text-slate-400 hover:text-white"
+                                                        )}
+                                                    >
+                                                        {st === 'ASAP' ? '⚡ Urgent (ASAP)' : st === 'ALL' ? 'All Leads' : st}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Desktop Table View */}
+                                    <table className="w-full text-left border-collapse hidden md:table">
                                         <thead>
                                             <tr className="bg-white/5 text-slate-400 text-[10px] font-black uppercase tracking-widest">
-                                                <th className="px-8 py-4">Requestor</th>
-                                                <th className="px-8 py-4">Service Type</th>
-                                                <th className="px-8 py-4 text-center">Urgency</th>
-                                                <th className="px-8 py-4 text-center">Status</th>
-                                                <th className="px-8 py-4 text-center">Date</th>
-                                                <th className="px-8 py-4 text-right">Actions</th>
+                                                <th className="px-6 py-4">Requestor</th>
+                                                <th className="px-6 py-4">Service Type</th>
+                                                <th className="px-6 py-4 text-center">Urgency</th>
+                                                <th className="px-6 py-4 text-center">Status</th>
+                                                <th className="px-6 py-4 text-center">Date</th>
+                                                <th className="px-6 py-4 text-right">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-white/5">
-                                            {leads.map(lead => (
+                                            {filteredLeads.map(lead => (
                                                 <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors group">
-                                                    <td className="px-8 py-6">
+                                                    <td className="px-6 py-5">
                                                         <div className="text-white font-bold uppercase tracking-wide">{lead.first_name} {lead.last_name}</div>
-                                                        <div className="text-slate-500 text-[9px] font-black tracking-widest mt-1">{lead.email}</div>
+                                                        <div className="text-slate-500 text-[9px] font-black tracking-widest mt-0.5">{lead.email}</div>
                                                         <div className="text-primary text-[9px] font-mono mt-0.5">{lead.phone}</div>
                                                     </td>
-                                                    <td className="px-8 py-6">
-                                                        <div className="text-slate-300 text-xs max-w-[200px] truncate">{lead.service_type}</div>
+                                                    <td className="px-6 py-5">
+                                                        <div className="text-slate-300 text-xs max-w-[220px] truncate">{lead.service_type}</div>
+                                                        <div className="text-slate-500 text-[9px] mt-0.5">{lead.city || 'Oahu'}</div>
                                                     </td>
-                                                    <td className="px-8 py-6 text-center">
-                                                        <span className={`px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border border-white/20 text-white/50 bg-white/5`}>
+                                                    <td className="px-6 py-5 text-center">
+                                                        <span className={cn(
+                                                            "px-2.5 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border",
+                                                            lead.urgency === 'ASAP' 
+                                                                ? "bg-red-500/10 text-red-400 border-red-500/30 animate-pulse" 
+                                                                : "border-white/20 text-white/50 bg-white/5"
+                                                        )}>
                                                             {lead.urgency || 'STANDARD'}
                                                         </span>
                                                     </td>
-                                                    <td className="px-8 py-6 text-center">
+                                                    <td className="px-6 py-5 text-center">
                                                         <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${lead.status === 'NEW' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.2)]' :
                                                             lead.status === 'CONTACTED' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
                                                                 lead.status === 'SCHEDULED' ? 'bg-primary/10 text-primary border-primary/20' :
@@ -579,18 +879,51 @@ export default function AdminPage() {
                                                             {lead.status || 'NEW'}
                                                         </span>
                                                     </td>
-                                                    <td className="px-8 py-6 text-center text-[10px] text-slate-500">
-                                                        <span className="font-mono">{new Date(lead.created_at).toLocaleDateString()}</span>
+                                                    <td className="px-6 py-5 text-center text-[10px] text-slate-500 font-mono">
+                                                        {new Date(lead.created_at).toLocaleDateString()}
                                                     </td>
-                                                    <td className="px-8 py-6 text-right">
-                                                        <button onClick={() => setViewingLead(lead)} className="size-10 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center ml-auto">
-                                                            <UserCog className="size-4" />
-                                                        </button>
+                                                    <td className="px-6 py-5 text-right">
+                                                        <div className="flex items-center justify-end gap-1.5">
+                                                            <a href={`tel:${lead.phone}`} className="size-8 bg-emerald-500/10 text-emerald-400 rounded-lg flex items-center justify-center hover:bg-emerald-500/20" title="Call Lead">
+                                                                <Phone className="size-3.5" />
+                                                            </a>
+                                                            <button onClick={() => setViewingLead(lead)} className="size-8 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center" title="Manage Lead Ticket">
+                                                                <UserCog className="size-3.5" />
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             ))}
                                         </tbody>
                                     </table>
+
+                                    {/* Mobile Stacked Card View */}
+                                    <div className="md:hidden divide-y divide-white/5">
+                                        {filteredLeads.map(lead => (
+                                            <div key={lead.id} className="p-4 space-y-2.5">
+                                                <div className="flex items-start justify-between gap-2">
+                                                    <div>
+                                                        <div className="text-white font-bold text-xs uppercase">{lead.first_name} {lead.last_name}</div>
+                                                        <div className="text-[10px] text-slate-400">{lead.service_type}</div>
+                                                    </div>
+                                                    <span className={cn(
+                                                        "text-[8px] font-black uppercase px-2 py-0.5 rounded-full border",
+                                                        lead.urgency === 'ASAP' ? "bg-red-500/10 text-red-400 border-red-500/30" : "bg-white/5 text-slate-400"
+                                                    )}>
+                                                        {lead.urgency || 'STANDARD'}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center justify-between pt-1">
+                                                    <a href={`tel:${lead.phone}`} className="text-[10px] font-mono text-primary flex items-center gap-1">
+                                                        <Phone className="size-3" /> {lead.phone}
+                                                    </a>
+                                                    <button onClick={() => setViewingLead(lead)} className="px-2.5 py-1 bg-white/5 hover:bg-white/10 text-white font-mono rounded text-[9px] flex items-center gap-1">
+                                                        <UserCog className="size-3" /> Manage
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </motion.div>
                             )}
 
@@ -646,6 +979,7 @@ function LeadDetailModal({ lead, adminFetch, onClose, onSave }: { lead: Lead, ad
     const [status, setStatus] = useState(lead.status);
     const [notes, setNotes] = useState(lead.notes || '');
     const [error, setError] = useState('');
+    const [copied, setCopied] = useState(false);
 
     const handleUpdate = async () => {
         setError('');
@@ -666,27 +1000,99 @@ function LeadDetailModal({ lead, adminFetch, onClose, onSave }: { lead: Lead, ad
         }
     };
 
+    const handleCopyDispatch = () => {
+        const text = `📋 AHAC DISPATCH TICKET #${lead.id}
+Customer: ${lead.first_name} ${lead.last_name}
+Phone: ${lead.phone}
+Email: ${lead.email}
+Address: ${lead.address}, ${lead.city}, HI ${lead.zip}
+Service: ${lead.service_type}
+Urgency: ${lead.urgency}
+Status: ${status}
+Notes: ${notes || lead.notes || 'None'}
+Created: ${new Date(lead.created_at).toLocaleString()}`;
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+    };
+
+    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${lead.address}, ${lead.city}, HI ${lead.zip}`)}`;
+    const emailSubject = encodeURIComponent(`Affordable Home A/C - Appointment Lead #${lead.id}`);
+    const emailBody = encodeURIComponent(`Aloha ${lead.first_name},\n\nThank you for choosing Affordable Home A/C! We received your request for ${lead.service_type} in ${lead.city}.\n\nOur dispatch team is reviewing your schedule and will contact you directly at ${lead.phone}.\n\nMahalo,\nAffordable Home A/C Team\nOahu, Hawaii | Lic #CT-36775`);
+    const mailtoUrl = `mailto:${lead.email}?subject=${emailSubject}&body=${emailBody}`;
+
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-6">
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="w-full max-w-2xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10">
-                <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="w-full max-w-2xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 my-auto">
+                <div className="p-6 sm:p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
                     <div>
-                        <h2 className="text-white font-header font-black text-2xl uppercase tracking-tighter">{content.admin.leads.modal.title}</h2>
-                        <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">Lead ID: {lead.id}</p>
+                        <div className="flex items-center gap-3">
+                            <h2 className="text-white font-header font-black text-2xl uppercase tracking-tighter">{content.admin.leads.modal.title}</h2>
+                            <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary">
+                                ID #{lead.id}
+                            </span>
+                        </div>
+                        <p className="text-slate-400 text-xs font-medium mt-1">
+                            {lead.service_type} • <span className="font-bold text-amber-400">{lead.urgency}</span>
+                        </p>
                     </div>
-                    <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
+                    <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5">
                         <X className="size-5" />
                     </button>
                 </div>
-                <div className="p-8 flex flex-col gap-8">
-                    {/* Status Top Row */}
-                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 shadow-inner">
-                        <label className="text-primary text-[10px] font-black uppercase tracking-widest block mb-3 text-center sm:text-left">{content.admin.leads.modal.status}</label>
+
+                <div className="p-6 sm:p-8 flex flex-col gap-6">
+                    {/* Quick 1-Click Action Dispatch Bar */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <a
+                            href={`tel:${lead.phone}`}
+                            className="flex items-center justify-center gap-2 py-3 px-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 rounded-xl font-black text-[10px] uppercase tracking-wider transition-all"
+                            title="Call Customer Immediately"
+                        >
+                            <Phone className="size-3.5" />
+                            <span>Call</span>
+                        </a>
+                        <a
+                            href={mailtoUrl}
+                            className="flex items-center justify-center gap-2 py-3 px-3 bg-sky-500/10 border border-sky-500/30 text-sky-400 hover:bg-sky-500/20 rounded-xl font-black text-[10px] uppercase tracking-wider transition-all"
+                            title="Send Pre-Drafted Aloha Email"
+                        >
+                            <Mail className="size-3.5" />
+                            <span>Aloha Email</span>
+                        </a>
+                        <a
+                            href={mapUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 py-3 px-3 bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 rounded-xl font-black text-[10px] uppercase tracking-wider transition-all"
+                            title="Open in Google Maps"
+                        >
+                            <MapPin className="size-3.5" />
+                            <span>Map Route</span>
+                        </a>
+                        <button
+                            type="button"
+                            onClick={handleCopyDispatch}
+                            className={`flex items-center justify-center gap-2 py-3 px-3 border rounded-xl font-black text-[10px] uppercase tracking-wider transition-all ${
+                                copied 
+                                    ? 'bg-primary/20 border-primary text-primary' 
+                                    : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10 hover:text-white'
+                            }`}
+                            title="Copy Complete Ticket to Clipboard"
+                        >
+                            {copied ? <Check className="size-3.5 text-primary" /> : <Copy className="size-3.5" />}
+                            <span>{copied ? 'Copied!' : 'Copy Ticket'}</span>
+                        </button>
+                    </div>
+
+                    {/* Status Row */}
+                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5 shadow-inner">
+                        <label className="text-primary text-[10px] font-black uppercase tracking-widest block mb-2.5">{content.admin.leads.modal.status}</label>
                         <div className="relative">
                             <select
                                 value={status}
                                 onChange={(e) => setStatus(e.target.value)}
-                                className="w-full bg-black/80 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-primary/50 outline-none appearance-none font-bold uppercase tracking-widest text-xs shadow-lg"
+                                className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none appearance-none font-bold uppercase tracking-widest text-xs shadow-lg"
                             >
                                 <option value="NEW">NEW</option>
                                 <option value="CONTACTED">CONTACTED</option>
@@ -694,53 +1100,66 @@ function LeadDetailModal({ lead, adminFetch, onClose, onSave }: { lead: Lead, ad
                                 <option value="COMPLETED">COMPLETED</option>
                                 <option value="ARCHIVED">ARCHIVED</option>
                             </select>
-                            <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-primary pointer-events-none size-5" />
+                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-primary pointer-events-none size-4" />
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                        <div>
-                            <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2 text-center sm:text-left">{content.admin.leads.modal.contact_info}</label>
-                            <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-3">
-                                <div className="flex items-center gap-3">
-                                    <User className="text-primary size-5" />
-                                    <span className="text-white font-bold">{lead.first_name} {lead.last_name}</span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <Mail className="text-slate-500 size-5" />
-                                    <span className="text-slate-300 text-sm">{lead.email}</span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <Phone className="text-slate-500 size-5" />
-                                    <span className="text-slate-300 text-sm font-mono">{lead.phone}</span>
-                                </div>
+                    {/* Details Cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-3">
+                            <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block">{content.admin.leads.modal.contact_info}</label>
+                            <div className="flex items-center gap-3">
+                                <User className="text-primary size-4 shrink-0" />
+                                <span className="text-white font-bold text-sm">{lead.first_name} {lead.last_name}</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Mail className="text-slate-400 size-4 shrink-0" />
+                                <a href={mailtoUrl} className="text-slate-300 text-xs hover:text-primary transition-colors truncate">{lead.email}</a>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Phone className="text-slate-400 size-4 shrink-0" />
+                                <a href={`tel:${lead.phone}`} className="text-slate-300 text-xs font-mono hover:text-primary transition-colors">{lead.phone}</a>
                             </div>
                         </div>
-                        <div>
-                            <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2 text-center sm:text-left">{content.admin.leads.modal.location}</label>
-                            <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 flex items-center gap-3 h-[calc(100%-24px)]">
-                                <MapPin className="text-slate-500 size-5" />
-                                <span className="text-slate-300 text-sm leading-relaxed">{lead.address}, {lead.city}, {lead.zip}</span>
+
+                        <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-3 flex flex-col justify-between">
+                            <div>
+                                <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">{content.admin.leads.modal.location}</label>
+                                <div className="flex items-start gap-3">
+                                    <MapPin className="text-amber-400 size-4 shrink-0 mt-0.5" />
+                                    <span className="text-slate-300 text-xs leading-relaxed">{lead.address}, {lead.city}, HI {lead.zip}</span>
+                                </div>
                             </div>
+                            <a
+                                href={mapUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 text-[10px] font-bold text-primary hover:underline mt-2"
+                            >
+                                <span>Open Google Maps Directions</span>
+                                <ExternalLink className="size-3" />
+                            </a>
                         </div>
                     </div>
 
-                    <div className="flex-1 flex flex-col pt-2 border-t border-white/5 min-h-[300px]">
-                        <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-3 text-center sm:text-left">{content.admin.leads.modal.notes}</label>
+                    {/* Notes Area */}
+                    <div className="flex-1 flex flex-col pt-2 border-t border-white/5">
+                        <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">{content.admin.leads.modal.notes}</label>
                         <textarea
                             value={notes}
                             onChange={(e) => setNotes(e.target.value)}
-                            className="flex-1 w-full bg-black/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:border-primary/50 outline-none text-sm leading-relaxed resize-y min-h-[250px] shadow-inner"
-                            placeholder="Add your internal notes, tracking IDs, or service updates here..."
+                            className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:border-primary/50 outline-none text-xs leading-relaxed resize-y min-h-[140px] shadow-inner font-sans"
+                            placeholder="Add your internal notes, tracking IDs, technician assignment, or service updates here..."
                         ></textarea>
                     </div>
                 </div>
+
                 {error && (
-                    <div className="mx-8 mb-4 text-red-500 text-xs font-bold uppercase tracking-wide bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
+                    <div className="mx-6 sm:mx-8 mb-4 text-red-500 text-xs font-bold uppercase tracking-wide bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
                         {error}
                     </div>
                 )}
-                <div className="p-8 border-t border-white/5 bg-white/[0.01] flex gap-4">
+                <div className="p-6 sm:p-8 border-t border-white/5 bg-white/[0.01] flex gap-4">
                     <button onClick={onClose} className="flex-1 py-4 border border-white/10 text-slate-400 font-bold uppercase tracking-widest text-[10px] rounded-xl hover:bg-white/5">Close</button>
                     <button onClick={handleUpdate} className="flex-1 py-4 bg-primary text-black font-black uppercase tracking-widest text-[10px] rounded-xl shadow-lg shadow-primary/20 hover:bg-white transition-all">{content.admin.leads.modal.update}</button>
                 </div>
@@ -764,6 +1183,11 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
         console.error("Failed to parse customer address", e);
     }
 
+    const total = order.total_cents / 100;
+    const getTax = (total * 0.04712 / 1.04712).toFixed(2);
+    const subtotal = (total - parseFloat(getTax)).toFixed(2);
+    const isPickup = order.fulfillment_mode === 'pickup';
+
     const handleUpdate = async () => {
         setError('');
         try {
@@ -784,35 +1208,62 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
     };
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-6">
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="w-full max-w-2xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 max-h-[90vh] overflow-y-auto">
-                <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02] sticky top-0 z-10 backdrop-blur-lg">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6">
+            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="w-full max-w-2xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 max-h-[90vh] overflow-y-auto">
+                <div className="p-6 sm:p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02] sticky top-0 z-10 backdrop-blur-lg">
                     <div>
-                        <h2 className="text-white font-header font-black text-2xl uppercase tracking-tighter">{content.admin.orders.modal.title}</h2>
-                        <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">Order ID: {order.id}</p>
+                        <div className="flex items-center gap-3">
+                            <h2 className="text-white font-header font-black text-2xl uppercase tracking-tighter">{content.admin.orders.modal.title}</h2>
+                            <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono">
+                                #{order.id.slice(-8)}
+                            </span>
+                        </div>
+                        <p className="text-slate-400 text-xs mt-1">Full Order ID: <span className="font-mono text-slate-300">{order.id}</span></p>
                     </div>
-                    <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
+                    <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5">
                         <X className="size-5" />
                     </button>
                 </div>
-                <div className="p-8 space-y-8">
-                    <div className="grid grid-cols-2 gap-8">
-                        <div className="space-y-6">
+
+                <div className="p-6 sm:p-8 space-y-6">
+                    {/* Fulfillment Mode Badge Banner */}
+                    <div className={cn(
+                        "p-4 rounded-2xl border flex items-center justify-between",
+                        isPickup ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400" : "bg-sky-500/10 border-sky-500/30 text-sky-400"
+                    )}>
+                        <div className="flex items-center gap-3">
+                            {isPickup ? <Package className="size-5" /> : <Truck className="size-5" />}
+                            <div>
+                                <p className="font-black text-xs uppercase tracking-wider">
+                                    {isPickup ? "Waipahu Warehouse Pickup ($0.00)" : "Oahu Island-Wide Delivery ($50.00)"}
+                                </p>
+                                <p className="text-[11px] opacity-80 mt-0.5">
+                                    {isPickup ? "94-1388 Moape St Unit 2, Waipahu, HI 96797" : "Direct delivery to customer residence across Oahu"}
+                                </p>
+                            </div>
+                        </div>
+                        <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border border-current">
+                            {isPickup ? "FREE PICKUP" : "DELIVERY"}
+                        </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div className="space-y-4">
                             <div>
                                 <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">Customer Details</label>
-                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-3">
+                                <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-2.5">
                                     <div className="flex items-center gap-3">
-                                        <User className="text-primary size-5" />
-                                        <span className="text-white font-bold">{order.customer_name || 'Anonymous User'}</span>
+                                        <User className="text-primary size-4" />
+                                        <span className="text-white font-bold text-sm">{order.customer_name || 'Anonymous User'}</span>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <Mail className="text-slate-500 size-5" />
-                                        <span className="text-slate-300 text-sm">{order.customer_email || 'No email provided'}</span>
+                                        <Mail className="text-slate-500 size-4" />
+                                        <a href={`mailto:${order.customer_email}`} className="text-slate-300 text-xs hover:text-primary transition-colors">{order.customer_email || 'No email'}</a>
                                     </div>
                                     {order.customer_phone && (
                                         <div className="flex items-center gap-3">
-                                            <Phone className="text-slate-500 size-5" />
-                                            <span className="text-slate-300 text-sm font-mono">{order.customer_phone}</span>
+                                            <Phone className="text-slate-500 size-4" />
+                                            <a href={`tel:${order.customer_phone}`} className="text-slate-300 text-xs font-mono hover:text-primary transition-colors">{order.customer_phone}</a>
                                         </div>
                                     )}
                                 </div>
@@ -822,8 +1273,8 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
                                 <div>
                                     <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">Shipping / Service Address</label>
                                     <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 flex items-center gap-3">
-                                        <MapPin className="text-slate-500 size-5" />
-                                        <div className="text-slate-300 text-sm">
+                                        <MapPin className="text-amber-400 size-4 shrink-0" />
+                                        <div className="text-slate-300 text-xs">
                                             <div>{address.line1} {address.line2}</div>
                                             <div>{address.city}, {address.state} {address.postal_code}</div>
                                         </div>
@@ -831,57 +1282,75 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
                                 </div>
                             )}
                         </div>
+
                         <div>
                             <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-2">{content.admin.orders.modal.transition}</label>
-                            <select
-                                value={status}
-                                onChange={(e) => setStatus(e.target.value)}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none appearance-none font-bold uppercase tracking-widest text-[10px]"
-                            >
-                                <option value="AWAIT_PAYMENT">AWAIT PAYMENT</option>
-                                <option value="PAID">PAID</option>
-                                <option value="SHIPPED">SHIPPED</option>
-                                <option value="DELIVERED">DELIVERED</option>
-                                <option value="CANCELLED">CANCELLED</option>
-                            </select>
+                            <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-4 space-y-4">
+                                <select
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
+                                    className="w-full bg-black/80 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none appearance-none font-bold uppercase tracking-widest text-xs shadow-lg"
+                                >
+                                    <option value="AWAIT_PAYMENT">AWAIT PAYMENT</option>
+                                    <option value="PAID">PAID</option>
+                                    <option value="SHIPPED">SHIPPED</option>
+                                    <option value="DELIVERED">DELIVERED</option>
+                                    <option value="CANCELLED">CANCELLED</option>
+                                </select>
+                                <div className="text-[11px] text-slate-500 space-y-1">
+                                    <p>Order Placed: <span className="text-slate-300">{new Date(order.created_at).toLocaleString()}</span></p>
+                                    <p>Payment: <span className="text-emerald-400 font-bold">Stripe Verified</span></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    {/* Order Manifest & Oahu Tax Breakdown */}
                     <div>
-                        <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-4 text-center sm:text-left">{content.admin.orders.modal.manifest}</label>
+                        <label className="text-slate-500 text-[9px] font-black uppercase tracking-widest block mb-3">{content.admin.orders.modal.manifest}</label>
                         <div className="bg-white/[0.03] border border-white/5 rounded-2xl overflow-hidden">
                             <table className="w-full text-left">
                                 <thead className="bg-white/5 text-[8px] font-black uppercase text-slate-500 tracking-widest">
                                     <tr>
-                                        <th className="px-6 py-3">Item</th>
-                                        <th className="px-6 py-3 text-center">Qty</th>
-                                        <th className="px-6 py-3 text-right">Unit Price</th>
+                                        <th className="px-5 py-3">Item</th>
+                                        <th className="px-5 py-3 text-center">Qty</th>
+                                        <th className="px-5 py-3 text-right">Unit Price</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-white/5">
+                                <tbody className="divide-y divide-white/5 text-xs text-slate-300">
                                     {items.map((item: any, i: number) => (
-                                        <tr key={i} className="text-xs text-slate-300">
-                                            <td className="px-6 py-4">{item.name}</td>
-                                            <td className="px-6 py-4 text-center">{item.quantity}</td>
-                                            <td className="px-6 py-4 text-right">${(item.price / 100).toFixed(2)}</td>
+                                        <tr key={i}>
+                                            <td className="px-5 py-3.5 font-medium">{item.name || item.description}</td>
+                                            <td className="px-5 py-3.5 text-center font-bold">{item.quantity || 1}</td>
+                                            <td className="px-5 py-3.5 text-right font-mono">${((item.price || (item.amount_total / (item.quantity || 1))) / 100).toFixed(2)}</td>
                                         </tr>
                                     ))}
                                 </tbody>
-                                <tfoot className="bg-white/5 font-bold text-white uppercase text-[10px]">
-                                    <tr>
-                                        <td colSpan={2} className="px-6 py-4 text-right">Manifest Total</td>
-                                        <td className="px-6 py-4 text-right text-primary">${(order.total_cents / 100).toLocaleString()}</td>
+                                <tfoot className="bg-white/[0.04] border-t border-white/10 text-xs">
+                                    <tr className="text-slate-400">
+                                        <td colSpan={2} className="px-5 py-2 text-right">Subtotal:</td>
+                                        <td className="px-5 py-2 text-right font-mono text-slate-300">${subtotal}</td>
+                                    </tr>
+                                    <tr className="text-slate-400">
+                                        <td colSpan={2} className="px-5 py-2 text-right">Oahu GET Tax (4.712%):</td>
+                                        <td className="px-5 py-2 text-right font-mono text-amber-400/90">${getTax}</td>
+                                    </tr>
+                                    <tr className="border-t border-white/10 font-bold text-white uppercase text-sm">
+                                        <td colSpan={2} className="px-5 py-3.5 text-right">Total:</td>
+                                        <td className="px-5 py-3.5 text-right text-primary font-mono text-base">${total.toFixed(2)}</td>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                     </div>
                 </div>
+
                 {error && (
-                    <div className="mx-8 mb-4 text-red-500 text-xs font-bold uppercase tracking-wide bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
+                    <div className="mx-6 sm:mx-8 mb-4 text-red-500 text-xs font-bold uppercase tracking-wide bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
                         {error}
                     </div>
                 )}
-                <div className="p-8 border-t border-white/5 bg-white/[0.01] flex gap-4">
+                <div className="p-6 sm:p-8 border-t border-white/5 bg-white/[0.01] flex gap-4">
                     <button onClick={onClose} className="flex-1 py-4 border border-white/10 text-slate-400 font-bold uppercase tracking-widest text-[10px] rounded-xl hover:bg-white/5">Dismiss</button>
                     <button onClick={handleUpdate} className="flex-1 py-4 bg-primary text-black font-black uppercase tracking-widest text-[10px] rounded-xl shadow-lg shadow-primary/20 hover:bg-white transition-all">{content.admin.orders.modal.update_status}</button>
                 </div>
@@ -897,7 +1366,7 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
 
 
 function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Product, adminFetch: any, onClose: () => void, onSave: () => void }) {
-    const [activeTab, setActiveTab] = useState<'basic' | 'specs'>('basic');
+    const [activeTab, setActiveTab] = useState<'basic' | 'specs' | 'fit'>('basic');
     const [error, setError] = useState<string>('');
     const [formData, setFormData] = useState({
         name: product?.name || '',
@@ -909,6 +1378,16 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
         btu: product?.btu || 0,
         voltage: product?.voltage || '',
         coverage: product?.coverage || '',
+        coverage_aham: product?.coverage_aham || '',
+        coverage_oahu: product?.coverage_oahu || '',
+        sizing_notes: product?.sizing_notes || '',
+        min_window_height: product?.min_window_height || '',
+        min_window_width: product?.min_window_width || '',
+        max_window_width: product?.max_window_width || '',
+        chassis_type: product?.chassis_type || '',
+        shipping_weight: product?.shipping_weight || '',
+        ceer_rating: product?.ceer_rating || '',
+        dry_air_flow_cfm: product?.dry_air_flow_cfm || '',
         performance_specs: product?.performance_specs || '',
         key_spec: product?.key_spec || '',
         noise_level: product?.noise_level || '',
@@ -927,6 +1406,26 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
     const [displayPromoPrice, setDisplayPromoPrice] = useState<string>(
         product?.promo_price ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.promo_price) : ''
     );
+
+    const cutawayImageMap: Record<number, string> = {
+        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+    };
+    const activeCutaway = (product?.id && cutawayImageMap[product.id]) || '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp';
 
     const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rawVal = e.target.value;
@@ -1009,9 +1508,11 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
 
         const method = product ? 'PUT' : 'POST';
 
-        // Prepare payload
+        // Prepare payload with all 10 Epoch 12 specs
         const payload = {
             ...formData,
+            btu: formData.btu ? Number(formData.btu) : null,
+            stock: Number(formData.stock) || 0,
             price: Math.round(parseFloat(formData.price || '0')),
             promo_price: formData.promo_price ? Math.round(parseFloat(formData.promo_price)) : null,
             discount_percent: formData.discount_percent ? parseInt(formData.discount_percent) : null
@@ -1039,68 +1540,86 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-6"
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
         >
             <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
+                initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="w-full max-w-2xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 max-h-[90vh] flex flex-col"
+                exit={{ scale: 0.95, opacity: 0 }}
+                className="w-full max-w-3xl bg-[#0a0e14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 max-h-[92vh] flex flex-col my-auto"
             >
-                <div className="p-8 border-b border-white/5 flex items-center justify-between">
+                <div className="p-6 sm:p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
                     <div>
-                        <h2 className="text-white font-header font-black text-2xl uppercase tracking-tighter">{product ? content.admin.products.modal.edit : content.admin.products.modal.new}</h2>
+                        <div className="flex items-center gap-3">
+                            <h2 className="text-white font-header font-black text-2xl uppercase tracking-tighter">{product ? content.admin.products.modal.edit : content.admin.products.modal.new}</h2>
+                            {product?.id && (
+                                <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary">
+                                    ID #{product.id}
+                                </span>
+                            )}
+                        </div>
                         <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">{content.admin.products.modal.subtitle}</p>
                     </div>
-                    <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors">
+                    <button onClick={onClose} className="text-slate-500 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5">
                         <X className="size-5" />
                     </button>
                 </div>
 
-                {/* Tabs */}
-                <div className="px-8 pt-6 flex gap-4 border-b border-white/5">
+                {/* 3 Navigation Tabs */}
+                <div className="px-6 sm:px-8 pt-4 flex gap-4 sm:gap-6 border-b border-white/5 overflow-x-auto">
                     <button
+                        type="button"
                         onClick={() => setActiveTab('basic')}
-                        className={`pb-4 text-[10px] font-black uppercase tracking-widest transition-all relative ${activeTab === 'basic' ? 'text-white' : 'text-slate-500 hover:text-white'
-                            }`}
+                        className={`pb-4 text-[10px] font-black uppercase tracking-widest transition-all relative shrink-0 ${activeTab === 'basic' ? 'text-white' : 'text-slate-500 hover:text-white'}`}
                     >
-                        Basic Info
+                        1. Basic Info
                         {activeTab === 'basic' && (
                             <motion.div layoutId="tab-highlight" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
                         )}
                     </button>
                     <button
+                        type="button"
                         onClick={() => setActiveTab('specs')}
-                        className={`pb-4 text-[10px] font-black uppercase tracking-widest transition-all relative ${activeTab === 'specs' ? 'text-white' : 'text-slate-500 hover:text-white'
-                            }`}
+                        className={`pb-4 text-[10px] font-black uppercase tracking-widest transition-all relative shrink-0 ${activeTab === 'specs' ? 'text-white' : 'text-slate-500 hover:text-white'}`}
                     >
-                        Technical Specs
+                        2. Dual Sizing & Specs
                         {activeTab === 'specs' && (
+                            <motion.div layoutId="tab-highlight" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+                        )}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setActiveTab('fit')}
+                        className={`pb-4 text-[10px] font-black uppercase tracking-widest transition-all relative shrink-0 flex items-center gap-1.5 ${activeTab === 'fit' ? 'text-primary font-black' : 'text-slate-500 hover:text-white'}`}
+                    >
+                        <Ruler className="size-3.5" />
+                        <span>3. 3D Window Fit & Calipers</span>
+                        {activeTab === 'fit' && (
                             <motion.div layoutId="tab-highlight" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
                         )}
                     </button>
                 </div>
 
-                <form id="product-form" onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-8 space-y-6">
+                <form id="product-form" onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
                     <AnimatePresence mode="wait">
-                        {activeTab === 'basic' ? (
+                        {activeTab === 'basic' && (
                             <motion.div
                                 key="basic"
-                                initial={{ opacity: 0, x: -20 }}
+                                initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 20 }}
+                                exit={{ opacity: 0, x: 10 }}
                                 className="space-y-6"
                             >
-                                <div className="grid grid-cols-2 gap-6">
-                                    <div className="col-span-2 space-y-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div className="col-span-1 sm:col-span-2 space-y-2">
                                         <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.name}</label>
                                         <input
                                             type="text"
                                             required
                                             value={formData.name}
                                             onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all placeholder:text-slate-700"
-                                            placeholder="e.g. LG 8000 BTU Window Unit"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all placeholder:text-slate-700 text-sm"
+                                            placeholder="e.g. LG Dual Inverter 12,000 BTU (LW1222IVSM)"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -1111,7 +1630,8 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                             value={displayPrice}
                                             onChange={handlePriceChange}
                                             onBlur={handlePriceBlur}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm font-mono"
+                                            placeholder="$699.00"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -1121,8 +1641,8 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                             value={displayPromoPrice}
                                             onChange={handlePromoPriceChange}
                                             onBlur={handlePromoPriceBlur}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. $899.00"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm font-mono"
+                                            placeholder="e.g. $629.00"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -1133,7 +1653,7 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                             min={0}
                                             max={100}
                                             onChange={e => setFormData({ ...formData, discount_percent: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
                                             placeholder="e.g. 10"
                                         />
                                     </div>
@@ -1144,8 +1664,8 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                             required
                                             value={formData.stock}
                                             min={0}
-                                            onChange={e => setFormData({ ...formData, stock: parseInt(e.target.value) })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
+                                            onChange={e => setFormData({ ...formData, stock: parseInt(e.target.value) || 0 })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm font-bold"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -1153,7 +1673,7 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                         <select
                                             value={formData.category}
                                             onChange={e => setFormData({ ...formData, category: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all appearance-none"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all appearance-none text-sm"
                                         >
                                             <option value="WINDOW_AC">Window AC</option>
                                             <option value="SERVICE">Service</option>
@@ -1164,7 +1684,7 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                         <select
                                             value={formData.subcategory}
                                             onChange={e => setFormData({ ...formData, subcategory: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all appearance-none"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all appearance-none text-sm"
                                         >
                                             <option value="dual_inverter">Dual Inverter</option>
                                             <option value="universal_fit">Universal Fit</option>
@@ -1173,19 +1693,18 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                             <option value="casement">Casement</option>
                                         </select>
                                     </div>
-                                    <div className="space-y-2">
+                                    <div className="col-span-1 sm:col-span-2 space-y-2">
                                         <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">{content.admin.products.modal.image}</label>
                                         <input
                                             type="text"
                                             value={formData.image_url}
                                             onChange={e => setFormData({ ...formData, image_url: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all placeholder:text-slate-700"
-                                            placeholder="https://..."
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all placeholder:text-slate-700 text-xs font-mono"
+                                            placeholder="/assets/window-unit-images/lg-units/..."
                                         />
                                     </div>
-                                    {/* Image Preview */}
                                     {formData.image_url && (
-                                        <div className="col-span-2 mt-2 bg-black rounded-xl border border-white/10 p-4 flex items-center justify-center relative h-40">
+                                        <div className="col-span-1 sm:col-span-2 bg-black rounded-2xl border border-white/10 p-4 flex items-center justify-center relative h-40">
                                             <Image
                                                 src={formData.image_url}
                                                 alt="Preview"
@@ -1197,43 +1716,82 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                     )}
                                 </div>
                             </motion.div>
-                        ) : (
+                        )}
+
+                        {activeTab === 'specs' && (
                             <motion.div
                                 key="specs"
-                                initial={{ opacity: 0, x: 20 }}
+                                initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
+                                exit={{ opacity: 0, x: 10 }}
                                 className="space-y-6"
                             >
-                                <div className="grid grid-cols-2 gap-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div className="space-y-2">
                                         <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Cooling Capacity (BTU)</label>
                                         <input
                                             type="number"
                                             value={formData.btu}
-                                            onChange={e => setFormData({ ...formData, btu: parseInt(e.target.value) })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. 8000"
+                                            onChange={e => setFormData({ ...formData, btu: parseInt(e.target.value) || 0 })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm font-bold"
+                                            placeholder="e.g. 12000"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Voltage</label>
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Voltage / Electrical</label>
                                         <input
                                             type="text"
                                             value={formData.voltage}
                                             onChange={e => setFormData({ ...formData, voltage: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. 115V"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. 115V / 15 Amp"
+                                        />
+                                    </div>
+
+                                    {/* Dual Sizing Architecture Fields */}
+                                    <div className="space-y-2">
+                                        <label className="text-emerald-400 text-[10px] font-black uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                                            <span>🏭 AHAM Factory Certified Coverage</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formData.coverage_aham}
+                                            onChange={e => setFormData({ ...formData, coverage_aham: e.target.value })}
+                                            className="w-full bg-black/50 border border-emerald-500/20 rounded-xl px-4 py-3 text-white focus:border-emerald-500/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. Up to 550 sq. ft."
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Room Coverage</label>
+                                        <label className="text-amber-400 text-[10px] font-black uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                                            <span>🌺 Island Microclimate Calibration™ Coverage</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formData.coverage_oahu}
+                                            onChange={e => setFormData({ ...formData, coverage_oahu: e.target.value })}
+                                            className="w-full bg-black/50 border border-amber-500/20 rounded-xl px-4 py-3 text-white focus:border-amber-500/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. 250–380 sq. ft."
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">General Room Coverage Display</label>
                                         <input
                                             type="text"
                                             value={formData.coverage}
                                             onChange={e => setFormData({ ...formData, coverage: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. 350 sq ft"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="Up to 550 sq. ft. (AHAM) • 250–380 sq. ft. (Oahu Single-Wall)"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">CEER Rating</label>
+                                        <input
+                                            type="text"
+                                            value={formData.ceer_rating}
+                                            onChange={e => setFormData({ ...formData, ceer_rating: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. 15.0"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -1242,57 +1800,57 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                             type="text"
                                             value={formData.noise_level}
                                             onChange={e => setFormData({ ...formData, noise_level: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. 52 dBA"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. 44 / 58 dB"
                                         />
                                     </div>
-                                    <div className="col-span-2 space-y-2">
-                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Key Spec (Highlight)</label>
-                                        <input
-                                            type="text"
-                                            value={formData.key_spec}
-                                            onChange={e => setFormData({ ...formData, key_spec: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. Dual Inverter Compressor"
-                                        />
-                                    </div>
-                                    <div className="col-span-2 space-y-2">
-                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Performance Specs</label>
-                                        <textarea
-                                            value={formData.performance_specs}
-                                            onChange={e => setFormData({ ...formData, performance_specs: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all min-h-[80px]"
-                                            placeholder="e.g. 12.0 CEER / 11.2 EER"
-                                        />
-                                    </div>
-                                    <div className="col-span-2 space-y-2">
+                                    <div className="space-y-2">
                                         <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Dehumidification</label>
                                         <input
                                             type="text"
                                             value={formData.dehumidification}
                                             onChange={e => setFormData({ ...formData, dehumidification: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. 2.2 pts/hr"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. 3.3 Pts/Hr"
                                         />
                                     </div>
-                                    <div className="col-span-2 space-y-2">
+                                    <div className="col-span-1 sm:col-span-2 space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Key Spec Highlight</label>
+                                        <input
+                                            type="text"
+                                            value={formData.key_spec}
+                                            onChange={e => setFormData({ ...formData, key_spec: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. Dual Inverter Compressor: Up to 40% Energy Savings"
+                                        />
+                                    </div>
+                                    <div className="col-span-1 sm:col-span-2 space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Performance Specs Summary</label>
+                                        <textarea
+                                            value={formData.performance_specs}
+                                            onChange={e => setFormData({ ...formData, performance_specs: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all min-h-[70px] text-xs font-mono"
+                                            placeholder="44dB Sleep Mode (CEER 15.0 / Energy Star Most Efficient 2026)"
+                                        />
+                                    </div>
+                                    <div className="col-span-1 sm:col-span-2 space-y-2">
                                         <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Dimensions</label>
                                         <input
                                             type="text"
                                             value={formData.dimensions}
                                             onChange={e => setFormData({ ...formData, dimensions: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. 23.6 x 14.9 x 24.8"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder='e.g. 15.0" H x 23.6" W x 24.8" D'
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Weight</label>
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Net Weight (lbs)</label>
                                         <input
                                             type="text"
                                             value={formData.weight}
                                             onChange={e => setFormData({ ...formData, weight: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. 89"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. 81"
                                         />
                                     </div>
                                     <div className="space-y-2">
@@ -1301,8 +1859,127 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                             type="text"
                                             value={formData.warranty}
                                             onChange={e => setFormData({ ...formData, warranty: e.target.value })}
-                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all"
-                                            placeholder="e.g. 1 YEAR LIMITED"
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. 1 YEAR LIMITED / 5 YR COMPRESSOR"
+                                        />
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+
+                        {activeTab === 'fit' && (
+                            <motion.div
+                                key="fit"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 10 }}
+                                className="space-y-6"
+                            >
+                                {/* Live 3D Spatial Window Fit Preview Card */}
+                                <div className="p-5 bg-white/[0.02] border border-white/10 rounded-2xl space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-2">
+                                            <div className="size-2 rounded-full bg-primary animate-pulse" />
+                                            <span className="text-[10px] font-black uppercase tracking-widest text-white">Live 3D Window Fit Preview</span>
+                                        </div>
+                                        <span className="text-[9px] font-mono text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-full">
+                                            ⚡ Blender 4.1 Cycles Raytraced (&lt; 85 KB WebP)
+                                        </span>
+                                    </div>
+
+                                    <div className="relative h-48 bg-black rounded-xl overflow-hidden border border-white/5 flex items-center justify-center">
+                                        <Image
+                                            src={activeCutaway}
+                                            alt="3D Spatial Cutaway"
+                                            fill
+                                            className="object-contain p-2"
+                                        />
+                                        <div className="absolute bottom-2 left-2 bg-black/80 backdrop-blur-md border border-white/10 px-2.5 py-1 rounded-lg text-[9px] font-mono text-slate-300">
+                                            Min Opening: <span className="text-amber-400 font-bold">{formData.min_window_height || '15"'}</span> H × <span className="text-sky-400 font-bold">{formData.min_window_width || '27"'}–{formData.max_window_width || '39"'}</span> W
+                                        </div>
+                                        <div className="absolute top-2 right-2 bg-black/80 backdrop-blur-md border border-white/10 px-2.5 py-1 rounded-lg text-[9px] font-mono text-emerald-400">
+                                            {formData.chassis_type || 'Slide-Out Chassis'}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div className="space-y-2">
+                                        <label className="text-amber-400 text-[10px] font-black uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                                            <Ruler className="size-3" />
+                                            <span>Min Window Opening Height</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formData.min_window_height}
+                                            onChange={e => setFormData({ ...formData, min_window_height: e.target.value })}
+                                            className="w-full bg-black/50 border border-amber-500/20 rounded-xl px-4 py-3 text-white focus:border-amber-500/50 outline-none transition-all text-sm font-mono"
+                                            placeholder='e.g. 15"'
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sky-400 text-[10px] font-black uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                                            <Ruler className="size-3" />
+                                            <span>Min Window Opening Width</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formData.min_window_width}
+                                            onChange={e => setFormData({ ...formData, min_window_width: e.target.value })}
+                                            className="w-full bg-black/50 border border-sky-500/20 rounded-xl px-4 py-3 text-white focus:border-sky-500/50 outline-none transition-all text-sm font-mono"
+                                            placeholder='e.g. 27"'
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sky-400 text-[10px] font-black uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                                            <Ruler className="size-3" />
+                                            <span>Max Window Opening Width</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={formData.max_window_width}
+                                            onChange={e => setFormData({ ...formData, max_window_width: e.target.value })}
+                                            className="w-full bg-black/50 border border-sky-500/20 rounded-xl px-4 py-3 text-white focus:border-sky-500/50 outline-none transition-all text-sm font-mono"
+                                            placeholder='e.g. 39"'
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-emerald-400 text-[10px] font-black uppercase tracking-widest ml-1">Chassis Design Type</label>
+                                        <input
+                                            type="text"
+                                            value={formData.chassis_type}
+                                            onChange={e => setFormData({ ...formData, chassis_type: e.target.value })}
+                                            className="w-full bg-black/50 border border-emerald-500/20 rounded-xl px-4 py-3 text-white focus:border-emerald-500/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. Slide-Out Chassis or Top-Mount Fixed"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Shipping Weight (lbs)</label>
+                                        <input
+                                            type="text"
+                                            value={formData.shipping_weight}
+                                            onChange={e => setFormData({ ...formData, shipping_weight: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. 89"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Dry Air Flow (CFM)</label>
+                                        <input
+                                            type="text"
+                                            value={formData.dry_air_flow_cfm}
+                                            onChange={e => setFormData({ ...formData, dry_air_flow_cfm: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
+                                            placeholder="e.g. 260 CFM"
+                                        />
+                                    </div>
+                                    <div className="col-span-1 sm:col-span-2 space-y-2">
+                                        <label className="text-primary text-[10px] font-black uppercase tracking-widest ml-1">Island Climate Sizing Notes / CEO Calibration</label>
+                                        <textarea
+                                            value={formData.sizing_notes}
+                                            onChange={e => setFormData({ ...formData, sizing_notes: e.target.value })}
+                                            className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all min-h-[90px] text-xs leading-relaxed"
+                                            placeholder="Factory AHAM rated up to 550 sq. ft. Calibrated for 250–380 sq. ft. in typical Oahu homes with single-wall construction and moderate solar load."
                                         />
                                     </div>
                                 </div>
@@ -1316,9 +1993,9 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                         </div>
                     )}
 
-                    <div className="pt-6 flex gap-4">
-                        <button type="button" onClick={onClose} className="flex-1 border border-white/10 text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-white/5 transition-all">{content.admin.products.modal.cancel}</button>
-                        <button type="submit" className="flex-2 bg-primary text-black font-black uppercase tracking-widest py-4 px-8 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20">
+                    <div className="pt-4 flex gap-4 border-t border-white/5">
+                        <button type="button" onClick={onClose} className="flex-1 border border-white/10 text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-white/5 transition-all text-xs">{content.admin.products.modal.cancel}</button>
+                        <button type="submit" className="flex-2 bg-primary text-black font-black uppercase tracking-widest py-4 px-8 rounded-xl hover:bg-white transition-all shadow-lg shadow-primary/20 text-xs">
                             {product ? content.admin.products.modal.save_edit : content.admin.products.modal.save_new}
                         </button>
                     </div>
@@ -1426,6 +2103,32 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
         general_availability_range: ""
     });
 
+    // Date Staleness Validator
+    const isDateStale = (dateStr: string) => {
+        if (!dateStr) return false;
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth(); // 0-indexed
+        const oldYearMatch = dateStr.match(/\b(202[0-5])\b/);
+        if (oldYearMatch) return true;
+
+        const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+        const lower = dateStr.toLowerCase();
+        for (let i = 0; i < months.length; i++) {
+            if (lower.includes(months[i])) {
+                const hasCurrentOrFutureYear = dateStr.includes(String(currentYear)) || dateStr.includes(String(currentYear + 1));
+                if (hasCurrentOrFutureYear && i < currentMonth - 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
+    const hasStaleDates = isDateStale(formData.mini_split_estimate_date) ||
+                         isDateStale(formData.mini_split_install_date) ||
+                         isDateStale(formData.window_ac_estimate_date) ||
+                         isDateStale(formData.window_ac_install_date);
+
     // FIX: The Hydration Trap Synchronization
     // Sync local form state when the global ContentContext fetches the live DB data.
     // This prevents stale build-time initialContentJson from clobbering the live database when saving.
@@ -1480,6 +2183,18 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
                 <h3 className="text-white font-header font-black uppercase text-xl tracking-widest mb-2">Footer Schedule Availability</h3>
                 <p className="text-slate-500 text-xs">Update the availability dates displayed in the footer for customers.</p>
             </div>
+
+            {hasStaleDates && (
+                <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-start gap-3 text-amber-400 mb-6 max-w-4xl">
+                    <AlertTriangle className="size-5 shrink-0 mt-0.5" />
+                    <div className="text-xs space-y-1">
+                        <p className="font-black uppercase tracking-wider">Date Staleness Alert</p>
+                        <p className="text-slate-300 leading-relaxed">
+                            One or more availability dates appear to be in the past or older than the current month. Please update footer availability dates to reflect current Oahu installation and estimate capacity so prospective customers see accurate booking timeframes.
+                        </p>
+                    </div>
+                </div>
+            )}
 
             <form onSubmit={handleSave} className="max-w-4xl space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

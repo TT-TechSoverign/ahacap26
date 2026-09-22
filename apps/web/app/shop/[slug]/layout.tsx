@@ -178,11 +178,33 @@ export default async function ProductLayout({ params, children }: Props) {
     const idHash = Array.from(product.id.toString()).reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const specs = getProductSpecs(product.id);
 
+    const cutawayImageMap: Record<number, string> = {
+        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp'
+    };
+    const cutawayUrl = cutawayImageMap[product.id] ? `${domain}${cutawayImageMap[product.id]}` : null;
+    const schemaImages = [absoluteImageUrl];
+    if (cutawayUrl) schemaImages.push(cutawayUrl);
+
     const schema = {
         "@context": "https://schema.org/",
         "@type": "Product",
         "name": product.name,
-        "image": [absoluteImageUrl],
+        "image": schemaImages,
         "description": `Buy the ${product.name} at Affordable Home A/C. ${specs.idealFor ? `Ideal for ${specs.idealFor}. ` : ''}${specs.benefits ? `${specs.benefits} ` : ''}Professional installation and affordable prices in Oahu, Hawaii.`,
         "sku": `AHAC-${product.id}`,
         "mpn": manufacturerMpn, // Real manufacturer MPN for Google Shopping matching
@@ -200,8 +222,33 @@ export default async function ProductLayout({ params, children }: Props) {
             },
             {
                 "@type": "PropertyValue",
-                "name": "Cooling Area",
-                "value": specs.coolingArea
+                "name": "AHAM Factory Certified Coverage",
+                "value": product.coverage_aham || product.coverage || specs.coolingAreaAham || specs.coolingArea
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Island Microclimate Calibration™ Coverage",
+                "value": product.coverage_oahu || specs.coolingAreaOahu || '250–380 sq. ft.'
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Min Window Opening Height",
+                "value": product.min_window_height || specs.windowFit?.minHeight || '16.0"'
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Window Opening Width Span",
+                "value": `${product.min_window_width || specs.windowFit?.minWidth || '27"'} – ${product.max_window_width || specs.windowFit?.maxWidth || '39"'}`
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Chassis Type",
+                "value": product.chassis_type || specs.chassisType || 'Slide In-Out'
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "CEER Efficiency Rating",
+                "value": product.ceer_rating || specs.ceerRating || '15.0'
             },
             {
                 "@type": "PropertyValue",

@@ -35,9 +35,34 @@ export async function GET() {
       const rawHero = images.length > 0 ? images[0] : (product.image_url ? product.image_url.replace('.svg', '.webp') : '/assets/logo-new.png');
       const imageLink = rawHero.startsWith('http') ? rawHero : `${domain}${rawHero}`;
       
-      // Secondary / gallery images for Google Shopping interactive carousel
+      // Secondary / gallery images & 3D raytraced cutaway for Google Shopping interactive carousel
+      const cutawayImageMap: Record<number, string> = {
+        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp'
+      };
+      const cutawayRel = cutawayImageMap[product.id];
+      const cutawayImgLink = cutawayRel ? `${domain}${cutawayRel}` : '';
+
       const additionalImages = images.slice(1);
-      const additionalImagesXml = additionalImages.map(img => {
+      const allAdditionalImages = [...additionalImages];
+      if (cutawayImgLink && !allAdditionalImages.includes(cutawayImgLink)) {
+        allAdditionalImages.push(cutawayImgLink);
+      }
+      const additionalImagesXml = allAdditionalImages.map(img => {
         const fullImg = img.startsWith('http') ? img : `${domain}${img}`;
         return `<g:additional_image_link>${fullImg}</g:additional_image_link>`;
       }).join('\n          ');
@@ -83,7 +108,10 @@ export async function GET() {
       // Detailed Description
       const descParts = [];
       if (product.key_spec) descParts.push(product.key_spec);
-      if (product.coverage) descParts.push(`Coverage: ${product.coverage}`);
+      if (product.coverage_aham) descParts.push(`AHAM Coverage: ${product.coverage_aham}`);
+      else if (product.coverage) descParts.push(`Coverage: ${product.coverage}`);
+      if (product.coverage_oahu) descParts.push(`Island Microclimate™: ${product.coverage_oahu}`);
+      if (product.min_window_height) descParts.push(`Min Window Height: ${product.min_window_height}`);
       if (product.noise_level) descParts.push(`Noise Level: ${product.noise_level}`);
       if (product.dehumidification) descParts.push(`Dehumidification: ${product.dehumidification}`);
       if (product.dimensions) descParts.push(`Dimensions: ${product.dimensions}`);
@@ -92,7 +120,18 @@ export async function GET() {
       descParts.push('Local Waipahu warehouse pickup or $50 island-wide Oahu delivery available. Hawaii Energy rebate form assistance included.');
       const description = descParts.join('. ');
 
-      const shippingWeight = product.weight ? `<g:shipping_weight>${product.weight} lb</g:shipping_weight>` : '';
+      const rawWeight = product.shipping_weight || (product.weight ? `${product.weight} lb` : '');
+      const shippingWeight = rawWeight ? `<g:shipping_weight>${escapeXml(rawWeight)}</g:shipping_weight>` : '';
+
+      // 2026 Google Shopping Product Highlights
+      const highlights = [
+        product.coverage_aham ? `AHAM Factory Certified: ${product.coverage_aham}` : `Coverage: ${product.coverage || 'Factory Rated'}`,
+        product.coverage_oahu ? `Island Microclimate Calibration™: ${product.coverage_oahu}` : 'Island Sizing: Optimized for Hawaii Trade Winds & High Humidity',
+        product.min_window_height ? `Window Fit: Min ${product.min_window_height} H Opening Clearance` : 'Standard Window Opening Clearance Required',
+        product.chassis_type ? `Chassis Design: ${product.chassis_type}` : 'Slide-Out Chassis for Clean Maintenance',
+        'Waipahu Warehouse In-Stock • Free Pickup / $50 Oahu Delivery'
+      ];
+      const highlightsXml = highlights.map(h => `<g:product_highlight>${escapeXml(h)}</g:product_highlight>`).join('\n          ');
 
       // Custom labels for Smart Bidding / Performance Max
       const customLabels = [
@@ -113,6 +152,7 @@ export async function GET() {
           <g:link>${productLink}</g:link>
           <g:image_link>${imageLink}</g:image_link>
           ${additionalImagesXml}
+          ${highlightsXml}
           <g:condition>new</g:condition>
           <g:availability>${availability}</g:availability>
           <g:price>${product.price}.00 USD</g:price>

@@ -1194,10 +1194,31 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
     const [mounted, setMounted] = useState(false);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const [viewMode, setViewMode] = useState<'studio' | 'cutaway'>('studio');
     const [tiltStyle, setTiltStyle] = useState({});
     const [glareStyle, setGlareStyle] = useState({ opacity: 0, transform: 'translate(-50%, -50%)' });
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
     const [sparks, setSparks] = useState<{ id: number; left: string; delay: string; duration: string; drift: string; color: string }[]>([]);
+
+    const cutawayImageMap: Record<number, string> = {
+        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+    };
+    const cutawayImage = cutawayImageMap[product.id] || '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp';
 
     const cardRef = useRef<HTMLDivElement>(null);
     const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
@@ -1373,6 +1394,42 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                     </div>
                 )}
 
+                {/* 3D Window Fit & Studio View Switcher Pills */}
+                <div className="absolute top-2 left-2 z-30 flex items-center bg-black/85 backdrop-blur-md rounded-lg p-0.5 border border-white/10 shadow-lg">
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setViewMode('studio');
+                        }}
+                        className={cn(
+                            "px-2 py-1 rounded text-[8px] font-header font-black uppercase tracking-wider transition-all",
+                            viewMode === 'studio' 
+                                ? "bg-primary text-black shadow-sm" 
+                                : "text-slate-400 hover:text-white"
+                        )}
+                        title="View Studio Unit Photos"
+                    >
+                        📷 Studio
+                    </button>
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setViewMode('cutaway');
+                        }}
+                        className={cn(
+                            "px-2 py-1 rounded text-[8px] font-header font-black uppercase tracking-wider transition-all flex items-center gap-1",
+                            viewMode === 'cutaway' 
+                                ? "bg-cyan-400 text-black shadow-sm" 
+                                : "text-slate-400 hover:text-white"
+                        )}
+                        title="View Raytraced 3D Window Fit & Dimension Calipers"
+                    >
+                        <span>📐 3D Fit</span>
+                    </button>
+                </div>
+
                 {rebate && (
                     <div className="absolute top-0 right-0 z-20 bg-emerald-500 text-white font-header font-black text-[8px] md:text-[9px] px-3 py-1.5 rounded-bl-2xl uppercase tracking-[0.2em] shadow-lg border-b border-l border-emerald-400/30">
                         {rebate}
@@ -1393,15 +1450,21 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                 </div>
 
                 {(() => {
-                    const displayImage = product.image_url || getProductImages(product.id)?.[0];
-                    return displayImage ? (
+                    const studioImg = product.image_url || getProductImages(product.id)?.[0];
+                    const activeImg = viewMode === 'cutaway' ? cutawayImage : studioImg;
+
+                    return activeImg ? (
                         <Image
-                            src={displayImage}
-                            alt={product.name}
+                            key={`${product.id}-${viewMode}`}
+                            src={activeImg}
+                            alt={viewMode === 'cutaway' ? `${product.name} 3D Window Fit Cutaway` : product.name}
                             fill
                             sizes="(max-width: 768px) 100vw, 33vw"
-                            className="object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative z-10 p-4 md:p-6"
-                            unoptimized={displayImage?.endsWith('.svg')}
+                            className={cn(
+                                "object-contain transition-transform duration-700 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative z-10",
+                                viewMode === 'cutaway' ? "p-1 md:p-2 scale-100 group-hover:scale-105" : "p-4 md:p-6 group-hover:scale-110"
+                            )}
+                            unoptimized={activeImg?.endsWith('.svg')}
                         />
                     ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-slate-700 relative z-10">
@@ -1414,8 +1477,8 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
 
             {/* Identity & Specs (Centered Axis) */}
             <div className="p-3 md:p-5 flex flex-col flex-grow items-center text-center relative z-10">
-                <div className="mb-3 w-full flex flex-col items-center">
-                    <div className="text-primary font-header font-black text-[8px] md:text-[9px] uppercase tracking-[0.4em] mb-1.5 flex items-center gap-2 opacity-80 group-hover:opacity-100 transition-opacity justify-center">
+                <div className="mb-2 w-full flex flex-col items-center">
+                    <div className="text-primary font-header font-black text-[8px] md:text-[9px] uppercase tracking-[0.4em] mb-1 flex items-center gap-2 opacity-80 group-hover:opacity-100 transition-opacity justify-center">
                         <span className="w-2 h-px bg-primary/30 group-hover:w-4 transition-all"></span>
                         {product.category || 'AC UNIT'}
                         <span className="w-2 h-px bg-primary/30 group-hover:w-4 transition-all"></span>
@@ -1425,15 +1488,34 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                     </h3>
                 </div>
 
-                {/* Technical Specs (Noise & Voltage Only) */}
-                <div className="grid grid-cols-2 gap-1.5 w-full mb-3">
-                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Noise Level</span>
-                        <span className="text-white text-[10px] font-bold font-header lowercase">{product.noise_level || 'N/A'}</span>
+                {/* Dual-Sizing Architecture (AHAM vs Island Microclimate™) */}
+                <div className="w-full mb-2.5 p-2 rounded-xl bg-white/[0.02] border border-white/5 space-y-1 text-left">
+                    <div className="flex items-center justify-between text-[8px] font-mono">
+                        <span className="text-slate-400 uppercase tracking-wider">AHAM Factory:</span>
+                        <span className="text-white font-bold">{product.coverage_aham || product.coverage || 'Factory Rated'}</span>
                     </div>
-                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2.5 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                        <span className="text-slate-500 text-[8px] font-black uppercase tracking-widest mb-0.5">Voltage</span>
-                        <span className="text-white text-[10px] font-bold font-header">{product.voltage || '115V'}</span>
+                    <div className="flex items-center justify-between text-[8px] font-mono">
+                        <span className="text-cyan-400 uppercase tracking-wider flex items-center gap-1">
+                            <span className="size-1 rounded-full bg-cyan-400 animate-pulse"></span>
+                            Island Sizing:
+                        </span>
+                        <span className="text-cyan-300 font-bold">{product.coverage_oahu || 'Calibrated'}</span>
+                    </div>
+                </div>
+
+                {/* Technical Specs & Window Fit Clearance */}
+                <div className="grid grid-cols-3 gap-1 w-full mb-2.5">
+                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
+                        <span className="text-slate-500 text-[7px] font-black uppercase tracking-widest mb-0.5">Noise</span>
+                        <span className="text-white text-[9px] font-bold font-header lowercase truncate">{product.noise_level || 'N/A'}</span>
+                    </div>
+                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
+                        <span className="text-slate-500 text-[7px] font-black uppercase tracking-widest mb-0.5">Voltage</span>
+                        <span className="text-white text-[9px] font-bold font-header">{product.voltage?.split('/')?.[0]?.trim() || '115V'}</span>
+                    </div>
+                    <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2 flex flex-col items-center justify-center group-hover:border-cyan-500/20 transition-all duration-500 shadow-inner">
+                        <span className="text-slate-500 text-[7px] font-black uppercase tracking-widest mb-0.5">Min Window</span>
+                        <span className="text-cyan-300 text-[9px] font-bold font-mono">{product.min_window_height ? `${product.min_window_height} H` : '16" H'}</span>
                     </div>
                 </div>
 

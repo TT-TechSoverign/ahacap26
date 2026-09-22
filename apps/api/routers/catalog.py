@@ -150,6 +150,12 @@ async def create_product(
     }
     persist_product_changes(product_dict)
     
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="CATALOG_PRODUCT_CREATE", details={"product_id": new_product.id, "name": new_product.name})
+    except Exception:
+        pass
+
     return product_dict
 
 @router.put("/{product_id}", dependencies=[Depends(verify_admin_token)])
@@ -206,6 +212,12 @@ async def update_product(
         }
         persist_product_changes(product_dict)
         
+        try:
+            from routers.dev_os import log_dev_os_audit
+            await log_dev_os_audit(db, action="CATALOG_PRODUCT_UPDATE", details={"product_id": updated_product.id, "name": updated_product.name})
+        except Exception:
+            pass
+
         return product_dict
     except Exception as e:
         import traceback
@@ -227,4 +239,10 @@ async def delete_product(
     # Persist deletion
     persist_product_changes({'id': product_id}, action='delete')
     
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="CATALOG_PRODUCT_DELETE", details={"product_id": product_id})
+    except Exception:
+        pass
+
     return {"status": "success"}

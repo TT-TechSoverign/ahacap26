@@ -473,7 +473,7 @@ async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
 
 # --- MAINTENANCE ---
 from seed_products import seed
-from dependencies import verify_admin_token
+from dependencies import verify_admin_token, get_db
 
 @app.post("/api/v1/maintenance/seed_products", dependencies=[Depends(verify_admin_token)])
 async def seed_products_endpoint(background_tasks: BackgroundTasks, force: bool = Query(False)):
@@ -481,17 +481,27 @@ async def seed_products_endpoint(background_tasks: BackgroundTasks, force: bool 
     return {"status": "seeding_started", "force": force}
 
 @app.post("/api/v1/admin/login")
-async def admin_login(payload: dict, request: Request):
+async def admin_login(payload: dict, request: Request, db: AsyncSession = Depends(get_db)):
     ip = request.client.host if request.client else "unknown"
-    if not await check_rate_limit(ip, "admin_login", limit=5, period=300):
+    if not await check_rate_limit(ip, "admin_login", limit=10, period=300):
         raise HTTPException(status_code=429, detail="Too many attempts. Please try again later.")
 
     pin = payload.get("pin")
     if not pin:
-        raise HTTPException(status_code=400, detail="Missing PIN")
+        raise HTTPException(status_code=400, detail="Missing Access Code")
+
     expected_pin = os.getenv("ADMIN_PIN", "8081")
-    if pin != expected_pin:
-        raise HTTPException(status_code=401, detail="Invalid PIN")
+    expected_password = os.getenv("ADMIN_MASTER_PASSWORD", "AudreynKa!1523!!")
+
+    is_valid = (pin == expected_pin) or (pin == expected_password)
+    if not is_valid:
+        try:
+            from routers.dev_os import log_dev_os_audit
+            await log_dev_os_audit(db, action="ADMIN_LOGIN_FAILED", details={"ip": ip}, ip=ip)
+        except Exception:
+            pass
+        raise HTTPException(status_code=401, detail="Invalid Access Code")
+
     from dependencies import create_signed_token
     signed_token = create_signed_token("admin")
     response = JSONResponse(content={"token": f"Bearer {signed_token}"})
@@ -507,6 +517,14 @@ async def admin_login(payload: dict, request: Request):
         path="/",
         max_age=86400
     )
+
+    try:
+        from routers.dev_os import log_dev_os_audit
+        login_method = "PIN" if pin == expected_pin else "MASTER_PASSWORD"
+        await log_dev_os_audit(db, action="ADMIN_LOGIN_SUCCESS", details={"method": login_method, "ip": ip}, ip=ip)
+    except Exception:
+        pass
+
     return response
 
 @app.post("/api/v1/admin/logout")

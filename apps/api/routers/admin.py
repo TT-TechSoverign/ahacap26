@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Body
+from fastapi import APIRouter, Depends, HTTPException, Body, Response
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from pydantic import BaseModel
@@ -8,6 +8,8 @@ from database import get_db
 from dependencies import verify_admin_token
 import json
 import os
+import csv
+import io
 from datetime import datetime
 
 router = APIRouter(dependencies=[Depends(verify_admin_token)])
@@ -72,6 +74,12 @@ async def update_schedule(
     await db.commit()
     await db.refresh(page)
 
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="ADMIN_SCHEDULE_UPDATE", details=schedule.dict())
+    except Exception:
+        pass
+
     return {"status": "success", "schedule": schedule.dict()}
 
 # --- ADMIN ORDERS & LEADS ---
@@ -88,14 +96,65 @@ async def get_all_orders(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.Order).order_by(models.Order.created_at.desc()))
     return result.scalars().all()
 
+@router.get("/orders/export-csv")
+async def export_orders_csv(db: AsyncSession = Depends(get_db)):
+    """Exports all orders as CSV with customer details and Oahu GET tax itemization."""
+    result = await db.execute(select(models.Order).order_by(models.Order.created_at.desc()))
+    orders = result.scalars().all()
+
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow([
+        "Order ID", "Status", "Date", "Customer Name", "Customer Email",
+        "Customer Phone", "Fulfillment Mode", "Subtotal ($)", "Oahu GET Tax 4.712% ($)",
+        "Total ($)", "Stripe PID"
+    ])
+
+    for order in orders:
+        total = (order.total_cents or 0) / 100.0
+        tax = round(total * 0.04712 / 1.04712, 2)
+        subtotal = round(total - tax, 2)
+        writer.writerow([
+            order.id,
+            order.status,
+            order.created_at.isoformat() if order.created_at else "",
+            order.customer_name or "",
+            order.customer_email or "",
+            order.customer_phone or "",
+            order.fulfillment_mode or "delivery",
+            f"{subtotal:.2f}",
+            f"{tax:.2f}",
+            f"{total:.2f}",
+            order.stripe_pid or ""
+        ])
+
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="ADMIN_ORDERS_CSV_EXPORT", details={"order_count": len(orders)})
+    except Exception:
+        pass
+
+    csv_data = output.getvalue()
+    return Response(
+        content=csv_data,
+        media_type="text/csv",
+        headers={"Content-Disposition": f"attachment; filename=ahac_orders_{datetime.utcnow().strftime('%Y%m%d')}.csv"}
+    )
+
 @router.post("/orders/reconcile")
-async def trigger_order_reconciliation():
+async def trigger_order_reconciliation(db: AsyncSession = Depends(get_db)):
     """
     Manually triggers Stripe order reconciliation to check recent Stripe sessions
     and automatically recover any missing orders into the database.
     """
     from services.reconciliation import reconcile_unrecorded_stripe_orders
-    return await reconcile_unrecorded_stripe_orders(limit=30)
+    recon_result = await reconcile_unrecorded_stripe_orders(limit=30)
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="ADMIN_RECONCILIATION_TRIGGER", details=recon_result)
+    except Exception:
+        pass
+    return recon_result
 
 @router.put("/orders/{order_id}")
 async def update_order_status(order_id: str, payload: OrderUpdate, db: AsyncSession = Depends(get_db)):
@@ -106,6 +165,11 @@ async def update_order_status(order_id: str, payload: OrderUpdate, db: AsyncSess
     
     order.status = payload.status
     await db.commit()
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="ADMIN_ORDER_STATUS_UPDATE", details={"order_id": order_id, "new_status": payload.status})
+    except Exception:
+        pass
     return {"status": "success"}
 
 @router.get("/leads")
@@ -125,6 +189,11 @@ async def update_lead_status(lead_id: int, payload: LeadUpdate, db: AsyncSession
         lead.notes = payload.notes
         
     await db.commit()
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="ADMIN_LEAD_STATUS_UPDATE", details={"lead_id": lead_id, "new_status": payload.status})
+    except Exception:
+        pass
     return {"status": "success"}
 
 @router.get("/orders/backfill")
