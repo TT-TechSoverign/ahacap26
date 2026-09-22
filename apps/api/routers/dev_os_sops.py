@@ -605,5 +605,169 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         ],
         "outputs": ["Spatial engine status (SPATIAL_VERIFIED)", "Rendered cutaway count (3)", "Caliper accuracy (CONFIRMED)"],
         "contingency_protocol": "Trigger local python scripts/generate_window_3d_render.py and scripts/apply_caliper_overlay.py if asset checksum fails."
+    },
+    # =========================================================================
+    # SUB-MASTER 7: SERP & INTENT ACQUISITION
+    # =========================================================================
+    "submaster_serp_acquisition": {
+        "id": "submaster_serp_acquisition",
+        "code": "SOP-SUB-07",
+        "title": "SERP & Intent Acquisition Sub-Master",
+        "domain": "SERP Acquisition",
+        "supervisor": "Sovereign Master Orchestrator",
+        "mandate": "Supervise search query intent harvesting across 22 Oahu city pages, click-through-rate title tag optimization, and Google Merchant Center XML feed syndication.",
+        "token_efficiency_policy": "Zero background polling loops. Invoked strictly on-demand by client CLI or Dev OS UI. Emits compact JSON summaries (< 400 bytes).",
+        "oahu_grounding": "Oahu search intent harvesting (Honolulu, Ewa Beach, Kailua, Waipahu, Kapolei), localized $0 estimate price anchoring, and Hawaii Contractor License CT-36775 SERP trust badges.",
+        "inputs": ["Google Search Console query logs", "Next.js page metadata", "Google Merchant XML feeds", "Canonical URL graph"],
+        "execution_steps": [
+            {"step": 1, "title": "High-Intent Query Clustering", "description": "Trigger agent_serp_intent_harvester to identify high-converting Oahu queries with impressions but low CTR.", "verification": "Query intent taxonomy categorized (Repair, Warehouse Pickup, Sizing)."},
+            {"step": 2, "title": "CTR Title Tag Optimization", "description": "Trigger agent_ctr_title_craftsman to enforce click-magnetic title patterns with phone hotline and $0 estimate hooks.", "verification": "22 city pages enforce ${city} AC Repair & In-Stock Window ACs | $0 Estimate | (808) 488-1111."},
+            {"step": 3, "title": "Merchant Feed Audit", "description": "Trigger agent_merchant_feed_sentinel to validate XML feed and rich snippet schemas.", "verification": "Google Merchant feed valid with validFrom anchors and zero duplicate reviews."}
+        ],
+        "outputs": ["SERP acquisition matrix", "CTR improvement roadmap", "Merchant feed health report"],
+        "contingency_protocol": "Auto-correct canonical tag conflicts and title tag formatting on detected SERP crawl penalties."
+    },
+    # =========================================================================
+    # SUB-MASTER 8: FRICTIONLESS CONVERSION VELOCITY
+    # =========================================================================
+    "submaster_conversion_velocity": {
+        "id": "submaster_conversion_velocity",
+        "code": "SOP-SUB-08",
+        "title": "Frictionless Conversion Velocity Sub-Master",
+        "domain": "Conversion",
+        "supervisor": "Sovereign Master Orchestrator",
+        "mandate": "Enforce frictionless checkout flow, 1-tap mobile wallet availability (Apple Pay, Google Pay, Link), Waipahu warehouse trust grounding, and strict anti-upsell mandate.",
+        "token_efficiency_policy": "On-demand client invocation. Evaluates checkout pipeline and Lighthouse web vitals metrics in < 10ms memory audits.",
+        "oahu_grounding": "Oahu customer trust defense: eliminates mainland shipping anxiety via Waipahu warehouse pickup proof, 1-year local warranty, and transparent GET tax.",
+        "inputs": ["Stripe checkout session config", "Checkout page UI DOM", "Core Web Vitals telemetry", "Phone bridge tap logs"],
+        "execution_steps": [
+            {"step": 1, "title": "Mobile Wallet Pipeline Check", "description": "Trigger agent_mobile_checkout_sentinel to confirm Apple Pay, Google Pay, and Stripe Link are unrestricted.", "verification": "payment_method_types is dynamic; card-only restriction removed."},
+            {"step": 2, "title": "Trust & Reassurance Grounding", "description": "Trigger agent_trust_authority_grounder to verify warehouse proof card and 1-year warranty replace intimidating refund warnings.", "verification": "High-trust card active; intimidating blood-red banners purged."},
+            {"step": 3, "title": "Zero-Friction & Anti-Upsell Audit", "description": "Trigger agent_zero_friction_navigator to enforce zero checkout friction, instant filter resets, and direct phone bridges.", "verification": "Zero upsells, zero checkout dead-ends, 1-tap phone hotline active."},
+            {"step": 4, "title": "Core Web Vitals Verification", "description": "Trigger agent_speed_core_vital_sentinel to audit mobile page speed and zero CLS delivery.", "verification": "Mobile response < 100ms, CLS = 0.00, zero-cache headers active."}
+        ],
+        "outputs": ["Mobile checkout velocity score", "Trust armor index", "Core Web Vitals status"],
+        "contingency_protocol": "Immediately purge any checkout blocker, modal pop-up, or payment restriction that decreases checkout completion speed."
+    },
+    # --- Under Sub-Master: SERP & Intent Acquisition ---
+    "agent_serp_intent_harvester": {
+        "id": "agent_serp_intent_harvester",
+        "code": "SOP-SERP-01",
+        "title": "SERP Intent Harvester Sentinel",
+        "domain": "SERP Acquisition",
+        "supervisor": "submaster_serp_acquisition",
+        "mandate": "Harvest and cluster high-intent Oahu search queries across repair, emergency replacement, warehouse pickup, and mini-split sizing keywords.",
+        "token_efficiency_policy": "In-memory query clustering against historical Search Console cache. Zero external network requests.",
+        "oahu_grounding": "Captures local microclimate queries ('kailua ac rust', 'ewa beach window ac sizing', 'honolulu emergency ac repair').",
+        "inputs": ["GSC query logs", "Search query cluster index"],
+        "execution_steps": [
+            {"step": 1, "title": "Cluster Analysis", "description": "Cluster queries by intent: transactional purchase, local warehouse pickup, or diagnostic repair.", "verification": "High-intent queries segmented with > 1,500 monthly impressions."},
+            {"step": 2, "title": "CTR Gap Detection", "description": "Identify queries ranking in top 5 with CTR below 3.5%.", "verification": "Target queries flagged for title craftsman optimization."}
+        ],
+        "outputs": ["Top query clusters", "Identified CTR gaps", "Intent harvesting status (HARVESTING_ACTIVE)"],
+        "contingency_protocol": "Recommend targeted title adjustments to submaster_serp_acquisition."
+    },
+    "agent_ctr_title_craftsman": {
+        "id": "agent_ctr_title_craftsman",
+        "code": "SOP-SERP-02",
+        "title": "CTR Title Tag Craftsman Sentinel",
+        "domain": "SERP Acquisition",
+        "supervisor": "submaster_serp_acquisition",
+        "mandate": "Formulate and audit click-optimized title tags, price anchors ($0 Estimate), and phone hotlines ((808) 488-1111) across all Oahu routes.",
+        "token_efficiency_policy": "Deterministic title syntax parsing. Zero external tokens consumed.",
+        "oahu_grounding": "Embeds Waipahu local stock availability and Honolulu phone bridge directly into Google SERP blue link snippets.",
+        "inputs": ["apps/web/app page metadata", "City page route templates"],
+        "execution_steps": [
+            {"step": 1, "title": "City Template Title Audit", "description": "Verify all 22 city pages format title as ${city} AC Repair & In-Stock Window ACs | $0 Estimate | (808) 488-1111.", "verification": "All 22 city templates match conversion title standard."},
+            {"step": 2, "title": "Canonical Link Integrity", "description": "Verify zero root canonical override on subpages.", "verification": "Root layout alternates canonical purged."}
+        ],
+        "outputs": ["Title tag compliance (100%)", "Title craftsman status (TITLES_CRAFTED)"],
+        "contingency_protocol": "Auto-correct malformed title templates."
+    },
+    "agent_merchant_feed_sentinel": {
+        "id": "agent_merchant_feed_sentinel",
+        "code": "SOP-SERP-03",
+        "title": "Google Merchant Feed Sentinel",
+        "domain": "SERP Acquisition",
+        "supervisor": "submaster_serp_acquisition",
+        "mandate": "Audit Google Merchant Center XML feed and Product JSON-LD schema for validFrom, priceValidUntil, and aggregateRating deduplication.",
+        "token_efficiency_policy": "Sub-millisecond XML/JSON schema inspection. Zero external calls.",
+        "oahu_grounding": "Ensures all 16 Waipahu in-stock window AC models display clean 4.9-star rich snippets and transparent Oahu pricing on Google Shopping.",
+        "inputs": ["apps/web/app/api/google-feed/route.ts", "apps/web/app/shop/[slug]/layout.tsx"],
+        "execution_steps": [
+            {"step": 1, "title": "Merchant XML Validation", "description": "Verify XML feed renders valid RSS 2.0 with g:price and g:availability.", "verification": "16 products syndicating to Google Merchant Center."},
+            {"step": 2, "title": "Schema Deduplication Audit", "description": "Verify zero duplicate aggregateRating blocks across city and shop layouts.", "verification": "Clean single aggregateRating per product/service."}
+        ],
+        "outputs": ["Merchant feed status (MERCHANT_FEED_VERIFIED)", "Audited products (16)"],
+        "contingency_protocol": "Filter malformed schema nodes prior to build compilation."
+    },
+    # --- Under Sub-Master: Frictionless Conversion Velocity ---
+    "agent_mobile_checkout_sentinel": {
+        "id": "agent_mobile_checkout_sentinel",
+        "code": "SOP-CONV-01",
+        "title": "Mobile Checkout Sentinel",
+        "domain": "Conversion",
+        "supervisor": "submaster_conversion_velocity",
+        "mandate": "Validate 1-tap mobile wallet availability (Apple Pay, Google Pay, Stripe Link) and prevent checkout payment gateway restrictions.",
+        "token_efficiency_policy": "In-memory inspection of Stripe checkout session creation parameters; 0Hz idle cost.",
+        "oahu_grounding": "Enables Oahu mobile shoppers on LTE/5G to complete unit purchases in under 15 seconds without typing credit cards manually.",
+        "inputs": ["apps/web/app/create-checkout-session/route.ts", "apps/web/app/api/checkout/route.ts"],
+        "execution_steps": [
+            {"step": 1, "title": "Payment Method Options Audit", "description": "Verify payment_method_types is dynamic or includes card, link, apple_pay, google_pay.", "verification": "Restricted ['card'] array absent."},
+            {"step": 2, "title": "Origin Fallback Audit", "description": "Verify origin fallback correctly resolves to https://www.affordablehome-ac.com.", "verification": "Localhost fallback replaced."}
+        ],
+        "outputs": ["Mobile checkout status (MOBILE_WALLETS_ARMORED)", "Supported wallets (Apple Pay, Google Pay, Link)"],
+        "contingency_protocol": "Restore dynamic payment method configurations immediately upon restriction detection."
+    },
+    "agent_trust_authority_grounder": {
+        "id": "agent_trust_authority_grounder",
+        "code": "SOP-CONV-02",
+        "title": "Trust Authority Grounder Sentinel",
+        "domain": "Conversion",
+        "supervisor": "submaster_conversion_velocity",
+        "mandate": "Embed Waipahu warehouse proof, 1-year manufacturer warranty, and Hawaii Contractor License CT-36775 badge in high-friction conversion steps.",
+        "token_efficiency_policy": "Static inspection of checkout page UI tree and warranty trust cards.",
+        "oahu_grounding": "Replaces hostile 'All Sales Final / No Refunds' warning with reassuring Waipahu warehouse pickup and warranty reassurance.",
+        "inputs": ["apps/web/app/checkout/page.tsx"],
+        "execution_steps": [
+            {"step": 1, "title": "Hostile Warning Audit", "description": "Confirm all intimidating red 'All Sales Final' banners have been purged.", "verification": "Hostile banner absent."},
+            {"step": 2, "title": "Warehouse Reassurance Card Check", "description": "Confirm presence of Waipahu Warehouse Verified badge and 1-Year Warranty reassurance card.", "verification": "Reassurance card verified in checkout DOM."}
+        ],
+        "outputs": ["Trust grounding status (TRUST_GROUNDED)", "Trust card active (Waipahu Warehouse Verified)"],
+        "contingency_protocol": "Revert to high-trust reassurance layout if any checkout template regresses."
+    },
+    "agent_zero_friction_navigator": {
+        "id": "agent_zero_friction_navigator",
+        "code": "SOP-CONV-03",
+        "title": "Zero-Friction Navigator Sentinel",
+        "domain": "Conversion",
+        "supervisor": "submaster_conversion_velocity",
+        "mandate": "Enforce strict anti-upsell mandate, eliminate checkout dead-ends, maintain instant filter resets, and provide 1-tap phone bridges.",
+        "token_efficiency_policy": "Zero token overhead. Performs code pattern scan for modal popups, accessory upsells, and bundle checkboxes.",
+        "oahu_grounding": "Protects Oahu shoppers from mainland-style aggressive sales tactics; ensures clean, direct, respectful checkout experience.",
+        "inputs": ["apps/web/app/checkout/page.tsx", "apps/web/app/shop/ShopClient.tsx"],
+        "execution_steps": [
+            {"step": 1, "title": "Anti-Upsell Audit", "description": "Scan checkout pipeline for upsell modals, warranty add-ons, or accessory bundle checkboxes.", "verification": "0 upsell components found."},
+            {"step": 2, "title": "Dispatch Phone Bridge Check", "description": "Verify (808) 488-1111 phone bridge is clickable with tel: URI.", "verification": "1-tap phone bridge verified."}
+        ],
+        "outputs": ["Friction status (FRICTION_ZERO)", "Anti-upsell compliance (100% ENFORCED)"],
+        "contingency_protocol": "Block any pull request introducing checkout modals or accessory add-ons."
+    },
+    "agent_speed_core_vital_sentinel": {
+        "id": "agent_speed_core_vital_sentinel",
+        "code": "SOP-CONV-04",
+        "title": "Speed & Core Web Vitals Sentinel",
+        "domain": "Conversion",
+        "supervisor": "submaster_conversion_velocity",
+        "mandate": "Enforce mobile sub-100ms TTFB, zero Cumulative Layout Shift (CLS = 0.00), and universal zero-cache headers for dynamic routes.",
+        "token_efficiency_policy": "Headers and bundle size analyzer; sub-5ms in-memory inspection.",
+        "oahu_grounding": "Optimizes page delivery across Hawaii cellular networks (Docomo, T-Mobile, AT&T, Verizon on Oahu).",
+        "inputs": ["Nginx response headers", "Next.js cache-control headers", "apps/web build traces"],
+        "execution_steps": [
+            {"step": 1, "title": "Cache-Control Audit", "description": "Verify shop and checkout routes emit no-cache, no-store, must-revalidate.", "verification": "Universal zero-cache headers active."},
+            {"step": 2, "title": "CLS Layout Verification", "description": "Verify images and cutaways have fixed aspect-ratio boxes preventing layout shift.", "verification": "CLS verified at 0.00."}
+        ],
+        "outputs": ["Core Web Vitals status (VITALS_OPTIMAL)", "LCP target (< 2.0s)", "CLS (0.00)"],
+        "contingency_protocol": "Alert Sovereign Master on any asset addition causing layout shift or bundle bloat."
     }
 }

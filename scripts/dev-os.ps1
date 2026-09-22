@@ -54,10 +54,12 @@ switch ($Command.ToLower()) {
             Write-Host "[!] Usage: .\scripts\dev-os.ps1 run-agent <agent_id>" -ForegroundColor Red
             Write-Host "   Infra:      agent_host_sentinel, agent_container_sentinel, agent_db_guardian, agent_storage_sentinel" -ForegroundColor Yellow
             Write-Host "   Security:   agent_security_shield, agent_commit_sentinel, agent_compliance_auditor, agent_perimeter_auditor" -ForegroundColor Yellow
-            Write-Host "   Commerce:   agent_funnel_telemetry, agent_cro_optimizer, agent_revenue_reconciler" -ForegroundColor Yellow
+            Write-Host "   Commerce:   agent_funnel_telemetry, agent_cro_optimizer, agent_revenue_reconciler, agent_catalog_auditor" -ForegroundColor Yellow
             Write-Host "   Growth:     agent_seo_metadata, agent_oahu_grounding, agent_market_research, agent_heco_rebate_strategist, agent_gsc_ga4_analytics, agent_schema_metadata_engine, agent_high_intent_planner" -ForegroundColor Yellow
             Write-Host "   CRM:        agent_crm_dispatch, agent_customer_lifecycle, agent_intake_triage" -ForegroundColor Yellow
-            Write-Host "   Deployment: agent_deployment_guardian, agent_build_qa, agent_regression_sentinel" -ForegroundColor Yellow
+            Write-Host "   Deployment: agent_deployment_guardian, agent_build_qa, agent_regression_sentinel, agent_spatial_visualizer" -ForegroundColor Yellow
+            Write-Host "   SERP:       agent_serp_intent_harvester, agent_ctr_title_craftsman, agent_merchant_feed_sentinel" -ForegroundColor Yellow
+            Write-Host "   Conversion: agent_mobile_checkout_sentinel, agent_trust_authority_grounder, agent_zero_friction_navigator, agent_speed_core_vital_sentinel" -ForegroundColor Yellow
             return
         }
         Write-Host "[*] Triggering Agent: $Target on Server..." -ForegroundColor Yellow
@@ -71,7 +73,7 @@ switch ($Command.ToLower()) {
     }
 
     "run-fleet" {
-        Write-Host "[*] Dispatching full fleet: Running All 24 Specialized Agents sequentially..." -ForegroundColor Yellow
+        Write-Host "[*] Dispatching full fleet: Running All 33 Specialized Agents sequentially..." -ForegroundColor Yellow
         try {
             $resp = Invoke-RestMethod -Uri "$ServerUrl/agents/run-all" -Method POST -Headers $headers
             Write-Host "[OK] Fleet Audit Completed at $($resp.executed_at) (All Healthy: $($resp.all_healthy)):" -ForegroundColor Green
@@ -155,7 +157,7 @@ switch ($Command.ToLower()) {
 
     "run-submaster" {
         if (-not $Target) {
-            Write-Host "[ERR] Usage: .\scripts\dev-os.ps1 run-submaster [infra|security|commerce|growth|crm|deploy]" -ForegroundColor Red
+            Write-Host "[ERR] Usage: .\scripts\dev-os.ps1 run-submaster [infra|security|commerce|growth|crm|deploy|serp|conversion]" -ForegroundColor Red
             return
         }
         $targetMap = @{
@@ -165,6 +167,8 @@ switch ($Command.ToLower()) {
             "growth"     = "submaster_growth_grounding"
             "crm"        = "submaster_crm_operations"
             "deploy"     = "submaster_deployment_quality"
+            "serp"       = "submaster_serp_acquisition"
+            "conversion" = "submaster_conversion_velocity"
         }
         $smId = if ($targetMap.ContainsKey($Target.ToLower())) { $targetMap[$Target.ToLower()] } else { $Target }
         Write-Host "[*] Dispatching Category Sub-Master: $smId on Server..." -ForegroundColor Yellow
