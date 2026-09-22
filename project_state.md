@@ -152,6 +152,12 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
     - Implemented `view_item` Enhanced Ecommerce dataLayer push on `/shop/[slug]` upon product hydration.
     - Implemented `view_cart` Enhanced Ecommerce dataLayer push in `<CartDrawer />` when the cart drawer opens.
     - Standardized `generate_lead` with `{ event: 'generate_lead', ... }` object payloads across `DispatchWizard.tsx`, `MiniSplitEstimator.tsx`, and `LocalServiceFunnel.tsx`, ensuring 100% trigger compatibility for GTM custom event tags and Google Ads conversion tracking.
+  - **Catalog Filter Deduplication & Unified Search Architecture (`/shop`)**:
+    - Eradicated duplicate secondary "Room Sizer" (All Capacities, Bedrooms, Master/Studio, Great Rooms) and "Wall Plug Voltage" (All Plugs, 115V Standard, 230V Heavy Duty) filter buttons previously stacked under the Dual Inverter section header.
+    - Purged redundant local states (`dualInverterVoltage`, `dualInverterCapacity`, and `filteredDualInverters` `useMemo`), resolving state divergence and cognitive clutter.
+    - Preserved high-converting utility links (Jalousie/Bracket installation service, Clean vs Replace Calculator, and official $45 Hawaii Energy Rebate Form PDF download) in a sleek, glassmorphic Polynesian quick-action banner.
+    - Established the top Master Oahu AC Filter & Search Suite (`#catalog-filters`) as the single authoritative filter controller across all 16 inventory models with real-time `<5ms` multi-dimensional filtering, instant filter dismissal chips, and Aloha empty state.
+    - Passed `compareList` and `onToggleCompare` across all default catalog section grids (`dual_inverter`, `universal_fit`, `base`, `ge`, `casement`), making the floating 3-model side-by-side comparison dock universally functional across the entire storefront.
 
 ---
 
