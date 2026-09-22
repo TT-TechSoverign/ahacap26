@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Cleaning Oahu | $275 Full Teardown & Sanitization | Affordable Home A/C'
     },
-    description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Scheduled by appointment across Oahu with zero online prepayment required. Call (808) 488-1111.',
+    description: 'Restore factory ice-cold airflow & eliminate stubborn black mold with Oahu\'s premier $275 window AC full teardown cleaning. Scheduled by appointment across Oahu with zero online prepayment required. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window_ac_maintenance',
     },
     openGraph: {
         title: 'Window AC Cleaning Oahu | $275 Full Teardown & Sanitization | Affordable Home A/C',
-        description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Scheduled by appointment across Oahu with zero online prepayment required. Call (808) 488-1111.',
+        description: 'Restore factory ice-cold airflow & eliminate stubborn black mold with Oahu\'s premier $275 window AC full teardown cleaning. Scheduled by appointment across Oahu with zero online prepayment required. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window_ac_maintenance',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Cleaning Oahu | $275 Full Teardown & Sanitization | Affordable Home A/C',
-        description: 'Restore factory ice-cold airflow & eliminate 100% of black mold with Oahu\'s premier $275 window AC full teardown cleaning. Scheduled by appointment across Oahu with zero online prepayment required. Call (808) 488-1111.',
+        description: 'Restore factory ice-cold airflow & eliminate stubborn black mold with Oahu\'s premier $275 window AC full teardown cleaning. Scheduled by appointment across Oahu with zero online prepayment required. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

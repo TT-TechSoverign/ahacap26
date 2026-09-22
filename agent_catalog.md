@@ -147,11 +147,28 @@ graph TD
 
     Sub6 --> A23[agent_build_qa]
     Sub6 --> A24[agent_deployment_guardian]
+    Sub6 --> A25[agent_spatial_visualizer]
+
+    Sub7[Sub-Master 07: SERP Acquisition<br/>submaster_serp_acquisition]
+    Sub8[Sub-Master 08: Conversion Velocity<br/>submaster_conversion_velocity]
+
+    Master --> Sub7
+    Master --> Sub8
+
+    Sub7 --> A26[agent_serp_intent_harvester]
+    Sub7 --> A27[agent_ctr_title_craftsman]
+    Sub7 --> A28[agent_merchant_feed_sentinel]
+
+    Sub8 --> A29[agent_mobile_checkout_sentinel]
+    Sub8 --> A30[agent_trust_authority_grounder]
+    Sub8 --> A31[agent_zero_friction_navigator]
+    Sub8 --> A32[agent_speed_core_vital_sentinel]
+    Sub3 --> A33[agent_catalog_auditor]
 ```
 
 ---
 
-## 3. The Complete 24 Specialized Agents Roster
+## 3. The Complete 33 Specialized Agents Roster
 
 | # | Agent Identifier | Sub-Master Category | Primary Focus & Domain | Associated SOP(s) |
 |---|---|---|---|---|
@@ -179,6 +196,17 @@ graph TD
 | 22 | `agent_appointment_integrity`| CRM Operations | Zero upfront fee enforcement before customer contact | `SOP-CRM-03` |
 | 23 | `agent_build_qa` | Deployment Quality | Next.js compilation, TypeScript strictness, link checks | `SOP-DEP-01` |
 | 24 | `agent_deployment_guardian` | Deployment Quality | Blue/green container rebuilds, zero-downtime Nginx reload | `SOP-DEP-02`, `SOP-DEP-03` |
+| 25 | `agent_spatial_visualizer` | Deployment Quality | Blender 4.1 headless raytracing & caliper overlay engine | `SOP-DEP-04` |
+| 26 | `agent_serp_intent_harvester`| SERP Acquisition | Oahu search query analytics, click-to-impression gaps | `SOP-SERP-01` |
+| 27 | `agent_ctr_title_craftsman` | SERP Acquisition | Click-optimized title tags, price anchors ($0 Estimate) | `SOP-SERP-02` |
+| 28 | `agent_merchant_feed_sentinel`| SERP Acquisition | Google Merchant XML feed & Product schema (validFrom) | `SOP-SERP-03` |
+| 29 | `agent_mobile_checkout_sentinel`| Conversion Velocity | 1-tap Apple Pay/Google Pay/Link verification on mobile | `SOP-VEL-01` |
+| 30 | `agent_trust_authority_grounder`| Conversion Velocity | Waipahu inventory proof, 1-year warranty, CT-36775 badge | `SOP-VEL-02` |
+| 31 | `agent_zero_friction_navigator` | Conversion Velocity | Zero checkout dead-ends, smooth filter resets, hotline bridge | `SOP-VEL-03` |
+| 32 | `agent_speed_core_vital_sentinel`| Conversion Velocity | Mobile Core Web Vitals (LCP < 2s, CLS = 0), zero-cache | `SOP-VEL-04` |
+| 33 | `agent_catalog_auditor` | Commerce & Telemetry | 16-model specification drift & AHAM/Island dual-sizing | `SOP-COM-05` |
+
+*(Strict Anti-Upsell Protocol: No accessory upsells, add-on modals, or bundle friction permitted in checkout).*
 
 ---
 
@@ -215,7 +243,7 @@ graph TD
 - **`SOP-CRM-01`**: "By Appointment First" Lead Queue Triage & Dispatch
 - **`SOP-CRM-02`**: Oahu Salt-Air Preventative Maintenance Lifecycle Recalls
 - **`SOP-CRM-03`**: Waipahu Warehouse Drop-Off Intake & 24-48hr Bench Testing
-- **`SOP-CRM-04`**: Customer Direct Pricing Guarantee & Zero Upfront Fee Policy
+- **`SOP-CRM-04`**: Customer Direct Pricing Transparency & Zero Upfront Fee Policy
 
 ### Cluster 6: Deployment Quality & Release Engineering (`SOP-DEP`)
 - **`SOP-DEP-01`**: Next.js & FastAPI Full-Stack Preflight Build Verification

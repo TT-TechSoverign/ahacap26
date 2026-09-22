@@ -47,7 +47,7 @@ Every conversation session inherits the knowledge, directives, historical timeli
 
 ## IV. SOVEREIGN AGENT REGISTRY (6 SUB-MASTERS • 24 AGENTS)
 
-The platform is monitored and driven by 6 Category Sub-Masters and 26 specialized satellite agents:
+The platform is monitored and driven by 8 Category Sub-Masters and 33 specialized satellite agents:
 
 1. **Infrastructure & Storage Sub-Master** (`submaster_infrastructure`):
    - `agent_host_sentinel` (VPS disk, memory, SSL, firewall)
@@ -81,6 +81,17 @@ The platform is monitored and driven by 6 Category Sub-Masters and 26 specialize
    - `agent_build_qa` (Next.js & FastAPI build verification)
    - `agent_regression_sentinel` (Zero upfront payment & booking non-regression)
    - `agent_spatial_visualizer` (Blender 4.1 headless raytracing & engineering caliper engine)
+7. **SERP & Intent Acquisition Sub-Master** (`submaster_serp_acquisition`):
+   - `agent_serp_intent_harvester` (Oahu search query analytics, click-to-impression gaps, query clusters)
+   - `agent_ctr_title_craftsman` (Title tag engineering, meta description conversion hooks, snippet CTR)
+   - `agent_merchant_feed_sentinel` (Google Merchant Center XML feeds & Product Rich Snippet compliance)
+8. **Frictionless Conversion Velocity Sub-Master** (`submaster_conversion_velocity`):
+   - `agent_mobile_checkout_sentinel` (1-tap Apple Pay/Google Pay/Link validation, sub-100ms transitions)
+   - `agent_trust_authority_grounder` (Waipahu inventory proof, 1-year warranty badges, CT-36775 license)
+   - `agent_zero_friction_navigator` (Zero dead-ends, smooth filter resets, 1-tap phone bridges)
+   - `agent_speed_core_vital_sentinel` (Mobile Core Web Vitals: LCP < 2.0s, CLS = 0, zero-cache delivery)
+
+*(Strict Anti-Upsell Protocol: No accessory upsells, add-on modals, or bundle friction permitted in checkout).*
 
 ---
 

@@ -69,13 +69,6 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
                         "description": "In-stock LG Dual Inverter, GE, and universal-fit window air conditioners available for Waipahu warehouse pickup and $50 flat island-wide delivery.",
                         "provider": {
                             "@id": `${domain}/#hvacbusiness`
-                        },
-                        "aggregateRating": {
-                            "@type": "AggregateRating",
-                            "ratingValue": "4.9",
-                            "reviewCount": "142",
-                            "bestRating": "5",
-                            "worstRating": "1"
                         }
                     })
                 }}

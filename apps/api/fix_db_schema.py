@@ -1,7 +1,8 @@
 import asyncio
 from dotenv import load_dotenv
 load_dotenv()
-from database import engine
+from database import engine, Base
+import models
 from sqlalchemy import text
 import logging
 
@@ -26,12 +27,15 @@ async def fix_schema():
                 logger.error("Max retries reached. Database unavailable.")
                 raise e
 
+    async with engine.begin() as conn:
+        logger.info("Ensuring all ORM tables exist (leads, orders, products, etc.)...")
+        await conn.run_sync(Base.metadata.create_all)
+        logger.info("ORM tables verified.")
+
     async with engine.connect() as conn:
-        # We already committed above, just re-establish for the work below
         await conn.execute(text("COMMIT")) 
 
-        
-        logger.info("Starting Schema Validation...")
+        logger.info("Starting Column & Index Schema Validation...")
         
         # Detect Dialect
         dialect = conn.dialect.name

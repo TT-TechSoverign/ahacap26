@@ -129,14 +129,7 @@ export default function WindowAcVsMiniSplitPage() {
                     "postalCode": "96797",
                     "addressCountry": "US"
                 },
-                "areaServed": "Oahu, Hawaii",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "122",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                }
+                "areaServed": "Oahu, Hawaii"
             },
             {
                 "@type": "BreadcrumbList",
@@ -251,7 +244,7 @@ export default function WindowAcVsMiniSplitPage() {
                                 </div>
                                 <div className="flex justify-between border-b border-white/5 pb-1">
                                     <span className="text-slate-400">Contractor License:</span>
-                                    <span className="text-purple-300 font-bold">100% CT-36775 Guaranteed</span>
+                                    <span className="text-purple-300 font-bold">Licensed CT-36775 Workmanship</span>
                                 </div>
                             </div>
                             <p className="text-xs text-slate-400 leading-relaxed">

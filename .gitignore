@@ -1,52 +1,107 @@
-# dependencies
-node_modules
-.pnpm-store
+# ==============================================================================
+# AFFORDABLE HOME A/C (AHAC) — SOVEREIGN ROOT .GITIGNORE
+# Hardened by Sovereign Master Fleet & 6 Category Sub-Masters (Epoch 12)
+# ==============================================================================
 
-# testing
-/coverage
-
-# next.js
-.next/
-out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# --- Node & Package Dependencies (Sub-Master 1: Infrastructure) ---
+node_modules/
+.pnpm-store/
+.pnpm-debug.log*
 npm-debug.log*
 yarn-debug.log*
-pnpm-debug.log*
+yarn-error.log*
 
-# local env files
-.env*.local
-.env
-.env.development
-.env.test
-.env.production
-
-# python
-__pycache__/
-*.pyc
-
-# persistence
+# --- Next.js, Turbo & Monorepo Build Artifacts (Sub-Master 6: Deployment QA) ---
+.next/
+out/
+/build
+dist/
+.turbo/
+*.tsbuildinfo
 apps/web/storage/
 
-# cPanel Server Configurations
+# --- Testing & Coverage ---
+/coverage/
+.nyc_output/
+
+# --- Python Environments & Caching (Sub-Master 1: Infrastructure) ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+
+# --- Environment & Secret Armor (Sub-Master 2: Cybersecurity & Compliance) ---
+# Strictly block all .env variations while preserving public schema template
+.env
+.env.*
+!.env.example
+.env*.local
+
+# Private Keys, Certificates & Credentials
+*.pem
+*.key
+*.crt
+*.cer
+*.pfx
+*.p12
+*.jks
+
+# --- Server Logs & Diagnostic Dumps (Sub-Master 1: Infrastructure) ---
+*.log
+*.log.*
+logs/
+local_backup_*
+brain_exports_*/
+
+# --- Operating System & Editor Artifacts ---
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editors & IDEs
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# --- 3D Spatial Visualizer & Blender Artifacts (Sub-Master 6: Deployment QA) ---
+*.blend1
+*.blend2
+*.blend@
+*.bphys
+
+# --- WebP Intermediate Test Dumps ---
+*_original.webp
+*_transparent_test.webp
+
+# --- cPanel & Local Analytics Data ---
 .htaccess
 php.ini
 .user.ini
-
-# Ignore local analytics data
 _analytics_data/
 *.csv
 *.json.json
-local_backup_*
 
-# Ignore local scratch and custom scripts
+# --- Local Scratch & Ad-hoc Scripts ---
 scratch/
 apps/web/scripts/
 scripts/*
@@ -56,11 +111,3 @@ scripts/*
 *.py
 !apps/api/**/*.py
 !*.sh
-*.tsbuildinfo
-
-# Ignore local WebP image backups
-*_original.webp
-*_transparent_test.webp
-
-# Ignore local brain folder exports
-brain_exports_*/

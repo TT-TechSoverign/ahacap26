@@ -144,13 +144,6 @@ export default function AcCleaningOahuPage() {
                     "price": "275.00",
                     "priceCurrency": "USD",
                     "availability": "https://schema.org/InStock"
-                },
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "128",
-                    "bestRating": "5",
-                    "worstRating": "1"
                 }
             },
             {
@@ -271,7 +264,7 @@ export default function AcCleaningOahuPage() {
                                             3. Digital Delta-T Calibration &amp; Verification
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
-                                            Unit is reassembled, calibrated, and run through a 30-minute amp-draw and temperature delta test to guarantee peak cooling performance.
+                                            Unit is reassembled, calibrated, and run through a 30-minute amp-draw and temperature delta test to verify optimal cooling performance.
                                         </p>
                                     </div>
                                 </div>
@@ -455,7 +448,7 @@ export default function AcCleaningOahuPage() {
                                     </button>
 
                                     <div className="text-[10px] font-mono text-slate-400 text-center leading-relaxed">
-                                        Licensed Hawaii Contractor CT-36775 &bull; Upfront pricing guaranteed
+                                        Licensed Hawaii Contractor CT-36775 &bull; Transparent upfront pricing
                                     </div>
                                 </form>
                             )}

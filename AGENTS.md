@@ -7,16 +7,17 @@ This document defines the agent architecture, roles, execution protocols, and op
 ## 1. SOVEREIGN MASTER & FLEET STRUCTURE
 
 - **Sovereign Master**: Central cognitive intelligence overseeing all autonomous operations.
-- **Category Sub-Masters (6)**: Autonomous domain supervisors governing specific functional areas.
-- **Specialized Satellite Agents (26)**: On-demand diagnostic and execution units.
+- **Category Sub-Masters (8)**: Autonomous domain supervisors governing specific functional areas.
+- **Specialized Satellite Agents (33)**: On-demand diagnostic and execution units.
+- **Strict Anti-Upsell Mandate**: No accessory upsells, add-on modals, or bundle friction in checkout.
 
 ```
-                         [ MASTER PROJECTS BRAIN ]
-                                     |
-    +-----------------+--------------+--------------+-----------------+
-    |                 |              |              |                 |
-[Infrastructure] [Cybersecurity] [Commerce]     [Growth & SEO]   [Customer & CRM]  [Deployment QA]
-  (4 Agents)       (4 Agents)    (4 Agents)       (7 Agents)       (3 Agents)        (4 Agents)
+                                        [ MASTER PROJECTS BRAIN ]
+                                                    |
+    +---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+    |               |               |               |               |               |               |               |               |
+[Infrastructure] [Cybersecurity] [Commerce]      [Growth & SEO]  [Customer & CRM] [Deployment QA] [SERP Acq.]     [Conversion]
+  (4 Agents)      (4 Agents)     (4 Agents)        (7 Agents)      (3 Agents)       (4 Agents)     (3 Agents)       (4 Agents)
 ```
 
 ---
@@ -32,7 +33,7 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_storage_sentinel`: Docker log cap enforcement (10m x 3), disk headroom monitoring.
 
 ### Sub-Master 2: Cybersecurity & Compliance (`submaster_security_compliance`)
-- **Scope**: Secret detection, git commit auditing, audit trail logging, local perimeter defense.
+- **Scope**: Secret detection, git commit auditing, audit trail logging, local perimeter defense, staging CEO notification shield.
 - **Agents**:
   - `agent_security_shield`: Scans diffs and commits for exposed tokens, API keys, and credentials.
   - `agent_commit_sentinel`: Enforces conventional commit standards and branch hygiene.
@@ -73,6 +74,21 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_regression_sentinel`: Validates By-Appointment-First rules and prevents upfront pay gates.
   - `agent_spatial_visualizer`: Supervise Blender 4.1 headless raytracing, caliper overlays, and 3D window cutaways.
 
+### Sub-Master 7: SERP & Intent Acquisition (`submaster_serp_acquisition`)
+- **Scope**: Search query intent harvesting, SERP snippet click-through optimization, Google Merchant feeds.
+- **Agents**:
+  - `agent_serp_intent_harvester`: Analyzes high-intent Oahu search queries, impressions, and CTR gaps across 22 city pages.
+  - `agent_ctr_title_craftsman`: Formulates click-optimized title tags, price anchors ($0 Estimate), and phone hotlines.
+  - `agent_merchant_feed_sentinel`: Audits Google Merchant XML feed and Product JSON-LD schema (validFrom, priceValidUntil).
+
+### Sub-Master 8: Frictionless Conversion Velocity (`submaster_conversion_velocity`)
+- **Scope**: Mobile checkout unblocking, 1-tap mobile wallets, buyer reassurance, core web vitals.
+- **Agents**:
+  - `agent_mobile_checkout_sentinel`: Validates 1-tap Apple Pay, Google Pay, and Link availability on mobile devices.
+  - `agent_trust_authority_grounder`: Embeds Waipahu warehouse proof, 1-year manufacturer warranty, and CT-36775 badge.
+  - `agent_zero_friction_navigator`: Ensures zero checkout dead-ends, instant filter resets, and dispatch phone bridges.
+  - `agent_speed_core_vital_sentinel`: Enforces mobile sub-100ms response, zero CLS, and universal zero-cache headers.
+
 ---
 
 ## 3. CLI BRIDGE EXECUTION CHEATSHEET
@@ -81,20 +97,20 @@ The local PowerShell CLI bridge (`.\scripts\dev-os.ps1`) allows immediate intera
 
 ```powershell
 # Fleet Health & Tree
-.\scripts\dev-os.ps1 status                  # Query all 24 agents' lifecycle and last run
+.\scripts\dev-os.ps1 status                  # Query all 33 agents' lifecycle and last run
 .\scripts\dev-os.ps1 tree                    # Display hierarchical agent tree
 .\scripts\dev-os.ps1 inspect <agent_id>      # Deep inspect an individual agent synapse
 
 # On-Demand Execution
 .\scripts\dev-os.ps1 run-agent <agent_id>    # Trigger a single satellite agent
 .\scripts\dev-os.ps1 run-submaster <id>      # Execute an entire category sub-master suite
-.\scripts\dev-os.ps1 run-fleet               # Sequentially execute all 24 agents
+.\scripts\dev-os.ps1 run-fleet               # Sequentially execute all 33 agents
 
 # Master Brain & Continuous Learning
 .\scripts\dev-os.ps1 brain                   # Query Master Brain status & live cognitive thoughts
 .\scripts\dev-os.ps1 brain-sync "Directive"  # Push strategic directive to Master Brain
 .\scripts\dev-os.ps1 session-sync "Summary"  # Push session learnings and milestones
-.\scripts\dev-os.ps1 inject-history          # Re-energize brain with all 11 chronological epochs
+.\scripts\dev-os.ps1 inject-history          # Re-energize brain with all chronological epochs
 
 # Deployment Swarm & Security
 .\scripts\dev-os.ps1 verify-live             # Execute 3-stage live deployment swarm check

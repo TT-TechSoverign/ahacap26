@@ -60,17 +60,17 @@ export function generateMetadata({ params }: Props): Metadata {
     
     if (!cityData) return { title: 'Service Area Not Found' };
  
-    const title = `${cityData.name} Split AC Repair & HVAC | Affordable Home A/C`;
+    const title = `${cityData.name} AC Repair & In-Stock Window ACs | $0 Estimate | (808) 488-1111`;
     
-    let description = `AC issues in ${cityData.name}? Licensed HVAC technicians for split AC installation, $275 window AC teardown cleaning, and diagnostic troubleshooting.`;
+    let description = `Fast ${cityData.name} AC repair & in-stock window ACs ready for pickup today. $0 in-home estimate, $275 bench teardown cleaning. Call Oahu's cooling team: (808) 488-1111.`;
     if (cityData.regionId === 'windward') {
-        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Licensed HVAC technicians for ductless split AC installation, $275 window AC cleaning & diagnostic repair.`;
+        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Licensed HVAC technicians, $0 in-home estimate, $275 bench cleaning & in-stock window ACs. Call (808) 488-1111.`;
     } else if (cityData.regionId === 'leeward') {
-        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Ductless split AC installation, $275 window AC teardown cleaning, and expert HVAC diagnostic troubleshooting.`;
+        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Ductless split AC installation, $0 in-home estimate, $275 bench cleaning & in-stock window ACs. Call (808) 488-1111.`;
     } else if (cityData.regionId === 'metro') {
-        description = `Whisper-quiet zoned cooling in ${cityData.name}, Oahu. Licensed technicians for mini-split AC installation, $275 window AC cleaning & diagnostic repair.`;
+        description = `Whisper-quiet zoned cooling in ${cityData.name}, Oahu. Licensed technicians for mini-split installation, $0 in-home estimate & in-stock window ACs. Call (808) 488-1111.`;
     } else if (cityData.regionId === 'central') {
-        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock mini-split installation, $275 window AC teardown cleaning & expert diagnostic troubleshooting.`;
+        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock window ACs, $0 in-home estimate, $275 bench teardown cleaning. Call (808) 488-1111.`;
     }
  
     return {
@@ -202,13 +202,6 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 "closes": "14:00"
                             }
                         ],
-                        "aggregateRating": {
-                            "@type": "AggregateRating",
-                            "ratingValue": "4.9",
-                            "reviewCount": "142",
-                            "bestRating": "5",
-                            "worstRating": "1"
-                        },
                         "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover",
                         "currenciesAccepted": "USD",
                         "priceRange": "$$",

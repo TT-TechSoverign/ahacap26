@@ -36,6 +36,7 @@ import {
     Sparkles
 } from 'lucide-react';
 import { StockBadge } from '@/components/StockBadge';
+import { SpatialCaliperHUD } from '@/components/SpatialCaliperHUD';
 import dynamic from 'next/dynamic';
 
 // Lazy load interactive widgets to minimize main-thread JS payload
@@ -356,26 +357,26 @@ export default function ProductDetailPage() {
     const [isSizingExplainerOpen, setIsSizingExplainerOpen] = useState(false);
     const [isCaliperLightboxOpen, setIsCaliperLightboxOpen] = useState(false);
 
-    // High-Resolution 3D Spatial Window Fit Cutaway Mapping
+    // High-Resolution 3D Spatial Window Fit Cutaway Mapping (Bespoke Model-Matched Assets)
     const cutawayImageMap: { [key: number]: string } = {
-        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp'
+        1: '/assets/window-unit-images/3d-fit/product_1_fit_cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/product_2_fit_cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/product_3_fit_cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/product_5_fit_cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/product_7_fit_cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/product_8_fit_cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/product_9_fit_cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/product_10_fit_cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/product_11_fit_cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/product_12_fit_cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/product_13_fit_cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/product_14_fit_cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/product_15_fit_cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/product_16_fit_cutaway.webp'
     };
-    const cutawayImageUrl = product ? (cutawayImageMap[product.id] || '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp') : null;
+    const cutawayImageUrl = product ? (cutawayImageMap[product.id] || `/assets/window-unit-images/3d-fit/product_${product.id}_fit_cutaway.webp`) : null;
 
     // Set initial image
     useEffect(() => {
@@ -481,8 +482,8 @@ export default function ProductDetailPage() {
                                             priority
                                         />
                                     </div>
-                                    <div className="absolute top-2 left-2 z-20 px-2.5 py-1 rounded-md bg-emerald-500/90 text-slate-950 text-[9px] font-header font-black uppercase tracking-wider shadow-md">
-                                        Blender 4.1 Caliper Raytrace
+                                    <div className="absolute top-2 left-2 z-20 px-2.5 py-1 rounded-md bg-cyan-500/90 text-slate-950 text-[9px] font-header font-black uppercase tracking-wider shadow-md">
+                                        3D Architectural Spatial Fit
                                     </div>
                                     <button
                                         type="button"
@@ -538,29 +539,28 @@ export default function ProductDetailPage() {
 
                         {/* Mode-Dependent Sub-Bar */}
                         {mediaView === 'cutaway' ? (
-                            <div className="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/30 shadow-lg text-left text-xs space-y-2">
-                                <div className="flex items-center justify-between">
-                                    <span className="text-[10px] font-header font-black uppercase tracking-widest text-emerald-400 flex items-center gap-1.5">
-                                        <Ruler className="size-3.5" />
-                                        Spatial Fit Guarantee
-                                    </span>
-                                    <span className="text-[9px] font-mono text-slate-400 uppercase">
-                                        {specs?.chassisType || 'Slide-Out Chassis'}
-                                    </span>
-                                </div>
-                                <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-300">
-                                    <div className="p-2 rounded-lg bg-surface-dark border border-border-dark">
-                                        <div className="text-[9px] text-slate-400 uppercase font-mono">Min Window Height</div>
-                                        <div className="text-white font-bold text-xs">{specs?.minWindowHeight || '16.0"'}</div>
-                                    </div>
-                                    <div className="p-2 rounded-lg bg-surface-dark border border-border-dark">
-                                        <div className="text-[9px] text-slate-400 uppercase font-mono">Window Width Span</div>
-                                        <div className="text-white font-bold text-xs">{specs?.minWindowWidth || '27"'} – {specs?.maxWindowWidth || '39"'}</div>
-                                    </div>
-                                </div>
-                                <p className="text-[10px] text-slate-400 font-sans leading-tight pt-1">
-                                    ✓ Calibrated for Hawaii jalousie louver replacement frames & standard double-hung sashes.
-                                </p>
+                            <div className="space-y-3">
+                                {specs && (
+                                    <SpatialCaliperHUD
+                                        specs={{
+                                            modelName: product.name,
+                                            btu: specs.btu,
+                                            minWindowHeight: specs.minWindowHeight,
+                                            minWindowWidth: specs.minWindowWidth,
+                                            maxWindowWidth: specs.maxWindowWidth,
+                                            chassisType: specs.chassisType,
+                                            dimensions: specs.dimensions || product.dimensions || '',
+                                            weight: specs.shippingWeight || product.weight || '85',
+                                            voltage: specs.voltage || product.voltage || '115V',
+                                            plugType: specs.plugType,
+                                            coverageAham: specs.coolingAreaAham,
+                                            coverageOahu: specs.coolingAreaOahu,
+                                            noiseLevel: specs.soundProfile,
+                                            isWallSleeve: product.subcategory === 'ge' || product.subcategory === 'casement'
+                                        }}
+                                        onExpand={() => setIsCaliperLightboxOpen(true)}
+                                    />
+                                )}
                             </div>
                         ) : productImages.length > 1 && (
                             <div 
@@ -680,7 +680,7 @@ export default function ProductDetailPage() {
                                         <strong className="text-emerald-400 font-bold">1. AHAM Factory Rating ({specs?.coolingAreaAham}):</strong> The certified mainland baseline for modern, insulated construction with double-pane glass and zero air infiltration.
                                     </p>
                                     <p>
-                                        <strong className="text-amber-400 font-bold">2. Island Microclimate Calibration™ ({specs?.coolingAreaOahu}):</strong> Hawaii homes frequently feature uninsulated single-wall redwood and louvered jalousie windows that increase infiltration heat load by 35–45%. Our Island standard guarantees rapid pull-down without continuous compressor burnout or inflated HECO electric bills.
+                                        <strong className="text-amber-400 font-bold">2. Island Microclimate Calibration™ ({specs?.coolingAreaOahu}):</strong> Hawaii homes frequently feature uninsulated single-wall redwood and louvered jalousie windows that increase infiltration heat load by 35–45%. Our Island standard delivers rapid pull-down without continuous compressor burnout or inflated HECO electric bills.
                                     </p>
                                 </div>
                             )}
@@ -694,7 +694,7 @@ export default function ProductDetailPage() {
                                     Pre-Purchase Fit Checklist
                                 </span>
                                 <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
-                                    Guaranteed Compatibility
+                                    Recommended Compatibility
                                 </span>
                             </div>
 
@@ -916,7 +916,7 @@ export default function ProductDetailPage() {
                                         3D Spatial Fit &amp; Dimension Calipers
                                     </h3>
                                     <p className="text-[10px] text-cyan-400 font-mono">
-                                        {product.name} • Blender 4.1 Cycles Raytracing
+                                        {product.name} • 3D Spatial Architectural Fit
                                     </p>
                                 </div>
                             </div>

@@ -126,14 +126,7 @@ export default function OahuWindowAcWarehousePage() {
                         "closes": "17:00"
                     }
                 ],
-                "priceRange": "$$",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "96",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                }
+                "priceRange": "$$"
             },
             {
                 "@type": "FAQPage",

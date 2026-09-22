@@ -422,7 +422,7 @@ export function WarehouseInventoryGrid() {
                                     </div>
                                 </div>
 
-                                {/* Pickup & Delivery Guarantee */}
+                                {/* Pickup & Delivery Fulfillment */}
                                 <div className="mt-3.5 pt-3 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
                                     <span className="inline-flex items-center gap-1 text-slate-300">
                                         <Warehouse className="w-3 h-3 text-emerald-400" />

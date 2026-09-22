@@ -14,7 +14,7 @@ import { getProductImages } from '../../lib/product-images';
 import { isCampaignActive } from '../../lib/utils';
 
 import { 
-    CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, Snowflake, Lock 
+    CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, Snowflake, Lock, ShieldCheck 
 } from 'lucide-react';
 
 function CheckoutContent() {
@@ -71,23 +71,27 @@ function CheckoutContent() {
 
     // Track begin_checkout
     useEffect(() => {
-        if (items.length > 0 && typeof window !== 'undefined' && (window as any).dataLayer) {
-            (window as any).dataLayer.push({
-                event: 'begin_checkout',
-                ecommerce: {
-                    value: cartTotal,
-                    currency: 'USD',
-                    items: items.map((item, index) => {
-                        return {
-                            item_id: String(item.id),
-                            item_name: item.name,
-                            price: item.price,
-                            quantity: item.quantity,
-                            index: index
-                        };
-                    })
-                }
-            });
+        if (items.length > 0 && typeof window !== 'undefined') {
+            const ecommerceData = {
+                value: cartTotal,
+                currency: 'USD',
+                items: items.map((item, index) => ({
+                    item_id: String(item.id),
+                    item_name: item.name,
+                    price: item.price,
+                    quantity: item.quantity,
+                    index: index
+                }))
+            };
+            if ((window as any).dataLayer) {
+                (window as any).dataLayer.push({
+                    event: 'begin_checkout',
+                    ecommerce: ecommerceData
+                });
+            }
+            if ((window as any).gtag) {
+                (window as any).gtag('event', 'begin_checkout', ecommerceData);
+            }
         }
     }, [items, cartTotal]);
 
@@ -416,18 +420,22 @@ function CheckoutContent() {
                                 </div>
                             </motion.div>
 
-                            <div className="p-4 md:p-8 rounded-3xl border border-red-900/40 bg-[#0f0505] flex flex-col items-center text-center space-y-3 md:space-y-4 shadow-lg relative overflow-hidden">
-                                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-900/10 via-transparent to-transparent opacity-50"></div>
-                                <div className="p-2 md:p-3 rounded-xl bg-red-950/50 text-red-500 border border-red-900/50 shadow-inner relative z-10">
-                                    <Lock className="size-6" />
+                            <div className="p-4 md:p-6 rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-slate-900/90 to-slate-950/90 flex flex-col items-center text-center space-y-3 shadow-xl relative overflow-hidden">
+                                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent opacity-60"></div>
+                                <div className="p-2.5 rounded-xl bg-cyan-950/60 text-cyan-400 border border-cyan-500/40 shadow-inner relative z-10">
+                                    <ShieldCheck className="size-6" />
                                 </div>
-                                <div className="relative z-10 space-y-1 md:space-y-2">
-                                    <h4 className="text-red-500 font-header font-black uppercase text-[10px] md:text-xs tracking-[0.3em]">All Sales Final</h4>
-                                    <p className="text-white font-bold uppercase text-[9px] md:text-[10px] tracking-widest">
-                                        No Refunds <span className="text-red-800 mx-1 md:mx-2">•</span> No Exchanges
+                                <div className="relative z-10 space-y-1.5">
+                                    <h4 className="text-white font-header font-black uppercase text-[11px] md:text-xs tracking-[0.25em]">Waipahu Warehouse Verified</h4>
+                                    <p className="text-cyan-400 font-bold uppercase text-[9px] md:text-[10px] tracking-wider flex items-center justify-center gap-1.5">
+                                        <span>1-Year Warranty</span>
+                                        <span className="text-slate-600">•</span>
+                                        <span>Bench Tested</span>
+                                        <span className="text-slate-600">•</span>
+                                        <span>Free In-Store Pickup</span>
                                     </p>
-                                    <p className="text-slate-500 text-[9px] md:text-[10px] font-medium leading-relaxed max-w-[250px] mx-auto pt-2 border-t border-red-900/30 mt-2">
-                                        All warranty claims & defective units must be processed directly through the manufacturer.
+                                    <p className="text-slate-400 text-[10px] leading-relaxed max-w-[260px] mx-auto pt-2 border-t border-white/10 mt-2">
+                                        All AC units are brand-new, factory-sealed, and backed by a 1-year manufacturer compressor & parts warranty. Questions? Call Waipahu Dispatch: <a href="tel:8084881111" className="text-cyan-300 font-bold hover:underline">(808) 488-1111</a>
                                     </p>
                                 </div>
                             </div>

@@ -7,7 +7,7 @@ import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
 import { sendGAEvent } from '@next/third-parties/google';
 import { useSearchParams } from 'next/navigation';
-import { CheckCircle, Settings, Calendar, User, Check, ArrowRight, Zap, ShoppingBag, ArrowLeft } from 'lucide-react';
+import { CheckCircle, Settings, Calendar, User, Check, ArrowRight, Zap, ShoppingBag, ArrowLeft, Phone } from 'lucide-react';
 
 export function DispatchWizard() {
     const { content } = useContent();
@@ -127,26 +127,58 @@ export function DispatchWizard() {
 
     if (isSuccess) {
         return (
-            <div className="py-20 text-center animate-in fade-in zoom-in duration-700">
-                <div className="size-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-8 border border-primary/30">
-                    <CheckCircle className="size-10 text-primary" />
+            <div className="py-12 md:py-16 text-center animate-in fade-in zoom-in duration-500 max-w-xl mx-auto px-4">
+                <div className="size-16 md:size-20 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                    <CheckCircle className="size-8 md:size-10 text-emerald-400" />
                 </div>
-                <h3 className="text-3xl font-header font-black text-white uppercase tracking-tight mb-4">{contentData.contact.wizard.success?.title || "SUCCESS"}</h3>
-                <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 max-w-sm mx-auto">
-                    {contentData.contact.wizard.success?.subtitle || "YOUR TICKET HAS BEEN CREATED"}
+                <h3 className="text-2xl md:text-3xl font-header font-black text-white uppercase tracking-tight mb-3">
+                    Service Request Received
+                </h3>
+                <p className="font-sans text-sm md:text-base text-slate-300 leading-relaxed max-w-lg mx-auto mb-6">
+                    Mahalo! Our Oahu dispatch team has received your service request and will contact you <strong className="text-white">as soon as possible</strong> to coordinate your appointment.
                 </p>
-                <Button onClick={() => {
-                    setIsSuccess(false);
-                    setStep(1);
-                    setFormData({
-                        first_name: '', last_name: '', email: '', phone: '',
-                        address: '', city: '', zip: '', urgency: '', user_notes: '', source: ''
-                    });
-                    setSelectedServices([]);
-                    setSelectedPreferences([]);
-                }} className="mt-8 bg-white/5 border border-white/10 hover:bg-white/10 text-white py-3 px-8 text-[10px] font-black uppercase tracking-widest">
-                    Submit Another Request
-                </Button>
+
+                <div className="bg-slate-900/80 border border-white/10 rounded-2xl p-4 md:p-6 mb-8 text-left space-y-3 shadow-inner">
+                    <div className="flex items-center justify-between text-xs border-b border-white/5 pb-2">
+                        <span className="text-slate-400 font-mono uppercase text-[10px] tracking-wider">Callback Contact</span>
+                        <span className="text-white font-semibold">{formData.phone || 'Phone on file'}</span>
+                    </div>
+                    {formData.email && (
+                        <div className="flex items-center justify-between text-xs border-b border-white/5 pb-2">
+                            <span className="text-slate-400 font-mono uppercase text-[10px] tracking-wider">Confirmation Email</span>
+                            <span className="text-white font-semibold truncate max-w-[200px]">{formData.email}</span>
+                        </div>
+                    )}
+                    <div className="flex items-center justify-between text-xs">
+                        <span className="text-slate-400 font-mono uppercase text-[10px] tracking-wider">Commitment</span>
+                        <span className="text-emerald-400 font-semibold">$0 Free Estimate &bull; CT-36775</span>
+                    </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a
+                        href="tel:8084881111"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)]"
+                    >
+                        <Phone className="size-4" />
+                        <span>Call Dispatch: (808) 488-1111</span>
+                    </a>
+                    <Button
+                        onClick={() => {
+                            setIsSuccess(false);
+                            setStep(1);
+                            setFormData({
+                                first_name: '', last_name: '', email: '', phone: '',
+                                address: '', city: '', zip: '', urgency: '', user_notes: '', source: ''
+                            });
+                            setSelectedServices([]);
+                            setSelectedPreferences([]);
+                        }}
+                        className="w-full sm:w-auto bg-white/5 border border-white/10 hover:bg-white/10 text-white py-3 px-6 text-xs font-header font-bold uppercase tracking-wider rounded-xl"
+                    >
+                        Submit Another Request
+                    </Button>
+                </div>
             </div>
         );
     }

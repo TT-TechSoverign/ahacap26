@@ -41,9 +41,6 @@ export const metadata: Metadata = {
             }
         ]
     },
-    alternates: {
-        canonical: '/',
-    },
     twitter: {
         card: 'summary_large_image',
         title: 'Affordable Home A/C | Ductless Mini Split & Air Conditioning Hawaii',
@@ -207,6 +204,24 @@ export default function RootLayout({
                         <MobileStickyBottomBar />
                     </CartProvider>
                 </ContentProvider>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            // Universal Live Freshness & BFCache Sync
+                            window.addEventListener('pageshow', function(event) {
+                                if (event && event.persisted) {
+                                    window.location.reload();
+                                }
+                            });
+                            // Universal ChunkLoadError recovery across asset bundle updates
+                            window.addEventListener('error', function(event) {
+                                if (event && event.message && (event.message.indexOf('ChunkLoadError') !== -1 || event.message.indexOf('Loading chunk') !== -1)) {
+                                    window.location.reload();
+                                }
+                            });
+                        `
+                    }}
+                />
             </body>
         </html>
     );

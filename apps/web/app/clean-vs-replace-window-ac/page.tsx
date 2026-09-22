@@ -90,14 +90,7 @@ export default function CleanVsReplacePage() {
                     "postalCode": "96797",
                     "addressCountry": "US"
                 },
-                "areaServed": "Oahu, Hawaii",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "115",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                }
+                "areaServed": "Oahu, Hawaii"
             },
             {
                 "@type": "BreadcrumbList",
@@ -376,7 +369,7 @@ export default function CleanVsReplacePage() {
                                             </div>
                                             <div className="flex justify-between items-center text-xs">
                                                 <span className="text-slate-400">Mold Eradication:</span>
-                                                <span className="text-emerald-400 font-mono font-bold">100% Guaranteed</span>
+                                                <span className="text-emerald-400 font-mono font-bold">Deep Chemical Purge</span>
                                             </div>
                                         </div>
 

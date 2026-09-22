@@ -182,7 +182,7 @@ export default function LgDualInverterGuidePage() {
         },
         {
             q: "Can Affordable Home AC install these units in Oahu jalousie windows?",
-            a: "Yes! Our CT-36775 licensed technicians specialize in jalousie louver retrofits across all 22 Oahu municipalities. We safely remove only the necessary glass louvers, precision-fit custom clear acrylic baffles, and anchor exterior cantilever brackets so your window structure is 100% protected."
+            a: "Yes! Our CT-36775 licensed technicians specialize in jalousie louver retrofits across all 22 Oahu municipalities. We safely remove only the necessary glass louvers, precision-fit custom clear acrylic baffles, and anchor exterior cantilever brackets so your window structure is securely preserved."
         },
         {
             q: "How do I claim the $45 Hawaii Energy cash rebate?",
@@ -209,14 +209,7 @@ export default function LgDualInverterGuidePage() {
                     "postalCode": "96797",
                     "addressCountry": "US"
                 },
-                "areaServed": "Oahu, Hawaii",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "112",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                }
+                "areaServed": "Oahu, Hawaii"
             },
             {
                 "@type": "BreadcrumbList",

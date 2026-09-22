@@ -159,7 +159,7 @@ export default function MaintenancePage() {
                                 { val: "90%", label: "Efficiency Drop from Dirty Coils", color: "text-primary" },
                                 { val: "24h", label: "Mold Spore Replication Cycle", color: "text-accent" },
                                 { val: "-$15/mo", label: "Avg Energy Bill Reduction", color: "text-white" },
-                                { val: "100%", label: "Odor Elimination", color: "text-primary" },
+                                { val: "Complete", label: "Odor Elimination", color: "text-primary" },
                             ].map((stat, i) => (
                                 <div key={i} className="industrial-card p-6 rounded-xl flex flex-col justify-center text-center bg-[#1a2333] border border-white/5">
                                     <p className={`text-4xl font-bold mb-2 ${stat.color}`}>{stat.val}</p>

@@ -144,14 +144,7 @@ export default function AcRepairOahuPage() {
                     "name": "Affordable Home AC"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Professional AC diagnostic troubleshooting and repairs for ductless mini-splits and window air conditioners in Honolulu, Waipahu, and island-wide Oahu.",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "119",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                }
+                "description": "Professional AC diagnostic troubleshooting and repairs for ductless mini-splits and window air conditioners in Honolulu, Waipahu, and island-wide Oahu."
             },
             {
                 "@type": "BreadcrumbList",
@@ -195,7 +188,7 @@ export default function AcRepairOahuPage() {
                         Mini Split &amp; Window AC Diagnostic Troubleshooting
                     </p>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Accurate diagnostic inspection for ductless mini-splits and window units across Honolulu, Pearl City, Waipahu, and all Oahu. Zero upfront booking deposit. Upfront itemized estimates with 100% CT-36775 contractor workmanship guarantee.
+                        Accurate diagnostic inspection for ductless mini-splits and window units across Honolulu, Pearl City, Waipahu, and all Oahu. Zero upfront booking deposit. Upfront itemized estimates backed by Hawaii CT-36775 licensed workmanship.
                     </p>
                 </div>
 
@@ -412,7 +405,7 @@ export default function AcRepairOahuPage() {
                                     </button>
 
                                     <div className="text-[10px] font-mono text-slate-400 text-center leading-relaxed">
-                                        Licensed Hawaii Contractor CT-36775 &bull; Upfront pricing guaranteed &bull; No surprise fees
+                                        Licensed Hawaii Contractor CT-36775 &bull; Transparent upfront pricing &bull; No surprise fees
                                     </div>
                                 </form>
                             )}

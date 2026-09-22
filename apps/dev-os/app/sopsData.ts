@@ -575,10 +575,10 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         supervisor: "submaster_deployment_quality",
         mandate: "Enforce By-Appointment-First rule, zero credit card checkout gates, drop-cloth legal protection, and anti-deception standards.",
         token_efficiency_policy: "Static pattern verification across UI components and legal templates; 0Hz idle token cost.",
-        oahu_grounding: "Hawaii CT-36775 contractor integrity; guarantees honest pricing and zero bait-and-switch claims on Oahu.",
+        oahu_grounding: "Hawaii CT-36775 contractor integrity; ensures honest pricing and zero bait-and-switch claims on Oahu.",
         inputs: ["Checkout form component code", "Service agreement disclaimer text", "Footer licensing notices"],
         execution_steps: [
-            { step: 1, title: "By-Appointment-First Audit", description: "Verify service booking funnel requires zero credit card input prior to scheduling contact.", verification: "100% zero-card booking verified." },
+            { step: 1, title: "By-Appointment-First Audit", description: "Verify service booking funnel requires zero credit card input prior to scheduling contact.", verification: "Zero-card booking verified." },
             { step: 2, title: "Drop-Cloth Legal Clause Check", description: "Verify service agreements include plastic sheeting and drop-cloth standards to protect against drywall dispute liability.", verification: "Drop-cloth clause verified in contract text." },
             { step: 3, title: "Licensing & Anti-Deception Audit", description: "Verify CT-36775 license is visible and zero false '24/7' or 'Free Diagnostic' claims exist.", verification: "Licensing verified, zero deceptive claims." }
         ],

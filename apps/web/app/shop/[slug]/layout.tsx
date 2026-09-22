@@ -179,22 +179,22 @@ export default async function ProductLayout({ params, children }: Props) {
     const specs = getProductSpecs(product.id);
 
     const cutawayImageMap: Record<number, string> = {
-        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp'
+        1: '/assets/window-unit-images/3d-fit/product_1_fit_cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/product_2_fit_cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/product_3_fit_cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/product_5_fit_cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/product_7_fit_cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/product_8_fit_cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/product_9_fit_cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/product_10_fit_cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/product_11_fit_cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/product_12_fit_cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/product_13_fit_cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/product_14_fit_cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/product_15_fit_cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/product_16_fit_cutaway.webp'
     };
     const cutawayUrl = cutawayImageMap[product.id] ? `${domain}${cutawayImageMap[product.id]}` : null;
     const schemaImages = [absoluteImageUrl];
@@ -301,6 +301,7 @@ export default async function ProductLayout({ params, children }: Props) {
             "priceCurrency": "USD",
             "price": activePriceInDollars,
             "priceValidUntil": "2027-12-31", // Resolves GSC "Missing priceValidUntil" warning
+            "validFrom": "2026-01-01", // Resolves GSC "Missing validFrom" warning
             "itemCondition": "https://schema.org/NewCondition",
             "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
             "seller": {

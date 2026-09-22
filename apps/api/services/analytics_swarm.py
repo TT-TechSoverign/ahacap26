@@ -312,7 +312,7 @@ class AnalyticsSwarmEngine:
                 "cluster": "Storefront Pricing Psychology",
                 "title": "$31 Upgrade Anchor from 6k to 8k Dual Inverter",
                 "target_path": "/shop",
-                "target_funnel": "LG Dual Inverter 8,000 BTU Upsell",
+                "target_funnel": "LG Dual Inverter 8,000 BTU Sizing Fit",
                 "rationale": "The 8,000 BTU unit is only $31 more than the 6,000 BTU model ($535 vs $504) while offering +33% more cooling capacity and ThinQ Smart WiFi.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+30% Model Upgrade Velocity"

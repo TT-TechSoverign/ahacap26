@@ -1408,24 +1408,24 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
     );
 
     const cutawayImageMap: Record<number, string> = {
-        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        1: '/assets/window-unit-images/3d-fit/product_1_fit_cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/product_2_fit_cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/product_3_fit_cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/product_5_fit_cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/product_7_fit_cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/product_8_fit_cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/product_9_fit_cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/product_10_fit_cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/product_11_fit_cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/product_12_fit_cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/product_13_fit_cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/product_14_fit_cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/product_15_fit_cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/product_16_fit_cutaway.webp',
     };
-    const activeCutaway = (product?.id && cutawayImageMap[product.id]) || '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp';
+    const activeCutaway = (product?.id && cutawayImageMap[product.id]) || `/assets/window-unit-images/3d-fit/product_${product?.id || 4}_fit_cutaway.webp`;
 
     const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rawVal = e.target.value;
@@ -1883,7 +1883,7 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                             <span className="text-[10px] font-black uppercase tracking-widest text-white">Live 3D Window Fit Preview</span>
                                         </div>
                                         <span className="text-[9px] font-mono text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-full">
-                                            ⚡ Blender 4.1 Cycles Raytraced (&lt; 85 KB WebP)
+                                            ⚡ High-Velocity 3D Spatial Cutaway (&lt; 85 KB WebP)
                                         </span>
                                     </div>
 

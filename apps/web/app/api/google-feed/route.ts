@@ -37,22 +37,22 @@ export async function GET() {
       
       // Secondary / gallery images & 3D raytraced cutaway for Google Shopping interactive carousel
       const cutawayImageMap: Record<number, string> = {
-        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp'
+        1: '/assets/window-unit-images/3d-fit/product_1_fit_cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/product_2_fit_cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/product_3_fit_cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/product_5_fit_cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/product_7_fit_cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/product_8_fit_cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/product_9_fit_cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/product_10_fit_cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/product_11_fit_cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/product_12_fit_cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/product_13_fit_cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/product_14_fit_cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/product_15_fit_cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/product_16_fit_cutaway.webp'
       };
       const cutawayRel = cutawayImageMap[product.id];
       const cutawayImgLink = cutawayRel ? `${domain}${cutawayRel}` : '';

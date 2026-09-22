@@ -230,7 +230,9 @@ export function middleware(request: NextRequest) {
 
     const response = NextResponse.next();
 
-    // 8. X-Robots-Tag: noindex for Internal/Secure Routes
+    // 8. X-Robots-Tag: noindex for Internal/Secure Routes & All Staging Traffic
+    const host = request.headers.get('host') || '';
+    const isStagingHost = host.includes('staging') || host.includes('localhost');
     const noIndexPaths = [
         '/admin',
         '/checkout',
@@ -238,9 +240,16 @@ export function middleware(request: NextRequest) {
         '/dev-os',
         '/puck',
     ];
-    if (noIndexPaths.some(path => url.pathname.startsWith(path))) {
+    if (isStagingHost || noIndexPaths.some(path => url.pathname.startsWith(path))) {
         response.headers.set('X-Robots-Tag', 'noindex, nofollow');
     }
+
+    // 9. Universal Browser Zero-Cache Protocol for All HTML Pages
+    // Forces iOS Safari, Chrome, Edge, Samsung Internet, and in-app webviews to ALWAYS fetch fresh live content
+    response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0');
+    response.headers.set('Pragma', 'no-cache');
+    response.headers.set('Expires', '0');
+    response.headers.set('Surrogate-Control', 'no-store');
 
     return response;
 }

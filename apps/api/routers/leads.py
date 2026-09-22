@@ -91,11 +91,16 @@ async def create_lead(
         
         logger.info(f"Lead Created: {new_lead.id} | {new_lead.email} | Service: {new_lead.service_type}")
 
-        # 3. Queue Email Notification
+        # 3. Queue Staff Inquiry Notification & Customer Appointment Confirmation
         background_tasks.add_task(
             email_service.send_inquiry_notification,
             lead=new_lead
         )
+        if new_lead.email and "@" in new_lead.email:
+            background_tasks.add_task(
+                email_service.send_customer_appointment_confirmation,
+                lead=new_lead
+            )
 
         return {"status": "success", "lead_id": new_lead.id, "message": "Inquiry received."}
 

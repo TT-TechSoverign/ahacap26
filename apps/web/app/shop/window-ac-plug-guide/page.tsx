@@ -140,14 +140,7 @@ export default function WindowAcPlugGuidePage() {
                     "postalCode": "96797",
                     "addressCountry": "US"
                 },
-                "areaServed": "Oahu, Hawaii",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "104",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                }
+                "areaServed": "Oahu, Hawaii"
             },
             {
                 "@type": "BreadcrumbList",

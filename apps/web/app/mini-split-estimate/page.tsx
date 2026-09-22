@@ -77,14 +77,7 @@ export default function MiniSplitEstimatePage() {
                     "name": "Affordable Home AC"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "On-site ductless mini-split installation estimate, room BTU heat load calculation, and electrical panel inspection on Oahu.",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "108",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                }
+                "description": "On-site ductless mini-split installation estimate, room BTU heat load calculation, and electrical panel inspection on Oahu."
             },
             {
                 "@type": "BreadcrumbList",
@@ -298,7 +291,7 @@ export default function MiniSplitEstimatePage() {
                             Ready for Whisper-Quiet Island Comfort?
                         </h2>
                         <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                            Book your free in-home sizing and electrical load assessment across Oahu today. We bring sample hardware, measure line sets, and provide guaranteed upfront pricing.
+                            Book your free in-home sizing and electrical load assessment across Oahu today. We bring sample hardware, measure line sets, and provide transparent upfront pricing.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
                             <a

@@ -98,7 +98,7 @@ export async function POST(req: Request) {
         // Determine origin with fallbacks
         const envUrl = process.env.NEXT_PUBLIC_URL;
         const headerOrigin = req.headers.get('origin');
-        const defaultOrigin = 'https://staging.affordablehome-ac.com';
+        const defaultOrigin = 'https://www.affordablehome-ac.com';
 
         const origin = envUrl || headerOrigin || defaultOrigin;
 
@@ -109,7 +109,6 @@ export async function POST(req: Request) {
         const session = await stripe.checkout.sessions.create({
 
             mode: 'payment',
-            payment_method_types: ['card'], // Strict Card Only
             line_items,
             expires_at: expiresAt,
 

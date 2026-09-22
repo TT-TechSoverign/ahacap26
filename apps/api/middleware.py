@@ -61,8 +61,19 @@ class HeaderMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
         response = await call_next(request)
         path = request.url.path
-        if path.startswith("/api/v1/admin") or path.startswith("/api/v1/payments") or path.startswith("/api/v1/maintenance"):
+        if (
+            path.startswith("/api/v1/admin")
+            or path.startswith("/api/v1/payments")
+            or path.startswith("/api/v1/maintenance")
+            or path.startswith("/api/v1/products")
+            or path.startswith("/api/v1/leads")
+            or path.startswith("/api/v1/dev-os")
+        ):
             response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
         else:
-            response.headers["Cache-Control"] = "public, max-age=60, s-maxage=60, stale-while-revalidate=30"
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
         return response

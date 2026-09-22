@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo, Suspense } from 'react';
 // Fix import path: go up two levels to 'web', then into 'context'
 import { useCart } from '../../context/CartContext';
 import { getProductImages } from '../../lib/product-images';
@@ -19,7 +19,8 @@ import contentData from '@/lib/content/content.json';
 import { 
     AlertTriangle, Warehouse, Truck, Ban, Leaf, Wind, ArrowUpRight, Eye, Check, X,
     Maximize2, Snowflake, Cpu, LayoutGrid, ShoppingCart, FileText, Mail, Droplets, Sun, Gauge,
-    Plug, Wrench, Sparkles, RotateCcw, Phone, Calendar
+    Plug, Wrench, Sparkles, RotateCcw, Phone, Calendar, Search, SlidersHorizontal, ArrowUpDown,
+    Layers, Filter
 } from 'lucide-react';
 
 const LucideIconMap: Record<string, React.ComponentType<any>> = {
@@ -53,7 +54,7 @@ function DynamicIcon({ name, className }: { name: string; className?: string }) 
     return <IconComponent className={className} />;
 }
 
-export default function ShopPage() {
+function ShopPageContent() {
     const { addToCart, items, openCart } = useCart();
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -64,7 +65,132 @@ export default function ShopPage() {
     const [dualInverterVoltage, setDualInverterVoltage] = useState<'ALL' | '115V' | '230V'>('ALL');
     const [dualInverterCapacity, setDualInverterCapacity] = useState<'ALL' | 'BEDROOM' | 'MASTER' | 'LIVING'>('ALL');
 
-    const filteredDualInverters = products.filter(p => {
+    // Multi-tier filter states
+    const [selectedCategory, setSelectedCategory] = useState<'ALL' | 'dual_inverter' | 'base' | 'casement' | 'ge' | 'universal_fit'>('ALL');
+    const [selectedCapacity, setSelectedCapacity] = useState<'ALL' | 'BEDROOM' | 'MASTER' | 'LIVING'>('ALL');
+    const [selectedVoltage, setSelectedVoltage] = useState<'ALL' | '115V' | '230V'>('ALL');
+    const [selectedMount, setSelectedMount] = useState<'ALL' | 'HUNG' | 'SLIDER' | 'SLEEVE'>('ALL');
+    const [inStockOnly, setInStockOnly] = useState<boolean>(false);
+    const [sortOption, setSortOption] = useState<'featured' | 'price_asc' | 'price_desc' | 'btu_asc' | 'btu_desc' | 'ceer'>('featured');
+
+    // Comparison drawer state
+    const [compareList, setCompareList] = useState<Product[]>([]);
+    const [isCompareOpen, setIsCompareOpen] = useState<boolean>(false);
+
+    const handleToggleCompare = (product: Product) => {
+        setCompareList(prev => {
+            const exists = prev.some(p => p.id === product.id);
+            if (exists) {
+                return prev.filter(p => p.id !== product.id);
+            }
+            if (prev.length >= 3) {
+                return [...prev.slice(1), product];
+            }
+            return [...prev, product];
+        });
+    };
+
+    const handleResetFilters = () => {
+        setSearchQuery('');
+        setSelectedCategory('ALL');
+        setSelectedCapacity('ALL');
+        setSelectedVoltage('ALL');
+        setSelectedMount('ALL');
+        setInStockOnly(false);
+        setSortOption('featured');
+    };
+
+    const isFiltered = Boolean(
+        searchQuery.trim() ||
+        selectedCategory !== 'ALL' ||
+        selectedCapacity !== 'ALL' ||
+        selectedVoltage !== 'ALL' ||
+        selectedMount !== 'ALL' ||
+        inStockOnly ||
+        sortOption !== 'featured'
+    );
+
+    const filteredProducts = useMemo(() => {
+        let result = products.filter(p => {
+            // Search query across specifications
+            if (searchQuery.trim()) {
+                const q = searchQuery.toLowerCase().trim();
+                const matchName = (p.name || '').toLowerCase().includes(q);
+                const matchCat = (p.category || '').toLowerCase().includes(q);
+                const matchSub = (p.subcategory || '').toLowerCase().includes(q);
+                const matchBtu = p.btu ? p.btu.toString().includes(q) : false;
+                const matchVolt = (p.voltage || '').toLowerCase().includes(q);
+                const matchCovAham = (p.coverage_aham || '').toLowerCase().includes(q);
+                const matchCovOahu = (p.coverage_oahu || '').toLowerCase().includes(q);
+                const matchChassis = (p.chassis_type || '').toLowerCase().includes(q);
+                if (!matchName && !matchCat && !matchSub && !matchBtu && !matchVolt && !matchCovAham && !matchCovOahu && !matchChassis) {
+                    return false;
+                }
+            }
+
+            // Category filter
+            if (selectedCategory !== 'ALL') {
+                if (p.subcategory !== selectedCategory) return false;
+            }
+
+            // Voltage filter
+            if (selectedVoltage === '115V') {
+                if (p.voltage && !p.voltage.includes('115V')) return false;
+            } else if (selectedVoltage === '230V') {
+                if (p.voltage && !p.voltage.includes('230V') && !p.voltage.includes('208')) return false;
+            }
+
+            // Room sizing capacity filter
+            if (selectedCapacity === 'BEDROOM') {
+                if (p.btu && p.btu > 8500) return false;
+            } else if (selectedCapacity === 'MASTER') {
+                if (p.btu && (p.btu < 9000 || p.btu > 14500)) return false;
+            } else if (selectedCapacity === 'LIVING') {
+                if (p.btu && p.btu < 15000) return false;
+            }
+
+            // Window mounting type filter
+            if (selectedMount === 'SLIDER') {
+                if (p.subcategory !== 'casement') return false;
+            } else if (selectedMount === 'SLEEVE') {
+                if (p.subcategory !== 'universal_fit') return false;
+            } else if (selectedMount === 'HUNG') {
+                if (p.subcategory === 'casement' || p.subcategory === 'universal_fit') return false;
+            }
+
+            // In-stock only filter
+            if (inStockOnly && p.stock <= 0) {
+                return false;
+            }
+
+            return true;
+        });
+
+        // Sorting
+        return result.sort((a, b) => {
+            if (sortOption === 'price_asc') return a.price - b.price;
+            if (sortOption === 'price_desc') return b.price - a.price;
+            if (sortOption === 'btu_asc') return (a.btu || 0) - (b.btu || 0);
+            if (sortOption === 'btu_desc') return (b.btu || 0) - (a.btu || 0);
+            if (sortOption === 'ceer') {
+                const ceerA = parseFloat(a.ceer_rating || '0');
+                const ceerB = parseFloat(b.ceer_rating || '0');
+                return ceerB - ceerA;
+            }
+            return 0;
+        });
+    }, [products, searchQuery, selectedCategory, selectedCapacity, selectedVoltage, selectedMount, inStockOnly, sortOption]);
+
+    const CATEGORIES = [
+        { id: 'ALL', label: 'All Units', count: products.length },
+        { id: 'dual_inverter', label: 'LG DUAL Inverter', count: products.filter(p => p.subcategory === 'dual_inverter').length },
+        { id: 'base', label: 'Frigidaire Standard', count: products.filter(p => p.subcategory === 'base').length },
+        { id: 'casement', label: 'Slider / Casement', count: products.filter(p => p.subcategory === 'casement').length },
+        { id: 'ge', label: 'GE Inverter', count: products.filter(p => p.subcategory === 'ge').length },
+        { id: 'universal_fit', label: 'Universal Fit (Sleeve)', count: products.filter(p => p.subcategory === 'universal_fit').length },
+    ];
+
+    const filteredDualInverters = useMemo(() => products.filter(p => {
         if (p.subcategory !== 'dual_inverter') return false;
         if (dualInverterVoltage === '115V' && p.voltage && !p.voltage.includes('115V')) return false;
         if (dualInverterVoltage === '230V' && p.voltage && !p.voltage.includes('230V') && !p.voltage.includes('208')) return false;
@@ -72,7 +198,7 @@ export default function ShopPage() {
         if (dualInverterCapacity === 'MASTER' && p.btu && (p.btu < 9500 || p.btu > 14000)) return false;
         if (dualInverterCapacity === 'LIVING' && p.btu && p.btu < 15000) return false;
         return true;
-    });
+    }), [products, dualInverterVoltage, dualInverterCapacity]);
 
     const sectionOrder = content?.shop?.sections || [
         "dual_inverter", "universal_fit", "base", "ge", "casement", "logistics", "sizing-guide"
@@ -351,7 +477,7 @@ export default function ShopPage() {
                     </div>
                 </div>
 
-                {/* Island Trust & Service Guarantee Bar */}
+                {/* Island Trust & Service Delivery Bar */}
                 <div className="max-w-7xl mx-auto px-4 mt-6 mb-2">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                         <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
@@ -460,7 +586,277 @@ export default function ShopPage() {
                     </div>
                 </div>
 
-                {/* Dynamic Reorderable Sections */}
+                {/* Master Oahu AC Filter & Search Suite */}
+                <div id="catalog-filters" className="max-w-7xl mx-auto px-4 mb-8">
+                    <div className="bg-slate-900/80 border border-white/10 rounded-3xl p-4 md:p-6 backdrop-blur-xl shadow-2xl space-y-4">
+                        
+                        {/* Row 1: Search Bar + Sort + In-Stock Toggle */}
+                        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+                            <div className="relative flex-1">
+                                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+                                <input
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    placeholder="Search Oahu inventory by brand, BTU, plug, or model..."
+                                    className="w-full pl-10 pr-10 py-3 bg-slate-950/70 border border-white/10 rounded-xl text-xs sm:text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all font-sans"
+                                />
+                                {searchQuery && (
+                                    <button
+                                        onClick={() => setSearchQuery('')}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1"
+                                        title="Clear search"
+                                    >
+                                        <X className="size-4" />
+                                    </button>
+                                )}
+                            </div>
+
+                            <div className="flex items-center gap-2.5 shrink-0">
+                                {/* In Stock Toggle */}
+                                <button
+                                    type="button"
+                                    onClick={() => setInStockOnly(!inStockOnly)}
+                                    className={cn(
+                                        "px-3.5 py-3 rounded-xl border text-xs font-mono uppercase tracking-wider flex items-center gap-2 transition-all",
+                                        inStockOnly
+                                            ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+                                            : "bg-slate-950/70 border-white/10 text-slate-400 hover:text-white"
+                                    )}
+                                >
+                                    <span className={cn("size-2 rounded-full", inStockOnly ? "bg-emerald-400 animate-pulse" : "bg-slate-600")} />
+                                    <span className="hidden sm:inline">In-Stock Only</span>
+                                    <span className="sm:hidden">In-Stock</span>
+                                </button>
+
+                                {/* Sort Dropdown */}
+                                <div className="relative flex items-center">
+                                    <ArrowUpDown className="absolute left-3 size-3.5 text-slate-400 pointer-events-none" />
+                                    <select
+                                        value={sortOption}
+                                        onChange={(e) => setSortOption(e.target.value as any)}
+                                        className="pl-8 pr-8 py-3 bg-slate-950/70 border border-white/10 rounded-xl text-xs font-mono text-slate-200 uppercase tracking-wider focus:outline-none focus:border-primary transition-all appearance-none cursor-pointer"
+                                    >
+                                        <option value="featured">Sort: Featured</option>
+                                        <option value="price_asc">Price: Low to High</option>
+                                        <option value="price_desc">Price: High to Low</option>
+                                        <option value="btu_asc">Capacity: Low to High</option>
+                                        <option value="btu_desc">Capacity: High to Low</option>
+                                        <option value="ceer">High Efficiency (CEER)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quick 1-Tap Search Suggestion Chips */}
+                        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-[11px]">
+                            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1">
+                                <Sparkles className="size-3 text-primary" />
+                                Popular:
+                            </span>
+                            {[
+                                { label: '12,000 BTU Inverter', query: '12,000' },
+                                { label: '115V Standard Plug', query: '115V' },
+                                { label: 'Quiet Dual Inverter', query: 'dual inverter' },
+                                { label: 'Casement / Slider', query: 'casement' },
+                                { label: '230V Great Room', query: '230V' },
+                            ].map(s => (
+                                <button
+                                    key={s.label}
+                                    type="button"
+                                    onClick={() => setSearchQuery(s.query)}
+                                    className="px-2.5 py-1 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-primary/30 text-slate-300 hover:text-white shrink-0 font-mono transition-colors"
+                                >
+                                    {s.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Category Selector Tabs */}
+                        <div className="pt-2 border-t border-white/5">
+                            <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+                                {CATEGORIES.map(cat => (
+                                    <button
+                                        key={cat.id}
+                                        type="button"
+                                        onClick={() => setSelectedCategory(cat.id as any)}
+                                        className={cn(
+                                            "px-3.5 py-2 rounded-xl text-xs font-header font-black uppercase tracking-wider shrink-0 transition-all flex items-center gap-2",
+                                            selectedCategory === cat.id
+                                                ? "bg-primary text-slate-950 shadow-[0_0_20px_rgba(0,174,239,0.35)] scale-[1.02]"
+                                                : "bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.07] border border-white/5"
+                                        )}
+                                    >
+                                        <span>{cat.label}</span>
+                                        <span className={cn(
+                                            "text-[10px] px-1.5 py-0.5 rounded-md font-mono",
+                                            selectedCategory === cat.id
+                                                ? "bg-slate-950/20 text-slate-950 font-black"
+                                                : "bg-white/10 text-slate-400"
+                                        )}>
+                                            {cat.count}
+                                        </span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Multi-Dimensional Filter Strips: Room Sizer, Wall Plug Voltage, Mount */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-white/5">
+                            {/* Room Sizer */}
+                            <div className="space-y-1.5">
+                                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Room Sizer</span>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {[
+                                        { id: 'ALL', label: 'All Sizes' },
+                                        { id: 'BEDROOM', label: 'Bedrooms (6k-8k)' },
+                                        { id: 'MASTER', label: 'Master (10k-14k)' },
+                                        { id: 'LIVING', label: 'Great Rooms (18k+)' },
+                                    ].map(f => (
+                                        <button
+                                            key={f.id}
+                                            type="button"
+                                            onClick={() => setSelectedCapacity(f.id as any)}
+                                            className={cn(
+                                                "px-2.5 py-1.5 rounded-lg text-[11px] font-mono uppercase tracking-wider transition-all",
+                                                selectedCapacity === f.id
+                                                    ? "bg-primary text-slate-950 font-bold shadow-[0_0_12px_rgba(0,174,239,0.3)]"
+                                                    : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
+                                            )}
+                                        >
+                                            {f.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Wall Plug Voltage */}
+                            <div className="space-y-1.5">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Plug Voltage</span>
+                                    <Link href="/shop/window-ac-plug-guide" className="text-[10px] text-primary hover:underline font-mono uppercase flex items-center gap-1">
+                                        <Plug className="size-2.5" />
+                                        Guide &rarr;
+                                    </Link>
+                                </div>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {[
+                                        { id: 'ALL', label: 'All Plugs' },
+                                        { id: '115V', label: '115V Standard (15A)' },
+                                        { id: '230V', label: '230V Heavy Duty (20A+)' },
+                                    ].map(v => (
+                                        <button
+                                            key={v.id}
+                                            type="button"
+                                            onClick={() => setSelectedVoltage(v.id as any)}
+                                            className={cn(
+                                                "px-2.5 py-1.5 rounded-lg text-[11px] font-mono uppercase tracking-wider transition-all",
+                                                selectedVoltage === v.id
+                                                    ? "bg-emerald-500 text-slate-950 font-bold shadow-[0_0_12px_rgba(16,185,129,0.3)]"
+                                                    : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
+                                            )}
+                                        >
+                                            {v.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Mounting / Window Type */}
+                            <div className="space-y-1.5">
+                                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Window Fitment</span>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {[
+                                        { id: 'ALL', label: 'All Mounts' },
+                                        { id: 'HUNG', label: 'Standard Sash' },
+                                        { id: 'SLIDER', label: 'Slider / Casement' },
+                                        { id: 'SLEEVE', label: 'Thru-the-Wall Sleeve' },
+                                    ].map(m => (
+                                        <button
+                                            key={m.id}
+                                            type="button"
+                                            onClick={() => setSelectedMount(m.id as any)}
+                                            className={cn(
+                                                "px-2.5 py-1.5 rounded-lg text-[11px] font-mono uppercase tracking-wider transition-all",
+                                                selectedMount === m.id
+                                                    ? "bg-cyan-400 text-slate-950 font-bold shadow-[0_0_12px_rgba(34,211,238,0.3)]"
+                                                    : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
+                                            )}
+                                        >
+                                            {m.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                {/* Active Filter Status Bar & Dismissal Chips */}
+                {isFiltered && (
+                    <div className="max-w-7xl mx-auto px-4 mb-6 animate-in fade-in duration-300">
+                        <div className="flex flex-wrap items-center justify-between gap-3 bg-white/[0.02] border border-white/10 rounded-2xl px-4 py-3">
+                            <div className="flex flex-wrap items-center gap-2">
+                                <span className="text-xs font-header font-black uppercase text-white tracking-wider">
+                                    Showing {filteredProducts.length} of {products.length} Models
+                                </span>
+
+                                {searchQuery && (
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-[10px] font-mono">
+                                        Search: &quot;{searchQuery}&quot;
+                                        <button onClick={() => setSearchQuery('')} className="hover:text-white"><X className="size-3" /></button>
+                                    </span>
+                                )}
+
+                                {selectedCategory !== 'ALL' && (
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-[10px] font-mono">
+                                        {CATEGORIES.find(c => c.id === selectedCategory)?.label}
+                                        <button onClick={() => setSelectedCategory('ALL')} className="hover:text-white"><X className="size-3" /></button>
+                                    </span>
+                                )}
+
+                                {selectedCapacity !== 'ALL' && (
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] font-mono">
+                                        Room: {selectedCapacity}
+                                        <button onClick={() => setSelectedCapacity('ALL')} className="hover:text-white"><X className="size-3" /></button>
+                                    </span>
+                                )}
+
+                                {selectedVoltage !== 'ALL' && (
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono">
+                                        Voltage: {selectedVoltage}
+                                        <button onClick={() => setSelectedVoltage('ALL')} className="hover:text-white"><X className="size-3" /></button>
+                                    </span>
+                                )}
+
+                                {selectedMount !== 'ALL' && (
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-[10px] font-mono">
+                                        Mount: {selectedMount}
+                                        <button onClick={() => setSelectedMount('ALL')} className="hover:text-white"><X className="size-3" /></button>
+                                    </span>
+                                )}
+
+                                {inStockOnly && (
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono">
+                                        In Stock Only
+                                        <button onClick={() => setInStockOnly(false)} className="hover:text-white"><X className="size-3" /></button>
+                                    </span>
+                                )}
+                            </div>
+
+                            <button
+                                onClick={handleResetFilters}
+                                className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white font-mono uppercase tracking-wider transition-colors hover:underline"
+                            >
+                                <RotateCcw className="size-3" />
+                                Reset All Filters
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Catalog Display: Filtered Grid or Curated Sections */}
                 <div className="space-y-8 md:space-y-10">
                     {error ? (
                         <div className="py-20 text-center space-y-4 max-w-lg mx-auto bg-red-500/5 border border-red-500/20 rounded-2xl p-8">
@@ -469,14 +865,52 @@ export default function ShopPage() {
                             <p className="text-slate-400 text-xs tracking-widest uppercase font-bold">{error}</p>
                             <p className="text-slate-500 text-[10px] tracking-widest uppercase mt-4">Review the backend API container health.</p>
                         </div>
+                    ) : isFiltered ? (
+                        filteredProducts.length === 0 ? (
+                            <div className="py-16 md:py-24 text-center max-w-lg mx-auto bg-slate-900/60 border border-white/10 rounded-3xl p-8 backdrop-blur-md shadow-2xl space-y-5 animate-in fade-in duration-300">
+                                <div className="size-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+                                    <Snowflake className="size-8 animate-pulse" />
+                                </div>
+                                <div className="space-y-2">
+                                    <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">
+                                        No Units Matching Filter Combination
+                                    </h3>
+                                    <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
+                                        Most Oahu residential spaces use standard 115V units between 8,000–12,000 BTU. Reset filters to browse our full inventory or call our Waipahu shop for custom sizing.
+                                    </p>
+                                </div>
+                                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                                    <button
+                                        onClick={handleResetFilters}
+                                        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2"
+                                    >
+                                        <RotateCcw className="size-3.5" />
+                                        <span>Reset All Filters</span>
+                                    </button>
+                                    <a
+                                        href="tel:8084881111"
+                                        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-header font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        <Phone className="size-3.5 text-cyan-400" />
+                                        <span>Call (808) 488-1111</span>
+                                    </a>
+                                </div>
+                            </div>
+                        ) : (
+                            <ProductGrid
+                                products={filteredProducts}
+                                onQuickAdd={addToCart}
+                                rebate="$45 Hawaii Energy Rebate"
+                                compareList={compareList}
+                                onToggleCompare={handleToggleCompare}
+                            />
+                        )
                     ) : (
-                        sectionOrder.map((sectionId, index) => (
+                        sectionOrder.map((sectionId) => (
                             <div
                                 key={sectionId}
                                 className="relative group/section"
                             >
-                                {/* Section Control Suite (Edit Mode) */}
-                                {/* Section Control Suite Removed */}
                                 {sectionMap[sectionId] || null}
                             </div>
                         ))
@@ -485,13 +919,156 @@ export default function ShopPage() {
 
             </main>
 
+            {/* Floating Side-by-Side Comparison Dock */}
+            {compareList.length > 0 && (
+                <div className="fixed bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-2xl bg-slate-950/95 border border-primary/40 rounded-2xl p-3 md:p-4 shadow-[0_0_40px_rgba(0,174,239,0.3)] backdrop-blur-xl animate-in slide-in-from-bottom duration-300">
+                    <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                            <div className="flex items-center -space-x-2">
+                                {compareList.map(c => {
+                                    const img = c.image_url || getProductImages(c.id)?.[0];
+                                    return (
+                                        <div key={c.id} className="size-9 rounded-lg bg-slate-900 border border-primary/50 overflow-hidden relative shadow-md">
+                                            {img ? (
+                                                <Image src={img} alt={c.name} fill className="object-contain p-1" />
+                                            ) : (
+                                                <Snowflake className="size-4 m-auto text-primary" />
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            <div>
+                                <div className="text-white text-xs font-header font-black uppercase tracking-wider">
+                                    Compare Models ({compareList.length}/3)
+                                </div>
+                                <div className="text-slate-400 text-[10px] hidden sm:block">
+                                    Side-by-side AHAM vs Island Microclimate™ comparison
+                                </div>
+                            </div>
+                        </div>
 
-            {/* --- VISUAL EDITOR CONTROL SUITE REMOVED --- */}
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => setIsCompareOpen(true)}
+                                className="px-4 py-2 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)]"
+                            >
+                                Compare Now
+                            </button>
+                            <button
+                                onClick={() => setCompareList([])}
+                                className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+                                title="Clear comparison"
+                            >
+                                <X className="size-4" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
-            {/* Footer */}
-            {/* Footer Removed (Handled by Global Layout) */}
+            {/* Compare Modal */}
+            {isCompareOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300">
+                    <div className="bg-slate-950 border border-white/10 rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 md:p-8 shadow-2xl relative">
+                        <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                            <div>
+                                <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">
+                                    Oahu Window AC Specification Comparison
+                                </h3>
+                                <p className="text-xs text-slate-400 font-mono">
+                                    AHAM Factory Certified &bull; Island Microclimate Calibration™
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => setIsCompareOpen(false)}
+                                className="p-2 text-slate-400 hover:text-white rounded-xl bg-white/5 hover:bg-white/10"
+                            >
+                                <X className="size-5" />
+                            </button>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {compareList.map(item => {
+                                const img = item.image_url || getProductImages(item.id)?.[0];
+                                return (
+                                    <div key={item.id} className="bg-slate-900/90 border border-white/10 rounded-2xl p-4 flex flex-col justify-between">
+                                        <div>
+                                            <div className="relative w-full aspect-[4/3] bg-black/40 rounded-xl mb-3 overflow-hidden">
+                                                {img && <Image src={img} alt={item.name} fill className="object-contain p-2" />}
+                                            </div>
+                                            <div className="text-[10px] font-mono text-primary uppercase">{item.category}</div>
+                                            <h4 className="text-sm font-header font-black text-white uppercase mb-2 line-clamp-2">{item.name}</h4>
+                                            <div className="text-xl font-header font-black text-cyan-400 mb-4">${item.price.toLocaleString()}</div>
+
+                                            <div className="space-y-2 text-xs border-t border-white/5 pt-3">
+                                                <div className="flex justify-between py-1 border-b border-white/5">
+                                                    <span className="text-slate-400 text-[10px] uppercase font-mono">AHAM Factory:</span>
+                                                    <span className="text-white font-semibold">{item.coverage_aham || item.coverage || 'Factory Rated'}</span>
+                                                </div>
+                                                <div className="flex justify-between py-1 border-b border-white/5">
+                                                    <span className="text-cyan-400 text-[10px] uppercase font-mono">Island Sizing:</span>
+                                                    <span className="text-cyan-300 font-bold">{item.coverage_oahu || 'Calibrated'}</span>
+                                                </div>
+                                                <div className="flex justify-between py-1 border-b border-white/5">
+                                                    <span className="text-slate-400 text-[10px] uppercase font-mono">Capacity:</span>
+                                                    <span className="text-white font-semibold">{item.btu?.toLocaleString() || 'N/A'} BTU</span>
+                                                </div>
+                                                <div className="flex justify-between py-1 border-b border-white/5">
+                                                    <span className="text-slate-400 text-[10px] uppercase font-mono">Voltage:</span>
+                                                    <span className="text-white font-semibold">{item.voltage || '115V'}</span>
+                                                </div>
+                                                <div className="flex justify-between py-1 border-b border-white/5">
+                                                    <span className="text-slate-400 text-[10px] uppercase font-mono">Min Window:</span>
+                                                    <span className="text-white font-semibold">{item.min_window_height ? `${item.min_window_height} H` : '16" H'}</span>
+                                                </div>
+                                                <div className="flex justify-between py-1 border-b border-white/5">
+                                                    <span className="text-slate-400 text-[10px] uppercase font-mono">CEER Rating:</span>
+                                                    <span className="text-emerald-400 font-bold">{item.ceer_rating || 'High Efficiency'}</span>
+                                                </div>
+                                                <div className="flex justify-between py-1">
+                                                    <span className="text-slate-400 text-[10px] uppercase font-mono">Noise:</span>
+                                                    <span className="text-white font-semibold">{item.noise_level || 'Ultra Quiet'}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-4 pt-3 border-t border-white/5">
+                                            <button
+                                                onClick={() => {
+                                                    addToCart(item);
+                                                    setIsCompareOpen(false);
+                                                }}
+                                                className="w-full py-2.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)]"
+                                            >
+                                                Add to Cart (${item.price})
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <BackToTop visible={true} />
         </div >
+    );
+}
+
+export default function ShopPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-[#0b1120] flex items-center justify-center">
+                <div className="flex flex-col items-center gap-3">
+                    <div className="size-12 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
+                    <span className="font-mono text-xs text-primary uppercase tracking-widest">Loading Oahu Catalog...</span>
+                </div>
+            </div>
+        }>
+            <ShopPageContent />
+        </Suspense>
     );
 }
 
@@ -1149,7 +1726,19 @@ function SizingGuideSection() {
 
 
 
-function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; onQuickAdd: (p: Product) => void; rebate?: string }) {
+function ProductGrid({ 
+    products, 
+    onQuickAdd, 
+    rebate,
+    compareList = [],
+    onToggleCompare
+}: { 
+    products: Product[]; 
+    onQuickAdd: (p: Product) => void; 
+    rebate?: string;
+    compareList?: Product[];
+    onToggleCompare?: (p: Product) => void;
+}) {
     if (products.length === 0) {
         return (
             <div className="py-12 text-center">
@@ -1182,14 +1771,32 @@ function ProductGrid({ products, onQuickAdd, rebate }: { products: Product[]; on
                     }}
                     className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-[360px]"
                 >
-                    <ProductCard product={product} onQuickAdd={() => onQuickAdd(product)} rebate={rebate} />
+                    <ProductCard 
+                        product={product} 
+                        onQuickAdd={() => onQuickAdd(product)} 
+                        rebate={rebate}
+                        isComparing={compareList.some(c => c.id === product.id)}
+                        onToggleCompare={onToggleCompare}
+                    />
                 </motion.div>
             ))}
         </motion.div>
     );
 }
 
-function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuickAdd: () => void; rebate?: string }) {
+function ProductCard({ 
+    product, 
+    onQuickAdd, 
+    rebate,
+    isComparing = false,
+    onToggleCompare
+}: { 
+    product: Product; 
+    onQuickAdd: () => void; 
+    rebate?: string;
+    isComparing?: boolean;
+    onToggleCompare?: (p: Product) => void;
+}) {
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -1201,24 +1808,24 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
     const [sparks, setSparks] = useState<{ id: number; left: string; delay: string; duration: string; drift: string; color: string }[]>([]);
 
     const cutawayImageMap: Record<number, string> = {
-        1: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        2: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        3: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        4: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        5: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        6: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        7: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        8: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        9: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        10: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        11: '/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp',
-        12: '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp',
-        13: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        14: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        15: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
-        16: '/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp',
+        1: '/assets/window-unit-images/3d-fit/product_1_fit_cutaway.webp',
+        2: '/assets/window-unit-images/3d-fit/product_2_fit_cutaway.webp',
+        3: '/assets/window-unit-images/3d-fit/product_3_fit_cutaway.webp',
+        4: '/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+        5: '/assets/window-unit-images/3d-fit/product_5_fit_cutaway.webp',
+        6: '/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp',
+        7: '/assets/window-unit-images/3d-fit/product_7_fit_cutaway.webp',
+        8: '/assets/window-unit-images/3d-fit/product_8_fit_cutaway.webp',
+        9: '/assets/window-unit-images/3d-fit/product_9_fit_cutaway.webp',
+        10: '/assets/window-unit-images/3d-fit/product_10_fit_cutaway.webp',
+        11: '/assets/window-unit-images/3d-fit/product_11_fit_cutaway.webp',
+        12: '/assets/window-unit-images/3d-fit/product_12_fit_cutaway.webp',
+        13: '/assets/window-unit-images/3d-fit/product_13_fit_cutaway.webp',
+        14: '/assets/window-unit-images/3d-fit/product_14_fit_cutaway.webp',
+        15: '/assets/window-unit-images/3d-fit/product_15_fit_cutaway.webp',
+        16: '/assets/window-unit-images/3d-fit/product_16_fit_cutaway.webp',
     };
-    const cutawayImage = cutawayImageMap[product.id] || '/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp';
+    const cutawayImage = cutawayImageMap[product.id] || `/assets/window-unit-images/3d-fit/product_${product.id}_fit_cutaway.webp`;
 
     const cardRef = useRef<HTMLDivElement>(null);
     const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
@@ -1424,13 +2031,34 @@ function ProductCard({ product, onQuickAdd, rebate }: { product: Product; onQuic
                                 ? "bg-cyan-400 text-black shadow-sm" 
                                 : "text-slate-400 hover:text-white"
                         )}
-                        title="View Raytraced 3D Window Fit & Dimension Calipers"
+                        title="View 3D Spatial Window Fit & Dimension Calipers"
                     >
                         <span>📐 3D Fit</span>
                     </button>
                 </div>
 
-                {rebate && (
+                {/* Compare Quick Toggle Pill */}
+                {onToggleCompare && (
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onToggleCompare(product);
+                        }}
+                        className={cn(
+                            "absolute top-2 right-2 z-30 flex items-center gap-1 px-2.5 py-1 rounded-lg text-[9px] font-mono uppercase tracking-wider backdrop-blur-md border transition-all shadow-lg",
+                            isComparing
+                                ? "bg-primary text-slate-950 font-black border-primary shadow-[0_0_15px_rgba(0,174,239,0.5)]"
+                                : "bg-black/75 text-slate-300 hover:text-white border-white/10 hover:border-primary/40"
+                        )}
+                        title={isComparing ? "Remove from comparison" : "Compare with other units"}
+                    >
+                        <Layers className="size-3" />
+                        <span>{isComparing ? 'Comparing' : 'Compare'}</span>
+                    </button>
+                )}
+
+                {rebate && !onToggleCompare && (
                     <div className="absolute top-0 right-0 z-20 bg-emerald-500 text-white font-header font-black text-[8px] md:text-[9px] px-3 py-1.5 rounded-bl-2xl uppercase tracking-[0.2em] shadow-lg border-b border-l border-emerald-400/30">
                         {rebate}
                     </div>

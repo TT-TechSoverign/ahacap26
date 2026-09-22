@@ -147,7 +147,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
         },
         {
             q: "How does the mini-split installation estimate process work?",
-            a: "Because every home's copper line run length, electrical panel capacity, and mounting locations differ, all mini-split installations are subject to a free on-site estimate. Our Hawaii Licensed HVAC technicians (CT-36775) survey your property, perform a complimentary electrical panel load audit, map architectural line-hide routing, and provide a clear, guaranteed fixed-price proposal with zero upfront deposit."
+            a: "Because every home's copper line run length, electrical panel capacity, and mounting locations differ, all mini-split installations are subject to a free on-site estimate. Our Hawaii Licensed HVAC technicians (CT-36775) survey your property, perform a complimentary electrical panel load audit, map architectural line-hide routing, and provide a clear, transparent fixed-price proposal with zero upfront deposit."
         },
         {
             q: "Can I install mini-splits in an Oahu condominium or townhouse?",
@@ -182,13 +182,6 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                 "areaServed": {
                     "@type": "State",
                     "name": "Hawaii"
-                },
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "135",
-                    "bestRating": "5",
-                    "worstRating": "1"
                 },
                 "hasOfferCatalog": {
                     "@type": "OfferCatalog",
@@ -479,14 +472,14 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                     <div className="text-center mb-10">
                         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-2">
                             <Clock className="w-3.5 h-3.5" />
-                            <span>100% Free • $0 Upfront Deposit</span>
+                            <span>Free Consultation • $0 Upfront Deposit</span>
                         </div>
                         <h2 className="text-3xl md:text-4xl font-extrabold text-white">
                             Request Your Turnkey Mini-Split On-Site Estimate
                         </h2>
                         <p className="text-sm md:text-base text-slate-400 mt-2 max-w-2xl mx-auto">
                             Our licensed technicians will assess your room square footage, sun exposure, line hide routing, 
-                            and electrical panel to deliver a guaranteed fixed-price proposal.
+                            and electrical panel to deliver an itemized fixed-price proposal.
                         </p>
                     </div>
 

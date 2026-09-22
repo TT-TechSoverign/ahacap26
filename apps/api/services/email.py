@@ -35,6 +35,31 @@ ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "office@affordablehome-ac.com")
 FROM_EMAIL = os.getenv("FROM_EMAIL", "office@affordablehome-ac.com")
 WEBSITE_URL = os.getenv("WEBSITE_URL", "https://affordablehome-ac.com")
 
+# Staging & Developer Fortress Guardrail (Prevents CEO from receiving test emails)
+ENVIRONMENT = os.getenv("ENVIRONMENT", "production").lower().strip()
+IS_STAGING = (
+    ENVIRONMENT in ["staging", "test", "development", "local"]
+    or "staging" in WEBSITE_URL.lower()
+    or "localhost" in WEBSITE_URL.lower()
+)
+DEV_TEST_EMAIL = "irasmussenjobs@gmail.com"
+
+def get_admin_notification_recipients(is_test: bool = False):
+    """
+    Bulletproof CEO Protection Guardrail:
+    - If IS_STAGING or is_test: 100% of emails route EXCLUSIVELY to irasmussenjobs@gmail.com.
+      The CEO (brian@affordablehome-ac.com) and ahacsplitdivision@gmail.com are COMPLETELY OMITTED.
+    - If PRODUCTION and REAL: Routes to primary admin list [brian@affordablehome-ac.com, ahacsplitdivision@gmail.com]
+      with BCC to irasmussenjobs@gmail.com.
+    """
+    if IS_STAGING or is_test:
+        logger.info(f"🛡️ [CEO GUARDRAIL ACTIVE] Intercepted test/staging notification (IS_STAGING={IS_STAGING}, is_test={is_test}). Routing EXCLUSIVELY to {DEV_TEST_EMAIL} with ZERO CEO alert.")
+        return [DEV_TEST_EMAIL], [], True
+
+    primary = ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com"]
+    bcc = [DEV_TEST_EMAIL]
+    return primary, bcc, False
+
 async def verify_connection():
     if not HAS_SMTP:
         logger.error("❌ SMTP Verification Skipped: 'aiosmtplib' is missing.")
@@ -421,6 +446,7 @@ END:VCALENDAR"""
                 <div style="text-align: center; margin-bottom: 6px;">
                     <h1>Order Confirmed</h1>
                     <span class="order-badge">Ref: #{order_id}</span>
+                    <span class="order-badge" style="background-color: #000000; color: #ffffff; margin-left: 6px;">{mode_title}</span>
                 </div>
 
                 <!-- Customer Information -->
@@ -459,26 +485,30 @@ END:VCALENDAR"""
                     </tbody>
                 </table>
 
-                <!-- Summary Box -->
+                <!-- Summary Box (Clean 1-Page Layout, Zero Consumer Fluff) -->
                 <div style="background-color: #ffffff; border: 1.5px solid #000000; border-radius: 4px; padding: 8px 10px; margin-bottom: 6px;">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="padding-bottom: 6px; vertical-align: top;">
+                            <td style="vertical-align: top;">
                                 <p style="margin: 0; color: #000000; font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Payment Method</p>
                                 <p style="margin: 2px 0 0 0; color: #000000; font-weight: 700; font-size: 12px;">{payment_method_text}</p>
                             </td>
-                            <td style="padding-bottom: 6px; text-align: right; vertical-align: top;">
+                            <td style="vertical-align: top; text-align: center;">
+                                <p style="margin: 0; color: #000000; font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Fulfillment</p>
+                                <p style="margin: 2px 0 0 0; color: #000000; font-weight: 700; font-size: 12px;">{mode_title}</p>
+                            </td>
+                            <td style="text-align: right; vertical-align: top;">
                                 <p style="margin: 0; color: #000000; font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">Total Paid</p>
                                 <p style="margin: 2px 0 0 0; color: #000000; font-weight: 900; font-size: 16px;">${(total_cents/100):.2f}</p>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="2" style="border-top: 1px solid #000000; padding-top: 6px;">
-                                <p style="margin: 0; color: #000000; font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800;">{instructions_title}</p>
-                                <p style="margin: 4px 0 0 0; color: #000000; font-size: 11px; line-height: 1.35;">{instructions_text}</p>
-                            </td>
-                        </tr>
                     </table>
+                </div>
+
+                <!-- Admin Quick Actions -->
+                <div style="text-align: center; margin-top: 8px; font-size: 11px;">
+                    <a href="tel:{c_phone}" style="display: inline-block; padding: 4px 12px; background-color: #000000; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 3px; margin-right: 8px;">Call Customer</a>
+                    <a href="mailto:{c_email}?subject=Re: Affordable Home A/C Order #{order_id}" style="display: inline-block; padding: 4px 12px; background-color: #000000; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 3px;">Email Customer</a>
                 </div>
             </div>
         </div>
@@ -753,16 +783,19 @@ END:VCALENDAR"""
     except:
         pass
 
-    admin_primary_list = [
-        "brian@affordablehome-ac.com", 
-        "ahacsplitdivision@gmail.com"
-    ]
-    admin_bcc_list = [
-        "irasmussenjobs@gmail.com"
-    ]
+    order_context_text = f"{order_id or ''} {to_email or ''}".lower()
+    is_test_order = (
+        IS_STAGING
+        or "test" in order_context_text
+        or to_email.lower().strip() == DEV_TEST_EMAIL.lower()
+    )
+
+    admin_primary_list, admin_bcc_list, is_intercepted = get_admin_notification_recipients(is_test_order)
     
     admin_subject = f"New Order Alert: {order_id} (Admin Copy)"
-    if is_promo:
+    if is_intercepted:
+        admin_subject = f"[SYSTEM TEST - NO CEO NOTIFICATION] {admin_subject}"
+    elif is_promo:
         admin_subject = f"[PROMO - 4TH OF JULY] {admin_subject}"
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
@@ -953,19 +986,18 @@ async def send_inquiry_notification(lead):
         # Smart Routing: Route test leads EXCLUSIVELY to irasmussenjobs@gmail.com with zero CEO impact
         lead_text = f"{lead.first_name or ''} {lead.last_name or ''} {lead.email or ''} {lead.notes or ''}".lower()
         is_test = (
-            "test" in lead_text
-            or (lead.email or "").lower() == "irasmussenjobs@gmail.com"
+            IS_STAGING
+            or "test" in lead_text
+            or (lead.email or "").lower() == DEV_TEST_EMAIL.lower()
             or getattr(lead, "is_test", False)
         )
 
-        if is_test:
-            primary_recipients = ["irasmussenjobs@gmail.com"]
-            bcc_recipients = []
+        primary_recipients, bcc_recipients, is_intercepted = get_admin_notification_recipients(is_test)
+
+        if is_intercepted:
             subject = f"[SYSTEM TEST - NO CEO NOTIFICATION] 🔔 Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}"
-            logger.info(f"🧪 Test lead detected ({lead.id}). Routing EXCLUSIVELY to {primary_recipients} without CEO alert.")
         else:
-            primary_recipients = ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com"]
-            bcc_recipients = ["irasmussenjobs@gmail.com"]
+            subject = f"🔔 New Service Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}"
 
         all_recipients = primary_recipients + bcc_recipients
 
@@ -1002,6 +1034,165 @@ async def send_inquiry_notification(lead):
 
     except Exception as e:
         logger.error(f"❌ Failed to send inquiry notification: {e} - Retrying due to tenacity exception...")
+        import traceback
+        traceback.print_exc()
+        raise
+
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=2, max=10),
+    reraise=True
+)
+async def send_customer_appointment_confirmation(lead):
+    """
+    Dispatches a professional, high-trust appointment confirmation email directly to the customer.
+    Includes zero upfront estimate commitment, Hawaii CT-36775 license, drop-cloth protection,
+    and 'as soon as possible' turnaround (strictly zero false claims of same-day or emergency dispatch).
+    """
+    if not HAS_SMTP:
+        logger.error("❌ Customer Confirmation Skipped: 'aiosmtplib' is missing.")
+        return
+
+    if not lead or not getattr(lead, "email", None) or "@" not in lead.email:
+        logger.info(f"Skipping customer confirmation: no valid customer email on lead {getattr(lead, 'id', 'unknown')}")
+        return
+
+    customer_email = lead.email.strip().lower()
+    # Skip internal staff emails
+    if customer_email.endswith("@affordablehome-ac.com") or customer_email == "office@affordablehome-ac.com":
+        logger.info(f"Skipping customer confirmation for internal staff address: {customer_email}")
+        return
+
+    # STAGING / TEST SHIELD: If on staging, ensure customer copy routes safely to DEV_TEST_EMAIL so external people never receive test emails
+    if IS_STAGING and customer_email != DEV_TEST_EMAIL.lower():
+        logger.info(f"🛡️ [STAGING SHIELD] Redirecting customer confirmation from {customer_email} to {DEV_TEST_EMAIL} so external inboxes never receive test emails.")
+        customer_email = DEV_TEST_EMAIL
+
+    try:
+        first_name = (getattr(lead, "first_name", "") or "").strip() or "Valued"
+        last_name = (getattr(lead, "last_name", "") or "").strip()
+        ref_id = str(getattr(lead, "id", "AHAC"))[:8].upper()
+        phone = getattr(lead, "phone", "") or "(808) 488-1111"
+        service = getattr(lead, "service_type", "Oahu Air Conditioning Service")
+        addr = getattr(lead, "address", "Oahu, HI")
+        city = getattr(lead, "city", "Oahu")
+        zip_code = getattr(lead, "zip", "")
+        location_parts = [p for p in [addr, city, zip_code] if p and p != "Oahu, HI"]
+        location_str = ", ".join(location_parts) if location_parts else "Oahu, Hawaii"
+
+        subject = f"Aloha {first_name} — Service Request Confirmed [Ref #{ref_id}]"
+
+        html_content = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #0b1120; color: #f8fafc; }}
+        .container {{ max-width: 600px; margin: 20px auto; background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); }}
+        .header {{ background-color: #0284c7; padding: 24px; text-align: center; border-bottom: 2px solid #38bdf8; }}
+        .content {{ padding: 28px 24px; }}
+        h1 {{ color: #ffffff; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px 0; }}
+        .badge {{ display: inline-block; background-color: #0369a1; color: #ffffff; padding: 4px 12px; border-radius: 9999px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px; }}
+        p {{ color: #cbd5e1; font-size: 14px; line-height: 1.6; margin: 0 0 16px 0; }}
+        .summary-card {{ background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 18px; margin: 20px 0; }}
+        .summary-row {{ display: table; width: 100%; margin-bottom: 10px; }}
+        .summary-row:last-child {{ margin-bottom: 0; }}
+        .summary-label {{ display: table-cell; width: 35%; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }}
+        .summary-val {{ display: table-cell; width: 65%; font-size: 13px; font-weight: 600; color: #f1f5f9; }}
+        .guarantees {{ background: linear-gradient(135deg, rgba(2, 132, 199, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid #0284c7; border-radius: 8px; padding: 16px; margin: 20px 0; }}
+        .guarantee-item {{ font-size: 12px; color: #e2e8f0; margin-bottom: 6px; line-height: 1.4; }}
+        .guarantee-item:last-child {{ margin-bottom: 0; }}
+        .cta-btn {{ display: block; width: 100%; max-width: 280px; margin: 24px auto 0 auto; text-align: center; background-color: #00AEEF; color: #020617; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; padding: 14px 20px; border-radius: 8px; text-decoration: none; }}
+        .footer {{ background-color: #0b1120; border-top: 1px solid #1e293b; padding: 20px; text-align: center; font-size: 11px; color: #64748b; line-height: 1.5; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <img src="cid:logo_img" style="width: 180px; max-width: 80%; height: auto; margin: 0 auto; display: block;" alt="Affordable Home A/C" />
+            <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.15em; color: #e0f2fe; text-transform: uppercase; margin-top: 10px;">OAHU SERVICE CONFIRMATION</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <span class="badge">Reference #{ref_id}</span>
+            <h1>Aloha {first_name},</h1>
+            <p>
+                Thank you for contacting Affordable Home A/C. Our Oahu dispatch team has received your service request and will contact you <strong>as soon as possible</strong> to coordinate your appointment.
+            </p>
+
+            <!-- Request Details -->
+            <div class="summary-card">
+                <div class="summary-row">
+                    <span class="summary-label">Service Type:</span>
+                    <span class="summary-val">{service}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Service Location:</span>
+                    <span class="summary-val">{location_str}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Callback Phone:</span>
+                    <span class="summary-val">{phone}</span>
+                </div>
+            </div>
+
+            <!-- Island Guarantees -->
+            <div class="guarantees">
+                <div class="guarantee-item"><strong>★ $0 Free Estimates:</strong> In-home quote across Oahu with zero upfront payment barrier.</div>
+                <div class="guarantee-item"><strong>★ Drop-Cloth Protection:</strong> Technicians lay industrial drop-cloths on all interior floors and furnishings.</div>
+                <div class="guarantee-item"><strong>★ Hawaii Contractor CT-36775:</strong> Island-grounded, fully licensed, bonded, and insured.</div>
+            </div>
+
+            <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 20px;">
+                Need immediate assistance or scheduling updates? Call our Waipahu shop directly:
+            </p>
+            <a href="tel:8084881111" class="cta-btn">Call Dispatch: (808) 488-1111</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <strong>Affordable Home A/C</strong> &bull; Waipahu Commercial Center &bull; 94-150 Leoleo St #203, Waipahu, HI 96797<br>
+            License CT-36775 &bull; <a href="https://www.affordablehome-ac.com" style="color: #38bdf8; text-decoration: none;">www.affordablehome-ac.com</a><br>
+            Mahalo for choosing local Hawaii workmanship!
+        </div>
+    </div>
+</body>
+</html>
+        """
+
+        primary_recipients = [customer_email]
+        bcc_recipients = ["irasmussenjobs@gmail.com"]
+        all_recipients = primary_recipients + bcc_recipients
+
+        msg = MIMEMultipart("related")
+        msg["Subject"] = subject
+        msg["From"] = f"Affordable Home A/C <{FROM_EMAIL}>"
+        msg["To"] = ", ".join(primary_recipients)
+        msg["Bcc"] = ", ".join(bcc_recipients)
+        msg["Reply-To"] = "office@affordablehome-ac.com"
+
+        msg.attach(MIMEText(html_content, "html"))
+
+        logo_attachment = get_logo_attachment()
+        if logo_attachment:
+            msg.attach(logo_attachment)
+
+        if SMTP_PORT == 587:
+            async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, start_tls=True) as smtp:
+                await smtp.login(SMTP_USER, SMTP_PASSWORD)
+                await smtp.send_message(msg, recipients=all_recipients)
+        else:
+            async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
+                await smtp.login(SMTP_USER, SMTP_PASSWORD)
+                await smtp.send_message(msg, recipients=all_recipients)
+
+        logger.info(f"✅ Customer Appointment Confirmation sent to {primary_recipients} (Ref #{ref_id}).")
+
+    except Exception as e:
+        logger.error(f"❌ Failed to send customer appointment confirmation: {e}")
         import traceback
         traceback.print_exc()
         raise

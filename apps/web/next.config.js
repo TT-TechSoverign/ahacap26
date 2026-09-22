@@ -8,6 +8,10 @@ const nextConfig = {
         cpus: 1,
         workerThreads: false,
         memoryBasedWorkersCount: true,
+        staleTimes: {
+            dynamic: 0,
+            static: 0,
+        },
     },
     reactStrictMode: true,
     typescript: {
@@ -32,7 +36,7 @@ const nextConfig = {
         dangerouslyAllowSVG: true,
         contentDispositionType: 'attachment',
         contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-        formats: ['image/avif', 'image/webp'],
+        formats: ['image/webp'],
         remotePatterns: [
             {
                 protocol: 'https',

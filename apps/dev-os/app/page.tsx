@@ -2142,7 +2142,7 @@ export default function DevOsEagleEyePage() {
                                                         { id: 'waipahu_pickup_anchor', title: 'Waipahu Warehouse Same-Day Pickup', impact: '+24% Cart Velocity', status: 'ACTIVE', detail: 'Eliminates Oahu customer freight anxiety (skip 2-3 week mainland barge transit).' },
                                                         { id: 'heco_power_roi', title: 'HECO ~44¢/kWh Electricity ROI Anchor', impact: '+18% Sizing Conversion', status: 'ACTIVE', detail: 'Anchors 20+ SEER2 savings ($1,020/yr power savings) against cheap 10-SEER alternatives.' },
                                                         { id: 'clinical_mold_protocol', title: 'Clinical Mold Remediation Framing', impact: '+31% Premium Clean Margin', status: 'ACTIVE', detail: 'Frames $275 teardown around salt-air corrosion & spore remediation instead of simple wash.' },
-                                                        { id: 'tax_transparency', title: 'Hawaii GET Tax (4.712%) Transparency', impact: '+12% Lead Trust Factor', status: 'ACTIVE', detail: 'Guarantees Oahu 4.712% tax transparency upfront with zero hidden fees.' }
+                                                        { id: 'tax_transparency', title: 'Hawaii GET Tax (4.712%) Transparency', impact: '+12% Lead Trust Factor', status: 'ACTIVE', detail: 'Ensures Oahu 4.712% tax transparency upfront with zero hidden fees.' }
                                                     ]).map((p: any) => (
                                                         <div key={p.id} className="rounded-xl border border-slate-800 bg-slate-950/80 p-2 text-[10px]">
                                                             <div className="flex items-center justify-between">

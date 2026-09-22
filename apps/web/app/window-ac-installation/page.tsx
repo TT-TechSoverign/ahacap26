@@ -149,14 +149,7 @@ export default function WindowAcInstallationPage() {
                     "name": "Affordable Home AC"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Licensed CT-36775 window air conditioner installation, custom plexiglass / acrylic jalousie window kits, and exterior bracket mounting on Oahu.",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "142",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                }
+                "description": "Licensed CT-36775 window air conditioner installation, custom plexiglass / acrylic jalousie window kits, and exterior bracket mounting on Oahu."
             },
             {
                 "@type": "BreadcrumbList",
@@ -201,7 +194,7 @@ export default function WindowAcInstallationPage() {
                         Jalousie Window AC Mounting Honolulu &amp; Island-Wide
                     </p>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Precision jalousie louver acrylic retrofits, cantilever exterior support bracket mounting, and laser-calibrated 3/8&quot; trade-wind pitch leveling. Complimentary window structural assessment and zero upfront deposit with 100% CT-36775 licensed workmanship.
+                        Precision jalousie louver acrylic retrofits, cantilever exterior support bracket mounting, and laser-calibrated 3/8&quot; trade-wind pitch leveling. Complimentary window structural assessment and zero upfront deposit backed by Hawaii CT-36775 licensed workmanship.
                     </p>
 
                     {/* Dual Action Top Nav Buttons */}
@@ -571,7 +564,7 @@ export default function WindowAcInstallationPage() {
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-slate-400">Workmanship:</span>
-                                            <span className="text-cyan-300 font-mono font-bold">100% CT-36775 Guarantee</span>
+                                            <span className="text-cyan-300 font-mono font-bold">Licensed CT-36775 Workmanship</span>
                                         </div>
                                         <div className="flex justify-between border-t border-white/10 pt-1">
                                             <span className="text-slate-400">Upfront Booking Deposit:</span>
@@ -769,7 +762,7 @@ export default function WindowAcInstallationPage() {
                                 Qualifying Window ACs Get a $45 Cash Rebate
                             </h3>
                             <p className="text-slate-400 text-xs sm:text-sm max-w-2xl leading-relaxed">
-                                When you buy and install an Energy Star LG Dual Inverter through Affordable Home AC, we provide our official pre-approved Hawaii Energy application form PDF. (Note: Mini split division does not participate in rebates; window ACs are 100% eligible).
+                                When you buy and install an Energy Star LG Dual Inverter through Affordable Home AC, we provide our official pre-approved Hawaii Energy application form PDF. (Note: Mini split division does not participate in rebates; window AC models qualify).
                             </p>
                         </div>
                         <a

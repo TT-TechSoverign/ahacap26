@@ -48,7 +48,7 @@ export default function WindowAcMaintenancePage() {
         },
         {
             icon: Sparkles,
-            title: "100% Black Mold & Odor Purge",
+            title: "Deep Black Mold & Odor Purge",
             stat: "Odor-Free Air",
             description: "Hawaii's 80%+ humidity turns damp blower wheels into breeding grounds for black mold and mildew. We completely extract and sanitize the blower assembly, eliminating musty smells so your family breathes pure, clean air."
         },
@@ -92,7 +92,7 @@ export default function WindowAcMaintenancePage() {
             detail: "Sprays push grime deeper into coils; teardown flushes dirt out from the reverse side."
         },
         {
-            feature: "100% Safe Electrical Isolation",
+            feature: "Complete Safe Electrical Isolation",
             diy: false,
             teardown: true,
             detail: "Chassis removal completely isolates circuit boards and motor from moisture."
@@ -184,7 +184,7 @@ export default function WindowAcMaintenancePage() {
                             <Wind className="size-3.5 text-cyan-400" /> Ice-Cold Airflow Restored
                         </span>
                         <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                            <Sparkles className="size-3.5 text-cyan-400" /> 100% Mold & Odor Purge
+                            <Sparkles className="size-3.5 text-cyan-400" /> Deep Mold & Odor Purge
                         </span>
                         <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
                             <Zap className="size-3.5 text-cyan-400" /> Lower Power Draw
