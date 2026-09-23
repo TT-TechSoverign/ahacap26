@@ -1,10 +1,9 @@
-import Section2OurServicesV2 from '@/components/Section2OurServicesV2';
 import Section1HeroHomeV2 from '@/components/Section1HeroHomeV2';
 import { QuickJumpBanner } from '@/components/QuickJumpBanner';
 import { BackToTop } from '@/components/BackToTop';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { HomeFeaturedInventory } from '@/components/HomeFeaturedInventory';
-import { HomePricingMatrix } from '@/components/HomePricingMatrix';
+import { HomeServicesDivisions } from '@/components/HomeServicesDivisions';
 import { HomeServiceAreasHub } from '@/components/HomeServiceAreasHub';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -162,11 +161,8 @@ export default function Homepage() {
                 {/* 3. Featured In-Stock Oahu Inventory (Waipahu Warehouse Direct) */}
                 <HomeFeaturedInventory />
 
-                {/* 4. Dual-Pathway Services (Mini-Split vs Window AC) */}
-                <Section2OurServicesV2 />
-
-                {/* 5. Official Oahu Transparent Service Pricing Matrix ($0 Estimate, $175 Diagnostic, $275 Teardown) */}
-                <HomePricingMatrix />
+                {/* 4. Dedicated Cooling Divisions & Services (Window AC & Split AC) */}
+                <HomeServicesDivisions />
 
                 {/* 6. Island Verified Customer Reviews Pavilion */}
                 <div className="border-t border-slate-800/80 bg-[#070b12]/95 backdrop-blur-sm">

@@ -27,16 +27,15 @@ Every conversation session inherits the knowledge, directives, historical timeli
 
 ---
 
-## III. CORE BUSINESS MANDATES & SERVICE PRICING MATRIX
+## III. CORE BUSINESS MANDATES & COOLING DIVISIONS
 
 1. **Strict 'By Appointment First' Mandate**:
    - Zero upfront checkout payment barriers for physical AC repair, maintenance, or estimates (+28% checkout velocity).
    - Customers submit appointment requests; dispatch contacts them first before any charge or technician roll.
-2. **Official Oahu Service Pricing Matrix**:
-   - **$0 Free Estimate**: In-home quote across Oahu with zero commitment.
-   - **$175 Diagnostic Inspection / Basic Sanitization**: Applied towards repair if contracted.
-   - **$275 Deep Chemical Flush (Mini-Split) / Full Teardown (Window AC)**: Waipahu shop service.
-   - **Hardware Catalog**: $504 to $1,025 (Frigidaire / GE Inverter Window ACs in stock in Waipahu).
+2. **Dedicated Window AC & Split AC Divisions**:
+   - **Window AC Division**: Waipahu warehouse-direct inventory sales ($504 to $1,025), custom jalousie & standard window installation, deep chemical cleaning/overhaul, and clean-vs-replace assessments.
+   - **Split AC Division**: Ductless mini-split installation & replacement ($0 Free In-Home Estimate), clinical chemical maintenance/deep flush, diagnostic troubleshooting & repair, and island microclimate sizing calculators.
+   - **No Fabricated Flat-Rate Packages**: Zero upfront booking payment barriers; custom transparent quotes by licensed technicians (CT-36775).
 3. **Drop-Cloth Protection & Legal Mandate**:
    - Technicians must lay industrial drop-cloths on all floors and furnishings.
    - Strictly prohibit false drywall repair claims or 24/7 unverified promises.

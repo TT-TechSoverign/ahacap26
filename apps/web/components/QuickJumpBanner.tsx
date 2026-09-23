@@ -18,7 +18,7 @@ export function QuickJumpBanner() {
                 <div className="flex flex-wrap items-center justify-center gap-2 text-center text-xs">
                     <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        Free Estimates ($0 to Book) • Transparent Flat-Rate Servicing
+                        Free Estimates ($0 to Book) • Window AC & Split AC Specialists
                     </span>
                     <span className="text-slate-300 font-sans text-[11px]">
                         Call Office: <a href="tel:808-488-1111" className="text-cyan-400 font-bold hover:underline">(808) 488-1111</a> or <Link href="/contact" className="text-primary hover:underline font-bold">Book Form</Link>
