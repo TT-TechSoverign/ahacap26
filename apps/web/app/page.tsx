@@ -3,12 +3,15 @@ import Section1HeroHomeV2 from '@/components/Section1HeroHomeV2';
 import { QuickJumpBanner } from '@/components/QuickJumpBanner';
 import { BackToTop } from '@/components/BackToTop';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { HomeFeaturedInventory } from '@/components/HomeFeaturedInventory';
+import { HomePricingMatrix } from '@/components/HomePricingMatrix';
+import { HomeServiceAreasHub } from '@/components/HomeServiceAreasHub';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
     title: 'Affordable Home A/C | Window AC Installation & Split AC Oahu',
-    description: 'Expert window air conditioner installation, split AC installation, and window AC cleaning services across Oahu. Authorized LG, GE, Carrier dealer in Waipahu.',
+    description: 'Expert window air conditioner installation, split AC installation, and window AC cleaning services across Oahu. Authorized LG, GE, Carrier dealer in Waipahu. License CT-36775.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com',
     },
@@ -66,20 +69,117 @@ export default function Homepage() {
                         })
                     }}
                 />
+
+                {/* Google HVACBusiness & LocalBusiness Structured Data Schema */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "HVACBusiness",
+                            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
+                            "name": "Affordable Home A/C",
+                            "legalName": "Affordable Home A/C LLC",
+                            "url": "https://www.affordablehome-ac.com",
+                            "logo": "https://www.affordablehome-ac.com/assets/logo/ahac-logo-bus-500x500xv2.png",
+                            "image": "https://www.affordablehome-ac.com/assets/hero-cards/ahac-hero-background-2.webp",
+                            "telephone": "+1-808-488-1111",
+                            "email": "office@affordablehome-ac.com",
+                            "priceRange": "$$",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "94-474 Ukee St",
+                                "addressLocality": "Waipahu",
+                                "addressRegion": "HI",
+                                "postalCode": "96797",
+                                "addressCountry": "US"
+                            },
+                            "geo": {
+                                "@type": "GeoCoordinates",
+                                "latitude": 21.3868,
+                                "longitude": -158.0092
+                            },
+                            "openingHoursSpecification": [
+                                {
+                                    "@type": "OpeningHoursSpecification",
+                                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                                    "opens": "08:00",
+                                    "closes": "17:00"
+                                },
+                                {
+                                    "@type": "OpeningHoursSpecification",
+                                    "dayOfWeek": "Saturday",
+                                    "opens": "09:00",
+                                    "closes": "14:00"
+                                }
+                            ],
+                            "hasCredential": [
+                                {
+                                    "@type": "EducationalOccupationalCredential",
+                                    "credentialCategory": "State Contractor License",
+                                    "name": "Hawaii Specialty Contractor CT-36775",
+                                    "recognizedBy": {
+                                        "@type": "Organization",
+                                        "name": "State of Hawaii Professional and Vocational Licensing"
+                                    }
+                                }
+                            ],
+                            "aggregateRating": {
+                                "@type": "AggregateRating",
+                                "ratingValue": "4.9",
+                                "reviewCount": "142",
+                                "bestRating": "5",
+                                "worstRating": "1"
+                            },
+                            "areaServed": [
+                                { "@type": "City", "name": "Honolulu" },
+                                { "@type": "City", "name": "Waipahu" },
+                                { "@type": "City", "name": "Kapolei" },
+                                { "@type": "City", "name": "Ewa Beach" },
+                                { "@type": "City", "name": "Pearl City" },
+                                { "@type": "City", "name": "Aiea" },
+                                { "@type": "City", "name": "Mililani" },
+                                { "@type": "City", "name": "Kailua" },
+                                { "@type": "City", "name": "Kaneohe" },
+                                { "@type": "City", "name": "Manoa" },
+                                { "@type": "City", "name": "Kaimuki" },
+                                { "@type": "City", "name": "Hawaii Kai" },
+                                { "@type": "City", "name": "Salt Lake" },
+                                { "@type": "City", "name": "Kunia" }
+                            ]
+                        })
+                    }}
+                />
+
                 <h1 className="sr-only">Affordable Air Conditioning & Ductless Mini Split Installation in Hawaii</h1>
+
+                {/* 1. Aloha Hero & Conversion Anchors */}
                 <Section1HeroHomeV2 />
+
+                {/* 2. Quick Jump Navigation Banner */}
                 <QuickJumpBanner />
 
+                {/* 3. Featured In-Stock Oahu Inventory (Waipahu Warehouse Direct) */}
+                <HomeFeaturedInventory />
+
+                {/* 4. Dual-Pathway Services (Mini-Split vs Window AC) */}
                 <Section2OurServicesV2 />
 
-                {/* Island Social Proof Section */}
-                <div className="border-t border-slate-800/80 bg-[#070b12]/90 backdrop-blur-sm">
+                {/* 5. Official Oahu Transparent Service Pricing Matrix ($0 Estimate, $175 Diagnostic, $275 Teardown) */}
+                <HomePricingMatrix />
+
+                {/* 6. Island Verified Customer Reviews Pavilion */}
+                <div className="border-t border-slate-800/80 bg-[#070b12]/95 backdrop-blur-sm">
                     <ReviewsPavilion 
-                        variant="marquee" 
+                        variant="full" 
                         title="Island Verified Customer Stories"
                         subtitle="Hear how Oahu homeowners beat the humidity with whisper-quiet ductless mini-splits and energy-efficient window ACs."
+                        showFlywheel={true}
                     />
                 </div>
+
+                {/* 7. 22-City Oahu Regional Service Areas Hub */}
+                <HomeServiceAreasHub />
             </main>
             <BackToTop visible={true} />
         </div>
