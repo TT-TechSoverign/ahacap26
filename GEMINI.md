@@ -36,8 +36,8 @@ Every conversation session inherits the knowledge, directives, historical timeli
    - **Window AC Division**: Waipahu warehouse-direct inventory sales ($504 to $1,025), custom jalousie & standard window installation, deep chemical cleaning/overhaul, and clean-vs-replace assessments.
    - **Split AC Division**: Ductless mini-split installation & replacement ($0 Free In-Home Estimate), clinical chemical maintenance/deep flush, diagnostic troubleshooting & repair, and island microclimate sizing calculators.
    - **No Fabricated Flat-Rate Packages**: Zero upfront booking payment barriers; custom transparent quotes by licensed technicians (CT-36775).
-3. **Drop-Cloth Protection & Legal Mandate**:
-   - Technicians must lay industrial drop-cloths on all floors and furnishings.
+3. **Floor Drop-Cloth Protection & Legal Mandate**:
+   - Technicians lay drop cloths on the floor under the unit during service.
    - Strictly prohibit false drywall repair claims or 24/7 unverified promises.
 4. **Hawaii Contractor License CT-36775 Grounding**:
    - Embedded in all JSON-LD schemas, footers, quotes, and emails.

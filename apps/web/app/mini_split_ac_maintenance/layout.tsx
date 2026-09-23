@@ -97,7 +97,7 @@ const miniSplitFaqSchema = {
             "name": "Will the chemical cleaning make a mess or leave chemical fumes in my house?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Our technicians lay down clean, heavy-duty floor drop cloths directly beneath your unit and use precision rinses. All dirty water, mold slurry, and chemical rinse are safely contained and removed from your home with zero water mess on your floors."
+                "text": "No. Our technicians lay clean drop cloths on the floor directly beneath your unit and use precision rinses. All dirty water, mold slurry, and chemical rinse are safely contained and removed from your home with zero water mess on your floors."
             }
         }
     ]

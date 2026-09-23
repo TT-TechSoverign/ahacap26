@@ -327,13 +327,13 @@ export function HomeServicesDivisions() {
                         <div className="space-y-1">
                             <div className="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider">
                                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                                Drop-Cloth Protection Guarantee • Hawaii Contractor CT-36775
+                                Floor Drop-Cloth Protection • Hawaii Contractor CT-36775
                             </div>
                             <h4 className="font-header font-black text-lg sm:text-xl text-white uppercase tracking-tight">
                                 By Appointment First • Free Installation Estimates ($0 to Book)
                             </h4>
                             <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                                Our technicians protect your home by laying industrial drop-cloths on all floors and furnishings during every service call. Zero upfront payment barriers—we evaluate your space first before any work begins.
+                                Our technicians protect your home by laying drop cloths on the floor under the unit during every service call. Zero upfront payment barriers—we evaluate your space first before any work begins.
                             </p>
                         </div>
                     </div>

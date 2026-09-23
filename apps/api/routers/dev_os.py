@@ -251,7 +251,7 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
         "legal_and_compliance": {
             "license_authority": "Hawaii State Contractor License CT-36775",
             "hawaii_get_tax": "4.712% Oahu General Excise Tax (GET) tracked and reconciled on all physical inventory orders",
-            "drop_cloth_mandate": "Technicians strictly use heavy-duty floor drop-cloth protection. Zero promises or claims regarding wall/drywall protection.",
+            "drop_cloth_mandate": "Technicians lay drop cloths on the floor under the unit. Zero promises or claims regarding wall/drywall protection.",
             "zero_guarantee_policy": "No blanket '100% guarantee' statements. Workmanship warrantied under standard CT-36775 terms.",
             "epa_compliance": "Section 608 certified recovery of R-410A / R-32 refrigerants; zero atmospheric venting."
         },

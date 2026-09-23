@@ -172,7 +172,7 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
     - Built `<HomeServicesDivisions />` (`apps/web/components/HomeServicesDivisions.tsx`): Eradicated fabricated flat-rate service packages ($175/$275) and consolidated redundant service sections into two dedicated operational wings:
       - **Window AC Division**: In-stock sales direct from Waipahu warehouse ($504 to $1,025), custom jalousie & standard window installation, deep chemical cleaning/overhaul, and clean-vs-replace assessments.
       - **Split AC Division**: Ductless mini-split installation & replacement ($0 Free In-Home Estimate), clinical chemical maintenance/deep flush, diagnostic troubleshooting & repair, and island microclimate sizing calculators.
-      - Grounded in the **Drop-Cloth Protection Guarantee**, **State License CT-36775**, and **$0 upfront booking**.
+      - Grounded in **Floor Drop-Cloth Protection** (under unit), **State License CT-36775**, and **$0 upfront booking**.
     - Built `<HomeServiceAreasHub />` (`apps/web/components/HomeServiceAreasHub.tsx`): Organizes all 22 localized Oahu city pages into 4 regional island clusters (Metro Honolulu, Leeward & West Oahu, Central Oahu, Windward Oahu), passing internal link equity and assuring homeowners across all neighborhoods.
     - Upgraded `<ReviewsPavilion variant="full" />` on the homepage, presenting the full authentic 142-review pavilion with technician spotlight filters (`Brian`, `Chris`, `Makoa`, `Omar`) and verified neighborhood tags.
     - Injected complete `HVACBusiness` JSON-LD schema into `page.tsx` alongside `WebSite` and Sitelinks SearchBox, embedding CT-36775 license credentials, 4.9★ rating (142 reviews), geo coordinates (21.3868, -158.0092), and 22-city coverage.

@@ -1142,7 +1142,7 @@ async def send_customer_appointment_confirmation(lead):
             <!-- Island Guarantees -->
             <div class="guarantees">
                 <div class="guarantee-item"><strong>★ $0 Free Estimates:</strong> In-home quote across Oahu with zero upfront payment barrier.</div>
-                <div class="guarantee-item"><strong>★ Drop-Cloth Protection:</strong> Technicians lay industrial drop-cloths on all interior floors and furnishings.</div>
+                <div class="guarantee-item"><strong>★ Drop-Cloth Protection:</strong> Technicians lay drop cloths on the floor directly under the unit.</div>
                 <div class="guarantee-item"><strong>★ Hawaii Contractor CT-36775:</strong> Island-grounded, fully licensed, bonded, and insured.</div>
             </div>
 

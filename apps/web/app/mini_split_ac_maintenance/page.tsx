@@ -116,7 +116,7 @@ export default function MiniSplitACMaintenancePage() {
         },
         {
             q: "Will the chemical cleaning make a water mess inside my home?",
-            a: "Zero water mess. Our technicians lay down clean, heavy-duty floor drop cloths directly beneath your unit and use precision rinses. All dirty water and mold slurry are safely contained and removed from your home with zero water mess on your floors."
+            a: "Zero water mess. Our technicians lay down clean drop cloths on the floor directly beneath your unit and use precision rinses. All dirty water and mold slurry are safely contained and removed from your home with zero water mess on your floors."
         }
     ];
 
