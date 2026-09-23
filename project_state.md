@@ -159,13 +159,28 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
     - Established the top Master Oahu AC Filter & Search Suite (`#catalog-filters`) as the single authoritative filter controller across all 16 inventory models with real-time `<5ms` multi-dimensional filtering, instant filter dismissal chips, and Aloha empty state.
     - Passed `compareList` and `onToggleCompare` across all default catalog section grids (`dual_inverter`, `universal_fit`, `base`, `ge`, `casement`), making the floating 3-model side-by-side comparison dock universally functional across the entire storefront.
 
+  - **Mobile Incognito Safeguard & Client Error Boundaries**:
+    - Diagnosed and resolved the fatal client-side exception (`Application error: a client-side exception has occurred`) encountered when accessing the website on mobile devices in Incognito / Private browsing mode (iOS Chrome and Safari).
+    - Root cause: Unshielded `localStorage` / `sessionStorage` access in `CartContext.tsx`, `CheckoutForm.tsx`, and `GTMRouteTracker.tsx` threw a blocking `SecurityError` during React tree mount and hydration when strict storage restrictions were active.
+    - Built `apps/web/lib/safe-storage.ts` featuring a universal, exception-proof storage interface with an in-memory `Map` fallback that silently supports incognito/private browsing mode without throwing.
+    - Wrapped all storage calls and telemetry beacons in try/catch guards across `CartContext.tsx`, `CheckoutForm.tsx`, and `GTMRouteTracker.tsx`.
+    - Deployed custom Next.js Client Error Boundary (`apps/web/app/error.tsx`) and Global Error Boundary (`apps/web/app/global-error.tsx`) with Polynesian dark glassmorphic styling, an Aloha Recovery Card, 1-tap reload button, and direct emergency hotline bridge to `(808) 488-1111`.
+    - Rebuilt `prod-web` on Hostinger VPS (`31.220.53.132`), verified with `chrome-devtools-mcp` mobile emulation (iPhone OS 16.6), confirming 0 console errors, 0 runtime exceptions, and flawless mobile rendering.
+  - **Full Homepage Modernization & Conversion Engine Upgrade**:
+    - Convened the Sovereign Master and all 9 Category Sub-Masters to transform the homepage (`/`) into an authoritative digital flagship for Oahu homeowners.
+    - Built `<HomeFeaturedInventory />` (`apps/web/components/HomeFeaturedInventory.tsx`): Directly showcases 4 Oahu bestseller inverter units (LG 12k Dual Inverter, LG 8k Dual Inverter, LG 6k Bedroom Inverter, GE 10k Wall Sleeve) with Island Sizing Dual Badges (AHAM certified vs Island Calibrated™), $45 Hawaii Energy Rebate badges, real-time Waipahu warehouse stock indicators, specs modal shortcuts, and 1-tap "Add Unit" cart actions.
+    - Built `<HomePricingMatrix />` (`apps/web/components/HomePricingMatrix.tsx`): Establishes upfront trust with the official Oahu service pricing matrix ($0 Free In-Home Estimate, $175 Diagnostic & Basic Service credited towards repair, $275 Deep Shop Teardown & Chemical Flush at Waipahu bench, and $504–$1,025 In-Stock Hardware), backed by the Drop-Cloth Floor Protection Guarantee and Hawaii Contractor License CT-36775.
+    - Built `<HomeServiceAreasHub />` (`apps/web/components/HomeServiceAreasHub.tsx`): Organizes all 22 localized Oahu city pages into 4 regional island clusters (Metro Honolulu, Leeward & West Oahu, Central Oahu, Windward Oahu), passing internal link equity and assuring homeowners across all neighborhoods.
+    - Upgraded `<ReviewsPavilion variant="full" />` on the homepage, presenting the full authentic 142-review pavilion with technician spotlight filters (`Brian`, `Chris`, `Makoa`, `Omar`) and verified neighborhood tags.
+    - Injected complete `HVACBusiness` JSON-LD schema into `page.tsx` alongside `WebSite` and Sitelinks SearchBox, embedding CT-36775 license credentials, 4.9★ rating (142 reviews), geo coordinates (21.3868, -158.0092), and 22-city coverage.
+
 ---
 
 ## 4. Current Status: All Systems Operational
 
 - **Fleet Health**: All 37 specialized agents report `[ACTIVE]` across 9 Sub-Masters.
 - **Deployment Swarm**: 3-stage verification pipeline returns `OVERALL: VERIFIED_CLEAN` with 0 specification drift.
-- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), and `prod-api` (`:8001`) are rebuilt, restarted, and running live with zero-cache headers, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the new Island Reviews Pavilion, the Dual-Action conversion bridge, and full-greenlight GTM/Consent telemetry.
+- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), and `prod-api` (`:8001`) are rebuilt, restarted, and running live with zero-cache headers, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the new Island Reviews Pavilion, the Dual-Action conversion bridge, full-greenlight GTM/Consent telemetry, safe-storage incognito hardening, and the modernized homepage.
 - **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens.
 - **Storefront & Admin Performance**: Next.js production build verified with 57/57 static routes rendered, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, GSC canonical and review schema fixes applied, visible FAQ accordions on all 22 city pages, GTM route change and lead tracking armed, and live reviews hub at `/reviews`.
 
