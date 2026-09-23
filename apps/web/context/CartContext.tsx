@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { CartItem, Product } from '../types/inventory';
 import { isCampaignActive } from '../lib/utils';
+import { safeStorage } from '../lib/safe-storage';
 
 interface CartContextType {
     items: CartItem[];
@@ -24,35 +25,43 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
     const [isOpen, setIsOpen] = useState(false);
 
-    // Capture and persist UTM tracking parameters site-wide
+    // Capture and persist UTM tracking parameters site-wide (Exception-Proof)
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const params = new URLSearchParams(window.location.search);
-            const utmSource = params.get('utm_source');
-            const utmMedium = params.get('utm_medium');
-            const utmCampaign = params.get('utm_campaign');
+        try {
+            if (typeof window !== 'undefined') {
+                const params = new URLSearchParams(window.location.search);
+                const utmSource = params.get('utm_source');
+                const utmMedium = params.get('utm_medium');
+                const utmCampaign = params.get('utm_campaign');
 
-            if (utmSource) sessionStorage.setItem('utm_source', utmSource);
-            if (utmMedium) sessionStorage.setItem('utm_medium', utmMedium);
-            if (utmCampaign) sessionStorage.setItem('utm_campaign', utmCampaign);
-        }
-    }, []);
-
-    // Load from LocalStorage
-    useEffect(() => {
-        const saved = localStorage.getItem('ahac_cart');
-        if (saved) {
-            try {
-                setItems(JSON.parse(saved));
-            } catch (e) {
-                console.error("Failed to parse cart", e);
+                if (utmSource) safeStorage.setItem('utm_source', utmSource, 'session');
+                if (utmMedium) safeStorage.setItem('utm_medium', utmMedium, 'session');
+                if (utmCampaign) safeStorage.setItem('utm_campaign', utmCampaign, 'session');
             }
+        } catch (e) {
+            // Silently ignore in restricted private browsing environments
         }
     }, []);
 
-    // Save to LocalStorage
+    // Load from LocalStorage (Exception-Proof)
     useEffect(() => {
-        localStorage.setItem('ahac_cart', JSON.stringify(items));
+        try {
+            const saved = safeStorage.getItem('ahac_cart', 'local');
+            if (saved) {
+                setItems(JSON.parse(saved));
+            }
+        } catch (e) {
+            console.warn("Storage restricted or failed to parse cart:", e);
+        }
+    }, []);
+
+    // Save to LocalStorage (Exception-Proof)
+    useEffect(() => {
+        try {
+            safeStorage.setItem('ahac_cart', JSON.stringify(items), 'local');
+        } catch (e) {
+            // Silently ignore in restricted private browsing environments
+        }
     }, [items]);
 
     const openCart = () => setIsOpen(true);

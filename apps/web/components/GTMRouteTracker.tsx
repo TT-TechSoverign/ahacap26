@@ -8,22 +8,26 @@ function RouteTrackerContent() {
     const searchParams = useSearchParams();
 
     useEffect(() => {
-        if (typeof window !== 'undefined' && (window as any).dataLayer) {
-            const search = searchParams?.toString();
-            const pagePath = pathname + (search ? `?${search}` : '');
+        try {
+            if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
+                const search = searchParams?.toString();
+                const pagePath = pathname + (search ? `?${search}` : '');
 
-            (window as any).dataLayer.push({
-                event: 'page_view',
-                page_path: pagePath,
-                page_title: document.title,
-            });
-
-            if (typeof (window as any).gtag === 'function') {
-                (window as any).gtag('event', 'page_view', {
+                (window as any).dataLayer.push({
+                    event: 'page_view',
                     page_path: pagePath,
                     page_title: document.title,
                 });
+
+                if (typeof (window as any).gtag === 'function') {
+                    (window as any).gtag('event', 'page_view', {
+                        page_path: pagePath,
+                        page_title: document.title,
+                    });
+                }
             }
+        } catch (e) {
+            // Silently swallow tracking exceptions on strict privacy browsers
         }
     }, [pathname, searchParams]);
 

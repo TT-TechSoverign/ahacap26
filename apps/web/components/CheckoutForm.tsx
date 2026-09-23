@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
+import { safeStorage } from '../lib/safe-storage';
 import { Loader2, Lock } from 'lucide-react';
 
 interface CheckoutFormProps {
@@ -44,9 +45,9 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
             const gaClientId = getCookie('_ga');
             const gaSessionId = getGaSessionCookie();
 
-            const utmSource = sessionStorage.getItem('utm_source');
-            const utmMedium = sessionStorage.getItem('utm_medium');
-            const utmCampaign = sessionStorage.getItem('utm_campaign');
+            const utmSource = safeStorage.getItem('utm_source', 'session');
+            const utmMedium = safeStorage.getItem('utm_medium', 'session');
+            const utmCampaign = safeStorage.getItem('utm_campaign', 'session');
 
             const response = await fetch('/create-checkout-session', {
                 method: 'POST',
