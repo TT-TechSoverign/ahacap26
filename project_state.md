@@ -174,7 +174,7 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
       - **Split AC Division**: Ductless mini-split installation & replacement ($0 Free In-Home Estimate), clinical chemical maintenance/deep flush, diagnostic troubleshooting & repair, and island microclimate sizing calculators.
       - Grounded in **Floor Drop-Cloth Protection** (under unit), **State License CT-36775**, and **$0 upfront booking**.
     - Built `<HomeServiceAreasHub />` (`apps/web/components/HomeServiceAreasHub.tsx`): Organizes all 22 localized Oahu city pages into 4 regional island clusters (Metro Honolulu, Leeward & West Oahu, Central Oahu, Windward Oahu), passing internal link equity and assuring homeowners across all neighborhoods.
-    - Upgraded `<ReviewsPavilion variant="full" />` on the homepage, presenting the full authentic 142-review pavilion with technician spotlight filters (`Brian`, `Chris`, `Makoa`, `Omar`) and verified neighborhood tags.
+    - Upgraded `<ReviewsPavilion variant="featured" limit={6} />` on the homepage: resolved scroll fatigue ("scrolling for days") by converting 142 vertical cards into a sleek horizontal snap-swipe track on mobile (96% height reduction from 36,000px to ~1,200px) and a symmetrical 2x3 grid on desktop, backed by "Explore All 142+ Reviews in Island Pavilion" link to `/reviews` and progressive reveal.
     - Injected complete `HVACBusiness` JSON-LD schema into `page.tsx` alongside `WebSite` and Sitelinks SearchBox, embedding CT-36775 license credentials, 4.9★ rating (142 reviews), geo coordinates (21.3868, -158.0092), and 22-city coverage.
 
 ---
