@@ -167,7 +167,8 @@ export default function Homepage() {
                 {/* 6. Island Verified Customer Reviews Pavilion */}
                 <div className="border-t border-slate-800/80 bg-[#070b12]/95 backdrop-blur-sm">
                     <ReviewsPavilion 
-                        variant="full" 
+                        variant="featured" 
+                        limit={6}
                         title="Island Verified Customer Stories"
                         subtitle="Hear how Oahu homeowners beat the humidity with whisper-quiet ductless mini-splits and energy-efficient window ACs."
                         showFlywheel={true}

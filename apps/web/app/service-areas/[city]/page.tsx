@@ -210,7 +210,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             </span>
                         </summary>
                         <p className="mt-4 text-slate-300 text-sm leading-relaxed border-t border-slate-800/80 pt-4 font-sans">
-                            Yes! We provide full on-site dispatch of licensed technicians for ductless split AC installations, sizing estimates, and mini-split cleaning directly to {cityData.name}. For window AC units, we provide professional full teardown cleaning ($275 flat rate) at our Waipahu warehouse, as well as Oahu flat-rate $50 delivery or free local pickup on new window AC purchases.
+                            Yes! We provide full on-site dispatch of licensed technicians for ductless split AC installations, sizing estimates, and mini-split cleaning directly to {cityData.name}. For window AC units, we provide professional full teardown cleaning at our Waipahu warehouse, as well as Oahu flat-rate $50 delivery or free local pickup on new window AC purchases.
                         </p>
                     </details>
                 </div>

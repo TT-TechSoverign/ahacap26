@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, Suspense } from 'react';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { 
     Star, 
@@ -12,23 +12,24 @@ import {
     Search, 
     ExternalLink, 
     MessageSquareQuote,
-    Filter,
-    ArrowRight,
-    X,
-    UserCheck,
-    ThumbsUp
+    Filter, 
+    ArrowRight, 
+    X, 
+    UserCheck, 
+    ThumbsUp 
 } from 'lucide-react';
 import { Review, ReviewStats, getAllReviews, getReviewStats } from '@/lib/product-reviews';
 import { cn } from '@/lib/utils';
 
 interface ReviewsPavilionProps {
-    variant?: 'full' | 'compact' | 'marquee';
+    variant?: 'full' | 'compact' | 'marquee' | 'featured';
     reviews?: Review[];
     initialFilter?: string;
     cityFilter?: string;
     title?: string;
     subtitle?: string;
     showFlywheel?: boolean;
+    limit?: number;
 }
 
 // Polynesian geometric gradient palettes for authentic avatar initials
@@ -190,7 +191,8 @@ export function ReviewsPavilionContent({
     cityFilter = 'ALL',
     title,
     subtitle,
-    showFlywheel = true
+    showFlywheel = true,
+    limit
 }: ReviewsPavilionProps) {
     const stats: ReviewStats = useMemo(() => getReviewStats(), []);
     const baseReviews: Review[] = useMemo(() => {
@@ -238,6 +240,18 @@ export function ReviewsPavilionContent({
         });
         return Array.from(set).sort();
     }, [baseReviews]);
+
+    // Progressive visibility and featured homepage bounding
+    const isFeatured = variant === 'featured' || (typeof limit === 'number' && limit > 0);
+    const initialVisible = isFeatured ? (limit || 6) : 12;
+    const [visibleCount, setVisibleCount] = useState<number>(initialVisible);
+
+    useEffect(() => {
+        setVisibleCount(initialVisible);
+    }, [selectedService, selectedCity, searchQuery, initialVisible]);
+
+    const displayReviews = filteredReviews.slice(0, visibleCount);
+    const hasMore = visibleCount < filteredReviews.length;
 
     // -------------------------------------------------------------------------
     // VARIANT: MARQUEE (Catalog / Homepage)
@@ -531,16 +545,84 @@ export function ReviewsPavilionContent({
                 )}
             </div>
 
-            {/* Review Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filteredReviews.map(review => (
-                    <ReviewCard
-                        key={review.id}
-                        review={review}
-                        onOpenStory={setActiveStory}
-                    />
-                ))}
-            </div>
+            {/* Review Cards Showcase */}
+            {isFeatured ? (
+                /* FEATURED HOMEPAGE LAYOUT:
+                   - Mobile: Smooth horizontal swipe track (touch-pan-x snap-x snap-mandatory) with peek (w-[85vw] max-w-[340px]).
+                     Takes exactly ONE screen height (~400px), eradicating vertical scroll fatigue!
+                   - Desktop: Symmetrical 2x3 responsive grid (6 cards).
+                */
+                <div className="space-y-6">
+                    <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 overflow-x-auto md:overflow-visible pb-4 pt-1 snap-x snap-mandatory scrollbar-none touch-pan-x -mx-4 px-4 sm:mx-0 sm:px-0">
+                        {displayReviews.map(review => (
+                            <div key={review.id} className="w-[85vw] max-w-[340px] md:w-auto shrink-0 snap-start flex flex-col">
+                                <ReviewCard
+                                    review={review}
+                                    onOpenStory={setActiveStory}
+                                    compact={false}
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Mobile Horizontal Swipe Guidance */}
+                    <div className="flex md:hidden items-center justify-between text-[11px] font-mono text-slate-400 px-1 pt-1">
+                        <span className="flex items-center gap-1.5 text-cyan-400 font-bold">
+                            <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                            ← Swipe sideways for more stories
+                        </span>
+                        <span className="text-slate-400 font-bold">{displayReviews.length} of {filteredReviews.length} shown</span>
+                    </div>
+
+                    {/* Navigation Gateway: View All in Pavilion or Show More */}
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-slate-800/80">
+                        <Link
+                            href="/reviews"
+                            prefetch={false}
+                            className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-header font-black uppercase text-xs sm:text-sm tracking-wider rounded-xl transition-all shadow-[0_0_25px_rgba(0,174,239,0.35)] hover:scale-[1.02] flex items-center justify-center gap-2"
+                        >
+                            <span>Explore All 142+ Reviews in Island Pavilion</span>
+                            <ArrowRight className="size-4 shrink-0" />
+                        </Link>
+
+                        {hasMore && (
+                            <button
+                                type="button"
+                                onClick={() => setVisibleCount(prev => prev + 6)}
+                                className="w-full sm:w-auto px-6 py-3.5 bg-slate-900 hover:bg-slate-800 border border-white/10 hover:border-cyan-500/40 text-slate-300 hover:text-white font-header font-bold uppercase text-xs sm:text-sm tracking-wider rounded-xl transition-all flex items-center justify-center gap-2"
+                            >
+                                <span>Show More Reviews (+6)</span>
+                            </button>
+                        )}
+                    </div>
+                </div>
+            ) : (
+                /* DEDICATED /reviews PAGE GRID WITH PROGRESSIVE REVEAL */
+                <div className="space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {displayReviews.map(review => (
+                            <ReviewCard
+                                key={review.id}
+                                review={review}
+                                onOpenStory={setActiveStory}
+                            />
+                        ))}
+                    </div>
+
+                    {hasMore && (
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 border-t border-slate-800/80">
+                            <button
+                                type="button"
+                                onClick={() => setVisibleCount(prev => prev + 12)}
+                                className="w-full sm:w-auto px-8 py-3.5 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-500/60 text-cyan-300 hover:text-white font-header font-bold uppercase text-xs sm:text-sm tracking-wider rounded-xl transition-all flex items-center justify-center gap-2"
+                            >
+                                <span>Load More Reviews ({filteredReviews.length - displayReviews.length} remaining)</span>
+                                <ArrowRight className="size-4 shrink-0" />
+                            </button>
+                        </div>
+                    )}
+                </div>
+            )}
 
             {filteredReviews.length === 0 && (
                 <div className="text-center py-16 bg-slate-900/50 rounded-2xl border border-slate-800 space-y-3">
