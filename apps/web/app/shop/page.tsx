@@ -493,7 +493,7 @@ function ShopPageContent() {
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
 
-            <main className="max-w-[1600px] mx-auto w-full px-4 md:px-12 pt-[70px] md:pt-[155px] pb-36 md:pb-20 flex-grow">
+            <main className="max-w-[1600px] mx-auto w-full px-4 md:px-12 pt-[70px] md:pt-[190px] pb-36 md:pb-20 flex-grow">
                 {/* Compact Shop Hero & Micro-Trust Bar */}
                 <div className="flex flex-col items-center text-center gap-1.5 md:gap-2 mb-4 border-b border-white/5 pb-3 md:pb-4 relative">
                     <div className="absolute inset-0 bg-primary/5 blur-[100px] rounded-full -z-10 opacity-25"></div>
