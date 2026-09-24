@@ -6,10 +6,10 @@ import { cn } from '@/lib/utils';
 import { ArrowUp } from 'lucide-react';
 
 interface BackToTopProps {
-    visible: boolean;
+    visible?: boolean;
 }
 
-export function BackToTop({ visible }: BackToTopProps) {
+export function BackToTop({ visible = true }: BackToTopProps = {}) {
     const pathname = usePathname();
     const [isScrollVisible, setIsScrollVisible] = useState(false);
 

@@ -45,8 +45,10 @@ import {
     Maximize2,
     Filter,
     AlertTriangle,
-    Clock
+    Clock,
+    Minus
 } from 'lucide-react';
+import { safeStorage } from '@/lib/safe-storage';
 
 const TabIconMap = {
     inventory: Package,
@@ -146,7 +148,7 @@ export default function AdminPage() {
     const [leadUrgencyFilter, setLeadUrgencyFilter] = useState<string>('ALL');
 
     const adminFetch = useCallback(async (url: string, options: RequestInit = {}) => {
-        const token = typeof window !== 'undefined' ? sessionStorage.getItem('admin_token') : null;
+        const token = safeStorage.getItem('admin_token', 'session');
         const headers = {
             'Content-Type': 'application/json',
             ...(token ? { 'Authorization': token } : {}),
@@ -155,7 +157,7 @@ export default function AdminPage() {
         try {
             const res = await fetch(url, { ...options, headers });
             if (res.status === 401) {
-                sessionStorage.removeItem('admin_token');
+                safeStorage.removeItem('admin_token', 'session');
                 setIsAuthenticated(false);
             }
             return res;
@@ -178,7 +180,7 @@ export default function AdminPage() {
             if (res.ok) {
                 const data = await res.json();
                 if (data.token) {
-                    sessionStorage.setItem('admin_token', data.token);
+                    safeStorage.setItem('admin_token', data.token, 'session');
                 }
                 setIsAuthenticated(true);
                 setError('');
@@ -196,13 +198,13 @@ export default function AdminPage() {
         try {
             await fetch('/api/v1/admin/logout', { method: 'POST' });
         } catch (err) {}
-        sessionStorage.removeItem('admin_token');
+        safeStorage.removeItem('admin_token', 'session');
         setIsAuthenticated(false);
     };
 
     // Auto-check session on mount
     useEffect(() => {
-        const token = sessionStorage.getItem('admin_token');
+        const token = safeStorage.getItem('admin_token', 'session');
         if (token) {
             setIsAuthenticated(true);
         }
@@ -274,6 +276,133 @@ export default function AdminPage() {
             if (res.ok) fetchProducts();
         } catch (err) {
             console.error('Delete failed', err);
+        }
+    };
+
+    // Quick Stock Update (Frictionless 1-tap stock adjuster for CEO on mobile and desktop)
+    const [updatingStockId, setUpdatingStockId] = useState<number | null>(null);
+
+    const handleQuickStockUpdate = async (productId: number, newStock: number) => {
+        const validStock = Math.max(0, Math.floor(newStock));
+        setUpdatingStockId(productId);
+        
+        // Optimistic UI update
+        setProducts(prev => prev.map(p => p.id === productId ? { ...p, stock: validStock } : p));
+        
+        try {
+            const res = await adminFetch(`/api/v1/products/${productId}`, {
+                method: 'PUT',
+                body: JSON.stringify({ stock: validStock })
+            });
+            if (!res.ok) {
+                console.error('Failed to update stock on server');
+                fetchProducts();
+            }
+        } catch (err) {
+            console.error('Stock update error:', err);
+            fetchProducts();
+        } finally {
+            setUpdatingStockId(null);
+        }
+    };
+
+    // Filtered Collections
+    const filteredProducts = useMemo(() => {
+        return products.filter(product => {
+            if (inventoryCategory !== 'ALL') {
+                const matchesCat = product.subcategory === inventoryCategory || product.category === inventoryCategory;
+                if (!matchesCat) return false;
+            }
+            if (inventorySearch.trim()) {
+                const q = inventorySearch.toLowerCase();
+                const nameMatch = product.name?.toLowerCase().includes(q);
+                const btuMatch = product.btu?.toString().includes(q);
+                const idMatch = product.id?.toString().includes(q);
+                const specMatch = product.key_spec?.toLowerCase().includes(q) || product.performance_specs?.toLowerCase().includes(q);
+                const coverageMatch = product.coverage?.toLowerCase().includes(q) || product.coverage_aham?.toLowerCase().includes(q) || product.coverage_oahu?.toLowerCase().includes(q);
+                return !!(nameMatch || btuMatch || idMatch || specMatch || coverageMatch);
+            }
+            return true;
+        });
+    }, [products, inventoryCategory, inventorySearch]);
+
+    const filteredOrders = useMemo(() => {
+        return orders.filter(order => {
+            if (orderStatusFilter !== 'ALL') {
+                if (order.status !== orderStatusFilter) return false;
+            }
+            if (orderSearch.trim()) {
+                const q = orderSearch.toLowerCase();
+                const idMatch = order.id?.toLowerCase().includes(q);
+                const nameMatch = order.customer_name?.toLowerCase().includes(q);
+                const emailMatch = order.customer_email?.toLowerCase().includes(q);
+                const phoneMatch = order.customer_phone?.toLowerCase().includes(q);
+                return !!(idMatch || nameMatch || emailMatch || phoneMatch);
+            }
+            return true;
+        });
+    }, [orders, orderStatusFilter, orderSearch]);
+
+    const filteredLeads = useMemo(() => {
+        return leads.filter(lead => {
+            if (leadUrgencyFilter === 'ASAP' && lead.urgency !== 'ASAP') {
+                return false;
+            }
+            if (leadStatusFilter !== 'ALL' && lead.status !== leadStatusFilter) {
+                return false;
+            }
+            if (leadSearch.trim()) {
+                const q = leadSearch.toLowerCase();
+                const nameMatch = `${lead.first_name || ''} ${lead.last_name || ''}`.toLowerCase().includes(q);
+                const emailMatch = lead.email?.toLowerCase().includes(q);
+                const phoneMatch = lead.phone?.toLowerCase().includes(q);
+                const cityMatch = lead.city?.toLowerCase().includes(q);
+                const serviceMatch = lead.service_type?.toLowerCase().includes(q);
+                const notesMatch = lead.notes?.toLowerCase().includes(q);
+                return !!(nameMatch || emailMatch || phoneMatch || cityMatch || serviceMatch || notesMatch);
+            }
+            return true;
+        });
+    }, [leads, leadStatusFilter, leadUrgencyFilter, leadSearch]);
+
+    const handleReconcileStripe = async () => {
+        setIsReconciling(true);
+        setReconcileMessage('');
+        try {
+            const res = await adminFetch('/api/v1/admin/orders/reconcile', { method: 'POST' });
+            if (res.ok) {
+                const data = await res.json().catch(() => ({}));
+                setReconcileMessage(data.message || 'Stripe reconciliation completed successfully.');
+                fetchOrders();
+            } else {
+                setReconcileMessage('Reconciliation completed with status: ' + res.status);
+            }
+        } catch (err) {
+            console.error('Reconciliation error:', err);
+            setReconcileMessage('Failed to connect to reconciliation service.');
+        } finally {
+            setIsReconciling(false);
+        }
+    };
+
+    const handleExportOrdersCsv = async () => {
+        try {
+            const token = safeStorage.getItem('admin_token', 'session');
+            const headers: HeadersInit = token ? { 'Authorization': token } : {};
+            const res = await fetch('/api/v1/admin/orders/export-csv', { headers });
+            if (!res.ok) throw new Error('Failed to export CSV');
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ahac_orders_${new Date().toISOString().slice(0, 10)}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (err) {
+            console.error('Export CSV error:', err);
+            alert('Failed to export orders CSV.');
         }
     };
 
@@ -429,7 +558,7 @@ export default function AdminPage() {
                             </div>
                             <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
                                 <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.inventory.value}</p>
-                                <p className="text-3xl text-primary font-header font-bold">${products.reduce((acc, p) => acc + (p.price * p.stock), 0).toLocaleString()}</p>
+                                <p className="text-3xl text-primary font-header font-bold">${products.reduce((acc, p) => acc + ((Number(p.price) || 0) * (Number(p.stock) || 0)), 0).toLocaleString()}</p>
                             </div>
                         </>
                     )}
@@ -441,7 +570,7 @@ export default function AdminPage() {
                             </div>
                             <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
                                 <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.orders.revenue}</p>
-                                <p className="text-3xl text-emerald-500 font-header font-bold">${orders.reduce((acc, o) => acc + (o.total_cents / 100), 0).toLocaleString()}</p>
+                                <p className="text-3xl text-emerald-500 font-header font-bold">${orders.reduce((acc, o) => acc + ((Number(o.total_cents) || 0) / 100), 0).toLocaleString()}</p>
                             </div>
                         </>
                     )}
@@ -488,7 +617,7 @@ export default function AdminPage() {
                                         </div>
                                         <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
                                             {['ALL', 'dual_inverter', 'universal_fit', 'base', 'ge', 'casement'].map(cat => (
-                                                <button
+                                                 <button
                                                     key={cat}
                                                     type="button"
                                                     onClick={() => setInventoryCategory(cat)}
@@ -548,18 +677,40 @@ export default function AdminPage() {
                                                         </span>
                                                     </td>
                                                     <td className="px-6 py-5 text-right font-header font-bold text-base text-white">
-                                                        ${product.price.toFixed(2)}
+                                                        ${(Number(product.price) || 0).toFixed(2)}
                                                         {product.promo_price ? (
                                                             <div className="text-[10px] font-mono text-cyan-400 font-normal">
-                                                                Promo: ${product.promo_price.toFixed(2)}
+                                                                Promo: ${(Number(product.promo_price) || 0).toFixed(2)}
                                                             </div>
                                                         ) : null}
                                                     </td>
                                                     <td className="px-6 py-5 text-center">
-                                                        <div className="flex flex-col items-center gap-1">
-                                                            <div className={`text-sm font-bold ${product.stock < 5 ? 'text-red-500' : 'text-slate-400'}`}>{product.stock}</div>
-                                                            <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${product.stock > 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'}`}>
-                                                                {product.stock > 0 ? 'In Stock' : 'Out Of Stock'}
+                                                        <div className="flex flex-col items-center gap-1.5">
+                                                            <div className="flex items-center gap-1.5">
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => handleQuickStockUpdate(product.id, Math.max(0, (Number(product.stock) || 0) - 1))}
+                                                                    disabled={updatingStockId === product.id || (Number(product.stock) || 0) <= 0}
+                                                                    className="size-7 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white flex items-center justify-center font-bold text-xs disabled:opacity-30 border border-white/5 transition-all"
+                                                                    title="Decrease stock by 1"
+                                                                >
+                                                                    <Minus className="size-3" />
+                                                                </button>
+                                                                <span className={`text-sm font-bold min-w-[28px] text-center ${(Number(product.stock) || 0) < 5 ? 'text-red-500' : 'text-slate-300'}`}>
+                                                                    {updatingStockId === product.id ? '...' : (Number(product.stock) || 0)}
+                                                                </span>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => handleQuickStockUpdate(product.id, (Number(product.stock) || 0) + 1)}
+                                                                    disabled={updatingStockId === product.id}
+                                                                    className="size-7 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white flex items-center justify-center font-bold text-xs disabled:opacity-30 border border-white/5 transition-all"
+                                                                    title="Increase stock by 1"
+                                                                >
+                                                                    <Plus className="size-3" />
+                                                                </button>
+                                                            </div>
+                                                            <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${(Number(product.stock) || 0) > 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'}`}>
+                                                                {(Number(product.stock) || 0) > 0 ? 'In Stock' : 'Out Of Stock'}
                                                             </span>
                                                         </div>
                                                     </td>
@@ -595,20 +746,43 @@ export default function AdminPage() {
                                                     <div className="flex-1 min-w-0">
                                                         <div className="text-white font-bold text-xs uppercase truncate">{product.name}</div>
                                                         <div className="text-primary font-header font-bold text-sm mt-0.5">
-                                                            ${product.price.toFixed(2)}
+                                                            ${(Number(product.price) || 0).toFixed(2)}
                                                         </div>
-                                                        <div className="flex items-center gap-2 mt-1">
-                                                            <span className={`text-[8px] font-black uppercase px-2 py-0.5 rounded-full ${product.stock > 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500'}`}>
-                                                                {product.stock} In Stock
+                                                        <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                                                            <div className="flex items-center gap-1 bg-black/60 border border-white/10 rounded-lg p-0.5">
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => handleQuickStockUpdate(product.id, Math.max(0, (Number(product.stock) || 0) - 1))}
+                                                                    disabled={updatingStockId === product.id || (Number(product.stock) || 0) <= 0}
+                                                                    className="size-7 rounded bg-white/5 text-slate-300 flex items-center justify-center text-xs font-bold disabled:opacity-30 active:bg-white/20"
+                                                                    title="Decrease stock by 1"
+                                                                >
+                                                                    <Minus className="size-3" />
+                                                                </button>
+                                                                <span className={`text-xs font-bold font-mono px-1.5 min-w-[24px] text-center ${(Number(product.stock) || 0) < 5 ? 'text-red-400' : 'text-white'}`}>
+                                                                    {updatingStockId === product.id ? '..' : (Number(product.stock) || 0)}
+                                                                </span>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => handleQuickStockUpdate(product.id, (Number(product.stock) || 0) + 1)}
+                                                                    disabled={updatingStockId === product.id}
+                                                                    className="size-7 rounded bg-white/5 text-slate-300 flex items-center justify-center text-xs font-bold disabled:opacity-30 active:bg-white/20"
+                                                                    title="Increase stock by 1"
+                                                                >
+                                                                    <Plus className="size-3" />
+                                                                </button>
+                                                            </div>
+                                                            <span className={`text-[8px] font-black uppercase px-2 py-1 rounded-full ${(Number(product.stock) || 0) > 0 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'}`}>
+                                                                {(Number(product.stock) || 0) > 0 ? `${Number(product.stock) || 0} In Stock` : 'Out Of Stock'}
                                                             </span>
                                                             <span className="text-[9px] font-mono text-slate-500">ID: {product.id}</span>
                                                         </div>
                                                     </div>
                                                     <div className="flex items-center gap-1.5 shrink-0">
-                                                        <button onClick={() => setEditingProduct(product)} className="size-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center">
+                                                        <button onClick={() => setEditingProduct(product)} className="size-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center" title="Edit Product Specs">
                                                             <Edit className="size-3.5" />
                                                         </button>
-                                                        <button onClick={() => handleDelete(product.id)} className="size-8 bg-red-500/10 text-red-500 rounded-lg flex items-center justify-center">
+                                                        <button onClick={() => handleDelete(product.id)} className="size-8 bg-red-500/10 text-red-500 rounded-lg flex items-center justify-center" title="Delete Product">
                                                             <Trash2 className="size-3.5" />
                                                         </button>
                                                     </div>
@@ -1512,10 +1686,10 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
         const payload = {
             ...formData,
             btu: formData.btu ? Number(formData.btu) : null,
-            stock: Number(formData.stock) || 0,
-            price: Math.round(parseFloat(formData.price || '0')),
-            promo_price: formData.promo_price ? Math.round(parseFloat(formData.promo_price)) : null,
-            discount_percent: formData.discount_percent ? parseInt(formData.discount_percent) : null
+            stock: Math.max(0, Number(formData.stock) || 0),
+            price: Math.round(parseFloat(String(formData.price || '0'))),
+            promo_price: formData.promo_price ? Math.round(parseFloat(String(formData.promo_price))) : null,
+            discount_percent: formData.discount_percent ? parseInt(String(formData.discount_percent), 10) : null
         };
 
         try {

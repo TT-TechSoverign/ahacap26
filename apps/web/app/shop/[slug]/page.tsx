@@ -767,7 +767,7 @@ export default function ProductDetailPage() {
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Dehumidification</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dehumidification || specs?.dehumidification || '3.8 Pts/Hr'}</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dehumidification || (specs as any)?.dehumidification || '3.8 Pts/Hr'}</span>
                                 </div>
                             </div>
                         </div>

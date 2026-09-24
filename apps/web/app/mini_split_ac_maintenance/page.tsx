@@ -556,7 +556,7 @@ export default function MiniSplitACMaintenancePage() {
                                     href={`/contact?service=Mini+Split+Maintenance&notes=${encodeURIComponent(`Diagnostic: ${selectedSymptoms.join(', ')} (Severity: ${totalSeverity})`)}`}
                                     onClick={() => trackFunnelEvent('symptom_diagnosis_book_click', {
                                         symptoms: selectedSymptoms,
-                                        severity: totalSeverity,
+                                        severity: String(totalSeverity),
                                         recommendation: totalSeverity > 4 ? 'teardown' : 'basic'
                                     })}
                                     className="w-full py-3.5 px-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2"
