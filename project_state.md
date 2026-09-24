@@ -176,6 +176,26 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
     - Built `<HomeServiceAreasHub />` (`apps/web/components/HomeServiceAreasHub.tsx`): Organizes all 22 localized Oahu city pages into 4 regional island clusters (Metro Honolulu, Leeward & West Oahu, Central Oahu, Windward Oahu), passing internal link equity and assuring homeowners across all neighborhoods.
     - Upgraded `<ReviewsPavilion variant="featured" limit={6} />` on the homepage: resolved scroll fatigue ("scrolling for days") by converting 142 vertical cards into a sleek horizontal snap-swipe track on mobile (96% height reduction from 36,000px to ~1,200px) and a symmetrical 2x3 grid on desktop, backed by "Explore All 142+ Reviews in Island Pavilion" link to `/reviews` and progressive reveal.
     - Injected complete `HVACBusiness` JSON-LD schema into `page.tsx` alongside `WebSite` and Sitelinks SearchBox, embedding CT-36775 license credentials, 4.9★ rating (142 reviews), geo coordinates (21.3868, -158.0092), and 22-city coverage.
+  - **CEO Admin Mobile Stock Update Hardening & 1-Tap Quick Steppers (`/admin`)**:
+    - Diagnosed and resolved the fatal client-side error boundary crash (`CONNECTION REFRESH NEEDED`) encountered by the CEO when attempting to view or update unit inventory stock on mobile devices.
+    - Root cause: Missing/undeclared variables and handlers in `apps/web/app/admin/page.tsx` (`filteredProducts`, `filteredOrders`, `filteredLeads`, `handleReconcileStripe`, and `handleExportOrdersCsv`) that evaluated immediately upon authenticated session state initialization, throwing `ReferenceError: filteredProducts is not defined`.
+    - Hardened session token persistence across private/incognito mobile browsers using `safeStorage` (session scope with memory fallback).
+    - Designed and implemented 1-tap quick stock steppers (`+` / `-`) on both mobile card views and desktop tables, allowing the CEO to adjust unit inventory with single-tap optimistic updates and automatic `PUT /api/v1/products/{id}` partial backend synchronization.
+    - Verified all 10 specification fields in `ProductModal` with exact float price parsing, sanitized inputs, and responsive mobile form inputs.
+    - Converted external `/dev-os` navigation link to standard anchor tag with `rel="noopener noreferrer"` to prevent Next.js client-side prefetching of external proxy routes.
+  - **Shop Page Elevation & Compact Toolbar Architecture (`/shop`)**:
+    - Accommodated CEO directive: elevated AC units directly to the top above the fold on mobile and desktop viewports, removing the ~2,250px vertical roadblock of promotional banners and the 4-tier open filter suite.
+    - Replaced the 4 bulky delivery cards with a sleek, 1-line Micro-Trust Strip (`[🏬 Waipahu Warehouse Pickup] • [🚚 $50 Flat Island Delivery] • [⚡ $45 Hawaii Energy Rebates] • [🛡️ 1-Yr Warranty & CT-36775]`).
+    - Tightened top hero vertical padding from `pt-[85px] md:pt-[165px]` down to `pt-[70px] md:pt-[105px]`.
+    - Engineered compact 2-row Master Toolbar:
+      - Row 1: Horizontal scrolling Category Tabs (`All Units 16`, `LG DUAL Inverter 7`, `Frigidaire Standard 3`, `Slider / Casement 2`, `GE Inverter 2`, `Universal Fit 3`) + `Sizing Wizard ↗` shortcut link.
+      - Row 2: Search input + In-Stock Only toggle + Sort dropdown (`Featured`, `Price`, `BTU`, `CEER`) + collapsible `Filters` button with active count badge.
+      - Collapsible Drawer: Room Sizer, Wall Plug Voltage (115V/230V), Window Fitment, and Popular quick chips collapse to 0px height by default, expanding smoothly on demand.
+    - Relocated advisory tools into the natural scrolling flow:
+      - `"sizing-banner"` positioned in `sectionOrder` immediately after the 7 LG Dual Inverter models.
+      - `"appointment-banner"` positioned right before the logistics section and at the base of filtered search results.
+      - 4 full Delivery & Trust cards relocated into the Logistics section directly above `LogisticsSection`.
+    - Achieved an 87% vertical height reduction prior to unit #1, ensuring product inventory is immediately visible above the fold on both desktop and mobile without sacrificing search, sizing, or filter utility.
 
 ---
 

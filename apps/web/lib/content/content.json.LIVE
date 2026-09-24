@@ -365,16 +365,14 @@
         },
         "sections": [
             "dual_inverter",
+            "sizing-banner",
             "universal_fit",
             "base",
             "ge",
             "casement",
-            "sizing-guide",
+            "appointment-banner",
             "logistics",
-            "rebate",
-            "brand-spotlight",
-            "educational-benefits",
-            "faq"
+            "sizing-guide"
         ],
         "dual_inverter": {
             "title": "DUAL INVERTER TECHNOLOGY",

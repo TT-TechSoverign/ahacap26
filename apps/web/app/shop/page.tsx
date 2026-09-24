@@ -21,7 +21,7 @@ import {
     AlertTriangle, Warehouse, Truck, Ban, Leaf, Wind, ArrowUpRight, Eye, Check, X,
     Maximize2, Snowflake, Cpu, LayoutGrid, ShoppingCart, FileText, Mail, Droplets, Sun, Gauge,
     Plug, Wrench, Sparkles, RotateCcw, Phone, Calendar, Search, SlidersHorizontal, ArrowUpDown,
-    Layers, Filter
+    Layers, Filter, ShieldCheck, ChevronDown
 } from 'lucide-react';
 
 const LucideIconMap: Record<string, React.ComponentType<any>> = {
@@ -70,6 +70,7 @@ function ShopPageContent() {
     const [selectedMount, setSelectedMount] = useState<'ALL' | 'HUNG' | 'SLIDER' | 'SLEEVE'>('ALL');
     const [inStockOnly, setInStockOnly] = useState<boolean>(false);
     const [sortOption, setSortOption] = useState<'featured' | 'price_asc' | 'price_desc' | 'btu_asc' | 'btu_desc' | 'ceer'>('featured');
+    const [isMoreFiltersOpen, setIsMoreFiltersOpen] = useState<boolean>(false);
 
     // Comparison drawer state
     const [compareList, setCompareList] = useState<Product[]>([]);
@@ -96,7 +97,10 @@ function ShopPageContent() {
         setSelectedMount('ALL');
         setInStockOnly(false);
         setSortOption('featured');
+        setIsMoreFiltersOpen(false);
     };
+
+    const activeSecondaryFilterCount = (selectedCapacity !== 'ALL' ? 1 : 0) + (selectedVoltage !== 'ALL' ? 1 : 0) + (selectedMount !== 'ALL' ? 1 : 0);
 
     const isFiltered = Boolean(
         searchQuery.trim() ||
@@ -188,9 +192,11 @@ function ShopPageContent() {
         { id: 'universal_fit', label: 'Universal Fit (Sleeve)', count: products.filter(p => p.subcategory === 'universal_fit').length },
     ];
 
-    const sectionOrder = content?.shop?.sections || [
-        "dual_inverter", "universal_fit", "base", "ge", "casement", "logistics", "sizing-guide"
-    ];
+    const sectionOrder = (content?.shop?.sections && content.shop.sections.includes("sizing-banner"))
+        ? content.shop.sections
+        : [
+            "dual_inverter", "sizing-banner", "universal_fit", "base", "ge", "casement", "appointment-banner", "logistics", "sizing-guide"
+        ];
 
     const sectionMap: Record<string, React.ReactNode> = {
         "dual_inverter": (
@@ -241,6 +247,37 @@ function ShopPageContent() {
                 />
             </div>
         ),
+
+        "sizing-banner": (
+            <div id="sizing-banner" className="relative my-8">
+                <div className="bg-[#0b1120]/60 border border-primary/20 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden backdrop-blur-md shadow-lg shadow-primary/5 group">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none z-0" />
+                    <div className="absolute top-0 left-0 w-12 h-[2px] bg-gradient-to-r from-primary to-transparent opacity-50 group-hover:w-24 transition-all duration-500"></div>
+
+                    <div className="space-y-2 relative z-10 text-center md:text-left flex-1">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-[9px] font-mono uppercase tracking-widest">
+                            <span className="relative flex h-1.5 w-1.5">
+                                <span className="animate-ping absolute h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></span>
+                            </span>
+                            Calibrated Oahu Sizing Matrix
+                        </div>
+                        <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">Not Sure What AC Size You Need?</h3>
+                        <p className="font-sans text-xs text-slate-400 max-w-xl">
+                            Skip the guesswork. Run our interactive, step-by-step sizing wizard calibrated for Hawaii humidity and Oahu micro-climates. Zero typing required.
+                        </p>
+                    </div>
+
+                    <Link 
+                        href="/sizing"
+                        className="w-full md:w-auto px-8 py-3.5 bg-primary hover:bg-primary/95 text-black font-black uppercase text-[10px] tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.2)] hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] hover:scale-[1.02] flex items-center justify-center gap-2 shrink-0 group active:scale-98 relative z-10"
+                    >
+                        Launch Sizing Wizard <ArrowUpRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
+                </div>
+            </div>
+        ),
+
         "universal_fit": (
             <div id="universal_fit" className="relative space-y-12">
                 <SectionHeader
@@ -308,8 +345,44 @@ function ShopPageContent() {
             </div>
         ),
 
+        "appointment-banner": (
+            <div id="appointment-banner" className="relative my-8">
+                <div className="bg-gradient-to-r from-slate-900 via-primary/10 to-slate-900 border border-primary/30 rounded-3xl p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_30px_rgba(0,174,239,0.1)]">
+                    <div className="space-y-2 text-center lg:text-left flex-1">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            By Appointment First • Free Installation & Replacement Estimates
+                        </div>
+                        <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">
+                            Need Professional Sizing or Installation Advice?
+                        </h3>
+                        <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+                            It is <strong className="text-white">zero cost to book an appointment for estimates</strong> on new or replacement mini split and window AC installations! Call our office directly at <a href="tel:808-488-1111" className="text-cyan-300 font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-cyan-300 font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the appointment form.
+                        </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
+                        <a 
+                            href="tel:808-488-1111"
+                            className="w-full sm:w-auto px-6 py-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] hover:scale-[1.02] flex items-center justify-center gap-2"
+                        >
+                            <Phone className="size-4 shrink-0" />
+                            <span>Call (808) 488-1111</span>
+                        </a>
+                        <Link 
+                            href="/contact"
+                            className="w-full sm:w-auto px-6 py-4 bg-slate-800 hover:bg-slate-700 border border-white/10 text-white font-header font-bold uppercase text-xs tracking-wider rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+                        >
+                            <Calendar className="size-4 text-cyan-400 shrink-0" />
+                            <span>Book Appt Form</span>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        ),
+
         "logistics": (
-            <div id="logistics_container" className="space-y-4">
+            <div id="logistics_container" className="space-y-6">
                 <SectionHeader
                     contentKey="shop.logistics"
                     icon="local_shipping"
@@ -327,6 +400,50 @@ function ShopPageContent() {
                         </div>
                     }
                 />
+
+                {/* 4 Trust & Service Delivery Cards */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
+                        <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                            <Warehouse className="size-5 text-primary" />
+                        </div>
+                        <div className="text-left">
+                            <div className="text-white font-header font-black text-xs uppercase tracking-wider">Waipahu Pickup</div>
+                            <div className="text-slate-400 text-[10px] leading-tight">By Appointment (Leoleo St)</div>
+                        </div>
+                    </div>
+
+                    <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
+                        <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0">
+                            <Truck className="size-5 text-cyan-400" />
+                        </div>
+                        <div className="text-left">
+                            <div className="text-white font-header font-black text-xs uppercase tracking-wider">$50 Flat Delivery</div>
+                            <div className="text-slate-400 text-[10px] leading-tight">Island-Wide Direct to Door</div>
+                        </div>
+                    </div>
+
+                    <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
+                            <Leaf className="size-5 text-emerald-400" />
+                        </div>
+                        <div className="text-left">
+                            <div className="text-white font-header font-black text-xs uppercase tracking-wider">$45 Cash Rebate</div>
+                            <div className="text-slate-400 text-[10px] leading-tight">Hawaii Energy Form Included</div>
+                        </div>
+                    </div>
+
+                    <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
+                        <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0">
+                            <Wrench className="size-5 text-amber-400" />
+                        </div>
+                        <div className="text-left">
+                            <div className="text-white font-header font-black text-xs uppercase tracking-wider">Zero Upfront Fee</div>
+                            <div className="text-slate-400 text-[10px] leading-tight">Free Installation Estimates</div>
+                        </div>
+                    </div>
+                </div>
+
                 <LogisticsSection />
             </div>
         ),
@@ -376,22 +493,20 @@ function ShopPageContent() {
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
 
-            <main className="max-w-[1600px] mx-auto w-full px-4 md:px-12 pt-[85px] md:pt-[165px] pb-36 md:pb-20 flex-grow">
-                {/* Hero Branding Section (Centered Vertical Axis) */}
-                <div className="flex flex-col items-center text-center gap-2 md:gap-4 mb-6 md:mb-8 border-b border-white/5 pb-6 md:pb-8 relative">
-                    <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full -z-10 opacity-30"></div>
-                    <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
+            <main className="max-w-[1600px] mx-auto w-full px-4 md:px-12 pt-[70px] md:pt-[105px] pb-36 md:pb-20 flex-grow">
+                {/* Compact Shop Hero & Micro-Trust Bar */}
+                <div className="flex flex-col items-center text-center gap-1.5 md:gap-2 mb-4 border-b border-white/5 pb-3 md:pb-4 relative">
+                    <div className="absolute inset-0 bg-primary/5 blur-[100px] rounded-full -z-10 opacity-25"></div>
+                    <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
 
-                    <div className="space-y-2 w-full max-w-7xl mx-auto flex flex-col items-center">
-
-                        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-header font-black leading-[0.9] tracking-tighter uppercase px-4 neon-glow">
+                    <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-header font-black leading-tight tracking-tight uppercase px-4 neon-glow">
                             <span className="text-white">
                                 <EditableText contentKey="shop.hero.title_word1" />
                             </span>{" "}
                             <span className="text-primary">
                                 <EditableText contentKey="shop.hero.title_word2" />
-                            </span>
-                            <br />
+                            </span>{" "}
                             <span className="text-primary">
                                 <EditableText contentKey="shop.hero.title_word3" />
                             </span>{" "}
@@ -399,223 +514,49 @@ function ShopPageContent() {
                                 <EditableText contentKey="shop.hero.title_word4" />
                             </span>
                         </h1>
-                        {/* Only render description if it exists (allows full removal via JSON) */}
-                        {!!content?.shop?.hero?.description && (
-                            <p className="text-slate-400 max-w-2xl mx-auto font-medium tracking-wide text-[10px] md:text-sm leading-relaxed uppercase [word-spacing:0.15em] opacity-80 px-4">
-                                <EditableText contentKey="shop.hero.description" />
-                            </p>
-                        )}
-                    </div>
-                </div>
 
-                {/* Island Trust & Service Delivery Bar */}
-                <div className="max-w-7xl mx-auto px-4 mt-6 mb-2">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                        <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
-                            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                                <Warehouse className="size-5 text-primary" />
-                            </div>
-                            <div className="text-left">
-                                <div className="text-white font-header font-black text-xs uppercase tracking-wider">Waipahu Pickup</div>
-                                <div className="text-slate-400 text-[10px] leading-tight">By Appointment (Leoleo St)</div>
-                            </div>
-                        </div>
-
-                        <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
-                            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0">
-                                <Truck className="size-5 text-cyan-400" />
-                            </div>
-                            <div className="text-left">
-                                <div className="text-white font-header font-black text-xs uppercase tracking-wider">$50 Flat Delivery</div>
-                                <div className="text-slate-400 text-[10px] leading-tight">Island-Wide Direct to Door</div>
-                            </div>
-                        </div>
-
-                        <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
-                            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
-                                <Leaf className="size-5 text-emerald-400" />
-                            </div>
-                            <div className="text-left">
-                                <div className="text-white font-header font-black text-xs uppercase tracking-wider">$45 Cash Rebate</div>
-                                <div className="text-slate-400 text-[10px] leading-tight">Hawaii Energy Form Included</div>
-                            </div>
-                        </div>
-
-                        <div className="bg-slate-900/60 border border-white/10 hover:border-primary/40 rounded-2xl p-3.5 flex items-center gap-3 transition-colors shadow-inner">
-                            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0">
-                                <Wrench className="size-5 text-amber-400" />
-                            </div>
-                            <div className="text-left">
-                                <div className="text-white font-header font-black text-xs uppercase tracking-wider">Zero Upfront Fee</div>
-                                <div className="text-slate-400 text-[10px] leading-tight">Free Installation Estimates</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* By Appointment First • Conversion Trust Banner */}
-                <div className="mt-6 mb-4 max-w-7xl mx-auto px-4">
-                    <div className="bg-gradient-to-r from-slate-900 via-primary/10 to-slate-900 border border-primary/30 rounded-3xl p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_30px_rgba(0,174,239,0.1)]">
-                        <div className="space-y-2 text-center lg:text-left flex-1">
-                            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">
-                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                By Appointment First • Free Installation & Replacement Estimates
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">
-                                Need Professional Sizing or Installation Advice?
-                            </h3>
-                            <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                                It is <strong className="text-white">zero cost to book an appointment for estimates</strong> on new or replacement mini split and window AC installations! Call our office directly at <a href="tel:808-488-1111" className="text-cyan-300 font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-cyan-300 font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the appointment form below.
-                            </p>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
-                            <a 
-                                href="tel:808-488-1111"
-                                className="w-full sm:w-auto px-6 py-4 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] hover:scale-[1.02] flex items-center justify-center gap-2"
-                            >
-                                <Phone className="size-4 shrink-0" />
-                                <span>Call (808) 488-1111</span>
-                            </a>
-                            <Link 
-                                href="/contact"
-                                className="w-full sm:w-auto px-6 py-4 bg-slate-800 hover:bg-slate-700 border border-white/10 text-white font-header font-bold uppercase text-xs tracking-wider rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
-                            >
-                                <Calendar className="size-4 text-cyan-400 shrink-0" />
-                                <span>Book Appt Form</span>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Sizing Wizard CTA Banner */}
-                <div className="mt-4 mb-10 max-w-7xl mx-auto px-4">
-                    <div className="bg-[#0b1120]/60 border border-primary/20 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden backdrop-blur-md shadow-lg shadow-primary/5 group">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none z-0" />
-                        <div className="absolute top-0 left-0 w-12 h-[2px] bg-gradient-to-r from-primary to-transparent opacity-50 group-hover:w-24 transition-all duration-500"></div>
-
-                        <div className="space-y-2 relative z-10 text-center md:text-left flex-1">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-[9px] font-mono uppercase tracking-widest">
-                                <span className="relative flex h-1.5 w-1.5">
-                                    <span className="animate-ping absolute h-full w-full rounded-full bg-primary opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></span>
-                                </span>
-                                Calibrated Oahu Sizing Matrix
-                            </div>
-                            <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">Not Sure What AC Size You Need?</h3>
-                            <p className="font-sans text-xs text-slate-400 max-w-xl">
-                                Skip the guesswork. Run our interactive, step-by-step sizing wizard calibrated for Hawaii humidity and Oahu micro-climates. Zero typing required.
-                            </p>
-                        </div>
-
-                        <Link 
-                            href="/sizing"
-                            className="w-full md:w-auto px-8 py-3.5 bg-primary hover:bg-primary/95 text-black font-black uppercase text-[10px] tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.2)] hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] hover:scale-[1.02] flex items-center justify-center gap-2 shrink-0 group active:scale-98 relative z-10"
-                        >
-                            Launch Sizing Wizard <ArrowUpRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                        </Link>
-                    </div>
-                </div>
-
-                {/* Master Oahu AC Filter & Search Suite */}
-                <div id="catalog-filters" className="max-w-7xl mx-auto px-4 mb-8">
-                    <div className="bg-slate-900/80 border border-white/10 rounded-3xl p-4 md:p-6 backdrop-blur-xl shadow-2xl space-y-4">
-                        
-                        {/* Row 1: Search Bar + Sort + In-Stock Toggle */}
-                        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
-                            <div className="relative flex-1">
-                                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
-                                <input
-                                    type="text"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    placeholder="Search Oahu inventory by brand, BTU, plug, or model..."
-                                    className="w-full pl-10 pr-10 py-3 bg-slate-950/70 border border-white/10 rounded-xl text-xs sm:text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all font-sans"
-                                />
-                                {searchQuery && (
-                                    <button
-                                        onClick={() => setSearchQuery('')}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1"
-                                        title="Clear search"
-                                    >
-                                        <X className="size-4" />
-                                    </button>
-                                )}
-                            </div>
-
-                            <div className="flex items-center gap-2.5 shrink-0">
-                                {/* In Stock Toggle */}
-                                <button
-                                    type="button"
-                                    onClick={() => setInStockOnly(!inStockOnly)}
-                                    className={cn(
-                                        "px-3.5 py-3 rounded-xl border text-xs font-mono uppercase tracking-wider flex items-center gap-2 transition-all",
-                                        inStockOnly
-                                            ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
-                                            : "bg-slate-950/70 border-white/10 text-slate-400 hover:text-white"
-                                    )}
-                                >
-                                    <span className={cn("size-2 rounded-full", inStockOnly ? "bg-emerald-400 animate-pulse" : "bg-slate-600")} />
-                                    <span className="hidden sm:inline">In-Stock Only</span>
-                                    <span className="sm:hidden">In-Stock</span>
-                                </button>
-
-                                {/* Sort Dropdown */}
-                                <div className="relative flex items-center">
-                                    <ArrowUpDown className="absolute left-3 size-3.5 text-slate-400 pointer-events-none" />
-                                    <select
-                                        value={sortOption}
-                                        onChange={(e) => setSortOption(e.target.value as any)}
-                                        className="pl-8 pr-8 py-3 bg-slate-950/70 border border-white/10 rounded-xl text-xs font-mono text-slate-200 uppercase tracking-wider focus:outline-none focus:border-primary transition-all appearance-none cursor-pointer"
-                                    >
-                                        <option value="featured">Sort: Featured</option>
-                                        <option value="price_asc">Price: Low to High</option>
-                                        <option value="price_desc">Price: High to Low</option>
-                                        <option value="btu_asc">Capacity: Low to High</option>
-                                        <option value="btu_desc">Capacity: High to Low</option>
-                                        <option value="ceer">High Efficiency (CEER)</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Quick 1-Tap Search Suggestion Chips */}
-                        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-[11px]">
-                            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1">
-                                <Sparkles className="size-3 text-primary" />
-                                Popular:
+                        {/* 1-Line Sleek Micro-Trust Strip */}
+                        <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] md:text-xs font-mono text-slate-300">
+                            <span className="inline-flex items-center gap-1.5 text-primary">
+                                <Warehouse className="size-3.5 shrink-0" />
+                                <span>Waipahu Warehouse Pickup</span>
                             </span>
-                            {[
-                                { label: '12,000 BTU Inverter', query: '12,000' },
-                                { label: '115V Standard Plug', query: '115V' },
-                                { label: 'Quiet Dual Inverter', query: 'dual inverter' },
-                                { label: 'Casement / Slider', query: 'casement' },
-                                { label: '230V Great Room', query: '230V' },
-                            ].map(s => (
-                                <button
-                                    key={s.label}
-                                    type="button"
-                                    onClick={() => setSearchQuery(s.query)}
-                                    className="px-2.5 py-1 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-primary/30 text-slate-300 hover:text-white shrink-0 font-mono transition-colors"
-                                >
-                                    {s.label}
-                                </button>
-                            ))}
+                            <span className="text-white/20 hidden sm:inline">•</span>
+                            <span className="inline-flex items-center gap-1.5 text-cyan-400">
+                                <Truck className="size-3.5 shrink-0" />
+                                <span>$50 Flat Island Delivery</span>
+                            </span>
+                            <span className="text-white/20 hidden sm:inline">•</span>
+                            <span className="inline-flex items-center gap-1.5 text-emerald-400">
+                                <Leaf className="size-3.5 shrink-0" />
+                                <span>$45 Hawaii Energy Rebates</span>
+                            </span>
+                            <span className="text-white/20 hidden md:inline">•</span>
+                            <span className="inline-flex items-center gap-1.5 text-amber-400">
+                                <ShieldCheck className="size-3.5 shrink-0" />
+                                <span>1-Yr Warranty &amp; CT-36775</span>
+                            </span>
                         </div>
+                    </div>
+                </div>
 
-                        {/* Category Selector Tabs */}
-                        <div className="pt-2 border-t border-white/5">
-                            <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+                {/* Compact Master Toolbar: Category Tabs + Quick Controls + Collapsible Drawer */}
+                <div id="catalog-controls" className="max-w-7xl mx-auto px-2 sm:px-4 mb-5">
+                    <div className="bg-slate-900/90 border border-white/10 rounded-2xl p-2.5 sm:p-3.5 backdrop-blur-xl shadow-xl space-y-2.5">
+                        
+                        {/* Row 1: Horizontal Category Tabs + Sizing Shortcut */}
+                        <div className="flex items-center justify-between gap-2 overflow-hidden">
+                            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none flex-1">
                                 {CATEGORIES.map(cat => (
                                     <button
                                         key={cat.id}
                                         type="button"
                                         onClick={() => setSelectedCategory(cat.id as any)}
                                         className={cn(
-                                            "px-3.5 py-2 rounded-xl text-xs font-header font-black uppercase tracking-wider shrink-0 transition-all flex items-center gap-2",
+                                            "px-3 py-1.5 rounded-xl text-xs font-header font-black uppercase tracking-wider shrink-0 transition-all flex items-center gap-1.5",
                                             selectedCategory === cat.id
-                                                ? "bg-primary text-slate-950 shadow-[0_0_20px_rgba(0,174,239,0.35)] scale-[1.02]"
-                                                : "bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.07] border border-white/5"
+                                                ? "bg-primary text-slate-950 shadow-[0_0_15px_rgba(0,174,239,0.35)] scale-[1.02]"
+                                                : "bg-white/[0.04] text-slate-300 hover:text-white hover:bg-white/[0.08] border border-white/5"
                                         )}
                                     >
                                         <span>{cat.label}</span>
@@ -630,96 +571,210 @@ function ShopPageContent() {
                                     </button>
                                 ))}
                             </div>
+
+                            <Link
+                                href="/sizing"
+                                className="hidden lg:inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-primary/10 hover:bg-primary/20 border border-primary/30 text-primary text-[11px] font-mono uppercase tracking-wider shrink-0 transition-all hover:scale-[1.02]"
+                            >
+                                <Sparkles className="size-3" />
+                                <span>Sizing Wizard &rarr;</span>
+                            </Link>
                         </div>
 
-                        {/* Multi-Dimensional Filter Strips: Room Sizer, Wall Plug Voltage, Mount */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-white/5">
-                            {/* Room Sizer */}
-                            <div className="space-y-1.5">
-                                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Room Sizer</span>
-                                <div className="flex flex-wrap gap-1.5">
-                                    {[
-                                        { id: 'ALL', label: 'All Sizes' },
-                                        { id: 'BEDROOM', label: 'Bedrooms (6k-8k)' },
-                                        { id: 'MASTER', label: 'Master (10k-14k)' },
-                                        { id: 'LIVING', label: 'Great Rooms (18k+)' },
-                                    ].map(f => (
-                                        <button
-                                            key={f.id}
-                                            type="button"
-                                            onClick={() => setSelectedCapacity(f.id as any)}
-                                            className={cn(
-                                                "px-2.5 py-1.5 rounded-lg text-[11px] font-mono uppercase tracking-wider transition-all",
-                                                selectedCapacity === f.id
-                                                    ? "bg-primary text-slate-950 font-bold shadow-[0_0_12px_rgba(0,174,239,0.3)]"
-                                                    : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
-                                            )}
-                                        >
-                                            {f.label}
-                                        </button>
-                                    ))}
-                                </div>
+                        {/* Row 2: Search + In-Stock + Sort + Expand Filters Button */}
+                        <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
+                            {/* Search Input */}
+                            <div className="relative flex-1 min-w-[200px]">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 text-slate-400" />
+                                <input
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    placeholder="Search 16 models by brand, BTU, plug..."
+                                    className="w-full pl-9 pr-8 py-2 bg-slate-950/70 border border-white/10 rounded-xl text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all font-sans"
+                                />
+                                {searchQuery && (
+                                    <button
+                                        onClick={() => setSearchQuery('')}
+                                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1"
+                                        title="Clear search"
+                                    >
+                                        <X className="size-3.5" />
+                                    </button>
+                                )}
                             </div>
 
-                            {/* Wall Plug Voltage */}
-                            <div className="space-y-1.5">
-                                <div className="flex items-center justify-between">
-                                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Plug Voltage</span>
-                                    <Link href="/shop/window-ac-plug-guide" className="text-[10px] text-primary hover:underline font-mono uppercase flex items-center gap-1">
-                                        <Plug className="size-2.5" />
-                                        Guide &rarr;
-                                    </Link>
-                                </div>
-                                <div className="flex flex-wrap gap-1.5">
-                                    {[
-                                        { id: 'ALL', label: 'All Plugs' },
-                                        { id: '115V', label: '115V Standard (15A)' },
-                                        { id: '230V', label: '230V Heavy Duty (20A+)' },
-                                    ].map(v => (
-                                        <button
-                                            key={v.id}
-                                            type="button"
-                                            onClick={() => setSelectedVoltage(v.id as any)}
-                                            className={cn(
-                                                "px-2.5 py-1.5 rounded-lg text-[11px] font-mono uppercase tracking-wider transition-all",
-                                                selectedVoltage === v.id
-                                                    ? "bg-emerald-500 text-slate-950 font-bold shadow-[0_0_12px_rgba(16,185,129,0.3)]"
-                                                    : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
-                                            )}
-                                        >
-                                            {v.label}
-                                        </button>
-                                    ))}
-                                </div>
+                            {/* In-Stock Toggle */}
+                            <button
+                                type="button"
+                                onClick={() => setInStockOnly(!inStockOnly)}
+                                className={cn(
+                                    "px-3 py-2 rounded-xl border text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 transition-all shrink-0",
+                                    inStockOnly
+                                        ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.2)]"
+                                        : "bg-slate-950/70 border-white/10 text-slate-400 hover:text-white"
+                                )}
+                            >
+                                <span className={cn("size-2 rounded-full", inStockOnly ? "bg-emerald-400 animate-pulse" : "bg-slate-600")} />
+                                <span>In-Stock</span>
+                            </button>
+
+                            {/* Sort Selector */}
+                            <div className="relative flex items-center shrink-0">
+                                <ArrowUpDown className="absolute left-2.5 size-3 text-slate-400 pointer-events-none" />
+                                <select
+                                    value={sortOption}
+                                    onChange={(e) => setSortOption(e.target.value as any)}
+                                    className="pl-7 pr-6 py-2 bg-slate-950/70 border border-white/10 rounded-xl text-xs font-mono text-slate-200 uppercase tracking-wider focus:outline-none focus:border-primary transition-all appearance-none cursor-pointer"
+                                >
+                                    <option value="featured">Sort: Featured</option>
+                                    <option value="price_asc">Price: Low to High</option>
+                                    <option value="price_desc">Price: High to Low</option>
+                                    <option value="btu_asc">Capacity: Low to High</option>
+                                    <option value="btu_desc">Capacity: High to Low</option>
+                                    <option value="ceer">Efficiency (CEER)</option>
+                                </select>
                             </div>
 
-                            {/* Mounting / Window Type */}
-                            <div className="space-y-1.5">
-                                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Window Fitment</span>
-                                <div className="flex flex-wrap gap-1.5">
-                                    {[
-                                        { id: 'ALL', label: 'All Mounts' },
-                                        { id: 'HUNG', label: 'Standard Sash' },
-                                        { id: 'SLIDER', label: 'Slider / Casement' },
-                                        { id: 'SLEEVE', label: 'Thru-the-Wall Sleeve' },
-                                    ].map(m => (
-                                        <button
-                                            key={m.id}
-                                            type="button"
-                                            onClick={() => setSelectedMount(m.id as any)}
-                                            className={cn(
-                                                "px-2.5 py-1.5 rounded-lg text-[11px] font-mono uppercase tracking-wider transition-all",
-                                                selectedMount === m.id
-                                                    ? "bg-cyan-400 text-slate-950 font-bold shadow-[0_0_12px_rgba(34,211,238,0.3)]"
-                                                    : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
-                                            )}
-                                        >
-                                            {m.label}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
+                            {/* More Filters Toggle Button */}
+                            <button
+                                type="button"
+                                onClick={() => setIsMoreFiltersOpen(!isMoreFiltersOpen)}
+                                className={cn(
+                                    "px-3 py-2 rounded-xl border text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 transition-all shrink-0",
+                                    isMoreFiltersOpen || activeSecondaryFilterCount > 0
+                                        ? "bg-primary/15 border-primary/50 text-primary shadow-[0_0_12px_rgba(0,174,239,0.2)]"
+                                        : "bg-slate-950/70 border-white/10 text-slate-400 hover:text-white"
+                                )}
+                            >
+                                <Filter className="size-3" />
+                                <span className="hidden sm:inline">Filters</span>
+                                {activeSecondaryFilterCount > 0 && (
+                                    <span className="px-1.5 py-0.2 rounded-full bg-primary text-slate-950 font-black text-[10px]">
+                                        {activeSecondaryFilterCount}
+                                    </span>
+                                )}
+                                <ChevronDown className={cn("size-3 transition-transform duration-200", isMoreFiltersOpen && "rotate-180")} />
+                            </button>
                         </div>
+
+                        {/* Collapsible Secondary Filter Drawer */}
+                        {isMoreFiltersOpen && (
+                            <div className="pt-3 border-t border-white/10 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
+                                {/* Multi-Dimensional Filter Strips: Room Sizer, Wall Plug Voltage, Mount */}
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                    {/* Room Sizer */}
+                                    <div className="space-y-1.5">
+                                        <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Room Sizer</span>
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {[
+                                                { id: 'ALL', label: 'All Sizes' },
+                                                { id: 'BEDROOM', label: 'Bedrooms (6k-8k)' },
+                                                { id: 'MASTER', label: 'Master (10k-14k)' },
+                                                { id: 'LIVING', label: 'Great Rooms (18k+)' },
+                                            ].map(f => (
+                                                <button
+                                                    key={f.id}
+                                                    type="button"
+                                                    onClick={() => setSelectedCapacity(f.id as any)}
+                                                    className={cn(
+                                                        "px-2.5 py-1 rounded-lg text-[11px] font-mono uppercase tracking-wider transition-all",
+                                                        selectedCapacity === f.id
+                                                            ? "bg-primary text-slate-950 font-bold shadow-[0_0_12px_rgba(0,174,239,0.3)]"
+                                                            : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
+                                                    )}
+                                                >
+                                                    {f.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Wall Plug Voltage */}
+                                    <div className="space-y-1.5">
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Plug Voltage</span>
+                                            <Link href="/shop/window-ac-plug-guide" className="text-[10px] text-primary hover:underline font-mono uppercase flex items-center gap-1">
+                                                <Plug className="size-2.5" />
+                                                Guide &rarr;
+                                            </Link>
+                                        </div>
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {[
+                                                { id: 'ALL', label: 'All Plugs' },
+                                                { id: '115V', label: '115V Standard (15A)' },
+                                                { id: '230V', label: '230V Heavy Duty (20A+)' },
+                                            ].map(v => (
+                                                <button
+                                                    key={v.id}
+                                                    type="button"
+                                                    onClick={() => setSelectedVoltage(v.id as any)}
+                                                    className={cn(
+                                                        "px-2.5 py-1 rounded-lg text-[11px] font-mono uppercase tracking-wider transition-all",
+                                                        selectedVoltage === v.id
+                                                            ? "bg-emerald-500 text-slate-950 font-bold shadow-[0_0_12px_rgba(16,185,129,0.3)]"
+                                                            : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
+                                                    )}
+                                                >
+                                                    {v.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Mounting / Window Type */}
+                                    <div className="space-y-1.5">
+                                        <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Window Fitment</span>
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {[
+                                                { id: 'ALL', label: 'All Mounts' },
+                                                { id: 'HUNG', label: 'Standard Sash' },
+                                                { id: 'SLIDER', label: 'Slider / Casement' },
+                                                { id: 'SLEEVE', label: 'Thru-the-Wall Sleeve' },
+                                            ].map(m => (
+                                                <button
+                                                    key={m.id}
+                                                    type="button"
+                                                    onClick={() => setSelectedMount(m.id as any)}
+                                                    className={cn(
+                                                        "px-2.5 py-1 rounded-lg text-[11px] font-mono uppercase tracking-wider transition-all",
+                                                        selectedMount === m.id
+                                                            ? "bg-cyan-400 text-slate-950 font-bold shadow-[0_0_12px_rgba(34,211,238,0.3)]"
+                                                            : "bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]"
+                                                    )}
+                                                >
+                                                    {m.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Popular Quick Queries inside drawer */}
+                                <div className="flex items-center gap-2 overflow-x-auto pt-1 scrollbar-none text-[11px]">
+                                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1">
+                                        <Sparkles className="size-3 text-primary" />
+                                        Popular:
+                                    </span>
+                                    {[
+                                        { label: '12,000 BTU Inverter', query: '12,000' },
+                                        { label: '115V Standard Plug', query: '115V' },
+                                        { label: 'Quiet Dual Inverter', query: 'dual inverter' },
+                                        { label: 'Casement / Slider', query: 'casement' },
+                                        { label: '230V Great Room', query: '230V' },
+                                    ].map(s => (
+                                        <button
+                                            key={s.label}
+                                            type="button"
+                                            onClick={() => setSearchQuery(s.query)}
+                                            className="px-2 py-0.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-primary/30 text-slate-300 hover:text-white shrink-0 font-mono text-[10px] transition-colors"
+                                        >
+                                            {s.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                     </div>
                 </div>
@@ -828,13 +883,16 @@ function ShopPageContent() {
                                 </div>
                             </div>
                         ) : (
-                            <ProductGrid
-                                products={filteredProducts}
-                                onQuickAdd={addToCart}
-                                rebate="$45 Hawaii Energy Rebate"
-                                compareList={compareList}
-                                onToggleCompare={handleToggleCompare}
-                            />
+                            <>
+                                <ProductGrid
+                                    products={filteredProducts}
+                                    onQuickAdd={addToCart}
+                                    rebate="$45 Hawaii Energy Rebate"
+                                    compareList={compareList}
+                                    onToggleCompare={handleToggleCompare}
+                                />
+                                {sectionMap["appointment-banner"]}
+                            </>
                         )
                     ) : (
                         sectionOrder.map((sectionId) => (
