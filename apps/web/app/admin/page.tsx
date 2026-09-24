@@ -513,14 +513,15 @@ export default function AdminPage() {
                         </nav>
                     </div>
                     <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-                        <Link 
+                        <a 
                             href="/dev-os" 
                             target="_blank"
+                            rel="noopener noreferrer"
                             className="text-cyan-400 hover:text-white transition-all text-[10px] font-mono font-bold uppercase tracking-widest border border-cyan-500/20 px-3.5 py-2.5 rounded-lg flex items-center gap-1.5 bg-cyan-500/10 hover:bg-cyan-500/20 hover:border-cyan-500/40"
                             title="Open Dev OS Autonomous Brain & Swarm Fleet"
                         >
                             <span>Dev OS ↗</span>
-                        </Link>
+                        </a>
                         {activeTab === 'inventory' && (
                             <button
                                 onClick={() => setIsAdding(true)}
