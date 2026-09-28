@@ -65,7 +65,7 @@ export default function NavbarV2() {
         { text: "Split AC Cleaning", href: "/mini_split_ac_maintenance" },
         { text: "Shop Window AC", href: "/shop" },
         { text: "AC Repair", href: "/ac-repair" },
-        { text: "Window AC Cleaning", href: "/window_ac_maintenance" },
+        { text: "Clean vs Replace", href: "/clean-vs-replace-window-ac" },
         { text: "Service Areas", href: "/service-areas" },
     ];
     const links = PRIMARY_NAV_LINKS;

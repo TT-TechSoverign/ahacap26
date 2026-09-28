@@ -95,21 +95,43 @@ export function middleware(request: NextRequest) {
         return makePermanentRedirect('/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm');
     }
 
-    // 5. Legacy Route Detection
-    const legacyPrefixes = [
-        '/product/',
-        '/product-category/',
-        '/product-tag/',
+    // Decommissioned routes
+    if (pathLower === '/window-ac-deep-cleaning-chemical-overhaul' || pathLower === '/window_ac_maintenance') {
+        return makePermanentRedirect('/clean-vs-replace-window-ac');
+    }
+
+    // 5. Legacy Route Detection & Decommissioning
+    const deadDebrisPrefixes = [
         '/wp-content/',
         '/author/',
         '/element_category/',
         '/fusion_tb_category/',
         '/media/',
+    ];
+
+    if (deadDebrisPrefixes.some(prefix => pathLower.startsWith(prefix))) {
+        return new NextResponse(
+            '<!DOCTYPE html><html><head><title>410 Gone</title><meta name="robots" content="noindex, nofollow"/></head><body><h1>410 - Resource Permanently Removed</h1><p>This legacy URL has been permanently removed.</p><p><a href="/">Return to Affordable Home A/C</a></p></body></html>',
+            {
+                status: 410,
+                statusText: 'Gone',
+                headers: {
+                    'Content-Type': 'text/html; charset=utf-8',
+                    'Cache-Control': 'public, max-age=31536000, immutable',
+                    'X-Robots-Tag': 'noindex, nofollow',
+                }
+            }
+        );
+    }
+
+    const legacyPrefixes = [
+        '/product/',
+        '/product-category/',
+        '/product-tag/',
         '/contact-us',
         '/why-buy-lg',
         '/cart',
         '/installations',
-        '/hawaii-energy-rebate',
         '/make-an-appointment',
         '/cleaning-and-maintenance',
     ];
@@ -128,7 +150,7 @@ export function middleware(request: NextRequest) {
         }
 
         // Specific legacy page mappings
-        if (pathLower === '/why-buy-lg' || pathLower === '/hawaii-energy-rebate') {
+        if (pathLower === '/why-buy-lg') {
             return makePermanentRedirect('/shop/lg-dual-inverter-guide');
         }
         if (pathLower === '/make-an-appointment' || pathLower === '/contact-us') {

@@ -128,7 +128,7 @@ export default function MobileStickyBottomBar() {
             }}
             className="fixed bottom-0 left-0 w-full z-50 flex flex-col md:hidden bg-slate-900 border-t border-slate-800 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]"
         >
-            {/* Free Estimates ($0) • Transparent Pricing Trust Banner */}
+            {/* Free Estimates ($0) • Upfront Quotes Trust Banner */}
             <div className="w-full bg-slate-950/95 border-b border-white/10 px-3 py-1 flex items-center justify-between text-[10px] text-slate-300">
                 <div className="flex items-center gap-1.5 font-medium truncate">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>

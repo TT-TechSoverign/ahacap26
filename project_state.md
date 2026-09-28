@@ -1,7 +1,7 @@
 # Project State Report: Affordable Home A/C (AHAC)
 
-**Last Updated**: September 22, 2026  
-**Current Epoch**: `EPOCH 13 (September 22, 2026)`  
+**Last Updated**: September 23, 2026  
+**Current Epoch**: `EPOCH 14 (September 23, 2026)`  
 **Branch**: `main` (Production Synchronized)  
 **Host**: Hostinger VPS (`31.220.53.132`) • Docker Production Stack
 
@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-Affordable Home A/C is an enterprise-grade, high-velocity e-commerce and HVAC service booking platform serving the island of Oahu, Hawaii. The platform operates on a **By-Appointment-First** architecture with zero upfront checkout payment barriers for physical service leads, backed by an autonomous **37-Agent Sovereign Fleet (9 Sub-Masters)** and **Master Projects Brain v2.6.0**.
+Affordable Home A/C is an enterprise-grade, high-velocity e-commerce and HVAC service booking platform serving the island of Oahu, Hawaii. The platform operates on a **By-Appointment-First** architecture with zero upfront checkout payment barriers for physical service leads, backed by an autonomous **40-Agent Sovereign Fleet (10 Sub-Masters)** and **Master Projects Brain v2.6.0**.
 
 All state, agent runs, cognitive streams, and historical lineages are synchronized across **multi-worker Uvicorn processes via Redis** and **PostgreSQL 16**.
 
@@ -170,7 +170,7 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
     - Convened the Sovereign Master and all 9 Category Sub-Masters to transform the homepage (`/`) into an authoritative digital flagship for Oahu homeowners.
     - Built `<HomeFeaturedInventory />` (`apps/web/components/HomeFeaturedInventory.tsx`): Directly showcases 4 Oahu bestseller inverter units (LG 12k Dual Inverter, LG 8k Dual Inverter, LG 6k Bedroom Inverter, GE 10k Wall Sleeve) with Island Sizing Dual Badges (AHAM certified vs Island Calibrated™), $45 Hawaii Energy Rebate badges, real-time Waipahu warehouse stock indicators, specs modal shortcuts, and 1-tap "Add Unit" cart actions.
     - Built `<HomeServicesDivisions />` (`apps/web/components/HomeServicesDivisions.tsx`): Eradicated fabricated flat-rate service packages ($175/$275) and consolidated redundant service sections into two dedicated operational wings:
-      - **Window AC Division**: In-stock sales direct from Waipahu warehouse ($504 to $1,025), custom jalousie & standard window installation, deep chemical cleaning/overhaul, and clean-vs-replace assessments.
+      - **Window AC Division**: In-stock sales direct from Waipahu warehouse ($504 to $1,025), custom jalousie & standard window installation, and clean-vs-replace assessments (no off-site shop teardowns).
       - **Split AC Division**: Ductless mini-split installation & replacement ($0 Free In-Home Estimate), clinical chemical maintenance/deep flush, diagnostic troubleshooting & repair, and island microclimate sizing calculators.
       - Grounded in **Floor Drop-Cloth Protection** (under unit), **State License CT-36775**, and **$0 upfront booking**.
     - Built `<HomeServiceAreasHub />` (`apps/web/components/HomeServiceAreasHub.tsx`): Organizes all 22 localized Oahu city pages into 4 regional island clusters (Metro Honolulu, Leeward & West Oahu, Central Oahu, Windward Oahu), passing internal link equity and assuring homeowners across all neighborhoods.
@@ -196,14 +196,155 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
       - `"appointment-banner"` positioned right before the logistics section and at the base of filtered search results.
       - 4 full Delivery & Trust cards relocated into the Logistics section directly above `LogisticsSection`.
     - Achieved an 87% vertical height reduction prior to unit #1, ensuring product inventory is immediately visible above the fold on both desktop and mobile without sacrificing search, sizing, or filter utility.
+- **Epoch 14 (Sep 23, 2026) Executive Monthly Analytics & SEO Reports Division**:
+  - **Chartered Sub-Master 10 (`submaster_executive_reporting`)**: Established the 10th category submaster and 3 specialized satellite agents (`agent_report_ingestor`, `agent_narrative_crafter`, `agent_document_forge`), bringing fleet cardinality to 10 Sub-Masters, 40 Agents, and 50 SOP dossiers.
+  - **Autonomous Analytics Reporting Engine (`apps/api/services/reporting_engine.py`)**: Built an end-to-end ingestion engine parsing GSC `.zip` exports (`Chart.csv`, `Queries.csv`, `Pages.csv`, `Devices.csv`) and GA4 snapshots. Automatically isolates search performance metrics, device distributions, high-intent Oahu queries, and product page rankings.
+  - **3rd-Grade Executive Narrative Synthesis**: Calibrated executive summaries in plain English, translating technical SEO metrics into clear business insights: Big Wins, Traffic Snapshot tables, High-Intent Keywords tables, Page Ranking Wins & Store Activity, and Action Plans.
+  - **Publication-Ready Multi-Format Document Forge**:
+    - Microsoft Word (`.docx`) compiled with native `python-docx` (executive styling, header branding, shaded tables `#D5E8F0`, 1-inch margins).
+    - Responsive Presentation HTML (`.html`) styled for browser viewing without sensitive VPS credentials or internal IPs.
+    - Source Markdown (`.md`) for instant copying and documentation archives.
+  - **FastAPI Endpoints (`apps/api/routers/dev_os.py`)**: Added `/api/v1/dev-os/reports` (list), `/upload` (multi-part ingestion), `/generate` (autonomous compilation), `/preview` (HTML/Markdown preview), and `/download` (Word/HTML/MD binary download).
+  - **Dev OS Executive Reporting Hub (`apps/dev-os/app/MonthlyReportsHub.tsx`)**: Engineered dedicated reporting cockpit accessible via top navigation and keyboard shortcut `Key R`, with drag-and-drop file upload, month/year selector, 1-click downloads, live preview modal, and satellite agent trigger buttons (< 150 kB First Load JS).
+  - **Strict User Scope Boundary Maintained**: Strictly excluded billing and invoicing logic per direct user directive.
+  - **Unit Test Suite 100% Pass**: `test_fleet_registry.py` (updated for 10 submasters and 40 agents) and `test_reporting_engine.py` (ingestion, narrative, docx, html) all passing cleanly (12/12 total test suite).
+- **Epoch 15 (Sep 24, 2026) GSC Remediation & Footprint Expansion (Batches 1 & 2 Completed)**:
+  - **175-Page Scaling Architecture**: Engineered the full expansion from 60 submitted URLs to 175 indexed pages (115 new standalone routes outside `/shop`) across 8 specialized topical silos.
+  - **Zero-Touch Shop Guarantee**: The entire `/shop` codebase (`apps/web/app/shop/page.tsx`, layout, filters, cart, checkout) remains 100% frozen and untouched (verified 0 diff lines).
+  - **Rebate & Delivery Ground Truth**: Fixed rebate amount to strictly **$45** (not $50) for qualifying Energy Star Window AC units only. Disclaimed mini-split rebates. Official pre-approved rebate application PDF linked on `/hawaii-energy-rebate`. Flat island-wide delivery fixed at **$50**.
+  - **Bracket Terminology Harmonization**: Eradicated all "hurricane bracket" branding; standardized strictly on **standard window AC brackets** and standard exterior sill support brackets, framed as an additional cost option with installation.
+  - **Drop-Cloth Clean Jobsite Standard**: Clean floor drop cloths laid under every unit during work; site left cleaner than upon arrival.
+  - **Company Protection Scope**: Conservative boutique contractor scope; explicitly disclaims municipal permitting promises.
+  - **Batch 1 Pages Built & Fortified (10 Pages)**: `/hawaii-energy-rebate`, `/mini-split-installation-cost-oahu`, `/jalousie-window-ac-installation-oahu`, `/quiet-bedroom-window-ac-oahu`, `/living-room-window-ac-oahu`, `/ac-blowing-warm-air-troubleshooting-oahu`, `/ac-freezing-up-ice-on-coils-hawaii`, `/ac-dripping-water-inside-house-repair`, `/ac-keeps-tripping-breaker-hawaii`, `/blinking-light-error-codes-ac-repair`.
+  - **Batch 2 Pages Built & Fortified (27 Pages — Completing Silo 1 & Silo 2)**:
+    - **Silo 1 (Window AC E-Commerce & Warehouse Direct — 16 Pages Complete)**:
+      1. `/hawaii-energy-rebate` ($45 rebate application PDF)
+      2. `/quiet-bedroom-window-ac-oahu` (44 dB sleep mode)
+      3. `/living-room-window-ac-oahu` (12k to 23.5k BTU)
+      4. `/window-ac-warehouse-pickup-waipahu` (94-150 Leoleo St #203)
+      5. `/large-room-window-ac-18000-24000-btu` (230V heavy duty)
+      6. `/small-room-window-ac-6000-8000-btu` (115V low amp draw)
+      7. `/energy-star-window-air-conditioners-hawaii` (High CEER efficiency)
+      8. `/smart-wifi-window-ac-oahu` (LG ThinQ remote smartphone control)
+      9. `/window-ac-replacement-oahu` (Swap old units, haul-away)
+      10. `/commercial-window-ac-oahu` (Trailers, security shacks, retail)
+      11. `/window-ac-for-studios-apartments-hawaii` (Waikiki walk-ups, studios)
+      12. `/low-voltage-window-ac-115v-oahu` (NEMA 5-15P regular wall plug)
+      13. `/inverter-window-ac-vs-standard-hawaii` (40% HECO power savings)
+      14. `/same-day-window-ac-pickup-oahu` (Emergency Kona heatwave loading)
+      15. `/window-ac-warranty-waipahu` (1-year warranty, Waipahu warehouse support by appointment)
+      16. `/window-ac-delivery-service-oahu` (Flat $50 island-wide delivery)
+    - **Silo 2 (Hawaii Housing Architecture & Window Framing — 15 Pages Complete)**:
+      17. `/jalousie-window-ac-installation-oahu` (Louver mounting, clean drop cloths)
+      18. `/horizontal-sliding-window-ac-oahu` (Vertical slider filler panels)
+      19. `/single-wall-construction-ac-cooling-hawaii` (Redwood plantation homes)
+      20. `/ac-brackets-exterior-security-mounting-oahu` (Cantilever load transfer)
+      21. `/window-ac-weather-stripping-island-seal` (Marine closed-cell foam)
+      22. `/condo-townhouse-window-ac-hoa-rules-oahu` (44 dB noise compliance)
+      23. `/renter-friendly-ac-installation-oahu` (Zero-damage mounting, keep deposit)
+      24. `/double-hung-window-ac-installation-hawaii` (Sash mounting, gravity pitch)
+      25. `/wood-frame-window-ac-support-oahu` (Preventing sill rot, vintage wood)
+      26. `/vinyl-replacement-window-ac-mounting` (Hollow PVC frame protection)
+      27. `/high-rise-condo-ac-rules-honolulu` (Safety tethers, freight elevators)
+      28. `/security-bars-window-ac-installation-oahu` (Shallow-depth mounting)
+      29. `/standard-window-ac-brackets-mounting-oahu` (Standard brackets option)
+      30. `/narrow-window-ac-solutions-hawaii` (Openings under 22 inches wide)
+      31. `/ac-condensation-drain-routing-condos` (Zero-drip lanai drainage kits)
+  - **Batch 3 Completed (23 New Pages — Silos 4 & 5 100% Complete)**:
+    - **Silo 4: Clinical Chemical Cleaning & Indoor Air Quality (14 Pages 100% Complete)**:
+      32. `/ac-mold-removal-cleaning-oahu` (Clinical mold eradication & drop cloths)
+      33. `/clean-vs-replace-window-ac` (Clean vs Replace evaluation; purged fabricated shop overhaul, 301 redirected)
+      34. `/premium-mini-split-deep-cleaning-oahu` ($275 full teardown clean & wheel extraction)
+      35. `/ac-smells-musty-mildew-hawaii` (Dirty sock syndrome & pan flush)
+      36. `/black-mold-in-ac-health-risks-hawaii` (Spore neutralization & respiratory defense)
+      37. `/seasonal-ac-maintenance-plans-oahu` (Island microclimate calendar)
+      38. `/commercial-ac-cleaning-oahu` (Boutique retail, dental & offices)
+      39. `/ac-coil-cleaning-benefits-power-bill` (Dirty coils driving HECO 44.2¢ bills)
+      40. `/air-conditioner-blower-wheel-cleaning-hawaii` (360° fan wheel extraction)
+      41. `/ac-drain-line-clog-clearing-oahu` (Vacuum extraction & line flush $175)
+      42. `/clean-air-filter-replacement-hawaii` (Washable filter care & vog defense)
+      43. `/salt-corrosion-coil-rinse-hawaii` (Neutralizing marine salt deposits)
+      44. `/post-storm-ac-inspection-cleaning-oahu` (Kona storm damage & coil wash)
+      45. `/pet-hair-dander-ac-cleaning-oahu` (Pet allergy deep teardown clean)
+    - **Silo 5: Urgent Diagnostic Solvers & Technical Fixes (14 Pages 100% Complete)**:
+      46. `/ac-diagnostic-service-175-flat-rate` ($175 flat rate diagnostic call)
+      47. `/ac-compressor-not-turning-on-oahu` (Capacitors, contactors, inverter boards)
+      48. `/window-ac-making-loud-buzzing-noise` (Bracket dampening & 44 dB inverter upgrade)
+      49. `/mini-split-remote-control-not-working` (Infrared tests & emergency run button)
+      50. `/ac-refrigerant-leak-detection-hawaii` (Electronic sniffers & 45° flare re-flare)
+      51. `/ac-turning-on-and-off-rapidly-short-cycling` (Thermistor testing & room sizing)
+      52. `/no-power-to-ac-unit-hawaii` (240V breakers, disconnects, float switches)
+      53. `/ac-burning-electrical-smell-oahu` (Emergency breaker shutoff protocol)
+      54. `/outdoor-unit-fan-not-spinning-hawaii` (Dual-run capacitors & seized motor bearings)
+      55. `/ac-blowing-warm-air-troubleshooting-oahu` (Troubleshooting & $175 diagnostic)
+      56. `/ac-freezing-up-ice-on-coils-hawaii` (Safe emergency thaw protocol)
+      57. `/ac-dripping-water-inside-house-repair` (Condensate leak repair)
+      58. `/ac-keeps-tripping-breaker-hawaii` (Electrical breaker diagnosis)
+      59. `/blinking-light-error-codes-ac-repair` (LED blinking code decoder)
+  - **Dynamic Sitemap & Directory Expansion**:
+    - `apps/web/app/sitemap.ts`: All 60 new routes added with daily change frequency and 0.9 priority.
+    - `apps/web/app/sitemap/page.tsx`: Upgraded human-facing directory with 4 balanced rows.
+    - `apps/web/components/Footer.tsx`: Enriched Quick Links with high-intent routes.
+  - **Verification Pipeline**:
+    - Next.js production build: **`116/116 static pages generated`** with zero errors (exit code 0).
+    - ESLint on all pages: 0 errors, all JSX entities escaped.
+    - `python -m pytest -v apps/api/tests/`: 12 passed, 0 failed in 3.52s.
+    - `.\scripts\scan-secrets.ps1`: `[CLEAN] Zero leaked secrets`.
+    - `git diff apps/web/app/shop`: completely empty (0 lines modified, 0 files changed).
+
+- **Epoch 16 (Sep 25, 2026) Real-World Service Grounding & Operational Reframing**:
+  - **Purged Fabricated Window AC Shop Overhaul**: Eradicated `/window-ac-deep-cleaning-chemical-overhaul` and `/window_ac_maintenance` with 301 permanent redirect to `/clean-vs-replace-window-ac`. Grounded window AC maintenance in free DIY washable filter cleaning vs upgrading to quiet LG Dual Inverters ($504–$1,025 with $45 rebate).
+  - **Purged Nitrogen Drain Line Claims**: Replaced all pressurized nitrogen drain blowout mentions with authentic commercial vacuum extraction and dedicated condensate line flushing ($175 flat rate).
+  - **Reframed Commercial Daytime Service (`/commercial-ac-cleaning-oahu`)**: Purged false promises of after-hours and night scheduling. Reframed service around standard daytime appointments made seamless by floor drop cloths, enclosed wash containers, and quiet extraction tools with zero water mess. Established transparent inquiry bridge to dispatch at `(808) 488-1111` for businesses with unique facility scheduling needs.
+  - **Automated Grounding Sentinel Script (`scripts/verify-service-grounding.ps1`)**: Built a 7-rule static assertion tool checking for shop teardowns, nitrogen drains, rebate drift, hurricane brackets, bench tests, hydro bags, and after-hours scheduling claims. Passed 100% clean across all routes.
+  - **Single-Source-of-Truth Services Matrix**: Architected `apps/api/content/services_matrix.json` and `apps/web/lib/content/services_matrix.json` uniting web forms and CRM dispatch.
+  - **Pre-Configured Batch 4 Blueprint (Silos 3, 6, 7 & 8)**: Codified exact guardrails in `implementation_plan.md` for upcoming mini-split installs ($0 free estimate), regional microclimates, dual AHAM/Island sizing, and jalousie architectural mounting.
+  - **Verification Suite**: Next.js full static build (114/114 routes exit code 0), 12/12 Python unit tests passing, zero secret leaks, zero changes to shop catalog.
+
+- **Epoch 17 (Sep 25-26, 2026) Admin Email De-Duplication, Customer Confirmation Overhaul & Brian Admin Routing**:
+  - **Admin Routing for Leads & Window AC Orders**: Confirmed both `brian@affordablehome-ac.com` AND `ahacsplitdivision@gmail.com` as primary recipients for all incoming inquiries and window AC orders, with automated developer BCC audit trail to `irasmussenjobs@gmail.com`.
+  - **4-Layer Idempotency Defense**: Completely eliminated duplicate lead email deliveries via:
+    1. Frontend `isSubmittingRef` lock in `DispatchWizard.tsx` preventing double-clicks.
+    2. Backend 60-second de-duplication window in `apps/api/routers/leads.py` suppressing identical phone and service submissions.
+    3. Service-level idempotency lock `has_inquiry_been_sent` / `mark_inquiry_as_sent` in `apps/api/services/email.py` backed by in-memory and Redis TTL 600s caching.
+    4. Post-send SMTP socket disconnect teardown isolation preventing premature retries upon clean connection closure.
+  - **Customer Appointment Confirmation Email Overhaul**:
+    - Resolved spam appearance and broken image box by harmonizing `Content-ID: <logo_img>` with `logo-new.png` and web fallback.
+    - Designed and implemented executive-grade responsive template with dual Dark and Light mode support (`@media (prefers-color-scheme: dark)`), deep Polynesian navy palette, brand cyan accents, and warm gold highlights.
+    - Multipart `MIMEMultipart("alternative")` delivery with clean text/plain and styled HTML parts for 0 spam scoring.
+    - Grounded with $0 Free In-Home Estimate, clean floor drop-cloth protection, CT-36775 license, Waipahu commercial center address, and 1-tap phone CTA `(808) 488-1111`.
+  - **Strict Dev-Only Routing for Customer Confirmations**: During development/testing until explicitly approved, customer copies route strictly to `irasmussenjobs@gmail.com` with top banner: `[DEVELOPMENT PREVIEW COPY] Intended Customer Recipient: {customer_email}`.
+  - **On-Site Window AC Deep Cleaning Grounding ($275 Flat Rate)**:
+    - Retained on-site chassis disassembly and deep cleaning ($275 flat rate) with floor drop cloths under unit.
+    - Updated `apps/web/lib/content/services_matrix.json`, `apps/api/content/services_matrix.json`, `DispatchWizard.tsx`, `MobileDrawerMenu.tsx`, `content.json`, and `content.json.LIVE`.
+  - **Verification Suite**:
+    - Pytest: All 14 tests passing (`apps/api/tests/`) in 1.31s.
+    - Next.js production build (`pnpm --filter web build`): Exit code 0 across all 114+ routes.
+    - Shop zero-touch guarantee: `git diff --stat apps/web/app/shop` confirmed 0 lines touched.
+    - Secret scanner: `scan-secrets.ps1` clean.
+
+  - **Epoch 15 (Sep 27-28, 2026) Brand Reframing, Subcontractor Grounding & Buzzword Purge**:
+    - **Competitor & Carrier Bashing Purged**: Eliminated all mentions of *Matson*, *Amazon*, *Home Depot*, *Lowe's*, and fearmongering language (*"suffer in the heat"*, *"bent fins"*, *"barge delays"*, *"nightmare returns"*). Reframed comparison tables and warehouse copy to focus purely on positive trade advantages: in-stock Waipahu inventory, factory warranties, and direct local support.
+    - **Electrical Subcontractor Scope Grounding**: Clearly articulated under License CT-36775 that all dedicated 208/230V circuits, breaker additions, and panel capacity work are coordinated with licensed electrical subcontractors.
+    - **Fabricated Fee Claims Eradicated**: Purged all references to "$250 Survey" and "Free $250 Sizing Survey", replacing with standard, transparent **$0 Free In-Home Estimate**.
+    - **Buzzword & Overpromise Purge**: Stripped *"fully permitted"*, *"completely transparent"*, *"transparent pricing"*, *"zero surprise electrical bills/fees"*, and *"zero red tape"*, replacing with direct contractor language: *"upfront estimates"*, *"island flat rates"*, *"itemized quotes"*, and *"direct contractor pricing"*.
+    - **Schedule & Availability Refresh**: Updated stale booking windows (February/September dates) across `Footer.tsx`, `content.json`, `content.json.LIVE`, and `content_seed.json` to active October 2026 scheduling windows (`Oct 1-5`, `Oct 6-10`).
+    - **Sitemap Link Syntax Fix**: Corrected `import Link from 'next'` to `import Link from 'next/link'` in `apps/web/app/sitemap/page.tsx`, restoring clean TypeScript compilation.
+    - **Verification Suite**:
+      - TypeScript compiler: `npx tsc --noEmit` exited code 0 with 0 errors across entire Next.js codebase.
+      - Pytest suite: 14/14 unit tests passed in 1.40s.
+      - Security scan: `scan-secrets.ps1` verified 2,105 files clean with 0 leaked secrets or tokens.
+      - Catalog & Cart Freeze: `apps/web/app/shop/page.tsx`, `apps/web/app/shop/layout.tsx`, and Stripe checkout preserved 100% untouched.
 
 ---
 
 ## 4. Current Status: All Systems Operational
 
-- **Fleet Health**: All 37 specialized agents report `[ACTIVE]` across 9 Sub-Masters.
+- **Fleet Health**: All 40 specialized agents report `[ACTIVE]` across 10 Sub-Masters.
 - **Deployment Swarm**: 3-stage verification pipeline returns `OVERALL: VERIFIED_CLEAN` with 0 specification drift.
-- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), and `prod-api` (`:8001`) are rebuilt, restarted, and running live with zero-cache headers, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the new Island Reviews Pavilion, the Dual-Action conversion bridge, full-greenlight GTM/Consent telemetry, safe-storage incognito hardening, and the specialized Window AC & Split AC cooling divisions.
-- **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens.
-- **Storefront & Admin Performance**: Next.js production build verified with 57/57 static routes rendered, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, GSC canonical and review schema fixes applied, visible FAQ accordions on all 22 city pages, GTM route change and lead tracking armed, and live reviews hub at `/reviews`.
+- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), and `prod-api` (`:8001`) are rebuilt, restarted, and running live with zero-cache headers, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the Island Reviews Pavilion, the Dual-Action conversion bridge, full-greenlight GTM/Consent telemetry, safe-storage incognito hardening, the specialized Window AC & Split AC cooling divisions, and the Executive Monthly Reporting Hub (`/dev-os` Key R).
+- **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens across 2,105 files.
+- **Storefront Performance**: Next.js production build verified with 116/116 static routes rendered, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, GSC canonical armor deployed, HTTP 410 Gone for dead WordPress debris, robots crawl shield, and Batches 1, 2 & 3 (60 new standalone routes) indexed in dynamic and HTML sitemaps.
+
+
 

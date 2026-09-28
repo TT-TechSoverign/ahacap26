@@ -82,6 +82,23 @@ async def update_schedule(
 
     return {"status": "success", "schedule": schedule.dict()}
 
+@router.post("/content/publish")
+async def publish_root_content(db: AsyncSession = Depends(get_db)):
+    """
+    Promote draft_data to published data for the root path ('/').
+    """
+    path = "/"
+    result = await db.execute(select(models.ContentPage).where(models.ContentPage.path == path))
+    page = result.scalars().first()
+    if not page or not page.draft_data:
+        raise HTTPException(status_code=404, detail="No draft content to publish")
+    
+    page.data = page.draft_data
+    from datetime import timezone
+    page.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)
+    await db.commit()
+    return {"status": "success", "message": "Root content published"}
+
 # --- ADMIN ORDERS & LEADS ---
 
 class OrderUpdate(BaseModel):

@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Free $250 Sizing Survey | Affordable Home A/C'
+        absolute: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Free In-Home Estimate | Affordable Home A/C'
     },
-    description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin. Free $250 in-home sizing & electrical survey. 10–12 yr warranty. Call (808) 488-1111.',
+    description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin. Free in-home sizing & placement estimate ($0). 10–12 yr warranty. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/mini_split_ac',
     },
     openGraph: {
-        title: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Free $250 Sizing Survey | Affordable Home A/C',
-        description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin. Free $250 in-home sizing & electrical survey. 10–12 yr warranty. Call (808) 488-1111.',
+        title: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Free In-Home Estimate | Affordable Home A/C',
+        description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin. Free in-home sizing & placement estimate ($0). 10–12 yr warranty. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/mini_split_ac',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Free $250 Sizing Survey | Affordable Home A/C',
-        description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin. Free $250 in-home sizing & electrical survey. 10–12 yr warranty. Call (808) 488-1111.',
+        title: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Free In-Home Estimate | Affordable Home A/C',
+        description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin. Free in-home sizing & placement estimate ($0). 10–12 yr warranty. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/minisplitacphotos/mini-split-mitsubishi-air-handler.png'],
     }
 };
@@ -53,7 +53,7 @@ const breadcrumbSchema = {
 const faqs = [
     {
         q: "How fast can you install a mini-split on Oahu?",
-        a: "Because we maintain local inventory in our Waipahu warehouse, we do not make homeowners wait 4 to 8 weeks for mainland container shipping. Once your free in-home sizing survey is completed and equipment is selected, installation is typically completed within 3 to 5 business days (subject to scheduling and crew availability)."
+        a: "Because we maintain local inventory in our Waipahu warehouse, our equipment is on-island and ready for scheduling without waiting on mainland transit cycles. Once your free in-home sizing estimate is completed and equipment is selected, installation is typically scheduled within 3 to 5 business days (subject to scheduling and crew availability)."
     },
     {
         q: "What is Blue Fin coastal protection and why is it essential in Hawaii?",
@@ -61,7 +61,7 @@ const faqs = [
     },
     {
         q: "Will a mini-split work with my older Oahu home's electrical panel?",
-        a: "Yes. Many older homes in Kailua, Kaneohe, Pearl City, and Kaimuki have 60A or 100A main panels. During your free $250 in-home survey, our licensed CT-36775 technicians calculate your breaker load and identify subpanel capacity to ensure your installation proceeds smoothly with zero surprise electrician bills."
+        a: "Yes. Many older homes in Kailua, Kaneohe, Pearl City, and Kaimuki have 60A or 100A main panels. During your free in-home estimate, our technicians evaluate unit placement and power requirements. If a dedicated 208/230V circuit or panel work is needed, we coordinate with licensed electrical subcontractors."
     },
     {
         q: "Can I install mini-splits in an Oahu townhouse or condo with strict HOA rules?",

@@ -191,7 +191,7 @@ export default function ACRepairFunnel() {
                                 <div className="space-y-1 text-center">
                                     <p className="text-[11px] text-emerald-400 font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5">
                                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                        Transparent Upfront Pricing • By Appointment First
+                                        Upfront Estimates • By Appointment First
                                     </p>
                                     <p className="text-[11px] text-slate-300 font-sans">
                                         $175 Mini Split Diagnosis Appointment ($0 to book replacement estimates). Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the form above to reserve your appointment window.

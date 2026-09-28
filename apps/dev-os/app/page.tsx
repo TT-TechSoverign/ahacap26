@@ -56,6 +56,7 @@ import {
 } from 'lucide-react';
 import { SOVEREIGN_SOPS, SopDossier, SopStep } from './sopsData';
 import LiveSwarmVisualizer from './LiveSwarmVisualizer';
+import MonthlyReportsHub from './MonthlyReportsHub';
 
 // --- TYPES & INTERFACES ---
 
@@ -141,7 +142,7 @@ export default function DevOsEagleEyePage() {
     const [startPan, setStartPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
     // --- ACTIVE WORKSPACE & TILING STATE ---
-    const [activeViewMode, setActiveViewMode] = useState<'eagle_eye' | 'free' | 'tiled' | 'agent_os' | 'swarm'>('free');
+    const [activeViewMode, setActiveViewMode] = useState<'eagle_eye' | 'free' | 'tiled' | 'agent_os' | 'swarm' | 'reports'>('free');
     const [tiledNodes, setTiledNodes] = useState<[string, string]>(['node_agents', 'node_revenue']);
     const [activeTerminalTab, setActiveTerminalTab] = useState<'output' | 'audit_log'>('output');
     const [terminalOpen, setTerminalOpen] = useState<boolean>(false);
@@ -598,6 +599,10 @@ export default function DevOsEagleEyePage() {
                 setActiveViewMode('swarm');
                 appendLog('Live Sovereign Neural Swarm engaged (Key S).');
             }
+            if ((e.key === 'r' || e.key === 'R') && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
+                setActiveViewMode('reports');
+                appendLog('Executive Monthly Analytics & Reporting Hub engaged (Key R).');
+            }
             if (e.key === 'Escape') {
                 setInspectModalOpen(false);
                 setCommandPaletteOpen(false);
@@ -768,6 +773,14 @@ export default function DevOsEagleEyePage() {
                         Live Swarm ⚡ [S]
                     </button>
                     <button
+                        onClick={() => { setActiveViewMode('reports'); appendLog('Executive Monthly Analytics & Reporting Hub engaged.'); }}
+                        className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono font-bold transition ${activeViewMode === 'reports' ? 'bg-gradient-to-r from-teal-400 to-cyan-400 text-slate-950 shadow-md shadow-cyan-500/30' : 'text-slate-300 hover:bg-slate-800'}`}
+                        title="Executive Monthly Analytics & SEO Reports (Key R)"
+                    >
+                        <BarChart3 className="size-3.5 text-cyan-900" />
+                        Reports 📊 [R]
+                    </button>
+                    <button
                         onClick={() => resetFocus()}
                         className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono font-bold transition ${activeViewMode === 'free' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300 hover:bg-slate-800'}`}
                     >
@@ -831,8 +844,15 @@ export default function DevOsEagleEyePage() {
                 </div>
             </header>
 
-            {/* Conditional View: Swarm vs Dedicated Agent OS vs Canvas Viewport */}
-            {activeViewMode === 'swarm' ? (
+            {/* Conditional View: Reports vs Swarm vs Dedicated Agent OS vs Canvas Viewport */}
+            {activeViewMode === 'reports' ? (
+                <div className="relative h-full w-full overflow-y-auto bg-slate-950 pt-16 px-6 pb-20">
+                    <MonthlyReportsHub
+                        onLog={appendLog}
+                        onInspectAgent={openInspector}
+                    />
+                </div>
+            ) : activeViewMode === 'swarm' ? (
                 <div className="relative h-full w-full overflow-y-auto bg-slate-950 pt-16 px-6 pb-20 space-y-6">
                     <LiveSwarmVisualizer
                         brainData={brainData}
@@ -2413,7 +2433,7 @@ export default function DevOsEagleEyePage() {
             )}
 
             {/* Radar Minimap (Bottom Left) */}
-            {activeViewMode !== 'agent_os' && activeViewMode !== 'swarm' && (
+            {activeViewMode !== 'agent_os' && activeViewMode !== 'swarm' && activeViewMode !== 'reports' && (
                 <div className="absolute bottom-4 left-4 z-30 flex flex-col gap-1.5 rounded-2xl border border-slate-800 bg-slate-950/90 p-3 shadow-2xl backdrop-blur-md">
                     <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
                         <span>RADAR VIEWPORT</span>
@@ -2865,14 +2885,21 @@ export default function DevOsEagleEyePage() {
                                 className="flex items-center justify-between rounded-lg p-2 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 cursor-pointer"
                             >
                                 <span>&gt; Execute Full Fleet Audit</span>
-                                <span className="text-[10px] text-slate-500">21 Agents</span>
+                                <span className="text-[10px] text-slate-500">40 Agents</span>
+                            </div>
+                            <div 
+                                onClick={() => { setActiveViewMode('reports'); setCommandPaletteOpen(false); }}
+                                className="flex items-center justify-between rounded-lg p-2 text-slate-300 hover:bg-slate-800 hover:text-teal-400 cursor-pointer"
+                            >
+                                <span>&gt; Executive Monthly Analytics & SEO Reports</span>
+                                <span className="text-[10px] text-slate-500">Key R</span>
                             </div>
                             <div 
                                 onClick={() => { setActiveViewMode('agent_os'); setAllSopsExpanded(true); setCommandPaletteOpen(false); }}
                                 className="flex items-center justify-between rounded-lg p-2 text-slate-300 hover:bg-slate-800 hover:text-purple-400 cursor-pointer"
                             >
                                 <span>&gt; View Agent SOP Protocols</span>
-                                <span className="text-[10px] text-slate-500">27 Dossiers</span>
+                                <span className="text-[10px] text-slate-500">50 Dossiers</span>
                             </div>
                             <div 
                                 onClick={() => { handleReconcileStripe(); setCommandPaletteOpen(false); }}

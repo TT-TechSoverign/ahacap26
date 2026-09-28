@@ -1,0 +1,109 @@
+{
+  "contractor_license": "CT-36775",
+  "company_name": "Affordable Home A/C",
+  "island": "Oahu, Hawaii",
+  "phone": "(808) 488-1111",
+  "warehouse_address": "94-150 Leoleo St #203, Waipahu, HI 96797",
+  "booking_policy": "By Appointment First — Zero Upfront Payment Gate",
+  "cleanliness_standard": "Clean floor drop cloths laid under every indoor unit; zero wall or floor mess",
+  "permitting_disclaimer": "Affordable Home A/C focuses on specialty mechanical refrigeration craftsmanship. Homeowners or general contractors coordinate City & County of Honolulu DPP municipal building permits independently if mandated by condo boards or HOAs.",
+  "divisions": {
+    "mini_split": {
+      "name": "Ductless Mini-Split Division",
+      "services": [
+        {
+          "id": "mini-split-installation-estimate",
+          "name": "New Installation & Replacement Consultation",
+          "price": 0.00,
+          "price_display": "$0 Free In-Home Estimate",
+          "billing_mode": "free_estimate",
+          "scope": "Comprehensive room-by-room cooling load analysis, power requirement review, equipment selection, and itemized estimate. Zero upfront fee."
+        },
+        {
+          "id": "mini-split-diagnostic",
+          "name": "Diagnostic Troubleshooting & Symptom Isolation",
+          "price": 175.00,
+          "price_display": "$175 Flat Rate",
+          "billing_mode": "flat_diagnostic",
+          "scope": "In-depth electrical continuity check, electronic halogen sniffer leak detection, thermistor resistance testing, and inverter board diagnostics."
+        },
+        {
+          "id": "mini-split-basic-cleaning",
+          "name": "Basic Mini-Split Cleaning & Coil Sanitize",
+          "price": 175.00,
+          "price_display": "$175 / Unit",
+          "billing_mode": "per_unit",
+          "scope": "Casing wipe-down, mesh filter chemical wash, high-velocity coil foaming wash, and condensate tray rinse. Drop cloths on floor."
+        },
+        {
+          "id": "mini-split-deep-cleaning",
+          "name": "Premium Deep Teardown Cleaning",
+          "price": 275.00,
+          "price_display": "$275 / Unit",
+          "billing_mode": "per_unit",
+          "scope": "Front housing unclipped, blower wheel cylinder completely extracted for 360-degree degreasing bath, coil scrub, drain pan sanitization. Protective floor drop cloths under unit. Zero messy hydro bags."
+        },
+        {
+          "id": "condensate-drain-flush",
+          "name": "Condensate Drain Line Clearing & Flush",
+          "price": 175.00,
+          "price_display": "$175 Flat Rate",
+          "billing_mode": "flat_repair",
+          "scope": "Commercial vacuum line evacuation, thorough water flush to clear algae biofilm plugs, and anti-fungal pan tablet placement. Professional vacuum extraction only — no high-pressure nitrogen gas."
+        }
+      ]
+    },
+    "window_ac": {
+      "name": "Window AC Division",
+      "services": [
+        {
+          "id": "window-ac-warehouse-sales",
+          "name": "Waipahu Warehouse Direct Inventory Sales",
+          "price_range": "$504 to $1,025",
+          "billing_mode": "inventory_purchase",
+          "scope": "Brand-new factory-sealed LG Dual Inverter and Energy Star units in stock at 94-150 Leoleo St #203. Same-day local pickup available."
+        },
+        {
+          "id": "hawaii-energy-rebate",
+          "name": "Hawaii Energy Cash Rebate",
+          "price": -45.00,
+          "price_display": "$45 Cash Rebate",
+          "billing_mode": "rebate_credit",
+          "scope": "Instant or mail-in cash rebate for Oahu residential electric customers purchasing qualifying Energy Star window AC models only."
+        },
+        {
+          "id": "island-delivery",
+          "name": "Island-Wide Flat Rate Delivery",
+          "price": 50.00,
+          "price_display": "$50 Flat Rate",
+          "billing_mode": "flat_delivery",
+          "scope": "Delivery to residential or commercial addresses anywhere on Oahu from Hawaii Kai to Waianae and the North Shore."
+        },
+        {
+          "id": "window-ac-installation",
+          "name": "Standard Window AC Installation",
+          "price": 275.00,
+          "price_display": "$275 Standard",
+          "billing_mode": "installation_service",
+          "scope": "Custom fabrication for jalousie glass, vertical horizontal slider filler panel, or double-hung window. Weatherproof marine foam sealing, floor drop cloth protection, laser leveling. Standard exterior sill support brackets optional at additional cost. No hurricane brackets."
+        },
+        {
+          "id": "window-ac-deep-cleaning",
+          "name": "On-Site Window AC Deep Cleaning & Teardown",
+          "price": 275.00,
+          "price_display": "$275 Flat Rate",
+          "billing_mode": "per_unit",
+          "scope": "On-site chassis disassembly and deep cleaning with clean floor drop cloths under unit. Foaming coil rinse, condensate drain pan flush, and blower wheel sanitization. Completed entirely on-site with zero off-site transport or shop teardown."
+        },
+        {
+          "id": "clean-vs-replace-guidance",
+          "name": "Clean vs. Replace Evaluation",
+          "price": 0.00,
+          "price_display": "$0 Free Guide",
+          "billing_mode": "educational",
+          "scope": "Guidance on on-site deep cleaning ($275) for newer quality units vs upgrading to energy-efficient Dual Inverters for aged units with corroded coils or failing compressors. We perform all service on-site with clean floor drop cloths (no off-site shop haul-away)."
+        }
+      ]
+    }
+  }
+}

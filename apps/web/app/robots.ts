@@ -31,10 +31,19 @@ export default function robots(): MetadataRoute.Robots {
                     '/api/v1/dev-os',
                     '/api/v1/dev-os/*',
                     '/api/v1/admin',
-                    '/api/v1/admin/*',
                     '/checkout/',
                     '/maintenance/',
-                    '/puck/'
+                    '/puck/',
+                    '/*?*add-to-cart=*',
+                    '/*?*product_orderby=*',
+                    '/*?*product_view=*',
+                    '/*?*min_price=*',
+                    '/*?*max_price=*',
+                    '/*?*v=*',
+                    '/author/',
+                    '/wp-content/',
+                    '/element_category/',
+                    '/fusion_tb_category/'
                 ],
             },
             {

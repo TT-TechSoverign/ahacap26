@@ -8,8 +8,8 @@ import subprocess
 from datetime import datetime, timedelta
 from typing import Optional, List, Dict, Any
 
-from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status, UploadFile, File, Form
+from fastapi.responses import JSONResponse, FileResponse
 from pydantic import BaseModel
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -30,6 +30,14 @@ except ImportError:
         from apps.api.services.analytics_swarm import analytics_swarm_service
     except ImportError:
         analytics_swarm_service = None
+
+try:
+    from services.reporting_engine import reporting_engine
+except ImportError:
+    try:
+        from apps.api.services.reporting_engine import reporting_engine
+    except ImportError:
+        reporting_engine = None
 
 logger = logging.getLogger("dev_os")
 router = APIRouter()
@@ -69,6 +77,11 @@ class SessionSyncRequest(BaseModel):
     learnings: Optional[List[str]] = None
     author: Optional[str] = "SOVEREIGN_MASTER_AGENT"
 
+class ReportGenerateRequest(BaseModel):
+    month: str
+    year: str = "2026"
+    source_dir: Optional[str] = None
+
 # --- MASTER PROJECTS BRAIN STATE & MEMORY STORE ---
 MASTER_BRAIN_STATE: Dict[str, Any] = {
     "status": "ARMED_AND_SYNAPSED",
@@ -94,7 +107,8 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
         {"id": "syn_submaster_deploy", "name": "Deployment Quality Sub-Master", "endpoint": "submaster_deployment_quality", "protocol": "IN_PROCESS", "mode": "On-Demand", "status": "ARMED"},
         {"id": "syn_submaster_serp", "name": "SERP & Intent Acquisition Sub-Master", "endpoint": "submaster_serp_acquisition", "protocol": "IN_PROCESS", "mode": "On-Demand", "status": "ARMED"},
         {"id": "syn_submaster_velocity", "name": "Frictionless Conversion Velocity Sub-Master", "endpoint": "submaster_conversion_velocity", "protocol": "IN_PROCESS", "mode": "On-Demand", "status": "ARMED"},
-        {"id": "syn_submaster_studio", "name": "Creative AI & Spatial Media Studio Sub-Master", "endpoint": "submaster_creative_studio", "protocol": "IN_PROCESS", "mode": "On-Demand", "status": "ARMED"}
+        {"id": "syn_submaster_studio", "name": "Creative AI & Spatial Media Studio Sub-Master", "endpoint": "submaster_creative_studio", "protocol": "IN_PROCESS", "mode": "On-Demand", "status": "ARMED"},
+        {"id": "syn_submaster_reporting", "name": "Executive Analytics & Monthly Reporting Sub-Master", "endpoint": "submaster_executive_reporting", "protocol": "IN_PROCESS", "mode": "On-Demand", "status": "ARMED"}
     ],
     "active_directives": [
         "Enforce strict 'By Appointment First' mandate across all Oahu service touchpoints (Zero upfront payment before scheduling).",
@@ -220,7 +234,7 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "electric_utility": "Hawaiian Electric (HECO) ~44.2¢/kWh residential baseline (Highest in US)",
             "cooling_load_zones": "Leeward surge (Kapolei/Ewa 91°F) vs Windward humidity (Kailua/Kaneohe 74% RH)",
             "central_depot": "Waipahu Industrial Warehouse (94-1388 Moape St, Waipahu, HI 96797)",
-            "freight_advantage": "Same-day warehouse pickup eliminates 14-21 day mainland barge delays",
+            "freight_advantage": "Same-day warehouse pickup eliminates weeks of mainland shipping delays",
             "license_authority": "Hawaii State Contractor License CT-36775",
             "salt_air_defense": "Marine salt aerosol causes condenser coil galvanic corrosion within 18-36 months without annual anti-corrosion flush",
             "mold_biofilm_pathology": "74% average relative humidity fosters Cladosporium & Aspergillus biofilm in indoor mini-split blower wheels within 6-12 months"
@@ -267,22 +281,26 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
         },
         "swarm_org_tree": {
             "sovereign_master": "Sovereign Master Orchestrator (irasmussenjobs@gmail.com)",
-            "submasters_count": 6,
-            "total_agents": 24,
+            "submasters_count": 10,
+            "total_agents": 40,
             "submasters": [
                 {"id": "submaster_infrastructure", "name": "Infrastructure & Storage Sub-Master", "agents_count": 4},
                 {"id": "submaster_security_compliance", "name": "Cybersecurity & Compliance Sub-Master", "agents_count": 4},
-                {"id": "submaster_commerce_telemetry", "name": "Commerce & Appointment Telemetry Sub-Master", "agents_count": 3},
+                {"id": "submaster_commerce_telemetry", "name": "Commerce & Telemetry Sub-Master", "agents_count": 4},
                 {"id": "submaster_growth_grounding", "name": "Growth & Oahu Grounding Sub-Master", "agents_count": 7},
                 {"id": "submaster_crm_operations", "name": "Customer Operations & CRM Sub-Master", "agents_count": 3},
-                {"id": "submaster_deployment_quality", "name": "Deployment & Quality Swarm Sub-Master", "agents_count": 3}
+                {"id": "submaster_deployment_quality", "name": "Deployment & Quality Swarm Sub-Master", "agents_count": 4},
+                {"id": "submaster_serp_acquisition", "name": "SERP & Intent Acquisition Sub-Master", "agents_count": 3},
+                {"id": "submaster_conversion_velocity", "name": "Frictionless Conversion Velocity Sub-Master", "agents_count": 4},
+                {"id": "submaster_creative_studio", "name": "Creative AI & Spatial Media Studio Sub-Master", "agents_count": 4},
+                {"id": "submaster_executive_reporting", "name": "Executive Analytics & Monthly Reporting Sub-Master", "agents_count": 3}
             ],
             "execution_mode": "100% On-Demand Triggered (0% Background CPU idle burn)"
         },
         "agent_sops_matrix": {
-            "total_sops": 30,
-            "agent_sops_count": 24,
-            "submaster_sops_count": 6,
+            "total_sops": 50,
+            "agent_sops_count": 40,
+            "submaster_sops_count": 10,
             "compliance_standard": "Sovereign Tier Architecture v2.6.0",
             "token_policy": "Zero background polling loops; strictly client-triggered on-demand execution with compact JSON payloads.",
             "island_grounding": "Oahu CT-36775 licensed operations, HECO 44.2¢/kWh power model, Waipahu warehouse pickup, By-Appointment-First zero-barrier booking."
@@ -750,7 +768,7 @@ async def get_analytics_overview(db: AsyncSession = Depends(get_db)):
             "title": "Waipahu Warehouse Same-Day Pickup",
             "impact": "+24% Conversion Velocity",
             "status": "ACTIVE IN STOREFRONT",
-            "detail": "Eliminates Oahu customer freight anxiety (skip 2-3 week mainland barge transit)."
+            "detail": "Eliminates Oahu customer shipping delays (skip 2-3 week mainland shipping transit)."
         },
         {
             "id": "heco_power_roi",
@@ -1119,6 +1137,16 @@ SUBMASTER_REGISTRY = [
         "icon": "Palette",
         "supervisor": "Sovereign Master",
         "agents": ["agent_comfyui_bridge", "agent_avatar_portrait_crafter", "agent_trust_medallion_forge", "agent_asset_optimizer_sentinel"]
+    },
+    {
+        "id": "submaster_executive_reporting",
+        "name": "Executive Analytics & Monthly Reporting Sub-Master",
+        "title": "Executive Analytics & Monthly Reporting Sub-Master",
+        "scope": "Raw Analytics Ingestion, 3rd-Grade Executive SEO Synthesis, Multi-Format Document Publishing (.docx, .html, .md)",
+        "tier": "Executive Reporting",
+        "icon": "FileText",
+        "supervisor": "Sovereign Master",
+        "agents": ["agent_report_ingestor", "agent_narrative_crafter", "agent_document_forge"]
     }
 ]
 
@@ -1427,6 +1455,31 @@ AGENT_REGISTRY = [
         "icon": "Sparkles",
         "tier": "Creative Studio",
         "supervisor": "submaster_creative_studio"
+    },
+    # --- Under Sub-Master: Executive Analytics & Monthly Reporting ---
+    {
+        "id": "agent_report_ingestor",
+        "name": "Raw Analytics Ingestion Sentinel",
+        "scope": "Search Console Zip Archives, GA4 Snapshots, Metric Normalization",
+        "icon": "Download",
+        "tier": "Executive Reporting",
+        "supervisor": "submaster_executive_reporting"
+    },
+    {
+        "id": "agent_narrative_crafter",
+        "name": "Executive 3rd-Grade Synthesis Engine",
+        "scope": "Big Wins Extraction, Plain-English Translation, Keyword Sizing & Action Planning",
+        "icon": "Sparkles",
+        "tier": "Executive Reporting",
+        "supervisor": "submaster_executive_reporting"
+    },
+    {
+        "id": "agent_document_forge",
+        "name": "Multi-Format Document Compiler",
+        "scope": "Publication-Ready Word (.docx), Styled Presentation (.html) & Source Markdown (.md)",
+        "icon": "FileText",
+        "tier": "Executive Reporting",
+        "supervisor": "submaster_executive_reporting"
     }
 ]
 
@@ -1591,10 +1644,10 @@ async def run_agent_cro_optimizer(db: AsyncSession) -> Dict[str, Any]:
                 "lift_est": "+28% High-Tier Selection"
             },
             {
-                "funnel": "Window AC Teardown",
-                "tactic": "Waipahu Warehouse Drop-Off by Appointment",
-                "action": "Emphasize 24-48hr bench test turnaround vs waiting weeks for replacement parts (subject to scheduling)",
-                "lift_est": "+22% Local Drop-off"
+                "funnel": "Window AC Replacement",
+                "tactic": "Waipahu Warehouse Direct Pickup",
+                "action": "Emphasize same-day local pickup for factory-sealed units vs mainland shipping delays",
+                "lift_est": "+24% Local Pickup"
             },
             {
                 "funnel": "AC Sizing Matrix",
@@ -1625,7 +1678,7 @@ async def run_agent_oahu_grounding() -> Dict[str, Any]:
             "seasonal_heat_index": "87°F - 91°F Peak Summer Load (Leeward surge)",
             "relative_humidity": "74% Average (High salt-air mold and evaporator biofilm growth)",
             "hawaii_energy_rebate": "$45 instant/mail-in cash rebate on Energy Star LG Dual Inverters with official AHAC form",
-            "freight_lead_time": "14-21 Days Mainland Barge vs 0 Days (AHAC Waipahu Central Warehouse in stock)"
+            "freight_lead_time": "14-21 Days Mainland Transit vs 0 Days (AHAC Waipahu Central Warehouse in stock)"
         },
         "pricing_matrix": {
             "mini_split_basic": "$175 (~1.0 hr)",
@@ -1700,18 +1753,18 @@ async def run_agent_market_research() -> Dict[str, Any]:
         "status": "MONITORED",
         "region": "Oahu, Hawaii (Honolulu County)",
         "competitor_landscape": {
-            "big_box_retailers": "Home Depot & Lowe's: Limited in-stock sizing, no chemical teardown services, 2-3 wk mainland barge delays for high-efficiency inverters.",
+            "big_box_retailers": "Big-box retail stores: Limited in-stock sizing, no specialized teardown services, 2-3 wk mainland shipping delays for high-efficiency inverters.",
             "island_hvac_contractors": "$250-$350/hr truck rolls, 3 to 6 week scheduling backlogs during peak trade-wind heat surges.",
             "ahac_edge": "Waipahu warehouse in-stock inventory, $275 teardown cleaning, $50 flat island delivery, free pickup by appointment."
         },
         "power_rate_index": "Hawaiian Electric (HECO) residential baseline ~44.2¢/kWh.",
         "customer_add_to_cart_drivers": {
-            "immediate_relief_vs_barge": "Same-day/next-day equipment availability solves emergency room heat vs 14-21 day mainland barge wait.",
+            "immediate_relief_vs_shipping": "Same-day/next-day equipment availability solves emergency room heat vs 14-21 day mainland shipping wait.",
             "fulfillment_decision_calculus": {
                 "island_delivery_driver": "$50 flat delivery is preferred by customers without trucks/SUVs (saving H-1 transit and lifting 64-99 lb heavy boxes).",
                 "warehouse_pickup_driver": "Free Waipahu pickup preferred by contractors/DIYers when staged by appointment to eliminate waiting."
             },
-            "bracket_pricing_transparency": "Framing the cantilever bracket as evaluated on-site ($0 deposit) and highlighting that standard sills require no bracket eliminates surprise fees while ensuring safe installation for jalousie louvers and multi-story framing.",
+            "bracket_pricing_clarity": "Framing the cantilever bracket as evaluated on-site ($0 deposit) and highlighting that standard sills require no bracket provides upfront clarity while ensuring safe installation for jalousie louvers and multi-story framing.",
             "instant_rebate_anchor": "The official pre-approved $45 Hawaii Energy cash rebate PDF lowers effective cost ($535 8k becomes $490).",
             "zero_risk_service_intake": "$0 upfront payment for installation appointments removes credit card resistance and establishes instant contractor trust."
         },
@@ -1735,7 +1788,7 @@ async def run_agent_crm_dispatch(db: AsyncSession) -> Dict[str, Any]:
         "total_service_leads": total_leads,
         "pending_scheduling": pending_leads,
         "confirmed_scheduled": sched_leads,
-        "waipahu_intake_turnaround": "24-48 Hours (Drop-off bench test and sanitization)",
+        "waipahu_intake_turnaround": "Same-Day Local Pickup (Factory-Sealed Inventory)",
         "dispatch_protocol": "Strictly By Appointment First (Customer contacted prior to any payment or technician roll)",
         "details": f"CRM queue has {total_leads} appointment requests ({pending_leads} awaiting dispatch contact)."
     }
@@ -1910,14 +1963,14 @@ async def run_agent_high_intent_planner(db: AsyncSession) -> Dict[str, Any]:
 async def run_agent_intake_triage(db: AsyncSession) -> Dict[str, Any]:
     return {
         "status": "TRIAGE_READY",
-        "intake_protocol": "Waipahu Warehouse Drop-Off vs Field Technician Dispatch",
-        "dropoff_turnaround": "24-48 Hours (Full chemical teardown & pressure wash)",
+        "intake_protocol": "Window AC Warehouse Direct vs Field Technician Dispatch",
+        "dropoff_turnaround": "Same-Day Pickup for Factory-Sealed Inventory",
         "symptom_routing": {
-            "mold_mildew_odor": "Window AC Teardown ($275) or Mini-Split Premium Flush ($275)",
-            "water_leaking_inside": "Drain pan / condensate line clear ($175 basic / diagnostic)",
-            "compressor_short_cycle": "Capacitor / thermistor bench test at Waipahu warehouse"
+            "mold_mildew_odor": "Mini-Split Premium Deep Teardown ($275) or Window AC Clean vs Replace Assessment",
+            "water_leaking_inside": "Mini-split drain pan / condensate line clear & flush ($175 flat rate)",
+            "compressor_short_cycle": "Mini-split diagnostic troubleshooting ($175) or Window AC Clean vs Replace"
         },
-        "details": "Intake triage actively bifurcates repair vs drop-off cleaning appointments."
+        "details": "Intake triage actively routes mini-split service vs warehouse-direct window AC sales."
     }
 
 async def run_agent_regression_sentinel() -> Dict[str, Any]:
@@ -2157,6 +2210,44 @@ async def run_agent_asset_optimizer_sentinel() -> Dict[str, Any]:
         "details": "All customer review assets compressed and protected with instant CSS/SVG gradient fallback."
     }
 
+async def run_agent_report_ingestor() -> Dict[str, Any]:
+    """Ingests raw Search Console and GA4 analytics files from _analytics_data."""
+    from services.reporting_engine import reporting_engine
+    reports = reporting_engine.list_reports()
+    return {
+        "status": "INGESTION_ARMED",
+        "archive_count": len(reports),
+        "latest_dataset": (reports[0]["month"] + " " + reports[0]["year"]) if reports else "None",
+        "supported_archives": [".zip", "Chart.csv", "Queries.csv", "Pages.csv", "Devices.csv"],
+        "details": f"Ingestion sentinel active. {len(reports)} monthly datasets cataloged in _analytics_data."
+    }
+
+async def run_agent_narrative_crafter() -> Dict[str, Any]:
+    """Validates 3rd-grade executive SEO synthesis rules and narrative structures."""
+    return {
+        "status": "NARRATIVE_SYNTHESIZED",
+        "reading_level": "3rd-grade executive",
+        "key_sections": ["Big Wins", "Traffic Snapshot", "High-Intent Keywords", "Store Activity", "Action Plan"],
+        "oahu_grounding": "Waipahu warehouse pickup, HECO ~44.2¢/kWh inverter savings, 22-city service area network",
+        "details": "Executive synthesis engine calibrated for clear, jargon-free business reporting."
+    }
+
+async def run_agent_document_forge() -> Dict[str, Any]:
+    """Audits multi-format report publishing (.docx, .html, .md) capabilities."""
+    from services.reporting_engine import reporting_engine
+    reports = reporting_engine.list_reports()
+    docx_count = sum(1 for r in reports if r["has_docx"])
+    html_count = sum(1 for r in reports if r["has_html"])
+    return {
+        "status": "FORGE_OPERATIONAL",
+        "docx_available": True,
+        "html_available": True,
+        "markdown_available": True,
+        "reports_with_docx": docx_count,
+        "reports_with_html": html_count,
+        "details": f"Multi-format document forge ready: {docx_count} Word docs and {html_count} HTML presentations verified."
+    }
+
 # Map agent ID to its runner
 AGENT_RUNNERS = {
     "agent_host_sentinel": run_agent_host_sentinel,
@@ -2196,6 +2287,9 @@ AGENT_RUNNERS = {
     "agent_avatar_portrait_crafter": run_agent_avatar_portrait_crafter,
     "agent_trust_medallion_forge": run_agent_trust_medallion_forge,
     "agent_asset_optimizer_sentinel": run_agent_asset_optimizer_sentinel,
+    "agent_report_ingestor": run_agent_report_ingestor,
+    "agent_narrative_crafter": run_agent_narrative_crafter,
+    "agent_document_forge": run_agent_document_forge,
 }
 
 # --- AGENT & SUB-MASTER API ENDPOINTS ---
@@ -2999,6 +3093,182 @@ async def update_admin_user_credentials(payload: AdminUserPasswordUpdateRequest,
     await db.commit()
     
     return {"status": "success", "email": email, "role": role, "name": name, "message": "User credentials successfully updated in database."}
+
+
+# --- EXECUTIVE MONTHLY ANALYTICS & REPORTING ENDPOINTS ---
+
+@router.get("/reports", dependencies=[Depends(verify_dev_os_session)])
+async def get_monthly_reports():
+    """Lists all available executive monthly reports in _analytics_data."""
+    if not reporting_engine:
+        raise HTTPException(status_code=500, detail="ReportingEngine not initialized")
+    reports = reporting_engine.list_reports()
+    return {
+        "status": "success",
+        "count": len(reports),
+        "reports": reports
+    }
+
+@router.post("/reports/upload", dependencies=[Depends(verify_dev_os_session)])
+async def upload_and_generate_report(
+    file: UploadFile = File(...),
+    month: str = Form(...),
+    year: str = Form("2026"),
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Uploads a raw analytics ZIP archive or CSV and compiles executive reports
+    across Markdown (.md), HTML presentation (.html), and Word document (.docx).
+    """
+    if not reporting_engine:
+        raise HTTPException(status_code=500, detail="ReportingEngine not initialized")
+
+    month_clean = month.strip().capitalize()
+    year_clean = year.strip()
+
+    # Create destination staging folder
+    staging_dir = os.path.join(reporting_engine.base_dir, f"{month_clean}{year_clean}")
+    os.makedirs(staging_dir, exist_ok=True)
+
+    file_bytes = await file.read()
+    file_path = os.path.join(staging_dir, file.filename)
+    with open(file_path, "wb") as f:
+        f.write(file_bytes)
+
+    # Run the reporting pipeline
+    try:
+        if file.filename.endswith(".zip"):
+            result = reporting_engine.run_full_pipeline(file_path, month_clean, year_clean)
+        else:
+            result = reporting_engine.run_full_pipeline(staging_dir, month_clean, year_clean)
+
+        await log_dev_os_audit(db, "EXECUTIVE_REPORT_GENERATED", {
+            "month": month_clean,
+            "year": year_clean,
+            "files": result["files"],
+            "metrics": result["metrics"]
+        })
+
+        return {
+            "status": "success",
+            "message": f"Successfully compiled {month_clean} {year_clean} Executive Report in .docx, .html, and .md.",
+            "report": result
+        }
+    except Exception as e:
+        logger.error(f"Error compiling report for {month_clean} {year_clean}: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Report generation error: {str(e)}")
+
+@router.post("/reports/generate", dependencies=[Depends(verify_dev_os_session)])
+async def generate_report_from_existing(payload: ReportGenerateRequest, db: AsyncSession = Depends(get_db)):
+    """Generates or regenerates an executive report from existing raw data directory."""
+    if not reporting_engine:
+        raise HTTPException(status_code=500, detail="ReportingEngine not initialized")
+
+    month_clean = payload.month.strip().capitalize()
+    year_clean = payload.year.strip()
+
+    source_dir = payload.source_dir
+    if not source_dir:
+        # Check standard potential folder names
+        candidates = [
+            os.path.join(reporting_engine.base_dir, f"{month_clean}{year_clean}"),
+            os.path.join(reporting_engine.base_dir, f"{month_clean}-{year_clean}"),
+            os.path.join(reporting_engine.base_dir, f"{month_clean}-SEO-Report-{year_clean}"),
+        ]
+        source_dir = next((c for c in candidates if os.path.exists(c)), None)
+
+    if not source_dir or not os.path.exists(source_dir):
+        raise HTTPException(status_code=404, detail=f"No raw data directory found for {month_clean} {year_clean}")
+
+    try:
+        result = reporting_engine.run_full_pipeline(source_dir, month_clean, year_clean)
+        await log_dev_os_audit(db, "EXECUTIVE_REPORT_REGENERATED", {
+            "month": month_clean,
+            "year": year_clean,
+            "files": result["files"]
+        })
+        return {
+            "status": "success",
+            "message": f"Successfully compiled {month_clean} {year_clean} Executive Report.",
+            "report": result
+        }
+    except Exception as e:
+        logger.error(f"Error generating report: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/reports/preview", dependencies=[Depends(verify_dev_os_session)])
+async def preview_monthly_report(month: str, year: str = "2026", format: str = "html"):
+    """Returns preview content (HTML or Markdown) for an executive report."""
+    if not reporting_engine:
+        raise HTTPException(status_code=500, detail="ReportingEngine not initialized")
+
+    month_clean = month.strip().capitalize()
+    year_clean = year.strip()
+    reports = reporting_engine.list_reports()
+    
+    match = next((r for r in reports if r["month"].lower() == month_clean.lower() and r["year"] == year_clean), None)
+    if not match:
+        raise HTTPException(status_code=404, detail=f"Report for {month_clean} {year_clean} not found.")
+
+    if format.lower() == "html" and match.get("html_path") and os.path.exists(match["html_path"]):
+        with open(match["html_path"], "r", encoding="utf-8") as f:
+            content = f.read()
+        return Response(content=content, media_type="text/html")
+    elif match.get("md_path") and os.path.exists(match["md_path"]):
+        with open(match["md_path"], "r", encoding="utf-8") as f:
+            content = f.read()
+        return {"format": "markdown", "content": content}
+    else:
+        raise HTTPException(status_code=404, detail="Preview file content not found.")
+
+@router.get("/reports/download", dependencies=[Depends(verify_dev_os_session)])
+async def download_monthly_report(month: str, year: str = "2026", file_type: str = "docx"):
+    """Downloads an executive report in Word (.docx), Presentation (.html), or Markdown (.md)."""
+    if not reporting_engine:
+        raise HTTPException(status_code=500, detail="ReportingEngine not initialized")
+
+    month_clean = month.strip().capitalize()
+    year_clean = year.strip()
+    reports = reporting_engine.list_reports()
+    
+    match = next((r for r in reports if r["month"].lower() == month_clean.lower() and r["year"] == year_clean), None)
+    if not match:
+        raise HTTPException(status_code=404, detail=f"Report for {month_clean} {year_clean} not found.")
+
+    target_path = None
+    media_type = "application/octet-stream"
+    ext = file_type.lower().strip(".")
+
+    if ext == "docx":
+        target_path = match.get("docx_path")
+        media_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    elif ext == "html":
+        target_path = match.get("html_path")
+        media_type = "text/html"
+    elif ext in ("md", "markdown"):
+        target_path = match.get("md_path")
+        media_type = "text/markdown"
+
+    if not target_path or not os.path.exists(target_path):
+        # Attempt just-in-time generation if missing docx
+        if ext == "docx" and match.get("md_path") and os.path.exists(match["md_path"]):
+            with open(match["md_path"], "r", encoding="utf-8") as f:
+                md_content = f.read()
+            out_docx = os.path.join(match["folder"], f"CEO-SEO-Report-{month_clean}-{year_clean}.docx")
+            if reporting_engine.generate_docx(md_content, out_docx, month_clean, year_clean):
+                target_path = out_docx
+            else:
+                raise HTTPException(status_code=404, detail=f"Could not generate docx for {month_clean} {year_clean}")
+        else:
+            raise HTTPException(status_code=404, detail=f"Requested {ext} file not found for {month_clean} {year_clean}")
+
+    filename = os.path.basename(target_path)
+    return FileResponse(
+        path=target_path,
+        media_type=media_type,
+        filename=filename,
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
 
 
 

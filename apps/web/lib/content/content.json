@@ -56,12 +56,12 @@
                     "color": "accent"
                 },
                 {
-                    "id": "cleaning",
-                    "title": "WINDOW AC CLEANING",
-                    "description": "Deep cleaning to restore efficiency and air quality.",
-                    "link": "WINDOW AC MAINTENANCE",
-                    "icon": "cleaning_services",
-                    "href": "/window_ac_maintenance",
+                    "id": "clean-vs-replace",
+                    "title": "CLEAN VS REPLACE",
+                    "description": "Evaluate repair costs vs. upgrading to an efficient inverter.",
+                    "link": "CLEAN VS REPLACE GUIDE",
+                    "icon": "calculate",
+                    "href": "/clean-vs-replace-window-ac",
                     "color": "accent"
                 }
             ],
@@ -334,7 +334,7 @@
             "btn_submit": "Submit Request",
             "services_list": [
                 "Window AC Installation",
-                "WINDOW AC CLEANING",
+                "Window AC Deep Cleaning",
                 "Window AC Diagnosis/Repair",
                 "Mini Split Estimate (New)",
                 "Mini Split Estimate (Replace)",
@@ -464,11 +464,11 @@
             }
         },
         "local_authority": {
-            "title_line1": "Don't Buy",
-            "title_italic": "\"Big Box\"",
-            "title_gradient": "Buy Local Expert.",
-            "subtitle": "Oahu Inventory Hub",
-            "description": "Why risk shipping damage or waiting weeks for mainland freight? Affordable Home A/C stocks thousands of units right here in Waipahu, HI for immediate local pickup.",
+            "title_line1": "Local Oahu",
+            "title_italic": "Warehouse Stock",
+            "title_gradient": "Ready for You.",
+            "subtitle": "Waipahu Inventory Hub",
+            "description": "Skip the wait for mainland shipping. Affordable Home A/C stocks brand-new, factory-sealed units right here in Waipahu for fast local pickup and island-wide delivery.",
             "badge": "Waipahu Distribution Center",
             "location": "Waipahu, HI"
         },
@@ -821,8 +821,8 @@
                 "href": "/ac-repair"
             },
             {
-                "text": "WINDOW AC CLEANING",
-                "href": "/window_ac_maintenance"
+                "text": "CLEAN VS REPLACE",
+                "href": "/clean-vs-replace-window-ac"
             },
             {
                 "text": "SERVICE AREAS",
@@ -920,10 +920,10 @@
     "footer_schedule": {
         "mini_split_label": "MINI SPLIT AC",
         "window_ac_label": "WINDOW AC",
-        "mini_split_estimate_date": "Next Available Estimate: Feb 23-27, 2026",
-        "mini_split_install_date": "Next Available Install: Feb 23-27, 2026",
-        "window_ac_estimate_date": "Next Available Estimate: Feb 23-27, 2026",
-        "window_ac_install_date": "Next Available Install: Feb 23-27, 2026"
+        "mini_split_estimate_date": "Next Available Estimate: Oct 1-5, 2026",
+        "mini_split_install_date": "Next Available Install: Oct 6-10, 2026",
+        "window_ac_estimate_date": "Next Available Estimate: Oct 1-3, 2026",
+        "window_ac_install_date": "Next Available Install: Oct 3-7, 2026"
     },
     "window_ac": {
         "hero": {

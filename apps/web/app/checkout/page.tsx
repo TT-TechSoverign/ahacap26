@@ -430,7 +430,7 @@ function CheckoutContent() {
                                     <p className="text-cyan-400 font-bold uppercase text-[9px] md:text-[10px] tracking-wider flex items-center justify-center gap-1.5">
                                         <span>1-Year Warranty</span>
                                         <span className="text-slate-600">•</span>
-                                        <span>Bench Tested</span>
+                                        <span>Factory Sealed</span>
                                         <span className="text-slate-600">•</span>
                                         <span>Free In-Store Pickup</span>
                                     </p>

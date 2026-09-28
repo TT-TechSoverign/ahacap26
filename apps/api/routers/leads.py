@@ -9,9 +9,14 @@ import models
 from database import get_db
 from services import email as email_service
 import logging
+import re
+import time
 
 # Configure Logger
 logger = logging.getLogger("api.leads")
+
+# In-memory deduplication cache: {dedup_key: (lead_id, timestamp)}
+RECENT_LEAD_SUBMISSIONS = {}
 
 router = APIRouter()
 
@@ -62,6 +67,22 @@ async def create_lead(
         urgency_val = (lead_data.urgency or "standard").strip().lower()
         addr = (lead_data.address or "").strip() or "Oahu, HI"
 
+        # 0. Rapid Submission Deduplication Guard (60s window)
+        clean_phone = re.sub(r'\D', '', lead_data.phone or "")
+        dedup_key = f"{clean_phone}:{svc.lower()}"
+        now_ts = time.time()
+        
+        # Prune old cache entries
+        for k in list(RECENT_LEAD_SUBMISSIONS.keys()):
+            if now_ts - RECENT_LEAD_SUBMISSIONS[k][1] > 300:
+                RECENT_LEAD_SUBMISSIONS.pop(k, None)
+
+        if clean_phone and dedup_key in RECENT_LEAD_SUBMISSIONS:
+            prev_id, prev_ts = RECENT_LEAD_SUBMISSIONS[dedup_key]
+            if now_ts - prev_ts < 60:
+                logger.warning(f"🛡️ [DEDUPLICATION SHIELD] Duplicate lead submission for {dedup_key} within 60s. Returning existing Lead ID {prev_id} without duplicate dispatch.")
+                return {"status": "success", "lead_id": prev_id, "message": "Inquiry already received (deduplicated)."}
+
         # Check rate limit (bypass for master test account)
         ip = request.client.host if request.client else "unknown"
         if email_addr.lower() != "irasmussenjobs@gmail.com":
@@ -88,6 +109,9 @@ async def create_lead(
         db.add(new_lead)
         await db.commit()
         await db.refresh(new_lead)
+        
+        if clean_phone:
+            RECENT_LEAD_SUBMISSIONS[dedup_key] = (new_lead.id, now_ts)
         
         logger.info(f"Lead Created: {new_lead.id} | {new_lead.email} | Service: {new_lead.service_type}")
 

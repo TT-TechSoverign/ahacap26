@@ -81,7 +81,7 @@ const brands = [
 const faqs = [
     {
         q: "How fast can you install a mini-split on Oahu?",
-        a: "Because we maintain local inventory in our Waipahu warehouse, we do not make homeowners wait 4 to 8 weeks for mainland container shipping. Once your free in-home sizing survey is completed and equipment is selected, installation is typically completed within 3 to 5 business days (subject to scheduling and crew availability)."
+        a: "Because we maintain local inventory in our Waipahu warehouse, our equipment is on-island and ready for scheduling without waiting on mainland transit cycles. Once your free in-home sizing estimate is completed and equipment is selected, installation is typically scheduled within 3 to 5 business days (subject to scheduling and crew availability)."
     },
     {
         q: "What is Blue Fin coastal protection and why is it essential in Hawaii?",
@@ -89,7 +89,7 @@ const faqs = [
     },
     {
         q: "Will a mini-split work with my older Oahu home's electrical panel?",
-        a: "Yes. Many older homes in Kailua, Kaneohe, Pearl City, and Kaimuki have 60A or 100A main panels. During your free $250 in-home survey, our licensed CT-36775 technicians calculate your breaker load and identify subpanel capacity to ensure your installation proceeds smoothly with zero surprise electrician bills."
+        a: "Yes. Many older homes in Kailua, Kaneohe, Pearl City, and Kaimuki have 60A or 100A main panels. During your free in-home estimate, our technicians evaluate unit placement and power requirements. If a dedicated 208/230V circuit or panel work is needed, we coordinate with licensed electrical subcontractors."
     },
     {
         q: "Can I install mini-splits in an Oahu townhouse or condo with strict HOA rules?",
@@ -97,7 +97,7 @@ const faqs = [
     },
     {
         q: "Does Affordable Home AC participate in Hawaii Energy rebates for mini-splits?",
-        a: "No. Affordable Home AC does not participate in Hawaii Energy rebates for our mini split division. Rebate programs often require contractors to artificially inflate base retail equipment prices, restrict unit selections, and subject homeowners to months of bureaucratic voucher approvals. Instead, we offer direct, honest Hawaii Contractor CT-36775 pricing—delivering genuine upfront savings with zero red tape."
+        a: "No. Affordable Home AC does not participate in Hawaii Energy rebates for our mini split division. Rebate programs often require contractors to artificially inflate base retail equipment prices, restrict unit selections, and subject homeowners to months of bureaucratic voucher approvals. Instead, we offer direct Hawaii Contractor CT-36775 pricing—delivering genuine upfront savings without voucher delays."
     },
     {
         q: "Do your mini-splits comply with Honolulu residential noise ordinances?",
@@ -151,7 +151,7 @@ export default function MiniSplitsPage() {
                             href="/mini-split-estimate"
                             className="w-full sm:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-cyan-500/40 font-bold text-base rounded-xl flex items-center justify-center gap-2 transition-colors"
                         >
-                            <Zap className="size-5" /> Instant Sizing & Panel Assessment
+                            <Zap className="size-5" /> Free Sizing & In-Home Estimate
                         </Link>
                     </div>
 
@@ -189,18 +189,18 @@ export default function MiniSplitsPage() {
                         </div>
                         <h3 className="font-header font-black text-lg text-white uppercase mb-2">On-Island Waipahu Stock</h3>
                         <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                            No 4 to 8 week Matson mainland freight delays while you suffer in the heat. Our Waipahu warehouse is fully stocked with top brands for rapid installation.
+                            Factory-sealed inventory stocked right here in our Waipahu warehouse. Avoid weeks of mainland transit wait times with prompt on-island delivery and installation.
                         </p>
                     </div>
 
-                    {/* Card 2: Free In-Home Sizing & Panel Check */}
+                    {/* Card 2: Free In-Home Sizing & Placement */}
                     <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 flex flex-col hover:border-cyan-500/40 transition-colors">
                         <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4">
                             <Zap className="size-6" />
                         </div>
-                        <h3 className="font-header font-black text-lg text-white uppercase mb-2">Free $250 Sizing & Panel Survey</h3>
+                        <h3 className="font-header font-black text-lg text-white uppercase mb-2">Free In-Home Sizing & Placement</h3>
                         <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                            We inspect square footage, sun exposure, and older Oahu 60A/100A electrical panels first, ensuring zero surprise electrical bills.
+                            Our technicians evaluate room dimensions, sun exposure, and unit placement. For dedicated circuits or panel capacity needs, we coordinate with licensed electrical subcontractors.
                         </p>
                     </div>
 

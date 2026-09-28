@@ -57,14 +57,14 @@ export default function LocalServiceFunnel({ city }: LocalServiceFunnelProps) {
             ariaLabel: `Shop local window AC inventory for ${city}`
         },
         {
-            id: 'window-ac-cleaning',
-            title: 'Window AC Cleaning',
-            description: `Complete teardown and chemical cleaning to eradicate salt-air corrosion and restore peak airflow in ${city}.`,
-            icon: LucideIcons.Droplets,
-            ctaText: 'BOOK A CLEANING',
-            route: `/window_ac_maintenance?city=${encodeURIComponent(city)}`,
-            gaCategory: 'Window Cleaning',
-            ariaLabel: `Book a window AC deep cleaning service in ${city}`
+            id: 'clean-vs-replace',
+            title: 'Clean vs. Replace Evaluation',
+            description: `Evaluate whether your aging window AC is worth maintaining or if upgrading to an LG Dual Inverter saves more on your ${city} electric bill.`,
+            icon: LucideIcons.RotateCcw,
+            ctaText: 'RUN CALCULATOR',
+            route: `/clean-vs-replace-window-ac`,
+            gaCategory: 'Clean vs Replace',
+            ariaLabel: `Evaluate window AC clean vs replace in ${city}`
         }
     ];
 

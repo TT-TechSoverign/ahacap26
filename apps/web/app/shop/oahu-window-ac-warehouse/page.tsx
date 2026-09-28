@@ -25,18 +25,18 @@ import { WarehouseInventoryGrid } from './inventory-grid';
 
 export const metadata: Metadata = {
     title: 'In-Stock Oahu Window AC Warehouse | Waipahu Pickup & $50 Delivery',
-    description: 'Skip the 14-21 day mainland barge shipping wait. In-stock LG Dual Inverter window ACs warehoused locally on Oahu. Free Waipahu warehouse pickup by appointment or $50 flat-rate island delivery.',
+    description: 'In-stock LG Dual Inverter window air conditioners warehoused locally in Waipahu, Oahu. Free warehouse pickup by appointment or $50 flat-rate island delivery.',
     keywords: [
         'in stock window ac oahu',
         'window ac warehouse waipahu',
         'buy window ac honolulu',
         'same day ac pickup hawaii',
         'lg dual inverter window ac oahu',
-        'beat mainland shipping ac hawaii',
+        'in stock ac delivery hawaii',
         'oahu air conditioning inventory'
     ],
     openGraph: {
-        title: 'In-Stock Oahu Window AC Warehouse | Skip Mainland Shipping Wait',
+        title: 'In-Stock Oahu Window AC Warehouse | Waipahu Pickup & Delivery',
         description: 'Locally warehoused LG Dual Inverter window air conditioners ready on Oahu. Free Waipahu pickup by appointment or $50 island-wide delivery. Includes $45 Hawaii Energy rebate form.',
         url: 'https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse',
         type: 'website',
@@ -65,8 +65,8 @@ export default function OahuWindowAcWarehousePage() {
             a: "We deliver across all Oahu zip codes—from Honolulu and Pearl City to Kapolei, Ewa Beach, Kailua, Kaneohe, and the North Shore—for a flat $50. Once your order is placed, our logistics coordinator reaches out to confirm your delivery date and safe placement location. No hidden freight surcharges or fuel add-ons."
         },
         {
-            q: "Why should I buy from your Oahu warehouse instead of ordering online from mainland retailers?",
-            a: "Mainland orders (Amazon, Home Depot mainland freight, etc.) take 14 to 21 days to cross the Pacific on commercial container barges. Units are repeatedly transferred across docks and heavy sea swells, frequently resulting in bent coil fins, internal refrigerant leaks, or concealed shipping damage that takes weeks to return. We inspect and warehouse genuine factory-sealed LG Dual Inverters directly on Oahu, backed by our local Hawaii support."
+            q: "What is the advantage of purchasing directly from your Oahu warehouse?",
+            a: "When ordering from the mainland, transit across the ocean can take weeks. By purchasing directly from our Waipahu warehouse, your unit is factory-sealed in our local inventory, pre-inspected, and backed by authentic local Hawaii warranty support. You can pick it up immediately by appointment or have it delivered directly to your door anywhere on Oahu."
         },
         {
             q: "How do I claim the $45 Hawaii Energy cash rebate?",
@@ -90,7 +90,7 @@ export default function OahuWindowAcWarehousePage() {
                 "@id": "https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse#webpage",
                 "url": "https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse",
                 "name": "In-Stock Oahu Window AC Warehouse | Waipahu Local Inventory",
-                "description": "Skip the 14-21 day mainland barge shipping wait. In-stock LG Dual Inverter window ACs warehoused locally on Oahu. Free Waipahu warehouse pickup by appointment or $50 flat-rate island delivery.",
+                "description": "In-stock LG Dual Inverter window air conditioners warehoused locally in Waipahu, Oahu. Free warehouse pickup by appointment or $50 flat-rate island delivery.",
                 "breadcrumb": {
                     "@type": "BreadcrumbList",
                     "itemListElement": [
@@ -168,13 +168,13 @@ export default function OahuWindowAcWarehousePage() {
                 </div>
             </div>
 
-            {/* Hero Section: Beat the Barge */}
+            {/* Hero Section: Local Waipahu Inventory */}
             <section className="relative overflow-hidden py-14 md:py-20 px-4 border-b border-slate-800 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-500/10 via-transparent to-transparent pointer-events-none" />
                 <div className="max-w-6xl mx-auto text-center relative z-10">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs md:text-sm font-semibold mb-6">
                         <Timer className="w-4 h-4 text-amber-400" />
-                        <span>Beat the 14–21 Day Mainland Barge Shipping Wait</span>
+                        <span>Local Waipahu Inventory • Rapid Oahu Availability</span>
                     </div>
 
                     <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight md:leading-[1.15]">
@@ -185,7 +185,7 @@ export default function OahuWindowAcWarehousePage() {
                     </h1>
 
                     <p className="mt-6 text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                        Don't suffer through Oahu's tropical humidity waiting 3 weeks for mainland freight. 
+                        Get dependable cooling on Oahu without waiting weeks on mainland transit. 
                         We physically stock genuine factory-sealed <strong className="text-white">LG Dual Inverter</strong> window air conditioners right here in Waipahu.
                     </p>
 
@@ -241,15 +241,15 @@ export default function OahuWindowAcWarehousePage() {
                 </div>
             </section>
 
-            {/* Why Local Oahu Warehouse Beats Mainland Retailers Comparison */}
+            {/* Why Local Oahu Warehouse Matters */}
             <section className="py-14 px-4 bg-slate-900/40 border-b border-slate-800">
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center mb-10">
                         <h2 className="text-2xl md:text-3xl font-extrabold text-white">
-                            The Reality of Ordering Window ACs to Hawaii
+                            Why Local Waipahu Warehouse Inventory Matters
                         </h2>
                         <p className="text-sm md:text-base text-slate-400 mt-2">
-                            Why mainland online ordering frequently ends in damaged compressors and weeks of sweltering heat.
+                            The benefits of purchasing in-stock equipment directly on Oahu.
                         </p>
                     </div>
 
@@ -257,47 +257,47 @@ export default function OahuWindowAcWarehousePage() {
                         <table className="w-full text-left text-sm border border-slate-800 rounded-xl overflow-hidden bg-slate-900/60">
                             <thead className="bg-slate-800/80 text-xs font-bold uppercase tracking-wider text-slate-300 border-b border-slate-700">
                                 <tr>
-                                    <th className="py-3.5 px-4">Feature / Experience</th>
-                                    <th className="py-3.5 px-4 text-rose-400">Mainland Online Retailers</th>
+                                    <th className="py-3.5 px-4">Fulfillment & Service</th>
+                                    <th className="py-3.5 px-4 text-slate-400">Standard Mainland Online Orders</th>
                                     <th className="py-3.5 px-4 text-emerald-400 bg-emerald-500/10 border-l border-r border-emerald-500/30">
-                                        Affordable Home AC Oahu Warehouse
+                                        Affordable Home AC Waipahu Warehouse
                                     </th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-800 text-slate-300">
                                 <tr>
                                     <td className="py-3.5 px-4 font-semibold text-white">Transit Time to Oahu</td>
-                                    <td className="py-3.5 px-4 text-rose-300">14 to 21 business days across Pacific barge</td>
+                                    <td className="py-3.5 px-4 text-slate-400">Typically 2 to 4 weeks mainland ocean transit</td>
                                     <td className="py-3.5 px-4 text-emerald-300 font-semibold bg-emerald-500/5 border-l border-r border-emerald-500/20">
                                         In-Stock in Waipahu (Same-Day / Next-Day Scheduled Pickup or Delivery)
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="py-3.5 px-4 font-semibold text-white">Freight Damage Risk</td>
-                                    <td className="py-3.5 px-4 text-slate-400">High: 4+ dock transfers, rough sea swell vibrations, bent fins</td>
+                                    <td className="py-3.5 px-4 font-semibold text-white">Inventory Handling</td>
+                                    <td className="py-3.5 px-4 text-slate-400">Multi-stage long-distance freight transit</td>
                                     <td className="py-3.5 px-4 text-emerald-300 font-semibold bg-emerald-500/5 border-l border-r border-emerald-500/20">
-                                        Zero Ocean Risk: Stored in climate-controlled Waipahu facility, pre-inspected
+                                        Stored in our local Waipahu facility, factory-sealed & verified
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="py-3.5 px-4 font-semibold text-white">Returns & Replacements</td>
-                                    <td className="py-3.5 px-4 text-slate-400">Nightmare: You must repack 70-110 lbs and pay return freight</td>
+                                    <td className="py-3.5 px-4 font-semibold text-white">Returns & Exchanges</td>
+                                    <td className="py-3.5 px-4 text-slate-400">Complex return shipping and long transit delays</td>
                                     <td className="py-3.5 px-4 text-emerald-300 font-semibold bg-emerald-500/5 border-l border-r border-emerald-500/20">
-                                        Local Hawaii Support: 1-Year local warranty support & immediate exchange
+                                        Direct local Hawaii support & prompt on-island service
                                     </td>
                                 </tr>
                                 <tr>
                                     <td className="py-3.5 px-4 font-semibold text-white">Hawaii Energy $45 Rebate</td>
-                                    <td className="py-3.5 px-4 text-slate-400">You must search and figure out forms yourself</td>
+                                    <td className="py-3.5 px-4 text-slate-400">Customer must locate and navigate forms independently</td>
                                     <td className="py-3.5 px-4 text-emerald-300 font-semibold bg-emerald-500/5 border-l border-r border-emerald-500/20">
                                         Pre-filled official $45 Hawaii Energy Rebate Form included in every box
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="py-3.5 px-4 font-semibold text-white">Professional Installation Add-on</td>
-                                    <td className="py-3.5 px-4 text-slate-400">None. You are on your own with jalousies and heavy brackets</td>
+                                    <td className="py-3.5 px-4 font-semibold text-white">Professional Installation</td>
+                                    <td className="py-3.5 px-4 text-slate-400">Customer arranges third-party installer or self-installs</td>
                                     <td className="py-3.5 px-4 text-emerald-300 font-semibold bg-emerald-500/5 border-l border-r border-emerald-500/20">
-                                        Optional turnkey installation by Hawaii Licensed HVAC Contractor (CT-36775)
+                                        Optional turnkey installation by licensed HVAC technicians (CT-36775)
                                     </td>
                                 </tr>
                             </tbody>

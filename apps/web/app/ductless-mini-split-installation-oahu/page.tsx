@@ -261,7 +261,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
 
                     <p className="mt-6 text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
                         Say goodbye to noisy window units and high electricity bills. 
-                        Affordable Home AC delivers marine-grade, whisper-quiet ductless heat pump systems engineered specifically for Oahu's trade winds and salt air.
+                        Affordable Home AC delivers marine-grade, whisper-quiet ductless heat pump systems engineered specifically for Oahu&apos;s trade winds and salt air.
                     </p>
 
                     {/* Trust Pillar Highlights */}
@@ -437,7 +437,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                         </p>
                         <p className="text-xs md:text-sm text-slate-300 leading-relaxed">
                             Because modern DC inverter compressors lack brutal startup spikes and ramp up gently, a 1-zone or 2-zone mini-split system only draws 8–15 Amps. 
-                            We calculate your panel's exact continuous capacity during your free site survey to keep your project affordable.
+                            We calculate your panel&apos;s exact continuous capacity during your free site survey to keep your project affordable.
                         </p>
                         <div className="p-3 rounded-xl bg-amber-500/5 border border-amber-500/20 text-amber-300 text-xs font-medium">
                             ★ Free continuous electrical load calculation included during on-site survey.
@@ -453,11 +453,11 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                             The Hawaii Energy 0% Rebate Fact Check
                         </h3>
                         <p className="text-xs md:text-sm text-slate-300 leading-relaxed">
-                            Be aware of HVAC contractors who advertise "$2,000 instant mini-split energy rebates." 
+                            Be aware of HVAC contractors who advertise &ldquo;$2,000 instant mini-split energy rebates.&rdquo; 
                             Hawaii Energy currently offers <strong className="text-white">0% cash rebates</strong> for residential ductless mini-split systems.
                         </p>
                         <p className="text-xs md:text-sm text-slate-300 leading-relaxed">
-                            Instead of inflating our prices by thousands just to offer a fake "discount," Affordable Home AC passes along direct wholesale equipment pricing and honest Hawaii contractor rates.
+                            Instead of inflating our prices by thousands just to offer a fake &ldquo;discount,&rdquo; Affordable Home AC passes along direct wholesale equipment pricing and honest Hawaii contractor rates.
                         </p>
                         <div className="p-3 rounded-xl bg-cyan-500/5 border border-cyan-500/20 text-cyan-300 text-xs font-medium">
                             ★ Need instant cash rebates? Our qualifying Energy Star Window AC units come with a $45 Hawaii Energy cash rebate.

@@ -1,8 +1,7 @@
 
 import smtplib
-import smtplib
 import base64
-import base64
+import time
 try:
     import aiosmtplib
     HAS_SMTP = True
@@ -78,6 +77,39 @@ async def verify_connection():
     except Exception as e:
         logger.error(f"❌ SMTP Connection FAILED: {e}")
 
+# ---------------------------------------------------------
+# Idempotency & Deduplication Shields
+# ---------------------------------------------------------
+_DISPATCHED_INQUIRY_LEAD_IDS = set()
+
+async def has_inquiry_been_sent(lead_id) -> bool:
+    if not lead_id:
+        return False
+    lead_key = str(lead_id)
+    if lead_key in _DISPATCHED_INQUIRY_LEAD_IDS:
+        return True
+    try:
+        from cache import redis_client
+        if redis_client:
+            val = await redis_client.get(f"email_sent:inquiry:{lead_key}")
+            if val:
+                return True
+    except Exception:
+        pass
+    return False
+
+async def mark_inquiry_as_sent(lead_id):
+    if not lead_id:
+        return
+    lead_key = str(lead_id)
+    _DISPATCHED_INQUIRY_LEAD_IDS.add(lead_key)
+    try:
+        from cache import redis_client
+        if redis_client:
+            await redis_client.set(f"email_sent:inquiry:{lead_key}", "1", ex=600)
+    except Exception:
+        pass
+
 # Helper to load logo
 def get_logo_attachment():
     try:
@@ -86,6 +118,7 @@ def get_logo_attachment():
             "apps/web/public/logo-new.png",
             "../web/public/logo-new.png",
             "/app/apps/web/public/logo-new.png", # Docker container path
+            "apps/web/public/assets/logo-new.png",
             "logo-new.png"
         ]
         
@@ -94,16 +127,16 @@ def get_logo_attachment():
                 with open(p, 'rb') as f:
                     img_data = f.read()
                     image = MIMEImage(img_data)
-                    image.add_header('Content-ID', '<logo_paramount>')
-                    image.add_header('Content-Disposition', 'inline', filename='logo.png')
+                    image.add_header('Content-ID', '<logo_img>')
+                    image.add_header('Content-Disposition', 'inline', filename='logo-new.png')
                     return image
         
         # Fallback to inline base64 logo if no file is found
         if LOGO_B64:
             img_data = base64.b64decode(LOGO_B64)
             image = MIMEImage(img_data)
-            image.add_header('Content-ID', '<logo_paramount>')
-            image.add_header('Content-Disposition', 'inline', filename='logo.png')
+            image.add_header('Content-ID', '<logo_img>')
+            image.add_header('Content-Disposition', 'inline', filename='logo-new.png')
             return image
             
         return None
@@ -825,17 +858,24 @@ END:VCALENDAR"""
     # Send both emails synchronously in thread pool
     await asyncio.get_event_loop().run_in_executor(None, _send_both_emails)
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10), reraise=True)
 async def send_inquiry_notification(lead):
     """
     Sends an Admin Notification when a new lead/inquiry comes in via the Contact Wizard.
+    Includes both Brian and AHAC Split Division as primary recipients.
+    Protected with idempotency locks against duplicate delivery.
     """
+    lead_id = getattr(lead, "id", None)
     if not HAS_SMTP:
-        logger.warning(f"Skipping inquiry email for lead {lead.id}: SMTP not active.")
+        logger.warning(f"Skipping inquiry email for lead {lead_id}: SMTP not active.")
+        return
+
+    if await has_inquiry_been_sent(lead_id):
+        logger.warning(f"🛡️ [DEDUPLICATION SHIELD] Lead ID {lead_id} inquiry notification already dispatched. Skipping duplicate send.")
         return
 
     try:
-        logger.info(f"Preparing Inquiry Notification for Lead ID: {lead.id}")
+        logger.info(f"Preparing Inquiry Notification for Lead ID: {lead_id}")
         
         subject = f"🔔 New Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}"
         
@@ -1021,19 +1061,32 @@ async def send_inquiry_notification(lead):
 
         # Send
         logger.info(f"Connecting to SMTP {SMTP_SERVER}...")
-        if SMTP_PORT == 587:
-            async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, start_tls=True) as smtp:
-                await smtp.login(SMTP_USER, SMTP_PASSWORD)
-                await smtp.send_message(msg, recipients=all_recipients)
-        else:
-            async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
-                await smtp.login(SMTP_USER, SMTP_PASSWORD)
-                await smtp.send_message(msg, recipients=all_recipients)
-            
-        logger.info(f"✅ Inquiry Notification Sent to To: {primary_recipients} (BCC: {bcc_recipients}).")
+        sent_successfully = False
+        try:
+            if SMTP_PORT == 587:
+                async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, start_tls=True) as smtp:
+                    await smtp.login(SMTP_USER, SMTP_PASSWORD)
+                    await smtp.send_message(msg, recipients=all_recipients)
+                    sent_successfully = True
+            else:
+                async with aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, use_tls=True) as smtp:
+                    await smtp.login(SMTP_USER, SMTP_PASSWORD)
+                    await smtp.send_message(msg, recipients=all_recipients)
+                    sent_successfully = True
+        except Exception as smtp_err:
+            if sent_successfully:
+                logger.warning(f"⚠️ SMTP socket teardown notice post-dispatch for Lead {lead_id} (ignored): {smtp_err}")
+            else:
+                raise
+
+        await mark_inquiry_as_sent(lead_id)
+        logger.info(f"✅ Inquiry Notification Sent to To: {primary_recipients} (BCC: {bcc_recipients}) for Lead {lead_id}.")
 
     except Exception as e:
-        logger.error(f"❌ Failed to send inquiry notification: {e} - Retrying due to tenacity exception...")
+        if sent_successfully:
+            logger.info(f"✅ Inquiry Notification already confirmed sent for Lead {lead_id}, suppressing retry: {e}")
+            return
+        logger.error(f"❌ Failed to send inquiry notification for Lead {lead_id}: {e} - Retrying due to tenacity exception...")
         import traceback
         traceback.print_exc()
         raise
@@ -1045,9 +1098,12 @@ async def send_inquiry_notification(lead):
 )
 async def send_customer_appointment_confirmation(lead):
     """
-    Dispatches a professional, high-trust appointment confirmation email directly to the customer.
+    Dispatches an executive-grade, beautifully branded appointment confirmation email.
     Includes zero upfront estimate commitment, Hawaii CT-36775 license, drop-cloth protection,
     and 'as soon as possible' turnaround (strictly zero false claims of same-day or emergency dispatch).
+    
+    SAFETY MANDATE: During development/testing until explicitly finalized, customer copies
+    route EXCLUSIVELY to DEV_TEST_EMAIL (irasmussenjobs@gmail.com).
     """
     if not HAS_SMTP:
         logger.error("❌ Customer Confirmation Skipped: 'aiosmtplib' is missing.")
@@ -1057,16 +1113,11 @@ async def send_customer_appointment_confirmation(lead):
         logger.info(f"Skipping customer confirmation: no valid customer email on lead {getattr(lead, 'id', 'unknown')}")
         return
 
-    customer_email = lead.email.strip().lower()
-    # Skip internal staff emails
-    if customer_email.endswith("@affordablehome-ac.com") or customer_email == "office@affordablehome-ac.com":
-        logger.info(f"Skipping customer confirmation for internal staff address: {customer_email}")
-        return
+    original_customer_email = lead.email.strip().lower()
 
-    # STAGING / TEST SHIELD: If on staging, ensure customer copy routes safely to DEV_TEST_EMAIL so external people never receive test emails
-    if IS_STAGING and customer_email != DEV_TEST_EMAIL.lower():
-        logger.info(f"🛡️ [STAGING SHIELD] Redirecting customer confirmation from {customer_email} to {DEV_TEST_EMAIL} so external inboxes never receive test emails.")
-        customer_email = DEV_TEST_EMAIL
+    # DEV TESTING MANDATE: Until finalized, customer confirmation emails route EXCLUSIVELY to DEV_TEST_EMAIL
+    target_customer_email = DEV_TEST_EMAIL
+    logger.info(f"🛡️ [DEV ROUTING ACTIVE] Customer confirmation email redirected strictly to {DEV_TEST_EMAIL} (intended: {original_customer_email})")
 
     try:
         first_name = (getattr(lead, "first_name", "") or "").strip() or "Valued"
@@ -1082,100 +1133,370 @@ async def send_customer_appointment_confirmation(lead):
 
         subject = f"Aloha {first_name} — Service Request Confirmed [Ref #{ref_id}]"
 
-        html_content = f"""
-<!DOCTYPE html>
-<html>
+        text_content = f"""Aloha {first_name},
+
+Mahalo for contacting Affordable Home A/C. Our Oahu dispatch team has received your service inquiry and will contact you as soon as possible to coordinate technician availability and confirm your appointment.
+
+[SERVICE REQUEST DETAILS]
+Reference Number: #{ref_id}
+Service Requested: {service}
+Service Location: {location_str}
+Callback Phone: {phone}
+Status: Dispatched to Scheduling Queue
+
+[OUR ISLAND COMMITMENTS]
+* $0 Free In-Home Estimates: Zero upfront booking payment barrier for new or replacement split AC and window AC installations.
+* Drop-Cloth Floor Protection: Technicians lay clean drop cloths on the floor directly under the unit before starting work.
+* Hawaii Contractor CT-36775: Island-grounded, fully licensed, bonded, and insured.
+
+Need immediate assistance or scheduling updates? Call our Waipahu shop directly:
+Office Phone: (808) 488-1111
+Waipahu Commercial Center: 94-150 Leoleo St #203, Waipahu, HI 96797
+Website: https://www.affordablehome-ac.com
+
+Mahalo for choosing local Hawaii workmanship!
+Affordable Home A/C • CT-36775
+"""
+
+        html_content = f"""<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>Service Request Confirmed - Affordable Home A/C</title>
     <style>
-        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #0b1120; color: #f8fafc; }}
-        .container {{ max-width: 600px; margin: 20px auto; background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); }}
-        .header {{ background-color: #0284c7; padding: 24px; text-align: center; border-bottom: 2px solid #38bdf8; }}
-        .content {{ padding: 28px 24px; }}
-        h1 {{ color: #ffffff; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px 0; }}
-        .badge {{ display: inline-block; background-color: #0369a1; color: #ffffff; padding: 4px 12px; border-radius: 9999px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px; }}
-        p {{ color: #cbd5e1; font-size: 14px; line-height: 1.6; margin: 0 0 16px 0; }}
-        .summary-card {{ background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 18px; margin: 20px 0; }}
-        .summary-row {{ display: table; width: 100%; margin-bottom: 10px; }}
-        .summary-row:last-child {{ margin-bottom: 0; }}
-        .summary-label {{ display: table-cell; width: 35%; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }}
-        .summary-val {{ display: table-cell; width: 65%; font-size: 13px; font-weight: 600; color: #f1f5f9; }}
-        .guarantees {{ background: linear-gradient(135deg, rgba(2, 132, 199, 0.1), rgba(16, 185, 129, 0.1)); border: 1px solid #0284c7; border-radius: 8px; padding: 16px; margin: 20px 0; }}
-        .guarantee-item {{ font-size: 12px; color: #e2e8f0; margin-bottom: 6px; line-height: 1.4; }}
-        .guarantee-item:last-child {{ margin-bottom: 0; }}
-        .cta-btn {{ display: block; width: 100%; max-width: 280px; margin: 24px auto 0 auto; text-align: center; background-color: #00AEEF; color: #020617; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; padding: 14px 20px; border-radius: 8px; text-decoration: none; }}
-        .footer {{ background-color: #0b1120; border-top: 1px solid #1e293b; padding: 20px; text-align: center; font-size: 11px; color: #64748b; line-height: 1.5; }}
+        :root {{
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }}
+        body {{
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            -webkit-text-size-adjust: 100%;
+        }}
+        .wrapper {{
+            width: 100%;
+            table-layout: fixed;
+            background-color: #f1f5f9;
+            padding: 30px 10px;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }}
+        .dev-banner {{
+            background: linear-gradient(90deg, #0284c7, #0369a1);
+            color: #ffffff;
+            padding: 10px 16px;
+            font-size: 11px;
+            font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 0.04em;
+        }}
+        .header {{
+            background: linear-gradient(180deg, #070b12 0%, #0d1527 100%);
+            padding: 32px 24px 24px 24px;
+            text-align: center;
+            border-bottom: 3px solid #00AEEF;
+        }}
+        .header img {{
+            width: 170px;
+            max-width: 80%;
+            height: auto;
+            margin: 0 auto 10px auto;
+            display: block;
+        }}
+        .header-sub {{
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            color: #38bdf8;
+            text-transform: uppercase;
+            margin: 0;
+        }}
+        .content {{
+            padding: 32px 28px;
+        }}
+        .ref-badge {{
+            display: inline-block;
+            background-color: rgba(0, 174, 239, 0.1);
+            color: #0284c7;
+            border: 1px solid rgba(0, 174, 239, 0.3);
+            padding: 4px 14px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }}
+        h1 {{
+            color: #0f172a;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin: 0 0 14px 0;
+        }}
+        p.intro {{
+            font-size: 14px;
+            line-height: 1.65;
+            color: #334155;
+            margin: 0 0 24px 0;
+        }}
+        .summary-card {{
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin: 0 0 24px 0;
+        }}
+        .summary-table {{
+            width: 100%;
+            border-collapse: collapse;
+        }}
+        .summary-table td {{
+            padding: 9px 0;
+            font-size: 13px;
+            vertical-align: top;
+            border-bottom: 1px solid #edf2f7;
+        }}
+        .summary-table tr:last-child td {{
+            border-bottom: none;
+        }}
+        .summary-label {{
+            width: 36%;
+            font-size: 11px;
+            font-weight: 800;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }}
+        .summary-val {{
+            width: 64%;
+            font-weight: 700;
+            color: #0f172a;
+        }}
+        .guarantees {{
+            background: linear-gradient(135deg, rgba(0, 174, 239, 0.06), rgba(16, 185, 129, 0.06));
+            border: 1px solid rgba(0, 174, 239, 0.3);
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin: 0 0 24px 0;
+        }}
+        .guarantee-title {{
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            color: #0284c7;
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+        }}
+        .guarantee-item {{
+            font-size: 12px;
+            color: #334155;
+            margin-bottom: 8px;
+            line-height: 1.45;
+        }}
+        .guarantee-item:last-child {{
+            margin-bottom: 0;
+        }}
+        .guarantee-item strong {{
+            color: #0f172a;
+        }}
+        .cta-wrapper {{
+            text-align: center;
+            margin: 28px 0 10px 0;
+        }}
+        .cta-btn {{
+            display: inline-block;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            background: linear-gradient(135deg, #00AEEF 0%, #0284c7 100%);
+            color: #ffffff !important;
+            font-weight: 900;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 15px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.35);
+        }}
+        .footer {{
+            background-color: #070b12;
+            border-top: 1px solid #1e293b;
+            padding: 24px;
+            text-align: center;
+            font-size: 11px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }}
+        .footer a {{
+            color: #38bdf8;
+            text-decoration: none;
+        }}
+        
+        /* Dark Mode Resilience */
+        @media (prefers-color-scheme: dark) {{
+            body, .wrapper {{
+                background-color: #05080e !important;
+                color: #f1f5f9 !important;
+            }}
+            .container {{
+                background-color: #0b1120 !important;
+                border-color: #1e293b !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+            }}
+            h1 {{
+                color: #ffffff !important;
+            }}
+            p.intro {{
+                color: #cbd5e1 !important;
+            }}
+            p.intro strong {{
+                color: #ffffff !important;
+            }}
+            .ref-badge {{
+                background-color: rgba(0, 174, 239, 0.15) !important;
+                color: #38bdf8 !important;
+                border-color: rgba(0, 174, 239, 0.4) !important;
+            }}
+            .summary-card {{
+                background-color: #131d2e !important;
+                border-color: #1e293b !important;
+            }}
+            .summary-table td {{
+                border-bottom-color: #1e293b !important;
+            }}
+            .summary-label {{
+                color: #94a3b8 !important;
+            }}
+            .summary-val {{
+                color: #f8fafc !important;
+            }}
+            .guarantees {{
+                background: linear-gradient(135deg, rgba(2, 132, 199, 0.12), rgba(16, 185, 129, 0.12)) !important;
+                border-color: #0284c7 !important;
+            }}
+            .guarantee-title {{
+                color: #38bdf8 !important;
+            }}
+            .guarantee-item {{
+                color: #cbd5e1 !important;
+            }}
+            .guarantee-item strong {{
+                color: #f8fafc !important;
+            }}
+            .footer {{
+                background-color: #04070d !important;
+                border-top-color: #1e293b !important;
+                color: #64748b !important;
+            }}
+        }}
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <img src="cid:logo_img" style="width: 180px; max-width: 80%; height: auto; margin: 0 auto; display: block;" alt="Affordable Home A/C" />
-            <div style="font-size: 11px; font-weight: 800; letter-spacing: 0.15em; color: #e0f2fe; text-transform: uppercase; margin-top: 10px;">OAHU SERVICE CONFIRMATION</div>
-        </div>
+    <div class="wrapper">
+        <div class="container">
+            <!-- Dev Preview Shield Banner -->
+            <div class="dev-banner">
+                [DEVELOPMENT PREVIEW COPY] Intended Recipient: {original_customer_email or 'None provided'} &bull; Dev Mode
+            </div>
 
-        <!-- Content -->
-        <div class="content">
-            <span class="badge">Reference #{ref_id}</span>
-            <h1>Aloha {first_name},</h1>
-            <p>
-                Thank you for contacting Affordable Home A/C. Our Oahu dispatch team has received your service request and will contact you <strong>as soon as possible</strong> to coordinate your appointment.
-            </p>
+            <!-- Header -->
+            <div class="header">
+                <img src="cid:logo_img" alt="Affordable Home A/C" onerror="this.src='https://www.affordablehome-ac.com/assets/logo-new.png';" />
+                <p class="header-sub">Oahu Air Conditioning &bull; License CT-36775</p>
+            </div>
 
-            <!-- Request Details -->
-            <div class="summary-card">
-                <div class="summary-row">
-                    <span class="summary-label">Service Type:</span>
-                    <span class="summary-val">{service}</span>
+            <!-- Content -->
+            <div class="content">
+                <div class="ref-badge">Service Request #{ref_id}</div>
+                <h1>Aloha {first_name},</h1>
+                <p class="intro">
+                    Mahalo for contacting Affordable Home A/C. Our Oahu dispatch team has received your service inquiry and will contact you <strong>as soon as possible</strong> to coordinate technician availability and confirm your appointment.
+                </p>
+
+                <!-- Service Details -->
+                <div class="summary-card">
+                    <table class="summary-table">
+                        <tr>
+                            <td class="summary-label">Requested Service</td>
+                            <td class="summary-val">{service}</td>
+                        </tr>
+                        <tr>
+                            <td class="summary-label">Service Location</td>
+                            <td class="summary-val">{location_str}</td>
+                        </tr>
+                        <tr>
+                            <td class="summary-label">Callback Phone</td>
+                            <td class="summary-val">{phone}</td>
+                        </tr>
+                        <tr>
+                            <td class="summary-label">Queue Status</td>
+                            <td class="summary-val" style="color: #10b981;">Dispatched to Scheduling Queue</td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="summary-row">
-                    <span class="summary-label">Service Location:</span>
-                    <span class="summary-val">{location_str}</span>
+
+                <!-- Island Guarantees -->
+                <div class="guarantees">
+                    <div class="guarantee-title">Our Island Workmanship Guarantees</div>
+                    <div class="guarantee-item"><strong>★ $0 Free In-Home Estimates:</strong> Zero upfront payment barrier for new or replacement installations.</div>
+                    <div class="guarantee-item"><strong>★ Clean Floor Drop-Cloth Protection:</strong> Licensed technicians lay drop cloths on the floor directly under the unit before starting work.</div>
+                    <div class="guarantee-item"><strong>★ Hawaii Contractor CT-36775:</strong> Island-grounded, fully licensed, bonded, and insured technicians.</div>
                 </div>
-                <div class="summary-row">
-                    <span class="summary-label">Callback Phone:</span>
-                    <span class="summary-val">{phone}</span>
+
+                <div class="cta-wrapper">
+                    <p style="font-size: 12px; color: #64748b; margin: 0 0 12px 0;">Need immediate scheduling updates? Call our Waipahu shop directly:</p>
+                    <a href="tel:8084881111" class="cta-btn">Call Dispatch: (808) 488-1111</a>
                 </div>
             </div>
 
-            <!-- Island Guarantees -->
-            <div class="guarantees">
-                <div class="guarantee-item"><strong>★ $0 Free Estimates:</strong> In-home quote across Oahu with zero upfront payment barrier.</div>
-                <div class="guarantee-item"><strong>★ Drop-Cloth Protection:</strong> Technicians lay drop cloths on the floor directly under the unit.</div>
-                <div class="guarantee-item"><strong>★ Hawaii Contractor CT-36775:</strong> Island-grounded, fully licensed, bonded, and insured.</div>
+            <!-- Footer -->
+            <div class="footer">
+                <strong>Affordable Home A/C</strong> &bull; Waipahu Commercial Center<br>
+                94-150 Leoleo St #203, Waipahu, HI 96797<br>
+                License CT-36775 &bull; <a href="https://www.affordablehome-ac.com">www.affordablehome-ac.com</a><br>
+                Mahalo for supporting local Hawaii small business!
             </div>
-
-            <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 20px;">
-                Need immediate assistance or scheduling updates? Call our Waipahu shop directly:
-            </p>
-            <a href="tel:8084881111" class="cta-btn">Call Dispatch: (808) 488-1111</a>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <strong>Affordable Home A/C</strong> &bull; Waipahu Commercial Center &bull; 94-150 Leoleo St #203, Waipahu, HI 96797<br>
-            License CT-36775 &bull; <a href="https://www.affordablehome-ac.com" style="color: #38bdf8; text-decoration: none;">www.affordablehome-ac.com</a><br>
-            Mahalo for choosing local Hawaii workmanship!
         </div>
     </div>
 </body>
 </html>
-        """
+"""
 
-        primary_recipients = [customer_email]
-        bcc_recipients = ["irasmussenjobs@gmail.com"]
-        all_recipients = primary_recipients + bcc_recipients
+        primary_recipients = [target_customer_email]
+        all_recipients = primary_recipients
 
+        # Build MIMEMultipart related with alternative text/html
         msg = MIMEMultipart("related")
         msg["Subject"] = subject
         msg["From"] = f"Affordable Home A/C <{FROM_EMAIL}>"
         msg["To"] = ", ".join(primary_recipients)
-        msg["Bcc"] = ", ".join(bcc_recipients)
         msg["Reply-To"] = "office@affordablehome-ac.com"
+        msg["Message-ID"] = f"<lead-confirm-{ref_id}-{int(time.time())}@affordablehome-ac.com>"
+        msg["X-Entity-Ref-ID"] = f"AHAC-CONFIRM-{ref_id}"
 
-        msg.attach(MIMEText(html_content, "html"))
+        # Subpart for text/html
+        alt_part = MIMEMultipart("alternative")
+        alt_part.attach(MIMEText(text_content, "plain", "utf-8"))
+        alt_part.attach(MIMEText(html_content, "html", "utf-8"))
+        msg.attach(alt_part)
 
+        # Attach logo
         logo_attachment = get_logo_attachment()
         if logo_attachment:
             msg.attach(logo_attachment)
@@ -1189,7 +1510,7 @@ async def send_customer_appointment_confirmation(lead):
                 await smtp.login(SMTP_USER, SMTP_PASSWORD)
                 await smtp.send_message(msg, recipients=all_recipients)
 
-        logger.info(f"✅ Customer Appointment Confirmation sent to {primary_recipients} (Ref #{ref_id}).")
+        logger.info(f"✅ Customer Appointment Confirmation preview sent to {primary_recipients} (Ref #{ref_id}).")
 
     except Exception as e:
         logger.error(f"❌ Failed to send customer appointment confirmation: {e}")

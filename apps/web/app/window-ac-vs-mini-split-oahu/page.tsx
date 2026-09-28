@@ -63,7 +63,7 @@ export default function WindowAcVsMiniSplitPage() {
         {
             feature: "Hawaii Energy Rebate",
             windowAc: "$45 Instant/Mail-In Cash Rebate (Pre-approved PDF)",
-            miniSplit: "0% Rebate Participation (Transparent direct pricing)",
+            miniSplit: "0% Rebate Participation (Direct contractor pricing)",
             winner: "window",
             note: "Official AHAC window AC cash rebate form included."
         },

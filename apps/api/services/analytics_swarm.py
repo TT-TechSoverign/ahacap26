@@ -379,7 +379,7 @@ class AnalyticsSwarmEngine:
                 "title": "Clinical AC Cleaning & Coil Sanitization Oahu",
                 "target_path": "/ac-cleaning-oahu",
                 "target_funnel": "Tier 1 Window AC Teardown & Tier 2 Mini-Split Deep Clean",
-                "rationale": "Targets salt-air mold/mildew queries with transparent pricing ($275 window teardown, $175/$275 mini-split deep clean) and scheduled warehouse turnaround.",
+                "rationale": "Targets salt-air mold/mildew queries with upfront pricing ($275 window teardown, $175/$275 mini-split deep clean) and scheduled warehouse turnaround.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+45% Maintenance Booking Lift"
             },
@@ -390,7 +390,7 @@ class AnalyticsSwarmEngine:
                 "title": "In-Stock Oahu Window AC Warehouse Hub",
                 "target_path": "/shop/oahu-window-ac-warehouse",
                 "target_funnel": "1-Click Stripe Sales, Free Waipahu Pickup & $50 Delivery",
-                "rationale": "Directly eliminates 14-21 day mainland barge transit anxiety. Real-time Waipahu stock badges, $45 rebate form included, and professional installation add-on.",
+                "rationale": "Directly eliminates 14-21 day mainland shipping delays. Real-time Waipahu stock badges, $45 rebate form included, and professional installation add-on.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+50% Window AC Direct Cart Conversion"
             },

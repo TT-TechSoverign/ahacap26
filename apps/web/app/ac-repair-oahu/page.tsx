@@ -104,7 +104,7 @@ export default function AcRepairOahuPage() {
         },
         {
             q: "How much is the diagnostic service fee?",
-            a: "We charge a standard flat-rate diagnostic inspection fee that covers on-site technician dispatch, travel time, and a comprehensive electrical and mechanical troubleshooting evaluation. You receive an upfront, itemized repair estimate before any physical work begins with zero surprise fees."
+            a: "We charge a standard flat-rate diagnostic inspection fee that covers on-site technician dispatch, travel time, and a comprehensive electrical and mechanical troubleshooting evaluation. You receive an upfront, itemized repair estimate before any physical work begins."
         },
         {
             q: "What if my AC unit is too old or expensive to repair?",

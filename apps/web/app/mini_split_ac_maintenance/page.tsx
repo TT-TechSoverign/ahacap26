@@ -448,7 +448,7 @@ export default function MiniSplitACMaintenancePage() {
                                 <div className="text-center mt-2.5 space-y-1">
                                     <p className="text-[11px] text-emerald-400 font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5">
                                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                        Transparent Flat-Rate Cleaning • By Appointment
+                                        Island Flat-Rate Cleaning • By Appointment
                                     </p>
                                     <p className="text-[11px] text-slate-300">
                                         $175 Basic Cleaning • $275 Premium Deep Sanitization ($0 to book replacement estimates). Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> or email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>.

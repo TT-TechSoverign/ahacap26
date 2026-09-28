@@ -333,7 +333,7 @@ export default function WindowAcInstallationPage() {
                                     </span>
                                 </div>
                                 <span className="hidden sm:inline-block font-mono text-[10px] text-cyan-400 uppercase font-bold bg-cyan-500/10 px-2.5 py-1 rounded border border-cyan-500/20 whitespace-nowrap">
-                                    Zero Surprise Fees
+                                    Upfront Estimates
                                 </span>
                             </div>
 

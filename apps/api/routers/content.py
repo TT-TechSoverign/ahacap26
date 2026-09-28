@@ -71,8 +71,9 @@ async def save_draft(path: str, payload: ContentPayload, db: AsyncSession = Depe
     await db.commit()
     return {"status": "saved", "path": path}
 
+@router.put("/publish", dependencies=[Depends(verify_admin_token)])
 @router.put("/{path:path}/publish", dependencies=[Depends(verify_admin_token)])
-async def publish_content(path: str, db: AsyncSession = Depends(get_db)):
+async def publish_content(path: str = "/", db: AsyncSession = Depends(get_db)):
     """
     Promote draft_data to data.
     """

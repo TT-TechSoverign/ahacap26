@@ -33,7 +33,7 @@ Every conversation session inherits the knowledge, directives, historical timeli
    - Zero upfront checkout payment barriers for physical AC repair, maintenance, or estimates (+28% checkout velocity).
    - Customers submit appointment requests; dispatch contacts them first before any charge or technician roll.
 2. **Dedicated Window AC & Split AC Divisions**:
-   - **Window AC Division**: Waipahu warehouse-direct inventory sales ($504 to $1,025), custom jalousie & standard window installation, deep chemical cleaning/overhaul, and clean-vs-replace assessments.
+   - **Window AC Division**: Waipahu warehouse-direct inventory sales ($504 to $1,025), custom jalousie & standard window installation, and clean-vs-replace assessments (no off-site shop teardowns).
    - **Split AC Division**: Ductless mini-split installation & replacement ($0 Free In-Home Estimate), clinical chemical maintenance/deep flush, diagnostic troubleshooting & repair, and island microclimate sizing calculators.
    - **No Fabricated Flat-Rate Packages**: Zero upfront booking payment barriers; custom transparent quotes by licensed technicians (CT-36775).
 3. **Floor Drop-Cloth Protection & Legal Mandate**:
@@ -72,7 +72,7 @@ The platform is monitored and driven by 9 Category Sub-Masters and 37 specialize
    - `agent_schema_metadata_engine` (JSON-LD Product, LocalBusiness, FAQ schemas)
    - `agent_high_intent_planner` (High-intent service area pathways)
 5. **Customer Operations & CRM Sub-Master** (`submaster_crm_operations`):
-   - `agent_crm_dispatch` (Lead triage, scheduling queue, 24-48h bench test)
+   - `agent_crm_dispatch` (Lead triage, scheduling queue, warehouse pickup dispatch)
    - `agent_customer_lifecycle` (Follow-up, maintenance reminders)
    - `agent_intake_triage` (Symptom analysis, customer routing)
 6. **Deployment & Quality Swarm Sub-Master** (`submaster_deployment_quality`):
@@ -94,6 +94,10 @@ The platform is monitored and driven by 9 Category Sub-Masters and 37 specialize
    - `agent_avatar_portrait_crafter` (Photorealistic aloha technician & customer persona portraits)
    - `agent_trust_medallion_forge` (3D golden review medallions, Waipahu warehouse proof, and CT-36775 shields)
    - `agent_asset_optimizer_sentinel` (WebP compression, zero CLS web delivery, responsive WebP/SVG fallback integrity)
+10. **Executive Analytics & Monthly Reporting Sub-Master** (`submaster_executive_reporting`):
+   - `agent_report_ingestor` (Search Console zip archives, GA4 snapshots, metric normalization)
+   - `agent_narrative_crafter` (Executive 3rd-grade reading level synthesis, Big Wins, and Action Plans)
+   - `agent_document_forge` (Publication-ready Word .docx, styled HTML presentations, and source Markdown .md)
 
 *(Strict Anti-Upsell Protocol: No accessory upsells, add-on modals, or bundle friction permitted in checkout).*
 
@@ -128,6 +132,23 @@ The platform is monitored and driven by 9 Category Sub-Masters and 37 specialize
   - Integrated Pavilion across `/reviews` (new standalone SEO powerhouse route with `HVACBusiness` `AggregateRating` 4.9★, 142 reviews), `/shop/[slug]` (model-matched reviews), `/shop` (proof marquee), `/` (social proof), all 22 `/service-areas/[city]` localized landing pages, `NavbarV2`, `MobileDrawerMenu`, and `Footer`.
   - Built `scripts/comfyui_studio_bridge.py` connecting to local ComfyUI Studio on `D:\Studio\v266\App\ComfyUI` powered by NVIDIA RTX 4090 24GB VRAM, with zero-broken-image SVG/CSS Polynesian fallback avatars.
   - Expanded Sovereign Fleet to 9 Sub-Masters and 37 specialized satellite agents, chartering Sub-Master 9 (`submaster_creative_studio`) with 4 dedicated agents (`agent_comfyui_bridge`, `agent_avatar_portrait_crafter`, `agent_trust_medallion_forge`, `agent_asset_optimizer_sentinel`) and 46 total SOP dossiers.
+- **Epoch 14 (Sep 23, 2026) Executive Monthly Analytics & SEO Reports Division**:
+  - Chartered Sub-Master 10 (`submaster_executive_reporting`) and 3 specialized satellite agents (`agent_report_ingestor`, `agent_narrative_crafter`, `agent_document_forge`), expanding the Sovereign Fleet to 10 Sub-Masters, 40 Agents, and 50 SOP dossiers.
+  - Built autonomous `ReportingEngine` (`apps/api/services/reporting_engine.py`) parsing GSC zip archives (`Chart.csv`, `Queries.csv`, `Pages.csv`, `Devices.csv`) and GA4 snapshots.
+  - Formulated 3rd-grade executive reading level synthesis generating Big Wins, Traffic Snapshot tables, High-Intent Keywords tables, Page Ranking Wins, and Action Plans.
+  - Multi-format publication forge producing Microsoft Word (`.docx`), styled presentation (`.html`), and source Markdown (`.md`).
+  - Added RESTful endpoints in FastAPI (`/api/v1/dev-os/reports*`) for list, upload, generate, preview, and download.
+  - Built dedicated `MonthlyReportsHub.tsx` cockpit in Dev OS (`Key R`) with drag-and-drop file ingestion, 1-click multi-format downloads, and live preview modal (< 150 kB First Load JS).
+  - Explicit user scope constraint strictly enforced: zero billing or CRM invoicing logic.
+  - All 12 unit tests passing (`test_fleet_registry.py`, `test_reporting_engine.py`, `test_domain.py`, `test_email_routing.py`).
+- **Epoch 15 (Sep 27-28, 2026) Brand Reframing, Subcontractor Grounding & Buzzword Purge**:
+  - Purged all competitor / carrier bashing by name (*Matson*, *Amazon*, *Home Depot*, *Lowe's*) and sensational barge fearmongering (*"suffer in the heat"*, *"bent fins"*, *"nightmare returns"*).
+  - Grounded all electrical scope under License CT-36775 to licensed electrical subcontractors (dedicated 208/230V circuits, breaker additions, panel upgrades).
+  - Eliminated fabricated package fees (all *$250 Survey* claims replaced with **$0 Free In-Home Estimate**).
+  - Purged buzzwords and overpromises: *"fully permitted"*, *"completely transparent"*, *"transparent pricing"*, *"zero surprise electrical bills/fees"*, and *"zero red tape"*, replacing with direct trade terminology (*"upfront estimates"*, *"island flat rates"*, *"itemized quotes"*, *"direct contractor pricing"*).
+  - Refreshed stale February/September booking dates across `Footer.tsx` and content JSONs to active October 2026 windows (`Oct 1-5`, `Oct 6-10`).
+  - Fixed Next.js Link import in `apps/web/app/sitemap/page.tsx` (`import Link from 'next/link'`).
+  - All 14 Pytest unit tests passing, `npx tsc --noEmit` 0 errors, and root secret scanner clean across 2,105 files.
 
 ---
 

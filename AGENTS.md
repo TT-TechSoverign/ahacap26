@@ -7,17 +7,17 @@ This document defines the agent architecture, roles, execution protocols, and op
 ## 1. SOVEREIGN MASTER & FLEET STRUCTURE
 
 - **Sovereign Master**: Central cognitive intelligence overseeing all autonomous operations.
-- **Category Sub-Masters (9)**: Autonomous domain supervisors governing specific functional areas.
-- **Specialized Satellite Agents (37)**: On-demand diagnostic and execution units.
+- **Category Sub-Masters (10)**: Autonomous domain supervisors governing specific functional areas.
+- **Specialized Satellite Agents (40)**: On-demand diagnostic and execution units.
 - **Strict Anti-Upsell Mandate**: No accessory upsells, add-on modals, or bundle friction in checkout.
 
 ```
-                                        [ MASTER PROJECTS BRAIN ]
-                                                    |
-    +---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
-    |               |               |               |               |               |               |               |               |               |
-[Infrastructure] [Cybersecurity] [Commerce]      [Growth & SEO]  [Customer & CRM] [Deployment QA] [SERP Acq.]     [Conversion]    [Creative Studio]
-  (4 Agents)      (4 Agents)     (4 Agents)        (7 Agents)      (3 Agents)       (4 Agents)     (3 Agents)       (4 Agents)       (4 Agents)
+                                                     [ MASTER PROJECTS BRAIN ]
+                                                                 |
+    +---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
+    |               |               |               |               |               |               |               |               |               |               |
+[Infrastructure] [Cybersecurity] [Commerce]      [Growth & SEO]  [Customer & CRM] [Deployment QA] [SERP Acq.]     [Conversion]    [Creative Studio] [Exec Reporting]
+  (4 Agents)      (4 Agents)     (4 Agents)        (7 Agents)      (3 Agents)       (4 Agents)     (3 Agents)       (4 Agents)       (4 Agents)       (3 Agents)
 ```
 
 ---
@@ -60,7 +60,7 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_high_intent_planner`: Optimizes high-converting service area pathways.
 
 ### Sub-Master 5: Customer Operations & CRM (`submaster_crm_operations`)
-- **Scope**: Intake dispatch, lead qualification, Waipahu bench testing, customer lifecycle.
+- **Scope**: Intake dispatch, lead qualification, Waipahu warehouse pickup, customer lifecycle.
 - **Agents**:
   - `agent_crm_dispatch`: Triages incoming appointment leads and monitors the dispatch queue.
   - `agent_customer_lifecycle`: Automates post-service follow-up and seasonal maintenance reminders.
@@ -97,6 +97,13 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_trust_medallion_forge`: Generates 3D golden review medallions, Waipahu warehouse proof, and CT-36775 shields.
   - `agent_asset_optimizer_sentinel`: Post-processes outputs (< 80KB WebP, zero CLS bounds) and manages Polynesian SVG/CSS fallbacks.
 
+### Sub-Master 10: Executive Analytics & Monthly Intelligence (`submaster_executive_reporting`)
+- **Scope**: Raw analytics ingestion, 3rd-grade executive SEO synthesis, publication-ready multi-format document compiling (.docx, .html, .md), zero-billing pure intelligence.
+- **Agents**:
+  - `agent_report_ingestor`: Ingests Search Console ZIP archives, GA4 snapshots, and normalizes queries and clicks.
+  - `agent_narrative_crafter`: Crafts plain-English, 3rd-grade reading level executive summaries, Big Wins, and Action Plans.
+  - `agent_document_forge`: Compiles publication-ready Word documents (`.docx`), styled HTML presentations (`.html`), and source Markdown (`.md`).
+
 ---
 
 ## 3. CLI BRIDGE EXECUTION CHEATSHEET
@@ -105,14 +112,18 @@ The local PowerShell CLI bridge (`.\scripts\dev-os.ps1`) allows immediate intera
 
 ```powershell
 # Fleet Health & Tree
-.\scripts\dev-os.ps1 status                  # Query all 37 agents' lifecycle and last run
-.\scripts\dev-os.ps1 tree                    # Display hierarchical agent tree
+.\scripts\dev-os.ps1 status                  # Query all 40 agents' lifecycle and last run
+.\scripts\dev-os.ps1 tree                    # Display hierarchical agent tree (10 Sub-Masters, 40 Agents)
 .\scripts\dev-os.ps1 inspect <agent_id>      # Deep inspect an individual agent synapse
 
 # On-Demand Execution
-.\scripts\dev-os.ps1 run-agent <agent_id>    # Trigger a single satellite agent
-.\scripts\dev-os.ps1 run-submaster <id>      # Execute an entire category sub-master suite
-.\scripts\dev-os.ps1 run-fleet               # Sequentially execute all 37 agents
+.\scripts\dev-os.ps1 run-agent <agent_id>    # Trigger a single satellite agent (40 available)
+.\scripts\dev-os.ps1 run-submaster <id>      # Execute an entire category sub-master suite (10 available)
+.\scripts\dev-os.ps1 run-fleet               # Sequentially execute all 40 agents
+
+# Executive Monthly Analytics & SEO Reports
+.\scripts\dev-os.ps1 report-list             # List all monthly executive reports (.docx, .html, .md)
+.\scripts\dev-os.ps1 report-generate <month> # Synthesize 3rd-grade executive report
 
 # Master Brain & Continuous Learning
 .\scripts\dev-os.ps1 brain                   # Query Master Brain status & live cognitive thoughts

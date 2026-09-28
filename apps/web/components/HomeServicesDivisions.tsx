@@ -81,16 +81,16 @@ const DIVISIONS: Division[] = [
                 badge: 'Jalousie Specialists'
             },
             {
-                title: 'Window AC Maintenance & Deep Cleaning',
-                desc: 'Complete mold purge, high-pressure chemical coil wash, blower wheel sanitization, and salt-air corrosion treatment.',
-                href: '/window_ac_maintenance',
-                cta: 'Cleaning Service Info',
-                icon: Sparkles,
-                badge: 'Mold & Odor Eradication'
+                title: 'Window AC Delivery & Warehouse Pickup',
+                desc: '$50 flat island-wide delivery or same-day vehicle loading at our Waipahu warehouse. Factory-sealed boxes with 1-year warranty.',
+                href: '/window-ac-delivery-service-oahu',
+                cta: 'Delivery & Pickup Info',
+                icon: Truck,
+                badge: '$50 Flat Delivery'
             },
             {
                 title: 'Clean vs. Replace Evaluation',
-                desc: 'Honest evaluation on whether an older window AC is worth servicing or if upgrading to an inverter pays for itself in HECO electricity savings.',
+                desc: 'Honest evaluation on whether an older window AC is worth maintaining or if upgrading to an LG Dual Inverter ($45 rebate) pays for itself in HECO savings.',
                 href: '/clean-vs-replace-window-ac',
                 cta: 'Run Calculator',
                 icon: RotateCcw,

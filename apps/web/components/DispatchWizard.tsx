@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { EditableText } from './EditableText';
 import { useContent } from '@/lib/context/ContentContext';
@@ -13,6 +13,7 @@ export function DispatchWizard() {
     const { content } = useContent();
     const [step, setStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const isSubmittingRef = useRef(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const searchParams = useSearchParams();
@@ -70,6 +71,8 @@ export function DispatchWizard() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (isSubmittingRef.current || isSubmitting) return;
+        isSubmittingRef.current = true;
         setIsSubmitting(true);
         setErrorMessage('');
 
@@ -122,13 +125,14 @@ export function DispatchWizard() {
             console.error('Lead submission failed', err);
             setErrorMessage('Network error. Please check your connection.');
         } finally {
+            isSubmittingRef.current = false;
             setIsSubmitting(false);
         }
     };
 
     const services = content?.contact?.wizard?.services_list || [
         "Window AC Installation",
-        "Window AC Cleaning",
+        "Window AC Deep Cleaning",
         "Window AC Diagnosis/Repair",
         "Mini Split Estimate (New)",
         "Mini Split Estimate (Replace)",
@@ -523,10 +527,10 @@ export function DispatchWizard() {
                     <div className="pt-4 text-center space-y-1 border-t border-white/5">
                         <div className="inline-flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
                             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                            By Appointment First • Transparent Pricing
+                            By Appointment First • Upfront Quotes
                         </div>
                         <p className="text-slate-400 text-[11px] leading-relaxed max-w-lg mx-auto">
-                            $0 to book in-home estimates for new or replacement installations. Transparent flat rates: $175 mini split diagnosis, $175 basic mini split cleaning, $275 premium mini split cleaning, $275 window AC cleaning.
+                            $0 to book in-home estimates for new or replacement installations. Island flat rates: $175 mini split diagnosis, $175 basic mini split cleaning, $275 premium mini split cleaning, $275 window AC deep cleaning.
                         </p>
                     </div>
                 </div>

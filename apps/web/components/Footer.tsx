@@ -15,11 +15,11 @@ export default function Footer() {
     const defaults = {
         mini_split_label: "MINI SPLIT AC",
         window_ac_label: "WINDOW AC",
-        mini_split_estimate_date: "Next Available Estimate: Feb 6",
-        mini_split_install_date: "Next Available Install: Feb 12",
-        window_ac_estimate_date: "Next Available Estimate: Feb 5",
-        window_ac_install_date: "Next Available Install: Feb 8",
-        general_availability_range: "Scheduling for week of February 2-9, 2026",
+        mini_split_estimate_date: "Next Available Estimate: Oct 1-5",
+        mini_split_install_date: "Next Available Install: Oct 6-10",
+        window_ac_estimate_date: "Next Available Estimate: Oct 1-3",
+        window_ac_install_date: "Next Available Install: Oct 3-7",
+        general_availability_range: "Scheduling for week of October 1-7, 2026",
     };
 
     const schedule = {
@@ -129,7 +129,7 @@ export default function Footer() {
                                 { text: 'Window AC Shop', href: '/shop' },
                                 { text: 'AC Repair Service', href: '/ac-repair' },
                                 { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
-                                { text: 'Window AC Cleaning', href: '/window_ac_maintenance' }
+                                { text: 'Clean vs Replace', href: '/clean-vs-replace-window-ac' }
                             ].map((item) => (
                                 <li key={item.text}>
                                     <Link href={item.href} prefetch={false} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
@@ -146,13 +146,14 @@ export default function Footer() {
                         <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Quick Links</h3>
                         <ul className="space-y-4 w-full">
                             {[
-                                { text: 'Mini Split AC', href: '/mini_split_ac' },
                                 { text: 'Shop Inventory', href: '/shop' },
+                                { text: '$45 Window AC Rebate', href: '/hawaii-energy-rebate' },
+                                { text: 'Waipahu Warehouse Pickup', href: '/window-ac-warehouse-pickup-waipahu' },
+                                { text: 'Jalousie Window AC Install', href: '/jalousie-window-ac-installation-oahu' },
                                 { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
-                                { text: 'Window AC Cleaning', href: '/window_ac_maintenance' },
+                                { text: 'Clean vs Replace Guide', href: '/clean-vs-replace-window-ac' },
                                 { text: 'Customer Reviews (142+)', href: '/reviews' },
-                                { text: 'Service Areas', href: '/service-areas' },
-                                { text: 'Sitemap', href: '/sitemap' },
+                                { text: 'Sitemap & Directory', href: '/sitemap' },
                                 { text: 'Contact Us', href: '/contact' }
                             ].map((item) => (
                                 <li key={item.text}>

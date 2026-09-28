@@ -59,11 +59,11 @@ export default function CleanVsReplacePage() {
     const faqItems = [
         {
             q: "How do I know if my window AC is worth cleaning or replacing on Oahu?",
-            a: "If your unit is under 4 years old, cools well, and the aluminum coils have zero flaking rust, our $275 Waipahu bench immersion teardown restores like-new airflow and completely eradicates black mold. However, if your unit is 5+ years old, has rusted coil fins from salt air, or is an older single-speed 10 SEER model, cleaning is often throwing good money away. Upgrading to an LG Dual Inverter saves up to $424/year on your HECO bill and qualifies for a $45 Hawaii Energy cash rebate."
+            a: "If your unit is relatively new (under 3 years old), cools well, and the coils have no rust, washing the removable nylon filter with mild dish soap every 2 weeks will maintain peak airflow and keep mold away. However, if your unit is 4+ years old, smells sour inside, has crumbling aluminum fins from salt air, or is an older single-speed model, spending money to repair it is uneconomical. Upgrading to a brand-new LG Dual Inverter starts at just $504 with a $45 Hawaii Energy cash rebate and saves up to $424/year on your HECO bill."
         },
         {
-            q: "How much does a professional window AC deep cleaning cost in Hawaii?",
-            a: "Our complete off-site bench teardown is $275 flat rate at our Waipahu warehouse facility. We fully dismantle the chassis, chemically strip and pressure flush the evaporator and condenser coils, sanitize the mold-choked squirrel cage blower wheel, treat against salt-air rust, and bench-test electrical draw before you pick it up. Turnaround is 24 to 48 hours."
+            q: "Is it worth paying to overhaul or chemically teardown an old window AC in Hawaii?",
+            a: "Almost never. Window air conditioners are factory-sealed appliances. Disassembling and cleaning internal fans and coils can cost hundreds in technician labor—nearly the cost of a brand-new, ultra-quiet Energy Star inverter unit with a fresh 1-year factory warranty. We recommend replacing old or heavily molded window units rather than paying for uneconomical off-site repairs."
         },
         {
             q: "Does Affordable Home AC participate in Hawaii Energy rebates for window ACs?",
@@ -347,39 +347,39 @@ export default function CleanVsReplacePage() {
                                                 <Sparkles className="size-6" />
                                             </div>
                                             <div>
-                                                <h3 className="text-2xl font-header font-black uppercase text-white">Keep & Book $275 Waipahu Teardown</h3>
+                                                <h3 className="text-2xl font-header font-black uppercase text-white">Keep &amp; Maintain Your Unit</h3>
                                                 <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                                                    Your unit is structurally sound. Our 24–48hr off-site warehouse immersion flush will eradicate black mold, restore 30% airflow, and extend its island lifespan.
+                                                    Your unit is in good mechanical health. Wash the slide-out mesh filter every 2–4 weeks with warm water, gently vacuum outer coil surfaces, and maintain clear airflow. If sour odors or loud buzzing develop later, consider upgrading to an LG Dual Inverter.
                                                 </p>
                                             </div>
                                         </div>
 
                                         <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 space-y-3">
                                             <div className="flex justify-between items-center text-xs">
-                                                <span className="text-slate-400">Service Fee:</span>
-                                                <span className="text-cyan-400 font-mono font-bold text-sm">$275 Flat Rate</span>
+                                                <span className="text-slate-400">Routine Maintenance:</span>
+                                                <span className="text-emerald-400 font-mono font-bold text-sm">DIY Washable Filter Rinse (Free)</span>
                                             </div>
                                             <div className="flex justify-between items-center text-xs">
-                                                <span className="text-slate-400">Facility Location:</span>
-                                                <span className="text-white font-mono font-bold">Waipahu Warehouse</span>
+                                                <span className="text-slate-400">Facility / Warehouse:</span>
+                                                <span className="text-white font-mono font-bold">Waipahu Inventory Hub</span>
                                             </div>
                                             <div className="flex justify-between items-center text-xs">
-                                                <span className="text-slate-400">Turnaround Time:</span>
-                                                <span className="text-white font-mono font-bold">24–48 Hours</span>
+                                                <span className="text-slate-400">New Unit Upgrade Option:</span>
+                                                <span className="text-cyan-400 font-mono font-bold">From $504 (-$45 Rebate)</span>
                                             </div>
                                             <div className="flex justify-between items-center text-xs">
-                                                <span className="text-slate-400">Mold Eradication:</span>
-                                                <span className="text-emerald-400 font-mono font-bold">Deep Chemical Purge</span>
+                                                <span className="text-slate-400">Delivery:</span>
+                                                <span className="text-white font-mono font-bold">$50 Flat Island-Wide</span>
                                             </div>
                                         </div>
 
                                         <div className="space-y-2 pt-2">
                                             <Link
-                                                href="/window_ac_maintenance"
-                                                onClick={() => trackFunnelEvent('decision_matrix_cta_clean', { choice: 'clean', age, condition })}
-                                                className="w-full py-3.5 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-header font-black text-sm uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,182,212,0.35)] transition-all"
+                                                href="/shop"
+                                                onClick={() => trackFunnelEvent('decision_matrix_cta_shop', { choice: 'shop', age, condition })}
+                                                className="w-full py-3.5 px-6 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-sm uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,174,239,0.35)] transition-all"
                                             >
-                                                Book $275 Waipahu Teardown
+                                                Browse In-Stock Dual Inverters
                                                 <ArrowRight className="size-4" />
                                             </Link>
                                             <a
@@ -564,14 +564,14 @@ export default function CleanVsReplacePage() {
                             Ready to Resolve Your Window AC?
                         </h2>
                         <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                            Whether you need an off-site $275 teardown in Waipahu or want a brand new whisper-quiet LG Dual Inverter picked up today, Affordable Home AC has you covered.
+                            Whether you want to learn how to maintain your current unit or upgrade to a brand new whisper-quiet LG Dual Inverter picked up today in Waipahu, Affordable Home AC has you covered.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
                             <Link
-                                href="/window_ac_maintenance"
+                                href="/contact"
                                 className="px-8 py-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-header font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,182,212,0.3)] transition-all"
                             >
-                                Book $275 Teardown Service
+                                Free Sizing Consultation
                                 <ArrowRight className="size-4" />
                             </Link>
                             <Link

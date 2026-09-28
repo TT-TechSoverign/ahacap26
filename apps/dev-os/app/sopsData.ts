@@ -1865,5 +1865,75 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             "Fallback state (ACTIVE)"
         ],
         "contingency_protocol": "Auto-generate fallback SVGs if any raster image exceeds 80KB or fails to load."
+    },
+    "submaster_executive_reporting": {
+        "id": "submaster_executive_reporting",
+        "code": "SOP-SUB-10",
+        "title": "Executive Analytics & Monthly Reporting Sub-Master",
+        "domain": "Executive Reporting",
+        "supervisor": "Sovereign Master Orchestrator",
+        "mandate": "Supervise automated ingestion of Search Console archives and GA4 telemetry, synthesis of executive-level 3rd-grade performance narratives, and multi-format document publishing across Word (.docx), presentation HTML (.html), and source Markdown (.md).",
+        "token_efficiency_policy": "Deterministic parsing and document compilation; completes in < 2.5s with zero continuous background compute overhead.",
+        "oahu_grounding": "Translates complex Oahu municipal search distributions, CTR moats, and inventory demand into plain-English business intelligence for company leadership.",
+        "inputs": ["Search Console archives (Chart.csv, Queries.csv, Pages.csv, Devices.csv)", "GA4 traffic exports", "ReportingEngine service"],
+        "execution_steps": [
+            {"step": 1, "title": "Raw Data Ingestion & Sanitization", "description": "Trigger agent_report_ingestor to uncompress and parse Search Console and GA4 telemetry datasets.", "verification": "Clicks, impressions, query ranks, and device distributions extracted."},
+            {"step": 2, "title": "Executive 3rd-Grade Synthesis", "description": "Trigger agent_narrative_crafter to synthesize Big Wins, high-intent keyword tables, store activity, and concrete action plans.", "verification": "Narrative generated in accessible 3rd-grade executive language."},
+            {"step": 3, "title": "Multi-Format Artifact Publishing", "description": "Trigger agent_document_forge to compile publication-ready .docx, stylized .html, and source .md files.", "verification": "All 3 artifact formats compiled and archived in _analytics_data."}
+        ],
+        "outputs": ["Executive report suite (.docx, .html, .md)", "Monthly KPI matrix", "Search performance index"],
+        "contingency_protocol": "If Search Console archive lacks GA4 files, estimate pageviews and users using verified historical click-through multipliers."
+    },
+    "agent_report_ingestor": {
+        "id": "agent_report_ingestor",
+        "code": "SOP-REP-01",
+        "title": "Raw Analytics Ingestion Sentinel",
+        "domain": "Executive Reporting",
+        "supervisor": "submaster_executive_reporting",
+        "mandate": "Ingest and normalize raw Google Search Console zip archives, individual CSV exports, and GA4 telemetry snapshots.",
+        "token_efficiency_policy": "Zero token overhead; high-throughput in-memory pandas parsing.",
+        "oahu_grounding": "Extracts Oahu regional traffic clusters (Honolulu, Aiea, Kapolei, Pearl City) and mobile device usage shares.",
+        "inputs": ["Uploaded .zip or CSV directory", "Chart.csv", "Queries.csv", "Pages.csv", "Devices.csv"],
+        "execution_steps": [
+            {"step": 1, "title": "Archive Unpacking & Discovery", "description": "Detect and extract uploaded Search Console archives into isolated temporary staging.", "verification": "Performance-on-Search directory verified."},
+            {"step": 2, "title": "Metric Normalization", "description": "Calculate total search clicks, impressions, average SERP position, and mobile click percentage.", "verification": "Core metric schema populated without NaN values."}
+        ],
+        "outputs": ["Normalized metrics dictionary", "Extracted queries list", "Top pages catalog"],
+        "contingency_protocol": "Prioritize Performance-on-Search CSV files over Breadcrumbs or Merchant Listing audit charts."
+    },
+    "agent_narrative_crafter": {
+        "id": "agent_narrative_crafter",
+        "code": "SOP-REP-02",
+        "title": "Executive 3rd-Grade Synthesis Engine",
+        "domain": "Executive Reporting",
+        "supervisor": "submaster_executive_reporting",
+        "mandate": "Transform complex search rankings and technical web metrics into clear, straightforward 3rd-grade reading level executive summaries.",
+        "token_efficiency_policy": "Templated heuristic narrative synthesis with dynamic data injection; zero LLM token consumption.",
+        "oahu_grounding": "Highlights Oahu homeowner buyer intent, Waipahu warehouse pickup demand, and island climate cooling relevance.",
+        "inputs": ["Normalized metrics dictionary", "High-intent keyword rankings", "Month/Year parameters"],
+        "execution_steps": [
+            {"step": 1, "title": "Big Wins Extraction", "description": "Isolate peak CTR records, shop catalog growth, and Page 1 Google product breakthroughs.", "verification": "Top 5 commercial achievements formulated."},
+            {"step": 2, "title": "Executive Action Plan Formulation", "description": "Formulate 3 high-impact next steps with plain-English problem and fix explanations.", "verification": "Action plan structured without technical jargon."}
+        ],
+        "outputs": ["Executive report markdown source", "Traffic snapshot table", "High-intent keyword table"],
+        "contingency_protocol": "Default to core Oahu branded CTR highlights if no secondary keyword breakthroughs occurred."
+    },
+    "agent_document_forge": {
+        "id": "agent_document_forge",
+        "code": "SOP-REP-03",
+        "title": "Multi-Format Document Compiler",
+        "domain": "Executive Reporting",
+        "supervisor": "submaster_executive_reporting",
+        "mandate": "Compile and publish executive reports simultaneously into publication-ready Word (.docx), stylized presentation (.html), and Markdown (.md).",
+        "token_efficiency_policy": "Native python-docx and python-markdown rendering; compiles all 3 formats in < 500ms.",
+        "oahu_grounding": "Applies professional Polynesian executive styling, corporate blue headers, and clean print layouts for company ownership.",
+        "inputs": ["Executive markdown narrative", "Output directory path", "python-docx engine"],
+        "execution_steps": [
+            {"step": 1, "title": "Word Document Compilation", "description": "Generate Microsoft Word (.docx) document with custom cell shading (#D5E8F0) and 1-inch margins.", "verification": ".docx file created and verified."},
+            {"step": 2, "title": "HTML Presentation Rendering", "description": "Compile standalone responsive HTML document with print-ready CSS.", "verification": ".html file created and verified."},
+            {"step": 3, "title": "Directory Archival", "description": "Save all compiled artifacts into standardized monthly directory (_analytics_data).", "verification": "3/3 artifacts persisted."}
+        ],
+        "outputs": ["Compiled .docx artifact", "Compiled .html presentation", "Persisted .md document"],
+        "contingency_protocol": "Fall back to HTML and Markdown output if python-docx library is unavailable in runtime environment."
     }
 };

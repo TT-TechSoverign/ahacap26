@@ -30,12 +30,12 @@ export default function ContactPage() {
 
 
                 <div className="flex flex-col gap-6 lg:gap-8">
-                    {/* Transparent Pricing & Free Estimates Banner */}
+                    {/* Free Estimates & Upfront Pricing Banner */}
                     <div className="max-w-5xl mx-auto w-full bg-slate-900/90 border border-primary/30 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs shadow-lg">
                         <div className="flex items-start sm:items-center gap-3">
                             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0 mt-1 sm:mt-0"></span>
                             <span className="text-slate-200 font-sans leading-relaxed">
-                                <strong className="text-white">Zero Cost For Estimates • Transparent Upfront Pricing:</strong> It is $0 to book an appointment for estimates on new or replacement mini split and window AC installations. Diagnostic &amp; cleaning appointments have transparent flat-rate pricing: <span className="text-cyan-300 font-bold">$175</span> mini split diagnosis, <span className="text-cyan-300 font-bold">$175</span> basic mini split cleaning, <span className="text-cyan-300 font-bold">$275</span> premium mini split cleaning, and <span className="text-cyan-300 font-bold">$275</span> window AC teardown/cleaning. Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> or email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>.
+                                <strong className="text-white">Zero Cost For In-Home Estimates ($0):</strong> It is $0 to book an appointment for estimates on new or replacement mini split and window AC installations. Diagnostic &amp; cleaning appointments carry clear flat rates: <span className="text-cyan-300 font-bold">$175</span> mini split diagnosis, <span className="text-cyan-300 font-bold">$175</span> basic mini split cleaning, and <span className="text-cyan-300 font-bold">$275</span> premium mini split cleaning. Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> or email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>.
                             </span>
                         </div>
                         <span className="font-mono text-[10px] uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full shrink-0">

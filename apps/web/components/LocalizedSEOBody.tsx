@@ -113,7 +113,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                             Whether you need urgent <Link href="/ac-repair" className="font-bold text-[#00E5FF] hover:underline">air conditioning repair Oahu</Link> homeowners trust, routine <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">affordable ac maintenance</Link>, or a comprehensive <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">split ac service</Link>, our licensed technicians are ready. 
                         </p>
                         <p>
-                            Our intensive <Link href="/window_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">window ac cleaning service</Link> and ductless sanitization protocols destroy mold at the root and apply specialized corrosion inhibitors to extend the life of your equipment.
+                            Our <Link href="/clean-vs-replace-window-ac" className="font-bold text-[#00E5FF] hover:underline">clean vs replace guidance</Link> and ductless mini split sanitization protocols destroy mold at the root and apply specialized corrosion inhibitors to extend the life of your equipment.
                         </p>
                     </div>
                 </div>

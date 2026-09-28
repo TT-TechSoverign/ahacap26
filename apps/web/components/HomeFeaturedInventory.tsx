@@ -165,7 +165,7 @@ export function HomeFeaturedInventory() {
                             Featured Oahu In-Stock Inventory
                         </h2>
                         <p className="font-sans text-sm sm:text-base text-slate-300 max-w-2xl">
-                            Brand new in factory boxes. No 6–8 week mainland freight delays. Pick up at our Waipahu shop or get $50 flat island-wide delivery.
+                            Brand-new factory-sealed units warehoused locally on Oahu. Pick up by appointment at our Waipahu warehouse or get $50 flat-rate island-wide delivery.
                         </p>
                     </div>
 

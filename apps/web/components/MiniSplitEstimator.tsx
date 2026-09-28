@@ -207,7 +207,7 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                     Oahu Mini-Split <span className="text-cyan-400">System Builder</span>
                 </h2>
                 <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mt-2">
-                    Configure your zoned cooling requirements in 30 seconds. Includes our <span className="text-white font-semibold">Free $250 In-Home Sizing & Electrical Load Survey</span> with zero obligation.
+                    Configure your zoned cooling requirements in 30 seconds. Includes our <span className="text-white font-semibold">Free In-Home Sizing & Placement Estimate</span> with zero obligation.
                 </p>
 
                 {/* Progress bar */}
@@ -431,9 +431,9 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                             <div className="text-center mb-6">
                                 <h3 className="text-lg sm:text-xl font-bold text-white flex items-center justify-center gap-2">
                                     <Zap className="size-5 text-cyan-400" />
-                                    Step 4: Lock In Your Free $250 Sizing & Electrical Survey
+                                    Step 4: Request Your Free In-Home Sizing Estimate
                                 </h3>
-                                <p className="text-xs sm:text-sm text-slate-400">Our CT-36775 licensed specialists inspect room volume and electrical panel capacity with zero sales pressure.</p>
+                                <p className="text-xs sm:text-sm text-slate-400">Our licensed technicians evaluate room dimensions and equipment placement to recommend the right system.</p>
                             </div>
 
                             {/* Preferred contact mode (Text vs Call) */}
@@ -561,7 +561,7 @@ export default function MiniSplitEstimator({ defaultCity = '' }: MiniSplitEstima
                             <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-slate-400 pt-2">
                                 <span className="flex items-center gap-1"><ShieldCheck className="size-3.5 text-cyan-400" /> CT-36775 Licensed & Insured</span>
                                 <span className="flex items-center gap-1"><Clock className="size-3.5 text-cyan-400" /> Waipahu Local Stock</span>
-                                <span className="flex items-center gap-1"><Zap className="size-3.5 text-cyan-400" /> Panel Check Included</span>
+                                <span className="flex items-center gap-1"><Zap className="size-3.5 text-cyan-400" /> Free In-Home Estimate</span>
                             </div>
 
                             <div className="flex justify-between items-center pt-3">

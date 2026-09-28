@@ -242,7 +242,7 @@ graph TD
 ### Cluster 5: CRM & Customer Operations (`SOP-CRM`)
 - **`SOP-CRM-01`**: "By Appointment First" Lead Queue Triage & Dispatch
 - **`SOP-CRM-02`**: Oahu Salt-Air Preventative Maintenance Lifecycle Recalls
-- **`SOP-CRM-03`**: Waipahu Warehouse Drop-Off Intake & 24-48hr Bench Testing
+- **`SOP-CRM-03`**: Waipahu Warehouse Direct Inventory Intake & Local Pickup Dispatch
 - **`SOP-CRM-04`**: Customer Direct Pricing Transparency & Zero Upfront Fee Policy
 
 ### Cluster 6: Deployment Quality & Release Engineering (`SOP-DEP`)

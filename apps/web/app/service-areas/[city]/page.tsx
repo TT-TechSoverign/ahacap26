@@ -167,14 +167,14 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         Frequently Asked Questions in {cityData.name}
                     </h2>
                     <p className="text-slate-400 text-sm max-w-xl mx-auto mt-2">
-                        Honest answers from Hawaii CT-36775 licensed technicians grounded in Oahu's coastal climate.
+                        Honest answers from Hawaii CT-36775 licensed technicians grounded in Oahu&apos;s coastal climate.
                     </p>
                 </div>
 
                 <div className="space-y-4">
                     <details className="group bg-slate-900/70 border border-slate-800 hover:border-cyan-500/30 rounded-2xl p-5 transition-all [&_svg]:open:-rotate-180">
                         <summary className="flex items-center justify-between cursor-pointer list-none text-white font-header font-bold text-sm sm:text-base select-none">
-                            <span>What is the most efficient AC unit for {cityData.name}'s high humidity?</span>
+                            <span>What is the most efficient AC unit for {cityData.name}&apos;s high humidity?</span>
                             <span className="text-cyan-400 ml-4 shrink-0 transition-transform duration-300">
                                 <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -182,7 +182,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             </span>
                         </summary>
                         <p className="mt-4 text-slate-300 text-sm leading-relaxed border-t border-slate-800/80 pt-4 font-sans">
-                            For {cityData.name}'s tropical climate, we highly recommend systems with variable-speed inverter compressors, such as the LG Dual Inverter window AC or a Mitsubishi mini-split. These systems adjust cooling capacity dynamically, which keeps energy bills low while continuously pulling moisture out of the air to maintain a dry, comfortable indoor environment.
+                            For {cityData.name}&apos;s tropical climate, we highly recommend systems with variable-speed inverter compressors, such as the LG Dual Inverter window AC or a Mitsubishi mini-split. These systems adjust cooling capacity dynamically, which keeps energy bills low while continuously pulling moisture out of the air to maintain a dry, comfortable indoor environment.
                         </p>
                     </details>
 
@@ -196,7 +196,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             </span>
                         </summary>
                         <p className="mt-4 text-slate-300 text-sm leading-relaxed border-t border-slate-800/80 pt-4 font-sans">
-                            Due to {cityData.name}'s salt-air exposure and humidity, we recommend a professional deep clean every 6 to 12 months. Regular maintenance cleanings remove accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30% and extending your system's life.
+                            Due to {cityData.name}&apos;s salt-air exposure and humidity, we recommend a professional deep clean every 6 to 12 months. Regular maintenance cleanings remove accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30% and extending your system&apos;s life.
                         </p>
                     </details>
 

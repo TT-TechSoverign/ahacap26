@@ -110,18 +110,18 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
 
                 {/* Body Links */}
                 <div className="flex-1 flex flex-col p-6 gap-6 overflow-y-auto">
-                    {/* Free Estimates ($0) & Transparent Pricing Hook Card */}
+                    {/* Free Estimates ($0) & Upfront Quotes Hook Card */}
                     <div className="p-4 rounded-2xl bg-gradient-to-br from-primary/15 via-slate-900/90 to-slate-900 border border-primary/30 space-y-3 text-left shadow-lg">
                         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[9px] font-black uppercase tracking-wider">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            Free Estimates ($0) • Transparent Pricing
+                            Free Estimates ($0) • Upfront Quotes
                         </div>
                         <div className="space-y-1">
                             <p className="text-white font-header font-bold text-xs uppercase tracking-wide">
                                 $0 Cost to Book In-Home Estimates
                             </p>
                             <p className="text-slate-300 text-[11px] font-sans leading-relaxed">
-                                Zero cost to book estimates on new or replacement mini split and window AC installations. Upfront flat rates: $175 mini split diagnosis, $175 basic cleaning, $275 premium cleaning, $275 window AC cleaning.
+                                Zero cost to book estimates on new or replacement mini split and window AC installations. Upfront flat rates: $175 mini split diagnosis, $175 basic cleaning, $275 premium cleaning, $275 window AC deep cleaning.
                             </p>
                         </div>
                         <div className="grid grid-cols-2 gap-2 pt-1">

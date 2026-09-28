@@ -61,6 +61,7 @@ switch ($Command.ToLower()) {
             Write-Host "   SERP:       agent_serp_intent_harvester, agent_ctr_title_craftsman, agent_merchant_feed_sentinel" -ForegroundColor Yellow
             Write-Host "   Conversion: agent_mobile_checkout_sentinel, agent_trust_authority_grounder, agent_zero_friction_navigator, agent_speed_core_vital_sentinel" -ForegroundColor Yellow
             Write-Host "   Studio:     agent_comfyui_bridge, agent_avatar_portrait_crafter, agent_trust_medallion_forge, agent_asset_optimizer_sentinel" -ForegroundColor Yellow
+            Write-Host "   Reporting:  agent_report_ingestor, agent_narrative_crafter, agent_document_forge" -ForegroundColor Yellow
             return
         }
         Write-Host "[*] Triggering Agent: $Target on Server..." -ForegroundColor Yellow
@@ -74,7 +75,7 @@ switch ($Command.ToLower()) {
     }
 
     "run-fleet" {
-        Write-Host "[*] Dispatching full fleet: Running All 37 Specialized Agents sequentially..." -ForegroundColor Yellow
+        Write-Host "[*] Dispatching full fleet: Running All 40 Specialized Agents sequentially..." -ForegroundColor Yellow
         try {
             $resp = Invoke-RestMethod -Uri "$ServerUrl/agents/run-all" -Method POST -Headers $headers
             Write-Host "[OK] Fleet Audit Completed at $($resp.executed_at) (All Healthy: $($resp.all_healthy)):" -ForegroundColor Green
@@ -548,6 +549,41 @@ switch ($Command.ToLower()) {
         }
     }
 
+    "report-list" {
+        Write-Host "[*] Querying Executive Monthly Reports from Server..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/reports" -Method GET -Headers $headers
+            Write-Host "`n[REPORTS ARCHIVE]: $($resp.count) compiled reports found" -ForegroundColor Green
+            foreach ($r in $resp.reports) {
+                Write-Host "`n  - $($r.month) $($r.year)" -ForegroundColor Yellow
+                Write-Host "      Word (.docx): $(if ($r.has_docx) { 'Available' } else { 'Missing' })" -ForegroundColor Cyan
+                Write-Host "      HTML:         $(if ($r.has_html) { 'Available' } else { 'Missing' })" -ForegroundColor Cyan
+                Write-Host "      Markdown:     $($r.md_path)" -ForegroundColor DarkGray
+            }
+        } catch {
+            Write-Host "[!] Failed to query reports: $_" -ForegroundColor Red
+        }
+    }
+
+    "report-generate" {
+        if (-not $Target) {
+            Write-Host "[!] Usage: .\scripts\dev-os.ps1 report-generate <Month> [Year]" -ForegroundColor Red
+            return
+        }
+        $month = $Target
+        $year = if ($args.Count -gt 0) { $args[0] } else { "2026" }
+        Write-Host "[*] Triggering Autonomous Report Synthesis for $month $year..." -ForegroundColor Yellow
+        try {
+            $body = @{ month = $month; year = $year } | ConvertTo-Json
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/reports/generate" -Method POST -Headers $headers -Body $body
+            Write-Host "[OK] $($resp.message)" -ForegroundColor Green
+            Write-Host "`nGenerated Files:" -ForegroundColor White
+            $resp.report.files | ConvertTo-Json | Write-Host -ForegroundColor DarkGray
+        } catch {
+            Write-Host "[!] Report generation failed: $_" -ForegroundColor Red
+        }
+    }
+
     "scan-secrets" {
         powershell -ExecutionPolicy Bypass -File .\scripts\scan-secrets.ps1
     }
@@ -561,12 +597,14 @@ switch ($Command.ToLower()) {
         Write-Host "  brain-sync [thought]       - Client-initiated outbound push of directive/thought to Master Brain"
         Write-Host "  session-sync [summary]     - Push cross-session learning and milestones to Master Brain"
         Write-Host "  inspect [id]               - Deep inspection of sub-master or agent synapse and security perimeter"
-        Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (6 Sub-Masters, 24 Agents)"
+        Write-Host "  tree                       - Display complete hierarchical Agent Org Tree (10 Sub-Masters, 40 Agents)"
         Write-Host "  status                     - Query fleet status and active agents"
-        Write-Host "  sops [id]                  - View Standard Operating Procedures (all 30 dossiers or specific agent)"
-        Write-Host "  run-submaster [name]       - Dispatch a Category Sub-Master suite (infra, security, commerce, growth, crm, deploy)"
-        Write-Host "  run-agent [agent_id]       - Trigger a single on-demand agent"
-        Write-Host "  run-fleet                  - Sequentially execute all 24 agents"
+        Write-Host "  sops [id]                  - View Standard Operating Procedures (all 50 dossiers or specific agent)"
+        Write-Host "  run-submaster [name]       - Dispatch a Category Sub-Master suite (10 available)"
+        Write-Host "  run-agent [agent_id]       - Trigger a single on-demand agent (40 available)"
+        Write-Host "  run-fleet                  - Sequentially execute all 40 agents"
+        Write-Host "  report-list                - List all monthly executive analytics & SEO reports"
+        Write-Host "  report-generate [month]    - Compile 3rd-grade executive report (.docx, .html, .md)"
         Write-Host "  analytics                  - Display Google Search Console & GA4 continuous telemetry & conversion drop-offs"
         Write-Host "  recommendations            - Stream active continuous CRO, schema, and UI/content optimization suggestions"
         Write-Host "  high-intent-pages          - Inspect high-converting landing pages catalog and deployment status"

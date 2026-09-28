@@ -158,7 +158,7 @@ export function HomeServiceAreasHub() {
                             <span>Same-Island Dispatch Available Mon–Sat</span>
                         </div>
                         <h4 className="text-lg sm:text-xl font-header font-black text-white uppercase tracking-tight">
-                            Don't See Your Specific Neighborhood?
+                            Don&apos;t See Your Specific Neighborhood?
                         </h4>
                         <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-xl">
                             We provide service, estimates, and window AC deliveries across the entire island of Oahu. Call our dispatch desk to confirm technician availability for your street.

@@ -33,11 +33,11 @@ export default function MiniSplitEstimatePage() {
     const faqItems = [
         {
             q: "Does Affordable Home AC participate in Hawaii Energy rebates for mini splits?",
-            a: "No. Affordable Home AC does not participate in Hawaii Energy rebates for our mini split division. Rebate programs frequently require contractors to artificially inflate base retail equipment prices, restrict equipment choices, and subject homeowners to months of bureaucratic voucher approvals. Instead, we offer upfront, honest Hawaii Contractor CT-36775 direct pricing—delivering genuine value with zero red tape."
+            a: "No. Affordable Home AC does not participate in Hawaii Energy rebates for our mini split division. Rebate programs frequently require contractors to artificially inflate base retail equipment prices, restrict equipment choices, and subject homeowners to months of bureaucratic voucher approvals. Instead, we offer upfront Hawaii Contractor CT-36775 direct pricing—delivering reliable cooling without voucher delays."
         },
         {
             q: "What electrical panel capacity do I need for a ductless mini split on Oahu?",
-            a: "A single-zone mini split typically requires a dedicated 15A or 20A 208/230V breaker. However, multi-zone systems (3 to 5 heads) draw 30A to 45A. Many classic Oahu homes in Kaimuki, Kailua, Kalihi, and Pearl City have older 60A or 100A electrical service panels. Every in-home estimate from Affordable Home AC includes a complimentary electrical panel load assessment to ensure your system operates safely without tripping your main service."
+            a: "A single-zone mini split typically requires a dedicated 15A or 20A 208/230V breaker. Multi-zone systems (3 to 5 heads) draw 30A to 45A. Many Oahu homes have 60A or 100A electrical services. During your free in-home estimate, our technicians review equipment placement and power requirements. When dedicated circuit wiring or panel work is needed, we coordinate with licensed electrical subcontractors."
         },
         {
             q: "How much can a high-SEER2 mini split save on Hawaii HECO electric bills?",
@@ -66,7 +66,7 @@ export default function MiniSplitEstimatePage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Hawaii Contractor CT-36775 providing honest, transparent ductless mini split installation, electrical panel assessment, and multi-zone climate design across Oahu."
+                "description": "Hawaii Contractor CT-36775 providing ductless mini split installation, cooling load sizing, and multi-zone climate design across Oahu."
             },
             {
                 "@type": "Service",
@@ -77,7 +77,7 @@ export default function MiniSplitEstimatePage() {
                     "name": "Affordable Home AC"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "On-site ductless mini-split installation estimate, room BTU heat load calculation, and electrical panel inspection on Oahu."
+                "description": "On-site ductless mini-split installation estimate, room BTU heat load calculation, and installation planning on Oahu."
             },
             {
                 "@type": "BreadcrumbList",
@@ -119,7 +119,7 @@ export default function MiniSplitEstimatePage() {
                         Oahu <span className="text-primary">Ductless Mini Split</span> Sizing & Estimate
                     </h1>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Honest contractor pricing, whisper-quiet 19 dBA luxury, and a complimentary 60A/100A electrical panel assessment. Zero rebate bureaucracy—just transparent, premium engineering.
+                        Honest contractor pricing, whisper-quiet 19 dBA cooling, and expert room sizing across Oahu.
                     </p>
                 </div>
 
@@ -129,19 +129,19 @@ export default function MiniSplitEstimatePage() {
                         <div className="space-y-2">
                             <div className="flex items-center gap-2 text-emerald-400 font-header font-black text-sm uppercase">
                                 <DollarSign className="size-4" />
-                                0% Rebate Red Tape
+                                Direct Contractor Value
                             </div>
                             <p className="text-xs text-slate-400 leading-relaxed">
-                                We do not participate in mini split Hawaii Energy rebates. Instead of inflated manufacturer MSRPs and 6-month voucher delays, we pass honest direct contractor pricing straight to you.
+                                We do not participate in mini split Hawaii Energy rebates. Instead of inflated markups and lengthy voucher processing, we provide clear direct contractor pricing.
                             </p>
                         </div>
                         <div className="space-y-2">
                             <div className="flex items-center gap-2 text-yellow-400 font-header font-black text-sm uppercase">
                                 <Zap className="size-4" />
-                                60A / 100A Panel Assessment
+                                Electrical Subcontractor Coordination
                             </div>
                             <p className="text-xs text-slate-400 leading-relaxed">
-                                Many Oahu homes have 60A or 100A main service panels. Every estimate includes a free comprehensive electrical load calculation to prevent breaker tripping.
+                                Many Oahu homes have 60A or 100A electrical services. If dedicated circuits or panel capacity work are required for your system, we coordinate directly with licensed electrical subcontractors.
                             </p>
                         </div>
                         <div className="space-y-2">
@@ -291,7 +291,7 @@ export default function MiniSplitEstimatePage() {
                             Ready for Whisper-Quiet Island Comfort?
                         </h2>
                         <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                            Book your free in-home sizing and electrical load assessment across Oahu today. We bring sample hardware, measure line sets, and provide transparent upfront pricing.
+                            Book your free in-home sizing estimate across Oahu today. We measure line sets, assess unit placement, and provide an upfront quote for your home.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
                             <a
