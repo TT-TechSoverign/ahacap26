@@ -319,6 +319,7 @@ export default function LgDualInverterGuidePage() {
                                         width={320}
                                         height={220}
                                         className="object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform duration-300"
+                                        unoptimized
                                     />
                                     <div className="absolute top-2 right-2">
                                         <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold uppercase">

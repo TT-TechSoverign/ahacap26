@@ -500,6 +500,7 @@ export default function ProductDetailPage() {
                                             fill
                                             className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.9)] transition-all duration-700 group-hover/cutaway:scale-105"
                                             priority
+                                            unoptimized
                                         />
                                     </div>
                                     <div className="absolute top-2 left-2 z-20 px-2.5 py-1 rounded-md bg-cyan-500/90 text-slate-950 text-[9px] font-header font-black uppercase tracking-wider shadow-md">
@@ -508,8 +509,8 @@ export default function ProductDetailPage() {
                                     <button
                                         type="button"
                                         onClick={(e) => {
-                                            e.stopPropagation();
-                                            setIsCaliperLightboxOpen(true);
+                                             e.stopPropagation();
+                                             setIsCaliperLightboxOpen(true);
                                         }}
                                         className="absolute top-2 right-2 z-30 px-2 py-1 rounded-md bg-black/80 hover:bg-black text-cyan-300 hover:text-white border border-white/20 text-[9px] font-header font-bold uppercase tracking-wider flex items-center gap-1 transition-all shadow-md active:scale-95"
                                         title="Expand Fullscreen 3D Calipers & Geometry"
@@ -529,6 +530,7 @@ export default function ProductDetailPage() {
                                         fill
                                         className="object-contain drop-shadow-[0_50px_100px_rgba(0,0,0,0.8)] transition-all duration-1000 group-hover:scale-105"
                                         priority
+                                        unoptimized
                                     />
                                 </div>
                             ) : (
@@ -596,7 +598,7 @@ export default function ProductDetailPage() {
                                             selectedImage === img ? "border-primary ring-2 ring-primary/20 shadow-lg shadow-primary/20" : "border-white/10 hover:border-white/30 grayscale hover:grayscale-0"
                                         )}
                                     >
-                                        <Image src={img} alt="Thumbnail" fill className="object-cover" />
+                                        <Image src={img} alt="Thumbnail" fill className="object-cover" unoptimized />
                                     </button>
                                 ))}
                             </div>
@@ -987,6 +989,7 @@ export default function ProductDetailPage() {
                                 fill 
                                 className="object-contain p-2 md:p-4" 
                                 priority
+                                unoptimized
                             />
                         </div>
                         <div className="p-4 md:p-6 border-t border-white/10 bg-surface-dark/90 grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">

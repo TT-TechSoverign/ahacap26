@@ -243,6 +243,7 @@ export default function Lg8000BtuOahuPage() {
                                 height={420}
                                 className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
                                 priority
+                                unoptimized
                             />
                         </div>
 

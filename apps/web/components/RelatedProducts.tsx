@@ -78,6 +78,7 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
                       alt={prod.name} 
                       fill 
                       className="object-contain p-2 group-hover:scale-105 transition-transform duration-500" 
+                      unoptimized
                     />
                   ) : (
                     <div className="text-[10px] text-slate-400 uppercase tracking-widest font-header">No Image</div>

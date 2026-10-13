@@ -928,7 +928,7 @@ function ShopPageContent() {
                                     return (
                                         <div key={c.id} className="size-9 rounded-lg bg-slate-900 border border-primary/50 overflow-hidden relative shadow-md">
                                             {img ? (
-                                                <Image src={img} alt={c.name} fill className="object-contain p-1" />
+                                                <Image src={img} alt={c.name} fill className="object-contain p-1" unoptimized />
                                             ) : (
                                                 <Snowflake className="size-4 m-auto text-primary" />
                                             )}
@@ -993,7 +993,7 @@ function ShopPageContent() {
                                     <div key={item.id} className="bg-slate-900/90 border border-white/10 rounded-2xl p-4 flex flex-col justify-between">
                                         <div>
                                             <div className="relative w-full aspect-[4/3] bg-black/40 rounded-xl mb-3 overflow-hidden">
-                                                {img && <Image src={img} alt={item.name} fill className="object-contain p-2" />}
+                                                {img && <Image src={img} alt={item.name} fill className="object-contain p-2" unoptimized />}
                                             </div>
                                             <div className="text-[10px] font-mono text-primary uppercase">{item.category}</div>
                                             <h4 className="text-sm font-header font-black text-white uppercase mb-2 line-clamp-2">{item.name}</h4>
@@ -2090,7 +2090,7 @@ function ProductCard({
                                 "object-contain transition-transform duration-700 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative z-10",
                                 viewMode === 'cutaway' ? "p-1 md:p-2 scale-100 group-hover:scale-105" : "p-4 md:p-6 group-hover:scale-110"
                             )}
-                            unoptimized={activeImg?.endsWith('.svg')}
+                            unoptimized={true}
                         />
                     ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-slate-700 relative z-10">

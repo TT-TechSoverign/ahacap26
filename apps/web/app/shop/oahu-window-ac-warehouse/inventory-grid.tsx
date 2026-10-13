@@ -342,6 +342,7 @@ export function WarehouseInventoryGrid() {
                                         fill
                                         className="object-contain"
                                         sizes="(max-width: 768px) 100vw, 300px"
+                                        unoptimized
                                     />
                                 </div>
                                 <h3 className="text-lg font-extrabold text-white mt-2">
