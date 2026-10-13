@@ -336,6 +336,21 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
       - Security scan: `scan-secrets.ps1` verified 2,105 files clean with 0 leaked secrets or tokens.
       - Catalog & Cart Freeze: `apps/web/app/shop/page.tsx`, `apps/web/app/shop/layout.tsx`, and Stripe checkout preserved 100% untouched.
 
+- **Epoch 18 (October 12-13, 2026) Catalog Evolution: GE AJCQ12AWJ Retirement & AJCQ12AXXWA Deployment**:
+  - **Model Transition**: Retired legacy GE 12,000 BTU Built-In unit (`AJCQ12AWJ`, ID 15) per CEO & distributor (PHAD Hawaii Appliance) authorization and replaced with the newly released variable-speed inverter model: **GE 12,000 BTU Variable Speed Built-In AC with SmartHQ™ WiFi (`AJCQ12AXXWA`)**.
+  - **Asset Studio Optimization**: Processed 5 authentic distributor/factory angles into padded, centered 1600x1000 white-canvas WebP images strictly `< 80 KB` (Front: 78.4 KB, Case: 10 KB, Remote: 14 KB, SideLeft: 64.8 KB, SideRight: 67.4 KB). Aliased owner's manual to `GE-AJCQ12AXXWA-spec-sheet.pdf`.
+  - **3D Spatial Caliper Cutaway Re-rendering**: Re-ran `scripts/generate_award_winning_cutaways.py` generating updated `product_15_fit_cutaway.webp` and `.png` with model-matched front photography and accurate AJCQ12AXXWA dimensional HUD overlays.
+  - **Monorepo Ground Truth Parity**:
+    - `apps/api/content/products_seed.json` & `apps/api/inventory.csv`: Synchronized with 12,000 BTU, variable-speed inverter, 48/56 dB noise profile, and SmartHQ™ WiFi.
+    - `apps/web/lib/product-identifiers.ts`: Set MPN to `AJCQ12AXXWA`, GTIN-12 to `084691985242`, and SmartHQ™ WiFi catalyst badge.
+    - `apps/web/lib/product-specs.ts` & `product-images.ts`: Updated `GE_PERF_12K` specs, dual-climate microclimate sizing, and gallery angles set `ge-ajcq12axxwa`.
+    - `apps/web/app/shop/page.tsx`, `apps/web/app/shop/layout.tsx`, and `apps/web/app/shop/[slug]/page.tsx`: Updated sizing matrix, schema ItemList, and PDF specsheet links.
+    - `apps/web/middleware.ts`: Implemented 301 permanent redirect from `/shop/15-ge-12-000-btu-ajcq12awj` to `/shop/15-ge-12-000-btu-ajcq12axxwa`.
+  - **Verification Suite**:
+    - TypeScript: `npx tsc --noEmit` exited code 0 with 0 errors across entire Next.js storefront.
+    - Backend Pytest: 14/14 unit tests passed with Python 3.13.
+    - Cybersecurity Root Scanner: All 5 stages passed, `[CLEAN] Zero leaked secrets` across 2,104 source and configuration files.
+
 ---
 
 ## 4. Current Status: All Systems Operational
@@ -343,7 +358,7 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
 - **Fleet Health**: All 40 specialized agents report `[ACTIVE]` across 10 Sub-Masters.
 - **Deployment Swarm**: 3-stage verification pipeline returns `OVERALL: VERIFIED_CLEAN` with 0 specification drift.
 - **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), and `prod-api` (`:8001`) are rebuilt, restarted, and running live with zero-cache headers, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the Island Reviews Pavilion, the Dual-Action conversion bridge, full-greenlight GTM/Consent telemetry, safe-storage incognito hardening, the specialized Window AC & Split AC cooling divisions, and the Executive Monthly Reporting Hub (`/dev-os` Key R).
-- **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens across 2,105 files.
+- **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens across 2,104 files.
 - **Storefront Performance**: Next.js production build verified with 116/116 static routes rendered, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, GSC canonical armor deployed, HTTP 410 Gone for dead WordPress debris, robots crawl shield, and Batches 1, 2 & 3 (60 new standalone routes) indexed in dynamic and HTML sitemaps.
 
 

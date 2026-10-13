@@ -289,13 +289,13 @@ We rank very high for people who are searching for affordable air conditioners i
 ## 🚀 Page Ranking Wins & Store Activity
 * **Our Homepage is the Front Door:** The homepage (/) got **{metrics['homepage_clicks']} clicks** and **{metrics['homepage_impressions']:,} impressions**, serving as our primary brand entry point.
 * **The Shop is Popular & Converting:** The main shop page (/shop) generated **{metrics['shop_impressions']:,} impressions and {metrics['shop_clicks']} direct clicks** from Google searches. People are browsing our catalog more than ever.
-* **Individual Product Pages on Page 1:** Window AC product pages continue to pull direct commercial search intent into Waipahu warehouse inventory.
+* **Individual Product Pages on Page 1:** Window AC product pages continue to pull direct buyer intent into Waipahu warehouse inventory.
 * **Regional Service Areas Driving Demand:** Localized city pages are actively funneling island-wide homeowners into direct phone and estimate inquiries.
 
 ## 🛠️ Things We Can Make Better (Our Next Steps)
 While our rankings are great, we have some huge opportunities to get even more clicks without spending money on ads:
 
-**1. Target Secondary High-Value Commercial Queries**
+**1. Target Secondary High-Value Residential Queries**
 * **The Issue:** Core brand queries are locked at #1, but high-ticket installation keywords like `"split ac installation near me"` and `"split ac cleaning service"` have room to climb onto Page 1.
 * **The Fix:** Publish targeted split AC installation and maintenance guides to propel these high-value queries onto Page 1.
 
@@ -308,7 +308,7 @@ While our rankings are great, we have some huge opportunities to get even more c
 * **The Fix:** Inject localized reviews and "Same-Day / Fast Dispatch from Waipahu" callouts to double click-through rates.
 
 ## 📅 Summary of Action Plan
-1. **Commercial Search Expansion:** Target split AC installation and maintenance keywords to capture high-margin leads.
+1. **Residential Search Expansion:** Target split AC installation and maintenance keywords to capture high-margin residential leads.
 2. **Product Page Conversion:** Optimize on-page CTAs and stock badges on Page-1 LG and GE product pages to push online sales.
 3. **Local Schema & Dispatch Badging:** Overhaul Pearl City and Aiea metadata to turn high search impressions into phone calls and scheduled service estimates.
 """

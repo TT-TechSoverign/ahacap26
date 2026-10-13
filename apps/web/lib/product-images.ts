@@ -28,6 +28,12 @@ export const galleryAssets = {
         '/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A-wall-sleeve-front-left-facing.webp',
         '/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A-wall-sleeve-back.webp',
         '/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A-wall-sleeve-back-grille.webp',
+    ],
+    'ge-ajcq12axxwa': [
+        '/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-SideLeft-1600x1000.webp',
+        '/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-SideRight-1600x1000.webp',
+        '/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Remote-1600x1000.webp',
+        '/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-CaseAssembled-1600x1000.webp',
     ]
 };
 
@@ -54,7 +60,7 @@ const productMap: Record<number, { hero: string, gallery: keyof typeof galleryAs
     // GE Performance (IDs 13-15)
     13: { hero: '/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.webp', gallery: 'ge-pro' },
     14: { hero: '/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.webp', gallery: 'ge-pro' },
-    15: { hero: '/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.webp', gallery: 'ge-pro' },
+    15: { hero: '/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp', gallery: 'ge-ajcq12axxwa' },
 
     // GE Wall Case (ID 16)
     16: { hero: '/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A.webp', gallery: 'ge-sleeve' },

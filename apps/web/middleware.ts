@@ -94,6 +94,9 @@ export function middleware(request: NextRequest) {
     if (pathLower === '/shop/5-lg-dual-inverter-14-000-btu-lw1522ivsm') {
         return makePermanentRedirect('/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm');
     }
+    if (pathLower === '/shop/15-ge-12-000-btu-ajcq12awj') {
+        return makePermanentRedirect('/shop/15-ge-12-000-btu-ajcq12axxwa');
+    }
 
     // Decommissioned routes
     if (pathLower === '/window-ac-deep-cleaning-chemical-overhaul' || pathLower === '/window_ac_maintenance') {

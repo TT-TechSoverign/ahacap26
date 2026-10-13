@@ -137,10 +137,10 @@ export const PRODUCT_IDENTIFIERS: Record<number, ProductIdentifier> = {
     },
     15: {
         id: 15,
-        gtin12: '084691845133',
-        mpn: 'AJCQ12AWJ',
+        gtin12: '084691985242',
+        mpn: 'AJCQ12AXXWA',
         brand: 'GE',
-        catalystBadge: '🏢 26" Wall Sleeve Powerhouse • Auto-Restart Surge Protection',
+        catalystBadge: '🏢 26" Wall Sleeve Powerhouse • Variable Speed Inverter • SmartHQ™ WiFi',
         plugType: '115V',
         bestFor: 'Large Living Space Wall Sleeves (Up to 550 sq. ft. AHAM • 250–380 sq. ft. Island)'
     },

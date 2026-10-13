@@ -1521,7 +1521,7 @@ function SizingGuideSection() {
                 { name: "LW1022IVSM", link: "#dual_inverter" },
                 { name: "LW1222IVSM", link: "#dual_inverter" },
                 { name: "AJCQ10AWJ", link: "#ge" },
-                { name: "AJCQ12AWJ", link: "#ge" },
+                { name: "AJCQ12AXXWA", link: "#ge" },
                 { name: "LW1017ERSM1", link: "#base" },
                 { name: "LW1217ERSM1", link: "#base" }
             ]

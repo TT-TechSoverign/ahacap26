@@ -419,7 +419,7 @@ export default function ProductDetailPage() {
         10: '/assets/specsheets/lg-universal-fit+wifi/LW2423HRSM_spec_sheet.pdf',
         13: '/assets/specsheets/ge/GE-AJCQ08AWJ-spec-sheet.pdf',
         14: '/assets/specsheets/ge/GE-AJCQ10AWJ-spec-sheet.pdf',
-        15: '/assets/specsheets/ge/GE-AJCQ12AWJ-spec-sheet.pdf',
+        15: '/assets/specsheets/ge/GE-AJCQ12AXXWA-spec-sheet.pdf',
     };
 
     const specSheetUrl = product ? specSheetMap[product.id] : null;

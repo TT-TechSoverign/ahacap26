@@ -97,7 +97,7 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
                             { "@type": "ListItem", "position": 12, "name": "LG 12,000 BTU (LW1217ERSM1)", "url": `${domain}/shop/12-lg-12-000-btu-lw1217ersm1` },
                             { "@type": "ListItem", "position": 13, "name": "GE 8,200 BTU (AJCQ08AWJ)", "url": `${domain}/shop/13-ge-8-200-btu-ajcq08awj` },
                             { "@type": "ListItem", "position": 14, "name": "GE 10,000 BTU (AJCQ10AWJ)", "url": `${domain}/shop/14-ge-10-000-btu-ajcq10awj` },
-                            { "@type": "ListItem", "position": 15, "name": "GE 12,000 BTU (AJCQ12AWJ)", "url": `${domain}/shop/15-ge-12-000-btu-ajcq12awj` },
+                            { "@type": "ListItem", "position": 15, "name": "GE 12,000 BTU (AJCQ12AXXWA)", "url": `${domain}/shop/15-ge-12-000-btu-ajcq12axxwa` },
                             { "@type": "ListItem", "position": 16, "name": "GE RAB26A Wall Casement", "url": `${domain}/shop/16-ge-rab26a-wall-casement` }
                         ]
                     })
