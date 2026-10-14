@@ -14,41 +14,65 @@ def load_products():
     with open(json_path, 'r') as f:
         return json.load(f)
 
-async def seed(cleanup: bool = True, force: bool = False):
+async def seed(cleanup: bool = False, force: bool = False, reset_stock: bool = False):
     print("🌱 Checking Product Seeding Status...")
     
     # 3. Insert/Update Data (Upsert)
     async with AsyncSessionLocal() as session:
-        if not force:
-            # Check if products already exist in database
-            result = await session.execute(text("SELECT COUNT(*) FROM products"))
-            count = result.scalar()
-            if count > 0:
-                print(f"   ℹ️  Products already exist in database ({count} found). Skipping seeding to preserve runtime modifications.")
-                return
+        existing_runtime_state = {}
+        try:
+            res = await session.execute(
+                text("SELECT id, stock, price, promo_price, discount_percent FROM products")
+            )
+            for row in res.fetchall():
+                existing_runtime_state[row[0]] = {
+                    "stock": row[1],
+                    "price": row[2],
+                    "promo_price": row[3],
+                    "discount_percent": row[4],
+                }
+        except Exception:
+            pass
 
-        # 1. Truncate Table (Clear old data to prevent duplicates)
-        if cleanup:
-            print("   🗑️  Clearing existing products...")
+        if not force and len(existing_runtime_state) > 0:
+            print(f"   ℹ️  Products already exist in database ({len(existing_runtime_state)} found). Skipping seeding to preserve runtime modifications.")
+            return
+
+        # Only truncate if explicitly resetting stock AND cleanup is requested
+        if cleanup and reset_stock:
+            print("   🗑️  Clearing existing products (--reset-stock active)...")
             await session.execute(text("TRUNCATE TABLE products RESTART IDENTITY CASCADE"))
+            existing_runtime_state = {}
         else:
-            print("   ℹ️  Skipping Truncate (Cleanup=False)...")
+            print("   ℹ️  Preserving existing database stock & pricing during catalog upsert...")
         
         products = load_products()
         print(f"   Seeding {len(products)} products from JSON...")
         
         for p in products:
-            # Create instance from dict
-            model_instance = models.Product(**p)
-            # Use merge to update if ID exists, or insert if not
+            p_copy = dict(p)
+            pid = p_copy.get("id")
+            if not reset_stock and pid in existing_runtime_state:
+                runtime = existing_runtime_state[pid]
+                if runtime["stock"] is not None:
+                    p_copy["stock"] = runtime["stock"]
+                if runtime["price"] is not None:
+                    p_copy["price"] = runtime["price"]
+                if runtime["promo_price"] is not None:
+                    p_copy["promo_price"] = runtime["promo_price"]
+                if runtime["discount_percent"] is not None:
+                    p_copy["discount_percent"] = runtime["discount_percent"]
+
+            model_instance = models.Product(**p_copy)
             await session.merge(model_instance)
 
         await session.commit()
-        print("✅ Seeding Complete! (Upsert Performed)")
+        print("✅ Seeding Complete! (Upsert Performed, Live Stock Preserved)")
 
 if __name__ == "__main__":
     import sys
     force = "--force" in sys.argv
+    reset_stock = "--reset-stock" in sys.argv
     if os.name == 'nt':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(seed(force=force))
+    asyncio.run(seed(cleanup=reset_stock, force=force, reset_stock=reset_stock))

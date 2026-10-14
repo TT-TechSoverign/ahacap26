@@ -18,14 +18,16 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
   useEffect(() => {
     async function fetchRelated() {
       try {
-        const res = await fetch('/api/v1/products');
+        const res = await fetch('/api/v1/products', { cache: 'no-store' });
         if (res.ok) {
           const data: Product[] = await res.json();
-          // Filter out the current product and match subcategory or brand
+          // Filter out the current product, prioritize in-stock, and match subcategory or brand
           const filtered = data
             .filter((p) => p.id !== currentProduct.id)
             .sort((a, b) => {
-              // Prioritize same subcategory, then general category
+              const aInStock = a.stock > 0 ? 1 : 0;
+              const bInStock = b.stock > 0 ? 1 : 0;
+              if (aInStock !== bInStock) return bInStock - aInStock;
               if (a.subcategory === currentProduct.subcategory && b.subcategory !== currentProduct.subcategory) return -1;
               if (a.subcategory !== currentProduct.subcategory && b.subcategory === currentProduct.subcategory) return 1;
               return 0;

@@ -8,13 +8,13 @@ import { Snowflake, Warehouse, ShieldCheck, Leaf, ArrowRight, ShoppingCart, Chec
 import { generateProductSlug } from '@/lib/utils';
 import { Product } from '../types/inventory';
 
-// Curated 4 top-selling Oahu models directly from the verified catalog
+// Curated 4 top-selling Oahu models directly from the verified catalog (fallback before live API hydration)
 const FEATURED_MODELS: Product[] = [
     {
         id: 4,
         category: 'WINDOW_AC',
         name: 'LG Dual Inverter 12,000 BTU (LW1222IVSM)',
-        stock: 10,
+        stock: 20,
         btu: 12000,
         coverage: 'Up to 550 sq. ft. (AHAM) • 250–380 sq. ft. (Oahu Single-Wall)',
         coverage_aham: 'Up to 550 sq. ft.',
@@ -45,7 +45,7 @@ const FEATURED_MODELS: Product[] = [
         id: 2,
         category: 'WINDOW_AC',
         name: 'LG Dual Inverter 8,000 BTU (LW8022IVSM)',
-        stock: 10,
+        stock: 0,
         btu: 8000,
         coverage: 'Up to 350 sq. ft. (AHAM) • 150–250 sq. ft. (Oahu Single-Wall)',
         coverage_aham: 'Up to 350 sq. ft.',
@@ -61,10 +61,10 @@ const FEATURED_MODELS: Product[] = [
         voltage: '115V / 15 Amp',
         performance_specs: 'ThinQ® Smart Control (CEER 15.0)',
         ceer_rating: '15.0',
-        dehumidification: '2.8 Pts/Hr',
+        dehumidification: '2.2 Pts/Hr',
         dimensions: '12.4" H x 19.6" W x 24.5" D',
-        weight: '63',
-        shipping_weight: '70',
+        weight: '60',
+        shipping_weight: '67',
         min_window_width: '22"',
         max_window_width: '36"',
         min_window_height: '13"',
@@ -90,28 +90,28 @@ const FEATURED_MODELS: Product[] = [
         discount_percent: 10,
         image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg',
         voltage: '115V / 15 Amp',
-        performance_specs: '44dB Ultra-Quiet Mode (CEER 14.7)',
-        ceer_rating: '14.7',
-        dehumidification: '2.3 Pts/Hr',
+        performance_specs: '44dB Ultra-Quiet Mode (CEER 13.6)',
+        ceer_rating: '13.6',
+        dehumidification: '1.8 Pts/Hr',
         dimensions: '12.4" H x 19.6" W x 24.5" D',
-        weight: '60',
-        shipping_weight: '67',
+        weight: '58',
+        shipping_weight: '64',
         min_window_width: '22"',
         max_window_width: '36"',
         min_window_height: '13"',
         chassis_type: 'Top-Mount Fixed',
-        dry_air_flow_cfm: '177 CFM',
+        dry_air_flow_cfm: '195 CFM',
         warranty: '1 YEAR LIMITED'
     },
     {
         id: 14,
         category: 'WINDOW_AC',
         name: 'GE 10,000 BTU Universal Thru-The-Wall (AJCQ10AWJ)',
-        stock: 5,
+        stock: 0,
         btu: 10000,
-        coverage: 'Up to 450 sq. ft. (AHAM) • 200–320 sq. ft. (Oahu Single-Wall)',
+        coverage: 'Up to 450 sq. ft. (AHAM) • 220–320 sq. ft. (Oahu Single-Wall)',
         coverage_aham: 'Up to 450 sq. ft.',
-        coverage_oahu: '200–320 sq. ft.',
+        coverage_oahu: '220–320 sq. ft.',
         sizing_notes: 'High-velocity air throw for deep rooms. True universal fit for standard 26" existing wall sleeves.',
         key_spec: 'Universal 26" Wall Sleeve Fit • High-Velocity Throw',
         noise_level: '55 / 61 dB',
@@ -132,16 +132,43 @@ const FEATURED_MODELS: Product[] = [
         min_window_height: '15.8"',
         chassis_type: 'Slide In-Out (Wall Sleeve)',
         dry_air_flow_cfm: '285 CFM',
-        warranty: '1 YEAR LIMITED'
+        warranty: '2-YR FULL / 5-YR SEALED'
     }
 ];
 
 export function HomeFeaturedInventory() {
     const { addToCart, openCart } = useCart();
     const [addedId, setAddedId] = React.useState<number | null>(null);
+    const [featuredModels, setFeaturedModels] = React.useState<Product[]>(FEATURED_MODELS);
+
+    React.useEffect(() => {
+        let isMounted = true;
+        async function fetchLiveInventory() {
+            try {
+                const res = await fetch('/api/v1/products', { cache: 'no-store' });
+                if (!res.ok) return;
+                const liveProducts: Product[] = await res.json();
+                if (!isMounted || !Array.isArray(liveProducts)) return;
+                const liveMap = new Map(liveProducts.map((p) => [p.id, p]));
+                setFeaturedModels(
+                    FEATURED_MODELS.map((fallback) => {
+                        const live = liveMap.get(fallback.id);
+                        return live ? { ...fallback, ...live } : fallback;
+                    })
+                );
+            } catch (err) {
+                console.error('Failed to sync live featured inventory:', err);
+            }
+        }
+        fetchLiveInventory();
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
     const handleQuickAdd = (product: Product, e: React.MouseEvent) => {
         e.preventDefault();
+        if (product.stock <= 0) return;
         addToCart(product);
         setAddedId(product.id);
         openCart();
@@ -180,10 +207,11 @@ export function HomeFeaturedInventory() {
 
                 {/* 4-Card Responsive Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {FEATURED_MODELS.map((product) => {
+                    {featuredModels.map((product) => {
                         const slug = generateProductSlug(product.id, product.name);
                         const isLgInverter = product.subcategory === 'dual_inverter';
                         const isAdded = addedId === product.id;
+                        const isOutOfStock = product.stock <= 0;
 
                         return (
                             <div
@@ -193,10 +221,17 @@ export function HomeFeaturedInventory() {
                                 {/* Top Badges */}
                                 <div className="space-y-2 mb-3">
                                     <div className="flex items-center justify-between gap-2">
-                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold rounded-full">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                                            {product.stock} In Stock Waipahu
-                                        </span>
+                                        {isOutOfStock ? (
+                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-rose-500/10 border border-rose-500/30 text-rose-400 font-mono text-[10px] font-bold uppercase rounded-full">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
+                                                Out of Stock
+                                            </span>
+                                        ) : (
+                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold rounded-full">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                                                {product.stock} In Stock Waipahu
+                                            </span>
+                                        )}
                                         <span className="inline-flex items-center gap-1 text-[11px] font-mono text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/40">
                                             {product.voltage?.split('/')[0]?.trim() || '115V'}
                                         </span>
@@ -280,14 +315,19 @@ export function HomeFeaturedInventory() {
                                         </Link>
                                         <button
                                             type="button"
+                                            disabled={isOutOfStock}
                                             onClick={(e) => handleQuickAdd(product, e)}
                                             className={`px-3 py-2.5 font-header font-black text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md ${
-                                                isAdded
+                                                isOutOfStock
+                                                    ? 'bg-slate-800/80 text-slate-500 cursor-not-allowed border border-white/5 shadow-none'
+                                                    : isAdded
                                                     ? 'bg-emerald-500 text-slate-950 shadow-emerald-500/20'
                                                     : 'bg-primary hover:bg-cyan-300 text-slate-950 shadow-primary/20 hover:scale-[1.02]'
                                             }`}
                                         >
-                                            {isAdded ? (
+                                            {isOutOfStock ? (
+                                                <span>Out of Stock</span>
+                                            ) : isAdded ? (
                                                 <>
                                                     <Check className="size-3.5" />
                                                     <span>Added!</span>

@@ -28,7 +28,7 @@ function getApiUrl() {
 async function fetchProducts(): Promise<Product[]> {
     try {
         const res = await fetch(`${getApiUrl()}/products`, {
-            next: { revalidate: 3600 }, // Cache for 1 hour to prevent TTFB latency and backend crash
+            cache: 'no-store',
         });
         if (!res.ok) return [];
         return await res.json();

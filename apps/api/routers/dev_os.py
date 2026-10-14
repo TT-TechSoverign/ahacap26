@@ -2826,9 +2826,35 @@ async def migrate_and_reseed_catalog(request: Request, db: AsyncSession = Depend
     with open(json_path, 'r', encoding='utf-8') as f:
         products_data = json.load(f)
     
+    # Preserve live admin stock & pricing from PostgreSQL before merging catalog specs
+    existing_runtime_state = {}
+    try:
+        res = await db.execute(text("SELECT id, stock, price, promo_price, discount_percent FROM products"))
+        for row in res.fetchall():
+            existing_runtime_state[row[0]] = {
+                "stock": row[1],
+                "price": row[2],
+                "promo_price": row[3],
+                "discount_percent": row[4],
+            }
+    except Exception as e:
+        logger.warning(f"Could not snapshot existing product stock before reseed: {e}")
+
     upserted_count = 0
     for p in products_data:
-        model_instance = models.Product(**p)
+        p_copy = dict(p)
+        pid = p_copy.get("id")
+        if pid in existing_runtime_state:
+            runtime = existing_runtime_state[pid]
+            if runtime["stock"] is not None:
+                p_copy["stock"] = runtime["stock"]
+            if runtime["price"] is not None:
+                p_copy["price"] = runtime["price"]
+            if runtime["promo_price"] is not None:
+                p_copy["promo_price"] = runtime["promo_price"]
+            if runtime["discount_percent"] is not None:
+                p_copy["discount_percent"] = runtime["discount_percent"]
+        model_instance = models.Product(**p_copy)
         await db.merge(model_instance)
         upserted_count += 1
     

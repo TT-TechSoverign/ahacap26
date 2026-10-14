@@ -45,26 +45,26 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         modelNumber: "LW6023IVSM",
         price: 560,
         promo_price: 504,
-        stock: 30,
+        stock: 12,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 6000,
         voltage: "115V / 15 Amp",
-        coverage: "Up to 260 sq. ft. (AHAM) • Up to 220 sq. ft. (Island)",
-        coverageAham: "Up to 260 sq. ft.",
-        coverageOahu: "Up to 220 sq. ft.",
-        minWindowHeight: '13.0"',
+        coverage: "Up to 250 sq. ft. (AHAM) • 100–180 sq. ft. (Oahu Single-Wall)",
+        coverageAham: "Up to 250 sq. ft.",
+        coverageOahu: "100–180 sq. ft.",
+        minWindowHeight: '13"',
         minWindowWidth: '22"',
         maxWindowWidth: '36"',
         chassisType: "Top-Mount Fixed",
-        netWeight: "63 lbs",
-        noise_level: "44 / 54 dB",
-        dehumidification: "1.4 Pts/Hr",
+        netWeight: "58 lbs",
+        noise_level: "44 / 56 dB",
+        dehumidification: "1.8 Pts/Hr",
         idealFor: "Small Bedroom / Nursery / Home Office",
         plugType: "Standard 115V (NEMA 5-15P)",
         hecoMonthly: "~$32 / mo",
         rebateAmount: 45,
-        badge: "15.5 CEER Whisper Quiet",
+        badge: "13.6 CEER Whisper Quiet",
         image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg"
     },
     {
@@ -72,23 +72,23 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         slug: "2-lg-dual-inverter-8-000-btu-lw8022ivsm",
         name: "LG Dual Inverter 8,000 BTU",
         modelNumber: "LW8022IVSM",
-        price: 600,
-        promo_price: 540,
-        stock: 50,
+        price: 595,
+        promo_price: 535,
+        stock: 0,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 8000,
         voltage: "115V / 15 Amp",
-        coverage: "Up to 350 sq. ft. (AHAM) • Up to 280 sq. ft. (Island)",
+        coverage: "Up to 350 sq. ft. (AHAM) • 150–250 sq. ft. (Oahu Single-Wall)",
         coverageAham: "Up to 350 sq. ft.",
-        coverageOahu: "Up to 280 sq. ft.",
-        minWindowHeight: '13.0"',
+        coverageOahu: "150–250 sq. ft.",
+        minWindowHeight: '13"',
         minWindowWidth: '22"',
         maxWindowWidth: '36"',
         chassisType: "Top-Mount Fixed",
-        netWeight: "63 lbs",
-        noise_level: "44 / 54 dB",
-        dehumidification: "2.5 Pts/Hr",
+        netWeight: "60 lbs",
+        noise_level: "44 / 58 dB",
+        dehumidification: "2.2 Pts/Hr",
         idealFor: "Master Bedroom / Standard Suite",
         plugType: "Standard 115V (NEMA 5-15P)",
         hecoMonthly: "~$38 / mo",
@@ -103,21 +103,21 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         modelNumber: "LW1022IVSM",
         price: 650,
         promo_price: 585,
-        stock: 50,
+        stock: 10,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 10000,
         voltage: "115V / 15 Amp",
-        coverage: "Up to 450 sq. ft. (AHAM) • Up to 330 sq. ft. (Island)",
+        coverage: "Up to 450 sq. ft. (AHAM) • 200–320 sq. ft. (Oahu Single-Wall)",
         coverageAham: "Up to 450 sq. ft.",
-        coverageOahu: "Up to 330 sq. ft.",
-        minWindowHeight: '13.0"',
+        coverageOahu: "200–320 sq. ft.",
+        minWindowHeight: '13"',
         minWindowWidth: '22"',
         maxWindowWidth: '36"',
         chassisType: "Top-Mount Fixed",
-        netWeight: "63 lbs",
-        noise_level: "44 / 58 dB",
-        dehumidification: "2.9 Pts/Hr",
+        netWeight: "68 lbs",
+        noise_level: "44 / 59 dB",
+        dehumidification: "3.2 Pts/Hr",
         idealFor: "Studio Apartment / Large Master Suite",
         plugType: "Standard 115V (NEMA 5-15P)",
         hecoMonthly: "~$44 / mo",
@@ -130,22 +130,22 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         slug: "4-lg-dual-inverter-12-000-btu-lw1222ivsm",
         name: "LG Dual Inverter 12,000 BTU",
         modelNumber: "LW1222IVSM",
-        price: 750,
-        promo_price: 675,
-        stock: 50,
+        price: 745,
+        promo_price: 670,
+        stock: 20,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 12000,
         voltage: "115V / 15 Amp",
-        coverage: "Up to 550 sq. ft. (AHAM) • Up to 380 sq. ft. (Island)",
+        coverage: "Up to 550 sq. ft. (AHAM) • 250–380 sq. ft. (Oahu Single-Wall)",
         coverageAham: "Up to 550 sq. ft.",
-        coverageOahu: "Up to 380 sq. ft.",
-        minWindowHeight: '16.0"',
+        coverageOahu: "250–380 sq. ft.",
+        minWindowHeight: '16"',
         minWindowWidth: '27"',
         maxWindowWidth: '39"',
         chassisType: "Slide In-Out",
         netWeight: "85 lbs",
-        noise_level: "44 / 58 dB",
+        noise_level: "44 / 59 dB",
         dehumidification: "3.8 Pts/Hr",
         idealFor: "Living Room / Open Lanai Enclosure",
         plugType: "Standard 115V (NEMA 5-15P)",
@@ -166,16 +166,16 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         subcategory: "dual_inverter",
         btu: 14000,
         voltage: "115V / 15 Amp",
-        coverage: "Up to 700 sq. ft. (AHAM) • Up to 450 sq. ft. (Island)",
+        coverage: "Up to 700 sq. ft. (AHAM) • 350–450 sq. ft. (Oahu Single-Wall)",
         coverageAham: "Up to 700 sq. ft.",
-        coverageOahu: "Up to 450 sq. ft.",
-        minWindowHeight: '16.0"',
+        coverageOahu: "350–450 sq. ft.",
+        minWindowHeight: '16"',
         minWindowWidth: '27"',
         maxWindowWidth: '39"',
         chassisType: "Slide In-Out",
-        netWeight: "85 lbs",
-        noise_level: "44 / 58 dB",
-        dehumidification: "4.2 Pts/Hr",
+        netWeight: "87 lbs",
+        noise_level: "44 / 59 dB",
+        dehumidification: "4.6 Pts/Hr",
         idealFor: "Large Living Area / Open Kitchen",
         plugType: "Standard 115V (NEMA 5-15P)",
         hecoMonthly: "~$58 / mo",
@@ -190,21 +190,21 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         modelNumber: "LW1822IVSM",
         price: 945,
         promo_price: 850,
-        stock: 30,
+        stock: 5,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 18000,
         voltage: "208/230V / 15 Amp",
-        coverage: "Up to 1,000 sq. ft. (AHAM) • Up to 600 sq. ft. (Island)",
+        coverage: "Up to 1,000 sq. ft. (AHAM) • 450–600 sq. ft. (Oahu Single-Wall)",
         coverageAham: "Up to 1,000 sq. ft.",
-        coverageOahu: "Up to 600 sq. ft.",
-        minWindowHeight: '19.0"',
+        coverageOahu: "450–600 sq. ft.",
+        minWindowHeight: '19"',
         minWindowWidth: '29"',
         maxWindowWidth: '41"',
         chassisType: "Slide In-Out",
         netWeight: "112 lbs",
         noise_level: "44 / 59 dB",
-        dehumidification: "4.2 Pts/Hr",
+        dehumidification: "5.4 Pts/Hr",
         idealFor: "Open Concept / Vaulted Ceilings",
         plugType: "208/230V 15A (NEMA 6-15P)",
         hecoMonthly: "~$68 / mo",
@@ -219,23 +219,23 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         modelNumber: "LW2422IVSM",
         price: 1055,
         promo_price: 950,
-        stock: 20,
+        stock: 15,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 23500,
-        voltage: "208/230V / 15 Amp",
-        coverage: "Up to 1,440 sq. ft. (AHAM) • Up to 800 sq. ft. (Island)",
+        voltage: "208/230V / 20 Amp",
+        coverage: "Up to 1,440 sq. ft. (AHAM) • 600–800 sq. ft. (Oahu Single-Wall)",
         coverageAham: "Up to 1,440 sq. ft.",
-        coverageOahu: "Up to 800 sq. ft.",
-        minWindowHeight: '19.0"',
+        coverageOahu: "600–800 sq. ft.",
+        minWindowHeight: '19"',
         minWindowWidth: '29"',
         maxWindowWidth: '41"',
         chassisType: "Slide In-Out",
-        netWeight: "112 lbs",
+        netWeight: "123 lbs",
         noise_level: "53 / 62 dB",
-        dehumidification: "5.6 Pts/Hr",
+        dehumidification: "6.5 Pts/Hr",
         idealFor: "Commercial Space / Multi-Room Great Room",
-        plugType: "208/230V 15A (NEMA 6-15P)",
+        plugType: "208/230V 20A (NEMA 6-20P)",
         hecoMonthly: "~$82 / mo",
         rebateAmount: 45,
         badge: "Flagship 23,500 BTU Cooling",
@@ -247,8 +247,45 @@ export function WarehouseInventoryGrid() {
     const { addToCart, openCart } = useCart();
     const [activeTab, setActiveTab] = useState<'all' | '115v' | '230v' | 'bedroom' | 'living'>('all');
     const [addedId, setAddedId] = useState<number | null>(null);
+    const [inventory, setInventory] = useState<WarehouseProduct[]>(WAREHOUSE_INVENTORY);
 
-    const filtered = WAREHOUSE_INVENTORY.filter(item => {
+    React.useEffect(() => {
+        let isMounted = true;
+        async function fetchLiveWarehouseStock() {
+            try {
+                const res = await fetch('/api/v1/products', { cache: 'no-store' });
+                if (!res.ok) return;
+                const liveProducts: Product[] = await res.json();
+                if (!isMounted || !Array.isArray(liveProducts)) return;
+                const liveMap = new Map(liveProducts.map((p) => [p.id, p]));
+                setInventory(
+                    WAREHOUSE_INVENTORY.map((fallback) => {
+                        const live = liveMap.get(fallback.id);
+                        if (!live) return fallback;
+                        return {
+                            ...fallback,
+                            stock: live.stock,
+                            price: live.price,
+                            promo_price: live.promo_price ?? fallback.promo_price,
+                            coverage: live.coverage || fallback.coverage,
+                            coverageAham: live.coverage_aham || fallback.coverageAham,
+                            coverageOahu: live.coverage_oahu || fallback.coverageOahu,
+                            noise_level: live.noise_level || fallback.noise_level,
+                            dehumidification: live.dehumidification || fallback.dehumidification
+                        };
+                    })
+                );
+            } catch (err) {
+                console.error('Failed to sync warehouse inventory:', err);
+            }
+        }
+        fetchLiveWarehouseStock();
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    const filtered = inventory.filter(item => {
         if (activeTab === '115v') return item.voltage?.includes('115V');
         if (activeTab === '230v') return item.voltage?.includes('230V');
         if (activeTab === 'bedroom') return (item.btu || 0) <= 10000;
@@ -257,6 +294,7 @@ export function WarehouseInventoryGrid() {
     });
 
     const handleAddToCart = (product: WarehouseProduct) => {
+        if (product.stock <= 0) return;
         trackFunnelEvent('add_to_cart_warehouse', {
             product_id: product.id,
             model: product.modelNumber,
@@ -314,6 +352,7 @@ export function WarehouseInventoryGrid() {
                 {filtered.map(product => {
                     const price = product.promo_price || product.price;
                     const netAfterRebate = price - product.rebateAmount;
+                    const isOutOfStock = product.stock <= 0;
 
                     return (
                         <div
@@ -322,10 +361,17 @@ export function WarehouseInventoryGrid() {
                         >
                             {/* Product Card Top Badges */}
                             <div className="p-4 pb-2 flex items-center justify-between gap-2">
-                                <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                                    <Warehouse className="w-3 h-3" />
-                                    Waipahu: {product.stock} In Stock
-                                </span>
+                                {isOutOfStock ? (
+                                    <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/30">
+                                        <Warehouse className="w-3 h-3" />
+                                        Out of Stock
+                                    </span>
+                                ) : (
+                                    <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                        <Warehouse className="w-3 h-3" />
+                                        Waipahu: {product.stock} In Stock
+                                    </span>
+                                )}
                                 {product.badge && (
                                     <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
                                         {product.badge}
@@ -438,10 +484,17 @@ export function WarehouseInventoryGrid() {
                                 {/* Action Buttons */}
                                 <div className="mt-4 flex flex-col gap-2">
                                     <button
+                                        disabled={isOutOfStock}
                                         onClick={() => handleAddToCart(product)}
-                                        className="w-full py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2"
+                                        className={`w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 ${
+                                            isOutOfStock
+                                                ? 'bg-slate-800/80 text-slate-500 cursor-not-allowed border border-slate-700/50'
+                                                : 'bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 shadow-md shadow-emerald-500/20'
+                                        }`}
                                     >
-                                        {addedId === product.id ? (
+                                        {isOutOfStock ? (
+                                            <span>Out of Stock</span>
+                                        ) : addedId === product.id ? (
                                              <>
                                                 <Check className="w-4 h-4 text-slate-950 stroke-[3]" />
                                                 <span>Added to Order!</span>
