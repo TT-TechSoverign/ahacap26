@@ -1,7 +1,7 @@
 # Project State Report: Affordable Home A/C (AHAC)
 
-**Last Updated**: September 23, 2026  
-**Current Epoch**: `EPOCH 14 (September 23, 2026)`  
+**Last Updated**: October 13, 2026  
+**Current Epoch**: `EPOCH 18 (October 12–13, 2026)`  
 **Branch**: `main` (Production Synchronized)  
 **Host**: Hostinger VPS (`31.220.53.132`) • Docker Production Stack
 
@@ -336,20 +336,23 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
       - Security scan: `scan-secrets.ps1` verified 2,105 files clean with 0 leaked secrets or tokens.
       - Catalog & Cart Freeze: `apps/web/app/shop/page.tsx`, `apps/web/app/shop/layout.tsx`, and Stripe checkout preserved 100% untouched.
 
-- **Epoch 18 (October 12-13, 2026) Catalog Evolution: GE AJCQ12AWJ Retirement & AJCQ12AXXWA Deployment**:
+- **Epoch 18 (October 12-13, 2026) Catalog Evolution: GE AJCQ12AWJ Retirement, AJCQ12AXXWA Deployment & Transparent RGBA Harmonization**:
   - **Model Transition**: Retired legacy GE 12,000 BTU Built-In unit (`AJCQ12AWJ`, ID 15) per CEO & distributor (PHAD Hawaii Appliance) authorization and replaced with the newly released variable-speed inverter model: **GE 12,000 BTU Variable Speed Built-In AC with SmartHQ™ WiFi (`AJCQ12AXXWA`)**.
-  - **Asset Studio Optimization**: Processed 5 authentic distributor/factory angles into padded, centered 1600x1000 white-canvas WebP images strictly `< 80 KB` (Front: 78.4 KB, Case: 10 KB, Remote: 14 KB, SideLeft: 64.8 KB, SideRight: 67.4 KB). Aliased owner's manual to `GE-AJCQ12AXXWA-spec-sheet.pdf`.
-  - **3D Spatial Caliper Cutaway Re-rendering**: Re-ran `scripts/generate_award_winning_cutaways.py` generating updated `product_15_fit_cutaway.webp` and `.png` with model-matched front photography and accurate AJCQ12AXXWA dimensional HUD overlays.
-  - **Monorepo Ground Truth Parity**:
-    - `apps/api/content/products_seed.json` & `apps/api/inventory.csv`: Synchronized with 12,000 BTU, variable-speed inverter, 48/56 dB noise profile, and SmartHQ™ WiFi.
+  - **Transparent RGBA Studio Cutouts & Proportional Harmonization**: Extracted high-resolution manufacturer studio angles via `rembg` (`u2net`) into transparent `RGBA` 1600x1000 WebP assets calibrated to **1343 x 808 px** (83.9% container width, matching `AJCQ08AWJ` and `AJCQ10AWJ` within 2px) on dark industrial cards (`#05070a`). Aliased owner's manual to `GE-AJCQ12AXXWA-spec-sheet.pdf`.
+  - **Direct Static WebP Delivery (`unoptimized={true}`)**: Bypassed Next.js standalone `/_next/image` loopback buffer errors and server-side `.next/cache/images` staleness across `/shop`, `/shop/[slug]`, `RelatedProducts`, `HomeFeaturedInventory`, and `inventory-grid`, serving pre-optimized WebP/SVG assets directly from Nginx with zero-cache headers.
+  - **3D Spatial Caliper Cutaway Re-rendering**: Re-ran `scripts/generate_award_winning_cutaways.py` generating updated `product_15_fit_cutaway.webp` (111.1 KB) and `.png` with transparent chassis photography and accurate AJCQ12AXXWA dimensional HUD overlays.
+  - **Monorepo & Live Database Ground Truth Parity**:
+    - `apps/api/content/products_seed.json`, `content_dump.json`, `live_content.json`, `apps/api/inventory.csv`, `update_catalogue.py`, & `update_others.py`: Synchronized with 12,000 BTU, variable-speed inverter, 48/56 dB noise profile, and SmartHQ™ WiFi.
+    - Live PostgreSQL (`ahac_db` `products` table ID 15 & `site_content` JSONB): Updated and verified via `/api/v1/products/15`.
     - `apps/web/lib/product-identifiers.ts`: Set MPN to `AJCQ12AXXWA`, GTIN-12 to `084691985242`, and SmartHQ™ WiFi catalyst badge.
     - `apps/web/lib/product-specs.ts` & `product-images.ts`: Updated `GE_PERF_12K` specs, dual-climate microclimate sizing, and gallery angles set `ge-ajcq12axxwa`.
     - `apps/web/app/shop/page.tsx`, `apps/web/app/shop/layout.tsx`, and `apps/web/app/shop/[slug]/page.tsx`: Updated sizing matrix, schema ItemList, and PDF specsheet links.
     - `apps/web/middleware.ts`: Implemented 301 permanent redirect from `/shop/15-ge-12-000-btu-ajcq12awj` to `/shop/15-ge-12-000-btu-ajcq12axxwa`.
   - **Verification Suite**:
+    - Live Visual Verification (`chrome-devtools-mcp`): Confirmed 100% visual parity across all 3 GE Built-In cards on `/shop` (Studio & 3D Fit modes) and `/shop/15-ge-12-000-btu-ajcq12axxwa`.
     - TypeScript: `npx tsc --noEmit` exited code 0 with 0 errors across entire Next.js storefront.
     - Backend Pytest: 14/14 unit tests passed with Python 3.13.
-    - Cybersecurity Root Scanner: All 5 stages passed, `[CLEAN] Zero leaked secrets` across 2,104 source and configuration files.
+    - Sovereign Fleet Live Verification (`verify-live`): Passed all 3 stages (`OVERALL: VERIFIED_CLEAN`).
 
 ---
 

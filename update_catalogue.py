@@ -20,7 +20,7 @@ updates = {
     'LW1217ERSM1': {'price': 625, 'stock': 'IN STOCK'},
     'AJCQ08AWJ': {'price': 1000, 'stock': 'IN STOCK'},
     'AJCQ10AWJ': {'price': 1100, 'stock': 'IN STOCK'},
-    'AJCQ12AWJ': {'price': 1200, 'stock': 'IN STOCK'},
+    'AJCQ12AXXWA': {'price': 1200, 'stock': 'IN STOCK'},
     'RAB26A': {'price': 275, 'stock': 'IN STOCK'},
 }
 
