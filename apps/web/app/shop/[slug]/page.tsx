@@ -413,7 +413,7 @@ export default function ProductDetailPage() {
         }
     }, [productImages, selectedImage]);
 
-    // Spec Sheet Mapping
+    // Spec Sheet Mapping (All 16 Catalog Products)
     const specSheetMap: { [key: number]: string } = {
         1: '/assets/specsheets/lg-dual-inverter+wifi/LW6023IVSM_spec_sheet-1.pdf',
         2: '/assets/specsheets/lg-dual-inverter+wifi/LW8022IVSM-Spec-Sheet.pdf',
@@ -425,9 +425,12 @@ export default function ProductDetailPage() {
         8: '/assets/specsheets/lg-universal-fit+wifi/LW8023HRSM_spec_sheet.pdf',
         9: '/assets/specsheets/lg-universal-fit+wifi/LW1823HRSM_spec_sheet.pdf',
         10: '/assets/specsheets/lg-universal-fit+wifi/LW2423HRSM_spec_sheet.pdf',
+        11: '/assets/specsheets/lg-base/LW8024RD-Spec-Sheet.pdf',
+        12: '/assets/specsheets/lg-base/LW1217ERSM1-Spec-Sheet.pdf',
         13: '/assets/specsheets/ge/GE-AJCQ08AWJ-spec-sheet.pdf',
         14: '/assets/specsheets/ge/GE-AJCQ10AWJ-spec-sheet.pdf',
         15: '/assets/specsheets/ge/GE-AJCQ12AXXWA-spec-sheet.pdf',
+        16: '/assets/specsheets/ge/GE-RAB26A-spec-sheet.pdf',
     };
 
     const specSheetPageCountMap: { [key: number]: number } = {
@@ -441,9 +444,12 @@ export default function ProductDetailPage() {
         8: 1,
         9: 1,
         10: 1,
+        11: 1,
+        12: 1,
         13: 3,
         14: 3,
         15: 20,
+        16: 2,
     };
 
     const specSheetUrl = product ? specSheetMap[product.id] : null;
@@ -638,7 +644,7 @@ export default function ProductDetailPage() {
                         <div className="space-y-3">
                             <div className="flex flex-wrap gap-3 items-center justify-center md:justify-start">
                                 <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-md text-primary text-[8px] font-header font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
-                                    {isWallSleeve ? 'BUILT-IN WALL SLEEVE AC' : product.category.replace('_', ' ')}
+                                    {product.id === 16 ? '26" STRUCTURAL WALL SLEEVE' : isWallSleeve ? 'BUILT-IN WALL SLEEVE AC' : product.category.replace('_', ' ')}
                                 </span>
                                 {isPromo && (
                                     <span className="px-3 py-1 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 border border-white/10 rounded-md text-white text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.2em] shadow-lg animate-pulse-slow">
@@ -676,10 +682,16 @@ export default function ProductDetailPage() {
                                 )}
                             </div>
 
-                            {/* HECO Island Electricity Savings Callout */}
+                            {/* HECO Island Electricity Savings / Structural Callout */}
                             <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-950/40 border border-emerald-500/30 rounded-lg text-emerald-300 text-xs font-sans w-fit mx-auto md:mx-0 shadow-sm">
                                 <Zap className="size-3.5 text-amber-400 shrink-0 animate-pulse" />
-                                <span>Inverter efficiency saves up to <strong className="text-white font-bold">$424/year</strong> under HECO ~44.2¢/kWh rates</span>
+                                {product.id === 16 ? (
+                                    <span>Heavy-gauge galvanized steel <strong className="text-white font-bold">26&quot; wall sleeve</strong> • Includes RAG13A aluminum grille</span>
+                                ) : (product.subcategory === 'dual_inverter' || product.id === 15) ? (
+                                    <span>Inverter efficiency saves up to <strong className="text-white font-bold">$424/year</strong> under HECO ~44.2¢/kWh rates</span>
+                                ) : (
+                                    <span>High-efficiency <strong className="text-white font-bold">R32 cooling</strong> calibrated for Oahu residential circuits</span>
+                                )}
                             </div>
                         </div>
 
@@ -689,9 +701,17 @@ export default function ProductDetailPage() {
                         <div className="grid grid-cols-2 gap-2 font-sans">
                             {/* Performance Card */}
                             <div className="bg-surface-dark border border-border-dark p-3 rounded-xl shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Performance</div>
-                                <div className="text-white font-header font-black text-base md:text-lg">{specs?.btu}</div>
-                                {specs?.ceerRating && (
+                                <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">
+                                    {product.id === 16 ? 'Construction' : 'Performance'}
+                                </div>
+                                <div className="text-white font-header font-black text-base md:text-lg">
+                                    {product.id === 16 ? '26" Wall Case' : specs?.btu}
+                                </div>
+                                {product.id === 16 ? (
+                                    <span className="text-[10px] font-mono text-emerald-400 mt-0.5">
+                                        Galvanized Steel • RAG13A Grille
+                                    </span>
+                                ) : specs?.ceerRating && (
                                     <span className="text-[10px] font-mono text-emerald-400 mt-0.5">
                                         {specs.ceerRating} CEER{product.id === 15 ? ' • R32 Inverter' : ''}
                                     </span>
@@ -840,8 +860,12 @@ export default function ProductDetailPage() {
                                     <span className="text-rose-400 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.warranty || product.warranty || '1 YEAR LIMITED'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
-                                    <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Dehumidification</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dehumidification || (specs as any)?.dehumidification || '3.8 Pts/Hr'}</span>
+                                    <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">
+                                        {product.id === 16 ? 'Exterior Grille' : 'Dehumidification'}
+                                    </span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">
+                                        {product.id === 16 ? 'RAG13A Aluminum Included' : (product.dehumidification || (specs as any)?.dehumidification || '3.8 Pts/Hr')}
+                                    </span>
                                 </div>
                                 {specs?.amps && specs.amps !== 'N/A' && (
                                     <div className="flex flex-col gap-1 items-center md:items-start">
@@ -1009,7 +1033,9 @@ export default function ProductDetailPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                     {/* Left Column (66% Width / Span 2) */}
                     <div className="lg:col-span-2 space-y-12">
-                        <ACCalculator productBtu={product.btu || 8000} productName={product.name} />
+                        {product.id !== 16 && (
+                            <ACCalculator productBtu={product.btu || 8000} productName={product.name} />
+                        )}
                         <YelpReviews productId={product.id} />
                     </div>
                     {/* Right Column (33% Width / Span 1) */}

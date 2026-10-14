@@ -23,7 +23,7 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 const FAQS = [
     {
         q: "What is the largest BTU window AC that runs on a standard 115V outlet?",
-        a: "Thanks to LG Dual Inverter variable-speed compressor technology, units up to 14,000 BTU (such as the LW1522IVSM) can operate on a standard 115V 15-amp circuit with a standard NEMA 5-15P plug, cooling up to 800 sq ft without requiring a 230V line."
+        a: "Thanks to LG Dual Inverter variable-speed compressor technology, units up to 14,000 BTU (such as the LW1522FVSM) can operate on a standard 115V 15-amp circuit with a standard NEMA 5-15P plug, cooling up to 700 sq ft (AHAM) without requiring a 230V line."
     },
     {
         q: "Will a 115V Dual Inverter window AC trip my home's circuit breaker?",
@@ -97,28 +97,28 @@ export default function LowVoltageWindowAcPage() {
                         <div className="p-6 rounded-2xl bg-surface-dark border border-white/10 space-y-2">
                             <span className="text-primary font-mono text-xs font-bold uppercase">6,000 BTU</span>
                             <h3 className="font-header font-bold text-lg text-white">LW6023IVSM</h3>
-                            <p className="text-xs text-slate-300 font-sans">Cooling up to 250 sq ft. Draws only 4.6 amps.</p>
+                            <p className="text-xs text-slate-300 font-sans">Cooling up to 260 sq ft. Draws only 5.5 amps (15.5 CEER).</p>
                             <div className="text-xs font-mono text-emerald-400">$45 Rebate Eligible</div>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-surface-dark border border-white/10 space-y-2">
                             <span className="text-primary font-mono text-xs font-bold uppercase">8,000 BTU</span>
                             <h3 className="font-header font-bold text-lg text-white">LW8022IVSM</h3>
-                            <p className="text-xs text-slate-300 font-sans">Cooling up to 350 sq ft. Draws only 6.3 amps.</p>
+                            <p className="text-xs text-slate-300 font-sans">Cooling up to 350 sq ft. Draws only 8.9 amps (15.5 CEER).</p>
                             <div className="text-xs font-mono text-emerald-400">$45 Rebate Eligible</div>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-surface-dark border border-white/10 space-y-2">
                             <span className="text-primary font-mono text-xs font-bold uppercase">10,000 BTU</span>
                             <h3 className="font-header font-bold text-lg text-white">LW1022IVSM</h3>
-                            <p className="text-xs text-slate-300 font-sans">Cooling up to 450 sq ft. Draws only 8.2 amps.</p>
+                            <p className="text-xs text-slate-300 font-sans">Cooling up to 450 sq ft. Draws 11.0 amps (15.0 CEER).</p>
                             <div className="text-xs font-mono text-emerald-400">$45 Rebate Eligible</div>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-surface-dark border border-white/10 space-y-2">
                             <span className="text-primary font-mono text-xs font-bold uppercase">14,000 BTU</span>
-                            <h3 className="font-header font-bold text-lg text-white">LW1522IVSM</h3>
-                            <p className="text-xs text-slate-300 font-sans">Cooling up to 800 sq ft on a 115V 15A plug!</p>
+                            <h3 className="font-header font-bold text-lg text-white">LW1522FVSM</h3>
+                            <p className="text-xs text-slate-300 font-sans">Cooling up to 700 sq ft on a 115V 15A plug! Draws 11.3 amps.</p>
                             <div className="text-xs font-mono text-emerald-400">$45 Rebate Eligible</div>
                         </div>
                     </div>

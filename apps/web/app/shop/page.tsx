@@ -155,9 +155,9 @@ function ShopPageContent() {
             if (selectedMount === 'SLIDER') {
                 if (p.subcategory !== 'casement') return false;
             } else if (selectedMount === 'SLEEVE') {
-                if (p.subcategory !== 'universal_fit') return false;
+                if (p.subcategory !== 'universal_fit' && p.subcategory !== 'ge' && p.subcategory !== 'casement') return false;
             } else if (selectedMount === 'HUNG') {
-                if (p.subcategory === 'casement' || p.subcategory === 'universal_fit') return false;
+                if (p.subcategory === 'casement' || p.subcategory === 'ge') return false;
             }
 
             // In-stock only filter
@@ -186,10 +186,10 @@ function ShopPageContent() {
     const CATEGORIES = [
         { id: 'ALL', label: 'All Units', count: products.length },
         { id: 'dual_inverter', label: 'LG DUAL Inverter', count: products.filter(p => p.subcategory === 'dual_inverter').length },
-        { id: 'base', label: 'Frigidaire Standard', count: products.filter(p => p.subcategory === 'base').length },
-        { id: 'casement', label: 'Slider / Casement', count: products.filter(p => p.subcategory === 'casement').length },
-        { id: 'ge', label: 'GE Inverter', count: products.filter(p => p.subcategory === 'ge').length },
-        { id: 'universal_fit', label: 'Universal Fit (Sleeve)', count: products.filter(p => p.subcategory === 'universal_fit').length },
+        { id: 'base', label: 'LG Standard Window', count: products.filter(p => p.subcategory === 'base').length },
+        { id: 'ge', label: 'GE Built-In (26" Sleeve)', count: products.filter(p => p.subcategory === 'ge').length },
+        { id: 'universal_fit', label: 'LG Cool + Heat (Wall/Window)', count: products.filter(p => p.subcategory === 'universal_fit').length },
+        { id: 'casement', label: '26" Wall Sleeve (RAB26A)', count: products.filter(p => p.subcategory === 'casement').length },
     ];
 
     const sectionOrder = (content?.shop?.sections && content.shop.sections.includes("sizing-banner"))
@@ -1526,7 +1526,6 @@ function SizingGuideSection() {
                 { name: "LW1222IVSM", link: "#dual_inverter" },
                 { name: "AJCQ10AWJ", link: "#ge" },
                 { name: "AJCQ12AXXWA", link: "#ge" },
-                { name: "LW1017ERSM1", link: "#base" },
                 { name: "LW1217ERSM1", link: "#base" }
             ]
         },

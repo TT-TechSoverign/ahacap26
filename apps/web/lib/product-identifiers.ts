@@ -77,7 +77,7 @@ export const PRODUCT_IDENTIFIERS: Record<number, ProductIdentifier> = {
         gtin12: '048231606448',
         mpn: 'LW8023HRSM',
         brand: 'LG',
-        catalystBadge: '☀️ All-Season Dual-Climate • 7,600 Cool + 7,000 Heat',
+        catalystBadge: '☀️ All-Season Dual-Climate • 7,600 BTU Cool + 3,850 BTU Heat',
         plugType: '115V',
         bestFor: 'Bedrooms & Studios Needing Heating (Up to 330 sq. ft. AHAM • 120–220 sq. ft. Island)'
     },
@@ -104,7 +104,7 @@ export const PRODUCT_IDENTIFIERS: Record<number, ProductIdentifier> = {
         gtin12: '048231606950',
         mpn: 'LW8024RD',
         brand: 'LG',
-        catalystBadge: '💰 Best Value Island Workhorse • Flat $355 Promo',
+        catalystBadge: '💰 Best Value Island Workhorse • 8,000 BTU 12.0 CEER ($529 Promo)',
         plugType: '115V',
         bestFor: 'Standard Bedroom Budget Replacement (Up to 350 sq. ft. AHAM • 150–250 sq. ft. Island)'
     },
@@ -133,7 +133,7 @@ export const PRODUCT_IDENTIFIERS: Record<number, ProductIdentifier> = {
         brand: 'GE',
         catalystBadge: '🏢 26" Wall Sleeve Universal Fit • High-Velocity Airflow',
         plugType: '115V',
-        bestFor: 'Deep Room Wall Sleeves (Up to 450 sq. ft. AHAM • 200–320 sq. ft. Island)'
+        bestFor: 'Deep Room Wall Sleeves (Up to 450 sq. ft. AHAM • 220–320 sq. ft. Island)'
     },
     15: {
         id: 15,
@@ -142,7 +142,7 @@ export const PRODUCT_IDENTIFIERS: Record<number, ProductIdentifier> = {
         brand: 'GE',
         catalystBadge: '🏢 26" Wall Sleeve Powerhouse • Variable Speed Inverter • SmartHQ™ WiFi',
         plugType: '115V',
-        bestFor: 'Large Living Space Wall Sleeves (Up to 550 sq. ft. AHAM • 250–380 sq. ft. Island)'
+        bestFor: 'Large Living Space Wall Sleeves (Up to 550 sq. ft. AHAM • 280–400 sq. ft. Island)'
     },
     16: {
         id: 16,

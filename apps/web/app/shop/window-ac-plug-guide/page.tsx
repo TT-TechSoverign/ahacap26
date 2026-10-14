@@ -32,76 +32,90 @@ export default function WindowAcPlugGuidePage() {
     // Specific in-stock models
     const units230V = [
         {
-            id: 9,
+            id: 6,
             name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
-            price: 875,
-            promoPrice: 815,
-            stock: 28,
-            voltage: "208/230V - 20A (NEMA 6-20P)",
-            coverage: "550 – 1,000 sq. ft. (Large Living Room / Open Concept)",
-            noise: "44 / 52 dB",
-            dehumid: "5.5 Pts/Hr",
+            price: 945,
+            promoPrice: 850,
+            stock: 30,
+            voltage: "208/230V - 15A (NEMA 6-15P)",
+            coverage: "Up to 1,000 sq. ft. AHAM (Up to 600 sq. ft. Oahu)",
+            noise: "44 / 59 dB",
+            dehumid: "4.2 Pts/Hr",
             rebate: "$45 Hawaii Energy Form Included",
-            slug: "9-lg-dual-inverter-18-000-btu-lw1822ivsm",
-            plugType: "NEMA 6-20P (T-Blade / Horizontal)"
+            slug: "6-lg-dual-inverter-18-000-btu-lw1822ivsm",
+            plugType: "NEMA 6-15P (208/230V 15A Tandem)"
         },
         {
-            id: 10,
+            id: 7,
             name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-            price: 975,
-            promoPrice: 922,
-            stock: 18,
-            voltage: "208/230V - 20A (NEMA 6-20P)",
-            coverage: "1,000 – 1,450 sq. ft. (Industrial Titan Open Floor)",
-            noise: "44 / 53 dB",
-            dehumid: "7.1 Pts/Hr",
+            price: 1055,
+            promoPrice: 950,
+            stock: 20,
+            voltage: "208/230V - 15A (NEMA 6-15P)",
+            coverage: "Up to 1,440 sq. ft. AHAM (Up to 800 sq. ft. Oahu)",
+            noise: "53 / 62 dB",
+            dehumid: "5.6 Pts/Hr",
             rebate: "$45 Hawaii Energy Form Included",
-            slug: "10-lg-dual-inverter-24-000-btu-lw2422ivsm",
-            plugType: "NEMA 6-20P (T-Blade / Horizontal)"
+            slug: "7-lg-dual-inverter-23-500-btu-lw2422ivsm",
+            plugType: "NEMA 6-15P (208/230V 15A Tandem)"
         }
     ];
 
     const units115V = [
         {
-            id: 5,
+            id: 2,
             name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
-            price: 575,
-            promoPrice: 535,
+            price: 600,
+            promoPrice: 540,
             stock: 50,
             voltage: "115V - 15A (Standard NEMA 5-15P)",
-            coverage: "250 – 350 sq. ft. (Master Bedroom / Studio)",
-            noise: "44 / 50 dB",
-            dehumid: "2.8 Pts/Hr",
+            coverage: "Up to 350 sq. ft. AHAM (Up to 280 sq. ft. Oahu)",
+            noise: "44 / 54 dB",
+            dehumid: "2.5 Pts/Hr",
             rebate: "$45 Hawaii Energy Form Included",
-            slug: "5-lg-dual-inverter-8-000-btu-lw8022ivsm",
+            slug: "2-lg-dual-inverter-8-000-btu-lw8022ivsm",
             plugType: "Standard 3-Prong 115V Wall Plug"
         },
         {
-            id: 6,
+            id: 3,
             name: "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
-            price: 625,
+            price: 650,
             promoPrice: 585,
             stock: 50,
             voltage: "115V - 15A (Standard NEMA 5-15P)",
-            coverage: "350 – 450 sq. ft. (Large Bedroom / Living Room)",
-            noise: "44 / 52 dB",
-            dehumid: "3.3 Pts/Hr",
+            coverage: "Up to 450 sq. ft. AHAM (Up to 330 sq. ft. Oahu)",
+            noise: "44 / 58 dB",
+            dehumid: "2.9 Pts/Hr",
             rebate: "$45 Hawaii Energy Form Included",
-            slug: "6-lg-dual-inverter-10-000-btu-lw1022ivsm",
+            slug: "3-lg-dual-inverter-10-000-btu-lw1022ivsm",
             plugType: "Standard 3-Prong 115V Wall Plug"
         },
         {
-            id: 7,
+            id: 4,
             name: "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
-            price: 700,
-            promoPrice: 650,
+            price: 750,
+            promoPrice: 675,
             stock: 50,
             voltage: "115V - 15A (Standard NEMA 5-15P)",
-            coverage: "450 – 550 sq. ft. (Living Room / Open Kitchen)",
-            noise: "44 / 53 dB",
+            coverage: "Up to 550 sq. ft. AHAM (Up to 380 sq. ft. Oahu)",
+            noise: "44 / 58 dB",
             dehumid: "3.8 Pts/Hr",
             rebate: "$45 Hawaii Energy Form Included",
-            slug: "7-lg-dual-inverter-12-000-btu-lw1222ivsm",
+            slug: "4-lg-dual-inverter-12-000-btu-lw1222ivsm",
+            plugType: "Standard 3-Prong 115V Wall Plug"
+        },
+        {
+            id: 5,
+            name: "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
+            price: 830,
+            promoPrice: 747,
+            stock: 50,
+            voltage: "115V - 15A (Standard NEMA 5-15P)",
+            coverage: "Up to 700 sq. ft. AHAM (Up to 450 sq. ft. Oahu)",
+            noise: "44 / 58 dB",
+            dehumid: "4.2 Pts/Hr",
+            rebate: "$45 Hawaii Energy Form Included",
+            slug: "5-lg-dual-inverter-14-000-btu-lw1522fvsm",
             plugType: "Standard 3-Prong 115V Wall Plug"
         }
     ];
@@ -109,7 +123,7 @@ export default function WindowAcPlugGuidePage() {
     const faqItems = [
         {
             q: "Can I plug an 18,000 or 23,500 BTU window AC into a regular 115V outlet?",
-            a: "No. High-capacity 18,000 BTU (LW1822IVSM) and 23,500 BTU (LW2422IVSM) window air conditioners require a 208V/230V 20-Amp circuit with a NEMA 6-20P plug (featuring horizontal blades). Attempting to use an adapter on a 115V outlet is dangerous and will damage the unit's variable inverter motor."
+            a: "No. High-capacity 18,000 BTU (LW1822IVSM) and 23,500 BTU (LW2422IVSM) Dual Inverter window air conditioners require a dedicated 208V/230V 15-Amp circuit with a NEMA 6-15P plug (and Cool+Heat models LW1823HRSM / LW2423HRSM require a 208/230V 20-Amp NEMA 6-20P circuit). Attempting to use a plug adapter on a 115V outlet is unsafe and will damage the compressor."
         },
         {
             q: "Why are 18k and 23.5k units 230V instead of 115V?",
@@ -448,7 +462,7 @@ export default function WindowAcPlugGuidePage() {
                         </div>
                         <div className="flex flex-col gap-3">
                             <Link
-                                href="/shop/7-lg-dual-inverter-12-000-btu-lw1222ivsm"
+                                href="/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm"
                                 className="px-6 py-3.5 rounded-xl bg-primary hover:bg-primary/90 text-white font-header font-black text-xs uppercase tracking-wider text-center transition-all"
                             >
                                 View 12,000 BTU 115V Champion

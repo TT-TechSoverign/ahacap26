@@ -37,20 +37,20 @@ export default function LargeRoomWindowAcPage() {
     const unit18k: Product = {
         id: 6,
         name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
-        price: 925,
-        promo_price: 832,
+        price: 945,
+        promo_price: 850,
         stock: 30,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 18000,
-        voltage: "208/230V / 20 Amp",
-        coverage: "400+ sq. ft. (Open Living / High Ceilings)",
-        noise_level: "52 / 63 dB",
-        dehumidification: "5.5 Pts/Hr",
-        performance_specs: "High-Capacity Moisture Removal & Dual Inverter",
-        key_spec: "Maximum Vertical Momentum: For vaulted ceilings.",
-        dimensions: "14.9 x 23.6 x 24.8",
-        weight: "99 lbs",
+        voltage: "208/230V / 15 Amp",
+        coverage: "Up to 1,000 sq. ft. AHAM (Up to 600 sq. ft. Oahu)",
+        noise_level: "44 / 59 dB",
+        dehumidification: "4.2 Pts/Hr",
+        performance_specs: "500 CFM High-Velocity • 14.7 CEER • Dual Inverter",
+        key_spec: "LW1822IVSM",
+        dimensions: '17.7" H x 26.0" W x 30.7" D',
+        weight: "112 lbs",
         warranty: "1 YEAR LIMITED",
         image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg"
     };
@@ -58,19 +58,19 @@ export default function LargeRoomWindowAcPage() {
     const unit23k: Product = {
         id: 7,
         name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-        price: 1025,
-        promo_price: 922,
+        price: 1055,
+        promo_price: 950,
         stock: 20,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 23500,
-        voltage: "208/230V / 20 Amp",
-        coverage: "550–1,500 sq. ft. (Whole Living Area / Open Concept)",
-        noise_level: "53 / 64 dB",
-        dehumidification: "7.1 Pts/Hr",
-        performance_specs: "Industrial-Grade Titan Cooling",
-        key_spec: "Maximum Moisture Management & Rapid High-Load Pull-Down.",
-        dimensions: "17.7 x 25.9 x 28.1",
+        voltage: "208/230V / 15 Amp",
+        coverage: "Up to 1,440 sq. ft. AHAM (Up to 800 sq. ft. Oahu)",
+        noise_level: "53 / 62 dB",
+        dehumidification: "5.6 Pts/Hr",
+        performance_specs: "Flagship 23,500 BTU • 14.5 CEER • 5.6 Pts/Hr Extraction",
+        key_spec: "LW2422IVSM",
+        dimensions: '17.7" H x 26.0" W x 30.7" D',
         weight: "112 lbs",
         warranty: "1 YEAR LIMITED",
         image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg"
@@ -90,15 +90,15 @@ export default function LargeRoomWindowAcPage() {
     const faqItems = [
         {
             q: "How does installing an 18k or 23.5k window AC save $4,000–$6,000 vs a mini-split?",
-            a: "A multi-zone 18k to 24k ductless mini-split system on Oahu typically costs $5,500 to $8,500 installed, requiring high-voltage electrical line pulls, wall penetrations, and refrigerant line brazing. An in-stock LG Dual Inverter 18k ($832) or 23.5k ($922) delivers equal or greater cooling volume with zero ductwork red tape, cooling entire living areas and high-ceiling spaces at a fraction of the cost."
+            a: "A multi-zone 18k to 24k ductless mini-split system on Oahu typically costs $5,500 to $8,500 installed, requiring high-voltage electrical line pulls, wall penetrations, and refrigerant line brazing. An in-stock LG Dual Inverter 18k ($850) or 23.5k ($950) delivers equal or greater cooling volume with 500 CFM air throw, cooling entire living areas and high-ceiling spaces at a fraction of the cost."
         },
         {
             q: "What type of electrical outlet do the 18,000 and 23,500 BTU units require?",
-            a: "Both the 18k (LW1822IVSM) and 23.5k (LW2422IVSM) operate on a dedicated 208/230V 20-Amp circuit using a NEMA 6-20P plug (horizontal-and-vertical blade configuration). Most Oahu single-family homes built with dedicated AC outlets or standard heavy-appliance feeds support this plug. If you need confirmation, review our visual 115V vs 230V Plug Guide or our technicians can assess it on-site."
+            a: "Both the 18k (LW1822IVSM) and 23.5k (LW2422IVSM) Dual Inverter units operate on a dedicated 208/230V 15-Amp circuit using a NEMA 6-15P tandem plug (and are also compatible with 208/230V 20-Amp NEMA 6-20R receptacles). If you need confirmation, review our visual 115V vs 230V Plug Guide or our technicians can assess it on-site."
         },
         {
-            q: "Do large 99–112 lb window units require an exterior support bracket?",
-            a: "Yes, for units of this weight, a sturdy heavy-duty cantilever support bracket is strongly recommended to relieve structural load from your window sill and framing. Our CT-36775 licensed technicians evaluate your wall construction on-site during installation ($0 upfront booking deposit)."
+            q: "Do large 112 lb window units require an exterior support bracket?",
+            a: "Yes, for 112 lb Slide In-Out chassis units, a heavy-duty exterior support bracket is strongly recommended to relieve structural load from your window sill and framing. Our CT-36775 licensed technicians evaluate your wall construction on-site during installation ($0 upfront booking deposit)."
         },
         {
             q: "How fast can I get one of these units on Oahu?",

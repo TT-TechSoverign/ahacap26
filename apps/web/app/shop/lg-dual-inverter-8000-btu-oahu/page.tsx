@@ -36,21 +36,21 @@ export default function Lg8000BtuOahuPage() {
     const product8k: Product = {
         id: 2,
         name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
-        price: 595,
-        promo_price: 535,
+        price: 600,
+        promo_price: 540,
         discount_percent: 10,
-        stock: 10,
+        stock: 50,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 8000,
         voltage: "115V / 15 Amp",
-        coverage: "100–350 sq. ft. (Master Bedroom / Home Office)",
-        noise_level: "44 / 58 dB",
-        dehumidification: "2.8 Pts/Hr",
-        performance_specs: "ThinQ® Smart WiFi & 44dB Sleep Mode",
-        key_spec: "Dual Inverter Compressor: 40% energy savings on HECO.",
-        dimensions: "11.7 x 19.4 x 19.4",
-        weight: "55.1 lbs",
+        coverage: "Up to 350 sq. ft. AHAM (Up to 280 sq. ft. Oahu)",
+        noise_level: "44 / 54 dB",
+        dehumidification: "2.5 Pts/Hr",
+        performance_specs: "15.5 CEER • ThinQ® Smart WiFi • 44dB Sleep Mode",
+        key_spec: "LW8022IVSM",
+        dimensions: '12.5" H x 19.6" W x 24.5" D',
+        weight: "63 lbs",
         warranty: "1 YEAR LIMITED",
         image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg"
     };
@@ -69,7 +69,7 @@ export default function Lg8000BtuOahuPage() {
     const faqItems = [
         {
             q: "Why is the 8,000 BTU model the best value compared to the 6,000 BTU unit?",
-            a: "The 8,000 BTU model (LW8022IVSM) costs just $31 more than the 6,000 BTU model ($535 vs $504 on promo), but provides +33% more cooling headroom (up to 350 sq. ft.) and includes LG ThinQ® Smart WiFi remote app control. This allows you to pre-cool your bedroom remotely from your phone before arriving home from work."
+            a: "The 8,000 BTU model (LW8022IVSM) costs just $36 more than the 6,000 BTU model ($540 vs $504 on promo), while providing +33% more cooling capacity (up to 350 sq. ft.) and nearly double the moisture removal (2.5 Pts/Hr vs 1.4 Pts/Hr) with the same 15.5 CEER efficiency and 44 dB sleep mode."
         },
         {
             q: "How quiet is the LG Dual Inverter 8,000 BTU in a bedroom?",
@@ -390,27 +390,32 @@ export default function Lg8000BtuOahuPage() {
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Promo Price</td>
                                 <td className="py-3 px-4">$504.00</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">$535.00 (+$31 diff)</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">$540.00 (+$36 diff)</td>
                             </tr>
                             <tr>
-                                <td className="py-3 px-4 font-bold text-white">Cooling Area</td>
-                                <td className="py-3 px-4">100 - 250 sq. ft.</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">100 - 350 sq. ft. (+33% Area)</td>
+                                <td className="py-3 px-4 font-bold text-white">Cooling Area (AHAM / Oahu)</td>
+                                <td className="py-3 px-4">Up to 260 / 220 sq. ft.</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">Up to 350 / 280 sq. ft. (+33% Area)</td>
+                            </tr>
+                            <tr>
+                                <td className="py-3 px-4 font-bold text-white">Moisture Removal</td>
+                                <td className="py-3 px-4">1.4 Pts/Hr</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">2.5 Pts/Hr (+78% Dehumidification)</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Smart WiFi Remote Control</td>
-                                <td className="py-3 px-4 text-slate-500">No (Standard Remote)</td>
+                                <td className="py-3 px-4">Yes (LG ThinQ® App)</td>
                                 <td className="py-3 px-4 text-emerald-400 font-bold">Yes (LG ThinQ® &amp; Alexa/Google)</td>
                             </tr>
                             <tr>
-                                <td className="py-3 px-4 font-bold text-white">Sleep Mode Noise</td>
-                                <td className="py-3 px-4">44 dB (Library Quiet)</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">44 dB (Library Quiet)</td>
+                                <td className="py-3 px-4 font-bold text-white">Sleep Mode Noise / CEER</td>
+                                <td className="py-3 px-4">44 / 54 dB • 15.5 CEER</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">44 / 54 dB • 15.5 CEER</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Electrical Plug</td>
-                                <td className="py-3 px-4">115V / 15A Standard</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">115V / 15A Standard</td>
+                                <td className="py-3 px-4">115V / 15A Standard (5.5A)</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">115V / 15A Standard (8.9A)</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Hawaii Energy Rebate</td>
@@ -420,7 +425,7 @@ export default function Lg8000BtuOahuPage() {
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Net Cost After Rebate</td>
                                 <td className="py-3 px-4">$459.00</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">$490.00</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">$495.00</td>
                             </tr>
                         </tbody>
                     </table>

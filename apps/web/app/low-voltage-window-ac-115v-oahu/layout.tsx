@@ -40,7 +40,7 @@ const lowVoltageFaqSchema = {
             "name": "What is the largest BTU window AC that runs on a standard 115V outlet?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Thanks to LG Dual Inverter variable-speed compressor technology, units up to 14,000 BTU (such as the LW1522IVSM) can operate on a standard 115V 15-amp circuit with a standard NEMA 5-15P plug, cooling up to 800 sq ft without requiring a 230V line."
+                "text": "Thanks to LG Dual Inverter variable-speed compressor technology, units up to 14,000 BTU (such as the LW1522FVSM) can operate on a standard 115V 15-amp circuit with a standard NEMA 5-15P plug, cooling up to 700 sq ft (AHAM) without requiring a 230V line."
             }
         },
         {
