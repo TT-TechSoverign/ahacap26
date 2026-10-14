@@ -33,7 +33,10 @@ import {
     Maximize2,
     Zap,
     SlidersHorizontal,
-    Sparkles
+    Sparkles,
+    ExternalLink,
+    ZoomIn,
+    ZoomOut
 } from 'lucide-react';
 import { StockBadge } from '@/components/StockBadge';
 import { SpatialCaliperHUD } from '@/components/SpatialCaliperHUD';
@@ -351,31 +354,36 @@ export default function ProductDetailPage() {
     const baseSpecs = product ? getProductSpecs(product.id) : null;
     const specs = useMemo(() => {
         if (!baseSpecs || !product) return null;
+        const rawShipWeight = baseSpecs.shippingWeight || product.shipping_weight || '96 lbs';
+        const formattedShipWeight = rawShipWeight.toLowerCase().includes('lb') ? rawShipWeight : `${rawShipWeight} lbs`;
         return {
             ...baseSpecs,
             btu: product.btu ? `${product.btu.toLocaleString()} BTU` : baseSpecs.btu,
             coolingArea: product.coverage || baseSpecs.coolingArea,
             coolingAreaAham: product.coverage_aham || baseSpecs.coolingAreaAham || 'Up to 550 sq. ft.',
             coolingAreaOahu: product.coverage_oahu || baseSpecs.coolingAreaOahu || '250–380 sq. ft.',
-            sizingNotes: product.sizing_notes || baseSpecs.sizingNotes,
+            sizingNotes: baseSpecs.sizingNotes || product.sizing_notes,
             minWindowHeight: product.min_window_height || baseSpecs.windowFit?.minHeight || '16.0"',
             minWindowWidth: product.min_window_width || baseSpecs.windowFit?.minWidth || '27"',
             maxWindowWidth: product.max_window_width || baseSpecs.windowFit?.maxWidth || '39"',
-            chassisType: product.chassis_type || baseSpecs.chassisType || 'Slide In-Out',
-            shippingWeight: product.shipping_weight || baseSpecs.shippingWeight || '96 lbs',
+            chassisType: baseSpecs.chassisType || product.chassis_type || 'Slide In-Out',
+            shippingWeight: formattedShipWeight,
             ceerRating: product.ceer_rating || baseSpecs.ceerRating || '15.0',
             dryAirFlowCfm: product.dry_air_flow_cfm || baseSpecs.dryAirFlowCfm,
             plugType: baseSpecs.plugType || (product.voltage?.includes('230V') ? 'NEMA 6-20P (208/230V)' : 'NEMA 5-15P (Standard 115V)'),
-            eer: product.performance_specs || baseSpecs.eer,
-            voltage: product.voltage || baseSpecs.voltage,
-            soundProfile: product.noise_level || baseSpecs.soundProfile,
-            keyFeature: product.key_spec || baseSpecs.keyFeature
+            eer: baseSpecs.eer || product.performance_specs,
+            voltage: baseSpecs.voltage || product.voltage,
+            soundProfile: baseSpecs.soundProfile || product.noise_level,
+            keyFeature: baseSpecs.keyFeature || product.key_spec,
+            warranty: baseSpecs.warranty || product.warranty || '1 YEAR LIMITED'
         };
     }, [baseSpecs, product]);
 
     const [mediaView, setMediaView] = useState<'photos' | 'cutaway' | 'specs'>('photos');
     const [isSizingExplainerOpen, setIsSizingExplainerOpen] = useState(false);
     const [isCaliperLightboxOpen, setIsCaliperLightboxOpen] = useState(false);
+    const [isMobilePdfZoomed, setIsMobilePdfZoomed] = useState(false);
+    const mobilePdfScrollRef = useRef<HTMLDivElement>(null);
 
     // High-Resolution 3D Spatial Window Fit Cutaway Mapping (Bespoke Model-Matched Assets)
     const cutawayImageMap: { [key: number]: string } = {
@@ -422,7 +430,24 @@ export default function ProductDetailPage() {
         15: '/assets/specsheets/ge/GE-AJCQ12AXXWA-spec-sheet.pdf',
     };
 
+    const specSheetPageCountMap: { [key: number]: number } = {
+        1: 1,
+        2: 1,
+        3: 1,
+        4: 1,
+        5: 1,
+        6: 1,
+        7: 1,
+        8: 1,
+        9: 1,
+        10: 1,
+        13: 3,
+        14: 3,
+        15: 20,
+    };
+
     const specSheetUrl = product ? specSheetMap[product.id] : null;
+    const specSheetPageCount = product ? (specSheetPageCountMap[product.id] || 1) : 1;
 
     if (loading) return <ProductPageSkeleton />;
 
@@ -443,6 +468,7 @@ export default function ProductDetailPage() {
 
     const isCampaignActive = mounted && isCampaignActiveChecker();
     const isPromo = isCampaignActive && !!product && !!product.promo_price && product.promo_price > 0;
+    const isWallSleeve = product.subcategory === 'ge' || product.subcategory === 'casement';
 
     return (
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
@@ -473,7 +499,7 @@ export default function ProductDetailPage() {
                                 )}
                             >
                                 <Ruler className="size-3.5" />
-                                <span>📐 3D Window Fit</span>
+                                <span>{isWallSleeve ? '📐 3D Wall Sleeve Fit' : '📐 3D Window Fit'}</span>
                             </button>
                             {specSheetUrl && (
                                 <button
@@ -496,7 +522,7 @@ export default function ProductDetailPage() {
                                     <div className="relative w-full h-full">
                                         <Image
                                             src={cutawayImageUrl}
-                                            alt={`${product.name} 3D Spatial Window Opening Fit`}
+                                            alt={`${product.name} 3D Spatial Fit`}
                                             fill
                                             className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.9)] transition-all duration-700 group-hover/cutaway:scale-105"
                                             priority
@@ -504,7 +530,7 @@ export default function ProductDetailPage() {
                                         />
                                     </div>
                                     <div className="absolute top-2 left-2 z-20 px-2.5 py-1 rounded-md bg-cyan-500/90 text-slate-950 text-[9px] font-header font-black uppercase tracking-wider shadow-md">
-                                        3D Architectural Spatial Fit
+                                        {isWallSleeve ? '3D Wall Sleeve Spatial Fit' : '3D Architectural Spatial Fit'}
                                     </div>
                                     <button
                                         type="button"
@@ -519,7 +545,9 @@ export default function ProductDetailPage() {
                                         <span>Expand Calipers</span>
                                     </button>
                                     <div className="absolute bottom-2 right-2 z-20 px-2.5 py-1 rounded-md bg-slate-950/85 border border-emerald-500/30 text-emerald-300 text-[9px] font-mono font-bold shadow-md">
-                                        Min Opening: {specs?.minWindowHeight || '16.0"'} H
+                                        {isWallSleeve
+                                            ? `Fits 26" Wall Sleeve (${specs?.minWindowHeight || '15.8"'} H × 26" W)`
+                                            : `Min Opening: ${specs?.minWindowHeight || '16.0"'} H`}
                                     </div>
                                 </div>
                             ) : selectedImage ? (
@@ -578,7 +606,7 @@ export default function ProductDetailPage() {
                                             coverageAham: specs.coolingAreaAham,
                                             coverageOahu: specs.coolingAreaOahu,
                                             noiseLevel: specs.soundProfile,
-                                            isWallSleeve: product.subcategory === 'ge' || product.subcategory === 'casement'
+                                            isWallSleeve
                                         }}
                                         onExpand={() => setIsCaliperLightboxOpen(true)}
                                     />
@@ -610,7 +638,7 @@ export default function ProductDetailPage() {
                         <div className="space-y-3">
                             <div className="flex flex-wrap gap-3 items-center justify-center md:justify-start">
                                 <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-md text-primary text-[8px] font-header font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
-                                    {product.category.replace('_', ' ')}
+                                    {isWallSleeve ? 'BUILT-IN WALL SLEEVE AC' : product.category.replace('_', ' ')}
                                 </span>
                                 {isPromo && (
                                     <span className="px-3 py-1 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 border border-white/10 rounded-md text-white text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.2em] shadow-lg animate-pulse-slow">
@@ -664,7 +692,9 @@ export default function ProductDetailPage() {
                                 <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Performance</div>
                                 <div className="text-white font-header font-black text-base md:text-lg">{specs?.btu}</div>
                                 {specs?.ceerRating && (
-                                    <span className="text-[10px] font-mono text-emerald-400 mt-0.5">{specs.ceerRating} CEER</span>
+                                    <span className="text-[10px] font-mono text-emerald-400 mt-0.5">
+                                        {specs.ceerRating} CEER{product.id === 15 ? ' • R32 Inverter' : ''}
+                                    </span>
                                 )}
                             </div>
 
@@ -678,15 +708,25 @@ export default function ProductDetailPage() {
                             {/* Voltage & Circuit Card */}
                             <div className="bg-surface-dark border border-border-dark p-3 rounded-xl shadow-lg group/spec hover:border-primary/50 transition-all duration-500 flex flex-col items-center md:items-start">
                                 <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-primary">Electrical Circuit</div>
-                                <div className="text-white font-header font-black text-xs md:text-sm">{specs?.voltage}</div>
+                                <div className="text-white font-header font-black text-xs md:text-sm">
+                                    {specs?.voltage}{specs?.amps && specs.amps !== 'N/A' ? ` (${specs.amps})` : ''}
+                                </div>
                                 <span className="text-[10px] font-mono text-cyan-300 truncate max-w-full">{specs?.plugType}</span>
                             </div>
 
-                            {/* Min Window Fit Card */}
+                            {/* Window Opening or Wall Sleeve Fit Card */}
                             <div className="bg-surface-dark border border-border-dark p-3 rounded-xl shadow-lg group/spec hover:border-cyan-500/50 transition-all duration-500 flex flex-col items-center md:items-start">
-                                <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-cyan-400">Window Opening Fit</div>
-                                <div className="text-white font-header font-black text-xs md:text-sm">Min {specs?.minWindowHeight} H</div>
-                                <span className="text-[10px] font-mono text-slate-300">{specs?.minWindowWidth}–{specs?.maxWindowWidth} Width Span</span>
+                                <div className="text-slate-400 text-[8px] font-header font-black uppercase tracking-[0.3em] mb-1 group-hover/spec:text-cyan-400">
+                                    {isWallSleeve ? 'Wall Sleeve Fit' : 'Window Opening Fit'}
+                                </div>
+                                <div className="text-white font-header font-black text-xs md:text-sm">
+                                    {isWallSleeve ? '26" Wall Sleeve' : `Min ${specs?.minWindowHeight} H`}
+                                </div>
+                                <span className="text-[10px] font-mono text-slate-300">
+                                    {isWallSleeve
+                                        ? `${specs?.minWindowHeight} H × 26.0" W (GE RAB26A)`
+                                        : `${specs?.minWindowWidth}–${specs?.maxWindowWidth} Width Span`}
+                                </span>
                             </div>
                         </div>
 
@@ -726,29 +766,61 @@ export default function ProductDetailPage() {
                                 </span>
                             </div>
 
-                            <div className="space-y-2.5 text-xs">
-                                <div className="flex items-start gap-2.5">
-                                    <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                                    <div>
-                                        <strong className="text-slate-200 font-bold block">1. Window Opening Clearance:</strong>
-                                        <span className="text-slate-400 text-[11px]">Requires minimum <strong className="text-white">{specs?.minWindowHeight}</strong> vertical height and <strong className="text-white">{specs?.minWindowWidth} to {specs?.maxWindowWidth}</strong> width span. Compatible with jalousies, sliders, and double-hung frames.</span>
+                            {isWallSleeve ? (
+                                <div className="space-y-2.5 text-xs">
+                                    <div className="flex items-start gap-2.5">
+                                        <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                        <div>
+                                            <strong className="text-slate-200 font-bold block">1. 26&quot; Wall Sleeve Compatibility:</strong>
+                                            <span className="text-slate-400 text-[11px]">
+                                                Designed for standard <strong className="text-white">26&quot; through-the-wall sleeves</strong> (<strong className="text-white">{specs?.minWindowHeight || '15.8"'} H × 26.0&quot; W</strong> opening). Directly fits <strong className="text-cyan-300">GE RAB26A / RAB46B</strong> wall sleeves with <strong className="text-white">RAG13A</strong> rear grille.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-2.5">
+                                        <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                        <div>
+                                            <strong className="text-slate-200 font-bold block">2. Electrical Outlet Matching:</strong>
+                                            <span className="text-slate-400 text-[11px]">
+                                                Powered by <strong className="text-white">{specs?.voltage}</strong>{specs?.amps && specs.amps !== 'N/A' ? <> (<strong className="text-white">{specs.amps} / {specs.watts}</strong>)</> : null} using <strong className="text-cyan-300">{specs?.plugType}</strong>. Includes 75&quot; power cord with LCDI safety plug.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-2.5">
+                                        <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                        <div>
+                                            <strong className="text-slate-200 font-bold block">3. Slide-In Chassis &amp; Security Brackets:</strong>
+                                            <span className="text-slate-400 text-[11px]">
+                                                <strong className="text-white">{specs?.chassisType}</strong> solid-side architecture (<strong className="text-white">{specs?.weight || '92.2 lbs'} net / {specs?.shippingWeight || '94 lbs'} ship</strong>). Secures directly to the wall sleeve using the 2 included metal retention brackets.
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-2.5">
-                                    <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                                    <div>
-                                        <strong className="text-slate-200 font-bold block">2. Electrical Outlet Matching:</strong>
-                                        <span className="text-slate-400 text-[11px]">Powered by <strong className="text-white">{specs?.voltage}</strong> using <strong className="text-cyan-300">{specs?.plugType}</strong>. Verify your wall outlet receptacle before ordering.</span>
+                            ) : (
+                                <div className="space-y-2.5 text-xs">
+                                    <div className="flex items-start gap-2.5">
+                                        <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                        <div>
+                                            <strong className="text-slate-200 font-bold block">1. Window Opening Clearance:</strong>
+                                            <span className="text-slate-400 text-[11px]">Requires minimum <strong className="text-white">{specs?.minWindowHeight}</strong> vertical height and <strong className="text-white">{specs?.minWindowWidth} to {specs?.maxWindowWidth}</strong> width span. Compatible with jalousies, sliders, and double-hung frames.</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-2.5">
+                                        <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                        <div>
+                                            <strong className="text-slate-200 font-bold block">2. Electrical Outlet Matching:</strong>
+                                            <span className="text-slate-400 text-[11px]">Powered by <strong className="text-white">{specs?.voltage}</strong> using <strong className="text-cyan-300">{specs?.plugType}</strong>. Verify your wall outlet receptacle before ordering.</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-2.5">
+                                        <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
+                                        <div>
+                                            <strong className="text-slate-200 font-bold block">3. Chassis Handling &amp; Safety:</strong>
+                                            <span className="text-slate-400 text-[11px]"><strong className="text-white">{specs?.chassisType}</strong> chassis architecture ({specs?.weight || (product.weight ? `${product.weight} lbs` : '85 lbs')} net). Outer mounting sleeve installs into window first for secure handling.</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-2.5">
-                                    <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                                    <div>
-                                        <strong className="text-slate-200 font-bold block">3. Chassis Handling & Safety:</strong>
-                                        <span className="text-slate-400 text-[11px]"><strong className="text-white">{specs?.chassisType}</strong> chassis architecture ({product.weight ? `${product.weight} lbs net` : specs?.weight || '85 lbs net'}). Outer mounting sleeve installs into window first for secure handling.</span>
-                                    </div>
-                                </div>
-                            </div>
+                            )}
                         </div>
 
                         {/* Secondary Specifications Hub */}
@@ -757,20 +829,32 @@ export default function ProductDetailPage() {
                             <div className="grid grid-cols-2 gap-y-4 gap-x-4 items-start relative z-10 text-xs md:text-left">
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Unit Dimensions</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dimensions || specs?.dimensions || 'N/A'}</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.dimensions || product.dimensions || 'N/A'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Weight (Net / Ship)</span>
-                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.weight ? `${product.weight} lbs` : specs?.weight || '85 lbs'} / {specs?.shippingWeight || '96 lbs'}</span>
+                                    <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.weight || (product.weight ? `${product.weight} lbs` : '85 lbs')} / {specs?.shippingWeight || '96 lbs'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Manufacturer Warranty</span>
-                                    <span className="text-rose-400 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.warranty || specs?.warranty || '1 YEAR LIMITED'}</span>
+                                    <span className="text-rose-400 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs?.warranty || product.warranty || '1 YEAR LIMITED'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1 items-center md:items-start">
                                     <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Dehumidification</span>
                                     <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{product.dehumidification || (specs as any)?.dehumidification || '3.8 Pts/Hr'}</span>
                                 </div>
+                                {specs?.amps && specs.amps !== 'N/A' && (
+                                    <div className="flex flex-col gap-1 items-center md:items-start">
+                                        <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Amps / Watts</span>
+                                        <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs.amps} / {specs.watts}</span>
+                                    </div>
+                                )}
+                                {specs?.refrigerant && specs.refrigerant !== 'N/A' && (
+                                    <div className="flex flex-col gap-1 items-center md:items-start">
+                                        <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Refrigerant / Sound</span>
+                                        <span className="text-emerald-300 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs.refrigerant} • {specs.soundProfile || '48 / 56 dB'}</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
 
@@ -940,18 +1024,143 @@ export default function ProductDetailPage() {
                 <RelatedProducts currentProduct={product} />
             </section>
 
-            {/* Spec Sheet Preview Modal */}
+            {/* Spec Sheet Preview Modal (Desktop Iframe + Mobile Multi-Page Touch Scroll Viewer) */}
             {isSpecModalOpen && specSheetUrl && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/80 backdrop-blur-sm">
-                    <div className="bg-surface-dark border border-border-dark w-full h-full md:w-[90vw] md:h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative ring-1 ring-white/20">
-                        <div className="flex items-center justify-between p-6 border-b border-border-dark">
-                            <h3 className="font-header font-black uppercase text-white tracking-widest text-sm">Specification Analysis</h3>
-                            <button onClick={() => setIsSpecModalOpen(false)} className="p-2 text-slate-400 hover:text-primary transition-colors">
-                                <X className="size-8" />
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-8 bg-black/85 backdrop-blur-sm">
+                    <div className="bg-surface-dark border border-border-dark w-full h-[94dvh] md:w-[90vw] md:h-[90vh] rounded-2xl md:rounded-3xl shadow-2xl flex flex-col overflow-hidden relative ring-1 ring-white/20">
+                        {/* Modal Header */}
+                        <div className="flex items-center justify-between px-4 py-3 md:p-6 border-b border-border-dark bg-slate-950/90 shrink-0 gap-2">
+                            <div className="min-w-0 text-left">
+                                <h3 className="font-header font-black uppercase text-white tracking-widest text-xs md:text-sm truncate">
+                                    Factory Specification Sheet
+                                </h3>
+                                <p className="text-[10px] font-mono text-cyan-400 truncate">
+                                    {product.name} • {specSheetPageCount} {specSheetPageCount === 1 ? 'Page' : 'Pages'}
+                                </p>
+                            </div>
+                            <div className="flex items-center gap-2 shrink-0">
+                                <a
+                                    href={specSheetUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-2.5 py-1.5 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 font-header font-bold uppercase tracking-wider text-[10px] flex items-center gap-1.5 transition-colors"
+                                >
+                                    <ExternalLink className="size-3.5" />
+                                    <span>Open PDF</span>
+                                </a>
+                                <button
+                                    onClick={() => {
+                                        setIsSpecModalOpen(false);
+                                        setIsMobilePdfZoomed(false);
+                                    }}
+                                    aria-label="Close Specification Modal"
+                                    className="p-1.5 md:p-2 text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
+                                >
+                                    <X className="size-6 md:size-7" />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Mobile Quick-Jump & Zoom Toolbar (Visible on Mobile / Touch Devices) */}
+                        <div className={cn("bg-slate-900/95 border-b border-white/10 px-3 py-2 flex items-center justify-between gap-2 shrink-0", !isTouchDevice && "md:hidden")}>
+                            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+                                {product.id === 15 ? (
+                                    [
+                                        { label: 'p.1 Cover', page: 1 },
+                                        { label: 'p.5 R32 Safety', page: 5 },
+                                        { label: 'p.9 Controls', page: 9 },
+                                        { label: 'p.12 WiFi', page: 12 },
+                                        { label: 'p.15 Wall Sleeve Install', page: 15 },
+                                        { label: 'p.18 Warranty', page: 18 },
+                                    ].map((jump) => (
+                                        <button
+                                            key={jump.page}
+                                            type="button"
+                                            onClick={() => {
+                                                const el = document.getElementById(`mobile-pdf-page-${jump.page}`);
+                                                el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            }}
+                                            className="px-2 py-1 rounded bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/40 text-[10px] font-mono text-slate-200 whitespace-nowrap shrink-0 transition-colors"
+                                        >
+                                            {jump.label}
+                                        </button>
+                                    ))
+                                ) : specSheetPageCount > 1 ? (
+                                    Array.from({ length: specSheetPageCount }, (_, idx) => idx + 1).map((pageNum) => (
+                                        <button
+                                            key={pageNum}
+                                            type="button"
+                                            onClick={() => {
+                                                const el = document.getElementById(`mobile-pdf-page-${pageNum}`);
+                                                el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                            }}
+                                            className="px-2.5 py-1 rounded bg-white/5 hover:bg-cyan-500/20 border border-white/10 text-[10px] font-mono text-slate-200 whitespace-nowrap shrink-0"
+                                        >
+                                            Page {pageNum}
+                                        </button>
+                                    ))
+                                ) : (
+                                    <span className="text-[10px] font-mono text-slate-400">
+                                        Scroll or pinch-zoom to inspect factory specs
+                                    </span>
+                                )}
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => setIsMobilePdfZoomed(!isMobilePdfZoomed)}
+                                className="px-2.5 py-1 rounded bg-primary/15 border border-primary/30 text-cyan-300 text-[10px] font-mono font-bold flex items-center gap-1 shrink-0"
+                            >
+                                {isMobilePdfZoomed ? <ZoomOut className="size-3.5" /> : <ZoomIn className="size-3.5" />}
+                                <span>{isMobilePdfZoomed ? '1x Fit' : '1.5x Zoom'}</span>
                             </button>
                         </div>
-                        <div className="grow bg-white/5 relative">
-                            <iframe src={specSheetUrl} className="w-full h-full" title="Product Specifications PDF" />
+
+                        {/* Viewer Body: Native Multi-Page Scroll on Mobile/Touch, Native PDF Iframe on Desktop */}
+                        <div className="grow relative overflow-hidden bg-slate-950">
+                            {/* Mobile / Touch Multi-Page High-Res WebP Stack (Fixes Mobile PDF Page 1 Lockup) */}
+                            <div
+                                ref={mobilePdfScrollRef}
+                                className={cn(
+                                    "w-full h-full overflow-y-auto overflow-x-auto overscroll-contain p-2 sm:p-4 space-y-4 bg-slate-950",
+                                    !isTouchDevice && "md:hidden"
+                                )}
+                                style={{ WebkitOverflowScrolling: 'touch' }}
+                            >
+                                {Array.from({ length: specSheetPageCount }, (_, idx) => idx + 1).map((pageNum) => (
+                                    <div
+                                        key={pageNum}
+                                        id={`mobile-pdf-page-${pageNum}`}
+                                        className={cn(
+                                            "mx-auto bg-white rounded-xl overflow-hidden shadow-xl border border-white/15 transition-all",
+                                            isMobilePdfZoomed ? "w-[145%] max-w-none" : "w-full max-w-3xl"
+                                        )}
+                                    >
+                                        <div className="bg-slate-900 px-3 py-1.5 flex items-center justify-between border-b border-slate-800">
+                                            <span className="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-wider">
+                                                Page {pageNum} of {specSheetPageCount}
+                                            </span>
+                                            <span className="text-[10px] font-mono text-slate-400">
+                                                {product.name}
+                                            </span>
+                                        </div>
+                                        <img
+                                            src={`/assets/specsheets/mobile-pages/${product.id}/page-${pageNum}.webp`}
+                                            alt={`${product.name} Factory Specification Sheet - Page ${pageNum} of ${specSheetPageCount}`}
+                                            loading={pageNum <= 2 ? "eager" : "lazy"}
+                                            className="w-full h-auto block select-none"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Desktop Native PDF Iframe (Preserved 100% intact for non-touch desktop) */}
+                            {!isTouchDevice && (
+                                <iframe
+                                    src={specSheetUrl}
+                                    className="hidden md:block w-full h-full"
+                                    title="Product Specifications PDF"
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
@@ -971,7 +1180,7 @@ export default function ProductDetailPage() {
                                         3D Spatial Fit &amp; Dimension Calipers
                                     </h3>
                                     <p className="text-[10px] text-cyan-400 font-mono">
-                                        {product.name} • 3D Spatial Architectural Fit
+                                        {product.name} • {isWallSleeve ? '26" Wall Sleeve Spatial Fit' : '3D Spatial Architectural Fit'}
                                     </p>
                                 </div>
                             </div>
@@ -994,12 +1203,18 @@ export default function ProductDetailPage() {
                         </div>
                         <div className="p-4 md:p-6 border-t border-white/10 bg-surface-dark/90 grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
                             <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-                                <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Min Window Height</div>
+                                <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">
+                                    {isWallSleeve ? 'Wall Sleeve Height' : 'Min Window Height'}
+                                </div>
                                 <div className="text-sm font-bold font-mono text-white mt-0.5">{specs?.minWindowHeight || '16.0"'} H</div>
                             </div>
                             <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
-                                <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Window Width Span</div>
-                                <div className="text-sm font-bold font-mono text-white mt-0.5">{specs?.minWindowWidth || '27"'} – {specs?.maxWindowWidth || '39"'}</div>
+                                <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">
+                                    {isWallSleeve ? 'Wall Sleeve Width' : 'Window Width Span'}
+                                </div>
+                                <div className="text-sm font-bold font-mono text-white mt-0.5">
+                                    {isWallSleeve ? '26.0" Standard (RAB26A)' : `${specs?.minWindowWidth || '27"'} – ${specs?.maxWindowWidth || '39"'}`}
+                                </div>
                             </div>
                             <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
                                 <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest">Chassis Type</div>

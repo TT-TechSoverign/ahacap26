@@ -1017,8 +1017,12 @@ function ShopPageContent() {
                                                     <span className="text-white font-semibold">{item.voltage || '115V'}</span>
                                                 </div>
                                                 <div className="flex justify-between py-1 border-b border-white/5">
-                                                    <span className="text-slate-400 text-[10px] uppercase font-mono">Min Window:</span>
-                                                    <span className="text-white font-semibold">{item.min_window_height ? `${item.min_window_height} H` : '16" H'}</span>
+                                                    <span className="text-slate-400 text-[10px] uppercase font-mono">
+                                                        {(item.subcategory === 'ge' || item.subcategory === 'casement') ? 'Wall Sleeve:' : 'Min Window:'}
+                                                    </span>
+                                                    <span className="text-white font-semibold">
+                                                        {(item.subcategory === 'ge' || item.subcategory === 'casement') ? '26" Sleeve (15.8" H)' : (item.min_window_height ? `${item.min_window_height} H` : '16" H')}
+                                                    </span>
                                                 </div>
                                                 <div className="flex justify-between py-1 border-b border-white/5">
                                                     <span className="text-slate-400 text-[10px] uppercase font-mono">CEER Rating:</span>
@@ -2140,8 +2144,12 @@ function ProductCard({
                         <span className="text-white text-[9px] font-bold font-header">{product.voltage?.split('/')?.[0]?.trim() || '115V'}</span>
                     </div>
                     <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2 flex flex-col items-center justify-center group-hover:border-cyan-500/20 transition-all duration-500 shadow-inner">
-                        <span className="text-slate-500 text-[7px] font-black uppercase tracking-widest mb-0.5">Min Window</span>
-                        <span className="text-cyan-300 text-[9px] font-bold font-mono">{product.min_window_height ? `${product.min_window_height} H` : '16" H'}</span>
+                        <span className="text-slate-500 text-[7px] font-black uppercase tracking-widest mb-0.5">
+                            {(product.subcategory === 'ge' || product.subcategory === 'casement') ? 'Wall Sleeve' : 'Min Window'}
+                        </span>
+                        <span className="text-cyan-300 text-[9px] font-bold font-mono">
+                            {(product.subcategory === 'ge' || product.subcategory === 'casement') ? '26" Sleeve' : (product.min_window_height ? `${product.min_window_height} H` : '16" H')}
+                        </span>
                     </div>
                 </div>
 

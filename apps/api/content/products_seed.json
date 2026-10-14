@@ -398,9 +398,9 @@
         "min_window_width": "26\"",
         "max_window_width": "26\"",
         "min_window_height": "15.8\"",
-        "chassis_type": "Slide In-Out (Wall Sleeve)",
+        "chassis_type": "Slide-In (26\" Wall Sleeve)",
         "dry_air_flow_cfm": "250 CFM",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "2-YR FULL / 5-YR SEALED"
     },
     {
         "category": "WINDOW_AC",
@@ -429,9 +429,9 @@
         "min_window_width": "26\"",
         "max_window_width": "26\"",
         "min_window_height": "15.8\"",
-        "chassis_type": "Slide In-Out (Wall Sleeve)",
+        "chassis_type": "Slide-In (26\" Wall Sleeve)",
         "dry_air_flow_cfm": "285 CFM",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "2-YR FULL / 5-YR SEALED"
     },
     {
         "category": "WINDOW_AC",
@@ -441,8 +441,8 @@
         "coverage": "Up to 550 sq. ft. (AHAM) • 250–380 sq. ft. (Oahu Single-Wall)",
         "coverage_aham": "Up to 550 sq. ft.",
         "coverage_oahu": "250–380 sq. ft.",
-        "sizing_notes": "Heavy-duty 115V built-in wall sleeve unit with variable-speed inverter, SmartHQ™ WiFi, and power failure recovery.",
-        "key_spec": "Variable Speed Inverter & SmartHQ™ WiFi: Shorter recovery and whisper-quiet cooling.",
+        "sizing_notes": "Heavy-duty 115V built-in 26\" through-the-wall unit with R32 variable-speed inverter (6,100–12,400 BTU/Hr), SmartHQ™ WiFi, Quiet Mode, and 2-Year Full / 5-Year Sealed System warranty.",
+        "key_spec": "Variable Speed Inverter & SmartHQ™ WiFi: R32 efficiency, 48dB Quiet Mode, fits 26\" RAB26A wall sleeves.",
         "noise_level": "48 / 56 dB",
         "subcategory": "ge",
         "id": 15,
@@ -451,18 +451,18 @@
         "discount_percent": 10,
         "image_url": "/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
         "voltage": "115V / 15 Amp",
-        "performance_specs": "Variable Speed Inverter • SmartHQ™ WiFi (CEER 10.5)",
+        "performance_specs": "Variable Speed Inverter • SmartHQ™ WiFi (CEER 10.5 / EER 10.6)",
         "ceer_rating": "10.5",
         "dehumidification": "3.4 Pts/Hr",
         "dimensions": "15.6\" H x 26.0\" W x 21.8\" D",
-        "weight": "81",
-        "shipping_weight": "90",
+        "weight": "92.2",
+        "shipping_weight": "94",
         "min_window_width": "26\"",
         "max_window_width": "26\"",
         "min_window_height": "15.8\"",
-        "chassis_type": "Slide In-Out (Wall Sleeve)",
+        "chassis_type": "Slide-In (26\" Wall Sleeve)",
         "dry_air_flow_cfm": "310 CFM",
-        "warranty": "1 YEAR LIMITED"
+        "warranty": "2-YR FULL / 5-YR SEALED"
     },
     {
         "category": "WINDOW_AC",
@@ -486,12 +486,12 @@
         "ceer_rating": "N/A",
         "dehumidification": "N/A",
         "dimensions": "15.8\" H x 26.0\" W x 16.9\" D",
-        "weight": "16",
+        "weight": "20.5",
         "shipping_weight": "22",
         "min_window_width": "26\"",
         "max_window_width": "26\"",
         "min_window_height": "15.8\"",
-        "chassis_type": "Structural Sleeve",
+        "chassis_type": "26\" Structural Wall Sleeve",
         "dry_air_flow_cfm": "N/A",
         "warranty": "1 YEAR LIMITED"
     }

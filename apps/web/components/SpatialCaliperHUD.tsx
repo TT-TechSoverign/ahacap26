@@ -117,10 +117,12 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                 <div className="flex items-center gap-2">
                     <span className="text-[10px] uppercase font-bold text-cyan-400 flex items-center gap-1">
                         <Ruler className="size-3.5" />
-                        <span>Architectural Sizing:</span>
+                        <span>{specs.isWallSleeve ? 'Wall Sleeve Sizing:' : 'Architectural Sizing:'}</span>
                     </span>
                     <span className="text-white font-bold text-[11px]">
-                        {formatDim(minH_num)} H Min × {formatDim(minW_num)}–{formatDim(maxW_num)} W
+                        {specs.isWallSleeve
+                            ? `${formatDim(minH_num)} H × ${formatDim(minW_num)} W (26" Sleeve)`
+                            : `${formatDim(minH_num)} H Min × ${formatDim(minW_num)}–${formatDim(maxW_num)} W`}
                     </span>
                 </div>
 
@@ -143,25 +145,25 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                         </button>
                     </div>
 
-                    {/* Check My Window Trigger */}
+                    {/* Check My Window / Sleeve Trigger */}
                     <button
                         type="button"
                         onClick={() => setShowCalculator(!showCalculator)}
                         className={`px-2.5 py-1 rounded-lg text-[9px] font-header font-black uppercase tracking-wider transition-all border ${showCalculator ? 'bg-emerald-500 text-black border-emerald-400' : 'bg-white/5 hover:bg-white/10 text-emerald-300 border-emerald-500/30'}`}
                     >
-                        Check My Window
+                        {specs.isWallSleeve ? 'Check My Sleeve' : 'Check My Window'}
                     </button>
                 </div>
             </div>
 
-            {/* Interactive "Check My Window" Instant Sizing Validator Drawer */}
+            {/* Interactive "Check My Window / Sleeve" Instant Sizing Validator Drawer */}
             {showCalculator && (
                 <div className="mb-3 p-3.5 rounded-2xl bg-gradient-to-br from-slate-900/95 to-slate-950/95 border border-cyan-500/40 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-300">
                     <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                         <div className="flex items-center gap-2">
                             <div className="size-2 rounded-full bg-cyan-400 animate-pulse" />
                             <span className="text-xs font-header font-black uppercase tracking-wider text-white">
-                                Instant Window Fit Assessment
+                                {specs.isWallSleeve ? 'Instant 26" Wall Sleeve Fit Assessment' : 'Instant Window Fit Assessment'}
                             </span>
                         </div>
                         <button
@@ -176,14 +178,14 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                         <div className="space-y-1">
                             <label className="text-[10px] font-mono text-cyan-300 uppercase flex items-center justify-between">
-                                <span>Your Window Opening Height ({unitSystem === 'in' ? 'inches' : 'cm'})</span>
+                                <span>{specs.isWallSleeve ? 'Wall Sleeve Height' : 'Your Window Opening Height'} ({unitSystem === 'in' ? 'inches' : 'cm'})</span>
                                 <span className="text-slate-400 text-[9px]">Min: {formatDim(minH_num)}</span>
                             </label>
                             <div className="relative">
                                 <input
                                     type="number"
                                     step="0.1"
-                                    placeholder={unitSystem === 'in' ? 'e.g. 17.5' : 'e.g. 44.5'}
+                                    placeholder={unitSystem === 'in' ? (specs.isWallSleeve ? 'e.g. 15.8' : 'e.g. 17.5') : 'e.g. 44.5'}
                                     value={userHeight}
                                     onChange={(e) => setUserHeight(e.target.value)}
                                     className="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-white font-mono text-xs focus:border-cyan-400 focus:outline-none transition-all placeholder:text-slate-600"
@@ -194,14 +196,14 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
 
                         <div className="space-y-1">
                             <label className="text-[10px] font-mono text-emerald-300 uppercase flex items-center justify-between">
-                                <span>Your Window Width ({unitSystem === 'in' ? 'inches' : 'cm'})</span>
-                                <span className="text-slate-400 text-[9px]">Span: {formatDim(minW_num)}–{formatDim(maxW_num)}</span>
+                                <span>{specs.isWallSleeve ? 'Wall Sleeve Width' : 'Your Window Width'} ({unitSystem === 'in' ? 'inches' : 'cm'})</span>
+                                <span className="text-slate-400 text-[9px]">{specs.isWallSleeve ? `Standard: ${formatDim(minW_num)}` : `Span: ${formatDim(minW_num)}–${formatDim(maxW_num)}`}</span>
                             </label>
                             <div className="relative">
                                 <input
                                     type="number"
                                     step="0.1"
-                                    placeholder={unitSystem === 'in' ? 'e.g. 32.0' : 'e.g. 81.3'}
+                                    placeholder={unitSystem === 'in' ? (specs.isWallSleeve ? 'e.g. 26.0' : 'e.g. 32.0') : 'e.g. 81.3'}
                                     value={userWidth}
                                     onChange={(e) => setUserWidth(e.target.value)}
                                     className="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-white font-mono text-xs focus:border-emerald-400 focus:outline-none transition-all placeholder:text-slate-600"
@@ -244,10 +246,10 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                     {/* 1-Click Dispatch Verification Action */}
                     <div className="flex items-center justify-between pt-1 text-[10px]">
                         <span className="text-slate-400 font-sans">
-                            Unsure about single-wall redwood or jalousie trim?
+                            {specs.isWallSleeve ? 'Unsure about your existing 26" wall sleeve?' : 'Unsure about single-wall redwood or jalousie trim?'}
                         </span>
                         <a
-                            href={`sms:8084881111?body=Aloha AHAC Dispatch, please verify my window fit for ${specs.modelName}. Window height: ${userHeight || '___'} in, width: ${userWidth || '___'} in.`}
+                            href={`sms:8084881111?body=Aloha AHAC Dispatch, please verify my ${specs.isWallSleeve ? 'wall sleeve' : 'window'} fit for ${specs.modelName}. Height: ${userHeight || '___'} in, width: ${userWidth || '___'} in.`}
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 rounded-lg font-mono font-bold transition-all"
                         >
                             <Phone className="size-3" />
@@ -264,14 +266,14 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                     className={`p-2.5 rounded-xl border transition-all cursor-pointer ${activeHotspot === 'sash' ? 'bg-cyan-950/60 border-cyan-400 ring-1 ring-cyan-400/50' : 'bg-white/[0.03] border-white/10 hover:border-cyan-500/40'}`}
                 >
                     <div className="text-[8px] font-mono text-cyan-400 uppercase tracking-widest flex items-center justify-between">
-                        <span>Min Sash Lift</span>
+                        <span>{specs.isWallSleeve ? 'Sleeve Height' : 'Min Sash Lift'}</span>
                         <span className="size-1.5 rounded-full bg-cyan-400" />
                     </div>
                     <div className="text-xs font-bold font-mono text-white mt-1">
                         {formatDim(minH_num)}
                     </div>
                     <div className="text-[8px] text-slate-400 font-sans mt-0.5">
-                        Clear vertical opening
+                        {specs.isWallSleeve ? '26" wall sleeve height' : 'Clear vertical opening'}
                     </div>
                 </div>
 
@@ -280,14 +282,14 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                     className={`p-2.5 rounded-xl border transition-all cursor-pointer ${activeHotspot === 'width' ? 'bg-emerald-950/60 border-emerald-400 ring-1 ring-emerald-400/50' : 'bg-white/[0.03] border-white/10 hover:border-emerald-500/40'}`}
                 >
                     <div className="text-[8px] font-mono text-emerald-400 uppercase tracking-widest flex items-center justify-between">
-                        <span>Width Opening</span>
+                        <span>{specs.isWallSleeve ? 'Sleeve Width' : 'Width Opening'}</span>
                         <span className="size-1.5 rounded-full bg-emerald-400" />
                     </div>
                     <div className="text-xs font-bold font-mono text-white mt-1">
-                        {formatDim(minW_num)}–{formatDim(maxW_num)}
+                        {specs.isWallSleeve ? formatDim(minW_num) : `${formatDim(minW_num)}–${formatDim(maxW_num)}`}
                     </div>
                     <div className="text-[8px] text-slate-400 font-sans mt-0.5">
-                        With side curtains
+                        {specs.isWallSleeve ? 'Fits GE RAB26A / RAB46B' : 'With side curtains'}
                     </div>
                 </div>
 
@@ -303,7 +305,7 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                         {specs.chassisType}
                     </div>
                     <div className="text-[8px] text-slate-400 font-sans mt-0.5">
-                        Weight: {specs.weight} lbs
+                        Weight: {String(specs.weight).toLowerCase().includes('lb') ? specs.weight : `${specs.weight} lbs`}
                     </div>
                 </div>
 
@@ -329,8 +331,8 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                 <div className="mt-2 p-3 rounded-xl bg-slate-900/95 border border-white/15 text-left text-xs space-y-1.5 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between">
                         <span className="font-header font-black uppercase text-cyan-300 text-[10px] tracking-wider">
-                            {activeHotspot === 'sash' && 'Vertical Sash Clearance Guide'}
-                            {activeHotspot === 'width' && 'Window Sill Span & Curtain Extension'}
+                            {activeHotspot === 'sash' && (specs.isWallSleeve ? '26" Wall Sleeve Vertical Height' : 'Vertical Sash Clearance Guide')}
+                            {activeHotspot === 'width' && (specs.isWallSleeve ? 'Standard 26" Through-the-Wall Sleeve Width' : 'Window Sill Span & Curtain Extension')}
                             {activeHotspot === 'chassis' && 'Chassis Architecture & Hawaii Single-Wall Balance'}
                             {activeHotspot === 'power' && 'Oahu Electrical & Circuit Grounding'}
                         </span>
@@ -343,9 +345,15 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                         </button>
                     </div>
                     <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
-                        {activeHotspot === 'sash' && `This ${specs.modelName} requires a minimum clear vertical opening of ${formatDim(minH_num)} from the sill to the raised bottom edge of your sash frame. Standard Hawaii double-hung sashes lift 18"–22".`}
-                        {activeHotspot === 'width' && `The unit includes heavy-duty side accordion curtain panels that expand from ${formatDim(minW_num)} up to ${formatDim(maxW_num)} to create an airtight seal in standard Oahu window casings.`}
-                        {activeHotspot === 'chassis' && `${specs.chassisType} design balances weight across standard Hawaii window stools. In uninsulated single-wall construction, the cabinet rests securely without custom carpentry.`}
+                        {activeHotspot === 'sash' && (specs.isWallSleeve
+                            ? `This ${specs.modelName} is engineered for standard 26" through-the-wall sleeves with a ${formatDim(minH_num)} vertical sleeve opening (GE RAB26A / RAB46B).`
+                            : `This ${specs.modelName} requires a minimum clear vertical opening of ${formatDim(minH_num)} from the sill to the raised bottom edge of your sash frame. Standard Hawaii double-hung sashes lift 18"–22".`)}
+                        {activeHotspot === 'width' && (specs.isWallSleeve
+                            ? `Slides directly into a 26.0" wide structural wall sleeve (GE RAB26A or RAB46B with RAG13A rear grille) and locks in place with the 2 included metal security brackets.`
+                            : `The unit includes heavy-duty side accordion curtain panels that expand from ${formatDim(minW_num)} up to ${formatDim(maxW_num)} to create an airtight seal in standard Oahu window casings.`)}
+                        {activeHotspot === 'chassis' && (specs.isWallSleeve
+                            ? `${specs.chassisType} solid-side cabinet slides directly into your existing or new 26" wall sleeve without side curtain fillers.`
+                            : `${specs.chassisType} design balances weight across standard Hawaii window stools. In uninsulated single-wall construction, the cabinet rests securely without custom carpentry.`)}
                         {activeHotspot === 'power' && `Operates on ${specs.voltage}. Calibrated against HECO residential ~44.2¢/kWh power rates. Qualifies for the $45 Hawaii Energy cash rebate.`}
                     </p>
                 </div>
