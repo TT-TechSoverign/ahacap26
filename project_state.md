@@ -348,10 +348,19 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
     - `apps/web/lib/product-specs.ts` & `product-images.ts`: Updated `GE_PERF_12K` specs, dual-climate microclimate sizing, and gallery angles set `ge-ajcq12axxwa`.
     - `apps/web/app/shop/page.tsx`, `apps/web/app/shop/layout.tsx`, and `apps/web/app/shop/[slug]/page.tsx`: Updated sizing matrix, schema ItemList, and PDF specsheet links.
     - `apps/web/middleware.ts`: Implemented 301 permanent redirect from `/shop/15-ge-12-000-btu-ajcq12awj` to `/shop/15-ge-12-000-btu-ajcq12axxwa`.
+  - **GE `AJCQ12AXXWA` Factory PDF Specification Alignment & Wall Sleeve Fit Copy (Oct 13, 2026)**:
+    - Audited all 20 English pages of `GE-AJCQ12AXXWA-spec-sheet.pdf` (`49-5001195 Rev. 0 06-26`) and GE Appliances factory specifications for `AJCQ12AXXWA`:
+      - Updated Net / Ship Weight from `81 lbs / 90` to **`92.2 lbs` Net / `94 lbs` Ship** (and normalized `shippingWeight` formatting so `lbs` is never omitted).
+      - Updated Manufacturer Warranty across GE Built-In Performance units (`IDs 13, 14, 15`) from `1 YEAR LIMITED` to **`2-YR FULL / 5-YR SEALED`** (Two Years Full Parts & Labor on Entire Appliance + Five Years Full Parts & Labor on Sealed Refrigerating System per PDF Page 18).
+      - Updated electrical draw for `AJCQ12AXXWA` to **`10.3 A` / `1130 W`** (`115V / 15 Amp`, `75"` LCDI `NEMA 5-15P` cord) and surfaced **R32** refrigerant and variable-speed capacity range (`6,100–12,400 BTU/Hr`).
+      - Updated `apps/web/app/shop/[slug]/page.tsx`, `apps/web/components/SpatialCaliperHUD.tsx`, and `apps/web/app/shop/page.tsx` so GE Built-In Wall Sleeve units (`subcategory === 'ge' || subcategory === 'casement'`) display **`Wall Sleeve Fit: 26" Wall Sleeve (15.8" H × 26.0" W — GE RAB26A / RAB46B with RAG13A rear grille)`** and the 2 included metal retention brackets instead of window-only sash/curtain copy.
+  - **Mobile Multi-Page Factory Specs PDF Viewer (`mobile-pages/<id>/page-*.webp`)**:
+    - Resolved mobile browser `<iframe src="*.pdf">` Page 1 lockup by pre-rendering all product spec sheets at 2x Retina WebP resolution (`apps/web/public/assets/specsheets/mobile-pages/{1..10,13,14,15}/page-*.webp`, including all 20 English pages of `GE-AJCQ12AXXWA-spec-sheet.pdf`).
+    - Preserved the native `<iframe src={specSheetUrl}>` viewer on desktop (`!isTouchDevice` and `hidden md:block`), while rendering a touch-friendly multi-page vertical scroll container on mobile/touch devices with section quick-jump pills (`p.1 Cover`, `p.5 R32 Safety`, `p.9 Controls`, `p.12 WiFi`, `p.15 Wall Sleeve Install`, `p.18 Warranty`), a `1x Fit / 1.5x Zoom` toggle, and a direct `Open PDF` header action.
   - **Verification Suite**:
-    - Live Visual Verification (`chrome-devtools-mcp`): Confirmed 100% visual parity across all 3 GE Built-In cards on `/shop` (Studio & 3D Fit modes) and `/shop/15-ge-12-000-btu-ajcq12axxwa`.
+    - Live Visual Verification (`chrome-devtools-mcp`): Confirmed 100% visual parity across all 3 GE Built-In cards on `/shop` (Studio & 3D Fit modes) and `/shop/15-ge-12-000-btu-ajcq12axxwa` (Desktop & Mobile viewports, including scrolling all 20 pages of the mobile PDF modal).
     - TypeScript: `npx tsc --noEmit` exited code 0 with 0 errors across entire Next.js storefront.
-    - Backend Pytest: 14/14 unit tests passed with Python 3.13.
+    - Backend Pytest: 14/14 unit tests passed.
     - Sovereign Fleet Live Verification (`verify-live`): Passed all 3 stages (`OVERALL: VERIFIED_CLEAN`).
 
 ---

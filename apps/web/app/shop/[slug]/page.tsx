@@ -849,10 +849,10 @@ export default function ProductDetailPage() {
                                         <span className="text-slate-200 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs.amps} / {specs.watts}</span>
                                     </div>
                                 )}
-                                {specs?.refrigerant && specs.refrigerant !== 'N/A' && (
+                                {specs?.amps && specs.amps !== 'N/A' && (
                                     <div className="flex flex-col gap-1 items-center md:items-start">
-                                        <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Refrigerant / Sound</span>
-                                        <span className="text-emerald-300 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs.refrigerant} • {specs.soundProfile || '48 / 56 dB'}</span>
+                                        <span className="text-slate-400 text-[9px] font-header font-black uppercase tracking-widest">Airflow / Sound</span>
+                                        <span className="text-emerald-300 font-header font-black uppercase tracking-wide text-[10px] md:text-xs">{specs.dryAirFlowCfm || '310 CFM'} • {specs.soundProfile || '48 / 56 dB'}</span>
                                     </div>
                                 )}
                             </div>
@@ -1026,7 +1026,7 @@ export default function ProductDetailPage() {
 
             {/* Spec Sheet Preview Modal (Desktop Iframe + Mobile Multi-Page Touch Scroll Viewer) */}
             {isSpecModalOpen && specSheetUrl && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-8 bg-black/85 backdrop-blur-sm">
+                <div className="fixed inset-0 z-[1000] flex items-center justify-center p-2 sm:p-4 md:p-8 bg-black/90 backdrop-blur-md">
                     <div className="bg-surface-dark border border-border-dark w-full h-[94dvh] md:w-[90vw] md:h-[90vh] rounded-2xl md:rounded-3xl shadow-2xl flex flex-col overflow-hidden relative ring-1 ring-white/20">
                         {/* Modal Header */}
                         <div className="flex items-center justify-between px-4 py-3 md:p-6 border-b border-border-dark bg-slate-950/90 shrink-0 gap-2">
@@ -1063,7 +1063,7 @@ export default function ProductDetailPage() {
 
                         {/* Mobile Quick-Jump & Zoom Toolbar (Visible on Mobile / Touch Devices) */}
                         <div className={cn("bg-slate-900/95 border-b border-white/10 px-3 py-2 flex items-center justify-between gap-2 shrink-0", !isTouchDevice && "md:hidden")}>
-                            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+                            <div className="flex items-center gap-1.5 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] py-0.5">
                                 {product.id === 15 ? (
                                     [
                                         { label: 'p.1 Cover', page: 1 },
@@ -1168,7 +1168,7 @@ export default function ProductDetailPage() {
 
             {/* 3D Caliper Lightbox Modal */}
             {isCaliperLightboxOpen && cutawayImageUrl && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md">
+                <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md">
                     <div className="bg-[#0a0e14] border border-cyan-500/30 w-full max-w-5xl rounded-3xl shadow-2xl flex flex-col overflow-hidden relative ring-1 ring-cyan-500/20">
                         <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/10 bg-surface-dark/90">
                             <div className="flex items-center gap-3">
