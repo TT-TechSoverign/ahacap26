@@ -165,15 +165,17 @@ export default function Homepage() {
                 <HomeServicesDivisions />
 
                 {/* 6. Island Verified Customer Reviews Pavilion */}
-                <div className="border-t border-slate-800/80 bg-[#070b12]/95 backdrop-blur-sm">
-                    <ReviewsPavilion 
-                        variant="featured" 
-                        limit={6}
-                        title="Island Verified Customer Stories"
-                        subtitle="Hear how Oahu homeowners beat the humidity with whisper-quiet ductless mini-splits and energy-efficient window ACs."
-                        showFlywheel={true}
-                    />
-                </div>
+                <section className="relative py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-[#070b12]/95 backdrop-blur-sm">
+                    <div className="max-w-7xl mx-auto">
+                        <ReviewsPavilion 
+                            variant="featured" 
+                            limit={6}
+                            title="Island Verified Customer Stories"
+                            subtitle="Hear how Oahu homeowners beat the humidity with whisper-quiet ductless mini-splits and energy-efficient window ACs."
+                            showFlywheel={true}
+                        />
+                    </div>
+                </section>
 
                 {/* 7. 22-City Oahu Regional Service Areas Hub */}
                 <HomeServiceAreasHub />

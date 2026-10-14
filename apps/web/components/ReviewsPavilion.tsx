@@ -96,8 +96,8 @@ function ReviewCard({
 
     return (
         <div className={cn(
-            "group relative rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden",
-            "bg-[#0B1120]/80 backdrop-blur-md border-slate-800/80 hover:border-cyan-500/40 hover:shadow-[0_10px_35px_rgba(0,174,239,0.12)]",
+            "h-full flex-1 group relative rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden",
+            "bg-[#0B1120]/85 backdrop-blur-md border-slate-800/80 hover:border-cyan-500/40 hover:shadow-[0_10px_35px_rgba(0,174,239,0.12)]",
             compact ? "p-5" : "p-6"
         )}>
             {/* Ambient inner glow */}
@@ -105,8 +105,8 @@ function ReviewCard({
 
             <div className="space-y-4 relative z-10">
                 {/* Header: Avatar, Author, Neighborhood & Platform */}
-                <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
+                <div className="flex items-start justify-between gap-2.5">
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
                         {/* Polynesian Gradient Avatar */}
                         <div className={cn(
                             "w-11 h-11 rounded-xl bg-gradient-to-br flex items-center justify-center text-white font-header font-black text-sm shadow-md border border-white/10 shrink-0",
@@ -115,28 +115,28 @@ function ReviewCard({
                             <span>{initials}</span>
                         </div>
 
-                        <div>
-                            <div className="flex items-center gap-2">
-                                <h4 className="font-header font-bold text-white text-sm tracking-wide">
+                        <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <h4 className="font-header font-bold text-white text-sm tracking-wide whitespace-nowrap">
                                     {review.author}
                                 </h4>
-                                <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full border border-emerald-500/20">
+                                <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full border border-emerald-500/20 shrink-0 whitespace-nowrap">
                                     <CheckCircle2 className="size-2.5" />
                                     Verified
                                 </span>
                             </div>
 
-                            <div className="flex items-center gap-1.5 text-xs text-slate-400 mt-0.5">
+                            <div className="flex items-center gap-1.5 text-xs text-slate-400 mt-1 whitespace-nowrap overflow-hidden">
                                 <MapPin className="size-3 text-cyan-400 shrink-0" />
-                                <span className="font-medium">{review.neighborhood || 'Oahu, HI'}</span>
-                                <span className="text-slate-600">•</span>
-                                <span className="text-[10px] text-slate-400">{review.platform}</span>
+                                <span className="font-medium text-slate-300 truncate">{review.neighborhood || 'Oahu, HI'}</span>
+                                <span className="text-slate-600 shrink-0">•</span>
+                                <span className="text-[11px] text-slate-400 shrink-0">{review.platform}</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Star Rating */}
-                    <div className="shrink-0">
+                    <div className="shrink-0 pt-0.5">
                         <StarRating rating={review.rating} size="sm" />
                     </div>
                 </div>
@@ -363,10 +363,41 @@ export function ReviewsPavilionContent({
     }
 
     // -------------------------------------------------------------------------
-    // VARIANT: FULL (Dedicated /reviews Page)
+    // VARIANT: FULL / FEATURED (Homepage & Dedicated /reviews Page)
     // -------------------------------------------------------------------------
     return (
         <div className="space-y-8">
+            {/* Optional Section Header (Homepage Featured Mode) */}
+            {(title || subtitle) && (
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div className="space-y-3">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded-full text-cyan-400 font-mono text-[11px] font-bold uppercase tracking-wider">
+                            <Star className="size-3 fill-cyan-400" />
+                            <span>4.9 / 5.0 Verified Rating • 142+ Oahu Homeowners</span>
+                        </div>
+                        {title && (
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-header font-black text-white uppercase tracking-tight">
+                                {title}
+                            </h2>
+                        )}
+                        {subtitle && (
+                            <p className="font-sans text-sm sm:text-base text-slate-300 max-w-2xl">
+                                {subtitle}
+                            </p>
+                        )}
+                    </div>
+
+                    <Link
+                        href="/reviews"
+                        prefetch={false}
+                        className="inline-flex items-center gap-2 self-start md:self-auto px-5 py-3 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-500/60 text-cyan-400 font-header font-bold text-xs uppercase tracking-wider rounded-xl transition-all group"
+                    >
+                        <span>View All 142+ Verified Reviews</span>
+                        <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                </div>
+            )}
+
             {/* Hero Trust & Scoreboard Banner */}
             <div className="relative rounded-3xl p-6 sm:p-8 md:p-10 border border-slate-800/90 bg-gradient-to-br from-[#0B1120] via-slate-950 to-[#0A0E17] shadow-2xl overflow-hidden">
                 {/* Background decorative ocean ambient */}
@@ -467,7 +498,7 @@ export function ReviewsPavilionContent({
                             { id: 'ALL', label: `All Reviews (${baseReviews.length})` },
                             { id: 'Window AC', label: 'Window AC' },
                             { id: 'Mini-Split', label: 'Mini Split' },
-                            { id: 'Cleaning', label: 'Deep Cleaning' },
+                            { id: 'Cleaning', label: 'AC Cleaning & Service' },
                             { id: 'Warehouse', label: 'Waipahu Warehouse' },
                         ].map(tab => (
                             <button
@@ -550,12 +581,12 @@ export function ReviewsPavilionContent({
                 /* FEATURED HOMEPAGE LAYOUT:
                    - Mobile: Smooth horizontal swipe track (touch-pan-x snap-x snap-mandatory) with peek (w-[85vw] max-w-[340px]).
                      Takes exactly ONE screen height (~400px), eradicating vertical scroll fatigue!
-                   - Desktop: Symmetrical 2x3 responsive grid (6 cards).
+                   - Desktop: Symmetrical 2x3 responsive grid (6 cards) filling full column width with equal card heights.
                 */
                 <div className="space-y-6">
-                    <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 overflow-x-auto md:overflow-visible pb-4 pt-1 snap-x snap-mandatory scrollbar-none touch-pan-x -mx-4 px-4 sm:mx-0 sm:px-0">
+                    <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-4 pt-1 snap-x snap-mandatory scrollbar-none touch-pan-x -mx-4 px-4 sm:mx-0 sm:px-0 items-stretch">
                         {displayReviews.map(review => (
-                            <div key={review.id} className="w-[85vw] max-w-[340px] md:w-auto shrink-0 snap-start flex flex-col">
+                            <div key={review.id} className="w-[85vw] max-w-[340px] md:w-full md:max-w-none shrink-0 snap-start flex flex-col h-full">
                                 <ReviewCard
                                     review={review}
                                     onOpenStory={setActiveStory}
@@ -599,7 +630,7 @@ export function ReviewsPavilionContent({
             ) : (
                 /* DEDICATED /reviews PAGE GRID WITH PROGRESSIVE REVEAL */
                 <div className="space-y-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                         {displayReviews.map(review => (
                             <ReviewCard
                                 key={review.id}
