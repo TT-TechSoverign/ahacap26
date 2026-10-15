@@ -26,7 +26,8 @@ import {
     Maximize2,
     Minimize2,
     Radio,
-    Palette
+    Palette,
+    FileText
 } from 'lucide-react';
 
 export interface LiveSwarmProps {
@@ -126,6 +127,8 @@ export default function LiveSwarmVisualizer({
                 return { color: 'text-teal-400', border: 'border-teal-500/40', bg: 'bg-teal-500/10', glow: 'shadow-teal-500/20', icon: Zap };
             case 'submaster_creative_studio':
                 return { color: 'text-fuchsia-400', border: 'border-fuchsia-500/40', bg: 'bg-fuchsia-500/10', glow: 'shadow-fuchsia-500/20', icon: Palette };
+            case 'submaster_executive_reporting':
+                return { color: 'text-indigo-400', border: 'border-indigo-500/40', bg: 'bg-indigo-500/10', glow: 'shadow-indigo-500/20', icon: FileText };
             default:
                 return { color: 'text-cyan-400', border: 'border-cyan-500/40', bg: 'bg-cyan-500/10', glow: 'shadow-cyan-500/20', icon: Cpu };
         }
@@ -175,12 +178,12 @@ export default function LiveSwarmVisualizer({
         }
     };
 
-    // Trigger Full 24-Agent Fleet Swarm
+    // Trigger Full 40-Agent Fleet Swarm
     const fireFleetSwarm = async () => {
         setFiringId('fleet');
         setFiringType('fleet');
         setRecentFiringResult(null);
-        onLog('⚡ [LIVE SWARM] Awakening COMPLETE 24-AGENT SOVEREIGN FLEET...');
+        onLog('⚡ [LIVE SWARM] Awakening COMPLETE 40-AGENT SOVEREIGN FLEET...');
         try {
             const start = performance.now();
             const res = await fetch('/api/v1/dev-os/agents/run-all', { method: 'POST' });
@@ -278,11 +281,11 @@ export default function LiveSwarmVisualizer({
                                     {brainData?.status || 'ARMED_AND_SYNAPSED'}
                                 </span>
                                 <span className="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-2.5 py-0.5 font-mono text-[10px] text-cyan-300">
-                                    {agents?.length || 24} NODES ACTIVE
+                                    {agents?.length || 40} NODES ACTIVE
                                 </span>
                             </div>
                             <p className="mt-0.5 font-mono text-xs text-slate-400">
-                                Master Brain Core &bull; 6 Sub-Master Hubs &bull; Live Telemetry Circuit
+                                Master Brain Core &bull; {submasters?.length || 10} Sub-Master Hubs &bull; Live Telemetry Circuit
                             </p>
                         </div>
                     </div>
@@ -314,7 +317,7 @@ export default function LiveSwarmVisualizer({
                             }`}
                         >
                             <Zap className={`size-4 ${firingType === 'fleet' ? 'animate-bounce' : 'text-amber-400'}`} />
-                            FIRE ALL 24 AGENTS ⚡
+                            FIRE ALL {agents?.length || 40} AGENTS ⚡
                         </button>
 
                         {/* Auto-Sync Toggle & Refresh */}
@@ -430,10 +433,10 @@ export default function LiveSwarmVisualizer({
                                 <span className="font-mono text-[10px] text-slate-400">CONTAINERS & SCHEMA</span>
                             </div>
                             <p className="mt-2 text-xs font-semibold text-white">
-                                Build QA & Schema Metadata
+                                Build QA, Spatial Cutaways & Schema
                             </p>
                             <div className="mt-3 space-y-1.5">
-                                {['agent_build_qa', 'agent_container_sentinel', 'agent_schema_metadata_engine'].map(agentName => {
+                                {['agent_build_qa', 'agent_container_sentinel', 'agent_schema_metadata_engine', 'agent_spatial_visualizer'].map(agentName => {
                                     const stageAgents = deployResult?.stages?.stage_2_build_containers?.agents;
                                     const agentData = stageAgents?.[agentName];
                                     return (
@@ -464,10 +467,10 @@ export default function LiveSwarmVisualizer({
                                 <span className="font-mono text-[10px] text-slate-400">HOST & NON-REGRESSION</span>
                             </div>
                             <p className="mt-2 text-xs font-semibold text-white">
-                                Zero-Downtime Host & Telemetry
+                                Zero-Downtime Host, Catalog & Telemetry
                             </p>
                             <div className="mt-3 space-y-1.5">
-                                {['agent_host_sentinel', 'agent_regression_sentinel', 'agent_funnel_telemetry', 'agent_crm_dispatch'].map(agentName => {
+                                {['agent_host_sentinel', 'agent_regression_sentinel', 'agent_funnel_telemetry', 'agent_crm_dispatch', 'agent_catalog_auditor'].map(agentName => {
                                     const stageAgents = deployResult?.stages?.stage_3_host_regression?.agents;
                                     const agentData = stageAgents?.[agentName];
                                     return (
@@ -489,7 +492,7 @@ export default function LiveSwarmVisualizer({
 
             {/* Main Interactive Swarm Grid & Satellite Hubs */}
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-                {/* Left 2 Cols: 6 Sub-Master Clusters & Click-to-Fire Nodes */}
+                {/* Left 2 Cols: 10 Sub-Master Clusters & Click-to-Fire Nodes */}
                 <div className="xl:col-span-2 space-y-6">
                     <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 shadow-xl backdrop-blur-md">
                         <div className="flex items-center justify-between pb-4 border-b border-slate-800">
@@ -497,7 +500,7 @@ export default function LiveSwarmVisualizer({
                                 <Layers className="size-5 text-cyan-400" />
                                 <div>
                                     <h3 className="font-mono text-sm font-black uppercase tracking-wider text-white">
-                                        6 Sub-Master Clusters &bull; 24 Satellite Agents
+                                        {submasters?.length || 10} Sub-Master Clusters &bull; {agents?.length || 40} Satellite Agents
                                     </h3>
                                     <p className="text-xs text-slate-400">
                                         Click any node to trigger on-demand execution with live latency telemetry

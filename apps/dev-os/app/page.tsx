@@ -927,7 +927,7 @@ export default function DevOsEagleEyePage() {
                                     className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 font-mono text-xs font-black text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50"
                                 >
                                     <Zap className="size-4" />
-                                    {fleetRunning ? 'Executing 24 Agents...' : 'Execute Fleet Swarm (24)'}
+                                    {fleetRunning ? `Executing ${agents.length || 40} Agents...` : `Execute Fleet Swarm (${agents.length || 40})`}
                                 </button>
                             </div>
                         </div>
@@ -937,28 +937,28 @@ export default function DevOsEagleEyePage() {
                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                 <span className="text-slate-400 text-[10px] uppercase">Active Synapses</span>
                                 <div className="mt-1 flex items-baseline gap-2">
-                                    <span className="text-xl font-bold text-cyan-400">{brainData?.total_synapses || 48}</span>
+                                    <span className="text-xl font-bold text-cyan-400">{brainData?.total_synapses || 80}</span>
                                     <span className="text-[10px] text-emerald-400">100% Armed</span>
                                 </div>
                             </div>
                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                 <span className="text-slate-400 text-[10px] uppercase">Category Sub-Masters</span>
                                 <div className="mt-1 flex items-baseline gap-2">
-                                    <span className="text-xl font-bold text-purple-400">{submasters.length || 6}</span>
+                                    <span className="text-xl font-bold text-purple-400">{submasters.length || 10}</span>
                                     <span className="text-[10px] text-slate-400">Supervisors</span>
                                 </div>
                             </div>
                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                 <span className="text-slate-400 text-[10px] uppercase">Specialized Agents</span>
                                 <div className="mt-1 flex items-baseline gap-2">
-                                    <span className="text-xl font-bold text-emerald-400">{agents.length || 24}</span>
+                                    <span className="text-xl font-bold text-emerald-400">{agents.length || 40}</span>
                                     <span className="text-[10px] text-slate-400">Active</span>
                                 </div>
                             </div>
                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                 <span className="text-slate-400 text-[10px] uppercase">Knowledge Nodes</span>
                                 <div className="mt-1 flex items-baseline gap-2">
-                                    <span className="text-xl font-bold text-amber-400">{brainData?.knowledge_nodes_count || 18}</span>
+                                    <span className="text-xl font-bold text-amber-400">{brainData?.knowledge_nodes_count || 42}</span>
                                     <span className="text-[10px] text-amber-300/80">Hawaii Grounded</span>
                                 </div>
                             </div>
@@ -996,7 +996,7 @@ export default function DevOsEagleEyePage() {
                                 <div className="flex items-center gap-2">
                                     <Clock className="size-4 text-amber-400" />
                                     <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
-                                        Project Chronicle & Historical Timeline ({timelineData.length || 10} Epochs • Inception to Current)
+                                        Project Chronicle & Historical Timeline ({timelineData.length || 16} Epochs • Inception to Current)
                                     </h4>
                                 </div>
                                 <span className="font-mono text-xs text-amber-400 hover:text-amber-300">
@@ -1103,7 +1103,7 @@ export default function DevOsEagleEyePage() {
                                             timeframe: "September 8-10, 2026",
                                             commit_start: "b968fa3b",
                                             commit_end: "CURRENT",
-                                            milestone: "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations, $175 mini-split diagnosis, $175 basic mini-split cleaning, $275 premium cleaning, and $275 window AC cleaning (only estimates are zero-cost). Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to irasmussenjobs@gmail.com. Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
+                                            milestone: "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations, custom itemized quotes by CT-36775 licensed technicians, and zero upfront booking payment barriers. Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to irasmussenjobs@gmail.com. Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
                                             impact: "Seamless lead conversion velocity, synchronized storefront & CRM pricing, and real-time Master Brain visual telemetry across sessions."
                                         }
                                     ]).map((phase: any, pIdx: number) => (
@@ -1152,7 +1152,7 @@ export default function DevOsEagleEyePage() {
                             <div className="flex items-center gap-2">
                                 <Network className="size-5 text-purple-400" />
                                 <h2 className="text-base font-bold text-white font-mono uppercase tracking-wider">
-                                    6 Category Sub-Master Supervisors
+                                    {submasters.length || 10} Category Sub-Master Supervisors
                                 </h2>
                             </div>
                             <span className="font-mono text-xs text-slate-400">
@@ -1209,13 +1209,13 @@ export default function DevOsEagleEyePage() {
                         </div>
                     </div>
 
-                    {/* 17 Specialized Agents Directory */}
+                    {/* 40 Specialized Agents Directory */}
                     <div>
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                             <div className="flex items-center gap-2">
                                 <Cpu className="size-5 text-cyan-400" />
                                 <h2 className="text-base font-bold text-white font-mono uppercase tracking-wider">
-                                    Specialized Agent Swarm Registry ({agents.length})
+                                    Specialized Agent Swarm Registry ({agents.length || 40})
                                 </h2>
                             </div>
 
@@ -1293,7 +1293,7 @@ export default function DevOsEagleEyePage() {
                         </div>
                     </div>
 
-                    {/* STANDARD OPERATING PROCEDURES (SOPS) VISUAL MATRIX (27 FLEET ENTITIES) */}
+                    {/* STANDARD OPERATING PROCEDURES (SOPS) VISUAL MATRIX (50 FLEET ENTITIES) */}
                     <div className="rounded-2xl border border-purple-500/30 bg-slate-900/90 p-6 shadow-2xl backdrop-blur-xl space-y-6">
                         {/* Header with Title, Badges & Expand All Button */}
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
@@ -1307,11 +1307,11 @@ export default function DevOsEagleEyePage() {
                                             Standard Operating Procedures (SOP) Visual Matrix
                                         </h2>
                                         <span className="rounded-full border border-purple-500/40 bg-purple-500/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-purple-300">
-                                            {Object.keys(sops).length} Total Protocols
+                                            {Object.keys(sops).length || 50} Total Protocols
                                         </span>
                                     </div>
                                     <p className="mt-1 font-mono text-xs text-slate-400">
-                                        Authoritative Step-by-Step Execution Protocols, Token-Efficiency Constraints &amp; Oahu Local Grounding across all 27 Fleet Entities
+                                        Authoritative Step-by-Step Execution Protocols, Token-Efficiency Constraints &amp; Oahu Local Grounding across all {Object.keys(sops).length || 50} Fleet Entities
                                     </p>
                                 </div>
                             </div>
@@ -1339,6 +1339,10 @@ export default function DevOsEagleEyePage() {
                                     { key: 'Growth', label: 'Growth', count: Object.values(sops).filter(s => s.domain === 'Growth').length },
                                     { key: 'Operations', label: 'Operations', count: Object.values(sops).filter(s => s.domain === 'Operations').length },
                                     { key: 'Deployment', label: 'Deployment', count: Object.values(sops).filter(s => s.domain === 'Deployment').length },
+                                    { key: 'SERP Acquisition', label: 'SERP Acq.', count: Object.values(sops).filter(s => s.domain === 'SERP Acquisition').length },
+                                    { key: 'Conversion', label: 'Conversion', count: Object.values(sops).filter(s => s.domain === 'Conversion').length },
+                                    { key: 'Creative Studio', label: 'Creative Studio', count: Object.values(sops).filter(s => s.domain === 'Creative Studio').length },
+                                    { key: 'Executive Reporting', label: 'Exec Reporting', count: Object.values(sops).filter(s => s.domain === 'Executive Reporting').length },
                                 ].map(tab => (
                                     <button
                                         key={tab.key}
@@ -1827,7 +1831,7 @@ export default function DevOsEagleEyePage() {
                                             <div className="flex items-center justify-between border-b border-slate-800 pb-2">
                                                 <div>
                                                     <span className="font-mono text-[11px] font-bold text-white">Hierarchical Agent Org Tree</span>
-                                                    <p className="text-[10px] text-slate-400">6 Category Sub-Masters • 21 Specialized Agents • 100% On-Demand</p>
+                                                    <p className="text-[10px] text-slate-400">{submasters.length || 10} Category Sub-Masters • {agents.length || 40} Specialized Agents • 100% On-Demand</p>
                                                 </div>
                                                 <div className="flex items-center gap-1.5">
                                                     <button
