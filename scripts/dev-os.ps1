@@ -172,6 +172,7 @@ switch ($Command.ToLower()) {
             "serp"       = "submaster_serp_acquisition"
             "conversion" = "submaster_conversion_velocity"
             "studio"     = "submaster_creative_studio"
+            "reporting"  = "submaster_executive_reporting"
         }
         $smId = if ($targetMap.ContainsKey($Target.ToLower())) { $targetMap[$Target.ToLower()] } else { $Target }
         Write-Host "[*] Dispatching Category Sub-Master: $smId on Server..." -ForegroundColor Yellow
@@ -377,12 +378,12 @@ switch ($Command.ToLower()) {
         try {
             $body = @{
                 session_id = "antigravity_session"
-                epoch = "EPOCH_11"
+                epoch = "EPOCH_19"
                 summary = $summary
                 author = "SOVEREIGN_MASTER_AGENT"
                 achievements = @(
-                    "Live Sovereign Neural Swarm visualizer active in Dev OS",
-                    "Multi-worker Redis synchronization live on prod-api",
+                    "40/40 Sovereign Agents healthy across 10 Sub-Masters",
+                    "Live homepage & warehouse stock synchronization and seed stock preservation",
                     "3-stage deployment verification pipeline VERIFIED_CLEAN"
                 )
             } | ConvertTo-Json
@@ -526,7 +527,7 @@ switch ($Command.ToLower()) {
                     Write-Host "[!] SOP not found for target: $Target" -ForegroundColor Red
                 }
             } else {
-                Write-Host "`nSUB-MASTER SOPS (6):" -ForegroundColor Magenta
+                Write-Host "`nSUB-MASTER SOPS (10):" -ForegroundColor Magenta
                 foreach ($prop in $resp.sops.PSObject.Properties) {
                     if ($prop.Name -like "submaster_*") {
                         $s = $prop.Value
@@ -534,7 +535,7 @@ switch ($Command.ToLower()) {
                         Write-Host "      Mandate: $($s.mandate)" -ForegroundColor DarkGray
                     }
                 }
-                Write-Host "`nSPECIALIZED AGENT SOPS (24):" -ForegroundColor Magenta
+                Write-Host "`nSPECIALIZED AGENT SOPS (40):" -ForegroundColor Magenta
                 foreach ($prop in $resp.sops.PSObject.Properties) {
                     if ($prop.Name -notlike "submaster_*") {
                         $s = $prop.Value
