@@ -156,21 +156,25 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
   - Hardened `seed_products.py` and `migrate_and_reseed_catalog` so catalog spec migrations never overwrite live PostgreSQL `stock` or pricing.
   - Fixed desktop `ReviewsPavilion` 3-column full-width card layout (`md:w-full md:max-w-none h-full`) and reclassified review service tags (zero `Deep Teardown Cleaning` references).
   - Replaced `pandas` in `reporting_engine.py` with native Python `csv` and added `python-docx>=1.1.2` to `requirements.txt` so all **40/40 Sovereign Agents** pass health checks (`All Healthy: True`) inside `prod-api`.
+  - Completed full 40-agent self-maintenance audit (`2a096590`): updated all 8 legacy agent runners (7 containers including CRM, 116 routes, live DB stock & 16/16 PDFs, zero fabricated package fees), upgraded Dev OS UI & SOP domain filters to 10 Sub-Masters / 40 Agents / 50 SOPs, and updated `agent_catalog.md`.
 
 ---
 
-## VI. CROSS-SESSION CONTINUOUS LEARNING PROTOCOL
+## VI. CROSS-SESSION CONTINUOUS LEARNING & HANDSHAKE PROTOCOL (`TRACKER`)
 
-To ensure every chat session compounds knowledge and keeps the Master Brain synchronized:
+To ensure every new chat session in `ahacws26` seamlessly continues where the previous session left off:
 
-1. **Before Modifying Code**:
+1. **Mandatory New-Chat Handshake (`TRACKER`)**:
+   - **CRITICAL RULE**: When the user opens a new chat session (especially when they say `"Convene all"` or ask to verify connection), you **MUST** include the codeword **`TRACKER`** prominently at the very top of your first response.
+   - Alongside **`TRACKER`**, confirm that you are connected to **Master Projects Brain v2.6.0 (`EPOCH 19`)**, that all **10 Category Sub-Masters & 40 Specialized Agents** are online (`All Healthy: True`), and summarize the active state from `project_state.md` so the user knows zero context was lost.
+2. **Before Modifying Code**:
    - Check `project_state.md` to confirm the latest progress and verified features.
    - Run `powershell -File .\scripts\dev-os.ps1 status` or `brain` to inspect live agent telemetries.
-2. **During Development**:
+3. **During Development**:
    - Maintain air-tight perimeter security (client-initiated pull/push; 0 inbound workstation reach).
    - Enforce pure Tailwind CSS and lightweight components in Dev OS (< 150 kB First Load JS).
    - Never add Dev OS or administrative bloat to the storefront (`apps/web`).
-3. **Before Concluding a Session**:
+4. **Before Concluding a Session**:
    - Run `powershell -File .\scripts\scan-secrets.ps1`.
    - Update `project_state.md` with accomplishments, verified tests, and next steps.
    - Execute `powershell -File .\scripts\dev-os.ps1 session-sync "<Brief Session Summary>"` to register the milestone into the permanent Master Brain cognitive stream.

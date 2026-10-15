@@ -384,13 +384,18 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
   - **40/40 Sovereign Fleet Health & Zero-Dependency Reporting Engine**:
     - Replaced `import pandas as pd` in `apps/api/services/reporting_engine.py` with a zero-dependency native Python `csv.DictReader` parser (`_read_csv_rows`) and added `python-docx>=1.1.2` to `apps/api/requirements.txt`, resolving `ModuleNotFoundError: No module named 'pandas'` on `agent_report_ingestor` and `agent_document_forge` inside `prod-api` (`python:3.12-alpine`) and restoring **40/40 (`All Healthy: True`)** fleet status.
     - Updated `MASTER_BRAIN_STATE` in `apps/api/routers/dev_os.py` through Epoch 19, updated `All 40 Specialized Agents` in `apps/dev-os/app/page.tsx`, and refreshed `Footer.tsx` / `content_seed.json` booking windows to `Oct 15-19` / `Oct 20-24, 2026`.
+  - **Full 40-Agent & 10-Sub-Master Self-Maintenance Audit (`2a096590`)**:
+    - Audited and updated all 8 legacy agent runner functions in `apps/api/routers/dev_os.py` (`run_agent_container_sentinel` now audits all 7 production containers including `ahac-crm-api` & `ahac-crm-frontend`; `run_agent_catalog_auditor` queries live PostgreSQL stock [`13` in stock, `3` out of stock `[2, 10, 14]`, `211` total units] and `16/16` factory PDFs; `run_agent_build_qa` & `run_agent_seo_metadata` report `116` compiled routes; purged legacy `$175/$275` flat-rate/teardown strings from `agent_funnel_telemetry`, `agent_cro_optimizer`, `agent_oahu_grounding`, `agent_market_research`, `agent_high_intent_planner`, and `agent_intake_triage`).
+    - Upgraded Dev OS Mission Control UI (`apps/dev-os/app/LiveSwarmVisualizer.tsx` and `apps/dev-os/app/page.tsx`) to dynamically display `10` Sub-Masters, `40` Agents, and `50` SOPs, added `submaster_executive_reporting` styling, wired `agent_spatial_visualizer` and `agent_catalog_auditor` into the 3-Stage Deployment Visualizer, and added all 10 SOP domain filter pills.
+    - Updated `agent_catalog.md` to the authoritative 10 Sub-Masters, 40 Specialized Agents, and 50 SOPs.
 
 ---
 
-## 4. Current Status: All Systems Operational
+## 4. Current Status & Cross-Session Handshake (`TRACKER`)
 
-- **Fleet Health**: All 40 specialized agents report `[ACTIVE]` (`All Healthy: True`) across 10 Sub-Masters.
+- **New-Chat Handshake Codeword**: **`TRACKER`** (Confirmed active in `GEMINI.md` and Master Projects Brain v2.6.0).
+- **Fleet Health**: All 40 specialized agents report `[ACTIVE]` (`All Healthy: True`) across 10 Sub-Masters (`50` SOPs).
 - **Deployment Swarm**: 3-stage verification pipeline returns `OVERALL: VERIFIED_CLEAN` with 0 specification drift across all 16 catalog models and 16/16 factory PDF spec sheets.
-- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), and `prod-api` (`:8001`) are rebuilt, restarted, and running live with zero-cache headers, live homepage/warehouse stock synchronization, permanent DB stock preservation, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the Island Reviews Pavilion, the Dual-Action conversion bridge, full-greenlight GTM/Consent telemetry, safe-storage incognito hardening, the specialized Window AC & Split AC cooling divisions, and the Executive Monthly Reporting Hub (`/dev-os` Key R).
-- **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens.
-- **Storefront Performance**: Next.js production build verified with 116/116 static routes rendered, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, GSC canonical armor deployed, HTTP 410 Gone for dead WordPress debris, robots crawl shield, and Batches 1, 2 & 3 (60 new standalone routes) indexed in dynamic and HTML sitemaps.
+- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), `prod-api` (`:8001`), `prod-db` (`:5433`), `prod-redis` (`:6380`), `ahac-crm-api`, and `ahac-crm-frontend` (`:8080`) are rebuilt, restarted, and running live with zero-cache headers, live homepage/warehouse stock synchronization, permanent DB stock preservation, CRM multi-stage invoice balance guardrails, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the Island Reviews Pavilion, and the Executive Monthly Reporting Hub (`/dev-os` Key R).
+- **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens across 2,104 files.
+- **Storefront Performance**: Next.js production build verified with 116/116 static and dynamic routes rendered, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, and GSC canonical armor deployed.
