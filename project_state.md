@@ -373,12 +373,24 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
     - Backend Pytest: 14/14 unit tests passed.
     - Sovereign Fleet Live Verification (`verify-live`): Passed all 3 stages (`OVERALL: VERIFIED_CLEAN`).
 
+- **Epoch 19 (October 14, 2026) Live Homepage Stock Synchronization, Seed Stock Preservation, Reviews Grid Alignment & 40/40 Fleet Health**:
+  - **Live Homepage & Warehouse Stock Synchronization (`e94be3d3`)**:
+    - Connected `<HomeFeaturedInventory />` (`apps/web/components/HomeFeaturedInventory.tsx`) and `<WarehouseInventoryGrid />` (`apps/web/app/shop/oahu-window-ac-warehouse/inventory-grid.tsx`) to live `/api/v1/products` (`cache: 'no-store'`) on mount so units set to `stock = 0` in `/admin` (`ID 2 LW8022IVSM`, `ID 10 LW2423HRSM`, `ID 14 AJCQ10AWJ`) immediately display red `Out of Stock` badges and disable `Add Unit` / `Add to Cart` buttons across the homepage and warehouse grid.
+    - Hardened `apps/api/seed_products.py` and `migrate_and_reseed_catalog` in `apps/api/routers/dev_os.py` so catalog specification migrations only update specs/metadata and never overwrite live PostgreSQL `stock` or pricing.
+  - **Homepage Reviews Pavilion Layout & Service Tag Alignment (`ad185ced`)**:
+    - Wrapped `<ReviewsPavilion variant="featured" />` on `/` (`apps/web/app/page.tsx`) in a dedicated `max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8` container.
+    - Updated `apps/web/components/ReviewsPavilion.tsx` with `md:w-full md:max-w-none h-full` + `items-stretch` so desktop cards expand to 100% of their 3-column grid width with uniform height and clean non-wrapping header alignment.
+    - Reclassified `Ron T.` and `Mermaid S.` from `Deep Teardown Cleaning` to `Window AC Installation` and replaced remaining `Deep Teardown Cleaning` service tags with `AC Cleaning & Service` across `apps/web/lib/content/reviews_db.json` and `apps/api/content/reviews_db.json`.
+  - **40/40 Sovereign Fleet Health & Zero-Dependency Reporting Engine**:
+    - Replaced `import pandas as pd` in `apps/api/services/reporting_engine.py` with a zero-dependency native Python `csv.DictReader` parser (`_read_csv_rows`) and added `python-docx>=1.1.2` to `apps/api/requirements.txt`, resolving `ModuleNotFoundError: No module named 'pandas'` on `agent_report_ingestor` and `agent_document_forge` inside `prod-api` (`python:3.12-alpine`) and restoring **40/40 (`All Healthy: True`)** fleet status.
+    - Updated `MASTER_BRAIN_STATE` in `apps/api/routers/dev_os.py` through Epoch 19, updated `All 40 Specialized Agents` in `apps/dev-os/app/page.tsx`, and refreshed `Footer.tsx` / `content_seed.json` booking windows to `Oct 15-19` / `Oct 20-24, 2026`.
+
 ---
 
 ## 4. Current Status: All Systems Operational
 
-- **Fleet Health**: All 40 specialized agents report `[ACTIVE]` across 10 Sub-Masters.
+- **Fleet Health**: All 40 specialized agents report `[ACTIVE]` (`All Healthy: True`) across 10 Sub-Masters.
 - **Deployment Swarm**: 3-stage verification pipeline returns `OVERALL: VERIFIED_CLEAN` with 0 specification drift across all 16 catalog models and 16/16 factory PDF spec sheets.
-- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), and `prod-api` (`:8001`) are rebuilt, restarted, and running live with zero-cache headers, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the Island Reviews Pavilion, the Dual-Action conversion bridge, full-greenlight GTM/Consent telemetry, safe-storage incognito hardening, the specialized Window AC & Split AC cooling divisions, and the Executive Monthly Reporting Hub (`/dev-os` Key R).
+- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), and `prod-api` (`:8001`) are rebuilt, restarted, and running live with zero-cache headers, live homepage/warehouse stock synchronization, permanent DB stock preservation, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the Island Reviews Pavilion, the Dual-Action conversion bridge, full-greenlight GTM/Consent telemetry, safe-storage incognito hardening, the specialized Window AC & Split AC cooling divisions, and the Executive Monthly Reporting Hub (`/dev-os` Key R).
 - **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens.
 - **Storefront Performance**: Next.js production build verified with 116/116 static routes rendered, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, GSC canonical armor deployed, HTTP 410 Gone for dead WordPress debris, robots crawl shield, and Batches 1, 2 & 3 (60 new standalone routes) indexed in dynamic and HTML sitemaps.

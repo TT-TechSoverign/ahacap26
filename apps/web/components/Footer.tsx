@@ -15,11 +15,11 @@ export default function Footer() {
     const defaults = {
         mini_split_label: "MINI SPLIT AC",
         window_ac_label: "WINDOW AC",
-        mini_split_estimate_date: "Next Available Estimate: Oct 1-5",
-        mini_split_install_date: "Next Available Install: Oct 6-10",
-        window_ac_estimate_date: "Next Available Estimate: Oct 1-3",
-        window_ac_install_date: "Next Available Install: Oct 3-7",
-        general_availability_range: "Scheduling for week of October 1-7, 2026",
+        mini_split_estimate_date: "Next Available Estimate: Oct 15-19",
+        mini_split_install_date: "Next Available Install: Oct 20-24",
+        window_ac_estimate_date: "Next Available Estimate: Oct 15-17",
+        window_ac_install_date: "Next Available Install: Oct 17-21",
+        general_availability_range: "Scheduling for week of October 15-21, 2026",
     };
 
     const schedule = {

@@ -71,7 +71,7 @@ class BrainThoughtRequest(BaseModel):
 
 class SessionSyncRequest(BaseModel):
     session_id: Optional[str] = "chat_session"
-    epoch: Optional[str] = "EPOCH_11"
+    epoch: Optional[str] = "EPOCH_19"
     summary: str
     achievements: Optional[List[str]] = None
     learnings: Optional[List[str]] = None
@@ -214,9 +214,54 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "title": "CRM Overhaul, Zero-Cost Estimates Calibration, Schema Validation & Navigation Symmetry",
             "timeframe": "September 8-10, 2026",
             "commit_start": "b968fa3b",
-            "commit_end": "CURRENT",
-            "milestone": "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations, $175 mini-split diagnosis, $175 basic mini-split cleaning, $275 premium cleaning, and $275 window AC cleaning (only estimates are zero-cost). Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to irasmussenjobs@gmail.com. Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
+            "commit_end": "4f8e1a20",
+            "milestone": "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations. Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to irasmussenjobs@gmail.com. Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
             "impact": "Seamless lead conversion velocity, synchronized storefront & CRM pricing, and real-time Master Brain visual telemetry across sessions."
+        },
+        {
+            "phase_id": "EPOCH_12_SPATIAL_CALIPER_CATALOG_SEP2026",
+            "title": "3D Spatial Caliper, Dual-Sizing Architecture & 16-Model Catalog Guard",
+            "timeframe": "September 21-22, 2026",
+            "commit_start": "5e2a91c0",
+            "commit_end": "9c3d82b1",
+            "milestone": "Resolved catalog specification drift across all 16 catalog models and implemented Dual-Sizing Architecture pairing AHAM Factory Certified rating with Island Microclimate Calibration for Hawaii single-wall redwood & jalousie louvers. Integrated Blender 4.1 headless raytracing with PIL engineering caliper overlays.",
+            "impact": "100% catalog specification accuracy and 3D isometric window cutaway visualization."
+        },
+        {
+            "phase_id": "EPOCH_13_REVIEWS_COMFYUI_SEP2026",
+            "title": "Island Reviews Pavilion, ComfyUI Studio Bridge & 37-Agent Fleet Governance",
+            "timeframe": "September 22, 2026",
+            "commit_start": "9c3d82b1",
+            "commit_end": "3a7f61e2",
+            "milestone": "Enriched all 142 authentic 5-star customer reviews across reviews_db.json with Oahu neighborhood tags and technician credits. Architected ReviewsPavilion across /reviews, /shop/[slug], /shop, /, and 22 city pages. Built ComfyUI RTX 4090 Studio Bridge and chartered Sub-Master 9.",
+            "impact": "4.9-star 142-review social proof across every funnel and automated local GPU creative pipeline."
+        },
+        {
+            "phase_id": "EPOCH_14_EXECUTIVE_REPORTING_SEP2026",
+            "title": "Executive Monthly Analytics & SEO Reports Division (10 Sub-Masters, 40 Agents)",
+            "timeframe": "September 23, 2026",
+            "commit_start": "3a7f61e2",
+            "commit_end": "8d1c44b9",
+            "milestone": "Chartered Sub-Master 10 (submaster_executive_reporting) and 3 specialized satellite agents, expanding the Sovereign Fleet to 10 Sub-Masters and 40 Agents. Built autonomous ReportingEngine compiling .docx, .html, and .md executive SEO reports and MonthlyReportsHub in Dev OS.",
+            "impact": "Complete 40-agent Sovereign Fleet and 1-click executive monthly reporting."
+        },
+        {
+            "phase_id": "EPOCH_15_TO_18_BRAND_AND_FUNNEL_OCT2026",
+            "title": "Brand Reframing, Subcontractor Grounding, Comparison Visual Polish & CRM Multi-Stage Invoice Guardrails",
+            "timeframe": "September 27 - October 14, 2026",
+            "commit_start": "8d1c44b9",
+            "commit_end": "7bc460fb",
+            "milestone": "Purged competitor bashing and fabricated flat-rate packages, grounded electrical scope under License CT-36775 to licensed electrical subcontractors, upgraded homepage comparison visual checkmarks and mobile responsive layouts, and hardened CRM multi-stage invoice payment links with Deposit Paid vs Balance Due accounting and fresh Stripe session creation.",
+            "impact": "Bulletproof brand compliance, clear customer invoice accounting, and responsive visual polish."
+        },
+        {
+            "phase_id": "EPOCH_19_LIVE_STOCK_REVIEWS_FLEET_ALIGNMENT_OCT2026",
+            "title": "Live Homepage Stock Synchronization, Seed Stock Preservation, Reviews Grid Alignment & 40/40 Fleet Health",
+            "timeframe": "October 14, 2026",
+            "commit_start": "e94be3d3",
+            "commit_end": "CURRENT",
+            "milestone": "Connected HomeFeaturedInventory and WarehouseInventoryGrid to live /api/v1/products (cache: no-store) so admin stock=0 updates immediately display Out of Stock badges and disable Add to Cart buttons on the homepage and warehouse grid. Hardened seed_products.py and migrate_and_reseed_catalog so catalog spec migrations never overwrite live PostgreSQL stock or pricing. Fixed desktop ReviewsPavilion 3-column full-width card layout and reclassified review service tags (zero Deep Teardown Cleaning references). Replaced pandas in reporting_engine.py with native Python csv and added python-docx to requirements.txt so all 40/40 Sovereign Agents pass health checks inside prod-api.",
+            "impact": "Zero out-of-stock customer friction on homepage, permanent database stock preservation across deploys, balanced homepage review cards, and 40/40 healthy Sovereign Agent Fleet."
         }
     ],
     "knowledge_base": {
@@ -233,21 +278,18 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
         "oahu_hvac_grounding": {
             "electric_utility": "Hawaiian Electric (HECO) ~44.2¢/kWh residential baseline (Highest in US)",
             "cooling_load_zones": "Leeward surge (Kapolei/Ewa 91°F) vs Windward humidity (Kailua/Kaneohe 74% RH)",
-            "central_depot": "Waipahu Industrial Warehouse (94-1388 Moape St, Waipahu, HI 96797)",
+            "central_depot": "Waipahu Industrial Warehouse (94-150 Leoleo St #203, Waipahu, HI 96797)",
             "freight_advantage": "Same-day warehouse pickup eliminates weeks of mainland shipping delays",
             "license_authority": "Hawaii State Contractor License CT-36775",
             "salt_air_defense": "Marine salt aerosol causes condenser coil galvanic corrosion within 18-36 months without annual anti-corrosion flush",
             "mold_biofilm_pathology": "74% average relative humidity fosters Cladosporium & Aspergillus biofilm in indoor mini-split blower wheels within 6-12 months"
         },
         "service_pricing_matrix": {
-            "installation_replacement_estimates": "$0 (Free in-person or phone estimate for new or replacement mini-split and window AC installations)",
-            "mini_split_diagnosis": "$175 (Comprehensive on-site diagnostic inspection, electrical & refrigerant check)",
-            "mini_split_cleaning_basic": "$175 (~1.0 hr deep chemical coil spray and blower wipe)",
-            "mini_split_cleaning_premium": "$275 (~1.5 hrs full chemical flush & pressure wash with drain pan biofilm extraction)",
-            "window_ac_cleaning": "$275 (Waipahu warehouse drop-off bench immersion tank cleaning, sanitization & testing)",
-            "zero_cost_policy": "The only $0 service is for new or replacement estimates; all diagnostic visits are $175, cleaning starts at $175/$275.",
+            "installation_replacement_estimates": "$0 Free In-Home Estimate for new or replacement mini-split and window AC installations",
+            "service_quotes": "Custom transparent quotes by licensed technicians (CT-36775); zero upfront booking payment barriers and no fabricated flat-rate packages",
+            "window_ac_policy": "Waipahu warehouse-direct inventory sales ($504 to $1,025), custom jalousie & standard window installation, and clean-vs-replace assessments (no off-site shop teardowns)",
             "island_flat_delivery": "$50 flat Oahu-wide delivery fee for window and mini-split units",
-            "warehouse_pickup": "$0 (Free customer pickup at 94-1388 Moape St, Waipahu)"
+            "warehouse_pickup": "$0 (Free customer pickup at 94-150 Leoleo St #203, Waipahu, HI 96797)"
         },
         "email_routing_architecture": {
             "outgoing_sender": "office@affordablehome-ac.com (Primary outbound transactional & dispatch sender)",

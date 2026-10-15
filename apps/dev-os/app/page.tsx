@@ -513,7 +513,7 @@ export default function DevOsEagleEyePage() {
 
     const runFullFleetAudit = async () => {
         setFleetRunning(true);
-        appendLog('⚡ Master initiating FULL-FLEET AUDIT (All 17 Specialized Agents sequentially)...');
+        appendLog('⚡ Master initiating FULL-FLEET AUDIT (All 40 Specialized Agents sequentially)...');
         try {
             const res = await fetch('/api/v1/dev-os/agents/run-all', { method: 'POST' });
             if (res.ok) {

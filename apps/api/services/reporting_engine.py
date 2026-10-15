@@ -7,10 +7,10 @@ generating executive-ready reports in 3rd-grade reading level across Markdown, H
 """
 
 import os
+import csv
 import glob
 import zipfile
 import tempfile
-import pandas as pd
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 
@@ -24,6 +24,46 @@ try:
     HAS_DOCX = True
 except ImportError:
     HAS_DOCX = False
+
+
+def _read_csv_rows(filepath: str, skiprows: int = 0, max_rows: Optional[int] = None) -> List[Dict[str, str]]:
+    """Lightweight, zero-dependency CSV reader supporting header trimming and row skipping."""
+    rows: List[Dict[str, str]] = []
+    with open(filepath, "r", encoding="utf-8-sig", errors="replace", newline="") as f:
+        for _ in range(skiprows):
+            if f.readline() == "":
+                return rows
+        reader = csv.DictReader(f)
+        if not reader.fieldnames:
+            return rows
+        clean_fields = [str(col).strip() if col is not None else "" for col in reader.fieldnames]
+        for idx, raw_row in enumerate(reader):
+            if max_rows is not None and idx >= max_rows:
+                break
+            cleaned = {}
+            for raw_k, v in raw_row.items():
+                if raw_k is not None:
+                    cleaned[str(raw_k).strip()] = (v or "").strip()
+            rows.append(cleaned)
+    return rows
+
+
+def _safe_int(val: Any, default: int = 0) -> int:
+    try:
+        if val is None or val == "":
+            return default
+        return int(float(str(val).replace(",", "").strip()))
+    except Exception:
+        return default
+
+
+def _safe_float(val: Any, default: float = 0.0) -> float:
+    try:
+        if val is None or val == "":
+            return default
+        return float(str(val).replace(",", "").replace("%", "").strip())
+    except Exception:
+        return default
 
 
 class ReportingEngine:
@@ -70,18 +110,19 @@ class ReportingEngine:
 
         # 1. Look for Chart.csv with Clicks & Impressions (Search Console performance)
         chart_files = glob.glob(os.path.join(directory, "**", "Chart.csv"), recursive=True)
-        # Prioritize files in 'Performance-on-Search' folder if present
         chart_files.sort(key=lambda x: 0 if 'performance-on-search' in x.lower() else 1)
         for cf in chart_files:
             try:
-                df = pd.read_csv(cf)
-                if 'Clicks' in df.columns and 'Impressions' in df.columns:
-                    metrics["total_clicks"] = int(df['Clicks'].sum())
-                    metrics["total_impressions"] = int(df['Impressions'].sum())
-                    if 'Position' in df.columns:
-                        metrics["avg_position"] = round(float(df['Position'].mean()), 1)
+                rows = _read_csv_rows(cf)
+                if rows and 'Clicks' in rows[0] and 'Impressions' in rows[0]:
+                    metrics["total_clicks"] = sum(_safe_int(r.get('Clicks')) for r in rows)
+                    metrics["total_impressions"] = sum(_safe_int(r.get('Impressions')) for r in rows)
+                    if 'Position' in rows[0]:
+                        positions = [_safe_float(r.get('Position')) for r in rows if r.get('Position')]
+                        if positions:
+                            metrics["avg_position"] = round(sum(positions) / len(positions), 1)
                     break
-            except Exception as e:
+            except Exception:
                 continue
 
         # 2. Look for Devices.csv
@@ -89,11 +130,11 @@ class ReportingEngine:
         device_files.sort(key=lambda x: 0 if 'performance-on-search' in x.lower() else 1)
         for df_path in device_files:
             try:
-                df = pd.read_csv(df_path)
-                if 'Device' in df.columns and 'Clicks' in df.columns:
-                    for _, row in df.iterrows():
+                rows = _read_csv_rows(df_path)
+                if rows and 'Device' in rows[0] and 'Clicks' in rows[0]:
+                    for row in rows:
                         dev_name = str(row.get('Device', '')).lower()
-                        clicks = int(row.get('Clicks', 0))
+                        clicks = _safe_int(row.get('Clicks', 0))
                         if 'mobile' in dev_name:
                             metrics["devices"]["mobile"] = clicks
                         elif 'desktop' in dev_name:
@@ -104,7 +145,7 @@ class ReportingEngine:
                     if total_dev > 0:
                         metrics["devices"]["mobile_pct"] = round((metrics["devices"]["mobile"] / total_dev) * 100, 1)
                     break
-            except Exception as e:
+            except Exception:
                 continue
 
         # 3. Look for Queries.csv
@@ -112,24 +153,25 @@ class ReportingEngine:
         query_files.sort(key=lambda x: 0 if 'performance-on-search' in x.lower() else 1)
         for qf in query_files:
             try:
-                df = pd.read_csv(qf)
-                col_map = {c: c.strip() for c in df.columns}
-                df.rename(columns=col_map, inplace=True)
-                top_q_cols = [c for c in df.columns if 'query' in c.lower() or 'queries' in c.lower()]
-                if top_q_cols and 'Clicks' in df.columns:
+                rows = _read_csv_rows(qf)
+                if not rows:
+                    continue
+                cols = list(rows[0].keys())
+                top_q_cols = [c for c in cols if 'query' in c.lower() or 'queries' in c.lower()]
+                if top_q_cols and 'Clicks' in cols:
                     top_q_col = top_q_cols[0]
                     queries_list = []
-                    for _, row in df.head(10).iterrows():
+                    for row in rows[:10]:
                         queries_list.append({
-                            "query": str(row[top_q_col]),
-                            "clicks": int(row.get('Clicks', 0)),
-                            "impressions": int(row.get('Impressions', 0)),
+                            "query": str(row.get(top_q_col, "")),
+                            "clicks": _safe_int(row.get('Clicks', 0)),
+                            "impressions": _safe_int(row.get('Impressions', 0)),
                             "ctr": str(row.get('CTR', '0%')),
-                            "position": round(float(row.get('Position', 0.0)), 2)
+                            "position": round(_safe_float(row.get('Position', 0.0)), 2)
                         })
                     metrics["top_queries"] = queries_list
                     break
-            except Exception as e:
+            except Exception:
                 continue
 
         # 4. Look for Pages.csv
@@ -137,19 +179,20 @@ class ReportingEngine:
         page_files.sort(key=lambda x: 0 if 'performance-on-search' in x.lower() else 1)
         for pf in page_files:
             try:
-                df = pd.read_csv(pf)
-                col_map = {c: c.strip() for c in df.columns}
-                df.rename(columns=col_map, inplace=True)
-                top_p_cols = [c for c in df.columns if 'page' in c.lower()]
-                if top_p_cols and 'Clicks' in df.columns:
+                rows = _read_csv_rows(pf)
+                if not rows:
+                    continue
+                cols = list(rows[0].keys())
+                top_p_cols = [c for c in cols if 'page' in c.lower()]
+                if top_p_cols and 'Clicks' in cols:
                     top_p_col = top_p_cols[0]
                     pages_list = []
-                    for _, row in df.iterrows():
-                        page_url = str(row[top_p_col])
-                        clicks = int(row.get('Clicks', 0))
-                        impressions = int(row.get('Impressions', 0))
+                    for row in rows:
+                        page_url = str(row.get(top_p_col, ""))
+                        clicks = _safe_int(row.get('Clicks', 0))
+                        impressions = _safe_int(row.get('Impressions', 0))
                         ctr = str(row.get('CTR', '0%'))
-                        pos = round(float(row.get('Position', 0.0)), 2)
+                        pos = round(_safe_float(row.get('Position', 0.0)), 2)
 
                         page_item = {
                             "url": page_url,
@@ -173,35 +216,33 @@ class ReportingEngine:
 
                     metrics["top_pages"] = pages_list[:12]
                     break
-            except Exception as e:
+            except Exception:
                 continue
 
         # 5. Look for GA4 Reports_snapshot*.csv
         ga4_snap = glob.glob(os.path.join(directory, "**", "Reports_snapshot*.csv"), recursive=True)
         if ga4_snap:
             try:
-                df_snap = pd.read_csv(ga4_snap[0], skiprows=8, nrows=1)
-                col_map = {c: c.strip() for c in df_snap.columns}
-                df_snap.rename(columns=col_map, inplace=True)
-                for col in ['Active users', 'Users', 'Total users']:
-                    if col in df_snap.columns:
-                        metrics["total_users"] = int(df_snap[col].iloc[0])
-                        break
-                if 'New users' in df_snap.columns:
-                    metrics["new_users"] = int(df_snap['New users'].iloc[0])
-            except Exception as e:
+                rows = _read_csv_rows(ga4_snap[0], skiprows=8, max_rows=1)
+                if rows:
+                    row0 = rows[0]
+                    for col in ['Active users', 'Users', 'Total users']:
+                        if col in row0:
+                            metrics["total_users"] = _safe_int(row0[col])
+                            break
+                    if 'New users' in row0:
+                        metrics["new_users"] = _safe_int(row0['New users'])
+            except Exception:
                 pass
 
         # 6. Look for GA4 Pages_and_screens*.csv
         ga4_pages = glob.glob(os.path.join(directory, "**", "Pages_and_screens*.csv"), recursive=True)
         if ga4_pages:
             try:
-                df_gp = pd.read_csv(ga4_pages[0], skiprows=9)
-                col_map = {c: c.strip() for c in df_gp.columns}
-                df_gp.rename(columns=col_map, inplace=True)
-                if 'Views' in df_gp.columns:
-                    metrics["total_views"] = int(df_gp['Views'].sum())
-            except Exception as e:
+                rows = _read_csv_rows(ga4_pages[0], skiprows=9)
+                if rows and 'Views' in rows[0]:
+                    metrics["total_views"] = sum(_safe_int(r.get('Views')) for r in rows)
+            except Exception:
                 pass
 
         # If total_clicks was computed but devices had 0, estimate mobile

@@ -2,7 +2,7 @@
 
 > **Affordable Home A/C (AHAC) — Oahu, Hawaii**  
 > **Master Projects Brain Version**: `2.6.0-SOVEREIGN`  
-> **Active Operational Epoch**: `EPOCH 11 (September 8–10, 2026)`  
+> **Active Operational Epoch**: `EPOCH 19 (October 14, 2026)`  
 > **Primary Host Node**: Hostinger VPS (`31.220.53.132`) • Dedicated Dev OS (`prod-dev-os:3005`) • FastAPI (`prod-api:8001`)
 
 ---
@@ -44,9 +44,9 @@ Every conversation session inherits the knowledge, directives, historical timeli
 
 ---
 
-## IV. SOVEREIGN AGENT REGISTRY (9 SUB-MASTERS • 37 AGENTS)
+## IV. SOVEREIGN AGENT REGISTRY (10 SUB-MASTERS • 40 AGENTS)
 
-The platform is monitored and driven by 9 Category Sub-Masters and 37 specialized satellite agents:
+The platform is monitored and driven by 10 Category Sub-Masters and 40 specialized satellite agents:
 
 1. **Infrastructure & Storage Sub-Master** (`submaster_infrastructure`):
    - `agent_host_sentinel` (VPS disk, memory, SSL, firewall)
@@ -149,6 +149,13 @@ The platform is monitored and driven by 9 Category Sub-Masters and 37 specialize
   - Refreshed stale February/September booking dates across `Footer.tsx` and content JSONs to active October 2026 windows (`Oct 1-5`, `Oct 6-10`).
   - Fixed Next.js Link import in `apps/web/app/sitemap/page.tsx` (`import Link from 'next/link'`).
   - All 14 Pytest unit tests passing, `npx tsc --noEmit` 0 errors, and root secret scanner clean across 2,105 files.
+- **Epoch 16–18 (Sep 25 – Oct 14, 2026) 116-Page SEO Footprint, 16/16 Factory Spec PDFs, GE AJCQ12AXXWA & CRM Multi-Stage Invoice Guardrails**:
+  - Expanded standalone SEO topical silos to 116 static routes, retired GE `AJCQ12AWJ` in favor of Variable Speed Inverter `AJCQ12AXXWA` with 16/16 factory PDF spec sheets and 2x Retina WebP mobile page viewers, upgraded homepage comparison visual checkmarks and mobile responsive layouts, and hardened CRM multi-stage invoice payment links with Deposit Paid vs Balance Due accounting.
+- **Epoch 19 (Oct 14, 2026) Live Homepage Stock Synchronization, Seed Stock Preservation, Reviews Grid Alignment & 40/40 Fleet Health**:
+  - Connected `HomeFeaturedInventory` and `WarehouseInventoryGrid` to live `/api/v1/products` (`cache: 'no-store'`) so admin `stock = 0` updates immediately show `Out of Stock` badges and disable `Add Unit` buttons on the homepage and warehouse grid.
+  - Hardened `seed_products.py` and `migrate_and_reseed_catalog` so catalog spec migrations never overwrite live PostgreSQL `stock` or pricing.
+  - Fixed desktop `ReviewsPavilion` 3-column full-width card layout (`md:w-full md:max-w-none h-full`) and reclassified review service tags (zero `Deep Teardown Cleaning` references).
+  - Replaced `pandas` in `reporting_engine.py` with native Python `csv` and added `python-docx>=1.1.2` to `requirements.txt` so all **40/40 Sovereign Agents** pass health checks (`All Healthy: True`) inside `prod-api`.
 
 ---
 
