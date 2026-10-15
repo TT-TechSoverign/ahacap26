@@ -68,18 +68,40 @@ def _safe_float(val: Any, default: float = 0.0) -> float:
 
 class ReportingEngine:
     def __init__(self, analytics_base_dir: Optional[str] = None):
-        if analytics_base_dir and os.path.exists(analytics_base_dir):
+        if analytics_base_dir:
             self.base_dir = analytics_base_dir
+            try:
+                os.makedirs(self.base_dir, exist_ok=True)
+                return
+            except OSError:
+                pass
+
+        candidates = [
+            os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "_analytics_data")),
+            os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "_analytics_data")),
+            r"c:\Users\Tai_Z790AeroG\Desktop\ahacws26\_analytics_data",
+            "/app/_analytics_data",
+            os.path.join(os.getcwd(), "_analytics_data"),
+            "/tmp/_analytics_data",
+        ]
+        existing = next((c for c in candidates if os.path.exists(c) and os.access(c, os.W_OK)), None)
+        if existing:
+            self.base_dir = existing
         else:
-            candidates = [
-                os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "_analytics_data")),
+            self.base_dir = "/tmp/_analytics_data"
+            for candidate in [
                 os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "_analytics_data")),
-                r"c:\Users\Tai_Z790AeroG\Desktop\ahacws26\_analytics_data",
+                os.path.join(os.getcwd(), "_analytics_data"),
                 "/app/_analytics_data",
-                os.path.join(os.getcwd(), "_analytics_data")
-            ]
-            self.base_dir = next((c for c in candidates if os.path.exists(c)), candidates[0])
-        os.makedirs(self.base_dir, exist_ok=True)
+                "/tmp/_analytics_data",
+            ]:
+                try:
+                    os.makedirs(candidate, exist_ok=True)
+                    if os.access(candidate, os.W_OK):
+                        self.base_dir = candidate
+                        break
+                except OSError:
+                    continue
 
     def extract_zip(self, zip_path: str, extract_to: str) -> str:
         """Extracts a zip file into target directory."""
