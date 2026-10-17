@@ -17,7 +17,7 @@ interface WindowAcQuickShopProps {
     subheading?: string;
 }
 
-const DEFAULT_IDS = [6, 1, 3, 4]; // $395 6k Standard, $560 6k Dual Inv, $650 10k Dual Inv, $755 12k Dual Inv
+const DEFAULT_IDS = [11, 1, 3, 4]; // $395 8k Standard (ID 11), $560 6k Dual Inv (ID 1), $650 10k Dual Inv (ID 3), $745 12k Dual Inv (ID 4)
 
 export function WindowAcQuickShop({ cityName, title, heading, subheading }: WindowAcQuickShopProps) {
     const { addToCart, openCart } = useCart();
