@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -23,102 +23,161 @@ import {
 import { useCart } from '../../../context/CartContext';
 import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
+import { isCampaignActive } from '@/lib/utils';
+import { Product } from '@/types/inventory';
+
+type PlugUnit = {
+    id: number;
+    name: string;
+    price: number;
+    promoPrice: number;
+    stock: number;
+    voltage: string;
+    coverage: string;
+    noise: string;
+    dehumid: string;
+    rebate: string;
+    slug: string;
+    plugType: string;
+};
+
+const INITIAL_UNITS_230V: PlugUnit[] = [
+    {
+        id: 6,
+        name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
+        price: 865,
+        promoPrice: 778,
+        stock: 20,
+        voltage: "208/230V - 15A (NEMA 6-15P)",
+        coverage: "Up to 1,000 sq. ft. AHAM (Up to 600 sq. ft. Oahu)",
+        noise: "44 / 59 dB",
+        dehumid: "4.2 Pts/Hr",
+        rebate: "$45 Hawaii Energy Form Included",
+        slug: "6-lg-dual-inverter-18-000-btu-lw1822ivsm",
+        plugType: "NEMA 6-15P (208/230V 15A Tandem)"
+    },
+    {
+        id: 7,
+        name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
+        price: 985,
+        promoPrice: 886,
+        stock: 0,
+        voltage: "208/230V - 15A (NEMA 6-15P)",
+        coverage: "Up to 1,440 sq. ft. AHAM (Up to 800 sq. ft. Oahu)",
+        noise: "53 / 62 dB",
+        dehumid: "5.6 Pts/Hr",
+        rebate: "$45 Hawaii Energy Form Included",
+        slug: "7-lg-dual-inverter-23-500-btu-lw2422ivsm",
+        plugType: "NEMA 6-15P (208/230V 15A Tandem)"
+    },
+    {
+        id: 9,
+        name: "LG Dual Inverter Cool + Heat 18,000 BTU (LW1823HRSM)",
+        price: 925,
+        promoPrice: 832,
+        stock: 6,
+        voltage: "208/230V - 20A (NEMA 6-20P)",
+        coverage: "Up to 1,000 sq. ft. AHAM (Up to 600 sq. ft. Oahu)",
+        noise: "44 / 59 dB",
+        dehumid: "5.4 Pts/Hr",
+        rebate: "Cool + Supplemental Heat",
+        slug: "9-lg-dual-inverter-cool-heat-18-000-btu-lw1823hrsm",
+        plugType: "NEMA 6-20P (208/230V 20A Tandem)"
+    }
+];
+
+const INITIAL_UNITS_115V: PlugUnit[] = [
+    {
+        id: 1,
+        name: "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
+        price: 560,
+        promoPrice: 504,
+        stock: 30,
+        voltage: "115V - 15A (Standard NEMA 5-15P)",
+        coverage: "Up to 260 sq. ft. AHAM (Up to 220 sq. ft. Oahu)",
+        noise: "44 / 54 dB",
+        dehumid: "1.4 Pts/Hr",
+        rebate: "$45 Hawaii Energy Form Included",
+        slug: "1-lg-dual-inverter-6-000-btu-lw6023ivsm",
+        plugType: "Standard 3-Prong 115V Wall Plug"
+    },
+    {
+        id: 3,
+        name: "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
+        price: 650,
+        promoPrice: 585,
+        stock: 15,
+        voltage: "115V - 15A (Standard NEMA 5-15P)",
+        coverage: "Up to 450 sq. ft. AHAM (Up to 330 sq. ft. Oahu)",
+        noise: "44 / 58 dB",
+        dehumid: "2.9 Pts/Hr",
+        rebate: "$45 Hawaii Energy Form Included",
+        slug: "3-lg-dual-inverter-10-000-btu-lw1022ivsm",
+        plugType: "Standard 3-Prong 115V Wall Plug"
+    },
+    {
+        id: 4,
+        name: "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
+        price: 745,
+        promoPrice: 670,
+        stock: 30,
+        voltage: "115V - 15A (Standard NEMA 5-15P)",
+        coverage: "Up to 550 sq. ft. AHAM (Up to 380 sq. ft. Oahu)",
+        noise: "44 / 58 dB",
+        dehumid: "3.8 Pts/Hr",
+        rebate: "$45 Hawaii Energy Form Included",
+        slug: "4-lg-dual-inverter-12-000-btu-lw1222ivsm",
+        plugType: "Standard 3-Prong 115V Wall Plug"
+    },
+    {
+        id: 5,
+        name: "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
+        price: 785,
+        promoPrice: 706,
+        stock: 15,
+        voltage: "115V - 15A (Standard NEMA 5-15P)",
+        coverage: "Up to 700 sq. ft. AHAM (Up to 450 sq. ft. Oahu)",
+        noise: "44 / 58 dB",
+        dehumid: "4.2 Pts/Hr",
+        rebate: "$45 Hawaii Energy Form Included",
+        slug: "5-lg-dual-inverter-14-000-btu-lw1522fvsm",
+        plugType: "Standard 3-Prong 115V Wall Plug"
+    }
+];
 
 export default function WindowAcPlugGuidePage() {
-    const { addToCart } = useCart();
+    const { addToCart, openCart } = useCart();
     const [selectedPlug, setSelectedPlug] = useState<'115v' | '230v'>('230v');
     const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [units230V, setUnits230V] = useState<PlugUnit[]>(INITIAL_UNITS_230V);
+    const [units115V, setUnits115V] = useState<PlugUnit[]>(INITIAL_UNITS_115V);
+    const isPromo = isCampaignActive();
 
-    // Specific in-stock models
-    const units230V = [
-        {
-            id: 6,
-            name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
-            price: 945,
-            promoPrice: 850,
-            stock: 30,
-            voltage: "208/230V - 15A (NEMA 6-15P)",
-            coverage: "Up to 1,000 sq. ft. AHAM (Up to 600 sq. ft. Oahu)",
-            noise: "44 / 59 dB",
-            dehumid: "4.2 Pts/Hr",
-            rebate: "$45 Hawaii Energy Form Included",
-            slug: "6-lg-dual-inverter-18-000-btu-lw1822ivsm",
-            plugType: "NEMA 6-15P (208/230V 15A Tandem)"
-        },
-        {
-            id: 7,
-            name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-            price: 1055,
-            promoPrice: 950,
-            stock: 20,
-            voltage: "208/230V - 15A (NEMA 6-15P)",
-            coverage: "Up to 1,440 sq. ft. AHAM (Up to 800 sq. ft. Oahu)",
-            noise: "53 / 62 dB",
-            dehumid: "5.6 Pts/Hr",
-            rebate: "$45 Hawaii Energy Form Included",
-            slug: "7-lg-dual-inverter-23-500-btu-lw2422ivsm",
-            plugType: "NEMA 6-15P (208/230V 15A Tandem)"
-        }
-    ];
-
-    const units115V = [
-        {
-            id: 2,
-            name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
-            price: 600,
-            promoPrice: 540,
-            stock: 50,
-            voltage: "115V - 15A (Standard NEMA 5-15P)",
-            coverage: "Up to 350 sq. ft. AHAM (Up to 280 sq. ft. Oahu)",
-            noise: "44 / 54 dB",
-            dehumid: "2.5 Pts/Hr",
-            rebate: "$45 Hawaii Energy Form Included",
-            slug: "2-lg-dual-inverter-8-000-btu-lw8022ivsm",
-            plugType: "Standard 3-Prong 115V Wall Plug"
-        },
-        {
-            id: 3,
-            name: "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
-            price: 650,
-            promoPrice: 585,
-            stock: 50,
-            voltage: "115V - 15A (Standard NEMA 5-15P)",
-            coverage: "Up to 450 sq. ft. AHAM (Up to 330 sq. ft. Oahu)",
-            noise: "44 / 58 dB",
-            dehumid: "2.9 Pts/Hr",
-            rebate: "$45 Hawaii Energy Form Included",
-            slug: "3-lg-dual-inverter-10-000-btu-lw1022ivsm",
-            plugType: "Standard 3-Prong 115V Wall Plug"
-        },
-        {
-            id: 4,
-            name: "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
-            price: 750,
-            promoPrice: 675,
-            stock: 50,
-            voltage: "115V - 15A (Standard NEMA 5-15P)",
-            coverage: "Up to 550 sq. ft. AHAM (Up to 380 sq. ft. Oahu)",
-            noise: "44 / 58 dB",
-            dehumid: "3.8 Pts/Hr",
-            rebate: "$45 Hawaii Energy Form Included",
-            slug: "4-lg-dual-inverter-12-000-btu-lw1222ivsm",
-            plugType: "Standard 3-Prong 115V Wall Plug"
-        },
-        {
-            id: 5,
-            name: "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
-            price: 830,
-            promoPrice: 747,
-            stock: 50,
-            voltage: "115V - 15A (Standard NEMA 5-15P)",
-            coverage: "Up to 700 sq. ft. AHAM (Up to 450 sq. ft. Oahu)",
-            noise: "44 / 58 dB",
-            dehumid: "4.2 Pts/Hr",
-            rebate: "$45 Hawaii Energy Form Included",
-            slug: "5-lg-dual-inverter-14-000-btu-lw1522fvsm",
-            plugType: "Standard 3-Prong 115V Wall Plug"
-        }
-    ];
+    useEffect(() => {
+        let isMounted = true;
+        fetch('/api/v1/products', { cache: 'no-store' })
+            .then((res) => (res.ok ? res.json() : null))
+            .then((liveProducts: Product[] | null) => {
+                if (!isMounted || !Array.isArray(liveProducts)) return;
+                const liveMap = new Map(liveProducts.map((p) => [p.id, p]));
+                setUnits230V(
+                    INITIAL_UNITS_230V.map((u) => {
+                        const live = liveMap.get(u.id);
+                        return live ? { ...u, price: live.price, promoPrice: live.promo_price ?? u.promoPrice, stock: live.stock } : u;
+                    })
+                );
+                setUnits115V(
+                    INITIAL_UNITS_115V.map((u) => {
+                        const live = liveMap.get(u.id);
+                        return live ? { ...u, price: live.price, promoPrice: live.promo_price ?? u.promoPrice, stock: live.stock } : u;
+                    })
+                );
+            })
+            .catch(() => {});
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
     const faqItems = [
         {
@@ -366,82 +425,106 @@ export default function WindowAcPlugGuidePage() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {(selectedPlug === '230v' ? units230V : units115V).map((unit) => (
-                            <div 
-                                key={unit.id}
-                                className="bg-slate-900/60 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-primary/50 transition-all duration-300 relative group"
-                            >
-                                <div className="space-y-4">
-                                    <div className="flex justify-between items-center text-xs">
-                                        <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold">
-                                            {unit.stock} In Stock Waipahu
-                                        </span>
-                                        <span className="text-slate-400 font-mono text-[11px]">{unit.voltage}</span>
+                        {(selectedPlug === '230v' ? units230V : units115V).map((unit) => {
+                            const activePrice = (isPromo && unit.promoPrice) ? unit.promoPrice : unit.price;
+                            const isOutOfStock = unit.stock <= 0;
+                            return (
+                                <div 
+                                    key={unit.id}
+                                    className="bg-slate-900/60 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-primary/50 transition-all duration-300 relative group"
+                                >
+                                    <div className="space-y-4">
+                                        <div className="flex justify-between items-center text-xs">
+                                            {isOutOfStock ? (
+                                                <span className="px-2.5 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 font-mono text-[10px] font-bold">
+                                                    Sold Out
+                                                </span>
+                                            ) : (
+                                                <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold">
+                                                    {unit.stock} In Stock Waipahu
+                                                </span>
+                                            )}
+                                            <span className="text-slate-400 font-mono text-[11px]">{unit.voltage}</span>
+                                        </div>
+
+                                        <div>
+                                            <Link href={`/shop/${unit.slug}`}>
+                                                <h3 className="text-lg font-header font-black uppercase text-white group-hover:text-primary transition-colors">
+                                                    {unit.name}
+                                                </h3>
+                                            </Link>
+                                            <p className="text-xs text-slate-400 mt-1">{unit.coverage}</p>
+                                        </div>
+
+                                        <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3.5 space-y-2 text-xs">
+                                            <div className="flex justify-between">
+                                                <span className="text-slate-500">Sound Mode:</span>
+                                                <span className="text-white font-mono">{unit.noise} (Ultra-Quiet)</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span className="text-slate-500">Dehumidification:</span>
+                                                <span className="text-white font-mono">{unit.dehumid}</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span className="text-slate-500">Plug Configuration:</span>
+                                                <span className="text-primary font-mono text-[11px] font-bold">{unit.plugType}</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] flex items-center gap-2">
+                                            <FileText className="size-3.5 shrink-0" />
+                                            <span>{unit.rebate}</span>
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <h3 className="text-lg font-header font-black uppercase text-white group-hover:text-primary transition-colors">
-                                            {unit.name}
-                                        </h3>
-                                        <p className="text-xs text-slate-400 mt-1">{unit.coverage}</p>
-                                    </div>
-
-                                    <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3.5 space-y-2 text-xs">
-                                        <div className="flex justify-between">
-                                            <span className="text-slate-500">Sound Mode:</span>
-                                            <span className="text-white font-mono">{unit.noise} (Ultra-Quiet)</span>
+                                    <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+                                        <div>
+                                            {isPromo && unit.promoPrice && unit.price > unit.promoPrice && (
+                                                <span className="text-xs text-slate-500 line-through mr-2">${unit.price}</span>
+                                            )}
+                                            <span className="text-2xl font-header font-black text-cyan-400">${activePrice}</span>
                                         </div>
-                                        <div className="flex justify-between">
-                                            <span className="text-slate-500">Dehumidification:</span>
-                                            <span className="text-white font-mono">{unit.dehumid}</span>
+                                        <div className="flex gap-2">
+                                            <Link
+                                                href={`/shop/${unit.slug}`}
+                                                className="p-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/10 transition-all"
+                                                title="View Specs"
+                                            >
+                                                <Eye className="size-4" />
+                                            </Link>
+                                            {isOutOfStock ? (
+                                                <Link
+                                                    href={`/shop/${unit.slug}`}
+                                                    className="px-4 py-3 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 font-header font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all"
+                                                >
+                                                    Alternatives
+                                                </Link>
+                                            ) : (
+                                                <button
+                                                    onClick={() => {
+                                                        addToCart({
+                                                            id: unit.id,
+                                                            name: unit.name,
+                                                            price: activePrice,
+                                                            promo_price: unit.promoPrice,
+                                                            stock: unit.stock,
+                                                            category: 'WINDOW_AC',
+                                                            subcategory: 'dual_inverter',
+                                                        });
+                                                        trackFunnelEvent('plug_guide_add_to_cart', { unit_id: unit.id, name: unit.name, voltage: unit.voltage });
+                                                        openCart();
+                                                    }}
+                                                    className="px-4 py-3 rounded-xl bg-primary hover:bg-primary/90 text-white font-header font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,174,239,0.3)] transition-all"
+                                                >
+                                                    <ShoppingCart className="size-3.5" />
+                                                    Add to Cart
+                                                </button>
+                                            )}
                                         </div>
-                                        <div className="flex justify-between">
-                                            <span className="text-slate-500">Plug Configuration:</span>
-                                            <span className="text-primary font-mono text-[11px] font-bold">{unit.plugType}</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] flex items-center gap-2">
-                                        <FileText className="size-3.5 shrink-0" />
-                                        <span>{unit.rebate}</span>
                                     </div>
                                 </div>
-
-                                <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between gap-3">
-                                    <div>
-                                        <span className="text-xs text-slate-500 line-through mr-2">${unit.price}</span>
-                                        <span className="text-2xl font-header font-black text-cyan-400">${unit.promoPrice}</span>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <Link
-                                            href={`/shop/${unit.slug}`}
-                                            className="p-3 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/10 transition-all"
-                                            title="View Specs"
-                                        >
-                                            <Eye className="size-4" />
-                                        </Link>
-                                        <button
-                                            onClick={() => {
-                                                addToCart({
-                                                    id: unit.id,
-                                                    name: unit.name,
-                                                    price: unit.price,
-                                                    promo_price: unit.promoPrice,
-                                                    stock: unit.stock,
-                                                    category: 'WINDOW_AC',
-                                                    subcategory: 'dual_inverter',
-                                                });
-                                                trackFunnelEvent('plug_guide_add_to_cart', { unit_id: unit.id, name: unit.name, voltage: unit.voltage });
-                                            }}
-                                            className="px-4 py-3 rounded-xl bg-primary hover:bg-primary/90 text-white font-header font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,174,239,0.3)] transition-all"
-                                        >
-                                            <ShoppingCart className="size-3.5" />
-                                            Add to Cart
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </section>
 

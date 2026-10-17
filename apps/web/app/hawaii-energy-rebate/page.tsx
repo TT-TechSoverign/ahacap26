@@ -22,6 +22,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { trackFunnelEvent } from '@/lib/tracking';
 
 const REBATE_PDF_URL = '/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf';
@@ -30,60 +31,67 @@ const QUALIFYING_MODELS = [
     {
         btu: '6,000 BTU',
         model: 'LW6023IVSM',
+        slug: '1-lg-dual-inverter-6-000-btu-lw6023ivsm',
         coverage: 'Up to 250 sq. ft. (Bedrooms)',
         efficiency: 'CEER 11.5 • Ultra-Quiet 44 dB',
-        price: '$504',
-        rebatePrice: '$459 after $45 rebate',
+        price: '$560',
+        rebatePrice: '$515 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
     },
     {
         btu: '8,000 BTU',
         model: 'LW8022IVSM',
+        slug: '2-lg-dual-inverter-8-000-btu-lw8022ivsm',
         coverage: 'Up to 350 sq. ft. (Master Bedrooms)',
         efficiency: 'CEER 12.0 • Ultra-Quiet 44 dB',
-        price: '$545',
-        rebatePrice: '$500 after $45 rebate',
+        price: '$595',
+        rebatePrice: '$550 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
     },
     {
         btu: '10,000 BTU',
         model: 'LW1022IVSM',
+        slug: '3-lg-dual-inverter-10-000-btu-lw1022ivsm',
         coverage: 'Up to 450 sq. ft. (Living Rooms)',
         efficiency: 'CEER 12.0 • Dual Inverter',
-        price: '$614',
-        rebatePrice: '$569 after $45 rebate',
+        price: '$650',
+        rebatePrice: '$605 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
     },
     {
         btu: '12,000 BTU',
         model: 'LW1222IVSM',
+        slug: '4-lg-dual-inverter-12-000-btu-lw1222ivsm',
         coverage: 'Up to 550 sq. ft. (Open Living Areas)',
         efficiency: 'CEER 12.0 • Dual Inverter',
-        price: '$670',
-        rebatePrice: '$625 after $45 rebate',
+        price: '$755',
+        rebatePrice: '$710 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
     },
     {
         btu: '14,000 BTU',
         model: 'LW1522FVSM',
+        slug: '5-lg-dual-inverter-14-000-btu-lw1522fvsm',
         coverage: 'Up to 700 sq. ft. (Large Open Suites)',
         efficiency: 'CEER 11.8 • Dual Inverter',
-        price: '$759',
-        rebatePrice: '$714 after $45 rebate',
+        price: '$820',
+        rebatePrice: '$775 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
     },
     {
         btu: '18,000 BTU',
         model: 'LW1822IVSM',
+        slug: '11-lg-dual-inverter-18-000-btu-lw1822ivsm',
         coverage: 'Up to 1,000 sq. ft. (Whole Floor Plans)',
         efficiency: 'CEER 11.8 • Heavy-Duty 230V',
-        price: '$890',
-        rebatePrice: '$845 after $45 rebate',
+        price: '$930',
+        rebatePrice: '$885 after $45 rebate',
         voltage: '208/230V 15A Circuit',
     },
     {
         btu: '23,500 BTU',
         model: 'LW2422IVSM',
+        slug: '12-lg-dual-inverter-23-500-btu-lw2422ivsm',
         coverage: 'Up to 1,400 sq. ft. (High Ceilings)',
         efficiency: 'CEER 10.4 • Max Capacity',
         price: '$1,025',
@@ -212,7 +220,7 @@ export default function HawaiiEnergyRebatePage() {
                             {
                                 step: "01",
                                 title: "Buy Qualifying Unit",
-                                desc: "Choose any Energy Star LG Dual Inverter from our Waipahu warehouse inventory ($504 to $1,025)."
+                                desc: "Choose any Energy Star LG Dual Inverter from our Waipahu warehouse inventory ($560 to $1,025)."
                             },
                             {
                                 step: "02",
@@ -286,15 +294,17 @@ export default function HawaiiEnergyRebatePage() {
                                         <span className="text-xs font-mono text-emerald-400 font-semibold">{item.rebatePrice}</span>
                                     </div>
                                     <Link 
-                                        href="/shop"
+                                        href={`/shop/${item.slug}`}
                                         className="w-full py-2.5 rounded-lg bg-primary/20 hover:bg-primary text-primary hover:text-slate-950 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
                                     >
-                                        Select in Shop
+                                        View Specs &amp; Buy Now
                                     </Link>
                                 </div>
                             </div>
                         ))}
                     </div>
+
+                    <WindowAcQuickShop title="Live Waipahu Rebate-Eligible Inventory" />
                 </section>
 
                 {/* Warehouse & Fulfillment Proof */}

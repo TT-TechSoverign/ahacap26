@@ -98,7 +98,7 @@ export default function SameDayWindowAcPickupPage() {
                             <span className="text-2xl font-black text-primary font-header">01</span>
                             <h3 className="font-header font-bold text-lg text-white uppercase">Order Online</h3>
                             <p className="text-slate-300 font-sans text-xs leading-relaxed">
-                                Select your model in our Shop ($504 to $1,025) and choose Waipahu Warehouse Pickup at checkout.
+                                Select your model in our Shop ($560 to $1,025) and choose Waipahu Warehouse Pickup at checkout.
                             </p>
                         </div>
 

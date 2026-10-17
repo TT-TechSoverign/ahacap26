@@ -90,12 +90,30 @@ export function middleware(request: NextRequest) {
         return makePermanentRedirect('/');
     }
 
-    // 4. Outdated Product Slug Redirects
-    if (pathLower === '/shop/5-lg-dual-inverter-14-000-btu-lw1522ivsm') {
-        return makePermanentRedirect('/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm');
-    }
-    if (pathLower === '/shop/15-ge-12-000-btu-ajcq12awj') {
-        return makePermanentRedirect('/shop/15-ge-12-000-btu-ajcq12axxwa');
+    // 4. Outdated & Short Product Slug Redirects
+    const SHORT_SLUG_REDIRECTS: Record<string, string> = {
+        '/shop/1-lg-dual-inverter-6-000-btu': '/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm',
+        '/shop/2-lg-dual-inverter-8-000-btu': '/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm',
+        '/shop/3-lg-dual-inverter-10-000-btu': '/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm',
+        '/shop/4-lg-dual-inverter-12-000-btu': '/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm',
+        '/shop/5-lg-dual-inverter-14-000-btu': '/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm',
+        '/shop/5-lg-dual-inverter-14-000-btu-lw1522ivsm': '/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm',
+        '/shop/6-lg-dual-inverter-18-000-btu': '/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm',
+        '/shop/9-lg-dual-inverter-18-000-btu-lw1822ivsm': '/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm',
+        '/shop/7-lg-dual-inverter-23-500-btu': '/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm',
+        '/shop/10-lg-dual-inverter-23-500-btu-lw2422ivsm': '/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm',
+        '/shop/8-lg-7-600-btu': '/shop/8-lg-7-600-btu-lw8023hrsm',
+        '/shop/9-lg-18-000-btu': '/shop/9-lg-18-000-btu-lw1823hrsm',
+        '/shop/10-lg-23-000-btu': '/shop/10-lg-23-000-btu-lw2423hrsm',
+        '/shop/11-lg-8-000-btu': '/shop/11-lg-8-000-btu-lw8024rd',
+        '/shop/12-lg-12-000-btu': '/shop/12-lg-12-000-btu-lw1217ersm1',
+        '/shop/13-ge-8-200-btu': '/shop/13-ge-8-200-btu-ajcq08awj',
+        '/shop/14-ge-10-000-btu': '/shop/14-ge-10-000-btu-ajcq10awj',
+        '/shop/15-ge-12-000-btu': '/shop/15-ge-12-000-btu-ajcq12axxwa',
+        '/shop/15-ge-12-000-btu-ajcq12awj': '/shop/15-ge-12-000-btu-ajcq12axxwa',
+    };
+    if (SHORT_SLUG_REDIRECTS[pathLower]) {
+        return makePermanentRedirect(SHORT_SLUG_REDIRECTS[pathLower]);
     }
 
     // Decommissioned routes

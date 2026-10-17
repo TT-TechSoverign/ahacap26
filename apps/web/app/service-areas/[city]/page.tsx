@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import LocalServiceFunnel from '@/components/LocalServiceFunnel';
 import LocalizedSEOBody from '@/components/LocalizedSEOBody';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { getReviewsByCity } from '@/lib/product-reviews';
 import { BackToTop } from '@/components/BackToTop';
@@ -64,15 +65,15 @@ export function generateMetadata({ params }: Props): Metadata {
  
     const title = `${cityData.name} AC Repair & In-Stock Window ACs | $0 Estimate | (808) 488-1111`;
     
-    let description = `Fast ${cityData.name} AC repair & in-stock window ACs ready for pickup today. $0 in-home estimate, $275 bench teardown cleaning. Call Oahu's cooling team: (808) 488-1111.`;
+    let description = `Fast ${cityData.name} AC repair & in-stock Window ACs ($395–$1,025) ready for Waipahu pickup or $50 delivery. $0 in-home mini-split estimate. Call (808) 488-1111.`;
     if (cityData.regionId === 'windward') {
-        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Licensed HVAC technicians, $0 in-home estimate, $275 bench cleaning & in-stock window ACs. Call (808) 488-1111.`;
+        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Licensed HVAC technicians, $0 in-home estimate & in-stock LG Dual Inverter window ACs. Call (808) 488-1111.`;
     } else if (cityData.regionId === 'leeward') {
-        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Ductless split AC installation, $0 in-home estimate, $275 bench cleaning & in-stock window ACs. Call (808) 488-1111.`;
+        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Ductless split AC installation, $0 in-home estimate & in-stock Waipahu window ACs ($395–$1,025). Call (808) 488-1111.`;
     } else if (cityData.regionId === 'metro') {
         description = `Whisper-quiet zoned cooling in ${cityData.name}, Oahu. Licensed technicians for mini-split installation, $0 in-home estimate & in-stock window ACs. Call (808) 488-1111.`;
     } else if (cityData.regionId === 'central') {
-        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock window ACs, $0 in-home estimate, $275 bench teardown cleaning. Call (808) 488-1111.`;
+        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock Waipahu window ACs ($395–$1,025), $0 in-home estimate & split AC deep cleaning. Call (808) 488-1111.`;
     }
  
     return {
@@ -154,6 +155,11 @@ export default function LocalServiceAreaPage({ params }: Props) {
             {/* 2. SYSTEM DIAGNOSTIC SCHEDULER */}
             <LocalServiceFunnel city={cityData.name} />
 
+            {/* 2b. IN-STOCK WINDOW AC QUICK SHOP */}
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+                <WindowAcQuickShop cityName={cityData.name} />
+            </div>
+
             {/* 3. DYNAMIC EDUCATIONAL SEO BODY */}
             <LocalizedSEOBody city={cityData.name} regionId={cityData.regionId} />
             
@@ -196,7 +202,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             </span>
                         </summary>
                         <p className="mt-4 text-slate-300 text-sm leading-relaxed border-t border-slate-800/80 pt-4 font-sans">
-                            Due to {cityData.name}&apos;s salt-air exposure and humidity, we recommend a professional deep clean every 6 to 12 months. Regular maintenance cleanings remove accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30% and extending your system&apos;s life.
+                            Due to {cityData.name}&apos;s salt-air exposure and humidity, we recommend a professional mini-split deep clean every 6 to 12 months, and rinsing window AC slide-out filters every 2 to 4 weeks. Regular maintenance removes accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30%.
                         </p>
                     </details>
 
@@ -210,7 +216,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             </span>
                         </summary>
                         <p className="mt-4 text-slate-300 text-sm leading-relaxed border-t border-slate-800/80 pt-4 font-sans">
-                            Yes! We provide full on-site dispatch of licensed technicians for ductless split AC installations, sizing estimates, and mini-split cleaning directly to {cityData.name}. For window AC units, we provide professional full teardown cleaning at our Waipahu warehouse, as well as Oahu flat-rate $50 delivery or free local pickup on new window AC purchases.
+                            Yes! We provide full on-site dispatch of licensed technicians for ductless split AC installations, sizing estimates, mini-split deep cleaning, and custom window AC installation directly to {cityData.name}. We also offer Oahu flat-rate $50 island-wide delivery or free local Waipahu warehouse pickup on all in-stock window AC purchases.
                         </p>
                     </details>
                 </div>
@@ -351,7 +357,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 "name": `How often do window and split AC systems need cleaning in ${cityData.name}?`,
                                 "acceptedAnswer": {
                                     "@type": "Answer",
-                                    "text": `Due to ${cityData.name}'s salt-air exposure and humidity, we recommend a professional deep clean every 6 to 12 months. Regular maintenance cleanings remove accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30% and extending your system's life.`
+                                    "text": `Due to ${cityData.name}'s salt-air exposure and humidity, we recommend a professional mini-split deep clean every 6 to 12 months, and rinsing window AC slide-out filters every 2 to 4 weeks. Regular maintenance removes accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30%.`
                                 }
                             },
                             {
@@ -359,7 +365,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 "name": `Does Affordable Home A/C deliver products and dispatch technicians to ${cityData.name}?`,
                                 "acceptedAnswer": {
                                     "@type": "Answer",
-                                    "text": `Yes! We provide full on-site dispatch of licensed technicians for ductless split AC installations, sizing estimates, and mini-split cleaning directly to ${cityData.name}. For window AC units, we provide professional full teardown cleaning ($275 flat rate) at our Waipahu warehouse, as well as Oahu flat-rate $50 delivery or free local pickup on new window AC purchases.`
+                                    "text": `Yes! We provide full on-site dispatch of licensed technicians for ductless split AC installations, sizing estimates, mini-split deep cleaning, and custom window AC installation directly to ${cityData.name}. We also offer Oahu flat-rate $50 island-wide delivery or free local Waipahu warehouse pickup on all in-stock window AC purchases.`
                                 }
                             }
                         ]

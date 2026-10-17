@@ -34,7 +34,7 @@ const rawStats: ReviewStats = (reviewsDb as any).stats || {
     five_star_count: 139,
     four_star_count: 3,
     license: "CT-36775",
-    waipahu_shop_address: "94-529 Ukee St, Waipahu, HI 96797",
+    waipahu_shop_address: "94-150 Leoleo St #203, Waipahu, HI 96797",
     top_neighborhoods: [],
     top_technicians: ["Brian", "Chris", "Omar", "Rostin", "Makoa", "Matt", "Scott"]
 };

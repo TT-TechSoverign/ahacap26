@@ -153,45 +153,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: route === '' ? 1.0 : (highYieldRoutes.includes(route) ? 0.9 : (route.startsWith('/service-areas/') ? 0.7 : 0.8)),
     }));
 
-    // 2. Fetch Dynamic Product Routes
-    let productRoutes: MetadataRoute.Sitemap = [];
+    // 2. Fetch Dynamic Product Routes (with INITIAL_CATALOG_PRODUCTS fallback)
+    const { INITIAL_CATALOG_PRODUCTS } = await import('@/lib/catalog-seed');
+    let products: Product[] = INITIAL_CATALOG_PRODUCTS;
     try {
-        // STRATEGY: Robustly determine API URL.
-        // Env var might be 'http://prod-api:8000' (no suffix) or '.../api/v1'.
-        // We ensure we target the /api/v1/products endpoint.
         let apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
         if (!apiUrl.endsWith('/api/v1')) {
             apiUrl = `${apiUrl}/api/v1`;
         }
 
-        console.log(`[Sitemap] Fetching products from: ${apiUrl}`);
-
-        // Add a timeout to prevent hanging builds
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
 
         const res = await fetch(`${apiUrl}/products`, {
-            next: { revalidate: 0 }, // No caching for sitemap
+            next: { revalidate: 0 },
             signal: controller.signal
         });
 
         clearTimeout(timeoutId);
 
         if (res.ok) {
-            const products: Product[] = await res.json();
-            productRoutes = products.map((product) => ({
-                url: `${baseUrl}/shop/${generateProductSlug(product.id, product.name)}`,
-                lastModified: new Date(),
-                changeFrequency: 'weekly' as const,
-                priority: 0.6,
-            }));
-            console.log(`[Sitemap] Successfully generated ${productRoutes.length} product routes.`);
-        } else {
-            console.error(`[Sitemap] Failed to fetch products: ${res.status} ${res.statusText} from ${apiUrl}`);
+            const liveProducts: Product[] = await res.json();
+            if (Array.isArray(liveProducts) && liveProducts.length > 0) {
+                products = liveProducts;
+            }
         }
     } catch (error) {
-        console.error('[Sitemap] API request failed. Using static routes only.', error);
+        console.error('[Sitemap] API request failed, using INITIAL_CATALOG_PRODUCTS fallback.', error);
     }
+
+    const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
+        url: `${baseUrl}/shop/${generateProductSlug(product.id, product.name)}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 0.95,
+    }));
 
     // 3. Combine and Return
     return [...staticRoutes, ...productRoutes];

@@ -5,28 +5,28 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../context/CartContext';
 import { Snowflake, Warehouse, ShieldCheck, Leaf, ArrowRight, ShoppingCart, Check, Zap } from 'lucide-react';
-import { generateProductSlug } from '@/lib/utils';
+import { generateProductSlug, isCampaignActive } from '@/lib/utils';
 import { Product } from '../types/inventory';
 
-// Curated 4 top-selling Oahu models directly from the verified catalog (fallback before live API hydration)
+// Curated 4 top-selling in-stock Oahu models directly from the verified catalog (fallback before live API hydration)
 const FEATURED_MODELS: Product[] = [
     {
         id: 4,
         category: 'WINDOW_AC',
         name: 'LG Dual Inverter 12,000 BTU (LW1222IVSM)',
-        stock: 20,
+        stock: 30,
         btu: 12000,
-        coverage: 'Up to 550 sq. ft. (AHAM) • 250–380 sq. ft. (Oahu Single-Wall)',
+        coverage: 'Up to 550 sq. ft. (AHAM) • Up to 380 sq. ft. (Oahu)',
         coverage_aham: 'Up to 550 sq. ft.',
-        coverage_oahu: '250–380 sq. ft.',
-        sizing_notes: 'Factory AHAM certified up to 550 sq. ft. Calibrated for 250–380 sq. ft. in uninsulated Hawaii single-wall structures facing afternoon Leeward/Honolulu sun.',
+        coverage_oahu: 'Up to 380 sq. ft.',
+        sizing_notes: 'Factory AHAM certified up to 550 sq. ft. Calibrated for up to 380 sq. ft. in uninsulated Hawaii single-wall structures facing afternoon Leeward/Honolulu sun.',
         key_spec: 'Gold Fin™ Anti-Corrosive Salt Shield • Slide In-Out Chassis',
-        noise_level: '44 / 59 dB',
+        noise_level: '44 / 58 dB',
         subcategory: 'dual_inverter',
         price: 745,
         promo_price: 670,
         discount_percent: 10,
-        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg',
+        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
         voltage: '115V / 15 Amp',
         performance_specs: 'Gold Fin™ Anti-Corrosive Coating (CEER 15.0)',
         ceer_rating: '15.0',
@@ -42,97 +42,97 @@ const FEATURED_MODELS: Product[] = [
         warranty: '1 YEAR LIMITED'
     },
     {
-        id: 2,
+        id: 3,
         category: 'WINDOW_AC',
-        name: 'LG Dual Inverter 8,000 BTU (LW8022IVSM)',
-        stock: 0,
-        btu: 8000,
-        coverage: 'Up to 350 sq. ft. (AHAM) • 150–250 sq. ft. (Oahu Single-Wall)',
-        coverage_aham: 'Up to 350 sq. ft.',
-        coverage_oahu: '150–250 sq. ft.',
-        sizing_notes: 'Factory AHAM rated up to 350 sq. ft. Calibrated for 150–250 sq. ft. in typical Oahu homes with single-wall construction and moderate solar load.',
-        key_spec: 'ThinQ® Smart Wi-Fi • 44dB Whisper Quiet Sleep Mode',
+        name: 'LG Dual Inverter 10,000 BTU (LW1022IVSM)',
+        stock: 15,
+        btu: 10000,
+        coverage: 'Up to 450 sq. ft. (AHAM) • Up to 330 sq. ft. (Oahu)',
+        coverage_aham: 'Up to 450 sq. ft.',
+        coverage_oahu: 'Up to 330 sq. ft.',
+        sizing_notes: 'Factory AHAM rated up to 450 sq. ft. Calibrated for up to 330 sq. ft. in typical Oahu master bedrooms and studios with single-wall construction.',
+        key_spec: 'ThinQ® Smart Wi-Fi • 44dB Whisper Quiet Master Suite',
         noise_level: '44 / 58 dB',
         subcategory: 'dual_inverter',
-        price: 595,
-        promo_price: 535,
+        price: 650,
+        promo_price: 585,
         discount_percent: 10,
-        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg',
+        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
         voltage: '115V / 15 Amp',
-        performance_specs: 'ThinQ® Smart Control (CEER 15.0)',
-        ceer_rating: '15.0',
-        dehumidification: '2.2 Pts/Hr',
-        dimensions: '12.4" H x 19.6" W x 24.5" D',
-        weight: '60',
-        shipping_weight: '67',
-        min_window_width: '22"',
-        max_window_width: '36"',
-        min_window_height: '13"',
-        chassis_type: 'Top-Mount Fixed',
-        dry_air_flow_cfm: '220 CFM',
+        performance_specs: 'ThinQ® Smart Control (CEER 15.5)',
+        ceer_rating: '15.5',
+        dehumidification: '2.9 Pts/Hr',
+        dimensions: '15.0" H x 23.6" W x 28.8" D',
+        weight: '87',
+        shipping_weight: '98',
+        min_window_width: '27"',
+        max_window_width: '39"',
+        min_window_height: '16"',
+        chassis_type: 'Slide In-Out',
+        dry_air_flow_cfm: '295 CFM',
         warranty: '1 YEAR LIMITED'
     },
     {
         id: 1,
         category: 'WINDOW_AC',
         name: 'LG Dual Inverter 6,000 BTU (LW6023IVSM)',
-        stock: 12,
+        stock: 30,
         btu: 6000,
-        coverage: 'Up to 250 sq. ft. (AHAM) • 100–180 sq. ft. (Oahu Single-Wall)',
-        coverage_aham: 'Up to 250 sq. ft.',
-        coverage_oahu: '100–180 sq. ft.',
-        sizing_notes: 'Factory AHAM rated up to 250 sq. ft. For uninsulated single-wall Hawaii homes with jalousie airflow, calibrated for 100–180 sq. ft. bedroom sanctuaries.',
+        coverage: 'Up to 260 sq. ft. (AHAM) • Up to 220 sq. ft. (Oahu)',
+        coverage_aham: 'Up to 260 sq. ft.',
+        coverage_oahu: 'Up to 220 sq. ft.',
+        sizing_notes: 'Factory AHAM rated up to 260 sq. ft. For uninsulated single-wall Hawaii homes with jalousie airflow, calibrated for up to 220 sq. ft. bedroom sanctuaries.',
         key_spec: '#1 Oahu Bedroom Bestseller • Standard 115V Plug',
-        noise_level: '44 / 56 dB',
+        noise_level: '44 / 54 dB',
         subcategory: 'dual_inverter',
         price: 560,
         promo_price: 504,
         discount_percent: 10,
-        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg',
+        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
         voltage: '115V / 15 Amp',
-        performance_specs: '44dB Ultra-Quiet Mode (CEER 13.6)',
-        ceer_rating: '13.6',
-        dehumidification: '1.8 Pts/Hr',
-        dimensions: '12.4" H x 19.6" W x 24.5" D',
-        weight: '58',
-        shipping_weight: '64',
+        performance_specs: '44dB Ultra-Quiet Mode (CEER 15.5)',
+        ceer_rating: '15.5',
+        dehumidification: '1.4 Pts/Hr',
+        dimensions: '12.5" H x 19.6" W x 24.5" D',
+        weight: '55',
+        shipping_weight: '62',
         min_window_width: '22"',
         max_window_width: '36"',
         min_window_height: '13"',
-        chassis_type: 'Top-Mount Fixed',
+        chassis_type: 'Top-Down Fixed',
         dry_air_flow_cfm: '195 CFM',
         warranty: '1 YEAR LIMITED'
     },
     {
-        id: 14,
+        id: 6,
         category: 'WINDOW_AC',
-        name: 'GE 10,000 BTU Universal Thru-The-Wall (AJCQ10AWJ)',
-        stock: 0,
-        btu: 10000,
-        coverage: 'Up to 450 sq. ft. (AHAM) • 220–320 sq. ft. (Oahu Single-Wall)',
-        coverage_aham: 'Up to 450 sq. ft.',
-        coverage_oahu: '220–320 sq. ft.',
-        sizing_notes: 'High-velocity air throw for deep rooms. True universal fit for standard 26" existing wall sleeves.',
-        key_spec: 'Universal 26" Wall Sleeve Fit • High-Velocity Throw',
-        noise_level: '55 / 61 dB',
-        subcategory: 'ge',
-        price: 1100,
-        promo_price: 990,
+        name: 'LG Dual Inverter 18,000 BTU (LW1822IVSM)',
+        stock: 20,
+        btu: 18000,
+        coverage: 'Up to 1,000 sq. ft. (AHAM) • Up to 600 sq. ft. (Oahu)',
+        coverage_aham: 'Up to 1,000 sq. ft.',
+        coverage_oahu: 'Up to 600 sq. ft.',
+        sizing_notes: '500 CFM high-velocity air throw for open-concept Oahu living rooms and vaulted ceilings.',
+        key_spec: '500 CFM High-Velocity Throw • 208/230V 15A Plug',
+        noise_level: '44 / 59 dB',
+        subcategory: 'dual_inverter',
+        price: 865,
+        promo_price: 778,
         discount_percent: 10,
-        image_url: '/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.svg',
-        voltage: '115V / 15 Amp',
-        performance_specs: 'High-Velocity Airflow (CEER 10.6)',
-        ceer_rating: '10.6',
-        dehumidification: '2.7 Pts/Hr',
-        dimensions: '15.6" H x 26.0" W x 21.8" D',
-        weight: '77',
-        shipping_weight: '86',
-        min_window_width: '26"',
-        max_window_width: '26"',
-        min_window_height: '15.8"',
-        chassis_type: 'Slide In-Out (Wall Sleeve)',
-        dry_air_flow_cfm: '285 CFM',
-        warranty: '2-YR FULL / 5-YR SEALED'
+        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+        voltage: '208/230V / 15 Amp',
+        performance_specs: 'High-Velocity 500 CFM Airflow (CEER 14.7)',
+        ceer_rating: '14.7',
+        dehumidification: '4.2 Pts/Hr',
+        dimensions: '17.7" H x 26.0" W x 30.7" D',
+        weight: '112',
+        shipping_weight: '124',
+        min_window_width: '29"',
+        max_window_width: '41"',
+        min_window_height: '19"',
+        chassis_type: 'Slide In-Out',
+        dry_air_flow_cfm: '500 CFM',
+        warranty: '1 YEAR LIMITED'
     }
 ];
 
@@ -140,6 +140,7 @@ export function HomeFeaturedInventory() {
     const { addToCart, openCart } = useCart();
     const [addedId, setAddedId] = React.useState<number | null>(null);
     const [featuredModels, setFeaturedModels] = React.useState<Product[]>(FEATURED_MODELS);
+    const isPromo = isCampaignActive();
 
     React.useEffect(() => {
         let isMounted = true;
@@ -150,12 +151,32 @@ export function HomeFeaturedInventory() {
                 const liveProducts: Product[] = await res.json();
                 if (!isMounted || !Array.isArray(liveProducts)) return;
                 const liveMap = new Map(liveProducts.map((p) => [p.id, p]));
-                setFeaturedModels(
-                    FEATURED_MODELS.map((fallback) => {
-                        const live = liveMap.get(fallback.id);
-                        return live ? { ...fallback, ...live } : fallback;
-                    })
-                );
+                const usedIds = new Set<number>();
+
+                const hydrated = FEATURED_MODELS.map((fallback) => {
+                    const live = liveMap.get(fallback.id);
+                    const merged = live ? { ...fallback, ...live } : fallback;
+                    usedIds.add(merged.id);
+                    return merged;
+                });
+
+                // Auto-substitute any out-of-stock slot with an in-stock unit from liveProducts so homepage always shows 4 buyable units
+                const finalFeatured = hydrated.map((item) => {
+                    if (item.stock > 0) return item;
+                    const replacement = liveProducts.find((p) => p.stock > 0 && !usedIds.has(p.id));
+                    if (replacement) {
+                        usedIds.add(replacement.id);
+                        return {
+                            ...replacement,
+                            image_url: replacement.image_url?.endsWith('.svg')
+                                ? replacement.image_url.replace('.svg', '.webp')
+                                : replacement.image_url,
+                        };
+                    }
+                    return item;
+                });
+
+                setFeaturedModels(finalFeatured);
             } catch (err) {
                 console.error('Failed to sync live featured inventory:', err);
             }
@@ -169,7 +190,11 @@ export function HomeFeaturedInventory() {
     const handleQuickAdd = (product: Product, e: React.MouseEvent) => {
         e.preventDefault();
         if (product.stock <= 0) return;
-        addToCart(product);
+        const activePrice = (isPromo && product.promo_price) ? product.promo_price : product.price;
+        addToCart({
+            ...product,
+            price: activePrice,
+        });
         setAddedId(product.id);
         openCart();
         setTimeout(() => setAddedId(null), 2500);

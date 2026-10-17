@@ -6,6 +6,7 @@ import { getProductFaqs } from '@/lib/product-faq';
 import { getSelectedReviews } from '@/lib/product-reviews';
 import { getProductSpecs } from '@/lib/product-specs';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 
 // We must use force-dynamic because this depends on the backend API being up,
 // and we don't want the build to fail if the API container is restarting.
@@ -30,11 +31,12 @@ async function fetchProducts(): Promise<Product[]> {
         const res = await fetch(`${getApiUrl()}/products`, {
             cache: 'no-store',
         });
-        if (!res.ok) return [];
-        return await res.json();
+        if (!res.ok) return INITIAL_CATALOG_PRODUCTS;
+        const data = await res.json();
+        return Array.isArray(data) && data.length > 0 ? data : INITIAL_CATALOG_PRODUCTS;
     } catch (e) {
-        console.error('[SEO Layout] Failed to fetch products:', e);
-        return [];
+        console.error('[SEO Layout] Failed to fetch products, using seed fallback:', e);
+        return INITIAL_CATALOG_PRODUCTS;
     }
 }
 
@@ -79,40 +81,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const canonicalSlug = generateProductSlug(product.id, product.name);
     const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
     const activePrice = isPromo ? product.promo_price : product.price;
-    const priceText = activePrice.toFixed(2);
+    const priceText = activePrice.toFixed(0);
     const specs = getProductSpecs(product.id);
+    const identifier = PRODUCT_IDENTIFIERS[product.id];
+    const mpn = identifier?.mpn || product.key_spec || '';
 
     const isOutOfStock = product.stock <= 0;
-    const stockStatusTitle = isOutOfStock ? 'Order Oahu' : 'In-Stock Waipahu, Oahu';
-    const stockStatusDesc = isOutOfStock ? 'Order online for Oahu.' : 'In-Stock Waipahu, Oahu!';
+    const stockStatusTitle = isOutOfStock ? 'Oahu Specs & Availability' : 'In-Stock Waipahu, Oahu';
+    const stockStatusDesc = isOutOfStock ? 'Check Oahu availability:' : 'In-Stock in Waipahu, Oahu!';
     const discountText = isPromo && product.discount_percent ? ` (${product.discount_percent}% off)` : '';
     
-    const cleanCoverage = product.coverage ? product.coverage.split(' (')[0] : '';
-    const coverageTextDesc = cleanCoverage ? ` Cools ${cleanCoverage}.` : '';
+    const cleanCoverage = product.coverage_oahu || (product.coverage ? product.coverage.split(' (')[0] : '');
+    const coverageTextDesc = cleanCoverage ? ` Island-calibrated for ${cleanCoverage}.` : '';
 
-    const firstIdeal = specs?.idealFor ? specs.idealFor.split(',')[0].trim() : '';
-    const cleanFirstIdeal = firstIdeal; // Keep exact phrase intact for title SEO
+    const displayNameWithMpn = mpn && !product.name.toUpperCase().includes(mpn.toUpperCase())
+        ? `${product.name} (${mpn})`
+        : product.name;
 
-    let title = `Buy ${product.name} ${cleanFirstIdeal ? `(${cleanFirstIdeal})` : ''} | ${stockStatusTitle}`;
-    let description = `${stockStatusDesc} Buy ${product.name} for $${priceText}${discountText}. Ideal for ${specs.idealFor || 'general cooling'}. Free Waipahu pickup / $50 delivery + 1-Yr warranty.${coverageTextDesc} ${specs.benefits || ''}`;
+    let title = `${displayNameWithMpn} — $${priceText} | ${stockStatusTitle}`;
+    let description = `${stockStatusDesc} Buy ${displayNameWithMpn} for $${priceText}${discountText}. Free Waipahu warehouse pickup or $50 flat Oahu delivery.${coverageTextDesc} ${specs.benefits || ''}`;
 
     if (product.name.toLowerCase().includes('lg dual inverter')) {
         const btuStr = specs.btu.replace(',000', 'k').replace(' BTU', '');
-        const modelMatch = product.name.match(/\(([^)]+)\)/);
-        const modelCode = modelMatch ? modelMatch[1] : '';
+        const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
         
-        title = `LG ${btuStr} Dual Inverter AC ${modelCode} | ${stockStatusTitle}`;
+        title = `LG ${btuStr} BTU Dual Inverter Window AC (${modelCode}) — $${priceText} | ${stockStatusTitle}`;
         
-        const techBenefit = product.id === 1 ? 'Quiet & saves up to 40% energy.' 
-            : product.id === 2 ? 'Smart ThinQ WiFi remote control.' 
-            : product.id === 3 ? '2024 ENERGY STAR Most Efficient.'
-            : product.id === 4 ? 'Anti-corrosive Gold Fin coating.'
-            : product.id === 5 ? 'High-torque large space cooling.'
-            : product.id === 6 ? 'Ideal for vaulted open ceilings.'
-            : product.id === 7 ? 'Industrial titan-grade cooling.'
+        const techBenefit = product.id === 1 ? '44dB ultra-quiet & $45 Hawaii Energy Rebate eligible.' 
+            : product.id === 2 ? 'Smart ThinQ WiFi & $45 Hawaii Energy Rebate eligible.' 
+            : product.id === 3 ? 'ENERGY STAR Most Efficient & $45 Hawaii Energy Rebate.'
+            : product.id === 4 ? 'Gold Fin salt-air shield & $45 Hawaii Energy Rebate.'
+            : product.id === 5 ? 'Max 14,000 BTU on standard 115V plug + $45 Rebate.'
+            : product.id === 6 ? '230V high-velocity 500 CFM open living room cooling.'
+            : product.id === 7 ? '23,500 BTU flagship whole-floor cooling power.'
             : 'Ultra-quiet energy saver.';
 
-        description = `${isOutOfStock ? 'Order for Oahu!' : 'Oahu In-Stock!'} Buy LG Dual Inverter ${btuStr} AC ${modelCode} for $${priceText}${discountText}. Free Waipahu pickup / $50 delivery + 1-Yr Warranty. ${techBenefit}`;
+        description = `${stockStatusDesc} Buy LG ${btuStr} BTU Dual Inverter Window AC (${modelCode}) for $${priceText}${discountText}. Free Waipahu pickup / $50 Oahu delivery + 1-Yr Warranty. ${techBenefit}`;
     }
 
     const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');

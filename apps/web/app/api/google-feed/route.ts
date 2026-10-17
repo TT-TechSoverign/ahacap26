@@ -3,6 +3,7 @@ import { Product } from '@/types/inventory';
 import { generateProductSlug } from '@/lib/utils';
 import { getProductImages } from '@/lib/product-images';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,10 +20,20 @@ export async function GET() {
   try {
     const apiUrl = process.env.API_INTERNAL_URL 
       ? `${process.env.API_INTERNAL_URL}/api/v1/products` 
-      : 'http://localhost:8000/api/v1/products';
+      : 'http://prod-api:8000/api/v1/products';
       
-    const response = await fetch(apiUrl, { cache: 'no-store' });
-    const products: Product[] = await response.json();
+    let products: Product[] = INITIAL_CATALOG_PRODUCTS;
+    try {
+      const response = await fetch(apiUrl, { cache: 'no-store' });
+      if (response.ok) {
+        const liveData = await response.json();
+        if (Array.isArray(liveData) && liveData.length > 0) {
+          products = liveData;
+        }
+      }
+    } catch {
+      // Fallback to INITIAL_CATALOG_PRODUCTS
+    }
 
     const domain = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.affordablehome-ac.com';
 
@@ -30,9 +41,9 @@ export async function GET() {
       const availability = product.stock > 0 ? 'in_stock' : 'out_of_stock';
       const productLink = `${domain}/shop/${generateProductSlug(product.id, product.name)}`; 
       
-      // Resolve WebP high-resolution product images
-      const images = getProductImages(product.id);
-      const rawHero = images.length > 0 ? images[0] : (product.image_url ? product.image_url.replace('.svg', '.webp') : '/assets/logo-new.png');
+      // Resolve WebP high-resolution product images (Google Merchant strictly requires raster WebP/PNG/JPG, never SVG)
+      const images = getProductImages(product.id).map(img => img.replace(/\.svg$/i, '.webp'));
+      const rawHero = images.length > 0 ? images[0] : (product.image_url ? product.image_url.replace(/\.svg$/i, '.webp') : '/assets/logo-new.png');
       const imageLink = rawHero.startsWith('http') ? rawHero : `${domain}${rawHero}`;
       
       // Secondary / gallery images & 3D raytraced cutaway for Google Shopping interactive carousel
@@ -63,7 +74,8 @@ export async function GET() {
         allAdditionalImages.push(cutawayImgLink);
       }
       const additionalImagesXml = allAdditionalImages.map(img => {
-        const fullImg = img.startsWith('http') ? img : `${domain}${img}`;
+        const cleanImg = img.replace(/\.svg$/i, '.webp');
+        const fullImg = cleanImg.startsWith('http') ? cleanImg : `${domain}${cleanImg}`;
         return `<g:additional_image_link>${fullImg}</g:additional_image_link>`;
       }).join('\n          ');
 
@@ -71,19 +83,26 @@ export async function GET() {
       const identifier = PRODUCT_IDENTIFIERS[product.id];
       const brand = identifier?.brand || (product.name.startsWith('GE') ? 'GE Appliances' : 'LG');
       const gtin = identifier?.gtin12 || '';
-      let mpn = identifier?.mpn || '';
+      let mpn = identifier?.mpn || product.key_spec || '';
       if (!mpn) {
         const matchInParens = product.name.match(/\(([^)]+)\)/);
         if (matchInParens) {
           mpn = matchInParens[1].trim();
-        } else {
-          const words = product.name.split(' ');
-          const modelWord = words.find(w => /^[A-Z0-9]{4,12}$/i.test(w) && !['DUAL', 'WALL', 'BASE', 'CASEMENT'].includes(w.toUpperCase()));
-          if (modelWord) {
-            mpn = modelWord.trim();
-          }
         }
       }
+
+      const nameWithMpn = mpn && !product.name.toUpperCase().includes(mpn.toUpperCase())
+        ? `${product.name} (${mpn})`
+        : product.name;
+      const categoryLabel = product.id === 16
+        ? '26" Structural Through-The-Wall Sleeve'
+        : product.subcategory === 'ge'
+        ? '26" Built-In Wall Sleeve Air Conditioner'
+        : product.subcategory === 'universal_fit'
+        ? 'Cool + Heat Window & Wall Air Conditioner'
+        : 'Window Air Conditioner';
+      const voltLabel = product.voltage && product.voltage !== 'N/A' ? ` - ${product.voltage}` : '';
+      const richTitle = `${nameWithMpn} ${categoryLabel}${voltLabel} - Oahu Waipahu Pickup & Delivery`;
 
       // Google Product Taxonomy & Type
       const isCasement = product.subcategory === 'casement' || product.name.toLowerCase().includes('casement');
@@ -147,7 +166,7 @@ export async function GET() {
           <g:id>${product.id}</g:id>
           <g:google_product_category>${googleCategory}</g:google_product_category>
           <g:product_type>${productType}</g:product_type>
-          <g:title>${escapeXml(product.name)}</g:title>
+          <g:title>${escapeXml(richTitle)}</g:title>
           <g:description>${escapeXml(description)}</g:description>
           <g:link>${productLink}</g:link>
           <g:image_link>${imageLink}</g:image_link>

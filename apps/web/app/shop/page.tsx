@@ -9,6 +9,7 @@ import { useCart } from '../../context/CartContext';
 import { getProductImages } from '../../lib/product-images';
 import { Product } from '../../types/inventory';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
@@ -57,8 +58,8 @@ function DynamicIcon({ name, className }: { name: string; className?: string }) 
 
 function ShopPageContent() {
     const { addToCart, items, openCart } = useCart();
-    const [products, setProducts] = useState<Product[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [products, setProducts] = useState<Product[]>(INITIAL_CATALOG_PRODUCTS);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const { content } = useContent();

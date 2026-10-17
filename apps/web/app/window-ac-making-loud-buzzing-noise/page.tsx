@@ -138,7 +138,7 @@ export default function WindowAcBuzzingPage() {
                                 If the unit rattles inside the frame, installing an exterior support bracket with vibration-dampening neoprene pads often eliminates harmonic buzzing instantly.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                If your AC is over 5 years old and the internal motor bearings or compressor are humming loudly, upgrade to an ultra-quiet LG Dual Inverter unit from our Waipahu warehouse starting at $504 with an available <strong className="text-emerald-400">$45 Hawaii Energy rebate</strong>. Dual inverters modulate compressor speeds smoothly down to 44 dBA—whisper quiet.
+                                If your AC is over 5 years old and the internal motor bearings or compressor are humming loudly, upgrade to an ultra-quiet LG Dual Inverter unit from our Waipahu warehouse starting at $560 with an available <strong className="text-emerald-400">$45 Hawaii Energy rebate</strong>. Dual inverters modulate compressor speeds smoothly down to 44 dBA—whisper quiet.
                             </p>
                         </div>
 
@@ -149,7 +149,7 @@ export default function WindowAcBuzzingPage() {
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">New Whisper-Quiet Inverter AC</span>
-                                <span className="font-header font-bold text-xs text-emerald-400">From $504 (-$45 Rebate)</span>
+                                <span className="font-header font-bold text-xs text-emerald-400">From $560 (-$45 Rebate)</span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-xs text-slate-300">Standard Exterior Brackets</span>

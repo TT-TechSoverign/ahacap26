@@ -28,6 +28,7 @@ import {
     Flame
 } from 'lucide-react';
 import { BackToTop } from '@/components/BackToTop';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { trackFunnelEvent } from '@/lib/tracking';
 
 export default function CleanVsReplacePage() {
@@ -59,7 +60,7 @@ export default function CleanVsReplacePage() {
     const faqItems = [
         {
             q: "How do I know if my window AC is worth cleaning or replacing on Oahu?",
-            a: "If your unit is relatively new (under 3 years old), cools well, and the coils have no rust, washing the removable nylon filter with mild dish soap every 2 weeks will maintain peak airflow and keep mold away. However, if your unit is 4+ years old, smells sour inside, has crumbling aluminum fins from salt air, or is an older single-speed model, spending money to repair it is uneconomical. Upgrading to a brand-new LG Dual Inverter starts at just $504 with a $45 Hawaii Energy cash rebate and saves up to $424/year on your HECO bill."
+            a: "If your unit is relatively new (under 3 years old), cools well, and the coils have no rust, washing the removable nylon filter with mild dish soap every 2 weeks will maintain peak airflow and keep mold away. However, if your unit is 4+ years old, smells sour inside, has crumbling aluminum fins from salt air, or is an older single-speed model, spending money to repair it is uneconomical. Upgrading to a brand-new LG Dual Inverter starts at just $560 with a $45 Hawaii Energy cash rebate (or $395 for standard 6K BTU units) and saves up to $424/year on your HECO bill."
         },
         {
             q: "Is it worth paying to overhaul or chemically teardown an old window AC in Hawaii?",
@@ -102,7 +103,7 @@ export default function CleanVsReplacePage() {
             {
                 "@type": "HowTo",
                 "name": "How to Decide Whether to Clean or Replace Your Window AC on Oahu",
-                "description": "Step-by-step diagnostic guide to evaluate window air conditioner age, coil condition, mold severity, and HECO electric power consumption to decide between a $275 bench teardown or upgrading to an LG Dual Inverter.",
+                "description": "Step-by-step diagnostic guide to evaluate window air conditioner age, coil condition, mold severity, and HECO electric power consumption to decide between DIY filter maintenance or upgrading to an LG Dual Inverter.",
                 "step": [
                     {
                         "@type": "HowToStep",
@@ -112,7 +113,7 @@ export default function CleanVsReplacePage() {
                     {
                         "@type": "HowToStep",
                         "name": "Inspect Coil & Blower Wheel Fins",
-                        "text": "Shine a flashlight into the blower louvers. If you see black spotted mildew, it can be cleaned. If aluminum fins are crumbling or rusted, replace the unit."
+                        "text": "Shine a flashlight into the blower louvers. If you see light dust, rinse the slide-out filter. If aluminum fins are crumbling or rusted, replace the unit."
                     },
                     {
                         "@type": "HowToStep",
@@ -155,7 +156,7 @@ export default function CleanVsReplacePage() {
                         Clean vs. Replace: <span className="text-primary">Window AC</span> Decision Matrix
                     </h1>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Don&apos;t waste $275 cleaning an obsolete, rusted power hog—and don&apos;t throw away a salvageable 2-year-old AC. Use our calibrated island calculator to make the financially smart move.
+                        Don&apos;t waste hundreds trying to overhaul an obsolete, rusted power hog—and don&apos;t throw away a salvageable 2-year-old AC. Use our calibrated island calculator to make the financially smart move.
                     </p>
                 </div>
 
@@ -296,7 +297,7 @@ export default function CleanVsReplacePage() {
                                             <div>
                                                 <h3 className="text-2xl font-header font-black uppercase text-white">Upgrade to LG Dual Inverter</h3>
                                                 <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                                                    Your unit&apos;s age, coil condition, or energy draw makes a $275 teardown economically unviable. Investing in a brand new LG Dual Inverter ($504–$670) pays for itself quickly.
+                                                    Your unit&apos;s age, coil condition, or energy draw makes off-site repair economically unviable. Investing in a brand new LG Dual Inverter ($560–$755, or $395+ standard units) pays for itself quickly.
                                                 </p>
                                             </div>
                                         </div>
@@ -365,7 +366,7 @@ export default function CleanVsReplacePage() {
                                             </div>
                                             <div className="flex justify-between items-center text-xs">
                                                 <span className="text-slate-400">New Unit Upgrade Option:</span>
-                                                <span className="text-cyan-400 font-mono font-bold">From $504 (-$45 Rebate)</span>
+                                                <span className="text-cyan-400 font-mono font-bold">From $395 / $560 Dual Inverter</span>
                                             </div>
                                             <div className="flex justify-between items-center text-xs">
                                                 <span className="text-slate-400">Delivery:</span>
@@ -399,14 +400,17 @@ export default function CleanVsReplacePage() {
                     </div>
                 </section>
 
+                {/* Live Waipahu Quick-Shop */}
+                <WindowAcQuickShop title="Upgrade Today — Live Waipahu Replacement Units" />
+
                 {/* Head-to-Head Comparison Matrix Table */}
                 <section className="mb-20">
                     <div className="text-center max-w-3xl mx-auto mb-10">
                         <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white">
-                            Oahu Economics: <span className="text-primary">Old Unit Cleaned</span> vs. <span className="text-emerald-400">New LG Dual Inverter</span>
+                            Oahu Economics: <span className="text-primary">Old Single-Speed Unit</span> vs. <span className="text-emerald-400">New LG Dual Inverter</span>
                         </h2>
                         <p className="text-slate-400 text-xs sm:text-sm mt-2">
-                            Comparing a 5-year-old cleaned single-speed window AC against a new 14.7+ CEER LG Dual Inverter over a 24-month horizon.
+                            Comparing keeping a 5-year-old single-speed window AC against upgrading to a new 14.7+ CEER LG Dual Inverter over a 24-month horizon.
                         </p>
                     </div>
 
@@ -415,7 +419,7 @@ export default function CleanVsReplacePage() {
                             <thead>
                                 <tr className="bg-white/[0.04] border-b border-white/10 font-mono uppercase text-slate-400 text-[11px] tracking-wider">
                                     <th className="p-4 sm:p-5">Performance Metric</th>
-                                    <th className="p-4 sm:p-5 text-slate-300">5+ Yr Old Cleaned AC</th>
+                                    <th className="p-4 sm:p-5 text-slate-300">5+ Yr Old Single-Speed AC</th>
                                     <th className="p-4 sm:p-5 text-emerald-400 bg-emerald-500/5 border-l border-r border-emerald-500/20">Brand New LG Dual Inverter</th>
                                 </tr>
                             </thead>
@@ -424,9 +428,9 @@ export default function CleanVsReplacePage() {
                                     <td className="p-4 sm:p-5 font-bold text-white flex items-center gap-2">
                                         <DollarSign className="size-4 text-primary" /> Upfront Expense
                                     </td>
-                                    <td className="p-4 sm:p-5 text-slate-300">$275 (Bench Cleaning)</td>
+                                    <td className="p-4 sm:p-5 text-slate-300">$275+ (Third-Party Labor)</td>
                                     <td className="p-4 sm:p-5 text-emerald-400 font-bold bg-emerald-500/5 border-l border-r border-emerald-500/20">
-                                        $504 – $670 (Minus $45 Rebate)
+                                        $560 – $755 (Minus $45 Rebate)
                                     </td>
                                 </tr>
                                 <tr>

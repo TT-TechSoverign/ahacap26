@@ -21,6 +21,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const BEDROOM_MODELS = [
     {
@@ -30,8 +31,8 @@ const BEDROOM_MODELS = [
         noise: '44 dB Sleep Mode',
         ceer: 'CEER 11.5 Energy Star',
         plug: 'Standard 115V / 15A Plug',
-        price: '$504',
-        afterRebate: '$459 after $45 rebate',
+        price: '$560',
+        afterRebate: '$515 after $45 rebate',
         slug: '1-lg-dual-inverter-6-000-btu-lw6023ivsm'
     },
     {
@@ -41,8 +42,8 @@ const BEDROOM_MODELS = [
         noise: '44 dB Sleep Mode',
         ceer: 'CEER 12.0 Energy Star',
         plug: 'Standard 115V / 15A Plug',
-        price: '$545',
-        afterRebate: '$500 after $45 rebate',
+        price: '$595',
+        afterRebate: '$550 after $45 rebate',
         popular: true,
         slug: '2-lg-dual-inverter-8-000-btu-lw8022ivsm'
     },
@@ -53,8 +54,8 @@ const BEDROOM_MODELS = [
         noise: '44 dB Sleep Mode',
         ceer: 'CEER 12.0 Energy Star',
         plug: 'Standard 115V / 15A Plug',
-        price: '$614',
-        afterRebate: '$569 after $45 rebate',
+        price: '$650',
+        afterRebate: '$605 after $45 rebate',
         slug: '3-lg-dual-inverter-10-000-btu-lw1022ivsm'
     }
 ];
@@ -256,15 +257,17 @@ export default function QuietBedroomWindowAcPage() {
                                         <span className="text-xs font-mono text-emerald-400">{item.afterRebate}</span>
                                     </div>
                                     <Link 
-                                        href="/shop"
+                                        href={`/shop/${item.slug}`}
                                         className="w-full py-3 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
                                     >
-                                        Buy Now in Shop
+                                        View Specs &amp; Buy Now
                                     </Link>
                                 </div>
                             </div>
                         ))}
                     </div>
+
+                    <WindowAcQuickShop title="Live Waipahu Bedroom AC Inventory" />
                 </section>
 
                 {/* Pickup & Delivery Reassurance */}

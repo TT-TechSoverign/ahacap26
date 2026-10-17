@@ -59,7 +59,7 @@ const comparisonFaqSchema = {
             "name": "Which is cheaper: a window AC or a ductless mini split on Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Window ACs are substantially cheaper upfront: an in-stock LG Dual Inverter costs $504–$1,025 with $0-deposit installation options. Ductless mini-splits typically range from $3,800 to $5,500+ per zone installed. Dual Inverters close the operating efficiency gap by using variable-speed inverter compressors."
+                "text": "Window ACs are substantially cheaper upfront: an in-stock LG Dual Inverter costs $560–$1,025 with $0-deposit installation options. Ductless mini-splits typically range from $3,800 to $5,500+ per zone installed. Dual Inverters close the operating efficiency gap by using variable-speed inverter compressors."
             }
         },
         {

@@ -76,16 +76,65 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                 for it_obj in line_items.data:
                     it = it_obj.to_dict() if hasattr(it_obj, 'to_dict') else dict(it_obj)
                     desc = it.get('description', '')
-                    # Resolve product ID if window AC or inverter unit
+                    # Resolve product ID across all 16 catalog models
                     p_id = None
-                    if '14,000' in desc or 'LW1522FVSM' in desc:
-                        p_id = 5
-                    elif '12,000' in desc or 'LW1222IVSM' in desc:
-                        p_id = 4
-                    elif '10,000' in desc or 'LW1022FVSM' in desc:
-                        p_id = 3
-                    elif '8,000' in desc or 'LW8022IVSM' in desc:
-                        p_id = 2
+                    mpn_map = {
+                        'LW6023IVSM': 1,
+                        'LW8022IVSM': 2,
+                        'LW1022IVSM': 3,
+                        'LW1022FVSM': 3,
+                        'LW1222IVSM': 4,
+                        'LW1522FVSM': 5,
+                        'LW1522IVSM': 5,
+                        'LW1822IVSM': 6,
+                        'LW2422IVSM': 7,
+                        'LW8023HRSM': 8,
+                        'LW1823HRSM': 9,
+                        'LW2423HRSM': 10,
+                        'LW8024RD': 11,
+                        'LW1217ERSM1': 12,
+                        'AJCQ08AWJ': 13,
+                        'AJCQ10AWJ': 14,
+                        'AJCQ12AXXWA': 15,
+                        'AJCQ12AWJ': 15,
+                        'RAB26A': 16,
+                    }
+                    desc_upper = desc.upper()
+                    for code, mapped_id in mpn_map.items():
+                        if code in desc_upper:
+                            p_id = mapped_id
+                            break
+                    if p_id is None:
+                        if '6,000' in desc:
+                            p_id = 1
+                        elif '23,500' in desc:
+                            p_id = 7
+                        elif '23,000' in desc:
+                            p_id = 10
+                        elif '18,000' in desc and 'DUAL INVERTER' in desc_upper:
+                            p_id = 6
+                        elif '18,000' in desc:
+                            p_id = 9
+                        elif '14,000' in desc:
+                            p_id = 5
+                        elif '12,000' in desc and 'GE' in desc_upper:
+                            p_id = 15
+                        elif '12,000' in desc and 'DUAL INVERTER' in desc_upper:
+                            p_id = 4
+                        elif '12,000' in desc:
+                            p_id = 12
+                        elif '10,000' in desc and 'GE' in desc_upper:
+                            p_id = 14
+                        elif '10,000' in desc:
+                            p_id = 3
+                        elif '8,200' in desc:
+                            p_id = 13
+                        elif '7,600' in desc:
+                            p_id = 8
+                        elif '8,000' in desc and 'DUAL INVERTER' in desc_upper:
+                            p_id = 2
+                        elif '8,000' in desc:
+                            p_id = 11
 
                     items_data.append({
                         "product_id": p_id,

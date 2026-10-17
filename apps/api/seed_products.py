@@ -19,41 +19,55 @@ async def seed(cleanup: bool = False, force: bool = False, reset_stock: bool = F
     
     # 3. Insert/Update Data (Upsert)
     async with AsyncSessionLocal() as session:
-        existing_runtime_state = {}
+        existing_by_key_spec = {}
+        existing_by_id = {}
         try:
             res = await session.execute(
-                text("SELECT id, stock, price, promo_price, discount_percent FROM products")
+                text("SELECT id, key_spec, stock, price, promo_price, discount_percent FROM products")
             )
             for row in res.fetchall():
-                existing_runtime_state[row[0]] = {
-                    "stock": row[1],
-                    "price": row[2],
-                    "promo_price": row[3],
-                    "discount_percent": row[4],
+                state = {
+                    "id": row[0],
+                    "key_spec": row[1],
+                    "stock": row[2],
+                    "price": row[3],
+                    "promo_price": row[4],
+                    "discount_percent": row[5],
                 }
+                existing_by_id[row[0]] = state
+                if row[1]:
+                    existing_by_key_spec[str(row[1]).strip().upper()] = state
         except Exception:
             pass
 
-        if not force and len(existing_runtime_state) > 0:
-            print(f"   ℹ️  Products already exist in database ({len(existing_runtime_state)} found). Skipping seeding to preserve runtime modifications.")
+        if not force and len(existing_by_id) > 0:
+            print(f"   ℹ️  Products already exist in database ({len(existing_by_id)} found). Skipping seeding to preserve runtime modifications.")
             return
 
         # Only truncate if explicitly resetting stock AND cleanup is requested
         if cleanup and reset_stock:
             print("   🗑️  Clearing existing products (--reset-stock active)...")
             await session.execute(text("TRUNCATE TABLE products RESTART IDENTITY CASCADE"))
-            existing_runtime_state = {}
+            existing_by_key_spec = {}
+            existing_by_id = {}
         else:
-            print("   ℹ️  Preserving existing database stock & pricing during catalog upsert...")
+            print("   ℹ️  Preserving existing database stock & pricing by key_spec during catalog upsert...")
         
         products = load_products()
         print(f"   Seeding {len(products)} products from JSON...")
+        valid_columns = {c.name for c in models.Product.__table__.columns}
         
         for p in products:
             p_copy = dict(p)
             pid = p_copy.get("id")
-            if not reset_stock and pid in existing_runtime_state:
-                runtime = existing_runtime_state[pid]
+            kspec = str(p_copy.get("key_spec") or "").strip().upper()
+            runtime = None
+            if not reset_stock:
+                if kspec and kspec in existing_by_key_spec:
+                    runtime = existing_by_key_spec[kspec]
+                elif pid in existing_by_id and str(existing_by_id[pid].get("key_spec") or "").strip().upper() == kspec:
+                    runtime = existing_by_id[pid]
+            if runtime:
                 if runtime["stock"] is not None:
                     p_copy["stock"] = runtime["stock"]
                 if runtime["price"] is not None:
@@ -63,7 +77,8 @@ async def seed(cleanup: bool = False, force: bool = False, reset_stock: bool = F
                 if runtime["discount_percent"] is not None:
                     p_copy["discount_percent"] = runtime["discount_percent"]
 
-            model_instance = models.Product(**p_copy)
+            filtered_p = {k: v for k, v in p_copy.items() if k in valid_columns}
+            model_instance = models.Product(**filtered_p)
             await session.merge(model_instance)
 
         await session.commit()

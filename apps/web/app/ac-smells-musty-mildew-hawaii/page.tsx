@@ -34,7 +34,7 @@ const FAQS = [
     },
     {
         q: "What service eliminates this musty smell completely?",
-        a: "For ductless mini splits, our $275 Premium Deep Teardown pulls the drain pan and blower wheel out, pressure-washes the coils, and flushes the drain line with floor drop cloth protection. For window units with heavy internal mold, we recommend cleaning your washable filter or upgrading to a high-efficiency LG Dual Inverter starting at $504 with a $45 Hawaii Energy cash rebate."
+        a: "For ductless mini splits, our $275 Premium Deep Teardown pulls the drain pan and blower wheel out, pressure-washes the coils, and flushes the drain line with floor drop cloth protection. For window units with heavy internal mold, we recommend cleaning your washable filter or upgrading to a high-efficiency LG Dual Inverter starting at $560 with a $45 Hawaii Energy cash rebate."
     }
 ];
 

@@ -148,7 +148,7 @@ export default function AirFilterCarePage() {
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-xs text-slate-300">Window AC Replacement (LG Inverter)</span>
-                                <span className="font-header font-bold text-sm text-cyan-400">From $504 (-$45 Rebate)</span>
+                                <span className="font-header font-bold text-sm text-cyan-400">From $560 (-$45 Rebate)</span>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { Product } from '@/types/inventory'; // Adjusted to use alias
+import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +16,7 @@ export async function POST(req: Request) {
         }
 
         // 1. HARD GUARDRAIL: Real-Time Inventory Validation
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+        const apiUrl = process.env.API_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL || 'http://prod-api:8000';
         const payload = {
             items: items.map((item: any) => ({
                 product_id: item.id,
@@ -42,15 +43,19 @@ export async function POST(req: Request) {
         // Use Canonical Pricing from validation response
         const line_items = items.map((clientItem: Product & { quantity: number }) => {
             const canonicalItem = validationData.results.find((r: any) => r.product_id === clientItem.id);
+            const mpn = PRODUCT_IDENTIFIERS[canonicalItem.product_id]?.mpn || canonicalItem.name.match(/\(([^)]+)\)/)?.[1] || 'N/A';
+            const displayName = mpn !== 'N/A' && !canonicalItem.name.includes(mpn)
+                ? `${canonicalItem.name} (${mpn})`
+                : canonicalItem.name;
             return {
                 price_data: {
                     currency: 'usd',
                     product_data: {
-                        name: canonicalItem.name, // Use backend name
+                        name: displayName, // Use backend name + canonical model code
                         images: clientItem.image_url && clientItem.image_url.startsWith('http') ? [clientItem.image_url] : undefined,
                         metadata: {
                             product_id: canonicalItem.product_id.toString(), // CRITICAL FOR WEBHOOK IDEMPOTENCY
-                            model_number: canonicalItem.name.match(/\(([^)]+)\)/)?.[1] || 'N/A', 
+                            model_number: mpn, 
                             category: clientItem.category,
                         },
                     },
@@ -137,7 +142,7 @@ export async function POST(req: Request) {
                     message: 'FULFILLMENT NOTICE: Unit pricing reflects Local Pickup at our Waipahu Distribution Center (94-150 Leoleo St. #203). WARNING: Our facility is an active distribution hub; unscheduled arrivals cannot be accommodated. A coordinator will contact you within 24 business hours to schedule a specific window. Optional Island-Wide Delivery is available for a flat $50.00 fee to most residential zones (excluding North Shore, Waianae, Waikiki, and Waimanalo).'
                 },
                 submit: {
-                    message: 'By confirming, you agree to the All Sales Final policy.'
+                    message: 'US-Issued Cards Only (50 US States). International & territory cards are not accepted. By confirming, you agree to the All Sales Final policy.'
                 }
             },
             phone_number_collection: {

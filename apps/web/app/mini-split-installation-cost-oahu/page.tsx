@@ -105,7 +105,7 @@ const FAQS = [
     },
     {
         q: "Should I buy a window AC instead if my budget is tighter?",
-        a: "If your budget is under $3,500, a modern in-stock LG Dual Inverter window AC ($504 to $1,025) is an exceptional alternative. They run on standard 115V wall outlets, feature variable-speed compressors that save almost as much HECO electricity as mini-splits, and qualify for our $45 Hawaii Energy cash rebate."
+        a: "If your budget is under $3,500, a modern in-stock LG Dual Inverter window AC ($560 to $1,025) is an exceptional alternative. They run on standard 115V wall outlets, feature variable-speed compressors that save almost as much HECO electricity as mini-splits, and qualify for our $45 Hawaii Energy cash rebate."
     }
 ];
 

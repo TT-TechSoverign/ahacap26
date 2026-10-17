@@ -56,7 +56,7 @@ const buzzingAcFaqSchema = {
             "name": "Can Affordable Home A/C silence or repair a buzzing window unit?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. We offer on-site bracket re-seating and vibration dampening, or brand-new whisper-quiet Dual Inverter models starting at $504 (as quiet as 44 dB) with an available $45 Hawaii Energy rebate."
+                "text": "Yes. We offer on-site bracket re-seating and vibration dampening, or brand-new whisper-quiet Dual Inverter models starting at $560 (as quiet as 44 dB) with an available $45 Hawaii Energy rebate."
             }
         }
     ]

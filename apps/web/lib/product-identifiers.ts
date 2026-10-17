@@ -23,7 +23,7 @@ export const PRODUCT_IDENTIFIERS: Record<number, ProductIdentifier> = {
         gtin12: '048231605861',
         mpn: 'LW8022IVSM',
         brand: 'LG',
-        catalystBadge: '⚡ Most Popular Bedroom Upgrade • +33% Power (+$31 over 6k)',
+        catalystBadge: '⚡ Most Popular Bedroom Upgrade • +33% Power (+$35 over 6k)',
         plugType: '115V',
         bestFor: 'Master Bedrooms & Nurseries (Up to 350 sq. ft. AHAM • 150–250 sq. ft. Island)'
     },
@@ -104,7 +104,7 @@ export const PRODUCT_IDENTIFIERS: Record<number, ProductIdentifier> = {
         gtin12: '048231606950',
         mpn: 'LW8024RD',
         brand: 'LG',
-        catalystBadge: '💰 Best Value Island Workhorse • 8,000 BTU 12.0 CEER ($529 Promo)',
+        catalystBadge: '💰 Best Value Island Workhorse • 8,000 BTU 12.0 CEER ($395 Waipahu Price)',
         plugType: '115V',
         bestFor: 'Standard Bedroom Budget Replacement (Up to 350 sq. ft. AHAM • 150–250 sq. ft. Island)'
     },

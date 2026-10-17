@@ -23,7 +23,7 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 const FAQS = [
     {
         q: "When should I replace my window AC instead of cleaning or repairing it?",
-        a: "If your window AC is over 4 to 5 years old, has severe chassis rust from salt air, is making loud bearing grinding noises, or is an older non-inverter unit driving up your HECO bill, replacing it with an LG Dual Inverter ($504 to $1,025) is far more economical than expensive component repairs."
+        a: "If your window AC is over 4 to 5 years old, has severe chassis rust from salt air, is making loud bearing grinding noises, or is an older non-inverter unit driving up your HECO bill, replacing it with an LG Dual Inverter ($560 to $1,025) is far more economical than expensive component repairs."
     },
     {
         q: "Can you haul away and dispose of my old window AC?",
@@ -115,7 +115,7 @@ export default function WindowAcReplacementPage() {
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3">
                             <div className="flex items-center gap-2 text-primary font-header font-bold text-lg uppercase">
                                 <RefreshCw className="size-5" />
-                                <span>Replace with New Inverter ($504 - $1,025)</span>
+                                <span>Replace with New Inverter ($395 - $1,025)</span>
                             </div>
                             <ul className="space-y-2 text-xs text-slate-300 font-sans">
                                 <li>&bull; Unit is 4+ years old with crumbling aluminum fins</li>

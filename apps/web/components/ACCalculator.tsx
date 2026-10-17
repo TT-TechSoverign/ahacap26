@@ -150,13 +150,15 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
 
     const StatusIcon = sizingStatus.icon;
 
-    // Get recommended shop link based on BTU mapping
+    // Get recommended in-stock shop link based on BTU mapping
     const recommendedShopLink = useMemo(() => {
         const btu = calculations.recommendedBtu;
-        if (btu <= 8500) return "/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm";
+        if (btu <= 6500) return "/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm";
+        if (btu <= 10500) return "/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm";
         if (btu <= 13000) return "/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm";
         if (btu <= 16000) return "/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm";
-        return "/shop/oahu-window-ac-warehouse";
+        if (btu <= 19500) return "/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm";
+        return "/shop/10-lg-dual-inverter-cool-heat-23-500-btu-lw2423hrsm";
     }, [calculations.recommendedBtu]);
 
     return (

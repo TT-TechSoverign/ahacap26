@@ -112,15 +112,22 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
                     <Loader2 className="size-5 animate-spin" />
                 ) : (
                     <>
-                        <span>Confirm & Pay</span>
+                        <span>Confirm & Pay (US-Issued Cards Only)</span>
                         <Lock className="size-5 group-hover:translate-x-1 transition-transform" />
                     </>
                 )}
             </button>
 
-            <div className="flex items-center justify-center gap-2 text-slate-600 mt-4">
-                <Lock className="size-3.5" />
-                <span className="text-[10px] font-mono uppercase tracking-widest">Processed securely by Stripe</span>
+            <div className="flex flex-col items-center justify-center gap-1.5 text-slate-400 mt-4">
+                <div className="flex items-center gap-2 text-slate-500">
+                    <Lock className="size-3.5 text-emerald-400" />
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-300 font-bold">
+                        US-Issued Cards Only (50 US States) • Processed Securely by Stripe
+                    </span>
+                </div>
+                <span className="text-[10px] text-slate-500 text-center">
+                    International & US-territory issued cards are not accepted. Billing & shipping address required in US.
+                </span>
             </div>
         </div>
     );

@@ -287,7 +287,7 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
         "service_pricing_matrix": {
             "installation_replacement_estimates": "$0 Free In-Home Estimate for new or replacement mini-split and window AC installations",
             "service_quotes": "Custom transparent quotes by licensed technicians (CT-36775); zero upfront booking payment barriers and no fabricated flat-rate packages",
-            "window_ac_policy": "Waipahu warehouse-direct inventory sales ($504 to $1,025), custom jalousie & standard window installation, and clean-vs-replace assessments (no off-site shop teardowns)",
+            "window_ac_policy": "Waipahu warehouse-direct inventory sales ($560 to $1,025), custom jalousie & standard window installation, and clean-vs-replace assessments (no off-site shop teardowns)",
             "island_flat_delivery": "$50 flat Oahu-wide delivery fee for window and mini-split units",
             "warehouse_pickup": "$0 (Free customer pickup at 94-150 Leoleo St #203, Waipahu, HI 96797)"
         },
@@ -1725,7 +1725,7 @@ async def run_agent_oahu_grounding() -> Dict[str, Any]:
             "freight_lead_time": "14-21 Days Mainland Transit vs 0 Days (AHAC Waipahu Central Warehouse in stock)"
         },
         "pricing_matrix": {
-            "window_ac_inventory": "$504 - $1,025 (16 Factory-Sealed Models at Waipahu Warehouse)",
+            "window_ac_inventory": "$395 - $1,025 (16 Factory-Sealed Models at Waipahu Warehouse)",
             "mini_split_estimate": "$0 Free In-Home Estimate (Custom itemized quote by CT-36775 licensed technician)",
             "mini_split_service": "Custom transparent quotes by appointment ($0 upfront booking barrier)",
             "exterior_bracket_option": "Cantilever bracket evaluated on-site ($0 deposit; no bracket needed for standard sills)",
@@ -1799,7 +1799,7 @@ async def run_agent_market_research() -> Dict[str, Any]:
         "competitor_landscape": {
             "big_box_retailers": "Big-box retail stores: Limited in-stock sizing, no custom jalousie fitting, 2-3 wk mainland freight wait for high-efficiency inverters.",
             "island_hvac_contractors": "$250-$350/hr truck rolls, 3 to 6 week scheduling backlogs during peak trade-wind heat surges.",
-            "ahac_edge": "Waipahu warehouse in-stock inventory ($504-$1,025), $0 Free In-Home Mini-Split Estimates, $50 flat island delivery, free pickup by appointment."
+            "ahac_edge": "Waipahu warehouse in-stock inventory ($560-$1,025), $0 Free In-Home Mini-Split Estimates, $50 flat island delivery, free pickup by appointment."
         },
         "power_rate_index": "Hawaiian Electric (HECO) residential baseline ~44.2¢/kWh.",
         "customer_add_to_cart_drivers": {
@@ -1954,7 +1954,7 @@ async def run_agent_schema_metadata_engine() -> Dict[str, Any]:
         "google_rich_results_ready": True,
         "schemas": schemas_audited,
         "dynamic_serp_tags": {
-            "price_range_displayed": "$504 - $1,025 (In Stock in Waipahu)",
+            "price_range_displayed": "$395 - $1,025 (In Stock in Waipahu)",
             "contractor_license_tag": "Hawaii Contractor License CT-36775",
             "stock_status_tag": "InStock (Waipahu Warehouse Pickup by Appt)"
         },
@@ -2888,26 +2888,38 @@ async def migrate_and_reseed_catalog(request: Request, db: AsyncSession = Depend
     with open(json_path, 'r', encoding='utf-8') as f:
         products_data = json.load(f)
     
-    # Preserve live admin stock & pricing from PostgreSQL before merging catalog specs
-    existing_runtime_state = {}
+    # Preserve live admin stock & pricing from PostgreSQL by key_spec before merging catalog specs
+    existing_by_key_spec = {}
+    existing_by_id = {}
     try:
-        res = await db.execute(text("SELECT id, stock, price, promo_price, discount_percent FROM products"))
+        res = await db.execute(text("SELECT id, key_spec, stock, price, promo_price, discount_percent FROM products"))
         for row in res.fetchall():
-            existing_runtime_state[row[0]] = {
-                "stock": row[1],
-                "price": row[2],
-                "promo_price": row[3],
-                "discount_percent": row[4],
+            state = {
+                "id": row[0],
+                "key_spec": row[1],
+                "stock": row[2],
+                "price": row[3],
+                "promo_price": row[4],
+                "discount_percent": row[5],
             }
+            existing_by_id[row[0]] = state
+            if row[1]:
+                existing_by_key_spec[str(row[1]).strip().upper()] = state
     except Exception as e:
         logger.warning(f"Could not snapshot existing product stock before reseed: {e}")
 
+    valid_columns = {c.name for c in models.Product.__table__.columns}
     upserted_count = 0
     for p in products_data:
         p_copy = dict(p)
         pid = p_copy.get("id")
-        if pid in existing_runtime_state:
-            runtime = existing_runtime_state[pid]
+        kspec = str(p_copy.get("key_spec") or "").strip().upper()
+        runtime = None
+        if kspec and kspec in existing_by_key_spec:
+            runtime = existing_by_key_spec[kspec]
+        elif pid in existing_by_id and str(existing_by_id[pid].get("key_spec") or "").strip().upper() == kspec:
+            runtime = existing_by_id[pid]
+        if runtime:
             if runtime["stock"] is not None:
                 p_copy["stock"] = runtime["stock"]
             if runtime["price"] is not None:
@@ -2916,10 +2928,11 @@ async def migrate_and_reseed_catalog(request: Request, db: AsyncSession = Depend
                 p_copy["promo_price"] = runtime["promo_price"]
             if runtime["discount_percent"] is not None:
                 p_copy["discount_percent"] = runtime["discount_percent"]
-        model_instance = models.Product(**p_copy)
+        filtered_p = {k: v for k, v in p_copy.items() if k in valid_columns}
+        model_instance = models.Product(**filtered_p)
         await db.merge(model_instance)
         upserted_count += 1
-    
+
     await db.commit()
     await log_dev_os_audit(db, "CATALOG_MIGRATE_AND_RESEED", {"products_count": upserted_count, "columns_added": len(migration_columns)}, ip=ip)
     

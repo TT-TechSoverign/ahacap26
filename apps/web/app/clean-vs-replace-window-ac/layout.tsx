@@ -59,7 +59,7 @@ const cleanVsReplaceFaqSchema = {
             "name": "How do I know if my window AC is worth cleaning or replacing on Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "If your unit is relatively new (under 3 years old), cools well, and the coils have no rust, washing the removable nylon filter with mild dish soap every 2 weeks will maintain peak airflow and keep mold away. However, if your unit is 4+ years old, smells sour inside, has crumbling aluminum fins from salt air, or is an older single-speed model, spending money to repair it is uneconomical. Upgrading to a brand-new LG Dual Inverter starts at just $504 with a $45 Hawaii Energy cash rebate and saves up to $424/year on your HECO bill."
+                "text": "If your unit is relatively new (under 3 years old), cools well, and the coils have no rust, washing the removable nylon filter with mild dish soap every 2 weeks will maintain peak airflow and keep mold away. However, if your unit is 4+ years old, smells sour inside, has crumbling aluminum fins from salt air, or is an older single-speed model, spending money to repair it is uneconomical. Upgrading to a brand-new LG Dual Inverter starts at just $560 with a $45 Hawaii Energy cash rebate and saves up to $424/year on your HECO bill."
             }
         },
         {

@@ -530,7 +530,7 @@ export function DispatchWizard() {
                             By Appointment First • Upfront Quotes
                         </div>
                         <p className="text-slate-400 text-[11px] leading-relaxed max-w-lg mx-auto">
-                            $0 to book in-home estimates for new or replacement installations. Island flat rates: $175 mini split diagnosis, $175 basic mini split cleaning, $275 premium mini split cleaning, $275 window AC deep cleaning.
+                            $0 to book in-home estimates for new or replacement installations. Island flat rates: $175 mini split diagnosis, $175 basic mini split cleaning, $275 premium mini split cleaning, and in-stock Waipahu Window ACs ($395–$1,025).
                         </p>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -29,147 +29,181 @@ import { useCart } from '@/context/CartContext';
 import { Product } from '@/types/inventory';
 import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
+import { isCampaignActive, generateProductSlug } from '@/lib/utils';
+
+type GuideModel = Product & { idealRoom: string; plugType: string; hecoMonthly: string; specialBadge?: string };
+
+const INITIAL_GUIDE_MODELS: GuideModel[] = [
+    {
+        id: 1,
+        name: "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
+        price: 560,
+        promo_price: 504,
+        stock: 30,
+        category: "WINDOW_AC",
+        subcategory: "dual_inverter",
+        btu: 6000,
+        voltage: "115V / 15 Amp",
+        coverage: "Up to 260 sq. ft. (AHAM) • Up to 220 sq. ft. (Oahu)",
+        noise_level: "44 / 54 dB",
+        dehumidification: "1.4 Pts/Hr",
+        idealRoom: "Small Bedroom / Home Office",
+        plugType: "Standard 115V (NEMA 5-15P)",
+        hecoMonthly: "~$32 / mo",
+        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        specialBadge: "15.5 CEER • 44dB Quiet"
+    },
+    {
+        id: 2,
+        name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
+        price: 595,
+        promo_price: 535,
+        stock: 0,
+        category: "WINDOW_AC",
+        subcategory: "dual_inverter",
+        btu: 8000,
+        voltage: "115V / 15 Amp",
+        coverage: "Up to 350 sq. ft. (AHAM) • Up to 280 sq. ft. (Oahu)",
+        noise_level: "44 / 54 dB",
+        dehumidification: "2.5 Pts/Hr",
+        idealRoom: "Master Bedroom / Nursery",
+        plugType: "Standard 115V (NEMA 5-15P)",
+        hecoMonthly: "~$38 / mo",
+        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        specialBadge: "★ #1 Oahu Bedroom Seller"
+    },
+    {
+        id: 3,
+        name: "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
+        price: 650,
+        promo_price: 585,
+        stock: 15,
+        category: "WINDOW_AC",
+        subcategory: "dual_inverter",
+        btu: 10000,
+        voltage: "115V / 15 Amp",
+        coverage: "Up to 450 sq. ft. (AHAM) • Up to 330 sq. ft. (Oahu)",
+        noise_level: "44 / 58 dB",
+        dehumidification: "2.9 Pts/Hr",
+        idealRoom: "Large Master Suite / Studio",
+        plugType: "Standard 115V (NEMA 5-15P)",
+        hecoMonthly: "~$44 / mo",
+        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        specialBadge: "ENERGY STAR® Most Efficient"
+    },
+    {
+        id: 4,
+        name: "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
+        price: 745,
+        promo_price: 670,
+        stock: 30,
+        category: "WINDOW_AC",
+        subcategory: "dual_inverter",
+        btu: 12000,
+        voltage: "115V / 15 Amp",
+        coverage: "Up to 550 sq. ft. (AHAM) • Up to 380 sq. ft. (Oahu)",
+        noise_level: "44 / 58 dB",
+        dehumidification: "3.8 Pts/Hr",
+        idealRoom: "Studio / Open Living Area",
+        plugType: "Standard 115V (NEMA 5-15P)",
+        hecoMonthly: "~$48 / mo",
+        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        specialBadge: "Gold Fin™ Salt Protection"
+    },
+    {
+        id: 5,
+        name: "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
+        price: 785,
+        promo_price: 706,
+        stock: 15,
+        category: "WINDOW_AC",
+        subcategory: "dual_inverter",
+        btu: 14000,
+        voltage: "115V / 15 Amp",
+        coverage: "Up to 700 sq. ft. (AHAM) • Up to 450 sq. ft. (Oahu)",
+        noise_level: "44 / 58 dB",
+        dehumidification: "4.2 Pts/Hr",
+        idealRoom: "Living Area / Dining Room",
+        plugType: "Standard 115V (NEMA 5-15P)",
+        hecoMonthly: "~$58 / mo",
+        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        specialBadge: "Maximum 115V Cooling"
+    },
+    {
+        id: 6,
+        name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
+        price: 865,
+        promo_price: 778,
+        stock: 20,
+        category: "WINDOW_AC",
+        subcategory: "dual_inverter",
+        btu: 18000,
+        voltage: "208/230V / 15 Amp",
+        coverage: "Up to 1,000 sq. ft. (AHAM) • Up to 600 sq. ft. (Oahu)",
+        noise_level: "44 / 59 dB",
+        dehumidification: "4.2 Pts/Hr",
+        idealRoom: "Open Concept / Vaulted Ceilings",
+        plugType: "208/230V 15A (NEMA 6-15P)",
+        hecoMonthly: "~$68 / mo",
+        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        specialBadge: "500 CFM High-Velocity Throw"
+    },
+    {
+        id: 7,
+        name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
+        price: 985,
+        promo_price: 886,
+        stock: 0,
+        category: "WINDOW_AC",
+        subcategory: "dual_inverter",
+        btu: 23500,
+        voltage: "208/230V / 15 Amp",
+        coverage: "Up to 1,440 sq. ft. (AHAM) • Up to 800 sq. ft. (Oahu)",
+        noise_level: "53 / 62 dB",
+        dehumidification: "5.6 Pts/Hr",
+        idealRoom: "Whole-Home Open Layout",
+        plugType: "208/230V 15A (NEMA 6-15P)",
+        hecoMonthly: "~$82 / mo",
+        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        specialBadge: "Flagship 23,500 BTU Cooling"
+    }
+];
 
 export default function LgDualInverterGuidePage() {
     const { addToCart, openCart } = useCart();
     const [activeFaq, setActiveFaq] = useState<number | null>(null);
     const [selectedFilter, setSelectedFilter] = useState<'all' | '115v' | '230v' | 'bedroom' | 'living'>('all');
+    const [allModels, setAllModels] = useState<GuideModel[]>(INITIAL_GUIDE_MODELS);
+    const isPromo = isCampaignActive();
 
-    const allModels: (Product & { idealRoom: string; plugType: string; hecoMonthly: string; specialBadge?: string })[] = [
-        {
-            id: 1,
-            name: "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
-            price: 560,
-            promo_price: 504,
-            stock: 30,
-            category: "WINDOW_AC",
-            subcategory: "dual_inverter",
-            btu: 6000,
-            voltage: "115V / 15 Amp",
-            coverage: "Up to 260 sq. ft. (AHAM) • Up to 220 sq. ft. (Oahu)",
-            noise_level: "44 / 54 dB",
-            dehumidification: "1.4 Pts/Hr",
-            idealRoom: "Small Bedroom / Home Office",
-            plugType: "Standard 115V (NEMA 5-15P)",
-            hecoMonthly: "~$32 / mo",
-            image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-            specialBadge: "15.5 CEER • 44dB Quiet"
-        },
-        {
-            id: 2,
-            name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
-            price: 600,
-            promo_price: 540,
-            stock: 50,
-            category: "WINDOW_AC",
-            subcategory: "dual_inverter",
-            btu: 8000,
-            voltage: "115V / 15 Amp",
-            coverage: "Up to 350 sq. ft. (AHAM) • Up to 280 sq. ft. (Oahu)",
-            noise_level: "44 / 54 dB",
-            dehumidification: "2.5 Pts/Hr",
-            idealRoom: "Master Bedroom / Nursery",
-            plugType: "Standard 115V (NEMA 5-15P)",
-            hecoMonthly: "~$38 / mo",
-            image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-            specialBadge: "★ #1 Oahu Bedroom Seller"
-        },
-        {
-            id: 3,
-            name: "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
-            price: 650,
-            promo_price: 585,
-            stock: 50,
-            category: "WINDOW_AC",
-            subcategory: "dual_inverter",
-            btu: 10000,
-            voltage: "115V / 15 Amp",
-            coverage: "Up to 450 sq. ft. (AHAM) • Up to 330 sq. ft. (Oahu)",
-            noise_level: "44 / 58 dB",
-            dehumidification: "2.9 Pts/Hr",
-            idealRoom: "Large Master Suite / Studio",
-            plugType: "Standard 115V (NEMA 5-15P)",
-            hecoMonthly: "~$44 / mo",
-            image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-            specialBadge: "ENERGY STAR® Most Efficient"
-        },
-        {
-            id: 4,
-            name: "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
-            price: 750,
-            promo_price: 675,
-            stock: 50,
-            category: "WINDOW_AC",
-            subcategory: "dual_inverter",
-            btu: 12000,
-            voltage: "115V / 15 Amp",
-            coverage: "Up to 550 sq. ft. (AHAM) • Up to 380 sq. ft. (Oahu)",
-            noise_level: "44 / 58 dB",
-            dehumidification: "3.8 Pts/Hr",
-            idealRoom: "Studio / Open Living Area",
-            plugType: "Standard 115V (NEMA 5-15P)",
-            hecoMonthly: "~$48 / mo",
-            image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-            specialBadge: "Gold Fin™ Salt Protection"
-        },
-        {
-            id: 5,
-            name: "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
-            price: 830,
-            promo_price: 747,
-            stock: 50,
-            category: "WINDOW_AC",
-            subcategory: "dual_inverter",
-            btu: 14000,
-            voltage: "115V / 15 Amp",
-            coverage: "Up to 700 sq. ft. (AHAM) • Up to 450 sq. ft. (Oahu)",
-            noise_level: "44 / 58 dB",
-            dehumidification: "4.2 Pts/Hr",
-            idealRoom: "Living Area / Dining Room",
-            plugType: "Standard 115V (NEMA 5-15P)",
-            hecoMonthly: "~$58 / mo",
-            image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-            specialBadge: "Maximum 115V Cooling"
-        },
-        {
-            id: 6,
-            name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
-            price: 945,
-            promo_price: 850,
-            stock: 30,
-            category: "WINDOW_AC",
-            subcategory: "dual_inverter",
-            btu: 18000,
-            voltage: "208/230V / 15 Amp",
-            coverage: "Up to 1,000 sq. ft. (AHAM) • Up to 600 sq. ft. (Oahu)",
-            noise_level: "44 / 59 dB",
-            dehumidification: "4.2 Pts/Hr",
-            idealRoom: "Open Concept / Vaulted Ceilings",
-            plugType: "208/230V 15A (NEMA 6-15P)",
-            hecoMonthly: "~$68 / mo",
-            image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-            specialBadge: "500 CFM High-Velocity Throw"
-        },
-        {
-            id: 7,
-            name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-            price: 1055,
-            promo_price: 950,
-            stock: 20,
-            category: "WINDOW_AC",
-            subcategory: "dual_inverter",
-            btu: 23500,
-            voltage: "208/230V / 15 Amp",
-            coverage: "Up to 1,440 sq. ft. (AHAM) • Up to 800 sq. ft. (Oahu)",
-            noise_level: "53 / 62 dB",
-            dehumidification: "5.6 Pts/Hr",
-            idealRoom: "Whole-Home Open Layout",
-            plugType: "208/230V 15A (NEMA 6-15P)",
-            hecoMonthly: "~$82 / mo",
-            image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-            specialBadge: "Flagship 23,500 BTU Cooling"
-        }
-    ];
+    useEffect(() => {
+        let isMounted = true;
+        fetch('/api/v1/products', { cache: 'no-store' })
+            .then((res) => (res.ok ? res.json() : null))
+            .then((liveProducts: Product[] | null) => {
+                if (!isMounted || !Array.isArray(liveProducts)) return;
+                const liveMap = new Map(liveProducts.map((p) => [p.id, p]));
+                setAllModels(
+                    INITIAL_GUIDE_MODELS.map((m) => {
+                        const live = liveMap.get(m.id);
+                        if (!live) return m;
+                        return {
+                            ...m,
+                            price: live.price,
+                            promo_price: live.promo_price ?? m.promo_price,
+                            stock: live.stock,
+                            coverage: live.coverage || m.coverage,
+                            noise_level: live.noise_level || m.noise_level,
+                            dehumidification: live.dehumidification || m.dehumidification,
+                        };
+                    })
+                );
+            })
+            .catch(() => {});
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
     const filteredModels = allModels.filter(m => {
         if (selectedFilter === '115v') return m.voltage?.includes('115V');
@@ -180,13 +214,18 @@ export default function LgDualInverterGuidePage() {
     });
 
     const handleBuy = (product: Product) => {
+        if (product.stock <= 0) return;
+        const activePrice = (isPromo && product.promo_price) ? product.promo_price : product.price;
         trackFunnelEvent('add_to_cart_guide', {
             product_id: product.id,
             product_name: product.name,
-            price: product.promo_price || product.price,
+            price: activePrice,
             btu: product.btu
         });
-        addToCart(product);
+        addToCart({
+            ...product,
+            price: activePrice,
+        });
         openCart();
     };
 
@@ -279,7 +318,7 @@ export default function LgDualInverterGuidePage() {
                 <div className="text-center max-w-4xl mx-auto space-y-4 mb-14">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-widest">
                         <Warehouse className="size-3.5" />
-                        In-Stock Waipahu Warehouse Inventory &bull; All Sizes Ready
+                        Live Waipahu Warehouse Inventory &bull; Instant Oahu Pickup or $50 Delivery
                     </div>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-header font-black tracking-tight uppercase leading-[0.95] text-white">
                         Oahu <span className="text-primary">LG Dual Inverter</span> Buyer&apos;s Guide
@@ -296,7 +335,7 @@ export default function LgDualInverterGuidePage() {
                 <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
                     {[
                         { id: 'all', label: 'All Models (6k–23.5k)' },
-                        { id: 'bedroom', label: 'Bedrooms (6k & 8k)' },
+                        { id: 'bedroom', label: 'Bedrooms (6k–10k)' },
                         { id: 'living', label: 'Living Rooms (12k–23.5k)' },
                         { id: '115v', label: '115V Standard Plugs' },
                         { id: '230v', label: '230V High-Capacity Plugs' },
@@ -317,91 +356,115 @@ export default function LgDualInverterGuidePage() {
 
                 {/* Model Comparison Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-                    {filteredModels.map(product => (
-                        <div 
-                            key={product.id}
-                            className="p-6 rounded-3xl bg-slate-900/70 border border-white/10 shadow-2xl flex flex-col justify-between relative hover:border-cyan-500/40 transition-all group"
-                        >
-                            {product.specialBadge && (
-                                <div className="absolute -top-3 left-6 z-10">
-                                    <span className="px-3 py-1 rounded-full bg-cyan-500 text-slate-950 text-[10px] font-mono font-black uppercase tracking-wider shadow-lg">
-                                        {product.specialBadge}
-                                    </span>
-                                </div>
-                            )}
-
-                            <div className="space-y-4">
-                                <div className="aspect-[4/3] flex items-center justify-center relative p-4 rounded-2xl bg-black/30 border border-white/5 mt-2">
-                                    <Image
-                                        src={product.image_url!}
-                                        alt={product.name}
-                                        width={320}
-                                        height={220}
-                                        className="object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform duration-300"
-                                        unoptimized
-                                    />
-                                    <div className="absolute top-2 right-2">
-                                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold uppercase">
-                                            {product.stock} In Stock
+                    {filteredModels.map(product => {
+                        const activePrice = (isPromo && product.promo_price) ? product.promo_price : product.price;
+                        const isOutOfStock = product.stock <= 0;
+                        const slug = generateProductSlug(product.id, product.name);
+                        return (
+                            <div 
+                                key={product.id}
+                                className="p-6 rounded-3xl bg-slate-900/70 border border-white/10 shadow-2xl flex flex-col justify-between relative hover:border-cyan-500/40 transition-all group"
+                            >
+                                {product.specialBadge && (
+                                    <div className="absolute -top-3 left-6 z-10">
+                                        <span className="px-3 py-1 rounded-full bg-cyan-500 text-slate-950 text-[10px] font-mono font-black uppercase tracking-wider shadow-lg">
+                                            {product.specialBadge}
                                         </span>
                                     </div>
+                                )}
+
+                                <div className="space-y-4">
+                                    <div className="aspect-[4/3] flex items-center justify-center relative p-4 rounded-2xl bg-black/30 border border-white/5 mt-2">
+                                        <Image
+                                            src={product.image_url!}
+                                            alt={product.name}
+                                            width={320}
+                                            height={220}
+                                            className="object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform duration-300"
+                                            unoptimized
+                                        />
+                                        <div className="absolute top-2 right-2">
+                                            {isOutOfStock ? (
+                                                <span className="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[10px] font-mono font-bold uppercase">
+                                                    Sold Out
+                                                </span>
+                                            ) : (
+                                                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold uppercase">
+                                                    {product.stock} In Stock
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div className="text-[11px] font-mono text-cyan-400 uppercase font-bold">
+                                            {product.idealRoom} &bull; {product.coverage}
+                                        </div>
+                                        <Link href={`/shop/${slug}`}>
+                                            <h3 className="text-lg font-header font-black uppercase text-white mt-1 hover:text-cyan-400 transition-colors">
+                                                {product.name}
+                                            </h3>
+                                        </Link>
+                                    </div>
+
+                                    <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5 font-mono text-xs space-y-1.5 text-slate-300">
+                                        <div className="flex justify-between">
+                                            <span className="text-slate-400">Power Plug:</span>
+                                            <span className="text-white font-bold">{product.voltage}</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-slate-400">Noise Level:</span>
+                                            <span className="text-cyan-300 font-bold">{product.noise_level}</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-slate-400">HECO Est.:</span>
+                                            <span className="text-emerald-400 font-bold">{product.hecoMonthly}</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="text-slate-400">Cash Rebate:</span>
+                                            <span className="text-emerald-400 font-bold">$45 Cash PDF</span>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div>
-                                    <div className="text-[11px] font-mono text-cyan-400 uppercase font-bold">
-                                        {product.idealRoom} &bull; {product.coverage}
+                                {/* Price & Buy Button */}
+                                <div className="pt-5 border-t border-white/10 mt-4 space-y-3">
+                                    <div className="flex items-baseline justify-between">
+                                        <div className="flex items-baseline gap-2">
+                                            <span className="text-2xl font-black text-white font-mono">
+                                                ${activePrice}
+                                            </span>
+                                            {isPromo && product.promo_price && product.price > product.promo_price && (
+                                                <span className="text-xs font-mono line-through text-slate-500">
+                                                    ${product.price}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <span className="text-[11px] font-mono text-emerald-400 font-bold">
+                                            Net: ${activePrice - 45} (after rebate)
+                                        </span>
                                     </div>
-                                    <h3 className="text-lg font-header font-black uppercase text-white mt-1">
-                                        {product.name}
-                                    </h3>
-                                </div>
 
-                                <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5 font-mono text-xs space-y-1.5 text-slate-300">
-                                    <div className="flex justify-between">
-                                        <span className="text-slate-400">Power Plug:</span>
-                                        <span className="text-white font-bold">{product.voltage}</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-slate-400">Noise Level:</span>
-                                        <span className="text-cyan-300 font-bold">{product.noise_level}</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-slate-400">HECO Est.:</span>
-                                        <span className="text-emerald-400 font-bold">{product.hecoMonthly}</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-slate-400">Cash Rebate:</span>
-                                        <span className="text-emerald-400 font-bold">$45 Cash PDF</span>
-                                    </div>
+                                    {isOutOfStock ? (
+                                        <Link
+                                            href={`/shop/${slug}`}
+                                            className="w-full py-3 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-amber-500/30 transition-all"
+                                        >
+                                            Sold Out — View In-Stock Alternatives
+                                        </Link>
+                                    ) : (
+                                        <button
+                                            onClick={() => handleBuy(product)}
+                                            className="w-full py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-md shadow-primary/20"
+                                        >
+                                            <ShoppingCart className="size-3.5" />
+                                            Buy on Stripe (${activePrice})
+                                        </button>
+                                    )}
                                 </div>
                             </div>
-
-                            {/* Price & Buy Button */}
-                            <div className="pt-5 border-t border-white/10 mt-4 space-y-3">
-                                <div className="flex items-baseline justify-between">
-                                    <div className="flex items-baseline gap-2">
-                                        <span className="text-2xl font-black text-white font-mono">
-                                            ${product.promo_price}
-                                        </span>
-                                        <span className="text-xs font-mono line-through text-slate-500">
-                                            ${product.price}
-                                        </span>
-                                    </div>
-                                    <span className="text-[11px] font-mono text-emerald-400 font-bold">
-                                        Net: ${(product.promo_price || product.price) - 45} (after rebate)
-                                    </span>
-                                </div>
-
-                                <button
-                                    onClick={() => handleBuy(product)}
-                                    className="w-full py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-md shadow-primary/20"
-                                >
-                                    <ShoppingCart className="size-3.5" />
-                                    Buy on Stripe (${product.promo_price})
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 {/* Sizing & BTU Decision Matrix */}
@@ -423,48 +486,17 @@ export default function LgDualInverterGuidePage() {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5 text-slate-300">
-                            <tr>
-                                <td className="py-3 px-4 font-bold text-white">Small Bedroom / Office (10x12)</td>
-                                <td className="py-3 px-4">100 - 180 sq. ft.</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">6,000 BTU (LW6023IVSM)</td>
-                                <td className="py-3 px-4">115V / 15A Standard</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">12 In Stock</td>
-                            </tr>
-                            <tr>
-                                <td className="py-3 px-4 font-bold text-white">Master Bedroom / Nursery (12x15)</td>
-                                <td className="py-3 px-4">150 - 350 sq. ft.</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">8,000 BTU (LW8022IVSM) ★</td>
-                                <td className="py-3 px-4">115V / 15A Standard</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">10 In Stock</td>
-                            </tr>
-                            <tr>
-                                <td className="py-3 px-4 font-bold text-white">Master Suite / Studio (15x18)</td>
-                                <td className="py-3 px-4">250 - 450 sq. ft.</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">12,000 BTU (LW1222IVSM)</td>
-                                <td className="py-3 px-4">115V / 15A Standard</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">10 In Stock</td>
-                            </tr>
-                            <tr>
-                                <td className="py-3 px-4 font-bold text-white">Living &amp; Dining Area (18x20)</td>
-                                <td className="py-3 px-4">350 - 550 sq. ft.</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">14,000 BTU (LW1522FVSM)</td>
-                                <td className="py-3 px-4">115V / 15A Standard</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">50 In Stock</td>
-                            </tr>
-                            <tr>
-                                <td className="py-3 px-4 font-bold text-white">Vaulted Open Floor Plan (20x25)</td>
-                                <td className="py-3 px-4">400 - 1,000 sq. ft.</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">18,000 BTU (LW1822IVSM)</td>
-                                <td className="py-3 px-4 text-purple-400 font-bold">208/230V / 20A (6-20P)</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">30 In Stock</td>
-                            </tr>
-                            <tr>
-                                <td className="py-3 px-4 font-bold text-white">Whole Home Open Layout (25x30+)</td>
-                                <td className="py-3 px-4">550 - 1,500+ sq. ft.</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">23,500 BTU (LW2422IVSM)</td>
-                                <td className="py-3 px-4 text-purple-400 font-bold">208/230V / 20A (6-20P)</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">20 In Stock</td>
-                            </tr>
+                            {allModels.map((m) => (
+                                <tr key={m.id}>
+                                    <td className="py-3 px-4 font-bold text-white">{m.idealRoom}</td>
+                                    <td className="py-3 px-4">{m.coverage}</td>
+                                    <td className="py-3 px-4 text-cyan-400 font-bold">{m.name}</td>
+                                    <td className="py-3 px-4">{m.voltage}</td>
+                                    <td className={`py-3 px-4 font-bold ${m.stock > 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                                        {m.stock > 0 ? `${m.stock} In Stock` : 'Sold Out'}
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

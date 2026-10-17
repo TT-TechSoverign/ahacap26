@@ -59,9 +59,9 @@
         {
           "id": "window-ac-warehouse-sales",
           "name": "Waipahu Warehouse Direct Inventory Sales",
-          "price_range": "$504 to $1,025",
+          "price_range": "$395 to $1,025",
           "billing_mode": "inventory_purchase",
-          "scope": "Brand-new factory-sealed LG Dual Inverter and Energy Star units in stock at 94-150 Leoleo St #203. Same-day local pickup available."
+          "scope": "Brand-new factory-sealed LG Dual Inverter ($560 to $1,025) and Standard ($395 to $895) units in stock at 94-150 Leoleo St #203. Same-day local pickup available."
         },
         {
           "id": "hawaii-energy-rebate",
@@ -82,18 +82,10 @@
         {
           "id": "window-ac-installation",
           "name": "Standard Window AC Installation",
-          "price": 275.00,
-          "price_display": "$275 Standard",
+          "price": 0.00,
+          "price_display": "$0 Free Window Assessment",
           "billing_mode": "installation_service",
-          "scope": "Custom fabrication for jalousie glass, vertical horizontal slider filler panel, or double-hung window. Weatherproof marine foam sealing, floor drop cloth protection, laser leveling. Standard exterior sill support brackets optional at additional cost. No hurricane brackets."
-        },
-        {
-          "id": "window-ac-deep-cleaning",
-          "name": "On-Site Window AC Deep Cleaning & Teardown",
-          "price": 275.00,
-          "price_display": "$275 Flat Rate",
-          "billing_mode": "per_unit",
-          "scope": "On-site chassis disassembly and deep cleaning with clean floor drop cloths under unit. Foaming coil rinse, condensate drain pan flush, and blower wheel sanitization. Completed entirely on-site with zero off-site transport or shop teardown."
+          "scope": "Custom fabrication for jalousie glass, vertical horizontal slider filler panel, or double-hung window. Weatherproof marine foam sealing, floor drop cloth protection, laser leveling. Standard exterior sill support brackets optional."
         },
         {
           "id": "clean-vs-replace-guidance",
@@ -101,7 +93,7 @@
           "price": 0.00,
           "price_display": "$0 Free Guide",
           "billing_mode": "educational",
-          "scope": "Guidance on on-site deep cleaning ($275) for newer quality units vs upgrading to energy-efficient Dual Inverters for aged units with corroded coils or failing compressors. We perform all service on-site with clean floor drop cloths (no off-site shop haul-away)."
+          "scope": "Guidance on DIY filter maintenance for newer quality window units vs upgrading to energy-efficient Dual Inverters ($560–$1,025) for aged units with corroded coils or failing compressors. Zero off-site shop teardowns."
         }
       ]
     }

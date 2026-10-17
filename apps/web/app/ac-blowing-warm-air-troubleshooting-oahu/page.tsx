@@ -63,7 +63,7 @@ const FAQS = [
     },
     {
         q: "What if my AC compressor is completely seized?",
-        a: "If the compressor is locked or grounded and the unit is over 7 years old, replacement is usually more cost-effective than a $1,800+ compressor swap. Affordable Home A/C stocks brand-new LG Dual Inverters in our Waipahu warehouse starting at $504 (with a $45 Hawaii Energy rebate) or provides $0 upfront estimates for new mini-split systems."
+        a: "If the compressor is locked or grounded and the unit is over 7 years old, replacement is usually more cost-effective than a $1,800+ compressor swap. Affordable Home A/C stocks brand-new LG Dual Inverters in our Waipahu warehouse starting at $560 (with a $45 Hawaii Energy rebate) or provides $0 upfront estimates for new mini-split systems."
     }
 ];
 

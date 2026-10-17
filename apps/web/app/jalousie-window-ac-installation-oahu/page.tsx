@@ -45,7 +45,7 @@ const FAQS = [
     },
     {
         q: "Can I bundle a new in-stock LG Dual Inverter with installation?",
-        a: "Yes! You can order any qualifying Energy Star LG Dual Inverter ($504 to $1,025) through our Shop and select professional installation. Your unit will qualify for the $45 Hawaii Energy cash rebate."
+        a: "Yes! You can order any qualifying Energy Star LG Dual Inverter ($560 to $1,025) through our Shop and select professional installation. Your unit will qualify for the $45 Hawaii Energy cash rebate."
     }
 ];
 

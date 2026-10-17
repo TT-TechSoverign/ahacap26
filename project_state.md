@@ -1,7 +1,7 @@
 # Project State Report: Affordable Home A/C (AHAC)
 
-**Last Updated**: October 14, 2026  
-**Current Epoch**: `EPOCH 19 (October 14, 2026)`  
+**Last Updated**: October 16, 2026  
+**Current Epoch**: `EPOCH 20 (October 16, 2026)`  
 **Branch**: `main` (Production Synchronized)  
 **Host**: Hostinger VPS (`31.220.53.132`) • Docker Production Stack
 
@@ -389,6 +389,28 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
     - Upgraded Dev OS Mission Control UI (`apps/dev-os/app/LiveSwarmVisualizer.tsx` and `apps/dev-os/app/page.tsx`) to dynamically display `10` Sub-Masters, `40` Agents, and `50` SOPs, added `submaster_executive_reporting` styling, wired `agent_spatial_visualizer` and `agent_catalog_auditor` into the 3-Stage Deployment Visualizer, and added all 10 SOP domain filter pills.
     - Updated `agent_catalog.md` to the authoritative 10 Sub-Masters, 40 Specialized Agents, and 50 SOPs.
 
+- **Epoch 20 (October 16, 2026) Full-Stack Catalog Synchronization, Online Window AC Exposure Expansion & Zero-Cost US-Issued Card Checkout**:
+  - **16-Model Catalog ID Alignment (`IDs 1–16` across Seed, DB & Storefront)**:
+    - Eliminated the `IDs 6–10` vs `IDs 8–12` swap between `apps/api/content/products_seed.json`, `apps/web/lib/catalog-seed.ts`, `apps/web/lib/product-identifiers.ts`, and PostgreSQL (`ahac_db` `products` table).
+    - Upgraded `apps/api/seed_products.py` and `/api/v1/dev-os/catalog/migrate-and-reseed` in `apps/api/routers/dev_os.py` to match existing live stock and prices by `key_spec` (model number) before applying canonical `IDs 1–16`, preserving live stock (`[2, 10, 14]` out of stock) and pricing (`$395–$1,025`) with zero data loss.
+    - Added 301 permanent redirects in `apps/web/middleware.ts` for all legacy swapped `/shop/6-*` through `/shop/12-*` slugs.
+  - **SSR Catalog Pre-Hydration & Out-of-Stock PDP Rescue**:
+    - Pre-hydrated `/shop` (`apps/web/app/shop/page.tsx`) with `INITIAL_CATALOG_PRODUCTS` so Googlebot and mobile users see all 16 Window AC units at `0ms` before live `/api/v1/products` stock hydration completes.
+    - Added an **"Out of Stock — View Closest In-Stock Alternative"** rescue card on `/shop/[slug]` (`apps/web/app/shop/[slug]/page.tsx`) that automatically surfaces the closest in-stock model by BTU/category when a user lands on an out-of-stock unit (`IDs 2, 10, 14`).
+  - **Google Merchant Feed, Sitemap Priority & `<title>` Tag Overhaul**:
+    - Rewrote `/api/google-feed` (`apps/web/app/api/google-feed/route.ts`) to fetch live PostgreSQL inventory (`/api/v1/products`, `cache: 'no-store'`), output canonical slugs (`generateProductSlug(p)`), accurate `<g:availability>` (`in_stock` vs `out_of_stock`), real MPN/GTIN-12 identifiers, and `$50.00 USD` Oahu delivery shipping tags, with `/merchant-feed.xml` rewrite in `next.config.js`.
+    - Upgraded `/shop` and `/shop/[slug]` `<title>`, OpenGraph, Twitter, and JSON-LD `Product` / `Offer` schemas (`apps/web/app/shop/layout.tsx`, `apps/web/app/shop/[slug]/layout.tsx`) with live stock status, dynamic promo pricing, and `shippingDetails` + `hasMerchantReturnPolicy`.
+    - Added all 16 canonical `/shop/[slug]` URLs and `/shop/*` sub-guides to `apps/web/app/sitemap.ts` at priority `0.95`.
+    - Purged all remaining `94-529 Ukee St` references across `apps/web`, `apps/api`, and `scripts` in favor of `94-150 Leoleo St #203, Waipahu, HI 96797`.
+  - **Storefront Dynamic Sync, `<WindowAcQuickShop />` & Cart Drawer Overhaul (100% Mobile + Desktop Parity)**:
+    - Synchronized all 5 `/shop/*` sub-pages (`oahu-window-ac-warehouse/inventory-grid.tsx`, `lg-dual-inverter-guide`, `lg-dual-inverter-8000-btu-oahu`, `large-room-window-ac-oahu`, `window-ac-plug-guide`) with live `/api/v1/products` stock & pricing.
+    - Updated `HomeFeaturedInventory.tsx` to default to 4 in-stock units (`IDs 1, 3, 4, 15`) and auto-substitute if any unit is out of stock; added 1-tap `Add to Cart` buttons in `RelatedProducts.tsx`; updated `ACCalculator.tsx` to route to in-stock models.
+    - Created and embedded `<WindowAcQuickShop />` across all 22 `/service-areas/[city]` pages, `/quiet-bedroom-window-ac-oahu`, `/clean-vs-replace-window-ac`, `/window-ac-installation`, and `/hawaii-energy-rebate`, and purged all `$504` and Window AC `$275 teardown` strings across the entire repository.
+    - Upgraded `CartContext.tsx` (`updateQuantity`) and `CartDrawer.tsx` with WebP product thumbnails, `-`/`+` quantity steppers, and transparent pickup/delivery/4.712% HI GET tax summary.
+  - **Zero-Cost US-Issued Cards Only Checkout (`$0` Radar Cost) & Backend Reconciliation Sync**:
+    - Enforced `billing_address_collection: 'required'` and `shipping_address_collection: { allowed_countries: ['US'] }` in `create-checkout-session/route.ts` and `api/checkout/route.ts`, and displayed `"US-Issued Cards Only (50 US States)"` across `CheckoutForm.tsx`, `checkout/page.tsx`, `CartDrawer.tsx`, and the Stripe submit message.
+    - Fixed `apps/api/services/reconciliation.py` to read `stripe_session_id` (with `stripe_payment_intent` fallback) so `agent_revenue_reconciler` accurately reconciles Stripe Checkout orders.
+
 ---
 
 ## 4. Current Status & Cross-Session Handshake (`TRACKER`)
@@ -396,6 +418,6 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
 - **New-Chat Handshake Codeword**: **`TRACKER`** (Confirmed active in `GEMINI.md` and Master Projects Brain v2.6.0).
 - **Fleet Health**: All 40 specialized agents report `[ACTIVE]` (`All Healthy: True`) across 10 Sub-Masters (`50` SOPs).
 - **Deployment Swarm**: 3-stage verification pipeline returns `OVERALL: VERIFIED_CLEAN` with 0 specification drift across all 16 catalog models and 16/16 factory PDF spec sheets.
-- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), `prod-api` (`:8001`), `prod-db` (`:5433`), `prod-redis` (`:6380`), `ahac-crm-api`, and `ahac-crm-frontend` (`:8080`) are rebuilt, restarted, and running live with zero-cache headers, live homepage/warehouse stock synchronization, permanent DB stock preservation, CRM multi-stage invoice balance guardrails, 3D Spatial Caliper assets, multi-tier shop filters, 1-tap mobile wallets, the Island Reviews Pavilion, and the Executive Monthly Reporting Hub (`/dev-os` Key R).
-- **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens across 2,104 files.
-- **Storefront Performance**: Next.js production build verified with 116/116 static and dynamic routes rendered, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, and GSC canonical armor deployed.
+- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), `prod-api` (`:8001`), `prod-db` (`:5433`), `prod-redis` (`:6380`), `ahac-crm-api`, and `ahac-crm-frontend` (`:8080`) are rebuilt, restarted, and running live with zero-cache headers, unified 16-model catalog IDs (`1–16`), live Google Merchant XML feed, `<WindowAcQuickShop />` across 22 city pages & guides, and Zero-Cost US-Issued Cards Only Stripe checkout.
+- **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens.
+- **Storefront Performance**: Next.js production build verified with 116+ static and dynamic routes rendered, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, and GSC canonical armor deployed.

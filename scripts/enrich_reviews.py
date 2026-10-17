@@ -153,7 +153,7 @@ def enrich_reviews(source_path: str):
         "five_star_count": sum(1 for r in all_reviews if r['rating'] == 5),
         "four_star_count": sum(1 for r in all_reviews if r['rating'] == 4),
         "license": "CT-36775",
-        "waipahu_shop_address": "94-529 Ukee St, Waipahu, HI 96797",
+        "waipahu_shop_address": "94-150 Leoleo St #203, Waipahu, HI 96797",
         "top_neighborhoods": [
             {"name": "Waipahu", "count": sum(1 for r in all_reviews if r['neighborhood'] == 'Waipahu')},
             {"name": "Honolulu", "count": sum(1 for r in all_reviews if r['neighborhood'] == 'Honolulu')},

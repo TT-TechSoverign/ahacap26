@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -28,48 +28,77 @@ import { useCart } from '@/context/CartContext';
 import { Product } from '@/types/inventory';
 import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
+import { isCampaignActive } from '@/lib/utils';
+
+const INITIAL_PRODUCT_8K: Product = {
+    id: 2,
+    name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
+    price: 595,
+    promo_price: 535,
+    discount_percent: 10,
+    stock: 0,
+    category: "WINDOW_AC",
+    subcategory: "dual_inverter",
+    btu: 8000,
+    voltage: "115V / 15 Amp",
+    coverage: "Up to 350 sq. ft. AHAM (Up to 280 sq. ft. Oahu)",
+    noise_level: "44 / 54 dB",
+    dehumidification: "2.5 Pts/Hr",
+    performance_specs: "15.5 CEER • ThinQ® Smart WiFi • 44dB Sleep Mode",
+    key_spec: "LW8022IVSM",
+    dimensions: '12.5" H x 19.6" W x 24.5" D',
+    weight: "58 lbs",
+    warranty: "1 YEAR LIMITED",
+    image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp"
+};
 
 export default function Lg8000BtuOahuPage() {
     const { addToCart, openCart } = useCart();
     const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [product8k, setProduct8k] = useState<Product>(INITIAL_PRODUCT_8K);
+    const isPromo = isCampaignActive();
 
-    const product8k: Product = {
-        id: 2,
-        name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
-        price: 600,
-        promo_price: 540,
-        discount_percent: 10,
-        stock: 50,
-        category: "WINDOW_AC",
-        subcategory: "dual_inverter",
-        btu: 8000,
-        voltage: "115V / 15 Amp",
-        coverage: "Up to 350 sq. ft. AHAM (Up to 280 sq. ft. Oahu)",
-        noise_level: "44 / 54 dB",
-        dehumidification: "2.5 Pts/Hr",
-        performance_specs: "15.5 CEER • ThinQ® Smart WiFi • 44dB Sleep Mode",
-        key_spec: "LW8022IVSM",
-        dimensions: '12.5" H x 19.6" W x 24.5" D',
-        weight: "63 lbs",
-        warranty: "1 YEAR LIMITED",
-        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg"
-    };
+    useEffect(() => {
+        let isMounted = true;
+        fetch('/api/v1/products/2', { cache: 'no-store' })
+            .then((res) => (res.ok ? res.json() : null))
+            .then((live: Product | null) => {
+                if (!isMounted || !live || !live.id) return;
+                setProduct8k((prev) => ({
+                    ...prev,
+                    price: live.price,
+                    promo_price: live.promo_price ?? prev.promo_price,
+                    stock: live.stock,
+                }));
+            })
+            .catch(() => {});
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    const activePrice = (isPromo && product8k.promo_price) ? product8k.promo_price : product8k.price;
+    const isOutOfStock = product8k.stock <= 0;
 
     const handleBuyNow = () => {
+        if (isOutOfStock) return;
         trackFunnelEvent('add_to_cart_8k_upgrade', {
             product_id: product8k.id,
             product_name: product8k.name,
-            price: product8k.promo_price || product8k.price,
+            price: activePrice,
             btu: product8k.btu
         });
-        addToCart(product8k);
+        addToCart({
+            ...product8k,
+            price: activePrice,
+        });
         openCart();
     };
 
     const faqItems = [
         {
             q: "Why is the 8,000 BTU model the best value compared to the 6,000 BTU unit?",
-            a: "The 8,000 BTU model (LW8022IVSM) costs just $36 more than the 6,000 BTU model ($540 vs $504 on promo), while providing +33% more cooling capacity (up to 350 sq. ft.) and nearly double the moisture removal (2.5 Pts/Hr vs 1.4 Pts/Hr) with the same 15.5 CEER efficiency and 44 dB sleep mode."
+            a: "The 8,000 BTU model (LW8022IVSM) costs just $35 more than the 6,000 BTU model ($595 vs $560), while providing +33% more cooling capacity (up to 350 sq. ft.) and nearly double the moisture removal (2.5 Pts/Hr vs 1.4 Pts/Hr) with the same 15.5 CEER efficiency and 44 dB sleep mode."
         },
         {
             q: "How quiet is the LG Dual Inverter 8,000 BTU in a bedroom?",
@@ -81,11 +110,11 @@ export default function Lg8000BtuOahuPage() {
         },
         {
             q: "How does the $45 Hawaii Energy cash rebate work?",
-            a: "Because this unit is ENERGY STAR® certified, it qualifies for a $45 cash rebate from Hawaii Energy. Affordable Home AC provides you with our official pre-approved rebate application form PDF. After purchase, you simply submit the form with your receipt to receive your $45 check, bringing your effective unit cost down to just $490."
+            a: "Because this unit is ENERGY STAR® certified, it qualifies for a $45 cash rebate from Hawaii Energy. Affordable Home AC provides you with our official pre-approved rebate application form PDF. After purchase, you simply submit the form with your receipt to receive your $45 check, bringing your effective unit cost down to just $550."
         },
         {
-            q: "Can I pick this unit up today in Waipahu?",
-            a: "Yes! We currently have 10 units in stock at our Waipahu Central Warehouse (94-150 Leoleo St. #203). Free warehouse pickup is available by appointment (subject to scheduling & inventory availability), or you can select $50 Flat Island-Wide Delivery directly to your home."
+            q: "What if the 8,000 BTU Dual Inverter is temporarily out of stock?",
+            a: "When the 8,000 BTU Dual Inverter is sold out, Oahu homeowners can pick up the in-stock 10,000 BTU LG Dual Inverter (LW1022IVSM, $650), the 6,000 BTU LG Dual Inverter (LW6023IVSM, $560), or the 8,000 BTU LG Cool+Heat Inverter (LW8023HRSM, $650) or 8,000 BTU LG Standard (LW8024RD, $395) today at our Waipahu warehouse!"
         }
     ];
 
@@ -106,12 +135,12 @@ export default function Lg8000BtuOahuPage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "In-stock LG Dual Inverter 8,000 BTU window AC in Waipahu, Oahu. Library-quiet 44dB operation, ThinQ WiFi, standard 115V plug, and official $45 Hawaii Energy cash rebate."
+                "description": "LG Dual Inverter 8,000 BTU window AC in Waipahu, Oahu. Library-quiet 44dB operation, ThinQ WiFi, standard 115V plug, and official $45 Hawaii Energy cash rebate."
             },
             {
                 "@type": "Product",
                 "name": "LG Dual Inverter 8,000 BTU Window Air Conditioner (LW8022IVSM)",
-                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
+                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
                 "description": "Ultra-quiet 8,000 BTU Dual Inverter window air conditioner with smart ThinQ WiFi control. Perfect for Oahu master bedrooms and home offices. Eligible for $45 Hawaii Energy cash rebate.",
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW8022IVSM",
@@ -126,11 +155,11 @@ export default function Lg8000BtuOahuPage() {
                 },
                 "offers": {
                     "@type": "Offer",
-                    "url": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-8000-btu-oahu",
+                    "url": "https://www.affordablehome-ac.com/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm",
                     "priceCurrency": "USD",
-                    "price": "535.00",
+                    "price": activePrice.toFixed(2),
                     "priceValidUntil": "2026-12-31",
-                    "availability": "https://schema.org/InStock",
+                    "availability": isOutOfStock ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
                     "itemCondition": "https://schema.org/NewCondition"
                 }
             },
@@ -183,7 +212,7 @@ export default function Lg8000BtuOahuPage() {
                 <div className="text-center max-w-4xl mx-auto space-y-4 mb-12">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-widest">
                         <Warehouse className="size-3.5" />
-                        Waipahu Warehouse In Stock &bull; 10 Units Ready
+                        {isOutOfStock ? 'High Demand Model • View In-Stock 8k & 10k Units Below' : `Waipahu Warehouse In Stock • ${product8k.stock} Units Ready`}
                     </div>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-header font-black tracking-tight uppercase leading-[0.95] text-white">
                         LG <span className="text-primary">8,000 BTU</span> Dual Inverter Oahu
@@ -196,26 +225,26 @@ export default function Lg8000BtuOahuPage() {
                     </p>
                 </div>
 
-                {/* The $31 Upgrade Anchor Banner */}
+                {/* The $35 Upgrade Anchor Banner */}
                 <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-emerald-950/40 via-slate-900/70 to-slate-950 border border-emerald-500/30 shadow-2xl mb-16 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
                         <div className="lg:col-span-2 space-y-2">
                             <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-emerald-400">
-                                <Sparkles className="size-4" /> The $31 Smart Sizing Advantage
+                                <Sparkles className="size-4" /> The $35 Smart Sizing Advantage
                             </div>
                             <h2 className="text-xl sm:text-2xl font-header font-black uppercase text-white">
-                                Why Oahu Homeowners Upgrade from 6k to 8k
+                                Why Oahu Homeowners Upgrade from 6k to 8k or 10k
                             </h2>
                             <p className="text-slate-300 text-sm leading-relaxed">
-                                For just <strong>$31 more</strong> than the 6,000 BTU model ($535 vs $504 promo), the 8,000 BTU unit gives you <strong>+33% more cooling capacity</strong> and adds built-in <strong>LG ThinQ® Smart WiFi</strong>. Pre-cool your bedroom from your smartphone on the H-1 drive home so your room is ice-cold when you walk through the door.
+                                For just <strong>$35 more</strong> than the 6,000 BTU model ($595 vs $560), the 8,000 BTU unit gives you <strong>+33% more cooling capacity</strong> and built-in <strong>LG ThinQ® Smart WiFi</strong>. Pre-cool your bedroom from your smartphone on the H-1 drive home so your room is ice-cold when you walk through the door.
                             </p>
                         </div>
                         <div className="p-5 rounded-2xl bg-black/40 border border-emerald-500/20 text-center font-mono space-y-1.5">
                             <div className="text-xs text-slate-400 uppercase">Upgrade Difference</div>
-                            <div className="text-3xl sm:text-4xl font-black text-emerald-400">+$31.00</div>
+                            <div className="text-3xl sm:text-4xl font-black text-emerald-400">+$35.00</div>
                             <div className="text-[11px] text-slate-300">+2,000 BTU &bull; Smart WiFi Added</div>
-                            <div className="text-[11px] text-emerald-400 font-bold">Effective Net Cost: $490 (after $45 rebate)</div>
+                            <div className="text-[11px] text-emerald-400 font-bold">Effective Net Cost: ${activePrice - 45} (after $45 rebate)</div>
                         </div>
                     </div>
                 </div>
@@ -225,9 +254,15 @@ export default function Lg8000BtuOahuPage() {
                     {/* Visual Card */}
                     <div className="p-8 rounded-3xl bg-slate-900/60 border border-white/10 shadow-2xl relative">
                         <div className="absolute top-4 left-4 z-10">
-                            <span className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider">
-                                In Stock &bull; Waipahu Warehouse
-                            </span>
+                            {isOutOfStock ? (
+                                <span className="px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-400 text-xs font-mono font-bold uppercase tracking-wider">
+                                    Sold Out &bull; Alternatives Ready
+                                </span>
+                            ) : (
+                                <span className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider">
+                                    In Stock &bull; Waipahu Warehouse
+                                </span>
+                            )}
                         </div>
                         <div className="absolute top-4 right-4 z-10">
                             <span className="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-mono font-bold uppercase tracking-wider">
@@ -293,19 +328,18 @@ export default function Lg8000BtuOahuPage() {
                                     <div className="text-xs font-mono text-slate-400 uppercase">Waipahu Warehouse Direct Price</div>
                                     <div className="flex items-baseline gap-3 mt-1">
                                         <span className="text-3xl sm:text-4xl font-black text-white font-mono">
-                                            ${product8k.promo_price}
+                                            ${activePrice}
                                         </span>
-                                        <span className="text-sm font-mono line-through text-slate-500">
-                                            ${product8k.price}
-                                        </span>
-                                        <span className="px-2 py-0.5 rounded bg-red-500/20 border border-red-500/30 text-red-400 text-xs font-mono font-bold">
-                                            10% OFF
-                                        </span>
+                                        {isPromo && product8k.promo_price && product8k.price > product8k.promo_price && (
+                                            <span className="text-sm font-mono line-through text-slate-500">
+                                                ${product8k.price}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
-                                <div className="text-right font-mono text-xs text-emerald-400">
-                                    <span className="block font-bold">In Stock (10 Units Available)</span>
-                                    <span className="text-slate-400 text-[11px]">Ready for Pickup/Delivery</span>
+                                <div className={`text-right font-mono text-xs ${isOutOfStock ? 'text-rose-400' : 'text-emerald-400'}`}>
+                                    <span className="block font-bold">{isOutOfStock ? 'Currently Sold Out' : `In Stock (${product8k.stock} Units Available)`}</span>
+                                    <span className="text-slate-400 text-[11px]">{isOutOfStock ? 'See In-Stock Options Below' : 'Ready for Pickup/Delivery'}</span>
                                 </div>
                             </div>
 
@@ -314,7 +348,7 @@ export default function Lg8000BtuOahuPage() {
                                 <div className="flex items-center gap-2.5">
                                     <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
                                     <div className="text-xs text-emerald-200">
-                                        <strong>$45 Hawaii Energy Cash Rebate</strong> eligible. Net price: <strong>$490</strong>.
+                                        <strong>$45 Hawaii Energy Cash Rebate</strong> eligible. Net price: <strong>${activePrice - 45}</strong>.
                                     </div>
                                 </div>
                                 <a 
@@ -327,15 +361,57 @@ export default function Lg8000BtuOahuPage() {
                                 </a>
                             </div>
 
-                            {/* Buy Now Button */}
+                            {/* Buy Now Button or In-Stock Rescue Alternatives */}
                             <div className="space-y-3 pt-2">
-                                <button
-                                    onClick={handleBuyNow}
-                                    className="w-full py-4 rounded-xl bg-primary text-slate-950 font-header font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.01]"
-                                >
-                                    <ShoppingCart className="size-4" />
-                                    Buy Now with Stripe (${product8k.promo_price})
-                                </button>
+                                {isOutOfStock ? (
+                                    <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-3">
+                                        <div className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider">
+                                            ⚡ LW8022IVSM Sold Out — Pick Up an In-Stock Bedroom Unit Today:
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                            <Link
+                                                href="/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm"
+                                                className="p-3 rounded-xl bg-slate-900/90 border border-emerald-500/40 hover:border-emerald-400 text-left transition-all block"
+                                            >
+                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">15 In Stock • 44dB Quiet</div>
+                                                <div className="text-xs font-bold text-white mt-0.5">LG 10,000 BTU Dual Inverter</div>
+                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$650 • View Unit →</div>
+                                            </Link>
+                                            <Link
+                                                href="/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm"
+                                                className="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/40 hover:border-cyan-400 text-left transition-all block"
+                                            >
+                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">30 In Stock • 44dB Quiet</div>
+                                                <div className="text-xs font-bold text-white mt-0.5">LG 6,000 BTU Dual Inverter</div>
+                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$560 • View Unit →</div>
+                                            </Link>
+                                            <Link
+                                                href="/shop/8-lg-dual-inverter-cool-heat-8-000-btu-lw8023hrsm"
+                                                className="p-3 rounded-xl bg-slate-900/90 border border-white/15 hover:border-cyan-400 text-left transition-all block"
+                                            >
+                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">8 In Stock • 8,000 BTU</div>
+                                                <div className="text-xs font-bold text-white mt-0.5">LG 8,000 BTU Dual Inverter + Heat</div>
+                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$650 • View Unit →</div>
+                                            </Link>
+                                            <Link
+                                                href="/shop/11-lg-standard-8-000-btu-lw8024rd"
+                                                className="p-3 rounded-xl bg-slate-900/90 border border-white/15 hover:border-cyan-400 text-left transition-all block"
+                                            >
+                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">30 In Stock • 8,000 BTU</div>
+                                                <div className="text-xs font-bold text-white mt-0.5">LG 8,000 BTU Standard 115V</div>
+                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$395 • View Unit →</div>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <button
+                                        onClick={handleBuyNow}
+                                        className="w-full py-4 rounded-xl bg-primary text-slate-950 font-header font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.01]"
+                                    >
+                                        <ShoppingCart className="size-4" />
+                                        Buy Now with Stripe (${activePrice})
+                                    </button>
+                                )}
                                 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-center text-xs font-mono">
                                     <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 text-slate-300 flex items-center justify-center gap-1.5">
@@ -376,56 +452,65 @@ export default function Lg8000BtuOahuPage() {
                 {/* 6k vs 8k Value Breakdown */}
                 <div className="p-6 sm:p-8 rounded-3xl bg-surface-dark border border-white/10 shadow-2xl mb-20 overflow-x-auto">
                     <h3 className="text-xl font-header font-black uppercase text-white mb-4">
-                        Comparison: LG 6,000 BTU vs LG 8,000 BTU
+                        Comparison: LG 6,000 BTU vs LG 8,000 BTU vs LG 10,000 BTU
                     </h3>
                     <table className="w-full text-left text-xs font-mono border-collapse min-w-[550px]">
                         <thead>
                             <tr className="border-b border-white/10 text-slate-400 uppercase">
                                 <th className="py-3 px-4">Feature</th>
                                 <th className="py-3 px-4">6,000 BTU (LW6023IVSM)</th>
-                                <th className="py-3 px-4 text-emerald-400">8,000 BTU (LW8022IVSM) ★ BEST VALUE</th>
+                                <th className="py-3 px-4 text-emerald-400">8,000 BTU (LW8022IVSM)</th>
+                                <th className="py-3 px-4 text-cyan-400">10,000 BTU (LW1022IVSM) ★ IN STOCK</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5 text-slate-300">
                             <tr>
-                                <td className="py-3 px-4 font-bold text-white">Promo Price</td>
-                                <td className="py-3 px-4">$504.00</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">$540.00 (+$36 diff)</td>
+                                <td className="py-3 px-4 font-bold text-white">Waipahu Direct Price</td>
+                                <td className="py-3 px-4">$560.00</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">$595.00 (+$35 diff)</td>
+                                <td className="py-3 px-4 text-cyan-400 font-bold">$650.00</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Cooling Area (AHAM / Oahu)</td>
                                 <td className="py-3 px-4">Up to 260 / 220 sq. ft.</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">Up to 350 / 280 sq. ft. (+33% Area)</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">Up to 350 / 280 sq. ft.</td>
+                                <td className="py-3 px-4 text-cyan-400 font-bold">Up to 450 / 330 sq. ft.</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Moisture Removal</td>
                                 <td className="py-3 px-4">1.4 Pts/Hr</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">2.5 Pts/Hr (+78% Dehumidification)</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">2.5 Pts/Hr</td>
+                                <td className="py-3 px-4 text-cyan-400 font-bold">2.9 Pts/Hr</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Smart WiFi Remote Control</td>
                                 <td className="py-3 px-4">Yes (LG ThinQ® App)</td>
                                 <td className="py-3 px-4 text-emerald-400 font-bold">Yes (LG ThinQ® &amp; Alexa/Google)</td>
+                                <td className="py-3 px-4 text-cyan-400 font-bold">Yes (LG ThinQ® &amp; Alexa/Google)</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Sleep Mode Noise / CEER</td>
                                 <td className="py-3 px-4">44 / 54 dB • 15.5 CEER</td>
                                 <td className="py-3 px-4 text-emerald-400 font-bold">44 / 54 dB • 15.5 CEER</td>
+                                <td className="py-3 px-4 text-cyan-400 font-bold">44 / 58 dB • 15.5 CEER</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Electrical Plug</td>
-                                <td className="py-3 px-4">115V / 15A Standard (5.5A)</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">115V / 15A Standard (8.9A)</td>
+                                <td className="py-3 px-4">115V / 15A Standard</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">115V / 15A Standard</td>
+                                <td className="py-3 px-4 text-cyan-400 font-bold">115V / 15A Standard</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Hawaii Energy Rebate</td>
                                 <td className="py-3 px-4 text-emerald-400">$45 Cash Rebate</td>
                                 <td className="py-3 px-4 text-emerald-400 font-bold">$45 Cash Rebate</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">$45 Cash Rebate</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Net Cost After Rebate</td>
-                                <td className="py-3 px-4">$459.00</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">$495.00</td>
+                                <td className="py-3 px-4">$515.00</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">$550.00</td>
+                                <td className="py-3 px-4 text-cyan-400 font-bold">$605.00</td>
                             </tr>
                         </tbody>
                     </table>
@@ -466,15 +551,24 @@ export default function Lg8000BtuOahuPage() {
                         Get the Ultimate Bedroom Window AC for Your Oahu Home
                     </h4>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
-                        In stock now in Waipahu. Order online with Stripe for immediate warehouse pickup by appointment or $50 island delivery.
+                        Order online with Stripe for immediate Waipahu warehouse pickup by appointment or $50 island delivery.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-                        <button
-                            onClick={handleBuyNow}
-                            className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20"
-                        >
-                            Buy LG 8,000 BTU ($535)
-                        </button>
+                        {isOutOfStock ? (
+                            <Link
+                                href="/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm"
+                                className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20"
+                            >
+                                View In-Stock 10,000 BTU Dual Inverter ($650)
+                            </Link>
+                        ) : (
+                            <button
+                                onClick={handleBuyNow}
+                                className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20"
+                            >
+                                Buy LG 8,000 BTU (${activePrice})
+                            </button>
+                        )}
                         <a 
                             href="tel:808-488-1111"
                             className="px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-mono text-xs font-bold hover:bg-white/10 transition-all flex items-center gap-2"

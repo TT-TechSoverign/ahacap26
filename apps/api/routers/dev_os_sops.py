@@ -433,7 +433,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "inputs": ["Route metadata registry", "Product catalog pricing/stock", "Customer FAQ dataset", "CT-36775 licensing data"],
         "execution_steps": [
             {"step": 1, "title": "Schema Integrity Audit", "description": "Validate existing JSON-LD schemas (Product, LocalBusiness, FAQPage, HowTo) for zero schema.org errors.", "verification": "100% valid schema markup across all routes."},
-            {"step": 2, "title": "SERP Rich Snippet Injection", "description": "Ensure dynamic prices ($504-$1025), stock availability, and CT-36775 license appear in structured output.", "verification": "Rich snippet attributes verified."},
+            {"step": 2, "title": "SERP Rich Snippet Injection", "description": "Ensure dynamic prices ($395-$1025), stock availability, and CT-36775 license appear in structured output.", "verification": "Rich snippet attributes verified."},
             {"step": 3, "title": "Metadata Optimization", "description": "Generate high-CTR title tags and meta descriptions tailored to high-impression search keywords.", "verification": "SERP metadata optimized."}
         ],
         "outputs": ["Schema catalog status (VALID)", "Rich snippet coverage rate", "Dynamic metadata templates"],
@@ -447,7 +447,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "submaster_growth_grounding",
         "mandate": "Supervise high-intent landing page roadmaps, cross-funnel bridges, and stream continuous CRO recommendations to hold conversion rates steady.",
         "token_efficiency_policy": "On-demand execution with memory-mapped recommendation catalog; completes in < 3ms.",
-        "oahu_grounding": "Bridges Oahu search intents: Waipahu bench teardowns ($275), LG Dual Inverter warehouse inventory, and CT-36775 licensed installations.",
+        "oahu_grounding": "Bridges Oahu search intents: clean-vs-replace assessments, LG Dual Inverter warehouse inventory, and CT-36775 licensed installations.",
         "inputs": ["GSC opportunity queries", "Shop inventory ledger (including 18k and 23.5k stock)", "Lead dispatch logs"],
         "execution_steps": [
             {"step": 1, "title": "High-Intent Page Roadmap Review", "description": "Audit production status of high-intent conversion pages (/clean-vs-replace, /installation, /plug-guide, /estimate).", "verification": "All active pages tracked in catalog."},

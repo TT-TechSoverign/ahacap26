@@ -970,7 +970,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "SERP Rich Snippet Injection",
-                "description": "Ensure dynamic prices ($504-$1025), stock availability, and CT-36775 license appear in structured output.",
+                "description": "Ensure dynamic prices ($395-$1025), stock availability, and CT-36775 license appear in structured output.",
                 "verification": "Rich snippet attributes verified."
             },
             {
@@ -995,7 +995,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "supervisor": "submaster_growth_grounding",
         "mandate": "Supervise high-intent landing page roadmaps, cross-funnel bridges, and stream continuous CRO recommendations to hold conversion rates steady.",
         "token_efficiency_policy": "On-demand execution with memory-mapped recommendation catalog; completes in < 3ms.",
-        "oahu_grounding": "Bridges Oahu search intents: Waipahu bench teardowns ($275), LG Dual Inverter warehouse inventory, and CT-36775 licensed installations.",
+        "oahu_grounding": "Bridges Oahu search intents: clean-vs-replace assessments, LG Dual Inverter warehouse inventory, and CT-36775 licensed installations.",
         "inputs": [
             "GSC opportunity queries",
             "Shop inventory ledger (including 18k and 23.5k stock)",

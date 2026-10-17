@@ -34,7 +34,7 @@ export default function WindowAcVsMiniSplitPage() {
     const comparisonData = [
         {
             feature: "Upfront Installed Cost",
-            windowAc: "$504 – $922 (Equipment + $0 deposit install option)",
+            windowAc: "$560 – $1,025 (Equipment + $0 deposit install option)",
             miniSplit: "$3,800 – $7,500+ per zone installed",
             winner: "window",
             note: "Window AC saves $3,000–$6,500 upfront per room."
@@ -69,7 +69,7 @@ export default function WindowAcVsMiniSplitPage() {
         },
         {
             feature: "Salt-Air & Mold Maintenance",
-            windowAc: "Easy removal for $275 full teardown immersion cleaning",
+            windowAc: "Simple DIY slide-out mesh filter rinse & plug-and-play swap",
             miniSplit: "Requires on-wall $175–$275 bag cleaning & coil flush",
             winner: "tie",
             note: "Both require annual deep cleaning in Oahu's 74% humidity."
@@ -191,7 +191,7 @@ export default function WindowAcVsMiniSplitPage() {
                             <div className="font-mono text-xs text-slate-300 space-y-2 py-2">
                                 <div className="flex justify-between border-b border-white/5 pb-1">
                                     <span className="text-slate-400">Upfront Equipment:</span>
-                                    <span className="text-emerald-400 font-bold">$504 – $922</span>
+                                    <span className="text-emerald-400 font-bold">$560 – $1,025</span>
                                 </div>
                                 <div className="flex justify-between border-b border-white/5 pb-1">
                                     <span className="text-slate-400">Installation Deposit:</span>

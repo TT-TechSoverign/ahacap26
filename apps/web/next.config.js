@@ -97,6 +97,10 @@ const nextConfig = {
                 source: '/api/webhooks/stripe',
                 destination: `${apiUrl}/api/webhooks/stripe`,
             },
+            {
+                source: '/merchant-feed.xml',
+                destination: '/api/google-feed',
+            },
         ];
     },
     async redirects() {

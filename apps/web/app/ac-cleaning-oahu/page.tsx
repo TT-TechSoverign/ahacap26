@@ -97,7 +97,7 @@ export default function AcCleaningOahuPage() {
         },
         {
             q: "Do you clean window air conditioners on Oahu?",
-            a: "Window air conditioners are sealed consumer appliances that are typically uneconomical to disassemble and chemically overhaul once internal mold or bearing noise sets in. We recommend regular DIY filter cleaning for younger units, or upgrading to an in-stock LG Dual Inverter from our Waipahu warehouse starting at $504 with a $45 Hawaii Energy cash rebate."
+            a: "Window air conditioners are sealed consumer appliances that are typically uneconomical to disassemble and chemically overhaul once internal mold or bearing noise sets in. We recommend regular DIY filter cleaning for younger units, or upgrading to an in-stock LG Dual Inverter from our Waipahu warehouse starting at $560 with a $45 Hawaii Energy cash rebate."
         },
         {
             q: "Will the chemical cleaning make a water mess inside my home?",
@@ -359,7 +359,7 @@ export default function AcCleaningOahuPage() {
                                 <Activity className="size-4" /> Have a Window AC Unit?
                             </div>
                             <p className="leading-relaxed">
-                                Window air conditioners are factory-sealed appliances that are typically uneconomical to pay hundreds to disassemble and chemically overhaul once internal mold or bearing noise sets in. We recommend regular DIY filter cleaning for young units, or upgrading to an in-stock LG Dual Inverter from our Waipahu warehouse starting at $504 with a pre-approved $45 Hawaii Energy cash rebate and $50 flat island-wide delivery.
+                                Window air conditioners are factory-sealed appliances that are typically uneconomical to pay hundreds to disassemble and chemically overhaul once internal mold or bearing noise sets in. We recommend regular DIY filter cleaning for young units, or upgrading to an in-stock LG Dual Inverter from our Waipahu warehouse starting at $560 with a pre-approved $45 Hawaii Energy cash rebate and $50 flat island-wide delivery.
                             </p>
                             <div>
                                 <Link 

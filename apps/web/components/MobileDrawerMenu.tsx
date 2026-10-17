@@ -51,17 +51,19 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
 
     const navSections = [
         {
-            title: 'Cooling & Inventory',
+            title: 'In-Stock Window ACs (Waipahu)',
             links: [
-                { text: 'In-Stock Window ACs', href: '/shop', icon: Store, badge: '$45 Rebate' },
-                { text: 'Ductless Mini-Splits', href: '/mini_split_ac', icon: Compass },
-                { text: 'Free Survey & Estimate', href: '/mini-split-estimate', icon: Calendar, highlight: true },
+                { text: 'Shop All 16 Window ACs', href: '/shop', icon: Store, badge: 'From $395', highlight: true },
+                { text: 'LG Dual Inverter Guide', href: '/shop/lg-dual-inverter-guide', icon: Sparkles, badge: '$45 Rebate' },
+                { text: 'Large Room 18k–23.5k ACs', href: '/shop/large-room-window-ac-oahu', icon: Compass, badge: '230V' },
+                { text: 'Window AC Installation', href: '/window-ac-installation', icon: Wrench, badge: '$0 Estimate' },
             ]
         },
         {
-            title: 'Services & Teardowns',
+            title: 'Split AC & Service Division',
             links: [
-                { text: 'Window AC Deep Cleaning', href: '/ac-cleaning-oahu', icon: Sparkles, badge: '$275 Teardown' },
+                { text: 'Ductless Mini-Splits', href: '/mini_split_ac', icon: Compass, badge: '$0 Estimate' },
+                { text: 'Mini Split Deep Cleaning', href: '/ac-cleaning-oahu', icon: Sparkles },
                 { text: 'AC Diagnostic & Repair', href: '/ac-repair-oahu', icon: Wrench },
                 { text: 'Mini Split Maintenance', href: '/mini_split_ac_maintenance', icon: ShieldCheck },
             ]
@@ -110,32 +112,29 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
 
                 {/* Body Links */}
                 <div className="flex-1 flex flex-col p-6 gap-6 overflow-y-auto">
-                    {/* Free Estimates ($0) & Upfront Quotes Hook Card */}
+                    {/* Free Estimates ($0) & In-Stock Warehouse Hook Card */}
                     <div className="p-4 rounded-2xl bg-gradient-to-br from-primary/15 via-slate-900/90 to-slate-900 border border-primary/30 space-y-3 text-left shadow-lg">
                         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[9px] font-black uppercase tracking-wider">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            Free Estimates ($0) • Upfront Quotes
+                            In-Stock Waipahu • $0 Estimates
                         </div>
                         <div className="space-y-1">
                             <p className="text-white font-header font-bold text-xs uppercase tracking-wide">
-                                $0 Cost to Book In-Home Estimates
+                                Order Online or Book $0 In-Home Estimate
                             </p>
                             <p className="text-slate-300 text-[11px] font-sans leading-relaxed">
-                                Zero cost to book estimates on new or replacement mini split and window AC installations. Upfront flat rates: $175 mini split diagnosis, $175 basic cleaning, $275 premium cleaning, $275 window AC deep cleaning.
+                                Order brand-new LG &amp; GE Window ACs online ($395–$1,025) for free Waipahu pickup or $50 island delivery. Zero upfront cost to book mini split or window AC installation estimates.
                             </p>
                         </div>
                         <div className="grid grid-cols-2 gap-2 pt-1">
-                            <a 
-                                href="tel:808-488-1111" 
-                                onClick={() => {
-                                    sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Drawer Top Call' });
-                                    setIsOpen(false);
-                                }}
+                            <Link 
+                                href="/shop" 
+                                onClick={() => setIsOpen(false)}
                                 className="p-2.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-1.5 shadow-md active:scale-95"
                             >
-                                <Phone className="size-3.5 shrink-0" />
-                                <span>Call Now</span>
-                            </a>
+                                <Store className="size-3.5 shrink-0" />
+                                <span>Shop Units</span>
+                            </Link>
                             <Link 
                                 href="/contact" 
                                 onClick={() => setIsOpen(false)}

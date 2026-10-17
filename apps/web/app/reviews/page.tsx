@@ -35,7 +35,7 @@ export default function ReviewsPage() {
         "email": "office@affordablehome-ac.com",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "94-529 Ukee St",
+            "streetAddress": "94-150 Leoleo St #203",
             "addressLocality": "Waipahu",
             "addressRegion": "HI",
             "postalCode": "96797",

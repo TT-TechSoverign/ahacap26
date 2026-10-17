@@ -29,6 +29,7 @@ import {
     ExternalLink
 } from 'lucide-react';
 import { BackToTop } from '@/components/BackToTop';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { trackFunnelEvent } from '@/lib/tracking';
 
 export default function WindowAcInstallationPage() {
@@ -681,31 +682,34 @@ export default function WindowAcInstallationPage() {
                         {[
                             {
                                 model: "LW6023IVSM",
+                                slug: "1-lg-dual-inverter-6-000-btu-lw6023ivsm",
                                 btu: "6,000 BTU",
                                 sqft: "Up to 250 sq. ft.",
                                 voltage: "115V (NEMA 5-15P)",
-                                price: "$504",
-                                netPrice: "$459 after $45 rebate",
+                                price: "$560",
+                                netPrice: "$515 after $45 rebate",
                                 badge: "Bedrooms & Studios",
                                 highlight: "44 dB ultra-quiet operation, dual inverter variable compressor, and smart Wi-Fi control."
                             },
                             {
                                 model: "LW8022IVSM",
+                                slug: "2-lg-dual-inverter-8-000-btu-lw8022ivsm",
                                 btu: "8,000 BTU",
                                 sqft: "Up to 350 sq. ft.",
                                 voltage: "115V (NEMA 5-15P)",
-                                price: "$535",
-                                netPrice: "$490 after $45 rebate",
-                                badge: "Best Value ($31 Upgrade)",
-                                highlight: "Only $31 more than the 6k model for +33% more cooling capacity and ThinQ Wi-Fi smart scheduling."
+                                price: "$595",
+                                netPrice: "$550 after $45 rebate",
+                                badge: "Best Value ($35 Upgrade)",
+                                highlight: "Only $35 more than the 6k model for +33% more cooling capacity and ThinQ Wi-Fi smart scheduling."
                             },
                             {
                                 model: "LW1222IVSM",
+                                slug: "4-lg-dual-inverter-12-000-btu-lw1222ivsm",
                                 btu: "12,000 BTU",
                                 sqft: "Up to 550 sq. ft.",
                                 voltage: "115V (NEMA 5-15P)",
-                                price: "$689",
-                                netPrice: "$644 after $45 rebate",
+                                price: "$755",
+                                netPrice: "$710 after $45 rebate",
                                 badge: "Master Suites & Living",
                                 highlight: "High airflow for open apartments, saves over $424/year in HECO power against old rotary window units."
                             }
@@ -737,10 +741,10 @@ export default function WindowAcInstallationPage() {
 
                                 <div className="pt-6 space-y-2">
                                     <Link
-                                        href="/shop"
+                                        href={`/shop/${unit.slug}`}
                                         className="w-full py-2.5 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
                                     >
-                                        Purchase on Shop <ArrowRight className="size-3.5" />
+                                        View Specs &amp; Buy Now <ArrowRight className="size-3.5" />
                                     </Link>
                                     <div className="text-[10px] text-center text-slate-500">
                                         Free Waipahu Pickup (by appointment) or $50 Island Delivery
@@ -749,6 +753,8 @@ export default function WindowAcInstallationPage() {
                             </div>
                         ))}
                     </div>
+
+                    <WindowAcQuickShop title="Live Waipahu Window AC Inventory — Bundle & Save" />
                 </section>
 
                 {/* Official Hawaii Energy Rebate Callout */}

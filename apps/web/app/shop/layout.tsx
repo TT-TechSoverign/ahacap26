@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Window Air Conditioner Oahu & Shop Near Me | Affordable Home A/C',
-    description: 'Looking for a window air conditioner Oahu? Our local ac shop near me stocks the LG Dual Inverter LW6023IVSM and provides professional window ac installation near me.',
+    title: {
+        absolute: 'In-Stock Window Air Conditioners Oahu ($395–$1,025) | Waipahu Pickup & $50 Delivery | Affordable Home A/C',
+    },
+    description: 'Shop 16 in-stock LG Dual Inverter (6,000–23,500 BTU), LG Cool+Heat, and GE 26" Wall Sleeve window air conditioners in Oahu ($395–$1,025). Free Waipahu warehouse pickup, $50 flat island delivery & CT-36775 installation.',
     alternates: {
         canonical: '/shop',
     },
     openGraph: {
-        title: 'Window Air Conditioner Oahu & Shop Near Me | Affordable Home A/C',
-        description: 'Looking for a window air conditioner Oahu? Our local ac shop near me stocks the LG Dual Inverter LW6023IVSM and provides professional window ac installation near me.',
+        title: 'In-Stock Window Air Conditioners Oahu ($395–$1,025) | Waipahu Pickup & $50 Delivery | Affordable Home A/C',
+        description: 'Shop 16 in-stock LG Dual Inverter (6,000–23,500 BTU), LG Cool+Heat, and GE 26" Wall Sleeve window air conditioners in Oahu ($395–$1,025). Free Waipahu warehouse pickup, $50 flat island delivery & CT-36775 installation.',
         url: '/shop',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -23,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window Air Conditioner Oahu & Shop Near Me | Affordable Home A/C',
-        description: 'Looking for a window air conditioner Oahu? Our local ac shop near me stocks the LG Dual Inverter LW6023IVSM and provides professional window ac installation near me.',
+        title: 'In-Stock Window Air Conditioners Oahu ($395–$1,025) | Waipahu Pickup & $50 Delivery | Affordable Home A/C',
+        description: 'Shop 16 in-stock LG Dual Inverter (6,000–23,500 BTU), LG Cool+Heat, and GE 26" Wall Sleeve window air conditioners in Oahu ($395–$1,025). Free Waipahu warehouse pickup, $50 flat island delivery & CT-36775 installation.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

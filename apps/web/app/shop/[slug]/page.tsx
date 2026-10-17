@@ -8,10 +8,11 @@ import { useCart } from '../../../context/CartContext';
 import { getProductImages } from '@/lib/product-images';
 import { getProductSpecs } from '@/lib/product-specs';
 import { Product } from '@/types/inventory';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { cn, isCampaignActive as isCampaignActiveChecker } from '@/lib/utils';
+import { cn, generateProductSlug, isCampaignActive as isCampaignActiveChecker } from '@/lib/utils';
 import { 
     Fan, 
     AlertCircle, 
@@ -269,9 +270,10 @@ export default function ProductDetailPage() {
     
     // Extract ID (everything before the first hyphen)
     const id = slug ? slug.split('-')[0] : null;
+    const initialSeedProduct = id ? (INITIAL_CATALOG_PRODUCTS.find(p => p.id === Number(id)) || null) : null;
 
-    const [product, setProduct] = useState<Product | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [product, setProduct] = useState<Product | null>(initialSeedProduct);
+    const [loading, setLoading] = useState(!initialSeedProduct);
     const [error, setError] = useState('');
     const { content } = useContent();
 
@@ -311,7 +313,7 @@ export default function ProductDetailPage() {
 
                 // GTM E-Commerce view_item push
                 if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                    const activePrice = (data.promo_price && data.promo_price > 0) ? data.promo_price : data.price;
+                    const activePrice = (isCampaignActiveChecker() && data.promo_price && data.promo_price > 0) ? data.promo_price : data.price;
                     (window as any).dataLayer.push({
                         event: 'view_item',
                         ecommerce: {
@@ -330,13 +332,15 @@ export default function ProductDetailPage() {
                 }
             } catch (err) {
                 console.error("Product Fetch Error:", err);
-                setError('Unable to load product details.');
+                if (!initialSeedProduct) {
+                    setError('Unable to load product details.');
+                }
             } finally {
                 setLoading(false);
             }
         }
         fetchProduct();
-    }, [id]);
+    }, [id, initialSeedProduct]);
 
     // Format product images fallback replacing SVG with WebP to keep payloads ultra light
     const productImages = useMemo(() => {
@@ -915,13 +919,69 @@ export default function ProductDetailPage() {
                                     </div>
                                 </div>
                             ) : (
-                                <a 
-                                    href="tel:808-488-1111"
-                                    className="w-full h-16 bg-gradient-to-r from-red-600 to-amber-600 text-white font-black uppercase tracking-[0.3em] text-xs rounded-xl shadow-[0_20px_50px_rgba(220,38,38,0.2)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 group"
-                                >
-                                    <Phone className="size-5 group-hover:animate-bounce" />
-                                    Call Waipahu Warehouse to Pre-order
-                                </a>
+                                <div className="space-y-3">
+                                    {/* High-Converting Out-of-Stock In-Stock Alternative Rescue Bridge */}
+                                    {(() => {
+                                        const altIds = product.id === 2 ? [3, 11, 1]
+                                            : (product.id === 7 || product.id === 10) ? [6, 9, 5]
+                                            : product.id === 14 ? [15, 13]
+                                            : [4, 3, 1];
+                                        const alternatives = altIds
+                                            .map(aid => INITIAL_CATALOG_PRODUCTS.find(p => p.id === aid))
+                                            .filter((p): p is Product => Boolean(p && p.stock > 0))
+                                            .slice(0, 2);
+
+                                        return alternatives.length > 0 ? (
+                                            <div className="bg-emerald-950/30 border border-emerald-500/40 rounded-2xl p-4 space-y-2.5 text-left shadow-[0_0_25px_rgba(16,185,129,0.12)]">
+                                                <div className="flex items-center justify-between gap-2">
+                                                    <span className="text-[10px] font-header font-black uppercase tracking-widest text-emerald-400 flex items-center gap-1.5">
+                                                        <span className="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                                        In-Stock Alternatives Ready for Waipahu Pickup Today
+                                                    </span>
+                                                    <span className="text-[9px] font-mono text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded">
+                                                        In Stock Now
+                                                    </span>
+                                                </div>
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                                    {alternatives.map(alt => {
+                                                        const altPrice = (isCampaignActiveChecker() && alt.promo_price && alt.promo_price > 0) ? alt.promo_price : alt.price;
+                                                        return (
+                                                            <Link
+                                                                key={alt.id}
+                                                                href={`/shop/${generateProductSlug(alt.id, alt.name)}`}
+                                                                className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-emerald-500/15 border border-emerald-500/30 hover:border-emerald-400 transition-all flex items-center justify-between gap-2 group/alt"
+                                                            >
+                                                                <div className="min-w-0">
+                                                                    <div className="text-[11px] font-header font-black text-white group-hover/alt:text-emerald-300 truncate">
+                                                                        {alt.name}
+                                                                    </div>
+                                                                    <div className="text-[10px] font-mono text-slate-400">
+                                                                        {alt.coverage_oahu || alt.coverage} • {alt.voltage?.split('/')[0]?.trim() || '115V'}
+                                                                    </div>
+                                                                </div>
+                                                                <div className="text-right shrink-0">
+                                                                    <div className="text-sm font-header font-black text-emerald-400">
+                                                                        ${altPrice}
+                                                                    </div>
+                                                                    <div className="text-[9px] font-mono text-cyan-300 uppercase">
+                                                                        View &rarr;
+                                                                    </div>
+                                                                </div>
+                                                            </Link>
+                                                        );
+                                                    })}
+                                                </div>
+                                            </div>
+                                        ) : null;
+                                    })()}
+                                    <a 
+                                        href="tel:808-488-1111"
+                                        className="w-full h-14 bg-gradient-to-r from-red-600 to-amber-600 text-white font-black uppercase tracking-[0.25em] text-xs rounded-xl shadow-[0_20px_50px_rgba(220,38,38,0.2)] hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 group"
+                                    >
+                                        <Phone className="size-5 group-hover:animate-bounce" />
+                                        Call Waipahu Warehouse to Reserve Next Shipment
+                                    </a>
+                                </div>
                             )}
 
                             {/* By Appointment First • Free Sizing Estimates & Dispatch Callout */}
@@ -1263,7 +1323,7 @@ export default function ProductDetailPage() {
                             {product.name}
                         </span>
                         <span className="text-base font-header font-black text-cyan-400">
-                            ${(product.promo_price || product.price).toLocaleString()}
+                            ${((isPromo && product.promo_price) ? product.promo_price : product.price).toLocaleString()}
                         </span>
                     </div>
                     <div className="flex items-center gap-2 grow justify-end">
@@ -1278,7 +1338,20 @@ export default function ProductDetailPage() {
                                 <ShoppingCart className="size-4 shrink-0" />
                                 <span>Buy Now</span>
                             </button>
-                        ) : null}
+                        ) : (
+                            (() => {
+                                const primaryAltId = product.id === 2 ? 3 : (product.id === 7 || product.id === 10) ? 6 : product.id === 14 ? 15 : 4;
+                                const primaryAlt = INITIAL_CATALOG_PRODUCTS.find(p => p.id === primaryAltId);
+                                return primaryAlt ? (
+                                    <Link
+                                        href={`/shop/${generateProductSlug(primaryAlt.id, primaryAlt.name)}`}
+                                        className="h-11 px-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider rounded-xl shadow-lg active:scale-95 flex items-center justify-center gap-1 grow max-w-[155px]"
+                                    >
+                                        <span>In-Stock Alt &rarr;</span>
+                                    </Link>
+                                ) : null;
+                            })()
+                        )}
                         <Link
                             href={`/contact?service=window_ac_purchase&notes=Inquiry%20for%20${encodeURIComponent(product.name)}`}
                             className="h-11 px-3 bg-slate-900 border border-cyan-500/40 text-cyan-300 font-header font-bold text-xs uppercase tracking-wider rounded-xl active:scale-95 flex items-center justify-center gap-1 shrink-0"

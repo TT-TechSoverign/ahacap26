@@ -264,29 +264,16 @@ function CheckoutContent() {
                             )}
 
                             {fulfillment === 'delivery' && (
-                                <div className="mt-6 md:mt-8 space-y-6 md:space-y-8 relative z-10 p-4 md:p-8 border border-white/5 bg-black/20 rounded-2xl ring-1 ring-white/5">
-                                    <div className="space-y-4 md:space-y-6">
-                                        <div className="space-y-2 md:space-y-3">
-                                            <label className="text-[9px] md:text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1 flex items-center justify-between">
-                                                Street Address
-                                                <span className="text-cyan-500 flex items-center gap-2 animate-pulse">
-                                                    <MapPin className="size-3" />
-                                                    <span className="hidden md:inline">Island Coverage Check</span>
-                                                    <span className="md:hidden">verify</span>
-                                                </span>
-                                            </label>
-                                            <input type="text" placeholder="Enter delivery address..." className="w-full bg-[#05070a] border border-white/5 rounded-xl px-4 py-3 md:py-4 text-white focus:outline-none focus:border-cyan-400/50 transition-all font-medium text-xs md:text-sm" />
-                                        </div>
-
-                                        <div className="grid grid-cols-2 gap-4 md:gap-6">
-                                            <div className="space-y-2 md:space-y-3">
-                                                <label className="text-[9px] md:text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">City</label>
-                                                <input type="text" placeholder="City" className="w-full bg-[#05070a] border border-white/5 rounded-xl px-4 py-3 md:py-4 text-white focus:outline-none focus:border-cyan-400/50 transition-all font-medium text-xs md:text-sm" />
-                                            </div>
-                                            <div className="space-y-2 md:space-y-3">
-                                                <label className="text-[9px] md:text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Zip Code</label>
-                                                <input type="text" placeholder="Zip" className="w-full bg-[#05070a] border border-white/5 rounded-xl px-4 py-3 md:py-4 text-white focus:outline-none focus:border-cyan-400/50 transition-all font-medium text-xs md:text-sm" />
-                                            </div>
+                                <div className="mt-6 md:mt-8 space-y-4 relative z-10 p-4 md:p-6 border border-white/5 bg-black/20 rounded-2xl ring-1 ring-white/5">
+                                    <div className="flex items-start gap-3 p-3.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-left">
+                                        <MapPin className="size-4 text-cyan-400 shrink-0 mt-0.5" />
+                                        <div className="space-y-1">
+                                            <p className="text-xs font-bold text-white uppercase tracking-wider">
+                                                Oahu Delivery Address Collected on Next Screen
+                                            </p>
+                                            <p className="text-[11px] text-slate-300 leading-relaxed">
+                                                Your Oahu street address and phone number are securely collected once inside Stripe Checkout (or 1-tap via Apple Pay / Google Pay).
+                                            </p>
                                         </div>
                                     </div>
 
@@ -308,7 +295,7 @@ function CheckoutContent() {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 }}
-                            className={`bg-[#0f131a] border border-emerald-500/20 bg-emerald-900/5 p-4 md:p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all duration-700 ring-1 ring-white/5 order-3 lg:order-none ${step === 'payment' ? 'ring-2 ring-emerald-500 border-emerald-500/50' : ''}`}
+                            className="bg-[#0f131a] border border-emerald-500/30 bg-emerald-900/5 p-4 md:p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all duration-700 ring-1 ring-emerald-500/30 order-3 lg:order-none"
                         >
                             <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-10 transition-all duration-700 group-hover:scale-110">
                                 <CreditCard className="size-32 text-emerald-500" />
@@ -316,30 +303,17 @@ function CheckoutContent() {
 
                             <h2 className="text-lg md:text-xl font-header font-black text-white uppercase tracking-widest mb-6 md:mb-8 flex items-center gap-3 md:gap-4">
                                 <span className="flex items-center justify-center size-8 md:size-10 rounded-xl bg-emerald-500/10 text-emerald-400 text-xs md:text-sm font-black border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">02</span>
-                                Secure Payment
+                                Secure Payment — US-Issued Cards Only (50 US States)
                             </h2>
 
                             <div className="relative z-10">
-                                {step === 'payment' ? (
-                                    <CheckoutWrapper
-                                        totalAmount={finalTotal}
-                                        items={items}
-                                        customerEmail={email}
-                                        fulfillmentMode={fulfillment}
-                                        onSuccess={handleSuccess}
-                                    />
-                                ) : (
-                                    <button
-                                        onClick={() => {
-                                            setStep('payment');
-                                        }}
-                                        className="w-full py-4 md:py-5 bg-cyan-500 hover:bg-cyan-400 text-white font-header font-black uppercase tracking-[0.3em] text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] active:scale-95 flex items-center justify-center gap-3"
-                                    >
-                                        <span className="hidden md:inline">Proceed To Secure Checkout VIA Stripe</span>
-                                        <span className="md:hidden">Proceed To Secure Checkout</span>
-                                        <ArrowRight className="size-4" />
-                                    </button>
-                                )}
+                                <CheckoutWrapper
+                                    totalAmount={finalTotal}
+                                    items={items}
+                                    customerEmail={email}
+                                    fulfillmentMode={fulfillment}
+                                    onSuccess={handleSuccess}
+                                />
                             </div>
                         </motion.div>
 

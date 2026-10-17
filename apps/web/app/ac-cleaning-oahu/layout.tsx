@@ -67,7 +67,7 @@ const acCleaningFaqSchema = {
             "name": "Do you clean window air conditioners on Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Window units are sealed consumer appliances that are generally uneconomical to disassemble and chemically overhaul once mold or bearing noise sets in. We recommend regular DIY filter cleaning for young units, or upgrading to a brand-new LG Dual Inverter starting at $504 with a $45 Hawaii Energy cash rebate."
+                "text": "Window units are sealed consumer appliances that are generally uneconomical to disassemble and chemically overhaul once mold or bearing noise sets in. We recommend regular DIY filter cleaning for young units, or upgrading to a brand-new LG Dual Inverter starting at $560 with a $45 Hawaii Energy cash rebate."
             }
         },
         {

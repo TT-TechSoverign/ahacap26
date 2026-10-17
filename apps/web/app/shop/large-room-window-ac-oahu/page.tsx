@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -28,69 +28,113 @@ import { useCart } from '@/context/CartContext';
 import { Product } from '@/types/inventory';
 import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
+import { isCampaignActive } from '@/lib/utils';
+
+const INITIAL_UNIT_18K: Product = {
+    id: 6,
+    name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
+    price: 865,
+    promo_price: 778,
+    stock: 20,
+    category: "WINDOW_AC",
+    subcategory: "dual_inverter",
+    btu: 18000,
+    voltage: "208/230V / 15 Amp",
+    coverage: "Up to 1,000 sq. ft. AHAM (Up to 600 sq. ft. Oahu)",
+    noise_level: "44 / 59 dB",
+    dehumidification: "4.2 Pts/Hr",
+    performance_specs: "500 CFM High-Velocity • 14.7 CEER • Dual Inverter",
+    key_spec: "LW1822IVSM",
+    dimensions: '17.7" H x 26.0" W x 30.7" D',
+    weight: "112 lbs",
+    warranty: "1 YEAR LIMITED",
+    image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp"
+};
+
+const INITIAL_UNIT_23K: Product = {
+    id: 7,
+    name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
+    price: 985,
+    promo_price: 886,
+    stock: 0,
+    category: "WINDOW_AC",
+    subcategory: "dual_inverter",
+    btu: 23500,
+    voltage: "208/230V / 15 Amp",
+    coverage: "Up to 1,440 sq. ft. AHAM (Up to 800 sq. ft. Oahu)",
+    noise_level: "53 / 62 dB",
+    dehumidification: "5.6 Pts/Hr",
+    performance_specs: "Flagship 23,500 BTU • 14.5 CEER • 5.6 Pts/Hr Extraction",
+    key_spec: "LW2422IVSM",
+    dimensions: '17.7" H x 26.0" W x 30.7" D',
+    weight: "112 lbs",
+    warranty: "1 YEAR LIMITED",
+    image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp"
+};
 
 export default function LargeRoomWindowAcPage() {
     const { addToCart, openCart } = useCart();
     const [activeFaq, setActiveFaq] = useState<number | null>(null);
     const [selectedUnit, setSelectedUnit] = useState<'18k' | '23k'>('18k');
+    const [unit18k, setUnit18k] = useState<Product>(INITIAL_UNIT_18K);
+    const [unit23k, setUnit23k] = useState<Product>(INITIAL_UNIT_23K);
+    const isPromo = isCampaignActive();
 
-    const unit18k: Product = {
-        id: 6,
-        name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
-        price: 945,
-        promo_price: 850,
-        stock: 30,
-        category: "WINDOW_AC",
-        subcategory: "dual_inverter",
-        btu: 18000,
-        voltage: "208/230V / 15 Amp",
-        coverage: "Up to 1,000 sq. ft. AHAM (Up to 600 sq. ft. Oahu)",
-        noise_level: "44 / 59 dB",
-        dehumidification: "4.2 Pts/Hr",
-        performance_specs: "500 CFM High-Velocity • 14.7 CEER • Dual Inverter",
-        key_spec: "LW1822IVSM",
-        dimensions: '17.7" H x 26.0" W x 30.7" D',
-        weight: "112 lbs",
-        warranty: "1 YEAR LIMITED",
-        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg"
-    };
+    useEffect(() => {
+        let isMounted = true;
+        fetch('/api/v1/products', { cache: 'no-store' })
+            .then((res) => (res.ok ? res.json() : null))
+            .then((liveProducts: Product[] | null) => {
+                if (!isMounted || !Array.isArray(liveProducts)) return;
+                const live18 = liveProducts.find((p) => p.id === 6);
+                const live23 = liveProducts.find((p) => p.id === 7);
+                if (live18) {
+                    setUnit18k((prev) => ({
+                        ...prev,
+                        price: live18.price,
+                        promo_price: live18.promo_price ?? prev.promo_price,
+                        stock: live18.stock,
+                    }));
+                }
+                if (live23) {
+                    setUnit23k((prev) => ({
+                        ...prev,
+                        price: live23.price,
+                        promo_price: live23.promo_price ?? prev.promo_price,
+                        stock: live23.stock,
+                    }));
+                }
+            })
+            .catch(() => {});
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
-    const unit23k: Product = {
-        id: 7,
-        name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-        price: 1055,
-        promo_price: 950,
-        stock: 20,
-        category: "WINDOW_AC",
-        subcategory: "dual_inverter",
-        btu: 23500,
-        voltage: "208/230V / 15 Amp",
-        coverage: "Up to 1,440 sq. ft. AHAM (Up to 800 sq. ft. Oahu)",
-        noise_level: "53 / 62 dB",
-        dehumidification: "5.6 Pts/Hr",
-        performance_specs: "Flagship 23,500 BTU • 14.5 CEER • 5.6 Pts/Hr Extraction",
-        key_spec: "LW2422IVSM",
-        dimensions: '17.7" H x 26.0" W x 30.7" D',
-        weight: "112 lbs",
-        warranty: "1 YEAR LIMITED",
-        image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg"
-    };
+    const activeUnit = selectedUnit === '18k' ? unit18k : unit23k;
+    const activePrice = (isPromo && activeUnit.promo_price) ? activeUnit.promo_price : activeUnit.price;
+    const isOutOfStock = activeUnit.stock <= 0;
 
     const handleBuyNow = (product: Product) => {
+        if (product.stock <= 0) return;
+        const pPrice = (isPromo && product.promo_price) ? product.promo_price : product.price;
         trackFunnelEvent('add_to_cart_high_capacity', {
             product_id: product.id,
             product_name: product.name,
-            price: product.promo_price || product.price,
+            price: pPrice,
             btu: product.btu
         });
-        addToCart(product);
+        addToCart({
+            ...product,
+            price: pPrice,
+        });
         openCart();
     };
 
     const faqItems = [
         {
             q: "How does installing an 18k or 23.5k window AC save $4,000–$6,000 vs a mini-split?",
-            a: "A multi-zone 18k to 24k ductless mini-split system on Oahu typically costs $5,500 to $8,500 installed, requiring high-voltage electrical line pulls, wall penetrations, and refrigerant line brazing. An in-stock LG Dual Inverter 18k ($850) or 23.5k ($950) delivers equal or greater cooling volume with 500 CFM air throw, cooling entire living areas and high-ceiling spaces at a fraction of the cost."
+            a: "A multi-zone 18k to 24k ductless mini-split system on Oahu typically costs $5,500 to $8,500 installed, requiring high-voltage electrical line pulls, wall penetrations, and refrigerant line brazing. An in-stock LG Dual Inverter 18k ($865) or 23.5k ($985) delivers equal or greater cooling volume with 500 CFM air throw, cooling entire living areas and high-ceiling spaces at a fraction of the cost."
         },
         {
             q: "What type of electrical outlet do the 18,000 and 23,500 BTU units require?",
@@ -102,7 +146,7 @@ export default function LargeRoomWindowAcPage() {
         },
         {
             q: "How fast can I get one of these units on Oahu?",
-            a: "Both models are currently in stock at our Waipahu Central Warehouse (94-150 Leoleo St. #203). You can select Free Waipahu Warehouse Pickup (by appointment, subject to scheduling & inventory availability) OR $50 Flat Island-Wide Delivery directly to your doorstep across all 22 Oahu municipalities."
+            a: "Our 18,000 BTU models are in stock now at our Waipahu Central Warehouse (94-150 Leoleo St. #203). You can select Free Waipahu Warehouse Pickup (by appointment, subject to scheduling & inventory availability) OR $50 Flat Island-Wide Delivery directly to your doorstep across all 22 Oahu municipalities."
         },
         {
             q: "Do these high-capacity models qualify for the Hawaii Energy cash rebate?",
@@ -132,8 +176,8 @@ export default function LargeRoomWindowAcPage() {
             {
                 "@type": "Product",
                 "name": "LG Dual Inverter 18,000 BTU Window Air Conditioner (LW1822IVSM)",
-                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-                "description": "High-capacity 18,000 BTU Dual Inverter window AC for large rooms and open-concept layouts. 208/230V NEMA 6-20P. $45 Hawaii Energy Rebate eligible.",
+                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                "description": "High-capacity 18,000 BTU Dual Inverter window AC for large rooms and open-concept layouts. 208/230V NEMA 6-15P. $45 Hawaii Energy Rebate eligible.",
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW1822IVSM",
                 "mpn": "LW1822IVSM",
@@ -147,19 +191,19 @@ export default function LargeRoomWindowAcPage() {
                 },
                 "offers": {
                     "@type": "Offer",
-                    "url": "https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu",
+                    "url": "https://www.affordablehome-ac.com/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm",
                     "priceCurrency": "USD",
-                    "price": "832.00",
+                    "price": ((isPromo && unit18k.promo_price) ? unit18k.promo_price : unit18k.price).toFixed(2),
                     "priceValidUntil": "2026-12-31",
-                    "availability": "https://schema.org/InStock",
+                    "availability": unit18k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
                     "itemCondition": "https://schema.org/NewCondition"
                 }
             },
             {
                 "@type": "Product",
                 "name": "LG Dual Inverter 23,500 BTU Window Air Conditioner (LW2422IVSM)",
-                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg",
-                "description": "Titan-grade 23,500 BTU Dual Inverter window AC for whole-home open areas up to 1,500 sq ft. 208/230V NEMA 6-20P. $45 Hawaii Energy Rebate eligible.",
+                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                "description": "Titan-grade 23,500 BTU Dual Inverter window AC for whole-home open areas up to 1,440 sq ft. 208/230V NEMA 6-15P. $45 Hawaii Energy Rebate eligible.",
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW2422IVSM",
                 "mpn": "LW2422IVSM",
@@ -173,11 +217,11 @@ export default function LargeRoomWindowAcPage() {
                 },
                 "offers": {
                     "@type": "Offer",
-                    "url": "https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu",
+                    "url": "https://www.affordablehome-ac.com/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm",
                     "priceCurrency": "USD",
-                    "price": "922.00",
+                    "price": ((isPromo && unit23k.promo_price) ? unit23k.promo_price : unit23k.price).toFixed(2),
                     "priceValidUntil": "2026-12-31",
-                    "availability": "https://schema.org/InStock",
+                    "availability": unit23k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
                     "itemCondition": "https://schema.org/NewCondition"
                 }
             },
@@ -230,7 +274,7 @@ export default function LargeRoomWindowAcPage() {
                 <div className="text-center max-w-4xl mx-auto space-y-4 mb-14">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-widest">
                         <Warehouse className="size-3.5" />
-                        50 High-Capacity Units In Stock &bull; Waipahu Warehouse
+                        {unit18k.stock + unit23k.stock} High-Capacity Units In Stock &bull; Waipahu Warehouse
                     </div>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-header font-black tracking-tight uppercase leading-[0.95] text-white">
                         Large Room <span className="text-primary">Window AC</span> Oahu
@@ -252,10 +296,10 @@ export default function LargeRoomWindowAcPage() {
                                 <DollarSign className="size-4" /> The Oahu Open-Concept Cost Reality
                             </div>
                             <h2 className="text-xl sm:text-2xl font-header font-black uppercase text-white">
-                                Why Spend $6,500+ When You Can Cool Your Living Room for Under $950?
+                                Why Spend $6,500+ When You Can Cool Your Living Room for Under $985?
                             </h2>
                             <p className="text-slate-300 text-sm leading-relaxed">
-                                Standard ductless mini-splits for an open floor plan cost thousands in electrical panel upgrades, line sets, and installation labor. Our heavy-duty 18,000 &amp; 23,500 BTU LG Dual Inverters pull 5.5 to 7.1 pints of moisture per hour, circulate air up to 40 feet, and slash cooling energy by up to 40% under Hawaiian Electric&apos;s ~44.2¢/kWh baseline.
+                                Standard ductless mini-splits for an open floor plan cost thousands in electrical panel upgrades, line sets, and installation labor. Our heavy-duty 18,000 &amp; 23,500 BTU LG Dual Inverters pull 4.2 to 5.6 pints of moisture per hour, circulate air up to 40 feet, and slash cooling energy by up to 40% under Hawaiian Electric&apos;s ~44.2¢/kWh baseline.
                             </p>
                         </div>
                         <div className="p-5 rounded-2xl bg-black/40 border border-white/10 space-y-2 text-center font-mono">
@@ -276,7 +320,7 @@ export default function LargeRoomWindowAcPage() {
 
                 {/* Model Selector Tabs */}
                 <div className="flex justify-center mb-8">
-                    <div className="inline-flex p-1.5 rounded-2xl bg-white/5 border border-white/10 gap-2">
+                    <div className="inline-flex flex-wrap justify-center p-1.5 rounded-2xl bg-white/5 border border-white/10 gap-2">
                         <button
                             onClick={() => setSelectedUnit('18k')}
                             className={`px-6 py-2.5 rounded-xl font-header font-bold text-xs sm:text-sm uppercase tracking-wide transition-all ${
@@ -285,7 +329,7 @@ export default function LargeRoomWindowAcPage() {
                                     : 'text-slate-400 hover:text-white'
                             }`}
                         >
-                            18,000 BTU (LW1822IVSM) &bull; 30 in Stock
+                            18,000 BTU (LW1822IVSM) &bull; {unit18k.stock > 0 ? `${unit18k.stock} in Stock` : 'Sold Out'}
                         </button>
                         <button
                             onClick={() => setSelectedUnit('23k')}
@@ -295,7 +339,7 @@ export default function LargeRoomWindowAcPage() {
                                     : 'text-slate-400 hover:text-white'
                             }`}
                         >
-                            23,500 BTU (LW2422IVSM) &bull; 20 in Stock
+                            23,500 BTU (LW2422IVSM) &bull; {unit23k.stock > 0 ? `${unit23k.stock} in Stock` : 'Sold Out'}
                         </button>
                     </div>
                 </div>
@@ -305,20 +349,26 @@ export default function LargeRoomWindowAcPage() {
                     {/* Visual Card */}
                     <div className="p-8 rounded-3xl bg-slate-900/60 border border-white/10 shadow-2xl relative">
                         <div className="absolute top-4 left-4 z-10">
-                            <span className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider">
-                                In Stock &bull; Waipahu Warehouse
-                            </span>
+                            {isOutOfStock ? (
+                                <span className="px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-400 text-xs font-mono font-bold uppercase tracking-wider">
+                                    Sold Out &bull; 18k In Stock
+                                </span>
+                            ) : (
+                                <span className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider">
+                                    In Stock &bull; Waipahu Warehouse
+                                </span>
+                            )}
                         </div>
                         <div className="absolute top-4 right-4 z-10">
                             <span className="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-mono font-bold uppercase tracking-wider">
-                                208/230V &bull; NEMA 6-20P
+                                208/230V &bull; NEMA 6-15P
                             </span>
                         </div>
                         
                         <div className="aspect-[4/3] flex items-center justify-center relative my-6">
                             <Image
-                                src={selectedUnit === '18k' ? unit18k.image_url! : unit23k.image_url!}
-                                alt={selectedUnit === '18k' ? unit18k.name : unit23k.name}
+                                src={activeUnit.image_url!}
+                                alt={activeUnit.name}
                                 width={600}
                                 height={450}
                                 className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
@@ -339,7 +389,7 @@ export default function LargeRoomWindowAcPage() {
                             </div>
                             <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
                                 <div className="text-slate-400 text-[10px] uppercase">Moisture Out</div>
-                                <div className="text-white font-bold text-sm mt-0.5">{selectedUnit === '18k' ? '5.5 Pts/Hr' : '7.1 Pts/Hr'}</div>
+                                <div className="text-white font-bold text-sm mt-0.5">{selectedUnit === '18k' ? '4.2 Pts/Hr' : '5.6 Pts/Hr'}</div>
                             </div>
                             <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
                                 <div className="text-slate-400 text-[10px] uppercase">Rebate PDF</div>
@@ -352,15 +402,15 @@ export default function LargeRoomWindowAcPage() {
                     <div className="space-y-6">
                         <div>
                             <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-bold mb-1">
-                                {selectedUnit === '18k' ? 'LW1822IVSM &bull; Open Floor Plan Titan' : 'LW2422IVSM &bull; Whole Home Titan Cooling'}
+                                {selectedUnit === '18k' ? 'LW1822IVSM • Open Floor Plan Titan' : 'LW2422IVSM • Whole Home Titan Cooling'}
                             </div>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white">
-                                {selectedUnit === '18k' ? unit18k.name : unit23k.name}
+                                {activeUnit.name}
                             </h2>
                             <p className="text-slate-400 text-sm mt-2 leading-relaxed">
                                 {selectedUnit === '18k' 
                                     ? 'Engineered for vaulted ceilings and open living-dining areas. Maximum vertical airflow momentum eliminates hot pockets, while LG Dual Inverter technology variable compressor speed saves up to 40% on electricity.'
-                                    : 'Our most powerful in-stock window AC. Delivers industrial-grade 23,500 BTU cooling and rapid moisture extraction (7.1 pts/hr) for large residential spaces, high solar-heat-load living rooms, and multi-room layouts.'
+                                    : 'Our most powerful window AC. Delivers industrial-grade 23,500 BTU cooling and rapid moisture extraction (5.6 pts/hr) for large residential spaces, high solar-heat-load living rooms, and multi-room layouts.'
                                 }
                             </p>
                         </div>
@@ -372,19 +422,18 @@ export default function LargeRoomWindowAcPage() {
                                     <div className="text-xs font-mono text-slate-400 uppercase">Waipahu Warehouse Direct Price</div>
                                     <div className="flex items-baseline gap-3 mt-1">
                                         <span className="text-3xl sm:text-4xl font-black text-white font-mono">
-                                            ${selectedUnit === '18k' ? unit18k.promo_price : unit23k.promo_price}
+                                            ${activePrice}
                                         </span>
-                                        <span className="text-sm font-mono line-through text-slate-500">
-                                            ${selectedUnit === '18k' ? unit18k.price : unit23k.price}
-                                        </span>
-                                        <span className="px-2 py-0.5 rounded bg-red-500/20 border border-red-500/30 text-red-400 text-xs font-mono font-bold">
-                                            10% OFF
-                                        </span>
+                                        {isPromo && activeUnit.promo_price && activeUnit.price > activeUnit.promo_price && (
+                                            <span className="text-sm font-mono line-through text-slate-500">
+                                                ${activeUnit.price}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
-                                <div className="text-right font-mono text-xs text-emerald-400">
-                                    <span className="block font-bold">In Stock ({selectedUnit === '18k' ? unit18k.stock : unit23k.stock} Available)</span>
-                                    <span className="text-slate-400 text-[11px]">Ready for Pickup/Delivery</span>
+                                <div className={`text-right font-mono text-xs ${isOutOfStock ? 'text-rose-400' : 'text-emerald-400'}`}>
+                                    <span className="block font-bold">{isOutOfStock ? 'Currently Sold Out' : `In Stock (${activeUnit.stock} Available)`}</span>
+                                    <span className="text-slate-400 text-[11px]">{isOutOfStock ? '18,000 BTU In Stock Now' : 'Ready for Pickup/Delivery'}</span>
                                 </div>
                             </div>
 
@@ -408,13 +457,39 @@ export default function LargeRoomWindowAcPage() {
 
                             {/* Action Buttons */}
                             <div className="space-y-3 pt-2">
-                                <button
-                                    onClick={() => handleBuyNow(selectedUnit === '18k' ? unit18k : unit23k)}
-                                    className="w-full py-4 rounded-xl bg-primary text-slate-950 font-header font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.01]"
-                                >
-                                    <ShoppingCart className="size-4" />
-                                    Buy Now with Stripe (${selectedUnit === '18k' ? unit18k.promo_price : unit23k.promo_price})
-                                </button>
+                                {isOutOfStock ? (
+                                    <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-3">
+                                        <div className="text-xs font-mono font-bold text-amber-300 uppercase">
+                                            ⚡ 23,500 BTU Sold Out — Pick Up an In-Stock Heavy-Duty Unit Today:
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                            <button
+                                                onClick={() => setSelectedUnit('18k')}
+                                                className="p-3 rounded-xl bg-slate-900/90 border border-emerald-500/40 hover:border-emerald-400 text-left transition-all"
+                                            >
+                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">{unit18k.stock} In Stock • 208/230V</div>
+                                                <div className="text-xs font-bold text-white mt-0.5">LG 18,000 BTU Dual Inverter</div>
+                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">${(isPromo && unit18k.promo_price) ? unit18k.promo_price : unit18k.price} • Switch to 18k →</div>
+                                            </button>
+                                            <Link
+                                                href="/shop/10-lg-dual-inverter-cool-heat-23-500-btu-lw2423hrsm"
+                                                className="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/40 hover:border-cyan-400 text-left transition-all block"
+                                            >
+                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">4 In Stock • 23,500 BTU</div>
+                                                <div className="text-xs font-bold text-white mt-0.5">LG 23,500 BTU Cool+Heat Inverter</div>
+                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$1,025 • View Unit →</div>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <button
+                                        onClick={() => handleBuyNow(activeUnit)}
+                                        className="w-full py-4 rounded-xl bg-primary text-slate-950 font-header font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.01]"
+                                    >
+                                        <ShoppingCart className="size-4" />
+                                        Buy Now with Stripe (${activePrice})
+                                    </button>
+                                )}
                                 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-center text-xs font-mono">
                                     <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 text-slate-300 flex items-center justify-center gap-1.5">
@@ -468,22 +543,22 @@ export default function LargeRoomWindowAcPage() {
                         <tbody className="divide-y divide-white/5 text-slate-300">
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Cooling Square Footage</td>
-                                <td className="py-3 px-4">400 - 1,000 sq. ft.</td>
-                                <td className="py-3 px-4">550 - 1,500+ sq. ft.</td>
+                                <td className="py-3 px-4">Up to 1,000 sq. ft. (600 sq. ft. Oahu)</td>
+                                <td className="py-3 px-4">Up to 1,440 sq. ft. (800 sq. ft. Oahu)</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Electrical Circuit</td>
-                                <td className="py-3 px-4 text-emerald-400">208/230V / 20 Amp (NEMA 6-20P)</td>
-                                <td className="py-3 px-4 text-emerald-400">208/230V / 20 Amp (NEMA 6-20P)</td>
+                                <td className="py-3 px-4 text-emerald-400">208/230V / 15 Amp (NEMA 6-15P)</td>
+                                <td className="py-3 px-4 text-emerald-400">208/230V / 15 Amp (NEMA 6-15P)</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Dehumidification Capacity</td>
-                                <td className="py-3 px-4">5.5 Pints / Hour</td>
-                                <td className="py-3 px-4">7.1 Pints / Hour</td>
+                                <td className="py-3 px-4">4.2 Pints / Hour</td>
+                                <td className="py-3 px-4">5.6 Pints / Hour</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Unit Weight</td>
-                                <td className="py-3 px-4">99 lbs</td>
+                                <td className="py-3 px-4">112 lbs</td>
                                 <td className="py-3 px-4">112 lbs</td>
                             </tr>
                             <tr>
@@ -498,8 +573,8 @@ export default function LargeRoomWindowAcPage() {
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Waipahu Warehouse Stock</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">30 Units Available</td>
-                                <td className="py-3 px-4 text-emerald-400 font-bold">20 Units Available</td>
+                                <td className="py-3 px-4 text-emerald-400 font-bold">{unit18k.stock > 0 ? `${unit18k.stock} Units Available` : 'Sold Out'}</td>
+                                <td className={`py-3 px-4 font-bold ${unit23k.stock > 0 ? 'text-emerald-400' : 'text-rose-400'}`}>{unit23k.stock > 0 ? `${unit23k.stock} Units Available` : 'Sold Out (23.5k Cool+Heat In Stock)'}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -540,14 +615,14 @@ export default function LargeRoomWindowAcPage() {
                         Ready for Heavy-Duty Cooling in Your Oahu Home?
                     </h4>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
-                        Pick up your 18k or 23.5k unit today at our Waipahu warehouse (by appointment) or have it delivered anywhere on Oahu for $50 flat.
+                        Pick up your unit today at our Waipahu warehouse (by appointment) or have it delivered anywhere on Oahu for $50 flat.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <button
-                            onClick={() => handleBuyNow(selectedUnit === '18k' ? unit18k : unit23k)}
+                            onClick={() => handleBuyNow(unit18k)}
                             className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20"
                         >
-                            Order In-Stock Unit Now
+                            Order In-Stock 18,000 BTU (${(isPromo && unit18k.promo_price) ? unit18k.promo_price : unit18k.price})
                         </button>
                         <a 
                             href="tel:808-488-1111"

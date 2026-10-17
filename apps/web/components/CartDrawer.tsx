@@ -16,7 +16,7 @@ function cn(...inputs: (string | undefined)[]) {
 }
 
 export default function CartDrawer() {
-    const { items, isOpen, closeCart, removeFromCart, cartTotal, clearCart, syncInventory } = useCart();
+    const { items, isOpen, closeCart, removeFromCart, updateQuantity, cartTotal, clearCart, syncInventory } = useCart();
     const [isCheckout, setIsCheckout] = useState(false);
     // Email state removed - handled by Stripe Hosted Checkout
     const [loading, setLoading] = useState(false);
@@ -166,7 +166,9 @@ export default function CartDrawer() {
                                 </div>
                             ) : (
                                 <AnimatePresence mode="popLayout">
-                                    {items.map((item) => (
+                                    {items.map((item) => {
+                                        const thumbSrc = (item.image_url || '/assets/products/ac-1.webp').replace(/\.(png|jpg|jpeg)$/i, '.webp');
+                                        return (
                                         <motion.div
                                             key={item.id}
                                             layout
@@ -178,15 +180,18 @@ export default function CartDrawer() {
                                             {/* Glow Effect */}
                                             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-cyan-500/0 group-hover:from-cyan-500/5 group-hover:to-transparent rounded-xl transition-all duration-500" />
 
-                                            <div className="relative size-20 bg-black/40 rounded-lg flex items-center justify-center text-slate-600 border border-white/5 overflow-hidden">
-                                                {/* Fallback Icon */}
-                                                <Snowflake className="size-8 z-0 text-slate-600" />
-                                                {/* Image Support (Future Proofing) */}
-                                                {/* <img src={...} className="absolute inset-0 w-full h-full object-cover z-10" /> */}
+                                            <div className="relative size-20 shrink-0 bg-black/40 rounded-lg flex items-center justify-center text-slate-600 border border-white/5 overflow-hidden p-1.5">
+                                                <Snowflake className="size-8 z-0 text-slate-700" />
+                                                <img
+                                                    src={thumbSrc}
+                                                    alt={item.name}
+                                                    className="absolute inset-0 w-full h-full object-contain p-1.5 z-10"
+                                                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                                                />
                                             </div>
 
-                                            <div className="flex-1 relative z-10">
-                                                <h4 className="text-slate-200 font-bold leading-tight mb-1 line-clamp-2 md:line-clamp-1">{item.name}</h4>
+                                            <div className="flex-1 relative z-10 pr-6">
+                                                <h4 className="text-slate-200 font-bold leading-tight mb-1 line-clamp-2 text-xs sm:text-sm">{item.name}</h4>
                                                 <div className="flex items-baseline gap-2">
                                                     {(isCampaignActive() && item.promo_price && item.promo_price > 0) ? (
                                                         <div className="flex items-center gap-1.5">
@@ -206,11 +211,27 @@ export default function CartDrawer() {
                                                 </div>
 
                                                 <div className="flex items-center gap-3 mt-3">
-                                                    <div className={`flex items-center gap-2 rounded px-2 py-1 border ${item.quantity > (item.stock || 0) ? 'bg-red-500/20 border-red-500 ring-1 ring-red-500/50' : 'bg-black/40 border-white/5'}`}>
-                                                        <span className={`text-xs font-bold uppercase ${item.quantity > (item.stock || 0) ? 'text-red-400' : 'text-slate-400'}`}>
-                                                            {item.quantity > (item.stock || 0) ? 'OOS' : 'Qty'}
+                                                    <div className={`flex items-center gap-1.5 rounded-lg px-1.5 py-0.5 border ${item.quantity > (item.stock || 0) ? 'bg-red-500/20 border-red-500 ring-1 ring-red-500/50' : 'bg-black/40 border-white/10'}`}>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                                            className="size-6 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-white/10 font-mono font-bold text-xs transition-colors"
+                                                            aria-label="Decrease quantity"
+                                                        >
+                                                            -
+                                                        </button>
+                                                        <span className={`font-mono text-xs font-bold min-w-[1.25rem] text-center ${item.quantity > (item.stock || 0) ? 'text-red-200' : 'text-white'}`}>
+                                                            {item.quantity}
                                                         </span>
-                                                        <span className={`font-mono text-xs ${item.quantity > (item.stock || 0) ? 'text-red-200' : 'text-white'}`}>{item.quantity}</span>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                            disabled={item.quantity >= (item.stock || 1)}
+                                                            className="size-6 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-30 font-mono font-bold text-xs transition-colors"
+                                                            aria-label="Increase quantity"
+                                                        >
+                                                            +
+                                                        </button>
                                                     </div>
 
                                                     {item.quantity > (item.stock || 0) ? (
@@ -221,7 +242,7 @@ export default function CartDrawer() {
                                                     ) : (
                                                         <span className="text-amber-500/90 font-bold uppercase text-[10px] tracking-wider flex items-center gap-1">
                                                             <Warehouse className="size-2.5" />
-                                                            Pickup
+                                                            Pickup / $50 Delivery
                                                         </span>
                                                     )}
                                                 </div>
@@ -235,7 +256,8 @@ export default function CartDrawer() {
                                                 <Trash2 className="size-5" />
                                             </button>
                                         </motion.div>
-                                    ))}
+                                        );
+                                    })}
                                 </AnimatePresence>
                             )}
                         </div>
@@ -246,18 +268,18 @@ export default function CartDrawer() {
                                 style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 1.5rem)' }}
                                 className="p-6 border-t border-cyan-500/10 bg-slate-900/80 backdrop-blur-xl space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.4)] z-20"
                             >
-                                <div className="space-y-5">
+                                <div className="space-y-4">
                                     <div className="space-y-1">
                                         <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-widest">
                                             <span>Subtotal {hasIssue && '(In-Stock Only)'}</span>
-                                            <span className="font-mono text-slate-500">{items.length} Units</span>
+                                            <span className="font-mono text-slate-500">{items.reduce((sum, i) => sum + i.quantity, 0)} Units</span>
                                         </div>
-                                        <div className="flex items-end justify-between">
+                                        <div className="flex items-end justify-between gap-2">
                                             <span className={`text-3xl font-header font-black tracking-tighter shadow-white-glow ${hasIssue ? 'text-amber-500' : 'text-white'}`}>
                                                 ${validTotal.toLocaleString()}
                                             </span>
-                                            <span className="text-xs text-cyan-500 font-bold uppercase tracking-wider mb-1">
-                                                Calculated at Refresh
+                                            <span className="text-[10px] text-cyan-400 font-mono uppercase tracking-wider mb-1 text-right leading-tight">
+                                                Free Waipahu Pickup or $50 Delivery<br />+ 4.712% HI GET Tax
                                             </span>
                                         </div>
                                     </div>
@@ -327,26 +349,31 @@ export default function CartDrawer() {
                                     <button
                                         onClick={handleCheckout}
                                         disabled={loading || hasIssue}
-                                        className={`w-full h-16 text-white font-header font-black uppercase tracking-[0.25em] text-sm rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed ${hasIssue ? 'bg-slate-800 cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-primary to-cyan-500 shadow-[0_0_30px_rgba(0,174,239,0.3)]'}`}
+                                        className={`w-full h-16 text-white font-header font-black uppercase tracking-[0.2em] text-sm rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-0.5 group disabled:opacity-50 disabled:cursor-not-allowed ${hasIssue ? 'bg-slate-800 cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-primary to-cyan-500 shadow-[0_0_30px_rgba(0,174,239,0.3)]'}`}
                                     >
                                         {loading ? (
                                             <Loader2 className="size-5 animate-spin" />
                                         ) : hasIssue ? (
-                                            <>
+                                            <div className="flex items-center gap-3">
                                                 <span className="text-slate-500">Inventory Locked</span>
                                                 <Lock className="size-5 text-slate-600" />
-                                            </>
+                                            </div>
                                         ) : (
                                             <>
-                                                <span>Secure Checkout</span>
-                                                <Lock className="size-5 group-hover:translate-x-1 transition-transform" />
+                                                <div className="flex items-center gap-3">
+                                                    <span>Secure Checkout</span>
+                                                    <Lock className="size-4 group-hover:translate-x-1 transition-transform" />
+                                                </div>
+                                                <span className="text-[9px] font-mono tracking-wider text-slate-950 font-bold">
+                                                    US-Issued Cards Only (50 US States)
+                                                </span>
                                             </>
                                         )}
                                     </button>
 
-                                    <div className="flex items-center justify-center gap-2 text-slate-600">
-                                        <Lock className="size-3.5 inline-block" />
-                                        <span className="text-[10px] font-mono uppercase tracking-widest">256-bit TLS Encryption via Stripe</span>
+                                    <div className="flex items-center justify-center gap-2 text-slate-500">
+                                        <Lock className="size-3.5 inline-block text-emerald-400" />
+                                        <span className="text-[10px] font-mono uppercase tracking-widest">256-bit TLS via Stripe • US Cards Only</span>
                                     </div>
                                 </div>
                             </div>
