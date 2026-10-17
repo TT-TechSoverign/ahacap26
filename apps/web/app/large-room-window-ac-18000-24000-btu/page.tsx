@@ -20,6 +20,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const FAQS = [
     {
@@ -221,6 +222,12 @@ export default function LargeRoomWindowAcPage() {
                         ))}
                     </div>
                 </section>
+
+                <WindowAcQuickShop
+                    modelIds={[6, 10, 5, 4]}
+                    title="In-Stock High-Capacity Window ACs (12,000 – 23,500 BTU)"
+                    subheading="Heavy-duty LG Dual Inverter units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
+                />
 
                 <ReviewsPavilion 
                     variant="marquee" 

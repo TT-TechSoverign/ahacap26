@@ -19,6 +19,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const FAQS = [
     {
@@ -167,6 +168,11 @@ export default function SecurityBarsWindowAcInstallationPage() {
                         ))}
                     </div>
                 </section>
+
+                <WindowAcQuickShop
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
+                />
 
                 <ReviewsPavilion 
                     variant="marquee" 

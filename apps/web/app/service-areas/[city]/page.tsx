@@ -243,7 +243,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         "name": "Affordable Home A/C",
                         "alternateName": "Affordable Home Air Conditioning",
                         "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
-                        "logo": "https://www.affordablehome-ac.com/assets/logo.svg",
+                        "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
                         "url": "https://www.affordablehome-ac.com",
                         "telephone": "+1-808-488-1111",
                         "email": "office@affordablehome-ac.com",
@@ -293,12 +293,12 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         },
                         "hasOfferCatalog": {
                             "@type": "OfferCatalog",
-                            "name": `Air Conditioning Services in ${cityData.name}`,
+                            "name": `Air Conditioning & Window AC Sales in ${cityData.name}`,
                             "itemListElement": [
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Affordable Air Conditioning in ${cityData.name}` } },
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Split AC Installation in ${cityData.name}` } },
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Window AC Cleaning Service in ${cityData.name}` } },
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `AC Repair in ${cityData.name}` } }
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `In-Stock LG & GE Window AC Sales & Delivery in ${cityData.name} ($395–$1,025)` } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Window AC & Jalousie Installation in ${cityData.name}` } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Ductless Split AC Installation in ${cityData.name}` } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Mini-Split Deep Cleaning & AC Repair in ${cityData.name}` } }
                             ]
                         }
                     })

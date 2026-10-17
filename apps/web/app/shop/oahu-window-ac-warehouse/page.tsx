@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.svg',
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
                 width: 1600,
                 height: 1000,
                 alt: 'In-Stock LG Dual Inverter Window ACs Waipahu Warehouse Oahu'

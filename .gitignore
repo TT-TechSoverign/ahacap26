@@ -110,6 +110,9 @@ scripts/*
 !scripts/comfyui_studio_bridge.py
 !scripts/enrich_reviews.py
 *.txt
+!apps/web/app/llms.txt/
+!apps/web/app/llms.txt/**
+!apps/web/public/*.txt
 *.py
 !apps/api/**/*.py
 !scripts/comfyui_studio_bridge.py

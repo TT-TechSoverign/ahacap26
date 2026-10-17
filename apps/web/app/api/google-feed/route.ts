@@ -152,13 +152,24 @@ export async function GET() {
       ];
       const highlightsXml = highlights.map(h => `<g:product_highlight>${escapeXml(h)}</g:product_highlight>`).join('\n          ');
 
-      // Custom labels for Smart Bidding / Performance Max
+      // Custom labels for Smart Bidding / Performance Max & Google Shopping Free Listings
+      const roomSizeTier = !product.btu
+        ? 'Wall_Sleeve_Accessory'
+        : product.btu <= 8500
+        ? '6k-8k_Bedroom'
+        : product.btu <= 14500
+        ? '10k-14k_Living_Room'
+        : '18k-24k_Large_Room';
+      const plugTier = product.voltage?.includes('230') || product.voltage?.includes('208')
+        ? '230V_High_Capacity'
+        : '115V_Standard_Plug';
+
       const customLabels = [
         product.subcategory === 'dual_inverter' ? '<g:custom_label_0>Hawaii Energy $45 Rebate Eligible</g:custom_label_0>' : '<g:custom_label_0>Standard Efficiency</g:custom_label_0>',
-        '<g:custom_label_1>Oahu Warehouse In-Stock</g:custom_label_1>',
-        '<g:custom_label_2>Waipahu Commercial Center Pickup</g:custom_label_2>',
-        product.voltage ? `<g:custom_label_3>${escapeXml(product.voltage)}</g:custom_label_3>` : '',
-        product.btu ? `<g:custom_label_4>${product.btu} BTU</g:custom_label_4>` : '',
+        product.stock > 0 ? '<g:custom_label_1>Waipahu_In_Stock</g:custom_label_1>' : '<g:custom_label_1>Out_Of_Stock</g:custom_label_1>',
+        `<g:custom_label_2>${escapeXml(roomSizeTier)}</g:custom_label_2>`,
+        `<g:custom_label_3>${escapeXml(plugTier)}</g:custom_label_3>`,
+        product.btu ? `<g:custom_label_4>${product.btu} BTU</g:custom_label_4>` : '<g:custom_label_4>26in Wall Sleeve</g:custom_label_4>',
       ].filter(Boolean).join('\n          ');
 
       return `
@@ -212,7 +223,7 @@ export async function GET() {
     return new NextResponse(xmlFeed, {
       headers: { 
         'Content-Type': 'application/xml; charset=utf-8', 
-        'Cache-Control': 's-maxage=86400, stale-while-revalidate' 
+        'Cache-Control': 'public, max-age=300, s-maxage=300, stale-while-revalidate=600' 
       },
     });
   } catch (error) {

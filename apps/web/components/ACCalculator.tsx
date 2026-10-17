@@ -158,7 +158,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
         if (btu <= 13000) return "/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm";
         if (btu <= 16000) return "/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm";
         if (btu <= 19500) return "/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm";
-        return "/shop/10-lg-dual-inverter-cool-heat-23-500-btu-lw2423hrsm";
+        return "/shop/10-lg-23-000-btu-lw2423hrsm";
     }, [calculations.recommendedBtu]);
 
     return (

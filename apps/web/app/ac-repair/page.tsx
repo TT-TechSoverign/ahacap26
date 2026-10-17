@@ -20,6 +20,7 @@ import {
     Phone,
     ArrowRight
 } from 'lucide-react';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 export const metadata: Metadata = {
     title: {
@@ -340,6 +341,10 @@ export default function ACRepairPage() {
             </section>
 
             <BackToTop visible={true} />
-        </main>
+                        <WindowAcQuickShop
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
+                />
+            </main>
     );
 }

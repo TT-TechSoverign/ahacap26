@@ -113,12 +113,67 @@ function ShopPageContent() {
         sortOption !== 'featured'
     );
 
+    // Sync URL query params (?q=, ?category=, ?capacity=, ?voltage=) and hash fragments (#dual_inverter, #standard, #wall_unit)
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const applyUrlFilters = () => {
+            const params = new URLSearchParams(window.location.search);
+            const qParam = params.get('q');
+            const catParam = (params.get('category') || '').toLowerCase();
+            const capParam = (params.get('capacity') || '').toLowerCase();
+            const voltParam = (params.get('voltage') || '').toLowerCase();
+            const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+
+            if (qParam) setSearchQuery(qParam);
+
+            if (catParam === 'dual_inverter' || hash === 'dual_inverter') {
+                setSelectedCategory('dual_inverter');
+            } else if (catParam === 'standard' || catParam === 'base' || hash === 'standard' || hash === 'base') {
+                setSelectedCategory('base');
+            } else if (catParam === 'wall_unit' || catParam === 'ge' || hash === 'wall_unit' || hash === 'ge') {
+                setSelectedCategory('ge');
+            } else if (catParam === 'casement' || hash === 'casement') {
+                setSelectedCategory('casement');
+            } else if (catParam === 'universal_fit' || hash === 'universal_fit') {
+                setSelectedCategory('universal_fit');
+            }
+
+            if (capParam === 'small' || capParam === 'bedroom') {
+                setSelectedCapacity('BEDROOM');
+                setIsMoreFiltersOpen(true);
+            } else if (capParam === 'medium' || capParam === 'master') {
+                setSelectedCapacity('MASTER');
+                setIsMoreFiltersOpen(true);
+            } else if (capParam === 'large' || capParam === 'living') {
+                setSelectedCapacity('LIVING');
+                setIsMoreFiltersOpen(true);
+            }
+
+            if (voltParam === '115v') {
+                setSelectedVoltage('115V');
+                setIsMoreFiltersOpen(true);
+            } else if (voltParam === '230v') {
+                setSelectedVoltage('230V');
+                setIsMoreFiltersOpen(true);
+            }
+        };
+
+        applyUrlFilters();
+        window.addEventListener('hashchange', applyUrlFilters);
+        window.addEventListener('popstate', applyUrlFilters);
+        return () => {
+            window.removeEventListener('hashchange', applyUrlFilters);
+            window.removeEventListener('popstate', applyUrlFilters);
+        };
+    }, []);
+
     const filteredProducts = useMemo(() => {
         let result = products.filter(p => {
             // Search query across specifications
             if (searchQuery.trim()) {
                 const q = searchQuery.toLowerCase().trim();
                 const matchName = (p.name || '').toLowerCase().includes(q);
+                const matchKeySpec = (p.key_spec || '').toLowerCase().includes(q);
                 const matchCat = (p.category || '').toLowerCase().includes(q);
                 const matchSub = (p.subcategory || '').toLowerCase().includes(q);
                 const matchBtu = p.btu ? p.btu.toString().includes(q) : false;
@@ -126,7 +181,7 @@ function ShopPageContent() {
                 const matchCovAham = (p.coverage_aham || '').toLowerCase().includes(q);
                 const matchCovOahu = (p.coverage_oahu || '').toLowerCase().includes(q);
                 const matchChassis = (p.chassis_type || '').toLowerCase().includes(q);
-                if (!matchName && !matchCat && !matchSub && !matchBtu && !matchVolt && !matchCovAham && !matchCovOahu && !matchChassis) {
+                if (!matchName && !matchKeySpec && !matchCat && !matchSub && !matchBtu && !matchVolt && !matchCovAham && !matchCovOahu && !matchChassis) {
                     return false;
                 }
             }
@@ -503,16 +558,16 @@ function ShopPageContent() {
                     <div className="w-full max-w-7xl mx-auto flex flex-col items-center">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-header font-black leading-tight tracking-tight uppercase px-4 neon-glow">
                             <span className="text-white">
-                                <EditableText contentKey="shop.hero.title_word1" />
+                                <EditableText contentKey="shop.hero.title_word1" defaultValue="IN-STOCK" />
                             </span>{" "}
                             <span className="text-primary">
-                                <EditableText contentKey="shop.hero.title_word2" />
+                                <EditableText contentKey="shop.hero.title_word2" defaultValue="OAHU" />
                             </span>{" "}
                             <span className="text-primary">
-                                <EditableText contentKey="shop.hero.title_word3" />
+                                <EditableText contentKey="shop.hero.title_word3" defaultValue="WINDOW AC" />
                             </span>{" "}
                             <span className="text-white">
-                                <EditableText contentKey="shop.hero.title_word4" />
+                                <EditableText contentKey="shop.hero.title_word4" defaultValue="INVENTORY" />
                             </span>
                         </h1>
 

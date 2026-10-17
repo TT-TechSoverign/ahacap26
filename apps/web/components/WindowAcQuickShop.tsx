@@ -15,17 +15,19 @@ interface WindowAcQuickShopProps {
     title?: string;
     heading?: string;
     subheading?: string;
+    modelIds?: number[];
 }
 
 const DEFAULT_IDS = [11, 1, 3, 4]; // $395 8k Standard (ID 11), $560 6k Dual Inv (ID 1), $650 10k Dual Inv (ID 3), $745 12k Dual Inv (ID 4)
 
-export function WindowAcQuickShop({ cityName, title, heading, subheading }: WindowAcQuickShopProps) {
+export function WindowAcQuickShop({ cityName, title, heading, subheading, modelIds }: WindowAcQuickShopProps) {
     const { addToCart, openCart } = useCart();
     const [addedId, setAddedId] = useState<number | null>(null);
     const isPromo = isCampaignActive();
+    const targetIds = modelIds && modelIds.length > 0 ? modelIds : DEFAULT_IDS;
 
     const [units, setUnits] = useState<Product[]>(() =>
-        DEFAULT_IDS.map((id) => INITIAL_CATALOG_PRODUCTS.find((p) => p.id === id)!).filter(Boolean)
+        targetIds.map((id) => INITIAL_CATALOG_PRODUCTS.find((p) => p.id === id)!).filter(Boolean)
     );
 
     useEffect(() => {
@@ -37,13 +39,13 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading }: Wind
                 const liveMap = new Map(liveProducts.map((p) => [p.id, p]));
                 const usedIds = new Set<number>();
 
-                const initialSelection = DEFAULT_IDS.map((id) => {
+                const initialSelection = targetIds.map((id) => {
                     const live = liveMap.get(id);
                     const fallback = INITIAL_CATALOG_PRODUCTS.find((p) => p.id === id)!;
                     const merged = live ? { ...fallback, ...live } : fallback;
                     usedIds.add(merged.id);
                     return merged;
-                });
+                }).filter(Boolean);
 
                 const finalSelection = initialSelection.map((item) => {
                     if (item.stock > 0) return item;
@@ -61,7 +63,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading }: Wind
         return () => {
             isMounted = false;
         };
-    }, []);
+    }, [modelIds]);
 
     const handleAdd = (product: Product) => {
         if (product.stock <= 0) return;
@@ -97,8 +99,56 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading }: Wind
             ? `Skip big-box backorders. Order brand-new LG & GE Window ACs online for $50 flat delivery to ${cityName} or free pickup at our Waipahu warehouse (94-150 Leoleo St #203).`
             : 'Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse. Free pickup by appointment or $50 flat island-wide Oahu delivery.');
 
+    const quickShopSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: resolvedHeading,
+        description: resolvedSubheading,
+        numberOfItems: units.length,
+        itemListElement: units.map((unit, idx) => {
+            const slug = generateProductSlug(unit.id, unit.name);
+            const activePrice = (isPromo && unit.promo_price) ? unit.promo_price : unit.price;
+            const imgSrc = unit.image_url?.endsWith('.svg')
+                ? unit.image_url.replace('.svg', '.webp')
+                : unit.image_url || '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp';
+            return {
+                '@type': 'ListItem',
+                position: idx + 1,
+                item: {
+                    '@type': 'Product',
+                    name: unit.key_spec && !unit.name.includes(unit.key_spec) ? `${unit.name} (${unit.key_spec})` : unit.name,
+                    sku: unit.key_spec || `AHAC-${unit.id}`,
+                    mpn: unit.key_spec || `AHAC-${unit.id}`,
+                    image: `https://www.affordablehome-ac.com${imgSrc}`,
+                    brand: {
+                        '@type': 'Brand',
+                        name: unit.name.startsWith('GE') ? 'GE' : 'LG',
+                    },
+                    offers: {
+                        '@type': 'Offer',
+                        url: `https://www.affordablehome-ac.com/shop/${slug}`,
+                        priceCurrency: 'USD',
+                        price: activePrice.toFixed(2),
+                        priceValidUntil: '2026-12-31',
+                        itemCondition: 'https://schema.org/NewCondition',
+                        availability: unit.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+                        seller: {
+                            '@type': 'HVACBusiness',
+                            name: 'Affordable Home A/C',
+                            telephone: '+1-808-488-1111',
+                        },
+                    },
+                },
+            };
+        }),
+    };
+
     return (
         <section className="py-12 px-4 sm:px-6 rounded-3xl bg-slate-900/70 border border-white/10 shadow-2xl my-12">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(quickShopSchema) }}
+            />
             <div className="max-w-7xl mx-auto space-y-8">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div className="space-y-2">

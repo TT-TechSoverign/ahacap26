@@ -29,6 +29,7 @@ import { Product } from '@/types/inventory';
 import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
 import { isCampaignActive } from '@/lib/utils';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const INITIAL_UNIT_18K: Product = {
     id: 6,
@@ -472,7 +473,7 @@ export default function LargeRoomWindowAcPage() {
                                                 <div className="text-xs font-mono text-cyan-400 font-bold mt-1">${(isPromo && unit18k.promo_price) ? unit18k.promo_price : unit18k.price} • Switch to 18k →</div>
                                             </button>
                                             <Link
-                                                href="/shop/10-lg-dual-inverter-cool-heat-23-500-btu-lw2423hrsm"
+                                                href="/shop/10-lg-23-000-btu-lw2423hrsm"
                                                 className="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/40 hover:border-cyan-400 text-left transition-all block"
                                             >
                                                 <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">4 In Stock • 23,500 BTU</div>
@@ -633,6 +634,11 @@ export default function LargeRoomWindowAcPage() {
                         </a>
                     </div>
                 </div>
+                            <WindowAcQuickShop
+                    modelIds={[6, 10, 5, 4]}
+                    title="In-Stock High-Capacity Window ACs (12,000 – 23,500 BTU)"
+                    subheading="Heavy-duty LG Dual Inverter units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
+                />
             </main>
             <BackToTop />
         </div>

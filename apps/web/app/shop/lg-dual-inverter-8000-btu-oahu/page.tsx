@@ -29,6 +29,7 @@ import { Product } from '@/types/inventory';
 import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
 import { isCampaignActive } from '@/lib/utils';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const INITIAL_PRODUCT_8K: Product = {
     id: 2,
@@ -386,7 +387,7 @@ export default function Lg8000BtuOahuPage() {
                                                 <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$560 • View Unit →</div>
                                             </Link>
                                             <Link
-                                                href="/shop/8-lg-dual-inverter-cool-heat-8-000-btu-lw8023hrsm"
+                                                href="/shop/8-lg-7-600-btu-lw8023hrsm"
                                                 className="p-3 rounded-xl bg-slate-900/90 border border-white/15 hover:border-cyan-400 text-left transition-all block"
                                             >
                                                 <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">8 In Stock • 8,000 BTU</div>
@@ -394,7 +395,7 @@ export default function Lg8000BtuOahuPage() {
                                                 <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$650 • View Unit →</div>
                                             </Link>
                                             <Link
-                                                href="/shop/11-lg-standard-8-000-btu-lw8024rd"
+                                                href="/shop/11-lg-8-000-btu-lw8024rd"
                                                 className="p-3 rounded-xl bg-slate-900/90 border border-white/15 hover:border-cyan-400 text-left transition-all block"
                                             >
                                                 <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">30 In Stock • 8,000 BTU</div>
@@ -578,6 +579,11 @@ export default function Lg8000BtuOahuPage() {
                         </a>
                     </div>
                 </div>
+                            <WindowAcQuickShop
+                    modelIds={[11, 1, 8, 3]}
+                    title="In-Stock 115V Bedroom & Studio Window ACs ($395–$650)"
+                    subheading="Plug-and-play 115V LG Standard & Dual Inverter models in stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery."
+                />
             </main>
             <BackToTop />
         </div>

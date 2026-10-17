@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 export default function AcRepairOahuPage() {
     const [selectedSymptom, setSelectedSymptom] = useState<string>('warm_air');
@@ -499,6 +500,10 @@ export default function AcRepairOahuPage() {
                         </Link>
                     </div>
                 </div>
+                            <WindowAcQuickShop
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
+                />
             </main>
             <BackToTop />
         </div>

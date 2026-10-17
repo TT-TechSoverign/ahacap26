@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
 import { Product } from '@/types/inventory';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { generateProductSlug } from '@/lib/utils';
 import { BackToTop } from '@/components/BackToTop';
 import contentData from '@/lib/content/content.json';
@@ -7,8 +9,16 @@ import { Navigation, ArrowRight, Package, MapPin, Wrench, Shield, Home, Shopping
 
 export const dynamic = 'force-dynamic';
 
+export const metadata: Metadata = {
+    title: 'Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C',
+    description: 'Browse all 119+ pages of Affordable Home A/C: 16 in-stock LG & GE window air conditioners ($395–$1,025), 22 Oahu service areas, Hawaii window installation guides, and mini-split services.',
+    alternates: {
+        canonical: 'https://www.affordablehome-ac.com/sitemap',
+    },
+};
+
 export default async function SitemapPage() {
-    let products: Product[] = [];
+    let products: Product[] = INITIAL_CATALOG_PRODUCTS;
     
     try {
         let apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
@@ -21,10 +31,13 @@ export default async function SitemapPage() {
         });
 
         if (res.ok) {
-            products = await res.json();
+            const liveProducts = await res.json();
+            if (Array.isArray(liveProducts) && liveProducts.length > 0) {
+                products = liveProducts;
+            }
         }
     } catch (error) {
-        console.error('[HTML Sitemap] Failed to fetch products:', error);
+        console.error('[HTML Sitemap] Failed to fetch products, using INITIAL_CATALOG_PRODUCTS fallback:', error);
     }
 
     const coreServices = [

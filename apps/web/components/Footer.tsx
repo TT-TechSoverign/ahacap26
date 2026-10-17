@@ -12,20 +12,36 @@ export default function Footer() {
     const { content } = useContent();
     if (pathname && pathname.startsWith('/checkout')) return null;
 
+    const getRollingWindow = (startOffsetDays: number, endOffsetDays: number) => {
+        const now = new Date();
+        const start = new Date(now.getTime() + startOffsetDays * 86400000);
+        const end = new Date(now.getTime() + endOffsetDays * 86400000);
+        const startMonth = start.toLocaleDateString('en-US', { month: 'short' });
+        const endMonth = end.toLocaleDateString('en-US', { month: 'short' });
+        if (startMonth === endMonth) {
+            return `${startMonth} ${start.getDate()}-${end.getDate()}`;
+        }
+        return `${startMonth} ${start.getDate()} - ${endMonth} ${end.getDate()}`;
+    };
+
     const defaults = {
         mini_split_label: "MINI SPLIT AC",
         window_ac_label: "WINDOW AC",
-        mini_split_estimate_date: "Next Available Estimate: Oct 15-19",
-        mini_split_install_date: "Next Available Install: Oct 20-24",
-        window_ac_estimate_date: "Next Available Estimate: Oct 15-17",
-        window_ac_install_date: "Next Available Install: Oct 17-21",
-        general_availability_range: "Scheduling for week of October 15-21, 2026",
+        mini_split_estimate_date: `Next Available Estimate: ${getRollingWindow(2, 5)}`,
+        mini_split_install_date: `Next Available Install: ${getRollingWindow(5, 9)}`,
+        window_ac_estimate_date: `Next Available Estimate: ${getRollingWindow(1, 3)}`,
+        window_ac_install_date: `Next Available Install: ${getRollingWindow(3, 6)}`,
+        general_availability_range: `Scheduling for ${getRollingWindow(1, 7)}, ${new Date().getFullYear()}`,
     };
 
-    const schedule = {
-        ...defaults,
-        ...(content?.footer_schedule || {})
-    };
+    const rawSchedule = content?.footer_schedule || {};
+    const isStaleSchedule = JSON.stringify(rawSchedule).includes('Oct 1-') || JSON.stringify(rawSchedule).includes('Oct 15-') || JSON.stringify(rawSchedule).includes('Sep ');
+    const schedule = isStaleSchedule
+        ? defaults
+        : {
+            ...defaults,
+            ...rawSchedule
+        };
 
     const regions = content?.landing_legacy?.service_areas?.regions || [];
     const dynamicCities: string[] = [];
@@ -122,14 +138,17 @@ export default function Footer() {
 
                     {/* Services Column */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                        <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Services</h3>
+                        <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Services &amp; Shop</h3>
                         <ul className="space-y-4 w-full">
                             {[
-                                { text: 'Mini Split AC', href: '/mini_split_ac' },
-                                { text: 'Window AC Shop', href: '/shop' },
-                                { text: 'AC Repair Service', href: '/ac-repair' },
+                                { text: 'Window AC Shop ($395–$1,025)', href: '/shop' },
+                                { text: '8,000 BTU Bedroom Window ACs', href: '/shop/lg-dual-inverter-8000-btu-oahu' },
+                                { text: 'Living Room Window ACs (12k–23.5k)', href: '/living-room-window-ac-oahu' },
+                                { text: 'LG Dual Inverter Lineup', href: '/shop/lg-dual-inverter-guide' },
+                                { text: 'Window AC Installation', href: '/window-ac-installation' },
+                                { text: 'Mini Split AC Installation', href: '/mini_split_ac' },
                                 { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
-                                { text: 'Clean vs Replace', href: '/clean-vs-replace-window-ac' }
+                                { text: 'AC Repair Service', href: '/ac-repair' }
                             ].map((item) => (
                                 <li key={item.text}>
                                     <Link href={item.href} prefetch={false} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
@@ -146,11 +165,11 @@ export default function Footer() {
                         <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Quick Links</h3>
                         <ul className="space-y-4 w-full">
                             {[
-                                { text: 'Shop Inventory', href: '/shop' },
+                                { text: 'Oahu Window AC Warehouse', href: '/shop/oahu-window-ac-warehouse' },
                                 { text: '$45 Window AC Rebate', href: '/hawaii-energy-rebate' },
                                 { text: 'Waipahu Warehouse Pickup', href: '/window-ac-warehouse-pickup-waipahu' },
+                                { text: '115V vs 230V Plug Guide', href: '/shop/window-ac-plug-guide' },
                                 { text: 'Jalousie Window AC Install', href: '/jalousie-window-ac-installation-oahu' },
-                                { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
                                 { text: 'Clean vs Replace Guide', href: '/clean-vs-replace-window-ac' },
                                 { text: 'Customer Reviews (142+)', href: '/reviews' },
                                 { text: 'Sitemap & Directory', href: '/sitemap' },

@@ -74,6 +74,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/shop/oahu-window-ac-warehouse',
         '/ductless-mini-split-installation-oahu',
         '/reviews',
+        '/central-ac',
         '/hawaii-energy-rebate',
         '/mini-split-installation-cost-oahu',
         '/jalousie-window-ac-installation-oahu',
@@ -144,6 +145,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/mini_split_ac_maintenance',
         '/sizing',
         '/service-areas',
+        '/sitemap',
         ...highYieldRoutes,
         ...cityRoutes
     ].map((route) => ({

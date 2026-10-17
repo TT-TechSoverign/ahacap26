@@ -1,4 +1,5 @@
 import reviewsDb from './content/reviews_db.json';
+import { INITIAL_CATALOG_PRODUCTS } from './catalog-seed';
 
 export interface Review {
     id: string;
@@ -160,7 +161,13 @@ export function getProductReviews(
  * Backwards-compatible legacy signature for getSelectedReviews
  */
 export function getSelectedReviews(productId: number, limit: number = 3): Review[] {
-    return getProductReviews({ id: productId }, limit);
+    const prod = INITIAL_CATALOG_PRODUCTS.find((p) => p.id === productId);
+    return getProductReviews(
+        prod
+            ? { id: prod.id, name: prod.name, btu: prod.btu, category: prod.category, subcategory: prod.subcategory }
+            : { id: productId },
+        limit
+    );
 }
 
 /**

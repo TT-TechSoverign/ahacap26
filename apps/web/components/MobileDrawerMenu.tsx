@@ -53,9 +53,11 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
         {
             title: 'In-Stock Window ACs (Waipahu)',
             links: [
-                { text: 'Shop All 16 Window ACs', href: '/shop', icon: Store, badge: 'From $395', highlight: true },
-                { text: 'LG Dual Inverter Guide', href: '/shop/lg-dual-inverter-guide', icon: Sparkles, badge: '$45 Rebate' },
-                { text: 'Large Room 18k–23.5k ACs', href: '/shop/large-room-window-ac-oahu', icon: Compass, badge: '230V' },
+                { text: 'Shop All 16 Window ACs', href: '/shop', icon: Store, badge: '$395–$1,025', highlight: true },
+                { text: 'Bedroom 115V (6k–8k BTU)', href: '/shop?capacity=small', icon: Sparkles, badge: 'From $395' },
+                { text: 'Living Room (10k–14k BTU)', href: '/shop?capacity=medium', icon: Compass, badge: '115V Plug' },
+                { text: 'Large Room 230V (18k–23.5k)', href: '/shop/large-room-window-ac-oahu', icon: Compass, badge: '230V' },
+                { text: '26" Thru-the-Wall Units (GE)', href: '/shop?category=wall_unit', icon: Store, badge: 'Wall Sleeve' },
                 { text: 'Window AC Installation', href: '/window-ac-installation', icon: Wrench, badge: '$0 Estimate' },
             ]
         },

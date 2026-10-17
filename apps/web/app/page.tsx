@@ -80,7 +80,7 @@ export default function Homepage() {
                             "name": "Affordable Home A/C",
                             "legalName": "Affordable Home A/C LLC",
                             "url": "https://www.affordablehome-ac.com",
-                            "logo": "https://www.affordablehome-ac.com/assets/logo/ahac-logo-bus-500x500xv2.png",
+                            "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
                             "image": "https://www.affordablehome-ac.com/assets/hero-cards/ahac-hero-background-2.webp",
                             "telephone": "+1-808-488-1111",
                             "email": "office@affordablehome-ac.com",

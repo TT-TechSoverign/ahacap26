@@ -47,12 +47,21 @@ export default function robots(): MetadataRoute.Robots {
                 ],
             },
             {
-                userAgent: 'GPTBot',
-                disallow: '/',
-            },
-            {
-                userAgent: 'ClaudeBot',
-                disallow: '/',
+                userAgent: ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'PerplexityBot', 'ClaudeBot', 'Applebot-Extended', 'Google-Extended'],
+                allow: '/',
+                disallow: [
+                    '/admin',
+                    '/admin/',
+                    '/admin/*',
+                    '/dev-os',
+                    '/dev-os/',
+                    '/dev-os/*',
+                    '/api/v1/dev-os',
+                    '/api/v1/dev-os/*',
+                    '/api/v1/admin',
+                    '/checkout/',
+                    '/puck/'
+                ],
             },
             {
                 userAgent: 'CCBot',

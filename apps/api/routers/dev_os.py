@@ -1799,7 +1799,7 @@ async def run_agent_market_research() -> Dict[str, Any]:
         "competitor_landscape": {
             "big_box_retailers": "Big-box retail stores: Limited in-stock sizing, no custom jalousie fitting, 2-3 wk mainland freight wait for high-efficiency inverters.",
             "island_hvac_contractors": "$250-$350/hr truck rolls, 3 to 6 week scheduling backlogs during peak trade-wind heat surges.",
-            "ahac_edge": "Waipahu warehouse in-stock inventory ($560-$1,025), $0 Free In-Home Mini-Split Estimates, $50 flat island delivery, free pickup by appointment."
+            "ahac_edge": "Waipahu warehouse in-stock inventory ($395-$1,025), $0 Free In-Home Mini-Split Estimates, $50 flat island delivery, free pickup by appointment."
         },
         "power_rate_index": "Hawaiian Electric (HECO) residential baseline ~44.2¢/kWh.",
         "customer_add_to_cart_drivers": {
@@ -1809,7 +1809,7 @@ async def run_agent_market_research() -> Dict[str, Any]:
                 "warehouse_pickup_driver": "Free Waipahu pickup preferred by contractors/DIYers when staged by appointment to eliminate waiting."
             },
             "bracket_pricing_clarity": "Framing the cantilever bracket as evaluated on-site ($0 deposit) and highlighting that standard sills require no bracket provides upfront clarity while ensuring safe installation for jalousie louvers and multi-story framing.",
-            "instant_rebate_anchor": "The official pre-approved $45 Hawaii Energy cash rebate PDF lowers effective cost ($535 8k becomes $490).",
+            "instant_rebate_anchor": "The official pre-approved $45 Hawaii Energy cash rebate PDF lowers effective cost ($560 6k becomes $515, $595 8k becomes $550).",
             "zero_risk_service_intake": "$0 upfront payment for installation and service appointments removes credit card resistance and establishes instant contractor trust."
         },
         "details": "Market research synthesizes 5 core psychological and operational conversion catalysts for Oahu window AC sales and installations with complimentary on-site structural evaluation."

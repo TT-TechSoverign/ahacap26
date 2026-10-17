@@ -46,6 +46,9 @@ export function QuickJumpBanner() {
                         >
                             <ShoppingBag className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
                             <span>Shop Window AC</span>
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-[9px] font-bold">
+                                $395+
+                            </span>
                         </Link>
 
                         <Link 

@@ -19,6 +19,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const FAQS = [
     {
@@ -182,6 +183,12 @@ export default function LowVoltageWindowAcPage() {
                         ))}
                     </div>
                 </section>
+
+                <WindowAcQuickShop
+                    modelIds={[11, 1, 8, 3]}
+                    title="In-Stock 115V Bedroom & Studio Window ACs ($395–$650)"
+                    subheading="Plug-and-play 115V LG Standard & Dual Inverter models in stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery."
+                />
 
                 <ReviewsPavilion 
                     variant="marquee" 

@@ -40,8 +40,18 @@ export default function Section1HeroHomeV2() {
                         />
                     </div>
 
+                    {/* Live In-Stock Waipahu Pill */}
+                    <Link
+                        href="/shop"
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-lg transition-all"
+                    >
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                        <span>16 Window ACs In-Stock ($395–$1,025) • Same-Day Waipahu Pickup or $50 Delivery</span>
+                        <ArrowRight className="size-3.5 shrink-0" />
+                    </Link>
+
                     {/* Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 sm:mt-6 w-full sm:w-auto justify-center items-center">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1 sm:mt-3 w-full sm:w-auto justify-center items-center">
                         <Link
                             href="/shop"
                             className="w-full sm:w-auto group relative overflow-hidden bg-cyan-500 hover:bg-cyan-400 text-white font-header font-black text-base sm:text-xl uppercase tracking-widest py-3.5 px-6 sm:py-5 sm:px-10 rounded shadow-[0_10px_30px_rgba(0,174,239,0.4)] transition-all transform hover:-translate-y-1 text-center"
@@ -63,7 +73,7 @@ export default function Section1HeroHomeV2() {
                     </div>
 
                     {/* Free In-Home Estimates ($0 to Book) Trust Badge */}
-                    <div className="inline-flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-slate-900/90 border border-cyan-500/30 rounded-2xl backdrop-blur-md shadow-lg mt-2 sm:mt-4 text-center">
+                    <div className="inline-flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-slate-900/90 border border-cyan-500/30 rounded-2xl backdrop-blur-md shadow-lg mt-1 sm:mt-2 text-center">
                         <div className="flex items-center gap-2 text-emerald-400 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider text-center">
                             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                             Free In-Home Estimates ($0 to Book) • New &amp; Replacement Installations

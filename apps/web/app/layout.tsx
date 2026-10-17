@@ -115,7 +115,7 @@ export default function RootLayout({
                             "alternateName": "Affordable Home Air Conditioning",
                             "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
                             "url": "https://www.affordablehome-ac.com",
-                            "logo": "https://www.affordablehome-ac.com/assets/logo.svg",
+                            "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
                             "telephone": "+1-808-488-1111",
                             "email": "office@affordablehome-ac.com",
                             "hasMap": "https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797",

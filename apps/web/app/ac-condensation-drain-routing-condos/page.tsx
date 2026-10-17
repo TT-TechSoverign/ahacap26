@@ -19,6 +19,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const FAQS = [
     {
@@ -167,6 +168,12 @@ export default function AcCondensationDrainRoutingCondosPage() {
                         ))}
                     </div>
                 </section>
+
+                <WindowAcQuickShop
+                    modelIds={[13, 14, 15, 3]}
+                    title="In-Stock Condo, Wall Sleeve & Narrow Window ACs"
+                    subheading="Genuine GE 26-inch Built-In Thru-the-Wall units and whisper-quiet LG Dual Inverters in stock at our Waipahu warehouse."
+                />
 
                 <ReviewsPavilion 
                     variant="marquee" 

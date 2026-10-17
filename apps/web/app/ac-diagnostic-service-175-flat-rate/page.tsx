@@ -18,6 +18,7 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const FAQS = [
     {
@@ -194,6 +195,11 @@ export default function AcDiagnosticPage() {
                         ))}
                     </div>
                 </section>
+
+                <WindowAcQuickShop
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
+                />
 
                 <ReviewsPavilion 
                     variant="marquee" 

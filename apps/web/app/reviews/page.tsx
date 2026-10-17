@@ -30,7 +30,7 @@ export default function ReviewsPage() {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
         "name": "Affordable Home A/C",
-        "image": "https://www.affordablehome-ac.com/assets/logo.svg",
+        "image": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
         "telephone": "(808) 488-1111",
         "email": "office@affordablehome-ac.com",
         "address": {

@@ -99,7 +99,13 @@ export default function NavbarV2() {
                             <span className="text-slate-600">•</span>
                             <span className="text-emerald-400 font-bold">Free Estimates ($0 to Book)</span>
                             <span className="text-slate-600">•</span>
-                            <span className="text-slate-400">Waipahu Warehouse Preorders</span>
+                            <Link
+                                href="/shop"
+                                prefetch={false}
+                                className="text-cyan-300 hover:text-white font-bold transition-colors hover:underline"
+                            >
+                                16 Window AC Models In-Stock ($395–$1,025) • Same-Day Waipahu Pickup
+                            </Link>
                         </div>
                         <div className="flex items-center gap-4">
                             <a 
@@ -186,31 +192,69 @@ export default function NavbarV2() {
                         <div className="w-10 hidden md:block shrink-0" aria-hidden="true" />
 
                         {/* Centered Navigation Flow (Evenly Distributed Nav Pills + Integrated CTA) */}
-                        <nav className="flex-1 flex items-center justify-center gap-1 lg:gap-1.5 xl:gap-2.5 overflow-hidden">
+                        <nav className="flex-1 flex items-center justify-center gap-1 lg:gap-1.5 xl:gap-2.5 overflow-visible">
                             {links.map((link: any, i: number) => {
                                 const Icon = getNavIcon(link.href, link.text);
                                 const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+                                const isShopLink = link.href === '/shop';
                                 return (
-                                    <Link
-                                        key={i}
-                                        prefetch={false}
-                                        href={link.href}
-                                        className={cn(
-                                            "inline-flex items-center gap-1.5 px-2 lg:px-2.5 xl:px-3 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap relative group shrink-0",
-                                            isActive 
-                                                ? "text-cyan-400 bg-cyan-500/10 border border-cyan-500/25 shadow-[0_0_10px_rgba(0,174,239,0.15)]" 
-                                                : "text-slate-300 hover:text-white hover:bg-slate-800/80"
+                                    <div key={i} className="relative group/navitem shrink-0">
+                                        <Link
+                                            prefetch={false}
+                                            href={link.href}
+                                            className={cn(
+                                                "inline-flex items-center gap-1.5 px-2 lg:px-2.5 xl:px-3 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap relative group shrink-0",
+                                                isActive 
+                                                    ? "text-cyan-400 bg-cyan-500/10 border border-cyan-500/25 shadow-[0_0_10px_rgba(0,174,239,0.15)]" 
+                                                    : "text-slate-300 hover:text-white hover:bg-slate-800/80"
+                                            )}
+                                        >
+                                            <Icon className={cn(
+                                                "size-3.5 shrink-0 transition-transform group-hover:scale-110",
+                                                isActive ? "text-cyan-400" : "text-slate-400 group-hover:text-cyan-300"
+                                            )} />
+                                            <span>{link.text}</span>
+                                            {isShopLink && (
+                                                <span className="px-1.5 py-0.2 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-[9px] font-black tracking-normal">
+                                                    In-Stock
+                                                </span>
+                                            )}
+                                            {isActive && (
+                                                <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+                                            )}
+                                        </Link>
+
+                                        {isShopLink && (
+                                            <div className="invisible opacity-0 group-hover/navitem:visible group-hover/navitem:opacity-100 transition-all duration-150 absolute left-1/2 -translate-x-1/2 top-full pt-2 w-72 z-50">
+                                                <div className="bg-[#0a0e14]/98 border border-cyan-500/30 rounded-2xl p-3 shadow-2xl backdrop-blur-xl space-y-1.5 text-left">
+                                                    <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold border-b border-white/10">
+                                                        Waipahu Warehouse • $395–$1,025
+                                                    </div>
+                                                    {[
+                                                        { label: 'All 16 In-Stock Window ACs', sub: 'Free Pickup or $50 Oahu Delivery', href: '/shop' },
+                                                        { label: 'Bedroom 115V (6k–8k BTU)', sub: 'From $395 • Standard 3-Prong Plug', href: '/shop?capacity=BEDROOM' },
+                                                        { label: 'Living Room (10k–14k BTU)', sub: '$650–$785 • 115V Dual Inverters', href: '/shop?capacity=MASTER' },
+                                                        { label: 'Large Room 230V (18k–23.5k)', sub: '$865–$1,025 • High-Velocity Cooling', href: '/shop?capacity=LIVING' },
+                                                        { label: '26" Thru-the-Wall (GE)', sub: 'Fits RAB26A Condo Wall Sleeves', href: '/shop?category=ge' },
+                                                    ].map((item) => (
+                                                        <Link
+                                                            key={item.href}
+                                                            href={item.href}
+                                                            prefetch={false}
+                                                            className="block px-2.5 py-2 rounded-xl hover:bg-cyan-500/15 border border-transparent hover:border-cyan-500/30 transition-all"
+                                                        >
+                                                            <div className="text-xs font-header font-bold uppercase text-white">
+                                                                {item.label}
+                                                            </div>
+                                                            <div className="text-[10px] font-mono text-slate-400">
+                                                                {item.sub}
+                                                            </div>
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         )}
-                                    >
-                                        <Icon className={cn(
-                                            "size-3.5 shrink-0 transition-transform group-hover:scale-110",
-                                            isActive ? "text-cyan-400" : "text-slate-400 group-hover:text-cyan-300"
-                                        )} />
-                                        <span>{link.text}</span>
-                                        {isActive && (
-                                            <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
-                                        )}
-                                    </Link>
+                                    </div>
                                 );
                             })}
 

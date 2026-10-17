@@ -21,48 +21,53 @@ import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const LIVING_MODELS = [
     {
         btu: '12,000 BTU',
         model: 'LW1222IVSM',
-        coverage: 'Medium Living Rooms (450–550 sq. ft.)',
+        coverage: 'Medium Living Rooms (Up to 550 sq. ft. AHAM / 400 sq. ft. Oahu)',
         voltage: '115V / 15A Standard Household Plug',
-        ceer: 'CEER 12.0 Energy Star',
-        price: '$670',
-        afterRebate: '$625 after $45 rebate',
+        ceer: 'CEER 14.9 Energy Star',
+        price: '$745',
+        afterRebate: '$700 after $45 rebate',
         plugType: 'NEMA 5-15P (Standard 3-prong)',
+        href: '/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm',
         popular: true
     },
     {
         btu: '14,000 BTU',
         model: 'LW1522FVSM',
-        coverage: 'Open Living & Dining Areas (550–700 sq. ft.)',
+        coverage: 'Open Living & Dining Areas (Up to 700 sq. ft. AHAM / 500 sq. ft. Oahu)',
         voltage: '115V / 15A Standard Household Plug',
-        ceer: 'CEER 11.8 Energy Star',
-        price: '$759',
-        afterRebate: '$714 after $45 rebate',
-        plugType: 'NEMA 5-15P (Standard 3-prong)'
+        ceer: 'CEER 14.7 Energy Star',
+        price: '$785',
+        afterRebate: '$740 after $45 rebate',
+        plugType: 'NEMA 5-15P (Standard 3-prong)',
+        href: '/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm'
     },
     {
         btu: '18,000 BTU',
         model: 'LW1822IVSM',
-        coverage: 'Large Open Floor Plans (700–1,000 sq. ft.)',
+        coverage: 'Large Open Floor Plans (Up to 1,000 sq. ft. AHAM / 600 sq. ft. Oahu)',
         voltage: '208/230V Dedicated 15A Circuit',
-        ceer: 'CEER 11.8 Energy Star',
-        price: '$890',
-        afterRebate: '$845 after $45 rebate',
-        plugType: 'NEMA 6-15P (Horizontal pins)'
+        ceer: 'CEER 14.7 Energy Star',
+        price: '$865',
+        afterRebate: '$820 after $45 rebate',
+        plugType: 'NEMA 6-15P (Horizontal pins)',
+        href: '/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm'
     },
     {
         btu: '23,500 BTU',
-        model: 'LW2422IVSM',
-        coverage: 'Expansive Living Areas & High Ceilings (1,000–1,400 sq. ft.)',
-        voltage: '208/230V Dedicated 20A Circuit',
-        ceer: 'CEER 10.4 Energy Star',
+        model: 'LW2423HRSM',
+        coverage: 'Expansive Living Areas & High Ceilings (Up to 1,440 sq. ft. AHAM / 800 sq. ft. Oahu)',
+        voltage: '208/230V Dedicated 20A Circuit (Cool + Heat)',
+        ceer: 'CEER 13.7 Inverter',
         price: '$1,025',
-        afterRebate: '$980 after $45 rebate',
-        plugType: 'NEMA 6-20P (Perpendicular pins)'
+        afterRebate: 'In-Stock Waipahu Direct',
+        plugType: 'NEMA 6-20P (Perpendicular pins)',
+        href: '/shop/10-lg-23-000-btu-lw2423hrsm'
     }
 ];
 
@@ -77,11 +82,11 @@ const FAQS = [
     },
     {
         q: "When do I need a 230V outlet?",
-        a: "The 18,000 BTU model requires a 208/230V 15A circuit, while the 23,500 BTU model requires a 208/230V 20A circuit. If your living room already has a horizontal-pin AC outlet, these heavy-duty units plug directly in."
+        a: "The 18,000 BTU model requires a 208/230V 15A circuit, while the 23,500 BTU model requires a 208/230V 15A/20A circuit. If your living room already has a horizontal-pin AC outlet, these heavy-duty units plug directly in."
     },
     {
         q: "Do these high-capacity units qualify for the $45 Hawaii Energy rebate?",
-        a: "Yes! All four models featured here are Energy Star certified and qualify for the $45 Hawaii Energy cash rebate."
+        a: "Yes! Our Energy Star certified LG Dual Inverter cooling models (12,000 BTU, 14,000 BTU, and 18,000 BTU) qualify for the $45 Hawaii Energy cash rebate."
     }
 ];
 
@@ -114,7 +119,7 @@ export default function LivingRoomWindowAcPage() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/shop"
+                            href="/shop?capacity=medium"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
                             Shop Living Room Inverters
@@ -150,10 +155,10 @@ export default function LivingRoomWindowAcPage() {
                                 <span>Island Sizing Quick Rules</span>
                             </div>
                             <ul className="space-y-2 text-slate-300 text-[11px] font-sans">
-                                <li>&bull; <strong>450–550 sq. ft.:</strong> 12,000 BTU (LW1222IVSM)</li>
-                                <li>&bull; <strong>550–700 sq. ft.:</strong> 14,000 BTU (LW1522FVSM)</li>
-                                <li>&bull; <strong>700–1,000 sq. ft.:</strong> 18,000 BTU (LW1822IVSM — 230V)</li>
-                                <li>&bull; <strong>1,000+ sq. ft. / Vaulted:</strong> 23,500 BTU (LW2422IVSM — 230V)</li>
+                                <li>&bull; <strong>Up to 400 sq. ft. Oahu (550 AHAM):</strong> 12,000 BTU (LW1222IVSM — 115V)</li>
+                                <li>&bull; <strong>Up to 500 sq. ft. Oahu (700 AHAM):</strong> 14,000 BTU (LW1522FVSM — 115V)</li>
+                                <li>&bull; <strong>Up to 600 sq. ft. Oahu (1,000 AHAM):</strong> 18,000 BTU (LW1822IVSM — 230V)</li>
+                                <li>&bull; <strong>Up to 800 sq. ft. Oahu (1,440 AHAM):</strong> 23,500 BTU (LW2423HRSM — 230V)</li>
                             </ul>
                         </div>
                     </div>
@@ -179,7 +184,7 @@ export default function LivingRoomWindowAcPage() {
                                 <div>
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="font-mono text-xs text-primary font-bold">{item.btu}</span>
-                                        <span className="font-mono text-xs text-emerald-400 font-bold">$45 Rebate Eligible</span>
+                                        <span className="font-mono text-xs text-emerald-400 font-bold">In-Stock Waipahu</span>
                                     </div>
                                     <h3 className="font-header font-bold text-xl uppercase text-white mb-1">
                                         LG {item.model}
@@ -199,16 +204,22 @@ export default function LivingRoomWindowAcPage() {
                                         <span className="text-xs font-mono text-emerald-400">{item.afterRebate}</span>
                                     </div>
                                     <Link 
-                                        href="/shop"
+                                        href={item.href}
                                         className="w-full py-3 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
                                     >
-                                        Order Online in Shop
+                                        View Specs &amp; Order Online
                                     </Link>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </section>
+
+                <WindowAcQuickShop
+                    modelIds={[4, 5, 6, 10]}
+                    title="Order Living Room Window ACs Online (12,000 – 23,500 BTU)"
+                    subheading="Live Waipahu warehouse stock. Add directly to cart for free Waipahu pickup by appointment or $50 flat Oahu island-wide delivery."
+                />
 
                 {/* Electrical Plug Compatibility Guide */}
                 <section className="mb-16 p-8 rounded-3xl bg-surface-dark border border-white/10">
