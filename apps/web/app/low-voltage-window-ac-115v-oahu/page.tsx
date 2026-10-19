@@ -94,34 +94,41 @@ export default function LowVoltageWindowAcPage() {
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="p-6 rounded-2xl bg-surface-dark border border-white/10 space-y-2">
-                            <span className="text-primary font-mono text-xs font-bold uppercase">6,000 BTU</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <Link href="/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm" className="p-5 rounded-2xl bg-surface-dark border border-white/10 hover:border-primary/40 transition-all space-y-2 block">
+                            <span className="text-primary font-mono text-xs font-bold uppercase">6,000 BTU • $560</span>
                             <h3 className="font-header font-bold text-lg text-white">LW6023IVSM</h3>
-                            <p className="text-xs text-slate-300 font-sans">Cooling up to 260 sq ft. Draws only 5.5 amps (15.5 CEER).</p>
-                            <div className="text-xs font-mono text-emerald-400">$45 Rebate Eligible</div>
-                        </div>
+                            <p className="text-xs text-slate-300 font-sans">Cools up to 260 sq ft AHAM (220 Oahu). 15.5 CEER Dual Inverter.</p>
+                            <div className="text-xs font-mono text-emerald-400">11 In Stock • $45 Rebate</div>
+                        </Link>
 
-                        <div className="p-6 rounded-2xl bg-surface-dark border border-white/10 space-y-2">
-                            <span className="text-primary font-mono text-xs font-bold uppercase">8,000 BTU</span>
-                            <h3 className="font-header font-bold text-lg text-white">LW8022IVSM</h3>
-                            <p className="text-xs text-slate-300 font-sans">Cooling up to 350 sq ft. Draws only 8.9 amps (15.5 CEER).</p>
-                            <div className="text-xs font-mono text-emerald-400">$45 Rebate Eligible</div>
-                        </div>
+                        <Link href="/shop/11-lg-8-000-btu-lw8024rd" className="p-5 rounded-2xl bg-surface-dark border border-white/10 hover:border-primary/40 transition-all space-y-2 block">
+                            <span className="text-primary font-mono text-xs font-bold uppercase">8,000 BTU • $395</span>
+                            <h3 className="font-header font-bold text-lg text-white">LW8024RD</h3>
+                            <p className="text-xs text-slate-300 font-sans">Cools up to 350 sq ft AHAM (280 Oahu). 10.9 CEER Standard Value.</p>
+                            <div className="text-xs font-mono text-emerald-400">20 In Stock • Best Value</div>
+                        </Link>
 
-                        <div className="p-6 rounded-2xl bg-surface-dark border border-white/10 space-y-2">
-                            <span className="text-primary font-mono text-xs font-bold uppercase">10,000 BTU</span>
+                        <Link href="/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm" className="p-5 rounded-2xl bg-surface-dark border border-white/10 hover:border-primary/40 transition-all space-y-2 block">
+                            <span className="text-primary font-mono text-xs font-bold uppercase">10,000 BTU • $650</span>
                             <h3 className="font-header font-bold text-lg text-white">LW1022IVSM</h3>
-                            <p className="text-xs text-slate-300 font-sans">Cooling up to 450 sq ft. Draws 11.0 amps (15.0 CEER).</p>
-                            <div className="text-xs font-mono text-emerald-400">$45 Rebate Eligible</div>
-                        </div>
+                            <p className="text-xs text-slate-300 font-sans">Cools up to 450 sq ft AHAM (330 Oahu). 15.0 CEER Dual Inverter.</p>
+                            <div className="text-xs font-mono text-emerald-400">10 In Stock • $45 Rebate</div>
+                        </Link>
 
-                        <div className="p-6 rounded-2xl bg-surface-dark border border-white/10 space-y-2">
-                            <span className="text-primary font-mono text-xs font-bold uppercase">14,000 BTU</span>
+                        <Link href="/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm" className="p-5 rounded-2xl bg-surface-dark border border-white/10 hover:border-primary/40 transition-all space-y-2 block">
+                            <span className="text-primary font-mono text-xs font-bold uppercase">12,000 BTU • $745</span>
+                            <h3 className="font-header font-bold text-lg text-white">LW1222IVSM</h3>
+                            <p className="text-xs text-slate-300 font-sans">Cools up to 550 sq ft AHAM (380 Oahu). 15.0 CEER Dual Inverter.</p>
+                            <div className="text-xs font-mono text-emerald-400">20 In Stock • $45 Rebate</div>
+                        </Link>
+
+                        <Link href="/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm" className="p-5 rounded-2xl bg-surface-dark border border-white/10 hover:border-primary/40 transition-all space-y-2 block">
+                            <span className="text-primary font-mono text-xs font-bold uppercase">14,000 BTU • $785</span>
                             <h3 className="font-header font-bold text-lg text-white">LW1522FVSM</h3>
-                            <p className="text-xs text-slate-300 font-sans">Cooling up to 700 sq ft on a 115V 15A plug! Draws 11.3 amps.</p>
-                            <div className="text-xs font-mono text-emerald-400">$45 Rebate Eligible</div>
-                        </div>
+                            <p className="text-xs text-slate-300 font-sans">Cools up to 700 sq ft AHAM (450 Oahu) on a 115V 15A plug! 14.7 CEER.</p>
+                            <div className="text-xs font-mono text-emerald-400">48 In Stock • $45 Rebate</div>
+                        </Link>
                     </div>
                 </section>
 

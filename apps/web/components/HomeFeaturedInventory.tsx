@@ -1,196 +1,152 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../context/CartContext';
-import { Snowflake, Warehouse, ShieldCheck, Leaf, ArrowRight, ShoppingCart, Check, Zap } from 'lucide-react';
+import { Warehouse, ShieldCheck, Leaf, ArrowRight, ShoppingCart, Check, Zap, Sparkles, SlidersHorizontal } from 'lucide-react';
 import { generateProductSlug, isCampaignActive } from '@/lib/utils';
 import { Product } from '../types/inventory';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
+import { getProductImages } from '@/lib/product-images';
+import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 
-// Curated 4 top-selling in-stock Oahu models directly from the verified catalog (fallback before live API hydration)
-const FEATURED_MODELS: Product[] = [
+type FeaturedTabId = 'bestsellers' | 'dual_inverter' | 'bedroom_115v' | 'large_wall';
+
+interface TabConfig {
+    id: FeaturedTabId;
+    label: string;
+    shortLabel: string;
+    title: string;
+    subtitle: string;
+    ctaText: (count: number) => string;
+    ctaHref: string;
+    priorityIds: number[];
+    filterFn: (p: Product) => boolean;
+}
+
+const FEATURED_TABS: TabConfig[] = [
     {
-        id: 4,
-        category: 'WINDOW_AC',
-        name: 'LG Dual Inverter 12,000 BTU (LW1222IVSM)',
-        stock: 30,
-        btu: 12000,
-        coverage: 'Up to 550 sq. ft. (AHAM) • Up to 380 sq. ft. (Oahu)',
-        coverage_aham: 'Up to 550 sq. ft.',
-        coverage_oahu: 'Up to 380 sq. ft.',
-        sizing_notes: 'Factory AHAM certified up to 550 sq. ft. Calibrated for up to 380 sq. ft. in uninsulated Hawaii single-wall structures facing afternoon Leeward/Honolulu sun.',
-        key_spec: 'Gold Fin™ Anti-Corrosive Salt Shield • Slide In-Out Chassis',
-        noise_level: '44 / 58 dB',
-        subcategory: 'dual_inverter',
-        price: 745,
-        promo_price: 670,
-        discount_percent: 10,
-        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
-        voltage: '115V / 15 Amp',
-        performance_specs: 'Gold Fin™ Anti-Corrosive Coating (CEER 15.0)',
-        ceer_rating: '15.0',
-        dehumidification: '3.8 Pts/Hr',
-        dimensions: '15.0" H x 23.6" W x 28.8" D',
-        weight: '85',
-        shipping_weight: '96',
-        min_window_width: '27"',
-        max_window_width: '39"',
-        min_window_height: '16"',
-        chassis_type: 'Slide In-Out',
-        dry_air_flow_cfm: '310 CFM',
-        warranty: '1 YEAR LIMITED'
+        id: 'bestsellers',
+        label: 'Top In-Stock Bestsellers',
+        shortLabel: 'Bestsellers',
+        title: 'Featured Oahu In-Stock Bestsellers',
+        subtitle:
+            'Our most-requested in-stock Waipahu units across LG Dual Inverter ($45 Rebate), LG Standard ($395+), and GE Thru-The-Wall series—ready for same-day pickup or $50 flat-rate delivery.',
+        ctaText: (count) => `Explore All ${count} In-Stock Models`,
+        ctaHref: '/shop',
+        // Curated cross-series mix: 12k Dual Inverter ($745), 10k Dual Inverter ($650), 6k Dual Inverter ($560), 8k Standard Value ($395), followed by fallback in-stock priority
+        priorityIds: [4, 3, 1, 11, 5, 6, 7, 12, 8, 15, 9, 13],
+        filterFn: () => true,
     },
     {
-        id: 3,
-        category: 'WINDOW_AC',
-        name: 'LG Dual Inverter 10,000 BTU (LW1022IVSM)',
-        stock: 15,
-        btu: 10000,
-        coverage: 'Up to 450 sq. ft. (AHAM) • Up to 330 sq. ft. (Oahu)',
-        coverage_aham: 'Up to 450 sq. ft.',
-        coverage_oahu: 'Up to 330 sq. ft.',
-        sizing_notes: 'Factory AHAM rated up to 450 sq. ft. Calibrated for up to 330 sq. ft. in typical Oahu master bedrooms and studios with single-wall construction.',
-        key_spec: 'ThinQ® Smart Wi-Fi • 44dB Whisper Quiet Master Suite',
-        noise_level: '44 / 58 dB',
-        subcategory: 'dual_inverter',
-        price: 650,
-        promo_price: 585,
-        discount_percent: 10,
-        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
-        voltage: '115V / 15 Amp',
-        performance_specs: 'ThinQ® Smart Control (CEER 15.5)',
-        ceer_rating: '15.5',
-        dehumidification: '2.9 Pts/Hr',
-        dimensions: '15.0" H x 23.6" W x 28.8" D',
-        weight: '87',
-        shipping_weight: '98',
-        min_window_width: '27"',
-        max_window_width: '39"',
-        min_window_height: '16"',
-        chassis_type: 'Slide In-Out',
-        dry_air_flow_cfm: '295 CFM',
-        warranty: '1 YEAR LIMITED'
+        id: 'dual_inverter',
+        label: 'LG Dual Inverter ($45 Rebate)',
+        shortLabel: 'Dual Inverter',
+        title: 'In-Stock LG Dual Inverter Units ($45 Rebate)',
+        subtitle:
+            'Whisper-quiet 44dB variable-speed Dual Inverter units in stock at our Waipahu warehouse. Every model in this view qualifies for the $45 Hawaii Energy instant rebate.',
+        ctaText: () => 'Shop All LG Dual Inverters',
+        ctaHref: '/shop?category=dual_inverter',
+        priorityIds: [4, 3, 1, 5, 6, 7],
+        filterFn: (p) => p.subcategory === 'dual_inverter',
     },
     {
-        id: 1,
-        category: 'WINDOW_AC',
-        name: 'LG Dual Inverter 6,000 BTU (LW6023IVSM)',
-        stock: 30,
-        btu: 6000,
-        coverage: 'Up to 260 sq. ft. (AHAM) • Up to 220 sq. ft. (Oahu)',
-        coverage_aham: 'Up to 260 sq. ft.',
-        coverage_oahu: 'Up to 220 sq. ft.',
-        sizing_notes: 'Factory AHAM rated up to 260 sq. ft. For uninsulated single-wall Hawaii homes with jalousie airflow, calibrated for up to 220 sq. ft. bedroom sanctuaries.',
-        key_spec: '#1 Oahu Bedroom Bestseller • Standard 115V Plug',
-        noise_level: '44 / 54 dB',
-        subcategory: 'dual_inverter',
-        price: 560,
-        promo_price: 504,
-        discount_percent: 10,
-        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
-        voltage: '115V / 15 Amp',
-        performance_specs: '44dB Ultra-Quiet Mode (CEER 15.5)',
-        ceer_rating: '15.5',
-        dehumidification: '1.4 Pts/Hr',
-        dimensions: '12.5" H x 19.6" W x 24.5" D',
-        weight: '55',
-        shipping_weight: '62',
-        min_window_width: '22"',
-        max_window_width: '36"',
-        min_window_height: '13"',
-        chassis_type: 'Top-Down Fixed',
-        dry_air_flow_cfm: '195 CFM',
-        warranty: '1 YEAR LIMITED'
+        id: 'bedroom_115v',
+        label: 'Bedrooms & 115V Plug (6k–12k)',
+        shortLabel: 'Bedrooms (115V)',
+        title: 'In-Stock Bedroom & Standard 115V Window ACs',
+        subtitle:
+            'Plug-and-play 115V / 15A units (6,000–12,000 BTU) engineered for Oahu bedrooms, studios, and home offices—zero 230V electrical rewiring required.',
+        ctaText: () => 'View All Bedroom & 115V Units',
+        ctaHref: '/shop?capacity=BEDROOM',
+        priorityIds: [1, 11, 3, 4, 8, 12, 13, 15],
+        filterFn: (p) => (p.btu || 0) <= 12000 && Boolean(p.voltage?.includes('115V')),
     },
     {
-        id: 6,
-        category: 'WINDOW_AC',
-        name: 'LG Dual Inverter 18,000 BTU (LW1822IVSM)',
-        stock: 20,
-        btu: 18000,
-        coverage: 'Up to 1,000 sq. ft. (AHAM) • Up to 600 sq. ft. (Oahu)',
-        coverage_aham: 'Up to 1,000 sq. ft.',
-        coverage_oahu: 'Up to 600 sq. ft.',
-        sizing_notes: '500 CFM high-velocity air throw for open-concept Oahu living rooms and vaulted ceilings.',
-        key_spec: '500 CFM High-Velocity Throw • 208/230V 15A Plug',
-        noise_level: '44 / 59 dB',
-        subcategory: 'dual_inverter',
-        price: 865,
-        promo_price: 778,
-        discount_percent: 10,
-        image_url: '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
-        voltage: '208/230V / 15 Amp',
-        performance_specs: 'High-Velocity 500 CFM Airflow (CEER 14.7)',
-        ceer_rating: '14.7',
-        dehumidification: '4.2 Pts/Hr',
-        dimensions: '17.7" H x 26.0" W x 30.7" D',
-        weight: '112',
-        shipping_weight: '124',
-        min_window_width: '29"',
-        max_window_width: '41"',
-        min_window_height: '19"',
-        chassis_type: 'Slide In-Out',
-        dry_air_flow_cfm: '500 CFM',
-        warranty: '1 YEAR LIMITED'
-    }
+        id: 'large_wall',
+        label: 'Large Room & 26" Wall Units',
+        shortLabel: 'Large & 26" Wall',
+        title: 'In-Stock Large Room (14k–23.5k BTU) & 26" Wall Units',
+        subtitle:
+            'High-capacity cooling for open Oahu living rooms plus true 26" built-in replacements (GE AJCQ & LG Universal Fit Cool+Heat) for Honolulu condos and townhomes.',
+        ctaText: () => 'View Large Room & 26" Wall Catalog',
+        ctaHref: '/shop?capacity=LARGE',
+        priorityIds: [5, 6, 7, 15, 9, 13, 8],
+        filterFn: (p) =>
+            (p.btu || 0) >= 14000 ||
+            p.subcategory === 'ge' ||
+            p.subcategory === 'universal_fit',
+    },
 ];
+
+function formatSeriesBadge(product: Product): string {
+    switch (product.subcategory) {
+        case 'dual_inverter':
+            return 'LG DUAL INVERTER';
+        case 'base':
+            return 'LG STANDARD SERIES';
+        case 'universal_fit':
+            return 'LG UNIVERSAL FIT • COOL + HEAT';
+        case 'ge':
+            return 'GE BUILT-IN • 26" SLEEVE';
+        default:
+            return 'WINDOW AC';
+    }
+}
 
 export function HomeFeaturedInventory() {
     const { addToCart, openCart } = useCart();
-    const [addedId, setAddedId] = React.useState<number | null>(null);
-    const [featuredModels, setFeaturedModels] = React.useState<Product[]>(FEATURED_MODELS);
+    const [addedId, setAddedId] = useState<number | null>(null);
+    const [activeTab, setActiveTab] = useState<FeaturedTabId>('bestsellers');
     const isPromo = isCampaignActive();
 
-    React.useEffect(() => {
-        let isMounted = true;
-        async function fetchLiveInventory() {
-            try {
-                const res = await fetch('/api/v1/products', { cache: 'no-store' });
-                if (!res.ok) return;
-                const liveProducts: Product[] = await res.json();
-                if (!isMounted || !Array.isArray(liveProducts)) return;
-                const liveMap = new Map(liveProducts.map((p) => [p.id, p]));
-                const usedIds = new Set<number>();
+    const {
+        inStockAcProducts,
+        inStockAcCount,
+        totalPhysicalAcUnits,
+        minPrice,
+        maxPrice,
+    } = useLiveInventorySummary();
 
-                const hydrated = FEATURED_MODELS.map((fallback) => {
-                    const live = liveMap.get(fallback.id);
-                    const merged = live ? { ...fallback, ...live } : fallback;
-                    usedIds.add(merged.id);
-                    return merged;
-                });
+    const currentTabConfig = useMemo(
+        () => FEATURED_TABS.find((t) => t.id === activeTab) || FEATURED_TABS[0],
+        [activeTab]
+    );
 
-                // Auto-substitute any out-of-stock slot with an in-stock unit from liveProducts so homepage always shows 4 buyable units
-                const finalFeatured = hydrated.map((item) => {
-                    if (item.stock > 0) return item;
-                    const replacement = liveProducts.find((p) => p.stock > 0 && !usedIds.has(p.id));
-                    if (replacement) {
-                        usedIds.add(replacement.id);
-                        return {
-                            ...replacement,
-                            image_url: replacement.image_url?.endsWith('.svg')
-                                ? replacement.image_url.replace('.svg', '.webp')
-                                : replacement.image_url,
-                        };
-                    }
-                    return item;
-                });
+    // Strictly select up to 4 IN-STOCK cooling units matching the active tab in priority order
+    const displayedUnits = useMemo(() => {
+        const matchingInStock = inStockAcProducts.filter(currentTabConfig.filterFn);
+        const byId = new Map<number, Product>(matchingInStock.map((p) => [p.id, p]));
+        const selected: Product[] = [];
+        const usedIds = new Set<number>();
 
-                setFeaturedModels(finalFeatured);
-            } catch (err) {
-                console.error('Failed to sync live featured inventory:', err);
+        for (const id of currentTabConfig.priorityIds) {
+            const match = byId.get(id);
+            if (match && match.stock > 0 && (match.btu || 0) > 0) {
+                selected.push(match);
+                usedIds.add(match.id);
+                if (selected.length === 4) break;
             }
         }
-        fetchLiveInventory();
-        return () => {
-            isMounted = false;
-        };
-    }, []);
+
+        if (selected.length < 4) {
+            for (const item of matchingInStock) {
+                if (!usedIds.has(item.id) && item.stock > 0 && (item.btu || 0) > 0) {
+                    selected.push(item);
+                    usedIds.add(item.id);
+                    if (selected.length === 4) break;
+                }
+            }
+        }
+
+        return selected;
+    }, [inStockAcProducts, currentTabConfig]);
 
     const handleQuickAdd = (product: Product, e: React.MouseEvent) => {
         e.preventDefault();
         if (product.stock <= 0) return;
-        const activePrice = (isPromo && product.promo_price) ? product.promo_price : product.price;
+        const activePrice = isPromo && product.promo_price ? product.promo_price : product.price;
         addToCart({
             ...product,
             price: activePrice,
@@ -207,36 +163,80 @@ export function HomeFeaturedInventory() {
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
                     <div className="space-y-3">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[11px] font-bold uppercase tracking-wider">
+                        <div className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 font-mono text-[11px] font-bold uppercase tracking-wider">
                             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                            Waipahu In-Stock Warehouse • Ready for Same-Day Pickup
+                            <span>
+                                Waipahu Warehouse Live: {inStockAcCount} AC Models ({totalPhysicalAcUnits} Units) In Stock • ${minPrice}–${maxPrice.toLocaleString()}
+                            </span>
                         </div>
                         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-header font-black text-white uppercase tracking-tight">
-                            Featured Oahu In-Stock Inventory
+                            {currentTabConfig.title}
                         </h2>
-                        <p className="font-sans text-sm sm:text-base text-slate-300 max-w-2xl">
-                            Brand-new factory-sealed units warehoused locally on Oahu. Pick up by appointment at our Waipahu warehouse or get $50 flat-rate island-wide delivery.
+                        <p className="font-sans text-sm sm:text-base text-slate-300 max-w-3xl">
+                            {currentTabConfig.subtitle}
                         </p>
                     </div>
 
                     <Link
-                        href="/shop"
-                        className="inline-flex items-center gap-2 self-start md:self-auto px-5 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 hover:border-primary/60 text-primary font-header font-bold text-xs uppercase tracking-wider rounded-xl transition-all group"
+                        href={currentTabConfig.ctaHref}
+                        className="inline-flex items-center gap-2 self-start lg:self-auto px-5 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 hover:border-primary/60 text-primary font-header font-bold text-xs uppercase tracking-wider rounded-xl transition-all group shrink-0"
                     >
-                        <span>Explore Full 16-Model Catalog</span>
+                        <span>{currentTabConfig.ctaText(inStockAcCount)}</span>
                         <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
 
-                {/* 4-Card Responsive Grid */}
+                {/* Dynamic Category / Room-Size Filter Tabs (Swipeable on Mobile, Centered/Left on Desktop) */}
+                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-6 border-b border-white/10">
+                    <span className="hidden md:inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-slate-400 mr-1 shrink-0">
+                        <SlidersHorizontal className="size-3.5 text-cyan-400" />
+                        Filter View:
+                    </span>
+                    {FEATURED_TABS.map((tab) => {
+                        const isActive = activeTab === tab.id;
+                        const matchingCount = inStockAcProducts.filter(tab.filterFn).length;
+                        return (
+                            <button
+                                key={tab.id}
+                                type="button"
+                                onClick={() => setActiveTab(tab.id)}
+                                className={`min-h-[44px] px-4 py-2 rounded-xl font-header font-bold text-xs uppercase tracking-wider transition-all shrink-0 flex items-center gap-2 border ${
+                                    isActive
+                                        ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.3)]'
+                                        : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 border-white/10 hover:border-cyan-500/40'
+                                }`}
+                            >
+                                <span className="sm:hidden">{tab.shortLabel}</span>
+                                <span className="hidden sm:inline">{tab.label}</span>
+                                <span
+                                    className={`px-1.5 py-0.5 rounded-md font-mono text-[10px] font-bold ${
+                                        isActive
+                                            ? 'bg-slate-950/20 text-slate-950'
+                                            : 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
+                                    }`}
+                                >
+                                    {matchingCount} In Stock
+                                </span>
+                            </button>
+                        );
+                    })}
+                </div>
+
+                {/* 4-Card Responsive Grid (Strictly In-Stock Units Only) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {featuredModels.map((product) => {
+                    {displayedUnits.map((product) => {
                         const slug = generateProductSlug(product.id, product.name);
                         const isLgInverter = product.subcategory === 'dual_inverter';
+                        const isGeBuiltIn = product.subcategory === 'ge';
+                        const isUniversalHeat = product.subcategory === 'universal_fit';
                         const isAdded = addedId === product.id;
-                        const isOutOfStock = product.stock <= 0;
+                        const primaryPhoto = getProductImages(product.id)[0] || product.image_url;
+                        const specTagline =
+                            product.performance_specs ||
+                            PRODUCT_IDENTIFIERS[product.id]?.catalystBadge ||
+                            'Factory-Sealed Waipahu Inventory';
 
                         return (
                             <div
@@ -246,34 +246,45 @@ export function HomeFeaturedInventory() {
                                 {/* Top Badges */}
                                 <div className="space-y-2 mb-3">
                                     <div className="flex items-center justify-between gap-2">
-                                        {isOutOfStock ? (
-                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-rose-500/10 border border-rose-500/30 text-rose-400 font-mono text-[10px] font-bold uppercase rounded-full">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
-                                                Out of Stock
-                                            </span>
-                                        ) : (
-                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold rounded-full">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                                                {product.stock} In Stock Waipahu
-                                            </span>
-                                        )}
+                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold rounded-full">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                                            {product.stock} In Stock Waipahu
+                                        </span>
                                         <span className="inline-flex items-center gap-1 text-[11px] font-mono text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/40">
                                             {product.voltage?.split('/')[0]?.trim() || '115V'}
                                         </span>
                                     </div>
 
-                                    {isLgInverter && (
+                                    {isLgInverter ? (
                                         <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-[10px] font-semibold rounded-md">
                                             <Leaf className="size-3 text-emerald-400 shrink-0" />
                                             <span>$45 Hawaii Energy Rebate</span>
+                                        </div>
+                                    ) : isGeBuiltIn ? (
+                                        <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-[10px] font-semibold rounded-md">
+                                            <ShieldCheck className="size-3 text-cyan-400 shrink-0" />
+                                            <span>True 26&quot; Wall Fit • 2-Yr Full Warranty</span>
+                                        </div>
+                                    ) : isUniversalHeat ? (
+                                        <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-950/60 border border-amber-500/30 text-amber-300 text-[10px] font-semibold rounded-md">
+                                            <Sparkles className="size-3 text-amber-400 shrink-0" />
+                                            <span>Dual-Climate Cool + Heat • 26&quot; Fit</span>
+                                        </div>
+                                    ) : (
+                                        <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-slate-800/80 border border-white/10 text-slate-300 text-[10px] font-semibold rounded-md">
+                                            <Warehouse className="size-3 text-cyan-400 shrink-0" />
+                                            <span>Gold Fin™ Anti-Corrosion • 115V Plug</span>
                                         </div>
                                     )}
                                 </div>
 
                                 {/* Product Image */}
-                                <Link href={`/shop/${slug}`} className="block relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-950/60 border border-white/5 mb-4 group-hover:border-primary/20 transition-colors">
+                                <Link
+                                    href={`/shop/${slug}`}
+                                    className="block relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-950/60 border border-white/5 mb-4 group-hover:border-primary/20 transition-colors"
+                                >
                                     <Image
-                                        src={product.image_url}
+                                        src={primaryPhoto}
                                         alt={product.name}
                                         fill
                                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -285,8 +296,8 @@ export function HomeFeaturedInventory() {
                                 {/* Product Info */}
                                 <div className="space-y-3 flex-1 flex flex-col justify-between">
                                     <div>
-                                        <div className="text-[10px] font-mono uppercase text-slate-400 tracking-wider">
-                                            {product.btu?.toLocaleString()} BTU • {product.subcategory?.replace('_', ' ').toUpperCase()}
+                                        <div className="text-[10px] font-mono uppercase text-cyan-400/90 font-semibold tracking-wider">
+                                            {product.btu?.toLocaleString()} BTU • {formatSeriesBadge(product)}
                                         </div>
                                         <Link href={`/shop/${slug}`} className="hover:text-primary transition-colors">
                                             <h3 className="font-header font-black text-white text-base leading-snug line-clamp-2 mt-1">
@@ -315,18 +326,18 @@ export function HomeFeaturedInventory() {
                                         <div className="flex items-baseline justify-between mb-1">
                                             <div>
                                                 <span className="text-xl font-header font-black text-white">
-                                                    ${product.price}
+                                                    ${product.price.toLocaleString()}
                                                 </span>
-                                                <span className="text-[10px] text-slate-400 ml-1.5">tax incl. at check</span>
+                                                <span className="text-[10px] text-slate-400 ml-1.5">+ 4.712% GET</span>
                                             </div>
-                                            {product.ceer_rating && (
+                                            {product.ceer_rating && product.ceer_rating !== 'N/A' && (
                                                 <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-800/40">
                                                     CEER {product.ceer_rating}
                                                 </span>
                                             )}
                                         </div>
-                                        <p className="text-[11px] text-slate-400 line-clamp-1">
-                                            {product.key_spec}
+                                        <p className="text-[11px] text-slate-300 line-clamp-1" title={specTagline}>
+                                            {specTagline}
                                         </p>
                                     </div>
 
@@ -340,19 +351,14 @@ export function HomeFeaturedInventory() {
                                         </Link>
                                         <button
                                             type="button"
-                                            disabled={isOutOfStock}
                                             onClick={(e) => handleQuickAdd(product, e)}
                                             className={`px-3 py-2.5 font-header font-black text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md ${
-                                                isOutOfStock
-                                                    ? 'bg-slate-800/80 text-slate-500 cursor-not-allowed border border-white/5 shadow-none'
-                                                    : isAdded
+                                                isAdded
                                                     ? 'bg-emerald-500 text-slate-950 shadow-emerald-500/20'
                                                     : 'bg-primary hover:bg-cyan-300 text-slate-950 shadow-primary/20 hover:scale-[1.02]'
                                             }`}
                                         >
-                                            {isOutOfStock ? (
-                                                <span>Out of Stock</span>
-                                            ) : isAdded ? (
+                                            {isAdded ? (
                                                 <>
                                                     <Check className="size-3.5" />
                                                     <span>Added!</span>
@@ -375,15 +381,21 @@ export function HomeFeaturedInventory() {
                 <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                     <div className="bg-slate-900/50 border border-white/5 rounded-2xl p-4 flex items-center justify-center gap-3">
                         <Warehouse className="size-5 text-cyan-400 shrink-0" />
-                        <span className="text-xs text-slate-300 font-medium">Waipahu Warehouse Pickup by Appointment</span>
+                        <span className="text-xs text-slate-300 font-medium">
+                            Same-Day Waipahu Pickup or $50 Delivery
+                        </span>
                     </div>
                     <div className="bg-slate-900/50 border border-white/5 rounded-2xl p-4 flex items-center justify-center gap-3">
                         <ShieldCheck className="size-5 text-emerald-400 shrink-0" />
-                        <span className="text-xs text-slate-300 font-medium">1-Year Factory Warranty & Support</span>
+                        <span className="text-xs text-slate-300 font-medium">
+                            1-Yr LG &amp; 2-Yr GE Factory Warranty • Lic #CT-36775
+                        </span>
                     </div>
                     <div className="bg-slate-900/50 border border-white/5 rounded-2xl p-4 flex items-center justify-center gap-3">
                         <Leaf className="size-5 text-amber-400 shrink-0" />
-                        <span className="text-xs text-slate-300 font-medium">$45 Hawaii Energy Rebate Paperwork Included</span>
+                        <span className="text-xs text-slate-300 font-medium">
+                            $45 Hawaii Energy Rebate on All LG Dual Inverters
+                        </span>
                     </div>
                 </div>
             </div>

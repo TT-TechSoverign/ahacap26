@@ -32,7 +32,7 @@ const FAQS = [
     },
     {
         q: "What if I can't pick it up myself today?",
-        a: "We offer island-wide flat-rate $50 delivery to any Oahu address from Hawaii Kai to Haleiwa, with prompt dispatch options."
+        a: "We offer flat-rate $50 delivery across our 15-municipality Oahu service area from Hawaii Kai to Kapolei and Kailua, with prompt dispatch options."
     },
     {
         q: "Do I get the $45 Hawaii Energy rebate on same-day pickups?",
@@ -99,7 +99,7 @@ export default function SameDayWindowAcPickupPage() {
                             <span className="text-2xl font-black text-primary font-header">01</span>
                             <h3 className="font-header font-bold text-lg text-white uppercase">Order Online</h3>
                             <p className="text-slate-300 font-sans text-xs leading-relaxed">
-                                Select your model in our Shop ($560 to $1,025) and choose Waipahu Warehouse Pickup at checkout.
+                                Select your model in our Shop ($395 to $1,200) and choose Waipahu Warehouse Pickup at checkout.
                             </p>
                         </div>
 
@@ -184,7 +184,7 @@ export default function SameDayWindowAcPickupPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

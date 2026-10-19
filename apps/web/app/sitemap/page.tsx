@@ -7,11 +7,11 @@ import { BackToTop } from '@/components/BackToTop';
 import contentData from '@/lib/content/content.json';
 import { Navigation, ArrowRight, Package, MapPin, Wrench, Shield, Home, ShoppingCart, AlertCircle, Sparkles } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
     title: 'Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C',
-    description: 'Browse all 119+ pages of Affordable Home A/C: 16 in-stock LG & GE window air conditioners ($395–$1,025), 22 Oahu service areas, Hawaii window installation guides, and mini-split services.',
+    description: 'Browse all 110+ pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and mini-split services.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sitemap',
     },
@@ -27,7 +27,7 @@ export default async function SitemapPage() {
         }
 
         const res = await fetch(`${apiUrl}/products`, {
-            next: { revalidate: 0 }
+            next: { revalidate: 86400 }
         });
 
         if (res.ok) {
@@ -43,13 +43,14 @@ export default async function SitemapPage() {
     const coreServices = [
         { name: 'Home', path: '/' },
         { name: 'Verified Customer Reviews (142+)', path: '/reviews' },
-        { name: 'Shop Inventory', path: '/shop' },
+        { name: 'Shop Inventory ($395–$1,200)', path: '/shop' },
         { name: 'Window AC Installation', path: '/window-ac-installation' },
         { name: 'Mini Split AC Overview', path: '/mini_split_ac' },
         { name: 'Ductless Mini Split Installation', path: '/ductless-mini-split-installation-oahu' },
         { name: 'Instant Mini Split Estimate ($0 Free)', path: '/mini-split-estimate' },
         { name: 'Mini Split Installation Cost Breakdown', path: '/mini-split-installation-cost-oahu' },
         { name: 'Mini Split AC Deep Cleaning Oahu', path: '/ac-cleaning-oahu' },
+        { name: 'Mini Split AC Maintenance Service', path: '/mini_split_ac_maintenance' },
         { name: 'Mini Split AC Repair & Diagnostics', path: '/ac-repair-oahu' },
         { name: 'Clean vs Replace Window AC Guide', path: '/clean-vs-replace-window-ac' },
         { name: 'Window AC vs Ductless Mini Split Oahu', path: '/window-ac-vs-mini-split-oahu' },
@@ -59,15 +60,19 @@ export default async function SitemapPage() {
     ];
 
     const windowAcShoppingGuides = [
+        { name: 'Oahu Window AC Warehouse Hub', path: '/shop/oahu-window-ac-warehouse' },
+        { name: 'Complete LG Dual Inverter Buyer Guide', path: '/shop/lg-dual-inverter-guide' },
+        { name: 'GE 26" Built-In Through-the-Wall AC Guide', path: '/shop/ge-built-in-wall-ac-oahu' },
+        { name: '115V vs 230V Window AC Plug Guide', path: '/shop/window-ac-plug-guide' },
+        { name: 'LG Dual Inverter 8,000 BTU Oahu Guide', path: '/shop/lg-dual-inverter-8000-btu-oahu' },
+        { name: 'Large Room Window AC (18K–23.5K BTU 230V)', path: '/shop/large-room-window-ac-oahu' },
         { name: 'Hawaii Energy $45 Window AC Rebate', path: '/hawaii-energy-rebate' },
         { name: 'Window AC Warehouse Pickup Waipahu', path: '/window-ac-warehouse-pickup-waipahu' },
         { name: 'Window AC Flat $50 Delivery Service', path: '/window-ac-delivery-service-oahu' },
-        { name: 'Same-Day Window AC Pickup Oahu', path: '/same-day-window-ac-pickup-oahu' },
         { name: 'Energy Star Window Air Conditioners', path: '/energy-star-window-air-conditioners-hawaii' },
         { name: 'Dual Inverter vs Standard Window AC', path: '/inverter-window-ac-vs-standard-hawaii' },
         { name: 'Quiet Bedroom Window AC (44 dB)', path: '/quiet-bedroom-window-ac-oahu' },
         { name: 'Living Room Window AC (10K–23.5K BTU)', path: '/living-room-window-ac-oahu' },
-        { name: 'Large Room Window AC (18K–23.5K BTU 230V)', path: '/large-room-window-ac-18000-24000-btu' },
         { name: 'Small Room Window AC (6K–8K BTU 115V)', path: '/small-room-window-ac-6000-8000-btu' },
         { name: 'Window AC for Studios & Apartments', path: '/window-ac-for-studios-apartments-hawaii' },
         { name: '115V Low-Voltage Window AC Units', path: '/low-voltage-window-ac-115v-oahu' },
@@ -82,7 +87,6 @@ export default async function SitemapPage() {
         { name: 'Horizontal Sliding Window AC Installation', path: '/horizontal-sliding-window-ac-oahu' },
         { name: 'Single-Wall Construction AC Cooling Hawaii', path: '/single-wall-construction-ac-cooling-hawaii' },
         { name: 'AC Exterior Support Brackets & Mounting', path: '/ac-brackets-exterior-security-mounting-oahu' },
-        { name: 'Standard Window AC Brackets & Mounting', path: '/standard-window-ac-brackets-mounting-oahu' },
         { name: 'Window AC Weather Stripping & Island Seal', path: '/window-ac-weather-stripping-island-seal' },
         { name: 'Condo & Townhouse Window AC HOA Rules', path: '/condo-townhouse-window-ac-hoa-rules-oahu' },
         { name: 'High-Rise Condo Window AC Rules Honolulu', path: '/high-rise-condo-ac-rules-honolulu' },
@@ -97,7 +101,6 @@ export default async function SitemapPage() {
 
     const cleaningGuides = [
         { name: 'AC Mold Removal & Deep Cleaning Oahu', path: '/ac-mold-removal-cleaning-oahu' },
-        { name: 'Premium Mini Split Deep Cleaning (Full Teardown $275)', path: '/premium-mini-split-deep-cleaning-oahu' },
         { name: 'AC Smells Musty & Mildew in Hawaii (Dirty Sock Syndrome)', path: '/ac-smells-musty-mildew-hawaii' },
         { name: 'Black Mold in AC: Health Risks & Spore Eradication', path: '/black-mold-in-ac-health-risks-hawaii' },
         { name: 'Seasonal AC Maintenance Plans Oahu', path: '/seasonal-ac-maintenance-plans-oahu' },
@@ -180,6 +183,7 @@ export default async function SitemapPage() {
                                     <li key={idx}>
                                         <Link 
                                             href={link.path}
+                                            prefetch={false}
                                             className="group flex items-center gap-2 py-1.5 text-xs text-slate-300 hover:text-white transition-colors"
                                         >
                                             <ArrowRight className="size-3 text-slate-500 group-hover:text-primary transition-colors shrink-0" />
@@ -201,6 +205,7 @@ export default async function SitemapPage() {
                                     <li key={idx}>
                                         <Link 
                                             href={link.path}
+                                            prefetch={false}
                                             className="group flex items-center gap-2 py-1.5 text-xs text-slate-300 hover:text-white transition-colors"
                                         >
                                             <ArrowRight className="size-3 text-slate-500 group-hover:text-cyan-400 transition-colors shrink-0" />
@@ -225,6 +230,7 @@ export default async function SitemapPage() {
                                     <li key={idx}>
                                         <Link 
                                             href={link.path}
+                                            prefetch={false}
                                             className="group flex items-center gap-2 py-1.5 text-xs text-slate-300 hover:text-white transition-colors"
                                         >
                                             <ArrowRight className="size-3 text-slate-500 group-hover:text-emerald-400 transition-colors shrink-0" />
@@ -246,6 +252,7 @@ export default async function SitemapPage() {
                                     <li key={idx}>
                                         <Link 
                                             href={link.path}
+                                            prefetch={false}
                                             className="group flex items-center gap-2 py-1.5 text-xs text-slate-300 hover:text-white transition-colors"
                                         >
                                             <ArrowRight className="size-3 text-slate-500 group-hover:text-primary transition-colors shrink-0" />
@@ -270,6 +277,7 @@ export default async function SitemapPage() {
                                     <li key={idx}>
                                         <Link 
                                             href={link.path}
+                                            prefetch={false}
                                             className="group flex items-center gap-2 py-1.5 text-xs text-slate-300 hover:text-white transition-colors"
                                         >
                                             <ArrowRight className="size-3 text-slate-500 group-hover:text-amber-400 transition-colors shrink-0" />
@@ -291,6 +299,7 @@ export default async function SitemapPage() {
                                     <li key={idx}>
                                         <Link 
                                             href={link.path}
+                                            prefetch={false}
                                             className="group flex items-center gap-2 py-1 text-xs text-slate-300 hover:text-white transition-colors"
                                         >
                                             <ArrowRight className="size-3 text-slate-500 group-hover:text-blue-400 transition-colors shrink-0" />
@@ -314,6 +323,7 @@ export default async function SitemapPage() {
                                         <li key={product.id}>
                                             <Link 
                                                 href={`/shop/${generateProductSlug(product.id, product.name)}`}
+                                                prefetch={false}
                                                 className="group flex items-center gap-2 py-1 text-xs text-slate-300 hover:text-white transition-colors"
                                             >
                                                 <ArrowRight className="size-3 text-slate-500 group-hover:text-emerald-500 transition-colors shrink-0" />

@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com'),
     title: {
         template: '%s | Affordable Home A/C',
-        default: 'Affordable Home A/C | Ductless Mini Split & Air Conditioning Hawaii',
+        default: 'Window AC & Ductless Mini Splits Oahu | In-Stock $395+ • $0 Estimate | Affordable Home A/C',
     },
-    description: 'We provide affordable air conditioning, ductless mini split installation, and window AC cleaning services across Oahu, Hawaii.',
+    description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery) & Ductless Mini Split Installation ($0 Free In-Home Estimate). Licensed CT-36775 • (808) 488-1111.',
     openGraph: {
         type: 'website',
         locale: 'en_US',
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Affordable Home A/C | Ductless Mini Split & Air Conditioning Hawaii',
-        description: 'We provide affordable air conditioning, ductless mini split installation, and window AC cleaning services across Oahu, Hawaii.',
+        title: 'Window AC & Ductless Mini Splits Oahu | In-Stock $395+ • $0 Estimate | Affordable Home A/C',
+        description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery) & Ductless Mini Split Installation ($0 Free In-Home Estimate). Licensed CT-36775 • (808) 488-1111.',
         images: ['/assets/logo-new.png'],
     }
 };
@@ -112,8 +112,9 @@ export default function RootLayout({
                             "@type": "HVACBusiness",
                             "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                             "name": "Affordable Home A/C",
+                            "legalName": "Affordable Home A/C LLC",
                             "alternateName": "Affordable Home Air Conditioning",
-                            "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
+                            "image": "https://www.affordablehome-ac.com/assets/hero-cards/ahac-hero-background-2.webp",
                             "url": "https://www.affordablehome-ac.com",
                             "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
                             "telephone": "+1-808-488-1111",
@@ -133,8 +134,8 @@ export default function RootLayout({
                             },
                             "geo": {
                                 "@type": "GeoCoordinates",
-                                "latitude": "21.3855",
-                                "longitude": "-158.0076"
+                                "latitude": 21.3868,
+                                "longitude": -158.0092
                             },
                             "openingHoursSpecification": [
                                 {
@@ -150,6 +151,17 @@ export default function RootLayout({
                                     "closes": "14:00"
                                 }
                             ],
+                            "hasCredential": [
+                                {
+                                    "@type": "EducationalOccupationalCredential",
+                                    "credentialCategory": "State Contractor License",
+                                    "name": "Hawaii Specialty Contractor CT-36775",
+                                    "recognizedBy": {
+                                        "@type": "Organization",
+                                        "name": "State of Hawaii Professional and Vocational Licensing"
+                                    }
+                                }
+                            ],
                             "aggregateRating": {
                                 "@type": "AggregateRating",
                                 "ratingValue": "4.9",
@@ -157,21 +169,33 @@ export default function RootLayout({
                                 "bestRating": "5",
                                 "worstRating": "1"
                             },
-                            "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover",
+                            "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover, Apple Pay, Google Pay",
                             "currenciesAccepted": "USD",
                             "priceRange": "$$",
                             "license": "CT-36775",
                             "knowsAbout": [
                                 "Window Air Conditioners",
                                 "LG Dual Inverter AC",
+                                "GE 26-Inch Built-In Thru-The-Wall AC",
                                 "Ductless Mini Split Installation",
-                                "Window AC Cleaning",
-                                "AC Deep Cleaning",
+                                "Window AC & Jalousie Louver Installation",
+                                "Mini Split AC Deep Cleaning",
                                 "AC Maintenance",
                                 "AC Repair",
                                 "Hawaii Energy Cash Rebates",
                                 "Oahu Air Conditioning"
                             ],
+                            "hasOfferCatalog": {
+                                "@type": "OfferCatalog",
+                                "name": "Oahu Air Conditioning Sales, Installation & Service",
+                                "itemListElement": [
+                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "In-Stock LG Dual Inverter & GE Window AC Sales ($395–$1,200)" } },
+                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC & Jalousie Louver Installation ($0 Free Estimate)" } },
+                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ductless Mini Split AC Installation ($0 Free In-Home Estimate)" } },
+                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mini Split AC Deep Cleaning & Mold Sanitization ($175 Basic / $275 Full Teardown)" } },
+                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AC Repair & Troubleshooting ($175 Flat-Rate Diagnostic)" } }
+                                ]
+                            },
                             "contactPoint": [
                                 {
                                     "@type": "ContactPoint",
@@ -183,22 +207,35 @@ export default function RootLayout({
                                 {
                                     "@type": "ContactPoint",
                                     "telephone": "+1-808-488-1111",
-                                    "contactType": "warehouse preorder",
+                                    "contactType": "sales",
                                     "areaServed": "US-HI",
                                     "availableLanguage": "English"
                                 }
                             ],
                             "areaServed": [
                                 { "@type": "AdministrativeArea", "name": "Honolulu County" },
-                                { "@type": "City", "name": "Waipahu" },
                                 { "@type": "City", "name": "Honolulu" },
-                                { "@type": "City", "name": "Pearl City" },
-                                { "@type": "City", "name": "Aiea" },
+                                { "@type": "City", "name": "Waipahu" },
                                 { "@type": "City", "name": "Kapolei" },
                                 { "@type": "City", "name": "Ewa Beach" },
+                                { "@type": "City", "name": "Pearl City" },
+                                { "@type": "City", "name": "Aiea" },
                                 { "@type": "City", "name": "Mililani" },
                                 { "@type": "City", "name": "Kailua" },
                                 { "@type": "City", "name": "Kaneohe" },
+                                { "@type": "City", "name": "Hawaii Kai" },
+                                { "@type": "City", "name": "Kaimuki" },
+                                { "@type": "City", "name": "Manoa" },
+                                { "@type": "City", "name": "Waikiki" },
+                                { "@type": "City", "name": "Salt Lake" },
+                                { "@type": "City", "name": "Kunia" },
+                                { "@type": "City", "name": "Wahiawa" },
+                                { "@type": "City", "name": "Waianae" },
+                                { "@type": "City", "name": "Nanakuli" },
+                                { "@type": "City", "name": "Waimanalo" },
+                                { "@type": "City", "name": "Haleiwa" },
+                                { "@type": "City", "name": "Waialua" },
+                                { "@type": "City", "name": "Hauula" },
                                 { "@type": "State", "name": "Hawaii" }
                             ]
                         })

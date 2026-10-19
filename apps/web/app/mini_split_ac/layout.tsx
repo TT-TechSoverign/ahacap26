@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Free In-Home Estimate | Affordable Home A/C'
+        absolute: 'Mini Split AC Installation Oahu | $0 Free In-Home Estimate • Lic #CT-36775 | Affordable Home A/C'
     },
-    description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin. Free in-home sizing & placement estimate ($0). 10–12 yr warranty. Call (808) 488-1111.',
+    description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin & LG. $0 Free In-Home Estimate • Lic #CT-36775 • Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/mini_split_ac',
     },
     openGraph: {
-        title: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Free In-Home Estimate | Affordable Home A/C',
-        description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin. Free in-home sizing & placement estimate ($0). 10–12 yr warranty. Call (808) 488-1111.',
+        title: 'Mini Split AC Installation Oahu | $0 Free In-Home Estimate • Lic #CT-36775 | Affordable Home A/C',
+        description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin & LG. $0 Free In-Home Estimate • Lic #CT-36775 • Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/mini_split_ac',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Mini Split AC Installation Oahu | In-Stock in Waipahu | Free In-Home Estimate | Affordable Home A/C',
-        description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin. Free in-home sizing & placement estimate ($0). 10–12 yr warranty. Call (808) 488-1111.',
+        title: 'Mini Split AC Installation Oahu | $0 Free In-Home Estimate • Lic #CT-36775 | Affordable Home A/C',
+        description: 'Beat the Oahu heat with premium ductless mini-split AC systems in-stock in our Waipahu warehouse. Mitsubishi, Fujitsu, Daikin & LG. $0 Free In-Home Estimate • Lic #CT-36775 • Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/minisplitacphotos/mini-split-mitsubishi-air-handler.png'],
     }
 };

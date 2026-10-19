@@ -64,17 +64,17 @@ const brands = [
         buttonClass: "bg-sky-500 text-slate-950 hover:bg-sky-400 border border-sky-400/50"
     },
     {
-        id: "carrier",
-        name: "CARRIER DUCTLESS",
-        badge: "Heavy-Duty Heritage",
-        className: "font-sans font-extrabold tracking-tighter text-3xl text-blue-500",
-        description: "Carrier invented modern air conditioning, and their ductless mini splits pack heavy-duty cooling power into sleek, compact air handlers. Featuring Golden Fin hydrophilic condenser coatings that prevent salt deposits and microbial buildup, Carrier systems deliver rapid temperature pull-down for large, sunny living spaces.",
+        id: "lg",
+        name: "LG DUCTLESS",
+        badge: "Dual Inverter & ThinQ™",
+        className: "font-sans font-extrabold tracking-tighter text-3xl text-rose-500",
+        description: "LG ductless mini splits combine Dual Inverter variable-speed compressors with Gold Fin™ anti-corrosion condenser coatings engineered to resist Oahu salt air and humidity. With built-in ThinQ™ smart Wi-Fi control and ultra-quiet indoor air handlers, LG systems deliver rapid temperature pull-down for sunny island living spaces.",
         airHandlerImg: "/assets/minisplitacphotos/mini-split-carrier-air-handler.png",
         condenserImg: "/assets/minisplitacphotos/mini-split-carrier-condenser.png",
         airHandlerScale: "scale-[1.8]",
         condenserScale: "scale-[1.1]",
         warranty: "10 Year Compressor Warranty",
-        buttonClass: "bg-blue-600 text-white hover:bg-blue-500 border border-blue-500/50"
+        buttonClass: "bg-rose-600 text-white hover:bg-rose-500 border border-rose-500/50"
     }
 ];
 
@@ -267,7 +267,7 @@ export default function MiniSplitsPage() {
                         { id: 'mitsubishi', label: 'Mitsubishi Electric' },
                         { id: 'fujitsu', label: 'Fujitsu Halcyon' },
                         { id: 'daikin', label: 'Daikin Inverter' },
-                        { id: 'carrier', label: 'Carrier Ductless' }
+                        { id: 'lg', label: 'LG Ductless' }
                     ].map((tab) => (
                         <button
                             key={tab.id}

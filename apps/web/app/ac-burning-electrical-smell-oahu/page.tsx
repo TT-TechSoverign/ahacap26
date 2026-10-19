@@ -91,7 +91,8 @@ export default function AcBurningSmellPage() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/appointment"
+                            href="/contact?service=AC+Diagnostic+%26+Repair"
+                            prefetch={false}
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-rose-500 text-white font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-rose-400 transition-all shadow-lg shadow-rose-500/20 hover:scale-[1.02]"
                         >
                             Book Emergency Diagnostic ($175)

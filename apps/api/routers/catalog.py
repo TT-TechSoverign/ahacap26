@@ -55,14 +55,15 @@ def persist_product_changes(product_data, action='update'):
         frontend_url = os.environ.get("FRONTEND_INTERNAL_URL", "http://web:3000")
         hook_url = f"{frontend_url}/api/revalidate"
         
-        revalidate_secret = os.environ.get("REVALIDATE_SECRET", "internal_ahac_revalidate_777")
-        req = urllib.request.Request(
-            hook_url, 
-            data=json.dumps({"secret": revalidate_secret, "path": "/shop"}).encode('utf-8'),
-            headers={'Content-Type': 'application/json'}
-        )
-        with urllib.request.urlopen(req, timeout=3) as response:
-             print(f"DEBUG: Next.js Shop Revalidation Triggered: {response.getcode()}")
+        revalidate_secret = os.environ.get("REVALIDATE_SECRET", "").strip()
+        if revalidate_secret:
+            req = urllib.request.Request(
+                hook_url, 
+                data=json.dumps({"secret": revalidate_secret, "path": "/shop"}).encode('utf-8'),
+                headers={'Content-Type': 'application/json'}
+            )
+            with urllib.request.urlopen(req, timeout=3) as response:
+                print(f"DEBUG: Next.js Shop Revalidation Triggered: {response.getcode()}")
     except Exception as e:
         print(f"WARNING: Failed to trigger Next.js cache revalidation: {e}")
 

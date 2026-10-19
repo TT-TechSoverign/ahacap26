@@ -32,8 +32,8 @@ const QUALIFYING_MODELS = [
         btu: '6,000 BTU',
         model: 'LW6023IVSM',
         slug: '1-lg-dual-inverter-6-000-btu-lw6023ivsm',
-        coverage: 'Up to 250 sq. ft. (Bedrooms)',
-        efficiency: 'CEER 11.5 • Ultra-Quiet 44 dB',
+        coverage: 'Up to 260 sq. ft. AHAM (Bedrooms)',
+        efficiency: 'CEER 15.5 • Ultra-Quiet 44 dB',
         price: '$560',
         rebatePrice: '$515 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
@@ -42,8 +42,8 @@ const QUALIFYING_MODELS = [
         btu: '8,000 BTU',
         model: 'LW8022IVSM',
         slug: '2-lg-dual-inverter-8-000-btu-lw8022ivsm',
-        coverage: 'Up to 350 sq. ft. (Master Bedrooms)',
-        efficiency: 'CEER 12.0 • Ultra-Quiet 44 dB',
+        coverage: 'Up to 350 sq. ft. AHAM (Master Bedrooms)',
+        efficiency: 'CEER 15.5 • Ultra-Quiet 44 dB',
         price: '$595',
         rebatePrice: '$550 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
@@ -52,8 +52,8 @@ const QUALIFYING_MODELS = [
         btu: '10,000 BTU',
         model: 'LW1022IVSM',
         slug: '3-lg-dual-inverter-10-000-btu-lw1022ivsm',
-        coverage: 'Up to 450 sq. ft. (Living Rooms)',
-        efficiency: 'CEER 12.0 • Dual Inverter',
+        coverage: 'Up to 450 sq. ft. AHAM (Living Rooms)',
+        efficiency: 'CEER 15.0 • Dual Inverter',
         price: '$650',
         rebatePrice: '$605 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
@@ -62,28 +62,28 @@ const QUALIFYING_MODELS = [
         btu: '12,000 BTU',
         model: 'LW1222IVSM',
         slug: '4-lg-dual-inverter-12-000-btu-lw1222ivsm',
-        coverage: 'Up to 550 sq. ft. (Open Living Areas)',
-        efficiency: 'CEER 12.0 • Dual Inverter',
-        price: '$755',
-        rebatePrice: '$710 after $45 rebate',
+        coverage: 'Up to 550 sq. ft. AHAM (Open Living Areas)',
+        efficiency: 'CEER 15.0 • Dual Inverter',
+        price: '$745',
+        rebatePrice: '$700 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
     },
     {
         btu: '14,000 BTU',
         model: 'LW1522FVSM',
         slug: '5-lg-dual-inverter-14-000-btu-lw1522fvsm',
-        coverage: 'Up to 700 sq. ft. (Large Open Suites)',
-        efficiency: 'CEER 11.8 • Dual Inverter',
-        price: '$820',
-        rebatePrice: '$775 after $45 rebate',
+        coverage: 'Up to 700 sq. ft. AHAM (Large Open Suites)',
+        efficiency: 'CEER 14.7 • Dual Inverter',
+        price: '$785',
+        rebatePrice: '$740 after $45 rebate',
         voltage: '115V / 15A Standard Plug',
     },
     {
         btu: '18,000 BTU',
         model: 'LW1822IVSM',
         slug: '6-lg-dual-inverter-18-000-btu-lw1822ivsm',
-        coverage: 'Up to 1,000 sq. ft. (Whole Floor Plans)',
-        efficiency: 'CEER 11.8 • Heavy-Duty 230V',
+        coverage: 'Up to 1,000 sq. ft. AHAM (Whole Floor Plans)',
+        efficiency: 'CEER 14.7 • Heavy-Duty 230V',
         price: '$925',
         rebatePrice: '$880 after $45 rebate',
         voltage: '208/230V 15A Circuit',
@@ -92,11 +92,11 @@ const QUALIFYING_MODELS = [
         btu: '23,500 BTU',
         model: 'LW2422IVSM',
         slug: '7-lg-dual-inverter-23-500-btu-lw2422ivsm',
-        coverage: 'Up to 1,400 sq. ft. (High Ceilings)',
-        efficiency: 'CEER 10.4 • Max Capacity',
+        coverage: 'Up to 1,440 sq. ft. AHAM (High Ceilings)',
+        efficiency: 'CEER 14.5 • Max Capacity',
         price: '$1,025',
         rebatePrice: '$980 after $45 rebate',
-        voltage: '208/230V 20A Circuit',
+        voltage: '208/230V 15A Circuit',
     }
 ];
 
@@ -119,7 +119,7 @@ const FAQS = [
     },
     {
         q: "How can I purchase an eligible unit today?",
-        a: "You can purchase directly online through our Shop. Select Free Waipahu Warehouse Pickup (by appointment at 94-150 Leoleo St #203) or flat-rate $50 island-wide delivery from Hawaii Kai to Haleiwa."
+        a: "You can purchase directly online through our Shop. Select Free Waipahu Warehouse Pickup (by appointment at 94-150 Leoleo St #203) or flat-rate $50 delivery across Honolulu, Metro, Central, Windward, and West Oahu."
     }
 ];
 
@@ -327,7 +327,7 @@ export default function HawaiiEnergyRebatePage() {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Truck className="size-4 text-primary shrink-0" />
-                                    <span><strong>Island Delivery:</strong> Flat $50 anywhere on Oahu (Hawaii Kai to North Shore)</span>
+                                    <span><strong>Island Delivery:</strong> Flat $50 across Honolulu, Metro, Central, Windward, and West Oahu</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <ShieldCheck className="size-4 text-emerald-400 shrink-0" />

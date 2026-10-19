@@ -143,7 +143,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
         },
         {
             q: "What brands of ductless mini-splits do you install?",
-            a: "We install top-tier marine-grade ductless systems engineered for Hawaii's coastal climate, including Mitsubishi Electric (Hyper-Heating & Diamond certified systems), Daikin, Fujitsu, and Carrier. All outdoor units are treated with anti-corrosive coil coatings to resist Pacific salt air breakdown."
+            a: "We install top-tier marine-grade ductless systems engineered for Hawaii's coastal climate, including Mitsubishi Electric (Hyper-Heating & Diamond certified systems), Daikin, Fujitsu, and LG. All outdoor units are treated with anti-corrosive coil coatings to resist Pacific salt air breakdown."
         },
         {
             q: "How does the mini-split installation estimate process work?",
@@ -231,7 +231,7 @@ export default function DuctlessMiniSplitInstallationOahuPage() {
                     <nav className="flex items-center space-x-2">
                         <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
                         <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
-                        <Link href="/services" className="hover:text-cyan-400 transition-colors">Services</Link>
+                        <Link href="/mini_split_ac" className="hover:text-cyan-400 transition-colors">Mini-Split Division</Link>
                         <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
                         <span className="text-cyan-400 font-medium">Ductless Mini-Split Installation Oahu</span>
                     </nav>

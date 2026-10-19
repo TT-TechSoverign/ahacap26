@@ -24,7 +24,7 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 const FAQS = [
     {
         q: "How much does window AC delivery cost on Oahu?",
-        a: "We charge a flat rate of $50 for delivery anywhere on Oahu, from Hawaii Kai and urban Honolulu to Ewa Beach, Kapolei, Kailua, and the North Shore."
+        a: "We charge a flat rate of $50 for delivery across our 15-municipality Oahu service area, from Hawaii Kai and urban Honolulu to Ewa Beach, Kapolei, Mililani, Kailua, and Kaneohe."
     },
     {
         q: "How quickly can my window AC be delivered?",
@@ -32,7 +32,7 @@ const FAQS = [
     },
     {
         q: "Can you install the window AC when you deliver it?",
-        a: "Yes! You can choose our professional window AC installation add-on at checkout. Our licensed technicians will deliver the unit, lay protective floor drop cloths, securely mount the unit with standard brackets if required, and test cooling operation before leaving."
+        a: "Yes! We coordinate professional window AC installation by appointment ($0 Free In-Home Estimate). Our licensed technicians (CT-36775) lay protective floor drop cloths, securely mount the unit with standard brackets if required, and test cooling operation before leaving."
     },
     {
         q: "Can I pick up the unit myself instead of paying for delivery?",
@@ -63,7 +63,7 @@ export default function WindowAcDeliveryServicePage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Need an air conditioner but don’t have an SUV, truck, or time to drive to Waipahu? We provide flat \$50 island-wide delivery from our central warehouse to any residence on Oahu, with optional professional installation.
+                        Need an air conditioner but don’t have an SUV, truck, or time to drive to Waipahu? We provide flat $50 delivery from our central warehouse across our 15-municipality Oahu delivery zone, with optional professional installation by appointment.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -88,8 +88,8 @@ export default function WindowAcDeliveryServicePage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center font-mono text-xs">
                         <div className="space-y-2 p-4 rounded-xl bg-white/[0.02]">
                             <DollarSign className="size-8 text-primary mx-auto" />
-                            <div className="text-2xl font-header font-black text-white">Flat $50 Island-Wide</div>
-                            <p className="text-slate-300 font-sans text-xs">No mileage fees or distance markups anywhere on Oahu.</p>
+                            <div className="text-2xl font-header font-black text-white">Flat $50 Delivery</div>
+                            <p className="text-slate-300 font-sans text-xs">No mileage fees or distance markups across our 15-city Oahu zone.</p>
                         </div>
 
                         <div className="space-y-2 p-4 rounded-xl bg-white/[0.02]">
@@ -111,32 +111,32 @@ export default function WindowAcDeliveryServicePage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div className="space-y-4">
                             <span className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] font-bold block">
-                                ALL 22 OAHU MUNICIPALITIES
+                                15 OAHU MUNICIPALITIES COVERED
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                                Delivering Island-Wide
+                                Delivering Across Oahu
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                From urban Honolulu high-rises to rural North Shore plantation homes, our delivery team covers the entire island of Oahu for a simple flat fee of $50:
+                                From urban Honolulu high-rises to Windward Kailua and Leeward Kapolei homes, our delivery team covers 15 Oahu municipalities for a simple flat fee of $50:
                             </p>
                             <div className="grid grid-cols-2 gap-2 text-xs text-slate-300 font-sans">
                                 <div>&bull; Honolulu / Waikiki / McCully</div>
                                 <div>&bull; Ewa Beach / Kapolei / Waipahu</div>
-                                <div>&bull; Kailua / Kaneohe / Waimanalo</div>
-                                <div>&bull; Mililani / Wahiawa / Kunia</div>
-                                <div>&bull; Pearl City / Aiea / Halawa</div>
-                                <div>&bull; Haleiwa / Waialua / Hauula</div>
+                                <div>&bull; Kailua / Kaneohe</div>
+                                <div>&bull; Mililani / Kunia</div>
+                                <div>&bull; Pearl City / Aiea / Salt Lake</div>
+                                <div>&bull; Hawaii Kai / Kaimuki / Manoa</div>
                             </div>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4 text-center">
                             <Home className="size-10 text-emerald-400 mx-auto" />
-                            <h3 className="font-header font-bold text-lg uppercase text-white">Add Installation at Checkout</h3>
+                            <h3 className="font-header font-bold text-lg uppercase text-white">Book Installation by Appointment</h3>
                             <p className="text-xs text-slate-300">
-                                Have your unit professionally mounted and weather-sealed upon delivery. Our technicians lay clean floor drop cloths under every window.
+                                Request a $0 Free In-Home Estimate to have your unit professionally mounted and weather-sealed. Our technicians lay clean floor drop cloths under every window.
                             </p>
-                            <Link href="/shop" className="inline-flex px-6 py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider">
-                                Order Unit with Delivery
+                            <Link href="/window-ac-installation" className="inline-flex px-6 py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider">
+                                Request $0 Install Estimate
                             </Link>
                         </div>
                     </div>
@@ -171,7 +171,7 @@ export default function WindowAcDeliveryServicePage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

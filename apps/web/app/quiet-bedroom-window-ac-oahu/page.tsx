@@ -27,36 +27,36 @@ const BEDROOM_MODELS = [
     {
         btu: '6,000 BTU',
         model: 'LW6023IVSM',
-        roomSize: 'Standard Bedrooms (Up to 250 sq. ft.)',
+        roomSize: 'Standard Bedrooms (Up to 260 sq. ft. AHAM / 220 sq. ft. Oahu)',
         noise: '44 dB Sleep Mode',
-        ceer: 'CEER 11.5 Energy Star',
+        ceer: 'CEER 15.5 Energy Star',
         plug: 'Standard 115V / 15A Plug',
         price: '$560',
-        afterRebate: '$515 after $45 rebate',
-        slug: '1-lg-dual-inverter-6-000-btu-lw6023ivsm'
-    },
-    {
-        btu: '8,000 BTU',
-        model: 'LW8022IVSM',
-        roomSize: 'Master Bedrooms (Up to 350 sq. ft.)',
-        noise: '44 dB Sleep Mode',
-        ceer: 'CEER 12.0 Energy Star',
-        plug: 'Standard 115V / 15A Plug',
-        price: '$595',
-        afterRebate: '$550 after $45 rebate',
+        afterRebate: '$515 after $45 rebate • 11 In Stock',
         popular: true,
-        slug: '2-lg-dual-inverter-8-000-btu-lw8022ivsm'
+        slug: '1-lg-dual-inverter-6-000-btu-lw6023ivsm'
     },
     {
         btu: '10,000 BTU',
         model: 'LW1022IVSM',
-        roomSize: 'Large Master Suites (Up to 450 sq. ft.)',
+        roomSize: 'Master Bedrooms & Suites (Up to 450 sq. ft. AHAM / 330 sq. ft. Oahu)',
         noise: '44 dB Sleep Mode',
-        ceer: 'CEER 12.0 Energy Star',
+        ceer: 'CEER 15.0 Energy Star',
         plug: 'Standard 115V / 15A Plug',
         price: '$650',
-        afterRebate: '$605 after $45 rebate',
+        afterRebate: '$605 after $45 rebate • 10 In Stock',
         slug: '3-lg-dual-inverter-10-000-btu-lw1022ivsm'
+    },
+    {
+        btu: '8,000 BTU',
+        model: 'LW8022IVSM (or In-Stock LW8024RD $395)',
+        roomSize: 'Medium Bedrooms (Up to 350 sq. ft. AHAM / 280 sq. ft. Oahu)',
+        noise: '44 dB Sleep Mode',
+        ceer: 'CEER 15.5 Energy Star',
+        plug: 'Standard 115V / 15A Plug',
+        price: '$595',
+        afterRebate: 'Sold Out — 6k ($560), 10k ($650) & 8k Standard ($395) In Stock',
+        slug: '2-lg-dual-inverter-8-000-btu-lw8022ivsm'
     }
 ];
 

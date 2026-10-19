@@ -36,7 +36,7 @@ const FAQS = [
     },
     {
         q: "How much does slider window installation cost?",
-        a: "Standard window AC installation starts at $275, with custom vertical filler panels and standard exterior brackets available as an additional cost option depending on window height and track profile."
+        a: "We provide a $0 Free In-Home Estimate and upfront itemized quotes by licensed technicians (CT-36775) before any work begins, covering custom vertical filler panels and standard exterior support brackets matched to your window height and track profile."
     }
 ];
 
@@ -132,7 +132,7 @@ export default function HorizontalSlidingWindowAcPage() {
                             <Warehouse className="size-10 text-primary mx-auto" />
                             <h3 className="font-header font-bold text-lg uppercase text-white">Waipahu Warehouse Direct</h3>
                             <p className="text-xs text-slate-300">
-                                Pick up in Waipahu or choose flat $50 island-wide delivery with installation scheduling.
+                                Pick up in Waipahu or choose flat $50 delivery across our 15-municipality Oahu zone with installation scheduling.
                             </p>
                             <Link href="/shop" className="inline-flex px-6 py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider">
                                 Choose Your Inverter Unit
@@ -170,7 +170,7 @@ export default function HorizontalSlidingWindowAcPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    modelIds={[13, 14, 15, 3]}
+                    modelIds={[13, 15, 3, 4]}
                     title="In-Stock Condo, Wall Sleeve & Narrow Window ACs"
                     subheading="Genuine GE 26-inch Built-In Thru-the-Wall units and whisper-quiet LG Dual Inverters in stock at our Waipahu warehouse."
                 />

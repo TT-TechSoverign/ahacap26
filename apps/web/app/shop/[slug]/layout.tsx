@@ -277,12 +277,14 @@ export default async function ProductLayout({ params, children }: Props) {
         },
         "review": selectedReviews.map((r, i) => {
             const years = [2024, 2025, 2026];
-            const months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+            const months2024_2025 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+            const months2026 = ["01", "02", "03", "04", "05", "06", "07", "08", "09"];
             const days = ["05", "10", "15", "20", "25"];
             
             const hashVal = (idHash + i) * 31;
             const year = years[hashVal % years.length];
-            const month = months[hashVal % months.length];
+            const activeMonths = year === 2026 ? months2026 : months2024_2025;
+            const month = activeMonths[hashVal % activeMonths.length];
             const day = days[hashVal % days.length];
             const datePublished = `${year}-${month}-${day}`;
             

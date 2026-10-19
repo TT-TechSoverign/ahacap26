@@ -65,15 +65,15 @@ export function generateMetadata({ params }: Props): Metadata {
  
     const title = `${cityData.name} AC Repair & In-Stock Window ACs | $0 Estimate | (808) 488-1111`;
     
-    let description = `Fast ${cityData.name} AC repair & in-stock Window ACs ($395–$1,025) ready for Waipahu pickup or $50 delivery. $0 in-home mini-split estimate. Call (808) 488-1111.`;
+    let description = `Fast ${cityData.name} AC repair & in-stock Window ACs ($395–$1,200) ready for Waipahu pickup or $50 delivery. $0 in-home mini-split estimate. Call (808) 488-1111.`;
     if (cityData.regionId === 'windward') {
         description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Licensed HVAC technicians, $0 in-home estimate & in-stock LG Dual Inverter window ACs. Call (808) 488-1111.`;
     } else if (cityData.regionId === 'leeward') {
-        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Ductless split AC installation, $0 in-home estimate & in-stock Waipahu window ACs ($395–$1,025). Call (808) 488-1111.`;
+        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Ductless split AC installation, $0 in-home estimate & in-stock Waipahu window ACs ($395–$1,200). Call (808) 488-1111.`;
     } else if (cityData.regionId === 'metro') {
         description = `Whisper-quiet zoned cooling in ${cityData.name}, Oahu. Licensed technicians for mini-split installation, $0 in-home estimate & in-stock window ACs. Call (808) 488-1111.`;
     } else if (cityData.regionId === 'central') {
-        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock Waipahu window ACs ($395–$1,025), $0 in-home estimate & split AC deep cleaning. Call (808) 488-1111.`;
+        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock Waipahu window ACs ($395–$1,200), $0 in-home estimate & split AC deep cleaning. Call (808) 488-1111.`;
     }
  
     return {
@@ -295,7 +295,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             "@type": "OfferCatalog",
                             "name": `Air Conditioning & Window AC Sales in ${cityData.name}`,
                             "itemListElement": [
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `In-Stock LG & GE Window AC Sales & Delivery in ${cityData.name} ($395–$1,025)` } },
+                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `In-Stock LG & GE Window AC Sales & Delivery in ${cityData.name} ($395–$1,200)` } },
                                 { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Window AC & Jalousie Installation in ${cityData.name}` } },
                                 { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Ductless Split AC Installation in ${cityData.name}` } },
                                 { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Mini-Split Deep Cleaning & AC Repair in ${cityData.name}` } }

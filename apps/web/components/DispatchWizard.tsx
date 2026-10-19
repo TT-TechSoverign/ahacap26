@@ -27,7 +27,7 @@ export function DispatchWizard() {
         address: '',
         city: '',
         zip: '',
-        urgency: '',
+        urgency: 'ASAP',
         user_notes: '', // User typed notes
         source: '',     // Dropdown selection
     });
@@ -35,25 +35,58 @@ export function DispatchWizard() {
     const [selectedServices, setSelectedServices] = useState<string[]>([]);
     const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
 
+    const services: string[] = (content?.contact?.wizard?.services_list || [
+        "Window AC Installation",
+        "Window AC Clean-vs-Replace Assessment",
+        "Window AC Diagnosis/Repair",
+        "Mini Split Estimate (New)",
+        "Mini Split Estimate (Replace)",
+        "Mini Split Maintenance",
+        "Mini Split Diagnosis/Repair"
+    ]).map((s: string) =>
+        s === "Window AC Deep Cleaning" || s === "Window AC Teardown"
+            ? "Window AC Clean-vs-Replace Assessment"
+            : s
+    );
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    // Auto-fill from search params
+    // Auto-fill from search params (?service=, ?model=, ?notes=, ?city=)
     useEffect(() => {
         const cityParam = searchParams?.get('city');
         const serviceParam = searchParams?.get('service');
         const notesParam = searchParams?.get('notes');
+        const modelParam = searchParams?.get('model');
 
         if (cityParam && !formData.city) {
             setFormData(prev => ({ ...prev, city: cityParam }));
         }
-        if (serviceParam && !selectedServices.includes(serviceParam)) {
-            setSelectedServices(prev => [...prev, serviceParam]);
+        if (serviceParam) {
+            const rawLower = serviceParam.toLowerCase();
+            let mappedService = serviceParam;
+            if (rawLower === 'cleaning' || rawLower.includes('mini split maintenance') || rawLower.includes('mini split cleaning')) {
+                mappedService = services.find(s => s.toLowerCase().includes('mini split maintenance')) || 'Mini Split Maintenance';
+            } else if (rawLower === 'repair' || rawLower.includes('diagnostic')) {
+                mappedService = services.find(s => s.toLowerCase().includes('mini split diagnosis')) || 'Mini Split Diagnosis/Repair';
+            } else if (rawLower === 'install' || rawLower === 'window_ac_purchase' || rawLower.includes('window ac install')) {
+                mappedService = services.find(s => s.toLowerCase().includes('window ac installation')) || 'Window AC Installation';
+            } else if (rawLower === 'mini_split' || rawLower.includes('mini split estimate')) {
+                mappedService = services.find(s => s.toLowerCase().includes('mini split estimate (new)')) || 'Mini Split Estimate (New)';
+            } else {
+                const exactOrPartial = services.find(s => s.toLowerCase() === rawLower);
+                if (exactOrPartial) mappedService = exactOrPartial;
+            }
+            setSelectedServices(prev => prev.includes(mappedService) ? prev : [...prev, mappedService]);
         }
-        if (notesParam && !formData.user_notes) {
-            setFormData(prev => ({ ...prev, user_notes: notesParam }));
+        if ((notesParam || modelParam) && !formData.user_notes) {
+            const combinedPrefill = [
+                modelParam ? `Model Inquiry: ${modelParam}` : '',
+                notesParam || ''
+            ].filter(Boolean).join(' — ');
+            setFormData(prev => ({ ...prev, user_notes: combinedPrefill }));
         }
     }, [searchParams]);
 
@@ -88,10 +121,10 @@ export function DispatchWizard() {
                 last_name: formData.last_name,
                 email: formData.email,
                 phone: formData.phone,
-                address: formData.address,
+                address: formData.address || 'Callback / Pickup Inquiry',
                 city: formData.city,
                 zip: formData.zip,
-                urgency: formData.urgency,
+                urgency: formData.urgency || 'ASAP',
                 service_type: selectedServices.join(', ') || 'General Inquiry',
                 notes: combinedNotesParts.join('\n') || 'No additional notes provided.'
             };
@@ -129,16 +162,6 @@ export function DispatchWizard() {
             setIsSubmitting(false);
         }
     };
-
-    const services = content?.contact?.wizard?.services_list || [
-        "Window AC Installation",
-        "Window AC Deep Cleaning",
-        "Window AC Diagnosis/Repair",
-        "Mini Split Estimate (New)",
-        "Mini Split Estimate (Replace)",
-        "Mini Split Maintenance",
-        "Mini Split Diagnosis/Repair"
-    ];
 
     if (isSuccess) {
         return (
@@ -426,7 +449,7 @@ export function DispatchWizard() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2 group">
                                 <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black group-hover:text-primary transition-colors">
-                                    <EditableText contentKey="contact.wizard.field_address" /> <span className="text-primary">*</span>
+                                    <EditableText contentKey="contact.wizard.field_address" /> <span className="text-slate-600">(Optional for Pickup / Callback)</span>
                                 </label>
                                 <input
                                     name="address"
@@ -435,7 +458,7 @@ export function DispatchWizard() {
                                     className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
                                     type="text"
                                     autoComplete="street-address"
-                                    required
+                                    placeholder="Street address (optional for pickup/quote)"
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
@@ -530,7 +553,7 @@ export function DispatchWizard() {
                             By Appointment First • Upfront Quotes
                         </div>
                         <p className="text-slate-400 text-[11px] leading-relaxed max-w-lg mx-auto">
-                            $0 to book in-home estimates for new or replacement installations. Island flat rates: $175 mini split diagnosis, $175 basic mini split cleaning, $275 premium mini split cleaning, and in-stock Waipahu Window ACs ($395–$1,025).
+                            $0 to book in-home estimates for new or replacement installations. Island flat rates: $175 mini split diagnosis, $175 basic mini split cleaning, $275 premium mini split cleaning, and in-stock Waipahu Window ACs ($395–$1,200).
                         </p>
                     </div>
                 </div>

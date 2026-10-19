@@ -184,7 +184,7 @@ class AnalyticsSwarmEngine:
                 "total_clicks": 0
             },
             "window_ac_cleaning": {
-                "name": "Window AC Deep Cleaning & Chemical Teardown",
+                "name": "Window AC Clean vs Replace & DIY Filter Guide",
                 "target_route": "/clean-vs-replace-window-ac",
                 "keywords": ["clean", "cleaning", "maintenance", "service", "mold", "smell", "dirty"],
                 "queries": [],
@@ -280,7 +280,7 @@ class AnalyticsSwarmEngine:
                 "title": "Clean vs Replace Decision Matrix Bridge",
                 "target_path": "/clean-vs-replace-window-ac",
                 "target_funnel": "Dual Conversion (Cleaning Lead OR LG Dual Inverter Sale)",
-                "rationale": "Oahu homeowners with 5+ year old units spend $275 on cleanings when buying an LG Dual Inverter saves $424/yr on HECO and qualifies for $45 rebate.",
+                "rationale": "Oahu homeowners with 5+ year old units compare replacement ROI when buying an LG Dual Inverter saves $424/yr on HECO and qualifies for $45 rebate.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+28% Storefront Upgrade Rate"
             },
@@ -310,7 +310,7 @@ class AnalyticsSwarmEngine:
                 "id": "CRO-REC-05",
                 "priority": "MEDIUM",
                 "cluster": "Storefront Pricing Psychology",
-                "title": "$31 Upgrade Anchor from 6k to 8k Dual Inverter",
+                "title": "$35 Upgrade Anchor from 6k to 8k Dual Inverter",
                 "target_path": "/shop",
                 "target_funnel": "LG Dual Inverter 8,000 BTU Sizing Fit",
                 "rationale": "The 8,000 BTU unit is only $35 more than the 6,000 BTU model ($595 vs $560) while offering +33% more cooling capacity and ThinQ Smart WiFi.",
@@ -335,7 +335,7 @@ class AnalyticsSwarmEngine:
                 "title": "Dedicated 8,000 BTU Bedroom Sweet Spot Funnel",
                 "target_path": "/shop/lg-dual-inverter-8000-btu-oahu",
                 "target_funnel": "Stripe Direct Sales (LW8022IVSM)",
-                "rationale": "Captures quiet bedroom AC searches; executes $31 upgrade anchor from 6k with 44dB acoustics and ThinQ WiFi.",
+                "rationale": "Captures quiet bedroom AC searches; executes $35 upgrade anchor from 6k with 44dB acoustics and ThinQ WiFi.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+35% 8k Velocity"
             },
@@ -378,8 +378,8 @@ class AnalyticsSwarmEngine:
                 "cluster": "AC Mold Cleaning & Coil Sanitization (2.4k Impr)",
                 "title": "Clinical AC Cleaning & Coil Sanitization Oahu",
                 "target_path": "/ac-cleaning-oahu",
-                "target_funnel": "Tier 1 Window AC Teardown & Tier 2 Mini-Split Deep Clean",
-                "rationale": "Targets salt-air mold/mildew queries with upfront pricing ($275 window teardown, $175/$275 mini-split deep clean) and scheduled warehouse turnaround.",
+                "target_funnel": "Mini-Split Deep Cleaning & Window AC Clean-vs-Replace Assessment",
+                "rationale": "Targets salt-air mold/mildew queries with clinical mini-split deep cleaning and window AC clean-vs-replace evaluation.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+45% Maintenance Booking Lift"
             },
@@ -431,10 +431,10 @@ class AnalyticsSwarmEngine:
         return [
             {"url": "https://www.affordablehome-ac.com/", "slug": "/", "clicks": 271, "impressions": 7498, "ctr": "3.61%", "ctr_num": 3.61, "position": 20.3},
             {"url": "https://www.affordablehome-ac.com/shop", "slug": "/shop", "clicks": 58, "impressions": 3142, "ctr": "1.85%", "ctr_num": 1.85, "position": 12.3},
-            {"url": "https://www.affordablehome-ac.com/ac-repair", "slug": "/ac-repair", "clicks": 1, "impressions": 1769, "ctr": "0.06%", "ctr_num": 0.06, "position": 60.5},
+            {"url": "https://www.affordablehome-ac.com/ac-repair-oahu", "slug": "/ac-repair-oahu", "clicks": 1, "impressions": 1769, "ctr": "0.06%", "ctr_num": 0.06, "position": 60.5},
             {"url": "https://www.affordablehome-ac.com/service-areas/honolulu", "slug": "/service-areas/honolulu", "clicks": 5, "impressions": 2939, "ctr": "0.17%", "ctr_num": 0.17, "position": 41.3},
             {"url": "https://www.affordablehome-ac.com/mini_split_ac", "slug": "/mini_split_ac", "clicks": 1, "impressions": 826, "ctr": "0.12%", "ctr_num": 0.12, "position": 30.2},
-            {"url": "https://www.affordablehome-ac.com/window_ac_maintenance", "slug": "/window_ac_maintenance", "clicks": 1, "impressions": 389, "ctr": "0.26%", "ctr_num": 0.26, "position": 39.9}
+            {"url": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac", "slug": "/clean-vs-replace-window-ac", "clicks": 1, "impressions": 389, "ctr": "0.26%", "ctr_num": 0.26, "position": 39.9}
         ]
 
 # Global singleton instance

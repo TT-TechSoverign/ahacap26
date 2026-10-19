@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState, useRef, useMemo, Suspense } from 'react';
 // Fix import path: go up two levels to 'web', then into 'context'
 import { useCart } from '../../context/CartContext';
@@ -58,6 +58,7 @@ function DynamicIcon({ name, className }: { name: string; className?: string }) 
 
 function ShopPageContent() {
     const { addToCart, items, openCart } = useCart();
+    const searchParams = useSearchParams();
     const [products, setProducts] = useState<Product[]>(INITIAL_CATALOG_PRODUCTS);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -118,13 +119,13 @@ function ShopPageContent() {
         if (typeof window === 'undefined') return;
         const applyUrlFilters = () => {
             const params = new URLSearchParams(window.location.search);
-            const qParam = params.get('q');
-            const catParam = (params.get('category') || '').toLowerCase();
-            const capParam = (params.get('capacity') || '').toLowerCase();
-            const voltParam = (params.get('voltage') || '').toLowerCase();
+            const qParam = params.get('q') || searchParams.get('q');
+            const catParam = (params.get('category') || searchParams.get('category') || '').toLowerCase();
+            const capParam = (params.get('capacity') || searchParams.get('capacity') || '').toLowerCase();
+            const voltParam = (params.get('voltage') || searchParams.get('voltage') || '').toLowerCase();
             const hash = (window.location.hash || '').replace('#', '').toLowerCase();
 
-            if (qParam) setSearchQuery(qParam);
+            setSearchQuery(qParam || '');
 
             if (catParam === 'dual_inverter' || hash === 'dual_inverter') {
                 setSelectedCategory('dual_inverter');
@@ -136,6 +137,8 @@ function ShopPageContent() {
                 setSelectedCategory('casement');
             } else if (catParam === 'universal_fit' || hash === 'universal_fit') {
                 setSelectedCategory('universal_fit');
+            } else {
+                setSelectedCategory('ALL');
             }
 
             if (capParam === 'small' || capParam === 'bedroom') {
@@ -147,6 +150,8 @@ function ShopPageContent() {
             } else if (capParam === 'large' || capParam === 'living') {
                 setSelectedCapacity('LIVING');
                 setIsMoreFiltersOpen(true);
+            } else {
+                setSelectedCapacity('ALL');
             }
 
             if (voltParam === '115v') {
@@ -155,6 +160,8 @@ function ShopPageContent() {
             } else if (voltParam === '230v') {
                 setSelectedVoltage('230V');
                 setIsMoreFiltersOpen(true);
+            } else {
+                setSelectedVoltage('ALL');
             }
         };
 
@@ -165,7 +172,7 @@ function ShopPageContent() {
             window.removeEventListener('hashchange', applyUrlFilters);
             window.removeEventListener('popstate', applyUrlFilters);
         };
-    }, []);
+    }, [searchParams]);
 
     const filteredProducts = useMemo(() => {
         let result = products.filter(p => {
@@ -224,7 +231,7 @@ function ShopPageContent() {
             return true;
         });
 
-        // Sorting
+        // Sorting (in-stock units prioritized first by default)
         return result.sort((a, b) => {
             if (sortOption === 'price_asc') return a.price - b.price;
             if (sortOption === 'price_desc') return b.price - a.price;
@@ -235,7 +242,9 @@ function ShopPageContent() {
                 const ceerB = parseFloat(b.ceer_rating || '0');
                 return ceerB - ceerA;
             }
-            return 0;
+            const stockDiff = (b.stock > 0 ? 1 : 0) - (a.stock > 0 ? 1 : 0);
+            if (stockDiff !== 0) return stockDiff;
+            return a.id - b.id;
         });
     }, [products, searchQuery, selectedCategory, selectedCapacity, selectedVoltage, selectedMount, inStockOnly, sortOption]);
 
@@ -1805,6 +1814,12 @@ function ProductGrid({
         );
     }
 
+    const sortedProducts = [...products].sort((a, b) => {
+        const stockDiff = (b.stock > 0 ? 1 : 0) - (a.stock > 0 ? 1 : 0);
+        if (stockDiff !== 0) return stockDiff;
+        return 0;
+    });
+
     return (
         <motion.div
             initial="hidden"
@@ -1819,7 +1834,7 @@ function ProductGrid({
             }}
             className="flex flex-wrap justify-center gap-3 md:gap-4"
         >
-            {products.map(product => (
+            {sortedProducts.map(product => (
                 <motion.div
                     key={product.id}
                     variants={{
@@ -1862,7 +1877,6 @@ function ProductCard({
     const [tiltStyle, setTiltStyle] = useState({});
     const [glareStyle, setGlareStyle] = useState({ opacity: 0, transform: 'translate(-50%, -50%)' });
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-    const [sparks, setSparks] = useState<{ id: number; left: string; delay: string; duration: string; drift: string; color: string }[]>([]);
 
     const cutawayImageMap: Record<number, string> = {
         1: '/assets/window-unit-images/3d-fit/product_1_fit_cutaway.webp',
@@ -1885,7 +1899,6 @@ function ProductCard({
     const cutawayImage = cutawayImageMap[product.id] || `/assets/window-unit-images/3d-fit/product_${product.id}_fit_cutaway.webp`;
 
     const cardRef = useRef<HTMLDivElement>(null);
-    const targetDate = new Date("2026-08-01T09:59:59Z"); // July 31st, 2026 23:59:59 HST
     const isCampaignActive = isCampaignActiveChecker();
     const isPromo = isCampaignActive && product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0;
 
@@ -1897,18 +1910,6 @@ function ProductCard({
             navigator.maxTouchPoints > 0 || 
             window.matchMedia('(pointer: coarse)').matches
         );
-
-        // Generate static properties for sparks
-        const colors = ['#EF4444', '#FFFFFF', '#3B82F6'];
-        const list = Array.from({ length: 8 }).map((_, i) => ({
-            id: i,
-            left: `${15 + Math.random() * 70}%`,
-            delay: `${Math.random() * -3}s`,
-            duration: `${1.5 + Math.random() * 2}s`,
-            drift: `${(Math.random() - 0.5) * 60}px`,
-            color: colors[i % colors.length]
-        }));
-        setSparks(list);
     }, []);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -1962,9 +1963,7 @@ function ProductCard({
         } as any);
     };
 
-    const borderClass = isPromo 
-        ? "animate-patriotic-glow"
-        : "border-white/5 hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,174,239,0.15)]";
+    const borderClass = "border-white/5 hover:border-primary/50 hover:shadow-[0_0_50px_rgba(0,174,239,0.15)]";
 
     return (
         <div
@@ -1979,57 +1978,16 @@ function ProductCard({
                 borderClass
             )}
         >
-            {/* Liquid Neon Cursor-Follow Glow */}
-            {isPromo && isHovered && !isTouchDevice && (
-                <div 
-                    className="absolute inset-[-1px] rounded-2xl pointer-events-none z-0"
-                    style={{
-                        background: `radial-gradient(circle 120px at ${cursorPos.x}px ${cursorPos.y}px, rgba(239, 68, 68, 0.8), rgba(255, 255, 255, 0.5), rgba(59, 130, 246, 0.8), transparent 70%)`,
-                        padding: '1px',
-                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                        WebkitMaskComposite: 'xor',
-                        maskComposite: 'exclude'
-                    }}
-                />
-            )}
-
             {/* 3D Reflective Glare Overlay */}
             <div 
                 className="absolute inset-0 pointer-events-none z-20"
                 style={glareStyle as any}
             />
 
-            {/* Micro-Spark Cascade (Hover Particle Effect) */}
-            {isPromo && isHovered && !isTouchDevice && (
-                <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
-                    {sparks.map(spark => (
-                        <div
-                            key={spark.id}
-                            className="absolute w-1 h-1 rounded-full animate-spark"
-                            style={{
-                                left: spark.left,
-                                top: '-5px',
-                                backgroundColor: spark.color,
-                                boxShadow: `0 0 6px ${spark.color}`,
-                                animationDelay: spark.delay,
-                                animationDuration: spark.duration,
-                                '--drift-x': spark.drift,
-                                opacity: 0.8
-                            } as any}
-                        />
-                    ))}
-                </div>
-            )}
-
             {/* Image Area with Luminous Hover & Immersive Blending */}
             <div className="w-full aspect-[16/10] bg-[#05070a] relative overflow-hidden transition-all duration-700 border-b border-white/5 p-4 flex items-center justify-center">
                 {/* Immersive radial depth */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,174,239,0.15)_0%,transparent_75%)] opacity-60 group-hover:opacity-100 transition-all duration-700 z-10"></div>
-                
-                {/* Patriotic radial glow behind promo product images */}
-                {isPromo && (
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08)_0%,rgba(59,130,246,0.08)_60%,transparent_100%)] opacity-80 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-10"></div>
-                )}
 
                 {/* Spinning HVAC Fan Background with Radial Blur */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] group-hover:opacity-[0.09] transition-opacity duration-500 z-0 overflow-hidden">
@@ -2051,12 +2009,6 @@ function ProductCard({
                 <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#0f131a]/95 to-transparent z-10"></div>
                 <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10"></div>
                 <div className="absolute inset-0 bg-primary/10 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-0"></div>
-
-                {isPromo && (
-                    <div className="absolute bottom-0 left-0 z-20 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 text-white font-header font-black text-[9px] sm:text-[10px] md:text-[11px] px-3 py-2 sm:px-4 sm:py-2.5 rounded-tr-2xl uppercase tracking-[0.2em] shadow-lg border-t border-r border-white/10 animate-pulse-slow">
-                        🇺🇸 CELEBRATING AMERICA 10% OFF
-                    </div>
-                )}
 
                 {/* 3D Window Fit & Studio View Switcher Pills */}
                 <div className="absolute top-2 left-2 z-30 flex items-center bg-black/85 backdrop-blur-md rounded-lg p-0.5 border border-white/10 shadow-lg">
@@ -2303,27 +2255,6 @@ function ProductCard({
                     </div>
                 </div>
             </div>
-
-            {/* Encapsulated micro-spark animation styles */}
-            <style jsx>{`
-                @keyframes spark-fall {
-                    0% {
-                        transform: translateY(-20px) translateX(0) scale(1);
-                        opacity: 1;
-                    }
-                    50% {
-                        transform: translateY(120px) translateX(var(--drift-x)) scale(0.8);
-                        opacity: 0.8;
-                    }
-                    100% {
-                        transform: translateY(240px) translateX(calc(var(--drift-x) * 2)) scale(0.4);
-                        opacity: 0;
-                    }
-                }
-                .animate-spark {
-                    animation: spark-fall var(--fall-duration, 2.5s) linear infinite;
-                }
-            `}</style>
         </div>
     );
 }

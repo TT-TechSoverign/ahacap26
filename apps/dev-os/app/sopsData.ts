@@ -46,7 +46,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "Container Topology Audit",
-                "description": "Trigger agent_container_sentinel to verify all 5 core containers (prod-api, prod-dev-os, prod-web, prod-db, prod-redis).",
+                "description": "Trigger agent_container_sentinel to verify all 7 core containers (prod-api, prod-dev-os, prod-web, prod-db, prod-redis, ahac-crm-web, ahac-crm-api).",
                 "verification": "All containers reported UP and bound to 127.0.0.1."
             },
             {
@@ -142,7 +142,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "CRO Heuristic Verification",
-                "description": "Trigger agent_cro_optimizer to inspect mobile CTA visibility, form field counts, and flat-rate pricing anchors.",
+                "description": "Trigger agent_cro_optimizer to inspect mobile CTA visibility, form field counts, and $0 Free In-Home Estimate pricing anchors.",
                 "verification": "Form fields <= 4, tap-to-call visible."
             },
             {
@@ -191,12 +191,12 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
                 "step": 3,
                 "title": "Market Competitive Analysis",
                 "description": "Trigger agent_market_research to benchmark island contractor rates against AHAC flat-rate pricing.",
-                "verification": "AHAC $175 basic / $275 teardown price moat intact."
+                "verification": "AHAC $0 Free In-Home Estimate & Waipahu direct inventory ($395-$1,200) price moat intact."
             },
             {
                 "step": 4,
                 "title": "HECO Rebate Modeling",
-                "description": "Trigger agent_heco_rebate_strategist to compute customer electricity savings ($424/yr) and Hawaii Energy cash rebates ($150-$500).",
+                "description": "Trigger agent_heco_rebate_strategist to compute customer electricity savings ($424/yr) and $45 Hawaii Energy Window AC rebates.",
                 "verification": "Payback period calculated at ~9.4 months."
             }
         ],
@@ -214,9 +214,9 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Customer Operations & CRM Sub-Master",
         "domain": "Operations",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Manage service request intake, technician dispatch queues, Waipahu bench repair triage, and customer lifecycle maintenance reminders.",
+        "mandate": "Manage service request intake, technician dispatch queues, Waipahu same-day warehouse pickup, and customer lifecycle maintenance reminders.",
         "token_efficiency_policy": "Direct SQL queries on indexed leads table; on-demand execution without pollers.",
-        "oahu_grounding": "Waipahu central repair facility (94-1388 Moaniani St), 24-48 hour drop-off turnaround, Oahu salt-air equipment degradation cycles.",
+        "oahu_grounding": "Waipahu central warehouse facility (94-150 Leoleo St #203), same-day pickup for factory-sealed inventory, Oahu salt-air equipment degradation cycles.",
         "inputs": [
             "PostgreSQL leads table records",
             "Technician availability calendar",
@@ -233,8 +233,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "Symptom & Intake Triage",
-                "description": "Trigger agent_intake_triage to categorize incoming issues (mold, refrigerant freeze, drain leak) and route between Waipahu shop and field van.",
-                "verification": "Portable/window units routed to shop; mini-splits to field dispatch."
+                "description": "Trigger agent_intake_triage to categorize incoming issues (mold, refrigerant freeze, drain leak) and route between Waipahu warehouse and field van.",
+                "verification": "Window units routed to clean-vs-replace/warehouse; mini-splits to field dispatch."
             },
             {
                 "step": 3,
@@ -276,7 +276,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "Build Compilation Verification",
-                "description": "Trigger agent_build_qa to confirm TypeScript zero-error compile and 44 static/dynamic Next.js routes.",
+                "description": "Trigger agent_build_qa to confirm TypeScript zero-error compile and 110 canonical static/dynamic Next.js routes.",
                 "verification": "Build exits code 0 with zero broken internal links."
             },
             {
@@ -339,19 +339,19 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Docker Container Sentinel",
         "domain": "Infrastructure",
         "supervisor": "submaster_infrastructure",
-        "mandate": "Supervise state, uptime, and loopback port bindings for the 5 core production containers.",
+        "mandate": "Supervise state, uptime, and loopback port bindings for the 7 core production containers.",
         "token_efficiency_policy": "Direct docker socket or loopback HTTP status checks; zero continuous polling loops.",
         "oahu_grounding": "Isolates container network to 127.0.0.1, preventing any unauthorized internet exposure on Oahu servers.",
         "inputs": [
             "Docker engine container states",
-            "Loopback port bindings (3005, 8001, 5433, 6380, 3001)"
+            "Loopback port bindings (3005, 8001, 5433, 6380, 3001, 8080)"
         ],
         "execution_steps": [
             {
                 "step": 1,
                 "title": "Container State Ingest",
-                "description": "Check operational status of prod-api, prod-dev-os, prod-web, prod-db, prod-redis.",
-                "verification": "All 5 containers in UP status."
+                "description": "Check operational status of prod-api, prod-dev-os, prod-web, prod-db, prod-redis, ahac-crm-web, ahac-crm-api.",
+                "verification": "All 7 containers in UP status."
             },
             {
                 "step": 2,
@@ -625,7 +625,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "supervisor": "submaster_commerce_telemetry",
         "mandate": "Track real-time visitor progression through the 4 core funnel steps with zero recurring polling overhead.",
         "token_efficiency_policy": "Reads in-memory ring buffer (capped at 500 events); outputs compact aggregated conversion ratios.",
-        "oahu_grounding": "Oahu homeowner service booking funnels (A/C Diagnostic, Teardown Cleaning, Mini-Split Repair).",
+        "oahu_grounding": "Oahu homeowner service booking funnels (A/C Diagnostic, Mini-Split Deep Cleaning, Window AC Clean-vs-Replace, Sizing Wizard).",
         "inputs": [
             "TELEMETRY_BUFFER events",
             "Funnel step transition timestamps"
@@ -681,13 +681,13 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "Tap-to-Call Prominence",
-                "description": "Verify click-to-call (808) 723-5595 button is visible on mobile viewport.",
+                "description": "Verify click-to-call (808) 488-1111 button is visible on mobile viewport.",
                 "verification": "Phone CTA immediately accessible."
             },
             {
                 "step": 3,
                 "title": "Value Anchor Verification",
-                "description": "Confirm $175 basic / $275 teardown flat pricing is clearly stated upfront.",
+                "description": "Confirm $0 Free In-Home Estimate and $50 flat delivery anchors are clearly stated upfront.",
                 "verification": "Pricing anchors visible before submit."
             }
         ],
@@ -763,7 +763,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "Schema.org JSON-LD Verification",
-                "description": "Verify LocalBusiness schema contains contractor license CT-36775 and telephone (808) 723-5595.",
+                "description": "Verify LocalBusiness schema contains contractor license CT-36775 and telephone (808) 488-1111.",
                 "verification": "Schema valid with license number."
             },
             {
@@ -810,8 +810,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 3,
                 "title": "Pricing Transparency Anchor",
-                "description": "Attach island flat pricing ($175 basic / $275 teardown / $50 delivery) to recommendation copy.",
-                "verification": "Transparent pricing confirmed."
+                "description": "Attach island pricing ($0 Free In-Home Estimate / $395-$1,200 inventory / $50 delivery) to recommendation copy.",
+                "verification": "Upfront pricing confirmed."
             }
         ],
         "outputs": [
@@ -839,8 +839,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 1,
                 "title": "Contractor Rate Benchmarking",
-                "description": "Compare AHAC flat rates ($175 / $275) against standard island contractor hourly fees.",
-                "verification": "AHAC maintains 40-50% value advantage."
+                "description": "Compare AHAC direct pricing ($395-$1,200) against standard island contractor fees.",
+                "verification": "AHAC maintains strong local value advantage."
             },
             {
                 "step": 2,
@@ -970,7 +970,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "SERP Rich Snippet Injection",
-                "description": "Ensure dynamic prices ($395-$1025), stock availability, and CT-36775 license appear in structured output.",
+                "description": "Ensure dynamic prices ($395-$1,200), stock availability, and CT-36775 license appear in structured output.",
                 "verification": "Rich snippet attributes verified."
             },
             {
@@ -1056,9 +1056,9 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             },
             {
                 "step": 3,
-                "title": "Waipahu Teardown Queue",
-                "description": "Track bench repair units at Waipahu warehouse for 24-48 hr turnaround.",
-                "verification": "Turnaround time maintained <= 48 hrs."
+                "title": "Waipahu Warehouse Pickup Queue",
+                "description": "Track customer pickup orders at Waipahu warehouse (94-150 Leoleo St #203) for same-day staging.",
+                "verification": "Same-day pickup staging maintained."
             }
         ],
         "outputs": [
@@ -1086,7 +1086,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 1,
                 "title": "Service Interval Calculation",
-                "description": "Identify customers reaching 6 months (mini-split coil flush) or 12 months (window AC teardown).",
+                "description": "Identify customers reaching 6 months (mini-split coil flush) or 12 months (window AC filter & corrosion check).",
                 "verification": "Recall list compiled."
             },
             {
@@ -1115,9 +1115,9 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "HVAC Symptom & Intake Triage Agent",
         "domain": "Operations",
         "supervisor": "submaster_crm_operations",
-        "mandate": "Triage incoming service requests by reported symptom to route between Waipahu Warehouse Bench Teardown vs Field Van Dispatch.",
+        "mandate": "Triage incoming service requests by reported symptom to route between Waipahu Warehouse Direct Replacement vs Field Van Dispatch.",
         "token_efficiency_policy": "In-memory string keyword categorization on incoming lead notes; completed in < 2ms.",
-        "oahu_grounding": "Waipahu central facility (94-1388 Moaniani St) handles drop-off teardown and coil immersion, saving customers on-site labor fees.",
+        "oahu_grounding": "Waipahu central warehouse (94-150 Leoleo St #203) stocks factory-sealed replacement units ($395-$1,200), saving customers weeks of mainland freight.",
         "inputs": [
             "Lead notes and symptom descriptions",
             "Service type selections (mini-split vs portable/window)"
@@ -1132,7 +1132,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "Service Routing Determination",
-                "description": "Route window/portable units to Waipahu Warehouse Teardown ($275 flat); route mini-splits to field dispatch.",
+                "description": "Route aging window units to Clean-vs-Replace Assessment & Waipahu Warehouse Direct inventory; route mini-splits to field dispatch.",
                 "verification": "Appropriate service path assigned."
             },
             {
@@ -1188,7 +1188,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             "Zero-downtime protocol verification",
             "Git branch confirmation"
         ],
-        "contingency_protocol": "Instantly abort deployment and roll back container if health probe fails within 30 seconds."
+        "contingency_protocol": "Instantly abort deployment and roll back container if health probe fails within 30 seconds of deployment."
     },
     "agent_build_qa": {
         "id": "agent_build_qa",
@@ -1202,7 +1202,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "inputs": [
             "TypeScript compiler output (tsc)",
             "Next.js production build logs",
-            "Route manifest (44 pages)"
+            "Route manifest (110 pages)"
         ],
         "execution_steps": [
             {
@@ -1214,8 +1214,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "Next.js Route Compilation",
-                "description": "Verify all 44 static and dynamic routes compile cleanly into optimized bundles.",
-                "verification": "44 routes compiled."
+                "description": "Verify all 110 canonical static and dynamic routes compile cleanly into optimized bundles.",
+                "verification": "110 routes compiled."
             },
             {
                 "step": 3,
@@ -1226,7 +1226,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         ],
         "outputs": [
             "Build QA status (VERIFIED)",
-            "Compiled routes count (44)",
+            "Compiled routes count (110)",
             "TypeScript strict check"
         ],
         "contingency_protocol": "Reject build and prevent deployment if any TypeScript error or compilation warning is emitted."

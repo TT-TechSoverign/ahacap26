@@ -6,7 +6,7 @@ interface StockBadgeProps {
 }
 
 export function StockBadge({ stock }: StockBadgeProps) {
-  const isOutOfStock = stock === 0;
+  const isOutOfStock = stock <= 0;
   const isLowStock = stock > 0 && stock <= 5;
 
   return (

@@ -276,34 +276,20 @@ async def send_order_confirmation(to_email: str, order_id: str, total_cents: int
     if not customer_info: customer_info = {}
     if not payment_info: payment_info = {}
 
-    # Check if there is any promo item in the order
     is_promo = False
-    is_promo_active = False
-    if is_promo_active:
-        try:
-            from database import AsyncSessionLocal
-            from sqlalchemy.future import select
-            import models
-
-            async with AsyncSessionLocal() as session:
-                for item in items:
-                    p_id = item.get("product_id")
-                    if p_id:
-                        res = await session.execute(select(models.Product).where(models.Product.id == p_id))
-                        prod = res.scalar_one_or_none()
-                        if prod and prod.promo_price is not None and prod.promo_price > 0:
-                            is_promo = True
-                            break
-        except Exception as e:
-            logger.error(f"Error checking promo items in DB: {e}")
 
     calendar_invite_bytes = None
     if fulfillment_mode:
         try:
+            hst_tz = timezone(timedelta(hours=-10))
             dtstamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
-            invite_desc = "Celebrating America Promo: To lock in your 10% discount, please schedule your installation window for July and coordinate your down payment with the representative." if is_promo else "Thank you for your order! Please coordinate your pick up or delivery window with our representative."
-            invite_prodid = "-//Affordable Home A/C//Celebrating America Promo//EN" if is_promo else "-//Affordable Home A/C//Order Fulfillment//EN"
-            invite_uid = f"promo_installation_window_2026_{order_id}" if is_promo else f"installation_window_2026_{order_id}"
+            next_biz = datetime.now(hst_tz) + timedelta(days=1)
+            if next_biz.weekday() == 6:  # Sunday -> Monday
+                next_biz += timedelta(days=1)
+            day_str = next_biz.strftime('%Y%m%d')
+            invite_desc = "Thank you for your order! Please coordinate your pick up or delivery window with our Waipahu representative at (808) 488-1111."
+            invite_prodid = "-//Affordable Home A/C//Order Fulfillment//EN"
+            invite_uid = f"fulfillment_window_{day_str}_{order_id}"
             invite_content = f"""BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:{invite_prodid}
@@ -312,11 +298,11 @@ METHOD:REQUEST
 BEGIN:VEVENT
 UID:{invite_uid}
 DTSTAMP:{dtstamp}
-DTSTART:20260701T080000
-DTEND:20260701T170000
-SUMMARY:Affordable Home A/C Installation Window
+DTSTART:{day_str}T080000
+DTEND:{day_str}T170000
+SUMMARY:Affordable Home A/C Pickup / Delivery Coordination Window
 DESCRIPTION:{invite_desc}
-LOCATION:Affordable Home A/C Waipahu shop or your residence
+LOCATION:Affordable Home A/C Waipahu Commercial Center (94-150 Leoleo St #203) or your Oahu residence
 STATUS:CONFIRMED
 SEQUENCE:0
 END:VEVENT
@@ -584,13 +570,6 @@ END:VCALENDAR"""
         """
 
         promo_banner_html = ""
-        if is_promo:
-            promo_banner_html = """
-            <div style="background-color: #0d1e36; border: 1px dashed #ef4444; border-radius: 6px; padding: 16px; margin-top: 16px; margin-bottom: 24px; text-align: center;">
-                <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.2em; color: #ef4444; text-transform: uppercase; display: block; margin-bottom: 6px;">★ 4th of July Promo Applied ★</span>
-                <p style="margin: 0; font-size: 13px; color: #f8fafc; font-weight: bold; line-height: 1.4;">Thank you for celebrating with us! Your 10% promotional pricing has been locked in for this order.</p>
-            </div>
-            """
 
         # --- Item Rows Generation ---
         rows_html = ""
@@ -828,8 +807,6 @@ END:VCALENDAR"""
     admin_subject = f"New Order Alert: {order_id} (Admin Copy)"
     if is_intercepted:
         admin_subject = f"[SYSTEM TEST - NO CEO NOTIFICATION] {admin_subject}"
-    elif is_promo:
-        admin_subject = f"[PROMO - 4TH OF JULY] {admin_subject}"
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
     def _send_both_emails():
@@ -1015,8 +992,8 @@ async def send_inquiry_notification(lead):
                     </div>
                 </div>
                 <div class="footer">
-                    &copy; 2026 Affordable Home AC & Heating.<br>
-                    Internal Dispatch System.
+                    &copy; 2026 Affordable Home A/C &bull; License CT-36775.<br>
+                    Internal Oahu Dispatch System.
                 </div>
             </div>
         </body>

@@ -6,9 +6,11 @@ import { useContent } from '../lib/context/ContentContext';
 import { X, Phone, Store, Calendar, Sparkles, Wrench, Compass, ShieldCheck, MapPin, Mail, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { sendGAEvent } from '@next/third-parties/google';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 
 export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val: boolean) => void }) {
     const { content } = useContent();
+    const { inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
 
     // Lock body scroll and prevent pull-to-refresh when drawer is open
     useEffect(() => {
@@ -53,11 +55,11 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
         {
             title: 'In-Stock Window ACs (Waipahu)',
             links: [
-                { text: 'Shop All 16 Window ACs', href: '/shop', icon: Store, badge: '$395–$1,025', highlight: true },
-                { text: 'Bedroom 115V (6k–8k BTU)', href: '/shop?capacity=small', icon: Sparkles, badge: 'From $395' },
-                { text: 'Living Room (10k–14k BTU)', href: '/shop?capacity=medium', icon: Compass, badge: '115V Plug' },
-                { text: 'Large Room 230V (18k–23.5k)', href: '/shop/large-room-window-ac-oahu', icon: Compass, badge: '230V' },
-                { text: '26" Thru-the-Wall Units (GE)', href: '/shop?category=wall_unit', icon: Store, badge: 'Wall Sleeve' },
+                { text: `Shop All ${inStockAcCount} In-Stock Window ACs`, href: '/shop', icon: Store, badge: `$${minPrice}–$${maxPrice.toLocaleString()}`, highlight: true },
+                { text: 'Bedroom 115V (6k–8k BTU)', href: '/shop?capacity=BEDROOM', icon: Sparkles, badge: 'From $395' },
+                { text: 'Living Room (10k–14k BTU)', href: '/shop?capacity=MASTER', icon: Compass, badge: '115V Plug' },
+                { text: 'Large Room 230V (18k–23.5k)', href: '/shop/large-room-window-ac-oahu', icon: Compass, badge: '$925–$1,025' },
+                { text: '26" Thru-the-Wall Units (GE)', href: '/shop?category=ge', icon: Store, badge: '$1,000–$1,200' },
                 { text: 'Window AC Installation', href: '/window-ac-installation', icon: Wrench, badge: '$0 Estimate' },
             ]
         },
@@ -65,8 +67,8 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
             title: 'Split AC & Service Division',
             links: [
                 { text: 'Ductless Mini-Splits', href: '/mini_split_ac', icon: Compass, badge: '$0 Estimate' },
-                { text: 'Mini Split Deep Cleaning', href: '/ac-cleaning-oahu', icon: Sparkles },
-                { text: 'AC Diagnostic & Repair', href: '/ac-repair-oahu', icon: Wrench },
+                { text: 'Mini Split Deep Cleaning', href: '/ac-cleaning-oahu', icon: Sparkles, badge: '$175+' },
+                { text: 'AC Diagnostic & Repair', href: '/ac-repair-oahu', icon: Wrench, badge: '$175 Flat' },
                 { text: 'Mini Split Maintenance', href: '/mini_split_ac_maintenance', icon: ShieldCheck },
             ]
         },
@@ -125,12 +127,13 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                                 Order Online or Book $0 In-Home Estimate
                             </p>
                             <p className="text-slate-300 text-[11px] font-sans leading-relaxed">
-                                Order brand-new LG &amp; GE Window ACs online ($395–$1,025) for free Waipahu pickup or $50 island delivery. Zero upfront cost to book mini split or window AC installation estimates.
+                                Order brand-new LG &amp; GE Window ACs online (${minPrice}–${maxPrice.toLocaleString()}) for free Waipahu pickup or $50 Oahu delivery. Zero upfront cost to book mini split or window AC installation estimates.
                             </p>
                         </div>
                         <div className="grid grid-cols-2 gap-2 pt-1">
                             <Link 
                                 href="/shop" 
+                                prefetch={false}
                                 onClick={() => setIsOpen(false)}
                                 className="p-2.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-1.5 shadow-md active:scale-95"
                             >
@@ -139,6 +142,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                             </Link>
                             <Link 
                                 href="/contact" 
+                                prefetch={false}
                                 onClick={() => setIsOpen(false)}
                                 className="p-2.5 bg-slate-800 hover:bg-slate-700 border border-white/15 text-white font-header font-bold text-[11px] uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-1.5 active:scale-95"
                             >
@@ -198,6 +202,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                             <h3 className="text-slate-500 font-mono font-bold uppercase tracking-widest text-[10px]">Service Areas</h3>
                             <Link 
                                 href="/service-areas" 
+                                prefetch={false}
                                 onClick={() => setIsOpen(false)}
                                 className="text-[10px] font-mono uppercase text-primary hover:underline"
                             >

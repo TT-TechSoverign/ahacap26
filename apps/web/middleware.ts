@@ -116,9 +116,22 @@ export function middleware(request: NextRequest) {
         return makePermanentRedirect(SHORT_SLUG_REDIRECTS[pathLower]);
     }
 
-    // Decommissioned routes
-    if (pathLower === '/window-ac-deep-cleaning-chemical-overhaul' || pathLower === '/window_ac_maintenance') {
-        return makePermanentRedirect('/clean-vs-replace-window-ac');
+    // Decommissioned & Consolidated Canonical Routes (301 Permanent Redirects)
+    const CONSOLIDATED_REDIRECTS: Record<string, string> = {
+        '/window-ac-deep-cleaning-chemical-overhaul': '/clean-vs-replace-window-ac',
+        '/window_ac_maintenance': '/clean-vs-replace-window-ac',
+        '/central-ac': '/mini_split_ac',
+        '/maintenance': '/mini_split_ac_maintenance',
+        '/ac-repair': '/ac-repair-oahu',
+        '/large-room-window-ac-18000-24000-btu': '/shop/large-room-window-ac-oahu',
+        '/same-day-window-ac-pickup-oahu': '/window-ac-warehouse-pickup-waipahu',
+        '/standard-window-ac-brackets-mounting-oahu': '/ac-brackets-exterior-security-mounting-oahu',
+        '/premium-mini-split-deep-cleaning-oahu': '/ac-cleaning-oahu',
+        '/appointment': '/contact',
+        '/services': '/mini_split_ac',
+    };
+    if (CONSOLIDATED_REDIRECTS[pathLower]) {
+        return makePermanentRedirect(CONSOLIDATED_REDIRECTS[pathLower]);
     }
 
     // 5. Legacy Route Detection & Decommissioning
@@ -200,7 +213,9 @@ export function middleware(request: NextRequest) {
                 destination = '/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm';
             } else if (productSlug.includes('1022') || productSlug.includes('10000')) {
                 destination = '/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm';
-            } else if (productSlug.includes('8021') || productSlug.includes('7500') || productSlug.includes('8000') || productSlug.includes('8022') || productSlug.includes('8024')) {
+            } else if (productSlug.includes('8024')) {
+                destination = '/shop/11-lg-8-000-btu-lw8024rd';
+            } else if (productSlug.includes('8021') || productSlug.includes('7500') || productSlug.includes('8000') || productSlug.includes('8022')) {
                 destination = '/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm';
             } else if (productSlug.includes('6023') || productSlug.includes('6000')) {
                 destination = '/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm';
@@ -273,7 +288,7 @@ export function middleware(request: NextRequest) {
 
     const response = NextResponse.next();
 
-    // 8. X-Robots-Tag: noindex for Internal/Secure Routes & All Staging Traffic
+    // 8. X-Robots-Tag: noindex for Internal/Secure Routes, Parameterized Filter/Prefill URLs & All Staging Traffic
     const host = request.headers.get('host') || '';
     const isStagingHost = host.includes('staging') || host.includes('localhost');
     const noIndexPaths = [
@@ -283,16 +298,34 @@ export function middleware(request: NextRequest) {
         '/dev-os',
         '/puck',
     ];
-    if (isStagingHost || noIndexPaths.some(path => url.pathname.startsWith(path))) {
+    const noIndexParams = [
+        'capacity',
+        'category',
+        'voltage',
+        'mount',
+        'sort',
+        'q',
+        'service',
+        'notes',
+        'model',
+        '_t',
+        '_rsc',
+    ];
+    const isPrivateRoute = noIndexPaths.some(path => url.pathname.startsWith(path));
+    const hasNoIndexParam = noIndexParams.some(param => url.searchParams.has(param));
+
+    if (isStagingHost || isPrivateRoute || hasNoIndexParam) {
         response.headers.set('X-Robots-Tag', 'noindex, nofollow');
     }
 
-    // 9. Universal Browser Zero-Cache Protocol for All HTML Pages
-    // Forces iOS Safari, Chrome, Edge, Samsung Internet, and in-app webviews to ALWAYS fetch fresh live content
-    response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0');
-    response.headers.set('Pragma', 'no-cache');
-    response.headers.set('Expires', '0');
-    response.headers.set('Surrogate-Control', 'no-store');
+    // 9. Conditional HTTP Caching Protocol (304 Not Modified for Public Routes; Zero-Cache for Admin/Checkout)
+    if (isPrivateRoute) {
+        response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+        response.headers.set('Pragma', 'no-cache');
+        response.headers.set('Expires', '0');
+    } else {
+        response.headers.set('Cache-Control', 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800');
+    }
 
     return response;
 }

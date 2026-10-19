@@ -45,9 +45,9 @@ const INITIAL_UNITS_230V: PlugUnit[] = [
     {
         id: 6,
         name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
-        price: 865,
-        promoPrice: 778,
-        stock: 20,
+        price: 925,
+        promoPrice: 0,
+        stock: 5,
         voltage: "208/230V - 15A (NEMA 6-15P)",
         coverage: "Up to 1,000 sq. ft. AHAM (Up to 600 sq. ft. Oahu)",
         noise: "44 / 59 dB",
@@ -59,9 +59,9 @@ const INITIAL_UNITS_230V: PlugUnit[] = [
     {
         id: 7,
         name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-        price: 985,
-        promoPrice: 886,
-        stock: 0,
+        price: 1025,
+        promoPrice: 0,
+        stock: 15,
         voltage: "208/230V - 15A (NEMA 6-15P)",
         coverage: "Up to 1,440 sq. ft. AHAM (Up to 800 sq. ft. Oahu)",
         noise: "53 / 62 dB",
@@ -72,16 +72,16 @@ const INITIAL_UNITS_230V: PlugUnit[] = [
     },
     {
         id: 9,
-        name: "LG Dual Inverter Cool + Heat 18,000 BTU (LW1823HRSM)",
+        name: "LG 18,000 BTU Cool + Heat (LW1823HRSM)",
         price: 925,
-        promoPrice: 832,
-        stock: 6,
+        promoPrice: 0,
+        stock: 10,
         voltage: "208/230V - 20A (NEMA 6-20P)",
         coverage: "Up to 1,000 sq. ft. AHAM (Up to 600 sq. ft. Oahu)",
-        noise: "44 / 59 dB",
-        dehumid: "5.4 Pts/Hr",
+        noise: "54 / 60 dB",
+        dehumid: "5.5 Pts/Hr",
         rebate: "Cool + Supplemental Heat",
-        slug: "9-lg-dual-inverter-cool-heat-18-000-btu-lw1823hrsm",
+        slug: "9-lg-18-000-btu-lw1823hrsm",
         plugType: "NEMA 6-20P (208/230V 20A Tandem)"
     }
 ];
@@ -91,8 +91,8 @@ const INITIAL_UNITS_115V: PlugUnit[] = [
         id: 1,
         name: "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
         price: 560,
-        promoPrice: 504,
-        stock: 30,
+        promoPrice: 0,
+        stock: 11,
         voltage: "115V - 15A (Standard NEMA 5-15P)",
         coverage: "Up to 260 sq. ft. AHAM (Up to 220 sq. ft. Oahu)",
         noise: "44 / 54 dB",
@@ -105,8 +105,8 @@ const INITIAL_UNITS_115V: PlugUnit[] = [
         id: 3,
         name: "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
         price: 650,
-        promoPrice: 585,
-        stock: 15,
+        promoPrice: 0,
+        stock: 10,
         voltage: "115V - 15A (Standard NEMA 5-15P)",
         coverage: "Up to 450 sq. ft. AHAM (Up to 330 sq. ft. Oahu)",
         noise: "44 / 58 dB",
@@ -119,8 +119,8 @@ const INITIAL_UNITS_115V: PlugUnit[] = [
         id: 4,
         name: "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
         price: 745,
-        promoPrice: 670,
-        stock: 30,
+        promoPrice: 0,
+        stock: 20,
         voltage: "115V - 15A (Standard NEMA 5-15P)",
         coverage: "Up to 550 sq. ft. AHAM (Up to 380 sq. ft. Oahu)",
         noise: "44 / 58 dB",
@@ -133,8 +133,8 @@ const INITIAL_UNITS_115V: PlugUnit[] = [
         id: 5,
         name: "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
         price: 785,
-        promoPrice: 706,
-        stock: 15,
+        promoPrice: 0,
+        stock: 48,
         voltage: "115V - 15A (Standard NEMA 5-15P)",
         coverage: "Up to 700 sq. ft. AHAM (Up to 450 sq. ft. Oahu)",
         noise: "44 / 58 dB",
@@ -163,14 +163,14 @@ export default function WindowAcPlugGuidePage() {
                 setUnits230V(
                     INITIAL_UNITS_230V.map((u) => {
                         const live = liveMap.get(u.id);
-                        return live ? { ...u, price: live.price, promoPrice: live.promo_price ?? u.promoPrice, stock: live.stock } : u;
-                    })
+                        return live ? { ...u, price: live.price, promoPrice: live.promo_price ?? 0, stock: live.stock } : u;
+                    }).sort((a, b) => (b.stock > 0 ? 1 : 0) - (a.stock > 0 ? 1 : 0))
                 );
                 setUnits115V(
                     INITIAL_UNITS_115V.map((u) => {
                         const live = liveMap.get(u.id);
-                        return live ? { ...u, price: live.price, promoPrice: live.promo_price ?? u.promoPrice, stock: live.stock } : u;
-                    })
+                        return live ? { ...u, price: live.price, promoPrice: live.promo_price ?? 0, stock: live.stock } : u;
+                    }).sort((a, b) => (b.stock > 0 ? 1 : 0) - (a.stock > 0 ? 1 : 0))
                 );
             })
             .catch(() => {});
@@ -190,7 +190,7 @@ export default function WindowAcPlugGuidePage() {
         },
         {
             q: "What if my Oahu living room only has standard 115V outlets?",
-            a: "You have two great options: 1) A licensed Oahu electrician can quickly convert a dedicated 15A or 20A breaker in your main panel into a 230V receptacle (frequently costing only $150–$250 in single-story homes). 2) Or, you can choose our maximum-capacity 115V model—the LG Dual Inverter 12,000 BTU (LW1222IVSM)—which plugs directly into any standard wall outlet and easily cools up to 550 sq. ft."
+            a: "You have two great options: 1) A licensed Oahu electrical subcontractor can convert a dedicated 15A or 20A breaker in your main panel into a 230V receptacle. 2) Or, you can choose our high-capacity 115V models—the LG Dual Inverter 12,000 BTU (LW1222IVSM, $745) or 14,000 BTU (LW1522FVSM, $785)—which plug directly into a standard 115V wall outlet and cool up to 550–700 sq. ft. AHAM (380–450 sq. ft. Oahu)."
         },
         {
             q: "Do the 18,000 and 23,500 BTU LG Dual Inverters qualify for Hawaii Energy rebates?",
@@ -241,7 +241,7 @@ export default function WindowAcPlugGuidePage() {
                     {
                         "@type": "HowToStep",
                         "name": "Match with AC BTU Size",
-                        "text": "Units from 6,000 to 12,000 BTU run on 115V. Heavy-duty 18,000 and 23,500 BTU units require 230V for safe, energy-efficient operation."
+                        "text": "Units from 6,000 to 14,000 BTU run on 115V. Heavy-duty 18,000 and 23,500 BTU units require 230V for safe, energy-efficient operation."
                     }
                 ]
             },
@@ -323,15 +323,15 @@ export default function WindowAcPlugGuidePage() {
                         <div className="space-y-2 text-xs">
                             <div className="flex justify-between py-1.5 border-b border-white/5">
                                 <span className="text-slate-400">Supported BTU Ratings:</span>
-                                <span className="text-white font-mono font-bold">6,000 / 8,000 / 10,000 / 12,000 BTU</span>
+                                <span className="text-white font-mono font-bold">6,000 / 8,000 / 10,000 / 12,000 / 14,000 BTU</span>
                             </div>
                             <div className="flex justify-between py-1.5 border-b border-white/5">
                                 <span className="text-slate-400">Typical Coverage:</span>
-                                <span className="text-white font-mono font-bold">100 to 550 sq. ft.</span>
+                                <span className="text-white font-mono font-bold">100 to 700 sq. ft. AHAM (up to 450 sq. ft. Oahu)</span>
                             </div>
                             <div className="flex justify-between py-1.5">
                                 <span className="text-slate-400">Typical Rooms:</span>
-                                <span className="text-cyan-400 font-bold">Bedrooms, Offices, Studios</span>
+                                <span className="text-cyan-400 font-bold">Bedrooms, Offices, Studios, Living Areas</span>
                             </div>
                         </div>
                     </div>
@@ -349,7 +349,7 @@ export default function WindowAcPlugGuidePage() {
                             <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs uppercase font-bold">
                                 High Power Titan (208/230V)
                             </span>
-                            <span className="text-xs font-mono text-slate-500">NEMA 6-20P</span>
+                            <span className="text-xs font-mono text-slate-500">NEMA 6-15P / 6-20P</span>
                         </div>
 
                         <h3 className="text-2xl font-header font-black uppercase text-white mb-2">
@@ -378,7 +378,7 @@ export default function WindowAcPlugGuidePage() {
                             </div>
                             <div className="flex justify-between py-1.5 border-b border-white/5">
                                 <span className="text-slate-400">Typical Coverage:</span>
-                                <span className="text-emerald-400 font-mono font-bold">600 to 1,450 sq. ft.</span>
+                                <span className="text-emerald-400 font-mono font-bold">600 to 1,440 sq. ft. AHAM</span>
                             </div>
                             <div className="flex justify-between py-1.5">
                                 <span className="text-slate-400">Typical Rooms:</span>
@@ -394,10 +394,10 @@ export default function WindowAcPlugGuidePage() {
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
                         <div>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white">
-                                {selectedPlug === '230v' ? 'In-Stock 230V High-Capacity Dual Inverters' : 'In-Stock 115V Standard Plug Dual Inverters'}
+                                {selectedPlug === '230v' ? 'In-Stock 230V High-Capacity Units' : 'In-Stock 115V Standard Plug Units'}
                             </h2>
                             <p className="text-slate-400 text-xs sm:text-sm mt-1">
-                                Available for Waipahu warehouse pickup (subject to scheduling &amp; inventory availability by appointment) or $50 flat island-wide Oahu delivery.
+                                Available for Waipahu warehouse pickup (subject to scheduling &amp; inventory availability by appointment) or $50 flat Oahu delivery.
                             </p>
                         </div>
                         <div className="flex gap-2">
@@ -506,7 +506,7 @@ export default function WindowAcPlugGuidePage() {
                                                             id: unit.id,
                                                             name: unit.name,
                                                             price: activePrice,
-                                                            promo_price: unit.promoPrice,
+                                                            promo_price: isPromo && unit.promoPrice ? unit.promoPrice : undefined,
                                                             stock: unit.stock,
                                                             category: 'WINDOW_AC',
                                                             subcategory: 'dual_inverter',
@@ -539,16 +539,16 @@ export default function WindowAcPlugGuidePage() {
                                 Two Island Workarounds That Work Perfectly
                             </h3>
                             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                                <strong>Option 1: Quick Breaker Conversion.</strong> A licensed Oahu electrician can convert a dedicated 15A/20A breaker to 230V in under 1 hour.<br />
-                                <strong>Option 2: High-Power 115V LG Dual Inverter 12k.</strong> Our 12,000 BTU unit (LW1222IVSM) plugs into any normal wall outlet and pushes up to 550 sq. ft. of cooling!
+                                <strong>Option 1: Quick Breaker Conversion.</strong> A licensed Oahu electrical subcontractor can convert a dedicated 15A/20A breaker to 230V.<br />
+                                <strong>Option 2: High-Power 115V LG Dual Inverter (12k / 14k BTU).</strong> Our 12,000 BTU ($745) and 14,000 BTU ($785) Dual Inverters plug into any standard 115V wall outlet and cool up to 550–700 sq. ft. AHAM (380–450 sq. ft. Oahu)!
                             </p>
                         </div>
                         <div className="flex flex-col gap-3">
                             <Link
-                                href="/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm"
+                                href="/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm"
                                 className="px-6 py-3.5 rounded-xl bg-primary hover:bg-primary/90 text-white font-header font-black text-xs uppercase tracking-wider text-center transition-all"
                             >
-                                View 12,000 BTU 115V Champion
+                                View 14,000 BTU 115V Champion ($785)
                             </Link>
                             <a
                                 href="tel:808-488-1111"

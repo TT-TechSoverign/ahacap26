@@ -1,14 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Warehouse, Truck, ShoppingCart, Check, ArrowRight, Sparkles } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { Product } from '@/types/inventory';
-import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { generateProductSlug, isCampaignActive } from '@/lib/utils';
 import { trackFunnelEvent } from '@/lib/tracking';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
+import { getProductImages } from '@/lib/product-images';
 
 interface WindowAcQuickShopProps {
     cityName?: string;
@@ -24,50 +25,39 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
     const { addToCart, openCart } = useCart();
     const [addedId, setAddedId] = useState<number | null>(null);
     const isPromo = isCampaignActive();
-    const targetIds = modelIds && modelIds.length > 0 ? modelIds : DEFAULT_IDS;
+    const { inStockAcProducts, inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
 
-    const [units, setUnits] = useState<Product[]>(() =>
-        targetIds.map((id) => INITIAL_CATALOG_PRODUCTS.find((p) => p.id === id)!).filter(Boolean)
-    );
+    const units = useMemo(() => {
+        const targetIds = modelIds && modelIds.length > 0 ? modelIds : DEFAULT_IDS;
+        const byId = new Map<number, Product>(inStockAcProducts.map((p) => [p.id, p]));
+        const selected: Product[] = [];
+        const usedIds = new Set<number>();
 
-    useEffect(() => {
-        let isMounted = true;
-        fetch('/api/v1/products', { cache: 'no-store' })
-            .then((res) => (res.ok ? res.json() : null))
-            .then((liveProducts: Product[] | null) => {
-                if (!isMounted || !Array.isArray(liveProducts)) return;
-                const liveMap = new Map(liveProducts.map((p) => [p.id, p]));
-                const usedIds = new Set<number>();
+        for (const id of targetIds) {
+            const match = byId.get(id);
+            if (match && match.stock > 0 && (match.btu || 0) > 0) {
+                selected.push(match);
+                usedIds.add(match.id);
+                if (selected.length === 4) break;
+            }
+        }
 
-                const initialSelection = targetIds.map((id) => {
-                    const live = liveMap.get(id);
-                    const fallback = INITIAL_CATALOG_PRODUCTS.find((p) => p.id === id)!;
-                    const merged = live ? { ...fallback, ...live } : fallback;
-                    usedIds.add(merged.id);
-                    return merged;
-                }).filter(Boolean);
+        if (selected.length < 4) {
+            for (const candidate of inStockAcProducts) {
+                if (!usedIds.has(candidate.id) && candidate.stock > 0 && (candidate.btu || 0) > 0) {
+                    selected.push(candidate);
+                    usedIds.add(candidate.id);
+                    if (selected.length === 4) break;
+                }
+            }
+        }
 
-                const finalSelection = initialSelection.map((item) => {
-                    if (item.stock > 0) return item;
-                    const replacement = liveProducts.find((p) => p.stock > 0 && !usedIds.has(p.id));
-                    if (replacement) {
-                        usedIds.add(replacement.id);
-                        return replacement;
-                    }
-                    return item;
-                });
-
-                setUnits(finalSelection);
-            })
-            .catch(() => {});
-        return () => {
-            isMounted = false;
-        };
-    }, [modelIds]);
+        return selected;
+    }, [inStockAcProducts, modelIds]);
 
     const handleAdd = (product: Product) => {
         if (product.stock <= 0) return;
-        const activePrice = (isPromo && product.promo_price) ? product.promo_price : product.price;
+        const activePrice = isPromo && product.promo_price ? product.promo_price : product.price;
         trackFunnelEvent('add_to_cart_quick_shop', {
             product_id: product.id,
             product_name: product.name,
@@ -77,78 +67,32 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
         addToCart({
             ...product,
             price: activePrice,
-            image_url: product.image_url?.endsWith('.svg')
-                ? product.image_url.replace('.svg', '.webp')
-                : product.image_url,
+            image_url: getProductImages(product.id)[0] || product.image_url,
         });
         setAddedId(product.id);
         openCart();
         setTimeout(() => setAddedId(null), 2200);
     };
 
-    const resolvedHeading =
+    const rawHeading =
         title ||
         heading ||
         (cityName
             ? `In-Stock Window ACs Ready for ${cityName} Delivery or Pickup`
             : 'In-Stock Waipahu Window ACs — Order Online Now');
 
-    const resolvedSubheading =
+    const resolvedHeading = rawHeading.replace(/\$395[–-]\$1,025/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
+
+    const rawSubheading =
         subheading ||
         (cityName
-            ? `Skip big-box backorders. Order brand-new LG & GE Window ACs online for $50 flat delivery to ${cityName} or free pickup at our Waipahu warehouse (94-150 Leoleo St #203).`
-            : 'Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse. Free pickup by appointment or $50 flat island-wide Oahu delivery.');
+            ? `Order brand-new LG & GE Window ACs online for $50 flat delivery to ${cityName} or free pickup at our Waipahu warehouse (94-150 Leoleo St #203).`
+            : 'Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse. Free pickup by appointment or $50 flat Oahu delivery.');
 
-    const quickShopSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: resolvedHeading,
-        description: resolvedSubheading,
-        numberOfItems: units.length,
-        itemListElement: units.map((unit, idx) => {
-            const slug = generateProductSlug(unit.id, unit.name);
-            const activePrice = (isPromo && unit.promo_price) ? unit.promo_price : unit.price;
-            const imgSrc = unit.image_url?.endsWith('.svg')
-                ? unit.image_url.replace('.svg', '.webp')
-                : unit.image_url || '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp';
-            return {
-                '@type': 'ListItem',
-                position: idx + 1,
-                item: {
-                    '@type': 'Product',
-                    name: unit.key_spec && !unit.name.includes(unit.key_spec) ? `${unit.name} (${unit.key_spec})` : unit.name,
-                    sku: unit.key_spec || `AHAC-${unit.id}`,
-                    mpn: unit.key_spec || `AHAC-${unit.id}`,
-                    image: `https://www.affordablehome-ac.com${imgSrc}`,
-                    brand: {
-                        '@type': 'Brand',
-                        name: unit.name.startsWith('GE') ? 'GE' : 'LG',
-                    },
-                    offers: {
-                        '@type': 'Offer',
-                        url: `https://www.affordablehome-ac.com/shop/${slug}`,
-                        priceCurrency: 'USD',
-                        price: activePrice.toFixed(2),
-                        priceValidUntil: '2026-12-31',
-                        itemCondition: 'https://schema.org/NewCondition',
-                        availability: unit.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-                        seller: {
-                            '@type': 'HVACBusiness',
-                            name: 'Affordable Home A/C',
-                            telephone: '+1-808-488-1111',
-                        },
-                    },
-                },
-            };
-        }),
-    };
+    const resolvedSubheading = rawSubheading.replace(/\$395[–-]\$1,025/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
 
     return (
         <section className="py-12 px-4 sm:px-6 rounded-3xl bg-slate-900/70 border border-white/10 shadow-2xl my-12">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(quickShopSchema) }}
-            />
             <div className="max-w-7xl mx-auto space-y-8">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div className="space-y-2">
@@ -165,9 +109,10 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                     </div>
                     <Link
                         href="/shop"
+                        prefetch={false}
                         className="inline-flex items-center gap-2 self-start md:self-auto px-5 py-3 rounded-xl bg-primary/15 hover:bg-primary/25 border border-primary/40 text-primary font-header font-bold text-xs uppercase tracking-wider transition-all shrink-0"
                     >
-                        <span>View All 16 Models</span>
+                        <span>View All {inStockAcCount} In-Stock Models (${minPrice}–${maxPrice.toLocaleString()})</span>
                         <ArrowRight className="size-4" />
                     </Link>
                 </div>
@@ -175,12 +120,12 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     {units.map((unit) => {
                         const slug = generateProductSlug(unit.id, unit.name);
-                        const activePrice = (isPromo && unit.promo_price) ? unit.promo_price : unit.price;
-                        const isOutOfStock = unit.stock <= 0;
+                        const activePrice = isPromo && unit.promo_price ? unit.promo_price : unit.price;
                         const isAdded = addedId === unit.id;
-                        const imgSrc = unit.image_url?.endsWith('.svg')
-                            ? unit.image_url.replace('.svg', '.webp')
-                            : unit.image_url || '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp';
+                        const imgSrc =
+                            getProductImages(unit.id)[0] ||
+                            unit.image_url ||
+                            '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp';
 
                         return (
                             <div
@@ -199,6 +144,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
 
                                     <Link
                                         href={`/shop/${slug}`}
+                                        prefetch={false}
                                         className="relative block aspect-[16/10] w-full rounded-xl bg-slate-900/90 border border-white/5 overflow-hidden mb-3"
                                     >
                                         <Image
@@ -214,7 +160,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                     <div className="text-[10px] font-mono text-cyan-400 uppercase font-bold">
                                         {unit.btu?.toLocaleString()} BTU • {unit.coverage_oahu || 'Oahu Calibrated'}
                                     </div>
-                                    <Link href={`/shop/${slug}`}>
+                                    <Link href={`/shop/${slug}`} prefetch={false}>
                                         <h3 className="text-sm font-header font-black uppercase text-white mt-0.5 line-clamp-2 group-hover:text-primary transition-colors">
                                             {unit.name}
                                         </h3>
@@ -224,7 +170,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                 <div className="pt-3 mt-3 border-t border-white/10 space-y-2.5">
                                     <div className="flex items-baseline justify-between">
                                         <div>
-                                            <span className="text-xl font-header font-black text-white">${activePrice}</span>
+                                            <span className="text-xl font-header font-black text-white">${activePrice.toLocaleString()}</span>
                                             <span className="text-[10px] text-slate-400 ml-1">Waipahu Direct</span>
                                         </div>
                                         {unit.subcategory === 'dual_inverter' && (
@@ -237,18 +183,16 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                     <div className="grid grid-cols-2 gap-2">
                                         <Link
                                             href={`/shop/${slug}`}
+                                            prefetch={false}
                                             className="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 font-header font-bold text-[11px] uppercase tracking-wider text-center transition-colors"
                                         >
                                             Specs
                                         </Link>
                                         <button
                                             type="button"
-                                            disabled={isOutOfStock}
                                             onClick={() => handleAdd(unit)}
                                             className={`py-2.5 px-3 rounded-xl font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all ${
-                                                isOutOfStock
-                                                    ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                                                    : isAdded
+                                                isAdded
                                                     ? 'bg-emerald-500 text-slate-950'
                                                     : 'bg-primary hover:bg-cyan-300 text-slate-950 shadow-md shadow-primary/20'
                                             }`}
@@ -279,7 +223,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                     </span>
                     <span className="inline-flex items-center gap-1.5 text-slate-300">
                         <Truck className="size-3.5 text-cyan-400" />
-                        $50 Flat Island-Wide Oahu Delivery • US-Issued Cards Only
+                        $50 Flat Oahu Delivery • US-Issued Cards Only
                     </span>
                 </div>
             </div>

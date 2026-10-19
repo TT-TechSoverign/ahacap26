@@ -8,6 +8,7 @@ import logging
 import logging
 import sys
 import json
+import hmac
 
 # 0. Load Env Support
 load_dotenv()
@@ -107,8 +108,6 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",                 # Local frontend
-        "http://staging.affordablehome-ac.com",  # Staging frontend
-        "https://staging.affordablehome-ac.com", # Staging frontend HTTPS
         "http://affordablehome-ac.com",          # Live frontend
         "https://affordablehome-ac.com",         # Live frontend HTTPS
         "http://www.affordablehome-ac.com",      # Live frontend WWW
@@ -379,8 +378,8 @@ async def process_stripe_event(event: dict, payload_data: dict):
                                         "dimensions": p_obj.dimensions,
                                         "weight": p_obj.weight,
                                         "warranty": p_obj.warranty,
-                                        "promo_price": p_obj.promo_price,
-                                        "discount_percent": p_obj.discount_percent
+                                        "promo_price": None,
+                                        "discount_percent": None
                                     }
                                     persist_product_changes(p_dict)
                                     print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
@@ -486,14 +485,19 @@ async def admin_login(payload: dict, request: Request, db: AsyncSession = Depend
     if not await check_rate_limit(ip, "admin_login", limit=10, period=300):
         raise HTTPException(status_code=429, detail="Too many attempts. Please try again later.")
 
-    pin = payload.get("pin")
+    pin = str(payload.get("pin") or "").strip()
     if not pin:
         raise HTTPException(status_code=400, detail="Missing Access Code")
 
-    expected_pin = os.getenv("ADMIN_PIN", "8081")
-    expected_password = os.getenv("ADMIN_MASTER_PASSWORD", "AudreynKa!1523!!")
+    expected_pin = os.getenv("ADMIN_PIN", "").strip()
+    expected_password = os.getenv("ADMIN_MASTER_PASSWORD", "").strip()
+    expected_dev_os = os.getenv("DEV_OS_MASTER_PASSWORD", "").strip()
 
-    is_valid = (pin == expected_pin) or (pin == expected_password)
+    is_valid = (
+        (bool(expected_pin) and hmac.compare_digest(pin, expected_pin))
+        or (bool(expected_password) and hmac.compare_digest(pin, expected_password))
+        or (bool(expected_dev_os) and hmac.compare_digest(pin, expected_dev_os))
+    )
     if not is_valid:
         try:
             from routers.dev_os import log_dev_os_audit

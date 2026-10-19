@@ -21,9 +21,9 @@ def generate_receipt_pdf(order_id: str, items: list, total_cents: int, date: dat
     c.drawString(0.5*inch, height - 0.6*inch, "AFFORDABLE HOME A/C")
 
     c.setFont("Helvetica", 10)
-    c.drawString(0.5*inch, height - 0.9*inch, "94-1388 Moaniani St #202")
+    c.drawString(0.5*inch, height - 0.9*inch, "94-150 Leoleo St. #203")
     c.drawString(0.5*inch, height - 1.05*inch, "Waipahu, HI 96797")
-    c.drawString(0.5*inch, height - 1.2*inch, "Phone: (808) 555-0123")
+    c.drawString(0.5*inch, height - 1.2*inch, "Phone: (808) 488-1111 • License CT-36775")
 
     c.setFont("Helvetica-Bold", 16)
     c.drawRightString(width - 0.5*inch, height - 0.6*inch, "RECEIPT")
@@ -41,21 +41,24 @@ def generate_receipt_pdf(order_id: str, items: list, total_cents: int, date: dat
     # --- Table Data ---
     data = [["Item", "Qty", "Price", "Total"]]
     for item in items:
-        # Check if item is dict or object (depending on how it's passed)
-        name = item.get('name') if isinstance(item, dict) else item.name
-        qty = item.get('quantity', 1) if isinstance(item, dict) else item.quantity
-        price_cents = item.get('price', 0) if isinstance(item, dict) else item.price # Assuming price is passed or looked up?
-        # Wait, simple cart items might not have price. We should ideally pass fully hydrated items.
-        # For mock flow, we might need to trust what's passed or fetch.
-        # Let's assume passed items have 'name' and we can guess price or pass it.
-        # FIX: The endpoint will likely pass CartItems which effectively have ID.
-        # We'll just display Name and mock price if missing, or use Total / items count for rough.
-        # Better: Pass full details.
+        name = (item.get('name') or item.get('description') or 'AC Unit') if isinstance(item, dict) else getattr(item, 'name', 'AC Unit')
+        qty = int((item.get('quantity', 1) if isinstance(item, dict) else getattr(item, 'quantity', 1)) or 1)
+        raw_price = item.get('price') if isinstance(item, dict) else getattr(item, 'price', None)
+        amount_total = item.get('amount_total') if isinstance(item, dict) else getattr(item, 'amount_total', None)
 
-        # Determine price (Unit price = Total / Qty if single item? No.)
-        # Let's just put "-" if unknown or handle in caller.
-        unit_price = "$ - "
-        line_total = "$ - "
+        if amount_total is not None and amount_total > 0:
+            line_val = float(amount_total) / 100.0
+            unit_val = line_val / max(1, qty)
+            unit_price = f"${unit_val:,.2f}"
+            line_total = f"${line_val:,.2f}"
+        elif raw_price is not None and raw_price > 0:
+            unit_val = float(raw_price)
+            line_val = unit_val * qty
+            unit_price = f"${unit_val:,.2f}"
+            line_total = f"${line_val:,.2f}"
+        else:
+            unit_price = "$ - "
+            line_total = "$ - "
 
         data.append([name, str(qty), unit_price, line_total])
 
@@ -86,8 +89,8 @@ def generate_receipt_pdf(order_id: str, items: list, total_cents: int, date: dat
     # --- Footer ---
     c.setFillColor(colors.HexColor("#64748b"))
     c.setFont("Helvetica", 9)
-    c.drawCentredString(width/2, 1*inch, "Thank you for your business!")
-    c.drawCentredString(width/2, 0.85*inch, "If you have any questions, please contact us at support@affordablehome-ac.com")
+    c.drawCentredString(width/2, 1*inch, "Thank you for your business! • Hawaii Contractor License CT-36775")
+    c.drawCentredString(width/2, 0.85*inch, "Questions? Contact Waipahu Dispatch at (808) 488-1111 or office@affordablehome-ac.com")
 
     c.showPage()
     c.save()

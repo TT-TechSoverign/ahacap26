@@ -130,8 +130,6 @@ function ProductPageSkeleton() {
 // High-Performance 3D Card Tilt utilizing Motion Values to bypass the React reconciliation loop
 function TiltCard({ children, isPromo, isTouchDevice }: { children: React.ReactNode; isPromo: boolean; isTouchDevice: boolean }) {
     const cardRef = useRef<HTMLDivElement>(null);
-    const [isHovered, setIsHovered] = useState(false);
-    const [sparks, setSparks] = useState<{ id: number; left: string; delay: string; duration: string; drift: string; color: string }[]>([]);
     
     const x = useMotionValue(0.5);
     const y = useMotionValue(0.5);
@@ -143,21 +141,6 @@ function TiltCard({ children, isPromo, isTouchDevice }: { children: React.ReactN
     const glareY = useSpring(useTransform(y, [0, 1], [0, 100]), { damping: 25, stiffness: 120 });
     const glareOpacity = useSpring(useTransform(x, [0, 1], [0, 0.15]), { damping: 25, stiffness: 120 });
 
-    useEffect(() => {
-        if (isPromo) {
-            const colors = ['#EF4444', '#FFFFFF', '#3B82F6'];
-            const list = Array.from({ length: 8 }).map((_, i) => ({
-                id: i,
-                left: `${15 + Math.random() * 70}%`,
-                delay: `${Math.random() * -3}s`,
-                duration: `${1.5 + Math.random() * 2}s`,
-                drift: `${(Math.random() - 0.5) * 60}px`,
-                color: colors[i % colors.length]
-            }));
-            setSparks(list);
-        }
-    }, [isPromo]);
-
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (isTouchDevice || !cardRef.current) return;
         const rect = cardRef.current.getBoundingClientRect();
@@ -165,13 +148,7 @@ function TiltCard({ children, isPromo, isTouchDevice }: { children: React.ReactN
         y.set((e.clientY - rect.top) / rect.height);
     };
 
-    const handleMouseEnter = () => {
-        if (isTouchDevice) return;
-        setIsHovered(true);
-    };
-
     const handleMouseLeave = () => {
-        setIsHovered(false);
         x.set(0.5);
         y.set(0.5);
     };
@@ -180,7 +157,6 @@ function TiltCard({ children, isPromo, isTouchDevice }: { children: React.ReactN
         <motion.div
             ref={cardRef}
             onMouseMove={handleMouseMove}
-            onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={{ 
                 rotateX, 
@@ -188,25 +164,8 @@ function TiltCard({ children, isPromo, isTouchDevice }: { children: React.ReactN
                 transformStyle: 'preserve-3d',
                 perspective: '1000px'
             }}
-            className={cn(
-                "aspect-square bg-surface-dark rounded-[2rem] relative overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.6)] flex items-center justify-center p-6 lg:p-8 card-hover-trigger transition-all duration-700 border border-border-dark",
-                isPromo ? "animate-patriotic-glow" : "ring-1 ring-white/5"
-            )}
+            className="aspect-square bg-surface-dark rounded-[2rem] relative overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.6)] flex items-center justify-center p-6 lg:p-8 card-hover-trigger transition-all duration-700 border border-border-dark ring-1 ring-white/5"
         >
-            {/* Liquid Neon Cursor-Follow Glow */}
-            {isPromo && isHovered && !isTouchDevice && (
-                <div 
-                    className="absolute inset-[-1px] rounded-[2rem] pointer-events-none z-0"
-                    style={{
-                        background: `radial-gradient(circle 150px at ${x.get() * 400}px ${y.get() * 400}px, rgba(239, 68, 68, 0.8), rgba(255, 255, 255, 0.5), rgba(59, 130, 246, 0.8), transparent 70%)`,
-                        padding: '1px',
-                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                        WebkitMaskComposite: 'xor',
-                        maskComposite: 'exclude'
-                    }}
-                />
-            )}
-
             {/* 3D Reflective Glare Overlay */}
             <motion.div
                 style={{
@@ -219,47 +178,13 @@ function TiltCard({ children, isPromo, isTouchDevice }: { children: React.ReactN
                 className="absolute inset-0 pointer-events-none z-20"
             />
 
-            {/* Micro-Spark Cascade (Hover Particle Effect) */}
-            {isPromo && isHovered && !isTouchDevice && (
-                <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
-                    {sparks.map(spark => (
-                        <div
-                            key={spark.id}
-                            className="absolute w-1 h-1 rounded-full animate-spark"
-                            style={{
-                                left: spark.left,
-                                top: '-5px',
-                                backgroundColor: spark.color,
-                                boxShadow: `0 0 6px ${spark.color}`,
-                                animationDelay: spark.delay,
-                                animationDuration: spark.duration,
-                                '--drift-x': spark.drift,
-                                opacity: 0.8
-                            } as any}
-                        />
-                    ))}
-                </div>
-            )}
-
             <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent z-10"></div>
 
             {/* Radial Highlights */}
             <div className="absolute -left-20 -top-20 w-[300px] h-[300px] bg-primary/20 rounded-full blur-[100px] pointer-events-none z-0"></div>
             <div className="absolute -right-20 -bottom-20 w-[300px] h-[300px] bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
 
-            {/* Patriotic radial glow behind promo product images */}
-            {isPromo && (
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08)_0%,rgba(59,130,246,0.08)_60%,transparent_100%)] opacity-80 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-0"></div>
-            )}
-
             {children}
-
-            {/* Celebrating America Badge Overlay on Main Image */}
-            {isPromo && (
-                <div className="absolute bottom-0 left-0 z-20 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 text-white font-header font-black text-[9px] sm:text-[10px] md:text-[11px] px-3 py-2 sm:px-4 sm:py-2.5 rounded-tr-2xl uppercase tracking-[0.2em] shadow-lg border-t border-r border-white/10 animate-pulse-slow">
-                    🇺🇸 CELEBRATING AMERICA 10% OFF
-                </div>
-            )}
         </motion.div>
     );
 }
@@ -280,6 +205,7 @@ export default function ProductDetailPage() {
     const { addToCart, openCart } = useCart();
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isSpecModalOpen, setIsSpecModalOpen] = useState(false);
+    const [isPurchaseBarSticky, setIsPurchaseBarSticky] = useState(false);
     
     const [mounted, setMounted] = useState(false);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -292,6 +218,21 @@ export default function ProductDetailPage() {
             window.matchMedia('(pointer: coarse)').matches
         );
     }, []);
+
+    useEffect(() => {
+        if (typeof window === 'undefined' || loading) return;
+        const targetEl = document.getElementById('product-purchase-section');
+        if (!targetEl) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsPurchaseBarSticky(!entry.isIntersecting);
+            },
+            { threshold: 0.1 }
+        );
+        observer.observe(targetEl);
+        return () => observer.disconnect();
+    }, [loading, product?.id]);
 
     useEffect(() => {
         async function fetchProduct() {
@@ -576,27 +517,6 @@ export default function ProductDetailPage() {
                             )}
                         </TiltCard>
 
-                        {/* Encapsulated micro-spark animation styles */}
-                        <style jsx global>{`
-                            @keyframes spark-fall {
-                                0% {
-                                    transform: translateY(-20px) translateX(0) scale(1);
-                                    opacity: 1;
-                                }
-                                50% {
-                                    transform: translateY(150px) translateX(var(--drift-x)) scale(0.8);
-                                    opacity: 0.8;
-                                }
-                                100% {
-                                    transform: translateY(300px) translateX(calc(var(--drift-x) * 2)) scale(0.4);
-                                    opacity: 0;
-                                }
-                            }
-                            .animate-spark {
-                                animation: spark-fall var(--fall-duration, 2.5s) linear infinite;
-                            }
-                        `}</style>
-
                         {/* Mode-Dependent Sub-Bar */}
                         {mediaView === 'cutaway' ? (
                             <div className="space-y-3">
@@ -650,11 +570,6 @@ export default function ProductDetailPage() {
                                 <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-md text-primary text-[8px] font-header font-black uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(0,174,239,0.1)]">
                                     {product.id === 16 ? '26" STRUCTURAL WALL SLEEVE' : isWallSleeve ? 'BUILT-IN WALL SLEEVE AC' : product.category.replace('_', ' ')}
                                 </span>
-                                {isPromo && (
-                                    <span className="px-3 py-1 bg-gradient-to-r from-red-600 via-slate-900 to-blue-600 border border-white/10 rounded-md text-white text-[10px] md:text-[11px] font-header font-black uppercase tracking-[0.2em] shadow-lg animate-pulse-slow">
-                                        🇺🇸 CELEBRATING AMERICA 10% OFF
-                                    </span>
-                                )}
                             </div>
 
                             {/* Stock Badge - Dynamic status */}
@@ -1315,58 +1230,144 @@ export default function ProductDetailPage() {
                 </div>
             )}
 
-            {/* Mobile Floating Quick-Action Dock (Fixed Bottom on Mobile Viewports) */}
+            {/* Mobile & Desktop Sticky Product Purchase Bar */}
             {product && (
-                <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur-lg border-t border-cyan-500/20 px-3.5 py-2.5 shadow-2xl flex items-center justify-between gap-2.5">
-                    <div className="flex flex-col min-w-0 pr-1">
-                        <span className="text-[10px] font-mono text-slate-400 truncate max-w-[110px]">
-                            {product.name}
-                        </span>
-                        <span className="text-base font-header font-black text-cyan-400">
-                            ${((isPromo && product.promo_price) ? product.promo_price : product.price).toLocaleString()}
-                        </span>
-                    </div>
-                    <div className="flex items-center gap-2 grow justify-end">
-                        {product.stock > 0 ? (
-                            <button
-                                onClick={() => {
-                                    addToCart(product);
-                                    openCart();
-                                }}
-                                className="h-11 px-3.5 bg-gradient-to-r from-primary to-cyan-500 text-white font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-lg active:scale-95 flex items-center justify-center gap-1.5 grow max-w-[150px]"
+                <>
+                    {/* Mobile Dock (Pinned Bottom on Mobile Viewports) */}
+                    <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur-lg border-t border-cyan-500/20 px-3.5 py-2.5 shadow-2xl flex items-center justify-between gap-2.5">
+                        <div className="flex flex-col min-w-0 pr-1">
+                            <span className="text-[10px] font-mono text-slate-400 truncate max-w-[110px]">
+                                {product.name}
+                            </span>
+                            <span className="text-base font-header font-black text-cyan-400">
+                                ${((isPromo && product.promo_price) ? product.promo_price : product.price).toLocaleString()}
+                            </span>
+                        </div>
+                        <div className="flex items-center gap-2 grow justify-end">
+                            {product.stock > 0 ? (
+                                <button
+                                    onClick={() => {
+                                        addToCart(product);
+                                        openCart();
+                                    }}
+                                    className="h-11 px-3.5 bg-gradient-to-r from-primary to-cyan-500 text-white font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-lg active:scale-95 flex items-center justify-center gap-1.5 grow max-w-[150px]"
+                                >
+                                    <ShoppingCart className="size-4 shrink-0" />
+                                    <span>Buy Now</span>
+                                </button>
+                            ) : (
+                                (() => {
+                                    const primaryAltId = product.id === 2 ? 3 : (product.id === 7 || product.id === 10) ? 6 : product.id === 14 ? 15 : 4;
+                                    const primaryAlt = INITIAL_CATALOG_PRODUCTS.find(p => p.id === primaryAltId);
+                                    return primaryAlt ? (
+                                        <Link
+                                            href={`/shop/${generateProductSlug(primaryAlt.id, primaryAlt.name)}`}
+                                            className="h-11 px-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider rounded-xl shadow-lg active:scale-95 flex items-center justify-center gap-1 grow max-w-[155px]"
+                                        >
+                                            <span>In-Stock Alt &rarr;</span>
+                                        </Link>
+                                    ) : null;
+                                })()
+                            )}
+                            <Link
+                                href={`/contact?service=window_ac_purchase&notes=Inquiry%20for%20${encodeURIComponent(product.name)}`}
+                                className="h-11 px-3 bg-slate-900 border border-cyan-500/40 text-cyan-300 font-header font-bold text-xs uppercase tracking-wider rounded-xl active:scale-95 flex items-center justify-center gap-1 shrink-0"
                             >
-                                <ShoppingCart className="size-4 shrink-0" />
-                                <span>Buy Now</span>
-                            </button>
-                        ) : (
-                            (() => {
-                                const primaryAltId = product.id === 2 ? 3 : (product.id === 7 || product.id === 10) ? 6 : product.id === 14 ? 15 : 4;
-                                const primaryAlt = INITIAL_CATALOG_PRODUCTS.find(p => p.id === primaryAltId);
-                                return primaryAlt ? (
-                                    <Link
-                                        href={`/shop/${generateProductSlug(primaryAlt.id, primaryAlt.name)}`}
-                                        className="h-11 px-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider rounded-xl shadow-lg active:scale-95 flex items-center justify-center gap-1 grow max-w-[155px]"
-                                    >
-                                        <span>In-Stock Alt &rarr;</span>
-                                    </Link>
-                                ) : null;
-                            })()
-                        )}
-                        <Link
-                            href={`/contact?service=window_ac_purchase&notes=Inquiry%20for%20${encodeURIComponent(product.name)}`}
-                            className="h-11 px-3 bg-slate-900 border border-cyan-500/40 text-cyan-300 font-header font-bold text-xs uppercase tracking-wider rounded-xl active:scale-95 flex items-center justify-center gap-1 shrink-0"
-                        >
-                            <span>$0 Estimate</span>
-                        </Link>
-                        <a
-                            href="tel:808-488-1111"
-                            className="h-11 w-11 shrink-0 bg-slate-800 border border-white/10 text-white rounded-xl flex items-center justify-center active:scale-95"
-                            aria-label="Call Waipahu Warehouse Dispatch"
-                        >
-                            <Phone className="size-4 text-cyan-400" />
-                        </a>
+                                <span>$0 Estimate</span>
+                            </Link>
+                            <a
+                                href="tel:808-488-1111"
+                                className="h-11 w-11 shrink-0 bg-slate-800 border border-white/10 text-white rounded-xl flex items-center justify-center active:scale-95"
+                                aria-label="Call Waipahu Warehouse Dispatch"
+                            >
+                                <Phone className="size-4 text-cyan-400" />
+                            </a>
+                        </div>
                     </div>
-                </div>
+
+                    {/* Desktop Sticky Purchase Bar (Slides in smoothly when #product-purchase-section scrolls out of view) */}
+                    <div
+                        className={cn(
+                            "hidden md:block fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur-xl border-t border-cyan-500/25 shadow-[0_-15px_40px_rgba(0,0,0,0.75)] transition-all duration-300",
+                            isPurchaseBarSticky
+                                ? "translate-y-0 opacity-100"
+                                : "translate-y-full opacity-0 pointer-events-none"
+                        )}
+                    >
+                        <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between gap-6">
+                            <div className="flex items-center gap-4 min-w-0">
+                                {productImages[0] && (
+                                    <div className="relative w-12 h-12 rounded-xl bg-slate-900 border border-white/10 overflow-hidden shrink-0">
+                                        <Image src={productImages[0]} alt={product.name} fill className="object-contain p-1" unoptimized />
+                                    </div>
+                                )}
+                                <div className="min-w-0 text-left">
+                                    <div className="flex items-center gap-2.5">
+                                        <span className="font-header font-black text-white text-sm uppercase tracking-tight truncate">
+                                            {product.name}
+                                        </span>
+                                        <StockBadge stock={product.stock} />
+                                    </div>
+                                    <div className="text-[11px] font-mono text-slate-400 flex items-center gap-3 mt-0.5">
+                                        <span>{specs?.coolingAreaOahu} (Island)</span>
+                                        <span>•</span>
+                                        <span>{specs?.voltage}</span>
+                                        <span>•</span>
+                                        <span className="text-emerald-400">Free Waipahu Pickup or $50 Delivery</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-3 shrink-0">
+                                <div className="text-right pr-2">
+                                    <div className="text-[9px] font-mono uppercase tracking-widest text-slate-400">Warehouse Direct</div>
+                                    <div className="text-2xl font-header font-black text-cyan-400 leading-none">
+                                        ${((isPromo && product.promo_price) ? product.promo_price : product.price).toLocaleString()}
+                                    </div>
+                                </div>
+                                {product.stock > 0 ? (
+                                    <button
+                                        onClick={() => {
+                                            addToCart(product);
+                                            openCart();
+                                        }}
+                                        className="h-11 px-6 bg-gradient-to-r from-primary to-cyan-500 hover:from-cyan-400 hover:to-primary text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_25px_rgba(0,174,239,0.35)] active:scale-95 transition-all flex items-center gap-2"
+                                    >
+                                        <ShoppingCart className="size-4 shrink-0" />
+                                        <span>Buy Now & Pick Up</span>
+                                    </button>
+                                ) : (
+                                    (() => {
+                                        const primaryAltId = product.id === 2 ? 3 : (product.id === 7 || product.id === 10) ? 6 : product.id === 14 ? 15 : 4;
+                                        const primaryAlt = INITIAL_CATALOG_PRODUCTS.find(p => p.id === primaryAltId);
+                                        return primaryAlt ? (
+                                            <Link
+                                                href={`/shop/${generateProductSlug(primaryAlt.id, primaryAlt.name)}`}
+                                                className="h-11 px-5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-lg active:scale-95 transition-all flex items-center gap-1.5"
+                                            >
+                                                <span>View In-Stock Alternative (${primaryAlt.price}) &rarr;</span>
+                                            </Link>
+                                        ) : null;
+                                    })()
+                                )}
+                                <Link
+                                    href={`/contact?service=window_ac_purchase&notes=Inquiry%20for%20${encodeURIComponent(product.name)}`}
+                                    className="h-11 px-4 bg-slate-900 hover:bg-slate-800 border border-cyan-500/40 text-cyan-300 hover:text-white font-header font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5"
+                                >
+                                    <Calendar className="size-3.5 text-cyan-400" />
+                                    <span>$0 Fit Estimate</span>
+                                </Link>
+                                <a
+                                    href="tel:808-488-1111"
+                                    className="h-11 px-4 bg-slate-800 hover:bg-slate-700 border border-white/10 text-white font-header font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5"
+                                >
+                                    <Phone className="size-3.5 text-cyan-400" />
+                                    <span>(808) 488-1111</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </>
             )}
         </div>
     );

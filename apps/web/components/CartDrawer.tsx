@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import { isCampaignActive } from '../lib/utils';
+import { getProductImages } from '../lib/product-images';
 import { ShoppingCart, X, Snowflake, AlertCircle, Warehouse, Trash2, AlertTriangle, Loader2, Lock, Phone, Calendar } from 'lucide-react';
 
 function cn(...inputs: (string | undefined)[]) {
@@ -167,7 +168,7 @@ export default function CartDrawer() {
                             ) : (
                                 <AnimatePresence mode="popLayout">
                                     {items.map((item) => {
-                                        const thumbSrc = (item.image_url || '/assets/products/ac-1.webp').replace(/\.(png|jpg|jpeg)$/i, '.webp');
+                                        const thumbSrc = (item.image_url || getProductImages(item.id)?.[0] || '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp').replace(/\.(png|jpg|jpeg)$/i, '.webp');
                                         return (
                                         <motion.div
                                             key={item.id}

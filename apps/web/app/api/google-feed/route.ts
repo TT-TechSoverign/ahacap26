@@ -35,7 +35,7 @@ export async function GET() {
       // Fallback to INITIAL_CATALOG_PRODUCTS
     }
 
-    const domain = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.affordablehome-ac.com';
+    const domain = process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.affordablehome-ac.com';
 
     const xmlItems = products.map((product: Product) => {
       const availability = product.stock > 0 ? 'in_stock' : 'out_of_stock';
@@ -192,6 +192,7 @@ export async function GET() {
           <g:identifier_exists>${(gtin || mpn) ? 'yes' : 'no'}</g:identifier_exists>
           ${itemGroupIdXml}
           ${shippingWeight}
+          <g:ships_from_country>US</g:ships_from_country>
           <g:shipping>
             <g:country>US</g:country>
             <g:region>HI</g:region>
@@ -223,7 +224,7 @@ export async function GET() {
     return new NextResponse(xmlFeed, {
       headers: { 
         'Content-Type': 'application/xml; charset=utf-8', 
-        'Cache-Control': 'public, max-age=300, s-maxage=300, stale-while-revalidate=600' 
+        'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400' 
       },
     });
   } catch (error) {

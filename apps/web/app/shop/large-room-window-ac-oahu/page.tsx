@@ -34,9 +34,9 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 const INITIAL_UNIT_18K: Product = {
     id: 6,
     name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
-    price: 865,
-    promo_price: 778,
-    stock: 20,
+    price: 925,
+    promo_price: null,
+    stock: 5,
     category: "WINDOW_AC",
     subcategory: "dual_inverter",
     btu: 18000,
@@ -55,9 +55,9 @@ const INITIAL_UNIT_18K: Product = {
 const INITIAL_UNIT_23K: Product = {
     id: 7,
     name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-    price: 985,
-    promo_price: 886,
-    stock: 0,
+    price: 1025,
+    promo_price: null,
+    stock: 15,
     category: "WINDOW_AC",
     subcategory: "dual_inverter",
     btu: 23500,
@@ -135,7 +135,7 @@ export default function LargeRoomWindowAcPage() {
     const faqItems = [
         {
             q: "How does installing an 18k or 23.5k window AC save $4,000–$6,000 vs a mini-split?",
-            a: "A multi-zone 18k to 24k ductless mini-split system on Oahu typically costs $5,500 to $8,500 installed, requiring high-voltage electrical line pulls, wall penetrations, and refrigerant line brazing. An in-stock LG Dual Inverter 18k ($865) or 23.5k ($985) delivers equal or greater cooling volume with 500 CFM air throw, cooling entire living areas and high-ceiling spaces at a fraction of the cost."
+            a: "A multi-zone 18k to 24k ductless mini-split system on Oahu typically costs $5,500 to $8,500 installed, requiring high-voltage electrical line pulls, wall penetrations, and refrigerant line brazing. An in-stock LG Dual Inverter 18k ($925) or 23.5k ($1,025) delivers equal or greater cooling volume with 500 CFM air throw, cooling entire living areas and high-ceiling spaces at a fraction of the cost."
         },
         {
             q: "What type of electrical outlet do the 18,000 and 23,500 BTU units require?",
@@ -147,7 +147,7 @@ export default function LargeRoomWindowAcPage() {
         },
         {
             q: "How fast can I get one of these units on Oahu?",
-            a: "Our 18,000 BTU models are in stock now at our Waipahu Central Warehouse (94-150 Leoleo St. #203). You can select Free Waipahu Warehouse Pickup (by appointment, subject to scheduling & inventory availability) OR $50 Flat Island-Wide Delivery directly to your doorstep across all 22 Oahu municipalities."
+            a: "Our 18,000 BTU and 23,500 BTU models are in stock now at our Waipahu Central Warehouse (94-150 Leoleo St. #203). You can select Free Waipahu Warehouse Pickup (by appointment, subject to scheduling & inventory availability) OR $50 Flat Delivery across Honolulu, Metro, Central, Windward, and West Oahu."
         },
         {
             q: "Do these high-capacity models qualify for the Hawaii Energy cash rebate?",
@@ -297,7 +297,7 @@ export default function LargeRoomWindowAcPage() {
                                 <DollarSign className="size-4" /> The Oahu Open-Concept Cost Reality
                             </div>
                             <h2 className="text-xl sm:text-2xl font-header font-black uppercase text-white">
-                                Why Spend $6,500+ When You Can Cool Your Living Room for Under $985?
+                                Why Spend $6,500+ When You Can Cool Your Living Room for $925–$1,025?
                             </h2>
                             <p className="text-slate-300 text-sm leading-relaxed">
                                 Standard ductless mini-splits for an open floor plan cost thousands in electrical panel upgrades, line sets, and installation labor. Our heavy-duty 18,000 &amp; 23,500 BTU LG Dual Inverters pull 4.2 to 5.6 pints of moisture per hour, circulate air up to 40 feet, and slash cooling energy by up to 40% under Hawaiian Electric&apos;s ~44.2¢/kWh baseline.
@@ -461,7 +461,7 @@ export default function LargeRoomWindowAcPage() {
                                 {isOutOfStock ? (
                                     <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-3">
                                         <div className="text-xs font-mono font-bold text-amber-300 uppercase">
-                                            ⚡ 23,500 BTU Sold Out — Pick Up an In-Stock Heavy-Duty Unit Today:
+                                            ⚡ Temporarily Sold Out — Pick Up an In-Stock Heavy-Duty Unit Today:
                                         </div>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                             <button
@@ -473,12 +473,12 @@ export default function LargeRoomWindowAcPage() {
                                                 <div className="text-xs font-mono text-cyan-400 font-bold mt-1">${(isPromo && unit18k.promo_price) ? unit18k.promo_price : unit18k.price} • Switch to 18k →</div>
                                             </button>
                                             <Link
-                                                href="/shop/10-lg-23-000-btu-lw2423hrsm"
+                                                href="/shop/9-lg-18-000-btu-lw1823hrsm"
                                                 className="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/40 hover:border-cyan-400 text-left transition-all block"
                                             >
-                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">4 In Stock • 23,500 BTU</div>
-                                                <div className="text-xs font-bold text-white mt-0.5">LG 23,500 BTU Cool+Heat Inverter</div>
-                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$1,025 • View Unit →</div>
+                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">10 In Stock • 18,000 BTU</div>
+                                                <div className="text-xs font-bold text-white mt-0.5">LG 18,000 BTU Cool+Heat Unit</div>
+                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$925 • View Unit →</div>
                                             </Link>
                                         </div>
                                     </div>
@@ -575,7 +575,7 @@ export default function LargeRoomWindowAcPage() {
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Waipahu Warehouse Stock</td>
                                 <td className="py-3 px-4 text-emerald-400 font-bold">{unit18k.stock > 0 ? `${unit18k.stock} Units Available` : 'Sold Out'}</td>
-                                <td className={`py-3 px-4 font-bold ${unit23k.stock > 0 ? 'text-emerald-400' : 'text-rose-400'}`}>{unit23k.stock > 0 ? `${unit23k.stock} Units Available` : 'Sold Out (23.5k Cool+Heat In Stock)'}</td>
+                                <td className={`py-3 px-4 font-bold ${unit23k.stock > 0 ? 'text-emerald-400' : 'text-rose-400'}`}>{unit23k.stock > 0 ? `${unit23k.stock} Units Available` : 'Sold Out (18k In Stock)'}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -616,7 +616,7 @@ export default function LargeRoomWindowAcPage() {
                         Ready for Heavy-Duty Cooling in Your Oahu Home?
                     </h4>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
-                        Pick up your unit today at our Waipahu warehouse (by appointment) or have it delivered anywhere on Oahu for $50 flat.
+                        Pick up your unit today at our Waipahu warehouse (by appointment) or have it delivered across Honolulu, Metro, Central, Windward, and West Oahu for $50 flat.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <button
@@ -635,7 +635,7 @@ export default function LargeRoomWindowAcPage() {
                     </div>
                 </div>
                             <WindowAcQuickShop
-                    modelIds={[6, 10, 5, 4]}
+                    modelIds={[6, 7, 5, 4]}
                     title="In-Stock High-Capacity Window ACs (12,000 – 23,500 BTU)"
                     subheading="Heavy-duty LG Dual Inverter units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
                 />

@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Oahu AC Repair & HVAC Service Areas | Affordable Home A/C',
+        absolute: '22 Oahu AC Service Areas | In-Stock Window ACs ($395+) & $0 Mini-Split Estimate | Affordable Home A/C',
     },
-    description: 'Affordable Home A/C serves all of Oahu with expert AC repair, split AC installation, and window AC cleaning. View our service areas from Honolulu to Waipahu.',
+    description: 'Affordable Home A/C serves 22 Oahu communities with in-stock LG & GE Window ACs ($395–$1,200), ductless mini-split installation ($0 Free Estimate), mini-split deep cleaning, and AC repair. Lic #CT-36775 • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/service-areas',
     },
     openGraph: {
-        title: 'Oahu AC Repair & HVAC Service Areas | Affordable Home A/C',
-        description: 'Affordable Home A/C serves all of Oahu with expert AC repair, split AC installation, and window AC cleaning. View our service areas from Honolulu to Waipahu.',
+        title: '22 Oahu AC Service Areas | In-Stock Window ACs ($395+) & $0 Mini-Split Estimate | Affordable Home A/C',
+        description: 'Affordable Home A/C serves 22 Oahu communities with in-stock LG & GE Window ACs ($395–$1,200), ductless mini-split installation ($0 Free Estimate), mini-split deep cleaning, and AC repair. Lic #CT-36775 • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/service-areas',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Oahu AC Repair & HVAC Service Areas | Affordable Home A/C',
-        description: 'Affordable Home A/C serves all of Oahu with expert AC repair, split AC installation, and window AC cleaning. View our service areas from Honolulu to Waipahu.',
+        title: '22 Oahu AC Service Areas | In-Stock Window ACs ($395+) & $0 Mini-Split Estimate | Affordable Home A/C',
+        description: 'Affordable Home A/C serves 22 Oahu communities with in-stock LG & GE Window ACs ($395–$1,200), ductless mini-split installation ($0 Free Estimate), mini-split deep cleaning, and AC repair. Lic #CT-36775 • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

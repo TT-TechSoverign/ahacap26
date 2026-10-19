@@ -74,10 +74,10 @@ async def verify_dev_os_session(request: Request):
     # 1. Check direct Master Key header (Local-to-Server Bridge)
     master_key_header = request.headers.get("X-Dev-OS-Key")
     if master_key_header:
-        expected_pwd = os.getenv("DEV_OS_MASTER_PASSWORD", "AhacMasterKey2026!Secured").strip()
-        admin_pin = os.getenv("ADMIN_PIN", "8081").strip()
+        expected_pwd = os.getenv("DEV_OS_MASTER_PASSWORD", "").strip()
+        admin_pin = os.getenv("ADMIN_PIN", "").strip()
         key_strip = master_key_header.strip()
-        if hmac.compare_digest(key_strip, expected_pwd) or hmac.compare_digest(key_strip, admin_pin):
+        if (expected_pwd and hmac.compare_digest(key_strip, expected_pwd)) or (admin_pin and hmac.compare_digest(key_strip, admin_pin)):
             return "dev_os_master:irasmussenjobs@gmail.com"
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

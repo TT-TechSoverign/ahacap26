@@ -64,7 +64,7 @@ ahacws26/ (Project Root)
 │   │   │   └── sopsData.ts                    # 50 Visual SOP dossiers & agent instruction data
 │   │   └── public/                            # Static cockpit assets
 │   │
-│   └── web/                                   # Customer-Facing Storefront & Conversion Surfaces (116 Routes)
+│   └── web/                                   # Customer-Facing Storefront & Conversion Surfaces (110 Routes)
 │       ├── Dockerfile                         # Next.js 14 App Router production runner
 │       ├── app/
 │       │   ├── page.tsx                       # High-converting homepage & live stock-synced featured inventory
@@ -80,7 +80,7 @@ ahacws26/ (Project Root)
 │       │   ├── service-areas/                 # 22 Oahu city landing pages with localized JSON-LD
 │       │   ├── contact/                       # "By Appointment First" customer booking intake
 │       │   ├── checkout/                      # Direct Stripe checkout bridge
-│       │   └── sitemap.ts                     # XML Sitemap generator for all 116 indexed routes
+│       │   └── sitemap.ts                     # XML Sitemap generator for all 110 indexed routes
 │       ├── components/                        # Tree-shaken UI components (Lucide React, Tailwind CSS)
 │       │   ├── MiniSplitEstimator.tsx         # Multi-step zone calculator & panel load intake
 │       │   ├── ReviewsPavilion.tsx            # 3-column full-width verified Oahu reviews showcase
@@ -200,18 +200,18 @@ graph TD
 | 10 | `agent_cro_optimizer` | Commerce & Telemetry | Zero-upfront booking velocity, Waipahu pickup, mobile CRO | `SOP-COM-02` |
 | 11 | `agent_revenue_reconciler` | Commerce & Telemetry | Stripe order reconciliation, 4.712% Oahu GET tax, invoice balance guards | `SOP-COM-03` |
 | 12 | `agent_catalog_auditor` | Commerce & Telemetry | 16/16 model spec drift, 16/16 factory PDFs, live DB stock sync | `SOP-COM-04` |
-| 13 | `agent_seo_metadata` | Growth & Grounding | 116-route XML sitemap, canonical URLs, robots.txt, SERP tags | `SOP-GRO-01` |
+| 13 | `agent_seo_metadata` | Growth & Grounding | 110-route XML sitemap, canonical URLs, robots.txt, SERP tags | `SOP-GRO-01` |
 | 14 | `agent_oahu_grounding` | Growth & Grounding | HECO ~44.2¢/kWh rates, $0 Free In-Home Estimates, CT-36775 | `SOP-GRO-02` |
 | 15 | `agent_market_research` | Growth & Grounding | Island competitor benchmarks & Waipahu warehouse pickup edge | `SOP-GRO-03` |
 | 16 | `agent_heco_rebate_strategist`| Growth & Grounding | HECO ~44.2¢/kWh ROI & $45 Hawaii Energy window AC rebate PDF | `SOP-GRO-04` |
 | 17 | `agent_gsc_ga4_analytics` | Growth & Grounding | GSC query clustering, CTR gaps, GA4 stage drop-off telemetry | `SOP-GRO-05` |
 | 18 | `agent_schema_metadata_engine`| Growth & Grounding | JSON-LD schema audits (Product, FAQPage, HVACBusiness, HowTo) | `SOP-GRO-06` |
-| 19 | `agent_high_intent_planner` | Growth & Grounding | 116-route high-intent SEO footprint & cross-funnel bridges | `SOP-GRO-07` |
+| 19 | `agent_high_intent_planner` | Growth & Grounding | 110-route high-intent SEO footprint & cross-funnel bridges | `SOP-GRO-07` |
 | 20 | `agent_crm_dispatch` | CRM Operations | "By Appointment First" lead intake & Waipahu pickup dispatch | `SOP-CRM-01` |
 | 21 | `agent_customer_lifecycle` | CRM Operations | Annual window AC / biannual mini-split salt-air recall triggers | `SOP-CRM-02` |
 | 22 | `agent_intake_triage` | CRM Operations | Mini-split diagnostic/flush vs Window AC clean-vs-replace triage | `SOP-CRM-03` |
 | 23 | `agent_deployment_guardian` | Deployment Quality | Blue/green container rebuilds, zero-downtime Nginx reload | `SOP-DEP-01` |
-| 24 | `agent_build_qa` | Deployment Quality | 116 Next.js routes compilation, TypeScript strictness, link checks | `SOP-DEP-02` |
+| 24 | `agent_build_qa` | Deployment Quality | 110 Next.js routes compilation, TypeScript strictness, link checks | `SOP-DEP-02` |
 | 25 | `agent_regression_sentinel` | Deployment Quality | By-Appointment-First non-regression & drop-cloth mandate | `SOP-DEP-03` |
 | 26 | `agent_spatial_visualizer` | Deployment Quality | Blender 4.1 headless raytracing & 16/16 caliper cutaway assets | `SOP-DEP-04` |
 | 27 | `agent_serp_intent_harvester`| SERP Acquisition | Oahu search query analytics & click-to-impression gap harvesting | `SOP-SERP-01` |
@@ -344,5 +344,5 @@ The Master CLI Bridge provides immediate command-line execution for the entire s
 1. **Loopback Binding**: Host ports 3005, 3001, 8001, 5433, and 6380 are strictly bound to `127.0.0.1`.
 2. **Zero Public Access**: Dev OS cockpit is barred by `robots.ts` (`Disallow: /`) and protected by SHA-256 HMAC session cookies.
 3. **Outbound Sync Only**: Workstation is 100% air-tight; VPS server possesses zero inbound network connectivity to the local development environment.
-4. **Mini Split Rebate Truth**: 0% participation in Hawaii Energy rebates (contractor direct pricing, zero red tape).
+4. **Mini Split Rebate Truth**: 0% participation in Hawaii Energy rebates (direct contractor pricing, $0 Free In-Home Estimate).
 5. **Window AC Rebate Truth**: Qualifying Energy Star LG Dual Inverters earn a $45 cash rebate using Affordable Home AC's official pre-approved application form PDF (`/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf`).

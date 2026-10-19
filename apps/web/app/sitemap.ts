@@ -9,7 +9,8 @@ import path from 'path';
 // This ensures the build never fails even if the API is down.
 // Force dynamic rendering so this runs at request time (when API is up),
 // not at build time (when API is down).
-export const dynamic = 'force-dynamic';
+export const revalidate = 86400;
+const STATIC_LAST_MODIFIED = '2026-10-18';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com';
@@ -57,9 +58,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Sort alphabetically
     cityRoutes.sort((a, b) => a.localeCompare(b));
 
-    // 1. Define Static Routes (Always included)
-    // NOTE: Routes with hash fragments (e.g., /shop#dual_inverter) have been removed 
-    // to comply with Google Sitemap protocol and avoid "Crawled - currently not indexed" bloat.
+    // 1. Define Canonical Static Routes (Zero redirected/doorway routes)
+    const coreServiceHubs = new Set([
+        '/contact',
+        '/mini_split_ac',
+        '/mini_split_ac_maintenance',
+        '/sizing',
+        '/service-areas',
+        '/window-ac-installation',
+        '/mini-split-estimate',
+        '/ac-repair-oahu',
+        '/ac-cleaning-oahu',
+        '/ductless-mini-split-installation-oahu',
+        '/reviews',
+        '/shop/oahu-window-ac-warehouse',
+        '/shop/ge-built-in-wall-ac-oahu',
+    ]);
+
     const highYieldRoutes = [
         '/clean-vs-replace-window-ac',
         '/window-ac-installation',
@@ -72,9 +87,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/ac-repair-oahu',
         '/ac-cleaning-oahu',
         '/shop/oahu-window-ac-warehouse',
+        '/shop/ge-built-in-wall-ac-oahu',
         '/ductless-mini-split-installation-oahu',
         '/reviews',
-        '/central-ac',
         '/hawaii-energy-rebate',
         '/mini-split-installation-cost-oahu',
         '/jalousie-window-ac-installation-oahu',
@@ -86,7 +101,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/ac-keeps-tripping-breaker-hawaii',
         '/blinking-light-error-codes-ac-repair',
         '/window-ac-warehouse-pickup-waipahu',
-        '/large-room-window-ac-18000-24000-btu',
         '/small-room-window-ac-6000-8000-btu',
         '/energy-star-window-air-conditioners-hawaii',
         '/smart-wifi-window-ac-oahu',
@@ -95,7 +109,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/window-ac-for-studios-apartments-hawaii',
         '/low-voltage-window-ac-115v-oahu',
         '/inverter-window-ac-vs-standard-hawaii',
-        '/same-day-window-ac-pickup-oahu',
         '/window-ac-warranty-waipahu',
         '/window-ac-delivery-service-oahu',
         '/horizontal-sliding-window-ac-oahu',
@@ -109,11 +122,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/vinyl-replacement-window-ac-mounting',
         '/high-rise-condo-ac-rules-honolulu',
         '/security-bars-window-ac-installation-oahu',
-        '/standard-window-ac-brackets-mounting-oahu',
         '/narrow-window-ac-solutions-hawaii',
         '/ac-condensation-drain-routing-condos',
         '/ac-mold-removal-cleaning-oahu',
-        '/premium-mini-split-deep-cleaning-oahu',
         '/ac-smells-musty-mildew-hawaii',
         '/black-mold-in-ac-health-risks-hawaii',
         '/seasonal-ac-maintenance-plans-oahu',
@@ -136,11 +147,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/outdoor-unit-fan-not-spinning-hawaii'
     ];
 
-    const staticRoutes = [
+    const staticRoutes: MetadataRoute.Sitemap = [
         '',
         '/shop',
         '/contact',
-        '/ac-repair',
         '/mini_split_ac',
         '/mini_split_ac_maintenance',
         '/sizing',
@@ -148,12 +158,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/sitemap',
         ...highYieldRoutes,
         ...cityRoutes
-    ].map((route) => ({
-        url: `${baseUrl}${route}`,
-        lastModified: new Date(),
-        changeFrequency: 'daily' as const,
-        priority: route === '' ? 1.0 : (highYieldRoutes.includes(route) ? 0.9 : (route.startsWith('/service-areas/') ? 0.7 : 0.8)),
-    }));
+    ].map((route) => {
+        const changeFrequency: 'weekly' | 'monthly' | 'yearly' =
+            (route === '' || route === '/shop')
+                ? 'weekly'
+                : coreServiceHubs.has(route)
+                    ? 'monthly'
+                    : 'yearly';
+
+        return {
+            url: `${baseUrl}${route}`,
+            lastModified: STATIC_LAST_MODIFIED,
+            changeFrequency,
+            priority: route === '' ? 1.0 : (highYieldRoutes.includes(route) ? 0.9 : (route.startsWith('/service-areas/') ? 0.7 : 0.8)),
+        };
+    });
 
     // 2. Fetch Dynamic Product Routes (with INITIAL_CATALOG_PRODUCTS fallback)
     const { INITIAL_CATALOG_PRODUCTS } = await import('@/lib/catalog-seed');
@@ -168,7 +187,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         const timeoutId = setTimeout(() => controller.abort(), 5000);
 
         const res = await fetch(`${apiUrl}/products`, {
-            next: { revalidate: 0 },
+            next: { revalidate: 86400 },
             signal: controller.signal
         });
 
@@ -186,8 +205,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
         url: `${baseUrl}/shop/${generateProductSlug(product.id, product.name)}`,
-        lastModified: new Date(),
-        changeFrequency: 'daily' as const,
+        lastModified: STATIC_LAST_MODIFIED,
+        changeFrequency: 'monthly' as const,
         priority: 0.95,
     }));
 

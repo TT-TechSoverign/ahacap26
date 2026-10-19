@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
-    Snowflake, 
     Wind, 
     Wrench, 
     Sparkles, 
@@ -13,12 +12,11 @@ import {
     ArrowRight, 
     Phone, 
     Calendar, 
-    CheckCircle2, 
     RotateCcw,
     SlidersHorizontal,
-    Layers,
-    FileText
+    Layers
 } from 'lucide-react';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 
 interface ServiceItem {
     title: string;
@@ -48,125 +46,126 @@ interface Division {
     secondaryCta: { text: string; href: string };
 }
 
-const DIVISIONS: Division[] = [
-    {
-        id: 'window-ac',
-        name: 'Window AC Division',
-        badge: 'Waipahu Warehouse Direct',
-        tagline: 'In-Stock Sales, Custom Mounting & Deep Chemical Wash',
-        description: 'From whisper-quiet dual inverter units in stock in Waipahu to custom jalousie installations and deep coil flushes, our dedicated window AC division keeps Oahu homes cool without mainland delays.',
-        theme: {
-            accent: 'cyan',
-            badgeBg: 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400',
-            border: 'border-cyan-500/30 hover:border-cyan-400',
-            glow: 'shadow-[0_0_35px_rgba(6,182,212,0.15)]',
-            btnBg: 'bg-primary hover:bg-cyan-300 text-slate-950',
-            iconColor: 'text-cyan-400',
-        },
-        services: [
-            {
-                title: 'In-Stock Units & Warehouse Sales',
-                desc: 'Brand new LG Dual Inverter & GE units in stock in Waipahu. Same-day shop pickup by appointment or $50 flat island-wide delivery.',
-                href: '/shop',
-                cta: 'Browse In-Stock Units',
-                icon: Warehouse,
-                badge: '16 Models in Waipahu'
-            },
-            {
-                title: 'Professional Window AC Installation',
-                desc: 'Expert mounting for jalousie windows (custom security brackets), horizontal sliders, standard hung sashes, and through-the-wall sleeves.',
-                href: '/window-ac-installation',
-                cta: 'Installation Details',
-                icon: Wrench,
-                badge: 'Jalousie Specialists'
-            },
-            {
-                title: 'Window AC Delivery & Warehouse Pickup',
-                desc: '$50 flat island-wide delivery or same-day vehicle loading at our Waipahu warehouse. Factory-sealed boxes with 1-year warranty.',
-                href: '/window-ac-delivery-service-oahu',
-                cta: 'Delivery & Pickup Info',
-                icon: Truck,
-                badge: '$50 Flat Delivery'
-            },
-            {
-                title: 'Clean vs. Replace Evaluation',
-                desc: 'Honest evaluation on whether an older window AC is worth maintaining or if upgrading to an LG Dual Inverter ($45 rebate) pays for itself in HECO savings.',
-                href: '/clean-vs-replace-window-ac',
-                cta: 'Run Calculator',
-                icon: RotateCcw,
-                badge: 'Save on HECO Power'
-            }
-        ],
-        primaryCta: {
-            text: 'Shop In-Stock Window ACs',
-            href: '/shop'
-        },
-        secondaryCta: {
-            text: 'Book Window AC Service',
-            href: '/contact'
-        }
-    },
-    {
-        id: 'split-ac',
-        name: 'Split AC Division',
-        badge: 'Ductless Mini-Split & Central Specialists',
-        tagline: 'Whole-Home Zoned Comfort, Inverter Retrofits & Diagnostics',
-        description: 'Factory-certified technicians delivering whisper-quiet ductless mini-split systems engineered for Hawaii tropical humidity. Free in-home estimates across Oahu with zero upfront booking fees.',
-        theme: {
-            accent: 'emerald',
-            badgeBg: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
-            border: 'border-emerald-500/30 hover:border-emerald-400',
-            glow: 'shadow-[0_0_35px_rgba(16,185,129,0.15)]',
-            btnBg: 'bg-emerald-400 hover:bg-emerald-300 text-slate-950',
-            iconColor: 'text-emerald-400',
-        },
-        services: [
-            {
-                title: 'Mini-Split Installation & Replacement',
-                desc: 'New multi-zone and single-zone ductless installations. Authorized dealer for Mitsubishi Electric, Fujitsu Halcyon, and Daikin Inverter.',
-                href: '/mini_split_ac',
-                cta: 'Explore Mini-Splits',
-                icon: Wind,
-                badge: '$0 Free In-Home Estimate'
-            },
-            {
-                title: 'Split AC Deep Cleaning & Sanitization',
-                desc: 'Anti-microbial deep coil chemical foam flush, barrel fan extraction, drain pan sanitization, and condensate line flush.',
-                href: '/mini_split_ac_maintenance',
-                cta: 'Split AC Maintenance',
-                icon: Sparkles,
-                badge: 'Clinical Coil Flush'
-            },
-            {
-                title: 'Diagnostic Troubleshooting & AC Repair',
-                desc: 'Licensed CT-36775 diagnosis for cooling failure, refrigerant leaks, compressor faults, sensor codes, and electrical issues.',
-                href: '/ac-repair',
-                cta: 'AC Repair Service',
-                icon: Wrench,
-                badge: 'Licensed Diagnosis'
-            },
-            {
-                title: 'Instant Sizing & Heat Load Assessment',
-                desc: 'Room-by-room microclimate sizing calculator tailored specifically for Hawaii single-wall redwood and jalousie heat loads.',
-                href: '/mini-split-estimate',
-                cta: 'Size Your System',
-                icon: SlidersHorizontal,
-                badge: 'Island Heat-Load Math'
-            }
-        ],
-        primaryCta: {
-            text: 'Request Free Estimate ($0)',
-            href: '/contact'
-        },
-        secondaryCta: {
-            text: 'Split AC Services',
-            href: '/mini_split_ac'
-        }
-    }
-];
-
 export function HomeServicesDivisions() {
     const [activeTab, setActiveTab] = useState<'all' | 'window-ac' | 'split-ac'>('all');
+    const { inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
+
+    const divisions: Division[] = [
+        {
+            id: 'window-ac',
+            name: 'Window AC Division',
+            badge: 'Waipahu Warehouse Direct',
+            tagline: 'In-Stock Sales, Custom Jalousie Mounting & Clean-vs-Replace Evaluations',
+            description: `From whisper-quiet LG Dual Inverter and GE Thru-The-Wall units in stock in Waipahu ($${minPrice}–$${maxPrice.toLocaleString()}) to custom jalousie security brackets and honest clean-vs-replace assessments, our dedicated Window AC division keeps Oahu homes cool without mainland shipping delays.`,
+            theme: {
+                accent: 'cyan',
+                badgeBg: 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400',
+                border: 'border-cyan-500/30 hover:border-cyan-400',
+                glow: 'shadow-[0_0_35px_rgba(6,182,212,0.15)]',
+                btnBg: 'bg-primary hover:bg-cyan-300 text-slate-950',
+                iconColor: 'text-cyan-400',
+            },
+            services: [
+                {
+                    title: 'In-Stock Units & Warehouse Sales',
+                    desc: `Brand new LG Dual Inverter & GE 26" Built-In units in stock in Waipahu ($${minPrice}–$${maxPrice.toLocaleString()}). Same-day warehouse pickup by appointment or $50 flat delivery.`,
+                    href: '/shop',
+                    cta: 'Browse In-Stock Units',
+                    icon: Warehouse,
+                    badge: `${inStockAcCount} Models In-Stock in Waipahu`
+                },
+                {
+                    title: 'Professional Window AC Installation',
+                    desc: 'Expert mounting for jalousie windows (custom security brackets), horizontal sliders, standard hung sashes, and 26" through-the-wall sleeves ($0 Free Estimate).',
+                    href: '/window-ac-installation',
+                    cta: 'Installation Details',
+                    icon: Wrench,
+                    badge: '$0 Free Estimate'
+                },
+                {
+                    title: 'Window AC Delivery & Warehouse Pickup',
+                    desc: '$50 flat delivery across Honolulu, West, Central & Windward Oahu or same-day vehicle loading at our Waipahu warehouse. Factory-sealed with 1-Yr / 2-Yr warranty.',
+                    href: '/window-ac-delivery-service-oahu',
+                    cta: 'Delivery & Pickup Info',
+                    icon: Truck,
+                    badge: '$50 Flat Delivery'
+                },
+                {
+                    title: 'Clean vs. Replace Evaluation',
+                    desc: 'Honest evaluation on whether an older window AC is worth maintaining or if upgrading to an LG Dual Inverter ($45 rebate) pays for itself in HECO savings.',
+                    href: '/clean-vs-replace-window-ac',
+                    cta: 'Run Calculator',
+                    icon: RotateCcw,
+                    badge: 'Save on HECO Power'
+                }
+            ],
+            primaryCta: {
+                text: 'Shop In-Stock Window ACs',
+                href: '/shop'
+            },
+            secondaryCta: {
+                text: 'Book Window AC Service',
+                href: '/contact'
+            }
+        },
+        {
+            id: 'split-ac',
+            name: 'Split AC Division',
+            badge: 'Ductless Mini-Split Specialists',
+            tagline: 'Whole-Home Zoned Comfort, Inverter Retrofits & Diagnostics',
+            description: 'Factory-certified technicians delivering whisper-quiet ductless mini-split systems engineered for Hawaii tropical humidity. Free in-home estimates ($0) across Oahu with zero upfront booking fees.',
+            theme: {
+                accent: 'emerald',
+                badgeBg: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
+                border: 'border-emerald-500/30 hover:border-emerald-400',
+                glow: 'shadow-[0_0_35px_rgba(16,185,129,0.15)]',
+                btnBg: 'bg-emerald-400 hover:bg-emerald-300 text-slate-950',
+                iconColor: 'text-emerald-400',
+            },
+            services: [
+                {
+                    title: 'Mini-Split Installation & Replacement',
+                    desc: 'New multi-zone and single-zone ductless installations. Authorized dealer for Mitsubishi Electric, Fujitsu Halcyon, Daikin, and LG.',
+                    href: '/mini_split_ac',
+                    cta: 'Explore Mini-Splits',
+                    icon: Wind,
+                    badge: '$0 Free In-Home Estimate'
+                },
+                {
+                    title: 'Split AC Deep Cleaning & Sanitization',
+                    desc: 'Clinical anti-microbial coil flush, blower wheel sanitization, drain pan treatment, and condensate line clearing ($175 Basic / $275 Premium).',
+                    href: '/mini_split_ac_maintenance',
+                    cta: 'Split AC Maintenance',
+                    icon: Sparkles,
+                    badge: 'Clinical Coil Flush'
+                },
+                {
+                    title: 'Diagnostic Troubleshooting & AC Repair',
+                    desc: 'Licensed CT-36775 diagnosis ($175 flat rate) for cooling failure, refrigerant leaks, compressor faults, blinking error codes, and inverter boards.',
+                    href: '/ac-repair-oahu',
+                    cta: 'AC Repair Service',
+                    icon: Wrench,
+                    badge: '$175 Flat Diagnostic'
+                },
+                {
+                    title: 'Instant Sizing & Heat Load Assessment',
+                    desc: 'Room-by-room microclimate sizing calculator tailored specifically for Hawaii single-wall redwood and jalousie heat loads.',
+                    href: '/mini-split-estimate',
+                    cta: 'Size Your System',
+                    icon: SlidersHorizontal,
+                    badge: 'Island Heat-Load Math'
+                }
+            ],
+            primaryCta: {
+                text: 'Request Free Estimate ($0)',
+                href: '/contact'
+            },
+            secondaryCta: {
+                text: 'Split AC Services',
+                href: '/mini_split_ac'
+            }
+        }
+    ];
 
     return (
         <section id="services" className="scroll-mt-24 relative py-16 px-4 bg-[#080d19] border-t border-slate-800/80">
@@ -182,7 +181,7 @@ export function HomeServicesDivisions() {
                         Licensed Hawaii Contractor CT-36775 • Two Specialized Divisions
                     </div>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-header font-black text-white uppercase tracking-tight">
-                        Our Cooling Divisions & Services
+                        Our Cooling Divisions &amp; Services
                     </h2>
                     <p className="font-sans text-sm sm:text-base text-slate-300 leading-relaxed">
                         Dedicated service teams specializing in their respective craft. Whether you need in-stock window AC inventory or complete whole-home ductless mini-split cooling, we have you covered across Oahu.
@@ -228,9 +227,7 @@ export function HomeServicesDivisions() {
 
                 {/* Symmetrical Two-Division Showcase */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {DIVISIONS.filter(div => activeTab === 'all' || activeTab === div.id).map((div) => {
-                        const isWindow = div.id === 'window-ac';
-
+                    {divisions.filter(div => activeTab === 'all' || activeTab === div.id).map((div) => {
                         return (
                             <div
                                 key={div.id}

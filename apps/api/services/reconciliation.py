@@ -76,8 +76,14 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                 for it_obj in line_items.data:
                     it = it_obj.to_dict() if hasattr(it_obj, 'to_dict') else dict(it_obj)
                     desc = it.get('description', '')
-                    # Resolve product ID across all 16 catalog models
+                    # Resolve product ID from explicit metadata first, then MPN map across all 16 catalog models
                     p_id = None
+                    meta_pid = (
+                        (it.get('price') or {}).get('product_data', {}).get('metadata', {}).get('product_id')
+                        or (it.get('metadata') or {}).get('product_id')
+                    )
+                    if meta_pid and str(meta_pid).isdigit():
+                        p_id = int(meta_pid)
                     mpn_map = {
                         'LW6023IVSM': 1,
                         'LW8022IVSM': 2,
@@ -100,10 +106,11 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                         'RAB26A': 16,
                     }
                     desc_upper = desc.upper()
-                    for code, mapped_id in mpn_map.items():
-                        if code in desc_upper:
-                            p_id = mapped_id
-                            break
+                    if p_id is None:
+                        for code, mapped_id in mpn_map.items():
+                            if code in desc_upper:
+                                p_id = mapped_id
+                                break
                     if p_id is None:
                         if '6,000' in desc:
                             p_id = 1

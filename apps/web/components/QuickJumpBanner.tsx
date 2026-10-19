@@ -2,8 +2,11 @@
 
 import Link from 'next/link';
 import { ShieldCheck, ShoppingBag, Calculator, ClipboardList } from 'lucide-react';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 
 export function QuickJumpBanner() {
+    const { minPrice } = useLiveInventorySummary();
+
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
         e.preventDefault();
         const element = document.getElementById(id);
@@ -18,7 +21,7 @@ export function QuickJumpBanner() {
                 <div className="flex flex-wrap items-center justify-center gap-2 text-center text-xs">
                     <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        Free Estimates ($0 to Book) • Window AC & Split AC Specialists
+                        Free Estimates ($0 to Book) • Window AC &amp; Split AC Specialists
                     </span>
                     <span className="text-slate-300 font-sans text-[11px]">
                         Call Office: <a href="tel:808-488-1111" className="text-cyan-400 font-bold hover:underline">(808) 488-1111</a> or <Link href="/contact" className="text-primary hover:underline font-bold">Book Form</Link>
@@ -47,7 +50,7 @@ export function QuickJumpBanner() {
                             <ShoppingBag className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
                             <span>Shop Window AC</span>
                             <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-[9px] font-bold">
-                                $395+
+                                ${minPrice}+
                             </span>
                         </Link>
 

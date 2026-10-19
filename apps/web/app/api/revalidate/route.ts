@@ -7,9 +7,9 @@ export async function POST(req: NextRequest) {
         const secret = body?.secret;
         const path = body?.path || '/shop';
 
-        const VALID_SECRET = (process.env.REVALIDATE_SECRET || "internal_ahac_revalidate_777").trim();
+        const VALID_SECRET = (process.env.REVALIDATE_SECRET || "").trim();
         const incomingSecret = typeof secret === "string" ? secret.trim() : "";
-        if (!incomingSecret || incomingSecret !== VALID_SECRET) {
+        if (!VALID_SECRET || !incomingSecret || incomingSecret !== VALID_SECRET) {
             return NextResponse.json({ error: "Invalid token" }, { status: 401 });
         }
 

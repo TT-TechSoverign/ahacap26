@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Repair Oahu | $175 Diagnostic Inspection & Fast Dispatch | Affordable Home A/C'
+        absolute: 'AC Repair Oahu | $175 Diagnostic Inspection • Lic #CT-36775 | Affordable Home A/C'
     },
-    description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 AC diagnostic inspection across Oahu. Fast appointment dispatch by licensed Hawaii contractor CT-36775.',
+    description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 AC diagnostic inspection across Oahu. Fast appointment dispatch by licensed contractor CT-36775 • Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-repair-oahu',
     },
     openGraph: {
-        title: 'AC Repair Oahu | $175 Diagnostic Inspection & Fast Dispatch | Affordable Home A/C',
-        description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 AC diagnostic inspection across Oahu. Fast appointment dispatch by licensed Hawaii contractor CT-36775.',
+        title: 'AC Repair Oahu | $175 Diagnostic Inspection • Lic #CT-36775 | Affordable Home A/C',
+        description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 AC diagnostic inspection across Oahu. Fast appointment dispatch by licensed contractor CT-36775 • Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/ac-repair-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Repair Oahu | $175 Diagnostic Inspection & Fast Dispatch | Affordable Home A/C',
-        description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 AC diagnostic inspection across Oahu. Fast appointment dispatch by licensed Hawaii contractor CT-36775.',
+        title: 'AC Repair Oahu | $175 Diagnostic Inspection • Lic #CT-36775 | Affordable Home A/C',
+        description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 AC diagnostic inspection across Oahu. Fast appointment dispatch by licensed contractor CT-36775 • Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

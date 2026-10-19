@@ -35,8 +35,8 @@ const INITIAL_PRODUCT_8K: Product = {
     id: 2,
     name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
     price: 595,
-    promo_price: 535,
-    discount_percent: 10,
+    promo_price: null,
+    discount_percent: null,
     stock: 0,
     category: "WINDOW_AC",
     subcategory: "dual_inverter",
@@ -68,7 +68,7 @@ export default function Lg8000BtuOahuPage() {
                 setProduct8k((prev) => ({
                     ...prev,
                     price: live.price,
-                    promo_price: live.promo_price ?? prev.promo_price,
+                    promo_price: live.promo_price ?? null,
                     stock: live.stock,
                 }));
             })
@@ -115,7 +115,7 @@ export default function Lg8000BtuOahuPage() {
         },
         {
             q: "What if the 8,000 BTU Dual Inverter is temporarily out of stock?",
-            a: "When the 8,000 BTU Dual Inverter is sold out, Oahu homeowners can pick up the in-stock 10,000 BTU LG Dual Inverter (LW1022IVSM, $650), the 6,000 BTU LG Dual Inverter (LW6023IVSM, $560), or the 8,000 BTU LG Cool+Heat Inverter (LW8023HRSM, $650) or 8,000 BTU LG Standard (LW8024RD, $395) today at our Waipahu warehouse!"
+            a: "When the 8,000 BTU Dual Inverter is sold out, Oahu homeowners can pick up the in-stock 10,000 BTU LG Dual Inverter (LW1022IVSM, $650), the 6,000 BTU LG Dual Inverter (LW6023IVSM, $560), or the 8,000 BTU LG Cool+Heat Inverter (LW8023HRSM, $660) or 8,000 BTU LG Standard (LW8024RD, $395) today at our Waipahu warehouse!"
         }
     ];
 
@@ -387,15 +387,15 @@ export default function Lg8000BtuOahuPage() {
                                                 <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$560 • View Unit →</div>
                                             </Link>
                                             <Link
-                                                href="/shop/8-lg-7-600-btu-lw8023hrsm"
+                                                href="/shop/8-lg-dual-inverter-cool-heat-8-000-btu-lw8023hrsm"
                                                 className="p-3 rounded-xl bg-slate-900/90 border border-white/15 hover:border-cyan-400 text-left transition-all block"
                                             >
                                                 <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">8 In Stock • 8,000 BTU</div>
                                                 <div className="text-xs font-bold text-white mt-0.5">LG 8,000 BTU Dual Inverter + Heat</div>
-                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$650 • View Unit →</div>
+                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$660 • View Unit →</div>
                                             </Link>
                                             <Link
-                                                href="/shop/11-lg-8-000-btu-lw8024rd"
+                                                href="/shop/11-lg-standard-8-000-btu-lw8024rd"
                                                 className="p-3 rounded-xl bg-slate-900/90 border border-white/15 hover:border-cyan-400 text-left transition-all block"
                                             >
                                                 <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">30 In Stock • 8,000 BTU</div>

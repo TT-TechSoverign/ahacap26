@@ -135,18 +135,18 @@ export const config: Config<{
                     { text: "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM " },
                     { text: "HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE)", href: "/shop" },
                     { text: " CURATED FOR DURABILITY; " },
-                    { text: "ULTRA-QUIET DUCTLESS MINI SPLITS", href: "/contact" },
+                    { text: "ULTRA-QUIET DUCTLESS MINI SPLITS", href: "/mini_split_ac" },
                     { text: " DESIGNED FOR PRECISION ZONE COOLING; " },
-                    { text: "CENTRAL AC RETROFITS", href: "/contact" },
+                    { text: "WINDOW AC & JALOUSIE INSTALLATION", href: "/window-ac-installation" },
                     { text: " ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND " },
-                    { text: "SPECIALIZED WINDOW AC CLEANINGS", href: "/contact" },
+                    { text: "SPECIALIZED MINI SPLIT DEEP CLEANING", href: "/mini_split_ac_maintenance" },
                     { text: " THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM." }
                 ],
                 items: [
-                    { title: "MINI SPLITS", description: "Eliminate Hot Spots & High Bills...", icon: "ac_unit", linkText: "MORE INFO", href: "/contact", color: "primary" },
+                    { title: "MINI SPLITS", description: "Eliminate Hot Spots & High Bills...", icon: "ac_unit", linkText: "MORE INFO", href: "/mini_split_ac", color: "primary" },
                     { title: "WINDOW AC SHOP", description: "Your Local High-Efficiency Resource...", icon: "storefront", linkText: "View Inventory", href: "/shop", color: "primary", badge: "In Stock" },
-                    { title: "CENTRAL AC", description: "Maximize Whole-Home Comfort...", icon: "hvac", linkText: "MORE INFO", href: "/contact", color: "accent" },
-                    { title: "WINDOW AC CLEANING", description: "Breathe Cleaner, Save Longer...", icon: "cleaning_services", linkText: "WINDOW AC MAINTENANCE", href: "/contact", color: "accent" }
+                    { title: "WINDOW AC INSTALL", description: "Jalousie & Standard Mounting...", icon: "hvac", linkText: "MORE INFO", href: "/window-ac-installation", color: "accent" },
+                    { title: "MINI SPLIT CLEANING", description: "Breathe Cleaner, Save Longer...", icon: "cleaning_services", linkText: "MINI SPLIT MAINTENANCE", href: "/mini_split_ac_maintenance", color: "accent" }
                 ],
                 mode: "dark",
                 styles: { padding: "96px 0px" }
@@ -215,7 +215,7 @@ export const config: Config<{
             defaultProps: {
                 title: "ELITE BRAND PARTNERSHIPS",
                 titleHighlight: "TECHNOLOGY TO MASTER OAHU'S MICRO-CLIMATES",
-                narrativeParam: "AFFORDABLE HOME A/C IS PROUD TO MAINTAIN COMPLIANANCE TO PROVIDE YOU WITH THE WORLD'S LEADING HVAC ENGINEERING FIRMS...",
+                narrativeParam: "AFFORDABLE HOME A/C IS PROUD TO MAINTAIN COMPLIANCE TO PROVIDE YOU WITH THE WORLD'S LEADING HVAC ENGINEERING FIRMS...",
                 brandsWindow: [
                     { name: "LG", colorClass: "text-rose-500", fontClass: "font-sans font-black tracking-tighter text-6xl" },
                     { name: "GE APPLIANCES", colorClass: "text-blue-400", fontClass: "font-serif font-bold tracking-wide text-3xl" },
@@ -225,7 +225,7 @@ export const config: Config<{
                     { name: "MITSUBISHI ELECTRIC", colorClass: "text-red-600", fontClass: "font-header font-bold tracking-normal uppercase text-xl" },
                     { name: "FUJITSU", colorClass: "text-red-500", fontClass: "font-sans font-bold italic tracking-widest text-3xl" },
                     { name: "DAIKIN", colorClass: "text-sky-400", fontClass: "font-header font-medium tracking-widest text-2xl" },
-                    { name: "CARRIER", colorClass: "text-blue-600", fontClass: "font-sans font-extrabold tracking-tighter text-3xl" }
+                    { name: "LG DUCTLESS", colorClass: "text-rose-500", fontClass: "font-sans font-extrabold tracking-tighter text-3xl" }
                 ],
                 brandsCentral: [
                     { name: "RHEEM", colorClass: "text-red-500", fontClass: "font-header font-bold tracking-tight text-5xl" },

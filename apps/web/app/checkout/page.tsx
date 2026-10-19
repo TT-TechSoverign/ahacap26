@@ -18,11 +18,15 @@ import {
 } from 'lucide-react';
 
 function CheckoutContent() {
-    const { items, clearCart, cartTotal } = useCart();
+    const { items, clearCart, cartTotal, syncInventory } = useCart();
     const [step, setStep] = useState<'shipping' | 'payment' | 'success'>('shipping');
     const [email, setEmail] = useState('');
     const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>('pickup');
 
+    useEffect(() => {
+        syncInventory();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const searchParams = useSearchParams();
     const router = useRouter();

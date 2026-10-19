@@ -9,7 +9,7 @@ import content from '@/lib/content/content.json';
 import { AdminCalendar } from '@/components/AdminCalendar';
 import { useContent } from '@/lib/context/ContentContext';
 import NavbarV2 from '@/components/NavbarV2';
-import { cn } from '@/lib/utils';
+import { cn, isCampaignActive } from '@/lib/utils';
 import { 
     Lock, 
     Settings, 
@@ -679,7 +679,7 @@ export default function AdminPage() {
                                                     </td>
                                                     <td className="px-6 py-5 text-right font-header font-bold text-base text-white">
                                                         ${(Number(product.price) || 0).toFixed(2)}
-                                                        {product.promo_price ? (
+                                                        {isCampaignActive() && product.promo_price ? (
                                                             <div className="text-[10px] font-mono text-cyan-400 font-normal">
                                                                 Promo: ${(Number(product.promo_price) || 0).toFixed(2)}
                                                             </div>
@@ -1413,7 +1413,7 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
                                     {isPickup ? "Waipahu Warehouse Pickup ($0.00)" : "Oahu Island-Wide Delivery ($50.00)"}
                                 </p>
                                 <p className="text-[11px] opacity-80 mt-0.5">
-                                    {isPickup ? "94-1388 Moape St Unit 2, Waipahu, HI 96797" : "Direct delivery to customer residence across Oahu"}
+                                    {isPickup ? "94-150 Leoleo St. #203, Waipahu, HI 96797" : "Direct delivery to customer residence across Oahu"}
                                 </p>
                             </div>
                         </div>
@@ -2224,7 +2224,7 @@ function DateRangeInput({ label, name, value, onChange }: { label: string, name:
                     value={value}
                     onChange={onChange}
                     className="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                    placeholder="e.g. July 6-10, 2026"
+                    placeholder="e.g. Oct 20-24, 2026"
                 />
                 <button
                     type="button"

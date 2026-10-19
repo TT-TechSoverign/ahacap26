@@ -68,7 +68,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                 When residents search for reliable, <Link href="/contact" className="font-bold text-[#00E5FF] hover:underline">affordable air conditioning</Link> built for the islands, they quickly realize that standard off-the-shelf units won&apos;t survive. 
                             </p>
                             <p>
-                                In {city}, your HVAC system is constantly battling <strong>{context.climateChallenge}</strong>. This unique micro-climate forces standard compressors to overwork, leading to high electricity bills and the inevitable need for <Link href="/ac-repair" className="font-bold text-[#00E5FF] hover:underline">ac repair near me</Link>.
+                                In {city}, your HVAC system is constantly battling <strong>{context.climateChallenge}</strong>. This unique micro-climate forces standard compressors to overwork, leading to high electricity bills and the inevitable need for <Link href="/ac-repair-oahu" className="font-bold text-[#00E5FF] hover:underline">ac repair near me</Link>.
                             </p>
                             <p>
                                 Instead of gambling with unvetted contractors, trust the established authority for <Link href="/" className="font-bold text-[#00E5FF] hover:underline">air conditioning Oahu</Link> relies on.
@@ -88,7 +88,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                 At Affordable Home A/C, we don&apos;t just sell boxes from a local <Link href="/shop" className="font-bold text-[#00E5FF] hover:underline">ac shop</Link>; we deploy specialized cooling infrastructure designed to last.
                             </p>
                             <p>
-                                When island residents look for the most efficient <Link href="/mini_split_ac" className="font-bold text-[#00E5FF] hover:underline">split ac units Hawaii</Link> has to offer, they trust our dedicated team. Whether you need a premium <Link href="/shop/lg-dual-inverter-guide" className="font-bold text-[#00E5FF] hover:underline">dual inverter air conditioner</Link> for a single room, or the seamless <Link href={`/contact?city=${city}&service=Mini+Split+Estimate+(New)`} className="font-bold text-[#00E5FF] hover:underline">split ac installation Oahu</Link> homes require for whole-house cooling.
+                                When island residents look for the most efficient <Link href="/mini_split_ac" className="font-bold text-[#00E5FF] hover:underline">split ac units Hawaii</Link> has to offer, they trust our dedicated team. Whether you need a premium <Link href="/shop/lg-dual-inverter-guide" className="font-bold text-[#00E5FF] hover:underline">dual inverter air conditioner</Link> for a single room, or the seamless <Link href={`/contact?city=${city}&service=Mini+Split+Estimate+(New)`} prefetch={false} className="font-bold text-[#00E5FF] hover:underline">split ac installation Oahu</Link> homes require for whole-house cooling.
                             </p>
                             <p>
                                 We utilize <strong>{context.techFocus}</strong> so your system is equipped to {context.benefit}
@@ -110,7 +110,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                             Did you know that the humidity in {city} can cause toxic mold to grow deep inside your unit? Combined with silent salt-air corrosion, an unmaintained system quickly becomes a health hazard and leads to unexpected breakdowns. 
                         </p>
                         <p>
-                            Whether you need urgent <Link href="/ac-repair" className="font-bold text-[#00E5FF] hover:underline">air conditioning repair Oahu</Link> homeowners trust, routine <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">affordable ac maintenance</Link>, or a comprehensive <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">split ac service</Link>, our licensed technicians are ready. 
+                            Whether you need urgent <Link href="/ac-repair-oahu" className="font-bold text-[#00E5FF] hover:underline">air conditioning repair Oahu</Link> homeowners trust, routine <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">affordable ac maintenance</Link>, or a comprehensive <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">split ac service</Link>, our licensed technicians are ready. 
                         </p>
                         <p>
                             Our <Link href="/clean-vs-replace-window-ac" className="font-bold text-[#00E5FF] hover:underline">clean vs replace guidance</Link> and ductless mini split sanitization protocols destroy mold at the root and apply specialized corrosion inhibitors to extend the life of your equipment.

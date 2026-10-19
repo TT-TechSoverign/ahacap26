@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Installation Oahu | Jalousie & Standard Mounting | Affordable Home A/C'
+        absolute: 'Window AC Installation Oahu | Jalousie & Slider Mounting • $0 Estimate | Affordable Home A/C'
     },
-    description: 'Expert window AC installation on Oahu. Specializing in jalousie louvers, slider windows, and heavy-duty security brackets. Drop cloth protection guaranteed. Call (808) 488-1111.',
+    description: 'Licensed CT-36775 window AC installation on Oahu ($0 Free Estimate). Custom jalousie louver acrylic baffles, horizontal slider panels, exterior brackets & drop cloth protection. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-installation',
     },
     openGraph: {
-        title: 'Window AC Installation Oahu | Jalousie & Standard Mounting | Affordable Home A/C',
-        description: 'Expert window AC installation on Oahu. Specializing in jalousie louvers, slider windows, and heavy-duty security brackets. Drop cloth protection guaranteed. Call (808) 488-1111.',
+        title: 'Window AC Installation Oahu | Jalousie & Slider Mounting • $0 Estimate | Affordable Home A/C',
+        description: 'Licensed CT-36775 window AC installation on Oahu ($0 Free Estimate). Custom jalousie louver acrylic baffles, horizontal slider panels, exterior brackets & drop cloth protection. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-installation',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Installation Oahu | Jalousie & Standard Mounting | Affordable Home A/C',
-        description: 'Expert window AC installation on Oahu. Specializing in jalousie louvers, slider windows, and heavy-duty security brackets. Drop cloth protection guaranteed. Call (808) 488-1111.',
+        title: 'Window AC Installation Oahu | Jalousie & Slider Mounting • $0 Estimate | Affordable Home A/C',
+        description: 'Licensed CT-36775 window AC installation on Oahu ($0 Free Estimate). Custom jalousie louver acrylic baffles, horizontal slider panels, exterior brackets & drop cloth protection. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -83,7 +83,7 @@ const windowAcInstallFaqSchema = {
             "name": "Can I bundle an in-stock LG Dual Inverter with installation?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! You can purchase any in-stock LG Dual Inverter directly through our online Shop. You can select Free Waipahu Warehouse Pickup (by appointment) or $50 Flat Island-Wide Delivery. Every qualifying Energy Star unit includes our pre-approved official Hawaii Energy $45 cash rebate application form PDF."
+                "text": "Yes! You can purchase any in-stock LG Dual Inverter directly through our online Shop ($395–$1,200). You can select Free Waipahu Warehouse Pickup (by appointment) or $50 Flat Delivery across our 15-municipality Oahu zone. Every qualifying Energy Star unit includes our pre-approved official Hawaii Energy $45 cash rebate application form PDF."
             }
         }
     ]
@@ -115,10 +115,10 @@ const hvacServiceSchema = {
         "itemListElement": [
             {
                 "@type": "Offer",
-                "name": "Window AC Installation (By Appointment)",
-                "price": "275.00",
+                "name": "Window AC Installation Estimate (By Appointment)",
+                "price": "0.00",
                 "priceCurrency": "USD",
-                "description": "Professional installation with laser-leveling, weatherproof sealing, floor drop cloth protection, and cold airflow operational check."
+                "description": "Free in-home fitment estimate and itemized quote for professional installation with laser-leveling, weatherproof sealing, and floor drop cloth protection."
             }
         ]
     }

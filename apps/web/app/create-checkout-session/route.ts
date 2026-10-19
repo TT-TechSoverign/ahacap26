@@ -48,12 +48,15 @@ export async function POST(req: Request) {
             const displayName = mpn !== 'N/A' && !canonicalItem.name.includes(mpn)
                 ? `${canonicalItem.name} (${mpn})`
                 : canonicalItem.name;
+            const resolvedImg = clientItem.image_url
+                ? (clientItem.image_url.startsWith('http') ? clientItem.image_url : `https://www.affordablehome-ac.com${clientItem.image_url}`)
+                : undefined;
             return {
                 price_data: {
                     currency: 'usd',
                     product_data: {
                         name: displayName, // Use backend name + canonical model code
-                        images: clientItem.image_url && clientItem.image_url.startsWith('http') ? [clientItem.image_url] : undefined,
+                        images: resolvedImg ? [resolvedImg] : undefined,
                         metadata: {
                             product_id: canonicalItem.product_id.toString(), // CRITICAL FOR WEBHOOK IDEMPOTENCY
                             model_number: mpn, 
@@ -74,7 +77,6 @@ export async function POST(req: Request) {
                     product_data: {
                         name: 'Oahu Island-Wide Delivery',
                         description: 'Flat rate delivery to residential zones (excluding North Shore/Waianae/Waikiki/Waimanalo)',
-                        images: ['https://staging.affordablehome-ac.com/delivery-icon.png'], // Optional icon
                     },
                     unit_amount: 5000, // $50.00
                 },
@@ -112,10 +114,6 @@ export async function POST(req: Request) {
 
         const expiresAt = Math.floor(Date.now() / 1000) + (30 * 60); // 30 minutes lock
 
-        // Check if checkout contains any promo items and the promo is active
-        const isPromoActive = isCampaignActive();
-        const hasPromoItem = isPromoActive && items.some((item: any) => item.promo_price !== undefined && item.promo_price !== null && item.promo_price > 0);
-
         const session = await stripe.checkout.sessions.create({
 
             mode: 'payment',
@@ -141,7 +139,6 @@ export async function POST(req: Request) {
                     ...(utmSource && { utm_source: utmSource }),
                     ...(utmMedium && { utm_medium: utmMedium }),
                     ...(utmCampaign && { utm_campaign: utmCampaign }),
-                    ...(hasPromoItem && { campaign: '4th_of_july_2026' }),
                 }
             },
             success_url: `${origin}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
@@ -168,7 +165,6 @@ export async function POST(req: Request) {
                 ...(utmSource && { utm_source: utmSource }),
                 ...(utmMedium && { utm_medium: utmMedium }),
                 ...(utmCampaign && { utm_campaign: utmCampaign }),
-                ...(hasPromoItem && { campaign: '4th_of_july_2026' }),
             },
             billing_address_collection: 'required',
         });

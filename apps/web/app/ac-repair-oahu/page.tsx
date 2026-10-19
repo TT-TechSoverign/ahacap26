@@ -113,7 +113,7 @@ export default function AcRepairOahuPage() {
         },
         {
             q: "Do you repair both window ACs and ductless mini-splits?",
-            a: "Yes. Our CT-36775 licensed technicians service and repair both ductless mini-splits (Mitsubishi, Daikin, Fujitsu, Carrier) and heavy-duty window air conditioners across Honolulu, Pearl City, Waipahu, Kailua, and all Oahu."
+            a: "Yes. Our CT-36775 licensed technicians service and repair both ductless mini-splits (Mitsubishi, Daikin, Fujitsu, LG) and heavy-duty window air conditioners across Honolulu, Pearl City, Waipahu, Kailua, and all Oahu."
         }
     ];
 

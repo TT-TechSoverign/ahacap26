@@ -99,8 +99,9 @@ services:
       - PROMO_ENABLED=False
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_PIN=${ADMIN_PIN}
+      - ADMIN_MASTER_PASSWORD=${ADMIN_MASTER_PASSWORD}
       - DEV_OS_MASTER_PASSWORD=${DEV_OS_MASTER_PASSWORD}
-      - REVALIDATE_SECRET=${REVALIDATE_SECRET:-internal_ahac_revalidate_777}
+      - REVALIDATE_SECRET=${REVALIDATE_SECRET}
     volumes:
       - ./apps/api/content:/app/content
     command: >

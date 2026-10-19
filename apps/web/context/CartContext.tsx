@@ -44,12 +44,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         }
     }, []);
 
-    // Load from LocalStorage (Exception-Proof)
+    // Load from LocalStorage (Exception-Proof) and strip stale promo prices when no campaign is active
     useEffect(() => {
         try {
             const saved = safeStorage.getItem('ahac_cart', 'local');
             if (saved) {
-                setItems(JSON.parse(saved));
+                const parsed: CartItem[] = JSON.parse(saved);
+                const campaignActive = isCampaignActive();
+                const sanitized = Array.isArray(parsed)
+                    ? parsed.map(item => campaignActive ? item : { ...item, promo_price: null, discount_percent: null })
+                    : [];
+                setItems(sanitized);
             }
         } catch (e) {
             console.warn("Storage restricted or failed to parse cart:", e);
@@ -167,17 +172,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             });
             if (res.ok) {
                 const data = await res.json();
+                const campaignActive = isCampaignActive();
                 setItems(current => current.map(item => {
                     const validation = data.results.find((r: any) => r.product_id === item.id);
                     if (validation) {
+                        const availStock = typeof validation.available_stock === 'number' ? validation.available_stock : item.stock;
                         return { 
                             ...item, 
                             name: validation.name || item.name,
-                            stock: validation.available_stock,
-                            price: validation.price // Also sync the canonical price
+                            stock: availStock,
+                            price: validation.price, // Canonical price from backend
+                            promo_price: campaignActive ? item.promo_price : null,
+                            discount_percent: campaignActive ? item.discount_percent : null,
+                            quantity: availStock > 0 ? Math.min(item.quantity, availStock) : item.quantity,
                         };
                     }
-                    return item;
+                    return campaignActive ? item : { ...item, promo_price: null, discount_percent: null };
                 }));
             }
         } catch (error) {

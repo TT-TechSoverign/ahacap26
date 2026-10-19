@@ -96,7 +96,7 @@ export default function ACRepairPage() {
         },
         {
             q: 'Do you repair all ductless mini-split brands?',
-            a: 'Yes. Our CT-36775 licensed technicians are trained to diagnose and repair all major ductless mini-split brands on Oahu, including Mitsubishi Electric, Fujitsu Halcyon, Daikin, and Carrier (subject to manufacturer OEM parts availability, unit age, and overall equipment condition).'
+            a: 'Yes. Our CT-36775 licensed technicians are trained to diagnose and repair all major ductless mini-split brands on Oahu, including Mitsubishi Electric, Fujitsu Halcyon, Daikin, and LG (subject to manufacturer OEM parts availability, unit age, and overall equipment condition).'
         },
         {
             q: 'Is there a warranty on your repair work?',
@@ -104,7 +104,7 @@ export default function ACRepairPage() {
         },
         {
             q: 'Do you repair window air conditioners or central AC systems?',
-            a: 'Our diagnostic and repair services are dedicated specifically to ductless mini-split heat pumps and air handlers ($175 diagnostic appointment). For window AC units, we provide precision on-site chemical teardown cleaning and rust-inhibitor servicing ($275 flat rate by scheduled appointment), but we do not perform sealed-refrigerant or compressor rebuilds on window units. In-home estimates for new and replacement installations are zero cost ($0 to book).'
+            a: 'Our diagnostic and repair services are dedicated to ductless mini-split heat pumps and air handlers ($175 diagnostic appointment). For aging or malfunctioning window AC units, we provide clean-vs-replace assessments and immediate in-stock Waipahu replacements ($395 to $1,200) with optional installation. In-home estimates for new and replacement installations are zero cost ($0 to book).'
         },
         {
             q: 'Can every mini-split problem be resolved on the initial diagnostic visit?',

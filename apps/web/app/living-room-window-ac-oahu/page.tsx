@@ -27,9 +27,9 @@ const LIVING_MODELS = [
     {
         btu: '12,000 BTU',
         model: 'LW1222IVSM',
-        coverage: 'Medium Living Rooms (Up to 550 sq. ft. AHAM / 400 sq. ft. Oahu)',
+        coverage: 'Medium Living Rooms (Up to 550 sq. ft. AHAM / 380 sq. ft. Oahu)',
         voltage: '115V / 15A Standard Household Plug',
-        ceer: 'CEER 14.9 Energy Star',
+        ceer: 'CEER 15.0 Energy Star',
         price: '$745',
         afterRebate: '$700 after $45 rebate',
         plugType: 'NEMA 5-15P (Standard 3-prong)',
@@ -39,7 +39,7 @@ const LIVING_MODELS = [
     {
         btu: '14,000 BTU',
         model: 'LW1522FVSM',
-        coverage: 'Open Living & Dining Areas (Up to 700 sq. ft. AHAM / 500 sq. ft. Oahu)',
+        coverage: 'Open Living & Dining Areas (Up to 700 sq. ft. AHAM / 450 sq. ft. Oahu)',
         voltage: '115V / 15A Standard Household Plug',
         ceer: 'CEER 14.7 Energy Star',
         price: '$785',
@@ -53,21 +53,21 @@ const LIVING_MODELS = [
         coverage: 'Large Open Floor Plans (Up to 1,000 sq. ft. AHAM / 600 sq. ft. Oahu)',
         voltage: '208/230V Dedicated 15A Circuit',
         ceer: 'CEER 14.7 Energy Star',
-        price: '$865',
-        afterRebate: '$820 after $45 rebate',
+        price: '$925',
+        afterRebate: '$880 after $45 rebate',
         plugType: 'NEMA 6-15P (Horizontal pins)',
         href: '/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm'
     },
     {
         btu: '23,500 BTU',
-        model: 'LW2423HRSM',
+        model: 'LW2422IVSM',
         coverage: 'Expansive Living Areas & High Ceilings (Up to 1,440 sq. ft. AHAM / 800 sq. ft. Oahu)',
-        voltage: '208/230V Dedicated 20A Circuit (Cool + Heat)',
-        ceer: 'CEER 13.7 Inverter',
+        voltage: '208/230V Dedicated 15A Circuit',
+        ceer: 'CEER 14.5 Energy Star',
         price: '$1,025',
-        afterRebate: 'In-Stock Waipahu Direct',
-        plugType: 'NEMA 6-20P (Perpendicular pins)',
-        href: '/shop/10-lg-23-000-btu-lw2423hrsm'
+        afterRebate: '$980 after $45 rebate',
+        plugType: 'NEMA 6-15P (Horizontal pins)',
+        href: '/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm'
     }
 ];
 
@@ -82,11 +82,11 @@ const FAQS = [
     },
     {
         q: "When do I need a 230V outlet?",
-        a: "The 18,000 BTU model requires a 208/230V 15A circuit, while the 23,500 BTU model requires a 208/230V 15A/20A circuit. If your living room already has a horizontal-pin AC outlet, these heavy-duty units plug directly in."
+        a: "The 18,000 BTU and 23,500 BTU Dual Inverter models operate on a 208/230V 15A circuit (NEMA 6-15P plug). If your living room already has a horizontal-pin 230V AC outlet, these heavy-duty units plug directly in."
     },
     {
         q: "Do these high-capacity units qualify for the $45 Hawaii Energy rebate?",
-        a: "Yes! Our Energy Star certified LG Dual Inverter cooling models (12,000 BTU, 14,000 BTU, and 18,000 BTU) qualify for the $45 Hawaii Energy cash rebate."
+        a: "Yes! All four Energy Star certified LG Dual Inverter cooling models (12,000 BTU, 14,000 BTU, 18,000 BTU, and 23,500 BTU) qualify for the $45 Hawaii Energy cash rebate."
     }
 ];
 

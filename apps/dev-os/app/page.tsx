@@ -2067,19 +2067,19 @@ export default function DevOsEagleEyePage() {
                                                 </div>
                                             )}
 
-                                            {/* TAB 3: WINDOW AC TEARDOWN */}
+                                            {/* TAB 3: WINDOW AC DIVISION */}
                                             {activeFunnelTab === 'window_ac' && (
                                                 <div className="space-y-2">
                                                     <div className="grid grid-cols-2 gap-2">
                                                         <div className="rounded-xl border border-slate-800 bg-slate-950 p-2.5">
                                                             <span className="text-[10px] font-mono text-slate-500">BTU Units Sized</span>
                                                             <p className="font-mono text-lg font-bold text-white">{funnelData?.funnels?.window_ac_dropoff?.btu_selections || 89}</p>
-                                                            <span className="text-[10px] text-emerald-400">$275 Full Teardown Clean</span>
+                                                            <span className="text-[10px] text-emerald-400">Clean-vs-Replace Assessment</span>
                                                         </div>
                                                         <div className="rounded-xl border border-slate-800 bg-slate-950 p-2.5">
                                                             <span className="text-[10px] font-mono text-slate-500">Central Facility</span>
                                                             <p className="font-mono text-sm font-bold text-white">Waipahu Warehouse</p>
-                                                            <span className="text-[10px] text-cyan-400">24-48hr Bench Turnaround</span>
+                                                            <span className="text-[10px] text-cyan-400">Same-Day Scheduled Pickup</span>
                                                         </div>
                                                     </div>
 
@@ -2087,7 +2087,7 @@ export default function DevOsEagleEyePage() {
                                                         <span className="font-mono text-[10px] text-slate-400 uppercase">Fulfillment Preference Split</span>
                                                         <div className="space-y-1 text-[10px]">
                                                             <div className="flex justify-between items-center text-slate-300">
-                                                                <span>Waipahu Warehouse Drop-Off ($0)</span>
+                                                                <span>Waipahu Warehouse Pickup ($0)</span>
                                                                 <span className="text-emerald-400 font-mono">78% Preference</span>
                                                             </div>
                                                             <div className="flex justify-between items-center text-slate-300">
@@ -2165,7 +2165,7 @@ export default function DevOsEagleEyePage() {
                                                         { id: 'by_appointment_first', title: 'By Appointment First (Zero Upfront Payment)', impact: '+28% Booking Velocity', status: 'ACTIVE', detail: 'Eliminates checkout friction for physical services; diagnostic scope and physical inspection confirmed before any transaction.' },
                                                         { id: 'waipahu_pickup_anchor', title: 'Waipahu Warehouse Same-Day Pickup', impact: '+24% Cart Velocity', status: 'ACTIVE', detail: 'Eliminates Oahu customer freight anxiety (skip 2-3 week mainland barge transit).' },
                                                         { id: 'heco_power_roi', title: 'HECO ~44¢/kWh Electricity ROI Anchor', impact: '+18% Sizing Conversion', status: 'ACTIVE', detail: 'Anchors 20+ SEER2 savings ($1,020/yr power savings) against cheap 10-SEER alternatives.' },
-                                                        { id: 'clinical_mold_protocol', title: 'Clinical Mold Remediation Framing', impact: '+31% Premium Clean Margin', status: 'ACTIVE', detail: 'Frames $275 teardown around salt-air corrosion & spore remediation instead of simple wash.' },
+                                                        { id: 'clinical_mold_protocol', title: 'Clinical Mold Remediation Framing', impact: '+31% Premium Clean Margin', status: 'ACTIVE', detail: 'Frames custom mini-split chemical flush around salt-air corrosion & spore remediation instead of simple wash.' },
                                                         { id: 'tax_transparency', title: 'Hawaii GET Tax (4.712%) Transparency', impact: '+12% Lead Trust Factor', status: 'ACTIVE', detail: 'Ensures Oahu 4.712% tax transparency upfront with zero hidden fees.' }
                                                     ]).map((p: any) => (
                                                         <div key={p.id} className="rounded-xl border border-slate-800 bg-slate-950/80 p-2 text-[10px]">
@@ -2336,7 +2336,7 @@ export default function DevOsEagleEyePage() {
                                             {seoClusterTab === 'pages' && (
                                                 <div className="space-y-2 max-h-56 overflow-y-auto font-mono text-[10px]">
                                                     {[
-                                                        { route: "/clean-vs-replace-window-ac", name: "Clean vs Replace Matrix", intent: "Old AC mold vs new AC", bridge: "$275 Waipahu bench or new LG Dual Inverter + $45 rebate", schema: "FAQPage, HowTo" },
+                                                        { route: "/clean-vs-replace-window-ac", name: "Clean vs Replace Matrix", intent: "Old AC mold vs new AC", bridge: "Clean-vs-replace assessment or new LG Dual Inverter + $45 rebate", schema: "FAQPage, HowTo" },
                                                         { route: "/window-ac-installation", name: "Professional Installation", intent: "Jalousie & bracket mount", bridge: "Book appointment (zero deposit) or buy with in-stock unit", schema: "HVACBusiness, FAQPage" },
                                                         { route: "/shop/window-ac-plug-guide", name: "115V vs 230V Plug Guide", intent: "18k & 23.5k outlet confusion", bridge: "Direct add-to-cart for 28x 18k and 18x 23.5k units", schema: "Product, HowTo, FAQPage" },
                                                         { route: "/mini-split-estimate", name: "Mini Split Estimate & Sizing", intent: "Split AC cost Oahu", bridge: "Multi-zone selector + free 60A/100A electrical panel check", schema: "HVACBusiness, FAQPage" }
@@ -2381,9 +2381,9 @@ export default function DevOsEagleEyePage() {
                                                             LG Dual Inverter Window AC Units In-Stock Oahu | Waipahu Warehouse
                                                         </h4>
                                                         <div className="flex items-center gap-2 my-1 text-[10px] text-amber-400 font-mono">
-                                                            <span>★★★★★ 4.9 (128 reviews)</span>
+                                                            <span>★★★★★ 4.9 (142 reviews)</span>
                                                             <span className="text-slate-500">•</span>
-                                                            <span className="text-emerald-400 font-bold">$504.00 – $922.00</span>
+                                                            <span className="text-emerald-400 font-bold">$395.00 – $1,200.00</span>
                                                             <span className="text-slate-500">•</span>
                                                             <span className="text-cyan-400">In Stock</span>
                                                         </div>
@@ -2654,9 +2654,9 @@ export default function DevOsEagleEyePage() {
                                             <li>• State Contractor License: <span className="text-emerald-400">CT-36775</span></li>
                                             <li>• Mini-Split Basic Cleaning: <span className="text-cyan-300">$175 (~1 hr)</span></li>
                                             <li>• Mini-Split Premium Chemical Flush: <span className="text-cyan-300">$275 (~1.5 hrs)</span></li>
-                                            <li>• Window AC Teardown Immersion: <span className="text-cyan-300">$275 (Waipahu Drop-off)</span></li>
+                                            <li>• Window AC Inventory Range: <span className="text-cyan-300">$395.00 – $1,200.00 (16 Models)</span></li>
                                             <li>• Island-Wide Delivery: <span className="text-cyan-300">$50 Flat</span></li>
-                                            <li>• Warehouse Pickup: <span className="text-cyan-300">94-1388 Moape St, Waipahu (Free)</span></li>
+                                            <li>• Warehouse Pickup: <span className="text-cyan-300">94-150 Leoleo St #203, Waipahu (Free)</span></li>
                                         </ul>
                                     </div>
                                 </div>

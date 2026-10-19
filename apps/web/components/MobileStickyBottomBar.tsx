@@ -4,15 +4,18 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { sendGAEvent } from '@next/third-parties/google';
-import { Phone, Calendar, ShoppingCart, Sparkles, Wrench, ArrowRight } from 'lucide-react';
+import { Phone, Calendar, ShoppingCart, Sparkles, Wrench } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 export default function MobileStickyBottomBar() {
     const pathname = usePathname() || '';
     const [isVisible, setIsVisible] = useState(false);
+    const { items, openCart } = useCart();
 
-    // Path-based UI Exclusion
+    // Path-based UI Exclusion (also hide on /shop/[id-slug] PDPs where the dedicated product purchase bar is active)
     const excludedPaths = ['/contact', '/checkout', '/admin'];
-    const isExcluded = excludedPaths.some(path => pathname.startsWith(path));
+    const isPdpRoute = /^\/shop\/\d+-/.test(pathname);
+    const isExcluded = isPdpRoute || excludedPaths.some(path => pathname.startsWith(path));
 
     // Scroll delay to prevent Hero Decision Fatigue
     useEffect(() => {
@@ -27,34 +30,25 @@ export default function MobileStickyBottomBar() {
 
     if (isExcluded) return null;
 
+    const totalCartCount = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
     // Context-Aware CTA Resolver
     const getCtaConfig = () => {
-        // 1. Specific Product Detail & Product Landing Pages
-        if (pathname.startsWith('/shop/') && !pathname.endsWith('/window-ac-plug-guide') && !pathname.endsWith('/lg-dual-inverter-guide')) {
+        // 1. Main Shop Catalog & Shop Guides
+        if (pathname === '/shop' || pathname.startsWith('/shop/')) {
             return {
-                text: 'Book Appt (Zero $)',
+                text: 'Free $0 Estimate',
                 icon: Calendar,
                 href: '/contact?service=window_ac_purchase',
-                gaEvent: 'click_to_book_product',
-                gaLabel: 'Sticky Bottom Product Appt'
-            };
-        }
-
-        // 2. Main Shop Catalog
-        if (pathname === '/shop') {
-            return {
-                text: 'Book Appt Form',
-                icon: Calendar,
-                href: '/contact',
                 gaEvent: 'click_to_book_catalog',
                 gaLabel: 'Sticky Bottom Catalog Appt'
             };
         }
 
-        // 3. Cleaning & Maintenance
+        // 2. Cleaning & Maintenance
         if (pathname.includes('cleaning') || pathname.includes('maintenance')) {
             return {
-                text: 'Book $275 Teardown',
+                text: 'Book $175+ Cleaning',
                 icon: Sparkles,
                 href: '/contact?service=cleaning',
                 gaEvent: 'click_to_book_cleaning',
@@ -62,10 +56,10 @@ export default function MobileStickyBottomBar() {
             };
         }
 
-        // 4. AC Repair
+        // 3. AC Repair
         if (pathname.includes('repair')) {
             return {
-                text: 'Diagnose AC Fault',
+                text: '$175 AC Diagnostic',
                 icon: Wrench,
                 href: '/contact?service=repair',
                 gaEvent: 'click_to_book_repair',
@@ -73,10 +67,10 @@ export default function MobileStickyBottomBar() {
             };
         }
 
-        // 5. Mini Split Pages
+        // 4. Mini Split Pages
         if (pathname === '/mini_split_ac') {
             return {
-                text: 'Free Survey (Zero $)',
+                text: 'Free $0 Estimate',
                 icon: Calendar,
                 scrollTarget: 'system-builder',
                 href: '/mini_split_ac#system-builder',
@@ -87,7 +81,7 @@ export default function MobileStickyBottomBar() {
 
         if (pathname.includes('mini-split')) {
             return {
-                text: 'Free Survey (Zero $)',
+                text: 'Free $0 Estimate',
                 icon: Calendar,
                 href: '/mini-split-estimate',
                 gaEvent: 'click_to_estimate',
@@ -95,10 +89,10 @@ export default function MobileStickyBottomBar() {
             };
         }
 
-        // 6. Sizing, Comparisons & Guides
+        // 5. Sizing, Comparisons & Guides
         if (pathname === '/sizing' || pathname.includes('guide') || pathname.includes('vs')) {
             return {
-                text: 'Book Consultation',
+                text: 'Free $0 Estimate',
                 icon: Calendar,
                 href: '/contact',
                 gaEvent: 'click_to_book_consult',
@@ -106,9 +100,9 @@ export default function MobileStickyBottomBar() {
             };
         }
 
-        // 7. Default Site-Wide CTA
+        // 6. Default Site-Wide CTA
         return {
-            text: 'Book Appt (Zero $)',
+            text: 'Free $0 Estimate',
             icon: Calendar,
             href: '/contact',
             gaEvent: 'click_to_book',
@@ -137,7 +131,7 @@ export default function MobileStickyBottomBar() {
                     <span className="truncate text-slate-200">$0 to Book New / Replacements</span>
                 </div>
                 <span className="text-cyan-400 font-mono text-[9px] uppercase tracking-wider shrink-0 pl-1">
-                    Direct Dispatch
+                    Lic #CT-36775
                 </span>
             </div>
 
@@ -155,8 +149,20 @@ export default function MobileStickyBottomBar() {
                     <span className="text-[9px] text-cyan-300 font-normal normal-case tracking-normal">(808) 488-1111</span>
                 </a>
                 
-                {/* Dynamic Context Action CTA */}
-                {cta.scrollTarget ? (
+                {/* If user has items in cart, surface 1-Tap Cart Checkout Accelerator */}
+                {totalCartCount > 0 ? (
+                    <button
+                        type="button"
+                        onClick={() => {
+                            sendGAEvent('event', 'open_cart_sticky', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Cart Accelerator' });
+                            openCart();
+                        }}
+                        className="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(16,185,129,0.4)] active:scale-95"
+                    >
+                        <ShoppingCart className="size-4 shrink-0" />
+                        <span className="truncate">Checkout Now ({totalCartCount})</span>
+                    </button>
+                ) : cta.scrollTarget ? (
                     <a 
                         href={`#${cta.scrollTarget}`}
                         onClick={(e) => {
@@ -167,7 +173,7 @@ export default function MobileStickyBottomBar() {
                             }
                             sendGAEvent('event', cta.gaEvent, { event_category: 'Mobile Conversion', event_label: cta.gaLabel });
                         }}
-                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95 btn-promo-glow btn-shimmer"
+                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95"
                     >
                         <cta.icon className="size-4 shrink-0" />
                         <span className="truncate">{cta.text}</span>
@@ -177,7 +183,7 @@ export default function MobileStickyBottomBar() {
                         href={cta.href}
                         prefetch={false}
                         onClick={() => sendGAEvent('event', cta.gaEvent, { event_category: 'Mobile Conversion', event_label: cta.gaLabel })}
-                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95 btn-promo-glow btn-shimmer"
+                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95"
                     >
                         <cta.icon className="size-4 shrink-0" />
                         <span className="truncate">{cta.text}</span>

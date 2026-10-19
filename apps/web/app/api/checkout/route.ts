@@ -47,12 +47,15 @@ export async function POST(req: Request) {
             const displayName = mpn !== 'N/A' && !canonicalItem.name.includes(mpn)
                 ? `${canonicalItem.name} (${mpn})`
                 : canonicalItem.name;
+            const resolvedImg = clientItem.image_url
+                ? (clientItem.image_url.startsWith('http') ? clientItem.image_url : `https://www.affordablehome-ac.com${clientItem.image_url}`)
+                : undefined;
             return {
                 price_data: {
                     currency: 'usd',
                     product_data: {
                         name: displayName, // Use backend name + canonical model code
-                        images: clientItem.image_url && clientItem.image_url.startsWith('http') ? [clientItem.image_url] : undefined,
+                        images: resolvedImg ? [resolvedImg] : undefined,
                         metadata: {
                             product_id: canonicalItem.product_id.toString(), // CRITICAL FOR WEBHOOK IDEMPOTENCY
                             model_number: mpn, 
@@ -73,7 +76,6 @@ export async function POST(req: Request) {
                     product_data: {
                         name: 'Oahu Island-Wide Delivery',
                         description: 'Flat rate delivery to residential zones (excluding North Shore/Waianae/Waikiki/Waimanalo)',
-                        images: ['https://staging.affordablehome-ac.com/delivery-icon.png'], // Optional icon
                     },
                     unit_amount: 5000, // $50.00
                 },

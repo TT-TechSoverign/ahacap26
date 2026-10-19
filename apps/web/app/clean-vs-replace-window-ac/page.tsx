@@ -297,7 +297,7 @@ export default function CleanVsReplacePage() {
                                             <div>
                                                 <h3 className="text-2xl font-header font-black uppercase text-white">Upgrade to LG Dual Inverter</h3>
                                                 <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                                                    Your unit&apos;s age, coil condition, or energy draw makes off-site repair economically unviable. Investing in a brand new LG Dual Inverter ($560–$755, or $395+ standard units) pays for itself quickly.
+                                                    Your unit&apos;s age, coil condition, or energy draw makes off-site repair economically unviable. Investing in a brand new LG Dual Inverter ($560–$785 for 115V models, or $395+ standard units) pays for itself quickly.
                                                 </p>
                                             </div>
                                         </div>
@@ -430,7 +430,7 @@ export default function CleanVsReplacePage() {
                                     </td>
                                     <td className="p-4 sm:p-5 text-slate-300">$275+ (Third-Party Labor)</td>
                                     <td className="p-4 sm:p-5 text-emerald-400 font-bold bg-emerald-500/5 border-l border-r border-emerald-500/20">
-                                        $560 – $755 (Minus $45 Rebate)
+                                        $560 – $785 (Minus $45 Rebate)
                                     </td>
                                 </tr>
                                 <tr>

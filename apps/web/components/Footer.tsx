@@ -34,8 +34,15 @@ export default function Footer() {
         general_availability_range: `Scheduling for ${getRollingWindow(1, 7)}, ${new Date().getFullYear()}`,
     };
 
-    const rawSchedule = content?.footer_schedule || {};
-    const isStaleSchedule = JSON.stringify(rawSchedule).includes('Oct 1-') || JSON.stringify(rawSchedule).includes('Oct 15-') || JSON.stringify(rawSchedule).includes('Sep ');
+    const rawSchedule: Record<string, any> = content?.footer_schedule || {};
+    const rawStr = JSON.stringify(rawSchedule);
+    const isStaleSchedule =
+        !rawSchedule?.mini_split_estimate_date ||
+        rawStr.includes('Oct ') ||
+        rawStr.includes('Sep ') ||
+        rawStr.includes('Feb ') ||
+        rawStr.includes('2024') ||
+        rawStr.includes('2025');
     const schedule = isStaleSchedule
         ? defaults
         : {
@@ -132,7 +139,7 @@ export default function Footer() {
                             />
                         </div>
                         <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-                            Oahu&apos;s quality provider of energy-efficient cooling solutions. Specializing in Window Units, Mini-Split AC and Central AC services for island living.
+                            Oahu&apos;s quality provider of energy-efficient cooling solutions. Specializing in Window Units and Ductless Mini-Split AC services for island living.
                         </p>
                     </div>
 
@@ -141,14 +148,14 @@ export default function Footer() {
                         <h3 className="text-white font-header font-bold uppercase tracking-widest mb-6 text-lg">Services &amp; Shop</h3>
                         <ul className="space-y-4 w-full">
                             {[
-                                { text: 'Window AC Shop ($395–$1,025)', href: '/shop' },
+                                { text: 'Window AC Shop ($395–$1,200)', href: '/shop' },
                                 { text: '8,000 BTU Bedroom Window ACs', href: '/shop/lg-dual-inverter-8000-btu-oahu' },
                                 { text: 'Living Room Window ACs (12k–23.5k)', href: '/living-room-window-ac-oahu' },
                                 { text: 'LG Dual Inverter Lineup', href: '/shop/lg-dual-inverter-guide' },
                                 { text: 'Window AC Installation', href: '/window-ac-installation' },
                                 { text: 'Mini Split AC Installation', href: '/mini_split_ac' },
                                 { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
-                                { text: 'AC Repair Service', href: '/ac-repair' }
+                                { text: 'AC Repair Service', href: '/ac-repair-oahu' }
                             ].map((item) => (
                                 <li key={item.text}>
                                     <Link href={item.href} prefetch={false} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
@@ -232,11 +239,9 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Availability Schedule Section Moved to Top */}
-
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">
-                        © 2026 Affordable Home A/C. All rights reserved.
+                        © 2026 Affordable Home A/C • LIC# CT-36775 • Island-Scale Cooling Solutions
                     </p>
                     <div className="flex flex-col md:flex-row items-center gap-6">
                         <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">

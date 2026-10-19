@@ -6,8 +6,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { cn, isCampaignActive } from '@/lib/utils';
 import { useCart } from '../context/CartContext';
-import { useContent } from '../lib/context/ContentContext';
-import { EditableText } from './EditableText';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 import { 
     ShoppingCart, 
     Wind, 
@@ -17,8 +16,7 @@ import {
     ShieldCheck, 
     MapPin, 
     Compass, 
-    Calendar,
-    Phone
+    Calendar
 } from 'lucide-react';
 
 const getNavIcon = (href: string, text: string) => {
@@ -37,7 +35,7 @@ const getNavIcon = (href: string, text: string) => {
 export default function NavbarV2() {
     const pathname = usePathname();
     const { items, openCart } = useCart();
-    const { content } = useContent();
+    const { inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
 
     // --- Sticky-Free Navigation Logic ---
     const [headerVisible, setHeaderVisible] = useState(true);
@@ -64,7 +62,7 @@ export default function NavbarV2() {
         { text: "Mini Split AC", href: "/mini_split_ac" },
         { text: "Split AC Cleaning", href: "/mini_split_ac_maintenance" },
         { text: "Shop Window AC", href: "/shop" },
-        { text: "AC Repair", href: "/ac-repair" },
+        { text: "AC Repair", href: "/ac-repair-oahu" },
         { text: "Clean vs Replace", href: "/clean-vs-replace-window-ac" },
         { text: "Service Areas", href: "/service-areas" },
     ];
@@ -104,7 +102,7 @@ export default function NavbarV2() {
                                 prefetch={false}
                                 className="text-cyan-300 hover:text-white font-bold transition-colors hover:underline"
                             >
-                                16 Window AC Models In-Stock ($395–$1,025) • Same-Day Waipahu Pickup
+                                {inStockAcCount} Window AC Models In-Stock (${minPrice}–${maxPrice.toLocaleString()}) • Same-Day Waipahu Pickup
                             </Link>
                         </div>
                         <div className="flex items-center gap-4">
@@ -132,17 +130,17 @@ export default function NavbarV2() {
                     <div className="max-w-7xl mx-auto px-6 py-1">
                         <div className="flex justify-between items-center relative py-1">
 
-                            {/* Left Brands (Desktop Only: Window & Central Mix) */}
+                            {/* Left Brands (Desktop Only: Window & Built-In Mix) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-end pr-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
                                 <Link prefetch={false} href="/shop" className="text-rose-400 font-sans font-black tracking-tighter text-lg relative group cursor-pointer block">
                                     LG
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/shop" className="text-blue-400 font-serif font-bold tracking-wide text-xs relative group cursor-pointer block">
+                                <Link prefetch={false} href="/shop?category=ge" className="text-blue-400 font-serif font-bold tracking-wide text-xs relative group cursor-pointer block">
                                     GE
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/shop#rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-sm relative group cursor-pointer block pb-1">
+                                <Link prefetch={false} href="/hawaii-energy-rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-sm relative group cursor-pointer block pb-1">
                                     Hawai&apos;i Energy
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -150,7 +148,7 @@ export default function NavbarV2() {
 
                             {/* Center: Prominent Logo */}
                             <div className="flex justify-center z-20">
-                                <Link prefetch={false} href="/" className="block relative h-16 w-36 md:h-20 md:w-48 group shrink-0 logo-promo-glow">
+                                <Link prefetch={false} href="/" className="block relative h-16 w-36 md:h-20 md:w-48 group shrink-0">
                                     <Image
                                         src="/assets/logo.svg"
                                         alt="AHAC Logo"
@@ -175,9 +173,9 @@ export default function NavbarV2() {
                                     DAIKIN
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/mini_split_ac#carrier" className="text-blue-400 font-sans font-extrabold tracking-tighter text-xs relative group cursor-pointer block">
-                                    CARRIER
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                                <Link prefetch={false} href="/mini_split_ac#lg" className="text-rose-400 font-sans font-extrabold tracking-tighter text-xs relative group cursor-pointer block">
+                                    LG DUCTLESS
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                             </div>
                         </div>
@@ -228,14 +226,14 @@ export default function NavbarV2() {
                                             <div className="invisible opacity-0 group-hover/navitem:visible group-hover/navitem:opacity-100 transition-all duration-150 absolute left-1/2 -translate-x-1/2 top-full pt-2 w-72 z-50">
                                                 <div className="bg-[#0a0e14]/98 border border-cyan-500/30 rounded-2xl p-3 shadow-2xl backdrop-blur-xl space-y-1.5 text-left">
                                                     <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold border-b border-white/10">
-                                                        Waipahu Warehouse • $395–$1,025
+                                                        Waipahu Warehouse • ${minPrice}–${maxPrice.toLocaleString()}
                                                     </div>
                                                     {[
-                                                        { label: 'All 16 In-Stock Window ACs', sub: 'Free Pickup or $50 Oahu Delivery', href: '/shop' },
+                                                        { label: `All ${inStockAcCount} In-Stock Window ACs`, sub: 'Free Pickup or $50 Oahu Delivery', href: '/shop' },
                                                         { label: 'Bedroom 115V (6k–8k BTU)', sub: 'From $395 • Standard 3-Prong Plug', href: '/shop?capacity=BEDROOM' },
-                                                        { label: 'Living Room (10k–14k BTU)', sub: '$650–$785 • 115V Dual Inverters', href: '/shop?capacity=MASTER' },
-                                                        { label: 'Large Room 230V (18k–23.5k)', sub: '$865–$1,025 • High-Velocity Cooling', href: '/shop?capacity=LIVING' },
-                                                        { label: '26" Thru-the-Wall (GE)', sub: 'Fits RAB26A Condo Wall Sleeves', href: '/shop?category=ge' },
+                                                        { label: 'Living Room (10k–14k BTU)', sub: '$625–$785 • 115V Dual Inverters', href: '/shop?capacity=MASTER' },
+                                                        { label: 'Large Room 230V (18k–23.5k)', sub: '$925–$1,025 • High-Velocity Cooling', href: '/shop?capacity=LIVING' },
+                                                        { label: '26" Thru-the-Wall (GE)', sub: '$1,000–$1,200 • Fits RAB26A Sleeves', href: '/shop?category=ge' },
                                                     ].map((item) => (
                                                         <Link
                                                             key={item.href}

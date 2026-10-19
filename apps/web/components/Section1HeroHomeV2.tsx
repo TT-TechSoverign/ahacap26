@@ -3,8 +3,11 @@
 import Link from 'next/link';
 import { EditableText } from './EditableText';
 import { ArrowRight } from 'lucide-react';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 
 export default function Section1HeroHomeV2() {
+    const { inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
+
     return (
         <section className="relative w-full min-h-[520px] md:h-[650px] flex items-center justify-center bg-transparent py-8 md:py-0">
             {/* Readability Overlay over global background */}
@@ -46,7 +49,9 @@ export default function Section1HeroHomeV2() {
                         className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-lg transition-all"
                     >
                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                        <span>16 Window ACs In-Stock ($395–$1,025) • Same-Day Waipahu Pickup or $50 Delivery</span>
+                        <span>
+                            {inStockAcCount} Window AC Models In-Stock (${minPrice}–${maxPrice.toLocaleString()}) • Same-Day Waipahu Pickup or $50 Delivery
+                        </span>
                         <ArrowRight className="size-3.5 shrink-0" />
                     </Link>
 

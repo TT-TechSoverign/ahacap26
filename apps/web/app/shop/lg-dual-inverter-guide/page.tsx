@@ -38,8 +38,8 @@ const INITIAL_GUIDE_MODELS: GuideModel[] = [
         id: 1,
         name: "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
         price: 560,
-        promo_price: 504,
-        stock: 30,
+        promo_price: null,
+        stock: 11,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 6000,
@@ -57,7 +57,7 @@ const INITIAL_GUIDE_MODELS: GuideModel[] = [
         id: 2,
         name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
         price: 595,
-        promo_price: 535,
+        promo_price: null,
         stock: 0,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
@@ -76,8 +76,8 @@ const INITIAL_GUIDE_MODELS: GuideModel[] = [
         id: 3,
         name: "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
         price: 650,
-        promo_price: 585,
-        stock: 15,
+        promo_price: null,
+        stock: 10,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 10000,
@@ -95,8 +95,8 @@ const INITIAL_GUIDE_MODELS: GuideModel[] = [
         id: 4,
         name: "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
         price: 745,
-        promo_price: 670,
-        stock: 30,
+        promo_price: null,
+        stock: 20,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 12000,
@@ -114,8 +114,8 @@ const INITIAL_GUIDE_MODELS: GuideModel[] = [
         id: 5,
         name: "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
         price: 785,
-        promo_price: 706,
-        stock: 15,
+        promo_price: null,
+        stock: 48,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 14000,
@@ -132,9 +132,9 @@ const INITIAL_GUIDE_MODELS: GuideModel[] = [
     {
         id: 6,
         name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
-        price: 865,
-        promo_price: 778,
-        stock: 20,
+        price: 925,
+        promo_price: null,
+        stock: 5,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 18000,
@@ -151,9 +151,9 @@ const INITIAL_GUIDE_MODELS: GuideModel[] = [
     {
         id: 7,
         name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-        price: 985,
-        promo_price: 886,
-        stock: 0,
+        price: 1025,
+        promo_price: null,
+        stock: 15,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
         btu: 23500,
@@ -190,7 +190,7 @@ export default function LgDualInverterGuidePage() {
                         return {
                             ...m,
                             price: live.price,
-                            promo_price: live.promo_price ?? m.promo_price,
+                            promo_price: live.promo_price ?? null,
                             stock: live.stock,
                             coverage: live.coverage || m.coverage,
                             noise_level: live.noise_level || m.noise_level,
@@ -205,13 +205,20 @@ export default function LgDualInverterGuidePage() {
         };
     }, []);
 
-    const filteredModels = allModels.filter(m => {
-        if (selectedFilter === '115v') return m.voltage?.includes('115V');
-        if (selectedFilter === '230v') return m.voltage?.includes('230V');
-        if (selectedFilter === 'bedroom') return (m.btu || 0) <= 10000;
-        if (selectedFilter === 'living') return (m.btu || 0) >= 12000;
-        return true;
-    });
+    const filteredModels = allModels
+        .filter(m => {
+            if (selectedFilter === '115v') return m.voltage?.includes('115V');
+            if (selectedFilter === '230v') return m.voltage?.includes('230V');
+            if (selectedFilter === 'bedroom') return (m.btu || 0) <= 10000;
+            if (selectedFilter === 'living') return (m.btu || 0) >= 12000;
+            return true;
+        })
+        .sort((a, b) => {
+            const aInStock = a.stock > 0 ? 1 : 0;
+            const bInStock = b.stock > 0 ? 1 : 0;
+            if (aInStock !== bInStock) return bInStock - aInStock;
+            return (a.btu || 0) - (b.btu || 0);
+        });
 
     const handleBuy = (product: Product) => {
         if (product.stock <= 0) return;

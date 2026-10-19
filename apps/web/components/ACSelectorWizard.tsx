@@ -2,7 +2,10 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { isCampaignActive } from '@/lib/utils';
+import { isCampaignActive, generateProductSlug } from '@/lib/utils';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { getProductImages } from '@/lib/product-images';
+import { useCart } from '@/context/CartContext';
 import { Button } from '@/components/ui/Button';
 import { sendGAEvent } from '@next/third-parties/google';
 import { trackFunnelEvent } from '@/lib/tracking';
@@ -27,7 +30,8 @@ import {
     Minus, 
     AlertTriangle,
     Snowflake,
-    Flame
+    Flame,
+    ShoppingCart
 } from 'lucide-react';
 
 interface Product {
@@ -58,11 +62,12 @@ interface Product {
     dimensions?: string;
     weight?: string;
     warranty?: string;
-    promo_price?: number;
-    discount_percent?: number;
+    promo_price?: number | null;
+    discount_percent?: number | null;
 }
 
 export function ACSelectorWizard() {
+    const { addToCart, openCart } = useCart();
     // Step state
     const [step, setStep] = useState(1);
     
@@ -76,22 +81,23 @@ export function ACSelectorWizard() {
     const [sunExposure, setSunExposure] = useState<'shaded' | 'moderate' | 'sunny'>('moderate');
     const [occupants, setOccupants] = useState<number>(2);
 
-    // Catalog state
-    const [products, setProducts] = useState<Product[]>([]);
-    const [loadingProducts, setLoadingProducts] = useState<boolean>(true);
+    // Catalog state initialized immediately with canonical seed so Step 5 never flashes empty
+    const [products, setProducts] = useState<Product[]>(INITIAL_CATALOG_PRODUCTS);
+    const [loadingProducts, setLoadingProducts] = useState<boolean>(false);
     const [loadError, setLoadError] = useState<string>('');
 
-    // Load products on mount
+    // Load live products on mount
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch('/api/v1/products');
+                const res = await fetch('/api/v1/products', { cache: 'no-store' });
                 if (!res.ok) throw new Error('Could not fetch catalog inventory.');
                 const data = await res.json();
-                setProducts(data);
+                if (Array.isArray(data) && data.length > 0) {
+                    setProducts(data);
+                }
             } catch (err: any) {
                 console.error("Error loading products in ACSelectorWizard:", err);
-                setLoadError(err.message || 'Unable to retrieve inventory.');
             } finally {
                 setLoadingProducts(false);
             }
@@ -180,13 +186,13 @@ export function ACSelectorWizard() {
         return { area, recommendedBtu };
     }, [width, length, isKitchen, ceilHeight, insulation, region, sunExposure, occupants]);
 
-    // Match products with sizing rules
+    // Match products with sizing rules — strictly filter p.stock > 0 so out-of-stock units are never recommended
     const matches = useMemo(() => {
         const reqBtu = calculation.recommendedBtu;
         
-        // Filter out non-cooling sleeve accessories and invalid entries
+        // Filter out non-cooling sleeve accessories, out-of-stock units, and invalid entries
         const coolingUnits = products.filter(
-            p => p.btu && p.btu > 0 && p.subcategory !== 'casement' && p.category === 'WINDOW_AC'
+            p => p.stock > 0 && p.btu && p.btu > 0 && p.subcategory !== 'casement' && p.category === 'WINDOW_AC'
         );
 
         return coolingUnits.map(product => {
@@ -751,6 +757,8 @@ export function ACSelectorWizard() {
                                         {matches.map((product) => {
                                             const isPromo = isCampaignActive() && product.promo_price && product.promo_price > 0;
                                             const activePrice = isPromo ? product.promo_price! : product.price;
+                                            const unitImage = getProductImages(product.id)[0] || product.image_url || '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp';
+                                            const productSlug = generateProductSlug(product.id, product.name);
 
                                             return (
                                                 <div 
@@ -767,7 +775,7 @@ export function ACSelectorWizard() {
                                                         <div className="flex gap-4 items-start">
                                                             <div className="relative size-24 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center shrink-0 overflow-hidden">
                                                                 <Image 
-                                                                    src={product.image_url || '/assets/logo.svg'} 
+                                                                    src={unitImage} 
                                                                     alt={product.name} 
                                                                     fill
                                                                     className="object-contain p-2"
@@ -775,7 +783,12 @@ export function ACSelectorWizard() {
                                                                 />
                                                             </div>
                                                             <div className="space-y-1">
-                                                                <span className="font-mono text-[8px] text-slate-500 uppercase tracking-widest">{product.subcategory?.replace('_', ' ')}</span>
+                                                                <div className="flex flex-wrap items-center gap-1.5">
+                                                                    <span className="font-mono text-[8px] text-slate-400 uppercase tracking-widest">{product.subcategory?.replace('_', ' ')}</span>
+                                                                    <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono text-[8px] font-bold uppercase">
+                                                                        Waipahu: {product.stock} In Stock
+                                                                    </span>
+                                                                </div>
                                                                 <h4 className="font-header font-black text-sm text-white uppercase tracking-tight group-hover:text-primary transition-colors pr-20">{product.name}</h4>
                                                                 <p className="text-lg font-header font-black text-white mt-1">
                                                                     {isPromo && (
@@ -809,21 +822,43 @@ export function ACSelectorWizard() {
 
                                                         {/* Specs Grid */}
                                                         <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/5 text-[10px] font-sans text-slate-400">
-                                                            <div>⚡ **Voltage:** {product.voltage || '115V'}</div>
-                                                            <div>❄️ **BTU Capacity:** {product.btu?.toLocaleString() || 'N/A'}</div>
-                                                            <div>📐 **Dimensions:** {product.dimensions || 'N/A'}</div>
-                                                            <div>🛡️ **Warranty:** {product.warranty || '1 Year Limited'}</div>
+                                                            <div>⚡ <strong className="text-white">Voltage:</strong> {product.voltage || '115V'}</div>
+                                                            <div>❄️ <strong className="text-white">BTU Capacity:</strong> {product.btu?.toLocaleString() || 'N/A'}</div>
+                                                            <div>📐 <strong className="text-white">Dimensions:</strong> {product.dimensions || 'N/A'}</div>
+                                                            <div>🛡️ <strong className="text-white">Warranty:</strong> {product.warranty || '1 Year Limited'}</div>
                                                         </div>
 
                                                         {/* Policies Disclosure Footer */}
                                                         <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3 text-[9px] font-sans text-slate-400 space-y-1 mt-2">
-                                                            <div className="flex items-center gap-1.5 text-slate-500"><Truck className="size-3" /> Pickup: **Waipahu Warehouse ($0)** | Delivery: **Oahu Flat-Rate ($50)**</div>
-                                                            <div className="flex items-center gap-1.5 text-slate-500"><Shield className="size-3" /> Returns: **Final Sale / No Returns** (Federal AC Regulations)</div>
+                                                            <div className="flex items-center gap-1.5 text-slate-400"><Truck className="size-3 text-cyan-400 shrink-0" /> <span>Pickup: <strong className="text-white">Waipahu Warehouse ($0)</strong> | Delivery: <strong className="text-white">Oahu Flat-Rate ($50)</strong></span></div>
+                                                            <div className="flex items-center gap-1.5 text-slate-400"><Shield className="size-3 text-emerald-400 shrink-0" /> <span>Returns: <strong className="text-white">Final Sale / No Returns</strong> (Federal AC Regulations)</span></div>
                                                         </div>
                                                     </div>
 
-                                                    {/* CTA Actions - Strictly By Appointment First */}
+                                                    {/* CTA Actions - Direct 1-Tap Order + Zero-Cost Consultation */}
                                                     <div className="space-y-2 pt-6 mt-4 border-t border-white/5">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                                addToCart({
+                                                                    ...product,
+                                                                    price: activePrice,
+                                                                    promo_price: isPromo ? product.promo_price! : undefined,
+                                                                    image_url: unitImage,
+                                                                });
+                                                                trackFunnelEvent('sizing_add_to_cart', {
+                                                                    product_id: product.id,
+                                                                    name: product.name,
+                                                                    price: activePrice,
+                                                                    btu: product.btu
+                                                                });
+                                                                openCart();
+                                                            }}
+                                                            className="w-full py-3 px-4 bg-primary hover:bg-cyan-300 hover:scale-[1.01] text-slate-950 font-header font-black uppercase text-[11px] tracking-wider rounded-xl transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)] flex items-center justify-center gap-2 text-center"
+                                                        >
+                                                            <ShoppingCart className="size-3.5" />
+                                                            Add to Order (${activePrice})
+                                                        </button>
                                                         <div className="flex gap-2">
                                                             <Link
                                                                 href={`/contact?service=AC+Sizing+Consultation&notes=${encodeURIComponent(getDispatchNotes())}%20Recommended%20Unit:%20${encodeURIComponent(product.name)}`}
@@ -835,13 +870,13 @@ export function ACSelectorWizard() {
                                                                         btu: product.btu
                                                                     });
                                                                 }}
-                                                                className="flex-1 py-3 px-3 bg-primary hover:bg-cyan-300 hover:scale-[1.02] text-slate-950 font-header font-black uppercase text-[10px] tracking-wider rounded-xl transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)] flex items-center justify-center gap-1.5 text-center"
+                                                                className="flex-1 py-2.5 px-3 bg-white/5 border border-white/10 hover:border-primary/40 hover:bg-white/10 text-white font-header font-bold uppercase text-[10px] tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 text-center"
                                                             >
-                                                                Schedule Consultation <ArrowRight className="size-3" />
+                                                                Schedule $0 Estimate <ArrowRight className="size-3 text-primary" />
                                                             </Link>
                                                             <Link
-                                                                href={`/shop/${product.id}-${product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}
-                                                                className="px-3.5 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-mono text-[9px] uppercase tracking-widest rounded-xl transition-all flex items-center justify-center shrink-0"
+                                                                href={`/shop/${productSlug}`}
+                                                                className="px-3.5 py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-mono text-[9px] uppercase tracking-widest rounded-xl transition-all flex items-center justify-center shrink-0"
                                                             >
                                                                 Specs
                                                             </Link>

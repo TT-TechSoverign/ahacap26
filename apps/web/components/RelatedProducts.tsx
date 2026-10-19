@@ -7,47 +7,45 @@ import { ChevronRight, ArrowUpRight, ShoppingCart, Check } from 'lucide-react';
 import { Product } from '@/types/inventory';
 import { generateProductSlug, isCampaignActive } from '@/lib/utils';
 import { useCart } from '@/context/CartContext';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { fetchLiveProductsClient } from '@/lib/use-live-inventory';
+import { getProductImages } from '@/lib/product-images';
 
 interface RelatedProductsProps {
   currentProduct: Product;
 }
 
+function selectRelatedInStock(source: Product[], currentProduct: Product): Product[] {
+  return source
+    .filter((p) => p.id !== currentProduct.id && p.stock > 0 && (p.btu || 0) > 0)
+    .sort((a, b) => {
+      if (a.subcategory === currentProduct.subcategory && b.subcategory !== currentProduct.subcategory) return -1;
+      if (a.subcategory !== currentProduct.subcategory && b.subcategory === currentProduct.subcategory) return 1;
+      return Math.abs((a.btu || 0) - (currentProduct.btu || 0)) - Math.abs((b.btu || 0) - (currentProduct.btu || 0));
+    })
+    .slice(0, 4);
+}
+
 export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
   const { addToCart, openCart } = useCart();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>(() =>
+    selectRelatedInStock(INITIAL_CATALOG_PRODUCTS, currentProduct)
+  );
   const [addedId, setAddedId] = useState<number | null>(null);
   const isPromo = isCampaignActive();
 
   useEffect(() => {
-    async function fetchRelated() {
-      try {
-        const res = await fetch('/api/v1/products', { cache: 'no-store' });
-        if (res.ok) {
-          const data: Product[] = await res.json();
-          // Filter out the current product, prioritize in-stock, and match subcategory or brand
-          const filtered = data
-            .filter((p) => p.id !== currentProduct.id)
-            .sort((a, b) => {
-              const aInStock = a.stock > 0 ? 1 : 0;
-              const bInStock = b.stock > 0 ? 1 : 0;
-              if (aInStock !== bInStock) return bInStock - aInStock;
-              if (a.subcategory === currentProduct.subcategory && b.subcategory !== currentProduct.subcategory) return -1;
-              if (a.subcategory !== currentProduct.subcategory && b.subcategory === currentProduct.subcategory) return 1;
-              return 0;
-            });
-          setProducts(filtered.slice(0, 4));
-        }
-      } catch (e) {
-        console.error("Failed to load related products:", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchRelated();
+    let active = true;
+    fetchLiveProductsClient().then((data) => {
+      if (!active || !Array.isArray(data) || data.length === 0) return;
+      setProducts(selectRelatedInStock(data, currentProduct));
+    });
+    return () => {
+      active = false;
+    };
   }, [currentProduct]);
 
-  if (loading || products.length === 0) return null;
+  if (products.length === 0) return null;
 
   return (
     <div className="space-y-6">

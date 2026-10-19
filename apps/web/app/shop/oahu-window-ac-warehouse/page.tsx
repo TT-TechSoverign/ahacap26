@@ -62,11 +62,11 @@ export default function OahuWindowAcWarehousePage() {
         },
         {
             q: "How fast is the $50 island-wide flat rate delivery?",
-            a: "We deliver across all Oahu zip codes—from Honolulu and Pearl City to Kapolei, Ewa Beach, Kailua, Kaneohe, and the North Shore—for a flat $50. Once your order is placed, our logistics coordinator reaches out to confirm your delivery date and safe placement location. No hidden freight surcharges or fuel add-ons."
+            a: "We deliver across standard Oahu residential zones—from Honolulu, Aiea, and Pearl City to Kapolei, Ewa Beach, Mililani, Kailua, and Kaneohe—for a flat $50 (excluding Waialua/North Shore, Waianae, Waikiki, and Waimanalo; free Waipahu warehouse pickup is available for all areas). Once your order is placed, our logistics coordinator reaches out to confirm your delivery date and safe placement location."
         },
         {
             q: "What is the advantage of purchasing directly from your Oahu warehouse?",
-            a: "When ordering from the mainland, transit across the ocean can take weeks. By purchasing directly from our Waipahu warehouse, your unit is factory-sealed in our local inventory, pre-inspected, and backed by authentic local Hawaii warranty support. You can pick it up immediately by appointment or have it delivered directly to your door anywhere on Oahu."
+            a: "When ordering from the mainland, transit across the ocean can take weeks. By purchasing directly from our Waipahu warehouse, your unit is factory-sealed in our local inventory, pre-inspected, and backed by authentic local Hawaii warranty support. You can pick it up immediately by appointment or have it delivered directly to your door anywhere in our Oahu delivery zones."
         },
         {
             q: "How do I claim the $45 Hawaii Energy cash rebate?",
@@ -78,7 +78,7 @@ export default function OahuWindowAcWarehousePage() {
         },
         {
             q: "What warranty and power requirements do these units carry?",
-            a: "All LG Dual Inverters come with a 1-Year LG Parts & Labor Manufacturer Warranty and a 10-Year Inverter Compressor Warranty. Units from 6,000 BTU to 14,000 BTU operate on standard 115V residential wall outlets (15A circuit). Units of 18,000 BTU and 23,500 BTU require 208/230V dedicated circuits (NEMA 6-20P outlet)."
+            a: "All LG Dual Inverters come with a 1-Year LG Parts & Labor Manufacturer Warranty and a 10-Year Inverter Compressor Warranty. Units from 6,000 BTU to 14,000 BTU operate on standard 115V residential wall outlets (15A circuit, NEMA 5-15P). Dual Inverter units of 18,000 BTU and 23,500 BTU require 208/230V dedicated circuits (15A NEMA 6-15P plug; Cool+Heat 18k/23.5k models use 20A NEMA 6-20P)."
         }
     ];
 
@@ -216,7 +216,7 @@ export default function OahuWindowAcWarehousePage() {
                                     <div className="text-xs uppercase font-bold tracking-wider text-cyan-400">Option 2: Doorstep Drop</div>
                                     <h3 className="text-lg font-bold text-white mt-0.5">$50 Island-Wide Delivery</h3>
                                     <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
-                                        Flat-rate delivery anywhere on Oahu. Honolulu, Kapolei, Kailua, Kaneohe, North Shore—handled safely by our local logistics team.
+                                        Flat-rate delivery to standard Oahu residential zones—Honolulu, Pearl City, Kapolei, Ewa Beach, Mililani, Kailua, and Kaneohe (excluding North Shore, Waianae, Waikiki, and Waimanalo).
                                     </p>
                                 </div>
                             </div>

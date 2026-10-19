@@ -24,7 +24,7 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 const FAQS = [
     {
         q: "When should I replace my window AC instead of cleaning or repairing it?",
-        a: "If your window AC is over 4 to 5 years old, has severe chassis rust from salt air, is making loud bearing grinding noises, or is an older non-inverter unit driving up your HECO bill, replacing it with an LG Dual Inverter ($560 to $1,025) is far more economical than expensive component repairs."
+        a: "If your window AC is over 4 to 5 years old, has severe chassis rust from salt air, is making loud bearing grinding noises, or is an older non-inverter unit driving up your HECO bill, replacing it with an LG Dual Inverter or GE unit ($395 to $1,200) is far more economical than expensive component repairs."
     },
     {
         q: "Can you haul away and dispose of my old window AC?",
@@ -63,7 +63,7 @@ export default function WindowAcReplacementPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Is your current window air conditioner rattling, blowing lukewarm air, covered in coil rust, or driving your electric bill over \$300? Swap it out for a modern, whisper-quiet LG Dual Inverter with professional replacement and old-unit haul-away.
+                        Is your current window air conditioner rattling, blowing lukewarm air, covered in coil rust, or driving your electric bill over $300? Swap it out for a modern, whisper-quiet LG Dual Inverter with professional replacement and old-unit haul-away.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -116,7 +116,7 @@ export default function WindowAcReplacementPage() {
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3">
                             <div className="flex items-center gap-2 text-primary font-header font-bold text-lg uppercase">
                                 <RefreshCw className="size-5" />
-                                <span>Replace with New Inverter ($395 - $1,025)</span>
+                                <span>Replace with New Inverter ($395 - $1,200)</span>
                             </div>
                             <ul className="space-y-2 text-xs text-slate-300 font-sans">
                                 <li>&bull; Unit is 4+ years old with crumbling aluminum fins</li>
@@ -155,7 +155,7 @@ export default function WindowAcReplacementPage() {
                         <TrendingDown className="size-8 text-emerald-400" />
                         <h3 className="font-header font-bold text-lg text-white uppercase">Slash Power Bills</h3>
                         <p className="text-slate-300 font-sans text-xs leading-relaxed">
-                            Modern CEER 14.5–15.0 units cut electrical waste immediately, saving up to 40% on running costs.
+                            Modern CEER 14.5–15.5 units cut electrical waste immediately, saving up to 40% on running costs.
                         </p>
                     </div>
                 </section>
@@ -182,7 +182,7 @@ export default function WindowAcReplacementPage() {
                             <Warehouse className="size-10 text-primary mx-auto" />
                             <h4 className="font-header font-bold text-base uppercase text-white">Waipahu Warehouse Ready</h4>
                             <p className="text-xs text-slate-300">
-                                Pick up your new unit today in Waipahu or choose flat $50 island-wide delivery with installation scheduling.
+                                Pick up your new unit today in Waipahu or choose flat $50 delivery across our 15-municipality Oahu zone with installation scheduling.
                             </p>
                             <Link href="/shop" className="inline-flex px-6 py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider">
                                 Choose Replacement Model
@@ -220,7 +220,7 @@ export default function WindowAcReplacementPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

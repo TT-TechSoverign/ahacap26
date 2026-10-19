@@ -45,7 +45,7 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         name: "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
         modelNumber: "LW6023IVSM",
         price: 560,
-        promo_price: 504,
+        promo_price: null,
         stock: 30,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
@@ -74,7 +74,7 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
         modelNumber: "LW8022IVSM",
         price: 595,
-        promo_price: 535,
+        promo_price: null,
         stock: 0,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
@@ -103,7 +103,7 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         name: "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
         modelNumber: "LW1022IVSM",
         price: 650,
-        promo_price: 585,
+        promo_price: null,
         stock: 15,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
@@ -132,7 +132,7 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         name: "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
         modelNumber: "LW1222IVSM",
         price: 745,
-        promo_price: 670,
+        promo_price: null,
         stock: 30,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
@@ -161,7 +161,7 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         name: "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
         modelNumber: "LW1522FVSM",
         price: 785,
-        promo_price: 706,
+        promo_price: null,
         stock: 15,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
@@ -190,7 +190,7 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
         modelNumber: "LW1822IVSM",
         price: 865,
-        promo_price: 778,
+        promo_price: null,
         stock: 20,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
@@ -219,7 +219,7 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         name: "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
         modelNumber: "LW2422IVSM",
         price: 985,
-        promo_price: 886,
+        promo_price: null,
         stock: 0,
         category: "WINDOW_AC",
         subcategory: "dual_inverter",
@@ -243,12 +243,99 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         image_url: "/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp"
     },
     {
+        id: 8,
+        slug: "8-lg-dual-inverter-cool-heat-8-000-btu-lw8023hrsm",
+        name: "LG Dual Inverter Cool + Heat 8,000 BTU (LW8023HRSM)",
+        modelNumber: "LW8023HRSM",
+        price: 660,
+        promo_price: null,
+        stock: 8,
+        category: "WINDOW_AC",
+        subcategory: "cool_plus_heat",
+        btu: 8000,
+        voltage: "115V / 15 Amp",
+        coverage: "Up to 350 sq. ft. (AHAM) • Up to 260 sq. ft. (Oahu)",
+        coverageAham: "Up to 350 sq. ft.",
+        coverageOahu: "Up to 260 sq. ft.",
+        minWindowHeight: '14"',
+        minWindowWidth: '25"',
+        maxWindowWidth: '36"',
+        chassisType: "Slide In-Out",
+        netWeight: "66 lbs",
+        noise_level: "44 / 53 dB",
+        dehumidification: "2.3 Pts/Hr",
+        idealFor: "Upland Bedrooms (Mililani / Wahiawa / Nuuanu)",
+        plugType: "Standard 115V (NEMA 5-15P)",
+        hecoMonthly: "~$39 / mo",
+        rebateAmount: 0,
+        badge: "Cool + Supplemental Heat",
+        image_url: "/assets/window-unit-images/lg-units/lg-cool-and-heat-unit-photos-1600x1000/lg-cool-and-heat-front-1600x1000.webp"
+    },
+    {
+        id: 9,
+        slug: "9-lg-dual-inverter-cool-heat-18-000-btu-lw1823hrsm",
+        name: "LG Dual Inverter Cool + Heat 18,000 BTU (LW1823HRSM)",
+        modelNumber: "LW1823HRSM",
+        price: 940,
+        promo_price: null,
+        stock: 6,
+        category: "WINDOW_AC",
+        subcategory: "cool_plus_heat",
+        btu: 18000,
+        voltage: "208/230V / 20 Amp",
+        coverage: "Up to 1,000 sq. ft. (AHAM) • Up to 600 sq. ft. (Oahu)",
+        coverageAham: "Up to 1,000 sq. ft.",
+        coverageOahu: "Up to 600 sq. ft.",
+        minWindowHeight: '19"',
+        minWindowWidth: '29"',
+        maxWindowWidth: '41"',
+        chassisType: "Slide In-Out",
+        netWeight: "123 lbs",
+        noise_level: "44 / 59 dB",
+        dehumidification: "5.4 Pts/Hr",
+        idealFor: "Large Living Room • Cool + Heat",
+        plugType: "208/230V 20A (NEMA 6-20P)",
+        hecoMonthly: "~$70 / mo",
+        rebateAmount: 0,
+        badge: "18k Cool + Heat Mode",
+        image_url: "/assets/window-unit-images/lg-units/lg-cool-and-heat-unit-photos-1600x1000/lg-cool-and-heat-front-1600x1000.webp"
+    },
+    {
+        id: 10,
+        slug: "10-lg-dual-inverter-cool-heat-23-500-btu-lw2423hrsm",
+        name: "LG Dual Inverter Cool + Heat 23,500 BTU (LW2423HRSM)",
+        modelNumber: "LW2423HRSM",
+        price: 1025,
+        promo_price: null,
+        stock: 4,
+        category: "WINDOW_AC",
+        subcategory: "cool_plus_heat",
+        btu: 23500,
+        voltage: "208/230V / 20 Amp",
+        coverage: "Up to 1,400 sq. ft. (AHAM) • Up to 800 sq. ft. (Oahu)",
+        coverageAham: "Up to 1,400 sq. ft.",
+        coverageOahu: "Up to 800 sq. ft.",
+        minWindowHeight: '19"',
+        minWindowWidth: '29"',
+        maxWindowWidth: '41"',
+        chassisType: "Slide In-Out",
+        netWeight: "136 lbs",
+        noise_level: "47 / 60 dB",
+        dehumidification: "6.5 Pts/Hr",
+        idealFor: "Great Room / Whole Floor • Cool + Heat",
+        plugType: "208/230V 20A (NEMA 6-20P)",
+        hecoMonthly: "~$84 / mo",
+        rebateAmount: 0,
+        badge: "23.5k In-Stock Flagship",
+        image_url: "/assets/window-unit-images/lg-units/lg-cool-and-heat-unit-photos-1600x1000/lg-cool-and-heat-front-1600x1000.webp"
+    },
+    {
         id: 11,
         slug: "11-lg-standard-8-000-btu-lw8024rd",
         name: "LG Standard 8,000 BTU (LW8024RD)",
         modelNumber: "LW8024RD",
         price: 395,
-        promo_price: 355,
+        promo_price: null,
         stock: 30,
         category: "WINDOW_AC",
         subcategory: "standard_universal",
@@ -277,7 +364,7 @@ const WAREHOUSE_INVENTORY: WarehouseProduct[] = [
         name: "LG Casement 12,000 BTU (LW1217ERSM1)",
         modelNumber: "LW1217ERSM1",
         price: 625,
-        promo_price: 562,
+        promo_price: null,
         stock: 15,
         category: "WINDOW_AC",
         subcategory: "casement_slider",
@@ -326,7 +413,7 @@ export function WarehouseInventoryGrid() {
                             ...fallback,
                             stock: live.stock,
                             price: live.price,
-                            promo_price: live.promo_price ?? fallback.promo_price,
+                            promo_price: live.promo_price ?? null,
                             coverage: live.coverage || fallback.coverage,
                             coverageAham: live.coverage_aham || fallback.coverageAham,
                             coverageOahu: live.coverage_oahu || fallback.coverageOahu,
@@ -345,13 +432,20 @@ export function WarehouseInventoryGrid() {
         };
     }, []);
 
-    const filtered = inventory.filter(item => {
-        if (activeTab === '115v') return item.voltage?.includes('115V');
-        if (activeTab === '230v') return item.voltage?.includes('230V');
-        if (activeTab === 'bedroom') return (item.btu || 0) <= 10000;
-        if (activeTab === 'living') return (item.btu || 0) >= 12000;
-        return true;
-    });
+    const filtered = inventory
+        .filter(item => {
+            if (activeTab === '115v') return item.voltage?.includes('115V');
+            if (activeTab === '230v') return item.voltage?.includes('230V');
+            if (activeTab === 'bedroom') return (item.btu || 0) <= 10000;
+            if (activeTab === 'living') return (item.btu || 0) >= 12000;
+            return true;
+        })
+        .sort((a, b) => {
+            const aInStock = a.stock > 0 ? 0 : 1;
+            const bInStock = b.stock > 0 ? 0 : 1;
+            if (aInStock !== bInStock) return aInStock - bInStock;
+            return (a.btu || 0) - (b.btu || 0);
+        });
 
     const handleAddToCart = (product: WarehouseProduct) => {
         if (product.stock <= 0) return;
@@ -516,18 +610,26 @@ export function WarehouseInventoryGrid() {
                                                 </span>
                                             )}
                                         </div>
-                                        <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-semibold mt-0.5">
-                                            <Sparkles className="w-3 h-3" />
-                                            <span>-${product.rebateAmount} Hawaii Energy Rebate</span>
-                                        </div>
+                                        {product.rebateAmount > 0 ? (
+                                            <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-semibold mt-0.5">
+                                                <Sparkles className="w-3 h-3" />
+                                                <span>-${product.rebateAmount} Hawaii Energy Rebate</span>
+                                            </div>
+                                        ) : (
+                                            <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-semibold mt-0.5">
+                                                <span>Waipahu Direct Contractor Pricing</span>
+                                            </div>
+                                        )}
                                     </div>
 
-                                    <div className="text-right">
-                                        <div className="text-[10px] uppercase font-bold text-slate-400">Net Cost</div>
-                                        <div className="text-base font-black text-emerald-300 font-mono">
-                                            ${netAfterRebate}
+                                    {product.rebateAmount > 0 && (
+                                        <div className="text-right">
+                                            <div className="text-[10px] uppercase font-bold text-slate-400">Net Cost</div>
+                                            <div className="text-base font-black text-emerald-300 font-mono">
+                                                ${netAfterRebate}
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
                                 </div>
 
                                 {/* Pickup & Delivery Fulfillment */}

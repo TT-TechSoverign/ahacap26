@@ -9,14 +9,16 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-    title: 'Affordable Home A/C | Window AC Installation & Split AC Oahu',
-    description: 'Expert window air conditioner installation, split AC installation, and window AC cleaning services across Oahu. Authorized LG, GE, Carrier dealer in Waipahu. License CT-36775.',
+    title: {
+        absolute: 'Window AC & Ductless Mini Splits Oahu | In-Stock $395+ • $0 Estimate | Affordable Home A/C',
+    },
+    description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery) & Ductless Mini Split Installation ($0 Free In-Home Estimate). Licensed CT-36775 • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com',
     },
     openGraph: {
-        title: 'Affordable Home A/C | Window AC Installation & Split AC Oahu',
-        description: 'Affordable home air conditioning, expert AC installation Oahu, and reliable AC repair Oahu. Your local HVAC Oahu cooling experts for split and window units.',
+        title: 'Window AC & Ductless Mini Splits Oahu | In-Stock $395+ • $0 Estimate | Affordable Home A/C',
+        description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery) & Ductless Mini Split Installation ($0 Free In-Home Estimate). Licensed CT-36775 • (808) 488-1111.',
         url: '/',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -53,7 +55,7 @@ export default function Homepage() {
                             "@id": "https://www.affordablehome-ac.com/#website",
                             "url": "https://www.affordablehome-ac.com",
                             "name": "Affordable Home A/C",
-                            "description": "Affordable window air conditioner installation, split AC installation, and window AC cleaning services across Oahu, Hawaii.",
+                            "description": "In-stock LG Dual Inverter & GE Window ACs ($395–$1,200), window AC installation, ductless mini split installation ($0 Free Estimate), and mini split deep cleaning across Oahu, Hawaii.",
                             "publisher": {
                                 "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
                             },
@@ -68,89 +70,6 @@ export default function Homepage() {
                         })
                     }}
                 />
-
-                {/* Google HVACBusiness & LocalBusiness Structured Data Schema */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            "@context": "https://schema.org",
-                            "@type": "HVACBusiness",
-                            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
-                            "name": "Affordable Home A/C",
-                            "legalName": "Affordable Home A/C LLC",
-                            "url": "https://www.affordablehome-ac.com",
-                            "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
-                            "image": "https://www.affordablehome-ac.com/assets/hero-cards/ahac-hero-background-2.webp",
-                            "telephone": "+1-808-488-1111",
-                            "email": "office@affordablehome-ac.com",
-                            "priceRange": "$$",
-                            "address": {
-                                "@type": "PostalAddress",
-                                "streetAddress": "94-150 Leoleo St #203",
-                                "addressLocality": "Waipahu",
-                                "addressRegion": "HI",
-                                "postalCode": "96797",
-                                "addressCountry": "US"
-                            },
-                            "geo": {
-                                "@type": "GeoCoordinates",
-                                "latitude": 21.3868,
-                                "longitude": -158.0092
-                            },
-                            "openingHoursSpecification": [
-                                {
-                                    "@type": "OpeningHoursSpecification",
-                                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                                    "opens": "08:00",
-                                    "closes": "17:00"
-                                },
-                                {
-                                    "@type": "OpeningHoursSpecification",
-                                    "dayOfWeek": "Saturday",
-                                    "opens": "09:00",
-                                    "closes": "14:00"
-                                }
-                            ],
-                            "hasCredential": [
-                                {
-                                    "@type": "EducationalOccupationalCredential",
-                                    "credentialCategory": "State Contractor License",
-                                    "name": "Hawaii Specialty Contractor CT-36775",
-                                    "recognizedBy": {
-                                        "@type": "Organization",
-                                        "name": "State of Hawaii Professional and Vocational Licensing"
-                                    }
-                                }
-                            ],
-                            "aggregateRating": {
-                                "@type": "AggregateRating",
-                                "ratingValue": "4.9",
-                                "reviewCount": "142",
-                                "bestRating": "5",
-                                "worstRating": "1"
-                            },
-                            "areaServed": [
-                                { "@type": "City", "name": "Honolulu" },
-                                { "@type": "City", "name": "Waipahu" },
-                                { "@type": "City", "name": "Kapolei" },
-                                { "@type": "City", "name": "Ewa Beach" },
-                                { "@type": "City", "name": "Pearl City" },
-                                { "@type": "City", "name": "Aiea" },
-                                { "@type": "City", "name": "Mililani" },
-                                { "@type": "City", "name": "Kailua" },
-                                { "@type": "City", "name": "Kaneohe" },
-                                { "@type": "City", "name": "Manoa" },
-                                { "@type": "City", "name": "Kaimuki" },
-                                { "@type": "City", "name": "Hawaii Kai" },
-                                { "@type": "City", "name": "Salt Lake" },
-                                { "@type": "City", "name": "Kunia" }
-                            ]
-                        })
-                    }}
-                />
-
-                <h1 className="sr-only">Affordable Air Conditioning & Ductless Mini Split Installation in Hawaii</h1>
 
                 {/* 1. Aloha Hero & Conversion Anchors */}
                 <Section1HeroHomeV2 />

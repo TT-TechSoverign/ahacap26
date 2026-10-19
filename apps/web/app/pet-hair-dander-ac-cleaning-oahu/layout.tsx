@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Pet Hair & Dander AC Cleaning Oahu | Allergy Relief | Affordable Home A/C'
+        absolute: 'Pet Hair & Dander Mini Split AC Cleaning Oahu | $175–$275 | Affordable Home A/C'
     },
-    description: 'Eradicate embedded pet hair, feline dander, and animal odors from your mini split or window AC in Oahu. Clinical teardown & coil wash. CT-36775 licensed.',
+    description: 'Eradicate embedded pet hair, feline dander, and animal odors from your ductless mini split AC in Oahu. Clinical $175–$275 deep teardown & coil wash. CT-36775 licensed.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/pet-hair-dander-ac-cleaning-oahu',
     },
     openGraph: {
-        title: 'Pet Hair & Dander AC Cleaning Oahu | Allergy Relief | Affordable Home A/C',
-        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your mini split or window AC in Oahu. Clinical teardown & coil wash. CT-36775 licensed.',
+        title: 'Pet Hair & Dander Mini Split AC Cleaning Oahu | $175–$275 | Affordable Home A/C',
+        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your ductless mini split AC in Oahu. Clinical $175–$275 deep teardown & coil wash. CT-36775 licensed.',
         url: 'https://www.affordablehome-ac.com/pet-hair-dander-ac-cleaning-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Pet Hair & Dander AC Cleaning Oahu | Allergy Relief | Affordable Home A/C',
-        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your mini split or window AC in Oahu. Clinical teardown & coil wash. CT-36775 licensed.',
+        title: 'Pet Hair & Dander Mini Split AC Cleaning Oahu | $175–$275 | Affordable Home A/C',
+        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your ductless mini split AC in Oahu. Clinical $175–$275 deep teardown & coil wash. CT-36775 licensed.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

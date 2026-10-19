@@ -90,10 +90,6 @@ async def validate_inventory_service(db: AsyncSession, validation_items: List[di
         if not is_available:
             all_valid = False
             
-        import time
-        import os
-        # 1785578399 seconds represents July 31st, 2026 23:59:59 HST
-        is_promo_active = False
         price = product.price
         results.append({
             "product_id": product.id,

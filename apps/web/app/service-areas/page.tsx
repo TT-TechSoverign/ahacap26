@@ -96,6 +96,7 @@ export default function ServiceAreasPage() {
 
                                             <Link 
                                                 href={`/service-areas/${city.name.toLowerCase().replace(/ /g, '-')}`}
+                                                prefetch={false}
                                                 className="mt-8 pt-6 w-full border-t border-slate-800/80 flex justify-center items-center gap-3 opacity-70 group-hover:opacity-100 transition-all text-cyan-400 hover:text-cyan-300 cursor-pointer"
                                             >
                                                 <span className="text-xs uppercase tracking-widest font-bold">View Local Services</span>

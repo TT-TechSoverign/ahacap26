@@ -684,23 +684,23 @@ export default function WindowAcInstallationPage() {
                                 model: "LW6023IVSM",
                                 slug: "1-lg-dual-inverter-6-000-btu-lw6023ivsm",
                                 btu: "6,000 BTU",
-                                sqft: "Up to 250 sq. ft.",
+                                sqft: "Up to 260 sq. ft.",
                                 voltage: "115V (NEMA 5-15P)",
                                 price: "$560",
                                 netPrice: "$515 after $45 rebate",
-                                badge: "Bedrooms & Studios",
+                                badge: "Bedrooms & Studios (11 In Stock)",
                                 highlight: "44 dB ultra-quiet operation, dual inverter variable compressor, and smart Wi-Fi control."
                             },
                             {
-                                model: "LW8022IVSM",
-                                slug: "2-lg-dual-inverter-8-000-btu-lw8022ivsm",
-                                btu: "8,000 BTU",
-                                sqft: "Up to 350 sq. ft.",
+                                model: "LW1022IVSM",
+                                slug: "3-lg-dual-inverter-10-000-btu-lw1022ivsm",
+                                btu: "10,000 BTU",
+                                sqft: "Up to 450 sq. ft.",
                                 voltage: "115V (NEMA 5-15P)",
-                                price: "$595",
-                                netPrice: "$550 after $45 rebate",
-                                badge: "Best Value ($35 Upgrade)",
-                                highlight: "Only $35 more than the 6k model for +33% more cooling capacity and ThinQ Wi-Fi smart scheduling."
+                                price: "$650",
+                                netPrice: "$605 after $45 rebate",
+                                badge: "Master Bedrooms (10 In Stock)",
+                                highlight: "Ideal for Oahu bedrooms & single-wall homes with 15.0 CEER efficiency and ThinQ Wi-Fi smart scheduling."
                             },
                             {
                                 model: "LW1222IVSM",
@@ -708,9 +708,9 @@ export default function WindowAcInstallationPage() {
                                 btu: "12,000 BTU",
                                 sqft: "Up to 550 sq. ft.",
                                 voltage: "115V (NEMA 5-15P)",
-                                price: "$755",
-                                netPrice: "$710 after $45 rebate",
-                                badge: "Master Suites & Living",
+                                price: "$745",
+                                netPrice: "$700 after $45 rebate",
+                                badge: "Master Suites & Living (20 In Stock)",
                                 highlight: "High airflow for open apartments, saves over $424/year in HECO power against old rotary window units."
                             }
                         ].map((unit, idx) => (
