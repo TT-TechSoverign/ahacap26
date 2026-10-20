@@ -63,7 +63,7 @@ export default function AcBracketsExteriorSecurityMountingPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Over 70% of a window AC’s heavy weight hangs outside your home. Without proper cantilever support, units can warp vinyl sills, crush wooden frames, or create hazardous fall risks on second-story lanais. Our licensed technicians install standard exterior window AC support brackets engineered for island conditions.
+                        Over 70% of a window AC’s heavy weight hangs outside your home. Without proper cantilever support, units can warp vinyl sills, crush wooden frames, or create hazardous fall risks on second-story lanais. Our Oahu cooling technicians install standard exterior window AC support brackets engineered for island conditions.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -124,7 +124,7 @@ export default function AcBracketsExteriorSecurityMountingPage() {
                                 Standard window AC installation covers direct sash mounting. Where structural support brackets are needed for heavy units, second stories, or delicate vinyl sills, our technicians supply and install standard exterior window AC brackets as an additional cost option with installation.
                             </p>
                             <p className="text-xs text-slate-300 font-sans">
-                                <strong>Clean Jobsite Standard:</strong> Our licensed technicians lay protective floor drop cloths under every unit and leave your home cleaner than when we arrived.
+                                <strong>Clean Jobsite Standard:</strong> Our Oahu cooling technicians lay protective floor drop cloths under every unit and leave your home cleaner than when we arrived.
                             </p>
                         </div>
 
@@ -132,7 +132,7 @@ export default function AcBracketsExteriorSecurityMountingPage() {
                             <Wrench className="size-10 text-emerald-400 mx-auto" />
                             <h3 className="font-header font-bold text-lg uppercase text-white">Insured Oahu Cooling Specialists</h3>
                             <p className="text-xs text-slate-300">
-                                Installed by licensed HVAC technicians adhering to Hawaii safety standards and building practices.
+                                Installed by insured Oahu cooling specialists adhering to Hawaii safety standards and building practices.
                             </p>
                             <Link href="/shop" className="inline-flex px-6 py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider">
                                 View Window AC Models
@@ -170,7 +170,7 @@ export default function AcBracketsExteriorSecurityMountingPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

@@ -63,7 +63,7 @@ export default function HorizontalSlidingWindowAcPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Most Oahu townhomes and modern subdivisions feature horizontal sliding windows rather than traditional sash windows. Our licensed technicians fabricate custom vertical filler panels and install standard exterior support brackets for a flawless, weather-tight installation.
+                        Most Oahu townhomes and modern subdivisions feature horizontal sliding windows rather than traditional sash windows. Our Oahu cooling technicians fabricate custom vertical filler panels and install standard exterior support brackets for a flawless, weather-tight installation.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

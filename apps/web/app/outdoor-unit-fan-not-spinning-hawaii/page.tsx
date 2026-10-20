@@ -23,7 +23,7 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const FAQS = [
     {
-        q: "What happens if the outdoor fan stops spinning while the AC is running?",
+        q: "What happens if the rear condenser fan stops spinning while the AC is running?",
         a: "Without the fan drawing air across the condenser coils, high-pressure superheated refrigerant cannot condense into liquid. Head pressure and temperatures skyrocket within 2 to 3 minutes, forcing the compressor into high-pressure thermal overload cutoff and risking permanent motor damage."
     },
     {
@@ -47,7 +47,7 @@ const FAN_FAILURES = [
     },
     {
         title: "Seized Bearing from Marine Salt Spray",
-        desc: "Airborne salt deposits penetrate non-sealed sleeve or ball bearings in outdoor condenser motors, causing rust lockup and seizing the fan shaft completely."
+        desc: "Airborne salt deposits penetrate non-sealed sleeve or ball bearings in rear condenser motors, causing rust lockup and seizing the fan shaft completely."
     },
     {
         title: "DC Inverter Motor Driver Failure",
@@ -67,7 +67,7 @@ export default function OutdoorFanNotSpinningPage() {
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
                 
                 <div className="mb-6">
-                    <Breadcrumb items={[{ name: 'Outdoor AC Fan Not Spinning in Hawaii' }]} />
+                    <Breadcrumb items={[{ name: 'AC Condenser Fan Not Spinning in Hawaii' }]} />
                 </div>
 
                 {/* Hero */}
@@ -78,7 +78,7 @@ export default function OutdoorFanNotSpinningPage() {
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
-                        Outdoor AC Fan Not Spinning? <span className="text-primary italic">Causes &amp; Repair Oahu</span>
+                        AC Condenser Fan Not Spinning? <span className="text-primary italic">Causes &amp; Repair Oahu</span>
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
@@ -97,7 +97,7 @@ export default function OutdoorFanNotSpinningPage() {
                         <TrackedPhoneLink 
                             phone="8084881111"
                             display="Condenser Triage Desk: (808) 488-1111"
-                            eventLabel="Outdoor Fan Call"
+                            eventLabel="Condenser Fan Call"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
                         />
                     </div>
@@ -166,7 +166,7 @@ export default function OutdoorFanNotSpinningPage() {
                 <section className="mb-16">
                     <div className="text-center mb-8">
                         <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                            Outdoor Fan FAQs
+                            Condenser Fan FAQs
                         </h2>
                     </div>
 
@@ -191,7 +191,7 @@ export default function OutdoorFanNotSpinningPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

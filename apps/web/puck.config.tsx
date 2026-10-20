@@ -83,9 +83,9 @@ export const config: Config<{
             defaultProps: {
                 badge: "Est. 2005 • Oahu, HI",
                 titleLine1: "20+ YEARS OF SERVICING ISLAND WIDE",
-                titleHighlight1: "OAHU'S HVAC CONTRACTOR",
-                titleHighlight2: "& AC Specialists",
-                subBadges: [{ text: "LG & GE THROUGH THE WALL AC RETAILER" }, { text: "Licensed & Insured" }, { text: "Energy Saving Units" }],
+                titleHighlight1: "OAHU'S WINDOW AC",
+                titleHighlight2: "& Cleaning Specialists",
+                subBadges: [{ text: "LG & GE THROUGH THE WALL AC RETAILER" }, { text: "Insured & Local" }, { text: "Energy Saving Units" }],
                 ctaShop: { text: "SHOP WINDOW AC INVENTORY", href: "/shop", variant: "primary" },
                 ctaEstimate: { text: "REQUEST A QUOTE", href: "/contact", variant: "outline" },
                 mode: "dark",
@@ -267,7 +267,7 @@ export const config: Config<{
                 badge: "Island-Wide Coverage",
                 title: "Oahu's Premier",
                 titleHighlight: "COOLING NETWORK",
-                description: "Licensed experts delivering optimal air quality...",
+                description: "Insured Oahu cooling specialists delivering optimal air quality...",
                 regions: [
                     { id: "central", title: "Central Oahu", icon: "warehouse", cities: [{ text: "Aiea" }, { text: "Pearl City" }, { text: "Mililani" }, { text: "Waipio Gentry" }, { text: "Waikele" }] },
                     { id: "metro", title: "Metro Honolulu", icon: "apartment", cities: [{ text: "Honolulu" }, { text: "Kalihi" }, { text: "Manoa" }, { text: "Kaimuki" }, { text: "Hawaii Kai" }, { text: "Salt Lake" }] },

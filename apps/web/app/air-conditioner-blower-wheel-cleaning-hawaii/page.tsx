@@ -30,7 +30,7 @@ const FAQS = [
     },
     {
         q: "What are the signs that my blower wheel is clogged?",
-        a: "Key symptoms include weak air velocity even on high fan speed, a rhythmic pulsating or roaring whoosh sound, black flecks blowing onto your bed or couch, and an unbalanced rattling vibration from the air handler."
+        a: "Key symptoms include weak air velocity even on high fan speed, a rhythmic pulsating or roaring whoosh sound, black flecks blowing onto your bed or couch, and an unbalanced rattling vibration from the window unit."
     },
     {
         q: "Does a clogged fan wheel increase power consumption?",

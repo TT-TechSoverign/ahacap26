@@ -160,7 +160,7 @@ export default function JalousieWindowAcInstallationPage() {
                                 Drop-Cloth Clean Jobsite Promise
                             </div>
                             <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                                Our licensed technicians always lay clean protective floor drop cloths under every unit and workspace. We catch all dust, shavings, and debris, <strong>leaving the jobsite cleaner and better than upon arrival</strong>.
+                                Our Oahu cooling technicians always lay clean protective floor drop cloths under every unit and workspace. We catch all dust, shavings, and debris, <strong>leaving the jobsite cleaner and better than upon arrival</strong>.
                             </p>
                         </div>
                     </div>
@@ -269,7 +269,7 @@ export default function JalousieWindowAcInstallationPage() {
                             Schedule Jalousie Window AC Installation
                         </h2>
                         <p className="text-xs sm:text-sm text-slate-300 font-sans">
-                            Book an appointment with our licensed technicians. Zero deposit required.
+                            Book an appointment with our Oahu cooling technicians. Zero deposit required.
                         </p>
                     </div>
 
@@ -391,7 +391,7 @@ export default function JalousieWindowAcInstallationPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

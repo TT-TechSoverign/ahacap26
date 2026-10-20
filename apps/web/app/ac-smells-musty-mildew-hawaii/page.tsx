@@ -31,7 +31,7 @@ const FAQS = [
     },
     {
         q: "Can I just spray Lysol or bleach into the front grille?",
-        a: "Never spray bleach or household disinfectants directly into an AC. Bleach causes rapid galvanic corrosion of aluminum fins and copper tubing, leading to costly refrigerant pinhole leaks. True eradication requires commercial, non-acidic coil cleaner applied by a licensed technician."
+        a: "Never spray bleach or household disinfectants directly into an AC. Bleach causes rapid galvanic corrosion of aluminum fins and copper tubing, leading to costly refrigerant pinhole leaks. True eradication requires commercial, non-acidic coil cleaner applied by an Oahu cooling technician."
     },
     {
         q: "What service eliminates this musty smell completely?",
@@ -46,7 +46,7 @@ const CAUSES = [
     },
     {
         title: "Stagnant Drain Pan Sludge",
-        desc: "Condensate water that fails to drain quickly becomes warm and stagnant. Algae, fungus, and dust gather in the pan, creating a foul cesspool inside your air handler."
+        desc: "Condensate water that fails to drain quickly becomes warm and stagnant. Algae, fungus, and dust gather in the pan, creating a foul cesspool inside your window unit."
     },
     {
         title: "Mold Encrustation on Blower Wheels",
@@ -211,7 +211,7 @@ export default function AcSmellsMustyPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

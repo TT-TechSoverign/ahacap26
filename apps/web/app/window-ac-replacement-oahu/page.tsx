@@ -28,7 +28,7 @@ const FAQS = [
     },
     {
         q: "Can you haul away and dispose of my old window AC?",
-        a: "Yes! When you book our professional installation service with your new unit, our licensed technicians can safely remove and haul away your old rusted air conditioner for certified eco-friendly recycling."
+        a: "Yes! When you book our professional installation service with your new unit, our Oahu cooling technicians can safely remove and haul away your old rusted air conditioner for certified eco-friendly recycling."
     },
     {
         q: "Will the new window unit fit my existing opening?",
@@ -147,7 +147,7 @@ export default function WindowAcReplacementPage() {
                         <Trash2 className="size-8 text-rose-400" />
                         <h3 className="font-header font-bold text-lg text-white uppercase">Old Unit Haul-Away</h3>
                         <p className="text-slate-300 font-sans text-xs leading-relaxed">
-                            Don’t let your heavy old unit clutter your garage or lanai. Our team can safely haul it away for licensed disposal.
+                            Don’t let your heavy old unit clutter your garage or lanai. Our team can safely haul it away for proper recycling and disposal.
                         </p>
                     </div>
 

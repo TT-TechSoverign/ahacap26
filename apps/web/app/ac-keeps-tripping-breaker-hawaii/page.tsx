@@ -30,9 +30,9 @@ const TRIP_MODES = [
         symptom: "Breaker snaps off immediately with a click or spark as soon as the AC is powered on.",
         causes: [
             "Grounded compressor motor winding (internal electrical insulation melted)",
-            "Gecko or lizard short circuit across high-voltage outdoor inverter terminal",
-            "Dead short circuit in 230V line-voltage disconnect wiring",
-            "Failed contactor or shorted control board"
+            "Gecko or lizard short circuit across high-voltage inverter board terminal",
+            "Dead short circuit in 115V/230V LCDI power cord or wall receptacle",
+            "Failed power relay or shorted control board"
         ],
         severity: "Critical Electrical Short"
     },
@@ -384,7 +384,7 @@ export default function AcTrippingBreakerPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

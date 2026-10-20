@@ -351,7 +351,7 @@ export default function BlinkingLightErrorCodesPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

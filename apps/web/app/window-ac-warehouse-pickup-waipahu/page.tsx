@@ -98,7 +98,7 @@ export default function WindowAcWarehousePickupPage() {
                         <ShieldCheck className="size-8 text-emerald-400" />
                         <h3 className="font-header font-bold text-lg text-white uppercase">Factory Inspected Stock</h3>
                         <p className="text-slate-300 font-sans text-xs leading-relaxed">
-                            Every box is verified by our licensed technicians for zero shipping damage, correct voltage, and authentic manufacturer warranty papers.
+                            Every box is verified by our Oahu cooling technicians for zero shipping damage, correct voltage, and authentic manufacturer warranty papers.
                         </p>
                     </div>
 
@@ -176,7 +176,7 @@ export default function WindowAcWarehousePickupPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

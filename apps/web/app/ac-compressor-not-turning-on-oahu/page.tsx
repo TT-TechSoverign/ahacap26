@@ -23,8 +23,8 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 const FAQS = [
     {
-        q: "Why is my indoor fan running but the outdoor compressor won't kick on?",
-        a: "The indoor blower fan and the outdoor compressor operate on separate electrical sub-circuits. Common reasons the compressor fails to start include a blown dual-run capacitor, pitted electrical contactor points, an inverter power module (IPM) error, or a low-pressure refrigerant cutoff."
+        q: "Why is my blower fan running but the window AC compressor won't kick on?",
+        a: "The interior blower fan and the sealed rotary compressor operate on separate electrical control relays. Common reasons the compressor fails to start include a blown dual-run capacitor, pitted power relay contacts, an inverter power module (IPM) error, or a thermal overload cutoff."
     },
     {
         q: "Can a bad capacitor cause the compressor to hum and buzz without starting?",
@@ -32,11 +32,11 @@ const FAQS = [
     },
     {
         q: "Should I turn off the system if the compressor isn't running?",
-        a: "Yes, shut off the cooling mode immediately. If the indoor unit calls for cooling while the compressor is locked or repeatedly buzzing, it can burn out compressor motor windings or destroy the control board."
+        a: "Yes, shut off the cooling mode immediately. If the thermostat calls for cooling while the compressor is locked or repeatedly buzzing, it can burn out compressor motor windings or damage the control board."
     },
     {
         q: "What does the $175 diagnostic fee cover?",
-        a: "Our licensed technician performs on-site electrical multi-meter testing of the capacitor, contactor, circuit board, wiring harness, and compressor terminal resistance (ohms) to pinpoint the exact failure point."
+        a: "Our technician performs on-site electrical multi-meter testing of the capacitor, control relay, circuit board, wiring harness, and compressor terminal resistance (ohms) to pinpoint the exact failure point."
     }
 ];
 
@@ -46,8 +46,8 @@ const COMPRESSOR_FAILURES = [
         desc: "Hawaii's ambient heat degrades oil-filled capacitors. If capacitance drops below ±10% of rated microfarads, the motor hums but cannot start."
     },
     {
-        title: "Burnt or Pitted Contactor Points",
-        desc: "Geckos and ants crawling into 240V contactors or natural electrical arcing causes pitted contact points that block high-voltage power."
+        title: "Burnt or Pitted Power Relay Contacts",
+        desc: "Geckos and ants crawling into control board relays or natural electrical arcing causes pitted contact points that block high-voltage power."
     },
     {
         title: "DC Inverter IPM Board Fault",
@@ -191,7 +191,7 @@ export default function CompressorNotTurningOnPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

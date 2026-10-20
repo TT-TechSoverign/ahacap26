@@ -56,7 +56,7 @@ const deliveryFaqSchema = {
             "name": "Can you install the window AC when you deliver it?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! You can choose our professional window AC installation add-on at checkout. Our licensed technicians will deliver the unit, lay protective floor drop cloths, securely mount the unit with standard brackets if required, and test cooling operation before leaving."
+                "text": "Yes! You can choose our professional window AC installation add-on at checkout. Our Oahu cooling technicians will deliver the unit, lay protective floor drop cloths, securely mount the unit with standard brackets if required, and test cooling operation before leaving."
             }
         }
     ]

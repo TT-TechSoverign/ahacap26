@@ -121,7 +121,7 @@ export default function NarrowWindowAcSolutionsPage() {
                                 Protective Drop-Cloth Standard
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our licensed technicians treat your home with great care. We lay protective floor drop cloths under every window during installation and leave your home cleaner than when we arrived.
+                                Our Oahu cooling technicians treat your home with great care. We lay protective floor drop cloths under every window during installation and leave your home cleaner than when we arrived.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
                                 <strong>Standard Brackets:</strong> We supply and install standard exterior window AC support brackets as an additional cost option with installation to safely support heavy units.

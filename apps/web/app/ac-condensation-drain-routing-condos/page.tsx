@@ -121,7 +121,7 @@ export default function AcCondensationDrainRoutingCondosPage() {
                                 Protective Drop-Cloth Standard
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our licensed technicians treat your condo with the highest level of care. We lay protective floor drop cloths under every window during installation, testing drain line water flow thoroughly before completing the job.
+                                Our Oahu cooling technicians treat your condo with the highest level of care. We lay protective floor drop cloths under every window during installation, testing drain line water flow thoroughly before completing the job.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
                                 <strong>$45 Rebate Qualified:</strong> All qualifying Energy Star Dual Inverter window models come with the pre-approved Hawaii Energy application PDF.

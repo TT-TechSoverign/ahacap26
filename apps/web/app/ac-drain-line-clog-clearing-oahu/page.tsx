@@ -47,7 +47,7 @@ const EMERGENCY_STEPS = [
     },
     {
         step: "02",
-        title: "Place Towels Under the Air Handler",
+        title: "Place Towels Under the Window Unit",
         desc: "Catch dripping water to protect baseboards, hardwood flooring, and nearby electrical outlets."
     },
     {
@@ -188,7 +188,7 @@ export default function DrainLineClogPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

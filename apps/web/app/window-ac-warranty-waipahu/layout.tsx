@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Warranty & Local Support Waipahu | Affordable Home A/C'
     },
-    description: 'Local Oahu warranty support for LG Dual Inverter window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and licensed technicians.',
+    description: 'Local Oahu warranty support for LG Dual Inverter window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
     },
     openGraph: {
         title: 'Window AC Warranty & Local Support Waipahu | Affordable Home A/C',
-        description: 'Local Oahu warranty support for LG Dual Inverter window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and licensed technicians.',
+        description: 'Local Oahu warranty support for LG Dual Inverter window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
         url: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Warranty & Local Support Waipahu | Affordable Home A/C',
-        description: 'Local Oahu warranty support for LG Dual Inverter window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and licensed technicians.',
+        description: 'Local Oahu warranty support for LG Dual Inverter window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -56,7 +56,7 @@ const warrantyFaqSchema = {
             "name": "What happens if my unit needs service during the warranty period?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Simply call our Waipahu office at (808) 488-1111 with your purchase receipt. Our licensed HVAC technicians can diagnose issues on-site or at our facility using authentic manufacturer replacement parts."
+                "text": "Simply call our Waipahu office at (808) 488-1111 with your purchase receipt. Our Oahu cooling technicians can diagnose issues on-site or at our facility using authentic manufacturer replacement parts."
             }
         }
     ]

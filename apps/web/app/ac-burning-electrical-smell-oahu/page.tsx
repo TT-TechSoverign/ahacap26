@@ -32,11 +32,11 @@ const FAQS = [
     },
     {
         q: "Why does a burning electrical issue sometimes smell like dead fish?",
-        a: "When the plastic and resin binders in electrical circuit breakers, contactors, or terminal blocks overheat, they release pungent amine compounds that produce a strong, unmistakable fish-like chemical odor."
+        a: "When the plastic and resin binders in electrical circuit breakers, power relays, or terminal blocks overheat, they release pungent amine compounds that produce a strong, unmistakable fish-like chemical odor."
     },
     {
         q: "Can I turn the AC back on if the smell dissipates?",
-        a: "No. The smell may decrease once the unit stops running, but the melted wiring, compromised insulation, or damaged capacitor remains a severe fire hazard. Keep the breaker OFF until a licensed HVAC technician inspects the terminals."
+        a: "No. The smell may decrease once the unit stops running, but the melted wiring, compromised insulation, or damaged capacitor remains a severe fire hazard. Keep the breaker OFF until an Oahu cooling technician inspects the terminals."
     }
 ];
 
@@ -44,12 +44,12 @@ const EMERGENCY_ACTIONS = [
     {
         step: "01",
         title: "Shut Off the System",
-        desc: "Turn off the cooling mode via the handheld remote or wall thermostat immediately to kill the run signal."
+        desc: "Turn off the cooling mode via the handheld remote or control panel immediately to kill the run signal."
     },
     {
         step: "02",
-        title: "Flip the 240V Breaker OFF",
-        desc: "Walk to your main electrical panel and switch the double-pole AC breaker completely to the OFF position."
+        title: "Flip the AC Breaker OFF",
+        desc: "Walk to your main electrical panel and switch the AC circuit breaker completely to the OFF position."
     },
     {
         step: "03",
@@ -86,7 +86,7 @@ export default function AcBurningSmellPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Smelling acrid burning plastic, melted wire coating, or an unmistakable fishy chemical odor from your AC vents? This is an electrical emergency. Follow our critical shutoff safety steps and contact our licensed technicians immediately.
+                        Smelling acrid burning plastic, melted wire coating, or an unmistakable fishy chemical odor from your AC vents? This is an electrical emergency. Follow our critical shutoff safety steps and contact our Oahu cooling technicians immediately.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -138,10 +138,10 @@ export default function AcBurningSmellPage() {
                                 Thermal Imaging & Terminal Tightening
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our technicians use infrared thermal imaging cameras to inspect contactors, terminal strips, and capacitor connections for hot spots.
+                                Our technicians use infrared thermal imaging cameras to inspect power relays, terminal strips, and capacitor connections for hot spots.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                We replace heat-damaged spade connectors, clip back oxidized copper wire to fresh strands, and torque all high-voltage electrical lugs to manufacturer specifications to eliminate future fire hazards.
+                                We replace heat-damaged spade connectors, clip back oxidized copper wire to fresh strands, and torque all electrical lugs to manufacturer specifications to eliminate future fire hazards.
                             </p>
                         </div>
 
@@ -155,8 +155,8 @@ export default function AcBurningSmellPage() {
                                 <span className="font-header font-bold text-xs text-white">Included</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-emerald-400">Insured</span>
+                                <span className="text-xs text-slate-300">Oahu Cooling Specialists</span>
+                                <span className="font-header font-bold text-xs text-emerald-400">Insured • Est. 2005</span>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@ export default function AcBurningSmellPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

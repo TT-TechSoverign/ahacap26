@@ -24,7 +24,7 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 const FAQS = [
     {
         q: "Why is my air conditioner completely dead with no lights or beeps?",
-        a: "When an AC has zero power, the most common causes are a tripped 2-pole circuit breaker in your electrical service panel, a blown low-voltage fuse on the indoor control board, a tripped condensate overflow safety switch, or a blown fuse inside the outdoor disconnect box."
+        a: "When a window AC has zero power, the most common causes are a tripped circuit breaker in your electrical service panel, a tripped LCDI safety button on the power plug, a blown low-voltage fuse on the control board, or a tripped condensate overflow safety switch."
     },
     {
         q: "How does a clogged drain pan cause the AC to lose all power?",
@@ -131,7 +131,7 @@ export default function NoPowerAcPage() {
                     </div>
                 </section>
 
-                {/* Licensed Electrical Assurance */}
+                {/* Professional Electrical Assurance */}
                 <section className="mb-16 p-8 rounded-3xl bg-slate-900/80 border border-white/10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div className="space-y-4">
@@ -195,7 +195,7 @@ export default function NoPowerAcPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

@@ -31,7 +31,7 @@ const FAQS = [
     },
     {
         q: "What happens if my unit needs service during the warranty period?",
-        a: "Simply call our Waipahu office at (808) 488-1111 with your purchase receipt. Our licensed HVAC technicians can diagnose issues on-site or at our facility using authentic manufacturer replacement parts."
+        a: "Simply call our Waipahu office at (808) 488-1111 with your purchase receipt. Our Oahu cooling technicians can diagnose issues on-site or at our facility using authentic manufacturer replacement parts."
     },
     {
         q: "Is Affordable Home A/C insured for residential and condo window AC service in Hawaii?",
@@ -169,7 +169,7 @@ export default function WindowAcWarrantyWaipahuPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

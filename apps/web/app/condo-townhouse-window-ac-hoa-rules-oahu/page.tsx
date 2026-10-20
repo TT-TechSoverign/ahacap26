@@ -32,7 +32,7 @@ const FAQS = [
     },
     {
         q: "How do you satisfy HOA condensation drainage requirements?",
-        a: "Our licensed technicians can attach custom condensate drain lines to route water safely to a drainage basin, container, or interior drain rather than letting it drip down the building exterior."
+        a: "Our Oahu cooling technicians can attach custom condensate drain lines to route water safely to a drainage basin, container, or interior drain rather than letting it drip down the building exterior."
     },
     {
         q: "Will you provide documentation for our HOA Architectural Review Committee (ARC)?",

@@ -173,7 +173,7 @@ export default function LargeRoomWindowAcPage() {
                                 Standard Exterior Support Brackets
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Because 18,000 and 23,500 BTU window units weigh over 110 lbs, our licensed technicians install standard exterior window AC support brackets. These heavy-gauge steel brackets anchor to your home’s outer sill, transferring the mechanical load away from fragile window frames.
+                                Because 18,000 and 23,500 BTU window units weigh over 110 lbs, our Oahu cooling technicians install standard exterior window AC support brackets. These heavy-gauge steel brackets anchor to your home’s outer sill, transferring the mechanical load away from fragile window frames.
                             </p>
                             <p className="text-xs text-slate-300 font-sans">
                                 <strong>Our Clean Jobsite Standard:</strong> Our technicians lay protective floor drop cloths under every unit and leave your home cleaner than when we arrived.

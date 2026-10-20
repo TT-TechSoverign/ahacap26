@@ -180,7 +180,7 @@ export default function SmallRoomWindowAcPage() {
                                 Standard Window Mounting & Brackets
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Need help installing into your window or jalousie louvers? Our licensed technicians provide professional window installation. We use standard window AC brackets for secure exterior sill support when required.
+                                Need help installing into your window or jalousie louvers? Our Oahu cooling technicians provide professional window installation. We use standard window AC brackets for secure exterior sill support when required.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
                                 <strong>Clean Jobsite Standard:</strong> Our technicians lay clean floor drop cloths under every unit during work, leaving your bedroom cleaner than when we arrived.

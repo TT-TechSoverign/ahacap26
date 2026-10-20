@@ -34,7 +34,7 @@ const FAQS = [
     },
     {
         q: "Will your technicians protect my floors from dirty pet hair runoff?",
-        a: "100% yes. Technicians lay protective floor drop cloths directly under the indoor unit. Precision rinse containment systems capture all water, hair mats, and dander slurry into closed disposal containers."
+        a: "100% yes. Technicians lay protective floor drop cloths directly under the window unit. Precision rinse containment systems capture all water, hair mats, and dander slurry into closed disposal containers."
     }
 ];
 

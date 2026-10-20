@@ -24,11 +24,11 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 const FAQS = [
     {
         q: "How can I tell if my air conditioner has a refrigerant leak?",
-        a: "The most common symptoms are ice forming on the indoor evaporator coils or thin copper service valves, the system running for hours without lowering the room temperature, a faint hissing sound near flare fittings, or dark oily residue coating the copper connections."
+        a: "The most common symptoms are ice forming on the front evaporator coils or copper U-bends, the system running for hours without lowering the room temperature, a faint hissing sound near the coil return bends, or dark oily residue coating the copper connections."
     },
     {
         q: "Why shouldn't I just ask a technician to add freon without fixing the leak?",
-        a: "Air conditioning systems are hermetically sealed closed loops. Refrigerant is never consumed or 'used up.' If your system is low, a physical hole or loose flare exists. Simply adding refrigerant without repairing the leak violates EPA Section 608 guidelines and will leak out again within weeks."
+        a: "Window air conditioning systems are hermetically sealed closed loops. Refrigerant is never consumed or 'used up.' If your system is low, a physical pinhole or corroded braze joint exists. Simply adding refrigerant without repairing the leak violates EPA Section 608 guidelines and will leak out again within weeks."
     },
     {
         q: "Where do leaks most frequently occur in Hawaii?",
@@ -198,7 +198,7 @@ export default function RefrigerantLeakPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

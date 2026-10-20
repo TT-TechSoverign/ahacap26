@@ -36,7 +36,7 @@ const FAQS = [
     },
     {
         q: "How much is professional double-hung window AC installation?",
-        a: "Standard window AC installation starts at $275. Our licensed technicians handle complete mounting, precision pitch leveling, side panel foam insulation, and electrical safety testing."
+        a: "Standard window AC installation starts at $275. Our Oahu cooling technicians handle complete mounting, precision pitch leveling, side panel foam insulation, and electrical safety testing."
     }
 ];
 
@@ -63,7 +63,7 @@ export default function DoubleHungWindowAcPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Traditional up-and-down double-hung sash windows require exact leveling, secure top-rail locking, and closed-cell foam insulation to prevent drafts and rainwater intrusion. Our licensed HVAC professionals deliver clean, secure, and airtight installations across Oahu.
+                        Traditional up-and-down double-hung sash windows require exact leveling, secure top-rail locking, and closed-cell foam insulation to prevent drafts and rainwater intrusion. Our Oahu cooling specialists deliver clean, secure, and airtight installations across Oahu.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -121,7 +121,7 @@ export default function DoubleHungWindowAcPage() {
                                 Protective Drop-Cloth Standard
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our licensed technicians lay protective floor drop cloths under every window during work and vacuum any incidental dust or wood shavings, leaving your home cleaner than when we arrived.
+                                Our Oahu cooling technicians lay protective floor drop cloths under every window during work and vacuum any incidental dust or wood shavings, leaving your home cleaner than when we arrived.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
                                 <strong>$45 Rebate Qualified:</strong> All qualifying Energy Star Dual Inverter window models come with the pre-approved Hawaii Energy application PDF.
@@ -170,7 +170,7 @@ export default function DoubleHungWindowAcPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

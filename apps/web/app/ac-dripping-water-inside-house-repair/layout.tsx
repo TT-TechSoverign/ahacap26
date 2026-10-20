@@ -48,7 +48,7 @@ const drippingFaqSchema = {
             "name": "How does Affordable Home AC fix indoor AC leaks?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our licensed technicians inspect the condensate drain pan, flush and clear the gravity drain line using vacuum extraction and dedicated line flushing, verify the mounting pitch with a digital level, and apply antimicrobial pan treatments to prevent future algae clogs."
+                "text": "Our Oahu cooling technicians inspect the condensate drain pan, flush and clear the gravity drain line using vacuum extraction and dedicated line flushing, verify the mounting pitch with a digital level, and apply antimicrobial pan treatments to prevent future algae clogs."
             }
         }
     ]

@@ -121,7 +121,7 @@ export default function RenterFriendlyWindowAcPage() {
                                 Protective Drop-Cloth Standard
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our licensed technicians treat your rental apartment with the highest level of care. We lay protective floor drop cloths under every window during work, preventing scuffs on hardwood or stains on rental carpet.
+                                Our Oahu cooling technicians treat your rental apartment with the highest level of care. We lay protective floor drop cloths under every window during work, preventing scuffs on hardwood or stains on rental carpet.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
                                 <strong>$45 Hawaii Energy Rebate:</strong> Even as a renter, you qualify for the official $45 cash rebate on eligible Energy Star units!
@@ -170,7 +170,7 @@ export default function RenterFriendlyWindowAcPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

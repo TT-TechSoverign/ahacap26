@@ -85,7 +85,7 @@ export function HomeServiceAreasHub() {
                 <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded-full text-cyan-400 font-mono text-[11px] font-bold uppercase tracking-wider">
                         <Navigation className="size-3 text-cyan-400" />
-                        22 Oahu Neighborhoods • Licensed Island Dispatch
+                        22 Oahu Neighborhoods • Insured Island Dispatch
                     </div>
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-header font-black text-white uppercase tracking-tight">
                         Serving Every Corner of Oahu

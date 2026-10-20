@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Compressor Not Turning On Oahu | Outdoor Unit Repair | Affordable Home A/C'
+        absolute: 'AC Compressor Not Turning On Oahu | Window AC Repair | Affordable Home A/C'
     },
-    description: 'Indoor fan blowing warm air but outdoor compressor not running? Accurate diagnostic of capacitors, contactors, inverter modules, and thermal overloads on Oahu.',
+    description: 'Blower fan blowing warm air but window AC compressor not running? Accurate diagnostic of capacitors, power relays, inverter modules, and thermal overloads on Oahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-compressor-not-turning-on-oahu',
     },
     openGraph: {
-        title: 'AC Compressor Not Turning On Oahu | Outdoor Unit Repair | Affordable Home A/C',
-        description: 'Indoor fan blowing warm air but outdoor compressor not running? Accurate diagnostic of capacitors, contactors, inverter modules, and thermal overloads on Oahu.',
+        title: 'AC Compressor Not Turning On Oahu | Window AC Repair | Affordable Home A/C',
+        description: 'Blower fan blowing warm air but window AC compressor not running? Accurate diagnostic of capacitors, power relays, inverter modules, and thermal overloads on Oahu.',
         url: 'https://www.affordablehome-ac.com/ac-compressor-not-turning-on-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Compressor Not Turning On Oahu | Outdoor Unit Repair | Affordable Home A/C',
-        description: 'Indoor fan blowing warm air but outdoor compressor not running? Accurate diagnostic of capacitors, contactors, inverter modules, and thermal overloads on Oahu.',
+        title: 'AC Compressor Not Turning On Oahu | Window AC Repair | Affordable Home A/C',
+        description: 'Blower fan blowing warm air but window AC compressor not running? Accurate diagnostic of capacitors, power relays, inverter modules, and thermal overloads on Oahu.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -37,10 +37,10 @@ const compressorFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Why is my indoor fan running but the outdoor compressor won't kick on?",
+            "name": "Why is my blower fan running but the window AC compressor won't kick on?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The indoor blower fan and the outdoor compressor operate on separate electrical sub-circuits. Common reasons the compressor fails to start include a blown dual-run capacitor, pitted electrical contactor points, an inverter power module (IPM) error, or a low-pressure refrigerant cutoff."
+                "text": "The interior blower fan and the sealed rotary compressor operate on separate electrical control relays. Common reasons the compressor fails to start include a blown dual-run capacitor, pitted power relay contacts, an inverter power module (IPM) error, or a thermal overload cutoff."
             }
         },
         {
@@ -56,7 +56,7 @@ const compressorFaqSchema = {
             "name": "How much does it cost to diagnose a non-starting AC compressor?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Affordable Home A/C offers a transparent $175 flat-rate diagnostic across all of Oahu. Our licensed technician checks capacitor ratings, winding resistance, and inverter voltages to identify the exact point of failure."
+                "text": "Affordable Home A/C offers a transparent $175 flat-rate diagnostic across all of Oahu. Our technician checks capacitor ratings, winding resistance, and inverter voltages to identify the exact point of failure."
             }
         }
     ]

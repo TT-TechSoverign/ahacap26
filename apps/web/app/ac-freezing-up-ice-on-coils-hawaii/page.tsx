@@ -29,7 +29,7 @@ const ROOT_CAUSES = [
     {
         title: "Low Refrigerant (Freon) Leak",
         desc: "Marine salt air corrodes copper U-bends and aluminum fin joints. When refrigerant pressure drops, the remaining liquid boils below 32°F, freezing ambient humidity onto the coil surface.",
-        action: "Electronic leak sniff test, flare joint resealing, nitrogen pressure test, and R-410A recharge."
+        action: "Electronic leak sniff test, coil corrosion inspection, and honest clean-vs-replace evaluation."
     },
     {
         title: "Choked Airflow (Mold & Dirty Filters)",
@@ -38,7 +38,7 @@ const ROOT_CAUSES = [
     },
     {
         title: "Faulty Fan Motor or Capacitor",
-        desc: "If the indoor blower motor slows down or stops spinning due to a burned-out capacitor, cold refrigerant continues circulating without airflow, rapidly freezing the entire indoor unit.",
+        desc: "If the interior blower motor slows down or stops spinning due to a burned-out capacitor, cold refrigerant continues circulating without airflow, rapidly freezing the entire evaporator coil.",
         action: "Capacitor replacement and blower motor voltage bench diagnostic."
     }
 ];
@@ -335,7 +335,7 @@ export default function AcFreezingUpPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

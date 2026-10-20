@@ -34,7 +34,7 @@ const FAQS = [
     },
     {
         q: "How does Affordable Home A/C protect coastal systems?",
-        a: "Our seasonal service includes pH-neutralizing salt dissolves, gentle freshwater reverse flushes, anti-corrosive protective film application, and inspection of outdoor disconnect boxes and copper flare connections."
+        a: "Our seasonal service includes pH-neutralizing salt dissolves, gentle freshwater reverse flushes, anti-corrosive protective film application, and inspection of electrical terminals and copper U-bend connections."
     }
 ];
 

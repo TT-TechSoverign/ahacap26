@@ -30,14 +30,14 @@ const CAUSES = [
     {
         title: "Blown Motor Run Capacitor",
         probability: "40% of Oahu Service Calls",
-        desc: "Oahu power grid voltage fluctuations frequently weaken the dual-run capacitor. The indoor fan blows room air, but the outdoor compressor fails to start.",
+        desc: "Oahu power grid voltage fluctuations frequently weaken the dual-run capacitor. The interior blower fan blows room air, but the rotary compressor fails to start.",
         fix: "Technician tests microfarad rating and installs a new heavy-duty motor capacitor."
     },
     {
         title: "Salt-Air Refrigerant Micro-Leak",
         probability: "30% of Oahu Service Calls",
-        desc: "Marine trade winds pit aluminum evaporator fins and copper flare joints, releasing R-410A refrigerant gas over time.",
-        fix: "Electronic halogen sniff test, nitrogen leak isolation, flare reseal, and vacuum recharge."
+        desc: "Marine trade winds pit aluminum evaporator fins and copper U-bends, releasing factory refrigerant gas over time.",
+        fix: "Electronic halogen sniff test, coil corrosion inspection, and honest clean-vs-replace evaluation."
     },
     {
         title: "Gecko Invertebrate Inverter Short",
@@ -367,7 +367,7 @@ export default function AcBlowingWarmAirPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

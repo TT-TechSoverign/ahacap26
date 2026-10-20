@@ -543,7 +543,7 @@ export default function LgDualInverterGuidePage() {
                         Need Guidance on Sizing or Installation?
                     </h4>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
-                        Visit our Waipahu warehouse by appointment or call our licensed HVAC dispatch team to confirm measurements and scheduling.
+                        Visit our Waipahu warehouse by appointment or call our Waipahu dispatch team to confirm measurements and scheduling.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <Link

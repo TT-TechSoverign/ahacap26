@@ -85,7 +85,7 @@ export default function BlackMoldAcPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Are black specks blowing onto your bed or furniture? In Hawaii&apos;s humid climate, mold colonies thrive inside dark air handlers, releasing millions of spores into your family&apos;s lungs. Learn the health signs and discover our Window AC cleaning and replacement solutions.
+                        Are black specks blowing onto your bed or furniture? In Hawaii&apos;s humid climate, mold colonies thrive inside dark AC blower wheels and coils, releasing millions of spores into your family&apos;s lungs. Learn the health signs and discover our Window AC cleaning and replacement solutions.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -196,7 +196,7 @@ export default function BlackMoldAcPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

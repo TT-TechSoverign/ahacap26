@@ -121,7 +121,7 @@ export default function WindowAcWeatherStrippingPage() {
                                 Marine-Grade Closed-Cell Foam
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                When our licensed technicians install your window AC, we don’t use flimsy paper-thin factory foam. We install durable, UV-stabilized closed-cell neoprene gaskets and custom insulated backer panels that resist tropical humidity and trade wind pressure.
+                                When our Oahu cooling technicians install your window AC, we don’t use flimsy paper-thin factory foam. We install durable, UV-stabilized closed-cell neoprene gaskets and custom insulated backer panels that resist tropical humidity and trade wind pressure.
                             </p>
                             <p className="text-xs text-slate-300 font-sans">
                                 <strong>Clean Jobsite Standard:</strong> Our technicians lay clean floor drop cloths under every window and leave your home cleaner than when we arrived.
@@ -170,7 +170,7 @@ export default function WindowAcWeatherStrippingPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,025)"
+                    title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 

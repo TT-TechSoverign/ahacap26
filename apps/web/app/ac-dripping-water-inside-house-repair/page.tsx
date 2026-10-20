@@ -212,7 +212,7 @@ export default function AcDrippingWaterPage() {
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                                    <span>Clean drop cloth protection laid beneath your indoor unit</span>
+                                    <span>Clean drop cloth protection laid beneath your window unit</span>
                                 </li>
                             </ul>
                         </div>
@@ -365,7 +365,7 @@ export default function AcDrippingWaterPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

@@ -40,7 +40,7 @@ const highRiseFaqSchema = {
             "name": "What safety precautions are required when installing a window AC in a Honolulu high-rise?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "In high-rise towers, our licensed technicians use industrial safety tether lanyards that anchor the AC chassis to the interior building structure throughout the entire mounting process, mathematically eliminating any risk of falling debris or equipment drop onto sidewalks or lanais below."
+                "text": "In high-rise towers, our Oahu cooling technicians use industrial safety tether lanyards that anchor the AC chassis to the interior building structure throughout the entire mounting process, mathematically eliminating any risk of falling debris or equipment drop onto sidewalks or lanais below."
             }
         },
         {

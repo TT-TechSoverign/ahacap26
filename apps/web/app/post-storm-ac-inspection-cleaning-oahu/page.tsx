@@ -23,34 +23,34 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 const FAQS = [
     {
         q: "Should I turn off my AC during a storm?",
-        a: "Yes. High wind gusts can cause head pressure spikes that force outdoor fans to stall, and island grid brownouts or lightning surges can instantly destroy expensive DC inverter control boards. Switch off the circuit breaker until winds pass."
+        a: "Yes. High wind gusts can cause head pressure spikes that force rear condenser fans to stall, and island grid brownouts or lightning surges can instantly destroy expensive DC inverter control boards. Switch off the circuit breaker until winds pass."
     },
     {
-        q: "What damage can a Kona storm cause to an outdoor AC condenser?",
-        a: "Kona storms blow heavy southern marine salt spray, palm fronds, gravel, and standing water into condenser housings. This corrodes electrical disconnect terminals, clogs heat-exchange fins, and can jam the outdoor fan motor."
+        q: "What damage can a Kona storm cause to an AC condenser?",
+        a: "Kona storms blow heavy southern marine salt spray, palm fronds, gravel, and standing water into rear condenser housings. This corrodes electrical terminals, clogs heat-exchange fins, and can jam the condenser fan motor."
     },
     {
         q: "What is included in a post-storm AC inspection by Affordable Home A/C?",
-        a: "We clear internal debris, flush wind-driven salt from coils, test the disconnect switch and contactor, inspect refrigerant line insulation, test electrical capacitor ratings, and run a full operational cycle for a $175 flat rate."
+        a: "We clear internal debris, flush wind-driven salt from coils, test the LCDI power cord and control relays, inspect window weather-seals, test electrical capacitor ratings, and run a full operational cycle for a $175 flat rate."
     },
     {
         q: "What if my AC won't power back on after the storm?",
-        a: "First check your main electrical panel to see if the two-pole AC breaker tripped. If resetting it immediately causes it to trip again, do not force it—a short circuit or grounded motor winding may be present. Call our dispatch desk for emergency diagnostics."
+        a: "First check your main electrical panel to see if the AC breaker tripped, and check the RESET button on your LCDI power plug. If resetting it immediately causes it to trip again, do not force it—a short circuit or grounded motor winding may be present. Call our dispatch desk for emergency diagnostics."
     }
 ];
 
 const STORM_CHECKLIST = [
     {
         title: "Salt Encrustation & Debris Extraction",
-        desc: "High winds pack leaves, twigs, and a heavy crust of sea salt into the condenser coil. We flush the coil matrix clean with fresh water and foaming cleaner."
+        desc: "High winds pack leaves, twigs, and a heavy crust of sea salt into the rear condenser coil. We flush the coil matrix clean with fresh water and foaming cleaner."
     },
     {
-        title: "Electrical Box Moisture Check",
-        desc: "Driving rain often penetrates outdoor disconnect boxes and whip conduits. We dry and seal electrical connections to prevent short circuits."
+        title: "Electrical Control Box Moisture Check",
+        desc: "Driving rain can penetrate exterior louvers and control compartments. We dry and inspect electrical terminals and relays to prevent short circuits."
     },
     {
         title: "Fan Blade & Motor Free-Spin Test",
-        desc: "We manually verify the fan rotates smoothly on its bearings without bent blades rubbing against fan grilles or storm debris."
+        desc: "We manually verify the fan rotates smoothly on its bearings without bent blades rubbing against fan shrouds or storm debris."
     },
     {
         title: "Inverter Board Voltage & Capacitance Test",
@@ -81,7 +81,7 @@ export default function PostStormInspectionPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Heavy Kona storm winds, torrential tropical downpours, and flying marine salt can cripple your air conditioner&apos;s outdoor condenser. Our licensed technicians inspect electrical components, clear debris, and flush salt crusting for safe restart.
+                        Heavy Kona storm winds, torrential tropical downpours, and flying marine salt can cripple your window air conditioner&apos;s rear condenser. Our Oahu cooling technicians inspect electrical components, clear debris, and flush salt crusting for safe restart.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

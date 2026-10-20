@@ -35,7 +35,7 @@ const FAQS = [
     },
     {
         q: "What if the repair is simple—is it done during the visit?",
-        a: "Yes. Our service vans are stocked with common run capacitors, contactors, fuses, thermistors, and condensate fittings. If your issue is a simple component failure, we can often repair it on the spot with upfront pricing."
+        a: "Yes. Our service vans are stocked with common run capacitors, power relays, fuses, thermistors, and condensate fittings. If your issue is a simple component failure, we can often repair it on the spot with upfront pricing."
     }
 ];
 
@@ -43,7 +43,7 @@ const DIAGNOSTIC_STEPS = [
     {
         step: "01",
         title: "Electrical Circuit Analysis",
-        desc: "We test incoming supply voltage (115V/230V), inspect disconnect switches, check contactors for pitting, and verify capacitor capacitance."
+        desc: "We test incoming supply voltage (115V/230V), inspect LCDI plug cords and outlets, check power relays for pitting, and verify capacitor capacitance."
     },
     {
         step: "02",
@@ -198,7 +198,7 @@ export default function AcDiagnosticPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

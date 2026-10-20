@@ -56,7 +56,7 @@ const burningSmellFaqSchema = {
             "name": "Why does a burning electrical issue sometimes smell like dead fish?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "When the plastic and resin binders in electrical circuit breakers, contactors, or terminal blocks overheat, they release pungent amine compounds that produce a strong, unmistakable fish-like chemical odor."
+                "text": "When the plastic and resin binders in electrical circuit breakers, power relays, or terminal blocks overheat, they release pungent amine compounds that produce a strong, unmistakable fish-like chemical odor."
             }
         }
     ]

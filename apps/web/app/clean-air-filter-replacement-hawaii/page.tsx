@@ -30,7 +30,7 @@ const FAQS = [
     },
     {
         q: "Why shouldn't I dry my filters in direct midday Hawaii sunlight?",
-        a: "Hawaii's intense UV radiation can warp the delicate polypropylene mesh and make the thin plastic mounting perimeter brittle, causing it to snap when bent back into the air handler channels."
+        a: "Hawaii's intense UV radiation can warp the delicate polypropylene mesh and make the thin plastic mounting perimeter brittle, causing it to snap when slid back into the front intake channels."
     },
     {
         q: "Does washing the filters clean the whole AC?",
@@ -185,7 +185,7 @@ export default function AirFilterCarePage() {
                 <ReviewsPavilion 
                     variant="marquee" 
                     title="Clean Air Reviews"
-                    subtitle="Honolulu homeowners breathing easier with maintained air handlers"
+                    subtitle="Honolulu homeowners breathing easier with clean window ACs"
                     limit={6}
                 />
 

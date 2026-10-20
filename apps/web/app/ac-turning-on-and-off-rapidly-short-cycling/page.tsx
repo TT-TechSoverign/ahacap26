@@ -36,7 +36,7 @@ const FAQS = [
     },
     {
         q: "What does your $175 diagnostic cover for short cycling?",
-        a: "Our licensed technician tests thermistor resistance against factory temperature curves, checks capacitor microfarad ratings, measures refrigerant pressures, and verifies proper BTU sizing for your room."
+        a: "Our technician tests thermistor resistance against factory temperature curves, checks capacitor microfarad ratings, measures coil temperatures, and verifies proper BTU sizing for your room."
     }
 ];
 
@@ -51,11 +51,11 @@ const SHORT_CYCLE_CAUSES = [
     },
     {
         title: "Refrigerant Charge Imbalance",
-        desc: "Low refrigerant levels or thermal expansion valve (TXV) restrictions trigger high- or low-pressure safety limit switches, killing compressor power."
+        desc: "Low refrigerant levels or capillary restrictions trigger thermal safety limit switches, killing compressor power."
     },
     {
         title: "Overheating Compressor Motor",
-        desc: "Dirty outdoor condenser coils or a failing fan motor causes head pressure to spike, tripping the compressor's internal thermal overload switch."
+        desc: "Dirty rear condenser coils or a failing fan motor causes head pressure to spike, tripping the compressor's internal thermal overload switch."
     }
 ];
 
@@ -138,10 +138,10 @@ export default function ShortCyclingPage() {
                                 Multi-Meter Calibration & Room Sizing
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our licensed technicians test thermistor resistance (k-ohms) at specific temperatures to verify if temperature sensors are drifting out of calibration.
+                                Our Oahu cooling technicians test thermistor resistance (k-ohms) at specific temperatures to verify if temperature sensors are drifting out of calibration.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                We also inspect refrigerant subcooling and superheat to confirm the system isn&apos;t cycling on a low-pressure cutoff. If a simple sensor repositioning or replacement is required, we resolve it on the spot.
+                                We also inspect evaporator and condenser temperature differentials to confirm the unit isn&apos;t cycling on a thermal cutoff. If a simple sensor repositioning or replacement is required, we resolve it on the spot.
                             </p>
                         </div>
 
@@ -155,8 +155,8 @@ export default function ShortCyclingPage() {
                                 <span className="font-header font-bold text-xs text-white">All 22 Oahu Cities</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-emerald-400">Insured</span>
+                                <span className="text-xs text-slate-300">Oahu Cooling Specialists</span>
+                                <span className="font-header font-bold text-xs text-emerald-400">Insured • Est. 2005</span>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@ export default function ShortCyclingPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
+                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 

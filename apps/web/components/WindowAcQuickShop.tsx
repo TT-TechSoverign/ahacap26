@@ -81,7 +81,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
             ? `In-Stock Window ACs Ready for ${cityName} Delivery or Pickup`
             : 'In-Stock Waipahu Window ACs — Order Online Now');
 
-    const resolvedHeading = rawHeading.replace(/\$395[–-]\$1,025/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
+    const resolvedHeading = rawHeading.replace(/\$395[–-]\$(?:1,025|1,200)/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
 
     const rawSubheading =
         subheading ||
@@ -89,7 +89,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
             ? `Order brand-new LG & GE Window ACs online for $50 flat delivery to ${cityName} or free pickup at our Waipahu warehouse (94-150 Leoleo St #203).`
             : 'Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse. Free pickup by appointment or $50 flat Oahu delivery.');
 
-    const resolvedSubheading = rawSubheading.replace(/\$395[–-]\$1,025/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
+    const resolvedSubheading = rawSubheading.replace(/\$395[–-]\$(?:1,025|1,200)/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
 
     return (
         <section className="py-12 px-4 sm:px-6 rounded-3xl bg-slate-900/70 border border-white/10 shadow-2xl my-12">

@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'No Power to AC Unit in Hawaii? Breaker & Disconnect Checks | Affordable Home A/C'
+        absolute: 'No Power to AC Unit in Hawaii? Breaker & Plug Checks | Affordable Home A/C'
     },
     description: 'Window AC unit completely dead with no power or display lights in Hawaii? Check circuit breakers, LCDI safety plugs, and control fuses.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/no-power-to-ac-unit-hawaii',
     },
     openGraph: {
-        title: 'No Power to AC Unit in Hawaii? Breaker & Disconnect Checks | Affordable Home A/C',
+        title: 'No Power to AC Unit in Hawaii? Breaker & Plug Checks | Affordable Home A/C',
         description: 'Window AC unit completely dead with no power or display lights in Hawaii? Check circuit breakers, LCDI safety plugs, and control fuses.',
         url: 'https://www.affordablehome-ac.com/no-power-to-ac-unit-hawaii',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'No Power to AC Unit in Hawaii? Breaker & Disconnect Checks | Affordable Home A/C',
+        title: 'No Power to AC Unit in Hawaii? Breaker & Plug Checks | Affordable Home A/C',
         description: 'Window AC unit completely dead with no power or display lights in Hawaii? Check circuit breakers, LCDI safety plugs, and control fuses.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }

@@ -48,7 +48,7 @@ const coilCleaningFaqSchema = {
             "name": "How much money can I actually save each month by cleaning my coils?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "For a typical 12,000 BTU unit running 8 hours a day, restoring clean coil heat transfer typically saves 2 to 3 kWh per day—translating to roughly $30 to $45 in monthly savings per air handler. In multi-split households, savings often exceed $100 per month."
+                "text": "For a typical 12,000 BTU window unit running 8 hours a day, restoring clean coil heat transfer typically saves 2 to 3 kWh per day—translating to roughly $30 to $45 in monthly savings per window AC. In multi-room households running multiple window units, savings often exceed $100 per month."
             }
         },
         {

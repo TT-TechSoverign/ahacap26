@@ -40,15 +40,15 @@ const stormInspectionFaqSchema = {
             "name": "Should I run my air conditioner during a severe storm or tropical system?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "It is best to turn off your AC at the breaker during severe tropical storms or hurricanes. Severe wind gusts can stall outdoor fan blades while electrical voltage fluctuations and lightning surges can burn out sensitive inverter circuit boards."
+                "text": "It is best to turn off your AC at the breaker during severe tropical storms or hurricanes. Severe wind gusts can stall rear condenser fan blades while electrical voltage fluctuations and lightning surges can burn out sensitive inverter circuit boards."
             }
         },
         {
             "@type": "Question",
-            "name": "What damage can a Kona storm cause to an outdoor AC condenser?",
+            "name": "What damage can a Kona storm cause to an AC condenser?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Kona storms blow heavy southern marine salt spray, palm fronds, gravel, and standing water into condenser housings. This corrodes electrical disconnect terminals, clogs heat-exchange fins, and can jam the outdoor fan motor."
+                "text": "Kona storms blow heavy southern marine salt spray, palm fronds, gravel, and standing water into rear condenser housings. This corrodes electrical terminals, clogs heat-exchange fins, and can jam the condenser fan motor."
             }
         },
         {
@@ -56,7 +56,7 @@ const stormInspectionFaqSchema = {
             "name": "What is included in a post-storm AC inspection by Affordable Home A/C?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We clear internal debris, flush wind-driven salt from coils, test the disconnect switch and contactor, inspect refrigerant line insulation, test electrical capacitor ratings, and run a full operational cycle for a $175 flat rate."
+                "text": "We clear internal debris, flush wind-driven salt from coils, test the LCDI power cord and control relays, inspect window weather-seals, test electrical capacitor ratings, and run a full operational cycle for a $175 flat rate."
             }
         }
     ]
