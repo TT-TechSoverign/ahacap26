@@ -24,7 +24,7 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 const FAQS = [
     {
         q: "What happens if the rear condenser fan stops spinning while the AC is running?",
-        a: "Without the fan drawing air across the condenser coils, high-pressure superheated refrigerant cannot condense into liquid. Head pressure and temperatures skyrocket within 2 to 3 minutes, forcing the compressor into high-pressure thermal overload cutoff and risking permanent motor damage."
+        a: "Without the fan drawing air across the condenser coils, high-pressure hot refrigerant gas cannot condense into liquid. Head pressure and temperatures skyrocket within 2 to 3 minutes, forcing the compressor into high-pressure thermal overload cutoff and risking permanent motor damage."
     },
     {
         q: "What is the most common reason a condenser fan motor stops spinning?",
