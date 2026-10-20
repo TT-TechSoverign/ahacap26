@@ -78,7 +78,9 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
   - **Brian Primary Admin Email & Tai BCC Preservation**:
     - Updated `apps/api/services/email.py`, `apps/api/tests/test_email_routing.py`, `scripts/resend_admin.py`, and `ahac-crm` so **`brian@affordablehome-ac.com`** is the primary recipient in production, **`irasmussenjobs@gmail.com`** is preserved on BCC in production and as exclusive recipient in staging/test, and all retired division email addresses are completely removed.
   - **Trust & Authority Grounding Reframe**:
-    - Removed all legacy contractor license references across the entire codebase, replacing with **`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`**.
+    - Replaced all legacy license references across the entire codebase with **`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`**.
+  - **2nd & 3rd Pass Forensic Audits, Live DB Sync & CRM Stripe Checkout Hardening**:
+    - Synced live PostgreSQL `content_pages` (`path='/'`) and `admin_users` (`brian@affordablehome-ac.com`, `Affordable Home A/C`), removed the legacy `Split / Central` section from `AdminCalendar.tsx` and `types/content.ts`, aligned `CEER` efficiency ratings and exterior window AC condenser terminology across all diagnostic/symptom pages, removed 25 unused static mini-split image files from `apps/web/public/assets/`, and updated `ahac-crm` Stripe Checkout session creation (`GET`/`POST /api/v1/invoices/{id}/pay`) to use Stripe Dynamic Payment Methods with `sqlalchemy[asyncio]`/`greenlet`.
   - **Zero Disruption to Window AC E-Commerce Store**:
     - Verified `/shop`, `/shop/[slug]`, all 16 LG & GE models (`$395` to `$1,200`, `12` in stock / `117` physical units), 16/16 factory PDF spec sheets, Cart, Stripe Checkout, and `/admin` remain 100% intact.
 
