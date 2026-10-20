@@ -42,13 +42,13 @@ const CAUSES = [
     {
         title: "Gecko Invertebrate Inverter Short",
         probability: "15% of Oahu Service Calls",
-        desc: "Island geckos crawl between the outdoor inverter heat sink and printed circuit board, triggering emergency high-voltage shutoff.",
+        desc: "Island geckos crawl between the rear inverter heat sink and printed circuit board inside the window chassis, triggering emergency high-voltage shutoff.",
         fix: "Board bench inspection, terminal fuse testing, and protective silicone insect shielding."
     },
     {
         title: "Salt-Crusted Condenser Coil",
         probability: "15% of Oahu Service Calls",
-        desc: "Outdoor coils caked in salt and red dirt cannot dissipate heat, triggering thermal overload safety cutoff.",
+        desc: "Rear condenser coils caked in salt and red dirt cannot dissipate heat, triggering thermal overload safety cutoff.",
         fix: "Specialized low-pressure chemical foam coil wash and fin comb realignment."
     }
 ];
@@ -56,11 +56,11 @@ const CAUSES = [
 const FAQS = [
     {
         q: "What should I check before calling for a repair?",
-        a: "Check three things: (1) Ensure the thermostat mode is set to COOL (not FAN ONLY), (2) Check your main electrical panel for a half-tripped double-pole breaker (flip firmly OFF then ON), and (3) Inspect your air filter—a pitch-black clogged filter chokes airflow and causes compressor overload."
+        a: "Check three things: (1) Ensure the control mode is set to COOL (not FAN ONLY or ENERGY SAVER), (2) Check your LCDI plug reset button and main electrical panel for a tripped breaker, and (3) Inspect your front slide-out air filter—a pitch-black clogged filter chokes airflow and causes compressor overload."
     },
     {
         q: "How much is your diagnostic service call?",
-        a: "We charge a transparent flat rate of $175. This covers technician dispatch anywhere on Oahu, electrical multimeter testing, refrigerant gauge pressure checks, and a comprehensive written quote before any physical repairs begin."
+        a: "We charge a transparent flat rate of $175. This covers technician dispatch anywhere on Oahu, electrical multimeter testing, thermal Delta-T and coil inspection, and a comprehensive written quote before any physical repairs begin."
     },
     {
         q: "What if my window AC compressor is completely seized?",
@@ -207,7 +207,7 @@ export default function AcBlowingWarmAirPage() {
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                                    <span>Evaporator &amp; condenser coil airflow and temperature split verification</span>
+                                    <span>Evaporator &amp; condenser coil airflow and temperature Delta-T verification</span>
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />

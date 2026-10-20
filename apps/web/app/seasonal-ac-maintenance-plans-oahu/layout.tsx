@@ -48,7 +48,7 @@ const seasonalPlanFaqSchema = {
             "name": "What is verified during a routine preventative maintenance visit?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our multi-point inspection covers evaporator and condenser coil sanitization, fan motor amp draws, electrical plug safety, condensate base pan clearing, and temperature split verification."
+                "text": "Our multi-point inspection covers evaporator and condenser coil sanitization, fan motor amp draws, electrical plug safety, condensate base pan clearing, and temperature Delta-T verification."
             }
         },
         {

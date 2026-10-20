@@ -7,12 +7,12 @@ payload = {
         {
             "product_id": 1,
             "name": "Test Product",
-            "category": "SPLIT_AIR",
+            "category": "WINDOW_AC",
             "quantity": 1
         }
     ],
     "customer_email": "debug@test.com",
-    "shipping_method": "PICKUP_AIEA"
+    "shipping_method": "PICKUP_WAIPAHU"
 }
 
 try:

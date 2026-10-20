@@ -23,7 +23,7 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 const FAQS = [
     {
         q: "What causes AC drain lines to clog so quickly in Hawaii?",
-        a: "Hawaii's warm ambient air combined with constant condensation creates the perfect breeding environment for bacterial slime called zooglea and airborne algae spores. Over 6 to 12 months, this forms a gelatinous plug that blocks the 5/8-inch or 3/4-inch condensate pipe."
+        a: "Hawaii's warm ambient air combined with constant condensation creates the perfect breeding environment for bacterial slime called zooglea and airborne algae spores. Over 6 to 12 months, this forms a gelatinous plug that blocks the rear condensate drain port, internal slinger channels, or attached drain tubing."
     },
     {
         q: "How does Affordable Home A/C clear clogged condensate drains?",

@@ -40,7 +40,7 @@ const burningSmellFaqSchema = {
             "name": "What should I do immediately if I smell burning electrical plastic from my AC?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Immediately shut off the air conditioner at the remote or thermostat, and go straight to your main electrical panel to switch the 240V AC breaker completely OFF. Do not leave the system energized, as overheating wires can ignite surrounding building materials."
+                "text": "Immediately shut off the air conditioner at the remote or front control panel, unplug the LCDI power cord if safely accessible, and go straight to your main electrical panel to switch the AC circuit breaker completely OFF. Do not leave the system energized, as overheating wires can ignite surrounding building materials."
             }
         },
         {

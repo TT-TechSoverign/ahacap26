@@ -23,7 +23,7 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 const FAQS = [
     {
         q: "What is included in the $175 AC Diagnostic Service?",
-        a: "Our $175 flat-rate diagnostic covers complete on-site troubleshooting: digital refrigerant pressure checks, electrical capacitor microfarad testing, compressor winding amp draw analysis, inverter circuit board error code diagnosis, and temperature delta-T split evaluation."
+        a: "Our $175 flat-rate diagnostic covers complete on-site window AC troubleshooting: electrical capacitor microfarad testing, compressor winding amp draw analysis, inverter circuit board error code diagnosis, and supply-to-return temperature Delta-T cooling evaluation."
     },
     {
         q: "Are there extra hidden fees or trip charges depending on my Oahu town?",
@@ -47,8 +47,8 @@ const DIAGNOSTIC_STEPS = [
     },
     {
         step: "02",
-        title: "Refrigerant & Thermal Pressures",
-        desc: "Using digital HVAC gauges, we read subcooling and superheat levels to detect slow refrigerant leaks, restrictions, or thermal expansion valve faults."
+        title: "Thermal Delta-T & Sealed Coil Check",
+        desc: "Using precision digital psychrometers and halogen leak detectors, we measure evaporator temperature drop and inspect copper U-bends for salt-air corrosion."
     },
     {
         step: "03",

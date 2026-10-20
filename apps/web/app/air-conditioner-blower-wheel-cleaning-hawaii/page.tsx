@@ -22,7 +22,7 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 const FAQS = [
     {
         q: "Why does the AC blower wheel get coated in black dirt and mold?",
-        a: "The crossflow blower wheel spins thousands of rotations per hour, pulling humid room air directly across wet cooling coils. Microscopic dust, skin cells, and pet dander stick to the damp curved fan blades, creating a dense fungal crust that chokes airflow."
+        a: "The centrifugal squirrel-cage blower wheel spins thousands of rotations per hour, pulling humid room air directly across wet cooling coils. Microscopic dust, skin cells, and pet dander stick to the damp curved fan blades, creating a dense fungal crust that chokes airflow."
     },
     {
         q: "Can you clean a heavily caked blower wheel in place?",
