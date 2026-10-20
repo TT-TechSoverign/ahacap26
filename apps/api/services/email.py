@@ -47,15 +47,15 @@ def get_admin_notification_recipients(is_test: bool = False):
     """
     Bulletproof CEO Protection Guardrail:
     - If IS_STAGING or is_test: 100% of emails route EXCLUSIVELY to irasmussenjobs@gmail.com.
-      The CEO (brian@affordablehome-ac.com) and ahacsplitdivision@gmail.com are COMPLETELY OMITTED.
-    - If PRODUCTION and REAL: Routes to primary admin list [brian@affordablehome-ac.com, ahacsplitdivision@gmail.com]
+      The CEO (brian@affordablehome-ac.com) is COMPLETELY OMITTED.
+    - If PRODUCTION and REAL: Routes to primary admin list [brian@affordablehome-ac.com]
       with BCC to irasmussenjobs@gmail.com.
     """
     if IS_STAGING or is_test:
         logger.info(f"🛡️ [CEO GUARDRAIL ACTIVE] Intercepted test/staging notification (IS_STAGING={IS_STAGING}, is_test={is_test}). Routing EXCLUSIVELY to {DEV_TEST_EMAIL} with ZERO CEO alert.")
         return [DEV_TEST_EMAIL], [], True
 
-    primary = ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com"]
+    primary = ["brian@affordablehome-ac.com"]
     bcc = [DEV_TEST_EMAIL]
     return primary, bcc, False
 
@@ -171,7 +171,7 @@ def send_raw_email(to_email, subject, html_body):
         with server:
             server.login(SMTP_USER, SMTP_PASSWORD)
             # Send to both Customer and Admin
-            recipients = [to_email, "brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com", "irasmussenjobs@gmail.com"]
+            recipients = [to_email, "brian@affordablehome-ac.com", "irasmussenjobs@gmail.com"]
             server.sendmail(SMTP_USER, recipients, msg.as_string())
             print(f"✅ Email sent to {to_email} (BCC: irasmussenjobs@gmail.com)")
     except Exception as e:
@@ -646,7 +646,7 @@ END:VCALENDAR"""
             <div style="border-top: 1px solid #1e293b; margin: 0 auto; width: 60%;"></div>
             
             <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #94a3b8; font-weight: 700; margin-top: 20px; display: block;">
-                LIC# CT-36775 <span style="color: #06b6d4; margin: 0 8px;">•</span> Licensed <span style="color: #1e293b;">|</span> Insured <span style="color: #1e293b;">|</span> Bonded
+                Waipahu Warehouse Direct <span style="color: #06b6d4; margin: 0 8px;">•</span> Insured Oahu Cooling Specialists <span style="color: #1e293b;">|</span> Est. 2005
             </span>
             
             <p style="margin-top: 12px; font-size: 11px; color: #64748b;">
@@ -817,14 +817,14 @@ END:VCALENDAR"""
                     server.login(SMTP_USER, SMTP_PASSWORD)
                     # Send Client Email
                     send_email_with_attachments(to_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
-                    # Send Admin Email (Primary To: Brian & Split Division, BCC: Ian Dev Record)
+                    # Send Admin Email (Primary To: Brian, BCC: Ian Dev Record)
                     send_email_with_attachments(admin_primary_list, admin_subject, admin_html_body, admin_bcc_list, None, server=server)
             else:
                 with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
                     server.login(SMTP_USER, SMTP_PASSWORD)
                     # Send Client Email
                     send_email_with_attachments(to_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
-                    # Send Admin Email (Primary To: Brian & Split Division, BCC: Ian Dev Record)
+                    # Send Admin Email (Primary To: Brian, BCC: Ian Dev Record)
                     send_email_with_attachments(admin_primary_list, admin_subject, admin_html_body, admin_bcc_list, None, server=server)
         except Exception as e:
             logger.error(f"❌ SMTP Connection failed for order {order_id}: {e} - Retrying due to tenacity exception...")
@@ -839,7 +839,7 @@ END:VCALENDAR"""
 async def send_inquiry_notification(lead):
     """
     Sends an Admin Notification when a new lead/inquiry comes in via the Contact Wizard.
-    Includes both Brian and AHAC Split Division as primary recipients.
+    Routes to Brian as primary recipient with BCC to DEV_TEST_EMAIL.
     Protected with idempotency locks against duplicate delivery.
     """
     lead_id = getattr(lead, "id", None)
@@ -992,7 +992,7 @@ async def send_inquiry_notification(lead):
                     </div>
                 </div>
                 <div class="footer">
-                    &copy; 2026 Affordable Home A/C &bull; License CT-36775.<br>
+                    &copy; 2026 Affordable Home A/C &bull; Insured Oahu Cooling Specialists.<br>
                     Internal Oahu Dispatch System.
                 </div>
             </div>
@@ -1076,7 +1076,7 @@ async def send_inquiry_notification(lead):
 async def send_customer_appointment_confirmation(lead):
     """
     Dispatches an executive-grade, beautifully branded appointment confirmation email.
-    Includes zero upfront estimate commitment, Hawaii CT-36775 license, drop-cloth protection,
+    Includes zero upfront estimate commitment, Waipahu warehouse direct authority, drop-cloth protection,
     and 'as soon as possible' turnaround (strictly zero false claims of same-day or emergency dispatch).
     
     SAFETY MANDATE: During development/testing until explicitly finalized, customer copies
@@ -1101,7 +1101,7 @@ async def send_customer_appointment_confirmation(lead):
         last_name = (getattr(lead, "last_name", "") or "").strip()
         ref_id = str(getattr(lead, "id", "AHAC"))[:8].upper()
         phone = getattr(lead, "phone", "") or "(808) 488-1111"
-        service = getattr(lead, "service_type", "Oahu Air Conditioning Service")
+        service = getattr(lead, "service_type", "Oahu Window Air Conditioning Service")
         addr = getattr(lead, "address", "Oahu, HI")
         city = getattr(lead, "city", "Oahu")
         zip_code = getattr(lead, "zip", "")
@@ -1122,9 +1122,9 @@ Callback Phone: {phone}
 Status: Dispatched to Scheduling Queue
 
 [OUR ISLAND COMMITMENTS]
-* $0 Free In-Home Estimates: Zero upfront booking payment barrier for new or replacement split AC and window AC installations.
+* $0 Free In-Home Estimates: Zero upfront booking payment barrier for new or replacement LG & GE window AC installations and window AC cleaning.
 * Drop-Cloth Floor Protection: Technicians lay clean drop cloths on the floor directly under the unit before starting work.
-* Hawaii Contractor CT-36775: Island-grounded, fully licensed, bonded, and insured.
+* Waipahu Warehouse Direct: Island-grounded, fully insured Oahu window AC specialists since 2005.
 
 Need immediate assistance or scheduling updates? Call our Waipahu shop directly:
 Office Phone: (808) 488-1111
@@ -1132,7 +1132,7 @@ Waipahu Commercial Center: 94-150 Leoleo St #203, Waipahu, HI 96797
 Website: https://www.affordablehome-ac.com
 
 Mahalo for choosing local Hawaii workmanship!
-Affordable Home A/C • CT-36775
+Affordable Home A/C • Waipahu, Oahu
 """
 
         html_content = f"""<!DOCTYPE html>
@@ -1395,7 +1395,7 @@ Affordable Home A/C • CT-36775
             <!-- Header -->
             <div class="header">
                 <img src="cid:logo_img" alt="Affordable Home A/C" onerror="this.src='https://www.affordablehome-ac.com/assets/logo-new.png';" />
-                <p class="header-sub">Oahu Air Conditioning &bull; License CT-36775</p>
+                <p class="header-sub">Oahu Window Air Conditioning &bull; Waipahu Warehouse Direct</p>
             </div>
 
             <!-- Content -->
@@ -1431,9 +1431,9 @@ Affordable Home A/C • CT-36775
                 <!-- Island Guarantees -->
                 <div class="guarantees">
                     <div class="guarantee-title">Our Island Workmanship Guarantees</div>
-                    <div class="guarantee-item"><strong>★ $0 Free In-Home Estimates:</strong> Zero upfront payment barrier for new or replacement installations.</div>
-                    <div class="guarantee-item"><strong>★ Clean Floor Drop-Cloth Protection:</strong> Licensed technicians lay drop cloths on the floor directly under the unit before starting work.</div>
-                    <div class="guarantee-item"><strong>★ Hawaii Contractor CT-36775:</strong> Island-grounded, fully licensed, bonded, and insured technicians.</div>
+                    <div class="guarantee-item"><strong>★ $0 Free In-Home Estimates:</strong> Zero upfront payment barrier for new or replacement window AC installations.</div>
+                    <div class="guarantee-item"><strong>★ Clean Floor Drop-Cloth Protection:</strong> Technicians lay drop cloths on the floor directly under the unit before starting work.</div>
+                    <div class="guarantee-item"><strong>★ Insured Oahu Specialists:</strong> Island-grounded LG &amp; GE window AC specialists since 2005.</div>
                 </div>
 
                 <div class="cta-wrapper">
@@ -1446,7 +1446,7 @@ Affordable Home A/C • CT-36775
             <div class="footer">
                 <strong>Affordable Home A/C</strong> &bull; Waipahu Commercial Center<br>
                 94-150 Leoleo St #203, Waipahu, HI 96797<br>
-                License CT-36775 &bull; <a href="https://www.affordablehome-ac.com">www.affordablehome-ac.com</a><br>
+                Insured Oahu Cooling Specialists &bull; <a href="https://www.affordablehome-ac.com">www.affordablehome-ac.com</a><br>
                 Mahalo for supporting local Hawaii small business!
             </div>
         </div>

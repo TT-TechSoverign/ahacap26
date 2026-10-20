@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Compressor Not Turning On Oahu | Outdoor Unit Repair | Affordable Home A/C'
     },
-    description: 'Indoor fan blowing warm air but outdoor compressor not running? Accurate diagnostic of capacitors, contactors, inverter modules, and thermal overloads on Oahu. CT-36775 licensed.',
+    description: 'Indoor fan blowing warm air but outdoor compressor not running? Accurate diagnostic of capacitors, contactors, inverter modules, and thermal overloads on Oahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-compressor-not-turning-on-oahu',
     },
     openGraph: {
         title: 'AC Compressor Not Turning On Oahu | Outdoor Unit Repair | Affordable Home A/C',
-        description: 'Indoor fan blowing warm air but outdoor compressor not running? Accurate diagnostic of capacitors, contactors, inverter modules, and thermal overloads on Oahu. CT-36775 licensed.',
+        description: 'Indoor fan blowing warm air but outdoor compressor not running? Accurate diagnostic of capacitors, contactors, inverter modules, and thermal overloads on Oahu.',
         url: 'https://www.affordablehome-ac.com/ac-compressor-not-turning-on-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Compressor Not Turning On Oahu | Outdoor Unit Repair | Affordable Home A/C',
-        description: 'Indoor fan blowing warm air but outdoor compressor not running? Accurate diagnostic of capacitors, contactors, inverter modules, and thermal overloads on Oahu. CT-36775 licensed.',
+        description: 'Indoor fan blowing warm air but outdoor compressor not running? Accurate diagnostic of capacitors, contactors, inverter modules, and thermal overloads on Oahu.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

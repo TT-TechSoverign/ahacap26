@@ -2,24 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { 
-    Sparkles, 
-    Droplets, 
-    Shield, 
-    Check, 
     ArrowRight, 
     CheckCircle2, 
-    Clock, 
     Phone, 
-    Warehouse, 
-    Wrench, 
     ChevronDown, 
-    DollarSign, 
-    Wind, 
-    FileText, 
-    AlertTriangle,
-    Layers,
     Activity,
     ShieldCheck
 } from 'lucide-react';
@@ -56,8 +43,8 @@ export default function AcCleaningOahuPage() {
             const lastName = nameParts.slice(1).join(' ') || 'Oahu';
 
             const serviceName = cleaningTier === 'premium' 
-                ? 'Premium Mini Split Deep Teardown ($275)' 
-                : 'Basic Mini Split Cleaning ($175)';
+                ? 'Deep Window AC Sanitization & Mold Purge' 
+                : 'Standard Window AC Coil & Filter Cleaning';
 
             const payload = {
                 first_name: firstName,
@@ -69,7 +56,7 @@ export default function AcCleaningOahuPage() {
                 zip: '',
                 service_type: serviceName,
                 urgency: 'standard',
-                notes: `Service: ${serviceName} | Location: ${city} | Service Type: On-Site In-Home Service (Drop Cloth Floor Protection) | Notes: ${notes.trim() || 'None'}`
+                notes: `Service: ${serviceName} | Location: ${city} | Service Type: Window AC Cleaning (Drop Cloth Floor Protection) | Notes: ${notes.trim() || 'None'}`
             };
 
             const res = await fetch('/api/v1/leads/', {
@@ -92,24 +79,24 @@ export default function AcCleaningOahuPage() {
 
     const faqItems = [
         {
-            q: "What is the difference between Basic ($175) and Premium ($275) Mini Split cleaning?",
-            a: "Basic Mini Split Cleaning ($175) provides routine on-site coil sanitization, air filter wash, and condensate drain flush. Premium Deep Teardown ($275) is our comprehensive mold-purge protocol: we fully disassemble the front facia and louvers, extract and deep-clean the cylindrical squirrel-cage blower wheel, pressure-wash the coils, and scrub the condensate pan with clean floor drop-cloth protection."
+            q: "What is included in your Window AC Cleaning & Sanitization service?",
+            a: "Standard Window AC Cleaning provides routine coil sanitization, reusable air filter wash, and drain pan flush. Deep Window AC Sanitization is our comprehensive mold-purge protocol: we deep-clean the blower wheel, evaporator and condenser coils, and scrub the condensate slinger pan with clean floor drop-cloth protection."
         },
         {
-            q: "Do you clean window air conditioners on Oahu?",
-            a: "Window air conditioners are sealed consumer appliances that are typically uneconomical to disassemble and chemically overhaul once internal mold or bearing noise sets in. We recommend regular DIY filter cleaning for younger units, or upgrading to an in-stock LG Dual Inverter from our Waipahu warehouse starting at $560 with a $45 Hawaii Energy cash rebate."
+            q: "When should I replace my window air conditioner instead of cleaning it?",
+            a: "If your window air conditioner is over 5–7 years old with severe coastal salt-air fin rot, loud bearing noise, or high power draw, upgrading to an in-stock LG Dual Inverter from our Waipahu warehouse starting at $560 with a $45 Hawaii Energy cash rebate is often the smartest investment."
         },
         {
-            q: "Will the chemical cleaning make a water mess inside my home?",
-            a: "Zero water mess. Our licensed technicians always lay clean protective floor drop cloths directly beneath your indoor unit during service and use precision containment rinses. All dirty water and mold slurry are safely captured and removed from your home."
+            q: "Will the cleaning make a water mess inside my home?",
+            a: "Zero water mess. Our technicians always lay clean protective floor drop cloths directly beneath your window or wall unit during service. All dirty water and mold residue are safely contained."
         },
         {
             q: "Do I have to pay upfront when booking a cleaning appointment?",
-            a: "No! Affordable Home AC requires zero upfront payment. You book your preferred mini-split in-home service with $0 deposit, and you pay only after the cleaning is finished and tested."
+            a: "No! Affordable Home AC requires zero upfront payment. You book your window AC cleaning appointment with $0 deposit, and our dispatch team confirms your service window first."
         },
         {
-            q: "How often should mini split ACs be cleaned on Oahu?",
-            a: "Because Oahu maintains 70–80% average humidity and constant coastal salt mist, mini split coils and blower wheels develop biological slime and mold within 6 to 12 months of daily use. Annual deep cleaning restores airflow CFM by up to 30% and reduces compressor power draw under HECO rates."
+            q: "How often should window ACs be cleaned on Oahu?",
+            a: "Because Oahu maintains 70–80% average humidity and constant coastal salt mist, window AC coils, blower wheels, and slinger pans accumulate biological slime and salt dust within 6 to 12 months of daily use. Regular cleaning restores airflow CFM by up to 30% and lowers compressor power draw under HECO rates."
         }
     ];
 
@@ -118,7 +105,7 @@ export default function AcCleaningOahuPage() {
         "@graph": [
             {
                 "@type": "HVACBusiness",
-                "name": "Affordable Home AC - Oahu Mini Split Deep Cleaning & Mold Sanitization",
+                "name": "Affordable Home AC - Oahu Window AC Deep Cleaning & Mold Sanitization",
                 "telephone": "+1-808-488-1111",
                 "priceRange": "$$",
                 "address": {
@@ -130,21 +117,21 @@ export default function AcCleaningOahuPage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Licensed Hawaii Contractor CT-36775 specializing in ductless mini-split chemical coil flushes and full teardown mold eradication ($175–$275) with floor drop cloth protection across Honolulu and Oahu."
+                "description": "Local Oahu cooling specialists providing window AC coil flushes, mold sanitization, and clean-vs-replace assessments with floor drop cloth protection across Honolulu and Oahu."
             },
             {
                 "@type": "Service",
-                "name": "Mini Split Deep Cleaning & Teardown Oahu ($175–$275)",
-                "serviceType": "HVAC Sanitization & Coil Pressure Wash",
+                "name": "Window AC Deep Cleaning & Sanitization Oahu",
+                "serviceType": "Window AC Sanitization & Coil Cleaning",
                 "provider": {
                     "@type": "HVACBusiness",
                     "name": "Affordable Home AC"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Clinical coil sanitization, blower wheel extraction, and condensate pan mold purge across Oahu.",
+                "description": "Clinical window AC coil sanitization, blower wheel cleaning, and condensate pan mold purge across Oahu.",
                 "offers": {
                     "@type": "Offer",
-                    "price": "275.00",
+                    "price": "175.00",
                     "priceCurrency": "USD",
                     "availability": "https://schema.org/InStock"
                 }
@@ -153,7 +140,7 @@ export default function AcCleaningOahuPage() {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
                     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
-                    { "@type": "ListItem", "position": 2, "name": "AC Cleaning Oahu", "item": "https://www.affordablehome-ac.com/ac-cleaning-oahu" }
+                    { "@type": "ListItem", "position": 2, "name": "Window AC Cleaning Oahu", "item": "https://www.affordablehome-ac.com/ac-cleaning-oahu" }
                 ]
             },
             {
@@ -182,16 +169,16 @@ export default function AcCleaningOahuPage() {
                 <div className="text-center max-w-4xl mx-auto space-y-4 mb-14">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono uppercase tracking-widest">
                         <ShieldCheck className="size-3.5" />
-                        Clinical Coil Sanitization &bull; CT-36775 Licensed &bull; Drop-Cloth Protected
+                        Clinical Coil Sanitization &bull; Insured Oahu Specialists &bull; Drop-Cloth Protected
                     </div>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-header font-black tracking-tight uppercase leading-[0.95] text-white">
-                        Oahu <span className="text-primary">Mini Split Cleaning</span> &amp; Mold Purge
+                        Oahu <span className="text-primary">Window AC Cleaning</span> &amp; Mold Purge
                     </h1>
                     <p className="text-slate-300 font-header font-bold text-base sm:text-lg uppercase tracking-wide text-cyan-400">
-                        Basic Service ($175) &bull; Premium Full Teardown ($275) &bull; Zero Water Mess
+                        Coil Sanitization &bull; Blower Wheel Scrub &bull; Zero Water Mess
                     </p>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Eradicate black mold, musty odors, and salt-crusted coil blockage. Our clinical cleaning protocols restore ice-cold airflow, purify indoor air, and cut electric bills under Hawaiian Electric rates. Zero upfront booking deposit.
+                        Eradicate black mold, musty odors, and salt-crusted coil blockage in your window or through-the-wall AC. Our clinical cleaning protocols restore ice-cold airflow, purify indoor air, and cut electric bills under Hawaiian Electric rates. Zero upfront booking deposit.
                     </p>
                 </div>
 
@@ -207,7 +194,7 @@ export default function AcCleaningOahuPage() {
                                     : 'text-slate-400 hover:text-white'
                             }`}
                         >
-                            Basic Cleaning ($175 Flat Rate)
+                            Standard Coil &amp; Filter Clean
                         </button>
                         <button
                             type="button"
@@ -218,7 +205,7 @@ export default function AcCleaningOahuPage() {
                                     : 'text-slate-400 hover:text-white'
                             }`}
                         >
-                            Premium Full Teardown ($275 - 100% Mold Purge) ★
+                            Deep Window AC Mold Purge ★
                         </button>
                     </div>
                 </div>
@@ -231,14 +218,13 @@ export default function AcCleaningOahuPage() {
                             <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-white/10 shadow-2xl space-y-6">
                                 <div className="border-b border-white/10 pb-4">
                                     <div className="text-xs font-mono text-cyan-400 uppercase font-bold tracking-widest">
-                                        On-Site In-Home Service &bull; Routine Sanitization
+                                        Routine Window AC Maintenance &bull; Sanitization
                                     </div>
                                     <h2 className="text-2xl font-header font-black uppercase text-white mt-1">
-                                        Basic Mini Split Cleaning &amp; Filter Care
+                                        Standard Window AC Cleaning &amp; Filter Care
                                     </h2>
                                     <div className="flex items-baseline gap-3 mt-2">
-                                        <span className="text-3xl font-black text-emerald-400 font-mono">$175.00</span>
-                                        <span className="text-xs font-mono text-slate-400">Flat Rate per Unit &bull; Zero Upfront Deposit</span>
+                                        <span className="text-xs font-mono text-emerald-400 font-bold">Upfront Itemized Quote &bull; Zero Booking Deposit</span>
                                     </div>
                                 </div>
 
@@ -249,14 +235,14 @@ export default function AcCleaningOahuPage() {
                                             1. Reusable Filter Reverse Rinse &amp; Sanitization
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
-                                            High-velocity reverse rinse removes red dirt, pet dander, and salt dust from the fine mesh intake screens.
+                                            High-velocity reverse rinse removes red dirt, pet dander, and salt dust from the fine mesh intake screen.
                                         </p>
                                     </div>
 
                                     <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
                                         <div className="text-white font-bold uppercase flex items-center gap-2">
                                             <CheckCircle2 className="size-4 text-emerald-400" />
-                                            2. Evaporator Coil Sanitizing Foam Treatment
+                                            2. Evaporator &amp; Condenser Coil Sanitizing Foam
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
                                             Non-acidic expanding foam penetrates aluminum coil fins to dissolve light biological buildup and restore heat transfer.
@@ -266,10 +252,10 @@ export default function AcCleaningOahuPage() {
                                     <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
                                         <div className="text-white font-bold uppercase flex items-center gap-2">
                                             <CheckCircle2 className="size-4 text-emerald-400" />
-                                            3. Condensate Drain Line Vacuum Extraction &amp; Flush
+                                            3. Slinger Pan &amp; Drain Channel Flush
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
-                                            Vacuum clears algae plugs and flushes condensate line to prevent indoor overflow leaks onto drywall.
+                                            Clears algae plugs and flushes condensate drainage paths to prevent indoor water drips onto your window sill.
                                         </p>
                                     </div>
 
@@ -291,11 +277,10 @@ export default function AcCleaningOahuPage() {
                                         Most Popular &bull; 100% Deep Mold Purge
                                     </div>
                                     <h2 className="text-2xl font-header font-black uppercase text-white mt-1">
-                                        Premium Mini Split Deep Cleaning (Full Teardown)
+                                        Deep Window AC Cleaning &amp; Blower Sanitization
                                     </h2>
                                     <div className="flex items-baseline gap-3 mt-2">
-                                        <span className="text-3xl font-black text-emerald-400 font-mono">$275.00</span>
-                                        <span className="text-xs font-mono text-slate-400">Flat Rate per Unit &bull; Zero Upfront Deposit</span>
+                                        <span className="text-xs font-mono text-emerald-400 font-bold">Upfront Itemized Quote &bull; Zero Booking Deposit</span>
                                     </div>
                                 </div>
 
@@ -303,40 +288,40 @@ export default function AcCleaningOahuPage() {
                                     <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
                                         <div className="text-white font-bold uppercase flex items-center gap-2">
                                             <CheckCircle2 className="size-4 text-primary" />
-                                            1. Complete Front Casing &amp; Louver Disassembly
+                                            1. Front Grille, Louver &amp; Air Channel Access
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
-                                            We remove outer plastic housing, motorized directional louvers, and air baffles to expose hidden mold colonies.
+                                            We remove the front intake grille, directional louvers, and filter assembly to expose hidden mold colonies.
                                         </p>
                                     </div>
 
                                     <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
                                         <div className="text-white font-bold uppercase flex items-center gap-2">
                                             <CheckCircle2 className="size-4 text-primary" />
-                                            2. Cylindrical Blower Wheel Extraction &amp; 360° Scrub
+                                            2. Blower Wheel &amp; Air Scoop Deep Scrub
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
-                                            Over 90% of mold grows on the barrel fan wheel. We pull and sanitize the wheel completely, restoring whisper-quiet airflow.
+                                            Over 90% of musty odors come from the internal blower wheel and discharge chute. We sanitize both thoroughly to restore icy airflow.
                                         </p>
                                     </div>
 
                                     <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
                                         <div className="text-white font-bold uppercase flex items-center gap-2">
                                             <CheckCircle2 className="size-4 text-primary" />
-                                            3. Deep Pressurized Coil Wash &amp; Biofilm Neutralization
+                                            3. Deep Evaporator &amp; Condenser Coil Wash
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
-                                            Clinical antimicrobial foaming flush strips stubborn fungal slime from both the front and back coil faces.
+                                            Clinical antimicrobial foaming flush strips stubborn fungal slime and coastal salt crust from aluminum coil fins.
                                         </p>
                                     </div>
 
                                     <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
                                         <div className="text-white font-bold uppercase flex items-center gap-2">
                                             <CheckCircle2 className="size-4 text-primary" />
-                                            4. Condensate Pan Scrub &amp; Slow-Dissolving Anti-Algae Tablet
+                                            4. Condensate Base Pan Scrub &amp; Anti-Algae Treatment
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
-                                            Bottom pan is deep-scrubbed and treated with long-lasting biocidal tablets preventing future algae clogs.
+                                            Bottom pan is deep-scrubbed and treated to prevent future algae clogs and indoor water overflow.
                                         </p>
                                     </div>
 
@@ -346,7 +331,7 @@ export default function AcCleaningOahuPage() {
                                             5. Protective Floor Drop Cloths Laid Under Unit
                                         </div>
                                         <p className="text-slate-400 font-sans text-[11px] leading-relaxed">
-                                            Our technicians lay clean protective drop cloths on the floor beneath your indoor unit. Zero water mess.
+                                            Our technicians lay clean protective drop cloths on the floor beneath your window unit. Zero water mess.
                                         </p>
                                     </div>
                                 </div>
@@ -356,10 +341,10 @@ export default function AcCleaningOahuPage() {
                         {/* Window AC Clean vs Replace Callout */}
                         <div className="p-6 rounded-3xl bg-cyan-950/40 border border-cyan-500/20 text-xs text-slate-300 space-y-3 font-sans">
                             <div className="font-header font-bold uppercase text-cyan-300 flex items-center gap-2 text-sm">
-                                <Activity className="size-4" /> Have a Window AC Unit?
+                                <Activity className="size-4" /> Should You Clean or Replace Your Window AC?
                             </div>
                             <p className="leading-relaxed">
-                                Window air conditioners are factory-sealed appliances that are typically uneconomical to pay hundreds to disassemble and chemically overhaul once internal mold or bearing noise sets in. We recommend regular DIY filter cleaning for young units, or upgrading to an in-stock LG Dual Inverter from our Waipahu warehouse starting at $560 with a pre-approved $45 Hawaii Energy cash rebate and $50 flat island-wide delivery.
+                                If your window air conditioner is 5+ years old with severe coastal salt-air fin rot or loud bearing noise, upgrading to a brand-new LG Dual Inverter from our Waipahu warehouse starting at $560 (with a $45 Hawaii Energy cash rebate and $50 flat Oahu delivery) can save up to 40% on monthly HECO electricity bills.
                             </p>
                             <div>
                                 <Link 
@@ -378,13 +363,13 @@ export default function AcCleaningOahuPage() {
                             <div className="border-b border-white/10 pb-4 mb-4">
                                 <div className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full mb-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                    Transparent Upfront Pricing • By Appointment First
+                                    Upfront Itemized Quotes • By Appointment First
                                 </div>
                                 <h3 className="text-xl font-header font-black uppercase text-white">
-                                    Book Cleaning Service
+                                    Book Window AC Cleaning
                                 </h3>
                                 <p className="text-slate-300 text-xs mt-1 leading-relaxed">
-                                    $175 Basic Mini Split Cleaning &bull; $275 Premium Full Teardown ($0 to book estimates on replacement units). Submit below, call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, or email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>.
+                                    Zero upfront payment to book your appointment. Submit below, call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, or email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>.
                                 </p>
                             </div>
 
@@ -395,7 +380,7 @@ export default function AcCleaningOahuPage() {
                                     </div>
                                     <div className="text-sm text-white font-bold uppercase">Cleaning Request Confirmed!</div>
                                     <p className="text-xs text-slate-300 font-sans">
-                                        Our dispatch team has scheduled your cleaning intake for {city}. We will reach out shortly to confirm appointment details and service timing.
+                                        Our dispatch team has scheduled your window AC cleaning intake for {city}. We will reach out shortly to confirm appointment details and service timing.
                                     </p>
                                     <div className="pt-4">
                                         <a 
@@ -460,10 +445,10 @@ export default function AcCleaningOahuPage() {
                                         <label className="text-[11px] font-mono text-slate-400 uppercase block mb-1">Selected Service</label>
                                         <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs flex justify-between items-center">
                                             <span className="font-bold text-white">
-                                                {cleaningTier === 'premium' ? 'Premium Full Teardown' : 'Basic Mini Split Cleaning'}
+                                                {cleaningTier === 'premium' ? 'Deep Window AC Mold Purge' : 'Standard Window AC Cleaning'}
                                             </span>
                                             <span className="text-emerald-400 font-mono font-bold">
-                                                {cleaningTier === 'premium' ? '$275.00' : '$175.00'}
+                                                $0 Deposit
                                             </span>
                                         </div>
                                     </div>
@@ -474,7 +459,7 @@ export default function AcCleaningOahuPage() {
                                             rows={2}
                                             value={notes}
                                             onChange={e => setNotes(e.target.value)}
-                                            placeholder="Preferred service timing, number of indoor units..."
+                                            placeholder="Preferred service timing, unit brand/BTU, number of window units..."
                                             className="w-full px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                                         />
                                     </div>
@@ -484,11 +469,11 @@ export default function AcCleaningOahuPage() {
                                         disabled={isSubmitting}
                                         className="w-full py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 disabled:opacity-50"
                                     >
-                                        {isSubmitting ? 'Booking Intake...' : `Book ${cleaningTier === 'premium' ? '$275 Premium' : '$175 Basic'} Service ($0 Deposit)`}
+                                        {isSubmitting ? 'Booking Intake...' : 'Book Window AC Cleaning ($0 Deposit)'}
                                     </button>
 
                                     <div className="text-[10px] font-mono text-slate-400 text-center leading-relaxed">
-                                        Licensed Hawaii Contractor CT-36775 &bull; Transparent upfront pricing
+                                        Waipahu Warehouse Direct &bull; Insured Oahu Cooling Specialists
                                     </div>
                                 </form>
                             )}
@@ -500,9 +485,9 @@ export default function AcCleaningOahuPage() {
                 <div className="max-w-3xl mx-auto space-y-4 mb-16">
                     <div className="text-center mb-8">
                         <h3 className="text-2xl font-header font-black uppercase text-white">
-                            AC Cleaning Frequently Asked Questions
+                            Window AC Cleaning Frequently Asked Questions
                         </h3>
-                        <p className="text-slate-400 text-xs mt-1">Everything about our chemical teardown and flush services</p>
+                        <p className="text-slate-400 text-xs mt-1">Everything about our window AC coil sanitization and deep clean services</p>
                     </div>
                     {faqItems.map((faq, index) => (
                         <div 

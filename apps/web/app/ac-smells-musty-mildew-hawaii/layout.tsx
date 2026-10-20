@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Smells Musty & Mildew in Hawaii | Dirty Sock Syndrome Solved | Affordable Home A/C'
     },
-    description: 'Why does your Hawaii AC smell musty like dirty socks or mildew? Discover causes of bacteria and mold buildup in coils and drain pans, and get clinical chemical sanitization. CT-36775 licensed.',
+    description: 'Why does your Hawaii AC smell musty like dirty socks or mildew? Discover causes of bacteria and mold buildup in coils and drain pans, and get clinical chemical sanitization.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-smells-musty-mildew-hawaii',
     },
     openGraph: {
         title: 'AC Smells Musty & Mildew in Hawaii | Dirty Sock Syndrome Solved | Affordable Home A/C',
-        description: 'Why does your Hawaii AC smell musty like dirty socks or mildew? Discover causes of bacteria and mold buildup in coils and drain pans, and get clinical chemical sanitization. CT-36775 licensed.',
+        description: 'Why does your Hawaii AC smell musty like dirty socks or mildew? Discover causes of bacteria and mold buildup in coils and drain pans, and get clinical chemical sanitization.',
         url: 'https://www.affordablehome-ac.com/ac-smells-musty-mildew-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Smells Musty & Mildew in Hawaii | Dirty Sock Syndrome Solved | Affordable Home A/C',
-        description: 'Why does your Hawaii AC smell musty like dirty socks or mildew? Discover causes of bacteria and mold buildup in coils and drain pans, and get clinical chemical sanitization. CT-36775 licensed.',
+        description: 'Why does your Hawaii AC smell musty like dirty socks or mildew? Discover causes of bacteria and mold buildup in coils and drain pans, and get clinical chemical sanitization.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

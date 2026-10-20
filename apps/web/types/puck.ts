@@ -71,8 +71,8 @@ export const PartnershipsSchema = z.object({
     titleHighlight: z.string(),
     narrativeParam: z.string().describe("Rich text narrative"),
     brandsWindow: z.array(BrandSchema),
-    brandsMiniSplit: z.array(BrandSchema),
-    brandsCentral: z.array(BrandSchema),
+    brandsThruWall: z.array(BrandSchema).optional(),
+    brandsCare: z.array(BrandSchema).optional(),
     styles: StyleSchema.optional()
 });
 

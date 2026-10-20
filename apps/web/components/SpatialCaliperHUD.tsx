@@ -363,7 +363,7 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
             <div className="mt-2.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] text-slate-400 font-mono text-center sm:text-left">
                 <span className="flex items-center gap-1.5">
                     <Shield className="size-3 text-emerald-400 shrink-0" />
-                    <span>Oahu Single-Wall &amp; Jalousie Calibrated • CT-36775 Grounded</span>
+                    <span>Oahu Single-Wall &amp; Jalousie Calibrated • Waipahu Warehouse Verified</span>
                 </span>
                 <Link
                     href="/shop/window-ac-plug-guide"

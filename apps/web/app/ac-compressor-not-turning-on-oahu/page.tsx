@@ -51,7 +51,7 @@ const COMPRESSOR_FAILURES = [
     },
     {
         title: "DC Inverter IPM Board Fault",
-        desc: "On mini splits, the outdoor inverter circuit board converts AC to DC power. Voltage spikes or marine salt corrosion can short the power transistors."
+        desc: "On inverter window ACs, the main inverter circuit board converts AC to DC power. Voltage spikes or marine salt corrosion can short the power transistors."
     },
     {
         title: "Thermal Overload Tripped",
@@ -82,7 +82,7 @@ export default function CompressorNotTurningOnPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        If your indoor vents are blowing warm, room-temperature air while the outdoor condensing unit sits silent or hums loudly, your compressor has failed to start. Our licensed technicians diagnose electrical capacitors, contactors, and inverter boards for a transparent <span className="text-white font-bold">$175 flat rate</span>.
+                        If your indoor vents are blowing warm, room-temperature air while the compressor sits silent or hums loudly, your compressor has failed to start. Our technicians diagnose electrical capacitors, relays, and inverter boards for a transparent <span className="text-white font-bold">$175 flat rate</span>.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -138,10 +138,10 @@ export default function CompressorNotTurningOnPage() {
                                 Honest Testing Before Condemning Equipment
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Many homeowners are told they need a brand-new $6,000 system when only a simple $35 capacitor or burnt contactor wire has failed. We test every electrical component with precision digital multi-meters before recommending replacement.
+                                Many homeowners are told they need an expensive replacement when only a simple $35 capacitor or burnt terminal wire has failed. We test every electrical component with precision digital multi-meters before recommending replacement.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                If the compressor motor itself has seized, we provide transparent, honest replacement pricing with zero pressure.
+                                If the compressor motor itself has seized, we provide direct warehouse replacement options with zero pressure.
                             </p>
                         </div>
 
@@ -151,12 +151,12 @@ export default function CompressorNotTurningOnPage() {
                                 <span className="font-header font-bold text-lg text-primary">$175 Flat Rate</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Replacement In-Home Estimate</span>
+                                <span className="text-xs text-slate-300">Replacement Window AC Estimate</span>
                                 <span className="font-header font-bold text-xs text-emerald-400">$0 Free In-Home</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-white">CT-36775</span>
+                                <span className="text-xs text-slate-300">Waipahu Warehouse Stock</span>
+                                <span className="font-header font-bold text-xs text-white">LG &amp; GE ($395–$1,200)</span>
                             </div>
                         </div>
                     </div>

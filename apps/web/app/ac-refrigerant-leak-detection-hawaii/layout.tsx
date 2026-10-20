@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Refrigerant Leak Detection Hawaii | Electronic Sniffers & Flare Repair | Affordable Home A/C'
+        absolute: 'Window AC Refrigerant Leak Assessment Hawaii | Sealed System Evaluation | Affordable Home A/C'
     },
-    description: 'Pinpoint refrigerant freon leaks in mini split copper flares and coils with electronic halogen sniffers and nitrogen decay testing in Oahu. EPA certified. CT-36775 licensed.',
+    description: 'Pinpoint sealed refrigerant system loss in window AC coils in Oahu. Honest clean-vs-replace assessments and Waipahu warehouse direct LG & GE replacements.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-refrigerant-leak-detection-hawaii',
     },
     openGraph: {
-        title: 'AC Refrigerant Leak Detection Hawaii | Electronic Sniffers & Flare Repair | Affordable Home A/C',
-        description: 'Pinpoint refrigerant freon leaks in mini split copper flares and coils with electronic halogen sniffers and nitrogen decay testing in Oahu. EPA certified. CT-36775 licensed.',
+        title: 'Window AC Refrigerant Leak Assessment Hawaii | Sealed System Evaluation | Affordable Home A/C',
+        description: 'Pinpoint sealed refrigerant system loss in window AC coils in Oahu. Honest clean-vs-replace assessments and Waipahu warehouse direct LG & GE replacements.',
         url: 'https://www.affordablehome-ac.com/ac-refrigerant-leak-detection-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Refrigerant Leak Detection Hawaii | Electronic Sniffers & Flare Repair | Affordable Home A/C',
-        description: 'Pinpoint refrigerant freon leaks in mini split copper flares and coils with electronic halogen sniffers and nitrogen decay testing in Oahu. EPA certified. CT-36775 licensed.',
+        title: 'Window AC Refrigerant Leak Assessment Hawaii | Sealed System Evaluation | Affordable Home A/C',
+        description: 'Pinpoint sealed refrigerant system loss in window AC coils in Oahu. Honest clean-vs-replace assessments and Waipahu warehouse direct LG & GE replacements.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -37,26 +37,26 @@ const refrigerantLeakFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How can I tell if my air conditioner has a refrigerant leak?",
+            "name": "How can I tell if my window air conditioner has a refrigerant leak?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The most common symptoms are ice forming on the indoor evaporator coils or thin copper service valves, the system running for hours without lowering the room temperature, a faint hissing sound near flare fittings, or dark oily residue coating the copper connections."
+                "text": "The most common symptoms are partial ice forming on one corner of the front evaporator coil while the rest stays warm, the compressor running continuously without lowering the room temperature, or dark oily residue on the lower copper return bends."
             }
         },
         {
             "@type": "Question",
-            "name": "Why shouldn't I just ask a technician to 'top off' or add more freon?",
+            "name": "Why shouldn't I pay to recharge a leaking window AC?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Air conditioning systems are hermetically sealed closed loops. Refrigerant is never consumed or 'used up.' If your system is low, a physical hole or loose flare exists. Simply adding refrigerant without repairing the leak violates EPA regulations and will leak out again within weeks."
+                "text": "Window air conditioners are factory brazed hermetically sealed loops without service ports. When coastal salt air corrodes thin copper return bends, brazing and recharging costs more than a brand-new factory-warranted LG Dual Inverter or GE window AC from our Waipahu warehouse."
             }
         },
         {
             "@type": "Question",
-            "name": "How does Affordable Home A/C locate microscopic refrigerant leaks?",
+            "name": "How does Affordable Home A/C verify whether my unit is clogged or leaking refrigerant?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We utilize heated diode electronic halogen sniffers capable of detecting leaks as small as 0.1 oz/year, bubble test micro-leak fluids on brass flare connections, and perform high-pressure nitrogen decay tests to verify hermetic integrity."
+                "text": "We inspect coil airflow, test compressor amp draw, measure temperature differential across the evaporator, and check for salt-pitted copper return bends so you know immediately whether your unit just needs a deep cleaning or a direct replacement."
             }
         }
     ]

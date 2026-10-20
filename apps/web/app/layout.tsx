@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com'),
     title: {
         template: '%s | Affordable Home A/C',
-        default: 'Window AC & Ductless Mini Splits Oahu | In-Stock $395+ • $0 Estimate | Affordable Home A/C',
+        default: 'LG & GE Window ACs & Window AC Cleaning Oahu | In-Stock $395+ | Affordable Home A/C',
     },
-    description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery) & Ductless Mini Split Installation ($0 Free In-Home Estimate). Licensed CT-36775 • (808) 488-1111.',
+    description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery), Jalousie Window AC Installation & Deep Window AC Cleaning • (808) 488-1111.',
     openGraph: {
         type: 'website',
         locale: 'en_US',
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC & Ductless Mini Splits Oahu | In-Stock $395+ • $0 Estimate | Affordable Home A/C',
-        description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery) & Ductless Mini Split Installation ($0 Free In-Home Estimate). Licensed CT-36775 • (808) 488-1111.',
+        title: 'LG & GE Window ACs & Window AC Cleaning Oahu | In-Stock $395+ | Affordable Home A/C',
+        description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery), Jalousie Window AC Installation & Deep Window AC Cleaning • (808) 488-1111.',
         images: ['/assets/logo-new.png'],
     }
 };
@@ -151,17 +151,6 @@ export default function RootLayout({
                                     "closes": "14:00"
                                 }
                             ],
-                            "hasCredential": [
-                                {
-                                    "@type": "EducationalOccupationalCredential",
-                                    "credentialCategory": "State Contractor License",
-                                    "name": "Hawaii Specialty Contractor CT-36775",
-                                    "recognizedBy": {
-                                        "@type": "Organization",
-                                        "name": "State of Hawaii Professional and Vocational Licensing"
-                                    }
-                                }
-                            ],
                             "aggregateRating": {
                                 "@type": "AggregateRating",
                                 "ratingValue": "4.9",
@@ -172,14 +161,12 @@ export default function RootLayout({
                             "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover, Apple Pay, Google Pay",
                             "currenciesAccepted": "USD",
                             "priceRange": "$$",
-                            "license": "CT-36775",
                             "knowsAbout": [
                                 "Window Air Conditioners",
                                 "LG Dual Inverter AC",
                                 "GE 26-Inch Built-In Thru-The-Wall AC",
-                                "Ductless Mini Split Installation",
                                 "Window AC & Jalousie Louver Installation",
-                                "Mini Split AC Deep Cleaning",
+                                "Window AC Deep Cleaning",
                                 "AC Maintenance",
                                 "AC Repair",
                                 "Hawaii Energy Cash Rebates",
@@ -187,13 +174,12 @@ export default function RootLayout({
                             ],
                             "hasOfferCatalog": {
                                 "@type": "OfferCatalog",
-                                "name": "Oahu Air Conditioning Sales, Installation & Service",
+                                "name": "Oahu Window Air Conditioning Sales, Installation & Cleaning",
                                 "itemListElement": [
                                     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "In-Stock LG Dual Inverter & GE Window AC Sales ($395–$1,200)" } },
-                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC & Jalousie Louver Installation ($0 Free Estimate)" } },
-                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ductless Mini Split AC Installation ($0 Free In-Home Estimate)" } },
-                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mini Split AC Deep Cleaning & Mold Sanitization ($175 Basic / $275 Full Teardown)" } },
-                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AC Repair & Troubleshooting ($175 Flat-Rate Diagnostic)" } }
+                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC & Jalousie Louver Installation ($0 Free Assessment)" } },
+                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC Deep Cleaning & Mold Sanitization" } },
+                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC Repair & Troubleshooting ($175 Flat-Rate Diagnostic)" } }
                                 ]
                             },
                             "contactPoint": [

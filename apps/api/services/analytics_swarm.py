@@ -199,10 +199,10 @@ class AnalyticsSwarmEngine:
                 "total_impressions": 0,
                 "total_clicks": 0
             },
-            "mini_split_estimates": {
-                "name": "Mini Split In-Home Estimates & Sizing",
-                "target_route": "/mini-split-estimate",
-                "keywords": ["split", "mini split", "ductless", "estimate", "quote", "cost"],
+            "window_ac_sizing": {
+                "name": "Window AC Room Sizing & BTU Calculator",
+                "target_route": "/sizing",
+                "keywords": ["size", "sizing", "btu", "calculator", "estimate", "quote", "cost"],
                 "queries": [],
                 "total_impressions": 0,
                 "total_clicks": 0
@@ -298,13 +298,13 @@ class AnalyticsSwarmEngine:
             {
                 "id": "CRO-REC-04",
                 "priority": "HIGH",
-                "cluster": "Mini Split Grounding & Capacity",
-                "title": "Free 60A/100A Panel Assessment on Mini Split Estimator",
-                "target_path": "/mini-split-estimate",
-                "target_funnel": "In-Home CT-36775 Estimates (Zero False Rebates)",
-                "rationale": "Eliminates customer friction regarding electric service panel capacity in classic Oahu homes (Kaimuki, Kailua, Kalihi). Grounded contractor pricing builds immediate trust.",
+                "cluster": "Window AC Sizing & Capacity",
+                "title": "Island Microclimate BTU Sizing Calculator",
+                "target_path": "/sizing",
+                "target_funnel": "In-Stock LG & GE Window AC Recommendations",
+                "rationale": "Eliminates customer friction regarding room BTU sizing and 115V vs 230V outlet matching in classic Oahu single-wall homes.",
                 "status": "DEPLOYED",
-                "estimated_impact": "+22% In-Home Booking Rate"
+                "estimated_impact": "+22% Sizing-to-Cart Rate"
             },
             {
                 "id": "CRO-REC-05",
@@ -324,7 +324,7 @@ class AnalyticsSwarmEngine:
                 "title": "Large Room 18k & 23.5k Window AC Landing Page",
                 "target_path": "/shop/large-room-window-ac-oahu",
                 "target_funnel": "Stripe Direct Sales (LW1822IVSM & LW2422IVSM)",
-                "rationale": "Positions 18k and 23.5k units as saving $4,500+ vs multi-zone mini split for open layouts. Resolves 208/230V outlet questions.",
+                "rationale": "Positions 18k and 23.5k units as high-capacity living room solutions for open Oahu layouts. Resolves 208/230V outlet questions.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+40% High-Capacity Sales"
             },
@@ -342,13 +342,13 @@ class AnalyticsSwarmEngine:
             {
                 "id": "CRO-REC-08",
                 "priority": "HIGH",
-                "cluster": "Window AC vs Mini Split Decision",
+                "cluster": "Inverter vs Standard Window AC Decision",
                 "title": "Oahu Climate & HECO Financial Comparison Tool",
-                "target_path": "/window-ac-vs-mini-split-oahu",
-                "target_funnel": "Dual Conversion (Window AC Sale OR Mini Split Lead)",
-                "rationale": "Addresses 1,500+ monthly searches comparing systems under 44.2¢/kWh HECO rate; bridges to both Stripe and estimate booking.",
+                "target_path": "/shop/lg-dual-inverter-guide",
+                "target_funnel": "LG Dual Inverter & GE Built-In Direct Sales",
+                "rationale": "Addresses monthly searches comparing window AC efficiency under 44.2¢/kWh HECO rate; bridges directly to Stripe checkout.",
                 "status": "DEPLOYED",
-                "estimated_impact": "+32% Lead & Sale Capture"
+                "estimated_impact": "+32% Sale Capture"
             },
             {
                 "id": "CRO-REC-09",
@@ -365,7 +365,7 @@ class AnalyticsSwarmEngine:
                 "id": "CRO-REC-10",
                 "priority": "CRITICAL",
                 "cluster": "Oahu AC Repair & Diagnostic Triage (GSC Rank 5.5, 2.3k Impr)",
-                "title": "Oahu AC Repair Diagnostic & Triage Funnel",
+                "title": "Oahu Window AC Repair Diagnostic & Triage Funnel",
                 "target_path": "/ac-repair-oahu",
                 "target_funnel": "Repair Lead & In-Stock Replacement Bridge",
                 "rationale": "Captures top GSC search query 'ac repair near me' (Rank 5.5) with interactive triage wizard, flat-rate fee transparency, and immediate replacement gateway.",
@@ -375,11 +375,11 @@ class AnalyticsSwarmEngine:
             {
                 "id": "CRO-REC-11",
                 "priority": "HIGH",
-                "cluster": "AC Mold Cleaning & Coil Sanitization (2.4k Impr)",
-                "title": "Clinical AC Cleaning & Coil Sanitization Oahu",
+                "cluster": "Window AC Mold Cleaning & Coil Sanitization (2.4k Impr)",
+                "title": "Clinical Window AC Cleaning & Coil Sanitization Oahu",
                 "target_path": "/ac-cleaning-oahu",
-                "target_funnel": "Mini-Split Deep Cleaning & Window AC Clean-vs-Replace Assessment",
-                "rationale": "Targets salt-air mold/mildew queries with clinical mini-split deep cleaning and window AC clean-vs-replace evaluation.",
+                "target_funnel": "Window AC Cleaning & Clean-vs-Replace Assessment",
+                "rationale": "Targets salt-air mold/mildew queries with clinical window AC cleaning and honest clean-vs-replace evaluation.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+45% Maintenance Booking Lift"
             },
@@ -397,13 +397,13 @@ class AnalyticsSwarmEngine:
             {
                 "id": "CRO-REC-13",
                 "priority": "HIGH",
-                "cluster": "Multi-Zone Ductless Sizing & Custom Estimates (625 Impr)",
-                "title": "Turnkey Ductless Mini-Split Installation Oahu",
-                "target_path": "/ductless-mini-split-installation-oahu",
-                "target_funnel": "1-to-4 Zone Configurations, 60A/100A Panel Audit & $0 Deposit Intake",
-                "rationale": "Clarifies multi-zone configurations, explains installations are subject to on-site estimate ($0 upfront deposit), clarifies 0% rebate truth, and audits older Oahu electrical panel compatibility.",
+                "cluster": "Jalousie & Custom Window AC Mounting (625 Impr)",
+                "title": "Turnkey Jalousie & Standard Window AC Installation Oahu",
+                "target_path": "/jalousie-window-ac-installation-oahu",
+                "target_funnel": "Jalousie Louver Custom Baffles & $0 Deposit Intake",
+                "rationale": "Clarifies jalousie louver mounting, explains installations are subject to on-site estimate ($0 upfront deposit), and highlights floor drop-cloth protection.",
                 "status": "DEPLOYED",
-                "estimated_impact": "+40% Qualified Mini-Split In-Home Quotes"
+                "estimated_impact": "+40% Qualified Installation Quotes"
             }
         ]
 
@@ -424,7 +424,7 @@ class AnalyticsSwarmEngine:
             {"query": "window ac installation oahu", "clicks": 2, "impressions": 34, "ctr": "5.88%", "ctr_num": 5.88, "position": 8.8, "opp_score": 3.27},
             {"query": "window ac unit cleaning service", "clicks": 1, "impressions": 22, "ctr": "4.55%", "ctr_num": 4.55, "position": 15.2, "opp_score": 1.30},
             {"query": "ac repair near me", "clicks": 1, "impressions": 217, "ctr": "0.46%", "ctr_num": 0.46, "position": 5.5, "opp_score": 33.23},
-            {"query": "split ac cleaning service", "clicks": 1, "impressions": 19, "ctr": "5.26%", "ctr_num": 5.26, "position": 20.6, "opp_score": 0.83}
+            {"query": "window ac cleaning oahu", "clicks": 1, "impressions": 19, "ctr": "5.26%", "ctr_num": 5.26, "position": 20.6, "opp_score": 0.83}
         ]
 
     def _fallback_pages(self) -> List[Dict[str, Any]]:
@@ -433,7 +433,7 @@ class AnalyticsSwarmEngine:
             {"url": "https://www.affordablehome-ac.com/shop", "slug": "/shop", "clicks": 58, "impressions": 3142, "ctr": "1.85%", "ctr_num": 1.85, "position": 12.3},
             {"url": "https://www.affordablehome-ac.com/ac-repair-oahu", "slug": "/ac-repair-oahu", "clicks": 1, "impressions": 1769, "ctr": "0.06%", "ctr_num": 0.06, "position": 60.5},
             {"url": "https://www.affordablehome-ac.com/service-areas/honolulu", "slug": "/service-areas/honolulu", "clicks": 5, "impressions": 2939, "ctr": "0.17%", "ctr_num": 0.17, "position": 41.3},
-            {"url": "https://www.affordablehome-ac.com/mini_split_ac", "slug": "/mini_split_ac", "clicks": 1, "impressions": 826, "ctr": "0.12%", "ctr_num": 0.12, "position": 30.2},
+            {"url": "https://www.affordablehome-ac.com/window-ac-installation", "slug": "/window-ac-installation", "clicks": 1, "impressions": 826, "ctr": "0.12%", "ctr_num": 0.12, "position": 30.2},
             {"url": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac", "slug": "/clean-vs-replace-window-ac", "clicks": 1, "impressions": 389, "ctr": "0.26%", "ctr_num": 0.26, "position": 39.9}
         ]
 

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Freezing Up Ice on Coils Hawaii | Emergency Thaw & Repair | Affordable Home A/C'
     },
-    description: 'Is your AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause diagnostics, and $175 repair dispatch by licensed CT-36775 technicians. Call (808) 488-1111.',
+    description: 'Is your window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-freezing-up-ice-on-coils-hawaii',
     },
     openGraph: {
         title: 'AC Freezing Up Ice on Coils Hawaii | Emergency Thaw & Repair | Affordable Home A/C',
-        description: 'Is your AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause diagnostics, and $175 repair dispatch by licensed CT-36775 technicians. Call (808) 488-1111.',
+        description: 'Is your window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/ac-freezing-up-ice-on-coils-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Freezing Up Ice on Coils Hawaii | Emergency Thaw & Repair | Affordable Home A/C',
-        description: 'Is your AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause diagnostics, and $175 repair dispatch by licensed CT-36775 technicians. Call (808) 488-1111.',
+        description: 'Is your window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

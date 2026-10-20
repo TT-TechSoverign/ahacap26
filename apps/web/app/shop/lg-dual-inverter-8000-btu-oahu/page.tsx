@@ -438,7 +438,7 @@ export default function Lg8000BtuOahuPage() {
                                 </span>
                             </div>
                             <p className="text-xs text-slate-300 leading-relaxed">
-                                Professional jalousie window retrofit, laser 3/8&quot; pitch leveling, and weather sealing by licensed CT-36775 technicians. Pay only after installation is complete.
+                                Professional jalousie window retrofit, laser 3/8&quot; pitch leveling, and weather sealing by insured Oahu window AC technicians. Pay only after installation is complete.
                             </p>
                             <Link 
                                 href="/window-ac-installation"

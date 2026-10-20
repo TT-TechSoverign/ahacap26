@@ -714,25 +714,25 @@ export function ACSelectorWizard() {
                                         {loadError}
                                     </div>
                                 ) : matches.length === 0 ? (
-                                    /* Fallback UI: BTU demand is too high for standard window units (> 24,000 BTU) */
-                                    <div className="bg-[#1f1717] border border-red-500/20 rounded-3xl p-8 text-center max-w-2xl mx-auto space-y-6">
-                                        <div className="size-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto text-red-500 border border-red-500/20">
+                                    /* Fallback UI: BTU demand is high (> 24,000 BTU) -> recommend 23,500 BTU LG Dual Inverter or Dual Window AC zone setup */
+                                    <div className="bg-[#1f1717] border border-amber-500/20 rounded-3xl p-8 text-center max-w-2xl mx-auto space-y-6">
+                                        <div className="size-16 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto text-amber-400 border border-amber-500/20">
                                             <AlertTriangle className="size-8" />
                                         </div>
                                         <div className="space-y-2">
-                                            <h4 className="font-header font-black text-xl text-white uppercase tracking-tight">Demand Exceeds Window Unit Limits</h4>
+                                            <h4 className="font-header font-black text-xl text-white uppercase tracking-tight">High-Capacity Multi-Window Cooling Recommended</h4>
                                             <p className="font-sans text-xs text-slate-400 leading-relaxed max-w-md mx-auto">
-                                                A calculated demand of {calculation.recommendedBtu.toLocaleString()} BTU exceeds the cooling limit of standard window A/C units. We highly recommend a high-efficiency Ductless Mini-Split system to cool this space comfortably and efficiently.
+                                                A calculated demand of {calculation.recommendedBtu.toLocaleString()} BTU exceeds a single standard bedroom unit. For large open living spaces on Oahu, we recommend our heavy-duty 23,500 BTU LG Dual Inverter (LW2422IVSM) or pairing two zoned LG Dual Inverter Window ACs for balanced airflow.
                                             </p>
                                         </div>
                                         
                                         <div className="pt-2 flex flex-col sm:flex-row justify-center gap-3">
                                             <Link 
-                                                href={`/contact?service=Mini+Split+Estimate+(New)&notes=${encodeURIComponent(getDispatchNotes())}`}
+                                                href={`/contact?service=Window+AC+Installation&notes=${encodeURIComponent(getDispatchNotes())}`}
                                                 onClick={handleProHelpClick}
-                                                className="px-8 py-3.5 bg-red-500 hover:bg-red-600 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(239,68,68,0.2)] hover:scale-[1.02] flex items-center justify-center gap-2"
+                                                className="px-8 py-3.5 bg-primary hover:bg-cyan-300 text-slate-950 font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.3)] hover:scale-[1.02] flex items-center justify-center gap-2"
                                             >
-                                                Request Free Mini-Split Quote <Wrench className="size-4" />
+                                                Request Free Window AC Sizing Quote <Wrench className="size-4" />
                                             </Link>
                                             <button 
                                                 onClick={() => setStep(1)}
@@ -749,7 +749,7 @@ export function ACSelectorWizard() {
                                             <Shield className="size-5 text-primary shrink-0 mt-0.5" />
                                             <div className="text-left text-xs">
                                                 <span className="font-header font-black text-white uppercase tracking-wider block">Zero Cost Sizing & Installation Estimates • By Appointment First</span>
-                                                <span className="text-slate-300 text-[11px] leading-relaxed">It is $0 to book an in-home estimate for new or replacement mini split and window AC installations. Submit your room details below, email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>, or call our office at <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> to schedule your free estimate appointment window.</span>
+                                                <span className="text-slate-300 text-[11px] leading-relaxed">It is $0 to book an in-home estimate for new or replacement LG &amp; GE window AC installations. Submit your room details below, email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>, or call our office at <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> to schedule your free estimate appointment window.</span>
                                             </div>
                                         </div>
 
@@ -861,7 +861,7 @@ export function ACSelectorWizard() {
                                                         </button>
                                                         <div className="flex gap-2">
                                                             <Link
-                                                                href={`/contact?service=AC+Sizing+Consultation&notes=${encodeURIComponent(getDispatchNotes())}%20Recommended%20Unit:%20${encodeURIComponent(product.name)}`}
+                                                                href={`/contact?service=Window+AC+Installation&notes=${encodeURIComponent(getDispatchNotes())}%20Recommended%20Unit:%20${encodeURIComponent(product.name)}`}
                                                                 onClick={() => {
                                                                     trackFunnelEvent('sizing_appointment_intent', {
                                                                         product_id: product.id,
@@ -904,9 +904,9 @@ export function ACSelectorWizard() {
 
                             {/* Pro help prompt */}
                             <div className="bg-white/[0.01] border border-white/5 rounded-3xl p-6 text-center max-w-xl mx-auto space-y-4">
-                                <h4 className="font-header font-black text-sm uppercase tracking-wider text-white">Prefer a Professional Assessment?</h4>
+                                <h4 className="font-header font-black text-sm uppercase tracking-wider text-white">Prefer a Professional Window Assessment?</h4>
                                 <p className="font-sans text-xs text-slate-400 leading-relaxed">
-                                    Want our certified technicians to inspect your window framing, electrical panels, or recommend a mini-split setup? We can pre-fill our dispatch ticket with your room sizing calculations instantly.
+                                    Want our Oahu window AC specialists to inspect your jalousie louvers, horizontal sliding window framing, or 26&quot; wall sleeve opening? We can pre-fill our dispatch ticket with your room sizing calculations instantly.
                                 </p>
                                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                                     <Link 

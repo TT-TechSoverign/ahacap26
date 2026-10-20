@@ -25,10 +25,10 @@ export default function Footer() {
     };
 
     const defaults = {
-        mini_split_label: "MINI SPLIT AC",
-        window_ac_label: "WINDOW AC",
-        mini_split_estimate_date: `Next Available Estimate: ${getRollingWindow(2, 5)}`,
-        mini_split_install_date: `Next Available Install: ${getRollingWindow(5, 9)}`,
+        cleaning_label: "WINDOW AC CLEANING",
+        window_ac_label: "WINDOW AC SALES & INSTALL",
+        cleaning_estimate_date: `Next Available Cleaning: ${getRollingWindow(2, 5)}`,
+        cleaning_service_date: `Next Available Service: ${getRollingWindow(4, 7)}`,
         window_ac_estimate_date: `Next Available Estimate: ${getRollingWindow(1, 3)}`,
         window_ac_install_date: `Next Available Install: ${getRollingWindow(3, 6)}`,
         general_availability_range: `Scheduling for ${getRollingWindow(1, 7)}, ${new Date().getFullYear()}`,
@@ -37,7 +37,8 @@ export default function Footer() {
     const rawSchedule: Record<string, any> = content?.footer_schedule || {};
     const rawStr = JSON.stringify(rawSchedule);
     const isStaleSchedule =
-        !rawSchedule?.mini_split_estimate_date ||
+        !rawSchedule?.cleaning_estimate_date ||
+        !rawSchedule?.cleaning_label ||
         rawStr.includes('Oct ') ||
         rawStr.includes('Sep ') ||
         rawStr.includes('Feb ') ||
@@ -84,7 +85,7 @@ export default function Footer() {
                         {/* Line 1: Columns */}
                         <div className="grid grid-cols-2 max-w-4xl mx-auto w-full">
                             <h3 className="text-white font-header font-black uppercase tracking-widest text-base md:text-lg text-center">
-                                {schedule?.mini_split_label || defaults.mini_split_label}
+                                {schedule?.cleaning_label || defaults.cleaning_label}
                             </h3>
                             <h3 className="text-white font-header font-black uppercase tracking-widest text-base md:text-lg text-center">
                                 {schedule?.window_ac_label || defaults.window_ac_label}
@@ -95,12 +96,12 @@ export default function Footer() {
                         <div className="grid grid-cols-2 max-w-4xl mx-auto w-full gap-y-2">
                             <div className="flex flex-col gap-1 items-center">
                                 <p className="text-primary font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
-                                    <span className="opacity-80 mr-0 md:mr-2">Next Available Estimate:</span>
-                                    <span>{(schedule?.mini_split_estimate_date || defaults.mini_split_estimate_date).split(':').pop()?.trim()}</span>
+                                    <span className="opacity-80 mr-0 md:mr-2">Next Available Cleaning:</span>
+                                    <span>{(schedule?.cleaning_estimate_date || defaults.cleaning_estimate_date).split(':').pop()?.trim()}</span>
                                 </p>
                                 <p className="text-slate-400 font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
-                                    <span className="opacity-80 mr-0 md:mr-2">Next Available Install:</span>
-                                    <span>{(schedule?.mini_split_install_date || defaults.mini_split_install_date).split(':').pop()?.trim()}</span>
+                                    <span className="opacity-80 mr-0 md:mr-2">Next Available Service:</span>
+                                    <span>{(schedule?.cleaning_service_date || defaults.cleaning_service_date).split(':').pop()?.trim()}</span>
                                 </p>
                             </div>
                             <div className="flex flex-col gap-1 items-center">
@@ -139,7 +140,7 @@ export default function Footer() {
                             />
                         </div>
                         <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-                            Oahu&apos;s quality provider of energy-efficient cooling solutions. Specializing in Window Units and Ductless Mini-Split AC services for island living.
+                            Oahu&apos;s quality provider of energy-efficient cooling solutions. Specializing in LG &amp; GE Window Air Conditioners, Custom Jalousie &amp; Thru-the-Wall Installation, and Window AC Deep Cleaning for island living.
                         </p>
                     </div>
 
@@ -153,9 +154,9 @@ export default function Footer() {
                                 { text: 'Living Room Window ACs (12k–23.5k)', href: '/living-room-window-ac-oahu' },
                                 { text: 'LG Dual Inverter Lineup', href: '/shop/lg-dual-inverter-guide' },
                                 { text: 'Window AC Installation', href: '/window-ac-installation' },
-                                { text: 'Mini Split AC Installation', href: '/mini_split_ac' },
-                                { text: 'Mini Split AC Maintenance', href: '/mini_split_ac_maintenance' },
-                                { text: 'AC Repair Service', href: '/ac-repair-oahu' }
+                                { text: 'Window AC Deep Cleaning', href: '/ac-cleaning-oahu' },
+                                { text: 'Window AC Maintenance', href: '/maintenance' },
+                                { text: 'Window AC Troubleshooting', href: '/ac-repair-oahu' }
                             ].map((item) => (
                                 <li key={item.text}>
                                     <Link href={item.href} prefetch={false} className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center justify-center md:justify-start gap-2 group">
@@ -173,8 +174,8 @@ export default function Footer() {
                         <ul className="space-y-4 w-full">
                             {[
                                 { text: 'Oahu Window AC Warehouse', href: '/shop/oahu-window-ac-warehouse' },
-                                { text: '$45 Window AC Rebate', href: '/hawaii-energy-rebate' },
-                                { text: 'Waipahu Warehouse Pickup', href: '/window-ac-warehouse-pickup-waipahu' },
+                                { text: '$45 Window AC Rebate', href: '/hawaii-energy-ac-rebates-oahu' },
+                                { text: 'Waipahu Warehouse Pickup', href: '/waipahu-ac-warehouse-pickup' },
                                 { text: '115V vs 230V Plug Guide', href: '/shop/window-ac-plug-guide' },
                                 { text: 'Jalousie Window AC Install', href: '/jalousie-window-ac-installation-oahu' },
                                 { text: 'Clean vs Replace Guide', href: '/clean-vs-replace-window-ac' },
@@ -241,16 +242,16 @@ export default function Footer() {
 
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">
-                        © 2026 Affordable Home A/C • LIC# CT-36775 • Island-Scale Cooling Solutions
+                        © 2026 Affordable Home A/C • Waipahu Warehouse Direct • Oahu Window AC &amp; Cleaning Specialists
                     </p>
                     <div className="flex flex-col md:flex-row items-center gap-6">
                         <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
                             <CheckCircle2 className="size-4 text-primary" />
-                            LIC# CT-36775
+                            Waipahu Warehouse Direct
                         </span>
                         <span className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 hover:text-primary transition-colors cursor-default">
                             <Shield className="size-4 text-primary" />
-                            Licensed | Insured | Bonded
+                            Insured Oahu Specialists • Est. 2005
                         </span>
                     </div>
                 </div>

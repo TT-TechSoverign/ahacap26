@@ -1,14 +1,14 @@
 """
 Sovereign Tier Standard Operating Procedures (SOPs) Matrix
 Defines the authoritative operational protocols, execution steps, token efficiency policies,
-and Oahu local grounding for all 21 Specialized Agents and 6 Category Sub-Masters.
+and Oahu local grounding for all 40 Specialized Agents and 10 Category Sub-Masters.
 """
 
 from typing import Dict, Any
 
 AGENT_SOPS: Dict[str, Dict[str, Any]] = {
     # =========================================================================
-    # 6 CATEGORY SUB-MASTERS
+    # 10 CATEGORY SUB-MASTERS
     # =========================================================================
     "submaster_infrastructure": {
         "id": "submaster_infrastructure",
@@ -22,7 +22,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "inputs": ["VPS host resource counters", "Docker socket container states", "PostgreSQL connection pool metrics", "Docker log file sizes"],
         "execution_steps": [
             {"step": 1, "title": "Host Resource Ingest", "description": "Trigger agent_host_sentinel to capture CPU, RAM, and NVMe disk headroom.", "verification": "Disk usage < 80%, RAM headroom > 500MB."},
-            {"step": 2, "title": "Container Topology Audit", "description": "Trigger agent_container_sentinel to verify all 7 core containers (prod-api, prod-dev-os, prod-web, prod-db, prod-redis, ahac-crm-api, ahac-crm-frontend).", "verification": "All containers reported UP and bound to 127.0.0.1."},
+            {"step": 2, "title": "Container Topology Audit", "description": "Trigger agent_container_sentinel to verify all 7 core containers (prod-api, prod-dev-os, prod-web, prod-db, prod-redis, ahac-crm-web, ahac-crm-api).", "verification": "All containers reported UP and bound to 127.0.0.1."},
             {"step": 3, "title": "PostgreSQL Health Probe", "description": "Trigger agent_db_guardian to test connection pool roundtrip and verify schema integrity.", "verification": "Latency < 5ms, 0 connection leaks."},
             {"step": 4, "title": "Storage Hygiene Check", "description": "Trigger agent_storage_sentinel to confirm Docker log caps (10m x 3) and 14-day audit pruning.", "verification": "0.00% storage leak risk confirmed."}
         ],
@@ -37,7 +37,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "Sovereign Master Orchestrator",
         "mandate": "Enforce zero-trust architecture, SHA-256 HMAC authentication, air-tight local perimeter isolation, and pre-push secret scrubbing.",
         "token_efficiency_policy": "Event-driven execution. Telemetry sanitized of all PII before streaming. No autonomous outbound network calls.",
-        "oahu_grounding": "Hawaii CT-36775 compliance protection, customer PII masking, air-tight local workstation isolation (server has 0 inbound reach).",
+        "oahu_grounding": "Hawaii business compliance protection, customer PII masking, air-tight local workstation isolation (server has 0 inbound reach).",
         "inputs": ["Active session tokens", "Git pre-push audit logs", "Audit table record counts", "Nginx reverse proxy logs"],
         "execution_steps": [
             {"step": 1, "title": "HMAC Session Verification", "description": "Verify SHA-256 HMAC signature and role whitelist for Dev OS operator.", "verification": "Token valid, email matches irasmussenjobs@gmail.com."},
@@ -56,7 +56,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "Sovereign Master Orchestrator",
         "mandate": "Supervise conversion funnels, schedule booking completion velocity, zero-barrier intake, and Stripe revenue reconciliation.",
         "token_efficiency_policy": "Aggregates client-side micro-telemetry into compact rolling ring buffer (max 500 entries) with zero recurring cron loops.",
-        "oahu_grounding": "By-Appointment-First conversion architecture; zero upfront credit card barrier for diagnostic visits across Oahu neighborhoods.",
+        "oahu_grounding": "By-Appointment-First conversion architecture; zero upfront credit card barrier for service visits across Oahu neighborhoods.",
         "inputs": ["Funnel telemetry ring buffer", "Stripe order ledger", "PostgreSQL appointment records", "Conversion drop-off events"],
         "execution_steps": [
             {"step": 1, "title": "Funnel Progression Analysis", "description": "Trigger agent_funnel_telemetry to compute step-by-step conversion drop-offs (Landing -> Service Select -> Booking Form -> Confirmed).", "verification": "Drop-off rate within expected parameters."},
@@ -77,9 +77,9 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "oahu_grounding": "22 Oahu municipalities, Leeward/Ewa heat profiles, Windward humidity/mold challenges, HECO 44.2¢/kWh residential tariff.",
         "inputs": ["22 Oahu city landing page routes", "HECO residential rate tariff", "Hawaii Energy rebate schedules", "Competitor pricing benchmarks"],
         "execution_steps": [
-            {"step": 1, "title": "Regional SEO Audit", "description": "Trigger agent_seo_metadata to audit meta tags, schema.org JSON-LD, and canonical routes across 22 Oahu city pages.", "verification": "All 22 city pages validated with CT-36775 license schema."},
+            {"step": 1, "title": "Regional SEO Audit", "description": "Trigger agent_seo_metadata to audit meta tags, schema.org JSON-LD, and canonical routes across 22 Oahu city pages.", "verification": "All 22 city pages validated with LocalBusiness schema."},
             {"step": 2, "title": "Microclimate Grounding", "description": "Trigger agent_oahu_grounding to align cooling recommendations with Leeward, Windward, and Central Oahu solar-gain profiles.", "verification": "Accurate BTU sizing and salt-air corrosion notes."},
-            {"step": 3, "title": "Market Competitive Analysis", "description": "Trigger agent_market_research to benchmark island contractor rates against AHAC flat-rate pricing.", "verification": "AHAC $0 Free In-Home Estimate & Waipahu direct inventory ($395-$1,200) price moat intact."},
+            {"step": 3, "title": "Market Competitive Analysis", "description": "Trigger agent_market_research to benchmark island rates against AHAC warehouse-direct pricing.", "verification": "AHAC $0 Free In-Home Estimate & Waipahu direct inventory ($395-$1,200) price moat intact."},
             {"step": 4, "title": "HECO Rebate Modeling", "description": "Trigger agent_heco_rebate_strategist to compute customer electricity savings ($424/yr) and Hawaii Energy cash rebates ($45 Window AC).", "verification": "Payback period calculated at ~9.4 months."}
         ],
         "outputs": ["SEO coverage matrix", "Oahu microclimate cooling matrix", "Hawaii Energy rebate calculators", "Competitor pricing index"],
@@ -97,8 +97,8 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "inputs": ["PostgreSQL leads table records", "Technician availability calendar", "Equipment service histories", "Customer failure reports"],
         "execution_steps": [
             {"step": 1, "title": "Dispatch Queue Ingest", "description": "Trigger agent_crm_dispatch to inspect new lead records and calculate dispatch workload.", "verification": "All new leads flagged for By-Appointment-First phone contact."},
-            {"step": 2, "title": "Symptom & Intake Triage", "description": "Trigger agent_intake_triage to categorize incoming issues (mold, refrigerant freeze, drain leak) and route between Waipahu warehouse and field van.", "verification": "Window units routed to clean-vs-replace/warehouse; mini-splits to field dispatch."},
-            {"step": 3, "title": "Lifecycle Maintenance Schedule", "description": "Trigger agent_customer_lifecycle to generate 6-month and 12-month proactive coil flush and sanitization reminders.", "verification": "Recall schedule updated based on Oahu coastal proximity."}
+            {"step": 2, "title": "Symptom & Intake Triage", "description": "Trigger agent_intake_triage to categorize incoming issues (mold, coil corrosion, drain leak) and route between Waipahu warehouse and field service.", "verification": "Window units routed to clean-vs-replace/warehouse or cleaning/installation dispatch."},
+            {"step": 3, "title": "Lifecycle Maintenance Schedule", "description": "Trigger agent_customer_lifecycle to generate 6-month and 12-month proactive coil sanitization and filter check reminders.", "verification": "Recall schedule updated based on Oahu coastal proximity."}
         ],
         "outputs": ["Triage queue distribution", "Pending dispatch count", "Customer satisfaction score", "Recall calendar"],
         "contingency_protocol": "High-priority dispatch escalation for senior or vulnerable households experiencing total cooling failure during Kona trade-wind lulls."
@@ -111,11 +111,11 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "Sovereign Master Orchestrator",
         "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification, drop-cloth workmanship standards, and non-regression guardrails.",
         "token_efficiency_policy": "Multi-stage pipeline running strictly during deployment sequences; zero background daemon overhead.",
-        "oahu_grounding": "Hawaii CT-36775 licensed workmanship protection, zero-downtime for live Oahu customers (www.affordablehome-ac.com).",
+        "oahu_grounding": "Insured Oahu cooling specialist workmanship protection, zero-downtime for live Oahu customers (www.affordablehome-ac.com).",
         "inputs": ["Next.js build manifests", "TypeScript compiler outputs", "Git branch state", "Docker compose configurations"],
         "execution_steps": [
             {"step": 1, "title": "Pre-Deploy Guardrails", "description": "Trigger agent_deployment_guardian to verify clean git working tree and Nginx reload syntax check.", "verification": "Branch is main, nginx -t returns syntax ok."},
-            {"step": 2, "title": "Build Compilation Verification", "description": "Trigger agent_build_qa to confirm TypeScript zero-error compile and 110 canonical static/dynamic Next.js routes.", "verification": "Build exits code 0 with zero broken internal links."},
+            {"step": 2, "title": "Build Compilation Verification", "description": "Trigger agent_build_qa to confirm TypeScript zero-error compile and 101 canonical static/dynamic Next.js routes.", "verification": "Build exits code 0 with zero broken internal links."},
             {"step": 3, "title": "Non-Regression Audit", "description": "Trigger agent_regression_sentinel to verify By-Appointment-First gate, zero-upfront card checkout, and drop-cloth legal clauses.", "verification": "100% compliant with zero customer deception."}
         ],
         "outputs": ["3-Stage verification certificate", "Compilation status", "Zero-dead-link audit report"],
@@ -123,7 +123,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
     },
 
     # =========================================================================
-    # 21 SPECIALIZED PRODUCTION AGENTS
+    # 40 SPECIALIZED PRODUCTION AGENTS
     # =========================================================================
 
     # --- Infrastructure & Storage (4 Agents) ---
@@ -156,7 +156,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "oahu_grounding": "Isolates container network to 127.0.0.1, preventing any unauthorized internet exposure on Oahu servers.",
         "inputs": ["Docker engine container states", "Loopback port bindings (3005, 8001, 5433, 6380, 3001, 8080)"],
         "execution_steps": [
-            {"step": 1, "title": "Container State Ingest", "description": "Check operational status of prod-api, prod-dev-os, prod-web, prod-db, prod-redis, ahac-crm-api, ahac-crm-frontend.", "verification": "All 7 containers in UP status."},
+            {"step": 1, "title": "Container State Ingest", "description": "Check operational status of prod-api, prod-dev-os, prod-web, prod-db, prod-redis, ahac-crm-web, ahac-crm-api.", "verification": "All 7 containers in UP status."},
             {"step": 2, "title": "Port Binding Verification", "description": "Verify every exposed container port is strictly bound to 127.0.0.1.", "verification": "Zero external 0.0.0.0 bindings."},
             {"step": 3, "title": "Restart Count Audit", "description": "Verify container restart counts are 0, confirming runtime stability.", "verification": "Restart count == 0."}
         ],
@@ -243,9 +243,9 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Regulatory & Audit Compliance Auditor",
         "domain": "Security",
         "supervisor": "submaster_security_compliance",
-        "mandate": "Verify audit trail immutability, customer PII masking, and professional contractor licensing compliance.",
+        "mandate": "Verify audit trail immutability, customer PII masking, and Hawaii business compliance.",
         "token_efficiency_policy": "Runs single SQL aggregation query on dev_os_audit_log; completes in < 3ms.",
-        "oahu_grounding": "Hawaii professional contractor standards (CT-36775) and state data privacy regulations.",
+        "oahu_grounding": "Hawaii business standards (Insured Oahu Cooling Specialists • Est. 2005) and state data privacy regulations.",
         "inputs": ["dev_os_audit_log table", "Customer PII fields in database"],
         "execution_steps": [
             {"step": 1, "title": "Audit Log Integrity Check", "description": "Count audit log entries and verify sequential timestamp monotonicity.", "verification": "Audit records intact and sequential."},
@@ -283,7 +283,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "submaster_commerce_telemetry",
         "mandate": "Track real-time visitor progression through the 4 core funnel steps with zero recurring polling overhead.",
         "token_efficiency_policy": "Reads in-memory ring buffer (capped at 500 events); outputs compact aggregated conversion ratios.",
-        "oahu_grounding": "Oahu homeowner service booking funnels (A/C Diagnostic, Mini-Split Deep Cleaning, Window AC Clean-vs-Replace, Sizing Wizard).",
+        "oahu_grounding": "Oahu homeowner service booking funnels (Window AC Installation, Window AC Cleaning, Clean-vs-Replace Assessment, Warehouse Pickup).",
         "inputs": ["TELEMETRY_BUFFER events", "Funnel step transition timestamps"],
         "execution_steps": [
             {"step": 1, "title": "Event Ingestion & Deduplication", "description": "Process client telemetry events from in-memory ring buffer.", "verification": "Buffer length within max capacity (500)."},
@@ -319,7 +319,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "submaster_commerce_telemetry",
         "mandate": "Reconcile Stripe payment charges, webhook events, and PostgreSQL database order records with zero discrepancy.",
         "token_efficiency_policy": "Executes reconciliation query only on-demand or during deployment verification; zero background polling.",
-        "oahu_grounding": "Financial reconciliation for Oahu parts purchases, filter kits, and warehouse pick-up orders.",
+        "oahu_grounding": "Financial reconciliation for Oahu window AC purchases and Waipahu warehouse pick-up orders.",
         "inputs": ["Stripe API charges ledger", "PostgreSQL orders table", "Webhook delivery logs"],
         "execution_steps": [
             {"step": 1, "title": "Unrecorded Charge Scan", "description": "Query Stripe API for recent successful charges and compare with database orders.", "verification": "Zero unrecorded payments found."},
@@ -343,10 +343,10 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "inputs": ["sitemap.ts route manifest", "City landing page metadata definitions", "Schema.org local business markup"],
         "execution_steps": [
             {"step": 1, "title": "City Route Coverage Audit", "description": "Verify all 22 Oahu city landing pages exist in sitemap.xml.", "verification": "22/22 city routes active."},
-            {"step": 2, "title": "Schema.org JSON-LD Verification", "description": "Verify LocalBusiness schema contains contractor license CT-36775 and telephone (808) 488-1111.", "verification": "Schema valid with license number."},
+            {"step": 2, "title": "Schema.org JSON-LD Verification", "description": "Verify LocalBusiness schema contains Waipahu warehouse address and telephone (808) 488-1111.", "verification": "Schema valid with warehouse details."},
             {"step": 3, "title": "Robots & Anti-Crawling Audit", "description": "Verify robots.ts disallows /dev-os, /admin, and internal APIs while allowing public city pages.", "verification": "Dev OS strictly protected; public pages indexed."}
         ],
-        "outputs": ["SEO status (ACTIVE_OPTIMIZING)", "Indexed city routes count (22)", "License schema verification"],
+        "outputs": ["SEO status (ACTIVE_OPTIMIZING)", "Indexed city routes count (22)", "LocalBusiness schema verification"],
         "contingency_protocol": "Regenerate sitemap and update canonical headers if route indexing discrepancies are detected."
     },
     "agent_oahu_grounding": {
@@ -373,14 +373,14 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Oahu HVAC Market & Competitor Intelligence Agent",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Monitor competitor pricing, contractor backlogs, and island supply chain availability to maintain AHAC's competitive edge.",
+        "mandate": "Monitor competitor pricing, service backlogs, and island supply chain availability to maintain AHAC's competitive edge.",
         "token_efficiency_policy": "Curated benchmark data structure; 0Hz background query overhead.",
-        "oahu_grounding": "Oahu contractor market ($250-$350/hr truck rolls) and big-box store delivery delays (2-3 weeks).",
-        "inputs": ["Island HVAC contractor rate surveys", "Big-box retailer stock availability", "AHAC warehouse inventory"],
+        "oahu_grounding": "Oahu service market ($250-$350/hr truck rolls) and big-box store delivery delays (2-3 weeks).",
+        "inputs": ["Island AC service rate surveys", "Big-box retailer stock availability", "AHAC warehouse inventory"],
         "execution_steps": [
-            {"step": 1, "title": "Contractor Rate Benchmarking", "description": "Compare AHAC direct pricing against standard island contractor hourly fees.", "verification": "AHAC maintains 40-50% value advantage."},
+            {"step": 1, "title": "Rate Benchmarking", "description": "Compare AHAC direct pricing against standard island service fees.", "verification": "AHAC maintains 40-50% value advantage."},
             {"step": 2, "title": "Inventory Availability Audit", "description": "Verify Waipahu warehouse has in-stock units ready for immediate island delivery.", "verification": "Zero multi-week shipping delays."},
-            {"step": 3, "title": "Value Proposition Synthesis", "description": "Update marketing anchors highlighting local warehouse stock and licensed workmanship.", "verification": "Marketing copy aligned with competitive moats."}
+            {"step": 3, "title": "Value Proposition Synthesis", "description": "Update marketing anchors highlighting local warehouse stock and insured workmanship.", "verification": "Marketing copy aligned with competitive moats."}
         ],
         "outputs": ["Market status (MONITORED)", "Competitor price benchmark", "Value proposition moats"],
         "contingency_protocol": "Adjust landing page headline emphasis if competitor promotions or inventory supply shifts."
@@ -391,16 +391,16 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Hawaii Energy Rebate & HECO Economics Strategist",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Model Hawaiian Electric (HECO 44.2¢/kWh) utility economics and verify AHAC's official $45 Hawaii Energy Rebate Form for Window ACs (Zero mini split rebate participation).",
+        "mandate": "Model Hawaiian Electric (HECO 44.2¢/kWh) utility economics and verify AHAC's official $45 Hawaii Energy Rebate Form for Window ACs.",
         "token_efficiency_policy": "Deterministic mathematical formulas; executed synchronously in < 1ms with zero token waste.",
         "oahu_grounding": "Hawaiian Electric (HECO) residential baseline tariff (44.2¢/kWh) — highest electricity rates in the nation.",
-        "inputs": ["HECO residential electric tariff", "Hawaii Energy Window AC rebate application PDF", "SEER2 efficiency curves"],
+        "inputs": ["HECO residential electric tariff", "Hawaii Energy Window AC rebate application PDF", "CEER efficiency curves"],
         "execution_steps": [
-            {"step": 1, "title": "Power Consumption Modeling", "description": "Calculate annual kilowatt-hour load for baseline 10 SEER vs 18+ SEER2 inverter units on Oahu.", "verification": "Annual consumption modeled at ~3,200 kWh/yr."},
-            {"step": 2, "title": "Rebate Policy Enforcement", "description": "Verify zero rebate claims on Mini Split division (straight CT-36775 contractor pricing) and verify official AHAC $45 rebate form availability for Window ACs.", "verification": "Mini split zero-rebate enforced; Window AC $45 form verified."},
+            {"step": 1, "title": "Power Consumption Modeling", "description": "Calculate annual kilowatt-hour load for baseline fixed-speed vs LG Dual Inverter window units on Oahu.", "verification": "Annual consumption modeled at ~3,200 kWh/yr."},
+            {"step": 2, "title": "Rebate Form Verification", "description": "Verify official AHAC $45 rebate form availability for qualifying ENERGY STAR Window ACs.", "verification": "Window AC $45 form verified."},
             {"step": 3, "title": "Payback Period Computation", "description": "Compute annual electricity savings ($424.32/yr) and payback period (~9.4 months) under HECO 44.2¢/kWh rate.", "verification": "Payback period calculated and verified."}
         ],
-        "outputs": ["Rebate status (REBATE_GROUNDED)", "Electricity savings estimate ($424/yr)", "Window AC $45 AHAC Form (ACTIVE)", "Mini Split Rebate Policy (HONEST_ZERO_REBATE)"],
+        "outputs": ["Rebate status (REBATE_GROUNDED)", "Electricity savings estimate ($424/yr)", "Window AC $45 AHAC Form (ACTIVE)"],
         "contingency_protocol": "Recalculate savings model when HECO announces fuel surcharge adjustments or tariff changes."
     },
     "agent_gsc_ga4_analytics": {
@@ -429,11 +429,11 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "submaster_growth_grounding",
         "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas and dynamic metadata to boost organic search CTR.",
         "token_efficiency_policy": "Deterministic schema generation using static templates; executes in < 2ms with zero runtime LLM overhead.",
-        "oahu_grounding": "Embeds Hawaii CT-36775 license, Waipahu warehouse geographic coordinates, and GET tax compliance across all schemas.",
-        "inputs": ["Route metadata registry", "Product catalog pricing/stock", "Customer FAQ dataset", "CT-36775 licensing data"],
+        "oahu_grounding": "Embeds Waipahu warehouse geographic coordinates, insured Oahu specialist details, and GET tax compliance across all schemas.",
+        "inputs": ["Route metadata registry", "Product catalog pricing/stock", "Customer FAQ dataset", "Waipahu warehouse details"],
         "execution_steps": [
             {"step": 1, "title": "Schema Integrity Audit", "description": "Validate existing JSON-LD schemas (Product, LocalBusiness, FAQPage, HowTo) for zero schema.org errors.", "verification": "100% valid schema markup across all routes."},
-            {"step": 2, "title": "SERP Rich Snippet Injection", "description": "Ensure dynamic prices ($395-$1,200), stock availability, and CT-36775 license appear in structured output.", "verification": "Rich snippet attributes verified."},
+            {"step": 2, "title": "SERP Rich Snippet Injection", "description": "Ensure dynamic prices ($395-$1,200), stock availability, and Waipahu warehouse details appear in structured output.", "verification": "Rich snippet attributes verified."},
             {"step": 3, "title": "Metadata Optimization", "description": "Generate high-CTR title tags and meta descriptions tailored to high-impression search keywords.", "verification": "SERP metadata optimized."}
         ],
         "outputs": ["Schema catalog status (VALID)", "Rich snippet coverage rate", "Dynamic metadata templates"],
@@ -447,14 +447,14 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "submaster_growth_grounding",
         "mandate": "Supervise high-intent landing page roadmaps, cross-funnel bridges, and stream continuous CRO recommendations to hold conversion rates steady.",
         "token_efficiency_policy": "On-demand execution with memory-mapped recommendation catalog; completes in < 3ms.",
-        "oahu_grounding": "Bridges Oahu search intents: clean-vs-replace assessments, LG Dual Inverter warehouse inventory, and CT-36775 licensed installations.",
+        "oahu_grounding": "Bridges Oahu search intents: clean-vs-replace assessments, LG Dual Inverter warehouse inventory, and window AC installations.",
         "inputs": ["GSC opportunity queries", "Shop inventory ledger (including 18k and 23.5k stock)", "Lead dispatch logs"],
         "execution_steps": [
-            {"step": 1, "title": "High-Intent Page Roadmap Review", "description": "Audit production status of high-intent conversion pages (/clean-vs-replace, /installation, /plug-guide, /estimate).", "verification": "All active pages tracked in catalog."},
-            {"step": 2, "title": "Cross-Funnel Bridge Verification", "description": "Verify that maintenance pages offer unit replacements, shop pages offer installation, and contact pages offer equipment.", "verification": "Cross-funnel CTAs verified active."},
+            {"step": 1, "title": "High-Intent Page Roadmap Review", "description": "Audit production status of high-intent conversion pages (/clean-vs-replace-window-ac, /window-ac-installation, /shop/window-ac-plug-guide).", "verification": "All active pages tracked in catalog."},
+            {"step": 2, "title": "Cross-Funnel Bridge Verification", "description": "Verify that cleaning pages offer unit replacements, shop pages offer installation, and contact pages offer equipment.", "verification": "Cross-funnel CTAs verified active."},
             {"step": 3, "title": "Continuous CRO Recommendation Stream", "description": "Generate prioritized UI, content, and CTA adjustments based on real-time funnel telemetry to stream conversion gains.", "verification": "Active recommendations published to Dev OS."}
         ],
-        "outputs": ["High-intent page roadmap (12 routes)", "Cross-funnel bridge status (ACTIVE)", "Streaming CRO recommendations"],
+        "outputs": ["High-intent page roadmap (8 routes)", "Cross-funnel bridge status (ACTIVE)", "Streaming CRO recommendations"],
         "contingency_protocol": "Immediately flag any disconnected commercial touchpoint or unaddressed high-volume search query."
     },
 
@@ -485,12 +485,12 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "submaster_crm_operations",
         "mandate": "Track equipment service intervals, schedule seasonal maintenance recalls, and manage warranty compliance.",
         "token_efficiency_policy": "Scheduled date range queries on completed leads; zero continuous CPU burn.",
-        "oahu_grounding": "Oahu salt air causes severe coil biofilm and mold growth within 6-12 months without proactive flushing.",
+        "oahu_grounding": "Oahu salt air causes severe coil biofilm and mold growth within 6-12 months without proactive sanitization.",
         "inputs": ["Completed service records", "Equipment installation dates", "Customer feedback scores"],
         "execution_steps": [
-            {"step": 1, "title": "Service Interval Calculation", "description": "Identify customers reaching 6 months (mini-split coil flush) or 12 months (window AC filter & corrosion check).", "verification": "Recall list compiled."},
+            {"step": 1, "title": "Service Interval Calculation", "description": "Identify customers reaching 6 months (window AC coil sanitization) or 12 months (window AC filter & corrosion check).", "verification": "Recall list compiled."},
             {"step": 2, "title": "Customer Satisfaction Tracking", "description": "Calculate customer satisfaction rate from completed service reviews.", "verification": "Satisfaction rate >= 98.0%."},
-            {"step": 3, "title": "Warranty Protection Check", "description": "Verify CT-36775 workmanship warranty coverage active on all eligible jobs.", "verification": "Warranty records verified."}
+            {"step": 3, "title": "Warranty Protection Check", "description": "Verify 1-year manufacturer and workmanship warranty coverage active on all eligible jobs.", "verification": "Warranty records verified."}
         ],
         "outputs": ["Lifecycle status (TRACKING)", "Maintenance recall intervals", "Customer satisfaction rate"],
         "contingency_protocol": "Trigger automated follow-up check if any service review indicates customer dissatisfaction."
@@ -501,20 +501,20 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "HVAC Symptom & Intake Triage Agent",
         "domain": "Operations",
         "supervisor": "submaster_crm_operations",
-        "mandate": "Triage incoming service requests by reported symptom to route between Waipahu Warehouse Direct Replacement vs Field Van Dispatch.",
+        "mandate": "Triage incoming service requests by reported symptom to route between Waipahu Warehouse Direct Replacement vs Window AC Cleaning & Installation Dispatch.",
         "token_efficiency_policy": "In-memory string keyword categorization on incoming lead notes; completed in < 2ms.",
         "oahu_grounding": "Waipahu central warehouse (94-150 Leoleo St #203) stocks factory-sealed replacement units ($395-$1,200), saving customers weeks of mainland freight.",
-        "inputs": ["Lead notes and symptom descriptions", "Service type selections (mini-split vs portable/window)"],
+        "inputs": ["Lead notes and symptom descriptions", "Service type selections (window AC cleaning, installation, or replacement)"],
         "execution_steps": [
             {"step": 1, "title": "Symptom Keyword Analysis", "description": "Scan lead notes for mold/odor, evaporator icing/freeze, water leakage, or total cooling failure.", "verification": "Symptom breakdown populated."},
-            {"step": 2, "title": "Service Routing Determination", "description": "Route aging window units to Clean-vs-Replace Assessment & Waipahu Warehouse Direct inventory; route mini-splits to field dispatch.", "verification": "Appropriate service path assigned."},
+            {"step": 2, "title": "Service Routing Determination", "description": "Route aging window units to Clean-vs-Replace Assessment & Waipahu Warehouse Direct inventory; route viable units to window AC cleaning or installation dispatch.", "verification": "Appropriate service path assigned."},
             {"step": 3, "title": "Emergency Priority Check", "description": "Flag severe heat vulnerability or medical necessity for expedited dispatch.", "verification": "High-priority flags honored."}
         ],
         "outputs": ["Triage status (TRIAGE_ACTIVE)", "Symptom breakdown counts", "Routing recommendations"],
         "contingency_protocol": "Escalate urgent cooling failure requests directly to master dispatch queue."
     },
 
-    # --- Deployment & Quality Swarm (3 Agents) ---
+    # --- Deployment & Quality Swarm (4 Agents) ---
     "agent_deployment_guardian": {
         "id": "agent_deployment_guardian",
         "code": "SOP-DEP-01",
@@ -542,13 +542,13 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "mandate": "Verify Next.js production compilation, TypeScript zero-error typing, and link integrity across apps/web and apps/dev-os.",
         "token_efficiency_policy": "Runs compiler checks synchronously during build; zero runtime token burn.",
         "oahu_grounding": "Prevents client-side crashes on low-bandwidth mobile connections across Oahu rural regions.",
-        "inputs": ["TypeScript compiler output (tsc)", "Next.js production build logs", "Route manifest (110 pages)"],
+        "inputs": ["TypeScript compiler output (tsc)", "Next.js production build logs", "Route manifest (101 pages)"],
         "execution_steps": [
             {"step": 1, "title": "TypeScript Strict Compile", "description": "Run TypeScript compiler to verify zero type mismatches or unhandled exceptions.", "verification": "0 type errors."},
-            {"step": 2, "title": "Next.js Route Compilation", "description": "Verify all 110 canonical static and dynamic routes compile cleanly into optimized bundles.", "verification": "110 routes compiled."},
+            {"step": 2, "title": "Next.js Route Compilation", "description": "Verify all 101 canonical static and dynamic routes compile cleanly into optimized bundles.", "verification": "101 routes compiled."},
             {"step": 3, "title": "Dev OS Standalone Verification", "description": "Verify apps/dev-os compiles with basePath /dev-os without asset 404s.", "verification": "Dev OS bundle verified."}
         ],
-        "outputs": ["Build QA status (VERIFIED)", "Compiled routes count (110)", "TypeScript strict check"],
+        "outputs": ["Build QA status (VERIFIED)", "Compiled routes count (101)", "TypeScript strict check"],
         "contingency_protocol": "Reject build and prevent deployment if any TypeScript error or compilation warning is emitted."
     },
     "agent_regression_sentinel": {
@@ -559,12 +559,12 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "submaster_deployment_quality",
         "mandate": "Enforce By-Appointment-First rule, zero credit card checkout gates, drop-cloth legal protection, and anti-deception standards.",
         "token_efficiency_policy": "Static pattern verification across UI components and legal templates; 0Hz idle token cost.",
-        "oahu_grounding": "Hawaii CT-36775 contractor integrity; guarantees honest pricing and zero bait-and-switch claims on Oahu.",
-        "inputs": ["Checkout form component code", "Service agreement disclaimer text", "Footer licensing notices"],
+        "oahu_grounding": "Insured Oahu cooling specialist integrity; guarantees honest pricing and zero bait-and-switch claims on Oahu.",
+        "inputs": ["Checkout form component code", "Service agreement disclaimer text", "Footer trust notices"],
         "execution_steps": [
             {"step": 1, "title": "By-Appointment-First Audit", "description": "Verify service booking funnel requires zero credit card input prior to scheduling contact.", "verification": "100% zero-card booking verified."},
             {"step": 2, "title": "Drop-Cloth Legal Clause Check", "description": "Verify service agreements include plastic sheeting and drop-cloth standards to protect against drywall dispute liability.", "verification": "Drop-cloth clause verified in contract text."},
-            {"step": 3, "title": "Licensing & Anti-Deception Audit", "description": "Verify CT-36775 license is visible and zero false '24/7' or 'Free Diagnostic' claims exist.", "verification": "Licensing verified, zero deceptive claims."}
+            {"step": 3, "title": "Trust & Anti-Deception Audit", "description": "Verify Waipahu warehouse proof is visible and zero false '24/7' or 'Free Diagnostic' claims exist.", "verification": "Trust details verified, zero deceptive claims."}
         ],
         "outputs": ["Regression status (NON_REGRESSION_VERIFIED)", "By-Appointment-First status (ENFORCED)", "Drop-cloth legal protection (ACTIVE)"],
         "contingency_protocol": "Immediately flag any PR or commit that introduces upfront credit card requirements for service scheduling."
@@ -603,7 +603,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
             {"step": 2, "title": "Caliper Overlay Integrity", "description": "Verify caliper boundary offsets, dimension leader lines, and typography compliance.", "verification": "0 graphic clipping, high-DPI contrast."},
             {"step": 3, "title": "Spatial Fit Resolution", "description": "Verify 1600x1000 WebP asset resolution and responsive image scaling on mobile.", "verification": "Zero CLS, responsive srcset verified."}
         ],
-        "outputs": ["Spatial engine status (SPATIAL_VERIFIED)", "Rendered cutaway count (3)", "Caliper accuracy (CONFIRMED)"],
+        "outputs": ["Spatial engine status (SPATIAL_VERIFIED)", "Rendered cutaway count (16)", "Caliper accuracy (CONFIRMED)"],
         "contingency_protocol": "Trigger local python scripts/generate_window_3d_render.py and scripts/apply_caliper_overlay.py if asset checksum fails."
     },
     # =========================================================================
@@ -617,11 +617,11 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "Sovereign Master Orchestrator",
         "mandate": "Supervise search query intent harvesting across 22 Oahu city pages, click-through-rate title tag optimization, and Google Merchant Center XML feed syndication.",
         "token_efficiency_policy": "Zero background polling loops. Invoked strictly on-demand by client CLI or Dev OS UI. Emits compact JSON summaries (< 400 bytes).",
-        "oahu_grounding": "Oahu search intent harvesting (Honolulu, Ewa Beach, Kailua, Waipahu, Kapolei), localized $0 estimate price anchoring, and Hawaii Contractor License CT-36775 SERP trust badges.",
+        "oahu_grounding": "Oahu search intent harvesting (Honolulu, Ewa Beach, Kailua, Waipahu, Kapolei), localized $0 estimate price anchoring, and Waipahu Warehouse Direct SERP trust badges.",
         "inputs": ["Google Search Console query logs", "Next.js page metadata", "Google Merchant XML feeds", "Canonical URL graph"],
         "execution_steps": [
-            {"step": 1, "title": "High-Intent Query Clustering", "description": "Trigger agent_serp_intent_harvester to identify high-converting Oahu queries with impressions but low CTR.", "verification": "Query intent taxonomy categorized (Repair, Warehouse Pickup, Sizing)."},
-            {"step": 2, "title": "CTR Title Tag Optimization", "description": "Trigger agent_ctr_title_craftsman to enforce click-magnetic title patterns with phone hotline and $0 estimate hooks.", "verification": "22 city pages enforce ${city} AC Repair & In-Stock Window ACs | $0 Estimate | (808) 488-1111."},
+            {"step": 1, "title": "High-Intent Query Clustering", "description": "Trigger agent_serp_intent_harvester to identify high-converting Oahu queries with impressions but low CTR.", "verification": "Query intent taxonomy categorized (Cleaning, Warehouse Pickup, Sizing)."},
+            {"step": 2, "title": "CTR Title Tag Optimization", "description": "Trigger agent_ctr_title_craftsman to enforce click-magnetic title patterns with phone hotline and $0 estimate hooks.", "verification": "22 city pages enforce ${city} Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111."},
             {"step": 3, "title": "Merchant Feed Audit", "description": "Trigger agent_merchant_feed_sentinel to validate XML feed and rich snippet schemas.", "verification": "Google Merchant feed valid with validFrom anchors and zero duplicate reviews."}
         ],
         "outputs": ["SERP acquisition matrix", "CTR improvement roadmap", "Merchant feed health report"],
@@ -656,12 +656,12 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "SERP Intent Harvester Sentinel",
         "domain": "SERP Acquisition",
         "supervisor": "submaster_serp_acquisition",
-        "mandate": "Harvest and cluster high-intent Oahu search queries across repair, emergency replacement, warehouse pickup, and mini-split sizing keywords.",
+        "mandate": "Harvest and cluster high-intent Oahu search queries across window AC cleaning, emergency replacement, warehouse pickup, and window AC sizing keywords.",
         "token_efficiency_policy": "In-memory query clustering against historical Search Console cache. Zero external network requests.",
-        "oahu_grounding": "Captures local microclimate queries ('kailua ac rust', 'ewa beach window ac sizing', 'honolulu emergency ac repair').",
+        "oahu_grounding": "Captures local microclimate queries ('kailua ac rust', 'ewa beach window ac sizing', 'honolulu window ac cleaning').",
         "inputs": ["GSC query logs", "Search query cluster index"],
         "execution_steps": [
-            {"step": 1, "title": "Cluster Analysis", "description": "Cluster queries by intent: transactional purchase, local warehouse pickup, or diagnostic repair.", "verification": "High-intent queries segmented with > 1,500 monthly impressions."},
+            {"step": 1, "title": "Cluster Analysis", "description": "Cluster queries by intent: transactional purchase, local warehouse pickup, or window AC cleaning/installation.", "verification": "High-intent queries segmented with > 1,500 monthly impressions."},
             {"step": 2, "title": "CTR Gap Detection", "description": "Identify queries ranking in top 5 with CTR below 3.5%.", "verification": "Target queries flagged for title craftsman optimization."}
         ],
         "outputs": ["Top query clusters", "Identified CTR gaps", "Intent harvesting status (HARVESTING_ACTIVE)"],
@@ -678,7 +678,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "oahu_grounding": "Embeds Waipahu local stock availability and Honolulu phone bridge directly into Google SERP blue link snippets.",
         "inputs": ["apps/web/app page metadata", "City page route templates"],
         "execution_steps": [
-            {"step": 1, "title": "City Template Title Audit", "description": "Verify all 22 city pages format title as ${city} AC Repair & In-Stock Window ACs | $0 Estimate | (808) 488-1111.", "verification": "All 22 city templates match conversion title standard."},
+            {"step": 1, "title": "City Template Title Audit", "description": "Verify all 22 city pages format title as ${city} Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111.", "verification": "All 22 city templates match conversion title standard."},
             {"step": 2, "title": "Canonical Link Integrity", "description": "Verify zero root canonical override on subpages.", "verification": "Root layout alternates canonical purged."}
         ],
         "outputs": ["Title tag compliance (100%)", "Title craftsman status (TITLES_CRAFTED)"],
@@ -725,7 +725,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Trust Authority Grounder Sentinel",
         "domain": "Conversion",
         "supervisor": "submaster_conversion_velocity",
-        "mandate": "Embed Waipahu warehouse proof, 1-year manufacturer warranty, and Hawaii Contractor License CT-36775 badge in high-friction conversion steps.",
+        "mandate": "Embed Waipahu warehouse proof, 1-year manufacturer warranty, and Insured Oahu Cooling Specialists badge in high-friction conversion steps.",
         "token_efficiency_policy": "Static inspection of checkout page UI tree and warranty trust cards.",
         "oahu_grounding": "Replaces hostile 'All Sales Final / No Refunds' warning with reassuring Waipahu warehouse pickup and warranty reassurance.",
         "inputs": ["apps/web/app/checkout/page.tsx"],
@@ -786,7 +786,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "execution_steps": [
             {"step": 1, "title": "GPU & Bridge Probe", "description": "Trigger agent_comfyui_bridge to verify RTX 4090 (24GB VRAM) and ComfyUI server port 8188.", "verification": "VRAM free > 16GB, bridge armed."},
             {"step": 2, "title": "Demographic Matrix Formulation", "description": "Trigger agent_avatar_portrait_crafter to synthesize non-stereotyped Oahu resident prompt matrices.", "verification": "Prompts match authentic island residential contexts."},
-            {"step": 3, "title": "Trust Medallion Forging", "description": "Trigger agent_trust_medallion_forge to forge 3D golden review medallions and CT-36775 shields.", "verification": "Golden medallions rendered in SVG and WebP."},
+            {"step": 3, "title": "Trust Medallion Forging", "description": "Trigger agent_trust_medallion_forge to forge 3D golden review medallions and Waipahu Warehouse Verified shields.", "verification": "Golden medallions rendered in SVG and WebP."},
             {"step": 4, "title": "Asset Optimization & CLS Guard", "description": "Trigger agent_asset_optimizer_sentinel to compress WebP assets (< 80KB) and verify zero-CLS layout boxes.", "verification": "WebP sizes < 80KB, CLS impact = 0.00."}
         ],
         "outputs": ["Creative studio status (STUDIO_ARMED)", "Hardware report", "Optimized review assets"],
@@ -818,7 +818,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "submaster_creative_studio",
         "mandate": "Formulate demographic prompt matrices for authentic Oahu customer avatars reflecting genuine local homeowners in Kailua, Waipahu, Honolulu, and Ewa Beach.",
         "token_efficiency_policy": "In-memory prompt matrix generation; zero runtime GPU polling.",
-        "oahu_grounding": "Grounds imagery in authentic island residential settings: lanais, jalousie window backgrounds, aloha shirts, and clean indoor AC splits.",
+        "oahu_grounding": "Grounds imagery in authentic island residential settings: lanais, jalousie window backgrounds, aloha shirts, and whisper-quiet LG Dual Inverter window units.",
         "inputs": ["OAHU_AVATAR_PROMPTS matrix", "Customer review neighborhood distributions"],
         "execution_steps": [
             {"step": 1, "title": "Demographic Archetype Audit", "description": "Verify coverage across Oahu communities (Windward, Leeward, Central, Metro).", "verification": "4 distinct regional archetypes active."},
@@ -833,12 +833,12 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Trust Medallion Forge Sentinel",
         "domain": "Creative Studio",
         "supervisor": "submaster_creative_studio",
-        "mandate": "Forge 3D golden review medallions, Waipahu Warehouse Verified badges, and CT-36775 contractor shields.",
+        "mandate": "Forge 3D golden review medallions and Waipahu Warehouse Verified badges.",
         "token_efficiency_policy": "Vector SVG and pre-rendered WebP assets; 0Hz runtime CPU cost.",
-        "oahu_grounding": "Embeds Waipahu local warehouse proof and Hawaii CT-36775 license directly into trust assets.",
-        "inputs": ["apps/web/public/assets/reviews/trust_medallion_gold.svg", "CT-36775 license registry"],
+        "oahu_grounding": "Embeds Waipahu local warehouse proof directly into trust assets.",
+        "inputs": ["apps/web/public/assets/reviews/trust_medallion_gold.svg", "Waipahu warehouse verification details"],
         "execution_steps": [
-            {"step": 1, "title": "Medallion Vector Verification", "description": "Verify gold medallion SVG renders with gold gradient and CT-36775 engraving.", "verification": "trust_medallion_gold.svg verified."},
+            {"step": 1, "title": "Medallion Vector Verification", "description": "Verify gold medallion SVG renders with gold gradient and Waipahu Warehouse Direct engraving.", "verification": "trust_medallion_gold.svg verified."},
             {"step": 2, "title": "Resolution Scaling Audit", "description": "Confirm vector scalability without raster pixelation on high-DPI mobile screens.", "verification": "Scalable SVG verified."}
         ],
         "outputs": ["Medallions status (MEDALLIONS_FORGED)", "Available badge formats (SVG, WebP)"],

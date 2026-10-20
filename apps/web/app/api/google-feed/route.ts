@@ -216,7 +216,7 @@ export async function GET() {
         <channel>
           <title>Affordable Home AC - Local Oahu Inventory</title>
           <link>${domain}</link>
-          <description>Live inventory feed for Waipahu window AC units and ductless accessories.</description>
+          <description>Live inventory feed for Waipahu LG Dual Inverter and GE window AC units.</description>
           ${xmlItems}
         </channel>
       </rss>`;

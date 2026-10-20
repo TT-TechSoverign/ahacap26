@@ -15,12 +15,11 @@ from datetime import datetime
 router = APIRouter(dependencies=[Depends(verify_admin_token)])
 
 class ScheduleUpdate(BaseModel):
-    mini_split_label: str
     window_ac_label: str
-    mini_split_estimate_date: str
-    mini_split_install_date: str
+    window_cleaning_label: Optional[str] = "Window AC Cleaning:"
     window_ac_estimate_date: str
     window_ac_install_date: str
+    window_cleaning_date: Optional[str] = ""
     general_availability_range: Optional[str] = ""
 
 @router.patch("/schedule")

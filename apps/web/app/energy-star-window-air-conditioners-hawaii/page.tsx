@@ -35,8 +35,8 @@ const FAQS = [
         a: "When you purchase an eligible Energy Star window AC from Affordable Home AC, we provide the pre-approved Hawaii Energy application form PDF. Simply attach your itemized receipt and submit online or by mail for your $45 cash rebate check."
     },
     {
-        q: "Are mini-split AC units eligible for this $45 rebate?",
-        a: "No. The $45 cash rebate is strictly for qualifying Energy Star certified Window Air Conditioners. Affordable Home A/C does not participate in mini-split rebates."
+        q: "Which Window AC models qualify for the $45 Hawaii Energy rebate?",
+        a: "All Energy Star certified LG Dual Inverter Window Air Conditioners in our Waipahu warehouse catalog qualify for the $45 cash rebate when installed in a residential home with an active HECO electric account."
     }
 ];
 
@@ -138,7 +138,7 @@ export default function EnergyStarWindowAcPage() {
                                 Hawaii Energy offers a <strong>$45 cash rebate</strong> for qualifying Energy Star certified window air conditioners. As a trusted local distributor, Affordable Home A/C provides the official pre-approved application form and receipt with your purchase.
                             </p>
                             <p className="text-xs text-slate-400 font-sans">
-                                <em>Note: Cash rebates apply strictly to qualifying window air conditioners. Mini-split ACs are not eligible.</em>
+                                <em>Note: Cash rebates apply strictly to qualifying Energy Star certified window air conditioners installed in residential HECO service territories.</em>
                             </p>
                         </div>
 

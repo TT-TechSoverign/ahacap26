@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Repair Oahu | $175 Diagnostic Inspection • Lic #CT-36775 | Affordable Home A/C'
+        absolute: 'Window AC Repair Oahu | $175 Diagnostic Inspection | Affordable Home A/C'
     },
-    description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 AC diagnostic inspection across Oahu. Fast appointment dispatch by licensed contractor CT-36775 • Call (808) 488-1111.',
+    description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 Window AC diagnostic inspection across Oahu. Fast appointment dispatch • Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-repair-oahu',
     },
     openGraph: {
-        title: 'AC Repair Oahu | $175 Diagnostic Inspection • Lic #CT-36775 | Affordable Home A/C',
-        description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 AC diagnostic inspection across Oahu. Fast appointment dispatch by licensed contractor CT-36775 • Call (808) 488-1111.',
+        title: 'Window AC Repair Oahu | $175 Diagnostic Inspection | Affordable Home A/C',
+        description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 Window AC diagnostic inspection across Oahu. Fast appointment dispatch • Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/ac-repair-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
                 url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
                 width: 800,
                 height: 600,
-                alt: 'AC Repair Oahu Diagnostic Inspection',
+                alt: 'Window AC Repair Oahu Diagnostic Inspection',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Repair Oahu | $175 Diagnostic Inspection • Lic #CT-36775 | Affordable Home A/C',
-        description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 AC diagnostic inspection across Oahu. Fast appointment dispatch by licensed contractor CT-36775 • Call (808) 488-1111.',
+        title: 'Window AC Repair Oahu | $175 Diagnostic Inspection | Affordable Home A/C',
+        description: 'Blowing warm air, leaking water, or tripped breakers? Schedule a flat-rate $175 Window AC diagnostic inspection across Oahu. Fast appointment dispatch • Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -44,7 +44,7 @@ const breadcrumbSchema = {
         {
             "@type": "ListItem",
             "position": 2,
-            "name": "AC Repair Oahu",
+            "name": "Window AC Repair Oahu",
             "item": "https://www.affordablehome-ac.com/ac-repair-oahu"
         }
     ]
@@ -56,7 +56,7 @@ const acRepairFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How quickly can a technician be scheduled for AC repair on Oahu?",
+            "name": "How quickly can a technician be scheduled for Window AC repair on Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "We schedule diagnostic appointments based on our earliest technician availability across all 22 Oahu municipalities. Booking through our form allows our dispatch team to coordinate a convenient appointment window with zero upfront deposit required."
@@ -72,18 +72,18 @@ const acRepairFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "What if my AC unit is too old or expensive to repair?",
+            "name": "What if my Window AC unit is too old or expensive to repair?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "If your compressor is seized or the unit is over 8 years old with extensive salt-air coil corrosion, repair costs can exceed the unit's value. Because we maintain our own central warehouse in Waipahu, we can immediately offer in-stock LG Dual Inverter window AC replacements (with pickup by appointment or $50 delivery) or provide an honest $0 upfront estimate for a new ductless mini-split."
+                "text": "If your compressor is seized or the unit is over 5–7 years old with extensive salt-air coil corrosion, repair costs can exceed the unit's value. Because we maintain our own Waipahu warehouse, we can immediately offer in-stock LG Dual Inverter and GE Built-In window AC replacements ($395–$1,200) with free Waipahu pickup or $50 flat Oahu delivery."
             }
         },
         {
             "@type": "Question",
-            "name": "Do you repair both window ACs and ductless mini-splits?",
+            "name": "Do you service both jalousie-mounted and through-the-wall window ACs?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. Our CT-36775 licensed technicians service and repair both ductless mini-splits (Mitsubishi, Daikin, Fujitsu, LG) and heavy-duty window air conditioners across Honolulu, Pearl City, Waipahu, Kailua, and all Oahu."
+                "text": "Yes. Our technicians service and replace both standard/jalousie-mounted LG Dual Inverter window units and 26-inch GE Built-In through-the-wall chassis across Honolulu, Pearl City, Waipahu, Kailua, and all Oahu."
             }
         }
     ]
@@ -92,12 +92,11 @@ const acRepairFaqSchema = {
 const hvacServiceSchema = {
     "@context": "https://schema.org",
     "@type": "HVACService",
-    "name": "Air Conditioning Diagnostic Repair & Troubleshooting",
+    "name": "Window Air Conditioning Diagnostic Repair & Troubleshooting",
     "provider": {
         "@type": "HVACBusiness",
         "name": "Affordable Home A/C",
         "telephone": "+1-808-488-1111",
-        "licenseNumber": "CT-36775",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "94-150 Leoleo St. #203",
@@ -108,14 +107,14 @@ const hvacServiceSchema = {
         }
     },
     "areaServed": "Oahu",
-    "description": "Professional residential AC repair, refrigerant leak detection, compressor diagnostics, and electrical troubleshooting across Oahu.",
+    "description": "Professional residential Window AC repair, compressor diagnostics, and electrical troubleshooting across Oahu.",
     "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "AC Repair Services",
+        "name": "Window AC Repair Services",
         "itemListElement": [
             {
                 "@type": "Offer",
-                "name": "AC Diagnostic Inspection (By Appointment)",
+                "name": "Window AC Diagnostic Inspection (By Appointment)",
                 "price": "175.00",
                 "priceCurrency": "USD",
                 "description": "Comprehensive electrical, mechanical, and refrigeration diagnostic inspection with itemized quote before repair."

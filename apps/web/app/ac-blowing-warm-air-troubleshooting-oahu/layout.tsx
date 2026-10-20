@@ -48,7 +48,7 @@ const warmAirFaqSchema = {
             "name": "How much does it cost to have a technician diagnose warm air?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We charge a transparent flat rate of $175 for our comprehensive on-site diagnostic inspection. A CT-36775 licensed technician tests electrical voltages, refrigerant pressures, and compressor health, providing an upfront quote before any repairs begin."
+                "text": "We provide on-site window AC troubleshooting and clean-vs-replace assessments across Oahu. An experienced technician tests electrical voltages, airflow, and compressor health, providing an upfront recommendation before any work begins."
             }
         }
     ]

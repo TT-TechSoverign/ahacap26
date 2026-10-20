@@ -12,10 +12,10 @@ const req = https.request(optionsProd, (res) => {
   let data = '';
   res.on('data', (d) => { data += d; });
   res.on('end', () => {
-     if (data.includes('mini_split_ac')) {
-         console.log("SUCCESS! Found mini_split_ac in the live API!");
+     if (data.includes('window_ac')) {
+         console.log("SUCCESS! Found window_ac in the live API!");
      } else {
-         console.log("FAILED. Did not find mini_split_ac.");
+         console.log("FAILED. Did not find window_ac.");
      }
   });
 });

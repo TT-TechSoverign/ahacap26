@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Drain Line Clog Clearing Oahu | Algae Slime Flush | Affordable Home A/C'
     },
-    description: 'Fast, professional AC condensate drain line clearing on Oahu. Vacuum extraction, dedicated line flushing, and anti-algae treatment stop indoor water leaks. CT-36775 licensed.',
+    description: 'Fast, professional AC condensate drain line clearing on Oahu. Vacuum extraction, dedicated line flushing, and anti-algae treatment stop indoor water leaks.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-drain-line-clog-clearing-oahu',
     },
     openGraph: {
         title: 'AC Drain Line Clog Clearing Oahu | Algae Slime Flush | Affordable Home A/C',
-        description: 'Fast, professional AC condensate drain line clearing on Oahu. Vacuum extraction, dedicated line flushing, and anti-algae treatment stop indoor water leaks. CT-36775 licensed.',
+        description: 'Fast, professional AC condensate drain line clearing on Oahu. Vacuum extraction, dedicated line flushing, and anti-algae treatment stop indoor water leaks.',
         url: 'https://www.affordablehome-ac.com/ac-drain-line-clog-clearing-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Drain Line Clog Clearing Oahu | Algae Slime Flush | Affordable Home A/C',
-        description: 'Fast, professional AC condensate drain line clearing on Oahu. Vacuum extraction, dedicated line flushing, and anti-algae treatment stop indoor water leaks. CT-36775 licensed.',
+        description: 'Fast, professional AC condensate drain line clearing on Oahu. Vacuum extraction, dedicated line flushing, and anti-algae treatment stop indoor water leaks.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'High-Rise Condo Window AC Rules Honolulu | Waikiki & Kakaako | Affordable Home A/C'
     },
-    description: 'Strict high-rise condo window air conditioning installation in Honolulu. Freight elevator coordination, safety lanyards, condensation drainage compliance, CT-36775 licensed.',
+    description: 'Strict high-rise condo window air conditioning installation in Honolulu. Freight elevator coordination, safety lanyards, condensation drainage compliance.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/high-rise-condo-ac-rules-honolulu',
     },
     openGraph: {
         title: 'High-Rise Condo Window AC Rules Honolulu | Waikiki & Kakaako | Affordable Home A/C',
-        description: 'Strict high-rise condo window air conditioning installation in Honolulu. Freight elevator coordination, safety lanyards, condensation drainage compliance, CT-36775 licensed.',
+        description: 'Strict high-rise condo window air conditioning installation in Honolulu. Freight elevator coordination, safety lanyards, condensation drainage compliance.',
         url: 'https://www.affordablehome-ac.com/high-rise-condo-ac-rules-honolulu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'High-Rise Condo Window AC Rules Honolulu | Waikiki & Kakaako | Affordable Home A/C',
-        description: 'Strict high-rise condo window air conditioning installation in Honolulu. Freight elevator coordination, safety lanyards, condensation drainage compliance, CT-36775 licensed.',
+        description: 'Strict high-rise condo window air conditioning installation in Honolulu. Freight elevator coordination, safety lanyards, condensation drainage compliance.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

@@ -830,7 +830,7 @@ export default function ProductDetailPage() {
                                         <span>Request $0 In-Home Fit Assessment & Installation</span>
                                     </Link>
                                     <div className="text-center text-[10px] font-mono text-emerald-400">
-                                        Zero Upfront Deposit • Hawaii CT-36775 Licensed Installation
+                                        Zero Upfront Deposit • Professional Oahu Window AC Installation
                                     </div>
                                 </div>
                             ) : (

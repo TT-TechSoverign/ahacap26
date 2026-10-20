@@ -113,7 +113,7 @@ export default function JalousieWindowAcInstallationPage() {
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <Sparkles className="size-3.5" />
-                        <span>Oahu Louver Specialists &bull; Licensed Contractor CT-36775</span>
+                        <span>Oahu Louver Specialists &bull; Insured Oahu Specialists</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
@@ -356,7 +356,7 @@ export default function JalousieWindowAcInstallationPage() {
                             </button>
 
                             <p className="text-[10px] font-mono text-slate-400 text-center">
-                                Licensed Hawaii Contractor CT-36775 &bull; Drop-Cloth Clean Guarantee &bull; Pay After Installation
+                                Waipahu Warehouse Direct &bull; Drop-Cloth Clean Guarantee &bull; Pay After Installation
                             </p>
                         </form>
                     )}

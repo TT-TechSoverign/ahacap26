@@ -76,7 +76,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                         </div>
                     </div>
 
-                    {/* Educational Block 2: Hitting Clusters 4 & 5 (Products, Split Systems, Inverters) */}
+                    {/* Educational Block 2: Hitting Clusters 4 & 5 (Products, Dual Inverters, Thru-The-Wall) */}
                     <div className="p-8 rounded-sm bg-slate-900 border border-slate-800 hover:border-[#00E5FF]/40 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all duration-300 relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <h3 className="font-header font-black text-xl md:text-2xl text-white uppercase mb-6 flex items-center gap-3 tracking-widest relative z-10">
@@ -85,10 +85,10 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                         </h3>
                         <div className="font-sans text-sm md:text-base text-slate-300 leading-relaxed font-light relative z-10 space-y-4">
                             <p>
-                                At Affordable Home A/C, we don&apos;t just sell boxes from a local <Link href="/shop" className="font-bold text-[#00E5FF] hover:underline">ac shop</Link>; we deploy specialized cooling infrastructure designed to last.
+                                At Affordable Home A/C, we don&apos;t just sell boxes from a local <Link href="/shop" className="font-bold text-[#00E5FF] hover:underline">ac shop</Link>; we deploy specialized LG &amp; GE cooling units built for Hawaii&apos;s climate.
                             </p>
                             <p>
-                                When island residents look for the most efficient <Link href="/mini_split_ac" className="font-bold text-[#00E5FF] hover:underline">split ac units Hawaii</Link> has to offer, they trust our dedicated team. Whether you need a premium <Link href="/shop/lg-dual-inverter-guide" className="font-bold text-[#00E5FF] hover:underline">dual inverter air conditioner</Link> for a single room, or the seamless <Link href={`/contact?city=${city}&service=Mini+Split+Estimate+(New)`} prefetch={false} className="font-bold text-[#00E5FF] hover:underline">split ac installation Oahu</Link> homes require for whole-house cooling.
+                                When island residents look for the most efficient <Link href="/shop" className="font-bold text-[#00E5FF] hover:underline">window ac units Hawaii</Link> has to offer, they trust our dedicated Waipahu warehouse team. Whether you need a whisper-quiet <Link href="/shop/lg-dual-inverter-guide" className="font-bold text-[#00E5FF] hover:underline">dual inverter air conditioner</Link> for a bedroom or living area, or custom <Link href={`/window-ac-installation?city=${encodeURIComponent(city)}`} prefetch={false} className="font-bold text-[#00E5FF] hover:underline">window ac installation Oahu</Link> homes require for jalousie louvers and 26&quot; wall sleeves.
                             </p>
                             <p>
                                 We utilize <strong>{context.techFocus}</strong> so your system is equipped to {context.benefit}
@@ -107,13 +107,13 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                     </h3>
                     <div className="font-sans text-sm md:text-base text-slate-300 leading-relaxed font-light relative z-10 space-y-4">
                         <p>
-                            Did you know that the humidity in {city} can cause toxic mold to grow deep inside your unit? Combined with silent salt-air corrosion, an unmaintained system quickly becomes a health hazard and leads to unexpected breakdowns. 
+                            Did you know that the humidity in {city} can cause toxic mold to grow deep inside your unit? Combined with silent salt-air corrosion, an unmaintained window AC quickly becomes a health hazard and leads to unexpected breakdowns. 
                         </p>
                         <p>
-                            Whether you need urgent <Link href="/ac-repair-oahu" className="font-bold text-[#00E5FF] hover:underline">air conditioning repair Oahu</Link> homeowners trust, routine <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">affordable ac maintenance</Link>, or a comprehensive <Link href="/mini_split_ac_maintenance" className="font-bold text-[#00E5FF] hover:underline">split ac service</Link>, our licensed technicians are ready. 
+                            Whether you need urgent <Link href="/ac-repair-oahu" className="font-bold text-[#00E5FF] hover:underline">air conditioning troubleshooting Oahu</Link> homeowners trust, routine <Link href="/ac-cleaning-oahu" className="font-bold text-[#00E5FF] hover:underline">affordable window ac cleaning</Link>, or a comprehensive <Link href="/ac-maintenance-service-contract-oahu" className="font-bold text-[#00E5FF] hover:underline">window ac maintenance plan</Link>, our Oahu specialists are ready. 
                         </p>
                         <p>
-                            Our <Link href="/clean-vs-replace-window-ac" className="font-bold text-[#00E5FF] hover:underline">clean vs replace guidance</Link> and ductless mini split sanitization protocols destroy mold at the root and apply specialized corrosion inhibitors to extend the life of your equipment.
+                            Our <Link href="/clean-vs-replace-window-ac" className="font-bold text-[#00E5FF] hover:underline">clean vs replace guidance</Link> and window AC sanitization protocols clear mold, dust, and salt-air buildup to restore crisp airflow and extend the life of your equipment.
                         </p>
                     </div>
                 </div>
@@ -132,8 +132,8 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                     </div>
                     <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 group">
                         <LucideIcons.ShieldCheck className="w-10 h-10 text-[#00E5FF] opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" strokeWidth={1.5} />
-                        <h4 className="font-header font-black text-lg text-white uppercase tracking-widest">Licensed Professionals</h4>
-                        <p className="text-sm text-slate-400 font-light leading-relaxed">Fully licensed, bonded, and insured. Oahu&apos;s trusted HVAC contractor for over 20 years.</p>
+                        <h4 className="font-header font-black text-lg text-white uppercase tracking-widest">Trusted Since 2005</h4>
+                        <p className="text-sm text-slate-400 font-light leading-relaxed">Fully insured Oahu window AC &amp; cleaning specialists serving Hawaii families for over 20 years.</p>
                     </div>
                 </div>
 
@@ -148,16 +148,16 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                         <div className="space-y-4 font-sans">
                             {[
                                 {
-                                    q: `What is the most efficient AC unit for ${city}'s high humidity?`,
-                                    a: `For ${city}'s tropical climate, we highly recommend systems with variable-speed inverter compressors, such as the LG Dual Inverter window AC or a Mitsubishi mini-split. These systems adjust cooling capacity dynamically, which keeps energy bills low while continuously pulling moisture out of the air to maintain a dry, comfortable indoor environment.`
+                                    q: `What is the most efficient Window AC unit for ${city}'s high humidity?`,
+                                    a: `For ${city}'s tropical climate, we highly recommend units with variable-speed inverter compressors, such as the LG Dual Inverter window AC or GE Built-In Variable Speed 26" wall unit. These units adjust cooling capacity dynamically, which keeps HECO energy bills up to 40% lower while continuously pulling moisture out of the air.`
                                 },
                                 {
-                                    q: `How often do window and split AC systems need cleaning in ${city}?`,
-                                    a: `Due to ${city}'s salt-air exposure and humidity, we recommend a professional mini-split deep clean every 6 to 12 months, and rinsing window AC slide-out filters every 2 to 4 weeks. Regular maintenance removes accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30%.`
+                                    q: `How often do window AC units need cleaning in ${city}?`,
+                                    a: `Due to ${city}'s salt-air exposure and humidity, we recommend rinsing window AC slide-out filters every 2 to 4 weeks and scheduling a professional Window AC deep cleaning and coil sanitization every 6 to 12 months. Regular maintenance removes accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30%.`
                                 },
                                 {
                                     q: `Does Affordable Home A/C deliver products and dispatch technicians to ${city}?`,
-                                    a: `Yes! We provide full on-site dispatch of licensed technicians for ductless split AC installations, sizing estimates, mini-split deep cleaning, and custom window AC installation directly to ${city}. We also offer Oahu flat-rate $50 island-wide delivery or free local Waipahu warehouse pickup on all in-stock window AC purchases.`
+                                    a: `Yes! We provide on-site dispatch of Oahu technicians for Window AC deep cleaning, custom jalousie and horizontal slider window AC installation, and 26" thru-the-wall replacements directly to ${city}. We also offer Oahu flat-rate $50 delivery or free local Waipahu warehouse pickup on all in-stock LG & GE window AC purchases.`
                                 }
                             ].map((faq, idx) => (
                                 <details 

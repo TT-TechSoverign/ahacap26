@@ -1,45 +1,36 @@
 {
     "landing_legacy": {
         "hero": {
-            "badge": "Est. 2005 \u2022 Oahu, HI",
+            "badge": "Est. 2005 • Oahu, HI",
             "title_line1": "20+ YEARS OF SERVICING ISLAND WIDE",
-            "title_highlight1": "OAHU'S HVAC CONTRACTOR",
+            "title_highlight1": "OAHU'S WINDOW AC",
             "title_highlight2": "& AC Specialists",
             "badges": {
                 "lg": "LG & GE THROUGH THE WALL AC RETAILER",
-                "licensed": "Licensed & Insured",
+                "licensed": "Insured & Local",
                 "energy": "Energy Saving Units"
             },
             "cta_shop": "SHOP WINDOW AC INVENTORY",
             "cta_estimate": "REQUEST A QUOTE"
         },
         "services": {
-            "subtitle": "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE) CURATED FOR DURABILITY; ULTRA-QUIET DUCTLESS MINI SPLITS DESIGNED FOR PRECISION ZONE COOLING; WINDOW AC INSTALLATIONS & CUSTOM BRACKETS ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND CLINICAL MINI-SPLIT DEEP CLEANINGS THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM.",
+            "subtitle": "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE) CURATED FOR DURABILITY; WAIPAHU WAREHOUSE SAME-DAY PICKUP; WINDOW AC INSTALLATIONS & CUSTOM JALOUSIE BRACKETS ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND CLINICAL WINDOW AC DEEP CLEANINGS THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM.",
             "backlinking": {
                 "part1": "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM ",
                 "link1_text": "HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE)",
                 "part2": " CURATED FOR DURABILITY; ",
-                "link2_text": "ULTRA-QUIET DUCTLESS MINI SPLITS",
-                "part3": " DESIGNED FOR PRECISION ZONE COOLING; ",
+                "link2_text": "SAME-DAY WAIPAHU WAREHOUSE PICKUP",
+                "part3": " FOR IMMEDIATE COOLING; ",
                 "link3_text": "WINDOW AC INSTALLATIONS & CUSTOM BRACKETS",
                 "part4": " ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND ",
-                "link4_text": "CLINICAL MINI-SPLIT DEEP CLEANINGS",
+                "link4_text": "CLINICAL WINDOW AC DEEP CLEANINGS",
                 "part5": " THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM."
             },
             "grid": [
                 {
-                    "id": "minisplits",
-                    "title": "MINI SPLITS",
-                    "description": "Eliminate Hot Spots & High Bills. Our ultra-quiet ductless mini splits provide targeted cooling for any size of rooms. Whether it\u2019s a new Installation or a Retrofit for an older Oahu home, we offer full Service & Repairs to keep your sanctuary cool and quiet.",
-                    "link": "MORE INFO",
-                    "icon": "ac_unit",
-                    "href": "/mini_split_ac",
-                    "color": "primary"
-                },
-                {
                     "id": "inventory",
                     "title": "WINDOW AC SHOP",
-                    "description": "Browse our massive inventory of LG & GE units",
+                    "description": "Browse our Waipahu warehouse inventory of 16 LG Dual Inverter & GE Built-In window AC units.",
                     "link": "View Inventory",
                     "icon": "storefront",
                     "href": "/shop",
@@ -47,18 +38,27 @@
                     "color": "primary"
                 },
                 {
-                    "id": "central",
-                    "title": "MINI SPLIT AC MAINTENANCE",
-                    "description": "Maximize Whole-Home Comfort. We provide professional clinical deep coil & blower wheel cleaning, condensate drain flushing, and precision diagnostics for your Ductless Mini-Split system(s). Our professionals ensure your system is precisely tuned to handle Hawaii's humidity while lowering your monthly energy costs.",
+                    "id": "window-install",
+                    "title": "WINDOW AC INSTALLATION",
+                    "description": "Custom jalousie glass kits, masonry through-the-wall sleeves, and standard window AC installation across Oahu.",
+                    "link": "MORE INFO",
+                    "icon": "ac_unit",
+                    "href": "/window-ac-installation",
+                    "color": "primary"
+                },
+                {
+                    "id": "window-cleaning",
+                    "title": "WINDOW AC DEEP CLEANING",
+                    "description": "Maximize cooling comfort. We provide professional deep coil & blower wheel cleaning, condensate drain flushing, and precision diagnostics for your Window AC unit.",
                     "link": "MORE INFO",
                     "icon": "hvac",
-                    "href": "/mini_split_ac_maintenance",
+                    "href": "/ac-cleaning-oahu",
                     "color": "accent"
                 },
                 {
                     "id": "clean-vs-replace",
                     "title": "CLEAN VS REPLACE",
-                    "description": "Evaluate repair costs vs. upgrading to an efficient inverter.",
+                    "description": "Evaluate cleaning & repair costs vs. upgrading to an efficient LG Dual Inverter window unit.",
                     "link": "CLEAN VS REPLACE GUIDE",
                     "icon": "calculate",
                     "href": "/clean-vs-replace-window-ac",
@@ -70,24 +70,16 @@
                     "id": "slide1",
                     "image": "/assets/carousel/project_showcase_1.png",
                     "title": "PRECISION INSTALLATION",
-                    "subtitle": "Complete retrofit of a dual-inverter system in a coastal Oahu residence.",
+                    "subtitle": "Complete retrofit of an LG Dual Inverter window AC system in a coastal Oahu residence.",
                     "category": "Residential",
                     "location": "Honolulu, HI"
                 },
                 {
                     "id": "slide2",
-                    "image": "/assets/carousel/modern_minisplit_installation.png",
-                    "title": "MINI-SPLIT SHOWCASE",
-                    "subtitle": "Seamless integration of ultra-quiet ductless technology in a modern interior.",
-                    "category": "Installation",
-                    "location": "Kailua, HI"
-                },
-                {
-                    "id": "slide3",
                     "image": "/assets/carousel/industrial_compressor_glow_macro.png",
                     "title": "GOLD-FIN PROTECTION",
                     "subtitle": "Macro detail of our corrosion-resistant coating engineered for Hawaii's salt air.",
-                    "category": "Commercial",
+                    "category": "Coastal Protection",
                     "location": "Kapolei, HI"
                 }
             ],
@@ -107,9 +99,9 @@
             "badge": "Island-Wide Coverage",
             "title": "",
             "title_highlight": "COOLING NETWORK",
-            "description": "Licensed experts delivering optimal air quality and precision cooling. Trusted by homeowner associations, realtors, property management companies, commercial office spaces and ohana island-wide.",
+            "description": "Local Oahu specialists delivering optimal air quality and precision window AC cooling. Trusted by homeowner associations, realtors, property management companies, commercial office spaces and ohana island-wide.",
             "backlinking": {
-                "part1": "Licensed experts delivering ",
+                "part1": "Local Oahu specialists delivering ",
                 "link1_text": "optimal air quality",
                 "part2": " and ",
                 "link2_text": "precision cooling",
@@ -124,27 +116,27 @@
                         {
                             "name": "Aiea",
                             "icon": "Home",
-                            "description": "Expert cooling care in Aiea covers high-quality Mini Split AC installation and routine cleaning. Technicians also handle fast Window AC installation and replacement to keep units running well. These services ensure every home stays comfortable and energy efficient."
+                            "description": "Expert cooling care in Aiea covers high-quality LG & GE Window AC installation and routine cleaning. Technicians also handle fast Window AC installation and replacement to keep units running well. These services ensure every home stays comfortable and energy efficient."
                         },
                         {
                             "name": "Pearl City",
                             "icon": "Building",
-                            "description": "Residents here rely on professional Mini Split AC retrofits and specialized maintenance cleanings. Our team also provides Window AC installation and replacement for local houses and apartments. Complete air care keeps every cooling system strong against the Hawaii heat."
+                            "description": "Residents here rely on professional LG & GE Window AC installation and specialized maintenance cleanings. Our team also provides Window AC installation and replacement for local houses and apartments. Complete air care keeps every cooling system strong against the Hawaii heat."
                         },
                         {
                             "name": "Mililani",
                             "icon": "Trees",
-                            "description": "Cool upland air stays fresh with expert Mini Split AC installation and deep cleaning help. We also offer Window AC installation and replacement to maintain perfect temperatures in every room. From new retrofits to basic service, your home stays healthy and chill."
+                            "description": "Cool upland air stays fresh with expert LG & GE Window AC installation and deep cleaning help. We also offer Window AC installation and replacement to maintain perfect temperatures in every room. From new upgrades to basic service, your home stays healthy and chill."
                         },
                         {
                             "name": "Waipio Gentry",
                             "icon": "Users",
-                            "description": "This community enjoys premium Mini Split AC retrofits and regular system cleaning. Expert Window AC installation and replacement are also available for all residential units. Proper care ensures your cooling equipment lasts for many years to come."
+                            "description": "This community enjoys premium LG & GE Window AC installation and regular system cleaning. Expert Window AC installation and replacement are also available for all residential units. Proper care ensures your cooling equipment lasts for many years to come."
                         },
                         {
                             "name": "Waikele",
                             "icon": "ShoppingBag",
-                            "description": "Quality service near the shops includes Mini Split AC installation and professional cleaning. The team also specializes in Window AC installation and replacement to stop dust from building up. These cooling options keep your home environment clean and quiet."
+                            "description": "Quality service near the shops includes LG & GE Window AC installation and professional cleaning. The team also specializes in Window AC installation and replacement to stop dust from building up. These cooling options keep your home environment clean and quiet."
                         }
                     ]
                 },
@@ -156,52 +148,52 @@
                         {
                             "name": "Honolulu",
                             "icon": "Building2",
-                            "description": "Fast city service features elite Mini Split AC installation and routine cleaning. We also perform Window AC installation and replacement for city homes and high-rises. New retrofits and deep maintenance keep the urban heat away from your living space."
+                            "description": "Fast city service features elite LG & GE Window AC installation and routine cleaning. We also perform Window AC installation and replacement for city homes and high-rises. New upgrades and deep maintenance keep the urban heat away from your living space."
                         },
                         {
                             "name": "Kalihi",
                             "icon": "Factory",
-                            "description": "Local cooling support includes strong Mini Split AC installation and thorough system cleaning. Residents can also book Window AC installation and replacement to improve air flow. Reliable retrofits help every business and home stay productive and cool."
+                            "description": "Local cooling support includes strong LG & GE Window AC installation and thorough system cleaning. Residents can also book Window AC installation and replacement to improve air flow. Reliable upgrades help every business and home stay productive and cool."
                         },
                         {
                             "name": "Manoa",
                             "icon": "CloudRain",
-                            "description": "Valley homes stay dry with specialized Mini Split AC installation and cleaning. We also provide Window AC installation and replacement to protect against moisture and mold. These full-service cooling choices keep your indoor air fresh and healthy."
+                            "description": "Valley homes stay dry with specialized LG & GE Window AC installation and cleaning. We also provide Window AC installation and replacement to protect against moisture and mold. These full-service cooling choices keep your indoor air fresh and healthy."
                         },
                         {
                             "name": "Kaimuki",
                             "icon": "Store",
-                            "description": "Iconic homes get modern Mini Split AC retrofits and deep maintenance cleaning. Professional Window AC installation and replacement are also key to preserving older units. Complete care helps your cooling system run smoothly in this classic neighborhood."
+                            "description": "Iconic homes get modern LG & GE Window AC installation and deep maintenance cleaning. Professional Window AC installation and replacement are also key to preserving older units. Complete care helps your cooling system run smoothly in this classic neighborhood."
                         },
                         {
                             "name": "Hawaii Kai",
                             "icon": "Waves",
-                            "description": "Marina-side homes stay protected with salt-resistant Mini Split AC installation and cleaning. We also offer Window AC installation and replacement to stop rust and clogs. Premium retrofits ensure your system survives the coastal island air."
+                            "description": "Marina-side homes stay protected with salt-resistant LG & GE Window AC installation and cleaning. We also offer Window AC installation and replacement to stop rust and clogs. Premium upgrades ensure your system survives the coastal island air."
                         },
                         {
                             "name": "Salt Lake",
                             "icon": "Coins",
-                            "description": "Rapid cooling help includes efficient Mini Split AC installation and routine cleaning. Local technicians also provide Window AC installation and replacement for every type of home. These service options keep your air cold and your electric bills low."
+                            "description": "Rapid cooling help includes efficient LG & GE Window AC installation and routine cleaning. Local technicians also provide Window AC installation and replacement for every type of home. These service options keep your air cold and your electric bills low."
                         },
                         {
                             "name": "Aina Haina",
                             "icon": "Anchor",
-                            "description": "Oceanside properties receive top-tier Mini Split AC installation and detailed cleaning. Our experts also handle Window AC installation and replacement to fight off the salt air. Specialized retrofits keep your cooling unit powerful and reliable."
+                            "description": "Oceanside properties receive top-tier LG & GE Window AC installation and detailed cleaning. Our experts also handle Window AC installation and replacement to fight off the salt air. Specialized upgrades keep your cooling unit powerful and reliable."
                         },
                         {
                             "name": "Kahala",
                             "icon": "Gem",
-                            "description": "Elite HVAC care focuses on premium Mini Split AC installation and deep cleaning. We also deliver Window AC installation and replacement for total home comfort. Every retrofit is designed to provide perfect air quality and quiet operation."
+                            "description": "Elite HVAC care focuses on premium LG & GE Window AC installation and deep cleaning. We also deliver Window AC installation and replacement for total home comfort. Every upgrade is designed to provide perfect air quality and quiet operation."
                         },
                         {
                             "name": "McCully",
                             "icon": "Car",
-                            "description": "Dense city living stays chill with rapid Mini Split AC installation and cleaning. We also offer Window AC installation and replacement to handle the midday sun. Professional maintenance ensures your unit stays strong even on the hottest days."
+                            "description": "Dense city living stays chill with rapid LG & GE Window AC installation and cleaning. We also offer Window AC installation and replacement to handle the midday sun. Professional maintenance ensures your unit stays strong even on the hottest days."
                         },
                         {
                             "name": "Makiki",
                             "icon": "MapPin",
-                            "description": "Central residents enjoy quiet Mini Split AC retrofits and professional cleaning. Our team also performs Window AC installation and replacement for total reliability. Consistent service keeps your home air fresh and your system running right."
+                            "description": "Central residents enjoy quiet LG & GE Window AC installation and professional cleaning. Our team also performs Window AC installation and replacement for total reliability. Consistent service keeps your home air fresh and your system running right."
                         }
                     ]
                 },
@@ -213,22 +205,22 @@
                         {
                             "name": "Kapolei",
                             "icon": "Sun",
-                            "description": "The Second City stays cool with modern Mini Split AC installation and deep cleaning. We also provide expert Window AC installation and replacement for new and old homes. These full-service retrofits keep the West side heat out of your house."
+                            "description": "The Second City stays cool with modern LG & GE Window AC installation and deep cleaning. We also provide expert Window AC installation and replacement for new and old homes. These full-service upgrades keep the West side heat out of your house."
                         },
                         {
                             "name": "Ewa Beach",
                             "icon": "Umbrella",
-                            "description": "Sunny coastal homes get extra care with Mini Split AC installation and cleaning. We also specialize in Window AC installation and replacement to combat the salt and dust. Proper retrofits ensure your cooling stays strong for the whole family."
+                            "description": "Sunny coastal homes get extra care with LG & GE Window AC installation and cleaning. We also specialize in Window AC installation and replacement to combat the salt and dust. Proper upgrades ensure your cooling stays strong for the whole family."
                         },
                         {
                             "name": "Waipahu",
                             "icon": "Wrench",
-                            "description": "Our home-base service features professional Mini Split AC installation and routine cleaning. Local residents can also rely on us for Window AC installation and replacement. From deep maintenance to new retrofits, we keep your air perfect."
+                            "description": "Our home-base service features professional LG & GE Window AC installation and routine cleaning. Local residents can also rely on us for Window AC installation and replacement. From deep maintenance to new upgrades, we keep your air perfect."
                         },
                         {
                             "name": "Kunia",
                             "icon": "Mountain",
-                            "description": "Ridge homes stay comfortable with reliable Mini Split AC installation and cleaning. We also offer Window AC installation and replacement to handle the intense mountain sun. Quality retrofits keep your cooling system efficient and cold."
+                            "description": "Ridge homes stay comfortable with reliable LG & GE Window AC installation and cleaning. We also offer Window AC installation and replacement to handle the intense mountain sun. Quality upgrades keep your cooling system efficient and cold."
                         }
                     ]
                 },
@@ -240,17 +232,17 @@
                         {
                             "name": "Kailua",
                             "icon": "Waves",
-                            "description": "Beachside living is improved with salt-ready Mini Split AC installation and cleaning. We also provide Window AC installation and replacement to prevent damage from the sea air. These complete retrofits keep your home healthy and your unit clean."
+                            "description": "Beachside living is improved with salt-ready LG & GE Window AC installation and cleaning. We also provide Window AC installation and replacement to prevent damage from the sea air. These complete upgrades keep your home healthy and your unit clean."
                         },
                         {
                             "name": "Kaneohe",
                             "icon": "Umbrella",
-                            "description": "Bay-area homes stay dry with specialized Mini Split AC installation and cleaning. Our technicians also perform Window AC installation and replacement to stop mold growth. Reliable retrofits ensure your cooling system stays quiet and powerful."
+                            "description": "Bay-area homes stay dry with specialized LG & GE Window AC installation and cleaning. Our technicians also perform Window AC installation and replacement to stop mold growth. Reliable upgrades ensure your cooling system stays quiet and powerful."
                         },
                         {
                             "name": "Kahaluu",
                             "icon": "Leaf",
-                            "description": "Tropical coastal homes get expert Mini Split AC installation and routine cleaning. We also provide Window AC installation and replacement for the best air quality. Regular maintenance keeps your system running well in the lush island air."
+                            "description": "Tropical coastal homes get expert LG & GE Window AC installation and routine cleaning. We also provide Window AC installation and replacement for the best air quality. Regular maintenance keeps your system running well in the lush island air."
                         }
                     ]
                 }
@@ -266,9 +258,9 @@
                 "link2_text": "BRANDS ENABLE US",
                 "part3": " TO DEPLOY SPECIALIZED EQUIPMENT DESIGNED SPECIFICALLY FOR HAWAII'S ",
                 "link3_text": "HIGH-HUMIDITY",
-                "part4": " AND CORROSIVE SALT-AIR MICRO-CLIMATES. OUR LICENSED STATUS ENSURES PRIORITY ACCESS TO THE LATEST ENERGY-EFFICIENT TECHNOLOGIES."
+                "part4": " AND CORROSIVE SALT-AIR MICRO-CLIMATES. OUR DIRECT WAREHOUSE STATUS ENSURES PRIORITY ACCESS TO THE LATEST ENERGY-EFFICIENT LG & GE TECHNOLOGIES."
             },
-            "narrative": "AFFORDABLE HOME A/C IS PROUD TO MAINTAIN COMPLIANANCE TO PROVIDE YOU WITH THE WORLD'S LEADING HVAC ENGINEERING FIRMS. THESE BRANDS ENABLE US TO DEPLOY SPECIALIZED EQUIPMENT DESIGNED SPECIFICALLY FOR HAWAII'S HIGH-HUMIDITY AND CORROSIVE SALT-AIR MICRO-CLIMATES. OUR LICENSED STATUS ENSURES PRIORITY ACCESS TO THE LATEST ENERGY-EFFICIENT TECHNOLOGIES."
+            "narrative": "AFFORDABLE HOME A/C IS PROUD TO PARTNER WITH LG AND GE TO DEPLOY SPECIALIZED WINDOW & THROUGH-THE-WALL AC EQUIPMENT DESIGNED SPECIFICALLY FOR HAWAII'S HIGH-HUMIDITY AND CORROSIVE SALT-AIR MICRO-CLIMATES."
         },
         "warehouse": {
             "badge": "Local Pickup Center",
@@ -295,16 +287,11 @@
         "address_value": "94-150 Leoleo St. #203\nWaipahu, HI 96797",
         "calendar": {
             "title": "Calendar",
-            "split_section_title": "MINI SPLIT AC",
-            "split_estimate_label": "NEXT AVAILABLE ESTIMATE DATE",
-            "split_estimate_value": "1-2 DAYS",
-            "split_install_label": "NEXT AVAILABLE INSTALLATION DATE",
-            "split_install_value": "1-2 WEEKS",
-            "window_section_title": "WINDOW AC",
-            "window_estimate_label": "NEXT AVAILABLE ESTIMATE DATE",
+            "window_section_title": "WINDOW AC & CLEANING",
+            "window_estimate_label": "NEXT AVAILABLE PICKUP / SERVICE DATE",
             "window_estimate_value": "1-2 DAYS",
             "window_install_label": "NEXT AVAILABLE INSTALLATION DATE",
-            "window_install_value": "1-2 WEEKS"
+            "window_install_value": "3-5 DAYS"
         },
         "wizard_title": "CONTACT US",
         "wizard_interface": "INTERFACE",
@@ -334,12 +321,10 @@
             "btn_submit": "Submit Request",
             "services_list": [
                 "Window AC Installation",
+                "Window AC Deep Cleaning",
                 "Window AC Clean-vs-Replace Assessment",
                 "Window AC Diagnosis/Repair",
-                "Mini Split Estimate (New)",
-                "Mini Split Estimate (Replace)",
-                "Mini Split Maintenance",
-                "Mini Split Diagnosis/Repair"
+                "Waipahu Warehouse Pickup"
             ],
             "success": {
                 "title": "REQUEST RECEIVED",
@@ -377,7 +362,7 @@
         "dual_inverter": {
             "title": "DUAL INVERTER TECHNOLOGY",
             "subtitle": "Extreme Energy Efficiency",
-            "description": "LG\u2019s DUAL Inverter\u2122 technology is engineered for the high-salinity and high-humidity environments of Oahu. By utilizing variable-speed compressors, these units slash energy consumption by up to 40% while operating at whisper-quiet levels. Every model in this section is $45 Hawaii Energy Rebate Qualified."
+            "description": "LG’s DUAL Inverter™ technology is engineered for the high-salinity and high-humidity environments of Oahu. By utilizing variable-speed compressors, these units slash energy consumption by up to 40% while operating at whisper-quiet levels. Every model in this section is $45 Hawaii Energy Rebate Qualified."
         },
         "universal_fit": {
             "title": "Perfect Fit For Older Panasonic & FRIEDRICH Units",
@@ -392,7 +377,7 @@
         "ge": {
             "title": "Thru Wall / Flush Mount Units",
             "subtitle": "Trusted Dependability",
-            "description": "Engineered for permanent through-the-wall installation, the GE Built-In series provides high-output cooling for Oahu\u2019s most demanding residential environments. These units feature a true universal fit chassis and advanced dehumidification cycles to maintain a crisp, dry interior climate regardless of exterior humidity."
+            "description": "Engineered for permanent through-the-wall installation, the GE Built-In series provides high-output cooling for Oahu’s most demanding residential environments. These units feature a true universal fit chassis and advanced dehumidification cycles to maintain a crisp, dry interior climate regardless of exterior humidity."
         },
         "casement": {
             "title": "WALL CASEMENT",
@@ -413,7 +398,7 @@
                 },
                 {
                     "title": "Energy Calibration",
-                    "description": "Compressors tuned for consistent 80\u00b0F+ operation.",
+                    "description": "Compressors tuned for consistent 80°F+ operation.",
                     "icon": "bolt"
                 },
                 {
@@ -446,7 +431,7 @@
         "guide": {
             "title": "ROOM SIZING GUIDE",
             "subtitle": "Technical Resource",
-            "description": "Standard sizing charts fail to account for Hawaii\u2019s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles andfails to dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determinethe precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don\u2019t guess with your comfort\u2014deploy the correct infrastructure.",
+            "description": "Standard sizing charts fail to account for Hawaii’s unique combination of high humidity and persistent heat loads. Installing an oversized unit creates a cold, clammy environment as it short-cycles andfails to dehumidify, while an undersized unit will run continuously, spiking your energy costs without ever reaching comfort. Our proprietary sizing matrix is engineered specifically for Oahu's micro-climates. Use it to determinethe precise BTU capacity required for your space, ensuring maximum efficiency, superior dehumidification, and long-term equipment durability. Don’t guess with your comfort—deploy the correct infrastructure.",
             "info_title": "High Ceiling / Sun Exposure?",
             "info_desc": "For rooms with high ceilings (9ft+) or direct afternoon sun, we recommend sizing up by 10% to ensure efficiency."
         },
@@ -456,11 +441,11 @@
         "bento": {
             "lg": {
                 "title": "Dual Inverter Technology",
-                "description": "LG's revolutionary Dual Inverter Compressor\u2122 eliminates the noisy stop-and-start cycle, saving up to 40% more energy."
+                "description": "LG's revolutionary Dual Inverter Compressor™ eliminates the noisy stop-and-start cycle, saving up to 40% more energy."
             },
             "ge": {
                 "title": "Ultra-Quiet Comfort",
-                "description": "GE Profile\u2122 brings whisper-quiet cooling designed for bedrooms. Built for high-humidity coastal duty."
+                "description": "GE Profile™ brings whisper-quiet cooling designed for bedrooms. Built for high-humidity coastal duty."
             }
         },
         "local_authority": {
@@ -480,7 +465,7 @@
             "steps": [
                 {
                     "title": "1. Purchase a Qualifying Unit",
-                    "description": "Shop our LG Dual Inverter ENERGY STAR\u00ae window ACs \u2014 available online or in-store.",
+                    "description": "Shop our LG Dual Inverter ENERGY STAR® window ACs — available online or in-store.",
                     "icon": "shopping_cart"
                 },
                 {
@@ -497,7 +482,7 @@
             "why_matters": {
                 "title": "Energy Efficiency That Pays Off",
                 "title_highlight": "Why It Matters",
-                "description": "ENERGY STAR\u00ae certified LG units use up to 15% less energy than standard models \u2014 saving you money every month while keeping your home cool and comfortable. Over time, those savings add up for both your wallet and the planet.",
+                "description": "ENERGY STAR® certified LG units use up to 15% less energy than standard models — saving you money every month while keeping your home cool and comfortable. Over time, those savings add up for both your wallet and the planet.",
                 "highlights": [
                     {
                         "title": "Up to $45 Mail-In Rebate",
@@ -566,9 +551,9 @@
         "hero": {
             "badge": "RESTORE LIKE-NEW COOLING & FRESH AIR",
             "title": "PROFESSIONAL",
-            "title_highlight": "MINI SPLIT AC CLEANING",
+            "title_highlight": "WINDOW AC CLEANING",
             "title_suffix": "& SANITIZATION SERVICES IN OAHU",
-            "description": "Eliminate stubborn black mold, musty odors, and salt-air corrosion. Our clinical mini-split deep clean restores optimal icy cooling airflow, lowers your electric bill, and ensures your family breathes pure, fresh air.",
+            "description": "Eliminate stubborn black mold, musty odors, and salt-air corrosion. Our clinical window AC deep clean restores optimal icy cooling airflow, lowers your electric bill, and ensures your family breathes pure, fresh air.",
             "cta_schedule": "Schedule Service",
             "cta_rates": "View Local Rates"
         },
@@ -613,10 +598,10 @@
             "title": "WHY HAWAII'S CLIMATE",
             "title_highlight": "DEMANDS",
             "title_suffix": "PROFESSIONAL SERVICE",
-            "description_p1": "Oahu's high humidity and constant exposure to saline trade winds create a \"perfect storm\" for ductless mini-split A/C units. Unlike drier climates, Honolulu's air causes rapid condensation buildup within the internal casing of wall-mounted air handlers, which often goes unnoticed behind the front louvers.",
+            "description_p1": "Oahu's high humidity and constant exposure to saline trade winds create a 'perfect storm' for window and through-the-wall A/C units. Unlike drier climates, Honolulu's air causes rapid condensation buildup within the internal chassis and slinger pan, which often goes unnoticed behind the front louvers.",
             "description_p2_prefix": "This moisture, combined with indoor dust, creates a fertile breeding ground for",
             "description_p2_highlight": "toxic mold (Aspergillus)",
-            "description_p2_suffix": "and bacteria. Without regular professional sanitization, your mini-split unit becomes a distribution system for allergens, causing \"Sick Building Syndrome\" symptoms like headaches, fatigue, and respiratory distress.",
+            "description_p2_suffix": "and bacteria. Without regular professional sanitization, your window AC unit becomes a distribution system for allergens, causing headaches, fatigue, and respiratory irritation.",
             "description_p3_prefix": "Furthermore, salt-air corrosion eats away at sensitive aluminum fins and copper tubing. Our deep cleaning process includes a specialized",
             "description_p3_highlight": "Corrosion Inhibitor Treatment",
             "description_p3_suffix": "that neutralizes salt deposits and helps protect your unit from premature coastal corrosion failure."
@@ -684,16 +669,16 @@
             "title_highlight": "QUESTIONS",
             "items": [
                 {
-                    "q": "How often should I have my mini-split A/C professionally cleaned in Oahu?",
-                    "a": "Due to our high humidity and salt-air concentration, we recommend a deep clinical sanitization every 6-12 months for primary living spaces to prevent mold buildup and corrosion."
+                    "q": "How often should I have my window A/C professionally cleaned in Oahu?",
+                    "a": "Due to our high humidity and salt-air concentration, we recommend rinsing your slide-out mesh filter every 2-4 weeks and scheduling a deep sanitization every 6-12 months to prevent mold buildup and corrosion."
                 },
                 {
-                    "q": "Does a dirty A/C impact electricity bills?",
-                    "a": "Yes. Clogged coils force the compressor to work 30-50% harder to achieve the same cooling effect, leading to significantly higher MECO/HECO bills and premature motor failure."
+                    "q": "Does a dirty window A/C impact electricity bills?",
+                    "a": "Yes. Clogged coils force the compressor to work 30-50% harder to achieve the same cooling effect, leading to significantly higher HECO bills and premature motor failure."
                 },
                 {
                     "q": "Can I just use a spray bottle from the hardware store?",
-                    "a": "Hardware store sprays only treat the surface. Our mini-split deep cleaning process involves disassembling the casing to thoroughly clean and sanitize the blower wheel, evaporator coil, and drain pan where 90% of mold actually resides."
+                    "a": "Hardware store sprays only treat the front surface. Our window AC deep cleaning process thoroughly cleans and sanitizes the blower wheel, evaporator coil, condenser fins, and drain pan where 90% of mold and salt buildup reside."
                 }
             ]
         },
@@ -800,21 +785,21 @@
         "description": "Affordable Home A/C is calibrating a new digital experience. Smart. Adaptive. Precise. A higher standard of comfort is loading now.",
         "status_pill": "Field Operations: Fully Active & Ready to Assist",
         "cta_button": "Contact Support",
-        "footer": "Authorized Dealer \u2022 Serving Oahu Since 2005"
+        "footer": "Authorized Dealer • Serving Oahu Since 2005"
     },
     "navigation": {
         "links": [
             {
-                "text": "MINI SPLIT AC",
-                "href": "/mini_split_ac"
-            },
-            {
-                "text": "SPLIT AC CLEANING",
-                "href": "/mini_split_ac_maintenance"
-            },
-            {
                 "text": "SHOP WINDOW AC",
                 "href": "/shop"
+            },
+            {
+                "text": "WINDOW AC INSTALL",
+                "href": "/window-ac-installation"
+            },
+            {
+                "text": "WINDOW AC CLEANING",
+                "href": "/ac-cleaning-oahu"
             },
             {
                 "text": "AC REPAIR",
@@ -830,48 +815,6 @@
             }
         ]
     },
-    "mini_split_ac_maintenance": {
-        "hero_basic": {
-            "title": "Basic Mini Split AC Cleaning",
-            "description": "This is our routine check-up. We wash the filters and the outside coils to keep the air cold. We also flush the drains and check the system heat and pressure. It is a great way to keep your unit running well.",
-            "checklist": [
-                "Clean/Wash air filters, housings, louvers, vanes, and condenser coil",
-                "Blow/Flush condensate drain",
-                "Clean/Wipe down evaporator coil",
-                "Check pressures and temps",
-                "Run and test system"
-            ]
-        },
-        "hero_premium": {
-            "title": "Premium Mini Split AC Cleaning",
-            "description": "This is our deepest clean. We wash every part, including the blower wheel and the drain pans. This service removes more dirt and helps your AC last much longer. It is the best choice for very fresh air.",
-            "checklist": [
-                "Everything in Basic Service, PLUS:",
-                "Deep Clean Air Scoop & Blower Wheel",
-                "Deep Clean & Flush Condensate Pans",
-                "Disassemble unit to access hidden dirt",
-                "Maximized energy efficiency & lifespan"
-            ]
-        },
-        "sections": {
-            "deep_clean": {
-                "title": "Our Deep Clean Process",
-                "description": "Dirt and dust can hide deep inside your AC unit, making it work harder and blowing dirty air into your home. Our deep clean process removes this hidden dirt, ensuring your unit runs efficiently and provides you with the cleanest air possible."
-            },
-            "energy": {
-                "title": "Saving on Energy",
-                "description": "A clean AC unit doesn't have to work as hard to cool your home, which means it uses less energy. Regular maintenance, especially our premium service, can significantly lower your electricity bills and help your AC unit last longer without needing repairs."
-            },
-            "air_quality": {
-                "title": "Better Air Quality",
-                "description": "Your AC unit circulates the air you breathe every day. If it's dirty, you're breathing in dust, mold, and allergens. Our thorough cleaning services remove these pollutants, improving the indoor air quality of your home and keeping your family healthy."
-            },
-            "salt_dust": {
-                "title": "Hawaii Salt & Dust",
-                "description": "Living in Hawaii means dealing with salt air and dust that can quickly corrode and clog your AC unit. Our specialized cleaning services target these specific issues, protecting your investment and ensuring your unit can withstand the unique challenges of our island environment."
-            }
-        }
-    },
     "landing": {
         "services_header": {
             "title": "PREMIUM",
@@ -881,15 +824,15 @@
         "services": {
             "window_shop": {
                 "title": "WINDOW AC STORE",
-                "description": "Browse our massive inventory of LG & GE units."
+                "description": "Browse our Waipahu warehouse inventory of LG & GE units."
             },
-            "split_systems": {
-                "title": "SPLIT SYSTEMS",
-                "description": "Whisper-quiet, energy-efficient cooling for your entire home."
+            "window_install": {
+                "title": "WINDOW AC INSTALLATION",
+                "description": "Custom jalousie & through-the-wall installations across Oahu."
             },
             "maintenance": {
-                "title": "MAINTENANCE",
-                "description": "Protect your investment with professional cleaning and servicing."
+                "title": "WINDOW AC CLEANING",
+                "description": "Protect your investment with professional window AC cleaning and servicing."
             }
         },
         "about_quick": {
@@ -897,12 +840,12 @@
             "subtitle_prefix": "THE",
             "title": "EVOLUTION",
             "title_highlight": "OF COOL",
-            "narrative": "FOR OVER 20 YEARS, AFFORDABLE HOME A/C HAS BEEN KNOWN FOR PREMIER WINDOW AC SERVICES. TODAY, WE HAVE EVOLVED INTO A FULLY LICENSED, INSURED, AND BONDED HVAC CONTRACTOR, EXPANDING OUR EXCELLENCE TO MITSUBISHI MINI-SPLITS AND HIGH-EFFICIENCY INVERTER WINDOW UNITS. WE BRING INDUSTRIAL DISCIPLINE TO RESIDENTIAL COMFORT.",
+            "narrative": "FOR OVER 20 YEARS, AFFORDABLE HOME A/C HAS BEEN KNOWN FOR PREMIER WINDOW AC SALES, INSTALLATION, AND CLEANING SERVICES. FROM HIGH-EFFICIENCY LG DUAL INVERTER WINDOW UNITS TO GE BUILT-IN THROUGH-THE-WALL CHASSIS, WE BRING INDUSTRIAL DISCIPLINE TO OAHU RESIDENTIAL COMFORT.",
             "stat1_value": "20+",
             "stat1_label": "YEARS SERVING OAHU",
-            "stat2_value": "CT-36775",
-            "stat2_label": "LICENSED & BONDED",
-            "image_alt": "HISTORIC SHOP PHOTO"
+            "stat2_value": "WAIPAHU",
+            "stat2_label": "LOCAL WAREHOUSE",
+            "image_alt": "WAIPAHU WAREHOUSE PHOTO"
         }
     },
     "common": {
@@ -914,21 +857,18 @@
             "nav": "Navigation",
             "support": "Support",
             "location": "Location",
-            "copyright": "\u00a9 2026 Affordable Home A/C \u2022 LIC# CT-36775 \u2022 Island-Scale Cooling Solutions"
+            "copyright": "? 2026 Affordable Home A/C ? Waipahu Warehouse Direct ? Island-Scale Window AC Solutions"
         }
     },
     "footer_schedule": {
-        "mini_split_label": "MINI SPLIT AC",
-        "window_ac_label": "WINDOW AC",
-        "mini_split_estimate_date": "Next Available Estimate: Oct 19-23, 2026",
-        "mini_split_install_date": "Next Available Install: Oct 23-28, 2026",
-        "window_ac_estimate_date": "Next Available Estimate: Oct 19-21, 2026",
+        "window_ac_label": "WINDOW AC & CLEANING",
+        "window_ac_estimate_date": "Next Available Pickup / Service: Oct 19-21, 2026",
         "window_ac_install_date": "Next Available Install: Oct 21-25, 2026"
     },
     "window_ac": {
         "hero": {
             "title": "Window AC Clean vs. Replace Assessment",
-            "description": "Evaluate whether DIY filter maintenance or upgrading to a new factory-sealed LG Dual Inverter ($560\u2013$1,025) or GE Built-In ($1,000\u2013$1,200) unit is more cost-effective under Hawaii's ~44.2\u00a2/kWh HECO rates.",
+            "description": "Evaluate whether DIY filter maintenance or upgrading to a new factory-sealed LG Dual Inverter ($560–$1,025) or GE Built-In ($1,000–$1,200) unit is more cost-effective under Hawaii's ~44.2¢/kWh HECO rates.",
             "image": "/assets/hero-cards/window-ac-cleaning-ba-1.png"
         },
         "phases": [
@@ -953,7 +893,7 @@
             {
                 "id": "phase4",
                 "title": "Step 4: Same-Day Waipahu Pickup or Installation",
-                "description": "Pick up a factory-sealed replacement unit at our Waipahu warehouse (94-150 Leoleo St #203) or schedule licensed CT-36775 jalousie/standard window installation.",
+                "description": "Pick up a factory-sealed replacement unit at our Waipahu warehouse (94-150 Leoleo St #203) or schedule professional jalousie/standard window installation.",
                 "image": "/assets/hero-cards/window-ac-drain-pan-blower-wheel-cleaning-800x800x-2.png"
             }
         ]

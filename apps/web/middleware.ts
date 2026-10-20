@@ -120,15 +120,24 @@ export function middleware(request: NextRequest) {
     const CONSOLIDATED_REDIRECTS: Record<string, string> = {
         '/window-ac-deep-cleaning-chemical-overhaul': '/clean-vs-replace-window-ac',
         '/window_ac_maintenance': '/clean-vs-replace-window-ac',
-        '/central-ac': '/mini_split_ac',
-        '/maintenance': '/mini_split_ac_maintenance',
+        '/central-ac': '/shop',
+        '/mini_split_ac': '/shop',
+        '/ductless-mini-split-installation-oahu': '/window-ac-installation',
+        '/mini-split-estimate': '/sizing',
+        '/mini-split-installation-cost-oahu': '/shop',
+        '/mini_split_ac_maintenance': '/ac-cleaning-oahu',
+        '/premium-mini-split-deep-cleaning-oahu': '/ac-cleaning-oahu',
+        '/mini-split-remote-control-not-working': '/ac-repair-oahu',
+        '/window-ac-vs-mini-split-oahu': '/shop/lg-dual-inverter-guide',
+        '/window-ac-installation-oahu': '/window-ac-installation',
+        '/ac-deep-cleaning-service-oahu': '/ac-cleaning-oahu',
+        '/maintenance': '/ac-cleaning-oahu',
         '/ac-repair': '/ac-repair-oahu',
         '/large-room-window-ac-18000-24000-btu': '/shop/large-room-window-ac-oahu',
         '/same-day-window-ac-pickup-oahu': '/window-ac-warehouse-pickup-waipahu',
         '/standard-window-ac-brackets-mounting-oahu': '/ac-brackets-exterior-security-mounting-oahu',
-        '/premium-mini-split-deep-cleaning-oahu': '/ac-cleaning-oahu',
         '/appointment': '/contact',
-        '/services': '/mini_split_ac',
+        '/services': '/shop',
     };
     if (CONSOLIDATED_REDIRECTS[pathLower]) {
         return makePermanentRedirect(CONSOLIDATED_REDIRECTS[pathLower]);
@@ -263,11 +272,7 @@ export function middleware(request: NextRequest) {
             return makePermanentRedirect(destination);
         }
         if (pathLower.includes('cleaning') || pathLower.includes('maintenance')) {
-            if (pathLower.includes('mini-split') || pathLower.includes('split-ac') || pathLower.includes('split_ac')) {
-                destination = '/mini_split_ac_maintenance';
-            } else {
-                destination = '/ac-cleaning-oahu';
-            }
+            destination = '/ac-cleaning-oahu';
             return makePermanentRedirect(destination);
         }
 

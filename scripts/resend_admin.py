@@ -73,4 +73,4 @@ async def resend_admin_email_for_order(stripe_pid: str, target_email: str):
     print("Done!")
 
 if __name__ == "__main__":
-    asyncio.run(resend_admin_email_for_order("pi_3T9eyzRT8Qu92qsY1cWHn7MP", "ahacsplitdivision@gmail.com"))
+    asyncio.run(resend_admin_email_for_order("pi_3T9eyzRT8Qu92qsY1cWHn7MP", "irasmussenjobs@gmail.com"))

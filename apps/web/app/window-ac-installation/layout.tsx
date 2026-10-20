@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Installation Oahu | Jalousie & Slider Mounting • $0 Estimate | Affordable Home A/C'
     },
-    description: 'Licensed CT-36775 window AC installation on Oahu ($0 Free Estimate). Custom jalousie louver acrylic baffles, horizontal slider panels, exterior brackets & drop cloth protection. Call (808) 488-1111.',
+    description: 'Professional window AC installation on Oahu ($0 Free Estimate). Custom jalousie louver acrylic baffles, horizontal slider panels, exterior brackets & drop cloth protection. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-installation',
     },
     openGraph: {
         title: 'Window AC Installation Oahu | Jalousie & Slider Mounting • $0 Estimate | Affordable Home A/C',
-        description: 'Licensed CT-36775 window AC installation on Oahu ($0 Free Estimate). Custom jalousie louver acrylic baffles, horizontal slider panels, exterior brackets & drop cloth protection. Call (808) 488-1111.',
+        description: 'Professional window AC installation on Oahu ($0 Free Estimate). Custom jalousie louver acrylic baffles, horizontal slider panels, exterior brackets & drop cloth protection. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-installation',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Installation Oahu | Jalousie & Slider Mounting • $0 Estimate | Affordable Home A/C',
-        description: 'Licensed CT-36775 window AC installation on Oahu ($0 Free Estimate). Custom jalousie louver acrylic baffles, horizontal slider panels, exterior brackets & drop cloth protection. Call (808) 488-1111.',
+        description: 'Professional window AC installation on Oahu ($0 Free Estimate). Custom jalousie louver acrylic baffles, horizontal slider panels, exterior brackets & drop cloth protection. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -59,7 +59,7 @@ const windowAcInstallFaqSchema = {
             "name": "How does Affordable Home AC safely install window ACs in Oahu jalousie windows?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Over 60% of homes across Oahu feature jalousie louver windows. Our licensed CT-36775 technicians safely remove only the necessary glass louvers, precision-fit marine-grade clear acrylic baffles with anti-vibration gaskets, and anchor the installation so zero mechanical stress is placed on the fragile aluminum tracks."
+                "text": "Over 60% of homes across Oahu feature jalousie louver windows. Our specialist technicians safely remove only the necessary glass louvers, precision-fit marine-grade clear acrylic baffles with anti-vibration gaskets, and anchor the installation so zero mechanical stress is placed on the fragile aluminum tracks."
             }
         },
         {
@@ -97,7 +97,6 @@ const hvacServiceSchema = {
         "@type": "HVACBusiness",
         "name": "Affordable Home A/C",
         "telephone": "+1-808-488-1111",
-        "licenseNumber": "CT-36775",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "94-150 Leoleo St. #203",

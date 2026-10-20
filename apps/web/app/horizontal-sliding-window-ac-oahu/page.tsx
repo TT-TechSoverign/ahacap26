@@ -36,7 +36,7 @@ const FAQS = [
     },
     {
         q: "How much does slider window installation cost?",
-        a: "We provide a $0 Free In-Home Estimate and upfront itemized quotes by licensed technicians (CT-36775) before any work begins, covering custom vertical filler panels and standard exterior support brackets matched to your window height and track profile."
+        a: "We provide a $0 Free In-Home Estimate and upfront itemized quotes by experienced technicians before any work begins, covering custom vertical filler panels and standard exterior support brackets matched to your window height and track profile."
     }
 ];
 
@@ -121,7 +121,7 @@ export default function HorizontalSlidingWindowAcPage() {
                                 Protective Drop-Cloth Standard
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our licensed HVAC technicians (Contractor License CT-36775) treat your home with the utmost respect. We lay clean floor drop cloths under every window opening during installation and clean up all debris, leaving your home spotless.
+                                Our experienced technicians treat your home with the utmost respect. We lay clean floor drop cloths under every window opening during installation and clean up all debris, leaving your home spotless.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
                                 <strong>$45 Rebate Qualified:</strong> All qualifying Energy Star Dual Inverter window models come with the pre-approved Hawaii Energy application PDF.

@@ -56,11 +56,11 @@ const FAQS = [
     },
     {
         q: "How does a technician test for an electrical short?",
-        a: "Our CT-36775 licensed technicians use calibrated digital multimeters and megohmmeters (meggers). We isolate the compressor terminals, measure resistance to ground (checking for infinite resistance), test capacitor microfarads against factory spec, and clamp the live electrical feed to monitor real-time amp draw."
+        a: "Our technicians use calibrated digital multimeters and megohmmeters (meggers). We isolate the compressor terminals, measure resistance to ground (checking for infinite resistance), test capacitor microfarads against factory spec, and clamp the live electrical feed to monitor real-time amp draw."
     },
     {
         q: "How much does the diagnostic inspection cost?",
-        a: "We charge a transparent flat rate of $175 anywhere on Oahu. This includes electrical testing, troubleshooting the breaker and unit, and providing an upfront itemized repair quote with zero hidden surprise fees."
+        a: "We provide upfront diagnostic troubleshooting anywhere on Oahu. This includes electrical testing, troubleshooting the breaker and unit, and providing an upfront itemized recommendation with zero hidden surprise fees."
     }
 ];
 
@@ -96,7 +96,7 @@ export default function AcTrippingBreakerPage() {
                 address: city.trim(),
                 city: city.trim(),
                 zip: '',
-                service_type: 'AC Electrical Diagnostic (Breaker Trip)',
+                service_type: 'Window AC Electrical Diagnostic (Breaker Trip)',
                 urgency: 'high',
                 notes: `Symptom: TRIPPING BREAKER | Timing: ${tripTiming.toUpperCase()} | Notes: ${notes.trim() || 'None'}`
             };
@@ -127,7 +127,7 @@ export default function AcTrippingBreakerPage() {
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <Zap className="size-3.5" />
-                        <span>Electrical Safety Alert &bull; Licensed Contractor CT-36775</span>
+                        <span>Electrical Safety Alert &bull; Insured Oahu Specialists</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
@@ -135,7 +135,7 @@ export default function AcTrippingBreakerPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Does your air conditioner instantly trip your electrical circuit breaker or shut off after running for 10 minutes? Learn what causes electrical overload in Oahu homes and book a $175 diagnostic inspection.
+                        Does your air conditioner instantly trip your electrical circuit breaker or shut off after running for 10 minutes? Learn what causes electrical overload in Oahu homes and book an inspection.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -144,7 +144,7 @@ export default function AcTrippingBreakerPage() {
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
                             <Calendar className="size-4" />
-                            Book $175 Electrical Diagnostic
+                            Book Electrical Diagnostic
                         </a>
                         <TrackedPhoneLink 
                             phone="8084881111"
@@ -206,15 +206,15 @@ export default function AcTrippingBreakerPage() {
                     </div>
                 </section>
 
-                {/* What $175 Service Includes */}
+                {/* What Service Includes */}
                 <section className="mb-16 p-8 rounded-3xl bg-slate-900/80 border border-white/10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div className="space-y-4">
                             <span className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] font-bold block">
-                                LICENSED ELECTRICAL DIAGNOSTIC
+                                PROFESSIONAL ELECTRICAL DIAGNOSTIC
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                                Complete $175 Electrical Inspection
+                                Complete Electrical &amp; Compressor Inspection
                             </h2>
                             <ul className="space-y-2.5 text-xs text-slate-300 font-sans">
                                 <li className="flex items-start gap-2">
@@ -231,7 +231,7 @@ export default function AcTrippingBreakerPage() {
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                                    <span>Inspection of disconnect box, fuses, terminal lugs, and gecko barrier</span>
+                                    <span>Inspection of LCDI power cord, wall receptacle, and control board</span>
                                 </li>
                             </ul>
                         </div>
@@ -240,7 +240,7 @@ export default function AcTrippingBreakerPage() {
                             <Activity className="size-12 text-primary mx-auto" />
                             <h3 className="font-header font-bold text-lg uppercase text-white">Need Technician Help?</h3>
                             <p className="text-xs text-slate-300">
-                                Call our Waipahu shop for immediate technician phone advice. We dispatch licensed technicians island-wide.
+                                Call our Waipahu shop for immediate technician phone advice. We dispatch window AC specialists island-wide.
                             </p>
                             <TrackedPhoneLink 
                                 phone="8084881111"
@@ -259,10 +259,10 @@ export default function AcTrippingBreakerPage() {
                             PREVENT ELECTRICAL FIRE HAZARD &bull; $0 TO BOOK
                         </span>
                         <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-tight mb-3">
-                            Schedule $175 Electrical Diagnostic
+                            Schedule Electrical Diagnostic
                         </h2>
                         <p className="text-xs sm:text-sm text-slate-300 font-sans">
-                            Fast dispatch by licensed Hawaii contractor CT-36775. Upfront pricing guaranteed.
+                            Fast dispatch by our Oahu window AC team. Upfront pricing guaranteed.
                         </p>
                     </div>
 
@@ -345,11 +345,11 @@ export default function AcTrippingBreakerPage() {
                                 disabled={isSubmitting}
                                 className="w-full py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 disabled:opacity-50"
                             >
-                                {isSubmitting ? 'Submitting...' : 'Request $175 Electrical Diagnostic'}
+                                {isSubmitting ? 'Submitting...' : 'Request Electrical Diagnostic'}
                             </button>
 
                             <p className="text-[10px] font-mono text-slate-400 text-center">
-                                $175 Flat Rate &bull; CT-36775 Licensed &bull; Drop-Cloth Protection Standard
+                                Upfront Estimates &bull; Insured Oahu Specialists &bull; Drop-Cloth Protection Standard
                             </p>
                         </form>
                     )}

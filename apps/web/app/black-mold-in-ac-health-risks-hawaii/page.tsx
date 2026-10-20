@@ -34,8 +34,8 @@ const FAQS = [
         a: "Our year-round high humidity (often 75% to 85%), combined with dark, damp indoor coils during cooling cycles and tropical ambient warmth, creates an ideal incubator. Units left uncleaned for over 12 months in windward or coastal areas almost universally harbor mold."
     },
     {
-        q: "How does Affordable Home A/C safely clean and eradicate mold?",
-        a: "For ductless mini splits, our $275 Premium Deep Cleaning completely dismantles the air handler, pulls the fan wheel, and applies non-toxic commercial hospital-grade antimicrobial wash. Technicians lay floor drop cloths to contain all wash fluid and protect your home."
+        q: "How does Affordable Home A/C safely resolve moldy Window ACs?",
+        a: "For lightly soiled newer window units, we provide on-site coil and filter sanitization with floor drop cloths to protect your home. For older window units with deep black mold colonization inside the sealed air channels, we supply and install brand-new, spore-free LG Dual Inverter and GE window units directly from our Waipahu warehouse."
     }
 ];
 
@@ -77,23 +77,23 @@ export default function BlackMoldAcPage() {
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <AlertOctagon className="size-3.5" />
-                        <span>Respiratory Health Advisory &bull; Clinical Eradication</span>
+                        <span>Respiratory Health Advisory &bull; Clean Air Solutions</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
-                        Black Mold in AC: <span className="text-primary italic">Health Risks & Removal Hawaii</span>
+                        Black Mold in AC: <span className="text-primary italic">Health Risks &amp; Removal Hawaii</span>
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Are black specks blowing onto your bed or furniture? In Hawaii&apos;s humid climate, mold colonies thrive inside dark air handlers, releasing millions of spores into your family&apos;s lungs. Learn the health signs and discover our hospital-grade sanitization process.
+                        Are black specks blowing onto your bed or furniture? In Hawaii&apos;s humid climate, mold colonies thrive inside dark air handlers, releasing millions of spores into your family&apos;s lungs. Learn the health signs and discover our Window AC cleaning and replacement solutions.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/mini_split_ac_maintenance"
+                            href="/ac-cleaning-oahu"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
-                            Schedule $275 Teardown Decontamination
+                            Explore Window AC Cleaning &amp; Replacement
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -140,24 +140,24 @@ export default function BlackMoldAcPage() {
                                 PROFESSIONAL PROTOCOL
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                                How We Eradicate Spores at the Source
+                                How We Restore Spore-Free Indoor Air
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Conventional wipe-downs only clean the surface you can see. True decontamination requires mechanical disassembly: removing the barrel fan wheel, soaking coils in hospital-grade antimicrobial solutions, and flushing the hidden drain channel.
+                                Conventional wipe-downs only clean the outer plastic grille. Depending on the age and condition of your window unit, we provide targeted coil and pan sanitization or replace heavily molded legacy units with brand-new LG Dual Inverter units.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                <strong>Clean Jobsite Guarantee:</strong> Drop cloths are laid beneath the unit to catch every drop of wash water and spore slurry, leaving your living room pristine.
+                                <strong>Clean Jobsite Guarantee:</strong> Drop cloths are laid beneath the window opening to catch every drop of dust and debris, leaving your living room pristine.
                             </p>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Mini Split Teardown Clean</span>
-                                <span className="font-header font-bold text-lg text-primary">$275 / head</span>
+                                <span className="text-xs text-slate-300">Window AC Cleaning &amp; Tune-Up</span>
+                                <span className="font-header font-bold text-lg text-primary">By Appointment</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Basic Mini Split Clean</span>
-                                <span className="font-header font-bold text-sm text-white">$175 / head</span>
+                                <span className="text-xs text-slate-300">New Spore-Free Window AC</span>
+                                <span className="font-header font-bold text-sm text-white">$395–$1,200 In Stock</span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-xs text-slate-300">Drop-Cloth Protection</span>

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Exterior Support Brackets & Mounting Oahu | Standard Brackets | Affordable Home A/C'
     },
-    description: 'Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU units, protect window sills, CT-36775 licensed.',
+    description: 'Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU units, protect window sills.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-brackets-exterior-security-mounting-oahu',
     },
     openGraph: {
         title: 'AC Exterior Support Brackets & Mounting Oahu | Standard Brackets | Affordable Home A/C',
-        description: 'Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU units, protect window sills, CT-36775 licensed.',
+        description: 'Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU units, protect window sills.',
         url: 'https://www.affordablehome-ac.com/ac-brackets-exterior-security-mounting-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Exterior Support Brackets & Mounting Oahu | Standard Brackets | Affordable Home A/C',
-        description: 'Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU units, protect window sills, CT-36775 licensed.',
+        description: 'Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU units, protect window sills.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

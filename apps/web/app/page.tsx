@@ -10,15 +10,15 @@ import Image from 'next/image';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC & Ductless Mini Splits Oahu | In-Stock $395+ • $0 Estimate | Affordable Home A/C',
+        absolute: 'LG & GE Window ACs & Window AC Cleaning Oahu | In-Stock $395+ | Affordable Home A/C',
     },
-    description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery) & Ductless Mini Split Installation ($0 Free In-Home Estimate). Licensed CT-36775 • (808) 488-1111.',
+    description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery), Jalousie Window AC Installation & Deep Window AC Cleaning • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com',
     },
     openGraph: {
-        title: 'Window AC & Ductless Mini Splits Oahu | In-Stock $395+ • $0 Estimate | Affordable Home A/C',
-        description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery) & Ductless Mini Split Installation ($0 Free In-Home Estimate). Licensed CT-36775 • (808) 488-1111.',
+        title: 'LG & GE Window ACs & Window AC Cleaning Oahu | In-Stock $395+ | Affordable Home A/C',
+        description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery), Jalousie Window AC Installation & Deep Window AC Cleaning • (808) 488-1111.',
         url: '/',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -32,7 +32,7 @@ export default function Homepage() {
             <div className="fixed inset-0 z-0">
                 <Image
                     src="/assets/hero-cards/ahac-hero-background-2.webp"
-                    alt="Expert HVAC Installation by Affordable Home A/C"
+                    alt="Expert Window AC Installation & Cleaning by Affordable Home A/C"
                     fill
                     sizes="(max-width: 768px) 180vh, 100vw"
                     className="object-cover object-center translate-y-0 scale-100 md:translate-y-[-10%] md:scale-110 [transform:translateZ(0)]" // Disable zoom/translate on mobile to prevent blurriness
@@ -55,7 +55,7 @@ export default function Homepage() {
                             "@id": "https://www.affordablehome-ac.com/#website",
                             "url": "https://www.affordablehome-ac.com",
                             "name": "Affordable Home A/C",
-                            "description": "In-stock LG Dual Inverter & GE Window ACs ($395–$1,200), window AC installation, ductless mini split installation ($0 Free Estimate), and mini split deep cleaning across Oahu, Hawaii.",
+                            "description": "In-stock LG Dual Inverter & GE Window ACs ($395–$1,200), custom jalousie window AC installation, and window AC deep cleaning across Oahu, Hawaii.",
                             "publisher": {
                                 "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
                             },
@@ -80,7 +80,7 @@ export default function Homepage() {
                 {/* 3. Featured In-Stock Oahu Inventory (Waipahu Warehouse Direct) */}
                 <HomeFeaturedInventory />
 
-                {/* 4. Dedicated Cooling Divisions & Services (Window AC & Split AC) */}
+                {/* 4. Dedicated Window AC & Cleaning Divisions */}
                 <HomeServicesDivisions />
 
                 {/* 6. Island Verified Customer Reviews Pavilion */}
@@ -90,7 +90,7 @@ export default function Homepage() {
                             variant="featured" 
                             limit={6}
                             title="Island Verified Customer Stories"
-                            subtitle="Hear how Oahu homeowners beat the humidity with whisper-quiet ductless mini-splits and energy-efficient window ACs."
+                            subtitle="Hear how Oahu homeowners beat the humidity with whisper-quiet LG Dual Inverter and GE Built-In window ACs and professional deep cleaning."
                             showFlywheel={true}
                         />
                     </div>

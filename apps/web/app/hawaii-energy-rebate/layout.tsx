@@ -45,10 +45,10 @@ const rebateFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "Does Affordable Home AC participate in Hawaii Energy rebates for ductless mini splits?",
+            "name": "Which window AC models qualify for the $45 Hawaii Energy rebate?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Our rebate participation is strictly for qualifying Energy Star window AC units. Hawaii Energy currently offers 0% cash rebates for residential ductless mini-split systems. For mini-split installations, we provide honest direct contractor pricing CT-36775 with zero inflated markup gimmicks."
+                "text": "Our rebate participation covers all qualifying Energy Star certified room window AC units, including our 6,000 BTU to 23,500 BTU LG Dual Inverter models stocked in our Waipahu warehouse."
             }
         },
         {
@@ -75,7 +75,6 @@ const hvacBusinessSchema = {
     "@type": "HVACBusiness",
     "name": "Affordable Home A/C",
     "telephone": "+1-808-488-1111",
-    "licenseNumber": "CT-36775",
     "address": {
         "@type": "PostalAddress",
         "streetAddress": "94-150 Leoleo St. #203",

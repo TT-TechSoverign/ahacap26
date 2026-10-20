@@ -27,16 +27,16 @@ const FAQS = [
         a: "Without the fan drawing air across the condenser coils, high-pressure superheated refrigerant cannot condense into liquid. Head pressure and temperatures skyrocket within 2 to 3 minutes, forcing the compressor into high-pressure thermal overload cutoff and risking permanent motor damage."
     },
     {
-        q: "What is the most common reason an outdoor fan motor stops spinning?",
-        a: "In Hawaii, the leading cause is a failed dual-run capacitor where the 'FAN' terminal has lost microfarad rating due to high ambient heat. Other frequent causes include bearing seizure from salt air corrosion or a shorted DC brushless fan motor on mini split inverters."
+        q: "What is the most common reason a condenser fan motor stops spinning?",
+        a: "In Hawaii, the leading cause is a failed dual-run capacitor where the 'FAN' terminal has lost microfarad rating due to high ambient heat. Other frequent causes include bearing seizure from salt air corrosion or a shorted DC brushless fan motor on inverter units."
     },
     {
         q: "Should I turn off the air conditioner right away?",
-        a: "Yes. Running an air conditioner with a dead outdoor fan will quickly overheat the compressor, degrade expensive compressor lubricant, and can permanently burn out the motor windings. Shut down the system immediately."
+        a: "Yes. Running an air conditioner with a dead condenser fan will quickly overheat the compressor, degrade expensive compressor lubricant, and can permanently burn out the motor windings. Shut down the system immediately."
     },
     {
         q: "What does your $175 diagnostic include?",
-        a: "Our licensed technician tests fan capacitor microfarads, measures winding resistance between common, start, and run poles, tests DC pulse voltages from the inverter board, and inspects the physical shaft bearings."
+        a: "Our technician tests fan capacitor microfarads, measures winding resistance between common, start, and run poles, tests DC pulse voltages from the inverter board, and inspects the physical shaft bearings."
     }
 ];
 
@@ -51,7 +51,7 @@ const FAN_FAILURES = [
     },
     {
         title: "DC Inverter Motor Driver Failure",
-        desc: "Mini splits use variable-speed DC brushless fan motors. Blown output transistors on the outdoor main control board prevent control signals from reaching the motor."
+        desc: "Inverter units use variable-speed DC brushless fan motors. Blown output transistors on the main control board prevent control signals from reaching the motor."
     },
     {
         title: "Thermal Limit Cutout Tripped",
@@ -78,11 +78,11 @@ export default function OutdoorFanNotSpinningPage() {
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
-                        Outdoor AC Fan Not Spinning? <span className="text-primary italic">Causes & Repair Oahu</span>
+                        Outdoor AC Fan Not Spinning? <span className="text-primary italic">Causes &amp; Repair Oahu</span>
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        If your outdoor condenser fan is sitting still while the compressor hums or the unit repeatedly shuts down after a few minutes, head pressure is dangerously high. Our licensed technicians diagnose capacitors, motor bearings, and inverter boards for a transparent <span className="text-white font-bold">$175 flat rate</span>.
+                        If your condenser fan is sitting still while the compressor hums or the unit repeatedly shuts down after a few minutes, head pressure is dangerously high. Our technicians diagnose capacitors, motor bearings, and inverter boards for a transparent <span className="text-white font-bold">$175 flat rate</span>.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -108,7 +108,7 @@ export default function OutdoorFanNotSpinningPage() {
                     <div className="text-center mb-10">
                         <span className="font-mono text-xs text-primary uppercase font-bold tracking-wider block mb-2">DIAGNOSTIC FAILURE MODES</span>
                         <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-tight">
-                            Why the Outdoor Fan Stops Spinning
+                            Why the Condenser Fan Stops Spinning
                         </h2>
                     </div>
 
@@ -135,13 +135,13 @@ export default function OutdoorFanNotSpinningPage() {
                                 TRUCK-STOCKED REPAIRS
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                                Fast On-Site Capacitor & Motor Replacement
+                                Fast On-Site Capacitor &amp; Motor Diagnostics
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Over 60% of non-spinning outdoor fans on Oahu are resolved by simply replacing a degraded dual-run capacitor. Our technicians carry universal capacitors and test microfarad ratings on the spot.
+                                Over 60% of non-spinning condenser fans on Oahu are resolved by simply replacing a degraded dual-run capacitor. Our technicians carry universal capacitors and test microfarad ratings on the spot.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                If the motor itself has seized from salt-air corrosion, we provide an upfront, itemized quote for an OEM replacement motor and install it with licensed expertise (CT-36775).
+                                If the motor itself has seized from salt-air corrosion on an older window unit, we provide direct Waipahu warehouse replacement options ($395–$1,200) so you never overpay for an uneconomical repair.
                             </p>
                         </div>
 
@@ -151,12 +151,12 @@ export default function OutdoorFanNotSpinningPage() {
                                 <span className="font-header font-bold text-lg text-primary">$175 Flat Rate</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Capacitor Testing & Replacement</span>
+                                <span className="text-xs text-slate-300">Capacitor Testing &amp; Replacement</span>
                                 <span className="font-header font-bold text-xs text-white">Truck Stock Available</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-emerald-400">CT-36775</span>
+                                <span className="text-xs text-slate-300">Waipahu Replacement Stock</span>
+                                <span className="font-header font-bold text-xs text-emerald-400">LG &amp; GE In Stock</span>
                             </div>
                         </div>
                     </div>

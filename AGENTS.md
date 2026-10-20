@@ -51,10 +51,10 @@ This document defines the agent architecture, roles, execution protocols, and op
 ### Sub-Master 4: Growth & Market Grounding (`submaster_growth_grounding`)
 - **Scope**: Search engine visibility, 22-city Oahu coverage, climate economics, HECO rates.
 - **Agents**:
-  - `agent_seo_metadata`: Audits HTML/XML sitemaps, canonical tags, and city landing pages.
+  - `agent_seo_metadata`: Audits HTML/XML sitemaps, canonical tags, and city landing pages across 101 canonical routes.
   - `agent_oahu_grounding`: Calibrates power consumption against HECO ~44.2¢/kWh residential rates.
   - `agent_market_research`: Tracks Honolulu competitor pricing and Waipahu pickup advantages.
-  - `agent_heco_rebate_strategist`: Anchors Hawaii Energy mini-split energy rebate messaging.
+  - `agent_heco_rebate_strategist`: Anchors Hawaii Energy $45 Window AC energy rebate messaging.
   - `agent_gsc_ga4_analytics`: Monitors real-time Google Search Console & GA4 telemetry.
   - `agent_schema_metadata_engine`: Validates JSON-LD rich snippets (Product, FAQ, LocalBusiness).
   - `agent_high_intent_planner`: Optimizes high-converting service area pathways.
@@ -63,16 +63,16 @@ This document defines the agent architecture, roles, execution protocols, and op
 - **Scope**: Intake dispatch, lead qualification, Waipahu warehouse pickup, customer lifecycle.
 - **Agents**:
   - `agent_crm_dispatch`: Triages incoming appointment leads and monitors the dispatch queue.
-  - `agent_customer_lifecycle`: Automates post-service follow-up and seasonal maintenance reminders.
-  - `agent_intake_triage`: Analyzes HVAC symptom reports (e.g. blinking lights, refrigerant leaks).
+  - `agent_customer_lifecycle`: Automates post-service follow-up and seasonal window AC cleaning reminders.
+  - `agent_intake_triage`: Analyzes Window AC symptom reports (e.g. blinking lights, warm air, musty odors).
 
 ### Sub-Master 6: Deployment & Quality Swarm (`submaster_deployment_quality`)
 - **Scope**: Pre-flight checks, build QA, zero-downtime container swaps, non-regression verification, 3D spatial graphics.
 - **Agents**:
   - `agent_deployment_guardian`: Coordinates zero-downtime Docker deployments on Hostinger VPS.
-  - `agent_build_qa`: Verifies TypeScript compilation and Next.js static asset bundling.
+  - `agent_build_qa`: Verifies TypeScript compilation and Next.js static asset bundling across 101 canonical routes.
   - `agent_regression_sentinel`: Validates By-Appointment-First rules and prevents upfront pay gates.
-  - `agent_spatial_visualizer`: Supervise Blender 4.1 headless raytracing, caliper overlays, and 3D window cutaways.
+  - `agent_spatial_visualizer`: Supervises Blender 4.1 headless raytracing, caliper overlays, and 3D window cutaways.
 
 ### Sub-Master 7: SERP & Intent Acquisition (`submaster_serp_acquisition`)
 - **Scope**: Search query intent harvesting, SERP snippet click-through optimization, Google Merchant feeds.
@@ -85,7 +85,7 @@ This document defines the agent architecture, roles, execution protocols, and op
 - **Scope**: Mobile checkout unblocking, 1-tap mobile wallets, buyer reassurance, core web vitals.
 - **Agents**:
   - `agent_mobile_checkout_sentinel`: Validates 1-tap Apple Pay, Google Pay, and Link availability on mobile devices.
-  - `agent_trust_authority_grounder`: Embeds Waipahu warehouse proof, 1-year manufacturer warranty, and CT-36775 badge.
+  - `agent_trust_authority_grounder`: Embeds Waipahu warehouse proof, 1-year manufacturer warranty, and Est. 2005 Oahu trust badges.
   - `agent_zero_friction_navigator`: Ensures zero checkout dead-ends, instant filter resets, and dispatch phone bridges.
   - `agent_speed_core_vital_sentinel`: Enforces mobile sub-100ms response, zero CLS, and universal zero-cache headers.
 
@@ -94,7 +94,7 @@ This document defines the agent architecture, roles, execution protocols, and op
 - **Agents**:
   - `agent_comfyui_bridge`: Manages workstation RTX 4090 GPU (24GB VRAM) and ComfyUI API queue at 127.0.0.1:8188.
   - `agent_avatar_portrait_crafter`: Synthesizes demographic prompt matrices for authentic Oahu homeowner portraits.
-  - `agent_trust_medallion_forge`: Generates 3D golden review medallions, Waipahu warehouse proof, and CT-36775 shields.
+  - `agent_trust_medallion_forge`: Generates 3D golden review medallions, Waipahu warehouse proof, and Est. 2005 shields.
   - `agent_asset_optimizer_sentinel`: Post-processes outputs (< 80KB WebP, zero CLS bounds) and manages Polynesian SVG/CSS fallbacks.
 
 ### Sub-Master 10: Executive Analytics & Monthly Intelligence (`submaster_executive_reporting`)

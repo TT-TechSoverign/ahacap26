@@ -7,8 +7,8 @@ export function Partnerships({
     titleHighlight,
     narrativeParam,
     brandsWindow,
-    brandsMiniSplit,
-    brandsCentral,
+    brandsThruWall,
+    brandsCare,
     styles
 }: PartnershipsProps) {
     return (
@@ -62,7 +62,7 @@ export function Partnerships({
                         </div>
                     </div>
 
-                    {/* Mini Splits */}
+                    {/* Thru-The-Wall AC */}
                     <div className="industrial-card p-10 border border-white/5 rounded-2xl flex flex-col gap-8 relative overflow-hidden group hover:border-accent/50 hover:shadow-[0_0_50px_-10px_rgba(34,211,238,0.3)] transition-all duration-500 bg-white/[0.02] min-h-[300px]">
                         <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div className="absolute inset-0 rounded-lg ring-1 ring-white/10 group-hover:ring-accent/30 transition-all duration-500 animate-[pulse_5s_cubic-bezier(0.4,0,0.6,1)_infinite]"></div>
@@ -70,14 +70,14 @@ export function Partnerships({
                         <div className="relative z-10 pb-6 border-b border-white/5 text-center">
                             <div className="flex items-center justify-center gap-3 mb-2 text-accent group-hover:scale-110 transition-transform duration-500">
                                 <Fan className="size-8" />
-                                <h3 className="font-header font-bold text-2xl uppercase tracking-wide">Mini Splits</h3>
+                                <h3 className="font-header font-bold text-2xl uppercase tracking-wide">26&quot; Thru-Wall AC</h3>
                             </div>
                             <div className="h-0.5 w-12 mx-auto bg-accent/30 rounded-full group-hover:w-24 transition-all duration-500"></div>
                         </div>
 
                         <div className="grid grid-cols-1 gap-10 items-center justify-items-center flex-1 relative z-10 py-4">
-                            {(brandsMiniSplit || []).map((brand, i) => (
-                                <Link key={i} href="/contact" className="transition-all duration-300 hover:scale-110 hover:brightness-125">
+                            {(brandsThruWall || []).map((brand, i) => (
+                                <Link key={i} href="/shop" className="transition-all duration-300 hover:scale-110 hover:brightness-125">
                                     <span className={`${brand.colorClass} ${brand.fontClass} drop-shadow-xl`}>
                                         {brand.name}
                                     </span>
@@ -86,7 +86,7 @@ export function Partnerships({
                         </div>
                     </div>
 
-                    {/* Central AC */}
+                    {/* Window AC Care */}
                     <div className="industrial-card p-10 border border-white/5 rounded-2xl flex flex-col gap-8 relative overflow-hidden group hover:border-primary/50 hover:shadow-[0_0_50px_-10px_rgba(0,174,239,0.3)] transition-all duration-500 bg-white/[0.02] min-h-[300px]">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div className="absolute inset-0 rounded-lg ring-1 ring-white/10 group-hover:ring-primary/30 transition-all duration-500 animate-[pulse_4.5s_cubic-bezier(0.4,0,0.6,1)_infinite]"></div>
@@ -94,14 +94,14 @@ export function Partnerships({
                         <div className="relative z-10 pb-6 border-b border-white/5 text-center">
                             <div className="flex items-center justify-center gap-3 mb-2 text-primary group-hover:scale-110 transition-transform duration-500">
                                 <Wind className="size-8" />
-                                <h3 className="font-header font-bold text-2xl uppercase tracking-wide">Central AC</h3>
+                                <h3 className="font-header font-bold text-2xl uppercase tracking-wide">Window AC Cleaning</h3>
                             </div>
                             <div className="h-0.5 w-12 mx-auto bg-primary/30 rounded-full group-hover:w-24 transition-all duration-500"></div>
                         </div>
 
                         <div className="flex flex-col justify-center items-center gap-10 flex-1 relative z-10 py-4">
-                            {(brandsCentral || []).map((brand, i) => (
-                                <Link key={i} href="/contact" className="cursor-pointer transition-all duration-300 transform hover:scale-110 hover:brightness-125">
+                            {(brandsCare || []).map((brand, i) => (
+                                <Link key={i} href="/ac-cleaning-oahu" className="cursor-pointer transition-all duration-300 transform hover:scale-110 hover:brightness-125">
                                     <span className={`${brand.colorClass} ${brand.fontClass} drop-shadow-xl`}>
                                         {brand.name}
                                     </span>

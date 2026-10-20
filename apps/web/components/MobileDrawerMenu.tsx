@@ -64,19 +64,19 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
             ]
         },
         {
-            title: 'Split AC & Service Division',
+            title: 'Window AC Cleaning & Care Division',
             links: [
-                { text: 'Ductless Mini-Splits', href: '/mini_split_ac', icon: Compass, badge: '$0 Estimate' },
-                { text: 'Mini Split Deep Cleaning', href: '/ac-cleaning-oahu', icon: Sparkles, badge: '$175+' },
-                { text: 'AC Diagnostic & Repair', href: '/ac-repair-oahu', icon: Wrench, badge: '$175 Flat' },
-                { text: 'Mini Split Maintenance', href: '/mini_split_ac_maintenance', icon: ShieldCheck },
+                { text: 'Window AC Deep Cleaning', href: '/ac-cleaning-oahu', icon: Sparkles, badge: 'Mold & Coil' },
+                { text: 'Window AC Maintenance', href: '/maintenance', icon: ShieldCheck, badge: 'Sanitize' },
+                { text: 'Window AC Troubleshooting', href: '/ac-repair-oahu', icon: Wrench, badge: 'Diagnostics' },
+                { text: '26" Wall Sleeve Replacement', href: '/thru-the-wall-ac-replacement-oahu', icon: Store },
             ]
         },
         {
             title: 'Tools & Guides',
             links: [
                 { text: 'Verified Reviews (142+)', href: '/reviews', icon: Star, badge: '4.9 ★' },
-                { text: 'Room AC Sizing Wizard', href: '/sizing', icon: Compass },
+                { text: 'Window AC BTU Calculator', href: '/sizing', icon: Compass },
                 { text: 'Clean vs. Replace Guide', href: '/clean-vs-replace-window-ac', icon: Compass },
                 { text: 'Island Service Areas', href: '/service-areas', icon: MapPin },
             ]
@@ -127,7 +127,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                                 Order Online or Book $0 In-Home Estimate
                             </p>
                             <p className="text-slate-300 text-[11px] font-sans leading-relaxed">
-                                Order brand-new LG &amp; GE Window ACs online (${minPrice}–${maxPrice.toLocaleString()}) for free Waipahu pickup or $50 Oahu delivery. Zero upfront cost to book mini split or window AC installation estimates.
+                                Order brand-new LG &amp; GE Window ACs online (${minPrice}–${maxPrice.toLocaleString()}) for free Waipahu pickup or $50 Oahu delivery. Zero upfront cost to book window AC installation or deep cleaning estimates.
                             </p>
                         </div>
                         <div className="grid grid-cols-2 gap-2 pt-1">
@@ -232,7 +232,7 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                             Waipahu Warehouse
                         </div>
                         <p className="text-xs text-slate-300 font-medium">94-150 Leoleo St. #203, Waipahu, HI 96797</p>
-                        <p className="text-[10px] text-slate-500">Pickups by appointment • Licensed LIC# CT-36775</p>
+                        <p className="text-[10px] text-slate-500">Pickups by appointment • Insured Oahu Specialists</p>
                     </div>
                 </div>
                 

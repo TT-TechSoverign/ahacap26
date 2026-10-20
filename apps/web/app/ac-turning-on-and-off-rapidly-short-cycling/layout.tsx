@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu | Affordable Home A/C'
     },
-    description: 'Why is your air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils. CT-36775 licensed.',
+    description: 'Why is your air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-turning-on-and-off-rapidly-short-cycling',
     },
     openGraph: {
         title: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu | Affordable Home A/C',
-        description: 'Why is your air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils. CT-36775 licensed.',
+        description: 'Why is your air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
         url: 'https://www.affordablehome-ac.com/ac-turning-on-and-off-rapidly-short-cycling',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu | Affordable Home A/C',
-        description: 'Why is your air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils. CT-36775 licensed.',
+        description: 'Why is your air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

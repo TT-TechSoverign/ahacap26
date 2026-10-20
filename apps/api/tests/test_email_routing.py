@@ -15,7 +15,6 @@ def test_ceo_shield_when_test_flag_is_true():
     assert recipients == [DEV_TEST_EMAIL]
     assert bcc == []
     assert "brian@affordablehome-ac.com" not in recipients
-    assert "ahacsplitdivision@gmail.com" not in recipients
 
 def test_ceo_shield_when_staging_environment():
     """Ensure CEO is 100% excluded when IS_STAGING is True."""
@@ -27,12 +26,11 @@ def test_ceo_shield_when_staging_environment():
         assert "brian@affordablehome-ac.com" not in recipients
 
 def test_production_routing_includes_admins():
-    """Ensure production real orders include primary admin emails."""
+    """Ensure production real orders route to Brian as primary and DEV_TEST_EMAIL on BCC."""
     with patch.object(email_module, "IS_STAGING", False):
         recipients, bcc, is_shielded = get_admin_notification_recipients(is_test=False)
         assert is_shielded is False
-        assert "brian@affordablehome-ac.com" in recipients
-        assert "ahacsplitdivision@gmail.com" in recipients
+        assert recipients == ["brian@affordablehome-ac.com"]
         assert DEV_TEST_EMAIL in bcc
 
 @pytest.mark.asyncio

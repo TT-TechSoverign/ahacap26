@@ -106,8 +106,8 @@ const FAQS = [
         a: "The Hawaii Energy rebate is exactly $45 for qualifying Energy Star certified room window air conditioners. It comes as a direct cash rebate check mailed to your Oahu address or credited via your HECO account."
     },
     {
-        q: "Are mini-split air conditioners eligible for this rebate?",
-        a: "No. This program is strictly for qualifying Energy Star window AC units. Hawaii Energy offers 0% cash rebates for residential ductless mini-split systems on Oahu. At Affordable Home A/C, we provide transparent, honest CT-36775 direct contractor pricing rather than inflating initial quotes."
+        q: "Which window air conditioners are eligible for this rebate?",
+        a: "This program applies to qualifying Energy Star certified room window AC units, including our 6,000 BTU to 23,500 BTU LG Dual Inverter models stocked in Waipahu. At Affordable Home A/C, we provide honest direct warehouse pricing plus your official $45 rebate application."
     },
     {
         q: "Do I get the official pre-approved rebate application with my purchase?",
@@ -188,19 +188,19 @@ export default function HawaiiEnergyRebatePage() {
                         <div className="p-5 rounded-2xl bg-emerald-500/5 border border-emerald-500/20">
                             <div className="flex items-center gap-2 text-emerald-400 font-header font-bold text-base uppercase mb-2">
                                 <CheckCircle2 className="size-5 shrink-0" />
-                                Window AC Units: $45 Cash Rebate
+                                Energy Star LG Dual Inverters: $45 Cash Rebate
                             </div>
                             <p className="text-xs text-slate-300 leading-relaxed font-sans">
                                 Applies to all qualifying Energy Star certified room window air conditioners. Every eligible LG Dual Inverter purchased through Affordable Home A/C comes with the required documentation for instant qualification.
                             </p>
                         </div>
-                        <div className="p-5 rounded-2xl bg-amber-500/5 border border-amber-500/20">
-                            <div className="flex items-center gap-2 text-amber-400 font-header font-bold text-base uppercase mb-2">
-                                <AlertCircle className="size-5 shrink-0" />
-                                Mini-Split Systems: Direct Pricing Overview
+                        <div className="p-5 rounded-2xl bg-cyan-500/5 border border-cyan-500/20">
+                            <div className="flex items-center gap-2 text-cyan-400 font-header font-bold text-base uppercase mb-2">
+                                <Sparkles className="size-5 shrink-0" />
+                                HECO Electric Bill Savings: Up to 40% Reduction
                             </div>
                             <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                                Hawaii Energy currently offers <strong className="text-white">0% cash rebates</strong> for residential ductless mini-split systems. We do not participate in deceptive inflated contractor quotes—we provide honest direct CT-36775 contractor pricing.
+                                Beyond the upfront <strong className="text-white">$45 cash rebate</strong>, LG Dual Inverter variable-speed compressors slash monthly HECO ~44.2¢/kWh electricity consumption by up to 40% compared to older single-speed rotary window units.
                             </p>
                         </div>
                     </div>
@@ -331,7 +331,7 @@ export default function HawaiiEnergyRebatePage() {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <ShieldCheck className="size-4 text-emerald-400 shrink-0" />
-                                    <span><strong>License CT-36775:</strong> Full 1-Year Manufacturer Warranty + Local Support</span>
+                                    <span><strong>Official Warranty:</strong> Full 1-Year Manufacturer Warranty + Local Support</span>
                                 </div>
                             </div>
                         </div>

@@ -23,7 +23,7 @@ def generate_receipt_pdf(order_id: str, items: list, total_cents: int, date: dat
     c.setFont("Helvetica", 10)
     c.drawString(0.5*inch, height - 0.9*inch, "94-150 Leoleo St. #203")
     c.drawString(0.5*inch, height - 1.05*inch, "Waipahu, HI 96797")
-    c.drawString(0.5*inch, height - 1.2*inch, "Phone: (808) 488-1111 • License CT-36775")
+    c.drawString(0.5*inch, height - 1.2*inch, "Phone: (808) 488-1111 • Waipahu Warehouse Direct")
 
     c.setFont("Helvetica-Bold", 16)
     c.drawRightString(width - 0.5*inch, height - 0.6*inch, "RECEIPT")
@@ -89,7 +89,7 @@ def generate_receipt_pdf(order_id: str, items: list, total_cents: int, date: dat
     # --- Footer ---
     c.setFillColor(colors.HexColor("#64748b"))
     c.setFont("Helvetica", 9)
-    c.drawCentredString(width/2, 1*inch, "Thank you for your business! • Hawaii Contractor License CT-36775")
+    c.drawCentredString(width/2, 1*inch, "Thank you for your business! • Waipahu Warehouse Direct • Insured Oahu Cooling Specialists")
     c.drawCentredString(width/2, 0.85*inch, "Questions? Contact Waipahu Dispatch at (808) 488-1111 or office@affordablehome-ac.com")
 
     c.showPage()

@@ -33,7 +33,6 @@ export default function robots(): MetadataRoute.Robots {
         '/checkout/*',
         '/maintenance',
         '/maintenance/',
-        '/central-ac',
         '/puck',
         '/puck/',
         '/*?*_rsc=*',

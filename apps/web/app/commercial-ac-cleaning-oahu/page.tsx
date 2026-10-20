@@ -29,19 +29,19 @@ const FAQS = [
         a: "Dirty coils and moldy blower wheels cause musty smells that clients notice immediately, degrade employee cognitive performance, and drive up HECO commercial electric bills substantially. Regular cleaning protects customer satisfaction and brand reputation."
     },
     {
-        q: "Do you service both ductless mini split systems and window ACs?",
-        a: "Yes. We service high-wall mini splits on-site with floor drop cloths ($175 Basic, $275 Premium Teardown). For commercial window units, we provide on-site diagnostics, filter servicing, and direct warehouse replacement installations."
+        q: "Do you provide both Window AC cleaning and replacement for commercial offices?",
+        a: "Yes. We service commercial window air conditioners on-site with floor drop cloths, filter and coil sanitization, and direct Waipahu warehouse replacement installations."
     },
     {
-        q: "Are you fully licensed and insured for commercial property management?",
-        a: "Yes. Affordable Home A/C is fully licensed (Hawaii Contractor License CT-36775) and carry comprehensive general liability and workers' compensation coverage suitable for commercial leases and HOA requirements."
+        q: "Are you insured for commercial property management?",
+        a: "Yes. Affordable Home A/C is fully insured and carries comprehensive general liability coverage suitable for commercial offices, retail spaces, and property management requirements."
     }
 ];
 
 const INDUSTRIES = [
     {
         title: "Medical & Dental Practices",
-        desc: "Strict clinical hygiene requirements. We eradicate microbial biofilm and fungal spores from treatment room air handlers."
+        desc: "Strict hygiene requirements. We eradicate microbial biofilm and fungal spores from office window AC units."
     },
     {
         title: "Boutique Retail & Showrooms",
@@ -49,7 +49,7 @@ const INDUSTRIES = [
     },
     {
         title: "Hair Salons & Spas",
-        desc: "Remove aerosol hairspray buildup, skin flakes, and humidity from clogged salon split systems to restore high airflow."
+        desc: "Remove aerosol hairspray buildup, skin flakes, and humidity from clogged salon window AC systems to restore high airflow."
     },
     {
         title: "Offices & Coworking Suites",
@@ -80,7 +80,7 @@ export default function CommercialAcCleaningPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Boutique retailers, dental clinics, salons, and professional offices across Honolulu and Oahu trust our licensed technicians for clean, courteous daytime mini split cleaning and maintenance. Spotless floor drop-cloth protection guaranteed.
+                        Boutique retailers, dental clinics, salons, and professional offices across Honolulu and Oahu trust our technicians for clean, courteous daytime window AC cleaning, maintenance, and replacement. Spotless floor drop-cloth protection guaranteed.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -132,13 +132,13 @@ export default function CommercialAcCleaningPage() {
                                 ZERO PROPERTY IMPACT
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                                Protective Drop-Cloth & Equipment Shrouding
+                                Protective Drop-Cloth &amp; Equipment Shrouding
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
                                 We protect your computers, display merchandise, dental chairs, and fine flooring. Every service includes complete floor drop cloths and closed containment buckets to guarantee zero water runoff.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
-                                <strong>Licensed CT-36775 & Insured:</strong> Full compliance documentation, W-9, and certificates of insurance provided upon request for commercial leases and property managers.
+                                <strong>Insured Oahu Cooling Specialists:</strong> Full compliance documentation, W-9, and certificates of insurance provided upon request for commercial leases and property managers.
                             </div>
                         </div>
 
@@ -146,7 +146,7 @@ export default function CommercialAcCleaningPage() {
                             <FileText className="size-10 text-primary mx-auto" />
                             <h3 className="font-header font-bold text-lg uppercase text-white">Itemized Business Receipts</h3>
                             <p className="text-xs text-slate-300">
-                                Detailed breakdown of each unit serviced, licensed contractor CT-36775 verification, and Hawaii GET compliance for your business expense records.
+                                Detailed breakdown of each unit serviced and Hawaii GET compliance for your business expense records.
                             </p>
                             <Link href="/contact" className="inline-flex px-6 py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider">
                                 Contact Dispatch to Inquire

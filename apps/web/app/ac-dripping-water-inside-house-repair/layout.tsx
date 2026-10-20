@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Dripping Water Inside House Repair Oahu | Drain Clearing | Affordable Home A/C'
     },
-    description: 'Is your AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain line clearing, pan repair, and leveling by licensed CT-36775 contractors. Call (808) 488-1111.',
+    description: 'Is your window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-dripping-water-inside-house-repair',
     },
     openGraph: {
         title: 'AC Dripping Water Inside House Repair Oahu | Drain Clearing | Affordable Home A/C',
-        description: 'Is your AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain line clearing, pan repair, and leveling by licensed CT-36775 contractors. Call (808) 488-1111.',
+        description: 'Is your window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/ac-dripping-water-inside-house-repair',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Dripping Water Inside House Repair Oahu | Drain Clearing | Affordable Home A/C',
-        description: 'Is your AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain line clearing, pan repair, and leveling by licensed CT-36775 contractors. Call (808) 488-1111.',
+        description: 'Is your window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -37,7 +37,7 @@ const drippingFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Why is water dripping from my mini split or window AC inside my house?",
+            "name": "Why is water dripping from my window AC inside my house?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "In Hawaii's humid climate, air conditioners pull gallons of water from the air each day. The most common cause of indoor water leaks is a clogged condensate drain line choked with algae slime. Other common causes include an unlevel mounting bracket, a cracked drain pan, or frozen evaporator coils that melt faster than the pan can drain."

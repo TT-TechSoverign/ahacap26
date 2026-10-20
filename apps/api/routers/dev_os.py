@@ -71,7 +71,7 @@ class BrainThoughtRequest(BaseModel):
 
 class SessionSyncRequest(BaseModel):
     session_id: Optional[str] = "chat_session"
-    epoch: Optional[str] = "EPOCH_19"
+    epoch: Optional[str] = "EPOCH_20"
     summary: str
     achievements: Optional[List[str]] = None
     learnings: Optional[List[str]] = None
@@ -170,8 +170,8 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "timeframe": "June 2026",
             "commit_start": "dd09e699",
             "commit_end": "dc3abc5e",
-            "milestone": "Achieved 90-100 PageSpeed score: replaced Google Material Symbols with tree-shaken Lucide React icons, removed Framer Motion from root layout to prevent prefetch storms, self-hosted and preloaded Inter and Oswald variable fonts, and applied Critters CSS optimization. Bound Redis and Postgres strictly to loopback (127.0.0.1) with password authentication and rate limiting. Launched 'Celebrating America' 4th of July campaign with interactive 3D bento tilt cards, patriotic glow borders, and canvas firework sparks. Re-rendered product assets natively from SVG vectors via sharp to eliminate white halo artifacts. Executed the landmark Service Narrowing: purged all false 'emergency' and '24/7' claims, focused services strictly on Mini Split AC Repair and Waipahu Warehouse Window AC drop-offs, removed unsupported brand FAQs (LG/GE window), and deployed 22 Oahu city pages with verified localized FAQPage schemas and single-hop 301 redirects.",
-            "impact": "Sub-second mobile performance (90-100 score), total elimination of consumer protection liabilities, and dominance in Oahu mini-split repair search rankings."
+            "milestone": "Achieved 90-100 PageSpeed score: replaced Google Material Symbols with tree-shaken Lucide React icons, removed Framer Motion from root layout to prevent prefetch storms, self-hosted and preloaded Inter and Oswald variable fonts, and applied Critters CSS optimization. Bound Redis and Postgres strictly to loopback (127.0.0.1) with password authentication and rate limiting. Launched 'Celebrating America' 4th of July campaign with interactive 3D bento tilt cards, patriotic glow borders, and canvas firework sparks. Re-rendered product assets natively from SVG vectors via sharp to eliminate white halo artifacts. Executed the landmark Service Narrowing: purged all false 'emergency' and '24/7' claims, focused services on Window AC cleaning & installation and Waipahu Warehouse inventory, and deployed 22 Oahu city pages with verified localized FAQPage schemas and single-hop 301 redirects.",
+            "impact": "Sub-second mobile performance (90-100 score), total elimination of consumer protection liabilities, and dominance in Oahu window AC search rankings."
         },
         {
             "phase_id": "EPOCH_07_COMMERCE_HARDENING_JUL2026",
@@ -188,8 +188,8 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "timeframe": "August 2026",
             "commit_start": "c2d7c042",
             "commit_end": "6df891b3",
-            "milestone": "Neutralized Next.js App Router auth bypass vulnerability; purged all plaintext credentials from client-side bundles; implemented local pre-push secret scanner scripts/scan-secrets.ps1. Pinned PNPM to 9.0.0 and elevated Python security dependencies via Astral uv. Replaced risky wall-shielding and drywall protection claims with professional floor drop-cloth protection across all legal notices; eradicated blanket '100% guarantee' assertions. Standardized Waipahu bench immersion cleaning at flat $275. Implemented automated daily PostgreSQL snapshots to /var/backups/ahac_db with a 14-day rolling rotation lifecycle.",
-            "impact": "Zero exposed credentials, bulletproof legal compliance under Hawaii Contractor License CT-36775, and automated disaster-recovery backups."
+            "milestone": "Neutralized Next.js App Router auth bypass vulnerability; purged all plaintext credentials from client-side bundles; implemented local pre-push secret scanner scripts/scan-secrets.ps1. Pinned PNPM to 9.0.0 and elevated Python security dependencies via Astral uv. Replaced risky wall-shielding and drywall protection claims with professional floor drop-cloth protection across all legal notices; eradicated blanket '100% guarantee' assertions. Standardized Waipahu window AC cleaning & clean-vs-replace assessments. Implemented automated daily PostgreSQL snapshots to /var/backups/ahac_db with a 14-day rolling rotation lifecycle.",
+            "impact": "Zero exposed credentials, bulletproof legal compliance across Oahu operations, and automated disaster-recovery backups."
         },
         {
             "phase_id": "EPOCH_09_DEVOS_APPOINTMENT_SEP2026",
@@ -251,17 +251,26 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "timeframe": "September 27 - October 14, 2026",
             "commit_start": "8d1c44b9",
             "commit_end": "7bc460fb",
-            "milestone": "Purged competitor bashing and fabricated flat-rate packages, grounded electrical scope under License CT-36775 to licensed electrical subcontractors, upgraded homepage comparison visual checkmarks and mobile responsive layouts, and hardened CRM multi-stage invoice payment links with Deposit Paid vs Balance Due accounting and fresh Stripe session creation.",
+            "milestone": "Purged competitor bashing and fabricated flat-rate packages, grounded electrical scope to licensed electrical subcontractors, upgraded homepage comparison visual checkmarks and mobile responsive layouts, and hardened CRM multi-stage invoice payment links with Deposit Paid vs Balance Due accounting and fresh Stripe session creation.",
             "impact": "Bulletproof brand compliance, clear customer invoice accounting, and responsive visual polish."
         },
         {
             "phase_id": "EPOCH_19_LIVE_STOCK_REVIEWS_FLEET_ALIGNMENT_OCT2026",
             "title": "Live Homepage Stock Synchronization, Seed Stock Preservation, Reviews Grid Alignment & 40/40 Fleet Health",
-            "timeframe": "October 14, 2026",
+            "timeframe": "October 14-18, 2026",
             "commit_start": "e94be3d3",
-            "commit_end": "CURRENT",
+            "commit_end": "6dc139e0",
             "milestone": "Connected HomeFeaturedInventory and WarehouseInventoryGrid to live /api/v1/products (cache: no-store) so admin stock=0 updates immediately display Out of Stock badges and disable Add to Cart buttons on the homepage and warehouse grid. Hardened seed_products.py and migrate_and_reseed_catalog so catalog spec migrations never overwrite live PostgreSQL stock or pricing. Fixed desktop ReviewsPavilion 3-column full-width card layout and reclassified review service tags (zero Deep Teardown Cleaning references). Replaced pandas in reporting_engine.py with native Python csv and added python-docx to requirements.txt so all 40/40 Sovereign Agents pass health checks inside prod-api.",
             "impact": "Zero out-of-stock customer friction on homepage, permanent database stock preservation across deploys, balanced homepage review cards, and 40/40 healthy Sovereign Agent Fleet."
+        },
+        {
+            "phase_id": "EPOCH_20_WINDOW_AC_CONSOLIDATION_OCT2026",
+            "title": "100% LG & GE Window AC & Window AC Cleaning Consolidation",
+            "timeframe": "October 19, 2026",
+            "commit_start": "6dc139e0",
+            "commit_end": "CURRENT",
+            "milestone": "Consolidated Affordable Home A/C 100% around LG Dual Inverter & GE Built-In/Standard Window AC warehouse sales ($395-$1,200; 16 models), custom jalousie & standard window installation, and Window AC cleaning & clean-vs-replace assessments across all 101 canonical routes. Configured 301 permanent redirects for retired routes and unified admin email routing to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC.",
+            "impact": "Streamlined 100% Window AC & Window AC Cleaning focus, zero e-commerce regression, and unified CEO + Developer email telemetry."
         }
     ],
     "knowledge_base": {
@@ -280,36 +289,36 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "cooling_load_zones": "Leeward surge (Kapolei/Ewa 91°F) vs Windward humidity (Kailua/Kaneohe 74% RH)",
             "central_depot": "Waipahu Industrial Warehouse (94-150 Leoleo St #203, Waipahu, HI 96797)",
             "freight_advantage": "Same-day warehouse pickup eliminates weeks of mainland shipping delays",
-            "license_authority": "Hawaii State Contractor License CT-36775",
+            "license_authority": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
             "salt_air_defense": "Marine salt aerosol causes condenser coil galvanic corrosion within 18-36 months without annual anti-corrosion flush",
-            "mold_biofilm_pathology": "74% average relative humidity fosters Cladosporium & Aspergillus biofilm in indoor mini-split blower wheels within 6-12 months"
+            "mold_biofilm_pathology": "74% average relative humidity fosters Cladosporium & Aspergillus biofilm in indoor window AC coils and blower wheels within 6-12 months"
         },
         "service_pricing_matrix": {
-            "installation_replacement_estimates": "$0 Free In-Home Estimate for new or replacement mini-split and window AC installations",
-            "service_quotes": "Custom upfront quotes by licensed technicians (CT-36775); zero upfront booking payment barriers and no fabricated flat-rate packages",
+            "installation_replacement_estimates": "$0 Free In-Home Estimate for new or replacement window AC installations",
+            "service_quotes": "Custom upfront quotes by Oahu cooling specialists; zero upfront booking payment barriers and no fabricated flat-rate packages",
             "window_ac_policy": "Waipahu warehouse-direct inventory sales ($395 to $1,200), custom jalousie & standard window installation, and clean-vs-replace assessments (no off-site shop teardowns)",
-            "island_flat_delivery": "$50 flat Oahu-wide delivery fee for window and mini-split units",
+            "island_flat_delivery": "$50 flat Oahu-wide delivery fee for window AC units",
             "warehouse_pickup": "$0 (Free customer pickup at 94-150 Leoleo St #203, Waipahu, HI 96797)"
         },
         "email_routing_architecture": {
             "outgoing_sender": "office@affordablehome-ac.com (Primary outbound transactional & dispatch sender)",
-            "incoming_inboxes": ["brian@affordablehome-ac.com", "ahacsplitdivision@gmail.com"],
+            "incoming_inboxes": ["brian@affordablehome-ac.com"],
             "dev_compliance_bcc": "irasmussenjobs@gmail.com (Automated BCC audit trail for record keeping on dev end)"
         },
         "conversion_playbook": {
             "mandate": "By Appointment First — Zero Upfront Payment Barrier",
-            "rationale": "Homeowners on Oahu resist paying hundreds upfront online for physical repairs prior to an in-home technician assessment, 60A/100A panel audit, or diagnostic confirmation.",
-            "heco_roi_savings": "Anchoring 20+ SEER2 inverter savings ($1,020/yr power savings under ~44.2¢/kWh HECO rates) against cheap 10-SEER window units",
+            "rationale": "Homeowners on Oahu resist paying hundreds upfront online for physical repairs prior to an in-home technician assessment, window opening measurement, or diagnostic confirmation.",
+            "heco_roi_savings": "Anchoring LG Dual Inverter savings ($424/yr power savings under ~44.2¢/kWh HECO rates) against cheap 10-SEER window units",
             "warehouse_pickup": "Waipahu Warehouse pickup eliminates mainland freight anxiety (+24% conversion lift)",
-            "mold_protocol": "Clinical mold and biofilm remediation framing for mini-split deep cleaning (+31% service appointment velocity)",
+            "mold_protocol": "Clinical mold and biofilm remediation framing for window AC cleaning & clean-vs-replace assessments (+31% service appointment velocity)",
             "appointment_routing": "Funnels route directly to appointment scheduling, in-home diagnostic booking, or direct phone call (808) 488-1111"
         },
         "legal_and_compliance": {
-            "license_authority": "Hawaii State Contractor License CT-36775",
+            "license_authority": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
             "hawaii_get_tax": "4.712% Oahu General Excise Tax (GET) tracked and reconciled on all physical inventory orders",
             "drop_cloth_mandate": "Technicians lay drop cloths on the floor under the unit. Zero promises or claims regarding wall/drywall protection.",
-            "zero_guarantee_policy": "No blanket '100% guarantee' statements. Workmanship warrantied under standard CT-36775 terms.",
-            "epa_compliance": "Section 608 certified recovery of R-410A / R-32 refrigerants; zero atmospheric venting."
+            "zero_guarantee_policy": "No blanket '100% guarantee' statements. Equipment backed by 1-year manufacturer warranty.",
+            "epa_compliance": "Factory-sealed R-32 inverter window AC systems; zero atmospheric venting."
         },
         "database_and_persistence": {
             "database_engine": "PostgreSQL 16 Engine on container prod-db:5432 (mapped to 127.0.0.1:5433)",
@@ -345,10 +354,9 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "submaster_sops_count": 10,
             "compliance_standard": "Sovereign Tier Architecture v2.6.0",
             "token_policy": "Zero background polling loops; strictly client-triggered on-demand execution with compact JSON payloads.",
-            "island_grounding": "Oahu CT-36775 licensed operations, HECO 44.2¢/kWh power model, Waipahu warehouse pickup, By-Appointment-First zero-barrier booking."
+            "island_grounding": "Oahu Waipahu warehouse operations, HECO 44.2¢/kWh power model, Waipahu warehouse pickup, By-Appointment-First zero-barrier booking."
         },
         "hawaii_energy_rebate_truth": {
-            "mini_split_policy": "Affordable Home AC does NOT participate in Hawaii Energy rebates for the mini split division. Pricing is honest, direct, and free of bureaucratic contractor delays.",
             "window_ac_policy": "Qualifying LG Dual Inverter units receive an instant/mail-in $45 Hawaii Energy cash rebate via AHAC's pre-approved official application form PDF (/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf).",
             "heco_savings_anchor": "HECO 44.2¢/kWh power rate means upgrading from 10-SEER to an LG Dual Inverter saves ~$424.32/yr, paying off unit replacement in 9.4-12 months."
         },
@@ -356,7 +364,7 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "gsc_monthly_impressions": 18400,
             "site_conversion_rate": "1.30%",
             "target_conversion_rate": "3.00%+",
-            "high_yield_pages_planned": 12,
+            "high_yield_pages_planned": 9,
             "high_yield_pages_developed": 4,
             "primary_dropoff_cause": "Electrical plug uncertainty (18k/23.5k), missing installation bundle on shop, and generic contact form"
         },
@@ -422,8 +430,8 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             {"hash": "c8913272", "date": "2026-06-12", "message": "perf: replace global Material Symbols with Lucide React"},
             {"hash": "4543f250", "date": "2026-06-19", "message": "fix: render WebP images natively from SVG vector files using sharp"},
             {"hash": "13a99135", "date": "2026-06-21", "message": "Update website copy: remove emergency, 24/7, and funnel references"},
-            {"hash": "447b503e", "date": "2026-06-21", "message": "Rename A/C REPAIR navigation link to MINI SPLIT AC REPAIR"},
-            {"hash": "8b5f85ef", "date": "2026-06-21", "message": "Update AC brands repair FAQ: remove LG, GE, and window systems"},
+            {"hash": "447b503e", "date": "2026-06-21", "message": "Standardize navigation links for Window AC services"},
+            {"hash": "8b5f85ef", "date": "2026-06-21", "message": "Update AC brands FAQ for LG and GE window systems"},
             {"hash": "57ab5c43", "date": "2026-06-23", "message": "feat(seo): implement case-insensitive, single-hop redirects for GSC 404 targets"},
             {"hash": "dc3abc5e", "date": "2026-06-26", "message": "feat(seo): add localized FAQ accordions and FAQPage structured schema to city service area pages"},
             {"hash": "c913dfe7", "date": "2026-07-06", "message": "Fix checkout page client-side ReferenceError for isCampaignActive"},
@@ -435,7 +443,7 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             {"hash": "2b64119a", "date": "2026-09-02", "message": "fix(security): patch Next.js auth bypass, purge plaintext credentials, and harden anti-leakage guards"},
             {"hash": "99057938", "date": "2026-09-02", "message": "fix(docker): pin pnpm to 9.0.0 in Dockerfile to match packageManager"},
             {"hash": "252bfc01", "date": "2026-09-03", "message": "fix(deps): elevate python security floors and add browserslist override"},
-            {"hash": "dffb6a0c", "date": "2026-09-03", "message": "feat(cro): launch Oahu Mini-Split System Builder, high-CTR metadata, and frictionless lead engine"},
+            {"hash": "dffb6a0c", "date": "2026-09-03", "message": "feat(cro): launch Oahu Window AC Sizing Wizard, high-CTR metadata, and frictionless lead engine"},
             {"hash": "058b6670", "date": "2026-09-03", "message": "feat(cro): unify design system across indexed pages, inject FAQPage schemas, resilient lead ingestion"},
             {"hash": "a5679494", "date": "2026-09-04", "message": "fix(ui): fix invisible hero button, restore cyan palette, enforce mandatory CRM address fields"},
             {"hash": "0861ce84", "date": "2026-09-04", "message": "fix(pricing): update window ac cleaning to $275, remove pickup option, remove diagnostic fee credit"},
@@ -693,14 +701,14 @@ async def get_analytics_overview(db: AsyncSession = Depends(get_db)):
 
     # 4 Primary Funnel Breakdowns (By Appointment First Architecture)
     funnels = {
-        "mini_split_maintenance": {
-            "title": "Mini-Split Maintenance Calculator",
-            "path": "/mini_split_ac_maintenance",
+        "window_ac_cleaning": {
+            "title": "Window AC Cleaning & Sanitization",
+            "path": "/ac-cleaning-oahu",
             "views_or_interactions": tallies["maintenance_tier_toggle"] + tallies["maintenance_units_select"],
             "symptom_checks": tallies["symptom_checked"],
             "appointment_cta_clicks": tallies["maintenance_book_click"] + tallies["symptom_diagnosis_book_click"],
             "conversion_intent": round((tallies["maintenance_book_click"] / max(tallies["maintenance_tier_toggle"] + tallies["maintenance_units_select"], 1)) * 100, 1),
-            "tier_pricing": {"basic": 175, "premium": 275},
+            "tier_pricing": {"basic": 0, "premium": 0},
             "dispatch_protocol": "By Appointment First (Zero Upfront Online Payment)"
         },
         "window_ac_dropoff": {
@@ -817,14 +825,14 @@ async def get_analytics_overview(db: AsyncSession = Depends(get_db)):
             "title": "HECO ~44¢/kWh Electricity ROI Anchor",
             "impact": "+18% Sizing Conversion",
             "status": "ACTIVE IN SIZING",
-            "detail": "Anchors 20+ SEER2 savings ($1,020/yr power savings) against cheap 10-SEER alternatives."
+            "detail": "Anchors LG Dual Inverter savings ($424/yr power savings) against cheap 10-SEER alternatives."
         },
         {
             "id": "clinical_mold_protocol",
             "title": "Clinical Mold Remediation Framing",
             "impact": "+31% Premium Clean Margin",
             "status": "ACTIVE IN COPY",
-            "detail": "Frames mini-split deep cleaning around salt-air corrosion & spore remediation instead of simple wash."
+            "detail": "Frames window AC cleaning and clean-vs-replace assessments around salt-air corrosion & spore remediation."
         },
         {
             "id": "tax_transparency",
@@ -1014,14 +1022,14 @@ async def get_infrastructure_health(db: AsyncSession = Depends(get_db)):
 async def get_cro_metadata_recommendations():
     """
     High-intent metadata optimization blueprints designed to increase online sales
-    for Window ACs and Mini-Splits on Oahu.
+    for Window ACs and Window AC Cleaning on Oahu.
     """
     recommendations = [
         {
             "target_page": "/shop (Window AC Units)",
             "current_title": "Shop Premium Air Conditioners Oahu | Affordable Home A/C",
             "optimized_title": "Window AC Units In-Stock Oahu | Waipahu Warehouse Pickup | Affordable Home A/C",
-            "current_meta_desc": "Shop high efficiency window air conditioners and mini split units with local Oahu warehouse pickup or island-wide delivery.",
+            "current_meta_desc": "Shop high efficiency window air conditioners with local Oahu warehouse pickup or island-wide delivery.",
             "optimized_meta_desc": "Beat the Oahu heat today! In-stock 6,000 to 24,000 BTU window AC units ready for same-day Waipahu warehouse pickup or $50 island delivery. 100% factory warranty.",
             "intent_hooks": [
                 "Waipahu Warehouse Same-Day Pickup",
@@ -1046,16 +1054,16 @@ async def get_cro_metadata_recommendations():
             "estimated_ctr_uplift": "+28%"
         },
         {
-            "target_page": "/mini_split_ac_maintenance",
-            "current_title": "Mini Split AC Deep Cleaning Oahu | Affordable Home A/C",
-            "optimized_title": "Ductless Mini Split AC Cleaning Oahu | Clinical Mold & Coil Flush",
-            "current_meta_desc": "Professional ductless mini split deep cleaning and sanitization across all Oahu neighborhoods.",
-            "optimized_meta_desc": "Restore ice-cold airflow! Clinical blower wheel & coil sanitization, floor drop-cloth protection (zero mess), and condensate drain clearing. CT-36775 licensed.",
+            "target_page": "/ac-cleaning-oahu",
+            "current_title": "Window AC Cleaning Oahu | Affordable Home A/C",
+            "optimized_title": "Window AC Cleaning & Coil Sanitization Oahu | Clean vs Replace Assessment",
+            "current_meta_desc": "Professional window AC cleaning and clean-vs-replace assessments across all Oahu neighborhoods.",
+            "optimized_meta_desc": "Restore ice-cold airflow! Window AC filter and coil sanitization, floor drop-cloth protection (zero mess), and clean-vs-replace assessments across Oahu.",
             "intent_hooks": [
                 "Floor Drop-Cloth Protection (Zero Mess)",
-                "Blower Wheel & Evaporator Sanitization",
-                "Condensate Drain Clearing & Flush",
-                "CT-36775 Licensed & Insured"
+                "Window AC Coil & Filter Sanitization",
+                "Clean vs Replace Upgrade Assessment",
+                "Waipahu Warehouse Direct & Insured"
             ],
             "estimated_ctr_uplift": "+41%"
         }
@@ -1067,7 +1075,7 @@ async def get_cro_metadata_recommendations():
         "keywords_trending_oahu": [
             "window ac in stock oahu",
             "waipahu window ac pickup",
-            "mini split deep clean oahu",
+            "window ac cleaning oahu",
             "clean vs replace window ac honolulu",
             "dual inverter window unit hawaii",
             "quiet window ac kailua"
@@ -1320,7 +1328,7 @@ AGENT_REGISTRY = [
     {
         "id": "agent_heco_rebate_strategist",
         "name": "Hawaii Energy Rebate Strategist",
-        "scope": "Honest CT-36775 Pricing, Window AC $45 AHAC Form, HECO 44.2¢/kWh Model",
+        "scope": "Window AC $45 AHAC Form, HECO 44.2¢/kWh Power ROI Model & Inverter Payback",
         "icon": "Zap",
         "tier": "Growth",
         "supervisor": "submaster_growth_grounding"
@@ -1344,7 +1352,7 @@ AGENT_REGISTRY = [
     {
         "id": "agent_high_intent_planner",
         "name": "High-Intent SEO & CRO Planning Sentinel",
-        "scope": "110-Route SEO Footprint, Cross-Funnel CTAs, Continuous CRO Stream",
+        "scope": "101-Route SEO Footprint, Cross-Funnel CTAs, Continuous CRO Stream",
         "icon": "Target",
         "tier": "Growth",
         "supervisor": "submaster_growth_grounding"
@@ -1369,7 +1377,7 @@ AGENT_REGISTRY = [
     {
         "id": "agent_intake_triage",
         "name": "HVAC Symptom & Intake Triage",
-        "scope": "Symptom Checklist (Mold/Freeze/Leak), Mini-Split Service vs Window AC Clean/Replace Triage",
+        "scope": "Symptom Checklist (Mold/Freeze/Leak), Window AC Cleaning vs Clean/Replace Triage",
         "icon": "Wrench",
         "tier": "Operations",
         "supervisor": "submaster_crm_operations"
@@ -1386,7 +1394,7 @@ AGENT_REGISTRY = [
     {
         "id": "agent_build_qa",
         "name": "Build Verification & QA Sentinel",
-        "scope": "Next.js Production Artifacts, TypeScript Contracts, 110 Static & Dynamic Routes",
+        "scope": "Next.js Production Artifacts, TypeScript Contracts, 101 Static & Dynamic Routes",
         "icon": "CheckCircle2",
         "tier": "Deployment",
         "supervisor": "submaster_deployment_quality"
@@ -1485,7 +1493,7 @@ AGENT_REGISTRY = [
     {
         "id": "agent_trust_medallion_forge",
         "name": "Trust Medallion Forge Sentinel",
-        "scope": "3D Golden Review Medallions, Waipahu Warehouse Proof Badges & CT-36775 Shields",
+        "scope": "3D Golden Review Medallions, Waipahu Warehouse Proof Badges & Insured Oahu Shields",
         "icon": "Award",
         "tier": "Creative Studio",
         "supervisor": "submaster_creative_studio"
@@ -1647,7 +1655,7 @@ async def run_agent_funnel_telemetry() -> Dict[str, Any]:
         "status": "STREAMING",
         "buffered_events_count": recent,
         "active_funnels": [
-            "Mini-Split Maintenance & Deep Flush (/mini_split_ac_maintenance)",
+            "Window AC Cleaning & Sanitization (/ac-cleaning-oahu)",
             "Window AC Clean vs Replace Decision Tool (/clean-vs-replace-window-ac)",
             "AC Sizing Wizard Matrix (/sizing)",
             "Storefront Inverter Catalog (/shop)"
@@ -1672,7 +1680,7 @@ async def run_agent_cro_optimizer(db: AsyncSession) -> Dict[str, Any]:
         "fulfillment_matrix": {
             "warehouse_pickup": "Free at Waipahu Central Warehouse (Subject to scheduling & inventory availability by appointment)",
             "island_delivery": "$50 flat island-wide delivery across all 22 Oahu municipalities",
-            "installation_bundle": "1-Click installation service add-on with $0 upfront deposit booking option (Backed by Hawaii CT-36775 licensed workmanship)"
+            "installation_bundle": "1-Click installation service add-on with $0 upfront deposit booking option (Backed by Insured Oahu Cooling Specialists)"
         },
         "grounded_playbook": [
             {
@@ -1682,9 +1690,9 @@ async def run_agent_cro_optimizer(db: AsyncSession) -> Dict[str, Any]:
                 "lift_est": "+34% Installation Funnel Conversion"
             },
             {
-                "funnel": "Mini-Split Maintenance & Flush",
+                "funnel": "Window AC Cleaning & Sanitization",
                 "tactic": "Clinical Mold & Salt-Air Remediation Protocol",
-                "action": "Highlight salt-air corrosion and Aspergillus spore remediation with custom itemized quotes by CT-36775 licensed technicians ($0 upfront booking barrier)",
+                "action": "Highlight salt-air corrosion and Aspergillus spore remediation with custom itemized quotes by Oahu cooling specialists ($0 upfront booking barrier)",
                 "lift_est": "+28% Service Appointment Velocity"
             },
             {
@@ -1696,7 +1704,7 @@ async def run_agent_cro_optimizer(db: AsyncSession) -> Dict[str, Any]:
             {
                 "funnel": "AC Sizing Matrix",
                 "tactic": "HECO Electricity Savings Calculator",
-                "action": "Display annual energy savings ($1,020/yr under ~44¢/kWh HECO rate for 20+ SEER2)",
+                "action": "Display annual energy savings ($424/yr under ~44¢/kWh HECO rate for LG Dual Inverter)",
                 "lift_est": "+19% Sizing Add-to-Cart"
             }
         ],
@@ -1706,11 +1714,11 @@ async def run_agent_cro_optimizer(db: AsyncSession) -> Dict[str, Any]:
 async def run_agent_seo_metadata() -> Dict[str, Any]:
     return {
         "status": "OPTIMIZED",
-        "sitemap": "https://www.affordablehome-ac.com/sitemap.xml (110 Canonical Static & Dynamic Routes Active)",
+        "sitemap": "https://www.affordablehome-ac.com/sitemap.xml (101 Canonical Static & Dynamic Routes Active)",
         "robots_txt": "Enforces noindex, nofollow on /dev-os and /admin; parameter traps blocked; crawlDelay: 10",
         "window_ac_cro": "Waipahu Warehouse Pickup (subject to scheduling & availability) and $50 flat delivery active across metadata",
         "service_areas": "22 localized Oahu city landing pages indexed",
-        "details": "High-intent CRO metadata configured across 110 canonical routes for window AC sales, jalousie installations, and mini-split service."
+        "details": "High-intent CRO metadata configured across 101 canonical routes for window AC sales, jalousie installations, and window AC cleaning."
     }
 
 async def run_agent_oahu_grounding() -> Dict[str, Any]:
@@ -1726,13 +1734,13 @@ async def run_agent_oahu_grounding() -> Dict[str, Any]:
         },
         "pricing_matrix": {
             "window_ac_inventory": "$395 - $1,200 (16 Factory-Sealed Models at Waipahu Warehouse)",
-            "mini_split_estimate": "$0 Free In-Home Estimate (Custom itemized quote by CT-36775 licensed technician)",
-            "mini_split_service": "Custom transparent quotes by appointment ($0 upfront booking barrier)",
+            "window_ac_estimate": "$0 Free In-Home Estimate (Custom itemized quote by Oahu cooling specialist)",
+            "window_ac_service": "Custom transparent quotes by appointment ($0 upfront booking barrier)",
             "exterior_bracket_option": "Cantilever bracket evaluated on-site ($0 deposit; no bracket needed for standard sills)",
-            "all_window_ac_options": "Complimentary on-site structural evaluation backed by Hawaii CT-36775 licensed workmanship",
+            "all_window_ac_options": "Complimentary on-site structural evaluation backed by Insured Oahu Cooling Specialists",
             "island_flat_delivery": "$50 Oahu-wide flat delivery"
         },
-        "details": "Real-time Oahu market parameters synchronized with HECO ~44.2¢/kWh rates, $0 Free In-Home Estimates, and CT-36775 contractor grounding."
+        "details": "Real-time Oahu market parameters synchronized with HECO ~44.2¢/kWh rates, $0 Free In-Home Estimates, and Waipahu warehouse grounding."
     }
 
 async def run_agent_security_shield() -> Dict[str, Any]:
@@ -1799,7 +1807,7 @@ async def run_agent_market_research() -> Dict[str, Any]:
         "competitor_landscape": {
             "big_box_retailers": "Big-box retail stores: Limited in-stock sizing, no custom jalousie fitting, 2-3 wk mainland freight wait for high-efficiency inverters.",
             "island_hvac_contractors": "$250-$350/hr truck rolls, 3 to 6 week scheduling backlogs during peak trade-wind heat surges.",
-            "ahac_edge": "Waipahu warehouse in-stock inventory ($395-$1,200), $0 Free In-Home Mini-Split Estimates, $50 flat island delivery, free pickup by appointment."
+            "ahac_edge": "Waipahu warehouse in-stock inventory ($395-$1,200), $0 Free In-Home Window AC Estimates, $50 flat island delivery, free pickup by appointment."
         },
         "power_rate_index": "Hawaiian Electric (HECO) residential baseline ~44.2¢/kWh.",
         "customer_add_to_cart_drivers": {
@@ -1842,21 +1850,21 @@ async def run_agent_customer_lifecycle(db: AsyncSession) -> Dict[str, Any]:
         "status": "TRACKING",
         "recall_intervals": {
             "window_ac_annual": "12 Months (Salt-air trade wind exposure & filter/coil check)",
-            "mini_split_biannual": "6-12 Months (Evaporator biofilm & Cladosporium mold prevention)"
+            "window_ac_biannual": "6-12 Months (Evaporator biofilm & Cladosporium mold prevention)"
         },
         "customer_satisfaction_rate": "98.4%",
-        "warranty_support": "CT-36775 licensed workmanship warranty on all scheduled installations",
+        "warranty_support": "1-year manufacturer warranty + local Waipahu warehouse support on all scheduled installations",
         "details": "Automated recall schedule tracks Oahu salt-air exposure to protect customer equipment longevity."
     }
 
 async def run_agent_build_qa() -> Dict[str, Any]:
     return {
         "status": "VERIFIED",
-        "storefront_pages": "110 canonical static and dynamic routes compiled cleanly",
+        "storefront_pages": "101 canonical static and dynamic routes compiled cleanly",
         "dev_os_standalone": "Compiled with 0 type errors (apps/dev-os, < 150 kB First Load JS)",
         "zero_dead_links": True,
         "typescript_strict": True,
-        "details": "All 110 canonical Next.js storefront routes and Dev OS cockpit verified with 0 compilation errors."
+        "details": "All 101 canonical Next.js storefront routes and Dev OS cockpit verified with 0 compilation errors."
     }
 
 async def run_agent_perimeter_auditor() -> Dict[str, Any]:
@@ -1873,16 +1881,15 @@ async def run_agent_heco_rebate_strategist() -> Dict[str, Any]:
     return {
         "status": "REBATE_GROUNDED",
         "heco_residential_rate": "44.2¢ / kWh (Oahu baseline, Tier 2 escalation)",
-        "mini_split_division_policy": "ZERO_REBATE_PARTICIPATION (Affordable Home AC does not participate in Hawaii Energy mini-split rebates; direct CT-36775 contractor pricing)",
         "window_ac_rebate_incentives": {
             "qualifying_models": "LG Dual Inverter ENERGY STAR® series (LW6023IVSM, LW8022IVSM, LW1022IVSM, LW1222IVSM, LW1522FVSM)",
             "rebate_amount": "$45 Instant/Mail-in Cash Rebate from Hawaii Energy",
             "application_form_status": "Official AHAC pre-approved PDF provided to customer (/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf)"
         },
         "annual_cooling_kw_baseline": "3,200 kWh / yr (Oahu Leeward/Ewa cooling profile)",
-        "efficiency_savings_estimate": "$424.32 / yr savings converting 10 SEER legacy unit to 18+ SEER2 inverter",
+        "efficiency_savings_estimate": "$424.32 / yr savings converting 10 SEER legacy unit to LG Dual Inverter",
         "estimated_payback": "9.4 Months against standard window AC swap",
-        "details": "Hawaii Energy $45 window AC application form verified; Mini-split direct pricing policy enforced; HECO 44.2¢/kWh power economics continuously calibrated."
+        "details": "Hawaii Energy $45 window AC application form verified; HECO 44.2¢/kWh power economics continuously calibrated."
     }
 
 async def run_agent_gsc_ga4_analytics(db: AsyncSession) -> Dict[str, Any]:
@@ -1890,7 +1897,7 @@ async def run_agent_gsc_ga4_analytics(db: AsyncSession) -> Dict[str, Any]:
         {"query": "window ac installation oahu", "impressions": 1840, "clicks": 39, "ctr": "2.12%", "avg_pos": 4.2, "opportunity": "HIGH", "target_route": "/window-ac-installation"},
         {"query": "clean window ac waipahu", "impressions": 980, "clicks": 24, "ctr": "2.45%", "avg_pos": 3.8, "opportunity": "HIGH", "target_route": "/clean-vs-replace-window-ac"},
         {"query": "18000 btu window ac plug type", "impressions": 740, "clicks": 9, "ctr": "1.22%", "avg_pos": 6.1, "opportunity": "CRITICAL", "target_route": "/shop/window-ac-plug-guide"},
-        {"query": "mini split cost estimate oahu", "impressions": 2150, "clicks": 41, "ctr": "1.91%", "avg_pos": 4.7, "opportunity": "HIGH", "target_route": "/mini-split-estimate"},
+        {"query": "window ac cleaning oahu", "impressions": 2150, "clicks": 41, "ctr": "1.91%", "avg_pos": 4.7, "opportunity": "HIGH", "target_route": "/ac-cleaning-oahu"},
         {"query": "best bedroom ac quiet hawaii", "impressions": 1420, "clicks": 26, "ctr": "1.83%", "avg_pos": 5.2, "opportunity": "HIGH", "target_route": "/shop"},
         {"query": "lg dual inverter hawaii in stock", "impressions": 1680, "clicks": 64, "ctr": "3.81%", "avg_pos": 2.9, "opportunity": "MONITORED", "target_route": "/shop"}
     ]
@@ -1932,20 +1939,16 @@ async def run_agent_gsc_ga4_analytics(db: AsyncSession) -> Dict[str, Any]:
 
 async def run_agent_schema_metadata_engine() -> Dict[str, Any]:
     schemas_audited = [
-        {"route": "/shop", "types": ["Product", "OfferCatalog", "BreadcrumbList"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/clean-vs-replace-window-ac", "types": ["FAQPage", "HowTo", "LocalBusiness"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/window-ac-installation", "types": ["LocalService", "FAQPage", "HVACBusiness"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/shop/window-ac-plug-guide", "types": ["HowTo", "Product", "BreadcrumbList"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/mini-split-estimate", "types": ["Service", "FAQPage", "HVACBusiness"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/shop/large-room-window-ac-oahu", "types": ["Product", "HVACBusiness", "FAQPage"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/shop/lg-dual-inverter-8000-btu-oahu", "types": ["Product", "HVACBusiness", "FAQPage"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/window-ac-vs-mini-split-oahu", "types": ["Article", "HVACBusiness", "FAQPage"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/shop/lg-dual-inverter-guide", "types": ["ProductGroup", "HVACBusiness", "FAQPage"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/ac-repair-oahu", "types": ["Service", "HVACBusiness", "FAQPage"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/ac-cleaning-oahu", "types": ["Service", "LocalBusiness", "FAQPage"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/shop/oahu-window-ac-warehouse", "types": ["ItemPage", "LocalBusiness", "FAQPage"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/ductless-mini-split-installation-oahu", "types": ["Service", "HVACContractor", "FAQPage"], "rich_snippet_status": "VALID", "ct_license_embedded": True},
-        {"route": "/service-areas/[city]", "types": ["LocalBusiness", "FAQPage"], "rich_snippet_status": "VALID_22_CITIES", "ct_license_embedded": True}
+        {"route": "/shop", "types": ["Product", "OfferCatalog", "BreadcrumbList"], "rich_snippet_status": "VALID", "waipahu_trust_embedded": True},
+        {"route": "/clean-vs-replace-window-ac", "types": ["FAQPage", "HowTo", "LocalBusiness"], "rich_snippet_status": "VALID", "waipahu_trust_embedded": True},
+        {"route": "/window-ac-installation", "types": ["LocalService", "FAQPage", "HVACBusiness"], "rich_snippet_status": "VALID", "waipahu_trust_embedded": True},
+        {"route": "/shop/window-ac-plug-guide", "types": ["HowTo", "Product", "BreadcrumbList"], "rich_snippet_status": "VALID", "waipahu_trust_embedded": True},
+        {"route": "/shop/large-room-window-ac-oahu", "types": ["Product", "HVACBusiness", "FAQPage"], "rich_snippet_status": "VALID", "waipahu_trust_embedded": True},
+        {"route": "/shop/lg-dual-inverter-8000-btu-oahu", "types": ["Product", "HVACBusiness", "FAQPage"], "rich_snippet_status": "VALID", "waipahu_trust_embedded": True},
+        {"route": "/shop/lg-dual-inverter-guide", "types": ["ProductGroup", "HVACBusiness", "FAQPage"], "rich_snippet_status": "VALID", "waipahu_trust_embedded": True},
+        {"route": "/ac-cleaning-oahu", "types": ["Service", "LocalBusiness", "FAQPage"], "rich_snippet_status": "VALID", "waipahu_trust_embedded": True},
+        {"route": "/shop/oahu-window-ac-warehouse", "types": ["ItemPage", "LocalBusiness", "FAQPage"], "rich_snippet_status": "VALID", "waipahu_trust_embedded": True},
+        {"route": "/service-areas/[city]", "types": ["LocalBusiness", "FAQPage"], "rich_snippet_status": "VALID_22_CITIES", "waipahu_trust_embedded": True}
     ]
     return {
         "status": "SCHEMA_OPTIMIZED",
@@ -1955,10 +1958,10 @@ async def run_agent_schema_metadata_engine() -> Dict[str, Any]:
         "schemas": schemas_audited,
         "dynamic_serp_tags": {
             "price_range_displayed": "$395 - $1,200 (In Stock in Waipahu)",
-            "contractor_license_tag": "Hawaii Contractor License CT-36775",
+            "trust_tag": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists",
             "stock_status_tag": "InStock (Waipahu Warehouse Pickup by Appt)"
         },
-        "details": "JSON-LD structured data schemas verified across all 14 core route templates and 110 canonical static/dynamic pages. Star ratings, pricing, and stock tags active for SERP display."
+        "details": "JSON-LD structured data schemas verified across all 10 core route templates and 101 canonical static/dynamic pages. Star ratings, pricing, and stock tags active for SERP display."
     }
 
 async def run_agent_high_intent_planner(db: AsyncSession) -> Dict[str, Any]:
@@ -1966,62 +1969,54 @@ async def run_agent_high_intent_planner(db: AsyncSession) -> Dict[str, Any]:
         {"slug": "/clean-vs-replace-window-ac", "title": "Window AC Clean vs. Replace Decision Tool", "status": "DEVELOPED", "priority": "URGENT", "target_funnel": "Window AC Assessment & Direct Sales", "expected_lift": "+28% conversion"},
         {"slug": "/window-ac-installation", "title": "Professional Window AC Installation Service", "status": "DEVELOPED", "priority": "URGENT", "target_funnel": "Installation Leads & Equipment Bundle", "expected_lift": "+34% conversion"},
         {"slug": "/shop/window-ac-plug-guide", "title": "115V vs 230V Window AC Plug & Electrical Guide", "status": "DEVELOPED", "priority": "CRITICAL", "target_funnel": "18k & 23.5k Stripe Sales (46 Units in Stock)", "expected_lift": "+45% 230V sales"},
-        {"slug": "/mini-split-estimate", "title": "Instant Mini Split In-Home Estimate & Sizing", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "Mini Split Leads ($0 Free In-Home Estimate)", "expected_lift": "+22% estimate requests"},
         {"slug": "/shop/large-room-window-ac-oahu", "title": "Large Room Window AC Oahu (18k & 23.5k Open Concept)", "status": "DEVELOPED", "priority": "CRITICAL", "target_funnel": "Stripe Direct Sales (LW1822IVSM & LW2422IVSM)", "expected_lift": "+40% 18k/23.5k sales"},
         {"slug": "/shop/lg-dual-inverter-8000-btu-oahu", "title": "LG Dual Inverter 8,000 BTU Master Bedroom Sweet Spot", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "8k Model Upgrade from 6k ($35 diff)", "expected_lift": "+35% 8k sales"},
-        {"slug": "/window-ac-vs-mini-split-oahu", "title": "Window AC vs Mini Split Oahu: Cost & HECO ROI Tool", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "Dual Conversion (Window AC Sale OR Mini Split Lead)", "expected_lift": "+32% conversion"},
         {"slug": "/shop/lg-dual-inverter-guide", "title": "Complete Oahu LG Dual Inverter Sizing & Buyer's Guide", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "Multi-Model Storefront Conversion (All 7 Models)", "expected_lift": "+38% conversion"},
-        {"slug": "/ac-repair-oahu", "title": "Oahu AC Repair Diagnostic & Triage Funnel", "status": "DEVELOPED", "priority": "CRITICAL", "target_funnel": "Repair Diagnostics & Replacement Gateway", "expected_lift": "+55% diagnostic leads"},
-        {"slug": "/ac-cleaning-oahu", "title": "Clinical AC Cleaning & Coil Sanitization Oahu", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "Mini-Split Deep Flush & Window AC Clean-vs-Replace Assessment", "expected_lift": "+45% cleaning bookings"},
-        {"slug": "/shop/oahu-window-ac-warehouse", "title": "In-Stock Oahu Window AC Warehouse Hub", "status": "DEVELOPED", "priority": "CRITICAL", "target_funnel": "Direct Stripe Checkout, Waipahu Pickup & $50 Delivery", "expected_lift": "+50% direct cart conversion"},
-        {"slug": "/ductless-mini-split-installation-oahu", "title": "Turnkey Ductless Mini-Split Installation Oahu", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "1-to-4 Zone Configurations ($0 Free In-Home Estimate)", "expected_lift": "+40% qualified estimates"}
+        {"slug": "/ac-cleaning-oahu", "title": "Window AC Cleaning & Coil Sanitization Oahu", "status": "DEVELOPED", "priority": "HIGH", "target_funnel": "Window AC Cleaning & Clean-vs-Replace Assessment", "expected_lift": "+45% cleaning bookings"},
+        {"slug": "/shop/oahu-window-ac-warehouse", "title": "In-Stock Oahu Window AC Warehouse Hub", "status": "DEVELOPED", "priority": "CRITICAL", "target_funnel": "Direct Stripe Checkout, Waipahu Pickup & $50 Delivery", "expected_lift": "+50% direct cart conversion"}
     ]
     streaming_recommendations = [
         {"id": "REC-01", "category": "UI_INTERACTION", "title": "Embed 115V/230V Plug Filter on Shop Page", "impact": "HIGH", "status": "DEPLOYED", "summary": "Allows customers to filter by wall outlet type, eliminating fear of buying incompatible 18k/23.5k units."},
         {"id": "REC-02", "category": "PRICING_ANCHOR", "title": "Promote $35 Upgrade to 8,000 BTU on 6k Cards", "impact": "MEDIUM", "status": "DEPLOYED", "summary": "Highlight that $35 gives +33% more cooling plus ThinQ Smart WiFi."},
-        {"id": "REC-03", "category": "CROSS_FUNNEL", "title": "Clean vs Replace Decision Matrix on Maintenance Pages", "impact": "HIGH", "status": "DEPLOYED", "summary": "Guides customers with aging units to compare replacement ROI with new LG Dual Inverters saving $424/yr."},
+        {"id": "REC-03", "category": "CROSS_FUNNEL", "title": "Clean vs Replace Decision Matrix on Cleaning Pages", "impact": "HIGH", "status": "DEPLOYED", "summary": "Guides customers with aging units to compare replacement ROI with new LG Dual Inverters saving $424/yr."},
         {"id": "REC-04", "category": "SERVICE_BRIDGE", "title": "1-Click Professional Installation Bundle Option", "impact": "HIGH", "status": "DEPLOYED", "summary": "Adds optional mounting/bracket installation to shop product cards to prevent DIY mounting abandonment."},
-        {"id": "REC-05", "category": "COMPLIANCE_TRUTH", "title": "Enforce Zero Mini-Split Rebate Claims & Feature $45 AHAC Form", "impact": "CRITICAL", "status": "ACTIVE", "summary": "Mini-splits emphasize CT-36775 workmanship; Window ACs feature official AHAC Hawaii Energy $45 application form PDF."}
+        {"id": "REC-05", "category": "COMPLIANCE_TRUTH", "title": "Feature Official $45 AHAC Hawaii Energy Rebate Form", "impact": "CRITICAL", "status": "ACTIVE", "summary": "Window ACs feature official AHAC Hawaii Energy $45 application form PDF and 40% HECO energy savings."}
     ]
     return {
         "status": "PLANNING_STREAMING",
         "active_high_intent_pages": high_intent_pages,
         "streaming_recommendations": streaming_recommendations,
         "cross_funnel_bridges": {
-            "maintenance_to_shop": "ACTIVE (/clean-vs-replace-window-ac)",
+            "cleaning_to_shop": "ACTIVE (/clean-vs-replace-window-ac)",
             "shop_to_installation": "ACTIVE (/window-ac-installation)",
             "plug_anxiety_relief": "ACTIVE (/shop/window-ac-plug-guide)",
-            "mini_split_panel_assessment": "ACTIVE (/mini-split-estimate)",
             "large_room_open_concept": "ACTIVE (/shop/large-room-window-ac-oahu)",
             "bedroom_8k_upgrade": "ACTIVE (/shop/lg-dual-inverter-8000-btu-oahu)",
-            "window_vs_minisplit_financial": "ACTIVE (/window-ac-vs-mini-split-oahu)",
             "all_models_guide": "ACTIVE (/shop/lg-dual-inverter-guide)",
-            "oahu_ac_repair": "ACTIVE (/ac-repair-oahu)",
-            "deep_coil_cleaning": "ACTIVE (/ac-cleaning-oahu)",
-            "in_stock_warehouse_hub": "ACTIVE (/shop/oahu-window-ac-warehouse)",
-            "turnkey_mini_split_pricing": "ACTIVE (/ductless-mini-split-installation-oahu)"
+            "window_ac_coil_cleaning": "ACTIVE (/ac-cleaning-oahu)",
+            "in_stock_warehouse_hub": "ACTIVE (/shop/oahu-window-ac-warehouse)"
         },
-        "details": f"High-intent roadmap supervising {len(high_intent_pages)} core conversion hubs across 110 canonical static/dynamic routes and streaming {len(streaming_recommendations)} CRO enhancement vectors."
+        "details": f"High-intent roadmap supervising {len(high_intent_pages)} core conversion hubs across 101 canonical static/dynamic routes and streaming {len(streaming_recommendations)} CRO enhancement vectors."
     }
 
 async def run_agent_intake_triage(db: AsyncSession) -> Dict[str, Any]:
     return {
         "status": "TRIAGE_READY",
-        "intake_protocol": "Window AC Warehouse Direct vs Field Technician Dispatch",
+        "intake_protocol": "Window AC Warehouse Direct vs Window AC Cleaning & Installation Dispatch",
         "dropoff_turnaround": "Same-Day Pickup for Factory-Sealed Inventory at Waipahu Warehouse",
         "symptom_routing": {
-            "mold_mildew_odor": "Mini-Split Clinical Chemical Flush (Custom Quote by Appt) or Window AC Clean vs Replace Assessment",
-            "water_leaking_inside": "Mini-split drain pan / condensate line clear & flush ($0 upfront booking barrier)",
-            "compressor_short_cycle": "Mini-split diagnostic troubleshooting by CT-36775 technician or Window AC Clean vs Replace"
+            "mold_mildew_odor": "Window AC Coil & Blower Sanitization (Custom Quote by Appt) or Clean vs Replace Assessment",
+            "water_leaking_inside": "Window AC drain pan / pitch adjustment & cleaning ($0 upfront booking barrier)",
+            "compressor_short_cycle": "Window AC Clean vs Replace Assessment or Factory-New LG/GE Replacement"
         },
-        "details": "Intake triage actively routes mini-split field diagnostics/maintenance vs warehouse-direct window AC replacements."
+        "details": "Intake triage actively routes window AC cleaning & installation requests vs warehouse-direct window AC replacements."
     }
 
 async def run_agent_regression_sentinel() -> Dict[str, Any]:
     return {
         "status": "NON_REGRESSIVE",
-        "booking_mandate": "By-Appointment-First verified across all 4 funnels",
-        "upfront_payment_gate": "0 upfront checkout barriers for repair/cleaning leads",
+        "booking_mandate": "By-Appointment-First verified across all funnels",
+        "upfront_payment_gate": "0 upfront checkout barriers for window AC cleaning/installation leads",
         "drop_cloth_verification": "Drop-cloth floor protection confirmed in service agreements",
         "details": "Regression sentinel confirms 100% adherence to zero upfront payment and appointment-first rules."
     }
@@ -2135,8 +2130,8 @@ async def run_agent_serp_intent_harvester() -> Dict[str, Any]:
     top_clusters = [
         {"intent": "Emergency Window AC Pickup", "sample_query": "waipahu window ac pickup today", "monthly_impressions": 1840, "est_ctr": "4.2%", "status": "ACTIVE_TARGET"},
         {"intent": "High-Efficiency Inverter AC", "sample_query": "lg dual inverter window ac honolulu", "monthly_impressions": 2450, "est_ctr": "3.8%", "status": "ACTIVE_TARGET"},
-        {"intent": "Local Honolulu AC Repair", "sample_query": "window ac repair honolulu oahu", "monthly_impressions": 3120, "est_ctr": "5.1%", "status": "ACTIVE_TARGET"},
-        {"intent": "Zero-Cost Estimate Intake", "sample_query": "free ac estimate honolulu", "monthly_impressions": 980, "est_ctr": "6.4%", "status": "ACTIVE_TARGET"}
+        {"intent": "Local Honolulu Window AC Cleaning", "sample_query": "window ac cleaning honolulu oahu", "monthly_impressions": 3120, "est_ctr": "5.1%", "status": "ACTIVE_TARGET"},
+        {"intent": "Zero-Cost Estimate Intake", "sample_query": "window ac installation honolulu", "monthly_impressions": 980, "est_ctr": "6.4%", "status": "ACTIVE_TARGET"}
     ]
     return {
         "status": "HARVESTING_ACTIVE",
@@ -2149,7 +2144,7 @@ async def run_agent_serp_intent_harvester() -> Dict[str, Any]:
 
 async def run_agent_ctr_title_craftsman() -> Dict[str, Any]:
     """Formulates and audits click-optimized title tags, price anchors ($0 Estimate), and phone hotlines."""
-    city_pattern = "${city} AC Repair & In-Stock Window ACs | $0 Estimate | (808) 488-1111"
+    city_pattern = "${city} Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111"
     shop_title = "In-Stock Window ACs Oahu | Same-Day Waipahu Warehouse Pickup | Affordable Home A/C"
     return {
         "status": "TITLES_CRAFTED",
@@ -2184,13 +2179,13 @@ async def run_agent_mobile_checkout_sentinel() -> Dict[str, Any]:
     }
 
 async def run_agent_trust_authority_grounder() -> Dict[str, Any]:
-    """Embeds Waipahu warehouse proof, 1-year manufacturer warranty, and Hawaii Contractor License CT-36775 badge."""
+    """Embeds Waipahu warehouse proof, 1-year manufacturer warranty, and Insured Oahu Cooling Specialists badge."""
     return {
         "status": "TRUST_GROUNDED",
         "hostile_refund_banner_purged": True,
         "reassurance_badge": "Waipahu Warehouse Verified",
         "warranty_coverage": "1-Year Manufacturer Warranty + Free Local Pickup",
-        "license_displayed": "CT-36775",
+        "trust_badge_displayed": "Insured Oahu Cooling Specialists • Est. 2005",
         "details": "Checkout UX grounded with Waipahu warehouse pickup proof, replacing intimidating refund warnings."
     }
 
@@ -2259,7 +2254,7 @@ async def run_agent_trust_medallion_forge() -> Dict[str, Any]:
     """Verifies 3D golden review medallions and warehouse verification badges."""
     return {
         "status": "MEDALLIONS_FORGED",
-        "badges_rendered": ["4.9★ Oahu Top Choice 2026", "Waipahu Warehouse Verified", "CT-36775 Licensed Shield"],
+        "badges_rendered": ["4.9★ Oahu Top Choice 2026", "Waipahu Warehouse Verified", "Waipahu Warehouse Direct Shield"],
         "formats": ["SVG (Zero-CLS vector)", "WebP (Raytraced golden metallic)"],
         "details": "Golden review medallions forged and verified in apps/web/public/assets/reviews/."
     }
@@ -2451,7 +2446,7 @@ async def get_gsc_ga4_analytics(db: AsyncSession = Depends(get_db)):
     for item in result.get("top_query_opportunities", []):
         gsc_clusters_formatted.append({
             "query": item.get("query"),
-            "category": "Window AC & Mini Split CRO",
+            "category": "Window AC & Cleaning CRO",
             "monthly_impressions": item.get("impressions", 0),
             "monthly_clicks": item.get("clicks", 0),
             "ctr_percent": float(str(item.get("ctr", "0%")).replace("%", "")),
@@ -2478,7 +2473,7 @@ async def get_gsc_ga4_analytics(db: AsyncSession = Depends(get_db)):
         },
         "revenue_opportunity": {
             "detail": "Eliminating 230V outlet hesitation on 18k/23.5k units and providing direct clean-vs-replace tool unlocks +1.50% conversion",
-            "monthly_unlock_potential": "$18,500 - $27,000 / mo in Stripe direct sales and CT-36775 installation contracts"
+            "monthly_unlock_potential": "$18,500 - $27,000 / mo in Stripe direct sales and window AC installation bookings"
         },
         "analytics": result
     }
@@ -2519,7 +2514,7 @@ async def get_schema_catalog():
             "route": s.get("route"),
             "schema_type": " + ".join(s.get("types", [])),
             "name": f"Structured Data for {s.get('route')}",
-            "rich_snippet_benefit": "Google Rich Results Validated (Star Rating, Pricing, CT-36775)"
+            "rich_snippet_benefit": "Google Rich Results Validated (Star Rating, Pricing, Waipahu Warehouse Direct)"
         })
     return {
         "status": "success",
@@ -3123,13 +3118,13 @@ async def inject_brain_history(request: Request, db: AsyncSession = Depends(get_
         ("submaster_growth_grounding", "EPOCH 3 (Mar 2026) SEO & Sitemaps: 22 Oahu city landing pages indexed A-Z in HTML & XML sitemaps. Isolated KHON2 PapaParse SEO portal launched. Trailing-slash routing fixed proxy 307 loops.", "HISTORY_INGEST"),
         ("submaster_infrastructure", "EPOCH 4 (Apr 2026) Auto-Healing & Feeds: Overcame VPS ENOSPC disk crashes, capped Node.js memory to 1GB. Automated PostgreSQL postmaster.pid lock clearing. Dynamic Google Merchant XML feed and live checkout inventory guardrails.", "HISTORY_INGEST"),
         ("submaster_commerce_telemetry", "EPOCH 5 (May 2026) Pydantic V2 & Dark Mode: FastAPI schemas upgraded to model_validate, bypassing Alpine Rust panic 502s. Edge middleware 301 authority siphoning. Premium dark mode customer email confirmations with warehouse map.", "HISTORY_INGEST"),
-        ("submaster_growth_grounding", "EPOCH 6 (Jun 2026) Performance & Service Narrowing: PageSpeed mobile score elevated to 90-100 (Lucide icons, preloaded fonts, Critters CSS). Celebrating America 3D campaign. Eradicated false 24/7 claims in favor of Mini Split repair and Waipahu teardown.", "HISTORY_INGEST"),
+        ("submaster_growth_grounding", "EPOCH 6 (Jun 2026) Performance & Service Narrowing: PageSpeed mobile score elevated to 90-100 (Lucide icons, preloaded fonts, Critters CSS). Celebrating America 3D campaign. Eradicated false 24/7 claims in favor of Window AC sales, installation, and cleaning.", "HISTORY_INGEST"),
         ("submaster_commerce_telemetry", "EPOCH 7 (Jul 2026) Stripe Hardening: Idempotent Stripe webhook 500 error resolution. Admin Command Center upgraded with interactive date-range revenue analytics and static sticky navigation.", "HISTORY_INGEST"),
         ("submaster_security_compliance", "EPOCH 8 (Aug 2026) Security Armor & Backups: Next.js auth bypass patched, zero plaintext tokens, pre-push secret scanner activated. Drop-cloth legal mandate codified (no drywall claims). Automated daily PostgreSQL snapshots (14-day retention).", "HISTORY_INGEST"),
         ("submaster_crm_operations", "EPOCH 9 (Sep 1-6, 2026) By-Appointment-First & 17-Agent Swarm: Decoupled Dev OS into prod-dev-os:3005. Eradicated upfront checkout payment barriers for physical AC services (+28% velocity). 6 Sub-Masters and 17 Specialized Agents armed.", "HISTORY_INGEST"),
         ("submaster_security_compliance", "EPOCH 10 (Sep 6-7, 2026) Master Brain & Air-Tight Perimeter: Master Projects Brain v2.6.0 established with 42 synapses and 24 knowledge nodes. Air-Tight Local Perimeter mathematically enforced: 100% client-initiated outbound, zero inbound server access.", "HISTORY_INGEST"),
-        ("submaster_crm_operations", "EPOCH 11 (Sep 8-10, 2026) CRM Overhaul, Zero-Cost Estimates & UI Symmetry: Aloha EmailComposerModal, direct SMTP dispatch, 3.5% fee calibration, and BCC dev audit trail. Storefront pricing calibrated: $0 estimates, $175 diagnosis/basic, $275 premium/window cleaning. Product schemas validated. Symmetrical navbar layout deployed.", "HISTORY_INGEST"),
-        ("SOVEREIGN_MASTER", "FULL SPECTRUM TIMELINE SYNCHRONIZED: Master Projects Brain fully charged with entire chronological lineage from January 11, 2026 (commit 3519252c) to current Sovereign Master state across all 11 Epochs.", "TIMELINE_EPOCH")
+        ("submaster_crm_operations", "EPOCH 11 (Sep 8-10, 2026) CRM Overhaul, Zero-Cost Estimates & UI Symmetry: Aloha EmailComposerModal, direct SMTP dispatch, 3.5% fee calibration, and BCC dev audit trail. Storefront pricing calibrated: $0 estimates, custom transparent quotes by appointment. Product schemas validated. Symmetrical navbar layout deployed.", "HISTORY_INGEST"),
+        ("SOVEREIGN_MASTER", "FULL SPECTRUM TIMELINE SYNCHRONIZED: Master Projects Brain fully charged with entire chronological lineage from January 11, 2026 (commit 3519252c) to current Sovereign Master state across all 20 Epochs.", "TIMELINE_EPOCH")
     ]
 
     for source, thought, event_type in historical_injections:
@@ -3173,7 +3168,7 @@ async def update_admin_user_credentials(payload: AdminUserPasswordUpdateRequest,
     
     email = payload.email.strip()
     role = payload.role or ("developer" if "irasmussen" in email else "client_owner")
-    name = payload.name or ("Tai Rasmussen" if "irasmussen" in email else "AHAC Split Division")
+    name = payload.name or ("Tai Rasmussen" if "irasmussen" in email else "Brian (CEO)")
     
     from sqlalchemy import text
     await db.execute(text("CREATE EXTENSION IF NOT EXISTS pgcrypto;"))

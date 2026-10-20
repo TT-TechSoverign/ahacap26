@@ -74,7 +74,7 @@ export default function OahuWindowAcWarehousePage() {
         },
         {
             q: "Can you install the window AC for me as well?",
-            a: "Yes! If you prefer a turnkey professional installation—including custom weather-sealed Plexiglas filler panels, corrosion-resistant outdoor support brackets, and trade-wind vibration isolation—our Hawaii Licensed HVAC technicians (CT-36775) provide dedicated installation appointments across Oahu. You can book an installation visit online or add installation at checkout."
+            a: "Yes! If you prefer a turnkey professional installation—including custom weather-sealed Plexiglas filler panels, corrosion-resistant outdoor support brackets, and trade-wind vibration isolation—our specialist Oahu window AC technicians provide dedicated installation appointments across Oahu. You can book an installation visit online or add installation at checkout."
         },
         {
             q: "What warranty and power requirements do these units carry?",
@@ -297,7 +297,7 @@ export default function OahuWindowAcWarehousePage() {
                                     <td className="py-3.5 px-4 font-semibold text-white">Professional Installation</td>
                                     <td className="py-3.5 px-4 text-slate-400">Customer arranges third-party installer or self-installs</td>
                                     <td className="py-3.5 px-4 text-emerald-300 font-semibold bg-emerald-500/5 border-l border-r border-emerald-500/20">
-                                        Optional turnkey installation by licensed HVAC technicians (CT-36775)
+                                        Optional turnkey installation by Oahu window AC specialists
                                     </td>
                                 </tr>
                             </tbody>
@@ -333,14 +333,14 @@ export default function OahuWindowAcWarehousePage() {
                 <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="space-y-3 text-center md:text-left">
                         <span className="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider">
-                            Licensed Hawaii HVAC Workmanship
+                            Insured Oahu Window AC Workmanship
                         </span>
                         <h3 className="text-2xl font-black text-white">
                             Need Professional Window AC Installation on Oahu?
                         </h3>
                         <p className="text-sm text-slate-300 max-w-xl">
                             Have jalousie louvers, sliding windows, or second-story height? 
-                            Our licensed technicians (CT-36775) provide custom weatherized Plexiglas louver cutouts, heavy-duty brackets, and precision vibration dampening.
+                            Our specialist technicians provide custom weatherized Plexiglas louver cutouts, heavy-duty brackets, and precision vibration dampening.
                         </p>
                     </div>
 

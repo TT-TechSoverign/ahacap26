@@ -1,60 +1,14 @@
 {
-  "contractor_license": "CT-36775",
   "company_name": "Affordable Home A/C",
   "island": "Oahu, Hawaii",
   "phone": "(808) 488-1111",
   "warehouse_address": "94-150 Leoleo St #203, Waipahu, HI 96797",
   "booking_policy": "By Appointment First — Zero Upfront Payment Gate",
   "cleanliness_standard": "Clean floor drop cloths laid under every indoor unit; zero wall or floor mess",
-  "permitting_disclaimer": "Affordable Home A/C focuses on specialty mechanical refrigeration craftsmanship. Homeowners or general contractors coordinate City & County of Honolulu DPP municipal building permits independently if mandated by condo boards or HOAs.",
+  "permitting_disclaimer": "Affordable Home A/C focuses on specialty Window AC sales, custom installation, and Window AC deep cleaning craftsmanship across Oahu.",
   "divisions": {
-    "mini_split": {
-      "name": "Ductless Mini-Split Division",
-      "services": [
-        {
-          "id": "mini-split-installation-estimate",
-          "name": "New Installation & Replacement Consultation",
-          "price": 0.00,
-          "price_display": "$0 Free In-Home Estimate",
-          "billing_mode": "free_estimate",
-          "scope": "Comprehensive room-by-room cooling load analysis, power requirement review, equipment selection, and itemized estimate. Zero upfront fee."
-        },
-        {
-          "id": "mini-split-diagnostic",
-          "name": "Diagnostic Troubleshooting & Symptom Isolation",
-          "price": 175.00,
-          "price_display": "$175 Flat Rate",
-          "billing_mode": "flat_diagnostic",
-          "scope": "In-depth electrical continuity check, electronic halogen sniffer leak detection, thermistor resistance testing, and inverter board diagnostics."
-        },
-        {
-          "id": "mini-split-basic-cleaning",
-          "name": "Basic Mini-Split Cleaning & Coil Sanitize",
-          "price": 175.00,
-          "price_display": "$175 / Unit",
-          "billing_mode": "per_unit",
-          "scope": "Casing wipe-down, mesh filter chemical wash, high-velocity coil foaming wash, and condensate tray rinse. Drop cloths on floor."
-        },
-        {
-          "id": "mini-split-deep-cleaning",
-          "name": "Premium Deep Teardown Cleaning",
-          "price": 275.00,
-          "price_display": "$275 / Unit",
-          "billing_mode": "per_unit",
-          "scope": "Front housing unclipped, blower wheel cylinder completely extracted for 360-degree degreasing bath, coil scrub, drain pan sanitization. Protective floor drop cloths under unit. Zero messy hydro bags."
-        },
-        {
-          "id": "condensate-drain-flush",
-          "name": "Condensate Drain Line Clearing & Flush",
-          "price": 175.00,
-          "price_display": "$175 Flat Rate",
-          "billing_mode": "flat_repair",
-          "scope": "Commercial vacuum line evacuation, thorough water flush to clear algae biofilm plugs, and anti-fungal pan tablet placement. Professional vacuum extraction only — no high-pressure nitrogen gas."
-        }
-      ]
-    },
     "window_ac": {
-      "name": "Window AC Division",
+      "name": "Window AC Sales & Installation Division",
       "services": [
         {
           "id": "window-ac-warehouse-sales",
@@ -81,11 +35,24 @@
         },
         {
           "id": "window-ac-installation",
-          "name": "Standard Window AC Installation",
+          "name": "Standard & Custom Window AC Installation",
           "price": 0.00,
           "price_display": "$0 Free Window Assessment",
           "billing_mode": "installation_service",
-          "scope": "Custom fabrication for jalousie glass, vertical horizontal slider filler panel, or double-hung window. Weatherproof marine foam sealing, floor drop cloth protection, laser leveling. Standard exterior sill support brackets optional."
+          "scope": "Custom fabrication for jalousie glass, vertical horizontal slider filler panel, 26\" thru-the-wall sleeves, or double-hung window. Weatherproof marine foam sealing, floor drop cloth protection, laser leveling. Standard exterior sill support brackets optional."
+        }
+      ]
+    },
+    "window_cleaning": {
+      "name": "Window AC Cleaning & Care Division",
+      "services": [
+        {
+          "id": "window-ac-deep-cleaning",
+          "name": "Window AC Deep Cleaning & Coil Sanitization",
+          "price": 0.00,
+          "price_display": "$0 Free Assessment",
+          "billing_mode": "cleaning_service",
+          "scope": "Filter wash, evaporator and condenser coil foaming wash, condensate drain pan flush, and mold & salt-air sanitization with floor drop cloths."
         },
         {
           "id": "clean-vs-replace-guidance",
@@ -93,7 +60,7 @@
           "price": 0.00,
           "price_display": "$0 Free Guide",
           "billing_mode": "educational",
-          "scope": "Guidance on DIY filter maintenance for newer quality window units vs upgrading to energy-efficient Dual Inverters ($560–$1,025) or GE Built-In ($1,000–$1,200) units for aged units with corroded coils or failing compressors. Zero off-site shop teardowns."
+          "scope": "Guidance on maintenance and cleaning for newer quality window units vs upgrading to energy-efficient LG Dual Inverters ($560–$1,025) or GE Built-In ($1,000–$1,200) units for aged units with corroded coils or failing compressors. Zero off-site shop teardowns."
         }
       ]
     }

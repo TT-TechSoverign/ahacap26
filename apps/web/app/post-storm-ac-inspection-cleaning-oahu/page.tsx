@@ -139,7 +139,7 @@ export default function PostStormInspectionPage() {
                                 Our $175 flat-rate diagnostic covers the complete inspection of outdoor and indoor components. If simple clearing or electrical re-sealing is needed, we do it on the spot. If major storm damage requires parts, we provide a transparent quote before any repair proceeds.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
-                                <strong>Contractor License CT-36775:</strong> Professional diagnosis by licensed Hawaii technicians.
+                                <strong>Insured Oahu Specialists:</strong> Professional diagnosis by experienced Hawaii technicians.
                             </div>
                         </div>
 

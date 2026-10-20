@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Contact & Schedule Appointment Oahu | Affordable Home A/C'
     },
-    description: 'Contact Affordable Home A/C on Oahu. Schedule $0 in-home mini split estimates, $175 diagnostic troubleshooting, or window AC installations. Call (808) 488-1111.',
+    description: 'Contact Affordable Home A/C on Oahu. Schedule $0 window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/contact',
     },
     openGraph: {
         title: 'Contact & Schedule Appointment Oahu | Affordable Home A/C',
-        description: 'Contact Affordable Home A/C on Oahu. Schedule $0 in-home mini split estimates, $175 diagnostic troubleshooting, or window AC installations. Call (808) 488-1111.',
+        description: 'Contact Affordable Home A/C on Oahu. Schedule $0 window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/contact',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Contact & Schedule Appointment Oahu | Affordable Home A/C',
-        description: 'Contact Affordable Home A/C on Oahu. Schedule $0 in-home mini split estimates, $175 diagnostic troubleshooting, or window AC installations. Call (808) 488-1111.',
+        description: 'Contact Affordable Home A/C on Oahu. Schedule $0 window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -59,7 +59,6 @@ const contactPageSchema = {
         "name": "Affordable Home A/C",
         "telephone": "+1-808-488-1111",
         "email": "office@affordablehome-ac.com",
-        "licenseNumber": "CT-36775",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "94-150 Leoleo St. #203",

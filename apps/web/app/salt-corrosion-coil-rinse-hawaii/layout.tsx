@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Salt Corrosion & Coil Rinse Hawaii | Marine AC Protection | Affordable Home A/C'
     },
-    description: 'Neutralize aggressive marine salt air and prevent coil corrosion in coastal Oahu homes. Professional low-pressure coil rinse and corrosion defense. CT-36775 licensed.',
+    description: 'Neutralize aggressive marine salt air and prevent coil corrosion in coastal Oahu homes. Professional low-pressure coil rinse and corrosion defense.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/salt-corrosion-coil-rinse-hawaii',
     },
     openGraph: {
         title: 'Salt Corrosion & Coil Rinse Hawaii | Marine AC Protection | Affordable Home A/C',
-        description: 'Neutralize aggressive marine salt air and prevent coil corrosion in coastal Oahu homes. Professional low-pressure coil rinse and corrosion defense. CT-36775 licensed.',
+        description: 'Neutralize aggressive marine salt air and prevent coil corrosion in coastal Oahu homes. Professional low-pressure coil rinse and corrosion defense.',
         url: 'https://www.affordablehome-ac.com/salt-corrosion-coil-rinse-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Salt Corrosion & Coil Rinse Hawaii | Marine AC Protection | Affordable Home A/C',
-        description: 'Neutralize aggressive marine salt air and prevent coil corrosion in coastal Oahu homes. Professional low-pressure coil rinse and corrosion defense. CT-36775 licensed.',
+        description: 'Neutralize aggressive marine salt air and prevent coil corrosion in coastal Oahu homes. Professional low-pressure coil rinse and corrosion defense.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

@@ -130,7 +130,7 @@ export default function AcBracketsExteriorSecurityMountingPage() {
 
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4 text-center">
                             <Wrench className="size-10 text-emerald-400 mx-auto" />
-                            <h3 className="font-header font-bold text-lg uppercase text-white">Hawaii Licensed Contractor CT-36775</h3>
+                            <h3 className="font-header font-bold text-lg uppercase text-white">Insured Oahu Cooling Specialists</h3>
                             <p className="text-xs text-slate-300">
                                 Installed by licensed HVAC technicians adhering to Hawaii safety standards and building practices.
                             </p>

@@ -1,17 +1,17 @@
 # Analytics Swarm Architecture & Continuous CRO Loop
 =====================================================
-### Technical Specification & Lifecycle Blueprint (v1.0)
-**Affordable Home AC (CT-36775) — Autonomous Telemetry & Growth Engine**
+### Technical Specification & Lifecycle Blueprint (v2.0)
+**Affordable Home AC (Waipahu Warehouse Direct • Est. 2005) — Autonomous Telemetry & Growth Engine**
 
 ---
 
 ## 1. Executive Summary & Core Objective
 
-Affordable Home AC attracts high volumes of search engine impressions across Oahu (exceeding 18,400 monthly impressions across window AC installation, AC cleaning, LG Dual Inverter models, and ductless mini split inquiries). However, historical storefront conversion hovered around 1.30% due to friction points:
+Affordable Home AC attracts high volumes of search engine impressions across Oahu (exceeding 18,400 monthly impressions across window AC installation, window AC cleaning, and LG & GE Window AC models). However, historical storefront conversion hovered around 1.30% due to friction points:
 - Confusion over 115V (NEMA 5-15P) vs 230V (NEMA 6-20P) wall outlet requirements for large units (18,000 BTU LW1822IVSM and 23,500 BTU LW2422IVSM).
 - Missing dedicated landing pages for specific search queries ("clean window ac waipahu", "window ac installation oahu").
-- Customer uncertainty over electrical panel capacity (60A/100A panels in older Oahu homes) when evaluating ductless mini splits.
-- Inquiries about Hawaii Energy rebates, requiring clear grounding between Mini Splits (0% rebate participation; direct CT-36775 pricing) and Window ACs ($45 cash rebate with AHAC pre-approved PDF application form).
+- Customer uncertainty over whether to clean an older window AC unit or upgrade to a quiet inverter unit.
+- Inquiries about Hawaii Energy rebates, requiring clear grounding for Window ACs ($45 cash rebate with AHAC pre-approved PDF application form).
 
 The **Analytics Swarm Architecture** operates as a continuous, closed-loop telemetry and conversion rate optimization (CRO) system. It ingests Google Search Console query clusters and Google Analytics 4 (GA4) funnel events to dynamically optimize conversion surfaces, deploy high-intent landing pages, enrich JSON-LD schema metadata, and monitor revenue performance.
 
@@ -29,7 +29,7 @@ flowchart TD
 
     subgraph L2["2. EXTRACTION & CLUSTERING ENGINE (apps/api/services/)"]
         ASE["AnalyticsSwarmEngine<br/>(analytics_swarm.py)"]
-        CLUST["Query Clustering Algorithm<br/>(Install, Clean, Plug, Mini Split, Store)"]
+        CLUST["Query Clustering Algorithm<br/>(Install, Clean, Plug, Store)"]
         OPP["Opportunity Score Engine<br/>(Opp = Imp * (1 - CTR) / (Pos + 1))"]
     end
 
@@ -49,7 +49,7 @@ flowchart TD
         P1["/clean-vs-replace-window-ac<br/>(3-Step Decision Matrix)"]
         P2["/window-ac-installation<br/>(Jalousie Retrofit Intake)"]
         P3["/shop/window-ac-plug-guide<br/>(115V vs 230V Visualizer)"]
-        P4["/mini-split-estimate<br/>(60A/100A Panel Calc)"]
+        P4["/ac-cleaning-oahu<br/>(On-Site Window AC Cleaning)"]
         P5["/shop<br/>(Room Sizer & Plug Filter)"]
     end
 
@@ -82,10 +82,10 @@ $$\text{Opportunity Score} = \frac{\text{Impressions} \times \left(1.0 - \frac{\
 
 | Cluster Key | Primary Keywords | Assigned High-Yield Route | Conversion Objective |
 |---|---|---|---|
-| `window_ac_install` | `install`, `installation`, `mounting`, `bracket`, `jalousie` | `/window-ac-installation` | Captures installation leads with zero upfront deposit; offers 1-click equipment add-ons. |
-| `window_ac_cleaning` | `clean`, `cleaning`, `service`, `mold`, `chemical teardown` | `/clean-vs-replace-window-ac` | Evaluates unit age/rot; bifurcates between $275 Waipahu cleaning or buying new LG Dual Inverter. |
-| `plug_and_electrical` | `plug`, `volt`, `115v`, `230v`, `nema 6-20p`, `outlet`, `breaker` | `/shop/window-ac-plug-guide` | Unblocks sales of 28 units of 18k (LW1822IVSM) and 18 units of 23.5k (LW2422IVSM) in stock. |
-| `mini_split_estimates` | `split ac`, `mini split`, `ductless`, `estimate`, `cost oahu` | `/mini-split-estimate` | Promotes honest CT-36775 direct pricing (0% rebate honesty); offers free 60A/100A panel audit. |
+| `window_ac_install` | `install`, `installation`, `mounting`, `bracket`, `jalousie` | `/window-ac-installation` | Captures installation leads with zero upfront deposit; offers direct Window AC catalog selection. |
+| `window_ac_cleaning` | `clean`, `cleaning`, `service`, `mold`, `musty` | `/clean-vs-replace-window-ac` | Evaluates unit age/rot; bifurcates between on-site window AC cleaning or buying new LG Dual Inverter. |
+| `plug_and_electrical` | `plug`, `volt`, `115v`, `230v`, `nema 6-20p`, `outlet`, `breaker` | `/shop/window-ac-plug-guide` | Unblocks sales of 18k (LW1822IVSM) and 23.5k (LW2422IVSM) in stock. |
+| `ac_cleaning_oahu` | `ac cleaning oahu`, `coil cleaning`, `drain clog`, `mildew` | `/ac-cleaning-oahu` | Promotes on-site window AC coil cleaning with floor drop-cloth protection and $0 Free In-Home Estimate. |
 | `storefront_units` | `dual inverter`, `lg window ac`, `6000`, `8000`, `12000`, `buy`, `stock` | `/shop` | Features interactive Room Sizer, 115V/230V Plug Filter, and $45 Hawaii Energy cash rebate PDF. |
 
 ---
@@ -94,14 +94,9 @@ $$\text{Opportunity Score} = \frac{\text{Impressions} \times \left(1.0 - \frac{\
 
 The swarm enforces strict domain compliance regarding energy incentives:
 
-### 1. Mini Split Division: ZERO Rebate Participation
-- **Fact**: Affordable Home AC does **not** participate in Hawaii Energy mini-split rebates.
-- **Why**: Utility rebate programs on Oahu frequently require contractors to artificially inflate base retail equipment prices, restrict equipment selection, and subject homeowners to 3-6 month voucher approvals.
-- **Customer Value**: Honest, upfront Hawaii Contractor CT-36775 direct pricing with zero red tape and zero markups.
-
-### 2. Window AC Division: $45 Cash Rebate
+### Window AC Division: $45 Cash Rebate
 - **Fact**: Energy Star® certified LG Dual Inverter models qualify for an instant/mail-in **$45 cash rebate** from Hawaii Energy.
-- **Qualifying Models**: LW6023IVSM (6k), LW8022IVSM (8k), LW1022IVSM (10k), LW1222IVSM (12k), LW1522IVSM (14k).
+- **Qualifying Models**: LW6023IVSM (6k), LW8022IVSM (8k), LW1022IVSM (10k), LW1222IVSM (12k), LW1522FVSM (14k).
 - **Application Form**: Official pre-approved PDF application form pre-packaged and downloadable at:
   `/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf`.
 
@@ -118,15 +113,14 @@ The swarm enforces strict domain compliance regarding energy incentives:
     {
       "@type": "HVACBusiness",
       "name": "Affordable Home AC",
-      "telephone": "+1-808-724-4328",
+      "telephone": "+1-808-488-1111",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "94-150 Leokane St",
+        "streetAddress": "94-150 Leoleo St. #203",
         "addressLocality": "Waipahu",
         "addressRegion": "HI",
         "postalCode": "96797"
-      },
-      "license": "Hawaii Contractor CT-36775"
+      }
     },
     {
       "@type": "FAQPage",

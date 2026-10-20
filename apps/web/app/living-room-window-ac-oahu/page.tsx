@@ -114,7 +114,7 @@ export default function LivingRoomWindowAcPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Cool open island living rooms, connected kitchen/dining spaces, and vaulted plantation ceilings without spending $6,000+ on split AC systems. High-capacity Dual Inverters stocked in Waipahu.
+                        Cool open island living rooms, connected kitchen/dining spaces, and vaulted plantation ceilings with powerful 18,000 to 23,500 BTU Window ACs. High-capacity Dual Inverters stocked in Waipahu.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

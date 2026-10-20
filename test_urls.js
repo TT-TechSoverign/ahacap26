@@ -20,5 +20,5 @@ function checkHost(hostname, path) {
   req.end();
 }
 
-checkHost('staging.affordablehome-ac.com', '/mini_split_ac');
-checkHost('affordablehome-ac.com', '/mini_split_ac');
+checkHost('staging.affordablehome-ac.com', '/shop');
+checkHost('affordablehome-ac.com', '/shop');

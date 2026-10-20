@@ -171,7 +171,7 @@ export default function WindowAcReplacementPage() {
                                 Drop-Cloth Clean Jobsite Standard
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Swapping an old window unit can be messy—years of trapped dust, dried leaves, and rust can fall when the old unit is pulled. Our licensed technicians (Contractor License CT-36775) lay protective floor drop cloths under every unit and leave your home cleaner than when we arrived.
+                                Swapping an old window unit can be messy—years of trapped dust, dried leaves, and rust can fall when the old unit is pulled. Our experienced technicians lay protective floor drop cloths under every unit and leave your home cleaner than when we arrived.
                             </p>
                             <p className="text-xs text-slate-300 font-sans">
                                 <strong>Standard Brackets:</strong> We inspect your sill and install standard exterior window AC brackets when needed for solid exterior support.

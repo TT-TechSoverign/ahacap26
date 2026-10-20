@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Outdoor AC Fan Not Spinning in Hawaii? Causes & Repair Oahu | Affordable Home A/C'
     },
-    description: 'Outdoor AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic. CT-36775 licensed.',
+    description: 'Window AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/outdoor-unit-fan-not-spinning-hawaii',
     },
     openGraph: {
         title: 'Outdoor AC Fan Not Spinning in Hawaii? Causes & Repair Oahu | Affordable Home A/C',
-        description: 'Outdoor AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic. CT-36775 licensed.',
+        description: 'Window AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic.',
         url: 'https://www.affordablehome-ac.com/outdoor-unit-fan-not-spinning-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Outdoor AC Fan Not Spinning in Hawaii? Causes & Repair Oahu | Affordable Home A/C',
-        description: 'Outdoor AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic. CT-36775 licensed.',
+        description: 'Window AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -37,18 +37,18 @@ const outdoorFanFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "What happens if the outdoor AC fan stops spinning while the unit is running?",
+            "name": "What happens if the rear condenser fan stops spinning while the window AC is running?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Without the fan drawing air across the condenser coils, high-pressure superheated refrigerant cannot condense into liquid. Head pressure and temperatures skyrocket within 2 to 3 minutes, forcing the compressor into high-pressure thermal overload cutoff and risking permanent motor damage."
+                "text": "Without the fan drawing air across the rear condenser coils, high-pressure superheated refrigerant cannot condense into liquid. Head pressure and temperatures skyrocket within 2 to 3 minutes, forcing the compressor into high-pressure thermal overload cutoff and risking permanent motor damage."
             }
         },
         {
             "@type": "Question",
-            "name": "What is the most common reason an outdoor fan motor stops spinning?",
+            "name": "What is the most common reason a condenser fan motor stops spinning?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "In Hawaii, the leading cause is a failed dual-run capacitor where the 'FAN' terminal has lost microfarad rating due to high ambient heat. Other frequent causes include bearing seizure from salt air corrosion or a shorted DC brushless fan motor on mini split inverters."
+                "text": "In Hawaii, the leading cause is a failed dual-run capacitor where the 'FAN' terminal has lost microfarad rating due to high ambient heat. Other frequent causes include bearing seizure from salt air corrosion or a shorted DC brushless fan motor on inverter window units."
             }
         },
         {
@@ -56,7 +56,7 @@ const outdoorFanFaqSchema = {
             "name": "Can I test if the fan motor is seized by spinning the blade?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "With the power completely turned off at the disconnect switch, use a wooden stick or pencil to gently push a fan blade. If the blade resists or stops immediately, the motor bearings are seized and the fan motor must be replaced."
+                "text": "With the power cord completely unplugged from the wall receptacle, a technician can gently check the fan shaft rotation. If the shaft resists or binds immediately, the motor bearings are seized."
             }
         }
     ]

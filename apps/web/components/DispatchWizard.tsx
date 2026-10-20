@@ -37,17 +37,12 @@ export function DispatchWizard() {
 
     const services: string[] = (content?.contact?.wizard?.services_list || [
         "Window AC Installation",
+        "Window AC Deep Cleaning & Sanitization",
         "Window AC Clean-vs-Replace Assessment",
-        "Window AC Diagnosis/Repair",
-        "Mini Split Estimate (New)",
-        "Mini Split Estimate (Replace)",
-        "Mini Split Maintenance",
-        "Mini Split Diagnosis/Repair"
-    ]).map((s: string) =>
-        s === "Window AC Deep Cleaning" || s === "Window AC Teardown"
-            ? "Window AC Clean-vs-Replace Assessment"
-            : s
-    );
+        "Window AC Diagnosis/Troubleshooting",
+        "26\" Thru-The-Wall AC Replacement",
+        "Waipahu Warehouse Pickup Inquiry"
+    ]).filter((s: string) => !s.toLowerCase().includes('split') && !s.toLowerCase().includes('central'));
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -67,14 +62,14 @@ export function DispatchWizard() {
         if (serviceParam) {
             const rawLower = serviceParam.toLowerCase();
             let mappedService = serviceParam;
-            if (rawLower === 'cleaning' || rawLower.includes('mini split maintenance') || rawLower.includes('mini split cleaning')) {
-                mappedService = services.find(s => s.toLowerCase().includes('mini split maintenance')) || 'Mini Split Maintenance';
-            } else if (rawLower === 'repair' || rawLower.includes('diagnostic')) {
-                mappedService = services.find(s => s.toLowerCase().includes('mini split diagnosis')) || 'Mini Split Diagnosis/Repair';
+            if (rawLower === 'cleaning' || rawLower.includes('maintenance') || rawLower.includes('cleaning')) {
+                mappedService = services.find(s => s.toLowerCase().includes('cleaning')) || 'Window AC Deep Cleaning & Sanitization';
+            } else if (rawLower === 'repair' || rawLower.includes('diagnostic') || rawLower.includes('troubleshooting')) {
+                mappedService = services.find(s => s.toLowerCase().includes('diagnosis')) || 'Window AC Diagnosis/Troubleshooting';
             } else if (rawLower === 'install' || rawLower === 'window_ac_purchase' || rawLower.includes('window ac install')) {
                 mappedService = services.find(s => s.toLowerCase().includes('window ac installation')) || 'Window AC Installation';
-            } else if (rawLower === 'mini_split' || rawLower.includes('mini split estimate')) {
-                mappedService = services.find(s => s.toLowerCase().includes('mini split estimate (new)')) || 'Mini Split Estimate (New)';
+            } else if (rawLower.includes('clean-vs-replace') || rawLower.includes('assessment')) {
+                mappedService = services.find(s => s.toLowerCase().includes('clean-vs-replace')) || 'Window AC Clean-vs-Replace Assessment';
             } else {
                 const exactOrPartial = services.find(s => s.toLowerCase() === rawLower);
                 if (exactOrPartial) mappedService = exactOrPartial;
@@ -189,7 +184,7 @@ export function DispatchWizard() {
                     )}
                     <div className="flex items-center justify-between text-xs">
                         <span className="text-slate-400 font-mono uppercase text-[10px] tracking-wider">Commitment</span>
-                        <span className="text-emerald-400 font-semibold">$0 Free Estimate &bull; CT-36775</span>
+                        <span className="text-emerald-400 font-semibold">$0 Free Estimate &bull; Waipahu Direct</span>
                     </div>
                 </div>
 
@@ -269,7 +264,7 @@ export function DispatchWizard() {
                                         <Check className="size-3 text-black stroke-[3px] opacity-0 peer-checked:opacity-100 transition-opacity" />
                                     </div>
                                     <span className="text-sm lg:text-base font-black text-slate-300 peer-checked:text-white uppercase tracking-tight leading-tight group-hover:text-white transition-colors">
-                                        <EditableText contentKey={`contact.wizard.services_list.${i}`} />
+                                        {service}
                                     </span>
                                 </div>
                             </label>
@@ -553,7 +548,7 @@ export function DispatchWizard() {
                             By Appointment First • Upfront Quotes
                         </div>
                         <p className="text-slate-400 text-[11px] leading-relaxed max-w-lg mx-auto">
-                            $0 to book in-home estimates for new or replacement installations. Island flat rates: $175 mini split diagnosis, $175 basic mini split cleaning, $275 premium mini split cleaning, and in-stock Waipahu Window ACs ($395–$1,200).
+                            $0 to book window assessments, custom jalousie/slider installations, or Window AC cleaning appointments. In-stock Waipahu LG &amp; GE Window ACs ($395–$1,200) ready for same-day pickup or $50 flat-rate Oahu delivery.
                         </p>
                     </div>
                 </div>

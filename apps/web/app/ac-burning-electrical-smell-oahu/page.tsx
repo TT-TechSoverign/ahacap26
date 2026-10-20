@@ -59,7 +59,7 @@ const EMERGENCY_ACTIONS = [
     {
         step: "04",
         title: "Call Emergency Dispatch",
-        desc: "Call (808) 488-1111 for rapid electrical triage by a licensed CT-36775 HVAC technician."
+        desc: "Call (808) 488-1111 for rapid electrical triage by an experienced Oahu window AC specialist."
     }
 ];
 
@@ -156,7 +156,7 @@ export default function AcBurningSmellPage() {
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-emerald-400">CT-36775</span>
+                                <span className="font-header font-bold text-xs text-emerald-400">Insured</span>
                             </div>
                         </div>
                     </div>

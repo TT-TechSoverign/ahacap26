@@ -47,16 +47,16 @@ interface Division {
 }
 
 export function HomeServicesDivisions() {
-    const [activeTab, setActiveTab] = useState<'all' | 'window-ac' | 'split-ac'>('all');
+    const [activeTab, setActiveTab] = useState<'all' | 'window-ac' | 'window-cleaning'>('all');
     const { inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
 
     const divisions: Division[] = [
         {
             id: 'window-ac',
-            name: 'Window AC Division',
+            name: 'Window AC Sales & Install Division',
             badge: 'Waipahu Warehouse Direct',
-            tagline: 'In-Stock Sales, Custom Jalousie Mounting & Clean-vs-Replace Evaluations',
-            description: `From whisper-quiet LG Dual Inverter and GE Thru-The-Wall units in stock in Waipahu ($${minPrice}–$${maxPrice.toLocaleString()}) to custom jalousie security brackets and honest clean-vs-replace assessments, our dedicated Window AC division keeps Oahu homes cool without mainland shipping delays.`,
+            tagline: 'In-Stock LG & GE Sales, Custom Jalousie Mounting & 26" Sleeve Replacements',
+            description: `From whisper-quiet LG Dual Inverter and GE Thru-The-Wall units in stock in Waipahu ($${minPrice}–$${maxPrice.toLocaleString()}) to custom jalousie security brackets and precision mounting, our Window AC Sales & Install division keeps Oahu homes cool without mainland shipping delays.`,
             theme: {
                 accent: 'cyan',
                 badgeBg: 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400',
@@ -85,18 +85,18 @@ export function HomeServicesDivisions() {
                 {
                     title: 'Window AC Delivery & Warehouse Pickup',
                     desc: '$50 flat delivery across Honolulu, West, Central & Windward Oahu or same-day vehicle loading at our Waipahu warehouse. Factory-sealed with 1-Yr / 2-Yr warranty.',
-                    href: '/window-ac-delivery-service-oahu',
+                    href: '/oahu-curbside-ac-delivery',
                     cta: 'Delivery & Pickup Info',
                     icon: Truck,
                     badge: '$50 Flat Delivery'
                 },
                 {
-                    title: 'Clean vs. Replace Evaluation',
-                    desc: 'Honest evaluation on whether an older window AC is worth maintaining or if upgrading to an LG Dual Inverter ($45 rebate) pays for itself in HECO savings.',
-                    href: '/clean-vs-replace-window-ac',
-                    cta: 'Run Calculator',
-                    icon: RotateCcw,
-                    badge: 'Save on HECO Power'
+                    title: '26" Thru-The-Wall Sleeve Replacement',
+                    desc: 'Direct drop-in GE AJCQ & LG LT replacements for Oahu high-rises, condos, and townhomes with existing 26-inch wall sleeves.',
+                    href: '/thru-the-wall-ac-replacement-oahu',
+                    cta: 'View 26" Sleeve Units',
+                    icon: Wind,
+                    badge: 'GE & LG Chassis'
                 }
             ],
             primaryCta: {
@@ -104,16 +104,16 @@ export function HomeServicesDivisions() {
                 href: '/shop'
             },
             secondaryCta: {
-                text: 'Book Window AC Service',
+                text: 'Book Window AC Install',
                 href: '/contact'
             }
         },
         {
-            id: 'split-ac',
-            name: 'Split AC Division',
-            badge: 'Ductless Mini-Split Specialists',
-            tagline: 'Whole-Home Zoned Comfort, Inverter Retrofits & Diagnostics',
-            description: 'Factory-certified technicians delivering whisper-quiet ductless mini-split systems engineered for Hawaii tropical humidity. Free in-home estimates ($0) across Oahu with zero upfront booking fees.',
+            id: 'window-cleaning',
+            name: 'Window AC Cleaning & Care Division',
+            badge: 'Antimicrobial Coil & Mold Flush',
+            tagline: 'Deep Window AC Cleaning, Airflow Restoration & Clean-vs-Replace Guidance',
+            description: 'Dedicated Window AC cleaning and maintenance specialists restoring icy airflow, eliminating musty tropical mildew, and lowering HECO power bills across Oahu. Free estimates ($0) with floor drop-cloth protection.',
             theme: {
                 accent: 'emerald',
                 badgeBg: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
@@ -124,45 +124,45 @@ export function HomeServicesDivisions() {
             },
             services: [
                 {
-                    title: 'Mini-Split Installation & Replacement',
-                    desc: 'New multi-zone and single-zone ductless installations. Authorized dealer for Mitsubishi Electric, Fujitsu Halcyon, Daikin, and LG.',
-                    href: '/mini_split_ac',
-                    cta: 'Explore Mini-Splits',
-                    icon: Wind,
-                    badge: '$0 Free In-Home Estimate'
-                },
-                {
-                    title: 'Split AC Deep Cleaning & Sanitization',
-                    desc: 'Clinical anti-microbial coil flush, blower wheel sanitization, drain pan treatment, and condensate line clearing ($175 Basic / $275 Premium).',
-                    href: '/mini_split_ac_maintenance',
-                    cta: 'Split AC Maintenance',
+                    title: 'Window AC Deep Cleaning & Sanitization',
+                    desc: 'Antimicrobial evaporator & condenser coil wash, blower wheel & slinger fan cleaning, and algae drain pan treatment with floor drop-cloth protection.',
+                    href: '/ac-cleaning-oahu',
+                    cta: 'Explore Window AC Cleaning',
                     icon: Sparkles,
-                    badge: 'Clinical Coil Flush'
+                    badge: 'Mold & Coil Wash'
                 },
                 {
-                    title: 'Diagnostic Troubleshooting & AC Repair',
-                    desc: 'Licensed CT-36775 diagnosis ($175 flat rate) for cooling failure, refrigerant leaks, compressor faults, blinking error codes, and inverter boards.',
+                    title: 'Seasonal Window AC Maintenance',
+                    desc: 'Preventative salt-air coil rinse, filter replacement, weep-hole clearing, and airflow temperature verification for residential & commercial window units.',
+                    href: '/maintenance',
+                    cta: 'Window AC Maintenance',
+                    icon: ShieldCheck,
+                    badge: 'Extend Unit Life'
+                },
+                {
+                    title: 'Window AC Troubleshooting & Diagnostics',
+                    desc: 'Diagnosis for warm air, ice on coils, water dripping indoors, loud fan vibration, breaker tripping, and LED filter/chassis error codes.',
                     href: '/ac-repair-oahu',
-                    cta: 'AC Repair Service',
+                    cta: 'Troubleshooting Guide',
                     icon: Wrench,
-                    badge: '$175 Flat Diagnostic'
+                    badge: 'Airflow & Cooling'
                 },
                 {
-                    title: 'Instant Sizing & Heat Load Assessment',
-                    desc: 'Room-by-room microclimate sizing calculator tailored specifically for Hawaii single-wall redwood and jalousie heat loads.',
-                    href: '/mini-split-estimate',
-                    cta: 'Size Your System',
-                    icon: SlidersHorizontal,
-                    badge: 'Island Heat-Load Math'
+                    title: 'Clean vs. Replace & BTU Sizing Guide',
+                    desc: 'Honest evaluation on whether an older window AC is worth cleaning or if upgrading to an LG Dual Inverter ($45 rebate) pays for itself in HECO savings.',
+                    href: '/clean-vs-replace-window-ac',
+                    cta: 'Compare Clean vs Replace',
+                    icon: RotateCcw,
+                    badge: 'Save on HECO Power'
                 }
             ],
             primaryCta: {
-                text: 'Request Free Estimate ($0)',
+                text: 'Book Window AC Cleaning ($0)',
                 href: '/contact'
             },
             secondaryCta: {
-                text: 'Split AC Services',
-                href: '/mini_split_ac'
+                text: 'Cleaning Process Details',
+                href: '/ac-cleaning-oahu'
             }
         }
     ];
@@ -178,13 +178,13 @@ export function HomeServicesDivisions() {
                 <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 font-mono text-[11px] font-bold uppercase tracking-wider">
                         <Layers className="size-3.5 text-cyan-400" />
-                        Licensed Hawaii Contractor CT-36775 • Two Specialized Divisions
+                        Waipahu Warehouse Direct • Two Specialized Window AC Divisions
                     </div>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-header font-black text-white uppercase tracking-tight">
-                        Our Cooling Divisions &amp; Services
+                        Our Window AC Divisions &amp; Services
                     </h2>
                     <p className="font-sans text-sm sm:text-base text-slate-300 leading-relaxed">
-                        Dedicated service teams specializing in their respective craft. Whether you need in-stock window AC inventory or complete whole-home ductless mini-split cooling, we have you covered across Oahu.
+                        Dedicated Oahu teams specializing in LG &amp; GE Window Air Conditioners. Whether you need an in-stock Dual Inverter unit with custom jalousie installation or deep antimicrobial Window AC cleaning, we have you covered across Oahu.
                     </p>
 
                     {/* Mobile Division Filter Buttons */}
@@ -209,18 +209,18 @@ export function HomeServicesDivisions() {
                                     : 'bg-transparent text-slate-400 border border-white/5'
                             }`}
                         >
-                            Window AC
+                            Sales &amp; Install
                         </button>
                         <button
                             type="button"
-                            onClick={() => setActiveTab('split-ac')}
+                            onClick={() => setActiveTab('window-cleaning')}
                             className={`px-3 py-1.5 rounded-xl font-header font-bold text-xs uppercase tracking-wider transition-all ${
-                                activeTab === 'split-ac'
+                                activeTab === 'window-cleaning'
                                     ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
                                     : 'bg-transparent text-slate-400 border border-white/5'
                             }`}
                         >
-                            Split AC
+                            AC Cleaning
                         </button>
                     </div>
                 </div>
@@ -315,7 +315,7 @@ export function HomeServicesDivisions() {
                     })}
                 </div>
 
-                {/* Drop-Cloth Protection Guarantee & License Grounding */}
+                {/* Drop-Cloth Protection Guarantee & Trust Grounding */}
                 <div className="mt-12 bg-slate-900/50 border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
                     <div className="flex items-start gap-4 text-center lg:text-left">
                         <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0 mx-auto lg:mx-0">
@@ -324,7 +324,7 @@ export function HomeServicesDivisions() {
                         <div className="space-y-1">
                             <div className="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider">
                                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                                Floor Drop-Cloth Protection • Hawaii Contractor CT-36775
+                                Floor Drop-Cloth Protection • Waipahu Warehouse Direct
                             </div>
                             <h4 className="font-header font-black text-lg sm:text-xl text-white uppercase tracking-tight">
                                 By Appointment First • Free Installation Estimates ($0 to Book)

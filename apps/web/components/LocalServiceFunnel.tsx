@@ -27,29 +27,9 @@ export default function LocalServiceFunnel({ city }: LocalServiceFunnelProps) {
 
     const services = [
         {
-            id: 'mini-split-installs',
-            title: 'Mini-Split Installs',
-            description: `Whisper-quiet, highly efficient ductless cooling designed specifically for your home in ${city}.`,
-            icon: LucideIcons.Fan,
-            ctaText: 'BUILD YOUR SYSTEM',
-            route: `/mini_split_ac?city=${encodeURIComponent(city)}#system-builder`,
-            gaCategory: 'Split Service',
-            ariaLabel: `Get a free quote for mini-split installation in ${city}`
-        },
-        {
-            id: 'mini-split-cleaning',
-            title: 'Mini-Split AC Cleaning',
-            description: `Deep cleaning and professional sanitization to keep your ductless system mold-free and efficient in ${city}.`,
-            icon: LucideIcons.Sparkles,
-            ctaText: 'BOOK A CLEANING',
-            route: `/mini_split_ac_maintenance?city=${encodeURIComponent(city)}`,
-            gaCategory: 'Split Cleaning',
-            ariaLabel: `Book a mini-split AC cleaning service in ${city}`
-        },
-        {
             id: 'window-ac-upgrades',
-            title: 'Window AC Upgrades',
-            description: `Premium window AC units stocked locally and ready for fast delivery to ${city}. Upgrade your cooling today.`,
+            title: 'LG & GE Window AC Shop',
+            description: `Factory-sealed LG Dual Inverter and GE Thru-The-Wall window AC units stocked locally in Waipahu and ready for fast delivery to ${city}.`,
             icon: LucideIcons.Store,
             ctaText: 'SHOP LOCAL INVENTORY',
             route: `/shop`,
@@ -57,9 +37,29 @@ export default function LocalServiceFunnel({ city }: LocalServiceFunnelProps) {
             ariaLabel: `Shop local window AC inventory for ${city}`
         },
         {
+            id: 'window-ac-cleaning',
+            title: 'Window AC Deep Cleaning',
+            description: `Professional Window AC coil, filter, and drain pan sanitization to eliminate mold, salt-air buildup, and musty odors in ${city}.`,
+            icon: LucideIcons.Sparkles,
+            ctaText: 'BOOK A CLEANING',
+            route: `/ac-cleaning-oahu?city=${encodeURIComponent(city)}`,
+            gaCategory: 'Window AC Cleaning',
+            ariaLabel: `Book a Window AC cleaning service in ${city}`
+        },
+        {
+            id: 'window-ac-installs',
+            title: 'Window AC Installation',
+            description: `Custom jalousie glass, horizontal slider, and 26" thru-the-wall sleeve installation tailored for your home in ${city}.`,
+            icon: LucideIcons.Fan,
+            ctaText: 'REQUEST FREE ESTIMATE',
+            route: `/window-ac-installation?city=${encodeURIComponent(city)}`,
+            gaCategory: 'Window AC Install',
+            ariaLabel: `Get a free quote for window AC installation in ${city}`
+        },
+        {
             id: 'clean-vs-replace',
             title: 'Clean vs. Replace Evaluation',
-            description: `Evaluate whether your aging window AC is worth maintaining or if upgrading to an LG Dual Inverter saves more on your ${city} electric bill.`,
+            description: `Evaluate whether your aging window AC is worth cleaning or if upgrading to an LG Dual Inverter saves more on your ${city} electric bill.`,
             icon: LucideIcons.RotateCcw,
             ctaText: 'RUN CALCULATOR',
             route: `/clean-vs-replace-window-ac`,

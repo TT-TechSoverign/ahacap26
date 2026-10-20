@@ -28,7 +28,7 @@ OAHU_AVATAR_PROMPTS = [
     {
         "id": "avatar_kailua_resident",
         "name": "Kailua Lanai Homeowner",
-        "prompt": "Authentic portrait of a smiling local Hawaii resident in Kailua Oahu, wearing casual subtle aloha shirt, standing in a bright breezy living room with a clean ductless mini-split AC mounted on wall, natural morning sunlight, photorealistic, 8k resolution, cinematic, realistic skin texture, shallow depth of field",
+        "prompt": "Authentic portrait of a smiling local Hawaii resident in Kailua Oahu, wearing casual subtle aloha shirt, standing in a bright breezy living room with a clean modern window AC unit mounted in window, natural morning sunlight, photorealistic, 8k resolution, cinematic, realistic skin texture, shallow depth of field",
         "negative_prompt": "blurry, low quality, oversaturated, deformed, cartoon, 3d render, extra limbs"
     },
     {
@@ -140,7 +140,7 @@ def generate_svg_fallbacks():
   <path d="M 128 50 L 137 78 L 166 78 L 142 96 L 151 124 L 128 106 L 105 124 L 114 96 L 90 78 L 119 78 Z" fill="#FBBF24"/>
   <text x="128" y="152" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">4.9 ★</text>
   <text x="128" y="174" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="700" font-size="12" fill="#38BDF8" text-anchor="middle" letter-spacing="2">OAHU VERIFIED</text>
-  <text x="128" y="192" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="600" font-size="10" fill="#94A3B8" text-anchor="middle">CT-36775</text>
+  <text x="128" y="192" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="600" font-size="10" fill="#94A3B8" text-anchor="middle">EST. 2005</text>
 </svg>'''
     medallion_target = os.path.join(OUTPUT_DIR, "trust_medallion_gold.svg")
     with open(medallion_target, "w", encoding="utf-8") as f:

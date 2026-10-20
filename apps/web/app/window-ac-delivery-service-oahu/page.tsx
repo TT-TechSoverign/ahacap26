@@ -32,7 +32,7 @@ const FAQS = [
     },
     {
         q: "Can you install the window AC when you deliver it?",
-        a: "Yes! We coordinate professional window AC installation by appointment ($0 Free In-Home Estimate). Our licensed technicians (CT-36775) lay protective floor drop cloths, securely mount the unit with standard brackets if required, and test cooling operation before leaving."
+        a: "Yes! We coordinate professional window AC installation by appointment ($0 Free In-Home Estimate). Our experienced technicians lay protective floor drop cloths, securely mount the unit with standard brackets if required, and test cooling operation before leaving."
     },
     {
         q: "Can I pick up the unit myself instead of paying for delivery?",

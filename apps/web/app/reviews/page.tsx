@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: '142+ Verified 5-Star Reviews | Affordable Home A/C Oahu',
-        description: 'Read authentic reviews from homeowners across Honolulu, Waipahu, Kailua, Ewa Beach, and Mililani. Licensed Hawaii Contractor CT-36775.',
+        description: 'Read authentic reviews from homeowners across Honolulu, Waipahu, Kailua, Ewa Beach, and Mililani. Insured Oahu Window AC Specialists.',
         url: 'https://www.affordablehome-ac.com/reviews',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -48,7 +48,6 @@ export default function ReviewsPage() {
         },
         "url": "https://www.affordablehome-ac.com",
         "priceRange": "$$",
-        "license": "CT-36775",
         "areaServed": [
             { "@type": "AdministrativeArea", "name": "Oahu" },
             { "@type": "City", "name": "Waipahu" },
@@ -135,7 +134,7 @@ export default function ReviewsPage() {
                     </h1>
 
                     <p className="text-slate-400 max-w-2xl text-xs sm:text-sm md:text-base font-medium leading-relaxed">
-                        Read unedited feedback from homeowners across Oahu. From prompt Waipahu warehouse pickups to full ductless mini-split installations, see why Hawaii families trust Affordable Home A/C.
+                        Read unedited feedback from homeowners across Oahu. From prompt Waipahu warehouse pickups to custom jalousie window AC installations and antimicrobial cleaning, see why Hawaii families trust Affordable Home A/C.
                     </p>
                 </div>
 

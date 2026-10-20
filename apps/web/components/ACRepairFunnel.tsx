@@ -19,17 +19,16 @@ import {
 
 export default function ACRepairFunnel() {
     const [step, setStep] = useState<number>(1);
-    // Default to 'Mini Split' since we only troubleshoot/repair mini split systems (window AC is cleaning only)
-    const [systemType] = useState<'Mini Split' | 'Window AC' | null>('Mini Split');
+    const [systemType] = useState<'Window AC' | null>('Window AC');
     const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
     const [customNotes, setCustomNotes] = useState<string>('');
 
     const symptomsList = [
-        { id: 'not_cooling', text: 'System Not Cooling / Blowing Warm Air', icon: Snowflake },
-        { id: 'water_leak', text: 'Water Leaking (Indoor or Outdoor)', icon: Droplets },
-        { id: 'weird_noises', text: 'Strange Noises (Rattling, Squealing, Grinding)', icon: Volume2 },
-        { id: 'electrical_fault', text: 'Power Issues / Tripping Breakers', icon: Activity },
-        { id: 'bad_odor', text: 'Musty Smell / Poor Air Quality', icon: Wind }
+        { id: 'not_cooling', text: 'Window AC Not Cooling / Blowing Warm Air', icon: Snowflake },
+        { id: 'water_leak', text: 'Water Dripping Indoors / Clogged Drain Pan', icon: Droplets },
+        { id: 'weird_noises', text: 'Strange Noises (Rattling, Vibration, Fan Rubbing)', icon: Volume2 },
+        { id: 'electrical_fault', text: 'Power Issues / LCDI Plug Reset Tripping', icon: Activity },
+        { id: 'bad_odor', text: 'Musty Smell / Clogged Coils & Filter', icon: Wind }
     ];
 
     const toggleSymptom = (text: string) => {
@@ -41,7 +40,7 @@ export default function ACRepairFunnel() {
     };
 
     const getContactLink = () => {
-        const service = 'Mini Split Diagnosis/Repair';
+        const service = 'Window AC Diagnosis/Troubleshooting';
         
         let notes = `Selected Symptoms: ${selectedSymptoms.join(', ')}.`;
         if (customNotes.trim()) {
@@ -64,7 +63,7 @@ export default function ACRepairFunnel() {
 
             <div className="flex justify-between items-center mb-6 pb-4 border-b border-white/5 relative z-10">
                 <span className="font-mono text-[9px] font-black uppercase tracking-[0.4em] text-[#00E5FF]/70">
-                    SYSTEM DIAGNOSTIC WIZARD
+                    WINDOW AC DIAGNOSTIC WIZARD
                 </span>
                 <span className="font-mono text-[9px] font-black text-slate-400">
                     STEP {step} OF 2
@@ -84,10 +83,10 @@ export default function ACRepairFunnel() {
                         >
                             <div className="text-center md:text-left">
                                 <h3 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-wider">
-                                    What symptoms are you experiencing?
+                                    What Window AC symptoms are you experiencing?
                                 </h3>
                                 <p className="text-xs text-slate-400 font-sans mt-1">
-                                    Select all that apply to help us prepare the right parts for your service (diagnostics & repairs subject to technician scheduling and on-site physical inspection).
+                                    Select all that apply so our Oahu team can recommend whether a deep cleaning or an energy-efficient LG / GE replacement is best for your space.
                                 </p>
                             </div>
 
@@ -146,7 +145,7 @@ export default function ACRepairFunnel() {
                                     Any additional details?
                                 </h3>
                                 <p className="text-xs text-slate-400 font-sans mt-1">
-                                    Describe any specific notes (brand of unit, error codes, height of installation). Service dispatch is subject to scheduling availability and scope of work approval.
+                                    Describe any specific notes (brand of window unit, BTU size, jalousie vs. sliding window, or 26&quot; wall sleeve).
                                 </p>
                             </div>
 
@@ -155,7 +154,7 @@ export default function ACRepairFunnel() {
                                     value={customNotes}
                                     onChange={(e) => setCustomNotes(e.target.value)}
                                     className="w-full h-32 bg-slate-950 border border-white/10 rounded-xl p-4 text-sm text-white focus:border-primary/50 outline-none transition-colors font-sans resize-none placeholder:text-slate-600"
-                                    placeholder="Examples: unit is a Fujitsu model, flashing green light on display, installed on the second floor wall..."
+                                    placeholder="Examples: unit is an LG 12,000 BTU window AC, filter light is on, mounted in a jalousie window..."
                                     aria-label="Additional diagnostic notes"
                                 />
 
@@ -182,9 +181,9 @@ export default function ACRepairFunnel() {
                                     <Link
                                         href={getContactLink()}
                                         className="px-8 py-3 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(0,174,239,0.4)]"
-                                        aria-label="Schedule Diagnostic Appointment"
+                                        aria-label="Schedule Window AC Assessment"
                                     >
-                                        Schedule Diagnostic Appointment
+                                        Schedule Window AC Assessment
                                         <Sparkles className="w-4 h-4 text-slate-950" />
                                     </Link>
                                 </div>
@@ -194,7 +193,7 @@ export default function ACRepairFunnel() {
                                         Upfront Estimates • By Appointment First
                                     </p>
                                     <p className="text-[11px] text-slate-300 font-sans">
-                                        $175 Mini Split Diagnosis Appointment ($0 to book replacement estimates). Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the form above to reserve your appointment window.
+                                        $0 to book Clean-vs-Replace or replacement Window AC estimates. Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the form above to reserve your appointment window.
                                     </p>
                                 </div>
                             </div>

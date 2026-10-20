@@ -27,12 +27,12 @@ const FAQS = [
         a: "When an AC has zero power, the most common causes are a tripped 2-pole circuit breaker in your electrical service panel, a blown low-voltage fuse on the indoor control board, a tripped condensate overflow safety switch, or a blown fuse inside the outdoor disconnect box."
     },
     {
-        q: "How does a clogged drain line cause the AC to lose all power?",
-        a: "Modern mini split systems and high-efficiency window units incorporate a float safety switch. When water backs up in the drain pan, the switch floats upward and cuts the 24V or 12V control circuit, killing all power to prevent water damage to your drywall."
+        q: "How does a clogged drain pan cause the AC to lose all power?",
+        a: "Modern high-efficiency window units incorporate a water level or float safety switch. When water backs up in the drain pan, the switch cuts the 12V control circuit, shutting down power to prevent water overflow into your home."
     },
     {
         q: "What should I do if the circuit breaker trips immediately when I reset it?",
-        a: "Never force a breaker to stay in the ON position or repeatedly reset it. An instantaneous trip signifies a hard direct short to ground in the compressor windings, an inverter power transistor failure, or a melted electrical whip."
+        a: "Never force a breaker to stay in the ON position or repeatedly reset it. An instantaneous trip signifies a hard direct short to ground in the compressor windings, an inverter power transistor failure, or a damaged LCDI power cord."
     },
     {
         q: "What is the reset button on a window AC power cord?",
@@ -43,8 +43,8 @@ const FAQS = [
 const POWER_CHECKS = [
     {
         step: "01",
-        title: "Main Electrical Panel (Double-Pole Breaker)",
-        desc: "Look for the dedicated 15A to 30A 240V breaker labeled 'A/C'. If the switch is in the center 'tripped' position, switch it firmly OFF, then back ON."
+        title: "Main Electrical Panel (Circuit Breaker)",
+        desc: "Look for the dedicated 15A to 30A breaker (115V or 240V) labeled 'A/C'. If the switch is in the center 'tripped' position, switch it firmly OFF, then back ON."
     },
     {
         step: "02",
@@ -53,13 +53,13 @@ const POWER_CHECKS = [
     },
     {
         step: "03",
-        title: "Outdoor Disconnect Switch Box",
-        desc: "Check the weather-tight disconnect box mounted next to your outdoor condenser. Verify the pullout block is firmly seated in the 'ON' position."
+        title: "Wall Receptacle & Dedicated Outlet",
+        desc: "Inspect the wall receptacle for loose blades or heat discoloration, and verify the plug is seated firmly without extension cords."
     },
     {
         step: "04",
         title: "Condensate Float Safety Switch",
-        desc: "If your indoor drain line is clogged with algae jelly, the overflow float switch cuts power to protect your home from water damage."
+        desc: "If your drain pan is clogged with algae jelly, the overflow safety switch cuts power to protect your home from water damage."
     }
 ];
 
@@ -82,11 +82,11 @@ export default function NoPowerAcPage() {
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
-                        No Power to AC Unit? <span className="text-primary italic">Breaker & Disconnect Checks Oahu</span>
+                        No Power to AC Unit? <span className="text-primary italic">Breaker &amp; Plug Checks Oahu</span>
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Is your air conditioner completely dead with no lights, sounds, or response? Before panicking, follow our licensed HVAC electrical troubleshooting steps to check breakers, disconnect pullouts, and safety float switches across Oahu.
+                        Is your air conditioner completely dead with no lights, sounds, or response? Before panicking, follow our HVAC electrical troubleshooting steps to check breakers, LCDI reset plugs, and safety switches across Oahu.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -139,13 +139,13 @@ export default function NoPowerAcPage() {
                                 PROFESSIONAL ELECTRICAL SAFETY
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                                High-Voltage Safety Standards (240V)
+                                High-Voltage Safety Standards (115V &amp; 240V)
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Air conditioners run on high-voltage 208V/240V power lines capable of causing severe electric shock or fire. Never touch exposed wiring or disassemble electrical control boxes yourself.
+                                Large-capacity window air conditioners run on dedicated 115V or high-voltage 208V/240V power lines capable of causing severe electric shock or fire. Never touch exposed wiring or disassemble electrical control boxes yourself.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our licensed CT-36775 HVAC technicians safely test line-voltage drop, control transformer output, PCB surge fuses, and safety interlocks with calibrated digital multimeters.
+                                Our HVAC technicians safely test line-voltage drop, control transformer output, PCB surge fuses, and safety interlocks with calibrated digital multimeters.
                             </p>
                         </div>
 
@@ -156,11 +156,11 @@ export default function NoPowerAcPage() {
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Voltage Verification</span>
-                                <span className="font-header font-bold text-xs text-white">Full 240V & Low-Voltage Check</span>
+                                <span className="font-header font-bold text-xs text-white">Full 115V/240V &amp; PCB Check</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-emerald-400">CT-36775</span>
+                                <span className="text-xs text-slate-300">Waipahu Warehouse Stock</span>
+                                <span className="font-header font-bold text-xs text-emerald-400">LG &amp; GE In Stock</span>
                             </div>
                         </div>
                     </div>

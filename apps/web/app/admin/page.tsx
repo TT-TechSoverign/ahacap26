@@ -1193,7 +1193,7 @@ Created: ${new Date(lead.created_at).toLocaleString()}`;
 
     const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${lead.address}, ${lead.city}, HI ${lead.zip}`)}`;
     const emailSubject = encodeURIComponent(`Affordable Home A/C - Appointment Lead #${lead.id}`);
-    const emailBody = encodeURIComponent(`Aloha ${lead.first_name},\n\nThank you for choosing Affordable Home A/C! We received your request for ${lead.service_type} in ${lead.city}.\n\nOur dispatch team is reviewing your schedule and will contact you directly at ${lead.phone}.\n\nMahalo,\nAffordable Home A/C Team\nOahu, Hawaii | Lic #CT-36775`);
+    const emailBody = encodeURIComponent(`Aloha ${lead.first_name},\n\nThank you for choosing Affordable Home A/C! We received your request for ${lead.service_type} in ${lead.city}.\n\nOur dispatch team is reviewing your schedule and will contact you directly at ${lead.phone}.\n\nMahalo,\nAffordable Home A/C Team\nOahu, Hawaii | Waipahu Warehouse Direct`);
     const mailtoUrl = `mailto:${lead.email}?subject=${emailSubject}&body=${emailBody}`;
 
     return (
@@ -2269,10 +2269,7 @@ function DateRangeInput({ label, name, value, onChange }: { label: string, name:
 function ScheduleManager({ adminFetch }: { adminFetch: any }) {
     const { content, refreshContent } = useContent();
     const [formData, setFormData] = useState(content.footer_schedule || {
-        mini_split_label: "",
         window_ac_label: "",
-        mini_split_estimate_date: "",
-        mini_split_install_date: "",
         window_ac_estimate_date: "",
         window_ac_install_date: "",
         general_availability_range: ""
@@ -2299,9 +2296,7 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
         return false;
     };
 
-    const hasStaleDates = isDateStale(formData.mini_split_estimate_date) ||
-                         isDateStale(formData.mini_split_install_date) ||
-                         isDateStale(formData.window_ac_estimate_date) ||
+    const hasStaleDates = isDateStale(formData.window_ac_estimate_date) ||
                          isDateStale(formData.window_ac_install_date);
 
     // FIX: The Hydration Trap Synchronization
@@ -2365,7 +2360,7 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
                     <div className="text-xs space-y-1">
                         <p className="font-black uppercase tracking-wider">Date Staleness Alert</p>
                         <p className="text-slate-300 leading-relaxed">
-                            One or more availability dates appear to be in the past or older than the current month. Please update footer availability dates to reflect current Oahu installation and estimate capacity so prospective customers see accurate booking timeframes.
+                            One or more availability dates appear to be in the past or older than the current month. Please update footer availability dates to reflect current Oahu installation and cleaning capacity so prospective customers see accurate booking timeframes.
                         </p>
                     </div>
                 </div>
@@ -2373,41 +2368,11 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
 
             <form onSubmit={handleSave} className="max-w-4xl space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Mini Split Section */}
-                    <div className="space-y-4 p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
-                        <div className="flex items-center gap-2 mb-2">
-                            <div className="w-1 h-4 bg-primary rounded-full"></div>
-                            <h4 className="text-white font-bold uppercase tracking-wider text-sm">Mini Split Column</h4>
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Label</label>
-                            <input
-                                name="mini_split_label"
-                                value={formData.mini_split_label}
-                                onChange={handleChange}
-                                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/50 outline-none transition-all text-sm"
-                            />
-                        </div>
-                        <DateRangeInput
-                            label="Next Available Estimate"
-                            name="mini_split_estimate_date"
-                            value={formData.mini_split_estimate_date}
-                            onChange={handleChange}
-                        />
-                        <DateRangeInput
-                            label="Next Available Install"
-                            name="mini_split_install_date"
-                            value={formData.mini_split_install_date}
-                            onChange={handleChange}
-                        />
-                    </div>
-
                     {/* Window AC Section */}
                     <div className="space-y-4 p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
                         <div className="flex items-center gap-2 mb-2">
                             <div className="w-1 h-4 bg-primary rounded-full"></div>
-                            <h4 className="text-white font-bold uppercase tracking-wider text-sm">Window AC Column</h4>
+                            <h4 className="text-white font-bold uppercase tracking-wider text-sm">Window AC &amp; Cleaning Schedule</h4>
                         </div>
                         <div className="space-y-2">
                             <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest ml-1">Label</label>
@@ -2419,7 +2384,7 @@ function ScheduleManager({ adminFetch }: { adminFetch: any }) {
                             />
                         </div>
                         <DateRangeInput
-                            label="Next Available Estimate"
+                            label="Next Available Pickup / Service"
                             name="window_ac_estimate_date"
                             value={formData.window_ac_estimate_date}
                             onChange={handleChange}

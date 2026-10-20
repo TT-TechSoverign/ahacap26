@@ -383,12 +383,11 @@ export interface SystemUpgradeContent {
 }
 
 export interface FooterScheduleContent {
-    mini_split_label: string;
     window_ac_label: string;
-    mini_split_estimate_date: string;
-    mini_split_install_date: string;
+    window_cleaning_label?: string;
     window_ac_estimate_date: string;
     window_ac_install_date: string;
+    window_cleaning_date?: string;
     general_availability_range: string;
 }
 
@@ -404,6 +403,5 @@ export interface ContentSchema {
     home_v2?: HomeV2Content;
     footer_schedule?: FooterScheduleContent;
     window_ac?: any;
-    mini_split_ac_maintenance?: any;
     service_areas?: any;
 }

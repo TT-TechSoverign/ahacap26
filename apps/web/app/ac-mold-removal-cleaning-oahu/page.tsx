@@ -28,16 +28,16 @@ const FAQS = [
         a: "Oahu's year-round 80%+ humidity combined with dark, damp indoor evaporator coils creates the ideal breeding ground for mold spores like Cladosporium and Aspergillus. Over months, spores colonize the cylindrical blower wheel and drip pan, blowing microscopic allergens into your home every time the unit runs."
     },
     {
-        q: "What is the difference between Basic and Premium AC mold cleaning?",
-        a: "Our Basic Mini Split AC Cleaning ($175) provides clinical coil sanitization, air filter wash, and condensate drain flush. Our Premium Deep Cleaning (Full Teardown) ($275) completely disassembles the casing to access hidden mold, deep cleans the air scoop, pulls the blower fan wheel for 360-degree decontamination, and scrubs the condensate pan."
+        q: "What is the best solution for mold inside a Window AC?",
+        a: "For lightly soiled newer window units, routine filter washing, surface coil sanitization, and drain pan treatment keep mold away. For older window units with heavy black mold caked inside the sealed Styrofoam air channels, upgrading to a brand-new factory-sealed LG Dual Inverter ($560+ with a $45 Hawaii Energy rebate) is the cleanest and most economical long-term solution."
     },
     {
-        q: "Will the cleaning process make a water mess on my walls or floor?",
-        a: "Zero water mess. Our licensed technicians lay protective floor drop cloths directly under the indoor unit. Precision rinse systems capture 100% of dirty water and mold slurry, safely removing all contaminants from your home."
+        q: "Will the service process make a water mess on my walls or floor?",
+        a: "Zero water mess. Our technicians lay protective floor drop cloths directly under the window opening during service or unit replacement, keeping your home spotless."
     },
     {
-        q: "How often should Oahu homeowners get their AC mold cleaned?",
-        a: "In humid island microclimates like Kaneohe, Kailua, Manoa, and coastal Ewa Beach, we recommend deep sanitization every 6 to 12 months to prevent respiratory irritation and preserve system efficiency."
+        q: "How often should Oahu homeowners clean their AC filters and coils?",
+        a: "In humid island microclimates like Kaneohe, Kailua, Manoa, and coastal Ewa Beach, we recommend washing slide-out filters every 2–4 weeks and scheduling seasonal maintenance every 6 to 12 months."
     }
 ];
 
@@ -56,23 +56,23 @@ export default function AcMoldRemovalCleaningPage() {
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <Sparkles className="size-3.5" />
-                        <span>Clinical Mold Neutralization &bull; Drop-Cloth Protection</span>
+                        <span>Window AC Cleaning &amp; Replacement &bull; Drop-Cloth Protection</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
-                        AC Mold Removal <span className="text-primary italic">& Deep Cleaning Oahu</span>
+                        AC Mold Removal <span className="text-primary italic">&amp; Cleaning Oahu</span>
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Notice black specks on your AC louvers or a sour, musty smell when you turn the unit on? Island humidity breeds hidden mold inside blower wheels and condensate pans. Our licensed technicians perform clinical chemical sanitization that eradicates mold at the source.
+                        Notice black specks on your AC louvers or a sour, musty smell when you turn the unit on? Island humidity breeds hidden mold inside damp air channels and condensate pans. Learn when to clean your window AC and when to upgrade to a fresh, factory-sealed LG Dual Inverter.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/mini_split_ac_maintenance"
+                            href="/ac-cleaning-oahu"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
-                            Book $175 Basic / $275 Premium Clean
+                            Explore Window AC Cleaning &amp; Care
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -89,67 +89,67 @@ export default function AcMoldRemovalCleaningPage() {
                     <div className="p-8 rounded-3xl bg-surface-dark border border-white/10 space-y-4">
                         <div className="flex items-center justify-between">
                             <span className="font-mono text-xs text-primary uppercase font-bold tracking-wider">ROUTINE SANITIZATION</span>
-                            <span className="text-2xl font-black text-white font-header">$175 <span className="text-xs text-slate-400 font-sans font-normal">/ unit</span></span>
+                            <span className="text-2xl font-black text-white font-header">By Appt</span>
                         </div>
-                        <h2 className="font-header font-black text-2xl uppercase text-white">Basic Mini Split AC Cleaning</h2>
+                        <h2 className="font-header font-black text-2xl uppercase text-white">Window AC Cleaning &amp; Tune-Up</h2>
                         <p className="text-xs text-slate-300 font-sans">
-                            Designed for annual maintenance on lightly soiled units showing minor odor or routine dust buildup.
+                            Designed for routine maintenance on lightly soiled window units showing minor odor or surface dust buildup.
                         </p>
                         <ul className="space-y-2 text-xs text-slate-300 font-sans">
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
-                                <span>Coil sanitation & antimicrobial treatment</span>
+                                <span>Surface coil sanitation &amp; antimicrobial treatment</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
-                                <span>Air filter extraction, chemical wash, & disinfection</span>
+                                <span>Air filter extraction, wash, &amp; disinfection</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
-                                <span>Gravity condensate drain line flush</span>
+                                <span>Condensate pan &amp; drain channel flush</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
-                                <span>Floor drop cloth protection under indoor unit</span>
+                                <span>Floor drop cloth protection under window unit</span>
                             </li>
                         </ul>
                         <div className="pt-2">
-                            <Link href="/mini_split_ac_maintenance" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
-                                Book Basic Service &rarr;
+                            <Link href="/ac-cleaning-oahu" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
+                                Book Window AC Cleaning &rarr;
                             </Link>
                         </div>
                     </div>
 
                     <div className="p-8 rounded-3xl bg-gradient-to-b from-primary/10 to-surface-dark border border-primary/30 space-y-4">
                         <div className="flex items-center justify-between">
-                            <span className="font-mono text-xs text-primary uppercase font-bold tracking-wider">CLINICAL TEARDOWN</span>
-                            <span className="text-2xl font-black text-primary font-header">$275 <span className="text-xs text-slate-400 font-sans font-normal">/ unit</span></span>
+                            <span className="font-mono text-xs text-primary uppercase font-bold tracking-wider">FACTORY-SEALED UPGRADE</span>
+                            <span className="text-2xl font-black text-primary font-header">$395–$1,200</span>
                         </div>
-                        <h2 className="font-header font-black text-2xl uppercase text-white">Premium Deep Cleaning (Full Teardown)</h2>
+                        <h2 className="font-header font-black text-2xl uppercase text-white">New LG &amp; GE Window AC Upgrade</h2>
                         <p className="text-xs text-slate-300 font-sans">
-                            Our gold standard for stubborn mold, black specks on louvers, musty odors, and multi-year neglect.
+                            Our #1 recommendation for older window units with stubborn internal mold, rusted pans, and high HECO electric draw.
                         </p>
                         <ul className="space-y-2 text-xs text-slate-300 font-sans">
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-primary shrink-0" />
-                                <span>Complete casing disassembly to access hidden interior dirt</span>
+                                <span>100% spore-free, factory-sealed LG Dual Inverter &amp; GE units</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-primary shrink-0" />
-                                <span>Deep clean air scoop & 360° blower fan wheel scrub</span>
+                                <span>Gold Fin™ anti-corrosion coating for Hawaii coastal air</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-primary shrink-0" />
-                                <span>Deep clean & flush condensate drip pan</span>
+                                <span>Up to 40% HECO electric bill savings + $45 Hawaii Energy Rebate</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-primary shrink-0" />
-                                <span>High-volume chemical coil wash restoring 100% velocity</span>
+                                <span>Free Waipahu warehouse pickup or $50 flat Oahu delivery</span>
                             </li>
                         </ul>
                         <div className="pt-2">
-                            <Link href="/mini_split_ac_maintenance" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
-                                Book Premium Teardown &rarr;
+                            <Link href="/shop" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
+                                Shop In-Stock Window ACs &rarr;
                             </Link>
                         </div>
                     </div>
@@ -166,10 +166,10 @@ export default function AcMoldRemovalCleaningPage() {
                                 Protective Drop-Cloth Standard
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Chemical cleaning requires water, but none of it touches your floors or furniture. Our licensed technicians lay protective floor drop cloths directly under the indoor unit. Precision rinse systems safely flush out the mold slurry into closed disposal containers.
+                                Every on-site service and window unit installation includes protective floor drop cloths laid directly under your window opening to keep your floors and furniture spotless.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
-                                <strong>Contractor License CT-36775:</strong> All sanitization is performed by licensed HVAC professionals, protecting equipment warranties and electrical circuitry.
+                                <strong>Insured Oahu Cooling Specialists:</strong> All service and installation work is performed by experienced local technicians, protecting equipment warranties and electrical safety.
                             </div>
                         </div>
 
@@ -179,8 +179,8 @@ export default function AcMoldRemovalCleaningPage() {
                             <p className="text-xs text-slate-300">
                                 Eliminate allergens, spore circulation, and musty odors. Service available island-wide across all 22 Oahu municipalities.
                             </p>
-                            <Link href="/mini_split_ac_maintenance" className="inline-flex px-6 py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider">
-                                Schedule Mold Cleaning
+                            <Link href="/ac-cleaning-oahu" className="inline-flex px-6 py-3 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider">
+                                Schedule Window AC Service
                             </Link>
                         </div>
                     </div>

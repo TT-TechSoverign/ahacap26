@@ -64,7 +64,7 @@ ahacws26/ (Project Root)
 │   │   │   └── sopsData.ts                    # 50 Visual SOP dossiers & agent instruction data
 │   │   └── public/                            # Static cockpit assets
 │   │
-│   └── web/                                   # Customer-Facing Storefront & Conversion Surfaces (110 Routes)
+│   └── web/                                   # Customer-Facing Storefront & Conversion Surfaces (101 Canonical Routes)
 │       ├── Dockerfile                         # Next.js 14 App Router production runner
 │       ├── app/
 │       │   ├── page.tsx                       # High-converting homepage & live stock-synced featured inventory
@@ -73,16 +73,13 @@ ahacws26/ (Project Root)
 │       │   │   └── window-ac-plug-guide/      # 115V vs 230V visual plug guide (NEMA 5-15P vs 6-20P)
 │       │   ├── clean-vs-replace-window-ac/    # 3-step decision tool, HECO comparison, $45 rebate form
 │       │   ├── window-ac-installation/        # Jalousie bracket mounting, zero-deposit intake form
-│       │   ├── mini-split-estimate/           # Multi-zone sizing wizard, $0 Free In-Home Estimate
+│       │   ├── ac-cleaning-oahu/              # Window AC cleaning & mold treatment hub
 │       │   ├── reviews/                       # 142 Verified 5-Star Oahu Reviews Pavilion
-│       │   ├── mini_split_ac/                 # Mini split overview (0% Hawaii Energy rebate honesty)
-│       │   ├── mini_split_ac_maintenance/     # Mini split clinical chemical flush & mold remediation
 │       │   ├── service-areas/                 # 22 Oahu city landing pages with localized JSON-LD
 │       │   ├── contact/                       # "By Appointment First" customer booking intake
 │       │   ├── checkout/                      # Direct Stripe checkout bridge
-│       │   └── sitemap.ts                     # XML Sitemap generator for all 110 indexed routes
+│       │   └── sitemap.ts                     # XML Sitemap generator for all 101 indexed routes
 │       ├── components/                        # Tree-shaken UI components (Lucide React, Tailwind CSS)
-│       │   ├── MiniSplitEstimator.tsx         # Multi-step zone calculator & panel load intake
 │       │   ├── ReviewsPavilion.tsx            # 3-column full-width verified Oahu reviews showcase
 │       │   ├── BackToTop.tsx                  # Floating navigation anchor
 │       │   └── NavbarV2.tsx                   # Unified island header navigation
@@ -200,30 +197,30 @@ graph TD
 | 10 | `agent_cro_optimizer` | Commerce & Telemetry | Zero-upfront booking velocity, Waipahu pickup, mobile CRO | `SOP-COM-02` |
 | 11 | `agent_revenue_reconciler` | Commerce & Telemetry | Stripe order reconciliation, 4.712% Oahu GET tax, invoice balance guards | `SOP-COM-03` |
 | 12 | `agent_catalog_auditor` | Commerce & Telemetry | 16/16 model spec drift, 16/16 factory PDFs, live DB stock sync | `SOP-COM-04` |
-| 13 | `agent_seo_metadata` | Growth & Grounding | 110-route XML sitemap, canonical URLs, robots.txt, SERP tags | `SOP-GRO-01` |
-| 14 | `agent_oahu_grounding` | Growth & Grounding | HECO ~44.2¢/kWh rates, $0 Free In-Home Estimates, CT-36775 | `SOP-GRO-02` |
+| 13 | `agent_seo_metadata` | Growth & Grounding | 101-route XML sitemap, canonical URLs, robots.txt, SERP tags | `SOP-GRO-01` |
+| 14 | `agent_oahu_grounding` | Growth & Grounding | HECO ~44.2¢/kWh rates, $0 Free In-Home Estimates, Waipahu Est. 2005 | `SOP-GRO-02` |
 | 15 | `agent_market_research` | Growth & Grounding | Island competitor benchmarks & Waipahu warehouse pickup edge | `SOP-GRO-03` |
 | 16 | `agent_heco_rebate_strategist`| Growth & Grounding | HECO ~44.2¢/kWh ROI & $45 Hawaii Energy window AC rebate PDF | `SOP-GRO-04` |
 | 17 | `agent_gsc_ga4_analytics` | Growth & Grounding | GSC query clustering, CTR gaps, GA4 stage drop-off telemetry | `SOP-GRO-05` |
 | 18 | `agent_schema_metadata_engine`| Growth & Grounding | JSON-LD schema audits (Product, FAQPage, HVACBusiness, HowTo) | `SOP-GRO-06` |
-| 19 | `agent_high_intent_planner` | Growth & Grounding | 110-route high-intent SEO footprint & cross-funnel bridges | `SOP-GRO-07` |
+| 19 | `agent_high_intent_planner` | Growth & Grounding | 101-route high-intent SEO footprint & cross-funnel bridges | `SOP-GRO-07` |
 | 20 | `agent_crm_dispatch` | CRM Operations | "By Appointment First" lead intake & Waipahu pickup dispatch | `SOP-CRM-01` |
-| 21 | `agent_customer_lifecycle` | CRM Operations | Annual window AC / biannual mini-split salt-air recall triggers | `SOP-CRM-02` |
-| 22 | `agent_intake_triage` | CRM Operations | Mini-split diagnostic/flush vs Window AC clean-vs-replace triage | `SOP-CRM-03` |
+| 21 | `agent_customer_lifecycle` | CRM Operations | Annual window AC cleaning & salt-air recall triggers | `SOP-CRM-02` |
+| 22 | `agent_intake_triage` | CRM Operations | Window AC cleaning vs replacement & installation triage | `SOP-CRM-03` |
 | 23 | `agent_deployment_guardian` | Deployment Quality | Blue/green container rebuilds, zero-downtime Nginx reload | `SOP-DEP-01` |
-| 24 | `agent_build_qa` | Deployment Quality | 110 Next.js routes compilation, TypeScript strictness, link checks | `SOP-DEP-02` |
+| 24 | `agent_build_qa` | Deployment Quality | 101 Next.js routes compilation, TypeScript strictness, link checks | `SOP-DEP-02` |
 | 25 | `agent_regression_sentinel` | Deployment Quality | By-Appointment-First non-regression & drop-cloth mandate | `SOP-DEP-03` |
 | 26 | `agent_spatial_visualizer` | Deployment Quality | Blender 4.1 headless raytracing & 16/16 caliper cutaway assets | `SOP-DEP-04` |
 | 27 | `agent_serp_intent_harvester`| SERP Acquisition | Oahu search query analytics & click-to-impression gap harvesting | `SOP-SERP-01` |
 | 28 | `agent_ctr_title_craftsman` | SERP Acquisition | Click-optimized title tags, price anchors ($0 Estimate), hotlines | `SOP-SERP-02` |
 | 29 | `agent_merchant_feed_sentinel`| SERP Acquisition | Google Merchant XML feed & Product schema (`validFrom`) | `SOP-SERP-03` |
 | 30 | `agent_mobile_checkout_sentinel`| Conversion Velocity | 1-tap Apple Pay/Google Pay/Link verification on mobile | `SOP-VEL-01` |
-| 31 | `agent_trust_authority_grounder`| Conversion Velocity | Waipahu inventory proof, 1-year warranty, CT-36775 badge | `SOP-VEL-02` |
+| 31 | `agent_trust_authority_grounder`| Conversion Velocity | Waipahu inventory proof, 1-year warranty, Est. 2005 Oahu trust | `SOP-VEL-02` |
 | 32 | `agent_zero_friction_navigator` | Conversion Velocity | Zero checkout dead-ends, smooth filter resets, hotline bridge | `SOP-VEL-03` |
 | 33 | `agent_speed_core_vital_sentinel`| Conversion Velocity | Mobile Core Web Vitals (LCP < 2s, CLS = 0), zero-cache | `SOP-VEL-04` |
 | 34 | `agent_comfyui_bridge` | Creative AI Studio | Local RTX 4090 (24GB VRAM) ComfyUI Studio API bridge | `SOP-CRE-01` |
 | 35 | `agent_avatar_portrait_crafter`| Creative AI Studio | Oahu homeowner & technician portrait matrix synthesis | `SOP-CRE-02` |
-| 36 | `agent_trust_medallion_forge` | Creative AI Studio | 3D golden review medallions & CT-36775 trust shields | `SOP-CRE-03` |
+| 36 | `agent_trust_medallion_forge` | Creative AI Studio | 3D golden review medallions & Est. 2005 Waipahu trust shields | `SOP-CRE-03` |
 | 37 | `agent_asset_optimizer_sentinel`| Creative AI Studio | Sub-80KB WebP optimization, zero CLS & Polynesian SVG fallbacks | `SOP-CRE-04` |
 | 38 | `agent_report_ingestor` | Executive Reporting | GSC ZIP archive & GA4 CSV ingestion (native Python `csv`) | `SOP-REP-01` |
 | 39 | `agent_narrative_crafter` | Executive Reporting | 3rd-grade reading level executive summary, Big Wins & Action Plan | `SOP-REP-02` |
@@ -276,7 +273,7 @@ _analytics_data/Queries.csv     analytics_swarm_service
   │  - REC-01: Plug Filter │   │  - FAQPage             │
   │  - REC-02: Clean/Repl  │   │  - HVACBusiness        │
   │  - REC-03: Install Form│   │  - HowTo               │
-  │  - REC-04: Panel Calc  │   │  - Product / Offers    │
+  │  - REC-04: Clean Hub   │   │  - Product / Offers    │
   └───────────┬────────────┘   └───────────┬────────────┘
               │                            │
               ▼                            ▼
@@ -285,7 +282,7 @@ _analytics_data/Queries.csv     analytics_swarm_service
   │  - /clean-vs-replace-window-ac                     │
   │  - /window-ac-installation                         │
   │  - /shop/window-ac-plug-guide                      │
-  │  - /mini-split-estimate                            │
+  │  - /ac-cleaning-oahu                               │
   │  - /shop (Interactive Room Sizer & Plug Filter)    │
   └─────────────────────────────────────────────────────┘
 ```
@@ -298,15 +295,15 @@ _analytics_data/Queries.csv     analytics_swarm_service
 
 2. **`/window-ac-installation`**:
    - **Target Query Cluster**: "window ac installation oahu", "window ac installers near me", "jalousie ac install".
-   - **Conversion Catalysts**: Jalousie retrofit bracket diagram; zero upfront deposit intake form; 1-click equipment add-on bundle; Hawaii Contractor License CT-36775 badge.
+   - **Conversion Catalysts**: Jalousie retrofit bracket diagram; zero upfront deposit intake form; 1-click equipment selection; Waipahu Warehouse Direct & Insured Oahu Cooling Specialists badge.
 
 3. **`/shop/window-ac-plug-guide`**:
    - **Target Query Cluster**: "18000 btu window ac plug type", "230 volt window ac outlet", "nema 6-20p vs 5-15p".
    - **Conversion Catalysts**: Visual plug diagrams (115V NEMA 5-15P vs 230V NEMA 6-20P); unblocks 18k (LW1822IVSM) and 23.5k (LW2422IVSM) inventory; direct Add to Cart buttons with $45 rebate form link.
 
-4. **`/mini-split-estimate`**:
-   - **Target Query Cluster**: "mini split cost estimate oahu", "split ac installation near me", "ductless ac honolulu".
-   - **Conversion Catalysts**: Strict 0% Hawaii Energy rebate honesty ($0 Free In-Home Estimate, direct CT-36775 contractor pricing); electrical circuit evaluation coordinated with licensed electrical subcontractors; interactive multi-zone sizing wizard (`MiniSplitEstimator`).
+4. **`/ac-cleaning-oahu`**:
+   - **Target Query Cluster**: "window ac cleaning oahu", "ac mold removal honolulu", "musty ac cleaning waipahu".
+   - **Conversion Catalysts**: On-site evaporator & condenser coil flush, antimicrobial pan treatment, floor drop-cloth protection, and honest clean-vs-replace assessments ($0 Free In-Home Estimate).
 
 ---
 
@@ -344,5 +341,5 @@ The Master CLI Bridge provides immediate command-line execution for the entire s
 1. **Loopback Binding**: Host ports 3005, 3001, 8001, 5433, and 6380 are strictly bound to `127.0.0.1`.
 2. **Zero Public Access**: Dev OS cockpit is barred by `robots.ts` (`Disallow: /`) and protected by SHA-256 HMAC session cookies.
 3. **Outbound Sync Only**: Workstation is 100% air-tight; VPS server possesses zero inbound network connectivity to the local development environment.
-4. **Mini Split Rebate Truth**: 0% participation in Hawaii Energy rebates (direct contractor pricing, $0 Free In-Home Estimate).
+4. **Window AC Specialization**: 100% dedicated to LG & GE Window Air Conditioners ($395 to $1,200) and on-site Window AC Cleaning across Oahu.
 5. **Window AC Rebate Truth**: Qualifying Energy Star LG Dual Inverters earn a $45 cash rebate using Affordable Home AC's official pre-approved application form PDF (`/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf`).

@@ -193,7 +193,7 @@ export default function DevOsEagleEyePage() {
     const [submasters, setSubmasters] = useState<SubMasterMeta[]>([]);
     const [runningAgentId, setRunningAgentId] = useState<string | null>(null);
     const [runningSubmasterId, setRunningSubmasterId] = useState<string | null>(null);
-    const [activeFunnelTab, setActiveFunnelTab] = useState<'waterfall' | 'mini_split' | 'window_ac' | 'sizing' | 'shop' | 'cro_playbook'>('waterfall');
+    const [activeFunnelTab, setActiveFunnelTab] = useState<'waterfall' | 'ac_cleaning' | 'window_ac' | 'sizing' | 'shop' | 'cro_playbook'>('waterfall');
     const [fleetRunning, setFleetRunning] = useState<boolean>(false);
     const [orders, setOrders] = useState<OrderRecord[]>([]);
     const [financials, setFinancials] = useState<any>(null);
@@ -975,7 +975,7 @@ export default function DevOsEagleEyePage() {
                             <div className="flex flex-wrap gap-2">
                                 {(brainData?.active_directives || [
                                     "Mandate: By Appointment First — Zero Upfront Payment Barrier",
-                                    "Hawaii State Contractor License CT-36775 Grounding",
+                                    "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
                                     "Waipahu Direct Warehouse Pickup Fulfillment (+24% CRO)",
                                     "Strict Air-Tight Perimeter: Client-Initiated Outbound (Zero Inbound Reach)"
                                 ]).map((directive: string, idx: number) => (
@@ -996,7 +996,7 @@ export default function DevOsEagleEyePage() {
                                 <div className="flex items-center gap-2">
                                     <Clock className="size-4 text-amber-400" />
                                     <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
-                                        Project Chronicle & Historical Timeline ({timelineData.length || 16} Epochs • Inception to Current)
+                                        Project Chronicle & Historical Timeline ({timelineData.length || 17} Epochs • Inception to Current)
                                     </h4>
                                 </div>
                                 <span className="font-mono text-xs text-amber-400 hover:text-amber-300">
@@ -1058,8 +1058,8 @@ export default function DevOsEagleEyePage() {
                                             timeframe: "June 2026",
                                             commit_start: "dd09e699",
                                             commit_end: "dc3abc5e",
-                                            milestone: "Achieved 90-100 PageSpeed score: replaced Google Material Symbols with tree-shaken Lucide React icons, removed Framer Motion from root layout to prevent prefetch storms, self-hosted and preloaded Inter and Oswald variable fonts, and applied Critters CSS optimization. Bound Redis and Postgres strictly to loopback (127.0.0.1) with password authentication and rate limiting. Launched 'Celebrating America' 4th of July campaign with interactive 3D bento tilt cards, patriotic glow borders, and canvas firework sparks. Re-rendered product assets natively from SVG vectors via sharp to eliminate white halo artifacts. Executed the landmark Service Narrowing: purged all false 'emergency' and '24/7' claims, focused services strictly on Mini Split AC Repair and Waipahu Warehouse Window AC drop-offs, removed unsupported brand FAQs (LG/GE window), and deployed 22 Oahu city pages with verified localized FAQPage schemas and single-hop 301 redirects.",
-                                            impact: "Sub-second mobile performance (90-100 score), total elimination of consumer protection liabilities, and dominance in Oahu mini-split repair search rankings."
+                                            milestone: "Achieved 90-100 PageSpeed score: replaced Google Material Symbols with tree-shaken Lucide React icons, removed Framer Motion from root layout to prevent prefetch storms, self-hosted and preloaded Inter and Oswald variable fonts, and applied Critters CSS optimization. Bound Redis and Postgres strictly to loopback (127.0.0.1) with password authentication and rate limiting. Launched 'Celebrating America' 4th of July campaign with interactive 3D bento tilt cards, patriotic glow borders, and canvas firework sparks. Re-rendered product assets natively from SVG vectors via sharp to eliminate white halo artifacts. Executed the landmark Service Narrowing: purged all false 'emergency' and '24/7' claims, focused services strictly on Window AC cleaning & installation and Waipahu Warehouse inventory, and deployed 22 Oahu city pages with verified localized FAQPage schemas and single-hop 301 redirects.",
+                                            impact: "Sub-second mobile performance (90-100 score), total elimination of consumer protection liabilities, and dominance in Oahu window AC search rankings."
                                         },
                                         {
                                             phase_id: "EPOCH_07_COMMERCE_HARDENING_JUL2026",
@@ -1076,8 +1076,8 @@ export default function DevOsEagleEyePage() {
                                             timeframe: "August 2026",
                                             commit_start: "c2d7c042",
                                             commit_end: "6df891b3",
-                                            milestone: "Neutralized Next.js App Router auth bypass vulnerability; purged all plaintext credentials from client-side bundles; implemented local pre-push secret scanner scripts/scan-secrets.ps1. Pinned PNPM to 9.0.0 and elevated Python security dependencies via Astral uv. Replaced risky wall-shielding and drywall protection claims with professional floor drop-cloth protection across all legal notices; eradicated blanket '100% guarantee' assertions. Standardized Waipahu bench immersion cleaning at flat $275. Implemented automated daily PostgreSQL snapshots to /var/backups/ahac_db with a 14-day rolling rotation lifecycle.",
-                                            impact: "Zero exposed credentials, bulletproof legal compliance under Hawaii Contractor License CT-36775, and automated disaster-recovery backups."
+                                            milestone: "Neutralized Next.js App Router auth bypass vulnerability; purged all plaintext credentials from client-side bundles; implemented local pre-push secret scanner scripts/scan-secrets.ps1. Pinned PNPM to 9.0.0 and elevated Python security dependencies via Astral uv. Replaced risky wall-shielding and drywall protection claims with professional floor drop-cloth protection across all legal notices; eradicated blanket '100% guarantee' assertions. Standardized Waipahu window AC cleaning & clean-vs-replace assessments. Implemented automated daily PostgreSQL snapshots to /var/backups/ahac_db with a 14-day rolling rotation lifecycle.",
+                                            impact: "Zero exposed credentials, bulletproof legal compliance across Oahu operations, and automated disaster-recovery backups."
                                         },
                                         {
                                             phase_id: "EPOCH_09_DEVOS_APPOINTMENT_SEP2026",
@@ -1103,7 +1103,7 @@ export default function DevOsEagleEyePage() {
                                             timeframe: "September 8-10, 2026",
                                             commit_start: "b968fa3b",
                                             commit_end: "CURRENT",
-                                            milestone: "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations, custom itemized quotes by CT-36775 licensed technicians, and zero upfront booking payment barriers. Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to irasmussenjobs@gmail.com. Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
+                                            milestone: "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations, custom itemized quotes by Oahu cooling specialists, and zero upfront booking payment barriers. Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to irasmussenjobs@gmail.com. Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
                                             impact: "Seamless lead conversion velocity, synchronized storefront & CRM pricing, and real-time Master Brain visual telemetry across sessions."
                                         }
                                     ]).map((phase: any, pIdx: number) => (
@@ -1963,7 +1963,7 @@ export default function DevOsEagleEyePage() {
                                             <div className="flex items-center gap-1 overflow-x-auto border-b border-slate-800/80 pb-1.5 text-[10px] font-mono">
                                                 {[
                                                     { id: 'waterfall', label: 'Waterfall' },
-                                                    { id: 'mini_split', label: 'Mini-Split' },
+                                                    { id: 'ac_cleaning', label: 'AC Cleaning' },
                                                     { id: 'window_ac', label: 'Window AC' },
                                                     { id: 'sizing', label: 'Sizing' },
                                                     { id: 'shop', label: 'Catalog' },
@@ -2028,20 +2028,20 @@ export default function DevOsEagleEyePage() {
                                                 </div>
                                             )}
 
-                                            {/* TAB 2: MINI-SPLIT MAINTENANCE */}
-                                            {activeFunnelTab === 'mini_split' && (
+                                            {/* TAB 2: WINDOW AC CLEANING & SANITIZATION */}
+                                            {activeFunnelTab === 'ac_cleaning' && (
                                                 <div className="space-y-2">
                                                     <div className="grid grid-cols-2 gap-2">
                                                         <div className="rounded-xl border border-slate-800 bg-slate-950 p-2.5">
-                                                            <span className="text-[10px] font-mono text-slate-500">Calculator Visits</span>
-                                                            <p className="font-mono text-lg font-bold text-white">{funnelData?.funnels?.mini_split_maintenance?.views_or_interactions || 142}</p>
-                                                            <span className="text-[10px] text-cyan-400">Conv Intent: {funnelData?.funnels?.mini_split_maintenance?.conversion_intent || '18.4'}%</span>
+                                                            <span className="text-[10px] font-mono text-slate-500">Cleaning Funnel Visits</span>
+                                                            <p className="font-mono text-lg font-bold text-white">{funnelData?.funnels?.window_ac_cleaning?.views_or_interactions || 142}</p>
+                                                            <span className="text-[10px] text-cyan-400">Conv Intent: {funnelData?.funnels?.window_ac_cleaning?.conversion_intent || '18.4'}%</span>
                                                         </div>
                                                         <div className="rounded-xl border border-slate-800 bg-slate-950 p-2.5">
-                                                            <span className="text-[10px] font-mono text-slate-500">Tier Pricing Structure</span>
+                                                            <span className="text-[10px] font-mono text-slate-500">Service Structure</span>
                                                             <div className="mt-1 flex justify-between text-[10px] font-mono">
-                                                                <span className="text-slate-300">Basic: $175 (1h)</span>
-                                                                <span className="text-emerald-400">Deep: $275 (1.5h)</span>
+                                                                <span className="text-slate-300">Clean vs Replace</span>
+                                                                <span className="text-emerald-400">$0 Upfront</span>
                                                             </div>
                                                             <span className="text-[9px] text-slate-400">Floor drop-cloth protocol</span>
                                                         </div>
@@ -2051,16 +2051,16 @@ export default function DevOsEagleEyePage() {
                                                         <span className="font-mono text-[10px] text-slate-400 uppercase">Top Symptoms Checked (Diagnosis)</span>
                                                         <div className="space-y-1 text-[10px]">
                                                             <div className="flex justify-between items-center text-slate-300">
-                                                                <span>Water Leaking / Condensate Backup</span>
+                                                                <span>Water Leaking / Drain Pan Backup</span>
                                                                 <span className="text-cyan-400 font-mono">38% (High Intent)</span>
                                                             </div>
                                                             <div className="flex justify-between items-center text-slate-300">
                                                                 <span>Foul / Musty Tropical Mold Odor</span>
-                                                                <span className="text-purple-400 font-mono">34% (Deep Clean)</span>
+                                                                <span className="text-purple-400 font-mono">34% (Sanitization)</span>
                                                             </div>
                                                             <div className="flex justify-between items-center text-slate-300">
                                                                 <span>Weak Airflow / Salt-Air Coil Dust</span>
-                                                                <span className="text-blue-400 font-mono">28% (Basic Clean)</span>
+                                                                <span className="text-blue-400 font-mono">28% (Coil Care)</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2119,15 +2119,15 @@ export default function DevOsEagleEyePage() {
                                                         <span className="font-mono text-slate-400 uppercase">Oahu Heat Load Profiles</span>
                                                         <div className="flex justify-between text-slate-300">
                                                             <span>150 - 300 sqft</span>
-                                                            <span className="font-mono text-cyan-400">9,000 BTU Mini-Split</span>
+                                                            <span className="font-mono text-cyan-400">8,000 BTU LG Dual Inverter</span>
                                                         </div>
                                                         <div className="flex justify-between text-slate-300">
                                                             <span>300 - 500 sqft</span>
-                                                            <span className="font-mono text-cyan-400">12,000 BTU Mini-Split</span>
+                                                            <span className="font-mono text-cyan-400">12,000 BTU LG Dual Inverter</span>
                                                         </div>
                                                         <div className="flex justify-between text-slate-300">
                                                             <span>500 - 800 sqft</span>
-                                                            <span className="font-mono text-cyan-400">18,000 BTU Multi-Zone</span>
+                                                            <span className="font-mono text-cyan-400">18,000 - 23,500 BTU LG Dual Inverter</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2139,16 +2139,12 @@ export default function DevOsEagleEyePage() {
                                                     <div className="rounded-xl border border-slate-800 bg-slate-950 p-2.5 space-y-1 text-[10px]">
                                                         <span className="font-mono text-slate-400 uppercase">Brand Filter Engagement</span>
                                                         <div className="flex justify-between text-slate-300">
-                                                            <span>Air-Con Dual Inverter</span>
-                                                            <span className="font-mono text-emerald-400">44% Share</span>
+                                                            <span>LG Dual Inverter Window ACs</span>
+                                                            <span className="font-mono text-emerald-400">68% Share</span>
                                                         </div>
                                                         <div className="flex justify-between text-slate-300">
-                                                            <span>Cooper&Hunter Mini-Splits</span>
-                                                            <span className="font-mono text-cyan-400">36% Share</span>
-                                                        </div>
-                                                        <div className="flex justify-between text-slate-300">
-                                                            <span>Daikin & High-SEER Systems</span>
-                                                            <span className="font-mono text-purple-400">20% Share</span>
+                                                            <span>GE Built-In & Standard Window ACs</span>
+                                                            <span className="font-mono text-cyan-400">32% Share</span>
                                                         </div>
                                                     </div>
                                                     <div className="rounded-xl border border-slate-800 bg-slate-950 p-2.5 text-[10px] text-slate-300">
@@ -2164,8 +2160,8 @@ export default function DevOsEagleEyePage() {
                                                     {(funnelData?.cro_playbook || [
                                                         { id: 'by_appointment_first', title: 'By Appointment First (Zero Upfront Payment)', impact: '+28% Booking Velocity', status: 'ACTIVE', detail: 'Eliminates checkout friction for physical services; diagnostic scope and physical inspection confirmed before any transaction.' },
                                                         { id: 'waipahu_pickup_anchor', title: 'Waipahu Warehouse Same-Day Pickup', impact: '+24% Cart Velocity', status: 'ACTIVE', detail: 'Eliminates Oahu customer freight anxiety (skip 2-3 week mainland barge transit).' },
-                                                        { id: 'heco_power_roi', title: 'HECO ~44¢/kWh Electricity ROI Anchor', impact: '+18% Sizing Conversion', status: 'ACTIVE', detail: 'Anchors 20+ SEER2 savings ($1,020/yr power savings) against cheap 10-SEER alternatives.' },
-                                                        { id: 'clinical_mold_protocol', title: 'Clinical Mold Remediation Framing', impact: '+31% Premium Clean Margin', status: 'ACTIVE', detail: 'Frames custom mini-split chemical flush around salt-air corrosion & spore remediation instead of simple wash.' },
+                                                        { id: 'heco_power_roi', title: 'HECO ~44¢/kWh Electricity ROI Anchor', impact: '+18% Sizing Conversion', status: 'ACTIVE', detail: 'Anchors LG Dual Inverter savings ($424/yr power savings) against aging 10-SEER alternatives.' },
+                                                        { id: 'clinical_mold_protocol', title: 'Clinical Mold Remediation Framing', impact: '+31% Premium Clean Margin', status: 'ACTIVE', detail: 'Frames window AC cleaning and clean-vs-replace assessments around salt-air corrosion & spore remediation.' },
                                                         { id: 'tax_transparency', title: 'Hawaii GET Tax (4.712%) Transparency', impact: '+12% Lead Trust Factor', status: 'ACTIVE', detail: 'Ensures Oahu 4.712% tax transparency upfront with zero hidden fees.' }
                                                     ]).map((p: any) => (
                                                         <div key={p.id} className="rounded-xl border border-slate-800 bg-slate-950/80 p-2 text-[10px]">
@@ -2289,7 +2285,7 @@ export default function DevOsEagleEyePage() {
                                                             { query: "window ac installation oahu", monthly_impressions: 4800, ctr_percent: 1.8, avg_position: 4.2, target_page: "/window-ac-installation" },
                                                             { query: "clean window ac mold hawaii", monthly_impressions: 3900, ctr_percent: 2.1, avg_position: 3.8, target_page: "/clean-vs-replace-window-ac" },
                                                             { query: "18000 btu window ac plug 230v", monthly_impressions: 3400, ctr_percent: 1.4, avg_position: 5.1, target_page: "/shop/window-ac-plug-guide" },
-                                                            { query: "mini split cost estimate oahu", monthly_impressions: 6300, ctr_percent: 1.9, avg_position: 4.6, target_page: "/mini-split-estimate" },
+                                                            { query: "window ac cleaning oahu", monthly_impressions: 6300, ctr_percent: 1.9, avg_position: 4.6, target_page: "/ac-cleaning-oahu" },
                                                         ]).map((qc: any, i: number) => (
                                                             <div key={i} className="rounded-xl border border-slate-800 bg-slate-950/80 p-2 flex items-center justify-between text-[10px] font-mono">
                                                                 <div className="space-y-0.5">
@@ -2313,7 +2309,7 @@ export default function DevOsEagleEyePage() {
                                                         { id: "CRO-REC-01", priority: "CRITICAL", title: "Plug Anxiety Breaker (18k & 23.5k)", target_route: "/shop/window-ac-plug-guide", action: "Deploy visual NEMA 6-20P plug guide to unlock 46 heavy units", expected_impact: "+35% conversion on high-BTU units" },
                                                         { id: "CRO-REC-02", priority: "HIGH", title: "1-Click Installation Add-On", target_route: "/window-ac-installation", action: "Bundle Waipahu warehouse delivery and professional bracket mount", expected_impact: "+$180 AOV and lower unit return rate" },
                                                         { id: "CRO-REC-03", priority: "HIGH", title: "Clean vs Replace Decision Matrix", target_route: "/clean-vs-replace-window-ac", action: "Siphon owners of 5+ yr rusty units to new LG Dual Inverters", expected_impact: "+22% upgrade conversion" },
-                                                        { id: "CRO-REC-04", priority: "MEDIUM", title: "Mini Split Panel Assessment", target_route: "/mini-split-estimate", action: "Provide free 60A/100A panel capacity check with honest pricing", expected_impact: "+40% qualified lead submission" }
+                                                        { id: "CRO-REC-04", priority: "MEDIUM", title: "Window AC Cleaning & Sanitization", target_route: "/ac-cleaning-oahu", action: "Highlight drop-cloth protection and salt-air coil sanitization", expected_impact: "+40% qualified lead submission" }
                                                     ]).map((rec: any) => (
                                                         <div key={rec.id} className="rounded-xl border border-slate-800 bg-slate-950 p-2.5 space-y-1">
                                                             <div className="flex items-center justify-between">
@@ -2339,7 +2335,7 @@ export default function DevOsEagleEyePage() {
                                                         { route: "/clean-vs-replace-window-ac", name: "Clean vs Replace Matrix", intent: "Old AC mold vs new AC", bridge: "Clean-vs-replace assessment or new LG Dual Inverter + $45 rebate", schema: "FAQPage, HowTo" },
                                                         { route: "/window-ac-installation", name: "Professional Installation", intent: "Jalousie & bracket mount", bridge: "Book appointment (zero deposit) or buy with in-stock unit", schema: "HVACBusiness, FAQPage" },
                                                         { route: "/shop/window-ac-plug-guide", name: "115V vs 230V Plug Guide", intent: "18k & 23.5k outlet confusion", bridge: "Direct add-to-cart for 28x 18k and 18x 23.5k units", schema: "Product, HowTo, FAQPage" },
-                                                        { route: "/mini-split-estimate", name: "Mini Split Estimate & Sizing", intent: "Split AC cost Oahu", bridge: "Multi-zone selector + free 60A/100A electrical panel check", schema: "HVACBusiness, FAQPage" }
+                                                        { route: "/ac-cleaning-oahu", name: "Window AC Cleaning Oahu", intent: "Window AC cleaning & coil sanitization", bridge: "Window AC cleaning or clean-vs-replace upgrade assessment", schema: "HVACBusiness, FAQPage" }
                                                     ].map((pg, i) => (
                                                         <div key={i} className="rounded-xl border border-slate-800 bg-slate-950 p-2.5 space-y-1">
                                                             <div className="flex items-center justify-between">
@@ -2651,9 +2647,9 @@ export default function DevOsEagleEyePage() {
                                     <div className="rounded-xl border border-slate-800 bg-slate-950 p-4">
                                         <span className="text-purple-400 font-bold">HAWAII REGULATORY & PRICING GROUNDING</span>
                                         <ul className="mt-2 space-y-1 text-slate-300">
-                                            <li>• State Contractor License: <span className="text-emerald-400">CT-36775</span></li>
-                                            <li>• Mini-Split Basic Cleaning: <span className="text-cyan-300">$175 (~1 hr)</span></li>
-                                            <li>• Mini-Split Premium Chemical Flush: <span className="text-cyan-300">$275 (~1.5 hrs)</span></li>
+                                            <li>• Authority: <span className="text-emerald-400">Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005</span></li>
+                                            <li>• Window AC Cleaning & Assessment: <span className="text-cyan-300">Custom Itemized Quote ($0 Upfront)</span></li>
+                                            <li>• Window AC Installation & Replacement: <span className="text-cyan-300">$0 Free In-Home Estimate</span></li>
                                             <li>• Window AC Inventory Range: <span className="text-cyan-300">$395.00 – $1,200.00 (16 Models)</span></li>
                                             <li>• Island-Wide Delivery: <span className="text-cyan-300">$50 Flat</span></li>
                                             <li>• Warehouse Pickup: <span className="text-cyan-300">94-150 Leoleo St #203, Waipahu (Free)</span></li>

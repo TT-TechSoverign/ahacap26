@@ -80,15 +80,15 @@ export default function PetHairCleaningPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        We love our island dogs and cats, but their shed fur and microscopic dander can choke air conditioner coils, produce pungent animal odors, and trigger chronic allergies. Our full teardown sanitization extracts pet hair mats and restores crisp, fresh air.
+                        We love our island dogs and cats, but their shed fur and microscopic dander can choke air conditioner coils, produce pungent animal odors, and trigger chronic allergies. Our Window AC cleaning and upgrade services remove pet hair mats and restore crisp, fresh air.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/mini_split_ac_maintenance"
+                            href="/ac-cleaning-oahu"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
-                            Book Pet Allergy Deep Clean ($275)
+                            Book Pet Allergy AC Cleaning
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -132,7 +132,7 @@ export default function PetHairCleaningPage() {
                                 TOTAL DECONTAMINATION
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                                Complete Teardown with Drop Cloths
+                                Pet-Safe Cleaning with Drop Cloths
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
                                 Pet dander contains sticky lipids that adhere stubborn hair mats to coil aluminum. We apply veterinary-safe enzymatic and foaming cleaners that liquefy organic proteins without harsh fumes.
@@ -144,12 +144,12 @@ export default function PetHairCleaningPage() {
 
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Basic Pet Care Clean</span>
-                                <span className="font-header font-bold text-lg text-white">$175 / unit</span>
+                                <span className="text-xs text-slate-300">Window AC Pet Care Clean</span>
+                                <span className="font-header font-bold text-lg text-white">By Appointment</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Premium Deep Teardown</span>
-                                <span className="font-header font-bold text-lg text-primary">$275 / unit</span>
+                                <span className="text-xs text-slate-300">New LG Dual Inverter Upgrade</span>
+                                <span className="font-header font-bold text-lg text-primary">From $560 (-$45 Rebate)</span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-xs text-slate-300">Floor Drop Cloth Protection</span>

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill | Affordable Home A/C'
     },
-    description: 'Learn how dirty evaporator and condenser coils spike Hawaii electricity bills at HECO ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month. CT-36775 licensed.',
+    description: 'Learn how dirty evaporator and condenser coils spike Hawaii electricity bills at HECO ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-coil-cleaning-benefits-power-bill',
     },
     openGraph: {
         title: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill | Affordable Home A/C',
-        description: 'Learn how dirty evaporator and condenser coils spike Hawaii electricity bills at HECO ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month. CT-36775 licensed.',
+        description: 'Learn how dirty evaporator and condenser coils spike Hawaii electricity bills at HECO ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
         url: 'https://www.affordablehome-ac.com/ac-coil-cleaning-benefits-power-bill',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill | Affordable Home A/C',
-        description: 'Learn how dirty evaporator and condenser coils spike Hawaii electricity bills at HECO ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month. CT-36775 licensed.',
+        description: 'Learn how dirty evaporator and condenser coils spike Hawaii electricity bills at HECO ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

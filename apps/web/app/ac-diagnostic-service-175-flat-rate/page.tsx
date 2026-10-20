@@ -58,7 +58,7 @@ const DIAGNOSTIC_STEPS = [
     {
         step: "04",
         title: "Inverter Logic & Sensor Check",
-        desc: "For mini splits, we read onboard LED error flash codes and test thermistor resistance across evaporator and outdoor ambient sensors."
+        desc: "For inverter window ACs, we read onboard LED error flash codes and test thermistor resistance across evaporator and ambient sensors."
     }
 ];
 
@@ -77,7 +77,7 @@ export default function AcDiagnosticPage() {
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <Wrench className="size-3.5" />
-                        <span>Licensed Contractor CT-36775 &bull; Island-Wide Flat Rate Service</span>
+                        <span>Waipahu Cooling Specialists &bull; Island-Wide Flat Rate Service</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
@@ -85,7 +85,7 @@ export default function AcDiagnosticPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        No mystery quotes, surprise travel fees, or pushy sales tactics. Our licensed HVAC technicians perform complete electrical, refrigerant, and mechanical troubleshooting on ductless mini splits and window units for a clear <span className="text-white font-bold">$175 flat rate</span>.
+                        No mystery quotes, surprise travel fees, or pushy sales tactics. Our experienced HVAC technicians perform complete electrical, thermal, and mechanical troubleshooting on window air conditioners for a clear <span className="text-white font-bold">$175 flat rate</span>.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -158,12 +158,12 @@ export default function AcDiagnosticPage() {
                                 <span className="font-header font-bold text-xs text-white">All 22 Municipalities</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">In-Home Mini Split Estimate</span>
+                                <span className="text-xs text-slate-300">In-Home Window AC Estimate</span>
                                 <span className="font-header font-bold text-xs text-emerald-400">$0 Free</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-white">CT-36775</span>
+                                <span className="text-xs text-slate-300">Waipahu Warehouse Inventory</span>
+                                <span className="font-header font-bold text-xs text-white">LG &amp; GE In Stock</span>
                             </div>
                         </div>
                     </div>

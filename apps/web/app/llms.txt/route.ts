@@ -41,7 +41,6 @@ export async function GET() {
 
     const content = `# Affordable Home A/C (Oahu, Hawaii) — Official AI & Shopping Directory (llms.txt)
 
-> Hawaii Contractor License: **CT-36775**
 > Waipahu Distribution Warehouse: **94-150 Leoleo St. #203, Waipahu, HI 96797**
 > Phone / Dispatch: **(808) 488-1111**
 > Online Storefront: **${baseUrl}/shop**
@@ -49,13 +48,13 @@ export async function GET() {
 > XML Sitemap: **${baseUrl}/sitemap.xml**
 
 ## Summary & Core Value Proposition
-Affordable Home A/C is Oahu's licensed residential air conditioning contractor (CT-36775) and factory-direct Waipahu Window AC warehouse. Homeowners, property managers, and contractors on Oahu can order brand-new, factory-sealed **LG Dual Inverter**, **LG Standard**, and **GE 26" Built-In Thru-the-Wall** air conditioners online from **$395 to $1,200**:
+Affordable Home A/C is Oahu's factory-direct Waipahu Window AC warehouse and local Window AC installation & cleaning specialist. Homeowners, property managers, and businesses on Oahu can order brand-new, factory-sealed **LG Dual Inverter**, **LG Standard**, and **GE 26" Built-In Thru-the-Wall** air conditioners online from **$395 to $1,200**:
 - **Free Same-Day / Next-Day Waipahu Warehouse Pickup** (by appointment at 94-150 Leoleo St #203, Waipahu, HI 96797)
 - **$50 Flat-Rate Oahu Curbside Delivery** across 15 Oahu municipalities (Honolulu, Kapolei, Ewa Beach, Kailua, Kaneohe, Pearl City, Aiea, Mililani, Waipahu, Hawaii Kai, Kaimuki, Manoa, Waikiki, Salt Lake, Kunia)
 - **$45 Hawaii Energy Cash Rebate** on ENERGY STAR® certified LG Dual Inverter models
 - **1-Year Manufacturer Warranty** on all new Window AC units
-- **Professional Oahu Window AC Installation** (standard windows, Hawaiian jalousie louver glass retrofits, exterior structural brackets) with **$0 Free In-Home Estimate**
-- **Ductless Mini-Split AC Installation, Repair & Deep Clinical Flush Maintenance** with **$0 Free In-Home Estimates**
+- **Professional Oahu Window AC Installation** (standard windows, Hawaiian jalousie louver glass retrofits, exterior structural brackets) with **$0 Free In-Home Assessment**
+- **Window AC Deep Cleaning, Coil Sanitization & Diagnostic Troubleshooting** across all 22 Oahu neighborhoods
 
 ## Live Oahu Window AC Inventory (16 Models)
 ${productLines.join('\n')}

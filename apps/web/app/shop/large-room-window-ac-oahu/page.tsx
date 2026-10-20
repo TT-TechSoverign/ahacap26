@@ -134,8 +134,8 @@ export default function LargeRoomWindowAcPage() {
 
     const faqItems = [
         {
-            q: "How does installing an 18k or 23.5k window AC save $4,000–$6,000 vs a mini-split?",
-            a: "A multi-zone 18k to 24k ductless mini-split system on Oahu typically costs $5,500 to $8,500 installed, requiring high-voltage electrical line pulls, wall penetrations, and refrigerant line brazing. An in-stock LG Dual Inverter 18k ($925) or 23.5k ($1,025) delivers equal or greater cooling volume with 500 CFM air throw, cooling entire living areas and high-ceiling spaces at a fraction of the cost."
+            q: "How do the 18,000 BTU and 23,500 BTU LG Dual Inverters cool large open-concept rooms?",
+            a: "An in-stock LG Dual Inverter 18k ($925) or 23.5k ($1,025) delivers high-volume cooling with up to 500 CFM air throw and variable-speed twin-rotary compression, cooling entire living areas, open floor plans, and high-ceiling spaces up to 1,440 sq ft while cutting HECO electricity consumption by up to 40%."
         },
         {
             q: "What type of electrical outlet do the 18,000 and 23,500 BTU units require?",
@@ -143,7 +143,7 @@ export default function LargeRoomWindowAcPage() {
         },
         {
             q: "Do large 112 lb window units require an exterior support bracket?",
-            a: "Yes, for 112 lb Slide In-Out chassis units, a heavy-duty exterior support bracket is strongly recommended to relieve structural load from your window sill and framing. Our CT-36775 licensed technicians evaluate your wall construction on-site during installation ($0 upfront booking deposit)."
+            a: "Yes, for 112 lb Slide In-Out chassis units, a heavy-duty exterior support bracket is strongly recommended to relieve structural load from your window sill and framing. Our specialist technicians evaluate your wall construction on-site during installation ($0 upfront booking deposit)."
         },
         {
             q: "How fast can I get one of these units on Oahu?",
@@ -284,11 +284,11 @@ export default function LargeRoomWindowAcPage() {
                         18,000 BTU &amp; 23,500 BTU LG Dual Inverters &bull; Open-Concept Power
                     </p>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Cool open living rooms, vaulted ceilings, and whole floorplans without spending $6,000+ on a ductless mini-split. In-stock for free Waipahu warehouse pickup by appointment or $50 island delivery. Includes pre-approved $45 Hawaii Energy cash rebate PDF.
+                        Cool open living rooms, vaulted ceilings, and whole floorplans with heavy-duty 208/230V LG Dual Inverters. In-stock for free Waipahu warehouse pickup by appointment or $50 island delivery. Includes pre-approved $45 Hawaii Energy cash rebate PDF.
                     </p>
                 </div>
 
-                {/* ROI Highlight Card: Window AC vs Mini Split */}
+                {/* ROI Highlight Card: Open-Concept Efficiency */}
                 <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-cyan-950/40 via-slate-900/60 to-slate-950 border border-cyan-500/20 shadow-2xl mb-16 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
@@ -297,16 +297,16 @@ export default function LargeRoomWindowAcPage() {
                                 <DollarSign className="size-4" /> The Oahu Open-Concept Cost Reality
                             </div>
                             <h2 className="text-xl sm:text-2xl font-header font-black uppercase text-white">
-                                Why Spend $6,500+ When You Can Cool Your Living Room for $925–$1,025?
+                                Cool Your Entire Open Living Room for $925–$1,025
                             </h2>
                             <p className="text-slate-300 text-sm leading-relaxed">
-                                Standard ductless mini-splits for an open floor plan cost thousands in electrical panel upgrades, line sets, and installation labor. Our heavy-duty 18,000 &amp; 23,500 BTU LG Dual Inverters pull 4.2 to 5.6 pints of moisture per hour, circulate air up to 40 feet, and slash cooling energy by up to 40% under Hawaiian Electric&apos;s ~44.2¢/kWh baseline.
+                                Our heavy-duty 18,000 &amp; 23,500 BTU LG Dual Inverters pull 4.2 to 5.6 pints of moisture per hour, circulate air up to 40 feet across open floor plans, and slash cooling energy by up to 40% under Hawaiian Electric&apos;s ~44.2¢/kWh baseline.
                             </p>
                         </div>
                         <div className="p-5 rounded-2xl bg-black/40 border border-white/10 space-y-2 text-center font-mono">
-                            <div className="text-xs text-slate-400 uppercase">Average Customer Savings</div>
-                            <div className="text-3xl sm:text-4xl font-black text-emerald-400">$4,500+</div>
-                            <div className="text-[11px] text-slate-400">Upfront Savings vs 24k Ductless Mini Split</div>
+                            <div className="text-xs text-slate-400 uppercase">HECO Power Reduction</div>
+                            <div className="text-3xl sm:text-4xl font-black text-emerald-400">Up to 40%</div>
+                            <div className="text-[11px] text-slate-400">Lower Electricity Use vs Standard Rotary Units</div>
                             <div className="pt-2">
                                 <Link 
                                     href="/shop/window-ac-plug-guide" 
@@ -516,7 +516,7 @@ export default function LargeRoomWindowAcPage() {
                                 </span>
                             </div>
                             <p className="text-xs text-slate-300 leading-relaxed">
-                                Our CT-36775 licensed technicians provide cantilever exterior bracket anchoring, laser 3/8&quot; trade-wind slope leveling, and custom window retrofits. Pay the technician only after installation is complete and cooling cold.
+                                Our specialist technicians provide cantilever exterior bracket anchoring, laser 3/8&quot; trade-wind slope leveling, and custom window retrofits. Pay the technician only after installation is complete and cooling cold.
                             </p>
                             <Link 
                                 href="/window-ac-installation"

@@ -40,7 +40,7 @@ const jalousieFaqSchema = {
             "name": "Can you install a window AC in jalousie louver windows in Hawaii?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! Jalousie installations are our specialty. Our CT-36775 licensed technicians remove only the necessary glass slats, install custom-cut marine-grade acrylic baffles and weather seals, and ensure zero mechanical weight is placed on the delicate louver tracks."
+                "text": "Yes! Jalousie installations are our specialty. Our experienced technicians remove only the necessary glass slats, install custom-cut marine-grade acrylic baffles and weather seals, and ensure zero mechanical weight is placed on the delicate louver tracks."
             }
         },
         {
@@ -70,7 +70,6 @@ const hvacServiceSchema = {
         "@type": "HVACBusiness",
         "name": "Affordable Home A/C",
         "telephone": "+1-808-488-1111",
-        "licenseNumber": "CT-36775",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "94-150 Leoleo St. #203",

@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Pet Hair & Dander Mini Split AC Cleaning Oahu | $175–$275 | Affordable Home A/C'
+        absolute: 'Pet Hair & Dander Window AC Cleaning Oahu | Affordable Home A/C'
     },
-    description: 'Eradicate embedded pet hair, feline dander, and animal odors from your ductless mini split AC in Oahu. Clinical $175–$275 deep teardown & coil wash. CT-36775 licensed.',
+    description: 'Eradicate embedded pet hair, feline dander, and animal odors from your window AC in Oahu. Filter sanitization, coil wash, and LG Dual Inverter upgrades. Local Waipahu specialists.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/pet-hair-dander-ac-cleaning-oahu',
     },
     openGraph: {
-        title: 'Pet Hair & Dander Mini Split AC Cleaning Oahu | $175–$275 | Affordable Home A/C',
-        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your ductless mini split AC in Oahu. Clinical $175–$275 deep teardown & coil wash. CT-36775 licensed.',
+        title: 'Pet Hair & Dander Window AC Cleaning Oahu | Affordable Home A/C',
+        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your window AC in Oahu. Filter sanitization, coil wash, and LG Dual Inverter upgrades. Local Waipahu specialists.',
         url: 'https://www.affordablehome-ac.com/pet-hair-dander-ac-cleaning-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Pet Hair & Dander Mini Split AC Cleaning Oahu | $175–$275 | Affordable Home A/C',
-        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your ductless mini split AC in Oahu. Clinical $175–$275 deep teardown & coil wash. CT-36775 licensed.',
+        title: 'Pet Hair & Dander Window AC Cleaning Oahu | Affordable Home A/C',
+        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your window AC in Oahu. Filter sanitization, coil wash, and LG Dual Inverter upgrades. Local Waipahu specialists.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -56,7 +56,7 @@ const petHairFaqSchema = {
             "name": "What cleaning service is recommended for homes with multiple pets?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "For homes with multiple shedding dogs or cats, we recommend our $275 Premium Deep Teardown for mini splits with floor drop cloth protection. For window units impacted by heavy pet dander, we recommend regular filter maintenance or upgrading to an energy-efficient new LG Dual Inverter unit."
+                "text": "For window units impacted by heavy pet dander, we recommend bi-weekly washable filter rinsing, periodic surface coil sanitization with floor drop cloth protection, or upgrading older units to an energy-efficient new LG Dual Inverter unit."
             }
         }
     ]

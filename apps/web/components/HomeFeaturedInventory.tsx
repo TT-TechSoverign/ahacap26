@@ -388,7 +388,7 @@ export function HomeFeaturedInventory() {
                     <div className="bg-slate-900/50 border border-white/5 rounded-2xl p-4 flex items-center justify-center gap-3">
                         <ShieldCheck className="size-5 text-emerald-400 shrink-0" />
                         <span className="text-xs text-slate-300 font-medium">
-                            1-Yr LG &amp; 2-Yr GE Factory Warranty • Lic #CT-36775
+                            1-Yr LG &amp; 2-Yr GE Factory Warranty • Factory-Sealed Stock
                         </span>
                     </div>
                     <div className="bg-slate-900/50 border border-white/5 rounded-2xl p-4 flex items-center justify-center gap-3">

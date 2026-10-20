@@ -31,11 +31,11 @@ const FAQS = [
     },
     {
         q: "Are there restrictive long-term auto-renewal contracts?",
-        a: "Zero restrictive contracts. We provide on-demand seasonal maintenance with straightforward flat rates ($175 Basic, $275 Premium Teardown) whenever you are ready. We also offer automated courtesy email/SMS reminders when your seasonal window approaches."
+        a: "Zero restrictive contracts. We provide on-demand seasonal Window AC maintenance and filter/coil care whenever you are ready. We also offer automated courtesy email/SMS reminders when your seasonal window approaches."
     },
     {
         q: "What brands and equipment do you maintain?",
-        a: "We service all major mini split ductless systems (Mitsubishi, Daikin, Fujitsu, Gree, Pioneer, LG) as well as all residential window air conditioner units."
+        a: "We service and replace all residential and commercial Window Air Conditioner units across Oahu, specializing in LG Dual Inverter and GE high-efficiency models."
     }
 ];
 
@@ -43,17 +43,17 @@ const SEASONS = [
     {
         icon: Sun,
         title: "Spring Pre-Summer Prep (April - May)",
-        desc: "Deep coil wash and refrigerant level check before peak summer humidity and 90°F+ afternoon temperatures strike Oahu."
+        desc: "Deep coil wash and airflow check before peak summer humidity and 90°F+ afternoon temperatures strike Oahu."
     },
     {
         icon: CloudRain,
         title: "Kona Weather & Vog Defense (August - October)",
-        desc: "Flush humid drain lines and scrub bio-growth accelerated by stagnant south winds and volcanic smog."
+        desc: "Flush humid drain pans and scrub bio-growth accelerated by stagnant south winds and volcanic smog."
     },
     {
         icon: Wind,
         title: "Winter Salt-Air Neutralization (December - January)",
-        desc: "Post-winter storm rinse to remove corrosive marine salt crusting on outdoor condenser coils and fan motor housings."
+        desc: "Post-winter storm rinse to remove corrosive marine salt crusting on exterior condenser coils and fan motor housings."
     }
 ];
 
@@ -85,7 +85,7 @@ export default function SeasonalMaintenancePage() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/mini_split_ac_maintenance"
+                            href="/ac-cleaning-oahu"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
                             Schedule Seasonal Service
@@ -130,31 +130,31 @@ export default function SeasonalMaintenancePage() {
                     <div className="p-8 rounded-3xl bg-surface-dark border border-white/10 space-y-4">
                         <div className="flex items-center justify-between">
                             <span className="font-mono text-xs text-primary uppercase font-bold tracking-wider">ANNUAL ROUTINE</span>
-                            <span className="text-2xl font-black text-white font-header">$175 <span className="text-xs text-slate-400 font-sans font-normal">/ unit</span></span>
+                            <span className="text-2xl font-black text-white font-header">By Appt</span>
                         </div>
-                        <h3 className="font-header font-black text-xl uppercase text-white">Basic Mini Split Tune-Up</h3>
+                        <h3 className="font-header font-black text-xl uppercase text-white">Window AC Tune-Up &amp; Cleaning</h3>
                         <p className="text-xs text-slate-300 font-sans">
-                            Complete electrical check, operating amp draw verification, filter cleaning, surface coil sanitization, and gravity drain flush.
+                            Complete electrical check, operating amp draw verification, filter cleaning, surface coil sanitization, and drain pan flush with floor drop-cloth protection.
                         </p>
                         <div className="pt-2">
-                            <Link href="/mini_split_ac_maintenance" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline">
-                                Book Basic Tune-Up &rarr;
+                            <Link href="/ac-cleaning-oahu" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline">
+                                Book Window AC Cleaning &rarr;
                             </Link>
                         </div>
                     </div>
 
                     <div className="p-8 rounded-3xl bg-surface-dark border border-white/10 space-y-4">
                         <div className="flex items-center justify-between">
-                            <span className="font-mono text-xs text-cyan-400 uppercase font-bold tracking-wider">DEEP TEARDOWN</span>
-                            <span className="text-2xl font-black text-cyan-400 font-header">$275 <span className="text-xs text-slate-400 font-sans font-normal">/ unit</span></span>
+                            <span className="font-mono text-xs text-cyan-400 uppercase font-bold tracking-wider">WAREHOUSE UPGRADE</span>
+                            <span className="text-2xl font-black text-cyan-400 font-header">$395–$1,200</span>
                         </div>
-                        <h3 className="font-header font-black text-xl uppercase text-white">Premium Deep Teardown Cleaning</h3>
+                        <h3 className="font-header font-black text-xl uppercase text-white">New LG &amp; GE Window AC Replacement</h3>
                         <p className="text-xs text-slate-300 font-sans">
-                            Full casing disassembly, blower wheel cylinder extracted for a 360-degree bath, and coil scrub. Floor drop cloth protection under every unit.
+                            Upgrade aging, corroded window units to whisper-quiet LG Dual Inverters with Gold Fin™ anti-corrosion protection and $45 Hawaii Energy rebates.
                         </p>
                         <div className="pt-2">
-                            <Link href="/mini_split_ac_maintenance" className="text-xs font-header font-bold uppercase tracking-wider text-cyan-400 hover:underline">
-                                Book Premium Teardown &rarr;
+                            <Link href="/shop" className="text-xs font-header font-bold uppercase tracking-wider text-cyan-400 hover:underline">
+                                Shop In-Stock Window ACs &rarr;
                             </Link>
                         </div>
                     </div>

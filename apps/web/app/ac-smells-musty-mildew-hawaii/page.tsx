@@ -35,7 +35,7 @@ const FAQS = [
     },
     {
         q: "What service eliminates this musty smell completely?",
-        a: "For ductless mini splits, our $275 Premium Deep Teardown pulls the drain pan and blower wheel out, pressure-washes the coils, and flushes the drain line with floor drop cloth protection. For window units with heavy internal mold, we recommend cleaning your washable filter or upgrading to a high-efficiency LG Dual Inverter starting at $560 with a $45 Hawaii Energy cash rebate."
+        a: "For newer window units with surface dust and minor pan odors, our Window AC Cleaning service sanitizes the coils, washes the reusable filter, and treats the condensate pan with floor drop cloth protection. For older window units with heavy internal mold inside the Styrofoam air channels, upgrading to a high-efficiency LG Dual Inverter starting at $560 with a $45 Hawaii Energy cash rebate is the most economical solution."
     }
 ];
 
@@ -81,12 +81,12 @@ export default function AcSmellsMustyPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        That sour, vinegar, or dirty-sock stench coming from your air conditioner isn&apos;t just unpleasant—it&apos;s active bacterial biofilm and mold spores cycling through your indoor air. Discover what causes it and how our clinical sanitization restores sweet, fresh air.
+                        That sour, vinegar, or dirty-sock stench coming from your air conditioner isn&apos;t just unpleasant—it&apos;s active bacterial biofilm and mold spores cycling through your indoor air. Discover what causes it and how our Window AC cleaning or replacement restores sweet, fresh air.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/mini_split_ac_maintenance"
+                            href="/ac-cleaning-oahu"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
                             Book Odor Elimination Service
@@ -128,28 +128,28 @@ export default function AcSmellsMustyPage() {
                 {/* Treatment Protocols */}
                 <section className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="p-8 rounded-3xl bg-surface-dark border border-white/10 space-y-4">
-                        <span className="font-mono text-xs text-primary uppercase font-bold tracking-wider block">DUCTLESS MINI SPLITS</span>
-                        <h3 className="text-2xl font-header font-black uppercase text-white">$275 Premium Deep Teardown</h3>
+                        <span className="font-mono text-xs text-primary uppercase font-bold tracking-wider block">WINDOW AC MAINTENANCE</span>
+                        <h3 className="text-2xl font-header font-black uppercase text-white">Coil &amp; Pan Sanitization</h3>
                         <p className="text-xs text-slate-300 font-sans leading-relaxed">
-                            We dismantle the front housing, drop the drain pan, extract the blower wheel, and apply professional antimicrobial foam to destroy the bacterial slime layer. Floor drop cloths protect your room.
+                            We wash the reusable filter screen, apply non-acidic antimicrobial coil foam to the evaporator fins, and flush the condensate drain pan. Floor drop cloths protect your room.
                         </p>
                         <ul className="space-y-2 text-xs text-slate-300 font-sans">
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
-                                <span>Blower wheel deep pressure scrub</span>
+                                <span>Evaporator coil antimicrobial wash</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
-                                <span>Drain pan disinfectant wash</span>
+                                <span>Drain pan disinfectant treatment</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
-                                <span>Drain line vacuum & treatment</span>
+                                <span>Floor drop cloth protection</span>
                             </li>
                         </ul>
                         <div className="pt-2">
-                            <Link href="/mini_split_ac_maintenance" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline">
-                                Schedule Mini Split Teardown &rarr;
+                            <Link href="/ac-cleaning-oahu" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline">
+                                Schedule Window AC Cleaning &rarr;
                             </Link>
                         </div>
                     </div>

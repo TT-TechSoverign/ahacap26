@@ -29,12 +29,12 @@
 
 ## IV. THE LOGISTICS & SMTP AGENT (Communication Loop)
 1. **SMTP Delivery**: Office 365 SMTP (`smtp.office365.com:587`) using `office@affordablehome-ac.com`, with BCC dev audit trail to `irasmussenjobs@gmail.com`.
-2. **Internal Lead Flow**: Send high-priority HTML alerts to the shop crew (`brian@affordablehome-ac.com` & `ahacsplitdivision@gmail.com`) for every new inquiry or appointment.
+2. **Internal Lead Flow**: Send high-priority HTML alerts to `brian@affordablehome-ac.com` (with BCC to `irasmussenjobs@gmail.com`) for every new inquiry or appointment.
 3. **Branded Receipts**: Generate Aloha-themed HTML confirmations with warehouse pickup map and $0 estimate breakdowns.
 4. **Scheduling Bridge**: Direct leads into the CRM queue (`https://crm.affordablehome-ac.com`) for By-Appointment-First scheduling triage.
 5. **Inventory Sync**: Trigger "In Stock" (Waipahu Warehouse) logic based on real-time database stock levels.
 6. **Confirmation Latency**: Ensure all transactional emails are dispatched asynchronously within 3 seconds of appointment submission.
-7. **Calendar Integration**: Provide clear Waipahu warehouse pickup directions (94-1388 Moape St #3, Waipahu, HI 96797).
+7. **Calendar Integration**: Provide clear Waipahu warehouse pickup directions (94-150 Leoleo St. #203, Waipahu, HI 96797).
 
 ## V. THE DEVOPS & VPS COMMANDER (Hostinger VPS Showrunner)
 1. **Deployment Stability**: Maintain 100% uptime on Hostinger VPS (`31.220.53.132`) managing multi-stage Docker builds and `standalone` Next.js output.
@@ -65,7 +65,7 @@
 - **Union Resolver**: Fix complex "union type that is too complex" errors (e.g., `ts(2590)`) by breaking down large component props into manageable sub-types.
 - **Generics Architect**: Implement reusable TypeScript generics for "Bento Grid" components to ensure data flows correctly from `content.json`.
 - **Null-Safety Audit**: Enforce optional chaining and nullish coalescing to prevent "Undefined" crashes in the mobile "Thumb-Zone".
-- **Enum Management**: Centralize all service categories (Window AC, Mini Splits, etc.) into a single source of truth for type-safe filtering.
+- **Enum Management**: Centralize all service categories (Window AC Sales, Window AC Installation, Window AC Cleaning) into a single source of truth for type-safe filtering.
 - **Async/Await Oversight**: Ensure all Stripe and SMTP API calls use robust try/catch blocks with typed error responses.
 - **Auto-Fix Protocol**: Automatically apply missing type imports and fix common syntax typos before the DevOps Agent initiates a build.
 
@@ -113,7 +113,7 @@
 - **Back-to-Top Integration**: Replace the bulky header with a subtle, neon-glowing "Back to Top" button in the bottom-right "Thumb-Zone".
 
 ### 2. THE CONTEXTUAL LINKAGE SPECIALIST
-- **Bento-Grid Linking**: Ensure every service card (Mini Splits, AC Cleaning, etc.) acts as a primary navigation node, linking directly to its respective shop or detail page.
+- **Bento-Grid Linking**: Ensure every service card (Window AC Sales, Window AC Installation, Window AC Cleaning) acts as a primary navigation node, linking directly to its respective shop or detail page.
 - **In-Line Anchor Points**: Strategically place anchor links within the "Hybrid Maximal" master narrative to allow users to jump to specific technical sections.
 - **CTO (Call-to-Order) Infusion**: Embed "Shop Now" or "Get Estimate" CTAs at the end of every educational block to remove the need to scroll back to the menu.
 - **Footer Navigation Hub**: Expand the footer into a comprehensive "Sitemap Hub" that replicates all header links for users who reach the bottom of the page.

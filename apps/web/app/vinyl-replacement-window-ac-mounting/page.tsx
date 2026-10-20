@@ -121,7 +121,7 @@ export default function VinylReplacementWindowAcMountingPage() {
                                 Protective Drop-Cloth Standard
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our licensed HVAC technicians (Contractor License CT-36775) lay protective floor drop cloths under every window during work. We leave your home cleaner than when we arrived, with your vinyl windows fully protected.
+                                Our experienced technicians lay protective floor drop cloths under every window during work. We leave your home cleaner than when we arrived, with your vinyl windows fully protected.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
                                 <strong>Standard Brackets:</strong> We supply and install standard exterior window AC support brackets as an additional cost option with installation to safely support heavy units.

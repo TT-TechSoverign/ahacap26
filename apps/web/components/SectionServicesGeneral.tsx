@@ -15,9 +15,9 @@ export default function SectionServicesGeneral() {
         {
             id: 'residential',
             defaultTitle: 'Residential',
-            defaultDesc: 'Keep your home cool and comfortable with our expert installation and repair services.',
+            defaultDesc: 'Keep your home cool and comfortable with our expert LG & GE Window AC installation and cleaning services.',
             cleanImage: '/assets/yelpphotos/yelp1.jpg',
-            link: '/mini_split_ac'
+            link: '/shop'
         },
         {
             id: 'commercial',

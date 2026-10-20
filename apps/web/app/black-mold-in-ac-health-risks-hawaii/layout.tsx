@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Black Mold in AC: Health Risks & Removal in Hawaii | Affordable Home A/C'
     },
-    description: 'Protect your family from black mold blowing out of your air conditioner in Hawaii. Understand health hazards, respiratory risks, and clinical AC teardown sanitization. CT-36775 licensed.',
+    description: 'Protect your family from black mold blowing out of your air conditioner in Hawaii. Understand health hazards, respiratory risks, and clinical AC teardown sanitization.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/black-mold-in-ac-health-risks-hawaii',
     },
     openGraph: {
         title: 'Black Mold in AC: Health Risks & Removal in Hawaii | Affordable Home A/C',
-        description: 'Protect your family from black mold blowing out of your air conditioner in Hawaii. Understand health hazards, respiratory risks, and clinical AC teardown sanitization. CT-36775 licensed.',
+        description: 'Protect your family from black mold blowing out of your air conditioner in Hawaii. Understand health hazards, respiratory risks, and clinical AC teardown sanitization.',
         url: 'https://www.affordablehome-ac.com/black-mold-in-ac-health-risks-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Black Mold in AC: Health Risks & Removal in Hawaii | Affordable Home A/C',
-        description: 'Protect your family from black mold blowing out of your air conditioner in Hawaii. Understand health hazards, respiratory risks, and clinical AC teardown sanitization. CT-36775 licensed.',
+        description: 'Protect your family from black mold blowing out of your air conditioner in Hawaii. Understand health hazards, respiratory risks, and clinical AC teardown sanitization.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

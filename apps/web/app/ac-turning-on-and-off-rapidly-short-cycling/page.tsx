@@ -156,7 +156,7 @@ export default function ShortCyclingPage() {
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-emerald-400">CT-36775</span>
+                                <span className="font-header font-bold text-xs text-emerald-400">Insured</span>
                             </div>
                         </div>
                     </div>

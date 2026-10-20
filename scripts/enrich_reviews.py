@@ -25,10 +25,10 @@ OAHU_NEIGHBORHOODS = [
 TECHNICIANS = ["Brian", "Chris", "Omar", "Rostin", "Makoa", "Matt", "Scott"]
 
 KEYWORDS_VOCAB = [
-    "quiet", "inverter", "lg", "ge", "carrier", "mitsubishi", "daikin", "fujitsu", 
+    "quiet", "inverter", "lg", "ge", 
     "clean", "cleaning", "condo", "hoa", "apartment", "living room", "bedroom", 
     "lanai", "electric bill", "wifi", "rebate", "energy", "pickup", "warehouse", 
-    "prompt", "fast", "honest", "estimate", "teardown"
+    "prompt", "fast", "honest", "estimate"
 ]
 
 def sanitize_text(text: str) -> str:
@@ -63,10 +63,8 @@ def detect_technicians(text: str) -> list[str]:
 
 def detect_service_tag(text: str) -> str:
     t = text.lower()
-    if any(w in t for w in ["split", "mini-split", "ductless", "multi-split"]):
-        return "Ductless Mini-Split"
     if any(w in t for w in ["clean", "cleaned", "cleaning", "sluggish", "sludge", "mold", "wash", "maintenance"]):
-        return "Deep Teardown Cleaning"
+        return "Window AC Cleaning"
     if any(w in t for w in ["warehouse", "pick up", "picked up", "in stock"]):
         return "Waipahu Warehouse Pickup"
     if any(w in t for w in ["inverter", "lg dual", "efficient"]):
@@ -141,7 +139,7 @@ def enrich_reviews(source_path: str):
             "text": r['text'],
             "sanitized_text": sanitized,
             "verified": True,
-            "badge": "Island Split AC Client" if "split" in sanitized.lower() else "Oahu Verified Customer"
+            "badge": "Oahu Verified Customer"
         }
         enriched_airp.append(item)
         all_reviews.append(item)
@@ -152,7 +150,7 @@ def enrich_reviews(source_path: str):
         "average_rating": 4.9,
         "five_star_count": sum(1 for r in all_reviews if r['rating'] == 5),
         "four_star_count": sum(1 for r in all_reviews if r['rating'] == 4),
-        "license": "CT-36775",
+        "verification": "Waipahu Warehouse Direct • Est. 2005",
         "waipahu_shop_address": "94-150 Leoleo St #203, Waipahu, HI 96797",
         "top_neighborhoods": [
             {"name": "Waipahu", "count": sum(1 for r in all_reviews if r['neighborhood'] == 'Waipahu')},

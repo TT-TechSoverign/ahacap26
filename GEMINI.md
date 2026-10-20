@@ -2,7 +2,7 @@
 
 > **Affordable Home A/C (AHAC) — Oahu, Hawaii**  
 > **Master Projects Brain Version**: `2.6.0-SOVEREIGN`  
-> **Active Operational Epoch**: `EPOCH 19 (October 18, 2026)`  
+> **Active Operational Epoch**: `EPOCH 20 (October 19, 2026)`  
 > **Primary Host Node**: Hostinger VPS (`31.220.53.132`) • Dedicated Dev OS (`prod-dev-os:3005`) • FastAPI (`prod-api:8001`)
 
 ---
@@ -27,20 +27,21 @@ Every conversation session inherits the knowledge, directives, historical timeli
 
 ---
 
-## III. CORE BUSINESS MANDATES & COOLING DIVISIONS
+## III. CORE BUSINESS MANDATES & WINDOW AC SPECIALIZATION
 
 1. **Strict 'By Appointment First' Mandate**:
-   - Zero upfront checkout payment barriers for physical AC repair, maintenance, or estimates (+28% checkout velocity).
+   - Zero upfront checkout payment barriers for physical Window AC service, cleaning, or installation estimates (+28% checkout velocity).
    - Customers submit appointment requests; dispatch contacts them first before any charge or technician roll.
-2. **Dedicated Window AC & Split AC Divisions**:
-   - **Window AC Division**: Waipahu warehouse-direct inventory sales ($395 to $1,200; 94-150 Leoleo St. #203, Waipahu, HI 96797), custom jalousie & standard window installation, and clean-vs-replace assessments (no off-site shop teardowns).
-   - **Split AC Division**: Ductless mini-split installation & replacement ($0 Free In-Home Estimate), clinical chemical maintenance/deep flush, diagnostic troubleshooting & repair, and island microclimate sizing calculators.
-   - **No Fabricated Flat-Rate Packages**: Zero upfront booking payment barriers; custom transparent quotes by licensed technicians (CT-36775).
+2. **100% Dedicated Window AC & Window AC Cleaning Focus**:
+   - **Window AC Sales & Installation**: Waipahu warehouse-direct LG & GE inventory sales ($395 to $1,200; 94-150 Leoleo St. #203, Waipahu, HI 96797), custom jalousie & standard window installation, and 26" through-the-wall sleeve replacements.
+   - **Window AC Cleaning & Assessment**: On-site evaporator/condenser coil cleaning, antimicrobial pan treatment, condensate drain clearing, and honest clean-vs-replace assessments ($0 Free In-Home Estimate).
+   - **No Fabricated Flat-Rate Packages**: Zero upfront booking payment barriers; custom itemized quotes by Oahu cooling specialists.
 3. **Floor Drop-Cloth Protection & Legal Mandate**:
    - Technicians lay drop cloths on the floor under the unit during service.
    - Strictly prohibit false drywall repair claims or 24/7 unverified promises.
-4. **Hawaii Contractor License CT-36775 Grounding**:
-   - Embedded in all JSON-LD schemas, footers, quotes, and emails.
+4. **Waipahu Warehouse Direct & Insured Oahu Cooling Grounding**:
+   - Embedded in all JSON-LD schemas, footers, quotes, and emails (`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`).
+   - Primary admin notification email is `brian@affordablehome-ac.com` with developer BCC audit trail to `irasmussenjobs@gmail.com`.
 
 ---
 
@@ -64,20 +65,20 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
    - `agent_revenue_reconciler` (Stripe automated order reconciliation & GET tax)
    - `agent_catalog_auditor` (16-model specification drift & AHAM/Island dual-coverage auditor)
 4. **Growth & Market Grounding Sub-Master** (`submaster_growth_grounding`):
-   - `agent_seo_metadata` (22 Oahu city pages, canonicals, sitemaps)
+   - `agent_seo_metadata` (22 Oahu city pages, canonicals, sitemaps across 101 canonical routes)
    - `agent_oahu_grounding` (Island weather, HECO ~44.2¢/kWh power rates)
    - `agent_market_research` (Competitor benchmark, Waipahu pickup advantage)
-   - `agent_heco_rebate_strategist` (Hawaii Energy rebate integration)
+   - `agent_heco_rebate_strategist` (Hawaii Energy $45 Window AC rebate integration)
    - `agent_gsc_ga4_analytics` (Search Console & GA4 telemetry)
    - `agent_schema_metadata_engine` (JSON-LD Product, LocalBusiness, FAQ schemas)
    - `agent_high_intent_planner` (High-intent service area pathways)
 5. **Customer Operations & CRM Sub-Master** (`submaster_crm_operations`):
    - `agent_crm_dispatch` (Lead triage, scheduling queue, warehouse pickup dispatch)
-   - `agent_customer_lifecycle` (Follow-up, maintenance reminders)
+   - `agent_customer_lifecycle` (Follow-up, seasonal window AC cleaning reminders)
    - `agent_intake_triage` (Symptom analysis, customer routing)
 6. **Deployment & Quality Swarm Sub-Master** (`submaster_deployment_quality`):
    - `agent_deployment_guardian` (Deployment gatekeeper & Docker orchestrator)
-   - `agent_build_qa` (Next.js & FastAPI build verification)
+   - `agent_build_qa` (Next.js & FastAPI build verification across 101 canonical routes)
    - `agent_regression_sentinel` (Zero upfront payment & booking non-regression)
    - `agent_spatial_visualizer` (Blender 4.1 headless raytracing & engineering caliper engine)
 7. **SERP & Intent Acquisition Sub-Master** (`submaster_serp_acquisition`):
@@ -86,13 +87,13 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
    - `agent_merchant_feed_sentinel` (Google Merchant Center XML feeds & Product Rich Snippet compliance)
 8. **Frictionless Conversion Velocity Sub-Master** (`submaster_conversion_velocity`):
    - `agent_mobile_checkout_sentinel` (1-tap Apple Pay/Google Pay/Link validation, sub-100ms transitions)
-   - `agent_trust_authority_grounder` (Waipahu inventory proof, 1-year warranty badges, CT-36775 license)
+   - `agent_trust_authority_grounder` (Waipahu inventory proof, 1-year warranty badges, Est. 2005 trust grounding)
    - `agent_zero_friction_navigator` (Zero dead-ends, smooth filter resets, 1-tap phone bridges)
    - `agent_speed_core_vital_sentinel` (Mobile Core Web Vitals: LCP < 2.0s, CLS = 0, zero-cache delivery)
 9. **Creative AI & Spatial Media Studio Sub-Master** (`submaster_creative_studio`):
    - `agent_comfyui_bridge` (RTX 4090 24GB VRAM lifecycle, headless queue, checkpoint warm-up)
    - `agent_avatar_portrait_crafter` (Photorealistic aloha technician & customer persona portraits)
-   - `agent_trust_medallion_forge` (3D golden review medallions, Waipahu warehouse proof, and CT-36775 shields)
+   - `agent_trust_medallion_forge` (3D golden review medallions, Waipahu warehouse proof, and Est. 2005 shields)
    - `agent_asset_optimizer_sentinel` (WebP compression, zero CLS web delivery, responsive WebP/SVG fallback integrity)
 10. **Executive Analytics & Monthly Reporting Sub-Master** (`submaster_executive_reporting`):
    - `agent_report_ingestor` (Search Console zip archives, GA4 snapshots, metric normalization)
@@ -142,21 +143,24 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
   - Explicit user scope constraint strictly enforced: zero billing or CRM invoicing logic.
   - All 12 unit tests passing (`test_fleet_registry.py`, `test_reporting_engine.py`, `test_domain.py`, `test_email_routing.py`).
 - **Epoch 15 (Sep 27-28, 2026) Brand Reframing, Subcontractor Grounding & Buzzword Purge**:
-  - Purged all competitor / carrier bashing by name (*Matson*, *Amazon*, *Home Depot*, *Lowe's*) and sensational barge fearmongering (*"suffer in the heat"*, *"bent fins"*, *"nightmare returns"*).
-  - Grounded all electrical scope under License CT-36775 to licensed electrical subcontractors (dedicated 208/230V circuits, breaker additions, panel upgrades).
+  - Purged all competitor / shipping bashing by name and sensational barge fearmongering.
+  - Grounded all dedicated 208/230V electrical circuit work to licensed electrical subcontractors.
   - Eliminated fabricated package fees (all *$250 Survey* claims replaced with **$0 Free In-Home Estimate**).
-  - Purged buzzwords and overpromises: *"fully permitted"*, *"completely transparent"*, *"transparent pricing"*, *"zero surprise electrical bills/fees"*, and *"zero red tape"*, replacing with direct trade terminology (*"upfront estimates"*, *"island flat rates"*, *"itemized quotes"*, *"direct contractor pricing"*).
-  - Refreshed stale February/September booking dates across `Footer.tsx` and content JSONs to active October 2026 windows (`Oct 1-5`, `Oct 6-10`).
+  - Purged buzzwords and overpromises, replacing with direct trade terminology (*"upfront estimates"*, *"island flat rates"*, *"itemized quotes"*, *"direct warehouse pricing"*).
   - Fixed Next.js Link import in `apps/web/app/sitemap/page.tsx` (`import Link from 'next/link'`).
-  - All 14 Pytest unit tests passing, `npx tsc --noEmit` 0 errors, and root secret scanner clean across 2,105 files.
-- **Epoch 16–18 (Sep 25 – Oct 14, 2026) 110-Page Canonical SEO Footprint, 16/16 Factory Spec PDFs, GE AJCQ12AXXWA & CRM Multi-Stage Invoice Guardrails**:
-  - Expanded standalone SEO topical silos to 110 canonical routes (with 6 consolidated 301 permanent redirects), retired GE `AJCQ12AWJ` in favor of Variable Speed Inverter `AJCQ12AXXWA` with 16/16 factory PDF spec sheets and 2x Retina WebP mobile page viewers, upgraded homepage comparison visual checkmarks and mobile responsive layouts, and hardened CRM multi-stage invoice payment links with Deposit Paid vs Balance Due accounting.
+  - All 14 Pytest unit tests passing, `npx tsc --noEmit` 0 errors, and root secret scanner clean.
+- **Epoch 16–18 (Sep 25 – Oct 14, 2026) Canonical SEO Footprint, 16/16 Factory Spec PDFs, GE AJCQ12AXXWA & CRM Multi-Stage Invoice Guardrails**:
+  - Expanded standalone SEO topical silos, retired GE `AJCQ12AWJ` in favor of Variable Speed Inverter `AJCQ12AXXWA` with 16/16 factory PDF spec sheets and 2x Retina WebP mobile page viewers, upgraded homepage comparison visual checkmarks and mobile responsive layouts, and hardened CRM multi-stage invoice payment links with Deposit Paid vs Balance Due accounting.
 - **Epoch 19 (Oct 14–18, 2026) Live Homepage Stock Synchronization, 11-Part Canonical Ground Truth & 40/40 Fleet Health**:
   - Connected `HomeFeaturedInventory` and `WarehouseInventoryGrid` to live `/api/v1/products` (`cache: 'no-store'`) so admin `stock = 0` updates immediately show `Out of Stock` badges and disable `Add Unit` buttons on the homepage and warehouse grid.
   - Hardened `seed_products.py` and `migrate_and_reseed_catalog` so catalog spec migrations never overwrite live PostgreSQL `stock` or pricing (`$395` to `$1,200`, `12` models in stock, `117` physical units across `16` total catalog rows).
-  - Fixed desktop `ReviewsPavilion` 3-column full-width card layout (`md:w-full md:max-w-none h-full`) and reclassified review service tags (zero `Deep Teardown Cleaning` references).
+  - Fixed desktop `ReviewsPavilion` 3-column full-width card layout (`md:w-full md:max-w-none h-full`) and reclassified review service tags.
   - Replaced `pandas` in `reporting_engine.py` with native Python `csv` and added `python-docx>=1.1.2` to `requirements.txt` so all **40/40 Sovereign Agents** pass health checks (`All Healthy: True`) inside `prod-api`.
-  - Completed full 40-agent self-maintenance and 11-part canonical ground truth synchronization: updated all agent runners (`7` containers including `ahac-crm-web` & `ahac-crm-api`, `110` canonical routes, live DB stock `12` in stock / `117` units & `16/16` PDFs, `$395` to `$1,200`, zero fabricated package fees), upgraded Dev OS UI & SOP domain filters to 10 Sub-Masters / 40 Agents / 50 SOPs, and updated `agent_catalog.md`.
+- **Epoch 20 (Oct 19, 2026) 100% Window AC & Window AC Cleaning Consolidation**:
+  - Retired all non-window AC divisions, pages, navigation items, and estimators across the entire monorepo (`apps/web`, `apps/api`, `apps/dev-os`, `ahac-crm`, `scripts`, and governance docs), consolidating 100% around **LG & GE Window ACs and Window AC Cleaning**.
+  - Added 301 permanent redirects for all retired routes to `/shop` and `/ac-cleaning-oahu` in `middleware.ts` and `next.config.js`, establishing **`101` canonical routes** (`85` static/city routes + `16` product routes).
+  - Updated email routing so **`brian@affordablehome-ac.com`** is the primary admin recipient across production notifications with **`irasmussenjobs@gmail.com`** preserved on BCC (and as exclusive recipient in staging/test environments).
+  - Replaced all legacy license references with **`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`** while keeping the 16-model Window AC store, Cart, Stripe Checkout, and `/admin` 100% intact.
 
 ---
 
@@ -166,7 +170,7 @@ To ensure every new chat session in `ahacws26` seamlessly continues where the pr
 
 1. **Mandatory New-Chat Handshake (`TRACKER`)**:
    - **CRITICAL RULE**: When the user opens a new chat session (especially when they say `"Convene all"` or ask to verify connection), you **MUST** include the codeword **`TRACKER`** prominently at the very top of your first response.
-   - Alongside **`TRACKER`**, confirm that you are connected to **Master Projects Brain v2.6.0 (`EPOCH 19`)**, that all **10 Category Sub-Masters & 40 Specialized Agents** are online (`All Healthy: True`), and summarize the active state from `project_state.md` so the user knows zero context was lost.
+   - Alongside **`TRACKER`**, confirm that you are connected to **Master Projects Brain v2.6.0 (`EPOCH 20`)**, that all **10 Category Sub-Masters & 40 Specialized Agents** are online (`All Healthy: True`), and summarize the active state from `project_state.md` so the user knows zero context was lost.
 2. **Before Modifying Code**:
    - Check `project_state.md` to confirm the latest progress and verified features.
    - Run `powershell -File .\scripts\dev-os.ps1 status` or `brain` to inspect live agent telemetries.

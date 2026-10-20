@@ -2,24 +2,16 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { 
-    Sparkles, 
     Wrench, 
     AlertTriangle, 
     Clock, 
     Phone, 
-    Shield, 
     CheckCircle2, 
-    ArrowRight, 
     Snowflake, 
     Droplets, 
     Zap, 
     ChevronDown, 
-    FileText, 
-    Warehouse, 
-    Truck, 
-    HelpCircle,
     RotateCcw,
     Gauge
 } from 'lucide-react';
@@ -29,7 +21,7 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 export default function AcRepairOahuPage() {
     const [selectedSymptom, setSelectedSymptom] = useState<string>('warm_air');
-    const [equipmentType, setEquipmentType] = useState<string>('mini_split');
+    const [equipmentType, setEquipmentType] = useState<string>('window_ac');
     const [unitAge, setUnitAge] = useState<string>('under_5');
     const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
@@ -44,10 +36,10 @@ export default function AcRepairOahuPage() {
     const [isSuccess, setIsSuccess] = useState(false);
 
     const symptoms = [
-        { id: 'warm_air', label: 'Blowing Warm Air / Not Cooling', icon: Snowflake, advice: 'Likely refrigerant leak, failed capacitor, or clogged condenser coil.' },
-        { id: 'leaking', label: 'Water Leaking Down Wall / Sill', icon: Droplets, advice: 'Clogged condensate drain line, cracked drain pan, or frozen evaporator coils.' },
-        { id: 'electrical', label: 'Tripped Breaker / Won\'t Turn On', icon: Zap, advice: 'Electrical short circuit, control board malfunction, or blown terminal fuse.' },
-        { id: 'noise', label: 'Loud Rattling / Screeching Noise', icon: AlertTriangle, advice: 'Worn blower wheel bearings, loose fan blade, or compressor mechanical failure.' },
+        { id: 'warm_air', label: 'Blowing Warm Air / Not Cooling', icon: Snowflake, advice: 'Likely failed capacitor, thermostat sensor issue, or clogged condenser coil.' },
+        { id: 'leaking', label: 'Water Leaking Inside / On Sill', icon: Droplets, advice: 'Improper window pitch, clogged drain pan channel, or frozen evaporator coils.' },
+        { id: 'electrical', label: 'Tripped Breaker / Won\'t Turn On', icon: Zap, advice: 'LCDI plug trip, electrical short circuit, control board malfunction, or blown fuse.' },
+        { id: 'noise', label: 'Loud Rattling / Screeching Noise', icon: AlertTriangle, advice: 'Worn blower wheel bearings, loose fan blade, or compressor mechanical wear.' },
     ];
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -75,7 +67,7 @@ export default function AcRepairOahuPage() {
                 address: address.trim() || 'Oahu, HI',
                 city: city.trim() || 'Oahu',
                 zip: '',
-                service_type: equipmentType === 'mini_split' ? 'Mini Split Diagnosis/Repair' : 'Window AC Diagnosis/Repair',
+                service_type: 'Window AC Diagnosis/Repair',
                 urgency: 'flexible',
                 notes: `Symptom: ${selectedSymptom.toUpperCase()} | Equipment: ${equipmentType.toUpperCase()} | Estimated Age: ${unitAge} Years | Customer Notes: ${notes.trim() || 'None'}`
             };
@@ -100,20 +92,20 @@ export default function AcRepairOahuPage() {
 
     const faqItems = [
         {
-            q: "How quickly can a technician be scheduled for AC repair on Oahu?",
+            q: "How quickly can a technician be scheduled for Window AC repair on Oahu?",
             a: "We schedule diagnostic appointments based on our earliest technician availability across all 22 Oahu municipalities. Booking through this form allows our dispatch team to coordinate a convenient appointment window with zero upfront deposit required."
         },
         {
             q: "How much is the diagnostic service fee?",
-            a: "We charge a standard flat-rate diagnostic inspection fee that covers on-site technician dispatch, travel time, and a comprehensive electrical and mechanical troubleshooting evaluation. You receive an upfront, itemized repair estimate before any physical work begins."
+            a: "We charge a standard $175 flat-rate diagnostic inspection fee that covers on-site technician dispatch, travel time, and a comprehensive electrical and mechanical troubleshooting evaluation. You receive an upfront, itemized repair or replacement recommendation before any physical work begins."
         },
         {
-            q: "What if my AC unit is too old or expensive to repair?",
-            a: "If your compressor is grounded/seized or your unit is over 8 years old with extensive salt-air coil corrosion, repair costs can exceed the value of the unit. Because Affordable Home AC maintains its own central warehouse in Waipahu, we can immediately offer in-stock LG Dual Inverter window AC replacements (with same-day/next-day pickup by appointment or $50 delivery) OR provide an honest $0 upfront estimate for a new ductless mini-split system."
+            q: "What if my Window AC unit is too old or expensive to repair?",
+            a: "If your compressor is grounded/seized or your unit is over 5–7 years old with extensive salt-air coil corrosion, repair costs can exceed the value of the unit. Because Affordable Home AC maintains its own Waipahu warehouse, we can immediately offer in-stock LG Dual Inverter and GE Built-In window AC replacements ($395–$1,200) with same-day/next-day pickup by appointment or $50 flat Oahu delivery."
         },
         {
-            q: "Do you repair both window ACs and ductless mini-splits?",
-            a: "Yes. Our CT-36775 licensed technicians service and repair both ductless mini-splits (Mitsubishi, Daikin, Fujitsu, LG) and heavy-duty window air conditioners across Honolulu, Pearl City, Waipahu, Kailua, and all Oahu."
+            q: "Do you service both window-mounted and through-the-wall AC units?",
+            a: "Yes. Our technicians service and replace both standard/jalousie-mounted LG Dual Inverter window air conditioners and 26-inch GE Built-In through-the-wall chassis across Honolulu, Pearl City, Waipahu, Kailua, and all Oahu."
         }
     ];
 
@@ -122,7 +114,7 @@ export default function AcRepairOahuPage() {
         "@graph": [
             {
                 "@type": "HVACBusiness",
-                "name": "Affordable Home AC - Oahu AC Repair & Diagnostic Troubleshooting",
+                "name": "Affordable Home AC - Oahu Window AC Repair & Diagnostic Troubleshooting",
                 "telephone": "+1-808-488-1111",
                 "priceRange": "$$",
                 "address": {
@@ -134,24 +126,24 @@ export default function AcRepairOahuPage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Licensed Hawaii Contractor CT-36775 providing diagnostic troubleshooting and repair for ductless mini-splits and window air conditioners across Honolulu, Waipahu, and all Oahu."
+                "description": "Local Oahu cooling specialists providing diagnostic troubleshooting, repair, and replacement for window and through-the-wall air conditioners across Honolulu, Waipahu, and all Oahu."
             },
             {
                 "@type": "Service",
-                "name": "AC Repair & Diagnostics Oahu",
-                "serviceType": "HVAC Repair & Troubleshooting",
+                "name": "Window AC Repair & Diagnostics Oahu",
+                "serviceType": "Window AC Repair & Troubleshooting",
                 "provider": {
                     "@type": "HVACBusiness",
                     "name": "Affordable Home AC"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Professional AC diagnostic troubleshooting and repairs for ductless mini-splits and window air conditioners in Honolulu, Waipahu, and island-wide Oahu."
+                "description": "Professional Window AC diagnostic troubleshooting and repairs across Honolulu, Waipahu, and island-wide Oahu."
             },
             {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
                     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
-                    { "@type": "ListItem", "position": 2, "name": "AC Repair Oahu", "item": "https://www.affordablehome-ac.com/ac-repair-oahu" }
+                    { "@type": "ListItem", "position": 2, "name": "Window AC Repair Oahu", "item": "https://www.affordablehome-ac.com/ac-repair-oahu" }
                 ]
             },
             {
@@ -180,16 +172,16 @@ export default function AcRepairOahuPage() {
                 <div className="text-center max-w-4xl mx-auto space-y-4 mb-14">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono uppercase tracking-widest">
                         <Clock className="size-3.5" />
-                        Prompt Diagnostic Scheduling &bull; Licensed Hawaii CT-36775
+                        Prompt Diagnostic Scheduling &bull; Waipahu Warehouse Direct
                     </div>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-header font-black tracking-tight uppercase leading-[0.95] text-white">
-                        Professional <span className="text-primary">AC Repair</span> Oahu
+                        Professional <span className="text-primary">Window AC Repair</span> Oahu
                     </h1>
                     <p className="text-slate-300 font-header font-bold text-base sm:text-lg uppercase tracking-wide text-cyan-400">
-                        Mini Split &amp; Window AC Diagnostic Troubleshooting
+                        Window &amp; Through-the-Wall AC Diagnostic Troubleshooting
                     </p>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Accurate diagnostic inspection for ductless mini-splits and window units across Honolulu, Pearl City, Waipahu, and all Oahu. Zero upfront booking deposit. Upfront itemized estimates backed by Hawaii CT-36775 licensed workmanship.
+                        Accurate diagnostic inspection for window and through-the-wall AC units across Honolulu, Pearl City, Waipahu, and all Oahu. Zero upfront booking deposit and upfront itemized estimates.
                     </p>
                 </div>
 
@@ -235,22 +227,10 @@ export default function AcRepairOahuPage() {
                         {/* Step 2: Equipment & Age */}
                         <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 border border-white/10 shadow-2xl space-y-4">
                             <label className="text-xs font-mono uppercase tracking-widest text-cyan-400 font-bold flex items-center gap-1.5">
-                                <Wrench className="size-4" /> 2. Equipment Type &amp; Approximate Age
+                                <Wrench className="size-4" /> 2. Mounting Type &amp; Approximate Age
                             </label>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <button
-                                    type="button"
-                                    onClick={() => setEquipmentType('mini_split')}
-                                    className={`p-4 rounded-2xl border text-left transition-all ${
-                                        equipmentType === 'mini_split'
-                                            ? 'bg-purple-500/10 border-purple-400 ring-1 ring-purple-400'
-                                            : 'bg-white/[0.02] border-white/10 hover:border-white/20'
-                                    }`}
-                                >
-                                    <div className="font-header font-bold text-xs uppercase text-white">Ductless Mini-Split</div>
-                                    <div className="text-[11px] text-slate-400 mt-1">Wall-mounted ductless head + outdoor compressor</div>
-                                </button>
                                 <button
                                     type="button"
                                     onClick={() => setEquipmentType('window_ac')}
@@ -260,8 +240,20 @@ export default function AcRepairOahuPage() {
                                             : 'bg-white/[0.02] border-white/10 hover:border-white/20'
                                     }`}
                                 >
-                                    <div className="font-header font-bold text-xs uppercase text-white">Window Air Conditioner</div>
-                                    <div className="text-[11px] text-slate-400 mt-1">Single window or casement mounted unit</div>
+                                    <div className="font-header font-bold text-xs uppercase text-white">Standard / Jalousie Window AC</div>
+                                    <div className="text-[11px] text-slate-400 mt-1">Mounted in a standard sash, slider, or jalousie window</div>
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setEquipmentType('thru_wall')}
+                                    className={`p-4 rounded-2xl border text-left transition-all ${
+                                        equipmentType === 'thru_wall'
+                                            ? 'bg-purple-500/10 border-purple-400 ring-1 ring-purple-400'
+                                            : 'bg-white/[0.02] border-white/10 hover:border-white/20'
+                                    }`}
+                                >
+                                    <div className="font-header font-bold text-xs uppercase text-white">Through-the-Wall Sleeve AC</div>
+                                    <div className="text-[11px] text-slate-400 mt-1">Slide-out chassis inside a 26&quot; metal wall sleeve</div>
                                 </button>
                             </div>
 
@@ -297,7 +289,7 @@ export default function AcRepairOahuPage() {
                                     <RotateCcw className="size-3.5" /> Repair vs. Replace Advisory
                                 </div>
                                 <p className="text-xs text-slate-300 leading-relaxed">
-                                    Because your system is over 8 years old, compressor replacement or severe coil leak repairs often cost more than a brand-new unit. If our technician finds irreparable damage, you can apply your diagnostic fee towards an in-stock LG Dual Inverter ($45 rebate) or new mini-split installation.
+                                    Because your window AC is over 8 years old, compressor replacement or severe coil leak repairs often cost more than a brand-new unit. If our technician finds irreparable damage, you can apply your diagnostic towards an in-stock LG Dual Inverter ($45 Hawaii Energy rebate) or GE Built-In replacement.
                                 </p>
                             </div>
                         )}
@@ -392,7 +384,7 @@ export default function AcRepairOahuPage() {
                                             rows={2}
                                             value={notes}
                                             onChange={e => setNotes(e.target.value)}
-                                            placeholder="Unit makes a humming sound, error code E1 on screen..."
+                                            placeholder="Unit makes a humming sound, error code CH05 on screen..."
                                             className="w-full px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                                         />
                                     </div>
@@ -406,7 +398,7 @@ export default function AcRepairOahuPage() {
                                     </button>
 
                                     <div className="text-[10px] font-mono text-slate-400 text-center leading-relaxed">
-                                        Licensed Hawaii Contractor CT-36775 &bull; Transparent upfront pricing &bull; No surprise fees
+                                        Waipahu Warehouse Direct &bull; Insured Oahu Cooling Specialists
                                     </div>
                                 </form>
                             )}
@@ -417,7 +409,7 @@ export default function AcRepairOahuPage() {
                 {/* Common Oahu Failure Modes Breakdown */}
                 <div className="p-8 rounded-3xl bg-surface-dark border border-white/10 shadow-2xl mb-20">
                     <h3 className="text-xl font-header font-black uppercase text-white mb-4">
-                        Why Air Conditioners Fail on Oahu
+                        Why Window Air Conditioners Fail on Oahu
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
                         <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2">
@@ -430,18 +422,18 @@ export default function AcRepairOahuPage() {
                         </div>
                         <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2">
                             <div className="text-cyan-400 font-bold uppercase flex items-center gap-1.5">
-                                <Clock className="size-4" /> Geckos &amp; Invertebrate Shorts
+                                <Clock className="size-4" /> Control Board &amp; Capacitor Wear
                             </div>
                             <p className="text-slate-300 font-sans leading-relaxed text-[11px]">
-                                In Hawaii, geckos crawling into outdoor mini-split inverter motherboards cause short circuits and fried capacitors—one of our most frequent diagnostic repair calls.
+                                High ambient heat and humidity place heavy thermal loads on start/run capacitors and inverter control boards during peak summer cooling cycles.
                             </p>
                         </div>
                         <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2">
                             <div className="text-cyan-400 font-bold uppercase flex items-center gap-1.5">
-                                <AlertTriangle className="size-4" /> Algae Drain Blockages
+                                <AlertTriangle className="size-4" /> Algae Drain Pan Blockages
                             </div>
                             <p className="text-slate-300 font-sans leading-relaxed text-[11px]">
-                                Warm 74%+ relative humidity incubates thick algae biofilm inside condensate drain lines, causing water to back up and overflow inside bedroom drywall.
+                                Warm 74%+ relative humidity incubates thick algae biofilm inside window AC slinger pans and drain channels, causing water to back up and drip indoors.
                             </p>
                         </div>
                     </div>
@@ -451,7 +443,7 @@ export default function AcRepairOahuPage() {
                 <div className="max-w-3xl mx-auto space-y-4 mb-16">
                     <div className="text-center mb-8">
                         <h3 className="text-2xl font-header font-black uppercase text-white">
-                            AC Repair Frequently Asked Questions
+                            Window AC Repair Frequently Asked Questions
                         </h3>
                         <p className="text-slate-400 text-xs mt-1">Fast answers to common Oahu cooling emergencies</p>
                     </div>
@@ -479,7 +471,7 @@ export default function AcRepairOahuPage() {
                 {/* Bottom Help Banner */}
                 <div className="p-8 rounded-3xl bg-slate-900/50 border border-white/10 text-center space-y-4">
                     <h4 className="text-xl font-header font-black uppercase text-white">
-                        Need Phone Assistance with Your Oahu AC?
+                        Need Phone Assistance with Your Oahu Window AC?
                     </h4>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
                         Speak directly with our local Waipahu dispatch team for real-time scheduling and technician availability.
@@ -500,7 +492,7 @@ export default function AcRepairOahuPage() {
                         </Link>
                     </div>
                 </div>
-                            <WindowAcQuickShop
+                <WindowAcQuickShop
                     title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,025)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />

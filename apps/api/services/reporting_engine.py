@@ -359,8 +359,8 @@ We rank very high for people who are searching for affordable air conditioners i
 While our rankings are great, we have some huge opportunities to get even more clicks without spending money on ads:
 
 **1. Target Secondary High-Value Residential Queries**
-* **The Issue:** Core brand queries are locked at #1, but high-ticket installation keywords like `"split ac installation near me"` and `"split ac cleaning service"` have room to climb onto Page 1.
-* **The Fix:** Publish targeted split AC installation and maintenance guides to propel these high-value queries onto Page 1.
+* **The Issue:** Core brand queries are locked at #1, but high-intent service keywords like `"window ac installation near me"` and `"window ac cleaning service"` have room to climb onto Page 1.
+* **The Fix:** Publish targeted window AC installation and maintenance guides to propel these high-value queries onto Page 1.
 
 **2. Boost Product Page-to-Checkout Conversion**
 * **The Issue:** Product pages are generating thousands of impressions on Google, but customers need stronger incentives to buy online instead of just browsing.
@@ -371,7 +371,7 @@ While our rankings are great, we have some huge opportunities to get even more c
 * **The Fix:** Inject localized reviews and "Same-Day / Fast Dispatch from Waipahu" callouts to double click-through rates.
 
 ## 📅 Summary of Action Plan
-1. **Residential Search Expansion:** Target split AC installation and maintenance keywords to capture high-margin residential leads.
+1. **Residential Search Expansion:** Target window AC installation and maintenance keywords to capture high-margin residential leads.
 2. **Product Page Conversion:** Optimize on-page CTAs and stock badges on Page-1 LG and GE product pages to push online sales.
 3. **Local Schema & Dispatch Badging:** Overhaul Pearl City and Aiea metadata to turn high search impressions into phone calls and scheduled service estimates.
 """

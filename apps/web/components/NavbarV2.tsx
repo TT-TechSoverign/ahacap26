@@ -22,13 +22,13 @@ import {
 const getNavIcon = (href: string, text: string) => {
     const h = (href || '').toLowerCase();
     const t = (text || '').toLowerCase();
-    if (h.includes('mini_split_ac_maintenance') || t.includes('split ac clean')) return Sparkles;
-    if (h.includes('mini_split') || t.includes('mini split')) return Wind;
+    if (h.includes('cleaning') || t.includes('clean')) return Sparkles;
+    if (h.includes('install') || t.includes('install')) return Wrench;
     if (h.includes('shop') || t.includes('shop') || t.includes('inventory')) return Store;
     if (h.includes('repair') || t.includes('repair')) return Wrench;
-    if (h.includes('window_ac') || t.includes('window ac clean')) return ShieldCheck;
+    if (h.includes('replace') || t.includes('window ac')) return ShieldCheck;
     if (h.includes('service-areas') || t.includes('service')) return MapPin;
-    if (h.includes('sizing') || t.includes('sizing')) return Compass;
+    if (h.includes('sizing') || t.includes('btu')) return Compass;
     return Compass;
 };
 
@@ -59,11 +59,11 @@ export default function NavbarV2() {
     if (pathname && pathname.startsWith('/checkout')) return null;
 
     const PRIMARY_NAV_LINKS = [
-        { text: "Mini Split AC", href: "/mini_split_ac" },
-        { text: "Split AC Cleaning", href: "/mini_split_ac_maintenance" },
         { text: "Shop Window AC", href: "/shop" },
-        { text: "AC Repair", href: "/ac-repair-oahu" },
+        { text: "Window AC Cleaning", href: "/ac-cleaning-oahu" },
+        { text: "Window AC Install", href: "/window-ac-installation" },
         { text: "Clean vs Replace", href: "/clean-vs-replace-window-ac" },
+        { text: "BTU Calculator", href: "/sizing" },
         { text: "Service Areas", href: "/service-areas" },
     ];
     const links = PRIMARY_NAV_LINKS;
@@ -77,7 +77,7 @@ export default function NavbarV2() {
             }}
             className="fixed top-0 w-full z-50 hidden md:flex flex-col pointer-events-none"
         >
-            {/* Split Header Container */}
+            {/* Header Container */}
             <div className="pointer-events-auto shadow-md relative flex flex-col">
 
                 {/* Row 0: Top Trust & Dispatch Utility Ribbon */}
@@ -93,7 +93,7 @@ export default function NavbarV2() {
                                 ⭐ <span>4.9/5 Rating (142+ Reviews)</span>
                             </Link>
                             <span className="text-slate-600">•</span>
-                            <span>Licensed Oahu Contractor CT-36775</span>
+                            <span>Insured Oahu Specialists • Est. 2005</span>
                             <span className="text-slate-600">•</span>
                             <span className="text-emerald-400 font-bold">Free Estimates ($0 to Book)</span>
                             <span className="text-slate-600">•</span>
@@ -140,7 +140,7 @@ export default function NavbarV2() {
                                     GE
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/hawaii-energy-rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-sm relative group cursor-pointer block pb-1">
+                                <Link prefetch={false} href="/hawaii-energy-ac-rebates-oahu" className="text-[#00B5E2] font-sans font-bold tracking-tight text-sm relative group cursor-pointer block pb-1">
                                     Hawai&apos;i Energy
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -159,23 +159,23 @@ export default function NavbarV2() {
                                 </Link>
                             </div>
 
-                            {/* Right Brands (Desktop Only: Mini Splits) */}
+                            {/* Right Pillars (Desktop Only: Window AC & Cleaning Highlights) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link prefetch={false} href="/mini_split_ac#mitsubishi-electric" className="text-red-500 font-header font-bold tracking-normal uppercase text-[10px] relative group cursor-pointer block">
-                                    MITSUBISHI ELECTRIC
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                                <Link prefetch={false} href="/shop?capacity=MASTER" className="text-rose-400 font-header font-bold tracking-normal uppercase text-[10px] relative group cursor-pointer block">
+                                    DUAL INVERTER
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/mini_split_ac#fujitsu" className="text-red-500 font-sans font-bold italic tracking-widest text-xs relative group cursor-pointer block">
-                                    FUJITSU
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                                <Link prefetch={false} href="/thru-the-wall-ac-replacement-oahu" className="text-blue-400 font-sans font-bold italic tracking-widest text-xs relative group cursor-pointer block">
+                                    26&quot; THRU-THE-WALL
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/mini_split_ac#daikin" className="text-[#00B5E2] font-header font-medium tracking-widest text-xs relative group cursor-pointer block pb-1">
-                                    DAIKIN
+                                <Link prefetch={false} href="/ac-cleaning-oahu" className="text-[#00B5E2] font-header font-medium tracking-widest text-xs relative group cursor-pointer block pb-1">
+                                    WINDOW AC CLEANING
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/mini_split_ac#lg" className="text-rose-400 font-sans font-extrabold tracking-tighter text-xs relative group cursor-pointer block">
-                                    LG DUCTLESS
-                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
+                                <Link prefetch={false} href="/waipahu-ac-warehouse-pickup" className="text-emerald-400 font-sans font-extrabold tracking-tighter text-xs relative group cursor-pointer block">
+                                    WAIPAHU PICKUP
+                                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                             </div>
                         </div>

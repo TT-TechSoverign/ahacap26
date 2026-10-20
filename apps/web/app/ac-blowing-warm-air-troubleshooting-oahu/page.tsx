@@ -63,8 +63,8 @@ const FAQS = [
         a: "We charge a transparent flat rate of $175. This covers technician dispatch anywhere on Oahu, electrical multimeter testing, refrigerant gauge pressure checks, and a comprehensive written quote before any physical repairs begin."
     },
     {
-        q: "What if my AC compressor is completely seized?",
-        a: "If the compressor is locked or grounded and the unit is over 7 years old, replacement is usually more cost-effective than a $1,800+ compressor swap. Affordable Home A/C stocks brand-new LG Dual Inverters in our Waipahu warehouse starting at $560 (with a $45 Hawaii Energy rebate) or provides $0 upfront estimates for new mini-split systems."
+        q: "What if my window AC compressor is completely seized?",
+        a: "If the compressor is locked or grounded and the unit is over 5 years old, replacement is much more cost-effective than a compressor swap. Affordable Home A/C stocks brand-new LG Dual Inverters and GE window ACs in our Waipahu warehouse starting at $395 (with a $45 Hawaii Energy rebate on qualifying Energy Star models) and provides $0 upfront estimates for new window AC installations."
     }
 ];
 
@@ -75,7 +75,7 @@ export default function AcBlowingWarmAirPage() {
     const [fullName, setFullName] = useState('');
     const [phone, setPhone] = useState('');
     const [city, setCity] = useState('Waipahu');
-    const [systemType, setSystemType] = useState('mini_split');
+    const [systemType, setSystemType] = useState('window_ac');
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -100,7 +100,7 @@ export default function AcBlowingWarmAirPage() {
                 address: city.trim(),
                 city: city.trim(),
                 zip: '',
-                service_type: 'AC Diagnostic (Warm Air)',
+                service_type: 'Window AC Diagnostic (Warm Air)',
                 urgency: 'high',
                 notes: `Symptom: BLOWING WARM AIR | Equipment: ${systemType.toUpperCase()} | Notes: ${notes.trim() || 'None'}`
             };
@@ -131,7 +131,7 @@ export default function AcBlowingWarmAirPage() {
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <AlertTriangle className="size-3.5" />
-                        <span>Urgent Symptom Solver &bull; $175 Flat Diagnostic Inspection</span>
+                        <span>Urgent Symptom Solver &bull; Window AC Troubleshooting &amp; Replacement</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
@@ -139,7 +139,7 @@ export default function AcBlowingWarmAirPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Is your air conditioner running but blowing lukewarm, room-temperature air? Learn the 4 most common Oahu failure modes, or book a flat-rate $175 diagnostic appointment with licensed contractor CT-36775.
+                        Is your window air conditioner running but blowing lukewarm, room-temperature air? Learn the 4 most common Oahu failure modes, or book an on-site troubleshooting &amp; clean-vs-replace assessment with our insured Oahu specialists.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -148,7 +148,7 @@ export default function AcBlowingWarmAirPage() {
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
                             <Calendar className="size-4" />
-                            Book $175 Diagnostic Inspection
+                            Book Troubleshooting Appointment
                         </a>
                         <TrackedPhoneLink 
                             phone="8084881111"
@@ -186,7 +186,7 @@ export default function AcBlowingWarmAirPage() {
                     </div>
                 </section>
 
-                {/* 175 Diagnostic Value Standard */}
+                {/* Diagnostic Value Standard */}
                 <section className="mb-16 p-8 rounded-3xl bg-slate-900/80 border border-white/10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div className="space-y-4">
@@ -194,12 +194,12 @@ export default function AcBlowingWarmAirPage() {
                                 OUR SERVICE COMMITMENT
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                                What Is Included in the $175 Diagnostic Inspection?
+                                What Is Included in Our On-Site Window AC Inspection?
                             </h2>
                             <ul className="space-y-2.5 text-xs text-slate-300 font-sans">
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                                    <span>Licensed CT-36775 technician dispatch to your Oahu residence</span>
+                                    <span>Experienced Oahu window AC technician dispatch to your residence</span>
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
@@ -207,11 +207,11 @@ export default function AcBlowingWarmAirPage() {
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                                    <span>Digital refrigerant manifold pressure and subcooling/superheat calculation</span>
+                                    <span>Evaporator &amp; condenser coil airflow and temperature split verification</span>
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                                    <span>Clear, itemized repair quote with zero obligation</span>
+                                    <span>Honest clean-vs-replace quote with zero obligation</span>
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="size-4 text-emerald-400 shrink-0 mt-0.5" />
@@ -240,10 +240,10 @@ export default function AcBlowingWarmAirPage() {
                 <section id="diagnostic-form" className="mb-16 p-8 sm:p-10 rounded-3xl bg-surface-dark border border-primary/30 shadow-2xl relative overflow-hidden">
                     <div className="max-w-2xl mx-auto text-center mb-8">
                         <span className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] font-bold block mb-2">
-                            SCHEDULE DIAGNOSTIC DISPATCH &bull; $0 DEPOSIT TO BOOK
+                            SCHEDULE SERVICE DISPATCH &bull; $0 DEPOSIT TO BOOK
                         </span>
                         <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-tight mb-3">
-                            Book $175 Diagnostic Inspection
+                            Book Window AC Troubleshooting
                         </h2>
                         <p className="text-xs sm:text-sm text-slate-300 font-sans">
                             Submit your contact details and our dispatch team will assign our earliest available field technician.
@@ -253,7 +253,7 @@ export default function AcBlowingWarmAirPage() {
                     {isSuccess ? (
                         <div className="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center max-w-lg mx-auto">
                             <CheckCircle2 className="size-12 text-emerald-400 mx-auto mb-3" />
-                            <h3 className="font-header font-black text-xl uppercase text-white mb-2">Diagnostic Request Received!</h3>
+                            <h3 className="font-header font-black text-xl uppercase text-white mb-2">Service Request Received!</h3>
                             <p className="text-xs text-slate-300 leading-relaxed mb-4">
                                 Our dispatch team will call you shortly to confirm technician arrival time.
                             </p>
@@ -307,9 +307,8 @@ export default function AcBlowingWarmAirPage() {
                                     onChange={(e) => setSystemType(e.target.value)}
                                     className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white text-xs focus:border-primary focus:outline-none"
                                 >
-                                    <option value="mini_split">Ductless Mini Split System</option>
-                                    <option value="window_ac">Window Air Conditioner</option>
-                                    <option value="central_ac">Central Air System</option>
+                                    <option value="window_ac">Window Air Conditioner (115V / 230V)</option>
+                                    <option value="wall_sleeve_ac">Thru-the-Wall Sleeve AC (GE 26&quot;)</option>
                                 </select>
                             </div>
 
@@ -319,7 +318,7 @@ export default function AcBlowingWarmAirPage() {
                                     rows={3}
                                     value={notes}
                                     onChange={(e) => setNotes(e.target.value)}
-                                    placeholder="When did it stop cooling? Is outdoor fan spinning? Any blinking lights?"
+                                    placeholder="When did it stop cooling? Is the fan spinning? Any blinking lights?"
                                     className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white text-xs focus:border-primary focus:outline-none"
                                 />
                             </div>
@@ -329,11 +328,11 @@ export default function AcBlowingWarmAirPage() {
                                 disabled={isSubmitting}
                                 className="w-full py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 disabled:opacity-50"
                             >
-                                {isSubmitting ? 'Dispatching...' : 'Request $175 Diagnostic Dispatch'}
+                                {isSubmitting ? 'Dispatching...' : 'Request Service Dispatch'}
                             </button>
 
                             <p className="text-[10px] font-mono text-slate-400 text-center">
-                                $175 Flat Rate &bull; CT-36775 Licensed &bull; No Upfront Payment Required to Book
+                                Upfront Estimates &bull; Insured Oahu Specialists &bull; No Upfront Payment Required to Book
                             </p>
                         </form>
                     )}

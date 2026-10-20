@@ -97,7 +97,17 @@ const nextConfig = {
         ];
     },
     async redirects() {
-        return [];
+        return [
+            { source: '/central-ac', destination: '/shop', permanent: true },
+            { source: '/mini_split_ac', destination: '/shop', permanent: true },
+            { source: '/ductless-mini-split-installation-oahu', destination: '/window-ac-installation', permanent: true },
+            { source: '/mini-split-estimate', destination: '/sizing', permanent: true },
+            { source: '/mini-split-installation-cost-oahu', destination: '/shop', permanent: true },
+            { source: '/mini_split_ac_maintenance', destination: '/ac-cleaning-oahu', permanent: true },
+            { source: '/premium-mini-split-deep-cleaning-oahu', destination: '/ac-cleaning-oahu', permanent: true },
+            { source: '/mini-split-remote-control-not-working', destination: '/ac-repair-oahu', permanent: true },
+            { source: '/window-ac-vs-mini-split-oahu', destination: '/shop/lg-dual-inverter-guide', permanent: true },
+        ];
     },
 };
 

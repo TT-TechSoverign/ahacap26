@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Keeps Tripping Breaker Hawaii | Electrical Diagnostic & Repair | Affordable Home A/C'
     },
-    description: 'Does your air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection for short circuits, grounded compressors, and failing capacitors by licensed CT-36775 contractors. Call (808) 488-1111.',
+    description: 'Does your window air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection for short circuits, grounded compressors, and failing capacitors. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-keeps-tripping-breaker-hawaii',
     },
     openGraph: {
         title: 'AC Keeps Tripping Breaker Hawaii | Electrical Diagnostic & Repair | Affordable Home A/C',
-        description: 'Does your air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection for short circuits, grounded compressors, and failing capacitors by licensed CT-36775 contractors. Call (808) 488-1111.',
+        description: 'Does your window air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection for short circuits, grounded compressors, and failing capacitors. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/ac-keeps-tripping-breaker-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Keeps Tripping Breaker Hawaii | Electrical Diagnostic & Repair | Affordable Home A/C',
-        description: 'Does your air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection for short circuits, grounded compressors, and failing capacitors by licensed CT-36775 contractors. Call (808) 488-1111.',
+        description: 'Does your window air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection for short circuits, grounded compressors, and failing capacitors. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

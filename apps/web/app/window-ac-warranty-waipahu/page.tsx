@@ -34,8 +34,8 @@ const FAQS = [
         a: "Simply call our Waipahu office at (808) 488-1111 with your purchase receipt. Our licensed HVAC technicians can diagnose issues on-site or at our facility using authentic manufacturer replacement parts."
     },
     {
-        q: "Is Affordable Home A/C a licensed HVAC contractor in Hawaii?",
-        a: "Yes. Affordable Home A/C is fully licensed (Hawaii Contractor License CT-36775) and insured, ensuring all installations, diagnostics, and repairs comply with Hawaii state building and electrical standards."
+        q: "Is Affordable Home A/C insured for residential and condo window AC service in Hawaii?",
+        a: "Yes. Affordable Home A/C is fully insured, ensuring all window AC installations, diagnostics, and cleanings comply with Oahu building and HOA standards."
     }
 ];
 
@@ -54,7 +54,7 @@ export default function WindowAcWarrantyWaipahuPage() {
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <ShieldCheck className="size-3.5" />
-                        <span>Hawaii Contractor License CT-36775 &bull; Local Waipahu Support</span>
+                        <span>Waipahu Warehouse Direct &bull; Local Oahu Support</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
@@ -62,7 +62,7 @@ export default function WindowAcWarrantyWaipahuPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Never worry about mainland warranty runarounds. When you buy from Affordable Home A/C, your investment is protected by a 1-year manufacturer warranty and backed by our dedicated Waipahu warehouse team and local licensed technicians.
+                        Never worry about mainland warranty runarounds. When you buy from Affordable Home A/C, your investment is protected by a 1-year manufacturer warranty and backed by our dedicated Waipahu warehouse team and local cooling specialists.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -102,9 +102,9 @@ export default function WindowAcWarrantyWaipahuPage() {
 
                     <div className="p-6 rounded-3xl bg-surface-dark border border-white/10 space-y-3">
                         <ShieldCheck className="size-8 text-primary" />
-                        <h3 className="font-header font-bold text-lg text-white uppercase">Contractor CT-36775</h3>
+                        <h3 className="font-header font-bold text-lg text-white uppercase">Insured Oahu Specialists</h3>
                         <p className="text-slate-300 font-sans text-xs leading-relaxed">
-                            All installation and service work is conducted by licensed Hawaii HVAC professionals adhering to the highest island standards.
+                            All installation and service work is conducted by insured Oahu window AC specialists adhering to the highest island standards.
                         </p>
                     </div>
                 </section>

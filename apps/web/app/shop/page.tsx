@@ -422,7 +422,7 @@ function ShopPageContent() {
                             Need Professional Sizing or Installation Advice?
                         </h3>
                         <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                            It is <strong className="text-white">zero cost to book an appointment for estimates</strong> on new or replacement mini split and window AC installations! Call our office directly at <a href="tel:808-488-1111" className="text-cyan-300 font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-cyan-300 font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the appointment form.
+                            It is <strong className="text-white">zero cost to book an appointment for estimates</strong> on new or replacement window AC installations! Call our office directly at <a href="tel:808-488-1111" className="text-cyan-300 font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-cyan-300 font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the appointment form.
                         </p>
                     </div>
 
@@ -599,7 +599,7 @@ function ShopPageContent() {
                             <span className="text-white/20 hidden md:inline">•</span>
                             <span className="inline-flex items-center gap-1.5 text-amber-400">
                                 <ShieldCheck className="size-3.5 shrink-0" />
-                                <span>1-Yr Warranty &amp; CT-36775</span>
+                                <span>1-Yr Factory Warranty &amp; Insured Install</span>
                             </span>
                         </div>
                     </div>

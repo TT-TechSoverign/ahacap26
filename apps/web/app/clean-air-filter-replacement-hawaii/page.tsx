@@ -21,12 +21,12 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 const FAQS = [
     {
-        q: "How often should I clean my mini split or window AC filters in Hawaii?",
+        q: "How often should I clean my window AC filters in Hawaii?",
         a: "In Hawaii, washable mesh filters should be rinsed every 2 to 4 weeks. If you live in an area prone to volcanic haze (vog), open windows frequently near red dirt, or have indoor pets, bi-weekly washing is recommended to maintain airflow."
     },
     {
-        q: "How do I properly wash a reusable mini split screen filter?",
-        a: "Unlatch the front panel, slide the mesh screens out, and rinse them with lukewarm water from the back side forward so dust washes away from the mesh. Allow them to dry 100% in the shade before sliding back in to prevent mildew."
+        q: "How do I properly wash a reusable window AC screen filter?",
+        a: "Unlatch the front grille or slide the mesh screen out from the side slot, and rinse it with lukewarm water from the back side forward so dust washes away from the mesh. Allow it to dry 100% in the shade before sliding back in to prevent mildew."
     },
     {
         q: "Why shouldn't I dry my filters in direct midday Hawaii sunlight?",
@@ -34,7 +34,7 @@ const FAQS = [
     },
     {
         q: "Does washing the filters clean the whole AC?",
-        a: "No. Filters only trap 15-20% of airborne particles. Fine dust, cooking vapors, and mold spores bypass the mesh and adhere directly to the cold evaporator coils and blower wheel. That requires professional chemical cleaning ($175 Basic or $275 Premium Teardown)."
+        a: "No. Filters only trap 15-20% of airborne particles. Fine dust, cooking vapors, and mold spores bypass the mesh and adhere directly to the cold evaporator coils and blower wheel. That requires periodic coil cleaning or upgrading old heavily fouled units."
     }
 ];
 
@@ -42,7 +42,7 @@ const WASH_STEPS = [
     {
         step: "01",
         title: "Power Off & Remove Mesh",
-        desc: "Turn off the AC unit. Gently unclip the front cover and slide out the two curved nylon screen filters."
+        desc: "Turn off the AC unit. Gently unclip the front grille or slide out the reusable nylon screen filter."
     },
     {
         step: "02",
@@ -75,7 +75,7 @@ export default function AirFilterCarePage() {
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
-                        AC Air Filter Cleaning <span className="text-primary italic">& Care in Hawaii</span>
+                        AC Air Filter Cleaning <span className="text-primary italic">&amp; Care in Hawaii</span>
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
@@ -84,10 +84,10 @@ export default function AirFilterCarePage() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/mini_split_ac_maintenance"
+                            href="/ac-cleaning-oahu"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
-                            Book Professional Tune-Up ($175)
+                            Book Window AC Cleaning &amp; Care
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -133,18 +133,18 @@ export default function AirFilterCarePage() {
                                 Even the best washable mesh screens allow microscopic pollen, cooking grease, and mold spores to pass right through. Once inside, they stick to the moist evaporator coil fins and colonize the dark blower fan wheel.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                If you wash your filters every month but your AC still smells musty or blows weak air, it&apos;s time for our $175 Basic or $275 Premium Deep Teardown cleaning with drop-cloth protection.
+                                If you wash your filters every month but your window AC still smells musty or blows weak air, schedule a professional Window AC cleaning or upgrade to a brand-new LG Dual Inverter unit.
                             </p>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Basic Mini Split Tune-Up</span>
-                                <span className="font-header font-bold text-lg text-white">$175 / unit</span>
+                                <span className="text-xs text-slate-300">Window AC Coil &amp; Filter Service</span>
+                                <span className="font-header font-bold text-lg text-white">By Appointment</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Premium Deep Teardown</span>
-                                <span className="font-header font-bold text-lg text-primary">$275 / unit</span>
+                                <span className="text-xs text-slate-300">Standard GE Window AC</span>
+                                <span className="font-header font-bold text-lg text-primary">From $395</span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-xs text-slate-300">Window AC Replacement (LG Inverter)</span>

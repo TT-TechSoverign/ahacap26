@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Post-Storm AC Inspection & Cleaning Oahu | Kona Storm Check | Affordable Home A/C'
     },
-    description: 'Post-storm AC inspection and emergency cleaning across Oahu. Remove salt crust, leaf debris, and water intrusion after Kona storms and high winds. CT-36775 licensed.',
+    description: 'Post-storm AC inspection and emergency cleaning across Oahu. Remove salt crust, leaf debris, and water intrusion after Kona storms and high winds.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/post-storm-ac-inspection-cleaning-oahu',
     },
     openGraph: {
         title: 'Post-Storm AC Inspection & Cleaning Oahu | Kona Storm Check | Affordable Home A/C',
-        description: 'Post-storm AC inspection and emergency cleaning across Oahu. Remove salt crust, leaf debris, and water intrusion after Kona storms and high winds. CT-36775 licensed.',
+        description: 'Post-storm AC inspection and emergency cleaning across Oahu. Remove salt crust, leaf debris, and water intrusion after Kona storms and high winds.',
         url: 'https://www.affordablehome-ac.com/post-storm-ac-inspection-cleaning-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Post-Storm AC Inspection & Cleaning Oahu | Kona Storm Check | Affordable Home A/C',
-        description: 'Post-storm AC inspection and emergency cleaning across Oahu. Remove salt crust, leaf debris, and water intrusion after Kona storms and high winds. CT-36775 licensed.',
+        description: 'Post-storm AC inspection and emergency cleaning across Oahu. Remove salt crust, leaf debris, and water intrusion after Kona storms and high winds.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

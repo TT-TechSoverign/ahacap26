@@ -36,7 +36,7 @@ const FAQS = [
     },
     {
         q: "Will you provide documentation for our HOA Architectural Review Committee (ARC)?",
-        a: "Yes! We can provide manufacturer specification cut-sheets, dimensions, decibel ratings, and our Hawaii Contractor License (CT-36775) documentation for quick HOA approval."
+        a: "Yes! We can provide manufacturer specification cut-sheets, dimensions, decibel ratings, and our certificate of insurance documentation for quick HOA approval."
     }
 ];
 
@@ -121,7 +121,7 @@ export default function CondoTownhouseWindowAcHoaRulesPage() {
                                 Hassle-Free HOA Approvals
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Need to submit an Architectural Review Form to your board? We can supply product specification sheets verifying dimensions, decibel limits, and electrical draws, alongside our Hawaii Contractor License (CT-36775) and insurance certificate.
+                                Need to submit an Architectural Review Form to your board? We can supply product specification sheets verifying dimensions, decibel limits, and electrical draws, alongside our certificate of insurance.
                             </p>
                             <p className="text-xs text-slate-300 font-sans">
                                 <strong>Clean Jobsite Standard:</strong> During installation, our technicians lay protective floor drop cloths under every window and leave your home cleaner than when we arrived.

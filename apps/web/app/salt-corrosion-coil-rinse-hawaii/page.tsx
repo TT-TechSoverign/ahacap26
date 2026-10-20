@@ -84,7 +84,7 @@ export default function SaltCorrosionPage() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/mini_split_ac_maintenance"
+                            href="/ac-cleaning-oahu"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
                             Schedule Coil Protection Service
@@ -133,22 +133,22 @@ export default function SaltCorrosionPage() {
                                 Fresh water alone doesn&apos;t dissolve deeply bonded marine salts and galvanic oxides. We apply specialized non-acidic neutralizing foaming agents that bind to sodium chloride crystals and float them out of the fin pack without attacking the aluminum metal.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Our technicians also inspect outdoor flare fittings, apply anti-corrosive barrier coatings to electrical contacts, and check compressor mounting isolation pads.
+                                Our technicians also inspect window mounting brackets, apply anti-corrosive barrier protection, and check compressor isolation pads.
                             </p>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Routine Salt Coil Wash</span>
-                                <span className="font-header font-bold text-lg text-white">$175 / unit</span>
+                                <span className="text-xs text-slate-300">On-Site Salt Coil Wash</span>
+                                <span className="font-header font-bold text-lg text-white">By Appointment</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Teardown & Neutralization</span>
-                                <span className="font-header font-bold text-lg text-primary">$275 / unit</span>
+                                <span className="text-xs text-slate-300">Clean-vs-Replace Check</span>
+                                <span className="font-header font-bold text-lg text-primary">$0 Free Estimate</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-slate-300">Contractor Verification</span>
-                                <span className="font-header font-bold text-xs text-emerald-400">Licensed CT-36775</span>
+                                <span className="text-xs text-slate-300">Service Coverage</span>
+                                <span className="font-header font-bold text-xs text-emerald-400">Insured Oahu Specialists</span>
                             </div>
                         </div>
                     </div>

@@ -48,10 +48,7 @@ async def debug_admin():
             try:
                 # Mock Payload
                 fake_schedule = {
-                    "mini_split_label": "TEST",
                     "window_ac_label": "TEST",
-                    "mini_split_estimate_date": "Jan 1-5",
-                    "mini_split_install_date": "Jan 1-5",
                     "window_ac_estimate_date": "Jan 1-5",
                     "window_ac_install_date": "Jan 1-5"
                 }

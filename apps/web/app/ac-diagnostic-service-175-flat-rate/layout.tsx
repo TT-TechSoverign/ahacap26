@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Diagnostic Service Oahu | $175 Flat Rate Troubleshooting | Affordable Home A/C'
     },
-    description: 'Accurate, honest AC diagnostic service on Oahu for a transparent $175 flat rate. Electrical, refrigerant, and mechanical troubleshooting. CT-36775 licensed.',
+    description: 'Accurate, honest window AC diagnostic service on Oahu for a transparent $175 flat rate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-diagnostic-service-175-flat-rate',
     },
     openGraph: {
         title: 'AC Diagnostic Service Oahu | $175 Flat Rate Troubleshooting | Affordable Home A/C',
-        description: 'Accurate, honest AC diagnostic service on Oahu for a transparent $175 flat rate. Electrical, refrigerant, and mechanical troubleshooting. CT-36775 licensed.',
+        description: 'Accurate, honest window AC diagnostic service on Oahu for a transparent $175 flat rate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
         url: 'https://www.affordablehome-ac.com/ac-diagnostic-service-175-flat-rate',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Diagnostic Service Oahu | $175 Flat Rate Troubleshooting | Affordable Home A/C',
-        description: 'Accurate, honest AC diagnostic service on Oahu for a transparent $175 flat rate. Electrical, refrigerant, and mechanical troubleshooting. CT-36775 licensed.',
+        description: 'Accurate, honest window AC diagnostic service on Oahu for a transparent $175 flat rate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -40,7 +40,7 @@ const diagnosticFaqSchema = {
             "name": "What is included in the $175 AC Diagnostic Service?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our $175 flat-rate diagnostic covers complete on-site troubleshooting: digital refrigerant pressure checks, electrical capacitor microfarad testing, compressor winding amp draw analysis, inverter circuit board error code diagnosis, and temperature delta-T split evaluation."
+                "text": "Our $175 flat-rate diagnostic covers complete on-site window AC troubleshooting: electrical capacitor microfarad testing, compressor winding amp draw analysis, inverter circuit board error code diagnosis, and temperature delta-T cooling evaluation."
             }
         },
         {
@@ -56,7 +56,7 @@ const diagnosticFaqSchema = {
             "name": "What happens if my unit requires replacement instead of repair?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "If our licensed technician determines the unit has a seized compressor or rotted coils where repair is uneconomical, we provide a free estimate for a replacement mini split or window AC from our Waipahu warehouse."
+                "text": "If our specialist determines the unit has a seized compressor or rotted coils where repair is uneconomical, we provide a free estimate for a replacement LG or GE window AC directly from our Waipahu warehouse."
             }
         }
     ]

@@ -65,7 +65,7 @@ export default function AcFreezingUpPage() {
     const [fullName, setFullName] = useState('');
     const [phone, setPhone] = useState('');
     const [city, setCity] = useState('Honolulu');
-    const [unitType, setUnitType] = useState('mini_split');
+    const [unitType, setUnitType] = useState('window_ac');
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -90,7 +90,7 @@ export default function AcFreezingUpPage() {
                 address: city.trim(),
                 city: city.trim(),
                 zip: '',
-                service_type: 'AC Diagnostic (Frozen Coils)',
+                service_type: 'Window AC Diagnostic (Frozen Coils)',
                 urgency: 'high',
                 notes: `Symptom: FROZEN COILS / ICE | Equipment: ${unitType.toUpperCase()} | Notes: ${notes.trim() || 'None'}`
             };
@@ -121,7 +121,7 @@ export default function AcFreezingUpPage() {
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <Snowflake className="size-3.5" />
-                        <span>Emergency Symptom Guide &bull; Fast $175 Diagnostic Dispatch</span>
+                        <span>Emergency Symptom Guide &bull; Fast Service Dispatch</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
@@ -129,7 +129,7 @@ export default function AcFreezingUpPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Is your window unit or mini-split covered in frost or a solid block of ice? Follow our safe emergency thaw procedure to prevent costly compressor failure, then schedule a professional inspection.
+                        Is your window air conditioner covered in frost or a solid block of ice? Follow our safe emergency thaw procedure to prevent costly compressor failure, then schedule a professional coil cleaning or replacement inspection.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -138,7 +138,7 @@ export default function AcFreezingUpPage() {
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
                             <Calendar className="size-4" />
-                            Book $175 Diagnostic Inspection
+                            Book Diagnostic Inspection
                         </a>
                         <TrackedPhoneLink 
                             phone="8084881111"
@@ -158,7 +158,7 @@ export default function AcFreezingUpPage() {
                                 Emergency Rule: NEVER Chip Ice with Metal Tools
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
-                                Scraping ice with a kitchen knife or screwdriver will puncture the delicate copper tubing and release toxic R-410A refrigerant gas. Follow these 3 safe steps:
+                                Scraping ice with a kitchen knife or screwdriver will puncture the delicate copper tubing and release refrigerant gas. Follow these 3 safe steps:
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
                                 <div className="p-3 rounded-xl bg-black/40 border border-white/10">
@@ -167,11 +167,11 @@ export default function AcFreezingUpPage() {
                                 </div>
                                 <div className="p-3 rounded-xl bg-black/40 border border-white/10">
                                     <span className="text-primary font-bold block mb-1">Step 2: Place Towels</span>
-                                    <span className="text-slate-300 text-[11px] font-sans">Catch dripping water before it overflows into interior drywall.</span>
+                                    <span className="text-slate-300 text-[11px] font-sans">Catch dripping water before it overflows onto your interior window sill.</span>
                                 </div>
                                 <div className="p-3 rounded-xl bg-black/40 border border-white/10">
                                     <span className="text-primary font-bold block mb-1">Step 3: Schedule Service</span>
-                                    <span className="text-slate-300 text-[11px] font-sans">Book a $175 diagnostic to identify the underlying pressure or airflow leak.</span>
+                                    <span className="text-slate-300 text-[11px] font-sans">Book an inspection to identify the underlying airflow blockage or coil leak.</span>
                                 </div>
                             </div>
                         </div>
@@ -211,10 +211,10 @@ export default function AcFreezingUpPage() {
                             PREVENT COMPRESSOR BURNOUT &bull; $0 TO BOOK
                         </span>
                         <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-tight mb-3">
-                            Schedule Frozen AC Diagnostic Inspection
+                            Schedule Frozen AC Inspection
                         </h2>
                         <p className="text-xs sm:text-sm text-slate-300 font-sans">
-                            A licensed technician will test pressures, inspect fan motors, and provide a clear upfront repair quote.
+                            An experienced technician will inspect your coils, fan motor, and airflow and provide a clear upfront recommendation.
                         </p>
                     </div>
 
@@ -275,9 +275,8 @@ export default function AcFreezingUpPage() {
                                     onChange={(e) => setUnitType(e.target.value)}
                                     className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white text-xs focus:border-primary focus:outline-none"
                                 >
-                                    <option value="mini_split">Ductless Mini Split System</option>
                                     <option value="window_ac">Window Unit Air Conditioner</option>
-                                    <option value="central_ac">Attic Central AC System</option>
+                                    <option value="wall_sleeve_ac">Thru-the-Wall Sleeve AC (GE 26&quot;)</option>
                                 </select>
                             </div>
 
@@ -287,7 +286,7 @@ export default function AcFreezingUpPage() {
                                     rows={3}
                                     value={notes}
                                     onChange={(e) => setNotes(e.target.value)}
-                                    placeholder="Where is the ice (indoor coils, outdoor copper line, or both)? Is water leaking inside?"
+                                    placeholder="Where is the ice forming on the front evaporator coil? Is water leaking inside?"
                                     className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white text-xs focus:border-primary focus:outline-none"
                                 />
                             </div>
@@ -297,11 +296,11 @@ export default function AcFreezingUpPage() {
                                 disabled={isSubmitting}
                                 className="w-full py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 disabled:opacity-50"
                             >
-                                {isSubmitting ? 'Submitting...' : 'Request $175 Diagnostic Inspection'}
+                                {isSubmitting ? 'Submitting...' : 'Request Diagnostic Inspection'}
                             </button>
 
                             <p className="text-[10px] font-mono text-slate-400 text-center">
-                                $175 Flat Rate &bull; Licensed Contractor CT-36775 &bull; Drop-Cloth Protection Standard
+                                Upfront Estimates &bull; Insured Oahu Specialists &bull; Drop-Cloth Protection Standard
                             </p>
                         </form>
                     )}

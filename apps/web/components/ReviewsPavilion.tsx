@@ -178,7 +178,7 @@ function ReviewCard({
                     <ShieldCheck className="size-3 text-cyan-400" />
                     <span>{review.badge || 'Waipahu Warehouse Verified'}</span>
                 </span>
-                <span className="text-slate-400 font-mono">CT-36775</span>
+                <span className="text-slate-400 font-mono">Est. 2005 • Oahu</span>
             </div>
         </div>
     );
@@ -409,7 +409,7 @@ export function ReviewsPavilionContent({
                     <div className="lg:col-span-5 space-y-3 text-center lg:text-left">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono font-bold uppercase tracking-wider">
                             <ShieldCheck className="size-3.5" />
-                            <span>Hawaii Licensed HVAC CT-36775</span>
+                            <span>Waipahu Warehouse Direct • Est. 2005</span>
                         </div>
 
                         <div className="flex items-baseline justify-center lg:justify-start gap-3">
@@ -497,8 +497,8 @@ export function ReviewsPavilionContent({
                         {[
                             { id: 'ALL', label: `All Reviews (${baseReviews.length})` },
                             { id: 'Window AC', label: 'Window AC' },
-                            { id: 'Mini-Split', label: 'Mini Split' },
-                            { id: 'Cleaning', label: 'AC Cleaning & Service' },
+                            { id: 'Cleaning', label: 'Window AC Cleaning' },
+                            { id: 'Installation', label: 'Custom Installation' },
                             { id: 'Warehouse', label: 'Waipahu Warehouse' },
                         ].map(tab => (
                             <button
@@ -752,7 +752,7 @@ function StoryModal({ review, onClose }: { review: Review; onClose: () => void }
 
                 <div className="pt-2 flex items-center justify-between">
                     <span className="text-[11px] font-mono text-slate-400">
-                        Licensed Contractor CT-36775
+                        Waipahu Warehouse Direct • Est. 2005
                     </span>
                     <button
                         onClick={onClose}

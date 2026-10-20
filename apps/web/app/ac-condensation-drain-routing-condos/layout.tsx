@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Condensation Drain Routing Condos Oahu | Stop Lanai Dripping | Affordable Home A/C'
     },
-    description: 'Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom drain kits, UV-resistant tubing, CT-36775 licensed.',
+    description: 'Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom drain kits, UV-resistant tubing.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-condensation-drain-routing-condos',
     },
     openGraph: {
         title: 'AC Condensation Drain Routing Condos Oahu | Stop Lanai Dripping | Affordable Home A/C',
-        description: 'Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom drain kits, UV-resistant tubing, CT-36775 licensed.',
+        description: 'Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom drain kits, UV-resistant tubing.',
         url: 'https://www.affordablehome-ac.com/ac-condensation-drain-routing-condos',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Condensation Drain Routing Condos Oahu | Stop Lanai Dripping | Affordable Home A/C',
-        description: 'Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom drain kits, UV-resistant tubing, CT-36775 licensed.',
+        description: 'Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom drain kits, UV-resistant tubing.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

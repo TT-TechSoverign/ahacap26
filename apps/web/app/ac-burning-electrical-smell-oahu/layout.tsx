@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair | Affordable Home A/C'
     },
-    description: 'Smell burning plastic, fishy odor, or electrical smoke from your AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu. CT-36775 licensed.',
+    description: 'Smell burning plastic, fishy odor, or electrical smoke from your AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu',
     },
     openGraph: {
         title: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair | Affordable Home A/C',
-        description: 'Smell burning plastic, fishy odor, or electrical smoke from your AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu. CT-36775 licensed.',
+        description: 'Smell burning plastic, fishy odor, or electrical smoke from your AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
         url: 'https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair | Affordable Home A/C',
-        description: 'Smell burning plastic, fishy odor, or electrical smoke from your AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu. CT-36775 licensed.',
+        description: 'Smell burning plastic, fishy odor, or electrical smoke from your AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

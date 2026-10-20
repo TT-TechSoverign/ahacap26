@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Wood-Frame Window AC Support Oahu | Prevent Sill Rot | Affordable Home A/C'
     },
-    description: 'Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene barriers, standard exterior support brackets, CT-36775 licensed.',
+    description: 'Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene barriers, standard exterior support brackets.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/wood-frame-window-ac-support-oahu',
     },
     openGraph: {
         title: 'Wood-Frame Window AC Support Oahu | Prevent Sill Rot | Affordable Home A/C',
-        description: 'Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene barriers, standard exterior support brackets, CT-36775 licensed.',
+        description: 'Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene barriers, standard exterior support brackets.',
         url: 'https://www.affordablehome-ac.com/wood-frame-window-ac-support-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Wood-Frame Window AC Support Oahu | Prevent Sill Rot | Affordable Home A/C',
-        description: 'Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene barriers, standard exterior support brackets, CT-36775 licensed.',
+        description: 'Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene barriers, standard exterior support brackets.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

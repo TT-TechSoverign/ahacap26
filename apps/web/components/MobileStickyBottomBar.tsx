@@ -45,10 +45,10 @@ export default function MobileStickyBottomBar() {
             };
         }
 
-        // 2. Cleaning & Maintenance
+        // 2. Window AC Cleaning & Maintenance
         if (pathname.includes('cleaning') || pathname.includes('maintenance')) {
             return {
-                text: 'Book $175+ Cleaning',
+                text: 'Book AC Cleaning',
                 icon: Sparkles,
                 href: '/contact?service=cleaning',
                 gaEvent: 'click_to_book_cleaning',
@@ -56,10 +56,10 @@ export default function MobileStickyBottomBar() {
             };
         }
 
-        // 3. AC Repair
+        // 3. Window AC Troubleshooting & Service
         if (pathname.includes('repair')) {
             return {
-                text: '$175 AC Diagnostic',
+                text: 'Book Window AC Service',
                 icon: Wrench,
                 href: '/contact?service=repair',
                 gaEvent: 'click_to_book_repair',
@@ -67,29 +67,7 @@ export default function MobileStickyBottomBar() {
             };
         }
 
-        // 4. Mini Split Pages
-        if (pathname === '/mini_split_ac') {
-            return {
-                text: 'Free $0 Estimate',
-                icon: Calendar,
-                scrollTarget: 'system-builder',
-                href: '/mini_split_ac#system-builder',
-                gaEvent: 'click_to_estimate',
-                gaLabel: 'Sticky Bottom Mini Split Builder'
-            };
-        }
-
-        if (pathname.includes('mini-split')) {
-            return {
-                text: 'Free $0 Estimate',
-                icon: Calendar,
-                href: '/mini-split-estimate',
-                gaEvent: 'click_to_estimate',
-                gaLabel: 'Sticky Bottom Mini Split Estimate'
-            };
-        }
-
-        // 5. Sizing, Comparisons & Guides
+        // 4. Sizing, Comparisons & Guides
         if (pathname === '/sizing' || pathname.includes('guide') || pathname.includes('vs')) {
             return {
                 text: 'Free $0 Estimate',
@@ -100,7 +78,7 @@ export default function MobileStickyBottomBar() {
             };
         }
 
-        // 6. Default Site-Wide CTA
+        // 5. Default Site-Wide CTA
         return {
             text: 'Free $0 Estimate',
             icon: Calendar,
@@ -128,10 +106,10 @@ export default function MobileStickyBottomBar() {
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
                     <span className="text-emerald-400 font-bold uppercase tracking-wider text-[9px]">Free Estimates</span>
                     <span className="text-slate-500">•</span>
-                    <span className="truncate text-slate-200">$0 to Book New / Replacements</span>
+                    <span className="truncate text-slate-200">$0 to Book Install / Cleaning</span>
                 </div>
                 <span className="text-cyan-400 font-mono text-[9px] uppercase tracking-wider shrink-0 pl-1">
-                    Lic #CT-36775
+                    Waipahu Direct
                 </span>
             </div>
 
@@ -162,22 +140,6 @@ export default function MobileStickyBottomBar() {
                         <ShoppingCart className="size-4 shrink-0" />
                         <span className="truncate">Checkout Now ({totalCartCount})</span>
                     </button>
-                ) : cta.scrollTarget ? (
-                    <a 
-                        href={`#${cta.scrollTarget}`}
-                        onClick={(e) => {
-                            const el = document.getElementById(cta.scrollTarget!);
-                            if (el) {
-                                e.preventDefault();
-                                el.scrollIntoView({ behavior: 'smooth' });
-                            }
-                            sendGAEvent('event', cta.gaEvent, { event_category: 'Mobile Conversion', event_label: cta.gaLabel });
-                        }}
-                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95"
-                    >
-                        <cta.icon className="size-4 shrink-0" />
-                        <span className="truncate">{cta.text}</span>
-                    </a>
                 ) : (
                     <Link 
                         href={cta.href}

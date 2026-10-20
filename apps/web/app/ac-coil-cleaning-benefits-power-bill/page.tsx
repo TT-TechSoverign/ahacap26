@@ -26,7 +26,7 @@ const FAQS = [
     },
     {
         q: "How much money can I actually save each month by cleaning my coils?",
-        a: "For a typical 12,000 BTU unit running 8 hours a day, restoring clean coil heat transfer typically saves 2 to 3 kWh per day—translating to roughly $30 to $45 in monthly savings per air handler. In multi-split households, savings often exceed $100 per month."
+        a: "For a typical 12,000 BTU unit running 8 hours a day, restoring clean coil heat transfer typically saves 2 to 3 kWh per day—translating to roughly $30 to $45 in monthly savings per room unit. Across multi-unit households, savings often exceed $100 per month."
     },
     {
         q: "How often should coils be chemically washed on Oahu?",
@@ -34,7 +34,7 @@ const FAQS = [
     },
     {
         q: "What makes professional coil washing different from DIY spray cans?",
-        a: "Hardware store aerosol cans often push dirt deeper into the coil slab or leave a sticky residue that attracts more dust. Our licensed technicians apply pH-balanced alkaline foaming agents that expand through the entire 2-to-3 row fin block and rinse it completely out."
+        a: "Hardware store aerosol cans often push dirt deeper into the coil slab or leave a sticky residue that attracts more dust. Our technicians apply pH-balanced alkaline foaming agents that expand through the entire 2-to-3 row fin block and rinse it completely out."
     }
 ];
 
@@ -66,10 +66,10 @@ export default function CoilCleaningPowerBillPage() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/mini_split_ac_maintenance"
+                            href="/ac-cleaning-oahu"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
-                            Book Coil Efficiency Clean ($175 / $275)
+                            Book Window AC Coil Cleaning
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -125,18 +125,18 @@ export default function CoilCleaningPowerBillPage() {
                                 Our technicians never use destructive high pressure that bends delicate aluminum fins. We use self-rinsing, non-acidic foaming detergents designed specifically for tropical coastal HVAC equipment. Floor drop cloths protect your floors throughout the entire appointment.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
-                                <strong>Contractor License CT-36775:</strong> Performed by certified technicians who test airflow CFM, delta-T split, and operating amps before and after service.
+                                <strong>Insured Oahu Cooling Specialists:</strong> Performed by experienced technicians who test airflow CFM, delta-T temperature drop, and operating amps before and after service.
                             </div>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Basic Mini Split Tune-Up</span>
-                                <span className="font-header font-bold text-lg text-white">$175</span>
+                                <span className="text-xs text-slate-300">Window AC Filter & Coil Maintenance</span>
+                                <span className="font-header font-bold text-lg text-white">By Appointment</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Premium Teardown & Overhaul</span>
-                                <span className="font-header font-bold text-lg text-primary">$275</span>
+                                <span className="text-xs text-slate-300">New LG Dual Inverter Upgrade</span>
+                                <span className="font-header font-bold text-lg text-primary">From $560 (-$45 Rebate)</span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-xs text-slate-300">Floor Drop Cloth Protection</span>

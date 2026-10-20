@@ -1,55 +1,31 @@
 {
-  "contractor_license": "CT-36775",
+  "service_verification": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
   "company_name": "Affordable Home A/C",
   "island": "Oahu, Hawaii",
   "phone": "(808) 488-1111",
   "warehouse_address": "94-150 Leoleo St #203, Waipahu, HI 96797",
   "booking_policy": "By Appointment First — Zero Upfront Payment Gate",
-  "cleanliness_standard": "Clean floor drop cloths laid under every indoor unit; zero wall or floor mess",
-  "permitting_disclaimer": "Affordable Home A/C focuses on specialty mechanical refrigeration craftsmanship. Homeowners or general contractors coordinate City & County of Honolulu DPP municipal building permits independently if mandated by condo boards or HOAs.",
+  "cleanliness_standard": "Clean floor drop cloths laid under every window unit; zero wall or floor mess",
+  "permitting_disclaimer": "Affordable Home A/C focuses on specialty window air conditioning sales, mounting, and cleaning. Homeowners or condo boards coordinate any HOA architectural approvals if mandated by building rules.",
   "divisions": {
-    "mini_split": {
-      "name": "Ductless Mini-Split Division",
+    "window_ac_cleaning": {
+      "name": "Window AC Cleaning & Diagnostic Division",
       "services": [
         {
-          "id": "mini-split-installation-estimate",
-          "name": "New Installation & Replacement Consultation",
+          "id": "window-ac-cleaning-service",
+          "name": "On-Site Window AC Coil & Blower Sanitization",
           "price": 0.00,
-          "price_display": "$0 Free In-Home Estimate",
-          "billing_mode": "free_estimate",
-          "scope": "Comprehensive room-by-room cooling load analysis, power requirement review, equipment selection, and itemized estimate. Zero upfront fee."
+          "price_display": "By Appointment ($0 Upfront Booking)",
+          "billing_mode": "by_appointment",
+          "scope": "Front grille removal, washable filter wash, evaporator & condenser coil foaming sanitization, blower wheel scrub, and base pan flush with protective floor drop cloths."
         },
         {
-          "id": "mini-split-diagnostic",
-          "name": "Diagnostic Troubleshooting & Symptom Isolation",
+          "id": "window-ac-diagnostic",
+          "name": "Window AC Diagnostic & Troubleshooting",
           "price": 175.00,
           "price_display": "$175 Flat Rate",
           "billing_mode": "flat_diagnostic",
-          "scope": "In-depth electrical continuity check, electronic halogen sniffer leak detection, thermistor resistance testing, and inverter board diagnostics."
-        },
-        {
-          "id": "mini-split-basic-cleaning",
-          "name": "Basic Mini-Split Cleaning & Coil Sanitize",
-          "price": 175.00,
-          "price_display": "$175 / Unit",
-          "billing_mode": "per_unit",
-          "scope": "Casing wipe-down, mesh filter chemical wash, high-velocity coil foaming wash, and condensate tray rinse. Drop cloths on floor."
-        },
-        {
-          "id": "mini-split-deep-cleaning",
-          "name": "Premium Deep Teardown Cleaning",
-          "price": 275.00,
-          "price_display": "$275 / Unit",
-          "billing_mode": "per_unit",
-          "scope": "Front housing unclipped, blower wheel cylinder completely extracted for 360-degree degreasing bath, coil scrub, drain pan sanitization. Protective floor drop cloths under unit. Zero messy hydro bags."
-        },
-        {
-          "id": "condensate-drain-flush",
-          "name": "Condensate Drain Line Clearing & Flush",
-          "price": 175.00,
-          "price_display": "$175 Flat Rate",
-          "billing_mode": "flat_repair",
-          "scope": "Commercial vacuum line evacuation, thorough water flush to clear algae biofilm plugs, and anti-fungal pan tablet placement. Professional vacuum extraction only — no high-pressure nitrogen gas."
+          "scope": "In-depth electrical continuity check, dual-run capacitor microfarad test, thermistor resistance testing, and inverter board diagnostics."
         }
       ]
     },

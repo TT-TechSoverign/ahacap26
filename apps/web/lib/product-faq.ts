@@ -23,7 +23,7 @@ export function getProductFaqs(productName: string): FAQItem[] {
         },
         {
             q: `Can the ${productName} be installed in Hawaii jalousie louvers or horizontal sliding windows?`,
-            a: `Yes! Our licensed technicians (Hawaii Contractor License CT-36775) custom-measure your opening, remove necessary jalousie glass slats or fabricate vertical slider filler panels, install standard exterior support brackets when needed, and lay protective floor drop cloths under every window.`
+            a: `Yes! Our Oahu installation specialists custom-measure your opening, remove necessary jalousie glass slats or fabricate vertical slider filler panels, install standard exterior support brackets when needed, and lay protective floor drop cloths under every window.`
         },
         {
             q: `What is the warranty and return policy for the ${productName}?`,

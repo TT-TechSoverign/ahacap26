@@ -32,34 +32,34 @@ const FAQS = [
     },
     {
         q: "Where do leaks most frequently occur in Hawaii?",
-        a: "Over 80% of ductless mini split leaks occur at the flared copper nut connections at either the indoor wall unit or the outdoor service valves due to thermal cycling or improper torque. The remaining 20% occur in the aluminum coil U-bends from marine salt galvanic corrosion."
+        a: "In Hawaii's coastal climate, refrigerant leaks most frequently occur in the aluminum and copper coil U-bends due to marine salt galvanic corrosion and formicary acid pitting, or at capillary tube and compressor braze joints."
     },
     {
         q: "What does the $175 diagnostic include?",
-        a: "Our certified technician attaches digital gauges to read saturated suction temperatures, measures superheat and subcooling, tests flare fittings with electronic halogen sniffers, and pinpoints the leak location."
+        a: "Our certified technician tests evaporator and condenser coil temperatures, checks compressor amp draw, inspects coil return bends with electronic halogen sniffers, and pinpoints the exact failure."
     }
 ];
 
 const LEAK_SIGNS = [
     {
         icon: Snowflake,
-        title: "Ice Accumulation on Coils or Valves",
+        title: "Ice Accumulation on Coils",
         desc: "Low refrigerant pressure causes the evaporator saturation temperature to drop below 32°F, freezing ambient moisture into a solid block of ice."
     },
     {
         icon: Search,
-        title: "Dark Oily Stains on Copper Fittings",
-        desc: "Polyolester (POE) compressor oil circulates with the refrigerant. When gas escapes through a leak, telltale oily residue is left behind on flares."
+        title: "Dark Oily Stains on Coil Bends",
+        desc: "Polyolester (POE) compressor oil circulates with the refrigerant. When gas escapes through a pinhole leak, telltale oily residue is left behind on the copper U-bends."
     },
     {
         icon: Zap,
         title: "Soaring HECO Electric Bills",
-        desc: "A undercharged system runs 24 hours a day trying to reach the setpoint, burning massive amounts of electricity at ~44.2¢/kWh without cooling."
+        desc: "An undercharged system runs 24 hours a day trying to reach the setpoint, burning massive amounts of electricity at ~44.2¢/kWh without cooling."
     },
     {
         icon: AlertTriangle,
         title: "Hissing or Bubbling Sound",
-        desc: "Pressurized gas escaping through a cracked flare connection or pinhole corrosion pit often produces an audible hissing noise."
+        desc: "Pressurized gas escaping through a pinhole corrosion pit often produces an audible hissing or gurgling noise inside the evaporator."
     }
 ];
 
@@ -82,11 +82,11 @@ export default function RefrigerantLeakPage() {
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
-                        AC Refrigerant Leak Detection <span className="text-primary italic">Hawaii (Flare & Coil Repair)</span>
+                        AC Refrigerant Leak Detection <span className="text-primary italic">Hawaii (Coil &amp; Sealed System)</span>
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Is your AC blowing room-temperature air or freezing into a block of ice? Air conditioners do not consume freon—if your refrigerant is low, you have a physical leak. Our EPA-certified technicians use electronic sniffer technology to locate leaks and re-flare copper lines.
+                        Is your AC blowing room-temperature air or freezing into a block of ice? Air conditioners do not consume freon—if your refrigerant is low, you have a physical leak. Our EPA-certified technicians use electronic sniffer technology to pinpoint coil leaks and guide you on the most economical solution.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -139,22 +139,22 @@ export default function RefrigerantLeakPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div className="space-y-4">
                             <span className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] font-bold block">
-                                PERMANENT REPAIR PROTOCOL
+                                HONEST ECONOMIC GUIDANCE
                             </span>
                             <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
-                                Precision Flaring & Pressure Decay Testing
+                                Electronic Sniffer Testing &amp; Replacement Economics
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                We don&apos;t just tighten leaking brass nuts until they strip. When a flare fails, we cut the copper square, ream out burrs, spin a brand-new 45-degree R410A eccentric flare, and torque it to exact foot-pounds with digital torque wrenches.
+                                We use heated-diode electronic halogen sniffers to verify whether warm air is caused by a simple electrical component or a corroded refrigerant coil.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Before recharging, we pressurize the line set with dry nitrogen to verify zero pressure drop, pull a deep vacuum below 500 microns, and weigh in factory-exact virgin refrigerant.
+                                On factory-sealed window units, when salt air eats through the evaporator or condenser U-bends, upgrading to a brand-new Gold Fin™ LG Dual Inverter from our Waipahu warehouse is far more reliable and cost-effective than attempting coil brazing.
                             </p>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Diagnostic & Leak Sniffer Test</span>
+                                <span className="text-xs text-slate-300">Diagnostic &amp; Leak Sniffer Test</span>
                                 <span className="font-header font-bold text-lg text-primary">$175 Flat Rate</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
@@ -162,8 +162,8 @@ export default function RefrigerantLeakPage() {
                                 <span className="font-header font-bold text-xs text-white">Full Compliance</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-emerald-400">CT-36775</span>
+                                <span className="text-xs text-slate-300">Waipahu Replacement Stock</span>
+                                <span className="font-header font-bold text-xs text-emerald-400">LG &amp; GE ($395–$1,200)</span>
                             </div>
                         </div>
                     </div>

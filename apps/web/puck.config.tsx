@@ -135,18 +135,18 @@ export const config: Config<{
                     { text: "OAHU'S UNIQUE HIGH-HUMIDITY ENVIRONMENT AND SILENT SALT-AIR CORROSION DEMAND FAR MORE THAN OFF-THE-SHELF COOLING FOR THE DIVERSE MICRO-CLIMATES OF THE ISLANDS. FROM " },
                     { text: "HIGH-EFFICIENCY WINDOW AC UNITS (LG & GE)", href: "/shop" },
                     { text: " CURATED FOR DURABILITY; " },
-                    { text: "ULTRA-QUIET DUCTLESS MINI SPLITS", href: "/mini_split_ac" },
-                    { text: " DESIGNED FOR PRECISION ZONE COOLING; " },
+                    { text: "26-INCH THRU-THE-WALL AC UNITS", href: "/shop" },
+                    { text: " DESIGNED FOR PRECISION ROOM COOLING; " },
                     { text: "WINDOW AC & JALOUSIE INSTALLATION", href: "/window-ac-installation" },
                     { text: " ENGINEERED FOR TROPICAL ENERGY PERFORMANCE; AND " },
-                    { text: "SPECIALIZED MINI SPLIT DEEP CLEANING", href: "/mini_split_ac_maintenance" },
+                    { text: "SPECIALIZED WINDOW AC CLEANING", href: "/ac-cleaning-oahu" },
                     { text: " THAT DEFEND AGAINST HAWAII'S RELENTLESS SALT-AIR HUMIDITY. WE OFFER PROVEN SOLUTIONS DESIGNED TO MAXIMIZE SYSTEM LIFESPAN, IMPROVE INDOOR AIR QUALITY, AND AGGRESSIVELY LOWER MONTHLY ENERGY COSTS FOR THE LONG TERM." }
                 ],
                 items: [
-                    { title: "MINI SPLITS", description: "Eliminate Hot Spots & High Bills...", icon: "ac_unit", linkText: "MORE INFO", href: "/mini_split_ac", color: "primary" },
                     { title: "WINDOW AC SHOP", description: "Your Local High-Efficiency Resource...", icon: "storefront", linkText: "View Inventory", href: "/shop", color: "primary", badge: "In Stock" },
                     { title: "WINDOW AC INSTALL", description: "Jalousie & Standard Mounting...", icon: "hvac", linkText: "MORE INFO", href: "/window-ac-installation", color: "accent" },
-                    { title: "MINI SPLIT CLEANING", description: "Breathe Cleaner, Save Longer...", icon: "cleaning_services", linkText: "MINI SPLIT MAINTENANCE", href: "/mini_split_ac_maintenance", color: "accent" }
+                    { title: "WINDOW AC CLEANING", description: "Breathe Cleaner, Save Longer...", icon: "cleaning_services", linkText: "WINDOW AC CLEANING", href: "/ac-cleaning-oahu", color: "accent" },
+                    { title: "WINDOW AC SIZING", description: "Island Microclimate Calculator...", icon: "ac_unit", linkText: "CALCULATE BTU", href: "/sizing", color: "primary" }
                 ],
                 mode: "dark",
                 styles: { padding: "96px 0px" }
@@ -185,7 +185,7 @@ export const config: Config<{
                         fontClass: { type: "text" }
                     }
                 },
-                brandsMiniSplit: {
+                brandsThruWall: {
                     type: "array",
                     getItemSummary: (item) => item.name,
                     arrayFields: {
@@ -194,7 +194,7 @@ export const config: Config<{
                         fontClass: { type: "text" }
                     }
                 },
-                brandsCentral: {
+                brandsCare: {
                     type: "array",
                     getItemSummary: (item) => item.name,
                     arrayFields: {
@@ -215,21 +215,19 @@ export const config: Config<{
             defaultProps: {
                 title: "ELITE BRAND PARTNERSHIPS",
                 titleHighlight: "TECHNOLOGY TO MASTER OAHU'S MICRO-CLIMATES",
-                narrativeParam: "AFFORDABLE HOME A/C IS PROUD TO MAINTAIN COMPLIANCE TO PROVIDE YOU WITH THE WORLD'S LEADING HVAC ENGINEERING FIRMS...",
+                narrativeParam: "AFFORDABLE HOME A/C IS PROUD TO PROVIDE OAHU HOMEOWNERS WITH THE WORLD'S LEADING WINDOW AC ENGINEERING...",
                 brandsWindow: [
                     { name: "LG", colorClass: "text-rose-500", fontClass: "font-sans font-black tracking-tighter text-6xl" },
                     { name: "GE APPLIANCES", colorClass: "text-blue-400", fontClass: "font-serif font-bold tracking-wide text-3xl" },
                     { name: "Hawai'i Energy", colorClass: "text-[#00FFFF]", fontClass: "font-sans font-bold tracking-tight text-4xl" }
                 ],
-                brandsMiniSplit: [
-                    { name: "MITSUBISHI ELECTRIC", colorClass: "text-red-600", fontClass: "font-header font-bold tracking-normal uppercase text-xl" },
-                    { name: "FUJITSU", colorClass: "text-red-500", fontClass: "font-sans font-bold italic tracking-widest text-3xl" },
-                    { name: "DAIKIN", colorClass: "text-sky-400", fontClass: "font-header font-medium tracking-widest text-2xl" },
-                    { name: "LG DUCTLESS", colorClass: "text-rose-500", fontClass: "font-sans font-extrabold tracking-tighter text-3xl" }
+                brandsThruWall: [
+                    { name: "LG THRU-THE-WALL", colorClass: "text-rose-500", fontClass: "font-sans font-extrabold tracking-tighter text-3xl" },
+                    { name: "GE BUILT-IN", colorClass: "text-blue-400", fontClass: "font-serif font-bold tracking-wide text-3xl" }
                 ],
-                brandsCentral: [
-                    { name: "RHEEM", colorClass: "text-red-500", fontClass: "font-header font-bold tracking-tight text-5xl" },
-                    { name: "BOSCH", colorClass: "text-cyan-500", fontClass: "font-mono font-bold tracking-[0.2em] text-3xl" }
+                brandsCare: [
+                    { name: "WAIPAHU WAREHOUSE", colorClass: "text-primary", fontClass: "font-header font-bold tracking-tight text-3xl" },
+                    { name: "DROP-CLOTH CARE", colorClass: "text-cyan-400", fontClass: "font-mono font-bold tracking-[0.2em] text-2xl" }
                 ]
             },
             render: Partnerships

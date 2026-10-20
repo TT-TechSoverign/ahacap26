@@ -80,12 +80,12 @@ export default function DrainLineClogPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Is water leaking down your wall from your mini split or pooling beneath your window unit? In Hawaii&apos;s tropical heat, algae jelly quickly blocks narrow drain pipes. Our licensed technicians clear clogs with high-vacuum extraction and thorough line flushing.
+                        Is water leaking inside your room or pooling beneath your window air conditioner? In Hawaii&apos;s tropical heat, algae jelly quickly blocks narrow condensate drain ports and channels. Our technicians clear clogs with high-vacuum extraction and thorough line flushing.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link 
-                            href="/mini_split_ac_maintenance"
+                            href="/ac-cleaning-oahu"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
                             Book $175 Drain Clearing
@@ -131,7 +131,7 @@ export default function DrainLineClogPage() {
                                 How We Clear Hawaii Drain Lines
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                Simply poking a wire into the drain pipe often punctures flexible tubing or packs the slime tighter into fittings. We use commercial high-vacuum extraction from outside combined with dedicated condensate line flushing from inside.
+                                Simply poking a wire into the drain port often punctures tubing or packs the slime tighter into channels. We use commercial high-vacuum extraction combined with dedicated condensate line flushing.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
                                 Once clear, we treat the drain pan with slow-release biocidal pan tablets that prevent algae colonies from reforming for up to 6 months. Floor drop cloths protect your living space throughout.
@@ -144,16 +144,16 @@ export default function DrainLineClogPage() {
                                 <span className="font-header font-bold text-lg text-primary">$175 Flat Rate</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">Included in Full Teardown</span>
-                                <span className="font-header font-bold text-xs text-white">Included in $275</span>
+                                <span className="text-xs text-slate-300">Floor Drop Cloth Protection</span>
+                                <span className="font-header font-bold text-xs text-white">Guaranteed Clean</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Biocidal Pan Tablets</span>
                                 <span className="font-header font-bold text-xs text-emerald-400">Included</span>
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="text-xs text-slate-300">Hawaii Contractor License</span>
-                                <span className="font-header font-bold text-xs text-white">CT-36775</span>
+                                <span className="text-xs text-slate-300">Service Coverage</span>
+                                <span className="font-header font-bold text-xs text-white">All 22 Oahu Towns</span>
                             </div>
                         </div>
                     </div>

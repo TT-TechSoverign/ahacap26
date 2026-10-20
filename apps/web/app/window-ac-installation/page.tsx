@@ -102,11 +102,11 @@ export default function WindowAcInstallationPage() {
     const faqItems = [
         {
             q: "How does Affordable Home AC safely install window ACs in Oahu jalousie windows?",
-            a: "Over 60% of homes across Honolulu, Kailua, Kaneohe, and Waipahu feature jalousie louver windows. Our licensed CT-36775 technicians safely remove only the necessary glass louvers, precision-cut and seal custom marine-grade clear acrylic baffles with anti-vibration gaskets, and anchor the installation so zero mechanical stress is placed on the fragile aluminum jalousie tracks."
+            a: "Over 60% of homes across Honolulu, Kailua, Kaneohe, and Waipahu feature jalousie louver windows. Our specialist technicians safely remove only the necessary glass louvers, precision-cut and seal custom marine-grade clear acrylic baffles with anti-vibration gaskets, and anchor the installation so zero mechanical stress is placed on the fragile aluminum jalousie tracks."
         },
         {
             q: "Is an exterior support bracket included with window AC installation?",
-            a: "Our licensed technicians inspect your window sill and wall framing during your initial consultation. If you have a sturdy concrete or wood sill, no exterior bracket is needed. For jalousie windows, second-story mounts, or heavier units (10,000 to 23,500 BTU weighing 75 to 99 lbs), our technician will evaluate and install the appropriate heavy-duty cantilever support bracket to protect your home's structural framing."
+            a: "Our technicians inspect your window sill and wall framing during your initial consultation. If you have a sturdy concrete or wood sill, no exterior bracket is needed. For jalousie windows, second-story mounts, or heavier units (10,000 to 23,500 BTU weighing 75 to 99 lbs), our technician will evaluate and install the appropriate heavy-duty cantilever support bracket to protect your home's structural framing."
         },
         {
             q: "Why is 3/8-inch trade-wind leveling pitch critical in Hawaii's climate?",
@@ -139,7 +139,7 @@ export default function WindowAcInstallationPage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Licensed Hawaii Contractor CT-36775 specializing in professional window AC installation, custom jalousie acrylic baffle retrofits, cantilever exterior support brackets, and trade-wind leveling across Honolulu, Waipahu, and all Oahu."
+                "description": "Insured Oahu cooling specialists providing professional window AC installation, custom jalousie acrylic baffle retrofits, cantilever exterior support brackets, and trade-wind leveling across Honolulu, Waipahu, and all Oahu."
             },
             {
                 "@type": "Service",
@@ -150,7 +150,7 @@ export default function WindowAcInstallationPage() {
                     "name": "Affordable Home AC"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Licensed CT-36775 window air conditioner installation, custom plexiglass / acrylic jalousie window kits, and exterior bracket mounting on Oahu."
+                "description": "Professional window air conditioner installation, custom plexiglass / acrylic jalousie window kits, and exterior bracket mounting on Oahu."
             },
             {
                 "@type": "BreadcrumbList",
@@ -186,7 +186,7 @@ export default function WindowAcInstallationPage() {
                 <div className="text-center max-w-4xl mx-auto space-y-4 mb-12">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-widest">
                         <Wrench className="size-3.5" />
-                        Licensed Hawaii Contractor CT-36775
+                        Insured Oahu Window AC Specialists
                     </div>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-header font-black tracking-tight uppercase leading-[0.95] text-white">
                         Professional <span className="text-primary">Window AC</span> Installation Oahu
@@ -195,7 +195,7 @@ export default function WindowAcInstallationPage() {
                         Jalousie Window AC Mounting Honolulu &amp; Island-Wide
                     </p>
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                        Precision jalousie louver acrylic retrofits, cantilever exterior support bracket mounting, and laser-calibrated 3/8&quot; trade-wind pitch leveling. Complimentary window structural assessment and zero upfront deposit backed by Hawaii CT-36775 licensed workmanship.
+                        Precision jalousie louver acrylic retrofits, cantilever exterior support bracket mounting, and laser-calibrated 3/8&quot; trade-wind pitch leveling. Complimentary window structural assessment and zero upfront deposit backed by insured local workmanship.
                     </p>
 
                     {/* Dual Action Top Nav Buttons */}
@@ -330,7 +330,7 @@ export default function WindowAcInstallationPage() {
                                 <div className="flex items-center gap-2.5">
                                     <ShieldCheck className="size-5 text-cyan-400 shrink-0" />
                                     <span>
-                                        <strong>Honest Oahu Workmanship:</strong> Every installation is backed by Hawaii Contractor License CT-36775. Your technician verifies your window measurements, electrical circuit, and bracket fit before beginning—with <strong>$0 upfront deposit</strong>.
+                                        <strong>Honest Oahu Workmanship:</strong> Every installation is performed by our experienced Oahu window AC team. Your technician verifies your window measurements, electrical circuit, and bracket fit before beginning—with <strong>$0 upfront deposit</strong>.
                                     </span>
                                 </div>
                                 <span className="hidden sm:inline-block font-mono text-[10px] text-cyan-400 uppercase font-bold bg-cyan-500/10 px-2.5 py-1 rounded border border-cyan-500/20 whitespace-nowrap">
@@ -565,7 +565,7 @@ export default function WindowAcInstallationPage() {
                                         </div>
                                         <div className="flex justify-between">
                                             <span className="text-slate-400">Workmanship:</span>
-                                            <span className="text-cyan-300 font-mono font-bold">Licensed CT-36775 Workmanship</span>
+                                            <span className="text-cyan-300 font-mono font-bold">Insured Oahu Specialists</span>
                                         </div>
                                         <div className="flex justify-between border-t border-white/10 pt-1">
                                             <span className="text-slate-400">Upfront Booking Deposit:</span>
@@ -768,7 +768,7 @@ export default function WindowAcInstallationPage() {
                                 Qualifying Window ACs Get a $45 Cash Rebate
                             </h3>
                             <p className="text-slate-400 text-xs sm:text-sm max-w-2xl leading-relaxed">
-                                When you buy and install an Energy Star LG Dual Inverter through Affordable Home AC, we provide our official pre-approved Hawaii Energy application form PDF. (Note: Mini split division does not participate in rebates; window AC models qualify).
+                                When you buy and install an Energy Star LG Dual Inverter through Affordable Home AC, we provide our official pre-approved Hawaii Energy application form PDF for your $45 cash rebate.
                             </p>
                         </div>
                         <a
