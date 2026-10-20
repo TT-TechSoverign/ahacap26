@@ -43,7 +43,7 @@ const EMERGENCY_STEPS = [
     {
         step: "01",
         title: "Turn Off Your AC Immediately",
-        desc: "Shut off the unit via the remote or wall thermostat to stop condensate production and prevent further water overflow onto drywall."
+        desc: "Shut off the unit via the remote or front control panel to stop condensate production and prevent further water overflow onto the window sill."
     },
     {
         step: "02",

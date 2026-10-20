@@ -35,7 +35,7 @@ const LG_CODES = [
 const GE_CODES = [
     { code: "F1 / E1", desc: "Room Temperature Sensor Fault", fix: "Inspect front intake thermistor plug on control board and replace sensor if open." },
     { code: "F2 / E2", desc: "Evaporator Frost Sensor Fault", fix: "Thaw frozen evaporator coil, clean air filter, and test coil thermistor resistance." },
-    { code: "E4 / E5", desc: "Outdoor Condenser Coil Over-Temperature / Fan Fault", fix: "Clear exterior louver blockage, rinse salt-crusted condenser fins, and test fan motor." },
+    { code: "E4 / E5", desc: "Exterior Condenser Coil Over-Temperature / Fan Fault", fix: "Clear exterior louver blockage, rinse salt-crusted condenser fins, and test fan motor." },
     { code: "FL / E8", desc: "Base Pan High Water Level / Drain Plug Alert", fix: "Clear rear condensate drain port and verify 3/8-inch exterior tilt pitch." }
 ];
 

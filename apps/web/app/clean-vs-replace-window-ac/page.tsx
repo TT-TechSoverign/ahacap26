@@ -118,7 +118,7 @@ export default function CleanVsReplacePage() {
                     {
                         "@type": "HowToStep",
                         "name": "Calculate HECO Power Cost",
-                        "text": "Evaluate your monthly electric bill. An older 10 SEER unit consumes ~$86/month in power versus ~$42/month for an LG Dual Inverter."
+                        "text": "Evaluate your monthly electric bill. An older 9.8 CEER unit consumes ~$86/month in power versus ~$42/month for an LG Dual Inverter."
                     }
                 ]
             },
@@ -243,7 +243,7 @@ export default function CleanVsReplacePage() {
                             <div className="space-y-2.5">
                                 <label className="text-xs font-mono uppercase tracking-widest text-slate-400 flex items-center justify-between">
                                     <span>Compressor Technology</span>
-                                    <span className="text-primary font-bold">{techType === 'standard' ? 'Old Single-Speed (10 SEER)' : 'Modern Inverter (Dual Inverter)'}</span>
+                                    <span className="text-primary font-bold">{techType === 'standard' ? 'Old Single-Speed (9.8 CEER)' : 'Modern Inverter (Dual Inverter)'}</span>
                                 </label>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <button
@@ -497,7 +497,7 @@ export default function CleanVsReplacePage() {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                         <div className="space-y-2 text-center md:text-left">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono uppercase">
-                                Pre-Approved Contractor Partner
+                                Hawaii Energy Trade Ally Partner
                             </div>
                             <h3 className="text-2xl sm:text-3xl font-header font-black uppercase text-white">
                                 Claim Your $45 Hawaii Energy Rebate

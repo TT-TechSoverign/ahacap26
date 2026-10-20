@@ -617,7 +617,7 @@ export function WarehouseInventoryGrid() {
                                             </div>
                                         ) : (
                                             <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-semibold mt-0.5">
-                                                <span>Waipahu Direct Contractor Pricing</span>
+                                                <span>Waipahu Warehouse Direct Pricing</span>
                                             </div>
                                         )}
                                     </div>

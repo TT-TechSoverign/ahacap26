@@ -71,7 +71,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                 In {city}, your HVAC system is constantly battling <strong>{context.climateChallenge}</strong>. This unique micro-climate forces standard compressors to overwork, leading to high electricity bills and the inevitable need for <Link href="/ac-repair-oahu" className="font-bold text-[#00E5FF] hover:underline">ac repair near me</Link>.
                             </p>
                             <p>
-                                Instead of gambling with unvetted contractors, trust the established authority for <Link href="/" className="font-bold text-[#00E5FF] hover:underline">air conditioning Oahu</Link> relies on.
+                                Instead of gambling with unvetted installers, trust the established specialists for <Link href="/" className="font-bold text-[#00E5FF] hover:underline">air conditioning Oahu</Link> relies on.
                             </p>
                         </div>
                     </div>

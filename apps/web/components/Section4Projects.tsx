@@ -50,7 +50,7 @@ const PROJECT_IMAGES: ProjectImage[] = [
     { src: '/assets/yelpphotos/yelp7.jpg', alt: 'Universal Fit', description: 'Cool + Heat 26" wall sleeve unit' },
     { src: '/assets/yelpphotos/yelp8.jpg', alt: 'Smart Controls', description: 'Smart ThinQ temperature control' },
     { src: '/assets/yelpphotos/yelp9.jpg', alt: 'Window AC Intake', description: 'Clean indoor air intake grille' },
-    { src: '/assets/yelpphotos/yelp10.jpg', alt: 'Condenser Coil', description: 'Gold-Fin outdoor condenser coil' },
+    { src: '/assets/yelpphotos/yelp10.jpg', alt: 'Condenser Coil', description: 'Gold-Fin exterior window AC condenser coil' },
     { src: '/assets/yelpphotos/yelp11.jpg', alt: 'Weather Sealing', description: 'Insulated window panel sealing' },
     { src: '/assets/yelpphotos/yelp12.jpg', alt: 'AC Maintenance', description: 'Window AC cleaning and maintenance' },
     { src: '/assets/yelpphotos/yelp13.jpg', alt: 'New Installation', description: 'Brand new Window AC installation' },

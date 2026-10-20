@@ -22,10 +22,10 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 const FAQS = [
     {
         q: "How does ocean salt air damage air conditioners in Hawaii?",
-        a: "Airborne sodium chloride from ocean spray deposits on outdoor condenser coils. Moisture in our humid air creates an electrolyte solution that triggers galvanic corrosion between copper tubes and aluminum fins. This eats away heat-transfer surfaces and causes pinhole refrigerant leaks."
+        a: "Airborne sodium chloride from ocean spray deposits on exterior condenser coils. Moisture in our humid air creates an electrolyte solution that triggers galvanic corrosion between copper tubes and aluminum fins. This eats away heat-transfer surfaces and causes pinhole refrigerant leaks."
     },
     {
-        q: "Can I spray my outdoor condenser unit with a regular garden hose?",
+        q: "Can I spray my window AC exterior condenser section with a regular garden hose?",
         a: "A gentle, low-pressure fresh water spray directly downward through the rear fins every 2 to 4 weeks helps rinse loose salt deposits. Never use high-pressure nozzles, which bend the razor-thin aluminum fins and permanently restrict airflow."
     },
     {
@@ -79,7 +79,7 @@ export default function SaltCorrosionPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Living near the ocean comes with a heavy price for air conditioners: airborne marine salts dissolve aluminum fins and cause microscopic refrigerant pinhole leaks. Learn how to protect your outdoor condenser with proper coil rinsing and protective care.
+                        Living near the ocean comes with a heavy price for air conditioners: airborne marine salts dissolve aluminum fins and cause microscopic refrigerant pinhole leaks. Learn how to protect your exterior condenser section with proper coil rinsing and protective care.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

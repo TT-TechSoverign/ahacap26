@@ -133,11 +133,6 @@ export interface ContactContent {
     address_value: string;
     calendar: {
         title: string;
-        split_section_title: string;
-        split_estimate_label: string;
-        split_estimate_value: string;
-        split_install_label: string;
-        split_install_value: string;
         window_section_title: string;
         window_estimate_label: string;
         window_estimate_value: string;

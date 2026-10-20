@@ -21,41 +21,8 @@ export function AdminCalendar() {
                 </div>
 
                 <div className="flex flex-col gap-2 relative z-10 px-0 md:px-8 lg:px-12">
-                    {/* Split / Central - Cyan Theme */}
-                    <div className="group/item relative flex flex-col items-center text-center w-full max-w-4xl mx-auto py-0">
-                        {/* Radial Glow Background */}
-                        <div className="absolute inset-0 bg-primary/5 blur-[80px] rounded-full -z-10 opacity-50 group-hover/item:opacity-100 transition-opacity"></div>
-
-                        <div className="flex items-center gap-6 mb-4 w-full justify-center">
-                            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
-                            <div className="font-mono text-[9px] lg:text-[10px] font-black text-primary uppercase tracking-[0.4em] px-6 py-2 border border-primary/30 rounded-full bg-primary/5 shadow-[0_0_20px_rgba(0,174,239,0.1)] backdrop-blur-sm">
-                                <EditableText contentKey="contact.calendar.split_section_title" />
-                            </div>
-                            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
-                            <div className="flex flex-col items-center p-5 border-2 border-primary/10 rounded-2xl bg-gradient-to-br from-primary/[0.05] to-transparent shadow-[shadow-inner,0_0_30px_rgba(0,174,239,0.05)] group/date hover:border-primary/40 hover:bg-primary/[0.1] transition-all duration-500">
-                                <div className="font-mono text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] mb-1.5 group-hover/date:text-primary transition-colors">
-                                    <EditableText contentKey="contact.calendar.split_estimate_label" />
-                                </div>
-                                <div className="text-white font-black text-2xl lg:text-4xl tracking-tight drop-shadow-[0_0_15px_rgba(0,174,239,0.4)]">
-                                    <EditableText contentKey="contact.calendar.split_estimate_value" />
-                                </div>
-                            </div>
-                            <div className="flex flex-col items-center p-5 border-2 border-primary/10 rounded-2xl bg-gradient-to-br from-primary/[0.05] to-transparent shadow-[shadow-inner,0_0_30px_rgba(0,174,239,0.05)] group/date hover:border-primary/40 hover:bg-primary/[0.1] transition-all duration-500">
-                                <div className="font-mono text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] mb-1.5 group-hover/date:text-primary transition-colors">
-                                    <EditableText contentKey="contact.calendar.split_install_label" />
-                                </div>
-                                <div className="text-white font-black text-2xl lg:text-4xl tracking-tight drop-shadow-[0_0_15px_rgba(0,174,239,0.4)]">
-                                    <EditableText contentKey="contact.calendar.split_install_value" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     {/* Window AC - Green Theme */}
-                    <div className="group/item relative flex flex-col items-center text-center w-full max-w-4xl mx-auto border-t border-white/10 pt-4 pb-0">
+                    <div className="group/item relative flex flex-col items-center text-center w-full max-w-4xl mx-auto pt-2 pb-0">
                         {/* Radial Glow Background */}
                         <div className="absolute inset-0 bg-emerald-500/5 blur-[80px] rounded-full -z-10 opacity-50 group-hover/item:opacity-100 transition-opacity mt-4"></div>
 

@@ -40,7 +40,7 @@ const warmAirFaqSchema = {
             "name": "Why is my AC running but blowing warm room-temperature air on Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The most frequent causes on Oahu are: (1) A blown dual-run motor capacitor caused by island voltage spikes, (2) A refrigerant (Freon) leak due to salt-air coil pitting, (3) A severely clogged outdoor condenser coil blocked by salt and dirt, or (4) A gecko shorting the inverter control board."
+                "text": "The most frequent causes on Oahu are: (1) A blown dual-run motor capacitor caused by island voltage spikes, (2) A refrigerant (Freon) leak due to salt-air coil pitting, (3) A severely clogged exterior condenser coil blocked by salt and dirt, or (4) A gecko shorting the inverter control board."
             }
         },
         {

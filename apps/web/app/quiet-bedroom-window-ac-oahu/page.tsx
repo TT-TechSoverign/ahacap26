@@ -183,7 +183,7 @@ export default function QuietBedroomWindowAcPage() {
                                 Run Overnight for Under $1.10 per Night
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
-                                Hawaii has the highest electricity tariff in America (~44.2¢/kWh). Running an old, inefficient 10 SEER window AC all night burns through cash. The LG Dual Inverter throttles its motor down to low speed once the bedroom reaches setpoint, drawing just 250–320 Watts.
+                                Hawaii has the highest electricity tariff in America (~44.2¢/kWh). Running an old, inefficient 9.8 CEER window AC all night burns through cash. The LG Dual Inverter throttles its motor down to low speed once the bedroom reaches setpoint, drawing just 250–320 Watts.
                             </p>
                             <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
                                 <strong>Average Household Savings:</strong> $62 to $78 monthly when replacing an old bedroom unit.

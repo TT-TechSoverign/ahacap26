@@ -308,7 +308,7 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
         "conversion_playbook": {
             "mandate": "By Appointment First — Zero Upfront Payment Barrier",
             "rationale": "Homeowners on Oahu resist paying hundreds upfront online for physical repairs prior to an in-home technician assessment, window opening measurement, or diagnostic confirmation.",
-            "heco_roi_savings": "Anchoring LG Dual Inverter savings ($424/yr power savings under ~44.2¢/kWh HECO rates) against cheap 10-SEER window units",
+            "heco_roi_savings": "Anchoring LG Dual Inverter savings ($424/yr power savings under ~44.2¢/kWh HECO rates) against cheap 9.8-CEER window units",
             "warehouse_pickup": "Waipahu Warehouse pickup eliminates mainland freight anxiety (+24% conversion lift)",
             "mold_protocol": "Clinical mold and biofilm remediation framing for window AC cleaning & clean-vs-replace assessments (+31% service appointment velocity)",
             "appointment_routing": "Funnels route directly to appointment scheduling, in-home diagnostic booking, or direct phone call (808) 488-1111"
@@ -358,7 +358,7 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
         },
         "hawaii_energy_rebate_truth": {
             "window_ac_policy": "Qualifying LG Dual Inverter units receive an instant/mail-in $45 Hawaii Energy cash rebate via AHAC's pre-approved official application form PDF (/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf).",
-            "heco_savings_anchor": "HECO 44.2¢/kWh power rate means upgrading from 10-SEER to an LG Dual Inverter saves ~$424.32/yr, paying off unit replacement in 9.4-12 months."
+            "heco_savings_anchor": "HECO 44.2¢/kWh power rate means upgrading from 9.8-CEER to an LG Dual Inverter saves ~$424.32/yr, paying off unit replacement in 9.4-12 months."
         },
         "analytics_swarm_radar": {
             "gsc_monthly_impressions": 18400,
@@ -825,7 +825,7 @@ async def get_analytics_overview(db: AsyncSession = Depends(get_db)):
             "title": "HECO ~44¢/kWh Electricity ROI Anchor",
             "impact": "+18% Sizing Conversion",
             "status": "ACTIVE IN SIZING",
-            "detail": "Anchors LG Dual Inverter savings ($424/yr power savings) against cheap 10-SEER alternatives."
+            "detail": "Anchors LG Dual Inverter savings ($424/yr power savings) against cheap 9.8-CEER alternatives."
         },
         {
             "id": "clinical_mold_protocol",
@@ -1887,7 +1887,7 @@ async def run_agent_heco_rebate_strategist() -> Dict[str, Any]:
             "application_form_status": "Official AHAC pre-approved PDF provided to customer (/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf)"
         },
         "annual_cooling_kw_baseline": "3,200 kWh / yr (Oahu Leeward/Ewa cooling profile)",
-        "efficiency_savings_estimate": "$424.32 / yr savings converting 10 SEER legacy unit to LG Dual Inverter",
+        "efficiency_savings_estimate": "$424.32 / yr savings converting 9.8 CEER legacy unit to LG Dual Inverter",
         "estimated_payback": "9.4 Months against standard window AC swap",
         "details": "Hawaii Energy $45 window AC application form verified; HECO 44.2¢/kWh power economics continuously calibrated."
     }

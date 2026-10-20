@@ -32,7 +32,7 @@ const FAQS = [
     },
     {
         q: "Do security bars restrict the air conditioner's exhaust airflow?",
-        a: "Our technicians verify at least 4 to 6 inches of clearance between the outdoor condenser coil and the security bar metal to prevent warm air recirculation, ensuring peak cooling efficiency."
+        a: "Our technicians verify at least 4 to 6 inches of clearance between the exterior condenser coil and the security bar metal to prevent warm air recirculation, ensuring peak cooling efficiency."
     },
     {
         q: "What window AC size fits best behind security bars?",

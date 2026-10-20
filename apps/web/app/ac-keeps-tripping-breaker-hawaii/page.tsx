@@ -43,7 +43,7 @@ const TRIP_MODES = [
             "Failing motor capacitor forcing compressor to pull massive starting amps (LRA)",
             "Clogged, salt-crusted condenser coil driving head pressure through the roof",
             "Undersized circuit wire or breaker on older 60A/100A Oahu electrical panel",
-            "Outdoor condenser fan motor seized or spinning at half speed"
+            "Exterior condenser fan motor seized or spinning at half speed"
         ],
         severity: "Thermal Overload / Amp Spike"
     }
