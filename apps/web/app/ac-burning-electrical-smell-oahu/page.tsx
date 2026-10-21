@@ -21,6 +21,8 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const FAQS = [
     {
         q: "What should I do immediately if I smell burning electrical plastic from my AC?",
@@ -64,7 +66,7 @@ const EMERGENCY_ACTIONS = [
 ];
 
 export default function AcBurningSmellPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
         <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
@@ -95,7 +97,7 @@ export default function AcBurningSmellPage() {
                             prefetch={false}
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-rose-500 text-white font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-rose-400 transition-all shadow-lg shadow-rose-500/20 hover:scale-[1.02]"
                         >
-                            Book Emergency Diagnostic ($175)
+                            Book Urgent Window AC Evaluation
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -148,7 +150,7 @@ export default function AcBurningSmellPage() {
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Diagnostic Fee</span>
-                                <span className="font-header font-bold text-lg text-rose-400">$175 Flat Rate</span>
+                                <span className="font-header font-bold text-lg text-rose-400">By Appointment ($0 Estimate)</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Thermal Imaging Inspection</span>
@@ -180,11 +182,9 @@ export default function AcBurningSmellPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -194,6 +194,8 @@ export default function AcBurningSmellPage() {
                     title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
+
+                                <OahuEEATAuthorityBar topicTitle="AC Burning Electrical Smell ? Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

@@ -109,7 +109,7 @@ export default async function SitemapPage() {
     ];
 
     const diagnosticGuides = [
-        { name: 'AC Diagnostic Service ($175 Flat Rate)', path: '/ac-diagnostic-service-175-flat-rate' },
+        { name: 'AC Diagnostic Service (By Appointment ($0 Estimate))', path: '/ac-diagnostic-service-175-flat-rate' },
         { name: 'AC Compressor Not Turning On Oahu', path: '/ac-compressor-not-turning-on-oahu' },
         { name: 'Window AC Making Loud Buzzing Noise', path: '/window-ac-making-loud-buzzing-noise' },
         { name: 'AC Refrigerant Leak Detection & Coil Inspection', path: '/ac-refrigerant-leak-detection-hawaii' },

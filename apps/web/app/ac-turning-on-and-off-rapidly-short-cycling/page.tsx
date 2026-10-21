@@ -21,6 +21,8 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const FAQS = [
     {
         q: "What is air conditioner short cycling?",
@@ -35,7 +37,7 @@ const FAQS = [
         a: "Yes. Restricted airflow prevents room heat from reaching the cooling coils. The evaporator temperature plunges, freezing the coils and triggering the low-pressure or freeze-protection sensor to shut the compressor off prematurely."
     },
     {
-        q: "What does your $175 diagnostic cover for short cycling?",
+        q: "What does your on-site evaluation cover for short cycling?",
         a: "Our technician tests thermistor resistance against factory temperature curves, checks capacitor microfarad ratings, measures coil temperatures, and verifies proper BTU sizing for your room."
     }
 ];
@@ -60,7 +62,7 @@ const SHORT_CYCLE_CAUSES = [
 ];
 
 export default function ShortCyclingPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
         <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
@@ -82,7 +84,7 @@ export default function ShortCyclingPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        If your air conditioner kicks on for a couple of minutes, suddenly shuts down, and repeats this cycle over and over, it is short cycling. This burns out compressors, spikes HECO electric bills, and leaves rooms cold and clammy. Discover how our $175 diagnostic solves it.
+                        If your air conditioner kicks on for a couple of minutes, suddenly shuts down, and repeats this cycle over and over, it is short cycling. This burns out compressors, spikes HECO electric bills, and leaves rooms cold and clammy. Discover how our on-site evaluation solves it.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -91,7 +93,7 @@ export default function ShortCyclingPage() {
                             prefetch={false}
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
-                            Book $175 Diagnostic Call
+                            Book $0 Assessment / Service Call
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -148,7 +150,7 @@ export default function ShortCyclingPage() {
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Complete Diagnostic Fee</span>
-                                <span className="font-header font-bold text-lg text-primary">$175 Flat Rate</span>
+                                <span className="font-header font-bold text-lg text-primary">By Appointment ($0 Estimate)</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Island-Wide Coverage</span>
@@ -180,11 +182,9 @@ export default function ShortCyclingPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -194,6 +194,8 @@ export default function ShortCyclingPage() {
                     title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
+
+                                <OahuEEATAuthorityBar topicTitle="AC Turning On & Off (Short Cycling) ? Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

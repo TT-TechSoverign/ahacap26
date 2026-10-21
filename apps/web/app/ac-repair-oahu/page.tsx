@@ -19,11 +19,13 @@ import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 export default function AcRepairOahuPage() {
     const [selectedSymptom, setSelectedSymptom] = useState<string>('warm_air');
     const [equipmentType, setEquipmentType] = useState<string>('window_ac');
     const [unitAge, setUnitAge] = useState<string>('under_5');
-    const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [activeFaq, setActiveFaq] = useState<number | null>(0);
 
     // Form state
     const [fullName, setFullName] = useState('');
@@ -97,7 +99,7 @@ export default function AcRepairOahuPage() {
         },
         {
             q: "How much is the diagnostic service fee?",
-            a: "We charge a standard $175 flat-rate diagnostic inspection fee that covers on-site technician dispatch, travel time, and a comprehensive electrical and mechanical troubleshooting evaluation. You receive an upfront, itemized repair or replacement recommendation before any physical work begins."
+            a: "We provide a $0 Free Clean-vs-Replace Assessment and custom itemized quote that covers on-site technician dispatch, travel time, and a comprehensive electrical and mechanical troubleshooting evaluation. You receive an upfront, itemized repair or replacement recommendation before any physical work begins."
         },
         {
             q: "What if my Window AC unit is too old or expensive to repair?",
@@ -459,11 +461,9 @@ export default function AcRepairOahuPage() {
                                 <span>{faq.q}</span>
                                 <ChevronDown className={`size-4 shrink-0 transition-transform ${activeFaq === index ? 'rotate-180 text-cyan-400' : 'text-slate-400'}`} />
                             </button>
-                            {activeFaq === index && (
-                                <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                            <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${activeFaq === index ? 'block' : 'hidden'}`}>
                                     {faq.a}
                                 </div>
-                            )}
                         </div>
                     ))}
                 </div>
@@ -497,7 +497,9 @@ export default function AcRepairOahuPage() {
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
             </main>
-            <BackToTop />
+                            <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+
+                <BackToTop />
         </div>
     );
 }

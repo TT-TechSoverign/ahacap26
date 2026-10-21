@@ -26,6 +26,8 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { trackFunnelEvent } from '@/lib/tracking';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const CAUSES = [
     {
         title: "Blown Motor Run Capacitor",
@@ -60,7 +62,7 @@ const FAQS = [
     },
     {
         q: "How much is your diagnostic service call?",
-        a: "We charge a transparent flat rate of $175. This covers technician dispatch anywhere on Oahu, electrical multimeter testing, thermal Delta-T and coil inspection, and a comprehensive written quote before any physical repairs begin."
+        a: "We charge a $0 Free Clean-vs-Replace Assessment & custom itemized quote. Our visit covers technician dispatch anywhere on Oahu, electrical multimeter testing, thermal Delta-T and coil inspection, and a comprehensive written quote before any physical repairs begin."
     },
     {
         q: "What if my window AC compressor is completely seized?",
@@ -69,7 +71,7 @@ const FAQS = [
 ];
 
 export default function AcBlowingWarmAirPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     // Form state
     const [fullName, setFullName] = useState('');
@@ -356,11 +358,9 @@ export default function AcBlowingWarmAirPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -373,7 +373,9 @@ export default function AcBlowingWarmAirPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                    <ReviewsPavilion 
+                                    <OahuEEATAuthorityBar topicTitle="AC Blowing Warm Air Troubleshooting ? Oahu Technical & Buying Guide" />
+
+                <ReviewsPavilion 
                         variant="marquee" 
                         title="Oahu AC Repair Customer Reviews"
                         subtitle="Homeowners who got their ice-cold air restored quickly"

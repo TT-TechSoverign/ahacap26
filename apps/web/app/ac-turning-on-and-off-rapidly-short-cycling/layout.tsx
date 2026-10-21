@@ -56,7 +56,7 @@ const shortCyclingFaqSchema = {
             "name": "How does Affordable Home A/C troubleshoot short cycling?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "During our $175 diagnostic visit, our technician tests temperature sensors (thermistors) with a digital multimeter, verifies coil temperature differentials, inspects capacitor capacitance, and calculates room thermal heat load."
+                "text": "During our on-site window AC evaluation, our technician tests temperature sensors (thermistors) with a digital multimeter, verifies coil temperature differentials, inspects capacitor capacitance, and calculates room thermal heat load."
             }
         }
     ]

@@ -56,7 +56,7 @@ const compressorFaqSchema = {
             "name": "How much does it cost to diagnose a non-starting AC compressor?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Affordable Home A/C offers a transparent $175 flat-rate diagnostic across all of Oahu. Our technician checks capacitor ratings, winding resistance, and inverter voltages to identify the exact point of failure."
+                "text": "Affordable Home A/C provides a $0 Free Clean-vs-Replace Assessment and by-appointment troubleshooting across all of Oahu. Our technician checks capacitor ratings, winding resistance, and inverter voltages to identify the exact point of failure."
             }
         }
     ]

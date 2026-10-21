@@ -13,9 +13,12 @@ import {
 import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
+
 export default function AcCleaningOahuPage() {
     const [cleaningTier, setCleaningTier] = useState<'basic' | 'premium'>('premium');
-    const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [activeFaq, setActiveFaq] = useState<number | null>(0);
 
     // Form state
     const [fullName, setFullName] = useState('');
@@ -121,17 +124,26 @@ export default function AcCleaningOahuPage() {
             },
             {
                 "@type": "Service",
-                "name": "Window AC Deep Cleaning & Sanitization Oahu",
+                "@id": "https://www.affordablehome-ac.com/ac-cleaning-oahu#service",
+                "name": "Window AC Deep Cleaning, Coil Sanitization & Clean-vs-Replace Assessment Oahu",
                 "serviceType": "Window AC Sanitization & Coil Cleaning",
                 "provider": {
                     "@type": "HVACBusiness",
-                    "name": "Affordable Home AC"
+                    "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
+                    "name": "Affordable Home A/C",
+                    "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Clinical window AC coil sanitization, blower wheel cleaning, and condensate pan mold purge across Oahu.",
+                "description": "On-site window AC evaporator/condenser coil foaming sanitization, blower wheel cleaning, antimicrobial slinger pan flush, protective floor drop cloths, and honest clean-vs-replace assessments across Oahu.",
+                "potentialAction": {
+                    "@type": "ReserveAction",
+                    "name": "Schedule Oahu Window AC Cleaning or $0 Clean-vs-Replace Assessment",
+                    "target": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
+                },
                 "offers": {
                     "@type": "Offer",
-                    "price": "175.00",
+                    "name": "Window AC Clean-vs-Replace Assessment & Custom Itemized Quote (By Appointment)",
+                    "price": "0.00",
                     "priceCurrency": "USD",
                     "availability": "https://schema.org/InStock"
                 }
@@ -501,16 +513,22 @@ export default function AcCleaningOahuPage() {
                                 <span>{faq.q}</span>
                                 <ChevronDown className={`size-4 shrink-0 transition-transform ${activeFaq === index ? 'rotate-180 text-cyan-400' : 'text-slate-400'}`} />
                             </button>
-                            {activeFaq === index && (
-                                <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                            <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${activeFaq === index ? 'block' : 'hidden'}`}>
                                     {faq.a}
                                 </div>
-                            )}
                         </div>
                     ))}
                 </div>
             </main>
-            <BackToTop />
+                            <WindowAcQuickShop
+                    modelIds={[2, 4, 15, 6]}
+                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395?$1,200)"
+                    subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
+                />
+
+                <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+
+                <BackToTop />
         </div>
     );
 }

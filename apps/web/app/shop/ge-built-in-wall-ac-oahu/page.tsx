@@ -18,6 +18,9 @@ import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
 import { isCampaignActive, generateProductSlug } from '@/lib/utils';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
+
 type GuideModel = Product & { idealRoom: string; plugType: string; hecoMonthly: string; specialBadge?: string };
 
 const INITIAL_GE_GUIDE_MODELS: GuideModel[] = [
@@ -145,7 +148,7 @@ const INITIAL_GE_GUIDE_MODELS: GuideModel[] = [
 
 export default function GeBuiltInWallAcGuidePage() {
     const { addToCart, openCart } = useCart();
-    const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [activeFaq, setActiveFaq] = useState<number | null>(0);
     const [selectedFilter, setSelectedFilter] = useState<'all' | 'ge_builtin' | 'lg_universal' | 'sleeve'>('all');
     const [allModels, setAllModels] = useState<GuideModel[]>(INITIAL_GE_GUIDE_MODELS);
     const isPromo = isCampaignActive();
@@ -488,11 +491,9 @@ export default function GeBuiltInWallAcGuidePage() {
                                     }`}
                                 />
                             </button>
-                            {activeFaq === index && (
-                                <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                            <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${activeFaq === index ? 'block' : 'hidden'}`}>
                                     {faq.a}
                                 </div>
-                            )}
                         </div>
                     ))}
                 </div>
@@ -522,7 +523,15 @@ export default function GeBuiltInWallAcGuidePage() {
                     </div>
                 </div>
             </main>
-            <BackToTop />
+                            <WindowAcQuickShop
+                    modelIds={[2, 4, 15, 6]}
+                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395?$1,200)"
+                    subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
+                />
+
+                <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+
+                <BackToTop />
         </div>
     );
 }

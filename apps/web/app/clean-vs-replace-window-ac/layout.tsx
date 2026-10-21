@@ -31,68 +31,7 @@ export const metadata: Metadata = {
     }
 };
 
-const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.affordablehome-ac.com"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Clean vs Replace Guide",
-            "item": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac"
-        }
-    ]
-};
-
-const cleanVsReplaceFaqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "How do I know if my window AC is worth cleaning or replacing on Oahu?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "If your unit is relatively new (under 3 years old), cools well, and the coils have no rust, washing the removable nylon filter with mild dish soap every 2 weeks will maintain peak airflow and keep mold away. However, if your unit is 4+ years old, smells sour inside, has crumbling aluminum fins from salt air, or is an older single-speed model, spending money to repair it is uneconomical. Upgrading to a brand-new LG Dual Inverter starts at just $560 with a $45 Hawaii Energy cash rebate and saves up to $424/year on your HECO bill."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Is it worth paying to overhaul or chemically teardown an old window AC in Hawaii?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Almost never. Window air conditioners are factory-sealed appliances. Disassembling and cleaning internal fans and coils can cost hundreds in technician labor—nearly the cost of a brand-new, ultra-quiet Energy Star inverter unit with a fresh 1-year factory warranty. We recommend replacing old or heavily molded window units rather than paying for uneconomical off-site repairs."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Does Affordable Home AC participate in Hawaii Energy rebates for window ACs?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes! Every qualifying Energy Star LG Dual Inverter & GE window AC purchased from our shop qualifies for a $45 Hawaii Energy cash rebate. We provide our own pre-approved official Hawaii Energy application form PDF with your purchase."
-            }
-        }
-    ]
-};
-
 export default function CleanVsReplaceLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(cleanVsReplaceFaqSchema) }}
-            />
-            {children}
-        </>
-    );
+    return <>{children}</>;
 }
+

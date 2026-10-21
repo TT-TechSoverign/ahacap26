@@ -21,6 +21,8 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const FAQS = [
     {
         q: "Do you provide window air conditioners for construction jobsite trailers on Oahu?",
@@ -41,7 +43,7 @@ const FAQS = [
 ];
 
 export default function CommercialWindowAcPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
         <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
@@ -174,11 +176,9 @@ export default function CommercialWindowAcPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -189,6 +189,8 @@ export default function CommercialWindowAcPage() {
                     title="In-Stock High-Capacity Window ACs (12,000 – 23,500 BTU)"
                     subheading="Heavy-duty LG Dual Inverter & GE units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
+
+                                <OahuEEATAuthorityBar topicTitle="Commercial Window AC Oahu ? Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

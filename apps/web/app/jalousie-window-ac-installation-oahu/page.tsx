@@ -27,6 +27,8 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { trackFunnelEvent } from '@/lib/tracking';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const FAQS = [
     {
         q: "Why can't I just rest a window AC directly on my jalousie window frame?",
@@ -51,7 +53,7 @@ const FAQS = [
 ];
 
 export default function JalousieWindowAcInstallationPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     // Form state
     const [fullName, setFullName] = useState('');
@@ -380,11 +382,9 @@ export default function JalousieWindowAcInstallationPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -397,7 +397,9 @@ export default function JalousieWindowAcInstallationPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                    <ReviewsPavilion 
+                                    <OahuEEATAuthorityBar topicTitle="Jalousie Window AC Installation ? Oahu Technical & Buying Guide" />
+
+                <ReviewsPavilion 
                         variant="marquee" 
                         title="Oahu Jalousie Installation Reviews"
                         subtitle="Homeowners who trusted us with their Hawaiian louver windows"

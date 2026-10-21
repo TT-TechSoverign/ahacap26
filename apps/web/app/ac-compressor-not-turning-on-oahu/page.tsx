@@ -21,6 +21,8 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const FAQS = [
     {
         q: "Why is my blower fan running but the window AC compressor won't kick on?",
@@ -35,7 +37,7 @@ const FAQS = [
         a: "Yes, shut off the cooling mode immediately. If the thermostat calls for cooling while the compressor is locked or repeatedly buzzing, it can burn out compressor motor windings or damage the control board."
     },
     {
-        q: "What does the $175 diagnostic fee cover?",
+        q: "What does your on-site window AC evaluation cover?",
         a: "Our technician performs on-site electrical multi-meter testing of the capacitor, control relay, circuit board, wiring harness, and compressor terminal resistance (ohms) to pinpoint the exact failure point."
     }
 ];
@@ -60,7 +62,7 @@ const COMPRESSOR_FAILURES = [
 ];
 
 export default function CompressorNotTurningOnPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
         <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
@@ -74,7 +76,7 @@ export default function CompressorNotTurningOnPage() {
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <AlertTriangle className="size-3.5" />
-                        <span>Fan Running But No Cooling &bull; $175 Flat Diagnostic</span>
+                        <span>Fan Running But No Cooling &bull; $0 Clean-vs-Replace Assessment</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
@@ -82,7 +84,7 @@ export default function CompressorNotTurningOnPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        If your indoor vents are blowing warm, room-temperature air while the compressor sits silent or hums loudly, your compressor has failed to start. Our technicians diagnose electrical capacitors, relays, and inverter boards for a transparent <span className="text-white font-bold">$175 flat rate</span>.
+                        If your indoor vents are blowing warm, room-temperature air while the compressor sits silent or hums loudly, your compressor has failed to start. Our technicians diagnose electrical capacitors, relays, and inverter boards for a transparent <span className="text-white font-bold">$0 Free Estimate flat rate</span>.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -91,7 +93,7 @@ export default function CompressorNotTurningOnPage() {
                             prefetch={false}
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
-                            Schedule $175 Diagnostic Call
+                            Schedule $0 Assessment / Service Call
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -148,7 +150,7 @@ export default function CompressorNotTurningOnPage() {
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Diagnostic Troubleshooting</span>
-                                <span className="font-header font-bold text-lg text-primary">$175 Flat Rate</span>
+                                <span className="font-header font-bold text-lg text-primary">By Appointment ($0 Estimate)</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Replacement Window AC Estimate</span>
@@ -180,11 +182,9 @@ export default function CompressorNotTurningOnPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -194,6 +194,8 @@ export default function CompressorNotTurningOnPage() {
                     title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
+
+                                <OahuEEATAuthorityBar topicTitle="AC Compressor Not Turning On ? Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

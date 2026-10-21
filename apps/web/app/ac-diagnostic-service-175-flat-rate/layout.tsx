@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Diagnostic Service Oahu | $175 Flat Rate Troubleshooting | Affordable Home A/C'
+        absolute: 'AC Diagnostic Service Oahu | $0 Clean-vs-Replace Assessment | Affordable Home A/C'
     },
-    description: 'Accurate, honest window AC diagnostic service on Oahu for a transparent $175 flat rate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
+    description: 'Accurate, honest window AC diagnostic service on Oahu with a $0 Free Clean-vs-Replace Estimate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-diagnostic-service-175-flat-rate',
     },
     openGraph: {
-        title: 'AC Diagnostic Service Oahu | $175 Flat Rate Troubleshooting | Affordable Home A/C',
-        description: 'Accurate, honest window AC diagnostic service on Oahu for a transparent $175 flat rate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
+        title: 'AC Diagnostic Service Oahu | $0 Clean-vs-Replace Assessment | Affordable Home A/C',
+        description: 'Accurate, honest window AC diagnostic service on Oahu with a $0 Free Clean-vs-Replace Estimate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
         url: 'https://www.affordablehome-ac.com/ac-diagnostic-service-175-flat-rate',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
                 url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
                 width: 800,
                 height: 600,
-                alt: 'AC Diagnostic Service 175 Flat Rate Oahu Hawaii',
+                alt: 'Window AC Diagnostic & Clean-vs-Replace Assessment Oahu Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Diagnostic Service Oahu | $175 Flat Rate Troubleshooting | Affordable Home A/C',
-        description: 'Accurate, honest window AC diagnostic service on Oahu for a transparent $175 flat rate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
+        title: 'AC Diagnostic Service Oahu | $0 Clean-vs-Replace Assessment | Affordable Home A/C',
+        description: 'Accurate, honest window AC diagnostic service on Oahu with a $0 Free Clean-vs-Replace Estimate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -37,10 +37,10 @@ const diagnosticFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "What is included in the $175 AC Diagnostic Service?",
+            "name": "What is included in your Window AC Diagnostic & Clean-vs-Replace Assessment?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our $175 flat-rate diagnostic covers complete on-site window AC troubleshooting: electrical capacitor microfarad testing, compressor winding amp draw analysis, inverter circuit board error code diagnosis, and temperature delta-T cooling evaluation."
+                "text": "Our on-site window AC evaluation covers complete on-site window AC troubleshooting: electrical capacitor microfarad testing, compressor winding amp draw analysis, inverter circuit board error code diagnosis, and temperature delta-T cooling evaluation."
             }
         },
         {
@@ -48,7 +48,7 @@ const diagnosticFaqSchema = {
             "name": "Are there extra hidden fees or trip charges depending on my Oahu town?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No hidden trip charges. Our $175 diagnostic fee is transparent across all 22 Oahu municipalities, from Honolulu and Pearl City to Kailua, Kaneohe, Kapolei, and the North Shore."
+                "text": "No hidden trip charges. Our by-appointment evaluation is transparent across all 22 Oahu municipalities, from Honolulu and Pearl City to Kailua, Kaneohe, Kapolei, and the North Shore."
             }
         },
         {

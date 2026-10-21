@@ -6,6 +6,7 @@ import { useContent } from '@/lib/context/ContentContext';
 import * as LucideIcons from 'lucide-react';
 import Link from 'next/link';
 import { BackToTop } from '@/components/BackToTop';
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 
 export default function ServiceAreasPage() {
     const { content } = useContent();
@@ -139,6 +140,8 @@ export default function ServiceAreasPage() {
                         </Link>
                     </div>
                 </div>
+
+                <OahuEEATAuthorityBar topicTitle="Oahu Island-Wide LG & GE Window AC Sales, Installation & Cleaning Coverage Directory" />
             </div>
 
             <BackToTop visible={true} />

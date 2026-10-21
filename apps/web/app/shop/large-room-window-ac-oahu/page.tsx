@@ -31,6 +31,8 @@ import { trackFunnelEvent } from '@/lib/tracking';
 import { isCampaignActive } from '@/lib/utils';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const INITIAL_UNIT_18K: Product = {
     id: 6,
     name: "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
@@ -75,7 +77,7 @@ const INITIAL_UNIT_23K: Product = {
 
 export default function LargeRoomWindowAcPage() {
     const { addToCart, openCart } = useCart();
-    const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [activeFaq, setActiveFaq] = useState<number | null>(0);
     const [selectedUnit, setSelectedUnit] = useState<'18k' | '23k'>('18k');
     const [unit18k, setUnit18k] = useState<Product>(INITIAL_UNIT_18K);
     const [unit23k, setUnit23k] = useState<Product>(INITIAL_UNIT_23K);
@@ -601,11 +603,9 @@ export default function LargeRoomWindowAcPage() {
                                 <span>{faq.q}</span>
                                 <ChevronDown className={`size-4 shrink-0 transition-transform ${activeFaq === index ? 'rotate-180 text-cyan-400' : 'text-slate-400'}`} />
                             </button>
-                            {activeFaq === index && (
-                                <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                            <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${activeFaq === index ? 'block' : 'hidden'}`}>
                                     {faq.a}
                                 </div>
-                            )}
                         </div>
                     ))}
                 </div>
@@ -640,7 +640,9 @@ export default function LargeRoomWindowAcPage() {
                     subheading="Heavy-duty LG Dual Inverter & GE units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
             </main>
-            <BackToTop />
+                            <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+
+                <BackToTop />
         </div>
     );
 }

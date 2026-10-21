@@ -23,6 +23,8 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const BEDROOM_MODELS = [
     {
         btu: '6,000 BTU',
@@ -80,7 +82,7 @@ const FAQS = [
 ];
 
 export default function QuietBedroomWindowAcPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
         <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
@@ -304,11 +306,9 @@ export default function QuietBedroomWindowAcPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -316,7 +316,9 @@ export default function QuietBedroomWindowAcPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                    <ReviewsPavilion 
+                                    <OahuEEATAuthorityBar topicTitle="Quiet Bedroom Window AC ? Oahu Technical & Buying Guide" />
+
+                <ReviewsPavilion 
                         variant="marquee" 
                         title="Oahu Light Sleepers Rest Easy"
                         subtitle="Homeowners who upgraded their bedrooms to quiet Dual Inverters"

@@ -24,6 +24,8 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { trackFunnelEvent } from '@/lib/tracking';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const LG_CODES = [
     { code: "CH01 / 1 Blink", desc: "Indoor Room Air Thermistor Open/Short", fix: "Ohm-test room thermistor resistance (10k ohms at 77°F) and replace sensor clip." },
     { code: "CH02 / 2 Blinks", desc: "Evaporator Pipe Thermistor Error", fix: "Inspect copper evaporator tube clip contact, test resistance (5k ohms at 77°F)." },
@@ -55,7 +57,7 @@ const FAQS = [
 ];
 
 export default function BlinkingLightErrorCodesPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     // Form state
     const [fullName, setFullName] = useState('');
@@ -340,11 +342,9 @@ export default function BlinkingLightErrorCodesPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -357,7 +357,9 @@ export default function BlinkingLightErrorCodesPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                    <ReviewsPavilion 
+                                    <OahuEEATAuthorityBar topicTitle="Blinking Light Error Codes AC Repair ? Oahu Technical & Buying Guide" />
+
+                <ReviewsPavilion 
                         variant="marquee" 
                         title="Oahu Homeowner Service Reviews"
                         subtitle="Homeowners who got accurate diagnostic answers without deceptive upselling"

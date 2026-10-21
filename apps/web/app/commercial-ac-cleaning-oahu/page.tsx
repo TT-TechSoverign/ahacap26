@@ -19,6 +19,9 @@ import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
+
 const FAQS = [
     {
         q: "How does scheduling work for businesses during operating hours?",
@@ -58,7 +61,7 @@ const INDUSTRIES = [
 ];
 
 export default function CommercialAcCleaningPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
         <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
@@ -173,15 +176,21 @@ export default function CommercialAcCleaningPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
                 </section>
+
+                                <WindowAcQuickShop
+                    modelIds={[2, 4, 15, 6]}
+                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395?$1,200)"
+                    subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
+                />
+
+                <OahuEEATAuthorityBar topicTitle="Commercial AC Cleaning Oahu ? Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

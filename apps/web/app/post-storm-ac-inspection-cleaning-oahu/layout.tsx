@@ -56,7 +56,7 @@ const stormInspectionFaqSchema = {
             "name": "What is included in a post-storm AC inspection by Affordable Home A/C?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We clear internal debris, flush wind-driven salt from coils, test the LCDI power cord and control relays, inspect window weather-seals, test electrical capacitor ratings, and run a full operational cycle for a $175 flat rate."
+                "text": "We clear internal debris, flush wind-driven salt from coils, test the LCDI power cord and control relays, inspect window weather-seals, test electrical capacitor ratings, and run a full operational cycle for a $0 Free Estimate flat rate."
             }
         }
     ]

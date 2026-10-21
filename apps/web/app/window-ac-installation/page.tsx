@@ -32,13 +32,15 @@ import { BackToTop } from '@/components/BackToTop';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { trackFunnelEvent } from '@/lib/tracking';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 export default function WindowAcInstallationPage() {
     const [windowType, setWindowType] = useState<string>('jalousie');
     const [includeBracket, setIncludeBracket] = useState<boolean>(true);
     const [unitStatus, setUnitStatus] = useState<string>('need_unit');
     const [selectedBtu, setSelectedBtu] = useState<string>('8000');
     const [city, setCity] = useState<string>('Waipahu');
-    const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [activeFaq, setActiveFaq] = useState<number | null>(0);
 
     // Form state
     const [fullName, setFullName] = useState('');
@@ -804,11 +806,9 @@ export default function WindowAcInstallationPage() {
                                     <span>{item.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${activeFaq === idx ? 'rotate-180 text-primary' : 'text-slate-500'}`} />
                                 </button>
-                                {activeFaq === idx && (
-                                    <div className="px-5 pb-5 text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-white/5 pt-4">
+                                <div className={`px-5 pb-5 text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-white/5 pt-4 ${activeFaq === idx ? 'block' : 'hidden'}`}>
                                         {item.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -816,7 +816,9 @@ export default function WindowAcInstallationPage() {
 
             </main>
 
-            <BackToTop />
+                            <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+
+                <BackToTop />
         </div>
     );
 }

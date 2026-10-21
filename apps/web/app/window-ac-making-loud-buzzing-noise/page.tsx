@@ -20,6 +20,8 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const FAQS = [
     {
         q: "Why is my window air conditioner making a loud buzzing or vibrating sound?",
@@ -59,7 +61,7 @@ const NOISE_CAUSES = [
 ];
 
 export default function WindowAcBuzzingPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
         <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
@@ -90,7 +92,7 @@ export default function WindowAcBuzzingPage() {
                             prefetch={false}
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
-                            Schedule Noise Diagnostic ($175)
+                            Schedule Window AC Noise Evaluation
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -147,7 +149,7 @@ export default function WindowAcBuzzingPage() {
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">On-Site Bracket Dampening Service</span>
-                                <span className="font-header font-bold text-lg text-primary">$175 Flat</span>
+                                <span className="font-header font-bold text-lg text-primary">By Appointment ($0 Estimate)</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">New Whisper-Quiet Inverter AC</span>
@@ -179,11 +181,9 @@ export default function WindowAcBuzzingPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -193,6 +193,8 @@ export default function WindowAcBuzzingPage() {
                     title="In-Stock Waipahu Window ACs — Order Online ($395–$1,200)"
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
+
+                                <OahuEEATAuthorityBar topicTitle="Window AC Making Loud Buzzing Noise ? Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

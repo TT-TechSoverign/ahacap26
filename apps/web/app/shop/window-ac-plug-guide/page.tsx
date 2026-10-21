@@ -26,6 +26,9 @@ import { trackFunnelEvent } from '@/lib/tracking';
 import { isCampaignActive } from '@/lib/utils';
 import { Product } from '@/types/inventory';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
+
 type PlugUnit = {
     id: number;
     name: string;
@@ -148,7 +151,7 @@ const INITIAL_UNITS_115V: PlugUnit[] = [
 export default function WindowAcPlugGuidePage() {
     const { addToCart, openCart } = useCart();
     const [selectedPlug, setSelectedPlug] = useState<'115v' | '230v'>('230v');
-    const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [activeFaq, setActiveFaq] = useState<number | null>(0);
     const [units230V, setUnits230V] = useState<PlugUnit[]>(INITIAL_UNITS_230V);
     const [units115V, setUnits115V] = useState<PlugUnit[]>(INITIAL_UNITS_115V);
     const isPromo = isCampaignActive();
@@ -581,11 +584,9 @@ export default function WindowAcPlugGuidePage() {
                                     <span>{item.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${activeFaq === idx ? 'rotate-180 text-primary' : 'text-slate-500'}`} />
                                 </button>
-                                {activeFaq === idx && (
-                                    <div className="px-5 pb-5 text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-white/5 pt-4">
+                                <div className={`px-5 pb-5 text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-white/5 pt-4 ${activeFaq === idx ? 'block' : 'hidden'}`}>
                                         {item.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -593,7 +594,15 @@ export default function WindowAcPlugGuidePage() {
 
             </main>
 
-            <BackToTop />
+                            <WindowAcQuickShop
+                    modelIds={[2, 4, 15, 6]}
+                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395?$1,200)"
+                    subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
+                />
+
+                <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+
+                <BackToTop />
         </div>
     );
 }

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { ACSelectorWizard } from '@/components/ACSelectorWizard';
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 import { EditableText } from '@/components/EditableText';
 import Link from 'next/link';
 import { ArrowLeft, Calculator } from 'lucide-react';
@@ -131,6 +132,8 @@ export default function SizingPage() {
                         </div>
                     </div>
                 </div>
+
+                <OahuEEATAuthorityBar topicTitle="Oahu Window AC BTU Sizing Wizard & Microclimate Heat-Load Calculator" />
 
             </main>
         </div>

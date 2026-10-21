@@ -31,6 +31,8 @@ import { trackFunnelEvent } from '@/lib/tracking';
 import { isCampaignActive } from '@/lib/utils';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const INITIAL_PRODUCT_8K: Product = {
     id: 2,
     name: "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
@@ -55,7 +57,7 @@ const INITIAL_PRODUCT_8K: Product = {
 
 export default function Lg8000BtuOahuPage() {
     const { addToCart, openCart } = useCart();
-    const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [activeFaq, setActiveFaq] = useState<number | null>(0);
     const [product8k, setProduct8k] = useState<Product>(INITIAL_PRODUCT_8K);
     const isPromo = isCampaignActive();
 
@@ -537,11 +539,9 @@ export default function Lg8000BtuOahuPage() {
                                 <span>{faq.q}</span>
                                 <ChevronDown className={`size-4 shrink-0 transition-transform ${activeFaq === index ? 'rotate-180 text-cyan-400' : 'text-slate-400'}`} />
                             </button>
-                            {activeFaq === index && (
-                                <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                            <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${activeFaq === index ? 'block' : 'hidden'}`}>
                                     {faq.a}
                                 </div>
-                            )}
                         </div>
                     ))}
                 </div>
@@ -585,7 +585,9 @@ export default function Lg8000BtuOahuPage() {
                     subheading="Plug-and-play 115V LG Standard & Dual Inverter models in stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery."
                 />
             </main>
-            <BackToTop />
+                            <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+
+                <BackToTop />
         </div>
     );
 }

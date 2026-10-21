@@ -25,6 +25,8 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { trackFunnelEvent } from '@/lib/tracking';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const REBATE_PDF_URL = '/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf';
 
 const QUALIFYING_MODELS = [
@@ -124,7 +126,7 @@ const FAQS = [
 ];
 
 export default function HawaiiEnergyRebatePage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     const handleDownloadPdf = () => {
         trackFunnelEvent('download_rebate_pdf', {
@@ -373,11 +375,9 @@ export default function HawaiiEnergyRebatePage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -385,7 +385,9 @@ export default function HawaiiEnergyRebatePage() {
 
                 {/* Social Proof Pavilion */}
                 <section className="mb-12">
-                    <ReviewsPavilion 
+                                    <OahuEEATAuthorityBar topicTitle="Hawaii Energy $45 Rebate ? Oahu Technical & Buying Guide" />
+
+                <ReviewsPavilion 
                         variant="marquee" 
                         title="Oahu Homeowners Love Their Dual Inverter ACs"
                         subtitle="Real verified reviews from local customers saving on their HECO electric bills"

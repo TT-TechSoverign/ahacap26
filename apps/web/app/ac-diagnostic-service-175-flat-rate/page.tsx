@@ -20,14 +20,16 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+
 const FAQS = [
     {
-        q: "What is included in the $175 AC Diagnostic Service?",
-        a: "Our $175 flat-rate diagnostic covers complete on-site window AC troubleshooting: electrical capacitor microfarad testing, compressor winding amp draw analysis, inverter circuit board error code diagnosis, and supply-to-return temperature Delta-T cooling evaluation."
+        q: "What is included in your Window AC Diagnostic & Clean-vs-Replace Assessment?",
+        a: "Our on-site window AC evaluation covers complete on-site window AC troubleshooting: electrical capacitor microfarad testing, compressor winding amp draw analysis, inverter circuit board error code diagnosis, and supply-to-return temperature Delta-T cooling evaluation."
     },
     {
         q: "Are there extra hidden fees or trip charges depending on my Oahu town?",
-        a: "No hidden trip charges. Our $175 diagnostic fee is transparent across all 22 Oahu municipalities, from Honolulu and Pearl City to Kailua, Kaneohe, Kapolei, and the North Shore."
+        a: "No hidden trip charges. Our by-appointment evaluation is transparent across all 22 Oahu municipalities, from Honolulu and Pearl City to Kailua, Kaneohe, Kapolei, and the North Shore."
     },
     {
         q: "How quickly can a technician arrive for emergency diagnostics?",
@@ -63,14 +65,14 @@ const DIAGNOSTIC_STEPS = [
 ];
 
 export default function AcDiagnosticPage() {
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
         <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
                 
                 <div className="mb-6">
-                    <Breadcrumb items={[{ name: 'AC Diagnostic Service ($175 Flat Rate)' }]} />
+                    <Breadcrumb items={[{ name: 'AC Diagnostic Service (By Appointment ($0 Estimate))' }]} />
                 </div>
 
                 {/* Hero */}
@@ -81,11 +83,11 @@ export default function AcDiagnosticPage() {
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
-                        AC Diagnostic Service <span className="text-primary italic">Oahu ($175 Flat Rate)</span>
+                        AC Diagnostic Service <span className="text-primary italic">Oahu (By Appointment ($0 Estimate))</span>
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        No mystery quotes, surprise travel fees, or pushy sales tactics. Our experienced HVAC technicians perform complete electrical, thermal, and mechanical troubleshooting on window air conditioners for a clear <span className="text-white font-bold">$175 flat rate</span>.
+                        No mystery quotes, surprise travel fees, or pushy sales tactics. Our experienced HVAC technicians perform complete electrical, thermal, and mechanical troubleshooting on window air conditioners for a clear <span className="text-white font-bold">$0 Free Estimate flat rate</span>.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -94,7 +96,7 @@ export default function AcDiagnosticPage() {
                             prefetch={false}
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-slate-950 font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.02]"
                         >
-                            Book $175 Diagnostic Call
+                            Book $0 Assessment / Service Call
                             <ArrowRight className="size-4" />
                         </Link>
                         <TrackedPhoneLink 
@@ -111,7 +113,7 @@ export default function AcDiagnosticPage() {
                     <div className="text-center mb-10">
                         <span className="font-mono text-xs text-primary uppercase font-bold tracking-wider block mb-2">FIELD TROUBLESHOOTING PROTOCOL</span>
                         <h2 className="text-2xl sm:text-4xl font-header font-black uppercase text-white tracking-tight">
-                            What the $175 Diagnostic Covers
+                            What Our Window AC Evaluation Covers
                         </h2>
                     </div>
 
@@ -151,7 +153,7 @@ export default function AcDiagnosticPage() {
                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Complete Diagnostic Fee</span>
-                                <span className="font-header font-bold text-lg text-primary">$175 Flat Rate</span>
+                                <span className="font-header font-bold text-lg text-primary">By Appointment ($0 Estimate)</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
                                 <span className="text-xs text-slate-300">Oahu Coverage</span>
@@ -187,11 +189,9 @@ export default function AcDiagnosticPage() {
                                     <span>{faq.q}</span>
                                     <ChevronDown className={`size-4 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180 text-primary' : 'text-slate-400'}`} />
                                 </button>
-                                {openFaq === idx && (
-                                    <div className="px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3">
+                                <div className={`px-4 sm:px-5 pb-5 text-xs text-slate-300 leading-relaxed font-sans border-t border-white/5 pt-3 ${openFaq === idx ? 'block' : 'hidden'}`}>
                                         {faq.a}
                                     </div>
-                                )}
                             </div>
                         ))}
                     </div>
@@ -201,6 +201,8 @@ export default function AcDiagnosticPage() {
                     title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
+
+                                <OahuEEATAuthorityBar topicTitle="AC Diagnostic Service (By Appointment ($0 Estimate)) ? Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 
