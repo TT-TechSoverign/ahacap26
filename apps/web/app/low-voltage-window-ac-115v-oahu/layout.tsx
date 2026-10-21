@@ -40,7 +40,7 @@ const lowVoltageFaqSchema = {
             "name": "What is the largest BTU window AC that runs on a standard 115V outlet?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Thanks to LG Dual Inverter variable-speed compressor technology, units up to 14,000 BTU (such as the LW1522FVSM) can operate on a standard 115V 15-amp circuit with a standard NEMA 5-15P plug, cooling up to 700 sq ft (AHAM) without requiring a 230V line."
+                "text": "Thanks to LG Dual Inverter & GE Built-In variable-speed compressor technology, units up to 14,000 BTU (such as the LW1522FVSM) can operate on a standard 115V 15-amp circuit with a standard NEMA 5-15P plug, cooling up to 700 sq ft (AHAM) without requiring a 230V line."
             }
         },
         {
@@ -48,7 +48,7 @@ const lowVoltageFaqSchema = {
             "name": "Will a 115V Dual Inverter window AC trip my home's circuit breaker?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Traditional non-inverter units draw massive startup current spikes (often 30 to 40 amps for a split second) when the compressor kicks on, tripping older breakers. LG Dual Inverters feature soft-start electronics that gradually ramp up power, virtually eliminating breaker trips."
+                "text": "Traditional non-inverter units draw massive startup current spikes (often 30 to 40 amps for a split second) when the compressor kicks on, tripping older breakers. LG Dual Inverter & GE Built-Ins feature soft-start electronics that gradually ramp up power, virtually eliminating breaker trips."
             }
         },
         {

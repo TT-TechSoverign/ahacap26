@@ -74,7 +74,7 @@ const LIVING_MODELS = [
 const FAQS = [
     {
         q: "Can a window AC really cool an open living room in Hawaii?",
-        a: "Yes! High-capacity LG Dual Inverter models (12,000 to 23,500 BTU) produce massive cubic-feet-per-minute (CFM) airflow designed specifically for large open-concept floor plans. Because they use variable-speed inverter compressors, they maintain steady cooling throughout the day without the sudden temperature swings of older units."
+        a: "Yes! High-capacity LG Dual Inverter & GE models (12,000 to 23,500 BTU) produce massive cubic-feet-per-minute (CFM) airflow designed specifically for large open-concept floor plans. Because they use variable-speed inverter compressors, they maintain steady cooling throughout the day without the sudden temperature swings of older units."
     },
     {
         q: "What electrical outlet do I need for a 12,000 or 14,000 BTU unit?",

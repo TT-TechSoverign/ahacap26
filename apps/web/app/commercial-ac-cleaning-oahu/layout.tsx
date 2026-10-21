@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Commercial AC Cleaning Oahu | Boutique Retail, Offices & Clinics | Affordable Home A/C'
     },
-    description: 'Specialized commercial window and thru-wall AC cleaning for Oahu boutiques, medical clinics, dental offices, and professional spaces. Drop-cloth protection.',
+    description: 'Specialized commercial LG & GE window and thru-wall AC cleaning for Oahu boutiques, medical clinics, dental offices, and professional spaces. Drop-cloth protection.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/commercial-ac-cleaning-oahu',
     },
     openGraph: {
         title: 'Commercial AC Cleaning Oahu | Boutique Retail, Offices & Clinics | Affordable Home A/C',
-        description: 'Specialized commercial window and thru-wall AC cleaning for Oahu boutiques, medical clinics, dental offices, and professional spaces. Drop-cloth protection.',
+        description: 'Specialized commercial LG & GE window and thru-wall AC cleaning for Oahu boutiques, medical clinics, dental offices, and professional spaces. Drop-cloth protection.',
         url: 'https://www.affordablehome-ac.com/commercial-ac-cleaning-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',

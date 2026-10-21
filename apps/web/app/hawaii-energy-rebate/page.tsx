@@ -107,7 +107,7 @@ const FAQS = [
     },
     {
         q: "Which window air conditioners are eligible for this rebate?",
-        a: "This program applies to qualifying Energy Star certified room window AC units, including our 6,000 BTU to 23,500 BTU LG Dual Inverter models stocked in Waipahu. At Affordable Home A/C, we provide honest direct warehouse pricing plus your official $45 rebate application."
+        a: "This program applies to qualifying Energy Star certified room window AC units, including our 6,000 BTU to 23,500 BTU LG Dual Inverter & GE models stocked in Waipahu. At Affordable Home A/C, we provide honest direct warehouse pricing plus your official $45 rebate application."
     },
     {
         q: "Do I get the official pre-approved rebate application with my purchase?",
@@ -154,7 +154,7 @@ export default function HawaiiEnergyRebatePage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Upgrade your Oahu home to an ultra-efficient LG Dual Inverter window air conditioner and claim an official <strong className="text-white">$45 cash rebate</strong> from Hawaii Energy. Cut your monthly HECO electric bill up to 40% while staying ice-cold.
+                        Upgrade your Oahu home to an ultra-efficient LG Dual Inverter or GE Built-In window air conditioner and claim an official <strong className="text-white">$45 cash rebate</strong> from Hawaii Energy. Cut your monthly HECO electric bill up to 40% while staying ice-cold.
                     </p>
 
                     {/* Dual Action CTAs */}
@@ -200,7 +200,7 @@ export default function HawaiiEnergyRebatePage() {
                                 HECO Electric Bill Savings: Up to 40% Reduction
                             </div>
                             <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                                Beyond the upfront <strong className="text-white">$45 cash rebate</strong>, LG Dual Inverter variable-speed compressors slash monthly HECO ~44.2¢/kWh electricity consumption by up to 40% compared to older single-speed rotary window units.
+                                Beyond the upfront <strong className="text-white">$45 cash rebate</strong>, LG Dual Inverter & GE R32 Inverter variable-speed compressors slash monthly HECO ~44.2¢/kWh electricity consumption by up to 40% compared to older single-speed rotary window units.
                             </p>
                         </div>
                     </div>

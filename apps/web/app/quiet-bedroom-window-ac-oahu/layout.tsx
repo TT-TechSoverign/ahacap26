@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Quiet Bedroom Window AC Oahu | 44 dB Ultra-Quiet Dual Inverter | Affordable Home A/C'
     },
-    description: 'Sleep in whisper-quiet comfort with 44 dB LG Dual Inverter bedroom window ACs on Oahu. In-stock in Waipahu ($560–$595) with $45 Hawaii Energy cash rebate. Free pickup or $50 delivery.',
+    description: 'Sleep in whisper-quiet comfort with 44 dB LG Dual Inverter & GE bedroom window ACs on Oahu. In-stock in Waipahu ($560–$595) with $45 Hawaii Energy cash rebate. Free pickup or $50 delivery.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/quiet-bedroom-window-ac-oahu',
     },
     openGraph: {
         title: 'Quiet Bedroom Window AC Oahu | 44 dB Ultra-Quiet Dual Inverter | Affordable Home A/C',
-        description: 'Sleep in whisper-quiet comfort with 44 dB LG Dual Inverter bedroom window ACs on Oahu. In-stock in Waipahu ($560–$595) with $45 Hawaii Energy cash rebate. Free pickup or $50 delivery.',
+        description: 'Sleep in whisper-quiet comfort with 44 dB LG Dual Inverter & GE bedroom window ACs on Oahu. In-stock in Waipahu ($560–$595) with $45 Hawaii Energy cash rebate. Free pickup or $50 delivery.',
         url: 'https://www.affordablehome-ac.com/quiet-bedroom-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Quiet Bedroom Window AC Oahu | 44 dB Ultra-Quiet Dual Inverter | Affordable Home A/C',
-        description: 'Sleep in whisper-quiet comfort with 44 dB LG Dual Inverter bedroom window ACs on Oahu. In-stock in Waipahu ($560–$595) with $45 Hawaii Energy cash rebate. Free pickup or $50 delivery.',
+        description: 'Sleep in whisper-quiet comfort with 44 dB LG Dual Inverter & GE bedroom window ACs on Oahu. In-stock in Waipahu ($560–$595) with $45 Hawaii Energy cash rebate. Free pickup or $50 delivery.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -37,7 +37,7 @@ const bedroomFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How quiet is an LG Dual Inverter window AC in a bedroom?",
+            "name": "How quiet is an LG Dual Inverter & GE window AC in a bedroom?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "In Sleep Mode, LG Dual Inverter 6,000 and 8,000 BTU models operate at just 44 decibels (dB)—as quiet as a quiet library or a gentle rain shower. Unlike traditional units that clatter and shudder when the compressor kicks on, the Dual Inverter variable-speed motor ramps up and down smoothly with zero sudden start-stop clangs."

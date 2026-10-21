@@ -68,7 +68,7 @@ export default function CleanVsReplacePage() {
         },
         {
             q: "Does Affordable Home AC participate in Hawaii Energy rebates for window ACs?",
-            a: "Yes! Every qualifying Energy Star LG Dual Inverter window AC purchased from our shop qualifies for a $45 Hawaii Energy cash rebate. We provide our own pre-approved official Hawaii Energy application form PDF with your purchase."
+            a: "Yes! Every qualifying Energy Star LG Dual Inverter & GE window AC purchased from our shop qualifies for a $45 Hawaii Energy cash rebate. We provide our own pre-approved official Hawaii Energy application form PDF with your purchase."
         },
         {
             q: "How much electricity does an LG Dual Inverter save compared to an old window unit?",

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Mold Removal & Deep Cleaning Oahu | Clinical Sanitization | Affordable Home A/C'
     },
-    description: 'Clinical window AC mold removal and deep cleaning for Oahu homes. Eliminate Cladosporium and black mold from blower wheels and coils. Insured Oahu Specialists.',
+    description: 'Clinical LG & GE window AC mold removal and deep cleaning for Oahu homes. Eliminate Cladosporium and black mold from blower wheels and coils. Insured Oahu Specialists.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-mold-removal-cleaning-oahu',
     },
     openGraph: {
         title: 'AC Mold Removal & Deep Cleaning Oahu | Clinical Sanitization | Affordable Home A/C',
-        description: 'Clinical window AC mold removal and deep cleaning for Oahu homes. Eliminate Cladosporium and black mold from blower wheels and coils. Insured Oahu Specialists.',
+        description: 'Clinical LG & GE window AC mold removal and deep cleaning for Oahu homes. Eliminate Cladosporium and black mold from blower wheels and coils. Insured Oahu Specialists.',
         url: 'https://www.affordablehome-ac.com/ac-mold-removal-cleaning-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',

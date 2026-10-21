@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Delivery Service Oahu | Flat $50 Island-Wide | Affordable Home A/C'
     },
-    description: 'Flat $50 island-wide delivery on all LG Dual Inverter window air conditioners from our Waipahu warehouse to any Oahu residence. Fast, safe delivery to your doorstep.',
+    description: 'Flat $50 island-wide delivery on all LG Dual Inverter & GE Built-In window air conditioners from our Waipahu warehouse to any Oahu residence. Fast, safe delivery to your doorstep.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu',
     },
     openGraph: {
         title: 'Window AC Delivery Service Oahu | Flat $50 Island-Wide | Affordable Home A/C',
-        description: 'Flat $50 island-wide delivery on all LG Dual Inverter window air conditioners from our Waipahu warehouse to any Oahu residence. Fast, safe delivery to your doorstep.',
+        description: 'Flat $50 island-wide delivery on all LG Dual Inverter & GE Built-In window air conditioners from our Waipahu warehouse to any Oahu residence. Fast, safe delivery to your doorstep.',
         url: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Delivery Service Oahu | Flat $50 Island-Wide | Affordable Home A/C',
-        description: 'Flat $50 island-wide delivery on all LG Dual Inverter window air conditioners from our Waipahu warehouse to any Oahu residence. Fast, safe delivery to your doorstep.',
+        description: 'Flat $50 island-wide delivery on all LG Dual Inverter & GE Built-In window air conditioners from our Waipahu warehouse to any Oahu residence. Fast, safe delivery to your doorstep.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

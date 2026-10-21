@@ -56,7 +56,7 @@ const acBracketsFaqSchema = {
             "name": "Are brackets included with installation?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Standard window AC installation covers standard mounting. Heavy-duty standard exterior support brackets and custom sill anchoring hardware are available as an additional cost option depending on window frame and exterior wall construction."
+                "text": "Standard LG & GE window AC installation covers standard mounting. Heavy-duty standard exterior support brackets and custom sill anchoring hardware are available as an additional cost option depending on window frame and exterior wall construction."
             }
         }
     ]

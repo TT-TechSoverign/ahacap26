@@ -56,7 +56,7 @@ const petHairFaqSchema = {
             "name": "What cleaning service is recommended for homes with multiple pets?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "For window units impacted by heavy pet dander, we recommend bi-weekly washable filter rinsing, periodic surface coil sanitization with floor drop cloth protection, or upgrading older units to an energy-efficient new LG Dual Inverter unit."
+                "text": "For window units impacted by heavy pet dander, we recommend bi-weekly washable filter rinsing, periodic surface coil sanitization with floor drop cloth protection, or upgrading older units to an energy-efficient new LG Dual Inverter or GE Built-In unit."
             }
         }
     ]

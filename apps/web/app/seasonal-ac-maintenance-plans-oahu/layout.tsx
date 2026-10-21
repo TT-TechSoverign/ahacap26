@@ -37,7 +37,7 @@ const seasonalPlanFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How often does a window air conditioner need maintenance on Oahu?",
+            "name": "How often does a LG & GE window air conditioner need maintenance on Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Due to Oahu's continuous salt-laden marine air and 80%+ humidity, we recommend bi-annual (every 6 months) servicing for primary living areas, and at minimum an annual comprehensive cleaning for secondary bedrooms."

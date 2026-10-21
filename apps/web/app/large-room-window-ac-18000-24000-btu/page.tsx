@@ -64,7 +64,7 @@ export default function LargeRoomWindowAcPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Engineered for expansive Hawaiian living rooms, cathedral ceiling spaces, and open-concept floor plans. Featuring variable-speed LG Dual Inverter compressors that slash electricity costs on HECO’s ~44.2¢/kWh tariff while providing whisper-quiet comfort.
+                        Engineered for expansive Hawaiian living rooms, cathedral ceiling spaces, and open-concept floor plans. Featuring variable-speed LG Dual Inverter & GE R32 Inverter compressors that slash electricity costs on HECO’s ~44.2¢/kWh tariff while providing whisper-quiet comfort.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -226,7 +226,7 @@ export default function LargeRoomWindowAcPage() {
                 <WindowAcQuickShop
                     modelIds={[6, 10, 5, 4]}
                     title="In-Stock High-Capacity Window ACs (12,000 – 23,500 BTU)"
-                    subheading="Heavy-duty LG Dual Inverter units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
+                    subheading="Heavy-duty LG Dual Inverter & GE units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 
                 <ReviewsPavilion 

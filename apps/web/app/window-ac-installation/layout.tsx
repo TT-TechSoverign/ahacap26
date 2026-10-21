@@ -80,10 +80,10 @@ const windowAcInstallFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "Can I bundle an in-stock LG Dual Inverter with installation?",
+            "name": "Can I bundle an in-stock LG Dual Inverter & GE Built-In with installation?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! You can purchase any in-stock LG Dual Inverter directly through our online Shop ($395–$1,200). You can select Free Waipahu Warehouse Pickup (by appointment) or $50 Flat Delivery across our 15-municipality Oahu zone. Every qualifying Energy Star unit includes our pre-approved official Hawaii Energy $45 cash rebate application form PDF."
+                "text": "Yes! You can purchase any in-stock LG Dual Inverter & GE Built-In directly through our online Shop ($395–$1,200). You can select Free Waipahu Warehouse Pickup (by appointment) or $50 Flat Delivery across our 15-municipality Oahu zone. Every qualifying Energy Star unit includes our pre-approved official Hawaii Energy $45 cash rebate application form PDF."
             }
         }
     ]

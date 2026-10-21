@@ -540,10 +540,10 @@ export default function LgDualInverterGuidePage() {
                 {/* Bottom Call to Action */}
                 <div className="p-8 rounded-3xl bg-slate-900/50 border border-white/10 text-center space-y-4">
                     <h4 className="text-xl font-header font-black uppercase text-white">
-                        Need Guidance on Sizing or Installation?
+                        Need Guidance on LG Window ACs or GE 26&quot; Built-In Wall Units?
                     </h4>
                     <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
-                        Visit our Waipahu warehouse by appointment or call our Waipahu dispatch team to confirm measurements and scheduling.
+                        Visit our Waipahu warehouse by appointment, compare our GE 26&quot; Built-In Through-the-Wall models for condos, or call our dispatch team to confirm measurements.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <Link
@@ -551,6 +551,12 @@ export default function LgDualInverterGuidePage() {
                             className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20"
                         >
                             Schedule Installation ($0 Upfront)
+                        </Link>
+                        <Link
+                            href="/shop/ge-built-in-wall-ac-oahu"
+                            className="px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-cyan-400 font-header font-bold text-xs uppercase tracking-wider hover:bg-white/10 transition-all"
+                        >
+                            Compare GE 26&quot; Built-In Wall ACs
                         </Link>
                         <a 
                             href="tel:808-488-1111"

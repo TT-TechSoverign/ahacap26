@@ -48,7 +48,7 @@ const condensationDrainFaqSchema = {
             "name": "How does professional condensation drain routing work?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our technicians install a sealed drain pan adapter nozzle on the base of your window AC and connect reinforced, UV-resistant vinyl tubing. We route the hose cleanly along the wall or railing to a dedicated lanai floor drain, drainage scupper, or discrete collection container."
+                "text": "Our technicians install a sealed drain pan adapter nozzle on the base of your LG or GE window AC and connect reinforced, UV-resistant vinyl tubing. We route the hose cleanly along the wall or railing to a dedicated lanai floor drain, drainage scupper, or discrete collection container."
             }
         },
         {

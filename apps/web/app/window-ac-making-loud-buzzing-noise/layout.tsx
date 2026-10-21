@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Making Loud Buzzing Noise? Causes & Fixes Oahu | Affordable Home A/C'
     },
-    description: 'Diagnose and silence loud buzzing, humming, and vibrating window air conditioners in Oahu. Bracket dampening, fan bearing repair, or whisper-quiet inverter upgrade.',
+    description: 'Diagnose and silence loud buzzing, humming, and vibrating LG & GE window air conditioners in Oahu. Bracket dampening, fan bearing repair, or whisper-quiet inverter upgrade.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-making-loud-buzzing-noise',
     },
     openGraph: {
         title: 'Window AC Making Loud Buzzing Noise? Causes & Fixes Oahu | Affordable Home A/C',
-        description: 'Diagnose and silence loud buzzing, humming, and vibrating window air conditioners in Oahu. Bracket dampening, fan bearing repair, or whisper-quiet inverter upgrade.',
+        description: 'Diagnose and silence loud buzzing, humming, and vibrating LG & GE window air conditioners in Oahu. Bracket dampening, fan bearing repair, or whisper-quiet inverter upgrade.',
         url: 'https://www.affordablehome-ac.com/window-ac-making-loud-buzzing-noise',
         siteName: 'Affordable Home A/C',
         type: 'website',

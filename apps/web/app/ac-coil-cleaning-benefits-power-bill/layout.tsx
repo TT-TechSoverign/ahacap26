@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill | Affordable Home A/C'
     },
-    description: 'Learn how dirty evaporator and condenser coils spike Hawaii electricity bills at HECO ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
+    description: 'Learn how dirty evaporator and condenser coils spike Hawaii window AC electricity bills at HECO for LG & GE units ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-coil-cleaning-benefits-power-bill',
     },
     openGraph: {
         title: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill | Affordable Home A/C',
-        description: 'Learn how dirty evaporator and condenser coils spike Hawaii electricity bills at HECO ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
+        description: 'Learn how dirty evaporator and condenser coils spike Hawaii window AC electricity bills at HECO for LG & GE units ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
         url: 'https://www.affordablehome-ac.com/ac-coil-cleaning-benefits-power-bill',
         siteName: 'Affordable Home A/C',
         type: 'website',

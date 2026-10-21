@@ -48,7 +48,7 @@ const woodFrameFaqSchema = {
             "name": "Can older wooden window sills support a heavy air conditioner?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Older wooden sills can crack or splinter under the concentrated weight of a 70 to 140 lb unit. Our technicians install standard exterior window AC support brackets that anchor to the exterior wall framing, transferring the load away from the wooden sill."
+                "text": "Older wooden sills can crack or splinter under the concentrated weight of a 70 to 140 lb unit. Our technicians install standard exterior LG & GE window AC support brackets that anchor to the exterior wall framing, transferring the load away from the wooden sill."
             }
         },
         {

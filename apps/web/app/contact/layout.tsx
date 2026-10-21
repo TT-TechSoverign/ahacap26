@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Contact & Schedule Appointment Oahu | Affordable Home A/C'
     },
-    description: 'Contact Affordable Home A/C on Oahu. Schedule $0 window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
+    description: 'Contact Affordable Home A/C on Oahu. Schedule $0 LG & GE window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/contact',
     },
     openGraph: {
         title: 'Contact & Schedule Appointment Oahu | Affordable Home A/C',
-        description: 'Contact Affordable Home A/C on Oahu. Schedule $0 window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
+        description: 'Contact Affordable Home A/C on Oahu. Schedule $0 LG & GE window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/contact',
         siteName: 'Affordable Home A/C',
         type: 'website',

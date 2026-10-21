@@ -7,7 +7,7 @@ import { ShieldCheck, Star, MapPin, ChevronRight, Home } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: '142+ Five-Star Reviews | Affordable Home A/C Oahu | (808) 488-1111',
-    description: 'Read 142+ verified 5-star customer reviews for Affordable Home A/C. Oahu homeowners praise our whisper-quiet LG dual inverters, $0 free estimates, and Waipahu warehouse pickup.',
+    description: 'Read 142+ verified 5-star customer reviews for Affordable Home A/C. Oahu homeowners praise our LG & GE our whisper-quiet LG dual inverters, $0 free estimates, and Waipahu warehouse pickup.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/reviews',
     },

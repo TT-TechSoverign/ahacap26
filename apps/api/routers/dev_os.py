@@ -1686,7 +1686,7 @@ async def run_agent_cro_optimizer(db: AsyncSession) -> Dict[str, Any]:
             {
                 "funnel": "Window AC Installation & Bundling",
                 "tactic": "Dual-Action Service vs Equipment Bridge",
-                "action": "Offer $0 upfront deposit appointment booking OR direct in-stock LG Dual Inverter purchase with complimentary on-site structural evaluation",
+                "action": "Offer $0 upfront deposit appointment booking OR direct in-stock LG Dual Inverter & GE Built-In purchase with complimentary on-site structural evaluation",
                 "lift_est": "+34% Installation Funnel Conversion"
             },
             {
@@ -1698,13 +1698,13 @@ async def run_agent_cro_optimizer(db: AsyncSession) -> Dict[str, Any]:
             {
                 "funnel": "Window AC Replacement",
                 "tactic": "Waipahu Warehouse Direct Pickup",
-                "action": "Emphasize same-day local pickup for factory-sealed units at 94-150 Leoleo St #203 vs mainland freight delays",
+                "action": "Emphasize same-day local pickup for factory-sealed LG & GE units at 94-150 Leoleo St #203 vs mainland freight delays",
                 "lift_est": "+24% Local Pickup"
             },
             {
                 "funnel": "AC Sizing Matrix",
                 "tactic": "HECO Electricity Savings Calculator",
-                "action": "Display annual energy savings ($424/yr under ~44¢/kWh HECO rate for LG Dual Inverter)",
+                "action": "Display annual energy savings ($424/yr under ~44¢/kWh HECO rate for LG Dual Inverter & GE R32 Inverter)",
                 "lift_est": "+19% Sizing Add-to-Cart"
             }
         ],
@@ -1718,7 +1718,7 @@ async def run_agent_seo_metadata() -> Dict[str, Any]:
         "robots_txt": "Enforces noindex, nofollow on /dev-os and /admin; parameter traps blocked; crawlDelay: 10",
         "window_ac_cro": "Waipahu Warehouse Pickup (subject to scheduling & availability) and $50 flat delivery active across metadata",
         "service_areas": "22 localized Oahu city landing pages indexed",
-        "details": "High-intent CRO metadata configured across 101 canonical routes for window AC sales, jalousie installations, and window AC cleaning."
+        "details": "High-intent CRO metadata configured across 101 canonical routes for LG & GE window AC sales, jalousie & 26\" wall sleeve installations, and window AC cleaning."
     }
 
 async def run_agent_oahu_grounding() -> Dict[str, Any]:

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Condenser Fan Not Spinning in Hawaii? Causes & Repair Oahu | Affordable Home A/C'
     },
-    description: 'Window AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic.',
+    description: 'LG & GE window AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/outdoor-unit-fan-not-spinning-hawaii',
     },
     openGraph: {
         title: 'AC Condenser Fan Not Spinning in Hawaii? Causes & Repair Oahu | Affordable Home A/C',
-        description: 'Window AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic.',
+        description: 'LG & GE window AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $175 flat rate diagnostic.',
         url: 'https://www.affordablehome-ac.com/outdoor-unit-fan-not-spinning-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',

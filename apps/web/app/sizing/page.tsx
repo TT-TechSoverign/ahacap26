@@ -9,13 +9,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Oahu AC Sizing Calculator & BTU Sizing Wizard | Affordable Home A/C'
     },
-    description: 'Calculate the exact BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
+    description: 'Calculate the exact LG & GE Window AC BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sizing',
     },
     openGraph: {
         title: 'Oahu AC Sizing Calculator & BTU Sizing Wizard | Affordable Home A/C',
-        description: 'Calculate the exact BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
+        description: 'Calculate the exact LG & GE Window AC BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
         url: 'https://www.affordablehome-ac.com/sizing',
         siteName: 'Affordable Home A/C',
         type: 'website',

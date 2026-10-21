@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Energy Star Window Air Conditioners Hawaii | Cut HECO Bills | Affordable Home A/C'
     },
-    description: 'Save hundreds on Oahu electric bills with Energy Star certified LG Dual Inverter window air conditioners. High CEER ratings, official $45 Hawaii Energy cash rebate, in stock in Waipahu.',
+    description: 'Save hundreds on Oahu electric bills with Energy Star certified LG Dual Inverter & GE Built-In window air conditioners. High CEER ratings, official $45 Hawaii Energy cash rebate, in stock in Waipahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/energy-star-window-air-conditioners-hawaii',
     },
     openGraph: {
         title: 'Energy Star Window Air Conditioners Hawaii | Cut HECO Bills | Affordable Home A/C',
-        description: 'Save hundreds on Oahu electric bills with Energy Star certified LG Dual Inverter window air conditioners. High CEER ratings, official $45 Hawaii Energy cash rebate, in stock in Waipahu.',
+        description: 'Save hundreds on Oahu electric bills with Energy Star certified LG Dual Inverter & GE Built-In window air conditioners. High CEER ratings, official $45 Hawaii Energy cash rebate, in stock in Waipahu.',
         url: 'https://www.affordablehome-ac.com/energy-star-window-air-conditioners-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Energy Star Window Air Conditioners Hawaii | Cut HECO Bills | Affordable Home A/C',
-        description: 'Save hundreds on Oahu electric bills with Energy Star certified LG Dual Inverter window air conditioners. High CEER ratings, official $45 Hawaii Energy cash rebate, in stock in Waipahu.',
+        description: 'Save hundreds on Oahu electric bills with Energy Star certified LG Dual Inverter & GE Built-In window air conditioners. High CEER ratings, official $45 Hawaii Energy cash rebate, in stock in Waipahu.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

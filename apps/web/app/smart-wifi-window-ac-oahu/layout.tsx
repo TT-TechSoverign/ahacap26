@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Smart Wi-Fi Window AC Oahu | LG ThinQ Remote Control | Affordable Home A/C'
     },
-    description: 'Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter window air conditioners. Pre-cool your home before driving home from Honolulu. In stock in Waipahu.',
+    description: 'Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter & GE SmartHQ & GE Built-In window air conditioners. Pre-cool your home before driving home from Honolulu. In stock in Waipahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/smart-wifi-window-ac-oahu',
     },
     openGraph: {
         title: 'Smart Wi-Fi Window AC Oahu | LG ThinQ Remote Control | Affordable Home A/C',
-        description: 'Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter window air conditioners. Pre-cool your home before driving home from Honolulu. In stock in Waipahu.',
+        description: 'Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter & GE SmartHQ & GE Built-In window air conditioners. Pre-cool your home before driving home from Honolulu. In stock in Waipahu.',
         url: 'https://www.affordablehome-ac.com/smart-wifi-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Smart Wi-Fi Window AC Oahu | LG ThinQ Remote Control | Affordable Home A/C',
-        description: 'Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter window air conditioners. Pre-cool your home before driving home from Honolulu. In stock in Waipahu.',
+        description: 'Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter & GE SmartHQ & GE Built-In window air conditioners. Pre-cool your home before driving home from Honolulu. In stock in Waipahu.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu | Affordable Home A/C'
     },
-    description: 'Why is your air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
+    description: 'Why is your LG or GE window air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-turning-on-and-off-rapidly-short-cycling',
     },
     openGraph: {
         title: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu | Affordable Home A/C',
-        description: 'Why is your air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
+        description: 'Why is your LG or GE window air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
         url: 'https://www.affordablehome-ac.com/ac-turning-on-and-off-rapidly-short-cycling',
         siteName: 'Affordable Home A/C',
         type: 'website',

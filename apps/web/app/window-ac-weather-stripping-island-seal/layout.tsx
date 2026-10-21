@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Weather Stripping & Island Seal Oahu | Stop Air Leaks | Affordable Home A/C'
     },
-    description: 'Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional window AC weather stripping and perimeter sealing on Oahu.',
+    description: 'Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC weather stripping and perimeter sealing on Oahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal',
     },
     openGraph: {
         title: 'Window AC Weather Stripping & Island Seal Oahu | Stop Air Leaks | Affordable Home A/C',
-        description: 'Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional window AC weather stripping and perimeter sealing on Oahu.',
+        description: 'Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC weather stripping and perimeter sealing on Oahu.',
         url: 'https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal',
         siteName: 'Affordable Home A/C',
         type: 'website',

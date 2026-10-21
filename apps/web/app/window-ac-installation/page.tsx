@@ -113,8 +113,8 @@ export default function WindowAcInstallationPage() {
             a: "Oahu's high 74%+ relative humidity causes high-efficiency window ACs to pull 1.5 to 2.5 gallons of moisture from the air daily. If an AC is installed flat or tilted inward, condensate pools inside the unit and overflows into interior drywall, causing costly structural rot and toxic Cladosporium mold. Our technicians laser-calibrate an exact 3/8-inch backward pitch so all drainage discharges cleanly outside."
         },
         {
-            q: "Can I bundle an in-stock LG Dual Inverter with installation?",
-            a: "Yes! That is our most popular option. You can purchase any in-stock LG Dual Inverter directly through our online Shop using Stripe. You can select Free Waipahu Warehouse Pickup (subject to scheduling & inventory availability by appointment) OR $50 Flat Island-Wide Delivery directly to your doorstep. Every qualifying Energy Star unit includes our pre-approved official Hawaii Energy $45 cash rebate application form PDF."
+            q: "Can I bundle an in-stock LG Dual Inverter & GE Built-In with installation?",
+            a: "Yes! That is our most popular option. You can purchase any in-stock LG Dual Inverter & GE Built-In directly through our online Shop using Stripe. You can select Free Waipahu Warehouse Pickup (subject to scheduling & inventory availability by appointment) OR $50 Flat Island-Wide Delivery directly to your doorstep. Every qualifying Energy Star unit includes our pre-approved official Hawaii Energy $45 cash rebate application form PDF."
         },
         {
             q: "Do I have to pay upfront when booking an installation appointment?",

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Renter-Friendly Window AC Installation Oahu | No-Damage Mounting | Affordable Home A/C'
     },
-    description: 'Zero-damage window air conditioner mounting for Oahu renters and tenants. Protect your security deposit with non-invasive brackets and removable weather seals. In stock in Waipahu.',
+    description: 'Zero-damage LG & GE window air conditioner mounting for Oahu renters and tenants. Protect your security deposit with non-invasive brackets and removable weather seals. In stock in Waipahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/renter-friendly-ac-installation-oahu',
     },
     openGraph: {
         title: 'Renter-Friendly Window AC Installation Oahu | No-Damage Mounting | Affordable Home A/C',
-        description: 'Zero-damage window air conditioner mounting for Oahu renters and tenants. Protect your security deposit with non-invasive brackets and removable weather seals. In stock in Waipahu.',
+        description: 'Zero-damage LG & GE window air conditioner mounting for Oahu renters and tenants. Protect your security deposit with non-invasive brackets and removable weather seals. In stock in Waipahu.',
         url: 'https://www.affordablehome-ac.com/renter-friendly-ac-installation-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',

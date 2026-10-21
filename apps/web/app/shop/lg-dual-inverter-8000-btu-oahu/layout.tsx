@@ -4,7 +4,7 @@ export const metadata: Metadata = {
     title: {
         absolute: '8,000 BTU Window AC Oahu (LG LW8022IVSM & LW8024RD) — From $395 | Waipahu Warehouse | Affordable Home A/C',
     },
-    description: 'Compare and buy 8,000 BTU 115V bedroom window air conditioners in Oahu: LG Standard LW8024RD ($395), LG Cool+Heat LW8023HRSM ($650), and LG Dual Inverter LW8022IVSM ($595). Free Waipahu pickup or $50 delivery.',
+    description: 'Compare and buy 8,000 BTU 115V bedroom window air conditioners in Oahu: LG Standard LW8024RD ($395), LG Cool+Heat LW8023HRSM ($650), LG Dual Inverter LW8022IVSM ($595), and GE 8,200 BTU Built-In AJCQ08AWJ ($1,000). Free Waipahu pickup or $50 delivery.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/shop/lg-dual-inverter-8000-btu-oahu',
     },

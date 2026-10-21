@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Replacement Oahu | Old Unit Swap & Haul-Away | Affordable Home A/C'
     },
-    description: 'Upgrade your loud, rusted, power-draining window air conditioner with an ultra-efficient LG Dual Inverter. Professional replacement, old unit haul-away, Waipahu warehouse pickup.',
+    description: 'Upgrade your loud, rusted, power-draining window air conditioner with an ultra-efficient LG Dual Inverter or GE Built-In unit. Professional replacement, old unit haul-away, Waipahu warehouse pickup.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-replacement-oahu',
     },
     openGraph: {
         title: 'Window AC Replacement Oahu | Old Unit Swap & Haul-Away | Affordable Home A/C',
-        description: 'Upgrade your loud, rusted, power-draining window air conditioner with an ultra-efficient LG Dual Inverter. Professional replacement, old unit haul-away, Waipahu warehouse pickup.',
+        description: 'Upgrade your loud, rusted, power-draining window air conditioner with an ultra-efficient LG Dual Inverter or GE Built-In unit. Professional replacement, old unit haul-away, Waipahu warehouse pickup.',
         url: 'https://www.affordablehome-ac.com/window-ac-replacement-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Replacement Oahu | Old Unit Swap & Haul-Away | Affordable Home A/C',
-        description: 'Upgrade your loud, rusted, power-draining window air conditioner with an ultra-efficient LG Dual Inverter. Professional replacement, old unit haul-away, Waipahu warehouse pickup.',
+        description: 'Upgrade your loud, rusted, power-draining window air conditioner with an ultra-efficient LG Dual Inverter or GE Built-In unit. Professional replacement, old unit haul-away, Waipahu warehouse pickup.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

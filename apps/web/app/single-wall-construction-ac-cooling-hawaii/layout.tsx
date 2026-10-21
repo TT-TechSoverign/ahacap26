@@ -48,7 +48,7 @@ const singleWallFaqSchema = {
             "name": "Can older electrical wiring in single-wall homes handle modern air conditioners?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes, when paired with LG Dual Inverter technology. Inverter compressors feature soft-start electronics that eliminate the 30-amp inrush current spike of older units, running safely on older 15-amp residential circuits without tripping breakers."
+                "text": "Yes, when paired with LG Dual Inverter & GE R32 Inverter technology. Inverter compressors feature soft-start electronics that eliminate the 30-amp inrush current spike of older units, running safely on older 15-amp residential circuits without tripping breakers."
             }
         },
         {

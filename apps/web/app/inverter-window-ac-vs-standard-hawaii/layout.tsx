@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Dual Inverter vs Standard Window AC Hawaii | Energy & Sound | Affordable Home A/C'
     },
-    description: 'Compare LG Dual Inverter variable-speed compressors against standard window air conditioners in Hawaii. Save up to 40% on HECO power bills with whisper 44 dB cooling.',
+    description: 'Compare LG Dual Inverter & GE R32 Inverter variable-speed compressors against standard window air conditioners in Hawaii. Save up to 40% on HECO power bills with whisper 44 dB cooling.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/inverter-window-ac-vs-standard-hawaii',
     },
     openGraph: {
         title: 'Dual Inverter vs Standard Window AC Hawaii | Energy & Sound | Affordable Home A/C',
-        description: 'Compare LG Dual Inverter variable-speed compressors against standard window air conditioners in Hawaii. Save up to 40% on HECO power bills with whisper 44 dB cooling.',
+        description: 'Compare LG Dual Inverter & GE R32 Inverter variable-speed compressors against standard window air conditioners in Hawaii. Save up to 40% on HECO power bills with whisper 44 dB cooling.',
         url: 'https://www.affordablehome-ac.com/inverter-window-ac-vs-standard-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Dual Inverter vs Standard Window AC Hawaii | Energy & Sound | Affordable Home A/C',
-        description: 'Compare LG Dual Inverter variable-speed compressors against standard window air conditioners in Hawaii. Save up to 40% on HECO power bills with whisper 44 dB cooling.',
+        description: 'Compare LG Dual Inverter & GE R32 Inverter variable-speed compressors against standard window air conditioners in Hawaii. Save up to 40% on HECO power bills with whisper 44 dB cooling.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -56,7 +56,7 @@ const inverterVsStandardFaqSchema = {
             "name": "How much quieter is a Dual Inverter window AC?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Standard window ACs typically produce 55 to 60 dB of noise, similar to a loud conversation or dishwasher. LG Dual Inverter units run at just 44 dB in sleep mode—quieter than a library whisper—and eliminate the loud mechanical kick every time the compressor cycles."
+                "text": "Standard window ACs typically produce 55 to 60 dB of noise, similar to a loud conversation or dishwasher. LG Dual Inverter & GE units run at just 44 dB in sleep mode—quieter than a library whisper—and eliminate the loud mechanical kick every time the compressor cycles."
             }
         }
     ]

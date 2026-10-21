@@ -67,7 +67,7 @@ const acCleaningFaqSchema = {
             "name": "When should I replace my window air conditioner instead of cleaning it?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "If a window AC is over 5–7 years old with severe coastal salt-air fin rot, loud bearing noise, or compressor wear, upgrading to a brand-new LG Dual Inverter starting at $560 with a $45 Hawaii Energy cash rebate is often more cost-effective and saves up to 40% on monthly HECO bills."
+                "text": "If a window AC is over 5–7 years old with severe coastal salt-air fin rot, loud bearing noise, or compressor wear, upgrading to a brand-new LG Dual Inverter & GE Built-In starting at $560 with a $45 Hawaii Energy cash rebate is often more cost-effective and saves up to 40% on monthly HECO bills."
             }
         },
         {

@@ -172,7 +172,7 @@ export default function LargeRoomWindowAcPage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "In-stock 18,000 BTU and 23,500 BTU LG Dual Inverter window air conditioners in Waipahu, Oahu. Heavy-duty living room and whole-floor cooling with $45 Hawaii Energy cash rebates."
+                "description": "In-stock 18,000 BTU and 23,500 BTU LG Dual Inverter & GE Built-In window air conditioners in Waipahu, Oahu. Heavy-duty living room and whole-floor cooling with $45 Hawaii Energy cash rebates."
             },
             {
                 "@type": "Product",
@@ -637,7 +637,7 @@ export default function LargeRoomWindowAcPage() {
                             <WindowAcQuickShop
                     modelIds={[6, 7, 5, 4]}
                     title="In-Stock High-Capacity Window ACs (12,000 – 23,500 BTU)"
-                    subheading="Heavy-duty LG Dual Inverter units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
+                    subheading="Heavy-duty LG Dual Inverter & GE units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
             </main>
             <BackToTop />

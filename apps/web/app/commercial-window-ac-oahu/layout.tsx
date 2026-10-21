@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Commercial Window AC Oahu | Jobsite Trailers & Offices | Affordable Home A/C'
     },
-    description: 'Rugged commercial window air conditioners for Oahu construction jobsite trailers, security guard shacks, retail shops, and offices. Bulk orders and same-day Waipahu pickup.',
+    description: 'Rugged commercial LG & GE window air conditioners for Oahu construction jobsite trailers, security guard shacks, retail shops, and offices. Bulk orders and same-day Waipahu pickup.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/commercial-window-ac-oahu',
     },
     openGraph: {
         title: 'Commercial Window AC Oahu | Jobsite Trailers & Offices | Affordable Home A/C',
-        description: 'Rugged commercial window air conditioners for Oahu construction jobsite trailers, security guard shacks, retail shops, and offices. Bulk orders and same-day Waipahu pickup.',
+        description: 'Rugged commercial LG & GE window air conditioners for Oahu construction jobsite trailers, security guard shacks, retail shops, and offices. Bulk orders and same-day Waipahu pickup.',
         url: 'https://www.affordablehome-ac.com/commercial-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Freezing Up Ice on Coils Hawaii | Emergency Thaw & Repair | Affordable Home A/C'
     },
-    description: 'Is your window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
+    description: 'Is your LG or GE window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-freezing-up-ice-on-coils-hawaii',
     },
     openGraph: {
         title: 'AC Freezing Up Ice on Coils Hawaii | Emergency Thaw & Repair | Affordable Home A/C',
-        description: 'Is your window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
+        description: 'Is your LG or GE window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/ac-freezing-up-ice-on-coils-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',

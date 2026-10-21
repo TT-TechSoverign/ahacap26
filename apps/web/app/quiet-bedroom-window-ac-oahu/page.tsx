@@ -63,7 +63,7 @@ const BEDROOM_MODELS = [
 const FAQS = [
     {
         q: "Why are traditional window ACs so loud in bedrooms?",
-        a: "Old-style single-speed window ACs cycle their compressors strictly on and off. Whenever room temperature rises, the compressor engages with a loud mechanical 'thunk' and runs at 100% capacity (58–64 dB), shuddering the window frame and waking light sleepers. LG Dual Inverters use twin-rotary brushless motors that gently modulate speed, eliminating start-stop noise."
+        a: "Old-style single-speed window ACs cycle their compressors strictly on and off. Whenever room temperature rises, the compressor engages with a loud mechanical 'thunk' and runs at 100% capacity (58–64 dB), shuddering the window frame and waking light sleepers. LG Dual Inverter & GE Built-Ins use twin-rotary brushless motors that gently modulate speed, eliminating start-stop noise."
     },
     {
         q: "What does 44 decibels (dB) sound like?",
@@ -103,7 +103,7 @@ export default function QuietBedroomWindowAcPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Stop waking up to loud compressor shudder and rattling window frames. Our in-stock LG Dual Inverter bedroom units operate at a whisper-quiet <strong>44 dB</strong> while slashing overnight HECO electric power bills.
+                        Stop waking up to loud compressor shudder and rattling window frames. Our in-stock LG Dual Inverter & GE Built-In bedroom units operate at a whisper-quiet <strong>44 dB</strong> while slashing overnight HECO electric power bills.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

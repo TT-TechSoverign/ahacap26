@@ -24,7 +24,7 @@ import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 const FAQS = [
     {
         q: "What size window AC is best for a studio apartment on Oahu?",
-        a: "For typical Honolulu studio apartments ranging from 350 to 550 sq ft, an 8,000 to 10,000 BTU LG Dual Inverter unit is ideal. It provides sufficient cooling capacity for island humidity while running on a standard 115V circuit."
+        a: "For typical Honolulu studio apartments ranging from 350 to 550 sq ft, an 8,000 to 10,000 BTU LG Dual Inverter or GE Built-In unit is ideal. It provides sufficient cooling capacity for island humidity while running on a standard 115V circuit."
     },
     {
         q: "Why is low decibel sound important in a studio apartment?",

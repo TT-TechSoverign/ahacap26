@@ -135,7 +135,7 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
             return {
                 color: 'text-amber-400 border-amber-500/25 bg-amber-500/5',
                 title: 'Unit is Oversized',
-                desc: `This ${productBtu.toLocaleString()} BTU unit exceeds the ${recommendedBtu.toLocaleString()} BTU requirement. With LG Dual Inverters, variable compressor speed reduces short-cycling risk, but sizing accurately saves upfront cost.`,
+                desc: `This ${productBtu.toLocaleString()} BTU unit exceeds the ${recommendedBtu.toLocaleString()} BTU requirement. With LG Dual Inverter & GE Inverter models, variable compressor speed reduces short-cycling risk, but sizing accurately saves upfront cost.`,
                 icon: AlertTriangle
             };
         } else {

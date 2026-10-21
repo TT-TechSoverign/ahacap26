@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Same-Day Window AC Pickup Oahu | Emergency Cooling Waipahu | Affordable Home A/C'
     },
-    description: 'Beat the island heatwave with same-day window air conditioner pickup at our Waipahu warehouse. In-stock LG Dual Inverter models loaded in minutes by appointment. Call (808) 488-1111.',
+    description: 'Beat the island heatwave with same-day window air conditioner pickup at our Waipahu warehouse. In-stock LG Dual Inverter & GE models loaded in minutes by appointment. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/same-day-window-ac-pickup-oahu',
     },
     openGraph: {
         title: 'Same-Day Window AC Pickup Oahu | Emergency Cooling Waipahu | Affordable Home A/C',
-        description: 'Beat the island heatwave with same-day window air conditioner pickup at our Waipahu warehouse. In-stock LG Dual Inverter models loaded in minutes by appointment. Call (808) 488-1111.',
+        description: 'Beat the island heatwave with same-day window air conditioner pickup at our Waipahu warehouse. In-stock LG Dual Inverter & GE models loaded in minutes by appointment. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/same-day-window-ac-pickup-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Same-Day Window AC Pickup Oahu | Emergency Cooling Waipahu | Affordable Home A/C',
-        description: 'Beat the island heatwave with same-day window air conditioner pickup at our Waipahu warehouse. In-stock LG Dual Inverter models loaded in minutes by appointment. Call (808) 488-1111.',
+        description: 'Beat the island heatwave with same-day window air conditioner pickup at our Waipahu warehouse. In-stock LG Dual Inverter & GE models loaded in minutes by appointment. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Large Room Window AC 18,000 to 23,500 BTU Oahu | Heavy Duty Cooling | Affordable Home A/C'
     },
-    description: 'High-capacity 18,000 and 23,500 BTU LG Dual Inverter window air conditioners for large living rooms and high-ceiling Oahu homes. 230V heavy-duty cooling in stock in Waipahu.',
+    description: 'High-capacity 18,000 and 23,500 BTU LG Dual Inverter & GE Built-In window air conditioners for large living rooms and high-ceiling Oahu homes. 230V heavy-duty cooling in stock in Waipahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/large-room-window-ac-18000-24000-btu',
     },
     openGraph: {
         title: 'Large Room Window AC 18,000 to 23,500 BTU Oahu | Heavy Duty Cooling | Affordable Home A/C',
-        description: 'High-capacity 18,000 and 23,500 BTU LG Dual Inverter window air conditioners for large living rooms and high-ceiling Oahu homes. 230V heavy-duty cooling in stock in Waipahu.',
+        description: 'High-capacity 18,000 and 23,500 BTU LG Dual Inverter & GE Built-In window air conditioners for large living rooms and high-ceiling Oahu homes. 230V heavy-duty cooling in stock in Waipahu.',
         url: 'https://www.affordablehome-ac.com/large-room-window-ac-18000-24000-btu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Large Room Window AC 18,000 to 23,500 BTU Oahu | Heavy Duty Cooling | Affordable Home A/C',
-        description: 'High-capacity 18,000 and 23,500 BTU LG Dual Inverter window air conditioners for large living rooms and high-ceiling Oahu homes. 230V heavy-duty cooling in stock in Waipahu.',
+        description: 'High-capacity 18,000 and 23,500 BTU LG Dual Inverter & GE Built-In window air conditioners for large living rooms and high-ceiling Oahu homes. 230V heavy-duty cooling in stock in Waipahu.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };

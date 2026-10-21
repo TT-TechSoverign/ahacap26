@@ -63,17 +63,17 @@ export function generateMetadata({ params }: Props): Metadata {
     
     if (!cityData) return { title: 'Service Area Not Found' };
  
-    const title = `${cityData.name} Window AC Sales, Installation & Cleaning | (808) 488-1111`;
+    const title = `${cityData.name} LG & GE Window AC Sales, Installation & Cleaning | (808) 488-1111`;
     
     let description = `Fast ${cityData.name} Window AC installation, deep cleaning & in-stock LG & GE Window ACs ($395–$1,200) ready for Waipahu pickup or $50 delivery. Call (808) 488-1111.`;
     if (cityData.regionId === 'windward') {
-        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Custom jalousie window AC installation, deep coil cleaning & in-stock LG Dual Inverter window ACs. Call (808) 488-1111.`;
+        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Custom jalousie window AC installation, deep coil cleaning & in-stock LG & GE window ACs. Call (808) 488-1111.`;
     } else if (cityData.regionId === 'leeward') {
-        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Custom window AC installation, deep cleaning & in-stock Waipahu window ACs ($395–$1,200). Call (808) 488-1111.`;
+        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Custom window AC installation, deep cleaning & in-stock Waipahu LG & GE window ACs ($395–$1,200). Call (808) 488-1111.`;
     } else if (cityData.regionId === 'metro') {
         description = `Whisper-quiet window & through-the-wall cooling in ${cityData.name}, Oahu. Jalousie & sleeve window AC installation, deep cleaning & in-stock LG & GE window ACs. Call (808) 488-1111.`;
     } else {
-        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock Waipahu window ACs ($395–$1,200), custom window installation & deep window AC cleaning. Call (808) 488-1111.`;
+        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock Waipahu LG & GE window ACs ($395–$1,200), custom window installation & deep window AC cleaning. Call (808) 488-1111.`;
     }
  
     return {

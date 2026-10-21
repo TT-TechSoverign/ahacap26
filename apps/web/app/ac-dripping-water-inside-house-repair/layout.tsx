@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Dripping Water Inside House Repair Oahu | Drain Clearing | Affordable Home A/C'
     },
-    description: 'Is your window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
+    description: 'Is your LG or GE window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-dripping-water-inside-house-repair',
     },
     openGraph: {
         title: 'AC Dripping Water Inside House Repair Oahu | Drain Clearing | Affordable Home A/C',
-        description: 'Is your window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
+        description: 'Is your LG or GE window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/ac-dripping-water-inside-house-repair',
         siteName: 'Affordable Home A/C',
         type: 'website',

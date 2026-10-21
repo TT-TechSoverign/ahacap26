@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Air Conditioner Blower Wheel Cleaning Hawaii | Deep Fan Wheel Scrub | Affordable Home A/C'
     },
-    description: 'Eliminate heavy dust cake and black mold from your window AC squirrel-cage blower fan wheel. Restores 100% airflow CFM and eradicates vibration.',
+    description: 'Eliminate heavy dust cake and black mold from your LG or GE window AC squirrel-cage blower fan wheel. Restores 100% airflow CFM and eradicates vibration.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/air-conditioner-blower-wheel-cleaning-hawaii',
     },
     openGraph: {
         title: 'Air Conditioner Blower Wheel Cleaning Hawaii | Deep Fan Wheel Scrub | Affordable Home A/C',
-        description: 'Eliminate heavy dust cake and black mold from your window AC squirrel-cage blower fan wheel. Restores 100% airflow CFM and eradicates vibration.',
+        description: 'Eliminate heavy dust cake and black mold from your LG or GE window AC squirrel-cage blower fan wheel. Restores 100% airflow CFM and eradicates vibration.',
         url: 'https://www.affordablehome-ac.com/air-conditioner-blower-wheel-cleaning-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',

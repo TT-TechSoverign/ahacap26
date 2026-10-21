@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Horizontal Sliding Window AC Installation Oahu | Slider Panels | Affordable Home A/C'
     },
-    description: 'Expert window AC installation for horizontal sliding windows on Oahu. Custom vertical filler panels, standard exterior support brackets, airtight weather sealing.',
+    description: 'Expert LG & GE window AC installation for horizontal sliding windows on Oahu. Custom vertical filler panels, standard exterior support brackets, airtight weather sealing.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/horizontal-sliding-window-ac-oahu',
     },
     openGraph: {
         title: 'Horizontal Sliding Window AC Installation Oahu | Slider Panels | Affordable Home A/C',
-        description: 'Expert window AC installation for horizontal sliding windows on Oahu. Custom vertical filler panels, standard exterior support brackets, airtight weather sealing.',
+        description: 'Expert LG & GE window AC installation for horizontal sliding windows on Oahu. Custom vertical filler panels, standard exterior support brackets, airtight weather sealing.',
         url: 'https://www.affordablehome-ac.com/horizontal-sliding-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',

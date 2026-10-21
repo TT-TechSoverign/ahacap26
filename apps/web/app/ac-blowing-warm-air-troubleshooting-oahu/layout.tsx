@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Blowing Warm Air Oahu | Troubleshooting & $175 Repair | Affordable Home A/C'
     },
-    description: 'Is your AC blowing warm air on Oahu? Diagnostic troubleshooting guide for refrigerant leaks, failed capacitors, and compressor lockouts. Fast $175 diagnostic dispatch. Call (808) 488-1111.',
+    description: 'Is your LG or GE window AC blowing warm air on Oahu? Diagnostic troubleshooting guide for refrigerant leaks, failed capacitors, and compressor lockouts. Fast $175 diagnostic dispatch. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-blowing-warm-air-troubleshooting-oahu',
     },
     openGraph: {
         title: 'AC Blowing Warm Air Oahu | Troubleshooting & $175 Repair | Affordable Home A/C',
-        description: 'Is your AC blowing warm air on Oahu? Diagnostic troubleshooting guide for refrigerant leaks, failed capacitors, and compressor lockouts. Fast $175 diagnostic dispatch. Call (808) 488-1111.',
+        description: 'Is your LG or GE window AC blowing warm air on Oahu? Diagnostic troubleshooting guide for refrigerant leaks, failed capacitors, and compressor lockouts. Fast $175 diagnostic dispatch. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/ac-blowing-warm-air-troubleshooting-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',

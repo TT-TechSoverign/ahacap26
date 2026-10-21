@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Security Bars Window AC Installation Oahu | Burglar Bar Mounting | Affordable Home A/C'
     },
-    description: 'Specialized window air conditioner installation for homes with exterior security burglar bars on Oahu. Clearances, bracket mounting, and airflow optimization.',
+    description: 'Specialized LG & GE window air conditioner installation for homes with exterior security burglar bars on Oahu. Clearances, bracket mounting, and airflow optimization.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/security-bars-window-ac-installation-oahu',
     },
     openGraph: {
         title: 'Security Bars Window AC Installation Oahu | Burglar Bar Mounting | Affordable Home A/C',
-        description: 'Specialized window air conditioner installation for homes with exterior security burglar bars on Oahu. Clearances, bracket mounting, and airflow optimization.',
+        description: 'Specialized LG & GE window air conditioner installation for homes with exterior security burglar bars on Oahu. Clearances, bracket mounting, and airflow optimization.',
         url: 'https://www.affordablehome-ac.com/security-bars-window-ac-installation-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',

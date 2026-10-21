@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Compressor Not Turning On Oahu | Window AC Repair | Affordable Home A/C'
     },
-    description: 'Blower fan blowing warm air but window AC compressor not running? Accurate diagnostic of capacitors, power relays, inverter modules, and thermal overloads on Oahu.',
+    description: 'Blower fan blowing warm air but LG & GE window AC compressor not running? Accurate diagnostic of capacitors, power relays, inverter modules, and thermal overloads on Oahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-compressor-not-turning-on-oahu',
     },
     openGraph: {
         title: 'AC Compressor Not Turning On Oahu | Window AC Repair | Affordable Home A/C',
-        description: 'Blower fan blowing warm air but window AC compressor not running? Accurate diagnostic of capacitors, power relays, inverter modules, and thermal overloads on Oahu.',
+        description: 'Blower fan blowing warm air but LG & GE window AC compressor not running? Accurate diagnostic of capacitors, power relays, inverter modules, and thermal overloads on Oahu.',
         url: 'https://www.affordablehome-ac.com/ac-compressor-not-turning-on-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',

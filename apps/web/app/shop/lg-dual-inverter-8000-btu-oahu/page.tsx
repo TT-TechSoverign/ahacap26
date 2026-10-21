@@ -115,7 +115,7 @@ export default function Lg8000BtuOahuPage() {
         },
         {
             q: "What if the 8,000 BTU Dual Inverter is temporarily out of stock?",
-            a: "When the 8,000 BTU Dual Inverter is sold out, Oahu homeowners can pick up the in-stock 10,000 BTU LG Dual Inverter (LW1022IVSM, $650), the 6,000 BTU LG Dual Inverter (LW6023IVSM, $560), or the 8,000 BTU LG Cool+Heat Inverter (LW8023HRSM, $660) or 8,000 BTU LG Standard (LW8024RD, $395) today at our Waipahu warehouse!"
+            a: "When the 8,000 BTU Dual Inverter is sold out, Oahu homeowners can pick up the in-stock 10,000 BTU LG Dual Inverter (LW1022IVSM, $650), the 6,000 BTU LG Dual Inverter (LW6023IVSM, $560), the 8,000 BTU LG Standard (LW8024RD, $395), or for 26\" through-the-wall sleeves, the GE 8,200 BTU Built-In (AJCQ08AWJ, $1,000) today at our Waipahu warehouse!"
         }
     ];
 

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: '$45 Hawaii Energy Window AC Rebate Oahu | Official Application | Affordable Home A/C'
     },
-    description: 'Claim your $45 Hawaii Energy cash rebate on qualifying Energy Star LG Dual Inverter window air conditioners. Download official pre-approved application form. Central Waipahu warehouse pickup or $50 delivery.',
+    description: 'Claim your $45 Hawaii Energy cash rebate on qualifying Energy Star LG Dual Inverter & GE Built-In window air conditioners. Download official pre-approved application form. Central Waipahu warehouse pickup or $50 delivery.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/hawaii-energy-rebate',
     },
     openGraph: {
         title: '$45 Hawaii Energy Window AC Rebate Oahu | Official Application | Affordable Home A/C',
-        description: 'Claim your $45 Hawaii Energy cash rebate on qualifying Energy Star LG Dual Inverter window air conditioners. Download official pre-approved application form. Central Waipahu warehouse pickup or $50 delivery.',
+        description: 'Claim your $45 Hawaii Energy cash rebate on qualifying Energy Star LG Dual Inverter & GE Built-In window air conditioners. Download official pre-approved application form. Central Waipahu warehouse pickup or $50 delivery.',
         url: 'https://www.affordablehome-ac.com/hawaii-energy-rebate',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: '$45 Hawaii Energy Window AC Rebate Oahu | Official Application | Affordable Home A/C',
-        description: 'Claim your $45 Hawaii Energy cash rebate on qualifying Energy Star LG Dual Inverter window air conditioners. Download official pre-approved application form. Central Waipahu warehouse pickup or $50 delivery.',
+        description: 'Claim your $45 Hawaii Energy cash rebate on qualifying Energy Star LG Dual Inverter & GE Built-In window air conditioners. Download official pre-approved application form. Central Waipahu warehouse pickup or $50 delivery.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -40,7 +40,7 @@ const rebateFaqSchema = {
             "name": "How much is the Hawaii Energy rebate for window air conditioners?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The Hawaii Energy rebate is exactly $45 for qualifying Energy Star certified room window air conditioners, such as the LG Dual Inverter models stocked in our Waipahu warehouse."
+                "text": "The Hawaii Energy rebate is exactly $45 for qualifying Energy Star certified room window air conditioners, such as the LG Dual Inverter & GE models stocked in our Waipahu warehouse."
             }
         },
         {
@@ -48,7 +48,7 @@ const rebateFaqSchema = {
             "name": "Which window AC models qualify for the $45 Hawaii Energy rebate?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our rebate participation covers all qualifying Energy Star certified room window AC units, including our 6,000 BTU to 23,500 BTU LG Dual Inverter models stocked in our Waipahu warehouse."
+                "text": "Our rebate participation covers all qualifying Energy Star certified room window AC units, including our 6,000 BTU to 23,500 BTU LG Dual Inverter & GE models stocked in our Waipahu warehouse."
             }
         },
         {

@@ -226,7 +226,7 @@ export default function WindowAcPlugGuidePage() {
             {
                 "@type": "HowTo",
                 "name": "How to Identify 115V vs 230V Window AC Plug Types in Hawaii",
-                "description": "Visual guide to identify NEMA 5-15P 115V plugs and NEMA 6-20P 230V outlets before purchasing 18,000 or 23,500 BTU LG Dual Inverter window air conditioners.",
+                "description": "Visual guide to identify NEMA 5-15P 115V plugs and NEMA 6-20P 230V outlets before purchasing 18,000 or 23,500 BTU LG Dual Inverter & GE Built-In window air conditioners.",
                 "step": [
                     {
                         "@type": "HowToStep",

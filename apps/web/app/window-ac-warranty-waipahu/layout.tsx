@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Warranty & Local Support Waipahu | Affordable Home A/C'
     },
-    description: 'Local Oahu warranty support for LG Dual Inverter window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
+    description: 'Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
     },
     openGraph: {
         title: 'Window AC Warranty & Local Support Waipahu | Affordable Home A/C',
-        description: 'Local Oahu warranty support for LG Dual Inverter window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
+        description: 'Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
         url: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Warranty & Local Support Waipahu | Affordable Home A/C',
-        description: 'Local Oahu warranty support for LG Dual Inverter window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
+        description: 'Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -37,10 +37,10 @@ const warrantyFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "What warranty comes with LG Dual Inverter window air conditioners?",
+            "name": "What warranty comes with LG Dual Inverter & GE Built-In window air conditioners?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Every new LG Dual Inverter window AC purchased from Affordable Home A/C includes a 1-year limited manufacturer warranty on parts and labor, plus an extended limited warranty on the Dual Inverter compressor component."
+                "text": "Every new LG Dual Inverter & GE window AC purchased from Affordable Home A/C includes a 1-year limited manufacturer warranty on parts and labor, plus an extended limited warranty on the Dual Inverter compressor component."
             }
         },
         {

@@ -25,7 +25,7 @@ import { WarehouseInventoryGrid } from './inventory-grid';
 
 export const metadata: Metadata = {
     title: 'In-Stock Oahu Window AC Warehouse | Waipahu Pickup & $50 Delivery',
-    description: 'In-stock LG Dual Inverter window air conditioners warehoused locally in Waipahu, Oahu. Free warehouse pickup by appointment or $50 flat-rate island delivery.',
+    description: 'In-stock LG Dual Inverter & GE Built-In window air conditioners warehoused locally in Waipahu, Oahu. Free warehouse pickup by appointment or $50 flat-rate island delivery.',
     keywords: [
         'in stock window ac oahu',
         'window ac warehouse waipahu',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     ],
     openGraph: {
         title: 'In-Stock Oahu Window AC Warehouse | Waipahu Pickup & Delivery',
-        description: 'Locally warehoused LG Dual Inverter window air conditioners ready on Oahu. Free Waipahu pickup by appointment or $50 island-wide delivery. Includes $45 Hawaii Energy rebate form.',
+        description: 'Locally warehoused LG Dual Inverter & GE Built-In window air conditioners ready on Oahu. Free Waipahu pickup by appointment or $50 island-wide delivery. Includes $45 Hawaii Energy rebate form.',
         url: 'https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse',
         type: 'website',
         images: [
@@ -90,7 +90,7 @@ export default function OahuWindowAcWarehousePage() {
                 "@id": "https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse#webpage",
                 "url": "https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse",
                 "name": "In-Stock Oahu Window AC Warehouse | Waipahu Local Inventory",
-                "description": "In-stock LG Dual Inverter window air conditioners warehoused locally in Waipahu, Oahu. Free warehouse pickup by appointment or $50 flat-rate island delivery.",
+                "description": "In-stock LG Dual Inverter & GE Built-In window air conditioners warehoused locally in Waipahu, Oahu. Free warehouse pickup by appointment or $50 flat-rate island delivery.",
                 "breadcrumb": {
                     "@type": "BreadcrumbList",
                     "itemListElement": [

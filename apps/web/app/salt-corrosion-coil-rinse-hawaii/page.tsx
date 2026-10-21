@@ -29,8 +29,8 @@ const FAQS = [
         a: "A gentle, low-pressure fresh water spray directly downward through the rear fins every 2 to 4 weeks helps rinse loose salt deposits. Never use high-pressure nozzles, which bend the razor-thin aluminum fins and permanently restrict airflow."
     },
     {
-        q: "What is the difference between Blue Fin / Gold Fin and standard coils?",
-        a: "Blue Fin and Gold Fin refer to hydrophilic epoxy coatings applied at the factory to aluminum fins. They repel water and salt adhesion, extending coil lifespan in marine environments like Kailua, Hawaii Kai, and Ewa Beach by up to 2-3 times longer than uncoated coils."
+        q: "What is the difference between LG & GE Blue Fin / Gold Fin and standard coils?",
+        a: "Blue Fin and LG Gold Fin™ refer to hydrophilic anti-corrosive coatings applied at the factory to aluminum fins on LG and GE window air conditioners. They repel water and salt adhesion, extending coil lifespan in marine environments like Kailua, Hawaii Kai, and Ewa Beach by up to 2-3 times longer than uncoated coils."
     },
     {
         q: "How does Affordable Home A/C protect coastal systems?",

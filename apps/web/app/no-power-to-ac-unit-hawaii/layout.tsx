@@ -37,7 +37,7 @@ const noPowerFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Why is my window air conditioner completely dead with no display lights or sound?",
+            "name": "Why is my LG & GE window air conditioner completely dead with no display lights or sound?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "When a window AC has zero power, the most common causes are a tripped LCDI safety button on the power cord plug head, a tripped circuit breaker in your electrical panel, or a blown low-voltage fuse on the internal control board."

@@ -148,7 +148,7 @@ export default function PetHairCleaningPage() {
                                 <span className="font-header font-bold text-lg text-white">By Appointment</span>
                             </div>
                             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                                <span className="text-xs text-slate-300">New LG Dual Inverter Upgrade</span>
+                                <span className="text-xs text-slate-300">New LG Dual Inverter & GE Built-In Upgrade</span>
                                 <span className="font-header font-bold text-lg text-primary">From $560 (-$45 Rebate)</span>
                             </div>
                             <div className="flex items-center justify-between">

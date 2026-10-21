@@ -31,8 +31,8 @@ const FAQS = [
         a: "An 8,000 BTU unit cools bedrooms up to 350 sq ft comfortably, even in uninsulated single-wall plantation homes with morning or afternoon sun exposure."
     },
     {
-        q: "How quiet are the 6,000 and 8,000 BTU LG Dual Inverter models?",
-        a: "In low sleep mode, LG Dual Inverter models operate at just 44 dB—quieter than a normal conversational whisper and significantly quieter than traditional rotary compressors."
+        q: "How quiet are the 6,000 and 8,000 BTU LG Dual Inverter & GE models?",
+        a: "In low sleep mode, LG Dual Inverter & GE models operate at just 44 dB—quieter than a normal conversational whisper and significantly quieter than traditional rotary compressors."
     },
     {
         q: "Do these models qualify for the $45 Hawaii Energy cash rebate?",

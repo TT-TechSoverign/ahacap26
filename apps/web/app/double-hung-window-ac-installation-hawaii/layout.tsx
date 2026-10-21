@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Double-Hung Window AC Installation Hawaii | Sash Window Mounting | Affordable Home A/C'
     },
-    description: 'Professional window air conditioner installation for double-hung sash windows across Oahu. Top-rail locking, side curtain insulation, and backward drainage pitch.',
+    description: 'Professional LG & GE window air conditioner installation for double-hung sash windows across Oahu. Top-rail locking, side curtain insulation, and backward drainage pitch.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/double-hung-window-ac-installation-hawaii',
     },
     openGraph: {
         title: 'Double-Hung Window AC Installation Hawaii | Sash Window Mounting | Affordable Home A/C',
-        description: 'Professional window air conditioner installation for double-hung sash windows across Oahu. Top-rail locking, side curtain insulation, and backward drainage pitch.',
+        description: 'Professional LG & GE window air conditioner installation for double-hung sash windows across Oahu. Top-rail locking, side curtain insulation, and backward drainage pitch.',
         url: 'https://www.affordablehome-ac.com/double-hung-window-ac-installation-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',

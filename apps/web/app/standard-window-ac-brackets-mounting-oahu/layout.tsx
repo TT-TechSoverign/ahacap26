@@ -45,7 +45,7 @@ const standardBracketsFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "Do all window air conditioners need support brackets?",
+            "name": "Do all LG & GE window air conditioners need support brackets?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "While small 6,000 to 8,000 BTU units can often rest on sturdy wooden sills, medium and large units (10,000 to 23,500 BTU weighing 70 to 140 lbs), units mounted in vinyl windows, and second-story installations require standard exterior brackets for safety."

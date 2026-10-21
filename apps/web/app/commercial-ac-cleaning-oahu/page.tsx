@@ -30,7 +30,7 @@ const FAQS = [
     },
     {
         q: "Do you provide both Window AC cleaning and replacement for commercial offices?",
-        a: "Yes. We service commercial window air conditioners on-site with floor drop cloths, filter and coil sanitization, and direct Waipahu warehouse replacement installations."
+        a: "Yes. We service commercial LG & GE window air conditioners on-site with floor drop cloths, filter and coil sanitization, and direct Waipahu warehouse replacement installations."
     },
     {
         q: "Are you insured for commercial property management?",

@@ -84,7 +84,7 @@ export default function AcCleaningOahuPage() {
         },
         {
             q: "When should I replace my window air conditioner instead of cleaning it?",
-            a: "If your window air conditioner is over 5–7 years old with severe coastal salt-air fin rot, loud bearing noise, or high power draw, upgrading to an in-stock LG Dual Inverter from our Waipahu warehouse starting at $560 with a $45 Hawaii Energy cash rebate is often the smartest investment."
+            a: "If your window air conditioner is over 5–7 years old with severe coastal salt-air fin rot, loud bearing noise, or high power draw, upgrading to an in-stock LG Dual Inverter & GE Built-In from our Waipahu warehouse starting at $560 with a $45 Hawaii Energy cash rebate is often the smartest investment."
         },
         {
             q: "Will the cleaning make a water mess inside my home?",
@@ -344,7 +344,7 @@ export default function AcCleaningOahuPage() {
                                 <Activity className="size-4" /> Should You Clean or Replace Your Window AC?
                             </div>
                             <p className="leading-relaxed">
-                                If your window air conditioner is 5+ years old with severe coastal salt-air fin rot or loud bearing noise, upgrading to a brand-new LG Dual Inverter from our Waipahu warehouse starting at $560 (with a $45 Hawaii Energy cash rebate and $50 flat Oahu delivery) can save up to 40% on monthly HECO electricity bills.
+                                If your window air conditioner is 5+ years old with severe coastal salt-air fin rot or loud bearing noise, upgrading to a brand-new LG Dual Inverter & GE Built-In from our Waipahu warehouse starting at $560 (with a $45 Hawaii Energy cash rebate and $50 flat Oahu delivery) can save up to 40% on monthly HECO electricity bills.
                             </p>
                             <div>
                                 <Link 

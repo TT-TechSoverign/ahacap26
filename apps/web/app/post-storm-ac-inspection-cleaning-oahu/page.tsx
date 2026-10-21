@@ -81,7 +81,7 @@ export default function PostStormInspectionPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        Heavy Kona storm winds, torrential tropical downpours, and flying marine salt can cripple your window air conditioner&apos;s rear condenser. Our Oahu cooling technicians inspect electrical components, clear debris, and flush salt crusting for safe restart.
+                        Heavy Kona storm winds, torrential tropical downpours, and flying marine salt can cripple your LG & GE window air conditioner&apos;s rear condenser. Our Oahu cooling technicians inspect electrical components, clear debris, and flush salt crusting for safe restart.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

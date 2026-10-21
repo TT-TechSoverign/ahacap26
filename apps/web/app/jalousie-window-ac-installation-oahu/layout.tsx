@@ -80,7 +80,7 @@ const hvacServiceSchema = {
         }
     },
     "areaServed": "Oahu",
-    "description": "Specialized window air conditioner installation in Hawaiian jalousie louver windows, custom acrylic fabrication, and exterior security mounting across Oahu."
+    "description": "Specialized LG & GE window air conditioner installation in Hawaiian jalousie louver windows, custom acrylic fabrication, and exterior security mounting across Oahu."
 };
 
 export default function JalousieWindowAcInstallationLayout({ children }: { children: React.ReactNode }) {

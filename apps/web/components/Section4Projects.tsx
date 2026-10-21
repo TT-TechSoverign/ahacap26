@@ -42,12 +42,12 @@ const PROJECT_IMAGES: ProjectImage[] = [
 
     // Yelp Photos (from assets/yelpphotos/)
     { src: '/assets/yelpphotos/yelp1.jpg', alt: 'Window AC System', description: 'Modern window AC installation' },
-    { src: '/assets/yelpphotos/yelp2.jpg', alt: 'Thru-Wall Unit', description: 'Thru-the-wall AC installation' },
-    { src: '/assets/yelpphotos/yelp3.jpg', alt: 'LG Dual Inverter', description: 'Energy efficient inverter setup' },
-    { src: '/assets/yelpphotos/yelp4.jpg', alt: 'Condo Cooling', description: 'Residential window cooling system' },
+    { src: '/assets/yelpphotos/yelp2.jpg', alt: 'GE Thru-Wall Unit', description: 'GE 26" Built-In thru-the-wall AC installation' },
+    { src: '/assets/yelpphotos/yelp3.jpg', alt: 'LG Dual Inverter', description: 'LG Dual Inverter energy-efficient window setup' },
+    { src: '/assets/yelpphotos/yelp4.jpg', alt: 'Condo Cooling', description: 'LG & GE residential window cooling system' },
     { src: '/assets/yelpphotos/yelp5.jpg', alt: 'Ventilation', description: 'Airflow & louver inspection' },
     { src: '/assets/yelpphotos/yelp6.jpg', alt: 'Compressor Unit', description: 'High-capacity cooling unit' },
-    { src: '/assets/yelpphotos/yelp7.jpg', alt: 'Universal Fit', description: 'Cool + Heat 26" wall sleeve unit' },
+    { src: '/assets/yelpphotos/yelp7.jpg', alt: 'GE & LG Universal Fit', description: 'GE & LG 26" wall sleeve unit' },
     { src: '/assets/yelpphotos/yelp8.jpg', alt: 'Smart Controls', description: 'Smart ThinQ temperature control' },
     { src: '/assets/yelpphotos/yelp9.jpg', alt: 'Window AC Intake', description: 'Clean indoor air intake grille' },
     { src: '/assets/yelpphotos/yelp10.jpg', alt: 'Condenser Coil', description: 'Gold-Fin exterior window AC condenser coil' },

@@ -26,7 +26,7 @@ const FAQS = [
     },
     {
         q: "Can you clean a heavily caked blower wheel in place?",
-        a: "Surface spray-down in place only cleans the exposed front edge and can wash mold slurry deeper into the housing. For lightly soiled window units, routine filter and surface cleaning works well; for older window units with heavily encrusted blower wheels, upgrading to a brand-new LG Dual Inverter ($560+ with a $45 rebate) is far more economical than a full mechanical teardown."
+        a: "Surface spray-down in place only cleans the exposed front edge and can wash mold slurry deeper into the housing. For lightly soiled window units, routine filter and surface cleaning works well; for older window units with heavily encrusted blower wheels, upgrading to a brand-new LG Dual Inverter & GE Built-In ($560+ with a $45 rebate) is far more economical than a full mechanical teardown."
     },
     {
         q: "What are the signs that my blower wheel is clogged?",
@@ -128,7 +128,7 @@ export default function BlowerWheelCleaningPage() {
                                 Spraying an aerosol into a heavily caked blower wheel cannot reach the back of the blades. It merely liquefies surface dirt into a sticky sludge that fouls the motor shaft bearing.
                             </p>
                             <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
-                                We help Oahu homeowners maintain newer window ACs with preventative coil and filter care, or upgrade heavily fouled older units to whisper-quiet LG Dual Inverters with full floor drop-cloth protection.
+                                We help Oahu homeowners maintain newer window ACs with preventative coil and filter care, or upgrade heavily fouled older units to whisper-quiet LG Dual Inverter & GE Built-Ins with full floor drop-cloth protection.
                             </p>
                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300 font-sans">
                                 <strong>Insured Oahu Cooling Specialists:</strong> Every window unit service and installation is backed by our Waipahu warehouse team and spotless drop-cloth protection.

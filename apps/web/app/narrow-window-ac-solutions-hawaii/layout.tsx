@@ -40,7 +40,7 @@ const narrowWindowFaqSchema = {
             "name": "What is the smallest window width that can fit an air conditioner?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "By removing standard side accordion curtains and using our custom narrow-mounting brackets, our compact 6,000 BTU LG Dual Inverter unit (chassis width 19.5 inches) can fit into window openings as narrow as 20 to 21 inches wide."
+                "text": "By removing standard side accordion curtains and using our custom narrow-mounting brackets, our compact 6,000 BTU LG Dual Inverter or GE Built-In unit (chassis width 19.5 inches) can fit into window openings as narrow as 20 to 21 inches wide."
             }
         },
         {

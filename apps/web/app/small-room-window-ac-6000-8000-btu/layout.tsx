@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Small Room Window AC 6,000 to 8,000 BTU Oahu | Low Power 115V | Affordable Home A/C'
     },
-    description: 'Compact 6,000 and 8,000 BTU LG Dual Inverter window air conditioners for bedrooms, home offices, and nursery rooms. Standard 115V plug, ultra-quiet 44 dB, in stock in Waipahu.',
+    description: 'Compact 6,000 and 8,000 BTU LG Dual Inverter & GE Built-In window air conditioners for bedrooms, home offices, and nursery rooms. Standard 115V plug, ultra-quiet 44 dB, in stock in Waipahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/small-room-window-ac-6000-8000-btu',
     },
     openGraph: {
         title: 'Small Room Window AC 6,000 to 8,000 BTU Oahu | Low Power 115V | Affordable Home A/C',
-        description: 'Compact 6,000 and 8,000 BTU LG Dual Inverter window air conditioners for bedrooms, home offices, and nursery rooms. Standard 115V plug, ultra-quiet 44 dB, in stock in Waipahu.',
+        description: 'Compact 6,000 and 8,000 BTU LG Dual Inverter & GE Built-In window air conditioners for bedrooms, home offices, and nursery rooms. Standard 115V plug, ultra-quiet 44 dB, in stock in Waipahu.',
         url: 'https://www.affordablehome-ac.com/small-room-window-ac-6000-8000-btu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Small Room Window AC 6,000 to 8,000 BTU Oahu | Low Power 115V | Affordable Home A/C',
-        description: 'Compact 6,000 and 8,000 BTU LG Dual Inverter window air conditioners for bedrooms, home offices, and nursery rooms. Standard 115V plug, ultra-quiet 44 dB, in stock in Waipahu.',
+        description: 'Compact 6,000 and 8,000 BTU LG Dual Inverter & GE Built-In window air conditioners for bedrooms, home offices, and nursery rooms. Standard 115V plug, ultra-quiet 44 dB, in stock in Waipahu.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -53,10 +53,10 @@ const smallRoomFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "How quiet are the 6,000 and 8,000 BTU LG Dual Inverter models?",
+            "name": "How quiet are the 6,000 and 8,000 BTU LG Dual Inverter & GE models?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "In low sleep mode, LG Dual Inverter models operate at just 44 dB—quieter than a normal conversational whisper and significantly quieter than traditional rotary compressors."
+                "text": "In low sleep mode, LG Dual Inverter & GE models operate at just 44 dB—quieter than a normal conversational whisper and significantly quieter than traditional rotary compressors."
             }
         },
         {

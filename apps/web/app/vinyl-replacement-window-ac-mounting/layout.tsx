@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Vinyl Window AC Mounting Oahu | Prevent Frame Cracking | Affordable Home A/C'
     },
-    description: 'Specialized window air conditioner mounting for vinyl replacement windows on Oahu. Weight distribution brackets prevent cracked vinyl tracks.',
+    description: 'Specialized LG & GE window air conditioner mounting for vinyl replacement windows on Oahu. Weight distribution brackets prevent cracked vinyl tracks.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/vinyl-replacement-window-ac-mounting',
     },
     openGraph: {
         title: 'Vinyl Window AC Mounting Oahu | Prevent Frame Cracking | Affordable Home A/C',
-        description: 'Specialized window air conditioner mounting for vinyl replacement windows on Oahu. Weight distribution brackets prevent cracked vinyl tracks.',
+        description: 'Specialized LG & GE window air conditioner mounting for vinyl replacement windows on Oahu. Weight distribution brackets prevent cracked vinyl tracks.',
         url: 'https://www.affordablehome-ac.com/vinyl-replacement-window-ac-mounting',
         siteName: 'Affordable Home A/C',
         type: 'website',

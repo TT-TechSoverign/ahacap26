@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair | Affordable Home A/C'
     },
-    description: 'Smell burning plastic, fishy odor, or electrical smoke from your AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
+    description: 'Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu',
     },
     openGraph: {
         title: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair | Affordable Home A/C',
-        description: 'Smell burning plastic, fishy odor, or electrical smoke from your AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
+        description: 'Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
         url: 'https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',

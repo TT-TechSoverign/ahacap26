@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'AC Air Filter Cleaning & Replacement Hawaii | Washable Filter Care | Affordable Home A/C'
     },
-    description: 'Learn how to clean and replace window AC air filters in Hawaii homes. Protect against vog, red dirt, and pet dander while maintaining max cooling CFM.',
+    description: 'Learn how to clean and replace LG & GE window AC air filters in Hawaii homes. Protect against vog, red dirt, and pet dander while maintaining max cooling CFM.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/clean-air-filter-replacement-hawaii',
     },
     openGraph: {
         title: 'AC Air Filter Cleaning & Replacement Hawaii | Washable Filter Care | Affordable Home A/C',
-        description: 'Learn how to clean and replace window AC air filters in Hawaii homes. Protect against vog, red dirt, and pet dander while maintaining max cooling CFM.',
+        description: 'Learn how to clean and replace LG & GE window AC air filters in Hawaii homes. Protect against vog, red dirt, and pet dander while maintaining max cooling CFM.',
         url: 'https://www.affordablehome-ac.com/clean-air-filter-replacement-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',

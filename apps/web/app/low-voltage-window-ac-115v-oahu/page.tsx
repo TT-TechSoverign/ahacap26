@@ -63,7 +63,7 @@ export default function LowVoltageWindowAcPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        No electrician required. No expensive 230-volt rewiring. Plug our high-efficiency LG Dual Inverter window air conditioners directly into any standard 15-amp, 3-prong household outlet. Available from 6,000 up to 14,000 BTU.
+                        No electrician required. No expensive 230-volt rewiring. Plug our high-efficiency LG Dual Inverter & GE Built-In window air conditioners directly into any standard 15-amp, 3-prong household outlet. Available from 6,000 up to 14,000 BTU.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

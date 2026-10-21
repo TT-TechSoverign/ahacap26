@@ -1320,7 +1320,7 @@ export default function ProductDetailPage() {
 
                             <div className="flex items-center gap-3 shrink-0">
                                 <div className="text-right pr-2">
-                                    <div className="text-[9px] font-mono uppercase tracking-widest text-slate-400">Warehouse Direct</div>
+                                    <div className="text-[9px] font-mono uppercase tracking-widest text-slate-400">Waipahu LG &amp; GE Warehouse Direct</div>
                                     <div className="text-2xl font-header font-black text-cyan-400 leading-none">
                                         ${((isPromo && product.promo_price) ? product.promo_price : product.price).toLocaleString()}
                                     </div>

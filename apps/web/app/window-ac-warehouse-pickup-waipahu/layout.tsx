@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Warehouse Pickup Waipahu | Same-Day In-Stock | Affordable Home A/C'
     },
-    description: 'Pick up in-stock LG Dual Inverter window air conditioners directly from our central Waipahu warehouse (94-150 Leoleo St #203). Fast pickup by appointment with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
+    description: 'Pick up in-stock LG Dual Inverter & GE Built-In window air conditioners directly from our central Waipahu warehouse (94-150 Leoleo St #203). Fast pickup by appointment with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-warehouse-pickup-waipahu',
     },
     openGraph: {
         title: 'Window AC Warehouse Pickup Waipahu | Same-Day In-Stock | Affordable Home A/C',
-        description: 'Pick up in-stock LG Dual Inverter window air conditioners directly from our central Waipahu warehouse (94-150 Leoleo St #203). Fast pickup by appointment with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
+        description: 'Pick up in-stock LG Dual Inverter & GE Built-In window air conditioners directly from our central Waipahu warehouse (94-150 Leoleo St #203). Fast pickup by appointment with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-warehouse-pickup-waipahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Warehouse Pickup Waipahu | Same-Day In-Stock | Affordable Home A/C',
-        description: 'Pick up in-stock LG Dual Inverter window air conditioners directly from our central Waipahu warehouse (94-150 Leoleo St #203). Fast pickup by appointment with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
+        description: 'Pick up in-stock LG Dual Inverter & GE Built-In window air conditioners directly from our central Waipahu warehouse (94-150 Leoleo St #203). Fast pickup by appointment with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
