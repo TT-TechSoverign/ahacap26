@@ -582,26 +582,6 @@ export default function AdminPage() {
                                 <span>{isRefreshing ? 'Syncing...' : 'Refresh'}</span>
                             </button>
 
-                            <a 
-                                href="https://crm.affordablehome-ac.com" 
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-emerald-400 hover:text-white transition-all text-[10px] font-mono font-bold uppercase tracking-widest border border-emerald-500/25 px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20"
-                                title="Open AHAC CRM & Invoice Dispatch Portal"
-                            >
-                                <span>CRM Portal ↗</span>
-                            </a>
-
-                            <a 
-                                href="/dev-os" 
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-cyan-400 hover:text-white transition-all text-[10px] font-mono font-bold uppercase tracking-widest border border-cyan-500/25 px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 bg-cyan-500/10 hover:bg-cyan-500/20"
-                                title="Open Dev OS Autonomous Brain & Swarm Fleet"
-                            >
-                                <span>Dev OS ↗</span>
-                            </a>
-
                             <Link 
                                 href="/shop" 
                                 className="text-slate-300 hover:text-white transition-all text-[10px] font-bold uppercase tracking-widest border border-white/10 px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 bg-white/5 hover:bg-white/10"
