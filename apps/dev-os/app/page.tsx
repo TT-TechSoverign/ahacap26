@@ -881,7 +881,7 @@ export default function DevOsEagleEyePage() {
                                             {brainData?.status || 'ARMED_AND_SYNAPSED'}
                                         </span>
                                         <span className="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-2.5 py-0.5 font-mono text-[10px] text-cyan-300">
-                                            {brainData?.brain_version || 'v2.6.0-SOVEREIGN'}
+                                            {brainData?.brain_version || '2.7.0-SOVEREIGN'}
                                         </span>
                                     </div>
                                     <p className="mt-1 font-mono text-xs text-slate-400">
@@ -937,7 +937,7 @@ export default function DevOsEagleEyePage() {
                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                 <span className="text-slate-400 text-[10px] uppercase">Active Synapses</span>
                                 <div className="mt-1 flex items-baseline gap-2">
-                                    <span className="text-xl font-bold text-cyan-400">{brainData?.total_synapses || 80}</span>
+                                    <span className="text-xl font-bold text-cyan-400">{brainData?.total_synapses || 55}</span>
                                     <span className="text-[10px] text-emerald-400">100% Armed</span>
                                 </div>
                             </div>
@@ -958,7 +958,7 @@ export default function DevOsEagleEyePage() {
                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                 <span className="text-slate-400 text-[10px] uppercase">Knowledge Nodes</span>
                                 <div className="mt-1 flex items-baseline gap-2">
-                                    <span className="text-xl font-bold text-amber-400">{brainData?.knowledge_nodes_count || 42}</span>
+                                    <span className="text-xl font-bold text-amber-400">{brainData?.knowledge_nodes_count || 11}</span>
                                     <span className="text-[10px] text-amber-300/80">Hawaii Grounded</span>
                                 </div>
                             </div>
@@ -975,8 +975,10 @@ export default function DevOsEagleEyePage() {
                             <div className="flex flex-wrap gap-2">
                                 {(brainData?.active_directives || [
                                     "Mandate: By Appointment First — Zero Upfront Payment Barrier",
+                                    "100% LG & GE Window AC & Window AC Cleaning Focus (101 Canonical Routes)",
                                     "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
-                                    "Waipahu Direct Warehouse Pickup Fulfillment (+24% CRO)",
+                                    "3-Row Fixed NavbarV2 Viewport Clearance & Solid #060a12 Dropdown Armor",
+                                    "Mandatory Shop #rebate ($45 Hawaii Energy Rebate) & Isolated /admin Deck",
                                     "Strict Air-Tight Perimeter: Client-Initiated Outbound (Zero Inbound Reach)"
                                 ]).map((directive: string, idx: number) => (
                                     <div key={idx} className="flex items-center gap-1.5 rounded-lg border border-slate-800 bg-slate-900/90 px-3 py-1 text-xs text-slate-300 font-mono">
@@ -996,7 +998,7 @@ export default function DevOsEagleEyePage() {
                                 <div className="flex items-center gap-2">
                                     <Clock className="size-4 text-amber-400" />
                                     <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
-                                        Project Chronicle & Historical Timeline ({timelineData.length || 17} Epochs • Inception to Current)
+                                        Project Chronicle & Historical Timeline ({timelineData.length || 18} Phases • Epochs 1–21)
                                     </h4>
                                 </div>
                                 <span className="font-mono text-xs text-amber-400 hover:text-amber-300">
@@ -2611,7 +2613,7 @@ export default function DevOsEagleEyePage() {
                                             {/* Node 2: Master Brain */}
                                             <circle cx="250" cy="80" r="30" fill="#0f172a" stroke="#06b6d4" strokeWidth="2.5" />
                                             <text x="250" y="76" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold" fontFamily="monospace">MASTER BRAIN</text>
-                                            <text x="250" y="90" textAnchor="middle" fill="#94a3b8" fontSize="8" fontFamily="monospace">v2.6.0 Synapses</text>
+                                            <text x="250" y="90" textAnchor="middle" fill="#94a3b8" fontSize="8" fontFamily="monospace">v2.7.0 Synapses</text>
 
                                             {/* Node 3: Inspect Target */}
                                             <circle cx="480" cy="80" r="28" fill="#0f172a" stroke="#a855f7" strokeWidth="2" />

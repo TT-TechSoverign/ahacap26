@@ -1,7 +1,7 @@
 # Project State Report: Affordable Home A/C (AHAC)
 
-**Last Updated**: October 19, 2026  
-**Current Epoch**: `EPOCH 20 (October 19, 2026)`  
+**Last Updated**: October 20, 2026  
+**Current Epoch**: `EPOCH 21 (October 20, 2026)`  
 **Branch**: `main` (Production Synchronized)  
 **Host**: Hostinger VPS (`31.220.53.132`) • Docker Production Stack
 
@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-Affordable Home A/C is an enterprise-grade, high-velocity e-commerce and Window AC service booking platform serving the island of Oahu, Hawaii. The platform is **100% consolidated around LG & GE Window Air Conditioners ($395 to $1,200) and on-site Window AC Cleaning & Installation**, operating on a **By-Appointment-First** architecture with zero upfront checkout payment barriers for physical service leads, backed by an autonomous **40-Agent Sovereign Fleet (10 Sub-Masters)** and **Master Projects Brain v2.6.0**.
+Affordable Home A/C is an enterprise-grade, high-velocity e-commerce and Window AC service booking platform serving the island of Oahu, Hawaii. The platform is **100% consolidated around LG & GE Window Air Conditioners ($395 to $1,200) and on-site Window AC Cleaning & Installation**, operating on a **By-Appointment-First** architecture with zero upfront checkout payment barriers for physical service leads, backed by an autonomous **40-Agent Sovereign Fleet (10 Sub-Masters, 50 SOPs, 55 Neural Synapses)** and **Master Projects Brain v2.7.0-SOVEREIGN**.
 
 All state, agent runs, cognitive streams, and historical lineages are synchronized across **multi-worker Uvicorn processes via Redis** and **PostgreSQL 16**.
 
@@ -83,17 +83,25 @@ All state, agent runs, cognitive streams, and historical lineages are synchroniz
     - Synced live PostgreSQL `content_pages` (`path='/'`), `admin_users` (`brian@affordablehome-ac.com`, `Affordable Home A/C`), and `crm_products` (filtered out all 98 retired non-window rows and synchronized all 16 official LG & GE Window AC models + Window AC services), removed retired service sections from `AdminCalendar.tsx`, `types/content.ts`, and `MobileLayout.jsx`, aligned `CEER` efficiency ratings and Window AC chassis/coil/drain/LCDI terminology across all diagnostic/symptom pages, removed 25 unused static legacy image files from `apps/web/public/assets/`, and updated `ahac-crm` Stripe Checkout session creation (`GET`/`POST /api/v1/invoices/{id}/pay`) to use Stripe Dynamic Payment Methods with `sqlalchemy[asyncio]`/`greenlet`.
     - Built dedicated `/shop/ge-built-in-wall-ac-oahu` (`layout.tsx` & `page.tsx`) buyer guide for GE 26" Built-In Through-the-Wall models (`AJCQ08AWJ`, `AJCQ10AWJ`, `AJCQ12AXXWA` R32 Inverter), `RAB26A` wall sleeves, and LG Universal Fit wall/window units so all 101 canonical routes in `sitemap.ts` and `/sitemap` return `200 OK`.
     - Updated all 101 canonical Next.js routes (`layout.tsx`, `page.tsx`, `service-areas/[city]/page.tsx`), `content.json` / `content_seed.json`, `reporting_engine.py`, `analytics_swarm.py`, and regenerated `CEO-SEO-Report-{June,July,August,September}-2026.{md,html,docx}` so 100% of titles, descriptions, page copy, and Google Search Console rankings reflect **both LG & GE Window AC units and Window AC Cleaning**.
-    - Relocated and revamped the `/admin` Command Menu (`apps/web/app/admin/page.tsx` & `apps/web/app/globals.css`) below `NavbarV2` (`pt-20 md:pt-[192px]`) with a dedicated Command Deck (`+ Add Product`, `Refresh`, `View Shop`, `Logout`), scroll-synced sticky 4-tab navigation dock with live badge counts (`Inventory`, `Orders`, `Leads`, `Schedule`), full 4-column KPI cards, and always-visible product row `Edit` / `Delete` actions.
-  - **Zero Disruption to Window AC E-Commerce Store**:
-    - Verified `/shop`, `/shop/[slug]`, all 16 LG & GE models (`$395` to `$1,200`, `13` in stock / `208` physical units), 16/16 factory PDF spec sheets, Cart, Stripe Checkout, and `/admin` remain 100% intact.
+- **Epoch 21 (October 20, 2026) Swarm Omniscience v2.7.0, 3-Row Navbar Viewport Armor, Shop `#rebate` Restoration & `/admin` Command Deck Isolation**:
+  - **3-Row Fixed `NavbarV2` Viewport Clearance Across All 74 `page.tsx` Files**:
+    - Upgraded top padding across `/` (`pt-[88px] md:pt-[176px]`), all 72 content/shop/city `page.tsx` routes (`md:pt-[180px]`), and `/admin` (`pt-20 md:pt-[192px]`) so zero page content or hero badges are ever occluded by the 3-row fixed `NavbarV2`.
+  - **Storefront `/admin` Command Menu Revamp & Isolation**:
+    - Relocated `/admin` Command Menu below `NavbarV2` (`sticky top-[72px] md:top-[168px]`) with 4 scroll-synced storefront tabs (`orders`, `products`, `availability`, `security`), 4-column KPI strip, always-visible product `Edit`/`Delete` buttons, and strict removal of internal `CRM Portal` and `Dev OS` links.
+  - **`Shop Window AC` Dropdown Armor & `$45` Hawaii Energy Rebate (`#rebate`) Restoration**:
+    - Replaced invalid Tailwind `bg-[#0a0f18]/98` opacity syntax on the `Shop Window AC` dropdown in `NavbarV2.tsx` with a solid `bg-[#060a12]` `z-[120]` surface and added the `$45 Hawaii Energy Rebates` (`/shop#rebate`) quick-jump link.
+    - Restored `"rebate"` (`<RebateSection />`) to `shop.sections` and `shop.sectionOrder` across `ShopClient.tsx` (both default and filtered views), `content.json`, `content_seed.json`, and live PostgreSQL `content_pages` (`path='shop'`).
+  - **Full Swarm Knowledge & Intelligence Upgrade (`v2.7.0-SOVEREIGN`)**:
+    - Upgraded `MASTER_BRAIN_STATE` (`2.7.0-SOVEREIGN`, `55` neural synapses), all `10` Category Sub-Masters (`SUBMASTER_REGISTRY`), all `40` Specialized Agents (`AGENT_REGISTRY` & live `run_agent_*` diagnostic functions with `epoch_intelligence: "v2.7.0-EPOCH-21"`), and all `50` SOP dossiers (`apps/api/routers/dev_os_sops.py` & `apps/dev-os/app/sopsData.ts`) with live runtime verification of all Epoch 20–21 mandates.
 
 ---
 
 ## 4. Current Status & Cross-Session Handshake (`TRACKER`)
 
-- **New-Chat Handshake Codeword**: **`TRACKER`** (Confirmed active in `GEMINI.md` and Master Projects Brain v2.6.0).
-- **Fleet Health**: All 40 specialized agents report `[ACTIVE]` (`All Healthy: True`) across 10 Sub-Masters (`50` SOPs).
-- **Deployment Swarm**: 3-stage verification pipeline returns `OVERALL: VERIFIED_CLEAN` with 0 specification drift across all 16 catalog models (`12` in stock, `117` physical units, `$395` to `$1,200`) and 16/16 factory PDF spec sheets.
-- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), `prod-api` (`:8001`), `prod-db` (`:5433`), `prod-redis` (`:6380`), `ahac-crm-api`, and `ahac-crm-web` (`:8080`) operate with zero-cache headers, unified 16-model catalog IDs (`1–16`), `101` canonical routes, live Google Merchant XML feed, `<WindowAcQuickShop />` across city/silo/symptom pages, `/llms.txt`, `/api/indexnow`, and Zero-Cost US-Issued Cards Only Stripe checkout.
+- **New-Chat Handshake Codeword**: **`TRACKER`** (Confirmed active in `GEMINI.md` and Master Projects Brain v2.7.0-SOVEREIGN).
+- **Fleet Health**: All 40 specialized agents report `[ACTIVE]` (`All Healthy: True`, `epoch_intelligence: "v2.7.0-EPOCH-21"`) across 10 Sub-Masters (`50` SOPs, `55` Neural Synapses).
+- **Deployment Swarm**: 3-stage verification pipeline returns `OVERALL: VERIFIED_CLEAN` with 0 specification drift across all 16 catalog models (`13` in stock, `208` physical units, `$395` to `$1,200`), 16/16 factory PDF spec sheets, 16/16 2x Retina WebP mobile spec viewers, 74/74 `page.tsx` fixed-header viewport clearance, and active Shop `#rebate` in code + PostgreSQL.
+- **Production Alignment**: `prod-web` (`:3001`), `prod-dev-os` (`:3005`), `prod-api` (`:8001`), `prod-db` (`:5433`), `prod-redis` (`:6380`), `ahac-crm-api`, and `ahac-crm-web` (`:8080`) operate with zero-cache headers, unified 16-model catalog IDs (`1–16`), `101` canonical routes, live Google Merchant XML feed, `<WindowAcQuickShop />` across city/silo/symptom pages, `/llms.txt`, `/api/indexnow`, and Dynamic Payment Methods Stripe checkout.
 - **Perimeter Security**: 0 open inbound ports on local workstation; secret scanner reports 0 leaked tokens.
 - **Storefront Performance**: Next.js production build and TypeScript compiler (`npx tsc --noEmit` in `apps/web` and `apps/dev-os`, plus `14/14` pytest tests in `apps/api`) verified with 0 errors, sub-80KB WebP/SVG assets, Apple Pay/Google Pay enabled checkout, and GSC canonical armor deployed.
+

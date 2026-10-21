@@ -1,5 +1,5 @@
 import pytest
-from routers.dev_os import SUBMASTER_REGISTRY, AGENT_REGISTRY, AGENT_RUNNERS
+from routers.dev_os import MASTER_BRAIN_STATE, SUBMASTER_REGISTRY, AGENT_REGISTRY, AGENT_RUNNERS
 from routers.dev_os_sops import AGENT_SOPS
 
 def test_fleet_hierarchy_and_cardinality():
@@ -29,3 +29,17 @@ def test_all_submasters_have_valid_sops_and_unique_children():
     # Exactly 40 agents assigned with zero duplicates
     assert len(all_supervised_agents) == 40
     assert len(set(all_supervised_agents)) == 40
+
+def test_master_brain_v2_7_0_and_sop_completeness():
+    assert MASTER_BRAIN_STATE["brain_version"] == "2.7.0-SOVEREIGN"
+    assert len(MASTER_BRAIN_STATE["synapses"]) == 55
+    assert len(AGENT_SOPS) == 50
+    for sop_id, sop in AGENT_SOPS.items():
+        assert sop["id"] == sop_id
+        assert len(sop.get("mandate", "")) > 20
+        assert len(sop.get("oahu_grounding", "")) > 20
+        assert len(sop.get("inputs", [])) >= 2
+        assert len(sop.get("execution_steps", [])) >= 2
+        assert len(sop.get("outputs", [])) >= 2
+        assert len(sop.get("contingency_protocol", "")) > 10
+
