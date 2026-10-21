@@ -38,20 +38,20 @@ foreach ($pattern in $sensitivePatterns) {
     }
 }
 
-# 2. Check staged changes (excluding this scanner script)
+# 2. Check staged changes (excluding this scanner script and binary docx files)
 Write-Host "[2/5] Scanning Git diff & staged files..." -ForegroundColor Yellow
-$stagedDiff = git diff --staged -- ":!scripts/scan-secrets.ps1"
+$stagedDiff = git diff --staged -- ":!scripts/scan-secrets.ps1" ":!*.docx"
 foreach ($p in $patterns) {
-    if ($stagedDiff -match $p.Pattern) {
+    if ($stagedDiff -cmatch $p.Pattern) {
         $violations += "Staged diff contains $($p.Name)!"
     }
 }
 
-# 3. Check commit history (last 50 commits, excluding this scanner script)
+# 3. Check commit history (last 50 commits, excluding this scanner script and binary docx files)
 Write-Host "[3/5] Scanning Git commit history (last 50 commits)..." -ForegroundColor Yellow
-$recentLogs = git log -n 50 -p -- ":!scripts/scan-secrets.ps1"
+$recentLogs = git log -n 50 -p -- ":!scripts/scan-secrets.ps1" ":!*.docx"
 foreach ($p in $patterns) {
-    if ($recentLogs -match $p.Pattern) {
+    if ($recentLogs -cmatch $p.Pattern) {
         $violations += "Recent commit history contains $($p.Name)!"
     }
 }
@@ -84,7 +84,7 @@ foreach ($file in $filesToScan) {
         $content = [System.IO.File]::ReadAllText($file.FullName)
         if (-not $content) { continue }
         foreach ($p in $patterns) {
-            if ($content -match $p.Pattern) {
+            if ($content -cmatch $p.Pattern) {
                 $rel = Resolve-Path -Path $file.FullName -Relative
                 $violations += "File contains $($p.Name): $rel"
             }
