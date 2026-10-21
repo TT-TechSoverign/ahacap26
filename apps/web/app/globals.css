@@ -449,4 +449,16 @@ html, body {
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: contain;
 }
+
+/* Hide scrollbars on horizontal pill tracks while keeping scroll functionality */
+.scrollbar-none,
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
 

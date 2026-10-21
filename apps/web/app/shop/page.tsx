@@ -250,17 +250,27 @@ function ShopPageContent() {
 
     const CATEGORIES = [
         { id: 'ALL', label: 'All Units', count: products.length },
-        { id: 'dual_inverter', label: 'LG DUAL Inverter', count: products.filter(p => p.subcategory === 'dual_inverter').length },
-        { id: 'base', label: 'LG Standard Window', count: products.filter(p => p.subcategory === 'base').length },
-        { id: 'ge', label: 'GE Built-In (26" Sleeve)', count: products.filter(p => p.subcategory === 'ge').length },
-        { id: 'universal_fit', label: 'LG Cool + Heat (Wall/Window)', count: products.filter(p => p.subcategory === 'universal_fit').length },
-        { id: 'casement', label: '26" Wall Sleeve (RAB26A)', count: products.filter(p => p.subcategory === 'casement').length },
+        { id: 'dual_inverter', label: 'LG Dual Inverter', count: products.filter(p => p.subcategory === 'dual_inverter').length },
+        { id: 'base', label: 'LG Standard', count: products.filter(p => p.subcategory === 'base').length },
+        { id: 'ge', label: 'GE 26" Built-In', count: products.filter(p => p.subcategory === 'ge').length },
+        { id: 'universal_fit', label: 'LG Cool + Heat', count: products.filter(p => p.subcategory === 'universal_fit').length },
+        { id: 'casement', label: '26" Wall Sleeve', count: products.filter(p => p.subcategory === 'casement').length },
     ];
 
-    const sectionOrder = (content?.shop?.sections && content.shop.sections.includes("sizing-banner"))
+    const DEFAULT_SHOP_SECTIONS = [
+        "dual_inverter", "sizing-banner", "universal_fit", "base", "ge", "casement", "rebate", "appointment-banner", "logistics", "sizing-guide"
+    ];
+
+    const rawSections: string[] = (content?.shop?.sections && content.shop.sections.includes("sizing-banner"))
         ? content.shop.sections
+        : DEFAULT_SHOP_SECTIONS;
+
+    const sectionOrder: string[] = rawSections.includes("rebate")
+        ? rawSections
         : [
-            "dual_inverter", "sizing-banner", "universal_fit", "base", "ge", "casement", "appointment-banner", "logistics", "sizing-guide"
+            ...rawSections.slice(0, rawSections.indexOf("appointment-banner") !== -1 ? rawSections.indexOf("appointment-banner") : rawSections.length),
+            "rebate",
+            ...rawSections.slice(rawSections.indexOf("appointment-banner") !== -1 ? rawSections.indexOf("appointment-banner") : rawSections.length),
         ];
 
     const sectionMap: Record<string, React.ReactNode> = {
@@ -291,6 +301,13 @@ function ShopPageContent() {
                             <RotateCcw className="size-3 text-cyan-400" />
                             <span>Clean vs Replace Calculator</span>
                         </Link>
+                        <a 
+                            href="#rebate" 
+                            className="inline-flex items-center gap-1.5 text-emerald-300 hover:text-white bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/30 hover:border-emerald-400/60 transition-colors"
+                        >
+                            <Leaf className="size-3 text-emerald-400" />
+                            <span>How to Claim $45 Rebate &darr;</span>
+                        </a>
                     </div>
                     <a 
                         href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
@@ -592,10 +609,10 @@ function ShopPageContent() {
                                 <span>$50 Flat Island Delivery</span>
                             </span>
                             <span className="text-white/20 hidden sm:inline">•</span>
-                            <span className="inline-flex items-center gap-1.5 text-emerald-400">
+                            <a href="#rebate" className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 hover:underline transition-colors">
                                 <Leaf className="size-3.5 shrink-0" />
                                 <span>$45 Hawaii Energy Rebates</span>
-                            </span>
+                            </a>
                             <span className="text-white/20 hidden md:inline">•</span>
                             <span className="inline-flex items-center gap-1.5 text-amber-400">
                                 <ShieldCheck className="size-3.5 shrink-0" />
@@ -611,14 +628,14 @@ function ShopPageContent() {
                         
                         {/* Row 1: Horizontal Category Tabs + Sizing Shortcut */}
                         <div className="flex items-center justify-between gap-2 overflow-hidden">
-                            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none flex-1">
+                            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none no-scrollbar flex-1">
                                 {CATEGORIES.map(cat => (
                                     <button
                                         key={cat.id}
                                         type="button"
                                         onClick={() => setSelectedCategory(cat.id as any)}
                                         className={cn(
-                                            "px-3 py-1.5 rounded-xl text-xs font-header font-black uppercase tracking-wider shrink-0 transition-all flex items-center gap-1.5",
+                                            "px-2.5 xl:px-3 py-1.5 rounded-xl text-[11px] xl:text-xs font-header font-black uppercase tracking-wider shrink-0 transition-all flex items-center gap-1.5",
                                             selectedCategory === cat.id
                                                 ? "bg-primary text-slate-950 shadow-[0_0_15px_rgba(0,174,239,0.35)] scale-[1.02]"
                                                 : "bg-white/[0.04] text-slate-300 hover:text-white hover:bg-white/[0.08] border border-white/5"
@@ -956,6 +973,7 @@ function ShopPageContent() {
                                     compareList={compareList}
                                     onToggleCompare={handleToggleCompare}
                                 />
+                                {sectionMap["rebate"]}
                                 {sectionMap["appointment-banner"]}
                             </>
                         )
@@ -1468,12 +1486,12 @@ function LogisticsSection() {
 function RebateSection() {
     const { content } = useContent();
     return (
-        <section id="rebate" className="relative pb-8 pt-0 overflow-hidden group">
+        <section id="rebate" className="relative py-8 scroll-mt-48 overflow-hidden group">
             {/* Background elements */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
-            <div className="absolute inset-0 bg-emerald-500/[0.02] rounded-[2rem] mx-4 md:mx-0"></div>
+            <div className="absolute inset-0 bg-emerald-500/[0.03] border border-emerald-500/15 rounded-[2rem] mx-4 md:mx-0"></div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-2 md:space-y-4">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-6">
                 {/* Header */}
                 <SectionHeader
                     contentKey="shop.rebate"
@@ -1483,9 +1501,9 @@ function RebateSection() {
                     noBlur={true}
                     forceBreak={true}
                     topElement={
-                        <div className="inline-flex items-center gap-2 px-4 py-1 bg-cyan-500 border border-cyan-500 rounded-full text-white text-[10px] font-header font-black tracking-widest uppercase mb-2">
-                            <Leaf className="size-4" />
-                            <EditableText contentKey="shop.rebate.badge" />
+                        <div className="inline-flex items-center gap-2 px-4 py-1 bg-emerald-500/15 border border-emerald-500/40 rounded-full text-emerald-300 text-[10px] font-header font-black tracking-widest uppercase mb-2">
+                            <Leaf className="size-4 text-emerald-400" />
+                            <EditableText contentKey="shop.rebate.badge" defaultValue="Hawaii Energy Partner" />
                         </div>
                     }
                 />
@@ -1502,16 +1520,16 @@ function RebateSection() {
                                 <Link
                                     key={i}
                                     href="#dual_inverter"
-                                    className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 cursor-pointer"
+                                    className="industrial-card p-6 bg-[#0f131a] border border-white/10 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 cursor-pointer"
                                 >
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
-                                        <DynamicIcon name={stepIconName} className="text-emerald-500 size-8 group-hover/card:scale-110 transition-transform" />
+                                        <DynamicIcon name={stepIconName} className="text-emerald-400 size-8 group-hover/card:scale-110 transition-transform" />
                                     </div>
                                     <div className="space-y-3">
                                         <h3 className="text-white font-header font-black uppercase tracking-widest text-base group-hover/card:text-emerald-400 transition-colors group-hover/card:underline decoration-emerald-500 underline-offset-4">
                                             <EditableText contentKey={`shop.rebate.steps.${i}.title`} />
                                         </h3>
-                                        <p className="text-slate-500 text-[11px] leading-relaxed uppercase tracking-widest font-medium group-hover/card:text-slate-400 transition-colors">
+                                        <p className="text-slate-400 text-[11px] leading-relaxed uppercase tracking-widest font-medium group-hover/card:text-slate-300 transition-colors">
                                             <EditableText contentKey={`shop.rebate.steps.${i}.description`} />
                                         </p>
                                     </div>
@@ -1526,16 +1544,16 @@ function RebateSection() {
                                     href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 cursor-pointer"
+                                    className="industrial-card p-6 bg-[#0f131a] border border-white/10 rounded-2xl relative z-20 group/card flex flex-col items-center text-center space-y-4 hover:border-emerald-500/50 transition-all hover:-translate-y-1 cursor-pointer"
                                 >
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
-                                        <DynamicIcon name={stepIconName} className="text-emerald-500 size-8 group-hover/card:scale-110 transition-transform" />
+                                        <DynamicIcon name={stepIconName} className="text-emerald-400 size-8 group-hover/card:scale-110 transition-transform" />
                                     </div>
                                     <div className="space-y-3">
                                         <h3 className="text-white font-header font-black uppercase tracking-widest text-base group-hover/card:text-emerald-400 transition-colors group-hover/card:underline decoration-emerald-500 underline-offset-4">
                                             <EditableText contentKey={`shop.rebate.steps.${i}.title`} />
                                         </h3>
-                                        <p className="text-slate-500 text-[11px] leading-relaxed uppercase tracking-widest font-medium group-hover/card:text-slate-400 transition-colors">
+                                        <p className="text-slate-400 text-[11px] leading-relaxed uppercase tracking-widest font-medium group-hover/card:text-slate-300 transition-colors">
                                             <EditableText contentKey={`shop.rebate.steps.${i}.description`} />
                                         </p>
                                     </div>
@@ -1543,15 +1561,15 @@ function RebateSection() {
                             );
                         }
                         return (
-                            <div key={i} className="industrial-card p-6 bg-[#0f131a] border border-white/5 rounded-2xl relative group/card flex flex-col items-center text-center space-y-4">
+                            <div key={i} className="industrial-card p-6 bg-[#0f131a] border border-white/10 rounded-2xl relative group/card flex flex-col items-center text-center space-y-4">
                                 <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover/card:bg-emerald-500/20 transition-all duration-500">
-                                    <DynamicIcon name={stepIconName} className="text-emerald-500 size-8 group-hover/card:scale-110 transition-transform" />
+                                    <DynamicIcon name={stepIconName} className="text-emerald-400 size-8 group-hover/card:scale-110 transition-transform" />
                                 </div>
                                 <div className="space-y-3">
                                     <h3 className="text-white font-header font-black uppercase tracking-widest text-base">
                                         <EditableText contentKey={`shop.rebate.steps.${i}.title`} />
                                     </h3>
-                                    <p className="text-slate-500 text-[11px] leading-relaxed uppercase tracking-widest font-medium">
+                                    <p className="text-slate-400 text-[11px] leading-relaxed uppercase tracking-widest font-medium">
                                         <EditableText contentKey={`shop.rebate.steps.${i}.description`} />
                                     </p>
                                 </div>
@@ -1560,6 +1578,25 @@ function RebateSection() {
                     })}
                 </div>
 
+                {/* Direct Rebate Form Download & Full Eligibility Guide Bar */}
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a
+                        href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full sm:w-auto px-6 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:scale-[1.02] flex items-center justify-center gap-2"
+                    >
+                        <FileText className="size-4 shrink-0" />
+                        <span>Download Official $45 Rebate Form (PDF)</span>
+                    </a>
+                    <Link
+                        href="/hawaii-energy-ac-rebates-oahu"
+                        className="w-full sm:w-auto px-6 py-3.5 bg-slate-900 hover:bg-slate-800 border border-emerald-500/30 text-emerald-300 hover:text-white font-header font-bold uppercase text-xs tracking-wider rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+                    >
+                        <Leaf className="size-4 shrink-0 text-emerald-400" />
+                        <span>Full Oahu Rebate Eligibility &amp; Guide &rarr;</span>
+                    </Link>
+                </div>
 
             </div>
         </section>
