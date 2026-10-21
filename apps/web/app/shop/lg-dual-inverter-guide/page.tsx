@@ -320,7 +320,7 @@ export default function LgDualInverterGuidePage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
             />
 
-            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-[130px] md:pt-[150px] pb-24">
+            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-[96px] md:pt-[180px] pb-24">
                 {/* Hero Header */}
                 <div className="text-center max-w-4xl mx-auto space-y-4 mb-14">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-widest">

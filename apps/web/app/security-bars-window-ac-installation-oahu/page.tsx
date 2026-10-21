@@ -44,7 +44,7 @@ export default function SecurityBarsWindowAcInstallationPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
 
     return (
-        <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[85px] md:pt-[165px] pb-36 lg:pb-24">
+        <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
                 
                 <div className="mb-6">

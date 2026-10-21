@@ -9,7 +9,7 @@ export default function Section1HeroHomeV2() {
     const { inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
 
     return (
-        <section className="relative w-full min-h-[520px] md:h-[650px] flex items-center justify-center bg-transparent py-8 md:py-0">
+        <section className="relative w-full min-h-[500px] md:min-h-[580px] flex items-center justify-center bg-transparent py-10 md:py-14">
             {/* Readability Overlay over global background */}
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/70 pointer-events-none" />
 
@@ -39,7 +39,7 @@ export default function Section1HeroHomeV2() {
                             contentKey="home_v2.hero.narrative"
                             as="p"
                             multiLine={true}
-                            defaultValue="Building comfort for our community, one project at a time. Whether you're a homeowner, realtor, or contractor, we master the dynamics of residential and commercial cooling—from HOA-compliant upgrades to new construction—so you can focus on what matters most."
+                            defaultValue="Building comfort for our community, one window at a time. Whether you're a homeowner, condo resident, or property manager, we specialize in whisper-quiet LG Dual Inverter & GE Built-In Window ACs, custom jalousie & 26&quot; thru-the-wall installation, and deep Window AC cleaning across Oahu."
                         />
                     </div>
 

@@ -77,7 +77,7 @@ export default function SizingPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
-            <main className="max-w-4xl mx-auto px-6 pt-[140px] md:pt-[165px]">
+            <main className="max-w-4xl mx-auto px-6 pt-[96px] md:pt-[180px]">
                 {/* Header branding */}
                 <div className="text-center mb-8 lg:mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <Link 

@@ -81,43 +81,44 @@ export default function NavbarV2() {
             <div className="pointer-events-auto shadow-md relative flex flex-col">
 
                 {/* Row 0: Top Trust & Dispatch Utility Ribbon */}
-                <div className="bg-[#05080e] border-b border-slate-800/80 text-[11px] font-mono text-slate-300 py-1.5 px-6">
-                    <div className="max-w-7xl mx-auto flex justify-between items-center">
-                        <div className="flex items-center gap-2.5 text-slate-400">
+                <div className="bg-[#05080e] border-b border-slate-800/80 text-[11px] font-mono text-slate-300 py-1.5 px-4 lg:px-6">
+                    <div className="max-w-7xl mx-auto flex justify-between items-center gap-4 whitespace-nowrap overflow-hidden">
+                        <div className="flex items-center gap-2 lg:gap-2.5 text-slate-400 whitespace-nowrap">
                             <Link 
                                 href="/reviews" 
                                 prefetch={false}
-                                className="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 transition-colors group cursor-pointer hover:underline decoration-amber-400/50 underline-offset-2"
+                                className="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 transition-colors group cursor-pointer hover:underline decoration-amber-400/50 underline-offset-2 shrink-0"
                                 title="Read 142+ Verified Customer Reviews"
                             >
-                                ⭐ <span>4.9/5 Rating (142+ Reviews)</span>
+                                ⭐ <span>4.9/5 (142+ Reviews)</span>
                             </Link>
                             <span className="text-slate-600">•</span>
-                            <span>Insured Oahu Specialists • Est. 2005</span>
+                            <span className="hidden xl:inline shrink-0">Insured Oahu Specialists • Est. 2005</span>
+                            <span className="xl:hidden shrink-0">Est. 2005 • Oahu</span>
                             <span className="text-slate-600">•</span>
-                            <span className="text-emerald-400 font-bold">Free Estimates ($0 to Book)</span>
-                            <span className="text-slate-600">•</span>
+                            <span className="text-emerald-400 font-bold shrink-0">Free Estimates ($0)</span>
+                            <span className="text-slate-600 hidden lg:inline">•</span>
                             <Link
                                 href="/shop"
                                 prefetch={false}
-                                className="text-cyan-300 hover:text-white font-bold transition-colors hover:underline"
+                                className="hidden lg:inline text-cyan-300 hover:text-white font-bold transition-colors hover:underline shrink-0"
                             >
-                                {inStockAcCount} Window AC Models In-Stock (${minPrice}–${maxPrice.toLocaleString()}) • Same-Day Waipahu Pickup
+                                {inStockAcCount} Window AC Models In-Stock (${minPrice}–${maxPrice.toLocaleString()}) • Waipahu Pickup
                             </Link>
                         </div>
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-3 whitespace-nowrap shrink-0">
                             <a 
                                 href="tel:808-488-1111" 
-                                className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-bold tracking-wide transition-colors"
+                                className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-bold tracking-wide transition-colors shrink-0"
                                 title="Direct Dispatch (808) 488-1111"
                             >
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
                                 <span>Office: (808) 488-1111</span>
                             </a>
-                            <span className="text-slate-700">|</span>
+                            <span className="text-slate-700 hidden xl:inline">|</span>
                             <a 
                                 href="mailto:office@affordablehome-ac.com" 
-                                className="text-slate-400 hover:text-cyan-300 transition-colors"
+                                className="text-slate-400 hover:text-cyan-300 transition-colors hidden xl:inline shrink-0"
                             >
                                 office@affordablehome-ac.com
                             </a>

@@ -28,7 +28,7 @@ export default function ServiceAreasPage() {
             </div>
 
             {/* Header Section */}
-            <div className="relative z-10 pt-[140px] md:pt-[165px] lg:pt-[175px] pb-16 px-6 md:px-12 max-w-7xl mx-auto">
+            <div className="relative z-10 pt-[96px] md:pt-[180px] pb-16 px-6 md:px-12 max-w-7xl mx-auto">
                 <div className="flex flex-col items-center text-center space-y-6">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono uppercase tracking-[0.2em]">
                         <LucideIcons.MapPin className="size-3.5 text-cyan-400" />

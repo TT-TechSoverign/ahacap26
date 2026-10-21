@@ -111,7 +111,7 @@ export default function ReviewsPage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
 
-            <main className="pt-[130px] md:pt-[150px] lg:pt-[160px] pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <main className="pt-[96px] md:pt-[180px] pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                 {/* Breadcrumbs Sequence */}
                 <nav className="flex items-center gap-2 text-xs font-mono text-slate-400 mb-8 overflow-x-auto whitespace-nowrap" aria-label="Breadcrumb">
                     <Link href="/" className="hover:text-cyan-400 transition-colors flex items-center gap-1">
