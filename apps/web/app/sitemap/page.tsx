@@ -4,6 +4,7 @@ import { Product } from '@/types/inventory';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { generateProductSlug } from '@/lib/utils';
 import { BackToTop } from '@/components/BackToTop';
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 import contentData from '@/lib/content/content.json';
 import { Navigation, ArrowRight, Package, MapPin, Wrench, Shield, Home, ShoppingCart, AlertCircle, Sparkles } from 'lucide-react';
 
@@ -11,9 +12,21 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
     title: 'Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C',
-    description: 'Browse all 100+ pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and window AC cleaning.',
+    description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and window AC cleaning.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sitemap',
+    },
+    openGraph: {
+        title: 'Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C',
+        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and window AC cleaning.',
+        url: 'https://www.affordablehome-ac.com/sitemap',
+        siteName: 'Affordable Home A/C',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C',
+        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and window AC cleaning.',
     },
 };
 
@@ -333,7 +346,34 @@ export default async function SitemapPage() {
                             )}
                         </div>
                     </div>
+
+                    <OahuEEATAuthorityBar topicTitle="Complete 101-Page Oahu LG & GE Window AC Sales, Installation & Cleaning Directory" />
                 </main>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "CollectionPage",
+                            "name": "Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C",
+                            "url": "https://www.affordablehome-ac.com/sitemap",
+                            "description": "Browse all 101 canonical pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and window AC cleaning."
+                        })
+                    }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [
+                                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+                                { "@type": "ListItem", "position": 2, "name": "Sitemap", "item": "https://www.affordablehome-ac.com/sitemap" }
+                            ]
+                        })
+                    }}
+                />
             <BackToTop visible={true} />
         </div>
     );

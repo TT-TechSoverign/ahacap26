@@ -167,7 +167,7 @@ function CheckoutContent() {
     }
 
     return (
-        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[140px] md:pt-[165px]">
+        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[140px] md:pt-[180px]">
             <div className="max-w-7xl mx-auto space-y-8">
 
                 {/* Header */}

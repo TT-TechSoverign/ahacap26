@@ -99,7 +99,7 @@ export default function CommercialWindowAcPage() {
                         <ShieldCheck className="size-8 text-emerald-400" />
                         <h3 className="font-header font-bold text-lg text-white uppercase">Security Guard Shacks</h3>
                         <p className="text-slate-300 font-sans text-xs leading-relaxed">
-                            Compact 6,000 to 8,000 BTU models keep guard stations cool 24/7 on standard 115V circuits with minimal electric draw.
+                            Compact 6,000 to 8,000 BTU models keep guard stations cool around the clock on standard 115V circuits with minimal electric draw.
                         </p>
                     </div>
 

@@ -63,25 +63,28 @@ export default function robots(): MetadataRoute.Robots {
         rules: [
             {
                 userAgent: '*',
-                allow: ['/', '/api/google-feed', '/merchant-feed.xml'],
+                allow: ['/', '/llms.txt', '/api/google-feed', '/merchant-feed.xml'],
                 disallow: sharedDisallows,
-            },
-            {
-                userAgent: ['OAI-SearchBot', 'ChatGPT-User', 'PerplexityBot'],
-                allow: ['/', '/api/google-feed', '/merchant-feed.xml'],
-                disallow: sharedDisallows,
-                crawlDelay: 10,
             },
             {
                 userAgent: [
-                    'GPTBot',
-                    'ClaudeBot',
                     'Google-Extended',
+                    'OAI-SearchBot',
+                    'ChatGPT-User',
+                    'GPTBot',
+                    'PerplexityBot',
+                    'ClaudeBot',
                     'Applebot-Extended',
-                    'Bytespider',
                     'Amazonbot',
                     'FacebookBot',
-                    'meta-externalagent',
+                    'meta-externalagent'
+                ],
+                allow: ['/', '/llms.txt', '/api/google-feed', '/merchant-feed.xml'],
+                disallow: sharedDisallows,
+            },
+            {
+                userAgent: [
+                    'Bytespider',
                     'CCBot',
                     'AhrefsBot',
                     'SemrushBot',

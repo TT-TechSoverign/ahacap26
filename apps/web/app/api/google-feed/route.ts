@@ -165,7 +165,7 @@ export async function GET() {
         : '115V_Standard_Plug';
 
       const customLabels = [
-        product.subcategory === 'dual_inverter' ? '<g:custom_label_0>Hawaii Energy $45 Rebate Eligible</g:custom_label_0>' : '<g:custom_label_0>Standard Efficiency</g:custom_label_0>',
+        (product.subcategory === 'dual_inverter' || product.id === 15) ? '<g:custom_label_0>Hawaii Energy $45 Rebate Eligible</g:custom_label_0>' : '<g:custom_label_0>Standard Efficiency</g:custom_label_0>',
         product.stock > 0 ? '<g:custom_label_1>Waipahu_In_Stock</g:custom_label_1>' : '<g:custom_label_1>Out_Of_Stock</g:custom_label_1>',
         `<g:custom_label_2>${escapeXml(roomSizeTier)}</g:custom_label_2>`,
         `<g:custom_label_3>${escapeXml(plugTier)}</g:custom_label_3>`,

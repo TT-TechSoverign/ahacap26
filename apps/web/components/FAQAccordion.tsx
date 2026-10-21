@@ -10,7 +10,7 @@ interface FAQAccordionProps {
 }
 
 export function FAQAccordion({ productName }: FAQAccordionProps) {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
   const faqs = getProductFaqs(productName);
 
   const toggle = (idx: number) => {
@@ -34,6 +34,7 @@ export function FAQAccordion({ productName }: FAQAccordionProps) {
             >
               <button 
                 onClick={() => toggle(idx)}
+                aria-expanded={isOpen}
                 className="w-full flex items-center justify-between text-left py-3 group focus:outline-none"
               >
                 <span className="font-header font-black uppercase text-[11px] md:text-[12px] text-slate-100 tracking-wider group-hover:text-primary transition-colors">
@@ -44,21 +45,11 @@ export function FAQAccordion({ productName }: FAQAccordionProps) {
                 />
               </button>
               
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: 'easeOut' }}
-                    className="overflow-hidden"
-                  >
-                    <p className="text-slate-300 text-xs leading-relaxed font-sans pb-3 pl-1">
-                      {faq.a}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div className={isOpen ? 'block overflow-hidden' : 'hidden overflow-hidden'}>
+                <p className="text-slate-300 text-xs leading-relaxed font-sans pb-3 pl-1">
+                  {faq.a}
+                </p>
+              </div>
             </div>
           );
         })}

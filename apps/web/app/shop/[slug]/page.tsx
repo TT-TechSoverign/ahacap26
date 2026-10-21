@@ -41,25 +41,14 @@ import {
 } from 'lucide-react';
 import { StockBadge } from '@/components/StockBadge';
 import { SpatialCaliperHUD } from '@/components/SpatialCaliperHUD';
+import { YelpReviews } from '@/components/YelpReviews';
+import { FAQAccordion } from '@/components/FAQAccordion';
+import { RelatedProducts } from '@/components/RelatedProducts';
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 import dynamic from 'next/dynamic';
 
-// Lazy load interactive widgets to minimize main-thread JS payload
+// Lazy load interactive BTU calculator widget to minimize main-thread JS payload
 const ACCalculator = dynamic(() => import('@/components/ACCalculator').then(mod => mod.ACCalculator), {
-    ssr: false,
-    loading: () => <div className="h-44 bg-surface-dark/50 rounded-2xl animate-pulse border border-border-dark" />
-});
-
-const YelpReviews = dynamic(() => import('@/components/YelpReviews').then(mod => mod.YelpReviews), {
-    ssr: false,
-    loading: () => <div className="h-44 bg-surface-dark/50 rounded-2xl animate-pulse border border-border-dark" />
-});
-
-const FAQAccordion = dynamic(() => import('@/components/FAQAccordion').then(mod => mod.FAQAccordion), {
-    ssr: false,
-    loading: () => <div className="h-44 bg-surface-dark/50 rounded-2xl animate-pulse border border-border-dark" />
-});
-
-const RelatedProducts = dynamic(() => import('@/components/RelatedProducts').then(mod => mod.RelatedProducts), {
     ssr: false,
     loading: () => <div className="h-44 bg-surface-dark/50 rounded-2xl animate-pulse border border-border-dark" />
 });
@@ -1024,6 +1013,11 @@ export default function ProductDetailPage() {
             <section className="px-4 md:px-8 max-w-6xl mx-auto mb-16">
                 <RelatedProducts currentProduct={product} />
             </section>
+
+            {/* First-Hand Oahu E-E-A-T Authority & Citation Block */}
+            <div className="px-4 md:px-8 max-w-6xl mx-auto">
+                <OahuEEATAuthorityBar topicTitle={`${product.name} — Oahu Window AC Specifications, Sizing & Installation`} />
+            </div>
 
             {/* Spec Sheet Preview Modal (Desktop Iframe + Mobile Multi-Page Touch Scroll Viewer) */}
             {isSpecModalOpen && specSheetUrl && (

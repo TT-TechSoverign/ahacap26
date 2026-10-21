@@ -23,6 +23,29 @@ export default function ServiceAreasPage() {
 
     return (
         <div className="min-h-screen bg-slate-950 font-sans pb-24 relative overflow-hidden selection:bg-cyan-500 selection:text-slate-950">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://www.affordablehome-ac.com"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Service Areas",
+                                "item": "https://www.affordablehome-ac.com/service-areas"
+                            }
+                        ]
+                    })
+                }}
+            />
             {/* Dark background grid texture overlay */}
             <div className="absolute inset-0 z-0 opacity-15 pointer-events-none" 
                  style={{ backgroundImage: 'radial-gradient(#334155 1px, transparent 1px)', backgroundSize: '32px 32px' }}>

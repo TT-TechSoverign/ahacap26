@@ -130,7 +130,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         openGraph: {
             title,
             description,
-            url: `/shop/${canonicalSlug}`,
+            url: `${domain}/shop/${canonicalSlug}`,
             siteName: 'Affordable Home A/C',
             images: product.image_url ? [
                 {

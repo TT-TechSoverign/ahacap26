@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        url: '/',
+        url: 'https://www.affordablehome-ac.com',
         siteName: 'Affordable Home A/C',
         images: [
             {
