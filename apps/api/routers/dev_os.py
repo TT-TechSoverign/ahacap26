@@ -2229,7 +2229,7 @@ async def run_agent_catalog_auditor(db: AsyncSession) -> Dict[str, Any]:
     promo_clean = True
     if db:
         try:
-            res = await db.execute(text("SELECT id, stock, promo_price, discount_percent FROM products WHERE coverage_aham IS NOT NULL ORDER BY id"))
+            res = await db.execute(text("SELECT id, stock, promo_price, discount_percent FROM products ORDER BY id"))
             rows = res.fetchall()
             db_count = len(rows)
             for r_id, r_stock, r_promo, r_disc in rows:
