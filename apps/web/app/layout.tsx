@@ -109,11 +109,13 @@ export default function RootLayout({
                     dangerouslySetInnerHTML={{
                         __html: JSON.stringify({
                             "@context": "https://schema.org",
-                            "@type": "HVACBusiness",
+                            "@type": ["HVACBusiness", "Store"],
                             "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                             "name": "Affordable Home A/C",
                             "legalName": "Affordable Home A/C LLC",
                             "alternateName": "Affordable Home Air Conditioning",
+                            "foundingDate": "2005",
+                            "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
                             "image": "https://www.affordablehome-ac.com/assets/hero-cards/ahac-hero-background-2.webp",
                             "url": "https://www.affordablehome-ac.com",
                             "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
@@ -123,6 +125,10 @@ export default function RootLayout({
                             "sameAs": [
                                 "https://www.yelp.com/biz/affordable-home-air-conditioning-waipahu",
                                 "https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797"
+                            ],
+                            "brand": [
+                                { "@type": "Brand", "name": "LG" },
+                                { "@type": "Brand", "name": "GE Appliances" }
                             ],
                             "address": {
                                 "@type": "PostalAddress",
@@ -160,26 +166,66 @@ export default function RootLayout({
                             },
                             "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover, Apple Pay, Google Pay",
                             "currenciesAccepted": "USD",
-                            "priceRange": "$$",
+                            "priceRange": "$395 - $1,200",
                             "knowsAbout": [
-                                "Window Air Conditioners",
-                                "LG Dual Inverter AC",
-                                "GE 26-Inch Built-In Thru-The-Wall AC",
-                                "Window AC & Jalousie Louver Installation",
-                                "Window AC Deep Cleaning",
-                                "AC Maintenance",
-                                "AC Repair",
-                                "Hawaii Energy Cash Rebates",
-                                "Oahu Air Conditioning"
+                                "LG Dual Inverter Window Air Conditioners",
+                                "GE 26-Inch Built-In Thru-The-Wall Air Conditioners",
+                                "Window AC & Hawaiian Jalousie Louver Installation",
+                                "Window AC Deep Cleaning & Mold Sanitization",
+                                "Window AC Clean-vs-Replace Evaluations",
+                                "Hawaii Energy $45 Window AC Cash Rebates",
+                                "Oahu Single-Wall Redwood Heat-Load Sizing"
+                            ],
+                            "potentialAction": [
+                                {
+                                    "@type": "OrderAction",
+                                    "name": "Order In-Stock LG & GE Window AC Units Online ($395–$1,200)",
+                                    "target": {
+                                        "@type": "EntryPoint",
+                                        "urlTemplate": "https://www.affordablehome-ac.com/shop",
+                                        "inLanguage": "en-US",
+                                        "actionPlatform": [
+                                            "http://schema.org/DesktopWebPlatform",
+                                            "http://schema.org/MobileWebPlatform"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "@type": "ReserveAction",
+                                    "name": "Schedule Oahu Window AC Deep Cleaning & Coil Sanitization",
+                                    "target": {
+                                        "@type": "EntryPoint",
+                                        "urlTemplate": "https://www.affordablehome-ac.com/ac-cleaning-oahu",
+                                        "inLanguage": "en-US",
+                                        "actionPlatform": [
+                                            "http://schema.org/DesktopWebPlatform",
+                                            "http://schema.org/MobileWebPlatform"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "@type": "ReserveAction",
+                                    "name": "Request $0 Free In-Home Window AC Installation Estimate",
+                                    "target": {
+                                        "@type": "EntryPoint",
+                                        "urlTemplate": "https://www.affordablehome-ac.com/window-ac-installation",
+                                        "inLanguage": "en-US",
+                                        "actionPlatform": [
+                                            "http://schema.org/DesktopWebPlatform",
+                                            "http://schema.org/MobileWebPlatform"
+                                        ]
+                                    }
+                                }
                             ],
                             "hasOfferCatalog": {
                                 "@type": "OfferCatalog",
                                 "name": "Oahu Window Air Conditioning Sales, Installation & Cleaning",
                                 "itemListElement": [
-                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "In-Stock LG Dual Inverter & GE Window AC Sales ($395–$1,200)" } },
-                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC & Jalousie Louver Installation ($0 Free Assessment)" } },
-                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC Deep Cleaning & Mold Sanitization" } },
-                                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window AC Repair & Troubleshooting ($175 Flat-Rate Diagnostic)" } }
+                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/shop", "itemOffered": { "@type": "Service", "name": "In-Stock LG Dual Inverter & GE Window AC Sales ($395–$1,200 • Free Waipahu Pickup or $50 Oahu Delivery)" } },
+                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/ac-cleaning-oahu", "itemOffered": { "@type": "Service", "name": "Window AC Deep Cleaning, Coil Sanitization & Antimicrobial Pan Treatment" } },
+                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/window-ac-installation", "itemOffered": { "@type": "Service", "name": "Window AC & Hawaiian Jalousie Louver Installation ($0 Free In-Home Estimate)" } },
+                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/shop/ge-built-in-wall-ac-oahu", "itemOffered": { "@type": "Service", "name": "GE 26-Inch Through-the-Wall Built-In Sleeve AC Replacement" } },
+                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac", "itemOffered": { "@type": "Service", "name": "Window AC Clean-vs-Replace Assessment ($0 Free In-Home Estimate)" } }
                                 ]
                             },
                             "contactPoint": [

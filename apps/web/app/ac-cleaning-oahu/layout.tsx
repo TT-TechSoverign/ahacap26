@@ -84,10 +84,14 @@ const acCleaningFaqSchema = {
 const hvacServiceSchema = {
     "@context": "https://schema.org",
     "@type": "HVACService",
-    "name": "Window AC Cleaning & Mold Remediation Service",
+    "@id": "https://www.affordablehome-ac.com/ac-cleaning-oahu#service",
+    "name": "Oahu Window AC Deep Cleaning, Coil Sanitization & Clean-vs-Replace Assessment",
+    "url": "https://www.affordablehome-ac.com/ac-cleaning-oahu",
     "provider": {
         "@type": "HVACBusiness",
+        "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
         "name": "Affordable Home A/C",
+        "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
         "telephone": "+1-808-488-1111",
         "address": {
             "@type": "PostalAddress",
@@ -98,25 +102,32 @@ const hvacServiceSchema = {
             "addressCountry": "US"
         }
     },
-    "areaServed": "Oahu",
-    "description": "Professional window air conditioning cleaning, black mold sanitation, and preventative coil care across Oahu.",
+    "areaServed": "Oahu, Hawaii",
+    "description": "On-site window air conditioner evaporator/condenser coil cleaning, antimicrobial pan treatment, condensate drain clearing, floor drop-cloth protection, and honest clean-vs-replace assessments across all 22 Oahu neighborhoods.",
+    "potentialAction": {
+        "@type": "ReserveAction",
+        "name": "Schedule Oahu Window AC Cleaning or $0 Clean-vs-Replace Assessment",
+        "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.affordablehome-ac.com/ac-cleaning-oahu",
+            "inLanguage": "en-US"
+        }
+    },
     "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Window AC Cleaning Services",
+        "name": "Oahu Window AC Cleaning & Assessment Services",
         "itemListElement": [
             {
                 "@type": "Offer",
-                "name": "Standard Window AC Cleaning & Coil Rinse",
-                "price": "175.00",
+                "name": "Window AC Clean-vs-Replace Assessment (By Appointment)",
+                "price": "0.00",
                 "priceCurrency": "USD",
-                "description": "Routine filter and coil care, drain pan flush, and performance inspection."
+                "description": "Free on-site evaluation of coil condition, salt-air fin integrity, and HECO power draw with custom itemized quote."
             },
             {
                 "@type": "Offer",
-                "name": "Deep Window AC Sanitization & Mold Purge",
-                "price": "225.00",
-                "priceCurrency": "USD",
-                "description": "Deep clean air scoop & blower wheel, flush condensate slinger pan, and antimicrobial coil wash."
+                "name": "On-Site Window AC Coil Cleaning & Antimicrobial Pan Sanitization",
+                "description": "Evaporator and condenser coil foaming wash, blower wheel sanitization, condensate drain clearing, and protective floor drop-cloth service by appointment."
             }
         ]
     }

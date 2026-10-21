@@ -1590,7 +1590,7 @@ function RebateSection() {
                         <span>Download Official $45 Rebate Form (PDF)</span>
                     </a>
                     <Link
-                        href="/hawaii-energy-ac-rebates-oahu"
+                        href="/hawaii-energy-rebate"
                         className="w-full sm:w-auto px-6 py-3.5 bg-slate-900 hover:bg-slate-800 border border-emerald-500/30 text-emerald-300 hover:text-white font-header font-bold uppercase text-xs tracking-wider rounded-xl transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
                     >
                         <Leaf className="size-4 shrink-0 text-emerald-400" />

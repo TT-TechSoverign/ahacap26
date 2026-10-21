@@ -141,7 +141,7 @@ export default function NavbarV2() {
                                     GE
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/hawaii-energy-ac-rebates-oahu" className="text-[#00B5E2] font-sans font-bold tracking-tight text-sm relative group cursor-pointer block pb-1">
+                                <Link prefetch={false} href="/hawaii-energy-rebate" className="text-[#00B5E2] font-sans font-bold tracking-tight text-sm relative group cursor-pointer block pb-1">
                                     Hawai&apos;i Energy
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -166,7 +166,7 @@ export default function NavbarV2() {
                                     DUAL INVERTER
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/thru-the-wall-ac-replacement-oahu" className="text-blue-400 font-sans font-bold italic tracking-widest text-xs relative group cursor-pointer block">
+                                <Link prefetch={false} href="/shop/ge-built-in-wall-ac-oahu" className="text-blue-400 font-sans font-bold italic tracking-widest text-xs relative group cursor-pointer block">
                                     26&quot; THRU-THE-WALL
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -174,7 +174,7 @@ export default function NavbarV2() {
                                     WINDOW AC CLEANING
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#00B5E2] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/waipahu-ac-warehouse-pickup" className="text-emerald-400 font-sans font-extrabold tracking-tighter text-xs relative group cursor-pointer block">
+                                <Link prefetch={false} href="/window-ac-warehouse-pickup-waipahu" className="text-emerald-400 font-sans font-extrabold tracking-tighter text-xs relative group cursor-pointer block">
                                     WAIPAHU PICKUP
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>

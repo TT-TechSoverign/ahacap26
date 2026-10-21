@@ -219,6 +219,20 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             Yes! We provide full on-site dispatch of technicians for custom jalousie and standard window AC installation, window AC deep cleaning, and clean-vs-replace assessments directly to {cityData.name}. We also offer Oahu flat-rate $50 delivery or free local Waipahu warehouse pickup on all in-stock window AC purchases.
                         </p>
                     </details>
+
+                    <details className="group bg-slate-900/70 border border-slate-800 hover:border-cyan-500/30 rounded-2xl p-5 transition-all [&_svg]:open:-rotate-180">
+                        <summary className="flex items-center justify-between cursor-pointer list-none text-white font-header font-bold text-sm sm:text-base select-none">
+                            <span>Where can {cityData.name} homeowners order an in-stock LG or GE window AC today?</span>
+                            <span className="text-cyan-400 ml-4 shrink-0 transition-transform duration-300">
+                                <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <p className="mt-4 text-slate-300 text-sm leading-relaxed border-t border-slate-800/80 pt-4 font-sans">
+                            Homeowners in {cityData.name} can order factory-sealed LG Dual Inverter and GE 26-inch Built-In window air conditioners ($395–$1,200) online at affordablehome-ac.com/shop or by calling (808) 488-1111. Choose Free Waipahu Warehouse Pickup by appointment (94-150 Leoleo St. #203, Waipahu, HI 96797) or $50 flat-rate delivery to {cityData.name}, plus a $45 Hawaii Energy cash rebate on qualifying inverter models.
+                        </p>
+                    </details>
                 </div>
             </section>
 
@@ -238,10 +252,12 @@ export default function LocalServiceAreaPage({ params }: Props) {
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
-                        "@type": "HVACBusiness",
+                        "@type": ["HVACBusiness", "Store"],
                         "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                         "name": "Affordable Home A/C",
                         "alternateName": "Affordable Home Air Conditioning",
+                        "foundingDate": "2005",
+                        "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
                         "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
                         "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
                         "url": "https://www.affordablehome-ac.com",
@@ -265,6 +281,13 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             "latitude": "21.3855",
                             "longitude": "-158.0076"
                         },
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "4.9",
+                            "reviewCount": "142",
+                            "bestRating": "5",
+                            "worstRating": "1"
+                        },
                         "openingHoursSpecification": [
                             {
                                 "@type": "OpeningHoursSpecification",
@@ -279,9 +302,9 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 "closes": "14:00"
                             }
                         ],
-                        "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover",
+                        "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover, Apple Pay, Google Pay",
                         "currenciesAccepted": "USD",
-                        "priceRange": "$$",
+                        "priceRange": "$395 - $1,200",
                         "areaServed": {
                             "@type": "City",
                             "name": cityData.name,
@@ -290,13 +313,25 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 "name": "Hawaii"
                             }
                         },
+                        "potentialAction": [
+                            {
+                                "@type": "OrderAction",
+                                "name": `Order LG & GE Window AC Units in ${cityData.name} ($395–$1,200)`,
+                                "target": "https://www.affordablehome-ac.com/shop"
+                            },
+                            {
+                                "@type": "ReserveAction",
+                                "name": `Schedule Window AC Deep Cleaning in ${cityData.name}`,
+                                "target": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
+                            }
+                        ],
                         "hasOfferCatalog": {
                             "@type": "OfferCatalog",
                             "name": `Window AC Sales, Installation & Cleaning in ${cityData.name}`,
                             "itemListElement": [
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `In-Stock LG & GE Window AC Sales & Delivery in ${cityData.name} ($395–$1,200)` } },
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Window AC & Jalousie Installation in ${cityData.name}` } },
-                                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": `Window AC Deep Cleaning & Repair in ${cityData.name}` } }
+                                { "@type": "Offer", "url": "https://www.affordablehome-ac.com/shop", "itemOffered": { "@type": "Service", "name": `In-Stock LG & GE Window AC Sales & Delivery in ${cityData.name} ($395–$1,200)` } },
+                                { "@type": "Offer", "url": "https://www.affordablehome-ac.com/window-ac-installation", "itemOffered": { "@type": "Service", "name": `Window AC & Jalousie Installation in ${cityData.name} ($0 Free In-Home Estimate)` } },
+                                { "@type": "Offer", "url": "https://www.affordablehome-ac.com/ac-cleaning-oahu", "itemOffered": { "@type": "Service", "name": `Window AC Deep Cleaning & Sanitization in ${cityData.name}` } }
                             ]
                         }
                     })
@@ -364,6 +399,14 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 "acceptedAnswer": {
                                     "@type": "Answer",
                                     "text": `Yes! We provide full on-site dispatch of technicians for custom jalousie and standard window AC installation, window AC deep cleaning, and clean-vs-replace assessments directly to ${cityData.name}. We also offer Oahu flat-rate $50 delivery or free local Waipahu warehouse pickup on all in-stock window AC purchases.`
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": `Where can ${cityData.name} homeowners order an in-stock LG or GE window AC today?`,
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": `Homeowners in ${cityData.name} can order factory-sealed LG Dual Inverter and GE 26-inch Built-In window air conditioners ($395–$1,200) online at affordablehome-ac.com/shop or by calling (808) 488-1111. Choose Free Waipahu Warehouse Pickup by appointment (94-150 Leoleo St. #203, Waipahu, HI 96797) or $50 flat-rate delivery to ${cityData.name}, plus a $45 Hawaii Energy cash rebate on qualifying inverter models.`
                                 }
                             }
                         ]

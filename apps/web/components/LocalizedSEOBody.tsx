@@ -110,11 +110,94 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                             Did you know that the humidity in {city} can cause toxic mold to grow deep inside your unit? Combined with silent salt-air corrosion, an unmaintained window AC quickly becomes a health hazard and leads to unexpected breakdowns. 
                         </p>
                         <p>
-                            Whether you need urgent <Link href="/ac-repair-oahu" className="font-bold text-[#00E5FF] hover:underline">air conditioning troubleshooting Oahu</Link> homeowners trust, routine <Link href="/ac-cleaning-oahu" className="font-bold text-[#00E5FF] hover:underline">affordable window ac cleaning</Link>, or a comprehensive <Link href="/ac-maintenance-service-contract-oahu" className="font-bold text-[#00E5FF] hover:underline">window ac maintenance plan</Link>, our Oahu specialists are ready. 
+                            Whether you need urgent <Link href="/ac-repair-oahu" className="font-bold text-[#00E5FF] hover:underline">air conditioning troubleshooting Oahu</Link> homeowners trust, routine <Link href="/ac-cleaning-oahu" className="font-bold text-[#00E5FF] hover:underline">affordable window ac cleaning</Link>, or a comprehensive <Link href="/seasonal-ac-maintenance-plans-oahu" className="font-bold text-[#00E5FF] hover:underline">window ac maintenance plan</Link>, our Oahu specialists are ready. 
                         </p>
                         <p>
                             Our <Link href="/clean-vs-replace-window-ac" className="font-bold text-[#00E5FF] hover:underline">clean vs replace guidance</Link> and window AC sanitization protocols clear mold, dust, and salt-air buildup to restore crisp airflow and extend the life of your equipment.
                         </p>
+                    </div>
+                </div>
+
+                {/* First-Hand Oahu Engineering & BTU Dual-Sizing Matrix (E-E-A-T Information Gain) */}
+                <div className="p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-cyan-500/20 shadow-xl mt-2">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+                        <div>
+                            <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-400 block mb-1">
+                                Island Microclimate Calibration™ • HECO ~44.2¢/kWh Verified
+                            </span>
+                            <h3 className="font-header font-black text-xl md:text-2xl text-white uppercase tracking-tight">
+                                {city} Window AC Dual-Sizing &amp; In-Stock Model Guide
+                            </h3>
+                        </div>
+                        <div className="flex flex-wrap gap-2.5">
+                            <Link
+                                href="/shop"
+                                className="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-header font-black text-xs uppercase tracking-wider transition-all"
+                            >
+                                Order Window AC ($395–$1,200) &rarr;
+                            </Link>
+                            <Link
+                                href="/ac-cleaning-oahu"
+                                className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-cyan-500/30 text-cyan-300 font-header font-bold text-xs uppercase tracking-wider transition-all"
+                            >
+                                Book Window AC Cleaning &rarr;
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse text-xs md:text-sm font-sans">
+                            <thead>
+                                <tr className="border-b border-slate-800 text-slate-400 font-mono uppercase text-[11px]">
+                                    <th className="py-3 pr-4">Room Type in {city}</th>
+                                    <th className="py-3 px-4">Oahu Single-Wall Sq. Ft.</th>
+                                    <th className="py-3 px-4">Recommended LG / GE Model</th>
+                                    <th className="py-3 pl-4">Rebate &amp; HECO Impact</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-800/70 text-slate-300">
+                                <tr>
+                                    <td className="py-3.5 pr-4 font-bold text-white">Bedroom / Home Office</td>
+                                    <td className="py-3.5 px-4">120 – 280 sq. ft. (6k–8k BTU)</td>
+                                    <td className="py-3.5 px-4">
+                                        <Link href="/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm" className="text-cyan-400 hover:underline font-semibold">
+                                            LG LW8022IVSM (8,000 BTU 115V)
+                                        </Link>
+                                    </td>
+                                    <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • 44dB Sleep-Quiet</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-3.5 pr-4 font-bold text-white">Master Bedroom / Studio</td>
+                                    <td className="py-3.5 px-4">280 – 450 sq. ft. (10k–12k BTU)</td>
+                                    <td className="py-3.5 px-4">
+                                        <Link href="/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm" className="text-cyan-400 hover:underline font-semibold">
+                                            LG LW1222IVSM (12,000 BTU 115V)
+                                        </Link>
+                                    </td>
+                                    <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • Saves ~$424/yr</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-3.5 pr-4 font-bold text-white">26&quot; Condo Thru-the-Wall Sleeve</td>
+                                    <td className="py-3.5 px-4">250 – 450 sq. ft. (8.2k–12k BTU)</td>
+                                    <td className="py-3.5 px-4">
+                                        <Link href="/shop/15-ge-12-000-btu-ajcq12axxwa" className="text-cyan-400 hover:underline font-semibold">
+                                            GE AJCQ12AXXWA (R-32 Inverter)
+                                        </Link>
+                                    </td>
+                                    <td className="py-3.5 pl-4 text-cyan-300 font-medium">True 26&quot; Wall Sleeve Fit</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-3.5 pr-4 font-bold text-white">Living Room / Open Layout</td>
+                                    <td className="py-3.5 px-4">500 – 1,000+ sq. ft. (18k–23.5k BTU)</td>
+                                    <td className="py-3.5 px-4">
+                                        <Link href="/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm" className="text-cyan-400 hover:underline font-semibold">
+                                            LG LW1822IVSM (18,000 BTU 230V)
+                                        </Link>
+                                    </td>
+                                    <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • Heavy Dehumidification</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -123,57 +206,17 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                     <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 group">
                         <LucideIcons.Truck className="w-10 h-10 text-[#00E5FF] opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" strokeWidth={1.5} />
                         <h4 className="font-header font-black text-lg text-white uppercase tracking-widest">Fast Dispatch</h4>
-                        <p className="text-sm text-slate-400 font-light leading-relaxed">We maintain a localized fleet ready to service the {city} area swiftly and professionally.</p>
+                        <p className="text-sm text-slate-400 font-light leading-relaxed">We maintain a localized fleet ready to service the {city} area with protective floor drop cloths and $0 Free In-Home Estimates.</p>
                     </div>
                     <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 group">
                         <LucideIcons.Package className="w-10 h-10 text-[#00E5FF] opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" strokeWidth={1.5} />
-                        <h4 className="font-header font-black text-lg text-white uppercase tracking-widest">Local Inventory</h4>
-                        <p className="text-sm text-slate-400 font-light leading-relaxed">No waiting for mainland freight. We stock premium LG & GE units on-island for immediate deployment.</p>
+                        <h4 className="font-header font-black text-lg text-white uppercase tracking-widest">Waipahu Warehouse</h4>
+                        <p className="text-sm text-slate-400 font-light leading-relaxed">16 LG &amp; GE models ($395–$1,200) stocked at 94-150 Leoleo St. #203, Waipahu for free pickup by appointment or $50 {city} delivery.</p>
                     </div>
                     <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 group">
                         <LucideIcons.ShieldCheck className="w-10 h-10 text-[#00E5FF] opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" strokeWidth={1.5} />
                         <h4 className="font-header font-black text-lg text-white uppercase tracking-widest">Trusted Since 2005</h4>
-                        <p className="text-sm text-slate-400 font-light leading-relaxed">Fully insured Oahu window AC &amp; cleaning specialists serving Hawaii families for over 20 years.</p>
-                    </div>
-                </div>
-
-                {/* Localized FAQ Accordion Block */}
-                <div className="pt-12 border-t border-slate-800/50 mt-4">
-                    <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 md:p-8">
-                        <div className="flex items-center gap-2 mb-6">
-                            <LucideIcons.HelpCircle className="size-5 text-[#00E5FF]" />
-                            <h3 className="font-header font-black uppercase text-sm tracking-wider text-white">Frequently Asked Questions for {city} Residents</h3>
-                        </div>
-
-                        <div className="space-y-4 font-sans">
-                            {[
-                                {
-                                    q: `What is the most efficient Window AC unit for ${city}'s high humidity?`,
-                                    a: `For ${city}'s tropical climate, we highly recommend units with variable-speed inverter compressors, such as the LG Dual Inverter window AC or GE Built-In Variable Speed 26" wall unit. These units adjust cooling capacity dynamically, which keeps HECO energy bills up to 40% lower while continuously pulling moisture out of the air.`
-                                },
-                                {
-                                    q: `How often do window AC units need cleaning in ${city}?`,
-                                    a: `Due to ${city}'s salt-air exposure and humidity, we recommend rinsing window AC slide-out filters every 2 to 4 weeks and scheduling a professional Window AC deep cleaning and coil sanitization every 6 to 12 months. Regular maintenance removes accumulated mold, dust, and coastal salt deposits, restoring airflow efficiency by up to 30%.`
-                                },
-                                {
-                                    q: `Does Affordable Home A/C deliver products and dispatch technicians to ${city}?`,
-                                    a: `Yes! We provide on-site dispatch of Oahu technicians for Window AC deep cleaning, custom jalousie and horizontal slider window AC installation, and 26" thru-the-wall replacements directly to ${city}. We also offer Oahu flat-rate $50 delivery or free local Waipahu warehouse pickup on all in-stock LG & GE window AC purchases.`
-                                }
-                            ].map((faq, idx) => (
-                                <details 
-                                    key={idx} 
-                                    className="group border-b border-slate-800 last:border-0 pb-4 last:pb-0"
-                                >
-                                    <summary className="flex items-center justify-between text-left font-header font-black uppercase text-xs md:text-sm text-slate-200 tracking-wider hover:text-[#00E5FF] transition-colors cursor-pointer list-none py-2 select-none focus:outline-none">
-                                        <span>{faq.q}</span>
-                                        <LucideIcons.ChevronDown className="size-4 text-slate-400 group-open:rotate-180 group-open:text-[#00E5FF] transition-transform duration-300 shrink-0 ml-4" />
-                                    </summary>
-                                    <p className="text-slate-300 text-xs md:text-sm leading-relaxed font-sans pt-2 pl-1 max-w-4xl">
-                                        {faq.a}
-                                    </p>
-                                </details>
-                            ))}
-                        </div>
+                        <p className="text-sm text-slate-400 font-light leading-relaxed">Waipahu Warehouse Direct &bull; Insured Oahu Cooling Specialists &bull; Est. 2005 (4.9★ across 142 Oahu homeowner reviews).</p>
                     </div>
                 </div>
 
