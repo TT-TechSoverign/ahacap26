@@ -1704,7 +1704,7 @@ async def run_agent_db_guardian(db: AsyncSession) -> Dict[str, Any]:
 
     shop_rebate_db_synced = True
     try:
-        cp_res = await db.execute(text("SELECT content FROM content_pages WHERE slug = 'shop' LIMIT 1"))
+        cp_res = await db.execute(text("SELECT data FROM content_pages WHERE path = 'shop' LIMIT 1"))
         row = cp_res.fetchone()
         if row and row[0]:
             c_data = row[0] if isinstance(row[0], dict) else json.loads(row[0])
@@ -1712,7 +1712,7 @@ async def run_agent_db_guardian(db: AsyncSession) -> Dict[str, Any]:
             sec_order = c_data.get("sectionOrder", [])
             shop_rebate_db_synced = ("rebate" in sections) and ("rebate" in sec_order)
     except Exception:
-        pass
+        await db.rollback()
 
     backup_info = {"status": "configured", "path": "/var/backups/ahac_db"}
     if os.path.exists("/var/backups/ahac_db"):
