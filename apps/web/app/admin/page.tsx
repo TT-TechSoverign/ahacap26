@@ -210,8 +210,27 @@ export default function AdminPage() {
         }
     }, []);
 
-    const fetchProducts = useCallback(async () => {
-        setLoading(true);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [navHeaderVisible, setNavHeaderVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const latest = window.scrollY;
+            const direction = latest > lastScrollY ? 'down' : 'up';
+            if (latest > 50 && direction === 'down' && navHeaderVisible) {
+                setNavHeaderVisible(false);
+            } else if ((direction === 'up' || latest <= 50) && !navHeaderVisible) {
+                setNavHeaderVisible(true);
+            }
+            setLastScrollY(latest);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollY, navHeaderVisible]);
+
+    const fetchProducts = useCallback(async (silent = false) => {
+        if (!silent) setLoading(true);
         try {
             const res = await fetch(`/api/v1/products`, { cache: 'no-store' });
             if (res.ok) {
@@ -221,12 +240,12 @@ export default function AdminPage() {
         } catch (err) {
             console.error('Failed to fetch products', err);
         } finally {
-            setLoading(false);
+            if (!silent) setLoading(false);
         }
     }, []);
 
-    const fetchOrders = useCallback(async () => {
-        setLoading(true);
+    const fetchOrders = useCallback(async (silent = false) => {
+        if (!silent) setLoading(true);
         try {
             const res = await adminFetch(`/api/v1/admin/orders`, { cache: 'no-store' });
             if (res.ok) {
@@ -236,12 +255,12 @@ export default function AdminPage() {
         } catch (err) {
             console.error('Failed to fetch orders', err);
         } finally {
-            setLoading(false);
+            if (!silent) setLoading(false);
         }
     }, [adminFetch]);
 
-    const fetchLeads = useCallback(async () => {
-        setLoading(true);
+    const fetchLeads = useCallback(async (silent = false) => {
+        if (!silent) setLoading(true);
         try {
             const res = await adminFetch(`/api/v1/admin/leads`, { cache: 'no-store' });
             if (res.ok) {
@@ -251,7 +270,7 @@ export default function AdminPage() {
         } catch (err) {
             console.error('Failed to fetch leads', err);
         } finally {
-            setLoading(false);
+            if (!silent) setLoading(false);
         }
     }, [adminFetch]);
 
@@ -261,11 +280,32 @@ export default function AdminPage() {
         if (activeTab === 'leads') fetchLeads();
     }, [activeTab, fetchProducts, fetchOrders, fetchLeads]);
 
+    const refreshAllData = useCallback(async () => {
+        setIsRefreshing(true);
+        try {
+            await Promise.allSettled([
+                fetchProducts(true),
+                fetchOrders(true),
+                fetchLeads(true),
+            ]);
+        } finally {
+            setIsRefreshing(false);
+        }
+    }, [fetchProducts, fetchOrders, fetchLeads]);
+
     useEffect(() => {
         if (isAuthenticated) {
             refreshData();
         }
     }, [isAuthenticated, refreshData]);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            fetchProducts(true);
+            fetchOrders(true);
+            fetchLeads(true);
+        }
+    }, [isAuthenticated, fetchProducts, fetchOrders, fetchLeads]);
 
     const handleDelete = async (id: number) => {
         if (!confirm('Are you sure you want to delete this product?')) return;
@@ -408,14 +448,12 @@ export default function AdminPage() {
 
     if (!isAuthenticated) {
         return (
-            <div className="min-h-screen bg-black text-white font-sans selection:bg-primary/30 flex items-center justify-center">
-                {/* Navbar Removed for Clean Login */}
-
+            <div className="min-h-screen bg-black text-white font-sans selection:bg-primary/30 flex items-center justify-center pt-24 md:pt-[180px] pb-16">
                 <div className="container mx-auto px-6 flex flex-col items-center justify-center">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="w-full max-w-md p-8 bg-[#0a0e14] border border-white/5 rounded-3xl shadow-2xl shadow-primary/5"
+                        className="w-full max-w-md p-8 bg-[#0a0e14] border border-white/10 rounded-3xl shadow-2xl shadow-primary/10"
                     >
                         <div className="text-center mb-10">
                             <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-primary/20 shadow-[0_0_20px_rgba(0,174,239,0.15)]">
@@ -456,134 +494,313 @@ export default function AdminPage() {
         );
     }
 
+    const inStockModelsCount = products.filter(p => (Number(p.stock) || 0) > 0).length;
+    const outOfStockModelsCount = products.filter(p => (Number(p.stock) || 0) <= 0).length;
+    const totalPhysicalUnits = products.reduce((acc, p) => acc + (Number(p.stock) || 0), 0);
+    const totalInventoryValue = products.reduce((acc, p) => acc + ((Number(p.price) || 0) * (Number(p.stock) || 0)), 0);
+    const urgentLeadsCount = leads.filter(l => l.urgency === 'ASAP').length;
+
+    const tabDefinitions: { id: Tab; label: string; badge: string; urgentBadge?: string }[] = [
+        {
+            id: 'inventory',
+            label: content.admin.tabs.inventory || 'Inventory',
+            badge: `${products.length} Models`,
+        },
+        {
+            id: 'orders',
+            label: content.admin.tabs.orders || 'Orders',
+            badge: `${orders.length}`,
+        },
+        {
+            id: 'leads',
+            label: content.admin.tabs.leads || 'Leads',
+            badge: `${leads.length}`,
+            urgentBadge: urgentLeadsCount > 0 ? `${urgentLeadsCount} ASAP` : undefined,
+        },
+        {
+            id: 'schedule',
+            label: 'Schedule',
+            badge: 'Live Dates',
+        },
+    ];
+
     return (
-        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-20 pt-[40px]">
-            {/* Admin Header - Static */}
-            <header
-                className="w-full bg-[#06090e]/80 backdrop-blur-md border-b border-white/10 px-6 py-4 shadow-lg shadow-black/50 sticky top-0 z-40 mb-8"
-            >
-                <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto">
+        <div className="min-h-screen bg-[#05070a] text-slate-100 font-sans pb-24 pt-20 md:pt-[192px]">
+            <main className="max-w-[1440px] mx-auto px-4 sm:px-6">
+                {/* Relocated & Revamped Admin Command Deck (Clearly positioned below NavbarV2) */}
+                <div className="bg-gradient-to-r from-[#080d14] via-[#0a111a] to-[#080d14] border border-primary/25 rounded-2xl p-4 sm:p-6 shadow-2xl shadow-primary/5 mb-4">
+                    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
-                            <div className="relative group">
+                            <div className="relative group shrink-0">
                                 <motion.div 
                                     animate={{ rotate: 360 }}
                                     transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                                    className="size-11 bg-gradient-to-tr from-primary to-[#00f3ff] rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 border border-primary/30"
+                                    className="size-12 bg-gradient-to-tr from-primary to-[#00f3ff] rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 border border-primary/30"
                                 >
-                                    <Settings className="size-5 text-black" strokeWidth={2.5} />
+                                    <Settings className="size-6 text-black" strokeWidth={2.5} />
                                 </motion.div>
                                 <div className="absolute inset-0 bg-primary/20 blur-md rounded-xl -z-10 group-hover:bg-primary/40 transition-all duration-300" />
                             </div>
-                            <div className="hidden sm:block">
-                                <h2 className="text-white font-header font-black tracking-widest uppercase text-lg leading-none flex items-center gap-2">
-                                    {content.admin.nav.title}
-                                    <span className="inline-block size-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_#10b981]" />
-                                </h2>
-                                <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1 font-mono">{content.admin.nav.subtitle}</p>
+                            <div>
+                                <div className="flex flex-wrap items-center gap-2.5">
+                                    <h1 className="text-white font-header font-black tracking-widest uppercase text-lg sm:text-xl leading-none">
+                                        {content.admin.nav.title}
+                                    </h1>
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                                        <span className="size-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_#10b981]" />
+                                        Live DB Sync
+                                    </span>
+                                </div>
+                                <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1 font-mono">
+                                    {content.admin.nav.subtitle} • Waipahu Warehouse Direct ({inStockModelsCount}/{products.length} Models In-Stock • {totalPhysicalUnits} Units)
+                                </p>
                             </div>
                         </div>
 
-                        {/* Tabs */}
-                        <nav className="flex items-center bg-black/50 p-1.5 rounded-xl border border-white/5 relative w-full sm:w-auto justify-center sm:justify-start">
-                            {(['inventory', 'orders', 'leads', 'schedule'] as const).map((tab) => {
-                                const isActive = activeTab === tab;
-                                const TabIcon = TabIconMap[tab];
+                        {/* Top Command Action Toolbar */}
+                        <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto justify-start lg:justify-end">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setActiveTab('inventory');
+                                    setIsAdding(true);
+                                }}
+                                className="bg-primary text-black px-4 sm:px-5 py-2.5 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-white transition-all flex items-center gap-2 shadow-lg shadow-primary/20"
+                            >
+                                <Plus className="size-4" strokeWidth={3} />
+                                <span>{content.admin.nav.add_product}</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={refreshAllData}
+                                disabled={isRefreshing}
+                                className="text-slate-200 hover:text-white transition-all text-[10px] font-mono font-bold uppercase tracking-widest border border-white/15 px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 bg-white/5 hover:bg-white/10"
+                                title="Refresh Live Inventory, Orders & Service Leads"
+                            >
+                                <RefreshCw className={cn("size-3.5 text-primary", isRefreshing && "animate-spin")} />
+                                <span>{isRefreshing ? 'Syncing...' : 'Refresh'}</span>
+                            </button>
+
+                            <a 
+                                href="https://crm.affordablehome-ac.com" 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-emerald-400 hover:text-white transition-all text-[10px] font-mono font-bold uppercase tracking-widest border border-emerald-500/25 px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20"
+                                title="Open AHAC CRM & Invoice Dispatch Portal"
+                            >
+                                <span>CRM Portal ↗</span>
+                            </a>
+
+                            <a 
+                                href="/dev-os" 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-cyan-400 hover:text-white transition-all text-[10px] font-mono font-bold uppercase tracking-widest border border-cyan-500/25 px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 bg-cyan-500/10 hover:bg-cyan-500/20"
+                                title="Open Dev OS Autonomous Brain & Swarm Fleet"
+                            >
+                                <span>Dev OS ↗</span>
+                            </a>
+
+                            <Link 
+                                href="/shop" 
+                                className="text-slate-300 hover:text-white transition-all text-[10px] font-bold uppercase tracking-widest border border-white/10 px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 bg-white/5 hover:bg-white/10"
+                            >
+                                <ShoppingBag className="size-3.5" />
+                                <span>{content.admin.nav.view_shop}</span>
+                            </Link>
+
+                            <button 
+                                type="button"
+                                onClick={handleLogout} 
+                                className="px-3.5 py-2.5 flex items-center gap-1.5 rounded-xl border border-red-500/30 text-red-400 hover:text-white hover:bg-red-500/20 hover:border-red-500/50 transition-all text-[10px] font-black uppercase tracking-widest"
+                                title="Logout of Admin Command Center"
+                            >
+                                <LogOut className="size-3.5" />
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Sticky Scroll-Synced Admin Navigation Bar (Never hidden behind NavbarV2) */}
+                <div
+                    className={cn(
+                        "sticky z-40 transition-all duration-300 mb-6",
+                        navHeaderVisible ? "top-[68px] md:top-[178px]" : "top-[68px] md:top-3"
+                    )}
+                >
+                    <div className="bg-[#060a10]/95 backdrop-blur-xl border border-white/15 rounded-2xl p-2 shadow-2xl shadow-black/90 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2">
+                        <nav className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 w-full md:w-auto">
+                            {tabDefinitions.map((tabObj) => {
+                                const isActive = activeTab === tabObj.id;
+                                const TabIcon = TabIconMap[tabObj.id];
                                 return (
                                     <button
-                                        key={tab}
-                                        //@ts-ignore
-                                        onClick={() => setActiveTab(tab)}
-                                        className={`relative px-5 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-colors z-10 flex items-center gap-1.5 ${
-                                            isActive ? 'text-black font-extrabold' : 'text-slate-400 hover:text-white'
-                                        }`}
+                                        key={tabObj.id}
+                                        type="button"
+                                        onClick={() => setActiveTab(tabObj.id)}
+                                        className={cn(
+                                            "relative px-4 py-3 rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all z-10 flex items-center justify-center sm:justify-start gap-2",
+                                            isActive
+                                                ? "text-black font-extrabold shadow-lg shadow-primary/20"
+                                                : "text-slate-300 hover:text-white hover:bg-white/5"
+                                        )}
                                     >
                                         {isActive && (
                                             <motion.div
                                                 layoutId="active-admin-tab"
-                                                className="absolute inset-0 bg-white rounded-lg -z-10 shadow-lg shadow-white/10"
+                                                className="absolute inset-0 bg-gradient-to-r from-white via-cyan-100 to-white rounded-xl -z-10 shadow-lg shadow-white/10"
                                                 transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                                             />
                                         )}
-                                        <TabIcon className="size-4" />
-                                        {tab === 'schedule' ? 'Schedule' : content.admin.tabs[tab as keyof typeof content.admin.tabs]}
+                                        <TabIcon className={cn("size-4 shrink-0", isActive ? "text-black" : "text-primary")} />
+                                        <span>{tabObj.label}</span>
+                                        <span
+                                            className={cn(
+                                                "px-2 py-0.5 rounded-full text-[9px] font-mono font-black tracking-normal",
+                                                isActive
+                                                    ? "bg-black/15 text-black"
+                                                    : "bg-white/10 text-cyan-300"
+                                            )}
+                                        >
+                                            {tabObj.badge}
+                                        </span>
+                                        {tabObj.urgentBadge && (
+                                            <span className="px-1.5 py-0.5 rounded-full text-[8px] font-mono font-black bg-red-500 text-white animate-pulse">
+                                                {tabObj.urgentBadge}
+                                            </span>
+                                        )}
                                     </button>
                                 );
                             })}
                         </nav>
-                    </div>
-                    <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-                        <a 
-                            href="/dev-os" 
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-cyan-400 hover:text-white transition-all text-[10px] font-mono font-bold uppercase tracking-widest border border-cyan-500/20 px-3.5 py-2.5 rounded-lg flex items-center gap-1.5 bg-cyan-500/10 hover:bg-cyan-500/20 hover:border-cyan-500/40"
-                            title="Open Dev OS Autonomous Brain & Swarm Fleet"
-                        >
-                            <span>Dev OS ↗</span>
-                        </a>
-                        {activeTab === 'inventory' && (
-                            <button
-                                onClick={() => setIsAdding(true)}
-                                className="bg-white text-black px-6 py-2.5 rounded-lg font-black uppercase text-[10px] tracking-widest hover:bg-primary hover:text-black transition-all flex items-center gap-2 shadow-lg shadow-white/5 hover:shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0"
-                            >
-                                <Plus className="size-4" /> {content.admin.nav.add_product}
-                            </button>
-                        )}
-                        <Link 
-                            href="/shop" 
-                            className="text-slate-300 hover:text-white transition-all text-[10px] font-bold uppercase tracking-widest border border-white/10 px-5 py-2.5 rounded-lg hidden md:flex items-center gap-1.5 bg-white/5 hover:bg-white/10 hover:border-white/20 hover:-translate-y-0.5 active:translate-y-0"
-                        >
-                            <ShoppingBag className="size-4" />
-                            {content.admin.nav.view_shop}
-                        </Link>
-                        <button 
-                            onClick={handleLogout} 
-                            className="size-11 flex items-center justify-center rounded-xl border border-red-500/20 text-red-500/60 hover:text-red-500 hover:bg-red-500/10 hover:border-red-500/40 transition-all hover:scale-105 active:scale-95"
-                            title="Logout"
-                        >
-                            <LogOut className="size-5" />
-                        </button>
+
+                        <div className="hidden md:flex items-center gap-2 pr-1">
+                            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider px-2">
+                                Active View: <strong className="text-primary">{activeTab.toUpperCase()}</strong>
+                            </span>
+                            {activeTab === 'inventory' && (
+                                <button
+                                    type="button"
+                                    onClick={() => setIsAdding(true)}
+                                    className="bg-white/10 hover:bg-primary text-white hover:text-black px-3.5 py-2 rounded-xl font-black uppercase text-[9px] tracking-widest transition-all flex items-center gap-1.5 border border-white/10"
+                                >
+                                    <Plus className="size-3.5" />
+                                    <span>Quick Add</span>
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
-            </header>
 
-            <main className="max-w-[1440px] mx-auto px-6 pt-4">
-                {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                {/* 4-Column KPI Stats Grid */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
                     {activeTab === 'inventory' && (
                         <>
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.inventory.total}</p>
-                                <p className="text-3xl text-white font-header font-bold">{products.length}</p>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">{content.admin.stats.inventory.total}</p>
+                                <p className="text-2xl sm:text-3xl text-white font-header font-bold">{products.length}</p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">LG Dual Inverter &amp; GE Built-In</p>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.inventory.value}</p>
-                                <p className="text-3xl text-primary font-header font-bold">${products.reduce((acc, p) => acc + ((Number(p.price) || 0) * (Number(p.stock) || 0)), 0).toLocaleString()}</p>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Models In-Stock</p>
+                                <p className="text-2xl sm:text-3xl text-emerald-400 font-header font-bold">{inStockModelsCount} <span className="text-base text-slate-500 font-normal">/ {products.length}</span></p>
+                                <p className="text-[10px] font-mono text-red-400/90 mt-1">{outOfStockModelsCount} Out of Stock</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Total Warehouse Units</p>
+                                <p className="text-2xl sm:text-3xl text-cyan-400 font-header font-bold">{totalPhysicalUnits}</p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Waipahu #203 Physical Count</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">{content.admin.stats.inventory.value}</p>
+                                <p className="text-2xl sm:text-3xl text-primary font-header font-bold">${totalInventoryValue.toLocaleString()}</p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Live Retail Stock Valuation</p>
                             </div>
                         </>
                     )}
                     {activeTab === 'orders' && (
                         <>
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.orders.total}</p>
-                                <p className="text-3xl text-white font-header font-bold">{orders.length}</p>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">{content.admin.stats.orders.total}</p>
+                                <p className="text-2xl sm:text-3xl text-white font-header font-bold">{orders.length}</p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">All Recorded Storefront Orders</p>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.orders.revenue}</p>
-                                <p className="text-3xl text-emerald-500 font-header font-bold">${orders.reduce((acc, o) => acc + ((Number(o.total_cents) || 0) / 100), 0).toLocaleString()}</p>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Paid / Fulfilled</p>
+                                <p className="text-2xl sm:text-3xl text-cyan-400 font-header font-bold">
+                                    {orders.filter(o => o.status === 'PAID' || o.status === 'SHIPPED' || o.status === 'DELIVERED').length}
+                                </p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Stripe Verified Checkout</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">{content.admin.stats.orders.revenue}</p>
+                                <p className="text-2xl sm:text-3xl text-emerald-400 font-header font-bold">${orders.reduce((acc, o) => acc + ((Number(o.total_cents) || 0) / 100), 0).toLocaleString()}</p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Gross Storefront Volume</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Oahu GET Tax (4.712%)</p>
+                                <p className="text-2xl sm:text-3xl text-amber-400 font-header font-bold">
+                                    ${orders.reduce((acc, o) => acc + (((Number(o.total_cents) || 0) / 100) * 0.04712 / 1.04712), 0).toFixed(2)}
+                                </p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Estimated Tax Collected</p>
                             </div>
                         </>
                     )}
                     {activeTab === 'leads' && (
                         <>
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.leads.active}</p>
-                                <p className="text-3xl text-white font-header font-bold">{leads.length}</p>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">{content.admin.stats.leads.active}</p>
+                                <p className="text-2xl sm:text-3xl text-white font-header font-bold">{leads.length}</p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">By-Appointment-First Queue</p>
                             </div>
-                            <div className="bg-[#0a0e14] border border-white/5 p-6 rounded-2xl">
-                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-2">{content.admin.stats.leads.urgent}</p>
-                                <p className="text-3xl text-red-500 font-header font-bold">{leads.filter(l => l.urgency === 'ASAP').length}</p>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">{content.admin.stats.leads.urgent}</p>
+                                <p className="text-2xl sm:text-3xl text-red-500 font-header font-bold">{urgentLeadsCount}</p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Priority ASAP Dispatch</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">New / Awaiting Contact</p>
+                                <p className="text-2xl sm:text-3xl text-amber-400 font-header font-bold">
+                                    {leads.filter(l => !l.status || l.status === 'NEW').length}
+                                </p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Needs Dispatch Call</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Scheduled / Completed</p>
+                                <p className="text-2xl sm:text-3xl text-emerald-400 font-header font-bold">
+                                    {leads.filter(l => l.status === 'SCHEDULED' || l.status === 'COMPLETED' || l.status === 'CONTACTED').length}
+                                </p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Processed Appointments</p>
+                            </div>
+                        </>
+                    )}
+                    {activeTab === 'schedule' && (
+                        <>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Dispatch Protocol</p>
+                                <p className="text-lg sm:text-xl text-emerald-400 font-header font-bold uppercase">By Appointment First</p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">$0 Upfront Estimate Booking</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Pickup / Cleaning Window</p>
+                                <p className="text-lg sm:text-xl text-white font-header font-bold truncate">
+                                    {content.footer_schedule?.window_ac_estimate_date || 'Rolling 2-5 Days'}
+                                </p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Live Footer Display</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Installation Window</p>
+                                <p className="text-lg sm:text-xl text-cyan-400 font-header font-bold truncate">
+                                    {content.footer_schedule?.window_ac_install_date || 'Rolling 3-6 Days'}
+                                </p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">Live Footer Display</p>
+                            </div>
+                            <div className="bg-[#0a0e14] border border-white/10 p-5 sm:p-6 rounded-2xl">
+                                <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5">Warehouse Hub</p>
+                                <p className="text-lg sm:text-xl text-primary font-header font-bold uppercase">Waipahu #203</p>
+                                <p className="text-[10px] font-mono text-slate-500 mt-1">94-150 Leoleo St., Waipahu</p>
                             </div>
                         </>
                     )}
@@ -716,11 +933,11 @@ export default function AdminPage() {
                                                         </div>
                                                     </td>
                                                     <td className="px-6 py-5 text-right">
-                                                        <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                            <button onClick={() => setEditingProduct(product)} className="size-9 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-black transition-all flex items-center justify-center" title="Edit Product Specs">
+                                                        <div className="flex items-center justify-end gap-2 opacity-90 group-hover:opacity-100 transition-opacity">
+                                                            <button onClick={() => setEditingProduct(product)} className="size-9 bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-black transition-all flex items-center justify-center border border-primary/20" title="Edit Product Specs">
                                                                 <Edit className="size-4" />
                                                             </button>
-                                                            <button onClick={() => handleDelete(product.id)} className="size-9 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all flex items-center justify-center" title="Delete Product">
+                                                            <button onClick={() => handleDelete(product.id)} className="size-9 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all flex items-center justify-center border border-red-500/20" title="Delete Product">
                                                                 <Trash2 className="size-4" />
                                                             </button>
                                                         </div>

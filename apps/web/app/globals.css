@@ -437,9 +437,9 @@ body.promo-active .cart-promo-badge-pulse {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Prevent accidental horizontal scrolling / viewport spillover on mobile */
+/* Prevent accidental horizontal scrolling / viewport spillover on mobile without breaking position: sticky */
 html, body {
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100vw;
     width: 100%;
 }
