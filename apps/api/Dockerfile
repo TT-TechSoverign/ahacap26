@@ -1,5 +1,5 @@
 # Stage 1: Builder
-FROM python:3.12-alpine as builder
+FROM python:3.12-alpine AS builder
 
 # Install build dependencies for asyncpg
 # UV requires minimal system deps, but compiling asyncpg/packages might still need gcc
@@ -21,7 +21,7 @@ COPY requirements.txt .
 RUN uv pip install --no-cache -r requirements.txt
 
 # Stage 2: Final Runtime
-FROM python:3.12-alpine as runner
+FROM python:3.12-alpine AS runner
 
 WORKDIR /app
 

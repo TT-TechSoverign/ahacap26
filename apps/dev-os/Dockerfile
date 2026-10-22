@@ -15,7 +15,7 @@ WORKDIR /app
 
 COPY --from=pruner /app/out/json/ .
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
-RUN npm install -g pnpm@9.0.0 && pnpm install --no-frozen-lockfile
+RUN npm install -g pnpm@10.34.7 && pnpm install --no-frozen-lockfile
 
 # 3. Build the project using the pruned source code
 FROM base AS builder
@@ -25,14 +25,14 @@ COPY --from=deps /app/apps/dev-os/node_modules ./apps/dev-os/node_modules
 COPY --from=pruner /app/out/full/ .
 
 ENV NODE_OPTIONS="--max-old-space-size=1024"
-RUN npm install -g pnpm@9.0.0 && pnpm --filter dev-os build
+RUN npm install -g pnpm@10.34.7 && pnpm --filter dev-os build
 
 # 4. Production runner
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -48,7 +48,7 @@ USER nextjs
 
 EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
 CMD ["sh", "-c", "if [ -f server.js ]; then HOSTNAME=0.0.0.0 PORT=3000 node server.js; else HOSTNAME=0.0.0.0 PORT=3000 node apps/dev-os/server.js; fi"]

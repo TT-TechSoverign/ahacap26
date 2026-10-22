@@ -19,7 +19,7 @@ COPY --from=pruner /app/out/json/ .
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
 # Install only the dependencies needed for the web app
-RUN npm install -g pnpm@9.0.0 && pnpm install --no-frozen-lockfile
+RUN npm install -g pnpm@10.34.7 && pnpm install --no-frozen-lockfile
 
 # 3. Build the project using the pruned source code
 FROM base AS builder
@@ -41,30 +41,19 @@ ARG NEXT_PUBLIC_GA_ID
 ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
 ARG NEXT_PUBLIC_GT_ID
 ENV NEXT_PUBLIC_GT_ID=$NEXT_PUBLIC_GT_ID
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build the project (disabled cache mount to prevent Server Action desync)
 # [HOTFIX] Explicitly limit Node.js heap memory to 1GB to prevent VPS OOM (Out of Memory) crashes during Next.js minification
 ENV NODE_OPTIONS="--max-old-space-size=1024"
-RUN npm install -g pnpm@9.0.0 && pnpm --filter web build
+RUN npm install -g pnpm@10.34.7 && pnpm --filter web build
 
-# Fix: Create a true static copy (dereference symlinks)
-# cp -rL ensures all pnpm symlinks are converted to real files
-# RUN cp -rL /app/apps/web/.next/standalone /app/standalone_output
-
-# 4. Production dependencies (Pruned for size)
-FROM base AS prod-deps
-WORKDIR /app
-COPY --from=pruner /app/out/json/ .
-COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
-RUN npm install -g pnpm@9.0.0 && pnpm install --prod --no-frozen-lockfile
-
-# 5. Production runner
+# 4. Production runner
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -100,6 +89,6 @@ ENV NODE_PATH=/app/node_modules:/app/apps/web/node_modules
 WORKDIR /app
 
 # Standalone entrypoint
-ENV PORT 3000
+ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 CMD ["sh", "-c", "if [ -f server.js ]; then HOSTNAME=0.0.0.0 PORT=3000 node server.js; else HOSTNAME=0.0.0.0 PORT=3000 node apps/web/server.js; fi"]
