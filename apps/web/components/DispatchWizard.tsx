@@ -6,7 +6,6 @@ import { EditableText } from './EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
 import { sendGAEvent } from '@next/third-parties/google';
-import { useSearchParams } from 'next/navigation';
 import { CheckCircle, Settings, Calendar, User, Check, ArrowRight, Zap, ShoppingBag, ArrowLeft, Phone } from 'lucide-react';
 
 export function DispatchWizard() {
@@ -16,7 +15,6 @@ export function DispatchWizard() {
     const isSubmittingRef = useRef(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const searchParams = useSearchParams();
 
     // Split state for better UX
     const [formData, setFormData] = useState({
@@ -51,10 +49,12 @@ export function DispatchWizard() {
 
     // Auto-fill from search params (?service=, ?model=, ?notes=, ?city=)
     useEffect(() => {
-        const cityParam = searchParams?.get('city');
-        const serviceParam = searchParams?.get('service');
-        const notesParam = searchParams?.get('notes');
-        const modelParam = searchParams?.get('model');
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(window.location.search);
+        const cityParam = params.get('city');
+        const serviceParam = params.get('service');
+        const notesParam = params.get('notes');
+        const modelParam = params.get('model');
 
         if (cityParam && !formData.city) {
             setFormData(prev => ({ ...prev, city: cityParam }));
@@ -83,7 +83,7 @@ export function DispatchWizard() {
             ].filter(Boolean).join(' — ');
             setFormData(prev => ({ ...prev, user_notes: combinedPrefill }));
         }
-    }, [searchParams]);
+    }, []);
 
     const handleServiceToggle = (service: string) => {
         setSelectedServices(prev =>

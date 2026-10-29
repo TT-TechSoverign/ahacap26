@@ -7,7 +7,7 @@ import { ShieldCheck, Star, MapPin, ChevronRight, Home } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: '142+ Five-Star Reviews | Affordable Home A/C Oahu | (808) 488-1111',
-    description: 'Read 142+ verified 5-star customer reviews for Affordable Home A/C. Oahu homeowners praise our LG & GE our whisper-quiet LG dual inverters, $0 free estimates, and Waipahu warehouse pickup.',
+    description: 'Read 142+ verified 5-star customer reviews for Affordable Home A/C. Oahu homeowners praise our whisper-quiet LG Dual Inverter & GE Built-In Window ACs, $0 free estimates, and Waipahu warehouse pickup.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/reviews',
     },
@@ -28,7 +28,7 @@ export default function ReviewsPage() {
     const hvacBusinessSchema = {
         "@context": "https://schema.org",
         "@type": "HVACBusiness",
-        "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
+        "@id": "https://www.affordablehome-ac.com/reviews#localbusiness",
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
         "telephone": "(808) 488-1111",

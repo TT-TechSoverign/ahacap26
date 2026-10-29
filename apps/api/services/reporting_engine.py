@@ -66,6 +66,21 @@ def _safe_float(val: Any, default: float = 0.0) -> float:
         return default
 
 
+def _find_files(directory: str, pattern: str) -> List[str]:
+    """Fast recursive file finder that prunes heavy non-analytics directories (e.g., node_modules, DevOps)."""
+    import fnmatch
+    matches: List[str] = []
+    if not os.path.exists(directory):
+        return matches
+    skip_dirs = {"node_modules", ".git", ".next", "__pycache__", "DevOps", "venv", ".venv"}
+    for root, dirs, files in os.walk(directory):
+        dirs[:] = [d for d in dirs if d not in skip_dirs]
+        for filename in files:
+            if fnmatch.fnmatch(filename, pattern):
+                matches.append(os.path.join(root, filename))
+    return matches
+
+
 class ReportingEngine:
     def __init__(self, analytics_base_dir: Optional[str] = None):
         if analytics_base_dir:
@@ -131,7 +146,7 @@ class ReportingEngine:
         }
 
         # 1. Look for Chart.csv with Clicks & Impressions (Search Console performance)
-        chart_files = glob.glob(os.path.join(directory, "**", "Chart.csv"), recursive=True)
+        chart_files = _find_files(directory, "Chart.csv")
         chart_files.sort(key=lambda x: 0 if 'performance-on-search' in x.lower() else 1)
         for cf in chart_files:
             try:
@@ -148,7 +163,7 @@ class ReportingEngine:
                 continue
 
         # 2. Look for Devices.csv
-        device_files = glob.glob(os.path.join(directory, "**", "Devices.csv"), recursive=True)
+        device_files = _find_files(directory, "Devices.csv")
         device_files.sort(key=lambda x: 0 if 'performance-on-search' in x.lower() else 1)
         for df_path in device_files:
             try:
@@ -171,7 +186,7 @@ class ReportingEngine:
                 continue
 
         # 3. Look for Queries.csv
-        query_files = glob.glob(os.path.join(directory, "**", "Queries.csv"), recursive=True)
+        query_files = _find_files(directory, "Queries.csv")
         query_files.sort(key=lambda x: 0 if 'performance-on-search' in x.lower() else 1)
         for qf in query_files:
             try:
@@ -210,7 +225,7 @@ class ReportingEngine:
                 continue
 
         # 4. Look for Pages.csv
-        page_files = glob.glob(os.path.join(directory, "**", "Pages.csv"), recursive=True)
+        page_files = _find_files(directory, "Pages.csv")
         page_files.sort(key=lambda x: 0 if 'performance-on-search' in x.lower() else 1)
         for pf in page_files:
             try:
@@ -257,7 +272,7 @@ class ReportingEngine:
                 continue
 
         # 5. Look for GA4 Reports_snapshot*.csv
-        ga4_snap = glob.glob(os.path.join(directory, "**", "Reports_snapshot*.csv"), recursive=True)
+        ga4_snap = _find_files(directory, "Reports_snapshot*.csv")
         if ga4_snap:
             try:
                 rows = _read_csv_rows(ga4_snap[0], skiprows=8, max_rows=1)
@@ -273,7 +288,7 @@ class ReportingEngine:
                 pass
 
         # 6. Look for GA4 Pages_and_screens*.csv
-        ga4_pages = glob.glob(os.path.join(directory, "**", "Pages_and_screens*.csv"), recursive=True)
+        ga4_pages = _find_files(directory, "Pages_and_screens*.csv")
         if ga4_pages:
             try:
                 rows = _read_csv_rows(ga4_pages[0], skiprows=9)
@@ -708,7 +723,7 @@ While our rankings are great, we have some huge opportunities to get even more c
     def list_reports(self) -> List[Dict[str, Any]]:
         """Scans for all existing monthly reports in _analytics_data."""
         reports = []
-        md_files = glob.glob(os.path.join(self.base_dir, "**", "CEO-SEO-Report-*.md"), recursive=True)
+        md_files = _find_files(self.base_dir, "CEO-SEO-Report-*.md")
 
         for mf in md_files:
             folder = os.path.dirname(mf)

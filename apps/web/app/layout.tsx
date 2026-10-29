@@ -109,7 +109,7 @@ export default function RootLayout({
                     dangerouslySetInnerHTML={{
                         __html: JSON.stringify({
                             "@context": "https://schema.org",
-                            "@type": ["HVACBusiness", "Store"],
+                            "@type": "HVACBusiness",
                             "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                             "name": "Affordable Home A/C",
                             "legalName": "Affordable Home A/C LLC",
@@ -157,13 +157,6 @@ export default function RootLayout({
                                     "closes": "14:00"
                                 }
                             ],
-                            "aggregateRating": {
-                                "@type": "AggregateRating",
-                                "ratingValue": "4.9",
-                                "reviewCount": "142",
-                                "bestRating": "5",
-                                "worstRating": "1"
-                            },
                             "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover, Apple Pay, Google Pay",
                             "currenciesAccepted": "USD",
                             "priceRange": "$395 - $1,200",
@@ -221,11 +214,11 @@ export default function RootLayout({
                                 "@type": "OfferCatalog",
                                 "name": "Oahu Window Air Conditioning Sales, Installation & Cleaning",
                                 "itemListElement": [
-                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/shop", "itemOffered": { "@type": "Service", "name": "In-Stock LG Dual Inverter & GE Window AC Sales ($395–$1,200 • Free Waipahu Pickup or $50 Oahu Delivery)" } },
-                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/ac-cleaning-oahu", "itemOffered": { "@type": "Service", "name": "Window AC Deep Cleaning, Coil Sanitization & Antimicrobial Pan Treatment" } },
-                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/window-ac-installation", "itemOffered": { "@type": "Service", "name": "Window AC & Hawaiian Jalousie Louver Installation ($0 Free In-Home Estimate)" } },
-                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/shop/ge-built-in-wall-ac-oahu", "itemOffered": { "@type": "Service", "name": "GE 26-Inch Through-the-Wall Built-In Sleeve AC Replacement" } },
-                                    { "@type": "Offer", "url": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac", "itemOffered": { "@type": "Service", "name": "Window AC Clean-vs-Replace Assessment ($0 Free In-Home Estimate)" } }
+                                    { "@type": "Service", "name": "In-Stock LG Dual Inverter & GE Window AC Sales ($395–$1,200)", "url": "https://www.affordablehome-ac.com/shop", "description": "Factory-sealed LG Dual Inverter and GE 26-inch Built-In window air conditioners ($395–$1,200) for Free Waipahu Warehouse Pickup by appointment or $50 flat Oahu delivery." },
+                                    { "@type": "Service", "name": "Window AC Deep Cleaning, Coil Sanitization & Antimicrobial Pan Treatment", "url": "https://www.affordablehome-ac.com/ac-cleaning-oahu", "description": "On-site Oahu window AC evaporator and condenser coil cleaning, mold sanitization, condensate drain clearing, and floor drop-cloth protection." },
+                                    { "@type": "Service", "name": "Window AC & Hawaiian Jalousie Louver Installation ($0 Free In-Home Estimate)", "url": "https://www.affordablehome-ac.com/window-ac-installation", "description": "Professional Oahu window AC installation, custom jalousie glass louver retrofits, and exterior support bracket mounting." },
+                                    { "@type": "Service", "name": "GE 26-Inch Through-the-Wall Built-In Sleeve AC Replacement", "url": "https://www.affordablehome-ac.com/shop/ge-built-in-wall-ac-oahu", "description": "True 26-inch GE AJCQ built-in wall air conditioners and RAB26A galvanized steel wall sleeves for Honolulu condos and townhomes." },
+                                    { "@type": "Service", "name": "Window AC Clean-vs-Replace Assessment ($0 Free In-Home Estimate)", "url": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac", "description": "Honest on-site diagnostic evaluation comparing deep coil cleaning against upgrading to an ENERGY STAR LG Dual Inverter or GE R-32 Inverter." }
                                 ]
                             },
                             "contactPoint": [

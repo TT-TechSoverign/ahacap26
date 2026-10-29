@@ -57,9 +57,16 @@ function DynamicIcon({ name, className }: { name: string; className?: string }) 
     return <IconComponent className={className} />;
 }
 
+function ShopUrlParamSync({ onSync }: { onSync: () => void }) {
+    const searchParams = useSearchParams();
+    useEffect(() => {
+        onSync();
+    }, [searchParams, onSync]);
+    return null;
+}
+
 function ShopPageContent() {
     const { addToCart, items, openCart } = useCart();
-    const searchParams = useSearchParams();
     const [products, setProducts] = useState<Product[]>(INITIAL_CATALOG_PRODUCTS);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -115,57 +122,58 @@ function ShopPageContent() {
         sortOption !== 'featured'
     );
 
+    const applyUrlFilters = () => {
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(window.location.search);
+        const qParam = params.get('q');
+        const catParam = (params.get('category') || '').toLowerCase();
+        const capParam = (params.get('capacity') || '').toLowerCase();
+        const voltParam = (params.get('voltage') || '').toLowerCase();
+        const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+
+        setSearchQuery(qParam || '');
+
+        if (catParam === 'dual_inverter' || hash === 'dual_inverter') {
+            setSelectedCategory('dual_inverter');
+        } else if (catParam === 'standard' || catParam === 'base' || hash === 'standard' || hash === 'base') {
+            setSelectedCategory('base');
+        } else if (catParam === 'wall_unit' || catParam === 'ge' || hash === 'wall_unit' || hash === 'ge') {
+            setSelectedCategory('ge');
+        } else if (catParam === 'casement' || hash === 'casement') {
+            setSelectedCategory('casement');
+        } else if (catParam === 'universal_fit' || hash === 'universal_fit') {
+            setSelectedCategory('universal_fit');
+        } else {
+            setSelectedCategory('ALL');
+        }
+
+        if (capParam === 'small' || capParam === 'bedroom') {
+            setSelectedCapacity('BEDROOM');
+            setIsMoreFiltersOpen(true);
+        } else if (capParam === 'medium' || capParam === 'master') {
+            setSelectedCapacity('MASTER');
+            setIsMoreFiltersOpen(true);
+        } else if (capParam === 'large' || capParam === 'living') {
+            setSelectedCapacity('LIVING');
+            setIsMoreFiltersOpen(true);
+        } else {
+            setSelectedCapacity('ALL');
+        }
+
+        if (voltParam === '115v') {
+            setSelectedVoltage('115V');
+            setIsMoreFiltersOpen(true);
+        } else if (voltParam === '230v') {
+            setSelectedVoltage('230V');
+            setIsMoreFiltersOpen(true);
+        } else {
+            setSelectedVoltage('ALL');
+        }
+    };
+
     // Sync URL query params (?q=, ?category=, ?capacity=, ?voltage=) and hash fragments (#dual_inverter, #standard, #wall_unit)
     useEffect(() => {
         if (typeof window === 'undefined') return;
-        const applyUrlFilters = () => {
-            const params = new URLSearchParams(window.location.search);
-            const qParam = params.get('q') || searchParams.get('q');
-            const catParam = (params.get('category') || searchParams.get('category') || '').toLowerCase();
-            const capParam = (params.get('capacity') || searchParams.get('capacity') || '').toLowerCase();
-            const voltParam = (params.get('voltage') || searchParams.get('voltage') || '').toLowerCase();
-            const hash = (window.location.hash || '').replace('#', '').toLowerCase();
-
-            setSearchQuery(qParam || '');
-
-            if (catParam === 'dual_inverter' || hash === 'dual_inverter') {
-                setSelectedCategory('dual_inverter');
-            } else if (catParam === 'standard' || catParam === 'base' || hash === 'standard' || hash === 'base') {
-                setSelectedCategory('base');
-            } else if (catParam === 'wall_unit' || catParam === 'ge' || hash === 'wall_unit' || hash === 'ge') {
-                setSelectedCategory('ge');
-            } else if (catParam === 'casement' || hash === 'casement') {
-                setSelectedCategory('casement');
-            } else if (catParam === 'universal_fit' || hash === 'universal_fit') {
-                setSelectedCategory('universal_fit');
-            } else {
-                setSelectedCategory('ALL');
-            }
-
-            if (capParam === 'small' || capParam === 'bedroom') {
-                setSelectedCapacity('BEDROOM');
-                setIsMoreFiltersOpen(true);
-            } else if (capParam === 'medium' || capParam === 'master') {
-                setSelectedCapacity('MASTER');
-                setIsMoreFiltersOpen(true);
-            } else if (capParam === 'large' || capParam === 'living') {
-                setSelectedCapacity('LIVING');
-                setIsMoreFiltersOpen(true);
-            } else {
-                setSelectedCapacity('ALL');
-            }
-
-            if (voltParam === '115v') {
-                setSelectedVoltage('115V');
-                setIsMoreFiltersOpen(true);
-            } else if (voltParam === '230v') {
-                setSelectedVoltage('230V');
-                setIsMoreFiltersOpen(true);
-            } else {
-                setSelectedVoltage('ALL');
-            }
-        };
-
         applyUrlFilters();
         window.addEventListener('hashchange', applyUrlFilters);
         window.addEventListener('popstate', applyUrlFilters);
@@ -173,7 +181,7 @@ function ShopPageContent() {
             window.removeEventListener('hashchange', applyUrlFilters);
             window.removeEventListener('popstate', applyUrlFilters);
         };
-    }, [searchParams]);
+    }, []);
 
     const filteredProducts = useMemo(() => {
         let result = products.filter(p => {
@@ -575,6 +583,9 @@ function ShopPageContent() {
 
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
+            <Suspense fallback={null}>
+                <ShopUrlParamSync onSync={applyUrlFilters} />
+            </Suspense>
 
             <main className="max-w-[1600px] mx-auto w-full px-4 md:px-12 pt-[88px] md:pt-[190px] pb-36 md:pb-20 flex-grow">
                 {/* Compact Shop Hero & Micro-Trust Bar */}
@@ -1223,7 +1234,9 @@ export default function ShopPage() {
                         "name": "Oahu In-Stock LG & GE Window Air Conditioners ($395–$1,200)",
                         "description": "In-stock LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In window and wall air conditioners in Waipahu, Oahu ($395–$1,200). Free Waipahu warehouse pickup by appointment, $50 flat island-wide delivery, and $45 Hawaii Energy cash rebate.",
                         "provider": {
-                            "@id": `${domain}/#hvacbusiness`
+                            "@type": "HVACBusiness",
+                            "name": "Affordable Home A/C",
+                            "url": domain
                         },
                         "potentialAction": {
                             "@type": "OrderAction",
@@ -1298,16 +1311,7 @@ export default function ShopPage() {
                     })
                 }}
             />
-            <Suspense fallback={
-                <div className="min-h-screen bg-[#0b1120] flex items-center justify-center">
-                    <div className="flex flex-col items-center gap-3">
-                        <div className="size-12 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
-                        <span className="font-mono text-xs text-primary uppercase tracking-widest">Loading Oahu Catalog...</span>
-                    </div>
-                </div>
-            }>
-                <ShopPageContent />
-            </Suspense>
+            <ShopPageContent />
         </>
     );
 }

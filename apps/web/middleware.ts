@@ -27,7 +27,7 @@ const LEGACY_ID_TO_SLUG: Record<string, string> = {
     '2900': 'oahu-window-ac-warehouse',
 };
 
-// Known WooCommerce tracking and faceted navigation parameters to aggressively prune from redirects
+// Known WooCommerce & WordPress tracking/faceted navigation parameters to aggressively prune via 301
 const WOOCOMMERCE_BLOAT_PARAMS = [
     'add-to-cart',
     'product_orderby',
@@ -37,6 +37,17 @@ const WOOCOMMERCE_BLOAT_PARAMS = [
     'paged',
     'min_price',
     'max_price',
+    'orderby',
+    'filtering',
+    'filter_btu',
+    'replytocom',
+    'p',
+    'page_id',
+    'attachment_id',
+    'cat',
+    'tag',
+    'author',
+    'feed',
     'v',
 ];
 
@@ -85,9 +96,23 @@ export function middleware(request: NextRequest) {
         return res;
     };
 
-    // 3. Exact Root / Index Normalization
+    // 2b. Global Legacy WooCommerce ?add-to-cart=<id> Direct Product Slug Resolution
+    const globalAddToCartId = url.searchParams.get('add-to-cart');
+    if (globalAddToCartId && LEGACY_ID_TO_SLUG[globalAddToCartId]) {
+        return makePermanentRedirect(`/shop/${LEGACY_ID_TO_SLUG[globalAddToCartId]}`);
+    }
+
+    // 3. Exact Root / Index Normalization & WordPress Pagination / Feed Stripping
     if (pathLower === '/index.html') {
         return makePermanentRedirect('/');
+    }
+    if (/\/page\/\d+$/.test(pathLower)) {
+        const stripped = cleanPath.replace(/\/page\/\d+$/i, '') || '/';
+        return makePermanentRedirect(stripped);
+    }
+    if (pathLower.endsWith('/feed') || pathLower.endsWith('/feed/rss') || pathLower.endsWith('/feed/atom')) {
+        const stripped = cleanPath.replace(/\/feed(\/(rss|atom))?$/i, '') || '/';
+        return makePermanentRedirect(stripped);
     }
 
     // 4. Outdated & Short Product Slug Redirects
@@ -113,6 +138,8 @@ export function middleware(request: NextRequest) {
         '/shop/14-ge-10-000-btu': '/shop/14-ge-10-000-btu-ajcq10awj',
         '/shop/15-ge-12-000-btu': '/shop/15-ge-12-000-btu-ajcq12axxwa',
         '/shop/15-ge-12-000-btu-ajcq12awj': '/shop/15-ge-12-000-btu-ajcq12axxwa',
+        '/shop/16-ge-rab26a': '/shop/16-ge-rab26a-wall-casement',
+        '/shop/16-ge-26-inch-wall-sleeve-rab26a': '/shop/16-ge-rab26a-wall-casement',
     };
     if (SHORT_SLUG_REDIRECTS[pathLower]) {
         return makePermanentRedirect(SHORT_SLUG_REDIRECTS[pathLower]);
@@ -136,6 +163,7 @@ export function middleware(request: NextRequest) {
         '/mini-split-remote-control-not-working': '/ac-repair-oahu',
         '/window-ac-vs-mini-split-oahu': '/shop/lg-dual-inverter-guide',
         '/window-ac-installation-oahu': '/window-ac-installation',
+        '/window ac-window-ac-installation-oahu': '/window-ac-installation',
         '/ac-deep-cleaning-service-oahu': '/ac-cleaning-oahu',
         '/maintenance': '/ac-cleaning-oahu',
         '/ac-repair': '/ac-repair-oahu',
@@ -144,14 +172,63 @@ export function middleware(request: NextRequest) {
         '/standard-window-ac-brackets-mounting-oahu': '/ac-brackets-exterior-security-mounting-oahu',
         '/appointment': '/contact',
         '/services': '/shop',
+        '/products': '/shop',
+        '/products-and-services': '/shop',
+        '/about': '/reviews',
+        '/about-us': '/reviews',
+        '/our-team': '/reviews',
+        '/my-account': '/shop',
+        '/www2affordablehomeac': '/',
+        '/window-ac-estimate': '/sizing',
+        '/complete-installation-package': '/window-ac-installation',
+        '/complete-installation-package-2': '/window-ac-installation',
+        '/gallery': '/reviews',
+        '/hometest': '/',
+        '/embed': '/',
     };
     if (CONSOLIDATED_REDIRECTS[pathLower]) {
         return makePermanentRedirect(CONSOLIDATED_REDIRECTS[pathLower]);
     }
 
+    // 4b. Legacy WordPress Spec Sheet PDFs -> 301 Redirect to Matching Product Pages
+    if (pathLower.startsWith('/wp-content/uploads/') && pathLower.endsWith('.pdf')) {
+        if (pathLower.includes('lw2422') || pathLower.includes('lw2217') || pathLower.includes('2423')) {
+            return makePermanentRedirect('/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm');
+        }
+        if (pathLower.includes('lw1822') || pathLower.includes('1823')) {
+            return makePermanentRedirect('/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm');
+        }
+        if (pathLower.includes('lw1522')) {
+            return makePermanentRedirect('/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm');
+        }
+        if (pathLower.includes('lw1222')) {
+            return makePermanentRedirect('/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm');
+        }
+        if (pathLower.includes('lw1217')) {
+            return makePermanentRedirect('/shop/12-lg-12-000-btu-lw1217ersm1');
+        }
+        if (pathLower.includes('lw1022')) {
+            return makePermanentRedirect('/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm');
+        }
+        if (pathLower.includes('lw8022') || pathLower.includes('lw8021')) {
+            return makePermanentRedirect('/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm');
+        }
+        if (pathLower.includes('lw8024')) {
+            return makePermanentRedirect('/shop/11-lg-8-000-btu-lw8024rd');
+        }
+        if (pathLower.includes('lw6023') || pathLower.includes('lw6017')) {
+            return makePermanentRedirect('/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm');
+        }
+        return makePermanentRedirect('/shop');
+    }
+
     // 5. Legacy Route Detection & Decommissioning
     const deadDebrisPrefixes = [
         '/wp-content/',
+        '/wp-admin',
+        '/wp-login.php',
+        '/wp-json/',
+        '/xmlrpc.php',
         '/author/',
         '/element_category/',
         '/fusion_tb_category/',

@@ -156,14 +156,50 @@ export default function Lg8000BtuOahuPage() {
                     "bestRating": "5",
                     "worstRating": "1"
                 },
+                "review": [
+                    {
+                        "@type": "Review",
+                        "author": { "@type": "Person", "name": "Leilani K. — Kaimuki, Oahu" },
+                        "datePublished": "2026-09-18",
+                        "reviewBody": "So quiet in our master bedroom! You can barely hear it running on sleep mode and the ThinQ app lets us cool the room before we get home.",
+                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                    }
+                ],
                 "offers": {
                     "@type": "Offer",
                     "url": "https://www.affordablehome-ac.com/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm",
                     "priceCurrency": "USD",
                     "price": activePrice.toFixed(2),
-                    "priceValidUntil": "2026-12-31",
+                    "validFrom": "2026-01-01",
+                    "priceValidUntil": "2027-12-31",
                     "availability": isOutOfStock ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-                    "itemCondition": "https://schema.org/NewCondition"
+                    "itemCondition": "https://schema.org/NewCondition",
+                    "hasMerchantReturnPolicy": {
+                        "@type": "MerchantReturnPolicy",
+                        "applicableCountry": "US",
+                        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                        "merchantReturnDays": 30,
+                        "returnMethod": "https://schema.org/ReturnInStore",
+                        "returnFees": "https://schema.org/FreeReturn"
+                    },
+                    "shippingDetails": {
+                        "@type": "OfferShippingDetails",
+                        "shippingRate": {
+                            "@type": "MonetaryAmount",
+                            "value": "0.00",
+                            "currency": "USD"
+                        },
+                        "shippingDestination": {
+                            "@type": "DefinedRegion",
+                            "addressCountry": "US",
+                            "addressRegion": "HI"
+                        },
+                        "deliveryTime": {
+                            "@type": "ShippingDeliveryTime",
+                            "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                            "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                        }
+                    }
                 }
             },
             {

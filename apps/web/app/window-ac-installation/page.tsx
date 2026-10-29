@@ -128,31 +128,27 @@ export default function WindowAcInstallationPage() {
         "@context": "https://schema.org",
         "@graph": [
             {
-                "@type": "HVACBusiness",
-                "name": "Affordable Home AC - Professional Window AC Installation Oahu",
-                "telephone": "+1-808-488-1111",
-                "priceRange": "$$",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leoleo St. #203",
-                    "addressLocality": "Waipahu",
-                    "addressRegion": "HI",
-                    "postalCode": "96797",
-                    "addressCountry": "US"
-                },
-                "areaServed": "Oahu, Hawaii",
-                "description": "Insured Oahu cooling specialists providing professional window AC installation, custom jalousie acrylic baffle retrofits, cantilever exterior support brackets, and trade-wind leveling across Honolulu, Waipahu, and all Oahu."
-            },
-            {
                 "@type": "Service",
+                "@id": "https://www.affordablehome-ac.com/window-ac-installation#service",
                 "name": "Professional Window AC Installation Oahu",
-                "serviceType": "HVAC Installation",
+                "serviceType": "Window AC & Jalousie Installation",
                 "provider": {
                     "@type": "HVACBusiness",
-                    "name": "Affordable Home AC"
+                    "name": "Affordable Home A/C",
+                    "telephone": "+1-808-488-1111",
+                    "priceRange": "$395 - $1,200",
+                    "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "94-150 Leoleo St. #203",
+                        "addressLocality": "Waipahu",
+                        "addressRegion": "HI",
+                        "postalCode": "96797",
+                        "addressCountry": "US"
+                    }
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Professional window air conditioner installation, custom plexiglass / acrylic jalousie window kits, and exterior bracket mounting on Oahu."
+                "description": "Insured Oahu cooling specialists providing professional window AC installation, custom jalousie acrylic baffle retrofits, cantilever exterior support brackets, and 26-inch wall sleeve installations ($0 Free In-Home Estimate) across Honolulu, Waipahu, and all Oahu."
             },
             {
                 "@type": "BreadcrumbList",

@@ -16,6 +16,9 @@ export default function robots(): MetadataRoute.Robots {
         };
     }
 
+    // Note: Legacy WordPress paths (/wp-content/, /author/, /element_category/, /fusion_tb_category/)
+    // and WooCommerce params (?add-to-cart=, ?product_orderby=, etc.) are intentionally NOT disallowed
+    // here so Googlebot can crawl them and honor middleware.ts's 301 Permanent Redirects and 410 Gone headers.
     const sharedDisallows = [
         '/admin',
         '/admin/',
@@ -31,8 +34,6 @@ export default function robots(): MetadataRoute.Robots {
         '/checkout',
         '/checkout/',
         '/checkout/*',
-        '/maintenance',
-        '/maintenance/',
         '/puck',
         '/puck/',
         '/*?*_rsc=*',
@@ -47,16 +48,6 @@ export default function robots(): MetadataRoute.Robots {
         '/*?*service=*',
         '/*?*notes=*',
         '/*?*model=*',
-        '/*?*add-to-cart=*',
-        '/*?*product_orderby=*',
-        '/*?*product_view=*',
-        '/*?*min_price=*',
-        '/*?*max_price=*',
-        '/*?*v=*',
-        '/author/',
-        '/wp-content/',
-        '/element_category/',
-        '/fusion_tb_category/'
     ];
 
     return {

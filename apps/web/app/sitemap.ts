@@ -10,7 +10,7 @@ import path from 'path';
 // Force dynamic rendering so this runs at request time (when API is up),
 // not at build time (when API is down).
 export const revalidate = 86400;
-const STATIC_LAST_MODIFIED = '2026-10-18';
+const STATIC_LAST_MODIFIED = '2026-10-29';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com';

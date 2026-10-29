@@ -12,24 +12,22 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
         "@type": "TechArticle",
         "headline": topicTitle,
         "datePublished": "2026-01-15",
-        "dateModified": "2026-10-21",
+        "dateModified": "2026-10-29",
         "inLanguage": "en-US",
         "author": {
             "@type": "Organization",
-            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
             "name": "Affordable Home A/C Oahu Cooling Specialists (Brian, Chris, Makoa & Omar)",
             "url": "https://www.affordablehome-ac.com/reviews"
         },
         "reviewedBy": {
             "@type": "Organization",
-            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
             "name": "Affordable Home A/C — Waipahu Warehouse Direct & Insured Oahu Cooling Specialists (Est. 2005)",
             "url": "https://www.affordablehome-ac.com"
         },
         "publisher": {
             "@type": "Organization",
-            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
             "name": "Affordable Home A/C",
+            "url": "https://www.affordablehome-ac.com",
             "telephone": "+1-808-488-1111",
             "address": {
                 "@type": "PostalAddress",

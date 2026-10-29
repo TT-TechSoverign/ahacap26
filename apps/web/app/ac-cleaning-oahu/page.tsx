@@ -107,45 +107,31 @@ export default function AcCleaningOahuPage() {
         "@context": "https://schema.org",
         "@graph": [
             {
-                "@type": "HVACBusiness",
-                "name": "Affordable Home AC - Oahu Window AC Deep Cleaning & Mold Sanitization",
-                "telephone": "+1-808-488-1111",
-                "priceRange": "$$",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leoleo St. #203",
-                    "addressLocality": "Waipahu",
-                    "addressRegion": "HI",
-                    "postalCode": "96797",
-                    "addressCountry": "US"
-                },
-                "areaServed": "Oahu, Hawaii",
-                "description": "Local Oahu cooling specialists providing window AC coil flushes, mold sanitization, and clean-vs-replace assessments with floor drop cloth protection across Honolulu and Oahu."
-            },
-            {
                 "@type": "Service",
                 "@id": "https://www.affordablehome-ac.com/ac-cleaning-oahu#service",
                 "name": "Window AC Deep Cleaning, Coil Sanitization & Clean-vs-Replace Assessment Oahu",
                 "serviceType": "Window AC Sanitization & Coil Cleaning",
                 "provider": {
                     "@type": "HVACBusiness",
-                    "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                     "name": "Affordable Home A/C",
-                    "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005"
+                    "telephone": "+1-808-488-1111",
+                    "priceRange": "$395 - $1,200",
+                    "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "94-150 Leoleo St. #203",
+                        "addressLocality": "Waipahu",
+                        "addressRegion": "HI",
+                        "postalCode": "96797",
+                        "addressCountry": "US"
+                    }
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "On-site window AC evaporator/condenser coil foaming sanitization, blower wheel cleaning, antimicrobial slinger pan flush, protective floor drop cloths, and honest clean-vs-replace assessments across Oahu.",
+                "description": "On-site window AC evaporator/condenser coil foaming sanitization, blower wheel cleaning, antimicrobial slinger pan flush, protective floor drop cloths, and honest clean-vs-replace assessments ($0 Free In-Home Estimate) across Oahu.",
                 "potentialAction": {
                     "@type": "ReserveAction",
                     "name": "Schedule Oahu Window AC Cleaning or $0 Clean-vs-Replace Assessment",
                     "target": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
-                },
-                "offers": {
-                    "@type": "Offer",
-                    "name": "Window AC Clean-vs-Replace Assessment & Custom Itemized Quote (By Appointment)",
-                    "price": "0.00",
-                    "priceCurrency": "USD",
-                    "availability": "https://schema.org/InStock"
                 }
             },
             {

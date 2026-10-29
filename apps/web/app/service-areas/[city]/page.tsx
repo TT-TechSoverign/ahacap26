@@ -4,6 +4,7 @@ import LocalServiceFunnel from '@/components/LocalServiceFunnel';
 import LocalizedSEOBody from '@/components/LocalizedSEOBody';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 import { getReviewsByCity } from '@/lib/product-reviews';
 import { BackToTop } from '@/components/BackToTop';
 import contentData from '@/lib/content/content.json';
@@ -63,17 +64,17 @@ export function generateMetadata({ params }: Props): Metadata {
     
     if (!cityData) return { title: 'Service Area Not Found' };
  
-    const title = `${cityData.name} LG & GE Window AC Sales, Installation & Cleaning | (808) 488-1111`;
+    const title = `${cityData.name} LG & GE Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111`;
     
-    let description = `Fast ${cityData.name} Window AC installation, deep cleaning & in-stock LG & GE Window ACs ($395–$1,200) ready for Waipahu pickup or $50 delivery. Call (808) 488-1111.`;
+    let description = `Fast ${cityData.name} Window AC installation, deep cleaning & in-stock LG & GE Window ACs ($395–$1,200) ready for Waipahu pickup or $50 delivery. $0 Free In-Home Estimate • (808) 488-1111.`;
     if (cityData.regionId === 'windward') {
-        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Custom jalousie window AC installation, deep coil cleaning & in-stock LG & GE window ACs. Call (808) 488-1111.`;
+        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Custom jalousie window AC installation, deep coil cleaning & in-stock LG & GE window ACs. $0 Estimate • (808) 488-1111.`;
     } else if (cityData.regionId === 'leeward') {
-        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Custom window AC installation, deep cleaning & in-stock Waipahu LG & GE window ACs ($395–$1,200). Call (808) 488-1111.`;
+        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Custom window AC installation, deep cleaning & in-stock Waipahu LG & GE window ACs ($395–$1,200). $0 Estimate • (808) 488-1111.`;
     } else if (cityData.regionId === 'metro') {
-        description = `Whisper-quiet window & through-the-wall cooling in ${cityData.name}, Oahu. Jalousie & sleeve window AC installation, deep cleaning & in-stock LG & GE window ACs. Call (808) 488-1111.`;
+        description = `Whisper-quiet window & through-the-wall cooling in ${cityData.name}, Oahu. Jalousie & sleeve window AC installation, deep cleaning & in-stock LG & GE window ACs. $0 Estimate • (808) 488-1111.`;
     } else {
-        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock Waipahu LG & GE window ACs ($395–$1,200), custom window installation & deep window AC cleaning. Call (808) 488-1111.`;
+        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock Waipahu LG & GE window ACs ($395–$1,200), custom window installation & deep window AC cleaning. $0 Estimate • (808) 488-1111.`;
     }
  
     return {
@@ -137,17 +138,17 @@ export default function LocalServiceAreaPage({ params }: Props) {
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30">
                         <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
                         <span className="text-xs font-bold uppercase tracking-widest text-cyan-300">
-                            Now Servicing {cityData.regionTitle}
+                            Now Servicing {cityData.regionTitle} • $0 Free In-Home Estimate
                         </span>
                     </div>
                     
-                    <h1 className="font-header font-black text-5xl md:text-7xl text-white uppercase tracking-tighter drop-shadow-2xl leading-[1.1]">
-                        Reliable Air Conditioning <br className="hidden md:block"/>
-                        Solutions in <span className="text-cyan-400 drop-shadow-[0_0_20px_rgba(34,211,238,0.5)]">{cityData.name}</span>
+                    <h1 className="font-header font-black text-4xl sm:text-5xl md:text-6xl text-white uppercase tracking-tighter drop-shadow-2xl leading-[1.1]">
+                        LG &amp; GE Window AC Sales, <br className="hidden md:block"/>
+                        Installation &amp; Cleaning in <span className="text-cyan-400 drop-shadow-[0_0_20px_rgba(34,211,238,0.5)]">{cityData.name}</span>
                     </h1>
                     
                     <p className="font-sans text-lg md:text-xl text-slate-300 font-medium max-w-2xl leading-relaxed">
-                        From whisper-quiet LG Dual Inverter window units to GE Built-In through-the-wall systems and deep cleaning, we deliver cooling solutions engineered for Hawaii&apos;s extreme humidity and coastal air.
+                        From whisper-quiet LG Dual Inverter window units to GE Built-In through-the-wall systems and deep cleaning, we deliver cooling solutions engineered for {cityData.name}&apos;s humidity and coastal air.
                     </p>
                 </div>
             </section>
@@ -252,15 +253,15 @@ export default function LocalServiceAreaPage({ params }: Props) {
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
-                        "@type": ["HVACBusiness", "Store"],
-                        "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
-                        "name": "Affordable Home A/C",
+                        "@type": "HVACBusiness",
+                        "@id": `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}#localbusiness`,
+                        "name": `Affordable Home A/C - ${cityData.name} Window AC Specialists`,
                         "alternateName": "Affordable Home Air Conditioning",
                         "foundingDate": "2005",
                         "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
                         "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
                         "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
-                        "url": "https://www.affordablehome-ac.com",
+                        "url": `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`,
                         "telephone": "+1-808-488-1111",
                         "email": "office@affordablehome-ac.com",
                         "hasMap": "https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797",
@@ -329,9 +330,24 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             "@type": "OfferCatalog",
                             "name": `Window AC Sales, Installation & Cleaning in ${cityData.name}`,
                             "itemListElement": [
-                                { "@type": "Offer", "url": "https://www.affordablehome-ac.com/shop", "itemOffered": { "@type": "Service", "name": `In-Stock LG & GE Window AC Sales & Delivery in ${cityData.name} ($395–$1,200)` } },
-                                { "@type": "Offer", "url": "https://www.affordablehome-ac.com/window-ac-installation", "itemOffered": { "@type": "Service", "name": `Window AC & Jalousie Installation in ${cityData.name} ($0 Free In-Home Estimate)` } },
-                                { "@type": "Offer", "url": "https://www.affordablehome-ac.com/ac-cleaning-oahu", "itemOffered": { "@type": "Service", "name": `Window AC Deep Cleaning & Sanitization in ${cityData.name}` } }
+                                {
+                                    "@type": "Service",
+                                    "name": `In-Stock LG & GE Window AC Sales & Delivery in ${cityData.name} ($395–$1,200)`,
+                                    "description": `Waipahu warehouse-direct LG Dual Inverter & GE Built-In Window ACs from $395 to $1,200 with $50 flat delivery to ${cityData.name}.`,
+                                    "url": "https://www.affordablehome-ac.com/shop"
+                                },
+                                {
+                                    "@type": "Service",
+                                    "name": `Window AC & Jalousie Installation in ${cityData.name} ($0 Free In-Home Estimate)`,
+                                    "description": `Custom jalousie glass, double-hung, and 26-inch wall sleeve Window AC installation in ${cityData.name} with $0 upfront estimate.`,
+                                    "url": "https://www.affordablehome-ac.com/window-ac-installation"
+                                },
+                                {
+                                    "@type": "Service",
+                                    "name": `Window AC Deep Cleaning & Sanitization in ${cityData.name}`,
+                                    "description": `On-site evaporator/condenser coil wash, antimicrobial pan treatment, and condensate drain clearing in ${cityData.name}.`,
+                                    "url": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
+                                }
                             ]
                         }
                     })
@@ -413,6 +429,10 @@ export default function LocalServiceAreaPage({ params }: Props) {
                     })
                 }}
             />
+
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full mb-12">
+                <OahuEEATAuthorityBar />
+            </div>
             
             <BackToTop visible={true} />
         </main>

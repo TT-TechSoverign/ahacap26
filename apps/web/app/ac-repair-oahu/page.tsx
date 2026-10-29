@@ -115,31 +115,27 @@ export default function AcRepairOahuPage() {
         "@context": "https://schema.org",
         "@graph": [
             {
-                "@type": "HVACBusiness",
-                "name": "Affordable Home AC - Oahu Window AC Repair & Diagnostic Troubleshooting",
-                "telephone": "+1-808-488-1111",
-                "priceRange": "$$",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leoleo St. #203",
-                    "addressLocality": "Waipahu",
-                    "addressRegion": "HI",
-                    "postalCode": "96797",
-                    "addressCountry": "US"
-                },
-                "areaServed": "Oahu, Hawaii",
-                "description": "Local Oahu cooling specialists providing diagnostic troubleshooting, repair, and replacement for window and through-the-wall air conditioners across Honolulu, Waipahu, and all Oahu."
-            },
-            {
                 "@type": "Service",
+                "@id": "https://www.affordablehome-ac.com/ac-repair-oahu#service",
                 "name": "Window AC Repair & Diagnostics Oahu",
                 "serviceType": "Window AC Repair & Troubleshooting",
                 "provider": {
                     "@type": "HVACBusiness",
-                    "name": "Affordable Home AC"
+                    "name": "Affordable Home A/C",
+                    "telephone": "+1-808-488-1111",
+                    "priceRange": "$395 - $1,200",
+                    "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "94-150 Leoleo St. #203",
+                        "addressLocality": "Waipahu",
+                        "addressRegion": "HI",
+                        "postalCode": "96797",
+                        "addressCountry": "US"
+                    }
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Professional Window AC diagnostic troubleshooting and repairs across Honolulu, Waipahu, and island-wide Oahu."
+                "description": "Local Oahu cooling specialists providing diagnostic troubleshooting, repair, and replacement for window and through-the-wall air conditioners ($0 Free Clean-vs-Replace Assessment) across Honolulu, Waipahu, and all Oahu."
             },
             {
                 "@type": "BreadcrumbList",

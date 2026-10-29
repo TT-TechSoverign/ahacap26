@@ -45,28 +45,49 @@ export default function Homepage() {
             </div>
 
             <main className="relative z-10 pt-[88px] md:pt-[176px]">
-                {/* Google WebSite & Sitelinks Search Box Schema */}
+                {/* Google WebSite, Sitelinks Search Box & Homepage AggregateRating Schema */}
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
                         __html: JSON.stringify({
                             "@context": "https://schema.org",
-                            "@type": "WebSite",
-                            "@id": "https://www.affordablehome-ac.com/#website",
-                            "url": "https://www.affordablehome-ac.com",
-                            "name": "Affordable Home A/C",
-                            "description": "In-stock LG Dual Inverter & GE Window ACs ($395–$1,200), custom jalousie window AC installation, and window AC deep cleaning across Oahu, Hawaii.",
-                            "publisher": {
-                                "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
-                            },
-                            "potentialAction": {
-                                "@type": "SearchAction",
-                                "target": {
-                                    "@type": "EntryPoint",
-                                    "urlTemplate": "https://www.affordablehome-ac.com/shop?q={search_term_string}"
+                            "@graph": [
+                                {
+                                    "@type": "WebSite",
+                                    "@id": "https://www.affordablehome-ac.com/#website",
+                                    "url": "https://www.affordablehome-ac.com",
+                                    "name": "Affordable Home A/C",
+                                    "description": "In-stock LG Dual Inverter & GE Window ACs ($395–$1,200), custom jalousie window AC installation, and window AC deep cleaning across Oahu, Hawaii.",
+                                    "publisher": {
+                                        "@type": "Organization",
+                                        "name": "Affordable Home A/C",
+                                        "url": "https://www.affordablehome-ac.com"
+                                    },
+                                    "potentialAction": {
+                                        "@type": "SearchAction",
+                                        "target": {
+                                            "@type": "EntryPoint",
+                                            "urlTemplate": "https://www.affordablehome-ac.com/shop?q={search_term_string}"
+                                        },
+                                        "query-input": "required name=search_term_string"
+                                    }
                                 },
-                                "query-input": "required name=search_term_string"
-                            }
+                                {
+                                    "@type": "HVACBusiness",
+                                    "@id": "https://www.affordablehome-ac.com/#localbusiness",
+                                    "name": "Affordable Home A/C",
+                                    "url": "https://www.affordablehome-ac.com",
+                                    "telephone": "+1-808-488-1111",
+                                    "priceRange": "$395 - $1,200",
+                                    "aggregateRating": {
+                                        "@type": "AggregateRating",
+                                        "ratingValue": "4.9",
+                                        "reviewCount": "142",
+                                        "bestRating": "5",
+                                        "worstRating": "1"
+                                    }
+                                }
+                            ]
                         })
                     }}
                 />

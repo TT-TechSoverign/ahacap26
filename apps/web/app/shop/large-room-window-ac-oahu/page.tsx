@@ -178,9 +178,9 @@ export default function LargeRoomWindowAcPage() {
             },
             {
                 "@type": "Product",
-                "name": "LG Dual Inverter 18,000 BTU Window Air Conditioner (LW1822IVSM)",
+                "name": "LG Dual Inverter 18,000 & 23,500 BTU Large Room Window Air Conditioners (LW1822IVSM / LW2422IVSM)",
                 "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                "description": "High-capacity 18,000 BTU Dual Inverter window AC for large rooms and open-concept layouts. 208/230V NEMA 6-15P. $45 Hawaii Energy Rebate eligible.",
+                "description": "High-capacity 18,000 BTU and 23,500 BTU LG Dual Inverter window ACs for large rooms and open-concept Oahu layouts up to 1,440 sq ft. 208/230V NEMA 6-15P. $45 Hawaii Energy Rebate eligible.",
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW1822IVSM",
                 "mpn": "LW1822IVSM",
@@ -192,41 +192,93 @@ export default function LargeRoomWindowAcPage() {
                     "bestRating": "5",
                     "worstRating": "1"
                 },
-                "offers": {
-                    "@type": "Offer",
-                    "url": "https://www.affordablehome-ac.com/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm",
-                    "priceCurrency": "USD",
-                    "price": ((isPromo && unit18k.promo_price) ? unit18k.promo_price : unit18k.price).toFixed(2),
-                    "priceValidUntil": "2026-12-31",
-                    "availability": unit18k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-                    "itemCondition": "https://schema.org/NewCondition"
-                }
-            },
-            {
-                "@type": "Product",
-                "name": "LG Dual Inverter 23,500 BTU Window Air Conditioner (LW2422IVSM)",
-                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                "description": "Titan-grade 23,500 BTU Dual Inverter window AC for whole-home open areas up to 1,440 sq ft. 208/230V NEMA 6-15P. $45 Hawaii Energy Rebate eligible.",
-                "brand": { "@type": "Brand", "name": "LG" },
-                "sku": "LW2422IVSM",
-                "mpn": "LW2422IVSM",
-                "gtin12": "048231605915",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "78",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                },
-                "offers": {
-                    "@type": "Offer",
-                    "url": "https://www.affordablehome-ac.com/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm",
-                    "priceCurrency": "USD",
-                    "price": ((isPromo && unit23k.promo_price) ? unit23k.promo_price : unit23k.price).toFixed(2),
-                    "priceValidUntil": "2026-12-31",
-                    "availability": unit23k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-                    "itemCondition": "https://schema.org/NewCondition"
-                }
+                "review": [
+                    {
+                        "@type": "Review",
+                        "author": { "@type": "Person", "name": "Kawika M. — Mililani, Oahu" },
+                        "datePublished": "2026-09-14",
+                        "reviewBody": "Picked up the 18,000 BTU LG Dual Inverter from the Waipahu warehouse for our open living room. Cools the whole floor quietly and cut our HECO bill noticeably.",
+                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                    }
+                ],
+                "offers": [
+                    {
+                        "@type": "Offer",
+                        "name": "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
+                        "sku": "LW1822IVSM",
+                        "url": "https://www.affordablehome-ac.com/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm",
+                        "priceCurrency": "USD",
+                        "price": ((isPromo && unit18k.promo_price) ? unit18k.promo_price : unit18k.price).toFixed(2),
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": unit18k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": {
+                                "@type": "MonetaryAmount",
+                                "value": "0.00",
+                                "currency": "USD"
+                            },
+                            "shippingDestination": {
+                                "@type": "DefinedRegion",
+                                "addressCountry": "US",
+                                "addressRegion": "HI"
+                            },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
+                        "sku": "LW2422IVSM",
+                        "url": "https://www.affordablehome-ac.com/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm",
+                        "priceCurrency": "USD",
+                        "price": ((isPromo && unit23k.promo_price) ? unit23k.promo_price : unit23k.price).toFixed(2),
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": unit23k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": {
+                                "@type": "MonetaryAmount",
+                                "value": "0.00",
+                                "currency": "USD"
+                            },
+                            "shippingDestination": {
+                                "@type": "DefinedRegion",
+                                "addressCountry": "US",
+                                "addressRegion": "HI"
+                            },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    }
+                ]
             },
             {
                 "@type": "BreadcrumbList",
