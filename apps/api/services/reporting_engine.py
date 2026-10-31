@@ -747,7 +747,19 @@ While our rankings are great, we have some huge opportunities to get even more c
                 "modified_time": os.path.getmtime(mf)
             })
 
-        reports.sort(key=lambda r: r["modified_time"], reverse=True)
+        month_order = {
+            "january": 1, "february": 2, "march": 3, "april": 4,
+            "may": 5, "june": 6, "july": 7, "august": 8,
+            "september": 9, "october": 10, "november": 11, "december": 12,
+        }
+        reports.sort(
+            key=lambda r: (
+                _safe_int(r.get("year", 2026)),
+                month_order.get(str(r.get("month", "")).lower(), 0),
+                r.get("modified_time", 0),
+            ),
+            reverse=True,
+        )
         return reports
 
 

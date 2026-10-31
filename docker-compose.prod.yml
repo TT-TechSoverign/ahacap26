@@ -104,6 +104,7 @@ services:
       - REVALIDATE_SECRET=${REVALIDATE_SECRET}
     volumes:
       - ./apps/api/content:/app/content
+      - ./_analytics_data:/app/_analytics_data
     command: >
       sh -c "python fix_db_schema.py && 
              python seed_products.py && 

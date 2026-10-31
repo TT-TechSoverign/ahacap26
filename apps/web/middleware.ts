@@ -77,7 +77,7 @@ export function middleware(request: NextRequest) {
 
         // Safeguard against infinite redirect loop
         const hasBloat = WOOCOMMERCE_BLOAT_PARAMS.some(p => url.searchParams.has(p));
-        if (cleanDest === rawPath || (cleanDest === cleanPath && !hasTrailingSlash && !hasBloat)) {
+        if (cleanDest === rawPath && !hasTrailingSlash && !hasBloat) {
             return NextResponse.next();
         }
 

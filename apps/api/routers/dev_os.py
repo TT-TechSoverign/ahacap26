@@ -2513,7 +2513,7 @@ async def run_agent_document_forge() -> Dict[str, Any]:
         "markdown_available": True,
         "reports_with_docx": docx_count,
         "reports_with_html": html_count,
-        "details": f"Multi-format document forge ready: {docx_count} Word docs (.docx) and {html_count} HTML presentations (.html) verified across June-September 2026."
+        "details": f"Multi-format document forge ready: {docx_count} Word docs (.docx) and {html_count} HTML presentations (.html) verified across June-October 2026."
     }
 
 # Map agent ID to its runner
