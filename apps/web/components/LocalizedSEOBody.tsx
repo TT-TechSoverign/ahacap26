@@ -3,6 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import * as LucideIcons from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 
 interface SEOBodyProps {
     city: string;
@@ -10,6 +12,14 @@ interface SEOBodyProps {
 }
 
 export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
+    const { addToCart, openCart } = useCart();
+    const handleQuickBuy = (productId: number) => {
+        const prod = INITIAL_CATALOG_PRODUCTS.find((item) => item.id === productId);
+        if (prod && prod.stock > 0) {
+            addToCart(prod);
+            openCart();
+        }
+    };
     
     // DYNAMIC PERSONALIZATION LOGIC (Anti-Duplicate Content)
     // We alter the HVAC diagnosis narrative based on the micro-climate of the region.
@@ -152,7 +162,8 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <th className="py-3 pr-4">Room Type in {city}</th>
                                     <th className="py-3 px-4">Oahu Single-Wall Sq. Ft.</th>
                                     <th className="py-3 px-4">Recommended LG / GE Model</th>
-                                    <th className="py-3 pl-4">Rebate &amp; HECO Impact</th>
+                                    <th className="py-3 px-4">Rebate &amp; HECO Impact</th>
+                                    <th className="py-3 pl-4 text-right">Instant Checkout</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-800/70 text-slate-300">
@@ -169,7 +180,25 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                             </Link>
                                         </div>
                                     </td>
-                                    <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • 44dB Sleep-Quiet</td>
+                                    <td className="py-3.5 px-4 text-emerald-400 font-medium">$45 Rebate • 44dB Sleep-Quiet</td>
+                                    <td className="py-3.5 pl-4 text-right">
+                                        <div className="flex flex-col items-end gap-1.5">
+                                            <button
+                                                type="button"
+                                                onClick={() => handleQuickBuy(11)}
+                                                className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                            >
+                                                Buy 8k ($395)
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => handleQuickBuy(3)}
+                                                className="px-3 py-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 font-header font-bold text-[10px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                            >
+                                                Buy 10k ($650)
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td className="py-3.5 pr-4 font-bold text-white">Master Bedroom / Studio</td>
@@ -179,7 +208,16 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                             LG LW1222IVSM (12,000 BTU 115V • $745 In Stock)
                                         </Link>
                                     </td>
-                                    <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • Saves ~$424/yr</td>
+                                    <td className="py-3.5 px-4 text-emerald-400 font-medium">$45 Rebate • Saves ~$424/yr</td>
+                                    <td className="py-3.5 pl-4 text-right">
+                                        <button
+                                            type="button"
+                                            onClick={() => handleQuickBuy(4)}
+                                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                        >
+                                            Buy 12k ($745)
+                                        </button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td className="py-3.5 pr-4 font-bold text-white">26&quot; Condo Thru-the-Wall Sleeve</td>
@@ -189,7 +227,16 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                             GE AJCQ12AXXWA (R-32 Inverter • $1,200 In Stock)
                                         </Link>
                                     </td>
-                                    <td className="py-3.5 pl-4 text-cyan-300 font-medium">True 26&quot; Wall Sleeve Fit</td>
+                                    <td className="py-3.5 px-4 text-cyan-300 font-medium">True 26&quot; Wall Sleeve Fit</td>
+                                    <td className="py-3.5 pl-4 text-right">
+                                        <button
+                                            type="button"
+                                            onClick={() => handleQuickBuy(15)}
+                                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                        >
+                                            Buy GE 12k ($1,200)
+                                        </button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td className="py-3.5 pr-4 font-bold text-white">Living Room / Open Layout</td>
@@ -199,7 +246,16 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                             LG LW1822IVSM (18,000 BTU 230V • $925 In Stock)
                                         </Link>
                                     </td>
-                                    <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • Heavy Dehumidification</td>
+                                    <td className="py-3.5 px-4 text-emerald-400 font-medium">$45 Rebate • Heavy Dehumidification</td>
+                                    <td className="py-3.5 pl-4 text-right">
+                                        <button
+                                            type="button"
+                                            onClick={() => handleQuickBuy(6)}
+                                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                        >
+                                            Buy 18k ($925)
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

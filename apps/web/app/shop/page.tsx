@@ -1772,11 +1772,10 @@ function SizingGuideSection() {
             btu: "6,000 - 8,000",
             app: "Small Bedroom / Office",
             models: [
-                { name: "LW6023IVSM", link: "#dual_inverter" },
-                { name: "LW8022IVSM", link: "#dual_inverter" },
-                { name: "AJCQ08AWJ", link: "#ge" },
-                { name: "LW8023HRSM", link: "#universal_fit" },
-                { name: "LW8024RD", link: "#base" }
+                { name: "LW8024RD • $395", link: "/shop/11-lg-8-000-btu-lw8024rd" },
+                { name: "LW6023IVSM • $560", link: "/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm" },
+                { name: "LW8023HRSM • $650", link: "/shop/8-lg-7-600-btu-lw8023hrsm" },
+                { name: "AJCQ08AWJ • $1,000", link: "/shop/13-ge-8-200-btu-ajcq08awj" }
             ]
         },
         {
@@ -1784,11 +1783,10 @@ function SizingGuideSection() {
             btu: "10,000 - 12,000",
             app: "Master / Studio",
             models: [
-                { name: "LW1022IVSM", link: "#dual_inverter" },
-                { name: "LW1222IVSM", link: "#dual_inverter" },
-                { name: "AJCQ10AWJ", link: "#ge" },
-                { name: "AJCQ12AXXWA", link: "#ge" },
-                { name: "LW1217ERSM1", link: "#base" }
+                { name: "LW1217ERSM1 • $625", link: "/shop/12-lg-12-000-btu-lw1217ersm1" },
+                { name: "LW1022IVSM • $650", link: "/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm" },
+                { name: "LW1222IVSM • $745", link: "/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm" },
+                { name: "AJCQ12AXXWA • $1,200", link: "/shop/15-ge-12-000-btu-ajcq12axxwa" }
             ]
         },
         {
@@ -1796,24 +1794,23 @@ function SizingGuideSection() {
             btu: "14,000 - 15,000",
             app: "Living / Large Master",
             models: [
-                { name: "LW1522FVSM", link: "#dual_inverter" }
+                { name: "LW1522FVSM • $785", link: "/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm" }
             ]
         },
         {
             sq: "400+",
-            btu: "18,000 - 24,000",
+            btu: "18,000 - 23,500",
             app: "Whole Floor / Large Open Space",
             models: [
-                { name: "LW1822IVSM", link: "#dual_inverter" },
-                { name: "LW2422IVSM", link: "#dual_inverter" },
-                { name: "LW1823HRSM", link: "#universal_fit" },
-                { name: "LW2423HRSM", link: "#universal_fit" }
+                { name: "LW1822IVSM • $925", link: "/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm" },
+                { name: "LW1823HRSM • $925", link: "/shop/9-lg-18-000-btu-lw1823hrsm" },
+                { name: "LW2422IVSM • $1,025", link: "/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm" }
             ]
         },
     ];
 
     return (
-        <section id="sizing-guide" className="scroll-mt-20 px-4">
+        <section id="sizing-guide" className="scroll-mt-24 md:scroll-mt-48 px-4">
             <SectionHeader
                 contentKey="shop.guide"
                 icon="straighten"

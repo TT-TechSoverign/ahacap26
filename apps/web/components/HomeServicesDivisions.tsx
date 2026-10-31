@@ -85,7 +85,7 @@ export function HomeServicesDivisions() {
                 {
                     title: 'Window AC Delivery & Warehouse Pickup',
                     desc: '$50 flat delivery across Honolulu, West, Central & Windward Oahu or same-day vehicle loading at our Waipahu warehouse. Factory-sealed with 1-Yr / 2-Yr warranty.',
-                    href: '/oahu-curbside-ac-delivery',
+                    href: '/window-ac-delivery-service-oahu',
                     cta: 'Delivery & Pickup Info',
                     icon: Truck,
                     badge: '$50 Flat Delivery'
@@ -93,7 +93,7 @@ export function HomeServicesDivisions() {
                 {
                     title: '26" Thru-The-Wall Sleeve Replacement',
                     desc: 'Direct drop-in GE AJCQ & LG LT replacements for Oahu high-rises, condos, and townhomes with existing 26-inch wall sleeves.',
-                    href: '/thru-the-wall-ac-replacement-oahu',
+                    href: '/shop/ge-built-in-wall-ac-oahu',
                     cta: 'View 26" Sleeve Units',
                     icon: Wind,
                     badge: 'GE & LG Chassis'
@@ -134,7 +134,7 @@ export function HomeServicesDivisions() {
                 {
                     title: 'Seasonal Window AC Maintenance',
                     desc: 'Preventative salt-air coil rinse, filter replacement, weep-hole clearing, and airflow temperature verification for residential & commercial window units.',
-                    href: '/maintenance',
+                    href: '/seasonal-ac-maintenance-plans-oahu',
                     cta: 'Window AC Maintenance',
                     icon: ShieldCheck,
                     badge: 'Extend Unit Life'
@@ -168,7 +168,7 @@ export function HomeServicesDivisions() {
     ];
 
     return (
-        <section id="services" className="scroll-mt-24 relative py-16 px-4 bg-[#080d19] border-t border-slate-800/80">
+        <section id="services" className="scroll-mt-24 md:scroll-mt-48 relative py-16 px-4 bg-[#080d19] border-t border-slate-800/80">
             {/* Ambient Island Gradients */}
             <div className="absolute top-10 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-10 right-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />

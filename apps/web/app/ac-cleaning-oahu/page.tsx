@@ -358,7 +358,7 @@ export default function AcCleaningOahuPage() {
 
                     {/* Right 5 Columns: Booking Intake */}
                     <div className="lg:col-span-5">
-                        <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-white/10 shadow-2xl sticky top-28">
+                        <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-white/10 shadow-2xl sticky top-24 md:top-[184px]">
                             <div className="border-b border-white/10 pb-4 mb-4">
                                 <div className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full mb-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -508,7 +508,7 @@ export default function AcCleaningOahuPage() {
                 </div>
             </main>
                             <WindowAcQuickShop
-                    modelIds={[2, 4, 15, 6]}
+                    modelIds={[3, 4, 15, 6]}
                     title="In-Stock Waipahu LG & GE Window Air Conditioners ($395–$1,200)"
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />

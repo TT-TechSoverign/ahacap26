@@ -430,7 +430,7 @@ MASTER_BRAIN_STATE: Dict[str, Any] = {
             "island_grounding": "Oahu Waipahu warehouse operations, HECO 44.2c/kWh power model, Waipahu warehouse pickup, By-Appointment-First zero-barrier booking."
         },
         "hawaii_energy_rebate_truth": {
-            "window_ac_policy": "Qualifying ENERGY STAR LG Dual Inverter & GE Inverter window AC units receive an instant/mail-in $45 Hawaii Energy cash rebate via AHAC's pre-approved official application form PDF (/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf), anchored on /shop#rebate and /hawaii-energy-ac-rebates-oahu.",
+            "window_ac_policy": "Qualifying ENERGY STAR LG Dual Inverter & GE Inverter window AC units receive an instant/mail-in $45 Hawaii Energy cash rebate via AHAC's pre-approved official application form PDF (/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf), anchored on /shop#rebate and /hawaii-energy-rebate.",
             "heco_savings_anchor": "HECO 44.2c/kWh power rate means upgrading from 9.8-CEER to an LG Dual Inverter or GE R-32 Inverter saves ~$424.32/yr, paying off unit replacement in 9.4-12 months."
         },
         "analytics_swarm_radar": {

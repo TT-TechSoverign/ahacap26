@@ -170,7 +170,7 @@ export default function NarrowWindowAcSolutionsPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    modelIds={[13, 14, 15, 3]}
+                    modelIds={[13, 15, 8, 3]}
                     title="In-Stock Condo, Wall Sleeve & Narrow Window ACs"
                     subheading="Genuine GE 26-inch Built-In Thru-the-Wall units and whisper-quiet LG Dual Inverters in stock at our Waipahu warehouse."
                 />

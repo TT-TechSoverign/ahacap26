@@ -67,9 +67,9 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
             title: 'Window AC Cleaning & Care Division',
             links: [
                 { text: 'Window AC Deep Cleaning', href: '/ac-cleaning-oahu', icon: Sparkles, badge: 'Mold & Coil' },
-                { text: 'Window AC Maintenance', href: '/maintenance', icon: ShieldCheck, badge: 'Sanitize' },
+                { text: 'Window AC Maintenance', href: '/seasonal-ac-maintenance-plans-oahu', icon: ShieldCheck, badge: 'Sanitize' },
                 { text: 'Window AC Troubleshooting', href: '/ac-repair-oahu', icon: Wrench, badge: 'Diagnostics' },
-                { text: '26" Wall Sleeve Replacement', href: '/thru-the-wall-ac-replacement-oahu', icon: Store },
+                { text: '26" Wall Sleeve Replacement', href: '/shop/ge-built-in-wall-ac-oahu', icon: Store },
             ]
         },
         {

@@ -425,7 +425,7 @@ export default function ProductDetailPage() {
             <main className="pt-[92px] md:pt-[180px] pb-36 md:pb-16 px-4 md:px-8 max-w-6xl mx-auto text-center md:text-left">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     {/* Visual Anchor & 3D Spatial Center */}
-                    <div className="space-y-4 md:sticky md:top-36">
+                    <div className="space-y-4 md:sticky md:top-[184px]">
                         {/* Media View Tab Switcher */}
                         <div className="flex items-center gap-1.5 p-1 bg-surface-dark/90 border border-border-dark rounded-xl text-xs font-header font-bold uppercase tracking-wider shadow-md">
                             <button

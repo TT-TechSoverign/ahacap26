@@ -79,7 +79,7 @@ export default function ServiceAreasPage() {
                     }
 
                     return (
-                        <div key={region.id} className="scroll-mt-32" id={region.id}>
+                        <div key={region.id} className="scroll-mt-24 md:scroll-mt-48" id={region.id}>
                             {/* Region Header */}
                             <div className="flex flex-col items-center text-center gap-4 mb-10">
                                 <RegionIcon className="w-10 h-10 text-cyan-400 mb-2" strokeWidth={1.5} />

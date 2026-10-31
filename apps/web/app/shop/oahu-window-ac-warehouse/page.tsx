@@ -158,7 +158,7 @@ export default function OahuWindowAcWarehousePage() {
             />
 
             {/* Top Breadcrumb Header */}
-            <div className="border-b border-slate-800 bg-slate-900/60 backdrop-blur-md sticky top-0 z-30">
+            <div className="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-[72px] md:top-[168px] z-30">
                 <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between text-xs text-slate-400">
                     <nav className="flex items-center space-x-2">
                         <Link href="/" className="hover:text-emerald-400 transition-colors">Home</Link>
@@ -168,10 +168,13 @@ export default function OahuWindowAcWarehousePage() {
                         <span className="text-emerald-400 font-medium">Oahu AC Warehouse</span>
                     </nav>
                     <div className="flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <a
+                            href="#warehouse-inventory"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition-all"
+                        >
                             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
-                            Live Waipahu Inventory
-                        </span>
+                            <span>Shop Live Inventory ($395–$1,200) &darr;</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -315,7 +318,7 @@ export default function OahuWindowAcWarehousePage() {
             </section>
 
             {/* Interactive Live Inventory Showcase */}
-            <section id="warehouse-inventory" className="py-16 px-4">
+            <section id="warehouse-inventory" className="py-16 px-4 scroll-mt-28 md:scroll-mt-48">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center max-w-3xl mx-auto mb-12">
                         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">

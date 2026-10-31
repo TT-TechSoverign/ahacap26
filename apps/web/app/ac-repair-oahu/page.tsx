@@ -296,7 +296,7 @@ export default function AcRepairOahuPage() {
 
                     {/* Dispatch Intake Form (Right 5 Cols) */}
                     <div className="lg:col-span-5">
-                        <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-white/10 shadow-2xl relative sticky top-28">
+                        <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-white/10 shadow-2xl relative sticky top-24 md:top-[184px]">
                             <div className="border-b border-white/10 pb-4 mb-4">
                                 <div className="inline-flex items-center gap-1 text-[10px] font-mono font-bold uppercase text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded mb-2">
                                     Zero Upfront Deposit

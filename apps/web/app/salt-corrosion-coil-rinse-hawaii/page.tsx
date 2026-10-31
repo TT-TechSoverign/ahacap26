@@ -184,7 +184,7 @@ export default function SaltCorrosionPage() {
                 </section>
 
                                 <WindowAcQuickShop
-                    modelIds={[2, 4, 15, 6]}
+                    modelIds={[3, 4, 15, 6]}
                     title="In-Stock Waipahu LG & GE Window Air Conditioners ($395–$1,200)"
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />

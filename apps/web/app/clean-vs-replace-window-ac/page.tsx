@@ -30,10 +30,22 @@ import {
 import { BackToTop } from '@/components/BackToTop';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { trackFunnelEvent } from '@/lib/tracking';
+import { useCart } from '@/context/CartContext';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { ShoppingCart } from 'lucide-react';
 
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 
 export default function CleanVsReplacePage() {
+    const { addToCart, openCart } = useCart();
+    const handleQuickBuy = (productId: number) => {
+        const prod = INITIAL_CATALOG_PRODUCTS.find((item) => item.id === productId);
+        if (prod && prod.stock > 0) {
+            trackFunnelEvent('decision_matrix_quick_buy', { product_id: productId });
+            addToCart(prod);
+            openCart();
+        }
+    };
     // Interactive Decision State
     const [age, setAge] = useState<string>('3-5');
     const [condition, setCondition] = useState<string>('mold');
@@ -325,12 +337,30 @@ export default function CleanVsReplacePage() {
                                         </div>
 
                                         <div className="space-y-2 pt-2">
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleQuickBuy(3)}
+                                                    className="py-3 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-xs uppercase tracking-wider text-center flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(16,185,129,0.25)] transition-all"
+                                                >
+                                                    <ShoppingCart className="size-3.5 shrink-0" />
+                                                    <span>Buy 10k ($650)</span>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleQuickBuy(4)}
+                                                    className="py-3 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-xs uppercase tracking-wider text-center flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(16,185,129,0.25)] transition-all"
+                                                >
+                                                    <ShoppingCart className="size-3.5 shrink-0" />
+                                                    <span>Buy 12k ($745)</span>
+                                                </button>
+                                            </div>
                                             <Link
                                                 href="/shop"
                                                 onClick={() => trackFunnelEvent('decision_matrix_cta_shop', { choice: 'replace', age, condition })}
                                                 className="w-full py-3.5 px-6 rounded-xl bg-primary hover:bg-primary/90 text-white font-header font-black text-sm uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(0,174,239,0.35)] transition-all"
                                             >
-                                                Shop In-Stock LG Dual Inverters
+                                                Shop All In-Stock LG &amp; GE Units
                                                 <ArrowRight className="size-4" />
                                             </Link>
                                             <a

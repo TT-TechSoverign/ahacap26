@@ -153,6 +153,7 @@ export function middleware(request: NextRequest) {
         '/hawaii-energy-ac-rebates-oahu': '/hawaii-energy-rebate',
         '/thru-the-wall-ac-replacement-oahu': '/shop/ge-built-in-wall-ac-oahu',
         '/waipahu-ac-warehouse-pickup': '/window-ac-warehouse-pickup-waipahu',
+        '/oahu-curbside-ac-delivery': '/window-ac-delivery-service-oahu',
         '/central-ac': '/shop',
         '/mini_split_ac': '/shop',
         '/ductless-mini-split-installation-oahu': '/window-ac-installation',

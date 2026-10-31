@@ -325,7 +325,7 @@ function CheckoutContent() {
 
                     {/* RIGHT COLUMN - SUMMARY (Sticky) */}
                     <div className="lg:col-span-4 order-2 lg:order-none">
-                        <div className="sticky top-28 space-y-4 md:space-y-6">
+                        <div className="sticky top-24 md:top-[184px] space-y-4 md:space-y-6">
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}

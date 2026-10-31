@@ -155,7 +155,7 @@ export default function Footer() {
                                 { text: 'LG Dual Inverter Lineup', href: '/shop/lg-dual-inverter-guide' },
                                 { text: 'Window AC Installation', href: '/window-ac-installation' },
                                 { text: 'Window AC Deep Cleaning', href: '/ac-cleaning-oahu' },
-                                { text: 'Window AC Maintenance', href: '/maintenance' },
+                                { text: 'Window AC Maintenance', href: '/seasonal-ac-maintenance-plans-oahu' },
                                 { text: 'Window AC Troubleshooting', href: '/ac-repair-oahu' }
                             ].map((item) => (
                                 <li key={item.text}>
@@ -174,8 +174,8 @@ export default function Footer() {
                         <ul className="space-y-4 w-full">
                             {[
                                 { text: 'Oahu Window AC Warehouse', href: '/shop/oahu-window-ac-warehouse' },
-                                { text: '$45 Window AC Rebate', href: '/hawaii-energy-ac-rebates-oahu' },
-                                { text: 'Waipahu Warehouse Pickup', href: '/waipahu-ac-warehouse-pickup' },
+                                { text: '$45 Window AC Rebate', href: '/hawaii-energy-rebate' },
+                                { text: 'Waipahu Warehouse Pickup', href: '/window-ac-warehouse-pickup-waipahu' },
                                 { text: '115V vs 230V Plug Guide', href: '/shop/window-ac-plug-guide' },
                                 { text: 'Jalousie Window AC Install', href: '/jalousie-window-ac-installation-oahu' },
                                 { text: 'Clean vs Replace Guide', href: '/clean-vs-replace-window-ac' },

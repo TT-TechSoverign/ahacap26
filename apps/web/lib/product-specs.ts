@@ -34,63 +34,6 @@ export interface ProductSpec {
 }
 
 const specs: { [key: string]: ProductSpec } = {
-    'GE_SMALL': {
-        btu: '6,000 BTU',
-        coolingArea: '250 sq. ft.',
-        eer: '11.0',
-        voltage: '115V',
-        amps: '4.6 A',
-        watts: '490 W',
-        dimensions: '12.5" H x 18.5" W x 15.25" D',
-        weight: '44 lbs',
-        features: ['Remote Control', '3 Fan Speeds', 'Eco Mode', 'Easy Mount Kit'],
-        warranty: '1 Year Limited',
-        deploymentHeader: 'Best Placements',
-        idealFor: 'Small Bedrooms (10x12)',
-        featureHeader: 'User-Friendly Control',
-        benefits: 'Compact and easier to install in smaller windows.',
-        acousticHeader: 'Consistent Cooling',
-        soundProfile: 'Standard Rotary (54dB)',
-        keyFeature: 'Easy Mount Kit'
-    },
-    'GE_MED': {
-        btu: '10,000 BTU',
-        coolingArea: '450 sq. ft.',
-        eer: '11.4',
-        voltage: '115V',
-        amps: '8.0 A',
-        watts: '870 W',
-        dimensions: '14.5" H x 19.0" W x 21.5" D',
-        weight: '62 lbs',
-        features: ['Energy Star', 'Dehumidify Mode', 'WiFi Connect', 'Voice Control'],
-        warranty: '1 Year Limited',
-        deploymentHeader: 'Best Placements',
-        idealFor: 'Medium Bedrooms, Guest Rooms',
-        featureHeader: 'Control From Anywhere',
-        benefits: 'Balances performance and size, with smart features for convenience.',
-        acousticHeader: 'Sleep Soundly & Stay Cool',
-        soundProfile: 'Standard Rotary (55dB)',
-        keyFeature: 'WiFi Connect'
-    },
-    'GE_LARGE': {
-        btu: '24,000 BTU',
-        coolingArea: '1,500 sq. ft.',
-        eer: '10.3',
-        voltage: '230V',
-        amps: '11.2 A',
-        watts: '2330 W',
-        dimensions: '18.6" H x 26.5" W x 26.5" D',
-        weight: '128 lbs',
-        features: ['Heat/Cool', 'Slide-Out Chassis', '24h Timer', 'Heavy Duty'],
-        warranty: '1 Year Limited',
-        deploymentHeader: 'Ideal Installation',
-        idealFor: 'Large Living Areas, Garages',
-        featureHeader: 'Heavy-Duty Performance',
-        benefits: 'High capacity for rapid cooling of large hot spaces.',
-        acousticHeader: 'Industrial Power',
-        soundProfile: 'High Capacity (60dB)',
-        keyFeature: 'Slide-Out Chassis'
-    },
     'LG_DUAL_6K': {
         btu: '6,000 BTU',
         coolingArea: 'Up to 260 sq. ft. (AHAM) • Up to 220 sq. ft. (Oahu Single-Wall)',
@@ -294,25 +237,6 @@ const specs: { [key: string]: ProductSpec } = {
         soundProfile: 'Power Cooling (53 / 62 dB) - Quiet for 24K Class',
         keyFeature: 'Flagship 23,500 BTU Dual Inverter'
     },
-    'LG_SMART_8K': {
-        btu: '8,000 BTU',
-        coolingArea: 'Up to 350 sq. ft.',
-        eer: '12.1',
-        voltage: '115V / 15 Amp',
-        amps: '6.2 A',
-        watts: '660 W',
-        dimensions: '12.4" H x 19.6" W x 19.4" D',
-        weight: '58 lbs',
-        features: ['Remote Control', 'Auto Restart', 'Clean Filter Alert', 'Energy Saver'],
-        warranty: '1 Year Limited',
-        deploymentHeader: 'Best Placements',
-        idealFor: 'Small Bedrooms, Home Offices',
-        featureHeader: 'Dependable Control',
-        benefits: 'Reliable rotary cooling with wireless LCD remote control and automatic power-outage restart.',
-        acousticHeader: 'Sleep Soundly & Stay Cool',
-        soundProfile: 'Standard Operation (52 / 58 dB)',
-        keyFeature: 'Gold Fin™ Coating'
-    },
     // LG UNIVERSAL FIT (Window / Through-The-Wall Cool + Heat)
     'LG_UNI_8K': {
         btu: '7,600 BTU',
@@ -430,35 +354,6 @@ const specs: { [key: string]: ProductSpec } = {
         acousticHeader: 'Consistent Cooling',
         soundProfile: 'Standard Rotary (52 / 58 dB)',
         keyFeature: 'Gold Fin™ Anti-Corrosion'
-    },
-    'LG_STD_10K': {
-        btu: '10,000 BTU',
-        coolingArea: 'Up to 450 sq. ft. (AHAM) • Up to 330 sq. ft. (Oahu Single-Wall)',
-        coolingAreaAham: 'Up to 450 sq. ft.',
-        coolingAreaOahu: 'Up to 330 sq. ft.',
-        sizingNotes: 'Smart diagnosis and WiFi enabled standard window cooling.',
-        windowFit: { minHeight: '15.0"', minWidth: '22"', maxWidth: '36"' },
-        chassisType: 'Top-Mount Fixed',
-        shippingWeight: '76 lbs',
-        ceerRating: '12.0',
-        dryAirFlowCfm: '270 CFM',
-        plugType: 'NEMA 5-15P (Standard 115V / 15A)',
-        refrigerant: 'R32',
-        eer: '12.0',
-        voltage: '115V / 15 Amp',
-        amps: '7.8 A',
-        watts: '830 W',
-        dimensions: '14.5" H x 19.5" W x 20.0" D',
-        weight: '68 lbs',
-        features: ['ThinQ® Smart Control', 'Smart Diagnosis™', 'Energy Saver'],
-        warranty: '1 Year Limited',
-        deploymentHeader: 'Best Placements',
-        idealFor: 'Master Bedroom, Studio',
-        featureHeader: 'Control From Anywhere',
-        benefits: 'Integrated Smart Diagnosis allows for system verification and longevity.',
-        acousticHeader: 'Consistent Cooling',
-        soundProfile: 'Standard (52dB)',
-        keyFeature: 'Smart Diagnosis™'
     },
     'LG_STD_12K': {
         btu: '12,000 BTU',
@@ -627,14 +522,6 @@ const defaultSpecs: ProductSpec = {
     keyFeature: 'Standard Fit'
 };
 
-// Update existing mock objects (GE_SMALL etc) to include new fields if needed to avoid TS errors, 
-// strictly speaking we should updated them all.
-specs['GE_SMALL'] = { ...specs['GE_SMALL'], idealFor: 'Small Bedrooms (10x12)', benefits: 'Compact and easier to install in smaller windows.', soundProfile: 'Standard Rotary (54dB)' };
-specs['GE_MED'] = { ...specs['GE_MED'], idealFor: 'Medium Bedrooms, Guest Rooms', benefits: 'Balances performance and size, with smart features for convenience.', soundProfile: 'Standard Rotary (55dB)' };
-specs['GE_LARGE'] = { ...specs['GE_LARGE'], idealFor: 'Large Living Areas, Garages', benefits: 'High capacity for rapid cooling of large hot spaces.', soundProfile: 'High Capacity (60dB)' };
-specs['LG_DUAL_SMALL'] = { ...specs['LG_DUAL_SMALL'], idealFor: 'bedroom window A/C, Bedrooms, Home Offices', benefits: 'Whisper-quiet bedroom window A/C featuring LG inverter technology for energy savings and library-quiet operation.', soundProfile: 'LoDecibel™ (44dB) - Very Quiet' };
-specs['LG_DUAL_LARGE'] = { ...specs['LG_DUAL_LARGE'], idealFor: 'large room window A/C, Large Spaces', benefits: 'High-efficiency large room window A/C designed for maximum cooling in large spaces.', soundProfile: 'Quiet (50dB)' }; // Fallback for the old key if used
-
 export const getProductSpecs = (id: number): ProductSpec => {
     // LG Dual Inverter Series (1-7)
     if (id === 1) return specs['LG_DUAL_6K'];
@@ -662,5 +549,5 @@ export const getProductSpecs = (id: number): ProductSpec => {
     // Accessories
     if (id === 16) return specs['GE_RAB26A'];
 
-    return { ...specs['GE_MED'], idealFor: 'General Use', benefits: 'Reliable cooling.', soundProfile: 'Standard' }; // Default fallback
+    return specs['LG_DUAL_12K'];
 };
