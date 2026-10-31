@@ -113,8 +113,8 @@ export default function LargeRoomWindowAcPage() {
                             </li>
                         </ul>
                         <div className="pt-2">
-                            <Link href="/shop" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
-                                View in Shop Catalog &rarr;
+                            <Link href="/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
+                                View 18,000 BTU Specs & Buy ($925 In Stock) &rarr;
                             </Link>
                         </div>
                     </div>
@@ -132,7 +132,7 @@ export default function LargeRoomWindowAcPage() {
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-primary shrink-0" />
-                                <span><strong>Electrical:</strong> 208/230V &bull; NEMA 6-20P Plug &bull; 20A Breaker</span>
+                                <span><strong>Electrical:</strong> 208/230V &bull; NEMA 6-15P Plug &bull; 15A Breaker</span>
                             </li>
                             <li className="flex items-center gap-2">
                                 <CheckCircle2 className="size-4 text-primary shrink-0" />
@@ -144,8 +144,8 @@ export default function LargeRoomWindowAcPage() {
                             </li>
                         </ul>
                         <div className="pt-2">
-                            <Link href="/shop" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
-                                View in Shop Catalog &rarr;
+                            <Link href="/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
+                                View 23,500 BTU Specs & Buy ($1,025 In Stock) &rarr;
                             </Link>
                         </div>
                     </div>
@@ -224,12 +224,12 @@ export default function LargeRoomWindowAcPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    modelIds={[6, 10, 5, 4]}
+                    modelIds={[6, 7, 5, 4]}
                     title="In-Stock High-Capacity Window ACs (12,000 – 23,500 BTU)"
                     subheading="Heavy-duty LG Dual Inverter & GE units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Large Room Window AC (18,000 - 23,500 BTU) ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Large Room Window AC (18,000 - 23,500 BTU) — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

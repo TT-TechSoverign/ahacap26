@@ -194,7 +194,7 @@ export default function PetHairCleaningPage() {
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 
-                <OahuEEATAuthorityBar topicTitle="Pet Hair & Dander AC Cleaning Oahu ? Oahu Technical & Buying Guide" />
+                <OahuEEATAuthorityBar topicTitle="Pet Hair & Dander AC Cleaning Oahu — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

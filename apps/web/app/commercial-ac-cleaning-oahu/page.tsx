@@ -190,7 +190,7 @@ export default function CommercialAcCleaningPage() {
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 
-                <OahuEEATAuthorityBar topicTitle="Commercial AC Cleaning Oahu ? Oahu Technical & Buying Guide" />
+                <OahuEEATAuthorityBar topicTitle="Commercial AC Cleaning Oahu — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

@@ -175,7 +175,7 @@ export default function StudioApartmentWindowAcPage() {
                     subheading="Plug-and-play 115V LG Standard & Dual Inverter models in stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Window AC for Studios & Apartments ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Window AC for Studios & Apartments — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

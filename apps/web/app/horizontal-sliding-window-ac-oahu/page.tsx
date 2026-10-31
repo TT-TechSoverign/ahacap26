@@ -175,7 +175,7 @@ export default function HorizontalSlidingWindowAcPage() {
                     subheading="Genuine GE 26-inch Built-In Thru-the-Wall units and whisper-quiet LG Dual Inverters in stock at our Waipahu warehouse."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Horizontal Sliding Window AC Installation ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Horizontal Sliding Window AC Installation — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

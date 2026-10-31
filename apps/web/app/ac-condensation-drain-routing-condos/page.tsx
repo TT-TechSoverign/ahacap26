@@ -175,7 +175,7 @@ export default function AcCondensationDrainRoutingCondosPage() {
                     subheading="Genuine GE 26-inch Built-In Thru-the-Wall units and whisper-quiet LG Dual Inverters in stock at our Waipahu warehouse."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="AC Condensation Drain Routing for Condos ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="AC Condensation Drain Routing for Condos — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

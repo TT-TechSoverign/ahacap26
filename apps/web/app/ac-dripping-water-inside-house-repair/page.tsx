@@ -371,7 +371,7 @@ export default function AcDrippingWaterPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                                    <OahuEEATAuthorityBar topicTitle="AC Dripping Water Inside House Repair ? Oahu Technical & Buying Guide" />
+                                    <OahuEEATAuthorityBar topicTitle="AC Dripping Water Inside House Repair — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                         variant="marquee" 

@@ -390,7 +390,7 @@ export default function AcTrippingBreakerPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                                    <OahuEEATAuthorityBar topicTitle="AC Keeps Tripping Breaker Hawaii ? Oahu Technical & Buying Guide" />
+                                    <OahuEEATAuthorityBar topicTitle="AC Keeps Tripping Breaker Hawaii — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                         variant="marquee" 

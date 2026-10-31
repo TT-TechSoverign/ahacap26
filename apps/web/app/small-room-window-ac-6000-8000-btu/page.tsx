@@ -136,8 +136,8 @@ export default function SmallRoomWindowAcPage() {
                             </li>
                         </ul>
                         <div className="pt-2">
-                            <Link href="/shop" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
-                                Check Stock in Shop &rarr;
+                            <Link href="/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
+                                View 6,000 BTU Specs & Buy ($560 In Stock) &rarr;
                             </Link>
                         </div>
                     </div>
@@ -164,9 +164,7 @@ export default function SmallRoomWindowAcPage() {
                             </li>
                         </ul>
                         <div className="pt-2">
-                            <Link href="/shop" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">
-                                Check Stock in Shop &rarr;
-                            </Link>
+                            <div className="flex flex-wrap gap-3"><Link href="/shop/11-lg-8-000-btu-lw8024rd" className="text-xs font-header font-bold uppercase tracking-wider text-emerald-400 hover:underline inline-flex items-center gap-1">Buy In-Stock 8k LW8024RD ($395) &rarr;</Link><Link href="/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm" className="text-xs font-header font-bold uppercase tracking-wider text-primary hover:underline inline-flex items-center gap-1">Buy In-Stock 10k Dual Inv ($650) &rarr;</Link></div>
                         </div>
                     </div>
                 </section>
@@ -234,7 +232,7 @@ export default function SmallRoomWindowAcPage() {
                     subheading="Plug-and-play 115V LG Standard & Dual Inverter models in stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Small Room Window AC (6,000 - 8,000 BTU) ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Small Room Window AC (6,000 - 8,000 BTU) — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

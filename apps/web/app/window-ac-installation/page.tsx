@@ -30,11 +30,15 @@ import {
 } from 'lucide-react';
 import { BackToTop } from '@/components/BackToTop';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
+import { useCart } from '@/context/CartContext';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { ShoppingCart } from 'lucide-react';
 import { trackFunnelEvent } from '@/lib/tracking';
 
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 
 export default function WindowAcInstallationPage() {
+    const { addToCart, openCart } = useCart();
     const [windowType, setWindowType] = useState<string>('jalousie');
     const [includeBracket, setIncludeBracket] = useState<boolean>(true);
     const [unitStatus, setUnitStatus] = useState<string>('need_unit');
@@ -739,12 +743,30 @@ export default function WindowAcInstallationPage() {
                                 </div>
 
                                 <div className="pt-6 space-y-2">
-                                    <Link
-                                        href={`/shop/${unit.slug}`}
-                                        className="w-full py-2.5 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
-                                    >
-                                        View Specs &amp; Buy Now <ArrowRight className="size-3.5" />
-                                    </Link>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const idPart = parseInt(unit.slug.split('-')[0], 10);
+                                                const prod = INITIAL_CATALOG_PRODUCTS.find(p => p.id === idPart);
+                                                if (prod) {
+                                                    addToCart(prod);
+                                                    openCart();
+                                                }
+                                            }}
+                                            className="w-full py-2.5 px-2 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md"
+                                        >
+                                            <ShoppingCart className="size-3.5 shrink-0" />
+                                            <span>Buy ({unit.price})</span>
+                                        </button>
+                                        <Link
+                                            href={`/shop/${unit.slug}`}
+                                            className="w-full py-2.5 px-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-header font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all"
+                                        >
+                                            <span>View Specs</span>
+                                            <ArrowRight className="size-3" />
+                                        </Link>
+                                    </div>
                                     <div className="text-[10px] text-center text-slate-500">
                                         Free Waipahu Pickup (by appointment) or $50 Island Delivery
                                     </div>

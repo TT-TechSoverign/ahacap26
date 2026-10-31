@@ -15,8 +15,11 @@ import {
     Sparkles, 
     Sun,
     AlertCircle,
-    Phone
+    Phone,
+    ShoppingCart
 } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
@@ -93,6 +96,7 @@ const FAQS = [
 ];
 
 export default function LivingRoomWindowAcPage() {
+    const { addToCart, openCart } = useCart();
     const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
@@ -160,7 +164,7 @@ export default function LivingRoomWindowAcPage() {
                                 <li>&bull; <strong>Up to 400 sq. ft. Oahu (550 AHAM):</strong> 12,000 BTU (LW1222IVSM — 115V)</li>
                                 <li>&bull; <strong>Up to 500 sq. ft. Oahu (700 AHAM):</strong> 14,000 BTU (LW1522FVSM — 115V)</li>
                                 <li>&bull; <strong>Up to 600 sq. ft. Oahu (1,000 AHAM):</strong> 18,000 BTU (LW1822IVSM — 230V)</li>
-                                <li>&bull; <strong>Up to 800 sq. ft. Oahu (1,440 AHAM):</strong> 23,500 BTU (LW2423HRSM — 230V)</li>
+                                <li>&bull; <strong>Up to 800 sq. ft. Oahu (1,440 AHAM):</strong> 23,500 BTU (LW2422IVSM — 230V)</li>
                             </ul>
                         </div>
                     </div>
@@ -205,12 +209,29 @@ export default function LivingRoomWindowAcPage() {
                                         <span className="text-2xl font-header font-black text-white">{item.price}</span>
                                         <span className="text-xs font-mono text-emerald-400">{item.afterRebate}</span>
                                     </div>
-                                    <Link 
-                                        href={item.href}
-                                        className="w-full py-3 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
-                                    >
-                                        View Specs &amp; Order Online
-                                    </Link>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const idPart = parseInt(item.href.replace('/shop/', '').split('-')[0], 10);
+                                                const prod = INITIAL_CATALOG_PRODUCTS.find(p => p.id === idPart);
+                                                if (prod) {
+                                                    addToCart(prod);
+                                                    openCart();
+                                                }
+                                            }}
+                                            className="w-full py-3 px-3 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"
+                                        >
+                                            <ShoppingCart className="size-3.5 shrink-0" />
+                                            <span>Buy Online ({item.price})</span>
+                                        </button>
+                                        <Link 
+                                            href={item.href}
+                                            className="w-full py-3 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
+                                        >
+                                            View Specs
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -218,7 +239,7 @@ export default function LivingRoomWindowAcPage() {
                 </section>
 
                 <WindowAcQuickShop
-                    modelIds={[4, 5, 6, 10]}
+                    modelIds={[4, 5, 6, 7]}
                     title="Order Living Room Window ACs Online (12,000 – 23,500 BTU)"
                     subheading="Live Waipahu warehouse stock. Add directly to cart for free Waipahu pickup by appointment or $50 flat Oahu island-wide delivery."
                 />
@@ -279,7 +300,7 @@ export default function LivingRoomWindowAcPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                                    <OahuEEATAuthorityBar topicTitle="Living Room Window AC ? Oahu Technical & Buying Guide" />
+                                    <OahuEEATAuthorityBar topicTitle="Living Room Window AC — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                         variant="marquee" 

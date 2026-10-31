@@ -357,7 +357,7 @@ export default function BlinkingLightErrorCodesPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                                    <OahuEEATAuthorityBar topicTitle="Blinking Light Error Codes AC Repair ? Oahu Technical & Buying Guide" />
+                                    <OahuEEATAuthorityBar topicTitle="Blinking Light Error Codes AC Repair — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                         variant="marquee" 

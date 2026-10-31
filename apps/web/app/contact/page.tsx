@@ -2,6 +2,8 @@
 
 import { DispatchWizard } from '@/components/DispatchWizard';
 import { EditableText } from '@/components/EditableText';
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
 import { Suspense } from 'react';
@@ -69,7 +71,12 @@ export default function ContactPage() {
                         </div>
                     </div>
 
+                    <WindowAcQuickShop
+                        title="Want to Order a Replacement Unit Directly Online? ($395–$1,200)"
+                        subheading="Skip the wait—order your factory-sealed LG Dual Inverter or GE 26-inch Built-In unit online for Free Waipahu Pickup by appointment or $50 flat-rate Oahu delivery."
+                    />
 
+                    <OahuEEATAuthorityBar topicTitle="Oahu Window AC Service, Installation & Warehouse Pickup Dispatch — Oahu Technical & Buying Guide" />
                 </div>
 
 

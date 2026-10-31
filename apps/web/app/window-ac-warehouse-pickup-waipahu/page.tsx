@@ -180,7 +180,7 @@ export default function WindowAcWarehousePickupPage() {
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Waipahu Warehouse Pickup ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Waipahu Warehouse Pickup — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

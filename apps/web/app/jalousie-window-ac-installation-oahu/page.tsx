@@ -397,7 +397,7 @@ export default function JalousieWindowAcInstallationPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                                    <OahuEEATAuthorityBar topicTitle="Jalousie Window AC Installation ? Oahu Technical & Buying Guide" />
+                                    <OahuEEATAuthorityBar topicTitle="Jalousie Window AC Installation — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                         variant="marquee" 

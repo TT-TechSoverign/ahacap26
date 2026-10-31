@@ -373,7 +373,7 @@ export default function AcBlowingWarmAirPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                                    <OahuEEATAuthorityBar topicTitle="AC Blowing Warm Air Troubleshooting ? Oahu Technical & Buying Guide" />
+                                    <OahuEEATAuthorityBar topicTitle="AC Blowing Warm Air Troubleshooting — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                         variant="marquee" 

@@ -175,7 +175,7 @@ export default function CondoTownhouseWindowAcHoaRulesPage() {
                     subheading="Genuine GE 26-inch Built-In Thru-the-Wall units and whisper-quiet LG Dual Inverters in stock at our Waipahu warehouse."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Condo & Townhouse Window AC HOA Rules ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Condo & Townhouse Window AC HOA Rules — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

@@ -165,7 +165,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                                 LG LW8024RD (8,000 BTU 115V • $395 In Stock)
                                             </Link>
                                             <Link href="/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm" className="text-emerald-400 hover:underline text-xs font-medium">
-                                                + LG LW1022IVSM (10,000 BTU Dual Inverter • $690 In Stock)
+                                                + LG LW1022IVSM (10,000 BTU Dual Inverter • $650 In Stock)
                                             </Link>
                                         </div>
                                     </td>
@@ -176,7 +176,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 px-4">280 – 450 sq. ft. (10k–12k BTU)</td>
                                     <td className="py-3.5 px-4">
                                         <Link href="/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm" className="text-cyan-400 hover:underline font-semibold">
-                                            LG LW1222IVSM (12,000 BTU 115V • $725 In Stock)
+                                            LG LW1222IVSM (12,000 BTU 115V • $745 In Stock)
                                         </Link>
                                     </td>
                                     <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • Saves ~$424/yr</td>
@@ -196,7 +196,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 px-4">500 – 1,000+ sq. ft. (18k–23.5k BTU)</td>
                                     <td className="py-3.5 px-4">
                                         <Link href="/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm" className="text-cyan-400 hover:underline font-semibold">
-                                            LG LW1822IVSM (18,000 BTU 230V • $920 In Stock)
+                                            LG LW1822IVSM (18,000 BTU 230V • $925 In Stock)
                                         </Link>
                                     </td>
                                     <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • Heavy Dehumidification</td>

@@ -190,7 +190,7 @@ export default function CommercialWindowAcPage() {
                     subheading="Heavy-duty LG Dual Inverter & GE units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Commercial Window AC Oahu ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Commercial Window AC Oahu — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

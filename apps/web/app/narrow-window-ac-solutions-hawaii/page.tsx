@@ -175,7 +175,7 @@ export default function NarrowWindowAcSolutionsPage() {
                     subheading="Genuine GE 26-inch Built-In Thru-the-Wall units and whisper-quiet LG Dual Inverters in stock at our Waipahu warehouse."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Narrow Window AC Solutions ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Narrow Window AC Solutions — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

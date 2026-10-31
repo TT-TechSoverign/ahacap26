@@ -195,7 +195,7 @@ export default function PostStormInspectionPage() {
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 
-                <OahuEEATAuthorityBar topicTitle="Post-Storm AC Inspection & Cleaning ? Oahu Technical & Buying Guide" />
+                <OahuEEATAuthorityBar topicTitle="Post-Storm AC Inspection & Cleaning — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

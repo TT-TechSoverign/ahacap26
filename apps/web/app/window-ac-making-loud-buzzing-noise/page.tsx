@@ -194,7 +194,7 @@ export default function WindowAcBuzzingPage() {
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Window AC Making Loud Buzzing Noise ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Window AC Making Loud Buzzing Noise — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

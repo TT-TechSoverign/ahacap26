@@ -189,7 +189,7 @@ export default function AirFilterCarePage() {
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 
-                <OahuEEATAuthorityBar topicTitle="AC Air Filter Cleaning & Replacement ? Oahu Technical & Buying Guide" />
+                <OahuEEATAuthorityBar topicTitle="AC Air Filter Cleaning & Replacement — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

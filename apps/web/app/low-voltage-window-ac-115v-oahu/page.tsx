@@ -197,7 +197,7 @@ export default function LowVoltageWindowAcPage() {
                     subheading="Plug-and-play 115V LG Standard & Dual Inverter models in stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="115V Standard Plug Window AC ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="115V Standard Plug Window AC — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

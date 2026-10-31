@@ -175,7 +175,7 @@ export default function HighRiseCondoAcRulesHonoluluPage() {
                     subheading="Genuine GE 26-inch Built-In Thru-the-Wall units and whisper-quiet LG Dual Inverters in stock at our Waipahu warehouse."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="High-Rise Condo Window AC Rules Honolulu ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="High-Rise Condo Window AC Rules Honolulu — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

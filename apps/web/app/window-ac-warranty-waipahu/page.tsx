@@ -173,7 +173,7 @@ export default function WindowAcWarrantyWaipahuPage() {
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Window AC Warranty & Support ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Window AC Warranty & Support — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

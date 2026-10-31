@@ -16,8 +16,11 @@ import {
     ChevronDown, 
     Sparkles, 
     Phone,
-    FileText
+    FileText,
+    ShoppingCart
 } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
@@ -126,6 +129,7 @@ const FAQS = [
 ];
 
 export default function HawaiiEnergyRebatePage() {
+    const { addToCart, openCart } = useCart();
     const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     const handleDownloadPdf = () => {
@@ -281,7 +285,7 @@ export default function HawaiiEnergyRebatePage() {
                                         </span>
                                     </div>
                                     <h3 className="font-header font-bold text-lg uppercase text-white mb-1">
-                                        LG Dual Inverter {item.model}
+                                        {item.model.startsWith('GE ') ? item.model : `LG Dual Inverter ${item.model}`}
                                     </h3>
                                     <p className="text-xs text-slate-300 mb-3">{item.coverage}</p>
                                     <div className="space-y-1 text-[11px] font-mono text-slate-400 mb-4 border-t border-white/5 pt-3">
@@ -295,12 +299,30 @@ export default function HawaiiEnergyRebatePage() {
                                         <span className="text-xl font-header font-black text-white">{item.price}</span>
                                         <span className="text-xs font-mono text-emerald-400 font-semibold">{item.rebatePrice}</span>
                                     </div>
-                                    <Link 
-                                        href={`/shop/${item.slug}`}
-                                        className="w-full py-2.5 rounded-lg bg-primary/20 hover:bg-primary text-primary hover:text-slate-950 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
-                                    >
-                                        View Specs &amp; Buy Now
-                                    </Link>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const idPart = parseInt(item.slug.split('-')[0], 10);
+                                                const targetId = idPart === 2 ? 3 : idPart;
+                                                const prod = INITIAL_CATALOG_PRODUCTS.find(p => p.id === targetId);
+                                                if (prod) {
+                                                    addToCart(prod);
+                                                    openCart();
+                                                }
+                                            }}
+                                            className="w-full py-2.5 px-2 rounded-lg bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md"
+                                        >
+                                            <ShoppingCart className="size-3.5 shrink-0" />
+                                            <span>{item.slug.startsWith('2-') ? 'Buy 10k Alt ($650)' : `Buy (${item.price})`}</span>
+                                        </button>
+                                        <Link 
+                                            href={`/shop/${item.slug}`}
+                                            className="w-full py-2.5 px-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 text-white font-header font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all"
+                                        >
+                                            View Specs
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -385,7 +407,7 @@ export default function HawaiiEnergyRebatePage() {
 
                 {/* Social Proof Pavilion */}
                 <section className="mb-12">
-                                    <OahuEEATAuthorityBar topicTitle="Hawaii Energy $45 Rebate ? Oahu Technical & Buying Guide" />
+                                    <OahuEEATAuthorityBar topicTitle="Hawaii Energy $45 Rebate — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                         variant="marquee" 

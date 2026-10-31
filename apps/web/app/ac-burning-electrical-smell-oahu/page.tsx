@@ -195,7 +195,7 @@ export default function AcBurningSmellPage() {
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="AC Burning Electrical Smell ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="AC Burning Electrical Smell — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 

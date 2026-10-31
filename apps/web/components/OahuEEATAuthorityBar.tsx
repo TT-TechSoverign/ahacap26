@@ -7,10 +7,11 @@ interface OahuEEATAuthorityBarProps {
 }
 
 export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning Technical Guide' }: OahuEEATAuthorityBarProps) {
+    const normalizedTopicTitle = topicTitle.replace(/\s+\?\s+/g, " — ");
     const eeatJsonLd = {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": topicTitle,
+        "headline": normalizedTopicTitle,
         "datePublished": "2026-01-15",
         "dateModified": "2026-10-29",
         "inLanguage": "en-US",

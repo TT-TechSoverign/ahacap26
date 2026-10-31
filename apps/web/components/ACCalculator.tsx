@@ -1,7 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Calculator, CheckCircle2, AlertTriangle, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
+import { Calculator, CheckCircle2, AlertTriangle, ArrowRight, ShieldCheck, HelpCircle, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { useCart } from '../context/CartContext';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 
 interface ACCalculatorProps {
     productBtu: number;
@@ -9,6 +11,7 @@ interface ACCalculatorProps {
 }
 
 export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
+    const { addToCart, openCart } = useCart();
     const [width, setWidth] = useState<number>(12);
     const [length, setLength] = useState<number>(15);
     const [ceilHeight, setCeilHeight] = useState<'standard' | 'high' | 'vaulted'>('standard');
@@ -150,7 +153,18 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
 
     const StatusIcon = sizingStatus.icon;
 
-    // Get recommended in-stock shop link based on BTU mapping
+    // Get recommended in-stock product and shop link based on BTU mapping
+    const matchedProduct = useMemo(() => {
+        const btu = calculations.recommendedBtu;
+        let targetId = 7;
+        if (btu <= 6500) targetId = 1;
+        else if (btu <= 10500) targetId = 3;
+        else if (btu <= 13000) targetId = 4;
+        else if (btu <= 16000) targetId = 5;
+        else if (btu <= 19500) targetId = 6;
+        return INITIAL_CATALOG_PRODUCTS.find(p => p.id === targetId) || INITIAL_CATALOG_PRODUCTS[0];
+    }, [calculations.recommendedBtu]);
+
     const recommendedShopLink = useMemo(() => {
         const btu = calculations.recommendedBtu;
         if (btu <= 6500) return "/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm";
@@ -341,35 +355,45 @@ export function ACCalculator({ productBtu, productName }: ACCalculatorProps) {
                         {/* Direct CTA Sizing Action Pathway */}
                         {calculations.compatibility !== 'PERFECT' ? (
                             <div className="flex flex-col gap-2 w-full">
-                                <Link 
-                                    href={recommendedShopLink} 
-                                    className="w-full text-center bg-primary hover:bg-cyan-400 text-slate-950 text-xs font-header font-black uppercase tracking-widest py-3 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[44px]"
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        addToCart(matchedProduct);
+                                        openCart();
+                                    }}
+                                    className="w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-header font-black uppercase tracking-widest py-3 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[44px]"
                                 >
-                                    <span>Browse {calculations.recommendedBtu.toLocaleString()} BTU In-Stock Units</span>
-                                    <ArrowRight className="size-3.5" />
-                                </Link>
-                                <Link 
-                                    href="/contact" 
-                                    className="w-full text-center bg-transparent border border-slate-600 hover:border-primary text-slate-300 hover:text-white text-xs font-header font-black uppercase tracking-widest py-2.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center min-h-[40px]"
-                                >
-                                    Free In-Home Sizing Assessment ($0)
-                                </Link>
+                                    <ShoppingCart className="size-3.5" />
+                                    <span>Buy Matched {matchedProduct.btu?.toLocaleString()} BTU ({matchedProduct.key_spec}) ? ${matchedProduct.price}</span>
+                                </button>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Link 
+                                        href={recommendedShopLink} 
+                                        className="w-full text-center bg-primary/15 hover:bg-primary/25 border border-primary/40 text-primary text-[11px] font-header font-black uppercase tracking-wider py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1 min-h-[40px]"
+                                    >
+                                        <span>View Specs</span>
+                                        <ArrowRight className="size-3" />
+                                    </Link>
+                                    <Link 
+                                        href="/contact" 
+                                        className="w-full text-center bg-transparent border border-slate-600 hover:border-primary text-slate-300 hover:text-white text-[11px] font-header font-black uppercase tracking-wider py-2.5 px-3 rounded-xl transition-all flex items-center justify-center min-h-[40px]"
+                                    >
+                                        $0 Free Estimate
+                                    </Link>
+                                </div>
                             </div>
                         ) : (
-                            <div className="w-full">
+                            <div className="flex flex-col gap-2 w-full">
                                 <button 
+                                    type="button"
                                     onClick={() => {
-                                        const el = document.getElementById('product-purchase-section');
-                                        if (el) {
-                                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                        } else {
-                                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                                        }
+                                        addToCart(matchedProduct);
+                                        openCart();
                                     }}
                                     className="w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-header font-black uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 min-h-[44px]"
                                 >
-                                    <CheckCircle2 className="size-4 text-slate-950" />
-                                    <span>Perfect Sizing Match - Reserve Unit</span>
+                                    <ShoppingCart className="size-4 text-slate-950" />
+                                    <span>Perfect Match ? Buy Online Now (${matchedProduct.price})</span>
                                 </button>
                             </div>
                         )}

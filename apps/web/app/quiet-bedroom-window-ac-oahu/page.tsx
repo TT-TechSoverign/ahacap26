@@ -15,8 +15,11 @@ import {
     Sparkles, 
     ChevronDown, 
     Clock,
-    Phone
+    Phone,
+    ShoppingCart
 } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
@@ -82,6 +85,7 @@ const FAQS = [
 ];
 
 export default function QuietBedroomWindowAcPage() {
+    const { addToCart, openCart } = useCart();
     const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
@@ -258,12 +262,30 @@ export default function QuietBedroomWindowAcPage() {
                                         <span className="text-2xl font-header font-black text-white">{item.price}</span>
                                         <span className="text-xs font-mono text-emerald-400">{item.afterRebate}</span>
                                     </div>
-                                    <Link 
-                                        href={`/shop/${item.slug}`}
-                                        className="w-full py-3 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
-                                    >
-                                        View Specs &amp; Buy Now
-                                    </Link>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const idPart = parseInt(item.slug.split('-')[0], 10);
+                                                const targetId = idPart === 2 ? 11 : idPart;
+                                                const prod = INITIAL_CATALOG_PRODUCTS.find(p => p.id === targetId);
+                                                if (prod) {
+                                                    addToCart(prod);
+                                                    openCart();
+                                                }
+                                            }}
+                                            className="w-full py-3 px-2 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md"
+                                        >
+                                            <ShoppingCart className="size-3.5 shrink-0" />
+                                            <span>{item.slug.startsWith('2-') ? 'Buy 8k Alt ($395)' : `Buy (${item.price})`}</span>
+                                        </button>
+                                        <Link 
+                                            href={`/shop/${item.slug}`}
+                                            className="w-full py-3 px-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-header font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all"
+                                        >
+                                            View Specs
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -316,7 +338,7 @@ export default function QuietBedroomWindowAcPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                                    <OahuEEATAuthorityBar topicTitle="Quiet Bedroom Window AC ? Oahu Technical & Buying Guide" />
+                                    <OahuEEATAuthorityBar topicTitle="Quiet Bedroom Window AC — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                         variant="marquee" 

@@ -341,7 +341,7 @@ export default function AcFreezingUpPage() {
 
                 {/* Reviews */}
                 <section className="mb-12">
-                                    <OahuEEATAuthorityBar topicTitle="AC Freezing Up Ice on Coils ? Oahu Technical & Buying Guide" />
+                                    <OahuEEATAuthorityBar topicTitle="AC Freezing Up Ice on Coils — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                         variant="marquee" 

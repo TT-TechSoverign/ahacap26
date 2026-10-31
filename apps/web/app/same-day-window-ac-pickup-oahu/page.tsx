@@ -188,7 +188,7 @@ export default function SameDayWindowAcPickupPage() {
                     subheading="Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse (94-150 Leoleo St #203). Free pickup by appointment or $50 flat Oahu delivery."
                 />
 
-                                <OahuEEATAuthorityBar topicTitle="Same-Day Window AC Pickup ? Oahu Technical & Buying Guide" />
+                                <OahuEEATAuthorityBar topicTitle="Same-Day Window AC Pickup — Oahu Technical & Buying Guide" />
 
                 <ReviewsPavilion 
                     variant="marquee" 
