@@ -47,38 +47,63 @@ class AnalyticsSwarmEngine:
         if not self.data_dir or not self.data_dir.exists():
             return None
         
-        # Look for August, July, June or any dated report folders
-        subdirs = [p for p in self.data_dir.iterdir() if p.is_dir() and ("SEO-Report" in p.name or "Ananlytics" in p.name)]
+        month_order = {
+            "december": 12, "dec": 12,
+            "november": 11, "nov": 11,
+            "october": 10, "oct": 10,
+            "september": 9, "sep": 9,
+            "august": 8, "aug": 8,
+            "july": 7, "jul": 7,
+            "june": 6, "jun": 6,
+            "may": 5, "april": 4, "apr": 4, "march": 3, "mar": 3, "february": 2, "feb": 2, "january": 1, "jan": 1
+        }
+        subdirs = [
+            p for p in self.data_dir.iterdir()
+            if p.is_dir() and (
+                "SEO-Report" in p.name
+                or "Ananlytics" in p.name
+                or "Analytics" in p.name
+                or any(m in p.name.lower() for m in month_order)
+            )
+        ]
         if not subdirs:
             return None
         
-        # Month ordering for chronological ranking
-        month_order = {"october": 10, "oct": 10, "september": 9, "sep": 9, "august": 8, "aug": 8, "july": 7, "jul": 7, "june": 6, "jun": 6, "may": 5, "apr": 4, "mar": 3, "feb": 2, "jan": 1}
         def folder_rank(p: Path) -> tuple:
             import re
             name_lower = p.name.lower()
-            # Check for 8-digit date suffix MMDDYYYY
+            year_match = re.search(r'(202\d)', name_lower)
+            year_val = int(year_match.group(1)) if year_match else 2026
+            for m_name, m_num in month_order.items():
+                if m_name in name_lower:
+                    return (year_val, m_num, 28)
             match = re.search(r'(\d{2})(\d{2})(\d{4})', name_lower)
             if match:
                 month, day, year = int(match.group(1)), int(match.group(2)), int(match.group(3))
                 return (year, month, day)
-            for m_name, m_num in month_order.items():
-                if m_name in name_lower:
-                    return (2026, m_num, 1)
             return (2020, 1, 1)
 
         subdirs.sort(key=folder_rank, reverse=True)
         return subdirs[0]
+
+    def _find_csv_in_dir(self, base_folder: Optional[Path], filename: str) -> Optional[Path]:
+        """Finds a CSV file directly or recursively inside a report directory."""
+        if not base_folder or not base_folder.exists():
+            return None
+        direct = base_folder / filename
+        if direct.exists():
+            return direct
+        matches = list(base_folder.rglob(filename))
+        return matches[0] if matches else None
 
     def parse_queries_csv(self, file_path: Optional[Path] = None) -> List[Dict[str, Any]]:
         """Parses Google Search Console Queries.csv into structured records."""
         target_file = file_path
         if not target_file:
             latest_dir = self.get_latest_report_dir()
-            if latest_dir and (latest_dir / "Queries.csv").exists():
-                target_file = latest_dir / "Queries.csv"
-            elif self.data_dir and (self.data_dir / "Queries.csv").exists():
-                target_file = self.data_dir / "Queries.csv"
+            target_file = self._find_csv_in_dir(latest_dir, "Queries.csv")
+            if not target_file and self.data_dir:
+                target_file = self._find_csv_in_dir(self.data_dir, "Queries.csv")
 
         if not target_file or not target_file.exists():
             return self._fallback_queries()
@@ -133,10 +158,9 @@ class AnalyticsSwarmEngine:
         target_file = file_path
         if not target_file:
             latest_dir = self.get_latest_report_dir()
-            if latest_dir and (latest_dir / "Pages.csv").exists():
-                target_file = latest_dir / "Pages.csv"
-            elif self.data_dir and (self.data_dir / "Pages.csv").exists():
-                target_file = self.data_dir / "Pages.csv"
+            target_file = self._find_csv_in_dir(latest_dir, "Pages.csv")
+            if not target_file and self.data_dir:
+                target_file = self._find_csv_in_dir(self.data_dir, "Pages.csv")
 
         if not target_file or not target_file.exists():
             return self._fallback_pages()
@@ -202,7 +226,7 @@ class AnalyticsSwarmEngine:
             "plug_and_electrical": {
                 "name": "115V vs 230V Plug & Outlet Compatibility",
                 "target_route": "/shop/window-ac-plug-guide",
-                "keywords": ["plug", "volt", "115v", "230v", "nema", "breaker", "outlet", "amp"],
+                "keywords": ["plug", "volt", "115v", "230v", "220v", "240v", "nema", "breaker", "outlet", "amp", "electrical", "circuit", "power", "cord", "not turning on", "blinking"],
                 "queries": [],
                 "total_impressions": 0,
                 "total_clicks": 0
