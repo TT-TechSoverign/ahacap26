@@ -21,25 +21,57 @@ interface WindowAcQuickShopProps {
 
 const DEFAULT_IDS = [11, 1, 3, 4]; // $395 8k Standard (ID 11), $560 6k Dual Inv (ID 1), $650 10k Dual Inv (ID 3), $745 12k Dual Inv (ID 4)
 
+const OOS_FALLBACK_MAP: Record<number, number[]> = {
+    2: [11, 3, 1, 8],
+    10: [7, 9, 6],
+    14: [15, 13, 8],
+};
+
+type QuickShopCategory = 'featured' | 'bedroom' | 'large' | 'wall';
+
 export function WindowAcQuickShop({ cityName, title, heading, subheading, modelIds }: WindowAcQuickShopProps) {
     const { addToCart, openCart } = useCart();
     const [addedId, setAddedId] = useState<number | null>(null);
+    const [activeCategory, setActiveCategory] = useState<QuickShopCategory>('featured');
     const isPromo = isCampaignActive();
-    const { inStockAcProducts, inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
+    const { inStockAcProducts, inStockAcCount, totalPhysicalAcUnits, minPrice, maxPrice } = useLiveInventorySummary();
 
     const units = useMemo(() => {
-        const targetIds = modelIds && modelIds.length > 0 ? modelIds : DEFAULT_IDS;
         const byId = new Map<number, Product>(inStockAcProducts.map((p) => [p.id, p]));
+        let targetIds: number[];
+
+        if (activeCategory === 'bedroom') {
+            targetIds = [11, 1, 3, 4, 8, 12];
+        } else if (activeCategory === 'large') {
+            targetIds = [5, 6, 7, 9, 4, 12];
+        } else if (activeCategory === 'wall') {
+            targetIds = [15, 13, 8, 9, 4];
+        } else {
+            targetIds = modelIds && modelIds.length > 0 ? modelIds : DEFAULT_IDS;
+        }
+
         const selected: Product[] = [];
         const usedIds = new Set<number>();
 
-        for (const id of targetIds) {
+        const trySelect = (id: number): boolean => {
+            if (usedIds.has(id)) return false;
             const match = byId.get(id);
             if (match && match.stock > 0 && (match.btu || 0) > 0) {
                 selected.push(match);
                 usedIds.add(match.id);
-                if (selected.length === 4) break;
+                return true;
             }
+            return false;
+        };
+
+        for (const id of targetIds) {
+            if (!trySelect(id)) {
+                const fallbacks = OOS_FALLBACK_MAP[id] || [];
+                for (const fbId of fallbacks) {
+                    if (trySelect(fbId)) break;
+                }
+            }
+            if (selected.length === 4) break;
         }
 
         if (selected.length < 4) {
@@ -53,7 +85,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
         }
 
         return selected;
-    }, [inStockAcProducts, modelIds]);
+    }, [inStockAcProducts, modelIds, activeCategory]);
 
     const handleAdd = (product: Product) => {
         if (product.stock <= 0) return;
@@ -63,6 +95,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
             product_name: product.name,
             price: activePrice,
             city: cityName || 'oahu',
+            category_tab: activeCategory,
         });
         addToCart({
             ...product,
@@ -81,7 +114,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
             ? `In-Stock Window ACs Ready for ${cityName} Delivery or Pickup`
             : 'In-Stock Waipahu Window ACs — Order Online Now');
 
-    const resolvedHeading = rawHeading.replace(/\$395[–-]\$(?:1,025|1,200)/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
+    const resolvedHeading = rawHeading.replace(/\$395[–\-?]\$(?:1,025|1,200)/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
 
     const rawSubheading =
         subheading ||
@@ -89,16 +122,18 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
             ? `Order brand-new LG & GE Window ACs online for $50 flat delivery to ${cityName} or free pickup at our Waipahu warehouse (94-150 Leoleo St #203).`
             : 'Brand-new factory-sealed LG & GE units in stock at our Waipahu warehouse. Free pickup by appointment or $50 flat Oahu delivery.');
 
-    const resolvedSubheading = rawSubheading.replace(/\$395[–-]\$(?:1,025|1,200)/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
+    const resolvedSubheading = rawSubheading.replace(/\$395[–\-?]\$(?:1,025|1,200)/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
 
     return (
         <section className="py-12 px-4 sm:px-6 rounded-3xl bg-slate-900/70 border border-white/10 shadow-2xl my-12">
-            <div className="max-w-7xl mx-auto space-y-8">
+            <div className="max-w-7xl mx-auto space-y-6">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div className="space-y-2">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-bold uppercase tracking-wider">
+                        <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-bold uppercase tracking-wider">
                             <Warehouse className="size-3.5" />
-                            <span>Live Waipahu Warehouse Stock • $45 HECO Rebate Eligible</span>
+                            <span>
+                                Live Waipahu Warehouse: {inStockAcCount} AC Models ({totalPhysicalAcUnits} Units) In Stock • $45 HECO Rebate
+                            </span>
                         </div>
                         <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white tracking-tight">
                             {resolvedHeading}
@@ -115,6 +150,29 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                         <span>View All {inStockAcCount} In-Stock Models (${minPrice}–${maxPrice.toLocaleString()})</span>
                         <ArrowRight className="size-4" />
                     </Link>
+                </div>
+
+                {/* Interactive Room & BTU Filter Tabs */}
+                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 border-b border-white/10">
+                    {[
+                        { id: 'featured', label: '★ Top Oahu Picks ($395+)' },
+                        { id: 'bedroom', label: 'Bedrooms & 115V (6k–12k BTU)' },
+                        { id: 'large', label: 'Large Living Rooms (14k–23.5k BTU)' },
+                        { id: 'wall', label: '26" Thru-Wall Condo Fit (GE & LG)' },
+                    ].map((tab) => (
+                        <button
+                            key={tab.id}
+                            type="button"
+                            onClick={() => setActiveCategory(tab.id as QuickShopCategory)}
+                            className={`min-h-[38px] px-3.5 py-1.5 rounded-xl font-header font-bold text-[11px] uppercase tracking-wider whitespace-nowrap shrink-0 transition-all border ${
+                                activeCategory === tab.id
+                                    ? 'bg-primary text-slate-950 border-cyan-400 shadow-md shadow-primary/20'
+                                    : 'bg-slate-950/80 text-slate-300 border-white/10 hover:text-white hover:border-primary/40'
+                            }`}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">

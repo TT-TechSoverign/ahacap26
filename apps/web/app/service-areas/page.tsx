@@ -7,6 +7,7 @@ import * as LucideIcons from 'lucide-react';
 import Link from 'next/link';
 import { BackToTop } from '@/components/BackToTop';
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 export default function ServiceAreasPage() {
     const { content } = useContent();
@@ -163,6 +164,11 @@ export default function ServiceAreasPage() {
                         </Link>
                     </div>
                 </div>
+
+                <WindowAcQuickShop
+                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395–$1,200)"
+                    subheading="Available for Free Waipahu Pickup by appointment or $50 flat-rate delivery across all 22 Oahu communities."
+                />
 
                 <OahuEEATAuthorityBar topicTitle="Oahu Island-Wide LG & GE Window AC Sales, Installation & Cleaning Coverage Directory" />
             </div>

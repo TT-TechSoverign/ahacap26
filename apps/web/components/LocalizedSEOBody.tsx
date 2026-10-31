@@ -160,9 +160,14 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 pr-4 font-bold text-white">Bedroom / Home Office</td>
                                     <td className="py-3.5 px-4">120 – 280 sq. ft. (6k–8k BTU)</td>
                                     <td className="py-3.5 px-4">
-                                        <Link href="/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm" className="text-cyan-400 hover:underline font-semibold">
-                                            LG LW8022IVSM (8,000 BTU 115V)
-                                        </Link>
+                                        <div className="flex flex-col gap-1">
+                                            <Link href="/shop/11-lg-8-000-btu-lw8024rd" className="text-cyan-400 hover:underline font-semibold">
+                                                LG LW8024RD (8,000 BTU 115V • $395 In Stock)
+                                            </Link>
+                                            <Link href="/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm" className="text-emerald-400 hover:underline text-xs font-medium">
+                                                + LG LW1022IVSM (10,000 BTU Dual Inverter • $690 In Stock)
+                                            </Link>
+                                        </div>
                                     </td>
                                     <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • 44dB Sleep-Quiet</td>
                                 </tr>
@@ -171,7 +176,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 px-4">280 – 450 sq. ft. (10k–12k BTU)</td>
                                     <td className="py-3.5 px-4">
                                         <Link href="/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm" className="text-cyan-400 hover:underline font-semibold">
-                                            LG LW1222IVSM (12,000 BTU 115V)
+                                            LG LW1222IVSM (12,000 BTU 115V • $725 In Stock)
                                         </Link>
                                     </td>
                                     <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • Saves ~$424/yr</td>
@@ -181,7 +186,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 px-4">250 – 450 sq. ft. (8.2k–12k BTU)</td>
                                     <td className="py-3.5 px-4">
                                         <Link href="/shop/15-ge-12-000-btu-ajcq12axxwa" className="text-cyan-400 hover:underline font-semibold">
-                                            GE AJCQ12AXXWA (R-32 Inverter)
+                                            GE AJCQ12AXXWA (R-32 Inverter • $1,200 In Stock)
                                         </Link>
                                     </td>
                                     <td className="py-3.5 pl-4 text-cyan-300 font-medium">True 26&quot; Wall Sleeve Fit</td>
@@ -191,7 +196,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 px-4">500 – 1,000+ sq. ft. (18k–23.5k BTU)</td>
                                     <td className="py-3.5 px-4">
                                         <Link href="/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm" className="text-cyan-400 hover:underline font-semibold">
-                                            LG LW1822IVSM (18,000 BTU 230V)
+                                            LG LW1822IVSM (18,000 BTU 230V • $920 In Stock)
                                         </Link>
                                     </td>
                                     <td className="py-3.5 pl-4 text-emerald-400 font-medium">$45 Rebate • Heavy Dehumidification</td>

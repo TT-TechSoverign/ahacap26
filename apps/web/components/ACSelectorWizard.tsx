@@ -403,11 +403,19 @@ export function ACSelectorWizard() {
                                 </button>
                             </div>
 
-                            <div className="pt-4 flex justify-end max-w-xl mx-auto">
+                            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 max-w-xl mx-auto">
+                                <button
+                                    type="button"
+                                    onClick={() => setStep(5)}
+                                    className="w-full sm:w-auto py-3 px-6 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 font-header font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2"
+                                >
+                                    <Sparkles className="size-3.5 text-emerald-400" />
+                                    <span>Skip to Instant Unit Matches &rarr;</span>
+                                </button>
                                 <Button
                                     type="button"
                                     onClick={() => setStep(2)}
-                                    className="w-full sm:w-auto py-3 px-10 uppercase font-bold tracking-widest text-[11px] hover:scale-[1.02] shadow-[0_0_20px_rgba(0,174,239,0.2)] ml-auto"
+                                    className="w-full sm:w-auto py-3 px-10 uppercase font-bold tracking-widest text-[11px] hover:scale-[1.02] shadow-[0_0_20px_rgba(0,174,239,0.2)] sm:ml-auto"
                                 >
                                     Next Step <ArrowRight className="ml-2 size-4" />
                                 </Button>

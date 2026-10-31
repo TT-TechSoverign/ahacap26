@@ -113,6 +113,7 @@ export default function AcCleaningOahuPage() {
                 "serviceType": "Window AC Sanitization & Coil Cleaning",
                 "provider": {
                     "@type": "HVACBusiness",
+                            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                     "name": "Affordable Home A/C",
                     "telephone": "+1-808-488-1111",
                     "priceRange": "$395 - $1,200",
@@ -508,7 +509,7 @@ export default function AcCleaningOahuPage() {
             </main>
                             <WindowAcQuickShop
                     modelIds={[2, 4, 15, 6]}
-                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395?$1,200)"
+                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395–$1,200)"
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 

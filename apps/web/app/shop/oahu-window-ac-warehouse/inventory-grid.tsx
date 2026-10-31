@@ -764,29 +764,47 @@ export function WarehouseInventoryGrid() {
 
                                 {/* Action Buttons */}
                                 <div className="mt-4 flex flex-col gap-2">
-                                    <button
-                                        disabled={isOutOfStock}
-                                        onClick={() => handleAddToCart(product)}
-                                        className={`w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 ${
-                                            isOutOfStock
-                                                ? 'bg-slate-800/80 text-slate-500 cursor-not-allowed border border-slate-700/50'
-                                                : 'bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 shadow-md shadow-emerald-500/20'
-                                        }`}
-                                    >
-                                        {isOutOfStock ? (
-                                            <span>Out of Stock</span>
-                                        ) : addedId === product.id ? (
-                                             <>
-                                                <Check className="w-4 h-4 text-slate-950 stroke-[3]" />
-                                                <span>Added to Order!</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <ShoppingCart className="w-4 h-4 text-slate-950" />
-                                                <span>Add to Order / Checkout</span>
-                                            </>
-                                        )}
-                                    </button>
+                                    {isOutOfStock ? (
+                                        (() => {
+                                            const altId = product.id === 2 ? 3 : product.id === 10 ? 7 : product.id === 14 ? 15 : 4;
+                                            const alt = inventory.find((item) => item.id === altId && item.stock > 0);
+                                            const altPrice = alt ? ((isPromo && alt.promo_price) ? alt.promo_price : alt.price) : 0;
+                                            return alt ? (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleAddToCart(alt)}
+                                                    className="w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-amber-500/20 hover:bg-emerald-500 hover:text-slate-950 text-amber-300 border border-amber-500/40 shadow-md"
+                                                >
+                                                    <ShoppingCart className="w-4 h-4 shrink-0" />
+                                                    <span>Sold Out — Buy In-Stock {alt.modelNumber} (${altPrice})</span>
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    disabled
+                                                    className="w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider bg-slate-800/80 text-slate-500 cursor-not-allowed border border-slate-700/50"
+                                                >
+                                                    Out of Stock
+                                                </button>
+                                            );
+                                        })()
+                                    ) : (
+                                        <button
+                                            onClick={() => handleAddToCart(product)}
+                                            className="w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-slate-950 shadow-md shadow-emerald-500/20"
+                                        >
+                                            {addedId === product.id ? (
+                                                <>
+                                                    <Check className="w-4 h-4 text-slate-950 stroke-[3]" />
+                                                    <span>Added to Order!</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <ShoppingCart className="w-4 h-4 text-slate-950" />
+                                                    <span>Add to Order / Checkout</span>
+                                                </>
+                                            )}
+                                        </button>
+                                    )}
 
                                     <Link
                                         href={`/shop/${product.slug}`}

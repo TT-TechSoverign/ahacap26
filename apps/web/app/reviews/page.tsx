@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { BackToTop } from '@/components/BackToTop';
 import { getReviewStats, getAllReviews } from '@/lib/product-reviews';
 import { ShieldCheck, Star, MapPin, ChevronRight, Home } from 'lucide-react';
@@ -28,7 +29,7 @@ export default function ReviewsPage() {
     const hvacBusinessSchema = {
         "@context": "https://schema.org",
         "@type": "HVACBusiness",
-        "@id": "https://www.affordablehome-ac.com/reviews#localbusiness",
+        "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
         "telephone": "(808) 488-1111",
@@ -140,6 +141,13 @@ export default function ReviewsPage() {
 
                 {/* Full Pavilion */}
                 <ReviewsPavilion variant="full" />
+
+                <div className="mt-16">
+                    <WindowAcQuickShop
+                        title="Shop the LG & GE Window Air Conditioners Oahu Homeowners Love ($395–$1,200)"
+                        subheading="In-stock at our Waipahu warehouse (94-150 Leoleo St #203). Buy online with 1-click checkout or request a $0 Free In-Home Estimate."
+                    />
+                </div>
             </main>
 
             <BackToTop visible={true} />

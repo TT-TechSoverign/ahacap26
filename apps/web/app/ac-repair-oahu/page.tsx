@@ -121,6 +121,7 @@ export default function AcRepairOahuPage() {
                 "serviceType": "Window AC Repair & Troubleshooting",
                 "provider": {
                     "@type": "HVACBusiness",
+                            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                     "name": "Affordable Home A/C",
                     "telephone": "+1-808-488-1111",
                     "priceRange": "$395 - $1,200",

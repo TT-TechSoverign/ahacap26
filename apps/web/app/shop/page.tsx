@@ -1235,6 +1235,7 @@ export default function ShopPage() {
                         "description": "In-stock LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In window and wall air conditioners in Waipahu, Oahu ($395–$1,200). Free Waipahu warehouse pickup by appointment, $50 flat island-wide delivery, and $45 Hawaii Energy cash rebate.",
                         "provider": {
                             "@type": "HVACBusiness",
+                            "@id": `${domain}/#hvacbusiness`,
                             "name": "Affordable Home A/C",
                             "url": domain
                         },
@@ -2431,22 +2432,30 @@ function ProductCard({
                             onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                if (product.stock > 0) onQuickAdd();
+                                if (product.stock > 0) {
+                                    onQuickAdd();
+                                } else {
+                                    const altSlugs: Record<number, string> = {
+                                        2: '/shop/11-lg-8-000-btu-lw8024rd',
+                                        10: '/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm',
+                                        14: '/shop/15-ge-12-000-btu-ajcq12axxwa',
+                                    };
+                                    router.push(altSlugs[product.id] || `/shop/${generateProductSlug(product.id, product.name)}`);
+                                }
                             }}
-                            disabled={product.stock <= 0}
                             className={cn(
-                                "font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2",
+                                "font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-[0.15em] transition-all flex items-center justify-center gap-1.5",
                                 product.stock > 0
                                     ? "bg-primary text-white hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] active:scale-95"
-                                    : "bg-slate-800 text-slate-500 cursor-not-allowed border border-white/5"
+                                    : "bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/35 active:scale-95"
                             )}
                         >
                             {product.stock > 0 ? (
                                 <ShoppingCart className="size-3" />
                             ) : (
-                                <Ban className="size-3" />
+                                <Check className="size-3 text-emerald-400" />
                             )}
-                            {product.stock > 0 ? 'SECURE' : 'SOLD OUT'}
+                            {product.stock > 0 ? 'SECURE' : 'IN-STOCK ALT'}
                         </button>
                     </div>
                 </div>

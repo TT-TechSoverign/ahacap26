@@ -110,7 +110,7 @@ export default function OahuWindowAcWarehousePage() {
             },
             {
                 "@type": "LocalBusiness",
-                "@id": "https://www.affordablehome-ac.com/#organization",
+                "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                 "name": "Affordable Home AC - Oahu Distribution Warehouse",
                 "telephone": "+1-808-488-1111",
                 "address": {

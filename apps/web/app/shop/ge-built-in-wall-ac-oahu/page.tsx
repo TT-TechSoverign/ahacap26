@@ -182,12 +182,14 @@ export default function GeBuiltInWallAcGuidePage() {
         };
     }, []);
 
-    const filteredModels = allModels.filter((m) => {
-        if (selectedFilter === 'ge_builtin') return m.subcategory === 'ge';
-        if (selectedFilter === 'lg_universal') return m.subcategory === 'universal_fit';
-        if (selectedFilter === 'sleeve') return m.subcategory === 'casement';
-        return true;
-    });
+    const filteredModels = allModels
+        .filter((m) => {
+            if (selectedFilter === 'ge_builtin') return m.subcategory === 'ge';
+            if (selectedFilter === 'lg_universal') return m.subcategory === 'universal_fit';
+            if (selectedFilter === 'sleeve') return m.subcategory === 'casement';
+            return true;
+        })
+        .sort((a, b) => (b.stock > 0 ? 1 : 0) - (a.stock > 0 ? 1 : 0));
 
     const handleBuy = (product: Product) => {
         if (product.stock <= 0) return;
@@ -229,6 +231,7 @@ export default function GeBuiltInWallAcGuidePage() {
         '@graph': [
             {
                 '@type': 'HVACBusiness',
+                '@id': 'https://www.affordablehome-ac.com/#hvacbusiness',
                 name: 'Affordable Home A/C - GE 26" Built-In & LG Window AC Oahu Store',
                 telephone: '+1-808-488-1111',
                 address: {
@@ -525,7 +528,7 @@ export default function GeBuiltInWallAcGuidePage() {
             </main>
                             <WindowAcQuickShop
                     modelIds={[2, 4, 15, 6]}
-                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395?$1,200)"
+                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395–$1,200)"
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 

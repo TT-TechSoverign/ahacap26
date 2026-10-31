@@ -187,6 +187,7 @@ export default function ProductDetailPage() {
     const initialSeedProduct = id ? (INITIAL_CATALOG_PRODUCTS.find(p => p.id === Number(id)) || null) : null;
 
     const [product, setProduct] = useState<Product | null>(initialSeedProduct);
+    const [liveCatalog, setLiveCatalog] = useState<Product[]>(INITIAL_CATALOG_PRODUCTS);
     const [loading, setLoading] = useState(!initialSeedProduct);
     const [error, setError] = useState('');
     const { content } = useContent();
@@ -240,6 +241,15 @@ export default function ProductDetailPage() {
                 if (!res.ok) throw new Error('Product not found');
                 const data = await res.json();
                 setProduct(data);
+
+                fetch(`${apiUrl}/products?_t=${timestamp}`, { cache: 'no-store' })
+                    .then((r) => (r.ok ? r.json() : null))
+                    .then((all: Product[] | null) => {
+                        if (Array.isArray(all) && all.length > 0) {
+                            setLiveCatalog(all);
+                        }
+                    })
+                    .catch(() => {});
 
                 // GTM E-Commerce view_item push
                 if (typeof window !== 'undefined' && (window as any).dataLayer) {
@@ -826,52 +836,79 @@ export default function ProductDetailPage() {
                                 <div className="space-y-3">
                                     {/* High-Converting Out-of-Stock In-Stock Alternative Rescue Bridge */}
                                     {(() => {
-                                        const altIds = product.id === 2 ? [3, 11, 1]
-                                            : (product.id === 7 || product.id === 10) ? [6, 9, 5]
-                                            : product.id === 14 ? [15, 13]
-                                            : [4, 3, 1];
+                                        const altIds = product.id === 2 ? [3, 11, 1, 8]
+                                            : product.id === 10 ? [7, 9, 6]
+                                            : product.id === 7 ? [6, 9, 5]
+                                            : product.id === 14 ? [15, 13, 8]
+                                            : [4, 3, 1, 11];
                                         const alternatives = altIds
-                                            .map(aid => INITIAL_CATALOG_PRODUCTS.find(p => p.id === aid))
+                                            .map(aid => liveCatalog.find(p => p.id === aid) || INITIAL_CATALOG_PRODUCTS.find(p => p.id === aid))
                                             .filter((p): p is Product => Boolean(p && p.stock > 0))
                                             .slice(0, 2);
 
                                         return alternatives.length > 0 ? (
-                                            <div className="bg-emerald-950/30 border border-emerald-500/40 rounded-2xl p-4 space-y-2.5 text-left shadow-[0_0_25px_rgba(16,185,129,0.12)]">
+                                            <div className="bg-emerald-950/30 border border-emerald-500/40 rounded-2xl p-4 space-y-3 text-left shadow-[0_0_25px_rgba(16,185,129,0.12)]">
                                                 <div className="flex items-center justify-between gap-2">
                                                     <span className="text-[10px] font-header font-black uppercase tracking-widest text-emerald-400 flex items-center gap-1.5">
                                                         <span className="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                                        In-Stock Alternatives Ready for Waipahu Pickup Today
+                                                        Instant In-Stock Replacements — Ready for Pickup/Delivery Today
                                                     </span>
                                                     <span className="text-[9px] font-mono text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded">
-                                                        In Stock Now
+                                                        Live Waipahu Stock
                                                     </span>
                                                 </div>
-                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                                     {alternatives.map(alt => {
                                                         const altPrice = (isCampaignActiveChecker() && alt.promo_price && alt.promo_price > 0) ? alt.promo_price : alt.price;
+                                                        const altImg = getProductImages(alt.id)[0] || alt.image_url;
                                                         return (
-                                                            <Link
+                                                            <div
                                                                 key={alt.id}
-                                                                href={`/shop/${generateProductSlug(alt.id, alt.name)}`}
-                                                                className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-emerald-500/15 border border-emerald-500/30 hover:border-emerald-400 transition-all flex items-center justify-between gap-2 group/alt"
+                                                                className="p-3 rounded-xl bg-slate-900/95 border border-emerald-500/30 hover:border-emerald-400 transition-all flex flex-col justify-between gap-2.5"
                                                             >
-                                                                <div className="min-w-0">
-                                                                    <div className="text-[11px] font-header font-black text-white group-hover/alt:text-emerald-300 truncate">
-                                                                        {alt.name}
+                                                                <div className="flex items-start justify-between gap-2">
+                                                                    <div className="min-w-0">
+                                                                        <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-mono text-[9px] font-bold mb-1">
+                                                                            {alt.stock} In Stock • {alt.voltage?.split('/')[0]?.trim() || '115V'}
+                                                                        </span>
+                                                                        <Link
+                                                                            href={`/shop/${generateProductSlug(alt.id, alt.name)}`}
+                                                                            className="block text-xs font-header font-black text-white hover:text-emerald-300 line-clamp-2"
+                                                                        >
+                                                                            {alt.name}
+                                                                        </Link>
+                                                                        <div className="text-[10px] font-mono text-slate-400 mt-0.5">
+                                                                            {alt.coverage_oahu || alt.coverage}
+                                                                        </div>
                                                                     </div>
-                                                                    <div className="text-[10px] font-mono text-slate-400">
-                                                                        {alt.coverage_oahu || alt.coverage} • {alt.voltage?.split('/')[0]?.trim() || '115V'}
+                                                                    <div className="text-right shrink-0">
+                                                                        <div className="text-base font-header font-black text-emerald-400">
+                                                                            ${altPrice}
+                                                                        </div>
+                                                                        <Link
+                                                                            href={`/shop/${generateProductSlug(alt.id, alt.name)}`}
+                                                                            className="text-[9px] font-mono text-cyan-300 hover:underline uppercase"
+                                                                        >
+                                                                            Specs &rarr;
+                                                                        </Link>
                                                                     </div>
                                                                 </div>
-                                                                <div className="text-right shrink-0">
-                                                                    <div className="text-sm font-header font-black text-emerald-400">
-                                                                        ${altPrice}
-                                                                    </div>
-                                                                    <div className="text-[9px] font-mono text-cyan-300 uppercase">
-                                                                        View &rarr;
-                                                                    </div>
-                                                                </div>
-                                                            </Link>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => {
+                                                                        addToCart({
+                                                                            ...alt,
+                                                                            price: altPrice,
+                                                                            image_url: altImg,
+                                                                        });
+                                                                        openCart();
+                                                                    }}
+                                                                    className="w-full py-2 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md transition-all"
+                                                                >
+                                                                    <ShoppingCart className="size-3.5" />
+                                                                    <span>Buy In-Stock Unit (${altPrice})</span>
+                                                                </button>
+                                                            </div>
                                                         );
                                                     })}
                                                 </div>
@@ -1251,14 +1288,14 @@ export default function ProductDetailPage() {
                                 </button>
                             ) : (
                                 (() => {
-                                    const primaryAltId = product.id === 2 ? 3 : (product.id === 7 || product.id === 10) ? 6 : product.id === 14 ? 15 : 4;
-                                    const primaryAlt = INITIAL_CATALOG_PRODUCTS.find(p => p.id === primaryAltId);
+                                    const primaryAltId = product.id === 2 ? 3 : product.id === 10 ? 7 : product.id === 7 ? 6 : product.id === 14 ? 15 : 4;
+                                    const primaryAlt = liveCatalog.find(p => p.id === primaryAltId) || INITIAL_CATALOG_PRODUCTS.find(p => p.id === primaryAltId);
                                     return primaryAlt ? (
                                         <Link
                                             href={`/shop/${generateProductSlug(primaryAlt.id, primaryAlt.name)}`}
                                             className="h-11 px-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider rounded-xl shadow-lg active:scale-95 flex items-center justify-center gap-1 grow max-w-[155px]"
                                         >
-                                            <span>In-Stock Alt &rarr;</span>
+                                            <span>In-Stock Alt (${primaryAlt.price}) &rarr;</span>
                                         </Link>
                                     ) : null;
                                 })()
@@ -1332,8 +1369,8 @@ export default function ProductDetailPage() {
                                     </button>
                                 ) : (
                                     (() => {
-                                        const primaryAltId = product.id === 2 ? 3 : (product.id === 7 || product.id === 10) ? 6 : product.id === 14 ? 15 : 4;
-                                        const primaryAlt = INITIAL_CATALOG_PRODUCTS.find(p => p.id === primaryAltId);
+                                        const primaryAltId = product.id === 2 ? 3 : product.id === 10 ? 7 : product.id === 7 ? 6 : product.id === 14 ? 15 : 4;
+                                        const primaryAlt = liveCatalog.find(p => p.id === primaryAltId) || INITIAL_CATALOG_PRODUCTS.find(p => p.id === primaryAltId);
                                         return primaryAlt ? (
                                             <Link
                                                 href={`/shop/${generateProductSlug(primaryAlt.id, primaryAlt.name)}`}

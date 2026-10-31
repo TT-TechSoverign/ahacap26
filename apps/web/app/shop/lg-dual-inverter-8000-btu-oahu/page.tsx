@@ -6,11 +6,9 @@ import Image from 'next/image';
 import { 
     Sparkles, 
     Zap, 
-    Shield, 
     Check, 
     ArrowRight, 
     ShoppingCart, 
-    FileText, 
     Warehouse, 
     Truck, 
     Wrench, 
@@ -19,18 +17,15 @@ import {
     Wifi, 
     DollarSign,
     CheckCircle2,
-    Clock,
-    Phone,
-    ThermometerSnowflake,
-    Moon
+    Phone
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { Product } from '@/types/inventory';
+import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { BackToTop } from '@/components/BackToTop';
 import { trackFunnelEvent } from '@/lib/tracking';
-import { isCampaignActive } from '@/lib/utils';
+import { isCampaignActive, generateProductSlug } from '@/lib/utils';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
-
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 
 const INITIAL_PRODUCT_8K: Product = {
@@ -59,20 +54,25 @@ export default function Lg8000BtuOahuPage() {
     const { addToCart, openCart } = useCart();
     const [activeFaq, setActiveFaq] = useState<number | null>(0);
     const [product8k, setProduct8k] = useState<Product>(INITIAL_PRODUCT_8K);
+    const [liveCatalog, setLiveCatalog] = useState<Product[]>(INITIAL_CATALOG_PRODUCTS);
     const isPromo = isCampaignActive();
 
     useEffect(() => {
         let isMounted = true;
-        fetch('/api/v1/products/2', { cache: 'no-store' })
+        fetch('/api/v1/products', { cache: 'no-store' })
             .then((res) => (res.ok ? res.json() : null))
-            .then((live: Product | null) => {
-                if (!isMounted || !live || !live.id) return;
-                setProduct8k((prev) => ({
-                    ...prev,
-                    price: live.price,
-                    promo_price: live.promo_price ?? null,
-                    stock: live.stock,
-                }));
+            .then((all: Product[] | null) => {
+                if (!isMounted || !Array.isArray(all) || all.length === 0) return;
+                setLiveCatalog(all);
+                const live = all.find((p) => p.id === 2);
+                if (live) {
+                    setProduct8k((prev) => ({
+                        ...prev,
+                        price: live.price,
+                        promo_price: live.promo_price ?? null,
+                        stock: live.stock,
+                    }));
+                }
             })
             .catch(() => {});
         return () => {
@@ -83,20 +83,26 @@ export default function Lg8000BtuOahuPage() {
     const activePrice = (isPromo && product8k.promo_price) ? product8k.promo_price : product8k.price;
     const isOutOfStock = product8k.stock <= 0;
 
-    const handleBuyNow = () => {
-        if (isOutOfStock) return;
+    const handleBuyNow = (targetProduct: Product = product8k) => {
+        if (targetProduct.stock <= 0) return;
+        const unitPrice = (isPromo && targetProduct.promo_price) ? targetProduct.promo_price : targetProduct.price;
         trackFunnelEvent('add_to_cart_8k_upgrade', {
-            product_id: product8k.id,
-            product_name: product8k.name,
-            price: activePrice,
-            btu: product8k.btu
+            product_id: targetProduct.id,
+            product_name: targetProduct.name,
+            price: unitPrice,
+            btu: targetProduct.btu
         });
         addToCart({
-            ...product8k,
-            price: activePrice,
+            ...targetProduct,
+            price: unitPrice,
         });
         openCart();
     };
+
+    const altBedroomIds = [3, 11, 1, 8];
+    const altBedroomUnits = altBedroomIds
+        .map((id) => liveCatalog.find((p) => p.id === id) || INITIAL_CATALOG_PRODUCTS.find((p) => p.id === id))
+        .filter((p): p is Product => Boolean(p && p.stock > 0));
 
     const faqItems = [
         {
@@ -117,7 +123,7 @@ export default function Lg8000BtuOahuPage() {
         },
         {
             q: "What if the 8,000 BTU Dual Inverter is temporarily out of stock?",
-            a: "When the 8,000 BTU Dual Inverter is sold out, Oahu homeowners can pick up the in-stock 10,000 BTU LG Dual Inverter (LW1022IVSM, $650), the 6,000 BTU LG Dual Inverter (LW6023IVSM, $560), the 8,000 BTU LG Standard (LW8024RD, $395), or for 26\" through-the-wall sleeves, the GE 8,200 BTU Built-In (AJCQ08AWJ, $1,000) today at our Waipahu warehouse!"
+            a: "When the 8,000 BTU Dual Inverter is sold out, Oahu homeowners can pick up the in-stock 10,000 BTU LG Dual Inverter (LW1022IVSM, $650), the 8,000 BTU LG Standard (LW8024RD, $395), the 6,000 BTU LG Dual Inverter (LW6023IVSM, $560), or the 7,600 BTU LG Universal Fit (LW8023HRSM, $650) today at our Waipahu warehouse!"
         }
     ];
 
@@ -126,9 +132,10 @@ export default function Lg8000BtuOahuPage() {
         "@graph": [
             {
                 "@type": "HVACBusiness",
+                "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                 "name": "Affordable Home AC - LG Dual Inverter 8,000 BTU Oahu",
                 "telephone": "+1-808-488-1111",
-                "priceRange": "$$",
+                "priceRange": "$395 - $1,200",
                 "address": {
                     "@type": "PostalAddress",
                     "streetAddress": "94-150 Leoleo St. #203",
@@ -403,48 +410,52 @@ export default function Lg8000BtuOahuPage() {
                             {/* Buy Now Button or In-Stock Rescue Alternatives */}
                             <div className="space-y-3 pt-2">
                                 {isOutOfStock ? (
-                                    <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-3">
-                                        <div className="text-xs font-mono font-bold text-amber-300 uppercase tracking-wider">
-                                            ⚡ LW8022IVSM Sold Out — Pick Up an In-Stock Bedroom Unit Today:
+                                    <div className="p-4 rounded-2xl bg-emerald-950/30 border border-emerald-500/40 space-y-3">
+                                        <div className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-wider">
+                                            ⚡ LW8022IVSM Sold Out — Order an In-Stock Bedroom Unit Today:
                                         </div>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                                            <Link
-                                                href="/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm"
-                                                className="p-3 rounded-xl bg-slate-900/90 border border-emerald-500/40 hover:border-emerald-400 text-left transition-all block"
-                                            >
-                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">15 In Stock • 44dB Quiet</div>
-                                                <div className="text-xs font-bold text-white mt-0.5">LG 10,000 BTU Dual Inverter</div>
-                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$650 • View Unit →</div>
-                                            </Link>
-                                            <Link
-                                                href="/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm"
-                                                className="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/40 hover:border-cyan-400 text-left transition-all block"
-                                            >
-                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">30 In Stock • 44dB Quiet</div>
-                                                <div className="text-xs font-bold text-white mt-0.5">LG 6,000 BTU Dual Inverter</div>
-                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$560 • View Unit →</div>
-                                            </Link>
-                                            <Link
-                                                href="/shop/8-lg-7-600-btu-lw8023hrsm"
-                                                className="p-3 rounded-xl bg-slate-900/90 border border-white/15 hover:border-cyan-400 text-left transition-all block"
-                                            >
-                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">8 In Stock • 7,600 BTU</div>
-                                                <div className="text-xs font-bold text-white mt-0.5">LG 7,600 BTU Cool + Heat (LW8023HRSM)</div>
-                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$660 • View Unit →</div>
-                                            </Link>
-                                            <Link
-                                                href="/shop/11-lg-8-000-btu-lw8024rd"
-                                                className="p-3 rounded-xl bg-slate-900/90 border border-white/15 hover:border-cyan-400 text-left transition-all block"
-                                            >
-                                                <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">30 In Stock • 8,000 BTU</div>
-                                                <div className="text-xs font-bold text-white mt-0.5">LG 8,000 BTU Standard 115V</div>
-                                                <div className="text-xs font-mono text-cyan-400 font-bold mt-1">$395 • View Unit →</div>
-                                            </Link>
+                                            {altBedroomUnits.map((alt) => {
+                                                const altPrice = (isPromo && alt.promo_price) ? alt.promo_price : alt.price;
+                                                const altSlug = generateProductSlug(alt.id, alt.name);
+                                                return (
+                                                    <div
+                                                        key={alt.id}
+                                                        className="p-3 rounded-xl bg-slate-900/95 border border-emerald-500/35 hover:border-emerald-400 text-left transition-all flex flex-col justify-between gap-2"
+                                                    >
+                                                        <div>
+                                                            <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase">
+                                                                {alt.stock} In Stock • {alt.voltage?.split('/')[0]?.trim() || '115V'}
+                                                            </div>
+                                                            <Link
+                                                                href={`/shop/${altSlug}`}
+                                                                className="text-xs font-bold text-white hover:text-cyan-400 mt-0.5 block"
+                                                            >
+                                                                {alt.name}
+                                                            </Link>
+                                                            <div className="flex items-center justify-between mt-1">
+                                                                <span className="text-sm font-mono text-emerald-400 font-black">${altPrice}</span>
+                                                                <Link href={`/shop/${altSlug}`} className="text-[10px] font-mono text-cyan-400 hover:underline">
+                                                                    Specs &rarr;
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleBuyNow(alt)}
+                                                            className="w-full py-2 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all"
+                                                        >
+                                                            <ShoppingCart className="size-3.5" />
+                                                            <span>Buy Now (${altPrice})</span>
+                                                        </button>
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 ) : (
                                     <button
-                                        onClick={handleBuyNow}
+                                        onClick={() => handleBuyNow(product8k)}
                                         className="w-full py-4 rounded-xl bg-primary text-slate-950 font-header font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20 hover:scale-[1.01]"
                                     >
                                         <ShoppingCart className="size-4" />
@@ -531,7 +542,7 @@ export default function Lg8000BtuOahuPage() {
                                 <td className="py-3 px-4 font-bold text-white">Sleep Mode Noise / CEER</td>
                                 <td className="py-3 px-4">44 / 54 dB • 15.5 CEER</td>
                                 <td className="py-3 px-4 text-emerald-400 font-bold">44 / 54 dB • 15.5 CEER</td>
-                                <td className="py-3 px-4 text-cyan-400 font-bold">44 / 58 dB • 15.5 CEER</td>
+                                <td className="py-3 px-4 text-cyan-400 font-bold">44 / 58 dB • 15.0 CEER</td>
                             </tr>
                             <tr>
                                 <td className="py-3 px-4 font-bold text-white">Electrical Plug</td>
@@ -592,15 +603,19 @@ export default function Lg8000BtuOahuPage() {
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                         {isOutOfStock ? (
-                            <Link
-                                href="/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm"
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    const primaryAlt = altBedroomUnits[0];
+                                    if (primaryAlt) handleBuyNow(primaryAlt);
+                                }}
                                 className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20"
                             >
-                                View In-Stock 10,000 BTU Dual Inverter ($650)
-                            </Link>
+                                Buy In-Stock 10,000 BTU Dual Inverter ($650)
+                            </button>
                         ) : (
                             <button
-                                onClick={handleBuyNow}
+                                onClick={() => handleBuyNow(product8k)}
                                 className="px-8 py-3.5 rounded-xl bg-primary text-slate-950 font-header font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 transition-all shadow-lg shadow-primary/20"
                             >
                                 Buy LG 8,000 BTU (${activePrice})
@@ -615,15 +630,14 @@ export default function Lg8000BtuOahuPage() {
                         </a>
                     </div>
                 </div>
-                            <WindowAcQuickShop
+                <WindowAcQuickShop
                     modelIds={[11, 1, 8, 3]}
                     title="In-Stock 115V Bedroom & Studio Window ACs ($395–$650)"
                     subheading="Plug-and-play 115V LG Standard & Dual Inverter models in stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery."
                 />
             </main>
-                            <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
-
-                <BackToTop />
+            <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+            <BackToTop />
         </div>
     );
 }

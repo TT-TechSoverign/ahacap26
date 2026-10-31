@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { ACSelectorWizard } from '@/components/ACSelectorWizard';
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { EditableText } from '@/components/EditableText';
 import Link from 'next/link';
 import { ArrowLeft, Calculator } from 'lucide-react';
@@ -131,6 +132,13 @@ export default function SizingPage() {
                             </Suspense>
                         </div>
                     </div>
+                </div>
+
+                <div className="mt-12">
+                    <WindowAcQuickShop
+                        title="In-Stock Waipahu LG & GE Window Air Conditioners ($395–$1,200)"
+                        subheading="Already know your room size? Order online for Free Waipahu Pickup by appointment or $50 flat Island-Wide Delivery."
+                    />
                 </div>
 
                 <OahuEEATAuthorityBar topicTitle="Oahu Window AC BTU Sizing Wizard & Microclimate Heat-Load Calculator" />

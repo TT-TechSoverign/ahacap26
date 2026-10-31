@@ -267,6 +267,7 @@ export default function LgDualInverterGuidePage() {
         "@graph": [
             {
                 "@type": "HVACBusiness",
+                "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                 "name": "Affordable Home AC - LG Dual Inverter Oahu Guide & Store",
                 "telephone": "+1-808-488-1111",
                 "address": {
@@ -571,7 +572,7 @@ export default function LgDualInverterGuidePage() {
             </main>
                             <WindowAcQuickShop
                     modelIds={[2, 4, 15, 6]}
-                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395?$1,200)"
+                    title="In-Stock Waipahu LG & GE Window Air Conditioners ($395–$1,200)"
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 
