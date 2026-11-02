@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -63,6 +63,13 @@ export default function JalousieWindowAcInstallationPage() {
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(window.location.search);
+        const cityParam = params.get('city');
+        if (cityParam) setCity(cityParam);
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -262,7 +269,7 @@ export default function JalousieWindowAcInstallationPage() {
                 </section>
 
                 {/* Lead Form */}
-                <section id="install-form" className="mb-16 p-8 sm:p-10 rounded-3xl bg-surface-dark border border-primary/30 shadow-2xl relative overflow-hidden">
+                <section id="install-form" className="mb-16 p-8 sm:p-10 rounded-3xl bg-surface-dark border border-primary/30 shadow-2xl relative overflow-hidden scroll-mt-28 md:scroll-mt-[192px]">
                     <div className="max-w-2xl mx-auto text-center mb-8">
                         <span className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] font-bold block mb-2">
                             ZERO UPFRONT PAYMENT &bull; PAY AFTER INSTALLATION

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
     ArrowRight, 
@@ -29,6 +29,17 @@ export default function AcCleaningOahuPage() {
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(window.location.search);
+        const cityParam = params.get('city');
+        const tierParam = params.get('tier');
+        const notesParam = params.get('notes');
+        if (cityParam) setCity(cityParam);
+        if (tierParam === 'basic' || tierParam === 'premium') setCleaningTier(tierParam);
+        if (notesParam) setNotes(notesParam);
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

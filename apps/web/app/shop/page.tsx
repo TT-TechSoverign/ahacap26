@@ -85,6 +85,7 @@ function ShopPageContent() {
     // Comparison drawer state
     const [compareList, setCompareList] = useState<Product[]>([]);
     const [isCompareOpen, setIsCompareOpen] = useState<boolean>(false);
+    const [isCheckoutCanceled, setIsCheckoutCanceled] = useState<boolean>(false);
 
     const handleToggleCompare = (product: Product) => {
         setCompareList(prev => {
@@ -130,6 +131,10 @@ function ShopPageContent() {
         const capParam = (params.get('capacity') || '').toLowerCase();
         const voltParam = (params.get('voltage') || '').toLowerCase();
         const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+
+        if (params.get('canceled') === 'true') {
+            setIsCheckoutCanceled(true);
+        }
 
         setSearchQuery(qParam || '');
 
@@ -284,7 +289,7 @@ function ShopPageContent() {
 
     const sectionMap: Record<string, React.ReactNode> = {
         "dual_inverter": (
-            <div id="dual_inverter" className="relative space-y-8">
+            <div id="dual_inverter" className="relative space-y-8 scroll-mt-28 md:scroll-mt-[192px]">
                 <SectionHeader
                     contentKey="shop.dual_inverter"
                     icon="energy_savings_leaf"
@@ -370,7 +375,7 @@ function ShopPageContent() {
         ),
 
         "universal_fit": (
-            <div id="universal_fit" className="relative space-y-12">
+            <div id="universal_fit" className="relative space-y-12 scroll-mt-28 md:scroll-mt-[192px]">
                 <SectionHeader
                     contentKey="shop.universal_fit"
                     icon="settings_overscan"
@@ -387,7 +392,7 @@ function ShopPageContent() {
         ),
 
         "base": (
-            <div id="base" className="relative space-y-12">
+            <div id="base" className="relative space-y-12 scroll-mt-28 md:scroll-mt-[192px]">
                 <SectionHeader
                     contentKey="shop.base"
                     icon="ac_unit"
@@ -403,7 +408,7 @@ function ShopPageContent() {
             </div>
         ),
         "ge": (
-            <div id="ge" className="relative space-y-12">
+            <div id="ge" className="relative space-y-12 scroll-mt-28 md:scroll-mt-[192px]">
                 <SectionHeader
                     contentKey="shop.ge"
                     icon="token"
@@ -420,7 +425,7 @@ function ShopPageContent() {
             </div>
         ),
         "casement": (
-            <div id="casement" className="relative space-y-12">
+            <div id="casement" className="relative space-y-12 scroll-mt-28 md:scroll-mt-[192px]">
                 <SectionHeader
                     contentKey="shop.casement"
                     icon="vertical_split"
@@ -633,6 +638,47 @@ function ShopPageContent() {
                         </div>
                     </div>
                 </div>
+
+                {/* Checkout Canceled Recovery Banner */}
+                {isCheckoutCanceled && (
+                    <div className="max-w-7xl mx-auto px-2 sm:px-4 mb-4">
+                        <div className="p-4 rounded-2xl bg-amber-950/50 border border-amber-500/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                            <div className="flex items-center gap-2.5 text-amber-200">
+                                <AlertTriangle className="size-4 text-amber-400 shrink-0" />
+                                <span>
+                                    <strong className="text-white uppercase font-header tracking-wide">Checkout Paused:</strong> No charge was made, and your selected Window AC units remain saved in your cart.
+                                </span>
+                            </div>
+                            <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-end">
+                                {items.length > 0 && (
+                                    <button
+                                        type="button"
+                                        onClick={openCart}
+                                        className="px-3.5 py-2 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase text-[10px] tracking-wider transition-all flex items-center gap-1.5"
+                                    >
+                                        <ShoppingCart className="size-3.5" />
+                                        <span>Resume Cart ({items.reduce((s, i) => s + (i.quantity || 1), 0)})</span>
+                                    </button>
+                                )}
+                                <a
+                                    href="tel:8084881111"
+                                    className="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-mono text-[10px] font-bold flex items-center gap-1"
+                                >
+                                    <Phone className="size-3 text-cyan-400" />
+                                    <span>(808) 488-1111</span>
+                                </a>
+                                <button
+                                    type="button"
+                                    onClick={() => setIsCheckoutCanceled(false)}
+                                    className="p-1.5 rounded-lg text-slate-400 hover:text-white"
+                                    aria-label="Dismiss checkout notice"
+                                >
+                                    <X className="size-4" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Compact Master Toolbar: Category Tabs + Quick Controls + Collapsible Drawer */}
                 <div id="catalog-controls" className="max-w-7xl mx-auto px-2 sm:px-4 mb-5">

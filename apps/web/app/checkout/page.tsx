@@ -14,7 +14,7 @@ import { getProductImages } from '../../lib/product-images';
 import { isCampaignActive } from '../../lib/utils';
 
 import { 
-    CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, Snowflake, Lock, ShieldCheck 
+    CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, Snowflake, Lock, ShieldCheck, FileText, Phone, ShoppingCart 
 } from 'lucide-react';
 
 function CheckoutContent() {
@@ -22,6 +22,7 @@ function CheckoutContent() {
     const [step, setStep] = useState<'shipping' | 'payment' | 'success'>('shipping');
     const [email, setEmail] = useState('');
     const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>('pickup');
+    const [confirmedSessionId, setConfirmedSessionId] = useState<string>('');
 
     useEffect(() => {
         syncInventory();
@@ -41,8 +42,13 @@ function CheckoutContent() {
 
 
     const handleSuccess = () => {
-        // Retrieve session_id for transaction alignment
+        // Retrieve session_id and fulfillment mode for transaction alignment
         const sessionId = searchParams.get('session_id') || `AHAC-${Math.floor(Math.random() * 90000) + 10000}`;
+        const urlFulfillment = searchParams.get('fulfillment');
+        if (urlFulfillment === 'delivery' || urlFulfillment === 'pickup') {
+            setFulfillment(urlFulfillment);
+        }
+        setConfirmedSessionId(sessionId);
 
 
 
@@ -113,35 +119,41 @@ function CheckoutContent() {
     }, [searchParams]);
 
     if (step === 'success') {
+        const displayRef = (confirmedSessionId || searchParams.get('session_id') || 'AHAC-VERIFIED').slice(-16).toUpperCase();
         return (
-            <main className="min-h-screen bg-[#0f172a] pt-[140px] md:pt-[165px] pb-12 px-4 md:px-8 flex items-center justify-center">
-                <div className="max-w-md w-full text-center space-y-8 p-8 border border-cyan-500/20 rounded-2xl bg-slate-900/50 backdrop-blur shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+            <main className="min-h-screen bg-[#0f172a] pt-[104px] md:pt-[188px] pb-16 px-4 md:px-8 flex items-center justify-center">
+                <div className="max-w-lg w-full text-center space-y-6 p-6 sm:p-8 border border-cyan-500/20 rounded-2xl bg-slate-900/50 backdrop-blur shadow-[0_0_50px_rgba(6,182,212,0.1)]">
                     <div className="relative">
                         <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full" />
                         <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ type: 'spring', delay: 0.2 }}
-                            className="relative size-24 bg-slate-900 border-2 border-cyan-500 rounded-full flex items-center justify-center mx-auto"
+                            className="relative size-20 bg-slate-900 border-2 border-cyan-500 rounded-full flex items-center justify-center mx-auto"
                         >
-                            <CheckCircle className="size-12 text-cyan-400" />
+                            <CheckCircle className="size-10 text-cyan-400" />
                         </motion.div>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                         <h1 className="text-white font-header font-black uppercase text-3xl tracking-wide drop-shadow-lg">
                             Order <span className="text-cyan-400">Confirmed</span>
                         </h1>
-                        <p className="text-slate-400 text-sm leading-relaxed">
-                            Thank you for your business. A confirmation email has been sent to the address provided.
+                        <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            Mahalo for your order! Your itemized receipt and fulfillment instructions have been sent to your email.
                         </p>
                     </div>
 
-                    <div className="bg-[#0a0e14]/80 backdrop-blur-2xl border border-primary/30 p-4 rounded-xl text-left space-y-3 relative overflow-hidden group">
+                    <div className="bg-[#0a0e14]/80 backdrop-blur-2xl border border-primary/30 p-4 rounded-xl text-left space-y-2.5 relative overflow-hidden group">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-50"></div>
                         <h4 className="text-primary font-header font-black uppercase text-xs tracking-widest flex items-center gap-2 relative z-10">
-                            <Info className="size-4 animate-pulse" />
-                            <EditableText contentKey="logistics.pickup.label" />
+                            <Info className="size-4 animate-pulse shrink-0" />
+                            <span>
+                                {fulfillment === 'delivery'
+                                    ? 'Oahu Island-Wide Delivery ($50 Flat Rate)'
+                                    : <EditableText contentKey="logistics.pickup.label" />
+                                }
+                            </span>
                         </h4>
                         <p className="text-slate-300 text-[11px] leading-relaxed uppercase font-bold tracking-tight relative z-10">
                             {fulfillment === 'pickup'
@@ -149,21 +161,88 @@ function CheckoutContent() {
                                 : <EditableText contentKey="logistics.delivery.coverage" />
                             }
                         </p>
+                        <div className="pt-2 border-t border-white/10 text-[11px] text-slate-400 font-sans flex flex-col sm:flex-row sm:items-center justify-between gap-2 relative z-10">
+                            <span>Waipahu Warehouse: <strong className="text-white">94-150 Leoleo St. #203, Waipahu, HI 96797</strong></span>
+                            <a
+                                href="tel:8084881111"
+                                className="inline-flex items-center gap-1 text-cyan-400 hover:text-white font-mono font-bold shrink-0"
+                            >
+                                <Phone className="size-3" /> (808) 488-1111
+                            </a>
+                        </div>
                     </div>
 
-                    <div className="bg-[#05070a] rounded border border-white/5 p-4 font-mono text-xs text-slate-500">
-                        <p className="uppercase tracking-widest text-[10px] mb-2 opacity-50 text-center">Deployment ID Hash</p>
-                        <p className="text-primary text-center font-black">{crypto.randomUUID().slice(0, 18).toUpperCase()}</p>
+                    {/* Post-Purchase Next Steps: $45 Rebate Form & $0 Installation Estimate */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+                        <a
+                            href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-3.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 transition-all flex flex-col justify-between gap-2"
+                        >
+                            <div className="flex items-center gap-1.5 text-emerald-400 font-mono text-[10px] font-bold uppercase">
+                                <FileText className="size-3.5 shrink-0" />
+                                <span>$45 Cash Rebate PDF</span>
+                            </div>
+                            <span className="text-white font-header font-bold text-xs uppercase">Download Hawaii Energy Rebate Form &rarr;</span>
+                        </a>
+                        <Link
+                            href="/window-ac-installation?unit=already_own"
+                            className="p-3.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 transition-all flex flex-col justify-between gap-2"
+                        >
+                            <div className="flex items-center gap-1.5 text-cyan-400 font-mono text-[10px] font-bold uppercase">
+                                <Calendar className="size-3.5 shrink-0" />
+                                <span>Need Installation?</span>
+                            </div>
+                            <span className="text-white font-header font-bold text-xs uppercase">Book $0 Free Install Estimate &rarr;</span>
+                        </Link>
                     </div>
 
+                    <div className="bg-[#05070a] rounded-xl border border-white/5 p-3 font-mono text-xs text-slate-500">
+                        <p className="uppercase tracking-widest text-[9px] mb-1 opacity-60 text-center">Order Reference ID</p>
+                        <p className="text-primary text-center font-black">{displayRef}</p>
+                    </div>
 
-
-                    <Link href="/shop" className="block w-full py-4 bg-white/5 hover:bg-primary border border-white/10 hover:border-primary text-white font-header font-black uppercase tracking-[0.2em] text-xs rounded-xl transition-all shadow-lg active:scale-95 text-center">
+                    <Link href="/shop" className="block w-full py-4 bg-white/5 hover:bg-primary border border-white/10 hover:border-primary text-white hover:text-slate-950 font-header font-black uppercase tracking-[0.2em] text-xs rounded-xl transition-all shadow-lg active:scale-95 text-center">
                         Return to Shop
                     </Link>
                 </div>
             </main>
-        )
+        );
+    }
+
+    if (items.length === 0 && !searchParams.get('success')) {
+        return (
+            <main className="min-h-screen bg-[#0a0e14] pt-[104px] md:pt-[188px] pb-16 px-4 md:px-8 flex items-center justify-center">
+                <div className="max-w-md w-full text-center space-y-6 p-8 border border-white/10 rounded-3xl bg-slate-900/60 backdrop-blur shadow-2xl">
+                    <div className="size-20 rounded-full bg-slate-950 border border-white/10 flex items-center justify-center mx-auto text-cyan-400">
+                        <ShoppingCart className="size-9 opacity-60" />
+                    </div>
+                    <div className="space-y-2">
+                        <h1 className="text-2xl font-header font-black uppercase text-white tracking-tight">Your Cart Is Empty</h1>
+                        <p className="text-xs text-slate-400 font-sans leading-relaxed">
+                            Select an in-stock LG Dual Inverter or GE Built-In Window AC ($395–$1,200) from our Waipahu warehouse to begin checkout.
+                        </p>
+                    </div>
+                    <div className="space-y-3">
+                        <Link
+                            href="/shop"
+                            className="w-full py-3.5 px-6 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black uppercase tracking-wider text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,174,239,0.3)]"
+                        >
+                            <Warehouse className="size-4" />
+                            <span>Shop In-Stock Window ACs</span>
+                        </Link>
+                        <Link
+                            href="/sizing"
+                            className="w-full py-3 px-6 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-header font-bold uppercase tracking-wider text-xs rounded-xl transition-all flex items-center justify-center gap-2"
+                        >
+                            <Snowflake className="size-4 text-cyan-400" />
+                            <span>Run Oahu BTU Sizing Calculator</span>
+                        </Link>
+                    </div>
+                </div>
+            </main>
+        );
     }
 
     return (

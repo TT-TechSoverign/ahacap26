@@ -60,18 +60,22 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
         return `${valInInches.toFixed(1)}"`;
     };
 
-    // Live Window Fit Evaluation
+    // Live Window Fit Evaluation (normalizes cm input to inches before comparing against manufacturer specs)
     const fitEvaluation = useMemo(() => {
-        const h = parseFloat(userHeight);
-        const w = parseFloat(userWidth);
+        const rawH = parseFloat(userHeight);
+        const rawW = parseFloat(userWidth);
 
-        if (!h && !w) return null;
+        if (!rawH && !rawW) return null;
+
+        const h = unitSystem === 'cm' ? rawH / 2.54 : rawH;
+        const w = unitSystem === 'cm' ? rawW / 2.54 : rawW;
+        const unitLabel = unitSystem === 'cm' ? ' cm' : '"';
 
         if (h > 0 && h < minH_num) {
             return {
                 status: 'warning',
                 title: 'Below Recommended Sash Height',
-                message: `Your window height (${h}") is below the ${specs.minWindowHeight} manufacturer recommendation. A compact chassis (13.0" min) is recommended.`,
+                message: `Your window height (${rawH}${unitLabel}) is below the ${formatDim(minH_num)} manufacturer recommendation. A compact chassis (${unitSystem === 'cm' ? '33.0 cm' : '13.0"'} min) is recommended.`,
                 actionLink: '/shop#base',
                 actionText: 'View Compact Series (13" Min)'
             };
@@ -81,8 +85,8 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
             return {
                 status: 'warning',
                 title: 'Outside Recommended Width Span',
-                message: `Your window width (${w}") is outside the recommended ${specs.minWindowWidth}–${specs.maxWindowWidth} curtain span. Custom seal fillers may be required.`,
-                actionLink: '/contact',
+                message: `Your window width (${rawW}${unitLabel}) is outside the recommended ${formatDim(minW_num)}–${formatDim(maxW_num)} curtain span. Custom seal fillers may be required.`,
+                actionLink: `/contact?service=Window+AC+Installation&model=${encodeURIComponent(specs.modelName)}&notes=${encodeURIComponent(`Window measurement check: ${rawH || '?'}${unitLabel} H x ${rawW || '?'}${unitLabel} W`)}`,
                 actionText: 'Consult Waipahu Dispatch'
             };
         }
@@ -91,7 +95,7 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
             return {
                 status: 'success',
                 title: 'Optimal Fit Recommendation',
-                message: `Your dimensions (${h}" H × ${w}" W) match recommended manufacturer specifications with recommended clearance.`,
+                message: `Your dimensions (${rawH}${unitLabel} H × ${rawW}${unitLabel} W) match recommended manufacturer specifications with recommended clearance.`,
                 actionLink: null,
                 actionText: null
             };
@@ -101,14 +105,14 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
             return {
                 status: 'info',
                 title: 'Sash Clearance Recommended',
-                message: `Vertical lift (${h}") clears the ${specs.minWindowHeight} minimum requirement. Enter width to verify accordion curtains.`,
+                message: `Vertical lift (${rawH}${unitLabel}) clears the ${formatDim(minH_num)} minimum requirement. Enter width to verify accordion curtains.`,
                 actionLink: null,
                 actionText: null
             };
         }
 
         return null;
-    }, [userHeight, userWidth, minH_num, minW_num, maxW_num, specs]);
+    }, [userHeight, userWidth, unitSystem, minH_num, minW_num, maxW_num, specs]);
 
     return (
         <div className="w-full relative select-none">
@@ -249,7 +253,7 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                             {specs.isWallSleeve ? 'Unsure about your existing 26" wall sleeve?' : 'Unsure about single-wall redwood or jalousie trim?'}
                         </span>
                         <a
-                            href={`sms:8084881111?body=Aloha AHAC Dispatch, please verify my ${specs.isWallSleeve ? 'wall sleeve' : 'window'} fit for ${specs.modelName}. Height: ${userHeight || '___'} in, width: ${userWidth || '___'} in.`}
+                            href={`sms:8084881111?body=Aloha AHAC Dispatch, please verify my ${specs.isWallSleeve ? 'wall sleeve' : 'window'} fit for ${specs.modelName}. Height: ${userHeight || '___'} ${unitSystem}, width: ${userWidth || '___'} ${unitSystem}.`}
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 rounded-lg font-mono font-bold transition-all"
                         >
                             <Phone className="size-3" />

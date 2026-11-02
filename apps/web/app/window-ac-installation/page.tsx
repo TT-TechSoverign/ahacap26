@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -54,6 +54,29 @@ export default function WindowAcInstallationPage() {
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(window.location.search);
+        const cityParam = params.get('city');
+        const btuParam = params.get('btu');
+        const windowParam = params.get('window');
+        const unitParam = params.get('unit');
+        const notesParam = params.get('notes');
+        if (cityParam) setCity(cityParam);
+        if (btuParam && ['6000', '8000', '10000', '12000', '14000', '18000', '24000'].includes(btuParam)) {
+            setSelectedBtu(btuParam);
+        }
+        if (windowParam && ['jalousie', 'hung', 'slider'].includes(windowParam)) {
+            setWindowType(windowParam);
+        }
+        if (unitParam === 'already_own' || unitParam === 'purchased') {
+            setUnitStatus('already_own');
+        } else if (unitParam === 'need_unit') {
+            setUnitStatus('need_unit');
+        }
+        if (notesParam) setNotes(notesParam);
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -324,7 +347,7 @@ export default function WindowAcInstallationPage() {
                 </section>
 
                 {/* Interactive Booking & Configuration Section */}
-                <section id="booking_form" className="bg-slate-900/70 border border-white/10 rounded-3xl p-6 sm:p-8 lg:p-10 mb-20 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+                <section id="booking_form" className="bg-slate-900/70 border border-white/10 rounded-3xl p-6 sm:p-8 lg:p-10 mb-20 backdrop-blur-xl shadow-2xl relative overflow-hidden scroll-mt-28 md:scroll-mt-[192px]">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                         
                         {/* Selector & Specs */}

@@ -38,7 +38,7 @@ const FAQS = [
     },
     {
         q: "How much is professional double-hung window AC installation?",
-        a: "Standard window AC installation starts at $275. Our Oahu cooling technicians handle complete mounting, precision pitch leveling, side panel foam insulation, and electrical safety testing."
+        a: "We provide a $0 Free In-Home Estimate and upfront itemized quote tailored to your window dimensions and BTU size. Our Oahu cooling technicians handle complete mounting, precision pitch leveling, side panel foam insulation, and electrical safety testing with zero upfront booking deposit."
     }
 ];
 

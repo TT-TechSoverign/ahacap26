@@ -141,7 +141,7 @@ export async function POST(req: Request) {
                     ...(utmCampaign && { utm_campaign: utmCampaign }),
                 }
             },
-            success_url: `${origin}/checkout?success=true&session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${origin}/checkout?success=true&fulfillment=${encodeURIComponent(fulfillmentMode || 'pickup')}&session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/shop?canceled=true`,
             shipping_address_collection: {
                 allowed_countries: ['US'], // Restrict to US (Hawaii focus)

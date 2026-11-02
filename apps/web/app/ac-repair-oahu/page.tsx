@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
     Wrench, 
@@ -36,6 +36,19 @@ export default function AcRepairOahuPage() {
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(window.location.search);
+        const cityParam = params.get('city');
+        const symptomParam = params.get('symptom');
+        const notesParam = params.get('notes');
+        if (cityParam) setCity(cityParam);
+        if (symptomParam && ['warm_air', 'leaking', 'electrical', 'noise'].includes(symptomParam)) {
+            setSelectedSymptom(symptomParam);
+        }
+        if (notesParam) setNotes(notesParam);
+    }, []);
 
     const symptoms = [
         { id: 'warm_air', label: 'Blowing Warm Air / Not Cooling', icon: Snowflake, advice: 'Likely failed capacitor, thermostat sensor issue, or clogged condenser coil.' },

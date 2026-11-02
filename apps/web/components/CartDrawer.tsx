@@ -150,20 +150,34 @@ export default function CartDrawer() {
                         {/* Items List */}
                         <div className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-track-slate-900 scrollbar-thumb-cyan-900">
                             {items.length === 0 && !orderSuccess ? (
-                                <div className="h-full flex flex-col items-center justify-center text-slate-600 space-y-6">
+                                <div className="h-full flex flex-col items-center justify-center text-slate-600 space-y-6 px-2">
                                     <div className="size-24 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center shadow-inner">
                                         <ShoppingCart className="size-16 opacity-20 text-cyan-500" />
                                     </div>
                                     <div className="text-center space-y-2">
-                                        <p className="font-header font-bold uppercase tracking-[0.2em] text-lg text-slate-400">System Empty</p>
-                                        <p className="text-xs text-slate-600 font-mono">No units detected in holding.</p>
+                                        <p className="font-header font-bold uppercase tracking-[0.2em] text-lg text-slate-300">Your Cart Is Empty</p>
+                                        <p className="text-xs text-slate-400 font-sans max-w-xs leading-relaxed">
+                                            Explore our in-stock Waipahu warehouse LG Dual Inverter &amp; GE Window ACs ($395–$1,200) with $0 warehouse pickup or $50 flat Oahu delivery.
+                                        </p>
                                     </div>
-                                    <button
-                                        onClick={closeCart}
-                                        className="px-6 py-3 bg-cyan-950/30 text-cyan-400 border border-cyan-500/30 rounded hover:bg-cyan-500 hover:text-black transition-all font-bold uppercase tracking-wider text-xs"
-                                    >
-                                        Initialize Inventory
-                                    </button>
+                                    <div className="w-full space-y-2.5">
+                                        <Link
+                                            href="/shop"
+                                            onClick={closeCart}
+                                            className="w-full py-3.5 px-6 bg-primary hover:bg-cyan-300 text-slate-950 rounded-xl transition-all font-header font-black uppercase tracking-wider text-xs flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,174,239,0.25)]"
+                                        >
+                                            <Warehouse className="size-4" />
+                                            <span>Shop In-Stock Window ACs</span>
+                                        </Link>
+                                        <Link
+                                            href="/sizing"
+                                            onClick={closeCart}
+                                            className="w-full py-3 px-6 bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 rounded-xl transition-all font-header font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2"
+                                        >
+                                            <Snowflake className="size-3.5 text-cyan-400" />
+                                            <span>Run Oahu BTU Sizing Calculator</span>
+                                        </Link>
+                                    </div>
                                 </div>
                             ) : (
                                 <AnimatePresence mode="popLayout">
@@ -295,18 +309,34 @@ export default function CartDrawer() {
                                         <motion.div
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl relative overflow-hidden group"
+                                            className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl relative overflow-hidden group space-y-2.5"
                                         >
                                             <div className="absolute inset-0 bg-red-500/5 animate-pulse"></div>
                                             <div className="flex items-start gap-3 relative z-10">
-                                                <AlertTriangle className="size-5 text-red-500 animate-bounce" />
+                                                <AlertTriangle className="size-5 text-red-500 animate-bounce shrink-0" />
                                                 <div className="space-y-1">
                                                     <p className="text-red-400 font-black uppercase text-[10px] tracking-[0.2em]">Action Required</p>
                                                     <p className="text-slate-300 text-xs font-bold leading-relaxed">
-                                                        Out-of-stock items detected. Please remove them to proceed.
+                                                        Out-of-stock or over-limit items detected. Adjust cart availability to proceed.
                                                     </p>
                                                 </div>
                                             </div>
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    items.forEach(i => {
+                                                        const avail = i.stock || 0;
+                                                        if (avail <= 0) {
+                                                            removeFromCart(i.id);
+                                                        } else if (i.quantity > avail) {
+                                                            updateQuantity(i.id, avail);
+                                                        }
+                                                    });
+                                                }}
+                                                className="relative z-10 w-full py-2 px-3 bg-red-500/20 hover:bg-red-500/30 border border-red-500/40 rounded-lg text-red-200 font-header font-black uppercase tracking-wider text-[10px] transition-all"
+                                            >
+                                                Auto-Fix Cart Availability
+                                            </button>
                                         </motion.div>
                                     )}
 

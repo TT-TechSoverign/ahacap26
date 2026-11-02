@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Black Mold in AC: Health Risks & Removal in Hawaii | Affordable Home A/C'
     },
-    description: 'Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand health hazards, respiratory risks, and clinical AC teardown sanitization.',
+    description: 'Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand health hazards, respiratory risks, and professional window AC coil and blower sanitization.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/black-mold-in-ac-health-risks-hawaii',
     },
     openGraph: {
         title: 'Black Mold in AC: Health Risks & Removal in Hawaii | Affordable Home A/C',
-        description: 'Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand health hazards, respiratory risks, and clinical AC teardown sanitization.',
+        description: 'Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand health hazards, respiratory risks, and professional window AC coil and blower sanitization.',
         url: 'https://www.affordablehome-ac.com/black-mold-in-ac-health-risks-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Black Mold in AC: Health Risks & Removal in Hawaii | Affordable Home A/C',
-        description: 'Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand health hazards, respiratory risks, and clinical AC teardown sanitization.',
+        description: 'Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand health hazards, respiratory risks, and professional window AC coil and blower sanitization.',
         images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
     }
 };
@@ -48,7 +48,7 @@ const blackMoldFaqSchema = {
             "name": "How do I know if black spots on my AC vents are toxic black mold?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Common HVAC molds in Oahu include Cladosporium, Penicillium, and Aspergillus. All mold types present respiratory hazards when distributed through an airstream. If you see black, fuzzy, or speckled residue along the louvers or behind the directional flaps, immediate teardown cleaning is advised."
+                "text": "Common HVAC molds in Oahu include Cladosporium, Penicillium, and Aspergillus. All mold types present respiratory hazards when distributed through an airstream. If you see black, fuzzy, or speckled residue along the louvers or behind the directional flaps, immediate window AC coil and blower sanitization is advised."
             }
         },
         {

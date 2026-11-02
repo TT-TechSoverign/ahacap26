@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
     Snowflake, 
@@ -35,8 +35,8 @@ const ROOT_CAUSES = [
     },
     {
         title: "Choked Airflow (Mold & Dirty Filters)",
-        desc: "Hawaii's tropical moisture causes black mold and dust to cake onto the squirrel-cage blower wheel fan blades. Air cannot pass across the cold coil, so heat transfer stops and frost accumulates.",
-        action: "Full teardown chemical wash and blower wheel sanitization ($275 flat rate)."
+        desc: "Hawaii's tropical moisture causes black mold and dust to cake onto the internal blower wheel fan blades and intake filter. Air cannot pass across the cold coil, so heat transfer stops and frost accumulates.",
+        action: "On-site evaporator coil foaming sanitization and blower wheel scrub ($0 Free Estimate)."
     },
     {
         title: "Faulty Fan Motor or Capacitor",
@@ -71,6 +71,13 @@ export default function AcFreezingUpPage() {
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(window.location.search);
+        const cityParam = params.get('city');
+        if (cityParam) setCity(cityParam);
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -207,7 +214,7 @@ export default function AcFreezingUpPage() {
                 </section>
 
                 {/* Diagnostic Intake Form */}
-                <section id="diagnostic-form" className="mb-16 p-8 sm:p-10 rounded-3xl bg-surface-dark border border-primary/30 shadow-2xl relative overflow-hidden">
+                <section id="diagnostic-form" className="mb-16 p-8 sm:p-10 rounded-3xl bg-surface-dark border border-primary/30 shadow-2xl relative overflow-hidden scroll-mt-28 md:scroll-mt-[192px]">
                     <div className="max-w-2xl mx-auto text-center mb-8">
                         <span className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] font-bold block mb-2">
                             PREVENT COMPRESSOR BURNOUT &bull; $0 TO BOOK
