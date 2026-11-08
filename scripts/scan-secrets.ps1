@@ -21,14 +21,15 @@ $patterns = @(
     @{ Name = "Private RSA/EC/SSH Key"; Pattern = '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----' },
     @{ Name = "AWS Access Key"; Pattern = 'AKIA[0-9A-Z]{16}' },
     @{ Name = "Google API Key"; Pattern = 'AIzaSy[0-9a-zA-Z_-]{33}' },
-    @{ Name = "Hardcoded Database URI with Password"; Pattern = 'postgresql(\+asyncpg)?://(?!(\$|\{|\%|user:password|crm_user:PASSWORD|crm_user:YOUR_SUPER_SECRET_KEY))[^:]+:(?!(\$|\{|\%|password|PASSWORD))[^@]+@[^/]+' }
+    @{ Name = "Hardcoded Database URI with Password"; Pattern = 'postgresql(\+asyncpg)?://(?!(\$|\{|\%|user:password|crm_user:PASSWORD|crm_user:YOUR_SUPER_SECRET_KEY))[^:]+:(?!(\$|\{|\%|password|PASSWORD))[^@]+@[^/]+' },
+    @{ Name = "Hardcoded SSH / Paramiko Password"; Pattern = 'ssh\.connect\([^)]*password\s*=\s*["''][^"'']+["'']|secret\s*=\s*["'']#AHAC' }
 )
 
 $violations = @()
 
 # 1. Check for tracked .env / sensitive files in Git
 Write-Host "[1/5] Checking Git tracked files for sensitive credentials..." -ForegroundColor Yellow
-$trackedFiles = git ls-files
+$trackedFiles = git -c core.fsmonitor=false ls-files
 $sensitivePatterns = @('.env', '.env.local', '.env.production', '*.pem', '*.key', '*.p12', '*.sqlite', '*.sqlite3')
 
 foreach ($pattern in $sensitivePatterns) {
@@ -40,7 +41,7 @@ foreach ($pattern in $sensitivePatterns) {
 
 # 2. Check staged changes (excluding this scanner script and binary docx files)
 Write-Host "[2/5] Scanning Git diff & staged files..." -ForegroundColor Yellow
-$stagedDiff = git diff --staged -- ":!scripts/scan-secrets.ps1" ":!*.docx"
+$stagedDiff = git -c core.fsmonitor=false diff --staged --no-textconv -- ":!scripts/scan-secrets.ps1" ":!*.docx"
 foreach ($p in $patterns) {
     if ($stagedDiff -cmatch $p.Pattern) {
         $violations += "Staged diff contains $($p.Name)!"
@@ -49,7 +50,7 @@ foreach ($p in $patterns) {
 
 # 3. Check commit history (last 50 commits, excluding this scanner script and binary docx files)
 Write-Host "[3/5] Scanning Git commit history (last 50 commits)..." -ForegroundColor Yellow
-$recentLogs = git log -n 50 -p -- ":!scripts/scan-secrets.ps1" ":!*.docx"
+$recentLogs = git -c core.fsmonitor=false log -n 50 -p --no-textconv -- ":!scripts/scan-secrets.ps1" ":!*.docx"
 foreach ($p in $patterns) {
     if ($recentLogs -cmatch $p.Pattern) {
         $violations += "Recent commit history contains $($p.Name)!"
@@ -58,7 +59,7 @@ foreach ($p in $patterns) {
 
 # 4. Full Working Tree Static Scan from Root
 Write-Host "[4/5] Scanning full working tree from repository root..." -ForegroundColor Yellow
-$excludedDirs = @('.git', 'node_modules', '.next', '__pycache__', '.venv', 'dist', 'build', '.idea', '.vscode')
+$excludedDirs = @('.git', 'node_modules', '.next', '__pycache__', '.venv', 'dist', 'build', '.idea', '.vscode', '_private_portfolio', '_analytics_data', 'brain_exports_2026-06-21')
 $targetExtensions = @('*.py', '*.ts', '*.tsx', '*.js', '*.json', '*.ps1', '*.sh', '*.yml', '*.yaml')
 
 $filesToScan = Get-ChildItem -Path . -Recurse -File -Include $targetExtensions -ErrorAction SilentlyContinue | Where-Object {

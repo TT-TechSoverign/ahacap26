@@ -166,21 +166,27 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
   - Added 301 permanent redirects for all retired routes to `/shop` and `/ac-cleaning-oahu` in `middleware.ts` and `next.config.js`, establishing **`101` canonical routes** (`85` static/city routes + `16` product routes).
   - Updated email routing so **`brian@affordablehome-ac.com`** is the primary admin recipient across production notifications with **`irasmussenjobs@gmail.com`** preserved on BCC (and as exclusive recipient in staging/test environments).
   - Replaced all legacy license references with **`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`** while keeping the 16-model Window AC store, Cart, Stripe Checkout, and `/admin` 100% intact.
-- **Epoch 21 (Oct 20, 2026) Swarm Omniscience v2.7.0, 3-Row Navbar Viewport Armor, Shop `#rebate` Restoration & `/admin` Command Deck Isolation**:
-  - Upgraded **Master Projects Brain to `2.7.0-SOVEREIGN` (`55` neural synapses)**, elevating all **10 Category Sub-Masters, 40 Specialized Agents, and 50 SOP Dossiers** (`dev_os.py`, `dev_os_sops.py`, `sopsData.ts`) with live runtime verification checks (`epoch_intelligence: "v2.7.0-EPOCH-21"`).
+- **Epoch 21 (Oct 20 – Nov 8, 2026) Swarm Omniscience v2.7.0 / v2.7.2, 3-Row Navbar Viewport Armor, Shop `#rebate` Restoration, `/admin` Command Deck Isolation, 360° Customer Journey Hardening & Antigravity Workspace Skills**:
+  - Upgraded **Master Projects Brain to `2.7.0-SOVEREIGN` (`55` neural synapses)**, elevating all **10 Category Sub-Masters, 40 Specialized Agents, and 50 SOP Dossiers** (`dev_os.py`, `dev_os_sops.py`, `sopsData.ts`) with live runtime verification checks (`epoch_intelligence: "v2.7.0-EPOCH-21"`, `maintenance_version: "2.7.2-NOV08-SWARM-OMNISCIENCE"`).
   - Enforced **3-row fixed `NavbarV2` viewport clearance** across all `74` `page.tsx` routes (`pt-[88px] md:pt-[176px]` on `/`, `md:pt-[180px]` on 72 content/shop/city pages, `pt-20 md:pt-[192px]` on `/admin`) and solid `bg-[#060a12]` `z-[120]` surface armor on the `Shop Window AC` dropdown (fixing Tailwind `/98` opacity bleed-through).
   - Restored and locked the **`$45` Hawaii Energy Rebate (`#rebate`, `<RebateSection />`)** on `/shop` across both default and filtered views, `content.json`, PostgreSQL `content_pages` (`shop` row), and the `NavbarV2` `Shop Window AC` dropdown.
   - Revamped the storefront **`/admin` Command Menu** below `NavbarV2` (`sticky top-[72px] md:top-[168px]`) with a 4-column KPI strip, always-visible product `Edit`/`Delete` buttons, and complete removal of internal `CRM Portal` and `Dev OS` links.
+  - Completed **4-Pass 360° Codebase Pruning, Hardcoding Purge & Customer Journey Hardening**: deployed `<WindowAcQuickShop />` with `OOS_FALLBACK_MAP` across high-intent funnels, added `Auto-Fix Cart Availability` in `CartDrawer.tsx`, post-purchase `$45` Rebate PDF & `$0` Install Estimate workflow actions in `checkout/page.tsx`, `?canceled=true` recovery banner on `/shop`, `cm` conversion & SMS verification in `SpatialCaliperHUD.tsx`, URL query pre-filling across all service/symptom intake forms, and 1-click `Resume Invoice Payment` in `ahac-crm`.
+  - Installed **3 Dedicated Antigravity Workspace Skills in `.agents/skills/`** (`ahac-sovereign-swarm`, `ahac-monthly-executive-billing-and-seo`, `ahac-brand-creative-and-storyboard-studio`) and upgraded `scripts/scan-secrets.ps1` with SSH/Paramiko password regex detection and `git -c core.fsmonitor=false`.
 
 ---
 
-## VI. CROSS-SESSION CONTINUOUS LEARNING & HANDSHAKE PROTOCOL (`TRACKER`)
+## VI. CROSS-SESSION CONTINUOUS LEARNING, WORKSPACE SKILLS & HANDSHAKE PROTOCOL (`TRACKER`)
 
 To ensure every new chat session in `ahacws26` seamlessly continues where the previous session left off:
 
 1. **Mandatory New-Chat Handshake (`TRACKER`)**:
    - **CRITICAL RULE**: When the user opens a new chat session (especially when they say `"Convene all"` or ask to verify connection), you **MUST** include the codeword **`TRACKER`** prominently at the very top of your first response.
-   - Alongside **`TRACKER`**, confirm that you are connected to **Master Projects Brain v2.7.0-SOVEREIGN (`EPOCH 21`)**, that all **10 Category Sub-Masters & 40 Specialized Agents (`55` Synapses)** are online (`All Healthy: True`), and summarize the active state from `project_state.md` so the user knows zero context was lost.
+   - Alongside **`TRACKER`**, confirm that you are connected to **Master Projects Brain v2.7.0-SOVEREIGN (`EPOCH 21` / `v2.7.2-NOV08-SWARM-OMNISCIENCE`)**, that all **10 Category Sub-Masters & 40 Specialized Agents (`55` Synapses)** are online (`All Healthy: True`), and summarize the active state from `project_state.md` so the user knows zero context was lost.
+2. **Mounted Antigravity Workspace Skills (`.agents/skills/`)**:
+   - [`ahac-sovereign-swarm`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-sovereign-swarm/SKILL.md): Full 40-agent swarm orchestration, 3-stage live deployment verification, and customer-journey non-regression checks.
+   - [`ahac-monthly-executive-billing-and-seo`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-monthly-executive-billing-and-seo/SKILL.md): Plain-English 3rd-grade CEO monthly SEO reporting (`.docx`, `.html`, `.md`) and non-technical invoice/email drafting for CEO Brian Borges (`_private_portfolio/` & `_analytics_data/` strictly untracked).
+   - [`ahac-brand-creative-and-storyboard-studio`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-brand-creative-and-storyboard-studio/SKILL.md): Official Affordable Home A/C visual identity, storyboard/ad prompt engineering, and Oahu architectural background rules (cities used strictly as visual background settings, never as storyboard text labels).
 2. **Before Modifying Code**:
    - Check `project_state.md` to confirm the latest progress and verified features.
    - Run `powershell -File .\scripts\dev-os.ps1 status` or `brain` to inspect live agent telemetries.

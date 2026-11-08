@@ -144,3 +144,13 @@ The local PowerShell CLI bridge (`.\scripts\dev-os.ps1`) allows immediate intera
 .\scripts\dev-os.ps1 verify-live             # Execute 3-stage live deployment swarm check
 .\scripts\dev-os.ps1 scan-secrets            # Run local git repository secret scanner
 ```
+
+---
+
+## 4. WORKSPACE SKILLS REGISTRY (`.agents/skills/`)
+
+All Antigravity sessions automatically discover and mount the following workspace skills:
+- **`ahac-sovereign-swarm`** (`.agents/skills/ahac-sovereign-swarm/SKILL.md`): Full 10 Sub-Master / 40 Agent swarm orchestration, 360° codebase audits, and 3-stage live deployment verification.
+- **`ahac-monthly-executive-billing-and-seo`** (`.agents/skills/ahac-monthly-executive-billing-and-seo/SKILL.md`): Plain-English CEO invoice line items, executive Gmail billing drafts, and 3rd-grade monthly SEO reports for CEO Brian Borges.
+- **`ahac-brand-creative-and-storyboard-studio`** (`.agents/skills/ahac-brand-creative-and-storyboard-studio/SKILL.md`): Official Affordable Home A/C branding, video/ad storyboard prompt engineering, and Oahu visual background guidelines.
+
