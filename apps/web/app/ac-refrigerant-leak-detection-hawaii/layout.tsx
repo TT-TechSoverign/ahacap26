@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Refrigerant Leak Assessment Hawaii | Sealed System Evaluation | Affordable Home A/C'
+        absolute: 'Window AC Refrigerant Leak Assessment Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Pinpoint sealed refrigerant system loss in window AC coils in Oahu. Honest clean-vs-replace assessments and Waipahu warehouse direct LG & GE replacements.',
+    description: '$0 Free Estimate • (808) 488-1111. Pinpoint sealed refrigerant system loss in window AC coils in Oahu. Honest clean-vs-replace assessments and.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-refrigerant-leak-detection-hawaii',
     },
     openGraph: {
-        title: 'Window AC Refrigerant Leak Assessment Hawaii | Sealed System Evaluation | Affordable Home A/C',
-        description: 'Pinpoint sealed refrigerant system loss in window AC coils in Oahu. Honest clean-vs-replace assessments and Waipahu warehouse direct LG & GE replacements.',
+        title: 'Window AC Refrigerant Leak Assessment Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Pinpoint sealed refrigerant system loss in window AC coils in Oahu. Honest clean-vs-replace assessments and.',
         url: 'https://www.affordablehome-ac.com/ac-refrigerant-leak-detection-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Refrigerant Leak Detection Hawaii Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Refrigerant Leak Assessment Hawaii | Sealed System Evaluation | Affordable Home A/C',
-        description: 'Pinpoint sealed refrigerant system loss in window AC coils in Oahu. Honest clean-vs-replace assessments and Waipahu warehouse direct LG & GE replacements.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Window AC Refrigerant Leak Assessment Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Pinpoint sealed refrigerant system loss in window AC coils in Oahu. Honest clean-vs-replace assessments and.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

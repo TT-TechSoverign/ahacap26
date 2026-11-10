@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Blinking Light Error Codes AC Repair Oahu | LG & GE Window AC | Affordable Home A/C'
+        absolute: 'LG & GE Window AC Blinking Light & CH Error Codes Oahu | $0 Estimate | (808) 488-1111'
     },
-    description: 'Decode blinking LED lights and digital CH error codes on LG Dual Inverter and GE window air conditioners on Oahu. Fast diagnostic triage by Oahu cooling specialists. Call (808) 488-1111.',
+    description: '$0 Free Estimate • (808) 488-1111. Fix blinking filter lights & CH05/CH21/CH34 error codes on LG & GE Window ACs in Oahu, or swap with an in-stock unit ($395+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/blinking-light-error-codes-ac-repair',
     },
     openGraph: {
-        title: 'Blinking Light Error Codes AC Repair Oahu | LG & GE Window AC | Affordable Home A/C',
-        description: 'Decode blinking LED lights and digital CH error codes on LG Dual Inverter and GE window air conditioners on Oahu. Fast diagnostic triage by Oahu cooling specialists. Call (808) 488-1111.',
+        title: 'LG & GE Window AC Blinking Light & CH Error Codes Oahu | $0 Estimate | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Fix blinking filter lights & CH05/CH21/CH34 error codes on LG & GE Window ACs in Oahu, or swap with an in-stock unit ($395+).',
         url: 'https://www.affordablehome-ac.com/blinking-light-error-codes-ac-repair',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Blinking Light Error Codes Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Blinking Light Error Codes AC Repair Oahu | LG & GE Window AC | Affordable Home A/C',
-        description: 'Decode blinking LED lights and digital CH error codes on LG Dual Inverter and GE window air conditioners on Oahu. Fast diagnostic triage by Oahu cooling specialists. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'LG & GE Window AC Blinking Light & CH Error Codes Oahu | $0 Estimate | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Fix blinking filter lights & CH05/CH21/CH34 error codes on LG & GE Window ACs in Oahu, or swap with an in-stock unit ($395+).',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Clean vs Replace Window AC Oahu | Diagnostic Decision Guide | Affordable Home A/C'
+        absolute: 'Clean vs Replace Window AC Oahu ($0 Estimate) | Repair or $395+ New AC | (808) 488-1111'
     },
-    description: 'Should you clean or replace your window AC on Oahu? Compare DIY filter maintenance vs upgrading to an in-stock LG Dual Inverter with $45 Hawaii Energy rebate.',
+    description: '$0 Free Estimate • (808) 488-1111. Should you clean or replace your Oahu Window AC? Compare deep coil cleaning vs in-stock LG Dual Inverters ($395+, $45 Rebate).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/clean-vs-replace-window-ac',
     },
     openGraph: {
-        title: 'Clean vs Replace Window AC Oahu | Diagnostic Decision Guide | Affordable Home A/C',
-        description: 'Should you clean or replace your window AC on Oahu? Compare DIY filter maintenance vs upgrading to an in-stock LG Dual Inverter with $45 Hawaii Energy rebate.',
+        title: 'Clean vs Replace Window AC Oahu ($0 Estimate) | Repair or $395+ New AC | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Should you clean or replace your Oahu Window AC? Compare deep coil cleaning vs in-stock LG Dual Inverters ($395+, $45 Rebate).',
         url: 'https://www.affordablehome-ac.com/clean-vs-replace-window-ac',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Clean vs Replace Window AC Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Clean vs Replace Window AC Oahu | Diagnostic Decision Guide | Affordable Home A/C',
-        description: 'Should you clean or replace your window AC on Oahu? Compare DIY filter maintenance vs upgrading to an in-stock LG Dual Inverter with $45 Hawaii Energy rebate.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Clean vs Replace Window AC Oahu ($0 Estimate) | Repair or $395+ New AC | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Should you clean or replace your Oahu Window AC? Compare deep coil cleaning vs in-stock LG Dual Inverters ($395+, $45 Rebate).',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

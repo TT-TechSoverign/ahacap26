@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Commercial Window AC Oahu | Jobsite Trailers & Offices | Affordable Home A/C'
+        absolute: 'Commercial Window AC Oahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Rugged commercial LG & GE window air conditioners for Oahu construction jobsite trailers, security guard shacks, retail shops, and offices. Bulk orders and same-day Waipahu pickup.',
+    description: '$0 Free Estimate • (808) 488-1111. Rugged commercial LG & GE window air conditioners for Oahu construction jobsite trailers, security guard shacks.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/commercial-window-ac-oahu',
     },
     openGraph: {
-        title: 'Commercial Window AC Oahu | Jobsite Trailers & Offices | Affordable Home A/C',
-        description: 'Rugged commercial LG & GE window air conditioners for Oahu construction jobsite trailers, security guard shacks, retail shops, and offices. Bulk orders and same-day Waipahu pickup.',
+        title: 'Commercial Window AC Oahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Rugged commercial LG & GE window air conditioners for Oahu construction jobsite trailers, security guard shacks.',
         url: 'https://www.affordablehome-ac.com/commercial-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Commercial Window AC Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Commercial Window AC Oahu | Jobsite Trailers & Offices | Affordable Home A/C',
+        title: 'Commercial Window AC Oahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
         description: 'Rugged commercial window air conditioners for Oahu construction jobsite trailers, security guard shacks, retail shops, and offices. Bulk orders and same-day Waipahu pickup.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

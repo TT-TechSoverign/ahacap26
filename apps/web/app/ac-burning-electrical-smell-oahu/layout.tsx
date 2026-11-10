@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair | Affordable Home A/C'
+        absolute: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
+    description: '$0 Free Estimate • (808) 488-1111. Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu',
     },
     openGraph: {
-        title: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair | Affordable Home A/C',
-        description: 'Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
+        title: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate.',
         url: 'https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Burning Electrical Smell Oahu Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair | Affordable Home A/C',
+        title: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Smell burning plastic, fishy odor, or electrical smoke from your AC vents? Follow immediate breaker shutoff safety steps and get emergency diagnostics in Oahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

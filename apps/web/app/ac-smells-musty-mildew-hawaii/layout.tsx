@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Smells Musty & Mildew in Hawaii | Dirty Sock Syndrome Solved | Affordable Home A/C'
+        absolute: 'Window AC Smells Musty in Hawaii? Deep Mold Cleaning ($0 Estimate) | (808) 488-1111'
     },
-    description: 'Why does your Hawaii LG or GE window AC smell musty like dirty socks or mildew? Discover causes of bacteria and mold buildup in coils and drain pans, and get clinical chemical sanitization.',
+    description: '$0 Free Estimate • (808) 488-1111. Eliminate musty mildew & dirty sock odors from your Oahu Window AC with deep evaporator coil & blower wheel sanitization.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-smells-musty-mildew-hawaii',
     },
     openGraph: {
-        title: 'AC Smells Musty & Mildew in Hawaii | Dirty Sock Syndrome Solved | Affordable Home A/C',
-        description: 'Why does your Hawaii LG or GE window AC smell musty like dirty socks or mildew? Discover causes of bacteria and mold buildup in coils and drain pans, and get clinical chemical sanitization.',
+        title: 'Window AC Smells Musty in Hawaii? Deep Mold Cleaning ($0 Estimate) | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Eliminate musty mildew & dirty sock odors from your Oahu Window AC with deep evaporator coil & blower wheel sanitization.',
         url: 'https://www.affordablehome-ac.com/ac-smells-musty-mildew-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Smells Musty Mildew Hawaii Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Smells Musty & Mildew in Hawaii | Dirty Sock Syndrome Solved | Affordable Home A/C',
-        description: 'Why does your Hawaii AC smell musty like dirty socks or mildew? Discover causes of bacteria and mold buildup in coils and drain pans, and get clinical chemical sanitization.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Window AC Smells Musty in Hawaii? Deep Mold Cleaning ($0 Estimate) | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Eliminate musty mildew & dirty sock odors from your Oahu Window AC with deep evaporator coil & blower wheel sanitization.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

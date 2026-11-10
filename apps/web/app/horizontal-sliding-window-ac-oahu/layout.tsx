@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Horizontal Sliding Window AC Installation Oahu | Slider Panels | Affordable Home A/C'
+        absolute: 'Horizontal Sliding Window AC Installation Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Expert LG & GE window AC installation for horizontal sliding windows on Oahu. Custom vertical filler panels, standard exterior support brackets, airtight weather sealing.',
+    description: '$0 Free Estimate • (808) 488-1111. Expert LG & GE window AC installation for horizontal sliding windows on Oahu. Custom vertical filler panels.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/horizontal-sliding-window-ac-oahu',
     },
     openGraph: {
-        title: 'Horizontal Sliding Window AC Installation Oahu | Slider Panels | Affordable Home A/C',
-        description: 'Expert LG & GE window AC installation for horizontal sliding windows on Oahu. Custom vertical filler panels, standard exterior support brackets, airtight weather sealing.',
+        title: 'Horizontal Sliding Window AC Installation Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Expert LG & GE window AC installation for horizontal sliding windows on Oahu. Custom vertical filler panels.',
         url: 'https://www.affordablehome-ac.com/horizontal-sliding-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Horizontal Sliding Window AC Installation Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Horizontal Sliding Window AC Installation Oahu | Slider Panels | Affordable Home A/C',
+        title: 'Horizontal Sliding Window AC Installation Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Expert window AC installation for horizontal sliding windows on Oahu. Custom vertical filler panels, standard exterior support brackets, airtight weather sealing.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

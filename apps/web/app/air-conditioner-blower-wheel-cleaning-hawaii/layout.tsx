@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Air Conditioner Blower Wheel Cleaning Hawaii | Deep Fan Wheel Scrub | Affordable Home A/C'
+        absolute: 'Air Conditioner Blower Wheel Cleaning Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Eliminate heavy dust cake and black mold from your LG or GE window AC squirrel-cage blower fan wheel. Restores 100% airflow CFM and eradicates vibration.',
+    description: '$0 Free Estimate • (808) 488-1111. Eliminate heavy dust cake and black mold from your LG or GE window AC squirrel-cage blower fan wheel. Restores.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/air-conditioner-blower-wheel-cleaning-hawaii',
     },
     openGraph: {
-        title: 'Air Conditioner Blower Wheel Cleaning Hawaii | Deep Fan Wheel Scrub | Affordable Home A/C',
-        description: 'Eliminate heavy dust cake and black mold from your LG or GE window AC squirrel-cage blower fan wheel. Restores 100% airflow CFM and eradicates vibration.',
+        title: 'Air Conditioner Blower Wheel Cleaning Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Eliminate heavy dust cake and black mold from your LG or GE window AC squirrel-cage blower fan wheel. Restores.',
         url: 'https://www.affordablehome-ac.com/air-conditioner-blower-wheel-cleaning-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Air Conditioner Blower Wheel Cleaning Hawaii Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Air Conditioner Blower Wheel Cleaning Hawaii | Deep Fan Wheel Scrub | Affordable Home A/C',
+        title: 'Air Conditioner Blower Wheel Cleaning Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Eliminate heavy dust cake and black mold from your window AC squirrel-cage blower fan wheel. Restores 100% airflow CFM and eradicates vibration.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

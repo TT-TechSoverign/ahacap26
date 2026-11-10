@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Seasonal AC Maintenance Plans Oahu | Preventative Care | Affordable Home A/C'
+        absolute: 'Seasonal AC Maintenance Plans Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Keep your window cooling system running at peak efficiency year-round. Bi-annual coil cleaning, amp draw checks, and pan flushes tailored to Oahu microclimates.',
+    description: '$0 Free Estimate • (808) 488-1111. Keep your window cooling system running at peak efficiency year-round. Bi-annual coil cleaning, amp draw checks.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/seasonal-ac-maintenance-plans-oahu',
     },
     openGraph: {
-        title: 'Seasonal AC Maintenance Plans Oahu | Preventative Care | Affordable Home A/C',
-        description: 'Keep your window cooling system running at peak efficiency year-round. Bi-annual coil cleaning, amp draw checks, and pan flushes tailored to Oahu microclimates.',
+        title: 'Seasonal AC Maintenance Plans Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Keep your window cooling system running at peak efficiency year-round. Bi-annual coil cleaning, amp draw checks.',
         url: 'https://www.affordablehome-ac.com/seasonal-ac-maintenance-plans-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Seasonal AC Maintenance Plans Oahu Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Seasonal AC Maintenance Plans Oahu | Preventative Care | Affordable Home A/C',
-        description: 'Keep your window cooling system running at peak efficiency year-round. Bi-annual coil cleaning, amp draw checks, and pan flushes tailored to Oahu microclimates.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Seasonal AC Maintenance Plans Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Keep your window cooling system running at peak efficiency year-round. Bi-annual coil cleaning, amp draw checks.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

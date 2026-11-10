@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'No Power to AC Unit in Hawaii? Breaker & Plug Checks | Affordable Home A/C'
+        absolute: 'No Power to AC Unit in Hawaii? Breaker & Plug Checks ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Window AC unit completely dead with no power or display lights in Hawaii? Check circuit breakers, LCDI safety plugs, and control fuses.',
+    description: '$0 Free Estimate • (808) 488-1111. Window AC unit completely dead with no power or display lights in Hawaii? Check circuit breakers, LCDI safety.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/no-power-to-ac-unit-hawaii',
     },
     openGraph: {
-        title: 'No Power to AC Unit in Hawaii? Breaker & Plug Checks | Affordable Home A/C',
-        description: 'Window AC unit completely dead with no power or display lights in Hawaii? Check circuit breakers, LCDI safety plugs, and control fuses.',
+        title: 'No Power to AC Unit in Hawaii? Breaker & Plug Checks ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Window AC unit completely dead with no power or display lights in Hawaii? Check circuit breakers, LCDI safety.',
         url: 'https://www.affordablehome-ac.com/no-power-to-ac-unit-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'No Power to AC Unit Hawaii Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'No Power to AC Unit in Hawaii? Breaker & Plug Checks | Affordable Home A/C',
-        description: 'Window AC unit completely dead with no power or display lights in Hawaii? Check circuit breakers, LCDI safety plugs, and control fuses.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'No Power to AC Unit in Hawaii? Breaker & Plug Checks ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Window AC unit completely dead with no power or display lights in Hawaii? Check circuit breakers, LCDI safety.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

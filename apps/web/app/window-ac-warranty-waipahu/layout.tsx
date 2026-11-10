@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Warranty & Local Support Waipahu | Affordable Home A/C'
+        absolute: 'Window AC Warranty & Local Support Waipahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
+    description: '$0 Free Estimate • (808) 488-1111. Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
     },
     openGraph: {
-        title: 'Window AC Warranty & Local Support Waipahu | Affordable Home A/C',
-        description: 'Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
+        title: 'Window AC Warranty & Local Support Waipahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer.',
         url: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Window AC Warranty Waipahu Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Warranty & Local Support Waipahu | Affordable Home A/C',
-        description: 'Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer warranty backed by our central Waipahu bench-testing facility and Oahu cooling technicians.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Window AC Warranty & Local Support Waipahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

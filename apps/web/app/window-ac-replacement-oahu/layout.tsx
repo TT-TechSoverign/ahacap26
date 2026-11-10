@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Replacement Oahu | Old Unit Swap & Haul-Away | Affordable Home A/C'
+        absolute: 'Window AC Replacement Oahu ($0 Estimate) | Old Unit Swap & In-Stock LG/GE ($395+)'
     },
-    description: 'Upgrade your loud, rusted, power-draining window air conditioner with an ultra-efficient LG Dual Inverter or GE Built-In unit. Professional replacement, old unit haul-away, Waipahu warehouse pickup.',
+    description: '$0 Free Estimate • (808) 488-1111. Replace loud, rusted Oahu Window ACs with in-stock LG Dual Inverter or GE 26" Built-In units ($395–$1,200, $45 Rebate).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-replacement-oahu',
     },
     openGraph: {
-        title: 'Window AC Replacement Oahu | Old Unit Swap & Haul-Away | Affordable Home A/C',
-        description: 'Upgrade your loud, rusted, power-draining window air conditioner with an ultra-efficient LG Dual Inverter or GE Built-In unit. Professional replacement, old unit haul-away, Waipahu warehouse pickup.',
+        title: 'Window AC Replacement Oahu ($0 Estimate) | Old Unit Swap & In-Stock LG/GE ($395+)',
+        description: '$0 Free Estimate • (808) 488-1111. Replace loud, rusted Oahu Window ACs with in-stock LG Dual Inverter or GE 26" Built-In units ($395–$1,200, $45 Rebate).',
         url: 'https://www.affordablehome-ac.com/window-ac-replacement-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Window AC Replacement Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Replacement Oahu | Old Unit Swap & Haul-Away | Affordable Home A/C',
-        description: 'Upgrade your loud, rusted, power-draining window air conditioner with an ultra-efficient LG Dual Inverter or GE Built-In unit. Professional replacement, old unit haul-away, Waipahu warehouse pickup.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Window AC Replacement Oahu ($0 Estimate) | Old Unit Swap & In-Stock LG/GE ($395+)',
+        description: '$0 Free Estimate • (808) 488-1111. Replace loud, rusted Oahu Window ACs with in-stock LG Dual Inverter or GE 26" Built-In units ($395–$1,200, $45 Rebate).',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

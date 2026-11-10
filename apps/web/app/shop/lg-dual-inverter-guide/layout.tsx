@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'LG Dual Inverter Window AC Guide Oahu (6,000–23,500 BTU) — $560–$1,025 | In-Stock Waipahu | Affordable Home A/C',
+        absolute: 'LG Dual Inverter Window ACs Oahu ($560–$1,025) | 6k–23.5k BTU In-Stock & $45 Rebate',
     },
-    description: 'Complete Oahu buyer guide and live Waipahu inventory for all 7 LG Dual Inverter Smart ThinQ window air conditioners (6,000 to 23,500 BTU, $560–$1,025), plus GE 26" Built-In wall sleeve options. Qualifies for $45 Hawaii Energy cash rebate.',
+    description: 'In-Stock LG Dual Inverter Window ACs ($560–$1,025, 6k–23.5k BTU) in Waipahu, Oahu. 44dB quiet, 40% HECO savings, $45 Rebate & $50 Oahu delivery • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/shop/lg-dual-inverter-guide',
     },

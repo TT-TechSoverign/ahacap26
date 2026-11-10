@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Pet Hair & Dander Window AC Cleaning Oahu | Affordable Home A/C'
+        absolute: 'Pet Hair & Dander Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Eradicate embedded pet hair, feline dander, and animal odors from your window AC in Oahu. Filter sanitization, coil wash, and LG Dual Inverter upgrades. Local Waipahu specialists.',
+    description: '$0 Free Estimate • (808) 488-1111. Eradicate embedded pet hair, feline dander, and animal odors from your window AC in Oahu. Filter sanitization.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/pet-hair-dander-ac-cleaning-oahu',
     },
     openGraph: {
-        title: 'Pet Hair & Dander Window AC Cleaning Oahu | Affordable Home A/C',
-        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your window AC in Oahu. Filter sanitization, coil wash, and LG Dual Inverter upgrades. Local Waipahu specialists.',
+        title: 'Pet Hair & Dander Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Eradicate embedded pet hair, feline dander, and animal odors from your window AC in Oahu. Filter sanitization.',
         url: 'https://www.affordablehome-ac.com/pet-hair-dander-ac-cleaning-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Pet Hair Dander AC Cleaning Oahu Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Pet Hair & Dander Window AC Cleaning Oahu | Affordable Home A/C',
-        description: 'Eradicate embedded pet hair, feline dander, and animal odors from your window AC in Oahu. Filter sanitization, coil wash, and LG Dual Inverter upgrades. Local Waipahu specialists.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Pet Hair & Dander Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Eradicate embedded pet hair, feline dander, and animal odors from your window AC in Oahu. Filter sanitization.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

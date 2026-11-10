@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC for Studios & Apartments Hawaii | Compact Cooling | Affordable Home A/C'
+        absolute: 'Window AC for Studios & Apartments Hawaii ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Space-saving, whisper-quiet window air conditioners designed for Honolulu studio apartments, Waikiki walk-ups, and rental condos. 115V plug, in stock in Waipahu.',
+    description: '$0 Free Estimate • (808) 488-1111. Space-saving, whisper-quiet window air conditioners designed for Honolulu studio apartments, Waikiki walk-ups, and.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-for-studios-apartments-hawaii',
     },
     openGraph: {
-        title: 'Window AC for Studios & Apartments Hawaii | Compact Cooling | Affordable Home A/C',
-        description: 'Space-saving, whisper-quiet window air conditioners designed for Honolulu studio apartments, Waikiki walk-ups, and rental condos. 115V plug, in stock in Waipahu.',
+        title: 'Window AC for Studios & Apartments Hawaii ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Space-saving, whisper-quiet window air conditioners designed for Honolulu studio apartments, Waikiki walk-ups, and.',
         url: 'https://www.affordablehome-ac.com/window-ac-for-studios-apartments-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Window AC for Studios and Apartments Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC for Studios & Apartments Hawaii | Compact Cooling | Affordable Home A/C',
-        description: 'Space-saving, whisper-quiet window air conditioners designed for Honolulu studio apartments, Waikiki walk-ups, and rental condos. 115V plug, in stock in Waipahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Window AC for Studios & Apartments Hawaii ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Space-saving, whisper-quiet window air conditioners designed for Honolulu studio apartments, Waikiki walk-ups, and.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp'],
     }
 };
 

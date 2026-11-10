@@ -11,22 +11,34 @@ import { Navigation, ArrowRight, Package, MapPin, Wrench, Shield, Home, Shopping
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-    title: 'Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C',
-    description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and window AC cleaning.',
+    title: {
+        absolute: 'Oahu Window AC Sitemap & In-Stock Directory ($395–$1,200) | Affordable Home A/C'
+    },
+    description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Free Estimate installation & coil cleaning • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sitemap',
     },
     openGraph: {
-        title: 'Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C',
-        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and window AC cleaning.',
+        title: 'Oahu Window AC Sitemap & In-Stock Directory ($395–$1,200) | Affordable Home A/C',
+        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Free Estimate installation & coil cleaning.',
         url: 'https://www.affordablehome-ac.com/sitemap',
         siteName: 'Affordable Home A/C',
+        locale: 'en_US',
         type: 'website',
+        images: [
+            {
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
+                alt: 'Affordable Home A/C Complete Oahu Window AC Directory',
+            }
+        ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C',
-        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and window AC cleaning.',
+        title: 'Oahu Window AC Sitemap & In-Stock Directory ($395–$1,200) | Affordable Home A/C',
+        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities & $0 Free Estimates.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },
 };
 

@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Warehouse Pickup Waipahu | Same-Day In-Stock | Affordable Home A/C'
+        absolute: 'Waipahu Window AC Warehouse Pickup ($395–$1,200) | 16 In-Stock LG & GE Models'
     },
-    description: 'Pick up in-stock LG Dual Inverter & GE Built-In window air conditioners directly from our central Waipahu warehouse (94-150 Leoleo St #203). Fast pickup by appointment with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
+    description: 'Same-day Waipahu warehouse pickup by appointment (94-150 Leoleo St #203) or $50 Oahu delivery! 16 in-stock LG & GE Window ACs ($395–$1,200) • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-warehouse-pickup-waipahu',
     },
     openGraph: {
-        title: 'Window AC Warehouse Pickup Waipahu | Same-Day In-Stock | Affordable Home A/C',
-        description: 'Pick up in-stock LG Dual Inverter & GE Built-In window air conditioners directly from our central Waipahu warehouse (94-150 Leoleo St #203). Fast pickup by appointment with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
+        title: 'Waipahu Window AC Warehouse Pickup ($395–$1,200) | 16 In-Stock LG & GE Models',
+        description: 'Same-day Waipahu warehouse pickup by appointment (94-150 Leoleo St #203) or $50 Oahu delivery! 16 in-stock LG & GE Window ACs ($395–$1,200) • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-warehouse-pickup-waipahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Window AC Warehouse Pickup Waipahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Warehouse Pickup Waipahu | Same-Day In-Stock | Affordable Home A/C',
-        description: 'Pick up in-stock LG Dual Inverter & GE Built-In window air conditioners directly from our central Waipahu warehouse (94-150 Leoleo St #203). Fast pickup by appointment with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Waipahu Window AC Warehouse Pickup ($395–$1,200) | 16 In-Stock LG & GE Models',
+        description: 'Same-day Waipahu warehouse pickup by appointment (94-150 Leoleo St #203) or $50 Oahu delivery! 16 in-stock LG & GE Window ACs ($395–$1,200) • (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

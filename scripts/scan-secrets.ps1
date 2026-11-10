@@ -57,36 +57,37 @@ foreach ($p in $patterns) {
     }
 }
 
-# 4. Full Working Tree Static Scan from Root
+# 4. Full Working Tree Static Scan from Root (Fast Git-Aware Traversal)
 Write-Host "[4/5] Scanning full working tree from repository root..." -ForegroundColor Yellow
 $excludedDirs = @('.git', 'node_modules', '.next', '__pycache__', '.venv', 'dist', 'build', '.idea', '.vscode', '_private_portfolio', '_analytics_data', 'brain_exports_2026-06-21')
-$targetExtensions = @('*.py', '*.ts', '*.tsx', '*.js', '*.json', '*.ps1', '*.sh', '*.yml', '*.yaml')
+$validExtRegex = '\.(py|ts|tsx|js|json|ps1|sh|yml|yaml)$'
 
-$filesToScan = Get-ChildItem -Path . -Recurse -File -Include $targetExtensions -ErrorAction SilentlyContinue | Where-Object {
-    $filePath = $_.FullName
-    $relPath = Resolve-Path -Path $filePath -Relative
+$gitFiles = git -c core.fsmonitor=false ls-files --cached --others --exclude-standard
+$filesToScan = @()
+foreach ($relPath in $gitFiles) {
+    if ($relPath -notmatch $validExtRegex) { continue }
     $isExcluded = $false
     foreach ($d in $excludedDirs) {
-        if ($filePath -like "*\$d\*" -or $filePath -like "*/$d/*") {
+        if ($relPath -like "$d/*" -or $relPath -like "*/$d/*") {
             $isExcluded = $true
             break
         }
     }
-    # Exclude scanner itself, example templates, test artifacts, lockfiles, and gitignored local env files
-    if ($relPath -like "*scripts*scan-secrets.ps1" -or $relPath -like "*.example" -or $relPath -like "*pnpm-lock.yaml" -or $relPath -like "*.env*") {
+    if ($relPath -like "*scripts/scan-secrets.ps1" -or $relPath -like "*.example" -or $relPath -like "*pnpm-lock.yaml" -or $relPath -like "*.env*") {
         $isExcluded = $true
     }
-    -not $isExcluded
+    if (-not $isExcluded -and (Test-Path -LiteralPath $relPath -PathType Leaf)) {
+        $filesToScan += $relPath
+    }
 }
 
 Write-Host "      Auditing $($filesToScan.Count) source and configuration files..." -ForegroundColor DarkGray
-foreach ($file in $filesToScan) {
+foreach ($rel in $filesToScan) {
     try {
-        $content = [System.IO.File]::ReadAllText($file.FullName)
+        $content = [System.IO.File]::ReadAllText((Resolve-Path -LiteralPath $rel).Path)
         if (-not $content) { continue }
         foreach ($p in $patterns) {
             if ($content -cmatch $p.Pattern) {
-                $rel = Resolve-Path -Path $file.FullName -Relative
                 $violations += "File contains $($p.Name): $rel"
             }
         }
@@ -106,17 +107,16 @@ $forbiddenClientPatterns = @(
     'NEXT_PUBLIC_.*KEY.*=.*rk_live'
 )
 
-$nextFiles = Get-ChildItem -Path @("apps/web", "apps/dev-os") -Recurse -File -Include @('*.ts', '*.tsx', '*.js') -ErrorAction SilentlyContinue | Where-Object {
-    $_.FullName -notlike "*node_modules*" -and $_.FullName -notlike "*.next*"
+$nextFiles = $filesToScan | Where-Object {
+    ($_ -like "apps/web/*" -or $_ -like "apps/dev-os/*") -and ($_ -match '\.(ts|tsx|js)$')
 }
 
-foreach ($f in $nextFiles) {
+foreach ($rel in $nextFiles) {
     try {
-        $content = [System.IO.File]::ReadAllText($f.FullName)
+        $content = [System.IO.File]::ReadAllText((Resolve-Path -LiteralPath $rel).Path)
         if (-not $content) { continue }
         foreach ($fp in $forbiddenClientPatterns) {
             if ($content -match $fp) {
-                $rel = Resolve-Path -Path $f.FullName -Relative
                 $violations += "Client file exposes dangerous NEXT_PUBLIC_ variable: $rel"
             }
         }

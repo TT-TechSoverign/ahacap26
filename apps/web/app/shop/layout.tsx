@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'In-Stock Window Air Conditioners Oahu ($395–$1,200) | Waipahu Pickup & $50 Delivery | Affordable Home A/C',
+        absolute: 'In-Stock LG & GE Window ACs Oahu ($395–$1,200) | Waipahu Pickup & $45 Rebate',
     },
-    description: 'Shop in-stock LG Dual Inverter (6,000–23,500 BTU, -$45 Rebate), LG Cool+Heat, and GE 26" Wall Sleeve window air conditioners in Oahu ($395–$1,200). Free Waipahu warehouse pickup, $50 flat delivery & professional installation.',
+    description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup by appt, $50 delivery, $45 Rebate & $0 Install Estimate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/shop',
     },

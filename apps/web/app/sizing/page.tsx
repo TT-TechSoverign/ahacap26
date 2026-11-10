@@ -9,32 +9,32 @@ import { Suspense } from 'react';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Oahu AC Sizing Calculator & BTU Sizing Wizard | Affordable Home A/C'
+        absolute: 'Oahu Window AC BTU Sizing Calculator (Single-Wall & Trade-Wind Calibrated) | $395+'
     },
-    description: 'Calculate the exact LG & GE Window AC BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
+    description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Calibrated for Hawaii single-wall heat loads & humidity. In-stock LG & GE ACs ($395–$1,200).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sizing',
     },
     openGraph: {
-        title: 'Oahu AC Sizing Calculator & BTU Sizing Wizard | Affordable Home A/C',
-        description: 'Calculate the exact LG & GE Window AC BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
+        title: 'Oahu Window AC BTU Sizing Calculator (Single-Wall & Trade-Wind Calibrated) | $395+',
+        description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Calibrated for Hawaii single-wall heat loads & humidity. In-stock LG & GE ACs ($395–$1,200).',
         url: 'https://www.affordablehome-ac.com/sizing',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Hawaii AC Sizing Wizard & Calculator',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Oahu AC Sizing Calculator & BTU Sizing Wizard | Affordable Home A/C',
-        description: 'Calculate the exact BTU cooling load for your Oahu home. Calibrated room load calculations for Kapolei, Ewa Beach, Kailua, and Honolulu micro-climates. Zero typing required.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Oahu Window AC BTU Sizing Calculator (Single-Wall & Trade-Wind Calibrated) | $395+',
+        description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Calibrated for Hawaii single-wall heat loads & humidity. In-stock LG & GE ACs ($395–$1,200).',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Contact & Schedule Appointment Oahu | Affordable Home A/C'
+        absolute: 'Contact Affordable Home A/C Oahu | $0 Free Estimate & Waipahu Pickup | (808) 488-1111'
     },
-    description: 'Contact Affordable Home A/C on Oahu. Schedule $0 LG & GE window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
+    description: 'Call (808) 488-1111 or book online! $0 Free Window AC installation & cleaning estimates across Oahu, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/contact',
     },
     openGraph: {
-        title: 'Contact & Schedule Appointment Oahu | Affordable Home A/C',
-        description: 'Contact Affordable Home A/C on Oahu. Schedule $0 LG & GE window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
+        title: 'Contact Affordable Home A/C Oahu | $0 Free Estimate & Waipahu Pickup | (808) 488-1111',
+        description: 'Call (808) 488-1111 or book online! $0 Free Window AC installation & cleaning estimates across Oahu, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
         url: 'https://www.affordablehome-ac.com/contact',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Contact Affordable Home A/C',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Contact & Schedule Appointment Oahu | Affordable Home A/C',
-        description: 'Contact Affordable Home A/C on Oahu. Schedule $0 window AC installation estimates, Waipahu warehouse pickups, or window AC cleaning. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Contact Affordable Home A/C Oahu | $0 Free Estimate & Waipahu Pickup | (808) 488-1111',
+        description: 'Call (808) 488-1111 or book online! $0 Free Window AC installation & cleaning estimates across Oahu, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

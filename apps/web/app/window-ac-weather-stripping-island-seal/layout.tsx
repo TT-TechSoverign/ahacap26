@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Weather Stripping & Island Seal Oahu | Stop Air Leaks | Affordable Home A/C'
+        absolute: 'Window AC Weather Stripping & Island Seal Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC weather stripping and perimeter sealing on Oahu.',
+    description: '$0 Free Estimate • (808) 488-1111. Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal',
     },
     openGraph: {
-        title: 'Window AC Weather Stripping & Island Seal Oahu | Stop Air Leaks | Affordable Home A/C',
-        description: 'Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC weather stripping and perimeter sealing on Oahu.',
+        title: 'Window AC Weather Stripping & Island Seal Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC.',
         url: 'https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Window AC Weather Stripping Island Seal Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Weather Stripping & Island Seal Oahu | Stop Air Leaks | Affordable Home A/C',
+        title: 'Window AC Weather Stripping & Island Seal Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional window AC weather stripping and perimeter sealing on Oahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

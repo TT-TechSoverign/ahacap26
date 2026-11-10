@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Renter-Friendly Window AC Installation Oahu | No-Damage Mounting | Affordable Home A/C'
+        absolute: 'Renter-Friendly Window AC Installation Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Zero-damage LG & GE window air conditioner mounting for Oahu renters and tenants. Protect your security deposit with non-invasive brackets and removable weather seals. In stock in Waipahu.',
+    description: '$0 Free Estimate • (808) 488-1111. Zero-damage LG & GE window air conditioner mounting for Oahu renters and tenants. Protect your security deposit.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/renter-friendly-ac-installation-oahu',
     },
     openGraph: {
-        title: 'Renter-Friendly Window AC Installation Oahu | No-Damage Mounting | Affordable Home A/C',
-        description: 'Zero-damage LG & GE window air conditioner mounting for Oahu renters and tenants. Protect your security deposit with non-invasive brackets and removable weather seals. In stock in Waipahu.',
+        title: 'Renter-Friendly Window AC Installation Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Zero-damage LG & GE window air conditioner mounting for Oahu renters and tenants. Protect your security deposit.',
         url: 'https://www.affordablehome-ac.com/renter-friendly-ac-installation-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Renter-Friendly Window AC Installation Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Renter-Friendly Window AC Installation Oahu | No-Damage Mounting | Affordable Home A/C',
+        title: 'Renter-Friendly Window AC Installation Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Zero-damage window air conditioner mounting for Oahu renters and tenants. Protect your security deposit with non-invasive brackets and removable weather seals. In stock in Waipahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

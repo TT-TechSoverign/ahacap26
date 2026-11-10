@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Same-Day Window AC Pickup Oahu | Emergency Cooling Waipahu | Affordable Home A/C'
+        absolute: 'Same-Day Window AC Pickup Oahu ($395–$1,200) | In-Stock Waipahu Warehouse'
     },
-    description: 'Beat the island heatwave with same-day window air conditioner pickup at our Waipahu warehouse. In-stock LG Dual Inverter & GE models loaded in minutes by appointment. Call (808) 488-1111.',
+    description: 'Need a Window AC today on Oahu? Pick up factory-sealed LG Dual Inverter & GE 26" Built-In units ($395–$1,200) in Waipahu by appointment • Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/same-day-window-ac-pickup-oahu',
     },
     openGraph: {
-        title: 'Same-Day Window AC Pickup Oahu | Emergency Cooling Waipahu | Affordable Home A/C',
-        description: 'Beat the island heatwave with same-day window air conditioner pickup at our Waipahu warehouse. In-stock LG Dual Inverter & GE models loaded in minutes by appointment. Call (808) 488-1111.',
+        title: 'Same-Day Window AC Pickup Oahu ($395–$1,200) | In-Stock Waipahu Warehouse',
+        description: 'Need a Window AC today on Oahu? Pick up factory-sealed LG Dual Inverter & GE 26" Built-In units ($395–$1,200) in Waipahu by appointment • Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/same-day-window-ac-pickup-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Same-Day Window AC Pickup Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Same-Day Window AC Pickup Oahu | Emergency Cooling Waipahu | Affordable Home A/C',
-        description: 'Beat the island heatwave with same-day window air conditioner pickup at our Waipahu warehouse. In-stock LG Dual Inverter & GE models loaded in minutes by appointment. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Same-Day Window AC Pickup Oahu ($395–$1,200) | In-Stock Waipahu Warehouse',
+        description: 'Need a Window AC today on Oahu? Pick up factory-sealed LG Dual Inverter & GE 26" Built-In units ($395–$1,200) in Waipahu by appointment • Call (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

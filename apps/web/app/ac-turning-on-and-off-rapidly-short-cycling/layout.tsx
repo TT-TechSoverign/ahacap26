@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu | Affordable Home A/C'
+        absolute: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Why is your LG or GE window air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
+    description: '$0 Free Estimate • (808) 488-1111. Why is your LG or GE window air conditioner short cycling every few minutes? Learn causes of rapid on/off.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-turning-on-and-off-rapidly-short-cycling',
     },
     openGraph: {
-        title: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu | Affordable Home A/C',
-        description: 'Why is your LG or GE window air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
+        title: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Why is your LG or GE window air conditioner short cycling every few minutes? Learn causes of rapid on/off.',
         url: 'https://www.affordablehome-ac.com/ac-turning-on-and-off-rapidly-short-cycling',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Turning On and Off Rapidly Short Cycling Oahu Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu | Affordable Home A/C',
+        title: 'AC Turning On and Off Rapidly? Short Cycling Fixes Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Why is your air conditioner short cycling every few minutes? Learn causes of rapid on/off cycles—oversizing, faulty thermistors, or clogged coils.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

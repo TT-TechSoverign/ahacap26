@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Storefront Admin Command Deck | Affordable Home A/C',
+    title: {
+        absolute: 'Storefront Admin Command Deck | Affordable Home A/C'
+    },
     robots: {
         index: false,
         follow: false,

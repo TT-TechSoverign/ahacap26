@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Blowing Warm Air Oahu | Troubleshooting & $0 Clean-vs-Replace Estimate | Affordable Home A/C'
+        absolute: 'AC Blowing Warm Air Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Is your LG or GE window AC blowing warm air on Oahu? Diagnostic troubleshooting guide for refrigerant leaks, failed capacitors, and compressor lockouts. Fast on-site evaluation dispatch. Call (808) 488-1111.',
+    description: '$0 Free Estimate • (808) 488-1111. Is your LG or GE window AC blowing warm air on Oahu? Diagnostic troubleshooting guide for refrigerant leaks.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-blowing-warm-air-troubleshooting-oahu',
     },
     openGraph: {
-        title: 'AC Blowing Warm Air Oahu | Troubleshooting & $0 Clean-vs-Replace Estimate | Affordable Home A/C',
-        description: 'Is your LG or GE window AC blowing warm air on Oahu? Diagnostic troubleshooting guide for refrigerant leaks, failed capacitors, and compressor lockouts. Fast on-site evaluation dispatch. Call (808) 488-1111.',
+        title: 'AC Blowing Warm Air Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Is your LG or GE window AC blowing warm air on Oahu? Diagnostic troubleshooting guide for refrigerant leaks.',
         url: 'https://www.affordablehome-ac.com/ac-blowing-warm-air-troubleshooting-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Blowing Warm Air Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Blowing Warm Air Oahu | Troubleshooting & $0 Clean-vs-Replace Estimate | Affordable Home A/C',
+        title: 'AC Blowing Warm Air Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Is your AC blowing warm air on Oahu? Diagnostic troubleshooting guide for refrigerant leaks, failed capacitors, and compressor lockouts. Fast on-site evaluation dispatch. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

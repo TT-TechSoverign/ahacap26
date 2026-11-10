@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Plug & Voltage Guide Oahu (115V vs 230V NEMA Chart) | Affordable Home A/C',
+        absolute: '115V vs 230V Window AC Plug Guide Oahu (NEMA 5-15P / 6-15P / 6-20P) | In-Stock $395+',
     },
-    description: 'Match your Hawaii wall outlet (115V NEMA 5-15P standard 3-prong vs 208/230V NEMA 6-15P & 6-20P) to the right in-stock LG or GE window air conditioner ($395–$1,025) in Waipahu, Oahu.',
+    description: 'Match your Oahu wall outlet (115V 15A vs 208/230V 15A/20A NEMA chart) to in-stock LG & GE Window ACs ($395–$1,200) in Waipahu. $0 Free Estimate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/shop/window-ac-plug-guide',
     },

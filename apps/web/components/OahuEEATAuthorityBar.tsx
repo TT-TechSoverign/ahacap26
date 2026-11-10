@@ -12,8 +12,13 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": normalizedTopicTitle,
+        "image": [
+            "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+            "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+            "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp"
+        ],
         "datePublished": "2026-01-15",
-        "dateModified": "2026-10-29",
+        "dateModified": "2026-11-10",
         "inLanguage": "en-US",
         "author": {
             "@type": "Organization",
@@ -27,9 +32,16 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
         },
         "publisher": {
             "@type": "Organization",
+            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
             "name": "Affordable Home A/C",
             "url": "https://www.affordablehome-ac.com",
             "telephone": "+1-808-488-1111",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
+                "width": 500,
+                "height": 500
+            },
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "94-150 Leoleo St. #203",

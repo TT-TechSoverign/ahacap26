@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Quiet Bedroom Window AC Oahu | 44 dB Ultra-Quiet Dual Inverter | Affordable Home A/C'
+        absolute: 'Quiet 44dB Bedroom Window AC Oahu ($560–$595 In-Stock) | LG Dual Inverter & $45 Rebate'
     },
-    description: 'Sleep in whisper-quiet comfort with 44 dB LG Dual Inverter & GE bedroom window ACs on Oahu. In-stock in Waipahu ($560–$595) with $45 Hawaii Energy cash rebate. Free pickup or $50 delivery.',
+    description: 'In-Stock 44dB ultra-quiet LG Dual Inverter bedroom Window ACs ($560–$595) in Waipahu, Oahu. Standard 115V plug, $45 Hawaii Energy Rebate & $50 delivery • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/quiet-bedroom-window-ac-oahu',
     },
     openGraph: {
-        title: 'Quiet Bedroom Window AC Oahu | 44 dB Ultra-Quiet Dual Inverter | Affordable Home A/C',
-        description: 'Sleep in whisper-quiet comfort with 44 dB LG Dual Inverter & GE bedroom window ACs on Oahu. In-stock in Waipahu ($560–$595) with $45 Hawaii Energy cash rebate. Free pickup or $50 delivery.',
+        title: 'Quiet 44dB Bedroom Window AC Oahu ($560–$595 In-Stock) | LG Dual Inverter & $45 Rebate',
+        description: 'In-Stock 44dB ultra-quiet LG Dual Inverter bedroom Window ACs ($560–$595) in Waipahu, Oahu. Standard 115V plug, $45 Hawaii Energy Rebate & $50 delivery • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/quiet-bedroom-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Quiet Bedroom Window AC Oahu 44dB',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Quiet Bedroom Window AC Oahu | 44 dB Ultra-Quiet Dual Inverter | Affordable Home A/C',
-        description: 'Sleep in whisper-quiet comfort with 44 dB LG Dual Inverter & GE bedroom window ACs on Oahu. In-stock in Waipahu ($560–$595) with $45 Hawaii Energy cash rebate. Free pickup or $50 delivery.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Quiet 44dB Bedroom Window AC Oahu ($560–$595 In-Stock) | LG Dual Inverter & $45 Rebate',
+        description: 'In-Stock 44dB ultra-quiet LG Dual Inverter bedroom Window ACs ($560–$595) in Waipahu, Oahu. Standard 115V plug, $45 Hawaii Energy Rebate & $50 delivery • (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

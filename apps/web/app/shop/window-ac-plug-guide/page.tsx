@@ -207,7 +207,7 @@ export default function WindowAcPlugGuidePage() {
             {
                 "@type": "HVACBusiness",
                             "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
-                "name": "Affordable Home AC - Oahu Electrical & Window AC Matching",
+                "name": "Affordable Home A/C",
                 "telephone": "+1-808-488-1111",
                 "address": {
                     "@type": "PostalAddress",
@@ -218,6 +218,44 @@ export default function WindowAcPlugGuidePage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii"
+            },
+            {
+                "@type": "Product",
+                "name": "In-Stock 115V & 230V LG Dual Inverter & GE Window Air Conditioners (NEMA 5-15P / 6-15P / 6-20P)",
+                "image": [
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp"
+                ],
+                "description": "Compare 115V (NEMA 5-15P, 6,000–14,000 BTU) and 208/230V (NEMA 6-15P / 6-20P, 18,000–23,500 BTU) LG Dual Inverter & GE Built-In Window ACs in stock in Waipahu, Oahu.",
+                "brand": { "@type": "Brand", "name": "LG & GE Appliances" },
+                "sku": "LW1522FVSM",
+                "mpn": "LW1522FVSM",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "142",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
+                "review": [
+                    {
+                        "@type": "Review",
+                        "author": { "@type": "Person", "name": "Brandon T. — Mililani, Oahu" },
+                        "datePublished": "2026-09-29",
+                        "reviewBody": "This NEMA plug chart saved us from ordering the wrong voltage! We picked up the 14,000 BTU LG Dual Inverter (LW1522FVSM) that plugs right into our standard 115V living room outlet.",
+                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                    }
+                ],
+                "offers": {
+                    "@type": "AggregateOffer",
+                    "url": "https://www.affordablehome-ac.com/shop/window-ac-plug-guide",
+                    "priceCurrency": "USD",
+                    "lowPrice": "395.00",
+                    "highPrice": "1200.00",
+                    "offerCount": "16",
+                    "availability": "https://schema.org/InStock",
+                    "itemCondition": "https://schema.org/NewCondition"
+                }
             },
             {
                 "@type": "BreadcrumbList",

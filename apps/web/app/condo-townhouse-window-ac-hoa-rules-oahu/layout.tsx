@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Condo & Townhouse Window AC HOA Rules Oahu | Compliance Guide | Affordable Home A/C'
+        absolute: 'Oahu Condo & Townhouse Window AC HOA Guide | 44dB LG & 26" GE Built-In ($395+)'
     },
-    description: 'Navigate Oahu condo and townhouse HOA rules for window air conditioners. Decibel restrictions, exterior facade aesthetics, condensation drain rules, and compliant models in stock in Waipahu.',
+    description: '$0 Free Estimate • (808) 488-1111. HOA-compliant 44dB LG Dual Inverter & GE 26" Built-In Through-the-Wall ACs ($395–$1,200) in stock in Waipahu, Oahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/condo-townhouse-window-ac-hoa-rules-oahu',
     },
     openGraph: {
-        title: 'Condo & Townhouse Window AC HOA Rules Oahu | Compliance Guide | Affordable Home A/C',
-        description: 'Navigate Oahu condo and townhouse HOA rules for window air conditioners. Decibel restrictions, exterior facade aesthetics, condensation drain rules, and compliant models in stock in Waipahu.',
+        title: 'Oahu Condo & Townhouse Window AC HOA Guide | 44dB LG & 26" GE Built-In ($395+)',
+        description: '$0 Free Estimate • (808) 488-1111. HOA-compliant 44dB LG Dual Inverter & GE 26" Built-In Through-the-Wall ACs ($395–$1,200) in stock in Waipahu, Oahu.',
         url: 'https://www.affordablehome-ac.com/condo-townhouse-window-ac-hoa-rules-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Condo Townhouse Window AC HOA Rules Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Condo & Townhouse Window AC HOA Rules Oahu | Compliance Guide | Affordable Home A/C',
-        description: 'Navigate Oahu condo and townhouse HOA rules for window air conditioners. Decibel restrictions, exterior facade aesthetics, condensation drain rules, and compliant models in stock in Waipahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Oahu Condo & Townhouse Window AC HOA Guide | 44dB LG & 26" GE Built-In ($395+)',
+        description: '$0 Free Estimate • (808) 488-1111. HOA-compliant 44dB LG Dual Inverter & GE 26" Built-In Through-the-Wall ACs ($395–$1,200) in stock in Waipahu, Oahu.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp'],
     }
 };
 

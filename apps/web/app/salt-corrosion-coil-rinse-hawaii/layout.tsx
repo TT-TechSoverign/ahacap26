@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Salt Corrosion & Coil Rinse Hawaii | Marine AC Protection | Affordable Home A/C'
+        absolute: 'Coastal Salt-Air Window AC Coil Cleaning Hawaii ($0 Estimate) | Gold Fin LG ACs'
     },
-    description: 'Neutralize aggressive marine salt air and prevent LG & GE window AC coil corrosion in coastal Oahu homes. Professional low-pressure coil rinse and corrosion defense.',
+    description: '$0 Free Estimate • (808) 488-1111. Protect coastal Oahu Window ACs from salt-air corrosion with professional coil washes or Gold Fin LG Dual Inverters ($560+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/salt-corrosion-coil-rinse-hawaii',
     },
     openGraph: {
-        title: 'Salt Corrosion & Coil Rinse Hawaii | Marine AC Protection | Affordable Home A/C',
-        description: 'Neutralize aggressive marine salt air and prevent LG & GE window AC coil corrosion in coastal Oahu homes. Professional low-pressure coil rinse and corrosion defense.',
+        title: 'Coastal Salt-Air Window AC Coil Cleaning Hawaii ($0 Estimate) | Gold Fin LG ACs',
+        description: '$0 Free Estimate • (808) 488-1111. Protect coastal Oahu Window ACs from salt-air corrosion with professional coil washes or Gold Fin LG Dual Inverters ($560+).',
         url: 'https://www.affordablehome-ac.com/salt-corrosion-coil-rinse-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Salt Corrosion Coil Rinse Hawaii Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Salt Corrosion & Coil Rinse Hawaii | Marine AC Protection | Affordable Home A/C',
-        description: 'Neutralize aggressive marine salt air and prevent coil corrosion in coastal Oahu homes. Professional low-pressure coil rinse and corrosion defense.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Coastal Salt-Air Window AC Coil Cleaning Hawaii ($0 Estimate) | Gold Fin LG ACs',
+        description: '$0 Free Estimate • (808) 488-1111. Protect coastal Oahu Window ACs from salt-air corrosion with professional coil washes or Gold Fin LG Dual Inverters ($560+).',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

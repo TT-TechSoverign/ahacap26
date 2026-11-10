@@ -268,7 +268,7 @@ export default function LgDualInverterGuidePage() {
             {
                 "@type": "HVACBusiness",
                 "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
-                "name": "Affordable Home AC - LG Dual Inverter Oahu Guide & Store",
+                "name": "Affordable Home A/C",
                 "telephone": "+1-808-488-1111",
                 "address": {
                     "@type": "PostalAddress",
@@ -279,6 +279,44 @@ export default function LgDualInverterGuidePage() {
                     "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii"
+            },
+            {
+                "@type": "Product",
+                "name": "LG Dual Inverter Window Air Conditioner Series (6,000–23,500 BTU)",
+                "image": [
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp"
+                ],
+                "description": "In-stock LG Dual Inverter window air conditioners (6,000 to 23,500 BTU) in Waipahu, Oahu. Whisper-quiet 44dB operation, up to 40% HECO energy savings, and $45 Hawaii Energy cash rebate.",
+                "brand": { "@type": "Brand", "name": "LG" },
+                "sku": "LW1222IVSM",
+                "mpn": "LW1222IVSM",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "142",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
+                "review": [
+                    {
+                        "@type": "Review",
+                        "author": { "@type": "Person", "name": "Kawika M. — Pearl City, Oahu" },
+                        "datePublished": "2026-09-24",
+                        "reviewBody": "Picked up two LG Dual Inverter units from the Waipahu warehouse. Super quiet at night and cut our HECO electric bill noticeably in the first month.",
+                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                    }
+                ],
+                "offers": {
+                    "@type": "AggregateOffer",
+                    "url": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-guide",
+                    "priceCurrency": "USD",
+                    "lowPrice": "560.00",
+                    "highPrice": "1025.00",
+                    "offerCount": "7",
+                    "availability": "https://schema.org/InStock",
+                    "itemCondition": "https://schema.org/NewCondition"
+                }
             },
             {
                 "@type": "BreadcrumbList",

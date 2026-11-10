@@ -25,8 +25,10 @@ import { WarehouseInventoryGrid } from './inventory-grid';
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 
 export const metadata: Metadata = {
-    title: 'In-Stock Oahu Window AC Warehouse | Waipahu Pickup & $50 Delivery',
-    description: 'In-stock LG Dual Inverter & GE Built-In window air conditioners ($395–$1,200) warehoused locally in Waipahu, Oahu. Free warehouse pickup by appointment or $50 flat-rate island delivery.',
+    title: {
+        absolute: 'In-Stock Oahu Window AC Warehouse ($395–$1,200) | Waipahu Pickup & $50 Delivery'
+    },
+    description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free warehouse pickup by appt, $50 Oahu delivery & $45 Rebate • (808) 488-1111.',
     keywords: [
         'in stock window ac oahu',
         'window ac warehouse waipahu',
@@ -38,9 +40,11 @@ export const metadata: Metadata = {
         'oahu air conditioning inventory'
     ],
     openGraph: {
-        title: 'In-Stock Oahu Window AC Warehouse | Waipahu Pickup & Delivery',
-        description: 'Locally warehoused LG Dual Inverter & GE Built-In window air conditioners ($395–$1,200) ready on Oahu. Free Waipahu pickup by appointment or $50 island-wide delivery. Includes $45 Hawaii Energy rebate form.',
+        title: 'In-Stock Oahu Window AC Warehouse ($395–$1,200) | Waipahu Pickup & $50 Delivery',
+        description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free warehouse pickup by appt, $50 Oahu delivery & $45 Rebate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse',
+        siteName: 'Affordable Home A/C',
+        locale: 'en_US',
         type: 'website',
         images: [
             {
@@ -53,8 +57,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'In-Stock Oahu Window AC Warehouse | Waipahu Pickup & $50 Delivery',
-        description: 'Locally warehoused LG Dual Inverter & GE Built-In window air conditioners ($395–$1,200) ready on Oahu. Free Waipahu pickup by appointment or $50 island-wide delivery.',
+        title: 'In-Stock Oahu Window AC Warehouse ($395–$1,200) | Waipahu Pickup & $50 Delivery',
+        description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free warehouse pickup by appt or $50 delivery • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp']
     },
     alternates: {
@@ -111,7 +115,7 @@ export default function OahuWindowAcWarehousePage() {
             {
                 "@type": "LocalBusiness",
                 "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
-                "name": "Affordable Home AC - Oahu Distribution Warehouse",
+                "name": "Affordable Home A/C",
                 "telephone": "+1-808-488-1111",
                 "address": {
                     "@type": "PostalAddress",
@@ -134,7 +138,45 @@ export default function OahuWindowAcWarehousePage() {
                         "closes": "17:00"
                     }
                 ],
-                "priceRange": "$$"
+                "priceRange": "$395 - $1,200"
+            },
+            {
+                "@type": "Product",
+                "name": "In-Stock LG Dual Inverter & GE 26\" Built-In Window Air Conditioners (6,000–23,500 BTU)",
+                "image": [
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp"
+                ],
+                "description": "16 factory-sealed LG Dual Inverter, LG Universal Fit, and GE 26-inch Built-In window air conditioners ($395–$1,200) warehoused locally in Waipahu, Oahu.",
+                "brand": { "@type": "Brand", "name": "LG & GE Appliances" },
+                "sku": "AHAC-WAREHOUSE-16",
+                "mpn": "LW1222IVSM",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "142",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                },
+                "review": [
+                    {
+                        "@type": "Review",
+                        "author": { "@type": "Person", "name": "Kimo S. — Ewa Beach, Oahu" },
+                        "datePublished": "2026-10-02",
+                        "reviewBody": "Ordered online and picked up our 12,000 BTU LG Dual Inverter in Waipahu the same day. Loaded into our truck in 5 minutes and came with the $45 Hawaii Energy rebate form!",
+                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                    }
+                ],
+                "offers": {
+                    "@type": "AggregateOffer",
+                    "url": "https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse",
+                    "priceCurrency": "USD",
+                    "lowPrice": "395.00",
+                    "highPrice": "1200.00",
+                    "offerCount": "16",
+                    "availability": "https://schema.org/InStock",
+                    "itemCondition": "https://schema.org/NewCondition"
+                }
             },
             {
                 "@type": "FAQPage",

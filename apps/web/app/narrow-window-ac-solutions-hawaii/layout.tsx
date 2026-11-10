@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Narrow Window AC Solutions Hawaii | Small Openings Under 22" | Affordable Home A/C'
+        absolute: 'Narrow Window AC Solutions Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Compact window air conditioners designed to fit narrow window openings under 22 inches wide on Oahu. Custom vertical framing and compact Inverters in stock in Waipahu.',
+    description: '$0 Free Estimate • (808) 488-1111. Compact window air conditioners designed to fit narrow window openings under 22 inches wide on Oahu. Custom.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/narrow-window-ac-solutions-hawaii',
     },
     openGraph: {
-        title: 'Narrow Window AC Solutions Hawaii | Small Openings Under 22" | Affordable Home A/C',
-        description: 'Compact window air conditioners designed to fit narrow window openings under 22 inches wide on Oahu. Custom vertical framing and compact Inverters in stock in Waipahu.',
+        title: 'Narrow Window AC Solutions Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Compact window air conditioners designed to fit narrow window openings under 22 inches wide on Oahu. Custom.',
         url: 'https://www.affordablehome-ac.com/narrow-window-ac-solutions-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Narrow Window AC Solutions Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Narrow Window AC Solutions Hawaii | Small Openings Under 22" | Affordable Home A/C',
-        description: 'Compact window air conditioners designed to fit narrow window openings under 22 inches wide on Oahu. Custom vertical framing and compact Inverters in stock in Waipahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Narrow Window AC Solutions Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Compact window air conditioners designed to fit narrow window openings under 22 inches wide on Oahu. Custom.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Dual Inverter vs Standard Window AC Hawaii | Energy & Sound | Affordable Home A/C'
+        absolute: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr on HECO + $45 Rebate'
     },
-    description: 'Compare LG Dual Inverter & GE R32 Inverter variable-speed compressors against standard window air conditioners in Hawaii. Save up to 40% on HECO power bills with whisper 44 dB cooling.',
+    description: 'Compare 44dB LG Dual Inverter & GE R-32 Inverter Window ACs vs standard units in Hawaii. Save 40% on HECO bills + claim a $45 Rebate in Waipahu • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/inverter-window-ac-vs-standard-hawaii',
     },
     openGraph: {
-        title: 'Dual Inverter vs Standard Window AC Hawaii | Energy & Sound | Affordable Home A/C',
-        description: 'Compare LG Dual Inverter & GE R32 Inverter variable-speed compressors against standard window air conditioners in Hawaii. Save up to 40% on HECO power bills with whisper 44 dB cooling.',
+        title: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr on HECO + $45 Rebate',
+        description: 'Compare 44dB LG Dual Inverter & GE R-32 Inverter Window ACs vs standard units in Hawaii. Save 40% on HECO bills + claim a $45 Rebate in Waipahu • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/inverter-window-ac-vs-standard-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Dual Inverter vs Standard Window AC Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Dual Inverter vs Standard Window AC Hawaii | Energy & Sound | Affordable Home A/C',
-        description: 'Compare LG Dual Inverter & GE R32 Inverter variable-speed compressors against standard window air conditioners in Hawaii. Save up to 40% on HECO power bills with whisper 44 dB cooling.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr on HECO + $45 Rebate',
+        description: 'Compare 44dB LG Dual Inverter & GE R-32 Inverter Window ACs vs standard units in Hawaii. Save 40% on HECO bills + claim a $45 Rebate in Waipahu • (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Exterior Support Brackets & Mounting Oahu | Standard Brackets | Affordable Home A/C'
+        absolute: 'AC Exterior Support Brackets & Mounting Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU units, protect window sills.',
+    description: '$0 Free Estimate • (808) 488-1111. Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-brackets-exterior-security-mounting-oahu',
     },
     openGraph: {
-        title: 'AC Exterior Support Brackets & Mounting Oahu | Standard Brackets | Affordable Home A/C',
-        description: 'Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU units, protect window sills.',
+        title: 'AC Exterior Support Brackets & Mounting Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU.',
         url: 'https://www.affordablehome-ac.com/ac-brackets-exterior-security-mounting-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Exterior Support Brackets Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Exterior Support Brackets & Mounting Oahu | Standard Brackets | Affordable Home A/C',
-        description: 'Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU units, protect window sills.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'AC Exterior Support Brackets & Mounting Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Heavy-duty standard exterior window AC support brackets and secure mounting on Oahu. Support 6,000 to 23,500 BTU.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

@@ -64,17 +64,17 @@ export function generateMetadata({ params }: Props): Metadata {
     
     if (!cityData) return { title: 'Service Area Not Found' };
  
-    const title = `${cityData.name} LG & GE Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111`;
+    const title = `${cityData.name} Window AC ($395+), Install, Cleaning & Repair | $0 Estimate | (808) 488-1111`;
     
-    let description = `Fast ${cityData.name} Window AC installation, deep cleaning & in-stock LG & GE Window ACs ($395–$1,200) ready for Waipahu pickup or $50 delivery. $0 Free In-Home Estimate • (808) 488-1111.`;
+    let description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), custom jalousie installation, deep cleaning & repair.`;
     if (cityData.regionId === 'windward') {
-        description = `Salt-air protection & tropical cooling in ${cityData.name}, Oahu. Custom jalousie window AC installation, deep coil cleaning & in-stock LG & GE window ACs. $0 Estimate • (808) 488-1111.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), jalousie install, deep coil cleaning & salt-air repair.`;
     } else if (cityData.regionId === 'leeward') {
-        description = `High-efficiency heat relief in ${cityData.name}, Oahu. Custom window AC installation, deep cleaning & in-stock Waipahu LG & GE window ACs ($395–$1,200). $0 Estimate • (808) 488-1111.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock Waipahu LG & GE Window ACs ($395–$1,200, $45 Rebate), custom window install, deep cleaning & repair.`;
     } else if (cityData.regionId === 'metro') {
-        description = `Whisper-quiet window & through-the-wall cooling in ${cityData.name}, Oahu. Jalousie & sleeve window AC installation, deep cleaning & in-stock LG & GE window ACs. $0 Estimate • (808) 488-1111.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window & 26" Wall ACs ($395–$1,200, $45 Rebate), jalousie/condo install, cleaning & repair.`;
     } else {
-        description = `Precision dehumidification cooling in ${cityData.name}, Oahu. In-stock Waipahu LG & GE window ACs ($395–$1,200), custom window installation & deep window AC cleaning. $0 Estimate • (808) 488-1111.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), custom jalousie installation, deep cleaning & repair.`;
     }
  
     return {
@@ -89,10 +89,10 @@ export function generateMetadata({ params }: Props): Metadata {
             type: 'website',
             images: [
                 {
-                    url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                    width: 800,
-                    height: 600,
-                    alt: 'Affordable Home A/C Logo',
+                    url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                    width: 1600,
+                    height: 1000,
+                    alt: `${cityData.name} In-Stock LG Dual Inverter & GE Window ACs — Affordable Home A/C`,
                 }
             ]
         },
@@ -100,7 +100,7 @@ export function generateMetadata({ params }: Props): Metadata {
             card: 'summary_large_image',
             title,
             description,
-            images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+            images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
         },
         alternates: {
             canonical: `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`,
@@ -255,11 +255,18 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         "@context": "https://schema.org",
                         "@type": "HVACBusiness",
                         "@id": `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}#localbusiness`,
+                        "parentOrganization": {
+                            "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
+                        },
                         "name": `Affordable Home A/C - ${cityData.name} Window AC Specialists`,
                         "alternateName": "Affordable Home Air Conditioning",
                         "foundingDate": "2005",
                         "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
-                        "image": "https://www.affordablehome-ac.com/assets/logo-new.png",
+                        "image": [
+                            "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                            "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                            "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp"
+                        ],
                         "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
                         "url": `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`,
                         "telephone": "+1-808-488-1111",

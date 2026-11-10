@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill | Affordable Home A/C'
+        absolute: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Learn how dirty evaporator and condenser coils spike Hawaii window AC electricity bills at HECO for LG & GE units ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
+    description: '$0 Free Estimate • (808) 488-1111. Learn how dirty evaporator and condenser coils spike Hawaii window AC electricity bills at HECO for LG & GE units.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-coil-cleaning-benefits-power-bill',
     },
     openGraph: {
-        title: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill | Affordable Home A/C',
-        description: 'Learn how dirty evaporator and condenser coils spike Hawaii window AC electricity bills at HECO for LG & GE units ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
+        title: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Learn how dirty evaporator and condenser coils spike Hawaii window AC electricity bills at HECO for LG & GE units.',
         url: 'https://www.affordablehome-ac.com/ac-coil-cleaning-benefits-power-bill',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Coil Cleaning HECO Power Bill Savings Oahu Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill | Affordable Home A/C',
+        title: 'AC Coil Cleaning Benefits: Lower Your HECO Power Bill ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Learn how dirty evaporator and condenser coils spike Hawaii electricity bills at HECO ~44.2¢/kWh rates. Clinical coil cleaning saves $40–$90/month.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '$45 Hawaii Energy Window AC Rebate Oahu | Official Application | Affordable Home A/C'
+        absolute: '$45 Hawaii Energy Window AC Rebate Oahu (2026 PDF Form) | In-Stock LG & GE ACs'
     },
-    description: 'Claim your $45 Hawaii Energy cash rebate on qualifying Energy Star LG Dual Inverter & GE Built-In window air conditioners. Download official pre-approved application form. Central Waipahu warehouse pickup or $50 delivery.',
+    description: 'Download the official $45 Hawaii Energy Window AC Rebate PDF! Save up to 40% ($424/yr) on HECO bills with in-stock Waipahu LG & GE Inverters • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/hawaii-energy-rebate',
     },
     openGraph: {
-        title: '$45 Hawaii Energy Window AC Rebate Oahu | Official Application | Affordable Home A/C',
-        description: 'Claim your $45 Hawaii Energy cash rebate on qualifying Energy Star LG Dual Inverter & GE Built-In window air conditioners. Download official pre-approved application form. Central Waipahu warehouse pickup or $50 delivery.',
+        title: '$45 Hawaii Energy Window AC Rebate Oahu (2026 PDF Form) | In-Stock LG & GE ACs',
+        description: 'Download the official $45 Hawaii Energy Window AC Rebate PDF! Save up to 40% ($424/yr) on HECO bills with in-stock Waipahu LG & GE Inverters • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/hawaii-energy-rebate',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Hawaii Energy Window AC $45 Rebate Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: '$45 Hawaii Energy Window AC Rebate Oahu | Official Application | Affordable Home A/C',
-        description: 'Claim your $45 Hawaii Energy cash rebate on qualifying Energy Star LG Dual Inverter & GE Built-In window air conditioners. Download official pre-approved application form. Central Waipahu warehouse pickup or $50 delivery.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: '$45 Hawaii Energy Window AC Rebate Oahu (2026 PDF Form) | In-Stock LG & GE ACs',
+        description: 'Download the official $45 Hawaii Energy Window AC Rebate PDF! Save up to 40% ($424/yr) on HECO bills with in-stock Waipahu LG & GE Inverters • (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

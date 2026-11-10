@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Wood-Frame Window AC Support Oahu | Prevent Sill Rot | Affordable Home A/C'
+        absolute: 'Wood-Frame Window AC Support Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene barriers, standard exterior support brackets.',
+    description: '$0 Free Estimate • (808) 488-1111. Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/wood-frame-window-ac-support-oahu',
     },
     openGraph: {
-        title: 'Wood-Frame Window AC Support Oahu | Prevent Sill Rot | Affordable Home A/C',
-        description: 'Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene barriers, standard exterior support brackets.',
+        title: 'Wood-Frame Window AC Support Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene.',
         url: 'https://www.affordablehome-ac.com/wood-frame-window-ac-support-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Wood-Frame Window AC Support Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Wood-Frame Window AC Support Oahu | Prevent Sill Rot | Affordable Home A/C',
-        description: 'Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene barriers, standard exterior support brackets.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Wood-Frame Window AC Support Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Protect historic wood-frame window sills from moisture rot and mechanical strain on Oahu. Waterproof neoprene.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

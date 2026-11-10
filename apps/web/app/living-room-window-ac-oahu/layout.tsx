@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Living Room Window AC Oahu | High-Capacity Dual Inverters | Affordable Home A/C'
+        absolute: 'Living Room Window ACs Oahu (12k–23.5k BTU In-Stock $695+) | Waipahu Pickup'
     },
-    description: 'Cool large living rooms and open floor plans on Oahu with high-capacity LG Dual Inverter & GE window ACs (12,000 to 23,500 BTU). In-stock in Waipahu with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
+    description: 'Cool open Oahu living rooms with in-stock 12,000–23,500 BTU LG Dual Inverter & GE Window ACs ($695–$1,200) in Waipahu. $45 Rebate & $0 Estimate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/living-room-window-ac-oahu',
     },
     openGraph: {
-        title: 'Living Room Window AC Oahu | High-Capacity Dual Inverters | Affordable Home A/C',
-        description: 'Cool large living rooms and open floor plans on Oahu with high-capacity LG Dual Inverter & GE window ACs (12,000 to 23,500 BTU). In-stock in Waipahu with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
+        title: 'Living Room Window ACs Oahu (12k–23.5k BTU In-Stock $695+) | Waipahu Pickup',
+        description: 'Cool open Oahu living rooms with in-stock 12,000–23,500 BTU LG Dual Inverter & GE Window ACs ($695–$1,200) in Waipahu. $45 Rebate & $0 Estimate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/living-room-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Living Room Window AC Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Living Room Window AC Oahu | High-Capacity Dual Inverters | Affordable Home A/C',
-        description: 'Cool large living rooms and open floor plans on Oahu with high-capacity LG Dual Inverter & GE window ACs (12,000 to 23,500 BTU). In-stock in Waipahu with $45 Hawaii Energy cash rebate. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Living Room Window ACs Oahu (12k–23.5k BTU In-Stock $695+) | Waipahu Pickup',
+        description: 'Cool open Oahu living rooms with in-stock 12,000–23,500 BTU LG Dual Inverter & GE Window ACs ($695–$1,200) in Waipahu. $45 Rebate & $0 Estimate • (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp'],
     }
 };
 

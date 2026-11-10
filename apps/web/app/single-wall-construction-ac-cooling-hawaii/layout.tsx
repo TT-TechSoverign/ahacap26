@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Single-Wall Construction AC Cooling Hawaii | Sizing & Install | Affordable Home A/C'
+        absolute: 'Single-Wall Home AC Sizing & Cooling Hawaii ($0 Estimate) | In-Stock LG & GE ACs'
     },
-    description: 'Specialized air conditioning sizing and installation for uninsulated single-wall redwood plantation homes on Oahu. Overcome thermal heat soak with Dual Inverters.',
+    description: '$0 Free Estimate • (808) 488-1111. Island Microclimate BTU sizing & jalousie installation for uninsulated Hawaii single-wall redwood homes. In-stock ACs $395+.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/single-wall-construction-ac-cooling-hawaii',
     },
     openGraph: {
-        title: 'Single-Wall Construction AC Cooling Hawaii | Sizing & Install | Affordable Home A/C',
-        description: 'Specialized air conditioning sizing and installation for uninsulated single-wall redwood plantation homes on Oahu. Overcome thermal heat soak with Dual Inverters.',
+        title: 'Single-Wall Home AC Sizing & Cooling Hawaii ($0 Estimate) | In-Stock LG & GE ACs',
+        description: '$0 Free Estimate • (808) 488-1111. Island Microclimate BTU sizing & jalousie installation for uninsulated Hawaii single-wall redwood homes. In-stock ACs $395+.',
         url: 'https://www.affordablehome-ac.com/single-wall-construction-ac-cooling-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Single Wall Construction AC Cooling Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Single-Wall Construction AC Cooling Hawaii | Sizing & Install | Affordable Home A/C',
-        description: 'Specialized air conditioning sizing and installation for uninsulated single-wall redwood plantation homes on Oahu. Overcome thermal heat soak with Dual Inverters.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Single-Wall Home AC Sizing & Cooling Hawaii ($0 Estimate) | In-Stock LG & GE ACs',
+        description: '$0 Free Estimate • (808) 488-1111. Island Microclimate BTU sizing & jalousie installation for uninsulated Hawaii single-wall redwood homes. In-stock ACs $395+.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

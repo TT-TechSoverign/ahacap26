@@ -96,7 +96,7 @@ export default function CleanVsReplacePage() {
             {
                 "@type": "HVACBusiness",
                             "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
-                "name": "Affordable Home AC - Clean vs Replace Diagnostics Oahu",
+                "name": "Affordable Home A/C",
                 "telephone": "+1-808-488-1111",
                 "address": {
                     "@type": "PostalAddress",

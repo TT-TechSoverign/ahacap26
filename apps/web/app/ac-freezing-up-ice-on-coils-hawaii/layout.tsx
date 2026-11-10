@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Freezing Up Ice on Coils Hawaii | Emergency Thaw & Repair | Affordable Home A/C'
+        absolute: 'AC Freezing Up Ice on Coils Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Is your LG or GE window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
+    description: '$0 Free Estimate • (808) 488-1111. Is your LG or GE window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-freezing-up-ice-on-coils-hawaii',
     },
     openGraph: {
-        title: 'AC Freezing Up Ice on Coils Hawaii | Emergency Thaw & Repair | Affordable Home A/C',
-        description: 'Is your LG or GE window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
+        title: 'AC Freezing Up Ice on Coils Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Is your LG or GE window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause.',
         url: 'https://www.affordablehome-ac.com/ac-freezing-up-ice-on-coils-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Freezing Up Ice on Coils Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Freezing Up Ice on Coils Hawaii | Emergency Thaw & Repair | Affordable Home A/C',
+        title: 'AC Freezing Up Ice on Coils Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Is your window AC frozen solid with ice on the coils on Oahu? Emergency thaw instructions, root-cause troubleshooting, and coil cleaning or replacement dispatch. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

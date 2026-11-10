@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Large Room Window AC 18,000 to 23,500 BTU Oahu | Heavy Duty Cooling | Affordable Home A/C'
+        absolute: '18,000 & 23,500 BTU Large Room Window ACs Oahu ($940–$1,025 In-Stock) | Waipahu'
     },
-    description: 'High-capacity 18,000 and 23,500 BTU LG Dual Inverter & GE Built-In window air conditioners for large living rooms and high-ceiling Oahu homes. 230V heavy-duty cooling in stock in Waipahu.',
+    description: 'In-Stock 18,000 & 23,500 BTU LG Dual Inverter & Cool+Heat Window ACs ($940–$1,025) in Waipahu, Oahu. Free pickup by appt or $50 delivery • Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/large-room-window-ac-18000-24000-btu',
     },
     openGraph: {
-        title: 'Large Room Window AC 18,000 to 23,500 BTU Oahu | Heavy Duty Cooling | Affordable Home A/C',
-        description: 'High-capacity 18,000 and 23,500 BTU LG Dual Inverter & GE Built-In window air conditioners for large living rooms and high-ceiling Oahu homes. 230V heavy-duty cooling in stock in Waipahu.',
+        title: '18,000 & 23,500 BTU Large Room Window ACs Oahu ($940–$1,025 In-Stock) | Waipahu',
+        description: 'In-Stock 18,000 & 23,500 BTU LG Dual Inverter & Cool+Heat Window ACs ($940–$1,025) in Waipahu, Oahu. Free pickup by appt or $50 delivery • Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/large-room-window-ac-18000-24000-btu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Large Room Window AC 18000 24000 BTU Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Large Room Window AC 18,000 to 23,500 BTU Oahu | Heavy Duty Cooling | Affordable Home A/C',
-        description: 'High-capacity 18,000 and 23,500 BTU LG Dual Inverter & GE Built-In window air conditioners for large living rooms and high-ceiling Oahu homes. 230V heavy-duty cooling in stock in Waipahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: '18,000 & 23,500 BTU Large Room Window ACs Oahu ($940–$1,025 In-Stock) | Waipahu',
+        description: 'In-Stock 18,000 & 23,500 BTU LG Dual Inverter & Cool+Heat Window ACs ($940–$1,025) in Waipahu, Oahu. Free pickup by appt or $50 delivery • Call (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp'],
     }
 };
 

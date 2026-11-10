@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Delivery Service Oahu | Flat $50 Island-Wide | Affordable Home A/C'
+        absolute: '$50 Flat-Rate Window AC Delivery Oahu | In-Stock LG & GE ACs ($395–$1,200)'
     },
-    description: 'Flat $50 island-wide delivery on all LG Dual Inverter & GE Built-In window air conditioners from our Waipahu warehouse to any Oahu residence. Fast, safe delivery to your doorstep.',
+    description: '$50 flat Oahu delivery or free Waipahu pickup by appointment! 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, $45 Rebate) • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu',
     },
     openGraph: {
-        title: 'Window AC Delivery Service Oahu | Flat $50 Island-Wide | Affordable Home A/C',
-        description: 'Flat $50 island-wide delivery on all LG Dual Inverter & GE Built-In window air conditioners from our Waipahu warehouse to any Oahu residence. Fast, safe delivery to your doorstep.',
+        title: '$50 Flat-Rate Window AC Delivery Oahu | In-Stock LG & GE ACs ($395–$1,200)',
+        description: '$50 flat Oahu delivery or free Waipahu pickup by appointment! 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, $45 Rebate) • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Window AC Delivery Service Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Delivery Service Oahu | Flat $50 Island-Wide | Affordable Home A/C',
-        description: 'Flat $50 island-wide delivery on all LG Dual Inverter & GE Built-In window air conditioners from our Waipahu warehouse to any Oahu residence. Fast, safe delivery to your doorstep.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: '$50 Flat-Rate Window AC Delivery Oahu | In-Stock LG & GE ACs ($395–$1,200)',
+        description: '$50 flat Oahu delivery or free Waipahu pickup by appointment! 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, $45 Rebate) • (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

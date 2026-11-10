@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Diagnostic Service Oahu | $0 Clean-vs-Replace Assessment | Affordable Home A/C'
+        absolute: 'AC Diagnostic Service Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Accurate, honest window AC diagnostic service on Oahu with a $0 Free Clean-vs-Replace Estimate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
+    description: '$0 Free Estimate • (808) 488-1111. Accurate, honest window AC diagnostic service on Oahu with a $0 Free Clean-vs-Replace Estimate. Electrical.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-diagnostic-service-175-flat-rate',
     },
     openGraph: {
-        title: 'AC Diagnostic Service Oahu | $0 Clean-vs-Replace Assessment | Affordable Home A/C',
-        description: 'Accurate, honest window AC diagnostic service on Oahu with a $0 Free Clean-vs-Replace Estimate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
+        title: 'AC Diagnostic Service Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Accurate, honest window AC diagnostic service on Oahu with a $0 Free Clean-vs-Replace Estimate. Electrical.',
         url: 'https://www.affordablehome-ac.com/ac-diagnostic-service-175-flat-rate',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Window AC Diagnostic & Clean-vs-Replace Assessment Oahu Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Diagnostic Service Oahu | $0 Clean-vs-Replace Assessment | Affordable Home A/C',
-        description: 'Accurate, honest window AC diagnostic service on Oahu with a $0 Free Clean-vs-Replace Estimate. Electrical, refrigerant, and mechanical troubleshooting. Waipahu Warehouse Direct.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'AC Diagnostic Service Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Accurate, honest window AC diagnostic service on Oahu with a $0 Free Clean-vs-Replace Estimate. Electrical.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

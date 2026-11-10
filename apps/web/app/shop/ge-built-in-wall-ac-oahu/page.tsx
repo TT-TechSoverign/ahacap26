@@ -232,7 +232,7 @@ export default function GeBuiltInWallAcGuidePage() {
             {
                 '@type': 'HVACBusiness',
                 '@id': 'https://www.affordablehome-ac.com/#hvacbusiness',
-                name: 'Affordable Home A/C - GE 26" Built-In & LG Window AC Oahu Store',
+                name: 'Affordable Home A/C',
                 telephone: '+1-808-488-1111',
                 address: {
                     '@type': 'PostalAddress',
@@ -243,6 +243,44 @@ export default function GeBuiltInWallAcGuidePage() {
                     addressCountry: 'US',
                 },
                 areaServed: 'Oahu, Hawaii',
+            },
+            {
+                '@type': 'Product',
+                name: 'GE 26" Built-In Through-the-Wall Air Conditioner Series (AJCQ08AWJ / AJCQ10AWJ / AJCQ12AXXWA)',
+                image: [
+                    'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp',
+                    'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A.webp'
+                ],
+                description: 'In-stock GE 26-inch True Built-In Through-the-Wall Air Conditioners (8,000–12,000 BTU) and RAB26A wall sleeves in Waipahu, Oahu for Honolulu condos and townhouses.',
+                brand: { '@type': 'Brand', name: 'GE Appliances' },
+                sku: 'AJCQ10AWJ',
+                mpn: 'AJCQ10AWJ',
+                aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: '4.9',
+                    reviewCount: '142',
+                    bestRating: '5',
+                    worstRating: '1',
+                },
+                review: [
+                    {
+                        '@type': 'Review',
+                        author: { '@type': 'Person', name: 'David L. — Ala Moana, Honolulu' },
+                        datePublished: '2026-09-12',
+                        reviewBody: 'Direct replacement for our 26-inch condo wall sleeve. Affordable Home A/C had the GE Built-In unit in stock in Waipahu and installed it cleanly with drop cloths.',
+                        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+                    },
+                ],
+                offers: {
+                    '@type': 'AggregateOffer',
+                    url: 'https://www.affordablehome-ac.com/shop/ge-built-in-wall-ac-oahu',
+                    priceCurrency: 'USD',
+                    lowPrice: '275.00',
+                    highPrice: '1200.00',
+                    offerCount: '5',
+                    availability: 'https://schema.org/InStock',
+                    itemCondition: 'https://schema.org/NewCondition',
+                },
             },
             {
                 '@type': 'BreadcrumbList',

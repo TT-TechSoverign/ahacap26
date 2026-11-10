@@ -87,28 +87,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const mpn = identifier?.mpn || product.key_spec || '';
 
     const isOutOfStock = product.stock <= 0;
-    const stockStatusTitle = isOutOfStock ? 'Oahu Specs & Availability' : 'In-Stock Waipahu, Oahu';
-    const stockStatusDesc = isOutOfStock ? 'Check Oahu availability:' : 'In-Stock in Waipahu, Oahu!';
+    const stockStatusTitle = isOutOfStock ? 'In-Stock Oahu Upgrade Ready' : 'In-Stock Waipahu, Oahu';
+    const stockStatusDesc = isOutOfStock ? 'In-Stock Oahu Upgrade Ready!' : 'In-Stock in Waipahu, Oahu!';
     const discountText = isPromo && product.discount_percent ? ` (${product.discount_percent}% off)` : '';
     
     const cleanCoverage = product.coverage_oahu || (product.coverage ? product.coverage.split(' (')[0] : '');
-    const coverageTextDesc = cleanCoverage ? ` Island-calibrated for ${cleanCoverage}.` : '';
+    const coverageTextDesc = cleanCoverage ? ` Calibrated for ${cleanCoverage}.` : '';
 
     const displayNameWithMpn = mpn && !product.name.toUpperCase().includes(mpn.toUpperCase())
         ? `${product.name} (${mpn})`
         : product.name;
 
     let title = `${displayNameWithMpn} — $${priceText} | ${stockStatusTitle}`;
-    let description = `${stockStatusDesc} Buy ${displayNameWithMpn} for $${priceText}${discountText}. Free Waipahu warehouse pickup or $50 flat Oahu delivery.${coverageTextDesc} ${specs.benefits || ''}`;
+    let description = `${stockStatusDesc} ${displayNameWithMpn} ($${priceText}${discountText}) • Free Waipahu pickup or $50 Oahu delivery • (808) 488-1111.${coverageTextDesc}`;
 
     if (product.name.toLowerCase().includes('lg dual inverter')) {
         const btuStr = specs.btu.replace(',000', 'k').replace(' BTU', '');
         const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
+        const rebateSuffix = product.id <= 5 ? '$45 Rebate' : 'Waipahu Pickup';
         
-        title = `LG ${btuStr} BTU Dual Inverter Window AC (${modelCode}) — $${priceText} | ${stockStatusTitle}`;
+        title = isOutOfStock
+            ? `LG ${btuStr} BTU Dual Inverter AC (${modelCode}) — $${priceText} | In-Stock Oahu Upgrade Ready`
+            : `LG ${btuStr} BTU Dual Inverter AC (${modelCode}) — $${priceText} In-Stock Oahu | ${rebateSuffix}`;
         
-        const techBenefit = product.id === 1 ? '44dB ultra-quiet & $45 Hawaii Energy Rebate eligible.' 
-            : product.id === 2 ? 'Smart ThinQ WiFi & $45 Hawaii Energy Rebate eligible.' 
+        const techBenefit = product.id === 1 ? '44dB ultra-quiet & $45 Hawaii Energy Rebate.' 
+            : product.id === 2 ? 'In-stock 8,000 BTU LG Dual Inverter (LW8022IVSM) ready today + $45 Rebate.' 
             : product.id === 3 ? 'ENERGY STAR Most Efficient & $45 Hawaii Energy Rebate.'
             : product.id === 4 ? 'Gold Fin salt-air shield & $45 Hawaii Energy Rebate.'
             : product.id === 5 ? 'Max 14,000 BTU on standard 115V plug + $45 Rebate.'
@@ -116,13 +119,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             : product.id === 7 ? '23,500 BTU flagship whole-floor cooling power.'
             : 'Ultra-quiet energy saver.';
 
-        description = `${stockStatusDesc} Buy LG ${btuStr} BTU Dual Inverter Window AC (${modelCode}) for $${priceText}${discountText}. Free Waipahu pickup / $50 Oahu delivery + 1-Yr Warranty. ${techBenefit}`;
+        description = `${stockStatusDesc} LG ${btuStr} BTU Dual Inverter Window AC (${modelCode}) — $${priceText}${discountText}. Free Waipahu pickup / $50 Oahu delivery • (808) 488-1111. ${techBenefit}`;
+    } else if (product.name.toLowerCase().includes('ge ') || product.id >= 12) {
+        const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(' BTU', '') : '';
+        const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
+        if (product.id === 16) {
+            title = `GE RAB26A 26" Through-the-Wall AC Metal Sleeve — $${priceText} In-Stock Oahu | Waipahu`;
+            description = `${stockStatusDesc} GE RAB26A 26" Wall Sleeve ($${priceText}) for Honolulu condos & built-in wall ACs. Free Waipahu pickup or $50 Oahu delivery • (808) 488-1111.`;
+        } else {
+            title = isOutOfStock
+                ? `GE ${btuStr} BTU 26" Built-In Wall AC (${modelCode}) — $${priceText} | In-Stock Oahu Alt Ready`
+                : `GE ${btuStr} BTU 26" Built-In Wall AC (${modelCode}) — $${priceText} In-Stock Oahu | Waipahu`;
+            description = `${stockStatusDesc} GE ${btuStr} BTU 26" True Through-the-Wall AC (${modelCode}) — $${priceText}. Direct condo sleeve fit, Waipahu pickup or $50 delivery • (808) 488-1111.`;
+        }
     }
 
     const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');
+    const ogImageUrl = product.image_url
+        ? `${domain}${product.image_url.replace('.svg', '.webp')}`
+        : `${domain}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp`;
 
     return {
-        title,
+        title: { absolute: title },
         description,
         alternates: {
             canonical: `${domain}/shop/${canonicalSlug}`,
@@ -132,21 +150,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description,
             url: `${domain}/shop/${canonicalSlug}`,
             siteName: 'Affordable Home A/C',
-            images: product.image_url ? [
+            images: [
                 {
-                    url: `${domain}${product.image_url.replace('.svg', '.webp')}`,
-                    width: 800,
-                    height: 600,
-                    alt: product.name,
+                    url: ogImageUrl,
+                    width: 1600,
+                    height: 1000,
+                    alt: displayNameWithMpn,
                 },
-            ] : undefined,
+            ],
             type: 'website', 
         },
         twitter: {
             card: 'summary_large_image',
             title,
             description,
-            images: product.image_url ? [`${domain}${product.image_url.replace('.svg', '.webp')}`] : undefined,
+            images: [ogImageUrl],
         }
     };
 }
@@ -167,7 +185,7 @@ export default async function ProductLayout({ params, children }: Props) {
     const domain = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/$/, '');
     const absoluteImageUrl = product.image_url 
         ? `${domain}${product.image_url.replace('.svg', '.webp')}` 
-        : `${domain}/assets/logo-new.png`;
+        : `${domain}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp`;
     
     const identifier = PRODUCT_IDENTIFIERS[product.id];
     const brandName = identifier?.brand || (product.name.startsWith('GE') ? 'GE Appliances' : 'LG');

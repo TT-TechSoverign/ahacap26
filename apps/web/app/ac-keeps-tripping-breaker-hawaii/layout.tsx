@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Keeps Tripping Breaker Hawaii | Electrical Diagnostic & Repair | Affordable Home A/C'
+        absolute: 'AC Keeps Tripping Breaker Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Does your LG & GE window air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection for short circuits, grounded compressors, and failing capacitors. Call (808) 488-1111.',
+    description: '$0 Free Estimate • (808) 488-1111. Does your LG & GE window air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-keeps-tripping-breaker-hawaii',
     },
     openGraph: {
-        title: 'AC Keeps Tripping Breaker Hawaii | Electrical Diagnostic & Repair | Affordable Home A/C',
-        description: 'Does your LG & GE window air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection for short circuits, grounded compressors, and failing capacitors. Call (808) 488-1111.',
+        title: 'AC Keeps Tripping Breaker Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Does your LG & GE window air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection.',
         url: 'https://www.affordablehome-ac.com/ac-keeps-tripping-breaker-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Tripping Breaker Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Keeps Tripping Breaker Hawaii | Electrical Diagnostic & Repair | Affordable Home A/C',
+        title: 'AC Keeps Tripping Breaker Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Does your window air conditioner immediately trip the breaker on Oahu? Diagnostic electrical inspection for short circuits, grounded compressors, and failing capacitors. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

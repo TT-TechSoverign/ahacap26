@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'GE 26" Built-In Through-the-Wall & Window AC Guide Oahu (8,200–12,000 BTU) | In-Stock Waipahu | Affordable Home A/C',
+        absolute: 'GE 26" Built-In Wall AC Oahu ($1,000–$1,200) & RAB26A Sleeve | In-Stock Waipahu',
     },
-    description: 'Complete Oahu buyer guide and live Waipahu warehouse inventory for GE Built-In 26" Through-the-Wall ACs (AJCQ08AWJ, AJCQ10AWJ, AJCQ12AXXWA R32 Inverter), GE RAB26A wall sleeves, and LG Universal Fit wall/window units.',
+    description: 'In-Stock GE 26" Built-In Through-the-Wall ACs (AJCQ08/10/12AXXWA, $1,000–$1,200) & RAB26A Wall Sleeves ($275) in Waipahu, Oahu. $0 Install Estimate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/shop/ge-built-in-wall-ac-oahu',
     },

@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '115V Window AC Units Oahu | Standard 15A Wall Plug | Affordable Home A/C'
+        absolute: '115V Standard Plug Window ACs Oahu (6k–14k BTU In-Stock $395–$785) | Waipahu'
     },
-    description: 'High-efficiency 115V window air conditioners that run safely on standard 15-amp household circuits. No electrician or 230V sub-panel rewiring required. In stock in Waipahu.',
+    description: 'In-Stock 115V 15-Amp LG & GE Window ACs (6,000–14,000 BTU, $395–$785) in Waipahu, Oahu. Plugs into standard outlets + $45 Hawaii Energy Rebate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/low-voltage-window-ac-115v-oahu',
     },
     openGraph: {
-        title: '115V Window AC Units Oahu | Standard 15A Wall Plug | Affordable Home A/C',
-        description: 'High-efficiency 115V window air conditioners that run safely on standard 15-amp household circuits. No electrician or 230V sub-panel rewiring required. In stock in Waipahu.',
+        title: '115V Standard Plug Window ACs Oahu (6k–14k BTU In-Stock $395–$785) | Waipahu',
+        description: 'In-Stock 115V 15-Amp LG & GE Window ACs (6,000–14,000 BTU, $395–$785) in Waipahu, Oahu. Plugs into standard outlets + $45 Hawaii Energy Rebate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/low-voltage-window-ac-115v-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: '115V Window AC Units Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: '115V Window AC Units Oahu | Standard 15A Wall Plug | Affordable Home A/C',
-        description: 'High-efficiency 115V window air conditioners that run safely on standard 15-amp household circuits. No electrician or 230V sub-panel rewiring required. In stock in Waipahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: '115V Standard Plug Window ACs Oahu (6k–14k BTU In-Stock $395–$785) | Waipahu',
+        description: 'In-Stock 115V 15-Amp LG & GE Window ACs (6,000–14,000 BTU, $395–$785) in Waipahu, Oahu. Plugs into standard outlets + $45 Hawaii Energy Rebate • (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

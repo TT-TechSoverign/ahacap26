@@ -10,18 +10,33 @@ import Image from 'next/image';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'LG & GE Window ACs & Window AC Cleaning Oahu | In-Stock $395+ | Affordable Home A/C',
+        absolute: 'In-Stock LG & GE Window ACs Oahu ($395–$1,200) | Install & Cleaning | (808) 488-1111',
     },
-    description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery), Jalousie Window AC Installation & Deep Window AC Cleaning • (808) 488-1111.',
+    description: '$0 Free Estimate • (808) 488-1111. Shop 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, Waipahu pickup / $50 delivery), jalousie install & cleaning.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com',
     },
     openGraph: {
-        title: 'LG & GE Window ACs & Window AC Cleaning Oahu | In-Stock $395+ | Affordable Home A/C',
-        description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery), Jalousie Window AC Installation & Deep Window AC Cleaning • (808) 488-1111.',
-        url: '/',
+        title: 'In-Stock LG & GE Window ACs Oahu ($395–$1,200) | Install & Cleaning | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Shop 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, Waipahu pickup / $50 delivery), jalousie install & cleaning.',
+        url: 'https://www.affordablehome-ac.com',
         siteName: 'Affordable Home A/C',
+        locale: 'en_US',
         type: 'website',
+        images: [
+            {
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
+                alt: 'In-Stock LG Dual Inverter & GE Window ACs Oahu ($395–$1,200) — Affordable Home A/C',
+            }
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'In-Stock LG & GE Window ACs Oahu ($395–$1,200) | Install & Cleaning | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Shop 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, Waipahu pickup / $50 delivery), jalousie install & cleaning.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

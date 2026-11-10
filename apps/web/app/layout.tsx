@@ -35,18 +35,18 @@ export const metadata: Metadata = {
         siteName: 'Affordable Home A/C',
         images: [
             {
-                url: '/assets/logo-new.png',
-                width: 800,
-                height: 600,
-                alt: 'Affordable Home A/C Logo',
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
+                alt: 'Affordable Home A/C — In-Stock LG Dual Inverter & GE Window ACs Oahu ($395–$1,200)',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
         title: 'LG & GE Window ACs & Window AC Cleaning Oahu | In-Stock $395+ | Affordable Home A/C',
-        description: 'Shop in-stock LG Dual Inverter & GE Built-In Window ACs from $395 (Waipahu Pickup or $50 Oahu Delivery), Jalousie Window AC Installation & Deep Window AC Cleaning • (808) 488-1111.',
-        images: ['/assets/logo-new.png'],
+        description: '$0 Free Estimate • (808) 488-1111. Shop in-stock LG Dual Inverter & GE Built-In Window ACs ($395–$1,200, Waipahu Pickup / $50 Delivery), Jalousie Install & Coil Cleaning.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 
@@ -116,7 +116,12 @@ export default function RootLayout({
                             "alternateName": "Affordable Home Air Conditioning",
                             "foundingDate": "2005",
                             "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
-                            "image": "https://www.affordablehome-ac.com/assets/hero-cards/ahac-hero-background-2.webp",
+                            "image": [
+                                "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                                "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                                "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                                "https://www.affordablehome-ac.com/assets/hero-cards/ahac-hero-background-2.webp"
+                            ],
                             "url": "https://www.affordablehome-ac.com",
                             "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
                             "telephone": "+1-808-488-1111",

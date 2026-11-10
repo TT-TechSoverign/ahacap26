@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Dripping Water Inside House Repair Oahu | Drain Clearing | Affordable Home A/C'
+        absolute: 'AC Dripping Water Inside House Repair Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Is your LG or GE window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
+    description: '$0 Free Estimate • (808) 488-1111. Is your LG or GE window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-dripping-water-inside-house-repair',
     },
     openGraph: {
-        title: 'AC Dripping Water Inside House Repair Oahu | Drain Clearing | Affordable Home A/C',
-        description: 'Is your LG or GE window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
+        title: 'AC Dripping Water Inside House Repair Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Is your LG or GE window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae.',
         url: 'https://www.affordablehome-ac.com/ac-dripping-water-inside-house-repair',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Dripping Water Inside House Repair Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Dripping Water Inside House Repair Oahu | Drain Clearing | Affordable Home A/C',
+        title: 'AC Dripping Water Inside House Repair Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Is your window AC leaking water inside your home on Oahu? Stop drywall damage immediately. Expert algae drain clearing, pan cleaning, and 3/8-inch pitch leveling. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

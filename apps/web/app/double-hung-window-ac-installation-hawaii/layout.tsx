@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Double-Hung Window AC Installation Hawaii | Sash Window Mounting | Affordable Home A/C'
+        absolute: 'Double-Hung Window AC Installation Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Professional LG & GE window air conditioner installation for double-hung sash windows across Oahu. Top-rail locking, side curtain insulation, and backward drainage pitch.',
+    description: '$0 Free Estimate • (808) 488-1111. Professional LG & GE window air conditioner installation for double-hung sash windows across Oahu. Top-rail.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/double-hung-window-ac-installation-hawaii',
     },
     openGraph: {
-        title: 'Double-Hung Window AC Installation Hawaii | Sash Window Mounting | Affordable Home A/C',
-        description: 'Professional LG & GE window air conditioner installation for double-hung sash windows across Oahu. Top-rail locking, side curtain insulation, and backward drainage pitch.',
+        title: 'Double-Hung Window AC Installation Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Professional LG & GE window air conditioner installation for double-hung sash windows across Oahu. Top-rail.',
         url: 'https://www.affordablehome-ac.com/double-hung-window-ac-installation-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Double-Hung Window AC Installation Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Double-Hung Window AC Installation Hawaii | Sash Window Mounting | Affordable Home A/C',
+        title: 'Double-Hung Window AC Installation Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Professional window air conditioner installation for double-hung sash windows across Oahu. Top-rail locking, side curtain insulation, and backward drainage pitch.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

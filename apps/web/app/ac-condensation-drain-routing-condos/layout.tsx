@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Condensation Drain Routing Condos Oahu | Stop Lanai Dripping | Affordable Home A/C'
+        absolute: 'AC Condensation Drain Routing Condos Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom drain kits, UV-resistant tubing.',
+    description: '$0 Free Estimate • (808) 488-1111. Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-condensation-drain-routing-condos',
     },
     openGraph: {
-        title: 'AC Condensation Drain Routing Condos Oahu | Stop Lanai Dripping | Affordable Home A/C',
-        description: 'Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom drain kits, UV-resistant tubing.',
+        title: 'AC Condensation Drain Routing Condos Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom.',
         url: 'https://www.affordablehome-ac.com/ac-condensation-drain-routing-condos',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'AC Condensation Drain Routing Condos Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Condensation Drain Routing Condos Oahu | Stop Lanai Dripping | Affordable Home A/C',
-        description: 'Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom drain kits, UV-resistant tubing.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'AC Condensation Drain Routing Condos Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Prevent window AC condensation from dripping on downstairs neighbor lanais and walkways in Oahu condos. Custom.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

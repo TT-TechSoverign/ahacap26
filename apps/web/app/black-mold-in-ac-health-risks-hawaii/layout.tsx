@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Black Mold in AC: Health Risks & Removal in Hawaii | Affordable Home A/C'
+        absolute: 'Black Mold in AC: Health Risks & Removal in Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand health hazards, respiratory risks, and professional window AC coil and blower sanitization.',
+    description: '$0 Free Estimate • (808) 488-1111. Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/black-mold-in-ac-health-risks-hawaii',
     },
     openGraph: {
-        title: 'Black Mold in AC: Health Risks & Removal in Hawaii | Affordable Home A/C',
-        description: 'Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand health hazards, respiratory risks, and professional window AC coil and blower sanitization.',
+        title: 'Black Mold in AC: Health Risks & Removal in Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand.',
         url: 'https://www.affordablehome-ac.com/black-mold-in-ac-health-risks-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Black Mold in AC Health Risks Hawaii Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Black Mold in AC: Health Risks & Removal in Hawaii | Affordable Home A/C',
-        description: 'Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand health hazards, respiratory risks, and professional window AC coil and blower sanitization.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Black Mold in AC: Health Risks & Removal in Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Protect your family from black mold blowing out of your LG or GE window air conditioner in Hawaii. Understand.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

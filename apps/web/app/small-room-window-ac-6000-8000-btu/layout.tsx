@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Small Room Window AC 6,000 to 8,000 BTU Oahu | Low Power 115V | Affordable Home A/C'
+        absolute: '6,000 & 8,000 BTU Bedroom Window ACs Oahu ($395–$595 In-Stock) | Waipahu Pickup'
     },
-    description: 'Compact 6,000 and 8,000 BTU LG Dual Inverter & GE Built-In window air conditioners for bedrooms, home offices, and nursery rooms. Standard 115V plug, ultra-quiet 44 dB, in stock in Waipahu.',
+    description: 'In-Stock 6,000 & 8,000 BTU LG & GE Window ACs ($395–$595) in Waipahu, Oahu. Standard 115V plug, 44dB quiet inverter option & $45 Rebate • Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/small-room-window-ac-6000-8000-btu',
     },
     openGraph: {
-        title: 'Small Room Window AC 6,000 to 8,000 BTU Oahu | Low Power 115V | Affordable Home A/C',
-        description: 'Compact 6,000 and 8,000 BTU LG Dual Inverter & GE Built-In window air conditioners for bedrooms, home offices, and nursery rooms. Standard 115V plug, ultra-quiet 44 dB, in stock in Waipahu.',
+        title: '6,000 & 8,000 BTU Bedroom Window ACs Oahu ($395–$595 In-Stock) | Waipahu Pickup',
+        description: 'In-Stock 6,000 & 8,000 BTU LG & GE Window ACs ($395–$595) in Waipahu, Oahu. Standard 115V plug, 44dB quiet inverter option & $45 Rebate • Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/small-room-window-ac-6000-8000-btu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Small Room Window AC 6000 8000 BTU Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Small Room Window AC 6,000 to 8,000 BTU Oahu | Low Power 115V | Affordable Home A/C',
-        description: 'Compact 6,000 and 8,000 BTU LG Dual Inverter & GE Built-In window air conditioners for bedrooms, home offices, and nursery rooms. Standard 115V plug, ultra-quiet 44 dB, in stock in Waipahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: '6,000 & 8,000 BTU Bedroom Window ACs Oahu ($395–$595 In-Stock) | Waipahu Pickup',
+        description: 'In-Stock 6,000 & 8,000 BTU LG & GE Window ACs ($395–$595) in Waipahu, Oahu. Standard 115V plug, 44dB quiet inverter option & $45 Rebate • Call (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Smart Wi-Fi Window AC Oahu | LG ThinQ Remote Control | Affordable Home A/C'
+        absolute: 'Smart Wi-Fi Window AC Oahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter & GE SmartHQ & GE Built-In window air conditioners. Pre-cool your home before driving home from Honolulu. In stock in Waipahu.',
+    description: '$0 Free Estimate • (808) 488-1111. Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter & GE SmartHQ & GE.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/smart-wifi-window-ac-oahu',
     },
     openGraph: {
-        title: 'Smart Wi-Fi Window AC Oahu | LG ThinQ Remote Control | Affordable Home A/C',
-        description: 'Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter & GE SmartHQ & GE Built-In window air conditioners. Pre-cool your home before driving home from Honolulu. In stock in Waipahu.',
+        title: 'Smart Wi-Fi Window AC Oahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter & GE SmartHQ & GE.',
         url: 'https://www.affordablehome-ac.com/smart-wifi-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Smart WiFi Window AC Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Smart Wi-Fi Window AC Oahu | LG ThinQ Remote Control | Affordable Home A/C',
-        description: 'Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter & GE SmartHQ & GE Built-In window air conditioners. Pre-cool your home before driving home from Honolulu. In stock in Waipahu.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Smart Wi-Fi Window AC Oahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Control your room temperature from anywhere on Oahu with smart Wi-Fi enabled LG Dual Inverter & GE SmartHQ & GE.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
 

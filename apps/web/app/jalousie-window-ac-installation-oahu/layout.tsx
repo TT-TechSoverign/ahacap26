@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Jalousie Window AC Installation Oahu | Custom Fabrication & Brackets | Affordable Home A/C'
+        absolute: 'Jalousie Window AC Installation Oahu ($0 Estimate) | Custom Louver Fit | (808) 488-1111'
     },
-    description: 'Expert window AC installation in Hawaiian jalousie louver windows. Custom fabrication options and security brackets available for an additional cost with installation. Clean drop-cloth guarantee. Call (808) 488-1111.',
+    description: '$0 Free Estimate • (808) 488-1111. Custom Hawaiian jalousie glass louver Window AC installation, weatherproof panels, brackets & in-stock LG/GE ACs ($395+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/jalousie-window-ac-installation-oahu',
     },
     openGraph: {
-        title: 'Jalousie Window AC Installation Oahu | Custom Fabrication & Brackets | Affordable Home A/C',
-        description: 'Expert window AC installation in Hawaiian jalousie louver windows. Custom fabrication options and security brackets available for an additional cost with installation. Clean drop-cloth guarantee. Call (808) 488-1111.',
+        title: 'Jalousie Window AC Installation Oahu ($0 Estimate) | Custom Louver Fit | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Custom Hawaiian jalousie glass louver Window AC installation, weatherproof panels, brackets & in-stock LG/GE ACs ($395+).',
         url: 'https://www.affordablehome-ac.com/jalousie-window-ac-installation-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Jalousie Window AC Installation Oahu',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Jalousie Window AC Installation Oahu | Custom Fabrication & Brackets | Affordable Home A/C',
-        description: 'Expert window AC installation in Hawaiian jalousie louver windows. Custom fabrication options and security brackets available for an additional cost with installation. Clean drop-cloth guarantee. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Jalousie Window AC Installation Oahu ($0 Estimate) | Custom Louver Fit | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Custom Hawaiian jalousie glass louver Window AC installation, weatherproof panels, brackets & in-stock LG/GE ACs ($395+).',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
 

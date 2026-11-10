@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Making Loud Buzzing Noise? Causes & Fixes Oahu | Affordable Home A/C'
+        absolute: 'Window AC Making Loud Buzzing Noise? Causes & Fixes Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
     },
-    description: 'Diagnose and silence loud buzzing, humming, and vibrating LG & GE window air conditioners in Oahu. Bracket dampening, fan bearing repair, or whisper-quiet inverter upgrade.',
+    description: '$0 Free Estimate • (808) 488-1111. Diagnose and silence loud buzzing, humming, and vibrating LG & GE window air conditioners in Oahu. Bracket.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-making-loud-buzzing-noise',
     },
     openGraph: {
-        title: 'Window AC Making Loud Buzzing Noise? Causes & Fixes Oahu | Affordable Home A/C',
-        description: 'Diagnose and silence loud buzzing, humming, and vibrating LG & GE window air conditioners in Oahu. Bracket dampening, fan bearing repair, or whisper-quiet inverter upgrade.',
+        title: 'Window AC Making Loud Buzzing Noise? Causes & Fixes Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
+        description: '$0 Free Estimate • (808) 488-1111. Diagnose and silence loud buzzing, humming, and vibrating LG & GE window air conditioners in Oahu. Bracket.',
         url: 'https://www.affordablehome-ac.com/window-ac-making-loud-buzzing-noise',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Window AC Making Loud Buzzing Noise Oahu Hawaii',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Making Loud Buzzing Noise? Causes & Fixes Oahu | Affordable Home A/C',
+        title: 'Window AC Making Loud Buzzing Noise? Causes & Fixes Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: 'Diagnose and silence loud buzzing, humming, and vibrating window air conditioners in Oahu. Bracket dampening, fan bearing repair, or whisper-quiet inverter upgrade.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 

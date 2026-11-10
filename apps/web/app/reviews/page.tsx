@@ -7,18 +7,35 @@ import { getReviewStats, getAllReviews } from '@/lib/product-reviews';
 import { ShieldCheck, Star, MapPin, ChevronRight, Home } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: '142+ Five-Star Reviews | Affordable Home A/C Oahu | (808) 488-1111',
-    description: 'Read 142+ verified 5-star customer reviews for Affordable Home A/C. Oahu homeowners praise our whisper-quiet LG Dual Inverter & GE Built-In Window ACs, $0 free estimates, and Waipahu warehouse pickup.',
+    title: {
+        absolute: '142+ Five-Star Reviews (4.9★) | Affordable Home A/C Oahu | (808) 488-1111'
+    },
+    description: '$0 Free Estimate • (808) 488-1111. Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG Dual Inverter & GE Window ACs ($395–$1,200), jalousie install & coil cleaning.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/reviews',
     },
     openGraph: {
-        title: '142+ Verified 5-Star Reviews | Affordable Home A/C Oahu',
-        description: 'Read authentic reviews from homeowners across Honolulu, Waipahu, Kailua, Ewa Beach, and Mililani. Insured Oahu Window AC Specialists.',
+        title: '142+ Verified 5-Star Reviews (4.9★) | Affordable Home A/C Oahu',
+        description: 'Read 142+ authentic 5-star reviews from homeowners across Honolulu, Waipahu, Kailua, Ewa Beach & Mililani. In-stock LG & GE Window ACs ($395–$1,200) & $0 Estimates.',
         url: 'https://www.affordablehome-ac.com/reviews',
         siteName: 'Affordable Home A/C',
+        locale: 'en_US',
         type: 'website',
-    }
+        images: [
+            {
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+                width: 1600,
+                height: 1000,
+                alt: '142+ Five-Star Oahu Customer Reviews — Affordable Home A/C',
+            }
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: '142+ Verified 5-Star Reviews (4.9★) | Affordable Home A/C Oahu',
+        description: 'Read 142+ authentic 5-star reviews from Oahu homeowners. In-stock LG & GE Window ACs ($395–$1,200), $0 Free Estimate • (808) 488-1111.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
+    },
 };
 
 export default function ReviewsPage() {
@@ -31,7 +48,12 @@ export default function ReviewsPage() {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
         "name": "Affordable Home A/C",
-        "image": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
+        "image": [
+            "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+            "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+            "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp"
+        ],
+        "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
         "telephone": "(808) 488-1111",
         "email": "office@affordablehome-ac.com",
         "address": {

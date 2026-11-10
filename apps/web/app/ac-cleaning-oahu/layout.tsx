@@ -2,32 +2,32 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Cleaning Oahu | Coil Sanitization & Deep Clean | Affordable Home A/C'
+        absolute: 'Window AC Cleaning Oahu ($0 Estimate) | Deep Coil & Mold Wash | (808) 488-1111'
     },
-    description: 'Breathe cleaner air and restore ice-cold airflow with professional Window AC cleaning and sanitization on Oahu. Floor drop-cloth protection & clean-vs-replace evaluation. Call (808) 488-1111.',
+    description: '$0 Free Estimate • (808) 488-1111. Professional Oahu Window AC deep coil cleaning, mold sanitization, drain clearing & honest clean-vs-replace evaluation.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-cleaning-oahu',
     },
     openGraph: {
-        title: 'Window AC Cleaning Oahu | Coil Sanitization & Deep Clean | Affordable Home A/C',
-        description: 'Breathe cleaner air and restore ice-cold airflow with professional Window AC cleaning and sanitization on Oahu. Floor drop-cloth protection & clean-vs-replace evaluation. Call (808) 488-1111.',
+        title: 'Window AC Cleaning Oahu ($0 Estimate) | Deep Coil & Mold Wash | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Professional Oahu Window AC deep coil cleaning, mold sanitization, drain clearing & honest clean-vs-replace evaluation.',
         url: 'https://www.affordablehome-ac.com/ac-cleaning-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [
             {
-                url: 'https://www.affordablehome-ac.com/assets/logo-new.png',
-                width: 800,
-                height: 600,
+                url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                width: 1600,
+                height: 1000,
                 alt: 'Window AC Cleaning Oahu Coil Sanitization',
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Cleaning Oahu | Coil Sanitization & Deep Clean | Affordable Home A/C',
-        description: 'Breathe cleaner air and restore ice-cold airflow with professional Window AC cleaning and sanitization on Oahu. Floor drop-cloth protection & clean-vs-replace evaluation. Call (808) 488-1111.',
-        images: ['https://www.affordablehome-ac.com/assets/logo-new.png'],
+        title: 'Window AC Cleaning Oahu ($0 Estimate) | Deep Coil & Mold Wash | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Professional Oahu Window AC deep coil cleaning, mold sanitization, drain clearing & honest clean-vs-replace evaluation.',
+        images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
 
