@@ -199,7 +199,7 @@ export default async function ProductLayout({ params, children }: Props) {
     const ratingValue = "4.9"; // Verified Oahu customer rating
     
     const selectedReviews = getSelectedReviews(product.id);
-    const reviewCount = selectedReviews.length || 4;
+    const reviewCount = 142; // Matches visible 4.9 / 5.0 Rating (142+ Reviews) in ReviewsPavilion
     const idHash = Array.from(product.id.toString()).reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const specs = getProductSpecs(product.id);
 
@@ -313,7 +313,7 @@ export default async function ProductLayout({ params, children }: Props) {
                     "name": r.author
                 },
                 "datePublished": datePublished,
-                "reviewBody": r.text,
+                "reviewBody": r.sanitized_text || r.text,
                 "reviewRating": {
                     "@type": "Rating",
                     "ratingValue": r.rating,

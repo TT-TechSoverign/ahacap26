@@ -182,10 +182,8 @@ export default function OahuWindowAcWarehousePage() {
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                            "merchantReturnDays": 30,
-                            "returnMethod": "https://schema.org/ReturnInStore",
-                            "returnFees": "https://schema.org/FreeReturn"
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+                            "name": "All Sales Final"
                         },
                         "shippingDetails": {
                             "@type": "OfferShippingDetails",
@@ -212,10 +210,8 @@ export default function OahuWindowAcWarehousePage() {
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                            "merchantReturnDays": 30,
-                            "returnMethod": "https://schema.org/ReturnInStore",
-                            "returnFees": "https://schema.org/FreeReturn"
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+                            "name": "All Sales Final"
                         },
                         "shippingDetails": {
                             "@type": "OfferShippingDetails",
@@ -242,10 +238,8 @@ export default function OahuWindowAcWarehousePage() {
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                            "merchantReturnDays": 30,
-                            "returnMethod": "https://schema.org/ReturnInStore",
-                            "returnFees": "https://schema.org/FreeReturn"
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+                            "name": "All Sales Final"
                         },
                         "shippingDetails": {
                             "@type": "OfferShippingDetails",

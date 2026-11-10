@@ -1281,7 +1281,6 @@ export default function ShopPage() {
                         "description": "In-stock LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In window and wall air conditioners in Waipahu, Oahu ($395–$1,200). Free Waipahu warehouse pickup by appointment, $50 flat island-wide delivery, and $45 Hawaii Energy cash rebate.",
                         "provider": {
                             "@type": "HVACBusiness",
-                            "@id": `${domain}/#hvacbusiness`,
                             "name": "Affordable Home A/C",
                             "url": domain
                         },
@@ -1290,6 +1289,99 @@ export default function ShopPage() {
                             "name": "Order In-Stock LG & GE Window AC Units Online on Oahu",
                             "target": `${domain}/shop`
                         }
+                    })
+                }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Product",
+                        "name": "In-Stock LG Dual Inverter & GE 26-Inch Built-In Window Air Conditioners (6,000–23,500 BTU)",
+                        "image": [
+                            `${domain}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp`,
+                            `${domain}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp`
+                        ],
+                        "description": "Shop 16 factory-sealed LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In Window ACs ($395 to $1,200) in stock at our Waipahu warehouse (94-150 Leoleo St. #203). Free Waipahu pickup by appointment, $50 flat Oahu delivery, and $45 Hawaii Energy cash rebate.",
+                        "brand": { "@type": "Brand", "name": "LG & GE Appliances" },
+                        "sku": "LW1222IVSM",
+                        "mpn": "LW1222IVSM",
+                        "gtin12": "195174031902",
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "4.9",
+                            "reviewCount": "142",
+                            "bestRating": "5",
+                            "worstRating": "1"
+                        },
+                        "review": [
+                            {
+                                "@type": "Review",
+                                "author": { "@type": "Person", "name": "Kimo S. — Ewa Beach, Oahu" },
+                                "datePublished": "2026-10-02",
+                                "reviewBody": "Ordered online and picked up our 12,000 BTU LG Dual Inverter in Waipahu the same day. Loaded into our truck in 5 minutes and came with the $45 Hawaii Energy rebate form!",
+                                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                            }
+                        ],
+                        "offers": [
+                            {
+                                "@type": "Offer",
+                                "name": "LG 8,000 BTU Window Air Conditioner (LW8024RD)",
+                                "sku": "LW8024RD",
+                                "url": `${domain}/shop/11-lg-8-000-btu-lw8024rd`,
+                                "priceCurrency": "USD",
+                                "price": "395.00",
+                                "validFrom": "2026-01-01",
+                                "priceValidUntil": "2027-12-31",
+                                "availability": "https://schema.org/InStock",
+                                "itemCondition": "https://schema.org/NewCondition",
+                                "hasMerchantReturnPolicy": {
+                                    "@type": "MerchantReturnPolicy",
+                                    "applicableCountry": "US",
+                                    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+                                    "name": "All Sales Final"
+                                },
+                                "shippingDetails": {
+                                    "@type": "OfferShippingDetails",
+                                    "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                                    "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                                    "deliveryTime": {
+                                        "@type": "ShippingDeliveryTime",
+                                        "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                        "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                                    }
+                                }
+                            },
+                            {
+                                "@type": "Offer",
+                                "name": "LG Dual Inverter 12,000 BTU Window Air Conditioner (LW1222IVSM)",
+                                "sku": "LW1222IVSM",
+                                "url": `${domain}/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm`,
+                                "priceCurrency": "USD",
+                                "price": "745.00",
+                                "validFrom": "2026-01-01",
+                                "priceValidUntil": "2027-12-31",
+                                "availability": "https://schema.org/InStock",
+                                "itemCondition": "https://schema.org/NewCondition",
+                                "hasMerchantReturnPolicy": {
+                                    "@type": "MerchantReturnPolicy",
+                                    "applicableCountry": "US",
+                                    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+                                    "name": "All Sales Final"
+                                },
+                                "shippingDetails": {
+                                    "@type": "OfferShippingDetails",
+                                    "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                                    "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                                    "deliveryTime": {
+                                        "@type": "ShippingDeliveryTime",
+                                        "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                        "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                                    }
+                                }
+                            }
+                        ]
                     })
                 }}
             />

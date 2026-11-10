@@ -158,7 +158,7 @@ export default function Lg8000BtuOahuPage() {
                 "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "4.9",
-                    "reviewCount": "84",
+                    "reviewCount": "142",
                     "bestRating": "5",
                     "worstRating": "1"
                 },
@@ -181,13 +181,11 @@ export default function Lg8000BtuOahuPage() {
                     "availability": isOutOfStock ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
                     "itemCondition": "https://schema.org/NewCondition",
                     "hasMerchantReturnPolicy": {
-                        "@type": "MerchantReturnPolicy",
-                        "applicableCountry": "US",
-                        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                        "merchantReturnDays": 30,
-                        "returnMethod": "https://schema.org/ReturnInStore",
-                        "returnFees": "https://schema.org/FreeReturn"
-                    },
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+                            "name": "All Sales Final"
+                        },
                     "shippingDetails": {
                         "@type": "OfferShippingDetails",
                         "shippingRate": {
