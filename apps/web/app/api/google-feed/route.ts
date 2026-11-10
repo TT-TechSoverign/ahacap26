@@ -43,7 +43,7 @@ export async function GET() {
       
       // Resolve WebP high-resolution product images (Google Merchant strictly requires raster WebP/PNG/JPG, never SVG)
       const images = getProductImages(product.id).map(img => img.replace(/\.svg$/i, '.webp'));
-      const rawHero = images.length > 0 ? images[0] : (product.image_url ? product.image_url.replace(/\.svg$/i, '.webp') : '/assets/logo-new.png');
+      const rawHero = images.length > 0 ? images[0] : (product.image_url ? product.image_url.replace(/\.svg$/i, '.webp') : '/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp');
       const imageLink = rawHero.startsWith('http') ? rawHero : `${domain}${rawHero}`;
       
       // Secondary / gallery images & 3D raytraced cutaway for Google Shopping interactive carousel

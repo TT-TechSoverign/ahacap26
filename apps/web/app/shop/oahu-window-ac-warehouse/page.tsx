@@ -158,6 +158,7 @@ export default function OahuWindowAcWarehousePage() {
                     "bestRating": "5",
                     "worstRating": "1"
                 },
+                "gtin12": "195174031902",
                 "review": [
                     {
                         "@type": "Review",
@@ -167,16 +168,98 @@ export default function OahuWindowAcWarehousePage() {
                         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
                     }
                 ],
-                "offers": {
-                    "@type": "AggregateOffer",
-                    "url": "https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse",
-                    "priceCurrency": "USD",
-                    "lowPrice": "395.00",
-                    "highPrice": "1200.00",
-                    "offerCount": "16",
-                    "availability": "https://schema.org/InStock",
-                    "itemCondition": "https://schema.org/NewCondition"
-                }
+                "offers": [
+                    {
+                        "@type": "Offer",
+                        "name": "LG 8,000 BTU Window Air Conditioner (LW8024RD)",
+                        "sku": "LW8024RD",
+                        "url": "https://www.affordablehome-ac.com/shop/11-lg-8-000-btu-lw8024rd",
+                        "priceCurrency": "USD",
+                        "price": "395.00",
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": "https://schema.org/InStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "LG Dual Inverter 12,000 BTU Window Air Conditioner (LW1222IVSM)",
+                        "sku": "LW1222IVSM",
+                        "url": "https://www.affordablehome-ac.com/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm",
+                        "priceCurrency": "USD",
+                        "price": "745.00",
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": "https://schema.org/InStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "GE 12,000 BTU R-32 Inverter Built-In AC (AJCQ12AXXWA)",
+                        "sku": "AJCQ12AXXWA",
+                        "url": "https://www.affordablehome-ac.com/shop/15-ge-12-000-btu-ajcq12axxwa",
+                        "priceCurrency": "USD",
+                        "price": "1200.00",
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": "https://schema.org/InStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    }
+                ]
             },
             {
                 "@type": "FAQPage",

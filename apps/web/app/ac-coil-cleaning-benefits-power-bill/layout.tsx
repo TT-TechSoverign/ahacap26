@@ -62,12 +62,41 @@ const coilCleaningFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Cleaning",
+            "item": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "HECO Power Bill Savings from Coil Cleaning",
+            "item": "https://www.affordablehome-ac.com/ac-coil-cleaning-benefits-power-bill"
+        }
+    ]
+};
+
 export default function CoilCleaningPowerBillLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(coilCleaningFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

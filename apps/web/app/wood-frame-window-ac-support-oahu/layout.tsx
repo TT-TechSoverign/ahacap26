@@ -62,12 +62,41 @@ const woodFrameFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Installation",
+            "item": "https://www.affordablehome-ac.com/window-ac-installation"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Wood-Frame Sill Window AC Support",
+            "item": "https://www.affordablehome-ac.com/wood-frame-window-ac-support-oahu"
+        }
+    ]
+};
+
 export default function WoodFrameAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(woodFrameFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

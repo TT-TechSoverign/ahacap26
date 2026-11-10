@@ -62,12 +62,41 @@ const petHairFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Cleaning",
+            "item": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Pet Hair & Dander Window AC Deep Clean",
+            "item": "https://www.affordablehome-ac.com/pet-hair-dander-ac-cleaning-oahu"
+        }
+    ]
+};
+
 export default function PetHairCleaningLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(petHairFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

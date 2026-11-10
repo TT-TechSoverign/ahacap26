@@ -62,12 +62,41 @@ const energyStarFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Oahu Window AC Shop",
+            "item": "https://www.affordablehome-ac.com/shop"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "ENERGY STAR Window Air Conditioners",
+            "item": "https://www.affordablehome-ac.com/energy-star-window-air-conditioners-hawaii"
+        }
+    ]
+};
+
 export default function EnergyStarAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(energyStarFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

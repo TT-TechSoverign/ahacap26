@@ -87,6 +87,31 @@ const hvacBusinessSchema = {
     "areaServed": "Oahu"
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Oahu Window AC Shop",
+            "item": "https://www.affordablehome-ac.com/shop"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "$45 Hawaii Energy Window AC Rebate",
+            "item": "https://www.affordablehome-ac.com/hawaii-energy-rebate"
+        }
+    ]
+};
+
 export default function HawaiiEnergyRebateLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
@@ -97,6 +122,10 @@ export default function HawaiiEnergyRebateLayout({ children }: { children: React
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(hvacBusinessSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

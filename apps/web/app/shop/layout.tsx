@@ -9,7 +9,7 @@ export const metadata: Metadata = {
         canonical: 'https://www.affordablehome-ac.com/shop',
     },
     openGraph: {
-        title: 'In-Stock Window Air Conditioners Oahu ($395–$1,200) | Waipahu Pickup & $50 Delivery | Affordable Home A/C',
+        title: 'In-Stock LG & GE Window ACs Oahu ($395–$1,200) | Waipahu Pickup & $45 Rebate',
         description: 'Shop in-stock LG Dual Inverter (6,000–23,500 BTU, -$45 Rebate), LG Cool+Heat, and GE 26" Wall Sleeve window air conditioners in Oahu ($395–$1,200). Free Waipahu warehouse pickup, $50 flat delivery & professional installation.',
         url: 'https://www.affordablehome-ac.com/shop',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'In-Stock Window Air Conditioners Oahu ($395–$1,200) | Waipahu Pickup & $50 Delivery | Affordable Home A/C',
+        title: 'In-Stock LG & GE Window ACs Oahu ($395–$1,200) | Waipahu Pickup & $45 Rebate',
         description: 'Shop in-stock LG Dual Inverter (6,000–23,500 BTU, -$45 Rebate), LG Cool+Heat, and GE 26" Wall Sleeve window air conditioners in Oahu ($395–$1,200). Free Waipahu warehouse pickup, $50 flat delivery & professional installation.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }

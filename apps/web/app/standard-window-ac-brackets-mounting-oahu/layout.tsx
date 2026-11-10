@@ -6,12 +6,12 @@ export const metadata: Metadata = {
     },
     description: '$0 Free Estimate • (808) 488-1111. Standard exterior window AC support brackets on Oahu. Sized for 6,000 to 23,500 BTU units, relieving weight from.',
     alternates: {
-        canonical: 'https://www.affordablehome-ac.com/standard-window-ac-brackets-mounting-oahu',
+        canonical: 'https://www.affordablehome-ac.com/ac-brackets-exterior-security-mounting-oahu',
     },
     openGraph: {
         title: 'Standard Window AC Brackets & Mounting Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
         description: '$0 Free Estimate • (808) 488-1111. Standard exterior window AC support brackets on Oahu. Sized for 6,000 to 23,500 BTU units, relieving weight from.',
-        url: 'https://www.affordablehome-ac.com/standard-window-ac-brackets-mounting-oahu',
+        url: 'https://www.affordablehome-ac.com/ac-brackets-exterior-security-mounting-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [

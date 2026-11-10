@@ -62,12 +62,41 @@ const refrigerantLeakFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Repair & Assessment",
+            "item": "https://www.affordablehome-ac.com/ac-repair-oahu"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Sealed-System Refrigerant Leak vs Replacement",
+            "item": "https://www.affordablehome-ac.com/ac-refrigerant-leak-detection-hawaii"
+        }
+    ]
+};
+
 export default function RefrigerantLeakLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(refrigerantLeakFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

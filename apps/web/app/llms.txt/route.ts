@@ -35,7 +35,7 @@ export async function GET() {
         const gtin = idInfo?.gtin12 || '';
         const slug = generateProductSlug(p.id, p.name);
         const stockText = p.stock > 0 ? `IN STOCK (${p.stock} units available)` : 'Temporarily Out of Stock';
-        const rebateText = p.subcategory === 'dual_inverter' ? ' • Eligible for $45 Hawaii Energy Cash Rebate' : '';
+        const rebateText = (p.subcategory === 'dual_inverter' || p.id === 15) ? ' • Eligible for $45 Hawaii Energy Cash Rebate' : '';
         return `- **${p.name}** (MPN: \`${mpn}\`${gtin ? `, UPC/GTIN: \`${gtin}\`` : ''}): **$${p.price.toFixed(2)}** | ${p.btu?.toLocaleString()} BTU | ${p.voltage} | Coverage: ${p.coverage_aham || p.coverage} (${p.coverage_oahu || 'Oahu calibrated'}) | Noise: ${p.noise_level} | Status: ${stockText}${rebateText} | Buy Online: ${baseUrl}/shop/${slug}`;
     });
 

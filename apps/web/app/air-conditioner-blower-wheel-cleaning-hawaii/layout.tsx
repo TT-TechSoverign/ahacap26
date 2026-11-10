@@ -62,12 +62,41 @@ const blowerWheelFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Cleaning",
+            "item": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Window AC Blower Wheel Deep Wash",
+            "item": "https://www.affordablehome-ac.com/air-conditioner-blower-wheel-cleaning-hawaii"
+        }
+    ]
+};
+
 export default function BlowerWheelCleaningLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(blowerWheelFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

@@ -62,12 +62,41 @@ const drainLineFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Cleaning",
+            "item": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Window AC Condensate Drain Pan & Line Clearing",
+            "item": "https://www.affordablehome-ac.com/ac-drain-line-clog-clearing-oahu"
+        }
+    ]
+};
+
 export default function DrainLineClogLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(drainLineFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

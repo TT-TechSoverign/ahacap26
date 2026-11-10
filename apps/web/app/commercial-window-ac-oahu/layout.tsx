@@ -62,12 +62,41 @@ const commercialAcFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Oahu Window AC Shop",
+            "item": "https://www.affordablehome-ac.com/shop"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Commercial & Office Window ACs",
+            "item": "https://www.affordablehome-ac.com/commercial-window-ac-oahu"
+        }
+    ]
+};
+
 export default function CommercialWindowAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(commercialAcFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

@@ -62,12 +62,41 @@ const condensationDrainFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Installation",
+            "item": "https://www.affordablehome-ac.com/window-ac-installation"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Condo Window AC Condensate Drain Routing",
+            "item": "https://www.affordablehome-ac.com/ac-condensation-drain-routing-condos"
+        }
+    ]
+};
+
 export default function CondensationDrainAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(condensationDrainFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

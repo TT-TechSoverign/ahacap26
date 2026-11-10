@@ -62,12 +62,41 @@ const renterFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Installation",
+            "item": "https://www.affordablehome-ac.com/window-ac-installation"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Renter-Friendly Window AC Installation",
+            "item": "https://www.affordablehome-ac.com/renter-friendly-ac-installation-oahu"
+        }
+    ]
+};
+
 export default function RenterFriendlyAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(renterFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

@@ -230,6 +230,7 @@ export default function WindowAcPlugGuidePage() {
                 "brand": { "@type": "Brand", "name": "LG & GE Appliances" },
                 "sku": "LW1522FVSM",
                 "mpn": "LW1522FVSM",
+                "gtin12": "195174031919",
                 "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "4.9",
@@ -246,16 +247,68 @@ export default function WindowAcPlugGuidePage() {
                         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
                     }
                 ],
-                "offers": {
-                    "@type": "AggregateOffer",
-                    "url": "https://www.affordablehome-ac.com/shop/window-ac-plug-guide",
-                    "priceCurrency": "USD",
-                    "lowPrice": "395.00",
-                    "highPrice": "1200.00",
-                    "offerCount": "16",
-                    "availability": "https://schema.org/InStock",
-                    "itemCondition": "https://schema.org/NewCondition"
-                }
+                "offers": [
+                    {
+                        "@type": "Offer",
+                        "name": "LG Dual Inverter 14,000 BTU 115V NEMA 5-15P (LW1522FVSM)",
+                        "sku": "LW1522FVSM",
+                        "url": "https://www.affordablehome-ac.com/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm",
+                        "priceCurrency": "USD",
+                        "price": "785.00",
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": "https://schema.org/InStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "LG Dual Inverter 18,000 BTU 208/230V NEMA 6-15P (LW1822IVSM)",
+                        "sku": "LW1822IVSM",
+                        "url": "https://www.affordablehome-ac.com/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm",
+                        "priceCurrency": "USD",
+                        "price": "925.00",
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": "https://schema.org/InStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    }
+                ]
             },
             {
                 "@type": "BreadcrumbList",

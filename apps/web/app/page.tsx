@@ -89,7 +89,7 @@ export default function Homepage() {
                                 },
                                 {
                                     "@type": "HVACBusiness",
-                                    "@id": "https://www.affordablehome-ac.com/#localbusiness",
+                                    "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                                     "name": "Affordable Home A/C",
                                     "url": "https://www.affordablehome-ac.com",
                                     "telephone": "+1-808-488-1111",
@@ -101,6 +101,35 @@ export default function Homepage() {
                                         "bestRating": "5",
                                         "worstRating": "1"
                                     }
+                                },
+                                {
+                                    "@type": "FAQPage",
+                                    "mainEntity": [
+                                        {
+                                            "@type": "Question",
+                                            "name": "Where can I buy an LG Dual Inverter or GE 26-inch Built-In Window AC in stock on Oahu?",
+                                            "acceptedAnswer": {
+                                                "@type": "Answer",
+                                                "text": "Affordable Home A/C stocks 16 LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In Through-the-Wall air conditioners ($395 to $1,200) at our central Waipahu warehouse (94-150 Leoleo St. #203, Waipahu, HI 96797). Order online for free Waipahu warehouse pickup by appointment or $50 flat-rate Oahu delivery."
+                                            }
+                                        },
+                                        {
+                                            "@type": "Question",
+                                            "name": "Do you install Window ACs in Hawaiian jalousie louver windows and 26-inch condo wall sleeves?",
+                                            "acceptedAnswer": {
+                                                "@type": "Answer",
+                                                "text": "Yes. Our insured Oahu cooling specialists custom-fit LG and GE window air conditioners into Hawaiian jalousie glass louver windows, standard sliders, double-hung windows, and 26-inch through-the-wall condo sleeves with floor drop-cloth protection and a $0 Free In-Home Estimate."
+                                            }
+                                        },
+                                        {
+                                            "@type": "Question",
+                                            "name": "Do your in-stock Window ACs qualify for the $45 Hawaii Energy cash rebate?",
+                                            "acceptedAnswer": {
+                                                "@type": "Answer",
+                                                "text": "Yes! Qualifying ENERGY STAR® LG Dual Inverter and GE R-32 Inverter window air conditioners include our official Hawaii Energy $45 cash rebate form PDF and reduce HECO cooling electricity use by up to 40% (~$424/yr)."
+                                            }
+                                        }
+                                    ]
                                 }
                             ]
                         })

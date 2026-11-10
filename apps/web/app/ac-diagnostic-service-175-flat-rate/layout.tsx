@@ -62,12 +62,41 @@ const diagnosticFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Repair & Assessment",
+            "item": "https://www.affordablehome-ac.com/ac-repair-oahu"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "$0 Free Window AC Clean-vs-Replace Assessment",
+            "item": "https://www.affordablehome-ac.com/ac-diagnostic-service-175-flat-rate"
+        }
+    ]
+};
+
 export default function AcDiagnosticLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(diagnosticFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

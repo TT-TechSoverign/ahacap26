@@ -62,12 +62,41 @@ const weatherSealFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Installation",
+            "item": "https://www.affordablehome-ac.com/window-ac-installation"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Marine-Grade Window AC Weather Stripping",
+            "item": "https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal"
+        }
+    ]
+};
+
 export default function WeatherSealAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(weatherSealFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

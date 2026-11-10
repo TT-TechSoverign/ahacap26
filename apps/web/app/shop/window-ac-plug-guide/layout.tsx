@@ -9,7 +9,7 @@ export const metadata: Metadata = {
         canonical: 'https://www.affordablehome-ac.com/shop/window-ac-plug-guide',
     },
     openGraph: {
-        title: 'Window AC Plug & Voltage Guide Oahu (115V vs 230V NEMA Chart) | Affordable Home A/C',
+        title: '115V vs 230V Window AC Plug Guide Oahu (NEMA 5-15P / 6-15P / 6-20P) | In-Stock $395+',
         description: 'Check your Oahu wall outlet before buying. Complete 115V vs 230V NEMA plug chart with live in-stock LG & GE window AC models.',
         url: 'https://www.affordablehome-ac.com/shop/window-ac-plug-guide',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Plug & Voltage Guide Oahu (115V vs 230V NEMA Chart)',
+        title: '115V vs 230V Window AC Plug Guide Oahu (NEMA 5-15P / 6-15P / 6-20P) | In-Stock $395+',
         description: 'Match your 115V or 230V wall outlet to in-stock Waipahu window air conditioners.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },

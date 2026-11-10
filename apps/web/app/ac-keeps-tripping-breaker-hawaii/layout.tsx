@@ -54,12 +54,41 @@ const breakerFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Repair & Assessment",
+            "item": "https://www.affordablehome-ac.com/ac-repair-oahu"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Window AC Tripping Breaker Troubleshooting",
+            "item": "https://www.affordablehome-ac.com/ac-keeps-tripping-breaker-hawaii"
+        }
+    ]
+};
+
 export default function AcTrippingBreakerLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breakerFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

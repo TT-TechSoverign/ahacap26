@@ -291,6 +291,7 @@ export default function LgDualInverterGuidePage() {
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW1222IVSM",
                 "mpn": "LW1222IVSM",
+                "gtin12": "195174031902",
                 "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "4.9",
@@ -307,16 +308,98 @@ export default function LgDualInverterGuidePage() {
                         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
                     }
                 ],
-                "offers": {
-                    "@type": "AggregateOffer",
-                    "url": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-guide",
-                    "priceCurrency": "USD",
-                    "lowPrice": "560.00",
-                    "highPrice": "1025.00",
-                    "offerCount": "7",
-                    "availability": "https://schema.org/InStock",
-                    "itemCondition": "https://schema.org/NewCondition"
-                }
+                "offers": [
+                    {
+                        "@type": "Offer",
+                        "name": "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
+                        "sku": "LW6023IVSM",
+                        "url": "https://www.affordablehome-ac.com/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm",
+                        "priceCurrency": "USD",
+                        "price": "560.00",
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": "https://schema.org/InStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
+                        "sku": "LW1222IVSM",
+                        "url": "https://www.affordablehome-ac.com/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm",
+                        "priceCurrency": "USD",
+                        "price": "745.00",
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": "https://schema.org/InStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
+                        "sku": "LW2422IVSM",
+                        "url": "https://www.affordablehome-ac.com/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm",
+                        "priceCurrency": "USD",
+                        "price": "1025.00",
+                        "validFrom": "2026-01-01",
+                        "priceValidUntil": "2027-12-31",
+                        "availability": "https://schema.org/InStock",
+                        "itemCondition": "https://schema.org/NewCondition",
+                        "hasMerchantReturnPolicy": {
+                            "@type": "MerchantReturnPolicy",
+                            "applicableCountry": "US",
+                            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                            "merchantReturnDays": 30,
+                            "returnMethod": "https://schema.org/ReturnInStore",
+                            "returnFees": "https://schema.org/FreeReturn"
+                        },
+                        "shippingDetails": {
+                            "@type": "OfferShippingDetails",
+                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
+                            "deliveryTime": {
+                                "@type": "ShippingDeliveryTime",
+                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
+                            }
+                        }
+                    }
+                ]
             },
             {
                 "@type": "BreadcrumbList",

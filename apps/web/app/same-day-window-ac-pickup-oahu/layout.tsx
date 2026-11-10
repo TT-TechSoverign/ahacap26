@@ -6,12 +6,12 @@ export const metadata: Metadata = {
     },
     description: 'Need a Window AC today on Oahu? Pick up factory-sealed LG Dual Inverter & GE 26" Built-In units ($395–$1,200) in Waipahu by appointment • Call (808) 488-1111.',
     alternates: {
-        canonical: 'https://www.affordablehome-ac.com/same-day-window-ac-pickup-oahu',
+        canonical: 'https://www.affordablehome-ac.com/window-ac-warehouse-pickup-waipahu',
     },
     openGraph: {
         title: 'Same-Day Window AC Pickup Oahu ($395–$1,200) | In-Stock Waipahu Warehouse',
         description: 'Need a Window AC today on Oahu? Pick up factory-sealed LG Dual Inverter & GE 26" Built-In units ($395–$1,200) in Waipahu by appointment • Call (808) 488-1111.',
-        url: 'https://www.affordablehome-ac.com/same-day-window-ac-pickup-oahu',
+        url: 'https://www.affordablehome-ac.com/window-ac-warehouse-pickup-waipahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
         images: [

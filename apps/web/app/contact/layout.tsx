@@ -79,6 +79,29 @@ const contactPageSchema = {
     }
 };
 
+const contactFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Where is Affordable Home A/C's Waipahu warehouse located?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our Oahu warehouse is located at 94-150 Leoleo St. #203, Waipahu, HI 96797. Warehouse pickup and showroom consultations are by appointment so we can have your unit staged and ready—call (808) 488-1111 or schedule online."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do I have to pay anything upfront to request a Window AC installation or cleaning estimate?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No! Affordable Home A/C operates strictly By Appointment First with $0 upfront booking payment barriers. Submit your appointment request online or call (808) 488-1111 and our dispatch team will confirm your visit directly."
+            }
+        }
+    ]
+};
+
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
@@ -89,6 +112,10 @@ export default function ContactLayout({ children }: { children: React.ReactNode 
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(contactFaqSchema) }}
             />
             {children}
         </>

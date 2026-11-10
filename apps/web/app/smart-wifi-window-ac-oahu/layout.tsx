@@ -62,12 +62,41 @@ const smartWifiFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Oahu Window AC Shop",
+            "item": "https://www.affordablehome-ac.com/shop"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Smart Wi-Fi LG ThinQ Window ACs",
+            "item": "https://www.affordablehome-ac.com/smart-wifi-window-ac-oahu"
+        }
+    ]
+};
+
 export default function SmartWifiAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(smartWifiFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

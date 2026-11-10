@@ -62,12 +62,41 @@ const outdoorFanFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Repair & Assessment",
+            "item": "https://www.affordablehome-ac.com/ac-repair-oahu"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Window AC Fan Motor Not Spinning Assessment",
+            "item": "https://www.affordablehome-ac.com/outdoor-unit-fan-not-spinning-hawaii"
+        }
+    ]
+};
+
 export default function OutdoorFanNotSpinningLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(outdoorFanFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

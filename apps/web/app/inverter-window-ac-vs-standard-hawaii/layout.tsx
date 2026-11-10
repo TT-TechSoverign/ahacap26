@@ -62,12 +62,41 @@ const inverterVsStandardFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Oahu Window AC Shop",
+            "item": "https://www.affordablehome-ac.com/shop"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Dual Inverter vs Standard Window AC",
+            "item": "https://www.affordablehome-ac.com/inverter-window-ac-vs-standard-hawaii"
+        }
+    ]
+};
+
 export default function InverterVsStandardLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(inverterVsStandardFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

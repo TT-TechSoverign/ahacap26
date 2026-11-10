@@ -64,7 +64,8 @@ const jalousieFaqSchema = {
 
 const hvacServiceSchema = {
     "@context": "https://schema.org",
-    "@type": "HVACService",
+    "@type": "Service",
+    "serviceType": "Jalousie Window AC Installation",
     "name": "Jalousie Window AC Installation & Custom Fabrication",
     "provider": {
         "@type": "HVACBusiness",
@@ -84,6 +85,31 @@ const hvacServiceSchema = {
     "description": "Specialized LG & GE window air conditioner installation in Hawaiian jalousie louver windows, custom acrylic fabrication, and exterior security mounting across Oahu."
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.affordablehome-ac.com"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Window AC Installation",
+            "item": "https://www.affordablehome-ac.com/window-ac-installation"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Jalousie Louver Window AC Installation",
+            "item": "https://www.affordablehome-ac.com/jalousie-window-ac-installation-oahu"
+        }
+    ]
+};
+
 export default function JalousieWindowAcInstallationLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
@@ -94,6 +120,10 @@ export default function JalousieWindowAcInstallationLayout({ children }: { child
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(hvacServiceSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

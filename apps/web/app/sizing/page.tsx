@@ -68,6 +68,29 @@ const breadcrumbSchema = {
     ]
 };
 
+const sizingFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "How many BTUs do I need for a single-wall redwood home in Hawaii?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Uninsulated single-wall redwood and tongue-and-groove Hawaii homes absorb 20% to 35% more solar heat than mainland drywall rooms. We recommend 6,000–8,000 BTU for bedrooms (100–250 sq. ft.), 10,000–12,000 BTU for master bedrooms and studios (220–380 sq. ft.), and 14,000–23,500 BTU for living rooms and open layouts (380–800+ sq. ft.)."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is the largest Window AC that runs on a standard 115V household outlet?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The LG Dual Inverter 14,000 BTU (LW1522FVSM, $785) and 12,000 BTU (LW1222IVSM, $745) are the highest-capacity Window ACs that plug directly into a standard 115V / 15-Amp household NEMA 5-15R receptacle. Units rated 18,000 BTU and 23,500 BTU require a 208/230V circuit."
+            }
+        }
+    ]
+};
+
 export default function SizingPage() {
     return (
         <div className="bg-background-dark min-h-screen text-white selection:bg-primary selection:text-white pb-12 lg:pb-32">
@@ -78,6 +101,10 @@ export default function SizingPage() {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(sizingFaqSchema) }}
             />
             <main className="max-w-4xl mx-auto px-6 pt-[96px] md:pt-[180px]">
                 {/* Header branding */}
