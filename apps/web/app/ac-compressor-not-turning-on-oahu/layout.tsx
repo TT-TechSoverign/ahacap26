@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Compressor Not Turning On Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Blower fan blowing warm air but window AC compressor not running? Accurate diagnostic of capacitors, power relays, inverter modules, and thermal overloads on Oahu.',
+        description: '$0 Free Estimate • (808) 488-1111. Blower fan blowing warm air but LG & GE window AC compressor not running? Accurate diagnostic of capacitors, power.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };

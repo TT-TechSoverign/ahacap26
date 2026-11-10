@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: 'Oahu Window AC Sitemap & In-Stock Directory ($395–$1,200) | Affordable Home A/C',
-        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Free Estimate installation & coil cleaning.',
+        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Free Estimate installation & coil cleaning • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/sitemap',
         siteName: 'Affordable Home A/C',
         locale: 'en_US',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Oahu Window AC Sitemap & In-Stock Directory ($395–$1,200) | Affordable Home A/C',
-        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities & $0 Free Estimates.',
+        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Free Estimate installation & coil cleaning • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },
 };

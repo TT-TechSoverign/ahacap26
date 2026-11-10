@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Commercial AC Cleaning Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Specialized commercial window and thru-wall AC cleaning for Oahu boutiques, medical clinics, dental offices, and professional spaces. Drop-cloth protection.',
+        description: '$0 Free Estimate • (808) 488-1111. Specialized commercial LG & GE window and thru-wall AC cleaning for Oahu boutiques, medical clinics, dental.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };

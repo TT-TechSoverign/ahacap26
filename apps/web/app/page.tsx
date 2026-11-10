@@ -89,7 +89,7 @@ export default function Homepage() {
                                 },
                                 {
                                     "@type": "HVACBusiness",
-                                    "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
+                                    "@id": "https://www.affordablehome-ac.com/#localbusiness",
                                     "name": "Affordable Home A/C",
                                     "url": "https://www.affordablehome-ac.com",
                                     "telephone": "+1-808-488-1111",

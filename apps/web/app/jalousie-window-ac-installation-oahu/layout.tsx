@@ -69,7 +69,6 @@ const hvacServiceSchema = {
     "name": "Jalousie Window AC Installation & Custom Fabrication",
     "provider": {
         "@type": "HVACBusiness",
-                            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
         "name": "Affordable Home A/C",
         "telephone": "+1-808-488-1111",
         "address": {

@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'In-Stock Oahu Window AC Warehouse ($395–$1,200) | Waipahu Pickup & $50 Delivery',
-        description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free warehouse pickup by appt or $50 delivery • (808) 488-1111.',
+        description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free warehouse pickup by appt, $50 Oahu delivery & $45 Rebate • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp']
     },
     alternates: {
@@ -114,7 +114,6 @@ export default function OahuWindowAcWarehousePage() {
             },
             {
                 "@type": "LocalBusiness",
-                "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                 "name": "Affordable Home A/C",
                 "telephone": "+1-808-488-1111",
                 "address": {

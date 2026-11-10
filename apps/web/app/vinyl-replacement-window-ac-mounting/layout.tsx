@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Vinyl Window AC Mounting Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Specialized window air conditioner mounting for vinyl replacement windows on Oahu. Weight distribution brackets prevent cracked vinyl tracks.',
+        description: '$0 Free Estimate • (808) 488-1111. Specialized LG & GE window air conditioner mounting for vinyl replacement windows on Oahu. Weight distribution.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };

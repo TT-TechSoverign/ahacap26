@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: 'LG Dual Inverter Window ACs Oahu ($560–$1,025) | 6k–23.5k BTU In-Stock & $45 Rebate',
-        description: 'Compare all 7 LG Dual Inverter window ACs in stock in Waipahu, Oahu. Whisper-quiet 44 dB sleep mode, up to 40% HECO bill savings, and $45 Hawaii Energy rebate.',
+        description: 'In-Stock LG Dual Inverter Window ACs ($560–$1,025, 6k–23.5k BTU) in Waipahu, Oahu. 44dB quiet, 40% HECO savings, $45 Rebate & $50 Oahu delivery • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/shop/lg-dual-inverter-guide',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'LG Dual Inverter Window ACs Oahu ($560–$1,025) | 6k–23.5k BTU In-Stock & $45 Rebate',
-        description: 'Compare all 7 LG Dual Inverter window AC models in stock at our Waipahu warehouse.',
+        description: 'In-Stock LG Dual Inverter Window ACs ($560–$1,025, 6k–23.5k BTU) in Waipahu, Oahu. 44dB quiet, 40% HECO savings, $45 Rebate & $50 Oahu delivery • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },
 };

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Drain Line Clog Clearing Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Fast, professional AC condensate drain line clearing on Oahu. Vacuum extraction, dedicated line flushing, and anti-algae treatment stop indoor water leaks.',
+        description: '$0 Free Estimate • (808) 488-1111. Fast, professional LG & GE window AC condensate drain line clearing on Oahu. Vacuum extraction, dedicated line.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };

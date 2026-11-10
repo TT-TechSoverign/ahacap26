@@ -124,7 +124,6 @@ export default function AcCleaningOahuPage() {
                 "serviceType": "Window AC Sanitization & Coil Cleaning",
                 "provider": {
                     "@type": "HVACBusiness",
-                            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                     "name": "Affordable Home A/C",
                     "telephone": "+1-808-488-1111",
                     "priceRange": "$395 - $1,200",

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Mold Removal & Deep Cleaning Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Clinical window AC mold removal and deep cleaning for Oahu homes. Eliminate Cladosporium and black mold from blower wheels and coils. Insured Oahu Specialists.',
+        description: '$0 Free Estimate • (808) 488-1111. Clinical LG & GE window AC mold removal and deep cleaning for Oahu homes. Eliminate Cladosporium and black mold.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };

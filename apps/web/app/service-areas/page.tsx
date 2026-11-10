@@ -16,7 +16,7 @@ export default function ServiceAreasPage() {
     if (!serviceAreas || !serviceAreas.regions) {
         return (
             <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-8">
-                <h1 className="text-3xl font-header font-bold text-white mb-4">Service Areas Not Found</h1>
+                <h2 className="text-3xl font-header font-bold text-white mb-4">Service Areas Not Found</h2>
                 <p className="text-slate-400">Please check the content configuration.</p>
             </div>
         );
@@ -29,19 +29,44 @@ export default function ServiceAreasPage() {
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
-                        "@type": "BreadcrumbList",
-                        "itemListElement": [
+                        "@graph": [
                             {
-                                "@type": "ListItem",
-                                "position": 1,
-                                "name": "Home",
-                                "item": "https://www.affordablehome-ac.com"
+                                "@type": "BreadcrumbList",
+                                "itemListElement": [
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "name": "Home",
+                                        "item": "https://www.affordablehome-ac.com"
+                                    },
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "name": "Service Areas",
+                                        "item": "https://www.affordablehome-ac.com/service-areas"
+                                    }
+                                ]
                             },
                             {
-                                "@type": "ListItem",
-                                "position": 2,
-                                "name": "Service Areas",
-                                "item": "https://www.affordablehome-ac.com/service-areas"
+                                "@type": "FAQPage",
+                                "mainEntity": [
+                                    {
+                                        "@type": "Question",
+                                        "name": "Which Oahu cities does Affordable Home A/C serve?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Affordable Home A/C serves all 22 Oahu communities across Metro Honolulu, Central Oahu, Leeward/West Oahu, Windward Oahu, East Honolulu, and the North Shore—including Honolulu, Waipahu, Kapolei, Ewa Beach, Mililani, Pearl City, Aiea, Kailua, Kaneohe, and Hawaii Kai."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "How much is island-wide Window AC delivery or Waipahu warehouse pickup?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Waipahu warehouse pickup at 94-150 Leoleo St. #203 is $0 (free by appointment), and island-wide residential delivery across all 22 Oahu service areas is a flat $50."
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     })

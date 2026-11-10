@@ -32,7 +32,6 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
         },
         "publisher": {
             "@type": "Organization",
-            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
             "name": "Affordable Home A/C",
             "url": "https://www.affordablehome-ac.com",
             "telephone": "+1-808-488-1111",

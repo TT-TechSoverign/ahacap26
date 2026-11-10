@@ -46,7 +46,7 @@ export default function ReviewsPage() {
     const hvacBusinessSchema = {
         "@context": "https://schema.org",
         "@type": "HVACBusiness",
-        "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
+        "@id": "https://www.affordablehome-ac.com/reviews#localbusiness",
         "name": "Affordable Home A/C",
         "image": [
             "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",

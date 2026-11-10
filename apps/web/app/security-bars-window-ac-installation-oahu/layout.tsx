@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Security Bars Window AC Installation Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Specialized window air conditioner installation for homes with exterior security burglar bars on Oahu. Clearances, bracket mounting, and airflow optimization.',
+        description: '$0 Free Estimate • (808) 488-1111. Specialized LG & GE window air conditioner installation for homes with exterior security burglar bars on Oahu.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };

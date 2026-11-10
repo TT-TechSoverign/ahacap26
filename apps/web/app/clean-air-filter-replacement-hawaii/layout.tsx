@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Air Filter Cleaning & Replacement Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Learn how to clean and replace window AC air filters in Hawaii homes. Protect against vog, red dirt, and pet dander while maintaining max cooling CFM.',
+        description: '$0 Free Estimate • (808) 488-1111. Learn how to clean and replace LG & GE window AC air filters in Hawaii homes. Protect against vog, red dirt, and.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };

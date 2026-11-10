@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Air Conditioner Blower Wheel Cleaning Hawaii ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Eliminate heavy dust cake and black mold from your window AC squirrel-cage blower fan wheel. Restores 100% airflow CFM and eradicates vibration.',
+        description: '$0 Free Estimate • (808) 488-1111. Eliminate heavy dust cake and black mold from your LG or GE window AC squirrel-cage blower fan wheel. Restores.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };

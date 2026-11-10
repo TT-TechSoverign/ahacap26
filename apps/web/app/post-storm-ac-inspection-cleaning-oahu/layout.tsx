@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Post-Storm AC Inspection & Cleaning Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Post-storm AC inspection and emergency cleaning across Oahu. Remove salt crust, leaf debris, and water intrusion after Kona storms and high winds.',
+        description: '$0 Free Estimate • (808) 488-1111. Post-storm LG & GE window AC inspection and cleaning across Oahu. Remove salt crust, leaf debris, and water.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };

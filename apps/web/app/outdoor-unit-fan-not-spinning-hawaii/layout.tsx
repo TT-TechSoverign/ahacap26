@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'AC Condenser Fan Not Spinning in Hawaii? Causes & Repair Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: 'Window AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter motor boards in Oahu. $0 Free Estimate flat rate diagnostic.',
+        description: '$0 Free Estimate • (808) 488-1111. LG & GE window AC condenser fan stopped spinning? Diagnose dead capacitors, seized fan bearings, and inverter.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
