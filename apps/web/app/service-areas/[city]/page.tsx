@@ -135,9 +135,11 @@ export default function LocalServiceAreaPage({ params }: Props) {
     }
 
     const neighborhoodSubAreas: Record<string, string> = {
-        'honolulu': 'Waikiki, Ala Moana, Kakaako, Ward Village, Downtown, Makiki, Nuuanu & Palolo',
+        'honolulu': 'Waikiki, Ala Moana, Kakaako, Ward Village, Downtown, Nuuanu & Palolo',
         'pearl-city': 'Momilani, Manana, Pearl City Peninsula, Palisades, Waiau & Pearl Highlands',
-        'waipahu': 'Waipahu Town, Royal Kunia, Village Park, Waikele & West Loch',
+        'waipahu': 'Waipahu Town, Village Park, Waipahu Gardens & West Loch',
+        'kunia': 'Royal Kunia, Kunia Camp & Central Oahu Foothills',
+        'makiki': 'Lower Makiki, Punchbowl, Tantalus & Nehoa',
         'kapolei': 'Makakilo, Ko Olina, Mehana, Kapolei Knolls & Hoopili',
         'ewa-beach': 'Ocean Pointe, Hoakalei, Ewa Gentry, Iroquois Point & Westgate',
         'aiea': 'Aiea Heights, Halawa, Pearlridge, Newtown & Royal Summit',
