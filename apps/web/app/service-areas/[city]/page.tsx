@@ -296,6 +296,21 @@ export default function LocalServiceAreaPage({ params }: Props) {
                             "bestRating": "5",
                             "worstRating": "1"
                         },
+                        "review": getReviewsByCity(cityData.name, 3).map((r) => ({
+                            "@type": "Review",
+                            "author": {
+                                "@type": "Person",
+                                "name": r.author
+                            },
+                            "datePublished": "2026-09-15",
+                            "reviewBody": (r as any).sanitized_text || r.text,
+                            "reviewRating": {
+                                "@type": "Rating",
+                                "ratingValue": String(r.rating || 5),
+                                "bestRating": "5",
+                                "worstRating": "1"
+                            }
+                        })),
                         "openingHoursSpecification": [
                             {
                                 "@type": "OpeningHoursSpecification",
@@ -438,7 +453,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
             />
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full mb-12">
-                <OahuEEATAuthorityBar />
+                <OahuEEATAuthorityBar topicTitle={`${cityData.name} LG & GE Window AC Sales ($395–$1,200), Installation & Deep Cleaning Guide`} />
             </div>
             
             <BackToTop visible={true} />

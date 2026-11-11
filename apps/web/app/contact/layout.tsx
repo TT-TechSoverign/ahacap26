@@ -56,9 +56,19 @@ const contactPageSchema = {
     "name": "Contact Affordable Home A/C",
     "mainEntity": {
         "@type": "HVACBusiness",
+        "@id": "https://www.affordablehome-ac.com/contact#localbusiness",
         "name": "Affordable Home A/C",
+        "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "telephone": "+1-808-488-1111",
         "email": "office@affordablehome-ac.com",
+        "priceRange": "$395 - $1,200",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "142",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "94-150 Leoleo St. #203",

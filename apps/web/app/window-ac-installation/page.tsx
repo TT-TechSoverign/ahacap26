@@ -161,10 +161,19 @@ export default function WindowAcInstallationPage() {
                 "serviceType": "Window AC & Jalousie Installation",
                 "provider": {
                     "@type": "HVACBusiness",
+                    "@id": "https://www.affordablehome-ac.com/window-ac-installation#localbusiness",
                     "name": "Affordable Home A/C",
+                    "image": "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
                     "telephone": "+1-808-488-1111",
                     "priceRange": "$395 - $1,200",
                     "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+                    "aggregateRating": {
+                        "@type": "AggregateRating",
+                        "ratingValue": "4.9",
+                        "reviewCount": "142",
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    },
                     "address": {
                         "@type": "PostalAddress",
                         "streetAddress": "94-150 Leoleo St. #203",

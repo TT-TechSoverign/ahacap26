@@ -98,7 +98,16 @@ const pass5RichSchema = {
     "description": "$0 Free Estimate • (808) 488-1111. Blower fan blowing warm air but LG & GE window AC compressor not running? Accurate diagnostic of capacitors, power.",
     "provider": {
         "@type": "HVACBusiness",
+        "@id": "https://www.affordablehome-ac.com/ac-compressor-not-turning-on-oahu#localbusiness",
         "name": "Affordable Home A/C",
+        "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "142",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
         "url": "https://www.affordablehome-ac.com",
         "telephone": "+1-808-488-1111",
         "priceRange": "$395 - $1,200",

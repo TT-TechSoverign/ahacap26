@@ -124,10 +124,19 @@ export default function AcCleaningOahuPage() {
                 "serviceType": "Window AC Sanitization & Coil Cleaning",
                 "provider": {
                     "@type": "HVACBusiness",
+                    "@id": "https://www.affordablehome-ac.com/ac-cleaning-oahu#localbusiness",
                     "name": "Affordable Home A/C",
+                    "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp",
                     "telephone": "+1-808-488-1111",
                     "priceRange": "$395 - $1,200",
                     "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+                    "aggregateRating": {
+                        "@type": "AggregateRating",
+                        "ratingValue": "4.9",
+                        "reviewCount": "142",
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    },
                     "address": {
                         "@type": "PostalAddress",
                         "streetAddress": "94-150 Leoleo St. #203",

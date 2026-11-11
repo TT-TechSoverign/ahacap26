@@ -255,7 +255,7 @@ export function HomeFeaturedInventory() {
                                         </span>
                                     </div>
 
-                                    {isLgInverter ? (
+                                    {(isLgInverter || product.id === 15) ? (
                                         <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-[10px] font-semibold rounded-md">
                                             <Leaf className="size-3 text-emerald-400 shrink-0" />
                                             <span>$45 Hawaii Energy Rebate</span>
@@ -377,8 +377,39 @@ export function HomeFeaturedInventory() {
                     })}
                 </div>
 
+                {/* Crawlable Direct In-Stock Model Catalog Links (Click Depth = 1 from Homepage to All In-Stock Models) */}
+                <div className="mt-8 pt-6 border-t border-white/10 space-y-2.5">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
+                        Direct In-Stock Waipahu Models — Click Any Model for Full Specs, 3D Window Fit &amp; Online Ordering:
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                        {inStockAcProducts.map((model) => {
+                            const modelSlug = generateProductSlug(model.id, model.name);
+                            const shortCode = model.key_spec || model.name.match(/\(([^)]+)\)/)?.[1] || `ID-${model.id}`;
+                            const btuText = model.btu ? `${(model.btu / 1000).toFixed(model.btu % 1000 === 0 ? 0 : 1)}k BTU` : '26" Fit';
+                            return (
+                                <Link
+                                    key={model.id}
+                                    href={`/shop/${modelSlug}`}
+                                    prefetch={false}
+                                    className="px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
+                                >
+                                    {model.name.startsWith('GE') ? 'GE' : 'LG'} {btuText} ({shortCode}) • ${model.price.toLocaleString()}
+                                </Link>
+                            );
+                        })}
+                        <Link
+                            href="/shop/16-ge-rab26a-wall-casement"
+                            prefetch={false}
+                            className="px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
+                        >
+                            GE RAB26A 26&quot; Wall Sleeve • $275
+                        </Link>
+                    </div>
+                </div>
+
                 {/* Bottom Trust Assurance */}
-                <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                     <div className="bg-slate-900/50 border border-white/5 rounded-2xl p-4 flex items-center justify-center gap-3">
                         <Warehouse className="size-5 text-cyan-400 shrink-0" />
                         <span className="text-xs text-slate-300 font-medium">

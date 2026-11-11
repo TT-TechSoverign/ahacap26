@@ -31,6 +31,30 @@ export default function ServiceAreasPage() {
                         "@context": "https://schema.org",
                         "@graph": [
                             {
+                                "@type": "HVACBusiness",
+                                "@id": "https://www.affordablehome-ac.com/service-areas#localbusiness",
+                                "name": "Affordable Home A/C — All 22 Oahu Service Areas",
+                                "url": "https://www.affordablehome-ac.com/service-areas",
+                                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                                "telephone": "+1-808-488-1111",
+                                "priceRange": "$395 - $1,200",
+                                "address": {
+                                    "@type": "PostalAddress",
+                                    "streetAddress": "94-150 Leoleo St. #203",
+                                    "addressLocality": "Waipahu",
+                                    "addressRegion": "HI",
+                                    "postalCode": "96797",
+                                    "addressCountry": "US"
+                                },
+                                "aggregateRating": {
+                                    "@type": "AggregateRating",
+                                    "ratingValue": "4.9",
+                                    "reviewCount": "142",
+                                    "bestRating": "5",
+                                    "worstRating": "1"
+                                }
+                            },
+                            {
                                 "@type": "BreadcrumbList",
                                 "itemListElement": [
                                     {

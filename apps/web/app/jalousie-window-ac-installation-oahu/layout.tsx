@@ -69,8 +69,18 @@ const hvacServiceSchema = {
     "name": "Jalousie Window AC Installation & Custom Fabrication",
     "provider": {
         "@type": "HVACBusiness",
+        "@id": "https://www.affordablehome-ac.com/jalousie-window-ac-installation-oahu#localbusiness",
         "name": "Affordable Home A/C",
+        "image": "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
         "telephone": "+1-808-488-1111",
+        "priceRange": "$395 - $1,200",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "142",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "94-150 Leoleo St. #203",

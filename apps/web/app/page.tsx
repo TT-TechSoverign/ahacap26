@@ -5,6 +5,7 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { HomeFeaturedInventory } from '@/components/HomeFeaturedInventory';
 import { HomeServicesDivisions } from '@/components/HomeServicesDivisions';
 import { HomeServiceAreasHub } from '@/components/HomeServiceAreasHub';
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -92,8 +93,17 @@ export default function Homepage() {
                                     "@id": "https://www.affordablehome-ac.com/#localbusiness",
                                     "name": "Affordable Home A/C",
                                     "url": "https://www.affordablehome-ac.com",
+                                    "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
                                     "telephone": "+1-808-488-1111",
                                     "priceRange": "$395 - $1,200",
+                                    "address": {
+                                        "@type": "PostalAddress",
+                                        "streetAddress": "94-150 Leoleo St. #203",
+                                        "addressLocality": "Waipahu",
+                                        "addressRegion": "HI",
+                                        "postalCode": "96797",
+                                        "addressCountry": "US"
+                                    },
                                     "aggregateRating": {
                                         "@type": "AggregateRating",
                                         "ratingValue": "4.9",
@@ -163,6 +173,11 @@ export default function Homepage() {
 
                 {/* 7. 22-City Oahu Regional Service Areas Hub */}
                 <HomeServiceAreasHub />
+
+                {/* 8. Oahu E-E-A-T Authority & Click-Depth-1 Silo Directory */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+                    <OahuEEATAuthorityBar topicTitle="Affordable Home A/C — Oahu's Waipahu Window AC Warehouse, Jalousie Installation & Deep Cleaning Specialists" />
+                </div>
             </main>
             <BackToTop visible={true} />
         </div>
