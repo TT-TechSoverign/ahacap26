@@ -87,6 +87,65 @@ const breadcrumbSchema = {
     ]
 };
 
+const pass5RichSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://www.affordablehome-ac.com/vinyl-replacement-window-ac-mounting#service",
+    "name": "Vinyl Window AC Mounting Oahu ($0 Estimate)",
+    "serviceType": "Vinyl Window AC Mounting Oahu ($0 Estimate)",
+    "url": "https://www.affordablehome-ac.com/vinyl-replacement-window-ac-mounting",
+    "image": "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+    "description": "$0 Free Estimate • (808) 488-1111. Specialized LG & GE window air conditioner mounting for vinyl replacement windows on Oahu. Weight distribution.",
+    "provider": {
+        "@type": "HVACBusiness",
+        "name": "Affordable Home A/C",
+        "url": "https://www.affordablehome-ac.com",
+        "telephone": "+1-808-488-1111",
+        "priceRange": "$395 - $1,200",
+        "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "94-150 Leoleo St. #203",
+            "addressLocality": "Waipahu",
+            "addressRegion": "HI",
+            "postalCode": "96797",
+            "addressCountry": "US"
+        }
+    },
+    "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Oahu, Hawaii"
+    },
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Oahu Window AC Services & In-Stock Replacements",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "$0 Free In-Home Window AC Estimate & Clean-vs-Replace Assessment (By Appointment First)"
+                },
+                "price": "0.00",
+                "priceCurrency": "USD"
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "In-Stock LG Dual Inverter & GE 26-Inch Built-In Window ACs ($395–$1,200)"
+                },
+                "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": "395.00",
+                    "maxPrice": "1200.00",
+                    "priceCurrency": "USD"
+                }
+            }
+        ]
+    }
+};
+
 export default function VinylWindowAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
@@ -97,6 +156,10 @@ export default function VinylWindowAcLayout({ children }: { children: React.Reac
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(pass5RichSchema) }}
             />
             {children}
         </>

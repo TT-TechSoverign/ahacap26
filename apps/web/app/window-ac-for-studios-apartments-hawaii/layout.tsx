@@ -87,6 +87,128 @@ const breadcrumbSchema = {
     ]
 };
 
+const pass5RichSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "LG Dual Inverter 6,000 BTU Studio & Apartment Window AC (LW6023IVSM)",
+    "image": [
+        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp"
+    ],
+    "description": "Compact, HOA-friendly 115V studio and apartment window ACs ($395–$745) and 26-inch condo wall units in stock at our Waipahu, Oahu warehouse.",
+    "sku": "LW6023IVSM",
+    "mpn": "LW6023IVSM",
+    "gtin12": "048231606028",
+    "brand": {
+        "@type": "Brand",
+        "name": "LG"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+    },
+    "review": [
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "Kimo M. — Oahu Homeowner"
+            },
+            "datePublished": "2026-09-18",
+            "reviewBody": "Picked up our new LG Dual Inverter at the Waipahu warehouse. Ice-cold, whisper quiet at 44dB, and qualified for the $45 Hawaii Energy rebate.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        }
+    ],
+    "offers": {
+        "@type": "Offer",
+        "url": "https://www.affordablehome-ac.com/window-ac-for-studios-apartments-hawaii",
+        "priceCurrency": "USD",
+        "price": "560.00",
+        "priceValidUntil": "2027-12-31",
+        "validFrom": "2026-01-01",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+            "@type": "Organization",
+            "name": "Affordable Home A/C"
+        },
+        "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "US",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+            "name": "All Sales Final"
+        },
+        "shippingDetails": [
+            {
+                "@type": "OfferShippingDetails",
+                "name": "Waipahu Warehouse Pickup by Appt",
+                "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0.00",
+                    "currency": "USD"
+                },
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "HI",
+                    "postalCode": "96797"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 1,
+                        "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 0,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            {
+                "@type": "OfferShippingDetails",
+                "name": "Flat-Rate Oahu Delivery",
+                "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "50.00",
+                    "currency": "USD"
+                },
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "HI"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 1,
+                        "maxValue": 2,
+                        "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 1,
+                        "maxValue": 3,
+                        "unitCode": "DAY"
+                    }
+                }
+            }
+        ]
+    }
+};
+
 export default function StudioApartmentAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
@@ -97,6 +219,10 @@ export default function StudioApartmentAcLayout({ children }: { children: React.
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(pass5RichSchema) }}
             />
             {children}
         </>

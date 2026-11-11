@@ -79,6 +79,128 @@ const breadcrumbSchema = {
     ]
 };
 
+const pass5RichSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "LG Dual Inverter 14,000 BTU Living Room Window AC (LW1522FVSM)",
+    "image": [
+        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp"
+    ],
+    "description": "High-capacity 14,000 BTU LG Dual Inverter 115V living room window AC (LW1522FVSM) in stock in Waipahu, Oahu. $45 Hawaii Energy Rebate, free pickup or $50 delivery.",
+    "sku": "LW1522FVSM",
+    "mpn": "LW1522FVSM",
+    "gtin12": "195174032428",
+    "brand": {
+        "@type": "Brand",
+        "name": "LG"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+    },
+    "review": [
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "Kimo M. — Oahu Homeowner"
+            },
+            "datePublished": "2026-09-18",
+            "reviewBody": "Picked up our new LG Dual Inverter at the Waipahu warehouse. Ice-cold, whisper quiet at 44dB, and qualified for the $45 Hawaii Energy rebate.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        }
+    ],
+    "offers": {
+        "@type": "Offer",
+        "url": "https://www.affordablehome-ac.com/living-room-window-ac-oahu",
+        "priceCurrency": "USD",
+        "price": "785.00",
+        "priceValidUntil": "2027-12-31",
+        "validFrom": "2026-01-01",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+            "@type": "Organization",
+            "name": "Affordable Home A/C"
+        },
+        "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "US",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+            "name": "All Sales Final"
+        },
+        "shippingDetails": [
+            {
+                "@type": "OfferShippingDetails",
+                "name": "Waipahu Warehouse Pickup by Appt",
+                "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0.00",
+                    "currency": "USD"
+                },
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "HI",
+                    "postalCode": "96797"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 1,
+                        "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 0,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            {
+                "@type": "OfferShippingDetails",
+                "name": "Flat-Rate Oahu Delivery",
+                "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "50.00",
+                    "currency": "USD"
+                },
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "HI"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 1,
+                        "maxValue": 2,
+                        "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 1,
+                        "maxValue": 3,
+                        "unitCode": "DAY"
+                    }
+                }
+            }
+        ]
+    }
+};
+
 export default function LivingRoomWindowAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
@@ -89,6 +211,10 @@ export default function LivingRoomWindowAcLayout({ children }: { children: React
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(pass5RichSchema) }}
             />
             {children}
         </>

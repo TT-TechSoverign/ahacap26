@@ -94,18 +94,53 @@ export default function CleanVsReplacePage() {
         "@context": "https://schema.org",
         "@graph": [
             {
-                "@type": "HVACBusiness",
-                "name": "Affordable Home A/C",
-                "telephone": "+1-808-488-1111",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leoleo St. #203",
-                    "addressLocality": "Waipahu",
-                    "addressRegion": "HI",
-                    "postalCode": "96797",
-                    "addressCountry": "US"
+                "@type": "Service",
+                "@id": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac#service",
+                "name": "$0 Free Clean-vs-Replace Window AC Assessment & Replacement Oahu",
+                "serviceType": "Window AC Clean-vs-Replace Evaluation & Replacement",
+                "provider": {
+                    "@type": "HVACBusiness",
+                    "name": "Affordable Home A/C",
+                    "telephone": "+1-808-488-1111",
+                    "priceRange": "$395 - $1,200",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "94-150 Leoleo St. #203",
+                        "addressLocality": "Waipahu",
+                        "addressRegion": "HI",
+                        "postalCode": "96797",
+                        "addressCountry": "US"
+                    }
                 },
-                "areaServed": "Oahu, Hawaii"
+                "areaServed": "Oahu, Hawaii",
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Clean-vs-Replace Assessment & In-Stock LG/GE Window ACs",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "$0 Free In-Home Clean-vs-Replace Window AC Evaluation"
+                            },
+                            "price": "0.00",
+                            "priceCurrency": "USD"
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Product",
+                                "name": "In-Stock LG Dual Inverter & GE 26-Inch Built-In Window ACs ($395–$1,200)"
+                            },
+                            "priceSpecification": {
+                                "@type": "PriceSpecification",
+                                "minPrice": "395.00",
+                                "maxPrice": "1200.00",
+                                "priceCurrency": "USD"
+                            }
+                        }
+                    ]
+                }
             },
             {
                 "@type": "BreadcrumbList",

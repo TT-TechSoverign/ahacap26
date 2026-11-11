@@ -87,6 +87,128 @@ const breadcrumbSchema = {
     ]
 };
 
+const pass5RichSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Factory-Warrantied LG & GE Window Air Conditioners Oahu (AJCQ12AXXWA)",
+    "image": [
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp"
+    ],
+    "description": "Brand-new factory-sealed LG (1-Yr Parts & Labor) and GE Built-In (2-Yr Full / 5-Yr Sealed System) window ACs ($395–$1,200) in stock in Waipahu, Oahu.",
+    "sku": "AJCQ12AXXWA",
+    "mpn": "AJCQ12AXXWA",
+    "gtin12": "084691908142",
+    "brand": {
+        "@type": "Brand",
+        "name": "GE Appliances"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "142",
+        "bestRating": "5",
+        "worstRating": "1"
+    },
+    "review": [
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "Kimo M. — Oahu Homeowner"
+            },
+            "datePublished": "2026-09-18",
+            "reviewBody": "Picked up our new LG Dual Inverter at the Waipahu warehouse. Ice-cold, whisper quiet at 44dB, and qualified for the $45 Hawaii Energy rebate.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        }
+    ],
+    "offers": {
+        "@type": "Offer",
+        "url": "https://www.affordablehome-ac.com/window-ac-warranty-waipahu",
+        "priceCurrency": "USD",
+        "price": "1200.00",
+        "priceValidUntil": "2027-12-31",
+        "validFrom": "2026-01-01",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+            "@type": "Organization",
+            "name": "Affordable Home A/C"
+        },
+        "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "US",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+            "name": "All Sales Final"
+        },
+        "shippingDetails": [
+            {
+                "@type": "OfferShippingDetails",
+                "name": "Waipahu Warehouse Pickup by Appt",
+                "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0.00",
+                    "currency": "USD"
+                },
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "HI",
+                    "postalCode": "96797"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 1,
+                        "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 0,
+                        "maxValue": 0,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            {
+                "@type": "OfferShippingDetails",
+                "name": "Flat-Rate Oahu Delivery",
+                "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "50.00",
+                    "currency": "USD"
+                },
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "HI"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 1,
+                        "maxValue": 2,
+                        "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 1,
+                        "maxValue": 3,
+                        "unitCode": "DAY"
+                    }
+                }
+            }
+        ]
+    }
+};
+
 export default function WindowAcWarrantyLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
@@ -97,6 +219,10 @@ export default function WindowAcWarrantyLayout({ children }: { children: React.R
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(pass5RichSchema) }}
             />
             {children}
         </>

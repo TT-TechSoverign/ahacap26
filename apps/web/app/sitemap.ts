@@ -148,18 +148,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...highYieldRoutes,
         ...cityRoutes
     ].map((route) => {
-        const changeFrequency: 'weekly' | 'monthly' | 'yearly' =
-            (route === '' || route === '/shop')
+        const changeFrequency: 'weekly' | 'monthly' =
+            (route === '' || route === '/shop' || route === '/reviews' || route.startsWith('/shop/') || coreServiceHubs.has(route))
                 ? 'weekly'
-                : coreServiceHubs.has(route)
-                    ? 'monthly'
-                    : 'yearly';
+                : 'monthly';
 
         return {
             url: `${baseUrl}${route}`,
             lastModified: STATIC_LAST_MODIFIED,
             changeFrequency,
-            priority: route === '' ? 1.0 : (highYieldRoutes.includes(route) ? 0.9 : (route.startsWith('/service-areas/') ? 0.7 : 0.8)),
+            priority: route === '' ? 1.0 : (highYieldRoutes.includes(route) ? 0.9 : (route.startsWith('/service-areas/') ? 0.8 : 0.85)),
         };
     });
 
@@ -195,7 +193,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
         url: `${baseUrl}/shop/${generateProductSlug(product.id, product.name)}`,
         lastModified: STATIC_LAST_MODIFIED,
-        changeFrequency: 'monthly' as const,
+        changeFrequency: 'weekly' as const,
         priority: 0.95,
     }));
 

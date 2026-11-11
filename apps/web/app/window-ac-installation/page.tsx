@@ -175,7 +175,35 @@ export default function WindowAcInstallationPage() {
                     }
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Insured Oahu cooling specialists providing professional window AC installation, custom jalousie acrylic baffle retrofits, cantilever exterior support brackets, and 26-inch wall sleeve installations ($0 Free In-Home Estimate) across Honolulu, Waipahu, and all Oahu."
+                "description": "Insured Oahu cooling specialists providing professional window AC installation, custom jalousie acrylic baffle retrofits, cantilever exterior support brackets, and 26-inch wall sleeve installations ($0 Free In-Home Estimate) across Honolulu, Waipahu, and all Oahu.",
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Oahu Window AC Installation & In-Stock Replacements",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "$0 Free In-Home Window AC Installation & Fit Estimate (By Appointment First)"
+                            },
+                            "price": "0.00",
+                            "priceCurrency": "USD"
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Product",
+                                "name": "In-Stock LG Dual Inverter & GE 26-Inch Built-In Window ACs ($395–$1,200)"
+                            },
+                            "priceSpecification": {
+                                "@type": "PriceSpecification",
+                                "minPrice": "395.00",
+                                "maxPrice": "1200.00",
+                                "priceCurrency": "USD"
+                            }
+                        }
+                    ]
+                }
             },
             {
                 "@type": "BreadcrumbList",

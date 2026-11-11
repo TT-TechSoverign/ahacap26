@@ -148,7 +148,35 @@ export default function AcRepairOahuPage() {
                     }
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "Local Oahu cooling specialists providing diagnostic troubleshooting, repair, and replacement for window and through-the-wall air conditioners ($0 Free Clean-vs-Replace Assessment) across Honolulu, Waipahu, and all Oahu."
+                "description": "Local Oahu cooling specialists providing diagnostic troubleshooting, repair, and replacement for window and through-the-wall air conditioners ($0 Free Clean-vs-Replace Assessment) across Honolulu, Waipahu, and all Oahu.",
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Oahu Window AC Repair, Diagnostics & In-Stock Replacements",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "$0 Free Clean-vs-Replace Window AC Diagnostic Estimate (By Appointment First)"
+                            },
+                            "price": "0.00",
+                            "priceCurrency": "USD"
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Product",
+                                "name": "In-Stock LG Dual Inverter & GE 26-Inch Built-In Replacement Window ACs ($395–$1,200)"
+                            },
+                            "priceSpecification": {
+                                "@type": "PriceSpecification",
+                                "minPrice": "395.00",
+                                "maxPrice": "1200.00",
+                                "priceCurrency": "USD"
+                            }
+                        }
+                    ]
+                }
             },
             {
                 "@type": "BreadcrumbList",

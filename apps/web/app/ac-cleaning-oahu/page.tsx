@@ -143,6 +143,34 @@ export default function AcCleaningOahuPage() {
                     "@type": "ReserveAction",
                     "name": "Schedule Oahu Window AC Cleaning or $0 Clean-vs-Replace Assessment",
                     "target": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
+                },
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Oahu Window AC Cleaning & Clean-vs-Replace Services",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "$0 Free In-Home Window AC Clean-vs-Replace Assessment (By Appointment First)"
+                            },
+                            "price": "0.00",
+                            "priceCurrency": "USD"
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Product",
+                                "name": "In-Stock LG Dual Inverter & GE 26-Inch Built-In Replacement Window ACs ($395–$1,200)"
+                            },
+                            "priceSpecification": {
+                                "@type": "PriceSpecification",
+                                "minPrice": "395.00",
+                                "maxPrice": "1200.00",
+                                "priceCurrency": "USD"
+                            }
+                        }
+                    ]
                 }
             },
             {

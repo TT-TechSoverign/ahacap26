@@ -231,7 +231,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                             <span className="text-xl font-header font-black text-white">${activePrice.toLocaleString()}</span>
                                             <span className="text-[10px] text-slate-400 ml-1">Waipahu Direct</span>
                                         </div>
-                                        {unit.subcategory === 'dual_inverter' && (
+                                        {(unit.subcategory === 'dual_inverter' || unit.id === 15) && (
                                             <span className="text-[10px] font-mono text-emerald-400 font-bold flex items-center gap-0.5">
                                                 <Sparkles className="size-2.5" /> -$45 Rebate
                                             </span>
@@ -272,6 +272,37 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                             </div>
                         );
                     })}
+                </div>
+
+                {/* Crawlable Direct Model Catalog Strip (Passes SSR PageRank & Direct Anchor Text to All In-Stock Models) */}
+                <div className="pt-4 border-t border-white/10 space-y-2">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
+                        Direct In-Stock Waipahu Model Links (Order Online or Pickup at 94-150 Leoleo St #203):
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                        {inStockAcProducts.map((model) => {
+                            const modelSlug = generateProductSlug(model.id, model.name);
+                            const shortCode = model.key_spec || model.name.match(/\(([^)]+)\)/)?.[1] || `ID-${model.id}`;
+                            const btuText = model.btu ? `${(model.btu / 1000).toFixed(model.btu % 1000 === 0 ? 0 : 1)}k BTU` : '26" Fit';
+                            return (
+                                <Link
+                                    key={model.id}
+                                    href={`/shop/${modelSlug}`}
+                                    prefetch={false}
+                                    className="px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
+                                >
+                                    {model.name.startsWith('GE') ? 'GE' : 'LG'} {btuText} ({shortCode}) • ${model.price.toLocaleString()}
+                                </Link>
+                            );
+                        })}
+                        <Link
+                            href="/shop/16-ge-rab26a-wall-casement"
+                            prefetch={false}
+                            className="px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
+                        >
+                            GE RAB26A 26&quot; Wall Sleeve • $275
+                        </Link>
+                    </div>
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/10 text-xs text-slate-400 font-mono">

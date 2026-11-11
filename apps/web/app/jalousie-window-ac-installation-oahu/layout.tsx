@@ -80,8 +80,36 @@ const hvacServiceSchema = {
             "addressCountry": "US"
         }
     },
-    "areaServed": "Oahu",
-    "description": "Specialized LG & GE window air conditioner installation in Hawaiian jalousie louver windows, custom acrylic fabrication, and exterior security mounting across Oahu."
+    "areaServed": "Oahu, Hawaii",
+    "description": "Specialized LG & GE window air conditioner installation in Hawaiian jalousie louver windows, custom acrylic fabrication, and exterior security mounting across Oahu.",
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Jalousie Window AC Installation & In-Stock Units",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "$0 Free In-Home Jalousie Window AC Installation Estimate (By Appointment First)"
+                },
+                "price": "0.00",
+                "priceCurrency": "USD"
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "In-Stock LG Dual Inverter & GE Window ACs ($395–$1,200)"
+                },
+                "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": "395.00",
+                    "maxPrice": "1200.00",
+                    "priceCurrency": "USD"
+                }
+            }
+        ]
+    }
 };
 
 const breadcrumbSchema = {

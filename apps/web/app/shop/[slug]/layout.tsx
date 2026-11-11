@@ -120,12 +120,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             : 'Ultra-quiet energy saver.';
 
         description = `${stockStatusDesc} LG ${btuStr} BTU Dual Inverter Window AC (${modelCode}) — $${priceText}${discountText}. Free Waipahu pickup / $50 Oahu delivery • (808) 488-1111. ${techBenefit}`;
-    } else if (product.name.toLowerCase().includes('ge ') || product.id >= 12) {
+    } else if (product.subcategory === 'universal_fit' || (product.id >= 8 && product.id <= 10)) {
+        const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(' BTU', '') : '';
+        const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
+        title = isOutOfStock
+            ? `LG ${btuStr} BTU Cool + Heat Wall/Window AC (${modelCode}) — $${priceText} | In-Stock Oahu Alt Ready`
+            : `LG ${btuStr} BTU Cool + Heat Wall/Window AC (${modelCode}) — $${priceText} In-Stock Oahu | Waipahu`;
+        description = `${stockStatusDesc} LG ${btuStr} BTU Universal Fit Cool + Heat Window & Wall AC (${modelCode}) — $${priceText}. Fits windows or 26" sleeves • Waipahu pickup / $50 delivery • (808) 488-1111.`;
+    } else if (product.subcategory === 'base' || product.id === 11 || product.id === 12) {
+        const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(' BTU', '') : '';
+        const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
+        title = `LG ${btuStr} BTU Window AC (${modelCode}) — $${priceText} In-Stock Oahu | Waipahu Pickup`;
+        description = `${stockStatusDesc} LG ${btuStr} BTU Standard Window AC (${modelCode}) — $${priceText}. Gold Fin salt-air shield, 115V plug • Free Waipahu pickup or $50 Oahu delivery • (808) 488-1111.`;
+    } else if (product.name.toLowerCase().includes('ge ') || product.id >= 13) {
         const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(' BTU', '') : '';
         const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
         if (product.id === 16) {
             title = `GE RAB26A 26" Through-the-Wall AC Metal Sleeve — $${priceText} In-Stock Oahu | Waipahu`;
             description = `${stockStatusDesc} GE RAB26A 26" Wall Sleeve ($${priceText}) for Honolulu condos & built-in wall ACs. Free Waipahu pickup or $50 Oahu delivery • (808) 488-1111.`;
+        } else if (product.id === 15) {
+            title = `GE 12k BTU R-32 Inverter 26" Wall AC (${modelCode}) — $${priceText} In-Stock Oahu | $45 Rebate`;
+            description = `${stockStatusDesc} GE 12,000 BTU 26" Built-In R-32 Inverter Wall AC (${modelCode}) — $${priceText} + $45 Rebate. 115V plug, Waipahu pickup or $50 delivery • (808) 488-1111.`;
         } else {
             title = isOutOfStock
                 ? `GE ${btuStr} BTU 26" Built-In Wall AC (${modelCode}) — $${priceText} | In-Stock Oahu Alt Ready`
@@ -284,6 +299,38 @@ export default async function ProductLayout({ params, children }: Props) {
                 "@type": "PropertyValue",
                 "name": "Performance Benefits",
                 "value": specs.benefits
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Voltage & Electrical Circuit",
+                "value": product.voltage || '115V / 15 Amp'
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Sound Level (Low / High)",
+                "value": product.noise_level || '44 / 58 dB'
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Dehumidification Moisture Removal",
+                "value": product.dehumidification || '3.8 Pts/Hr'
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Hawaii Energy Rebate Eligibility",
+                "value": (product.subcategory === 'dual_inverter' || product.id === 15)
+                    ? '$45 Instant Hawaii Energy Cash Rebate Eligible'
+                    : 'Standard High-Efficiency Unit'
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Unit Dimensions",
+                "value": product.dimensions || 'Standard Window Fit'
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Manufacturer Warranty",
+                "value": product.warranty || '1-YR PARTS & LABOR'
             }
         ],
         "aggregateRating": {
