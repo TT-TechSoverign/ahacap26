@@ -64,15 +64,15 @@ export function generateMetadata({ params }: Props): Metadata {
     
     if (!cityData) return { title: 'Service Area Not Found' };
  
-    const title = `${cityData.name} Window ACs ($395+), Install & Clean | $0 Est • (808) 488-1111`;
+    const title = `${cityData.name} Window ACs ($395+), Install, Clean & Repair | $0 Estimate`;
     
     let description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), custom jalousie install, cleaning & repair.`;
     if (cityData.regionId === 'windward') {
-        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), jalousie install, coil cleaning & salt-air repair.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), jalousie install, coil cleaning & repair.`;
     } else if (cityData.regionId === 'leeward') {
-        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock Waipahu LG & GE Window ACs ($395–$1,200, $45 Rebate), window install, deep cleaning & repair.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock Waipahu LG & GE Window ACs ($395–$1,200, $45 Rebate), window install, cleaning & repair.`;
     } else if (cityData.regionId === 'metro') {
-        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window & 26" Wall ACs ($395–$1,200, $45 Rebate), condo/jalousie install & cleaning.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window & 26" Wall ACs ($395–$1,200), condo/jalousie install, cleaning & repair.`;
     } else {
         description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), custom jalousie install, cleaning & repair.`;
     }
@@ -134,6 +134,20 @@ export default function LocalServiceAreaPage({ params }: Props) {
         notFound();
     }
 
+    const neighborhoodSubAreas: Record<string, string> = {
+        'honolulu': 'Waikiki, Ala Moana, Kakaako, Ward Village, Downtown, Makiki, Nuuanu & Palolo',
+        'pearl-city': 'Momilani, Manana, Pearl City Peninsula, Palisades, Waiau & Pearl Highlands',
+        'waipahu': 'Waipahu Town, Royal Kunia, Village Park, Waikele & West Loch',
+        'kapolei': 'Makakilo, Ko Olina, Mehana, Kapolei Knolls & Hoopili',
+        'ewa-beach': 'Ocean Pointe, Hoakalei, Ewa Gentry, Iroquois Point & Westgate',
+        'aiea': 'Aiea Heights, Halawa, Pearlridge, Newtown & Royal Summit',
+        'mililani': 'Mililani Town, Mililani Mauka, Waipio Acres & Wahiawa Heights',
+        'kailua': 'Lanikai, Enchanted Lake, Aikahi, Maunawili & Keolu Hills',
+        'kaneohe': 'Ahuimanu, Temple Valley, Haiku Plantations, Yacht Club & Kahaluu',
+        'hawaii-kai': 'Portlock, Kalama Valley, Hahaione, Mariner’s Ridge & Kuliouou',
+    };
+    const subAreaText = neighborhoodSubAreas[cityData.slug];
+
     return (
         <main className="min-h-screen bg-slate-950 flex flex-col">
             
@@ -142,7 +156,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/assets/hero-cards/ahac-hero-background-2.webp"
-                        alt={`Window AC Services in ${cityData.name}`}
+                        alt={`LG & GE Window AC Sales, Installation, Cleaning & Repair in ${cityData.name}, Oahu`}
                         fill
                         sizes="100vw"
                         className="object-cover object-center opacity-60 scale-105"
@@ -156,17 +170,17 @@ export default function LocalServiceAreaPage({ params }: Props) {
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30">
                         <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
                         <span className="text-xs font-bold uppercase tracking-widest text-cyan-300">
-                            Now Servicing {cityData.regionTitle} • $0 Free In-Home Estimate
+                            Now Servicing {cityData.regionTitle} • $0 Free In-Home Estimate • (808) 488-1111
                         </span>
                     </div>
                     
                     <h1 className="font-header font-black text-4xl sm:text-5xl md:text-6xl text-white uppercase tracking-tighter drop-shadow-2xl leading-[1.1]">
                         LG &amp; GE Window AC Sales, <br className="hidden md:block"/>
-                        Installation &amp; Cleaning in <span className="text-cyan-400 drop-shadow-[0_0_20px_rgba(34,211,238,0.5)]">{cityData.name}</span>
+                        Installation, Cleaning &amp; Repair in <span className="text-cyan-400 drop-shadow-[0_0_20px_rgba(34,211,238,0.5)]">{cityData.name}</span>
                     </h1>
                     
                     <p className="font-sans text-lg md:text-xl text-slate-300 font-medium max-w-2xl leading-relaxed">
-                        From whisper-quiet LG Dual Inverter window units to GE Built-In through-the-wall systems and deep cleaning, we deliver cooling solutions engineered for {cityData.name}&apos;s humidity and coastal air.
+                        From whisper-quiet LG Dual Inverter window units ($395–$1,200) to GE 26&quot; Built-In wall ACs, custom jalousie installation, deep coil cleaning, and window AC repair/diagnostics, we serve homeowners across {cityData.name}{subAreaText ? ` (${subAreaText})` : ''}.
                     </p>
                 </div>
             </section>
@@ -369,7 +383,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         ],
                         "hasOfferCatalog": {
                             "@type": "OfferCatalog",
-                            "name": `Window AC Sales, Installation & Cleaning in ${cityData.name}`,
+                            "name": `Window AC Sales, Installation, Cleaning & Repair in ${cityData.name}`,
                             "itemListElement": [
                                 {
                                     "@type": "Service",
@@ -388,6 +402,12 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                     "name": `Window AC Deep Cleaning & Sanitization in ${cityData.name}`,
                                     "description": `On-site evaporator/condenser coil wash, antimicrobial pan treatment, and condensate drain clearing in ${cityData.name}.`,
                                     "url": "https://www.affordablehome-ac.com/ac-cleaning-oahu"
+                                },
+                                {
+                                    "@type": "Service",
+                                    "name": `Window AC Repair & Clean-vs-Replace Diagnostics in ${cityData.name} ($0 Free Estimate)`,
+                                    "description": `By-appointment window air conditioner troubleshooting, warm-air/drain/ice repair, and honest clean-vs-replace assessments in ${cityData.name}.`,
+                                    "url": "https://www.affordablehome-ac.com/ac-repair-oahu"
                                 }
                             ]
                         }

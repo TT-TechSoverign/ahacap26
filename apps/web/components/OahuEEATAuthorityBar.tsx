@@ -19,7 +19,7 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
             "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
         ],
         "datePublished": "2026-01-15",
-        "dateModified": "2026-11-10",
+        "dateModified": "2026-11-11",
         "inLanguage": "en-US",
         "author": {
             "@type": "Organization",

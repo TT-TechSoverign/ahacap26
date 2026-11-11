@@ -190,6 +190,7 @@ export default async function SitemapPage() {
                         <a href="#core-services" className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-primary/15 border border-white/10 text-cyan-400 transition-colors">Core Hubs</a>
                         <a href="#in-stock-models" className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-primary/15 border border-white/10 text-cyan-400 transition-colors">16 LG &amp; GE Models</a>
                         <a href="#city-areas" className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-primary/15 border border-white/10 text-cyan-400 transition-colors">22 Oahu Cities</a>
+                        <a href="#sitemap-faqs" className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-primary/15 border border-white/10 text-cyan-400 transition-colors">Directory FAQs</a>
                     </nav>
                 </div>
 
@@ -419,8 +420,76 @@ export default async function SitemapPage() {
                         </div>
                     </div>
 
+                    {/* Directory FAQ Accordion for 108/108 FAQPage Parity */}
+                    <section id="sitemap-faqs" className="scroll-mt-28 md:scroll-mt-48 mt-16 p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-5">
+                        <h2 className="text-xl font-header font-black uppercase tracking-wider text-white">
+                            Affordable Home A/C Directory — Frequently Asked Questions
+                        </h2>
+                        <div className="space-y-4 text-sm text-slate-300">
+                            <details open className="p-4 rounded-2xl bg-slate-950/70 border border-white/10">
+                                <summary className="font-header font-bold text-white cursor-pointer">
+                                    Where do I order an in-stock LG Dual Inverter or GE 26-inch Built-In Window AC on Oahu?
+                                </summary>
+                                <p className="mt-2 text-slate-300 leading-relaxed">
+                                    Visit our live <Link href="/shop" className="text-cyan-400 hover:underline">/shop</Link> catalog to order any of our 16 LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In Through-the-Wall air conditioners ($395 to $1,200) for Free Waipahu Warehouse Pickup by appointment (94-150 Leoleo St. #203, Waipahu, HI 96797) or $50 flat-rate Oahu delivery.
+                                </p>
+                            </details>
+                            <details className="p-4 rounded-2xl bg-slate-950/70 border border-white/10">
+                                <summary className="font-header font-bold text-white cursor-pointer">
+                                    How do I book a $0 Free In-Home Estimate for Window AC installation, cleaning, or repair?
+                                </summary>
+                                <p className="mt-2 text-slate-300 leading-relaxed">
+                                    Affordable Home A/C operates strictly By Appointment First with $0 upfront booking fees. Request service online via <Link href="/window-ac-installation" className="text-cyan-400 hover:underline">/window-ac-installation</Link>, <Link href="/ac-cleaning-oahu" className="text-cyan-400 hover:underline">/ac-cleaning-oahu</Link>, or <Link href="/ac-repair-oahu" className="text-cyan-400 hover:underline">/ac-repair-oahu</Link>, or call Waipahu dispatch at (808) 488-1111.
+                                </p>
+                            </details>
+                            <details className="p-4 rounded-2xl bg-slate-950/70 border border-white/10">
+                                <summary className="font-header font-bold text-white cursor-pointer">
+                                    Which Oahu neighborhoods and condo buildings do you serve?
+                                </summary>
+                                <p className="mt-2 text-slate-300 leading-relaxed">
+                                    Our insured Oahu cooling specialists serve all 22 Oahu service areas—including Honolulu, Waikiki, Pearl City, Waipahu, Kapolei, Ewa Beach, Aiea, Mililani, Kailua, Kaneohe, and Hawaii Kai—with floor drop-cloth protection and custom jalousie or 26-inch condo wall sleeve fitting.
+                                </p>
+                            </details>
+                        </div>
+                    </section>
+
                     <OahuEEATAuthorityBar topicTitle="Complete 108-Page Oahu LG & GE Window AC Sales, Installation & Cleaning Directory" />
                 </main>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "FAQPage",
+                            "mainEntity": [
+                                {
+                                    "@type": "Question",
+                                    "name": "Where do I order an in-stock LG Dual Inverter or GE 26-inch Built-In Window AC on Oahu?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Visit https://www.affordablehome-ac.com/shop to order any of our 16 LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In Through-the-Wall air conditioners ($395 to $1,200) for Free Waipahu Warehouse Pickup by appointment (94-150 Leoleo St. #203, Waipahu, HI 96797) or $50 flat-rate Oahu delivery."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "How do I book a $0 Free In-Home Estimate for Window AC installation, cleaning, or repair?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Affordable Home A/C operates strictly By Appointment First with $0 upfront booking fees. Request service online via /window-ac-installation, /ac-cleaning-oahu, or /ac-repair-oahu, or call Waipahu dispatch at (808) 488-1111."
+                                    }
+                                },
+                                {
+                                    "@type": "Question",
+                                    "name": "Which Oahu neighborhoods and condo buildings do you serve?",
+                                    "acceptedAnswer": {
+                                        "@type": "Answer",
+                                        "text": "Our insured Oahu cooling specialists serve all 22 Oahu service areas—including Honolulu, Waikiki, Pearl City, Waipahu, Kapolei, Ewa Beach, Aiea, Mililani, Kailua, Kaneohe, and Hawaii Kai—with floor drop-cloth protection and custom jalousie or 26-inch condo wall sleeve fitting."
+                                    }
+                                }
+                            ]
+                        })
+                    }}
+                />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{

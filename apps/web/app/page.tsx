@@ -73,11 +73,22 @@ export default function Homepage() {
                                     "@id": "https://www.affordablehome-ac.com/#website",
                                     "url": "https://www.affordablehome-ac.com",
                                     "name": "Affordable Home A/C",
-                                    "description": "In-stock LG Dual Inverter & GE Window ACs ($395–$1,200), custom jalousie window AC installation, and window AC deep cleaning across Oahu, Hawaii.",
+                                    "alternateName": [
+                                        "Affordable Home AC",
+                                        "Affordable Home Air Conditioning",
+                                        "affordablehome-ac.com"
+                                    ],
+                                    "description": "In-stock LG Dual Inverter & GE Window ACs ($395–$1,200), custom jalousie window AC installation, deep cleaning, and repair across Oahu, Hawaii.",
                                     "publisher": {
                                         "@type": "Organization",
                                         "name": "Affordable Home A/C",
-                                        "url": "https://www.affordablehome-ac.com"
+                                        "url": "https://www.affordablehome-ac.com",
+                                        "logo": {
+                                            "@type": "ImageObject",
+                                            "url": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
+                                            "width": 500,
+                                            "height": 500
+                                        }
                                     },
                                     "potentialAction": {
                                         "@type": "SearchAction",

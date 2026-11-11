@@ -186,6 +186,29 @@ export function middleware(request: NextRequest) {
         '/gallery': '/reviews',
         '/hometest': '/',
         '/embed': '/',
+        // Oahu Sub-Neighborhood & Regional Alias 301 Redirects to Canonical City Pages
+        '/service-areas/waikiki': '/service-areas/honolulu',
+        '/service-areas/ala-moana': '/service-areas/honolulu',
+        '/service-areas/kakaako': '/service-areas/honolulu',
+        '/service-areas/makiki': '/service-areas/honolulu',
+        '/service-areas/downtown-honolulu': '/service-areas/honolulu',
+        '/service-areas/makakilo': '/service-areas/kapolei',
+        '/service-areas/ko-olina': '/service-areas/kapolei',
+        '/service-areas/hoopili': '/service-areas/kapolei',
+        '/service-areas/royal-kunia': '/service-areas/waipahu',
+        '/service-areas/kunia': '/service-areas/waipahu',
+        '/service-areas/wahiawa': '/service-areas/mililani',
+        '/service-areas/schofield': '/service-areas/mililani',
+        '/service-areas/pearl-harbor': '/service-areas/pearl-city',
+        '/service-areas/hickam': '/service-areas/salt-lake',
+        '/service-areas/waianae': '/service-areas/kapolei',
+        '/service-areas/nanakuli': '/service-areas/kapolei',
+        '/service-areas/maili': '/service-areas/kapolei',
+        '/service-areas/haleiwa': '/service-areas/mililani',
+        '/service-areas/waialua': '/service-areas/mililani',
+        '/service-areas/waimanalo': '/service-areas/kailua',
+        '/service-areas/hauula': '/service-areas/kaneohe',
+        '/service-areas/laie': '/service-areas/kaneohe',
     };
     if (CONSOLIDATED_REDIRECTS[pathLower]) {
         return makePermanentRedirect(CONSOLIDATED_REDIRECTS[pathLower]);
@@ -428,6 +451,6 @@ export const config = {
          * - _next/image (image optimization files)
          * - favicon.ico, sitemap.xml, robots.txt (static files)
          */
-        '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+        '/((?!api|_next/static|_next/image|favicon\\.ico|favicon-48x48\\.png|favicon-96x96\\.png|icon\\.png|icon-192\\.png|icon-512\\.png|apple-touch-icon\\.png|manifest\\.json|sitemap\\.xml|robots\\.txt).*)',
     ],
 };

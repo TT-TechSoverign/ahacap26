@@ -7,6 +7,7 @@ import { useParams } from 'next/navigation';
 import { useCart } from '../../../context/CartContext';
 import { getProductImages } from '@/lib/product-images';
 import { getProductSpecs } from '@/lib/product-specs';
+import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 import { Product } from '@/types/inventory';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { EditableText } from '@/components/EditableText';
@@ -517,7 +518,7 @@ export default function ProductDetailPage() {
                                 <div className="relative w-full h-full z-10">
                                     <Image
                                         src={selectedImage}
-                                        alt={product.name}
+                                        alt={`${product.name}${PRODUCT_IDENTIFIERS[product.id]?.mpn && !product.name.toUpperCase().includes(PRODUCT_IDENTIFIERS[product.id].mpn.toUpperCase()) ? ` (${PRODUCT_IDENTIFIERS[product.id].mpn})` : ''} — In-Stock Waipahu, Oahu`}
                                         fill
                                         className="object-contain drop-shadow-[0_50px_100px_rgba(0,0,0,0.8)] transition-all duration-1000 group-hover:scale-105"
                                         priority
@@ -568,7 +569,13 @@ export default function ProductDetailPage() {
                                             selectedImage === img ? "border-primary ring-2 ring-primary/20 shadow-lg shadow-primary/20" : "border-white/10 hover:border-white/30 grayscale hover:grayscale-0"
                                         )}
                                     >
-                                        <Image src={img} alt="Thumbnail" fill className="object-cover" unoptimized />
+                                        <Image
+                                            src={img}
+                                            alt={`${product.name}${PRODUCT_IDENTIFIERS[product.id]?.mpn && !product.name.toUpperCase().includes(PRODUCT_IDENTIFIERS[product.id].mpn.toUpperCase()) ? ` (${PRODUCT_IDENTIFIERS[product.id].mpn})` : ''} — View ${idx + 1} (Waipahu Oahu Warehouse)`}
+                                            fill
+                                            className="object-cover"
+                                            unoptimized
+                                        />
                                     </button>
                                 ))}
                             </div>
@@ -588,7 +595,9 @@ export default function ProductDetailPage() {
                             <StockBadge stock={product.stock} />
 
                             <h1 className="text-2xl md:text-3xl lg:text-4xl font-header font-black uppercase leading-[0.95] tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                                {product.name}
+                                {PRODUCT_IDENTIFIERS[product.id]?.mpn && !product.name.toUpperCase().includes(PRODUCT_IDENTIFIERS[product.id].mpn.toUpperCase())
+                                    ? `${product.name} (${PRODUCT_IDENTIFIERS[product.id].mpn})`
+                                    : product.name}
                             </h1>
 
                             <div className="flex items-baseline gap-3 pt-1 justify-center md:justify-start">

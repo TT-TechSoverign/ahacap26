@@ -274,8 +274,7 @@ export default async function ProductLayout({ params, children }: Props) {
         ...(gtin12 ? { "gtin12": gtin12 } : {}),
         "brand": {
             "@type": "Brand",
-            "name": brandName,
-            "logo": `${domain}/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png`
+            "name": brandName
         },
         "additionalProperty": [
             {
@@ -403,7 +402,9 @@ export default async function ProductLayout({ params, children }: Props) {
             "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
             "seller": {
                 "@type": "Organization",
-                "name": "Affordable Home A/C"
+                "name": "Affordable Home A/C",
+                "url": domain,
+                "logo": `${domain}/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png`
             },
             // Resolves GSC "Missing hasMerchantReturnPolicy" warning
             "hasMerchantReturnPolicy": {

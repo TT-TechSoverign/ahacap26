@@ -203,8 +203,9 @@ export default function AcRepairOahuPage() {
                         {
                             "@type": "Offer",
                             "itemOffered": {
-                                "@type": "Product",
-                                "name": "In-Stock LG Dual Inverter & GE 26-Inch Built-In Replacement Window ACs ($395–$1,200)"
+                                "@type": "Service",
+                                "name": "Waipahu Warehouse Direct LG & GE Window AC Replacement Supply ($395–$1,200)",
+                                "description": "Factory-sealed LG Dual Inverter & GE 26-inch Built-In Window ACs in stock in Waipahu for free pickup by appointment, $50 Oahu delivery, or custom installation."
                             },
                             "priceSpecification": {
                                 "@type": "PriceSpecification",
