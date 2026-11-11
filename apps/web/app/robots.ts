@@ -54,7 +54,7 @@ export default function robots(): MetadataRoute.Robots {
         rules: [
             {
                 userAgent: '*',
-                allow: ['/', '/llms.txt', '/api/google-feed', '/merchant-feed.xml', '/api/google-reviews-feed', '/product-reviews-feed.xml'],
+                allow: ['/', '/llms.txt', '/api/sitemap-xml', '/api/google-feed', '/merchant-feed.xml', '/api/google-reviews-feed', '/product-reviews-feed.xml'],
                 disallow: sharedDisallows,
             },
             {
@@ -70,7 +70,7 @@ export default function robots(): MetadataRoute.Robots {
                     'FacebookBot',
                     'meta-externalagent'
                 ],
-                allow: ['/', '/llms.txt', '/api/google-feed', '/merchant-feed.xml', '/api/google-reviews-feed', '/product-reviews-feed.xml'],
+                allow: ['/', '/llms.txt', '/api/sitemap-xml', '/api/google-feed', '/merchant-feed.xml', '/api/google-reviews-feed', '/product-reviews-feed.xml'],
                 disallow: sharedDisallows,
             },
             {

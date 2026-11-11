@@ -81,24 +81,32 @@ const nextConfig = {
     async rewrites() {
         const apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
         console.log(`[Next.js Rewrites] Proxying to ${apiUrl}`);
-        return [
-            {
-                source: '/api/v1/:path*',
-                destination: `${apiUrl}/api/v1/:path*`,
-            },
-            {
-                source: '/api/webhooks/stripe',
-                destination: `${apiUrl}/api/webhooks/stripe`,
-            },
-            {
-                source: '/merchant-feed.xml',
-                destination: '/api/google-feed',
-            },
-            {
-                source: '/product-reviews-feed.xml',
-                destination: '/api/google-reviews-feed',
-            },
-        ];
+        return {
+            beforeFiles: [
+                {
+                    source: '/sitemap.xml',
+                    destination: '/api/sitemap-xml',
+                },
+            ],
+            afterFiles: [
+                {
+                    source: '/api/v1/:path*',
+                    destination: `${apiUrl}/api/v1/:path*`,
+                },
+                {
+                    source: '/api/webhooks/stripe',
+                    destination: `${apiUrl}/api/webhooks/stripe`,
+                },
+                {
+                    source: '/merchant-feed.xml',
+                    destination: '/api/google-feed',
+                },
+                {
+                    source: '/product-reviews-feed.xml',
+                    destination: '/api/google-reviews-feed',
+                },
+            ],
+        };
     },
     async redirects() {
         return [
