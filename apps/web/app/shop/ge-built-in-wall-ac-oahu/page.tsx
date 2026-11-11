@@ -246,10 +246,14 @@ export default function GeBuiltInWallAcGuidePage() {
             },
             {
                 '@type': 'Product',
+                color: 'White',
+                category: 'Window Air Conditioners',
                 name: 'GE 26" Built-In Through-the-Wall Air Conditioner Series (AJCQ08AWJ / AJCQ10AWJ / AJCQ12AXXWA)',
                 image: [
                     'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp',
-                    'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A.webp'
+                    'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.webp',
+                    'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A.webp',
+                    'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_15_fit_cutaway.webp',
                 ],
                 description: 'In-stock GE 26-inch True Built-In Through-the-Wall Air Conditioners (8,000–12,000 BTU) and RAB26A wall sleeves in Waipahu, Oahu for Honolulu condos and townhouses.',
                 brand: { '@type': 'Brand', name: 'GE Appliances' },
@@ -284,6 +288,7 @@ export default function GeBuiltInWallAcGuidePage() {
                         priceValidUntil: '2027-12-31',
                         availability: 'https://schema.org/InStock',
                         itemCondition: 'https://schema.org/NewCondition',
+                        seller: { '@type': 'Organization', name: 'Affordable Home A/C', url: 'https://www.affordablehome-ac.com' },
                         hasMerchantReturnPolicy: {
                             '@type': 'MerchantReturnPolicy',
                             applicableCountry: 'US',
@@ -312,6 +317,7 @@ export default function GeBuiltInWallAcGuidePage() {
                         priceValidUntil: '2027-12-31',
                         availability: 'https://schema.org/InStock',
                         itemCondition: 'https://schema.org/NewCondition',
+                        seller: { '@type': 'Organization', name: 'Affordable Home A/C', url: 'https://www.affordablehome-ac.com' },
                         hasMerchantReturnPolicy: {
                             '@type': 'MerchantReturnPolicy',
                             applicableCountry: 'US',
@@ -340,6 +346,7 @@ export default function GeBuiltInWallAcGuidePage() {
                         priceValidUntil: '2027-12-31',
                         availability: 'https://schema.org/InStock',
                         itemCondition: 'https://schema.org/NewCondition',
+                        seller: { '@type': 'Organization', name: 'Affordable Home A/C', url: 'https://www.affordablehome-ac.com' },
                         hasMerchantReturnPolicy: {
                             '@type': 'MerchantReturnPolicy',
                             applicableCountry: 'US',

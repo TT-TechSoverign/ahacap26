@@ -263,10 +263,14 @@ export default async function ProductLayout({ params, children }: Props) {
         ...(cutawayUrl ? [cutawayUrl] : []),
     ]));
 
+    const rawWeightNum = parseFloat(String(product.weight || specs.weight || '').replace(/[^0-9.]/g, ''));
+
     const schema = {
         "@context": "https://schema.org/",
         "@type": "Product",
         "name": displayNameWithMpn,
+        "color": "White",
+        "category": product.id === 16 ? "Air Conditioner Wall Sleeves" : "Window Air Conditioners",
         "image": schemaImages,
         "description": `Buy the ${displayNameWithMpn} at Affordable Home A/C in Waipahu, Oahu. ${specs.idealFor ? `Ideal for ${specs.idealFor}. ` : ''}${specs.benefits ? `${specs.benefits} ` : ''}Free Waipahu warehouse pickup by appointment or $50 flat Oahu island-wide delivery.`,
         "sku": manufacturerMpn,
@@ -276,6 +280,17 @@ export default async function ProductLayout({ params, children }: Props) {
             "@type": "Brand",
             "name": brandName
         },
+        "manufacturer": {
+            "@type": "Organization",
+            "name": brandName === 'GE' ? 'GE Appliances' : brandName
+        },
+        ...(!isNaN(rawWeightNum) && rawWeightNum > 0 ? {
+            "weight": {
+                "@type": "QuantitativeValue",
+                "value": rawWeightNum,
+                "unitCode": "LBR"
+            }
+        } : {}),
         "additionalProperty": [
             {
                 "@type": "PropertyValue",

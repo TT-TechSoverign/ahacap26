@@ -34,6 +34,7 @@ export default function ServiceAreasPage() {
                             {
                                 "@type": "HVACBusiness",
                                 "@id": "https://www.affordablehome-ac.com/service-areas#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
                                 "name": "Affordable Home A/C — All 22 Oahu Service Areas",
                                 "url": "https://www.affordablehome-ac.com/service-areas",
                                 "image": [
@@ -118,8 +119,16 @@ export default function ServiceAreasPage() {
                                             "@type": "Answer",
                                             "text": "Waipahu warehouse pickup at 94-150 Leoleo St. #203 is $0 (free by appointment), and island-wide residential delivery across all 22 Oahu service areas is a flat $50."
                                         }
-                                    }
-                                ]
+                                    },
+        {
+            "@type": "Question",
+            "name": "Do you charge upfront to book an in-home Window AC estimate in my neighborhood?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Never. Across all 22 Oahu service areas—from Hawaii Kai and Kailua to Kapolei, Ewa Beach, Mililani, and Waipahu—we operate strictly By Appointment First with $0 Free In-Home Estimates and protective floor drop cloths under every serviced unit."
+            }
+        }
+    ]
                             }
                         ]
                     })

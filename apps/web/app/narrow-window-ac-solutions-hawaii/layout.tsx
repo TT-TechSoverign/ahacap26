@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Narrow Window AC Solutions Oahu ($395+ In-Stock) | Compact 19.6" LG Units'
+        absolute: 'Narrow Window ACs Oahu ($395+ In-Stock) | 19.6" Compact LG'
     },
     description: '$0 Free Estimate • (808) 488-1111. Need a compact Window AC for a narrow Oahu opening? Shop in-stock 19.6"-wide LG 6k–10k BTU units ($395–$650) in Waipahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/narrow-window-ac-solutions-hawaii',
     },
     openGraph: {
-        title: 'Narrow Window AC Solutions Oahu ($395+ In-Stock) | Compact 19.6" LG Units',
+        title: 'Narrow Window ACs Oahu ($395+ In-Stock) | 19.6" Compact LG',
         description: '$0 Free Estimate • (808) 488-1111. Need a compact Window AC for a narrow Oahu opening? Shop in-stock 19.6"-wide LG 6k–10k BTU units ($395–$650) in Waipahu.',
         url: 'https://www.affordablehome-ac.com/narrow-window-ac-solutions-hawaii',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Narrow Window AC Solutions Oahu ($395+ In-Stock) | Compact 19.6" LG Units',
+        title: 'Narrow Window ACs Oahu ($395+ In-Stock) | 19.6" Compact LG',
         description: '$0 Free Estimate • (808) 488-1111. Need a compact Window AC for a narrow Oahu opening? Shop in-stock 19.6"-wide LG 6k–10k BTU units ($395–$650) in Waipahu.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
@@ -104,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/narrow-window-ac-solutions-hawaii#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

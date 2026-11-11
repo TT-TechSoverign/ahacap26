@@ -50,6 +50,14 @@ const breakerFaqSchema = {
                 "@type": "Answer",
                 "text": "No! Resetting a tripping breaker more than once is extremely dangerous. Breakers trip to prevent electrical wires inside your walls from overheating and starting an electrical fire. Repeatedly forcing the breaker ON can melt terminal lugs and damage your main service panel."
             }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I replace an old tripping Window AC with a low-amp LG Dual Inverter?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! Older single-speed window ACs surge heavily at startup, straining aging Oahu circuits. Upgrading to a soft-start LG Dual Inverter (6,000–14,000 BTU on standard 115V NEMA 5-15P, $560–$785 in stock in Waipahu) eliminates hard compressor inrush spikes and cuts HECO power draw by up to 40%."
+            }
         }
     ]
 };
@@ -96,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/ac-keeps-tripping-breaker-hawaii#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

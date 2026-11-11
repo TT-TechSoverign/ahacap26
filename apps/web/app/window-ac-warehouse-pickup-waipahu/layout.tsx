@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Waipahu Window AC Warehouse Pickup ($395–$1,200) | 16 In-Stock LG & GE Models'
+        absolute: 'Waipahu Window AC Pickup ($395–$1,200) | 16 LG & GE Models'
     },
     description: 'Same-day Waipahu warehouse pickup by appointment (94-150 Leoleo St #203) or $50 Oahu delivery! 16 in-stock LG & GE Window ACs ($395–$1,200) • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-warehouse-pickup-waipahu',
     },
     openGraph: {
-        title: 'Waipahu Window AC Warehouse Pickup ($395–$1,200) | 16 In-Stock LG & GE Models',
+        title: 'Waipahu Window AC Pickup ($395–$1,200) | 16 LG & GE Models',
         description: 'Same-day Waipahu warehouse pickup by appointment (94-150 Leoleo St #203) or $50 Oahu delivery! 16 in-stock LG & GE Window ACs ($395–$1,200) • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-warehouse-pickup-waipahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Waipahu Window AC Warehouse Pickup ($395–$1,200) | 16 In-Stock LG & GE Models',
+        title: 'Waipahu Window AC Pickup ($395–$1,200) | 16 LG & GE Models',
         description: 'Same-day Waipahu warehouse pickup by appointment (94-150 Leoleo St #203) or $50 Oahu delivery! 16 in-stock LG & GE Window ACs ($395–$1,200) • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
@@ -90,6 +90,8 @@ const breadcrumbSchema = {
 const pass5RichSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
     "name": "Waipahu Warehouse Direct LG & GE Window Air Conditioners (LW8024RD)",
     "image": [
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
@@ -170,7 +172,8 @@ const pass5RichSchema = {
         "availability": "https://schema.org/InStock",
         "seller": {
             "@type": "Organization",
-            "name": "Affordable Home A/C"
+            "name": "Affordable Home A/C",
+            "url": "https://www.affordablehome-ac.com"
         },
         "hasMerchantReturnPolicy": {
             "@type": "MerchantReturnPolicy",

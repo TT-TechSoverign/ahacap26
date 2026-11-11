@@ -282,10 +282,14 @@ export default function LgDualInverterGuidePage() {
             },
             {
                 "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
                 "name": "LG Dual Inverter Window Air Conditioner Series (6,000–23,500 BTU)",
                 "image": [
                     "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp"
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
                 ],
                 "description": "In-stock LG Dual Inverter window air conditioners (6,000 to 23,500 BTU) in Waipahu, Oahu. Whisper-quiet 44dB operation, up to 40% HECO energy savings, and $45 Hawaii Energy cash rebate.",
                 "brand": { "@type": "Brand", "name": "LG" },
@@ -320,6 +324,7 @@ export default function LgDualInverterGuidePage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": "https://schema.org/InStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
@@ -348,6 +353,7 @@ export default function LgDualInverterGuidePage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": "https://schema.org/InStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
@@ -376,6 +382,7 @@ export default function LgDualInverterGuidePage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": "https://schema.org/InStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",

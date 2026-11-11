@@ -149,8 +149,15 @@ export default function Lg8000BtuOahuPage() {
             },
             {
                 "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
                 "name": "LG Dual Inverter 8,000 BTU Window Air Conditioner (LW8022IVSM)",
-                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                "image": [
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+                ],
                 "description": "Ultra-quiet 8,000 BTU Dual Inverter window air conditioner with smart ThinQ WiFi control. Perfect for Oahu master bedrooms and home offices. Eligible for $45 Hawaii Energy cash rebate.",
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW8022IVSM",
@@ -181,6 +188,7 @@ export default function Lg8000BtuOahuPage() {
                     "priceValidUntil": "2027-12-31",
                     "availability": isOutOfStock ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
                     "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                     "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",

@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { Product } from '@/types/inventory';
 import { generateProductSlug } from '@/lib/utils';
+import { getProductImages } from '@/lib/product-images';
 import contentData from '@/lib/content/content.json';
 import fs from 'fs';
 import path from 'path';
@@ -138,6 +139,55 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/outdoor-unit-fan-not-spinning-hawaii'
     ];
 
+    const getStaticRouteImages = (route: string): string[] => {
+        const r = route.toLowerCase();
+        if (r.includes('ge-built-in') || r.includes('wall') || r.includes('condo') || r.includes('sleeve')) {
+            return [
+                `${baseUrl}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp`,
+                `${baseUrl}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.webp`,
+                `${baseUrl}/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A.webp`,
+                `${baseUrl}/assets/window-unit-images/3d-fit/product_15_fit_cutaway.webp`,
+            ];
+        }
+        if (
+            r.includes('clean') || r.includes('mold') || r.includes('musty') ||
+            r.includes('maintenance') || r.includes('coil') || r.includes('blower') ||
+            r.includes('drain') || r.includes('filter') || r.includes('salt') ||
+            r.includes('storm') || r.includes('pet') || r.includes('repair') ||
+            r.includes('diagnostic') || r.includes('compressor') || r.includes('buzzing') ||
+            r.includes('leak') || r.includes('cycling') || r.includes('power') ||
+            r.includes('smell') || r.includes('fan') || r.includes('warm-air') ||
+            r.includes('freezing') || r.includes('dripping') || r.includes('breaker') ||
+            r.includes('blinking')
+        ) {
+            return [
+                `${baseUrl}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp`,
+                `${baseUrl}/assets/window-unit-images/lg-base-standard-units/lg-base-standard-lw8024rd-front-filter-1600x1000.webp`,
+                `${baseUrl}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp`,
+                `${baseUrl}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.webp`,
+            ];
+        }
+        if (
+            r.includes('install') || r.includes('jalousie') || r.includes('bracket') ||
+            r.includes('sliding') || r.includes('weather') || r.includes('renter') ||
+            r.includes('double-hung') || r.includes('wood-frame') || r.includes('vinyl') ||
+            r.includes('security-bars') || r.includes('narrow') || r.includes('sizing')
+        ) {
+            return [
+                `${baseUrl}/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp`,
+                `${baseUrl}/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp`,
+                `${baseUrl}/assets/window-unit-images/3d-fit/heavy-duty-window-fit-cutaway.webp`,
+                `${baseUrl}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp`,
+            ];
+        }
+        return [
+            `${baseUrl}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp`,
+            `${baseUrl}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp`,
+            `${baseUrl}/assets/window-unit-images/lg-universal-fit-unit-photos-1600x1000/lg-universal-fit-through-the-wall-front-1600x1000.webp`,
+            `${baseUrl}/assets/window-unit-images/lg-base-standard-units/lg-base-standard-lw8024rd-front-1600x1000.webp`,
+        ];
+    };
+
     const staticRoutes: MetadataRoute.Sitemap = [
         '',
         '/shop',
@@ -158,6 +208,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: STATIC_LAST_MODIFIED,
             changeFrequency,
             priority: route === '' ? 1.0 : (highYieldRoutes.includes(route) ? 0.9 : (route.startsWith('/service-areas/') ? 0.8 : 0.85)),
+            images: getStaticRouteImages(route),
         };
     });
 
@@ -165,10 +216,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { INITIAL_CATALOG_PRODUCTS } = await import('@/lib/catalog-seed');
     let products: Product[] = INITIAL_CATALOG_PRODUCTS;
     try {
-        let apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
-        if (!apiUrl.endsWith('/api/v1')) {
-            apiUrl = `${apiUrl}/api/v1`;
-        }
+        const baseApi = (process.env.API_INTERNAL_URL || 'http://prod-api:8000').replace(/\/api\/v1\/?$/, '');
+        const apiUrl = `${baseApi}/api/v1`;
 
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
@@ -190,12 +239,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         console.error('[Sitemap] API request failed, using INITIAL_CATALOG_PRODUCTS fallback.', error);
     }
 
-    const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
-        url: `${baseUrl}/shop/${generateProductSlug(product.id, product.name)}`,
-        lastModified: STATIC_LAST_MODIFIED,
-        changeFrequency: 'weekly' as const,
-        priority: 0.95,
-    }));
+    const productRoutes: MetadataRoute.Sitemap = products.map((product) => {
+        const galleryUrls = getProductImages(product.id).map((img) => {
+            const clean = img.replace(/\.svg$/i, '.webp');
+            return clean.startsWith('http') ? clean : `${baseUrl}${clean}`;
+        });
+        const cutawayUrl = `${baseUrl}/assets/window-unit-images/3d-fit/product_${product.id}_fit_cutaway.webp`;
+        const specPageUrl = `${baseUrl}/assets/specsheets/mobile-pages/${product.id}/page-1.webp`;
+        const uniqueImages = Array.from(new Set([...galleryUrls, cutawayUrl, specPageUrl]));
+
+        return {
+            url: `${baseUrl}/shop/${generateProductSlug(product.id, product.name)}`,
+            lastModified: STATIC_LAST_MODIFIED,
+            changeFrequency: 'weekly' as const,
+            priority: 0.95,
+            images: uniqueImages,
+        };
+    });
 
     // 3. Combine and Return
     return [...staticRoutes, ...productRoutes];

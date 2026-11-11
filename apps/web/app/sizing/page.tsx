@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Oahu Window AC BTU Sizing Calculator ($395+ In-Stock) | (808) 488-1111'
     },
-    description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Calibrated for Hawaii single-wall heat loads & humidity. In-stock LG & GE ACs ($395–$1,200).',
+    description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Hawaii single-wall sizing, in-stock LG & GE ACs ($395–$1,200) • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sizing',
     },
     openGraph: {
         title: 'Oahu Window AC BTU Sizing Calculator ($395+ In-Stock) | (808) 488-1111',
-        description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Calibrated for Hawaii single-wall heat loads & humidity. In-stock LG & GE ACs ($395–$1,200).',
+        description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Hawaii single-wall sizing, in-stock LG & GE ACs ($395–$1,200) • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/sizing',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Oahu Window AC BTU Sizing Calculator ($395+ In-Stock) | (808) 488-1111',
-        description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Calibrated for Hawaii single-wall heat loads & humidity. In-stock LG & GE ACs ($395–$1,200).',
+        description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Hawaii single-wall sizing, in-stock LG & GE ACs ($395–$1,200) • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
@@ -104,6 +104,14 @@ const sizingFaqSchema = {
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "The LG Dual Inverter 14,000 BTU (LW1522FVSM, $785) and 12,000 BTU (LW1222IVSM, $745) are the highest-capacity Window ACs that plug directly into a standard 115V / 15-Amp household NEMA 5-15R receptacle. Units rated 18,000 BTU and 23,500 BTU require a 208/230V circuit."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do I need a 26-inch wall sleeve unit for an Oahu condo or high-rise?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Many Honolulu, Waikiki, Makiki, and Ala Moana concrete condos use a built-in 26-inch through-the-wall sleeve instead of a jalousie window. We stock direct-fit GE 26-inch Built-In Wall ACs (8,200–12,000 BTU, including the R-32 Inverter AJCQ12AXXWA) and the GE RAB26A galvanized sleeve in Waipahu."
             }
         }
     ]

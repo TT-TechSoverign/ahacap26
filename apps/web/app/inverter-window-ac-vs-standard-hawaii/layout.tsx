@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr + $45 Rebate'
+        absolute: 'Inverter vs Standard Window AC Oahu ($395+) | Save $424/yr'
     },
     description: 'Compare 44dB LG Dual Inverter & GE R-32 Inverter Window ACs vs standard units in Hawaii. Save 40% on HECO bills + claim a $45 Rebate in Waipahu • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/inverter-window-ac-vs-standard-hawaii',
     },
     openGraph: {
-        title: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr + $45 Rebate',
+        title: 'Inverter vs Standard Window AC Oahu ($395+) | Save $424/yr',
         description: 'Compare 44dB LG Dual Inverter & GE R-32 Inverter Window ACs vs standard units in Hawaii. Save 40% on HECO bills + claim a $45 Rebate in Waipahu • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/inverter-window-ac-vs-standard-hawaii',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr + $45 Rebate',
+        title: 'Inverter vs Standard Window AC Oahu ($395+) | Save $424/yr',
         description: 'Compare 44dB LG Dual Inverter & GE R-32 Inverter Window ACs vs standard units in Hawaii. Save 40% on HECO bills + claim a $45 Rebate in Waipahu • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
@@ -90,6 +90,8 @@ const breadcrumbSchema = {
 const pass5RichSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
     "name": "LG Dual Inverter 12,000 BTU Window Air Conditioner (LW1222IVSM)",
     "image": [
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
@@ -170,7 +172,8 @@ const pass5RichSchema = {
         "availability": "https://schema.org/InStock",
         "seller": {
             "@type": "Organization",
-            "name": "Affordable Home A/C"
+            "name": "Affordable Home A/C",
+            "url": "https://www.affordablehome-ac.com"
         },
         "hasMerchantReturnPolicy": {
             "@type": "MerchantReturnPolicy",

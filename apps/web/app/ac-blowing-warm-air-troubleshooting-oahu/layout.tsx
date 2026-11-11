@@ -50,6 +50,14 @@ const warmAirFaqSchema = {
                 "@type": "Answer",
                 "text": "We provide on-site window AC troubleshooting and clean-vs-replace assessments across Oahu. An experienced technician tests electrical voltages, airflow, and compressor health, providing an upfront recommendation before any work begins."
             }
+        },
+        {
+            "@type": "Question",
+            "name": "What if my window AC compressor is completely seized?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If the compressor is locked or grounded and the unit is over 5 years old, replacement is much more cost-effective than a compressor swap. Affordable Home A/C stocks brand-new LG Dual Inverters and GE window ACs in our Waipahu warehouse starting at $395 (with a $45 Hawaii Energy rebate on qualifying Energy Star models) and provides $0 upfront estimates for new window AC installations."
+            }
         }
     ]
 };
@@ -96,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/ac-blowing-warm-air-troubleshooting-oahu#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

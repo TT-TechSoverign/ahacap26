@@ -94,6 +94,10 @@ const nextConfig = {
                 source: '/merchant-feed.xml',
                 destination: '/api/google-feed',
             },
+            {
+                source: '/product-reviews-feed.xml',
+                destination: '/api/google-reviews-feed',
+            },
         ];
     },
     async redirects() {

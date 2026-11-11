@@ -5,6 +5,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { CartItem, Product } from '../types/inventory';
 import { isCampaignActive } from '../lib/utils';
 import { safeStorage } from '../lib/safe-storage';
+import { buildGa4EcommerceItem, trackEcommerceEvent } from '../lib/tracking';
 
 interface CartContextType {
     items: CartItem[];
@@ -84,25 +85,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             return [...current, { ...product, quantity: 1 }];
         });
 
-        // GTM E-Commerce add_to_cart push
-        if (typeof window !== 'undefined' && (window as any).dataLayer) {
-            const activePrice = (isCampaignActive() && product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0) ? product.promo_price : product.price;
-            (window as any).dataLayer.push({
-                event: 'add_to_cart',
-                ecommerce: {
-                    currency: 'USD',
-                    value: activePrice,
-                    items: [
-                        {
-                            item_id: String(product.id),
-                            item_name: product.name,
-                            price: activePrice,
-                            quantity: 1
-                        }
-                    ]
-                }
-            });
-        }
+        // GA4 + GTM E-Commerce add_to_cart dispatch
+        const activePrice = (isCampaignActive() && product.promo_price !== undefined && product.promo_price !== null && product.promo_price > 0) ? product.promo_price : product.price;
+        trackEcommerceEvent('add_to_cart', {
+            currency: 'USD',
+            value: activePrice,
+            items: [buildGa4EcommerceItem(product, 1, 0, activePrice)],
+        });
 
         setIsOpen(true);
     };
@@ -111,23 +100,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const itemToRemove = items.find(item => item.id === id);
         setItems(current => current.filter(item => item.id !== id));
 
-        // GTM E-Commerce remove_from_cart push
-        if (itemToRemove && typeof window !== 'undefined' && (window as any).dataLayer) {
+        // GA4 + GTM E-Commerce remove_from_cart dispatch
+        if (itemToRemove) {
             const activePrice = (isCampaignActive() && itemToRemove.promo_price !== undefined && itemToRemove.promo_price !== null && itemToRemove.promo_price > 0) ? itemToRemove.promo_price : itemToRemove.price;
-            (window as any).dataLayer.push({
-                event: 'remove_from_cart',
-                ecommerce: {
-                    currency: 'USD',
-                    value: activePrice * itemToRemove.quantity,
-                    items: [
-                        {
-                            item_id: String(itemToRemove.id),
-                            item_name: itemToRemove.name,
-                            price: activePrice,
-                            quantity: itemToRemove.quantity
-                        }
-                    ]
-                }
+            trackEcommerceEvent('remove_from_cart', {
+                currency: 'USD',
+                value: activePrice * itemToRemove.quantity,
+                items: [buildGa4EcommerceItem(itemToRemove, itemToRemove.quantity, 0, activePrice)],
             });
         }
     };

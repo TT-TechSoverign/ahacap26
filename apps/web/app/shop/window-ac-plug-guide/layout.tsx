@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '115V vs 230V Window AC Plug Guide Oahu (5-15P / 6-15P / 6-20P) | $395+',
+        absolute: '115V vs 230V Window AC Plug Guide Oahu ($395+) | 5-15P & 6-15P',
     },
     description: 'Match your Oahu wall outlet (115V 15A vs 208/230V 15A/20A NEMA chart) to in-stock LG & GE Window ACs ($395–$1,200) in Waipahu. $0 Free Estimate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/shop/window-ac-plug-guide',
     },
     openGraph: {
-        title: '115V vs 230V Window AC Plug Guide Oahu (5-15P / 6-15P / 6-20P) | $395+',
+        title: '115V vs 230V Window AC Plug Guide Oahu ($395+) | 5-15P & 6-15P',
         description: 'Match your Oahu wall outlet (115V 15A vs 208/230V 15A/20A NEMA chart) to in-stock LG & GE Window ACs ($395–$1,200) in Waipahu. $0 Free Estimate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/shop/window-ac-plug-guide',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: '115V vs 230V Window AC Plug Guide Oahu (5-15P / 6-15P / 6-20P) | $395+',
+        title: '115V vs 230V Window AC Plug Guide Oahu ($395+) | 5-15P & 6-15P',
         description: 'Match your Oahu wall outlet (115V 15A vs 208/230V 15A/20A NEMA chart) to in-stock LG & GE Window ACs ($395–$1,200) in Waipahu. $0 Free Estimate • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },

@@ -9,6 +9,7 @@ import { useCart } from '../../context/CartContext';
 import { getProductImages } from '../../lib/product-images';
 import { Product } from '../../types/inventory';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
+import { buildGa4EcommerceItem, trackEcommerceEvent } from '@/lib/tracking';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
@@ -548,6 +549,8 @@ function ShopPageContent() {
 
     };
 
+    const hasTrackedItemListRef = useRef(false);
+
     // Fetch Products from API
     useEffect(() => {
         const fetchProducts = async () => {
@@ -574,6 +577,18 @@ function ShopPageContent() {
 
                 const data = await res.json();
                 setProducts(data);
+
+                if (Array.isArray(data) && data.length > 0 && !hasTrackedItemListRef.current) {
+                    hasTrackedItemListRef.current = true;
+                    trackEcommerceEvent('view_item_list', {
+                        item_list_id: 'oahu_warehouse_shop',
+                        item_list_name: 'Oahu Waipahu In-Stock Window ACs',
+                        items: data.slice(0, 16).map((p: Product, idx: number) => {
+                            const activePrice = (isCampaignActiveChecker() && p.promo_price && p.promo_price > 0) ? p.promo_price : p.price;
+                            return buildGa4EcommerceItem(p, 1, idx, activePrice);
+                        }),
+                    });
+                }
             } catch (err: any) {
                 console.error("Inventory Load Error:", err);
                 setError(err.message || 'Unable to load inventory.');
@@ -1298,10 +1313,14 @@ export default function ShopPage() {
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
                         "name": "In-Stock LG Dual Inverter & GE 26-Inch Built-In Window Air Conditioners (6,000–23,500 BTU)",
                         "image": [
                             `${domain}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp`,
-                            `${domain}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp`
+                            `${domain}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp`,
+                            `${domain}/assets/window-unit-images/lg-universal-fit-unit-photos-1600x1000/lg-universal-fit-through-the-wall-front-1600x1000.webp`,
+                            `${domain}/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp`
                         ],
                         "description": "Shop 16 factory-sealed LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In Window ACs ($395 to $1,200) in stock at our Waipahu warehouse (94-150 Leoleo St. #203). Free Waipahu pickup by appointment, $50 flat Oahu delivery, and $45 Hawaii Energy cash rebate.",
                         "brand": { "@type": "Brand", "name": "LG & GE Appliances" },
@@ -1336,6 +1355,7 @@ export default function ShopPage() {
                                 "priceValidUntil": "2027-12-31",
                                 "availability": "https://schema.org/InStock",
                                 "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                                 "hasMerchantReturnPolicy": {
                                     "@type": "MerchantReturnPolicy",
                                     "applicableCountry": "US",
@@ -1364,6 +1384,7 @@ export default function ShopPage() {
                                 "priceValidUntil": "2027-12-31",
                                 "availability": "https://schema.org/InStock",
                                 "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                                 "hasMerchantReturnPolicy": {
                                     "@type": "MerchantReturnPolicy",
                                     "applicableCountry": "US",

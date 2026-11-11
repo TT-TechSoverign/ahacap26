@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Oahu Condo & Townhouse Window AC HOA Guide | 44dB LG & 26" GE Built-In ($395+)'
+        absolute: 'Oahu Condo Window AC HOA Guide ($395+) | 44dB LG & 26" GE'
     },
     description: '$0 Free Estimate • (808) 488-1111. HOA-compliant 44dB LG Dual Inverter & GE 26" Built-In Through-the-Wall ACs ($395–$1,200) in stock in Waipahu, Oahu.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/condo-townhouse-window-ac-hoa-rules-oahu',
     },
     openGraph: {
-        title: 'Oahu Condo & Townhouse Window AC HOA Guide | 44dB LG & 26" GE Built-In ($395+)',
+        title: 'Oahu Condo Window AC HOA Guide ($395+) | 44dB LG & 26" GE',
         description: '$0 Free Estimate • (808) 488-1111. HOA-compliant 44dB LG Dual Inverter & GE 26" Built-In Through-the-Wall ACs ($395–$1,200) in stock in Waipahu, Oahu.',
         url: 'https://www.affordablehome-ac.com/condo-townhouse-window-ac-hoa-rules-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Oahu Condo & Townhouse Window AC HOA Guide | 44dB LG & 26" GE Built-In ($395+)',
+        title: 'Oahu Condo Window AC HOA Guide ($395+) | 44dB LG & 26" GE',
         description: '$0 Free Estimate • (808) 488-1111. HOA-compliant 44dB LG Dual Inverter & GE 26" Built-In Through-the-Wall ACs ($395–$1,200) in stock in Waipahu, Oahu.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp'],
     }
@@ -104,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/condo-townhouse-window-ac-hoa-rules-oahu#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

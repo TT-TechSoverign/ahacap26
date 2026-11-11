@@ -18,9 +18,8 @@ function escapeXml(unsafe: string) {
 
 export async function GET() {
   try {
-    const apiUrl = process.env.API_INTERNAL_URL 
-      ? `${process.env.API_INTERNAL_URL}/api/v1/products` 
-      : 'http://prod-api:8000/api/v1/products';
+    const baseApi = (process.env.API_INTERNAL_URL || 'http://prod-api:8000').replace(/\/api\/v1\/?$/, '');
+    const apiUrl = `${baseApi}/api/v1/products`;
       
     let products: Product[] = INITIAL_CATALOG_PRODUCTS;
     try {
@@ -172,6 +171,44 @@ export async function GET() {
         product.btu ? `<g:custom_label_4>${product.btu} BTU</g:custom_label_4>` : '<g:custom_label_4>26in Wall Sleeve</g:custom_label_4>',
       ].filter(Boolean).join('\n          ');
 
+      const productDetails: Array<{ section: string; attr: string; val: string }> = [];
+      if (product.btu) {
+        productDetails.push({ section: 'Cooling Performance', attr: 'Cooling Capacity', val: `${product.btu.toLocaleString()} BTU` });
+      }
+      if (product.coverage_aham || product.coverage) {
+        productDetails.push({ section: 'Cooling Performance', attr: 'AHAM Certified Coverage', val: String(product.coverage_aham || product.coverage) });
+      }
+      if (product.coverage_oahu) {
+        productDetails.push({ section: 'Cooling Performance', attr: 'Oahu Single-Wall Coverage', val: String(product.coverage_oahu) });
+      }
+      if (product.ceer_rating) {
+        productDetails.push({ section: 'Efficiency & Electrical', attr: 'CEER Efficiency Rating', val: String(product.ceer_rating) });
+      }
+      if (product.voltage && product.voltage !== 'N/A') {
+        productDetails.push({ section: 'Efficiency & Electrical', attr: 'Electrical Requirement', val: String(product.voltage) });
+      }
+      if (product.noise_level) {
+        productDetails.push({ section: 'Acoustics & Fit', attr: 'Noise Level', val: String(product.noise_level) });
+      }
+      if (product.min_window_height) {
+        productDetails.push({ section: 'Acoustics & Fit', attr: 'Minimum Window Opening Height', val: String(product.min_window_height) });
+      }
+      if (product.dimensions) {
+        productDetails.push({ section: 'Acoustics & Fit', attr: 'Unit Dimensions', val: String(product.dimensions) });
+      }
+      productDetails.push({
+        section: 'Rebates & Fulfillment',
+        attr: 'Hawaii Energy Rebate',
+        val: (product.subcategory === 'dual_inverter' || product.id === 15) ? '$45 Instant Rebate Form Provided' : 'Standard Efficiency Tier',
+      });
+
+      const productDetailsXml = productDetails.map((d) => `
+          <g:product_detail>
+            <g:section_name>${escapeXml(d.section)}</g:section_name>
+            <g:attribute_name>${escapeXml(d.attr)}</g:attribute_name>
+            <g:attribute_value>${escapeXml(d.val)}</g:attribute_value>
+          </g:product_detail>`).join('');
+
       return `
         <item>
           <g:id>${product.id}</g:id>
@@ -180,13 +217,15 @@ export async function GET() {
           <g:title>${escapeXml(richTitle)}</g:title>
           <g:description>${escapeXml(description)}</g:description>
           <g:link>${productLink}</g:link>
+          <g:canonical_link>${productLink}</g:canonical_link>
           <g:image_link>${imageLink}</g:image_link>
           ${additionalImagesXml}
-          ${highlightsXml}
+          ${highlightsXml}${productDetailsXml}
           <g:condition>new</g:condition>
           <g:availability>${availability}</g:availability>
           <g:price>${product.price}.00 USD</g:price>
           <g:brand>${escapeXml(brand)}</g:brand>
+          <g:color>White</g:color>
           ${gtin ? `<g:gtin>${gtin}</g:gtin>` : ''}
           ${mpn ? `<g:mpn>${escapeXml(mpn)}</g:mpn>` : ''}
           <g:identifier_exists>${(gtin || mpn) ? 'yes' : 'no'}</g:identifier_exists>
@@ -198,6 +237,10 @@ export async function GET() {
             <g:region>HI</g:region>
             <g:service>Island-Wide Oahu Delivery</g:service>
             <g:price>50.00 USD</g:price>
+            <g:min_handling_time>0</g:min_handling_time>
+            <g:max_handling_time>1</g:max_handling_time>
+            <g:min_transit_time>1</g:min_transit_time>
+            <g:max_transit_time>3</g:max_transit_time>
           </g:shipping>
           <g:shipping>
             <g:country>US</g:country>
@@ -205,6 +248,10 @@ export async function GET() {
             <g:postal_code>96797</g:postal_code>
             <g:service>Waipahu Warehouse Pickup by Appt</g:service>
             <g:price>0.00 USD</g:price>
+            <g:min_handling_time>0</g:min_handling_time>
+            <g:max_handling_time>1</g:max_handling_time>
+            <g:min_transit_time>0</g:min_transit_time>
+            <g:max_transit_time>1</g:max_transit_time>
           </g:shipping>
           ${customLabels}
         </item>

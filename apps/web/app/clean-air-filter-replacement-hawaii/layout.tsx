@@ -104,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/clean-air-filter-replacement-hawaii#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

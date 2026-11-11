@@ -50,6 +50,14 @@ const freezingFaqSchema = {
                 "@type": "Answer",
                 "text": "Immediately switch the unit to FAN ONLY mode (or turn it completely OFF). NEVER use a knife, screwdriver, or ice pick to chip ice away—this will puncture delicate copper coil tubes and release refrigerant. Place towels beneath the unit to catch the melting water and schedule a professional diagnostic check."
             }
+        },
+        {
+            "@type": "Question",
+            "name": "Will my Window AC work normally again after the ice thaws out?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rarely without addressing the root airflow or refrigerant issue. Melting the ice clears the temporary blockage, but if evaporator coils are impacted with dust or refrigerant is low from coastal salt-air pitting, ice will reform within 30 to 90 minutes. Schedule a $0 Free Clean-vs-Replace Assessment at (808) 488-1111 to protect your compressor."
+            }
         }
     ]
 };
@@ -96,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/ac-freezing-up-ice-on-coils-hawaii#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

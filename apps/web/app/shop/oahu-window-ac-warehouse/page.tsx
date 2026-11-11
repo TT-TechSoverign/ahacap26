@@ -27,7 +27,7 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Oahu Window AC Warehouse ($395–$1,200 In-Stock) | Waipahu & $50 Delivery'
+        absolute: 'Oahu Window AC Warehouse ($395–$1,200) | Free Waipahu Pickup'
     },
     description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup, $50 delivery & $45 Rebate • (808) 488-1111.',
     keywords: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
         'oahu air conditioning inventory'
     ],
     openGraph: {
-        title: 'Oahu Window AC Warehouse ($395–$1,200 In-Stock) | Waipahu & $50 Delivery',
+        title: 'Oahu Window AC Warehouse ($395–$1,200) | Free Waipahu Pickup',
         description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup, $50 delivery & $45 Rebate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse',
         siteName: 'Affordable Home A/C',
@@ -142,10 +142,14 @@ export default function OahuWindowAcWarehousePage() {
             },
             {
                 "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
                 "name": "In-Stock LG Dual Inverter & GE 26\" Built-In Window Air Conditioners (6,000–23,500 BTU)",
                 "image": [
                     "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp"
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
                 ],
                 "description": "16 factory-sealed LG Dual Inverter, LG Universal Fit, and GE 26-inch Built-In window air conditioners ($395–$1,200) warehoused locally in Waipahu, Oahu.",
                 "brand": { "@type": "Brand", "name": "LG & GE Appliances" },
@@ -180,6 +184,7 @@ export default function OahuWindowAcWarehousePage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": "https://schema.org/InStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
@@ -208,6 +213,7 @@ export default function OahuWindowAcWarehousePage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": "https://schema.org/InStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
@@ -236,6 +242,7 @@ export default function OahuWindowAcWarehousePage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": "https://schema.org/InStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",

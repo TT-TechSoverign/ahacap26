@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'LG & GE Window AC Blinking Light & CH Error Codes Oahu | $0 Estimate'
+        absolute: 'LG & GE Window AC Error Codes Oahu ($0 Estimate) | Repair'
     },
     description: '$0 Free Estimate • (808) 488-1111. Fix blinking filter lights & CH05/CH21/CH34 error codes on LG & GE Window ACs in Oahu, or swap with an in-stock unit ($395+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/blinking-light-error-codes-ac-repair',
     },
     openGraph: {
-        title: 'LG & GE Window AC Blinking Light & CH Error Codes Oahu | $0 Estimate',
+        title: 'LG & GE Window AC Error Codes Oahu ($0 Estimate) | Repair',
         description: '$0 Free Estimate • (808) 488-1111. Fix blinking filter lights & CH05/CH21/CH34 error codes on LG & GE Window ACs in Oahu, or swap with an in-stock unit ($395+).',
         url: 'https://www.affordablehome-ac.com/blinking-light-error-codes-ac-repair',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'LG & GE Window AC Blinking Light & CH Error Codes Oahu | $0 Estimate',
+        title: 'LG & GE Window AC Error Codes Oahu ($0 Estimate) | Repair',
         description: '$0 Free Estimate • (808) 488-1111. Fix blinking filter lights & CH05/CH21/CH34 error codes on LG & GE Window ACs in Oahu, or swap with an in-stock unit ($395+).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
@@ -49,6 +49,14 @@ const errorCodeFaqSchema = {
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Yes, turning off the breaker for 5 full minutes performs a hard microprocessor reset. If the error was caused by a transient power surge from the HECO grid, the unit may restart normally. However, if the light starts flashing again immediately upon powering on, a physical component failure exists that requires technician attention."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What if the Clean Filter LED is blinking on my LG or GE Window AC?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "On LG and GE window air conditioners, a steady or blinking Filter LED triggers automatically after 250 hours of fan operation as a reminder to wash the front mesh screen. Pull out the filter, rinse it with warm water, let it dry, reinstall it, and hold the Filter or Temp buttons for 3 seconds to clear the indicator."
             }
         }
     ]
@@ -96,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/blinking-light-error-codes-ac-repair#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

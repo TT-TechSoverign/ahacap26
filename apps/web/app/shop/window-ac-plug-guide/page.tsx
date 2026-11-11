@@ -221,10 +221,14 @@ export default function WindowAcPlugGuidePage() {
             },
             {
                 "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
                 "name": "In-Stock 115V & 230V LG Dual Inverter & GE Window Air Conditioners (NEMA 5-15P / 6-15P / 6-20P)",
                 "image": [
                     "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp"
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
                 ],
                 "description": "Compare 115V (NEMA 5-15P, 6,000–14,000 BTU) and 208/230V (NEMA 6-15P / 6-20P, 18,000–23,500 BTU) LG Dual Inverter & GE Built-In Window ACs in stock in Waipahu, Oahu.",
                 "brand": { "@type": "Brand", "name": "LG & GE Appliances" },
@@ -259,6 +263,7 @@ export default function WindowAcPlugGuidePage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": "https://schema.org/InStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
@@ -287,6 +292,7 @@ export default function WindowAcPlugGuidePage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": "https://schema.org/InStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",

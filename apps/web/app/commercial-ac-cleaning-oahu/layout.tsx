@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Commercial Window & Thru-Wall AC Cleaning Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Commercial Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Commercial LG & GE Window and 26" Thru-Wall AC deep coil cleaning for Oahu offices, clinics, shops & property managers.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/commercial-ac-cleaning-oahu',
     },
     openGraph: {
-        title: 'Commercial Window & Thru-Wall AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Commercial Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Commercial LG & GE Window and 26" Thru-Wall AC deep coil cleaning for Oahu offices, clinics, shops & property managers.',
         url: 'https://www.affordablehome-ac.com/commercial-ac-cleaning-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Commercial Window & Thru-Wall AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Commercial Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Commercial LG & GE Window and 26" Thru-Wall AC deep coil cleaning for Oahu offices, clinics, shops & property managers.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
@@ -104,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/commercial-ac-cleaning-oahu#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

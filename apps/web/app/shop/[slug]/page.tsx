@@ -8,6 +8,7 @@ import { useCart } from '../../../context/CartContext';
 import { getProductImages } from '@/lib/product-images';
 import { getProductSpecs } from '@/lib/product-specs';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
+import { buildGa4EcommerceItem, trackEcommerceEvent } from '@/lib/tracking';
 import { Product } from '@/types/inventory';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { EditableText } from '@/components/EditableText';
@@ -238,6 +239,8 @@ export default function ProductDetailPage() {
         return () => observer.disconnect();
     }, [loading, product?.id]);
 
+    const viewedProductIdRef = useRef<number | null>(null);
+
     useEffect(() => {
         async function fetchProduct() {
             if (!id) return;
@@ -265,29 +268,30 @@ export default function ProductDetailPage() {
                     })
                     .catch(() => {});
 
-                // GTM E-Commerce view_item push
-                if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                // GA4 + Google Tag + GTM E-Commerce view_item push
+                if (typeof window !== 'undefined' && viewedProductIdRef.current !== Number(data.id)) {
+                    viewedProductIdRef.current = Number(data.id);
                     const activePrice = (isCampaignActiveChecker() && data.promo_price && data.promo_price > 0) ? data.promo_price : data.price;
-                    (window as any).dataLayer.push({
-                        event: 'view_item',
-                        ecommerce: {
-                            currency: 'USD',
-                            value: activePrice,
-                            items: [
-                                {
-                                    item_id: String(data.id),
-                                    item_name: data.name,
-                                    price: activePrice,
-                                    item_brand: data.category?.replace('_', ' ') || 'Window AC',
-                                }
-                            ]
-                        }
+                    trackEcommerceEvent('view_item', {
+                        currency: 'USD',
+                        value: activePrice,
+                        items: [buildGa4EcommerceItem(data, 1, 0, activePrice)],
                     });
                 }
             } catch (err) {
                 console.error("Product Fetch Error:", err);
                 if (!initialSeedProduct) {
                     setError('Unable to load product details.');
+                } else if (typeof window !== 'undefined' && viewedProductIdRef.current !== Number(initialSeedProduct.id)) {
+                    viewedProductIdRef.current = Number(initialSeedProduct.id);
+                    const activePrice = (isCampaignActiveChecker() && initialSeedProduct.promo_price && initialSeedProduct.promo_price > 0)
+                        ? initialSeedProduct.promo_price
+                        : initialSeedProduct.price;
+                    trackEcommerceEvent('view_item', {
+                        currency: 'USD',
+                        value: activePrice,
+                        items: [buildGa4EcommerceItem(initialSeedProduct, 1, 0, activePrice)],
+                    });
                 }
             } finally {
                 setLoading(false);

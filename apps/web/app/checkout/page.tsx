@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useState, Suspense } from 'react';
+import { useState, useRef, Suspense } from 'react';
 import { EditableText } from '../../components/EditableText';
 import CheckoutWrapper from '../../components/CheckoutForm';
 import { useCart } from '../../context/CartContext';
@@ -12,6 +12,8 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import { getProductImages } from '../../lib/product-images';
 import { isCampaignActive } from '../../lib/utils';
+import { safeStorage } from '../../lib/safe-storage';
+import { buildGa4EcommerceItem, trackEcommerceEvent, Ga4EcommerceItem } from '../../lib/tracking';
 
 import { 
     CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, Snowflake, Lock, ShieldCheck, FileText, Phone, ShoppingCart 
@@ -23,6 +25,7 @@ function CheckoutContent() {
     const [email, setEmail] = useState('');
     const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>('pickup');
     const [confirmedSessionId, setConfirmedSessionId] = useState<string>('');
+    const hasTrackedBeginCheckoutRef = useRef(false);
 
     useEffect(() => {
         syncInventory();
@@ -37,10 +40,6 @@ function CheckoutContent() {
     const taxAmount = subtotal * 0.04712; // 4.712% HI Tax
     const finalTotal = subtotal + taxAmount;
 
-
-
-
-
     const handleSuccess = () => {
         // Retrieve session_id and fulfillment mode for transaction alignment
         const sessionId = searchParams.get('session_id') || `AHAC-${Math.floor(Math.random() * 90000) + 10000}`;
@@ -50,60 +49,93 @@ function CheckoutContent() {
         }
         setConfirmedSessionId(sessionId);
 
+        // Idempotent GA4 + Google Tag + GTM E-Commerce purchase push hydrated from pre-Stripe localStorage snapshot
+        if (typeof window !== 'undefined') {
+            const purchaseGuardKey = `ahac_purchased_${sessionId}`;
+            const alreadyTracked = safeStorage.getItem(purchaseGuardKey, 'local') === '1';
 
+            if (!alreadyTracked) {
+                let purchaseItems: Ga4EcommerceItem[] = [];
+                let purchaseTotal = finalTotal;
+                let purchaseShipping = urlFulfillment === 'delivery' ? 50 : (urlFulfillment === 'pickup' ? 0 : deliveryFee);
+                let purchaseTax = taxAmount;
 
-        // GTM E-Commerce purchase push
-        if (typeof window !== 'undefined' && (window as any).dataLayer) {
-            (window as any).dataLayer.push({
-                event: 'purchase',
-                ecommerce: {
-                    transaction_id: sessionId,
-                    value: finalTotal,
-                    tax: taxAmount,
-                    shipping: deliveryFee,
-                    currency: 'USD',
-                    items: items.map((item, index) => {
-                        return {
-                            item_id: String(item.id),
-                            item_name: item.name,
-                            price: item.price,
-                            quantity: item.quantity,
-                            index: index
-                        };
-                    })
+                try {
+                    const pendingRaw = safeStorage.getItem('ahac_pending_order', 'local');
+                    if (pendingRaw) {
+                        const parsed = JSON.parse(pendingRaw);
+                        if (Array.isArray(parsed?.items) && parsed.items.length > 0) {
+                            purchaseItems = parsed.items;
+                            if (typeof parsed.shippingFee === 'number') {
+                                purchaseShipping = parsed.shippingFee;
+                            }
+                            if (typeof parsed.totalAmount === 'number' && parsed.totalAmount > 0) {
+                                purchaseTotal = parsed.totalAmount;
+                                const preTax = purchaseTotal / 1.04712;
+                                purchaseTax = Math.max(0, purchaseTotal - preTax);
+                            }
+                        }
+                    }
+
+                    if (purchaseItems.length === 0 && items.length > 0) {
+                        purchaseItems = items.map((item, index) => buildGa4EcommerceItem(item, item.quantity, index, item.price));
+                        const sub = items.reduce((acc, it) => acc + (Number(it.price || 0) * (it.quantity || 1)), 0) + purchaseShipping;
+                        purchaseTax = sub * 0.04712;
+                        purchaseTotal = sub + purchaseTax;
+                    }
+
+                    if (purchaseItems.length === 0) {
+                        const savedCartRaw = safeStorage.getItem('ahac_cart', 'local');
+                        if (savedCartRaw) {
+                            const savedCart = JSON.parse(savedCartRaw);
+                            if (Array.isArray(savedCart) && savedCart.length > 0) {
+                                purchaseItems = savedCart.map((item: any, index: number) =>
+                                    buildGa4EcommerceItem(item, item.quantity || 1, index, item.price)
+                                );
+                                const sub = savedCart.reduce((acc: number, it: any) => acc + (Number(it.price || 0) * (it.quantity || 1)), 0) + purchaseShipping;
+                                purchaseTax = sub * 0.04712;
+                                purchaseTotal = sub + purchaseTax;
+                            }
+                        }
+                    }
+                } catch {
+                    // Fallback safely if JSON parse fails
                 }
-            });
+
+                trackEcommerceEvent('purchase', {
+                    transaction_id: sessionId,
+                    currency: 'USD',
+                    value: Number(purchaseTotal.toFixed(2)),
+                    tax: Number(purchaseTax.toFixed(2)),
+                    shipping: Number(purchaseShipping.toFixed(2)),
+                    items: purchaseItems,
+                });
+
+                safeStorage.setItem(purchaseGuardKey, '1', 'local');
+                safeStorage.removeItem('ahac_pending_order', 'local');
+            }
         }
 
         setStep('success');
         clearCart();
     };
 
-    // Track begin_checkout
+    // Track begin_checkout (once per checkout visit, skipped on Stripe success return)
     useEffect(() => {
-        if (items.length > 0 && typeof window !== 'undefined') {
-            const ecommerceData = {
-                value: cartTotal,
+        if (
+            items.length > 0 &&
+            searchParams.get('success') !== 'true' &&
+            !hasTrackedBeginCheckoutRef.current &&
+            typeof window !== 'undefined'
+        ) {
+            hasTrackedBeginCheckoutRef.current = true;
+            trackEcommerceEvent('begin_checkout', {
                 currency: 'USD',
-                items: items.map((item, index) => ({
-                    item_id: String(item.id),
-                    item_name: item.name,
-                    price: item.price,
-                    quantity: item.quantity,
-                    index: index
-                }))
-            };
-            if ((window as any).dataLayer) {
-                (window as any).dataLayer.push({
-                    event: 'begin_checkout',
-                    ecommerce: ecommerceData
-                });
-            }
-            if ((window as any).gtag) {
-                (window as any).gtag('event', 'begin_checkout', ecommerceData);
-            }
+                value: Number(cartTotal.toFixed(2)),
+                items: items.map((item, index) => buildGa4EcommerceItem(item, item.quantity, index, item.price)),
+            });
         }
-    }, [items, cartTotal]);
+    }, [items, cartTotal, searchParams]);
 
     useEffect(() => {
         console.log('CheckoutPage: params check', {

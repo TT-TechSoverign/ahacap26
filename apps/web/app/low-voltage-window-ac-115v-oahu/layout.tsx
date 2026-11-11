@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '115V Standard Plug Window ACs Oahu (6k–14k BTU In-Stock $395–$785) | Waipahu'
+        absolute: '115V Plug Window ACs Oahu ($395–$785) | 6k–14k BTU In-Stock'
     },
     description: 'In-Stock 115V 15-Amp LG & GE Window ACs (6,000–14,000 BTU, $395–$785) in Waipahu, Oahu. Plugs into standard outlets + $45 Hawaii Energy Rebate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/low-voltage-window-ac-115v-oahu',
     },
     openGraph: {
-        title: '115V Standard Plug Window ACs Oahu (6k–14k BTU In-Stock $395–$785) | Waipahu',
+        title: '115V Plug Window ACs Oahu ($395–$785) | 6k–14k BTU In-Stock',
         description: 'In-Stock 115V 15-Amp LG & GE Window ACs (6,000–14,000 BTU, $395–$785) in Waipahu, Oahu. Plugs into standard outlets + $45 Hawaii Energy Rebate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/low-voltage-window-ac-115v-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: '115V Standard Plug Window ACs Oahu (6k–14k BTU In-Stock $395–$785) | Waipahu',
+        title: '115V Plug Window ACs Oahu ($395–$785) | 6k–14k BTU In-Stock',
         description: 'In-Stock 115V 15-Amp LG & GE Window ACs (6,000–14,000 BTU, $395–$785) in Waipahu, Oahu. Plugs into standard outlets + $45 Hawaii Energy Rebate • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
@@ -90,6 +90,8 @@ const breadcrumbSchema = {
 const pass5RichSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
     "name": "LG Dual Inverter 12,000 BTU 115V Standard Plug Window AC (LW1222IVSM)",
     "image": [
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
@@ -170,7 +172,8 @@ const pass5RichSchema = {
         "availability": "https://schema.org/InStock",
         "seller": {
             "@type": "Organization",
-            "name": "Affordable Home A/C"
+            "name": "Affordable Home A/C",
+            "url": "https://www.affordablehome-ac.com"
         },
         "hasMerchantReturnPolicy": {
             "@type": "MerchantReturnPolicy",

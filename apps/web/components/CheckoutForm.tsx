@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { safeStorage } from '../lib/safe-storage';
+import { buildGa4EcommerceItem, trackEcommerceEvent } from '../lib/tracking';
 import { Loader2, Lock } from 'lucide-react';
 
 interface CheckoutFormProps {
@@ -70,6 +71,32 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
 
             if (apiError) throw new Error(apiError);
             if (!url) throw new Error('Checkout URL missing');
+
+            // Persist pending order snapshot so post-Stripe redirect purchase telemetry has 100% accurate items & totals
+            try {
+                const ga4Items = items.map((it, idx) => buildGa4EcommerceItem(it, it.quantity || 1, idx, it.price));
+                const shippingFee = fulfillmentMode === 'delivery' ? 50 : 0;
+                const shippingTier = fulfillmentMode === 'delivery' ? 'Oahu Flat-Rate $50 Delivery' : 'Waipahu Free Warehouse Pickup';
+                trackEcommerceEvent('add_shipping_info', {
+                    currency: 'USD',
+                    value: totalAmount,
+                    shipping_tier: shippingTier,
+                    items: ga4Items,
+                });
+                safeStorage.setItem(
+                    'ahac_pending_order',
+                    JSON.stringify({
+                        items: ga4Items,
+                        totalAmount,
+                        shippingFee,
+                        fulfillmentMode,
+                        createdAt: Date.now(),
+                    }),
+                    'local'
+                );
+            } catch {
+                // Non-blocking storage snapshot
+            }
 
             // Redirect to Stripe Hosted Checkout
             window.location.href = url;

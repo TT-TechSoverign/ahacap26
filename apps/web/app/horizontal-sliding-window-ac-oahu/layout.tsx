@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Horizontal Sliding Window AC Installation Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Sliding Window AC Install Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Custom horizontal sliding Window AC installation on Oahu with vertical weather-seal filler panels, security locks & brackets.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/horizontal-sliding-window-ac-oahu',
     },
     openGraph: {
-        title: 'Horizontal Sliding Window AC Installation Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Sliding Window AC Install Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Custom horizontal sliding Window AC installation on Oahu with vertical weather-seal filler panels, security locks & brackets.',
         url: 'https://www.affordablehome-ac.com/horizontal-sliding-window-ac-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Horizontal Sliding Window AC Installation Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Sliding Window AC Install Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Custom horizontal sliding Window AC installation on Oahu with vertical weather-seal filler panels, security locks & brackets.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
@@ -104,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/horizontal-sliding-window-ac-oahu#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '1-Year Window AC Warranty & Waipahu Support | In-Stock LG & GE ($395+)'
+        absolute: '1-Yr Window AC Warranty Waipahu ($395+ LG & GE) | Local Help'
     },
     description: 'Every factory-sealed LG & GE Window AC ($395–$1,200) at our Waipahu warehouse includes a 1-Year Manufacturer Parts & Labor Warranty • Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
     },
     openGraph: {
-        title: '1-Year Window AC Warranty & Waipahu Support | In-Stock LG & GE ($395+)',
+        title: '1-Yr Window AC Warranty Waipahu ($395+ LG & GE) | Local Help',
         description: 'Every factory-sealed LG & GE Window AC ($395–$1,200) at our Waipahu warehouse includes a 1-Year Manufacturer Parts & Labor Warranty • Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: '1-Year Window AC Warranty & Waipahu Support | In-Stock LG & GE ($395+)',
+        title: '1-Yr Window AC Warranty Waipahu ($395+ LG & GE) | Local Help',
         description: 'Every factory-sealed LG & GE Window AC ($395–$1,200) at our Waipahu warehouse includes a 1-Year Manufacturer Parts & Labor Warranty • Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
@@ -90,6 +90,8 @@ const breadcrumbSchema = {
 const pass5RichSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
     "name": "Factory-Warrantied LG & GE Window Air Conditioners Oahu (AJCQ12AXXWA)",
     "image": [
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
@@ -170,7 +172,8 @@ const pass5RichSchema = {
         "availability": "https://schema.org/InStock",
         "seller": {
             "@type": "Organization",
-            "name": "Affordable Home A/C"
+            "name": "Affordable Home A/C",
+            "url": "https://www.affordablehome-ac.com"
         },
         "hasMerchantReturnPolicy": {
             "@type": "MerchantReturnPolicy",

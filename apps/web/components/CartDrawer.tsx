@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import { isCampaignActive } from '../lib/utils';
 import { getProductImages } from '../lib/product-images';
+import { buildGa4EcommerceItem, trackEcommerceEvent } from '../lib/tracking';
 import { ShoppingCart, X, Snowflake, AlertCircle, Warehouse, Trash2, AlertTriangle, Loader2, Lock, Phone, Calendar } from 'lucide-react';
 
 function cn(...inputs: (string | undefined)[]) {
@@ -31,21 +32,12 @@ export default function CartDrawer() {
             document.body.style.overflow = 'hidden';
             document.body.style.touchAction = 'none';
 
-            // GTM E-Commerce view_cart push
-            if (items.length > 0 && typeof window !== 'undefined' && (window as any).dataLayer) {
-                (window as any).dataLayer.push({
-                    event: 'view_cart',
-                    ecommerce: {
-                        currency: 'USD',
-                        value: cartTotal,
-                        items: items.map((item, index) => ({
-                            item_id: String(item.id),
-                            item_name: item.name,
-                            price: item.price,
-                            quantity: item.quantity,
-                            index: index
-                        }))
-                    }
+            // GA4 + GTM E-Commerce view_cart dispatch
+            if (items.length > 0) {
+                trackEcommerceEvent('view_cart', {
+                    currency: 'USD',
+                    value: cartTotal,
+                    items: items.map((item, index) => buildGa4EcommerceItem(item, item.quantity, index, item.price)),
                 });
             }
 

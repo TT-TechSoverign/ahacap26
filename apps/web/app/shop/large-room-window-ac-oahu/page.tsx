@@ -179,8 +179,15 @@ export default function LargeRoomWindowAcPage() {
             },
             {
                 "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
                 "name": "LG Dual Inverter 18,000 & 23,500 BTU Large Room Window Air Conditioners (LW1822IVSM / LW2422IVSM)",
-                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                "image": [
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+                ],
                 "description": "High-capacity 18,000 BTU and 23,500 BTU LG Dual Inverter window ACs for large rooms and open-concept Oahu layouts up to 1,440 sq ft. 208/230V NEMA 6-15P. $45 Hawaii Energy Rebate eligible.",
                 "brand": { "@type": "Brand", "name": "LG" },
                 "sku": "LW1822IVSM",
@@ -214,6 +221,7 @@ export default function LargeRoomWindowAcPage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": unit18k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",
@@ -250,6 +258,7 @@ export default function LargeRoomWindowAcPage() {
                         "priceValidUntil": "2027-12-31",
                         "availability": unit23k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
                         "itemCondition": "https://schema.org/NewCondition",
+                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
                         "hasMerchantReturnPolicy": {
                             "@type": "MerchantReturnPolicy",
                             "applicableCountry": "US",

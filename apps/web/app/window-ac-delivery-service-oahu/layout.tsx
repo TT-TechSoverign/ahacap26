@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '$50 Flat-Rate Window AC Delivery Oahu | In-Stock LG & GE ACs ($395–$1,200)'
+        absolute: '$50 Oahu Window AC Delivery | In-Stock LG & GE ($395–$1,200)'
     },
     description: '$50 flat Oahu delivery or free Waipahu pickup! 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, $45 Rebate) • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu',
     },
     openGraph: {
-        title: '$50 Flat-Rate Window AC Delivery Oahu | In-Stock LG & GE ACs ($395–$1,200)',
+        title: '$50 Oahu Window AC Delivery | In-Stock LG & GE ($395–$1,200)',
         description: '$50 flat Oahu delivery or free Waipahu pickup! 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, $45 Rebate) • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: '$50 Flat-Rate Window AC Delivery Oahu | In-Stock LG & GE ACs ($395–$1,200)',
+        title: '$50 Oahu Window AC Delivery | In-Stock LG & GE ($395–$1,200)',
         description: '$50 flat Oahu delivery or free Waipahu pickup! 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, $45 Rebate) • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
@@ -90,6 +90,8 @@ const breadcrumbSchema = {
 const pass5RichSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
     "name": "In-Stock LG & GE Window Air Conditioners with $50 Flat Oahu Delivery (LW1222IVSM)",
     "image": [
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
@@ -170,7 +172,8 @@ const pass5RichSchema = {
         "availability": "https://schema.org/InStock",
         "seller": {
             "@type": "Organization",
-            "name": "Affordable Home A/C"
+            "name": "Affordable Home A/C",
+            "url": "https://www.affordablehome-ac.com"
         },
         "hasMerchantReturnPolicy": {
             "@type": "MerchantReturnPolicy",

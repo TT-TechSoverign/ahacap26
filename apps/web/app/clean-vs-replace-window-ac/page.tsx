@@ -97,11 +97,19 @@ export default function CleanVsReplacePage() {
             {
                 "@type": "Service",
                 "@id": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac#service",
+                "url": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac",
+                "image": [
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+                ],
                 "name": "$0 Free Clean-vs-Replace Window AC Assessment & Replacement Oahu",
                 "serviceType": "Window AC Clean-vs-Replace Evaluation & Replacement",
                 "provider": {
                     "@type": "HVACBusiness",
                     "@id": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
                     "name": "Affordable Home A/C",
                     "image": [
                         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",

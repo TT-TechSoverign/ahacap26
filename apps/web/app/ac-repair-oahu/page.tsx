@@ -131,11 +131,19 @@ export default function AcRepairOahuPage() {
             {
                 "@type": "Service",
                 "@id": "https://www.affordablehome-ac.com/ac-repair-oahu#service",
+                "url": "https://www.affordablehome-ac.com/ac-repair-oahu",
+                "image": [
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+                ],
                 "name": "Window AC Repair & Diagnostics Oahu",
                 "serviceType": "Window AC Repair & Troubleshooting",
                 "provider": {
                     "@type": "HVACBusiness",
                     "@id": "https://www.affordablehome-ac.com/ac-repair-oahu#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
                     "name": "Affordable Home A/C",
                     "image": [
                         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",

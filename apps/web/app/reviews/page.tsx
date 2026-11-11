@@ -9,14 +9,14 @@ import { ShieldCheck, Star, MapPin, ChevronRight, Home } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '142+ Five-Star Reviews (4.9★) | Affordable Home A/C Oahu | (808) 488-1111'
+        absolute: '142+ Oahu 5-Star Reviews (4.9★) | $395+ Window ACs & $0 Est.'
     },
     description: 'Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG & GE Window ACs ($395–$1,200), jalousie install & cleaning • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/reviews',
     },
     openGraph: {
-        title: '142+ Five-Star Reviews (4.9★) | Affordable Home A/C Oahu | (808) 488-1111',
+        title: '142+ Oahu 5-Star Reviews (4.9★) | $395+ Window ACs & $0 Est.',
         description: 'Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG & GE Window ACs ($395–$1,200), jalousie install & cleaning • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/reviews',
         siteName: 'Affordable Home A/C',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: '142+ Five-Star Reviews (4.9★) | Affordable Home A/C Oahu | (808) 488-1111',
+        title: '142+ Oahu 5-Star Reviews (4.9★) | $395+ Window ACs & $0 Est.',
         description: 'Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG & GE Window ACs ($395–$1,200), jalousie install & cleaning • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },
@@ -48,6 +48,7 @@ export default function ReviewsPage() {
         "@context": "https://schema.org",
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/reviews#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": [
             "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
@@ -143,8 +144,16 @@ export default function ReviewsPage() {
                     "@type": "Answer",
                     "text": "Yes. Every factory-sealed LG and GE Window AC purchased from our Waipahu warehouse includes a full 1-year manufacturer parts and labor warranty (and 2-year full / 5-year sealed system on the GE AJCQ12AXXWA), supported directly by our local Oahu team since 2005."
                 }
+            },
+        {
+            "@type": "Question",
+            "name": "How do I book a $0 Free In-Home Window AC Estimate or buy an in-stock unit?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can purchase any of our 16 in-stock LG Dual Inverter or GE 26-inch Built-In Window ACs ($395–$1,200) directly online at affordablehome-ac.com/shop, or request a By-Appointment-First $0 Free In-Home Estimate for jalousie installation, 26-inch wall sleeve replacement, or deep coil cleaning by calling (808) 488-1111."
             }
-        ]
+        }
+    ]
     };
 
     return (

@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Wood-Frame Window AC Support & Sealing Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Wood-Frame Window AC Support Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Protect Oahu single-wall redwood window sills from rot and heavy AC weight with exterior support brackets & proper pitch.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/wood-frame-window-ac-support-oahu',
     },
     openGraph: {
-        title: 'Wood-Frame Window AC Support & Sealing Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Wood-Frame Window AC Support Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Protect Oahu single-wall redwood window sills from rot and heavy AC weight with exterior support brackets & proper pitch.',
         url: 'https://www.affordablehome-ac.com/wood-frame-window-ac-support-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Wood-Frame Window AC Support & Sealing Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Wood-Frame Window AC Support Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Protect Oahu single-wall redwood window sills from rot and heavy AC weight with exterior support brackets & proper pitch.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
@@ -104,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/wood-frame-window-ac-support-oahu#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

@@ -418,14 +418,26 @@ export function middleware(request: NextRequest) {
         'service',
         'notes',
         'model',
+        'city',
+        'tier',
+        'btu',
+        'window',
+        'unit',
+        'symptom',
+        'canceled',
+        'success',
+        'session_id',
+        'fulfillment',
         '_t',
         '_rsc',
     ];
     const isPrivateRoute = noIndexPaths.some(path => url.pathname.startsWith(path));
     const hasNoIndexParam = noIndexParams.some(param => url.searchParams.has(param));
 
-    if (isStagingHost || isPrivateRoute || hasNoIndexParam) {
+    if (isStagingHost || isPrivateRoute) {
         response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    } else if (hasNoIndexParam) {
+        response.headers.set('X-Robots-Tag', 'noindex, follow');
     }
 
     // 9. Conditional HTTP Caching Protocol (304 Not Modified for Public Routes; Zero-Cache for Admin/Checkout)
@@ -447,8 +459,8 @@ export const config = {
          * - api (API routes)
          * - _next/static (static files)
          * - _next/image (image optimization files)
-         * - favicon.ico, sitemap.xml, robots.txt (static files)
+         * - favicon.ico, sitemap.xml, robots.txt, XML feeds (static/feed files)
          */
-        '/((?!api|_next/static|_next/image|favicon\\.ico|favicon-48x48\\.png|favicon-96x96\\.png|icon\\.png|icon-192\\.png|icon-512\\.png|apple-touch-icon\\.png|manifest\\.json|sitemap\\.xml|robots\\.txt).*)',
+        '/((?!api|_next/static|_next/image|favicon\\.ico|favicon-48x48\\.png|favicon-96x96\\.png|icon\\.png|icon-192\\.png|icon-512\\.png|apple-touch-icon\\.png|manifest\\.json|sitemap\\.xml|robots\\.txt|merchant-feed\\.xml|product-reviews-feed\\.xml).*)',
     ],
 };

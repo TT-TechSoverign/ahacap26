@@ -50,6 +50,14 @@ const drippingFaqSchema = {
                 "@type": "Answer",
                 "text": "Our Oahu cooling technicians inspect the condensate drain pan, flush and clear the gravity drain line using vacuum extraction and dedicated line flushing, verify the mounting pitch with a digital level, and apply antimicrobial pan treatments to prevent future algae clogs."
             }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I pour bleach into my window AC drain pan myself?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We strongly advise against bleach. Bleach fumes are corrosive to aluminum coil fins, can degrade rubber gaskets, and if splashed on paint or upholstery causes permanent discoloration. Our technicians use specialized non-corrosive HVAC pan treatments and lay protective floor drop cloths under your unit during service."
+            }
         }
     ]
 };
@@ -96,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/ac-dripping-water-inside-house-repair#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {

@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Living Room Window ACs Oahu (12k–23.5k BTU In-Stock $695+) | Waipahu Pickup'
+        absolute: 'Living Room Window ACs Oahu ($695+ In-Stock) | 12k–23.5k BTU'
     },
     description: 'Cool open Oahu living rooms with in-stock 12,000–23,500 BTU LG Dual Inverter & GE Window ACs ($695–$1,200) in Waipahu. $45 Rebate & $0 Estimate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/living-room-window-ac-oahu',
     },
     openGraph: {
-        title: 'Living Room Window ACs Oahu (12k–23.5k BTU In-Stock $695+) | Waipahu Pickup',
+        title: 'Living Room Window ACs Oahu ($695+ In-Stock) | 12k–23.5k BTU',
         description: 'Cool open Oahu living rooms with in-stock 12,000–23,500 BTU LG Dual Inverter & GE Window ACs ($695–$1,200) in Waipahu. $45 Rebate & $0 Estimate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/living-room-window-ac-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Living Room Window ACs Oahu (12k–23.5k BTU In-Stock $695+) | Waipahu Pickup',
+        title: 'Living Room Window ACs Oahu ($695+ In-Stock) | 12k–23.5k BTU',
         description: 'Cool open Oahu living rooms with in-stock 12,000–23,500 BTU LG Dual Inverter & GE Window ACs ($695–$1,200) in Waipahu. $45 Rebate & $0 Estimate • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_6_fit_cutaway.webp'],
     }
@@ -49,6 +49,14 @@ const livingRoomFaqSchema = {
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Yes! The LG Dual Inverter 14,000 BTU (LW1522FVSM) runs on a standard 115V 15A wall plug. For 18,000 BTU and 23,500 BTU units, a dedicated 208/230V circuit is required."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do high-capacity living room Window ACs qualify for the $45 Hawaii Energy rebate?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! All ENERGY STAR certified LG Dual Inverter cooling models—including 12,000 BTU (LW1222IVSM), 14,000 BTU (LW1522FVSM), 18,000 BTU (LW1822IVSM), and 23,500 BTU (LW2422IVSM)—qualify for the $45 Hawaii Energy cash rebate, and we include the official rebate PDF at checkout."
             }
         }
     ]
@@ -82,6 +90,8 @@ const breadcrumbSchema = {
 const pass5RichSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
+                "color": "White",
+                "category": "Window Air Conditioners",
     "name": "LG Dual Inverter 14,000 BTU Living Room Window AC (LW1522FVSM)",
     "image": [
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
@@ -162,7 +172,8 @@ const pass5RichSchema = {
         "availability": "https://schema.org/InStock",
         "seller": {
             "@type": "Organization",
-            "name": "Affordable Home A/C"
+            "name": "Affordable Home A/C",
+            "url": "https://www.affordablehome-ac.com"
         },
         "hasMerchantReturnPolicy": {
             "@type": "MerchantReturnPolicy",

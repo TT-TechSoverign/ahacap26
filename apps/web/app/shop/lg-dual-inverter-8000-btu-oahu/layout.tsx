@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '8,000 BTU Window ACs Oahu ($395–$1,000 In-Stock) | LG & GE Waipahu Pickup',
+        absolute: '8,000 BTU Window ACs Oahu ($395–$1,000) | LG & GE In-Stock',
     },
     description: 'Compare 8,000 BTU 115V Oahu bedroom Window ACs: In-Stock LG Standard LW8024RD ($395), LG Cool+Heat ($650), LG Inverter ($595) & GE 26" ($1,000) • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/shop/lg-dual-inverter-8000-btu-oahu',
     },
     openGraph: {
-        title: '8,000 BTU Window ACs Oahu ($395–$1,000 In-Stock) | LG & GE Waipahu Pickup',
+        title: '8,000 BTU Window ACs Oahu ($395–$1,000) | LG & GE In-Stock',
         description: 'Compare 8,000 BTU 115V Oahu bedroom Window ACs: In-Stock LG Standard LW8024RD ($395), LG Cool+Heat ($650), LG Inverter ($595) & GE 26" ($1,000) • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/shop/lg-dual-inverter-8000-btu-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: '8,000 BTU Window ACs Oahu ($395–$1,000 In-Stock) | LG & GE Waipahu Pickup',
+        title: '8,000 BTU Window ACs Oahu ($395–$1,000) | LG & GE In-Stock',
         description: 'Compare 8,000 BTU 115V Oahu bedroom Window ACs: In-Stock LG Standard LW8024RD ($395), LG Cool+Heat ($650), LG Inverter ($595) & GE 26" ($1,000) • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },

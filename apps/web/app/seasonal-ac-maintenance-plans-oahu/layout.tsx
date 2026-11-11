@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Seasonal Window AC Cleaning & Maintenance Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Seasonal Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Keep your Oahu Window AC ice-cold year-round with 6- and 12-month deep coil cleaning, antimicrobial pan care & amp checks.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/seasonal-ac-maintenance-plans-oahu',
     },
     openGraph: {
-        title: 'Seasonal Window AC Cleaning & Maintenance Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Seasonal Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Keep your Oahu Window AC ice-cold year-round with 6- and 12-month deep coil cleaning, antimicrobial pan care & amp checks.',
         url: 'https://www.affordablehome-ac.com/seasonal-ac-maintenance-plans-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Seasonal Window AC Cleaning & Maintenance Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Seasonal Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Keep your Oahu Window AC ice-cold year-round with 6- and 12-month deep coil cleaning, antimicrobial pan care & amp checks.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
@@ -104,6 +104,7 @@ const pass5RichSchema = {
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/seasonal-ac-maintenance-plans-oahu#localbusiness",
+        "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
         "name": "Affordable Home A/C",
         "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
         "aggregateRating": {
