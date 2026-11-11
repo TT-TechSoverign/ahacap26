@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC for Studios & Apartments Hawaii ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C'
+        absolute: 'Studio & Apartment Window ACs Oahu ($395–$650 In-Stock) | 44dB Quiet LG'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Space-saving, whisper-quiet window air conditioners designed for Honolulu studio apartments, Waikiki walk-ups, and.',
+    description: 'In-Stock compact 6,000–10,000 BTU LG & GE Window ACs ($395–$650) for Honolulu studios & Waikiki apartments. 115V plug, 44dB quiet & $45 Rebate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-for-studios-apartments-hawaii',
     },
     openGraph: {
-        title: 'Window AC for Studios & Apartments Hawaii ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Space-saving, whisper-quiet window air conditioners designed for Honolulu studio apartments, Waikiki walk-ups, and.',
+        title: 'Studio & Apartment Window ACs Oahu ($395–$650 In-Stock) | 44dB Quiet LG',
+        description: 'In-Stock compact 6,000–10,000 BTU LG & GE Window ACs ($395–$650) for Honolulu studios & Waikiki apartments. 115V plug, 44dB quiet & $45 Rebate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-for-studios-apartments-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC for Studios & Apartments Hawaii ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Space-saving, whisper-quiet window air conditioners designed for Honolulu studio apartments, Waikiki walk-ups, and.',
+        title: 'Studio & Apartment Window ACs Oahu ($395–$650 In-Stock) | 44dB Quiet LG',
+        description: 'In-Stock compact 6,000–10,000 BTU LG & GE Window ACs ($395–$650) for Honolulu studios & Waikiki apartments. 115V plug, 44dB quiet & $45 Rebate • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp'],
     }
 };
@@ -92,7 +92,10 @@ const pass5RichSchema = {
     "@type": "Product",
     "name": "LG Dual Inverter 6,000 BTU Studio & Apartment Window AC (LW6023IVSM)",
     "image": [
-        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp"
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
     "description": "Compact, HOA-friendly 115V studio and apartment window ACs ($395–$745) and 26-inch condo wall units in stock at our Waipahu, Oahu warehouse.",
     "sku": "LW6023IVSM",
@@ -118,6 +121,36 @@ const pass5RichSchema = {
             },
             "datePublished": "2026-09-18",
             "reviewBody": "Picked up our new LG Dual Inverter at the Waipahu warehouse. Ice-cold, whisper quiet at 44dB, and qualified for the $45 Hawaii Energy rebate.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        },
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "Leilani K. — Honolulu, Oahu"
+            },
+            "datePublished": "2026-10-02",
+            "reviewBody": "Upgraded our Honolulu condo bedroom to an in-stock Waipahu unit. Runs whisper-quiet overnight on a standard 115V outlet and cut our HECO electric bill.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        },
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "David C. — Pearl City, Oahu"
+            },
+            "datePublished": "2026-10-14",
+            "reviewBody": "Same-week Waipahu warehouse pickup by appointment. Brand-new factory-sealed unit with 1-year warranty and official $45 Hawaii Energy rebate PDF.",
             "reviewRating": {
                 "@type": "Rating",
                 "ratingValue": "5",

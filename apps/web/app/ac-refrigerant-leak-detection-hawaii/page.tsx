@@ -69,7 +69,7 @@ export default function RefrigerantLeakPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
-        <div className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
+        <main className="bg-[#0a0e14] text-white min-h-screen selection:bg-primary selection:text-white pt-[92px] md:pt-[180px] pb-36 lg:pb-24">
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
                 
                 <div className="mb-6">
@@ -213,6 +213,6 @@ export default function RefrigerantLeakPage() {
 
                 <BackToTop />
             </div>
-        </div>
+        </main>
     );
 }

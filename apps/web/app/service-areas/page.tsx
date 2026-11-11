@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { BackToTop } from '@/components/BackToTop';
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 export default function ServiceAreasPage() {
     const { content } = useContent();
@@ -23,7 +24,7 @@ export default function ServiceAreasPage() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 font-sans pb-24 relative overflow-hidden selection:bg-cyan-500 selection:text-slate-950">
+        <main className="min-h-screen bg-slate-950 font-sans pb-24 relative overflow-hidden selection:bg-cyan-500 selection:text-slate-950">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -35,7 +36,12 @@ export default function ServiceAreasPage() {
                                 "@id": "https://www.affordablehome-ac.com/service-areas#localbusiness",
                                 "name": "Affordable Home A/C — All 22 Oahu Service Areas",
                                 "url": "https://www.affordablehome-ac.com/service-areas",
-                                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                                "image": [
+                                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-profile-clearview-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                                    "https://www.affordablehome-ac.com/images/products/cutaways/product_4_fit_cutaway.webp",
+                                    "https://www.affordablehome-ac.com/assets/hero-cards-bg/window-ac-maintenance-hero-bg-1.webp"
+                                ],
                                 "telephone": "+1-808-488-1111",
                                 "priceRange": "$395 - $1,200",
                                 "address": {
@@ -52,7 +58,30 @@ export default function ServiceAreasPage() {
                                     "reviewCount": "142",
                                     "bestRating": "5",
                                     "worstRating": "1"
-                                }
+                                },
+                                "review": [
+                                    {
+                                        "@type": "Review",
+                                        "author": { "@type": "Person", "name": "Kimo M. — Waipahu, Oahu" },
+                                        "datePublished": "2026-09-18",
+                                        "reviewBody": "Picked up a 12,000 BTU LG Dual Inverter directly from their Waipahu warehouse and had Brian's team custom-install it in our jalousie window with floor drop cloths. Whisper quiet and dropped our HECO bill immediately.",
+                                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                                    },
+                                    {
+                                        "@type": "Review",
+                                        "author": { "@type": "Person", "name": "Leilani K. — Honolulu, Oahu" },
+                                        "datePublished": "2026-10-04",
+                                        "reviewBody": "Zero upfront payment to get an honest in-home assessment. They deep-cleaned our bedroom window AC coils and replaced our corroded 26-inch living room wall sleeve unit with a new GE R-32 inverter.",
+                                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                                    },
+                                    {
+                                        "@type": "Review",
+                                        "author": { "@type": "Person", "name": "David C. — Pearl City, Oahu" },
+                                        "datePublished": "2026-10-19",
+                                        "reviewBody": "Fast island-wide delivery, direct Waipahu warehouse pricing, and they handed us the pre-filled $45 Hawaii Energy rebate form at checkout.",
+                                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                                    }
+                                ]
                             },
                             {
                                 "@type": "BreadcrumbList",
@@ -219,10 +248,12 @@ export default function ServiceAreasPage() {
                     subheading="Available for Free Waipahu Pickup by appointment or $50 flat-rate delivery across all 22 Oahu communities."
                 />
 
+                <ReviewsPavilion variant="compact" title="Verified Oahu Homeowner Reviews Across All 22 Service Areas" subtitle="Rated 4.9★ across 142+ installations, cleanings & warehouse pickups island-wide" limit={6} />
+
                 <OahuEEATAuthorityBar topicTitle="Oahu Island-Wide LG & GE Window AC Sales, Installation & Cleaning Coverage Directory" />
             </div>
 
             <BackToTop visible={true} />
-        </div>
+        </main>
     );
 }

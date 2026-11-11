@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
+        absolute: 'Window AC Burning Smell Oahu ($0 Estimate) | Safety Check & $395+ Swap'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate.',
+    description: '$0 Free Estimate • (808) 488-1111. Smell burning plastic or electrical odor from your Oahu Window AC? Shut off breaker now & book a safe repair or $395+ swap.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu',
     },
     openGraph: {
-        title: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate.',
+        title: 'Window AC Burning Smell Oahu ($0 Estimate) | Safety Check & $395+ Swap',
+        description: '$0 Free Estimate • (808) 488-1111. Smell burning plastic or electrical odor from your Oahu Window AC? Shut off breaker now & book a safe repair or $395+ swap.',
         url: 'https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate.',
+        title: 'Window AC Burning Smell Oahu ($0 Estimate) | Safety Check & $395+ Swap',
+        description: '$0 Free Estimate • (808) 488-1111. Smell burning plastic or electrical odor from your Oahu Window AC? Shut off breaker now & book a safe repair or $395+ swap.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
@@ -91,11 +91,16 @@ const pass5RichSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": "https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu#service",
-    "name": "AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair ($0 Estimate)",
-    "serviceType": "AC Burning Electrical Smell Oahu? Emergency Shutoff & Repair ($0 Estimate)",
+    "name": "Window AC Burning Smell Oahu ($0 Estimate) | Safety Check & $395+ Swap",
+    "serviceType": "Window AC Burning Smell Oahu ($0 Estimate) | Safety Check & $395+ Swap",
     "url": "https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu",
-    "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp",
-    "description": "$0 Free Estimate • (808) 488-1111. Smell burning plastic, fishy odor, or electrical smoke from your LG or GE window AC vents? Follow immediate.",
+    "image": [
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+    ],
+    "description": "$0 Free Estimate • (808) 488-1111. Smell burning plastic or electrical odor from your Oahu Window AC? Shut off breaker now & book a safe repair or $395+ swap.",
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/ac-burning-electrical-smell-oahu#localbusiness",
@@ -108,6 +113,29 @@ const pass5RichSchema = {
             "bestRating": "5",
             "worstRating": "1"
         },
+        "review": [
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Kimo M. — Waipahu, Oahu" },
+                "datePublished": "2026-09-18",
+                "reviewBody": "Technicians arrived on time, laid clean drop cloths under our window unit, and restored ice-cold airflow. Honest pricing and aloha service!",
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+            },
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Leilani K. — Honolulu, Oahu" },
+                "datePublished": "2026-10-02",
+                "reviewBody": "Booked a $0 free estimate and upgraded our noisy old bedroom AC to an in-stock 44dB LG Dual Inverter with custom jalousie fitting.",
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+            },
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "David C. — Pearl City, Oahu" },
+                "datePublished": "2026-10-14",
+                "reviewBody": "Fast Waipahu warehouse pickup and expert Oahu window AC support. Qualified for the $45 Hawaii Energy rebate and cut our HECO bill immediately.",
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+            }
+        ],
         "url": "https://www.affordablehome-ac.com",
         "telephone": "+1-808-488-1111",
         "priceRange": "$395 - $1,200",

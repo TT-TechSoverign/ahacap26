@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { WarehouseInventoryGrid } from './inventory-grid';
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 export const metadata: Metadata = {
     title: {
@@ -553,7 +554,8 @@ export default function OahuWindowAcWarehousePage() {
                     </div>
                 </div>
                 <div className="max-w-5xl mx-auto mt-8">
-                    <OahuEEATAuthorityBar topicTitle="In-Stock Oahu LG & GE Window AC Warehouse Inventory & Fulfillment Guide" />
+                    <ReviewsPavilion variant="compact" />
+                <OahuEEATAuthorityBar topicTitle="In-Stock Oahu LG & GE Window AC Warehouse Inventory & Fulfillment Guide" />
                 </div>
             </section>
         </main>

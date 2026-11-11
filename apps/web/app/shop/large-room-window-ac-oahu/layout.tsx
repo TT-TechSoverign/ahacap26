@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Large Room Window ACs Oahu (14,000–23,500 BTU) — $785–$1,025 | In-Stock Waipahu | Affordable Home A/C',
+        absolute: '14k–23.5k BTU Large Room Window ACs Oahu ($785–$1,025 In-Stock) | Waipahu',
     },
-    description: 'Shop high-capacity 14,000 BTU (115V), 18,000 BTU (230V), and 23,500 BTU (230V) LG Dual Inverter & GE Built-In window air conditioners in stock in Waipahu, Oahu ($785–$1,025). Free warehouse pickup or $50 island delivery.',
+    description: 'In-Stock 14,000 BTU (115V), 18,000 BTU & 23,500 BTU (230V) LG Dual Inverter Window ACs ($785–$1,025) in Waipahu, Oahu. $45 Rebate & $50 delivery • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu',
     },
     openGraph: {
-        title: 'Large Room Window ACs Oahu (14,000–23,500 BTU) — $785–$1,025 | In-Stock Waipahu | Affordable Home A/C',
-        description: 'Shop high-capacity 14,000 BTU (115V), 18,000 BTU (230V), and 23,500 BTU (230V) LG Dual Inverter & GE Built-In window air conditioners in stock in Waipahu, Oahu ($785–$1,025). Free warehouse pickup or $50 island delivery.',
+        title: '14k–23.5k BTU Large Room Window ACs Oahu ($785–$1,025 In-Stock) | Waipahu',
+        description: 'In-Stock 14,000 BTU (115V), 18,000 BTU & 23,500 BTU (230V) LG Dual Inverter Window ACs ($785–$1,025) in Waipahu, Oahu. $45 Rebate & $50 delivery • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Large Room Window ACs Oahu (14,000–23,500 BTU) — $785–$1,025 | In-Stock Waipahu | Affordable Home A/C',
-        description: 'Shop high-capacity 14,000 BTU (115V), 18,000 BTU (230V), and 23,500 BTU (230V) LG Dual Inverter & GE Built-In window air conditioners in stock in Waipahu, Oahu ($785–$1,025). Free warehouse pickup or $50 island delivery.',
+        title: '14k–23.5k BTU Large Room Window ACs Oahu ($785–$1,025 In-Stock) | Waipahu',
+        description: 'In-Stock 14,000 BTU (115V), 18,000 BTU & 23,500 BTU (230V) LG Dual Inverter Window ACs ($785–$1,025) in Waipahu, Oahu. $45 Rebate & $50 delivery • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },
 };

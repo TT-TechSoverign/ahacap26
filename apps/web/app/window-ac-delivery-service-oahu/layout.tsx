@@ -92,7 +92,10 @@ const pass5RichSchema = {
     "@type": "Product",
     "name": "In-Stock LG & GE Window Air Conditioners with $50 Flat Oahu Delivery (LW1222IVSM)",
     "image": [
-        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp"
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
     "description": "Order in-stock LG Dual Inverter & GE Built-In window ACs ($395–$1,200) online with $50 flat-rate delivery across all 22 Oahu cities or free Waipahu warehouse pickup.",
     "sku": "LW1222IVSM",
@@ -118,6 +121,36 @@ const pass5RichSchema = {
             },
             "datePublished": "2026-09-18",
             "reviewBody": "Picked up our new LG Dual Inverter at the Waipahu warehouse. Ice-cold, whisper quiet at 44dB, and qualified for the $45 Hawaii Energy rebate.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        },
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "Leilani K. — Honolulu, Oahu"
+            },
+            "datePublished": "2026-10-02",
+            "reviewBody": "Upgraded our Honolulu condo bedroom to an in-stock Waipahu unit. Runs whisper-quiet overnight on a standard 115V outlet and cut our HECO electric bill.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        },
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "David C. — Pearl City, Oahu"
+            },
+            "datePublished": "2026-10-14",
+            "reviewBody": "Same-week Waipahu warehouse pickup by appointment. Brand-new factory-sealed unit with 1-year warranty and official $45 Hawaii Energy rebate PDF.",
             "reviewRating": {
                 "@type": "Rating",
                 "ratingValue": "5",

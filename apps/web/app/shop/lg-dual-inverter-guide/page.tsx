@@ -32,6 +32,7 @@ import { trackFunnelEvent } from '@/lib/tracking';
 import { isCampaignActive, generateProductSlug } from '@/lib/utils';
 
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 type GuideModel = Product & { idealRoom: string; plugType: string; hecoMonthly: string; specialBadge?: string };
@@ -683,14 +684,15 @@ export default function LgDualInverterGuidePage() {
                         </a>
                     </div>
                 </div>
-            </main>
-                            <WindowAcQuickShop
+<WindowAcQuickShop
                     modelIds={[3, 4, 15, 6]}
                     title="In-Stock Waipahu LG & GE Window Air Conditioners ($395–$1,200)"
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 
-                <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+                <ReviewsPavilion variant="compact" />
+                <OahuEEATAuthorityBar topicTitle="Complete LG Dual Inverter Window AC Oahu Buyer Guide (6,000–23,500 BTU)" />
+            </main>
 
                 <BackToTop />
         </div>

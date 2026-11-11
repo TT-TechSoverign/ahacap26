@@ -125,8 +125,24 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
     const resolvedSubheading = rawSubheading.replace(/\$395[–\-?]\$(?:1,025|1,200)/g, `$${minPrice}–$${maxPrice.toLocaleString()}`);
 
     return (
-        <section className="py-12 px-4 sm:px-6 rounded-3xl bg-slate-900/70 border border-white/10 shadow-2xl my-12">
+        <section id="in-stock-waipahu-models" className="py-12 px-4 sm:px-6 rounded-3xl bg-slate-900/70 border border-white/10 shadow-2xl my-12">
             <div className="max-w-7xl mx-auto space-y-6">
+                {/* Crawlable Google SERP Quick-Jump Sitelink Anchor Bar */}
+                <nav aria-label="On-Page Quick Jump" className="flex flex-wrap items-center gap-2 pb-4 border-b border-white/10 text-[11px] font-mono">
+                    <span className="text-slate-400 uppercase font-bold tracking-wider mr-1">Jump To:</span>
+                    <a href="#in-stock-waipahu-models" className="px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 text-cyan-400 hover:text-cyan-300 transition-colors">
+                        In-Stock Units (${minPrice}–${maxPrice.toLocaleString()})
+                    </a>
+                    <a href="#oahu-window-ac-comparison-table" className="px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 text-cyan-400 hover:text-cyan-300 transition-colors">
+                        Oahu Price &amp; BTU Spec Table
+                    </a>
+                    <a href="#oahu-service-options-summary" className="px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 text-cyan-400 hover:text-cyan-300 transition-colors">
+                        $0 Estimate Install &amp; Cleaning
+                    </a>
+                    <a href="#oahu-window-ac-directory" className="px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 text-cyan-400 hover:text-cyan-300 transition-colors">
+                        Complete Oahu AC Directory
+                    </a>
+                </nav>
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div className="space-y-2">
                         <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-bold uppercase tracking-wider">
@@ -303,6 +319,90 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                             GE RAB26A 26&quot; Wall Sleeve • $275
                         </Link>
                     </div>
+                </div>
+
+                {/* Semantic HTML Comparison Table for Google SERP Rich Table Snippets & Featured Snippets */}
+                <div className="pt-5 border-t border-white/10 space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <h3 className="text-sm sm:text-base font-header font-black uppercase text-white tracking-wide">
+                            Oahu In-Stock LG &amp; GE Window AC Price, BTU &amp; Specification Comparison Table
+                        </h3>
+                        <span className="text-[11px] font-mono text-emerald-400">
+                            4.9★ (142 Oahu Reviews) • Free Waipahu Pickup or $50 Delivery
+                        </span>
+                    </div>
+                    <div className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950/90">
+                        <table id="oahu-window-ac-comparison-table" className="w-full text-left border-collapse text-xs">
+                            <caption className="sr-only">
+                                Complete comparison of in-stock LG Dual Inverter, LG Cool+Heat, LG Standard, and GE 26-Inch Built-In Window Air Conditioners ($395 to $1,200) at Affordable Home A/C in Waipahu, Oahu.
+                            </caption>
+                            <thead>
+                                <tr className="border-b border-white/10 bg-white/[0.03] font-mono text-[10px] uppercase tracking-wider text-slate-400">
+                                    <th scope="col" className="py-2.5 px-3">Model &amp; MPN</th>
+                                    <th scope="col" className="py-2.5 px-3">Cooling BTU</th>
+                                    <th scope="col" className="py-2.5 px-3">Oahu Room Size (AHAM)</th>
+                                    <th scope="col" className="py-2.5 px-3">Voltage / Circuit</th>
+                                    <th scope="col" className="py-2.5 px-3">Noise / Efficiency</th>
+                                    <th scope="col" className="py-2.5 px-3">Waipahu Price &amp; Rebate</th>
+                                    <th scope="col" className="py-2.5 px-3">Stock &amp; Action</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5 font-sans text-slate-200">
+                                {inStockAcProducts.map((model) => {
+                                    const modelSlug = generateProductSlug(model.id, model.name);
+                                    const hasRebate = model.subcategory === 'dual_inverter' || model.id === 15;
+                                    return (
+                                        <tr key={model.id} className="hover:bg-white/[0.02] transition-colors">
+                                            <td className="py-2 px-3 font-bold text-white">
+                                                <Link href={`/shop/${modelSlug}`} prefetch={false} className="hover:text-primary underline decoration-white/20">
+                                                    {model.name}
+                                                </Link>
+                                            </td>
+                                            <td className="py-2 px-3 font-mono text-cyan-400 whitespace-nowrap">
+                                                {model.btu ? `${model.btu.toLocaleString()} BTU` : '26" Sleeve'}
+                                            </td>
+                                            <td className="py-2 px-3 text-slate-300">
+                                                {model.coverage_oahu || 'Oahu Calibrated'} <span className="text-slate-500 text-[11px]">({model.coverage_aham || model.coverage})</span>
+                                            </td>
+                                            <td className="py-2 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">
+                                                {model.voltage || '115V / 15A'}
+                                            </td>
+                                            <td className="py-2 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">
+                                                {model.noise_level || '44 dB'} • {model.ceer_rating ? `${model.ceer_rating} CEER` : 'R-32'}
+                                            </td>
+                                            <td className="py-2 px-3 font-mono whitespace-nowrap">
+                                                <span className="font-bold text-white">${model.price.toLocaleString()}</span>
+                                                {hasRebate && (
+                                                    <span className="ml-1.5 text-[10px] text-emerald-400 font-bold">(-$45 Rebate)</span>
+                                                )}
+                                            </td>
+                                            <td className="py-2 px-3 font-mono text-[11px] whitespace-nowrap">
+                                                <Link href={`/shop/${modelSlug}`} prefetch={false} className="text-emerald-400 hover:text-cyan-300 font-bold">
+                                                    {model.stock} In Stock &rarr;
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {/* Oahu Service & Installation Options Summary Block */}
+                <div id="oahu-service-options-summary" className="pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <Link href="/window-ac-installation" prefetch={false} className="p-3 rounded-xl bg-slate-950/70 hover:bg-slate-950 border border-white/10 hover:border-primary/40 transition-colors">
+                        <div className="font-header font-bold uppercase text-white">Window &amp; Jalousie AC Installation</div>
+                        <div className="text-[11px] text-emerald-400 font-mono mt-0.5">$0 Free In-Home Estimate • Custom Louver &amp; 26&quot; Wall Fit</div>
+                    </Link>
+                    <Link href="/ac-cleaning-oahu" prefetch={false} className="p-3 rounded-xl bg-slate-950/70 hover:bg-slate-950 border border-white/10 hover:border-primary/40 transition-colors">
+                        <div className="font-header font-bold uppercase text-white">Window AC Deep Mold &amp; Coil Cleaning</div>
+                        <div className="text-[11px] text-emerald-400 font-mono mt-0.5">$0 Free Estimate • Floor Drop-Cloth Protection</div>
+                    </Link>
+                    <Link href="/clean-vs-replace-window-ac" prefetch={false} className="p-3 rounded-xl bg-slate-950/70 hover:bg-slate-950 border border-white/10 hover:border-primary/40 transition-colors">
+                        <div className="font-header font-bold uppercase text-white">Clean vs. Replace AC Assessment</div>
+                        <div className="text-[11px] text-emerald-400 font-mono mt-0.5">$0 Honest Evaluation • Cut HECO Bills 40% + $45 Rebate</div>
+                    </Link>
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/10 text-xs text-slate-400 font-mono">

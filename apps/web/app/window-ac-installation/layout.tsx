@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Installation Oahu ($0 Estimate) | Jalousie & 26" Wall Sleeve | (808) 488-1111'
+        absolute: 'Window AC Installation Oahu ($0 Estimate) | Jalousie & 26" Sleeve | (808) 488-1111'
     },
     description: '$0 Free In-Home Estimate • (808) 488-1111. Custom Oahu jalousie louver baffles, 26" condo wall sleeve swaps, brackets & in-stock LG/GE Window ACs ($395–$1,200).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-installation',
     },
     openGraph: {
-        title: 'Window AC Installation Oahu ($0 Estimate) | Jalousie & 26" Wall Sleeve | (808) 488-1111',
+        title: 'Window AC Installation Oahu ($0 Estimate) | Jalousie & 26" Sleeve | (808) 488-1111',
         description: '$0 Free In-Home Estimate • (808) 488-1111. Custom Oahu jalousie louver baffles, 26" condo wall sleeve swaps, brackets & in-stock LG/GE Window ACs ($395–$1,200).',
         url: 'https://www.affordablehome-ac.com/window-ac-installation',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Installation Oahu ($0 Estimate) | Jalousie & 26" Wall Sleeve | (808) 488-1111',
+        title: 'Window AC Installation Oahu ($0 Estimate) | Jalousie & 26" Sleeve | (808) 488-1111',
         description: '$0 Free In-Home Estimate • (808) 488-1111. Custom Oahu jalousie louver baffles, 26" condo wall sleeve swaps, brackets & in-stock LG/GE Window ACs ($395–$1,200).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }

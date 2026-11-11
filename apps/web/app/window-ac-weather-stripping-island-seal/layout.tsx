@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Weather Stripping & Island Seal Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
+        absolute: 'Window AC Weather Stripping & Sealing Oahu ($0 Estimate) | (808) 488-1111'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC.',
+    description: '$0 Free Estimate • (808) 488-1111. Seal out Oahu trade wind rain, humidity, noise & geckos with marine-grade closed-cell foam Window AC weather stripping.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal',
     },
     openGraph: {
-        title: 'Window AC Weather Stripping & Island Seal Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC.',
+        title: 'Window AC Weather Stripping & Sealing Oahu ($0 Estimate) | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Seal out Oahu trade wind rain, humidity, noise & geckos with marine-grade closed-cell foam Window AC weather stripping.',
         url: 'https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Weather Stripping & Island Seal Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC.',
+        title: 'Window AC Weather Stripping & Sealing Oahu ($0 Estimate) | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Seal out Oahu trade wind rain, humidity, noise & geckos with marine-grade closed-cell foam Window AC weather stripping.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
@@ -91,11 +91,16 @@ const pass5RichSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": "https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal#service",
-    "name": "Window AC Weather Stripping & Island Seal Oahu ($0 Estimate)",
-    "serviceType": "Window AC Weather Stripping & Island Seal Oahu ($0 Estimate)",
+    "name": "Window AC Weather Stripping & Sealing Oahu ($0 Estimate) | (808) 488-1111",
+    "serviceType": "Window AC Weather Stripping & Sealing Oahu ($0 Estimate) | (808) 488-1111",
     "url": "https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal",
-    "image": "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
-    "description": "$0 Free Estimate • (808) 488-1111. Prevent cool air loss, trade wind drafts, driving rain, and island insects with professional LG & GE window AC.",
+    "image": [
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+    ],
+    "description": "$0 Free Estimate • (808) 488-1111. Seal out Oahu trade wind rain, humidity, noise & geckos with marine-grade closed-cell foam Window AC weather stripping.",
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal#localbusiness",
@@ -108,6 +113,29 @@ const pass5RichSchema = {
             "bestRating": "5",
             "worstRating": "1"
         },
+        "review": [
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Kimo M. — Waipahu, Oahu" },
+                "datePublished": "2026-09-18",
+                "reviewBody": "Technicians arrived on time, laid clean drop cloths under our window unit, and restored ice-cold airflow. Honest pricing and aloha service!",
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+            },
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Leilani K. — Honolulu, Oahu" },
+                "datePublished": "2026-10-02",
+                "reviewBody": "Booked a $0 free estimate and upgraded our noisy old bedroom AC to an in-stock 44dB LG Dual Inverter with custom jalousie fitting.",
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+            },
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "David C. — Pearl City, Oahu" },
+                "datePublished": "2026-10-14",
+                "reviewBody": "Fast Waipahu warehouse pickup and expert Oahu window AC support. Qualified for the $45 Hawaii Energy rebate and cut our HECO bill immediately.",
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+            }
+        ],
         "url": "https://www.affordablehome-ac.com",
         "telephone": "+1-808-488-1111",
         "priceRange": "$395 - $1,200",

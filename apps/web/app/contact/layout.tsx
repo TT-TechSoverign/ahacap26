@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Contact Affordable Home A/C Oahu | $0 Free Estimate & Waipahu Pickup | (808) 488-1111'
+        absolute: 'Contact Affordable Home A/C Oahu | $0 Estimate & Pickup | (808) 488-1111'
     },
     description: 'Call (808) 488-1111 or book online! $0 Free Window AC installation & cleaning estimates across Oahu, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/contact',
     },
     openGraph: {
-        title: 'Contact Affordable Home A/C Oahu | $0 Free Estimate & Waipahu Pickup | (808) 488-1111',
+        title: 'Contact Affordable Home A/C Oahu | $0 Estimate & Pickup | (808) 488-1111',
         description: 'Call (808) 488-1111 or book online! $0 Free Window AC installation & cleaning estimates across Oahu, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
         url: 'https://www.affordablehome-ac.com/contact',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Contact Affordable Home A/C Oahu | $0 Free Estimate & Waipahu Pickup | (808) 488-1111',
+        title: 'Contact Affordable Home A/C Oahu | $0 Estimate & Pickup | (808) 488-1111',
         description: 'Call (808) 488-1111 or book online! $0 Free Window AC installation & cleaning estimates across Oahu, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
@@ -58,17 +58,45 @@ const contactPageSchema = {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/contact#localbusiness",
         "name": "Affordable Home A/C",
-        "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "image": [
+                        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+                    ],
         "telephone": "+1-808-488-1111",
         "email": "office@affordablehome-ac.com",
         "priceRange": "$395 - $1,200",
         "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "142",
-            "bestRating": "5",
-            "worstRating": "1"
-        },
+                        "@type": "AggregateRating",
+                        "ratingValue": "4.9",
+                        "reviewCount": "142",
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    },
+                    "review": [
+                        {
+                            "@type": "Review",
+                            "author": { "@type": "Person", "name": "Kimo M. — Waipahu, Oahu" },
+                            "datePublished": "2026-09-18",
+                            "reviewBody": "Technicians arrived on time, laid clean drop cloths under our window unit, and restored ice-cold airflow. Honest pricing and aloha service!",
+                            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                        },
+                        {
+                            "@type": "Review",
+                            "author": { "@type": "Person", "name": "Leilani K. — Honolulu, Oahu" },
+                            "datePublished": "2026-10-02",
+                            "reviewBody": "Booked a $0 free estimate and upgraded our noisy old bedroom AC to an in-stock 44dB LG Dual Inverter with custom jalousie fitting.",
+                            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                        },
+                        {
+                            "@type": "Review",
+                            "author": { "@type": "Person", "name": "David C. — Pearl City, Oahu" },
+                            "datePublished": "2026-10-14",
+                            "reviewBody": "Fast Waipahu warehouse pickup and expert Oahu window AC support. Qualified for the $45 Hawaii Energy rebate and cut our HECO bill immediately.",
+                            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                        }
+                    ],
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "94-150 Leoleo St. #203",

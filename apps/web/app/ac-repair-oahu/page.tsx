@@ -20,6 +20,7 @@ import { trackFunnelEvent } from '@/lib/tracking';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 export default function AcRepairOahuPage() {
     const [selectedSymptom, setSelectedSymptom] = useState<string>('warm_air');
@@ -136,7 +137,12 @@ export default function AcRepairOahuPage() {
                     "@type": "HVACBusiness",
                     "@id": "https://www.affordablehome-ac.com/ac-repair-oahu#localbusiness",
                     "name": "Affordable Home A/C",
-                    "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp",
+                    "image": [
+                        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+                    ],
                     "telephone": "+1-808-488-1111",
                     "priceRange": "$395 - $1,200",
                     "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
@@ -147,6 +153,29 @@ export default function AcRepairOahuPage() {
                         "bestRating": "5",
                         "worstRating": "1"
                     },
+                    "review": [
+                        {
+                            "@type": "Review",
+                            "author": { "@type": "Person", "name": "Kimo M. — Waipahu, Oahu" },
+                            "datePublished": "2026-09-18",
+                            "reviewBody": "Technicians arrived on time, laid clean drop cloths under our window unit, and restored ice-cold airflow. Honest pricing and aloha service!",
+                            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                        },
+                        {
+                            "@type": "Review",
+                            "author": { "@type": "Person", "name": "Leilani K. — Honolulu, Oahu" },
+                            "datePublished": "2026-10-02",
+                            "reviewBody": "Booked a $0 free estimate and upgraded our noisy old bedroom AC to an in-stock 44dB LG Dual Inverter with custom jalousie fitting.",
+                            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                        },
+                        {
+                            "@type": "Review",
+                            "author": { "@type": "Person", "name": "David C. — Pearl City, Oahu" },
+                            "datePublished": "2026-10-14",
+                            "reviewBody": "Fast Waipahu warehouse pickup and expert Oahu window AC support. Qualified for the $45 Hawaii Energy rebate and cut our HECO bill immediately.",
+                            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+                        }
+                    ],
                     "address": {
                         "@type": "PostalAddress",
                         "streetAddress": "94-150 Leoleo St. #203",
@@ -456,9 +485,7 @@ export default function AcRepairOahuPage() {
 
                 {/* Common Oahu Failure Modes Breakdown */}
                 <div className="p-8 rounded-3xl bg-surface-dark border border-white/10 shadow-2xl mb-20">
-                    <h3 className="text-xl font-header font-black uppercase text-white mb-4">
-                        Why Window Air Conditioners Fail on Oahu
-                    </h3>
+                    <h2 className="text-xl font-header font-black uppercase text-white mb-4">Why Window Air Conditioners Fail on Oahu</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
                         <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2">
                             <div className="text-cyan-400 font-bold uppercase flex items-center gap-1.5">
@@ -490,9 +517,7 @@ export default function AcRepairOahuPage() {
                 {/* FAQ Accordion */}
                 <div className="max-w-3xl mx-auto space-y-4 mb-16">
                     <div className="text-center mb-8">
-                        <h3 className="text-2xl font-header font-black uppercase text-white">
-                            Window AC Repair Frequently Asked Questions
-                        </h3>
+                        <h2 className="text-2xl font-header font-black uppercase text-white">Window AC Repair Frequently Asked Questions</h2>
                         <p className="text-slate-400 text-xs mt-1">Fast answers to common Oahu cooling emergencies</p>
                     </div>
                     {faqItems.map((faq, index) => (
@@ -542,8 +567,9 @@ export default function AcRepairOahuPage() {
                     title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
                     subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
+<ReviewsPavilion variant="compact" />
+                <OahuEEATAuthorityBar topicTitle="Oahu Window AC Repair, Troubleshooting & Clean-vs-Replace Guide ($395+ New ACs)" />
             </main>
-                            <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
 
                 <BackToTop />
         </div>

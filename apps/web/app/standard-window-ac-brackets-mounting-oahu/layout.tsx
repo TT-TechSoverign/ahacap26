@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Standard Window AC Brackets & Mounting Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C'
+        absolute: 'Standard Window AC Support Brackets Oahu ($0 Estimate) | (808) 488-1111'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Standard exterior window AC support brackets on Oahu. Sized for 6,000 to 23,500 BTU units, relieving weight from.',
+    description: '$0 Free Estimate • (808) 488-1111. Heavy-duty exterior support brackets for 6,000–23,500 BTU Window ACs on Oahu. Relieves window sill weight & vibration.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-brackets-exterior-security-mounting-oahu',
     },
     openGraph: {
-        title: 'Standard Window AC Brackets & Mounting Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Standard exterior window AC support brackets on Oahu. Sized for 6,000 to 23,500 BTU units, relieving weight from.',
+        title: 'Standard Window AC Support Brackets Oahu ($0 Estimate) | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Heavy-duty exterior support brackets for 6,000–23,500 BTU Window ACs on Oahu. Relieves window sill weight & vibration.',
         url: 'https://www.affordablehome-ac.com/ac-brackets-exterior-security-mounting-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Standard Window AC Brackets & Mounting Oahu ($0 Estimate) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Standard exterior window AC support brackets on Oahu. Sized for 6,000 to 23,500 BTU units, relieving weight from.',
+        title: 'Standard Window AC Support Brackets Oahu ($0 Estimate) | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Heavy-duty exterior support brackets for 6,000–23,500 BTU Window ACs on Oahu. Relieves window sill weight & vibration.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };

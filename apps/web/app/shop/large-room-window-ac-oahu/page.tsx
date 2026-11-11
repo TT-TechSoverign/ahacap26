@@ -32,6 +32,7 @@ import { isCampaignActive } from '@/lib/utils';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 const INITIAL_UNIT_18K: Product = {
     id: 6,
@@ -687,8 +688,9 @@ export default function LargeRoomWindowAcPage() {
                     title="In-Stock High-Capacity Window ACs (12,000 – 23,500 BTU)"
                     subheading="Heavy-duty LG Dual Inverter & GE units in stock at our Waipahu warehouse. Order online for free Waipahu pickup or $50 flat Oahu delivery."
                 />
+<ReviewsPavilion variant="compact" />
+                <OahuEEATAuthorityBar topicTitle="14,000 to 23,500 BTU Large Room Window AC Oahu Buying & Sizing Guide" />
             </main>
-                            <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
 
                 <BackToTop />
         </div>

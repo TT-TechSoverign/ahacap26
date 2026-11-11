@@ -27,6 +27,7 @@ import { trackFunnelEvent } from '@/lib/tracking';
 import { isCampaignActive, generateProductSlug } from '@/lib/utils';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 const INITIAL_PRODUCT_8K: Product = {
     id: 2,
@@ -632,8 +633,9 @@ export default function Lg8000BtuOahuPage() {
                     title="In-Stock 115V Bedroom & Studio Window ACs ($395–$650)"
                     subheading="Plug-and-play 115V LG Standard & Dual Inverter models in stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery."
                 />
+<ReviewsPavilion variant="compact" />
+                <OahuEEATAuthorityBar topicTitle="8,000 BTU 115V Bedroom Window AC Oahu Comparison Guide ($395–$1,000)" />
             </main>
-            <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
             <BackToTop />
         </div>
     );

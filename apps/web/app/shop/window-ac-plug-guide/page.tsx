@@ -27,6 +27,7 @@ import { isCampaignActive } from '@/lib/utils';
 import { Product } from '@/types/inventory';
 
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 
 type PlugUnit = {
@@ -678,16 +679,15 @@ export default function WindowAcPlugGuidePage() {
                         ))}
                     </div>
                 </section>
-
-            </main>
-
-                            <WindowAcQuickShop
+<WindowAcQuickShop
                     modelIds={[3, 4, 15, 6]}
                     title="In-Stock Waipahu LG & GE Window Air Conditioners ($395–$1,200)"
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 
-                <OahuEEATAuthorityBar topicTitle="Oahu Window AC & Cleaning Technical Guide" />
+                <ReviewsPavilion variant="compact" />
+                <OahuEEATAuthorityBar topicTitle="Oahu 115V vs 208/230V Window AC Electrical Outlet & NEMA Plug Guide" />
+            </main>
 
                 <BackToTop />
         </div>

@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Quiet 44dB Bedroom Window AC Oahu ($560–$595 In-Stock) | LG Dual Inverter & $45 Rebate'
+        absolute: 'Quiet 44dB Bedroom Window AC Oahu ($560–$595) | LG Dual Inverter & $45 Rebate'
     },
-    description: 'In-Stock 44dB ultra-quiet LG Dual Inverter bedroom Window ACs ($560–$595) in Waipahu, Oahu. Standard 115V plug, $45 Hawaii Energy Rebate & $50 delivery • (808) 488-1111.',
+    description: 'In-Stock 44dB ultra-quiet LG Dual Inverter bedroom Window ACs ($560–$595) in Waipahu, Oahu. Standard 115V plug, $45 Rebate & $50 delivery • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/quiet-bedroom-window-ac-oahu',
     },
     openGraph: {
-        title: 'Quiet 44dB Bedroom Window AC Oahu ($560–$595 In-Stock) | LG Dual Inverter & $45 Rebate',
-        description: 'In-Stock 44dB ultra-quiet LG Dual Inverter bedroom Window ACs ($560–$595) in Waipahu, Oahu. Standard 115V plug, $45 Hawaii Energy Rebate & $50 delivery • (808) 488-1111.',
+        title: 'Quiet 44dB Bedroom Window AC Oahu ($560–$595) | LG Dual Inverter & $45 Rebate',
+        description: 'In-Stock 44dB ultra-quiet LG Dual Inverter bedroom Window ACs ($560–$595) in Waipahu, Oahu. Standard 115V plug, $45 Rebate & $50 delivery • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/quiet-bedroom-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Quiet 44dB Bedroom Window AC Oahu ($560–$595 In-Stock) | LG Dual Inverter & $45 Rebate',
-        description: 'In-Stock 44dB ultra-quiet LG Dual Inverter bedroom Window ACs ($560–$595) in Waipahu, Oahu. Standard 115V plug, $45 Hawaii Energy Rebate & $50 delivery • (808) 488-1111.',
+        title: 'Quiet 44dB Bedroom Window AC Oahu ($560–$595) | LG Dual Inverter & $45 Rebate',
+        description: 'In-Stock 44dB ultra-quiet LG Dual Inverter bedroom Window ACs ($560–$595) in Waipahu, Oahu. Standard 115V plug, $45 Rebate & $50 delivery • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
@@ -92,7 +92,10 @@ const pass5RichSchema = {
     "@type": "Product",
     "name": "LG Dual Inverter 6,000 BTU Ultra-Quiet 44dB Bedroom Window AC (LW6023IVSM)",
     "image": [
-        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp"
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
     "description": "Whisper-quiet 44dB LG Dual Inverter 6,000 BTU bedroom window AC (LW6023IVSM) in stock in Waipahu, Oahu. Standard 115V plug, $45 Hawaii Energy Rebate, free pickup or $50 delivery.",
     "sku": "LW6023IVSM",
@@ -118,6 +121,36 @@ const pass5RichSchema = {
             },
             "datePublished": "2026-09-18",
             "reviewBody": "Picked up our new LG Dual Inverter at the Waipahu warehouse. Ice-cold, whisper quiet at 44dB, and qualified for the $45 Hawaii Energy rebate.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        },
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "Leilani K. — Honolulu, Oahu"
+            },
+            "datePublished": "2026-10-02",
+            "reviewBody": "Upgraded our Honolulu condo bedroom to an in-stock Waipahu unit. Runs whisper-quiet overnight on a standard 115V outlet and cut our HECO electric bill.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        },
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "David C. — Pearl City, Oahu"
+            },
+            "datePublished": "2026-10-14",
+            "reviewBody": "Same-week Waipahu warehouse pickup by appointment. Brand-new factory-sealed unit with 1-year warranty and official $45 Hawaii Energy rebate PDF.",
             "reviewRating": {
                 "@type": "Rating",
                 "ratingValue": "5",

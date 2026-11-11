@@ -5,6 +5,7 @@ import { generateProductSlug, isCampaignActive } from '@/lib/utils';
 import { getProductFaqs } from '@/lib/product-faq';
 import { getSelectedReviews } from '@/lib/product-reviews';
 import { getProductSpecs } from '@/lib/product-specs';
+import { getProductImages } from '@/lib/product-images';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 
@@ -54,7 +55,7 @@ function resolveProduct(slug: string, products: Product[]): Product | null {
     }
 
     // 3. Try slugified name match (without ID prefix)
-    const normalizedRequestedSlug = slug.replace(/^\d+-/, ''); // Remove leading ID prefix if any
+    const normalizedRequestedSlug = slug.replace(/^\d+-/, '').toLowerCase(); // Remove leading ID prefix if any
     const nameMatch = products.find(p => {
         const productSlugName = p.name
             .toLowerCase()
@@ -64,6 +65,18 @@ function resolveProduct(slug: string, products: Product[]): Product | null {
     });
 
     if (nameMatch) return nameMatch;
+
+    // 4. Try MPN / Model Code match (e.g. "/shop/lw1222ivsm", "/shop/ajcq12axxwa", "/shop/rab26a")
+    const cleanAlphaNum = normalizedRequestedSlug.replace(/[^a-z0-9]/g, '');
+    if (cleanAlphaNum.length >= 5) {
+        const mpnMatch = products.find(p => {
+            const mpn = (PRODUCT_IDENTIFIERS[p.id]?.mpn || p.key_spec || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+            const parenCode = (p.name.match(/\(([^)]+)\)/)?.[1] || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+            return (mpn && (cleanAlphaNum === mpn || cleanAlphaNum.includes(mpn))) ||
+                   (parenCode && (cleanAlphaNum === parenCode || cleanAlphaNum.includes(parenCode)));
+        });
+        if (mpnMatch) return mpnMatch;
+    }
 
     return null;
 }
@@ -153,6 +166,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const ogImageUrl = product.image_url
         ? `${domain}${product.image_url.replace('.svg', '.webp')}`
         : `${domain}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp`;
+    const galleryUrls = getProductImages(product.id).map(p => `${domain}${p}`);
+    const ogImageList = Array.from(new Set([ogImageUrl, ...galleryUrls])).map(url => ({
+        url,
+        width: 1600,
+        height: 1000,
+        alt: displayNameWithMpn,
+    }));
 
     return {
         title: { absolute: title },
@@ -165,14 +185,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description,
             url: `${domain}/shop/${canonicalSlug}`,
             siteName: 'Affordable Home A/C',
-            images: [
-                {
-                    url: ogImageUrl,
-                    width: 1600,
-                    height: 1000,
-                    alt: displayNameWithMpn,
-                },
-            ],
+            images: ogImageList,
             type: 'website', 
         },
         twitter: {
@@ -237,8 +250,12 @@ export default async function ProductLayout({ params, children }: Props) {
         16: '/assets/window-unit-images/3d-fit/product_16_fit_cutaway.webp'
     };
     const cutawayUrl = cutawayImageMap[product.id] ? `${domain}${cutawayImageMap[product.id]}` : null;
-    const schemaImages = [absoluteImageUrl];
-    if (cutawayUrl) schemaImages.push(cutawayUrl);
+    const allGalleryUrls = getProductImages(product.id).map(p => `${domain}${p}`);
+    const schemaImages = Array.from(new Set([
+        absoluteImageUrl,
+        ...allGalleryUrls,
+        ...(cutawayUrl ? [cutawayUrl] : []),
+    ]));
 
     const schema = {
         "@context": "https://schema.org/",

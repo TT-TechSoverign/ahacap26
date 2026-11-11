@@ -15,7 +15,8 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
         "image": [
             "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
             "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-            "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp"
+            "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+            "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
         ],
         "datePublished": "2026-01-15",
         "dateModified": "2026-11-10",
@@ -72,6 +73,7 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
 
     return (
         <aside
+            id="oahu-window-ac-directory"
             aria-label="Oahu Field Engineering Verification & Direct Ordering Hub"
             className="my-12 rounded-3xl bg-slate-900/90 border border-cyan-500/25 p-6 sm:p-8 shadow-2xl"
         >

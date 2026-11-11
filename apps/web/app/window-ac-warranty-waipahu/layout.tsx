@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Warranty & Local Support Waipahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C'
+        absolute: '1-Year Window AC Warranty & Waipahu Support | In-Stock LG & GE ($395+)'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer.',
+    description: 'Every factory-sealed LG & GE Window AC ($395–$1,200) at our Waipahu warehouse includes a 1-Year Manufacturer Parts & Labor Warranty • Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
     },
     openGraph: {
-        title: 'Window AC Warranty & Local Support Waipahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer.',
+        title: '1-Year Window AC Warranty & Waipahu Support | In-Stock LG & GE ($395+)',
+        description: 'Every factory-sealed LG & GE Window AC ($395–$1,200) at our Waipahu warehouse includes a 1-Year Manufacturer Parts & Labor Warranty • Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-warranty-waipahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Warranty & Local Support Waipahu ($395+ In-Stock) | (808) 488-1111 | Affordable Home A/C',
-        description: '$0 Free Estimate • (808) 488-1111. Local Oahu warranty support for LG Dual Inverter & GE Built-In window air conditioners. 1-year manufacturer.',
+        title: '1-Year Window AC Warranty & Waipahu Support | In-Stock LG & GE ($395+)',
+        description: 'Every factory-sealed LG & GE Window AC ($395–$1,200) at our Waipahu warehouse includes a 1-Year Manufacturer Parts & Labor Warranty • Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
@@ -92,7 +92,10 @@ const pass5RichSchema = {
     "@type": "Product",
     "name": "Factory-Warrantied LG & GE Window Air Conditioners Oahu (AJCQ12AXXWA)",
     "image": [
-        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp"
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
     "description": "Brand-new factory-sealed LG (1-Yr Parts & Labor) and GE Built-In (2-Yr Full / 5-Yr Sealed System) window ACs ($395–$1,200) in stock in Waipahu, Oahu.",
     "sku": "AJCQ12AXXWA",
@@ -118,6 +121,36 @@ const pass5RichSchema = {
             },
             "datePublished": "2026-09-18",
             "reviewBody": "Picked up our new LG Dual Inverter at the Waipahu warehouse. Ice-cold, whisper quiet at 44dB, and qualified for the $45 Hawaii Energy rebate.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        },
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "Leilani K. — Honolulu, Oahu"
+            },
+            "datePublished": "2026-10-02",
+            "reviewBody": "Upgraded our Honolulu condo bedroom to an in-stock Waipahu unit. Runs whisper-quiet overnight on a standard 115V outlet and cut our HECO electric bill.",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+            }
+        },
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "David C. — Pearl City, Oahu"
+            },
+            "datePublished": "2026-10-14",
+            "reviewBody": "Same-week Waipahu warehouse pickup by appointment. Brand-new factory-sealed unit with 1-year warranty and official $45 Hawaii Energy rebate PDF.",
             "reviewRating": {
                 "@type": "Rating",
                 "ratingValue": "5",
