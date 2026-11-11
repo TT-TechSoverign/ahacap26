@@ -64,17 +64,17 @@ export function generateMetadata({ params }: Props): Metadata {
     
     if (!cityData) return { title: 'Service Area Not Found' };
  
-    const title = `${cityData.name} Window AC ($395+), Install, Cleaning & Repair | $0 Estimate | (808) 488-1111`;
+    const title = `${cityData.name} Window ACs ($395+), Install & Clean | $0 Est • (808) 488-1111`;
     
-    let description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), custom jalousie installation, deep cleaning & repair.`;
+    let description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), custom jalousie install, cleaning & repair.`;
     if (cityData.regionId === 'windward') {
-        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), jalousie install, deep coil cleaning & salt-air repair.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), jalousie install, coil cleaning & salt-air repair.`;
     } else if (cityData.regionId === 'leeward') {
-        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock Waipahu LG & GE Window ACs ($395–$1,200, $45 Rebate), custom window install, deep cleaning & repair.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock Waipahu LG & GE Window ACs ($395–$1,200, $45 Rebate), window install, deep cleaning & repair.`;
     } else if (cityData.regionId === 'metro') {
-        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window & 26" Wall ACs ($395–$1,200, $45 Rebate), jalousie/condo install, cleaning & repair.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window & 26" Wall ACs ($395–$1,200, $45 Rebate), condo/jalousie install & cleaning.`;
     } else {
-        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), custom jalousie installation, deep cleaning & repair.`;
+        description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), custom jalousie install, cleaning & repair.`;
     }
  
     return {
@@ -93,6 +93,24 @@ export function generateMetadata({ params }: Props): Metadata {
                     width: 1600,
                     height: 1000,
                     alt: `${cityData.name} In-Stock LG Dual Inverter & GE Window ACs — Affordable Home A/C`,
+                },
+                {
+                    url: 'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp',
+                    width: 1600,
+                    height: 1000,
+                    alt: `GE 26-Inch Built-In Wall AC Installation in ${cityData.name}, Oahu`,
+                },
+                {
+                    url: 'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp',
+                    width: 1600,
+                    height: 1000,
+                    alt: `Custom Jalousie Window AC Fit in ${cityData.name}, Oahu`,
+                },
+                {
+                    url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp',
+                    width: 1600,
+                    height: 1000,
+                    alt: `Deep Window AC Coil & Mold Cleaning in ${cityData.name}, Oahu`,
                 }
             ]
         },
@@ -165,7 +183,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
             <LocalizedSEOBody city={cityData.name} regionId={cityData.regionId} />
             
             {/* 3b. VISIBLE LOCALIZED FAQ ACCORDION (Google Rich Snippet Visibility Standard) */}
-            <section className="max-w-4xl mx-auto px-4 sm:px-6 my-14 w-full">
+            <section id="city-faqs" className="scroll-mt-28 md:scroll-mt-48 max-w-4xl mx-auto px-4 sm:px-6 my-14 w-full">
                 <div className="text-center mb-8">
                     <span className="text-xs font-mono text-cyan-400 bg-cyan-950/60 border border-cyan-500/30 px-3 py-1 rounded-full uppercase tracking-wider">
                         {cityData.name} Climate Advisory
@@ -179,7 +197,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                 </div>
 
                 <div className="space-y-4">
-                    <details className="group bg-slate-900/70 border border-slate-800 hover:border-cyan-500/30 rounded-2xl p-5 transition-all [&_svg]:open:-rotate-180">
+                    <details open className="group bg-slate-900/70 border border-slate-800 hover:border-cyan-500/30 rounded-2xl p-5 transition-all [&_svg]:open:-rotate-180">
                         <summary className="flex items-center justify-between cursor-pointer list-none text-white font-header font-bold text-sm sm:text-base select-none">
                             <span>What is the most efficient AC unit for {cityData.name}&apos;s high humidity?</span>
                             <span className="text-cyan-400 ml-4 shrink-0 transition-transform duration-300">
@@ -238,7 +256,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
             </section>
 
             {/* 3c. LOCALIZED ISLAND REVIEWS */}
-            <section className="max-w-6xl mx-auto px-4 sm:px-6 my-16">
+            <section id="city-reviews" className="scroll-mt-28 md:scroll-mt-48 max-w-6xl mx-auto px-4 sm:px-6 my-16">
                 <ReviewsPavilion 
                     variant="compact"
                     reviews={getReviewsByCity(cityData.name, 3)}
@@ -265,7 +283,8 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         "image": [
                             "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
                             "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-                            "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp"
+                            "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                            "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
                         ],
                         "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
                         "url": `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`,

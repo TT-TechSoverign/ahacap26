@@ -9,14 +9,14 @@ import { Suspense } from 'react';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Oahu Window AC BTU Sizing Calculator (Single-Wall & Trade-Wind Calibrated) | $395+'
+        absolute: 'Oahu Window AC BTU Sizing Calculator ($395+ In-Stock) | (808) 488-1111'
     },
     description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Calibrated for Hawaii single-wall heat loads & humidity. In-stock LG & GE ACs ($395–$1,200).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sizing',
     },
     openGraph: {
-        title: 'Oahu Window AC BTU Sizing Calculator (Single-Wall & Trade-Wind Calibrated) | $395+',
+        title: 'Oahu Window AC BTU Sizing Calculator ($395+ In-Stock) | (808) 488-1111',
         description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Calibrated for Hawaii single-wall heat loads & humidity. In-stock LG & GE ACs ($395–$1,200).',
         url: 'https://www.affordablehome-ac.com/sizing',
         siteName: 'Affordable Home A/C',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Oahu Window AC BTU Sizing Calculator (Single-Wall & Trade-Wind Calibrated) | $395+',
+        title: 'Oahu Window AC BTU Sizing Calculator ($395+ In-Stock) | (808) 488-1111',
         description: 'Calculate the exact BTU Window AC for your Oahu room in 30 seconds! Calibrated for Hawaii single-wall heat loads & humidity. In-stock LG & GE ACs ($395–$1,200).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
@@ -41,8 +41,14 @@ export const metadata: Metadata = {
 const sizingAppSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Oahu AC Sizing Calculator",
+    "name": "Oahu Window AC BTU Sizing Calculator",
     "url": "https://www.affordablehome-ac.com/sizing",
+    "image": [
+        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+    ],
     "applicationCategory": "UtilityApplication",
     "operatingSystem": "All",
     "browserRequirements": "Requires JavaScript",

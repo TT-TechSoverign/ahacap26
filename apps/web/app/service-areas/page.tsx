@@ -38,9 +38,9 @@ export default function ServiceAreasPage() {
                                 "url": "https://www.affordablehome-ac.com/service-areas",
                                 "image": [
                                     "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-profile-clearview-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-                                    "https://www.affordablehome-ac.com/images/products/cutaways/product_4_fit_cutaway.webp",
-                                    "https://www.affordablehome-ac.com/assets/hero-cards-bg/window-ac-maintenance-hero-bg-1.webp"
+                                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
                                 ],
                                 "telephone": "+1-808-488-1111",
                                 "priceRange": "$395 - $1,200",

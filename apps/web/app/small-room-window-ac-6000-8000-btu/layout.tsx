@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '6,000 & 8,000 BTU Bedroom Window ACs Oahu ($395–$595 In-Stock) | Waipahu Pickup'
+        absolute: '6,000 & 8,000 BTU Bedroom Window ACs Oahu ($395–$595) | Waipahu Pickup'
     },
     description: 'In-Stock 6,000 & 8,000 BTU LG & GE Window ACs ($395–$595) in Waipahu, Oahu. Standard 115V plug, 44dB quiet inverter option & $45 Rebate • Call (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/small-room-window-ac-6000-8000-btu',
     },
     openGraph: {
-        title: '6,000 & 8,000 BTU Bedroom Window ACs Oahu ($395–$595 In-Stock) | Waipahu Pickup',
+        title: '6,000 & 8,000 BTU Bedroom Window ACs Oahu ($395–$595) | Waipahu Pickup',
         description: 'In-Stock 6,000 & 8,000 BTU LG & GE Window ACs ($395–$595) in Waipahu, Oahu. Standard 115V plug, 44dB quiet inverter option & $45 Rebate • Call (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/small-room-window-ac-6000-8000-btu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: '6,000 & 8,000 BTU Bedroom Window ACs Oahu ($395–$595 In-Stock) | Waipahu Pickup',
+        title: '6,000 & 8,000 BTU Bedroom Window ACs Oahu ($395–$595) | Waipahu Pickup',
         description: 'In-Stock 6,000 & 8,000 BTU LG & GE Window ACs ($395–$595) in Waipahu, Oahu. Standard 115V plug, 44dB quiet inverter option & $45 Rebate • Call (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }

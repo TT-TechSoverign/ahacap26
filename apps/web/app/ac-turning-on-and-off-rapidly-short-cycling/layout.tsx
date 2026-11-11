@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Short Cycling Oahu ($0 Estimate) | Fix Rapid On/Off Cycling'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Why does your Oahu Window AC turn on and off rapidly? Fix thermistor & airflow blocks or upgrade to an LG Dual Inverter ($560+).',
+    description: '$0 Free Estimate • (808) 488-1111. Fix Oahu Window AC short cycling & airflow blocks, or upgrade to an in-stock LG Dual Inverter ($560+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-turning-on-and-off-rapidly-short-cycling',
     },
     openGraph: {
         title: 'Window AC Short Cycling Oahu ($0 Estimate) | Fix Rapid On/Off Cycling',
-        description: '$0 Free Estimate • (808) 488-1111. Why does your Oahu Window AC turn on and off rapidly? Fix thermistor & airflow blocks or upgrade to an LG Dual Inverter ($560+).',
+        description: '$0 Free Estimate • (808) 488-1111. Fix Oahu Window AC short cycling & airflow blocks, or upgrade to an in-stock LG Dual Inverter ($560+).',
         url: 'https://www.affordablehome-ac.com/ac-turning-on-and-off-rapidly-short-cycling',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Short Cycling Oahu ($0 Estimate) | Fix Rapid On/Off Cycling',
-        description: '$0 Free Estimate • (808) 488-1111. Why does your Oahu Window AC turn on and off rapidly? Fix thermistor & airflow blocks or upgrade to an LG Dual Inverter ($560+).',
+        description: '$0 Free Estimate • (808) 488-1111. Fix Oahu Window AC short cycling & airflow blocks, or upgrade to an in-stock LG Dual Inverter ($560+).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
@@ -100,7 +100,7 @@ const pass5RichSchema = {
         "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
-    "description": "$0 Free Estimate • (808) 488-1111. Why does your Oahu Window AC turn on and off rapidly? Fix thermistor & airflow blocks or upgrade to an LG Dual Inverter ($560+).",
+    "description": "$0 Free Estimate • (808) 488-1111. Fix Oahu Window AC short cycling & airflow blocks, or upgrade to an in-stock LG Dual Inverter ($560+).",
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/ac-turning-on-and-off-rapidly-short-cycling#localbusiness",

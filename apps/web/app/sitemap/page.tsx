@@ -12,15 +12,15 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Oahu Window AC Sitemap & In-Stock Directory ($395–$1,200) | Affordable Home A/C'
+        absolute: 'Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C'
     },
-    description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Free Estimate installation & coil cleaning • (808) 488-1111.',
+    description: 'Browse all 108 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sitemap',
     },
     openGraph: {
-        title: 'Oahu Window AC Sitemap & In-Stock Directory ($395–$1,200) | Affordable Home A/C',
-        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Free Estimate installation & coil cleaning • (808) 488-1111.',
+        title: 'Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C',
+        description: 'Browse all 108 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/sitemap',
         siteName: 'Affordable Home A/C',
         locale: 'en_US',
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Oahu Window AC Sitemap & In-Stock Directory ($395–$1,200) | Affordable Home A/C',
-        description: 'Browse all 101 canonical pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Free Estimate installation & coil cleaning • (808) 488-1111.',
+        title: 'Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C',
+        description: 'Browse all 108 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },
 };
@@ -181,15 +181,75 @@ export default async function SitemapPage() {
                         Sitemap & Directory
                     </h1>
                     <p className="text-slate-400 max-w-3xl text-sm md:text-base font-medium leading-relaxed">
-                        A comprehensive directory of Affordable Home A/C&apos;s digital infrastructure. Access in-stock warehouse models, specialized Hawaii housing guides, clinical diagnostic solvers, and localized Oahu service areas.
+                        A comprehensive 108-page directory of Affordable Home A/C&apos;s Oahu cooling infrastructure: 16 in-stock Waipahu LG &amp; GE models ($395–$1,200), specialized Hawaii housing installation guides, antimicrobial cleaning hubs, diagnostic solvers, and all 22 Oahu service areas.
                     </p>
+
+                    <nav aria-label="Sitemap Quick Jump" className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-2 text-[11px] font-mono">
+                        <span className="text-slate-400 uppercase font-bold tracking-wider mr-1">Jump To:</span>
+                        <a href="#oahu-sitemap-summary-table" className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-primary/15 border border-white/10 text-cyan-400 transition-colors">Hub Summary Table</a>
+                        <a href="#core-services" className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-primary/15 border border-white/10 text-cyan-400 transition-colors">Core Hubs</a>
+                        <a href="#in-stock-models" className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-primary/15 border border-white/10 text-cyan-400 transition-colors">16 LG &amp; GE Models</a>
+                        <a href="#city-areas" className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-primary/15 border border-white/10 text-cyan-400 transition-colors">22 Oahu Cities</a>
+                    </nav>
                 </div>
+
+                {/* Semantic Hub Summary Table for Google Structured Table Snippets */}
+                <section className="mb-14 rounded-3xl bg-white/[0.02] border border-white/10 p-6 md:p-8">
+                    <h2 className="text-lg md:text-xl font-header font-black uppercase tracking-wider text-white mb-4">
+                        Affordable Home A/C — 108-Page Oahu Directory Overview
+                    </h2>
+                    <div className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950/80">
+                        <table id="oahu-sitemap-summary-table" className="w-full text-left border-collapse text-xs">
+                            <caption className="sr-only">Summary of all 108 canonical pages across Affordable Home A/C Oahu divisions.</caption>
+                            <thead>
+                                <tr className="border-b border-white/10 bg-white/[0.03] font-mono text-[10px] uppercase tracking-wider text-slate-400">
+                                    <th scope="col" className="py-2.5 px-4">Oahu Cooling Division</th>
+                                    <th scope="col" className="py-2.5 px-4">Primary Hub</th>
+                                    <th scope="col" className="py-2.5 px-4">Pricing / Fulfillment</th>
+                                    <th scope="col" className="py-2.5 px-4">Indexed Pages</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5 text-slate-200">
+                                <tr>
+                                    <th scope="row" className="py-2.5 px-4 font-bold text-white">Waipahu LG &amp; GE Window AC Catalog</th>
+                                    <td className="py-2.5 px-4"><Link href="/shop" className="text-cyan-400 hover:underline font-semibold">/shop</Link></td>
+                                    <td className="py-2.5 px-4 font-mono">$395–$1,200 • Free Pickup / $50 Delivery</td>
+                                    <td className="py-2.5 px-4 font-mono">16 Product Pages + 20 Guides</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="py-2.5 px-4 font-bold text-white">Jalousie, Slider &amp; 26&quot; Wall AC Installation</th>
+                                    <td className="py-2.5 px-4"><Link href="/window-ac-installation" className="text-cyan-400 hover:underline font-semibold">/window-ac-installation</Link></td>
+                                    <td className="py-2.5 px-4 font-mono">$0 Free In-Home Estimate • By Appointment</td>
+                                    <td className="py-2.5 px-4 font-mono">15 Architecture Guides</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="py-2.5 px-4 font-bold text-white">Antimicrobial Window AC Deep Cleaning</th>
+                                    <td className="py-2.5 px-4"><Link href="/ac-cleaning-oahu" className="text-cyan-400 hover:underline font-semibold">/ac-cleaning-oahu</Link></td>
+                                    <td className="py-2.5 px-4 font-mono">$0 Free In-Home Estimate • Drop-Cloth Protected</td>
+                                    <td className="py-2.5 px-4 font-mono">13 Cleaning &amp; Mold Guides</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="py-2.5 px-4 font-bold text-white">Clean-vs-Replace Diagnostics &amp; Repair</th>
+                                    <td className="py-2.5 px-4"><Link href="/ac-repair-oahu" className="text-cyan-400 hover:underline font-semibold">/ac-repair-oahu</Link></td>
+                                    <td className="py-2.5 px-4 font-mono">$0 Free Clean-vs-Replace Assessment</td>
+                                    <td className="py-2.5 px-4 font-mono">14 Symptom Solvers</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" className="py-2.5 px-4 font-bold text-white">Island-Wide Oahu Service Coverage</th>
+                                    <td className="py-2.5 px-4"><Link href="/service-areas" className="text-cyan-400 hover:underline font-semibold">/service-areas</Link></td>
+                                    <td className="py-2.5 px-4 font-mono">All 22 Oahu Communities • (808) 488-1111</td>
+                                    <td className="py-2.5 px-4 font-mono">22 City Hubs + 8 Core Pages</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
 
                 {/* Grid of Sections */}
                 <div className="space-y-16">
                     
                     {/* Row 1: Core Navigation & Clinical Cleaning */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div id="core-services" className="scroll-mt-28 md:scroll-mt-48 grid grid-cols-1 md:grid-cols-2 gap-12">
                         {/* Core Services */}
                         <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-6">
                             <div className="flex items-center gap-3 border-b border-white/10 pb-4">
@@ -307,7 +367,7 @@ export default async function SitemapPage() {
                         </div>
 
                         {/* Service Areas (22 Cities) */}
-                        <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-6">
+                        <div id="city-areas" className="scroll-mt-28 md:scroll-mt-48 p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-6">
                             <div className="flex items-center gap-3 border-b border-white/10 pb-4">
                                 <MapPin className="text-blue-400 size-6" />
                                 <h2 className="text-xl font-header font-black uppercase tracking-wider text-white">Oahu Service Areas (22 Cities)</h2>
@@ -330,7 +390,7 @@ export default async function SitemapPage() {
                     </div>
 
                     {/* Row 4: Live Catalog Products */}
-                    <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-6">
+                    <div id="in-stock-models" className="scroll-mt-28 md:scroll-mt-48 p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-6">
                         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
                             <Package className="text-emerald-500 size-6" />
                             <h2 className="text-xl font-header font-black uppercase tracking-wider text-white">In-Stock Warehouse Models</h2>
@@ -359,7 +419,7 @@ export default async function SitemapPage() {
                         </div>
                     </div>
 
-                    <OahuEEATAuthorityBar topicTitle="Complete 101-Page Oahu LG & GE Window AC Sales, Installation & Cleaning Directory" />
+                    <OahuEEATAuthorityBar topicTitle="Complete 108-Page Oahu LG & GE Window AC Sales, Installation & Cleaning Directory" />
                 </main>
                 <script
                     type="application/ld+json"
@@ -367,9 +427,15 @@ export default async function SitemapPage() {
                         __html: JSON.stringify({
                             "@context": "https://schema.org",
                             "@type": "CollectionPage",
-                            "name": "Complete Oahu AC Sitemap & In-Stock Window AC Directory | Affordable Home A/C",
+                            "name": "Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C",
                             "url": "https://www.affordablehome-ac.com/sitemap",
-                            "description": "Browse all 101 canonical pages of Affordable Home A/C: 16 LG & GE window air conditioners ($395–$1,200), 22 Oahu service areas, Hawaii window installation guides, and window AC cleaning."
+                            "description": "Browse all 108 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.",
+                            "image": [
+                                "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                                "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                                "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                                "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+                            ]
                         })
                     }}
                 />

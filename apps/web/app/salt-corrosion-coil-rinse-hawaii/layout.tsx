@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Coastal Salt-Air Window AC Coil Cleaning Hawaii ($0 Estimate) | Gold Fin LG ACs'
+        absolute: 'Coastal Salt-Air Window AC Coil Cleaning Hawaii ($0 Estimate) | Oahu'
     },
     description: '$0 Free Estimate • (808) 488-1111. Protect coastal Oahu Window ACs from salt-air corrosion with professional coil washes or Gold Fin LG Dual Inverters ($560+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/salt-corrosion-coil-rinse-hawaii',
     },
     openGraph: {
-        title: 'Coastal Salt-Air Window AC Coil Cleaning Hawaii ($0 Estimate) | Gold Fin LG ACs',
+        title: 'Coastal Salt-Air Window AC Coil Cleaning Hawaii ($0 Estimate) | Oahu',
         description: '$0 Free Estimate • (808) 488-1111. Protect coastal Oahu Window ACs from salt-air corrosion with professional coil washes or Gold Fin LG Dual Inverters ($560+).',
         url: 'https://www.affordablehome-ac.com/salt-corrosion-coil-rinse-hawaii',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Coastal Salt-Air Window AC Coil Cleaning Hawaii ($0 Estimate) | Gold Fin LG ACs',
+        title: 'Coastal Salt-Air Window AC Coil Cleaning Hawaii ($0 Estimate) | Oahu',
         description: '$0 Free Estimate • (808) 488-1111. Protect coastal Oahu Window ACs from salt-air corrosion with professional coil washes or Gold Fin LG Dual Inverters ($560+).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }

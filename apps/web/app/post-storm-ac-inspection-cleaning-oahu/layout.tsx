@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate)'
     },
     description: '$0 Free Estimate • (808) 488-1111. Post-storm Oahu Window AC inspection and freshwater coil wash to remove heavy salt spray, wind debris & moisture intrusion.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/post-storm-ac-inspection-cleaning-oahu',
     },
     openGraph: {
-        title: 'Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate)',
         description: '$0 Free Estimate • (808) 488-1111. Post-storm Oahu Window AC inspection and freshwater coil wash to remove heavy salt spray, wind debris & moisture intrusion.',
         url: 'https://www.affordablehome-ac.com/post-storm-ac-inspection-cleaning-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate)',
         description: '$0 Free Estimate • (808) 488-1111. Post-storm Oahu Window AC inspection and freshwater coil wash to remove heavy salt spray, wind debris & moisture intrusion.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
@@ -91,8 +91,8 @@ const pass5RichSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": "https://www.affordablehome-ac.com/post-storm-ac-inspection-cleaning-oahu#service",
-    "name": "Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate) | (808) 488-1111",
-    "serviceType": "Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate) | (808) 488-1111",
+    "name": "Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate)",
+    "serviceType": "Post-Storm Window AC Inspection & Coil Wash Oahu ($0 Estimate)",
     "url": "https://www.affordablehome-ac.com/post-storm-ac-inspection-cleaning-oahu",
     "image": [
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",

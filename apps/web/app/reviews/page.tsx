@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
+import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 import { BackToTop } from '@/components/BackToTop';
 import { getReviewStats, getAllReviews } from '@/lib/product-reviews';
 import { ShieldCheck, Star, MapPin, ChevronRight, Home } from 'lucide-react';
@@ -10,13 +11,13 @@ export const metadata: Metadata = {
     title: {
         absolute: '142+ Five-Star Reviews (4.9★) | Affordable Home A/C Oahu | (808) 488-1111'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG Dual Inverter & GE Window ACs ($395–$1,200), jalousie install & coil cleaning.',
+    description: 'Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG & GE Window ACs ($395–$1,200), jalousie install & cleaning • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/reviews',
     },
     openGraph: {
         title: '142+ Five-Star Reviews (4.9★) | Affordable Home A/C Oahu | (808) 488-1111',
-        description: '$0 Free Estimate • (808) 488-1111. Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG Dual Inverter & GE Window ACs ($395–$1,200), jalousie install & coil cleaning.',
+        description: 'Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG & GE Window ACs ($395–$1,200), jalousie install & cleaning • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/reviews',
         siteName: 'Affordable Home A/C',
         locale: 'en_US',
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: '142+ Five-Star Reviews (4.9★) | Affordable Home A/C Oahu | (808) 488-1111',
-        description: '$0 Free Estimate • (808) 488-1111. Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG Dual Inverter & GE Window ACs ($395–$1,200), jalousie install & coil cleaning.',
+        description: 'Read 142+ verified 5-star Oahu reviews (4.9★) for Affordable Home A/C: LG & GE Window ACs ($395–$1,200), jalousie install & cleaning • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },
 };
@@ -51,7 +52,8 @@ export default function ReviewsPage() {
         "image": [
             "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
             "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-            "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp"
+            "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+            "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
         ],
         "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
         "telephone": "(808) 488-1111",
@@ -196,6 +198,10 @@ export default function ReviewsPage() {
                         title="Shop the LG & GE Window Air Conditioners Oahu Homeowners Love ($395–$1,200)"
                         subheading="In-stock at our Waipahu warehouse (94-150 Leoleo St #203). Buy online with 1-click checkout or request a $0 Free In-Home Estimate."
                     />
+                </div>
+
+                <div className="mt-12">
+                    <OahuEEATAuthorityBar topicTitle="142+ Verified Oahu Homeowner Reviews — LG & GE Window AC Sales, Installation & Cleaning" />
                 </div>
             </main>
 

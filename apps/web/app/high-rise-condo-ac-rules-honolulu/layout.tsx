@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Honolulu High-Rise Condo Window & 26" Wall AC Installation ($0 Estimate) | Oahu'
+        absolute: 'Honolulu High-Rise Condo Window & 26" Wall AC Install ($0 Estimate)'
     },
     description: '$0 Free Estimate • (808) 488-1111. Honolulu condo 26" through-the-wall GE Built-In & quiet 44dB LG Dual Inverter AC sales, drain routing & installation.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/high-rise-condo-ac-rules-honolulu',
     },
     openGraph: {
-        title: 'Honolulu High-Rise Condo Window & 26" Wall AC Installation ($0 Estimate) | Oahu',
+        title: 'Honolulu High-Rise Condo Window & 26" Wall AC Install ($0 Estimate)',
         description: '$0 Free Estimate • (808) 488-1111. Honolulu condo 26" through-the-wall GE Built-In & quiet 44dB LG Dual Inverter AC sales, drain routing & installation.',
         url: 'https://www.affordablehome-ac.com/high-rise-condo-ac-rules-honolulu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Honolulu High-Rise Condo Window & 26" Wall AC Installation ($0 Estimate) | Oahu',
+        title: 'Honolulu High-Rise Condo Window & 26" Wall AC Install ($0 Estimate)',
         description: '$0 Free Estimate • (808) 488-1111. Honolulu condo 26" through-the-wall GE Built-In & quiet 44dB LG Dual Inverter AC sales, drain routing & installation.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp'],
     }

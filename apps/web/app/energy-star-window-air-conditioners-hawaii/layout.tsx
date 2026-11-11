@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'ENERGY STAR Window ACs Hawaii ($560+ In-Stock) | Cut HECO Bills 40% + $45 Rebate'
+        absolute: 'ENERGY STAR Window ACs Hawaii ($560+ In-Stock) | Cut HECO 40% + $45 Rebate'
     },
     description: 'Save up to 40% ($424/yr) on Oahu HECO bills with in-stock ENERGY STAR LG Dual Inverter & GE R-32 Window ACs. Includes $45 Hawaii Energy Rebate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/energy-star-window-air-conditioners-hawaii',
     },
     openGraph: {
-        title: 'ENERGY STAR Window ACs Hawaii ($560+ In-Stock) | Cut HECO Bills 40% + $45 Rebate',
+        title: 'ENERGY STAR Window ACs Hawaii ($560+ In-Stock) | Cut HECO 40% + $45 Rebate',
         description: 'Save up to 40% ($424/yr) on Oahu HECO bills with in-stock ENERGY STAR LG Dual Inverter & GE R-32 Window ACs. Includes $45 Hawaii Energy Rebate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/energy-star-window-air-conditioners-hawaii',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'ENERGY STAR Window ACs Hawaii ($560+ In-Stock) | Cut HECO Bills 40% + $45 Rebate',
+        title: 'ENERGY STAR Window ACs Hawaii ($560+ In-Stock) | Cut HECO 40% + $45 Rebate',
         description: 'Save up to 40% ($424/yr) on Oahu HECO bills with in-stock ENERGY STAR LG Dual Inverter & GE R-32 Window ACs. Includes $45 Hawaii Energy Rebate • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }

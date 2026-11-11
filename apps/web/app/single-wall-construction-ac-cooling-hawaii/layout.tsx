@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Single-Wall Home AC Sizing & Cooling Hawaii ($0 Estimate) | In-Stock LG & GE ACs'
+        absolute: 'Single-Wall Home Window AC Sizing Hawaii ($0 Estimate) | LG & GE ACs'
     },
     description: '$0 Free Estimate • (808) 488-1111. Island Microclimate BTU sizing & jalousie installation for uninsulated Hawaii single-wall redwood homes. In-stock ACs $395+.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/single-wall-construction-ac-cooling-hawaii',
     },
     openGraph: {
-        title: 'Single-Wall Home AC Sizing & Cooling Hawaii ($0 Estimate) | In-Stock LG & GE ACs',
+        title: 'Single-Wall Home Window AC Sizing Hawaii ($0 Estimate) | LG & GE ACs',
         description: '$0 Free Estimate • (808) 488-1111. Island Microclimate BTU sizing & jalousie installation for uninsulated Hawaii single-wall redwood homes. In-stock ACs $395+.',
         url: 'https://www.affordablehome-ac.com/single-wall-construction-ac-cooling-hawaii',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Single-Wall Home AC Sizing & Cooling Hawaii ($0 Estimate) | In-Stock LG & GE ACs',
+        title: 'Single-Wall Home Window AC Sizing Hawaii ($0 Estimate) | LG & GE ACs',
         description: '$0 Free Estimate • (808) 488-1111. Island Microclimate BTU sizing & jalousie installation for uninsulated Hawaii single-wall redwood homes. In-stock ACs $395+.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Making Loud Buzzing Noise Oahu ($0 Estimate) | Quiet 44dB Swap'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Silence rattling, buzzing Oahu Window ACs with bracket vibration dampening, blower cleaning, or a 44dB LG Dual Inverter ($560+).',
+    description: '$0 Free Estimate • (808) 488-1111. Fix rattling, buzzing Oahu Window ACs with bracket dampening, blower cleaning, or a 44dB LG Dual Inverter ($560+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-making-loud-buzzing-noise',
     },
     openGraph: {
         title: 'Window AC Making Loud Buzzing Noise Oahu ($0 Estimate) | Quiet 44dB Swap',
-        description: '$0 Free Estimate • (808) 488-1111. Silence rattling, buzzing Oahu Window ACs with bracket vibration dampening, blower cleaning, or a 44dB LG Dual Inverter ($560+).',
+        description: '$0 Free Estimate • (808) 488-1111. Fix rattling, buzzing Oahu Window ACs with bracket dampening, blower cleaning, or a 44dB LG Dual Inverter ($560+).',
         url: 'https://www.affordablehome-ac.com/window-ac-making-loud-buzzing-noise',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Making Loud Buzzing Noise Oahu ($0 Estimate) | Quiet 44dB Swap',
-        description: '$0 Free Estimate • (808) 488-1111. Silence rattling, buzzing Oahu Window ACs with bracket vibration dampening, blower cleaning, or a 44dB LG Dual Inverter ($560+).',
+        description: '$0 Free Estimate • (808) 488-1111. Fix rattling, buzzing Oahu Window ACs with bracket dampening, blower cleaning, or a 44dB LG Dual Inverter ($560+).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
@@ -100,7 +100,7 @@ const pass5RichSchema = {
         "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
-    "description": "$0 Free Estimate • (808) 488-1111. Silence rattling, buzzing Oahu Window ACs with bracket vibration dampening, blower cleaning, or a 44dB LG Dual Inverter ($560+).",
+    "description": "$0 Free Estimate • (808) 488-1111. Fix rattling, buzzing Oahu Window ACs with bracket dampening, blower cleaning, or a 44dB LG Dual Inverter ($560+).",
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/window-ac-making-loud-buzzing-noise#localbusiness",

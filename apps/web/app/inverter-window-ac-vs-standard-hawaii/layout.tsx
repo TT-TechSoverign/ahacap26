@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr on HECO + $45 Rebate'
+        absolute: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr + $45 Rebate'
     },
     description: 'Compare 44dB LG Dual Inverter & GE R-32 Inverter Window ACs vs standard units in Hawaii. Save 40% on HECO bills + claim a $45 Rebate in Waipahu • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/inverter-window-ac-vs-standard-hawaii',
     },
     openGraph: {
-        title: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr on HECO + $45 Rebate',
+        title: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr + $45 Rebate',
         description: 'Compare 44dB LG Dual Inverter & GE R-32 Inverter Window ACs vs standard units in Hawaii. Save 40% on HECO bills + claim a $45 Rebate in Waipahu • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/inverter-window-ac-vs-standard-hawaii',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr on HECO + $45 Rebate',
+        title: 'LG Dual Inverter vs Standard Window AC Hawaii | Save $424/yr + $45 Rebate',
         description: 'Compare 44dB LG Dual Inverter & GE R-32 Inverter Window ACs vs standard units in Hawaii. Save 40% on HECO bills + claim a $45 Rebate in Waipahu • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Blowing Warm Air Oahu ($0 Estimate) | Repair or $395+ New AC'
     },
-    description: '$0 Free Estimate • (808) 488-1111. LG or GE Window AC blowing warm air on Oahu? Expert coil cleaning, capacitor troubleshooting & in-stock replacements ($395+).',
+    description: '$0 Free Estimate • (808) 488-1111. Window AC blowing warm air on Oahu? Expert coil cleaning, capacitor checks & in-stock replacements ($395+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-blowing-warm-air-troubleshooting-oahu',
     },
     openGraph: {
         title: 'Window AC Blowing Warm Air Oahu ($0 Estimate) | Repair or $395+ New AC',
-        description: '$0 Free Estimate • (808) 488-1111. LG or GE Window AC blowing warm air on Oahu? Expert coil cleaning, capacitor troubleshooting & in-stock replacements ($395+).',
+        description: '$0 Free Estimate • (808) 488-1111. Window AC blowing warm air on Oahu? Expert coil cleaning, capacitor checks & in-stock replacements ($395+).',
         url: 'https://www.affordablehome-ac.com/ac-blowing-warm-air-troubleshooting-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Blowing Warm Air Oahu ($0 Estimate) | Repair or $395+ New AC',
-        description: '$0 Free Estimate • (808) 488-1111. LG or GE Window AC blowing warm air on Oahu? Expert coil cleaning, capacitor troubleshooting & in-stock replacements ($395+).',
+        description: '$0 Free Estimate • (808) 488-1111. Window AC blowing warm air on Oahu? Expert coil cleaning, capacitor checks & in-stock replacements ($395+).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
@@ -92,7 +92,7 @@ const pass5RichSchema = {
         "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
-    "description": "$0 Free Estimate • (808) 488-1111. LG or GE Window AC blowing warm air on Oahu? Expert coil cleaning, capacitor troubleshooting & in-stock replacements ($395+).",
+    "description": "$0 Free Estimate • (808) 488-1111. Window AC blowing warm air on Oahu? Expert coil cleaning, capacitor checks & in-stock replacements ($395+).",
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/ac-blowing-warm-air-troubleshooting-oahu#localbusiness",

@@ -59,10 +59,28 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
         <section data-version="v28.2" className="relative w-full bg-[#0F172A] py-20 px-6 border-t border-white/5">
             <div className="max-w-5xl mx-auto flex flex-col gap-12">
                 
-                <div className="text-center mb-4">
-                    <h2 className="font-header font-black text-3xl md:text-4xl text-white uppercase tracking-tight drop-shadow-lg">
+                <div className="text-center mb-4 space-y-4">
+                    <h2 id="city-ac-services" className="scroll-mt-28 md:scroll-mt-48 font-header font-black text-3xl md:text-4xl text-white uppercase tracking-tight drop-shadow-lg">
                         Dedicated AC Services for <span className="text-[#00E5FF] drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]">{city}</span> Homes
                     </h2>
+                    <nav aria-label={`${city} Page Quick Jump`} className="flex flex-wrap items-center justify-center gap-2 text-[11px] font-mono">
+                        <span className="text-slate-400 uppercase font-bold tracking-wider mr-1">Jump To:</span>
+                        <a href="#in-stock-waipahu-models" className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-cyan-500/15 border border-white/10 text-cyan-400 transition-colors">
+                            In-Stock Units ($395+)
+                        </a>
+                        <a href="#city-sizing-table" className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-cyan-500/15 border border-white/10 text-cyan-400 transition-colors">
+                            {city} BTU Sizing Table
+                        </a>
+                        <a href="#city-faqs" className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-cyan-500/15 border border-white/10 text-cyan-400 transition-colors">
+                            {city} FAQs
+                        </a>
+                        <a href="#city-reviews" className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-cyan-500/15 border border-white/10 text-cyan-400 transition-colors">
+                            4.9★ {city} Reviews
+                        </a>
+                        <a href="#oahu-window-ac-directory" className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-cyan-500/15 border border-white/10 text-cyan-400 transition-colors">
+                            Oahu AC Directory
+                        </a>
+                    </nav>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -129,7 +147,7 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                 </div>
 
                 {/* First-Hand Oahu Engineering & BTU Dual-Sizing Matrix (E-E-A-T Information Gain) */}
-                <div className="p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-cyan-500/20 shadow-xl mt-2">
+                <div id="city-sizing-table" className="scroll-mt-28 md:scroll-mt-48 p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-cyan-500/20 shadow-xl mt-2">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
                         <div>
                             <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-400 block mb-1">

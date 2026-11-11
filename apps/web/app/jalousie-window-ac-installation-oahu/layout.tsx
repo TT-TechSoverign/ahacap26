@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Jalousie Window AC Installation Oahu ($0 Estimate) | Custom Fit | (808) 488-1111'
+        absolute: 'Jalousie Window AC Installation Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Custom Hawaiian jalousie glass louver Window AC installation, weatherproof panels, brackets & in-stock LG/GE ACs ($395+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/jalousie-window-ac-installation-oahu',
     },
     openGraph: {
-        title: 'Jalousie Window AC Installation Oahu ($0 Estimate) | Custom Fit | (808) 488-1111',
+        title: 'Jalousie Window AC Installation Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Custom Hawaiian jalousie glass louver Window AC installation, weatherproof panels, brackets & in-stock LG/GE ACs ($395+).',
         url: 'https://www.affordablehome-ac.com/jalousie-window-ac-installation-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Jalousie Window AC Installation Oahu ($0 Estimate) | Custom Fit | (808) 488-1111',
+        title: 'Jalousie Window AC Installation Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Custom Hawaiian jalousie glass louver Window AC installation, weatherproof panels, brackets & in-stock LG/GE ACs ($395+).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
