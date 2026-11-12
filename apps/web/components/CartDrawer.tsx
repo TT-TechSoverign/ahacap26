@@ -10,8 +10,9 @@ import Link from 'next/link';
 import { useCart } from '../context/CartContext';
 import { isCampaignActive } from '../lib/utils';
 import { getProductImages } from '../lib/product-images';
+import { safeStorage } from '../lib/safe-storage';
 import { buildGa4EcommerceItem, trackEcommerceEvent } from '../lib/tracking';
-import { ShoppingCart, X, Snowflake, AlertCircle, Warehouse, Trash2, AlertTriangle, Loader2, Lock, Phone, Calendar } from 'lucide-react';
+import { ShoppingCart, X, Snowflake, AlertCircle, Warehouse, Truck, Trash2, AlertTriangle, Loader2, Lock, Phone, Calendar, ArrowRight } from 'lucide-react';
 
 function cn(...inputs: (string | undefined)[]) {
     return twMerge(clsx(inputs));
@@ -20,7 +21,7 @@ function cn(...inputs: (string | undefined)[]) {
 export default function CartDrawer() {
     const { items, isOpen, closeCart, removeFromCart, updateQuantity, cartTotal, clearCart, syncInventory } = useCart();
     const [isCheckout, setIsCheckout] = useState(false);
-    // Email state removed - handled by Stripe Hosted Checkout
+    const [fulfillmentMode, setFulfillmentMode] = useState<'pickup' | 'delivery'>('pickup');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [orderSuccess, setOrderSuccess] = useState(false);
@@ -64,9 +65,99 @@ export default function CartDrawer() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen]);
 
-    const handleCheckout = () => {
+    const handleFullReviewPage = () => {
         closeCart();
-        window.location.href = '/checkout';
+        window.location.href = `/checkout?fulfillment=${fulfillmentMode}`;
+    };
+
+    const handleExpressStripeCheckout = async () => {
+        if (loading || hasIssue || items.length === 0) return;
+        setLoading(true);
+        setError('');
+        try {
+            const getCookie = (name: string) => {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop()?.split(';').shift();
+                return null;
+            };
+
+            const getGaSessionCookie = () => {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith('_ga_')) {
+                        return cookie.split('=')[1];
+                    }
+                }
+                return null;
+            };
+
+            const gaClientId = getCookie('_ga');
+            const gaSessionId = getGaSessionCookie();
+            const utmSource = safeStorage.getItem('utm_source', 'session');
+            const utmMedium = safeStorage.getItem('utm_medium', 'session');
+            const utmCampaign = safeStorage.getItem('utm_campaign', 'session');
+
+            const ga4Items = items.map((it, idx) => buildGa4EcommerceItem(it, it.quantity || 1, idx, it.price));
+            trackEcommerceEvent('begin_checkout', {
+                currency: 'USD',
+                value: Number(validTotal.toFixed(2)),
+                items: ga4Items,
+            });
+
+            const response = await fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    items,
+                    fulfillmentMode,
+                    gaClientId,
+                    gaSessionId,
+                    utmSource,
+                    utmMedium,
+                    utmCampaign,
+                }),
+            });
+
+            const { url, error: apiError } = await response.json();
+            if (apiError) throw new Error(apiError);
+            if (!url) throw new Error('Checkout URL missing');
+
+            try {
+                const shippingFee = fulfillmentMode === 'delivery' ? 50 : 0;
+                const shippingTier = fulfillmentMode === 'delivery' ? 'Oahu Flat-Rate $50 Delivery' : 'Waipahu Free Warehouse Pickup';
+                trackEcommerceEvent('add_shipping_info', {
+                    currency: 'USD',
+                    value: Number(expressFinalTotal.toFixed(2)),
+                    shipping_tier: shippingTier,
+                    items: ga4Items,
+                });
+                safeStorage.setItem(
+                    'ahac_pending_order',
+                    JSON.stringify({
+                        items: ga4Items,
+                        totalAmount: Number(expressFinalTotal.toFixed(2)),
+                        shippingFee,
+                        fulfillmentMode,
+                        createdAt: Date.now(),
+                    }),
+                    'local'
+                );
+            } catch {
+                // Non-blocking storage snapshot
+            }
+
+            window.location.href = url;
+        } catch (err: any) {
+            if (err.message === 'out_of_stock') {
+                setError('INVENTORY ALERT: An item in your cart was just sold. Availability has been refreshed below.');
+                syncInventory();
+            } else {
+                setError(err.message || 'Express checkout connection failed. Please try again.');
+            }
+            setLoading(false);
+        }
     };
 
     const triggerConfetti = () => {
@@ -100,6 +191,10 @@ export default function CartDrawer() {
         }
         return acc;
     }, 0);
+    const expressDeliveryFee = fulfillmentMode === 'delivery' ? 50 : 0;
+    const expressTaxableSubtotal = validTotal + expressDeliveryFee;
+    const expressTaxAmount = expressTaxableSubtotal * 0.04712;
+    const expressFinalTotal = expressTaxableSubtotal + expressTaxAmount;
 
     return (
         <AnimatePresence>
@@ -269,31 +364,63 @@ export default function CartDrawer() {
                             )}
                         </div>
 
-                        {/* Footer / Checkout (Thumb Zone) */}
+                        {/* Footer / Express Checkout (Thumb Zone) */}
                         {(items.length > 0) && (
                             <div 
-                                style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 1.5rem)' }}
-                                className="p-6 border-t border-cyan-500/10 bg-slate-900/80 backdrop-blur-xl space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.4)] z-20"
+                                style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' }}
+                                className="p-4 sm:p-5 border-t border-cyan-500/15 bg-slate-900/95 backdrop-blur-xl space-y-3 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] z-20"
                             >
-                                <div className="space-y-4">
-                                    <div className="space-y-1">
-                                        <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-widest">
-                                            <span>Subtotal {hasIssue && '(In-Stock Only)'}</span>
-                                            <span className="font-mono text-slate-500">{items.reduce((sum, i) => sum + i.quantity, 0)} Units</span>
-                                        </div>
-                                        <div className="flex items-end justify-between gap-2">
-                                            <span className={`text-3xl font-header font-black tracking-tighter shadow-white-glow ${hasIssue ? 'text-amber-500' : 'text-white'}`}>
-                                                ${validTotal.toLocaleString()}
-                                            </span>
-                                            <span className="text-[10px] text-cyan-400 font-mono uppercase tracking-wider mb-1 text-right leading-tight">
-                                                Free Waipahu Pickup or $50 Delivery<br />+ 4.712% HI GET Tax
-                                            </span>
-                                        </div>
+                                <div className="space-y-3">
+                                    {/* Inline 1-Tap Fulfillment Toggle */}
+                                    <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-slate-950 border border-white/10">
+                                        <button
+                                            type="button"
+                                            onClick={() => setFulfillmentMode('pickup')}
+                                            className={cn(
+                                                "py-2 px-2 rounded-lg text-[10px] font-header font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all",
+                                                fulfillmentMode === 'pickup'
+                                                    ? "bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                                                    : "text-slate-400 hover:text-white"
+                                            )}
+                                        >
+                                            <Warehouse className="size-3.5 shrink-0" />
+                                            <span>Waipahu Pickup ($0)</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setFulfillmentMode('delivery')}
+                                            className={cn(
+                                                "py-2 px-2 rounded-lg text-[10px] font-header font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all",
+                                                fulfillmentMode === 'delivery'
+                                                    ? "bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                                                    : "text-slate-400 hover:text-white"
+                                            )}
+                                        >
+                                            <Truck className="size-3.5 shrink-0" />
+                                            <span>Oahu Delivery ($50)</span>
+                                        </button>
                                     </div>
 
-                                    {/* Progress Bar (Visual Flair) */}
-                                    <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-                                        <div className={`h-full w-[60%] shadow-[0_0_10px_currentColor] transition-colors ${hasIssue ? 'bg-red-500' : 'bg-cyan-500'}`} />
+                                    {/* Live Itemized Breakdown */}
+                                    <div className="space-y-1 bg-slate-950/60 border border-white/5 rounded-xl px-3.5 py-2.5">
+                                        <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                                            <span>Equipment ({items.reduce((sum, i) => sum + i.quantity, 0)} {items.reduce((sum, i) => sum + i.quantity, 0) === 1 ? 'Unit' : 'Units'})</span>
+                                            <span className="text-slate-200 font-bold">${validTotal.toLocaleString()}</span>
+                                        </div>
+                                        <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                                            <span>{fulfillmentMode === 'delivery' ? 'Flat-Rate Oahu Delivery' : 'Waipahu Pickup (By Appt)'} + 4.712% Tax</span>
+                                            <span className="text-cyan-300 font-bold">
+                                                {fulfillmentMode === 'delivery' ? `+$50.00 + $${expressTaxAmount.toFixed(2)}` : `$0 + $${expressTaxAmount.toFixed(2)}`}
+                                            </span>
+                                        </div>
+                                        <div className="flex items-baseline justify-between pt-1.5 border-t border-white/10">
+                                            <span className="text-[11px] font-header font-black uppercase tracking-wider text-white">
+                                                Total {hasIssue && '(In-Stock Only)'}
+                                            </span>
+                                            <span className={`text-2xl font-header font-black tracking-tight ${hasIssue ? 'text-amber-500' : 'text-white'}`}>
+                                                ${expressFinalTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                            </span>
+                                        </div>
                                     </div>
 
                                     {/* Critical Inventory Warning */}
@@ -301,17 +428,14 @@ export default function CartDrawer() {
                                         <motion.div
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl relative overflow-hidden group space-y-2.5"
+                                            className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl relative overflow-hidden group space-y-2"
                                         >
                                             <div className="absolute inset-0 bg-red-500/5 animate-pulse"></div>
-                                            <div className="flex items-start gap-3 relative z-10">
-                                                <AlertTriangle className="size-5 text-red-500 animate-bounce shrink-0" />
-                                                <div className="space-y-1">
-                                                    <p className="text-red-400 font-black uppercase text-[10px] tracking-[0.2em]">Action Required</p>
-                                                    <p className="text-slate-300 text-xs font-bold leading-relaxed">
-                                                        Out-of-stock or over-limit items detected. Adjust cart availability to proceed.
-                                                    </p>
-                                                </div>
+                                            <div className="flex items-start gap-2.5 relative z-10">
+                                                <AlertTriangle className="size-4 text-red-500 animate-bounce shrink-0 mt-0.5" />
+                                                <p className="text-slate-200 text-[11px] font-bold leading-snug">
+                                                    Out-of-stock or over-limit items detected. Auto-adjust availability to proceed.
+                                                </p>
                                             </div>
                                             <button
                                                 type="button"
@@ -333,70 +457,67 @@ export default function CartDrawer() {
                                     )}
 
                                     {error && (
-                                        <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs font-bold text-center">
+                                        <div className="p-2.5 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs font-bold text-center">
                                             {error}
                                         </div>
                                     )}
 
-                                    {/* Free Sizing Estimates & Direct Dispatch Alternative */}
-                                    <div className="p-3.5 bg-slate-950/80 border border-emerald-500/30 rounded-xl space-y-2 text-left shadow-inner">
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-1.5 text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                                By Appt First • Free Sizing Estimates
-                                            </div>
-                                            <span className="text-[9px] text-cyan-400 font-mono uppercase">Direct Dispatch</span>
-                                        </div>
-                                        <p className="text-slate-300 text-[11px] font-sans leading-relaxed">
-                                            Want to confirm window sizing, 115V vs 230V electrical fit, or pickup details before purchasing? Call our office or submit an appointment inquiry ($0 for estimates).
-                                        </p>
-                                        <div className="grid grid-cols-2 gap-2 pt-1">
-                                            <a 
-                                                href="tel:808-488-1111"
-                                                className="py-2 px-2.5 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 font-bold text-[10px] uppercase tracking-wider rounded-lg border border-emerald-500/30 text-center flex items-center justify-center gap-1.5 active:scale-95 transition-all"
-                                            >
-                                                <Phone className="size-3 text-emerald-400 shrink-0" />
-                                                <span>Call (808) 488-1111</span>
-                                            </a>
-                                            <Link 
-                                                href="/contact?service=window_ac_purchase"
-                                                onClick={closeCart}
-                                                className="py-2 px-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold text-[10px] uppercase tracking-wider rounded-lg border border-white/10 text-center flex items-center justify-center gap-1.5 active:scale-95 transition-all"
-                                            >
-                                                <Calendar className="size-3 text-cyan-400 shrink-0" />
-                                                <span>Book via Form</span>
-                                            </Link>
-                                        </div>
-                                    </div>
-
+                                    {/* 1-Tap Express Stripe Checkout CTA */}
                                     <button
-                                        onClick={handleCheckout}
+                                        type="button"
+                                        onClick={handleExpressStripeCheckout}
                                         disabled={loading || hasIssue}
-                                        className={`w-full h-16 text-white font-header font-black uppercase tracking-[0.2em] text-sm rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-0.5 group disabled:opacity-50 disabled:cursor-not-allowed ${hasIssue ? 'bg-slate-800 cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-primary to-cyan-500 shadow-[0_0_30px_rgba(0,174,239,0.3)]'}`}
+                                        className={`w-full h-14 text-slate-950 font-header font-black uppercase tracking-[0.14em] text-xs sm:text-sm rounded-xl hover:scale-[1.01] active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-0.5 group disabled:opacity-50 disabled:cursor-not-allowed ${hasIssue ? 'bg-slate-800 text-slate-400 cursor-not-allowed border border-white/5' : 'bg-gradient-to-r from-emerald-400 via-cyan-400 to-primary shadow-[0_0_28px_rgba(16,185,129,0.35)]'}`}
                                     >
                                         {loading ? (
-                                            <Loader2 className="size-5 animate-spin" />
+                                            <div className="flex items-center gap-2 text-slate-950">
+                                                <Loader2 className="size-4 animate-spin" />
+                                                <span>Opening Secure Stripe Checkout...</span>
+                                            </div>
                                         ) : hasIssue ? (
-                                            <div className="flex items-center gap-3">
-                                                <span className="text-slate-500">Inventory Locked</span>
-                                                <Lock className="size-5 text-slate-600" />
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-slate-400">Inventory Locked</span>
+                                                <Lock className="size-4 text-slate-500" />
                                             </div>
                                         ) : (
                                             <>
-                                                <div className="flex items-center gap-3">
-                                                    <span>Secure Checkout</span>
-                                                    <Lock className="size-4 group-hover:translate-x-1 transition-transform" />
+                                                <div className="flex items-center gap-2">
+                                                    <Lock className="size-3.5 shrink-0" />
+                                                    <span>Express Pay • Apple Pay / Google Pay / Card</span>
                                                 </div>
-                                                <span className="text-[9px] font-mono tracking-wider text-slate-950 font-bold">
-                                                    US-Issued Cards Only (50 US States)
+                                                <span className="text-[9px] font-mono tracking-wider text-slate-900 font-bold">
+                                                    US-Issued Cards Only (50 US States) • 1-Yr Warranty
                                                 </span>
                                             </>
                                         )}
                                     </button>
 
-                                    <div className="flex items-center justify-center gap-2 text-slate-500">
-                                        <Lock className="size-3.5 inline-block text-emerald-400" />
-                                        <span className="text-[10px] font-mono uppercase tracking-widest">256-bit TLS via Stripe • US Cards Only</span>
+                                    {/* Secondary Actions: Full Order Review + Free Sizing Help */}
+                                    <div className="grid grid-cols-3 gap-1.5 pt-0.5">
+                                        <button
+                                            type="button"
+                                            onClick={handleFullReviewPage}
+                                            disabled={hasIssue}
+                                            className="py-2 px-2 bg-white/5 hover:bg-white/10 text-slate-200 font-bold text-[10px] uppercase tracking-wider rounded-lg border border-white/10 text-center flex items-center justify-center gap-1 active:scale-95 transition-all disabled:opacity-40"
+                                        >
+                                            <span>Full Review</span>
+                                            <ArrowRight className="size-3 text-cyan-400 shrink-0" />
+                                        </button>
+                                        <a 
+                                            href="tel:808-488-1111"
+                                            className="py-2 px-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 font-bold text-[10px] uppercase tracking-wider rounded-lg border border-emerald-500/25 text-center flex items-center justify-center gap-1 active:scale-95 transition-all"
+                                        >
+                                            <Phone className="size-3 text-emerald-400 shrink-0" />
+                                            <span>(808) 488-1111</span>
+                                        </a>
+                                        <Link 
+                                            href="/contact?service=window_ac_purchase"
+                                            onClick={closeCart}
+                                            className="py-2 px-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[10px] uppercase tracking-wider rounded-lg border border-white/10 text-center flex items-center justify-center gap-1 active:scale-95 transition-all"
+                                        >
+                                            <Calendar className="size-3 text-cyan-400 shrink-0" />
+                                            <span>$0 Estimate</span>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

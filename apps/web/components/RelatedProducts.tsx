@@ -10,6 +10,7 @@ import { useCart } from '@/context/CartContext';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { fetchLiveProductsClient } from '@/lib/use-live-inventory';
 import { getProductImages } from '@/lib/product-images';
+import { buildGa4EcommerceItem, trackEcommerceEvent } from '@/lib/tracking';
 
 interface RelatedProductsProps {
   currentProduct: Product;
@@ -93,7 +94,17 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
                 </div>
 
                 {/* Image Container */}
-                <Link href={`/shop/${slug}`} className="relative aspect-video w-full rounded-2xl bg-[#0b1120] overflow-hidden flex items-center justify-center p-3 mb-4 border border-border-dark/30 group-hover:border-primary/20 transition-colors block">
+                <Link
+                  href={`/shop/${slug}`}
+                  onClick={() => {
+                    trackEcommerceEvent('select_item', {
+                      item_list_id: 'related_in_stock_models',
+                      item_list_name: 'Related In-Stock Models',
+                      items: [buildGa4EcommerceItem(prod, 1, 0, activePrice)],
+                    });
+                  }}
+                  className="relative aspect-video w-full rounded-2xl bg-[#0b1120] overflow-hidden flex items-center justify-center p-3 mb-4 border border-border-dark/30 group-hover:border-primary/20 transition-colors block"
+                >
                   {prod.image_url ? (
                     <Image 
                       src={prod.image_url.endsWith('.svg') ? prod.image_url.replace('.svg', '.webp') : prod.image_url} 

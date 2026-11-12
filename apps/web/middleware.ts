@@ -62,8 +62,9 @@ export function middleware(request: NextRequest) {
         // use raw pathname if malformed URI
     }
 
-    // 2. Trailing slash normalization
-    let cleanPath = rawPath;
+    // 2. Collapse duplicate consecutive slashes (e.g. //checkout -> /checkout) & trailing slash normalization
+    const hasDuplicateSlashes = /\/{2,}/.test(rawPath);
+    let cleanPath = hasDuplicateSlashes ? rawPath.replace(/\/{2,}/g, '/') : rawPath;
     const hasTrailingSlash = cleanPath.length > 1 && cleanPath.endsWith('/');
     if (hasTrailingSlash) {
         cleanPath = cleanPath.slice(0, -1);
@@ -77,7 +78,7 @@ export function middleware(request: NextRequest) {
 
         // Safeguard against infinite redirect loop
         const hasBloat = WOOCOMMERCE_BLOAT_PARAMS.some(p => url.searchParams.has(p));
-        if (cleanDest === rawPath && !hasTrailingSlash && !hasBloat) {
+        if (cleanDest === rawPath && !hasTrailingSlash && !hasDuplicateSlashes && !hasBloat) {
             return NextResponse.next();
         }
 
@@ -385,10 +386,10 @@ export function middleware(request: NextRequest) {
         return makePermanentRedirect('/service-areas');
     }
 
-    // 6. Trailing Slash Canonicalization for Valid Static/Dynamic Pages
-    // (e.g. /shop/ -> /shop, /contact/ -> /contact, /window-ac-installation/ -> /window-ac-installation)
-    if (hasTrailingSlash) {
-        return makePermanentRedirect(cleanPath);
+    // 6. Trailing & Duplicate Slash Canonicalization for Valid Static/Dynamic Pages
+    // (e.g. //checkout -> /checkout, /shop/ -> /shop, /contact/ -> /contact)
+    if (hasTrailingSlash || hasDuplicateSlashes) {
+        return makePermanentRedirect(cleanPath || '/');
     }
 
     // 7. Prune WooCommerce Bloat Params on Otherwise Valid Pages

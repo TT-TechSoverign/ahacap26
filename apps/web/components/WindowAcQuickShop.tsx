@@ -7,7 +7,7 @@ import { Warehouse, Truck, ShoppingCart, Check, ArrowRight, Sparkles } from 'luc
 import { useCart } from '@/context/CartContext';
 import { Product } from '@/types/inventory';
 import { generateProductSlug, isCampaignActive } from '@/lib/utils';
-import { trackFunnelEvent } from '@/lib/tracking';
+import { buildGa4EcommerceItem, trackEcommerceEvent, trackFunnelEvent } from '@/lib/tracking';
 import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 import { getProductImages } from '@/lib/product-images';
 
@@ -219,6 +219,13 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                     <Link
                                         href={`/shop/${slug}`}
                                         prefetch={false}
+                                        onClick={() => {
+                                            trackEcommerceEvent('select_item', {
+                                                item_list_id: cityName ? `city_quick_shop_${cityName.toLowerCase().replace(/\s+/g, '_')}` : `quick_shop_${activeCategory}`,
+                                                item_list_name: cityName ? `${cityName} Quick Shop` : 'Window AC Quick Shop',
+                                                items: [buildGa4EcommerceItem(unit, 1, 0, activePrice)],
+                                            });
+                                        }}
                                         className="relative block aspect-[16/10] w-full rounded-xl bg-slate-900/90 border border-white/5 overflow-hidden mb-3"
                                     >
                                         <Image

@@ -19,7 +19,7 @@ export default function LocalServiceFunnel({ city }: LocalServiceFunnelProps) {
                 form_name: 'Local Service Funnel'
             });
         }
-        sendGAEvent('event', 'generate_lead', {
+        sendGAEvent('event', 'select_city_service', {
             event_category: category,
             event_label: `${city} Page`
         });

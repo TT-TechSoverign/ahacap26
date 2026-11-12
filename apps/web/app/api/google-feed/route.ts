@@ -141,13 +141,21 @@ export async function GET() {
       const rawWeight = product.shipping_weight || (product.weight ? `${product.weight} lb` : '');
       const shippingWeight = rawWeight ? `<g:shipping_weight>${escapeXml(rawWeight)}</g:shipping_weight>` : '';
 
-      // 2026 Google Shopping Product Highlights
+      // 2026 Google Shopping Product Highlights (Front-Loaded for Free Listing & Shopping CTR)
+      const isRebateEligible = product.subcategory === 'dual_inverter' || product.id === 15;
       const highlights = [
+        product.btu
+          ? `${product.btu.toLocaleString()} BTU Cooling • $${product.price} Waipahu Warehouse Direct${isRebateEligible ? ' ($45 Hawaii Energy Rebate)' : ''}`
+          : `Genuine GE 26-Inch Through-the-Wall Steel Sleeve • $${product.price} Waipahu Direct`,
+        isRebateEligible
+          ? 'Qualifies for $45 Hawaii Energy Cash Rebate (Official AHAC Rebate PDF Included)'
+          : 'Brand-New Factory-Sealed Unit • Full 1-Year Manufacturer Warranty',
         product.coverage_aham ? `AHAM Factory Certified: ${product.coverage_aham}` : `Coverage: ${product.coverage || 'Factory Rated'}`,
         product.coverage_oahu ? `Island Microclimate Calibration™: ${product.coverage_oahu}` : 'Island Sizing: Optimized for Hawaii Trade Winds & High Humidity',
-        product.min_window_height ? `Window Fit: Min ${product.min_window_height} H Opening Clearance` : 'Standard Window Opening Clearance Required',
-        product.chassis_type ? `Chassis Design: ${product.chassis_type}` : 'Slide-Out Chassis for Clean Maintenance',
-        'Waipahu Warehouse In-Stock • Free Pickup / $50 Oahu Delivery'
+        product.noise_level && product.voltage
+          ? `Acoustic & Power: ${product.noise_level} • ${product.voltage}`
+          : (product.min_window_height ? `Window Fit: Min ${product.min_window_height} H Opening Clearance` : 'Standard Window Opening Clearance Required'),
+        'In-Stock Waipahu (94-150 Leoleo St #203) • Free Pickup by Appt or $50 Flat Oahu Delivery'
       ];
       const highlightsXml = highlights.map(h => `<g:product_highlight>${escapeXml(h)}</g:product_highlight>`).join('\n          ');
 

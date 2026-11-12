@@ -126,12 +126,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         if (isOutOfStock && product.id === 2) {
             description = `LG 8k Dual Inverter (${modelCode}, $${priceText}) — see in-stock LW8024RD ($395) & 10k LW1022IVSM ($650 + $45 Rebate) in Waipahu • (808) 488-1111.`;
         } else {
-            const techShort = product.id === 1 ? '44dB quiet + $45 Rebate.'
-                : product.id === 3 ? 'ENERGY STAR + $45 Rebate.'
-                : product.id === 4 ? 'Gold Fin + $45 Rebate.'
-                : product.id === 5 ? '14k BTU on 115V + $45 Rebate.'
-                : product.id === 6 ? '230V 500 CFM living room cooling.'
-                : product.id === 7 ? '23,500 BTU whole-floor cooling.'
+            const techShort = product.id === 1 ? '44dB quiet ($515 net after $45 Rebate; 8k Standard $395).'
+                : product.id === 3 ? 'ENERGY STAR ($605 net after $45 Rebate).'
+                : product.id === 4 ? 'Gold Fin ($700 net after $45 Rebate).'
+                : product.id === 5 ? '14k BTU on 115V ($740 net after $45 Rebate).'
+                : product.id === 6 ? '230V 500 CFM living room ($45 Rebate).'
+                : product.id === 7 ? '23,500 BTU whole-floor ($45 Rebate).'
                 : 'Quiet Oahu energy saver.';
             description = `In-Stock Waipahu! LG ${btuStr} BTU Dual Inverter AC (${modelCode}) — $${priceText}. Free pickup / $50 Oahu delivery • (808) 488-1111. ${techShort}`;
         }
@@ -417,9 +417,26 @@ export default async function ProductLayout({ params, children }: Props) {
             "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
             "seller": {
                 "@type": "Organization",
+                "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
                 "name": "Affordable Home A/C",
                 "url": domain,
                 "logo": `${domain}/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png`
+            },
+            "availableAtOrFrom": {
+                "@type": "Place",
+                "name": "Affordable Home A/C — Waipahu Warehouse",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "94-150 Leoleo St. #203",
+                    "addressLocality": "Waipahu",
+                    "addressRegion": "HI",
+                    "postalCode": "96797",
+                    "addressCountry": "US"
+                }
+            },
+            "potentialAction": {
+                "@type": "BuyAction",
+                "target": `${domain}/shop/${canonicalSlug}`
             },
             // Resolves GSC "Missing hasMerchantReturnPolicy" warning
             "hasMerchantReturnPolicy": {

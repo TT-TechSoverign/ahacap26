@@ -16,11 +16,11 @@ import { safeStorage } from '../../lib/safe-storage';
 import { buildGa4EcommerceItem, trackEcommerceEvent, Ga4EcommerceItem } from '../../lib/tracking';
 
 import { 
-    CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, Snowflake, Lock, ShieldCheck, FileText, Phone, ShoppingCart 
+    CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, ArrowLeft, Snowflake, Lock, ShieldCheck, FileText, Phone, ShoppingCart, Trash2 
 } from 'lucide-react';
 
 function CheckoutContent() {
-    const { items, clearCart, cartTotal, syncInventory } = useCart();
+    const { items, clearCart, cartTotal, syncInventory, updateQuantity, removeFromCart } = useCart();
     const [step, setStep] = useState<'shipping' | 'payment' | 'success'>('shipping');
     const [email, setEmail] = useState('');
     const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>('pickup');
@@ -34,6 +34,13 @@ function CheckoutContent() {
 
     const searchParams = useSearchParams();
     const router = useRouter();
+
+    useEffect(() => {
+        const urlFulfillment = searchParams.get('fulfillment');
+        if (urlFulfillment === 'delivery' || urlFulfillment === 'pickup') {
+            setFulfillment(urlFulfillment);
+        }
+    }, [searchParams]);
 
     const deliveryFee = fulfillment === 'delivery' ? 50 : 0;
     const subtotal = cartTotal + deliveryFee;
@@ -278,8 +285,34 @@ function CheckoutContent() {
     }
 
     return (
-        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[140px] md:pt-[180px]">
-            <div className="max-w-7xl mx-auto space-y-8">
+        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[88px] md:pt-[180px]">
+            {/* Dedicated Secure Express Checkout Header Bar (NavbarV2 is intentionally hidden on /checkout) */}
+            <header className="fixed top-0 inset-x-0 z-50 bg-[#060a12] border-b border-white/10 shadow-xl">
+                <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between gap-3">
+                    <Link
+                        href="/shop"
+                        className="inline-flex items-center gap-2 text-slate-300 hover:text-cyan-400 text-xs font-header font-black uppercase tracking-wider transition-colors"
+                    >
+                        <ArrowLeft className="size-4 text-cyan-400 shrink-0" />
+                        <span>Continue Shopping</span>
+                    </Link>
+
+                    <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-3 py-1.5 rounded-full">
+                        <Lock className="size-3.5 shrink-0" />
+                        <span>256-Bit Stripe SSL • Apple Pay &amp; Google Pay Ready</span>
+                    </div>
+
+                    <a
+                        href="tel:8084881111"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 text-xs font-mono font-bold transition-colors"
+                    >
+                        <Phone className="size-3.5 text-emerald-400 shrink-0" />
+                        <span>(808) 488-1111</span>
+                    </a>
+                </div>
+            </header>
+
+            <div className="max-w-7xl mx-auto space-y-6 md:space-y-8">
 
                 {/* Header */}
                 <motion.div
@@ -447,9 +480,9 @@ function CheckoutContent() {
                                     Order Summary
                                 </h3>
 
-                                <div className="space-y-4 md:space-y-5 mb-6 md:mb-8 max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 relative z-10">
+                                <div className="space-y-4 md:space-y-5 mb-6 md:mb-8 max-h-[340px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-white/10 relative z-10">
                                     {items.map(item => (
-                                        <div key={item.id} className="flex gap-3 md:gap-4 group/item">
+                                        <div key={item.id} className="flex gap-3 md:gap-4 group/item bg-black/25 border border-white/5 rounded-xl p-2.5">
                                             <div className="size-12 md:size-14 bg-[#05070a] rounded-xl flex items-center justify-center border border-white/5 group-hover/item:border-primary/30 transition-colors relative overflow-hidden shrink-0">
                                                 {item.image_url || getProductImages(item.id)?.[0] ? (
                                                     <Image
@@ -463,20 +496,52 @@ function CheckoutContent() {
                                                 )}
                                             </div>
                                             <div className="flex-1 min-w-0">
-                                                <h4 className="text-[10px] md:text-xs font-black text-white/80 line-clamp-1 uppercase tracking-tighter group-hover/item:text-white transition-colors">{item.name}</h4>
-                                                <div className="flex items-center justify-between mt-1">
-                                                    <span className="text-[9px] md:text-[10px] text-slate-500 font-bold uppercase tracking-widest">Qty: {item.quantity}</span>
+                                                <div className="flex items-start justify-between gap-2">
+                                                    <h4 className="text-[10px] md:text-xs font-black text-white/90 line-clamp-1 uppercase tracking-tighter group-hover/item:text-white transition-colors">{item.name}</h4>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => removeFromCart(item.id)}
+                                                        className="text-slate-500 hover:text-red-400 p-0.5 rounded transition-colors shrink-0"
+                                                        aria-label={`Remove ${item.name}`}
+                                                        title="Remove item"
+                                                    >
+                                                        <Trash2 className="size-3.5" />
+                                                    </button>
+                                                </div>
+                                                <div className="flex items-center justify-between mt-1.5 gap-2">
+                                                    <div className="flex items-center gap-1 rounded-lg bg-slate-900 border border-white/10 px-1 py-0.5">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                                            className="size-5 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-white/10 font-mono font-bold text-xs transition-colors"
+                                                            aria-label="Decrease quantity"
+                                                        >
+                                                            -
+                                                        </button>
+                                                        <span className="font-mono text-[11px] font-bold text-white min-w-[1.25rem] text-center">
+                                                            {item.quantity}
+                                                        </span>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                            disabled={item.quantity >= (item.stock || 1)}
+                                                            className="size-5 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-30 font-mono font-bold text-xs transition-colors"
+                                                            aria-label="Increase quantity"
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
                                                     {(isCampaignActive() && item.promo_price && item.promo_price > 0) ? (
                                                         <div className="flex items-center gap-1.5">
                                                             <span className="text-[10px] text-red-500 line-through font-bold opacity-60">
-                                                                ${item.price.toLocaleString()}
+                                                                ${(item.price * item.quantity).toLocaleString()}
                                                             </span>
                                                             <span className="text-primary font-header font-black text-xs">
-                                                                ${item.promo_price.toLocaleString()}
+                                                                ${(item.promo_price * item.quantity).toLocaleString()}
                                                             </span>
                                                         </div>
                                                     ) : (
-                                                        <span className="text-primary font-header font-black text-xs">${item.price.toLocaleString()}</span>
+                                                        <span className="text-primary font-header font-black text-xs">${(item.price * item.quantity).toLocaleString()}</span>
                                                     )}
                                                 </div>
                                             </div>

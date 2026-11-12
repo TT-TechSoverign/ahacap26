@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '$45 Hawaii Energy Window AC Rebate Oahu (2026 PDF) | LG & GE'
+        absolute: '$45 Hawaii Energy Window AC Rebate PDF (2026) | Oahu In-Stock'
     },
-    description: 'Download the official $45 Hawaii Energy Window AC Rebate PDF! Save up to 40% ($424/yr) on HECO bills with in-stock Waipahu LG & GE Inverters • (808) 488-1111.',
+    description: 'Instant $45 Hawaii Energy Window AC Rebate PDF Download! Eligible LG Dual Inverter & GE ACs ($560+, $515 net) in stock in Waipahu • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/hawaii-energy-rebate',
     },
     openGraph: {
-        title: '$45 Hawaii Energy Window AC Rebate Oahu (2026 PDF) | LG & GE',
-        description: 'Download the official $45 Hawaii Energy Window AC Rebate PDF! Save up to 40% ($424/yr) on HECO bills with in-stock Waipahu LG & GE Inverters • (808) 488-1111.',
+        title: '$45 Hawaii Energy Window AC Rebate PDF (2026) | Oahu In-Stock',
+        description: 'Instant $45 Hawaii Energy Window AC Rebate PDF Download! Eligible LG Dual Inverter & GE ACs ($560+, $515 net) in stock in Waipahu • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/hawaii-energy-rebate',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: '$45 Hawaii Energy Window AC Rebate Oahu (2026 PDF) | LG & GE',
-        description: 'Download the official $45 Hawaii Energy Window AC Rebate PDF! Save up to 40% ($424/yr) on HECO bills with in-stock Waipahu LG & GE Inverters • (808) 488-1111.',
+        title: '$45 Hawaii Energy Window AC Rebate PDF (2026) | Oahu In-Stock',
+        description: 'Instant $45 Hawaii Energy Window AC Rebate PDF Download! Eligible LG Dual Inverter & GE ACs ($560+, $515 net) in stock in Waipahu • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
@@ -73,6 +73,7 @@ const rebateFaqSchema = {
 const hvacBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "HVACBusiness",
+    "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
     "name": "Affordable Home A/C",
     "telephone": "+1-808-488-1111",
     "address": {
@@ -84,6 +85,37 @@ const hvacBusinessSchema = {
         "addressCountry": "US"
     },
     "areaServed": "Oahu"
+};
+
+const rebateHowToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Claim Your $45 Hawaii Energy Window AC Rebate on Oahu",
+    "description": "3-step guide to claiming your $45 cash rebate from Hawaii Energy when purchasing an ENERGY STAR LG Dual Inverter or GE Inverter Window AC in Oahu.",
+    "totalTime": "PT5M",
+    "step": [
+        {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Purchase an ENERGY STAR Qualifying Window AC",
+            "text": "Order an eligible LG Dual Inverter (6,000–23,500 BTU) or GE Variable Speed Inverter (AJCQ12AXXWA) online at affordablehome-ac.com/shop ($560–$1,200) for Free Waipahu Pickup or $50 Oahu Delivery.",
+            "url": "https://www.affordablehome-ac.com/shop#dual_inverter"
+        },
+        {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Download the Official Pre-Approved AHAC Rebate PDF",
+            "text": "Download the official Affordable Home A/C Hawaii Energy Window AC Purchase Application (Version 4 PDF) and enter your 12-digit Hawaiian Electric (HECO) residential account number.",
+            "url": "https://www.affordablehome-ac.com/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
+        },
+        {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Submit Receipt & Form for Your $45 Check",
+            "text": "Submit your completed application alongside your itemized Affordable Home A/C purchase receipt to Hawaii Energy online or by mail to receive your $45 cash rebate check.",
+            "url": "https://www.affordablehome-ac.com/hawaii-energy-rebate"
+        }
+    ]
 };
 
 const breadcrumbSchema = {
@@ -283,6 +315,10 @@ export default function HawaiiEnergyRebateLayout({ children }: { children: React
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(rebateHowToSchema) }}
             />
             <script
                 type="application/ld+json"

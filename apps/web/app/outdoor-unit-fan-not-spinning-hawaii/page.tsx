@@ -69,18 +69,18 @@ export default function OutdoorFanNotSpinningPage() {
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
                 
                 <div className="mb-6">
-                    <Breadcrumb items={[{ name: 'AC Condenser Fan Not Spinning in Hawaii' }]} />
+                    <Breadcrumb items={[{ name: 'Window AC Fan Not Spinning in Hawaii' }]} />
                 </div>
 
                 {/* Hero */}
                 <section className="text-center mb-12 sm:mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 font-mono text-[11px] font-bold uppercase tracking-wider mb-6">
                         <Fan className="size-3.5" />
-                        <span>Compressor Overheat Warning &bull; $0 Clean-vs-Replace Assessment</span>
+                        <span>Window AC Compressor Overheat Warning &bull; $0 Clean-vs-Replace Assessment</span>
                     </div>
 
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-black uppercase tracking-tight text-white mb-6 leading-tight">
-                        AC Condenser Fan Not Spinning? <span className="text-primary italic">Causes &amp; Repair Oahu</span>
+                        Window AC Fan Not Spinning? <span className="text-primary italic">Causes &amp; Repair Oahu</span>
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">

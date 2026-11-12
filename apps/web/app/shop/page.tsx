@@ -2325,7 +2325,15 @@ function ProductCard({
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={tiltStyle}
-            onClick={() => router.push(`/shop/${generateProductSlug(product.id, product.name)}`)}
+            onClick={() => {
+                const activePrice = isPromo ? (product.promo_price || product.price) : product.price;
+                trackEcommerceEvent('select_item', {
+                    item_list_id: 'oahu_warehouse_shop',
+                    item_list_name: 'Oahu Waipahu In-Stock Window ACs',
+                    items: [buildGa4EcommerceItem(product, 1, 0, activePrice)],
+                });
+                router.push(`/shop/${generateProductSlug(product.id, product.name)}`);
+            }}
             className={cn(
                 "industrial-card group flex flex-col bg-[#0f131a] rounded-2xl overflow-hidden transition-all duration-700 relative h-full ring-1 ring-white/5 active:scale-[0.98] cursor-pointer card-hover-trigger",
                 borderClass
@@ -2577,12 +2585,18 @@ function ProductCard({
                         <button
                             onClick={(e) => {
                                 e.stopPropagation();
+                                const activePrice = isPromo ? (product.promo_price || product.price) : product.price;
+                                trackEcommerceEvent('select_item', {
+                                    item_list_id: 'oahu_warehouse_shop',
+                                    item_list_name: 'Oahu Waipahu In-Stock Window ACs',
+                                    items: [buildGa4EcommerceItem(product, 1, 0, activePrice)],
+                                });
                                 router.push(`/shop/${generateProductSlug(product.id, product.name)}`);
                             }}
-                            className="bg-red-500/10 hover:bg-red-500/20 text-red-500 font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-widest transition-all border border-red-500/20 hover:border-red-500/40 active:scale-95 flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]"
+                            className="bg-white/[0.04] hover:bg-white/10 text-slate-200 hover:text-white font-header font-black text-[9px] md:text-[10px] py-3 rounded-lg text-center uppercase tracking-wider transition-all border border-white/10 hover:border-primary/40 active:scale-95 flex items-center justify-center gap-1.5"
                         >
-                            <Eye className="size-3" />
-                            SPECS
+                            <Eye className="size-3.5 text-cyan-400" />
+                            <span>View Specs</span>
                         </button>
                         <button
                             onClick={(e) => {
@@ -2600,18 +2614,18 @@ function ProductCard({
                                 }
                             }}
                             className={cn(
-                                "font-header font-black text-[8px] py-3 rounded-lg text-center uppercase tracking-[0.15em] transition-all flex items-center justify-center gap-1.5",
+                                "font-header font-black text-[9px] md:text-[10px] py-3 rounded-lg text-center uppercase tracking-wider transition-all flex items-center justify-center gap-1.5",
                                 product.stock > 0
-                                    ? "bg-primary text-white hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] active:scale-95"
+                                    ? "bg-primary hover:bg-cyan-300 text-slate-950 shadow-[0_0_20px_rgba(0,174,239,0.25)] hover:shadow-[0_0_30px_rgba(0,174,239,0.45)] active:scale-95"
                                     : "bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/35 active:scale-95"
                             )}
                         >
                             {product.stock > 0 ? (
-                                <ShoppingCart className="size-3" />
+                                <ShoppingCart className="size-3.5" />
                             ) : (
-                                <Check className="size-3 text-emerald-400" />
+                                <Check className="size-3.5 text-emerald-400" />
                             )}
-                            {product.stock > 0 ? 'SECURE' : 'IN-STOCK ALT'}
+                            <span>{product.stock > 0 ? 'Add to Cart' : 'In-Stock Alt'}</span>
                         </button>
                     </div>
                 </div>

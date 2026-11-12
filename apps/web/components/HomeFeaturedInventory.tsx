@@ -10,6 +10,7 @@ import { Product } from '../types/inventory';
 import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 import { getProductImages } from '@/lib/product-images';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
+import { buildGa4EcommerceItem, trackEcommerceEvent } from '@/lib/tracking';
 
 type FeaturedTabId = 'bestsellers' | 'dual_inverter' | 'bedroom_115v' | 'large_wall';
 
@@ -295,6 +296,13 @@ export function HomeFeaturedInventory() {
                                 {/* Product Image */}
                                 <Link
                                     href={`/shop/${slug}`}
+                                    onClick={() => {
+                                        trackEcommerceEvent('select_item', {
+                                            item_list_id: `home_featured_${activeTab}`,
+                                            item_list_name: `Homepage Featured: ${currentTabConfig.shortLabel}`,
+                                            items: [buildGa4EcommerceItem(product, 1, 0, product.price)],
+                                        });
+                                    }}
                                     className="block relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-slate-950/60 border border-white/5 mb-4 group-hover:border-primary/20 transition-colors"
                                 >
                                     <Image

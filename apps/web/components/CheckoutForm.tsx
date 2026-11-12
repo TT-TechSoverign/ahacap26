@@ -113,15 +113,23 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
     };
 
     return (
-        <div className="space-y-6">
-            <div className="text-center space-y-2 mb-8">
-                <p className="text-slate-400 text-xs uppercase tracking-widest font-bold">Total Due Now</p>
-                <div className="text-5xl font-header font-black text-white tracking-tighter shadow-cyan-glow">
+        <div className="space-y-5">
+            <div className="text-center space-y-2 mb-6">
+                <p className="text-slate-400 text-xs uppercase tracking-widest font-bold">Total Due Now (Incl. 4.712% HI GET)</p>
+                <div className="text-4xl md:text-5xl font-header font-black text-white tracking-tighter shadow-cyan-glow">
                     ${totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </div>
-                <p className="text-[10px] text-slate-500 font-mono uppercase">
-                    Secure 256-bit Encrypted Connection
-                </p>
+                <div className="flex flex-wrap items-center justify-center gap-1.5 pt-1">
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-white font-mono text-[10px] font-bold">
+                        Apple Pay
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-white font-mono text-[10px] font-bold">
+                        Google Pay
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-[10px] font-bold">
+                        US Visa • Mastercard • Amex • Discover
+                    </span>
+                </div>
             </div>
 
             {error && (
@@ -133,27 +141,32 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
             <button
                 onClick={handleCheckout}
                 disabled={loading}
-                className="w-full py-5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-header font-black uppercase tracking-[0.25em] text-sm rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-4 group disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-5 px-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-header font-black uppercase tracking-[0.18em] text-sm rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-1 group disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 {loading ? (
                     <Loader2 className="size-5 animate-spin" />
                 ) : (
                     <>
-                        <span>Confirm & Pay (US-Issued Cards Only)</span>
-                        <Lock className="size-5 group-hover:translate-x-1 transition-transform" />
+                        <div className="flex items-center gap-3">
+                            <span>Pay Now • Apple Pay / Google Pay / Card</span>
+                            <Lock className="size-4 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                        <span className="text-[10px] font-mono tracking-wider text-emerald-950 font-bold">
+                            US-Issued Cards Only (50 US States)
+                        </span>
                     </>
                 )}
             </button>
 
-            <div className="flex flex-col items-center justify-center gap-1.5 text-slate-400 mt-4">
+            <div className="flex flex-col items-center justify-center gap-1.5 text-slate-400 mt-3">
                 <div className="flex items-center gap-2 text-slate-500">
-                    <Lock className="size-3.5 text-emerald-400" />
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-300 font-bold">
-                        US-Issued Cards Only (50 US States) • Processed Securely by Stripe
+                    <Lock className="size-3.5 text-emerald-400 shrink-0" />
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-300 font-bold text-center">
+                        US-Issued Cards Only (50 US States) • 256-Bit Stripe SSL
                     </span>
                 </div>
                 <span className="text-[10px] text-slate-500 text-center">
-                    International & US-territory issued cards are not accepted. Billing & shipping address required in US.
+                    International &amp; US-territory issued cards are not accepted. Billing &amp; shipping address required in US.
                 </span>
             </div>
         </div>

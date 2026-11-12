@@ -31,6 +31,7 @@ export default function MobileStickyBottomBar() {
     if (isExcluded) return null;
 
     const totalCartCount = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const isOnShopPage = pathname === '/shop';
 
     // Context-Aware CTA Resolver
     const getCtaConfig = () => {
@@ -113,21 +114,21 @@ export default function MobileStickyBottomBar() {
                 </span>
             </div>
 
-            <div className="flex w-full p-2 gap-2">
+            <div className="flex w-full p-2 gap-1.5">
                 {/* Call Now (DNI Tracking & Direct Dispatch Framing) */}
                 <a 
                     href="tel:808-488-1111"
                     onClick={() => sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Call' })}
-                    className="ctm-track-number flex-1 bg-slate-800 hover:bg-slate-700 text-white font-black uppercase tracking-wider text-xs py-2 min-h-[48px] rounded-lg flex flex-col items-center justify-center transition-colors border border-slate-700 active:scale-95 leading-tight"
+                    className={`ctm-track-number ${totalCartCount === 0 && !isOnShopPage ? 'px-2.5 shrink-0' : 'flex-1'} bg-slate-800 hover:bg-slate-700 text-white font-black uppercase tracking-wider text-[11px] py-2 min-h-[48px] rounded-lg flex flex-col items-center justify-center transition-colors border border-slate-700 active:scale-95 leading-tight`}
                 >
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1">
                         <Phone className="size-3.5 text-primary shrink-0" />
-                        <span>Call Office</span>
+                        <span>Call</span>
                     </div>
-                    <span className="text-[9px] text-cyan-300 font-normal normal-case tracking-normal">(808) 488-1111</span>
+                    <span className="text-[9px] text-cyan-300 font-normal normal-case tracking-normal">488-1111</span>
                 </a>
                 
-                {/* If user has items in cart, surface 1-Tap Cart Checkout Accelerator */}
+                {/* If user has items in cart, surface 1-Tap Express Cart Checkout Accelerator */}
                 {totalCartCount > 0 ? (
                     <button
                         type="button"
@@ -138,18 +139,31 @@ export default function MobileStickyBottomBar() {
                         className="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(16,185,129,0.4)] active:scale-95"
                     >
                         <ShoppingCart className="size-4 shrink-0" />
-                        <span className="truncate">Checkout Now ({totalCartCount})</span>
+                        <span className="truncate">Express Cart ({totalCartCount})</span>
                     </button>
                 ) : (
-                    <Link 
-                        href={cta.href}
-                        prefetch={false}
-                        onClick={() => sendGAEvent('event', cta.gaEvent, { event_category: 'Mobile Conversion', event_label: cta.gaLabel })}
-                        className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-xs py-3 min-h-[48px] rounded-lg flex items-center justify-center gap-2 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95"
-                    >
-                        <cta.icon className="size-4 shrink-0" />
-                        <span className="truncate">{cta.text}</span>
-                    </Link>
+                    <>
+                        {!isOnShopPage && (
+                            <Link
+                                href="/shop"
+                                prefetch={false}
+                                onClick={() => sendGAEvent('event', 'click_to_shop_sticky', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Shop ACs' })}
+                                className="flex-1 bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-black uppercase tracking-wider text-[11px] py-2 min-h-[48px] rounded-lg flex items-center justify-center gap-1.5 transition-colors active:scale-95"
+                            >
+                                <ShoppingCart className="size-3.5 text-emerald-400 shrink-0" />
+                                <span className="truncate">Shop $395+</span>
+                            </Link>
+                        )}
+                        <Link 
+                            href={cta.href}
+                            prefetch={false}
+                            onClick={() => sendGAEvent('event', cta.gaEvent, { event_category: 'Mobile Conversion', event_label: cta.gaLabel })}
+                            className="flex-1 bg-primary hover:bg-cyan-300 text-slate-950 font-black uppercase tracking-wider text-[11px] py-2 min-h-[48px] rounded-lg flex items-center justify-center gap-1.5 transition-colors shadow-[0_0_15px_rgba(0,174,239,0.4)] active:scale-95"
+                        >
+                            <cta.icon className="size-3.5 shrink-0" />
+                            <span className="truncate">{cta.text}</span>
+                        </Link>
+                    </>
                 )}
             </div>
         </div>

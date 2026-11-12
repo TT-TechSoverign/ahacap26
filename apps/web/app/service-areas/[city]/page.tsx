@@ -7,8 +7,11 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 import { getReviewsByCity } from '@/lib/product-reviews';
 import { BackToTop } from '@/components/BackToTop';
+import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import contentData from '@/lib/content/content.json';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ShoppingCart, Calendar, ArrowRight } from 'lucide-react';
 
 interface Props {
     params: { city: string };
@@ -64,7 +67,7 @@ export function generateMetadata({ params }: Props): Metadata {
     
     if (!cityData) return { title: 'Service Area Not Found' };
  
-    const title = `${cityData.name} Window ACs ($395+), Install, Clean & Repair | $0 Estimate`;
+    const title = `${cityData.name} Window ACs ($395+) • $0 Install, Clean & Repair`;
     
     let description = `$0 Free Estimate in ${cityData.name} • (808) 488-1111. In-stock LG & GE Window ACs ($395–$1,200, $45 Rebate), custom jalousie install, cleaning & repair.`;
     if (cityData.regionId === 'windward') {
@@ -181,19 +184,45 @@ export default function LocalServiceAreaPage({ params }: Props) {
                         Installation, Cleaning &amp; Repair in <span className="text-cyan-400 drop-shadow-[0_0_20px_rgba(34,211,238,0.5)]">{cityData.name}</span>
                     </h1>
                     
-                    <p className="font-sans text-lg md:text-xl text-slate-300 font-medium max-w-2xl leading-relaxed">
+                    <p className="font-sans text-base sm:text-lg md:text-xl text-slate-300 font-medium max-w-2xl leading-relaxed">
                         From whisper-quiet LG Dual Inverter window units ($395–$1,200) to GE 26&quot; Built-In wall ACs, custom jalousie installation, deep coil cleaning, and window AC repair/diagnostics, we serve homeowners across {cityData.name}{subAreaText ? ` (${subAreaText})` : ''}.
                     </p>
+
+                    {/* Immediate Above-the-Fold Buyer & Service Actions */}
+                    <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 w-full pt-2">
+                        <a
+                            href="#in-stock-waipahu-models"
+                            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(0,174,239,0.35)] hover:scale-[1.02]"
+                        >
+                            <ShoppingCart className="size-4 shrink-0" />
+                            <span>Shop In-Stock Window ACs ($395+)</span>
+                            <ArrowRight className="size-4 shrink-0" />
+                        </a>
+                        <Link
+                            href={`/contact?city=${encodeURIComponent(cityData.name)}`}
+                            prefetch={false}
+                            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-header font-black text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+                        >
+                            <Calendar className="size-4 text-emerald-400 shrink-0" />
+                            <span>Book $0 Install / Clean / Repair</span>
+                        </Link>
+                        <TrackedPhoneLink
+                            phone="8084881111"
+                            display="Call (808) 488-1111"
+                            eventLabel={`${cityData.name} Hero Call`}
+                            className="w-full sm:w-auto px-6 py-4 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-white/15 text-white font-header font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+                        />
+                    </div>
                 </div>
             </section>
 
-            {/* 2. SYSTEM DIAGNOSTIC SCHEDULER */}
-            <LocalServiceFunnel city={cityData.name} />
-
-            {/* 2b. IN-STOCK WINDOW AC QUICK SHOP */}
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+            {/* 2. IN-STOCK WINDOW AC QUICK SHOP (Immediate Above-Fold Inventory Access) */}
+            <div id="in-stock-waipahu-models" className="scroll-mt-28 md:scroll-mt-48 max-w-6xl mx-auto px-4 sm:px-6 w-full pt-4">
                 <WindowAcQuickShop cityName={cityData.name} />
             </div>
+
+            {/* 2b. SYSTEM DIAGNOSTIC & SERVICE SCHEDULER */}
+            <LocalServiceFunnel city={cityData.name} />
 
             {/* 3. DYNAMIC EDUCATIONAL SEO BODY */}
             <LocalizedSEOBody city={cityData.name} regionId={cityData.regionId} />

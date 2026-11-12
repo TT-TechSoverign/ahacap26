@@ -70,12 +70,26 @@ const largeRoomFaqSchema = {
     ]
 };
 
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.affordablehome-ac.com" },
+        { "@type": "ListItem", "position": 2, "name": "Oahu Window AC Shop", "item": "https://www.affordablehome-ac.com/shop" },
+        { "@type": "ListItem", "position": 3, "name": "18,000 & 23,500 BTU Large Room Window ACs", "item": "https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu" }
+    ]
+};
+
 export default function LargeRoomAcLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(largeRoomFaqSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             {children}
         </>

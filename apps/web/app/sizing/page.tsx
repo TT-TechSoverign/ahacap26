@@ -4,7 +4,7 @@ import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { EditableText } from '@/components/EditableText';
 import Link from 'next/link';
-import { ArrowLeft, Calculator } from 'lucide-react';
+import { ArrowLeft, Calculator, ShoppingCart, ArrowRight } from 'lucide-react';
 import { Suspense } from 'react';
 
 export const metadata: Metadata = {
@@ -117,6 +117,34 @@ const sizingFaqSchema = {
     ]
 };
 
+const sizingHowToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Size a Window Air Conditioner for Oahu Single-Wall & Condo Rooms",
+    "description": "3-step Hawaii BTU sizing method accounting for single-wall redwood framing, trade-wind humidity, solar exposure, and 115V vs 230V electrical outlets.",
+    "totalTime": "PT1M",
+    "step": [
+        {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Measure Room Square Footage",
+            "text": "Multiply room length by width in feet (e.g., 12 ft x 12 ft = 144 sq ft bedroom; 20 ft x 20 ft = 400 sq ft living room)."
+        },
+        {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Apply Hawaii Microclimate Heat-Load Factor",
+            "text": "Add 15%–25% BTU capacity for uninsulated single-wall redwood homes, jalousie windows, afternoon west-facing Leeward sun, or high ceilings."
+        },
+        {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Match Wall Outlet Voltage & Window Opening",
+            "text": "Choose 115V standard 15A models (6,000–14,000 BTU, $395–$785) for standard outlets, 208/230V models (18,000–23,500 BTU, $925–$1,025) for heavy-duty circuits, or 26-inch GE Built-In models ($1,000–$1,200) for existing condo wall sleeves."
+        }
+    ]
+};
+
 export default function SizingPage() {
     return (
         <div className="bg-background-dark min-h-screen text-white selection:bg-primary selection:text-white pb-12 lg:pb-32">
@@ -132,31 +160,82 @@ export default function SizingPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(sizingFaqSchema) }}
             />
-            <main className="max-w-4xl mx-auto px-6 pt-[96px] md:pt-[180px]">
-                {/* Header branding */}
-                <div className="text-center mb-8 lg:mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                    <Link 
-                        href="/shop"
-                        className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-slate-400 hover:text-white mb-6 group transition-colors"
-                    >
-                        <ArrowLeft className="size-4 group-hover:-translate-x-1 transition-transform" /> Back to Shop Inventory
-                    </Link>
-
-                    <div className="flex justify-center">
-                        <div className="inline-flex items-center gap-3 px-6 py-2 bg-primary/5 border border-primary/20 rounded-md text-primary font-mono text-[9px] lg:text-[10px] font-black tracking-[0.4em] uppercase mb-6 shadow-[0_0_20px_rgba(0,174,239,0.1)] backdrop-blur-sm relative overflow-hidden group/badge">
-                            <div className="absolute inset-0 bg-primary/5 -translate-x-full group-hover/badge:translate-x-full transition-transform duration-1000"></div>
-                            <Calculator className="size-4 text-primary" />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(sizingHowToSchema) }}
+            />
+            <main className="max-w-4xl mx-auto px-4 sm:px-6 pt-[96px] md:pt-[180px]">
+                {/* Compact Above-the-Fold Header + Instant Oahu Room Quick-Picks */}
+                <div className="text-center mb-5 lg:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <div className="flex flex-wrap items-center justify-center gap-3 mb-3">
+                        <Link 
+                            href="/shop"
+                            className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-slate-400 hover:text-white group transition-colors"
+                        >
+                            <ArrowLeft className="size-3.5 group-hover:-translate-x-1 transition-transform" /> Back to Shop Inventory
+                        </Link>
+                        <span className="text-slate-700">•</span>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/25 rounded-full text-primary font-mono text-[9px] lg:text-[10px] font-black tracking-[0.25em] uppercase">
+                            <Calculator className="size-3.5 text-primary" />
                             <span>Hawaii BTU Sizing Matrix</span>
                         </div>
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-header font-bold uppercase tracking-tight mb-6">
+                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-header font-bold uppercase tracking-tight mb-2">
                         Oahu A/C <span className="text-primary italic font-black shadow-primary/20 drop-shadow-2xl">Sizing Wizard</span>
                     </h1>
                     
-                    <p className="font-mono text-[10px] md:text-[11px] lg:text-[12px] font-black tracking-[0.3em] uppercase text-white max-w-3xl mx-auto leading-relaxed opacity-90">
-                        CALIBRATED FOR HAWAII HUMIDITY & REGIONAL MICRO-CLIMATES
+                    <p className="font-mono text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase text-slate-300 max-w-2xl mx-auto leading-relaxed mb-4">
+                        Calibrated for Hawaii Single-Wall Homes &amp; Regional Micro-Climates
                     </p>
+
+                    {/* 1-Tap Instant Oahu Room Quick-Shop Jumps */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-3xl mx-auto text-left">
+                        <Link
+                            href="/shop?capacity=BEDROOM"
+                            className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 transition-all group"
+                        >
+                            <div className="text-[9px] font-mono text-cyan-400 uppercase font-bold">Up to 250 sq ft</div>
+                            <div className="text-xs font-header font-black text-white uppercase flex items-center justify-between">
+                                <span>Bedrooms</span>
+                                <ArrowRight className="size-3 text-primary group-hover:translate-x-0.5 transition-transform" />
+                            </div>
+                            <div className="text-[10px] text-emerald-400 font-mono font-bold">6k–8k • From $395</div>
+                        </Link>
+                        <Link
+                            href="/shop?capacity=MASTER"
+                            className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 transition-all group"
+                        >
+                            <div className="text-[9px] font-mono text-cyan-400 uppercase font-bold">250–450 sq ft</div>
+                            <div className="text-xs font-header font-black text-white uppercase flex items-center justify-between">
+                                <span>Master / Studio</span>
+                                <ArrowRight className="size-3 text-primary group-hover:translate-x-0.5 transition-transform" />
+                            </div>
+                            <div className="text-[10px] text-emerald-400 font-mono font-bold">10k–12k • From $625</div>
+                        </Link>
+                        <Link
+                            href="/shop?capacity=LIVING"
+                            className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 transition-all group"
+                        >
+                            <div className="text-[9px] font-mono text-cyan-400 uppercase font-bold">450–1,000+ sq ft</div>
+                            <div className="text-xs font-header font-black text-white uppercase flex items-center justify-between">
+                                <span>Living Rooms</span>
+                                <ArrowRight className="size-3 text-primary group-hover:translate-x-0.5 transition-transform" />
+                            </div>
+                            <div className="text-[10px] text-emerald-400 font-mono font-bold">14k–23.5k • $785+</div>
+                        </Link>
+                        <Link
+                            href="/shop?category=ge"
+                            className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 transition-all group"
+                        >
+                            <div className="text-[9px] font-mono text-cyan-400 uppercase font-bold">26&quot; Condo Sleeve</div>
+                            <div className="text-xs font-header font-black text-white uppercase flex items-center justify-between">
+                                <span>Built-In Wall</span>
+                                <ArrowRight className="size-3 text-primary group-hover:translate-x-0.5 transition-transform" />
+                            </div>
+                            <div className="text-[10px] text-emerald-400 font-mono font-bold">GE Series • $1,000+</div>
+                        </Link>
+                    </div>
                 </div>
 
 
