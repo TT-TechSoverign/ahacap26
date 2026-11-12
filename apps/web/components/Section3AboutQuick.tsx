@@ -17,6 +17,7 @@ export default function Section3AboutQuick() {
                     src="/assets/hero-cards/bg-honolulu_skyline.jpg"
                     alt="Honolulu Skyline"
                     fill
+                    sizes="100vw"
                     className="object-cover object-center"
                     priority
                 />
@@ -51,6 +52,7 @@ export default function Section3AboutQuick() {
                                 src="/assets/hero-cards/videoad-screenshot-van1.png"
                                 alt="Historic Service Photo"
                                 fill
+                                sizes="(max-width: 896px) 100vw, 896px"
                                 className="object-cover object-center opacity-100 transition-transform duration-700 group-hover:scale-105"
                             />
                             {/* Subtle tint */}

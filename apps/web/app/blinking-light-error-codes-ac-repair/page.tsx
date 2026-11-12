@@ -82,8 +82,14 @@ export default function BlinkingLightErrorCodesPage() {
             trackFunnelEvent('symptom_blinking_code_lead', {
                 brand,
                 city,
-                full_name: fullName,
-                phone
+            });
+            trackFunnelEvent('generate_lead', {
+                currency: 'USD',
+                value: 0,
+                lead_type: 'symptom_blinking_code',
+                form_name: 'blinking_error_codes_form',
+                brand,
+                city,
             });
 
             const nameParts = fullName.trim().split(/\s+/);

@@ -174,14 +174,44 @@ export function trackEcommerceEvent(
     }
 }
 
+const GA_PII_KEYS = new Set([
+    'full_name',
+    'first_name',
+    'last_name',
+    'name',
+    'phone',
+    'email',
+    'address',
+]);
+
+let lastClickToCallTs = 0;
+
+function sanitizeAnalyticsParams(params: FunnelEventParams): FunnelEventParams {
+    const clean: FunnelEventParams = {};
+    for (const [k, v] of Object.entries(params)) {
+        if (!GA_PII_KEYS.has(k.toLowerCase()) && v !== undefined) {
+            clean[k] = v;
+        }
+    }
+    return clean;
+}
+
 export function trackFunnelEvent(eventName: string, params: FunnelEventParams = {}): void {
     if (typeof window === 'undefined') return;
 
     try {
         const timestamp = Date.now();
+        if (eventName === 'click_to_call') {
+            if (timestamp - lastClickToCallTs < 400) {
+                return;
+            }
+            lastClickToCallTs = timestamp;
+        }
+
+        const safeParams = sanitizeAnalyticsParams(params);
         const payload = {
             event: eventName,
-            ...params,
+            ...safeParams,
             timestamp,
             page_path: window.location.pathname,
             page_title: document.title,
@@ -193,13 +223,13 @@ export function trackFunnelEvent(eventName: string, params: FunnelEventParams = 
 
         // 2. Google Analytics 4 (gtag)
         if (typeof (window as any).gtag === 'function') {
-            (window as any).gtag('event', eventName, params);
+            (window as any).gtag('event', eventName, safeParams);
         }
 
         // 3. Dev OS Live Telemetry Stream (fire-and-forget beacon)
         const eventData = JSON.stringify({
             event_name: eventName,
-            payload: params,
+            payload: safeParams,
             path: window.location.pathname,
             timestamp: new Date().toISOString(),
         });

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Pet Hair & Dander Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Pet Hair Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Remove matted pet hair, dander & odors from your Oahu Window AC coils and blower wheel. Clean floor drop-cloth protection.',
     alternates: {

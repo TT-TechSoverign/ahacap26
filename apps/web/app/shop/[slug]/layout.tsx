@@ -115,28 +115,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     let description = `${stockStatusDesc} ${displayNameWithMpn} ($${priceText}${discountText}) • Free Waipahu pickup or $50 Oahu delivery • (808) 488-1111.${coverageTextDesc}`;
 
     if (product.name.toLowerCase().includes('lg dual inverter')) {
-        const btuStr = specs.btu.replace(',000', 'k').replace(' BTU', '');
+        const btuStr = specs.btu.replace(',000', 'k').replace(',500', '.5k').replace(' BTU', '');
         const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
-        const rebateSuffix = product.id <= 5 ? '$45 Rebate' : 'Waipahu';
+        const btuLabel = product.id === 7 ? btuStr : `${btuStr} BTU`;
         
         title = isOutOfStock
-            ? `LG ${btuStr} BTU Dual Inverter (${modelCode}) — $${priceText} | Oahu Alt Ready`
-            : `LG ${btuStr} BTU Dual Inverter (${modelCode}) — $${priceText} In-Stock | ${rebateSuffix}`;
+            ? `LG ${btuLabel} Dual Inverter (${modelCode}) — $${priceText} | Oahu Alt Ready`
+            : `LG ${btuLabel} Dual Inverter (${modelCode}) — $${priceText} In-Stock | $45 Rebate`;
         
         if (isOutOfStock && product.id === 2) {
             description = `LG 8k Dual Inverter (${modelCode}, $${priceText}) — see in-stock LW8024RD ($395) & 10k LW1022IVSM ($650 + $45 Rebate) in Waipahu • (808) 488-1111.`;
+        } else if (isOutOfStock) {
+            description = `LG ${btuLabel} Dual Inverter (${modelCode}, $${priceText}) — view in-stock Oahu LG Dual Inverter alternatives in Waipahu ($45 Rebate) • (808) 488-1111.`;
         } else {
             const techShort = product.id === 1 ? '44dB quiet ($515 net after $45 Rebate; 8k Standard $395).'
                 : product.id === 3 ? 'ENERGY STAR ($605 net after $45 Rebate).'
                 : product.id === 4 ? 'Gold Fin ($700 net after $45 Rebate).'
                 : product.id === 5 ? '14k BTU on 115V ($740 net after $45 Rebate).'
-                : product.id === 6 ? '230V 500 CFM living room ($45 Rebate).'
-                : product.id === 7 ? '23,500 BTU whole-floor ($45 Rebate).'
+                : product.id === 6 ? '230V 500 CFM living room ($880 net after $45 Rebate).'
+                : product.id === 7 ? '23,500 BTU whole-floor ($980 net after $45 Rebate).'
                 : 'Quiet Oahu energy saver.';
             description = `In-Stock Waipahu! LG ${btuStr} BTU Dual Inverter AC (${modelCode}) — $${priceText}. Free pickup / $50 Oahu delivery • (808) 488-1111. ${techShort}`;
         }
     } else if (product.subcategory === 'universal_fit' || (product.id >= 8 && product.id <= 10)) {
-        const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(' BTU', '') : '';
+        const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(',500', '.5k').replace(' BTU', '') : '';
         const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
         title = isOutOfStock
             ? `LG ${btuStr} BTU Cool+Heat AC (${modelCode}) — $${priceText} | Oahu Alt Ready`
@@ -145,19 +147,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             ? `LG ${btuStr} BTU Cool+Heat (${modelCode}, $${priceText}) — in-stock 23.5k LW2422IVSM ($1,025) & 18k LW1823HRSM ($925) ready in Waipahu • (808) 488-1111.`
             : `In-Stock Waipahu! LG ${btuStr} BTU Cool + Heat Window/Wall AC (${modelCode}) — $${priceText}. Fits windows or 26" sleeves • $50 delivery • (808) 488-1111.`;
     } else if (product.subcategory === 'base' || product.id === 11 || product.id === 12) {
-        const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(' BTU', '') : '';
+        const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(',500', '.5k').replace(' BTU', '') : '';
         const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
-        title = `LG ${btuStr} BTU Window AC (${modelCode}) — $${priceText} In-Stock Oahu | Waipahu`;
-        description = `In-Stock Waipahu! LG ${btuStr} BTU Standard Window AC (${modelCode}) — $${priceText}. Gold Fin shield, 115V plug, free pickup or $50 delivery • (808) 488-1111.`;
+        title = isOutOfStock
+            ? `LG ${btuStr} BTU Window AC (${modelCode}) — $${priceText} | Oahu Alt Ready`
+            : `LG ${btuStr} BTU Window AC (${modelCode}) — $${priceText} In-Stock Oahu | Waipahu`;
+        description = isOutOfStock
+            ? `LG ${btuStr} BTU Standard Window AC (${modelCode}, $${priceText}) — see in-stock LG Dual Inverter ACs in Waipahu ($45 Rebate) • (808) 488-1111.`
+            : `In-Stock Waipahu! LG ${btuStr} BTU Standard Window AC (${modelCode}) — $${priceText}. Gold Fin shield, 115V plug, free pickup or $50 delivery • (808) 488-1111.`;
     } else if (product.name.toLowerCase().includes('ge ') || product.id >= 13) {
-        const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(' BTU', '') : '';
+        const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(',500', '.5k').replace(' BTU', '') : '';
         const modelCode = mpn || (product.name.match(/\(([^)]+)\)/)?.[1] ?? '');
         if (product.id === 16) {
-            title = `GE RAB26A 26" Wall AC Metal Sleeve — $${priceText} In-Stock Oahu | Waipahu`;
-            description = `In-Stock Waipahu! GE RAB26A 26" Through-the-Wall Sleeve ($${priceText}) for Oahu condos & built-in ACs. Free pickup or $50 delivery • (808) 488-1111.`;
+            title = isOutOfStock
+                ? `GE RAB26A 26" Wall AC Metal Sleeve — $${priceText} | Call Waipahu`
+                : `GE RAB26A 26" Wall AC Metal Sleeve — $${priceText} In-Stock Oahu | Waipahu`;
+            description = isOutOfStock
+                ? `GE RAB26A 26" Through-the-Wall Sleeve ($${priceText}) for Oahu condos & built-in ACs. Call (808) 488-1111 for Waipahu restock & installation.`
+                : `In-Stock Waipahu! GE RAB26A 26" Through-the-Wall Sleeve ($${priceText}) for Oahu condos & built-in ACs. Free pickup or $50 delivery • (808) 488-1111.`;
         } else if (product.id === 15) {
-            title = `GE 12k R-32 Inverter 26" Wall AC (${modelCode}) — $${priceText} | $45 Rebate`;
-            description = `In-Stock Waipahu! GE 12k BTU 26" Built-In R-32 Inverter Wall AC (${modelCode}) — $${priceText} + $45 Rebate. 115V plug, $50 delivery • (808) 488-1111.`;
+            title = isOutOfStock
+                ? `GE 12k R-32 Inverter 26" Wall AC (${modelCode}) — $${priceText} | Oahu Alt Ready`
+                : `GE 12k R-32 Inverter 26" Wall AC (${modelCode}) — $${priceText} | $45 Rebate`;
+            description = isOutOfStock
+                ? `GE 12k R-32 Inverter 26" Wall AC (${modelCode}, $${priceText}) — see in-stock GE 26" Built-In & LG 12k Dual Inverter ACs in Waipahu • (808) 488-1111.`
+                : `In-Stock Waipahu! GE 12k BTU 26" Built-In R-32 Inverter Wall AC (${modelCode}) — $${priceText} + $45 Rebate. 115V plug, $50 delivery • (808) 488-1111.`;
         } else {
             title = isOutOfStock
                 ? `GE ${btuStr} BTU 26" Wall AC (${modelCode}) — $${priceText} | Oahu Alt Ready`

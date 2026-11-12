@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Installation Oahu ($0 Estimate) | Jalousie & Wall | (808) 488-1111'
+        absolute: 'Window AC Installation Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Custom Oahu jalousie louver baffles, 26" condo wall sleeve swaps, brackets & in-stock LG/GE ACs ($395–$1,200).',
     alternates: {

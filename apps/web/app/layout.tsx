@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     },
     title: {
         template: '%s | Affordable Home A/C',
-        default: 'LG & GE Window ACs & AC Cleaning Oahu ($395+ In-Stock) | (808) 488-1111',
+        default: 'LG & GE Window ACs Oahu ($395+) & AC Cleaning | (808) 488-1111',
     },
     description: '$0 Free Estimate • (808) 488-1111. Shop in-stock LG Dual Inverter & GE Built-In Window ACs ($395–$1,200, Waipahu Pickup / $50 Delivery), Install & Cleaning.',
     robots: {

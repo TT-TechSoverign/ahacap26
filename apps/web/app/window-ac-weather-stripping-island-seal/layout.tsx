@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Weather Stripping & Sealing Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Window AC Weather Sealing Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Seal out Oahu trade wind rain, humidity, noise & geckos with marine-grade closed-cell foam Window AC weather stripping.',
     alternates: {

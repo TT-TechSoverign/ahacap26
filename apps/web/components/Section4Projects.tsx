@@ -102,6 +102,7 @@ export default function Section4Projects() {
                     src="/assets/yelpphotos/bg-eastside-view1.webp"
                     alt="Background Pattern"
                     fill
+                    sizes="100vw"
                     className="object-cover opacity-30 pointer-events-none blur-sm"
                     priority
                 />

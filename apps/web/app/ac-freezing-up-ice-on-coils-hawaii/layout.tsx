@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Freezing Up & Ice on Coils Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Window AC Frozen Coils & Ice Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Is your Oahu Window AC frozen with ice on the coils? Fast thaw steps, deep airflow coil wash & in-stock LG/GE units ($395+).',
     alternates: {

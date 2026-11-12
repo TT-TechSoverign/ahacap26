@@ -81,6 +81,7 @@ export function Warehouse({
                             src={mapImage || "/assets/ahac-shoplocationv2.svg"}
                             alt="Waipahu Shop Location"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-contain p-4 transition-all duration-1000"
                             unoptimized
                         />

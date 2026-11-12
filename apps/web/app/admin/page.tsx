@@ -850,7 +850,7 @@ export default function AdminPage() {
                                                     <td className="px-6 py-5">
                                                         <div className="size-16 bg-black rounded-lg border border-white/10 overflow-hidden relative">
                                                             {product.image_url ? (
-                                                                <Image src={product.image_url} alt={product.name} fill className="object-contain p-2" />
+                                                                <Image src={product.image_url} alt={product.name} fill sizes="64px" className="object-contain p-2" />
                                                             ) : (
                                                                 <div className="absolute inset-0 flex items-center justify-center text-slate-800">
                                                                     <ImageIcon className="size-8" />
@@ -934,7 +934,7 @@ export default function AdminPage() {
                                                 <div className="flex items-start gap-3">
                                                     <div className="size-16 bg-black rounded-lg border border-white/10 overflow-hidden relative shrink-0">
                                                         {product.image_url ? (
-                                                            <Image src={product.image_url} alt={product.name} fill className="object-contain p-1" />
+                                                            <Image src={product.image_url} alt={product.name} fill sizes="64px" className="object-contain p-1" />
                                                         ) : (
                                                             <div className="absolute inset-0 flex items-center justify-center text-slate-800">
                                                                 <ImageIcon className="size-6" />
@@ -2081,6 +2081,7 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                                 src={formData.image_url}
                                                 alt="Preview"
                                                 fill
+                                                sizes="(max-width: 640px) 100vw, 512px"
                                                 className="object-contain"
                                                 onError={(e) => (e.currentTarget.style.display = 'none')}
                                             />
@@ -2264,6 +2265,7 @@ function ProductModal({ product, adminFetch, onClose, onSave }: { product?: Prod
                                             src={activeCutaway}
                                             alt="3D Spatial Cutaway"
                                             fill
+                                            sizes="(max-width: 640px) 100vw, 512px"
                                             className="object-contain p-2"
                                         />
                                         <div className="absolute bottom-2 left-2 bg-black/80 backdrop-blur-md border border-white/10 px-2.5 py-1 rounded-lg text-[9px] font-mono text-slate-300">

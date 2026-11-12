@@ -78,8 +78,13 @@ export default function JalousieWindowAcInstallationPage() {
             trackFunnelEvent('jalousie_install_lead', {
                 city,
                 bracket_needed: bracketNeeded,
-                full_name: fullName,
-                phone
+            });
+            trackFunnelEvent('generate_lead', {
+                currency: 'USD',
+                value: 0,
+                lead_type: 'jalousie_window_ac_installation',
+                form_name: 'jalousie_installation_form',
+                city,
             });
 
             const nameParts = fullName.trim().split(/\s+/);

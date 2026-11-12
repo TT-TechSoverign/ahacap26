@@ -89,8 +89,15 @@ export default function WindowAcInstallationPage() {
                 unit_status: unitStatus,
                 btu: selectedBtu,
                 city,
-                full_name: fullName,
-                phone,
+            });
+            trackFunnelEvent('generate_lead', {
+                currency: 'USD',
+                value: 0,
+                lead_type: 'window_ac_installation',
+                form_name: 'window_ac_installation_form',
+                window_type: windowType,
+                btu: selectedBtu,
+                city,
             });
 
             const nameParts = fullName.trim().split(/\s+/);

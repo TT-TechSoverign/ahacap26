@@ -85,6 +85,7 @@ export default function Navbar() {
                                 src="/assets/ahac-logo-updated-businfo.png"
                                 alt="AHAC Logo"
                                 fill
+                                sizes="(max-width: 768px) 48px, 128px"
                                 className="object-contain relative z-10"
                             />
                         </Link>

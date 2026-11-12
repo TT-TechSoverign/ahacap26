@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { sendGAEvent } from '@next/third-parties/google';
 import { Phone, Calendar, ShoppingCart, Sparkles, Wrench } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { trackFunnelEvent } from '../lib/tracking';
 
 export default function MobileStickyBottomBar() {
     const pathname = usePathname() || '';
@@ -118,7 +119,7 @@ export default function MobileStickyBottomBar() {
                 {/* Call Now (DNI Tracking & Direct Dispatch Framing) */}
                 <a 
                     href="tel:808-488-1111"
-                    onClick={() => sendGAEvent('event', 'click_to_call', { event_category: 'Mobile Conversion', event_label: 'Sticky Bottom Call' })}
+                    onClick={() => trackFunnelEvent('click_to_call', { category: 'Mobile Conversion', cta_location: 'mobile_sticky_bottom', label: 'Sticky Bottom Call', phone_number: '808-488-1111' })}
                     className={`ctm-track-number ${totalCartCount === 0 && !isOnShopPage ? 'px-2.5 shrink-0' : 'flex-1'} bg-slate-800 hover:bg-slate-700 text-white font-black uppercase tracking-wider text-[11px] py-2 min-h-[48px] rounded-lg flex flex-col items-center justify-center transition-colors border border-slate-700 active:scale-95 leading-tight`}
                 >
                     <div className="flex items-center gap-1">

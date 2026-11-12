@@ -86,8 +86,13 @@ export default function AcFreezingUpPage() {
             trackFunnelEvent('symptom_frozen_ac_lead', {
                 unit_type: unitType,
                 city,
-                full_name: fullName,
-                phone
+            });
+            trackFunnelEvent('generate_lead', {
+                currency: 'USD',
+                value: 0,
+                lead_type: 'symptom_frozen_coils',
+                form_name: 'ac_freezing_up_form',
+                city,
             });
 
             const nameParts = fullName.trim().split(/\s+/);

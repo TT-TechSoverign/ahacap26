@@ -268,6 +268,32 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
         import traceback
         traceback.print_exc()
 
+REBATE_ELIGIBLE_MODEL_TOKENS = (
+    "LW6023IVSM",
+    "LW8022IVSM",
+    "LW1022IVSM",
+    "LW1222IVSM",
+    "LW1522FVSM",
+    "LW1822IVSM",
+    "LW2422IVSM",
+    "AJCQ12AXXWA",
+    "DUAL INVERTER",
+)
+
+REBATE_PDF_URL = "https://www.affordablehome-ac.com/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf"
+INSTALL_ESTIMATE_URL = "https://www.affordablehome-ac.com/window-ac-installation?unit=purchased"
+
+
+def order_qualifies_for_rebate(items: list | None) -> bool:
+    if not items:
+        return False
+    for item in items:
+        desc = str((item or {}).get("description") or "").upper()
+        if any(token in desc for token in REBATE_ELIGIBLE_MODEL_TOKENS):
+            return True
+    return False
+
+
 async def send_order_confirmation(to_email: str, order_id: str, total_cents: int, fulfillment_mode: str = "pickup", items: list = None, customer_info: dict = None, payment_info: dict = None):
     subject = f"Order Confirmation #{order_id} - Affordable Home A/C"
     
@@ -338,7 +364,9 @@ END:VCALENDAR"""
         payment_method_text = "Credit Card"
 
     # --- Verification & Content Logic ---
-    is_delivery = (fulfillment_mode.lower() == "delivery")
+    is_delivery = ((fulfillment_mode or "").lower() == "delivery")
+    address_label = "Deliver To (Oahu)" if is_delivery else "Billed To"
+    has_rebate_item = order_qualifies_for_rebate(items)
     
     if is_delivery:
         mode_title = "ISLAND-WIDE DELIVERY"
@@ -348,7 +376,7 @@ END:VCALENDAR"""
             "A logistics coordinator will contact you within 24 business hours to schedule your specific delivery window."
         )
         warning_text = "Note: We do not deliver to Waialua, North Shore, Kahuku, Waianae, Nanakuli, Waikiki, or Waimanalo."
-        map_display = "block" # Always show map for customer convenience
+        map_display = "none"
     else:
         # Pickup Default
         mode_title = "WAIPAHU SHOP PICKUP"
@@ -473,7 +501,7 @@ END:VCALENDAR"""
                 <table style="width: 100%; border-collapse: collapse; margin-bottom: 8px; table-layout: fixed;">
                     <tr>
                         <td style="width: 50%; vertical-align: top; padding-right: 8px;" class="info-item">
-                            <p class="label">Billed To</p>
+                            <p class="label">{address_label}</p>
                             <p class="value">
                                 <strong style="color: #000000; font-size: 13px;">{c_name}</strong><br>
                                 <span style="color: #000000;">{c_address_html}</span>
@@ -602,8 +630,44 @@ END:VCALENDAR"""
         </div>
         """
             
-        map_block_html = f"""
-            <!-- 3. Directions & Map (Hidden on Delivery) -->
+        rebate_cta_html = ""
+        if has_rebate_item:
+            rebate_cta_html = f"""
+            <div style="background-color: #052e16; border: 1px solid #10b981; border-radius: 6px; padding: 18px 20px; margin-bottom: 16px;">
+                <p style="margin: 0 0 6px 0; color: #34d399; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800;">&#9733; Qualifies for $45 Hawaii Energy Cash Rebate</p>
+                <p style="margin: 0 0 14px 0; color: #d1fae5; font-size: 13px; line-height: 1.55;">
+                    Your ENERGY STAR&reg; inverter AC qualifies for an official <strong>$45 cash rebate</strong> from Hawaii Energy. Download your pre-approved application PDF below and submit it with this receipt.
+                </p>
+                <a href="{REBATE_PDF_URL}" target="_blank" style="display: inline-block; background-color: #10b981; color: #022c22; font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; padding: 10px 18px; border-radius: 6px;">
+                    Download Official $45 Rebate Form PDF &rarr;
+                </a>
+            </div>
+            """
+
+        customer_next_steps_html = f"""
+            {rebate_cta_html}
+            <div style="background-color: #0c4a6e; border: 1px solid #0284c7; border-radius: 6px; padding: 18px 20px; margin-bottom: 24px;">
+                <p style="margin: 0 0 6px 0; color: #38bdf8; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800;">Need Professional Oahu Window AC Installation?</p>
+                <p style="margin: 0 0 14px 0; color: #e0f2fe; font-size: 13px; line-height: 1.55;">
+                    Need custom jalousie louver fitting, a 26&quot; condo wall sleeve swap, or heavy-duty bracket mounting? Book a <strong>$0 Free In-Home Installation Estimate</strong> ($0 upfront to book).
+                </p>
+                <a href="{INSTALL_ESTIMATE_URL}" target="_blank" style="display: inline-block; background-color: #38bdf8; color: #082f49; font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; padding: 10px 18px; border-radius: 6px;">
+                    Request $0 Installation Estimate &rarr;
+                </a>
+            </div>
+        """
+
+        if is_delivery:
+            map_block_html = f"""
+            <div style="margin-top: 16px; text-align: center;">
+                 <p style="color: #fef08a; font-size: 12px; font-weight: 500; background-color: #422006; border: 1px solid #713f12; padding: 12px; border-radius: 4px; display: inline-block;">
+                    {warning_text}
+                </p>
+            </div>
+            """
+        else:
+            map_block_html = f"""
+            <!-- 3. Directions & Map (Pickup Only) -->
             <div class="map-container" style="display: {map_display}; margin-bottom: 32px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
                 <h3 style="color: #f8fafc; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 800; margin-bottom: 12px; border-bottom: 2px solid #1e293b; padding-bottom: 8px;">Directions to Warehouse</h3>
                 
@@ -622,7 +686,7 @@ END:VCALENDAR"""
                     {warning_text}
                 </p>
             </div>
-        """
+            """
             
         footer_html = f"""
         <!-- 4. Premium Footer with Disclaimers -->
@@ -712,7 +776,7 @@ END:VCALENDAR"""
                 <table style="width: 100%; border-collapse: collapse; margin-bottom: {mar_grid}; table-layout: fixed;">
                     <tr>
                         <td style="width: 50%; vertical-align: top; padding-right: {gap_grid};" class="info-item">
-                            <p class="label">Billed To</p>
+                            <p class="label">{address_label}</p>
                             <p class="value">
                                 <strong>{c_name}</strong><br>
                                 {c_address_html}
@@ -765,6 +829,8 @@ END:VCALENDAR"""
                     </table>
                 </div>
 
+                {customer_next_steps_html}
+
                 {map_block_html}
             </div>
 
@@ -789,7 +855,7 @@ END:VCALENDAR"""
         logger.error(f"Logo decode error: {e}")
 
     try:
-        if MAP_B64:
+        if MAP_B64 and not is_delivery:
              map_data = base64.b64decode(MAP_B64)
              images.append({'content_id': 'map_img', 'data': map_data, 'filename': 'map.png'})
     except:

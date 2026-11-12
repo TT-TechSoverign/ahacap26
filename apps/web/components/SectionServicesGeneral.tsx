@@ -56,6 +56,7 @@ export default function SectionServicesGeneral() {
                                 src={service.cleanImage}
                                 alt={service.defaultTitle}
                                 fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 className="object-cover object-center opacity-60 group-hover:opacity-70 transition-opacity"
                             />
                             {/* Dark Gradient Overlay for Text Readability */}

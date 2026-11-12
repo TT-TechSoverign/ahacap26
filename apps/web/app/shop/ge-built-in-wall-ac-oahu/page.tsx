@@ -227,6 +227,24 @@ export default function GeBuiltInWallAcGuidePage() {
         },
     ];
 
+    const getModelSchemaOffer = (modelId: number, fallbackPrice: number, fallbackStock: number) => {
+        const model = allModels.find((m) => m.id === modelId);
+        const unitPrice = model
+            ? (isPromo && model.promo_price ? model.promo_price : model.price)
+            : fallbackPrice;
+        const stockCount = model ? model.stock : fallbackStock;
+        return {
+            price: unitPrice.toFixed(2),
+            availability: stockCount > 0
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock',
+        };
+    };
+
+    const offer08 = getModelSchemaOffer(13, 1000, 5);
+    const offer10 = getModelSchemaOffer(14, 1100, 0);
+    const offer12 = getModelSchemaOffer(15, 1200, 4);
+
     const jsonLdData = {
         '@context': 'https://schema.org',
         '@graph': [
@@ -257,9 +275,9 @@ export default function GeBuiltInWallAcGuidePage() {
                 ],
                 description: 'In-stock GE 26-inch True Built-In Through-the-Wall Air Conditioners (8,000–12,000 BTU) and RAB26A wall sleeves in Waipahu, Oahu for Honolulu condos and townhouses.',
                 brand: { '@type': 'Brand', name: 'GE Appliances' },
-                sku: 'AJCQ10AWJ',
-                mpn: 'AJCQ10AWJ',
-                gtin12: '084691852391',
+                sku: 'AJCQ12AXXWA',
+                mpn: 'AJCQ12AXXWA',
+                gtin12: '084691962724',
                 aggregateRating: {
                     '@type': 'AggregateRating',
                     ratingValue: '4.9',
@@ -283,10 +301,10 @@ export default function GeBuiltInWallAcGuidePage() {
                         sku: 'AJCQ08AWJ',
                         url: 'https://www.affordablehome-ac.com/shop/13-ge-8-200-btu-ajcq08awj',
                         priceCurrency: 'USD',
-                        price: '1000.00',
+                        price: offer08.price,
                         validFrom: '2026-01-01',
                         priceValidUntil: '2027-12-31',
-                        availability: 'https://schema.org/InStock',
+                        availability: offer08.availability,
                         itemCondition: 'https://schema.org/NewCondition',
                         seller: { '@type': 'Organization', name: 'Affordable Home A/C', url: 'https://www.affordablehome-ac.com' },
                         hasMerchantReturnPolicy: {
@@ -312,10 +330,10 @@ export default function GeBuiltInWallAcGuidePage() {
                         sku: 'AJCQ10AWJ',
                         url: 'https://www.affordablehome-ac.com/shop/14-ge-10-000-btu-ajcq10awj',
                         priceCurrency: 'USD',
-                        price: '1100.00',
+                        price: offer10.price,
                         validFrom: '2026-01-01',
                         priceValidUntil: '2027-12-31',
-                        availability: 'https://schema.org/InStock',
+                        availability: offer10.availability,
                         itemCondition: 'https://schema.org/NewCondition',
                         seller: { '@type': 'Organization', name: 'Affordable Home A/C', url: 'https://www.affordablehome-ac.com' },
                         hasMerchantReturnPolicy: {
@@ -341,10 +359,10 @@ export default function GeBuiltInWallAcGuidePage() {
                         sku: 'AJCQ12AXXWA',
                         url: 'https://www.affordablehome-ac.com/shop/15-ge-12-000-btu-ajcq12axxwa',
                         priceCurrency: 'USD',
-                        price: '1200.00',
+                        price: offer12.price,
                         validFrom: '2026-01-01',
                         priceValidUntil: '2027-12-31',
-                        availability: 'https://schema.org/InStock',
+                        availability: offer12.availability,
                         itemCondition: 'https://schema.org/NewCondition',
                         seller: { '@type': 'Organization', name: 'Affordable Home A/C', url: 'https://www.affordablehome-ac.com' },
                         hasMerchantReturnPolicy: {

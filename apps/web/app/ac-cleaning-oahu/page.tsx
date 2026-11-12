@@ -49,8 +49,14 @@ export default function AcCleaningOahuPage() {
             trackFunnelEvent('ac_cleaning_lead', {
                 service_tier: cleaningTier,
                 city,
-                full_name: fullName,
-                phone,
+            });
+            trackFunnelEvent('generate_lead', {
+                currency: 'USD',
+                value: 0,
+                lead_type: 'window_ac_cleaning',
+                form_name: 'ac_cleaning_oahu_form',
+                service_tier: cleaningTier,
+                city,
             });
 
             const nameParts = fullName.trim().split(/\s+/);

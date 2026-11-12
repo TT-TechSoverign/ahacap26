@@ -94,8 +94,13 @@ export default function AcDrippingWaterPage() {
             trackFunnelEvent('symptom_water_leak_lead', {
                 leak_location: leakLocation,
                 city,
-                full_name: fullName,
-                phone
+            });
+            trackFunnelEvent('generate_lead', {
+                currency: 'USD',
+                value: 0,
+                lead_type: 'symptom_water_leak',
+                form_name: 'ac_dripping_water_form',
+                city,
             });
 
             const nameParts = fullName.trim().split(/\s+/);

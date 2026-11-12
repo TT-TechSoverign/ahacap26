@@ -103,6 +103,7 @@ export function ImageCarousel({ slides }: ImageCarouselProps) {
                                 src={slides[currentIndex].image}
                                 alt="blur-bg"
                                 fill
+                                sizes="100vw"
                                 className="object-cover blur-[80px] scale-110 opacity-60"
                             />
                         </motion.div>
@@ -138,6 +139,7 @@ export function ImageCarousel({ slides }: ImageCarouselProps) {
                                     src={slides[currentIndex].image}
                                     alt={slides[currentIndex].title}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, 80vw"
                                     className="object-contain filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
                                     priority
                                 />

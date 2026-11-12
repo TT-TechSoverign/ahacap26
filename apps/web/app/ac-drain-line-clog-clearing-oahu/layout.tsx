@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Drain Pan & Clog Clearing Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Window AC Drain Clog Clearing Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Clear clogged Window AC drain pans & algae slime on Oahu with floor drop-cloth protection. Fast indoor leak & drip prevention.',
     alternates: {

@@ -92,8 +92,13 @@ export default function AcTrippingBreakerPage() {
             trackFunnelEvent('symptom_breaker_trip_lead', {
                 trip_timing: tripTiming,
                 city,
-                full_name: fullName,
-                phone
+            });
+            trackFunnelEvent('generate_lead', {
+                currency: 'USD',
+                value: 0,
+                lead_type: 'symptom_breaker_trip',
+                form_name: 'ac_tripping_breaker_form',
+                city,
             });
 
             const nameParts = fullName.trim().split(/\s+/);

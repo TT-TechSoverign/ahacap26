@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Window AC Air Filter Cleaning & Care Oahu ($0 Estimate) | (808) 488-1111'
+        absolute: 'Window AC Filter Cleaning Oahu ($0 Estimate) | (808) 488-1111'
     },
     description: '$0 Free Estimate • (808) 488-1111. Protect your Oahu Window AC against red dirt, vog & salt dust with routine filter care and deep evaporator coil sanitization.',
     alternates: {
