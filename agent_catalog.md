@@ -13,13 +13,21 @@ Every file and directory across this monorepo operates under the governance of t
 
 ```
 ahacws26/ (Project Root)
-├── AGENTS.md                                  # Sovereign Agent & Swarm Registry (10 Sub-Masters, 40 Agents)
-├── GEMINI.md                                  # Sovereign Master Projects Brain Constitution (v2.6.0-SOVEREIGN)
+├── AGENTS.md                                  # Sovereign Agent & Swarm Registry (10 Sub-Masters, 40 Agents, 60 Synapses)
+├── GEMINI.md                                  # Sovereign Master Projects Brain Constitution (v2.8.0-SOVEREIGN)
 ├── agent_catalog.md                           # This document: Master Catalog & Swarm Taxonomy
-├── docker-compose.prod.yml                    # Production blue/green container orchestration
-├── docker-compose.yml                         # Local staging & development container topology
-├── pnpm-workspace.yaml                        # Monorepo package manager boundaries
-├── package.json                               # Workspace scripts & shared toolchain
+├── docker-compose.prod.yml                    # Production container orchestration (loopback-isolated, Redis 256MB cap)
+├── docker-compose.staging.yml                 # Staging container topology (ahac_staging, Redis 128MB cap)
+├── docker-compose.yml                         # Local development container topology
+├── pnpm-workspace.yaml                        # Monorepo package manager boundaries & transitive security overrides
+├── package.json                               # Workspace scripts & shared toolchain (pnpm@10.34.7, turbo@2.11.10)
+│
+├── .agents/skills/                            # 5 Mounted Antigravity Workspace Skills
+│   ├── ahac-sovereign-swarm/SKILL.md          # 40-agent swarm orchestration, 6-gatekeeper QA & VPS deploy SOP
+│   ├── ahac-cybersecurity-and-email-shield/SKILL.md # 6-Layer Email Fortress, CEO Email Shield & security-sweep
+│   ├── ahac-google-seo-merchant-and-cro/SKILL.md    # 118-route Google SEO, Merchant/Reviews XML feeds, IndexNow & CRO
+│   ├── ahac-monthly-executive-billing-and-seo/SKILL.md # 3rd-grade CEO monthly SEO reports & plain-English billing
+│   └── ahac-brand-creative-and-storyboard-studio/SKILL.md # AHAC branding, video storyboards & ComfyUI/Blender 3D
 │
 ├── _analytics_data/                           # Google Search Console & GA4 Ingestion Data Layer
 │   ├── August-SEO-Report-09012026/            # GSC August 2026 performance export (Queries, Pages, Chart)
@@ -54,18 +62,18 @@ ahacws26/ (Project Root)
 │   │       └── reconciliation.py              # Stripe-to-Postgres order reconciliation worker
 │   │
 │   ├── dev-os/                                # Dev OS Autonomous Operations Cockpit (Standalone Next.js)
-│   │   ├── Dockerfile                         # Node.js 18 runner (capping memory to 384MB)
+│   │   ├── Dockerfile                         # Node.js 22 Alpine runner (node:22-alpine, capping memory to 384MB)
 │   │   ├── app/
 │   │   │   ├── page.tsx                       # Master Cockpit UI, 10 Sub-Master clusters, Analytics Radar
 │   │   │   ├── LiveSwarmVisualizer.tsx        # Real-time 40-Agent & 3-Stage Deployment Pipeline Visualizer
 │   │   │   ├── MonthlyReportsHub.tsx          # Executive Analytics & Monthly Reports Cockpit (Key R)
 │   │   │   ├── layout.tsx                     # Zero-telemetry isolated layout
 │   │   │   ├── robots.ts                      # Strict noindex/nofollow exclusion for search crawlers
-│   │   │   └── sopsData.ts                    # 50 Visual SOP dossiers & agent instruction data
+│   │   │   └── sopsData.ts                    # 50 Visual SOP dossiers (1:1 synced with dev_os_sops.py)
 │   │   └── public/                            # Static cockpit assets
 │   │
-│   └── web/                                   # Customer-Facing Storefront & Conversion Surfaces (101 Canonical Routes)
-│       ├── Dockerfile                         # Next.js 14 App Router production runner
+│   └── web/                                   # Customer-Facing Storefront & Conversion Surfaces (118 Canonical Routes)
+│       ├── Dockerfile                         # Node.js 22 Alpine Next.js 14 App Router production runner
 │       ├── app/
 │       │   ├── page.tsx                       # High-converting homepage & live stock-synced featured inventory
 │       │   ├── shop/
@@ -78,17 +86,20 @@ ahacws26/ (Project Root)
 │       │   ├── service-areas/                 # 22 Oahu city landing pages with localized JSON-LD
 │       │   ├── contact/                       # "By Appointment First" customer booking intake
 │       │   ├── checkout/                      # Direct Stripe checkout bridge
-│       │   └── sitemap.ts                     # XML Sitemap generator for all 101 indexed routes
+│       │   └── sitemap.ts                     # XML + Image Sitemap generator for all 118 indexed routes
 │       ├── components/                        # Tree-shaken UI components (Lucide React, Tailwind CSS)
 │       │   ├── ReviewsPavilion.tsx            # 3-column full-width verified Oahu reviews showcase
 │       │   ├── BackToTop.tsx                  # Floating navigation anchor
-│       │   └── NavbarV2.tsx                   # Unified island header navigation
+│       │   └── NavbarV2.tsx                   # Unified 3-row fixed island header navigation
 │       └── public/
 │           └── assets/he-rebate-form/         # Pre-approved Hawaii Energy $45 Window AC Application PDF
 │
-├── scripts/                                   # Master CLI Tools & Security Scanners
-│   ├── dev-os.ps1                             # Sovereign CLI control bridge (40 agents, 10 Sub-Masters, reports)
-│   ├── scan-secrets.ps1                       # Automated pre-commit & pre-deploy cybersecurity scanner
+├── scripts/                                   # Master CLI Tools, Crawlers & Security Scanners
+│   ├── dev-os.ps1                             # Sovereign CLI control bridge (40 agents, gatekeepers, live-crawl, indexnow)
+│   ├── live-seo-feed-audit.py                 # Concurrent 118-URL + Merchant/Reviews XML feed forensic crawler
+│   ├── scan-secrets.ps1                       # 6-stage automated pre-commit & pre-deploy secret scanner
+│   ├── security-email-audit.py                # Python forensic email shield, raw mailto & secret fallback auditor
+│   ├── verify-service-grounding.ps1           # Codebase trade-truth, $0 estimate & anti-upsell mandate verifier
 │   ├── verify-build.ps1                       # Local cross-package compilation check
 │   └── sync_local.ps1                         # Workstation-to-VPS deployment synchronizer
 │
@@ -197,24 +208,24 @@ graph TD
 | 10 | `agent_cro_optimizer` | Commerce & Telemetry | Zero-upfront booking velocity, Waipahu pickup, mobile CRO | `SOP-COM-02` |
 | 11 | `agent_revenue_reconciler` | Commerce & Telemetry | Stripe order reconciliation, 4.712% Oahu GET tax, invoice balance guards | `SOP-COM-03` |
 | 12 | `agent_catalog_auditor` | Commerce & Telemetry | 16/16 model spec drift, 16/16 factory PDFs, live DB stock sync | `SOP-COM-04` |
-| 13 | `agent_seo_metadata` | Growth & Grounding | 101-route XML sitemap, canonical URLs, robots.txt, SERP tags | `SOP-GRO-01` |
+| 13 | `agent_seo_metadata` | Growth & Grounding | 118-route XML sitemap, canonical URLs, robots.txt, SERP tags | `SOP-GRO-01` |
 | 14 | `agent_oahu_grounding` | Growth & Grounding | HECO ~44.2¢/kWh rates, $0 Free In-Home Estimates, Waipahu Est. 2005 | `SOP-GRO-02` |
 | 15 | `agent_market_research` | Growth & Grounding | Island competitor benchmarks & Waipahu warehouse pickup edge | `SOP-GRO-03` |
-| 16 | `agent_heco_rebate_strategist`| Growth & Grounding | HECO ~44.2¢/kWh ROI & $45 Hawaii Energy window AC rebate PDF | `SOP-GRO-04` |
+| 16 | `agent_heco_rebate_strategist`| Growth & Grounding | HECO ~44.2¢/kWh ROI & $45 Hawaii Energy window AC rebate PDF (8 SKUs) | `SOP-GRO-04` |
 | 17 | `agent_gsc_ga4_analytics` | Growth & Grounding | GSC query clustering, CTR gaps, GA4 stage drop-off telemetry | `SOP-GRO-05` |
-| 18 | `agent_schema_metadata_engine`| Growth & Grounding | JSON-LD schema audits (Product, FAQPage, HVACBusiness, HowTo) | `SOP-GRO-06` |
-| 19 | `agent_high_intent_planner` | Growth & Grounding | 101-route high-intent SEO footprint & cross-funnel bridges | `SOP-GRO-07` |
+| 18 | `agent_schema_metadata_engine`| Growth & Grounding | JSON-LD schema audits (16 PDP Product, CollectionPage, Service, FAQPage) | `SOP-GRO-06` |
+| 19 | `agent_high_intent_planner` | Growth & Grounding | 118-route high-intent SEO footprint & cross-funnel bridges | `SOP-GRO-07` |
 | 20 | `agent_crm_dispatch` | CRM Operations | "By Appointment First" lead intake & Waipahu pickup dispatch | `SOP-CRM-01` |
 | 21 | `agent_customer_lifecycle` | CRM Operations | Annual window AC cleaning & salt-air recall triggers | `SOP-CRM-02` |
 | 22 | `agent_intake_triage` | CRM Operations | Window AC cleaning vs replacement & installation triage | `SOP-CRM-03` |
 | 23 | `agent_deployment_guardian` | Deployment Quality | Blue/green container rebuilds, zero-downtime Nginx reload | `SOP-DEP-01` |
-| 24 | `agent_build_qa` | Deployment Quality | 101 Next.js routes compilation, TypeScript strictness, link checks | `SOP-DEP-02` |
+| 24 | `agent_build_qa` | Deployment Quality | 118 Next.js routes compilation, TypeScript strictness, live HTTP probe | `SOP-DEP-02` |
 | 25 | `agent_regression_sentinel` | Deployment Quality | By-Appointment-First non-regression & drop-cloth mandate | `SOP-DEP-03` |
 | 26 | `agent_spatial_visualizer` | Deployment Quality | Blender 4.1 headless raytracing & 16/16 caliper cutaway assets | `SOP-DEP-04` |
 | 27 | `agent_serp_intent_harvester`| SERP Acquisition | Oahu search query analytics & click-to-impression gap harvesting | `SOP-SERP-01` |
 | 28 | `agent_ctr_title_craftsman` | SERP Acquisition | Click-optimized title tags, price anchors ($0 Estimate), hotlines | `SOP-SERP-02` |
-| 29 | `agent_merchant_feed_sentinel`| SERP Acquisition | Google Merchant XML feed & Product schema (`validFrom`) | `SOP-SERP-03` |
-| 30 | `agent_mobile_checkout_sentinel`| Conversion Velocity | 1-tap Apple Pay/Google Pay/Link verification on mobile | `SOP-VEL-01` |
+| 29 | `agent_merchant_feed_sentinel`| SERP Acquisition | Google Merchant & 142-Review XML feeds & Product schema (`validFrom`) | `SOP-SERP-03` |
+| 30 | `agent_mobile_checkout_sentinel`| Conversion Velocity | 1-tap Apple Pay, Google Pay & US Cards (2.9% fee lock, Link/BNPL blocked) | `SOP-VEL-01` |
 | 31 | `agent_trust_authority_grounder`| Conversion Velocity | Waipahu inventory proof, 1-year warranty, Est. 2005 Oahu trust | `SOP-VEL-02` |
 | 32 | `agent_zero_friction_navigator` | Conversion Velocity | Zero checkout dead-ends, smooth filter resets, hotline bridge | `SOP-VEL-03` |
 | 33 | `agent_speed_core_vital_sentinel`| Conversion Velocity | Mobile Core Web Vitals (LCP < 2s, CLS = 0), zero-cache | `SOP-VEL-04` |
@@ -332,6 +343,15 @@ The Master CLI Bridge provides immediate command-line execution for the entire s
 
 # Execute a category Sub-Master suite
 .\scripts\dev-os.ps1 run-submaster submaster_growth_grounding
+
+# Run all 6 local pre-deploy gatekeepers (security-sweep, grounding-audit, pytest, web/dev-os tsc, web build)
+.\scripts\dev-os.ps1 gatekeepers
+
+# Crawl all 118 live canonical URLs + Merchant & Reviews XML feeds
+.\scripts\dev-os.ps1 live-crawl
+
+# Push all 118 canonical URLs via IndexNow
+.\scripts\dev-os.ps1 indexnow
 ```
 
 ---
@@ -339,7 +359,7 @@ The Master CLI Bridge provides immediate command-line execution for the entire s
 ## 7. Air-Tight Security & Grounding Directives
 
 1. **Loopback Binding**: Host ports 3005, 3001, 8001, 5433, and 6380 are strictly bound to `127.0.0.1`.
-2. **Zero Public Access**: Dev OS cockpit is barred by `robots.ts` (`Disallow: /`) and protected by SHA-256 HMAC session cookies.
+2. **Zero Public Access**: Dev OS cockpit is barred by `robots.ts` (`Disallow: /`) and protected by 48-character SHA-256 HMAC session cookies (`DEV_OS_MASTER_PASSWORD`).
 3. **Outbound Sync Only**: Workstation is 100% air-tight; VPS server possesses zero inbound network connectivity to the local development environment.
-4. **Window AC Specialization**: 100% dedicated to LG & GE Window Air Conditioners ($395 to $1,200) and on-site Window AC Cleaning across Oahu.
-5. **Window AC Rebate Truth**: Qualifying Energy Star LG Dual Inverters earn a $45 cash rebate using Affordable Home AC's official pre-approved application form PDF (`/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf`).
+4. **Window AC Specialization**: 100% dedicated to LG & GE Window Air Conditioners ($395 to $1,200) and on-site Window AC Cleaning across Oahu (`118` canonical routes).
+5. **Window AC Rebate Truth**: The 8 qualifying Energy Star Inverter SKUs (`IDs 1–7` LG Dual Inverters + `ID 15` GE `AJCQ12AXXWA` R-32 Variable Speed Inverter) earn a $45 cash rebate using Affordable Home AC's official pre-approved application form PDF (`/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf`).

@@ -12,7 +12,7 @@ param(
 )
 
 Write-Host "==================================================" -ForegroundColor Cyan
-Write-Host "  [SHIELD] AHAC CYBERSECURITY & EMAIL SCANNER v2.7.3" -ForegroundColor Cyan
+Write-Host "  [SHIELD] AHAC CYBERSECURITY & EMAIL SCANNER v2.8.0" -ForegroundColor Cyan
 Write-Host "==================================================" -ForegroundColor Cyan
 
 $historyPatterns = @(
@@ -55,8 +55,12 @@ foreach ($pattern in $sensitivePatterns) {
 }
 
 # 2. Check staged changes (added lines only, excluding scanner scripts and binary docx files)
-Write-Host "[2/6] Scanning Git diff & staged files..." -ForegroundColor Yellow
-$stagedAddedLines = (git -c core.fsmonitor=false diff --staged --no-textconv -- ":!scripts/scan-secrets.ps1" ":!scripts/security-email-audit.py" ":!*.docx") | Where-Object { $_ -match '^\+[^+]' }
+Write-Host "[2/6] Scanning Git diff & staged files (root + ahac-crm)..." -ForegroundColor Yellow
+$stagedAddedLines = @(git -c core.fsmonitor=false diff --staged --no-textconv -- ":!scripts/scan-secrets.ps1" ":!scripts/security-email-audit.py" ":!*.docx") | Where-Object { $_ -match '^\+[^+]' }
+if (Test-Path "ahac-crm/.git") {
+    $crmStaged = @(git -C ahac-crm -c core.fsmonitor=false diff --staged --no-textconv -- ":!*.docx") | Where-Object { $_ -match '^\+[^+]' }
+    $stagedAddedLines += $crmStaged
+}
 $stagedDiff = $stagedAddedLines -join "`n"
 foreach ($p in $allActivePatterns) {
     if ($stagedDiff -cmatch $p.Pattern) {
@@ -65,8 +69,12 @@ foreach ($p in $allActivePatterns) {
 }
 
 # 3. Check commit history (added lines in last 50 commits)
-Write-Host "[3/6] Scanning Git commit history (last 50 commits)..." -ForegroundColor Yellow
-$recentAddedLines = (git -c core.fsmonitor=false log -n 50 -p --no-textconv -- ":!scripts/scan-secrets.ps1" ":!scripts/security-email-audit.py" ":!*.docx") | Where-Object { $_ -match '^\+[^+]' }
+Write-Host "[3/6] Scanning Git commit history (last 50 commits, root + ahac-crm)..." -ForegroundColor Yellow
+$recentAddedLines = @(git -c core.fsmonitor=false log -n 50 -p --no-textconv -- ":!scripts/scan-secrets.ps1" ":!scripts/security-email-audit.py" ":!*.docx") | Where-Object { $_ -match '^\+[^+]' }
+if (Test-Path "ahac-crm/.git") {
+    $crmHistory = @(git -C ahac-crm -c core.fsmonitor=false log -n 50 -p --no-textconv -- ":!*.docx") | Where-Object { $_ -match '^\+[^+]' }
+    $recentAddedLines += $crmHistory
+}
 $recentLogs = $recentAddedLines -join "`n"
 foreach ($p in $historyPatterns) {
     if ($recentLogs -cmatch $p.Pattern) {
@@ -157,7 +165,7 @@ foreach ($rel in $nextFiles) {
 # 6. Public Storefront & CRM Client Bundle Email & Anti-Harvester Verification
 Write-Host "[6/6] Verifying public storefront & CRM frontend email privacy & anti-harvester DOM shield..." -ForegroundColor Yellow
 $privateEmailRegex = '(brian@affordablehome-ac\.com|irasmussenjobs@gmail\.com|airperfection\.itai@gmail\.com)'
-$storefrontFiles = $filesToScan | Where-Object { $_ -like "apps/web/*" -or $_ -like "ahac-crm/frontend/*" }
+$storefrontFiles = $filesToScan | Where-Object { $_ -like "apps/web/*" -or $_ -like "apps/dev-os/*" -or $_ -like "ahac-crm/frontend/*" }
 foreach ($rel in $storefrontFiles) {
     try {
         $content = [System.IO.File]::ReadAllText((Resolve-Path -LiteralPath $rel).Path)

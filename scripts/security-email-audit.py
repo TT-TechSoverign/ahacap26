@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Sovereign Every-File Security, Privacy & Email Protection Audit Engine (v2.7.4)
+Sovereign Every-File Security, Privacy & Email Protection Audit Engine (v2.8.0)
 Scans git-tracked files (root + ahac-crm), public web assets (apps/web/public),
 Next.js storefront bundles/routes, Docker ignore boundaries, and email/catalog guards:
   1. Zero private executive/developer emails in apps/web/ or ahac-crm/frontend/.
@@ -189,12 +189,14 @@ def main() -> int:
         if not os.path.exists(req_path):
             violations.append(f"[MISSING_SHIELD] Required security module missing: {req_path}")
         else:
-            body = open(req_path, "r", encoding="utf-8", errors="ignore").read()
+            with open(req_path, "r", encoding="utf-8", errors="ignore") as fh:
+                body = fh.read()
             if marker not in body:
                 violations.append(f"[MISSING_GUARD] '{marker}' missing in {os.path.relpath(req_path, ROOT)}")
 
     if os.path.exists(api_deps_py):
-        deps_body = open(api_deps_py, "r", encoding="utf-8", errors="ignore").read()
+        with open(api_deps_py, "r", encoding="utf-8", errors="ignore") as fh:
+            deps_body = fh.read()
         if "ADMIN_PIN" in deps_body:
             violations.append("[AUTH_ESCALATION_RISK] 4-digit ADMIN_PIN must never be accepted in dependencies.py")
 

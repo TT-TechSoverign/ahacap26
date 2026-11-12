@@ -162,7 +162,7 @@ async def validate_inventory(
         from fastapi import HTTPException
         raise HTTPException(status_code=429, detail="Too many validation requests. Please try again later.")
 
-    items_data = [item.dict() for item in validation_request.items]
+    items_data = [item.model_dump() for item in validation_request.items]
     return await catalog.validate_inventory_service(db, items_data)
 
 @router.post("", dependencies=[Depends(verify_admin_token)])
@@ -171,7 +171,7 @@ async def create_product(
     product: schemas.ProductCreate,
     db: AsyncSession = Depends(get_db)
 ):
-    raw_data = product.model_dump() if hasattr(product, "model_dump") else product.dict()
+    raw_data = product.model_dump()
     new_product = await catalog.create_product_service(db, raw_data)
     product_dict = serialize_product_seed_dict(new_product)
     persist_product_changes(product_dict)
@@ -193,11 +193,7 @@ async def update_product(
 ):
     from fastapi import HTTPException
     try:
-        raw_updates = (
-            product_update.model_dump(exclude_unset=True)
-            if hasattr(product_update, "model_dump")
-            else product_update.dict(exclude_unset=True)
-        )
+        raw_updates = product_update.model_dump(exclude_unset=True)
         update_data = {
             k: v for k, v in raw_updates.items()
             if not (k in NON_NULLABLE_PRODUCT_FIELDS and v is None)

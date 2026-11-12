@@ -108,7 +108,9 @@ apps/web/scripts/
 scripts/*
 !scripts/dev-os.*
 !scripts/scan-secrets.*
+!scripts/verify-service-grounding.ps1
 !scripts/security-email-audit.py
+!scripts/live-seo-feed-audit.py
 !scripts/comfyui_studio_bridge.py
 !scripts/enrich_reviews.py
 *.txt
@@ -118,6 +120,7 @@ scripts/*
 *.py
 !apps/api/**/*.py
 !scripts/security-email-audit.py
+!scripts/live-seo-feed-audit.py
 !scripts/comfyui_studio_bridge.py
 !scripts/enrich_reviews.py
 !*.sh

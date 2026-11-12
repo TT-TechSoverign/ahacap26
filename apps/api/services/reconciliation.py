@@ -2,7 +2,7 @@ import asyncio
 import os
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 import stripe
 from sqlalchemy.future import select
 
@@ -181,7 +181,11 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                     logger.warning(f"Could not retrieve card brand for {stripe_pid}: {pi_err}")
 
                 # 1. Insert Order
-                created_at = datetime.fromtimestamp(s.created) if getattr(s, 'created', None) else datetime.utcnow()
+                created_at = (
+                    datetime.fromtimestamp(s.created, tz=timezone.utc).replace(tzinfo=None)
+                    if getattr(s, 'created', None)
+                    else datetime.now(timezone.utc).replace(tzinfo=None)
+                )
                 recovered_order = models.Order(
                     id=order_id,
                     stripe_pid=stripe_pid,
@@ -267,7 +271,7 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                     "customer_name": customer_name,
                     "customer_email": receipt_email,
                     "amount_cents": amount_received,
-                    "recovered_at": datetime.utcnow().isoformat()
+                    "recovered_at": datetime.now(timezone.utc).replace(tzinfo=None).isoformat()
                 })
 
         return {

@@ -2,7 +2,12 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Enum, Bool
 from sqlalchemy.orm import relationship
 import enum
 from database import Base
-from datetime import datetime
+from datetime import datetime, timezone
+
+
+def utcnow_naive() -> datetime:
+    """Returns timezone-naive UTC datetime compatible with PostgreSQL TIMESTAMP WITHOUT TIME ZONE."""
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 class OrderStatus(str, enum.Enum):
     CART = "CART"
@@ -68,7 +73,7 @@ class Lead(Base):
     urgency = Column(String)
     notes = Column(String, nullable=True)
     status = Column(String, default=LeadStatus.NEW)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=utcnow_naive)
 
 class Order(Base):
     __tablename__ = "orders"
@@ -88,7 +93,7 @@ class Order(Base):
     utm_source = Column(String, nullable=True)
     utm_medium = Column(String, nullable=True)
     utm_campaign = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=utcnow_naive)
 
 class ContentPage(Base):
     __tablename__ = "content_pages"
@@ -96,7 +101,7 @@ class ContentPage(Base):
     path = Column(String, primary_key=True, index=True)
     data = Column(String, nullable=True) # JSON String (Published)
     draft_data = Column(String, nullable=True) # JSON String (Draft)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at = Column(DateTime, default=utcnow_naive, onupdate=utcnow_naive)
 
 class ContentSnippet(Base):
     __tablename__ = "content_snippets"
@@ -104,7 +109,7 @@ class ContentSnippet(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
     data = Column(String, nullable=False) # JSON string of component data
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=utcnow_naive)
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -113,7 +118,7 @@ class Customer(Base):
     phone = Column(String, nullable=True)
     email = Column(String, nullable=True, index=True)
     address = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=utcnow_naive)
 
 class Equipment(Base):
     __tablename__ = "equipment"
@@ -129,7 +134,7 @@ class Equipment(Base):
     location = Column(String, nullable=True)
     service_date = Column(DateTime, nullable=True)
     photo_url = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=utcnow_naive)
 
 class VendorInvoice(Base):
     __tablename__ = "vendor_invoices"
@@ -138,7 +143,7 @@ class VendorInvoice(Base):
     amount_cents = Column(Integer)
     file_url = Column(String, nullable=True)
     status = Column(String, default="PENDING")
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=utcnow_naive)
 
 class AdminUser(Base):
     __tablename__ = "admin_users"
@@ -149,7 +154,7 @@ class AdminUser(Base):
     role = Column(String, default="superadmin")
     name = Column(String, default="")
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=utcnow_naive)
 
 class DevOsAuditLog(Base):
     __tablename__ = "dev_os_audit_log"
@@ -158,6 +163,6 @@ class DevOsAuditLog(Base):
     actor = Column(String, default="dev_os_master")
     details_json = Column(String, nullable=True)
     ip_address = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    created_at = Column(DateTime, default=utcnow_naive, index=True)
 
 

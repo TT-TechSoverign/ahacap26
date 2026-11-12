@@ -43,16 +43,18 @@ export async function GET() {
     const baseApi = (process.env.API_INTERNAL_URL || 'http://prod-api:8000').replace(/\/api\/v1\/?$/, '');
 
     let products: Product[] = INITIAL_CATALOG_PRODUCTS;
-    try {
-      const response = await fetch(`${baseApi}/api/v1/products`, { next: { revalidate: 3600 } });
-      if (response.ok) {
-        const liveData = await response.json();
-        if (Array.isArray(liveData) && liveData.length > 0) {
-          products = liveData;
+    if (process.env.NEXT_PHASE !== 'phase-production-build') {
+      try {
+        const response = await fetch(`${baseApi}/api/v1/products`, { next: { revalidate: 3600 } });
+        if (response.ok) {
+          const liveData = await response.json();
+          if (Array.isArray(liveData) && liveData.length > 0) {
+            products = liveData;
+          }
         }
+      } catch {
+        // Fallback to INITIAL_CATALOG_PRODUCTS
       }
-    } catch {
-      // Fallback to INITIAL_CATALOG_PRODUCTS
     }
 
     const productById = new Map(products.map((p) => [p.id, p]));

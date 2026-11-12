@@ -6,7 +6,7 @@ description: >-
   limiting, secret rotation, or running security sweeps across Affordable Home A/C and ahac-crm.
 ---
 
-# AHAC Cybersecurity & 6-Layer Email Fortress Protocol (`v2.7.3-NOV11-EMAIL-FORTRESS`)
+# AHAC Cybersecurity & 6-Layer Email Fortress Protocol (`v2.8.0-NOV12-OMNISCIENT-SWARM`)
 
 ## 1. Private vs. Public Email Architecture
 - **Public Storefront Contact Email**: `office@affordablehome-ac.com`
@@ -15,10 +15,10 @@ description: >-
   - Note: Structured JSON-LD business contact metadata may reference `office@affordablehome-ac.com` where required by Google Merchant / LocalBusiness schemas, while interactive DOM links must use `<ProtectedEmailLink />`.
 - **Private Executive Admin Recipient**: `brian@affordablehome-ac.com`
   - Allowed **only** in server-side backend dispatch (`apps/api/`, `ahac-crm/backend/`) and governance docs.
-  - **NEVER** expose in `apps/web/`, `apps/web/public/`, or `NEXT_PUBLIC_*` client bundles.
+  - **NEVER** expose in `apps/web/`, `apps/dev-os/`, `ahac-crm/frontend/`, `apps/web/public/`, or `NEXT_PUBLIC_*` client bundles.
 - **Private Developer Audit / Staging Shield Recipient**: `irasmussenjobs@gmail.com`
-  - Receives BCC copies on production notifications and acts as the **exclusive** recipient when `IS_STAGING=True` or `is_test=True` (CEO Email Shield — `brian@affordablehome-ac.com` is 100% excluded from staging/test noise).
-  - **NEVER** expose in `apps/web/`, `apps/web/public/`, or `NEXT_PUBLIC_*` client bundles, and **NEVER** grant unauthenticated rate-limit bypasses based on user-supplied email addresses (`X-Dev-OS-Key` HMAC verification is mandatory).
+  - Receives BCC copies on production notifications and acts as the **exclusive** recipient when `IS_STAGING=True` or `is_explicit_test_submission(...)` triggers (CEO Email Shield — `brian@affordablehome-ac.com` is 100% excluded from staging/test/QA noise, including `[TEST]`, `e2e`, `playwright`, `audit`, `@example.com`, and `555-01xx` submissions).
+  - **NEVER** expose in `apps/web/`, `apps/dev-os/`, `ahac-crm/frontend/`, `apps/web/public/`, or `NEXT_PUBLIC_*` client bundles, and **NEVER** grant unauthenticated rate-limit bypasses based on user-supplied email addresses (`X-Dev-OS-Key` HMAC verification is mandatory).
 
 ## 2. 6-Layer Backend Email Fortress (`apps/api/services/email.py` & `ahac-crm/backend/email_service.py`)
 Whenever building or editing any email template, SMTP sender, or webhook handler:
@@ -29,8 +29,10 @@ Whenever building or editing any email template, SMTP sender, or webhook handler
 5. **Fallback Loop Prevention**: When a lead submits without an email address and defaults to `office@affordablehome-ac.com`, skip customer auto-responder confirmation to prevent self-mailing loops while still dispatching the internal admin alert.
 6. **CSV Formula Neutralization (`sanitize_csv_cell`)**: Prefix any exported CSV cell starting with `=`, `+`, `-`, `@`, or `\t` with a leading single quote (`'`) so spreadsheet exports in `/admin` cannot execute formulas.
 
-## 3. Perimeter, Proxy & Secret Guardrails
-- **Zero Hardcoded Fallbacks**: Never commit fallback passwords or static JWT keys in Python, TypeScript, PowerShell, or Docker Compose files. Generate ephemeral random fallbacks via `secrets.token_urlsafe(48)` only for non-production test processes and load production secrets strictly from `chmod 600` `.env` files.
+## 3. Perimeter, Proxy, Auth Isolation & Zero-Lost-Lead Guardrails
+- **Zero Hardcoded Fallbacks & Secret Domain Separation**: Never commit fallback passwords or static JWT keys in Python, TypeScript, PowerShell, or Docker Compose files. Keep `DEV_OS_MASTER_PASSWORD` strictly separated from storefront `ADMIN_PIN` (storefront PIN can NEVER authenticate `/dev-os`), and derive `CRM_JWT_SECRET` via `HMAC(SECRET_KEY, "ahac-crm-jwt-domain-v1")` when unset so CRM tokens are cryptographically distinct from storefront HMAC tokens.
+- **Docker Build Context Exclusion (`.dockerignore`)**: Both root `.dockerignore` and `ahac-crm/frontend/.dockerignore` / `ahac-crm/backend/.dockerignore` must exclude `.env*`, `.git`, `_private_portfolio`, and `_analytics_data` so secrets never enter Docker image layers.
+- **Zero-Lost-Lead Form Armor**: Every storefront intake form (`LeadCaptureWizard`, `ServiceIntakeForm`, `CleanVsReplaceClient`, `ContactFormClient`, `WindowAcInstallationClient`) must inspect `res.ok` on `/api/v1/leads` before showing confirmation UI and display a `tel:8084881111` fallback banner on network/HTTP failure.
 - **Trusted Real Client IP (`get_client_ip`)**: Nginx `location /api/v1/` must pass `proxy_set_header X-Real-IP $remote_addr;` so Redis rate limiters (`leads`, `admin/login`, `dev-os/auth/login`, `dev-os/analytics/event`) key on the true visitor IP rather than Docker bridge `172.18.0.1` or spoofed `X-Forwarded-For` headers.
 - **API Docs Disabled in Production**: Keep `docs_url=None`, `redoc_url=None`, and `openapi_url=None` on both `prod-api` and `ahac-crm-api` outside local development.
 - **Database Backup Vault Permissions**: Keep `/var/backups/ahac_db` at `chmod 700`, `*.sql.gz` snapshots at `chmod 600`, and `umask 077` in `/etc/cron.daily/backup-ahac-db`.

@@ -1,10 +1,11 @@
 FROM node:22-alpine AS base
+RUN npm install -g pnpm@10.34.7
 
 # 1. Prune the workspace to only include the "dev-os" app and its dependencies
 FROM base AS pruner
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-RUN npm install -g turbo
+RUN npm install -g turbo@2.11.10
 COPY . .
 RUN turbo prune dev-os --docker
 
@@ -15,7 +16,7 @@ WORKDIR /app
 
 COPY --from=pruner /app/out/json/ .
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
-RUN npm install -g pnpm@10.34.7 && pnpm install --no-frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
 
 # 3. Build the project using the pruned source code
 FROM base AS builder
@@ -25,7 +26,9 @@ COPY --from=deps /app/apps/dev-os/node_modules ./apps/dev-os/node_modules
 COPY --from=pruner /app/out/full/ .
 
 ENV NODE_OPTIONS="--max-old-space-size=1024"
-RUN npm install -g pnpm@10.34.7 && pnpm --filter dev-os build
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV BROWSERSLIST_IGNORE_OLD_DATA=1
+RUN pnpm --filter dev-os build
 
 # 4. Production runner
 FROM base AS runner

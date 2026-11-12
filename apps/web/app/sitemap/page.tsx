@@ -45,24 +45,26 @@ export const metadata: Metadata = {
 export default async function SitemapPage() {
     let products: Product[] = INITIAL_CATALOG_PRODUCTS;
     
-    try {
-        let apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
-        if (!apiUrl.endsWith('/api/v1')) {
-            apiUrl = `${apiUrl}/api/v1`;
-        }
-
-        const res = await fetch(`${apiUrl}/products`, {
-            next: { revalidate: 86400 }
-        });
-
-        if (res.ok) {
-            const liveProducts = await res.json();
-            if (Array.isArray(liveProducts) && liveProducts.length > 0) {
-                products = liveProducts;
+    if (process.env.NEXT_PHASE !== 'phase-production-build') {
+        try {
+            let apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
+            if (!apiUrl.endsWith('/api/v1')) {
+                apiUrl = `${apiUrl}/api/v1`;
             }
+
+            const res = await fetch(`${apiUrl}/products`, {
+                next: { revalidate: 86400 }
+            });
+
+            if (res.ok) {
+                const liveProducts = await res.json();
+                if (Array.isArray(liveProducts) && liveProducts.length > 0) {
+                    products = liveProducts;
+                }
+            }
+        } catch (error) {
+            console.error('[HTML Sitemap] Failed to fetch products, using INITIAL_CATALOG_PRODUCTS fallback:', error);
         }
-    } catch (error) {
-        console.error('[HTML Sitemap] Failed to fetch products, using INITIAL_CATALOG_PRODUCTS fallback:', error);
     }
 
     const coreServices = [

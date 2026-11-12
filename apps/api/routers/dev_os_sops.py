@@ -1,7 +1,7 @@
 """
-Sovereign Tier Standard Operating Procedures (SOPs) Matrix — v2.7.0-SOVEREIGN (EPOCH 21)
+Sovereign Tier Standard Operating Procedures (SOPs) Matrix — v2.8.0-SOVEREIGN (EPOCH 21)
 Defines the authoritative operational protocols, execution steps, token efficiency policies,
-and Oahu local grounding for all 40 Specialized Agents and 10 Category Sub-Masters.
+and Oahu local grounding for all 40 Specialized Agents and 10 Category Sub-Masters (50 SOPs).
 """
 
 from typing import Dict, Any
@@ -37,12 +37,12 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "supervisor": "Sovereign Master Orchestrator",
         "mandate": "Enforce zero-trust architecture, SHA-256 HMAC authentication, air-tight local perimeter isolation, pre-push secret scrubbing, storefront /admin Command Deck isolation (zero internal Dev OS or CRM links), and CEO Email Shield routing.",
         "token_efficiency_policy": "Event-driven execution. Telemetry sanitized of all PII before streaming. No autonomous outbound network calls.",
-        "oahu_grounding": "Hawaii business compliance protection (Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005), customer PII masking, production admin routing to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC, and air-tight local workstation isolation.",
+        "oahu_grounding": "Hawaii business compliance protection (Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005), customer PII masking, production admin routing to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield), and air-tight local workstation isolation.",
         "inputs": ["Active session tokens", "Git pre-push audit logs", "Storefront /admin DOM & email routing config", "Audit table record counts"],
         "execution_steps": [
             {"step": 1, "title": "HMAC Session & Admin Isolation Audit", "description": "Trigger agent_security_shield to verify SHA-256 HMAC signature, loopback port bindings, and confirm /admin Command Menu contains zero internal Dev OS or CRM links.", "verification": "Zero exposed management ports; /admin isolated to 4 storefront tabs."},
             {"step": 2, "title": "Pre-Push Secret Scrubbing", "description": "Trigger agent_commit_sentinel to scan staged diffs and recent commits for API keys, Stripe sk_live tokens, or private certificates.", "verification": "Zero leaked secrets detected."},
-            {"step": 3, "title": "CEO Email Shield & PII Compliance", "description": "Trigger agent_compliance_auditor to verify production notifications route to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC (and staging shield exclusively to irasmussenjobs@gmail.com).", "verification": "Email routing & PII masking 100% compliant."},
+            {"step": 3, "title": "CEO Email Shield & PII Compliance", "description": "Trigger agent_compliance_auditor to verify production notifications route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) on BCC, and staging/test routes exclusively to DEV_BCC_EMAIL.", "verification": "Email routing & PII masking 100% compliant."},
             {"step": 4, "title": "Air-Tight Perimeter Verification", "description": "Trigger agent_perimeter_auditor to mathematically verify server has zero inbound reach into the local development workstation.", "verification": "Zero inbound holes; 100% outbound-only client sync."}
         ],
         "outputs": ["Security posture grade (ARMORED)", "Admin isolation & CEO email shield status", "Perimeter state (AIR_TIGHT_OUTBOUND_ONLY)"],
@@ -97,7 +97,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "oahu_grounding": "Waipahu central warehouse facility (94-150 Leoleo St #203), same-day pickup for factory-sealed LG & GE inventory, and Oahu salt-air coil sanitization cycles.",
         "inputs": ["PostgreSQL leads table records", "CRM crm_products catalog", "Equipment service histories", "Customer failure reports"],
         "execution_steps": [
-            {"step": 1, "title": "Dispatch Queue & Email Routing Ingest", "description": "Trigger agent_crm_dispatch to inspect new lead records, enforce By-Appointment-First contact, and confirm brian@affordablehome-ac.com primary dispatch notifications.", "verification": "All new leads flagged for phone contact before truck roll."},
+            {"step": 1, "title": "Dispatch Queue & Email Routing Ingest", "description": "Trigger agent_crm_dispatch to inspect new lead records, enforce By-Appointment-First contact, and confirm CEO_NOTIFICATION_EMAIL (Primary) + DEV_BCC_EMAIL (Audit) dispatch notifications.", "verification": "All new leads flagged for phone contact before truck roll."},
             {"step": 2, "title": "Window AC Symptom & Intake Triage", "description": "Trigger agent_intake_triage to categorize incoming Window AC issues (mold, coil corrosion, drain leak, warm air) and route between Waipahu warehouse replacement vs cleaning/installation.", "verification": "100% Window AC & Window AC Cleaning routing enforced."},
             {"step": 3, "title": "Lifecycle Maintenance Schedule", "description": "Trigger agent_customer_lifecycle to generate 6-month and 12-month proactive Window AC coil sanitization and antimicrobial pan treatment recalls.", "verification": "Recall schedule updated based on Oahu coastal proximity."}
         ],
@@ -129,14 +129,14 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "SERP & Intent Acquisition Sub-Master",
         "domain": "SERP Acquisition",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Supervise 100% Window AC & Window AC Cleaning search query intent harvesting across 22 Oahu city pages and topical silos, click-through-rate title tag optimization, and 16-model Google Merchant Center XML feed syndication.",
+        "mandate": "Supervise 100% Window AC & Window AC Cleaning search query intent harvesting across 22 Oahu city pages and topical silos, click-through-rate title tag optimization, and 16-model Google Merchant Center + 142-review Product Reviews XML feed syndication.",
         "token_efficiency_policy": "Zero background polling loops. Invoked strictly on-demand by client CLI or Dev OS UI. Emits compact JSON summaries (< 400 bytes).",
         "oahu_grounding": "Oahu search intent harvesting (Honolulu, Ewa Beach, Kailua, Waipahu, Kapolei), localized $0 Free In-Home Estimate price anchoring, and Waipahu Warehouse Direct SERP trust badges.",
-        "inputs": ["Google Search Console query logs", "Next.js page metadata across 118 canonical routes", "Google Merchant XML feed (16 LG & GE models)"],
+        "inputs": ["Google Search Console query logs", "Next.js page metadata across 118 canonical routes", "Google Merchant XML feed (16 SKUs) & Product Reviews XML feed (142 reviews)"],
         "execution_steps": [
             {"step": 1, "title": "Window AC Query Clustering", "description": "Trigger agent_serp_intent_harvester to identify high-converting Oahu Window AC & cleaning queries (including 26\" through-the-wall sleeves and jalousie mounts) with zero legacy mini-split drift.", "verification": "Query intent taxonomy 100% Window AC focused."},
-            {"step": 2, "title": "CTR Title Tag Optimization", "description": "Trigger agent_ctr_title_craftsman to enforce click-magnetic title patterns with phone hotline and $0 Estimate hooks across all 22 city pages and topical silos.", "verification": "22 city pages enforce ${city} Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111."},
-            {"step": 3, "title": "16-Model Merchant Feed Audit", "description": "Trigger agent_merchant_feed_sentinel to validate XML feed and Product rich snippet schemas (including GE AJCQ12AXXWA R-32 inverter).", "verification": "16 LG & GE models syndicating cleanly with validFrom anchors."}
+            {"step": 2, "title": "CTR Title Tag Optimization", "description": "Trigger agent_ctr_title_craftsman to enforce front-loaded (<60 char) click-magnetic title patterns with $395+ and $0 Install/Estimate hooks across all 22 city pages and topical silos.", "verification": "22 city pages enforce ${city} Window ACs ($395+) • $0 Install, Clean & Repair."},
+            {"step": 3, "title": "16-Model Merchant & 142-Review Feed Audit", "description": "Trigger agent_merchant_feed_sentinel to validate Merchant XML (/api/google-feed), Product Reviews XML (/product-reviews-feed.xml), <g:sale_price>, and 8-SKU $45 rebate lock.", "verification": "16 LG & GE models and 142 verified reviews syndicating cleanly."}
         ],
         "outputs": ["SERP acquisition matrix", "CTR improvement roadmap", "16-model Merchant feed health report"],
         "contingency_protocol": "Auto-correct canonical tag conflicts and title tag formatting on detected SERP crawl penalties."
@@ -152,7 +152,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "oahu_grounding": "Oahu customer trust defense: eliminates mainland shipping anxiety via Waipahu warehouse pickup proof, 1-year local warranty, Insured Oahu Cooling Specialists • Est. 2005 badges, and transparent 4.712% GET tax.",
         "inputs": ["Stripe checkout & CRM invoice session configs", "NavbarV2 & ShopClient DOM", "globals.css scrollbar utilities", "Core Web Vitals telemetry"],
         "execution_steps": [
-            {"step": 1, "title": "Mobile Wallet & CRM Fresh Session Check", "description": "Trigger agent_mobile_checkout_sentinel to confirm Apple Pay, Google Pay, and US Cards are active (with Link/BNPL disabled) on both storefront checkout and CRM multi-stage invoices.", "verification": "Dynamic payment methods active; stale CRM sessions auto-regenerated on balance change."},
+            {"step": 1, "title": "Mobile Wallet & CRM Card-Lock Session Check", "description": "Trigger agent_mobile_checkout_sentinel to confirm payment_method_types=['card'] enables Apple Pay, Google Pay, and US Cards (while blocking Link/BNPL 5.99% fee traps) on both storefront checkout and CRM multi-stage invoices.", "verification": "Card/wallet 2.9% fee lock active; stale CRM sessions auto-regenerated on balance change."},
             {"step": 2, "title": "Trust & Reassurance Grounding", "description": "Trigger agent_trust_authority_grounder to verify Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005 badges across checkout, footer, and schemas.", "verification": "High-trust card active; zero legacy license or hostile banner regressions."},
             {"step": 3, "title": "Zero-Friction Navigation & Dropdown Armor", "description": "Trigger agent_zero_friction_navigator to verify zero upsells, solid bg-[#060a12] z-[120] Shop Window AC dropdown, and .scrollbar-none horizontal filter tracks.", "verification": "Zero upsells, zero dropdown transparency bleed, 1-tap phone hotline active."},
             {"step": 4, "title": "Core Web Vitals & Viewport Clearance", "description": "Trigger agent_speed_core_vital_sentinel to audit mobile page speed, zero CLS, and 3-row NavbarV2 top-padding clearance across all 84 page.tsx routes.", "verification": "Mobile response < 100ms, CLS = 0.00, 84/84 pages clear fixed header."}
@@ -319,13 +319,13 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Regulatory & Audit Compliance Auditor",
         "domain": "Security",
         "supervisor": "submaster_security_compliance",
-        "mandate": "Verify audit trail immutability, customer PII masking, production admin email routing to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC, staging CEO Email Shield, and Hawaii business compliance.",
+        "mandate": "Verify audit trail immutability, customer PII masking, production admin email routing to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) on BCC, staging CEO Email Shield, and Hawaii business compliance.",
         "token_efficiency_policy": "Runs single SQL aggregation query on dev_os_audit_log and inspects email routing config; completes in < 3ms.",
         "oahu_grounding": "Hawaii business standards (Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005), floor drop-cloth mandate, and CEO email routing.",
         "inputs": ["dev_os_audit_log table", "apps/api/services/email.py", "Customer PII fields in database"],
         "execution_steps": [
             {"step": 1, "title": "Audit Log Integrity Check", "description": "Count audit log entries and verify sequential timestamp monotonicity and 14-day retention.", "verification": "Audit records intact and sequential."},
-            {"step": 2, "title": "CEO Email Routing & Staging Shield Check", "description": "Verify production notifications route to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC, and non-production routes exclusively to irasmussenjobs@gmail.com.", "verification": "Email routing & staging shield verified."},
+            {"step": 2, "title": "CEO Email Routing & Staging Shield Check", "description": "Verify production notifications route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit) on BCC, and non-production/test routes exclusively to DEV_BCC_EMAIL.", "verification": "Email routing & staging shield verified."},
             {"step": 3, "title": "PII Masking & Legal Grounding Check", "description": "Ensure customer phone numbers and emails are masked in logs and zero false drywall or legacy license claims exist.", "verification": "PII masking and legal grounding active."}
         ],
         "outputs": ["Compliance status (COMPLIANT)", "CEO email routing verification", "PII masking status"],
@@ -399,7 +399,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "inputs": ["Stripe API charges ledger", "PostgreSQL orders table", "ahac-crm invoice checkout route"],
         "execution_steps": [
             {"step": 1, "title": "Unrecorded Charge & GET Tax Scan", "description": "Query Stripe API for recent successful charges, verify 4.712% Oahu GET tax, and compare with database orders.", "verification": "Zero unrecorded payments found."},
-            {"step": 2, "title": "CRM Multi-Stage Invoice Guardrail Check", "description": "Verify CRM invoices track depositPaidCents vs balanceDueCents and create a fresh Stripe Checkout Session whenever payable balance changes.", "verification": "Stale Stripe session reuse prevented; dynamic payment methods enabled."},
+            {"step": 2, "title": "CRM Multi-Stage Invoice Guardrail Check", "description": "Verify CRM invoices track depositPaidCents vs balanceDueCents and create a fresh Stripe Checkout Session (payment_method_types=['card']) whenever payable balance changes.", "verification": "Stale Stripe session reuse prevented; 2.9% card/wallet fee lock enabled."},
             {"step": 3, "title": "Webhook Idempotency & Net Revenue Summary", "description": "Verify webhook events are processed idempotently and calculate verified gross volume and dispute count (0).", "verification": "Disputes == 0, idempotency verified."}
         ],
         "outputs": ["Reconciliation status (RECONCILED)", "CRM multi-stage invoice guardrail status", "Verified transaction volume"],
@@ -439,7 +439,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "execution_steps": [
             {"step": 1, "title": "118-Route & 22-City Coverage Audit", "description": "Verify all 118 canonical routes (including /shop/ge-built-in-wall-ac-oahu and 22 city pages) exist in sitemap.ts.", "verification": "118 canonical routes and 22/22 city routes active."},
             {"step": 2, "title": "301 Redirect & Legacy Purge Check", "description": "Confirm all 9 retired mini-split/ductless/central AC routes 301-redirect permanently to /shop or /ac-cleaning-oahu.", "verification": "9/9 retired routes 301-redirected; zero legacy pages in sitemap."},
-            {"step": 3, "title": "Robots & Anti-Crawling Audit", "description": "Verify robots.ts disallows /dev-os, /admin, and internal APIs while allowing all 118 public canonical routes.", "verification": "Dev OS & /admin strictly protected; 118 public pages indexed."}
+            {"step": 3, "title": "Robots, Query Consolidation & AI Discovery Audit", "description": "Verify robots.txt disallows /dev-os, /admin, and /*?*_rsc=* while keeping query filters crawlable for X-Robots-Tag: noindex, follow consolidation, and confirm /llms.txt & /api/indexnow are active.", "verification": "Dev OS & /admin strictly protected; 118 public pages indexed."}
         ],
         "outputs": ["SEO status (ACTIVE_OPTIMIZING)", "Canonical routes count (118)", "301 redirect enforcement status"],
         "contingency_protocol": "Regenerate sitemap and enforce 301 redirect rules if any route indexing discrepancy is detected."
@@ -522,12 +522,12 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Structured Data Schema & Dynamic SERP Enhancer",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas (Product, HVACBusiness, LocalBusiness, FAQPage, AggregateRating 4.9★ across 142 reviews) across all 118 canonical routes.",
+        "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas (Product strictly on 16 PDPs, CollectionPage+ItemList on category guides, HVACBusiness, Service, FAQPage with 100% visible DOM parity, AggregateRating 4.9★ across 142 reviews) across all 118 canonical routes.",
         "token_efficiency_policy": "Deterministic schema generation using static templates; executes in < 2ms with zero runtime LLM overhead.",
         "oahu_grounding": "Embeds Waipahu warehouse coordinates, Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005 trust grounding, and GET tax compliance.",
         "inputs": ["Route metadata registry (118 routes)", "Product catalog pricing/stock ($395-$1,200)", "reviews_db.json (142 reviews)"],
         "execution_steps": [
-            {"step": 1, "title": "Schema Integrity Audit", "description": "Validate JSON-LD schemas (Product, HVACBusiness, LocalBusiness, FAQPage) for zero schema.org errors and zero legacy non-window AC services.", "verification": "100% valid schema markup across all 118 routes."},
+            {"step": 1, "title": "Schema Integrity & Non-PDP Clone Audit", "description": "Validate JSON-LD schemas across all 118 routes, confirming 0 Product schema clones on non-PDP pages and 100% visible FAQPage question parity.", "verification": "100% valid schema markup across all 118 routes."},
             {"step": 2, "title": "SERP Rich Snippet Injection", "description": "Ensure dynamic prices ($395-$1,200), stock availability, 4.9★ AggregateRating (142 reviews), and Waipahu warehouse details appear in structured output.", "verification": "Rich snippet attributes verified."},
             {"step": 3, "title": "Trust String Grounding Check", "description": "Confirm all schemas use 'Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005' with zero legacy license strings.", "verification": "Trust grounding 100% aligned."}
         ],
@@ -560,14 +560,14 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "CRM Dispatch & Technician Queue Agent",
         "domain": "Operations",
         "supervisor": "submaster_crm_operations",
-        "mandate": "Manage incoming Window AC service requests, technician dispatch queues, Waipahu warehouse pickup staging, and By-Appointment-First customer contact with brian@affordablehome-ac.com primary notifications.",
+        "mandate": "Manage incoming Window AC service requests, technician dispatch queues, Waipahu warehouse pickup staging, and By-Appointment-First customer contact with CEO_NOTIFICATION_EMAIL (Primary) + DEV_BCC_EMAIL (Audit) notifications.",
         "token_efficiency_policy": "Direct SQLAlchemy query on leads table with status index; execution time < 5ms.",
         "oahu_grounding": "Oahu-wide technician dispatch covering Honolulu, Leeward, Central, and Windward zones from Waipahu headquarters.",
         "inputs": ["PostgreSQL leads table", "Lead status enum (NEW, SCHEDULED, COMPLETED)", "Email dispatch routing config"],
         "execution_steps": [
             {"step": 1, "title": "New Lead Ingest", "description": "Query leads table for all records with status == NEW.", "verification": "Pending count calculated."},
             {"step": 2, "title": "By-Appointment-First Gate Check", "description": "Verify all customer records require phone scheduling contact before any payment or truck roll.", "verification": "Zero unauthorized truck rolls."},
-            {"step": 3, "title": "Waipahu Warehouse Pickup & Email Audit", "description": "Track customer pickup orders at Waipahu warehouse (94-150 Leoleo St #203) and confirm dispatch alerts route to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC.", "verification": "Same-day pickup staging and email routing maintained."}
+            {"step": 3, "title": "Waipahu Warehouse Pickup & Email Audit", "description": "Track customer pickup orders at Waipahu warehouse (94-150 Leoleo St #203) and confirm dispatch alerts route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL on BCC.", "verification": "Same-day pickup staging and email routing maintained."}
         ],
         "outputs": ["Dispatch status (DISPATCH_READY)", "Pending scheduling count", "Turnaround metric"],
         "contingency_protocol": "Notify dispatch manager if new leads remain uncontacted for more than 2 hours during operating hours."
@@ -712,8 +712,8 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "oahu_grounding": "Embeds Waipahu local stock availability and Honolulu phone bridge directly into Google SERP blue link snippets.",
         "inputs": ["apps/web/app page metadata (118 routes)", "22 City page route templates"],
         "execution_steps": [
-            {"step": 1, "title": "City Template Title Audit", "description": "Verify all 22 city pages format title as ${city} Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111.", "verification": "All 22 city templates match Window AC conversion title standard."},
-            {"step": 2, "title": "Canonical Link & Legacy Purge Integrity", "description": "Verify zero root canonical override on subpages and zero mini-split/ductless terms in any title or meta description.", "verification": "118 canonical routes 100% Window AC aligned."}
+            {"step": 1, "title": "City Template Title Audit", "description": "Verify all 22 city pages format front-loaded (<60 char) title as ${city} Window ACs ($395+) • $0 Install, Clean & Repair.", "verification": "All 22 city templates match Window AC front-loaded CTR standard."},
+            {"step": 2, "title": "Canonical Link, Double-Suffix & Legacy Purge", "description": "Verify zero root canonical override, zero double brand suffixes, and zero mini-split/ductless terms across all 118 canonical routes.", "verification": "118 canonical routes 100% Window AC aligned."}
         ],
         "outputs": ["Title tag compliance (100%)", "Title craftsman status (TITLES_CRAFTED)"],
         "contingency_protocol": "Auto-correct malformed title templates."
@@ -724,13 +724,13 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Google Merchant Feed Sentinel",
         "domain": "SERP Acquisition",
         "supervisor": "submaster_serp_acquisition",
-        "mandate": "Audit Google Merchant Center XML feed and Product JSON-LD schema for all 16 LG & GE Window AC models (including GE AJCQ12AXXWA R-32 inverter), verifying validFrom, priceValidUntil, and aggregateRating deduplication.",
+        "mandate": "Audit Google Merchant Center XML feed (/api/google-feed), Product Reviews XML feed (/product-reviews-feed.xml), and Product JSON-LD schema for all 16 LG & GE Window AC models (including GE AJCQ12AXXWA R-32 inverter), verifying <g:sale_price>, 8-SKU $45 rebate lock, and aggregateRating deduplication.",
         "token_efficiency_policy": "Sub-millisecond XML/JSON schema inspection. Zero external calls.",
-        "oahu_grounding": "Ensures all 16 Waipahu warehouse window & wall-sleeve AC models display clean 4.9-star rich snippets and transparent Oahu pricing ($395–$1,200) on Google Shopping.",
-        "inputs": ["apps/web/app/api/google-feed/route.ts", "apps/web/app/shop/[slug]/layout.tsx", "products_seed.json"],
+        "oahu_grounding": "Ensures all 16 Waipahu warehouse window & wall-sleeve AC models and 142 verified reviews display clean 4.9-star rich snippets and transparent Oahu pricing ($395–$1,200) on Google Shopping.",
+        "inputs": ["apps/web/app/api/google-feed/route.ts", "apps/web/app/api/google-reviews-feed/route.ts", "apps/web/app/shop/[slug]/layout.tsx", "products_seed.json"],
         "execution_steps": [
-            {"step": 1, "title": "16-Model Merchant XML Validation", "description": "Verify XML feed renders valid RSS 2.0 with g:price, g:availability, and updated GE AJCQ12AXXWA SKU.", "verification": "16 LG & GE products syndicating to Google Merchant Center."},
-            {"step": 2, "title": "Schema Deduplication Audit", "description": "Verify zero duplicate aggregateRating blocks across city and shop layouts.", "verification": "Clean single aggregateRating per product/service."}
+            {"step": 1, "title": "16-Model Merchant & 142-Review XML Validation", "description": "Verify Merchant XML (16 SKUs, dynamic <g:sale_price>, 8-SKU $45 rebate lock) and Product Reviews XML (142 reviews) render valid feeds.", "verification": "16 LG & GE products and 142 reviews syndicating cleanly."},
+            {"step": 2, "title": "Schema Deduplication Audit", "description": "Verify zero duplicate aggregateRating blocks and 0 non-PDP Product schema clones across all 118 routes.", "verification": "Clean single aggregateRating per product/service."}
         ],
         "outputs": ["Merchant feed status (MERCHANT_FEED_VERIFIED)", "Audited products (16)"],
         "contingency_protocol": "Filter malformed schema nodes prior to build compilation."
@@ -748,11 +748,11 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "oahu_grounding": "Enables Oahu mobile shoppers on LTE/5G to complete unit purchases or pay invoice deposits/balances in under 15 seconds without typing credit cards manually.",
         "inputs": ["apps/web/app/create-checkout-session/route.ts", "apps/web/app/api/checkout/route.ts", "ahac-crm invoice checkout route"],
         "execution_steps": [
-            {"step": 1, "title": "Dynamic Payment Method & BNPL Guard Audit", "description": "Verify dynamic payment methods enable Apple Pay, Google Pay, and US Cards while keeping Link/BNPL disabled.", "verification": "2.9% + $0.30 domestic card/wallet guard verified across storefront and CRM."},
+            {"step": 1, "title": "Card/Wallet Lock & BNPL Guard Audit", "description": "Verify payment_method_types=['card'] enables Apple Pay, Google Pay, and US Cards while blocking Link/BNPL 5.99% fee traps across Storefront & CRM.", "verification": "2.9% + $0.30 domestic card/wallet guard verified across storefront and CRM."},
             {"step": 2, "title": "Origin & Fresh Session Audit", "description": "Verify origin fallback resolves to https://www.affordablehome-ac.com and CRM invoices create fresh sessions when balance changes.", "verification": "Production origin and fresh session guardrails verified."}
         ],
         "outputs": ["Mobile checkout status (MOBILE_WALLETS_ARMORED)", "Supported wallets (Apple Pay, Google Pay, US Cards)"],
-        "contingency_protocol": "Restore dynamic payment method configurations immediately upon restriction detection."
+        "contingency_protocol": "Restore payment_method_types=['card'] and wallet configurations immediately upon drift detection."
     },
     "agent_trust_authority_grounder": {
         "id": "agent_trust_authority_grounder",

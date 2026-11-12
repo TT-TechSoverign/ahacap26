@@ -17,32 +17,33 @@ const CITY_AND_GUIDE_LAST_MODIFIED = '2026-11-08';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com';
+    const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build';
 
     let data = contentData;
-    try {
-        // Monorepo-aware path resolution
-        const pathsToTry = [
-            path.join(process.cwd(), 'lib/content/content.json.LIVE'),
-            path.join(process.cwd(), 'apps/web/lib/content/content.json.LIVE'),
-        ];
-        
-        let resolvedPath = '';
-        for (const p of pathsToTry) {
-            if (fs.existsSync(p)) {
-                resolvedPath = p;
-                break;
+    if (!isBuildPhase) {
+        try {
+            // Monorepo-aware path resolution
+            const pathsToTry = [
+                path.join(process.cwd(), 'lib/content/content.json.LIVE'),
+                path.join(process.cwd(), 'apps/web/lib/content/content.json.LIVE'),
+            ];
+            
+            let resolvedPath = '';
+            for (const p of pathsToTry) {
+                if (fs.existsSync(p)) {
+                    resolvedPath = p;
+                    break;
+                }
             }
-        }
 
-        if (resolvedPath) {
-            const raw = fs.readFileSync(resolvedPath, 'utf8');
-            data = JSON.parse(raw);
-            console.log(`[Sitemap] Successfully read live content from ${resolvedPath}`);
-        } else {
-            console.warn('[Sitemap] content.json.LIVE not found in known paths, falling back to static build-time content.');
+            if (resolvedPath) {
+                const raw = fs.readFileSync(resolvedPath, 'utf8');
+                data = JSON.parse(raw);
+                console.log(`[Sitemap] Successfully read live content from ${resolvedPath}`);
+            }
+        } catch (e) {
+            console.warn('[Sitemap] Failed to read live content, falling back to static content.', e);
         }
-    } catch (e) {
-        console.warn('[Sitemap] Failed to read live content, falling back to static content.', e);
     }
 
     // Extract service area cities
@@ -277,28 +278,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 2. Fetch Dynamic Product Routes (with INITIAL_CATALOG_PRODUCTS fallback)
     const { INITIAL_CATALOG_PRODUCTS } = await import('@/lib/catalog-seed');
     let products: Product[] = INITIAL_CATALOG_PRODUCTS;
-    try {
-        const baseApi = (process.env.API_INTERNAL_URL || 'http://prod-api:8000').replace(/\/api\/v1\/?$/, '');
-        const apiUrl = `${baseApi}/api/v1`;
+    if (!isBuildPhase) {
+        try {
+            const baseApi = (process.env.API_INTERNAL_URL || 'http://prod-api:8000').replace(/\/api\/v1\/?$/, '');
+            const apiUrl = `${baseApi}/api/v1`;
 
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-        const res = await fetch(`${apiUrl}/products`, {
-            next: { revalidate: 86400 },
-            signal: controller.signal
-        });
+            const res = await fetch(`${apiUrl}/products`, {
+                next: { revalidate: 86400 },
+                signal: controller.signal
+            });
 
-        clearTimeout(timeoutId);
+            clearTimeout(timeoutId);
 
-        if (res.ok) {
-            const liveProducts: Product[] = await res.json();
-            if (Array.isArray(liveProducts) && liveProducts.length > 0) {
-                products = liveProducts;
+            if (res.ok) {
+                const liveProducts: Product[] = await res.json();
+                if (Array.isArray(liveProducts) && liveProducts.length > 0) {
+                    products = liveProducts;
+                }
             }
+        } catch (error) {
+            console.error('[Sitemap] API request failed, using INITIAL_CATALOG_PRODUCTS fallback.', error);
         }
-    } catch (error) {
-        console.error('[Sitemap] API request failed, using INITIAL_CATALOG_PRODUCTS fallback.', error);
     }
 
     const productRoutes: MetadataRoute.Sitemap = products.map((product) => {

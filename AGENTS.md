@@ -1,7 +1,7 @@
 # SOVEREIGN AGENT & SWARM REGISTRY (AGENTS.md)
 
-> **Master Projects Brain Version**: `2.7.0-SOVEREIGN` (`v2.7.3-NOV11-EMAIL-FORTRESS`) • **Active Epoch**: `EPOCH 21 (November 11, 2026)`  
-> **Swarm Topology**: `10 Category Sub-Masters` • `40 Specialized Satellite Agents` • `50 SOP Dossiers` • `58 Neural Synapses` • `4 Workspace Skills`
+> **Master Projects Brain Version**: `2.8.0-SOVEREIGN` (`v2.8.0-NOV12-OMNISCIENT-SWARM`) • **Active Epoch**: `EPOCH 21 (November 12, 2026)`  
+> **Swarm Topology**: `10 Category Sub-Masters` • `40 Specialized Satellite Agents` • `50 SOP Dossiers (100% 1:1 Parity)` • `60 Neural Synapses` • `5 Workspace Skills`
 
 This document defines the agent architecture, roles, execution protocols, and operational guardrails for all AI agents and subagents operating within the Affordable Home A/C codebase.
 
@@ -9,7 +9,7 @@ This document defines the agent architecture, roles, execution protocols, and op
 
 ## 1. SOVEREIGN MASTER & FLEET STRUCTURE
 
-- **Sovereign Master (`2.7.0-SOVEREIGN`)**: Central cognitive intelligence overseeing all autonomous operations, cross-session learning (`TRACKER` protocol), and 58 neural synapses.
+- **Sovereign Master (`2.8.0-SOVEREIGN`)**: Central cognitive intelligence overseeing all autonomous operations, cross-session learning (`TRACKER` protocol), and 60 neural synapses.
 - **Category Sub-Masters (10)**: Autonomous domain supervisors governing specific functional areas.
 - **Specialized Satellite Agents (40)**: On-demand diagnostic and execution units (0% background idle CPU burn; multi-worker Redis pub/sub synchronized across 4 Uvicorn processes).
 - **Core Operational Mandates**:
@@ -20,8 +20,8 @@ This document defines the agent architecture, roles, execution protocols, and op
   - **Strict Anti-Upsell Mandate**: No accessory upsells, add-on modals, or bundle friction in checkout.
 
 ```
-                                                     [ MASTER PROJECTS BRAIN v2.7.0 ]
-                                                            (58 Neural Synapses)
+                                                     [ MASTER PROJECTS BRAIN v2.8.0 ]
+                                                            (60 Neural Synapses)
                                                                       |
     +---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
     |               |               |               |               |               |               |               |               |               |               |
@@ -31,7 +31,7 @@ This document defines the agent architecture, roles, execution protocols, and op
 
 ---
 
-## 2. SUB-MASTER & 40-AGENT SPECIFICATIONS (`v2.7.0-EPOCH-21`)
+## 2. SUB-MASTER & 40-AGENT SPECIFICATIONS (`v2.8.0-EPOCH-21`)
 
 ### Sub-Master 1: Infrastructure & Storage (`submaster_infrastructure`)
 - **Scope**: Bare-metal VPS health (`31.220.53.132`), 7-container Docker lifecycle, PostgreSQL 16 connection pools & `content_pages` JSONB parity (including mandatory `shop` `#rebate`), and zero-disk-bloat retention policies.
@@ -84,16 +84,16 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_spatial_visualizer`: Supervises Blender 4.1 headless raytracing, PIL caliper overlays, 16 isometric fit cutaways (`product_{id}_fit_cutaway.webp`), 16 factory PDF spec sheets, and 16 2x Retina WebP mobile spec sheet viewers.
 
 ### Sub-Master 7: SERP & Intent Acquisition (`submaster_serp_acquisition`)
-- **Scope**: 100% Window AC & Window AC Cleaning search query intent harvesting, SERP snippet CTR optimization, and 16-model Google Merchant feeds.
+- **Scope**: 100% Window AC & Window AC Cleaning search query intent harvesting, SERP snippet CTR optimization, and 16-model Google Merchant + 142-review Product Reviews XML feeds.
 - **Agents**:
   - `agent_serp_intent_harvester`: Analyzes high-intent Oahu Window AC, 26" wall sleeve, jalousie installation, and mold cleaning search queries across 22 city pages with zero legacy mini-split drift.
-  - `agent_ctr_title_craftsman`: Formulates click-optimized Window AC title tags (`${city} Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111`), price anchors, and phone hotlines.
-  - `agent_merchant_feed_sentinel`: Audits Google Merchant XML feed and Product JSON-LD schema (`validFrom`, `priceValidUntil`, single `aggregateRating`) across all 16 LG & GE models (including `AJCQ12AXXWA`).
+  - `agent_ctr_title_craftsman`: Formulates front-loaded (<60 char) click-optimized Window AC title tags (`${city} Window ACs ($395+) • $0 Install, Clean & Repair`), price anchors, and `(808) 488-1111` phone hotlines across all 118 canonical routes.
+  - `agent_merchant_feed_sentinel`: Audits Google Merchant XML (`/api/google-feed`), Product Reviews XML (`/product-reviews-feed.xml`, `142` reviews), `<g:sale_price>`, 8-SKU `$45` rebate lock, and Product JSON-LD schema (`validFrom`, `priceValidUntil`, single `aggregateRating`) across all 16 LG & GE models (including `AJCQ12AXXWA`).
 
 ### Sub-Master 8: Frictionless Conversion Velocity (`submaster_conversion_velocity`)
-- **Scope**: Mobile checkout unblocking, 1-tap mobile wallets across storefront & CRM invoices, buyer reassurance, solid dropdown & horizontal pill navigation ergonomics, and Core Web Vitals.
+- **Scope**: Mobile checkout unblocking, 1-tap mobile wallets across storefront & CRM invoices (`payment_method_types=['card']`), buyer reassurance, solid dropdown & horizontal pill navigation ergonomics, and Core Web Vitals.
 - **Agents**:
-  - `agent_mobile_checkout_sentinel`: Validates 1-tap Apple Pay, Google Pay, and US Cards across storefront checkout and CRM multi-stage invoice sessions (with Stripe Link/BNPL disabled to prevent 5.99% fee leakage).
+  - `agent_mobile_checkout_sentinel`: Validates 1-tap Apple Pay, Google Pay, and US Cards across storefront checkout and CRM multi-stage invoice sessions (`payment_method_types=['card']` enforced to block 5.99% Link/BNPL fee traps).
   - `agent_trust_authority_grounder`: Embeds `Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`, 1-year manufacturer warranty, and floor drop-cloth reassurance across checkout and footers with zero legacy license strings.
   - `agent_zero_friction_navigator`: Ensures zero checkout dead-ends, strict anti-upsell compliance, solid `bg-[#060a12]` `z-[120]` `Shop Window AC` dropdown armor, `.scrollbar-none` / `.no-scrollbar` horizontal pill tracks, and 1-tap phone bridges.
   - `agent_speed_core_vital_sentinel`: Enforces mobile sub-100ms response, zero CLS (`0.00`), universal zero-cache headers on dynamic routes, and 84/84 `page.tsx` fixed-header viewport clearance.
@@ -131,28 +131,33 @@ The local PowerShell CLI bridge (`.\scripts\dev-os.ps1`) allows immediate intera
 .\scripts\dev-os.ps1 run-fleet               # Sequentially execute all 40 agents
 
 # Executive Monthly Analytics & SEO Reports
-.\scripts\dev-os.ps1 report-list             # List all monthly executive reports (.docx, .html, .md)
-.\scripts\dev-os.ps1 report-generate <month> # Synthesize 3rd-grade executive report
+.\scripts\dev-os.ps1 report-list                    # List all monthly executive reports (.docx, .html, .md)
+.\scripts\dev-os.ps1 report-generate <Month> [Year] # Synthesize 3rd-grade executive report (accepts "October 2026" or "October2026")
 
 # Master Brain & Continuous Learning
-.\scripts\dev-os.ps1 brain                   # Query Master Brain v2.7.0 status & live cognitive thoughts
-.\scripts\dev-os.ps1 brain-sync "Directive"  # Push strategic directive to Master Brain
-.\scripts\dev-os.ps1 session-sync "Summary"  # Push session learnings and milestones
-.\scripts\dev-os.ps1 inject-history          # Re-energize brain with all 21 chronological epochs
+.\scripts\dev-os.ps1 brain                          # Query Master Brain v2.8.0 status & live cognitive thoughts
+.\scripts\dev-os.ps1 brain-sync "Directive"         # Push strategic directive to Master Brain
+.\scripts\dev-os.ps1 session-sync "Summary"         # Push session learnings and milestones
+.\scripts\dev-os.ps1 inject-history                 # Re-energize brain with all 21 chronological epochs
 
-# Deployment Swarm & Security
-.\scripts\dev-os.ps1 verify-live             # Execute 3-stage live deployment swarm check
-.\scripts\dev-os.ps1 scan-secrets            # Run 6-stage local + submodule git secret scanner
-.\scripts\dev-os.ps1 security-sweep          # Run full 6-stage secret scan + Python forensic email/codebase audit
+# Deployment Swarm, Live Google SEO Crawl, Gatekeepers & Security
+.\scripts\dev-os.ps1 verify-live                    # Execute 3-stage live deployment swarm check
+.\scripts\dev-os.ps1 live-crawl                     # Live 118-URL Google SEO, Merchant XML, FAQ DOM & anti-mailto audit
+.\scripts\dev-os.ps1 grounding-audit                # Run Oahu service & legal grounding static check
+.\scripts\dev-os.ps1 indexnow                       # Push all 118 canonical sitemap URLs to IndexNow
+.\scripts\dev-os.ps1 gatekeepers                    # Run all 6 local pre-deploy gatekeepers (TS, Biome, Pytest, Grounding, Security)
+.\scripts\dev-os.ps1 scan-secrets                   # Run 6-stage local + submodule git secret scanner
+.\scripts\dev-os.ps1 security-sweep                 # Run full 6-stage secret scan + Python forensic email/codebase audit
 ```
 
 ---
 
 ## 4. WORKSPACE SKILLS REGISTRY (`.agents/skills/`)
 
-All Antigravity sessions automatically discover and mount the following 4 workspace skills:
-- **`ahac-sovereign-swarm`** (`.agents/skills/ahac-sovereign-swarm/SKILL.md`): Full 10 Sub-Master / 40 Agent swarm orchestration (`58` synapses), 360° codebase audits, and 3-stage live deployment verification.
-- **`ahac-cybersecurity-and-email-shield`** (`.agents/skills/ahac-cybersecurity-and-email-shield/SKILL.md`): 6-layer Email Fortress (`safe_html`, CRLF stripping, PII log masking, `<ProtectedEmailLink />` anti-harvester DOM armor), CEO Email Shield routing, zero hardcoded fallbacks, and `security-sweep` gatekeepers.
+All Antigravity sessions automatically discover and mount the following 5 workspace skills:
+- **`ahac-sovereign-swarm`** (`.agents/skills/ahac-sovereign-swarm/SKILL.md`): Full 10 Sub-Master / 40 Agent swarm orchestration (`60` synapses), 6-gatekeeper pre-deploy pipeline, and 3-stage live deployment verification.
+- **`ahac-cybersecurity-and-email-shield`** (`.agents/skills/ahac-cybersecurity-and-email-shield/SKILL.md`): 6-layer Email Fortress (`safe_html`, CRLF stripping, PII log masking, `<ProtectedEmailLink />` anti-harvester DOM armor), CEO Email Shield routing (`is_explicit_test_submission`), zero hardcoded fallbacks, and `security-sweep` gatekeepers.
+- **`ahac-google-seo-merchant-and-cro`** (`.agents/skills/ahac-google-seo-merchant-and-cro/SKILL.md`): 118-route Google Search Essentials & Spam Policy rules, Merchant XML (`/merchant-feed.xml`) + 142-review Product Ratings XML (`/product-reviews-feed.xml`), 100% visible `FAQPage` DOM parity, 8-SKU `$45` Hawaii Energy Rebate lock, GA4 e-commerce attribution, and `live-crawl` verification.
 - **`ahac-monthly-executive-billing-and-seo`** (`.agents/skills/ahac-monthly-executive-billing-and-seo/SKILL.md`): Plain-English CEO invoice line items, executive Gmail billing drafts, and 3rd-grade monthly SEO reports for CEO Brian Borges.
 - **`ahac-brand-creative-and-storyboard-studio`** (`.agents/skills/ahac-brand-creative-and-storyboard-studio/SKILL.md`): Official Affordable Home A/C branding, video/ad storyboard prompt engineering, and Oahu visual background guidelines.
 

@@ -74,7 +74,7 @@ SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
 SMTP_PORT = int(os.getenv("SMTP_PORT", 465))
 SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
-ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "office@affordablehome-ac.com")
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL") or "office@affordablehome-ac.com"
 FROM_EMAIL = os.getenv("FROM_EMAIL", "office@affordablehome-ac.com")
 WEBSITE_URL = os.getenv("WEBSITE_URL", "https://affordablehome-ac.com")
 

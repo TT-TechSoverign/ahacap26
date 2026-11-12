@@ -1,10 +1,9 @@
 
-from datetime import datetime
+from datetime import datetime, timezone
 from dotenv import load_dotenv
 import os
 import sentry_sdk
 import stripe
-import logging
 import logging
 import sys
 import json
@@ -334,7 +333,7 @@ async def process_stripe_event(event: dict, payload_data: dict):
                         utm_source=metadata.get('utm_source'),
                         utm_medium=metadata.get('utm_medium'),
                         utm_campaign=metadata.get('utm_campaign'),
-                        created_at=datetime.utcnow()
+                        created_at=datetime.now(timezone.utc).replace(tzinfo=None)
                     )
                     session.add(order)
                     try:
@@ -363,7 +362,7 @@ async def process_stripe_event(event: dict, payload_data: dict):
                                 utm_source=metadata.get('utm_source'),
                                 utm_medium=metadata.get('utm_medium'),
                                 utm_campaign=metadata.get('utm_campaign'),
-                                created_at=datetime.utcnow()
+                                created_at=datetime.now(timezone.utc).replace(tzinfo=None)
                             )
                             session.add(order)
                             await session.commit()

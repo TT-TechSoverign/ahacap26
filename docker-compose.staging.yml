@@ -1,3 +1,5 @@
+name: ahac_staging
+
 services:
   staging-web:
     build:
@@ -103,7 +105,7 @@ services:
     restart: always
     ports:
       - "127.0.0.1:6381:6379"
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+    command: redis-server --requirepass ${REDIS_PASSWORD} --maxmemory 128mb --maxmemory-policy volatile-lru
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
@@ -113,3 +115,5 @@ services:
 
 volumes:
   staging_postgres_data:
+    external: true
+    name: ahac_staging_staging_postgres_data

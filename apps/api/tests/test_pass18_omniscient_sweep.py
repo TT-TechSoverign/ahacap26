@@ -2,6 +2,7 @@ import asyncio
 import json
 import os
 import re
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock
 
@@ -86,15 +87,13 @@ def test_services_matrix_and_products_seed_pass18_ground_truth():
 def test_dev_os_perimeter_push_directive_endpoint_and_118_route_parity():
     route_paths = {getattr(r, "path", "") for r in dev_os_router.routes}
     assert "/brain/perimeter/push-directive" in route_paths
-    assert len(MASTER_BRAIN_STATE["synapses"]) == 58
+    assert len(MASTER_BRAIN_STATE["synapses"]) == 60
 
-    with open(os.path.join(API_ROOT, "routers", "dev_os.py"), encoding="utf-8") as f:
-        dev_os_src = f.read()
+    dev_os_src = Path(os.path.join(API_ROOT, "routers", "dev_os.py")).read_text(encoding="utf-8")
     retired_literal = "AhacMasterKey" + "2026!Secured"
     assert retired_literal not in dev_os_src
 
-    with open(os.path.join(DEV_OS_APP, "sopsData.ts"), encoding="utf-8") as f:
-        sops_ts = f.read()
+    sops_ts = Path(os.path.join(DEV_OS_APP, "sopsData.ts")).read_text(encoding="utf-8")
     assert "101 canonical" not in sops_ts
     assert "74/74" not in sops_ts
 
@@ -106,12 +105,12 @@ def test_zero_silent_lead_form_catches_and_100_percent_faqpage_dom_parity():
         for fn in files:
             if fn.endswith(".tsx"):
                 fp = os.path.join(root, fn)
-                txt = open(fp, encoding="utf-8").read()
+                txt = Path(fp).read_text(encoding="utf-8")
                 m = re.search(r"catch\s*(?:\([^)]*\))?\s*\{\s*setIsSuccess\(true\)", txt)
                 assert m is None, f"Silent false-success catch found in {fp}"
 
     # 2. ProtectedEmailLink SSR fallback points to /contact (not dead #dispatch-email)
-    pel = open(os.path.join(WEB_ROOT, "components", "ProtectedEmailLink.tsx"), encoding="utf-8").read()
+    pel = Path(os.path.join(WEB_ROOT, "components", "ProtectedEmailLink.tsx")).read_text(encoding="utf-8")
     assert "'/contact'" in pel
     assert "#dispatch-email" not in pel
 
@@ -123,8 +122,8 @@ def test_zero_silent_lead_form_catches_and_100_percent_faqpage_dom_parity():
             continue
         l_fp = os.path.join(root, "layout.tsx")
         p_fp = os.path.join(root, "page.tsx")
-        l_txt = open(l_fp, encoding="utf-8").read() if os.path.exists(l_fp) else ""
-        p_txt = open(p_fp, encoding="utf-8").read() if os.path.exists(p_fp) else ""
+        l_txt = Path(l_fp).read_text(encoding="utf-8") if os.path.exists(l_fp) else ""
+        p_txt = Path(p_fp).read_text(encoding="utf-8") if os.path.exists(p_fp) else ""
         all_src = l_txt + "\n" + p_txt
         if "FAQPage" not in all_src:
             continue
@@ -135,17 +134,17 @@ def test_zero_silent_lead_form_catches_and_100_percent_faqpage_dom_parity():
         for m_imp in re.findall(r"from\s+['\"]@/components/([^'\"]+)['\"]", p_txt):
             cfp = os.path.join(comp_dir, m_imp if m_imp.endswith(".tsx") else m_imp + ".tsx")
             if os.path.exists(cfp):
-                visible_p += "\n" + open(cfp, encoding="utf-8").read()
+                visible_p += "\n" + Path(cfp).read_text(encoding="utf-8")
         for q in q_names:
             assert q[:32] in visible_p, f"FAQ question '{q}' missing from visible DOM in /{rel}"
 
 
 def test_crm_auth_fail_closed_and_subcent_deposit_rounding():
-    auth_src = open(os.path.join(CRM_ROOT, "backend", "auth.py"), encoding="utf-8").read()
+    auth_src = Path(os.path.join(CRM_ROOT, "backend", "auth.py")).read_text(encoding="utf-8")
     assert "RuntimeError" in auth_src
     assert 'not auth_header.startswith("Bearer ")' not in auth_src
 
-    crm_main = open(os.path.join(CRM_ROOT, "backend", "main.py"), encoding="utf-8").read()
+    crm_main = Path(os.path.join(CRM_ROOT, "backend", "main.py")).read_text(encoding="utf-8")
     assert "(808) 555-0100" not in crm_main
     assert "123 Main St" not in crm_main
     assert "deposit_amount - 0.01" in crm_main
@@ -155,8 +154,10 @@ def test_crm_auth_fail_closed_and_subcent_deposit_rounding():
 
 
 def test_content_seed_parity_and_shop_rebate_lock():
-    api_seed = json.load(open(os.path.join(API_ROOT, "content_seed.json"), encoding="utf-8"))
-    web_content = json.load(open(os.path.join(REPO_ROOT, "apps", "web", "lib", "content", "content.json"), encoding="utf-8"))
+    api_seed = json.loads(Path(os.path.join(API_ROOT, "content_seed.json")).read_text(encoding="utf-8"))
+    web_content = json.loads(
+        Path(os.path.join(REPO_ROOT, "apps", "web", "lib", "content", "content.json")).read_text(encoding="utf-8")
+    )
     assert api_seed == web_content, "apps/api/content_seed.json must match apps/web/lib/content/content.json 1:1"
     assert "rebate" in api_seed["shop"]["sections"]
     assert bool(api_seed["shop"].get("rebate"))

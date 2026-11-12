@@ -7,7 +7,7 @@ from typing import Optional, Dict, Any
 import models
 from database import get_db
 from dependencies import verify_admin_token, get_client_ip
-from datetime import datetime
+from datetime import datetime, timezone
 
 router = APIRouter()
 
@@ -68,7 +68,7 @@ async def save_draft(path: str, payload: ContentPayload, request: Request, db: A
 
     if page:
         page.draft_data = data_str
-        page.updated_at = datetime.utcnow()
+        page.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)
     else:
         page = models.ContentPage(path=path, draft_data=data_str)
         db.add(page)
@@ -99,7 +99,7 @@ async def publish_content(request: Request, path: str = "/", db: AsyncSession = 
         raise HTTPException(status_code=404, detail="No draft to publish")
 
     page.data = page.draft_data
-    page.updated_at = datetime.utcnow()
+    page.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)
     
     await db.commit()
     try:

@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import select
 from database import Base
 import models
-from datetime import datetime
+from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -65,7 +65,7 @@ async def seed_content():
                 path=GLOBAL_PATH,
                 data=json_str,
                 draft_data=json_str,
-                updated_at=datetime.utcnow()
+                updated_at=datetime.now(timezone.utc).replace(tzinfo=None)
             )
             session.add(page)
         

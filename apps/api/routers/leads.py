@@ -5,7 +5,7 @@ from cache import check_rate_limit
 from sqlalchemy.future import select
 from pydantic import BaseModel, Field
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, timezone
 import models
 from database import get_db
 from dependencies import get_client_ip
@@ -129,7 +129,7 @@ async def create_lead(
             urgency=urgency_val[:50],
             notes=(lead_data.notes or "No additional notes provided.")[:4000],
             status=models.LeadStatus.NEW,
-            created_at=datetime.utcnow()
+            created_at=datetime.now(timezone.utc).replace(tzinfo=None)
         )
         
         # 2. Save to DB

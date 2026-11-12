@@ -77,7 +77,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "supervisor": "Sovereign Master Orchestrator",
         "mandate": "Enforce zero-trust architecture, SHA-256 HMAC authentication, air-tight local perimeter isolation, pre-push secret scrubbing, storefront /admin Command Deck isolation (zero internal Dev OS or CRM links), and CEO Email Shield routing.",
         "token_efficiency_policy": "Event-driven execution. Telemetry sanitized of all PII before streaming. No autonomous outbound network calls.",
-        "oahu_grounding": "Hawaii business compliance protection (Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005), customer PII masking, production admin routing to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC, and air-tight local workstation isolation.",
+        "oahu_grounding": "Hawaii business compliance protection (Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005), customer PII masking, production admin routing to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield), and air-tight local workstation isolation.",
         "inputs": [
             "Active session tokens",
             "Git pre-push audit logs",
@@ -100,7 +100,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 3,
                 "title": "CEO Email Shield & PII Compliance",
-                "description": "Trigger agent_compliance_auditor to verify production notifications route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC (and staging shield exclusively to DEV_BCC_EMAIL (Audit / Staging Shield)).",
+                "description": "Trigger agent_compliance_auditor to verify production notifications route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) on BCC, and staging/test routes exclusively to DEV_BCC_EMAIL.",
                 "verification": "Email routing & PII masking 100% compliant."
             },
             {
@@ -184,7 +184,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 1,
                 "title": "118-Route Canonical & 301 Redirect Audit",
-                "description": "Trigger agent_seo_metadata to verify 118 canonical routes (102 static/city + 16 product) and 301 permanent redirects for all 9 retired mini-split/central AC routes.",
+                "description": "Trigger agent_seo_metadata to verify 118 canonical routes (102 static/city + 16 product) and 301 permanent redirects for all retired legacy routes.",
                 "verification": "118 routes active; 0 legacy non-window AC routes indexed."
             },
             {
@@ -232,7 +232,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 1,
                 "title": "Dispatch Queue & Email Routing Ingest",
-                "description": "Trigger agent_crm_dispatch to inspect new lead records, enforce By-Appointment-First contact, and confirm CEO_NOTIFICATION_EMAIL (Primary) primary dispatch notifications.",
+                "description": "Trigger agent_crm_dispatch to inspect new lead records, enforce By-Appointment-First contact, and confirm CEO_NOTIFICATION_EMAIL (Primary) + DEV_BCC_EMAIL (Audit) dispatch notifications.",
                 "verification": "All new leads flagged for phone contact before truck roll."
             },
             {
@@ -262,7 +262,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Deployment & Quality Swarm Sub-Master",
         "domain": "Deployment",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 118 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 84 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
+        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 118 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 84 NavbarV2 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
         "token_efficiency_policy": "Multi-stage pipeline running strictly during deployment sequences; zero background daemon overhead.",
         "oahu_grounding": "Insured Oahu cooling specialist workmanship protection (floor drop-cloth mandate), zero-downtime for live Oahu customers (www.affordablehome-ac.com).",
         "inputs": [
@@ -310,13 +310,13 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "SERP & Intent Acquisition Sub-Master",
         "domain": "SERP Acquisition",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Supervise 100% Window AC & Window AC Cleaning search query intent harvesting across 22 Oahu city pages and topical silos, click-through-rate title tag optimization, and 16-model Google Merchant Center XML feed syndication.",
+        "mandate": "Supervise 100% Window AC & Window AC Cleaning search query intent harvesting across 22 Oahu city pages and topical silos, click-through-rate title tag optimization, and 16-model Google Merchant Center + 142-review Product Reviews XML feed syndication.",
         "token_efficiency_policy": "Zero background polling loops. Invoked strictly on-demand by client CLI or Dev OS UI. Emits compact JSON summaries (< 400 bytes).",
         "oahu_grounding": "Oahu search intent harvesting (Honolulu, Ewa Beach, Kailua, Waipahu, Kapolei), localized $0 Free In-Home Estimate price anchoring, and Waipahu Warehouse Direct SERP trust badges.",
         "inputs": [
             "Google Search Console query logs",
             "Next.js page metadata across 118 canonical routes",
-            "Google Merchant XML feed (16 LG & GE models)"
+            "Google Merchant XML feed (16 SKUs) & Product Reviews XML feed (142 reviews)"
         ],
         "execution_steps": [
             {
@@ -328,14 +328,14 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "CTR Title Tag Optimization",
-                "description": "Trigger agent_ctr_title_craftsman to enforce click-magnetic title patterns with phone hotline and $0 Estimate hooks across all 22 city pages and topical silos.",
-                "verification": "22 city pages enforce ${city} Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111."
+                "description": "Trigger agent_ctr_title_craftsman to enforce front-loaded (<60 char) click-magnetic title patterns with $395+ and $0 Install/Estimate hooks across all 22 city pages and topical silos.",
+                "verification": "22 city pages enforce ${city} Window ACs ($395+) • $0 Install, Clean & Repair."
             },
             {
                 "step": 3,
-                "title": "16-Model Merchant Feed Audit",
-                "description": "Trigger agent_merchant_feed_sentinel to validate XML feed and Product rich snippet schemas (including GE AJCQ12AXXWA R-32 inverter).",
-                "verification": "16 LG & GE models syndicating cleanly with validFrom anchors."
+                "title": "16-Model Merchant & 142-Review Feed Audit",
+                "description": "Trigger agent_merchant_feed_sentinel to validate Merchant XML (/api/google-feed), Product Reviews XML (/product-reviews-feed.xml), <g:sale_price>, and 8-SKU $45 rebate lock.",
+                "verification": "16 LG & GE models and 142 verified reviews syndicating cleanly."
             }
         ],
         "outputs": [
@@ -351,7 +351,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Frictionless Conversion Velocity Sub-Master",
         "domain": "Conversion",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Enforce frictionless checkout flow, 1-tap mobile wallet availability (Apple Pay, Google Pay & US Cards — Stripe Link/BNPL disabled for 2.9% fee lock), Waipahu warehouse trust grounding, solid dropdown & horizontal pill navigation ergonomics, and sub-100ms Core Web Vitals.",
+        "mandate": "Enforce frictionless checkout flow, 1-tap mobile wallet availability (Apple Pay, Google Pay & US Cards — Stripe Link disabled for zero 5.99% BNPL fee leakage), Waipahu warehouse trust grounding, solid dropdown & horizontal pill navigation ergonomics, and sub-100ms Core Web Vitals.",
         "token_efficiency_policy": "On-demand client invocation. Evaluates checkout pipeline and Lighthouse web vitals metrics in < 10ms memory audits.",
         "oahu_grounding": "Oahu customer trust defense: eliminates mainland shipping anxiety via Waipahu warehouse pickup proof, 1-year local warranty, Insured Oahu Cooling Specialists • Est. 2005 badges, and transparent 4.712% GET tax.",
         "inputs": [
@@ -363,9 +363,9 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "execution_steps": [
             {
                 "step": 1,
-                "title": "Mobile Wallet & CRM Fresh Session Check",
-                "description": "Trigger agent_mobile_checkout_sentinel to confirm Apple Pay, Google Pay, and US Cards are active (with Link/BNPL disabled for 2.9% fee lock) on storefront checkout and CRM multi-stage invoices.",
-                "verification": "Apple Pay, Google Pay & Card active; stale CRM sessions auto-regenerated on balance change."
+                "title": "Mobile Wallet & CRM Card-Lock Session Check",
+                "description": "Trigger agent_mobile_checkout_sentinel to confirm payment_method_types=['card'] enables Apple Pay, Google Pay, and US Cards (while blocking Link/BNPL 5.99% fee traps) on both storefront checkout and CRM multi-stage invoices.",
+                "verification": "Card/wallet 2.9% fee lock active; stale CRM sessions auto-regenerated on balance change."
             },
             {
                 "step": 2,
@@ -681,51 +681,51 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         ],
         "outputs": [
             "Security status (ARMORED)",
-            "Admin Command Deck isolation status",
-            "Authentication gate status"
+            "Email Fortress & anti-harvester status",
+            "Admin Command Deck isolation status"
         ],
-        "contingency_protocol": "Immediately revoke compromised session tokens and strip any internal administrative links from storefront templates."
+        "contingency_protocol": "Immediately revoke compromised session tokens, rotate master keys, and strip any raw mailto: or internal admin links from storefront templates."
     },
     "agent_commit_sentinel": {
         "id": "agent_commit_sentinel",
         "code": "SOP-SEC-02",
-        "title": "Git Pre-Push Commit Sentinel",
+        "title": "Git & Public File Secret/Email Sentinel",
         "domain": "Security",
         "supervisor": "submaster_security_compliance",
-        "mandate": "Prevent credential leakage, API secrets, and unvetted code from reaching remote or public git repositories.",
-        "token_efficiency_policy": "Executes pre-push script check; consumes 0 tokens by performing regex pattern analysis locally.",
-        "oahu_grounding": "Protects proprietary Oahu customer phone numbers, addresses, and Stripe payment keys from repository exposure.",
+        "mandate": "Prevent credential leakage, fallback secrets, API keys, and private executive/developer email addresses from reaching public bundles, public assets, or git repositories.",
+        "token_efficiency_policy": "Executes scripts/scan-secrets.ps1 and scripts/security-email-audit.py locally; consumes 0 LLM tokens.",
+        "oahu_grounding": "Protects proprietary Oahu customer PII, private CEO/developer emails, and Stripe live keys across all 1,287+ project files.",
         "inputs": [
-            "Git commit history (last 10 commits)",
-            "Staged git diffs",
-            "scan-secrets.ps1 patterns"
+            "Git tracked files & history",
+            "apps/web/public/* & SSR client source",
+            "scan-secrets.ps1 & security-email-audit.py"
         ],
         "execution_steps": [
             {
                 "step": 1,
-                "title": "Recent Commits Inspection",
-                "description": "Scan recent commits for high-entropy strings, private keys, and API tokens.",
-                "verification": "Zero leaked secrets detected."
+                "title": "Every-File Secret & Fallback Scan",
+                "description": "Scan git HEAD, recent commits, and submodule files for API tokens, private keys, and hardcoded fallback passwords.",
+                "verification": "Zero leaked secrets or hardcoded fallbacks detected."
             },
             {
                 "step": 2,
-                "title": "Environment File Audit",
-                "description": "Verify all .env files and local secrets are strictly included in .gitignore.",
-                "verification": ".env files ignored."
+                "title": "Public Asset & Private Email Audit",
+                "description": "Verify apps/web/public/ contains zero sensitive files/emails and apps/web/ contains zero private CEO/dev email addresses.",
+                "verification": "0 private emails in storefront code; .env files chmod 600 & gitignored."
             },
             {
                 "step": 3,
-                "title": "Pre-Push Validation",
-                "description": "Run scripts/scan-secrets.ps1 to verify full working tree compliance.",
-                "verification": "Scanner returns exit code 0."
+                "title": "Automated Security Sweep Gate",
+                "description": "Run scripts/scan-secrets.ps1 and scripts/security-email-audit.py before push.",
+                "verification": "Both scanners return exit code 0."
             }
         ],
         "outputs": [
             "Commit audit grade (SECURED)",
             "Leaked secrets count (0)",
-            "Ignored env file verification"
+            "Public email exposure count (0)"
         ],
-        "contingency_protocol": "Block git push immediately if a secret pattern matches; rewrite history or purge credentials before allowing push."
+        "contingency_protocol": "Block git push immediately if a secret or private email pattern matches in public paths; rotate credentials and purge before push."
     },
     "agent_compliance_auditor": {
         "id": "agent_compliance_auditor",
@@ -733,7 +733,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Regulatory & Audit Compliance Auditor",
         "domain": "Security",
         "supervisor": "submaster_security_compliance",
-        "mandate": "Verify audit trail immutability, customer PII masking, production admin email routing to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC, staging CEO Email Shield, and Hawaii business compliance.",
+        "mandate": "Verify audit trail immutability, customer PII masking, production admin email routing to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) on BCC, staging CEO Email Shield, and Hawaii business compliance.",
         "token_efficiency_policy": "Runs single SQL aggregation query on dev_os_audit_log and inspects email routing config; completes in < 3ms.",
         "oahu_grounding": "Hawaii business standards (Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005), floor drop-cloth mandate, and CEO email routing.",
         "inputs": [
@@ -751,7 +751,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "CEO Email Routing & Staging Shield Check",
-                "description": "Verify production notifications route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC, and non-production routes exclusively to DEV_BCC_EMAIL (Audit / Staging Shield).",
+                "description": "Verify production notifications route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit) on BCC, and non-production/test routes exclusively to DEV_BCC_EMAIL.",
                 "verification": "Email routing & staging shield verified."
             },
             {
@@ -914,8 +914,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "CRM Multi-Stage Invoice Guardrail Check",
-                "description": "Verify CRM invoices track depositPaidCents vs balanceDueCents and create a fresh Stripe Checkout Session whenever payable balance changes.",
-                "verification": "Stale Stripe session reuse prevented; dynamic payment methods enabled."
+                "description": "Verify CRM invoices track depositPaidCents vs balanceDueCents and create a fresh Stripe Checkout Session (payment_method_types=['card']) whenever payable balance changes.",
+                "verification": "Stale Stripe session reuse prevented; 2.9% card/wallet fee lock enabled."
             },
             {
                 "step": 3,
@@ -1008,8 +1008,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             },
             {
                 "step": 3,
-                "title": "Robots & Anti-Crawling Audit",
-                "description": "Verify robots.ts disallows /dev-os, /admin, and internal APIs while allowing all 118 public canonical routes.",
+                "title": "Robots, Query Consolidation & AI Discovery Audit",
+                "description": "Verify robots.txt disallows /dev-os, /admin, and /*?*_rsc=* while keeping query filters crawlable for X-Robots-Tag: noindex, follow consolidation, and confirm /llms.txt & /api/indexnow are active.",
                 "verification": "Dev OS & /admin strictly protected; 118 public pages indexed."
             }
         ],
@@ -1191,7 +1191,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Structured Data Schema & Dynamic SERP Enhancer",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas (Product, HVACBusiness, LocalBusiness, FAQPage, AggregateRating 4.9★ across 142 reviews) across all 118 canonical routes.",
+        "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas (Product strictly on 16 PDPs, CollectionPage+ItemList on category guides, HVACBusiness, Service, FAQPage with 100% visible DOM parity, AggregateRating 4.9★ across 142 reviews) across all 118 canonical routes.",
         "token_efficiency_policy": "Deterministic schema generation using static templates; executes in < 2ms with zero runtime LLM overhead.",
         "oahu_grounding": "Embeds Waipahu warehouse coordinates, Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005 trust grounding, and GET tax compliance.",
         "inputs": [
@@ -1202,8 +1202,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "execution_steps": [
             {
                 "step": 1,
-                "title": "Schema Integrity Audit",
-                "description": "Validate JSON-LD schemas (Product, HVACBusiness, LocalBusiness, FAQPage) for zero schema.org errors and zero legacy non-window AC services.",
+                "title": "Schema Integrity & Non-PDP Clone Audit",
+                "description": "Validate JSON-LD schemas across all 118 routes, confirming 0 Product schema clones on non-PDP pages and 100% visible FAQPage question parity.",
                 "verification": "100% valid schema markup across all 118 routes."
             },
             {
@@ -1273,7 +1273,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "CRM Dispatch & Technician Queue Agent",
         "domain": "Operations",
         "supervisor": "submaster_crm_operations",
-        "mandate": "Manage incoming Window AC service requests, technician dispatch queues, Waipahu warehouse pickup staging, and By-Appointment-First customer contact with CEO_NOTIFICATION_EMAIL (Primary) primary notifications.",
+        "mandate": "Manage incoming Window AC service requests, technician dispatch queues, Waipahu warehouse pickup staging, and By-Appointment-First customer contact with CEO_NOTIFICATION_EMAIL (Primary) + DEV_BCC_EMAIL (Audit) notifications.",
         "token_efficiency_policy": "Direct SQLAlchemy query on leads table with status index; execution time < 5ms.",
         "oahu_grounding": "Oahu-wide technician dispatch covering Honolulu, Leeward, Central, and Windward zones from Waipahu headquarters.",
         "inputs": [
@@ -1297,7 +1297,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 3,
                 "title": "Waipahu Warehouse Pickup & Email Audit",
-                "description": "Track customer pickup orders at Waipahu warehouse (94-150 Leoleo St #203) and confirm dispatch alerts route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC.",
+                "description": "Track customer pickup orders at Waipahu warehouse (94-150 Leoleo St #203) and confirm dispatch alerts route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL on BCC.",
                 "verification": "Same-day pickup staging and email routing maintained."
             }
         ],
@@ -1605,13 +1605,13 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 1,
                 "title": "City Template Title Audit",
-                "description": "Verify all 22 city pages format title as ${city} Window AC Sales, Installation & Cleaning | $0 Estimate | (808) 488-1111.",
-                "verification": "All 22 city templates match Window AC conversion title standard."
+                "description": "Verify all 22 city pages format front-loaded (<60 char) title as ${city} Window ACs ($395+) • $0 Install, Clean & Repair.",
+                "verification": "All 22 city templates match Window AC front-loaded CTR standard."
             },
             {
                 "step": 2,
-                "title": "Canonical Link & Legacy Purge Integrity",
-                "description": "Verify zero root canonical override on subpages and zero mini-split/ductless terms in any title or meta description.",
+                "title": "Canonical Link, Double-Suffix & Legacy Purge",
+                "description": "Verify zero root canonical override, zero double brand suffixes, and zero mini-split/ductless terms across all 118 canonical routes.",
                 "verification": "118 canonical routes 100% Window AC aligned."
             }
         ],
@@ -1627,25 +1627,26 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Google Merchant Feed Sentinel",
         "domain": "SERP Acquisition",
         "supervisor": "submaster_serp_acquisition",
-        "mandate": "Audit Google Merchant Center XML feed and Product JSON-LD schema for all 16 LG & GE Window AC models (including GE AJCQ12AXXWA R-32 inverter), verifying validFrom, priceValidUntil, and aggregateRating deduplication.",
+        "mandate": "Audit Google Merchant Center XML feed (/api/google-feed), Product Reviews XML feed (/product-reviews-feed.xml), and Product JSON-LD schema for all 16 LG & GE Window AC models (including GE AJCQ12AXXWA R-32 inverter), verifying <g:sale_price>, 8-SKU $45 rebate lock, and aggregateRating deduplication.",
         "token_efficiency_policy": "Sub-millisecond XML/JSON schema inspection. Zero external calls.",
-        "oahu_grounding": "Ensures all 16 Waipahu warehouse window & wall-sleeve AC models display clean 4.9-star rich snippets and transparent Oahu pricing ($395–$1,200) on Google Shopping.",
+        "oahu_grounding": "Ensures all 16 Waipahu warehouse window & wall-sleeve AC models and 142 verified reviews display clean 4.9-star rich snippets and transparent Oahu pricing ($395–$1,200) on Google Shopping.",
         "inputs": [
             "apps/web/app/api/google-feed/route.ts",
+            "apps/web/app/api/google-reviews-feed/route.ts",
             "apps/web/app/shop/[slug]/layout.tsx",
             "products_seed.json"
         ],
         "execution_steps": [
             {
                 "step": 1,
-                "title": "16-Model Merchant XML Validation",
-                "description": "Verify XML feed renders valid RSS 2.0 with g:price, g:availability, and updated GE AJCQ12AXXWA SKU.",
-                "verification": "16 LG & GE products syndicating to Google Merchant Center."
+                "title": "16-Model Merchant & 142-Review XML Validation",
+                "description": "Verify Merchant XML (16 SKUs, dynamic <g:sale_price>, 8-SKU $45 rebate lock) and Product Reviews XML (142 reviews) render valid feeds.",
+                "verification": "16 LG & GE products and 142 reviews syndicating cleanly."
             },
             {
                 "step": 2,
                 "title": "Schema Deduplication Audit",
-                "description": "Verify zero duplicate aggregateRating blocks across city and shop layouts.",
+                "description": "Verify zero duplicate aggregateRating blocks and 0 non-PDP Product schema clones across all 118 routes.",
                 "verification": "Clean single aggregateRating per product/service."
             }
         ],
@@ -1661,20 +1662,20 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Mobile Checkout Sentinel",
         "domain": "Conversion",
         "supervisor": "submaster_conversion_velocity",
-        "mandate": "Validate 1-tap mobile wallet availability (Apple Pay, Google Pay & US Cards — Link/BNPL disabled for 2.9% fee lock) across storefront checkout and CRM multi-stage invoice checkout sessions.",
+        "mandate": "Validate 1-tap mobile wallet availability (Apple Pay, Google Pay & US Cards — Stripe Link disabled for zero 5.99% BNPL fee leakage) across storefront checkout and CRM multi-stage invoice checkout sessions.",
         "token_efficiency_policy": "In-memory inspection of Stripe checkout session creation parameters; 0Hz idle cost.",
         "oahu_grounding": "Enables Oahu mobile shoppers on LTE/5G to complete unit purchases or pay invoice deposits/balances in under 15 seconds without typing credit cards manually.",
         "inputs": [
             "apps/web/app/create-checkout-session/route.ts",
-            "apps/api/domain/payments.py",
+            "apps/web/app/api/checkout/route.ts",
             "ahac-crm invoice checkout route"
         ],
         "execution_steps": [
             {
                 "step": 1,
-                "title": "Card & Mobile Wallet Fee-Lock Audit",
-                "description": "Verify payment_method_types=['card'] on storefront so Apple Pay, Google Pay, and US Cards render automatically while blocking Stripe Link/BNPL 5.99% fees.",
-                "verification": "Apple Pay, Google Pay & US Cards active; Link/BNPL fee leakage blocked."
+                "title": "Card/Wallet Lock & BNPL Guard Audit",
+                "description": "Verify payment_method_types=['card'] enables Apple Pay, Google Pay, and US Cards while blocking Link/BNPL 5.99% fee traps across Storefront & CRM.",
+                "verification": "2.9% + $0.30 domestic card/wallet guard verified across storefront and CRM."
             },
             {
                 "step": 2,
@@ -1687,7 +1688,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             "Mobile checkout status (MOBILE_WALLETS_ARMORED)",
             "Supported wallets (Apple Pay, Google Pay, US Cards)"
         ],
-        "contingency_protocol": "Restore dynamic payment method configurations immediately upon restriction detection."
+        "contingency_protocol": "Restore payment_method_types=['card'] and wallet configurations immediately upon drift detection."
     },
     "agent_trust_authority_grounder": {
         "id": "agent_trust_authority_grounder",

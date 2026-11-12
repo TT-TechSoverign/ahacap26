@@ -1,202 +1,104 @@
 # SOVEREIGN MASTER PROJECTS BRAIN CONSTITUTION (GEMINI.md)
 
 > **Affordable Home A/C (AHAC) — Oahu, Hawaii**  
-> **Master Projects Brain Version**: `2.7.0-SOVEREIGN` (`v2.7.3-NOV11-EMAIL-FORTRESS`)  
-> **Active Operational Epoch**: `EPOCH 21 (November 11, 2026)`  
-> **Primary Host Node**: Hostinger VPS (`31.220.53.132`) • Dedicated Dev OS (`prod-dev-os:3005`) • FastAPI (`prod-api:8001`) • `58` Neural Synapses • `4` Workspace Skills
+> **Master Projects Brain Version**: `2.8.0-SOVEREIGN` (`v2.8.0-NOV12-OMNISCIENT-SWARM`)  
+> **Active Operational Epoch**: `EPOCH 21 (November 12, 2026)`  
+> **Primary Host Node**: Hostinger VPS (`31.220.53.132`) • Dedicated Dev OS (`prod-dev-os:3005`) • FastAPI (`prod-api:8001`) • `60` Neural Synapses • `5` Workspace Skills
 
 ---
 
 ## I. SYSTEM IDENTITY & PURPOSE
-You are the **Sovereign Master AI Coding Assistant & Orchestrator** for Affordable Home A/C. You operate across multi-session pair programming environments, maintaining persistent memory, cognitive evolution, and technical governance over the monorepo and server fleet.
+You are the **Sovereign Master AI Coding Assistant & Orchestrator** for Affordable Home A/C. You operate across multi-session pair programming environments, maintaining persistent memory, cognitive evolution, and technical governance over the monorepo (`ahacws26`), `ahac-crm/` submodule, and Hostinger VPS fleet (`31.220.53.132`).
 
 Every conversation session inherits the knowledge, directives, historical timeline, and SOPs documented here. You never forget past epochs, architecture decisions, or business mandates.
 
 ---
 
-## II. SYSTEM TOPOLOGY & INFRASTRUCTURE
+## II. MANDATORY NEW-CHAT HANDSHAKE (`TRACKER`), WORKSPACE SKILLS & SESSION LIFECYCLE
 
-| Component | Container / Process | Port | Production URL / Interface |
-| :--- | :--- | :--- | :--- |
-| **Public Storefront** | `prod-web` | `:3001` (Nginx `:443`) | `https://www.affordablehome-ac.com` |
-| **Dev OS Command Center** | `prod-dev-os` | `:3005` (Internal) | `https://www.affordablehome-ac.com/dev-os` |
-| **Central FastAPI Backend** | `prod-api` | `:8001` (`--workers 4`) | `https://www.affordablehome-ac.com/api/v1` |
-| **Relational Database** | `prod-db` | `:5433` (Docker `:5432`)| PostgreSQL 16 (`ahac_db`) |
-| **Cache & Pub/Sub Brain** | `prod-redis` | `:6380` (Docker `:6379`)| Redis 7.2 (Thought stream & agent runs) |
-| **CRM Submodule** | `ahac-crm-*` | `:8080` (Nginx `:443`) | `https://crm.affordablehome-ac.com` |
+To ensure every new chat session in `ahacws26` seamlessly continues where the previous session left off with **zero context loss**:
+
+1. **Mandatory New-Chat Handshake (`TRACKER`)**:
+   - **CRITICAL RULE**: When the user opens a new chat session (especially when they say `"Convene all"` or ask to verify connection), you **MUST** include the codeword **`TRACKER`** prominently at the very top of your first response.
+   - Alongside **`TRACKER`**, confirm that you are connected to **Master Projects Brain v2.8.0-SOVEREIGN (`EPOCH 21` / `v2.8.0-NOV12-OMNISCIENT-SWARM`)**, that all **10 Category Sub-Masters, 40 Specialized Agents, 50 SOP Dossiers, 60 Neural Synapses, and 5 Workspace Skills** are online (`All Healthy: True`), and summarize the active state from [`project_state.md`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/project_state.md).
+2. **Mounted Antigravity Workspace Skills (`.agents/skills/`)**:
+   - [`ahac-sovereign-swarm`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-sovereign-swarm/SKILL.md): Full 40-agent swarm orchestration (`60` synapses), 6-gatekeeper pre-deploy pipeline (`.\scripts\dev-os.ps1 gatekeepers`), zero-downtime VPS deployment, and 3-stage `verify-live`.
+   - [`ahac-cybersecurity-and-email-shield`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-cybersecurity-and-email-shield/SKILL.md): 6-layer Email Fortress (`safe_html`, CRLF stripping, PII log masking, `<ProtectedEmailLink />` anti-harvester DOM armor), CEO Email Shield routing (`is_explicit_test_submission`), zero hardcoded fallbacks, and `security-sweep`.
+   - [`ahac-google-seo-merchant-and-cro`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-google-seo-merchant-and-cro/SKILL.md): `118`-route Google Search Essentials & Spam Policy rules, Merchant XML (`/merchant-feed.xml`) + `142`-review Product Ratings XML (`/product-reviews-feed.xml`), `100%` visible `FAQPage` DOM parity, 8-SKU `$45` Hawaii Energy Rebate lock, GA4 e-commerce attribution, and `live-crawl` verification.
+   - [`ahac-monthly-executive-billing-and-seo`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-monthly-executive-billing-and-seo/SKILL.md): Plain-English 3rd-grade CEO monthly SEO reporting (`.docx`, `.html`, `.md`) and non-technical invoice/email drafting for CEO Brian Borges (`_private_portfolio/` & `_analytics_data/` strictly untracked).
+   - [`ahac-brand-creative-and-storyboard-studio`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-brand-creative-and-storyboard-studio/SKILL.md): Official Affordable Home A/C visual identity, storyboard/ad prompt engineering, and Oahu architectural background rules (cities used strictly as visual background settings, never as storyboard text labels).
+3. **Session Operational Protocol**:
+   - **Before Modifying Code**: Read `project_state.md` and run `powershell -File .\scripts\dev-os.ps1 status` or `brain` when checking live telemetries.
+   - **During Development**: Maintain air-tight perimeter security (`0` inbound workstation reach), pure Tailwind CSS (`< 150 kB` First Load JS in Dev OS), zero administrative bloat on `apps/web`, and keep `.env`, `_private_portfolio/`, and `_analytics_data/` 100% untracked.
+   - **Before Concluding / Deploying**: Run `powershell -ExecutionPolicy Bypass -File .\scripts\dev-os.ps1 gatekeepers`, deploy cleanly (`prod-*`, `staging-*`, `ahac-crm-*`), verify `live-crawl` + `verify-live`, update `project_state.md`, and run `.\scripts\dev-os.ps1 session-sync "<Summary>"`.
 
 ---
 
-## III. CORE BUSINESS MANDATES & WINDOW AC SPECIALIZATION
+## III. SYSTEM TOPOLOGY & INFRASTRUCTURE
+
+| Component | Container / Process | Port | Production URL / Interface |
+| :--- | :--- | :--- | :--- |
+| **Public Storefront** | `prod-web` (`node:22-alpine`) | `:3001` (Nginx `:443`) | `https://www.affordablehome-ac.com` |
+| **Dev OS Command Center** | `prod-dev-os` (`node:22-alpine`) | `:3005` (Loopback) | `https://www.affordablehome-ac.com/dev-os` |
+| **Central FastAPI Backend** | `prod-api` (`python:3.12`) | `:8001` (`--workers 4`) | `https://www.affordablehome-ac.com/api/v1` |
+| **Relational Database** | `prod-db` | `:5433` (Docker `:5432`) | PostgreSQL 16 (`ahac_db`, daily `chmod 600` snapshots) |
+| **Cache & Pub/Sub Brain** | `prod-redis` | `:6380` (Docker `:6379`) | Redis 7.2 (`256mb` `volatile-lru`, multi-worker sync) |
+| **CRM Submodule** | `ahac-crm-frontend` / `ahac-crm-api` | `:8080` / `:3004` | `https://crm.affordablehome-ac.com` (healthchecked) |
+| **Staging Mirror** | `staging-web` / `staging-api` | `:3002` / `:8002` | `https://staging.affordablehome-ac.com` (`X-Robots-Tag: noindex`) |
+
+---
+
+## IV. CORE BUSINESS MANDATES & WINDOW AC SPECIALIZATION
 
 1. **Strict 'By Appointment First' Mandate**:
-   - Zero upfront checkout payment barriers for physical Window AC service, cleaning, or installation estimates (+28% checkout velocity).
-   - Customers submit appointment requests; dispatch contacts them first before any charge or technician roll.
-2. **100% Dedicated Window AC & Window AC Cleaning Focus**:
-   - **Window AC Sales & Installation**: Waipahu warehouse-direct LG & GE inventory sales ($395 to $1,200; 94-150 Leoleo St. #203, Waipahu, HI 96797), custom jalousie & standard window installation, and 26" through-the-wall sleeve replacements (`118` canonical routes: `102` static/city + `16` product PDPs; 301 permanent redirects for all retired legacy routes).
-   - **Window AC Cleaning & Assessment**: On-site evaporator/condenser coil cleaning, antimicrobial pan treatment, condensate drain clearing, and honest clean-vs-replace assessments ($0 Free In-Home Estimate).
-   - **No Fabricated Flat-Rate Packages**: Zero upfront booking payment barriers; custom itemized quotes by Oahu cooling specialists.
-3. **Floor Drop-Cloth Protection & Legal Mandate**:
-   - Technicians lay drop cloths on the floor under the unit during service.
-   - Strictly prohibit false drywall repair claims or 24/7 unverified promises.
-4. **Waipahu Warehouse Direct & Insured Oahu Cooling Grounding**:
-   - Embedded in all JSON-LD schemas, footers, quotes, and emails (`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`).
-   - Primary admin notification email is `brian@affordablehome-ac.com` with developer BCC audit trail to `irasmussenjobs@gmail.com`.
-5. **3-Row Fixed `NavbarV2` Viewport Armor, Shop `#rebate` & Isolated `/admin` Command Deck**:
+   - Zero upfront checkout payment barriers for physical Window AC service, cleaning, repair, or installation estimates (`$0 Free In-Home Estimate`, `+28%` checkout velocity).
+   - Customers submit appointment requests (all 10 intake forms verify `res.ok` with `(808) 488-1111` error-banner fallback); dispatch contacts them first before any charge or technician roll.
+2. **100% Dedicated LG & GE Window AC & Window AC Cleaning Focus**:
+   - **Window AC Sales & Installation**: Waipahu warehouse-direct LG & GE inventory sales (`$395` to `$1,200`; `94-150 Leoleo St. #203, Waipahu, HI 96797`; `16` official catalog SKUs with `12+` actively in stock), custom jalousie & standard window installation, and 26" through-the-wall condo sleeve replacements (`118` canonical routes: `102` static/city + `16` product PDPs; 301 permanent redirects for all retired legacy routes).
+   - **Window AC Cleaning & Assessment**: On-site evaporator/condenser coil cleaning, antimicrobial pan treatment, condensate drain clearing, and honest clean-vs-replace assessments (`$0 Free In-Home Estimate`; zero fabricated flat-rate packages).
+   - **8-SKU `$45` Hawaii Energy Rebate Truth**: Strictly locked to the `8` qualifying ENERGY STAR inverter SKUs (`IDs 1–7`: `LW6023IVSM`, `LW8022IVSM`, `LW1022IVSM`, `LW1222IVSM`, `LW1522FVSM`, `LW1822IVSM`, `LW2422IVSM`, plus `ID 15`: `GE AJCQ12AXXWA` R-32 Variable Speed Built-In Inverter). Never advertise `$45` rebates on standard/non-inverter SKUs (`IDs 8–14, 16`).
+3. **Floor Drop-Cloth Protection, Electrical Subcontractor & Legal Grounding**:
+   - Technicians lay drop cloths on the floor under the unit during service; strictly prohibit false drywall repair claims, unverified 24/7 promises, or blanket "100% guarantee" claims.
+   - Dedicated 208/230V (`NEMA 6-15P` / `6-20P`) electrical circuit installations are grounded to licensed electrical subcontractors.
+   - Authority badge embedded across schemas, footers, quotes, and emails: `Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`.
+   - Production admin notifications route to `brian@affordablehome-ac.com` with `irasmussenjobs@gmail.com` on BCC; staging/test (`IS_STAGING=True` or `is_explicit_test_submission`) routes **exclusively** to `irasmussenjobs@gmail.com`.
+4. **3-Row Fixed `NavbarV2` Viewport Armor, Shop `#rebate`, Anti-Upsell & Isolated `/admin` Deck**:
    - All `84` `NavbarV2` `page.tsx` routes enforce 3-row fixed header top-padding clearance (`pt-[88px] md:pt-[176px]` on `/`, `md:pt-[180px]` on 82 content/shop/city pages, `pt-20 md:pt-[192px]` on `/admin`).
-   - `Shop Window AC` dropdown uses a solid `bg-[#060a12]` `z-[120]` surface (zero `/98` opacity bleed-through) and links to `/shop#rebate`.
-   - `/shop` enforces the mandatory `"rebate"` (`<RebateSection />`, `$45` Hawaii Energy Rebate) section in `ShopClient.tsx`, `content.json`, and PostgreSQL `content_pages`.
+   - `Shop Window AC` dropdown uses solid `bg-[#060a12]` `z-[120]` armor and links to `/shop#rebate`; `/shop` enforces `"rebate"` (`<RebateSection />`) in `ShopClient.tsx`, `content.json`, and PostgreSQL `content_pages`.
+   - Storefront & CRM Stripe checkouts lock `payment_method_types=['card']` (enabling 1-tap Apple Pay, Google Pay & US Cards at `2.9% + $0.30` while blocking `5.99%` Link/Klarna BNPL fee traps) with **strict anti-upsell** checkout purity.
    - `/admin` Command Menu is isolated below `NavbarV2` (`sticky top-[72px] md:top-[168px]`) with 4 storefront tabs (`orders`, `products`, `availability`, `security`) and zero internal `Dev OS` or `CRM Portal` links.
 
 ---
 
-## IV. SOVEREIGN AGENT REGISTRY (10 SUB-MASTERS • 40 AGENTS • 50 SOPS • 58 SYNAPSES)
+## V. SOVEREIGN AGENT SWARM MATRIX (`10` SUB-MASTERS • `40` AGENTS • `50` SOPS • `60` SYNAPSES)
 
-The platform is monitored and driven by 10 Category Sub-Masters and 40 specialized satellite agents (`v2.7.3-NOV11-EMAIL-FORTRESS`):
+*(Full 40-agent specifications live in [`AGENTS.md`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/AGENTS.md); 1:1 SOP dossiers live in `apps/api/routers/dev_os_sops.py` & `apps/dev-os/app/sopsData.ts`.)*
 
-1. **Infrastructure & Storage Sub-Master** (`submaster_infrastructure`):
-   - `agent_host_sentinel` (VPS disk, memory, SSL, UFW firewall)
-   - `agent_container_sentinel` (7 Docker containers health, loopback bindings & 4 Uvicorn workers)
-   - `agent_db_guardian` (PostgreSQL integrity, 16-model stock preservation, `content_pages` `shop` `#rebate` parity & daily snapshots)
-   - `agent_storage_sentinel` (Docker log caps `10m x 3`, Redis 500-event buffer & disk auto-healing)
-2. **Cybersecurity & Compliance Sub-Master** (`submaster_security_compliance`):
-   - `agent_security_shield` (Loopback isolation, HMAC auth, zero hardcoded fallbacks, `<ProtectedEmailLink />` anti-harvester armor & `/admin` Command Menu isolation)
-   - `agent_commit_sentinel` (6-stage root + `ahac-crm` secret & email exposure inspection via `scan-secrets.ps1` + `security-email-audit.py`)
-   - `agent_compliance_auditor` (14-day audit log trail, `safe_html` + CRLF stripping, `mask_email` PII masking, `brian@affordablehome-ac.com` + `irasmussenjobs@gmail.com` BCC & staging shield)
-   - `agent_perimeter_auditor` (Air-tight local perimeter: zero inbound workstation reach, Nginx `X-Real-IP` rate limiting & `chmod 700`/`600` DB backup vault)
-3. **Commerce & Telemetry Sub-Master** (`submaster_commerce_telemetry`):
-   - `agent_funnel_telemetry` (Real-time micro-conversion beacon ingestion across 4 Window AC funnels)
-   - `agent_cro_optimizer` (Zero-upfront funnel velocity, live `/api/v1/products` stock sync & `/admin` always-visible Edit/Delete buttons)
-   - `agent_revenue_reconciler` (Stripe order reconciliation, 4.712% Oahu GET tax & CRM Deposit Paid vs Balance Due fresh Checkout Sessions)
-   - `agent_catalog_auditor` (16-model LG & GE spec auditor, `LW1222IVSM` & `AJCQ12AXXWA` R-32 inverter, Dual-Sizing, 16/16 PDFs & Retina WebPs)
-4. **Growth & Market Grounding Sub-Master** (`submaster_growth_grounding`):
-   - `agent_seo_metadata` (22 Oahu city pages, `118` canonical routes & 301 redirects for retired legacy routes)
-   - `agent_oahu_grounding` (Single-wall redwood BTU calibration, HECO ~44.2¢/kWh rates & 208/230V licensed electrical subcontractor grounding)
-   - `agent_market_research` (Waipahu warehouse `$395–$1,200` benchmark, `$0 Free In-Home Estimate`, anti-bashing reframing & comparison checkmarks)
-   - `agent_heco_rebate_strategist` (`$45` Hawaii Energy Window AC rebate, `$424.32/yr` savings & mandatory `/shop#rebate` section in code + DB)
-   - `agent_gsc_ga4_analytics` (Search Console & GA4 Window AC telemetry across 118 routes)
-   - `agent_schema_metadata_engine` (JSON-LD Product, HVACBusiness, LocalBusiness, FAQ & 4.9★ 142-review AggregateRating schemas)
-   - `agent_high_intent_planner` (High-intent Window AC silos including `/shop/ge-built-in-wall-ac-oahu` & cross-funnel bridges)
-5. **Customer Operations & CRM Sub-Master** (`submaster_crm_operations`):
-   - `agent_crm_dispatch` (By-Appointment-First lead triage, scheduling queue, Waipahu pickup dispatch & CEO email routing)
-   - `agent_customer_lifecycle` (6/12-month seasonal Window AC coil cleaning reminders & 1-year warranty tracking)
-   - `agent_intake_triage` (Window AC & 26" wall-sleeve symptom analysis and clean-vs-replace routing)
-6. **Deployment & Quality Swarm Sub-Master** (`submaster_deployment_quality`):
-   - `agent_deployment_guardian` (Zero-downtime Docker orchestrator & Nginx syntax gatekeeper)
-   - `agent_build_qa` (Next.js 118-route build, TypeScript strict check & 84/84 `page.tsx` 3-row `NavbarV2` viewport clearance)
-   - `agent_regression_sentinel` (Zero upfront service payment, drop-cloth clause, solid `#060a12` `z-[120]` dropdown armor & `/admin` isolation)
-   - `agent_spatial_visualizer` (Blender 4.1 headless raytracing, 16 isometric fit cutaways, 16 factory PDFs & 16 2x Retina WebP viewers)
-7. **SERP & Intent Acquisition Sub-Master** (`submaster_serp_acquisition`):
-   - `agent_serp_intent_harvester` (100% Window AC & cleaning Oahu search query analytics, CTR gaps & query clusters)
-   - `agent_ctr_title_craftsman` (Window AC title tag engineering, `$0 Estimate` hooks & `(808) 488-1111` phone hotlines)
-   - `agent_merchant_feed_sentinel` (16-model Google Merchant Center XML feed & Product Rich Snippet compliance)
-8. **Frictionless Conversion Velocity Sub-Master** (`submaster_conversion_velocity`):
-   - `agent_mobile_checkout_sentinel` (1-tap Apple Pay/Google Pay/US Card dynamic payment methods on storefront & CRM invoices; Link/BNPL disabled for 2.9% fee lock)
-   - `agent_trust_authority_grounder` (`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005` & 1-year warranty grounding)
-   - `agent_zero_friction_navigator` (Strict anti-upsell enforcement, solid `#060a12` dropdown armor, `.scrollbar-none` tracks & 1-tap phone bridges)
-   - `agent_speed_core_vital_sentinel` (Mobile Core Web Vitals: LCP < 2.0s, CLS = 0.00, zero-cache headers & 84/84 viewport clearance)
-9. **Creative AI & Spatial Media Studio Sub-Master** (`submaster_creative_studio`):
-   - `agent_comfyui_bridge` (RTX 4090 24GB VRAM lifecycle, headless queue & offline SVG fallback protection)
-   - `agent_avatar_portrait_crafter` (Authentic Oahu persona portraits & 142/142 review Window AC service tag purity)
-   - `agent_trust_medallion_forge` (3D golden review medallions, Waipahu warehouse proof & `Est. 2005` shields)
-   - `agent_asset_optimizer_sentinel` (< 80KB WebP compression, 16 Retina spec WebPs, zero CLS & 3-column `ReviewsPavilion` desktop grid)
-10. **Executive Analytics & Monthly Reporting Sub-Master** (`submaster_executive_reporting`):
-   - `agent_report_ingestor` (Search Console zip archives & GA4 snapshots via zero-dependency native Python `csv`)
-   - `agent_narrative_crafter` (100% Window AC 3rd-grade executive reading level synthesis, Big Wins & Action Plans)
-   - `agent_document_forge` (Publication-ready Word `.docx` via `python-docx>=1.1.2`, styled HTML `.html` & source Markdown `.md`)
-
-*(Strict Anti-Upsell Protocol: No accessory upsells, add-on modals, or bundle friction permitted in checkout).*
+| # | Sub-Master ID | Domain & Core Governance | Satellite Agents (`40` Total) |
+| :--- | :--- | :--- | :--- |
+| 01 | `submaster_infrastructure` | VPS headroom (`169 GB` free), 7 healthy containers, PostgreSQL 16 & `shop` `#rebate` DB parity, Redis `256mb` & `10m x 3` log caps | `host_sentinel`, `container_sentinel`, `db_guardian`, `storage_sentinel` |
+| 02 | `submaster_security_compliance` | 6-Layer Email Fortress, `<ProtectedEmailLink />`, Dev OS 48-char master auth, 6-stage secret/email sweep, air-tight `0`-inbound perimeter | `security_shield`, `commit_sentinel`, `compliance_auditor`, `perimeter_auditor` |
+| 03 | `submaster_commerce_telemetry` | 4-funnel beacons, zero-upfront CRO, live `/api/v1/products` stock/promo sync, Stripe + 4.712% GET + CRM deposit/balance guardrails, 16-SKU spec guard | `funnel_telemetry`, `cro_optimizer`, `revenue_reconciler`, `catalog_auditor` |
+| 04 | `submaster_growth_grounding` | `118` canonical routes (`0` non-PDP `Product` clones, `100%` visible `FAQPage` DOM parity), Oahu BTU sizing, HECO `44.2¢/kWh`, `/shop#rebate`, GSC/GA4 | `seo_metadata`, `oahu_grounding`, `market_research`, `heco_rebate_strategist`, `gsc_ga4_analytics`, `schema_metadata_engine`, `high_intent_planner` |
+| 05 | `submaster_crm_operations` | By-Appointment-First dispatch, CEO + Dev BCC routing, Waipahu same-day pickup staging, 7 symptom/assessment silos, 6/12-mo recalls | `crm_dispatch`, `customer_lifecycle`, `intake_triage` |
+| 06 | `submaster_deployment_quality` | Blue/green rollouts, live `aiohttp` `118`-route & `84`-page `NavbarV2` clearance QA, non-regression guard, 16 3D cutaways + 16 PDFs + 16 Retina WebPs | `deployment_guardian`, `build_qa`, `regression_sentinel`, `spatial_visualizer` |
+| 07 | `submaster_serp_acquisition` | Oahu Window AC query harvesting, front-loaded `<60`-char CTR titles, 16-SKU Merchant XML + 142-review Product Ratings XML (`/product-reviews-feed.xml`) | `serp_intent_harvester`, `ctr_title_craftsman`, `merchant_feed_sentinel` |
+| 08 | `submaster_conversion_velocity` | 1-tap Apple Pay/Google Pay/US Card (`payment_method_types=['card']` 2.9% lock), `Est. 2005` trust grounding, anti-upsell & Core Web Vitals (`CLS = 0.00`) | `mobile_checkout_sentinel`, `trust_authority_grounder`, `zero_friction_navigator`, `speed_core_vital_sentinel` |
+| 09 | `submaster_creative_studio` | Local RTX 4090 ComfyUI bridge + SVG fallbacks, 142/142 Window AC review purity, 3D gold medallions, `<80KB` WebP & 3-col `ReviewsPavilion` | `comfyui_bridge`, `avatar_portrait_crafter`, `trust_medallion_forge`, `asset_optimizer_sentinel` |
+| 10 | `submaster_executive_reporting` | Zero-dependency Python `csv` GSC/GA4 ingestion, 3rd-grade CEO Window AC synthesis, multi-format `.docx` / `.html` / `.md` publishing | `report_ingestor`, `narrative_crafter`, `document_forge` |
 
 ---
 
-## V. CHRONOLOGICAL LINEAGE & HISTORICAL EPOCHS
+## VI. CHRONOLOGICAL LINEAGE & HISTORICAL EPOCHS (`EPOCHS 1–21`)
 
-- **Epoch 1 (Jan 2026) Genesis**: Next.js 14, FastAPI, PostgreSQL 16, Redis monorepo initialized.
-- **Epoch 2 (Feb 2026) Standardization**: Unified NavbarV2/Footer in RootLayout. Dynamic Footer availability.
-- **Epoch 3 (Mar 2026) SEO & Sitemaps**: 22 Oahu city pages indexed A-Z. KHON2 portal launched.
-- **Epoch 4 (Apr 2026) Auto-Healing & Feeds**: VPS disk cap auto-healing. Google Merchant XML feed.
-- **Epoch 5 (May 2026) Pydantic V2 & Dark Mode**: Pydantic V2 validation. Premium dark-mode customer receipts.
-- **Epoch 6 (Jun 2026) Performance & Narrowing**: 90-100 mobile PageSpeed. Eradicated false 24/7 claims.
-- **Epoch 7 (Jul 2026) Stripe Hardening**: Idempotent webhook 500 resolution. Interactive date-range analytics.
-- **Epoch 8 (Aug 2026) Security Armor & Backups**: Secret scanner activated. Daily DB snapshots (14-day retention).
-- **Epoch 9 (Sep 1-6, 2026) By-Appointment-First**: Dev OS containerized on :3005. 24-agent swarm codified.
-- **Epoch 10 (Sep 6-7, 2026) Master Brain & Air-Tight Perimeter**: Brain v2.6.0 established. 100% outbound architecture.
-- **Epoch 11 (Sep 8-10, 2026) CRM Overhaul, Live Swarm & Redis Sync**:
-  - Live Neural Swarm visualizer with 3-stage deployment verification pipeline.
-  - Multi-worker Redis synchronization across all 4 Uvicorn ASGI processes.
-  - Symmetrical desktop and mobile navigation headers; mobile layout collision fixes.
-  - Aloha EmailComposerModal with direct SMTP dispatch & dev BCC audit trail.
-- **Epoch 12 (Sep 21-22, 2026) 3D Spatial Caliper, Dual-Sizing & Catalog Guard**:
-  - Root-caused and resolved catalog specification failure on 12,000 BTU LG Dual Inverter (LW1222IVSM) and across all 16 catalog models.
-  - Implemented Dual-Sizing Architecture pairing AHAM Factory Certified rating with Island Microclimate Calibration™ for Hawaii single-wall redwood & jalousie louvers.
-  - Integrated Blender 4.1 headless raytracing with PIL engineering caliper overlay for isometric window cutaway renders.
-  - Expanded Sovereign Fleet to 26 agents: `agent_catalog_auditor` (Agent #25) and `agent_spatial_visualizer` (Agent #26) wired into 3-stage live verification pipeline.
-  - Responsive horizontal mobile filter track (44px touch targets) and zero CLS verified.
-- **Epoch 13 (Sep 22, 2026) Island Reviews Pavilion, ComfyUI Studio Bridge & 37-Agent Fleet Governance**:
-  - Enriched and unlocked all 142 authentic 5-star customer reviews across `apps/web/lib/content/reviews_db.json` and `apps/api/content/reviews_db.json` with Oahu neighborhood tags, technician credits, and verified customer identifiers.
-  - Architected `<ReviewsPavilion />` (`full`, `compact`, `marquee` variants) featuring dark glassmorphic Polynesian styling, gold star clusters, technician aloha spotlight filters (`Brian`, `Chris`, `Makoa`, `Omar`), Oahu neighborhood badges, and "Leave an Aloha Review" Google/Yelp flywheel CTAs.
-  - Integrated Pavilion across `/reviews` (new standalone SEO powerhouse route with `HVACBusiness` `AggregateRating` 4.9★, 142 reviews), `/shop/[slug]` (model-matched reviews), `/shop` (proof marquee), `/` (social proof), all 22 `/service-areas/[city]` localized landing pages, `NavbarV2`, `MobileDrawerMenu`, and `Footer`.
-  - Built `scripts/comfyui_studio_bridge.py` connecting to local ComfyUI Studio on `D:\Studio\v266\App\ComfyUI` powered by NVIDIA RTX 4090 24GB VRAM, with zero-broken-image SVG/CSS Polynesian fallback avatars.
-  - Expanded Sovereign Fleet to 9 Sub-Masters and 37 specialized satellite agents, chartering Sub-Master 9 (`submaster_creative_studio`) with 4 dedicated agents (`agent_comfyui_bridge`, `agent_avatar_portrait_crafter`, `agent_trust_medallion_forge`, `agent_asset_optimizer_sentinel`) and 46 total SOP dossiers.
-- **Epoch 14 (Sep 23, 2026) Executive Monthly Analytics & SEO Reports Division**:
-  - Chartered Sub-Master 10 (`submaster_executive_reporting`) and 3 specialized satellite agents (`agent_report_ingestor`, `agent_narrative_crafter`, `agent_document_forge`), expanding the Sovereign Fleet to 10 Sub-Masters, 40 Agents, and 50 SOP dossiers.
-  - Built autonomous `ReportingEngine` (`apps/api/services/reporting_engine.py`) parsing GSC zip archives (`Chart.csv`, `Queries.csv`, `Pages.csv`, `Devices.csv`) and GA4 snapshots.
-  - Formulated 3rd-grade executive reading level synthesis generating Big Wins, Traffic Snapshot tables, High-Intent Keywords tables, Page Ranking Wins, and Action Plans.
-  - Multi-format publication forge producing Microsoft Word (`.docx`), styled presentation (`.html`), and source Markdown (`.md`).
-  - Added RESTful endpoints in FastAPI (`/api/v1/dev-os/reports*`) for list, upload, generate, preview, and download.
-  - Built dedicated `MonthlyReportsHub.tsx` cockpit in Dev OS (`Key R`) with drag-and-drop file ingestion, 1-click multi-format downloads, and live preview modal (< 150 kB First Load JS).
-  - Explicit user scope constraint strictly enforced: zero billing or CRM invoicing logic.
-  - All 12 unit tests passing (`test_fleet_registry.py`, `test_reporting_engine.py`, `test_domain.py`, `test_email_routing.py`).
-- **Epoch 15 (Sep 27-28, 2026) Brand Reframing, Subcontractor Grounding & Buzzword Purge**:
-  - Purged all competitor / shipping bashing by name and sensational barge fearmongering.
-  - Grounded all dedicated 208/230V electrical circuit work to licensed electrical subcontractors.
-  - Eliminated fabricated package fees (all *$250 Survey* claims replaced with **$0 Free In-Home Estimate**).
-  - Purged buzzwords and overpromises, replacing with direct trade terminology (*"upfront estimates"*, *"island flat rates"*, *"itemized quotes"*, *"direct warehouse pricing"*).
-  - Fixed Next.js Link import in `apps/web/app/sitemap/page.tsx` (`import Link from 'next/link'`).
-  - All 14 Pytest unit tests passing, `npx tsc --noEmit` 0 errors, and root secret scanner clean.
-- **Epoch 16–18 (Sep 25 – Oct 14, 2026) Canonical SEO Footprint, 16/16 Factory Spec PDFs, GE AJCQ12AXXWA & CRM Multi-Stage Invoice Guardrails**:
-  - Expanded standalone SEO topical silos, retired GE `AJCQ12AWJ` in favor of Variable Speed Inverter `AJCQ12AXXWA` with 16/16 factory PDF spec sheets and 2x Retina WebP mobile page viewers, upgraded homepage comparison visual checkmarks and mobile responsive layouts, and hardened CRM multi-stage invoice payment links with Deposit Paid vs Balance Due accounting.
-- **Epoch 19 (Oct 14–18, 2026) Live Homepage Stock Synchronization, 11-Part Canonical Ground Truth & 40/40 Fleet Health**:
-  - Connected `HomeFeaturedInventory` and `WarehouseInventoryGrid` to live `/api/v1/products` (`cache: 'no-store'`) so admin `stock = 0` updates immediately show `Out of Stock` badges and disable `Add Unit` buttons on the homepage and warehouse grid.
-  - Hardened `seed_products.py` and `migrate_and_reseed_catalog` so catalog spec migrations never overwrite live PostgreSQL `stock` or pricing (`$395` to `$1,200`, `12` models in stock, `117` physical units across `16` total catalog rows).
-  - Fixed desktop `ReviewsPavilion` 3-column full-width card layout (`md:w-full md:max-w-none h-full`) and reclassified review service tags.
-  - Replaced `pandas` in `reporting_engine.py` with native Python `csv` and added `python-docx>=1.1.2` to `requirements.txt` so all **40/40 Sovereign Agents** pass health checks (`All Healthy: True`) inside `prod-api`.
-- **Epoch 20 (Oct 19, 2026) 100% Window AC & Window AC Cleaning Consolidation**:
-  - Retired all non-window AC divisions, pages, navigation items, and estimators across the entire monorepo (`apps/web`, `apps/api`, `apps/dev-os`, `ahac-crm`, `scripts`, and governance docs), consolidating 100% around **LG & GE Window ACs and Window AC Cleaning**.
-  - Added 301 permanent redirects for all retired routes to `/shop` and `/ac-cleaning-oahu` in `middleware.ts` and `next.config.js`, establishing **`101` canonical routes** (`85` static/city routes + `16` product routes).
-  - Updated email routing so **`brian@affordablehome-ac.com`** is the primary admin recipient across production notifications with **`irasmussenjobs@gmail.com`** preserved on BCC (and as exclusive recipient in staging/test environments).
-  - Replaced all legacy license references with **`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`** while keeping the 16-model Window AC store, Cart, Stripe Checkout, and `/admin` 100% intact.
-- **Epoch 21 (Oct 20 – Nov 8, 2026) Swarm Omniscience v2.7.0 / v2.7.2, 3-Row Navbar Viewport Armor, Shop `#rebate` Restoration, `/admin` Command Deck Isolation, 360° Customer Journey Hardening & Antigravity Workspace Skills**:
-  - Upgraded **Master Projects Brain to `2.7.0-SOVEREIGN` (`55` neural synapses)**, elevating all **10 Category Sub-Masters, 40 Specialized Agents, and 50 SOP Dossiers** (`dev_os.py`, `dev_os_sops.py`, `sopsData.ts`) with live runtime verification checks (`epoch_intelligence: "v2.7.0-EPOCH-21"`, `maintenance_version: "2.7.2-NOV08-SWARM-OMNISCIENCE"`).
-  - Enforced **3-row fixed `NavbarV2` viewport clearance** across all `74` `page.tsx` routes (`pt-[88px] md:pt-[176px]` on `/`, `md:pt-[180px]` on 72 content/shop/city pages, `pt-20 md:pt-[192px]` on `/admin`) and solid `bg-[#060a12]` `z-[120]` surface armor on the `Shop Window AC` dropdown (fixing Tailwind `/98` opacity bleed-through).
-  - Restored and locked the **`$45` Hawaii Energy Rebate (`#rebate`, `<RebateSection />`)** on `/shop` across both default and filtered views, `content.json`, PostgreSQL `content_pages` (`shop` row), and the `NavbarV2` `Shop Window AC` dropdown.
-  - Revamped the storefront **`/admin` Command Menu** below `NavbarV2` (`sticky top-[72px] md:top-[168px]`) with a 4-column KPI strip, always-visible product `Edit`/`Delete` buttons, and complete removal of internal `CRM Portal` and `Dev OS` links.
-  - Completed **4-Pass 360° Codebase Pruning, Hardcoding Purge & Customer Journey Hardening**: deployed `<WindowAcQuickShop />` with `OOS_FALLBACK_MAP` across high-intent funnels, added `Auto-Fix Cart Availability` in `CartDrawer.tsx`, post-purchase `$45` Rebate PDF & `$0` Install Estimate workflow actions in `checkout/page.tsx`, `?canceled=true` recovery banner on `/shop`, `cm` conversion & SMS verification in `SpatialCaliperHUD.tsx`, URL query pre-filling across all service/symptom intake forms, and 1-click `Resume Invoice Payment` in `ahac-crm`.
-  - Installed **4 Dedicated Antigravity Workspace Skills in `.agents/skills/`** (`ahac-sovereign-swarm`, `ahac-cybersecurity-and-email-shield`, `ahac-monthly-executive-billing-and-seo`, `ahac-brand-creative-and-storyboard-studio`), rotated `DEV_OS_MASTER_PASSWORD` to a 48-char random secret across local & VPS `.env`, deployed the **6-Layer Email Fortress** (`safe_html`, CRLF header stripping, `mask_email`, `<ProtectedEmailLink />` anti-harvester DOM armor across all 9 public email links, Nginx `X-Real-IP` rate-limit armor, disabled prod `/docs`, `chmod 700`/`600` DB backup vault), expanded canonical SEO silos from `101` to **`118` canonical routes** (`84` `NavbarV2` `page.tsx` routes: `1` home + `82` content/shop/city + `1` `/admin`, plus `16` dynamic PDPs), and upgraded Master Brain to **`58` neural synapses (`v2.7.3-NOV11-EMAIL-FORTRESS`)** with `.\scripts\dev-os.ps1 security-sweep`.
-
----
-
-## VI. CROSS-SESSION CONTINUOUS LEARNING, WORKSPACE SKILLS & HANDSHAKE PROTOCOL (`TRACKER`)
-
-To ensure every new chat session in `ahacws26` seamlessly continues where the previous session left off:
-
-1. **Mandatory New-Chat Handshake (`TRACKER`)**:
-   - **CRITICAL RULE**: When the user opens a new chat session (especially when they say `"Convene all"` or ask to verify connection), you **MUST** include the codeword **`TRACKER`** prominently at the very top of your first response.
-   - Alongside **`TRACKER`**, confirm that you are connected to **Master Projects Brain v2.7.0-SOVEREIGN (`EPOCH 21` / `v2.7.3-NOV11-EMAIL-FORTRESS`)**, that all **10 Category Sub-Masters & 40 Specialized Agents (`58` Synapses)** are online (`All Healthy: True`), and summarize the active state from `project_state.md` so the user knows zero context was lost.
-2. **Mounted Antigravity Workspace Skills (`.agents/skills/`)**:
-   - [`ahac-sovereign-swarm`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-sovereign-swarm/SKILL.md): Full 40-agent swarm orchestration (`58` synapses), 3-stage live deployment verification, and customer-journey non-regression checks.
-   - [`ahac-cybersecurity-and-email-shield`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-cybersecurity-and-email-shield/SKILL.md): 6-layer Email Fortress (`safe_html`, CRLF header stripping, PII log masking, `<ProtectedEmailLink />` anti-harvester DOM armor), CEO Email Shield routing, zero hardcoded fallbacks, and `security-sweep` verification.
-   - [`ahac-monthly-executive-billing-and-seo`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-monthly-executive-billing-and-seo/SKILL.md): Plain-English 3rd-grade CEO monthly SEO reporting (`.docx`, `.html`, `.md`) and non-technical invoice/email drafting for CEO Brian Borges (`_private_portfolio/` & `_analytics_data/` strictly untracked).
-   - [`ahac-brand-creative-and-storyboard-studio`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-brand-creative-and-storyboard-studio/SKILL.md): Official Affordable Home A/C visual identity, storyboard/ad prompt engineering, and Oahu architectural background rules (cities used strictly as visual background settings, never as storyboard text labels).
-3. **Before Modifying Code**:
-   - Check `project_state.md` to confirm the latest progress and verified features.
-   - Run `powershell -File .\scripts\dev-os.ps1 status` or `brain` to inspect live agent telemetries.
-4. **During Development**:
-   - Maintain air-tight perimeter security (client-initiated pull/push; 0 inbound workstation reach).
-   - Enforce pure Tailwind CSS and lightweight components in Dev OS (< 150 kB First Load JS).
-   - Never add Dev OS or administrative bloat to the storefront (`apps/web`).
-5. **Before Concluding a Session**:
-   - Run `powershell -ExecutionPolicy Bypass -File .\scripts\dev-os.ps1 security-sweep`.
-   - Update `project_state.md` with accomplishments, verified tests, and next steps.
-   - Execute `powershell -File .\scripts\dev-os.ps1 session-sync "<Brief Session Summary>"` to register the milestone into the permanent Master Brain cognitive stream.
-
+- **Epochs 1–4 (Jan–Apr 2026)**: Next.js 14 / FastAPI / PostgreSQL 16 / Redis monorepo genesis; unified `NavbarV2`/`Footer`; 22 Oahu city pages A–Z & KHON2 portal; VPS ENOSPC auto-healing & dynamic Google Merchant XML feed.
+- **Epochs 5–8 (May–Aug 2026)**: Pydantic V2 migration & dark-mode warehouse-map receipts; 90–100 mobile PageSpeed & service narrowing (purged false 24/7 claims); idempotent Stripe webhooks; 6-stage secret scanner, floor drop-cloth legal mandate, and 14-day DB backups.
+- **Epochs 9–11 (Sep 1–10, 2026)**: Decoupled `prod-dev-os:3005` & By-Appointment-First conversion (`+28%` velocity); Master Brain & mathematical air-tight `0`-inbound workstation perimeter; `ahac-crm` overhaul, 3-stage `verify-live` pipeline, and 4-worker Redis synchronization.
+- **Epochs 12–14 (Sep 21–23, 2026)**: Dual-Sizing Architecture (AHAM + Island Microclimate Calibration™) & Blender 4.1 3D spatial caliper cutaways across 16 models; 142 verified 5-star Oahu reviews (`<ReviewsPavilion />`) & RTX 4090 ComfyUI Studio Bridge; Sub-Master 10 `ReportingEngine` (`.docx`, `.html`, `.md`) completing the 10-Sub-Master / 40-Agent / 50-SOP fleet.
+- **Epochs 15–19 (Sep 27 – Oct 18, 2026)**: Respectful brand reframing & 208/230V licensed electrical subcontractor grounding; `GE AJCQ12AXXWA` R-32 Variable Speed Built-In Inverter + `16/16` factory PDFs & 2x Retina WebP viewers; CRM multi-stage invoice `depositPaidCents` vs `balanceDueCents` fresh Stripe sessions; live `/api/v1/products` (`cache: 'no-store'`) homepage/warehouse stock sync, non-destructive seed stock/price preservation, and zero-`pandas` `40/40` fleet health.
+- **Epoch 20 (Oct 19, 2026)**: 100% consolidation around LG & GE Window ACs and Window AC Cleaning (`301` redirects for all retired routes, `/shop/ge-built-in-wall-ac-oahu` guide, normalized `crm_products`, `brian@affordablehome-ac.com` primary + `irasmussenjobs@gmail.com` BCC, and `Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`).
+- **Epoch 21 (Oct 20 – Nov 12, 2026) — Omniscient Swarm `v2.8.0-SOVEREIGN` (Passes 1–19)**:
+  - **UI Armor & Conversion Velocity**: Enforced 3-row fixed `NavbarV2` viewport clearance across all `84` `NavbarV2` `page.tsx` routes, solid `bg-[#060a12]` `z-[120]` `Shop Window AC` dropdown, restored `/shop#rebate` (`<RebateSection />`) in code + DB, isolated `/admin`, deployed `<WindowAcQuickShop />` (`OOS_FALLBACK_MAP`), 1-tap Express Stripe Checkout in `CartDrawer` & all 16 PDPs (`payment_method_types=['card']` locking `2.9% + $0.30` and blocking `5.99%` Link/BNPL fees), full GA4 + GTM + Stripe MP attribution, and zero-lost-lead form error armor.
+  - **Google-Compliant `118`-Route Indexing & Rich Results**: Expanded sitemap to `118` canonical routes (`102` static/city + `16` PDPs) with `1600x1000` WebP visual thumbnails, `0` non-PDP `Product` schema clones (`CollectionPage` + `ItemList` on category hubs), `100%` word-for-word visible `FAQPage` DOM parity, 8-SKU `$45` rebate lock, `<g:sale_price>` Merchant XML, `142`-review `/product-reviews-feed.xml`, `/llms.txt`, and `/api/indexnow`.
+  - **6-Layer Email Fortress & Multi-Worker Hardening**: Rotated 48-char `DEV_OS_MASTER_PASSWORD` & `REVALIDATE_SECRET` (`chmod 600`), deployed `safe_html`, CRLF stripping, `mask_email`, `<ProtectedEmailLink />` (`0` raw `mailto:` in SSR HTML), `is_explicit_test_submission`, Dev OS PIN-escalation closure, CRM domain-separated JWT/CSRF + ReportLab XML escaping, 28-field atomic `products_seed.json` preservation, and Nginx `X-Real-IP` + OpenAPI lockdown.
+  - **Pass 19 Deep Self-Maintenance & Swarm Org `v2.8.0-SOVEREIGN`**: Upgraded VPS Ubuntu `24.04.5 LTS` / Docker `29.9.3` (reclaimed `13.5 GB` NVMe -> `169 GB` free), `node:22-alpine` (`@types/node ^22`, `caniuse-lite 1.0.30001826`, Biome `2.6.2`), slimmed CRM backend wheels & dead files, added healthchecks + Redis `maxmemory` caps across compose files, eliminated all Python 3.12 `datetime.utcnow()` / Pydantic `.dict()` deprecations, activated live `aiohttp` probes in `dev_os.py`, unified `50/50` SOP dossiers (`100%` 1:1 parity), mounted `5` Workspace Skills + `live-seo-feed-audit.py` + `dev-os.ps1 gatekeepers`, and elevated Master Brain to **`v2.8.0-SOVEREIGN` (`60` Neural Synapses)** with zero-truncation `GEMINI.md` governance.

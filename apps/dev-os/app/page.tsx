@@ -681,13 +681,13 @@ export default function DevOsEagleEyePage() {
                                 type="email"
                                 value={loginEmail}
                                 onChange={e => setLoginEmail(e.target.value)}
-                                placeholder="admin@affordablehome-ac.com"
+                                placeholder="office@affordablehome-ac.com"
                                 className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-sm text-white focus:border-cyan-500 focus:outline-none"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-xs font-mono text-slate-400">Master Password or PIN</label>
+                            <label className="block text-xs font-mono text-slate-400">Master Password</label>
                             <input
                                 type="password"
                                 value={loginPassword}
@@ -882,7 +882,7 @@ export default function DevOsEagleEyePage() {
                                             {brainData?.status || 'ARMED_AND_SYNAPSED'}
                                         </span>
                                         <span className="rounded-full border border-cyan-500/40 bg-cyan-500/10 px-2.5 py-0.5 font-mono text-[10px] text-cyan-300">
-                                            {brainData?.brain_version || '2.7.0-SOVEREIGN'}
+                                            {brainData?.brain_version || '2.8.0-SOVEREIGN'}
                                         </span>
                                     </div>
                                     <p className="mt-1 font-mono text-xs text-slate-400">
@@ -938,7 +938,7 @@ export default function DevOsEagleEyePage() {
                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                 <span className="text-slate-400 text-[10px] uppercase">Active Synapses</span>
                                 <div className="mt-1 flex items-baseline gap-2">
-                                    <span className="text-xl font-bold text-cyan-400">{brainData?.total_synapses || 58}</span>
+                                    <span className="text-xl font-bold text-cyan-400">{brainData?.total_synapses || 60}</span>
                                     <span className="text-[10px] text-emerald-400">100% Armed</span>
                                 </div>
                             </div>

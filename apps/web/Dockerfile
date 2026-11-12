@@ -1,10 +1,11 @@
 FROM node:22-alpine AS base
+RUN npm install -g pnpm@10.34.7
 
 # 1. Prune the workspace to only include the "web" app and its dependencies
 FROM base AS pruner
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-RUN npm install -g turbo
+RUN npm install -g turbo@2.11.10
 COPY . .
 # Generates a "cleaned" project structure in /app/out needed for the build
 RUN turbo prune web --docker
@@ -19,7 +20,7 @@ COPY --from=pruner /app/out/json/ .
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
 # Install only the dependencies needed for the web app
-RUN npm install -g pnpm@10.34.7 && pnpm install --no-frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
 
 # 3. Build the project using the pruned source code
 FROM base AS builder
@@ -42,11 +43,12 @@ ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
 ARG NEXT_PUBLIC_GT_ID
 ENV NEXT_PUBLIC_GT_ID=$NEXT_PUBLIC_GT_ID
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV BROWSERSLIST_IGNORE_OLD_DATA=1
 
 # Build the project (disabled cache mount to prevent Server Action desync)
 # [HOTFIX] Explicitly limit Node.js heap memory to 1GB to prevent VPS OOM (Out of Memory) crashes during Next.js minification
 ENV NODE_OPTIONS="--max-old-space-size=1024"
-RUN npm install -g pnpm@10.34.7 && pnpm --filter web build
+RUN pnpm --filter web build
 
 # 4. Production runner
 FROM base AS runner
@@ -54,6 +56,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV BROWSERSLIST_IGNORE_OLD_DATA=1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

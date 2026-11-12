@@ -95,14 +95,14 @@ services:
       - SMTP_PORT=${SMTP_PORT}
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-office@affordablehome-ac.com}
       - GA4_MEASUREMENT_ID=${GA4_MEASUREMENT_ID:-G-MYJZTZFXQV}
-      - GA4_API_SECRET=${GA4_API_SECRET}
+      - GA4_API_SECRET=${GA4_API_SECRET:-}
       - FRONTEND_INTERNAL_URL=http://prod-web:3000
       - PROMO_ENABLED=False
       - JWT_SECRET=${JWT_SECRET}
       - ADMIN_PIN=${ADMIN_PIN}
-      - ADMIN_MASTER_PASSWORD=${ADMIN_MASTER_PASSWORD}
+      - ADMIN_MASTER_PASSWORD=${ADMIN_MASTER_PASSWORD:-}
       - DEV_OS_MASTER_PASSWORD=${DEV_OS_MASTER_PASSWORD}
       - REVALIDATE_SECRET=${REVALIDATE_SECRET}
     volumes:
@@ -150,7 +150,7 @@ services:
     restart: always
     ports:
       - "127.0.0.1:6380:6379"
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+    command: redis-server --requirepass ${REDIS_PASSWORD} --maxmemory 256mb --maxmemory-policy volatile-lru
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s

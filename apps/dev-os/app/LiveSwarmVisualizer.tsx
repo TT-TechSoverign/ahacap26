@@ -240,7 +240,11 @@ export default function LiveSwarmVisualizer({
             const res = await fetch('/api/v1/dev-os/brain/perimeter/push-directive', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ directive: customThought.trim(), source: 'dev_os_swarm_hud' })
+                body: JSON.stringify({
+                    directive_updates: [customThought.trim()],
+                    thought: customThought.trim(),
+                    client_name: 'dev_os_swarm_hud'
+                })
             });
             if (res.ok) {
                 onLog(`🧠 [BRAIN SYNAPSE] Injected cognitive directive: "${customThought}"`);

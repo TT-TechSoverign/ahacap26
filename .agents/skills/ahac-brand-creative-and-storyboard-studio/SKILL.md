@@ -19,8 +19,8 @@ Whenever generating or editing storyboards, image/video prompts, or commercial s
   - Primary Logo: `/assets/logo-new.png` (`ahac-logo-updated-businfo.png` / `ahac-logo-bus-500x500xv2.svg`)
   - Color Palette: Deep Polynesian Navy/Slate (`#060a12` / `#0a0e14`), Electric Cooling Cyan (`#06b6d4` / `#38bdf8`), Aloha Gold (`#f59e0b`), and Clean White (`#ffffff`).
 - **Core Product & Service Focus (100% Window AC & Window AC Cleaning)**:
-  - **In-Stock LG Dual Inverter & GE Built-In 26" Window A/Cs**: `$395 to $1,200` (16 models in stock in Waipahu, including `LG LW1222IVSM` Dual Inverter and `GE AJCQ12AXXWA` 12,000 BTU R-32 Variable Speed Built-In Wall AC).
-  - **Rebates & Energy Savings**: `$45 Hawaii Energy Cash Rebate` + up to `$424.32/yr` HECO electricity savings (`~44.2¢/kWh`).
+  - **In-Stock LG Dual Inverter & GE Built-In 26" Window A/Cs**: `$395 to $1,200` (16 official catalog models at our Waipahu warehouse, with 12+ actively in stock for same-day pickup, including `LG LW1222IVSM` Dual Inverter and `GE AJCQ12AXXWA` 12,000 BTU R-32 Variable Speed Built-In Wall AC).
+  - **Rebates & Energy Savings**: `$45 Hawaii Energy Cash Rebate` on the **8 qualifying ENERGY STAR inverter models** (`IDs 1–7` LG Dual Inverters + `ID 15` `GE AJCQ12AXXWA`) + up to `$424.32/yr` HECO electricity savings (`~44.2¢/kWh`).
   - **Services**: On-Site Window A/C Deep Coil Cleaning & Sanitization, Custom Jalousie & Standard Window A/C Installation, 26" Through-the-Wall Condo Sleeve Replacement, and Honest Clean-vs-Replace Assessments.
   - **Zero-Barrier Booking**: `$0 Free In-Home Estimate` (By-Appointment-First; zero upfront deposit to book) + **Floor Drop-Cloth Clean Jobsite Guarantee**.
 

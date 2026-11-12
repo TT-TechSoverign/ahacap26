@@ -53,7 +53,7 @@ async def update_schedule(
 
     # 2. Update footer_schedule
     # We update the dictionary fields with the new user input, rather than destroying existing keys or corrupting format
-    for k, v in schedule.dict(exclude_unset=True).items():
+    for k, v in schedule.model_dump(exclude_unset=True).items():
         current_data['footer_schedule'][k] = v
 
     # 3. Save back (Draft + Publish for immediate effect as per user expectation)
@@ -77,11 +77,11 @@ async def update_schedule(
 
     try:
         from routers.dev_os import log_dev_os_audit
-        await log_dev_os_audit(db, action="ADMIN_SCHEDULE_UPDATE", details=schedule.dict(), ip=get_client_ip(request))
+        await log_dev_os_audit(db, action="ADMIN_SCHEDULE_UPDATE", details=schedule.model_dump(), ip=get_client_ip(request))
     except Exception:
         pass
 
-    return {"status": "success", "schedule": schedule.dict()}
+    return {"status": "success", "schedule": schedule.model_dump()}
 
 @router.post("/content/publish")
 async def publish_root_content(db: AsyncSession = Depends(get_db)):
@@ -162,10 +162,11 @@ async def export_orders_csv(request: Request, db: AsyncSession = Depends(get_db)
         pass
 
     csv_data = output.getvalue()
+    from datetime import timezone
     return Response(
         content=csv_data,
         media_type="text/csv",
-        headers={"Content-Disposition": f"attachment; filename=ahac_orders_{datetime.utcnow().strftime('%Y%m%d')}.csv"}
+        headers={"Content-Disposition": f"attachment; filename=ahac_orders_{datetime.now(timezone.utc).strftime('%Y%m%d')}.csv"}
     )
 
 @router.post("/orders/reconcile")

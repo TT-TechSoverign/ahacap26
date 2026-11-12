@@ -27,7 +27,7 @@ if (-not $MasterKey) {
     }
 }
 
-$localOnlyCommands = @("scan-secrets", "security-sweep", "help")
+$localOnlyCommands = @("scan-secrets", "security-sweep", "live-crawl", "seo-audit", "grounding-audit", "gatekeepers", "help")
 if (-not $MasterKey -and ($localOnlyCommands -notcontains $Command.ToLower())) {
     Write-Host "[!] Missing DEV_OS_MASTER_PASSWORD in environment or root .env file." -ForegroundColor Red
     exit 1
@@ -175,7 +175,7 @@ switch ($Command.ToLower()) {
 
     "run-submaster" {
         if (-not $Target) {
-            Write-Host "[ERR] Usage: .\scripts\dev-os.ps1 run-submaster [infra|security|commerce|growth|crm|deploy|serp|conversion|studio]" -ForegroundColor Red
+            Write-Host "[ERR] Usage: .\scripts\dev-os.ps1 run-submaster [infra|security|commerce|growth|crm|deploy|serp|conversion|studio|reporting]" -ForegroundColor Red
             return
         }
         $targetMap = @{
@@ -398,9 +398,9 @@ switch ($Command.ToLower()) {
                 summary = $summary
                 author = "SOVEREIGN_MASTER_AGENT"
                 achievements = @(
-                    "Master Projects Brain v2.7.0-SOVEREIGN armed with 58 neural synapses (v2.7.3-NOV11-EMAIL-FORTRESS)",
-                    "All 10 Category Sub-Masters, 40 Specialized Agents, and 50 SOP Dossiers upgraded with live Email Fortress & Zero-Trust runtime checks",
-                    "Every-file security & email sweep clean: HTML/CRLF email sanitizer, <ProtectedEmailLink /> anti-harvester DOM armor, Nginx X-Real-IP rate limiting, OpenAPI lockdown, and rotated 48-char master key"
+                    "Master Projects Brain v2.8.0-SOVEREIGN armed with 60 neural synapses & 5 Antigravity Workspace Skills (v2.8.0-NOV12-OMNISCIENT-SWARM)",
+                    "All 10 Category Sub-Masters, 40 Specialized Agents, and 50 SOP Dossiers synchronized across 118 canonical routes, 16 LG/GE SKUs, and 142 verified reviews",
+                    "Every-file security, Email Fortress & live 118-URL Google/Merchant/FAQ audit clean (0 leaks, 0 raw mailto links, 0 schema/DOM drift)"
                 )
             } | ConvertTo-Json
             $resp = Invoke-RestMethod -Uri "$ServerUrl/brain/session-sync" -Method POST -Headers $headers -Body $body
@@ -587,8 +587,13 @@ switch ($Command.ToLower()) {
             Write-Host "[!] Usage: .\scripts\dev-os.ps1 report-generate <Month> [Year]" -ForegroundColor Red
             return
         }
-        $month = $Target
-        $year = if ($args.Count -gt 0) { $args[0] } else { "2026" }
+        if ($Target -match '^([A-Za-z]+)\s*(\d{4})$') {
+            $month = $Matches[1]
+            $year = $Matches[2]
+        } else {
+            $month = $Target
+            $year = if ($args.Count -gt 0) { $args[0] } else { "2026" }
+        }
         Write-Host "[*] Triggering Autonomous Report Synthesis for $month $year..." -ForegroundColor Yellow
         try {
             $body = @{ month = $month; year = $year } | ConvertTo-Json
@@ -612,6 +617,71 @@ switch ($Command.ToLower()) {
         $pyExe = if (Test-Path ".\apps\api\.venv\Scripts\python.exe") { ".\apps\api\.venv\Scripts\python.exe" } else { "python" }
         & $pyExe .\scripts\security-email-audit.py
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    }
+
+    { $_ -in @("live-crawl", "seo-audit") } {
+        $targetOrigin = if ($Target) { $Target } else { "https://www.affordablehome-ac.com" }
+        Write-Host "[*] Running Live SEO, Merchant Feed, Rich Snippet & Visible FAQ Crawler against $targetOrigin..." -ForegroundColor Yellow
+        $pyExe = if (Test-Path ".\apps\api\.venv\Scripts\python.exe") { ".\apps\api\.venv\Scripts\python.exe" } else { "python" }
+        & $pyExe .\scripts\live-seo-feed-audit.py --base-url $targetOrigin
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    }
+
+    "grounding-audit" {
+        powershell -ExecutionPolicy Bypass -File .\scripts\verify-service-grounding.ps1
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    }
+
+    "indexnow" {
+        Write-Host "[*] Broadcasting all canonical sitemap URLs to IndexNow via /api/indexnow..." -ForegroundColor Yellow
+        try {
+            $resp = Invoke-RestMethod -Uri "https://www.affordablehome-ac.com/api/indexnow" -Method POST -Headers $headers -Body "{}"
+            Write-Host "[OK] IndexNow Broadcast Result:" -ForegroundColor Green
+            $resp | ConvertTo-Json -Depth 4 | Write-Host -ForegroundColor White
+        } catch {
+            Write-Host "[!] IndexNow submission failed or throttled (5m cooldown): $_" -ForegroundColor Yellow
+        }
+    }
+
+    "gatekeepers" {
+        Write-Host "[*] Running All 6 Pre-Deploy Sovereign Gatekeepers..." -ForegroundColor Yellow
+        $pyExe = if (Test-Path ".\apps\api\.venv\Scripts\python.exe") { ".\apps\api\.venv\Scripts\python.exe" } else { "python" }
+        Write-Host "`n[1/6] Backend Pytest Suite (apps/api/tests)..." -ForegroundColor Cyan
+        & $pyExe -m pytest apps/api/tests -q
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+        Write-Host "`n[2/6] Storefront TypeScript Strict Check (apps/web)..." -ForegroundColor Cyan
+        Push-Location apps\web
+        npx tsc --noEmit
+        $webRc = $LASTEXITCODE
+        Pop-Location
+        if ($webRc -ne 0) { exit $webRc }
+
+        Write-Host "`n[3/6] Dev OS TypeScript Strict Check (apps/dev-os)..." -ForegroundColor Cyan
+        Push-Location apps\dev-os
+        npx tsc --noEmit
+        $devRc = $LASTEXITCODE
+        Pop-Location
+        if ($devRc -ne 0) { exit $devRc }
+
+        Write-Host "`n[4/6] CRM Frontend Production Bundle Check (ahac-crm/frontend)..." -ForegroundColor Cyan
+        Push-Location ahac-crm\frontend
+        npx vite build
+        $crmRc = $LASTEXITCODE
+        Pop-Location
+        if ($crmRc -ne 0) { exit $crmRc }
+
+        Write-Host "`n[5/6] Real-World Service Grounding & Factuality Audit..." -ForegroundColor Cyan
+        powershell -ExecutionPolicy Bypass -File .\scripts\verify-service-grounding.ps1
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+        Write-Host "`n[6/6] Full 6-Stage Secret Scanner + Every-File Email Fortress Sweep..." -ForegroundColor Cyan
+        powershell -ExecutionPolicy Bypass -File .\scripts\scan-secrets.ps1
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        & $pyExe .\scripts\security-email-audit.py
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+        Write-Host "`n[PASS] All 6 Sovereign Gatekeepers Passed 100%!" -ForegroundColor Green
     }
 
     default {
@@ -638,6 +708,9 @@ switch ($Command.ToLower()) {
         Write-Host "  waterfall                  - Display 5-stage By Appointment First conversion waterfall"
         Write-Host "  reconcile                  - Trigger on-demand Stripe auto-reconciliation"
         Write-Host "  verify-live                - Run 3-stage live deployment swarm check"
+        Write-Host "  live-crawl [url]           - Crawl all canonical URLs, Merchant/Review XML feeds, JSON-LD & visible FAQs"
+        Write-Host "  indexnow                   - Broadcast all canonical sitemap URLs via /api/indexnow"
+        Write-Host "  gatekeepers                - Run all 6 local pre-deploy gatekeepers (pytest, tsc, vite, grounding, security)"
         Write-Host "  scan-secrets               - Run local git repository secret scanner"
         Write-Host "  security-sweep             - Run full root + submodule secret & email protection audit"
     }

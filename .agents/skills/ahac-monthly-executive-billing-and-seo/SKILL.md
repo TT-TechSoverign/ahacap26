@@ -51,4 +51,4 @@ Every 1st/2nd of the month, format the retainer invoice into these **exact 5 lin
 
 ## 4. Generating Monthly CEO SEO Reports (`ReportingEngine`)
 - Raw GSC & GA4 exports live in `_analytics_data/<MonthYear>/`.
-- Generate `.docx`, `.html`, and `.md` reports via `ReportingEngine` (`apps/api/services/reporting_engine.py`) or `powershell -File .\scripts\dev-os.ps1 report-generate <MonthYear>`.
+- Generate `.docx`, `.html`, and `.md` reports via `ReportingEngine` (`apps/api/services/reporting_engine.py`) or `powershell -File .\scripts\dev-os.ps1 report-generate <Month> [Year]` (auto-accepts both `October 2026` and `October2026`).

@@ -35,7 +35,7 @@
         "zod": "^4.6.7"
     },
     "devDependencies": {
-        "@types/node": "^20",
+        "@types/node": "^22",
         "@types/papaparse": "^5.5.2",
         "@types/react": "^18",
         "@types/react-dom": "^18",
