@@ -4,8 +4,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 import hmac
 import hashlib
 import os
+import secrets
 import time
 from fastapi import Request, HTTPException, status
+from cache import check_rate_limit
 
 SECRET_KEY = os.getenv("JWT_SECRET")
 database_url = os.getenv("DATABASE_URL", "")
@@ -16,7 +18,7 @@ if not SECRET_KEY:
     if is_prod_or_staging:
         raise RuntimeError("CRITICAL STARTUP ERROR: JWT_SECRET environment variable is missing on staging/production!")
     else:
-        SECRET_KEY = "super-secret-key-change-me"
+        SECRET_KEY = secrets.token_urlsafe(48)
 
 
 def get_client_ip(request: Request) -> str:
@@ -80,14 +82,19 @@ async def verify_admin_token(request: Request):
     return True
 
 async def verify_dev_os_session(request: Request):
-    # 1. Check direct Master Key header (Local-to-Server Bridge)
+    # 1. Check direct Master Key header (Local-to-Server Bridge — 48-char DEV_OS_MASTER_PASSWORD only)
     master_key_header = request.headers.get("X-Dev-OS-Key")
-    if master_key_header:
+    if master_key_header is not None:
         expected_pwd = os.getenv("DEV_OS_MASTER_PASSWORD", "").strip()
-        admin_pin = os.getenv("ADMIN_PIN", "").strip()
         key_strip = master_key_header.strip()
-        if (expected_pwd and hmac.compare_digest(key_strip, expected_pwd)) or (admin_pin and hmac.compare_digest(key_strip, admin_pin)):
+        if expected_pwd and key_strip and hmac.compare_digest(key_strip, expected_pwd):
             return f"dev_os_master:{MASTER_EMAIL_DEFAULT}"
+        ip = get_client_ip(request)
+        if not await check_rate_limit(ip, "dev_os_key_fail", limit=8, period=900):
+            raise HTTPException(
+                status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+                detail="Too many failed authentication attempts. Please wait 15 minutes."
+            )
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid X-Dev-OS-Key"
@@ -114,7 +121,7 @@ async def verify_dev_os_session(request: Request):
         )
         
     role_data = decode_signed_token_role(token)
-    if not role_data or (role_data != f"dev_os_master:{MASTER_EMAIL_DEFAULT}" and role_data != "admin"):
+    if not role_data or role_data != f"dev_os_master:{MASTER_EMAIL_DEFAULT}":
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Unauthorized: Dev OS Master credentials required"

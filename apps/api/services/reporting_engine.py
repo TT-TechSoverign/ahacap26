@@ -91,13 +91,16 @@ class ReportingEngine:
             except OSError:
                 pass
 
+        env_dir = (os.getenv("ANALYTICS_DATA_DIR") or "").strip()
         candidates = [
-            os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "_analytics_data")),
-            os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "_analytics_data")),
-            r"c:\Users\Tai_Z790AeroG\Desktop\ahacws26\_analytics_data",
-            "/app/_analytics_data",
-            os.path.join(os.getcwd(), "_analytics_data"),
-            "/tmp/_analytics_data",
+            c for c in [
+                env_dir,
+                os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "_analytics_data")),
+                os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "_analytics_data")),
+                "/app/_analytics_data",
+                os.path.join(os.getcwd(), "_analytics_data"),
+                "/tmp/_analytics_data",
+            ] if c
         ]
         existing = next((c for c in candidates if os.path.exists(c) and os.access(c, os.W_OK)), None)
         if existing:

@@ -3,11 +3,50 @@ from fastapi.encoders import jsonable_encoder
 import schemas
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional, List
-from dependencies import get_db, verify_admin_token
+from dependencies import get_db, verify_admin_token, get_client_ip
 from domain import catalog
 from cache import check_rate_limit
 import json
 import os
+
+
+def serialize_product_seed_dict(p_obj) -> dict:
+    """
+    Canonical 28-field serializer for Product ORM objects to products_seed.json.
+    Preserves Dual-Sizing (AHAM + Oahu), Spatial Caliper dimensions, and promo pricing
+    during both admin edits and Stripe stock deductions while avoiding Pydantic/Alpine panics.
+    """
+    return {
+        "id": p_obj.id,
+        "name": p_obj.name,
+        "price": p_obj.price,
+        "category": p_obj.category,
+        "subcategory": p_obj.subcategory,
+        "stock": p_obj.stock,
+        "image_url": p_obj.image_url,
+        "btu": p_obj.btu,
+        "voltage": p_obj.voltage,
+        "coverage": p_obj.coverage,
+        "performance_specs": p_obj.performance_specs,
+        "key_spec": p_obj.key_spec,
+        "noise_level": p_obj.noise_level,
+        "dehumidification": p_obj.dehumidification,
+        "dimensions": p_obj.dimensions,
+        "weight": p_obj.weight,
+        "shipping_weight": p_obj.shipping_weight,
+        "min_window_width": p_obj.min_window_width,
+        "max_window_width": p_obj.max_window_width,
+        "min_window_height": p_obj.min_window_height,
+        "chassis_type": p_obj.chassis_type,
+        "ceer_rating": p_obj.ceer_rating,
+        "dry_air_flow_cfm": p_obj.dry_air_flow_cfm,
+        "coverage_aham": p_obj.coverage_aham,
+        "coverage_oahu": p_obj.coverage_oahu,
+        "sizing_notes": p_obj.sizing_notes,
+        "warranty": p_obj.warranty,
+        "promo_price": p_obj.promo_price,
+        "discount_percent": p_obj.discount_percent,
+    }
 
 def persist_product_changes(product_data, action='update'):
     """
@@ -101,7 +140,7 @@ async def validate_inventory(
     Validates multiple products' inventory and returns canonical pricing.
     Bypasses caching to ensure real-time accuracy.
     """
-    ip = request.client.host if request.client else "unknown"
+    ip = get_client_ip(request)
     if not await check_rate_limit(ip, "inventory_validate", limit=60, period=60):
         from fastapi import HTTPException
         raise HTTPException(status_code=429, detail="Too many validation requests. Please try again later.")
@@ -115,40 +154,7 @@ async def create_product(
     db: AsyncSession = Depends(get_db)
 ):
     new_product = await catalog.create_product_service(db, product.dict())
-    
-    # Persist to seed file
-    # FIX: Bypass Pydantic V2 model_validate completely to prevent Rust/musl panics on Alpine
-    product_dict = {
-        "id": new_product.id,
-        "name": new_product.name,
-        "price": new_product.price,
-        "category": new_product.category,
-        "subcategory": new_product.subcategory,
-        "stock": new_product.stock,
-        "image_url": new_product.image_url,
-        "btu": new_product.btu,
-        "voltage": new_product.voltage,
-        "coverage": new_product.coverage,
-        "performance_specs": new_product.performance_specs,
-        "key_spec": new_product.key_spec,
-        "noise_level": new_product.noise_level,
-        "dehumidification": new_product.dehumidification,
-        "dimensions": new_product.dimensions,
-        "weight": new_product.weight,
-        "shipping_weight": new_product.shipping_weight,
-        "min_window_width": new_product.min_window_width,
-        "max_window_width": new_product.max_window_width,
-        "min_window_height": new_product.min_window_height,
-        "chassis_type": new_product.chassis_type,
-        "ceer_rating": new_product.ceer_rating,
-        "dry_air_flow_cfm": new_product.dry_air_flow_cfm,
-        "coverage_aham": new_product.coverage_aham,
-        "coverage_oahu": new_product.coverage_oahu,
-        "sizing_notes": new_product.sizing_notes,
-        "warranty": new_product.warranty,
-        "promo_price": new_product.promo_price,
-        "discount_percent": new_product.discount_percent
-    }
+    product_dict = serialize_product_seed_dict(new_product)
     persist_product_changes(product_dict)
     
     try:
@@ -165,52 +171,16 @@ async def update_product(
     product_update: schemas.ProductUpdate,
     db: AsyncSession = Depends(get_db)
 ):
+    from fastapi import HTTPException
     try:
-        print(f"DEBUG: Receiving Update for {product_id}: {product_update.dict()}")
-        
         # Filter out None values to allow partial updates
         update_data = {k: v for k, v in product_update.dict().items() if v is not None}
         
         updated_product = await catalog.update_product_service(db, product_id, update_data)
         if not updated_product:
-            from fastapi import HTTPException
             raise HTTPException(status_code=404, detail="Product not found")
             
-        print(f"DEBUG: DB Update Success. Persisting to JSON...")
-        
-        # Persist to seed file
-        # FIX: Bypass Pydantic V2 model_validate completely to prevent Rust/musl panics on Alpine
-        product_dict = {
-            "id": updated_product.id,
-            "name": updated_product.name,
-            "price": updated_product.price,
-            "category": updated_product.category,
-            "subcategory": updated_product.subcategory,
-            "stock": updated_product.stock,
-            "image_url": updated_product.image_url,
-            "btu": updated_product.btu,
-            "voltage": updated_product.voltage,
-            "coverage": updated_product.coverage,
-            "performance_specs": updated_product.performance_specs,
-            "key_spec": updated_product.key_spec,
-            "noise_level": updated_product.noise_level,
-            "dehumidification": updated_product.dehumidification,
-            "dimensions": updated_product.dimensions,
-            "weight": updated_product.weight,
-            "shipping_weight": updated_product.shipping_weight,
-            "min_window_width": updated_product.min_window_width,
-            "max_window_width": updated_product.max_window_width,
-            "min_window_height": updated_product.min_window_height,
-            "chassis_type": updated_product.chassis_type,
-            "ceer_rating": updated_product.ceer_rating,
-            "dry_air_flow_cfm": updated_product.dry_air_flow_cfm,
-            "coverage_aham": updated_product.coverage_aham,
-            "coverage_oahu": updated_product.coverage_oahu,
-            "sizing_notes": updated_product.sizing_notes,
-            "warranty": updated_product.warranty,
-            "promo_price": updated_product.promo_price,
-            "discount_percent": updated_product.discount_percent
-        }
+        product_dict = serialize_product_seed_dict(updated_product)
         persist_product_changes(product_dict)
         
         try:
@@ -220,12 +190,13 @@ async def update_product(
             pass
 
         return product_dict
+    except HTTPException:
+        raise
     except Exception as e:
         import traceback
         traceback.print_exc()
         print(f"CRITICAL API FAILURE IN UPDATE_PRODUCT: {e}")
-        from fastapi import HTTPException
-        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error updating product")
 
 @router.delete("/{product_id}", dependencies=[Depends(verify_admin_token)])
 async def delete_product(

@@ -651,15 +651,13 @@ async def dev_os_login(payload: MasterLoginRequest, request: Request):
             detail="Access Denied: Master account restricted"
         )
 
-    # 2. Airtight password verification
+    # 2. Airtight password verification (strictly 48-char DEV_OS_MASTER_PASSWORD; storefront ADMIN_PIN rejected)
     expected_password = os.getenv("DEV_OS_MASTER_PASSWORD", "").strip()
-    admin_pin = os.getenv("ADMIN_PIN", "").strip()
     pwd_attempt = payload.password.strip()
 
-    is_valid_master = bool(expected_password) and hmac.compare_digest(pwd_attempt, expected_password)
-    is_valid_pin = bool(admin_pin) and hmac.compare_digest(pwd_attempt, admin_pin)
+    is_valid_master = bool(expected_password) and bool(pwd_attempt) and hmac.compare_digest(pwd_attempt, expected_password)
 
-    if not (is_valid_master or is_valid_pin):
+    if not is_valid_master:
         logger.warning(f"[Dev OS] Failed password attempt from {ip}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -696,7 +694,7 @@ async def dev_os_login(payload: MasterLoginRequest, request: Request):
         max_age=86400 * 7 # 7 days persistent session
     )
 
-    logger.info(f"[Dev OS] Master session established for {MASTER_EMAIL} from {ip}")
+    logger.info(f"[Dev OS] Master session established for {email_service.mask_email(MASTER_EMAIL)} from {ip}")
     return response
 
 @router.post("/auth/logout")
@@ -722,7 +720,7 @@ async def dev_os_auth_me(request: Request):
         return JSONResponse(status_code=401, content={"authenticated": False, "detail": "No session"})
 
     role_data = decode_signed_token_role(token)
-    if not role_data or (role_data != f"dev_os_master:{MASTER_EMAIL}" and role_data != "admin"):
+    if not role_data or role_data != f"dev_os_master:{MASTER_EMAIL}":
         return JSONResponse(status_code=401, content={"authenticated": False, "detail": "Session expired or invalid"})
 
     return {

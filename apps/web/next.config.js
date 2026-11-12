@@ -60,7 +60,7 @@ const nextConfig = {
                 headers: [
                     {
                         key: 'Content-Security-Policy',
-                        value: `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://js.stripe.com https://www.googletagmanager.com https://*.tctm.co; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob: https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://js.stripe.com; connect-src 'self' https: https://api.stripe.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net${localDevConnect}; base-uri 'self'; form-action 'self' https://checkout.stripe.com; object-src 'none'`,
+                        value: `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://js.stripe.com https://www.googletagmanager.com https://*.tctm.co; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob: https://www.googletagmanager.com https://www.google-analytics.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com https://www.googletagmanager.com; connect-src 'self' https: https://api.stripe.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://stats.g.doubleclick.net${localDevConnect}; base-uri 'self'; form-action 'self' https://checkout.stripe.com; object-src 'none'`,
                     },
                     {
                         key: 'Strict-Transport-Security',
@@ -80,7 +80,7 @@ const nextConfig = {
                     },
                     {
                         key: 'Permissions-Policy',
-                        value: 'camera=(), microphone=(), geolocation=(), payment=(self "https://js.stripe.com")',
+                        value: 'camera=(), microphone=(), geolocation=(), payment=(self "https://js.stripe.com" "https://checkout.stripe.com" "https://hooks.stripe.com")',
                     },
                 ],
             },

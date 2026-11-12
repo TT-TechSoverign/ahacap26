@@ -192,6 +192,7 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                 # 2. Deduct inventory idempotently
                 if not recovered_order.inventory_deducted:
                     recovered_order.inventory_deducted = True
+                    from routers.catalog import serialize_product_seed_dict
                     for item in items_data:
                         p_id = item.get("product_id")
                         qty = item.get("quantity", 0)
@@ -200,34 +201,14 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                             p_obj = db_prod.scalar_one_or_none()
                             if p_obj:
                                 p_obj.stock = max(0, p_obj.stock - qty)
-                                p_dict = {
-                                    "id": p_obj.id,
-                                    "name": p_obj.name,
-                                    "price": p_obj.price,
-                                    "category": p_obj.category,
-                                    "subcategory": p_obj.subcategory,
-                                    "stock": p_obj.stock,
-                                    "image_url": p_obj.image_url,
-                                    "btu": p_obj.btu,
-                                    "voltage": p_obj.voltage,
-                                    "coverage": p_obj.coverage,
-                                    "performance_specs": p_obj.performance_specs,
-                                    "key_spec": p_obj.key_spec,
-                                    "noise_level": p_obj.noise_level,
-                                    "dehumidification": p_obj.dehumidification,
-                                    "dimensions": p_obj.dimensions,
-                                    "weight": p_obj.weight,
-                                    "warranty": p_obj.warranty,
-                                    "promo_price": p_obj.promo_price,
-                                    "discount_percent": p_obj.discount_percent
-                                }
+                                p_dict = serialize_product_seed_dict(p_obj)
                                 persist_product_changes(p_dict)
                                 logger.info(f"✅ [Auto-Reconciliation] Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
                     await db_session.commit()
 
                 # 3. Dispatch emails
                 if receipt_email:
-                    logger.info(f"📧 [Auto-Reconciliation] Sending confirmation emails for {order_id} to {receipt_email}...")
+                    logger.info(f"📧 [Auto-Reconciliation] Sending confirmation emails for {order_id} to {email_service.mask_email(receipt_email)}...")
                     try:
                         await email_service.send_order_confirmation(
                             receipt_email,
@@ -235,7 +216,7 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                             amount_received,
                             fulfillment_mode=fulfillment_mode,
                             items=items_data,
-                            customer_info=cust,
+                            customer_info=extracted_info,
                             payment_info=payment_info
                         )
                         logger.info(f"✅ [Auto-Reconciliation] Email pipeline completed for {order_id}.")

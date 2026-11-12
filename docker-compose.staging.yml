@@ -22,6 +22,11 @@ services:
       - ./apps/web/lib/content:/app/apps/web/lib/content:ro
       - ./apps/web/storage/staging:/app/apps/web/storage
       - ./apps/web/public:/app/apps/web/public:ro
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     depends_on:
       staging-api:
         condition: service_healthy
@@ -52,6 +57,11 @@ services:
       - PROMO_ENABLED=True
     volumes:
       - ./apps/api/content:/app/content:ro
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     command: >
       sh -c "python fix_db_schema.py && 
              python seed_products.py && 

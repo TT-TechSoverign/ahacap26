@@ -159,8 +159,8 @@ from services.stripe_telemetry import (
 
 
 async def fire_ga4_purchase_event(order_id, ga_client_id, ga_session_id, items_data, amount_total, amount_tax=0, amount_shipping=0):
-    measurement_id = os.getenv("GA4_MEASUREMENT_ID")
-    api_secret = os.getenv("GA4_API_SECRET")
+    measurement_id = (os.getenv("GA4_MEASUREMENT_ID") or "G-MYJZTZFXQV").strip()
+    api_secret = (os.getenv("GA4_API_SECRET") or "").strip()
     norm_cid, norm_sid = normalize_ga4_identifiers(ga_client_id, ga_session_id)
 
     if not measurement_id or not api_secret or not norm_cid:
@@ -355,8 +355,7 @@ async def process_stripe_event(event: dict, payload_data: dict):
                     # Idempotency lock for stock deduction
                     if not order.inventory_deducted:
                         order.inventory_deducted = True
-                        from routers.catalog import persist_product_changes
-                        import schemas
+                        from routers.catalog import persist_product_changes, serialize_product_seed_dict
                         for item in items_data:
                             p_id = item.get("product_id")
                             qty = item.get("quantity", 0)
@@ -365,27 +364,7 @@ async def process_stripe_event(event: dict, payload_data: dict):
                                 p_obj = db_product.scalar_one_or_none()
                                 if p_obj:
                                     p_obj.stock = max(0, p_obj.stock - qty)
-                                    p_dict = {
-                                        "id": p_obj.id,
-                                        "name": p_obj.name,
-                                        "price": p_obj.price,
-                                        "category": p_obj.category,
-                                        "subcategory": p_obj.subcategory,
-                                        "stock": p_obj.stock,
-                                        "image_url": p_obj.image_url,
-                                        "btu": p_obj.btu,
-                                        "voltage": p_obj.voltage,
-                                        "coverage": p_obj.coverage,
-                                        "performance_specs": p_obj.performance_specs,
-                                        "key_spec": p_obj.key_spec,
-                                        "noise_level": p_obj.noise_level,
-                                        "dehumidification": p_obj.dehumidification,
-                                        "dimensions": p_obj.dimensions,
-                                        "weight": p_obj.weight,
-                                        "warranty": p_obj.warranty,
-                                        "promo_price": None,
-                                        "discount_percent": None
-                                    }
+                                    p_dict = serialize_product_seed_dict(p_obj)
                                     persist_product_changes(p_dict)
                                     print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
 
