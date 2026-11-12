@@ -18,12 +18,16 @@ async def seed(cleanup: bool = False, force: bool = False, reset_stock: bool = F
     print("🌱 Checking Product Seeding Status...")
     
     # 3. Insert/Update Data (Upsert)
+    products = load_products()
+    canonical_ids = {int(p["id"]) for p in products if p.get("id") is not None}
+
     async with AsyncSessionLocal() as session:
         existing_by_key_spec = {}
         existing_by_id = {}
+        missing_dual_sizing = False
         try:
             res = await session.execute(
-                text("SELECT id, key_spec, stock, price, promo_price, discount_percent FROM products")
+                text("SELECT id, key_spec, stock, price, promo_price, discount_percent, coverage_oahu FROM products")
             )
             for row in res.fetchall():
                 state = {
@@ -33,15 +37,23 @@ async def seed(cleanup: bool = False, force: bool = False, reset_stock: bool = F
                     "price": row[3],
                     "promo_price": row[4],
                     "discount_percent": row[5],
+                    "coverage_oahu": row[6],
                 }
                 existing_by_id[row[0]] = state
+                if not row[6]:
+                    missing_dual_sizing = True
                 if row[1]:
                     existing_by_key_spec[str(row[1]).strip().upper()] = state
         except Exception:
             pass
 
-        if not force and len(existing_by_id) > 0:
-            print(f"   ℹ️  Products already exist in database ({len(existing_by_id)} found). Skipping seeding to preserve runtime modifications.")
+        needs_schema_or_canon_sync = (
+            missing_dual_sizing
+            or set(existing_by_id.keys()) != canonical_ids
+        )
+
+        if not force and len(existing_by_id) > 0 and not needs_schema_or_canon_sync:
+            print(f"   ℹ️  Products already exist in database ({len(existing_by_id)} canonical rows with Dual-Sizing). Skipping seeding to preserve runtime modifications.")
             return
 
         # Only truncate if explicitly resetting stock AND cleanup is requested
@@ -52,8 +64,11 @@ async def seed(cleanup: bool = False, force: bool = False, reset_stock: bool = F
             existing_by_id = {}
         else:
             print("   ℹ️  Preserving existing database stock & pricing by key_spec during catalog upsert...")
-        
-        products = load_products()
+            stale_ids = [eid for eid in existing_by_id.keys() if eid not in canonical_ids]
+            if stale_ids:
+                for sid in stale_ids:
+                    await session.execute(text("DELETE FROM products WHERE id = :sid"), {"sid": int(sid)})
+
         print(f"   Seeding {len(products)} products from JSON...")
         valid_columns = {c.name for c in models.Product.__table__.columns}
         

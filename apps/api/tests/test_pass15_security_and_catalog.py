@@ -225,3 +225,16 @@ async def test_reconcile_unrecorded_orders_passes_extracted_info_and_preserves_2
     assert persisted_payloads[0]["min_window_width"] == '27"'
     assert len(sent_confirmations) == 1
     assert sent_confirmations[0]["customer_info"]["address"]["city"] == "Waipahu"
+
+
+def test_fix_db_schema_covers_all_28_product_columns():
+    """fix_db_schema.py must maintain 100% parity with models.Product so staging/restored DBs never miss Dual-Sizing columns."""
+    fix_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "fix_db_schema.py")
+    with open(fix_path, "r", encoding="utf-8") as f:
+        src = f.read()
+
+    base_create_cols = {"id", "name", "price", "category", "stock"}
+    orm_cols = {c.name for c in models.Product.__table__.columns}
+    for col in orm_cols - base_create_cols:
+        assert f'("{col}"' in src, f"Column '{col}' missing from fix_db_schema.py!"
+
