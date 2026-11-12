@@ -1788,11 +1788,15 @@ async def run_agent_db_guardian(db: AsyncSession) -> Dict[str, Any]:
                     continue
                 c_data = r_data if isinstance(r_data, dict) else json.loads(r_data)
                 shop_node = c_data.get("shop", c_data) if r_path == "/" else c_data
-                sections = shop_node.get("sections", {}) if isinstance(shop_node, dict) else {}
-                sec_order = shop_node.get("sectionOrder", []) if isinstance(shop_node, dict) else []
-                if ("rebate" in sections) and ("rebate" in sec_order):
-                    shop_rebate_db_synced = True
-                    break
+                if isinstance(shop_node, dict):
+                    sections = shop_node.get("sections", [])
+                    sec_order = shop_node.get("sectionOrder", [])
+                    if isinstance(sections, list) and ("rebate" in sections) and bool(shop_node.get("rebate")):
+                        shop_rebate_db_synced = True
+                        break
+                    if isinstance(sections, dict) and ("rebate" in sections) and ("rebate" in sec_order):
+                        shop_rebate_db_synced = True
+                        break
     except Exception:
         await db.rollback()
 
@@ -2188,9 +2192,13 @@ async def run_agent_heco_rebate_strategist(db: AsyncSession = None) -> Dict[str,
         try:
             with open(web_content_path, 'r', encoding='utf-8') as f:
                 c_json = json.load(f)
-                shop_sec = c_json.get("shop", {}).get("sections", {})
-                shop_ord = c_json.get("shop", {}).get("sectionOrder", [])
-                rebate_section_verified = ("rebate" in shop_sec) and ("rebate" in shop_ord)
+                shop_node_local = c_json.get("shop", {})
+                shop_sec = shop_node_local.get("sections", [])
+                shop_ord = shop_node_local.get("sectionOrder", [])
+                if isinstance(shop_sec, list):
+                    rebate_section_verified = ("rebate" in shop_sec) and bool(shop_node_local.get("rebate"))
+                else:
+                    rebate_section_verified = ("rebate" in shop_sec) and ("rebate" in shop_ord)
         except Exception:
             pass
     elif db is not None:
@@ -2206,11 +2214,15 @@ async def run_agent_heco_rebate_strategist(db: AsyncSession = None) -> Dict[str,
                         continue
                     c_data = r_data if isinstance(r_data, dict) else json.loads(r_data)
                     shop_node = c_data.get("shop", c_data) if r_path == "/" else c_data
-                    sections = shop_node.get("sections", {}) if isinstance(shop_node, dict) else {}
-                    sec_order = shop_node.get("sectionOrder", []) if isinstance(shop_node, dict) else []
-                    if ("rebate" in sections) and ("rebate" in sec_order):
-                        rebate_section_verified = True
-                        break
+                    if isinstance(shop_node, dict):
+                        sections = shop_node.get("sections", [])
+                        sec_order = shop_node.get("sectionOrder", [])
+                        if isinstance(sections, list) and ("rebate" in sections) and bool(shop_node.get("rebate")):
+                            rebate_section_verified = True
+                            break
+                        if isinstance(sections, dict) and ("rebate" in sections) and ("rebate" in sec_order):
+                            rebate_section_verified = True
+                            break
         except Exception:
             pass
 

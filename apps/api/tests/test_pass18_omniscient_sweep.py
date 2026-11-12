@@ -152,3 +152,13 @@ def test_crm_auth_fail_closed_and_subcent_deposit_rounding():
     assert not os.path.exists(
         os.path.join(CRM_ROOT, "frontend", "src", "components", "CustomerList.backup.jsx")
     )
+
+
+def test_content_seed_parity_and_shop_rebate_lock():
+    api_seed = json.load(open(os.path.join(API_ROOT, "content_seed.json"), encoding="utf-8"))
+    web_content = json.load(open(os.path.join(REPO_ROOT, "apps", "web", "lib", "content", "content.json"), encoding="utf-8"))
+    assert api_seed == web_content, "apps/api/content_seed.json must match apps/web/lib/content/content.json 1:1"
+    assert "rebate" in api_seed["shop"]["sections"]
+    assert bool(api_seed["shop"].get("rebate"))
+    assert "AJCQ12AXXWA" in json.dumps(api_seed["shop"]["rebate"])
+
