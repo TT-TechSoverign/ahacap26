@@ -148,6 +148,7 @@ export function middleware(request: NextRequest) {
 
     // Decommissioned & Consolidated Canonical Routes (301 Permanent Redirects)
     const CONSOLIDATED_REDIRECTS: Record<string, string> = {
+        '/ac-diagnostic-service-175-flat-rate': '/window-ac-diagnostic-assessment-oahu',
         '/window-ac-deep-cleaning-chemical-overhaul': '/clean-vs-replace-window-ac',
         '/window_ac_maintenance': '/clean-vs-replace-window-ac',
         '/ac-maintenance-service-contract-oahu': '/seasonal-ac-maintenance-plans-oahu',

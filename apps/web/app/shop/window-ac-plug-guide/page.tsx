@@ -207,111 +207,89 @@ export default function WindowAcPlugGuidePage() {
         "@graph": [
             {
                 "@type": "HVACBusiness",
+                "@id": "https://www.affordablehome-ac.com/shop/window-ac-plug-guide#localbusiness",
+                "parentOrganization": {
+                                "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
+                },
                 "name": "Affordable Home A/C",
+                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                "url": "https://www.affordablehome-ac.com",
                 "telephone": "+1-808-488-1111",
+                "priceRange": "$395 - $1,200",
+                "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
                 "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leoleo St. #203",
-                    "addressLocality": "Waipahu",
-                    "addressRegion": "HI",
-                    "postalCode": "96797",
-                    "addressCountry": "US"
+                                "@type": "PostalAddress",
+                                "streetAddress": "94-150 Leoleo St. #203",
+                                "addressLocality": "Waipahu",
+                                "addressRegion": "HI",
+                                "postalCode": "96797",
+                                "addressCountry": "US"
                 },
-                "areaServed": "Oahu, Hawaii"
-            },
-            {
-                "@type": "Product",
-                "color": "White",
-                "category": "Window Air Conditioners",
-                "name": "In-Stock 115V & 230V LG Dual Inverter & GE Window Air Conditioners (NEMA 5-15P / 6-15P / 6-20P)",
-                "image": [
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
-                ],
-                "description": "Compare 115V (NEMA 5-15P, 6,000–14,000 BTU) and 208/230V (NEMA 6-15P / 6-20P, 18,000–23,500 BTU) LG Dual Inverter & GE Built-In Window ACs in stock in Waipahu, Oahu.",
-                "brand": { "@type": "Brand", "name": "LG & GE Appliances" },
-                "sku": "LW1522FVSM",
-                "mpn": "LW1522FVSM",
-                "gtin12": "195174031919",
+                "areaServed": "Oahu, Hawaii",
                 "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "142",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                },
-                "review": [
-                    {
-                        "@type": "Review",
-                        "author": { "@type": "Person", "name": "Brandon T. — Mililani, Oahu" },
-                        "datePublished": "2026-09-29",
-                        "reviewBody": "This NEMA plug chart saved us from ordering the wrong voltage! We picked up the 14,000 BTU LG Dual Inverter (LW1522FVSM) that plugs right into our standard 115V living room outlet.",
-                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
-                    }
-                ],
-                "offers": [
-                    {
-                        "@type": "Offer",
-                        "name": "LG Dual Inverter 14,000 BTU 115V NEMA 5-15P (LW1522FVSM)",
-                        "sku": "LW1522FVSM",
-                        "url": "https://www.affordablehome-ac.com/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm",
-                        "priceCurrency": "USD",
-                        "price": "785.00",
-                        "validFrom": "2026-01-01",
-                        "priceValidUntil": "2027-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                        "hasMerchantReturnPolicy": {
-                            "@type": "MerchantReturnPolicy",
-                            "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                            "name": "All Sales Final"
-                        },
-                        "shippingDetails": {
-                            "@type": "OfferShippingDetails",
-                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
-                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
-                            "deliveryTime": {
-                                "@type": "ShippingDeliveryTime",
-                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                            }
-                        }
-                    },
-                    {
-                        "@type": "Offer",
-                        "name": "LG Dual Inverter 18,000 BTU 208/230V NEMA 6-15P (LW1822IVSM)",
-                        "sku": "LW1822IVSM",
-                        "url": "https://www.affordablehome-ac.com/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm",
-                        "priceCurrency": "USD",
-                        "price": "925.00",
-                        "validFrom": "2026-01-01",
-                        "priceValidUntil": "2027-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                        "hasMerchantReturnPolicy": {
-                            "@type": "MerchantReturnPolicy",
-                            "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                            "name": "All Sales Final"
-                        },
-                        "shippingDetails": {
-                            "@type": "OfferShippingDetails",
-                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
-                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
-                            "deliveryTime": {
-                                "@type": "ShippingDeliveryTime",
-                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                            }
-                        }
-                    }
-                ]
-            },
+                                "@type": "AggregateRating",
+                                "ratingValue": "4.9",
+                                "reviewCount": "142",
+                                "bestRating": "5",
+                                "worstRating": "1"
+                }
+},
+            {
+                "@type": "CollectionPage",
+                "@id": "https://www.affordablehome-ac.com/shop/window-ac-plug-guide#collection",
+                "url": "https://www.affordablehome-ac.com/shop/window-ac-plug-guide",
+                "name": "115V vs 208/230V Window AC Plug & NEMA Receptacle Guide Oahu",
+                "description": "Complete Oahu electrical plug guide mapping NEMA 5-15P (115V 15A), NEMA 6-15P (230V 15A), and NEMA 6-20P (230V 20A) receptacles to in-stock LG & GE Window ACs.",
+                "mainEntity": {
+                                "@type": "ItemList",
+                                "name": "115V vs 208/230V Window AC Plug & NEMA Receptacle Guide Oahu — Canonical Models",
+                                "numberOfItems": 7,
+                                "itemListElement": [
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 1,
+                                                                "name": "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 2,
+                                                                "name": "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 3,
+                                                                "name": "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 4,
+                                                                "name": "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 5,
+                                                                "name": "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 6,
+                                                                "name": "LG 18,000 BTU Cool + Heat (LW1823HRSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/9-lg-18-000-btu-lw1823hrsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 7,
+                                                                "name": "GE 12,000 BTU R-32 Inverter 26\" Built-In (AJCQ12AXXWA)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/15-ge-12-000-btu-ajcq12axxwa"
+                                                }
+                                ]
+                }
+},
             {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
@@ -360,7 +338,7 @@ export default function WindowAcPlugGuidePage() {
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData).replace(/</g, '\u003c') }}
             />
 
             <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-[96px] md:pt-[180px] pb-24">

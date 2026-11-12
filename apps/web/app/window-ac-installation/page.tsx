@@ -936,6 +936,43 @@ export default function WindowAcInstallationPage() {
                         ))}
                     </div>
                 </section>
+                {/* Contextual Hawaii Window & Condo Architecture Engineering Guides */}
+                <section aria-label="Oahu Window AC Installation & Condo Architecture Guides" className="max-w-6xl mx-auto mb-16 pt-8 border-t border-white/10">
+                    <div className="text-center mb-8">
+                        <span className="text-primary font-mono text-[10px] uppercase tracking-[0.25em] block mb-1.5">
+                            HAWAII FRAMING &amp; ELECTRICAL ENGINEERING
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl font-header font-black uppercase text-white">
+                            Oahu Window, Condo &amp; <span className="text-primary">230V Circuit Guides</span>
+                        </h2>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                        {[
+                            { title: 'Oahu Window AC Installation Cost Guide', sub: '$0 Free Estimate • Itemized Labor Factors', href: '/window-ac-installation-cost-oahu' },
+                            { title: 'Jalousie Glass Louver Retrofits', sub: 'Custom Clear Acrylic Baffle Sealing', href: '/jalousie-window-ac-installation-oahu' },
+                            { title: '230V NEMA 6-15 & 6-20 Outlet Guide', sub: '18k–23.5k BTU Plug & Licensed Subcontractor Rules', href: '/230v-window-ac-outlet-nema-6-15-6-20-oahu' },
+                            { title: '26" Wall Sleeve Dimensions (RAB26A)', sub: 'GE AJCQ & LG Universal Fit Condo Chassis', href: '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu' },
+                            { title: 'Property Manager & Landlord AC Program', sub: 'Multi-Unit Rental Replacements & Scheduling', href: '/property-manager-landlord-window-ac-oahu' },
+                            { title: 'Honolulu High-Rise Condo HOA Rules', sub: 'AOAO Noise, Drip Routing & Exterior Brackets', href: '/high-rise-condo-ac-rules-honolulu' },
+                            { title: 'Single-Wall Redwood Home Sizing', sub: 'Uninsulated Plantation Heat-Soak Calibration', href: '/single-wall-construction-ac-cooling-hawaii' },
+                            { title: 'Horizontal Sliding Window Mounting', sub: 'Vertical Acrylic Filler & Security Track Lock', href: '/horizontal-sliding-window-ac-oahu' },
+                        ].map((g) => (
+                            <Link
+                                key={g.href}
+                                href={g.href}
+                                className="p-4 rounded-2xl bg-slate-900/60 hover:bg-primary/10 border border-white/10 hover:border-primary/40 transition-all group"
+                            >
+                                <div className="font-header font-bold text-xs sm:text-sm uppercase text-white group-hover:text-cyan-300 transition-colors">
+                                    {g.title} &rarr;
+                                </div>
+                                <div className="text-[11px] font-mono text-slate-400 mt-1">
+                                    {g.sub}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+
 <ReviewsPavilion variant="compact" />
                 <OahuEEATAuthorityBar topicTitle="Oahu Window & Jalousie AC Installation Guide ($0 Free In-Home Estimate)" />
             </main>

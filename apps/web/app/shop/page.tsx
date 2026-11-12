@@ -1155,6 +1155,48 @@ function ShopPageContent() {
                     </div>
                 </section>
 
+                {/* Contextual Oahu Window AC Buyer & Technical Cluster Hub */}
+                <section aria-label="Oahu Window AC Buyer Guides by Room Size & Voltage" className="max-w-7xl mx-auto mt-14 pt-10 border-t border-white/5">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                        <div>
+                            <span className="text-primary font-mono text-[10px] uppercase tracking-[0.25em] block mb-1.5">
+                                OAHU TECHNICAL BUYING GUIDES
+                            </span>
+                            <h2 className="text-xl md:text-2xl font-header font-black text-white uppercase tracking-tight">
+                                Shop by Room Size, Sleeve Fit &amp; <span className="text-primary">HECO Energy Math</span>
+                            </h2>
+                        </div>
+                        <Link href="/sizing" className="text-xs font-mono text-cyan-400 hover:text-cyan-300 font-bold uppercase tracking-wider">
+                            Launch Oahu BTU Sizing Wizard &rarr;
+                        </Link>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                        {[
+                            { title: '6,000–8,000 BTU Bedroom ACs', sub: '$395–$595 • 115V Standard Plug', href: '/small-room-window-ac-6000-8000-btu' },
+                            { title: '10,000–12,000 BTU Master & Condo', sub: '$650–$1,200 • 115V Dual Inverters & GE', href: '/shop/10000-12000-btu-window-ac-oahu' },
+                            { title: '14,000–23,500 BTU Large Room ACs', sub: '$785–$1,025 • Open Living Rooms', href: '/shop/large-room-window-ac-oahu' },
+                            { title: 'GE 26" Thru-the-Wall & RAB26A Fit', sub: '26" x 15-5/8" Sleeve Caliper Specs', href: '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu' },
+                            { title: 'LG Cool + Heat Window ACs Hawaii', sub: '7.6k–23k BTU • Mililani, Manoa & Wahiawa', href: '/shop/lg-cool-and-heat-window-ac-hawaii' },
+                            { title: 'LG Standard Budget Window ACs', sub: '$395–$685 • Turnkey Rental & Studio Value', href: '/shop/lg-standard-budget-window-ac-oahu' },
+                            { title: 'HECO Electricity Cost Calculator', sub: '44.2¢/kWh Monthly Cost & $45 Rebate ROI', href: '/window-ac-electricity-cost-heco-calculator-hawaii' },
+                            { title: 'Portable AC vs Window AC Hawaii', sub: 'Why Single-Hose Units Fail Single-Wall Heat', href: '/portable-ac-vs-window-ac-hawaii' },
+                        ].map((g) => (
+                            <Link
+                                key={g.href}
+                                href={g.href}
+                                className="p-4 rounded-2xl bg-slate-900/70 hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-400/40 transition-all group"
+                            >
+                                <div className="font-header font-black text-xs sm:text-sm uppercase text-white group-hover:text-cyan-300 transition-colors">
+                                    {g.title} &rarr;
+                                </div>
+                                <div className="text-[11px] font-mono text-slate-400 mt-1">
+                                    {g.sub}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+
                 <div className="max-w-7xl mx-auto">
                     <OahuEEATAuthorityBar topicTitle="Oahu In-Stock LG Dual Inverter & GE Built-In Window Air Conditioner Catalog ($395–$1,200)" />
                 </div>
@@ -1358,21 +1400,28 @@ export default function ShopPage() {
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
-                        "@type": "Product",
-                "color": "White",
-                "category": "Window Air Conditioners",
-                        "name": "In-Stock LG Dual Inverter & GE 26-Inch Built-In Window Air Conditioners (6,000–23,500 BTU)",
+                        "@type": "HVACBusiness",
+                        "@id": `${domain}/shop#localbusiness`,
+                        "parentOrganization": { "@id": `${domain}/#hvacbusiness` },
+                        "name": "Affordable Home A/C — Waipahu Window AC Warehouse",
                         "image": [
                             `${domain}/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp`,
                             `${domain}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp`,
-                            `${domain}/assets/window-unit-images/lg-universal-fit-unit-photos-1600x1000/lg-universal-fit-through-the-wall-front-1600x1000.webp`,
                             `${domain}/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp`
                         ],
                         "description": "Shop 16 factory-sealed LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In Window ACs ($395 to $1,200) in stock at our Waipahu warehouse (94-150 Leoleo St. #203). Free Waipahu pickup by appointment, $50 flat Oahu delivery, and $45 Hawaii Energy cash rebate.",
-                        "brand": { "@type": "Brand", "name": "LG & GE Appliances" },
-                        "sku": "LW1222IVSM",
-                        "mpn": "LW1222IVSM",
-                        "gtin12": "195174031902",
+                        "url": `${domain}/shop`,
+                        "telephone": "+1-808-488-1111",
+                        "priceRange": "$395 - $1,200",
+                        "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "94-150 Leoleo St. #203",
+                            "addressLocality": "Waipahu",
+                            "addressRegion": "HI",
+                            "postalCode": "96797",
+                            "addressCountry": "US"
+                        },
                         "aggregateRating": {
                             "@type": "AggregateRating",
                             "ratingValue": "4.9",
@@ -1388,68 +1437,8 @@ export default function ShopPage() {
                                 "reviewBody": "Ordered online and picked up our 12,000 BTU LG Dual Inverter in Waipahu the same day. Loaded into our truck in 5 minutes and came with the $45 Hawaii Energy rebate form!",
                                 "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
                             }
-                        ],
-                        "offers": [
-                            {
-                                "@type": "Offer",
-                                "name": "LG 8,000 BTU Window Air Conditioner (LW8024RD)",
-                                "sku": "LW8024RD",
-                                "url": `${domain}/shop/11-lg-8-000-btu-lw8024rd`,
-                                "priceCurrency": "USD",
-                                "price": "395.00",
-                                "validFrom": "2026-01-01",
-                                "priceValidUntil": "2027-12-31",
-                                "availability": "https://schema.org/InStock",
-                                "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                                "hasMerchantReturnPolicy": {
-                                    "@type": "MerchantReturnPolicy",
-                                    "applicableCountry": "US",
-                                    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                                    "name": "All Sales Final"
-                                },
-                                "shippingDetails": {
-                                    "@type": "OfferShippingDetails",
-                                    "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
-                                    "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
-                                    "deliveryTime": {
-                                        "@type": "ShippingDeliveryTime",
-                                        "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                                        "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                                    }
-                                }
-                            },
-                            {
-                                "@type": "Offer",
-                                "name": "LG Dual Inverter 12,000 BTU Window Air Conditioner (LW1222IVSM)",
-                                "sku": "LW1222IVSM",
-                                "url": `${domain}/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm`,
-                                "priceCurrency": "USD",
-                                "price": "745.00",
-                                "validFrom": "2026-01-01",
-                                "priceValidUntil": "2027-12-31",
-                                "availability": "https://schema.org/InStock",
-                                "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                                "hasMerchantReturnPolicy": {
-                                    "@type": "MerchantReturnPolicy",
-                                    "applicableCountry": "US",
-                                    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                                    "name": "All Sales Final"
-                                },
-                                "shippingDetails": {
-                                    "@type": "OfferShippingDetails",
-                                    "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
-                                    "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
-                                    "deliveryTime": {
-                                        "@type": "ShippingDeliveryTime",
-                                        "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                                        "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                                    }
-                                }
-                            }
                         ]
-                    })
+                    }).replace(/</g, '\\u003c')
                 }}
             />
             <script

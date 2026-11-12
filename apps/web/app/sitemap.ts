@@ -11,7 +11,9 @@ import path from 'path';
 // Force dynamic rendering so this runs at request time (when API is up),
 // not at build time (when API is down).
 export const revalidate = 86400;
-const STATIC_LAST_MODIFIED = '2026-11-11';
+const PASS17_LAST_MODIFIED = '2026-11-12';
+const CORE_LAST_MODIFIED = '2026-11-11';
+const CITY_AND_GUIDE_LAST_MODIFIED = '2026-11-08';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com';
@@ -59,7 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Sort alphabetically
     cityRoutes.sort((a, b) => a.localeCompare(b));
 
-    // 1. Define Canonical Static Routes (Zero redirected/doorway routes)
+    // 1. Define Canonical Static Routes (Zero redirected/doorway routes — 118 total canonical routes)
     const coreServiceHubs = new Set([
         '/contact',
         '/sizing',
@@ -70,21 +72,76 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/reviews',
         '/shop/oahu-window-ac-warehouse',
         '/shop/ge-built-in-wall-ac-oahu',
+        '/shop/10000-12000-btu-window-ac-oahu',
+        '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu',
+        '/window-ac-installation-cost-oahu',
+        '/window-ac-electricity-cost-heco-calculator-hawaii',
+    ]);
+
+    const pass17UpdatedRoutes = new Set([
+        '',
+        '/shop',
+        '/sizing',
+        '/sitemap',
+        '/window-ac-installation',
+        '/ac-cleaning-oahu',
+        '/ac-repair-oahu',
+        '/living-room-window-ac-oahu',
+        '/window-ac-delivery-service-oahu',
+        '/window-ac-diagnostic-assessment-oahu',
+        '/hawaii-energy-rebate',
+        '/window-ac-replacement-oahu',
+        '/window-ac-warehouse-pickup-waipahu',
+        '/window-ac-warranty-waipahu',
+        '/commercial-window-ac-oahu',
+        '/energy-star-window-air-conditioners-hawaii',
+        '/inverter-window-ac-vs-standard-hawaii',
+        '/low-voltage-window-ac-115v-oahu',
+        '/quiet-bedroom-window-ac-oahu',
+        '/small-room-window-ac-6000-8000-btu',
+        '/smart-wifi-window-ac-oahu',
+        '/window-ac-for-studios-apartments-hawaii',
+        '/shop/ge-built-in-wall-ac-oahu',
+        '/shop/large-room-window-ac-oahu',
+        '/shop/lg-dual-inverter-8000-btu-oahu',
+        '/shop/lg-dual-inverter-guide',
+        '/shop/oahu-window-ac-warehouse',
+        '/shop/window-ac-plug-guide',
+        '/shop/10000-12000-btu-window-ac-oahu',
+        '/shop/lg-cool-and-heat-window-ac-hawaii',
+        '/shop/lg-standard-budget-window-ac-oahu',
+        '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu',
+        '/window-ac-installation-cost-oahu',
+        '/window-ac-electricity-cost-heco-calculator-hawaii',
+        '/portable-ac-vs-window-ac-hawaii',
+        '/230v-window-ac-outlet-nema-6-15-6-20-oahu',
+        '/window-ac-cleaning-vs-repair-cost-oahu',
+        '/property-manager-landlord-window-ac-oahu',
     ]);
 
     const highYieldRoutes = [
         '/clean-vs-replace-window-ac',
         '/window-ac-installation',
+        '/window-ac-installation-cost-oahu',
         '/shop/window-ac-plug-guide',
+        '/230v-window-ac-outlet-nema-6-15-6-20-oahu',
+        '/shop/10000-12000-btu-window-ac-oahu',
         '/shop/large-room-window-ac-oahu',
         '/shop/lg-dual-inverter-8000-btu-oahu',
         '/shop/lg-dual-inverter-guide',
+        '/shop/lg-cool-and-heat-window-ac-hawaii',
+        '/shop/lg-standard-budget-window-ac-oahu',
+        '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu',
         '/ac-repair-oahu',
         '/ac-cleaning-oahu',
+        '/window-ac-cleaning-vs-repair-cost-oahu',
         '/shop/oahu-window-ac-warehouse',
         '/shop/ge-built-in-wall-ac-oahu',
         '/reviews',
         '/hawaii-energy-rebate',
+        '/window-ac-electricity-cost-heco-calculator-hawaii',
+        '/portable-ac-vs-window-ac-hawaii',
+        '/property-manager-landlord-window-ac-oahu',
         '/jalousie-window-ac-installation-oahu',
         '/quiet-bedroom-window-ac-oahu',
         '/living-room-window-ac-oahu',
@@ -129,7 +186,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/salt-corrosion-coil-rinse-hawaii',
         '/post-storm-ac-inspection-cleaning-oahu',
         '/pet-hair-dander-ac-cleaning-oahu',
-        '/ac-diagnostic-service-175-flat-rate',
+        '/window-ac-diagnostic-assessment-oahu',
         '/ac-compressor-not-turning-on-oahu',
         '/window-ac-making-loud-buzzing-noise',
         '/ac-refrigerant-leak-detection-hawaii',
@@ -141,7 +198,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const getStaticRouteImages = (route: string): string[] => {
         const r = route.toLowerCase();
-        if (r.includes('ge-built-in') || r.includes('wall') || r.includes('condo') || r.includes('sleeve')) {
+        if (r.includes('ge-built-in') || r.includes('wall') || r.includes('condo') || r.includes('sleeve') || r.includes('rab26a')) {
             return [
                 `${baseUrl}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp`,
                 `${baseUrl}/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.webp`,
@@ -171,7 +228,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             r.includes('install') || r.includes('jalousie') || r.includes('bracket') ||
             r.includes('sliding') || r.includes('weather') || r.includes('renter') ||
             r.includes('double-hung') || r.includes('wood-frame') || r.includes('vinyl') ||
-            r.includes('security-bars') || r.includes('narrow') || r.includes('sizing')
+            r.includes('security-bars') || r.includes('narrow') || r.includes('sizing') ||
+            r.includes('230v') || r.includes('nema')
         ) {
             return [
                 `${baseUrl}/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp`,
@@ -203,9 +261,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 ? 'weekly'
                 : 'monthly';
 
+        const routeLastMod = pass17UpdatedRoutes.has(route)
+            ? PASS17_LAST_MODIFIED
+            : (coreServiceHubs.has(route) ? CORE_LAST_MODIFIED : CITY_AND_GUIDE_LAST_MODIFIED);
+
         return {
             url: `${baseUrl}${route}`,
-            lastModified: STATIC_LAST_MODIFIED,
+            lastModified: routeLastMod,
             changeFrequency,
             priority: route === '' ? 1.0 : (highYieldRoutes.includes(route) ? 0.9 : (route.startsWith('/service-areas/') ? 0.8 : 0.85)),
             images: getStaticRouteImages(route),
@@ -250,7 +312,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
         return {
             url: `${baseUrl}/shop/${generateProductSlug(product.id, product.name)}`,
-            lastModified: STATIC_LAST_MODIFIED,
+            lastModified: CORE_LAST_MODIFIED,
             changeFrequency: 'weekly' as const,
             priority: 0.95,
             images: uniqueImages,

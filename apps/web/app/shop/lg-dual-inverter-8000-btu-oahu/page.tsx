@@ -133,88 +133,77 @@ export default function Lg8000BtuOahuPage() {
         "@graph": [
             {
                 "@type": "HVACBusiness",
+                "@id": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-8000-btu-oahu#localbusiness",
+                "parentOrganization": {
+                                "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
+                },
                 "name": "Affordable Home A/C",
+                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                "url": "https://www.affordablehome-ac.com",
                 "telephone": "+1-808-488-1111",
                 "priceRange": "$395 - $1,200",
+                "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
                 "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leoleo St. #203",
-                    "addressLocality": "Waipahu",
-                    "addressRegion": "HI",
-                    "postalCode": "96797",
-                    "addressCountry": "US"
+                                "@type": "PostalAddress",
+                                "streetAddress": "94-150 Leoleo St. #203",
+                                "addressLocality": "Waipahu",
+                                "addressRegion": "HI",
+                                "postalCode": "96797",
+                                "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "LG Dual Inverter 8,000 BTU window AC in Waipahu, Oahu. Library-quiet 44dB operation, ThinQ WiFi, standard 115V plug, and official $45 Hawaii Energy cash rebate."
-            },
-            {
-                "@type": "Product",
-                "color": "White",
-                "category": "Window Air Conditioners",
-                "name": "LG Dual Inverter 8,000 BTU Window Air Conditioner (LW8022IVSM)",
-                "image": [
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
-                ],
-                "description": "Ultra-quiet 8,000 BTU Dual Inverter window air conditioner with smart ThinQ WiFi control. Perfect for Oahu master bedrooms and home offices. Eligible for $45 Hawaii Energy cash rebate.",
-                "brand": { "@type": "Brand", "name": "LG" },
-                "sku": "LW8022IVSM",
-                "mpn": "LW8022IVSM",
-                "gtin12": "048231605861",
                 "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "142",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                },
-                "review": [
-                    {
-                        "@type": "Review",
-                        "author": { "@type": "Person", "name": "Leilani K. — Kaimuki, Oahu" },
-                        "datePublished": "2026-09-18",
-                        "reviewBody": "So quiet in our master bedroom! You can barely hear it running on sleep mode and the ThinQ app lets us cool the room before we get home.",
-                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
-                    }
-                ],
-                "offers": {
-                    "@type": "Offer",
-                    "url": "https://www.affordablehome-ac.com/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm",
-                    "priceCurrency": "USD",
-                    "price": activePrice.toFixed(2),
-                    "validFrom": "2026-01-01",
-                    "priceValidUntil": "2027-12-31",
-                    "availability": isOutOfStock ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-                    "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                    "hasMerchantReturnPolicy": {
-                            "@type": "MerchantReturnPolicy",
-                            "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                            "name": "All Sales Final"
-                        },
-                    "shippingDetails": {
-                        "@type": "OfferShippingDetails",
-                        "shippingRate": {
-                            "@type": "MonetaryAmount",
-                            "value": "0.00",
-                            "currency": "USD"
-                        },
-                        "shippingDestination": {
-                            "@type": "DefinedRegion",
-                            "addressCountry": "US",
-                            "addressRegion": "HI"
-                        },
-                        "deliveryTime": {
-                            "@type": "ShippingDeliveryTime",
-                            "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                            "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                        }
-                    }
+                                "@type": "AggregateRating",
+                                "ratingValue": "4.9",
+                                "reviewCount": "142",
+                                "bestRating": "5",
+                                "worstRating": "1"
                 }
-            },
+},
+            {
+                "@type": "CollectionPage",
+                "@id": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-8000-btu-oahu#collection",
+                "url": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-8000-btu-oahu",
+                "name": "8,000 BTU Bedroom Window AC Comparison Oahu (LG Dual Inverter vs Standard & Universal)",
+                "description": "Side-by-side Oahu bedroom comparison of 8,000 BTU class LG Dual Inverter (LW8022IVSM), LG Standard (LW8024RD), LG Cool+Heat (LW8023HRSM), and GE 8,200 BTU Built-In.",
+                "mainEntity": {
+                                "@type": "ItemList",
+                                "name": "8,000 BTU Bedroom Window AC Comparison Oahu (LG Dual Inverter vs Standard & Universal) — Canonical Models",
+                                "numberOfItems": 5,
+                                "itemListElement": [
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 1,
+                                                                "name": "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 2,
+                                                                "name": "LG 8,000 BTU Standard (LW8024RD)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/11-lg-8-000-btu-lw8024rd"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 3,
+                                                                "name": "LG 7,600 BTU Cool + Heat (LW8023HRSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/8-lg-7-600-btu-lw8023hrsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 4,
+                                                                "name": "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 5,
+                                                                "name": "GE 8,200 BTU 26\" Built-In (AJCQ08AWJ)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/13-ge-8-200-btu-ajcq08awj"
+                                                }
+                                ]
+                }
+},
             {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
@@ -256,7 +245,7 @@ export default function Lg8000BtuOahuPage() {
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData).replace(/</g, '\u003c') }}
             />
 
             <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-[96px] md:pt-[180px] pb-24">

@@ -89,159 +89,47 @@ const breadcrumbSchema = {
 
 const pass5RichSchema = {
     "@context": "https://schema.org",
-    "@type": "Product",
-                "color": "White",
-                "category": "Window Air Conditioners",
-    "name": "Factory-Warrantied LG & GE Window Air Conditioners Oahu (AJCQ12AXXWA)",
+    "@type": "Service",
+    "@id": "https://www.affordablehome-ac.com/window-ac-warranty-waipahu#service",
+    "name": "LG & GE Window AC Factory Warranty & Local Waipahu Support Oahu",
+    "serviceType": "LG & GE Window AC Factory Warranty & Local Waipahu Support Oahu",
+    "url": "https://www.affordablehome-ac.com/window-ac-warranty-waipahu",
+    "description": "1-year LG parts & labor and 2-year full / 5-year sealed-system GE Built-In manufacturer warranty support backed by our local Waipahu warehouse team.",
     "image": [
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
-        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp"
     ],
-    "description": "Brand-new factory-sealed LG (1-Yr Parts & Labor) and GE Built-In (2-Yr Full / 5-Yr Sealed System) window ACs ($395–$1,200) in stock in Waipahu, Oahu.",
-    "sku": "AJCQ12AXXWA",
-    "mpn": "AJCQ12AXXWA",
-    "gtin12": "084691908142",
-    "brand": {
-        "@type": "Brand",
-        "name": "GE Appliances"
-    },
-    "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "142",
-        "bestRating": "5",
-        "worstRating": "1"
-    },
-    "review": [
-        {
-            "@type": "Review",
-            "author": {
-                "@type": "Person",
-                "name": "Kimo M. — Oahu Homeowner"
-            },
-            "datePublished": "2026-09-18",
-            "reviewBody": "Picked up our new LG Dual Inverter at the Waipahu warehouse. Ice-cold, whisper quiet at 44dB, and qualified for the $45 Hawaii Energy rebate.",
-            "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "5",
-                "bestRating": "5",
-                "worstRating": "1"
-            }
+    "provider": {
+        "@type": "HVACBusiness",
+        "@id": "https://www.affordablehome-ac.com/window-ac-warranty-waipahu#localbusiness",
+        "parentOrganization": {
+            "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
         },
-        {
-            "@type": "Review",
-            "author": {
-                "@type": "Person",
-                "name": "Leilani K. — Honolulu, Oahu"
-            },
-            "datePublished": "2026-10-02",
-            "reviewBody": "Upgraded our Honolulu condo bedroom to an in-stock Waipahu unit. Runs whisper-quiet overnight on a standard 115V outlet and cut our HECO electric bill.",
-            "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "5",
-                "bestRating": "5",
-                "worstRating": "1"
-            }
+        "name": "Affordable Home A/C",
+        "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+        "url": "https://www.affordablehome-ac.com",
+        "telephone": "+1-808-488-1111",
+        "priceRange": "$395 - $1,200",
+        "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "94-150 Leoleo St. #203",
+            "addressLocality": "Waipahu",
+            "addressRegion": "HI",
+            "postalCode": "96797",
+            "addressCountry": "US"
         },
-        {
-            "@type": "Review",
-            "author": {
-                "@type": "Person",
-                "name": "David C. — Pearl City, Oahu"
-            },
-            "datePublished": "2026-10-14",
-            "reviewBody": "Same-week Waipahu warehouse pickup by appointment. Brand-new factory-sealed unit with 1-year warranty and official $45 Hawaii Energy rebate PDF.",
-            "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "5",
-                "bestRating": "5",
-                "worstRating": "1"
-            }
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "142",
+            "bestRating": "5",
+            "worstRating": "1"
         }
-    ],
-    "offers": {
-        "@type": "Offer",
-        "url": "https://www.affordablehome-ac.com/window-ac-warranty-waipahu",
-        "priceCurrency": "USD",
-        "price": "1200.00",
-        "priceValidUntil": "2027-12-31",
-        "validFrom": "2026-01-01",
-        "itemCondition": "https://schema.org/NewCondition",
-        "availability": "https://schema.org/InStock",
-        "seller": {
-            "@type": "Organization",
-            "name": "Affordable Home A/C",
-            "url": "https://www.affordablehome-ac.com"
-        },
-        "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "applicableCountry": "US",
-            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-            "name": "All Sales Final"
-        },
-        "shippingDetails": [
-            {
-                "@type": "OfferShippingDetails",
-                "name": "Waipahu Warehouse Pickup by Appt",
-                "shippingRate": {
-                    "@type": "MonetaryAmount",
-                    "value": "0.00",
-                    "currency": "USD"
-                },
-                "shippingDestination": {
-                    "@type": "DefinedRegion",
-                    "addressCountry": "US",
-                    "addressRegion": "HI",
-                    "postalCode": "96797"
-                },
-                "deliveryTime": {
-                    "@type": "ShippingDeliveryTime",
-                    "handlingTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 0,
-                        "maxValue": 1,
-                        "unitCode": "DAY"
-                    },
-                    "transitTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 0,
-                        "maxValue": 0,
-                        "unitCode": "DAY"
-                    }
-                }
-            },
-            {
-                "@type": "OfferShippingDetails",
-                "name": "Flat-Rate Oahu Delivery",
-                "shippingRate": {
-                    "@type": "MonetaryAmount",
-                    "value": "50.00",
-                    "currency": "USD"
-                },
-                "shippingDestination": {
-                    "@type": "DefinedRegion",
-                    "addressCountry": "US",
-                    "addressRegion": "HI"
-                },
-                "deliveryTime": {
-                    "@type": "ShippingDeliveryTime",
-                    "handlingTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 1,
-                        "maxValue": 2,
-                        "unitCode": "DAY"
-                    },
-                    "transitTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 1,
-                        "maxValue": 3,
-                        "unitCode": "DAY"
-                    }
-                }
-            }
-        ]
+    },
+    "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Oahu, Hawaii"
     }
 };
 
@@ -250,15 +138,15 @@ export default function WindowAcWarrantyLayout({ children }: { children: React.R
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(warrantyFaqSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(warrantyFaqSchema).replace(/</g, '\u003c') }}
             />
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\u003c') }}
             />
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(pass5RichSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(pass5RichSchema).replace(/</g, '\u003c') }}
             />
             {children}
         </>

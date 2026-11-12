@@ -602,6 +602,43 @@ export default function AcCleaningOahuPage() {
                     subheading="Ready for Free Waipahu Warehouse Pickup by appointment or $50 flat-rate Oahu delivery with $45 Hawaii Energy Rebate."
                 />
 
+                {/* Contextual Oahu Coil Cleaning & Mold Remediation Cluster */}
+                <section aria-label="Oahu Window AC Cleaning & Mold Guides" className="max-w-6xl mx-auto my-12 pt-8 border-t border-white/10">
+                    <div className="text-center mb-6">
+                        <span className="text-cyan-400 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1.5">
+                            CLINICAL SANITIZATION &amp; ECONOMICS
+                        </span>
+                        <h2 className="text-xl sm:text-2xl font-header font-black uppercase text-white">
+                            Oahu Mold Purge, Blower Wash &amp; <span className="text-primary">Clean-vs-Replace Guides</span>
+                        </h2>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                        {[
+                            { title: 'Cleaning vs Repair vs Replace Cost', sub: 'Oahu Break-Even Matrix ($0 Estimate)', href: '/window-ac-cleaning-vs-repair-cost-oahu' },
+                            { title: '$0 Clean-vs-Replace Assessment', sub: 'Honest Age, Rust & Compressor Triage', href: '/clean-vs-replace-window-ac' },
+                            { title: 'Black Mold & Spore Purge Guide', sub: 'Antimicrobial Coil & Slinger Pan Flush', href: '/black-mold-in-ac-health-risks-hawaii' },
+                            { title: 'Musty Mildew Odor Treatment', sub: 'Eliminate Dirty Sock Syndrome on Oahu', href: '/ac-smells-musty-mildew-hawaii' },
+                            { title: '360° Blower Wheel Deep Scrub', sub: 'Restore Ice-Cold CFM Airflow Velocity', href: '/air-conditioner-blower-wheel-cleaning-hawaii' },
+                            { title: 'Coastal Salt-Air Coil Rinse', sub: 'Protect Kailua, Ewa & Hawaii Kai Fins', href: '/salt-corrosion-coil-rinse-hawaii' },
+                            { title: 'Coil Cleaning HECO Bill Savings', sub: 'Cut 44.2¢/kWh Compressor Amp Draw', href: '/ac-coil-cleaning-benefits-power-bill' },
+                            { title: 'Property Manager Multi-Unit Wash', sub: 'Tenant Turnover Sanitization & Swaps', href: '/property-manager-landlord-window-ac-oahu' },
+                        ].map((g) => (
+                            <Link
+                                key={g.href}
+                                href={g.href}
+                                className="p-4 rounded-2xl bg-slate-900/60 hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-400/40 transition-all group"
+                            >
+                                <div className="font-header font-bold text-xs sm:text-sm uppercase text-white group-hover:text-cyan-300 transition-colors">
+                                    {g.title} &rarr;
+                                </div>
+                                <div className="text-[11px] font-mono text-slate-400 mt-1">
+                                    {g.sub}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+
                 <ReviewsPavilion variant="compact" />
                 <OahuEEATAuthorityBar topicTitle="Oahu Window AC Deep Coil Cleaning, Mold Sanitization & Drop-Cloth Guide" />
             </main>

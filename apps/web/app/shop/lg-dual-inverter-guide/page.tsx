@@ -268,140 +268,89 @@ export default function LgDualInverterGuidePage() {
         "@graph": [
             {
                 "@type": "HVACBusiness",
+                "@id": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-guide#localbusiness",
+                "parentOrganization": {
+                                "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
+                },
                 "name": "Affordable Home A/C",
+                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                "url": "https://www.affordablehome-ac.com",
                 "telephone": "+1-808-488-1111",
+                "priceRange": "$395 - $1,200",
+                "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
                 "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leoleo St. #203",
-                    "addressLocality": "Waipahu",
-                    "addressRegion": "HI",
-                    "postalCode": "96797",
-                    "addressCountry": "US"
+                                "@type": "PostalAddress",
+                                "streetAddress": "94-150 Leoleo St. #203",
+                                "addressLocality": "Waipahu",
+                                "addressRegion": "HI",
+                                "postalCode": "96797",
+                                "addressCountry": "US"
                 },
-                "areaServed": "Oahu, Hawaii"
-            },
-            {
-                "@type": "Product",
-                "color": "White",
-                "category": "Window Air Conditioners",
-                "name": "LG Dual Inverter Window Air Conditioner Series (6,000–23,500 BTU)",
-                "image": [
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
-                ],
-                "description": "In-stock LG Dual Inverter window air conditioners (6,000 to 23,500 BTU) in Waipahu, Oahu. Whisper-quiet 44dB operation, up to 40% HECO energy savings, and $45 Hawaii Energy cash rebate.",
-                "brand": { "@type": "Brand", "name": "LG" },
-                "sku": "LW1222IVSM",
-                "mpn": "LW1222IVSM",
-                "gtin12": "195174031902",
+                "areaServed": "Oahu, Hawaii",
                 "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "142",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                },
-                "review": [
-                    {
-                        "@type": "Review",
-                        "author": { "@type": "Person", "name": "Kawika M. — Pearl City, Oahu" },
-                        "datePublished": "2026-09-24",
-                        "reviewBody": "Picked up two LG Dual Inverter units from the Waipahu warehouse. Super quiet at night and cut our HECO electric bill noticeably in the first month.",
-                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
-                    }
-                ],
-                "offers": [
-                    {
-                        "@type": "Offer",
-                        "name": "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
-                        "sku": "LW6023IVSM",
-                        "url": "https://www.affordablehome-ac.com/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm",
-                        "priceCurrency": "USD",
-                        "price": "560.00",
-                        "validFrom": "2026-01-01",
-                        "priceValidUntil": "2027-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                        "hasMerchantReturnPolicy": {
-                            "@type": "MerchantReturnPolicy",
-                            "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                            "name": "All Sales Final"
-                        },
-                        "shippingDetails": {
-                            "@type": "OfferShippingDetails",
-                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
-                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
-                            "deliveryTime": {
-                                "@type": "ShippingDeliveryTime",
-                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                            }
-                        }
-                    },
-                    {
-                        "@type": "Offer",
-                        "name": "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
-                        "sku": "LW1222IVSM",
-                        "url": "https://www.affordablehome-ac.com/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm",
-                        "priceCurrency": "USD",
-                        "price": "745.00",
-                        "validFrom": "2026-01-01",
-                        "priceValidUntil": "2027-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                        "hasMerchantReturnPolicy": {
-                            "@type": "MerchantReturnPolicy",
-                            "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                            "name": "All Sales Final"
-                        },
-                        "shippingDetails": {
-                            "@type": "OfferShippingDetails",
-                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
-                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
-                            "deliveryTime": {
-                                "@type": "ShippingDeliveryTime",
-                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                            }
-                        }
-                    },
-                    {
-                        "@type": "Offer",
-                        "name": "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-                        "sku": "LW2422IVSM",
-                        "url": "https://www.affordablehome-ac.com/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm",
-                        "priceCurrency": "USD",
-                        "price": "1025.00",
-                        "validFrom": "2026-01-01",
-                        "priceValidUntil": "2027-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                        "hasMerchantReturnPolicy": {
-                            "@type": "MerchantReturnPolicy",
-                            "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                            "name": "All Sales Final"
-                        },
-                        "shippingDetails": {
-                            "@type": "OfferShippingDetails",
-                            "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
-                            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US", "addressRegion": "HI" },
-                            "deliveryTime": {
-                                "@type": "ShippingDeliveryTime",
-                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                            }
-                        }
-                    }
-                ]
-            },
+                                "@type": "AggregateRating",
+                                "ratingValue": "4.9",
+                                "reviewCount": "142",
+                                "bestRating": "5",
+                                "worstRating": "1"
+                }
+},
+            {
+                "@type": "CollectionPage",
+                "@id": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-guide#collection",
+                "url": "https://www.affordablehome-ac.com/shop/lg-dual-inverter-guide",
+                "name": "Complete Oahu LG Dual Inverter Window AC Sizing & Buyer Guide (6,000–23,500 BTU)",
+                "description": "Compare all 7 factory-sealed LG Dual Inverter Window Air Conditioners ($560–$1,025) warehoused locally in Waipahu, Oahu with $45 Hawaii Energy rebates.",
+                "mainEntity": {
+                                "@type": "ItemList",
+                                "name": "Complete Oahu LG Dual Inverter Window AC Sizing & Buyer Guide (6,000–23,500 BTU) — Canonical Models",
+                                "numberOfItems": 7,
+                                "itemListElement": [
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 1,
+                                                                "name": "LG Dual Inverter 6,000 BTU (LW6023IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/1-lg-dual-inverter-6-000-btu-lw6023ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 2,
+                                                                "name": "LG Dual Inverter 8,000 BTU (LW8022IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/2-lg-dual-inverter-8-000-btu-lw8022ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 3,
+                                                                "name": "LG Dual Inverter 10,000 BTU (LW1022IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 4,
+                                                                "name": "LG Dual Inverter 12,000 BTU (LW1222IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 5,
+                                                                "name": "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 6,
+                                                                "name": "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 7,
+                                                                "name": "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm"
+                                                }
+                                ]
+                }
+},
             {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
@@ -443,7 +392,7 @@ export default function LgDualInverterGuidePage() {
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData).replace(/</g, '\u003c') }}
             />
 
             <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-[96px] md:pt-[180px] pb-24">

@@ -163,129 +163,77 @@ export default function LargeRoomWindowAcPage() {
         "@graph": [
             {
                 "@type": "HVACBusiness",
+                "@id": "https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu#localbusiness",
+                "parentOrganization": {
+                                "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
+                },
                 "name": "Affordable Home A/C",
+                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                "url": "https://www.affordablehome-ac.com",
                 "telephone": "+1-808-488-1111",
-                "priceRange": "$$",
+                "priceRange": "$395 - $1,200",
+                "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
                 "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "94-150 Leoleo St. #203",
-                    "addressLocality": "Waipahu",
-                    "addressRegion": "HI",
-                    "postalCode": "96797",
-                    "addressCountry": "US"
+                                "@type": "PostalAddress",
+                                "streetAddress": "94-150 Leoleo St. #203",
+                                "addressLocality": "Waipahu",
+                                "addressRegion": "HI",
+                                "postalCode": "96797",
+                                "addressCountry": "US"
                 },
                 "areaServed": "Oahu, Hawaii",
-                "description": "In-stock 18,000 BTU and 23,500 BTU LG Dual Inverter & GE Built-In window air conditioners in Waipahu, Oahu. Heavy-duty living room and whole-floor cooling with $45 Hawaii Energy cash rebates."
-            },
-            {
-                "@type": "Product",
-                "color": "White",
-                "category": "Window Air Conditioners",
-                "name": "LG Dual Inverter 18,000 & 23,500 BTU Large Room Window Air Conditioners (LW1822IVSM / LW2422IVSM)",
-                "image": [
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
-                    "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
-                ],
-                "description": "High-capacity 18,000 BTU and 23,500 BTU LG Dual Inverter window ACs for large rooms and open-concept Oahu layouts up to 1,440 sq ft. 208/230V NEMA 6-15P. $45 Hawaii Energy Rebate eligible.",
-                "brand": { "@type": "Brand", "name": "LG" },
-                "sku": "LW1822IVSM",
-                "mpn": "LW1822IVSM",
-                "gtin12": "048231605908",
                 "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.9",
-                    "reviewCount": "142",
-                    "bestRating": "5",
-                    "worstRating": "1"
-                },
-                "review": [
-                    {
-                        "@type": "Review",
-                        "author": { "@type": "Person", "name": "Kawika M. — Mililani, Oahu" },
-                        "datePublished": "2026-09-14",
-                        "reviewBody": "Picked up the 18,000 BTU LG Dual Inverter from the Waipahu warehouse for our open living room. Cools the whole floor quietly and cut our HECO bill noticeably.",
-                        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
-                    }
-                ],
-                "offers": [
-                    {
-                        "@type": "Offer",
-                        "name": "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
-                        "sku": "LW1822IVSM",
-                        "url": "https://www.affordablehome-ac.com/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm",
-                        "priceCurrency": "USD",
-                        "price": ((isPromo && unit18k.promo_price) ? unit18k.promo_price : unit18k.price).toFixed(2),
-                        "validFrom": "2026-01-01",
-                        "priceValidUntil": "2027-12-31",
-                        "availability": unit18k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-                        "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                        "hasMerchantReturnPolicy": {
-                            "@type": "MerchantReturnPolicy",
-                            "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                            "name": "All Sales Final"
-                        },
-                        "shippingDetails": {
-                            "@type": "OfferShippingDetails",
-                            "shippingRate": {
-                                "@type": "MonetaryAmount",
-                                "value": "0.00",
-                                "currency": "USD"
-                            },
-                            "shippingDestination": {
-                                "@type": "DefinedRegion",
-                                "addressCountry": "US",
-                                "addressRegion": "HI"
-                            },
-                            "deliveryTime": {
-                                "@type": "ShippingDeliveryTime",
-                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                            }
-                        }
-                    },
-                    {
-                        "@type": "Offer",
-                        "name": "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
-                        "sku": "LW2422IVSM",
-                        "url": "https://www.affordablehome-ac.com/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm",
-                        "priceCurrency": "USD",
-                        "price": ((isPromo && unit23k.promo_price) ? unit23k.promo_price : unit23k.price).toFixed(2),
-                        "validFrom": "2026-01-01",
-                        "priceValidUntil": "2027-12-31",
-                        "availability": unit23k.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-                        "itemCondition": "https://schema.org/NewCondition",
-                        "seller": { "@type": "Organization", "name": "Affordable Home A/C", "url": "https://www.affordablehome-ac.com" },
-                        "hasMerchantReturnPolicy": {
-                            "@type": "MerchantReturnPolicy",
-                            "applicableCountry": "US",
-                            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                            "name": "All Sales Final"
-                        },
-                        "shippingDetails": {
-                            "@type": "OfferShippingDetails",
-                            "shippingRate": {
-                                "@type": "MonetaryAmount",
-                                "value": "0.00",
-                                "currency": "USD"
-                            },
-                            "shippingDestination": {
-                                "@type": "DefinedRegion",
-                                "addressCountry": "US",
-                                "addressRegion": "HI"
-                            },
-                            "deliveryTime": {
-                                "@type": "ShippingDeliveryTime",
-                                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                                "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 2, "unitCode": "DAY" }
-                            }
-                        }
-                    }
-                ]
-            },
+                                "@type": "AggregateRating",
+                                "ratingValue": "4.9",
+                                "reviewCount": "142",
+                                "bestRating": "5",
+                                "worstRating": "1"
+                }
+},
+            {
+                "@type": "CollectionPage",
+                "@id": "https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu#collection",
+                "url": "https://www.affordablehome-ac.com/shop/large-room-window-ac-oahu",
+                "name": "Large Room 14,000–23,500 BTU Window Air Conditioners Oahu ($785–$1,025)",
+                "description": "High-velocity 14,000 BTU (115V) and 18,000–23,500 BTU (208/230V) LG Dual Inverter & Cool+Heat Window ACs in stock in Waipahu, Oahu.",
+                "mainEntity": {
+                                "@type": "ItemList",
+                                "name": "Large Room 14,000–23,500 BTU Window Air Conditioners Oahu ($785–$1,025) — Canonical Models",
+                                "numberOfItems": 5,
+                                "itemListElement": [
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 1,
+                                                                "name": "LG Dual Inverter 14,000 BTU (LW1522FVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/5-lg-dual-inverter-14-000-btu-lw1522fvsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 2,
+                                                                "name": "LG Dual Inverter 18,000 BTU (LW1822IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 3,
+                                                                "name": "LG Dual Inverter 23,500 BTU (LW2422IVSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/7-lg-dual-inverter-23-500-btu-lw2422ivsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 4,
+                                                                "name": "LG 18,000 BTU Cool + Heat (LW1823HRSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/9-lg-18-000-btu-lw1823hrsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 5,
+                                                                "name": "LG 23,000 BTU Cool + Heat (LW2423HRSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/10-lg-23-000-btu-lw2423hrsm"
+                                                }
+                                ]
+                }
+},
             {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
@@ -327,7 +275,7 @@ export default function LargeRoomWindowAcPage() {
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData).replace(/</g, '\u003c') }}
             />
 
             <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-[96px] md:pt-[180px] pb-24">

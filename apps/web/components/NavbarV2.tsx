@@ -136,7 +136,7 @@ export default function NavbarV2() {
                                     LG
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
-                                <Link prefetch={false} href="/shop?category=ge" className="text-blue-400 font-serif font-bold tracking-wide text-xs relative group cursor-pointer block">
+                                <Link prefetch={false} href="/shop/ge-built-in-wall-ac-oahu" className="text-blue-400 font-serif font-bold tracking-wide text-xs relative group cursor-pointer block">
                                     GE
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -162,7 +162,7 @@ export default function NavbarV2() {
 
                             {/* Right Pillars (Desktop Only: Window AC & Cleaning Highlights) */}
                             <div className="hidden lg:flex items-center gap-6 flex-1 justify-start pl-8 opacity-80 hover:opacity-100 transition-opacity whitespace-nowrap">
-                                <Link prefetch={false} href="/shop?capacity=MASTER" className="text-rose-400 font-header font-bold tracking-normal uppercase text-[10px] relative group cursor-pointer block">
+                                <Link prefetch={false} href="/shop/lg-dual-inverter-guide" className="text-rose-400 font-header font-bold tracking-normal uppercase text-[10px] relative group cursor-pointer block">
                                     DUAL INVERTER
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-rose-400 transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
@@ -235,10 +235,11 @@ export default function NavbarV2() {
                                                     </div>
                                                     {[
                                                         { label: `All ${inStockAcCount} In-Stock Window ACs`, sub: 'Free Pickup or $50 Oahu Delivery', href: '/shop' },
-                                                        { label: 'Bedroom 115V (6k–8k BTU)', sub: 'From $395 • Standard 3-Prong Plug', href: '/shop?capacity=BEDROOM' },
-                                                        { label: 'Living Room (10k–14k BTU)', sub: '$625–$785 • 115V Dual Inverters', href: '/shop?capacity=MASTER' },
-                                                        { label: 'Large Room 230V (18k–23.5k)', sub: '$925–$1,025 • High-Velocity Cooling', href: '/shop?capacity=LIVING' },
-                                                        { label: '26" Thru-the-Wall (GE)', sub: '$1,000–$1,200 • Fits RAB26A Sleeves', href: '/shop?category=ge' },
+                                                        { label: 'Bedroom 115V (6k–8k BTU)', sub: 'From $395 • Standard 3-Prong Plug', href: '/small-room-window-ac-6000-8000-btu' },
+                                                        { label: 'Master & Condo (10k–12k BTU)', sub: '$650–$1,200 • 115V Dual Inverters & GE', href: '/shop/10000-12000-btu-window-ac-oahu' },
+                                                        { label: 'Large Room (14k–23.5k BTU)', sub: '$785–$1,025 • High-Velocity Cooling', href: '/shop/large-room-window-ac-oahu' },
+                                                        { label: '26" Thru-the-Wall (GE)', sub: '$1,000–$1,200 • Fits RAB26A Sleeves', href: '/shop/ge-built-in-wall-ac-oahu' },
+                                                        { label: 'LG Cool + Heat (7.6k–23k)', sub: '$745–$1,025 • Upcountry & Universal Fit', href: '/shop/lg-cool-and-heat-window-ac-hawaii' },
                                                         { label: '$45 Hawaii Energy Rebates', sub: 'Official Rebate Form & Qualifying Units', href: '/shop#rebate' },
                                                     ].map((item) => (
                                                         <Link

@@ -127,6 +127,7 @@ const nextConfig = {
             { source: '/premium-mini-split-deep-cleaning-oahu', destination: '/ac-cleaning-oahu', permanent: true },
             { source: '/mini-split-remote-control-not-working', destination: '/ac-repair-oahu', permanent: true },
             { source: '/window-ac-vs-mini-split-oahu', destination: '/shop/lg-dual-inverter-guide', permanent: true },
+            { source: '/ac-diagnostic-service-175-flat-rate', destination: '/window-ac-diagnostic-assessment-oahu', permanent: true },
         ];
     },
 };

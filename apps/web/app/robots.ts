@@ -24,9 +24,11 @@ export default function robots(): MetadataRoute.Robots {
         };
     }
 
-    // Note: Legacy WordPress paths (/wp-content/, /author/, /element_category/, /fusion_tb_category/)
-    // and WooCommerce params (?add-to-cart=, ?product_orderby=, etc.) are intentionally NOT disallowed
-    // here so Googlebot can crawl them and honor middleware.ts's 301 Permanent Redirects and 410 Gone headers.
+    // Note: Legacy WordPress paths (/wp-content/, /author/, /element_category/, /fusion_tb_category/),
+    // WooCommerce params (?add-to-cart=, ?product_orderby=, etc.), and storefront UI filter/prefill
+    // query params (?capacity=, ?category=, ?service=, etc.) are intentionally NOT disallowed here so
+    // Googlebot can crawl them and honor middleware.ts's 301 Permanent Redirects, 410 Gone headers,
+    // X-Robots-Tag: noindex, follow headers, and clean base <link rel="canonical"> consolidation.
     const sharedDisallows = [
         '/admin',
         '/admin/',
@@ -47,17 +49,6 @@ export default function robots(): MetadataRoute.Robots {
         '/puck',
         '/puck/',
         '/*?*_rsc=*',
-        '/*?*_t=*',
-        '/*?*capacity=*',
-        '/*?*category=*',
-        '/*?*voltage=*',
-        '/*?*mount=*',
-        '/*?*sort=*',
-        '/*?*q=*',
-        '/contact?*',
-        '/*?*service=*',
-        '/*?*notes=*',
-        '/*?*model=*',
     ];
 
     return {

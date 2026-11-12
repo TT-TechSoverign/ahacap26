@@ -171,11 +171,11 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Growth & Oahu Grounding Sub-Master",
         "domain": "Growth",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Ground all copy, pricing, technical recommendations, and SEO across all 101 canonical Window AC routes, 22 Oahu city pages, HECO 44.2¢/kWh energy economics, and mandatory Shop #rebate ($45 Hawaii Energy Rebate) architecture.",
+        "mandate": "Ground all copy, pricing, technical recommendations, and SEO across all 118 canonical Window AC routes, 22 Oahu city pages, HECO 44.2¢/kWh energy economics, and mandatory Shop #rebate ($45 Hawaii Energy Rebate) architecture.",
         "token_efficiency_policy": "Static knowledge graph queries with zero runtime AI hallucination; cached geographic centroids.",
         "oahu_grounding": "22 Oahu municipalities, Leeward/Ewa heat profiles, Windward humidity/mold challenges, HECO 44.2¢/kWh residential tariff, and $45 Hawaii Energy Window AC Rebate.",
         "inputs": [
-            "101 canonical routes & 22 city pages",
+            "118 canonical routes & 22 city pages",
             "HECO 44.2¢/kWh tariff",
             "content.json & PostgreSQL content_pages shop #rebate config",
             "GSC/GA4 telemetry"
@@ -183,8 +183,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "execution_steps": [
             {
                 "step": 1,
-                "title": "101-Route Canonical & 301 Redirect Audit",
-                "description": "Trigger agent_seo_metadata to verify 101 canonical routes (85 static/city + 16 product) and 301 permanent redirects for all 9 retired mini-split/central AC routes.",
+                "title": "118-Route Canonical & 301 Redirect Audit",
+                "description": "Trigger agent_seo_metadata to verify 118 canonical routes (102 static/city + 16 product) and 301 permanent redirects for all 9 retired mini-split/central AC routes.",
                 "verification": "101 routes active; 0 legacy non-window AC routes indexed."
             },
             {
@@ -207,7 +207,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             }
         ],
         "outputs": [
-            "101-route SEO coverage matrix",
+            "118-route SEO coverage matrix",
             "Oahu microclimate cooling matrix",
             "Shop #rebate & $45 Hawaii Energy Rebate verification"
         ],
@@ -262,11 +262,11 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Deployment & Quality Swarm Sub-Master",
         "domain": "Deployment",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 101 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 74 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
+        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 118 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 74 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
         "token_efficiency_policy": "Multi-stage pipeline running strictly during deployment sequences; zero background daemon overhead.",
         "oahu_grounding": "Insured Oahu cooling specialist workmanship protection (floor drop-cloth mandate), zero-downtime for live Oahu customers (www.affordablehome-ac.com).",
         "inputs": [
-            "Next.js build manifests (74 page.tsx files)",
+            "Next.js build manifests (84 page.tsx files)",
             "NavbarV2.tsx & admin/page.tsx",
             "3D cutaway & Retina WebP spec assets",
             "Docker compose configurations"
@@ -280,9 +280,9 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             },
             {
                 "step": 2,
-                "title": "101-Route Build & Viewport Clearance QA",
-                "description": "Trigger agent_build_qa to confirm zero TypeScript errors, 101 canonical routes, and 3-row fixed NavbarV2 top-padding clearance (pt-[88px] md:pt-[176px]..[192px]) across all 74 page.tsx files.",
-                "verification": "Build exits code 0; 0 header overlap regressions across 74 page.tsx files."
+                "title": "118-Route Build & Viewport Clearance QA",
+                "description": "Trigger agent_build_qa to confirm zero TypeScript errors, 118 canonical routes, and 3-row fixed NavbarV2 top-padding clearance (pt-[88px] md:pt-[176px]..[192px]) across all 84 page.tsx files.",
+                "verification": "Build exits code 0; 0 header overlap regressions across 84 page.tsx files."
             },
             {
                 "step": 3,
@@ -299,7 +299,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         ],
         "outputs": [
             "3-Stage verification certificate",
-            "74/74 viewport clearance report",
+            "84/84 viewport clearance report",
             "Spatial & Retina spec asset report"
         ],
         "contingency_protocol": "Instant rollback to previous container image if health probe or viewport/regression check fails within 30 seconds of deployment."
@@ -315,7 +315,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "oahu_grounding": "Oahu search intent harvesting (Honolulu, Ewa Beach, Kailua, Waipahu, Kapolei), localized $0 Free In-Home Estimate price anchoring, and Waipahu Warehouse Direct SERP trust badges.",
         "inputs": [
             "Google Search Console query logs",
-            "Next.js page metadata across 101 canonical routes",
+            "Next.js page metadata across 118 canonical routes",
             "Google Merchant XML feed (16 LG & GE models)"
         ],
         "execution_steps": [
@@ -382,8 +382,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 4,
                 "title": "Core Web Vitals & Viewport Clearance",
-                "description": "Trigger agent_speed_core_vital_sentinel to audit mobile page speed, zero CLS, and 3-row NavbarV2 top-padding clearance across all 74 page.tsx routes.",
-                "verification": "Mobile response < 100ms, CLS = 0.00, 74/74 pages clear fixed header."
+                "description": "Trigger agent_speed_core_vital_sentinel to audit mobile page speed, zero CLS, and 3-row NavbarV2 top-padding clearance across all 84 page.tsx routes.",
+                "verification": "Mobile response < 100ms, CLS = 0.00, 84/84 pages clear fixed header."
             }
         ],
         "outputs": [
@@ -985,20 +985,20 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "SEO & Oahu City Landing Page Sentinel",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Verify search engine indexing, semantic JSON-LD structured data, 101 canonical Window AC routes (85 static/city + 16 product), and 301 permanent redirects for all 9 retired mini-split/central AC routes.",
+        "mandate": "Verify search engine indexing, semantic JSON-LD structured data, 118 canonical Window AC routes (102 static/city + 16 product), and 301 permanent redirects for all 9 retired mini-split/central AC routes.",
         "token_efficiency_policy": "Reads sitemap, middleware, and metadata definitions synchronously; zero external web crawling tokens consumed.",
         "oahu_grounding": "22 Oahu cities (Honolulu, Pearl City, Kapolei, Kailua, Kaneohe, Mililani, Ewa Beach, Waipahu, etc.) plus dedicated Window AC topical silos.",
         "inputs": [
-            "sitemap.ts route manifest (101 routes)",
+            "sitemap.ts route manifest (118 routes)",
             "middleware.ts & next.config.js 301 redirects",
             "22 City landing page metadata definitions"
         ],
         "execution_steps": [
             {
                 "step": 1,
-                "title": "101-Route & 22-City Coverage Audit",
-                "description": "Verify all 101 canonical routes (including /shop/ge-built-in-wall-ac-oahu and 22 city pages) exist in sitemap.ts.",
-                "verification": "101 canonical routes and 22/22 city routes active."
+                "title": "118-Route & 22-City Coverage Audit",
+                "description": "Verify all 118 canonical routes (including /shop/ge-built-in-wall-ac-oahu and 22 city pages) exist in sitemap.ts.",
+                "verification": "118 canonical routes and 22/22 city routes active."
             },
             {
                 "step": 2,
@@ -1009,13 +1009,13 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 3,
                 "title": "Robots & Anti-Crawling Audit",
-                "description": "Verify robots.ts disallows /dev-os, /admin, and internal APIs while allowing all 101 public canonical routes.",
-                "verification": "Dev OS & /admin strictly protected; 101 public pages indexed."
+                "description": "Verify robots.ts disallows /dev-os, /admin, and internal APIs while allowing all 118 public canonical routes.",
+                "verification": "Dev OS & /admin strictly protected; 118 public pages indexed."
             }
         ],
         "outputs": [
             "SEO status (ACTIVE_OPTIMIZING)",
-            "Canonical routes count (101)",
+            "Canonical routes count (118)",
             "301 redirect enforcement status"
         ],
         "contingency_protocol": "Regenerate sitemap and enforce 301 redirect rules if any route indexing discrepancy is detected."
@@ -1150,7 +1150,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Search Console & GA4 Performance Analytics Sentinel",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Ingest and analyze Google Search Console query impressions and GA4 funnel telemetry across all 101 canonical Window AC routes to detect high-impression / low-CTR bottlenecks.",
+        "mandate": "Ingest and analyze Google Search Console query impressions and GA4 funnel telemetry across all 118 canonical Window AC routes to detect high-impression / low-CTR bottlenecks.",
         "token_efficiency_policy": "On-demand execution with cached aggregation; executes in < 4ms without external polling overhead.",
         "oahu_grounding": "Tracks localized Oahu Window AC search queries across Honolulu, Waipahu, Kailua, Kapolei, Ewa Beach, and Mililani.",
         "inputs": [
@@ -1174,7 +1174,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 3,
                 "title": "Opportunity Matrix Generation",
-                "description": "Correlate search impressions with conversion barriers across all 101 canonical routes.",
+                "description": "Correlate search impressions with conversion barriers across all 118 canonical routes.",
                 "verification": "Analytics opportunity report compiled."
             }
         ],
@@ -1191,11 +1191,11 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Structured Data Schema & Dynamic SERP Enhancer",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas (Product, HVACBusiness, LocalBusiness, FAQPage, AggregateRating 4.9★ across 142 reviews) across all 101 canonical routes.",
+        "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas (Product, HVACBusiness, LocalBusiness, FAQPage, AggregateRating 4.9★ across 142 reviews) across all 118 canonical routes.",
         "token_efficiency_policy": "Deterministic schema generation using static templates; executes in < 2ms with zero runtime LLM overhead.",
         "oahu_grounding": "Embeds Waipahu warehouse coordinates, Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005 trust grounding, and GET tax compliance.",
         "inputs": [
-            "Route metadata registry (101 routes)",
+            "Route metadata registry (118 routes)",
             "Product catalog pricing/stock ($395-$1,200)",
             "reviews_db.json (142 reviews)"
         ],
@@ -1204,7 +1204,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
                 "step": 1,
                 "title": "Schema Integrity Audit",
                 "description": "Validate JSON-LD schemas (Product, HVACBusiness, LocalBusiness, FAQPage) for zero schema.org errors and zero legacy non-window AC services.",
-                "verification": "100% valid schema markup across all 101 routes."
+                "verification": "100% valid schema markup across all 118 routes."
             },
             {
                 "step": 2,
@@ -1436,13 +1436,13 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Next.js Production Build, TypeScript & Viewport QA Agent",
         "domain": "Deployment",
         "supervisor": "submaster_deployment_quality",
-        "mandate": "Verify Next.js production compilation across all 101 canonical routes, TypeScript zero-error typing across apps/web and apps/dev-os, and 3-row fixed NavbarV2 top-padding clearance across all 74 page.tsx files.",
+        "mandate": "Verify Next.js production compilation across all 118 canonical routes, TypeScript zero-error typing across apps/web and apps/dev-os, and 3-row fixed NavbarV2 top-padding clearance across all 84 page.tsx files.",
         "token_efficiency_policy": "Runs compiler and AST/padding checks synchronously during build/verification; zero runtime token burn.",
         "oahu_grounding": "Prevents client-side crashes and fixed-header overlap on mobile and desktop viewports across Oahu.",
         "inputs": [
             "TypeScript compiler output (tsc)",
-            "Next.js route manifest (101 routes)",
-            "All 74 apps/web/app/**/page.tsx files"
+            "Next.js route manifest (118 routes)",
+            "All 84 apps/web/app/**/page.tsx files"
         ],
         "execution_steps": [
             {
@@ -1453,21 +1453,21 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             },
             {
                 "step": 2,
-                "title": "101-Route Next.js Compilation",
-                "description": "Verify all 101 canonical static, city, and product routes compile cleanly into optimized bundles.",
-                "verification": "101 canonical routes compiled."
+                "title": "118-Route Next.js Compilation",
+                "description": "Verify all 118 canonical static, city, and product routes compile cleanly into optimized bundles.",
+                "verification": "118 canonical routes compiled."
             },
             {
                 "step": 3,
                 "title": "3-Row NavbarV2 Viewport Clearance Audit",
-                "description": "Verify all 74 page.tsx files enforce 3-row fixed header clearance (pt-[88px] md:pt-[176px] on /, md:pt-[180px] on 72 routes, pt-20 md:pt-[192px] on /admin) with zero cramped md:pt-20..40 overlaps.",
-                "verification": "74/74 page.tsx routes clear fixed NavbarV2."
+                "description": "Verify all 84 page.tsx files enforce 3-row fixed header clearance (pt-[88px] md:pt-[176px] on /, md:pt-[180px] on 82 routes, pt-20 md:pt-[192px] on /admin) with zero cramped md:pt-20..40 overlaps.",
+                "verification": "84/84 page.tsx routes clear fixed NavbarV2."
             }
         ],
         "outputs": [
             "Build QA status (VERIFIED)",
-            "Compiled routes count (101)",
-            "Viewport clearance audit (74/74 pages)"
+            "Compiled routes count (118)",
+            "Viewport clearance audit (84/84 pages)"
         ],
         "contingency_protocol": "Reject build and prevent deployment if any TypeScript error or fixed-header padding regression is detected."
     },
@@ -1565,7 +1565,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "oahu_grounding": "Captures local microclimate queries ('kailua window ac cleaning', 'ewa beach lg dual inverter', 'oahu 26 inch wall sleeve ac replacement').",
         "inputs": [
             "GSC query logs",
-            "Search query cluster index (101 canonical routes)"
+            "Search query cluster index (118 canonical routes)"
         ],
         "execution_steps": [
             {
@@ -1598,7 +1598,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "token_efficiency_policy": "Deterministic title syntax parsing. Zero external tokens consumed.",
         "oahu_grounding": "Embeds Waipahu local stock availability and Honolulu phone bridge directly into Google SERP blue link snippets.",
         "inputs": [
-            "apps/web/app page metadata (101 routes)",
+            "apps/web/app page metadata (118 routes)",
             "22 City page route templates"
         ],
         "execution_steps": [
@@ -1612,7 +1612,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
                 "step": 2,
                 "title": "Canonical Link & Legacy Purge Integrity",
                 "description": "Verify zero root canonical override on subpages and zero mini-split/ductless terms in any title or meta description.",
-                "verification": "101 canonical routes 100% Window AC aligned."
+                "verification": "118 canonical routes 100% Window AC aligned."
             }
         ],
         "outputs": [
@@ -1768,13 +1768,13 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Speed & Core Web Vitals Sentinel",
         "domain": "Conversion",
         "supervisor": "submaster_conversion_velocity",
-        "mandate": "Enforce mobile sub-100ms TTFB, zero Cumulative Layout Shift (CLS = 0.00), universal zero-cache headers for dynamic routes, and 3-row fixed NavbarV2 viewport clearance across all 74 page.tsx routes.",
+        "mandate": "Enforce mobile sub-100ms TTFB, zero Cumulative Layout Shift (CLS = 0.00), universal zero-cache headers for dynamic routes, and 3-row fixed NavbarV2 viewport clearance across all 84 page.tsx routes.",
         "token_efficiency_policy": "Headers, padding, and bundle size analyzer; sub-5ms in-memory inspection.",
         "oahu_grounding": "Optimizes page delivery and prevents top-nav overlap across Hawaii cellular networks and desktop monitors.",
         "inputs": [
             "Nginx response headers",
             "Next.js cache-control headers",
-            "74 apps/web/app/**/page.tsx files"
+            "84 apps/web/app/**/page.tsx files"
         ],
         "execution_steps": [
             {
@@ -1786,14 +1786,14 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "CLS & 3-Row Navbar Clearance Verification",
-                "description": "Verify images have fixed aspect-ratio boxes and all 74 page.tsx routes enforce pt-[88px] md:pt-[176px]..[192px] clearance below the 3-row fixed NavbarV2.",
-                "verification": "CLS verified at 0.00; 74/74 pages clear fixed header."
+                "description": "Verify images have fixed aspect-ratio boxes and all 84 page.tsx routes enforce pt-[88px] md:pt-[176px]..[192px] clearance below the 3-row fixed NavbarV2.",
+                "verification": "CLS verified at 0.00; 84/84 pages clear fixed header."
             }
         ],
         "outputs": [
             "Core Web Vitals status (VITALS_OPTIMAL)",
             "LCP target (< 2.0s)",
-            "CLS (0.00) & 74/74 Viewport Clearance"
+            "CLS (0.00) & 84/84 Viewport Clearance"
         ],
         "contingency_protocol": "Alert Sovereign Master on any asset addition or top-padding regression causing layout shift or header overlap."
     },

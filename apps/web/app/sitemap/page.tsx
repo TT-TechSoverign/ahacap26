@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C'
     },
-    description: 'Browse all 108 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
+    description: 'Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sitemap',
     },
     openGraph: {
         title: 'Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C',
-        description: 'Browse all 108 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
+        description: 'Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/sitemap',
         siteName: 'Affordable Home A/C',
         locale: 'en_US',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C',
-        description: 'Browse all 108 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
+        description: 'Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },
 };
@@ -81,17 +81,24 @@ export default async function SitemapPage() {
     const windowAcShoppingGuides = [
         { name: 'Oahu Window AC Warehouse Hub', path: '/shop/oahu-window-ac-warehouse' },
         { name: 'Complete LG Dual Inverter Buyer Guide', path: '/shop/lg-dual-inverter-guide' },
-        { name: 'GE 26" Built-In Through-the-Wall AC Guide', path: '/shop/ge-built-in-wall-ac-oahu' },
-        { name: '115V vs 230V Window AC Plug Guide', path: '/shop/window-ac-plug-guide' },
         { name: 'LG Dual Inverter 8,000 BTU Oahu Guide', path: '/shop/lg-dual-inverter-8000-btu-oahu' },
-        { name: 'Large Room Window AC (18K–23.5K BTU 230V)', path: '/shop/large-room-window-ac-oahu' },
+        { name: '10,000–12,000 BTU Master Bedroom & Condo Window ACs', path: '/shop/10000-12000-btu-window-ac-oahu' },
+        { name: 'Large Room Window AC (14K–23.5K BTU)', path: '/shop/large-room-window-ac-oahu' },
+        { name: 'LG Cool + Heat Window ACs Hawaii (7.6K–23K BTU)', path: '/shop/lg-cool-and-heat-window-ac-hawaii' },
+        { name: 'LG Standard Budget Window ACs ($395–$685)', path: '/shop/lg-standard-budget-window-ac-oahu' },
+        { name: 'GE 26" Built-In Through-the-Wall AC Guide', path: '/shop/ge-built-in-wall-ac-oahu' },
+        { name: '26" Wall Sleeve Dimensions & GE RAB26A Caliper Guide', path: '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu' },
+        { name: '115V vs 230V Window AC Plug Guide', path: '/shop/window-ac-plug-guide' },
         { name: 'Hawaii Energy $45 Window AC Rebate', path: '/hawaii-energy-rebate' },
+        { name: 'HECO Window AC Electricity Cost Calculator (44.2¢/kWh)', path: '/window-ac-electricity-cost-heco-calculator-hawaii' },
+        { name: 'Portable AC vs Window AC Hawaii Engineering Guide', path: '/portable-ac-vs-window-ac-hawaii' },
+        { name: 'Property Manager & Landlord Multi-Unit Window ACs', path: '/property-manager-landlord-window-ac-oahu' },
         { name: 'Window AC Warehouse Pickup Waipahu', path: '/window-ac-warehouse-pickup-waipahu' },
         { name: 'Window AC Flat $50 Delivery Service', path: '/window-ac-delivery-service-oahu' },
         { name: 'Energy Star Window Air Conditioners', path: '/energy-star-window-air-conditioners-hawaii' },
         { name: 'Dual Inverter vs Standard Window AC', path: '/inverter-window-ac-vs-standard-hawaii' },
         { name: 'Quiet Bedroom Window AC (44 dB)', path: '/quiet-bedroom-window-ac-oahu' },
-        { name: 'Living Room Window AC (10K–23.5K BTU)', path: '/living-room-window-ac-oahu' },
+        { name: 'Living Room Window AC (12K–23.5K BTU)', path: '/living-room-window-ac-oahu' },
         { name: 'Small Room Window AC (6K–8K BTU 115V)', path: '/small-room-window-ac-6000-8000-btu' },
         { name: 'Window AC for Studios & Apartments', path: '/window-ac-for-studios-apartments-hawaii' },
         { name: '115V Low-Voltage Window AC Units', path: '/low-voltage-window-ac-115v-oahu' },
@@ -102,6 +109,8 @@ export default async function SitemapPage() {
     ];
 
     const housingArchitectureGuides = [
+        { name: 'Oahu Window AC Installation Cost & Itemized Factors', path: '/window-ac-installation-cost-oahu' },
+        { name: '230V Window AC Outlet (NEMA 6-15 & 6-20) Guide', path: '/230v-window-ac-outlet-nema-6-15-6-20-oahu' },
         { name: 'Jalousie Window AC Installation Oahu', path: '/jalousie-window-ac-installation-oahu' },
         { name: 'Horizontal Sliding Window AC Installation', path: '/horizontal-sliding-window-ac-oahu' },
         { name: 'Single-Wall Construction AC Cooling Hawaii', path: '/single-wall-construction-ac-cooling-hawaii' },
@@ -119,6 +128,7 @@ export default async function SitemapPage() {
     ];
 
     const cleaningGuides = [
+        { name: 'Window AC Cleaning vs Repair vs Replace Cost Guide', path: '/window-ac-cleaning-vs-repair-cost-oahu' },
         { name: 'AC Mold Removal & Deep Cleaning Oahu', path: '/ac-mold-removal-cleaning-oahu' },
         { name: 'AC Smells Musty & Mildew in Hawaii (Dirty Sock Syndrome)', path: '/ac-smells-musty-mildew-hawaii' },
         { name: 'Black Mold in AC: Health Risks & Spore Eradication', path: '/black-mold-in-ac-health-risks-hawaii' },
@@ -134,7 +144,7 @@ export default async function SitemapPage() {
     ];
 
     const diagnosticGuides = [
-        { name: 'AC Diagnostic Service (By Appointment ($0 Estimate))', path: '/ac-diagnostic-service-175-flat-rate' },
+        { name: '$0 Window AC Diagnostic & Bench Assessment Oahu', path: '/window-ac-diagnostic-assessment-oahu' },
         { name: 'AC Compressor Not Turning On Oahu', path: '/ac-compressor-not-turning-on-oahu' },
         { name: 'Window AC Making Loud Buzzing Noise', path: '/window-ac-making-loud-buzzing-noise' },
         { name: 'AC Refrigerant Leak Detection & Coil Inspection', path: '/ac-refrigerant-leak-detection-hawaii' },
@@ -181,7 +191,7 @@ export default async function SitemapPage() {
                         Sitemap & Directory
                     </h1>
                     <p className="text-slate-400 max-w-3xl text-sm md:text-base font-medium leading-relaxed">
-                        A comprehensive 108-page directory of Affordable Home A/C&apos;s Oahu cooling infrastructure: 16 in-stock Waipahu LG &amp; GE models ($395–$1,200), specialized Hawaii housing installation guides, antimicrobial cleaning hubs, diagnostic solvers, and all 22 Oahu service areas.
+                        A comprehensive 118-page directory of Affordable Home A/C&apos;s Oahu cooling infrastructure: 16 in-stock Waipahu LG &amp; GE models ($395–$1,200), specialized Hawaii housing installation guides, antimicrobial cleaning hubs, diagnostic solvers, and all 22 Oahu service areas.
                     </p>
 
                     <nav aria-label="Sitemap Quick Jump" className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-2 text-[11px] font-mono">
@@ -197,11 +207,11 @@ export default async function SitemapPage() {
                 {/* Semantic Hub Summary Table for Google Structured Table Snippets */}
                 <section className="mb-14 rounded-3xl bg-white/[0.02] border border-white/10 p-6 md:p-8">
                     <h2 className="text-lg md:text-xl font-header font-black uppercase tracking-wider text-white mb-4">
-                        Affordable Home A/C — 108-Page Oahu Directory Overview
+                        Affordable Home A/C — 118-Page Oahu Directory Overview
                     </h2>
                     <div className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950/80">
                         <table id="oahu-sitemap-summary-table" className="w-full text-left border-collapse text-xs">
-                            <caption className="sr-only">Summary of all 108 canonical pages across Affordable Home A/C Oahu divisions.</caption>
+                            <caption className="sr-only">Summary of all 118 canonical pages across Affordable Home A/C Oahu divisions.</caption>
                             <thead>
                                 <tr className="border-b border-white/10 bg-white/[0.03] font-mono text-[10px] uppercase tracking-wider text-slate-400">
                                     <th scope="col" className="py-2.5 px-4">Oahu Cooling Division</th>
@@ -215,19 +225,19 @@ export default async function SitemapPage() {
                                     <th scope="row" className="py-2.5 px-4 font-bold text-white">Waipahu LG &amp; GE Window AC Catalog</th>
                                     <td className="py-2.5 px-4"><Link href="/shop" className="text-cyan-400 hover:underline font-semibold">/shop</Link></td>
                                     <td className="py-2.5 px-4 font-mono">$395–$1,200 • Free Pickup / $50 Delivery</td>
-                                    <td className="py-2.5 px-4 font-mono">16 Product Pages + 20 Guides</td>
+                                    <td className="py-2.5 px-4 font-mono">16 Product Pages + 27 Guides</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="py-2.5 px-4 font-bold text-white">Jalousie, Slider &amp; 26&quot; Wall AC Installation</th>
                                     <td className="py-2.5 px-4"><Link href="/window-ac-installation" className="text-cyan-400 hover:underline font-semibold">/window-ac-installation</Link></td>
                                     <td className="py-2.5 px-4 font-mono">$0 Free In-Home Estimate • By Appointment</td>
-                                    <td className="py-2.5 px-4 font-mono">15 Architecture Guides</td>
+                                    <td className="py-2.5 px-4 font-mono">17 Architecture Guides</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="py-2.5 px-4 font-bold text-white">Antimicrobial Window AC Deep Cleaning</th>
                                     <td className="py-2.5 px-4"><Link href="/ac-cleaning-oahu" className="text-cyan-400 hover:underline font-semibold">/ac-cleaning-oahu</Link></td>
                                     <td className="py-2.5 px-4 font-mono">$0 Free In-Home Estimate • Drop-Cloth Protected</td>
-                                    <td className="py-2.5 px-4 font-mono">13 Cleaning &amp; Mold Guides</td>
+                                    <td className="py-2.5 px-4 font-mono">14 Cleaning &amp; Mold Guides</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="py-2.5 px-4 font-bold text-white">Clean-vs-Replace Diagnostics &amp; Repair</th>
@@ -453,7 +463,7 @@ export default async function SitemapPage() {
                         </div>
                     </section>
 
-                    <OahuEEATAuthorityBar topicTitle="Complete 108-Page Oahu LG & GE Window AC Sales, Installation & Cleaning Directory" />
+                    <OahuEEATAuthorityBar topicTitle="Complete 118-Page Oahu LG & GE Window AC Sales, Installation & Cleaning Directory" />
                 </main>
                 <script
                     type="application/ld+json"
@@ -498,7 +508,7 @@ export default async function SitemapPage() {
                             "@type": "CollectionPage",
                             "name": "Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C",
                             "url": "https://www.affordablehome-ac.com/sitemap",
-                            "description": "Browse all 108 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.",
+                            "description": "Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.",
                             "image": [
                                 "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
                                 "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",

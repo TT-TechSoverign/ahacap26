@@ -249,141 +249,84 @@ export default function GeBuiltInWallAcGuidePage() {
         '@context': 'https://schema.org',
         '@graph': [
             {
-                '@type': 'HVACBusiness',
-                name: 'Affordable Home A/C',
-                telephone: '+1-808-488-1111',
-                address: {
-                    '@type': 'PostalAddress',
-                    streetAddress: '94-150 Leoleo St. #203',
-                    addressLocality: 'Waipahu',
-                    addressRegion: 'HI',
-                    postalCode: '96797',
-                    addressCountry: 'US',
+                "@type": "HVACBusiness",
+                "@id": "https://www.affordablehome-ac.com/shop/ge-built-in-wall-ac-oahu#localbusiness",
+                "parentOrganization": {
+                                "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
                 },
-                areaServed: 'Oahu, Hawaii',
-            },
+                "name": "Affordable Home A/C",
+                "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                "url": "https://www.affordablehome-ac.com",
+                "telephone": "+1-808-488-1111",
+                "priceRange": "$395 - $1,200",
+                "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+                "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "94-150 Leoleo St. #203",
+                                "addressLocality": "Waipahu",
+                                "addressRegion": "HI",
+                                "postalCode": "96797",
+                                "addressCountry": "US"
+                },
+                "areaServed": "Oahu, Hawaii",
+                "aggregateRating": {
+                                "@type": "AggregateRating",
+                                "ratingValue": "4.9",
+                                "reviewCount": "142",
+                                "bestRating": "5",
+                                "worstRating": "1"
+                }
+},
             {
-                '@type': 'Product',
-                color: 'White',
-                category: 'Window Air Conditioners',
-                name: 'GE 26" Built-In Through-the-Wall Air Conditioner Series (AJCQ08AWJ / AJCQ10AWJ / AJCQ12AXXWA)',
-                image: [
-                    'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp',
-                    'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-performance-series-front-1600x1000.webp',
-                    'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/rab26a-ge-lg-universal-casement-slider-1600x1000/RAB26A.webp',
-                    'https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_15_fit_cutaway.webp',
-                ],
-                description: 'In-stock GE 26-inch True Built-In Through-the-Wall Air Conditioners (8,000–12,000 BTU) and RAB26A wall sleeves in Waipahu, Oahu for Honolulu condos and townhouses.',
-                brand: { '@type': 'Brand', name: 'GE Appliances' },
-                sku: 'AJCQ12AXXWA',
-                mpn: 'AJCQ12AXXWA',
-                gtin12: '084691962724',
-                aggregateRating: {
-                    '@type': 'AggregateRating',
-                    ratingValue: '4.9',
-                    reviewCount: '142',
-                    bestRating: '5',
-                    worstRating: '1',
-                },
-                review: [
-                    {
-                        '@type': 'Review',
-                        author: { '@type': 'Person', name: 'David L. — Ala Moana, Honolulu' },
-                        datePublished: '2026-09-12',
-                        reviewBody: 'Direct replacement for our 26-inch condo wall sleeve. Affordable Home A/C had the GE Built-In unit in stock in Waipahu and installed it cleanly with drop cloths.',
-                        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-                    },
-                ],
-                offers: [
-                    {
-                        '@type': 'Offer',
-                        name: 'GE 8,200 BTU Built-In Through-the-Wall AC (AJCQ08AWJ)',
-                        sku: 'AJCQ08AWJ',
-                        url: 'https://www.affordablehome-ac.com/shop/13-ge-8-200-btu-ajcq08awj',
-                        priceCurrency: 'USD',
-                        price: offer08.price,
-                        validFrom: '2026-01-01',
-                        priceValidUntil: '2027-12-31',
-                        availability: offer08.availability,
-                        itemCondition: 'https://schema.org/NewCondition',
-                        seller: { '@type': 'Organization', name: 'Affordable Home A/C', url: 'https://www.affordablehome-ac.com' },
-                        hasMerchantReturnPolicy: {
-                            '@type': 'MerchantReturnPolicy',
-                            applicableCountry: 'US',
-                            returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
-                            name: 'All Sales Final',
-                        },
-                        shippingDetails: {
-                            '@type': 'OfferShippingDetails',
-                            shippingRate: { '@type': 'MonetaryAmount', value: '0.00', currency: 'USD' },
-                            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US', addressRegion: 'HI' },
-                            deliveryTime: {
-                                '@type': 'ShippingDeliveryTime',
-                                handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
-                                transitTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 2, unitCode: 'DAY' },
-                            },
-                        },
-                    },
-                    {
-                        '@type': 'Offer',
-                        name: 'GE 10,000 BTU Built-In Through-the-Wall AC (AJCQ10AWJ)',
-                        sku: 'AJCQ10AWJ',
-                        url: 'https://www.affordablehome-ac.com/shop/14-ge-10-000-btu-ajcq10awj',
-                        priceCurrency: 'USD',
-                        price: offer10.price,
-                        validFrom: '2026-01-01',
-                        priceValidUntil: '2027-12-31',
-                        availability: offer10.availability,
-                        itemCondition: 'https://schema.org/NewCondition',
-                        seller: { '@type': 'Organization', name: 'Affordable Home A/C', url: 'https://www.affordablehome-ac.com' },
-                        hasMerchantReturnPolicy: {
-                            '@type': 'MerchantReturnPolicy',
-                            applicableCountry: 'US',
-                            returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
-                            name: 'All Sales Final',
-                        },
-                        shippingDetails: {
-                            '@type': 'OfferShippingDetails',
-                            shippingRate: { '@type': 'MonetaryAmount', value: '0.00', currency: 'USD' },
-                            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US', addressRegion: 'HI' },
-                            deliveryTime: {
-                                '@type': 'ShippingDeliveryTime',
-                                handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
-                                transitTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 2, unitCode: 'DAY' },
-                            },
-                        },
-                    },
-                    {
-                        '@type': 'Offer',
-                        name: 'GE 12,000 BTU R-32 Inverter Built-In AC (AJCQ12AXXWA)',
-                        sku: 'AJCQ12AXXWA',
-                        url: 'https://www.affordablehome-ac.com/shop/15-ge-12-000-btu-ajcq12axxwa',
-                        priceCurrency: 'USD',
-                        price: offer12.price,
-                        validFrom: '2026-01-01',
-                        priceValidUntil: '2027-12-31',
-                        availability: offer12.availability,
-                        itemCondition: 'https://schema.org/NewCondition',
-                        seller: { '@type': 'Organization', name: 'Affordable Home A/C', url: 'https://www.affordablehome-ac.com' },
-                        hasMerchantReturnPolicy: {
-                            '@type': 'MerchantReturnPolicy',
-                            applicableCountry: 'US',
-                            returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
-                            name: 'All Sales Final',
-                        },
-                        shippingDetails: {
-                            '@type': 'OfferShippingDetails',
-                            shippingRate: { '@type': 'MonetaryAmount', value: '0.00', currency: 'USD' },
-                            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US', addressRegion: 'HI' },
-                            deliveryTime: {
-                                '@type': 'ShippingDeliveryTime',
-                                handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
-                                transitTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 2, unitCode: 'DAY' },
-                            },
-                        },
-                    },
-                ],
-            },
+                "@type": "CollectionPage",
+                "@id": "https://www.affordablehome-ac.com/shop/ge-built-in-wall-ac-oahu#collection",
+                "url": "https://www.affordablehome-ac.com/shop/ge-built-in-wall-ac-oahu",
+                "name": "GE 26\" Built-In Through-the-Wall AC & RAB26A Wall Sleeve Guide Oahu",
+                "description": "In-stock GE 26-inch True Built-In Through-the-Wall Air Conditioners (AJCQ08AWJ, AJCQ10AWJ, AJCQ12AXXWA) and RAB26A wall sleeves in Waipahu, Oahu.",
+                "mainEntity": {
+                                "@type": "ItemList",
+                                "name": "GE 26\" Built-In Through-the-Wall AC & RAB26A Wall Sleeve Guide Oahu — Canonical Models",
+                                "numberOfItems": 6,
+                                "itemListElement": [
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 1,
+                                                                "name": "GE 8,200 BTU 26\" Built-In (AJCQ08AWJ)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/13-ge-8-200-btu-ajcq08awj"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 2,
+                                                                "name": "GE 10,000 BTU 26\" Built-In (AJCQ10AWJ)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/14-ge-10-000-btu-ajcq10awj"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 3,
+                                                                "name": "GE 12,000 BTU R-32 Inverter 26\" Built-In (AJCQ12AXXWA)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/15-ge-12-000-btu-ajcq12axxwa"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 4,
+                                                                "name": "GE RAB26A 26\" Wall Casement Sleeve",
+                                                                "url": "https://www.affordablehome-ac.com/shop/16-ge-rab26a-wall-casement"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 5,
+                                                                "name": "LG 7,600 BTU Cool + Heat (LW8023HRSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/8-lg-7-600-btu-lw8023hrsm"
+                                                },
+                                                {
+                                                                "@type": "ListItem",
+                                                                "position": 6,
+                                                                "name": "LG 18,000 BTU Cool + Heat (LW1823HRSM)",
+                                                                "url": "https://www.affordablehome-ac.com/shop/9-lg-18-000-btu-lw1823hrsm"
+                                                }
+                                ]
+                }
+},
             {
                 '@type': 'BreadcrumbList',
                 itemListElement: [
@@ -425,7 +368,7 @@ export default function GeBuiltInWallAcGuidePage() {
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData).replace(/</g, '\u003c') }}
             />
 
             <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-[96px] md:pt-[180px] pb-24">

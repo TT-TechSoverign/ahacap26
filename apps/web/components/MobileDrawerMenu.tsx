@@ -57,10 +57,11 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
             title: 'In-Stock Window ACs (Waipahu)',
             links: [
                 { text: `Shop All ${inStockAcCount} In-Stock Window ACs`, href: '/shop', icon: Store, badge: `$${minPrice}–$${maxPrice.toLocaleString()}`, highlight: true },
-                { text: 'Bedroom 115V (6k–8k BTU)', href: '/shop?capacity=BEDROOM', icon: Sparkles, badge: 'From $395' },
-                { text: 'Living Room (10k–14k BTU)', href: '/shop?capacity=MASTER', icon: Compass, badge: '115V Plug' },
-                { text: 'Large Room 230V (18k–23.5k)', href: '/shop/large-room-window-ac-oahu', icon: Compass, badge: '$925–$1,025' },
-                { text: '26" Thru-the-Wall Units (GE)', href: '/shop?category=ge', icon: Store, badge: '$1,000–$1,200' },
+                { text: 'Bedroom 115V (6k–8k BTU)', href: '/small-room-window-ac-6000-8000-btu', icon: Sparkles, badge: 'From $395' },
+                { text: 'Master & Condo (10k–12k BTU)', href: '/shop/10000-12000-btu-window-ac-oahu', icon: Compass, badge: '115V Plug' },
+                { text: 'Large Room (14k–23.5k BTU)', href: '/shop/large-room-window-ac-oahu', icon: Compass, badge: '$785–$1,025' },
+                { text: '26" Thru-the-Wall Units (GE)', href: '/shop/ge-built-in-wall-ac-oahu', icon: Store, badge: '$1,000–$1,200' },
+                { text: 'LG Cool + Heat (7.6k–23k)', href: '/shop/lg-cool-and-heat-window-ac-hawaii', icon: Sparkles, badge: 'Cool+Heat' },
                 { text: 'Window AC Installation', href: '/window-ac-installation', icon: Wrench, badge: '$0 Estimate' },
             ]
         },
@@ -68,9 +69,10 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
             title: 'Window AC Cleaning & Care Division',
             links: [
                 { text: 'Window AC Deep Cleaning', href: '/ac-cleaning-oahu', icon: Sparkles, badge: 'Mold & Coil' },
+                { text: 'Cleaning vs. Repair Cost Guide', href: '/window-ac-cleaning-vs-repair-cost-oahu', icon: Compass, badge: 'Compare' },
                 { text: 'Window AC Maintenance', href: '/seasonal-ac-maintenance-plans-oahu', icon: ShieldCheck, badge: 'Sanitize' },
                 { text: 'Window AC Troubleshooting', href: '/ac-repair-oahu', icon: Wrench, badge: 'Diagnostics' },
-                { text: '26" Wall Sleeve Replacement', href: '/shop/ge-built-in-wall-ac-oahu', icon: Store },
+                { text: '26" Wall Sleeve Dimensions (RAB26A)', href: '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu', icon: Store },
             ]
         },
         {
@@ -78,6 +80,8 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
             links: [
                 { text: 'Verified Reviews (142+)', href: '/reviews', icon: Star, badge: '4.9 ★' },
                 { text: 'Window AC BTU Calculator', href: '/sizing', icon: Compass },
+                { text: 'HECO AC Electricity Calculator', href: '/window-ac-electricity-cost-heco-calculator-hawaii', icon: Compass },
+                { text: 'Installation Cost Guide Oahu', href: '/window-ac-installation-cost-oahu', icon: Wrench },
                 { text: 'Clean vs. Replace Guide', href: '/clean-vs-replace-window-ac', icon: Compass },
                 { text: 'Island Service Areas', href: '/service-areas', icon: MapPin },
             ]

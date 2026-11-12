@@ -607,6 +607,43 @@ export default function AcRepairOahuPage() {
                         subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
                     />
                 </div>
+                {/* Contextual Oahu Window AC Diagnostic & Symptom Solvers */}
+                <section aria-label="Oahu Window AC Diagnostic & Symptom Troubleshooting Guides" className="max-w-6xl mx-auto my-12 pt-8 border-t border-white/10">
+                    <div className="text-center mb-6">
+                        <span className="text-cyan-400 font-mono text-[10px] uppercase tracking-[0.25em] block mb-1.5">
+                            OAHU BENCH &amp; ON-SITE DIAGNOSTICS
+                        </span>
+                        <h2 className="text-xl sm:text-2xl font-header font-black uppercase text-white">
+                            Window AC Symptom &amp; <span className="text-primary">Diagnostic Triage Guides</span>
+                        </h2>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                        {[
+                            { title: '$0 Window AC Diagnostic Assessment', sub: '4-Point Amp, Delta-T & Sealed-System Test', href: '/window-ac-diagnostic-assessment-oahu' },
+                            { title: 'Cleaning vs Repair vs Replace Cost', sub: 'When to Sanitize vs Swap ($395+ New)', href: '/window-ac-cleaning-vs-repair-cost-oahu' },
+                            { title: 'Blowing Warm Air Troubleshooting', sub: 'Capacitor, Overload & Inverter Board Checks', href: '/ac-blowing-warm-air-troubleshooting-oahu' },
+                            { title: 'Frozen Coils & Ice Buildup Fix', sub: 'Blocked Blower Airflow vs Low Charge', href: '/ac-freezing-up-ice-on-coils-hawaii' },
+                            { title: 'Dripping Water Inside House Fix', sub: 'Algae Drain Pan & 3/8" Pitch Calibration', href: '/ac-dripping-water-inside-house-repair' },
+                            { title: 'Tripping Breaker or LCDI Plug', sub: '15A Circuit Load & Ground-Fault Tests', href: '/ac-keeps-tripping-breaker-hawaii' },
+                            { title: 'LG / GE Blinking CH Error Codes', sub: 'CH05, CH21, Thermistor & Filter Reset', href: '/blinking-light-error-codes-ac-repair' },
+                            { title: '230V NEMA 6-15 & 6-20 Receptacles', sub: 'Verify 208/230V High-BTU Wall Circuits', href: '/230v-window-ac-outlet-nema-6-15-6-20-oahu' },
+                        ].map((g) => (
+                            <Link
+                                key={g.href}
+                                href={g.href}
+                                className="p-4 rounded-2xl bg-slate-900/60 hover:bg-cyan-500/10 border border-white/10 hover:border-cyan-400/40 transition-all group"
+                            >
+                                <div className="font-header font-bold text-xs sm:text-sm uppercase text-white group-hover:text-cyan-300 transition-colors">
+                                    {g.title} &rarr;
+                                </div>
+                                <div className="text-[11px] font-mono text-slate-400 mt-1">
+                                    {g.sub}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+
 <ReviewsPavilion variant="compact" />
                 <OahuEEATAuthorityBar topicTitle="Oahu Window AC Repair, Troubleshooting & Clean-vs-Replace Guide ($395+ New ACs)" />
             </main>

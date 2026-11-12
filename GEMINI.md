@@ -33,7 +33,7 @@ Every conversation session inherits the knowledge, directives, historical timeli
    - Zero upfront checkout payment barriers for physical Window AC service, cleaning, or installation estimates (+28% checkout velocity).
    - Customers submit appointment requests; dispatch contacts them first before any charge or technician roll.
 2. **100% Dedicated Window AC & Window AC Cleaning Focus**:
-   - **Window AC Sales & Installation**: Waipahu warehouse-direct LG & GE inventory sales ($395 to $1,200; 94-150 Leoleo St. #203, Waipahu, HI 96797), custom jalousie & standard window installation, and 26" through-the-wall sleeve replacements (`101` canonical routes; 301 permanent redirects for all 9 retired legacy routes).
+   - **Window AC Sales & Installation**: Waipahu warehouse-direct LG & GE inventory sales ($395 to $1,200; 94-150 Leoleo St. #203, Waipahu, HI 96797), custom jalousie & standard window installation, and 26" through-the-wall sleeve replacements (`118` canonical routes: `102` static/city + `16` product PDPs; 301 permanent redirects for all retired legacy routes).
    - **Window AC Cleaning & Assessment**: On-site evaporator/condenser coil cleaning, antimicrobial pan treatment, condensate drain clearing, and honest clean-vs-replace assessments ($0 Free In-Home Estimate).
    - **No Fabricated Flat-Rate Packages**: Zero upfront booking payment barriers; custom itemized quotes by Oahu cooling specialists.
 3. **Floor Drop-Cloth Protection & Legal Mandate**:
@@ -43,7 +43,7 @@ Every conversation session inherits the knowledge, directives, historical timeli
    - Embedded in all JSON-LD schemas, footers, quotes, and emails (`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`).
    - Primary admin notification email is `brian@affordablehome-ac.com` with developer BCC audit trail to `irasmussenjobs@gmail.com`.
 5. **3-Row Fixed `NavbarV2` Viewport Armor, Shop `#rebate` & Isolated `/admin` Command Deck**:
-   - All `74` `page.tsx` routes enforce 3-row fixed header top-padding clearance (`pt-[88px] md:pt-[176px]` on `/`, `md:pt-[180px]` on 72 content/shop/city pages, `pt-20 md:pt-[192px]` on `/admin`).
+   - All `84` `NavbarV2` `page.tsx` routes enforce 3-row fixed header top-padding clearance (`pt-[88px] md:pt-[176px]` on `/`, `md:pt-[180px]` on 82 content/shop/city pages, `pt-20 md:pt-[192px]` on `/admin`).
    - `Shop Window AC` dropdown uses a solid `bg-[#060a12]` `z-[120]` surface (zero `/98` opacity bleed-through) and links to `/shop#rebate`.
    - `/shop` enforces the mandatory `"rebate"` (`<RebateSection />`, `$45` Hawaii Energy Rebate) section in `ShopClient.tsx`, `content.json`, and PostgreSQL `content_pages`.
    - `/admin` Command Menu is isolated below `NavbarV2` (`sticky top-[72px] md:top-[168px]`) with 4 storefront tabs (`orders`, `products`, `availability`, `security`) and zero internal `Dev OS` or `CRM Portal` links.
@@ -70,11 +70,11 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
    - `agent_revenue_reconciler` (Stripe order reconciliation, 4.712% Oahu GET tax & CRM Deposit Paid vs Balance Due fresh Checkout Sessions)
    - `agent_catalog_auditor` (16-model LG & GE spec auditor, `LW1222IVSM` & `AJCQ12AXXWA` R-32 inverter, Dual-Sizing, 16/16 PDFs & Retina WebPs)
 4. **Growth & Market Grounding Sub-Master** (`submaster_growth_grounding`):
-   - `agent_seo_metadata` (22 Oahu city pages, `101` canonical routes & 301 redirects for 9 retired legacy routes)
+   - `agent_seo_metadata` (22 Oahu city pages, `118` canonical routes & 301 redirects for retired legacy routes)
    - `agent_oahu_grounding` (Single-wall redwood BTU calibration, HECO ~44.2¢/kWh rates & 208/230V licensed electrical subcontractor grounding)
    - `agent_market_research` (Waipahu warehouse `$395–$1,200` benchmark, `$0 Free In-Home Estimate`, anti-bashing reframing & comparison checkmarks)
    - `agent_heco_rebate_strategist` (`$45` Hawaii Energy Window AC rebate, `$424.32/yr` savings & mandatory `/shop#rebate` section in code + DB)
-   - `agent_gsc_ga4_analytics` (Search Console & GA4 Window AC telemetry across 101 routes)
+   - `agent_gsc_ga4_analytics` (Search Console & GA4 Window AC telemetry across 118 routes)
    - `agent_schema_metadata_engine` (JSON-LD Product, HVACBusiness, LocalBusiness, FAQ & 4.9★ 142-review AggregateRating schemas)
    - `agent_high_intent_planner` (High-intent Window AC silos including `/shop/ge-built-in-wall-ac-oahu` & cross-funnel bridges)
 5. **Customer Operations & CRM Sub-Master** (`submaster_crm_operations`):
@@ -83,7 +83,7 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
    - `agent_intake_triage` (Window AC & 26" wall-sleeve symptom analysis and clean-vs-replace routing)
 6. **Deployment & Quality Swarm Sub-Master** (`submaster_deployment_quality`):
    - `agent_deployment_guardian` (Zero-downtime Docker orchestrator & Nginx syntax gatekeeper)
-   - `agent_build_qa` (Next.js 101-route build, TypeScript strict check & 74/74 `page.tsx` 3-row `NavbarV2` viewport clearance)
+   - `agent_build_qa` (Next.js 118-route build, TypeScript strict check & 84/84 `page.tsx` 3-row `NavbarV2` viewport clearance)
    - `agent_regression_sentinel` (Zero upfront service payment, drop-cloth clause, solid `#060a12` `z-[120]` dropdown armor & `/admin` isolation)
    - `agent_spatial_visualizer` (Blender 4.1 headless raytracing, 16 isometric fit cutaways, 16 factory PDFs & 16 2x Retina WebP viewers)
 7. **SERP & Intent Acquisition Sub-Master** (`submaster_serp_acquisition`):
@@ -94,7 +94,7 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
    - `agent_mobile_checkout_sentinel` (1-tap Apple Pay/Google Pay/Link dynamic payment methods on storefront & CRM invoices)
    - `agent_trust_authority_grounder` (`Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005` & 1-year warranty grounding)
    - `agent_zero_friction_navigator` (Strict anti-upsell enforcement, solid `#060a12` dropdown armor, `.scrollbar-none` tracks & 1-tap phone bridges)
-   - `agent_speed_core_vital_sentinel` (Mobile Core Web Vitals: LCP < 2.0s, CLS = 0.00, zero-cache headers & 74/74 viewport clearance)
+   - `agent_speed_core_vital_sentinel` (Mobile Core Web Vitals: LCP < 2.0s, CLS = 0.00, zero-cache headers & 84/84 viewport clearance)
 9. **Creative AI & Spatial Media Studio Sub-Master** (`submaster_creative_studio`):
    - `agent_comfyui_bridge` (RTX 4090 24GB VRAM lifecycle, headless queue & offline SVG fallback protection)
    - `agent_avatar_portrait_crafter` (Authentic Oahu persona portraits & 142/142 review Window AC service tag purity)

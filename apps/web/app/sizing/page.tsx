@@ -192,7 +192,7 @@ export default function SizingPage() {
                     {/* 1-Tap Instant Oahu Room Quick-Shop Jumps */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-3xl mx-auto text-left">
                         <Link
-                            href="/shop?capacity=BEDROOM"
+                            href="/small-room-window-ac-6000-8000-btu"
                             className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 transition-all group"
                         >
                             <div className="text-[9px] font-mono text-cyan-400 uppercase font-bold">Up to 250 sq ft</div>
@@ -203,7 +203,7 @@ export default function SizingPage() {
                             <div className="text-[10px] text-emerald-400 font-mono font-bold">6k–8k • From $395</div>
                         </Link>
                         <Link
-                            href="/shop?capacity=MASTER"
+                            href="/shop/10000-12000-btu-window-ac-oahu"
                             className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 transition-all group"
                         >
                             <div className="text-[9px] font-mono text-cyan-400 uppercase font-bold">250–450 sq ft</div>
@@ -214,7 +214,7 @@ export default function SizingPage() {
                             <div className="text-[10px] text-emerald-400 font-mono font-bold">10k–12k • From $625</div>
                         </Link>
                         <Link
-                            href="/shop?capacity=LIVING"
+                            href="/shop/large-room-window-ac-oahu"
                             className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 transition-all group"
                         >
                             <div className="text-[9px] font-mono text-cyan-400 uppercase font-bold">450–1,000+ sq ft</div>
@@ -225,7 +225,7 @@ export default function SizingPage() {
                             <div className="text-[10px] text-emerald-400 font-mono font-bold">14k–23.5k • $785+</div>
                         </Link>
                         <Link
-                            href="/shop?category=ge"
+                            href="/shop/ge-built-in-wall-ac-oahu"
                             className="p-2.5 rounded-xl bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 transition-all group"
                         >
                             <div className="text-[9px] font-mono text-cyan-400 uppercase font-bold">26&quot; Condo Sleeve</div>

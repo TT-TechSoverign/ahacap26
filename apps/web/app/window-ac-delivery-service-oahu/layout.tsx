@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: {
-        absolute: '$50 Oahu Window AC Delivery | In-Stock LG & GE ($395–$1,200)'
+        absolute: '$50 Oahu Window AC Delivery Service | Waipahu Warehouse Direct',
     },
-    description: '$50 flat Oahu delivery or free Waipahu pickup! 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, $45 Rebate) • (808) 488-1111.',
+    description: 'Flat $50 Window AC delivery across 15 Oahu municipalities from our Waipahu warehouse ($395–$1,200 LG & GE units in stock). $0 Estimate • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu',
     },
     openGraph: {
-        title: '$50 Oahu Window AC Delivery | In-Stock LG & GE ($395–$1,200)',
-        description: '$50 flat Oahu delivery or free Waipahu pickup! 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, $45 Rebate) • (808) 488-1111.',
+        title: '$50 Oahu Window AC Delivery Service | Waipahu Warehouse Direct',
+        description: 'Flat $50 Window AC delivery across 15 Oahu municipalities from our Waipahu warehouse ($395–$1,200 LG & GE units in stock). $0 Estimate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -19,246 +19,140 @@ export const metadata: Metadata = {
                 url: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
                 width: 1600,
                 height: 1000,
-                alt: 'Window AC Delivery Service Oahu',
-            }
-        ]
+                alt: 'Oahu Flat-Rate $50 Window AC Delivery Service from Waipahu Warehouse',
+            },
+        ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: '$50 Oahu Window AC Delivery | In-Stock LG & GE ($395–$1,200)',
-        description: '$50 flat Oahu delivery or free Waipahu pickup! 16 in-stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200, $45 Rebate) • (808) 488-1111.',
+        title: '$50 Oahu Window AC Delivery Service | Waipahu Warehouse Direct',
+        description: 'Flat $50 Window AC delivery across 15 Oahu municipalities from our Waipahu warehouse ($395–$1,200 LG & GE units in stock). $0 Estimate • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
-    }
+    },
 };
 
 const deliveryFaqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
         {
-            "@type": "Question",
-            "name": "How much does window AC delivery cost on Oahu?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "We charge a flat rate of $50 for delivery anywhere on Oahu, from Hawaii Kai and urban Honolulu to Ewa Beach, Kapolei, Kailua, and the North Shore."
-            }
+            '@type': 'Question',
+            name: 'How much does window AC delivery cost on Oahu and which areas are covered?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'We charge a flat $50 delivery fee across 15 primary Oahu residential municipalities — including Waipahu, Kapolei, Ewa Beach, Pearl City, Aiea, Mililani, Kunia, Salt Lake, Honolulu, Makiki, Manoa, Kaimuki, Hawaii Kai, Kailua, and Kaneohe. Standard $50 curbside delivery excludes North Shore, Waianae, Waikiki, and Waimanalo (customers in those areas can use Free Waipahu Warehouse Pickup by appointment at 94-150 Leoleo St #203).',
+            },
         },
         {
-            "@type": "Question",
-            "name": "How quickly can my window AC be delivered?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Units in stock at our Waipahu warehouse are typically scheduled for delivery within 24 to 48 hours. Our dispatch team coordinates a 2-hour delivery window directly with you."
-            }
+            '@type': 'Question',
+            name: 'How quickly is an in-stock LG or GE window AC delivered?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Units in stock at our Waipahu warehouse are typically dispatched within 24 to 48 hours after online checkout. Our dispatch desk calls you directly to confirm a convenient 2-hour arrival window.',
+            },
         },
         {
-            "@type": "Question",
-            "name": "Can you install the window AC when you deliver it?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes! You can choose our professional window AC installation add-on at checkout. Our Oahu cooling technicians will deliver the unit, lay protective floor drop cloths, securely mount the unit with standard brackets if required, and test cooling operation before leaving."
-            }
-        }
-    ]
+            '@type': 'Question',
+            name: 'How do I schedule installation if I also want my new window AC mounted?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'We never bundle hidden installation fees at checkout. Simply request a $0 Free In-Home Estimate by appointment on our Window AC Installation page or call (808) 488-1111 — our Oahu cooling specialists lay protective floor drop cloths and provide an upfront itemized quote for your exact jalousie, slider, or 26-inch wall sleeve opening.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'Can I pick up my window AC for free at your Waipahu warehouse instead?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Yes. Warehouse pickup at 94-150 Leoleo St. #203, Waipahu, HI 96797 is 100% free ($0) by appointment, and our team loads the factory-sealed carton upright into your truck, van, or SUV.',
+            },
+        },
+    ],
 };
 
 const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.affordablehome-ac.com"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Oahu Window AC Shop",
-            "item": "https://www.affordablehome-ac.com/shop"
-        },
-        {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "$50 Flat-Rate Oahu Window AC Delivery",
-            "item": "https://www.affordablehome-ac.com/window-ac-delivery-service-oahu"
-        }
-    ]
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.affordablehome-ac.com' },
+        { '@type': 'ListItem', position: 2, name: 'Oahu Window AC Shop', item: 'https://www.affordablehome-ac.com/shop' },
+        { '@type': 'ListItem', position: 3, name: '$50 Oahu Window AC Delivery Service', item: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu' },
+    ],
 };
 
-const pass5RichSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-                "color": "White",
-                "category": "Window Air Conditioners",
-    "name": "In-Stock LG & GE Window Air Conditioners with $50 Flat Oahu Delivery (LW1222IVSM)",
-    "image": [
-        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
-        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+const deliveryServiceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu#service',
+    name: '$50 Flat-Rate Oahu Window AC Delivery Service (Waipahu Warehouse Direct)',
+    serviceType: 'Window Air Conditioner Local Delivery & Fulfillment',
+    url: 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu',
+    image: [
+        'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+        'https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp',
     ],
-    "description": "Order in-stock LG Dual Inverter & GE Built-In window ACs ($395–$1,200) online with $50 flat-rate delivery across all 22 Oahu cities or free Waipahu warehouse pickup.",
-    "sku": "LW1222IVSM",
-    "mpn": "LW1222IVSM",
-    "gtin12": "195174029947",
-    "brand": {
-        "@type": "Brand",
-        "name": "LG"
+    description: 'Flat $50 upright HVAC delivery across 15 Oahu residential municipalities from our Waipahu warehouse (excludes North Shore, Waianae, Waikiki & Waimanalo).',
+    provider: {
+        '@type': 'HVACBusiness',
+        '@id': 'https://www.affordablehome-ac.com/window-ac-delivery-service-oahu#localbusiness',
+        parentOrganization: { '@id': 'https://www.affordablehome-ac.com/#hvacbusiness' },
+        name: 'Affordable Home A/C',
+        image: 'https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp',
+        aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.9',
+            reviewCount: '142',
+            bestRating: '5',
+            worstRating: '1',
+        },
+        url: 'https://www.affordablehome-ac.com',
+        telephone: '+1-808-488-1111',
+        priceRange: '$395 - $1,200',
+        slogan: 'Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005',
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: '94-150 Leoleo St. #203',
+            addressLocality: 'Waipahu',
+            addressRegion: 'HI',
+            postalCode: '96797',
+            addressCountry: 'US',
+        },
     },
-    "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "142",
-        "bestRating": "5",
-        "worstRating": "1"
-    },
-    "review": [
-        {
-            "@type": "Review",
-            "author": {
-                "@type": "Person",
-                "name": "Kimo M. — Oahu Homeowner"
-            },
-            "datePublished": "2026-09-18",
-            "reviewBody": "Picked up our new LG Dual Inverter at the Waipahu warehouse. Ice-cold, whisper quiet at 44dB, and qualified for the $45 Hawaii Energy rebate.",
-            "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "5",
-                "bestRating": "5",
-                "worstRating": "1"
-            }
-        },
-        {
-            "@type": "Review",
-            "author": {
-                "@type": "Person",
-                "name": "Leilani K. — Honolulu, Oahu"
-            },
-            "datePublished": "2026-10-02",
-            "reviewBody": "Upgraded our Honolulu condo bedroom to an in-stock Waipahu unit. Runs whisper-quiet overnight on a standard 115V outlet and cut our HECO electric bill.",
-            "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "5",
-                "bestRating": "5",
-                "worstRating": "1"
-            }
-        },
-        {
-            "@type": "Review",
-            "author": {
-                "@type": "Person",
-                "name": "David C. — Pearl City, Oahu"
-            },
-            "datePublished": "2026-10-14",
-            "reviewBody": "Same-week Waipahu warehouse pickup by appointment. Brand-new factory-sealed unit with 1-year warranty and official $45 Hawaii Energy rebate PDF.",
-            "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": "5",
-                "bestRating": "5",
-                "worstRating": "1"
-            }
-        }
-    ],
-    "offers": {
-        "@type": "Offer",
-        "url": "https://www.affordablehome-ac.com/window-ac-delivery-service-oahu",
-        "priceCurrency": "USD",
-        "price": "745.00",
-        "priceValidUntil": "2027-12-31",
-        "validFrom": "2026-01-01",
-        "itemCondition": "https://schema.org/NewCondition",
-        "availability": "https://schema.org/InStock",
-        "seller": {
-            "@type": "Organization",
-            "name": "Affordable Home A/C",
-            "url": "https://www.affordablehome-ac.com"
-        },
-        "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "applicableCountry": "US",
-            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-            "name": "All Sales Final"
-        },
-        "shippingDetails": [
+    areaServed: { '@type': 'AdministrativeArea', name: 'Oahu, Hawaii' },
+    hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Oahu Window AC Fulfillment Options',
+        itemListElement: [
             {
-                "@type": "OfferShippingDetails",
-                "name": "Waipahu Warehouse Pickup by Appt",
-                "shippingRate": {
-                    "@type": "MonetaryAmount",
-                    "value": "0.00",
-                    "currency": "USD"
-                },
-                "shippingDestination": {
-                    "@type": "DefinedRegion",
-                    "addressCountry": "US",
-                    "addressRegion": "HI",
-                    "postalCode": "96797"
-                },
-                "deliveryTime": {
-                    "@type": "ShippingDeliveryTime",
-                    "handlingTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 0,
-                        "maxValue": 1,
-                        "unitCode": "DAY"
-                    },
-                    "transitTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 0,
-                        "maxValue": 0,
-                        "unitCode": "DAY"
-                    }
-                }
+                '@type': 'Offer',
+                itemOffered: { '@type': 'Service', name: 'Flat-Rate Oahu Curbside Delivery (15 Covered Municipalities)' },
+                price: '50.00',
+                priceCurrency: 'USD',
             },
             {
-                "@type": "OfferShippingDetails",
-                "name": "Flat-Rate Oahu Delivery",
-                "shippingRate": {
-                    "@type": "MonetaryAmount",
-                    "value": "50.00",
-                    "currency": "USD"
-                },
-                "shippingDestination": {
-                    "@type": "DefinedRegion",
-                    "addressCountry": "US",
-                    "addressRegion": "HI"
-                },
-                "deliveryTime": {
-                    "@type": "ShippingDeliveryTime",
-                    "handlingTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 1,
-                        "maxValue": 2,
-                        "unitCode": "DAY"
-                    },
-                    "transitTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 1,
-                        "maxValue": 3,
-                        "unitCode": "DAY"
-                    }
-                }
-            }
-        ]
-    }
+                '@type': 'Offer',
+                itemOffered: { '@type': 'Service', name: 'Waipahu Warehouse Pickup by Appointment (94-150 Leoleo St #203)' },
+                price: '0.00',
+                priceCurrency: 'USD',
+            },
+        ],
+    },
 };
 
-export default function WindowAcDeliveryLayout({ children }: { children: React.ReactNode }) {
+export default function WindowAcDeliveryServiceLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(deliveryFaqSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(deliveryFaqSchema).replace(/</g, '\\u003c') }}
             />
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }}
             />
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(pass5RichSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(deliveryServiceSchema).replace(/</g, '\\u003c') }}
             />
             {children}
         </>

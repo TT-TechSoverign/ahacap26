@@ -48,7 +48,7 @@ const FEATURED_TABS: TabConfig[] = [
         subtitle:
             'Whisper-quiet 44dB variable-speed Dual Inverter units in stock at our Waipahu warehouse. Every model in this view qualifies for the $45 Hawaii Energy instant rebate.',
         ctaText: () => 'Shop All LG Dual Inverters',
-        ctaHref: '/shop?category=dual_inverter',
+        ctaHref: '/shop/lg-dual-inverter-guide',
         priorityIds: [4, 3, 1, 5, 6, 7],
         filterFn: (p) => p.subcategory === 'dual_inverter',
     },
@@ -60,7 +60,7 @@ const FEATURED_TABS: TabConfig[] = [
         subtitle:
             'Plug-and-play 115V / 15A units (6,000–12,000 BTU) engineered for Oahu bedrooms, studios, and home offices—zero 230V electrical rewiring required.',
         ctaText: () => 'View All Bedroom & 115V Units',
-        ctaHref: '/shop?capacity=BEDROOM',
+        ctaHref: '/small-room-window-ac-6000-8000-btu',
         priorityIds: [1, 11, 3, 4, 8, 12, 13, 15],
         filterFn: (p) => (p.btu || 0) <= 12000 && Boolean(p.voltage?.includes('115V')),
     },
@@ -72,7 +72,7 @@ const FEATURED_TABS: TabConfig[] = [
         subtitle:
             'High-capacity cooling for open Oahu living rooms plus true 26" built-in replacements (GE AJCQ & LG Universal Fit Cool+Heat) for Honolulu condos and townhomes.',
         ctaText: () => 'View Large Room & 26" Wall Catalog',
-        ctaHref: '/shop',
+        ctaHref: '/shop/large-room-window-ac-oahu',
         priorityIds: [5, 6, 7, 15, 9, 13, 8],
         filterFn: (p) =>
             (p.btu || 0) >= 14000 ||

@@ -38,7 +38,7 @@ powershell -File .\scripts\dev-os.ps1 session-sync "<Session Summary>"
 
 ## 3. Local Pre-Deploy Verification Gatekeepers
 Always run these four checks locally before pushing or deploying:
-1. **Storefront & Dev OS TypeScript Verification (`108` indexed sitemap URLs / `101` canonical Window AC routes)**:
+1. **Storefront & Dev OS TypeScript Verification (`118` canonical indexed sitemap URLs: `102` static/city + `16` product PDPs)**:
    ```powershell
    cd apps/web; npx tsc --noEmit
    cd apps/dev-os; npx tsc --noEmit
