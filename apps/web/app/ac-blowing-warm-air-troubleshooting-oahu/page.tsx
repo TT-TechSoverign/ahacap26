@@ -45,7 +45,7 @@ const CAUSES = [
         title: "Gecko Invertebrate Inverter Short",
         probability: "15% of Oahu Service Calls",
         desc: "Island geckos crawl between the rear inverter heat sink and printed circuit board inside the window chassis, triggering emergency high-voltage shutoff.",
-        fix: "Board bench inspection, terminal fuse testing, and protective silicone insect shielding."
+        fix: "On-site control board inspection, terminal fuse testing, and protective silicone insect shielding."
     },
     {
         title: "Salt-Crusted Condenser Coil",
@@ -81,6 +81,7 @@ export default function AcBlowingWarmAirPage() {
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -92,6 +93,7 @@ export default function AcBlowingWarmAirPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setSubmitError('');
         try {
             trackFunnelEvent('symptom_warm_air_lead', {
                 system_type: systemType,
@@ -119,14 +121,15 @@ export default function AcBlowingWarmAirPage() {
                 notes: `Symptom: BLOWING WARM AIR | Equipment: ${systemType.toUpperCase()} | Notes: ${notes.trim() || 'None'}`
             };
 
-            await fetch('/api/v1/leads/', {
+            const res = await fetch('/api/v1/leads/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
+            if (!res.ok) throw new Error('Lead submission failed');
             setIsSuccess(true);
         } catch {
-            setIsSuccess(true);
+            setSubmitError('Unable to submit online right now. Please call (808) 488-1111 directly for immediate assistance.');
         } finally {
             setIsSubmitting(false);
         }
@@ -336,6 +339,12 @@ export default function AcBlowingWarmAirPage() {
                                     className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/10 text-white text-xs focus:border-primary focus:outline-none"
                                 />
                             </div>
+
+                            {submitError && (
+                                <div role="alert" className="p-3.5 rounded-xl bg-red-500/15 border border-red-500/40 text-red-200 text-xs font-sans text-center">
+                                    {submitError}
+                                </div>
+                            )}
 
                             <button
                                 type="submit"

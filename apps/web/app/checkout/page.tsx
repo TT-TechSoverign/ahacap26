@@ -19,6 +19,35 @@ import {
     CheckCircle, Info, Star, Calendar, Truck, Warehouse, AlertTriangle, MapPin, Ban, CreditCard, ArrowRight, ArrowLeft, Snowflake, Lock, ShieldCheck, FileText, Phone, ShoppingCart, Trash2 
 } from 'lucide-react';
 
+function CheckoutTopHeader() {
+    return (
+        <header className="fixed top-0 inset-x-0 z-50 bg-[#060a12] border-b border-white/10 shadow-xl">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between gap-3">
+                <Link
+                    href="/shop"
+                    className="inline-flex items-center gap-2 text-slate-300 hover:text-cyan-400 text-xs font-header font-black uppercase tracking-wider transition-colors"
+                >
+                    <ArrowLeft className="size-4 text-cyan-400 shrink-0" />
+                    <span>Continue Shopping</span>
+                </Link>
+
+                <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-3 py-1.5 rounded-full">
+                    <Lock className="size-3.5 shrink-0" />
+                    <span>256-Bit Stripe SSL • Apple Pay &amp; Google Pay Ready</span>
+                </div>
+
+                <a
+                    href="tel:8084881111"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 text-xs font-mono font-bold transition-colors"
+                >
+                    <Phone className="size-3.5 text-emerald-400 shrink-0" />
+                    <span>(808) 488-1111</span>
+                </a>
+            </div>
+        </header>
+    );
+}
+
 function CheckoutContent() {
     const { items, clearCart, cartTotal, syncInventory, updateQuantity, removeFromCart } = useCart();
     const [step, setStep] = useState<'shipping' | 'payment' | 'success'>('shipping');
@@ -145,13 +174,7 @@ function CheckoutContent() {
     }, [items, cartTotal, searchParams]);
 
     useEffect(() => {
-        console.log('CheckoutPage: params check', {
-            val: searchParams.get('success'),
-            hasSucc: searchParams.has('success')
-        });
-
         if (searchParams.get('success') === 'true') {
-            console.log('CheckoutPage: SUCCESS DETECTED -> Triggering Success View');
             handleSuccess();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -160,7 +183,8 @@ function CheckoutContent() {
     if (step === 'success') {
         const displayRef = (confirmedSessionId || searchParams.get('session_id') || 'AHAC-VERIFIED').slice(-16).toUpperCase();
         return (
-            <main className="min-h-screen bg-[#0f172a] pt-[104px] md:pt-[188px] pb-16 px-4 md:px-8 flex items-center justify-center">
+            <main className="min-h-screen bg-[#0f172a] pt-24 md:pt-28 pb-16 px-4 md:px-8 flex items-center justify-center">
+                <CheckoutTopHeader />
                 <div className="max-w-lg w-full text-center space-y-6 p-6 sm:p-8 border border-cyan-500/20 rounded-2xl bg-slate-900/50 backdrop-blur shadow-[0_0_50px_rgba(6,182,212,0.1)]">
                     <div className="relative">
                         <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full" />
@@ -252,7 +276,8 @@ function CheckoutContent() {
 
     if (items.length === 0 && !searchParams.get('success')) {
         return (
-            <main className="min-h-screen bg-[#0a0e14] pt-[104px] md:pt-[188px] pb-16 px-4 md:px-8 flex items-center justify-center">
+            <main className="min-h-screen bg-[#0a0e14] pt-24 md:pt-28 pb-16 px-4 md:px-8 flex items-center justify-center">
+                <CheckoutTopHeader />
                 <div className="max-w-md w-full text-center space-y-6 p-8 border border-white/10 rounded-3xl bg-slate-900/60 backdrop-blur shadow-2xl">
                     <div className="size-20 rounded-full bg-slate-950 border border-white/10 flex items-center justify-center mx-auto text-cyan-400">
                         <ShoppingCart className="size-9 opacity-60" />
@@ -285,32 +310,8 @@ function CheckoutContent() {
     }
 
     return (
-        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-[88px] md:pt-[180px]">
-            {/* Dedicated Secure Express Checkout Header Bar (NavbarV2 is intentionally hidden on /checkout) */}
-            <header className="fixed top-0 inset-x-0 z-50 bg-[#060a12] border-b border-white/10 shadow-xl">
-                <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between gap-3">
-                    <Link
-                        href="/shop"
-                        className="inline-flex items-center gap-2 text-slate-300 hover:text-cyan-400 text-xs font-header font-black uppercase tracking-wider transition-colors"
-                    >
-                        <ArrowLeft className="size-4 text-cyan-400 shrink-0" />
-                        <span>Continue Shopping</span>
-                    </Link>
-
-                    <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-3 py-1.5 rounded-full">
-                        <Lock className="size-3.5 shrink-0" />
-                        <span>256-Bit Stripe SSL • Apple Pay &amp; Google Pay Ready</span>
-                    </div>
-
-                    <a
-                        href="tel:8084881111"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 text-xs font-mono font-bold transition-colors"
-                    >
-                        <Phone className="size-3.5 text-emerald-400 shrink-0" />
-                        <span>(808) 488-1111</span>
-                    </a>
-                </div>
-            </header>
+        <main className="min-h-screen bg-[#0a0e14] pb-12 px-4 md:px-8 pt-24 md:pt-28">
+            <CheckoutTopHeader />
 
             <div className="max-w-7xl mx-auto space-y-6 md:space-y-8">
 
@@ -469,7 +470,7 @@ function CheckoutContent() {
 
                     {/* RIGHT COLUMN - SUMMARY (Sticky) */}
                     <div className="lg:col-span-4 order-2 lg:order-none">
-                        <div className="sticky top-24 md:top-[184px] space-y-4 md:space-y-6">
+                        <div className="sticky top-24 md:top-28 space-y-4 md:space-y-6">
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}

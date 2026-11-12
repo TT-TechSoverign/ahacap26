@@ -45,18 +45,26 @@ const blackMoldFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "How do I know if black spots on my AC vents are toxic black mold?",
+            "name": "How do I know if black spots on my AC vents are mold?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Common HVAC molds in Oahu include Cladosporium, Penicillium, and Aspergillus. All mold types present respiratory hazards when distributed through an airstream. If you see black, fuzzy, or speckled residue along the louvers or behind the directional flaps, immediate window AC coil and blower sanitization is advised."
+                "text": "Common HVAC molds in Oahu include Cladosporium, Penicillium, and Aspergillus. If you see black, dark green, or fuzzy speckles coating the air outlet louvers, inside the fan barrel, or along the bottom edge of the plastic chassis, active colonization has taken place."
             }
         },
         {
             "@type": "Question",
-            "name": "Does standard filter cleaning remove black mold?",
+            "name": "Why does mold love Hawaii air conditioners so much?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Mesh filters capture larger lint and hair particles, but mold thrives behind the filter on the cold aluminum coil fins, inside the condensate pan, and deep within the cylindrical fan wheel blades. Cleaning the filters alone leaves 90% of the mold undisturbed."
+                "text": "Our year-round high humidity (often 75% to 85%), combined with dark, damp indoor coils during cooling cycles and tropical ambient warmth, creates an ideal incubator. Units left uncleaned for over 12 months in windward or coastal areas almost universally harbor mold."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How does Affordable Home A/C safely resolve moldy Window ACs?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For lightly soiled newer window units, we provide on-site coil and filter sanitization with floor drop cloths to protect your home. For older window units with deep black mold colonization inside the sealed air channels, we supply and install brand-new, spore-free LG Dual Inverter and GE window units directly from our Waipahu warehouse."
             }
         }
     ]

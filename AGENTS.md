@@ -93,7 +93,7 @@ This document defines the agent architecture, roles, execution protocols, and op
 ### Sub-Master 8: Frictionless Conversion Velocity (`submaster_conversion_velocity`)
 - **Scope**: Mobile checkout unblocking, 1-tap mobile wallets across storefront & CRM invoices, buyer reassurance, solid dropdown & horizontal pill navigation ergonomics, and Core Web Vitals.
 - **Agents**:
-  - `agent_mobile_checkout_sentinel`: Validates 1-tap Apple Pay, Google Pay, and Stripe Link via Dynamic Payment Methods across storefront checkout and CRM multi-stage invoice sessions.
+  - `agent_mobile_checkout_sentinel`: Validates 1-tap Apple Pay, Google Pay, and US Cards across storefront checkout and CRM multi-stage invoice sessions (with Stripe Link/BNPL disabled to prevent 5.99% fee leakage).
   - `agent_trust_authority_grounder`: Embeds `Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`, 1-year manufacturer warranty, and floor drop-cloth reassurance across checkout and footers with zero legacy license strings.
   - `agent_zero_friction_navigator`: Ensures zero checkout dead-ends, strict anti-upsell compliance, solid `bg-[#060a12]` `z-[120]` `Shop Window AC` dropdown armor, `.scrollbar-none` / `.no-scrollbar` horizontal pill tracks, and 1-tap phone bridges.
   - `agent_speed_core_vital_sentinel`: Enforces mobile sub-100ms response, zero CLS (`0.00`), universal zero-cache headers on dynamic routes, and 84/84 `page.tsx` fixed-header viewport clearance.

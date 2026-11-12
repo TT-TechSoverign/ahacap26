@@ -19,11 +19,10 @@ function escapeXml(unsafe: unknown): string {
 
 function selectTargetProductId(reviewText: string, index: number): number {
   const lower = reviewText.toLowerCase();
-  if (lower.includes('rab26') || lower.includes('wall sleeve')) {
-    const wallIds = [13, 14, 15, 16];
-    return wallIds[index % wallIds.length];
+  if (lower.includes('rab26')) {
+    return 16;
   }
-  if (lower.includes('ge ') || lower.includes('ajcq') || lower.includes('through-the-wall') || lower.includes('built-in')) {
+  if (lower.includes('wall sleeve') || lower.includes('ge ') || lower.includes('ajcq') || lower.includes('through-the-wall') || lower.includes('built-in')) {
     const geIds = [13, 14, 15];
     return geIds[index % geIds.length];
   }
@@ -35,7 +34,7 @@ function selectTargetProductId(reviewText: string, index: number): number {
     const baseIds = [11, 12];
     return baseIds[index % baseIds.length];
   }
-  return (index % 16) + 1;
+  return (index % 15) + 1;
 }
 
 export async function GET() {
@@ -68,9 +67,9 @@ export async function GET() {
       const targetId = selectTargetProductId(content, idx);
       const product = productById.get(targetId) || products[0] || INITIAL_CATALOG_PRODUCTS[0];
       const ident = PRODUCT_IDENTIFIERS[product.id];
-      const brand = ident?.brand === 'GE' ? 'GE Appliances' : (ident?.brand || 'LG');
+      const brand = ident?.brand || (product.name.startsWith('GE') ? 'GE Appliances' : 'LG');
       const gtin = ident?.gtin12 || '';
-      const mpn = ident?.mpn || '';
+      const mpn = ident?.mpn || product.key_spec || '';
       const productUrl = `${domain}/shop/${generateProductSlug(product.id, product.name)}`;
       const timestampIso = new Date(baseEpochMs - idx * 3 * dayMs).toISOString();
       const neighborhood = rev.neighborhood || 'Oahu';

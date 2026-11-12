@@ -21,11 +21,11 @@
         },
         {
           "id": "window-ac-diagnostic",
-          "name": "Window AC Diagnostic & Troubleshooting",
-          "price": 175.00,
-          "price_display": "$175 Flat Rate",
-          "billing_mode": "flat_diagnostic",
-          "scope": "In-depth electrical continuity check, dual-run capacitor microfarad test, thermistor resistance testing, and inverter board diagnostics."
+          "name": "Window AC Diagnostic & Clean-vs-Replace Assessment",
+          "price": 0.00,
+          "price_display": "By Appointment ($0 Free Assessment)",
+          "billing_mode": "by_appointment",
+          "scope": "4-point bench & in-window diagnostic protocol: airflow/coil delta-T evaluation, LCDI power & capacitor check, thermistor verification, and honest clean-vs-replace comparison."
         }
       ]
     },
@@ -37,7 +37,7 @@
           "name": "Waipahu Warehouse Direct Inventory Sales",
           "price_range": "$395 to $1,200",
           "billing_mode": "inventory_purchase",
-          "scope": "Brand-new factory-sealed LG Dual Inverter ($560 to $1,025), LG Standard ($395 to $895), and GE Built-In ($1,000 to $1,200) units in stock at 94-150 Leoleo St #203. Same-day local pickup available."
+          "scope": "Brand-new factory-sealed LG Dual Inverter ($560 to $1,025), LG Cool+Heat ($650 to $1,025), LG Standard ($395 to $625), and GE Built-In ($1,000 to $1,200) units in stock at 94-150 Leoleo St #203. Same-day local pickup available."
         },
         {
           "id": "hawaii-energy-rebate",

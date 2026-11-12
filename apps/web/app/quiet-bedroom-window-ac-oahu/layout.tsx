@@ -37,26 +37,34 @@ const bedroomFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How quiet is an LG Dual Inverter & GE window AC in a bedroom?",
+            "name": "Why are traditional window ACs so loud in bedrooms?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "In Sleep Mode, LG Dual Inverter 6,000 and 8,000 BTU models operate at just 44 decibels (dB)—as quiet as a quiet library or a gentle rain shower. Unlike traditional units that clatter and shudder when the compressor kicks on, the Dual Inverter variable-speed motor ramps up and down smoothly with zero sudden start-stop clangs."
+                "text": "Old-style single-speed window ACs cycle their compressors strictly on and off. Whenever room temperature rises, the compressor engages with a loud mechanical 'thunk' and runs at 100% capacity (58–64 dB), shuddering the window frame and waking light sleepers. LG Dual Inverter & GE Built-Ins use twin-rotary brushless motors that gently modulate speed, eliminating start-stop noise."
             }
         },
         {
             "@type": "Question",
-            "name": "How much electricity does a quiet window AC use overnight on Oahu?",
+            "name": "What does 44 decibels (dB) sound like?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "At HECO's residential rate of ~44.2¢/kWh, running an LG Dual Inverter 8 hours overnight typically consumes only 2.0 to 2.4 kWh, which amounts to approximately $0.90 to $1.06 per night. Older single-speed window ACs draw over 2.5x more power."
+                "text": "44 dB is quieter than a normal conversational voice (60 dB) and comparable to a quiet suburban library or light rain rustling leaves. You hear only a gentle, steady whoosh of cool conditioned air."
             }
         },
         {
             "@type": "Question",
-            "name": "Does this quiet bedroom unit qualify for a Hawaii Energy rebate?",
+            "name": "Can I run this unit on my existing bedroom outlet?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! Both the 6,000 BTU (LW6023IVSM) and 8,000 BTU (LW8022IVSM) are Energy Star certified and qualify for the $45 Hawaii Energy cash rebate."
+                "text": "Yes! All three bedroom models (6k, 8k, and 10k BTU) operate on standard 115V 15-amp household wall outlets. No special 230V wiring or expensive electrical upgrades are required."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do these bedroom units qualify for the $45 Hawaii Energy rebate?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! Every model featured here is Energy Star certified and qualifies for a $45 Hawaii Energy cash rebate. We provide the official pre-approved application form PDF with your purchase."
             }
         }
     ]

@@ -188,7 +188,7 @@ export function OahuPillarPageBody({
                 </p>
 
                 <div className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950/90">
-                    <table id={table.id} className="w-full text-left border-collapse text-xs">
+                    <table id={table.id} className="scroll-mt-28 md:scroll-mt-48 w-full text-left border-collapse text-xs">
                         <caption className="sr-only">{table.caption}</caption>
                         <thead>
                             <tr className="border-b border-white/10 bg-white/[0.04] font-mono text-[10px] uppercase tracking-wider text-slate-400">

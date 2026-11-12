@@ -37,26 +37,26 @@ const breakerFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Why does my AC keep tripping the breaker in my electrical panel?",
+            "name": "Why shouldn't I keep flipping the breaker back on?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "If it trips instantly with a pop, you likely have a dead short circuit, a grounded compressor motor winding, or a gecko shorting the inverter board. If it trips after running for 5 to 15 minutes, the compressor is likely pulling excessive amperage due to a failing capacitor, dirty coils, or low voltage supply."
+                "text": "A circuit breaker is a vital fire safety device designed to trip when electrical current exceeds the safe capacity of your home's wiring. If you repeatedly force the breaker on against a grounded compressor or dead short, the wires inside your walls overheat, melting insulation and creating a severe electrical arc flash or structural fire hazard."
             }
         },
         {
             "@type": "Question",
-            "name": "Is it safe to keep resetting the breaker?",
+            "name": "How does a technician test for an electrical short?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No! Resetting a tripping breaker more than once is extremely dangerous. Breakers trip to prevent electrical wires inside your walls from overheating and starting an electrical fire. Repeatedly forcing the breaker ON can melt terminal lugs and damage your main service panel."
+                "text": "Our technicians use calibrated digital multimeters and megohmmeters (meggers). We isolate the compressor terminals, measure resistance to ground (checking for infinite resistance), test capacitor microfarads against factory spec, and clamp the live electrical feed to monitor real-time amp draw."
             }
         },
         {
             "@type": "Question",
-            "name": "Can I replace an old tripping Window AC with a low-amp LG Dual Inverter?",
+            "name": "How much does the diagnostic inspection cost?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! Older single-speed window ACs surge heavily at startup, straining aging Oahu circuits. Upgrading to a soft-start LG Dual Inverter (6,000–14,000 BTU on standard 115V NEMA 5-15P, $560–$785 in stock in Waipahu) eliminates hard compressor inrush spikes and cuts HECO power draw by up to 40%."
+                "text": "We provide upfront diagnostic troubleshooting anywhere on Oahu. This includes electrical testing, troubleshooting the breaker and unit, and providing an upfront itemized recommendation with zero hidden surprise fees."
             }
         }
     ]

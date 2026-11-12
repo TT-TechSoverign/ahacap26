@@ -22,8 +22,8 @@ function mergeLiveCatalog(liveData: Product[]): Product[] {
             coverage_oahu: live.coverage_oahu || fallback.coverage_oahu,
             image_url: live.image_url || fallback.image_url,
             ceer_rating: live.ceer_rating || fallback.ceer_rating,
-            promo_price: undefined,
-            discount_percent: undefined,
+            promo_price: live.promo_price ?? undefined,
+            discount_percent: live.discount_percent ?? undefined,
         };
     });
 }

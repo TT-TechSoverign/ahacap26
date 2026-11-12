@@ -40,15 +40,15 @@ const blowerWheelFaqSchema = {
             "name": "Why does the AC blower wheel get coated in black dirt and mold?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The blower wheel spins thousands of rotations per hour, pulling humid room air directly across wet cooling coils. Microscopic dust, skin cells, and pet dander stick to the damp curved fan blades, creating a dense fungal crust that chokes airflow."
+                "text": "The centrifugal squirrel-cage blower wheel spins thousands of rotations per hour, pulling humid room air directly across wet cooling coils. Microscopic dust, skin cells, and pet dander stick to the damp curved fan blades, creating a dense fungal crust that chokes airflow."
             }
         },
         {
             "@type": "Question",
-            "name": "How do you clean a window AC blower wheel effectively?",
+            "name": "Can you clean a heavily caked blower wheel in place?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our specialists access the internal blower housing to scrub and flush away baked-on biofilm and dust crust from the fan fins while protecting the fan motor bearings and laying floor drop cloths beneath your window."
+                "text": "Surface spray-down in place only cleans the exposed front edge and can wash mold slurry deeper into the housing. For lightly soiled window units, routine filter and surface cleaning works well; for older window units with heavily encrusted blower wheels, upgrading to a brand-new LG Dual Inverter & GE Built-In ($560+ with a $45 rebate) is far more economical than a full mechanical teardown."
             }
         },
         {
@@ -57,6 +57,14 @@ const blowerWheelFaqSchema = {
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Key symptoms include weak air velocity even on high fan speed, a rhythmic pulsating or roaring whoosh sound, black flecks blowing onto your bed or couch, and an unbalanced rattling vibration from the window unit."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does a clogged fan wheel increase power consumption?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. When the concave curvature of the fan blades is packed with dirt, the wheel loses aerodynamic lift. The motor draws more amps trying to push air, while room cooling times double, wasting electricity at HECO's ~44.2¢/kWh rate."
             }
         }
     ]

@@ -48,15 +48,23 @@ const coilCleaningFaqSchema = {
             "name": "How much money can I actually save each month by cleaning my coils?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "For a typical 12,000 BTU window unit running 8 hours a day, restoring clean coil heat transfer typically saves 2 to 3 kWh per day—translating to roughly $30 to $45 in monthly savings per window AC. In multi-room households running multiple window units, savings often exceed $100 per month."
+                "text": "For a typical 12,000 BTU unit running 8 hours a day, restoring clean coil heat transfer typically saves 2 to 3 kWh per day—translating to roughly $30 to $45 in monthly savings per room unit. Across multi-unit households, savings often exceed $100 per month."
             }
         },
         {
             "@type": "Question",
-            "name": "Can I just vacuum the front of the coils myself?",
+            "name": "How often should coils be chemically washed on Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Gentle surface brushing helps remove coarse lint, but microscopic grime, salt crystals, and mold cling deep inside the 14-to-18 fins-per-inch matrix. Commercial foaming chemical cleaners and precision pressure rinsing are required to penetrate the full coil depth."
+                "text": "Given the continuous trade winds carrying salt spray and red dirt, evaporator and condenser coils should receive professional chemical cleaning every 6 to 12 months depending on your proximity to the coastline."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What makes professional coil washing different from DIY spray cans?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hardware store aerosol cans often push dirt deeper into the coil slab or leave a sticky residue that attracts more dust. Our technicians apply pH-balanced alkaline foaming agents that expand through the entire 2-to-3 row fin block and rinse it completely out."
             }
         }
     ]

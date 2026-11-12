@@ -37,26 +37,34 @@ const refrigerantLeakFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How can I tell if my window air conditioner has a refrigerant leak?",
+            "name": "How can I tell if my air conditioner has a refrigerant leak?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The most common symptoms are partial ice forming on one corner of the front evaporator coil while the rest stays warm, the compressor running continuously without lowering the room temperature, or dark oily residue on the lower copper return bends."
+                "text": "The most common symptoms are ice forming on the front evaporator coils or copper U-bends, the system running for hours without lowering the room temperature, a faint hissing sound near the coil return bends, or dark oily residue coating the copper connections."
             }
         },
         {
             "@type": "Question",
-            "name": "Why shouldn't I pay to recharge a leaking window AC?",
+            "name": "Why shouldn't I just ask a technician to add freon without fixing the leak?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Window air conditioners are factory brazed hermetically sealed loops without service ports. When coastal salt air corrodes thin copper return bends, brazing and recharging costs more than a brand-new factory-warranted LG Dual Inverter or GE window AC from our Waipahu warehouse."
+                "text": "Window air conditioning systems are hermetically sealed closed loops. Refrigerant is never consumed or 'used up.' If your system is low, a physical pinhole or corroded braze joint exists. Simply adding refrigerant without repairing the leak violates EPA Section 608 guidelines and will leak out again within weeks."
             }
         },
         {
             "@type": "Question",
-            "name": "How does Affordable Home A/C verify whether my unit is clogged or leaking refrigerant?",
+            "name": "Where do leaks most frequently occur in Hawaii?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We inspect coil airflow, test compressor amp draw, measure temperature differential across the evaporator, and check for salt-pitted copper return bends so you know immediately whether your unit just needs a deep cleaning or a direct replacement."
+                "text": "In Hawaii's coastal climate, refrigerant leaks most frequently occur in the aluminum and copper coil U-bends due to marine salt galvanic corrosion and formicary acid pitting, or at capillary tube and compressor braze joints."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What does your on-site window AC evaluation include?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our certified technician tests evaporator and condenser coil temperatures, checks compressor amp draw, inspects coil return bends with electronic halogen sniffers, and pinpoints the exact failure."
             }
         }
     ]

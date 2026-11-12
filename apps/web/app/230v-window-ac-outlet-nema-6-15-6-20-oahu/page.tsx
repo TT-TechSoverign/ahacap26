@@ -118,7 +118,7 @@ const PAGE_DATA: OahuPillarPageProps = {
             "title": "No 230V Outlet? Meet the 14,000 BTU 115V LG LW1522FVSM",
             "paragraphs": [
                 "What if your living room only has regular 115V 3-prong outlets and your HOA or landlord won't allow running a new 230V line from the breaker box?",
-                "Order the LG LW1522FVSM 14,000 BTU Dual Inverter ($785 — 48 units in stock in Waipahu). It is the largest cooling capacity UL-approved for a standard 115V / 15A NEMA 5-15P household outlet, cooling up to 450 Oahu sq. ft. (700 AHAM) with a $45 Hawaii Energy rebate."
+                "Order the LG LW1522FVSM 14,000 BTU Dual Inverter ($785 — in stock in Waipahu). It is the largest cooling capacity UL-approved for a standard 115V / 15A NEMA 5-15P household outlet, cooling up to 450 Oahu sq. ft. (700 AHAM) with a $45 Hawaii Energy rebate."
             ],
             "bullets": [
                 "Plugs into normal 115V living room outlet — $0 electrician cost",

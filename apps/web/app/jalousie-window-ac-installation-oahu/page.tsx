@@ -63,6 +63,7 @@ export default function JalousieWindowAcInstallationPage() {
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -74,6 +75,7 @@ export default function JalousieWindowAcInstallationPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setSubmitError('');
         try {
             trackFunnelEvent('jalousie_install_lead', {
                 city,
@@ -101,14 +103,15 @@ export default function JalousieWindowAcInstallationPage() {
                 notes: `Jalousie Lead | Bracket Requested: ${bracketNeeded} | Notes: ${notes.trim() || 'None'}`
             };
 
-            await fetch('/api/v1/leads/', {
+            const res = await fetch('/api/v1/leads/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
+            if (!res.ok) throw new Error('Lead submission failed');
             setIsSuccess(true);
         } catch {
-            setIsSuccess(true);
+            setSubmitError('Unable to submit online right now. Please call (808) 488-1111 directly for immediate assistance.');
         } finally {
             setIsSubmitting(false);
         }
@@ -150,7 +153,7 @@ export default function JalousieWindowAcInstallationPage() {
                             href="/shop"
                             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-header font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
                         >
-                            Shop In-Stock Window ACs ($45 Rebate)
+                            Shop In-Stock Window ACs (Qualifying $45 Rebate)
                             <ArrowRight className="size-4 text-primary" />
                         </Link>
                     </div>
@@ -261,7 +264,7 @@ export default function JalousieWindowAcInstallationPage() {
                             {
                                 step: "4",
                                 title: "Clean Vacuum & Test",
-                                desc: "Protective drop cloths are packed up, the area vacuumed spotless, and the AC cold-tested before technician sign-off."
+                                desc: "Protective drop cloths are packed up, the area vacuumed spotless, and the AC field-tested cold before technician sign-off."
                             }
                         ].map((item, idx) => (
                             <div key={idx} className="p-6 rounded-2xl bg-white/[0.02] border border-white/10">

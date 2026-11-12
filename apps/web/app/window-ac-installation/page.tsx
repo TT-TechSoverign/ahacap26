@@ -31,7 +31,7 @@ import {
 import { BackToTop } from '@/components/BackToTop';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { useCart } from '@/context/CartContext';
-import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 import { ShoppingCart } from 'lucide-react';
 import { trackFunnelEvent } from '@/lib/tracking';
 
@@ -40,6 +40,7 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 export default function WindowAcInstallationPage() {
     const { addToCart, openCart } = useCart();
+    const { products: liveProducts } = useLiveInventorySummary();
     const [windowType, setWindowType] = useState<string>('jalousie');
     const [includeBracket, setIncludeBracket] = useState<boolean>(true);
     const [unitStatus, setUnitStatus] = useState<string>('need_unit');
@@ -55,6 +56,7 @@ export default function WindowAcInstallationPage() {
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -124,13 +126,22 @@ export default function WindowAcInstallationPage() {
             });
 
             if (!res.ok) {
-                console.warn('Lead endpoint returned non-200 status', res.status);
+                let errDetail = 'Unable to submit right now. Please check your phone number or call dispatch at (808) 488-1111.';
+                try {
+                    const errBody = await res.json();
+                    if (typeof errBody?.detail === 'string') errDetail = errBody.detail;
+                } catch {
+                    // Fallback message
+                }
+                setSubmitError(errDetail);
+                return;
             }
 
+            setSubmitError(null);
             setIsSuccess(true);
         } catch (err) {
-            console.error('Lead submission network fallback', err);
-            setIsSuccess(true); // Graceful UX
+            console.error('Lead submission network error', err);
+            setSubmitError('Connection interrupted. Please retry or call Waipahu dispatch directly at (808) 488-1111.');
         } finally {
             setIsSubmitting(false);
         }
@@ -155,7 +166,7 @@ export default function WindowAcInstallationPage() {
         },
         {
             q: "Do I have to pay upfront when booking an installation appointment?",
-            a: "No! Affordable Home AC operates strictly By Appointment First with ZERO upfront payment required to book your installation. You pay the technician only after your window AC has been installed, sealed, laser-leveled, and bench-tested cold."
+            a: "No! Affordable Home AC operates strictly By Appointment First with ZERO upfront payment required to book your installation. You pay the technician only after your window AC has been installed, sealed, laser-leveled, and field-tested cold."
         }
     ];
 
@@ -750,6 +761,13 @@ export default function WindowAcInstallationPage() {
                                         />
                                     </div>
 
+                                    {submitError && (
+                                        <div role="alert" className="p-3 rounded-xl bg-red-500/15 border border-red-500/40 text-red-200 text-xs leading-relaxed">
+                                            {submitError}{' '}
+                                            <a href="tel:8084881111" className="underline font-bold text-white">Call (808) 488-1111</a>
+                                        </div>
+                                    )}
+
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
@@ -781,13 +799,14 @@ export default function WindowAcInstallationPage() {
                             Popular In-Stock LG Dual Inverters
                         </h2>
                         <p className="text-slate-400 text-xs sm:text-sm mt-2">
-                            Waipahu Warehouse Pickup (subject to scheduling &amp; inventory availability by appointment) OR $50 Flat Island-Wide Delivery across all Oahu.
+                            Waipahu Warehouse Pickup (subject to scheduling &amp; inventory availability by appointment) OR $50 Flat Oahu Residential Delivery.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
                             {
+                                id: 1,
                                 model: "LW6023IVSM",
                                 slug: "1-lg-dual-inverter-6-000-btu-lw6023ivsm",
                                 btu: "6,000 BTU",
@@ -795,10 +814,11 @@ export default function WindowAcInstallationPage() {
                                 voltage: "115V (NEMA 5-15P)",
                                 price: "$560",
                                 netPrice: "$515 after $45 rebate",
-                                badge: "Bedrooms & Studios (11 In Stock)",
+                                badgePrefix: "Bedrooms & Studios",
                                 highlight: "44 dB ultra-quiet operation, dual inverter variable compressor, and smart Wi-Fi control."
                             },
                             {
+                                id: 3,
                                 model: "LW1022IVSM",
                                 slug: "3-lg-dual-inverter-10-000-btu-lw1022ivsm",
                                 btu: "10,000 BTU",
@@ -806,10 +826,11 @@ export default function WindowAcInstallationPage() {
                                 voltage: "115V (NEMA 5-15P)",
                                 price: "$650",
                                 netPrice: "$605 after $45 rebate",
-                                badge: "Master Bedrooms (10 In Stock)",
+                                badgePrefix: "Master Bedrooms",
                                 highlight: "Ideal for Oahu bedrooms & single-wall homes with 15.0 CEER efficiency and ThinQ Wi-Fi smart scheduling."
                             },
                             {
+                                id: 4,
                                 model: "LW1222IVSM",
                                 slug: "4-lg-dual-inverter-12-000-btu-lw1222ivsm",
                                 btu: "12,000 BTU",
@@ -817,15 +838,22 @@ export default function WindowAcInstallationPage() {
                                 voltage: "115V (NEMA 5-15P)",
                                 price: "$745",
                                 netPrice: "$700 after $45 rebate",
-                                badge: "Master Suites & Living (20 In Stock)",
+                                badgePrefix: "Master Suites & Living",
                                 highlight: "High airflow for open apartments, saves over $424/year in HECO power against old rotary window units."
                             }
-                        ].map((unit, idx) => (
+                        ].map((unit, idx) => {
+                            const liveProd = liveProducts.find(p => p.id === unit.id);
+                            const isInStock = liveProd ? liveProd.stock > 0 : true;
+                            const activePrice = liveProd
+                                ? (liveProd.promo_price && liveProd.promo_price > 0 && liveProd.promo_price < liveProd.price ? liveProd.promo_price : liveProd.price)
+                                : null;
+                            const displayPrice = activePrice ? `$${activePrice.toLocaleString()}` : unit.price;
+                            return (
                             <div key={idx} className="bg-slate-900/60 border border-white/10 rounded-2xl p-6 flex flex-col justify-between">
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between">
                                         <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded">
-                                            {unit.badge}
+                                            {unit.badgePrefix} ({liveProd ? (liveProd.stock > 0 ? `${liveProd.stock} In Stock` : 'Out of Stock') : 'In Stock'})
                                         </span>
                                         <span className="text-xs font-mono text-slate-400">{unit.voltage}</span>
                                     </div>
@@ -837,11 +865,11 @@ export default function WindowAcInstallationPage() {
                                     <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 space-y-1 text-xs">
                                         <div className="flex justify-between">
                                             <span className="text-slate-400">Retail Price:</span>
-                                            <span className="text-white font-bold">{unit.price}</span>
+                                            <span className="text-white font-bold">{displayPrice}</span>
                                         </div>
                                         <div className="flex justify-between text-emerald-400 font-bold">
                                             <span>After Hawaii Energy Rebate:</span>
-                                            <span>{unit.netPrice}</span>
+                                            <span>{activePrice ? `$${(activePrice - 45).toLocaleString()} after $45 rebate` : unit.netPrice}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -850,18 +878,17 @@ export default function WindowAcInstallationPage() {
                                     <div className="grid grid-cols-2 gap-2">
                                         <button
                                             type="button"
+                                            disabled={!isInStock}
                                             onClick={() => {
-                                                const idPart = parseInt(unit.slug.split('-')[0], 10);
-                                                const prod = INITIAL_CATALOG_PRODUCTS.find(p => p.id === idPart);
-                                                if (prod) {
-                                                    addToCart(prod);
+                                                if (liveProd && liveProd.stock > 0) {
+                                                    addToCart(liveProd);
                                                     openCart();
                                                 }
                                             }}
-                                            className="w-full py-2.5 px-2 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md"
+                                            className="w-full py-2.5 px-2 rounded-xl bg-primary hover:bg-cyan-300 disabled:opacity-40 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md"
                                         >
                                             <ShoppingCart className="size-3.5 shrink-0" />
-                                            <span>Buy ({unit.price})</span>
+                                            <span>{isInStock ? `Buy (${displayPrice})` : 'Sold Out'}</span>
                                         </button>
                                         <Link
                                             href={`/shop/${unit.slug}`}
@@ -872,11 +899,12 @@ export default function WindowAcInstallationPage() {
                                         </Link>
                                     </div>
                                     <div className="text-[10px] text-center text-slate-500">
-                                        Free Waipahu Pickup (by appointment) or $50 Island Delivery
+                                        Free Waipahu Pickup (by appointment) or $50 Oahu Delivery
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
 
                     <WindowAcQuickShop title="Live Waipahu Window AC Inventory — Bundle & Save" />

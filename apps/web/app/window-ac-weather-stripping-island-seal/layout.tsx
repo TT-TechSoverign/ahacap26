@@ -9,7 +9,7 @@ export const metadata: Metadata = {
         canonical: 'https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal',
     },
     openGraph: {
-        title: 'Window AC Weather Stripping & Sealing Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Window AC Weather Sealing Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Seal out Oahu trade wind rain, humidity, noise & geckos with marine-grade closed-cell foam Window AC weather stripping.',
         url: 'https://www.affordablehome-ac.com/window-ac-weather-stripping-island-seal',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Weather Stripping & Sealing Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Window AC Weather Sealing Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Seal out Oahu trade wind rain, humidity, noise & geckos with marine-grade closed-cell foam Window AC weather stripping.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }

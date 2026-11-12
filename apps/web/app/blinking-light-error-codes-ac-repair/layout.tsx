@@ -37,26 +37,26 @@ const errorCodeFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "What does a blinking light or CH code on my window air conditioner mean?",
+            "name": "How do I read the blinking lights or digital error codes on my window AC?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "A flashing LED light or CH display on your LG or GE window air conditioner indicates a self-diagnostic error code. For example, on LG Dual Inverter units, CH01 indicates an indoor room thermistor fault, CH02 indicates an evaporator pipe thermistor fault, and CH21 indicates compressor overcurrent protection."
+                "text": "On LG Dual Inverter and GE digital window units, the LED display will show a 2-character code (such as CH01, CH02, CH21, F1, or F2) or blink the Clean Filter / Power LED in a repeating sequence. Count the flashes between pauses or note the digital code shown on the front panel."
             }
         },
         {
             "@type": "Question",
-            "name": "Can I reset a blinking AC error code by turning off the breaker?",
+            "name": "Can I clear the error code by unplugging the unit or resetting the breaker?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes, turning off the breaker for 5 full minutes performs a hard microprocessor reset. If the error was caused by a transient power surge from the HECO grid, the unit may restart normally. However, if the light starts flashing again immediately upon powering on, a physical component failure exists that requires technician attention."
+                "text": "Yes! Unplug the window unit (or press the RESET button on the LCDI plug head) and wait 5 full minutes to let the internal inverter capacitors discharge. Plug it back in and press RESET. If the error was caused by a temporary HECO island voltage flicker, the unit may reboot normally. If the code returns immediately, a sensor or board fault exists."
             }
         },
         {
             "@type": "Question",
-            "name": "What if the Clean Filter LED is blinking on my LG or GE Window AC?",
+            "name": "What if the Clean Filter LED is blinking?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "On LG and GE window air conditioners, a steady or blinking Filter LED triggers automatically after 250 hours of fan operation as a reminder to wash the front mesh screen. Pull out the filter, rinse it with warm water, let it dry, reinstall it, and hold the Filter or Temp buttons for 3 seconds to clear the indicator."
+                "text": "On LG and GE window air conditioners, a steady or blinking Filter LED triggers automatically after 250 hours of fan operation as a reminder to wash the front mesh screen. Pull out the filter, rinse it with warm water, reinstall it, and hold the Filter / Temp buttons for 3 seconds to clear the light."
             }
         }
     ]

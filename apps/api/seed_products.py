@@ -87,8 +87,10 @@ async def seed(cleanup: bool = False, force: bool = False, reset_stock: bool = F
                     p_copy["stock"] = runtime["stock"]
                 if runtime["price"] is not None:
                     p_copy["price"] = runtime["price"]
-                p_copy["promo_price"] = p.get("promo_price")
-                p_copy["discount_percent"] = p.get("discount_percent")
+                if runtime.get("promo_price") is not None:
+                    p_copy["promo_price"] = runtime["promo_price"]
+                if runtime.get("discount_percent") is not None:
+                    p_copy["discount_percent"] = runtime["discount_percent"]
 
             filtered_p = {k: v for k, v in p_copy.items() if k in valid_columns}
             model_instance = models.Product(**filtered_p)

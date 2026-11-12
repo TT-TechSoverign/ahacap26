@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Smart Wi-Fi Window ACs Oahu ($560+ In-Stock) | LG ThinQ & GE SmartHQ'
     },
-    description: 'In-Stock Smart Wi-Fi LG ThinQ Dual Inverter & GE SmartHQ Window ACs ($560–$1,200) in Waipahu, Oahu. Phone app control, $45 Rebate & $50 delivery • (808) 488-1111.',
+    description: 'In-Stock Smart Wi-Fi LG ThinQ & GE SmartHQ Window ACs ($560–$1,200) in Waipahu, Oahu. App control, qualifying $45 Rebate & $50 delivery • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/smart-wifi-window-ac-oahu',
     },
     openGraph: {
         title: 'Smart Wi-Fi Window ACs Oahu ($560+ In-Stock) | LG ThinQ & GE SmartHQ',
-        description: 'In-Stock Smart Wi-Fi LG ThinQ Dual Inverter & GE SmartHQ Window ACs ($560–$1,200) in Waipahu, Oahu. Phone app control, $45 Rebate & $50 delivery • (808) 488-1111.',
+        description: 'In-Stock Smart Wi-Fi LG ThinQ & GE SmartHQ Window ACs ($560–$1,200) in Waipahu, Oahu. App control, qualifying $45 Rebate & $50 delivery • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/smart-wifi-window-ac-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Smart Wi-Fi Window ACs Oahu ($560+ In-Stock) | LG ThinQ & GE SmartHQ',
-        description: 'In-Stock Smart Wi-Fi LG ThinQ Dual Inverter & GE SmartHQ Window ACs ($560–$1,200) in Waipahu, Oahu. Phone app control, $45 Rebate & $50 delivery • (808) 488-1111.',
+        description: 'In-Stock Smart Wi-Fi LG ThinQ & GE SmartHQ Window ACs ($560–$1,200) in Waipahu, Oahu. App control, qualifying $45 Rebate & $50 delivery • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
@@ -95,7 +95,7 @@ const pass5RichSchema = {
             "@id": "https://www.affordablehome-ac.com/smart-wifi-window-ac-oahu#collection",
             "url": "https://www.affordablehome-ac.com/smart-wifi-window-ac-oahu",
             "name": "Smart Wi-Fi Window ACs Oahu — LG ThinQ & GE SmartHQ App Control",
-            "description": "Wi-Fi enabled LG ThinQ and GE SmartHQ Window Air Conditioners ($560–$1,200) in stock in Waipahu with HECO energy monitoring, voice control, and remote pre-cooling.",
+            "description": "In-Stock Smart Wi-Fi LG ThinQ & GE SmartHQ Window ACs ($560–$1,200) in Waipahu, Oahu. App control, qualifying $45 Rebate & $50 delivery • (808) 488-1111.",
             "mainEntity": {
                 "@type": "ItemList",
                 "name": "Smart Wi-Fi Window ACs Oahu — LG ThinQ & GE SmartHQ App Control — Canonical Waipahu Models",

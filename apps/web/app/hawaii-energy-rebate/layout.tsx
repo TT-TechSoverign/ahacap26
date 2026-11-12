@@ -37,34 +37,42 @@ const rebateFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How much is the Hawaii Energy rebate for window air conditioners?",
+            "name": "What is the exact amount of the Hawaii Energy window AC rebate?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The Hawaii Energy rebate is exactly $45 for qualifying Energy Star certified room window air conditioners, such as the LG Dual Inverter & GE models stocked in our Waipahu warehouse."
+                "text": "The Hawaii Energy rebate is exactly $45 for qualifying Energy Star certified room window air conditioners. It comes as a direct cash rebate check mailed to your Oahu address or credited via your HECO account."
             }
         },
         {
             "@type": "Question",
-            "name": "Which window AC models qualify for the $45 Hawaii Energy rebate?",
+            "name": "Which window air conditioners are eligible for this rebate?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our rebate participation covers all qualifying Energy Star certified room window AC units, including our 6,000 BTU to 23,500 BTU LG Dual Inverter & GE models stocked in our Waipahu warehouse."
+                "text": "This program applies to qualifying Energy Star certified room window AC units, including our 6,000 BTU to 23,500 BTU LG Dual Inverter & GE models stocked in Waipahu. At Affordable Home A/C, we provide honest direct warehouse pricing plus your official $45 rebate application."
             }
         },
         {
             "@type": "Question",
-            "name": "How do I claim my $45 window AC rebate?",
+            "name": "Do I get the official pre-approved rebate application with my purchase?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "When you purchase an in-stock qualifying Energy Star window unit from Affordable Home AC, we provide you with our official pre-approved Hawaii Energy Rebate Application Form (Version 4). Simply fill in your HECO electric account number and submit the form with your purchase receipt online or via mail to receive your $45 check from Hawaii Energy."
+                "text": "Yes! Affordable Home A/C provides our official pre-approved Hawaii Energy Rebate Application (Version 4) with every eligible in-stock window unit purchase. You can also download the application form right here on this page."
             }
         },
         {
             "@type": "Question",
-            "name": "Can I pick up my rebate-qualifying window AC today?",
+            "name": "What documentation do I need to submit with the rebate form?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! We maintain active inventory in our central Waipahu warehouse (94-150 Leoleo St #203). You can order online and arrange free local pickup by appointment, or choose flat-rate $50 island-wide delivery."
+                "text": "You simply need: (1) Your completed Hawaii Energy application form with your HECO electric account number, and (2) Your itemized purchase receipt from Affordable Home A/C showing the qualifying Energy Star model number and purchase date."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How can I purchase an eligible unit today?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can purchase directly online through our Shop. Select Free Waipahu Warehouse Pickup (by appointment at 94-150 Leoleo St #203) or flat-rate $50 delivery across Honolulu, Metro, Central, Windward, and West Oahu."
             }
         }
     ]

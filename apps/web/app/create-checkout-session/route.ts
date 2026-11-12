@@ -180,6 +180,12 @@ export async function POST(req: Request) {
                     : `https://www.affordablehome-ac.com${primaryImg}`
                 : undefined;
 
+            const rawBasePrice = Number(canonicalItem.price);
+            const rawPromoPrice = Number((canonicalItem as any).promo_price);
+            const effectiveUnitPrice = Number.isFinite(rawPromoPrice) && rawPromoPrice > 0 && rawPromoPrice < rawBasePrice
+                ? rawPromoPrice
+                : rawBasePrice;
+
             return {
                 price_data: {
                     currency: 'usd',
@@ -192,7 +198,7 @@ export async function POST(req: Request) {
                             category: clientItem.category || 'WINDOW_AC',
                         },
                     },
-                    unit_amount: Math.round(Number(canonicalItem.price) * 100),
+                    unit_amount: Math.round(effectiveUnitPrice * 100),
                 },
                 quantity: clientItem.quantity,
             };

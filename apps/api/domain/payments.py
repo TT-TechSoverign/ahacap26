@@ -1,3 +1,4 @@
+import asyncio
 import stripe
 import os
 
@@ -6,18 +7,19 @@ stripe.api_key = STRIPE_SECRET_KEY
 
 async def create_payment_intent_service(amount: int, currency: str = "usd", idempotency_key: str = None):
     """
-    Creates a Stripe PaymentIntent with Idempotency.
+    Creates a Stripe PaymentIntent with Idempotency without blocking the async event loop,
+    locked to card/Apple Pay/Google Pay (excluding high-fee BNPL/Link funding sources).
     """
     if not STRIPE_SECRET_KEY:
         raise ValueError("STRIPE_SECRET_KEY is not set")
 
     try:
-        # Idempotency is handled natively by Stripe if key is provided
-        intent = stripe.PaymentIntent.create(
+        intent = await asyncio.to_thread(
+            stripe.PaymentIntent.create,
             amount=amount,
-            currency="usd", # Enforce USD
-            automatic_payment_methods={"enabled": True}, # Delegates control to Dashboard (Enables Apple/Google Pay)
-            idempotency_key=idempotency_key
+            currency="usd",
+            payment_method_types=["card"],
+            idempotency_key=idempotency_key,
         )
         return {"clientSecret": intent.client_secret, "id": intent.id}
     except Exception as e:

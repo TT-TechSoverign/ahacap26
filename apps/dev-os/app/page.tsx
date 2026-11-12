@@ -285,11 +285,14 @@ export default function DevOsEagleEyePage() {
 
     // --- VISUAL INSPECTOR MODAL HANDLERS ---
     const openInspector = (target: any) => {
-        setInspectTarget(target);
+        const resolved = typeof target === 'string'
+            ? (agents.find(a => a.id === target) || submasters.find(s => s.id === target) || { id: target, name: target })
+            : target;
+        setInspectTarget(resolved);
         setModalTab('synapse');
         setModalExecutionResult(null);
         setInspectModalOpen(true);
-        appendLog(`Opened Visual Synapse Inspector for [${target.name || target.id}]`);
+        appendLog(`Opened Visual Synapse Inspector for [${resolved?.name || resolved?.id}]`);
     };
 
     const openInspectorSop = (target: any) => {
@@ -935,7 +938,7 @@ export default function DevOsEagleEyePage() {
                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                 <span className="text-slate-400 text-[10px] uppercase">Active Synapses</span>
                                 <div className="mt-1 flex items-baseline gap-2">
-                                    <span className="text-xl font-bold text-cyan-400">{brainData?.total_synapses || 55}</span>
+                                    <span className="text-xl font-bold text-cyan-400">{brainData?.total_synapses || 58}</span>
                                     <span className="text-[10px] text-emerald-400">100% Armed</span>
                                 </div>
                             </div>
@@ -973,7 +976,7 @@ export default function DevOsEagleEyePage() {
                             <div className="flex flex-wrap gap-2">
                                 {(brainData?.active_directives || [
                                     "Mandate: By Appointment First — Zero Upfront Payment Barrier",
-                                    "100% LG & GE Window AC & Window AC Cleaning Focus (101 Canonical Routes)",
+                                    "100% LG & GE Window AC & Window AC Cleaning Focus (118 Canonical Routes)",
                                     "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
                                     "3-Row Fixed NavbarV2 Viewport Clearance & Solid #060a12 Dropdown Armor",
                                     "Mandatory Shop #rebate ($45 Hawaii Energy Rebate) & Isolated /admin Deck",
@@ -1731,7 +1734,7 @@ export default function DevOsEagleEyePage() {
                                             <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
                                                 <div className="flex items-center justify-between pb-2 border-b border-slate-800">
                                                     <span className="font-mono font-bold text-[11px] text-slate-300">Active Docker Containers</span>
-                                                    <span className="text-[10px] text-emerald-400">5/5 UP</span>
+                                                    <span className="text-[10px] text-emerald-400">7/7 UP</span>
                                                 </div>
                                                 <div className="mt-2 space-y-1.5 font-mono text-[11px]">
                                                     <div className="flex justify-between items-center text-slate-300">
@@ -1753,6 +1756,10 @@ export default function DevOsEagleEyePage() {
                                                     <div className="flex justify-between items-center text-slate-300">
                                                         <span>prod-redis :6380</span>
                                                         <span className="text-emerald-400">HEALTHY (Pub/Sub)</span>
+                                                    </div>
+                                                    <div className="flex justify-between items-center text-slate-300">
+                                                        <span>ahac-crm-web / crm-api :8080</span>
+                                                        <span className="text-emerald-400">HEALTHY (CRM Stack)</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2307,7 +2314,7 @@ export default function DevOsEagleEyePage() {
                                                 <div className="space-y-2 max-h-56 overflow-y-auto font-mono text-[10px]">
                                                     {(recommendationsData?.recommendations || [
                                                         { id: "CRO-REC-01", priority: "CRITICAL", title: "Plug Anxiety Breaker (18k & 23.5k)", target_route: "/shop/window-ac-plug-guide", action: "Deploy visual NEMA 6-20P plug guide to unlock 46 heavy units", expected_impact: "+35% conversion on high-BTU units" },
-                                                        { id: "CRO-REC-02", priority: "HIGH", title: "1-Click Installation Add-On", target_route: "/window-ac-installation", action: "Bundle Waipahu warehouse delivery and professional bracket mount", expected_impact: "+$180 AOV and lower unit return rate" },
+                                                        { id: "CRO-REC-02", priority: "HIGH", title: "$0 Free In-Home Installation Estimate", target_route: "/window-ac-installation", action: "Highlight By-Appointment-First $0 Free In-Home Estimate (strict anti-upsell checkout)", expected_impact: "+28% appointment request velocity" },
                                                         { id: "CRO-REC-03", priority: "HIGH", title: "Clean vs Replace Decision Matrix", target_route: "/clean-vs-replace-window-ac", action: "Siphon owners of 5+ yr rusty units to new LG Dual Inverters", expected_impact: "+22% upgrade conversion" },
                                                         { id: "CRO-REC-04", priority: "MEDIUM", title: "Window AC Cleaning & Sanitization", target_route: "/ac-cleaning-oahu", action: "Highlight drop-cloth protection and salt-air coil sanitization", expected_impact: "+40% qualified lead submission" }
                                                     ]).map((rec: any) => (
@@ -2334,7 +2341,7 @@ export default function DevOsEagleEyePage() {
                                                     {[
                                                         { route: "/clean-vs-replace-window-ac", name: "Clean vs Replace Matrix", intent: "Old AC mold vs new AC", bridge: "Clean-vs-replace assessment or new LG Dual Inverter + $45 rebate", schema: "FAQPage, HowTo" },
                                                         { route: "/window-ac-installation", name: "Professional Installation", intent: "Jalousie & bracket mount", bridge: "Book appointment (zero deposit) or buy with in-stock unit", schema: "HVACBusiness, FAQPage" },
-                                                        { route: "/shop/window-ac-plug-guide", name: "115V vs 230V Plug Guide", intent: "18k & 23.5k outlet confusion", bridge: "Direct add-to-cart for 28x 18k and 18x 23.5k units", schema: "Product, HowTo, FAQPage" },
+                                                        { route: "/shop/window-ac-plug-guide", name: "115V vs 230V Plug Guide", intent: "18k & 23.5k outlet confusion", bridge: "Direct add-to-cart for 18k and 23.5k Dual Inverter units", schema: "CollectionPage, HowTo, FAQPage" },
                                                         { route: "/ac-cleaning-oahu", name: "Window AC Cleaning Oahu", intent: "Window AC cleaning & coil sanitization", bridge: "Window AC cleaning or clean-vs-replace upgrade assessment", schema: "HVACBusiness, FAQPage" }
                                                     ].map((pg, i) => (
                                                         <div key={i} className="rounded-xl border border-slate-800 bg-slate-950 p-2.5 space-y-1">

@@ -37,26 +37,34 @@ const pickupFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Where is the warehouse pickup location on Oahu?",
+            "name": "Where is the Affordable Home AC warehouse located?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our warehouse facility is centrally located in Waipahu at 94-150 Leoleo St. #203, Waipahu, HI 96797, right off Farrington Highway near Leeward Community College. Pickups are scheduled by appointment."
+                "text": "Our central Oahu warehouse is located at 94-150 Leoleo St. #203, Waipahu, HI 96797. We are easily accessible from H-1 and Farrington Highway, making pickups quick and convenient from Pearl City, Kapolei, Ewa Beach, and Honolulu."
             }
         },
         {
             "@type": "Question",
-            "name": "How quickly can I pick up my window AC?",
+            "name": "How does warehouse pickup work?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Units in stock are available for same-day or next-day pickup by appointment. Once your online order is placed through our Shop, our team contacts you to confirm your convenient loading window."
+                "text": "Browse our online Shop and purchase your unit with zero hassle. Select 'Waipahu Warehouse Pickup' at checkout. Our dispatch team will immediately coordinate an appointment window so your unit is pulled, inspected, and ready the moment you pull up."
             }
         },
         {
             "@type": "Question",
-            "name": "Do you help load the unit into my vehicle?",
+            "name": "Will an 8,000 or 12,000 BTU window AC fit in my car?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! Our warehouse team will gladly assist you in loading the unit into your trunk, hatchback, or truck bed and provide you with your receipt and pre-approved $45 Hawaii Energy rebate form."
+                "text": "Yes! 6,000 to 12,000 BTU units easily fit into the trunk or back seat of a standard sedan or compact SUV. 18,000 and 23,500 BTU units fit comfortably in an SUV, minivan, or truck bed."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do warehouse pickup orders receive the $45 Hawaii Energy rebate form?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! Our warehouse coordinator hands you the official pre-approved $45 Hawaii Energy rebate application form PDF along with your itemized receipt upon pickup."
             }
         }
     ]

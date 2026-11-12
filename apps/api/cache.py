@@ -43,9 +43,14 @@ def cache_response(ttl: int = 60, key_prefix: str = "api"):
             if not redis_client:
                 return await func(*args, **kwargs)
 
-            # Generate Cache Key (Simple)
-            # Warning: args/kwargs must be serializable
-            cache_key = f"{key_prefix}:{func.__name__}:{str(args)}:{str(kwargs)}"
+            # Generate deterministic cache key excluding non-primitive FastAPI dependencies (AsyncSession, Request)
+            safe_args = tuple(a for a in args if isinstance(a, (str, int, float, bool, type(None))))
+            safe_kwargs = {
+                k: v
+                for k, v in sorted(kwargs.items())
+                if isinstance(v, (str, int, float, bool, type(None)))
+            }
+            cache_key = f"{key_prefix}:{func.__name__}:{safe_args}:{safe_kwargs}"
 
             # 1. Try to get from cache
             try:
@@ -83,7 +88,7 @@ async def invalidate_cache(key_pattern: str):
         return
 
     try:
-        keys = await redis_client.keys(key_pattern)
+        keys = [k async for k in redis_client.scan_iter(match=key_pattern, count=100)]
         if keys:
             await redis_client.delete(*keys)
             print(f"Cache: Invalidated {len(keys)} keys for pattern '{key_pattern}'")

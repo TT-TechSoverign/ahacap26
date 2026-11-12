@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, Request
 from sqlalchemy.ext.asyncio import AsyncSession
+import cache as cache_module
 from cache import check_rate_limit
 from sqlalchemy.future import select
 from pydantic import BaseModel, Field
@@ -81,10 +82,20 @@ async def create_lead(
         urgency_val = (lead_data.urgency or "standard").strip().lower()
         addr = (lead_data.address or "").strip() or "Oahu, HI"
 
-        # 0. Rapid Submission Deduplication Guard (60s window)
+        # 0. Rapid Submission Deduplication Guard (60s window across all Uvicorn workers via Redis + local fallback)
         clean_phone = re.sub(r'\D', '', lead_data.phone or "")
         dedup_key = f"{clean_phone}:{svc.lower()}"
+        redis_dedup_key = f"lead_dedup:{dedup_key}"
         now_ts = time.time()
+
+        if clean_phone and cache_module.redis_client:
+            try:
+                existing_redis_lead_id = await cache_module.redis_client.get(redis_dedup_key)
+                if existing_redis_lead_id:
+                    logger.warning(f"🛡️ [DEDUPLICATION SHIELD] Redis cross-worker duplicate lead within 60s from {ip}. Returning Lead ID {existing_redis_lead_id}.")
+                    return {"status": "success", "lead_id": int(existing_redis_lead_id), "message": "Inquiry already received (deduplicated)."}
+            except Exception:
+                pass
         
         # Prune old cache entries
         for k in list(RECENT_LEAD_SUBMISSIONS.keys()):
@@ -128,6 +139,11 @@ async def create_lead(
         
         if clean_phone:
             RECENT_LEAD_SUBMISSIONS[dedup_key] = (new_lead.id, now_ts)
+            if cache_module.redis_client:
+                try:
+                    await cache_module.redis_client.setex(redis_dedup_key, 60, str(new_lead.id))
+                except Exception:
+                    pass
         
         logger.info(f"Lead Created: {new_lead.id} | {email_service.mask_email(new_lead.email)} | Service: {new_lead.service_type}")
 

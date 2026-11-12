@@ -117,14 +117,14 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
                     className="p-4 rounded-2xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/40 transition-all group flex flex-col justify-between gap-2"
                 >
                     <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-300 font-bold">16 In-Stock LG &amp; GE Models</span>
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-300 font-bold">16 LG &amp; GE Catalog Models</span>
                         <Warehouse className="size-4 text-cyan-400" />
                     </div>
                     <div className="font-header font-black text-sm sm:text-base uppercase text-white group-hover:text-cyan-300 transition-colors">
                         Order Window AC Units ($395&ndash;$1,200) &rarr;
                     </div>
                     <p className="text-[11px] text-slate-300 font-sans">
-                        LG Dual Inverter (6k&ndash;23.5k BTU), LG Cool+Heat &amp; GE 26&quot; Built-In units. Eligible for <strong className="text-emerald-400">$45 Hawaii Energy Rebate</strong>.
+                        LG Dual Inverter (6k&ndash;23.5k BTU), LG Cool+Heat &amp; GE 26&quot; Built-In units. Qualifying Inverter models include a <strong className="text-emerald-400">$45 Hawaii Energy Rebate</strong>.
                     </p>
                 </Link>
 

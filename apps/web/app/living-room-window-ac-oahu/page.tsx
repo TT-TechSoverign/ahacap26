@@ -19,7 +19,7 @@ import {
     ShoppingCart
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
@@ -97,6 +97,7 @@ const FAQS = [
 
 export default function LivingRoomWindowAcPage() {
     const { addToCart, openCart } = useCart();
+    const { products: liveProducts } = useLiveInventorySummary();
     const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
@@ -182,7 +183,15 @@ export default function LivingRoomWindowAcPage() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {LIVING_MODELS.map((item, idx) => (
+                        {LIVING_MODELS.map((item, idx) => {
+                            const idPart = parseInt(item.href.replace('/shop/', '').split('-')[0], 10);
+                            const liveProd = liveProducts.find(p => p.id === idPart);
+                            const isInStock = liveProd ? liveProd.stock > 0 : true;
+                            const activePrice = liveProd
+                                ? (liveProd.promo_price && liveProd.promo_price > 0 && liveProd.promo_price < liveProd.price ? liveProd.promo_price : liveProd.price)
+                                : null;
+                            const displayPrice = activePrice ? `$${activePrice.toLocaleString()}` : item.price;
+                            return (
                             <div 
                                 key={idx}
                                 className={`p-6 sm:p-8 rounded-3xl border flex flex-col justify-between transition-all ${item.popular ? 'bg-gradient-to-b from-primary/10 via-surface-dark to-surface-dark border-primary/40 shadow-xl' : 'bg-surface-dark border-white/10'}`}
@@ -190,7 +199,9 @@ export default function LivingRoomWindowAcPage() {
                                 <div>
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="font-mono text-xs text-primary font-bold">{item.btu}</span>
-                                        <span className="font-mono text-xs text-emerald-400 font-bold">In-Stock Waipahu</span>
+                                        <span className={`font-mono text-xs font-bold ${isInStock ? 'text-emerald-400' : 'text-amber-400'}`}>
+                                            {isInStock ? 'In-Stock Waipahu' : 'Out of Stock'}
+                                        </span>
                                     </div>
                                     <h3 className="font-header font-bold text-xl uppercase text-white mb-1">
                                         LG {item.model}
@@ -206,24 +217,23 @@ export default function LivingRoomWindowAcPage() {
 
                                 <div className="border-t border-white/10 pt-4">
                                     <div className="flex items-baseline justify-between mb-3">
-                                        <span className="text-2xl font-header font-black text-white">{item.price}</span>
-                                        <span className="text-xs font-mono text-emerald-400">{item.afterRebate}</span>
+                                        <span className="text-2xl font-header font-black text-white">{displayPrice}</span>
+                                        <span className="text-xs font-mono text-emerald-400">{activePrice ? `$${(activePrice - 45).toLocaleString()} after $45 rebate` : item.afterRebate}</span>
                                     </div>
                                     <div className="grid grid-cols-2 gap-2">
                                         <button
                                             type="button"
+                                            disabled={!isInStock}
                                             onClick={() => {
-                                                const idPart = parseInt(item.href.replace('/shop/', '').split('-')[0], 10);
-                                                const prod = INITIAL_CATALOG_PRODUCTS.find(p => p.id === idPart);
-                                                if (prod) {
-                                                    addToCart(prod);
+                                                if (liveProd && liveProd.stock > 0) {
+                                                    addToCart(liveProd);
                                                     openCart();
                                                 }
                                             }}
-                                            className="w-full py-3 px-3 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"
+                                            className="w-full py-3 px-3 rounded-xl bg-primary hover:bg-cyan-300 disabled:opacity-40 text-slate-950 font-header font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md"
                                         >
                                             <ShoppingCart className="size-3.5 shrink-0" />
-                                            <span>Buy Online ({item.price})</span>
+                                            <span>{isInStock ? `Buy Online (${displayPrice})` : 'Sold Out'}</span>
                                         </button>
                                         <Link 
                                             href={item.href}
@@ -234,7 +244,8 @@ export default function LivingRoomWindowAcPage() {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </section>
 

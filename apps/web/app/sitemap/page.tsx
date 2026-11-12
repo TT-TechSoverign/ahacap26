@@ -85,7 +85,7 @@ export default async function SitemapPage() {
         { name: '10,000–12,000 BTU Master Bedroom & Condo Window ACs', path: '/shop/10000-12000-btu-window-ac-oahu' },
         { name: 'Large Room Window AC (14K–23.5K BTU)', path: '/shop/large-room-window-ac-oahu' },
         { name: 'LG Cool + Heat Window ACs Hawaii (7.6K–23K BTU)', path: '/shop/lg-cool-and-heat-window-ac-hawaii' },
-        { name: 'LG Standard Budget Window ACs ($395–$685)', path: '/shop/lg-standard-budget-window-ac-oahu' },
+        { name: 'LG Standard Budget Window ACs ($395–$625)', path: '/shop/lg-standard-budget-window-ac-oahu' },
         { name: 'GE 26" Built-In Through-the-Wall AC Guide', path: '/shop/ge-built-in-wall-ac-oahu' },
         { name: '26" Wall Sleeve Dimensions & GE RAB26A Caliper Guide', path: '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu' },
         { name: '115V vs 230V Window AC Plug Guide', path: '/shop/window-ac-plug-guide' },
@@ -105,7 +105,7 @@ export default async function SitemapPage() {
         { name: 'Smart Wi-Fi Window AC (LG ThinQ)', path: '/smart-wifi-window-ac-oahu' },
         { name: 'Window AC Replacement & Haul-Away', path: '/window-ac-replacement-oahu' },
         { name: 'Commercial Window AC (Jobsite Trailers & Retail)', path: '/commercial-window-ac-oahu' },
-        { name: 'Window AC Warranty & Waipahu Bench Support', path: '/window-ac-warranty-waipahu' },
+        { name: 'Window AC Warranty & Local Waipahu Support', path: '/window-ac-warranty-waipahu' },
     ];
 
     const housingArchitectureGuides = [
@@ -430,7 +430,7 @@ export default async function SitemapPage() {
                         </div>
                     </div>
 
-                    {/* Directory FAQ Accordion for 108/108 FAQPage Parity */}
+                    {/* Directory FAQ Accordion for 118/118 FAQPage Parity */}
                     <section id="sitemap-faqs" className="scroll-mt-28 md:scroll-mt-48 mt-16 p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-5">
                         <h2 className="text-xl font-header font-black uppercase tracking-wider text-white">
                             Affordable Home A/C Directory — Frequently Asked Questions
@@ -505,15 +505,52 @@ export default async function SitemapPage() {
                     dangerouslySetInnerHTML={{
                         __html: JSON.stringify({
                             "@context": "https://schema.org",
-                            "@type": "CollectionPage",
-                            "name": "Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C",
-                            "url": "https://www.affordablehome-ac.com/sitemap",
-                            "description": "Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.",
-                            "image": [
-                                "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                                "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-                                "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
-                                "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+                            "@graph": [
+                                {
+                                    "@type": "CollectionPage",
+                                    "@id": "https://www.affordablehome-ac.com/sitemap#collection",
+                                    "name": "Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C",
+                                    "url": "https://www.affordablehome-ac.com/sitemap",
+                                    "description": "Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.",
+                                    "image": [
+                                        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                                        "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
+                                        "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
+                                        "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
+                                    ]
+                                },
+                                {
+                                    "@type": "HVACBusiness",
+                                    "@id": "https://www.affordablehome-ac.com/sitemap#localbusiness",
+                                    "parentOrganization": {
+                                        "@id": "https://www.affordablehome-ac.com/#hvacbusiness"
+                                    },
+                                    "name": "Affordable Home A/C",
+                                    "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
+                                    "url": "https://www.affordablehome-ac.com",
+                                    "telephone": "+1-808-488-1111",
+                                    "priceRange": "$395 - $1,200",
+                                    "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
+                                    "address": {
+                                        "@type": "PostalAddress",
+                                        "streetAddress": "94-150 Leoleo St. #203",
+                                        "addressLocality": "Waipahu",
+                                        "addressRegion": "HI",
+                                        "postalCode": "96797",
+                                        "addressCountry": "US"
+                                    },
+                                    "areaServed": {
+                                        "@type": "AdministrativeArea",
+                                        "name": "Oahu, Hawaii"
+                                    },
+                                    "aggregateRating": {
+                                        "@type": "AggregateRating",
+                                        "ratingValue": "4.9",
+                                        "reviewCount": "142",
+                                        "bestRating": "5",
+                                        "worstRating": "1"
+                                    }
+                                }
                             ]
                         })
                     }}

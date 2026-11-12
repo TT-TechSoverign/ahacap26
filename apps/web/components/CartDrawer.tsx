@@ -1,7 +1,7 @@
 'use client';
 
-import confetti from 'canvas-confetti';
 import { loadStripe } from '@stripe/stripe-js';
+import confetti from 'canvas-confetti';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -298,7 +298,7 @@ export default function CartDrawer() {
                                                         <button
                                                             type="button"
                                                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                                            className="size-6 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-white/10 font-mono font-bold text-xs transition-colors"
+                                                            className="size-7 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-white/10 font-mono font-bold text-xs transition-colors"
                                                             aria-label="Decrease quantity"
                                                         >
                                                             -
@@ -310,7 +310,7 @@ export default function CartDrawer() {
                                                             type="button"
                                                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                                             disabled={item.quantity >= (item.stock || 1)}
-                                                            className="size-6 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-30 font-mono font-bold text-xs transition-colors"
+                                                            className="size-7 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-30 font-mono font-bold text-xs transition-colors"
                                                             aria-label="Increase quantity"
                                                         >
                                                             +

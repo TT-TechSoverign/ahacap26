@@ -40,23 +40,31 @@ const acMoldFaqSchema = {
             "name": "How does mold grow inside my air conditioner in Hawaii?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Oahu's year-round 80%+ humidity combined with dark, damp indoor evaporator coils creates the ideal breeding ground for mold spores like Cladosporium and Aspergillus. Over months, spores colonize the blower wheel and drip pan, blowing microscopic allergens into your home every time the unit runs."
+                "text": "Oahu's year-round 80%+ humidity combined with dark, damp indoor evaporator coils creates the ideal breeding ground for mold spores like Cladosporium and Aspergillus. Over months, spores colonize the cylindrical blower wheel and drip pan, blowing microscopic allergens into your home every time the unit runs."
             }
         },
         {
             "@type": "Question",
-            "name": "What is included in your on-site window AC mold cleaning?",
+            "name": "What is the best solution for mold inside a Window AC?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our on-site Window AC Cleaning provides clinical evaporator and condenser coil sanitization, air filter wash, blower wheel scrubbing, and condensate pan flush—with honest clean-vs-replace assessments if a chassis is heavily corroded."
+                "text": "For lightly soiled newer window units, routine filter washing, surface coil sanitization, and drain pan treatment keep mold away. For older window units with heavy black mold caked inside the sealed Styrofoam air channels, upgrading to a brand-new factory-sealed LG Dual Inverter ($560+ with a $45 Hawaii Energy rebate) is the cleanest and most economical long-term solution."
             }
         },
         {
             "@type": "Question",
-            "name": "Will the cleaning process make a water mess on my walls or floor?",
+            "name": "Will the service process make a water mess on my walls or floor?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Zero water mess. Our technicians lay protective floor drop cloths directly under the window opening during service, safely containing all moisture and debris."
+                "text": "Zero water mess. Our technicians lay protective floor drop cloths directly under the window opening during service or unit replacement, keeping your home spotless."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How often should Oahu homeowners clean their AC filters and coils?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "In humid island microclimates like Kaneohe, Kailua, Manoa, and coastal Ewa Beach, we recommend washing slide-out filters every 2–4 weeks and scheduling seasonal maintenance every 6 to 12 months."
             }
         }
     ]

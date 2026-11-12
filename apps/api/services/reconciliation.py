@@ -49,16 +49,21 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                 if metadata.get('source') == 'crm' or metadata.get('invoice_id'):
                     continue
 
-                # Check if order exists in DB
-                res = await db_session.execute(select(models.Order).where(models.Order.stripe_pid == stripe_pid))
+                # Check if order exists in DB (or if 6-char suffix collides with another order)
+                candidate_id = f"ORD-{stripe_pid[-6:].upper()}"
+                res = await db_session.execute(
+                    select(models.Order).where(
+                        (models.Order.stripe_pid == stripe_pid) | (models.Order.id == candidate_id)
+                    )
+                )
                 existing_order = res.scalars().first()
 
-                if existing_order:
+                if existing_order and getattr(existing_order, "stripe_pid", None) == stripe_pid:
                     # Order is safely recorded
                     continue
 
                 # Unrecorded paid order detected! Begin self-healing recovery.
-                order_id = f"ORD-{stripe_pid[-6:].upper()}"
+                order_id = f"ORD-{stripe_pid[-10:].upper()}" if existing_order else candidate_id
                 logger.warning(f"🚨 [Auto-Reconciliation] Unrecorded order found: {order_id} (PI: {stripe_pid}). Recovering...")
 
                 # Extract customer & delivery shipping details
@@ -72,16 +77,24 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                 customer_address = extracted_info['address']
                 amount_received = s.amount_total or 0
 
-                # Extract line items
-                line_items = await asyncio.to_thread(stripe.checkout.Session.list_line_items, s.id, limit=100)
+                # Extract line items (expand price.product so product.metadata.product_id is present in Stripe's response)
+                line_items = await asyncio.to_thread(
+                    stripe.checkout.Session.list_line_items,
+                    s.id,
+                    limit=100,
+                    expand=['data.price.product'],
+                )
                 items_data = []
                 for it_obj in line_items.data:
                     it = it_obj.to_dict() if hasattr(it_obj, 'to_dict') else dict(it_obj)
                     desc = it.get('description', '')
-                    # Resolve product ID from explicit metadata first, then MPN map across all 16 catalog models
+                    # Resolve product ID from explicit metadata first (expanded price.product or mock product_data), then MPN map across all 16 catalog models
                     p_id = None
+                    price_dict = it.get('price') or {}
+                    expanded_product = price_dict.get('product') if isinstance(price_dict.get('product'), dict) else {}
                     meta_pid = (
-                        (it.get('price') or {}).get('product_data', {}).get('metadata', {}).get('product_id')
+                        (expanded_product.get('metadata') or {}).get('product_id')
+                        or (price_dict.get('product_data') or {}).get('metadata', {}).get('product_id')
                         or (it.get('metadata') or {}).get('product_id')
                     )
                     if meta_pid and str(meta_pid).isdigit():
@@ -191,8 +204,16 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                     logger.info(f"✅ [Auto-Reconciliation] Persisted order {order_id} in database.")
                 except Exception:
                     await db_session.rollback()
-                    logger.info(f"ℹ️ [Auto-Reconciliation] Order {order_id} already persisted concurrently. Skipping.")
-                    continue
+                    pid_check = await db_session.execute(select(models.Order).where(models.Order.stripe_pid == stripe_pid))
+                    if pid_check.scalars().first():
+                        logger.info(f"ℹ️ [Auto-Reconciliation] Order for {stripe_pid} already persisted concurrently. Skipping.")
+                        continue
+                    import secrets
+                    order_id = f"ORD-{stripe_pid[-8:].upper()}-{secrets.token_hex(2).upper()}"
+                    recovered_order.id = order_id
+                    db_session.add(recovered_order)
+                    await db_session.commit()
+                    logger.info(f"✅ [Auto-Reconciliation] Persisted order {order_id} after suffix collision retry.")
 
                 # 2. Deduct inventory idempotently
                 if not recovered_order.inventory_deducted:

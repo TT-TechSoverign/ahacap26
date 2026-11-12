@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Contact Affordable Home A/C Oahu ($0 Estimate) | (808) 488-1111'
     },
-    description: 'Call (808) 488-1111 or book online! $0 Free Window AC installation & cleaning estimates across Oahu, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
+    description: 'Call (808) 488-1111 or book online! $0 Free Oahu Window AC install & cleaning estimates, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/contact',
     },
     openGraph: {
         title: 'Contact Affordable Home A/C Oahu ($0 Estimate) | (808) 488-1111',
-        description: 'Call (808) 488-1111 or book online! $0 Free Window AC installation & cleaning estimates across Oahu, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
+        description: 'Call (808) 488-1111 or book online! $0 Free Oahu Window AC install & cleaning estimates, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
         url: 'https://www.affordablehome-ac.com/contact',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Contact Affordable Home A/C Oahu ($0 Estimate) | (808) 488-1111',
-        description: 'Call (808) 488-1111 or book online! $0 Free Window AC installation & cleaning estimates across Oahu, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
+        description: 'Call (808) 488-1111 or book online! $0 Free Oahu Window AC install & cleaning estimates, or schedule Waipahu warehouse pickup (94-150 Leoleo St #203).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     }
 };
@@ -139,10 +139,10 @@ const contactFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "Where is the Waipahu Window AC warehouse located for free pickup?",
+            "name": "Which Oahu neighborhoods do you serve for Window AC installation and cleaning?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our local Oahu warehouse is located at 94-150 Leoleo St. #203, Waipahu, HI 96797 (Monday–Saturday, 8:00 AM – 5:00 PM by appointment). Order online or call (808) 488-1111 for $0 free warehouse pickup or $50 flat island-wide Oahu delivery."
+                "text": "Our insured Oahu cooling specialists serve all 22 Oahu communities—including Honolulu, Waikiki, Pearl City, Waipahu, Kapolei, Ewa Beach, Aiea, Mililani, Kailua, Kaneohe, and Hawaii Kai—with protective floor drop cloths and custom jalousie or 26-inch wall sleeve fitting."
             }
         }
     ]

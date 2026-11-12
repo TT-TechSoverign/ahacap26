@@ -9,7 +9,7 @@ export const metadata: Metadata = {
         canonical: 'https://www.affordablehome-ac.com/ac-freezing-up-ice-on-coils-hawaii',
     },
     openGraph: {
-        title: 'Window AC Freezing Up & Ice on Coils Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Window AC Frozen Coils & Ice Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Is your Oahu Window AC frozen with ice on the coils? Fast thaw steps, deep airflow coil wash & in-stock LG/GE units ($395+).',
         url: 'https://www.affordablehome-ac.com/ac-freezing-up-ice-on-coils-hawaii',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Freezing Up & Ice on Coils Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Window AC Frozen Coils & Ice Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Is your Oahu Window AC frozen with ice on the coils? Fast thaw steps, deep airflow coil wash & in-stock LG/GE units ($395+).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
@@ -37,26 +37,26 @@ const freezingFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Why is ice forming on my air conditioner coils in Hawaii?",
+            "name": "Why should I never scrape ice off the AC coils with a tool?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Oahu's high 74%+ relative humidity means air is heavy with water vapor. If airflow is choked by a dirty filter or the refrigerant charge is low from a pinhole leak, the coil temperature plunges below 32°F (0°C). Moisture instantly freezes on the aluminum fins, cascading into a solid block of ice that blocks all cooling."
+                "text": "The aluminum cooling fins and copper refrigerant tubes inside your air conditioner are extremely delicate (often only 0.028 inches thick). Using a knife, screwdriver, or ice pick will instantly puncture the pressurized copper tube, releasing toxic refrigerant gas and turning an inexpensive repair into a total coil replacement."
             }
         },
         {
             "@type": "Question",
-            "name": "What should I do immediately if my AC is frozen?",
+            "name": "How long does it take for a frozen AC coil to completely thaw?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Immediately switch the unit to FAN ONLY mode (or turn it completely OFF). NEVER use a knife, screwdriver, or ice pick to chip ice away—this will puncture delicate copper coil tubes and release refrigerant. Place towels beneath the unit to catch the melting water and schedule a professional diagnostic check."
+                "text": "Depending on ice thickness, running the system in 'FAN ONLY' mode takes between 2 to 5 hours to safely melt the ice block. Turning the unit completely off takes longer (4 to 8 hours). Always keep towels beneath the unit to catch the water."
             }
         },
         {
             "@type": "Question",
-            "name": "Will my Window AC work normally again after the ice thaws out?",
+            "name": "Will my AC work normally again after it thaws out?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Rarely without addressing the root airflow or refrigerant issue. Melting the ice clears the temporary blockage, but if evaporator coils are impacted with dust or refrigerant is low from coastal salt-air pitting, ice will reform within 30 to 90 minutes. Schedule a $0 Free Clean-vs-Replace Assessment at (808) 488-1111 to protect your compressor."
+                "text": "Rarely without fixing the underlying issue. Melting the ice temporarily clears the physical blockage, but as soon as the compressor kicks back on, the underlying root cause (low refrigerant leak or dirty coils) will cause ice to reform within 30 to 90 minutes. Professional diagnosis is necessary to prevent compressor motor burnout."
             }
         }
     ]

@@ -56,7 +56,7 @@ foreach ($pattern in $sensitivePatterns) {
 
 # 2. Check staged changes (added lines only, excluding scanner scripts and binary docx files)
 Write-Host "[2/6] Scanning Git diff & staged files..." -ForegroundColor Yellow
-$stagedAddedLines = (git -c core.fsmonitor=false diff --staged --no-textconv -- ":!scripts/scan-secrets.ps1" ":!scripts/security-email-audit.py" ":!apps/api/routers/dev_os.py" ":!*.docx") | Where-Object { $_ -match '^\+[^+]' }
+$stagedAddedLines = (git -c core.fsmonitor=false diff --staged --no-textconv -- ":!scripts/scan-secrets.ps1" ":!scripts/security-email-audit.py" ":!*.docx") | Where-Object { $_ -match '^\+[^+]' }
 $stagedDiff = $stagedAddedLines -join "`n"
 foreach ($p in $allActivePatterns) {
     if ($stagedDiff -cmatch $p.Pattern) {
@@ -114,7 +114,7 @@ foreach ($rel in $filesToScan) {
     try {
         $content = [System.IO.File]::ReadAllText((Resolve-Path -LiteralPath $rel).Path)
         if (-not $content) { continue }
-        $applicablePatterns = if ($rel -eq "apps/api/routers/dev_os.py" -or $rel -like "*.md") { $historyPatterns } else { $allActivePatterns }
+        $applicablePatterns = if ($rel -like "*.md") { $historyPatterns } else { $allActivePatterns }
         foreach ($p in $applicablePatterns) {
             if ($content -cmatch $p.Pattern) {
                 $violations += "File contains $($p.Name): $rel"

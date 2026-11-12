@@ -24,6 +24,16 @@
     --background-end-rgb: 11, 17, 32;
 }
 
+html {
+    scroll-padding-top: 104px;
+}
+
+@media (min-width: 768px) {
+    html {
+        scroll-padding-top: 192px;
+    }
+}
+
 body {
     color: rgb(var(--foreground-rgb));
     background: linear-gradient(to bottom,

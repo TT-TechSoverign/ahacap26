@@ -59,7 +59,7 @@ export function ProtectedEmailLink({
 
     return (
         <a
-            href={mounted ? buildMailto() : '#dispatch-email'}
+            href={mounted ? buildMailto() : '/contact'}
             onClick={handleClick}
             className={className}
             title={title}

@@ -128,14 +128,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         } else if (isOutOfStock) {
             description = `LG ${btuLabel} Dual Inverter (${modelCode}, $${priceText}) — view in-stock Oahu LG Dual Inverter alternatives in Waipahu ($45 Rebate) • (808) 488-1111.`;
         } else {
-            const techShort = product.id === 1 ? '44dB quiet ($515 net after $45 Rebate; 8k Standard $395).'
+            const techShort = product.id === 1 ? '44dB ($515 net after $45 Rebate; 8k Std $395).'
                 : product.id === 3 ? 'ENERGY STAR ($605 net after $45 Rebate).'
                 : product.id === 4 ? 'Gold Fin ($700 net after $45 Rebate).'
-                : product.id === 5 ? '14k BTU on 115V ($740 net after $45 Rebate).'
-                : product.id === 6 ? '230V 500 CFM living room ($880 net after $45 Rebate).'
-                : product.id === 7 ? '23,500 BTU whole-floor ($980 net after $45 Rebate).'
+                : product.id === 5 ? '14k on 115V ($740 net after $45 Rebate).'
+                : product.id === 6 ? '230V 500 CFM ($880 net after $45 Rebate).'
+                : product.id === 7 ? 'Whole-floor ($980 after $45 Rebate).'
                 : 'Quiet Oahu energy saver.';
-            description = `In-Stock Waipahu! LG ${btuStr} BTU Dual Inverter AC (${modelCode}) — $${priceText}. Free pickup / $50 Oahu delivery • (808) 488-1111. ${techShort}`;
+            description = `In-Stock Waipahu! LG ${btuStr} BTU Dual Inverter AC (${modelCode}) — $${priceText}. Waipahu pickup / $50 delivery • (808) 488-1111. ${techShort}`;
         }
     } else if (product.subcategory === 'universal_fit' || (product.id >= 8 && product.id <= 10)) {
         const btuStr = specs.btu ? specs.btu.replace(',000', 'k').replace(',500', '.5k').replace(' BTU', '') : '';
@@ -533,7 +533,7 @@ export default async function ProductLayout({ params, children }: Props) {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": `${domain}/`
+                "item": domain
             },
             {
                 "@type": "ListItem",

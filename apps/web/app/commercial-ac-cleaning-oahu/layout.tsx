@@ -37,26 +37,34 @@ const commercialCleaningFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How does scheduling work for Oahu businesses during operating hours?",
+            "name": "How does scheduling work for businesses during operating hours?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We operate during standard daytime hours. Because our technicians lay protective drop cloths beneath every unit and utilize self-contained, quiet washing equipment with zero water runoff, many offices, boutiques, and clinics schedule during normal morning hours without client disruption. Contact our dispatch desk at (808) 488-1111 to discuss your schedule."
+                "text": "We perform all appointments during standard daytime business hours. Because our technicians lay protective drop cloths beneath every unit and utilize quiet, self-contained washing equipment with zero water runoff, many Oahu offices, boutiques, and clinics easily schedule during normal morning hours or quiet mid-day windows without client disruption. If you have specific scheduling constraints, contact our dispatch desk at (808) 488-1111 or submit an inquiry to see if we are able to assist your location."
             }
         },
         {
             "@type": "Question",
-            "name": "Can you provide documentation and invoicing for commercial accounting?",
+            "name": "How does dirty AC affect commercial environments?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. We provide complete itemized invoicing detailing all work performed, certificate of insurance verification, and Hawaii GET compliance for your business expense records."
+                "text": "Dirty coils and moldy blower wheels cause musty smells that clients notice immediately, degrade employee cognitive performance, and drive up HECO commercial electric bills substantially. Regular cleaning protects customer satisfaction and brand reputation."
             }
         },
         {
             "@type": "Question",
-            "name": "How do you protect computers, merchandise, and clinic floors?",
+            "name": "Do you provide both Window AC cleaning and replacement for commercial offices?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our technicians lay heavy-duty protective floor drop cloths and poly shrouds over adjacent desks, inventory, and dental chairs. Precision drain containment captures all wastewater safely."
+                "text": "Yes. We service commercial LG & GE window air conditioners on-site with floor drop cloths, filter and coil sanitization, and direct Waipahu warehouse replacement installations."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Are you insured for commercial property management?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Affordable Home A/C is fully insured and carries comprehensive general liability coverage suitable for commercial offices, retail spaces, and property management requirements."
             }
         }
     ]

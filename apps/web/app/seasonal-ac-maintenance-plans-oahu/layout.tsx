@@ -37,26 +37,34 @@ const seasonalPlanFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How often does a LG & GE window air conditioner need maintenance on Oahu?",
+            "name": "How often does an air conditioner need maintenance on Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Due to Oahu's continuous salt-laden marine air and 80%+ humidity, we recommend bi-annual (every 6 months) servicing for primary living areas, and at minimum an annual comprehensive cleaning for secondary bedrooms."
+                "text": "Because Oahu combines high humidity (often 80%+) with airborne sea salt particles, units degrade much faster than on the mainland. We recommend servicing living areas every 6 months and bedroom units at least once a year."
             }
         },
         {
             "@type": "Question",
-            "name": "What is verified during a routine preventative maintenance visit?",
+            "name": "Will regular maintenance lower my HECO electricity bill?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our multi-point inspection covers evaporator and condenser coil sanitization, fan motor amp draws, electrical plug safety, condensate base pan clearing, and temperature Delta-T verification."
+                "text": "Absolutely. A 1/16-inch layer of dirt and mold on your evaporator coil forces your compressor to run 30% longer to achieve the same cooling effect. At HECO's ~44.2¢/kWh residential rate, regular cleanings can save $40 to $90 every single month."
             }
         },
         {
             "@type": "Question",
-            "name": "Do you lock customers into recurring binding contracts?",
+            "name": "Are there restrictive long-term auto-renewal contracts?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No locked-in contracts. We believe in earning your business on every service call with upfront itemized estimates and zero upfront booking fees."
+                "text": "Zero restrictive contracts. We provide on-demand seasonal Window AC maintenance and filter/coil care whenever you are ready. We also offer automated courtesy email/SMS reminders when your seasonal window approaches."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What brands and equipment do you maintain?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We service and replace all residential and commercial Window Air Conditioner units across Oahu, specializing in LG Dual Inverter and GE high-efficiency models."
             }
         }
     ]

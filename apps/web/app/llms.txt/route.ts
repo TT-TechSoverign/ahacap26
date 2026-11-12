@@ -96,7 +96,7 @@ ${productLines.join('\n')}
 - 10,000–12,000 BTU Master Bedroom & Condo Window AC Guide: ${baseUrl}/shop/10000-12000-btu-window-ac-oahu
 - Large Room 14,000–23,500 BTU Window AC Guide: ${baseUrl}/shop/large-room-window-ac-oahu
 - LG Cool + Heat Window AC Hawaii Guide (7.6k–23k BTU): ${baseUrl}/shop/lg-cool-and-heat-window-ac-hawaii
-- LG Standard Budget Window AC Oahu Guide ($395–$685): ${baseUrl}/shop/lg-standard-budget-window-ac-oahu
+- LG Standard Budget Window AC Oahu Guide ($395–$625): ${baseUrl}/shop/lg-standard-budget-window-ac-oahu
 - GE 26" Thru-the-Wall Built-In AC Replacement Oahu: ${baseUrl}/shop/ge-built-in-wall-ac-oahu
 - 26" Wall Sleeve Dimensions & GE RAB26A Caliper Guide: ${baseUrl}/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu
 - 115V vs 230V Window AC Plug & Circuit Guide: ${baseUrl}/shop/window-ac-plug-guide

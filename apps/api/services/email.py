@@ -308,10 +308,10 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
             server.sendmail(SMTP_USER, recipients, msg.as_string())
         else:
             if SMTP_PORT == 587:
-                new_server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+                new_server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=15)
                 new_server.starttls()
             else:
-                new_server = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
+                new_server = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, timeout=15)
                 
             with new_server:
                 new_server.login(SMTP_USER, SMTP_PASSWORD)
@@ -941,7 +941,7 @@ END:VCALENDAR"""
     def _send_both_emails():
         try:
             if SMTP_PORT == 587:
-                with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+                with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=15) as server:
                     server.starttls()
                     server.login(SMTP_USER, SMTP_PASSWORD)
                     if not dispatch_state["client_sent"]:
@@ -951,7 +951,7 @@ END:VCALENDAR"""
                         send_email_with_attachments(admin_primary_list, admin_subject, admin_html_body, admin_bcc_list, None, server=server)
                         dispatch_state["admin_sent"] = True
             else:
-                with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+                with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, timeout=15) as server:
                     server.login(SMTP_USER, SMTP_PASSWORD)
                     if not dispatch_state["client_sent"]:
                         send_email_with_attachments(client_target_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)

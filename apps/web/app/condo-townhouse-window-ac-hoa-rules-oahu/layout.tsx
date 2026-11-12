@@ -45,10 +45,10 @@ const condoHoaFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "Do LG Dual Inverter & GE window ACs pass strict HOA noise rules?",
+            "name": "Do LG Dual Inverter window ACs pass strict HOA noise rules?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! Operating at as low as 44 dB, LG Dual Inverter & GE units are significantly quieter than older rotary ACs (58+ dB) and pass even the strictest residential decibel rules in Honolulu and Salt Lake condos."
+                "text": "Yes! Operating at as low as 44 dB, LG Dual Inverter units are significantly quieter than older rotary ACs (58+ dB) and pass even the strictest residential decibel rules in Honolulu and Salt Lake condos."
             }
         },
         {
@@ -57,6 +57,14 @@ const condoHoaFaqSchema = {
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Our Oahu cooling technicians can attach custom condensate drain lines to route water safely to a drainage basin, container, or interior drain rather than letting it drip down the building exterior."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Will you provide documentation for our HOA Architectural Review Committee (ARC)?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! We can provide manufacturer specification cut-sheets, dimensions, decibel ratings, and our certificate of insurance documentation for quick HOA approval."
             }
         }
     ]

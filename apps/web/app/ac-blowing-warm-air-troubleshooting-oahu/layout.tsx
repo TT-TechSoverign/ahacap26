@@ -37,18 +37,18 @@ const warmAirFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Why is my AC running but blowing warm room-temperature air on Oahu?",
+            "name": "What should I check before calling for a repair?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The most frequent causes on Oahu are: (1) A blown dual-run motor capacitor caused by island voltage spikes, (2) A refrigerant (Freon) leak due to salt-air coil pitting, (3) A severely clogged exterior condenser coil blocked by salt and dirt, or (4) A gecko shorting the inverter control board."
+                "text": "Check three things: (1) Ensure the control mode is set to COOL (not FAN ONLY or ENERGY SAVER), (2) Check your LCDI plug reset button and main electrical panel for a tripped breaker, and (3) Inspect your front slide-out air filter—a pitch-black clogged filter chokes airflow and causes compressor overload."
             }
         },
         {
             "@type": "Question",
-            "name": "How much does it cost to have a technician diagnose warm air?",
+            "name": "How much is your diagnostic service call?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We provide on-site window AC troubleshooting and clean-vs-replace assessments across Oahu. An experienced technician tests electrical voltages, airflow, and compressor health, providing an upfront recommendation before any work begins."
+                "text": "We charge a $0 Free Clean-vs-Replace Assessment & custom itemized quote. Our visit covers technician dispatch anywhere on Oahu, electrical multimeter testing, thermal Delta-T and coil inspection, and a comprehensive written quote before any physical repairs begin."
             }
         },
         {

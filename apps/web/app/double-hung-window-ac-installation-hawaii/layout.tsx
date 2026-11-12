@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Double-Hung Window AC Installation Oahu ($0 Estimate) | (808) 488-1111'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Professional LG & GE Window AC installation for double-hung sash windows on Oahu. Weatherproof side panels & support brackets.',
+    description: '$0 Free Estimate • (808) 488-1111. LG & GE Window AC installation for double-hung sash windows on Oahu with weatherproof side panels & support brackets.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/double-hung-window-ac-installation-hawaii',
     },
     openGraph: {
         title: 'Double-Hung Window AC Installation Oahu ($0 Estimate) | (808) 488-1111',
-        description: '$0 Free Estimate • (808) 488-1111. Professional LG & GE Window AC installation for double-hung sash windows on Oahu. Weatherproof side panels & support brackets.',
+        description: '$0 Free Estimate • (808) 488-1111. LG & GE Window AC installation for double-hung sash windows on Oahu with weatherproof side panels & support brackets.',
         url: 'https://www.affordablehome-ac.com/double-hung-window-ac-installation-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Double-Hung Window AC Installation Oahu ($0 Estimate) | (808) 488-1111',
-        description: '$0 Free Estimate • (808) 488-1111. Professional LG & GE Window AC installation for double-hung sash windows on Oahu. Weatherproof side panels & support brackets.',
+        description: '$0 Free Estimate • (808) 488-1111. LG & GE Window AC installation for double-hung sash windows on Oahu with weatherproof side panels & support brackets.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp'],
     }
 };
@@ -100,7 +100,7 @@ const pass5RichSchema = {
         "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
-    "description": "$0 Free Estimate • (808) 488-1111. Professional LG & GE Window AC installation for double-hung sash windows on Oahu. Weatherproof side panels & support brackets.",
+    "description": "$0 Free Estimate • (808) 488-1111. LG & GE Window AC installation for double-hung sash windows on Oahu with weatherproof side panels & support brackets.",
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/double-hung-window-ac-installation-hawaii#localbusiness",

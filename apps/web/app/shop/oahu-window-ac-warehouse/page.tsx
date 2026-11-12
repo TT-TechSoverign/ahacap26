@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Oahu Window AC Warehouse ($395–$1,200) | Free Waipahu Pickup'
     },
-    description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup, $50 delivery & $45 Rebate • (808) 488-1111.',
+    description: '16 LG & GE Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup, $50 Oahu delivery & qualifying $45 Rebate • (808) 488-1111.',
     keywords: [
         'in stock window ac oahu',
         'window ac warehouse waipahu',
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     ],
     openGraph: {
         title: 'Oahu Window AC Warehouse ($395–$1,200) | Free Waipahu Pickup',
-        description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup, $50 delivery & $45 Rebate • (808) 488-1111.',
+        description: '16 LG & GE Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup, $50 Oahu delivery & qualifying $45 Rebate • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse',
         siteName: 'Affordable Home A/C',
         locale: 'en_US',
@@ -58,8 +58,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Oahu Window AC Warehouse ($395–$1,200 In-Stock) | Waipahu & $50 Delivery',
-        description: '16 In-Stock LG Dual Inverter & GE 26" Built-In Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup, $50 delivery & $45 Rebate • (808) 488-1111.',
+        title: 'Oahu Window AC Warehouse ($395–$1,200) | Free Waipahu Pickup',
+        description: '16 LG & GE Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup, $50 Oahu delivery & qualifying $45 Rebate • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp']
     },
     alternates: {
@@ -103,7 +103,7 @@ export default function OahuWindowAcWarehousePage() {
                 "@id": "https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse#webpage",
                 "url": "https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse",
                 "name": "In-Stock Oahu Window AC Warehouse | Waipahu Local Inventory",
-                "description": "In-stock LG Dual Inverter & GE Built-In window air conditioners warehoused locally in Waipahu, Oahu. Free warehouse pickup by appointment or $50 flat-rate island delivery.",
+                "description": "16 LG & GE Window ACs ($395–$1,200) in Waipahu, Oahu. Free pickup, $50 Oahu delivery & qualifying $45 Rebate • (808) 488-1111.",
                 "breadcrumb": {
                     "@type": "BreadcrumbList",
                     "itemListElement": [
@@ -354,7 +354,7 @@ export default function OahuWindowAcWarehousePage() {
                     <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 border-t border-slate-800/80 pt-6">
                         <div className="flex items-center gap-2">
                             <Sparkles className="w-4 h-4 text-emerald-400" />
-                            <span>Includes <strong>$45 Hawaii Energy Rebate</strong> Form</span>
+                            <span><strong>$45 Hawaii Energy Rebate</strong> Form on Qualifying Inverter Models</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <ShieldCheck className="w-4 h-4 text-emerald-400" />
@@ -417,7 +417,7 @@ export default function OahuWindowAcWarehousePage() {
                                     <td className="py-3.5 px-4 font-semibold text-white">Hawaii Energy $45 Rebate</td>
                                     <td className="py-3.5 px-4 text-slate-400">Customer must locate and navigate forms independently</td>
                                     <td className="py-3.5 px-4 text-emerald-300 font-semibold bg-emerald-500/5 border-l border-r border-emerald-500/20">
-                                        Pre-filled official $45 Hawaii Energy Rebate Form included in every box
+                                        Official $45 Hawaii Energy Rebate Form included with every qualifying Inverter model
                                     </td>
                                 </tr>
                                 <tr>

@@ -187,7 +187,7 @@ const PAGE_DATA: OahuPillarPageProps = {
         4
     ],
     "quickShopTitle": "Order In-Stock $395 & $625 LG Window ACs Online",
-    "quickShopSubheading": "20+ units in stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery.",
+    "quickShopSubheading": "In stock in Waipahu. Free warehouse pickup by appointment or $50 flat Oahu delivery.",
     "eeatTopicTitle": "Affordable LG Standard Window ACs Oahu ($395 LW8024RD & $625 LW1217ERSM1)",
     "reviewsTitle": "Oahu Value & Waipahu Pickup Customer Reviews",
     "reviewsSubtitle": "Real Oahu homeowners & property managers rated 4.9★ across 142 reviews"

@@ -262,23 +262,23 @@ function ShopPageContent() {
 
             // Voltage filter
             if (selectedVoltage === '115V') {
-                if (p.voltage && !p.voltage.includes('115V')) return false;
+                if (!p.voltage || p.voltage === 'N/A' || !p.voltage.includes('115V')) return false;
             } else if (selectedVoltage === '230V') {
-                if (p.voltage && !p.voltage.includes('230V') && !p.voltage.includes('208')) return false;
+                if (!p.voltage || p.voltage === 'N/A' || (!p.voltage.includes('230V') && !p.voltage.includes('208'))) return false;
             }
 
             // Room sizing capacity filter
             if (selectedCapacity === 'BEDROOM') {
-                if (p.btu && p.btu > 8500) return false;
+                if (!p.btu || p.btu <= 0 || p.btu > 8500) return false;
             } else if (selectedCapacity === 'MASTER') {
-                if (p.btu && (p.btu < 9000 || p.btu > 14500)) return false;
+                if (!p.btu || p.btu < 9000 || p.btu > 14500) return false;
             } else if (selectedCapacity === 'LIVING') {
-                if (p.btu && p.btu < 15000) return false;
+                if (!p.btu || p.btu < 15000) return false;
             }
 
             // Window mounting type filter
             if (selectedMount === 'SLIDER') {
-                if (p.subcategory !== 'casement') return false;
+                if (!p.btu || p.btu <= 0 || p.btu > 10000 || p.subcategory === 'ge' || p.subcategory === 'casement') return false;
             } else if (selectedMount === 'SLEEVE') {
                 if (p.subcategory !== 'universal_fit' && p.subcategory !== 'ge' && p.subcategory !== 'casement') return false;
             } else if (selectedMount === 'HUNG') {
@@ -1088,7 +1088,6 @@ function ShopPageContent() {
                                 <ProductGrid
                                     products={filteredProducts}
                                     onQuickAdd={addToCart}
-                                    rebate="$45 Hawaii Energy Rebate"
                                     compareList={compareList}
                                     onToggleCompare={handleToggleCompare}
                                 />
@@ -1177,7 +1176,7 @@ function ShopPageContent() {
                             { title: '14,000–23,500 BTU Large Room ACs', sub: '$785–$1,025 • Open Living Rooms', href: '/shop/large-room-window-ac-oahu' },
                             { title: 'GE 26" Thru-the-Wall & RAB26A Fit', sub: '26" x 15-5/8" Sleeve Caliper Specs', href: '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu' },
                             { title: 'LG Cool + Heat Window ACs Hawaii', sub: '7.6k–23k BTU • Mililani, Manoa & Wahiawa', href: '/shop/lg-cool-and-heat-window-ac-hawaii' },
-                            { title: 'LG Standard Budget Window ACs', sub: '$395–$685 • Turnkey Rental & Studio Value', href: '/shop/lg-standard-budget-window-ac-oahu' },
+                            { title: 'LG Standard Budget Window ACs', sub: '$395–$625 • Turnkey Rental & Studio Value', href: '/shop/lg-standard-budget-window-ac-oahu' },
                             { title: 'HECO Electricity Cost Calculator', sub: '44.2¢/kWh Monthly Cost & $45 Rebate ROI', href: '/window-ac-electricity-cost-heco-calculator-hawaii' },
                             { title: 'Portable AC vs Window AC Hawaii', sub: 'Why Single-Hose Units Fail Single-Wall Heat', href: '/portable-ac-vs-window-ac-hawaii' },
                         ].map((g) => (
@@ -1323,13 +1322,15 @@ function ShopPageContent() {
 
                                         <div className="mt-4 pt-3 border-t border-white/5">
                                             <button
+                                                disabled={item.stock <= 0}
                                                 onClick={() => {
+                                                    if (item.stock <= 0) return;
                                                     addToCart(item);
                                                     setIsCompareOpen(false);
                                                 }}
-                                                className="w-full py-2.5 bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)]"
+                                                className="w-full py-2.5 bg-primary hover:bg-cyan-300 disabled:bg-slate-800 disabled:text-slate-500 disabled:shadow-none text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-[0_0_15px_rgba(0,174,239,0.3)]"
                                             >
-                                                Add to Cart (${item.price})
+                                                {item.stock > 0 ? `Add to Cart ($${item.price})` : 'Out of Stock'}
                                             </button>
                                         </div>
                                     </div>
@@ -1360,7 +1361,7 @@ export default function ShopPage() {
                                 "@type": "ListItem",
                                 "position": 1,
                                 "name": "Home",
-                                "item": `${domain}/`
+                                "item": domain
                             },
                             {
                                 "@type": "ListItem",
@@ -2463,9 +2464,9 @@ function ProductCard({
                     </button>
                 )}
 
-                {rebate && !onToggleCompare && (
+                {(product.subcategory === 'dual_inverter' || product.id === 15) && (
                     <div className="absolute top-0 right-0 z-20 bg-emerald-500 text-white font-header font-black text-[8px] md:text-[9px] px-3 py-1.5 rounded-bl-2xl uppercase tracking-[0.2em] shadow-lg border-b border-l border-emerald-400/30">
-                        {rebate}
+                        {rebate || '$45 Rebate'}
                     </div>
                 )}
 

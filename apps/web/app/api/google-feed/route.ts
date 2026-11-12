@@ -125,6 +125,7 @@ export async function GET() {
       const itemGroupIdXml = itemGroupId ? `<g:item_group_id>${itemGroupId}</g:item_group_id>` : '';
 
       // Detailed Description
+      const isRebateEligible = product.subcategory === 'dual_inverter' || product.id === 15;
       const descParts = [];
       if (product.key_spec) descParts.push(product.key_spec);
       if (product.coverage_aham) descParts.push(`AHAM Coverage: ${product.coverage_aham}`);
@@ -136,26 +137,34 @@ export async function GET() {
       if (product.dimensions) descParts.push(`Dimensions: ${product.dimensions}`);
       if (product.voltage) descParts.push(`Voltage: ${product.voltage}`);
       if (product.warranty) descParts.push(`Warranty: ${product.warranty}`);
-      descParts.push('Local Waipahu warehouse pickup or $50 island-wide Oahu delivery available. Hawaii Energy rebate form assistance included.');
+      descParts.push(
+        isRebateEligible
+          ? 'Local Waipahu warehouse pickup by appointment or $50 island-wide Oahu delivery available. Qualifies for $45 Hawaii Energy cash rebate (official AHAC form included).'
+          : 'Local Waipahu warehouse pickup by appointment or $50 island-wide Oahu delivery available.'
+      );
       const description = descParts.join('. ');
 
       const rawWeight = product.shipping_weight || (product.weight ? `${product.weight} lb` : '');
       const shippingWeight = rawWeight ? `<g:shipping_weight>${escapeXml(rawWeight)}</g:shipping_weight>` : '';
 
       // 2026 Google Shopping Product Highlights (Front-Loaded for Free Listing & Shopping CTR)
-      const isRebateEligible = product.subcategory === 'dual_inverter' || product.id === 15;
+      const warrantyHighlight = product.id === 16
+        ? 'Heavy-Gauge Weather-Resistant Galvanized Steel 26-Inch Wall Sleeve'
+        : (product.id === 13 || product.id === 14)
+        ? 'Brand-New Factory-Sealed GE Unit • 2-Year Full Manufacturer Warranty'
+        : 'Brand-New Factory-Sealed Unit • Full 1-Year Manufacturer Warranty';
       const highlights = [
         product.btu
           ? `${product.btu.toLocaleString()} BTU Cooling • $${product.price} Waipahu Warehouse Direct${isRebateEligible ? ' ($45 Hawaii Energy Rebate)' : ''}`
           : `Genuine GE 26-Inch Through-the-Wall Steel Sleeve • $${product.price} Waipahu Direct`,
         isRebateEligible
           ? 'Qualifies for $45 Hawaii Energy Cash Rebate (Official AHAC Rebate PDF Included)'
-          : 'Brand-New Factory-Sealed Unit • Full 1-Year Manufacturer Warranty',
+          : warrantyHighlight,
         product.coverage_aham ? `AHAM Factory Certified: ${product.coverage_aham}` : `Coverage: ${product.coverage || 'Factory Rated'}`,
         product.coverage_oahu ? `Island Microclimate Calibration™: ${product.coverage_oahu}` : 'Island Sizing: Optimized for Hawaii Trade Winds & High Humidity',
         product.noise_level && product.voltage
           ? `Acoustic & Power: ${product.noise_level} • ${product.voltage}`
-          : (product.min_window_height ? `Window Fit: Min ${product.min_window_height} H Opening Clearance` : 'Standard Window Opening Clearance Required'),
+          : (product.min_window_height ? `Window Fit: Min ${product.min_window_height} H Opening Clearance` : '26-Inch Standard Wall Sleeve Opening Clearance'),
         'In-Stock Waipahu (94-150 Leoleo St #203) • Free Pickup by Appt or $50 Flat Oahu Delivery'
       ];
       const highlightsXml = highlights.map(h => `<g:product_highlight>${escapeXml(h)}</g:product_highlight>`).join('\n          ');
@@ -221,6 +230,8 @@ export async function GET() {
       const formattedPrice = Number.isFinite(Number(product.price))
         ? Number(product.price).toFixed(2)
         : '0.00';
+      const hasActivePromo = typeof product.promo_price === 'number' && product.promo_price > 0 && product.promo_price < product.price;
+      const salePriceXml = hasActivePromo ? `\n          <g:sale_price>${Number(product.promo_price).toFixed(2)} USD</g:sale_price>` : '';
 
       return `
         <item>
@@ -236,7 +247,7 @@ export async function GET() {
           ${highlightsXml}${productDetailsXml}
           <g:condition>new</g:condition>
           <g:availability>${availability}</g:availability>
-          <g:price>${formattedPrice} USD</g:price>
+          <g:price>${formattedPrice} USD</g:price>${salePriceXml}
           <g:brand>${escapeXml(brand)}</g:brand>
           <g:color>White</g:color>
           ${gtin ? `<g:gtin>${escapeXml(gtin)}</g:gtin>` : ''}
@@ -284,7 +295,7 @@ export async function GET() {
     return new NextResponse(xmlFeed, {
       headers: { 
         'Content-Type': 'application/xml; charset=utf-8', 
-        'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400' 
+        'Cache-Control': 'public, max-age=60, s-maxage=60, stale-while-revalidate=300' 
       },
     });
   } catch (error) {

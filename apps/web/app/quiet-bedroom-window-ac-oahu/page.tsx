@@ -19,7 +19,7 @@ import {
     ShoppingCart
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { BackToTop } from '@/components/BackToTop';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
@@ -37,7 +37,7 @@ const BEDROOM_MODELS = [
         ceer: 'CEER 15.5 Energy Star',
         plug: 'Standard 115V / 15A Plug',
         price: '$560',
-        afterRebate: '$515 after $45 rebate • 11 In Stock',
+        afterRebate: '$515 after $45 rebate',
         popular: true,
         slug: '1-lg-dual-inverter-6-000-btu-lw6023ivsm'
     },
@@ -49,7 +49,7 @@ const BEDROOM_MODELS = [
         ceer: 'CEER 15.0 Energy Star',
         plug: 'Standard 115V / 15A Plug',
         price: '$650',
-        afterRebate: '$605 after $45 rebate • 10 In Stock',
+        afterRebate: '$605 after $45 rebate',
         slug: '3-lg-dual-inverter-10-000-btu-lw1022ivsm'
     },
     {
@@ -60,7 +60,7 @@ const BEDROOM_MODELS = [
         ceer: 'CEER 15.5 Energy Star',
         plug: 'Standard 115V / 15A Plug',
         price: '$595',
-        afterRebate: 'Sold Out — 6k ($560), 10k ($650) & 8k Standard ($395) In Stock',
+        afterRebate: '$550 after $45 rebate',
         slug: '2-lg-dual-inverter-8-000-btu-lw8022ivsm'
     }
 ];
@@ -86,6 +86,7 @@ const FAQS = [
 
 export default function QuietBedroomWindowAcPage() {
     const { addToCart, openCart } = useCart();
+    const { products: liveProducts } = useLiveInventorySummary();
     const [openFaq, setOpenFaq] = useState<number | null>(0);
 
     return (
@@ -227,7 +228,20 @@ export default function QuietBedroomWindowAcPage() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {BEDROOM_MODELS.map((item, idx) => (
+                        {BEDROOM_MODELS.map((item, idx) => {
+                            const idPart = parseInt(item.slug.split('-')[0], 10);
+                            const liveProd = liveProducts.find(p => p.id === idPart);
+                            const alt8k = idPart === 2 ? liveProducts.find(p => p.id === 11) : undefined;
+                            const isInStock = liveProd ? liveProd.stock > 0 : false;
+                            const canBuyAlt = !isInStock && idPart === 2 && Boolean(alt8k && alt8k.stock > 0);
+                            const activePrice = liveProd
+                                ? (liveProd.promo_price && liveProd.promo_price > 0 && liveProd.promo_price < liveProd.price ? liveProd.promo_price : liveProd.price)
+                                : null;
+                            const displayPrice = activePrice ? `$${activePrice.toLocaleString()}` : item.price;
+                            const altPrice = alt8k
+                                ? (alt8k.promo_price && alt8k.promo_price > 0 && alt8k.promo_price < alt8k.price ? alt8k.promo_price : alt8k.price)
+                                : 395;
+                            return (
                             <div 
                                 key={idx}
                                 className={`p-6 rounded-3xl border flex flex-col justify-between transition-all ${item.popular ? 'bg-gradient-to-b from-primary/10 via-surface-dark to-surface-dark border-primary/40 shadow-xl' : 'bg-surface-dark border-white/10'}`}
@@ -240,7 +254,9 @@ export default function QuietBedroomWindowAcPage() {
                                     )}
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="font-mono text-xs text-primary font-bold">{item.btu}</span>
-                                        <span className="font-mono text-xs text-emerald-400 font-bold">$45 Rebate</span>
+                                        <span className={`font-mono text-xs font-bold ${isInStock ? 'text-emerald-400' : 'text-amber-400'}`}>
+                                            {isInStock ? `$45 Rebate • ${liveProd?.stock} In Stock` : 'Out of Stock • $45 Rebate'}
+                                        </span>
                                     </div>
                                     <h3 className="font-header font-bold text-xl uppercase text-white mb-1">
                                         LG {item.model}
@@ -259,25 +275,30 @@ export default function QuietBedroomWindowAcPage() {
 
                                 <div className="border-t border-white/10 pt-4">
                                     <div className="flex items-baseline justify-between mb-3">
-                                        <span className="text-2xl font-header font-black text-white">{item.price}</span>
-                                        <span className="text-xs font-mono text-emerald-400">{item.afterRebate}</span>
+                                        <span className="text-2xl font-header font-black text-white">{displayPrice}</span>
+                                        <span className="text-xs font-mono text-emerald-400">
+                                            {isInStock
+                                                ? (activePrice ? `$${(activePrice - 45).toLocaleString()} after $45 rebate` : item.afterRebate)
+                                                : (canBuyAlt ? `8k Standard In Stock ($${altPrice})` : 'Check Waipahu Availability')}
+                                        </span>
                                     </div>
                                     <div className="grid grid-cols-2 gap-2">
                                         <button
                                             type="button"
+                                            disabled={!isInStock && !canBuyAlt}
                                             onClick={() => {
-                                                const idPart = parseInt(item.slug.split('-')[0], 10);
-                                                const targetId = idPart === 2 ? 11 : idPart;
-                                                const prod = INITIAL_CATALOG_PRODUCTS.find(p => p.id === targetId);
-                                                if (prod) {
-                                                    addToCart(prod);
+                                                const target = isInStock ? liveProd : (canBuyAlt ? alt8k : undefined);
+                                                if (target && target.stock > 0) {
+                                                    addToCart(target);
                                                     openCart();
                                                 }
                                             }}
-                                            className="w-full py-3 px-2 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md"
+                                            className="w-full py-3 px-2 rounded-xl bg-primary hover:bg-cyan-300 disabled:opacity-40 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md"
                                         >
                                             <ShoppingCart className="size-3.5 shrink-0" />
-                                            <span>{item.slug.startsWith('2-') ? 'Buy 8k Alt ($395)' : `Buy (${item.price})`}</span>
+                                            <span>
+                                                {isInStock ? `Buy (${displayPrice})` : (canBuyAlt ? `Buy 8k Alt ($${altPrice})` : 'Sold Out')}
+                                            </span>
                                         </button>
                                         <Link 
                                             href={`/shop/${item.slug}`}
@@ -288,7 +309,8 @@ export default function QuietBedroomWindowAcPage() {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
 
                     <WindowAcQuickShop title="Live Waipahu Bedroom AC Inventory" />

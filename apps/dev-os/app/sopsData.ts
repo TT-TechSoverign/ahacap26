@@ -185,7 +185,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
                 "step": 1,
                 "title": "118-Route Canonical & 301 Redirect Audit",
                 "description": "Trigger agent_seo_metadata to verify 118 canonical routes (102 static/city + 16 product) and 301 permanent redirects for all 9 retired mini-split/central AC routes.",
-                "verification": "101 routes active; 0 legacy non-window AC routes indexed."
+                "verification": "118 routes active; 0 legacy non-window AC routes indexed."
             },
             {
                 "step": 2,
@@ -262,7 +262,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Deployment & Quality Swarm Sub-Master",
         "domain": "Deployment",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 118 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 74 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
+        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 118 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 84 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
         "token_efficiency_policy": "Multi-stage pipeline running strictly during deployment sequences; zero background daemon overhead.",
         "oahu_grounding": "Insured Oahu cooling specialist workmanship protection (floor drop-cloth mandate), zero-downtime for live Oahu customers (www.affordablehome-ac.com).",
         "inputs": [
@@ -351,7 +351,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Frictionless Conversion Velocity Sub-Master",
         "domain": "Conversion",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Enforce frictionless checkout flow, 1-tap mobile wallet availability (Apple Pay, Google Pay, Link), Waipahu warehouse trust grounding, solid dropdown & horizontal pill navigation ergonomics, and sub-100ms Core Web Vitals.",
+        "mandate": "Enforce frictionless checkout flow, 1-tap mobile wallet availability (Apple Pay, Google Pay & US Cards — Stripe Link/BNPL disabled for 2.9% fee lock), Waipahu warehouse trust grounding, solid dropdown & horizontal pill navigation ergonomics, and sub-100ms Core Web Vitals.",
         "token_efficiency_policy": "On-demand client invocation. Evaluates checkout pipeline and Lighthouse web vitals metrics in < 10ms memory audits.",
         "oahu_grounding": "Oahu customer trust defense: eliminates mainland shipping anxiety via Waipahu warehouse pickup proof, 1-year local warranty, Insured Oahu Cooling Specialists • Est. 2005 badges, and transparent 4.712% GET tax.",
         "inputs": [
@@ -364,8 +364,8 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 1,
                 "title": "Mobile Wallet & CRM Fresh Session Check",
-                "description": "Trigger agent_mobile_checkout_sentinel to confirm Apple Pay, Google Pay, and Stripe Link are active on both storefront checkout and CRM multi-stage invoices.",
-                "verification": "Dynamic payment methods active; stale CRM sessions auto-regenerated on balance change."
+                "description": "Trigger agent_mobile_checkout_sentinel to confirm Apple Pay, Google Pay, and US Cards are active (with Link/BNPL disabled for 2.9% fee lock) on storefront checkout and CRM multi-stage invoices.",
+                "verification": "Apple Pay, Google Pay & Card active; stale CRM sessions auto-regenerated on balance change."
             },
             {
                 "step": 2,
@@ -956,7 +956,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "Target Flagship Audit (LW1222IVSM & AJCQ12AXXWA)",
-                "description": "Verify LW1222IVSM (12,000 BTU, 550 sq. ft. AHAM, 250-380 sq. ft. Island, 85 lbs) and GE AJCQ12AXXWA (12,000 BTU R-32 Variable Speed Inverter, 230/208V, 13.6 CEER, 26\" wall sleeve).",
+                "description": "Verify LW1222IVSM (12,000 BTU, 550 sq. ft. AHAM, 250-380 sq. ft. Island, 85 lbs) and GE AJCQ12AXXWA (12,000 BTU R-32 Variable Speed Inverter, 115V/15A, 10.5 CEER, 26\" wall sleeve).",
                 "verification": "Both flagship models verified with zero spec drift across seed, DB, and CRM."
             },
             {
@@ -1594,7 +1594,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "CTR Title Tag Craftsman Sentinel",
         "domain": "SERP Acquisition",
         "supervisor": "submaster_serp_acquisition",
-        "mandate": "Formulate and audit click-optimized Window AC title tags, price anchors ($0 Free In-Home Estimate, $395–$1,200), and phone hotlines ((808) 488-1111) across all 101 canonical Oahu routes.",
+        "mandate": "Formulate and audit click-optimized Window AC title tags, price anchors ($0 Free In-Home Estimate, $395–$1,200), and phone hotlines ((808) 488-1111) across all 118 canonical Oahu routes.",
         "token_efficiency_policy": "Deterministic title syntax parsing. Zero external tokens consumed.",
         "oahu_grounding": "Embeds Waipahu local stock availability and Honolulu phone bridge directly into Google SERP blue link snippets.",
         "inputs": [
@@ -1661,20 +1661,20 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Mobile Checkout Sentinel",
         "domain": "Conversion",
         "supervisor": "submaster_conversion_velocity",
-        "mandate": "Validate 1-tap mobile wallet availability (Apple Pay, Google Pay, Stripe Link) across storefront checkout and CRM multi-stage invoice checkout sessions.",
+        "mandate": "Validate 1-tap mobile wallet availability (Apple Pay, Google Pay & US Cards — Link/BNPL disabled for 2.9% fee lock) across storefront checkout and CRM multi-stage invoice checkout sessions.",
         "token_efficiency_policy": "In-memory inspection of Stripe checkout session creation parameters; 0Hz idle cost.",
         "oahu_grounding": "Enables Oahu mobile shoppers on LTE/5G to complete unit purchases or pay invoice deposits/balances in under 15 seconds without typing credit cards manually.",
         "inputs": [
             "apps/web/app/create-checkout-session/route.ts",
-            "apps/web/app/api/checkout/route.ts",
+            "apps/api/domain/payments.py",
             "ahac-crm invoice checkout route"
         ],
         "execution_steps": [
             {
                 "step": 1,
-                "title": "Dynamic Payment Method Audit",
-                "description": "Verify payment_method_types is omitted/dynamic so Apple Pay, Google Pay, and Link render automatically.",
-                "verification": "Restricted ['card'] array absent across storefront and CRM."
+                "title": "Card & Mobile Wallet Fee-Lock Audit",
+                "description": "Verify payment_method_types=['card'] on storefront so Apple Pay, Google Pay, and US Cards render automatically while blocking Stripe Link/BNPL 5.99% fees.",
+                "verification": "Apple Pay, Google Pay & US Cards active; Link/BNPL fee leakage blocked."
             },
             {
                 "step": 2,
@@ -1685,7 +1685,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         ],
         "outputs": [
             "Mobile checkout status (MOBILE_WALLETS_ARMORED)",
-            "Supported wallets (Apple Pay, Google Pay, Link)"
+            "Supported wallets (Apple Pay, Google Pay, US Cards)"
         ],
         "contingency_protocol": "Restore dynamic payment method configurations immediately upon restriction detection."
     },

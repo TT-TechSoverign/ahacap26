@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Diagnostic Oahu ($0 Estimate) | (808) 488-1111',
     },
-    description: '$0 Free Estimate • (808) 488-1111. Honest Oahu Window AC troubleshooting & clean-vs-replace evaluation. Compare deep coil cleaning vs in-stock LG/GE ACs ($395+).',
+    description: '$0 Free Estimate • (808) 488-1111. Honest Oahu Window AC troubleshooting & clean-vs-replace assessment. Compare coil cleaning vs new LG/GE ACs ($395+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/window-ac-diagnostic-assessment-oahu',
     },
     openGraph: {
         title: 'Window AC Diagnostic Oahu ($0 Estimate) | (808) 488-1111',
-        description: '$0 Free Estimate • (808) 488-1111. Honest Oahu Window AC troubleshooting & clean-vs-replace evaluation. Compare deep coil cleaning vs in-stock LG/GE ACs ($395+).',
+        description: '$0 Free Estimate • (808) 488-1111. Honest Oahu Window AC troubleshooting & clean-vs-replace assessment. Compare coil cleaning vs new LG/GE ACs ($395+).',
         url: 'https://www.affordablehome-ac.com/window-ac-diagnostic-assessment-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Diagnostic Oahu ($0 Estimate) | (808) 488-1111',
-        description: '$0 Free Estimate • (808) 488-1111. Honest Oahu Window AC troubleshooting & clean-vs-replace evaluation. Compare deep coil cleaning vs in-stock LG/GE ACs ($395+).',
+        description: '$0 Free Estimate • (808) 488-1111. Honest Oahu Window AC troubleshooting & clean-vs-replace assessment. Compare coil cleaning vs new LG/GE ACs ($395+).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     },
 };

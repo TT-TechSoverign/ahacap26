@@ -37,18 +37,18 @@ const drippingFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Why is water dripping from my window AC inside my house?",
+            "name": "What should I do right now if water is pouring from my AC?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "In Hawaii's humid climate, air conditioners pull gallons of water from the air each day. The most common cause of indoor water leaks is a clogged condensate drain line choked with algae slime. Other common causes include an unlevel mounting bracket, a cracked drain pan, or frozen evaporator coils that melt faster than the pan can drain."
+                "text": "Immediately turn off the air conditioner at the remote and flip the circuit breaker off. Unplug electronics located beneath the unit, place buckets or thick towels beneath the leak, and wipe down wet drywall to prevent mold and bubbling paint."
             }
         },
         {
             "@type": "Question",
-            "name": "How does Affordable Home AC fix indoor AC leaks?",
+            "name": "How do you clear a window AC drain clog on Oahu?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our Oahu cooling technicians inspect the condensate drain pan, flush and clear the gravity drain line using vacuum extraction and dedicated line flushing, verify the mounting pitch with a digital level, and apply antimicrobial pan treatments to prevent future algae clogs."
+                "text": "Our technicians inspect the rear drain port, flush and clear blocked condensate channels using commercial vacuum extraction, verify the 3/8-inch exterior tilt pitch, and sanitize the drain pan to prevent recurring algae buildup."
             }
         },
         {
@@ -56,7 +56,7 @@ const drippingFaqSchema = {
             "name": "Can I pour bleach into my window AC drain pan myself?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We strongly advise against bleach. Bleach fumes are corrosive to aluminum coil fins, can degrade rubber gaskets, and if splashed on paint or upholstery causes permanent discoloration. Our technicians use specialized non-corrosive HVAC pan treatments and lay protective floor drop cloths under your unit during service."
+                "text": "We strongly advise against bleach. Bleach fumes are corrosive to aluminum coil fins, can degrade rubber gaskets, and if splashed on paint or upholstery causes permanent discoloration. Our technicians use specialized non-corrosive HVAC pan tablets and enzyme cleaners."
             }
         }
     ]

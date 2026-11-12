@@ -106,7 +106,7 @@ function ProductPageSkeleton() {
                         </div>
                         <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
                             <Check className="size-4 text-emerald-400 shrink-0" />
-                            <span className="font-medium text-[11px] leading-tight">$45 Hawaii Energy Rebate Form</span>
+                            <span className="font-medium text-[11px] leading-tight">Factory-Sealed Manufacturer Warranty</span>
                         </div>
                         <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
                             <Check className="size-4 text-emerald-400 shrink-0" />
@@ -659,7 +659,8 @@ export default function ProductDetailPage() {
                                             coverageAham: specs.coolingAreaAham,
                                             coverageOahu: specs.coolingAreaOahu,
                                             noiseLevel: specs.soundProfile,
-                                            isWallSleeve
+                                            isWallSleeve,
+                                            isRebateEligible
                                         }}
                                         onExpand={() => setIsCaliperLightboxOpen(true)}
                                     />
@@ -1199,18 +1200,27 @@ export default function ProductDetailPage() {
                                     <Check className="size-4 text-emerald-400 shrink-0" />
                                     <span className="font-medium text-[11px] leading-tight">$50 Flat Island-Wide Delivery</span>
                                 </div>
-                                <a 
-                                    href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 text-slate-300 hover:text-cyan-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 rounded-xl p-2.5 shadow-inner transition-colors group cursor-pointer"
-                                >
-                                    <Check className="size-4 text-emerald-400 shrink-0" />
-                                    <span className="font-medium text-[11px] leading-tight flex items-center gap-1">
-                                        <span>$45 Hawaii Energy Rebate Form</span>
-                                        <span className="text-[9px] font-mono text-cyan-400 uppercase tracking-wider group-hover:underline">(PDF)</span>
-                                    </span>
-                                </a>
+                                {isRebateEligible ? (
+                                    <a 
+                                        href="/assets/he-rebate-form/Affordable-Home-AC-WINDOW-AC-PURCHASE-APP-V4-12.24.24.pdf" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 text-slate-300 hover:text-cyan-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-500/40 rounded-xl p-2.5 shadow-inner transition-colors group cursor-pointer"
+                                    >
+                                        <Check className="size-4 text-emerald-400 shrink-0" />
+                                        <span className="font-medium text-[11px] leading-tight flex items-center gap-1">
+                                            <span>$45 Hawaii Energy Rebate Form</span>
+                                            <span className="text-[9px] font-mono text-cyan-400 uppercase tracking-wider group-hover:underline">(PDF)</span>
+                                        </span>
+                                    </a>
+                                ) : (
+                                    <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
+                                        <Check className="size-4 text-emerald-400 shrink-0" />
+                                        <span className="font-medium text-[11px] leading-tight">
+                                            {product.id === 16 ? 'Heavy-Gauge Galvanized Steel Sleeve' : `${product.warranty || '1-Year Manufacturer Warranty'}`}
+                                        </span>
+                                    </div>
+                                )}
                                 <div className="flex items-center gap-2 text-slate-300 bg-white/[0.04] border border-white/10 rounded-xl p-2.5 shadow-inner">
                                     <Check className="size-4 text-emerald-400 shrink-0" />
                                     <span className="font-medium text-[11px] leading-tight">Zero Upfront Estimate Fee</span>

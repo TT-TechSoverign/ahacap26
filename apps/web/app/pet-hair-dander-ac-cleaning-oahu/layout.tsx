@@ -9,7 +9,7 @@ export const metadata: Metadata = {
         canonical: 'https://www.affordablehome-ac.com/pet-hair-dander-ac-cleaning-oahu',
     },
     openGraph: {
-        title: 'Pet Hair & Dander Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Pet Hair Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Remove matted pet hair, dander & odors from your Oahu Window AC coils and blower wheel. Clean floor drop-cloth protection.',
         url: 'https://www.affordablehome-ac.com/pet-hair-dander-ac-cleaning-oahu',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Pet Hair & Dander Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Pet Hair Window AC Cleaning Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Remove matted pet hair, dander & odors from your Oahu Window AC coils and blower wheel. Clean floor drop-cloth protection.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
@@ -45,7 +45,7 @@ const petHairFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "Why doesn't vacuuming the filter get rid of the dog or cat smell?",
+            "name": "Why doesn't vacuuming the filter get rid of the animal smell?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "The pet smell originates from animal dander and dried oils that have bonded deep within the cooling fins and on the cylindrical blower fan wheel. Surface vacuuming only clears loose hair on the outer screen, leaving 90% of the odor source inside the machine."
@@ -53,10 +53,18 @@ const petHairFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "What cleaning service is recommended for homes with multiple pets?",
+            "name": "How often should pet owners have their AC professionally cleaned?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "For window units impacted by heavy pet dander, we recommend bi-weekly washable filter rinsing, periodic surface coil sanitization with floor drop cloth protection, or upgrading older units to an energy-efficient new LG Dual Inverter or GE Built-In unit."
+                "text": "On Oahu, households with one shedding dog or cat should have their system serviced annually. Households with two or more pets or long-haired breeds (like Golden Retrievers or Huskies) benefit greatly from every-6-month cleanings to maintain fresh indoor air."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Will your technicians protect my floors from dirty pet hair runoff?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "100% yes. Technicians lay protective floor drop cloths directly under the window unit. Precision rinse containment systems capture all water, hair mats, and dander slurry into closed disposal containers."
             }
         }
     ]

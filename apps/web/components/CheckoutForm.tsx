@@ -16,9 +16,23 @@ interface CheckoutFormProps {
 }
 
 export default function CheckoutForm({ totalAmount, items, customerEmail, fulfillmentMode, onSuccess }: CheckoutFormProps) {
-    const { syncInventory } = useCart();
+    const { syncInventory, updateQuantity, removeFromCart } = useCart();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    const hasInventoryConflict = items.some((it) => (it.stock ?? 0) <= 0 || it.quantity > (it.stock ?? 0));
+
+    const handleAutoFix = () => {
+        for (const it of items) {
+            const avail = it.stock ?? 0;
+            if (avail <= 0) {
+                removeFromCart(it.id);
+            } else if (it.quantity > avail) {
+                updateQuantity(it.id, avail);
+            }
+        }
+        setError('');
+    };
 
     const handleCheckout = async () => {
         setLoading(true);
@@ -83,8 +97,7 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
             window.location.href = url;
         } catch (err: any) {
             if (err.message === 'out_of_stock') {
-                setError('INVENTORY ALERT: An item in your cart was just sold to another customer. Please close this checkout drawer to review the updated availability.');
-                // Trigger a sync so the parent drawer UI immediately reflects the dead stock
+                setError('INVENTORY ALERT: An item in your cart was just sold. Click Auto-Fix Cart Availability below or adjust quantities in your Order Summary to continue.');
                 syncInventory();
             } else {
                 setError(err.message || 'Checkout connection failed. Please try again.');
@@ -113,6 +126,21 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
                 </div>
             </div>
 
+            {hasInventoryConflict && (
+                <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-200 text-xs space-y-2.5 text-center">
+                    <p className="font-bold">
+                        One or more items in your cart exceed live Waipahu warehouse stock.
+                    </p>
+                    <button
+                        type="button"
+                        onClick={handleAutoFix}
+                        className="px-4 py-2 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all"
+                    >
+                        Auto-Fix Cart Availability
+                    </button>
+                </div>
+            )}
+
             {error && (
                 <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs font-bold text-center">
                     {error}
@@ -121,7 +149,7 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
 
             <button
                 onClick={handleCheckout}
-                disabled={loading}
+                disabled={loading || hasInventoryConflict}
                 className="w-full py-5 px-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-header font-black uppercase tracking-[0.18em] text-sm rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-1 group disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 {loading ? (

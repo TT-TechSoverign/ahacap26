@@ -9,7 +9,7 @@ export const metadata: Metadata = {
         canonical: 'https://www.affordablehome-ac.com/clean-air-filter-replacement-hawaii',
     },
     openGraph: {
-        title: 'Window AC Air Filter Cleaning & Care Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Window AC Filter Cleaning Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Protect your Oahu Window AC against red dirt, vog & salt dust with routine filter care and deep evaporator coil sanitization.',
         url: 'https://www.affordablehome-ac.com/clean-air-filter-replacement-hawaii',
         siteName: 'Affordable Home A/C',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Air Filter Cleaning & Care Oahu ($0 Estimate) | (808) 488-1111',
+        title: 'Window AC Filter Cleaning Oahu ($0 Estimate) | (808) 488-1111',
         description: '$0 Free Estimate • (808) 488-1111. Protect your Oahu Window AC against red dirt, vog & salt dust with routine filter care and deep evaporator coil sanitization.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
@@ -40,23 +40,31 @@ const filterCareFaqSchema = {
             "name": "How often should I clean my window AC filters in Hawaii?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "In Hawaii, washable mesh window AC filters should be rinsed every 2 to 4 weeks. If you live in an area prone to volcanic haze (vog), open windows frequently near red dirt, or have indoor pets, bi-weekly washing is recommended to maintain airflow."
+                "text": "In Hawaii, washable mesh filters should be rinsed every 2 to 4 weeks. If you live in an area prone to volcanic haze (vog), open windows frequently near red dirt, or have indoor pets, bi-weekly washing is recommended to maintain airflow."
             }
         },
         {
             "@type": "Question",
-            "name": "How do I properly wash a reusable window AC mesh filter?",
+            "name": "How do I properly wash a reusable window AC screen filter?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Unlatch the front intake grille, slide the mesh screen out, and rinse it with lukewarm water from the back side forward so dust washes away from the mesh. Allow it to dry 100% in the shade before sliding back in to prevent mildew."
+                "text": "Unlatch the front grille or slide the mesh screen out from the side slot, and rinse it with lukewarm water from the back side forward so dust washes away from the mesh. Allow it to dry 100% in the shade before sliding back in to prevent mildew."
             }
         },
         {
             "@type": "Question",
-            "name": "When should an AC filter be completely replaced rather than cleaned?",
+            "name": "Why shouldn't I dry my filters in direct midday Hawaii sunlight?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Reusable filters should be replaced if the plastic frame is cracked or if tears or holes have formed in the nylon mesh."
+                "text": "Hawaii's intense UV radiation can warp the delicate polypropylene mesh and make the thin plastic mounting perimeter brittle, causing it to snap when slid back into the front intake channels."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does washing the filters clean the whole AC?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Filters only trap 15-20% of airborne particles. Fine dust, cooking vapors, and mold spores bypass the mesh and adhere directly to the cold evaporator coils and blower wheel. That requires periodic coil cleaning or upgrading old heavily fouled units."
             }
         }
     ]

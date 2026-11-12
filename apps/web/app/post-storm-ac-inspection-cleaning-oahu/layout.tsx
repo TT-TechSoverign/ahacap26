@@ -37,10 +37,10 @@ const stormInspectionFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Should I run my air conditioner during a severe storm or tropical system?",
+            "name": "Should I turn off my AC during a storm?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "It is best to turn off your AC at the breaker during severe tropical storms or hurricanes. Severe wind gusts can stall rear condenser fan blades while electrical voltage fluctuations and lightning surges can burn out sensitive inverter circuit boards."
+                "text": "Yes. High wind gusts can cause head pressure spikes that force rear condenser fans to stall, and island grid brownouts or lightning surges can instantly destroy expensive DC inverter control boards. Switch off the circuit breaker until winds pass."
             }
         },
         {
@@ -57,6 +57,14 @@ const stormInspectionFaqSchema = {
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "We clear internal debris, flush wind-driven salt from coils, test the LCDI power cord and control relays, inspect window weather-seals, test electrical capacitor ratings, and run a full operational cycle for a $0 Free Estimate flat rate."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What if my AC won't power back on after the storm?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "First check your main electrical panel to see if the AC breaker tripped, and check the RESET button on your LCDI power plug. If resetting it immediately causes it to trip again, do not force it—a short circuit or grounded motor winding may be present. Call our dispatch desk for emergency diagnostics."
             }
         }
     ]

@@ -53,10 +53,18 @@ const buzzingAcFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "Can Affordable Home A/C silence or repair a buzzing window unit?",
+            "name": "Is a continuous electrical hum dangerous?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. We offer on-site bracket re-seating and vibration dampening, or brand-new whisper-quiet Dual Inverter models starting at $560 (as quiet as 44 dB) with an available $45 Hawaii Energy rebate."
+                "text": "A loud 60Hz electrical hum often indicates a locked compressor motor or a failing start capacitor. If the compressor cannot turn, it will overheat and trip the circuit breaker. Turn the unit off and schedule a diagnostic check."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What options do I have if my window AC is simply too loud to sleep with?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If your unit is an older fixed-speed rotary model, it naturally operates at 58–64 dBA. We stock modern Dual Inverter window air conditioners at our Waipahu warehouse running as quietly as 44 dBA—whisper quiet—with an available $45 Hawaii Energy cash rebate."
             }
         }
     ]

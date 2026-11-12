@@ -131,7 +131,7 @@ const PAGE_DATA: OahuPillarPageProps = {
         "heading": "Which LG Cool + Heat Model Fits Your Space?",
         "description": "Match your room square footage, elevation microclimate, and wall receptacle before reserving Waipahu pickup or $50 Oahu delivery:",
         "items": [
-            "Bedrooms & Offices up to 260 Oahu sq. ft. (115V normal plug): Choose LG LW8023HRSM ($650 — 40 units warehoused in Waipahu).",
+            "Bedrooms & Offices up to 260 Oahu sq. ft. (115V normal plug): Choose LG LW8023HRSM ($650 — warehoused in Waipahu).",
             "Living Rooms & Clinics up to 600 Oahu sq. ft. (208/230V 20A NEMA 6-20R): Choose LG LW1823HRSM ($925).",
             "Large Open Floors up to 780 Oahu sq. ft. (208/230V 20A NEMA 6-20R): Check stock on LG LW2423HRSM ($1,025) or cooling-only LW2422IVSM ($1,025).",
             "Installing into a dedicated 26-inch concrete condo sleeve where cooling-only inverter efficiency is priority? Compare GE AJCQ12AXXWA ($1,200)."

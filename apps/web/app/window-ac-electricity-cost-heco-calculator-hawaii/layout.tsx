@@ -48,7 +48,7 @@ const faqSchema = {
             "name": "How many watts does a 6,000 or 8,000 BTU LG Dual Inverter draw?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "At full pull-down capacity, a 6,000 BTU LG LW6023IVSM draws roughly 520 watts (~4.5 amps at 115V), and an 8,000 BTU LW8022IVSM draws roughly 710 watts (~6.2 amps). Once the bedroom reaches temperature overnight, both throttle down into the 220W–380W range."
+                "text": "At full pull-down capacity, a 6,000 BTU LG LW6023IVSM draws roughly 510 watts (5.5 amps rated at 115V), and an 8,000 BTU LW8022IVSM draws roughly 660 watts (8.9 amps rated). Once the bedroom reaches temperature overnight, both throttle down into the 220W–380W range."
             }
         },
         {

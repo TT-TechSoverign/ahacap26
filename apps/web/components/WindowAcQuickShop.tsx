@@ -34,10 +34,11 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
     const [addedId, setAddedId] = useState<number | null>(null);
     const [activeCategory, setActiveCategory] = useState<QuickShopCategory>('featured');
     const isPromo = isCampaignActive();
-    const { inStockAcProducts, inStockAcCount, totalPhysicalAcUnits, minPrice, maxPrice } = useLiveInventorySummary();
+    const { products: allLiveProducts, inStockAcProducts, inStockAcCount, totalPhysicalAcUnits, minPrice, maxPrice } = useLiveInventorySummary();
 
     const units = useMemo(() => {
-        const byId = new Map<number, Product>(inStockAcProducts.map((p) => [p.id, p]));
+        const byId = new Map<number, Product>(allLiveProducts.map((p) => [p.id, p]));
+        const explicitSet = new Set<number>(activeCategory === 'featured' && modelIds ? modelIds : []);
         let targetIds: number[];
 
         if (activeCategory === 'bedroom') {
@@ -56,7 +57,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
         const trySelect = (id: number): boolean => {
             if (usedIds.has(id)) return false;
             const match = byId.get(id);
-            if (match && match.stock > 0 && (match.btu || 0) > 0) {
+            if (match && match.stock > 0 && ((match.btu || 0) > 0 || explicitSet.has(id))) {
                 selected.push(match);
                 usedIds.add(match.id);
                 return true;
@@ -85,7 +86,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
         }
 
         return selected;
-    }, [inStockAcProducts, modelIds, activeCategory]);
+    }, [allLiveProducts, inStockAcProducts, modelIds, activeCategory]);
 
     const handleAdd = (product: Product) => {
         if (product.stock <= 0) return;
@@ -239,7 +240,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                     </Link>
 
                                     <div className="text-[10px] font-mono text-cyan-400 uppercase font-bold">
-                                        {unit.btu?.toLocaleString()} BTU • {unit.coverage_oahu || 'Oahu Calibrated'}
+                                        {unit.btu ? `${unit.btu.toLocaleString()} BTU • ${unit.coverage_oahu || 'Oahu Calibrated'}` : '26" Structural Wall Sleeve • Condo Fit'}
                                     </div>
                                     <Link href={`/shop/${slug}`} prefetch={false}>
                                         <h3 className="text-sm font-header font-black uppercase text-white mt-0.5 line-clamp-2 group-hover:text-primary transition-colors">

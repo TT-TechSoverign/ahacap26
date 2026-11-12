@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import * as LucideIcons from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { Product } from '@/types/inventory';
 
 interface SEOBodyProps {
     city: string;
@@ -13,8 +14,29 @@ interface SEOBodyProps {
 
 export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
     const { addToCart, openCart } = useCart();
+    const [liveCatalog, setLiveCatalog] = useState<Product[]>(INITIAL_CATALOG_PRODUCTS);
+
+    useEffect(() => {
+        let active = true;
+        fetch('/api/v1/products', { cache: 'no-store' })
+            .then((res) => (res.ok ? res.json() : null))
+            .then((data) => {
+                if (active && Array.isArray(data) && data.length > 0) {
+                    setLiveCatalog(data);
+                }
+            })
+            .catch(() => {
+                // Keep static fallback
+            });
+        return () => {
+            active = false;
+        };
+    }, []);
+
+    const getProd = (productId: number) => liveCatalog.find((item) => item.id === productId) || INITIAL_CATALOG_PRODUCTS.find((item) => item.id === productId);
+
     const handleQuickBuy = (productId: number) => {
-        const prod = INITIAL_CATALOG_PRODUCTS.find((item) => item.id === productId);
+        const prod = getProd(productId);
         if (prod && prod.stock > 0) {
             addToCart(prod);
             openCart();
@@ -191,29 +213,31 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 px-4">
                                         <div className="flex flex-col gap-1">
                                             <Link href="/shop/11-lg-8-000-btu-lw8024rd" className="text-cyan-400 hover:underline font-semibold">
-                                                LG LW8024RD (8,000 BTU 115V • $395 In Stock)
+                                                LG LW8024RD (8,000 BTU 115V • ${(getProd(11)?.price ?? 395).toLocaleString()} {(getProd(11)?.stock ?? 1) > 0 ? 'In Stock' : 'Out of Stock'})
                                             </Link>
                                             <Link href="/shop/3-lg-dual-inverter-10-000-btu-lw1022ivsm" className="text-emerald-400 hover:underline text-xs font-medium">
-                                                + LG LW1022IVSM (10,000 BTU Dual Inverter • $650 In Stock)
+                                                + LG LW1022IVSM (10,000 BTU Dual Inverter • ${(getProd(3)?.price ?? 650).toLocaleString()} {(getProd(3)?.stock ?? 1) > 0 ? 'In Stock' : 'Out of Stock'})
                                             </Link>
                                         </div>
                                     </td>
-                                    <td className="py-3.5 px-4 text-emerald-400 font-medium">$45 Rebate • 44dB Sleep-Quiet</td>
+                                    <td className="py-3.5 px-4 text-emerald-400 font-medium">LW1022IVSM: $45 Rebate (44dB) • LW8024RD: Standard Budget</td>
                                     <td className="py-3.5 pl-4 text-right">
                                         <div className="flex flex-col items-end gap-1.5">
                                             <button
                                                 type="button"
+                                                disabled={(getProd(11)?.stock ?? 1) <= 0}
                                                 onClick={() => handleQuickBuy(11)}
-                                                className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                                className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
                                             >
-                                                Buy 8k ($395)
+                                                {(getProd(11)?.stock ?? 1) > 0 ? `Buy 8k ($${getProd(11)?.price ?? 395})` : '8k Sold Out'}
                                             </button>
                                             <button
                                                 type="button"
+                                                disabled={(getProd(3)?.stock ?? 1) <= 0}
                                                 onClick={() => handleQuickBuy(3)}
-                                                className="px-3 py-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 font-header font-bold text-[10px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                                className="px-3 py-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 disabled:opacity-40 border border-cyan-500/30 text-cyan-300 font-header font-bold text-[10px] uppercase tracking-wider transition-all whitespace-nowrap"
                                             >
-                                                Buy 10k ($650)
+                                                {(getProd(3)?.stock ?? 1) > 0 ? `Buy 10k ($${getProd(3)?.price ?? 650})` : '10k Sold Out'}
                                             </button>
                                         </div>
                                     </td>
@@ -223,17 +247,18 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 px-4">280 – 450 sq. ft. (10k–12k BTU)</td>
                                     <td className="py-3.5 px-4">
                                         <Link href="/shop/4-lg-dual-inverter-12-000-btu-lw1222ivsm" className="text-cyan-400 hover:underline font-semibold">
-                                            LG LW1222IVSM (12,000 BTU 115V • $745 In Stock)
+                                            LG LW1222IVSM (12,000 BTU 115V • ${(getProd(4)?.price ?? 745).toLocaleString()} {(getProd(4)?.stock ?? 1) > 0 ? 'In Stock' : 'Out of Stock'})
                                         </Link>
                                     </td>
                                     <td className="py-3.5 px-4 text-emerald-400 font-medium">$45 Rebate • Saves ~$424/yr</td>
                                     <td className="py-3.5 pl-4 text-right">
                                         <button
                                             type="button"
+                                            disabled={(getProd(4)?.stock ?? 1) <= 0}
                                             onClick={() => handleQuickBuy(4)}
-                                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
                                         >
-                                            Buy 12k ($745)
+                                            {(getProd(4)?.stock ?? 1) > 0 ? `Buy 12k ($${getProd(4)?.price ?? 745})` : '12k Sold Out'}
                                         </button>
                                     </td>
                                 </tr>
@@ -242,17 +267,18 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 px-4">250 – 450 sq. ft. (8.2k–12k BTU)</td>
                                     <td className="py-3.5 px-4">
                                         <Link href="/shop/15-ge-12-000-btu-ajcq12axxwa" className="text-cyan-400 hover:underline font-semibold">
-                                            GE AJCQ12AXXWA (R-32 Inverter • $1,200 In Stock)
+                                            GE AJCQ12AXXWA (R-32 Inverter • ${(getProd(15)?.price ?? 1200).toLocaleString()} {(getProd(15)?.stock ?? 1) > 0 ? 'In Stock' : 'Out of Stock'})
                                         </Link>
                                     </td>
-                                    <td className="py-3.5 px-4 text-cyan-300 font-medium">True 26&quot; Wall Sleeve Fit</td>
+                                    <td className="py-3.5 px-4 text-emerald-400 font-medium">$45 Rebate • True 26&quot; Wall Sleeve Fit</td>
                                     <td className="py-3.5 pl-4 text-right">
                                         <button
                                             type="button"
+                                            disabled={(getProd(15)?.stock ?? 1) <= 0}
                                             onClick={() => handleQuickBuy(15)}
-                                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
                                         >
-                                            Buy GE 12k ($1,200)
+                                            {(getProd(15)?.stock ?? 1) > 0 ? `Buy GE 12k ($${(getProd(15)?.price ?? 1200).toLocaleString()})` : 'GE 12k Sold Out'}
                                         </button>
                                     </td>
                                 </tr>
@@ -261,17 +287,18 @@ export default function LocalizedSEOBody({ city, regionId }: SEOBodyProps) {
                                     <td className="py-3.5 px-4">500 – 1,000+ sq. ft. (18k–23.5k BTU)</td>
                                     <td className="py-3.5 px-4">
                                         <Link href="/shop/6-lg-dual-inverter-18-000-btu-lw1822ivsm" className="text-cyan-400 hover:underline font-semibold">
-                                            LG LW1822IVSM (18,000 BTU 230V • $925 In Stock)
+                                            LG LW1822IVSM (18,000 BTU 230V • ${(getProd(6)?.price ?? 925).toLocaleString()} {(getProd(6)?.stock ?? 1) > 0 ? 'In Stock' : 'Out of Stock'})
                                         </Link>
                                     </td>
                                     <td className="py-3.5 px-4 text-emerald-400 font-medium">$45 Rebate • Heavy Dehumidification</td>
                                     <td className="py-3.5 pl-4 text-right">
                                         <button
                                             type="button"
+                                            disabled={(getProd(6)?.stock ?? 1) <= 0}
                                             onClick={() => handleQuickBuy(6)}
-                                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
+                                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider transition-all whitespace-nowrap"
                                         >
-                                            Buy 18k ($925)
+                                            {(getProd(6)?.stock ?? 1) > 0 ? `Buy 18k ($${getProd(6)?.price ?? 925})` : '18k Sold Out'}
                                         </button>
                                     </td>
                                 </tr>

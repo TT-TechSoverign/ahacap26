@@ -102,6 +102,16 @@ const QUALIFYING_MODELS = [
         price: '$1,025',
         rebatePrice: '$980 after $45 rebate',
         voltage: '208/230V 15A Circuit',
+    },
+    {
+        btu: '12,000 BTU (26" Wall)',
+        model: 'GE AJCQ12AXXWA',
+        slug: '15-ge-12-000-btu-ajcq12axxwa',
+        coverage: 'Up to 550 sq. ft. AHAM (26" Wall Sleeves)',
+        efficiency: 'CEER 10.5 • R-32 Variable Speed Inverter',
+        price: '$1,200',
+        rebatePrice: '$1,155 after $45 rebate',
+        voltage: '115V / 15A Standard Plug (26" Wall Sleeve)',
     }
 ];
 
@@ -131,6 +141,24 @@ const FAQS = [
 export default function HawaiiEnergyRebatePage() {
     const { addToCart, openCart } = useCart();
     const [openFaq, setOpenFaq] = useState<number | null>(0);
+    const [liveCatalog, setLiveCatalog] = useState(INITIAL_CATALOG_PRODUCTS);
+
+    React.useEffect(() => {
+        let active = true;
+        fetch('/api/v1/products', { cache: 'no-store' })
+            .then((res) => (res.ok ? res.json() : null))
+            .then((data) => {
+                if (active && Array.isArray(data) && data.length > 0) {
+                    setLiveCatalog(data);
+                }
+            })
+            .catch(() => {
+                // Keep static fallback
+            });
+        return () => {
+            active = false;
+        };
+    }, []);
 
     const handleDownloadPdf = () => {
         trackFunnelEvent('download_rebate_pdf', {
@@ -226,7 +254,7 @@ export default function HawaiiEnergyRebatePage() {
                             {
                                 step: "01",
                                 title: "Buy Qualifying Unit",
-                                desc: "Choose any Energy Star LG Dual Inverter from our Waipahu warehouse inventory ($560 to $1,025)."
+                                desc: "Choose any qualifying Energy Star LG Dual Inverter or GE R-32 Inverter from our Waipahu warehouse ($560 to $1,200)."
                             },
                             {
                                 step: "02",
@@ -273,7 +301,12 @@ export default function HawaiiEnergyRebatePage() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {QUALIFYING_MODELS.map((item, idx) => (
+                        {QUALIFYING_MODELS.map((item, idx) => {
+                            const idPart = parseInt(item.slug.split('-')[0], 10);
+                            const liveItem = liveCatalog.find((p) => p.id === idPart);
+                            const isInStock = (liveItem?.stock ?? 1) > 0;
+                            const altProd = liveCatalog.find((p) => p.id === 3) || INITIAL_CATALOG_PRODUCTS.find((p) => p.id === 3);
+                            return (
                             <div key={idx} className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-primary/40 transition-all flex flex-col justify-between">
                                 <div>
                                     <div className="flex items-center justify-between gap-2 mb-3">
@@ -281,7 +314,7 @@ export default function HawaiiEnergyRebatePage() {
                                             {item.btu}
                                         </span>
                                         <span className="font-mono text-xs text-emerald-400 font-bold">
-                                            $45 Rebate Eligible
+                                            {isInStock ? '$45 Rebate Eligible' : 'Out of Stock • $45 Rebate'}
                                         </span>
                                     </div>
                                     <h3 className="font-header font-bold text-lg uppercase text-white mb-1">
@@ -302,19 +335,18 @@ export default function HawaiiEnergyRebatePage() {
                                     <div className="grid grid-cols-2 gap-2">
                                         <button
                                             type="button"
+                                            disabled={!isInStock && !(idPart === 2 && altProd && altProd.stock > 0)}
                                             onClick={() => {
-                                                const idPart = parseInt(item.slug.split('-')[0], 10);
-                                                const targetId = idPart === 2 ? 3 : idPart;
-                                                const prod = INITIAL_CATALOG_PRODUCTS.find(p => p.id === targetId);
-                                                if (prod) {
-                                                    addToCart(prod);
+                                                const targetProd = isInStock ? liveItem : (idPart === 2 ? altProd : undefined);
+                                                if (targetProd && targetProd.stock > 0) {
+                                                    addToCart(targetProd);
                                                     openCart();
                                                 }
                                             }}
-                                            className="w-full py-2.5 px-2 rounded-lg bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md"
+                                            className="w-full py-2.5 px-2 rounded-lg bg-primary hover:bg-cyan-300 disabled:opacity-40 text-slate-950 font-header font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md"
                                         >
                                             <ShoppingCart className="size-3.5 shrink-0" />
-                                            <span>{item.slug.startsWith('2-') ? 'Buy 10k Alt ($650)' : `Buy (${item.price})`}</span>
+                                            <span>{isInStock ? `Buy (${item.price})` : (idPart === 2 && altProd && altProd.stock > 0 ? `Buy 10k Alt ($${altProd.price})` : 'Sold Out')}</span>
                                         </button>
                                         <Link 
                                             href={`/shop/${item.slug}`}
@@ -325,7 +357,8 @@ export default function HawaiiEnergyRebatePage() {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
 
                     <WindowAcQuickShop title="Live Waipahu Rebate-Eligible Inventory" />
@@ -342,7 +375,7 @@ export default function HawaiiEnergyRebatePage() {
                                 Waipahu Warehouse Pickup or $50 Island Delivery
                             </h2>
                             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6 font-sans">
-                                Skip the mainland shipping wait and big-box store lines. Our central Oahu warehouse stocks units ready for immediate deployment. Every unit is unboxed and factory inspected by our technicians.
+                                Skip the mainland shipping wait and big-box store lines. Our central Oahu warehouse stocks units ready for immediate deployment. Every unit is stored factory-sealed in its original manufacturer carton in Waipahu.
                             </p>
                             <div className="space-y-3 font-mono text-xs text-slate-300">
                                 <div className="flex items-center gap-2">

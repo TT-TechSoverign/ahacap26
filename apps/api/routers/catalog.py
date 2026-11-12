@@ -11,6 +11,7 @@ import os
 import tempfile
 import threading
 
+_SEED_WRITE_LOCK = threading.Lock()
 NON_NULLABLE_PRODUCT_FIELDS = {"name", "price", "category", "stock"}
 
 
@@ -84,37 +85,38 @@ def persist_product_changes(product_data, action='update'):
     json_path = os.path.join(base_dir, 'content', 'products_seed.json')
     
     try:
-        if not os.path.exists(json_path):
-            print(f"WARNING: Seed file not found at {json_path}. Skipping persistence.")
-            return
+        with _SEED_WRITE_LOCK:
+            if not os.path.exists(json_path):
+                print(f"WARNING: Seed file not found at {json_path}. Skipping persistence.")
+                return
 
-        with open(json_path, 'r', encoding='utf-8') as f:
-            products = json.load(f)
-        
-        if action == 'delete':
-            products = [p for p in products if p['id'] != product_data['id']]
-        else:
-            existing_index = next((index for (index, d) in enumerate(products) if d["id"] == product_data['id']), None)
-            if existing_index is not None:
-                products[existing_index] = product_data
+            with open(json_path, 'r', encoding='utf-8') as f:
+                products = json.load(f)
+            
+            if action == 'delete':
+                products = [p for p in products if p['id'] != product_data['id']]
             else:
-                products.append(product_data)
-        
-        seed_dir = os.path.dirname(json_path)
-        tmp_path = None
-        try:
-            with tempfile.NamedTemporaryFile('w', dir=seed_dir, delete=False, encoding='utf-8', suffix='.tmp') as tf:
-                json.dump(products, tf, indent=4)
-                tf.flush()
-                os.fsync(tf.fileno())
-                tmp_path = tf.name
-            os.replace(tmp_path, json_path)
-        finally:
-            if tmp_path and os.path.exists(tmp_path):
-                try:
-                    os.remove(tmp_path)
-                except OSError:
-                    pass
+                existing_index = next((index for (index, d) in enumerate(products) if d["id"] == product_data['id']), None)
+                if existing_index is not None:
+                    products[existing_index] = product_data
+                else:
+                    products.append(product_data)
+            
+            seed_dir = os.path.dirname(json_path)
+            tmp_path = None
+            try:
+                with tempfile.NamedTemporaryFile('w', dir=seed_dir, delete=False, encoding='utf-8', suffix='.tmp') as tf:
+                    json.dump(products, tf, indent=4)
+                    tf.flush()
+                    os.fsync(tf.fileno())
+                    tmp_path = tf.name
+                os.replace(tmp_path, json_path)
+            finally:
+                if tmp_path and os.path.exists(tmp_path):
+                    try:
+                        os.remove(tmp_path)
+                    except OSError:
+                        pass
             
     except Exception as e:
         print(f"CRITICAL ERROR: Failed to persist product changes to JSON: {e}")

@@ -186,7 +186,7 @@ async def fire_ga4_purchase_event(order_id, ga_client_id, ga_session_id, items_d
 
     try:
         import aiohttp
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=10)) as session:
             async with session.post(url, json=payload) as response:
                 print(f"GA4 Measurement Protocol Response: {response.status}")
     except Exception as e:
@@ -252,9 +252,14 @@ async def process_stripe_event(event: dict, payload_data: dict):
                 fulfillment_mode=metadata.get('fulfillment_mode', 'pickup')
             )
             
-            # Retrieve line items
+            # Retrieve line items without blocking Uvicorn's event loop
             try:
-                line_items = stripe.checkout.Session.list_line_items(obj['id'], limit=100, expand=['data.price.product'])
+                line_items = await asyncio.to_thread(
+                    stripe.checkout.Session.list_line_items,
+                    obj['id'],
+                    limit=100,
+                    expand=['data.price.product'],
+                )
                 for item_obj in line_items.data:
                     item = item_obj.to_dict() if hasattr(item_obj, 'to_dict') else dict(item_obj)
                     product_id_str = None
@@ -312,6 +317,9 @@ async def process_stripe_event(event: dict, payload_data: dict):
                 if not order:
                     print(f"Order not found for PID: {stripe_pid}. Generating new order record...")
                     new_order_id = f"ORD-{stripe_pid[-6:].upper()}"
+                    id_clash = await session.execute(select(models.Order.id).where(models.Order.id == new_order_id))
+                    if id_clash.scalar_one_or_none():
+                        new_order_id = f"ORD-{stripe_pid[-10:].upper()}"
                     order = models.Order(
                         id=new_order_id,
                         stripe_pid=stripe_pid,
@@ -339,7 +347,26 @@ async def process_stripe_event(event: dict, payload_data: dict):
                         )
                         order = result.scalars().first()
                         if not order:
-                            raise
+                            import secrets
+                            fallback_order_id = f"ORD-{stripe_pid[-8:].upper()}-{secrets.token_hex(2).upper()}"
+                            order = models.Order(
+                                id=fallback_order_id,
+                                stripe_pid=stripe_pid,
+                                total_cents=amount_received or 0,
+                                customer_email=customer_info.get('email', receipt_email),
+                                customer_name=customer_info.get('name', ''),
+                                customer_phone=customer_info.get('phone', ''),
+                                customer_address=json.dumps(customer_info.get('address', {})),
+                                status=models.OrderStatus.PAID,
+                                items_json=json.dumps(items_data) if items_data else None,
+                                fulfillment_mode=fulfillment_mode,
+                                utm_source=metadata.get('utm_source'),
+                                utm_medium=metadata.get('utm_medium'),
+                                utm_campaign=metadata.get('utm_campaign'),
+                                created_at=datetime.utcnow()
+                            )
+                            session.add(order)
+                            await session.commit()
 
                 # 1. Update Status to PAID if not already set
                 if order.status != models.OrderStatus.PAID:

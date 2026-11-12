@@ -29,16 +29,20 @@ async def list_snippets(db: AsyncSession = Depends(get_db)):
 
 @router.post("/")
 async def create_snippet(payload: SnippetPayload, db: AsyncSession = Depends(get_db)):
-    import json
-    # Check if exists
-    # result = await db.execute(select(models.ContentSnippet).where(models.ContentSnippet.name == payload.name))
-    # existing = result.scalars().first()
-    
-    # Simple Append
+    result = await db.execute(
+        select(models.ContentSnippet).where(models.ContentSnippet.name == payload.name)
+    )
+    existing = result.scalars().first()
+    if existing:
+        existing.data = json.dumps(payload.data)
+        await db.commit()
+        return {"status": "updated", "id": existing.id}
+
     new_snippet = models.ContentSnippet(
         name=payload.name,
         data=json.dumps(payload.data)
     )
     db.add(new_snippet)
     await db.commit()
+    await db.refresh(new_snippet)
     return {"status": "created", "id": new_snippet.id}

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Fan Not Spinning Oahu ($0 Estimate) | Motor & Capacitor Fix'
     },
-    description: '$0 Free Estimate • (808) 488-1111. LG or GE Window AC fan stopped spinning on Oahu? Diagnose bad capacitors & seized motors, or swap with an in-stock AC ($395+).',
+    description: '$0 Free Estimate • (808) 488-1111. LG or GE Window AC fan not spinning on Oahu? Diagnose bad capacitors & motors, or swap with an in-stock AC ($395+).',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/outdoor-unit-fan-not-spinning-hawaii',
     },
     openGraph: {
         title: 'Window AC Fan Not Spinning Oahu ($0 Estimate) | Motor & Capacitor Fix',
-        description: '$0 Free Estimate • (808) 488-1111. LG or GE Window AC fan stopped spinning on Oahu? Diagnose bad capacitors & seized motors, or swap with an in-stock AC ($395+).',
+        description: '$0 Free Estimate • (808) 488-1111. LG or GE Window AC fan not spinning on Oahu? Diagnose bad capacitors & motors, or swap with an in-stock AC ($395+).',
         url: 'https://www.affordablehome-ac.com/outdoor-unit-fan-not-spinning-hawaii',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Window AC Fan Not Spinning Oahu ($0 Estimate) | Motor & Capacitor Fix',
-        description: '$0 Free Estimate • (808) 488-1111. LG or GE Window AC fan stopped spinning on Oahu? Diagnose bad capacitors & seized motors, or swap with an in-stock AC ($395+).',
+        description: '$0 Free Estimate • (808) 488-1111. LG or GE Window AC fan not spinning on Oahu? Diagnose bad capacitors & motors, or swap with an in-stock AC ($395+).',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
@@ -37,10 +37,10 @@ const outdoorFanFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "What happens if the rear condenser fan stops spinning while the window AC is running?",
+            "name": "What happens if the rear condenser fan stops spinning while the AC is running?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Without the fan drawing air across the rear condenser coils, high-pressure hot refrigerant gas cannot condense into liquid. Head pressure and temperatures skyrocket within 2 to 3 minutes, forcing the compressor into high-pressure thermal overload cutoff and risking permanent motor damage."
+                "text": "Without the fan drawing air across the condenser coils, high-pressure hot refrigerant gas cannot condense into liquid. Head pressure and temperatures skyrocket within 2 to 3 minutes, forcing the compressor into high-pressure thermal overload cutoff and risking permanent motor damage."
             }
         },
         {
@@ -48,15 +48,23 @@ const outdoorFanFaqSchema = {
             "name": "What is the most common reason a condenser fan motor stops spinning?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "In Hawaii, the leading cause is a failed dual-run capacitor where the 'FAN' terminal has lost microfarad rating due to high ambient heat. Other frequent causes include bearing seizure from salt air corrosion or a shorted DC brushless fan motor on inverter window units."
+                "text": "In Hawaii, the leading cause is a failed dual-run capacitor where the 'FAN' terminal has lost microfarad rating due to high ambient heat. Other frequent causes include bearing seizure from salt air corrosion or a shorted DC brushless fan motor on inverter units."
             }
         },
         {
             "@type": "Question",
-            "name": "Can I test if the fan motor is seized by spinning the blade?",
+            "name": "Should I turn off the air conditioner right away?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "With the power cord completely unplugged from the wall receptacle, a technician can gently check the fan shaft rotation. If the shaft resists or binds immediately, the motor bearings are seized."
+                "text": "Yes. Running an air conditioner with a dead condenser fan will quickly overheat the compressor, degrade expensive compressor lubricant, and can permanently burn out the motor windings. Shut down the system immediately."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What does your on-site window AC evaluation include?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our technician tests fan capacitor microfarads, measures winding resistance between common, start, and run poles, tests DC pulse voltages from the inverter board, and inspects the physical shaft bearings."
             }
         }
     ]
@@ -100,7 +108,7 @@ const pass5RichSchema = {
         "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
-    "description": "$0 Free Estimate • (808) 488-1111. LG or GE Window AC fan stopped spinning on Oahu? Diagnose bad capacitors & seized motors, or swap with an in-stock AC ($395+).",
+    "description": "$0 Free Estimate • (808) 488-1111. LG or GE Window AC fan not spinning on Oahu? Diagnose bad capacitors & motors, or swap with an in-stock AC ($395+).",
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/outdoor-unit-fan-not-spinning-hawaii#localbusiness",

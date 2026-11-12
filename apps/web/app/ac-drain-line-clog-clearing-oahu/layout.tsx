@@ -4,13 +4,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Window AC Drain Clog Clearing Oahu ($0 Estimate) | (808) 488-1111'
     },
-    description: '$0 Free Estimate • (808) 488-1111. Clear clogged Window AC drain pans & algae slime on Oahu with floor drop-cloth protection. Fast indoor leak & drip prevention.',
+    description: '$0 Free Estimate • (808) 488-1111. Clear clogged Oahu Window AC drain pans & algae slime with floor drop-cloth protection. Fast indoor leak prevention.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/ac-drain-line-clog-clearing-oahu',
     },
     openGraph: {
-        title: 'Window AC Drain Pan & Clog Clearing Oahu ($0 Estimate) | (808) 488-1111',
-        description: '$0 Free Estimate • (808) 488-1111. Clear clogged Window AC drain pans & algae slime on Oahu with floor drop-cloth protection. Fast indoor leak & drip prevention.',
+        title: 'Window AC Drain Clog Clearing Oahu ($0 Estimate) | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Clear clogged Oahu Window AC drain pans & algae slime with floor drop-cloth protection. Fast indoor leak prevention.',
         url: 'https://www.affordablehome-ac.com/ac-drain-line-clog-clearing-oahu',
         siteName: 'Affordable Home A/C',
         type: 'website',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Window AC Drain Pan & Clog Clearing Oahu ($0 Estimate) | (808) 488-1111',
-        description: '$0 Free Estimate • (808) 488-1111. Clear clogged Window AC drain pans & algae slime on Oahu with floor drop-cloth protection. Fast indoor leak & drip prevention.',
+        title: 'Window AC Drain Clog Clearing Oahu ($0 Estimate) | (808) 488-1111',
+        description: '$0 Free Estimate • (808) 488-1111. Clear clogged Oahu Window AC drain pans & algae slime with floor drop-cloth protection. Fast indoor leak prevention.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp'],
     }
 };
@@ -100,7 +100,7 @@ const pass5RichSchema = {
         "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/window-ac-maintenance-hero-bg-1.webp"
     ],
-    "description": "$0 Free Estimate • (808) 488-1111. Clear clogged Window AC drain pans & algae slime on Oahu with floor drop-cloth protection. Fast indoor leak & drip prevention.",
+    "description": "$0 Free Estimate • (808) 488-1111. Clear clogged Oahu Window AC drain pans & algae slime with floor drop-cloth protection. Fast indoor leak prevention.",
     "provider": {
         "@type": "HVACBusiness",
         "@id": "https://www.affordablehome-ac.com/ac-drain-line-clog-clearing-oahu#localbusiness",

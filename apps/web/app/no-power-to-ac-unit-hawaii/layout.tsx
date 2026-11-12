@@ -37,18 +37,18 @@ const noPowerFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Why is my LG & GE window air conditioner completely dead with no display lights or sound?",
+            "name": "Why is my air conditioner completely dead with no lights or beeps?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "When a window AC has zero power, the most common causes are a tripped LCDI safety button on the power cord plug head, a tripped circuit breaker in your electrical panel, or a blown low-voltage fuse on the internal control board."
+                "text": "When a window AC has zero power, the most common causes are a tripped circuit breaker in your electrical service panel, a tripped LCDI safety button on the power plug, a blown low-voltage fuse on the control board, or a tripped condensate overflow safety switch."
             }
         },
         {
             "@type": "Question",
-            "name": "How does the LCDI safety plug on my window AC cord work?",
+            "name": "How does a clogged drain pan cause the AC to lose all power?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "High-efficiency window units incorporate a Leakage Current Detection Interrupter (LCDI) on the plug head. If a power surge or cord damage occurs, the button pops out and cuts power immediately to prevent electrical hazards."
+                "text": "Modern high-efficiency window units incorporate a water level or float safety switch. When water backs up in the drain pan, the switch cuts the 12V control circuit, shutting down power to prevent water overflow into your home."
             }
         },
         {
@@ -56,7 +56,15 @@ const noPowerFaqSchema = {
             "name": "What should I do if the circuit breaker trips immediately when I reset it?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Never force a breaker to stay in the ON position or repeatedly reset it. An instantaneous trip signifies a hard direct short to ground in the compressor windings or an inverter power module failure."
+                "text": "Never force a breaker to stay in the ON position or repeatedly reset it. An instantaneous trip signifies a hard direct short to ground in the compressor windings, an inverter power transistor failure, or a damaged LCDI power cord."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is the reset button on a window AC power cord?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Window AC cords have an LCDI (Leakage Current Detection and Interrupter) protective head. If current leaks, the test button pops out. Press the 'RESET' button firmly. If it will not stay depressed, the power cord or compressor has an internal short."
             }
         }
     ]

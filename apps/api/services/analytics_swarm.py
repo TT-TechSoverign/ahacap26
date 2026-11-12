@@ -400,7 +400,7 @@ class AnalyticsSwarmEngine:
                 "title": "Oahu Window AC Repair Diagnostic & Triage Funnel",
                 "target_path": "/ac-repair-oahu",
                 "target_funnel": "Repair Lead & In-Stock LG/GE Replacement Bridge",
-                "rationale": "Captures top GSC search query 'ac repair near me' (Rank 5.5) with interactive triage wizard, flat-rate fee transparency, and immediate replacement gateway.",
+                "rationale": "Captures top GSC search query 'ac repair near me' (Rank 5.5) with interactive triage wizard, $0 Free Assessment by-appointment clarity, and immediate replacement gateway.",
                 "status": "DEPLOYED",
                 "estimated_impact": "+55% Diagnostic Lead Velocity"
             },

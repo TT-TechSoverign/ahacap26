@@ -43,7 +43,7 @@ const PAGE_DATA: OahuPillarPageProps = {
             {
                 "rowHeader": "6,000 BTU (LG LW6023IVSM • $560)",
                 "cells": [
-                    "~290W – 520W (15.5 CEER)",
+                    "~290W – 510W (15.5 CEER)",
                     "~$34 / mo",
                     "~$65 / mo (610W fixed)",
                     "~$372 / yr saved"
@@ -53,7 +53,7 @@ const PAGE_DATA: OahuPillarPageProps = {
             {
                 "rowHeader": "8,000 BTU (LG LW8022IVSM • $595)",
                 "cells": [
-                    "~380W – 710W (15.5 CEER)",
+                    "~380W – 660W (15.5 CEER)",
                     "~$44 / mo",
                     "~$86 / mo (815W fixed)",
                     "~$504 / yr saved"
@@ -193,7 +193,7 @@ const PAGE_DATA: OahuPillarPageProps = {
         },
         {
             "q": "How many watts does a 6,000 or 8,000 BTU LG Dual Inverter draw?",
-            "a": "At full pull-down capacity, a 6,000 BTU LG LW6023IVSM draws roughly 520 watts (~4.5 amps at 115V), and an 8,000 BTU LW8022IVSM draws roughly 710 watts (~6.2 amps). Once the bedroom reaches temperature overnight, both throttle down into the 220W–380W range."
+            "a": "At full pull-down capacity, a 6,000 BTU LG LW6023IVSM draws roughly 510 watts (5.5 amps rated at 115V), and an 8,000 BTU LW8022IVSM draws roughly 660 watts (8.9 amps rated). Once the bedroom reaches temperature overnight, both throttle down into the 220W–380W range."
         },
         {
             "q": "Is it cheaper on HECO to leave an inverter window AC on 24/7 or turn it off when nobody is home?",

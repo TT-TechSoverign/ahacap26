@@ -19,6 +19,7 @@ export interface SpatialCaliperSpecs {
     coverageOahu?: string;
     noiseLevel?: string;
     isWallSleeve?: boolean;
+    isRebateEligible?: boolean;
 }
 
 interface SpatialCaliperHUDProps {
@@ -358,7 +359,9 @@ export function SpatialCaliperHUD({ specs, compact = false, onExpand }: SpatialC
                         {activeHotspot === 'chassis' && (specs.isWallSleeve
                             ? `${specs.chassisType} solid-side cabinet slides directly into your existing or new 26" wall sleeve without side curtain fillers.`
                             : `${specs.chassisType} design balances weight across standard Hawaii window stools. In uninsulated single-wall construction, the cabinet rests securely without custom carpentry.`)}
-                        {activeHotspot === 'power' && `Operates on ${specs.voltage}. Calibrated against HECO residential ~44.2¢/kWh power rates. Qualifies for the $45 Hawaii Energy cash rebate.`}
+                        {activeHotspot === 'power' && (specs.voltage === 'N/A' || !specs.voltage
+                            ? 'Structural galvanized steel 26" wall sleeve enclosure — requires no electrical circuit of its own.'
+                            : `Operates on ${specs.voltage}. Calibrated against HECO residential ~44.2¢/kWh power rates.${specs.isRebateEligible ? ' Qualifies for the $45 Hawaii Energy cash rebate.' : ''}`)}
                     </p>
                 </div>
             )}

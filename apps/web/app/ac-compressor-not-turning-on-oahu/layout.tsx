@@ -53,10 +53,18 @@ const compressorFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "How much does it cost to diagnose a non-starting AC compressor?",
+            "name": "Should I turn off the system if the compressor isn't running?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Affordable Home A/C provides a $0 Free Clean-vs-Replace Assessment and by-appointment troubleshooting across all of Oahu. Our technician checks capacitor ratings, winding resistance, and inverter voltages to identify the exact point of failure."
+                "text": "Yes, shut off the cooling mode immediately. If the thermostat calls for cooling while the compressor is locked or repeatedly buzzing, it can burn out compressor motor windings or damage the control board."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What does your on-site window AC evaluation cover?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our technician performs on-site electrical multi-meter testing of the capacitor, control relay, circuit board, wiring harness, and compressor terminal resistance (ohms) to pinpoint the exact failure point."
             }
         }
     ]

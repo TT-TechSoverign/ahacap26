@@ -31,6 +31,7 @@ export default function AcCleaningOahuPage() {
     const [notes, setNotes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -88,12 +89,21 @@ export default function AcCleaningOahuPage() {
             });
 
             if (!res.ok) {
-                console.warn('Cleaning lead submission non-200', res.status);
+                let errDetail = 'Unable to submit right now. Please check your phone number or call dispatch at (808) 488-1111.';
+                try {
+                    const errBody = await res.json();
+                    if (typeof errBody?.detail === 'string') errDetail = errBody.detail;
+                } catch {
+                    // Fallback message
+                }
+                setSubmitError(errDetail);
+                return;
             }
+            setSubmitError(null);
             setIsSuccess(true);
         } catch (err) {
-            console.error('Cleaning lead submission fallback', err);
-            setIsSuccess(true);
+            console.error('Cleaning lead submission error', err);
+            setSubmitError('Connection interrupted. Please retry or call Waipahu dispatch directly at (808) 488-1111.');
         } finally {
             setIsSubmitting(false);
         }
@@ -554,6 +564,13 @@ export default function AcCleaningOahuPage() {
                                             className="w-full px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                                         />
                                     </div>
+
+                                    {submitError && (
+                                        <div role="alert" className="p-3 rounded-xl bg-red-500/15 border border-red-500/40 text-red-200 text-xs leading-relaxed">
+                                            {submitError}{' '}
+                                            <a href="tel:8084881111" className="underline font-bold text-white">Call (808) 488-1111</a>
+                                        </div>
+                                    )}
 
                                     <button
                                         type="submit"

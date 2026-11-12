@@ -40,23 +40,31 @@ const mustyAcFaqSchema = {
             "name": "Why does my air conditioner smell like dirty socks or sour mildew?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Known in the HVAC industry as 'Dirty Sock Syndrome,' this pungent odor is caused by bacterial colonies and mold spores decaying on the damp cooling coils and in stagnant drain pan water. Hawaii's persistent high humidity accelerates this microbial growth."
+                "text": "Known in the HVAC trade as 'Dirty Sock Syndrome,' this odor occurs when bacteria and mold colonize damp evaporator coils and stagnant condensate pan water. Hawaii's 80%+ humidity and warm ambient temperatures provide constant fuel for this biofilm to fester."
             }
         },
         {
             "@type": "Question",
-            "name": "Will spraying air freshener or disinfectant spray into the vents fix the smell?",
+            "name": "Is it dangerous to breathe air from an AC that smells musty?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Spraying household aerosol fresheners only masks the odor for hours while leaving the sticky bacterial biofilm intact on the aluminum fins. In fact, many household sprays can corrode sensitive evaporator coils."
+                "text": "Yes. The odor is caused by volatile organic compounds released by active fungal and bacterial colonies. Breathing this air continuously can cause sinus congestion, morning headaches, throat irritation, and trigger asthma attacks, especially in children and elderly island residents."
             }
         },
         {
             "@type": "Question",
-            "name": "How does Affordable Home A/C eradicate musty AC odors permanently?",
+            "name": "Can I just spray Lysol or bleach into the front grille?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We apply foaming alkaline coil detergents that dissolve biofilm down to bare aluminum, pressure flush stagnant condensate pans, treat drain lines with antimicrobial agents, and scrub the blower fan assembly where mold spores cling."
+                "text": "Never spray bleach or household disinfectants directly into an AC. Bleach causes rapid galvanic corrosion of aluminum fins and copper tubing, leading to costly refrigerant pinhole leaks. True eradication requires commercial, non-acidic coil cleaner applied by an Oahu cooling technician."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What service eliminates this musty smell completely?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For newer window units with surface dust and minor pan odors, our Window AC Cleaning service sanitizes the coils, washes the reusable filter, and treats the condensate pan with floor drop cloth protection. For older window units with heavy internal mold inside the Styrofoam air channels, upgrading to a high-efficiency LG Dual Inverter starting at $560 with a $45 Hawaii Energy cash rebate is the most economical solution."
             }
         }
     ]

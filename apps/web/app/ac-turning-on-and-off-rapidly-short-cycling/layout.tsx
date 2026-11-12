@@ -45,18 +45,26 @@ const shortCyclingFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "Can an oversized air conditioner cause short cycling in Hawaii?",
+            "name": "Why does short cycling make my room feel clammy or muggy?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. An oversized unit drops the sensible air temperature in a small room too rapidly without running long enough to remove moisture. This leaves your room feeling cold and clammy, encouraging mold growth while stressing the compressor."
+                "text": "Dehumidification requires at least 15 to 20 minutes of continuous coil contact time to condense moisture out of Hawaii's humid air. When an AC shuts off after 3 minutes, it cools the air but leaves the moisture behind, resulting in a cold, clammy, mold-friendly environment."
             }
         },
         {
             "@type": "Question",
-            "name": "How does Affordable Home A/C troubleshoot short cycling?",
+            "name": "Can a dirty air filter cause short cycling?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "During our on-site window AC evaluation, our technician tests temperature sensors (thermistors) with a digital multimeter, verifies coil temperature differentials, inspects capacitor capacitance, and calculates room thermal heat load."
+                "text": "Yes. Restricted airflow prevents room heat from reaching the cooling coils. The evaporator temperature plunges, freezing the coils and triggering the low-pressure or freeze-protection sensor to shut the compressor off prematurely."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What does your on-site evaluation cover for short cycling?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our technician tests thermistor resistance against factory temperature curves, checks capacitor microfarad ratings, measures coil temperatures, and verifies proper BTU sizing for your room."
             }
         }
     ]

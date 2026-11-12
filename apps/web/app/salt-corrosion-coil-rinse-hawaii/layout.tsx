@@ -53,10 +53,18 @@ const saltCorrosionFaqSchema = {
         },
         {
             "@type": "Question",
-            "name": "What is the difference between Blue Fin / Gold Fin and standard coils?",
+            "name": "What is the difference between LG & GE Blue Fin / Gold Fin and standard coils?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Blue Fin and Gold Fin refer to hydrophilic epoxy coatings applied at the factory to aluminum fins. They repel water and salt adhesion, extending coil lifespan in marine environments like Kailua, Hawaii Kai, and Ewa Beach by up to 2-3 times longer than uncoated coils."
+                "text": "Blue Fin and LG Gold Fin™ refer to hydrophilic anti-corrosive coatings applied at the factory to aluminum fins on LG and GE window air conditioners. They repel water and salt adhesion, extending coil lifespan in marine environments like Kailua, Hawaii Kai, and Ewa Beach by up to 2-3 times longer than uncoated coils."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How does Affordable Home A/C protect coastal systems?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our seasonal service includes pH-neutralizing salt dissolves, gentle freshwater reverse flushes, anti-corrosive protective film application, and inspection of electrical terminals and copper U-bend connections."
             }
         }
     ]

@@ -77,6 +77,39 @@ export default function ContactPage() {
                         subheading="Skip the wait—order your factory-sealed LG Dual Inverter or GE 26-inch Built-In unit online for Free Waipahu Pickup by appointment or $50 flat-rate Oahu delivery."
                     />
 
+                    {/* Contact & Warehouse Pickup FAQs */}
+                    <section id="contact-faqs" className="scroll-mt-28 md:scroll-mt-48 p-6 sm:p-8 rounded-3xl bg-white/[0.02] border border-white/10 space-y-4">
+                        <h2 className="text-xl sm:text-2xl font-header font-black uppercase tracking-wider text-white">
+                            Contact, Appointments &amp; Waipahu Warehouse FAQs
+                        </h2>
+                        <div className="space-y-3 text-sm text-slate-300">
+                            <details open className="p-4 rounded-2xl bg-slate-950/70 border border-white/10">
+                                <summary className="font-header font-bold text-white cursor-pointer">
+                                    {"Where is Affordable Home A/C's Waipahu warehouse located?"}
+                                </summary>
+                                <p className="mt-2 text-slate-300 leading-relaxed text-xs sm:text-sm">
+                                    Our Oahu warehouse is located at 94-150 Leoleo St. #203, Waipahu, HI 96797. Warehouse pickup and showroom consultations are by appointment so we can have your unit staged and ready—call (808) 488-1111 or schedule online.
+                                </p>
+                            </details>
+                            <details className="p-4 rounded-2xl bg-slate-950/70 border border-white/10">
+                                <summary className="font-header font-bold text-white cursor-pointer">
+                                    Do I have to pay anything upfront to request a Window AC installation or cleaning estimate?
+                                </summary>
+                                <p className="mt-2 text-slate-300 leading-relaxed text-xs sm:text-sm">
+                                    No! Affordable Home A/C operates strictly By Appointment First with $0 upfront booking payment barriers. Submit your appointment request online or call (808) 488-1111 and our dispatch team will confirm your visit directly.
+                                </p>
+                            </details>
+                            <details className="p-4 rounded-2xl bg-slate-950/70 border border-white/10">
+                                <summary className="font-header font-bold text-white cursor-pointer">
+                                    Which Oahu neighborhoods do you serve for Window AC installation and cleaning?
+                                </summary>
+                                <p className="mt-2 text-slate-300 leading-relaxed text-xs sm:text-sm">
+                                    Our insured Oahu cooling specialists serve all 22 Oahu communities—including Honolulu, Waikiki, Pearl City, Waipahu, Kapolei, Ewa Beach, Aiea, Mililani, Kailua, Kaneohe, and Hawaii Kai—with protective floor drop cloths and custom jalousie or 26-inch wall sleeve fitting.
+                                </p>
+                            </details>
+                        </div>
+                    </section>
+
                     <OahuEEATAuthorityBar topicTitle="Oahu Window AC Service, Installation & Warehouse Pickup Dispatch — Oahu Technical & Buying Guide" />
                 </div>
 

@@ -78,7 +78,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "oahu_grounding": "22 Oahu municipalities, Leeward/Ewa heat profiles, Windward humidity/mold challenges, HECO 44.2¢/kWh residential tariff, and $45 Hawaii Energy Window AC Rebate.",
         "inputs": ["118 canonical routes & 22 city pages", "HECO 44.2¢/kWh tariff", "content.json & PostgreSQL content_pages shop #rebate config", "GSC/GA4 telemetry"],
         "execution_steps": [
-            {"step": 1, "title": "118-Route Canonical & 301 Redirect Audit", "description": "Trigger agent_seo_metadata to verify 118 canonical routes (102 static/city + 16 product) and 301 permanent redirects for all 9 retired mini-split/central AC routes.", "verification": "101 routes active; 0 legacy non-window AC routes indexed."},
+            {"step": 1, "title": "118-Route Canonical & 301 Redirect Audit", "description": "Trigger agent_seo_metadata to verify 118 canonical routes (102 static/city + 16 product) and 301 permanent redirects for all retired legacy routes.", "verification": "118 routes active; 0 legacy non-window AC routes indexed."},
             {"step": 2, "title": "Microclimate & Subcontractor Grounding", "description": "Trigger agent_oahu_grounding to align cooling recommendations with Oahu microclimates and verify 208/230V electrical work is grounded to licensed electrical subcontractors.", "verification": "Single-wall redwood BTU calibration & subcontractor grounding verified."},
             {"step": 3, "title": "Market & Rebate Section Verification", "description": "Trigger agent_market_research and agent_heco_rebate_strategist to confirm Waipahu warehouse pricing ($395-$1,200) and verify #rebate (<RebateSection />) is active on /shop and in NavbarV2.", "verification": "shop.sections.rebate and sectionOrder verified in code and DB."},
             {"step": 4, "title": "GSC/GA4, Schema & High-Intent Pathways", "description": "Trigger agent_gsc_ga4_analytics, agent_schema_metadata_engine, and agent_high_intent_planner to validate JSON-LD schemas and high-intent pathways (including /shop/ge-built-in-wall-ac-oahu).", "verification": "100% valid schemas and cross-funnel bridges."}
@@ -110,7 +110,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Deployment & Quality Swarm Sub-Master",
         "domain": "Deployment",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 118 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 74 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
+        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 118 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 84 NavbarV2 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
         "token_efficiency_policy": "Multi-stage pipeline running strictly during deployment sequences; zero background daemon overhead.",
         "oahu_grounding": "Insured Oahu cooling specialist workmanship protection (floor drop-cloth mandate), zero-downtime for live Oahu customers (www.affordablehome-ac.com).",
         "inputs": ["Next.js build manifests (84 page.tsx files)", "NavbarV2.tsx & admin/page.tsx", "3D cutaway & Retina WebP spec assets", "Docker compose configurations"],
@@ -147,12 +147,12 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Frictionless Conversion Velocity Sub-Master",
         "domain": "Conversion",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Enforce frictionless checkout flow, 1-tap mobile wallet availability (Apple Pay, Google Pay, Link), Waipahu warehouse trust grounding, solid dropdown & horizontal pill navigation ergonomics, and sub-100ms Core Web Vitals.",
+        "mandate": "Enforce frictionless checkout flow, 1-tap mobile wallet availability (Apple Pay, Google Pay & US Cards — Stripe Link disabled for zero 5.99% BNPL fee leakage), Waipahu warehouse trust grounding, solid dropdown & horizontal pill navigation ergonomics, and sub-100ms Core Web Vitals.",
         "token_efficiency_policy": "On-demand client invocation. Evaluates checkout pipeline and Lighthouse web vitals metrics in < 10ms memory audits.",
         "oahu_grounding": "Oahu customer trust defense: eliminates mainland shipping anxiety via Waipahu warehouse pickup proof, 1-year local warranty, Insured Oahu Cooling Specialists • Est. 2005 badges, and transparent 4.712% GET tax.",
         "inputs": ["Stripe checkout & CRM invoice session configs", "NavbarV2 & ShopClient DOM", "globals.css scrollbar utilities", "Core Web Vitals telemetry"],
         "execution_steps": [
-            {"step": 1, "title": "Mobile Wallet & CRM Fresh Session Check", "description": "Trigger agent_mobile_checkout_sentinel to confirm Apple Pay, Google Pay, and Stripe Link are active on both storefront checkout and CRM multi-stage invoices.", "verification": "Dynamic payment methods active; stale CRM sessions auto-regenerated on balance change."},
+            {"step": 1, "title": "Mobile Wallet & CRM Fresh Session Check", "description": "Trigger agent_mobile_checkout_sentinel to confirm Apple Pay, Google Pay, and US Cards are active (with Link/BNPL disabled) on both storefront checkout and CRM multi-stage invoices.", "verification": "Dynamic payment methods active; stale CRM sessions auto-regenerated on balance change."},
             {"step": 2, "title": "Trust & Reassurance Grounding", "description": "Trigger agent_trust_authority_grounder to verify Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005 badges across checkout, footer, and schemas.", "verification": "High-trust card active; zero legacy license or hostile banner regressions."},
             {"step": 3, "title": "Zero-Friction Navigation & Dropdown Armor", "description": "Trigger agent_zero_friction_navigator to verify zero upsells, solid bg-[#060a12] z-[120] Shop Window AC dropdown, and .scrollbar-none horizontal filter tracks.", "verification": "Zero upsells, zero dropdown transparency bleed, 1-tap phone hotline active."},
             {"step": 4, "title": "Core Web Vitals & Viewport Clearance", "description": "Trigger agent_speed_core_vital_sentinel to audit mobile page speed, zero CLS, and 3-row NavbarV2 top-padding clearance across all 84 page.tsx routes.", "verification": "Mobile response < 100ms, CLS = 0.00, 84/84 pages clear fixed header."}
@@ -417,7 +417,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "inputs": ["products_seed.json", "PostgreSQL products table", "public/specs/*.pdf (16 PDFs)", "public/assets/spec-sheets/*.webp (16 Retina WebPs)"],
         "execution_steps": [
             {"step": 1, "title": "Dual-Sizing & 16-Model Verification", "description": "Verify all 16 models ($395–$1,200) carry both AHAM Factory Certified sq. ft. and Oahu Island Microclimate Calibration sq. ft.", "verification": "Dual-coverage present on all 16 models."},
-            {"step": 2, "title": "Target Flagship Audit (LW1222IVSM & AJCQ12AXXWA)", "description": "Verify LW1222IVSM (12,000 BTU, 550 sq. ft. AHAM, 250-380 sq. ft. Island, 85 lbs) and GE AJCQ12AXXWA (12,000 BTU R-32 Variable Speed Inverter, 230/208V, 13.6 CEER, 26\" wall sleeve).", "verification": "Both flagship models verified with zero spec drift across seed, DB, and CRM."},
+            {"step": 2, "title": "Target Flagship Audit (LW1222IVSM & AJCQ12AXXWA)", "description": "Verify LW1222IVSM (12,000 BTU, 550 sq. ft. AHAM, 250-380 sq. ft. Island, 85 lbs) and GE AJCQ12AXXWA (12,000 BTU R-32 Variable Speed Inverter, 115V/15A, 10.5 CEER, 26\" wall sleeve).", "verification": "Both flagship models verified with zero spec drift across seed, DB, and CRM."},
             {"step": 3, "title": "16/16 Factory PDF & Retina WebP Check", "description": "Confirm all 16 factory PDF spec sheets and 16 2x Retina WebP mobile spec viewer images exist on disk.", "verification": "16/16 PDFs and 16/16 Retina WebPs verified."},
             {"step": 4, "title": "Non-Destructive Reseed Guardrail Check", "description": "Verify migrate_and_reseed_catalog preserves live PostgreSQL stock, price, promo_price, and discount_percent.", "verification": "Runtime stock & pricing preservation active."}
         ],
@@ -707,7 +707,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "CTR Title Tag Craftsman Sentinel",
         "domain": "SERP Acquisition",
         "supervisor": "submaster_serp_acquisition",
-        "mandate": "Formulate and audit click-optimized Window AC title tags, price anchors ($0 Free In-Home Estimate, $395–$1,200), and phone hotlines ((808) 488-1111) across all 101 canonical Oahu routes.",
+        "mandate": "Formulate and audit click-optimized Window AC title tags, price anchors ($0 Free In-Home Estimate, $395–$1,200), and phone hotlines ((808) 488-1111) across all 118 canonical Oahu routes.",
         "token_efficiency_policy": "Deterministic title syntax parsing. Zero external tokens consumed.",
         "oahu_grounding": "Embeds Waipahu local stock availability and Honolulu phone bridge directly into Google SERP blue link snippets.",
         "inputs": ["apps/web/app page metadata (118 routes)", "22 City page route templates"],
@@ -743,15 +743,15 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Mobile Checkout Sentinel",
         "domain": "Conversion",
         "supervisor": "submaster_conversion_velocity",
-        "mandate": "Validate 1-tap mobile wallet availability (Apple Pay, Google Pay, Stripe Link) across storefront checkout and CRM multi-stage invoice checkout sessions.",
+        "mandate": "Validate 1-tap mobile wallet availability (Apple Pay, Google Pay & US Cards — Stripe Link disabled for zero 5.99% BNPL fee leakage) across storefront checkout and CRM multi-stage invoice checkout sessions.",
         "token_efficiency_policy": "In-memory inspection of Stripe checkout session creation parameters; 0Hz idle cost.",
         "oahu_grounding": "Enables Oahu mobile shoppers on LTE/5G to complete unit purchases or pay invoice deposits/balances in under 15 seconds without typing credit cards manually.",
         "inputs": ["apps/web/app/create-checkout-session/route.ts", "apps/web/app/api/checkout/route.ts", "ahac-crm invoice checkout route"],
         "execution_steps": [
-            {"step": 1, "title": "Dynamic Payment Method Audit", "description": "Verify payment_method_types is omitted/dynamic so Apple Pay, Google Pay, and Link render automatically.", "verification": "Restricted ['card'] array absent across storefront and CRM."},
+            {"step": 1, "title": "Dynamic Payment Method & BNPL Guard Audit", "description": "Verify dynamic payment methods enable Apple Pay, Google Pay, and US Cards while keeping Link/BNPL disabled.", "verification": "2.9% + $0.30 domestic card/wallet guard verified across storefront and CRM."},
             {"step": 2, "title": "Origin & Fresh Session Audit", "description": "Verify origin fallback resolves to https://www.affordablehome-ac.com and CRM invoices create fresh sessions when balance changes.", "verification": "Production origin and fresh session guardrails verified."}
         ],
-        "outputs": ["Mobile checkout status (MOBILE_WALLETS_ARMORED)", "Supported wallets (Apple Pay, Google Pay, Link)"],
+        "outputs": ["Mobile checkout status (MOBILE_WALLETS_ARMORED)", "Supported wallets (Apple Pay, Google Pay, US Cards)"],
         "contingency_protocol": "Restore dynamic payment method configurations immediately upon restriction detection."
     },
     "agent_trust_authority_grounder": {

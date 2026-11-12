@@ -44,12 +44,18 @@ interface MonthlyReportsHubProps {
 }
 
 export default function MonthlyReportsHub({ onLog, onInspectAgent }: MonthlyReportsHubProps) {
+    const MONTHS = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const nowDate = new Date();
     const [reports, setReports] = useState<MonthlyReport[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [uploading, setUploading] = useState<boolean>(false);
     const [generating, setGenerating] = useState<boolean>(false);
-    const [selectedMonth, setSelectedMonth] = useState<string>('September');
-    const [selectedYear, setSelectedYear] = useState<string>('2026');
+    const [selectedMonth, setSelectedMonth] = useState<string>(MONTHS[nowDate.getMonth()] || 'November');
+    const [selectedYear, setSelectedYear] = useState<string>(String(nowDate.getFullYear() || 2026));
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [isDragOver, setIsDragOver] = useState<boolean>(false);
     const [feedback, setFeedback] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null);
@@ -63,11 +69,6 @@ export default function MonthlyReportsHub({ onLog, onInspectAgent }: MonthlyRepo
     const [copied, setCopied] = useState<boolean>(false);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
-
-    const MONTHS = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-    ];
 
     const fetchReports = async () => {
         setLoading(true);
@@ -210,11 +211,12 @@ export default function MonthlyReportsHub({ onLog, onInspectAgent }: MonthlyRepo
             const res = await fetch(`/api/v1/dev-os/agents/run/${agentId}`, { method: 'POST' });
             if (res.ok) {
                 const data = await res.json();
+                const payload = data.result || data;
                 setFeedback({
                     type: 'success',
-                    message: `${agentId} executed successfully: ${data.details || 'Operational status optimal.'}`
+                    message: `${agentId} executed successfully: ${payload.details || payload.status || 'Operational status optimal.'}`
                 });
-                onLog?.(`[${agentId}] Result: ${JSON.stringify(data.status)}`);
+                onLog?.(`[${agentId}] Result: ${JSON.stringify(payload.status || 'HEALTHY')}`);
             } else {
                 setFeedback({ type: 'error', message: `Failed to execute ${agentId}` });
             }

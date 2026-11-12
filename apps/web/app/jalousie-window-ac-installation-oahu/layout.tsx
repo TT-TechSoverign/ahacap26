@@ -37,10 +37,10 @@ const jalousieFaqSchema = {
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Can you install a window AC in jalousie louver windows in Hawaii?",
+            "name": "Why can't I just rest a window AC directly on my jalousie window frame?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes! Jalousie installations are our specialty. Our experienced technicians remove only the necessary glass slats, install custom-cut marine-grade acrylic baffles and weather seals, and ensure zero mechanical weight is placed on the delicate louver tracks."
+                "text": "Jalousie tracks are made of lightweight aluminum louvers designed only to hold glass slats. A 50 to 90 lb air conditioner resting directly on the tracks will bend the metal, crack the glass channels, cause severe trade-wind air leaks, and risk falling out during heavy Kona wind gusts."
             }
         },
         {
@@ -48,7 +48,15 @@ const jalousieFaqSchema = {
             "name": "Are custom fabrication options and security brackets available?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. Custom fabrication options and security brackets are available for an additional cost with installation. During installation, our technician inspects your sill and framing to ensure your installation is safe, secure, and weatherproof."
+                "text": "Yes. Custom fabrication options and security brackets are available for an additional cost with installation. Our technician evaluates your window sill and exterior wall construction to design the ideal custom acrylic baffle and cantilever support bracket."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do you stop trade wind rain and geckos from getting in?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We custom cut clear marine-grade acrylic baffles to fit the exact open section of your window, sealing the edges with closed-cell neoprene weather stripping and silicone gaskets. This forms an airtight, water-tight, and gecko-proof barrier."
             }
         },
         {
@@ -56,7 +64,15 @@ const jalousieFaqSchema = {
             "name": "What is your floor drop-cloth guarantee?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Our technicians lay clean protective drop cloths directly under the window workspace to catch glass dust, acrylic shavings, or debris. We vacuum the work area and ensure your home is left cleaner than when we arrived."
+                "text": "Our technicians always lay clean protective drop cloths directly under the window workspace to catch glass dust, acrylic shavings, or debris. We vacuum the work area and ensure your home is left cleaner than when we arrived."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I bundle a new in-stock LG Dual Inverter with installation?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! You can order any qualifying Energy Star LG Dual Inverter ($560 to $1,025) through our Shop and select professional installation. Your unit will qualify for the $45 Hawaii Energy cash rebate."
             }
         }
     ]
