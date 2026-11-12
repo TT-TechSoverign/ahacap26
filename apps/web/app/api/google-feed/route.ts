@@ -7,8 +7,9 @@ import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 
 export const dynamic = 'force-dynamic';
 
-function escapeXml(unsafe: string) {
-  return unsafe
+function escapeXml(unsafe: unknown): string {
+  return String(unsafe ?? '')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -75,7 +76,7 @@ export async function GET() {
       const additionalImagesXml = allAdditionalImages.map(img => {
         const cleanImg = img.replace(/\.svg$/i, '.webp');
         const fullImg = cleanImg.startsWith('http') ? cleanImg : `${domain}${cleanImg}`;
-        return `<g:additional_image_link>${fullImg}</g:additional_image_link>`;
+        return `<g:additional_image_link>${escapeXml(fullImg)}</g:additional_image_link>`;
       }).join('\n          ');
 
       // Brand, GTIN-12 UPC, & Manufacturer MPN Extraction
@@ -217,24 +218,28 @@ export async function GET() {
             <g:attribute_value>${escapeXml(d.val)}</g:attribute_value>
           </g:product_detail>`).join('');
 
+      const formattedPrice = Number.isFinite(Number(product.price))
+        ? Number(product.price).toFixed(2)
+        : '0.00';
+
       return `
         <item>
-          <g:id>${product.id}</g:id>
+          <g:id>${escapeXml(product.id)}</g:id>
           <g:google_product_category>${googleCategory}</g:google_product_category>
           <g:product_type>${productType}</g:product_type>
           <g:title>${escapeXml(richTitle)}</g:title>
           <g:description>${escapeXml(description)}</g:description>
-          <g:link>${productLink}</g:link>
-          <g:canonical_link>${productLink}</g:canonical_link>
-          <g:image_link>${imageLink}</g:image_link>
+          <g:link>${escapeXml(productLink)}</g:link>
+          <g:canonical_link>${escapeXml(productLink)}</g:canonical_link>
+          <g:image_link>${escapeXml(imageLink)}</g:image_link>
           ${additionalImagesXml}
           ${highlightsXml}${productDetailsXml}
           <g:condition>new</g:condition>
           <g:availability>${availability}</g:availability>
-          <g:price>${product.price}.00 USD</g:price>
+          <g:price>${formattedPrice} USD</g:price>
           <g:brand>${escapeXml(brand)}</g:brand>
           <g:color>White</g:color>
-          ${gtin ? `<g:gtin>${gtin}</g:gtin>` : ''}
+          ${gtin ? `<g:gtin>${escapeXml(gtin)}</g:gtin>` : ''}
           ${mpn ? `<g:mpn>${escapeXml(mpn)}</g:mpn>` : ''}
           <g:identifier_exists>${(gtin || mpn) ? 'yes' : 'no'}</g:identifier_exists>
           ${itemGroupIdXml}
@@ -270,7 +275,7 @@ export async function GET() {
       <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
         <channel>
           <title>Affordable Home AC - Local Oahu Inventory</title>
-          <link>${domain}</link>
+          <link>${escapeXml(domain)}</link>
           <description>Live inventory feed for Waipahu LG Dual Inverter and GE window AC units.</description>
           ${xmlItems}
         </channel>

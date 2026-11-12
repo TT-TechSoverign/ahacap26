@@ -5,23 +5,37 @@ import "@measured/puck/puck.css";
 import config from "../../puck.config";
 import { Button } from "@/components/ui/Button";
 import { useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
 import { Save, Eye } from 'lucide-react';
 
+function getAdminHeaders(): Record<string, string> {
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (typeof window !== 'undefined') {
+        const token = sessionStorage.getItem('admin_token');
+        if (token) {
+            headers['Authorization'] = token.startsWith('Bearer ') ? token : `Bearer ${token}`;
+        }
+    }
+    return headers;
+}
+
 export function PuckEditor({ path, initialData }: { path: string, initialData: Data }) {
-    const router = useRouter();
     const [saving, setSaving] = useState(false);
     const [publishing, setPublishing] = useState(false);
 
     // Save Draft Logic
-    const handleSave = useCallback(async (data: Data) => {
+    const handleSave = useCallback(async (data: Data): Promise<boolean> => {
         setSaving(true);
         try {
-            await fetch('/api/puck', {
+            const res = await fetch('/api/puck', {
                 method: 'POST',
+                headers: getAdminHeaders(),
                 body: JSON.stringify({ path, data })
             });
-            // Optional: Toast success
+            if (!res.ok) {
+                alert("Failed to save draft. Please verify your admin session.");
+                return false;
+            }
+            return true;
         } finally {
             setSaving(false);
         }
@@ -31,14 +45,18 @@ export function PuckEditor({ path, initialData }: { path: string, initialData: D
     const handlePublish = useCallback(async (data: Data) => {
         setPublishing(true);
         try {
-            // First save draft
-            await handleSave(data);
-            // Then promote
-            await fetch('/api/puck', {
+            const saved = await handleSave(data);
+            if (!saved) return;
+            const res = await fetch('/api/puck', {
                 method: 'PUT',
+                headers: getAdminHeaders(),
                 body: JSON.stringify({ path })
             });
-            alert("Published Successfully!"); // Replace with nice toast
+            if (!res.ok) {
+                alert("Failed to publish changes. Please verify your admin session.");
+                return;
+            }
+            alert("Published Successfully!");
         } finally {
             setPublishing(false);
         }
@@ -58,17 +76,22 @@ export function PuckEditor({ path, initialData }: { path: string, initialData: D
                         <Button
                             variant="outline"
                             size="sm"
+                            disabled={saving || publishing}
                             onClick={async () => {
                                 const name = prompt("Name this page configuration:");
                                 if (!name) return;
                                 try {
-                                    await fetch('/api/v1/content/snippets', {
+                                    const res = await fetch('/api/v1/content/snippets', {
                                         method: 'POST',
-                                        headers: { 'Content-Type': 'application/json' },
+                                        headers: getAdminHeaders(),
                                         body: JSON.stringify({ name, data: { content: initialData.content } })
                                     });
+                                    if (!res.ok) {
+                                        alert("Failed to save snippet.");
+                                        return;
+                                    }
                                     alert("Saved to Library!");
-                                } catch (e) {
+                                } catch {
                                     alert("Failed to save snippet.");
                                 }
                             }}
@@ -80,7 +103,7 @@ export function PuckEditor({ path, initialData }: { path: string, initialData: D
                         <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => window.open(path, '_blank')}
+                            onClick={() => window.open(path, '_blank', 'noopener,noreferrer')}
                             className="bg-slate-800 text-white border-slate-700 hover:bg-slate-700"
                         >
                             <Eye className="size-4 mr-1.5" />

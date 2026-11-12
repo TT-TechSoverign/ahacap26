@@ -112,6 +112,13 @@ async def fix_schema():
         for col, dtype in product_cols:
             await add_column("products", col, dtype)
 
+        # 2.5 Admin Users Table alignment
+        await add_column("admin_users", "password_hash", "VARCHAR")
+        await add_column("admin_users", "hashed_password", "VARCHAR")
+        await add_column("admin_users", "role", "VARCHAR")
+        await add_column("admin_users", "name", "VARCHAR")
+        await add_column("admin_users", "is_active", "BOOLEAN")
+
         # 3. Dev OS Audit Log Table
         try:
             if dialect != 'sqlite':

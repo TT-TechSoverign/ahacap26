@@ -9,9 +9,26 @@ import time
 from fastapi import Request, HTTPException, status
 from cache import check_rate_limit
 
+def is_deployed_env() -> bool:
+    """
+    Returns True on staging/production (and fails closed by default on unknown hosts).
+    Returns False only when explicitly running in local/development/test or against sqlite/localhost.
+    """
+    env = os.getenv("ENVIRONMENT", "").strip().lower()
+    db_url = os.getenv("DATABASE_URL", "")
+    if env in ("production", "staging"):
+        return True
+    if any(tag in db_url for tag in ("db:", "staging-db:", "prod-db:")):
+        return True
+    if env in ("development", "local", "test"):
+        return False
+    if "sqlite" in db_url or "@localhost" in db_url or "@127.0.0.1" in db_url:
+        return False
+    return True
+
+
 SECRET_KEY = os.getenv("JWT_SECRET")
-database_url = os.getenv("DATABASE_URL", "")
-is_prod_or_staging = "db:" in database_url or "staging-db:" in database_url or "prod-db:" in database_url
+is_prod_or_staging = is_deployed_env()
 MASTER_EMAIL_DEFAULT = os.getenv("DEV_OS_MASTER_EMAIL", "").strip() or "@".join(("irasmussenjobs", "gmail.com"))
 
 if not SECRET_KEY:

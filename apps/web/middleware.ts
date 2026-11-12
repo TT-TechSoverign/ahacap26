@@ -208,6 +208,7 @@ export function middleware(request: NextRequest) {
         '/service-areas/waimanalo': '/service-areas/kailua',
         '/service-areas/hauula': '/service-areas/kaneohe',
         '/service-areas/laie': '/service-areas/kaneohe',
+        '/service-areas/kahuku': '/service-areas/kaneohe',
     };
     if (CONSOLIDATED_REDIRECTS[pathLower]) {
         return makePermanentRedirect(CONSOLIDATED_REDIRECTS[pathLower]);
@@ -405,6 +406,7 @@ export function middleware(request: NextRequest) {
     const noIndexPaths = [
         '/admin',
         '/checkout',
+        '/create-checkout-session',
         '/maintenance',
         '/dev-os',
         '/puck',
@@ -441,11 +443,15 @@ export function middleware(request: NextRequest) {
         response.headers.set('X-Robots-Tag', 'noindex, follow');
     }
 
-    // 9. Conditional HTTP Caching Protocol (304 Not Modified for Public Routes; Zero-Cache for Admin/Checkout)
-    if (isPrivateRoute) {
+    // 9. Conditional HTTP Caching Protocol (Zero-Cache for Admin/Checkout/Staging; Short Revalidation for Live Inventory; Long SWR for Static Guides)
+    const isLiveInventoryRoute =
+        url.pathname === '/' || url.pathname === '/shop' || url.pathname.startsWith('/shop/');
+    if (isPrivateRoute || isStagingHost) {
         response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
         response.headers.set('Pragma', 'no-cache');
         response.headers.set('Expires', '0');
+    } else if (isLiveInventoryRoute) {
+        response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
     } else {
         response.headers.set('Cache-Control', 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800');
     }

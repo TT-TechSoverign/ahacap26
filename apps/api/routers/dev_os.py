@@ -18,7 +18,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from database import AsyncSessionLocal
 import models
 from cache import check_rate_limit
-from dependencies import create_signed_token, decode_signed_token_role, verify_dev_os_session, get_db, get_client_ip
+from dependencies import create_signed_token, decode_signed_token_role, verify_dev_os_session, get_db, get_client_ip, is_deployed_env
 from services import email as email_service
 from services.reconciliation import reconcile_unrecorded_stripe_orders
 try:
@@ -668,8 +668,7 @@ async def dev_os_login(payload: MasterLoginRequest, request: Request):
     role_claim = f"dev_os_master:{MASTER_EMAIL}"
     signed_token = create_signed_token(role_claim)
 
-    database_url = os.getenv("DATABASE_URL", "")
-    is_prod_or_staging = "db:" in database_url or "staging-db:" in database_url or "prod-db:" in database_url
+    is_prod_or_staging = is_deployed_env()
 
     response = JSONResponse(
         content={
@@ -683,7 +682,7 @@ async def dev_os_login(payload: MasterLoginRequest, request: Request):
         }
     )
 
-    # Set HttpOnly, SameSite=Strict secure cookie
+    # Set HttpOnly, SameSite=Strict secure cookie aligned with 24h token TTL
     response.set_cookie(
         key="dev_os_session",
         value=f"Bearer {signed_token}",
@@ -691,7 +690,7 @@ async def dev_os_login(payload: MasterLoginRequest, request: Request):
         samesite="strict",
         secure=is_prod_or_staging,
         path="/",
-        max_age=86400 * 7 # 7 days persistent session
+        max_age=86400
     )
 
     logger.info(f"[Dev OS] Master session established for {email_service.mask_email(MASTER_EMAIL)} from {ip}")
@@ -2916,7 +2915,7 @@ async def log_high_intent_page(payload: Dict[str, Any], request: Request, db: As
     if not slug:
         raise HTTPException(status_code=400, detail="Page slug is required")
     
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     await log_dev_os_audit(db, action=f"HIGH_INTENT_PAGE_LOG:{slug}", details=payload, ip=ip)
     record_brain_cognitive_event(
         source="agent_high_intent_planner",
@@ -2931,7 +2930,7 @@ async def apply_recommendation(payload: Dict[str, Any], request: Request, db: As
     rec_id = payload.get("id")
     if not rec_id:
         raise HTTPException(status_code=400, detail="Recommendation ID is required")
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     await log_dev_os_audit(db, action=f"CRO_REC_APPLY:{rec_id}", details=payload, ip=ip)
     record_brain_cognitive_event(
         source="agent_high_intent_planner",
@@ -2952,7 +2951,7 @@ async def run_submaster_suite(submaster_id: str, request: Request, db: AsyncSess
     if not submaster:
         raise HTTPException(status_code=404, detail=f"Sub-Master '{submaster_id}' not found")
 
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     now_iso = datetime.utcnow().isoformat()
     results = {}
 
@@ -2972,7 +2971,8 @@ async def run_submaster_suite(submaster_id: str, request: Request, db: AsyncSess
                     "result": res
                 })
             except Exception as e:
-                err_res = {"status": "ERROR", "error": str(e)}
+                logger.error(f"[Dev OS] Sub-Master agent {aid} error: {e}", exc_info=True)
+                err_res = {"status": "ERROR", "error": f"Agent {aid} execution failed ({type(e).__name__})"}
                 results[aid] = err_res
                 await sync_save_agent_last_run(aid, {
                     "timestamp_epoch": time.time(),
@@ -3008,7 +3008,7 @@ async def run_single_agent(agent_id: str, request: Request, db: AsyncSession = D
     if agent_id not in AGENT_RUNNERS:
         raise HTTPException(status_code=404, detail=f"Agent '{agent_id}' not found in registry")
 
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     runner = AGENT_RUNNERS[agent_id]
     
     try:
@@ -3018,7 +3018,8 @@ async def run_single_agent(agent_id: str, request: Request, db: AsyncSession = D
         else:
             result = await runner()
     except Exception as e:
-        result = {"status": "ERROR", "error": str(e)}
+        logger.error(f"[Dev OS] Single agent {agent_id} error: {e}", exc_info=True)
+        result = {"status": "ERROR", "error": f"Agent {agent_id} execution failed ({type(e).__name__})"}
 
     now_iso = datetime.utcnow().isoformat()
     await sync_save_agent_last_run(agent_id, {
@@ -3047,7 +3048,7 @@ async def run_single_agent(agent_id: str, request: Request, db: AsyncSession = D
 async def run_all_agents(request: Request, db: AsyncSession = Depends(get_db)):
     """Sequentially executes all agents on demand and compiles a fleetwide report."""
     import inspect
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     results = {}
     now_iso = datetime.utcnow().isoformat()
 
@@ -3065,7 +3066,8 @@ async def run_all_agents(request: Request, db: AsyncSession = Depends(get_db)):
                 "result": res
             })
         except Exception as e:
-            err_res = {"status": "ERROR", "error": str(e)}
+            logger.error(f"[Dev OS] Fleet agent {aid} error: {e}", exc_info=True)
+            err_res = {"status": "ERROR", "error": f"Agent {aid} execution failed ({type(e).__name__})"}
             results[aid] = err_res
             await sync_save_agent_last_run(aid, {
                 "timestamp_epoch": time.time(),
@@ -3105,7 +3107,7 @@ async def run_all_agents(request: Request, db: AsyncSession = Depends(get_db)):
 @router.post("/deployment/verify", dependencies=[Depends(verify_dev_os_session)])
 async def verify_deployment_swarm(request: Request, db: AsyncSession = Depends(get_db)):
     """Executes the complete 3-stage Deployment Swarm Verification protocol with full telemetry."""
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     start_time = time.time()
     now_iso = datetime.utcnow().isoformat()
     
@@ -3224,7 +3226,7 @@ async def migrate_and_reseed_catalog(request: Request, db: AsyncSession = Depend
     then re-seeds all 16 products from products_seed.json with exact dual coverage and dimensions.
     """
     from sqlalchemy import text
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     migration_columns = [
         "ALTER TABLE products ADD COLUMN IF NOT EXISTS coverage_aham VARCHAR(100);",
         "ALTER TABLE products ADD COLUMN IF NOT EXISTS coverage_oahu VARCHAR(100);",
@@ -3342,7 +3344,8 @@ async def get_audit_logs(db: AsyncSession = Depends(get_db), limit: int = 50):
             })
         return {"logs": logs, "count": len(logs)}
     except Exception as e:
-        return {"logs": [], "error": str(e)}
+        logger.error(f"[Dev OS] Audit log query error: {e}", exc_info=True)
+        return {"logs": [], "error": "Unable to retrieve audit logs"}
 
 # --- MASTER PROJECTS BRAIN API ENDPOINTS ---
 
@@ -3382,7 +3385,7 @@ async def sync_brain_state(payload: BrainSyncRequest, request: Request, db: Asyn
     Strictly client-initiated pull/push: Local environment pushes directives or thoughts
     and pulls updated brain state. Server maintains ZERO inbound connectivity to local.
     """
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     now_iso = datetime.utcnow().isoformat()
 
     if payload.directive_updates:
@@ -3423,7 +3426,7 @@ async def record_brain_thought(payload: BrainThoughtRequest):
 @router.post("/brain/session-sync", dependencies=[Depends(verify_dev_os_session)])
 async def record_session_sync(payload: SessionSyncRequest, request: Request, db: AsyncSession = Depends(get_db)):
     """Registers cross-session continuous learning, achievements, and improvements into Master Brain memory."""
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     now_iso = datetime.utcnow().isoformat()
 
     thought_msg = f"[{payload.epoch}] Session Sync: {payload.summary}"
@@ -3472,7 +3475,7 @@ async def inject_brain_history(request: Request, db: AsyncSession = Depends(get_
     Executes a comprehensive historical swarm memory injection into the Master Projects Brain.
     Activates all 10 Category Sub-Masters to synchronize chronological cognitive events across Epochs 1-21 into the active thought stream.
     """
-    ip = request.client.host if request.client else "127.0.0.1"
+    ip = get_client_ip(request)
     now_iso = datetime.utcnow().isoformat()
 
     historical_injections = [
@@ -3523,43 +3526,52 @@ async def inject_brain_history(request: Request, db: AsyncSession = Depends(get_
     }
 
 class AdminUserPasswordUpdateRequest(BaseModel):
-    email: str
-    password: str
-    name: Optional[str] = None
-    role: Optional[str] = None
+    email: str = Field(..., max_length=254)
+    password: str = Field(..., min_length=8, max_length=72)
+    name: Optional[str] = Field(default=None, max_length=120)
+    role: Optional[str] = Field(default=None, max_length=60)
 
 @router.post("/auth/update-admin-user", dependencies=[Depends(verify_dev_os_session)])
-async def update_admin_user_credentials(payload: AdminUserPasswordUpdateRequest, db: AsyncSession = Depends(get_db)):
+async def update_admin_user_credentials(payload: AdminUserPasswordUpdateRequest, request: Request, db: AsyncSession = Depends(get_db)):
     """Securely hashes password with bcrypt and updates or inserts into admin_users table in PostgreSQL."""
+    if len(payload.password.encode("utf-8")) > 72:
+        raise HTTPException(status_code=400, detail="Password exceeds 72-byte bcrypt limit")
+    email = email_service.sanitize_email_addr(payload.email)
+    if not email:
+        raise HTTPException(status_code=400, detail="Invalid email address")
+
     from passlib.context import CryptContext
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     hashed_pwd = pwd_context.hash(payload.password)
     
-    email = payload.email.strip()
     role = payload.role or ("developer" if "irasmussen" in email else "client_owner")
     name = payload.name or ("Tai Rasmussen" if "irasmussen" in email else "Brian (CEO)")
     
     from sqlalchemy import text
-    await db.execute(text("CREATE EXTENSION IF NOT EXISTS pgcrypto;"))
-    await db.execute(text("""
-        CREATE TABLE IF NOT EXISTS admin_users (
-            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-            email VARCHAR UNIQUE NOT NULL,
-            password_hash VARCHAR NOT NULL,
-            role VARCHAR DEFAULT 'superadmin',
-            name VARCHAR DEFAULT '',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-    """))
+    import uuid
+    await db.execute(text("ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS password_hash VARCHAR;"))
+    await db.execute(text("ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS hashed_password VARCHAR;"))
     await db.execute(text("ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS role VARCHAR DEFAULT 'superadmin';"))
     await db.execute(text("ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS name VARCHAR DEFAULT '';"))
-    
-    await db.execute(text("""
-        INSERT INTO admin_users (id, email, password_hash, role, name)
-        VALUES (gen_random_uuid(), :email, :pwd, :role, :name)
-        ON CONFLICT (email) DO UPDATE SET password_hash = :pwd, role = :role, name = :name;
-    """), {"email": email, "pwd": hashed_pwd, "role": role, "name": name})
+
+    id_type_res = await db.execute(text(
+        "SELECT data_type FROM information_schema.columns WHERE table_name = 'admin_users' AND column_name = 'id'"
+    ))
+    id_dtype = (id_type_res.scalar() or "").lower()
+    if "int" in id_dtype:
+        await db.execute(text("""
+            INSERT INTO admin_users (email, password_hash, hashed_password, role, name)
+            VALUES (:email, :pwd, :pwd, :role, :name)
+            ON CONFLICT (email) DO UPDATE SET password_hash = :pwd, hashed_password = :pwd, role = :role, name = :name;
+        """), {"email": email, "pwd": hashed_pwd, "role": role, "name": name})
+    else:
+        await db.execute(text("""
+            INSERT INTO admin_users (id, email, password_hash, hashed_password, role, name)
+            VALUES (:uid, :email, :pwd, :pwd, :role, :name)
+            ON CONFLICT (email) DO UPDATE SET password_hash = :pwd, hashed_password = :pwd, role = :role, name = :name;
+        """), {"uid": str(uuid.uuid4()), "email": email, "pwd": hashed_pwd, "role": role, "name": name})
     await db.commit()
+    await log_dev_os_audit(db, action="ADMIN_USER_CREDENTIALS_UPDATED", details={"email": email_service.mask_email(email), "role": role}, ip=get_client_ip(request))
     
     return {"status": "success", "email": email, "role": role, "name": name, "message": "User credentials successfully updated in database."}
 
@@ -3708,7 +3720,14 @@ async def preview_monthly_report(month: str, year: str = "2026", format: str = "
     if format.lower() == "html" and match.get("html_path") and os.path.exists(match["html_path"]):
         with open(match["html_path"], "r", encoding="utf-8") as f:
             content = f.read()
-        return Response(content=content, media_type="text/html")
+        return Response(
+            content=content,
+            media_type="text/html",
+            headers={
+                "Content-Security-Policy": "sandbox; default-src 'none'; style-src 'unsafe-inline'; img-src data:",
+                "X-Content-Type-Options": "nosniff",
+            },
+        )
     elif match.get("md_path") and os.path.exists(match["md_path"]):
         with open(match["md_path"], "r", encoding="utf-8") as f:
             content = f.read()

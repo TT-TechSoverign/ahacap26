@@ -84,28 +84,40 @@ async def delete_product_service(db: AsyncSession, product_id: int):
 
 async def validate_inventory_service(db: AsyncSession, validation_items: List[dict]):
     """
-    Validates multiple products' inventory and returns canonical pricing.
+    Validates multiple products' inventory (aggregating duplicate product_id rows) and returns canonical pricing.
     """
     results = []
     all_valid = True
+
+    totals_by_pid = {}
     for item in validation_items:
-        query = select(models.Product).where(models.Product.id == item['product_id'])
+        pid = item["product_id"]
+        qty = int(item["requested_quantity"])
+        totals_by_pid[pid] = totals_by_pid.get(pid, 0) + qty
+
+    for item in validation_items:
+        pid = item['product_id']
+        req_qty = int(item['requested_quantity'])
+        if req_qty <= 0:
+            all_valid = False
+        query = select(models.Product).where(models.Product.id == pid)
         result = await db.execute(query)
         product = result.scalar_one_or_none()
         
         if not product:
             results.append({
-                "product_id": item['product_id'],
+                "product_id": pid,
                 "name": "Unknown Product",
                 "price": 0,
-                "requested_quantity": item['requested_quantity'],
+                "requested_quantity": req_qty,
                 "available_stock": 0,
                 "is_available": False
             })
             all_valid = False
             continue
             
-        is_available = product.stock >= item['requested_quantity']
+        total_req_for_pid = totals_by_pid.get(product.id, req_qty)
+        is_available = req_qty > 0 and product.stock >= total_req_for_pid
         if not is_available:
             all_valid = False
             
@@ -114,7 +126,7 @@ async def validate_inventory_service(db: AsyncSession, validation_items: List[di
             "product_id": product.id,
             "name": product.name,
             "price": price,
-            "requested_quantity": item['requested_quantity'],
+            "requested_quantity": req_qty,
             "available_stock": product.stock,
             "is_available": is_available
         })

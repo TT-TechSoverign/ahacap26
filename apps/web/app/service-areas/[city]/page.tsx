@@ -442,7 +442,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 }
                             ]
                         }
-                    })
+                    }).replace(/</g, '\\u003c')
                 }}
             />
 
@@ -473,7 +473,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 "item": `https://www.affordablehome-ac.com/service-areas/${params.city.toLowerCase()}`
                             }
                         ]
-                    })
+                    }).replace(/</g, '\\u003c')
                 }}
             />
 
@@ -518,7 +518,7 @@ export default function LocalServiceAreaPage({ params }: Props) {
                                 }
                             }
                         ]
-                    })
+                    }).replace(/</g, '\\u003c')
                 }}
             />
 

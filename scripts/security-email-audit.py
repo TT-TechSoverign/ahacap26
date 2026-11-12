@@ -155,7 +155,7 @@ def main() -> int:
                 continue
             email_inventory.setdefault(em, []).append(rel)
 
-        if rel.startswith("apps/web/") or rel.startswith("ahac-crm/frontend/"):
+        if rel.startswith(("apps/web/", "apps/dev-os/", "ahac-crm/frontend/")):
             for priv in PRIVATE_EMAILS:
                 if priv in content.lower():
                     violations.append(f"[PRIVATE_EMAIL_EXPOSED] '{priv}' found in client bundle file: {rel}")
@@ -180,6 +180,7 @@ def main() -> int:
         (api_email_py, "def safe_html("),
         (api_email_py, "def sanitize_header_val("),
         (api_email_py, "def mask_email("),
+        (api_email_py, "def is_explicit_test_submission("),
         (crm_email_py, "html.escape("),
         (crm_email_py, "def _mask_email("),
         (prot_link_tsx, "export function ProtectedEmailLink"),

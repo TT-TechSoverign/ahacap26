@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const API_INTERNAL_URL = process.env.API_INTERNAL_URL || 'http://localhost:8000';
+const API_INTERNAL_URL = (process.env.API_INTERNAL_URL || 'http://prod-api:8000').replace(/\/api\/v1\/?$/, '');
 const SAFE_PUCK_PATH_RE = /^\/[A-Za-z0-9/_-]*$/;
 
 function sanitizeContentPath(rawPath: unknown): string | null {

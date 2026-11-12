@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import sitemap from '@/app/sitemap';
 
@@ -8,19 +9,24 @@ const HOST = 'www.affordablehome-ac.com';
 const COOLDOWN_MS = 5 * 60 * 1000; // 5-minute outbound amplification guard
 let lastSubmissionEpochMs = 0;
 
-function hasAdminBypass(req: NextRequest): boolean {
+function safeSecretMatch(candidate: string, expected: string): boolean {
+    if (!candidate || !expected) return false;
+    const hashA = crypto.createHash('sha256').update(candidate).digest();
+    const hashB = crypto.createHash('sha256').update(expected).digest();
+    return crypto.timingSafeEqual(hashA, hashB);
+}
+
+function isAuthorizedIndexNowCaller(req: NextRequest): boolean {
     const revalidateSecret = (process.env.REVALIDATE_SECRET || '').trim();
     const devOsKey = (process.env.DEV_OS_MASTER_PASSWORD || '').trim();
     const headerSecret = (req.headers.get('x-indexnow-secret') || req.headers.get('x-dev-os-key') || '').trim();
-    return Boolean(
-        headerSecret &&
-        ((revalidateSecret && headerSecret === revalidateSecret) || (devOsKey && headerSecret === devOsKey))
-    );
+    if (!headerSecret) return false;
+    return safeSecretMatch(headerSecret, revalidateSecret) || safeSecretMatch(headerSecret, devOsKey);
 }
 
-async function pushAllUrlsToIndexNow(req: NextRequest) {
+async function pushAllUrlsToIndexNow() {
     const now = Date.now();
-    if (!hasAdminBypass(req) && now - lastSubmissionEpochMs < COOLDOWN_MS) {
+    if (now - lastSubmissionEpochMs < COOLDOWN_MS) {
         return {
             status: 429,
             ok: false,
@@ -57,7 +63,7 @@ async function pushAllUrlsToIndexNow(req: NextRequest) {
         };
     } catch {
         return {
-            status: 500,
+            status: 502,
             ok: false,
             submittedCount: urlList.length,
             error: 'IndexNow submission temporarily unavailable',
@@ -65,12 +71,29 @@ async function pushAllUrlsToIndexNow(req: NextRequest) {
     }
 }
 
+function toHttpResponse(result: Awaited<ReturnType<typeof pushAllUrlsToIndexNow>>) {
+    const httpStatus = result.throttled
+        ? 429
+        : result.ok
+        ? 200
+        : result.status >= 400
+        ? result.status
+        : 502;
+    return NextResponse.json(result, { status: httpStatus });
+}
+
 export async function GET(req: NextRequest) {
-    const result = await pushAllUrlsToIndexNow(req);
-    return NextResponse.json(result, { status: result.throttled ? 429 : 200 });
+    if (!isAuthorizedIndexNowCaller(req)) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    const result = await pushAllUrlsToIndexNow();
+    return toHttpResponse(result);
 }
 
 export async function POST(req: NextRequest) {
-    const result = await pushAllUrlsToIndexNow(req);
-    return NextResponse.json(result, { status: result.throttled ? 429 : 200 });
+    if (!isAuthorizedIndexNowCaller(req)) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    const result = await pushAllUrlsToIndexNow();
+    return toHttpResponse(result);
 }

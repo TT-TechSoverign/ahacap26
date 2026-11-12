@@ -9,10 +9,20 @@ generating executive-ready reports in 3rd-grade reading level across Markdown, H
 import os
 import csv
 import glob
+import html
+import shutil
 import zipfile
 import tempfile
 from typing import Dict, Any, List, Optional
 from datetime import datetime
+
+
+def _safe_md_text(val: Any) -> str:
+    """Escapes HTML tags, quotes, and Markdown table pipes from untrusted CSV strings."""
+    if val is None:
+        return ""
+    cleaned = str(val).replace("\r", " ").replace("\n", " ")
+    return html.escape(cleaned, quote=True).replace("|", "&#124;").replace("`", "&#96;")
 
 try:
     import docx
@@ -121,12 +131,53 @@ class ReportingEngine:
                 except OSError:
                     continue
 
+    MAX_ZIP_FILES = 200
+    MAX_ZIP_UNCOMPRESSED_BYTES = 100 * 1024 * 1024  # 100 MB decompression bomb cap
+
     def extract_zip(self, zip_path: str, extract_to: str) -> str:
-        """Extracts a zip file into target directory."""
-        os.makedirs(extract_to, exist_ok=True)
+        """Safely extracts a zip file into target directory with Zip-Slip & Zip-Bomb guards."""
+        target_real = os.path.realpath(extract_to)
+        os.makedirs(target_real, exist_ok=True)
+
+        total_bytes = 0
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(extract_to)
-        return extract_to
+            infos = zip_ref.infolist()
+            if len(infos) > self.MAX_ZIP_FILES:
+                raise ValueError(f"ZIP archive exceeds maximum entry count ({self.MAX_ZIP_FILES})")
+
+            for member in infos:
+                name = member.filename
+                if not name or name.startswith(("/", "\\")) or ".." in name.replace("\\", "/").split("/"):
+                    raise ValueError(f"Unsafe ZIP entry path rejected: {name}")
+                # Reject Unix symlinks (S_IFLNK = 0o120000)
+                if ((member.external_attr >> 16) & 0o170000) == 0o120000:
+                    raise ValueError(f"Symlink ZIP entry rejected: {name}")
+
+                dest_real = os.path.realpath(os.path.join(target_real, name))
+                if not (dest_real == target_real or dest_real.startswith(target_real + os.sep)):
+                    raise ValueError(f"Zip-Slip path traversal rejected: {name}")
+
+                if member.is_dir():
+                    os.makedirs(dest_real, exist_ok=True)
+                    continue
+
+                total_bytes += max(0, int(member.file_size))
+                if total_bytes > self.MAX_ZIP_UNCOMPRESSED_BYTES:
+                    raise ValueError("ZIP archive uncompressed size exceeds 100 MB safety ceiling")
+
+                os.makedirs(os.path.dirname(dest_real), exist_ok=True)
+                with zip_ref.open(member, 'r') as src, open(dest_real, 'wb') as dst:
+                    copied = 0
+                    while True:
+                        chunk = src.read(65536)
+                        if not chunk:
+                            break
+                        copied += len(chunk)
+                        if copied > self.MAX_ZIP_UNCOMPRESSED_BYTES:
+                            raise ValueError("ZIP member stream exceeded 100 MB safety ceiling")
+                        dst.write(chunk)
+
+        return target_real
 
     def parse_analytics_files(self, directory: str) -> Dict[str, Any]:
         """Parses Search Console and GA4 CSVs from a directory (or its subdirectories)."""
@@ -325,8 +376,8 @@ class ReportingEngine:
 
         for q in metrics.get("top_queries", []):
             if "affordable" in q.get("query", "").lower() and q.get("position", 99) <= 2.0:
-                top_query_ctr = q["query"]
-                top_ctr_val = q.get("ctr") or (f"{round((q['clicks']/q['impressions'])*100, 1)}%" if q.get("impressions") else "70.73%")
+                top_query_ctr = _safe_md_text(q["query"])
+                top_ctr_val = _safe_md_text(q.get("ctr") or (f"{round((q['clicks']/q['impressions'])*100, 1)}%" if q.get("impressions") else "70.73%"))
                 top_ctr_pos = q.get("position", 1.0)
                 break
 
@@ -341,7 +392,7 @@ class ReportingEngine:
         for p in selected_prods:
             url = p.get("url", p.get("model", "LG Dual Inverter & GE Built-In"))
             slug = url.split('/shop/')[-1]
-            prod_name = slug.replace('-', ' ').title().replace('Lg ', 'LG ').replace('Ge ', 'GE ').replace('Btu', 'BTU')
+            prod_name = _safe_md_text(slug.replace('-', ' ').title().replace('Lg ', 'LG ').replace('Ge ', 'GE ').replace('Btu', 'BTU'))
             prod_wins.append(f"• **{prod_name}**: {p.get('impressions', 0):,} impressions and {p.get('clicks', 0)} clicks (position #{p.get('position', 1.0)})")
         if not any("GE " in w for w in prod_wins):
             prod_wins.append("• **GE 26\" Built-In Series (AJCQ08AWJ / AJCQ10AWJ / AJCQ12AXXWA R32 Inverter)**: High-intent Page 1 visibility across Honolulu condo & through-the-wall searches")
@@ -351,7 +402,7 @@ class ReportingEngine:
         city_wins = []
         for c in metrics.get("city_pages", [])[:4]:
             url = c.get("url", c.get("city", "Honolulu"))
-            city_name = url.split('/')[-1].replace('-', ' ').title()
+            city_name = _safe_md_text(url.split('/')[-1].replace('-', ' ').title())
             city_wins.append(f"{city_name} ({c.get('impressions', 0):,} impressions, {c.get('clicks', 0)} clicks)")
         city_wins_text = ", ".join(city_wins) if city_wins else "Honolulu, Aiea, Kapolei, and Pearl City"
 
@@ -384,8 +435,9 @@ We rank very high for people who are searching for LG & GE window air conditione
 |----------------------|--------|-------------|------------|-------------|
 """
         for q in metrics.get("top_queries", [])[:8]:
-            ctr_val = q.get("ctr") or (f"{round((q['clicks']/q['impressions'])*100, 1)}%" if q.get("impressions") else "0.0%")
-            md += f"| {q.get('query', '')} | {q.get('clicks', 0)} | {q.get('impressions', 0)} | {ctr_val} | {q.get('position', 0)} |\n"
+            ctr_val = _safe_md_text(q.get("ctr") or (f"{round((q['clicks']/q['impressions'])*100, 1)}%" if q.get("impressions") else "0.0%"))
+            safe_q = _safe_md_text(q.get("query", ""))
+            md += f"| {safe_q} | {q.get('clicks', 0)} | {q.get('impressions', 0)} | {ctr_val} | {q.get('position', 0)} |\n"
 
         md += f"""
 **What this means:** *We are winning these high-intent local buyers.*
@@ -421,6 +473,8 @@ While our rankings are great, we have some huge opportunities to get even more c
     def generate_html(self, markdown_content: str, month_name: str, year_str: str) -> str:
         """Converts Markdown narrative to stylized executive presentation HTML."""
         import markdown
+        safe_month = html.escape(str(month_name), quote=True)
+        safe_year = html.escape(str(year_str), quote=True)
         html_body = markdown.markdown(markdown_content, extensions=['tables'])
 
         html_doc = f"""<!DOCTYPE html>
@@ -428,7 +482,7 @@ While our rankings are great, we have some huge opportunities to get even more c
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monthly Executive SEO Report - {month_name} {year_str}</title>
+<title>Monthly Executive SEO Report - {safe_month} {safe_year}</title>
 <style>
   body {{
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;

@@ -1,11 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException, Body, Response
+from fastapi import APIRouter, Depends, HTTPException, Body, Request, Response
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from pydantic import BaseModel
-from typing import Dict, Any, Optional
+from pydantic import BaseModel, Field
+from typing import Dict, Any, Optional, Literal
+import asyncio
 import models
 from database import get_db
-from dependencies import verify_admin_token
+from dependencies import verify_admin_token, get_client_ip
 import json
 import os
 import csv
@@ -25,6 +26,7 @@ class ScheduleUpdate(BaseModel):
 @router.patch("/schedule")
 async def update_schedule(
     schedule: ScheduleUpdate,
+    request: Request,
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -75,7 +77,7 @@ async def update_schedule(
 
     try:
         from routers.dev_os import log_dev_os_audit
-        await log_dev_os_audit(db, action="ADMIN_SCHEDULE_UPDATE", details=schedule.dict())
+        await log_dev_os_audit(db, action="ADMIN_SCHEDULE_UPDATE", details=schedule.dict(), ip=get_client_ip(request))
     except Exception:
         pass
 
@@ -101,11 +103,11 @@ async def publish_root_content(db: AsyncSession = Depends(get_db)):
 # --- ADMIN ORDERS & LEADS ---
 
 class OrderUpdate(BaseModel):
-    status: str
+    status: Literal["CART", "LOCK_STOCK", "AWAIT_PAYMENT", "PAID", "SHIPPED", "DELIVERED", "CANCELLED"]
 
 class LeadUpdate(BaseModel):
-    status: str
-    notes: Optional[str] = None
+    status: Literal["NEW", "CONTACTED", "SCHEDULED", "COMPLETED", "ARCHIVED"]
+    notes: Optional[str] = Field(default=None, max_length=4000)
 
 
 def sanitize_csv_cell(val: Any) -> str:
@@ -122,7 +124,7 @@ async def get_all_orders(db: AsyncSession = Depends(get_db)):
     return result.scalars().all()
 
 @router.get("/orders/export-csv")
-async def export_orders_csv(db: AsyncSession = Depends(get_db)):
+async def export_orders_csv(request: Request, db: AsyncSession = Depends(get_db)):
     """Exports all orders as CSV with customer details and Oahu GET tax itemization."""
     result = await db.execute(select(models.Order).order_by(models.Order.created_at.desc()))
     orders = result.scalars().all()
@@ -155,7 +157,7 @@ async def export_orders_csv(db: AsyncSession = Depends(get_db)):
 
     try:
         from routers.dev_os import log_dev_os_audit
-        await log_dev_os_audit(db, action="ADMIN_ORDERS_CSV_EXPORT", details={"order_count": len(orders)})
+        await log_dev_os_audit(db, action="ADMIN_ORDERS_CSV_EXPORT", details={"order_count": len(orders)}, ip=get_client_ip(request))
     except Exception:
         pass
 
@@ -167,7 +169,7 @@ async def export_orders_csv(db: AsyncSession = Depends(get_db)):
     )
 
 @router.post("/orders/reconcile")
-async def trigger_order_reconciliation(db: AsyncSession = Depends(get_db)):
+async def trigger_order_reconciliation(request: Request, db: AsyncSession = Depends(get_db)):
     """
     Manually triggers Stripe order reconciliation to check recent Stripe sessions
     and automatically recover any missing orders into the database.
@@ -176,13 +178,13 @@ async def trigger_order_reconciliation(db: AsyncSession = Depends(get_db)):
     recon_result = await reconcile_unrecorded_stripe_orders(limit=30)
     try:
         from routers.dev_os import log_dev_os_audit
-        await log_dev_os_audit(db, action="ADMIN_RECONCILIATION_TRIGGER", details=recon_result)
+        await log_dev_os_audit(db, action="ADMIN_RECONCILIATION_TRIGGER", details=recon_result, ip=get_client_ip(request))
     except Exception:
         pass
     return recon_result
 
 @router.put("/orders/{order_id}")
-async def update_order_status(order_id: str, payload: OrderUpdate, db: AsyncSession = Depends(get_db)):
+async def update_order_status(order_id: str, payload: OrderUpdate, request: Request, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.Order).where(models.Order.id == order_id))
     order = result.scalars().first()
     if not order:
@@ -192,7 +194,7 @@ async def update_order_status(order_id: str, payload: OrderUpdate, db: AsyncSess
     await db.commit()
     try:
         from routers.dev_os import log_dev_os_audit
-        await log_dev_os_audit(db, action="ADMIN_ORDER_STATUS_UPDATE", details={"order_id": order_id, "new_status": payload.status})
+        await log_dev_os_audit(db, action="ADMIN_ORDER_STATUS_UPDATE", details={"order_id": order_id, "new_status": payload.status}, ip=get_client_ip(request))
     except Exception:
         pass
     return {"status": "success"}
@@ -203,7 +205,7 @@ async def get_all_leads(db: AsyncSession = Depends(get_db)):
     return result.scalars().all()
 
 @router.put("/leads/{lead_id}")
-async def update_lead_status(lead_id: int, payload: LeadUpdate, db: AsyncSession = Depends(get_db)):
+async def update_lead_status(lead_id: int, payload: LeadUpdate, request: Request, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.Lead).where(models.Lead.id == lead_id))
     lead = result.scalars().first()
     if not lead:
@@ -216,13 +218,15 @@ async def update_lead_status(lead_id: int, payload: LeadUpdate, db: AsyncSession
     await db.commit()
     try:
         from routers.dev_os import log_dev_os_audit
-        await log_dev_os_audit(db, action="ADMIN_LEAD_STATUS_UPDATE", details={"lead_id": lead_id, "new_status": payload.status})
+        await log_dev_os_audit(db, action="ADMIN_LEAD_STATUS_UPDATE", details={"lead_id": lead_id, "new_status": payload.status}, ip=get_client_ip(request))
     except Exception:
         pass
     return {"status": "success"}
 
+@router.post("/orders/backfill")
 @router.get("/orders/backfill")
 async def backfill_historical_orders(
+    request: Request,
     db: AsyncSession = Depends(get_db)
 ):
     import stripe
@@ -247,11 +251,14 @@ async def backfill_historical_orders(
          if not order.stripe_pid:
              continue
          try:
-             sessions = stripe.checkout.Session.list(payment_intent=order.stripe_pid, limit=1)
+             sessions = await asyncio.to_thread(stripe.checkout.Session.list, payment_intent=order.stripe_pid, limit=1)
              if not sessions.data:
                  continue
                  
              session = sessions.data[0]
+             s_meta = session.metadata.to_dict() if hasattr(session.metadata, 'to_dict') else dict(session.metadata or {})
+             if s_meta.get('source') == 'crm' or s_meta.get('invoice_id'):
+                 continue
              cust = session.customer_details or {}
              order.customer_name = cust.get('name', 'Valued Customer')
              order.customer_email = cust.get('email', order.customer_email)
@@ -259,7 +266,7 @@ async def backfill_historical_orders(
              if cust.get('address'):
                  order.customer_address = json.dumps(cust.get('address'))
                  
-             line_items_res = stripe.checkout.Session.list_line_items(session.id, limit=100)
+             line_items_res = await asyncio.to_thread(stripe.checkout.Session.list_line_items, session.id, limit=100)
              items_data = []
              for item in line_items_res.data:
                  items_data.append({
@@ -276,9 +283,15 @@ async def backfill_historical_orders(
                  
              count += 1
          except Exception as e:
-             errors.append(f"Failed Order {order.id}: {str(e)}")
+             print(f"WARNING: Backfill failed for order {order.id}: {e}")
+             errors.append(f"Failed Order {order.id}")
              
     await db.commit()
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="ADMIN_ORDERS_BACKFILL", details={"updated_rows": count}, ip=get_client_ip(request))
+    except Exception:
+        pass
     
     return {
         "status": "success", 

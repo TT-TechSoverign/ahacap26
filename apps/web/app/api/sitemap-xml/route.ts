@@ -3,8 +3,9 @@ import buildSitemapEntries from '@/app/sitemap';
 
 export const revalidate = 86400;
 
-function escapeXml(unsafe: string): string {
-  return String(unsafe || '')
+function escapeXml(unsafe: unknown): string {
+  return String(unsafe ?? '')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')

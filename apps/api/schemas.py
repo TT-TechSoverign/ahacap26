@@ -1,12 +1,12 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional
 
 class ProductBase(BaseModel):
     name: str
-    price: int
+    price: int = Field(..., ge=0)
     category: str
     subcategory: Optional[str] = None # Added to match DB model
-    stock: int
+    stock: int = Field(..., ge=0)
     image_url: Optional[str] = None
     btu: Optional[int] = None
     voltage: Optional[str] = None
@@ -36,10 +36,10 @@ class ProductCreate(ProductBase):
 
 class ProductUpdate(BaseModel):
     name: Optional[str] = None
-    price: Optional[int] = None
+    price: Optional[int] = Field(default=None, ge=0)
     category: Optional[str] = None
     subcategory: Optional[str] = None
-    stock: Optional[int] = None
+    stock: Optional[int] = Field(default=None, ge=0)
     image_url: Optional[str] = None
     btu: Optional[int] = None
     voltage: Optional[str] = None
@@ -70,11 +70,11 @@ class Product(ProductBase):
     model_config = ConfigDict(from_attributes=True)
 
 class InventoryValidationItem(BaseModel):
-    product_id: int
-    requested_quantity: int
+    product_id: int = Field(..., gt=0)
+    requested_quantity: int = Field(..., gt=0, le=50)
 
 class InventoryValidationRequest(BaseModel):
-    items: list[InventoryValidationItem]
+    items: list[InventoryValidationItem] = Field(..., min_length=1, max_length=50)
 
 class ValidationResult(BaseModel):
     product_id: int

@@ -186,8 +186,13 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                     created_at=created_at
                 )
                 db_session.add(recovered_order)
-                await db_session.commit()
-                logger.info(f"✅ [Auto-Reconciliation] Persisted order {order_id} in database.")
+                try:
+                    await db_session.commit()
+                    logger.info(f"✅ [Auto-Reconciliation] Persisted order {order_id} in database.")
+                except Exception:
+                    await db_session.rollback()
+                    logger.info(f"ℹ️ [Auto-Reconciliation] Order {order_id} already persisted concurrently. Skipping.")
+                    continue
 
                 # 2. Deduct inventory idempotently
                 if not recovered_order.inventory_deducted:
@@ -197,7 +202,9 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                         p_id = item.get("product_id")
                         qty = item.get("quantity", 0)
                         if p_id and qty > 0:
-                            db_prod = await db_session.execute(select(models.Product).where(models.Product.id == p_id))
+                            db_prod = await db_session.execute(
+                                select(models.Product).where(models.Product.id == p_id).with_for_update()
+                            )
                             p_obj = db_prod.scalar_one_or_none()
                             if p_obj:
                                 p_obj.stock = max(0, p_obj.stock - qty)
@@ -206,22 +213,32 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                                 logger.info(f"✅ [Auto-Reconciliation] Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
                     await db_session.commit()
 
-                # 3. Dispatch emails
+                # 3. Dispatch emails (guarded by Redis order_id lock)
                 if receipt_email:
-                    logger.info(f"📧 [Auto-Reconciliation] Sending confirmation emails for {order_id} to {email_service.mask_email(receipt_email)}...")
+                    should_send = True
                     try:
-                        await email_service.send_order_confirmation(
-                            receipt_email,
-                            order_id,
-                            amount_received,
-                            fulfillment_mode=fulfillment_mode,
-                            items=items_data,
-                            customer_info=extracted_info,
-                            payment_info=payment_info
-                        )
-                        logger.info(f"✅ [Auto-Reconciliation] Email pipeline completed for {order_id}.")
-                    except Exception as mail_err:
-                        logger.error(f"❌ [Auto-Reconciliation] Email failed for {order_id}: {mail_err}")
+                        from cache import redis_client
+                        if redis_client:
+                            claimed = await redis_client.set(f"email_sent:order:{order_id}", "1", nx=True, ex=86400)
+                            if not claimed:
+                                should_send = False
+                    except Exception:
+                        pass
+                    if should_send:
+                        logger.info(f"📧 [Auto-Reconciliation] Sending confirmation emails for {order_id} to {email_service.mask_email(receipt_email)}...")
+                        try:
+                            await email_service.send_order_confirmation(
+                                receipt_email,
+                                order_id,
+                                amount_received,
+                                fulfillment_mode=fulfillment_mode,
+                                items=items_data,
+                                customer_info=extracted_info,
+                                payment_info=payment_info
+                            )
+                            logger.info(f"✅ [Auto-Reconciliation] Email pipeline completed for {order_id}.")
+                        except Exception as mail_err:
+                            logger.error(f"❌ [Auto-Reconciliation] Email failed for {order_id}: {mail_err}")
 
                 recovered.append({
                     "order_id": order_id,
@@ -240,20 +257,31 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
         }
     except Exception as e:
         logger.error(f"❌ [Auto-Reconciliation Error]: {e}", exc_info=True)
-        return {"status": "error", "error": str(e), "recovered": recovered}
+        return {"status": "error", "error": "Reconciliation check encountered a backend error", "recovered": recovered}
 
 async def periodic_reconciliation_runner(interval_seconds: int = 600):
     """
     Background worker that runs order reconciliation periodically (default: every 10 minutes).
-    Initial run occurs 20 seconds after API startup to allow all pools to warm up.
+    Uses a Redis distributed lock so only 1 of the 4 Uvicorn workers polls Stripe per window.
     """
     await asyncio.sleep(20)
     logger.info("[Auto-Reconciliation] Background worker initialized. Running every 10 minutes.")
     while True:
         try:
-            result = await reconcile_unrecorded_stripe_orders(limit=20)
-            if result.get("recovered_count", 0) > 0:
-                logger.warning(f"🎉 [Auto-Reconciliation] Recovered {result['recovered_count']} unrecorded order(s)!")
+            lock_acquired = True
+            try:
+                from cache import redis_client
+                if redis_client:
+                    lock_ttl = max(60, int(interval_seconds) - 30)
+                    claimed = await redis_client.set("lock:reconcile_stripe", "1", nx=True, ex=lock_ttl)
+                    lock_acquired = bool(claimed)
+            except Exception:
+                lock_acquired = True
+
+            if lock_acquired:
+                result = await reconcile_unrecorded_stripe_orders(limit=20)
+                if result.get("recovered_count", 0) > 0:
+                    logger.warning(f"🎉 [Auto-Reconciliation] Recovered {result['recovered_count']} unrecorded order(s)!")
         except Exception as e:
             logger.error(f"[Auto-Reconciliation Runner Exception]: {e}")
         await asyncio.sleep(interval_seconds)

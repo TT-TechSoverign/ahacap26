@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Lock } from 'lucide-react';
 
@@ -13,12 +12,43 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
     const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
-        // Check session storage on mount
-        const auth = sessionStorage.getItem('puck_auth');
-        if (auth === 'true') {
-            setIsAuthenticated(true);
+        let cancelled = false;
+        async function verifyExistingSession() {
+            try {
+                const token = sessionStorage.getItem('admin_token');
+                if (!token) {
+                    sessionStorage.removeItem('puck_auth');
+                    if (!cancelled) setLoading(false);
+                    return;
+                }
+                const res = await fetch('/api/v1/admin/verify', {
+                    method: 'POST',
+                    headers: {
+                        Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+                    },
+                    cache: 'no-store',
+                });
+                if (!cancelled) {
+                    if (res.ok) {
+                        setIsAuthenticated(true);
+                    } else {
+                        sessionStorage.removeItem('admin_token');
+                        sessionStorage.removeItem('puck_auth');
+                        setIsAuthenticated(false);
+                    }
+                    setLoading(false);
+                }
+            } catch {
+                if (!cancelled) {
+                    setIsAuthenticated(false);
+                    setLoading(false);
+                }
+            }
         }
-        setLoading(false);
+        verifyExistingSession();
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -49,7 +79,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                 }
                 setPin('');
             }
-        } catch (err) {
+        } catch {
             setError('CONNECTION ERROR');
             setPin('');
         } finally {
@@ -57,7 +87,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
         }
     };
 
-    if (loading) return null; // Or a spinner
+    if (loading) return null;
 
     if (!isAuthenticated) {
         return (
@@ -74,14 +104,14 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                     <form onSubmit={handleLogin} className="space-y-6">
                         <div className="space-y-2">
                             <label className="text-blue-400 text-xs font-bold uppercase tracking-widest pl-1">
-                                Access PIN
+                                Access PIN or Master Key
                             </label>
                             <input
                                 type="password"
                                 value={pin}
                                 onChange={(e) => setPin(e.target.value)}
-                                className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 text-white text-center text-2xl tracking-[0.5em] py-4 rounded-lg outline-none transition-all placeholder:tracking-normal placeholder:text-slate-700 font-mono"
-                                maxLength={4}
+                                className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 text-white text-center text-lg tracking-widest py-4 px-3 rounded-lg outline-none transition-all placeholder:tracking-normal placeholder:text-slate-700 font-mono"
+                                maxLength={128}
                                 disabled={submitting}
                                 autoFocus
                             />
@@ -100,8 +130,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
 
                     <div className="mt-8 text-center border-t border-slate-800 pt-6">
                         <p className="text-slate-600 text-[10px] uppercase tracking-widest">
-                            Authorized Personnel Only <br />
-                            IP Logged: {typeof window !== 'undefined' ? '127.0.0.1' : ''}
+                            Authorized Personnel Only • Session Audit Active
                         </p>
                     </div>
                 </div>

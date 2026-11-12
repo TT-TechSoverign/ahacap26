@@ -36,9 +36,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
                 const utmMedium = params.get('utm_medium');
                 const utmCampaign = params.get('utm_campaign');
 
-                if (utmSource) safeStorage.setItem('utm_source', utmSource, 'session');
-                if (utmMedium) safeStorage.setItem('utm_medium', utmMedium, 'session');
-                if (utmCampaign) safeStorage.setItem('utm_campaign', utmCampaign, 'session');
+                if (utmSource) safeStorage.setItem('utm_source', utmSource.slice(0, 120), 'session');
+                if (utmMedium) safeStorage.setItem('utm_medium', utmMedium.slice(0, 120), 'session');
+                if (utmCampaign) safeStorage.setItem('utm_campaign', utmCampaign.slice(0, 120), 'session');
             }
         } catch (e) {
             // Silently ignore in restricted private browsing environments

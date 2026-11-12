@@ -8,10 +8,14 @@ from database import Base
 import models
 from datetime import datetime
 
-# Use environment variable if available (Docker), else localhost (Local)
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://user:password@localhost:5432/ahac_db")
+from dotenv import load_dotenv
+load_dotenv()
 
-engine = create_async_engine(DATABASE_URL, echo=True)
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set.")
+
+engine = create_async_engine(DATABASE_URL, echo=False)
 AsyncSessionLocal = sessionmaker(
     bind=engine,
     class_=AsyncSession,

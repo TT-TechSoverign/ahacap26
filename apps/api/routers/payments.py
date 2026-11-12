@@ -1,18 +1,18 @@
-from fastapi import APIRouter, HTTPException, Body, Request
+from fastapi import APIRouter, Depends, HTTPException, Body, Request
 from pydantic import BaseModel, Field
 from domain import payments
 from cache import check_rate_limit
-from dependencies import get_client_ip
+from dependencies import get_client_ip, verify_admin_token
 import logging
 
 logger = logging.getLogger("api.payments")
 router = APIRouter()
 
 class PaymentIntentRequest(BaseModel):
-    amount: int = Field(..., gt=0, le=50_000_00)
+    amount: int = Field(..., ge=50, le=50_000_00)
     idempotencyKey: str = Field(..., min_length=8, max_length=128)
 
-@router.post("/create-intent")
+@router.post("/create-intent", dependencies=[Depends(verify_admin_token)])
 async def create_payment_intent(request: Request, payload: PaymentIntentRequest):
     ip = get_client_ip(request)
     if not await check_rate_limit(ip, "payments", limit=10, period=3600):

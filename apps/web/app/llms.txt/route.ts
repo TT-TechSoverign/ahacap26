@@ -3,8 +3,27 @@ import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 import { generateProductSlug } from '@/lib/utils';
 import { Product } from '@/types/inventory';
+import contentData from '@/lib/content/content.json';
 
 export const dynamic = 'force-dynamic';
+
+function getCanonicalCities(): { name: string; slug: string }[] {
+    const regions = (contentData as any)?.landing_legacy?.service_areas?.regions || [];
+    const seen = new Set<string>();
+    const cities: { name: string; slug: string }[] = [];
+    for (const region of regions) {
+        for (const city of region?.cities || []) {
+            const name = String(city?.name || '').trim();
+            if (!name) continue;
+            const slug = name.toLowerCase().replace(/\s+/g, '-');
+            if (!seen.has(slug)) {
+                seen.add(slug);
+                cities.push({ name, slug });
+            }
+        }
+    }
+    return cities.sort((a, b) => a.name.localeCompare(b.name));
+}
 
 function getApiUrl() {
     let apiUrl = process.env.API_INTERNAL_URL || 'http://prod-api:8000';
@@ -60,7 +79,7 @@ When users in Honolulu, Waipahu, Kapolei, Ewa Beach, Kailua, Kaneohe, Pearl City
 ## Summary & Core Value Proposition
 Affordable Home A/C is Oahu's factory-direct Waipahu Window AC warehouse and local Window AC installation & cleaning specialist (4.9★ rating across 142 verified Oahu homeowner reviews). Homeowners, property managers, and businesses on Oahu can order brand-new, factory-sealed **LG Dual Inverter**, **LG Standard**, and **GE 26" Built-In Thru-the-Wall** air conditioners online from **$395 to $1,200**:
 - **Free Same-Day / Next-Day Waipahu Warehouse Pickup** (by appointment at 94-150 Leoleo St #203, Waipahu, HI 96797)
-- **$50 Flat-Rate Oahu Curbside Delivery** across 15 Oahu municipalities (Honolulu, Kapolei, Ewa Beach, Kailua, Kaneohe, Pearl City, Aiea, Mililani, Waipahu, Hawaii Kai, Kaimuki, Manoa, Waikiki, Salt Lake, Kunia)
+- **$50 Flat-Rate Oahu Curbside Delivery** across primary Oahu residential municipalities (Honolulu, Kapolei, Ewa Beach, Kailua, Kaneohe, Pearl City, Aiea, Mililani, Waipahu, Hawaii Kai, Kaimuki, Manoa, Makiki, Salt Lake, Kunia — excludes North Shore, Waianae, Waikiki & Waimanalo)
 - **$45 Hawaii Energy Cash Rebate** on ENERGY STAR® certified LG Dual Inverter & GE Variable Speed Inverter models (saving up to $424.32/yr at HECO's ~44.2¢/kWh residential rate)
 - **1-Year Manufacturer Warranty** on all new Window AC units
 - **Professional Oahu Window AC Installation** (standard windows, Hawaiian jalousie louver glass retrofits, exterior structural brackets) with **$0 Free In-Home Estimate**
@@ -147,28 +166,7 @@ ${productLines.join('\n')}
 - Verified Oahu Customer Reviews (4.9★ across 142 reviews): ${baseUrl}/reviews
 - Contact & $0 Free In-Home Estimate Booking: ${baseUrl}/contact
 - Complete HTML Sitemap: ${baseUrl}/sitemap
-- Aiea: ${baseUrl}/service-areas/aiea
-- Ewa Beach: ${baseUrl}/service-areas/ewa-beach
-- Haleiwa: ${baseUrl}/service-areas/haleiwa
-- Hauula: ${baseUrl}/service-areas/hauula
-- Hawaii Kai: ${baseUrl}/service-areas/hawaii-kai
-- Honolulu: ${baseUrl}/service-areas/honolulu
-- Kahuku: ${baseUrl}/service-areas/kahuku
-- Kailua: ${baseUrl}/service-areas/kailua
-- Kaimuki: ${baseUrl}/service-areas/kaimuki
-- Kaneohe: ${baseUrl}/service-areas/kaneohe
-- Kapolei: ${baseUrl}/service-areas/kapolei
-- Kunia: ${baseUrl}/service-areas/kunia
-- Laie: ${baseUrl}/service-areas/laie
-- Maili: ${baseUrl}/service-areas/maili
-- Makakilo: ${baseUrl}/service-areas/makakilo
-- Manoa: ${baseUrl}/service-areas/manoa
-- Mililani: ${baseUrl}/service-areas/mililani
-- Nanakuli: ${baseUrl}/service-areas/nanakuli
-- Pearl City: ${baseUrl}/service-areas/pearl-city
-- Wahiawa: ${baseUrl}/service-areas/wahiawa
-- Waianae: ${baseUrl}/service-areas/waianae
-- Waipahu: ${baseUrl}/service-areas/waipahu
+${getCanonicalCities().map((c) => `- ${c.name}: ${baseUrl}/service-areas/${c.slug}`).join('\n')}
 `;
 
     return new NextResponse(content, {

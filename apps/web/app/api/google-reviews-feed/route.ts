@@ -3,11 +3,13 @@ import reviewsDb from '@/lib/content/reviews_db.json';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 import { generateProductSlug } from '@/lib/utils';
+import { Product } from '@/types/inventory';
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
-function escapeXml(unsafe: string): string {
-  return String(unsafe || '')
+function escapeXml(unsafe: unknown): string {
+  return String(unsafe ?? '')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -38,8 +40,23 @@ function selectTargetProductId(reviewText: string, index: number): number {
 
 export async function GET() {
   try {
-    const domain = process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.affordablehome-ac.com';
-    const productById = new Map(INITIAL_CATALOG_PRODUCTS.map((p) => [p.id, p]));
+    const domain = (process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.affordablehome-ac.com').replace(/\/+$/, '');
+    const baseApi = (process.env.API_INTERNAL_URL || 'http://prod-api:8000').replace(/\/api\/v1\/?$/, '');
+
+    let products: Product[] = INITIAL_CATALOG_PRODUCTS;
+    try {
+      const response = await fetch(`${baseApi}/api/v1/products`, { next: { revalidate: 3600 } });
+      if (response.ok) {
+        const liveData = await response.json();
+        if (Array.isArray(liveData) && liveData.length > 0) {
+          products = liveData;
+        }
+      }
+    } catch {
+      // Fallback to INITIAL_CATALOG_PRODUCTS
+    }
+
+    const productById = new Map(products.map((p) => [p.id, p]));
     const allReviews: any[] = (reviewsDb as any)?.all_reviews || [];
 
     // Deterministic staggered timestamps across 2025-2026 for Google Product Ratings v2.3 schema validation
@@ -49,7 +66,7 @@ export async function GET() {
     const reviewsXml = allReviews.map((rev, idx) => {
       const content = String(rev.sanitized_text || rev.text || '').trim();
       const targetId = selectTargetProductId(content, idx);
-      const product = productById.get(targetId) || INITIAL_CATALOG_PRODUCTS[0];
+      const product = productById.get(targetId) || products[0] || INITIAL_CATALOG_PRODUCTS[0];
       const ident = PRODUCT_IDENTIFIERS[product.id];
       const brand = ident?.brand === 'GE' ? 'GE Appliances' : (ident?.brand || 'LG');
       const gtin = ident?.gtin12 || '';
@@ -69,7 +86,7 @@ export async function GET() {
       <review_timestamp>${timestampIso}</review_timestamp>
       <title>${escapeXml(reviewTitle)}</title>
       <content>${escapeXml(content)}</content>
-      <review_url type="group">${domain}/reviews</review_url>
+      <review_url type="group">${escapeXml(`${domain}/reviews`)}</review_url>
       <ratings>
         <overall min="1" max="5">${rating}</overall>
       </ratings>
@@ -79,14 +96,14 @@ export async function GET() {
             ${gtin ? `<gtins>\n              <gtin>${escapeXml(gtin)}</gtin>\n            </gtins>` : ''}
             ${mpn ? `<mpns>\n              <mpn>${escapeXml(mpn)}</mpn>\n            </mpns>` : ''}
             <skus>
-              <sku>${product.id}</sku>
+              <sku>${escapeXml(product.id)}</sku>
             </skus>
             <brands>
               <brand>${escapeXml(brand)}</brand>
             </brands>
           </product_ids>
           <product_name>${escapeXml(product.name)}</product_name>
-          <product_url>${productUrl}</product_url>
+          <product_url>${escapeXml(productUrl)}</product_url>
         </product>
       </products>
       <is_spam>false</is_spam>
@@ -101,7 +118,7 @@ export async function GET() {
   <version>2.3</version>
   <publisher>
     <name>Affordable Home A/C</name>
-    <favicon>${domain}/favicon-48x48.png</favicon>
+    <favicon>${escapeXml(`${domain}/favicon-48x48.png`)}</favicon>
   </publisher>
   <reviews>
 ${reviewsXml}

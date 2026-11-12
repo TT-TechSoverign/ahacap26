@@ -77,7 +77,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "supervisor": "Sovereign Master Orchestrator",
         "mandate": "Enforce zero-trust architecture, SHA-256 HMAC authentication, air-tight local perimeter isolation, pre-push secret scrubbing, storefront /admin Command Deck isolation (zero internal Dev OS or CRM links), and CEO Email Shield routing.",
         "token_efficiency_policy": "Event-driven execution. Telemetry sanitized of all PII before streaming. No autonomous outbound network calls.",
-        "oahu_grounding": "Hawaii business compliance protection (Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005), customer PII masking, production admin routing to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC, and air-tight local workstation isolation.",
+        "oahu_grounding": "Hawaii business compliance protection (Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005), customer PII masking, production admin routing to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC, and air-tight local workstation isolation.",
         "inputs": [
             "Active session tokens",
             "Git pre-push audit logs",
@@ -100,7 +100,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 3,
                 "title": "CEO Email Shield & PII Compliance",
-                "description": "Trigger agent_compliance_auditor to verify production notifications route to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC (and staging shield exclusively to irasmussenjobs@gmail.com).",
+                "description": "Trigger agent_compliance_auditor to verify production notifications route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC (and staging shield exclusively to DEV_BCC_EMAIL (Audit / Staging Shield)).",
                 "verification": "Email routing & PII masking 100% compliant."
             },
             {
@@ -232,7 +232,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 1,
                 "title": "Dispatch Queue & Email Routing Ingest",
-                "description": "Trigger agent_crm_dispatch to inspect new lead records, enforce By-Appointment-First contact, and confirm brian@affordablehome-ac.com primary dispatch notifications.",
+                "description": "Trigger agent_crm_dispatch to inspect new lead records, enforce By-Appointment-First contact, and confirm CEO_NOTIFICATION_EMAIL (Primary) primary dispatch notifications.",
                 "verification": "All new leads flagged for phone contact before truck roll."
             },
             {
@@ -733,7 +733,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "Regulatory & Audit Compliance Auditor",
         "domain": "Security",
         "supervisor": "submaster_security_compliance",
-        "mandate": "Verify audit trail immutability, customer PII masking, production admin email routing to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC, staging CEO Email Shield, and Hawaii business compliance.",
+        "mandate": "Verify audit trail immutability, customer PII masking, production admin email routing to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC, staging CEO Email Shield, and Hawaii business compliance.",
         "token_efficiency_policy": "Runs single SQL aggregation query on dev_os_audit_log and inspects email routing config; completes in < 3ms.",
         "oahu_grounding": "Hawaii business standards (Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005), floor drop-cloth mandate, and CEO email routing.",
         "inputs": [
@@ -751,7 +751,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 2,
                 "title": "CEO Email Routing & Staging Shield Check",
-                "description": "Verify production notifications route to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC, and non-production routes exclusively to irasmussenjobs@gmail.com.",
+                "description": "Verify production notifications route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC, and non-production routes exclusively to DEV_BCC_EMAIL (Audit / Staging Shield).",
                 "verification": "Email routing & staging shield verified."
             },
             {
@@ -1273,7 +1273,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
         "title": "CRM Dispatch & Technician Queue Agent",
         "domain": "Operations",
         "supervisor": "submaster_crm_operations",
-        "mandate": "Manage incoming Window AC service requests, technician dispatch queues, Waipahu warehouse pickup staging, and By-Appointment-First customer contact with brian@affordablehome-ac.com primary notifications.",
+        "mandate": "Manage incoming Window AC service requests, technician dispatch queues, Waipahu warehouse pickup staging, and By-Appointment-First customer contact with CEO_NOTIFICATION_EMAIL (Primary) primary notifications.",
         "token_efficiency_policy": "Direct SQLAlchemy query on leads table with status index; execution time < 5ms.",
         "oahu_grounding": "Oahu-wide technician dispatch covering Honolulu, Leeward, Central, and Windward zones from Waipahu headquarters.",
         "inputs": [
@@ -1297,7 +1297,7 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
             {
                 "step": 3,
                 "title": "Waipahu Warehouse Pickup & Email Audit",
-                "description": "Track customer pickup orders at Waipahu warehouse (94-150 Leoleo St #203) and confirm dispatch alerts route to brian@affordablehome-ac.com with irasmussenjobs@gmail.com BCC.",
+                "description": "Track customer pickup orders at Waipahu warehouse (94-150 Leoleo St #203) and confirm dispatch alerts route to CEO_NOTIFICATION_EMAIL (Primary) with DEV_BCC_EMAIL (Audit / Staging Shield) BCC.",
                 "verification": "Same-day pickup staging and email routing maintained."
             }
         ],

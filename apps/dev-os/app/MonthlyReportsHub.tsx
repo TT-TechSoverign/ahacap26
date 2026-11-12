@@ -200,7 +200,7 @@ export default function MonthlyReportsHub({ onLog, onInspectAgent }: MonthlyRepo
     const handleDownload = (report: MonthlyReport, fileType: 'docx' | 'html' | 'md') => {
         onLog?.(`[Sub-Master 10] Downloading ${report.month} ${report.year} (${fileType})...`);
         const url = `/api/v1/dev-os/reports/download?month=${encodeURIComponent(report.month)}&year=${encodeURIComponent(report.year)}&file_type=${fileType}`;
-        window.open(url, '_blank');
+        window.open(url, '_blank', 'noopener,noreferrer');
     };
 
     const runSpecializedAgent = async (agentId: string) => {
@@ -623,6 +623,8 @@ export default function MonthlyReportsHub({ onLog, onInspectAgent }: MonthlyRepo
                             {previewFormat === 'html' ? (
                                 <iframe
                                     srcDoc={previewContent}
+                                    sandbox=""
+                                    referrerPolicy="no-referrer"
                                     title="Report Preview"
                                     className="h-full w-full rounded-xl border border-slate-800 bg-white"
                                 />

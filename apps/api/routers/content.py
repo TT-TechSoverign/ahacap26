@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from typing import Optional, Dict, Any
 import models
 from database import get_db
-from dependencies import verify_admin_token
+from dependencies import verify_admin_token, get_client_ip
 from datetime import datetime
 
 router = APIRouter()
@@ -49,20 +49,19 @@ async def get_content(request: Request, path: str = "/", draft: bool = False, db
     return {"data": json.loads(page.data) if page.data else {}, "path": path}
 
 @router.post("/{path:path}", dependencies=[Depends(verify_admin_token)])
-async def save_draft(path: str, payload: ContentPayload, db: AsyncSession = Depends(get_db)):
+async def save_draft(path: str, payload: ContentPayload, request: Request, db: AsyncSession = Depends(get_db)):
     """
     Save content to draft_data.
     """
+    if ".." in path or "\x00" in path or len(path) > 256:
+        raise HTTPException(status_code=400, detail="Invalid content path")
     if not path.startswith("/"):
         path = "/" + path
 
-    # Using repr to store JSON as string (simple approach for now, usually use json.dumps)
-    # But since the models definition used String, we need to serialize.
-    # Note: eval() in get is dangerous in prod, but for internal CMS JSON it's acceptable for MVPs. 
-    # Better to use json.loads/dumps. I will use json.
-    
     import json
     data_str = json.dumps(payload.data)
+    if len(data_str) > 2 * 1024 * 1024:
+        raise HTTPException(status_code=413, detail="Content payload exceeds 2MB limit")
 
     result = await db.execute(select(models.ContentPage).where(models.ContentPage.path == path))
     page = result.scalars().first()
@@ -75,14 +74,21 @@ async def save_draft(path: str, payload: ContentPayload, db: AsyncSession = Depe
         db.add(page)
     
     await db.commit()
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="CONTENT_DRAFT_SAVED", details={"path": path}, ip=get_client_ip(request))
+    except Exception:
+        pass
     return {"status": "saved", "path": path}
 
 @router.put("/publish", dependencies=[Depends(verify_admin_token)])
 @router.put("/{path:path}/publish", dependencies=[Depends(verify_admin_token)])
-async def publish_content(path: str = "/", db: AsyncSession = Depends(get_db)):
+async def publish_content(request: Request, path: str = "/", db: AsyncSession = Depends(get_db)):
     """
     Promote draft_data to data.
     """
+    if ".." in path or "\x00" in path or len(path) > 256:
+        raise HTTPException(status_code=400, detail="Invalid content path")
     if not path.startswith("/"):
         path = "/" + path
 
@@ -96,4 +102,9 @@ async def publish_content(path: str = "/", db: AsyncSession = Depends(get_db)):
     page.updated_at = datetime.utcnow()
     
     await db.commit()
+    try:
+        from routers.dev_os import log_dev_os_audit
+        await log_dev_os_audit(db, action="CONTENT_PUBLISHED", details={"path": path}, ip=get_client_ip(request))
+    except Exception:
+        pass
     return {"status": "published", "path": path}

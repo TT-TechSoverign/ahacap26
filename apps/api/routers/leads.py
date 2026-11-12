@@ -40,7 +40,6 @@ class LeadCreate(BaseModel):
     service: Optional[str] = Field(default=None, max_length=200)
     urgency: Optional[str] = Field(default="standard", max_length=50)
     notes: Optional[str] = Field(default=None, max_length=4000)
-    is_test: Optional[bool] = False
     website_url: Optional[str] = Field(default=None, max_length=200)  # Invisible bot honeypot
 
 @router.post("", status_code=201, include_in_schema=False)

@@ -569,18 +569,18 @@ export default async function ProductLayout({ params, children }: Props) {
             {/* Inject JSON-LD Product Schema */}
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
             />
             {/* Inject JSON-LD Breadcrumb Schema */}
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }}
             />
             {/* Inject JSON-LD FAQPage Schema */}
             {faqs.length > 0 && (
                 <script
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }}
                 />
             )}
             {/* Render the Client Component Page */}

@@ -87,7 +87,7 @@ export default function AcDiagnosticPage() {
                     </h1>
 
                     <p className="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-                        No mystery quotes, surprise travel fees, or pushy sales tactics. Our experienced HVAC technicians perform complete electrical, thermal, and mechanical troubleshooting on window air conditioners for a clear <span className="text-white font-bold">$0 Free Estimate flat rate</span>.
+                        No mystery quotes, surprise travel fees, or pushy sales tactics. Our experienced HVAC technicians perform complete electrical, thermal, and mechanical troubleshooting on window air conditioners with a clear <span className="text-white font-bold">$0 Free In-Home Estimate and upfront itemized quote</span>.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

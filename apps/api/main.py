@@ -39,6 +39,7 @@ from database import engine, Base, AsyncSessionLocal
 import models
 from services import email as email_service
 from cache import init_redis, close_redis, check_rate_limit
+from dependencies import is_deployed_env
 from middleware import LogSanitizerMiddleware, ChaosMiddleware, HeaderMiddleware
 from routers import catalog, payments
 
@@ -74,12 +75,7 @@ async def lifespan(app: FastAPI):
     await close_redis()
     await engine.dispose()
 
-_startup_db_url = os.getenv("DATABASE_URL", "")
-_disable_public_api_docs = (
-    "db:" in _startup_db_url
-    or "staging-db:" in _startup_db_url
-    or "prod-db:" in _startup_db_url
-)
+_disable_public_api_docs = is_deployed_env()
 
 app = FastAPI(
     lifespan=lifespan,
@@ -101,11 +97,8 @@ async def global_exception_handler(request: Request, exc: Exception):
     tb = traceback.format_exc()
     print(f"GLOBAL ERROR: {error_msg}\n{tb}")
     
-    # Hide details in production/staging environments
-    database_url = os.getenv("DATABASE_URL", "")
-    is_prod_or_staging = "db:" in database_url or "staging-db:" in database_url or "prod-db:" in database_url
-    
-    if is_prod_or_staging:
+    # Hide details in production/staging environments (fail-closed)
+    if is_deployed_env():
         return JSONResponse(
             status_code=500,
             content={"message": "Internal Server Error"}
@@ -230,14 +223,20 @@ async def process_stripe_event(event: dict, payload_data: dict):
             stripe_pid = obj['id']
             receipt_email = obj.get('receipt_email')
             amount_received = obj.get('amount_received')
-            metadata = obj.get('metadata', {})
+            metadata = obj.get('metadata') or {}
+            if metadata.get('source') == 'crm' or metadata.get('invoice_id'):
+                print(f"Skipping CRM payment_intent.succeeded ({stripe_pid}) in storefront webhook.")
+                return
             
         elif event['type'] == 'checkout.session.completed':
             stripe_pid = obj.get('payment_intent')
             # Extract main email
-            receipt_email = obj.get('customer_details', {}).get('email')
+            receipt_email = (obj.get('customer_details') or {}).get('email')
             amount_received = obj.get('amount_total')
-            metadata = obj.get('metadata', {})
+            metadata = obj.get('metadata') or {}
+            if metadata.get('source') == 'crm' or metadata.get('invoice_id'):
+                print(f"Skipping CRM checkout.session.completed ({stripe_pid}) in storefront webhook.")
+                return
             
             # Extract GA4 Pipeline Data
             total_details = obj.get('total_details', {})
@@ -278,9 +277,13 @@ async def process_stripe_event(event: dict, payload_data: dict):
 
         if stripe_pid:
             try:
-                # Expand payment_method to get card details
-                pi_obj = stripe.PaymentIntent.retrieve(stripe_pid, expand=['payment_method'])
+                # Expand payment_method to get card details without blocking event loop
+                pi_obj = await asyncio.to_thread(stripe.PaymentIntent.retrieve, stripe_pid, expand=['payment_method'])
                 pi = pi_obj.to_dict() if hasattr(pi_obj, 'to_dict') else dict(pi_obj)
+                pi_meta = pi.get('metadata') or {}
+                if pi_meta.get('source') == 'crm' or pi_meta.get('invoice_id'):
+                    print(f"Skipping CRM PaymentIntent ({stripe_pid}) in storefront webhook.")
+                    return
                 
                 if pi.get('payment_method'):
                     pm = pi.get('payment_method')
@@ -297,9 +300,12 @@ async def process_stripe_event(event: dict, payload_data: dict):
         if stripe_pid:
             fulfillment_mode = metadata.get('fulfillment_mode', 'pickup')
             print(f"Processing Payment Success: {stripe_pid} | Mode: {fulfillment_mode}")
+            should_dispatch_notifications = False
 
             async with AsyncSessionLocal() as session:
-                result = await session.execute(select(models.Order).where(models.Order.stripe_pid == stripe_pid))
+                result = await session.execute(
+                    select(models.Order).where(models.Order.stripe_pid == stripe_pid).with_for_update()
+                )
                 order = result.scalars().first()
 
                 # --- AUTO-CREATE LOGIC ---
@@ -323,8 +329,17 @@ async def process_stripe_event(event: dict, payload_data: dict):
                         created_at=datetime.utcnow()
                     )
                     session.add(order)
-                    await session.commit()
-                    print(f"Created/Recovered Order {new_order_id} from Webhook.")
+                    try:
+                        await session.commit()
+                        print(f"Created/Recovered Order {new_order_id} from Webhook.")
+                    except Exception:
+                        await session.rollback()
+                        result = await session.execute(
+                            select(models.Order).where(models.Order.stripe_pid == stripe_pid).with_for_update()
+                        )
+                        order = result.scalars().first()
+                        if not order:
+                            raise
 
                 # 1. Update Status to PAID if not already set
                 if order.status != models.OrderStatus.PAID:
@@ -338,7 +353,7 @@ async def process_stripe_event(event: dict, payload_data: dict):
                     if not order.utm_campaign:
                         order.utm_campaign = metadata.get('utm_campaign')
 
-                # 2. Enrich, deduct stock, and trigger GA4 on checkout.session.completed (Always runs, avoiding race condition skips)
+                # 2. Enrich, deduct stock, and trigger GA4 on checkout.session.completed (Idempotently locked)
                 if event['type'] == 'checkout.session.completed':
                     order.customer_email = customer_info.get('email', order.customer_email)
                     order.customer_name = customer_info.get('name', order.customer_name)
@@ -352,15 +367,18 @@ async def process_stripe_event(event: dict, payload_data: dict):
                     if items_data and not order.items_json:
                         order.items_json = json.dumps(items_data)
                     
-                    # Idempotency lock for stock deduction
+                    # Idempotency lock for stock deduction + GA4 + confirmation email
                     if not order.inventory_deducted:
                         order.inventory_deducted = True
+                        should_dispatch_notifications = True
                         from routers.catalog import persist_product_changes, serialize_product_seed_dict
                         for item in items_data:
                             p_id = item.get("product_id")
                             qty = item.get("quantity", 0)
                             if p_id and qty > 0:
-                                db_product = await session.execute(select(models.Product).where(models.Product.id == p_id))
+                                db_product = await session.execute(
+                                    select(models.Product).where(models.Product.id == p_id).with_for_update()
+                                )
                                 p_obj = db_product.scalar_one_or_none()
                                 if p_obj:
                                     p_obj.stock = max(0, p_obj.stock - qty)
@@ -368,8 +386,7 @@ async def process_stripe_event(event: dict, payload_data: dict):
                                     persist_product_changes(p_dict)
                                     print(f"Deducted {qty} from Product {p_id}. New stock: {p_obj.stock}")
 
-                    # Trigger GA4 Purchase Event async within the Idempotency Lock
-                    if ga_client_id:
+                    if should_dispatch_notifications and ga_client_id:
                         print(f"Triggering GA4 Pipeline for Order {order.id}")
                         asyncio.create_task(
                             fire_ga4_purchase_event(
@@ -386,13 +403,21 @@ async def process_stripe_event(event: dict, payload_data: dict):
                 await session.commit()
                 print(f"Order {order.id} marked as PAID with comprehensive details.")
 
-                # ONLY send confirmation email on Checkout Session completion (contains items & customer info)
-                if event['type'] == 'checkout.session.completed':
+                # ONLY send confirmation email once per order on Checkout Session completion
+                if event['type'] == 'checkout.session.completed' and should_dispatch_notifications:
+                    already_emailed = False
+                    try:
+                        from cache import redis_client
+                        if redis_client:
+                            claimed = await redis_client.set(f"email_sent:order:{order.id}", "1", nx=True, ex=86400)
+                            if not claimed:
+                                already_emailed = True
+                    except Exception:
+                        pass
+
                     target_email = order.customer_email or receipt_email
-                    if target_email:
+                    if target_email and not already_emailed:
                         print(f"Dispatching email to {email_service.mask_email(target_email)} via Checkout Session...")
-                        
-                        # Call updated service with new args
                         try:
                             await email_service.send_order_confirmation(
                                 target_email, 
@@ -408,10 +433,12 @@ async def process_stripe_event(event: dict, payload_data: dict):
                             print(f"❌ FATAL: Email Pipeline failed permanently after all retries for order {order.id}: {e}")
                             import traceback
                             traceback.print_exc()
+                    elif already_emailed:
+                        print(f"Skipping duplicate order confirmation email for {order.id} (Redis lock active).")
                     else:
                         print("No email found for order confirmation.")
                 else:
-                     print(f"Skipping email dispatch for {event['type']} (Wait for checkout.session.completed)")
+                    print(f"Skipping email dispatch for {event['type']} (already notified or awaiting checkout.session.completed)")
     except Exception as e:
         print(f"CRITICAL: Webhook Processing Error: {e}")
         import traceback
@@ -493,8 +520,7 @@ async def admin_login(payload: dict, request: Request, db: AsyncSession = Depend
     from dependencies import create_signed_token
     signed_token = create_signed_token("admin")
     response = JSONResponse(content={"token": f"Bearer {signed_token}"})
-    database_url = os.getenv("DATABASE_URL", "")
-    is_prod_or_staging = "db:" in database_url or "staging-db:" in database_url or "prod-db:" in database_url
+    is_prod_or_staging = is_deployed_env()
     
     response.set_cookie(
         key="admin_session",

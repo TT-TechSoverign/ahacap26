@@ -142,9 +142,12 @@ class VendorInvoice(Base):
 
 class AdminUser(Base):
     __tablename__ = "admin_users"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(String, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
+    password_hash = Column(String, nullable=True)
+    hashed_password = Column(String, nullable=True)
+    role = Column(String, default="superadmin")
+    name = Column(String, default="")
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 

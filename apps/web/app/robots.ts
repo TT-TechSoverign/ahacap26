@@ -1,8 +1,17 @@
 import { MetadataRoute } from 'next';
+import { headers } from 'next/headers';
+
+export const dynamic = 'force-dynamic';
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com';
-    const isStaging = baseUrl.includes('staging');
+    const reqHeaders = headers();
+    const host = (reqHeaders.get('x-forwarded-host') || reqHeaders.get('host') || '').toLowerCase();
+    const baseUrl = (process.env.NEXT_PUBLIC_URL || 'https://www.affordablehome-ac.com').replace(/\/+$/, '');
+    const envName = (process.env.ENVIRONMENT || '').toLowerCase();
+    const isStaging =
+        envName === 'staging' ||
+        host.includes('staging.') ||
+        baseUrl.includes('staging.');
 
     if (isStaging) {
         return {
@@ -10,9 +19,8 @@ export default function robots(): MetadataRoute.Robots {
                 {
                     userAgent: '*',
                     disallow: '/',
-                }
+                },
             ],
-            sitemap: `${baseUrl}/sitemap.xml`,
         };
     }
 
@@ -30,6 +38,8 @@ export default function robots(): MetadataRoute.Robots {
         '/api/v1/*',
         '/api/checkout',
         '/api/revalidate',
+        '/api/indexnow',
+        '/api/puck',
         '/create-checkout-session',
         '/checkout',
         '/checkout/',

@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import redis.asyncio as redis
 from functools import wraps
@@ -8,6 +9,9 @@ from fastapi.encoders import jsonable_encoder
 # Redis Client Singleton
 redis_client: Optional[redis.Redis] = None
 
+def _mask_redis_url(url: str) -> str:
+    return re.sub(r"://([^:@/]*):([^@/]+)@", r"://\1:***@", url or "")
+
 async def init_redis():
     """Initialize Redis connection"""
     global redis_client
@@ -16,9 +20,9 @@ async def init_redis():
         try:
             redis_client = redis.from_url(redis_url, encoding="utf-8", decode_responses=True)
             await redis_client.ping()
-            print("Accessing Redis at " + redis_url)
+            print("Accessing Redis at " + _mask_redis_url(redis_url))
         except Exception as e:
-            print(f"Redis Connection Failed: {e}")
+            print(f"Redis Connection Failed: {type(e).__name__}")
             redis_client = None
 
 async def close_redis():
@@ -88,21 +92,21 @@ async def invalidate_cache(key_pattern: str):
 
 async def check_rate_limit(ip: str, key_prefix: str, limit: int, period: int) -> bool:
     """
-    IP-based rate limiter using Redis
+    Atomic IP-based rate limiter using Redis INCR + EXPIRE with TTL self-healing.
     """
     global redis_client
     if not redis_client:
         return True
     key = f"rate_limit:{key_prefix}:{ip}"
     try:
-        count = await redis_client.get(key)
-        if count is not None and int(count) >= limit:
-            return False
-        if count is None:
-            await redis_client.set(key, 1, ex=period)
+        current = await redis_client.incr(key)
+        if current == 1:
+            await redis_client.expire(key, period)
         else:
-            await redis_client.incr(key)
-        return True
+            ttl = await redis_client.ttl(key)
+            if ttl == -1:
+                await redis_client.expire(key, period)
+        return int(current) <= limit
     except Exception as e:
-        print(f"Rate Limiter Error: {e}")
+        print(f"Rate Limiter Error: {type(e).__name__}")
         return True

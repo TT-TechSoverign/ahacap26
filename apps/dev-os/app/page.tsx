@@ -239,7 +239,7 @@ export default function DevOsEagleEyePage() {
     const fetchAllData = useCallback(async () => {
         if (!isAuthenticated) return;
         try {
-            const [treeRes, ordRes, finRes, infRes, telRes, croRes, audRes, brainRes, sopsRes, gscRes, recRes, pagesRes] = await Promise.all([
+            const [treeRes, ordRes, finRes, infRes, telRes, croRes, audRes, brainRes, timelineRes, sopsRes, gscRes, recRes, pagesRes] = await Promise.all([
                 fetch('/api/v1/dev-os/agents/tree').then(r => r.ok ? r.json() : null),
                 fetch('/api/v1/dev-os/orders').then(r => r.ok ? r.json() : null),
                 fetch('/api/v1/dev-os/financials').then(r => r.ok ? r.json() : null),
@@ -271,13 +271,13 @@ export default function DevOsEagleEyePage() {
             if (croRes) setCroData(croRes);
             if (audRes?.logs) setAuditLogs(audRes.logs);
             if (brainRes?.brain) setBrainData(brainRes.brain);
-            if (brainRes?.timeline || treeRes?.timeline) setTimelineData(brainRes?.timeline || treeRes?.timeline);
+            if (timelineRes?.timeline || brainRes?.timeline || treeRes?.timeline) {
+                setTimelineData(timelineRes?.timeline || brainRes?.timeline || treeRes?.timeline);
+            }
             if (sopsRes?.sops) setSops(prev => ({ ...prev, ...sopsRes.sops }));
             if (gscRes) setAnalyticsData(gscRes);
             if (recRes) setRecommendationsData(recRes);
             if (pagesRes) setHighIntentPagesData(pagesRes);
-            const timelineRes = await fetch('/api/v1/dev-os/brain/timeline').then(r => r.ok ? r.json() : null).catch(() => null);
-            if (timelineRes?.timeline) setTimelineData(timelineRes.timeline);
         } catch (e: any) {
             appendLog(`Data sync error: ${e.message}`);
         }
@@ -1103,7 +1103,7 @@ export default function DevOsEagleEyePage() {
                                             timeframe: "September 8-10, 2026",
                                             commit_start: "b968fa3b",
                                             commit_end: "CURRENT",
-                                            milestone: "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations, custom itemized quotes by Oahu cooling specialists, and zero upfront booking payment barriers. Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to irasmussenjobs@gmail.com. Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
+                                            milestone: "Standardized Oahu storefront pricing architecture: $0 estimates for new/replacement installations, custom itemized quotes by Oahu cooling specialists, and zero upfront booking payment barriers. Audited and validated Product JSON-LD schemas across all live products. Fixed mobile header collisions and balanced desktop navbar layout with symmetrical spacing. Completed CRM submodule overhaul (ahac-crm) with Aloha EmailComposerModal, direct SMTP dispatch, 3.5% transaction fee calibration, and automated BCC audit logging to DEV_BCC_EMAIL (Audit / Staging Shield). Connected Dev OS visual sync heartbeat and on-demand refresh capability.",
                                             impact: "Seamless lead conversion velocity, synchronized storefront & CRM pricing, and real-time Master Brain visual telemetry across sessions."
                                         }
                                     ]).map((phase: any, pIdx: number) => (
@@ -1245,7 +1245,7 @@ export default function DevOsEagleEyePage() {
                         {/* Agents Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                             {agents
-                                .filter(a => !agentFilter || a.name.toLowerCase().includes(agentFilter.toLowerCase()) || a.category.toLowerCase().includes(agentFilter.toLowerCase()) || a.id.toLowerCase().includes(agentFilter.toLowerCase()))
+                                .filter(a => !agentFilter || (a.name || '').toLowerCase().includes(agentFilter.toLowerCase()) || (a.category || '').toLowerCase().includes(agentFilter.toLowerCase()) || (a.id || '').toLowerCase().includes(agentFilter.toLowerCase()))
                                 .map(agent => (
                                     <div key={agent.id} className="flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/60 p-4 transition hover:border-cyan-500/40 hover:bg-slate-900">
                                         <div>

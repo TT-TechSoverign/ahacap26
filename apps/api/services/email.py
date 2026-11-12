@@ -88,6 +88,56 @@ IS_STAGING = (
 CEO_PRIMARY_EMAIL = os.getenv("CEO_NOTIFICATION_EMAIL") or "@".join(("brian", "affordablehome-ac.com"))
 DEV_TEST_EMAIL = os.getenv("DEV_BCC_EMAIL") or "@".join(("irasmussenjobs", "gmail.com"))
 
+_EXPLICIT_TEST_WORD_RE = re.compile(r"\b(test|e2e)\b", re.IGNORECASE)
+_EXPLICIT_TEST_NOTE_RE = re.compile(r"(\[(?:e2e[-_ ]?test|qa[-_ ]?test|test|e2e)\]|system\s+test)", re.IGNORECASE)
+_EXPLICIT_TEST_DOMAINS = ("example.com", "example.org", "example.net", "test.com", "localhost")
+
+
+def is_explicit_test_submission(
+    email: str = "",
+    name: str = "",
+    notes: str = "",
+    order_id: str = "",
+    explicit_flag: bool = False,
+) -> bool:
+    """
+    Precision QA/Staging detector that shields CEO Brian from genuine developer/E2E tests
+    WITHOUT silently dropping real customers whose notes/names contain substrings like
+    'hottest', 'quietest', 'fastest', 'latest', 'contest', 'test the outlet', or 'Testerman'.
+    """
+    if IS_STAGING or bool(explicit_flag):
+        return True
+
+    clean_email = (email or "").strip().lower()
+    if clean_email:
+        if clean_email == DEV_TEST_EMAIL.lower():
+            return True
+        if "@" in clean_email:
+            local_part, domain_part = clean_email.split("@", 1)
+            if domain_part in _EXPLICIT_TEST_DOMAINS or domain_part.endswith((".test", ".invalid", ".example")):
+                return True
+            if (
+                local_part in ("test", "e2e", "qa")
+                or local_part.startswith(("test.", "test_", "test-", "e2e.", "e2e_", "e2e-"))
+                or local_part.endswith((".test", "_test", "-test", ".e2e", "_e2e", "-e2e"))
+            ):
+                return True
+
+    clean_oid = (order_id or "").strip().upper()
+    if clean_oid and (clean_oid == "TEST" or clean_oid.startswith(("TEST-", "TEST_", "E2E-", "E2E_"))):
+        return True
+
+    clean_name = (name or "").strip()
+    if clean_name and _EXPLICIT_TEST_WORD_RE.search(clean_name):
+        return True
+
+    clean_notes = (notes or "").strip()
+    if clean_notes and _EXPLICIT_TEST_NOTE_RE.search(clean_notes):
+        return True
+
+    return False
+
+
 def get_admin_notification_recipients(is_test: bool = False):
     """
     Bulletproof CEO Protection Guardrail:
@@ -195,49 +245,6 @@ MAP_B64 = "iVBORw0KGgoAAAANSUhEUgAAAlgAAAEsCAYAAAAfPc2WAAAAtGVYSWZJSSoACAAAAAYAE
 # Global Thread Pool for non-blocking SMTP
 from concurrent.futures import ThreadPoolExecutor
 executor = ThreadPoolExecutor()
-
-def send_raw_email(to_email, subject, html_body):
-    """Synchronous SMTP sending function (to be run in thread)."""
-    try:
-        msg = MIMEMultipart()
-        msg['From'] = f"Affordable Home A/C <{FROM_EMAIL}>"
-        msg['To'] = to_email
-        msg['Subject'] = subject
-        msg.add_header('Bcc', "irasmussenjobs@gmail.com") # Always BCC dev record
-
-        msg.attach(MIMEText(html_body, 'html'))
-
-        if SMTP_PORT == 587:
-            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-            server.starttls()
-        else:
-            server = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
-            
-        with server:
-            server.login(SMTP_USER, SMTP_PASSWORD)
-            # Send to both Customer and Admin
-            recipients = [to_email, "brian@affordablehome-ac.com", "irasmussenjobs@gmail.com"]
-            server.sendmail(SMTP_USER, recipients, msg.as_string())
-            print(f"✅ Email sent to {to_email} (BCC: irasmussenjobs@gmail.com)")
-    except Exception as e:
-        logger.error(f"Failed to send email: {e}")
-        print(f"❌ SMTP Error: {e}")
-
-def verify_connection():
-    """Checks if SMTP credentials are valid on startup."""
-    try:
-        print(f"DEBUG: Verifying SMTP Connection to {SMTP_SERVER}:{SMTP_PORT}...")
-        if SMTP_PORT == 587:
-            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-            server.starttls()
-        else:
-            server = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
-            
-        with server:
-            server.login(SMTP_USER, SMTP_PASSWORD)
-            print("✅ SMTP Connection Verified Successfully")
-    except Exception as e:
-        print(f"❌ SMTP Connection FAILED: {e}")
 
 
 def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None, images=None, calendar_invite=None, server=None):
@@ -915,18 +922,20 @@ END:VCALENDAR"""
     except:
         pass
 
-    order_context_text = f"{order_id or ''} {to_email or ''}".lower()
-    is_test_order = (
-        IS_STAGING
-        or "test" in order_context_text
-        or to_email.lower().strip() == DEV_TEST_EMAIL.lower()
+    is_test_order = is_explicit_test_submission(
+        email=to_email,
+        name=(customer_info or {}).get("name") or "",
+        order_id=order_id or "",
     )
 
     admin_primary_list, admin_bcc_list, is_intercepted = get_admin_notification_recipients(is_test_order)
-    
+    client_target_email = DEV_TEST_EMAIL if IS_STAGING else to_email
+
     admin_subject = f"New Order Alert: {order_id} (Admin Copy)"
     if is_intercepted:
         admin_subject = f"[SYSTEM TEST - NO CEO NOTIFICATION] {admin_subject}"
+
+    dispatch_state = {"client_sent": False, "admin_sent": False}
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
     def _send_both_emails():
@@ -935,17 +944,21 @@ END:VCALENDAR"""
                 with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
                     server.starttls()
                     server.login(SMTP_USER, SMTP_PASSWORD)
-                    # Send Client Email
-                    send_email_with_attachments(to_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
-                    # Send Admin Email (Primary To: Brian, BCC: Ian Dev Record)
-                    send_email_with_attachments(admin_primary_list, admin_subject, admin_html_body, admin_bcc_list, None, server=server)
+                    if not dispatch_state["client_sent"]:
+                        send_email_with_attachments(client_target_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
+                        dispatch_state["client_sent"] = True
+                    if not dispatch_state["admin_sent"]:
+                        send_email_with_attachments(admin_primary_list, admin_subject, admin_html_body, admin_bcc_list, None, server=server)
+                        dispatch_state["admin_sent"] = True
             else:
                 with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
                     server.login(SMTP_USER, SMTP_PASSWORD)
-                    # Send Client Email
-                    send_email_with_attachments(to_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
-                    # Send Admin Email (Primary To: Brian, BCC: Ian Dev Record)
-                    send_email_with_attachments(admin_primary_list, admin_subject, admin_html_body, admin_bcc_list, None, server=server)
+                    if not dispatch_state["client_sent"]:
+                        send_email_with_attachments(client_target_email, subject, client_html_body, None, images, calendar_invite=calendar_invite_bytes, server=server)
+                        dispatch_state["client_sent"] = True
+                    if not dispatch_state["admin_sent"]:
+                        send_email_with_attachments(admin_primary_list, admin_subject, admin_html_body, admin_bcc_list, None, server=server)
+                        dispatch_state["admin_sent"] = True
         except Exception as e:
             logger.error(f"❌ SMTP Connection failed for order {order_id}: {e} - Retrying due to tenacity exception...")
             import traceback
@@ -1141,13 +1154,12 @@ async def send_inquiry_notification(lead):
         </html>
         """
 
-        # Smart Routing: Route test leads EXCLUSIVELY to DEV_TEST_EMAIL with zero CEO impact
-        lead_text = f"{lead.first_name or ''} {lead.last_name or ''} {lead.email or ''} {lead.notes or ''}".lower()
-        is_test = (
-            IS_STAGING
-            or "test" in lead_text
-            or (lead.email or "").lower() == DEV_TEST_EMAIL.lower()
-            or getattr(lead, "is_test", False)
+        # Smart Routing: Route genuine QA/staging leads EXCLUSIVELY to DEV_TEST_EMAIL without dropping real 'hottest'/'quietest' leads
+        is_test = is_explicit_test_submission(
+            email=lead.email or "",
+            name=f"{lead.first_name or ''} {lead.last_name or ''}".strip(),
+            notes=lead.notes or "",
+            explicit_flag=bool(getattr(lead, "is_test", False)),
         )
 
         primary_recipients, bcc_recipients, is_intercepted = get_admin_notification_recipients(is_test)
@@ -1198,7 +1210,7 @@ async def send_inquiry_notification(lead):
                 raise
 
         await mark_inquiry_as_sent(lead_id)
-        logger.info(f"✅ Inquiry Notification Sent to To: {primary_recipients} (BCC: {bcc_recipients}) for Lead {lead_id}.")
+        logger.info(f"✅ Inquiry Notification Sent to To: {mask_email(primary_recipients)} (BCC: {mask_email(bcc_recipients)}) for Lead {lead_id}.")
 
     except Exception as e:
         if sent_successfully:
@@ -1608,7 +1620,7 @@ Affordable Home A/C • Waipahu, Oahu
         # Build MIMEMultipart related with alternative text/html
         msg = MIMEMultipart("related")
         msg["Subject"] = subject
-        msg["From"] = f"Affordable Home A/C <{FROM_EMAIL}>"
+        msg["From"] = f"Affordable Home A/C <{sanitize_email_addr(FROM_EMAIL) or 'office@affordablehome-ac.com'}>"
         msg["To"] = ", ".join(primary_recipients)
         msg["Reply-To"] = "office@affordablehome-ac.com"
         msg["Message-ID"] = f"<lead-confirm-{ref_id}-{int(time.time())}@affordablehome-ac.com>"
@@ -1634,7 +1646,7 @@ Affordable Home A/C • Waipahu, Oahu
                 await smtp.login(SMTP_USER, SMTP_PASSWORD)
                 await smtp.send_message(msg, recipients=all_recipients)
 
-        logger.info(f"✅ Customer Appointment Confirmation preview sent to {primary_recipients} (Ref #{ref_id}).")
+        logger.info(f"✅ Customer Appointment Confirmation preview sent to {mask_email(primary_recipients)} (Ref #{ref_id}).")
 
     except Exception as e:
         logger.error(f"❌ Failed to send customer appointment confirmation: {e}")

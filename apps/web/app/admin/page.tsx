@@ -120,6 +120,10 @@ interface Lead {
 
 type Tab = 'inventory' | 'orders' | 'leads' | 'schedule';
 
+function sanitizeTelHref(phone?: string): string {
+    return String(phone || '').replace(/[^0-9+()-]/g, '');
+}
+
 export default function AdminPage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [pin, setPin] = useState('');
@@ -202,12 +206,43 @@ export default function AdminPage() {
         setIsAuthenticated(false);
     };
 
-    // Auto-check session on mount
+    // Verify stored admin token with backend on mount before unlocking dashboard
     useEffect(() => {
-        const token = safeStorage.getItem('admin_token', 'session');
-        if (token) {
-            setIsAuthenticated(true);
+        let cancelled = false;
+        async function verifyToken() {
+            const token = safeStorage.getItem('admin_token', 'session');
+            if (!token) {
+                if (!cancelled) setLoading(false);
+                return;
+            }
+            try {
+                const res = await fetch('/api/v1/admin/verify', {
+                    method: 'POST',
+                    headers: {
+                        Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+                    },
+                    cache: 'no-store',
+                });
+                if (!cancelled) {
+                    if (res.ok) {
+                        setIsAuthenticated(true);
+                    } else {
+                        safeStorage.removeItem('admin_token', 'session');
+                        setIsAuthenticated(false);
+                        setLoading(false);
+                    }
+                }
+            } catch {
+                if (!cancelled) {
+                    setIsAuthenticated(false);
+                    setLoading(false);
+                }
+            }
         }
+        verifyToken();
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
     const [isRefreshing, setIsRefreshing] = useState(false);
@@ -295,15 +330,12 @@ export default function AdminPage() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            refreshData();
-        }
-    }, [isAuthenticated, refreshData]);
-
-    useEffect(() => {
-        if (isAuthenticated) {
-            fetchProducts(true);
-            fetchOrders(true);
-            fetchLeads(true);
+            setLoading(true);
+            Promise.allSettled([
+                fetchProducts(true),
+                fetchOrders(true),
+                fetchLeads(true),
+            ]).finally(() => setLoading(false));
         }
     }, [isAuthenticated, fetchProducts, fetchOrders, fetchLeads]);
 
@@ -474,7 +506,7 @@ export default function AdminPage() {
                                         "w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-center text-white focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all placeholder:text-slate-700",
                                         pin.length <= 4 ? "text-xl tracking-[1em]" : "text-sm font-mono tracking-wider"
                                     )}
-                                    maxLength={64}
+                                    maxLength={128}
                                     autoFocus
                                     placeholder="••••"
                                 />
@@ -1256,7 +1288,7 @@ export default function AdminPage() {
                                                     </td>
                                                     <td className="px-6 py-5 text-right">
                                                         <div className="flex items-center justify-end gap-1.5">
-                                                            <a href={`tel:${lead.phone}`} className="size-8 bg-emerald-500/10 text-emerald-400 rounded-lg flex items-center justify-center hover:bg-emerald-500/20" title="Call Lead">
+                                                            <a href={`tel:${sanitizeTelHref(lead.phone)}`} className="size-8 bg-emerald-500/10 text-emerald-400 rounded-lg flex items-center justify-center hover:bg-emerald-500/20" title="Call Lead">
                                                                 <Phone className="size-3.5" />
                                                             </a>
                                                             <button onClick={() => setViewingLead(lead)} className="size-8 bg-white/5 text-slate-400 rounded-lg hover:bg-white/10 hover:text-white transition-all flex items-center justify-center" title="Manage Lead Ticket">
@@ -1286,7 +1318,7 @@ export default function AdminPage() {
                                                     </span>
                                                 </div>
                                                 <div className="flex items-center justify-between pt-1">
-                                                    <a href={`tel:${lead.phone}`} className="text-[10px] font-mono text-primary flex items-center gap-1">
+                                                    <a href={`tel:${sanitizeTelHref(lead.phone)}`} className="text-[10px] font-mono text-primary flex items-center gap-1">
                                                         <Phone className="size-3" /> {lead.phone}
                                                     </a>
                                                     <button onClick={() => setViewingLead(lead)} className="px-2.5 py-1 bg-white/5 hover:bg-white/10 text-white font-mono rounded text-[9px] flex items-center gap-1">
@@ -1418,7 +1450,7 @@ Created: ${new Date(lead.created_at).toLocaleString()}`;
                     {/* Quick 1-Click Action Dispatch Bar */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                         <a
-                            href={`tel:${lead.phone}`}
+                            href={`tel:${sanitizeTelHref(lead.phone)}`}
                             className="flex items-center justify-center gap-2 py-3 px-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 rounded-xl font-black text-[10px] uppercase tracking-wider transition-all"
                             title="Call Customer Immediately"
                         >
@@ -1491,7 +1523,7 @@ Created: ${new Date(lead.created_at).toLocaleString()}`;
                             </div>
                             <div className="flex items-center gap-3">
                                 <Phone className="text-slate-400 size-4 shrink-0" />
-                                <a href={`tel:${lead.phone}`} className="text-slate-300 text-xs font-mono hover:text-primary transition-colors">{lead.phone}</a>
+                                <a href={`tel:${sanitizeTelHref(lead.phone)}`} className="text-slate-300 text-xs font-mono hover:text-primary transition-colors">{lead.phone}</a>
                             </div>
                         </div>
 
@@ -1544,8 +1576,25 @@ Created: ${new Date(lead.created_at).toLocaleString()}`;
 function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order, adminFetch: any, onClose: () => void, onSave: () => void }) {
     const [status, setStatus] = useState(order.status);
     const [error, setError] = useState('');
-    const items = order.items_json ? JSON.parse(order.items_json) : [];
-    
+    let rawItems: any[] = [];
+    try {
+        if (order.items_json) {
+            const parsed = JSON.parse(order.items_json);
+            if (Array.isArray(parsed)) rawItems = parsed;
+        }
+    } catch (e) {
+        console.error("Failed to parse order items_json", e);
+    }
+
+    const isTaxLine = (it: any) => {
+        const label = String(it?.name || it?.description || '').toLowerCase();
+        return label.includes('hawaii state tax') || label.includes('general excise tax');
+    };
+    const items = rawItems.filter((it) => !isTaxLine(it));
+    const recordedTaxCents = rawItems
+        .filter(isTaxLine)
+        .reduce((acc, it) => acc + Number(it?.amount_total ?? (Number(it?.price || 0) * Number(it?.quantity || 1))), 0);
+
     // Parse the saved address JSON string if it exists
     let address = null;
     try {
@@ -1557,8 +1606,10 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
     }
 
     const total = order.total_cents / 100;
-    const getTax = (total * 0.04712 / 1.04712).toFixed(2);
-    const subtotal = (total - parseFloat(getTax)).toFixed(2);
+    const getTax = recordedTaxCents > 0
+        ? (recordedTaxCents / 100).toFixed(2)
+        : (total * 0.04712 / 1.04712).toFixed(2);
+    const subtotal = Math.max(0, total - parseFloat(getTax)).toFixed(2);
     const isPickup = order.fulfillment_mode === 'pickup';
 
     const handleUpdate = async () => {
@@ -1636,7 +1687,7 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
                                     {order.customer_phone && (
                                         <div className="flex items-center gap-3">
                                             <Phone className="text-slate-500 size-4" />
-                                            <a href={`tel:${order.customer_phone}`} className="text-slate-300 text-xs font-mono hover:text-primary transition-colors">{order.customer_phone}</a>
+                                            <a href={`tel:${sanitizeTelHref(order.customer_phone)}`} className="text-slate-300 text-xs font-mono hover:text-primary transition-colors">{order.customer_phone}</a>
                                         </div>
                                     )}
                                 </div>
@@ -1672,7 +1723,15 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
                                 </select>
                                 <div className="text-[11px] text-slate-500 space-y-1">
                                     <p>Order Placed: <span className="text-slate-300">{new Date(order.created_at).toLocaleString()}</span></p>
-                                    <p>Payment: <span className="text-emerald-400 font-bold">Stripe Verified</span></p>
+                                    <p>Payment: {
+                                        ['PAID', 'SHIPPED', 'DELIVERED'].includes(order.status) ? (
+                                            <span className="text-emerald-400 font-bold">Stripe Verified</span>
+                                        ) : order.status === 'CANCELLED' ? (
+                                            <span className="text-red-400 font-bold">Cancelled</span>
+                                        ) : (
+                                            <span className="text-amber-400 font-bold">Awaiting Payment</span>
+                                        )
+                                    }</p>
                                 </div>
                             </div>
                         </div>

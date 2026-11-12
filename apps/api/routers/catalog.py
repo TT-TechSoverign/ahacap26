@@ -8,6 +8,33 @@ from domain import catalog
 from cache import check_rate_limit
 import json
 import os
+import tempfile
+import threading
+
+NON_NULLABLE_PRODUCT_FIELDS = {"name", "price", "category", "stock"}
+
+
+def _trigger_frontend_revalidation_async():
+    def _run():
+        try:
+            import urllib.request
+            frontend_url = os.environ.get("FRONTEND_INTERNAL_URL", "http://prod-web:3000").rstrip("/")
+            hook_url = f"{frontend_url}/api/revalidate"
+            revalidate_secret = os.environ.get("REVALIDATE_SECRET", "").strip()
+            if not revalidate_secret:
+                return
+            for route_path in ("/shop", "/", "/sitemap"):
+                req = urllib.request.Request(
+                    hook_url,
+                    data=json.dumps({"secret": revalidate_secret, "path": route_path}).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                )
+                with urllib.request.urlopen(req, timeout=3) as response:
+                    response.read()
+        except Exception as e:
+            print(f"WARNING: Failed to trigger Next.js cache revalidation: {type(e).__name__}")
+
+    threading.Thread(target=_run, daemon=True).start()
 
 
 def serialize_product_seed_dict(p_obj) -> dict:
@@ -50,61 +77,49 @@ def serialize_product_seed_dict(p_obj) -> dict:
 
 def persist_product_changes(product_data, action='update'):
     """
-    Updates the products_seed.json file with the new product data.
+    Atomically updates the products_seed.json file with the new product data.
     action: 'update' (create/update) or 'delete'
     """
-    # Robust path resolution for Docker (/app/content) vs Local
     base_dir = os.path.dirname(os.path.dirname(__file__))
     json_path = os.path.join(base_dir, 'content', 'products_seed.json')
     
     try:
         if not os.path.exists(json_path):
-             print(f"WARNING: Seed file not found at {json_path}. Skipping persistence.")
-             return
+            print(f"WARNING: Seed file not found at {json_path}. Skipping persistence.")
+            return
 
-        with open(json_path, 'r') as f:
+        with open(json_path, 'r', encoding='utf-8') as f:
             products = json.load(f)
         
         if action == 'delete':
             products = [p for p in products if p['id'] != product_data['id']]
         else:
-            # Update or Append
-            # Check if exists
             existing_index = next((index for (index, d) in enumerate(products) if d["id"] == product_data['id']), None)
             if existing_index is not None:
                 products[existing_index] = product_data
             else:
                 products.append(product_data)
         
-        with open(json_path, 'w') as f:
-            json.dump(products, f, indent=4)
+        seed_dir = os.path.dirname(json_path)
+        tmp_path = None
+        try:
+            with tempfile.NamedTemporaryFile('w', dir=seed_dir, delete=False, encoding='utf-8', suffix='.tmp') as tf:
+                json.dump(products, tf, indent=4)
+                tf.flush()
+                os.fsync(tf.fileno())
+                tmp_path = tf.name
+            os.replace(tmp_path, json_path)
+        finally:
+            if tmp_path and os.path.exists(tmp_path):
+                try:
+                    os.remove(tmp_path)
+                except OSError:
+                    pass
             
     except Exception as e:
-        # Catch-all to prevent 500 errors if file IO fails (e.g. permissions)
         print(f"CRITICAL ERROR: Failed to persist product changes to JSON: {e}")
-        # explicit pass to prevent bubbling up
-        pass
 
-    try:
-        import urllib.request
-        import urllib.parse
-        
-        # Determine internal host. Standard Docker network is 'http://web:3000'
-        # Fallback to localhost if running outside Docker
-        frontend_url = os.environ.get("FRONTEND_INTERNAL_URL", "http://web:3000")
-        hook_url = f"{frontend_url}/api/revalidate"
-        
-        revalidate_secret = os.environ.get("REVALIDATE_SECRET", "").strip()
-        if revalidate_secret:
-            req = urllib.request.Request(
-                hook_url, 
-                data=json.dumps({"secret": revalidate_secret, "path": "/shop"}).encode('utf-8'),
-                headers={'Content-Type': 'application/json'}
-            )
-            with urllib.request.urlopen(req, timeout=3) as response:
-                print(f"DEBUG: Next.js Shop Revalidation Triggered: {response.getcode()}")
-    except Exception as e:
-        print(f"WARNING: Failed to trigger Next.js cache revalidation: {e}")
+    _trigger_frontend_revalidation_async()
 
 
 router = APIRouter()
@@ -150,16 +165,18 @@ async def validate_inventory(
 
 @router.post("", dependencies=[Depends(verify_admin_token)])
 async def create_product(
+    request: Request,
     product: schemas.ProductCreate,
     db: AsyncSession = Depends(get_db)
 ):
-    new_product = await catalog.create_product_service(db, product.dict())
+    raw_data = product.model_dump() if hasattr(product, "model_dump") else product.dict()
+    new_product = await catalog.create_product_service(db, raw_data)
     product_dict = serialize_product_seed_dict(new_product)
     persist_product_changes(product_dict)
     
     try:
         from routers.dev_os import log_dev_os_audit
-        await log_dev_os_audit(db, action="CATALOG_PRODUCT_CREATE", details={"product_id": new_product.id, "name": new_product.name})
+        await log_dev_os_audit(db, action="CATALOG_PRODUCT_CREATE", details={"product_id": new_product.id, "name": new_product.name}, ip=get_client_ip(request))
     except Exception:
         pass
 
@@ -169,12 +186,20 @@ async def create_product(
 async def update_product(
     product_id: int,
     product_update: schemas.ProductUpdate,
+    request: Request,
     db: AsyncSession = Depends(get_db)
 ):
     from fastapi import HTTPException
     try:
-        # Filter out None values to allow partial updates
-        update_data = {k: v for k, v in product_update.dict().items() if v is not None}
+        raw_updates = (
+            product_update.model_dump(exclude_unset=True)
+            if hasattr(product_update, "model_dump")
+            else product_update.dict(exclude_unset=True)
+        )
+        update_data = {
+            k: v for k, v in raw_updates.items()
+            if not (k in NON_NULLABLE_PRODUCT_FIELDS and v is None)
+        }
         
         updated_product = await catalog.update_product_service(db, product_id, update_data)
         if not updated_product:
@@ -185,7 +210,7 @@ async def update_product(
         
         try:
             from routers.dev_os import log_dev_os_audit
-            await log_dev_os_audit(db, action="CATALOG_PRODUCT_UPDATE", details={"product_id": updated_product.id, "name": updated_product.name})
+            await log_dev_os_audit(db, action="CATALOG_PRODUCT_UPDATE", details={"product_id": updated_product.id, "name": updated_product.name}, ip=get_client_ip(request))
         except Exception:
             pass
 
@@ -201,6 +226,7 @@ async def update_product(
 @router.delete("/{product_id}", dependencies=[Depends(verify_admin_token)])
 async def delete_product(
     product_id: int,
+    request: Request,
     db: AsyncSession = Depends(get_db)
 ):
     success = await catalog.delete_product_service(db, product_id)
@@ -213,7 +239,7 @@ async def delete_product(
     
     try:
         from routers.dev_os import log_dev_os_audit
-        await log_dev_os_audit(db, action="CATALOG_PRODUCT_DELETE", details={"product_id": product_id})
+        await log_dev_os_audit(db, action="CATALOG_PRODUCT_DELETE", details={"product_id": product_id}, ip=get_client_ip(request))
     except Exception:
         pass
 
