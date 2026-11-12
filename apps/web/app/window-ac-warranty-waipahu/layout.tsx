@@ -40,7 +40,7 @@ const warrantyFaqSchema = {
             "name": "What warranty comes with LG Dual Inverter & GE Built-In window air conditioners?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Every new LG Dual Inverter & GE window AC purchased from Affordable Home A/C includes a 1-year limited manufacturer warranty on parts and labor, plus an extended limited warranty on the Dual Inverter compressor component."
+                "text": "Every new LG Dual Inverter and GE Built-In window AC purchased from Affordable Home A/C includes a full 1-year limited manufacturer warranty on parts and labor (plus 2-year full / 5-year sealed-system coverage on the GE AJCQ12AXXWA R-32 Inverter and extended Dual Inverter compressor protection)."
             }
         },
         {
@@ -57,6 +57,14 @@ const warrantyFaqSchema = {
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Simply call our Waipahu office at (808) 488-1111 with your purchase receipt. Our Oahu cooling technicians can diagnose issues on-site or at our facility using authentic manufacturer replacement parts."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is Affordable Home A/C insured for residential and condo window AC service in Hawaii?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Affordable Home A/C is fully insured, ensuring all window AC installations, diagnostics, and cleanings comply with Oahu building and HOA standards."
             }
         }
     ]

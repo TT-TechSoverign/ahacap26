@@ -24,8 +24,8 @@ import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
 
 const FAQS = [
     {
-        q: "What warranty comes with LG Dual Inverter window air conditioners?",
-        a: "Every new LG Dual Inverter window AC purchased from Affordable Home A/C includes a 1-year limited manufacturer warranty on parts and labor, plus an extended limited warranty on the Dual Inverter compressor component."
+        q: "What warranty comes with LG Dual Inverter & GE Built-In window air conditioners?",
+        a: "Every new LG Dual Inverter and GE Built-In window AC purchased from Affordable Home A/C includes a full 1-year limited manufacturer warranty on parts and labor (plus 2-year full / 5-year sealed-system coverage on the GE AJCQ12AXXWA R-32 Inverter and extended Dual Inverter compressor protection)."
     },
     {
         q: "Do I have to ship my broken unit to the mainland for warranty service?",

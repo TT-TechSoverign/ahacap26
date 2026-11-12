@@ -324,6 +324,47 @@ export default function ServiceAreasPage() {
 
                 <ReviewsPavilion variant="compact" title="Verified Oahu Homeowner Reviews Across All 22 Service Areas" subtitle="Rated 4.9★ across 142+ installations, cleanings & warehouse pickups island-wide" limit={6} />
 
+                {/* Visible Island-Wide Coverage FAQs (1:1 FAQPage JSON-LD Parity) */}
+                <section id="service-areas-faqs" className="max-w-4xl mx-auto w-full py-6">
+                    <div className="text-center mb-8">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-cyan-400">
+                            22 Oahu Communities • Delivery &amp; Dispatch Answers
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl font-header font-black uppercase tracking-tight text-white mt-2">
+                            Oahu Service Areas &amp; Delivery FAQs
+                        </h2>
+                    </div>
+                    <div className="space-y-3">
+                        <details open className="group rounded-2xl bg-slate-900/75 border border-slate-800 p-5">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>Which Oahu cities does Affordable Home A/C serve?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Affordable Home A/C serves all 22 Oahu communities across Metro Honolulu, Central Oahu, Leeward/West Oahu, Windward Oahu, East Honolulu, and the North Shore—including Honolulu, Waipahu, Kapolei, Ewa Beach, Mililani, Pearl City, Aiea, Kailua, Kaneohe, and Hawaii Kai.
+                            </p>
+                        </details>
+                        <details className="group rounded-2xl bg-slate-900/75 border border-slate-800 p-5">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>How much is island-wide Window AC delivery or Waipahu warehouse pickup?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Waipahu warehouse pickup at 94-150 Leoleo St. #203 is $0 (free by appointment), and island-wide residential delivery across all 22 Oahu service areas is a flat $50.
+                            </p>
+                        </details>
+                        <details className="group rounded-2xl bg-slate-900/75 border border-slate-800 p-5">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>Do you charge upfront to book an in-home Window AC estimate in my neighborhood?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Never. Across all 22 Oahu service areas—from Hawaii Kai and Kailua to Kapolei, Ewa Beach, Mililani, and Waipahu—we operate strictly By Appointment First with $0 Free In-Home Estimates and protective floor drop cloths under every serviced unit.
+                            </p>
+                        </details>
+                    </div>
+                </section>
+
                 <OahuEEATAuthorityBar topicTitle="Oahu Island-Wide LG & GE Window AC Sales, Installation & Cleaning Coverage Directory" />
             </div>
 

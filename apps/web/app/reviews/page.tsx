@@ -209,6 +209,47 @@ export default function ReviewsPage() {
                     />
                 </div>
 
+                {/* Visible Customer Reviews & Warranty FAQs (1:1 FAQPage JSON-LD Parity) */}
+                <section id="reviews-faqs" className="mt-14 max-w-4xl mx-auto">
+                    <div className="text-center mb-8">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-cyan-400">
+                            Verified Oahu Feedback • Warranty &amp; Booking Answers
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl font-header font-black uppercase tracking-tight text-white mt-2">
+                            Oahu Customer Review &amp; Warranty FAQs
+                        </h2>
+                    </div>
+                    <div className="space-y-3">
+                        <details open className="group rounded-2xl bg-slate-900/75 border border-slate-800 p-5">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>What is Affordable Home A/C&apos;s customer rating on Oahu?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Affordable Home A/C maintains a 4.9-star rating across 142+ verified Oahu homeowner reviews for in-stock LG Dual Inverter and GE Window AC sales ($395–$1,200), custom jalousie and 26-inch wall sleeve installations, and deep coil cleaning.
+                            </p>
+                        </details>
+                        <details className="group rounded-2xl bg-slate-900/75 border border-slate-800 p-5">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>Are your Window AC units backed by a local warranty?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Yes. Every factory-sealed LG and GE Window AC purchased from our Waipahu warehouse includes a full 1-year manufacturer parts and labor warranty (and 2-year full / 5-year sealed system on the GE AJCQ12AXXWA), supported directly by our local Oahu team since 2005.
+                            </p>
+                        </details>
+                        <details className="group rounded-2xl bg-slate-900/75 border border-slate-800 p-5">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>How do I book a $0 Free In-Home Window AC Estimate or buy an in-stock unit?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                You can purchase any of our 16 in-stock LG Dual Inverter or GE 26-inch Built-In Window ACs ($395–$1,200) directly online at affordablehome-ac.com/shop, or request a By-Appointment-First $0 Free In-Home Estimate for jalousie installation, 26-inch wall sleeve replacement, or deep coil cleaning by calling (808) 488-1111.
+                            </p>
+                        </details>
+                    </div>
+                </section>
+
                 <div className="mt-12">
                     <OahuEEATAuthorityBar topicTitle="142+ Verified Oahu Homeowner Reviews — LG & GE Window AC Sales, Installation & Cleaning" />
                 </div>

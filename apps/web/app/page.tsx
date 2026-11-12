@@ -185,6 +185,47 @@ export default function Homepage() {
                 {/* 7. 22-City Oahu Regional Service Areas Hub */}
                 <HomeServiceAreasHub />
 
+                {/* 7b. Visible Oahu Window AC & Rebate FAQs (1:1 FAQPage JSON-LD Parity) */}
+                <section id="home-faqs" className="relative py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+                    <div className="text-center mb-8">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-cyan-400">
+                            Waipahu Warehouse Direct • Oahu Window AC Answers
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl font-header font-black uppercase tracking-tight text-white mt-2">
+                            Oahu Window AC Sales, Installation &amp; Rebate FAQs
+                        </h2>
+                    </div>
+                    <div className="space-y-3">
+                        <details open className="group rounded-2xl bg-slate-900/85 border border-slate-800/90 p-5 backdrop-blur-sm">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>Where can I buy an LG Dual Inverter or GE 26-inch Built-In Window AC in stock on Oahu?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Affordable Home A/C stocks 16 LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In Through-the-Wall air conditioners ($395 to $1,200) at our central Waipahu warehouse (94-150 Leoleo St. #203, Waipahu, HI 96797). Order online for free Waipahu warehouse pickup by appointment or $50 flat-rate Oahu delivery.
+                            </p>
+                        </details>
+                        <details className="group rounded-2xl bg-slate-900/85 border border-slate-800/90 p-5 backdrop-blur-sm">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>Do you install Window ACs in Hawaiian jalousie louver windows and 26-inch condo wall sleeves?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Yes. Our insured Oahu cooling specialists custom-fit LG and GE window air conditioners into Hawaiian jalousie glass louver windows, standard sliders, double-hung windows, and 26-inch through-the-wall condo sleeves with floor drop-cloth protection and a $0 Free In-Home Estimate.
+                            </p>
+                        </details>
+                        <details className="group rounded-2xl bg-slate-900/85 border border-slate-800/90 p-5 backdrop-blur-sm">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>Do your in-stock Window ACs qualify for the $45 Hawaii Energy cash rebate?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Yes! Qualifying ENERGY STAR® LG Dual Inverter and GE R-32 Inverter window air conditioners include our official Hawaii Energy $45 cash rebate form PDF and reduce HECO cooling electricity use by up to 40% (~$424/yr).
+                            </p>
+                        </details>
+                    </div>
+                </section>
+
                 {/* 8. Oahu E-E-A-T Authority & Click-Depth-1 Silo Directory */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
                     <OahuEEATAuthorityBar topicTitle="Affordable Home A/C — Oahu's Waipahu Window AC Warehouse, Jalousie Installation & Deep Cleaning Specialists" />

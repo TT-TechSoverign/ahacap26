@@ -273,6 +273,47 @@ export default function SizingPage() {
                     />
                 </div>
 
+                {/* Visible Hawaii BTU Sizing FAQs (1:1 FAQPage JSON-LD Parity) */}
+                <section id="sizing-faqs" className="mt-12 mb-8">
+                    <div className="text-center mb-8">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-primary">
+                            Single-Wall Redwood • 115V vs 230V • 26&quot; Condo Sleeves
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl font-header font-black uppercase tracking-tight text-white mt-2">
+                            Oahu Window AC BTU Sizing FAQs
+                        </h2>
+                    </div>
+                    <div className="space-y-3">
+                        <details open className="group rounded-2xl bg-slate-900/75 border border-white/10 p-5">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>How many BTUs do I need for a single-wall redwood home in Hawaii?</span>
+                                <span className="text-primary text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-white/10 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Uninsulated single-wall redwood and tongue-and-groove Hawaii homes absorb 20% to 35% more solar heat than mainland drywall rooms. We recommend 6,000–8,000 BTU for bedrooms (100–250 sq. ft.), 10,000–12,000 BTU for master bedrooms and studios (220–380 sq. ft.), and 14,000–23,500 BTU for living rooms and open layouts (380–800+ sq. ft.).
+                            </p>
+                        </details>
+                        <details className="group rounded-2xl bg-slate-900/75 border border-white/10 p-5">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>What is the largest Window AC that runs on a standard 115V household outlet?</span>
+                                <span className="text-primary text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-white/10 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                The LG Dual Inverter 14,000 BTU (LW1522FVSM, $785) and 12,000 BTU (LW1222IVSM, $745) are the highest-capacity Window ACs that plug directly into a standard 115V / 15-Amp household NEMA 5-15R receptacle. Units rated 18,000 BTU and 23,500 BTU require a 208/230V circuit.
+                            </p>
+                        </details>
+                        <details className="group rounded-2xl bg-slate-900/75 border border-white/10 p-5">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>Do I need a 26-inch wall sleeve unit for an Oahu condo or high-rise?</span>
+                                <span className="text-primary text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-white/10 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Many Honolulu, Waikiki, Makiki, and Ala Moana concrete condos use a built-in 26-inch through-the-wall sleeve instead of a jalousie window. We stock direct-fit GE 26-inch Built-In Wall ACs (8,200–12,000 BTU, including the R-32 Inverter AJCQ12AXXWA) and the GE RAB26A galvanized sleeve in Waipahu.
+                            </p>
+                        </details>
+                    </div>
+                </section>
+
                 <OahuEEATAuthorityBar topicTitle="Oahu Window AC BTU Sizing Wizard & Microclimate Heat-Load Calculator" />
 
             </main>
