@@ -2,40 +2,46 @@ from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from cache import check_rate_limit
 from sqlalchemy.future import select
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime
 import models
 from database import get_db
+from dependencies import get_client_ip
 from services import email as email_service
+import hmac
 import logging
+import os
 import re
 import time
 
 # Configure Logger
 logger = logging.getLogger("api.leads")
 
+DEFAULT_OFFICE_EMAIL = "@".join(("office", "affordablehome-ac.com"))
+
 # In-memory deduplication cache: {dedup_key: (lead_id, timestamp)}
 RECENT_LEAD_SUBMISSIONS = {}
 
 router = APIRouter()
 
-# Pydantic Model for Incoming Lead with flexible intake
+# Pydantic Model for Incoming Lead with flexible intake & strict length bounds
 class LeadCreate(BaseModel):
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    customer_name: Optional[str] = None
-    full_name: Optional[str] = None
-    email: Optional[str] = None
-    phone: str
-    address: Optional[str] = "Oahu, HI"
-    city: Optional[str] = None
-    zip: Optional[str] = None
-    service_type: Optional[str] = None
-    service: Optional[str] = None
-    urgency: Optional[str] = "standard"
-    notes: Optional[str] = None
+    first_name: Optional[str] = Field(default=None, max_length=120)
+    last_name: Optional[str] = Field(default=None, max_length=120)
+    customer_name: Optional[str] = Field(default=None, max_length=200)
+    full_name: Optional[str] = Field(default=None, max_length=200)
+    email: Optional[str] = Field(default=None, max_length=254)
+    phone: str = Field(..., min_length=7, max_length=40)
+    address: Optional[str] = Field(default="Oahu, HI", max_length=300)
+    city: Optional[str] = Field(default=None, max_length=120)
+    zip: Optional[str] = Field(default=None, max_length=20)
+    service_type: Optional[str] = Field(default=None, max_length=200)
+    service: Optional[str] = Field(default=None, max_length=200)
+    urgency: Optional[str] = Field(default="standard", max_length=50)
+    notes: Optional[str] = Field(default=None, max_length=4000)
     is_test: Optional[bool] = False
+    website_url: Optional[str] = Field(default=None, max_length=200)  # Invisible bot honeypot
 
 @router.post("", status_code=201, include_in_schema=False)
 @router.post("/", status_code=201)
@@ -46,7 +52,16 @@ async def create_lead(
     db: AsyncSession = Depends(get_db)
 ):
     try:
-        email_addr = (lead_data.email or "").strip() or "office@affordablehome-ac.com"
+        ip = get_client_ip(request)
+
+        # Honeypot bot trap: silent 201 decoy without DB write or SMTP dispatch
+        if lead_data.website_url and lead_data.website_url.strip():
+            logger.warning(f"🛡️ [HONEYPOT SHIELD] Bot lead submission discarded from {ip}")
+            return {"status": "success", "lead_id": 0, "message": "Inquiry received."}
+
+        raw_email = (lead_data.email or "").strip()
+        validated_email = email_service.sanitize_email_addr(raw_email) if raw_email else ""
+        email_addr = validated_email or DEFAULT_OFFICE_EMAIL
         
         # Parse names gracefully
         first = (lead_data.first_name or "").strip()
@@ -80,27 +95,29 @@ async def create_lead(
         if clean_phone and dedup_key in RECENT_LEAD_SUBMISSIONS:
             prev_id, prev_ts = RECENT_LEAD_SUBMISSIONS[dedup_key]
             if now_ts - prev_ts < 60:
-                logger.warning(f"🛡️ [DEDUPLICATION SHIELD] Duplicate lead submission for {dedup_key} within 60s. Returning existing Lead ID {prev_id} without duplicate dispatch.")
+                logger.warning(f"🛡️ [DEDUPLICATION SHIELD] Duplicate lead submission within 60s from {ip}. Returning existing Lead ID {prev_id}.")
                 return {"status": "success", "lead_id": prev_id, "message": "Inquiry already received (deduplicated)."}
 
-        # Check rate limit (bypass for master test account)
-        ip = request.client.host if request.client else "unknown"
-        if email_addr.lower() != "irasmussenjobs@gmail.com":
+        # Rate limit check (only bypassed via authenticated X-Dev-OS-Key header, never by unauthenticated email string!)
+        dev_key_hdr = (request.headers.get("X-Dev-OS-Key") or "").strip()
+        expected_dev_pwd = os.getenv("DEV_OS_MASTER_PASSWORD", "").strip()
+        is_authenticated_master = bool(dev_key_hdr and expected_dev_pwd and hmac.compare_digest(dev_key_hdr, expected_dev_pwd))
+        if not is_authenticated_master:
             if not await check_rate_limit(ip, "leads", limit=10, period=3600):
                 raise HTTPException(status_code=429, detail="Too many inquiries. Please try again later.")
 
         # 1. Create DB Model
         new_lead = models.Lead(
-            first_name=first,
-            last_name=last,
+            first_name=first[:120],
+            last_name=last[:120],
             email=email_addr,
-            phone=lead_data.phone.strip(),
-            address=addr,
-            city=lead_data.city or "Oahu",
-            zip=lead_data.zip or "",
-            service_type=svc,
-            urgency=urgency_val,
-            notes=lead_data.notes or "No additional notes provided.",
+            phone=lead_data.phone.strip()[:40],
+            address=addr[:300],
+            city=(lead_data.city or "Oahu")[:120],
+            zip=(lead_data.zip or "")[:20],
+            service_type=svc[:200],
+            urgency=urgency_val[:50],
+            notes=(lead_data.notes or "No additional notes provided.")[:4000],
             status=models.LeadStatus.NEW,
             created_at=datetime.utcnow()
         )
@@ -113,14 +130,14 @@ async def create_lead(
         if clean_phone:
             RECENT_LEAD_SUBMISSIONS[dedup_key] = (new_lead.id, now_ts)
         
-        logger.info(f"Lead Created: {new_lead.id} | {new_lead.email} | Service: {new_lead.service_type}")
+        logger.info(f"Lead Created: {new_lead.id} | {email_service.mask_email(new_lead.email)} | Service: {new_lead.service_type}")
 
         # 3. Queue Staff Inquiry Notification & Customer Appointment Confirmation
         background_tasks.add_task(
             email_service.send_inquiry_notification,
             lead=new_lead
         )
-        if new_lead.email and "@" in new_lead.email:
+        if validated_email and validated_email.lower() != DEFAULT_OFFICE_EMAIL:
             background_tasks.add_task(
                 email_service.send_customer_appointment_confirmation,
                 lead=new_lead

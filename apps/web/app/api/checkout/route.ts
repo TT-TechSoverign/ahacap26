@@ -1,19 +1,53 @@
 import { NextResponse } from 'next/server';
+import type Stripe from 'stripe';
 import { stripe } from '@/lib/stripe';
 import { Product } from '@/types/inventory'; // Adjusted to use alias
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 
 export const dynamic = 'force-dynamic';
 
+const ALLOWED_CHECKOUT_ORIGINS = new Set([
+    'https://www.affordablehome-ac.com',
+    'https://affordablehome-ac.com',
+    'https://staging.affordablehome-ac.com',
+    'http://localhost:3000',
+    'http://localhost:3001',
+]);
+
+function resolveTrustedOrigin(headerOrigin: string | null): string {
+    const defaultOrigin = 'https://www.affordablehome-ac.com';
+    const envUrl = (process.env.NEXT_PUBLIC_URL || '').trim().replace(/\/+$/, '');
+    if (envUrl && ALLOWED_CHECKOUT_ORIGINS.has(envUrl)) {
+        return envUrl;
+    }
+    const cleanHeader = (headerOrigin || '').trim().replace(/\/+$/, '');
+    if (cleanHeader && ALLOWED_CHECKOUT_ORIGINS.has(cleanHeader)) {
+        return cleanHeader;
+    }
+    return defaultOrigin;
+}
+
 export async function POST(req: Request) {
     try {
-        console.log('--- CHECKOUT SESSION START ---');
-        console.log('Headers:', Object.fromEntries(req.headers));
         const { items, customerEmail, fulfillmentMode } = await req.json();
 
-        if (!items || items.length === 0) {
+        if (!Array.isArray(items) || items.length === 0 || items.length > 25) {
             return NextResponse.json({ error: 'No items in cart' }, { status: 400 });
         }
+
+        for (const it of items) {
+            const qty = Number(it?.quantity);
+            if (!Number.isInteger(qty) || qty < 1 || qty > 20) {
+                return NextResponse.json({ error: 'Invalid item quantity' }, { status: 400 });
+            }
+        }
+
+        const safeFulfillment = fulfillmentMode === 'delivery' ? 'delivery' : 'pickup';
+        const safeCustomerEmail =
+            typeof customerEmail === 'string' &&
+            /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,24}$/.test(customerEmail.trim())
+                ? customerEmail.trim()
+                : undefined;
 
         // 1. HARD GUARDRAIL: Real-Time Inventory Validation
         const apiUrl = process.env.API_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL || 'http://prod-api:8000';
@@ -41,7 +75,7 @@ export async function POST(req: Request) {
         }
 
         // Use Canonical Pricing from validation response
-        const line_items = items.map((clientItem: Product & { quantity: number }) => {
+        const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((clientItem: Product & { quantity: number }) => {
             const canonicalItem = validationData.results.find((r: any) => r.product_id === clientItem.id);
             const mpn = PRODUCT_IDENTIFIERS[canonicalItem.product_id]?.mpn || canonicalItem.name.match(/\(([^)]+)\)/)?.[1] || 'N/A';
             const displayName = mpn !== 'N/A' && !canonicalItem.name.includes(mpn)
@@ -69,7 +103,7 @@ export async function POST(req: Request) {
         });
 
         // ADD DELIVERY FEE IF SELECTED
-        if (fulfillmentMode === 'delivery') {
+        if (safeFulfillment === 'delivery') {
             line_items.push({
                 price_data: {
                     currency: 'usd',
@@ -85,7 +119,7 @@ export async function POST(req: Request) {
 
         // CALCULATE HAWAII STATE TAX (4.712%)
         // Sum current line items (Products + Delivery)
-        const subtotalCents = line_items.reduce((acc: number, item: any) => acc + (item.price_data.unit_amount * item.quantity), 0);
+        const subtotalCents = line_items.reduce((acc: number, item) => acc + ((item.price_data?.unit_amount ?? 0) * (item.quantity ?? 1)), 0);
         const taxAmountCents = Math.round(subtotalCents * 0.04712);
 
         if (taxAmountCents > 0) {
@@ -102,14 +136,8 @@ export async function POST(req: Request) {
             });
         }
 
-        // Determine origin with fallbacks
-        const envUrl = process.env.NEXT_PUBLIC_URL;
-        const headerOrigin = req.headers.get('origin');
-        const defaultOrigin = 'https://www.affordablehome-ac.com';
-
-        const origin = envUrl || headerOrigin || defaultOrigin;
-
-        console.log('Origin Resolution:', { envUrl, headerOrigin, defaultOrigin, finalOrigin: origin });
+        // Strict origin allowlist resolution (prevents open redirect / session_id leak)
+        const origin = resolveTrustedOrigin(req.headers.get('origin'));
 
         const expiresAt = Math.floor(Date.now() / 1000) + (30 * 60); // 30 minutes lock
 
@@ -125,12 +153,12 @@ export async function POST(req: Request) {
                     request_three_d_secure: 'automatic',
                 },
             },
-            ...(customerEmail && { customer_email: customerEmail }), // Only pre-fill if provided
+            ...(safeCustomerEmail && { customer_email: safeCustomerEmail }), // Only pre-fill if validated
             // CRITICAL: Pass metadata to PaymentIntent for Backend Webhook (Email Native)
             payment_intent_data: {
                 metadata: {
-                    fulfillment_mode: fulfillmentMode,
-                    customer_email: customerEmail,
+                    fulfillment_mode: safeFulfillment,
+                    customer_email: safeCustomerEmail || '',
                     source: 'web_checkout_v2'
                 }
             },
@@ -152,15 +180,15 @@ export async function POST(req: Request) {
             },
             metadata: {
                 source: 'web_checkout',
-                fulfillment_mode: fulfillmentMode,
+                fulfillment_mode: safeFulfillment,
             },
             billing_address_collection: 'required',
         });
 
-        console.log('Session Created:', { id: session.id, url: session.url, success_url: session.success_url });
+        console.log('Checkout Session Created:', { id: session.id });
         return NextResponse.json({ sessionId: session.id, url: session.url });
     } catch (err: any) {
-        console.error('Stripe Checkout Error:', err);
-        return NextResponse.json({ error: err.message }, { status: 500 });
+        console.error('Stripe Checkout Error:', err?.message || err);
+        return NextResponse.json({ error: 'Unable to initialize checkout session. Please try again or call (808) 488-1111.' }, { status: 500 });
     }
 }

@@ -93,10 +93,11 @@ $RECYCLE.BIN/
 *_original.webp
 *_transparent_test.webp
 
-# --- cPanel & Local Analytics Data ---
+# --- cPanel, Private Vault & Local Analytics Data ---
 .htaccess
 php.ini
 .user.ini
+_private_portfolio/
 _analytics_data/
 *.csv
 *.json.json
@@ -107,6 +108,7 @@ apps/web/scripts/
 scripts/*
 !scripts/dev-os.*
 !scripts/scan-secrets.*
+!scripts/security-email-audit.py
 !scripts/comfyui_studio_bridge.py
 !scripts/enrich_reviews.py
 *.txt
@@ -115,6 +117,7 @@ scripts/*
 !apps/web/public/*.txt
 *.py
 !apps/api/**/*.py
+!scripts/security-email-audit.py
 !scripts/comfyui_studio_bridge.py
 !scripts/enrich_reviews.py
 !*.sh

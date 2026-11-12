@@ -32,7 +32,7 @@ def test_all_submasters_have_valid_sops_and_unique_children():
 
 def test_master_brain_v2_7_0_and_sop_completeness():
     assert MASTER_BRAIN_STATE["brain_version"] == "2.7.0-SOVEREIGN"
-    assert len(MASTER_BRAIN_STATE["synapses"]) == 55
+    assert len(MASTER_BRAIN_STATE["synapses"]) == 58
     assert len(AGENT_SOPS) == 50
     for sop_id, sop in AGENT_SOPS.items():
         assert sop["id"] == sop_id

@@ -18,7 +18,19 @@ param(
 )
 
 if (-not $MasterKey) {
-    $MasterKey = "AhacMasterKey2026!Secured"
+    $rootEnvPath = Join-Path $PSScriptRoot "..\.env"
+    if (Test-Path -LiteralPath $rootEnvPath) {
+        $envLine = Get-Content -LiteralPath $rootEnvPath | Where-Object { $_ -match '^DEV_OS_MASTER_PASSWORD=' } | Select-Object -First 1
+        if ($envLine) {
+            $MasterKey = ($envLine -replace '^DEV_OS_MASTER_PASSWORD=', '').Trim().Trim('"').Trim("'")
+        }
+    }
+}
+
+$localOnlyCommands = @("scan-secrets", "security-sweep", "help")
+if (-not $MasterKey -and ($localOnlyCommands -notcontains $Command.ToLower())) {
+    Write-Host "[!] Missing DEV_OS_MASTER_PASSWORD in environment or root .env file." -ForegroundColor Red
+    exit 1
 }
 
 $headers = @{
@@ -108,7 +120,11 @@ switch ($Command.ToLower()) {
     }
 
     "update-password" {
-        $userEmail = if ($Target) { $Target } else { "irasmussenjobs@gmail.com" }
+        $userEmail = if ($Target) { $Target } else { $env:DEV_OS_MASTER_EMAIL }
+        if (-not $userEmail) {
+            Write-Host "[!] Usage: .\scripts\dev-os.ps1 update-password <email>" -ForegroundColor Red
+            return
+        }
         $userPass = $args[0]
         if (-not $userPass) {
             Write-Host "[*] Enter password for $userEmail..." -ForegroundColor Yellow
@@ -382,9 +398,9 @@ switch ($Command.ToLower()) {
                 summary = $summary
                 author = "SOVEREIGN_MASTER_AGENT"
                 achievements = @(
-                    "Master Projects Brain v2.7.0-SOVEREIGN armed with 55 neural synapses",
-                    "All 10 Category Sub-Masters, 40 Specialized Agents, and 50 SOP Dossiers upgraded to v2.7.0-EPOCH-21",
-                    "3-row fixed NavbarV2 viewport clearance across all 74 page.tsx routes, solid #060a12 z-[120] dropdown armor, mandatory Shop #rebate section, and isolated /admin Command Deck"
+                    "Master Projects Brain v2.7.0-SOVEREIGN armed with 58 neural synapses (v2.7.3-NOV11-EMAIL-FORTRESS)",
+                    "All 10 Category Sub-Masters, 40 Specialized Agents, and 50 SOP Dossiers upgraded with live Email Fortress & Zero-Trust runtime checks",
+                    "Every-file security & email sweep clean: HTML/CRLF email sanitizer, <ProtectedEmailLink /> anti-harvester DOM armor, Nginx X-Real-IP rate limiting, OpenAPI lockdown, and rotated 48-char master key"
                 )
             } | ConvertTo-Json
             $resp = Invoke-RestMethod -Uri "$ServerUrl/brain/session-sync" -Method POST -Headers $headers -Body $body
@@ -589,6 +605,15 @@ switch ($Command.ToLower()) {
         powershell -ExecutionPolicy Bypass -File .\scripts\scan-secrets.ps1
     }
 
+    "security-sweep" {
+        Write-Host "[*] Executing Full 2-Stage Sovereign Security & Email Protection Sweep..." -ForegroundColor Yellow
+        powershell -ExecutionPolicy Bypass -File .\scripts\scan-secrets.ps1
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        $pyExe = if (Test-Path ".\apps\api\.venv\Scripts\python.exe") { ".\apps\api\.venv\Scripts\python.exe" } else { "python" }
+        & $pyExe .\scripts\security-email-audit.py
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    }
+
     default {
         Write-Host "Available Commands:" -ForegroundColor Yellow
         Write-Host "  brain                      - Query Master Projects Brain, synapses, and cognitive thought stream"
@@ -614,6 +639,7 @@ switch ($Command.ToLower()) {
         Write-Host "  reconcile                  - Trigger on-demand Stripe auto-reconciliation"
         Write-Host "  verify-live                - Run 3-stage live deployment swarm check"
         Write-Host "  scan-secrets               - Run local git repository secret scanner"
+        Write-Host "  security-sweep             - Run full root + submodule secret & email protection audit"
     }
 }
 

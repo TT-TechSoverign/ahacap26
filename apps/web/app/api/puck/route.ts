@@ -1,11 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const API_INTERNAL_URL = process.env.API_INTERNAL_URL || 'http://localhost:8000'; // Default to localhost if internal not set
+const API_INTERNAL_URL = process.env.API_INTERNAL_URL || 'http://localhost:8000';
+const SAFE_PUCK_PATH_RE = /^\/[A-Za-z0-9/_-]*$/;
+
+function sanitizeContentPath(rawPath: unknown): string | null {
+    if (typeof rawPath !== 'string') return null;
+    const normalized = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
+    if (
+        normalized.length > 200 ||
+        normalized.includes('..') ||
+        normalized.includes('//') ||
+        !SAFE_PUCK_PATH_RE.test(normalized)
+    ) {
+        return null;
+    }
+    return normalized;
+}
 
 // Common function for fetching from FastAPI
-async function proxyToApi(req: NextRequest, path: string, method: string, body?: any) {
-    const url = `${API_INTERNAL_URL}/api/v1/content${path}`;
-    console.log(`[Puck Proxy] ${method} ${url}`);
+async function proxyToApi(req: NextRequest, safePathWithQuery: string, method: string, body?: any) {
+    const url = `${API_INTERNAL_URL}/api/v1/content${safePathWithQuery}`;
+    console.log(`[Puck Proxy] ${method} ${safePathWithQuery}`);
 
     const authHeader = req.headers.get('Authorization');
     const adminSessionCookie = req.cookies.get('admin_session')?.value;
@@ -29,55 +44,42 @@ async function proxyToApi(req: NextRequest, path: string, method: string, body?:
         });
 
         if (!res.ok) {
-            const error = await res.text();
-            console.error(`[Puck Proxy] Error: ${res.status} - ${error}`);
-            return NextResponse.json({ error }, { status: res.status });
+            return NextResponse.json({ error: 'Upstream content request failed' }, { status: res.status });
         }
 
         const data = await res.json();
         return NextResponse.json(data);
     } catch (e) {
         console.error(`[Puck Proxy] Connection Refused: ${(e as Error).message}`);
-        return NextResponse.json({ error: "Backend Unavailable", details: (e as Error).message }, { status: 503 });
+        return NextResponse.json({ error: 'Backend Unavailable' }, { status: 503 });
     }
 }
 
 export async function GET(req: NextRequest) {
-    const path = req.nextUrl.searchParams.get('path') || '/';
-    // Puck sends ?path=/puck/[...], but we want to store it as the actual route it represents.
-    // Actually, Puck editor loads data for the path being edited.
-    // If we edit `/`, path is `/`.
-    // The query param `puckPath` from the editor might be passed.
-
-    // Wait, the standard Puck `usePuck` hook calls `onPublish` and `onChange` manually, but `data` prop is initial data.
-    // We usually fetch initial data on the server page.
-
-    // However, for the editor specifically, we might want an API to dynamic load.
-    // Let's assume standard usage: `apps/web/app/api/puck/route.ts` handles generic requests.
-
-    // If the request comes from the editor client to `load` data:
-    // It's convenient to simply proxy.
-
-    // Draft query param
+    const safePath = sanitizeContentPath(req.nextUrl.searchParams.get('path') || '/');
+    if (!safePath) {
+        return NextResponse.json({ error: 'Invalid path' }, { status: 400 });
+    }
     const draft = req.nextUrl.searchParams.get('draft') === 'true';
     const query = draft ? '?draft=true' : '';
 
-    return proxyToApi(req, `${path}${query}`, 'GET');
+    return proxyToApi(req, `${safePath}${query}`, 'GET');
 }
 
 export async function POST(req: NextRequest) {
-    const body = await req.json();
-    const { path, data } = body;
-    // Puck `onPublish` sends payload. We need to structure what we send.
-    // Standard Puck `onPublish` (data) => void.
-    // We will wrap it to send path.
-
-    return proxyToApi(req, path, 'POST', { data });
+    const body = await req.json().catch(() => ({}));
+    const safePath = sanitizeContentPath(body?.path);
+    if (!safePath) {
+        return NextResponse.json({ error: 'Invalid path' }, { status: 400 });
+    }
+    return proxyToApi(req, safePath, 'POST', { data: body?.data });
 }
 
 export async function PUT(req: NextRequest) {
-    const body = await req.json();
-    const { path } = body;
-    // For manual "Publish" action
-    return proxyToApi(req, `${path}/publish`, 'PUT');
+    const body = await req.json().catch(() => ({}));
+    const safePath = sanitizeContentPath(body?.path);
+    if (!safePath) {
+        return NextResponse.json({ error: 'Invalid path' }, { status: 400 });
+    }
+    return proxyToApi(req, `${safePath === '/' ? '' : safePath}/publish`, 'PUT');
 }

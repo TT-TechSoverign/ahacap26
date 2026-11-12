@@ -167,3 +167,79 @@ async def test_order_confirmation_pickup_non_rebate_html():
     assert "Directions to Warehouse" in client_mail["html"]
     assert email_module.REBATE_PDF_URL not in client_mail["html"]
     assert email_module.INSTALL_ESTIMATE_URL in client_mail["html"]
+
+
+def test_safe_html_escapes_xss_phishing_and_tracking_pixels():
+    """Ensure safe_html neutralizes <script>, <img onerror=...>, and phishing <a href=...> tags."""
+    payload = '<script>alert(1)</script><img src="x" onerror="fetch(1)"><a href="https://evil.example">Click</a>'
+    escaped = email_module.safe_html(payload)
+    assert "<script>" not in escaped
+    assert "<img" not in escaped
+    assert "<a " not in escaped
+    assert "&lt;script&gt;" in escaped
+    assert "&quot;https://evil.example&quot;" in escaped
+    assert email_module.safe_html(None) == ""
+
+
+def test_sanitize_header_val_strips_crlf_bcc_injection():
+    """Ensure CR/LF/NUL SMTP header injection attempts cannot inject extra Bcc headers."""
+    injected = "Inquiry\r\nBcc: attacker@evil.example\nX-Injected: 1\x00"
+    cleaned = email_module.sanitize_header_val(injected)
+    assert "\r" not in cleaned
+    assert "\n" not in cleaned
+    assert "\x00" not in cleaned
+    assert email_module.sanitize_email_addr("valid.user@gmail.com\r\nBcc:a@b.com") == ""
+    assert email_module.sanitize_email_addr("valid.user@gmail.com") == "valid.user@gmail.com"
+
+
+def test_mask_email_redacts_pii_preserving_domain():
+    """Ensure mask_email hides local-part PII while keeping domain diagnostic context."""
+    masked = email_module.mask_email("keanu.reeves@gmail.com")
+    assert "keanu.reeves" not in masked
+    assert "@gmail.com" in masked
+    masked_list = email_module.mask_email(["brian@affordablehome-ac.com", "irasmussenjobs@gmail.com"])
+    assert "brian@" not in masked_list
+    assert "irasmussenjobs@" not in masked_list
+    assert "@affordablehome-ac.com" in masked_list
+
+
+def test_sanitize_csv_cell_neutralizes_formula_injection():
+    """Ensure spreadsheet formula triggers (=, +, -, @, tab) are prefixed with a literal quote."""
+    try:
+        from routers.admin import sanitize_csv_cell
+    except ImportError:
+        from apps.api.routers.admin import sanitize_csv_cell
+
+    assert sanitize_csv_cell("=CMD|' /C calc'!A0") == "'=CMD|' /C calc'!A0"
+    assert sanitize_csv_cell("+SUM(A1:A2)") == "'+SUM(A1:A2)"
+    assert sanitize_csv_cell("-1+2") == "'-1+2"
+    assert sanitize_csv_cell("@HYPERLINK(\"https://evil\")") == "'@HYPERLINK(\"https://evil\")"
+    assert sanitize_csv_cell("\t=1+1") == "'\t=1+1"
+    assert sanitize_csv_cell("Leilani K.\r\nHonolulu") == "Leilani K.  Honolulu"
+    assert sanitize_csv_cell(None) == ""
+
+
+@pytest.mark.asyncio
+async def test_get_content_draft_requires_admin_auth():
+    """Ensure unauthenticated draft=True requests on /api/v1/content raise HTTP 401."""
+    from fastapi import HTTPException
+    from starlette.requests import Request
+    try:
+        from routers.content import get_content
+    except ImportError:
+        from apps.api.routers.content import get_content
+
+    scope = {
+        "type": "http",
+        "method": "GET",
+        "path": "/api/v1/content/shop",
+        "headers": [],
+        "query_string": b"draft=true",
+    }
+    req = Request(scope)
+    mock_db = AsyncMock()
+
+    with pytest.raises(HTTPException) as exc_info:
+        await get_content(request=req, path="shop", draft=True, db=mock_db)
+    assert exc_info.value.status_code == 401
+

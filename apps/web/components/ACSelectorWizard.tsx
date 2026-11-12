@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 import { sendGAEvent } from '@next/third-parties/google';
 import { trackFunnelEvent } from '@/lib/tracking';
 import Link from 'next/link';
+import { ProtectedEmailLink } from './ProtectedEmailLink';
 import Image from 'next/image';
 import { 
     Settings, 
@@ -757,7 +758,7 @@ export function ACSelectorWizard() {
                                             <Shield className="size-5 text-primary shrink-0 mt-0.5" />
                                             <div className="text-left text-xs">
                                                 <span className="font-header font-black text-white uppercase tracking-wider block">Zero Cost Sizing & Installation Estimates • By Appointment First</span>
-                                                <span className="text-slate-300 text-[11px] leading-relaxed">It is $0 to book an in-home estimate for new or replacement LG &amp; GE window AC installations. Submit your room details below, email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>, or call our office at <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> to schedule your free estimate appointment window.</span>
+                                                <span className="text-slate-300 text-[11px] leading-relaxed">It is $0 to book an in-home estimate for new or replacement LG &amp; GE window AC installations. Submit your room details below, email <ProtectedEmailLink className="text-primary font-bold hover:underline" eventLabel="SizingWizard Email" />, or call our office at <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a> to schedule your free estimate appointment window.</span>
                                             </div>
                                         </div>
 

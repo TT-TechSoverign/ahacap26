@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { ProtectedEmailLink } from './ProtectedEmailLink';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
     Wrench, 
@@ -193,7 +194,7 @@ export default function ACRepairFunnel() {
                                         Upfront Estimates • By Appointment First
                                     </p>
                                     <p className="text-[11px] text-slate-300 font-sans">
-                                        $0 to book Clean-vs-Replace or replacement Window AC estimates. Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the form above to reserve your appointment window.
+                                        $0 to book Clean-vs-Replace or replacement Window AC estimates. Call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, email <ProtectedEmailLink className="text-primary font-bold hover:underline" eventLabel="ACRepairFunnel Email" />, or submit the form above to reserve your appointment window.
                                     </p>
                                 </div>
                             </div>

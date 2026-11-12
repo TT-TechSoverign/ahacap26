@@ -10,12 +10,21 @@ from fastapi import Request, HTTPException, status
 SECRET_KEY = os.getenv("JWT_SECRET")
 database_url = os.getenv("DATABASE_URL", "")
 is_prod_or_staging = "db:" in database_url or "staging-db:" in database_url or "prod-db:" in database_url
+MASTER_EMAIL_DEFAULT = os.getenv("DEV_OS_MASTER_EMAIL", "").strip() or "@".join(("irasmussenjobs", "gmail.com"))
 
 if not SECRET_KEY:
     if is_prod_or_staging:
         raise RuntimeError("CRITICAL STARTUP ERROR: JWT_SECRET environment variable is missing on staging/production!")
     else:
         SECRET_KEY = "super-secret-key-change-me"
+
+
+def get_client_ip(request: Request) -> str:
+    """Extracts client IP safely via Nginx loopback X-Real-IP overwrite, falling back to socket peer."""
+    real_ip = (request.headers.get("X-Real-IP") or "").strip()
+    if real_ip and len(real_ip) <= 64 and "\n" not in real_ip and "\r" not in real_ip:
+        return real_ip
+    return request.client.host if request.client else "unknown"
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     async with AsyncSessionLocal() as session:
@@ -78,7 +87,7 @@ async def verify_dev_os_session(request: Request):
         admin_pin = os.getenv("ADMIN_PIN", "").strip()
         key_strip = master_key_header.strip()
         if (expected_pwd and hmac.compare_digest(key_strip, expected_pwd)) or (admin_pin and hmac.compare_digest(key_strip, admin_pin)):
-            return "dev_os_master:irasmussenjobs@gmail.com"
+            return f"dev_os_master:{MASTER_EMAIL_DEFAULT}"
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid X-Dev-OS-Key"
@@ -105,7 +114,7 @@ async def verify_dev_os_session(request: Request):
         )
         
     role_data = decode_signed_token_role(token)
-    if not role_data or (role_data != "dev_os_master:irasmussenjobs@gmail.com" and role_data != "admin"):
+    if not role_data or (role_data != f"dev_os_master:{MASTER_EMAIL_DEFAULT}" and role_data != "admin"):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Unauthorized: Dev OS Master credentials required"

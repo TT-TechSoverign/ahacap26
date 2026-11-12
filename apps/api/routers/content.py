@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import update
@@ -17,11 +17,17 @@ class ContentPayload(BaseModel):
 @router.get("")
 @router.get("/")
 @router.get("/{path:path}")
-async def get_content(path: str = "/", draft: bool = False, db: AsyncSession = Depends(get_db)):
+async def get_content(request: Request, path: str = "/", draft: bool = False, db: AsyncSession = Depends(get_db)):
     """
     Get content for a specific path.
-    If draft=True, return draft_data, else return published data.
+    If draft=True, require admin authentication and return draft_data, else return published data.
     """
+    if ".." in path or "\x00" in path or len(path) > 256:
+        raise HTTPException(status_code=400, detail="Invalid content path")
+
+    if draft:
+        await verify_admin_token(request)
+
     # Normalize path (ensure leading slash)
     if not path.startswith("/"):
         path = "/" + path

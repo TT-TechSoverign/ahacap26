@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { ProtectedEmailLink } from '@/components/ProtectedEmailLink';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState, useRef, useMemo, Suspense } from 'react';
 // Fix import path: go up two levels to 'web', then into 'context'
@@ -500,7 +501,7 @@ function ShopPageContent() {
                             Need Professional Sizing or Installation Advice?
                         </h3>
                         <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                            It is <strong className="text-white">zero cost to book an appointment for estimates</strong> on new or replacement window AC installations! Call our office directly at <a href="tel:808-488-1111" className="text-cyan-300 font-bold hover:underline">(808) 488-1111</a>, email <a href="mailto:office@affordablehome-ac.com" className="text-cyan-300 font-bold hover:underline">office@affordablehome-ac.com</a>, or submit the appointment form.
+                            It is <strong className="text-white">zero cost to book an appointment for estimates</strong> on new or replacement window AC installations! Call our office directly at <a href="tel:808-488-1111" className="text-cyan-300 font-bold hover:underline">(808) 488-1111</a>, email <ProtectedEmailLink className="text-cyan-300 font-bold hover:underline" eventLabel="Shop Appointment Banner Email" />, or submit the appointment form.
                         </p>
                     </div>
 

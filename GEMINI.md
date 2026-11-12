@@ -1,9 +1,9 @@
 # SOVEREIGN MASTER PROJECTS BRAIN CONSTITUTION (GEMINI.md)
 
 > **Affordable Home A/C (AHAC) — Oahu, Hawaii**  
-> **Master Projects Brain Version**: `2.7.0-SOVEREIGN`  
-> **Active Operational Epoch**: `EPOCH 21 (October 20, 2026)`  
-> **Primary Host Node**: Hostinger VPS (`31.220.53.132`) • Dedicated Dev OS (`prod-dev-os:3005`) • FastAPI (`prod-api:8001`) • `55` Neural Synapses
+> **Master Projects Brain Version**: `2.7.0-SOVEREIGN` (`v2.7.3-NOV11-EMAIL-FORTRESS`)  
+> **Active Operational Epoch**: `EPOCH 21 (November 11, 2026)`  
+> **Primary Host Node**: Hostinger VPS (`31.220.53.132`) • Dedicated Dev OS (`prod-dev-os:3005`) • FastAPI (`prod-api:8001`) • `58` Neural Synapses • `4` Workspace Skills
 
 ---
 
@@ -50,9 +50,9 @@ Every conversation session inherits the knowledge, directives, historical timeli
 
 ---
 
-## IV. SOVEREIGN AGENT REGISTRY (10 SUB-MASTERS • 40 AGENTS • 50 SOPS • 55 SYNAPSES)
+## IV. SOVEREIGN AGENT REGISTRY (10 SUB-MASTERS • 40 AGENTS • 50 SOPS • 58 SYNAPSES)
 
-The platform is monitored and driven by 10 Category Sub-Masters and 40 specialized satellite agents (`v2.7.0-EPOCH-21`):
+The platform is monitored and driven by 10 Category Sub-Masters and 40 specialized satellite agents (`v2.7.3-NOV11-EMAIL-FORTRESS`):
 
 1. **Infrastructure & Storage Sub-Master** (`submaster_infrastructure`):
    - `agent_host_sentinel` (VPS disk, memory, SSL, UFW firewall)
@@ -60,10 +60,10 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
    - `agent_db_guardian` (PostgreSQL integrity, 16-model stock preservation, `content_pages` `shop` `#rebate` parity & daily snapshots)
    - `agent_storage_sentinel` (Docker log caps `10m x 3`, Redis 500-event buffer & disk auto-healing)
 2. **Cybersecurity & Compliance Sub-Master** (`submaster_security_compliance`):
-   - `agent_security_shield` (Loopback isolation, HMAC auth, zero plaintext tokens & `/admin` Command Menu isolation)
-   - `agent_commit_sentinel` (Git commit & pre-push secret inspection via `scan-secrets.ps1`)
-   - `agent_compliance_auditor` (14-day audit log trail, PII masking, `brian@affordablehome-ac.com` + `irasmussenjobs@gmail.com` BCC & staging shield)
-   - `agent_perimeter_auditor` (Air-tight local perimeter: zero inbound workstation reach)
+   - `agent_security_shield` (Loopback isolation, HMAC auth, zero hardcoded fallbacks, `<ProtectedEmailLink />` anti-harvester armor & `/admin` Command Menu isolation)
+   - `agent_commit_sentinel` (6-stage root + `ahac-crm` secret & email exposure inspection via `scan-secrets.ps1` + `security-email-audit.py`)
+   - `agent_compliance_auditor` (14-day audit log trail, `safe_html` + CRLF stripping, `mask_email` PII masking, `brian@affordablehome-ac.com` + `irasmussenjobs@gmail.com` BCC & staging shield)
+   - `agent_perimeter_auditor` (Air-tight local perimeter: zero inbound workstation reach, Nginx `X-Real-IP` rate limiting & `chmod 700`/`600` DB backup vault)
 3. **Commerce & Telemetry Sub-Master** (`submaster_commerce_telemetry`):
    - `agent_funnel_telemetry` (Real-time micro-conversion beacon ingestion across 4 Window AC funnels)
    - `agent_cro_optimizer` (Zero-upfront funnel velocity, live `/api/v1/products` stock sync & `/admin` always-visible Edit/Delete buttons)
@@ -172,7 +172,7 @@ The platform is monitored and driven by 10 Category Sub-Masters and 40 specializ
   - Restored and locked the **`$45` Hawaii Energy Rebate (`#rebate`, `<RebateSection />`)** on `/shop` across both default and filtered views, `content.json`, PostgreSQL `content_pages` (`shop` row), and the `NavbarV2` `Shop Window AC` dropdown.
   - Revamped the storefront **`/admin` Command Menu** below `NavbarV2` (`sticky top-[72px] md:top-[168px]`) with a 4-column KPI strip, always-visible product `Edit`/`Delete` buttons, and complete removal of internal `CRM Portal` and `Dev OS` links.
   - Completed **4-Pass 360° Codebase Pruning, Hardcoding Purge & Customer Journey Hardening**: deployed `<WindowAcQuickShop />` with `OOS_FALLBACK_MAP` across high-intent funnels, added `Auto-Fix Cart Availability` in `CartDrawer.tsx`, post-purchase `$45` Rebate PDF & `$0` Install Estimate workflow actions in `checkout/page.tsx`, `?canceled=true` recovery banner on `/shop`, `cm` conversion & SMS verification in `SpatialCaliperHUD.tsx`, URL query pre-filling across all service/symptom intake forms, and 1-click `Resume Invoice Payment` in `ahac-crm`.
-  - Installed **3 Dedicated Antigravity Workspace Skills in `.agents/skills/`** (`ahac-sovereign-swarm`, `ahac-monthly-executive-billing-and-seo`, `ahac-brand-creative-and-storyboard-studio`) and upgraded `scripts/scan-secrets.ps1` with SSH/Paramiko password regex detection and `git -c core.fsmonitor=false`.
+  - Installed **4 Dedicated Antigravity Workspace Skills in `.agents/skills/`** (`ahac-sovereign-swarm`, `ahac-cybersecurity-and-email-shield`, `ahac-monthly-executive-billing-and-seo`, `ahac-brand-creative-and-storyboard-studio`), rotated `DEV_OS_MASTER_PASSWORD` to a 48-char random secret across local & VPS `.env`, deployed the **6-Layer Email Fortress** (`safe_html`, CRLF header stripping, `mask_email`, `<ProtectedEmailLink />` anti-harvester DOM armor across all 9 public email links, Nginx `X-Real-IP` rate-limit armor, disabled prod `/docs`, `chmod 700`/`600` DB backup vault), and upgraded Master Brain to **`58` neural synapses (`v2.7.3-NOV11-EMAIL-FORTRESS`)** with `.\scripts\dev-os.ps1 security-sweep`.
 
 ---
 
@@ -182,20 +182,21 @@ To ensure every new chat session in `ahacws26` seamlessly continues where the pr
 
 1. **Mandatory New-Chat Handshake (`TRACKER`)**:
    - **CRITICAL RULE**: When the user opens a new chat session (especially when they say `"Convene all"` or ask to verify connection), you **MUST** include the codeword **`TRACKER`** prominently at the very top of your first response.
-   - Alongside **`TRACKER`**, confirm that you are connected to **Master Projects Brain v2.7.0-SOVEREIGN (`EPOCH 21` / `v2.7.2-NOV08-SWARM-OMNISCIENCE`)**, that all **10 Category Sub-Masters & 40 Specialized Agents (`55` Synapses)** are online (`All Healthy: True`), and summarize the active state from `project_state.md` so the user knows zero context was lost.
+   - Alongside **`TRACKER`**, confirm that you are connected to **Master Projects Brain v2.7.0-SOVEREIGN (`EPOCH 21` / `v2.7.3-NOV11-EMAIL-FORTRESS`)**, that all **10 Category Sub-Masters & 40 Specialized Agents (`58` Synapses)** are online (`All Healthy: True`), and summarize the active state from `project_state.md` so the user knows zero context was lost.
 2. **Mounted Antigravity Workspace Skills (`.agents/skills/`)**:
-   - [`ahac-sovereign-swarm`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-sovereign-swarm/SKILL.md): Full 40-agent swarm orchestration, 3-stage live deployment verification, and customer-journey non-regression checks.
+   - [`ahac-sovereign-swarm`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-sovereign-swarm/SKILL.md): Full 40-agent swarm orchestration (`58` synapses), 3-stage live deployment verification, and customer-journey non-regression checks.
+   - [`ahac-cybersecurity-and-email-shield`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-cybersecurity-and-email-shield/SKILL.md): 6-layer Email Fortress (`safe_html`, CRLF header stripping, PII log masking, `<ProtectedEmailLink />` anti-harvester DOM armor), CEO Email Shield routing, zero hardcoded fallbacks, and `security-sweep` verification.
    - [`ahac-monthly-executive-billing-and-seo`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-monthly-executive-billing-and-seo/SKILL.md): Plain-English 3rd-grade CEO monthly SEO reporting (`.docx`, `.html`, `.md`) and non-technical invoice/email drafting for CEO Brian Borges (`_private_portfolio/` & `_analytics_data/` strictly untracked).
    - [`ahac-brand-creative-and-storyboard-studio`](file:///c:/Users/Tai_Z790AeroG/Desktop/ahacws26/.agents/skills/ahac-brand-creative-and-storyboard-studio/SKILL.md): Official Affordable Home A/C visual identity, storyboard/ad prompt engineering, and Oahu architectural background rules (cities used strictly as visual background settings, never as storyboard text labels).
-2. **Before Modifying Code**:
+3. **Before Modifying Code**:
    - Check `project_state.md` to confirm the latest progress and verified features.
    - Run `powershell -File .\scripts\dev-os.ps1 status` or `brain` to inspect live agent telemetries.
-3. **During Development**:
+4. **During Development**:
    - Maintain air-tight perimeter security (client-initiated pull/push; 0 inbound workstation reach).
    - Enforce pure Tailwind CSS and lightweight components in Dev OS (< 150 kB First Load JS).
    - Never add Dev OS or administrative bloat to the storefront (`apps/web`).
-4. **Before Concluding a Session**:
-   - Run `powershell -File .\scripts\scan-secrets.ps1`.
+5. **Before Concluding a Session**:
+   - Run `powershell -ExecutionPolicy Bypass -File .\scripts\dev-os.ps1 security-sweep`.
    - Update `project_state.md` with accomplishments, verified tests, and next steps.
    - Execute `powershell -File .\scripts\dev-os.ps1 session-sync "<Brief Session Summary>"` to register the milestone into the permanent Master Brain cognitive stream.
 

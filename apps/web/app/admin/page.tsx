@@ -1391,7 +1391,8 @@ Created: ${new Date(lead.created_at).toLocaleString()}`;
     const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${lead.address}, ${lead.city}, HI ${lead.zip}`)}`;
     const emailSubject = encodeURIComponent(`Affordable Home A/C - Appointment Lead #${lead.id}`);
     const emailBody = encodeURIComponent(`Aloha ${lead.first_name},\n\nThank you for choosing Affordable Home A/C! We received your request for ${lead.service_type} in ${lead.city}.\n\nOur dispatch team is reviewing your schedule and will contact you directly at ${lead.phone}.\n\nMahalo,\nAffordable Home A/C Team\nOahu, Hawaii | Waipahu Warehouse Direct`);
-    const mailtoUrl = `mailto:${lead.email}?subject=${emailSubject}&body=${emailBody}`;
+    const safeLeadEmail = encodeURIComponent((lead.email || '').replace(/[\r\n]/g, '').trim());
+    const mailtoUrl = `mailto:${safeLeadEmail}?subject=${emailSubject}&body=${emailBody}`;
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -1630,7 +1631,7 @@ function OrderDetailModal({ order, adminFetch, onClose, onSave }: { order: Order
                                     </div>
                                     <div className="flex items-center gap-3">
                                         <Mail className="text-slate-500 size-4" />
-                                        <a href={`mailto:${order.customer_email}`} className="text-slate-300 text-xs hover:text-primary transition-colors">{order.customer_email || 'No email'}</a>
+                                        <a href={`mailto:${encodeURIComponent((order.customer_email || '').replace(/[\r\n]/g, '').trim())}`} className="text-slate-300 text-xs hover:text-primary transition-colors">{order.customer_email || 'No email'}</a>
                                     </div>
                                     {order.customer_phone && (
                                         <div className="flex items-center gap-3">

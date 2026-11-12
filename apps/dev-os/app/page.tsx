@@ -125,8 +125,6 @@ interface OrderRecord {
     created_at?: string;
 }
 
-const MASTER_EMAIL = 'irasmussenjobs@gmail.com';
-
 export default function DevOsEagleEyePage() {
     // --- AUTHENTICATION STATE ---
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -680,7 +678,7 @@ export default function DevOsEagleEyePage() {
                                 type="email"
                                 value={loginEmail}
                                 onChange={e => setLoginEmail(e.target.value)}
-                                placeholder="irasmussenjobs@gmail.com"
+                                placeholder="admin@affordablehome-ac.com"
                                 className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-950 px-3 py-2 text-sm text-white focus:border-cyan-500 focus:outline-none"
                                 required
                             />
@@ -741,7 +739,7 @@ export default function DevOsEagleEyePage() {
                             <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                             <span>Dedicated Container: prod-dev-os :3005</span>
                             <span>•</span>
-                            <span className="text-cyan-400">{MASTER_EMAIL}</span>
+                            <span className="text-cyan-400">{loginEmail || 'Sovereign Architect'}</span>
                         </div>
                     </div>
                 </div>

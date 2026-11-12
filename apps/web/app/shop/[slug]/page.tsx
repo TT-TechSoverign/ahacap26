@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { ProtectedEmailLink } from '@/components/ProtectedEmailLink';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { useCart } from '../../../context/CartContext';
@@ -1178,13 +1179,13 @@ export default function ProductDetailPage() {
                                     </Link>
                                 </div>
                                 <div className="text-center pt-1">
-                                    <a 
-                                        href={`mailto:office@affordablehome-ac.com?subject=${encodeURIComponent('Appointment Inquiry: ' + product.name)}`}
+                                    <ProtectedEmailLink
+                                        subject={`Appointment Inquiry: ${product.name}`}
+                                        prefixText="Email Dispatch: "
+                                        icon={<Mail className="size-3.5" />}
                                         className="text-[11px] text-slate-400 hover:text-cyan-300 font-mono tracking-wide underline inline-flex items-center gap-1.5 transition-colors"
-                                    >
-                                        <Mail className="size-3.5" />
-                                        Email Dispatch: office@affordablehome-ac.com
-                                    </a>
+                                        eventLabel={`PDP Email: ${product.name}`}
+                                    />
                                 </div>
                             </div>
                             

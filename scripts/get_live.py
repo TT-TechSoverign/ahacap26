@@ -3,10 +3,8 @@ import ssl
 import json
 
 ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
 
-url = "https://affordablehome-ac.com/api/v1/products?limit=1000"
+url = "https://www.affordablehome-ac.com/api/v1/products?limit=1000"
 try:
     with urllib.request.urlopen(url, context=ctx) as response:
         data = response.read().decode('utf-8')

@@ -107,6 +107,15 @@ class LeadUpdate(BaseModel):
     status: str
     notes: Optional[str] = None
 
+
+def sanitize_csv_cell(val: Any) -> str:
+    """Neutralizes spreadsheet formula injection (=, +, -, @, tab, CR) in exported CSV cells."""
+    s = "" if val is None else str(val).replace("\r", " ").replace("\n", " ")
+    if s and s[0] in ("=", "+", "-", "@", "\t"):
+        return f"'{s}"
+    return s
+
+
 @router.get("/orders")
 async def get_all_orders(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(models.Order).order_by(models.Order.created_at.desc()))
@@ -131,17 +140,17 @@ async def export_orders_csv(db: AsyncSession = Depends(get_db)):
         tax = round(total * 0.04712 / 1.04712, 2)
         subtotal = round(total - tax, 2)
         writer.writerow([
-            order.id,
-            order.status,
+            sanitize_csv_cell(order.id),
+            sanitize_csv_cell(order.status),
             order.created_at.isoformat() if order.created_at else "",
-            order.customer_name or "",
-            order.customer_email or "",
-            order.customer_phone or "",
-            order.fulfillment_mode or "delivery",
+            sanitize_csv_cell(order.customer_name or ""),
+            sanitize_csv_cell(order.customer_email or ""),
+            sanitize_csv_cell(order.customer_phone or ""),
+            sanitize_csv_cell(order.fulfillment_mode or "delivery"),
             f"{subtotal:.2f}",
             f"{tax:.2f}",
             f"{total:.2f}",
-            order.stripe_pid or ""
+            sanitize_csv_cell(order.stripe_pid or "")
         ])
 
     try:

@@ -73,4 +73,7 @@ async def resend_admin_email_for_order(stripe_pid: str, target_email: str):
     print("Done!")
 
 if __name__ == "__main__":
-    asyncio.run(resend_admin_email_for_order("pi_3T9eyzRT8Qu92qsY1cWHn7MP", "irasmussenjobs@gmail.com"))
+    target_inbox = sys.argv[1] if len(sys.argv) > 1 else os.getenv("DEV_TEST_EMAIL", "")
+    if not target_inbox:
+        raise SystemExit("Usage: python scripts/resend_admin.py <target_email> (or set DEV_TEST_EMAIL)")
+    asyncio.run(resend_admin_email_for_order("pi_3T9eyzRT8Qu92qsY1cWHn7MP", target_inbox))

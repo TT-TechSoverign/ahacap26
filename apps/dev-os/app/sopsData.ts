@@ -647,35 +647,36 @@ export const SOVEREIGN_SOPS: Record<string, SopDossier> = {
     "agent_security_shield": {
         "id": "agent_security_shield",
         "code": "SOP-SEC-01",
-        "title": "Zero-Trust Security Shield",
+        "title": "Zero-Trust Security & Email Fortress Shield",
         "domain": "Security",
         "supervisor": "submaster_security_compliance",
-        "mandate": "Enforce zero-trust network boundaries, loopback binding, client bundle sanitization, HMAC master authentication, and storefront /admin Command Deck isolation (zero internal Dev OS or CRM links).",
+        "mandate": "Enforce zero-trust network boundaries, loopback binding, HTML/CRLF email sanitization, <ProtectedEmailLink /> anti-harvester DOM armor, OpenAPI public lockdown, HMAC master authentication, and storefront /admin Command Deck isolation.",
         "token_efficiency_policy": "Synchronous validation on-demand; zero background CPU or network overhead.",
-        "oahu_grounding": "Ensures Dev OS and CRM links are completely absent from the storefront /admin Command Center bar while keeping internal services isolated.",
+        "oahu_grounding": "Protects Oahu customer and executive email inboxes against phishing injection, spam harvesting, and unauthorized API introspection while keeping /admin isolated.",
         "inputs": [
             "Listening socket map",
+            "services/email.py & ProtectedEmailLink.tsx",
             "apps/web/app/admin/page.tsx",
-            "Master authentication credentials"
+            "Rotated Master authentication credentials"
         ],
         "execution_steps": [
             {
                 "step": 1,
-                "title": "Loopback Enforcement Scan",
-                "description": "Audit listening ports to verify internal services are restricted to 127.0.0.1.",
-                "verification": "All internal ports bound to loopback."
+                "title": "Loopback & OpenAPI Lockdown Scan",
+                "description": "Audit listening ports (127.0.0.1) and verify FastAPI /docs, /redoc, and /openapi.json are disabled on production/staging.",
+                "verification": "All internal ports bound to loopback; OpenAPI hidden."
             },
             {
                 "step": 2,
-                "title": "Storefront /admin Isolation Audit",
-                "description": "Inspect apps/web/app/admin/page.tsx to confirm zero internal 'CRM Portal' or 'Dev OS' links exist in the Command Menu bar.",
-                "verification": "Storefront /admin 100% isolated to 4 storefront tabs."
+                "title": "Email Fortress & Anti-Harvester Audit",
+                "description": "Verify HTML entity escaping, CRLF header stripping in services/email.py, and <ProtectedEmailLink /> across all 9 storefront contact surfaces.",
+                "verification": "0 raw mailto: in SSR DOM; 0 HTML/CRLF email injection vectors."
             },
             {
                 "step": 3,
-                "title": "Master Auth Gate Check",
-                "description": "Verify only irasmussenjobs@gmail.com is authorized for Dev OS with SHA-256 HMAC token validation.",
-                "verification": "Master auth gate enforced."
+                "title": "Storefront /admin & Master Auth Gate Check",
+                "description": "Confirm zero CRM/Dev OS links in /admin Command Menu and verify rotated SHA-256 HMAC Dev OS master key.",
+                "verification": "Master auth gate & /admin isolation enforced."
             }
         ],
         "outputs": [

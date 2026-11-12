@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useContent } from '@/lib/context/ContentContext';
 import { TrackedPhoneLink } from './TrackedPhoneLink';
+import { ProtectedEmailLink } from './ProtectedEmailLink';
 import { MapPin, Phone, Mail, CheckCircle2, Shield } from 'lucide-react';
 
 export default function Footer() {
@@ -234,7 +235,7 @@ export default function Footer() {
                                 <Mail className="text-primary size-5 mt-1 shrink-0" />
                                 <div>
                                     <div className="text-white font-bold text-sm uppercase">Email</div>
-                                    <a href="mailto:office@affordablehome-ac.com" className="text-slate-400 text-sm hover:text-white transition-colors">office@affordablehome-ac.com</a>
+                                    <ProtectedEmailLink className="text-slate-400 text-sm hover:text-white transition-colors" eventLabel="Footer Email Link" />
                                 </div>
                             </li>
                         </ul>

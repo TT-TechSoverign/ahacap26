@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ProtectedEmailLink } from './ProtectedEmailLink';
 import { useEffect } from 'react';
 import { useContent } from '../lib/context/ContentContext';
 import { X, Phone, Store, Calendar, Sparkles, Wrench, Compass, ShieldCheck, MapPin, Mail, Star } from 'lucide-react';
@@ -151,13 +152,13 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
                             </Link>
                         </div>
                         <div className="text-center pt-0.5">
-                            <a 
-                                href="mailto:office@affordablehome-ac.com?subject=Appointment%20Inquiry%20-%20Affordable%20Home%20AC"
+                            <ProtectedEmailLink
+                                subject="Appointment Inquiry - Affordable Home AC"
+                                prefixText="Email: "
+                                icon={<Mail className="size-3" />}
                                 className="text-[10px] text-slate-400 hover:text-cyan-300 font-mono tracking-wide underline inline-flex items-center gap-1"
-                            >
-                                <Mail className="size-3" />
-                                Email: office@affordablehome-ac.com
-                            </a>
+                                eventLabel="Mobile Drawer Email"
+                            />
                         </div>
                     </div>
 

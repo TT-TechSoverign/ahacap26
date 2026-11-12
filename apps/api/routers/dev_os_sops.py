@@ -280,38 +280,38 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
     "agent_security_shield": {
         "id": "agent_security_shield",
         "code": "SOP-SEC-01",
-        "title": "Zero-Trust Security Shield",
+        "title": "Zero-Trust Security & Email Fortress Shield",
         "domain": "Security",
         "supervisor": "submaster_security_compliance",
-        "mandate": "Enforce zero-trust network boundaries, loopback binding, client bundle sanitization, HMAC master authentication, and storefront /admin Command Deck isolation (zero internal Dev OS or CRM links).",
+        "mandate": "Enforce zero-trust network boundaries, loopback binding, HTML/CRLF email sanitization, <ProtectedEmailLink /> anti-harvester DOM armor, OpenAPI public lockdown, HMAC master authentication, and storefront /admin Command Deck isolation.",
         "token_efficiency_policy": "Synchronous validation on-demand; zero background CPU or network overhead.",
-        "oahu_grounding": "Ensures Dev OS and CRM links are completely absent from the storefront /admin Command Center bar while keeping internal services isolated.",
-        "inputs": ["Listening socket map", "apps/web/app/admin/page.tsx", "Master authentication credentials"],
+        "oahu_grounding": "Protects Oahu customer and executive email inboxes against phishing injection, spam harvesting, and unauthorized API introspection while keeping /admin isolated.",
+        "inputs": ["Listening socket map", "services/email.py & ProtectedEmailLink.tsx", "apps/web/app/admin/page.tsx", "Rotated Master authentication credentials"],
         "execution_steps": [
-            {"step": 1, "title": "Loopback Enforcement Scan", "description": "Audit listening ports to verify internal services are restricted to 127.0.0.1.", "verification": "All internal ports bound to loopback."},
-            {"step": 2, "title": "Storefront /admin Isolation Audit", "description": "Inspect apps/web/app/admin/page.tsx to confirm zero internal 'CRM Portal' or 'Dev OS' links exist in the Command Menu bar.", "verification": "Storefront /admin 100% isolated to 4 storefront tabs."},
-            {"step": 3, "title": "Master Auth Gate Check", "description": "Verify only irasmussenjobs@gmail.com is authorized for Dev OS with SHA-256 HMAC token validation.", "verification": "Master auth gate enforced."}
+            {"step": 1, "title": "Loopback & OpenAPI Lockdown Scan", "description": "Audit listening ports (127.0.0.1) and verify FastAPI /docs, /redoc, and /openapi.json are disabled on production/staging.", "verification": "All internal ports bound to loopback; OpenAPI hidden."},
+            {"step": 2, "title": "Email Fortress & Anti-Harvester Audit", "description": "Verify HTML entity escaping, CRLF header stripping in services/email.py, and <ProtectedEmailLink /> across all 9 storefront contact surfaces.", "verification": "0 raw mailto: in SSR DOM; 0 HTML/CRLF email injection vectors."},
+            {"step": 3, "title": "Storefront /admin & Master Auth Gate Check", "description": "Confirm zero CRM/Dev OS links in /admin Command Menu and verify rotated SHA-256 HMAC Dev OS master key.", "verification": "Master auth gate & /admin isolation enforced."}
         ],
-        "outputs": ["Security status (ARMORED)", "Admin Command Deck isolation status", "Authentication gate status"],
-        "contingency_protocol": "Immediately revoke compromised session tokens and strip any internal administrative links from storefront templates."
+        "outputs": ["Security status (ARMORED)", "Email Fortress & anti-harvester status", "Admin Command Deck isolation status"],
+        "contingency_protocol": "Immediately revoke compromised session tokens, rotate master keys, and strip any raw mailto: or internal admin links from storefront templates."
     },
     "agent_commit_sentinel": {
         "id": "agent_commit_sentinel",
         "code": "SOP-SEC-02",
-        "title": "Git Pre-Push Commit Sentinel",
+        "title": "Git & Public File Secret/Email Sentinel",
         "domain": "Security",
         "supervisor": "submaster_security_compliance",
-        "mandate": "Prevent credential leakage, API secrets, and unvetted code from reaching remote or public git repositories.",
-        "token_efficiency_policy": "Executes pre-push script check; consumes 0 tokens by performing regex pattern analysis locally.",
-        "oahu_grounding": "Protects proprietary Oahu customer phone numbers, addresses, and Stripe payment keys from repository exposure.",
-        "inputs": ["Git commit history (last 10 commits)", "Staged git diffs", "scan-secrets.ps1 patterns"],
+        "mandate": "Prevent credential leakage, fallback secrets, API keys, and private executive/developer email addresses from reaching public bundles, public assets, or git repositories.",
+        "token_efficiency_policy": "Executes scripts/scan-secrets.ps1 and scripts/security-email-audit.py locally; consumes 0 LLM tokens.",
+        "oahu_grounding": "Protects proprietary Oahu customer PII, private CEO/developer emails, and Stripe live keys across all 1,287+ project files.",
+        "inputs": ["Git tracked files & history", "apps/web/public/* & SSR client source", "scan-secrets.ps1 & security-email-audit.py"],
         "execution_steps": [
-            {"step": 1, "title": "Recent Commits Inspection", "description": "Scan recent commits for high-entropy strings, private keys, and API tokens.", "verification": "Zero leaked secrets detected."},
-            {"step": 2, "title": "Environment File Audit", "description": "Verify all .env files and local secrets are strictly included in .gitignore.", "verification": ".env files ignored."},
-            {"step": 3, "title": "Pre-Push Validation", "description": "Run scripts/scan-secrets.ps1 to verify full working tree compliance.", "verification": "Scanner returns exit code 0."}
+            {"step": 1, "title": "Every-File Secret & Fallback Scan", "description": "Scan git HEAD, recent commits, and submodule files for API tokens, private keys, and hardcoded fallback passwords.", "verification": "Zero leaked secrets or hardcoded fallbacks detected."},
+            {"step": 2, "title": "Public Asset & Private Email Audit", "description": "Verify apps/web/public/ contains zero sensitive files/emails and apps/web/ contains zero private CEO/dev email addresses.", "verification": "0 private emails in storefront code; .env files chmod 600 & gitignored."},
+            {"step": 3, "title": "Automated Security Sweep Gate", "description": "Run scripts/scan-secrets.ps1 and scripts/security-email-audit.py before push.", "verification": "Both scanners return exit code 0."}
         ],
-        "outputs": ["Commit audit grade (SECURED)", "Leaked secrets count (0)", "Ignored env file verification"],
-        "contingency_protocol": "Block git push immediately if a secret pattern matches; rewrite history or purge credentials before allowing push."
+        "outputs": ["Commit audit grade (SECURED)", "Leaked secrets count (0)", "Public email exposure count (0)"],
+        "contingency_protocol": "Block git push immediately if a secret or private email pattern matches in public paths; rotate credentials and purge before push."
     },
     "agent_compliance_auditor": {
         "id": "agent_compliance_auditor",

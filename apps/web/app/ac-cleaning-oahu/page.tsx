@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { ProtectedEmailLink } from '@/components/ProtectedEmailLink';
 import { 
     ArrowRight, 
     CheckCircle2, 
@@ -459,7 +460,7 @@ export default function AcCleaningOahuPage() {
                                     Book Window AC Cleaning
                                 </h3>
                                 <p className="text-slate-300 text-xs mt-1 leading-relaxed">
-                                    Zero upfront payment to book your appointment. Submit below, call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, or email <a href="mailto:office@affordablehome-ac.com" className="text-primary font-bold hover:underline">office@affordablehome-ac.com</a>.
+                                    Zero upfront payment to book your appointment. Submit below, call <a href="tel:808-488-1111" className="text-primary font-bold hover:underline">(808) 488-1111</a>, or email <ProtectedEmailLink className="text-primary font-bold hover:underline" eventLabel="AC Cleaning Oahu Email" />.
                                 </p>
                             </div>
 

@@ -1,7 +1,7 @@
 # SOVEREIGN AGENT & SWARM REGISTRY (AGENTS.md)
 
-> **Master Projects Brain Version**: `2.7.0-SOVEREIGN` • **Active Epoch**: `EPOCH 21 (October 20, 2026)`  
-> **Swarm Topology**: `10 Category Sub-Masters` • `40 Specialized Satellite Agents` • `50 SOP Dossiers` • `55 Neural Synapses`
+> **Master Projects Brain Version**: `2.7.0-SOVEREIGN` (`v2.7.3-NOV11-EMAIL-FORTRESS`) • **Active Epoch**: `EPOCH 21 (November 11, 2026)`  
+> **Swarm Topology**: `10 Category Sub-Masters` • `40 Specialized Satellite Agents` • `50 SOP Dossiers` • `58 Neural Synapses` • `4 Workspace Skills`
 
 This document defines the agent architecture, roles, execution protocols, and operational guardrails for all AI agents and subagents operating within the Affordable Home A/C codebase.
 
@@ -9,7 +9,7 @@ This document defines the agent architecture, roles, execution protocols, and op
 
 ## 1. SOVEREIGN MASTER & FLEET STRUCTURE
 
-- **Sovereign Master (`2.7.0-SOVEREIGN`)**: Central cognitive intelligence overseeing all autonomous operations, cross-session learning (`TRACKER` protocol), and 55 neural synapses.
+- **Sovereign Master (`2.7.0-SOVEREIGN`)**: Central cognitive intelligence overseeing all autonomous operations, cross-session learning (`TRACKER` protocol), and 58 neural synapses.
 - **Category Sub-Masters (10)**: Autonomous domain supervisors governing specific functional areas.
 - **Specialized Satellite Agents (40)**: On-demand diagnostic and execution units (0% background idle CPU burn; multi-worker Redis pub/sub synchronized across 4 Uvicorn processes).
 - **Core Operational Mandates**:
@@ -21,7 +21,7 @@ This document defines the agent architecture, roles, execution protocols, and op
 
 ```
                                                      [ MASTER PROJECTS BRAIN v2.7.0 ]
-                                                            (55 Neural Synapses)
+                                                            (58 Neural Synapses)
                                                                       |
     +---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
     |               |               |               |               |               |               |               |               |               |               |
@@ -42,12 +42,12 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_storage_sentinel`: Enforces Docker log caps (`10m` x `3`), Redis 500-event ring buffer limits, and 14-day rolling audit pruning (`0.00%` storage leak risk).
 
 ### Sub-Master 2: Cybersecurity & Compliance (`submaster_security_compliance`)
-- **Scope**: Zero-trust HMAC authentication, pre-push secret detection, immutable audit trails, air-tight local perimeter defense (`0` inbound workstation reach), storefront `/admin` Command Deck isolation, and CEO Email Shield routing.
+- **Scope**: Zero-trust HMAC authentication, 6-layer Email Fortress (`safe_html`, CRLF header stripping, PII log masking, `<ProtectedEmailLink />` anti-harvester DOM armor), pre-push secret detection, air-tight local perimeter defense (`0` inbound workstation reach), storefront `/admin` Command Deck isolation, and CEO Email Shield routing.
 - **Agents**:
-  - `agent_security_shield`: Enforces loopback port isolation, SHA-256 HMAC master authentication, client bundle sanitization, and verifies zero internal `CRM Portal` or `Dev OS` links exist in the storefront `/admin` Command Menu.
-  - `agent_commit_sentinel`: Scans git diffs and commits via `scripts/scan-secrets.ps1` for exposed API keys, Stripe `sk_live` tokens, and credentials.
-  - `agent_compliance_auditor`: Manages 14-day rolling PostgreSQL audit logs, PII masking, floor drop-cloth legal grounding, and verifies production notifications route to `brian@affordablehome-ac.com` with `irasmussenjobs@gmail.com` on BCC (and exclusively to `irasmussenjobs@gmail.com` in staging/test).
-  - `agent_perimeter_auditor`: Mathematically validates `0` inbound server-to-workstation reach (100% client-initiated outbound HTTPS pull/push).
+  - `agent_security_shield`: Enforces loopback port isolation, SHA-256 HMAC master authentication, zero hardcoded fallback secrets, disabled prod `/docs`, `<ProtectedEmailLink />` anti-harvester armor, and verifies zero internal `CRM Portal` or `Dev OS` links exist in `/admin`.
+  - `agent_commit_sentinel`: Scans git diffs and commits via `scripts/scan-secrets.ps1` and `scripts/security-email-audit.py` across both root and `ahac-crm` for exposed API keys, fallback keys, private emails in `apps/web/`, and raw public `mailto:` links.
+  - `agent_compliance_auditor`: Manages 14-day rolling PostgreSQL audit logs, `safe_html` + CRLF header sanitization, PII log masking (`mask_email`), floor drop-cloth legal grounding, and verifies production notifications route to `brian@affordablehome-ac.com` with `irasmussenjobs@gmail.com` on BCC (and exclusively to `irasmussenjobs@gmail.com` in staging/test).
+  - `agent_perimeter_auditor`: Mathematically validates `0` inbound server-to-workstation reach (100% client-initiated outbound HTTPS pull/push), trusted `X-Real-IP` rate-limiting, and `chmod 700`/`600` DB backup vault permissions.
 
 ### Sub-Master 3: Commerce & Telemetry (`submaster_commerce_telemetry`)
 - **Scope**: 4-funnel Window AC telemetry, appointment velocity, live homepage & warehouse stock synchronization, Stripe payments & 4.712% Oahu GET tax, CRM multi-stage invoice guardrails, and 16-model catalog specification fidelity.
@@ -142,15 +142,17 @@ The local PowerShell CLI bridge (`.\scripts\dev-os.ps1`) allows immediate intera
 
 # Deployment Swarm & Security
 .\scripts\dev-os.ps1 verify-live             # Execute 3-stage live deployment swarm check
-.\scripts\dev-os.ps1 scan-secrets            # Run local git repository secret scanner
+.\scripts\dev-os.ps1 scan-secrets            # Run 6-stage local + submodule git secret scanner
+.\scripts\dev-os.ps1 security-sweep          # Run full 6-stage secret scan + Python forensic email/codebase audit
 ```
 
 ---
 
 ## 4. WORKSPACE SKILLS REGISTRY (`.agents/skills/`)
 
-All Antigravity sessions automatically discover and mount the following workspace skills:
-- **`ahac-sovereign-swarm`** (`.agents/skills/ahac-sovereign-swarm/SKILL.md`): Full 10 Sub-Master / 40 Agent swarm orchestration, 360° codebase audits, and 3-stage live deployment verification.
+All Antigravity sessions automatically discover and mount the following 4 workspace skills:
+- **`ahac-sovereign-swarm`** (`.agents/skills/ahac-sovereign-swarm/SKILL.md`): Full 10 Sub-Master / 40 Agent swarm orchestration (`58` synapses), 360° codebase audits, and 3-stage live deployment verification.
+- **`ahac-cybersecurity-and-email-shield`** (`.agents/skills/ahac-cybersecurity-and-email-shield/SKILL.md`): 6-layer Email Fortress (`safe_html`, CRLF stripping, PII log masking, `<ProtectedEmailLink />` anti-harvester DOM armor), CEO Email Shield routing, zero hardcoded fallbacks, and `security-sweep` gatekeepers.
 - **`ahac-monthly-executive-billing-and-seo`** (`.agents/skills/ahac-monthly-executive-billing-and-seo/SKILL.md`): Plain-English CEO invoice line items, executive Gmail billing drafts, and 3rd-grade monthly SEO reports for CEO Brian Borges.
 - **`ahac-brand-creative-and-storyboard-studio`** (`.agents/skills/ahac-brand-creative-and-storyboard-studio/SKILL.md`): Official Affordable Home A/C branding, video/ad storyboard prompt engineering, and Oahu visual background guidelines.
 

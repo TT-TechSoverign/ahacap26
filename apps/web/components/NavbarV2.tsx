@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { cn, isCampaignActive } from '@/lib/utils';
 import { useCart } from '../context/CartContext';
 import { useLiveInventorySummary } from '@/lib/use-live-inventory';
+import { ProtectedEmailLink } from './ProtectedEmailLink';
 import { 
     ShoppingCart, 
     Wind, 
@@ -116,12 +117,10 @@ export default function NavbarV2() {
                                 <span>Office: (808) 488-1111</span>
                             </a>
                             <span className="text-slate-700 hidden xl:inline">|</span>
-                            <a 
-                                href="mailto:office@affordablehome-ac.com" 
+                            <ProtectedEmailLink
                                 className="text-slate-400 hover:text-cyan-300 transition-colors hidden xl:inline shrink-0"
-                            >
-                                office@affordablehome-ac.com
-                            </a>
+                                eventLabel="Navbar Top Utility Email"
+                            />
                         </div>
                     </div>
                 </div>

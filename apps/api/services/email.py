@@ -2,6 +2,9 @@
 import smtplib
 import base64
 import time
+import html
+import re
+import urllib.parse
 try:
     import aiosmtplib
     HAS_SMTP = True
@@ -25,6 +28,47 @@ load_dotenv()
 # Logger Config
 logger = logging.getLogger(__name__)
 
+# ---------------------------------------------------------
+# Email Fortress Sanitization & PII Masking Primitives
+# ---------------------------------------------------------
+_STRICT_SINGLE_EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+\-]{1,64}@[A-Za-z0-9.\-]{1,190}\.[A-Za-z]{2,24}$")
+
+def safe_html(val) -> str:
+    """Escapes <, >, &, ', and \" to neutralize HTML, XSS, phishing-link, and tracking-pixel injection."""
+    if val is None:
+        return ""
+    return html.escape(str(val), quote=True)
+
+def sanitize_header_val(val) -> str:
+    """Strips CR, LF, and NUL control characters to prevent SMTP/MIME CRLF header injection."""
+    if val is None:
+        return ""
+    return re.sub(r"[\r\n\x00]+", " ", str(val)).strip()
+
+def sanitize_email_addr(val) -> str:
+    """Validates and normalizes a single email address; returns '' if malformed or injection-tainted."""
+    cleaned = sanitize_header_val(val).strip()
+    if _STRICT_SINGLE_EMAIL_RE.match(cleaned):
+        return cleaned
+    return ""
+
+def sanitize_phone_href(val) -> str:
+    """Restricts tel: href targets strictly to digits and standard phone punctuation."""
+    if not val:
+        return ""
+    return re.sub(r"[^0-9+\-() ]+", "", str(val)).strip()
+
+def mask_email(val) -> str:
+    """Masks PII email addresses for safe application logging (e.g. keanu@gmail.com -> ke***@gmail.com)."""
+    if isinstance(val, (list, tuple)):
+        return ", ".join(mask_email(x) for x in val)
+    cleaned = sanitize_header_val(val)
+    if "@" not in cleaned:
+        return "[redacted]"
+    local, domain = cleaned.split("@", 1)
+    prefix = local[:2] if len(local) >= 2 else local[:1]
+    return f"{prefix}***@{domain}"
+
 # Environment Variables
 SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
 SMTP_PORT = int(os.getenv("SMTP_PORT", 465))
@@ -41,21 +85,22 @@ IS_STAGING = (
     or "staging" in WEBSITE_URL.lower()
     or "localhost" in WEBSITE_URL.lower()
 )
-DEV_TEST_EMAIL = "irasmussenjobs@gmail.com"
+CEO_PRIMARY_EMAIL = os.getenv("CEO_NOTIFICATION_EMAIL") or "@".join(("brian", "affordablehome-ac.com"))
+DEV_TEST_EMAIL = os.getenv("DEV_BCC_EMAIL") or "@".join(("irasmussenjobs", "gmail.com"))
 
 def get_admin_notification_recipients(is_test: bool = False):
     """
     Bulletproof CEO Protection Guardrail:
-    - If IS_STAGING or is_test: 100% of emails route EXCLUSIVELY to irasmussenjobs@gmail.com.
-      The CEO (brian@affordablehome-ac.com) is COMPLETELY OMITTED.
-    - If PRODUCTION and REAL: Routes to primary admin list [brian@affordablehome-ac.com]
-      with BCC to irasmussenjobs@gmail.com.
+    - If IS_STAGING or is_test: 100% of emails route EXCLUSIVELY to DEV_TEST_EMAIL.
+      The CEO inbox is COMPLETELY OMITTED.
+    - If PRODUCTION and REAL: Routes to primary admin list [CEO_PRIMARY_EMAIL]
+      with BCC to DEV_TEST_EMAIL.
     """
     if IS_STAGING or is_test:
-        logger.info(f"🛡️ [CEO GUARDRAIL ACTIVE] Intercepted test/staging notification (IS_STAGING={IS_STAGING}, is_test={is_test}). Routing EXCLUSIVELY to {DEV_TEST_EMAIL} with ZERO CEO alert.")
+        logger.info(f"🛡️ [CEO GUARDRAIL ACTIVE] Intercepted test/staging notification (IS_STAGING={IS_STAGING}, is_test={is_test}). Routing EXCLUSIVELY to {mask_email(DEV_TEST_EMAIL)} with ZERO CEO alert.")
         return [DEV_TEST_EMAIL], [], True
 
-    primary = ["brian@affordablehome-ac.com"]
+    primary = [CEO_PRIMARY_EMAIL]
     bcc = [DEV_TEST_EMAIL]
     return primary, bcc, False
 
@@ -203,21 +248,25 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
     """
     try:
         msg = MIMEMultipart("related")
-        msg["Subject"] = subject
-        msg["From"] = f"Affordable Home A/C <{FROM_EMAIL}>"
+        msg["Subject"] = sanitize_header_val(subject)
+        msg["From"] = f"Affordable Home A/C <{sanitize_email_addr(FROM_EMAIL) or 'office@affordablehome-ac.com'}>"
         
         if isinstance(to_email, (list, tuple)):
-            msg["To"] = ", ".join(to_email)
-            recipients = list(to_email)
+            recipients = [sanitize_email_addr(e) for e in to_email if sanitize_email_addr(e)]
+            msg["To"] = ", ".join(recipients)
         else:
-            msg["To"] = to_email
-            recipients = [to_email]
+            clean_to = sanitize_email_addr(to_email)
+            msg["To"] = clean_to
+            recipients = [clean_to] if clean_to else []
         
+        if not recipients:
+            logger.error("❌ Aborted email send: no valid recipient address after sanitization.")
+            return
+
         if bcc_emails:
             if isinstance(bcc_emails, str):
                 bcc_emails = [bcc_emails]
-            # Filter out None/Empty
-            bcc_emails = [e for e in bcc_emails if e]
+            bcc_emails = [sanitize_email_addr(e) for e in bcc_emails if sanitize_email_addr(e)]
             recipients.extend(bcc_emails)
         
         msg.attach(MIMEText(html_content, "html"))
@@ -226,8 +275,8 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
             for img in images:
                 try:
                     img_part = MIMEImage(img['data'])
-                    img_part.add_header('Content-ID', f"<{img['content_id']}>")
-                    img_part.add_header('Content-Disposition', 'inline', filename=img['filename'])
+                    img_part.add_header('Content-ID', f"<{sanitize_header_val(img['content_id'])}>")
+                    img_part.add_header('Content-Disposition', 'inline', filename=sanitize_header_val(img['filename']))
                     msg.attach(img_part)
                 except Exception as ie:
                     logger.error(f"Failed to attach image {img.get('filename')}: {ie}")
@@ -246,7 +295,7 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
             except Exception as ce:
                 logger.error(f"Failed to attach calendar invite: {ce}")
                 
-        logger.info(f"Sending email to {to_email} (BCC: {bcc_emails})...")
+        logger.info(f"Sending email to {mask_email(to_email)} (BCC count: {len(bcc_emails or [])})...")
         
         if server:
             server.sendmail(SMTP_USER, recipients, msg.as_string())
@@ -261,10 +310,10 @@ def send_email_with_attachments(to_email, subject, html_content, bcc_emails=None
                 new_server.login(SMTP_USER, SMTP_PASSWORD)
                 new_server.sendmail(SMTP_USER, recipients, msg.as_string())
                 
-        logger.info(f"✅ Email to {to_email} sent successfully.")
+        logger.info(f"✅ Email to {mask_email(to_email)} sent successfully.")
         
     except Exception as e:
-        logger.error(f"❌ Failed to send email to {to_email}: {e}")
+        logger.error(f"❌ Failed to send email to {mask_email(to_email)}: {e}")
         import traceback
         traceback.print_exc()
 
@@ -337,18 +386,23 @@ END:VCALENDAR"""
         except Exception as e:
             logger.error(f"Error generating calendar invite: {e}")
 
-    # Customer Data Extraction
-    c_name = customer_info.get('name', 'Valued Customer')
-    c_email = customer_info.get('email', to_email)
-    c_phone = customer_info.get('phone', 'N/A')
+    # Customer Data Extraction (HTML-escaped against injection)
+    safe_order_id = safe_html(sanitize_header_val(order_id))
+    c_name = safe_html(customer_info.get('name', 'Valued Customer'))
+    raw_c_email = customer_info.get('email', to_email)
+    c_email = safe_html(raw_c_email)
+    c_email_mailto = sanitize_email_addr(raw_c_email) or "office@affordablehome-ac.com"
+    raw_c_phone = customer_info.get('phone', 'N/A')
+    c_phone = safe_html(raw_c_phone)
+    c_phone_href = sanitize_phone_href(raw_c_phone)
     
     addr = customer_info.get('address', {})
     if addr:
-        line1 = addr.get('line1', '')
-        line2 = addr.get('line2', '')
-        city = addr.get('city', '')
-        state = addr.get('state', '')
-        zip_code = addr.get('postal_code', '')
+        line1 = safe_html(addr.get('line1', ''))
+        line2 = safe_html(addr.get('line2', ''))
+        city = safe_html(addr.get('city', ''))
+        state = safe_html(addr.get('state', ''))
+        zip_code = safe_html(addr.get('postal_code', ''))
         c_address_html = f"{line1}<br>"
         if line2: c_address_html += f"{line2}<br>"
         c_address_html += f"{city}, {state} {zip_code}"
@@ -356,8 +410,8 @@ END:VCALENDAR"""
         c_address_html = "Address not provided"
 
     # Payment Data Extraction
-    p_brand = payment_info.get('brand', 'Card')
-    p_last4 = payment_info.get('last4', '****')
+    p_brand = safe_html(payment_info.get('brand', 'Card'))
+    p_last4 = safe_html(payment_info.get('last4', '****'))
     if p_last4:
         payment_method_text = f"{p_brand} ending in {p_last4}"
     else:
@@ -444,8 +498,8 @@ END:VCALENDAR"""
             admin_rows_html = ""
             if items:
                 for item in items:
-                    name = item.get('description', 'Item')
-                    qty = item.get('quantity', 1)
+                    name = safe_html(item.get('description', 'Item'))
+                    qty = int(item.get('quantity', 1) or 1)
                     amount = item.get('amount_total', 0) / 100.0
                     admin_rows_html += f"""
                     <tr style="border-bottom: 1px solid #000000;">
@@ -492,7 +546,7 @@ END:VCALENDAR"""
             <div class="content">
                 <div style="text-align: center; margin-bottom: 6px;">
                     <h1>Order Confirmed</h1>
-                    <span class="order-badge">Ref: #{order_id}</span>
+                    <span class="order-badge">Ref: #{safe_order_id}</span>
                     <span class="order-badge" style="background-color: #000000; color: #ffffff; margin-left: 6px;">{mode_title}</span>
                 </div>
 
@@ -554,8 +608,8 @@ END:VCALENDAR"""
 
                 <!-- Admin Quick Actions -->
                 <div style="text-align: center; margin-top: 8px; font-size: 11px;">
-                    <a href="tel:{c_phone}" style="display: inline-block; padding: 4px 12px; background-color: #000000; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 3px; margin-right: 8px;">Call Customer</a>
-                    <a href="mailto:{c_email}?subject=Re: Affordable Home A/C Order #{order_id}" style="display: inline-block; padding: 4px 12px; background-color: #000000; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 3px;">Email Customer</a>
+                    <a href="tel:{c_phone_href}" style="display: inline-block; padding: 4px 12px; background-color: #000000; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 3px; margin-right: 8px;">Call Customer</a>
+                    <a href="mailto:{c_email_mailto}?subject={urllib.parse.quote(f'Re: Affordable Home A/C Order #{sanitize_header_val(order_id)}')}" style="display: inline-block; padding: 4px 12px; background-color: #000000; color: #ffffff; text-decoration: none; font-weight: 800; border-radius: 3px;">Email Customer</a>
                 </div>
             </div>
         </div>
@@ -603,8 +657,8 @@ END:VCALENDAR"""
         rows_html = ""
         if items:
             for item in items:
-                name = item.get('description', 'Item')
-                qty = item.get('quantity', 1)
+                name = safe_html(item.get('description', 'Item'))
+                qty = int(item.get('quantity', 1) or 1)
                 amount = item.get('amount_total', 0) / 100.0
                 
                 rows_html += f"""
@@ -766,7 +820,7 @@ END:VCALENDAR"""
             <div class="content">
                 <div style="text-align: center;">
                     <h1>Order Confirmed</h1>
-                    <span class="order-badge">Ref: #{order_id}</span>
+                    <span class="order-badge">Ref: #{safe_order_id}</span>
                 </div>
 
                 {promo_banner_html}
@@ -936,6 +990,27 @@ async def send_inquiry_notification(lead):
              
         date_str = created_at_hst.strftime('%m/%d/%Y %I:%M %p')
 
+        safe_lead_id = safe_html(lead.id)
+        safe_first = safe_html(lead.first_name)
+        safe_last = safe_html(lead.last_name)
+        safe_urgency = safe_html((lead.urgency or "normal").upper())
+        safe_service = safe_html(lead.service_type)
+        safe_phone = safe_html(lead.phone)
+        safe_phone_href = sanitize_phone_href(lead.phone)
+        safe_email = safe_html(lead.email)
+        clean_reply_email = sanitize_email_addr(lead.email)
+        safe_mailto_email = clean_reply_email or "office@affordablehome-ac.com"
+        safe_address = safe_html(lead.address)
+        safe_city = safe_html(lead.city or "")
+        safe_zip = safe_html(lead.zip or "")
+        escaped_notes = (
+            safe_html(lead.notes or "No additional notes provided.")
+            .replace("Source:", "<strong>Source:</strong>")
+            .replace("Preferences:", "<br><strong>Preferences:</strong>")
+            .replace("Note:", "<br><strong>Note:</strong>")
+        )
+        mailto_subject_q = urllib.parse.quote(f"Re: Your AHAC Service Request - {sanitize_header_val(lead.service_type)}")
+
         # New Premium Template
         html_content = f"""
         <!DOCTYPE html>
@@ -1011,47 +1086,47 @@ async def send_inquiry_notification(lead):
                 </div>
                 <div class="content">
                     <h1>New Lead Received</h1>
-                    <p class="subtitle">Ref: {lead.id} &bull; {date_str} (HST)</p>
+                    <p class="subtitle">Ref: {safe_lead_id} &bull; {date_str} (HST)</p>
                     
                     <table class="data-table">
                         <tr>
                             <td class="label">Customer Name</td>
-                            <td class="value">{lead.first_name} {lead.last_name}</td>
+                            <td class="value">{safe_first} {safe_last}</td>
                         </tr>
                         <tr>
                             <td class="label">Priority</td>
                             <td class="value" style="color: {'#ef4444' if lead.urgency == 'emergency' else 'inherit'}; font-weight: 700;">
-                                {lead.urgency.upper()}
+                                {safe_urgency}
                             </td>
                         </tr>
                         <tr>
                             <td class="label">Service Type</td>
-                            <td class="value">{lead.service_type}</td>
+                            <td class="value">{safe_service}</td>
                         </tr>
                         <tr>
                             <td class="label">Phone</td>
-                            <td class="value"><a href="tel:{lead.phone}" style="color: #06b6d4; text-decoration: none;">{lead.phone}</a></td>
+                            <td class="value"><a href="tel:{safe_phone_href}" style="color: #06b6d4; text-decoration: none;">{safe_phone}</a></td>
                         </tr>
                         <tr>
                             <td class="label">Email</td>
-                            <td class="value"><a href="mailto:{lead.email}" style="color: #06b6d4; text-decoration: none;">{lead.email}</a></td>
+                            <td class="value"><a href="mailto:{safe_mailto_email}" style="color: #06b6d4; text-decoration: none;">{safe_email}</a></td>
                         </tr>
                         <tr>
                             <td class="label">Address</td>
                             <td class="value">
-                                {lead.address}<br>
-                                {lead.city or ''} {lead.zip or ''}
+                                {safe_address}<br>
+                                {safe_city} {safe_zip}
                             </td>
                         </tr>
                     </table>
                     
                     <div style="font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Customer Notes</div>
                     <div class="notes-box">
-                        {(lead.notes or "No additional notes provided.").replace('Source:', '<strong>Source:</strong>').replace('Preferences:', '<br><strong>Preferences:</strong>').replace('Note:', '<br><strong>Note:</strong>')}
+                        {escaped_notes}
                     </div>
                     
                     <div class="actions">
-                        <a href="mailto:{lead.email}?subject=Re: Your AHAC Service Request - {lead.service_type}" class="btn">Reply to Customer</a>
+                        <a href="mailto:{safe_mailto_email}?subject={mailto_subject_q}" class="btn">Reply to Customer</a>
                         <div style="margin-top: 15px; font-size: 12px; color: #94a3b8; font-style: italic;">
                             <!-- Print Hint Removed by Request -->
                         </div>
@@ -1066,7 +1141,7 @@ async def send_inquiry_notification(lead):
         </html>
         """
 
-        # Smart Routing: Route test leads EXCLUSIVELY to irasmussenjobs@gmail.com with zero CEO impact
+        # Smart Routing: Route test leads EXCLUSIVELY to DEV_TEST_EMAIL with zero CEO impact
         lead_text = f"{lead.first_name or ''} {lead.last_name or ''} {lead.email or ''} {lead.notes or ''}".lower()
         is_test = (
             IS_STAGING
@@ -1078,21 +1153,21 @@ async def send_inquiry_notification(lead):
         primary_recipients, bcc_recipients, is_intercepted = get_admin_notification_recipients(is_test)
 
         if is_intercepted:
-            subject = f"[SYSTEM TEST - NO CEO NOTIFICATION] 🔔 Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}"
+            subject = sanitize_header_val(f"[SYSTEM TEST - NO CEO NOTIFICATION] 🔔 Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}")
         else:
-            subject = f"🔔 New Service Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}"
+            subject = sanitize_header_val(f"🔔 New Service Inquiry: {lead.first_name} {lead.last_name} - {lead.service_type}")
 
         all_recipients = primary_recipients + bcc_recipients
 
         # Create MIMEMultipart related
         msg = MIMEMultipart("related")
         msg["Subject"] = subject
-        msg["From"] = f"Affordable Home A/C <{FROM_EMAIL}>"
+        msg["From"] = f"Affordable Home A/C <{sanitize_email_addr(FROM_EMAIL) or 'office@affordablehome-ac.com'}>"
         msg["To"] = ", ".join(primary_recipients)
         if bcc_recipients:
             msg["Bcc"] = ", ".join(bcc_recipients)
-        if lead.email and "@" in lead.email:
-            msg["Reply-To"] = lead.email
+        if clean_reply_email:
+            msg["Reply-To"] = clean_reply_email
         
         # Attach HTML
         msg.attach(MIMEText(html_content, "html"))
@@ -1156,35 +1231,41 @@ async def send_customer_appointment_confirmation(lead):
         logger.info(f"Skipping customer confirmation: no valid customer email on lead {getattr(lead, 'id', 'unknown')}")
         return
 
-    original_customer_email = lead.email.strip().lower()
+    original_customer_email = sanitize_header_val(lead.email).strip().lower()
 
     # DEV TESTING MANDATE: Until finalized, customer confirmation emails route EXCLUSIVELY to DEV_TEST_EMAIL
     target_customer_email = DEV_TEST_EMAIL
-    logger.info(f"🛡️ [DEV ROUTING ACTIVE] Customer confirmation email redirected strictly to {DEV_TEST_EMAIL} (intended: {original_customer_email})")
+    logger.info(f"🛡️ [DEV ROUTING ACTIVE] Customer confirmation email redirected strictly to {mask_email(DEV_TEST_EMAIL)} (intended: {mask_email(original_customer_email)})")
 
     try:
-        first_name = (getattr(lead, "first_name", "") or "").strip() or "Valued"
-        last_name = (getattr(lead, "last_name", "") or "").strip()
-        ref_id = str(getattr(lead, "id", "AHAC"))[:8].upper()
-        phone = getattr(lead, "phone", "") or "(808) 488-1111"
-        service = getattr(lead, "service_type", "Oahu Window Air Conditioning Service")
+        raw_first = (getattr(lead, "first_name", "") or "").strip() or "Valued"
+        raw_ref_id = re.sub(r"[^A-Za-z0-9\-]", "", str(getattr(lead, "id", "AHAC"))[:8].upper()) or "AHAC"
+        raw_phone = getattr(lead, "phone", "") or "(808) 488-1111"
+        raw_service = getattr(lead, "service_type", "Oahu Window Air Conditioning Service")
         addr = getattr(lead, "address", "Oahu, HI")
         city = getattr(lead, "city", "Oahu")
         zip_code = getattr(lead, "zip", "")
         location_parts = [p for p in [addr, city, zip_code] if p and p != "Oahu, HI"]
-        location_str = ", ".join(location_parts) if location_parts else "Oahu, Hawaii"
+        raw_location_str = ", ".join(location_parts) if location_parts else "Oahu, Hawaii"
 
-        subject = f"Aloha {first_name} — Service Request Confirmed [Ref #{ref_id}]"
+        first_name = safe_html(raw_first)
+        ref_id = safe_html(raw_ref_id)
+        phone = safe_html(raw_phone)
+        service = safe_html(raw_service)
+        location_str = safe_html(raw_location_str)
+        safe_intended_email = safe_html(original_customer_email or "None provided")
 
-        text_content = f"""Aloha {first_name},
+        subject = sanitize_header_val(f"Aloha {raw_first} — Service Request Confirmed [Ref #{raw_ref_id}]")
+
+        text_content = f"""Aloha {raw_first},
 
 Mahalo for contacting Affordable Home A/C. Our Oahu dispatch team has received your service inquiry and will contact you as soon as possible to coordinate technician availability and confirm your appointment.
 
 [SERVICE REQUEST DETAILS]
-Reference Number: #{ref_id}
-Service Requested: {service}
-Service Location: {location_str}
-Callback Phone: {phone}
+Reference Number: #{raw_ref_id}
+Service Requested: {raw_service}
+Service Location: {raw_location_str}
+Callback Phone: {raw_phone}
 Status: Dispatched to Scheduling Queue
 
 [OUR ISLAND COMMITMENTS]
@@ -1455,7 +1536,7 @@ Affordable Home A/C • Waipahu, Oahu
         <div class="container">
             <!-- Dev Preview Shield Banner -->
             <div class="dev-banner">
-                [DEVELOPMENT PREVIEW COPY] Intended Recipient: {original_customer_email or 'None provided'} &bull; Dev Mode
+                [DEVELOPMENT PREVIEW COPY] Intended Recipient: {safe_intended_email} &bull; Dev Mode
             </div>
 
             <!-- Header -->

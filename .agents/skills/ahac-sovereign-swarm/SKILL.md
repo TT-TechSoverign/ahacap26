@@ -7,15 +7,15 @@ description: >-
   maintenance and security audits.
 ---
 
-# AHAC Sovereign Swarm & Deployment Runbook (`v2.7.2-NOV08-SWARM-OMNISCIENCE`)
+# AHAC Sovereign Swarm & Deployment Runbook (`v2.7.3-NOV11-EMAIL-FORTRESS`)
 
 ## 1. Mandatory Handshake & Identity Protocol (`TRACKER`)
 - Every new conversation or `"Convene all"` response **MUST** begin prominently with **`TRACKER`**.
-- Confirm connection to **Master Projects Brain v2.7.0-SOVEREIGN (`EPOCH 21`)** across all **10 Category Sub-Masters, 40 Specialized Agents, 50 SOP Dossiers, and 55 Neural Synapses**.
+- Confirm connection to **Master Projects Brain v2.7.0-SOVEREIGN (`EPOCH 21` / `v2.7.3-NOV11-EMAIL-FORTRESS`)** across all **10 Category Sub-Masters, 40 Specialized Agents, 50 SOP Dossiers, 58 Neural Synapses, and 4 Workspace Skills**.
 - Read [`project_state.md`](../../project_state.md), [`GEMINI.md`](../../GEMINI.md), and [`AGENTS.md`](../../AGENTS.md) before modifying code.
 
 ## 2. CLI Bridge Commands (`.\scripts\dev-os.ps1`)
-Because `.\scripts\dev-os.ps1` queries the live production API over HTTPS (`https://www.affordablehome-ac.com/api/v1/dev-os`), run it with network access when verifying live server telemetry:
+`.\scripts\dev-os.ps1` loads `DEV_OS_MASTER_PASSWORD` dynamically from the process environment or untracked local `.env` (zero hardcoded secrets) and queries the live production API over HTTPS (`https://www.affordablehome-ac.com/api/v1/dev-os`):
 ```powershell
 # Query 40-agent lifecycle & Master Brain state
 powershell -File .\scripts\dev-os.ps1 status
@@ -29,31 +29,35 @@ powershell -File .\scripts\dev-os.ps1 run-fleet
 # Execute 3-Stage Live Deployment Verification Swarm
 powershell -File .\scripts\dev-os.ps1 verify-live
 
+# Execute Full 6-Stage Secret Scanner + Forensic Email & Codebase Security Audit
+powershell -File .\scripts\dev-os.ps1 security-sweep
+
 # Sync session milestones into Redis & PostgreSQL Master Brain
 powershell -File .\scripts\dev-os.ps1 session-sync "<Session Summary>"
 ```
 
-## 3. Local Pre-Deploy Verification Gatekeepers (Run Sandboxed)
-Always run these three checks locally before pushing or deploying:
-1. **Storefront TypeScript Verification (`101` canonical routes)**:
+## 3. Local Pre-Deploy Verification Gatekeepers
+Always run these four checks locally before pushing or deploying:
+1. **Storefront & Dev OS TypeScript Verification (`108` indexed sitemap URLs / `101` canonical Window AC routes)**:
    ```powershell
    cd apps/web; npx tsc --noEmit
+   cd apps/dev-os; npx tsc --noEmit
    ```
-2. **Backend Pytest Suite (`15/15` unit tests)**:
+2. **Backend Pytest Suite (`apps/api/tests`)**:
    ```powershell
-   pytest apps/api/tests
+   .\apps\api\.venv\Scripts\python.exe -m pytest apps/api/tests -q
    ```
-3. **5-Stage Root Cybersecurity Secret Scanner**:
+3. **Full Security & Email Fortress Sweep (`scan-secrets.ps1` + `security-email-audit.py`)**:
    ```powershell
-   powershell -File .\scripts\scan-secrets.ps1
+   powershell -ExecutionPolicy Bypass -File .\scripts\dev-os.ps1 security-sweep
    ```
-- **Untracked Vault Rule**: Keep `_private_portfolio/` and `_analytics_data/` 100% untracked in Git (`.git/info/exclude`). Never stage or commit them.
+- **Untracked Vault Rule**: Keep `_private_portfolio/`, `_analytics_data/`, and `.env` 100% untracked in Git. Never stage or commit them.
 
 ## 4. Zero-Downtime Production VPS Deployment (`31.220.53.132`)
-- **Main Monorepo Path on VPS**: `/root/ahacap26` (uses `docker-compose.prod.yml`; service names: `prod-web`, `prod-api`, `prod-dev-os`, `prod-db`, `prod-redis`).
-- **CRM Repository Path on VPS**: `/var/www/ahac-crm` (uses `docker-compose.crm.yml`; service names: `crm-frontend`, `crm-api`).
-- **Standard Deploy Sequence**:
+- **Main Monorepo Path on VPS**: `/root/ahacap26` (uses `docker-compose.prod.yml`; service names: `web` -> `prod-web`, `api` -> `prod-api`, `dev-os` -> `prod-dev-os`, `db` -> `prod-db`, `redis` -> `prod-redis`).
+- **CRM Repository Path on VPS**: `/var/www/ahac-crm` or `/root/ahacap26/ahac-crm` submodule (uses `docker-compose.crm.yml`).
+- **Standard Deploy Sequence** (use `--force-recreate` whenever `.env` secrets are rotated so running containers reload environment variables):
   ```powershell
-  ssh root@31.220.53.132 "cd /root/ahacap26 && git fetch origin main && git reset --hard origin/main && docker compose -f docker-compose.prod.yml up -d --build prod-web prod-api && cd /var/www/ahac-crm && git fetch origin main && git reset --hard origin/main && docker compose -f docker-compose.crm.yml up -d --build"
+  ssh root@31.220.53.132 "cd /root/ahacap26 && git fetch origin main && git reset --hard origin/main && git submodule update --init --recursive && docker compose -f docker-compose.prod.yml up -d --build --force-recreate web api dev-os"
   ```
 - Immediately after container recreation, run `powershell -File .\scripts\dev-os.ps1 verify-live` and confirm `overall_status: "VERIFIED_CLEAN"`.

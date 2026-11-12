@@ -74,7 +74,19 @@ async def lifespan(app: FastAPI):
     await close_redis()
     await engine.dispose()
 
-app = FastAPI(lifespan=lifespan)
+_startup_db_url = os.getenv("DATABASE_URL", "")
+_disable_public_api_docs = (
+    "db:" in _startup_db_url
+    or "staging-db:" in _startup_db_url
+    or "prod-db:" in _startup_db_url
+)
+
+app = FastAPI(
+    lifespan=lifespan,
+    docs_url=None if _disable_public_api_docs else "/docs",
+    redoc_url=None if _disable_public_api_docs else "/redoc",
+    openapi_url=None if _disable_public_api_docs else "/openapi.json",
+)
 
 from fastapi.responses import JSONResponse
 import traceback
@@ -399,7 +411,7 @@ async def process_stripe_event(event: dict, payload_data: dict):
                 if event['type'] == 'checkout.session.completed':
                     target_email = order.customer_email or receipt_email
                     if target_email:
-                        print(f"Dispatching email to {target_email} via Checkout Session...")
+                        print(f"Dispatching email to {email_service.mask_email(target_email)} via Checkout Session...")
                         
                         # Call updated service with new args
                         try:
@@ -436,7 +448,7 @@ async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
     # Reload env var to be safe (though docker restart fixed it)
     webhook_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
     
-    print(f"DEBUG: Sig Header: {sig_header}")
+    print(f"DEBUG: Sig Header Present: {bool(sig_header)}")
     print(f"DEBUG: Secret Present: {bool(webhook_secret)}")
 
     if not webhook_secret:
@@ -465,7 +477,7 @@ async def stripe_webhook(request: Request, background_tasks: BackgroundTasks):
 
 # --- MAINTENANCE ---
 from seed_products import seed
-from dependencies import verify_admin_token, get_db
+from dependencies import verify_admin_token, get_db, get_client_ip
 
 @app.post("/api/v1/maintenance/seed_products", dependencies=[Depends(verify_admin_token)])
 async def seed_products_endpoint(background_tasks: BackgroundTasks, force: bool = Query(False)):
@@ -474,12 +486,12 @@ async def seed_products_endpoint(background_tasks: BackgroundTasks, force: bool 
 
 @app.post("/api/v1/admin/login")
 async def admin_login(payload: dict, request: Request, db: AsyncSession = Depends(get_db)):
-    ip = request.client.host if request.client else "unknown"
-    if not await check_rate_limit(ip, "admin_login", limit=10, period=300):
+    ip = get_client_ip(request)
+    if not await check_rate_limit(ip, "admin_login", limit=8, period=300):
         raise HTTPException(status_code=429, detail="Too many attempts. Please try again later.")
 
     pin = str(payload.get("pin") or "").strip()
-    if not pin:
+    if not pin or len(pin) > 128:
         raise HTTPException(status_code=400, detail="Missing Access Code")
 
     expected_pin = os.getenv("ADMIN_PIN", "").strip()
@@ -517,7 +529,7 @@ async def admin_login(payload: dict, request: Request, db: AsyncSession = Depend
 
     try:
         from routers.dev_os import log_dev_os_audit
-        login_method = "PIN" if pin == expected_pin else "MASTER_PASSWORD"
+        login_method = "PIN" if (bool(expected_pin) and hmac.compare_digest(pin, expected_pin)) else "MASTER_PASSWORD"
         await log_dev_os_audit(db, action="ADMIN_LOGIN_SUCCESS", details={"method": login_method, "ip": ip}, ip=ip)
     except Exception:
         pass
