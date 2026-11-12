@@ -54,10 +54,10 @@ Always run these four checks locally before pushing or deploying:
 - **Untracked Vault Rule**: Keep `_private_portfolio/`, `_analytics_data/`, and `.env` 100% untracked in Git. Never stage or commit them.
 
 ## 4. Zero-Downtime Production VPS Deployment (`31.220.53.132`)
-- **Main Monorepo Path on VPS**: `/root/ahacap26` (uses `docker-compose.prod.yml`; service names: `web` -> `prod-web`, `api` -> `prod-api`, `dev-os` -> `prod-dev-os`, `db` -> `prod-db`, `redis` -> `prod-redis`).
-- **CRM Repository Path on VPS**: `/var/www/ahac-crm` or `/root/ahacap26/ahac-crm` submodule (uses `docker-compose.crm.yml`).
+- **Main Monorepo Path on VPS**: `/root/ahacap26` (uses `docker-compose.prod.yml`; service names: `prod-web`, `prod-api`, `prod-dev-os`, `prod-db`, `prod-redis`).
+- **CRM Repository Path on VPS**: `/var/www/ahac-crm` (uses `docker-compose.crm.yml`; service names: `crm-frontend`, `crm-api`).
 - **Standard Deploy Sequence** (use `--force-recreate` whenever `.env` secrets are rotated so running containers reload environment variables):
   ```powershell
-  ssh root@31.220.53.132 "cd /root/ahacap26 && git fetch origin main && git reset --hard origin/main && git submodule update --init --recursive && docker compose -f docker-compose.prod.yml up -d --build --force-recreate web api dev-os"
+  ssh root@31.220.53.132 "cd /root/ahacap26 && git fetch origin main && git reset --hard origin/main && docker compose -f docker-compose.prod.yml up -d --build --force-recreate prod-api prod-web prod-dev-os && cd /var/www/ahac-crm && git fetch origin main && git reset --hard origin/main && docker compose -f docker-compose.crm.yml up -d --build --force-recreate crm-api crm-frontend"
   ```
 - Immediately after container recreation, run `powershell -File .\scripts\dev-os.ps1 verify-live` and confirm `overall_status: "VERIFIED_CLEAN"`.
