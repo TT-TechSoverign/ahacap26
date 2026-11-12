@@ -72,7 +72,7 @@ const FEATURED_TABS: TabConfig[] = [
         subtitle:
             'High-capacity cooling for open Oahu living rooms plus true 26" built-in replacements (GE AJCQ & LG Universal Fit Cool+Heat) for Honolulu condos and townhomes.',
         ctaText: () => 'View Large Room & 26" Wall Catalog',
-        ctaHref: '/shop?capacity=LARGE',
+        ctaHref: '/shop',
         priorityIds: [5, 6, 7, 15, 9, 13, 8],
         filterFn: (p) =>
             (p.btu || 0) >= 14000 ||

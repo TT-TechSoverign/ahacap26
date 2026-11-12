@@ -11,7 +11,7 @@ import { Menu, X, ShoppingCart, Phone } from 'lucide-react';
 
 export default function MobileStickyHeader() {
     const pathname = usePathname();
-    const { items, openCart, isOpen: isCartOpen, closeCart } = useCart();
+    const { items, cartCount, openCart, isOpen: isCartOpen, closeCart } = useCart();
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -70,6 +70,7 @@ export default function MobileStickyHeader() {
                                     src="/assets/logo.svg"
                                     alt="AHAC Logo"
                                     fill
+                                    sizes="128px"
                                     className="object-contain"
                                     unoptimized
                                 />
@@ -84,14 +85,14 @@ export default function MobileStickyHeader() {
                                 aria-label="Open Cart"
                             >
                                 <ShoppingCart className="size-6" />
-                                {items.length > 0 && (
+                                {cartCount > 0 && (
                                     <span className={cn(
-                                        "absolute top-1 right-0 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
+                                        "absolute top-1 right-0 min-w-[16px] h-4 px-1 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
                                         (isCampaignActive() && items.some(item => item.promo_price && item.promo_price > 0))
                                             ? "cart-promo-badge-pulse text-white"
                                             : "bg-cyan-400 text-black"
                                     )}>
-                                        {items.length}
+                                        {cartCount}
                                     </span>
                                 )}
                             </button>

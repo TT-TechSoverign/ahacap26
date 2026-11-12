@@ -31,7 +31,7 @@ import { BackToTop } from '@/components/BackToTop';
 import { WindowAcQuickShop } from '@/components/WindowAcQuickShop';
 import { trackFunnelEvent } from '@/lib/tracking';
 import { useCart } from '@/context/CartContext';
-import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 import { ShoppingCart } from 'lucide-react';
 
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
@@ -39,8 +39,9 @@ import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 export default function CleanVsReplacePage() {
     const { addToCart, openCart } = useCart();
+    const { products: liveCatalogProducts } = useLiveInventorySummary();
     const handleQuickBuy = (productId: number) => {
-        const prod = INITIAL_CATALOG_PRODUCTS.find((item) => item.id === productId);
+        const prod = liveCatalogProducts.find((item) => item.id === productId);
         if (prod && prod.stock > 0) {
             trackFunnelEvent('decision_matrix_quick_buy', { product_id: productId });
             addToCart(prod);
@@ -75,7 +76,7 @@ export default function CleanVsReplacePage() {
     const faqItems = [
         {
             q: "How do I know if my window AC is worth cleaning or replacing on Oahu?",
-            a: "If your unit is relatively new (under 3 years old), cools well, and the coils have no rust, washing the removable nylon filter with mild dish soap every 2 weeks will maintain peak airflow and keep mold away. However, if your unit is 4+ years old, smells sour inside, has crumbling aluminum fins from salt air, or is an older single-speed model, spending money to repair it is uneconomical. Upgrading to a brand-new LG Dual Inverter starts at just $560 with a $45 Hawaii Energy cash rebate (or $395 for standard 6K BTU units) and saves up to $424/year on your HECO bill."
+            a: "If your unit is relatively new (under 3 years old), cools well, and the coils have no rust, washing the removable nylon filter with mild dish soap every 2 weeks will maintain peak airflow and keep mold away. However, if your unit is 4+ years old, smells sour inside, has crumbling aluminum fins from salt air, or is an older single-speed model, spending money to repair it is uneconomical. Upgrading to a brand-new LG Dual Inverter starts at just $560 with a $45 Hawaii Energy cash rebate (or $395 for standard 8,000 BTU LW8024RD units) and saves up to $424/year on your HECO bill."
         },
         {
             q: "Is it worth paying to overhaul or chemically teardown an old window AC in Hawaii?",

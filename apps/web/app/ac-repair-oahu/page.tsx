@@ -70,6 +70,12 @@ export default function AcRepairOahuPage() {
                 full_name: fullName,
                 phone,
             });
+            trackFunnelEvent('generate_lead', {
+                lead_type: 'Window AC Diagnosis/Repair',
+                form_name: 'AC Repair Oahu Triage',
+                symptom: selectedSymptom,
+                city,
+            });
 
             const nameParts = fullName.trim().split(/\s+/);
             const firstName = nameParts[0] || 'Customer';
@@ -269,10 +275,33 @@ export default function AcRepairOahuPage() {
                     <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
                         Accurate diagnostic inspection for window and through-the-wall AC units across Honolulu, Pearl City, Waipahu, and all Oahu. Zero upfront booking deposit and upfront itemized estimates.
                     </p>
+                    <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+                        <a
+                            href="#repair-triage-form"
+                            className="px-6 py-3.5 rounded-xl bg-primary hover:bg-cyan-300 text-slate-950 font-header font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-primary/25 flex items-center gap-2"
+                        >
+                            <Wrench className="size-4" />
+                            <span>Start $0 Repair Triage &darr;</span>
+                        </a>
+                        <a
+                            href="#in-stock-replacements"
+                            className="px-6 py-3.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-header font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center gap-2"
+                        >
+                            <Snowflake className="size-4 text-emerald-400" />
+                            <span>Shop In-Stock Replacements ($395+)</span>
+                        </a>
+                        <a
+                            href="tel:808-488-1111"
+                            className="px-5 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-mono text-xs font-bold transition-all flex items-center gap-2"
+                        >
+                            <Phone className="size-4 text-cyan-400" />
+                            <span>Call (808) 488-1111</span>
+                        </a>
+                    </div>
                 </div>
 
                 {/* Main Interactive Triage & Dispatch Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-20">
+                <div id="repair-triage-form" className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-20 scroll-mt-28 md:scroll-mt-[192px]">
                     {/* Diagnostic Selector (Left 7 Cols) */}
                     <div className="lg:col-span-7 space-y-6">
                         {/* Step 1: Symptom Selector */}
@@ -572,10 +601,12 @@ export default function AcRepairOahuPage() {
                         </Link>
                     </div>
                 </div>
-                <WindowAcQuickShop
-                    title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
-                    subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
-                />
+                <div id="in-stock-replacements" className="scroll-mt-28 md:scroll-mt-[192px]">
+                    <WindowAcQuickShop
+                        title="Old AC Beyond Repair? Order an In-Stock Replacement Today ($395–$1,200)"
+                        subheading="Skip expensive compressor or sealed-system repairs on older window units. Order a brand-new factory-sealed LG or GE Window AC online for free Waipahu pickup or $50 flat Oahu delivery."
+                    />
+                </div>
 <ReviewsPavilion variant="compact" />
                 <OahuEEATAuthorityBar topicTitle="Oahu Window AC Repair, Troubleshooting & Clean-vs-Replace Guide ($395+ New ACs)" />
             </main>

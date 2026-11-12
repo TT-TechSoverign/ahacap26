@@ -23,6 +23,18 @@ export default function ServiceAreasPage() {
         );
     }
 
+    const allSortedCities: { name: string; slug: string }[] = Array.from(
+        new Map<string, { name: string; slug: string }>(
+            serviceAreas.regions
+                .flatMap((r: any) => r.cities || [])
+                .filter((c: any) => c?.name)
+                .map((c: any) => {
+                    const slug = c.name.toLowerCase().replace(/ /g, '-');
+                    return [slug, { name: c.name, slug }] as [string, { name: string; slug: string }];
+                })
+        ).values()
+    ).sort((a, b) => a.name.localeCompare(b.name));
+
     return (
         <main className="min-h-screen bg-slate-950 font-sans pb-24 relative overflow-hidden selection:bg-cyan-500 selection:text-slate-950">
             <script
@@ -140,7 +152,7 @@ export default function ServiceAreasPage() {
             </div>
 
             {/* Header Section */}
-            <div className="relative z-10 pt-[96px] md:pt-[180px] pb-16 px-6 md:px-12 max-w-7xl mx-auto">
+            <div className="relative z-10 pt-[96px] md:pt-[180px] pb-12 px-6 md:px-12 max-w-7xl mx-auto">
                 <div className="flex flex-col items-center text-center space-y-6">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono uppercase tracking-[0.2em]">
                         <LucideIcons.MapPin className="size-3.5 text-cyan-400" />
@@ -153,7 +165,60 @@ export default function ServiceAreasPage() {
                     <p className="max-w-3xl mx-auto text-slate-300 md:text-lg tracking-wide leading-relaxed font-light">
                         {serviceAreas.description}
                     </p>
+                    <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                        <Link
+                            href="/shop"
+                            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-header font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-cyan-500/20"
+                        >
+                            <LucideIcons.ShoppingBag className="size-4" />
+                            <span>Shop In-Stock Window ACs ($395+)</span>
+                        </Link>
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-header font-bold text-xs sm:text-sm uppercase tracking-wider transition-all"
+                        >
+                            <LucideIcons.Calendar className="size-4 text-emerald-400" />
+                            <span>Book $0 Free Estimate</span>
+                        </Link>
+                        <a
+                            href="tel:808-488-1111"
+                            className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-white font-mono text-xs font-bold transition-all"
+                        >
+                            <LucideIcons.Phone className="size-4 text-cyan-400" />
+                            <span>Call (808) 488-1111</span>
+                        </a>
+                    </div>
                 </div>
+
+                {/* 22-City A–Z Instant Oahu Neighborhood Jump Bar */}
+                {allSortedCities.length > 0 && (
+                    <nav
+                        aria-label="All 22 Oahu Service Areas A to Z"
+                        className="mt-10 p-5 md:p-6 rounded-2xl bg-slate-900/75 border border-slate-800/90 shadow-xl"
+                    >
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3.5">
+                            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-cyan-400 flex items-center gap-1.5">
+                                <LucideIcons.Compass className="size-3.5" />
+                                Jump Directly to Your Oahu Neighborhood (A–Z):
+                            </span>
+                            <span className="text-[11px] font-mono text-slate-400">
+                                $0 Free Estimate &bull; Free Waipahu Pickup or $50 Oahu Delivery
+                            </span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {allSortedCities.map((city) => (
+                                <Link
+                                    key={city.slug}
+                                    href={`/service-areas/${city.slug}`}
+                                    prefetch={false}
+                                    className="px-3 py-1.5 rounded-lg bg-slate-950/90 hover:bg-cyan-500/15 border border-slate-800 hover:border-cyan-400/50 text-slate-200 hover:text-cyan-300 text-xs font-header font-bold uppercase tracking-wider transition-all"
+                                >
+                                    {city.name}
+                                </Link>
+                            ))}
+                        </div>
+                    </nav>
+                )}
             </div>
 
             {/* Regions Layout */}

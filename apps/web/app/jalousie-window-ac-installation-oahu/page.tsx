@@ -194,6 +194,7 @@ export default function JalousieWindowAcInstallationPage() {
                                     src="/assets/window-unit-images/3d-fit/compact-window-fit-cutaway.webp" 
                                     alt="Compact Jalousie Window AC 3D Cutaway" 
                                     fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                     className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
@@ -212,6 +213,7 @@ export default function JalousieWindowAcInstallationPage() {
                                     src="/assets/window-unit-images/3d-fit/lw1222ivsm-window-fit-cutaway.webp" 
                                     alt="Heavy Duty Jalousie Window AC 3D Cutaway" 
                                     fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
                                     className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                                 />
                             </div>

@@ -31,6 +31,57 @@ export interface Ga4EcommerceItem {
     index?: number;
 }
 
+export interface Ga4SessionIdentifiers {
+    gaClientId: string | null;
+    gaSessionId: string | null;
+}
+
+/**
+ * Extracts normalized GA4 Measurement Protocol identifiers from browser cookies:
+ * - `_ga`: strips `GA1.x.` prefix -> `"123456789.1700000000"`
+ * - `_ga_*`: extracts numeric `session_id` from `GS1.1.<sid>....` or `GS2.1.s<sid>$...`
+ */
+export function extractGa4SessionIdentifiers(): Ga4SessionIdentifiers {
+    if (typeof document === 'undefined') {
+        return { gaClientId: null, gaSessionId: null };
+    }
+    try {
+        const cookieStr = `; ${document.cookie}`;
+        const gaParts = cookieStr.split('; _ga=');
+        const rawGa = gaParts.length === 2 ? gaParts.pop()?.split(';').shift() || null : null;
+        let gaClientId: string | null = rawGa;
+        if (rawGa) {
+            const segments = rawGa.split('.');
+            if (segments.length >= 4 && segments[0].startsWith('GA')) {
+                gaClientId = segments.slice(-2).join('.');
+            }
+        }
+
+        let gaSessionId: string | null = null;
+        const cookies = document.cookie.split(';');
+        for (const rawCookie of cookies) {
+            const trimmed = rawCookie.trim();
+            if (trimmed.startsWith('_ga_')) {
+                const rawVal = trimmed.split('=').slice(1).join('=');
+                if (rawVal.startsWith('GS2.')) {
+                    const sMatch = rawVal.match(/(?:^|\.)s(\d+)(?:\$|\.)/);
+                    gaSessionId = sMatch ? sMatch[1] : rawVal;
+                } else if (rawVal.startsWith('GS1.')) {
+                    const parts = rawVal.split('.');
+                    gaSessionId = parts.length >= 3 ? parts[2] : rawVal;
+                } else {
+                    gaSessionId = rawVal || null;
+                }
+                break;
+            }
+        }
+
+        return { gaClientId, gaSessionId };
+    } catch {
+        return { gaClientId: null, gaSessionId: null };
+    }
+}
+
 export function buildGa4EcommerceItem(
     product: { id: number | string; name: string; price: number; promo_price?: number | null; subcategory?: string | null },
     quantity = 1,

@@ -61,13 +61,15 @@ async def reconcile_unrecorded_stripe_orders(limit: int = 25) -> dict:
                 order_id = f"ORD-{stripe_pid[-6:].upper()}"
                 logger.warning(f"🚨 [Auto-Reconciliation] Unrecorded order found: {order_id} (PI: {stripe_pid}). Recovering...")
 
-                # Extract customer details
-                cust = s.customer_details.to_dict() if hasattr(s.customer_details, 'to_dict') else dict(s.customer_details or {})
-                receipt_email = cust.get('email', '')
-                customer_name = cust.get('name', 'Valued Customer')
-                customer_phone = cust.get('phone', '')
-                customer_address = cust.get('address', {})
+                # Extract customer & delivery shipping details
+                from services.stripe_telemetry import extract_stripe_customer_info
+                s_dict = s.to_dict() if hasattr(s, 'to_dict') else dict(s or {})
                 fulfillment_mode = metadata.get('fulfillment_mode', 'pickup')
+                extracted_info = extract_stripe_customer_info(s_dict, fallback_email='', fulfillment_mode=fulfillment_mode)
+                receipt_email = extracted_info['email'] or ''
+                customer_name = extracted_info['name']
+                customer_phone = extracted_info['phone']
+                customer_address = extracted_info['address']
                 amount_received = s.amount_total or 0
 
                 # Extract line items

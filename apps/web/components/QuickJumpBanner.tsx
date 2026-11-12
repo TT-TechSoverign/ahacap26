@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ShieldCheck, ShoppingBag, Calculator, ClipboardList } from 'lucide-react';
+import { ShieldCheck, ShoppingBag, Calculator, ClipboardList, Warehouse } from 'lucide-react';
 import { useLiveInventorySummary } from '@/lib/use-live-inventory';
 
 export function QuickJumpBanner() {
@@ -33,7 +33,27 @@ export function QuickJumpBanner() {
                         Quick Pathways:
                     </span>
                     
-                    <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2 md:gap-4 lg:gap-8 w-full sm:w-auto">
+                    <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2 md:gap-4 lg:gap-6 w-full sm:w-auto">
+                        <a 
+                            href="#in-stock-waipahu-models" 
+                            onClick={(e) => handleScroll(e, 'in-stock-waipahu-models')}
+                            className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent cursor-pointer"
+                        >
+                            <Warehouse className="size-3.5 sm:size-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+                            <span>In-Stock Units</span>
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-[9px] font-bold">
+                                ${minPrice}+
+                            </span>
+                        </a>
+
+                        <Link 
+                            href="/shop" 
+                            className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent"
+                        >
+                            <ShoppingBag className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
+                            <span>Full Shop Catalog</span>
+                        </Link>
+
                         <a 
                             href="#services" 
                             onClick={(e) => handleScroll(e, 'services')}
@@ -42,17 +62,6 @@ export function QuickJumpBanner() {
                             <ShieldCheck className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
                             <span>Our Services</span>
                         </a>
-
-                        <Link 
-                            href="/shop" 
-                            className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent"
-                        >
-                            <ShoppingBag className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
-                            <span>Shop Window AC</span>
-                            <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-[9px] font-bold">
-                                ${minPrice}+
-                            </span>
-                        </Link>
 
                         <Link 
                             href="/sizing" 

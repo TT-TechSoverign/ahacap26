@@ -8,7 +8,8 @@ import { useCart } from '../../../context/CartContext';
 import { getProductImages } from '@/lib/product-images';
 import { getProductSpecs } from '@/lib/product-specs';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
-import { buildGa4EcommerceItem, trackEcommerceEvent } from '@/lib/tracking';
+import { safeStorage } from '@/lib/safe-storage';
+import { buildGa4EcommerceItem, extractGa4SessionIdentifiers, trackEcommerceEvent } from '@/lib/tracking';
 import { Product } from '@/types/inventory';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { EditableText } from '@/components/EditableText';
@@ -39,7 +40,11 @@ import {
     Sparkles,
     ExternalLink,
     ZoomIn,
-    ZoomOut
+    ZoomOut,
+    Warehouse,
+    Truck,
+    Lock,
+    Loader2
 } from 'lucide-react';
 import { StockBadge } from '@/components/StockBadge';
 import { SpatialCaliperHUD } from '@/components/SpatialCaliperHUD';
@@ -207,10 +212,13 @@ export default function ProductDetailPage() {
     const [error, setError] = useState('');
     const { content } = useContent();
 
-    const { addToCart, openCart } = useCart();
+    const { items: cartItems, addToCart, openCart, syncInventory } = useCart();
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isSpecModalOpen, setIsSpecModalOpen] = useState(false);
     const [isPurchaseBarSticky, setIsPurchaseBarSticky] = useState(false);
+    const [pdpFulfillmentMode, setPdpFulfillmentMode] = useState<'pickup' | 'delivery'>('pickup');
+    const [expressLoading, setExpressLoading] = useState(false);
+    const [expressError, setExpressError] = useState('');
     
     const [mounted, setMounted] = useState(false);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -437,6 +445,101 @@ export default function ProductDetailPage() {
     const isCampaignActive = mounted && isCampaignActiveChecker();
     const isPromo = isCampaignActive && !!product && !!product.promo_price && product.promo_price > 0;
     const isWallSleeve = product.subcategory === 'ge' || product.subcategory === 'casement';
+    const activeUnitPrice = (isPromo && product.promo_price) ? product.promo_price : product.price;
+    const isRebateEligible = product.subcategory === 'dual_inverter' || product.id === 15;
+    const pdpDeliveryFee = pdpFulfillmentMode === 'delivery' ? 50 : 0;
+    const pdpTaxAmount = Math.round(((activeUnitPrice + pdpDeliveryFee) * 0.04712) * 100) / 100;
+    const pdpEstimatedTotal = Math.round(((activeUnitPrice + pdpDeliveryFee) * 1.04712) * 100) / 100;
+
+    const handlePdpExpressCheckout = async () => {
+        if (expressLoading || !product || product.stock <= 0) return;
+        setExpressLoading(true);
+        setExpressError('');
+        try {
+            const alreadyInCart = cartItems.some(ci => ci.id === product.id);
+            const resolvedProduct = {
+                ...product,
+                price: activeUnitPrice,
+                image_url: productImages[0] || product.image_url,
+            };
+            if (!alreadyInCart) {
+                addToCart(resolvedProduct);
+            }
+            const validExisting = cartItems.filter(ci => (ci.stock ?? 1) > 0);
+            const checkoutItems = alreadyInCart
+                ? validExisting
+                : [...validExisting, { ...resolvedProduct, quantity: 1 }];
+
+            const subtotal = checkoutItems.reduce((acc, it) => acc + (it.price * (it.quantity || 1)), 0);
+            const shippingFee = pdpFulfillmentMode === 'delivery' ? 50 : 0;
+            const totalWithTax = Number(((subtotal + shippingFee) * 1.04712).toFixed(2));
+            const ga4Items = checkoutItems.map((it, idx) => buildGa4EcommerceItem(it, it.quantity || 1, idx, it.price));
+
+            trackEcommerceEvent('begin_checkout', {
+                currency: 'USD',
+                value: Number(subtotal.toFixed(2)),
+                items: ga4Items,
+            });
+
+            const { gaClientId, gaSessionId } = extractGa4SessionIdentifiers();
+            const utmSource = safeStorage.getItem('utm_source', 'session');
+            const utmMedium = safeStorage.getItem('utm_medium', 'session');
+            const utmCampaign = safeStorage.getItem('utm_campaign', 'session');
+
+            const response = await fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    items: checkoutItems,
+                    fulfillmentMode: pdpFulfillmentMode,
+                    gaClientId,
+                    gaSessionId,
+                    utmSource,
+                    utmMedium,
+                    utmCampaign,
+                }),
+            });
+
+            const { url, error: apiError } = await response.json();
+            if (apiError) throw new Error(apiError);
+            if (!url) throw new Error('Checkout URL missing');
+
+            try {
+                const shippingTier = pdpFulfillmentMode === 'delivery'
+                    ? 'Oahu Flat-Rate $50 Delivery'
+                    : 'Waipahu Free Warehouse Pickup';
+                trackEcommerceEvent('add_shipping_info', {
+                    currency: 'USD',
+                    value: totalWithTax,
+                    shipping_tier: shippingTier,
+                    items: ga4Items,
+                });
+                safeStorage.setItem(
+                    'ahac_pending_order',
+                    JSON.stringify({
+                        items: ga4Items,
+                        totalAmount: totalWithTax,
+                        shippingFee,
+                        fulfillmentMode: pdpFulfillmentMode,
+                        createdAt: Date.now(),
+                    }),
+                    'local'
+                );
+            } catch {
+                // Non-blocking storage snapshot
+            }
+
+            window.location.href = url;
+        } catch (err: any) {
+            if (err.message === 'out_of_stock') {
+                setExpressError('INVENTORY ALERT: Stock was just updated. Refreshing live Waipahu availability...');
+                syncInventory();
+            } else {
+                setExpressError(err.message || 'Express checkout connection failed. Please try again.');
+            }
+            setExpressLoading(false);
+        }
+    };
 
     return (
         <div className="bg-background-dark min-h-screen selection:bg-primary/30 text-slate-100">
@@ -492,6 +595,7 @@ export default function ProductDetailPage() {
                                             src={cutawayImageUrl}
                                             alt={`${product.name} 3D Spatial Fit`}
                                             fill
+                                            sizes="(max-width: 1024px) 100vw, 50vw"
                                             className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.9)] transition-all duration-700 group-hover/cutaway:scale-105"
                                             priority
                                             unoptimized
@@ -524,6 +628,7 @@ export default function ProductDetailPage() {
                                         src={selectedImage}
                                         alt={`${product.name}${PRODUCT_IDENTIFIERS[product.id]?.mpn && !product.name.toUpperCase().includes(PRODUCT_IDENTIFIERS[product.id].mpn.toUpperCase()) ? ` (${PRODUCT_IDENTIFIERS[product.id].mpn})` : ''} — In-Stock Waipahu, Oahu`}
                                         fill
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
                                         className="object-contain drop-shadow-[0_50px_100px_rgba(0,0,0,0.8)] transition-all duration-1000 group-hover:scale-105"
                                         priority
                                         unoptimized
@@ -577,6 +682,7 @@ export default function ProductDetailPage() {
                                             src={img}
                                             alt={`${product.name}${PRODUCT_IDENTIFIERS[product.id]?.mpn && !product.name.toUpperCase().includes(PRODUCT_IDENTIFIERS[product.id].mpn.toUpperCase()) ? ` (${PRODUCT_IDENTIFIERS[product.id].mpn})` : ''} — View ${idx + 1} (Waipahu Oahu Warehouse)`}
                                             fill
+                                            sizes="64px"
                                             className="object-cover"
                                             unoptimized
                                         />
@@ -829,30 +935,118 @@ export default function ProductDetailPage() {
                         {/* Dual-Action Purchase & Appointment Hub */}
                         <div id="product-purchase-section" className="space-y-3 pt-2 relative font-header">
                             {product.stock > 0 ? (
-                                <div className="space-y-2.5">
-                                    {/* Primary Action: Direct Hardware Purchase (Waipahu Warehouse Pickup or Delivery) */}
-                                    <button
-                                        onClick={() => {
-                                            addToCart(product);
-                                            openCart();
-                                        }}
-                                        className="w-full h-15 py-4 bg-gradient-to-r from-primary to-cyan-500 text-white font-black uppercase tracking-[0.25em] text-xs sm:text-sm rounded-xl shadow-[0_20px_50px_rgba(0,174,239,0.25)] hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 group"
-                                    >
-                                        <ShoppingCart className="size-5 group-hover:rotate-12 transition-transform shrink-0" />
-                                        <span>Buy Now & Pick Up in Waipahu</span>
-                                    </button>
-                                    <div className="flex items-center justify-between px-1 text-[11px] text-slate-400 font-sans">
-                                        <span>Free Waipahu Warehouse Pickup</span>
-                                        <span>$50 Flat Island Delivery</span>
+                                <div className="space-y-3">
+                                    {/* Inline Waipahu Pickup ($0) vs Oahu Delivery ($50) Toggle */}
+                                    <div className="bg-slate-900/90 border border-white/10 rounded-2xl p-3 space-y-2.5 text-left font-sans shadow-lg">
+                                        <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                                            <span>1. Choose Oahu Fulfillment</span>
+                                            <span className="text-emerald-400 font-bold">{product.stock} In Stock Waipahu</span>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => setPdpFulfillmentMode('pickup')}
+                                                className={cn(
+                                                    "p-2.5 rounded-xl border text-left transition-all flex items-center gap-2",
+                                                    pdpFulfillmentMode === 'pickup'
+                                                        ? "bg-emerald-500/15 border-emerald-400 text-white shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                                                        : "bg-slate-950/70 border-white/10 text-slate-400 hover:border-white/25 hover:text-white"
+                                                )}
+                                            >
+                                                <Warehouse className={cn("size-4 shrink-0", pdpFulfillmentMode === 'pickup' ? "text-emerald-400" : "text-slate-500")} />
+                                                <div className="min-w-0">
+                                                    <div className="text-[11px] font-header font-black uppercase leading-tight">Waipahu Pickup</div>
+                                                    <div className="text-[10px] font-mono text-emerald-400 font-bold">$0 Free • By Appt</div>
+                                                </div>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => setPdpFulfillmentMode('delivery')}
+                                                className={cn(
+                                                    "p-2.5 rounded-xl border text-left transition-all flex items-center gap-2",
+                                                    pdpFulfillmentMode === 'delivery'
+                                                        ? "bg-cyan-500/15 border-cyan-400 text-white shadow-[0_0_15px_rgba(34,211,238,0.15)]"
+                                                        : "bg-slate-950/70 border-white/10 text-slate-400 hover:border-white/25 hover:text-white"
+                                                )}
+                                            >
+                                                <Truck className={cn("size-4 shrink-0", pdpFulfillmentMode === 'delivery' ? "text-cyan-400" : "text-slate-500")} />
+                                                <div className="min-w-0">
+                                                    <div className="text-[11px] font-header font-black uppercase leading-tight">Oahu Delivery</div>
+                                                    <div className="text-[10px] font-mono text-cyan-300 font-bold">$50 Flat Island-Wide</div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div className="flex flex-wrap items-center justify-between gap-2 pt-1.5 border-t border-white/5 text-[11px]">
+                                            <span className="text-slate-400">
+                                                Unit ${activeUnitPrice.toLocaleString()}{pdpDeliveryFee > 0 ? ` + $50 Delivery` : ''} + ${pdpTaxAmount.toFixed(2)} HI GET
+                                            </span>
+                                            <span className="font-mono font-bold text-white">
+                                                Total: <span className="text-emerald-400">${pdpEstimatedTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                                            </span>
+                                        </div>
+                                        {isRebateEligible && (
+                                            <div className="text-[10px] font-mono text-cyan-300 bg-cyan-500/10 border border-cyan-500/25 rounded-lg px-2.5 py-1 flex items-center justify-between">
+                                                <span>Qualifies for $45 Hawaii Energy Rebate PDF</span>
+                                                <strong className="text-emerald-300">${(activeUnitPrice - 45).toLocaleString()} Net Unit Cost</strong>
+                                            </div>
+                                        )}
                                     </div>
 
-                                    {/* Secondary Action: $0 In-Home Estimate & Professional Installation */}
+                                    {expressError && (
+                                        <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-sans text-center">
+                                            {expressError}
+                                        </div>
+                                    )}
+
+                                    {/* 1-Tap Express Stripe Checkout (Apple Pay / Google Pay / US Card) */}
+                                    <button
+                                        type="button"
+                                        onClick={handlePdpExpressCheckout}
+                                        disabled={expressLoading}
+                                        className="w-full py-4 px-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black uppercase tracking-[0.15em] text-xs sm:text-sm rounded-xl shadow-[0_15px_40px_rgba(16,185,129,0.3)] hover:scale-[1.01] active:scale-[0.99] transition-all flex flex-col items-center justify-center gap-1 disabled:opacity-60"
+                                    >
+                                        {expressLoading ? (
+                                            <div className="flex items-center gap-2 py-1">
+                                                <Loader2 className="size-5 animate-spin" />
+                                                <span>Opening Secure Stripe Checkout...</span>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <div className="flex items-center gap-2">
+                                                    <Lock className="size-4 shrink-0" />
+                                                    <span>Express Pay • Apple Pay / Google Pay / Card</span>
+                                                </div>
+                                                <span className="text-[10px] font-mono tracking-normal font-bold text-emerald-950 normal-case">
+                                                    Instant 1-Tap Checkout (${pdpEstimatedTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}) • US-Issued Cards Only
+                                                </span>
+                                            </>
+                                        )}
+                                    </button>
+
+                                    {/* Secondary Action: Add to Cart & Keep Shopping (Multi-Unit Buyers) */}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            addToCart({
+                                                ...product,
+                                                price: activeUnitPrice,
+                                                image_url: productImages[0] || product.image_url,
+                                            });
+                                            openCart();
+                                        }}
+                                        className="w-full h-12 py-3 px-4 bg-gradient-to-r from-primary/20 to-cyan-500/20 hover:from-primary/30 hover:to-cyan-500/30 border border-primary/50 text-white font-black uppercase tracking-[0.18em] text-xs rounded-xl transition-all flex items-center justify-center gap-2.5 group active:scale-[0.99]"
+                                    >
+                                        <ShoppingCart className="size-4 text-cyan-300 group-hover:rotate-12 transition-transform shrink-0" />
+                                        <span>Add to Cart &amp; Review Order</span>
+                                    </button>
+
+                                    {/* Tertiary Action: $0 In-Home Estimate & Professional Installation */}
                                     <Link
-                                        href={`/contact?service=window_ac_purchase&notes=Inquiry%20for%20${encodeURIComponent(product.name)}`}
-                                        className="w-full h-13 py-3 px-4 bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/40 hover:border-cyan-400 text-cyan-300 hover:text-white font-header font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg active:scale-[0.99] text-center"
+                                        href={`/contact?service=window_ac_purchase&model=${encodeURIComponent(product.name)}&notes=${encodeURIComponent('Fit assessment & installation quote for ' + product.name)}`}
+                                        className="w-full h-12 py-3 px-4 bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/40 hover:border-cyan-400 text-cyan-300 hover:text-white font-header font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg active:scale-[0.99] text-center"
                                     >
                                         <Calendar className="size-4 text-cyan-400 shrink-0" />
-                                        <span>Request $0 In-Home Fit Assessment & Installation</span>
+                                        <span>Request $0 In-Home Fit Assessment &amp; Installation</span>
                                     </Link>
                                     <div className="text-center text-[10px] font-mono text-emerald-400">
                                         Zero Upfront Deposit • Professional Oahu Window AC Installation
@@ -1351,6 +1545,7 @@ export default function ProductDetailPage() {
                                 src={cutawayImageUrl} 
                                 alt={`${product.name} 3D Caliper Dimensions`} 
                                 fill 
+                                sizes="90vw"
                                 className="object-contain p-2 md:p-4" 
                                 priority
                                 unoptimized
@@ -1452,7 +1647,7 @@ export default function ProductDetailPage() {
                             <div className="flex items-center gap-4 min-w-0">
                                 {productImages[0] && (
                                     <div className="relative w-12 h-12 rounded-xl bg-slate-900 border border-white/10 overflow-hidden shrink-0">
-                                        <Image src={productImages[0]} alt={product.name} fill className="object-contain p-1" unoptimized />
+                                        <Image src={productImages[0]} alt={product.name} fill sizes="48px" className="object-contain p-1" unoptimized />
                                     </div>
                                 )}
                                 <div className="min-w-0 text-left">
@@ -1482,13 +1677,17 @@ export default function ProductDetailPage() {
                                 {product.stock > 0 ? (
                                     <button
                                         onClick={() => {
-                                            addToCart(product);
+                                            addToCart({
+                                                ...product,
+                                                price: activeUnitPrice,
+                                                image_url: productImages[0] || product.image_url,
+                                            });
                                             openCart();
                                         }}
-                                        className="h-11 px-6 bg-gradient-to-r from-primary to-cyan-500 hover:from-cyan-400 hover:to-primary text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_25px_rgba(0,174,239,0.35)] active:scale-95 transition-all flex items-center gap-2"
+                                        className="h-11 px-6 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-header font-black text-xs uppercase tracking-wider rounded-xl shadow-[0_0_25px_rgba(16,185,129,0.35)] active:scale-95 transition-all flex items-center gap-2"
                                     >
                                         <ShoppingCart className="size-4 shrink-0" />
-                                        <span>Buy Now & Pick Up</span>
+                                        <span>Buy Now • Pickup / Delivery</span>
                                     </button>
                                 ) : (
                                     (() => {

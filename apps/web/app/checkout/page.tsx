@@ -489,6 +489,7 @@ function CheckoutContent() {
                                                         src={item.image_url || getProductImages(item.id)[0]}
                                                         alt={item.name}
                                                         fill
+                                                        sizes="56px"
                                                         className="object-contain p-1"
                                                     />
                                                 ) : (

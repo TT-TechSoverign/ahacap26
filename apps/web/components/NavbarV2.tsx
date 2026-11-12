@@ -34,7 +34,7 @@ const getNavIcon = (href: string, text: string) => {
 
 export default function NavbarV2() {
     const pathname = usePathname();
-    const { items, openCart } = useCart();
+    const { items, cartCount, openCart } = useCart();
     const { inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
 
     // --- Sticky-Free Navigation Logic ---
@@ -154,6 +154,7 @@ export default function NavbarV2() {
                                         src="/assets/logo.svg"
                                         alt="AHAC Logo"
                                         fill
+                                        sizes="(max-width: 768px) 144px, 192px"
                                         className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
                                         unoptimized
                                     />
@@ -286,14 +287,14 @@ export default function NavbarV2() {
                                 aria-label="Open Cart"
                             >
                                 <ShoppingCart className="size-5 text-white group-hover:text-cyan-400 transition-colors" />
-                                {items.length > 0 && (
+                                {cartCount > 0 && (
                                     <span className={cn(
-                                        "absolute -top-1 -right-1 w-4 h-4 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
+                                        "absolute -top-1 -right-1 min-w-[16px] h-4 px-1 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
                                         (isCampaignActive() && items.some(item => item.promo_price && item.promo_price > 0))
                                             ? "cart-promo-badge-pulse text-white"
                                             : "bg-cyan-400 text-black"
                                     )}>
-                                        {items.length}
+                                        {cartCount}
                                     </span>
                                 )}
                             </button>

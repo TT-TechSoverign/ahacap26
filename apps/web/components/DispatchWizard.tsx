@@ -6,6 +6,7 @@ import { EditableText } from './EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import contentData from '@/lib/content/content.json';
 import { sendGAEvent } from '@next/third-parties/google';
+import { trackFunnelEvent } from '@/lib/tracking';
 import { CheckCircle, Settings, Calendar, User, Check, ArrowRight, Zap, ShoppingBag, ArrowLeft, Phone } from 'lucide-react';
 
 export function DispatchWizard() {
@@ -83,6 +84,10 @@ export function DispatchWizard() {
             ].filter(Boolean).join(' — ');
             setFormData(prev => ({ ...prev, user_notes: combinedPrefill }));
         }
+        // Fast-Track directly to Contact Details (Step 3) when arriving from a pre-qualified service/model CTA
+        if (serviceParam || modelParam || notesParam) {
+            setStep(3);
+        }
     }, []);
 
     const handleServiceToggle = (service: string) => {
@@ -132,17 +137,14 @@ export function DispatchWizard() {
             });
 
             if (res.ok) {
-                // GTM Standard Custom Event Object for Lead Conversion
-                if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                    (window as any).dataLayer.push({
-                        event: 'generate_lead',
-                        lead_type: selectedServices.join(', ') || 'Service Inquiry',
-                        form_name: 'Dispatch Wizard Form',
-                        city: formData.city || 'Oahu',
-                        currency: 'USD',
-                        value: 0
-                    });
-                }
+                const resolvedLeadType = selectedServices.join(', ') || 'Service Inquiry';
+                trackFunnelEvent('generate_lead', {
+                    lead_type: resolvedLeadType,
+                    form_name: 'Dispatch Wizard Form',
+                    city: formData.city || 'Oahu',
+                    currency: 'USD',
+                    value: 0
+                });
                 sendGAEvent('event', 'generate_lead', { event_category: 'Lead', event_label: 'Dispatch Wizard Form' });
                 setIsSuccess(true);
             } else {
@@ -270,14 +272,34 @@ export function DispatchWizard() {
                             </label>
                         ))}
                     </div>
-                    <Button
-                        type="button"
-                        onClick={() => setStep(2)}
-                        disabled={selectedServices.length === 0}
-                        className="w-full mt-6 py-4 uppercase font-bold tracking-widest text-sm hover:scale-[1.02] shadow-[0_0_20px_rgba(0,174,239,0.2)] disabled:opacity-50"
-                    >
-                        <EditableText contentKey="contact.wizard.btn_next_urgency" /> <ArrowRight className="ml-2 size-5" />
-                    </Button>
+                    <div className="space-y-2.5 pt-2">
+                        <Button
+                            type="button"
+                            onClick={() => setStep(2)}
+                            disabled={selectedServices.length === 0}
+                            className="w-full py-4 uppercase font-bold tracking-widest text-sm hover:scale-[1.02] shadow-[0_0_20px_rgba(0,174,239,0.2)] disabled:opacity-50"
+                        >
+                            <EditableText contentKey="contact.wizard.btn_next_urgency" /> <ArrowRight className="ml-2 size-5" />
+                        </Button>
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-1 text-xs">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    if (selectedServices.length === 0) {
+                                        setSelectedServices(['Window AC Installation']);
+                                    }
+                                    setStep(3);
+                                }}
+                                className="text-cyan-400 hover:text-cyan-300 font-mono text-[11px] font-bold uppercase tracking-wider hover:underline"
+                            >
+                                In a hurry? Skip straight to Fast Callback Details &rarr;
+                            </button>
+                            <a href="tel:808-488-1111" className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-mono text-[11px] font-bold">
+                                <Phone className="size-3.5" />
+                                <span>Or Call Dispatch: (808) 488-1111</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             )}
 
@@ -329,7 +351,7 @@ export function DispatchWizard() {
                     {/* Best Time */}
                     <div className="space-y-6 flex flex-col items-center">
                         <label className="font-mono text-[9px] text-slate-500 uppercase tracking-[0.4em] font-black opacity-80 text-center mb-4">
-                            <EditableText contentKey="contact.wizard.step2_contact_time_label" /> <span className="text-primary">*</span>
+                            <EditableText contentKey="contact.wizard.step2_contact_time_label" /> <span className="text-slate-600">(Optional)</span>
                         </label>
                         <div className="flex flex-wrap justify-center gap-3 w-full max-w-3xl">
                             {["Weekdays", "Weekends", "Morning", "Evening", "Afternoon"].map((time, i) => (
@@ -367,8 +389,8 @@ export function DispatchWizard() {
             {/* Step 3: Logistics & Review */}
             {step === 3 && (
                 <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-                    <div className="text-center mb-10">
-                        <h3 className="text-2xl lg:text-3xl font-header font-black text-white uppercase tracking-tight mb-4">
+                    <div className="text-center mb-6">
+                        <h3 className="text-2xl lg:text-3xl font-header font-black text-white uppercase tracking-tight mb-3">
                             <EditableText contentKey="contact.wizard.step3_title" />
                         </h3>
                         <p className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-white opacity-90">
@@ -376,66 +398,105 @@ export function DispatchWizard() {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    {/* Active Service & Inline Urgency Summary Bar (1-Screen Fast-Track) */}
+                    <div className="bg-slate-900/90 border border-primary/30 rounded-xl p-3.5 space-y-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                            <div className="flex items-center gap-2 min-w-0">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
+                                <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400">Service:</span>
+                                <span className="font-header font-bold text-white uppercase truncate">
+                                    {selectedServices.length > 0 ? selectedServices.join(' • ') : 'Window AC $0 Free Estimate'}
+                                </span>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => setStep(1)}
+                                className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 hover:text-cyan-300 underline shrink-0"
+                            >
+                                Change Service
+                            </button>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-white/5">
+                            <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400 mr-1">Timing:</span>
+                            {["ASAP", "Within 30 days", "No rush, just shopping"].map((time) => (
+                                <button
+                                    key={time}
+                                    type="button"
+                                    onClick={() => setFormData(prev => ({ ...prev, urgency: time }))}
+                                    className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider border transition-all ${
+                                        formData.urgency === time
+                                            ? 'bg-primary/20 border-primary text-cyan-300'
+                                            : 'bg-white/[0.03] border-white/10 text-slate-400 hover:text-white'
+                                    }`}
+                                >
+                                    {time}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2 group">
-                            <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black group-hover:text-primary transition-colors">
+                            <label className="font-mono text-[9px] text-slate-400 uppercase tracking-widest font-black group-hover:text-primary transition-colors">
                                 <EditableText contentKey="contact.wizard.field_first_name" /> <span className="text-primary">*</span>
                             </label>
                             <input
                                 name="first_name"
                                 value={formData.first_name}
                                 onChange={handleChange}
-                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                className="w-full bg-transparent border border-white/15 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-500 transition-all hover:border-white/25"
                                 type="text"
                                 autoComplete="given-name"
+                                placeholder="First or Full Name"
                                 required
                             />
                         </div>
                         <div className="space-y-2 group">
-                            <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black group-hover:text-primary transition-colors">
-                                <EditableText contentKey="contact.wizard.field_last_name" /> <span className="text-primary">*</span>
+                            <label className="font-mono text-[9px] text-slate-400 uppercase tracking-widest font-black group-hover:text-primary transition-colors">
+                                <EditableText contentKey="contact.wizard.field_last_name" /> <span className="text-slate-600">(Optional)</span>
                             </label>
                             <input
                                 name="last_name"
                                 value={formData.last_name}
                                 onChange={handleChange}
-                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                className="w-full bg-transparent border border-white/15 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-500 transition-all hover:border-white/25"
                                 type="text"
                                 autoComplete="family-name"
-                                required
+                                placeholder="Last Name"
                             />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2 group">
-                            <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black group-hover:text-primary transition-colors">
-                                <EditableText contentKey="contact.wizard.field_email" /> <span className="text-primary">*</span>
-                            </label>
-                            <input
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
-                                type="email"
-                                autoComplete="email"
-                                inputMode="email"
-                                required
-                            />
-                        </div>
-                        <div className="space-y-2 group">
-                            <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black group-hover:text-primary transition-colors">
+                            <label className="font-mono text-[9px] text-slate-400 uppercase tracking-widest font-black group-hover:text-primary transition-colors">
                                 <EditableText contentKey="contact.wizard.field_phone" /> <span className="text-primary">*</span>
                             </label>
                             <input
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handleChange}
-                                className="w-full bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20"
+                                className="w-full bg-transparent border border-white/15 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-500 transition-all hover:border-white/25"
                                 type="tel"
                                 autoComplete="tel"
-                                inputMode="numeric"
+                                inputMode="tel"
+                                placeholder="(808) 555-0199"
                                 required
+                            />
+                        </div>
+                        <div className="space-y-2 group">
+                            <label className="font-mono text-[9px] text-slate-400 uppercase tracking-widest font-black group-hover:text-primary transition-colors">
+                                <EditableText contentKey="contact.wizard.field_email" /> <span className="text-slate-600">(For Written Quote)</span>
+                            </label>
+                            <input
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="w-full bg-transparent border border-white/15 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-500 transition-all hover:border-white/25"
+                                type="email"
+                                autoComplete="email"
+                                inputMode="email"
+                                placeholder="you@example.com (optional)"
                             />
                         </div>
                     </div>
@@ -488,19 +549,19 @@ export function DispatchWizard() {
                         </div>
                     </div>
 
-                    {/* Source & Other */}
-                    <div className="space-y-4 pt-4 border-t border-white/5 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar flex flex-col">
+                    {/* Source & Notes (Full Height — No Nested Mobile Scroll Trap) */}
+                    <div className="space-y-4 pt-4 border-t border-white/5 flex flex-col">
                         <div className="space-y-2 flex flex-col items-center">
-                            <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black text-center mb-4">
+                            <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black text-center mb-2">
                                 <EditableText contentKey="contact.wizard.field_source" />
                             </label>
                             <select
                                 name="source"
                                 value={formData.source}
                                 onChange={handleChange}
-                                className="w-full max-w-md bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-2 text-slate-300 text-center"
+                                className="w-full max-w-md bg-slate-900 border border-white/15 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-base p-2.5 text-slate-200 text-center"
                             >
-                                <option value="">Select a source</option>
+                                <option value="">Select a source (optional)</option>
                                 <option value="Google">Google</option>
                                 <option value="Social Media">Social Media</option>
                                 <option value="Referral">Referral</option>
@@ -508,16 +569,16 @@ export function DispatchWizard() {
                             </select>
                         </div>
                         <div className="space-y-2 flex flex-col items-center">
-                            <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black text-center mb-4">
+                            <label className="font-mono text-[9px] text-slate-500 uppercase tracking-widest font-black text-center mb-2">
                                 <EditableText contentKey="contact.wizard.field_notes" />
                             </label>
                             <textarea
                                 name="user_notes"
                                 value={formData.user_notes}
                                 onChange={handleChange}
-                                className="w-full max-w-2xl bg-transparent border border-white/10 rounded focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-600 transition-all hover:border-white/20 text-center"
-                                rows={4}
-                                placeholder="Any access codes, gate info, or specific details we should know?"
+                                className="w-full max-w-2xl bg-transparent border border-white/15 rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-base p-3 text-white placeholder-slate-500 transition-all hover:border-white/25"
+                                rows={3}
+                                placeholder="Window type (jalousie / slider / 26&quot; wall sleeve), room size, or model question..."
                             ></textarea>
                         </div>
                     </div>

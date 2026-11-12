@@ -135,6 +135,7 @@ export default function Footer() {
                                 src="/assets/logo.svg"
                                 alt="Affordable Home A/C"
                                 fill
+                                sizes="128px"
                                 className="object-contain"
                                 unoptimized
                             />

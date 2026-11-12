@@ -786,6 +786,7 @@ export function ACSelectorWizard() {
                                                                     src={unitImage} 
                                                                     alt={product.name} 
                                                                     fill
+                                                                    sizes="96px"
                                                                     className="object-contain p-2"
                                                                     unoptimized
                                                                 />

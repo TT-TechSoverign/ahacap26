@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { safeStorage } from '../lib/safe-storage';
-import { buildGa4EcommerceItem, trackEcommerceEvent } from '../lib/tracking';
+import { buildGa4EcommerceItem, extractGa4SessionIdentifiers, trackEcommerceEvent } from '../lib/tracking';
 import { Loader2, Lock } from 'lucide-react';
 
 interface CheckoutFormProps {
@@ -24,27 +24,8 @@ export default function CheckoutForm({ totalAmount, items, customerEmail, fulfil
         setLoading(true);
         setError('');
         try {
-            // Extract GA4 cookies for server-side telemetry stitching
-            const getCookie = (name: string) => {
-                const value = `; ${document.cookie}`;
-                const parts = value.split(`; ${name}=`);
-                if (parts.length === 2) return parts.pop()?.split(';').shift();
-                return null;
-            };
-
-            const getGaSessionCookie = () => {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.startsWith('_ga_')) {
-                        return cookie.split('=')[1];
-                    }
-                }
-                return null;
-            };
-
-            const gaClientId = getCookie('_ga');
-            const gaSessionId = getGaSessionCookie();
+            // Extract normalized GA4 identifiers for server-side Measurement Protocol stitching
+            const { gaClientId, gaSessionId } = extractGa4SessionIdentifiers();
 
             const utmSource = safeStorage.getItem('utm_source', 'session');
             const utmMedium = safeStorage.getItem('utm_medium', 'session');

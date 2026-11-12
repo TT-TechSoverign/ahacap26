@@ -139,48 +139,43 @@ from routers import leads
 app.include_router(leads.router, prefix="/api/v1/leads", tags=["Leads"])
 
 # --- WEBHOOKS ---
+from services.stripe_telemetry import (
+    normalize_ga4_identifiers,
+    compute_ga4_purchase_breakdown,
+    extract_stripe_customer_info,
+)
+
+
 async def fire_ga4_purchase_event(order_id, ga_client_id, ga_session_id, items_data, amount_total, amount_tax=0, amount_shipping=0):
     measurement_id = os.getenv("GA4_MEASUREMENT_ID")
     api_secret = os.getenv("GA4_API_SECRET")
-    
-    if not measurement_id or not api_secret or not ga_client_id:
+    norm_cid, norm_sid = normalize_ga4_identifiers(ga_client_id, ga_session_id)
+
+    if not measurement_id or not api_secret or not norm_cid:
         print("DEBUG: Skipping GA4 event. Missing env vars or client_id.")
         return
         
     url = f"https://www.google-analytics.com/mp/collect?measurement_id={measurement_id}&api_secret={api_secret}"
-    
-    # Exclude tax and shipping from true revenue
-    true_revenue = (amount_total - amount_tax - amount_shipping) / 100.0
-    tax_dollars = amount_tax / 100.0
-    shipping_dollars = amount_shipping / 100.0
+    true_revenue, tax_dollars, shipping_dollars, ga_items = compute_ga4_purchase_breakdown(
+        items_data, amount_total, amount_tax, amount_shipping
+    )
 
-    ga_items = []
-    for item in items_data:
-        desc = item.get("description", "")
-        # Filter out tax and shipping line items from the product array
-        if "Tax" in desc or "Delivery" in desc:
-            continue
-            
-        ga_items.append({
-            "item_id": str(item.get("product_id")) if item.get("product_id") else "UNKNOWN",
-            "item_name": desc,
-            "price": (item.get("amount_total", 0) / 100.0) / (item.get("quantity") or 1) if item.get("quantity") else 0,
-            "quantity": item.get("quantity", 1)
-        })
+    params = {
+        "currency": "USD",
+        "transaction_id": order_id,
+        "value": true_revenue,
+        "tax": tax_dollars,
+        "shipping": shipping_dollars,
+        "items": ga_items,
+    }
+    if norm_sid:
+        params["session_id"] = int(norm_sid) if norm_sid.isdigit() else norm_sid
 
     payload = {
-        "client_id": ga_client_id,
+        "client_id": norm_cid,
         "events": [{
             "name": "purchase",
-            "params": {
-                "currency": "USD",
-                "transaction_id": order_id,
-                "value": true_revenue,
-                "tax": tax_dollars,
-                "shipping": shipping_dollars,
-                "items": ga_items,
-                "session_id": ga_session_id
-            }
+            "params": params
         }]
     }
 
@@ -239,14 +234,12 @@ async def process_stripe_event(event: dict, payload_data: dict):
             ga_client_id = metadata.get('ga_client_id')
             ga_session_id = metadata.get('ga_session_id')
             
-            # --- Extract Expanded Customer/Billing Info ---
-            cust = obj.get('customer_details', {})
-            customer_info = {
-                "name": cust.get('name', 'Valued Customer'),
-                "email": cust.get('email', receipt_email),
-                "phone": cust.get('phone', ''),
-                "address": cust.get('address', {}) 
-            }
+            # --- Extract Expanded Customer / Shipping / Billing Info ---
+            customer_info = extract_stripe_customer_info(
+                obj,
+                fallback_email=receipt_email,
+                fulfillment_mode=metadata.get('fulfillment_mode', 'pickup')
+            )
             
             # Retrieve line items
             try:

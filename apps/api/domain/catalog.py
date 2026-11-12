@@ -1,4 +1,5 @@
 from sqlalchemy.future import select
+from sqlalchemy import or_
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional, List
 import models
@@ -15,8 +16,26 @@ async def get_products_service(
     """
     query = select(models.Product)
 
-    if q:
-        query = query.where(models.Product.name.ilike(f"%{q}%"))
+    if q and q.strip():
+        q_clean = q.strip()
+        q_norm = q_clean.replace(",", "")
+        search_clauses = [
+            models.Product.name.ilike(f"%{q_clean}%"),
+            models.Product.category.ilike(f"%{q_clean}%"),
+            models.Product.subcategory.ilike(f"%{q_clean}%"),
+            models.Product.voltage.ilike(f"%{q_clean}%"),
+            models.Product.coverage.ilike(f"%{q_clean}%"),
+            models.Product.coverage_aham.ilike(f"%{q_clean}%"),
+            models.Product.coverage_oahu.ilike(f"%{q_clean}%"),
+            models.Product.key_spec.ilike(f"%{q_clean}%"),
+            models.Product.performance_specs.ilike(f"%{q_clean}%"),
+            models.Product.chassis_type.ilike(f"%{q_clean}%"),
+        ]
+        if q_norm.isdigit():
+            search_clauses.append(models.Product.btu == int(q_norm))
+        elif q_norm.lower().endswith("k") and q_norm[:-1].isdigit():
+            search_clauses.append(models.Product.btu == int(q_norm[:-1]) * 1000)
+        query = query.where(or_(*search_clauses))
     if category:
         query = query.where(models.Product.category == category)
     if min_price is not None:

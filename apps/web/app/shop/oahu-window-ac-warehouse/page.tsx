@@ -83,11 +83,11 @@ export default function OahuWindowAcWarehousePage() {
         },
         {
             q: "How do I claim the $45 Hawaii Energy cash rebate?",
-            a: "Every qualifying Energy Star certified LG Dual Inverter unit purchased from our warehouse comes with a pre-filled Hawaii Energy $45 Instant/Mail-In Rebate Form. Simply submit your proof of purchase to Hawaii Energy, and receive a $45 check back in the mail, reducing your effective equipment investment even further."
+            a: "Every qualifying ENERGY STAR certified LG Dual Inverter unit and the GE R-32 Variable Speed Inverter (AJCQ12AXXWA) purchased from our warehouse comes with our official Hawaii Energy $45 Instant/Mail-In Rebate Form PDF. Simply submit your proof of purchase to Hawaii Energy and receive a $45 check back in the mail, reducing your effective equipment investment even further."
         },
         {
             q: "Can you install the window AC for me as well?",
-            a: "Yes! If you prefer a turnkey professional installation—including custom weather-sealed Plexiglas filler panels, corrosion-resistant outdoor support brackets, and trade-wind vibration isolation—our specialist Oahu window AC technicians provide dedicated installation appointments across Oahu. You can book an installation visit online or add installation at checkout."
+            a: "Yes! If you prefer a turnkey professional installation—including custom weather-sealed acrylic jalousie filler panels, corrosion-resistant outdoor support brackets, floor drop cloths, and trade-wind vibration isolation—our specialist Oahu window AC technicians provide dedicated installation appointments across Oahu with a $0 Free In-Home Estimate (By Appointment First, zero upfront deposit)."
         },
         {
             q: "What warranty and power requirements do these units carry?",
@@ -115,6 +115,8 @@ export default function OahuWindowAcWarehousePage() {
             },
             {
                 "@type": "LocalBusiness",
+                "@id": "https://www.affordablehome-ac.com/shop/oahu-window-ac-warehouse#localbusiness",
+                "parentOrganization": { "@id": "https://www.affordablehome-ac.com/#hvacbusiness" },
                 "name": "Affordable Home A/C",
                 "telephone": "+1-808-488-1111",
                 "address": {

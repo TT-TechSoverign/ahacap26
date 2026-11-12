@@ -131,6 +131,7 @@ function ShopPageContent() {
         const catParam = (params.get('category') || '').toLowerCase();
         const capParam = (params.get('capacity') || '').toLowerCase();
         const voltParam = (params.get('voltage') || '').toLowerCase();
+        const mountParam = (params.get('mount') || '').toLowerCase();
         const hash = (window.location.hash || '').replace('#', '').toLowerCase();
 
         if (params.get('canceled') === 'true') {
@@ -175,9 +176,22 @@ function ShopPageContent() {
         } else {
             setSelectedVoltage('ALL');
         }
+
+        if (mountParam === 'sleeve' || mountParam === 'wall') {
+            setSelectedMount('SLEEVE');
+            setIsMoreFiltersOpen(true);
+        } else if (mountParam === 'slider' || mountParam === 'casement') {
+            setSelectedMount('SLIDER');
+            setIsMoreFiltersOpen(true);
+        } else if (mountParam === 'hung' || mountParam === 'jalousie' || mountParam === 'standard') {
+            setSelectedMount('HUNG');
+            setIsMoreFiltersOpen(true);
+        } else {
+            setSelectedMount('ALL');
+        }
     };
 
-    // Sync URL query params (?q=, ?category=, ?capacity=, ?voltage=) and hash fragments (#dual_inverter, #standard, #wall_unit)
+    // Sync URL query params (?q=, ?category=, ?capacity=, ?voltage=, ?mount=) and hash fragments (#dual_inverter, #standard, #wall_unit)
     useEffect(() => {
         if (typeof window === 'undefined') return;
         applyUrlFilters();
@@ -191,19 +205,51 @@ function ShopPageContent() {
 
     const filteredProducts = useMemo(() => {
         let result = products.filter(p => {
-            // Search query across specifications
+            // Search query across specifications, MPNs, shorthand BTUs, rebates & mounting styles
             if (searchQuery.trim()) {
                 const q = searchQuery.toLowerCase().trim();
-                const matchName = (p.name || '').toLowerCase().includes(q);
-                const matchKeySpec = (p.key_spec || '').toLowerCase().includes(q);
-                const matchCat = (p.category || '').toLowerCase().includes(q);
-                const matchSub = (p.subcategory || '').toLowerCase().includes(q);
-                const matchBtu = p.btu ? p.btu.toString().includes(q) : false;
-                const matchVolt = (p.voltage || '').toLowerCase().includes(q);
-                const matchCovAham = (p.coverage_aham || '').toLowerCase().includes(q);
-                const matchCovOahu = (p.coverage_oahu || '').toLowerCase().includes(q);
-                const matchChassis = (p.chassis_type || '').toLowerCase().includes(q);
-                if (!matchName && !matchKeySpec && !matchCat && !matchSub && !matchBtu && !matchVolt && !matchCovAham && !matchCovOahu && !matchChassis) {
+                const qNorm = q.replace(/,/g, '');
+                const ident = PRODUCT_IDENTIFIERS[p.id];
+                const btuShorthand = p.btu ? `${Math.round(p.btu / 1000)}k` : '';
+                const btuFormatted = p.btu ? p.btu.toLocaleString().toLowerCase() : '';
+                const isRebateModel = p.subcategory === 'dual_inverter' || p.id === 15;
+                const isWallOrSleeve = p.subcategory === 'ge' || p.subcategory === 'universal_fit' || p.subcategory === 'casement';
+                const isQuietModel = p.subcategory === 'dual_inverter' || p.id === 15 || (p.noise_level || '').toLowerCase().includes('44');
+
+                const searchableHaystack = [
+                    p.name,
+                    p.key_spec,
+                    p.performance_specs,
+                    p.category,
+                    p.subcategory,
+                    p.voltage,
+                    p.coverage,
+                    p.coverage_aham,
+                    p.coverage_oahu,
+                    p.sizing_notes,
+                    p.noise_level,
+                    p.chassis_type,
+                    p.ceer_rating,
+                    p.btu ? String(p.btu) : '',
+                    btuFormatted,
+                    btuShorthand,
+                    ident?.mpn,
+                    ident?.gtin12,
+                    ident?.catalystBadge,
+                    isRebateModel ? 'rebate $45 hawaii energy star' : '',
+                    isWallOrSleeve ? '26" 26 inch wall sleeve condo built-in thru-the-wall through-the-wall' : 'jalousie window hung',
+                    isQuietModel ? 'quiet whisper silent 44db bedroom' : '',
+                ]
+                    .filter(Boolean)
+                    .join(' ')
+                    .toLowerCase();
+
+                const searchableNorm = searchableHaystack.replace(/,/g, '');
+                const tokens = qNorm.split(/\s+/).filter(Boolean);
+                const matchesDirect = searchableHaystack.includes(q) || searchableNorm.includes(qNorm);
+                const matchesAllTokens = tokens.length > 1 && tokens.every(tok => searchableNorm.includes(tok));
+
+                if (!matchesDirect && !matchesAllTokens) {
                     return false;
                 }
             }
@@ -551,7 +597,7 @@ function ShopPageContent() {
 
     const hasTrackedItemListRef = useRef(false);
 
-    // Fetch Products from API
+    // Fetch full 16-model live inventory once on mount; client-side filteredProducts handles instant rich search
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -559,12 +605,10 @@ function ShopPageContent() {
 
                 let url = `${apiUrl}/products`;
                 const params = new URLSearchParams();
-                if (searchQuery) params.append('q', searchQuery);
-                // Add cache-buster to ensure we get fresh data after seeding
+                // Add cache-buster to ensure we get fresh live stock data
                 params.append('_t', Date.now().toString());
                 if (params.toString()) url += `?${params.toString()}`;
 
-                console.log('Fetching products from:', url);
                 const res = await fetch(url, {
                     cache: 'no-store',
                     headers: {
@@ -597,9 +641,8 @@ function ShopPageContent() {
             }
         };
 
-        const debounce = setTimeout(fetchProducts, 300);
-        return () => clearTimeout(debounce);
-    }, [searchQuery]);
+        fetchProducts();
+    }, []);
 
     return (
         <div className="min-h-screen bg-background-dark text-slate-100 font-sans selection:bg-primary/30">
@@ -913,8 +956,10 @@ function ShopPageContent() {
                                     </span>
                                     {[
                                         { label: '12,000 BTU Inverter', query: '12,000' },
+                                        { label: '$45 Rebate Models', query: 'rebate' },
                                         { label: '115V Standard Plug', query: '115V' },
                                         { label: 'Quiet Dual Inverter', query: 'dual inverter' },
+                                        { label: '26" Wall Sleeve', query: '26" sleeve' },
                                         { label: 'Casement / Slider', query: 'casement' },
                                         { label: '230V Great Room', query: '230V' },
                                     ].map(s => (
@@ -1126,7 +1171,7 @@ function ShopPageContent() {
                                     return (
                                         <div key={c.id} className="size-9 rounded-lg bg-slate-900 border border-primary/50 overflow-hidden relative shadow-md">
                                             {img ? (
-                                                <Image src={img} alt={c.name} fill className="object-contain p-1" unoptimized />
+                                                <Image src={img} alt={c.name} fill sizes="36px" className="object-contain p-1" unoptimized />
                                             ) : (
                                                 <Snowflake className="size-4 m-auto text-primary" />
                                             )}
@@ -1191,7 +1236,7 @@ function ShopPageContent() {
                                     <div key={item.id} className="bg-slate-900/90 border border-white/10 rounded-2xl p-4 flex flex-col justify-between">
                                         <div>
                                             <div className="relative w-full aspect-[4/3] bg-black/40 rounded-xl mb-3 overflow-hidden">
-                                                {img && <Image src={img} alt={item.name} fill className="object-contain p-2" unoptimized />}
+                                                {img && <Image src={img} alt={item.name} fill sizes="(max-width: 768px) 100vw, 280px" className="object-contain p-2" unoptimized />}
                                             </div>
                                             <div className="text-[10px] font-mono text-primary uppercase">{item.category}</div>
                                             <h4 className="text-sm font-header font-black text-white uppercase mb-2 line-clamp-2">{item.name}</h4>

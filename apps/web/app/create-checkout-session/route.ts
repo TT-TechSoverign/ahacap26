@@ -131,8 +131,8 @@ export async function POST(req: Request) {
             // CRITICAL: Pass metadata to PaymentIntent for Backend Webhook (Email Native)
             payment_intent_data: {
                 metadata: {
-                    fulfillment_mode: fulfillmentMode,
-                    customer_email: customerEmail,
+                    fulfillment_mode: fulfillmentMode || 'pickup',
+                    ...(customerEmail && { customer_email: customerEmail }),
                     source: 'web_checkout_v2',
                     ...(gaClientId && { ga_client_id: gaClientId }),
                     ...(gaSessionId && { ga_session_id: gaSessionId }),
@@ -148,10 +148,12 @@ export async function POST(req: Request) {
             },
             custom_text: {
                 shipping_address: {
-                    message: 'FULFILLMENT NOTICE: Unit pricing reflects Local Pickup at our Waipahu Distribution Center (94-150 Leoleo St. #203). WARNING: Our facility is an active distribution hub; unscheduled arrivals cannot be accommodated. A coordinator will contact you within 24 business hours to schedule a specific window. Optional Island-Wide Delivery is available for a flat $50.00 fee to most residential zones (excluding North Shore, Waianae, Waikiki, and Waimanalo).'
+                    message: fulfillmentMode === 'delivery'
+                        ? 'OAHU ISLAND-WIDE DELIVERY ($50.00 INCLUDED): Enter your Oahu residential delivery street address above (excludes North Shore, Waianae, Waikiki & Waimanalo). Our Waipahu dispatch coordinator will call you within 24 business hours to confirm your delivery window.'
+                        : 'FREE WAIPAHU WAREHOUSE PICKUP (94-150 Leoleo St. #203, Waipahu, HI 96797): Enter your contact/billing address above. Because our Waipahu hub is an active loading bay, our coordinator will call you within 24 business hours to schedule your 5-minute pre-staged pickup window.'
                 },
                 submit: {
-                    message: 'US-Issued Cards Only (50 US States). International & territory cards are not accepted. By confirming, you agree to the All Sales Final policy.'
+                    message: 'US-Issued Cards Only (50 US States). International & territory cards are not accepted. Backed by 1-Year Manufacturer Warranty • All Sales Final.'
                 }
             },
             phone_number_collection: {
