@@ -52,8 +52,8 @@ export default function Homepage() {
                     fill
                     sizes="(max-width: 640px) 256px, (max-width: 1024px) 640px, 100vw"
                     className="object-cover object-center translate-y-0 scale-100 md:translate-y-[-10%] md:scale-110 [transform:translateZ(0)]"
-                    priority
-                    fetchPriority="high"
+                    loading="eager"
+                    decoding="async"
                     quality={48}
                 />
                 <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-20" />

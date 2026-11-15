@@ -82,13 +82,6 @@ export default function RootLayout({
     return (
         <html lang="en" className="dark">
             <head>
-                <link
-                    rel="preload"
-                    href="/assets/fonts/oswald.woff2"
-                    as="font"
-                    type="font/woff2"
-                    crossOrigin="anonymous"
-                />
                 {/* Global GA/GTM queueing stub & Google Consent Mode V2 */}
                 <script
                     dangerouslySetInnerHTML={{
@@ -308,11 +301,21 @@ export default function RootLayout({
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `
-                            // Ensure deferred stylesheets always flip to media="all"
-                            window.addEventListener('load', function() {
-                                var links = document.querySelectorAll('link[data-precedence="next"][media="print"]');
-                                for (var i = 0; i < links.length; i++) links[i].media = 'all';
-                            });
+                            // Activate full stylesheet cleanly after first paint settles or on first interaction
+                            (function() {
+                                var activated = false;
+                                function enableFullCss() {
+                                    if (activated) return;
+                                    activated = true;
+                                    var links = document.querySelectorAll('link[data-precedence="next"][media="print"]');
+                                    for (var i = 0; i < links.length; i++) links[i].media = 'all';
+                                }
+                                var evts = ['pointerdown', 'touchstart', 'scroll', 'keydown', 'mousemove'];
+                                for (var j = 0; j < evts.length; j++) {
+                                    window.addEventListener(evts[j], enableFullCss, { once: true, passive: true });
+                                }
+                                setTimeout(enableFullCss, window.location.pathname === '/' ? 4500 : 120);
+                            })();
                             // Universal Live Freshness & BFCache Sync
                             window.addEventListener('pageshow', function(event) {
                                 if (event && event.persisted) {

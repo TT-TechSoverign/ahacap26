@@ -12,21 +12,6 @@ const cssnano = require(require.resolve('next/dist/compiled/cssnano-simple', { p
 async function buildCriticalInlineCss() {
     const criticalCssInput = `
 @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: optional;
-    src: url('/assets/fonts/inter.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter Fallback';
-    src: local('Arial');
-    ascent-override: 90%;
-    descent-override: 22%;
-    line-gap-override: 0%;
-    size-adjust: 107%;
-}
-@font-face {
     font-family: 'Oswald';
     font-style: normal;
     font-weight: 400 900;
@@ -86,6 +71,12 @@ html, body {
             './components/NavbarV2.tsx',
             './components/Section1HeroHomeV2.tsx',
             './components/QuickJumpBanner.tsx',
+            './components/HomeFeaturedInventory.tsx',
+            './components/HomeServicesDivisions.tsx',
+            './components/ReviewsPavilion.tsx',
+            './components/HomeServiceAreasHub.tsx',
+            './components/OahuEEATAuthorityBar.tsx',
+            './components/Footer.tsx',
             './components/EditableText.tsx',
             './components/ProtectedEmailLink.tsx',
         ],
