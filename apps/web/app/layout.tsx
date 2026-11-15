@@ -121,6 +121,16 @@ export default function RootLayout({
                     />
                 </noscript>
                 {/* <TickerWrapper /> */}
+                <ContentProvider>
+                    <CartProvider>
+                        <MobileStickyHeader />
+                        {children}
+                        <NavbarV2 />
+                        <LazyCartDrawerHost />
+                        <Footer />
+                        <MobileStickyBottomBar />
+                    </CartProvider>
+                </ContentProvider>
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
@@ -288,16 +298,6 @@ export default function RootLayout({
                         })
                     }}
                 />
-                <ContentProvider>
-                    <CartProvider>
-                        <MobileStickyHeader />
-                        <NavbarV2 />
-                        {children}
-                        <LazyCartDrawerHost />
-                        <Footer />
-                        <MobileStickyBottomBar />
-                    </CartProvider>
-                </ContentProvider>
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `
