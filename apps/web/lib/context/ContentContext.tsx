@@ -39,17 +39,20 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // Fetch fresh content strictly after First Paint/LCP so initial render is never contended
+  // Fetch fresh content strictly after First Paint/LCP (or immediately on interaction) so initial render is never contended
   useEffect(() => {
-    let timer: number | undefined;
-    const raf = window.requestAnimationFrame(() => {
-      timer = window.setTimeout(() => {
-        refreshContent();
-      }, 300);
-    });
+    let done = false;
+    const trigger = () => {
+      if (done) return;
+      done = true;
+      refreshContent();
+    };
+    const evts = ['pointerdown', 'touchstart', 'scroll', 'keydown'];
+    evts.forEach((e) => window.addEventListener(e, trigger, { once: true, passive: true }));
+    const timer = window.setTimeout(trigger, 1500);
     return () => {
-      window.cancelAnimationFrame(raf);
-      if (timer !== undefined) window.clearTimeout(timer);
+      evts.forEach((e) => window.removeEventListener(e, trigger));
+      window.clearTimeout(timer);
     };
   }, [refreshContent]);
 

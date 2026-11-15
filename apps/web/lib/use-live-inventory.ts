@@ -65,18 +65,21 @@ export function useLiveInventorySummary() {
 
     useEffect(() => {
         let active = true;
-        let timer: number | undefined;
-        const raf = window.requestAnimationFrame(() => {
-            timer = window.setTimeout(() => {
-                fetchLiveCatalogProducts().then((merged) => {
-                    if (active) setProducts(merged);
-                });
-            }, 250);
-        });
+        let triggered = false;
+        const runSync = () => {
+            if (triggered) return;
+            triggered = true;
+            fetchLiveCatalogProducts().then((merged) => {
+                if (active) setProducts(merged);
+            });
+        };
+        const evts = ['pointerdown', 'touchstart', 'scroll', 'keydown'];
+        evts.forEach((e) => window.addEventListener(e, runSync, { once: true, passive: true }));
+        const timer = window.setTimeout(runSync, 1200);
         return () => {
             active = false;
-            window.cancelAnimationFrame(raf);
-            if (timer !== undefined) window.clearTimeout(timer);
+            evts.forEach((e) => window.removeEventListener(e, runSync));
+            window.clearTimeout(timer);
         };
     }, []);
 

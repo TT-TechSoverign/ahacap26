@@ -149,7 +149,7 @@ export default function RootLayout({
                                 for (var j = 0; j < evts.length; j++) {
                                     window.addEventListener(evts[j], enableFullCss, { once: true, passive: true });
                                 }
-                                setTimeout(enableFullCss, window.location.pathname === '/' ? 4500 : 2800);
+                                setTimeout(enableFullCss, 5500);
                             })();
                             // Universal Live Freshness & BFCache Sync
                             window.addEventListener('pageshow', function(event) {
