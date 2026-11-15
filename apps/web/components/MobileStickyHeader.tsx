@@ -66,7 +66,7 @@ export default function MobileStickyHeader() {
 
                         {/* Center Logo */}
                         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20">
-                            <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 logo-promo-glow ${isScrolled ? 'h-9 w-24' : 'h-12 w-28 sm:h-14 sm:w-32'}`}>
+                            <Link href="/" prefetch={false} onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 logo-promo-glow ${isScrolled ? 'h-9 w-24' : 'h-12 w-28 sm:h-14 sm:w-32'}`}>
                                 <Image
                                     src="/assets/logo.svg"
                                     alt="AHAC Logo"

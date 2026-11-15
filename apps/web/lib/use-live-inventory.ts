@@ -65,11 +65,18 @@ export function useLiveInventorySummary() {
 
     useEffect(() => {
         let active = true;
-        fetchLiveCatalogProducts().then((merged) => {
-            if (active) setProducts(merged);
+        let timer: number | undefined;
+        const raf = window.requestAnimationFrame(() => {
+            timer = window.setTimeout(() => {
+                fetchLiveCatalogProducts().then((merged) => {
+                    if (active) setProducts(merged);
+                });
+            }, 250);
         });
         return () => {
             active = false;
+            window.cancelAnimationFrame(raf);
+            if (timer !== undefined) window.clearTimeout(timer);
         };
     }, []);
 

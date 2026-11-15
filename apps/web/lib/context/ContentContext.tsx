@@ -39,9 +39,18 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // Fetch fresh content on mount to ensure we have the latest server-side edits
+  // Fetch fresh content strictly after First Paint/LCP so initial render is never contended
   useEffect(() => {
-    refreshContent();
+    let timer: number | undefined;
+    const raf = window.requestAnimationFrame(() => {
+      timer = window.setTimeout(() => {
+        refreshContent();
+      }, 300);
+    });
+    return () => {
+      window.cancelAnimationFrame(raf);
+      if (timer !== undefined) window.clearTimeout(timer);
+    };
   }, [refreshContent]);
 
   return (

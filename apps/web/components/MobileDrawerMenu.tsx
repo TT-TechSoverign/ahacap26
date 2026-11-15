@@ -13,18 +13,14 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
     const { content } = useContent();
     const { inStockAcCount, minPrice, maxPrice } = useLiveInventorySummary();
 
-    // Lock body scroll and prevent pull-to-refresh when drawer is open
+    // Lock body scroll and prevent pull-to-refresh ONLY when drawer is open (zero body style mutation on initial mount)
     useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-            document.body.style.touchAction = 'none';
-        } else {
-            document.body.style.overflow = 'unset';
-            document.body.style.touchAction = 'unset';
-        }
+        if (!isOpen) return;
+        document.body.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
         return () => {
-            document.body.style.overflow = 'unset';
-            document.body.style.touchAction = 'unset';
+            document.body.style.overflow = '';
+            document.body.style.touchAction = '';
         };
     }, [isOpen]);
 

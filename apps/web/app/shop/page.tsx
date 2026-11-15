@@ -12,6 +12,7 @@ import { Product } from '../../types/inventory';
 import { PRODUCT_IDENTIFIERS } from '@/lib/product-identifiers';
 import { buildGa4EcommerceItem, trackEcommerceEvent } from '@/lib/tracking';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
+import { fetchLiveCatalogProducts } from '@/lib/use-live-inventory';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
 import { BackToTop } from '@/components/BackToTop';
@@ -350,6 +351,7 @@ function ShopPageContent() {
                     <div className="flex flex-wrap items-center gap-2.5">
                         <Link 
                             href="/window-ac-installation" 
+                            prefetch={false}
                             className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-white/[0.04] px-3 py-1.5 rounded-lg border border-white/10 hover:border-primary/40 transition-colors"
                         >
                             <Wrench className="size-3 text-primary" />
@@ -357,6 +359,7 @@ function ShopPageContent() {
                         </Link>
                         <Link 
                             href="/clean-vs-replace-window-ac" 
+                            prefetch={false}
                             className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white bg-white/[0.04] px-3 py-1.5 rounded-lg border border-white/10 hover:border-cyan-400/40 transition-colors"
                         >
                             <RotateCcw className="size-3 text-cyan-400" />
@@ -414,6 +417,7 @@ function ShopPageContent() {
 
                     <Link 
                         href="/sizing"
+                        prefetch={false}
                         className="w-full md:w-auto px-8 py-3.5 bg-primary hover:bg-primary/95 text-black font-black uppercase text-[10px] tracking-widest rounded-xl transition-all shadow-[0_0_20px_rgba(0,174,239,0.2)] hover:shadow-[0_0_30px_rgba(0,174,239,0.4)] hover:scale-[1.02] flex items-center justify-center gap-2 shrink-0 group active:scale-98 relative z-10"
                     >
                         Launch Sizing Wizard <ArrowUpRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -598,29 +602,15 @@ function ShopPageContent() {
 
     const hasTrackedItemListRef = useRef(false);
 
-    // Fetch full 16-model live inventory once on mount; client-side filteredProducts handles instant rich search
+    // Fetch full 16-model live inventory strictly after First Paint/LCP via shared deduplicated client cache
     useEffect(() => {
+        let active = true;
+        let timer: number | undefined;
+
         const fetchProducts = async () => {
             try {
-                const apiUrl = '/api/v1';
-
-                let url = `${apiUrl}/products`;
-                const params = new URLSearchParams();
-                // Add cache-buster to ensure we get fresh live stock data
-                params.append('_t', Date.now().toString());
-                if (params.toString()) url += `?${params.toString()}`;
-
-                const res = await fetch(url, {
-                    cache: 'no-store',
-                    headers: {
-                        'Pragma': 'no-cache',
-                        'Cache-Control': 'no-cache'
-                    }
-                });
-
-                if (!res.ok) throw new Error(`Failed to fetch inventory (Status: ${res.status})`);
-
-                const data = await res.json();
+                const data = await fetchLiveCatalogProducts();
+                if (!active) return;
                 startTransition(() => {
                     setProducts(data);
                 });
@@ -638,13 +628,23 @@ function ShopPageContent() {
                 }
             } catch (err: any) {
                 console.error("Inventory Load Error:", err);
-                setError(err.message || 'Unable to load inventory.');
+                if (active) setError(err.message || 'Unable to load inventory.');
             } finally {
-                setLoading(false);
+                if (active) setLoading(false);
             }
         };
 
-        fetchProducts();
+        const raf = window.requestAnimationFrame(() => {
+            timer = window.setTimeout(() => {
+                fetchProducts();
+            }, 250);
+        });
+
+        return () => {
+            active = false;
+            window.cancelAnimationFrame(raf);
+            if (timer !== undefined) window.clearTimeout(timer);
+        };
     }, []);
 
     return (

@@ -20,15 +20,12 @@ export default function Navbar() {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    // Lock body scroll when mobile menu is open
+    // Lock body scroll only when mobile menu is open
     useEffect(() => {
-        if (mobileMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
+        if (!mobileMenuOpen) return;
+        document.body.style.overflow = 'hidden';
         return () => {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
         };
     }, [mobileMenuOpen]);
 

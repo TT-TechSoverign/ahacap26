@@ -52,8 +52,6 @@ export default function CartDrawer() {
                 document.body.style.touchAction = '';
             };
         } else {
-            document.body.style.overflow = '';
-            document.body.style.touchAction = '';
             // Slight delay to allow animation to finish before resetting state logic
             const tm = setTimeout(() => {
                 setIsCheckout(false);
