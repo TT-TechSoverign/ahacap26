@@ -8,6 +8,7 @@ import MobileStickyHeader from '../components/MobileStickyHeader';
 import { DeferredGoogleTags } from '../components/DeferredGoogleTags';
 import { GTMRouteTracker } from '../components/GTMRouteTracker';
 import { LazyCartDrawerHost } from '../components/LazyCartDrawerHost';
+import { GlobalBusinessJsonLd } from '../components/CoreJsonLd';
 import './globals.css';
 import dynamic from 'next/dynamic';
 
@@ -131,173 +132,7 @@ export default function RootLayout({
                         <MobileStickyBottomBar />
                     </CartProvider>
                 </ContentProvider>
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            "@context": "https://schema.org",
-                            "@type": "HVACBusiness",
-                            "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
-                            "name": "Affordable Home A/C",
-                            "legalName": "Affordable Home A/C LLC",
-                            "alternateName": "Affordable Home Air Conditioning",
-                            "foundingDate": "2005",
-                            "slogan": "Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005",
-                            "image": [
-                                "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                                "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",
-                                "https://www.affordablehome-ac.com/assets/window-unit-images/3d-fit/product_4_fit_cutaway.webp",
-                                "https://www.affordablehome-ac.com/assets/hero-cards/ahac-hero-background-2.webp"
-                            ],
-                            "url": "https://www.affordablehome-ac.com",
-                            "logo": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
-                            "telephone": "+1-808-488-1111",
-                            "email": "office@affordablehome-ac.com",
-                            "hasMap": "https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797",
-                            "sameAs": [
-                                "https://www.yelp.com/biz/affordable-home-air-conditioning-waipahu",
-                                "https://www.google.com/maps/search/?api=1&query=Waipahu+Commercial+Center+94-150+Leoleo+St+%23203+Waipahu+HI+96797"
-                            ],
-                            "brand": [
-                                { "@type": "Brand", "name": "LG" },
-                                { "@type": "Brand", "name": "GE Appliances" }
-                            ],
-                            "address": {
-                                "@type": "PostalAddress",
-                                "streetAddress": "94-150 Leoleo St. #203",
-                                "addressLocality": "Waipahu",
-                                "addressRegion": "HI",
-                                "postalCode": "96797",
-                                "addressCountry": "US"
-                            },
-                            "geo": {
-                                "@type": "GeoCoordinates",
-                                "latitude": 21.3868,
-                                "longitude": -158.0092
-                            },
-                            "openingHoursSpecification": [
-                                {
-                                    "@type": "OpeningHoursSpecification",
-                                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                                    "opens": "08:00",
-                                    "closes": "17:00"
-                                },
-                                {
-                                    "@type": "OpeningHoursSpecification",
-                                    "dayOfWeek": ["Saturday"],
-                                    "opens": "09:00",
-                                    "closes": "14:00"
-                                }
-                            ],
-                            "paymentAccepted": "Cash, Credit Card, Debit Card, Visa, Mastercard, American Express, Discover, Apple Pay, Google Pay",
-                            "currenciesAccepted": "USD",
-                            "priceRange": "$395 - $1,200",
-                            "knowsAbout": [
-                                "LG Dual Inverter Window Air Conditioners",
-                                "GE 26-Inch Built-In Thru-The-Wall Air Conditioners",
-                                "Window AC & Hawaiian Jalousie Louver Installation",
-                                "Window AC Deep Cleaning & Mold Sanitization",
-                                "Window AC Clean-vs-Replace Evaluations",
-                                "Hawaii Energy $45 Window AC Cash Rebates",
-                                "Oahu Single-Wall Redwood Heat-Load Sizing"
-                            ],
-                            "potentialAction": [
-                                {
-                                    "@type": "OrderAction",
-                                    "name": "Order In-Stock LG & GE Window AC Units Online ($395–$1,200)",
-                                    "target": {
-                                        "@type": "EntryPoint",
-                                        "urlTemplate": "https://www.affordablehome-ac.com/shop",
-                                        "inLanguage": "en-US",
-                                        "actionPlatform": [
-                                            "http://schema.org/DesktopWebPlatform",
-                                            "http://schema.org/MobileWebPlatform"
-                                        ]
-                                    }
-                                },
-                                {
-                                    "@type": "ReserveAction",
-                                    "name": "Schedule Oahu Window AC Deep Cleaning & Coil Sanitization",
-                                    "target": {
-                                        "@type": "EntryPoint",
-                                        "urlTemplate": "https://www.affordablehome-ac.com/ac-cleaning-oahu",
-                                        "inLanguage": "en-US",
-                                        "actionPlatform": [
-                                            "http://schema.org/DesktopWebPlatform",
-                                            "http://schema.org/MobileWebPlatform"
-                                        ]
-                                    }
-                                },
-                                {
-                                    "@type": "ReserveAction",
-                                    "name": "Request $0 Free In-Home Window AC Installation Estimate",
-                                    "target": {
-                                        "@type": "EntryPoint",
-                                        "urlTemplate": "https://www.affordablehome-ac.com/window-ac-installation",
-                                        "inLanguage": "en-US",
-                                        "actionPlatform": [
-                                            "http://schema.org/DesktopWebPlatform",
-                                            "http://schema.org/MobileWebPlatform"
-                                        ]
-                                    }
-                                }
-                            ],
-                            "hasOfferCatalog": {
-                                "@type": "OfferCatalog",
-                                "name": "Oahu Window Air Conditioning Sales, Installation & Cleaning",
-                                "itemListElement": [
-                                    { "@type": "Service", "name": "In-Stock LG Dual Inverter & GE Window AC Sales ($395–$1,200)", "url": "https://www.affordablehome-ac.com/shop", "description": "Factory-sealed LG Dual Inverter and GE 26-inch Built-In window air conditioners ($395–$1,200) for Free Waipahu Warehouse Pickup by appointment or $50 flat Oahu delivery." },
-                                    { "@type": "Service", "name": "Window AC Deep Cleaning, Coil Sanitization & Antimicrobial Pan Treatment", "url": "https://www.affordablehome-ac.com/ac-cleaning-oahu", "description": "On-site Oahu window AC evaporator and condenser coil cleaning, mold sanitization, condensate drain clearing, and floor drop-cloth protection." },
-                                    { "@type": "Service", "name": "Window AC & Hawaiian Jalousie Louver Installation ($0 Free In-Home Estimate)", "url": "https://www.affordablehome-ac.com/window-ac-installation", "description": "Professional Oahu window AC installation, custom jalousie glass louver retrofits, and exterior support bracket mounting." },
-                                    { "@type": "Service", "name": "GE 26-Inch Through-the-Wall Built-In Sleeve AC Replacement", "url": "https://www.affordablehome-ac.com/shop/ge-built-in-wall-ac-oahu", "description": "True 26-inch GE AJCQ built-in wall air conditioners and RAB26A galvanized steel wall sleeves for Honolulu condos and townhomes." },
-                                    { "@type": "Service", "name": "Window AC Clean-vs-Replace Assessment ($0 Free In-Home Estimate)", "url": "https://www.affordablehome-ac.com/clean-vs-replace-window-ac", "description": "Honest on-site diagnostic evaluation comparing deep coil cleaning against upgrading to an ENERGY STAR LG Dual Inverter or GE R-32 Inverter." }
-                                ]
-                            },
-                            "contactPoint": [
-                                {
-                                    "@type": "ContactPoint",
-                                    "telephone": "+1-808-488-1111",
-                                    "contactType": "customer service",
-                                    "areaServed": "US-HI",
-                                    "availableLanguage": "English"
-                                },
-                                {
-                                    "@type": "ContactPoint",
-                                    "telephone": "+1-808-488-1111",
-                                    "contactType": "sales",
-                                    "areaServed": "US-HI",
-                                    "availableLanguage": "English"
-                                }
-                            ],
-                            "areaServed": [
-                                { "@type": "AdministrativeArea", "name": "Honolulu County" },
-                                { "@type": "City", "name": "Honolulu" },
-                                { "@type": "City", "name": "Waipahu" },
-                                { "@type": "City", "name": "Kapolei" },
-                                { "@type": "City", "name": "Ewa Beach" },
-                                { "@type": "City", "name": "Pearl City" },
-                                { "@type": "City", "name": "Aiea" },
-                                { "@type": "City", "name": "Mililani" },
-                                { "@type": "City", "name": "Kailua" },
-                                { "@type": "City", "name": "Kaneohe" },
-                                { "@type": "City", "name": "Hawaii Kai" },
-                                { "@type": "City", "name": "Kaimuki" },
-                                { "@type": "City", "name": "Manoa" },
-                                { "@type": "City", "name": "Waikiki" },
-                                { "@type": "City", "name": "Salt Lake" },
-                                { "@type": "City", "name": "Kunia" },
-                                { "@type": "City", "name": "Wahiawa" },
-                                { "@type": "City", "name": "Waianae" },
-                                { "@type": "City", "name": "Nanakuli" },
-                                { "@type": "City", "name": "Waimanalo" },
-                                { "@type": "City", "name": "Haleiwa" },
-                                { "@type": "City", "name": "Waialua" },
-                                { "@type": "City", "name": "Hauula" },
-                                { "@type": "State", "name": "Hawaii" }
-                            ]
-                        })
-                    }}
-                />
+                <GlobalBusinessJsonLd />
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `
@@ -314,7 +149,7 @@ export default function RootLayout({
                                 for (var j = 0; j < evts.length; j++) {
                                     window.addEventListener(evts[j], enableFullCss, { once: true, passive: true });
                                 }
-                                setTimeout(enableFullCss, window.location.pathname === '/' ? 4500 : 120);
+                                setTimeout(enableFullCss, window.location.pathname === '/' ? 4500 : 2800);
                             })();
                             // Universal Live Freshness & BFCache Sync
                             window.addEventListener('pageshow', function(event) {

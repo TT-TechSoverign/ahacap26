@@ -6,6 +6,7 @@ import { HomeFeaturedInventory } from '@/components/HomeFeaturedInventory';
 import { HomeServicesDivisions } from '@/components/HomeServicesDivisions';
 import { HomeServiceAreasHub } from '@/components/HomeServiceAreasHub';
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
+import { HomeJsonLd } from '@/components/CoreJsonLd';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -120,100 +121,7 @@ export default function Homepage() {
                 </div>
 
                 {/* Google WebSite, Sitelinks Search Box & Homepage AggregateRating Schema */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            "@context": "https://schema.org",
-                            "@graph": [
-                                {
-                                    "@type": "WebSite",
-                                    "@id": "https://www.affordablehome-ac.com/#website",
-                                    "url": "https://www.affordablehome-ac.com",
-                                    "name": "Affordable Home A/C",
-                                    "alternateName": [
-                                        "Affordable Home AC",
-                                        "Affordable Home Air Conditioning",
-                                        "affordablehome-ac.com"
-                                    ],
-                                    "description": "In-stock LG Dual Inverter & GE Window ACs ($395–$1,200), custom jalousie window AC installation, deep cleaning, and repair across Oahu, Hawaii.",
-                                    "publisher": {
-                                        "@type": "Organization",
-                                        "name": "Affordable Home A/C",
-                                        "url": "https://www.affordablehome-ac.com",
-                                        "logo": {
-                                            "@type": "ImageObject",
-                                            "url": "https://www.affordablehome-ac.com/assets/AFORDABLE_LOGO_2026_500x500_blkblugrn.png",
-                                            "width": 500,
-                                            "height": 500
-                                        }
-                                    },
-                                    "potentialAction": {
-                                        "@type": "SearchAction",
-                                        "target": {
-                                            "@type": "EntryPoint",
-                                            "urlTemplate": "https://www.affordablehome-ac.com/shop?q={search_term_string}"
-                                        },
-                                        "query-input": "required name=search_term_string"
-                                    }
-                                },
-                                {
-                                    "@type": "HVACBusiness",
-                                    "@id": "https://www.affordablehome-ac.com/#localbusiness",
-                                    "name": "Affordable Home A/C",
-                                    "url": "https://www.affordablehome-ac.com",
-                                    "image": "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
-                                    "telephone": "+1-808-488-1111",
-                                    "priceRange": "$395 - $1,200",
-                                    "address": {
-                                        "@type": "PostalAddress",
-                                        "streetAddress": "94-150 Leoleo St. #203",
-                                        "addressLocality": "Waipahu",
-                                        "addressRegion": "HI",
-                                        "postalCode": "96797",
-                                        "addressCountry": "US"
-                                    },
-                                    "aggregateRating": {
-                                        "@type": "AggregateRating",
-                                        "ratingValue": "4.9",
-                                        "reviewCount": "142",
-                                        "bestRating": "5",
-                                        "worstRating": "1"
-                                    }
-                                },
-                                {
-                                    "@type": "FAQPage",
-                                    "mainEntity": [
-                                        {
-                                            "@type": "Question",
-                                            "name": "Where can I buy an LG Dual Inverter or GE 26-inch Built-In Window AC in stock on Oahu?",
-                                            "acceptedAnswer": {
-                                                "@type": "Answer",
-                                                "text": "Affordable Home A/C stocks 16 LG Dual Inverter, LG Cool+Heat, and GE 26-inch Built-In Through-the-Wall air conditioners ($395 to $1,200) at our central Waipahu warehouse (94-150 Leoleo St. #203, Waipahu, HI 96797). Order online for free Waipahu warehouse pickup by appointment or $50 flat-rate Oahu delivery."
-                                            }
-                                        },
-                                        {
-                                            "@type": "Question",
-                                            "name": "Do you install Window ACs in Hawaiian jalousie louver windows and 26-inch condo wall sleeves?",
-                                            "acceptedAnswer": {
-                                                "@type": "Answer",
-                                                "text": "Yes. Our insured Oahu cooling specialists custom-fit LG and GE window air conditioners into Hawaiian jalousie glass louver windows, standard sliders, double-hung windows, and 26-inch through-the-wall condo sleeves with floor drop-cloth protection and a $0 Free In-Home Estimate."
-                                            }
-                                        },
-                                        {
-                                            "@type": "Question",
-                                            "name": "Do your in-stock Window ACs qualify for the $45 Hawaii Energy cash rebate?",
-                                            "acceptedAnswer": {
-                                                "@type": "Answer",
-                                                "text": "Yes! Qualifying ENERGY STAR® LG Dual Inverter and GE R-32 Inverter window air conditioners include our official Hawaii Energy $45 cash rebate form PDF and reduce HECO cooling electricity use by up to 40% (~$424/yr)."
-                                            }
-                                        }
-                                    ]
-                                }
-                            ]
-                        })
-                    }}
-                />
+                <HomeJsonLd />
             </main>
 
             {/* Global Background Image with Overlay (placed after <main> in DOM stream so Hero h1 paints in Frame 1) */}
