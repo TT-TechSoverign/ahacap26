@@ -9,6 +9,7 @@ import { DeferredGoogleTags } from '../components/DeferredGoogleTags';
 import { GTMRouteTracker } from '../components/GTMRouteTracker';
 import { LazyCartDrawerHost } from '../components/LazyCartDrawerHost';
 import './globals.css';
+import { INLINE_GLOBAL_CSS } from './generated-global-css';
 import dynamic from 'next/dynamic';
 
 const MobileStickyBottomBar = dynamic(() => import('../components/MobileStickyBottomBar'), { ssr: false });
@@ -30,8 +31,6 @@ export const metadata: Metadata = {
             { url: '/favicon.ico', sizes: '48x48' },
             { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
             { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-            { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-            { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
         ],
         shortcut: ['/favicon.ico'],
         apple: [
@@ -91,6 +90,12 @@ export default function RootLayout({
                     type="font/woff2"
                     crossOrigin="anonymous"
                 />
+                {process.env.NODE_ENV === 'production' && (
+                    <style
+                        id="ahac-global-css"
+                        dangerouslySetInnerHTML={{ __html: INLINE_GLOBAL_CSS }}
+                    />
+                )}
                 {/* Global GA/GTM queueing stub & Google Consent Mode V2 */}
                 <script
                     dangerouslySetInnerHTML={{
@@ -310,6 +315,11 @@ export default function RootLayout({
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `
+                            // Ensure deferred stylesheets always flip to media="all"
+                            window.addEventListener('load', function() {
+                                var links = document.querySelectorAll('link[data-precedence="next"][media="print"]');
+                                for (var i = 0; i < links.length; i++) links[i].media = 'all';
+                            });
                             // Universal Live Freshness & BFCache Sync
                             window.addEventListener('pageshow', function(event) {
                                 if (event && event.persisted) {

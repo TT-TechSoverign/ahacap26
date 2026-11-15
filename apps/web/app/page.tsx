@@ -50,11 +50,11 @@ export default function Homepage() {
                     src="/assets/hero-cards/ahac-hero-background-2.webp"
                     alt="Expert Window AC Installation & Cleaning by Affordable Home A/C"
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 640px) 256px, (max-width: 1024px) 640px, 100vw"
                     className="object-cover object-center translate-y-0 scale-100 md:translate-y-[-10%] md:scale-110 [transform:translateZ(0)]"
                     priority
                     fetchPriority="high"
-                    quality={55}
+                    quality={48}
                 />
                 <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-20" />
                 {/* Secondary subtle blur & darkening (desktop only to avoid full-screen mobile GPU compositing cost) */}
@@ -165,13 +165,17 @@ export default function Homepage() {
                 <QuickJumpBanner />
 
                 {/* 3. Featured In-Stock Oahu Inventory (Waipahu Warehouse Direct) */}
-                <HomeFeaturedInventory />
+                <div className="cv-auto">
+                    <HomeFeaturedInventory />
+                </div>
 
                 {/* 4. Dedicated Window AC & Cleaning Divisions */}
-                <HomeServicesDivisions />
+                <div className="cv-auto">
+                    <HomeServicesDivisions />
+                </div>
 
                 {/* 6. Island Verified Customer Reviews Pavilion */}
-                <section className="relative py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-[#070b12]/95 backdrop-blur-sm">
+                <section className="cv-auto relative py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-[#070b12]/95 backdrop-blur-sm">
                     <div className="max-w-7xl mx-auto">
                         <ReviewsPavilion 
                             variant="featured" 
@@ -187,7 +191,7 @@ export default function Homepage() {
                 <HomeServiceAreasHub />
 
                 {/* 7b. Visible Oahu Window AC & Rebate FAQs (1:1 FAQPage JSON-LD Parity) */}
-                <section id="home-faqs" className="relative py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+                <section id="home-faqs" className="cv-auto relative py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
                     <div className="text-center mb-8">
                         <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-cyan-400">
                             Waipahu Warehouse Direct • Oahu Window AC Answers
@@ -228,7 +232,7 @@ export default function Homepage() {
                 </section>
 
                 {/* 8. Oahu E-E-A-T Authority & Click-Depth-1 Silo Directory */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+                <div className="cv-auto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
                     <OahuEEATAuthorityBar topicTitle="Affordable Home A/C — Oahu's Waipahu Window AC Warehouse, Jalousie Installation & Deep Cleaning Specialists" />
                 </div>
             </main>

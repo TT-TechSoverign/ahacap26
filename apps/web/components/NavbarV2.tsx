@@ -150,12 +150,12 @@ export default function NavbarV2() {
                             <div className="flex justify-center z-20">
                                 <Link prefetch={false} href="/" className="block relative h-16 w-36 md:h-20 md:w-48 group shrink-0">
                                     <Image
-                                        src="/assets/logo.svg"
+                                        src="/assets/logo-header.webp"
                                         alt="AHAC Logo"
                                         fill
-                                        sizes="(max-width: 768px) 144px, 192px"
+                                        sizes="(max-width: 768px) 68px, 114px"
+                                        quality={80}
                                         className="object-contain relative z-10 drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
-                                        unoptimized
                                     />
                                 </Link>
                             </div>

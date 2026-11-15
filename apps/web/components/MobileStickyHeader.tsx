@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useCart } from '../context/CartContext';
-import MobileDrawerMenu from './MobileDrawerMenu';
 import { cn, isCampaignActive } from '@/lib/utils';
-import { Menu, X, ShoppingCart, Phone } from 'lucide-react';
+import { Menu, X, ShoppingCart } from 'lucide-react';
+
+const MobileDrawerMenu = dynamic(() => import('./MobileDrawerMenu'), { ssr: false });
 
 export default function MobileStickyHeader() {
     const pathname = usePathname();
@@ -68,12 +70,12 @@ export default function MobileStickyHeader() {
                         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20">
                             <Link href="/" prefetch={false} onClick={() => setMobileMenuOpen(false)} className={`block relative transition-all duration-300 logo-promo-glow ${isScrolled ? 'h-9 w-24' : 'h-12 w-28 sm:h-14 sm:w-32'}`}>
                                 <Image
-                                    src="/assets/logo.svg"
+                                    src="/assets/logo-header.webp"
                                     alt="AHAC Logo"
                                     fill
-                                    sizes="128px"
+                                    sizes="68px"
+                                    quality={78}
                                     className="object-contain"
-                                    unoptimized
                                 />
                             </Link>
                         </div>
@@ -105,10 +107,12 @@ export default function MobileStickyHeader() {
                 </div>
             </header>
 
-            <MobileDrawerMenu 
-                isOpen={mobileMenuOpen} 
-                setIsOpen={setMobileMenuOpen} 
-            />
+            {mobileMenuOpen && (
+                <MobileDrawerMenu 
+                    isOpen={mobileMenuOpen} 
+                    setIsOpen={setMobileMenuOpen} 
+                />
+            )}
         </>
     );
 }

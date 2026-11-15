@@ -77,7 +77,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-36 md:pb-8">
+        <footer className="cv-auto relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-36 md:pb-8">
             <div className="max-w-7xl mx-auto px-6">
                 <h2 className="sr-only">Oahu Window AC Scheduling, Directory &amp; Contact</h2>
                 {/* Availability Schedule Section */}
@@ -140,12 +140,12 @@ export default function Footer() {
                     <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
                         <div className="relative h-32 w-32 -mb-2">
                             <Image
-                                src="/assets/logo.svg"
+                                src="/assets/logo-header.webp"
                                 alt="Affordable Home A/C"
                                 fill
                                 sizes="128px"
+                                quality={78}
                                 className="object-contain"
-                                unoptimized
                             />
                         </div>
                         <p className="text-slate-400 text-sm leading-relaxed max-w-xs">

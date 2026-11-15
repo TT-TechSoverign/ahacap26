@@ -41,7 +41,8 @@ export const metadata: Metadata = {
 
 export default function ReviewsPage() {
     const stats = getReviewStats();
-    const topReviews = getAllReviews().slice(0, 10);
+    const allReviews = getAllReviews();
+    const topReviews = allReviews.slice(0, 10);
 
     // Schema.org Structured Data: Single Clean HVACBusiness with AggregateRating
     const hvacBusinessSchema = {
@@ -200,7 +201,7 @@ export default function ReviewsPage() {
                 </div>
 
                 {/* Full Pavilion */}
-                <ReviewsPavilion variant="full" />
+                <ReviewsPavilion variant="full" reviews={allReviews} />
 
                 <div className="mt-16">
                     <WindowAcQuickShop

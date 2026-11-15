@@ -18,7 +18,7 @@ import {
     UserCheck, 
     ThumbsUp 
 } from 'lucide-react';
-import { Review, ReviewStats, getAllReviews, getReviewStats } from '@/lib/product-reviews';
+import { Review, ReviewStats, getLiteReviews, getLiteReviewStats } from '@/lib/reviews-lite';
 import { cn } from '@/lib/utils';
 
 interface ReviewsPavilionProps {
@@ -49,25 +49,16 @@ function getAvatarGradient(name: string): string {
 
 function StarRating({ rating = 5, size = 'md' }: { rating?: number; size?: 'sm' | 'md' | 'lg' }) {
     const sizeClasses = {
-        sm: 'size-3',
-        md: 'size-4',
-        lg: 'size-5'
+        sm: 'text-xs tracking-[0.08em]',
+        md: 'text-sm tracking-[0.1em]',
+        lg: 'text-base tracking-[0.12em]'
     };
+    const clamped = Math.max(0, Math.min(5, Math.round(rating)));
 
     return (
-        <div role="img" className="flex items-center gap-0.5 text-amber-400" aria-label={`${rating} out of 5 stars`}>
-            {Array.from({ length: 5 }).map((_, i) => (
-                <Star 
-                    key={i} 
-                    aria-hidden="true"
-                    className={cn(
-                        sizeClasses[size], 
-                        i < rating 
-                            ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]' 
-                            : 'text-slate-700 fill-slate-800'
-                    )} 
-                />
-            ))}
+        <div role="img" className={cn("inline-flex items-center leading-none select-none font-sans", sizeClasses[size])} aria-label={`${rating} out of 5 stars`}>
+            <span aria-hidden="true" className="text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]">{'★'.repeat(clamped)}</span>
+            {clamped < 5 && <span aria-hidden="true" className="text-slate-700">{'★'.repeat(5 - clamped)}</span>}
         </div>
     );
 }
@@ -195,10 +186,10 @@ export function ReviewsPavilionContent({
     showFlywheel = true,
     limit
 }: ReviewsPavilionProps) {
-    const stats: ReviewStats = useMemo(() => getReviewStats(), []);
+    const stats: ReviewStats = useMemo(() => getLiteReviewStats(), []);
     const baseReviews: Review[] = useMemo(() => {
         if (customReviews && customReviews.length > 0) return customReviews;
-        return getAllReviews();
+        return getLiteReviews();
     }, [customReviews]);
 
     // Filtering states
@@ -496,7 +487,7 @@ export function ReviewsPavilionContent({
                     {/* Filter Track Tabs */}
                     <div className="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
                         {[
-                            { id: 'ALL', label: `All Reviews (${baseReviews.length})` },
+                            { id: 'ALL', label: `All Reviews (${variant === 'full' ? baseReviews.length : `${stats.total_reviews}+`})` },
                             { id: 'Window AC', label: 'Window AC' },
                             { id: 'Cleaning', label: 'Window AC Cleaning' },
                             { id: 'Installation', label: 'Custom Installation' },

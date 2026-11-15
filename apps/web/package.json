@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
+        "prebuild": "node generate-inline-css.cjs",
         "build": "next build",
         "start": "next start",
         "lint": "next lint"

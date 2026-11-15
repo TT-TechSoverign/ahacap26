@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { getProductReviews } from '@/lib/product-reviews';
+import { getLiteProductReviews } from '@/lib/reviews-lite';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 
 interface YelpReviewsProps {
@@ -10,7 +10,7 @@ interface YelpReviewsProps {
 
 export function YelpReviews({ productId }: YelpReviewsProps) {
   const selectedReviews = React.useMemo(() => {
-    return getProductReviews({ id: productId }, 3);
+    return getLiteProductReviews(productId, 3);
   }, [productId]);
 
   return (

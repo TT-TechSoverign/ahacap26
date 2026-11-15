@@ -1,8 +1,6 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
-import { MapPin, Navigation, ArrowRight, ShieldCheck, Sun, Building2, Trees, Wind } from 'lucide-react';
+import { Navigation, ArrowRight, Sun, Building2, Trees, Wind } from 'lucide-react';
 
 interface CityItem {
     name: string;
@@ -76,7 +74,7 @@ const OAHU_REGIONS: RegionGroup[] = [
 
 export function HomeServiceAreasHub() {
     return (
-        <section className="relative py-16 px-4 bg-slate-950 border-t border-slate-800/80">
+        <section className="cv-auto relative py-16 px-4 bg-slate-950 border-t border-slate-800/80">
             {/* Background Map Glow */}
             <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -123,14 +121,15 @@ export function HomeServiceAreasHub() {
                                         {region.cities.map((city, cIdx) => (
                                             <Link
                                                 key={cIdx}
+                                                prefetch={false}
                                                 href={`/service-areas/${city.slug}`}
                                                 className="group/city flex items-center justify-between px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-primary/30 transition-all text-xs text-slate-300 hover:text-white"
                                             >
                                                 <div className="flex items-center gap-2">
-                                                    <MapPin className="size-3 text-primary group-hover/city:text-cyan-300 transition-colors" />
+                                                    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-primary/80 group-hover/city:bg-cyan-300 transition-colors shrink-0" />
                                                     <span className="font-medium">{city.name}</span>
                                                 </div>
-                                                <ArrowRight className="size-3 text-slate-500 group-hover/city:text-primary group-hover/city:translate-x-0.5 transition-all" />
+                                                <span aria-hidden="true" className="text-slate-500 group-hover/city:text-primary group-hover/city:translate-x-0.5 transition-all font-mono">→</span>
                                             </Link>
                                         ))}
                                     </div>
@@ -138,6 +137,7 @@ export function HomeServiceAreasHub() {
 
                                 <div className="mt-6 pt-4 border-t border-white/5">
                                     <Link
+                                        prefetch={false}
                                         href={`/service-areas/${region.cities[0].slug}`}
                                         className="text-[11px] font-mono font-bold text-primary hover:text-cyan-300 inline-flex items-center gap-1 group"
                                     >

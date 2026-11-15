@@ -9,6 +9,7 @@ const config: Config = {
         "./app/**/*.{js,ts,jsx,tsx,mdx}",
         "./components/**/*.{js,ts,jsx,tsx,mdx}",
         "./context/**/*.{js,ts,jsx,tsx,mdx}",
+        "./lib/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
         extend: {
@@ -30,9 +31,9 @@ const config: Config = {
                 },
             },
             fontFamily: {
-                "display": ["Inter", "sans-serif"],
-                "header": ["Oswald", "sans-serif"],
-                "sans": ["Inter", "sans-serif"], // Default fallback
+                "display": ["Inter", "Inter Fallback", "system-ui", "-apple-system", "sans-serif"],
+                "header": ["Oswald", "Oswald Fallback", "Arial Narrow", "sans-serif"],
+                "sans": ["Inter", "Inter Fallback", "system-ui", "-apple-system", "sans-serif"],
             },
             borderRadius: {
                 "DEFAULT": "0.25rem",
