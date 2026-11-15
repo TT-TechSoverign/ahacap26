@@ -2521,15 +2521,15 @@ function ProductCard({
                 {/* Technical Specs & Window Fit Clearance */}
                 <div className="grid grid-cols-3 gap-1 w-full mb-2.5">
                     <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                        <span className="text-slate-500 text-[7px] font-black uppercase tracking-widest mb-0.5">Noise</span>
+                        <span className="text-slate-400 text-[7px] font-black uppercase tracking-widest mb-0.5">Noise</span>
                         <span className="text-white text-[9px] font-bold font-header lowercase truncate">{product.noise_level || 'N/A'}</span>
                     </div>
                     <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2 flex flex-col items-center justify-center group-hover:border-primary/20 transition-all duration-500 shadow-inner">
-                        <span className="text-slate-500 text-[7px] font-black uppercase tracking-widest mb-0.5">Voltage</span>
+                        <span className="text-slate-400 text-[7px] font-black uppercase tracking-widest mb-0.5">Voltage</span>
                         <span className="text-white text-[9px] font-bold font-header">{product.voltage?.split('/')?.[0]?.trim() || '115V'}</span>
                     </div>
                     <div className="bg-white/[0.03] border border-white/5 rounded-lg p-2 flex flex-col items-center justify-center group-hover:border-cyan-500/20 transition-all duration-500 shadow-inner">
-                        <span className="text-slate-500 text-[7px] font-black uppercase tracking-widest mb-0.5">
+                        <span className="text-slate-400 text-[7px] font-black uppercase tracking-widest mb-0.5">
                             {(product.subcategory === 'ge' || product.subcategory === 'casement') ? 'Wall Sleeve' : 'Min Window'}
                         </span>
                         <span className="text-cyan-300 text-[9px] font-bold font-mono">

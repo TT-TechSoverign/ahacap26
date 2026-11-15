@@ -62,26 +62,26 @@ html, body {
 }
 `;
 
-    const criticalTailwindConfig = {
+    const baseContent = [
+        './app/layout.tsx',
+        './app/page.tsx',
+        './components/MobileStickyHeader.tsx',
+        './components/NavbarV2.tsx',
+        './components/Section1HeroHomeV2.tsx',
+        './components/QuickJumpBanner.tsx',
+        './components/HomeFeaturedInventory.tsx',
+        './components/HomeServicesDivisions.tsx',
+        './components/ReviewsPavilion.tsx',
+        './components/HomeServiceAreasHub.tsx',
+        './components/OahuEEATAuthorityBar.tsx',
+        './components/Footer.tsx',
+        './components/EditableText.tsx',
+        './components/ProtectedEmailLink.tsx',
+    ];
+
+    const sharedTheme = {
         darkMode: 'class',
         future: { hoverOnlyWhenSupported: true },
-        content: [
-            './app/layout.tsx',
-            './app/page.tsx',
-            './app/shop/page.tsx',
-            './components/MobileStickyHeader.tsx',
-            './components/NavbarV2.tsx',
-            './components/Section1HeroHomeV2.tsx',
-            './components/QuickJumpBanner.tsx',
-            './components/HomeFeaturedInventory.tsx',
-            './components/HomeServicesDivisions.tsx',
-            './components/ReviewsPavilion.tsx',
-            './components/HomeServiceAreasHub.tsx',
-            './components/OahuEEATAuthorityBar.tsx',
-            './components/Footer.tsx',
-            './components/EditableText.tsx',
-            './components/ProtectedEmailLink.tsx',
-        ],
         safelist: [
             'pt-[92px]', 'pt-[96px]', 'pt-20', 'md:pt-[180px]', 'md:pt-[192px]',
             'bg-[#05070a]', 'bg-[#050914]', 'bg-[#060a12]', 'min-h-screen',
@@ -129,16 +129,23 @@ html, body {
         plugins: [],
     };
 
-    const result = await postcss([
-        tailwindcss(criticalTailwindConfig),
-        autoprefixer(),
-        cssnano({ excludeAll: false }, postcss),
-    ]).process(criticalCssInput, { from: path.join(webDir, 'app/globals.css') });
+    const bundles = [
+        { outFile: 'critical-head.css', content: baseContent },
+        { outFile: 'critical-shop.css', content: [...baseContent, './app/shop/page.tsx'] },
+    ];
 
-    const safeCss = result.css.replace(/<\/style/gi, '<\\/style');
-    const outPath = path.join(webDir, 'critical-head.css');
-    fs.writeFileSync(outPath, safeCss, 'utf8');
-    console.log(`[generate-inline-css] Wrote ${safeCss.length} bytes of critical CSS to critical-head.css`);
+    for (const b of bundles) {
+        const result = await postcss([
+            tailwindcss({ ...sharedTheme, content: b.content }),
+            autoprefixer(),
+            cssnano({ excludeAll: false }, postcss),
+        ]).process(criticalCssInput, { from: path.join(webDir, 'app/globals.css') });
+
+        const safeCss = result.css.replace(/<\/style/gi, '<\\/style');
+        const outPath = path.join(webDir, b.outFile);
+        fs.writeFileSync(outPath, safeCss, 'utf8');
+        console.log(`[generate-inline-css] Wrote ${safeCss.length} bytes of critical CSS to ${b.outFile}`);
+    }
 }
 
 buildCriticalInlineCss().catch((err) => {

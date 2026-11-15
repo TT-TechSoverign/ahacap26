@@ -2,29 +2,38 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 
-const cssCandidates = [
-    path.join(__dirname, 'critical-head.css'),
-    path.join(process.cwd(), 'apps/web/critical-head.css'),
-    path.join(process.cwd(), 'critical-head.css'),
-];
-
-let critCss = '';
-for (const p of cssCandidates) {
-    if (fs.existsSync(p)) {
-        critCss = fs.readFileSync(p, 'utf8').trim();
-        break;
+function loadCssFile(fileName) {
+    const candidates = [
+        path.join(__dirname, fileName),
+        path.join(process.cwd(), 'apps/web', fileName),
+        path.join(process.cwd(), fileName),
+    ];
+    for (const p of candidates) {
+        if (fs.existsSync(p)) {
+            return fs.readFileSync(p, 'utf8').trim();
+        }
     }
+    return '';
 }
+
+const critCss = loadCssFile('critical-head.css');
+const critShopCss = loadCssFile('critical-shop.css') || critCss;
 
 const NEEDLE = Buffer.from('<meta charSet="utf-8"/>');
 const INJECT = critCss
     ? Buffer.from(`<meta charSet="utf-8"/><style id="ahac-crit">${critCss}</style>`)
     : NEEDLE;
+const INJECT_SHOP = critShopCss
+    ? Buffer.from(`<meta charSet="utf-8"/><style id="ahac-crit">${critShopCss}</style>`)
+    : INJECT;
 
 const origEmit = http.Server.prototype.emit;
 http.Server.prototype.emit = function (event, req, res) {
     if (event === 'request' && req && req.headers && req.url && !req.url.startsWith('/_next/')) {
         delete req.headers['accept-encoding'];
+        if (res) {
+            res._ahacUrl = req.url;
+        }
     }
     return origEmit.apply(this, arguments);
 };
@@ -79,9 +88,10 @@ function transformFirstHtmlChunk(res, chunk, encoding) {
         return chunk;
     }
     res._ahacCritChecked = true;
+    const isShop = typeof res._ahacUrl === 'string' && res._ahacUrl.startsWith('/shop');
     return Buffer.concat([
         buf.subarray(0, idx),
-        INJECT,
+        isShop ? INJECT_SHOP : INJECT,
         buf.subarray(idx + NEEDLE.length),
     ]);
 }

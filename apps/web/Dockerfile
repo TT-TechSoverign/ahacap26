@@ -72,6 +72,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/l
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/critical-head.css ./apps/web/critical-head.css
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/critical-shop.css ./apps/web/critical-shop.css
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/start-prod.cjs ./apps/web/start-prod.cjs
 
 # Removed: Force remove broken pnpm symlinks hack
