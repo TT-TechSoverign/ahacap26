@@ -7,10 +7,10 @@ import NavbarV2 from '../components/NavbarV2';
 import MobileStickyHeader from '../components/MobileStickyHeader';
 import { DeferredGoogleTags } from '../components/DeferredGoogleTags';
 import { GTMRouteTracker } from '../components/GTMRouteTracker';
+import { LazyCartDrawerHost } from '../components/LazyCartDrawerHost';
 import './globals.css';
 import dynamic from 'next/dynamic';
 
-const CartDrawer = dynamic(() => import('../components/CartDrawer'), { ssr: false });
 const MobileStickyBottomBar = dynamic(() => import('../components/MobileStickyBottomBar'), { ssr: false });
 
 
@@ -302,7 +302,7 @@ export default function RootLayout({
                         <MobileStickyHeader />
                         <NavbarV2 />
                         {children}
-                        <CartDrawer />
+                        <LazyCartDrawerHost />
                         <Footer />
                         <MobileStickyBottomBar />
                     </CartProvider>

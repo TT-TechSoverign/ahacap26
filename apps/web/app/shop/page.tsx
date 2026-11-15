@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ProtectedEmailLink } from '@/components/ProtectedEmailLink';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, useRef, useMemo, Suspense } from 'react';
+import { startTransition, useEffect, useState, useRef, useMemo, Suspense } from 'react';
 // Fix import path: go up two levels to 'web', then into 'context'
 import { useCart } from '../../context/CartContext';
 import { getProductImages } from '../../lib/product-images';
@@ -14,7 +14,6 @@ import { buildGa4EcommerceItem, trackEcommerceEvent } from '@/lib/tracking';
 import { INITIAL_CATALOG_PRODUCTS } from '@/lib/catalog-seed';
 import { EditableText } from '@/components/EditableText';
 import { useContent } from '@/lib/context/ContentContext';
-import { Reorder, motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { BackToTop } from '@/components/BackToTop';
 import { ReviewsPavilion } from '@/components/ReviewsPavilion';
 import { OahuEEATAuthorityBar } from '@/components/OahuEEATAuthorityBar';
@@ -388,6 +387,7 @@ function ShopPageContent() {
                     rebate="$45 Hawaii Energy Rebate"
                     compareList={compareList}
                     onToggleCompare={handleToggleCompare}
+                    priorityFirst={true}
                 />
             </div>
         ),
@@ -621,7 +621,9 @@ function ShopPageContent() {
                 if (!res.ok) throw new Error(`Failed to fetch inventory (Status: ${res.status})`);
 
                 const data = await res.json();
-                setProducts(data);
+                startTransition(() => {
+                    setProducts(data);
+                });
 
                 if (Array.isArray(data) && data.length > 0 && !hasTrackedItemListRef.current) {
                     hasTrackedItemListRef.current = true;
@@ -2122,19 +2124,7 @@ function SizingGuideSection() {
             </div>
 
             {/* Advanced Technical Sizing Variables */}
-            <motion.div
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={{
-                    hidden: { opacity: 0 },
-                    show: {
-                        opacity: 1,
-                        transition: { staggerChildren: 0.15 }
-                    }
-                }}
-                className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto"
-            >
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
                 {[
                     {
                         title: "Humidity Load Factor",
@@ -2152,12 +2142,8 @@ function SizingGuideSection() {
                         desc: <>Units in the <span className="text-white font-bold italic">LG DUAL Inverter series</span> can modulate their speed, making them <span className="text-primary/90 font-bold">more forgiving</span> if you slightly &quot;oversize&quot; for a space compared to a standard single-speed unit.</>
                     }
                 ].map((factor, idx) => (
-                    <motion.div
+                    <div
                         key={idx}
-                        variants={{
-                            hidden: { opacity: 0, y: 20 },
-                            show: { opacity: 1, y: 0 }
-                        }}
                         className="bg-[#0f172a]/40 border border-white/10 rounded-2xl p-7 hover:border-primary/50 hover:bg-[#1e293b]/40 transition-all duration-500 group/factor shadow-lg hover:shadow-[0_0_40px_rgba(0,174,239,0.1)] relative overflow-hidden h-full"
                     >
                         {/* Industrial Accent Line */}
@@ -2176,9 +2162,9 @@ function SizingGuideSection() {
 
                         {/* Mesh decoration subtle backdrop */}
                         <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary/5 rounded-full blur-3xl group-hover/factor:bg-primary/10 transition-colors duration-700"></div>
-                    </motion.div>
+                    </div>
                 ))}
-            </motion.div>
+            </div>
         </section>
     );
 }
@@ -2190,13 +2176,15 @@ function ProductGrid({
     onQuickAdd, 
     rebate,
     compareList = [],
-    onToggleCompare
+    onToggleCompare,
+    priorityFirst = false
 }: { 
     products: Product[]; 
     onQuickAdd: (p: Product) => void; 
     rebate?: string;
     compareList?: Product[];
     onToggleCompare?: (p: Product) => void;
+    priorityFirst?: boolean;
 }) {
     if (products.length === 0) {
         return (
@@ -2214,26 +2202,10 @@ function ProductGrid({
     });
 
     return (
-        <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={{
-                hidden: { opacity: 0 },
-                show: {
-                    opacity: 1,
-                    transition: { staggerChildren: 0.1 }
-                }
-            }}
-            className="flex flex-wrap justify-center gap-3 md:gap-4"
-        >
-            {sortedProducts.map(product => (
-                <motion.div
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+            {sortedProducts.map((product, idx) => (
+                <div
                     key={product.id}
-                    variants={{
-                        hidden: { opacity: 0, y: 20 },
-                        show: { opacity: 1, y: 0 }
-                    }}
                     className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] max-w-[360px]"
                 >
                     <ProductCard 
@@ -2242,10 +2214,11 @@ function ProductGrid({
                         rebate={rebate}
                         isComparing={compareList.some(c => c.id === product.id)}
                         onToggleCompare={onToggleCompare}
+                        priority={priorityFirst && idx === 0}
                     />
-                </motion.div>
+                </div>
             ))}
-        </motion.div>
+        </div>
     );
 }
 
@@ -2254,13 +2227,15 @@ function ProductCard({
     onQuickAdd, 
     rebate,
     isComparing = false,
-    onToggleCompare
+    onToggleCompare,
+    priority = false
 }: { 
     product: Product; 
     onQuickAdd: () => void; 
     rebate?: string;
     isComparing?: boolean;
     onToggleCompare?: (p: Product) => void;
+    priority?: boolean;
 }) {
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
@@ -2497,6 +2472,7 @@ function ProductCard({
                             src={activeImg}
                             alt={viewMode === 'cutaway' ? `${product.name} 3D Window Fit Cutaway` : product.name}
                             fill
+                            priority={priority}
                             sizes="(max-width: 640px) 320px, (max-width: 1024px) 360px, 300px"
                             quality={70}
                             className={cn(
