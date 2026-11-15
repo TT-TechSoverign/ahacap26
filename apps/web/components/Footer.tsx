@@ -77,7 +77,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="cv-auto relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-36 md:pb-8">
+        <footer className="relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-36 md:pb-8">
             <div className="max-w-7xl mx-auto px-6">
                 <h2 className="sr-only">Oahu Window AC Scheduling, Directory &amp; Contact</h2>
                 {/* Availability Schedule Section */}

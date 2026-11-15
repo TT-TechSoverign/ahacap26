@@ -10,7 +10,6 @@ const autoprefixer = require(require.resolve('autoprefixer', { paths: [webDir] }
 const cssnano = require(require.resolve('next/dist/compiled/cssnano-simple', { paths: [webDir] }));
 
 async function buildCriticalInlineCss() {
-    // Minimal base + font-face + above-the-fold Tailwind input (full globals.css with animations loads async right behind!)
     const criticalCssInput = `
 @font-face {
     font-family: 'Inter';
@@ -30,8 +29,8 @@ async function buildCriticalInlineCss() {
 @font-face {
     font-family: 'Oswald';
     font-style: normal;
-    font-weight: 200 700;
-    font-display: swap;
+    font-weight: 400 900;
+    font-display: optional;
     src: url('/assets/fonts/oswald.woff2') format('woff2');
 }
 @font-face {
@@ -67,10 +66,6 @@ html, body {
     overflow-x: clip;
     max-width: 100vw;
     width: 100%;
-}
-.cv-auto {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 700px;
 }
 .scrollbar-none, .no-scrollbar {
     -ms-overflow-style: none;
@@ -143,10 +138,9 @@ html, body {
     ]).process(criticalCssInput, { from: path.join(webDir, 'app/globals.css') });
 
     const safeCss = result.css.replace(/<\/style/gi, '<\\/style');
-    const outTs = `// Auto-generated critical above-the-fold CSS by generate-inline-css.cjs during prebuild — DO NOT EDIT MANUALLY\nexport const INLINE_GLOBAL_CSS = ${JSON.stringify(safeCss)};\n`;
-    const outPath = path.join(webDir, 'app/generated-global-css.ts');
-    fs.writeFileSync(outPath, outTs, 'utf8');
-    console.log(`[generate-inline-css] Wrote ${safeCss.length} bytes of critical above-the-fold CSS to app/generated-global-css.ts`);
+    const outPath = path.join(webDir, 'critical-head.css');
+    fs.writeFileSync(outPath, safeCss, 'utf8');
+    console.log(`[generate-inline-css] Wrote ${safeCss.length} bytes of critical CSS to critical-head.css`);
 }
 
 buildCriticalInlineCss().catch((err) => {

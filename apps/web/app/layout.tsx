@@ -9,7 +9,6 @@ import { DeferredGoogleTags } from '../components/DeferredGoogleTags';
 import { GTMRouteTracker } from '../components/GTMRouteTracker';
 import { LazyCartDrawerHost } from '../components/LazyCartDrawerHost';
 import './globals.css';
-import { INLINE_GLOBAL_CSS } from './generated-global-css';
 import dynamic from 'next/dynamic';
 
 const MobileStickyBottomBar = dynamic(() => import('../components/MobileStickyBottomBar'), { ssr: false });
@@ -90,12 +89,6 @@ export default function RootLayout({
                     type="font/woff2"
                     crossOrigin="anonymous"
                 />
-                {process.env.NODE_ENV === 'production' && (
-                    <style
-                        id="ahac-global-css"
-                        dangerouslySetInnerHTML={{ __html: INLINE_GLOBAL_CSS }}
-                    />
-                )}
                 {/* Global GA/GTM queueing stub & Google Consent Mode V2 */}
                 <script
                     dangerouslySetInnerHTML={{

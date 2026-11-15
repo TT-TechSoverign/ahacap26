@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { Navigation, ArrowRight, Sun, Building2, Trees, Wind } from 'lucide-react';
@@ -74,7 +76,7 @@ const OAHU_REGIONS: RegionGroup[] = [
 
 export function HomeServiceAreasHub() {
     return (
-        <section className="cv-auto relative py-16 px-4 bg-slate-950 border-t border-slate-800/80">
+        <section className="relative py-16 px-4 bg-slate-950 border-t border-slate-800/80">
             {/* Background Map Glow */}
             <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 

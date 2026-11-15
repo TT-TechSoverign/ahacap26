@@ -18,8 +18,8 @@
 @font-face {
     font-family: 'Oswald';
     font-style: normal;
-    font-weight: 200 700;
-    font-display: swap;
+    font-weight: 400 900;
+    font-display: optional;
     src: url('/assets/fonts/oswald.woff2') format('woff2');
 }
 
@@ -491,11 +491,6 @@ html, body {
     display: none;
 }
 
-/* Defer offscreen layout/paint while keeping 100% SSR HTML & FAQ DOM intact for crawlers */
-.cv-auto {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 700px;
-}
 
 
 

@@ -165,17 +165,13 @@ export default function Homepage() {
                 <QuickJumpBanner />
 
                 {/* 3. Featured In-Stock Oahu Inventory (Waipahu Warehouse Direct) */}
-                <div className="cv-auto">
-                    <HomeFeaturedInventory />
-                </div>
+                <HomeFeaturedInventory />
 
                 {/* 4. Dedicated Window AC & Cleaning Divisions */}
-                <div className="cv-auto">
-                    <HomeServicesDivisions />
-                </div>
+                <HomeServicesDivisions />
 
                 {/* 6. Island Verified Customer Reviews Pavilion */}
-                <section className="cv-auto relative py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-[#070b12]/95 backdrop-blur-sm">
+                <section className="relative py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-[#070b12]/95 backdrop-blur-sm">
                     <div className="max-w-7xl mx-auto">
                         <ReviewsPavilion 
                             variant="featured" 
@@ -191,7 +187,7 @@ export default function Homepage() {
                 <HomeServiceAreasHub />
 
                 {/* 7b. Visible Oahu Window AC & Rebate FAQs (1:1 FAQPage JSON-LD Parity) */}
-                <section id="home-faqs" className="cv-auto relative py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+                <section id="home-faqs" className="relative py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
                     <div className="text-center mb-8">
                         <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-cyan-400">
                             Waipahu Warehouse Direct • Oahu Window AC Answers
@@ -232,7 +228,7 @@ export default function Homepage() {
                 </section>
 
                 {/* 8. Oahu E-E-A-T Authority & Click-Depth-1 Silo Directory */}
-                <div className="cv-auto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
                     <OahuEEATAuthorityBar topicTitle="Affordable Home A/C — Oahu's Waipahu Window AC Warehouse, Jalousie Installation & Deep Cleaning Specialists" />
                 </div>
             </main>
