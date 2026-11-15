@@ -233,9 +233,10 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                             src={imgSrc}
                                             alt={unit.name}
                                             fill
-                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                                            sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 25vw"
+                                            quality={75}
                                             className="object-contain p-2.5 group-hover:scale-105 transition-transform duration-300"
-                                            unoptimized
+                                            unoptimized={imgSrc.endsWith('.svg')}
                                         />
                                     </Link>
 
@@ -303,7 +304,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                     <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
                         Direct In-Stock Waipahu Model Links (Order Online or Pickup at 94-150 Leoleo St #203):
                     </div>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                         {inStockAcProducts.map((model) => {
                             const modelSlug = generateProductSlug(model.id, model.name);
                             const shortCode = model.key_spec || model.name.match(/\(([^)]+)\)/)?.[1] || `ID-${model.id}`;
@@ -313,7 +314,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                     key={model.id}
                                     href={`/shop/${modelSlug}`}
                                     prefetch={false}
-                                    className="px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
+                                    className="inline-flex items-center min-h-[28px] px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
                                 >
                                     {model.name.startsWith('GE') ? 'GE' : 'LG'} {btuText} ({shortCode}) • ${model.price.toLocaleString()}
                                 </Link>
@@ -322,7 +323,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                         <Link
                             href="/shop/16-ge-rab26a-wall-casement"
                             prefetch={false}
-                            className="px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
+                            className="inline-flex items-center min-h-[28px] px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
                         >
                             GE RAB26A 26&quot; Wall Sleeve • $275
                         </Link>
@@ -370,7 +371,7 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                                 {model.btu ? `${model.btu.toLocaleString()} BTU` : '26" Sleeve'}
                                             </td>
                                             <td className="py-2 px-3 text-slate-300">
-                                                {model.coverage_oahu || 'Oahu Calibrated'} <span className="text-slate-500 text-[11px]">({model.coverage_aham || model.coverage})</span>
+                                                {model.coverage_oahu || 'Oahu Calibrated'} <span className="text-slate-400 text-[11px]">({model.coverage_aham || model.coverage})</span>
                                             </td>
                                             <td className="py-2 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">
                                                 {model.voltage || '115V / 15A'}

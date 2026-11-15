@@ -54,6 +54,7 @@ export default function MobileStickyHeader() {
                                 onClick={handleToggleMenu}
                                 className="text-white hover:text-primary transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center -ml-2 rounded-lg active:bg-white/5"
                                 aria-label="Toggle Menu"
+                                aria-expanded={mobileMenuOpen}
                             >
                                 {mobileMenuOpen ? (
                                     <X className="size-7" />
@@ -82,7 +83,7 @@ export default function MobileStickyHeader() {
                             <button
                                 onClick={handleOpenCart}
                                 className="text-white hover:text-cyan-400 transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 relative rounded-lg active:bg-white/5"
-                                aria-label="Open Cart"
+                                aria-label={cartCount > 0 ? `Open Cart (${cartCount})` : 'Open Cart'}
                             >
                                 <ShoppingCart className="size-6" />
                                 {cartCount > 0 && (

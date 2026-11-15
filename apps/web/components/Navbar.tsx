@@ -110,7 +110,7 @@ export default function Navbar() {
                         <button
                             onClick={openCart}
                             className="relative group p-2 hover:bg-white/5 rounded-lg transition-colors"
-                            aria-label="Open Cart"
+                            aria-label={items.length > 0 ? `Open Cart (${items.length})` : 'Open Cart'}
                         >
                             <ShoppingCart className="size-6 text-white group-hover:text-primary transition-colors" />
                             {items.length > 0 && (

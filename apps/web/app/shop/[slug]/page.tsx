@@ -596,10 +596,12 @@ export default function ProductDetailPage() {
                                             src={cutawayImageUrl}
                                             alt={`${product.name} 3D Spatial Fit`}
                                             fill
-                                            sizes="(max-width: 1024px) 100vw, 50vw"
+                                            sizes="(max-width: 1024px) 92vw, 480px"
+                                            quality={78}
                                             className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.9)] transition-all duration-700 group-hover/cutaway:scale-105"
                                             priority
-                                            unoptimized
+                                            fetchPriority="high"
+                                            unoptimized={cutawayImageUrl.endsWith('.svg')}
                                         />
                                     </div>
                                     <div className="absolute top-2 left-2 z-20 px-2.5 py-1 rounded-md bg-cyan-500/90 text-slate-950 text-[9px] font-header font-black uppercase tracking-wider shadow-md">
@@ -629,10 +631,12 @@ export default function ProductDetailPage() {
                                         src={selectedImage}
                                         alt={`${product.name}${PRODUCT_IDENTIFIERS[product.id]?.mpn && !product.name.toUpperCase().includes(PRODUCT_IDENTIFIERS[product.id].mpn.toUpperCase()) ? ` (${PRODUCT_IDENTIFIERS[product.id].mpn})` : ''} — In-Stock Waipahu, Oahu`}
                                         fill
-                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                        sizes="(max-width: 1024px) 92vw, 480px"
+                                        quality={78}
                                         className="object-contain drop-shadow-[0_50px_100px_rgba(0,0,0,0.8)] transition-all duration-1000 group-hover:scale-105"
                                         priority
-                                        unoptimized
+                                        fetchPriority="high"
+                                        unoptimized={selectedImage.endsWith('.svg')}
                                     />
                                 </div>
                             ) : (
@@ -685,8 +689,9 @@ export default function ProductDetailPage() {
                                             alt={`${product.name}${PRODUCT_IDENTIFIERS[product.id]?.mpn && !product.name.toUpperCase().includes(PRODUCT_IDENTIFIERS[product.id].mpn.toUpperCase()) ? ` (${PRODUCT_IDENTIFIERS[product.id].mpn})` : ''} — View ${idx + 1} (Waipahu Oahu Warehouse)`}
                                             fill
                                             sizes="64px"
+                                            quality={70}
                                             className="object-cover"
-                                            unoptimized
+                                            unoptimized={img.endsWith('.svg')}
                                         />
                                     </button>
                                 ))}
@@ -716,7 +721,7 @@ export default function ProductDetailPage() {
                                 {isPromo ? (
                                     <div className="flex flex-col items-center md:items-start gap-1.5 font-header">
                                         <div className="flex items-baseline gap-2.5 justify-center md:justify-start">
-                                            <span className="text-sm md:text-base text-slate-500 line-through decoration-red-500 decoration-[1.5px] font-medium">
+                                            <span className="text-sm md:text-base text-slate-400 line-through decoration-red-500 decoration-[1.5px] font-medium">
                                                 ${product.price.toLocaleString()}
                                             </span>
                                             <span className="text-3xl md:text-4xl font-black text-cyan-400 tracking-tighter drop-shadow-[0_0_15px_rgba(34,211,238,0.35)] animate-pulse-slow">

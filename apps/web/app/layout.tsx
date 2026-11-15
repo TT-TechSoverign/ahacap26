@@ -5,7 +5,7 @@ import { ContentProvider } from '../lib/context/ContentContext';
 import Footer from '../components/Footer';
 import NavbarV2 from '../components/NavbarV2';
 import MobileStickyHeader from '../components/MobileStickyHeader';
-import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
+import { DeferredGoogleTags } from '../components/DeferredGoogleTags';
 import { GTMRouteTracker } from '../components/GTMRouteTracker';
 import './globals.css';
 import dynamic from 'next/dynamic';
@@ -112,17 +112,24 @@ export default function RootLayout({
                                 'ad_personalization': 'granted'
                             });
                             gtag('js', new Date());
+                            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID || 'G-MYJZTZFXQV'}');
+                            gtag('config', '${process.env.NEXT_PUBLIC_GT_ID || 'GT-PLTZM3FV'}');
                         `
                     }}
                 />
             </head>
             <body className="font-sans bg-background-light dark:bg-background-dark text-charcoal dark:text-white">
-                <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KTZ58FJX'} />
-                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-MYJZTZFXQV'} />
-                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GT_ID || 'GT-PLTZM3FV'} />
+                <DeferredGoogleTags
+                    gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KTZ58FJX'}
+                    gaIds={[
+                        process.env.NEXT_PUBLIC_GA_ID || 'G-MYJZTZFXQV',
+                        process.env.NEXT_PUBLIC_GT_ID || 'GT-PLTZM3FV',
+                    ]}
+                />
                 <GTMRouteTracker />
                 <noscript>
                     <iframe 
+                        title="Google Tag Manager"
                         src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID || 'GTM-KTZ58FJX'}`}
                         height="0" 
                         width="0" 

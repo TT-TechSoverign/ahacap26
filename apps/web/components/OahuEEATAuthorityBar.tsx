@@ -171,34 +171,34 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
                         <div className="font-header font-bold uppercase text-white text-xs tracking-wide border-b border-white/10 pb-1">
                             Shop &amp; Buyer Guides ($395+)
                         </div>
-                        <ul className="space-y-1 text-slate-300">
-                            <li><Link href="/shop/oahu-window-ac-warehouse" className="hover:text-cyan-300 transition-colors">Waipahu Window AC Warehouse</Link></li>
-                            <li><Link href="/shop/lg-dual-inverter-guide" className="hover:text-cyan-300 transition-colors">LG Dual Inverter Buyer Guide</Link></li>
-                            <li><Link href="/shop/lg-dual-inverter-8000-btu-oahu" className="hover:text-cyan-300 transition-colors">8,000 BTU LG Dual Inverter Guide</Link></li>
-                            <li><Link href="/shop/10000-12000-btu-window-ac-oahu" className="hover:text-cyan-300 transition-colors">10,000–12,000 BTU Master &amp; Condo ACs</Link></li>
-                            <li><Link href="/shop/large-room-window-ac-oahu" className="hover:text-cyan-300 transition-colors">Large Room 14k–23.5k BTU Units</Link></li>
-                            <li><Link href="/shop/ge-built-in-wall-ac-oahu" className="hover:text-cyan-300 transition-colors">GE 26&quot; Built-In Wall Sleeve ACs</Link></li>
-                            <li><Link href="/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu" className="hover:text-cyan-300 transition-colors">26&quot; Wall Sleeve Dimensions (RAB26A)</Link></li>
-                            <li><Link href="/shop/lg-cool-and-heat-window-ac-hawaii" className="hover:text-cyan-300 transition-colors">LG Cool + Heat Window ACs Hawaii</Link></li>
-                            <li><Link href="/shop/lg-standard-budget-window-ac-oahu" className="hover:text-cyan-300 transition-colors">LG Standard Budget Window ACs ($395+)</Link></li>
-                            <li><Link href="/shop/window-ac-plug-guide" className="hover:text-cyan-300 transition-colors">115V vs 230V Window AC Plug Guide</Link></li>
-                            <li><Link href="/hawaii-energy-rebate" className="hover:text-cyan-300 transition-colors">$45 Hawaii Energy Cash Rebate</Link></li>
-                            <li><Link href="/window-ac-electricity-cost-heco-calculator-hawaii" className="hover:text-cyan-300 transition-colors">HECO AC Electricity Cost Calculator</Link></li>
-                            <li><Link href="/portable-ac-vs-window-ac-hawaii" className="hover:text-cyan-300 transition-colors">Portable AC vs Window AC Hawaii</Link></li>
-                            <li><Link href="/quiet-bedroom-window-ac-oahu" className="hover:text-cyan-300 transition-colors">Quiet 44dB Bedroom Window ACs</Link></li>
-                            <li><Link href="/living-room-window-ac-oahu" className="hover:text-cyan-300 transition-colors">Living Room Window ACs Oahu</Link></li>
-                            <li><Link href="/small-room-window-ac-6000-8000-btu" className="hover:text-cyan-300 transition-colors">Small Room 6,000–8,000 BTU ACs</Link></li>
-                            <li><Link href="/energy-star-window-air-conditioners-hawaii" className="hover:text-cyan-300 transition-colors">ENERGY STAR Window ACs Hawaii</Link></li>
-                            <li><Link href="/smart-wifi-window-ac-oahu" className="hover:text-cyan-300 transition-colors">Smart WiFi Window ACs (ThinQ/SmartHQ)</Link></li>
-                            <li><Link href="/low-voltage-window-ac-115v-oahu" className="hover:text-cyan-300 transition-colors">115V Standard Plug Window ACs</Link></li>
-                            <li><Link href="/inverter-window-ac-vs-standard-hawaii" className="hover:text-cyan-300 transition-colors">Inverter vs Standard Window AC</Link></li>
-                            <li><Link href="/window-ac-for-studios-apartments-hawaii" className="hover:text-cyan-300 transition-colors">Studio &amp; Apartment Window ACs</Link></li>
-                            <li><Link href="/commercial-window-ac-oahu" className="hover:text-cyan-300 transition-colors">Commercial &amp; Office Window ACs</Link></li>
-                            <li><Link href="/property-manager-landlord-window-ac-oahu" className="hover:text-cyan-300 transition-colors">Property Manager &amp; Landlord ACs</Link></li>
-                            <li><Link href="/window-ac-replacement-oahu" className="hover:text-cyan-300 transition-colors">Window AC Replacement Oahu</Link></li>
-                            <li><Link href="/window-ac-warehouse-pickup-waipahu" className="hover:text-cyan-300 transition-colors">Waipahu Warehouse Free Pickup</Link></li>
-                            <li><Link href="/window-ac-delivery-service-oahu" className="hover:text-cyan-300 transition-colors">$50 Flat-Rate Oahu AC Delivery</Link></li>
-                            <li><Link href="/window-ac-warranty-waipahu" className="hover:text-cyan-300 transition-colors">1–5 Yr Factory Warranty Support</Link></li>
+                        <ul className="space-y-1.5 text-slate-300">
+                            <li><Link href="/shop/oahu-window-ac-warehouse" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Waipahu Window AC Warehouse</Link></li>
+                            <li><Link href="/shop/lg-dual-inverter-guide" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">LG Dual Inverter Buyer Guide</Link></li>
+                            <li><Link href="/shop/lg-dual-inverter-8000-btu-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">8,000 BTU LG Dual Inverter Guide</Link></li>
+                            <li><Link href="/shop/10000-12000-btu-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">10,000–12,000 BTU Master &amp; Condo ACs</Link></li>
+                            <li><Link href="/shop/large-room-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Large Room 14k–23.5k BTU Units</Link></li>
+                            <li><Link href="/shop/ge-built-in-wall-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">GE 26&quot; Built-In Wall Sleeve ACs</Link></li>
+                            <li><Link href="/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">26&quot; Wall Sleeve Dimensions (RAB26A)</Link></li>
+                            <li><Link href="/shop/lg-cool-and-heat-window-ac-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">LG Cool + Heat Window ACs Hawaii</Link></li>
+                            <li><Link href="/shop/lg-standard-budget-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">LG Standard Budget Window ACs ($395+)</Link></li>
+                            <li><Link href="/shop/window-ac-plug-guide" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">115V vs 230V Window AC Plug Guide</Link></li>
+                            <li><Link href="/hawaii-energy-rebate" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">$45 Hawaii Energy Cash Rebate</Link></li>
+                            <li><Link href="/window-ac-electricity-cost-heco-calculator-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">HECO AC Electricity Cost Calculator</Link></li>
+                            <li><Link href="/portable-ac-vs-window-ac-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Portable AC vs Window AC Hawaii</Link></li>
+                            <li><Link href="/quiet-bedroom-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Quiet 44dB Bedroom Window ACs</Link></li>
+                            <li><Link href="/living-room-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Living Room Window ACs Oahu</Link></li>
+                            <li><Link href="/small-room-window-ac-6000-8000-btu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Small Room 6,000–8,000 BTU ACs</Link></li>
+                            <li><Link href="/energy-star-window-air-conditioners-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">ENERGY STAR Window ACs Hawaii</Link></li>
+                            <li><Link href="/smart-wifi-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Smart WiFi Window ACs (ThinQ/SmartHQ)</Link></li>
+                            <li><Link href="/low-voltage-window-ac-115v-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">115V Standard Plug Window ACs</Link></li>
+                            <li><Link href="/inverter-window-ac-vs-standard-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Inverter vs Standard Window AC</Link></li>
+                            <li><Link href="/window-ac-for-studios-apartments-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Studio &amp; Apartment Window ACs</Link></li>
+                            <li><Link href="/commercial-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Commercial &amp; Office Window ACs</Link></li>
+                            <li><Link href="/property-manager-landlord-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Property Manager &amp; Landlord ACs</Link></li>
+                            <li><Link href="/window-ac-replacement-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Window AC Replacement Oahu</Link></li>
+                            <li><Link href="/window-ac-warehouse-pickup-waipahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Waipahu Warehouse Free Pickup</Link></li>
+                            <li><Link href="/window-ac-delivery-service-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">$50 Flat-Rate Oahu AC Delivery</Link></li>
+                            <li><Link href="/window-ac-warranty-waipahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">1–5 Yr Factory Warranty Support</Link></li>
                         </ul>
                     </div>
 
@@ -206,24 +206,24 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
                         <div className="font-header font-bold uppercase text-white text-xs tracking-wide border-b border-white/10 pb-1">
                             Jalousie &amp; Condo Installation
                         </div>
-                        <ul className="space-y-1 text-slate-300">
-                            <li><Link href="/window-ac-installation-cost-oahu" className="hover:text-cyan-300 transition-colors">Window AC Installation Cost Oahu</Link></li>
-                            <li><Link href="/jalousie-window-ac-installation-oahu" className="hover:text-cyan-300 transition-colors">Jalousie Louver Window AC Install</Link></li>
-                            <li><Link href="/230v-window-ac-outlet-nema-6-15-6-20-oahu" className="hover:text-cyan-300 transition-colors">230V NEMA 6-15 &amp; 6-20 Outlet Guide</Link></li>
-                            <li><Link href="/single-wall-construction-ac-cooling-hawaii" className="hover:text-cyan-300 transition-colors">Single-Wall Redwood Home Sizing</Link></li>
-                            <li><Link href="/horizontal-sliding-window-ac-oahu" className="hover:text-cyan-300 transition-colors">Horizontal Sliding Window AC Mount</Link></li>
-                            <li><Link href="/double-hung-window-ac-installation-hawaii" className="hover:text-cyan-300 transition-colors">Double-Hung Window AC Install</Link></li>
-                            <li><Link href="/ac-brackets-exterior-security-mounting-oahu" className="hover:text-cyan-300 transition-colors">Exterior Support Brackets Oahu</Link></li>
-                            <li><Link href="/window-ac-weather-stripping-island-seal" className="hover:text-cyan-300 transition-colors">Trade-Wind Weather Stripping Seal</Link></li>
-                            <li><Link href="/condo-townhouse-window-ac-hoa-rules-oahu" className="hover:text-cyan-300 transition-colors">Condo &amp; Townhouse HOA AC Rules</Link></li>
-                            <li><Link href="/high-rise-condo-ac-rules-honolulu" className="hover:text-cyan-300 transition-colors">Honolulu High-Rise Condo AC Fit</Link></li>
-                            <li><Link href="/renter-friendly-ac-installation-oahu" className="hover:text-cyan-300 transition-colors">Renter-Friendly Window AC Mount</Link></li>
-                            <li><Link href="/wood-frame-window-ac-support-oahu" className="hover:text-cyan-300 transition-colors">Wood-Frame Window Sill Support</Link></li>
-                            <li><Link href="/vinyl-replacement-window-ac-mounting" className="hover:text-cyan-300 transition-colors">Vinyl Window AC Track Protection</Link></li>
-                            <li><Link href="/security-bars-window-ac-installation-oahu" className="hover:text-cyan-300 transition-colors">Security Bars Window AC Clearance</Link></li>
-                            <li><Link href="/narrow-window-ac-solutions-hawaii" className="hover:text-cyan-300 transition-colors">Narrow Window AC Fit Solutions</Link></li>
-                            <li><Link href="/ac-condensation-drain-routing-condos" className="hover:text-cyan-300 transition-colors">Condo Condensate Drain Routing</Link></li>
-                            <li><Link href="/sizing" className="hover:text-cyan-300 transition-colors">Oahu BTU &amp; Window Fit Calculator</Link></li>
+                        <ul className="space-y-1.5 text-slate-300">
+                            <li><Link href="/window-ac-installation-cost-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Window AC Installation Cost Oahu</Link></li>
+                            <li><Link href="/jalousie-window-ac-installation-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Jalousie Louver Window AC Install</Link></li>
+                            <li><Link href="/230v-window-ac-outlet-nema-6-15-6-20-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">230V NEMA 6-15 &amp; 6-20 Outlet Guide</Link></li>
+                            <li><Link href="/single-wall-construction-ac-cooling-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Single-Wall Redwood Home Sizing</Link></li>
+                            <li><Link href="/horizontal-sliding-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Horizontal Sliding Window AC Mount</Link></li>
+                            <li><Link href="/double-hung-window-ac-installation-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Double-Hung Window AC Install</Link></li>
+                            <li><Link href="/ac-brackets-exterior-security-mounting-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Exterior Support Brackets Oahu</Link></li>
+                            <li><Link href="/window-ac-weather-stripping-island-seal" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Trade-Wind Weather Stripping Seal</Link></li>
+                            <li><Link href="/condo-townhouse-window-ac-hoa-rules-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Condo &amp; Townhouse HOA AC Rules</Link></li>
+                            <li><Link href="/high-rise-condo-ac-rules-honolulu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Honolulu High-Rise Condo AC Fit</Link></li>
+                            <li><Link href="/renter-friendly-ac-installation-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Renter-Friendly Window AC Mount</Link></li>
+                            <li><Link href="/wood-frame-window-ac-support-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Wood-Frame Window Sill Support</Link></li>
+                            <li><Link href="/vinyl-replacement-window-ac-mounting" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Vinyl Window AC Track Protection</Link></li>
+                            <li><Link href="/security-bars-window-ac-installation-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Security Bars Window AC Clearance</Link></li>
+                            <li><Link href="/narrow-window-ac-solutions-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Narrow Window AC Fit Solutions</Link></li>
+                            <li><Link href="/ac-condensation-drain-routing-condos" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Condo Condensate Drain Routing</Link></li>
+                            <li><Link href="/sizing" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Oahu BTU &amp; Window Fit Calculator</Link></li>
                         </ul>
                     </div>
 
@@ -231,21 +231,21 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
                         <div className="font-header font-bold uppercase text-white text-xs tracking-wide border-b border-white/10 pb-1">
                             Deep Coil &amp; Mold Cleaning
                         </div>
-                        <ul className="space-y-1 text-slate-300">
-                            <li><Link href="/clean-vs-replace-window-ac" className="hover:text-cyan-300 transition-colors">$0 Clean-vs-Replace Assessment</Link></li>
-                            <li><Link href="/window-ac-cleaning-vs-repair-cost-oahu" className="hover:text-cyan-300 transition-colors">Cleaning vs Repair vs Replace Cost</Link></li>
-                            <li><Link href="/ac-mold-removal-cleaning-oahu" className="hover:text-cyan-300 transition-colors">Window AC Mold Removal &amp; Wash</Link></li>
-                            <li><Link href="/ac-smells-musty-mildew-hawaii" className="hover:text-cyan-300 transition-colors">Musty Mildew AC Odor Treatment</Link></li>
-                            <li><Link href="/black-mold-in-ac-health-risks-hawaii" className="hover:text-cyan-300 transition-colors">Black Mold in Window AC Purge</Link></li>
-                            <li><Link href="/ac-coil-cleaning-benefits-power-bill" className="hover:text-cyan-300 transition-colors">Coil Cleaning HECO Bill Savings</Link></li>
-                            <li><Link href="/air-conditioner-blower-wheel-cleaning-hawaii" className="hover:text-cyan-300 transition-colors">Blower Wheel Deep Scrubbing</Link></li>
-                            <li><Link href="/ac-drain-line-clog-clearing-oahu" className="hover:text-cyan-300 transition-colors">Drain Pan &amp; Slinger Clearing</Link></li>
-                            <li><Link href="/clean-air-filter-replacement-hawaii" className="hover:text-cyan-300 transition-colors">Air Filter Wash &amp; Sanitization</Link></li>
-                            <li><Link href="/salt-corrosion-coil-rinse-hawaii" className="hover:text-cyan-300 transition-colors">Coastal Salt-Air Coil Rinse</Link></li>
-                            <li><Link href="/post-storm-ac-inspection-cleaning-oahu" className="hover:text-cyan-300 transition-colors">Post-Storm &amp; Kona Wind AC Wash</Link></li>
-                            <li><Link href="/pet-hair-dander-ac-cleaning-oahu" className="hover:text-cyan-300 transition-colors">Pet Hair &amp; Dander Coil Cleaning</Link></li>
-                            <li><Link href="/seasonal-ac-maintenance-plans-oahu" className="hover:text-cyan-300 transition-colors">6/12-Month Window AC Maintenance</Link></li>
-                            <li><Link href="/commercial-ac-cleaning-oahu" className="hover:text-cyan-300 transition-colors">Commercial Office Window AC Wash</Link></li>
+                        <ul className="space-y-1.5 text-slate-300">
+                            <li><Link href="/clean-vs-replace-window-ac" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">$0 Clean-vs-Replace Assessment</Link></li>
+                            <li><Link href="/window-ac-cleaning-vs-repair-cost-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Cleaning vs Repair vs Replace Cost</Link></li>
+                            <li><Link href="/ac-mold-removal-cleaning-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Window AC Mold Removal &amp; Wash</Link></li>
+                            <li><Link href="/ac-smells-musty-mildew-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Musty Mildew AC Odor Treatment</Link></li>
+                            <li><Link href="/black-mold-in-ac-health-risks-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Black Mold in Window AC Purge</Link></li>
+                            <li><Link href="/ac-coil-cleaning-benefits-power-bill" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Coil Cleaning HECO Bill Savings</Link></li>
+                            <li><Link href="/air-conditioner-blower-wheel-cleaning-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Blower Wheel Deep Scrubbing</Link></li>
+                            <li><Link href="/ac-drain-line-clog-clearing-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Drain Pan &amp; Slinger Clearing</Link></li>
+                            <li><Link href="/clean-air-filter-replacement-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Air Filter Wash &amp; Sanitization</Link></li>
+                            <li><Link href="/salt-corrosion-coil-rinse-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Coastal Salt-Air Coil Rinse</Link></li>
+                            <li><Link href="/post-storm-ac-inspection-cleaning-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Post-Storm &amp; Kona Wind AC Wash</Link></li>
+                            <li><Link href="/pet-hair-dander-ac-cleaning-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Pet Hair &amp; Dander Coil Cleaning</Link></li>
+                            <li><Link href="/seasonal-ac-maintenance-plans-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">6/12-Month Window AC Maintenance</Link></li>
+                            <li><Link href="/commercial-ac-cleaning-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Commercial Office Window AC Wash</Link></li>
                         </ul>
                     </div>
 
@@ -253,22 +253,22 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
                         <div className="font-header font-bold uppercase text-white text-xs tracking-wide border-b border-white/10 pb-1">
                             Symptoms &amp; Troubleshooting
                         </div>
-                        <ul className="space-y-1 text-slate-300">
-                            <li><Link href="/ac-repair-oahu" className="hover:text-cyan-300 transition-colors">Oahu Window AC Repair Hub</Link></li>
-                            <li><Link href="/window-ac-diagnostic-assessment-oahu" className="hover:text-cyan-300 transition-colors">$0 Window AC Diagnostic Assessment</Link></li>
-                            <li><Link href="/ac-blowing-warm-air-troubleshooting-oahu" className="hover:text-cyan-300 transition-colors">Window AC Blowing Warm Air Fix</Link></li>
-                            <li><Link href="/ac-freezing-up-ice-on-coils-hawaii" className="hover:text-cyan-300 transition-colors">Frozen Evaporator Coils &amp; Ice</Link></li>
-                            <li><Link href="/ac-dripping-water-inside-house-repair" className="hover:text-cyan-300 transition-colors">Window AC Leaking Water Inside</Link></li>
-                            <li><Link href="/ac-keeps-tripping-breaker-hawaii" className="hover:text-cyan-300 transition-colors">AC Tripping Breaker / LCDI Plug</Link></li>
-                            <li><Link href="/blinking-light-error-codes-ac-repair" className="hover:text-cyan-300 transition-colors">LG/GE Blinking Filter &amp; CH Codes</Link></li>
-                            <li><Link href="/ac-compressor-not-turning-on-oahu" className="hover:text-cyan-300 transition-colors">Compressor Not Kicking On</Link></li>
-                            <li><Link href="/window-ac-making-loud-buzzing-noise" className="hover:text-cyan-300 transition-colors">Loud Rattling or Buzzing Noise</Link></li>
-                            <li><Link href="/ac-refrigerant-leak-detection-hawaii" className="hover:text-cyan-300 transition-colors">Sealed System Refrigerant Loss</Link></li>
-                            <li><Link href="/ac-turning-on-and-off-rapidly-short-cycling" className="hover:text-cyan-300 transition-colors">Rapid On/Off Short Cycling Fix</Link></li>
-                            <li><Link href="/no-power-to-ac-unit-hawaii" className="hover:text-cyan-300 transition-colors">Dead Window AC / No Power</Link></li>
-                            <li><Link href="/ac-burning-electrical-smell-oahu" className="hover:text-cyan-300 transition-colors">Electrical or Burning Smell</Link></li>
-                            <li><Link href="/outdoor-unit-fan-not-spinning-hawaii" className="hover:text-cyan-300 transition-colors">Condenser Fan Motor Not Spinning</Link></li>
-                            <li><Link href="/service-areas" className="hover:text-cyan-300 transition-colors">All 22 Oahu Service Areas &rarr;</Link></li>
+                        <ul className="space-y-1.5 text-slate-300">
+                            <li><Link href="/ac-repair-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Oahu Window AC Repair Hub</Link></li>
+                            <li><Link href="/window-ac-diagnostic-assessment-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">$0 Window AC Diagnostic Assessment</Link></li>
+                            <li><Link href="/ac-blowing-warm-air-troubleshooting-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Window AC Blowing Warm Air Fix</Link></li>
+                            <li><Link href="/ac-freezing-up-ice-on-coils-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Frozen Evaporator Coils &amp; Ice</Link></li>
+                            <li><Link href="/ac-dripping-water-inside-house-repair" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Window AC Leaking Water Inside</Link></li>
+                            <li><Link href="/ac-keeps-tripping-breaker-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">AC Tripping Breaker / LCDI Plug</Link></li>
+                            <li><Link href="/blinking-light-error-codes-ac-repair" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">LG/GE Blinking Filter &amp; CH Codes</Link></li>
+                            <li><Link href="/ac-compressor-not-turning-on-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Compressor Not Kicking On</Link></li>
+                            <li><Link href="/window-ac-making-loud-buzzing-noise" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Loud Rattling or Buzzing Noise</Link></li>
+                            <li><Link href="/ac-refrigerant-leak-detection-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Sealed System Refrigerant Loss</Link></li>
+                            <li><Link href="/ac-turning-on-and-off-rapidly-short-cycling" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Rapid On/Off Short Cycling Fix</Link></li>
+                            <li><Link href="/no-power-to-ac-unit-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Dead Window AC / No Power</Link></li>
+                            <li><Link href="/ac-burning-electrical-smell-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Electrical or Burning Smell</Link></li>
+                            <li><Link href="/outdoor-unit-fan-not-spinning-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Condenser Fan Motor Not Spinning</Link></li>
+                            <li><Link href="/service-areas" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">All 22 Oahu Service Areas &rarr;</Link></li>
                         </ul>
                     </div>
                 </div>

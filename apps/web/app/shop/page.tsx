@@ -822,6 +822,7 @@ function ShopPageContent() {
                             <div className="relative flex items-center shrink-0">
                                 <ArrowUpDown className="absolute left-2.5 size-3 text-slate-400 pointer-events-none" />
                                 <select
+                                    aria-label="Sort Window AC Models"
                                     value={sortOption}
                                     onChange={(e) => setSortOption(e.target.value as any)}
                                     className="pl-7 pr-6 py-2 bg-slate-950/70 border border-white/10 rounded-xl text-xs font-mono text-slate-200 uppercase tracking-wider focus:outline-none focus:border-primary transition-all appearance-none cursor-pointer"
@@ -838,6 +839,8 @@ function ShopPageContent() {
                             {/* More Filters Toggle Button */}
                             <button
                                 type="button"
+                                aria-label={activeSecondaryFilterCount > 0 ? `Filters (${activeSecondaryFilterCount}) — Toggle Catalog Filters` : 'Filters — Toggle Catalog Filters'}
+                                aria-expanded={isMoreFiltersOpen}
                                 onClick={() => setIsMoreFiltersOpen(!isMoreFiltersOpen)}
                                 className={cn(
                                     "px-3 py-2 rounded-xl border text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 transition-all shrink-0",
@@ -1213,7 +1216,7 @@ function ShopPageContent() {
                                     return (
                                         <div key={c.id} className="size-9 rounded-lg bg-slate-900 border border-primary/50 overflow-hidden relative shadow-md">
                                             {img ? (
-                                                <Image src={img} alt={c.name} fill sizes="36px" className="object-contain p-1" unoptimized />
+                                                <Image src={img} alt={c.name} fill sizes="36px" quality={70} className="object-contain p-1" unoptimized={img.endsWith('.svg')} />
                                             ) : (
                                                 <Snowflake className="size-4 m-auto text-primary" />
                                             )}
@@ -1278,7 +1281,7 @@ function ShopPageContent() {
                                     <div key={item.id} className="bg-slate-900/90 border border-white/10 rounded-2xl p-4 flex flex-col justify-between">
                                         <div>
                                             <div className="relative w-full aspect-[4/3] bg-black/40 rounded-xl mb-3 overflow-hidden">
-                                                {img && <Image src={img} alt={item.name} fill sizes="(max-width: 768px) 100vw, 280px" className="object-contain p-2" unoptimized />}
+                                                {img && <Image src={img} alt={item.name} fill sizes="(max-width: 768px) 90vw, 280px" quality={75} className="object-contain p-2" unoptimized={img.endsWith('.svg')} />}
                                             </div>
                                             <div className="text-[10px] font-mono text-primary uppercase">{item.category}</div>
                                             <h4 className="text-sm font-header font-black text-white uppercase mb-2 line-clamp-2">{item.name}</h4>
@@ -1775,7 +1778,7 @@ function LogisticsSection() {
                         </div>
                         <div className="space-y-4 relative z-10 flex-grow">
                             <div className="p-4 bg-white/[0.02] border border-white/5 rounded-lg space-y-2 hover:border-primary/40 transition-all duration-500 hover:shadow-[0_0_15px_rgba(0,174,239,0.1)]">
-                                <span className="text-[10px] font-black uppercase text-primary tracking-[0.2em] opacity-70">
+                                <span className="text-[10px] font-black uppercase text-cyan-300 tracking-[0.2em]">
                                     <EditableText contentKey="logistics.pickup.label" />
                                 </span>
                                 <p className="text-[11px] text-slate-300 leading-relaxed font-bold uppercase tracking-tight">
@@ -1783,8 +1786,8 @@ function LogisticsSection() {
                                 </p>
                             </div>
                             <div className="p-4 bg-orange-500/5 border border-orange-500/10 rounded-lg flex gap-3 items-start hover:border-orange-500/30 transition-all duration-500">
-                                <AlertTriangle className="text-orange-500 size-4 pt-0.5 animate-pulse" />
-                                <p className="text-[10px] text-orange-500/70 font-bold uppercase tracking-widest leading-relaxed">
+                                <AlertTriangle className="text-orange-400 size-4 pt-0.5 animate-pulse" />
+                                <p className="text-[10px] text-amber-300 font-bold uppercase tracking-widest leading-relaxed">
                                     <EditableText contentKey="logistics.pickup.warning" />
                                 </p>
                             </div>
@@ -1825,7 +1828,7 @@ function LogisticsSection() {
                                     <Ban className="size-4" />
                                     <EditableText contentKey="logistics.delivery.exclusions_label" />
                                 </h4>
-                                <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest leading-loose">
+                                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest leading-loose">
                                     <EditableText contentKey="logistics.delivery.exclusions" />
                                 </p>
                             </div>
@@ -2022,7 +2025,7 @@ function SizingGuideSection() {
             <div className="mt-6 mb-8 max-w-4xl mx-auto">
                 <div className="bg-primary/5 border border-primary/20 rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left relative overflow-hidden">
                     <div className="space-y-1">
-                        <h4 className="font-header font-black text-sm uppercase tracking-wider text-white">Oahu Interactive Sizing Tool</h4>
+                        <h3 className="font-header font-black text-sm uppercase tracking-wider text-white">Oahu Interactive Sizing Tool</h3>
                         <p className="font-sans text-xs text-slate-400">
                             Have high ceilings, sun-facing windows, or multiple occupants? Get an exact calibrated BTU recommendation.
                         </p>
@@ -2089,26 +2092,27 @@ function SizingGuideSection() {
                                 <h3 className="text-xl font-header font-black text-white uppercase">{row.sq} sq. ft.</h3>
                             </div>
                             <div className="text-right">
-                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Capacity</p>
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Capacity</p>
                                 <span className="text-lg font-header font-black text-white">{row.btu} <span className="text-[10px] text-primary">BTU</span></span>
                             </div>
                         </div>
                         <div>
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Application</p>
-                            <p className="text-slate-400 text-sm font-medium">{row.app}</p>
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Application</p>
+                            <p className="text-slate-300 text-sm font-medium">{row.app}</p>
                         </div>
                         <div className="pt-3 border-t border-white/5 bg-white/[0.01] -mx-4 -mb-4 p-4">
-                            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-3">Recommended Models</p>
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Recommended Models</p>
                             <div className="grid grid-cols-2 gap-2">
                                 {sizingData[i].models.map((m, idx) => (
                                     <Link
                                         key={idx}
                                         href={m.link}
+                                        prefetch={false}
                                         className="px-2 py-2.5 bg-white/5 border border-white/10 rounded-lg text-[9px] font-black text-white hover:border-primary/50 hover:bg-primary/10 transition-all flex items-center justify-center gap-1.5 shadow-lg active:scale-95"
                                     >
                                         <Snowflake className="size-2.5 text-primary" />
                                         <span className="truncate">{m.name}</span>
-                                        <ArrowUpRight className="size-2.5 text-slate-600" />
+                                        <ArrowUpRight className="size-2.5 text-slate-400" />
                                     </Link>
                                 ))}
                             </div>
@@ -2493,12 +2497,13 @@ function ProductCard({
                             src={activeImg}
                             alt={viewMode === 'cutaway' ? `${product.name} 3D Window Fit Cutaway` : product.name}
                             fill
-                            sizes="(max-width: 768px) 100vw, 33vw"
+                            sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 33vw"
+                            quality={75}
                             className={cn(
                                 "object-contain transition-transform duration-700 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative z-10",
                                 viewMode === 'cutaway' ? "p-1 md:p-2 scale-100 group-hover:scale-105" : "p-4 md:p-6 group-hover:scale-110"
                             )}
-                            unoptimized={true}
+                            unoptimized={activeImg.endsWith('.svg')}
                         />
                     ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-slate-700 relative z-10">

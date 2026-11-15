@@ -788,8 +788,9 @@ export function ACSelectorWizard() {
                                                                     alt={product.name} 
                                                                     fill
                                                                     sizes="96px"
+                                                                    quality={75}
                                                                     className="object-contain p-2"
-                                                                    unoptimized
+                                                                    unoptimized={unitImage.endsWith('.svg')}
                                                                 />
                                                             </div>
                                                             <div className="space-y-1">
@@ -802,7 +803,7 @@ export function ACSelectorWizard() {
                                                                 <h4 className="font-header font-black text-sm text-white uppercase tracking-tight group-hover:text-primary transition-colors pr-20">{product.name}</h4>
                                                                 <p className="text-lg font-header font-black text-white mt-1">
                                                                     {isPromo && (
-                                                                        <span className="text-xs text-slate-500 line-through mr-2 font-medium">${product.price}</span>
+                                                                        <span className="text-xs text-slate-400 line-through mr-2 font-medium">${product.price}</span>
                                                                     )}
                                                                     ${activePrice}
                                                                 </p>

@@ -50,14 +50,15 @@ export default function Homepage() {
                     src="/assets/hero-cards/ahac-hero-background-2.webp"
                     alt="Expert Window AC Installation & Cleaning by Affordable Home A/C"
                     fill
-                    sizes="(max-width: 768px) 180vh, 100vw"
-                    className="object-cover object-center translate-y-0 scale-100 md:translate-y-[-10%] md:scale-110 [transform:translateZ(0)]" // Disable zoom/translate on mobile to prevent blurriness
+                    sizes="100vw"
+                    className="object-cover object-center translate-y-0 scale-100 md:translate-y-[-10%] md:scale-110 [transform:translateZ(0)]"
                     priority
-                    quality={85} // Higher quality to avoid compression artifacts
+                    fetchPriority="high"
+                    quality={72}
                 />
                 <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-20" />
-                {/* Secondary subtle blur & darkening */}
-                <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[2px]" />
+                {/* Secondary subtle blur & darkening (desktop only to avoid full-screen mobile GPU compositing cost) */}
+                <div className="absolute inset-0 bg-slate-950/25 md:bg-slate-950/20 md:backdrop-blur-[2px]" />
             </div>
 
             <main className="relative z-10 pt-[88px] md:pt-[176px]">

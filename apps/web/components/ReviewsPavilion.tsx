@@ -55,10 +55,11 @@ function StarRating({ rating = 5, size = 'md' }: { rating?: number; size?: 'sm' 
     };
 
     return (
-        <div className="flex items-center gap-0.5 text-amber-400" aria-label={`${rating} out of 5 stars`}>
+        <div role="img" className="flex items-center gap-0.5 text-amber-400" aria-label={`${rating} out of 5 stars`}>
             {Array.from({ length: 5 }).map((_, i) => (
                 <Star 
                     key={i} 
+                    aria-hidden="true"
                     className={cn(
                         sizeClasses[size], 
                         i < rating 
@@ -117,9 +118,9 @@ function ReviewCard({
 
                         <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-2 flex-wrap">
-                                <h4 className="font-header font-bold text-white text-sm tracking-wide whitespace-nowrap">
+                                <h3 className="font-header font-bold text-white text-sm tracking-wide whitespace-nowrap">
                                     {review.author}
-                                </h4>
+                                </h3>
                                 <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full border border-emerald-500/20 shrink-0 whitespace-nowrap">
                                     <CheckCircle2 className="size-2.5" />
                                     Verified

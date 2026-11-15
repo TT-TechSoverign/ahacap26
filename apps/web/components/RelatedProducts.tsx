@@ -96,6 +96,7 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
                 {/* Image Container */}
                 <Link
                   href={`/shop/${slug}`}
+                  prefetch={false}
                   onClick={() => {
                     trackEcommerceEvent('select_item', {
                       item_list_id: 'related_in_stock_models',
@@ -111,8 +112,8 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
                       alt={prod.name} 
                       fill 
                       sizes="(max-width: 1024px) 280px, 25vw"
+                      quality={75}
                       className="object-contain p-2 group-hover:scale-105 transition-transform duration-500" 
-                      unoptimized
                     />
                   ) : (
                     <div className="text-[10px] text-slate-400 uppercase tracking-widest font-header">No Image</div>
@@ -123,7 +124,7 @@ export function RelatedProducts({ currentProduct }: RelatedProductsProps) {
                   <span className="text-[8px] font-header font-black text-primary uppercase tracking-[0.25em]">
                     {prod.btu ? `${prod.btu.toLocaleString()} BTU • ` : ''}{prod.subcategory?.replace('_', ' ') || 'WINDOW AC'}
                   </span>
-                  <Link href={`/shop/${slug}`}>
+                  <Link href={`/shop/${slug}`} prefetch={false}>
                     <h3 className="font-header font-black uppercase text-sm text-slate-100 line-clamp-2 group-hover:text-primary transition-colors">
                       {prod.name}
                     </h3>

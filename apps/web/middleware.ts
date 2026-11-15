@@ -444,10 +444,12 @@ export function middleware(request: NextRequest) {
         response.headers.set('X-Robots-Tag', 'noindex, follow');
     }
 
-    // 9. Conditional HTTP Caching Protocol (Zero-Cache for Admin/Checkout/Staging; Short Revalidation for Live Inventory; Long SWR for Static Guides)
+    // 9. Conditional HTTP Caching Protocol (Zero-Cache for Admin/Checkout/Staging; Immutable 1yr for Static Assets; Short Revalidation for Live Inventory; Long SWR for Static Guides)
     const isLiveInventoryRoute =
         url.pathname === '/' || url.pathname === '/shop' || url.pathname.startsWith('/shop/');
-    if (isPrivateRoute || isStagingHost) {
+    if (url.pathname.startsWith('/assets/')) {
+        response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (isPrivateRoute || isStagingHost) {
         response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
         response.headers.set('Pragma', 'no-cache');
         response.headers.set('Expires', '0');
@@ -465,10 +467,11 @@ export const config = {
         /*
          * Match all request paths except for the ones starting with:
          * - api (API routes)
+         * - assets (static public fonts, SVGs, WebP photos, PDFs)
          * - _next/static (static files)
          * - _next/image (image optimization files)
          * - favicon.ico, sitemap.xml, robots.txt, XML feeds (static/feed files)
          */
-        '/((?!api|_next/static|_next/image|favicon\\.ico|favicon-48x48\\.png|favicon-96x96\\.png|icon\\.png|icon-192\\.png|icon-512\\.png|apple-touch-icon\\.png|manifest\\.json|sitemap\\.xml|robots\\.txt|merchant-feed\\.xml|product-reviews-feed\\.xml).*)',
+        '/((?!api|assets|_next/static|_next/image|favicon\\.ico|favicon-48x48\\.png|favicon-96x96\\.png|icon\\.png|icon-192\\.png|icon-512\\.png|apple-touch-icon\\.png|manifest\\.json|sitemap\\.xml|robots\\.txt|merchant-feed\\.xml|product-reviews-feed\\.xml).*)',
     ],
 };

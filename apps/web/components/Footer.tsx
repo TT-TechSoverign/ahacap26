@@ -13,16 +13,22 @@ export default function Footer() {
     const { content } = useContent();
     if (pathname && pathname.startsWith('/checkout')) return null;
 
+    const hstMonthFmt = new Intl.DateTimeFormat('en-US', { timeZone: 'Pacific/Honolulu', month: 'short' });
+    const hstDayFmt = new Intl.DateTimeFormat('en-US', { timeZone: 'Pacific/Honolulu', day: 'numeric' });
+    const hstYearFmt = new Intl.DateTimeFormat('en-US', { timeZone: 'Pacific/Honolulu', year: 'numeric' });
+
     const getRollingWindow = (startOffsetDays: number, endOffsetDays: number) => {
         const now = new Date();
         const start = new Date(now.getTime() + startOffsetDays * 86400000);
         const end = new Date(now.getTime() + endOffsetDays * 86400000);
-        const startMonth = start.toLocaleDateString('en-US', { month: 'short' });
-        const endMonth = end.toLocaleDateString('en-US', { month: 'short' });
+        const startMonth = hstMonthFmt.format(start);
+        const endMonth = hstMonthFmt.format(end);
+        const startDay = hstDayFmt.format(start);
+        const endDay = hstDayFmt.format(end);
         if (startMonth === endMonth) {
-            return `${startMonth} ${start.getDate()}-${end.getDate()}`;
+            return `${startMonth} ${startDay}-${endDay}`;
         }
-        return `${startMonth} ${start.getDate()} - ${endMonth} ${end.getDate()}`;
+        return `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
     };
 
     const defaults = {
@@ -32,7 +38,7 @@ export default function Footer() {
         cleaning_service_date: `Next Available Service: ${getRollingWindow(4, 7)}`,
         window_ac_estimate_date: `Next Available Estimate: ${getRollingWindow(1, 3)}`,
         window_ac_install_date: `Next Available Install: ${getRollingWindow(3, 6)}`,
-        general_availability_range: `Scheduling for ${getRollingWindow(1, 7)}, ${new Date().getFullYear()}`,
+        general_availability_range: `Scheduling for ${getRollingWindow(1, 7)}, ${hstYearFmt.format(new Date())}`,
     };
 
     const rawSchedule: Record<string, any> = content?.footer_schedule || {};
@@ -73,6 +79,7 @@ export default function Footer() {
     return (
         <footer className="relative z-10 bg-[#0a0e14] border-t border-white/5 pt-12 pb-36 md:pb-8">
             <div className="max-w-7xl mx-auto px-6">
+                <h2 className="sr-only">Oahu Window AC Scheduling, Directory &amp; Contact</h2>
                 {/* Availability Schedule Section */}
                 <div className="border-b border-white/5 pb-6 mb-6">
                     {/* Glassmorphic Header Pill */}
@@ -98,21 +105,21 @@ export default function Footer() {
                             <div className="flex flex-col gap-1 items-center">
                                 <p className="text-primary font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Cleaning:</span>
-                                    <span>{(schedule?.cleaning_estimate_date || defaults.cleaning_estimate_date).split(':').pop()?.trim()}</span>
+                                    <span suppressHydrationWarning>{(schedule?.cleaning_estimate_date || defaults.cleaning_estimate_date).split(':').pop()?.trim()}</span>
                                 </p>
                                 <p className="text-slate-400 font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Service:</span>
-                                    <span>{(schedule?.cleaning_service_date || defaults.cleaning_service_date).split(':').pop()?.trim()}</span>
+                                    <span suppressHydrationWarning>{(schedule?.cleaning_service_date || defaults.cleaning_service_date).split(':').pop()?.trim()}</span>
                                 </p>
                             </div>
                             <div className="flex flex-col gap-1 items-center">
                                 <p className="text-primary font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Estimate:</span>
-                                    <span>{(schedule?.window_ac_estimate_date || defaults.window_ac_estimate_date).split(':').pop()?.trim()}</span>
+                                    <span suppressHydrationWarning>{(schedule?.window_ac_estimate_date || defaults.window_ac_estimate_date).split(':').pop()?.trim()}</span>
                                 </p>
                                 <p className="text-slate-400 font-bold uppercase tracking-wider text-[10px] md:text-xs flex flex-col md:block">
                                     <span className="opacity-80 mr-0 md:mr-2">Next Available Install:</span>
-                                    <span>{(schedule?.window_ac_install_date || defaults.window_ac_install_date).split(':').pop()?.trim()}</span>
+                                    <span suppressHydrationWarning>{(schedule?.window_ac_install_date || defaults.window_ac_install_date).split(':').pop()?.trim()}</span>
                                 </p>
                             </div>
                         </div>

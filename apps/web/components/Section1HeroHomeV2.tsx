@@ -15,7 +15,7 @@ export default function Section1HeroHomeV2() {
 
             {/* Content Container - Centered and Mobile Optimized */}
             <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center h-full text-center">
-                <div className="max-w-4xl flex flex-col items-center gap-4 sm:gap-6 animate-in fade-in slide-in-from-bottom-10 duration-1000">
+                <div className="max-w-4xl flex flex-col items-center gap-4 sm:gap-6">
 
                     {/* Header */}
                     <h1 className="font-header font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.95] md:leading-[0.9] tracking-tighter uppercase drop-shadow-2xl">
@@ -46,6 +46,7 @@ export default function Section1HeroHomeV2() {
                     {/* Live In-Stock Waipahu Pill */}
                     <Link
                         href="/shop"
+                        prefetch={false}
                         className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/40 text-emerald-300 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-lg transition-all"
                     >
                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
@@ -59,7 +60,8 @@ export default function Section1HeroHomeV2() {
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1 sm:mt-3 w-full sm:w-auto justify-center items-center">
                         <Link
                             href="/shop"
-                            className="w-full sm:w-auto group relative overflow-hidden bg-cyan-500 hover:bg-cyan-400 text-white font-header font-black text-base sm:text-xl uppercase tracking-widest py-3.5 px-6 sm:py-5 sm:px-10 rounded shadow-[0_10px_30px_rgba(0,174,239,0.4)] transition-all transform hover:-translate-y-1 text-center"
+                            prefetch={false}
+                            className="w-full sm:w-auto group relative overflow-hidden bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-header font-black text-base sm:text-xl uppercase tracking-widest py-3.5 px-6 sm:py-5 sm:px-10 rounded shadow-[0_10px_30px_rgba(34,211,238,0.4)] transition-all transform hover:-translate-y-1 text-center"
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 <EditableText contentKey="home_v2.hero.cta_shop" defaultValue="Shop Window AC Units" />
@@ -69,6 +71,7 @@ export default function Section1HeroHomeV2() {
 
                         <Link
                             href="/contact"
+                            prefetch={false}
                             className="w-full sm:w-auto group relative overflow-hidden bg-transparent border-2 border-white hover:border-cyan-400 text-white hover:text-cyan-400 font-header font-black text-base sm:text-xl uppercase tracking-widest py-3.5 px-6 sm:py-5 sm:px-10 rounded transition-all transform hover:-translate-y-1 backdrop-blur-sm text-center"
                         >
                             <span className="relative z-10">

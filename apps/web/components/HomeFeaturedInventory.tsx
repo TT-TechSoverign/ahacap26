@@ -296,6 +296,7 @@ export function HomeFeaturedInventory() {
                                 {/* Product Image */}
                                 <Link
                                     href={`/shop/${slug}`}
+                                    prefetch={false}
                                     onClick={() => {
                                         trackEcommerceEvent('select_item', {
                                             item_list_id: `home_featured_${activeTab}`,
@@ -309,9 +310,10 @@ export function HomeFeaturedInventory() {
                                         src={primaryPhoto}
                                         alt={product.name}
                                         fill
-                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                                        sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 25vw"
+                                        quality={75}
                                         className="object-contain p-3 group-hover:scale-105 transition-transform duration-500"
-                                        unoptimized
+                                        unoptimized={primaryPhoto.endsWith('.svg')}
                                     />
                                 </Link>
 
@@ -321,7 +323,7 @@ export function HomeFeaturedInventory() {
                                         <div className="text-[10px] font-mono uppercase text-cyan-400/90 font-semibold tracking-wider">
                                             {product.btu?.toLocaleString()} BTU • {formatSeriesBadge(product)}
                                         </div>
-                                        <Link href={`/shop/${slug}`} className="hover:text-primary transition-colors">
+                                        <Link href={`/shop/${slug}`} prefetch={false} className="hover:text-primary transition-colors">
                                             <h3 className="font-header font-black text-white text-base leading-snug line-clamp-2 mt-1">
                                                 {product.name}
                                             </h3>
@@ -367,6 +369,7 @@ export function HomeFeaturedInventory() {
                                     <div className="grid grid-cols-2 gap-2 pt-2">
                                         <Link
                                             href={`/shop/${slug}`}
+                                            prefetch={false}
                                             className="px-3 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-header font-bold text-xs uppercase tracking-wider rounded-xl transition-colors text-center border border-white/10"
                                         >
                                             Specs
@@ -404,7 +407,7 @@ export function HomeFeaturedInventory() {
                     <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
                         Direct In-Stock Waipahu Models — Click Any Model for Full Specs, 3D Window Fit &amp; Online Ordering:
                     </div>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                         {inStockAcProducts.map((model) => {
                             const modelSlug = generateProductSlug(model.id, model.name);
                             const shortCode = model.key_spec || model.name.match(/\(([^)]+)\)/)?.[1] || `ID-${model.id}`;
@@ -414,7 +417,7 @@ export function HomeFeaturedInventory() {
                                     key={model.id}
                                     href={`/shop/${modelSlug}`}
                                     prefetch={false}
-                                    className="px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
+                                    className="inline-flex items-center min-h-[28px] px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
                                 >
                                     {model.name.startsWith('GE') ? 'GE' : 'LG'} {btuText} ({shortCode}) • ${model.price.toLocaleString()}
                                 </Link>
@@ -423,7 +426,7 @@ export function HomeFeaturedInventory() {
                         <Link
                             href="/shop/16-ge-rab26a-wall-casement"
                             prefetch={false}
-                            className="px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
+                            className="inline-flex items-center min-h-[28px] px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-primary/15 border border-white/10 hover:border-primary/40 text-[11px] font-mono text-slate-300 hover:text-cyan-300 transition-colors"
                         >
                             GE RAB26A 26&quot; Wall Sleeve • $275
                         </Link>
@@ -471,7 +474,7 @@ export function HomeFeaturedInventory() {
                                                 {model.btu ? `${model.btu.toLocaleString()} BTU` : '26" Sleeve'}
                                             </td>
                                             <td className="py-2 px-3 text-slate-300">
-                                                {model.coverage_oahu || 'Oahu Calibrated'} <span className="text-slate-500 text-[11px]">({model.coverage_aham || model.coverage})</span>
+                                                {model.coverage_oahu || 'Oahu Calibrated'} <span className="text-slate-400 text-[11px]">({model.coverage_aham || model.coverage})</span>
                                             </td>
                                             <td className="py-2 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">
                                                 {model.voltage || '115V / 15A'}

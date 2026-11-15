@@ -112,8 +112,8 @@ export default function LocalServiceFunnel({ city }: LocalServiceFunnelProps) {
                                     href={service.route}
                                     prefetch={false}
                                     onClick={() => fireAnalytics(service.gaCategory)}
-                                    aria-label={service.ariaLabel}
-                                    className="mt-8 pt-6 w-full border-t border-slate-800/50 flex justify-center items-center gap-3 opacity-60 group-hover:opacity-100 transition-opacity hover:text-[#00E5FF] cursor-pointer"
+                                    aria-label={`${service.ctaText} — ${service.ariaLabel}`}
+                                    className="mt-8 pt-6 w-full border-t border-slate-800/50 flex justify-center items-center gap-3 opacity-90 group-hover:opacity-100 transition-opacity hover:text-[#00E5FF] cursor-pointer"
                                 >
                                     <span className="text-[10px] text-[#00E5FF] uppercase tracking-widest font-bold">{service.ctaText}</span>
                                     <LucideIcons.ArrowRight className="w-4 h-4 text-[#00E5FF]" />
