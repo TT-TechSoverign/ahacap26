@@ -12,15 +12,16 @@ const cssnano = require(require.resolve('next/dist/compiled/cssnano-simple', { p
 async function buildCriticalInlineCss() {
     const criticalCssInput = `
 @font-face {
-    font-family: 'Oswald';
-    font-style: normal;
-    font-weight: 400 900;
-    font-display: optional;
-    src: url('/assets/fonts/oswald.woff2') format('woff2');
+    font-family: 'Inter Fallback';
+    src: local('Arial');
+    ascent-override: 90%;
+    descent-override: 22%;
+    line-gap-override: 0%;
+    size-adjust: 107%;
 }
 @font-face {
     font-family: 'Oswald Fallback';
-    src: local('Arial Narrow'), local('Arial');
+    src: local('Arial Narrow'), local('Impact'), local('Arial');
     ascent-override: 118%;
     descent-override: 28%;
     line-gap-override: 0%;
