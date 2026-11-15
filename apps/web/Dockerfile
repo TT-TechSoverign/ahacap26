@@ -68,9 +68,11 @@ RUN adduser --system --uid 1001 nextjs
 # Ensure content.json is available
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/lib/content ./apps/web/lib/content
 
-# Copy standalone build (minimal size)
+# Copy standalone build (minimal size) + critical CSS head injector
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/critical-head.css ./apps/web/critical-head.css
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/start-prod.cjs ./apps/web/start-prod.cjs
 
 # Removed: Force remove broken pnpm symlinks hack
 # Removed: Manually install next.js and react hack
@@ -94,4 +96,4 @@ WORKDIR /app
 # Standalone entrypoint
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
-CMD ["sh", "-c", "if [ -f server.js ]; then HOSTNAME=0.0.0.0 PORT=3000 node server.js; else HOSTNAME=0.0.0.0 PORT=3000 node apps/web/server.js; fi"]
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 PORT=3000 node apps/web/start-prod.cjs"]
