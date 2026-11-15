@@ -24,7 +24,7 @@ export function QuickJumpBanner() {
                         Free Estimates ($0 to Book) • LG &amp; GE Window AC &amp; Cleaning Specialists
                     </span>
                     <span className="text-slate-300 font-sans text-[11px]">
-                        Call Office: <a href="tel:808-488-1111" className="text-cyan-400 font-bold hover:underline">(808) 488-1111</a> or <Link href="/contact" className="text-primary hover:underline font-bold">Book Form</Link>
+                        Call Office: <a href="tel:808-488-1111" className="text-cyan-400 font-bold hover:underline">(808) 488-1111</a> or <Link href="/contact" prefetch={false} className="text-primary hover:underline font-bold">Book Form</Link>
                     </span>
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 pt-1 border-t border-white/5">
@@ -48,6 +48,7 @@ export function QuickJumpBanner() {
 
                         <Link 
                             href="/shop" 
+                            prefetch={false}
                             className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent"
                         >
                             <ShoppingBag className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
@@ -65,6 +66,7 @@ export function QuickJumpBanner() {
 
                         <Link 
                             href="/sizing" 
+                            prefetch={false}
                             className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent"
                         >
                             <Calculator className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />
@@ -73,6 +75,7 @@ export function QuickJumpBanner() {
 
                         <Link 
                             href="/contact" 
+                            prefetch={false}
                             className="group flex items-center justify-center gap-1.5 sm:gap-2 text-white hover:text-cyan-400 font-header font-bold text-xs sm:text-sm md:text-base uppercase tracking-wider transition-colors min-h-[42px] px-3 py-1.5 rounded bg-slate-800/40 sm:bg-transparent border border-white/5 sm:border-transparent"
                         >
                             <ClipboardList className="size-3.5 sm:size-4 text-cyan-500 group-hover:scale-110 transition-transform" />

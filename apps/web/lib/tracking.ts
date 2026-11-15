@@ -160,7 +160,7 @@ export function trackEcommerceEvent(
         });
 
         if (navigator.sendBeacon) {
-            navigator.sendBeacon('/api/v1/dev-os/analytics/event', eventData);
+            navigator.sendBeacon('/api/v1/dev-os/analytics/event', new Blob([eventData], { type: 'application/json' }));
         } else {
             fetch('/api/v1/dev-os/analytics/event', {
                 method: 'POST',
@@ -235,7 +235,7 @@ export function trackFunnelEvent(eventName: string, params: FunnelEventParams = 
         });
 
         if (navigator.sendBeacon) {
-            navigator.sendBeacon('/api/v1/dev-os/analytics/event', eventData);
+            navigator.sendBeacon('/api/v1/dev-os/analytics/event', new Blob([eventData], { type: 'application/json' }));
         } else {
             fetch('/api/v1/dev-os/analytics/event', {
                 method: 'POST',

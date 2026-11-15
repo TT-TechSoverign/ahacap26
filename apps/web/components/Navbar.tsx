@@ -110,11 +110,11 @@ export default function Navbar() {
                         <button
                             onClick={openCart}
                             className="relative group p-2 hover:bg-white/5 rounded-lg transition-colors"
-                            aria-label={items.length > 0 ? `Open Cart (${items.length})` : 'Open Cart'}
+                            aria-label={items.length > 0 ? `Open Cart, ${items.length} items` : 'Open Cart'}
                         >
-                            <ShoppingCart className="size-6 text-white group-hover:text-primary transition-colors" />
+                            <ShoppingCart className="size-6 text-white group-hover:text-primary transition-colors" aria-hidden="true" />
                             {items.length > 0 && (
-                                <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-[9px] font-black flex items-center justify-center rounded-full shadow-[0_0_10px_rgba(0,174,239,0.5)]">
+                                <span aria-hidden="true" className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white text-[9px] font-black flex items-center justify-center rounded-full shadow-[0_0_10px_rgba(0,174,239,0.5)]">
                                     {items.length}
                                 </span>
                             )}

@@ -284,11 +284,11 @@ export default function NavbarV2() {
                             <button
                                 onClick={openCart}
                                 className="relative group p-1.5 hover:bg-white/5 rounded-lg transition-colors flex items-center text-slate-300 hover:text-cyan-400"
-                                aria-label={cartCount > 0 ? `Open Cart (${cartCount})` : 'Open Cart'}
+                                aria-label={cartCount > 0 ? `Open Cart, ${cartCount} items` : 'Open Cart'}
                             >
-                                <ShoppingCart className="size-5 text-white group-hover:text-cyan-400 transition-colors" />
+                                <ShoppingCart className="size-5 text-white group-hover:text-cyan-400 transition-colors" aria-hidden="true" />
                                 {cartCount > 0 && (
-                                    <span className={cn(
+                                    <span aria-hidden="true" className={cn(
                                         "absolute -top-1 -right-1 min-w-[16px] h-4 px-1 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
                                         (isCampaignActive() && items.some(item => item.promo_price && item.promo_price > 0))
                                             ? "cart-promo-badge-pulse text-white"

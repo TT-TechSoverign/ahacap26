@@ -54,7 +54,7 @@ export default function Homepage() {
                     className="object-cover object-center translate-y-0 scale-100 md:translate-y-[-10%] md:scale-110 [transform:translateZ(0)]"
                     priority
                     fetchPriority="high"
-                    quality={72}
+                    quality={55}
                 />
                 <div className="absolute inset-0 bg-[#0F172A] mix-blend-multiply opacity-20" />
                 {/* Secondary subtle blur & darkening (desktop only to avoid full-screen mobile GPU compositing cost) */}

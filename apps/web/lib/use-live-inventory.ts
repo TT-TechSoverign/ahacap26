@@ -37,7 +37,7 @@ export async function fetchLiveCatalogProducts(force = false): Promise<Product[]
         return inflightPromise;
     }
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
+    const apiUrl = typeof window !== 'undefined' ? '/api/v1' : (process.env.NEXT_PUBLIC_API_URL || '/api/v1');
     inflightPromise = fetch(`${apiUrl}/products`, { cache: 'no-store' })
         .then(async (res) => {
             if (!res.ok) return INITIAL_CATALOG_PRODUCTS;

@@ -233,8 +233,8 @@ export function WindowAcQuickShop({ cityName, title, heading, subheading, modelI
                                             src={imgSrc}
                                             alt={unit.name}
                                             fill
-                                            sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 25vw"
-                                            quality={75}
+                                            sizes="(max-width: 640px) 320px, (max-width: 1024px) 360px, 280px"
+                                            quality={70}
                                             className="object-contain p-2.5 group-hover:scale-105 transition-transform duration-300"
                                             unoptimized={imgSrc.endsWith('.svg')}
                                         />

@@ -83,11 +83,11 @@ export default function MobileStickyHeader() {
                             <button
                                 onClick={handleOpenCart}
                                 className="text-white hover:text-cyan-400 transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 relative rounded-lg active:bg-white/5"
-                                aria-label={cartCount > 0 ? `Open Cart (${cartCount})` : 'Open Cart'}
+                                aria-label={cartCount > 0 ? `Open Cart, ${cartCount} items` : 'Open Cart'}
                             >
-                                <ShoppingCart className="size-6" />
+                                <ShoppingCart className="size-6" aria-hidden="true" />
                                 {cartCount > 0 && (
-                                    <span className={cn(
+                                    <span aria-hidden="true" className={cn(
                                         "absolute top-1 right-0 min-w-[16px] h-4 px-1 text-black text-[9px] font-black flex items-center justify-center rounded-full shadow-sm",
                                         (isCampaignActive() && items.some(item => item.promo_price && item.promo_price > 0))
                                             ? "cart-promo-badge-pulse text-white"

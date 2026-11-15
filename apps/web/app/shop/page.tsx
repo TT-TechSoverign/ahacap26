@@ -2497,8 +2497,8 @@ function ProductCard({
                             src={activeImg}
                             alt={viewMode === 'cutaway' ? `${product.name} 3D Window Fit Cutaway` : product.name}
                             fill
-                            sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 33vw"
-                            quality={75}
+                            sizes="(max-width: 640px) 320px, (max-width: 1024px) 360px, 300px"
+                            quality={70}
                             className={cn(
                                 "object-contain transition-transform duration-700 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative z-10",
                                 viewMode === 'cutaway' ? "p-1 md:p-2 scale-100 group-hover:scale-105" : "p-4 md:p-6 group-hover:scale-110"
