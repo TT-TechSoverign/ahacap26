@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
-import { trackFunnelEvent } from '@/lib/tracking';
+import { detectAndPersistAiSearchSource, trackFunnelEvent } from '@/lib/tracking';
 
 function RouteTrackerContent() {
     const pathname = usePathname();
@@ -10,6 +10,15 @@ function RouteTrackerContent() {
 
     useEffect(() => {
         try {
+            const aiAttribution = detectAndPersistAiSearchSource();
+            if (aiAttribution?.isNewSessionAttribution) {
+                trackFunnelEvent('ai_search_referral', {
+                    category: 'AI Search Discovery',
+                    ai_engine: aiAttribution.engine,
+                    landing_path: pathname,
+                });
+            }
+
             if (typeof window !== 'undefined' && Array.isArray((window as any).dataLayer)) {
                 const search = searchParams?.toString();
                 const pagePath = pathname + (search ? `?${search}` : '');
@@ -18,12 +27,14 @@ function RouteTrackerContent() {
                     event: 'page_view',
                     page_path: pagePath,
                     page_title: document.title,
+                    ...(aiAttribution?.engine ? { ai_discovery_source: aiAttribution.engine } : {}),
                 });
 
                 if (typeof (window as any).gtag === 'function') {
                     (window as any).gtag('event', 'page_view', {
                         page_path: pagePath,
                         page_title: document.title,
+                        ...(aiAttribution?.engine ? { ai_discovery_source: aiAttribution.engine } : {}),
                     });
                 }
             }

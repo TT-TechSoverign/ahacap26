@@ -73,17 +73,17 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Growth & Oahu Grounding Sub-Master",
         "domain": "Growth",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Ground all copy, pricing, technical recommendations, and SEO across all 118 canonical Window AC routes, 22 Oahu city pages, HECO 44.2¢/kWh energy economics, and mandatory Shop #rebate ($45 Hawaii Energy Rebate) architecture.",
+        "mandate": "Ground all copy, pricing, technical recommendations, and SEO across all 120 canonical Window AC routes, 22 Oahu city pages, HECO 44.2¢/kWh energy economics, and mandatory Shop #rebate ($45 Hawaii Energy Rebate) architecture.",
         "token_efficiency_policy": "Static knowledge graph queries with zero runtime AI hallucination; cached geographic centroids.",
         "oahu_grounding": "22 Oahu municipalities, Leeward/Ewa heat profiles, Windward humidity/mold challenges, HECO 44.2¢/kWh residential tariff, and $45 Hawaii Energy Window AC Rebate.",
-        "inputs": ["118 canonical routes & 22 city pages", "HECO 44.2¢/kWh tariff", "content.json & PostgreSQL content_pages shop #rebate config", "GSC/GA4 telemetry"],
+        "inputs": ["120 canonical routes & 22 city pages", "HECO 44.2¢/kWh tariff", "content.json & PostgreSQL content_pages shop #rebate config", "GSC/GA4 telemetry"],
         "execution_steps": [
-            {"step": 1, "title": "118-Route Canonical & 301 Redirect Audit", "description": "Trigger agent_seo_metadata to verify 118 canonical routes (102 static/city + 16 product) and 301 permanent redirects for all retired legacy routes.", "verification": "118 routes active; 0 legacy non-window AC routes indexed."},
+            {"step": 1, "title": "120-Route Canonical & 301 Redirect Audit", "description": "Trigger agent_seo_metadata to verify 120 canonical routes (104 static/city + 16 product) and 301 permanent redirects for all retired legacy routes.", "verification": "120 routes active; 0 legacy non-window AC routes indexed."},
             {"step": 2, "title": "Microclimate & Subcontractor Grounding", "description": "Trigger agent_oahu_grounding to align cooling recommendations with Oahu microclimates and verify 208/230V electrical work is grounded to licensed electrical subcontractors.", "verification": "Single-wall redwood BTU calibration & subcontractor grounding verified."},
             {"step": 3, "title": "Market & Rebate Section Verification", "description": "Trigger agent_market_research and agent_heco_rebate_strategist to confirm Waipahu warehouse pricing ($395-$1,200) and verify #rebate (<RebateSection />) is active on /shop and in NavbarV2.", "verification": "shop.sections.rebate and sectionOrder verified in code and DB."},
             {"step": 4, "title": "GSC/GA4, Schema & High-Intent Pathways", "description": "Trigger agent_gsc_ga4_analytics, agent_schema_metadata_engine, and agent_high_intent_planner to validate JSON-LD schemas and high-intent pathways (including /shop/ge-built-in-wall-ac-oahu).", "verification": "100% valid schemas and cross-funnel bridges."}
         ],
-        "outputs": ["118-route SEO coverage matrix", "Oahu microclimate cooling matrix", "Shop #rebate & $45 Hawaii Energy Rebate verification"],
+        "outputs": ["120-route SEO coverage matrix", "Oahu microclimate cooling matrix", "Shop #rebate & $45 Hawaii Energy Rebate verification"],
         "contingency_protocol": "Automatically restore shop #rebate section or 301 redirect rules if any route or content_pages regression occurs."
     },
     "submaster_crm_operations": {
@@ -110,17 +110,17 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Deployment & Quality Swarm Sub-Master",
         "domain": "Deployment",
         "supervisor": "Sovereign Master Orchestrator",
-        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 118 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 84 NavbarV2 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
+        "mandate": "Guarantee zero-downtime blue/green rollouts, Next.js production build verification across 120 canonical routes, 3-row fixed NavbarV2 viewport clearance across all 86 NavbarV2 page.tsx templates, solid dropdown surface armor, and 3D spatial caliper cutaway integrity.",
         "token_efficiency_policy": "Multi-stage pipeline running strictly during deployment sequences; zero background daemon overhead.",
         "oahu_grounding": "Insured Oahu cooling specialist workmanship protection (floor drop-cloth mandate), zero-downtime for live Oahu customers (www.affordablehome-ac.com).",
         "inputs": ["Next.js build manifests (84 page.tsx files)", "NavbarV2.tsx & admin/page.tsx", "3D cutaway & Retina WebP spec assets", "Docker compose configurations"],
         "execution_steps": [
             {"step": 1, "title": "Pre-Deploy Guardrails", "description": "Trigger agent_deployment_guardian to verify clean git working tree, main branch alignment, and Nginx reload syntax check.", "verification": "Branch is main, nginx -t returns syntax ok."},
-            {"step": 2, "title": "118-Route Build & Viewport Clearance QA", "description": "Trigger agent_build_qa to confirm zero TypeScript errors, 118 canonical routes, and 3-row fixed NavbarV2 top-padding clearance (pt-[88px] md:pt-[176px]..[192px]) across all 84 page.tsx files.", "verification": "Build exits code 0; 0 header overlap regressions across 84 page.tsx files."},
+            {"step": 2, "title": "120-Route Build & Viewport Clearance QA", "description": "Trigger agent_build_qa to confirm zero TypeScript errors, 120 canonical routes, and 3-row fixed NavbarV2 top-padding clearance (pt-[88px] md:pt-[176px]..[192px]) across all 84 page.tsx files.", "verification": "Build exits code 0; 0 header overlap regressions across 84 page.tsx files."},
             {"step": 3, "title": "Non-Regression, Dropdown & Admin Deck Audit", "description": "Trigger agent_regression_sentinel to verify By-Appointment-First gate, drop-cloth clause, solid bg-[#060a12] z-[120] Shop Window AC dropdown, and isolated /admin Command Deck.", "verification": "100% compliant with zero UI bleed-through or upfront pay gates."},
             {"step": 4, "title": "3D Spatial Cutaway & Retina Spec Audit", "description": "Trigger agent_spatial_visualizer to verify 16 isometric fit cutaways, 16 factory PDFs, and 16 2x Retina WebP mobile spec sheet images.", "verification": "48/48 spatial & engineering assets verified."}
         ],
-        "outputs": ["3-Stage verification certificate", "84/84 viewport clearance report", "Spatial & Retina spec asset report"],
+        "outputs": ["3-Stage verification certificate", "86/86 viewport clearance report", "Spatial & Retina spec asset report"],
         "contingency_protocol": "Instant rollback to previous container image if health probe or viewport/regression check fails within 30 seconds of deployment."
     },
     "submaster_serp_acquisition": {
@@ -132,7 +132,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "mandate": "Supervise 100% Window AC & Window AC Cleaning search query intent harvesting across 22 Oahu city pages and topical silos, click-through-rate title tag optimization, and 16-model Google Merchant Center + 142-review Product Reviews XML feed syndication.",
         "token_efficiency_policy": "Zero background polling loops. Invoked strictly on-demand by client CLI or Dev OS UI. Emits compact JSON summaries (< 400 bytes).",
         "oahu_grounding": "Oahu search intent harvesting (Honolulu, Ewa Beach, Kailua, Waipahu, Kapolei), localized $0 Free In-Home Estimate price anchoring, and Waipahu Warehouse Direct SERP trust badges.",
-        "inputs": ["Google Search Console query logs", "Next.js page metadata across 118 canonical routes", "Google Merchant XML feed (16 SKUs) & Product Reviews XML feed (142 reviews)"],
+        "inputs": ["Google Search Console query logs", "Next.js page metadata across 120 canonical routes", "Google Merchant XML feed (16 SKUs) & Product Reviews XML feed (142 reviews)"],
         "execution_steps": [
             {"step": 1, "title": "Window AC Query Clustering", "description": "Trigger agent_serp_intent_harvester to identify high-converting Oahu Window AC & cleaning queries (including 26\" through-the-wall sleeves and jalousie mounts) with zero legacy mini-split drift.", "verification": "Query intent taxonomy 100% Window AC focused."},
             {"step": 2, "title": "CTR Title Tag Optimization", "description": "Trigger agent_ctr_title_craftsman to enforce front-loaded (<60 char) click-magnetic title patterns with $395+ and $0 Install/Estimate hooks across all 22 city pages and topical silos.", "verification": "22 city pages enforce ${city} Window ACs ($395+) • $0 Install, Clean & Repair."},
@@ -155,7 +155,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
             {"step": 1, "title": "Mobile Wallet & CRM Card-Lock Session Check", "description": "Trigger agent_mobile_checkout_sentinel to confirm payment_method_types=['card'] enables Apple Pay, Google Pay, and US Cards (while blocking Link/BNPL 5.99% fee traps) on both storefront checkout and CRM multi-stage invoices.", "verification": "Card/wallet 2.9% fee lock active; stale CRM sessions auto-regenerated on balance change."},
             {"step": 2, "title": "Trust & Reassurance Grounding", "description": "Trigger agent_trust_authority_grounder to verify Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005 badges across checkout, footer, and schemas.", "verification": "High-trust card active; zero legacy license or hostile banner regressions."},
             {"step": 3, "title": "Zero-Friction Navigation & Dropdown Armor", "description": "Trigger agent_zero_friction_navigator to verify zero upsells, solid bg-[#060a12] z-[120] Shop Window AC dropdown, and .scrollbar-none horizontal filter tracks.", "verification": "Zero upsells, zero dropdown transparency bleed, 1-tap phone hotline active."},
-            {"step": 4, "title": "Core Web Vitals & Viewport Clearance", "description": "Trigger agent_speed_core_vital_sentinel to audit mobile page speed, zero CLS, and 3-row NavbarV2 top-padding clearance across all 84 page.tsx routes.", "verification": "Mobile response < 100ms, CLS = 0.00, 84/84 pages clear fixed header."}
+            {"step": 4, "title": "Core Web Vitals & Viewport Clearance", "description": "Trigger agent_speed_core_vital_sentinel to audit mobile page speed, zero CLS, and 3-row NavbarV2 top-padding clearance across all 84 page.tsx routes.", "verification": "Mobile response < 100ms, CLS = 0.00, 86/86 pages clear fixed header."}
         ],
         "outputs": ["Mobile checkout velocity score", "Trust & navigation armor index", "Core Web Vitals & viewport clearance status"],
         "contingency_protocol": "Immediately purge any checkout blocker, modal pop-up, dropdown opacity regression, or payment restriction."
@@ -432,14 +432,14 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "SEO & Oahu City Landing Page Sentinel",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Verify search engine indexing, semantic JSON-LD structured data, 118 canonical Window AC routes (102 static/city + 16 product), and 301 permanent redirects for all 9 retired mini-split/central AC routes.",
+        "mandate": "Verify search engine indexing, semantic JSON-LD structured data, 120 canonical Window AC routes (104 static/city + 16 product), and 301 permanent redirects for all 9 retired mini-split/central AC routes.",
         "token_efficiency_policy": "Reads sitemap, middleware, and metadata definitions synchronously; zero external web crawling tokens consumed.",
         "oahu_grounding": "22 Oahu cities (Honolulu, Pearl City, Kapolei, Kailua, Kaneohe, Mililani, Ewa Beach, Waipahu, etc.) plus dedicated Window AC topical silos.",
-        "inputs": ["sitemap.ts route manifest (118 routes)", "middleware.ts & next.config.js 301 redirects", "22 City landing page metadata definitions"],
+        "inputs": ["sitemap.ts route manifest (120 routes)", "middleware.ts & next.config.js 301 redirects", "22 City landing page metadata definitions"],
         "execution_steps": [
-            {"step": 1, "title": "118-Route & 22-City Coverage Audit", "description": "Verify all 118 canonical routes (including /shop/ge-built-in-wall-ac-oahu and 22 city pages) exist in sitemap.ts.", "verification": "118 canonical routes and 22/22 city routes active."},
+            {"step": 1, "title": "120-Route & 22-City Coverage Audit", "description": "Verify all 120 canonical routes (including /shop/ge-built-in-wall-ac-oahu and 22 city pages) exist in sitemap.ts.", "verification": "120 canonical routes and 22/22 city routes active."},
             {"step": 2, "title": "301 Redirect & Legacy Purge Check", "description": "Confirm all 9 retired mini-split/ductless/central AC routes 301-redirect permanently to /shop or /ac-cleaning-oahu.", "verification": "9/9 retired routes 301-redirected; zero legacy pages in sitemap."},
-            {"step": 3, "title": "Robots, Query Consolidation & AI Discovery Audit", "description": "Verify robots.txt disallows /dev-os, /admin, and /*?*_rsc=* while keeping query filters crawlable for X-Robots-Tag: noindex, follow consolidation, and confirm /llms.txt & /api/indexnow are active.", "verification": "Dev OS & /admin strictly protected; 118 public pages indexed."}
+            {"step": 3, "title": "Robots, Query Consolidation & AI Discovery Audit", "description": "Verify robots.txt disallows /dev-os, /admin, and /*?*_rsc=* while keeping query filters crawlable for X-Robots-Tag: noindex, follow consolidation, and confirm /llms.txt, /llms-full.txt & /openai-product-feed.json & /api/indexnow are active.", "verification": "Dev OS & /admin strictly protected; 118 public pages indexed."}
         ],
         "outputs": ["SEO status (ACTIVE_OPTIMIZING)", "Canonical routes count (118)", "301 redirect enforcement status"],
         "contingency_protocol": "Regenerate sitemap and enforce 301 redirect rules if any route indexing discrepancy is detected."
@@ -504,14 +504,14 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Search Console & GA4 Performance Analytics Sentinel",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Ingest and analyze Google Search Console query impressions and GA4 funnel telemetry across all 118 canonical Window AC routes to detect high-impression / low-CTR bottlenecks.",
+        "mandate": "Ingest and analyze Google Search Console query impressions and GA4 funnel telemetry across all 120 canonical Window AC routes to detect high-impression / low-CTR bottlenecks.",
         "token_efficiency_policy": "On-demand execution with cached aggregation; executes in < 4ms without external polling overhead.",
         "oahu_grounding": "Tracks localized Oahu Window AC search queries across Honolulu, Waipahu, Kailua, Kapolei, Ewa Beach, and Mililani.",
         "inputs": ["Google Search Console query performance data", "GA4 user session telemetry", "Funnel stage drop-off logs"],
         "execution_steps": [
             {"step": 1, "title": "GSC Window AC Query Cluster Audit", "description": "Scan Search Console impressions for high-volume Window AC & cleaning keywords with CTR < 3.0%.", "verification": "High-impression Window AC opportunity queries identified."},
             {"step": 2, "title": "GA4 Funnel Drop-off Analysis", "description": "Track session progression from landing page to product view, lead wizard, and Stripe checkout.", "verification": "Stage drop-off rates quantified."},
-            {"step": 3, "title": "Opportunity Matrix Generation", "description": "Correlate search impressions with conversion barriers across all 118 canonical routes.", "verification": "Analytics opportunity report compiled."}
+            {"step": 3, "title": "Opportunity Matrix Generation", "description": "Correlate search impressions with conversion barriers across all 120 canonical routes.", "verification": "Analytics opportunity report compiled."}
         ],
         "outputs": ["GSC query cluster report", "GA4 funnel efficiency index", "Underperforming route alerts"],
         "contingency_protocol": "Alert growth sub-master when any high-volume Window AC query cluster experiences > 20% CTR drop."
@@ -522,12 +522,12 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Structured Data Schema & Dynamic SERP Enhancer",
         "domain": "Growth",
         "supervisor": "submaster_growth_grounding",
-        "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas (Product strictly on 16 PDPs, CollectionPage+ItemList on category guides, HVACBusiness, Service, FAQPage with 100% visible DOM parity, AggregateRating 4.9★ across 142 reviews) across all 118 canonical routes.",
+        "mandate": "Generate, validate, and update Google Rich Results compliant JSON-LD schemas (Product strictly on 16 PDPs, CollectionPage+ItemList on category guides, HVACBusiness, Service, FAQPage with 100% visible DOM parity, AggregateRating 4.9★ across 142 reviews) across all 120 canonical routes.",
         "token_efficiency_policy": "Deterministic schema generation using static templates; executes in < 2ms with zero runtime LLM overhead.",
         "oahu_grounding": "Embeds Waipahu warehouse coordinates, Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005 trust grounding, and GET tax compliance.",
-        "inputs": ["Route metadata registry (118 routes)", "Product catalog pricing/stock ($395-$1,200)", "reviews_db.json (142 reviews)"],
+        "inputs": ["Route metadata registry (120 routes)", "Product catalog pricing/stock ($395-$1,200)", "reviews_db.json (142 reviews)"],
         "execution_steps": [
-            {"step": 1, "title": "Schema Integrity & Non-PDP Clone Audit", "description": "Validate JSON-LD schemas across all 118 routes, confirming 0 Product schema clones on non-PDP pages and 100% visible FAQPage question parity.", "verification": "100% valid schema markup across all 118 routes."},
+            {"step": 1, "title": "Schema Integrity & Non-PDP Clone Audit", "description": "Validate JSON-LD schemas across all 120 routes, confirming 0 Product schema clones on non-PDP pages and 100% visible FAQPage question parity.", "verification": "100% valid schema markup across all 120 routes."},
             {"step": 2, "title": "SERP Rich Snippet Injection", "description": "Ensure dynamic prices ($395-$1,200), stock availability, 4.9★ AggregateRating (142 reviews), and Waipahu warehouse details appear in structured output.", "verification": "Rich snippet attributes verified."},
             {"step": 3, "title": "Trust String Grounding Check", "description": "Confirm all schemas use 'Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005' with zero legacy license strings.", "verification": "Trust grounding 100% aligned."}
         ],
@@ -634,16 +634,16 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "Next.js Production Build, TypeScript & Viewport QA Agent",
         "domain": "Deployment",
         "supervisor": "submaster_deployment_quality",
-        "mandate": "Verify Next.js production compilation across all 118 canonical routes, TypeScript zero-error typing across apps/web and apps/dev-os, and 3-row fixed NavbarV2 top-padding clearance across all 84 page.tsx files.",
+        "mandate": "Verify Next.js production compilation across all 120 canonical routes, TypeScript zero-error typing across apps/web and apps/dev-os, and 3-row fixed NavbarV2 top-padding clearance across all 84 page.tsx files.",
         "token_efficiency_policy": "Runs compiler and AST/padding checks synchronously during build/verification; zero runtime token burn.",
         "oahu_grounding": "Prevents client-side crashes and fixed-header overlap on mobile and desktop viewports across Oahu.",
-        "inputs": ["TypeScript compiler output (tsc)", "Next.js route manifest (118 routes)", "All 84 apps/web/app/**/page.tsx files"],
+        "inputs": ["TypeScript compiler output (tsc)", "Next.js route manifest (120 routes)", "All 84 apps/web/app/**/page.tsx files"],
         "execution_steps": [
             {"step": 1, "title": "TypeScript Strict Compile", "description": "Verify zero TypeScript errors across apps/web and apps/dev-os.", "verification": "0 type errors."},
-            {"step": 2, "title": "118-Route Next.js Compilation", "description": "Verify all 118 canonical static, city, and product routes compile cleanly into optimized bundles.", "verification": "118 canonical routes compiled."},
-            {"step": 3, "title": "3-Row NavbarV2 Viewport Clearance Audit", "description": "Verify all 84 page.tsx files enforce 3-row fixed header clearance (pt-[88px] md:pt-[176px] on /, md:pt-[180px] on 82 routes, pt-20 md:pt-[192px] on /admin) with zero cramped md:pt-20..40 overlaps.", "verification": "84/84 page.tsx routes clear fixed NavbarV2."}
+            {"step": 2, "title": "120-Route Next.js Compilation", "description": "Verify all 120 canonical static, city, and product routes compile cleanly into optimized bundles.", "verification": "120 canonical routes compiled."},
+            {"step": 3, "title": "3-Row NavbarV2 Viewport Clearance Audit", "description": "Verify all 84 page.tsx files enforce 3-row fixed header clearance (pt-[88px] md:pt-[176px] on /, md:pt-[180px] on 82 routes, pt-20 md:pt-[192px] on /admin) with zero cramped md:pt-20..40 overlaps.", "verification": "86/86 page.tsx routes clear fixed NavbarV2."}
         ],
-        "outputs": ["Build QA status (VERIFIED)", "Compiled routes count (118)", "Viewport clearance audit (84/84 pages)"],
+        "outputs": ["Build QA status (VERIFIED)", "Compiled routes count (118)", "Viewport clearance audit (86/86 pages)"],
         "contingency_protocol": "Reject build and prevent deployment if any TypeScript error or fixed-header padding regression is detected."
     },
     "agent_regression_sentinel": {
@@ -693,7 +693,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "mandate": "Harvest and cluster high-intent Oahu search queries across LG & GE Window AC sales, Waipahu warehouse pickup, Window AC cleaning, jalousie installation, and 26\" through-the-wall sleeve replacements.",
         "token_efficiency_policy": "In-memory query clustering against historical Search Console cache. Zero external network requests.",
         "oahu_grounding": "Captures local microclimate queries ('kailua window ac cleaning', 'ewa beach lg dual inverter', 'oahu 26 inch wall sleeve ac replacement').",
-        "inputs": ["GSC query logs", "Search query cluster index (118 canonical routes)"],
+        "inputs": ["GSC query logs", "Search query cluster index (120 canonical routes)"],
         "execution_steps": [
             {"step": 1, "title": "Window AC Cluster Analysis", "description": "Cluster queries by intent: Waipahu warehouse purchase, 26\" wall sleeve replacement, jalousie installation, or Window AC mold cleaning.", "verification": "High-intent Window AC queries segmented with > 1,500 monthly impressions."},
             {"step": 2, "title": "CTR Gap & Legacy Drift Detection", "description": "Identify queries ranking in top 5 with CTR below 3.5% and confirm zero retired mini-split/ductless keyword targeting.", "verification": "Target Window AC queries flagged for title craftsman optimization."}
@@ -707,13 +707,13 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "title": "CTR Title Tag Craftsman Sentinel",
         "domain": "SERP Acquisition",
         "supervisor": "submaster_serp_acquisition",
-        "mandate": "Formulate and audit click-optimized Window AC title tags, price anchors ($0 Free In-Home Estimate, $395–$1,200), and phone hotlines ((808) 488-1111) across all 118 canonical Oahu routes.",
+        "mandate": "Formulate and audit click-optimized Window AC title tags, price anchors ($0 Free In-Home Estimate, $395–$1,200), and phone hotlines ((808) 488-1111) across all 120 canonical Oahu routes.",
         "token_efficiency_policy": "Deterministic title syntax parsing. Zero external tokens consumed.",
         "oahu_grounding": "Embeds Waipahu local stock availability and Honolulu phone bridge directly into Google SERP blue link snippets.",
-        "inputs": ["apps/web/app page metadata (118 routes)", "22 City page route templates"],
+        "inputs": ["apps/web/app page metadata (120 routes)", "22 City page route templates"],
         "execution_steps": [
             {"step": 1, "title": "City Template Title Audit", "description": "Verify all 22 city pages format front-loaded (<60 char) title as ${city} Window ACs ($395+) • $0 Install, Clean & Repair.", "verification": "All 22 city templates match Window AC front-loaded CTR standard."},
-            {"step": 2, "title": "Canonical Link, Double-Suffix & Legacy Purge", "description": "Verify zero root canonical override, zero double brand suffixes, and zero mini-split/ductless terms across all 118 canonical routes.", "verification": "118 canonical routes 100% Window AC aligned."}
+            {"step": 2, "title": "Canonical Link, Double-Suffix & Legacy Purge", "description": "Verify zero root canonical override, zero double brand suffixes, and zero mini-split/ductless terms across all 120 canonical routes.", "verification": "120 canonical routes 100% Window AC aligned."}
         ],
         "outputs": ["Title tag compliance (100%)", "Title craftsman status (TITLES_CRAFTED)"],
         "contingency_protocol": "Auto-correct malformed title templates."
@@ -730,7 +730,7 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "inputs": ["apps/web/app/api/google-feed/route.ts", "apps/web/app/api/google-reviews-feed/route.ts", "apps/web/app/shop/[slug]/layout.tsx", "products_seed.json"],
         "execution_steps": [
             {"step": 1, "title": "16-Model Merchant & 142-Review XML Validation", "description": "Verify Merchant XML (16 SKUs, dynamic <g:sale_price>, 8-SKU $45 rebate lock) and Product Reviews XML (142 reviews) render valid feeds.", "verification": "16 LG & GE products and 142 reviews syndicating cleanly."},
-            {"step": 2, "title": "Schema Deduplication Audit", "description": "Verify zero duplicate aggregateRating blocks and 0 non-PDP Product schema clones across all 118 routes.", "verification": "Clean single aggregateRating per product/service."}
+            {"step": 2, "title": "Schema Deduplication Audit", "description": "Verify zero duplicate aggregateRating blocks and 0 non-PDP Product schema clones across all 120 routes.", "verification": "Clean single aggregateRating per product/service."}
         ],
         "outputs": ["Merchant feed status (MERCHANT_FEED_VERIFIED)", "Audited products (16)"],
         "contingency_protocol": "Filter malformed schema nodes prior to build compilation."
@@ -801,9 +801,9 @@ AGENT_SOPS: Dict[str, Dict[str, Any]] = {
         "inputs": ["Nginx response headers", "Next.js cache-control headers", "84 apps/web/app/**/page.tsx files"],
         "execution_steps": [
             {"step": 1, "title": "Cache-Control & Live API Audit", "description": "Verify shop, checkout, and /api/v1/products emit no-cache, no-store, must-revalidate.", "verification": "Universal zero-cache headers active."},
-            {"step": 2, "title": "CLS & 3-Row Navbar Clearance Verification", "description": "Verify images have fixed aspect-ratio boxes and all 84 page.tsx routes enforce pt-[88px] md:pt-[176px]..[192px] clearance below the 3-row fixed NavbarV2.", "verification": "CLS verified at 0.00; 84/84 pages clear fixed header."}
+            {"step": 2, "title": "CLS & 3-Row Navbar Clearance Verification", "description": "Verify images have fixed aspect-ratio boxes and all 84 page.tsx routes enforce pt-[88px] md:pt-[176px]..[192px] clearance below the 3-row fixed NavbarV2.", "verification": "CLS verified at 0.00; 86/86 pages clear fixed header."}
         ],
-        "outputs": ["Core Web Vitals status (VITALS_OPTIMAL)", "LCP target (< 2.0s)", "CLS (0.00) & 84/84 Viewport Clearance"],
+        "outputs": ["Core Web Vitals status (VITALS_OPTIMAL)", "LCP target (< 2.0s)", "CLS (0.00) & 86/86 Viewport Clearance"],
         "contingency_protocol": "Alert Sovereign Master on any asset addition or top-padding regression causing layout shift or header overlap."
     },
 

@@ -7,6 +7,8 @@ WEB_ROOT = os.path.join(REPO_ROOT, "apps", "web")
 WEB_APP = os.path.join(WEB_ROOT, "app")
 
 PASS17_NEW_ROUTES = [
+    "/shop/in-stock-lg-window-ac-oahu",
+    "/shop/lg-vs-ge-window-ac-hawaii",
     "/shop/10000-12000-btu-window-ac-oahu",
     "/shop/lg-cool-and-heat-window-ac-hawaii",
     "/shop/lg-standard-budget-window-ac-oahu",
@@ -82,13 +84,13 @@ def test_sitemap_118_canonical_routes_exist_on_disk_and_have_viewport_armor():
         for line in m.group(1).splitlines()
         if line.strip() and not line.strip().startswith("//")
     ]
-    assert len(hy) == 74, f"Expected 74 highYieldRoutes, got {len(hy)}"
+    assert len(hy) == 76, f"Expected 76 highYieldRoutes, got {len(hy)}"
 
     static_and_city = ["", "/shop", "/contact", "/sizing", "/service-areas", "/sitemap"] + hy + cities
-    assert len(static_and_city) == 102
-    assert len(set(static_and_city)) == 102, "Duplicate route in sitemap.ts!"
-    # 102 static/city + 16 dynamic product PDPs = 118 canonical routes
-    assert len(static_and_city) + 16 == 118
+    assert len(static_and_city) == 104
+    assert len(set(static_and_city)) == 104, "Duplicate route in sitemap.ts!"
+    # 104 static/city + 16 dynamic product PDPs = 120 canonical routes
+    assert len(static_and_city) + 16 == 120
 
     for new_route in PASS17_NEW_ROUTES:
         assert new_route in hy, f"Missing {new_route} in sitemap.ts"

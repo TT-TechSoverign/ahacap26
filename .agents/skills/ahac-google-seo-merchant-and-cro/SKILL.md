@@ -11,7 +11,7 @@ description: >-
 # AHAC Google Search, Merchant Feeds, Rich Snippets & Conversion Velocity Runbook
 
 ## 1. Google Search Essentials & Anti-Spam Indexing Architecture (`118` Canonical Routes)
-- **Canonical Footprint**: `118` canonical URLs (`102` static, pillar, symptom, and 22-city Oahu hubs + `16` `/shop/[slug]` product detail pages) indexed in [`sitemap.ts`](../../apps/web/app/sitemap.ts), [`sitemap/page.tsx`](../../apps/web/app/sitemap/page.tsx), and [`llms.txt/route.ts`](../../apps/web/app/llms.txt/route.ts).
+- **Canonical Footprint**: `120` canonical URLs (`104` static, pillar, symptom, and 22-city Oahu hubs + `16` `/shop/[slug]` product detail pages) indexed in [`sitemap.ts`](../../apps/web/app/sitemap.ts), [`sitemap/page.tsx`](../../apps/web/app/sitemap/page.tsx), and [`llms.txt/route.ts`](../../apps/web/app/llms.txt/route.ts).
 - **People-First Anti-Doorway Standard**: Every new route MUST serve a distinct Oahu homeowner intent backed by authentic Waipahu 16-SKU data, a semantic `<table>` comparison/specification matrix, `pt-[92px] md:pt-[180px]` 3-row `NavbarV2` clearance, `<WindowAcQuickShop />`, and `<OahuEEATAuthorityBar />`. Never create thin near-duplicate doorway pages.
 - **Crawl vs. Consolidation (`robots.ts` & `middleware.ts`)**: Never block user-facing filter parameters (`?capacity=`, `?category=`, `?voltage=`, `?q=`) in `robots.ts`; allow `Googlebot` to crawl them so `middleware.ts` can consolidate link equity via `X-Robots-Tag: noindex, follow` and `<link rel="canonical">`. Never place `/shop?...` query links in global navigation (`NavbarV2`, `MobileDrawerMenu`, `Footer`); link directly to canonical category hubs.
 

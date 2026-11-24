@@ -115,6 +115,18 @@ const nextConfig = {
                     source: '/product-reviews-feed.xml',
                     destination: '/api/google-reviews-feed',
                 },
+                {
+                    source: '/openai-product-feed.json',
+                    destination: '/api/openai-feed',
+                },
+                {
+                    source: '/openai-product-feed.jsonl',
+                    destination: '/api/openai-feed?format=jsonl',
+                },
+                {
+                    source: '/ai-catalog.json',
+                    destination: '/api/openai-feed',
+                },
             ],
         };
     },

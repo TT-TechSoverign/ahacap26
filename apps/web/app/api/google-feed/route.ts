@@ -199,6 +199,16 @@ export async function GET() {
       if (product.coverage_oahu) {
         productDetails.push({ section: 'Cooling Performance', attr: 'Oahu Single-Wall Coverage', val: String(product.coverage_oahu) });
       }
+      if (mpn) {
+        productDetails.push({ section: 'Oahu Warehouse Availability', attr: 'Manufacturer Model Code', val: mpn });
+      }
+      productDetails.push({
+        section: 'Oahu Warehouse Availability',
+        attr: 'Local Island Fulfillment',
+        val: product.stock > 0
+          ? 'Physically In Stock at Waipahu Warehouse (94-150 Leoleo St #203) — Free Pickup by Appt or $50 Oahu Delivery'
+          : 'Awaiting Next Waipahu Container — Call (808) 488-1111 for In-Stock Equivalent'
+      });
       if (product.ceer_rating) {
         productDetails.push({ section: 'Efficiency & Electrical', attr: 'CEER Efficiency Rating', val: String(product.ceer_rating) });
       }

@@ -51,11 +51,26 @@ export default function robots(): MetadataRoute.Robots {
         '/*?*_rsc=*',
     ];
 
+    const allowedFeeds = [
+        '/',
+        '/llms.txt',
+        '/llms-full.txt',
+        '/openai-product-feed.json',
+        '/openai-product-feed.jsonl',
+        '/ai-catalog.json',
+        '/api/openai-feed',
+        '/api/sitemap-xml',
+        '/api/google-feed',
+        '/merchant-feed.xml',
+        '/api/google-reviews-feed',
+        '/product-reviews-feed.xml',
+    ];
+
     return {
         rules: [
             {
                 userAgent: '*',
-                allow: ['/', '/llms.txt', '/api/sitemap-xml', '/api/google-feed', '/merchant-feed.xml', '/api/google-reviews-feed', '/product-reviews-feed.xml'],
+                allow: allowedFeeds,
                 disallow: sharedDisallows,
             },
             {
@@ -65,13 +80,23 @@ export default function robots(): MetadataRoute.Robots {
                     'ChatGPT-User',
                     'GPTBot',
                     'PerplexityBot',
+                    'Perplexity-User',
                     'ClaudeBot',
+                    'Claude-SearchBot',
+                    'Claude-User',
+                    'anthropic-ai',
                     'Applebot-Extended',
+                    'bingbot',
+                    'msnbot',
+                    'DuckAssistBot',
+                    'YouBot',
+                    'MistralAI-User',
+                    'cohere-ai',
                     'Amazonbot',
                     'FacebookBot',
                     'meta-externalagent'
                 ],
-                allow: ['/', '/llms.txt', '/api/sitemap-xml', '/api/google-feed', '/merchant-feed.xml', '/api/google-reviews-feed', '/product-reviews-feed.xml'],
+                allow: allowedFeeds,
                 disallow: sharedDisallows,
             },
             {

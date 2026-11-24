@@ -399,8 +399,8 @@ switch ($Command.ToLower()) {
                 author = "SOVEREIGN_MASTER_AGENT"
                 achievements = @(
                     "Master Projects Brain v2.8.0-SOVEREIGN armed with 60 neural synapses & 5 Antigravity Workspace Skills (v2.8.0-NOV12-OMNISCIENT-SWARM)",
-                    "All 10 Category Sub-Masters, 40 Specialized Agents, and 50 SOP Dossiers synchronized across 118 canonical routes, 16 LG/GE SKUs, and 142 verified reviews",
-                    "Every-file security, Email Fortress & live 118-URL Google/Merchant/FAQ audit clean (0 leaks, 0 raw mailto links, 0 schema/DOM drift)"
+                    "All 10 Category Sub-Masters, 40 Specialized Agents, and 50 SOP Dossiers synchronized across 120 canonical routes, 16 LG/GE SKUs, and 142 verified reviews",
+                    "Every-file security, Email Fortress & live 120-URL Google/Merchant/FAQ audit clean (0 leaks, 0 raw mailto links, 0 schema/DOM drift)"
                 )
             } | ConvertTo-Json
             $resp = Invoke-RestMethod -Uri "$ServerUrl/brain/session-sync" -Method POST -Headers $headers -Body $body

@@ -472,6 +472,6 @@ export const config = {
          * - _next/image (image optimization files)
          * - favicon.ico, sitemap.xml, robots.txt, XML feeds (static/feed files)
          */
-        '/((?!api|assets|_next/static|_next/image|favicon\\.ico|favicon-48x48\\.png|favicon-96x96\\.png|icon\\.png|icon-192\\.png|icon-512\\.png|apple-touch-icon\\.png|manifest\\.json|sitemap\\.xml|robots\\.txt|merchant-feed\\.xml|product-reviews-feed\\.xml).*)',
+        '/((?!api|assets|_next/static|_next/image|favicon\\.ico|favicon-48x48\\.png|favicon-96x96\\.png|icon\\.png|icon-192\\.png|icon-512\\.png|apple-touch-icon\\.png|manifest\\.json|sitemap\\.xml|robots\\.txt|llms\\.txt|llms-full\\.txt|openai-product-feed\\.json|openai-product-feed\\.jsonl|ai-catalog\\.json|merchant-feed\\.xml|product-reviews-feed\\.xml).*)',
     ],
 };

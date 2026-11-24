@@ -6,6 +6,10 @@ export interface FAQItem {
 export function getProductFaqs(productName: string): FAQItem[] {
     return [
         {
+            q: `Is the ${productName} physically in stock on Oahu right now without waiting for mainland shipping?`,
+            a: `Affordable Home A/C stocks factory-sealed LG and GE units directly at our central Waipahu warehouse (94-150 Leoleo St. #203, Waipahu, HI 96797) so Oahu homeowners do not have to wait weeks for mainland ocean freight. Check the live real-time Waipahu unit counter at the top of this page or call (808) 488-1111 to reserve same-day pickup by appointment or $50 Oahu delivery.`
+        },
+        {
             q: `Does Affordable Home A/C deliver and install the ${productName} near me?`,
             a: `Yes, we offer professional installation by appointment ($0 Free In-Home Estimate) across all 22 Oahu communities and flat-rate $50 delivery across our 15-municipality Oahu delivery zone, including Waipahu, Honolulu, Kapolei, Ewa Beach, Kailua, Kaneohe, Mililani, Pearl City, Aiea, and Hawaii Kai.`
         },

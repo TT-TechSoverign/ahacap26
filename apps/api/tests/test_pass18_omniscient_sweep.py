@@ -87,7 +87,7 @@ def test_services_matrix_and_products_seed_pass18_ground_truth():
 def test_dev_os_perimeter_push_directive_endpoint_and_118_route_parity():
     route_paths = {getattr(r, "path", "") for r in dev_os_router.routes}
     assert "/brain/perimeter/push-directive" in route_paths
-    assert len(MASTER_BRAIN_STATE["synapses"]) == 60
+    assert len(MASTER_BRAIN_STATE["synapses"]) == 62
 
     dev_os_src = Path(os.path.join(API_ROOT, "routers", "dev_os.py")).read_text(encoding="utf-8")
     retired_literal = "AhacMasterKey" + "2026!Secured"

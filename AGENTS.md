@@ -1,7 +1,7 @@
 # SOVEREIGN AGENT & SWARM REGISTRY (AGENTS.md)
 
 > **Master Projects Brain Version**: `2.8.0-SOVEREIGN` (`v2.8.0-NOV12-OMNISCIENT-SWARM`) • **Active Epoch**: `EPOCH 21 (November 12, 2026)`  
-> **Swarm Topology**: `10 Category Sub-Masters` • `40 Specialized Satellite Agents` • `50 SOP Dossiers (100% 1:1 Parity)` • `60 Neural Synapses` • `5 Workspace Skills`
+> **Swarm Topology**: `10 Category Sub-Masters` • `40 Specialized Satellite Agents` • `50 SOP Dossiers (100% 1:1 Parity)` • `62 Neural Synapses` • `5 Workspace Skills`
 
 This document defines the agent architecture, roles, execution protocols, and operational guardrails for all AI agents and subagents operating within the Affordable Home A/C codebase.
 
@@ -13,15 +13,15 @@ This document defines the agent architecture, roles, execution protocols, and op
 - **Category Sub-Masters (10)**: Autonomous domain supervisors governing specific functional areas.
 - **Specialized Satellite Agents (40)**: On-demand diagnostic and execution units (0% background idle CPU burn; multi-worker Redis pub/sub synchronized across 4 Uvicorn processes).
 - **Core Operational Mandates**:
-  - **100% LG & GE Window AC & Window AC Cleaning Focus**: `118` canonical routes (`102` static/city + `16` product routes), 301 permanent redirects for all retired legacy routes, and `16` catalog models (`$395` to `$1,200`, including `LW1222IVSM` and `GE AJCQ12AXXWA` R-32 Variable Speed Inverter).
+  - **100% LG & GE Window AC & Window AC Cleaning Focus**: `120` canonical routes (`104` static/city + `16` product routes), 301 permanent redirects for all retired legacy routes, and `16` catalog models (`$395` to `$1,200`, including `LW1222IVSM` and `GE AJCQ12AXXWA` R-32 Variable Speed Inverter).
   - **By-Appointment-First Mandate**: Zero upfront payment barriers for Window AC service, cleaning, or installation estimates (`$0 Free In-Home Estimate`).
-  - **3-Row Fixed `NavbarV2` Viewport & Dropdown Armor**: Mandatory top-padding clearance (`pt-[88px] md:pt-[176px]` on `/`, `md:pt-[180px]` on 82 content/shop/city pages, `pt-20 md:pt-[192px]` on `/admin`) and solid `bg-[#060a12]` `z-[120]` dropdown surface armor.
+  - **3-Row Fixed `NavbarV2` Viewport & Dropdown Armor**: Mandatory top-padding clearance (`pt-[88px] md:pt-[176px]` on `/`, `md:pt-[180px]` on 84 content/shop/city pages, `pt-20 md:pt-[192px]` on `/admin`) and solid `bg-[#060a12]` `z-[120]` dropdown surface armor.
   - **Mandatory Shop `#rebate` & Isolated `/admin` Command Deck**: `"rebate"` (`<RebateSection />`) enforced in `ShopClient.tsx`, `content.json`, and PostgreSQL `content_pages`; `/admin` Command Menu isolated below `NavbarV2` with 4 storefront tabs and zero internal `Dev OS` or `CRM Portal` links.
   - **Strict Anti-Upsell Mandate**: No accessory upsells, add-on modals, or bundle friction in checkout.
 
 ```
                                                      [ MASTER PROJECTS BRAIN v2.8.0 ]
-                                                            (60 Neural Synapses)
+                                                            (62 Neural Synapses)
                                                                       |
     +---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+
     |               |               |               |               |               |               |               |               |               |               |
@@ -58,13 +58,13 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_catalog_auditor`: Audits all 16 LG & GE catalog models (`$395`–`$1,200`), verifying `LW1222IVSM` & `GE AJCQ12AXXWA` R-32 Inverter specs, AHAM + Island Dual-Sizing, 16/16 factory PDFs, 16/16 2x Retina WebP mobile spec viewers, and non-destructive `stock`/price preservation during reseeds.
 
 ### Sub-Master 4: Growth & Market Grounding (`submaster_growth_grounding`)
-- **Scope**: Search engine visibility across `118` canonical Window AC routes, 301 permanent redirects for retired legacy routes, 22-city Oahu coverage, HECO `44.2¢/kWh` energy economics, and mandatory Shop `#rebate` (`$45` Hawaii Energy Rebate) architecture.
+- **Scope**: Search engine visibility across `120` canonical Window AC routes, 301 permanent redirects for retired legacy routes, 22-city Oahu coverage, HECO `44.2¢/kWh` energy economics, and mandatory Shop `#rebate` (`$45` Hawaii Energy Rebate) architecture.
 - **Agents**:
-  - `agent_seo_metadata`: Audits HTML/XML sitemaps, canonical tags, 22 Oahu city landing pages across `118` canonical routes, and 301 permanent redirects for all 9 retired mini-split/central AC routes.
+  - `agent_seo_metadata`: Audits HTML/XML sitemaps, canonical tags, 22 Oahu city landing pages across `120` canonical routes, and 301 permanent redirects for all 9 retired mini-split/central AC routes.
   - `agent_oahu_grounding`: Calibrates single-wall redwood & jalousie heat-load sizing, coastal salt-air protection, HECO `~44.2¢/kWh` rates, and grounds dedicated 208/230V electrical work to licensed electrical subcontractors.
   - `agent_market_research`: Benchmarks Waipahu warehouse-direct pricing (`$395`–`$1,200`) and `$0 Free In-Home Estimate` advantages while enforcing respectful brand reframing (zero competitor bashing or barge fearmongering) and homepage comparison visual checkmarks.
   - `agent_heco_rebate_strategist`: Anchors `$45` Hawaii Energy Window AC rebate messaging (`$424.32/yr` HECO savings) and verifies `"rebate"` (`<RebateSection />`) is active in `ShopClient.tsx`, `content.json`, PostgreSQL `content_pages`, and `NavbarV2` (`/shop#rebate`).
-  - `agent_gsc_ga4_analytics`: Monitors Google Search Console & GA4 telemetry across all 118 canonical Window AC routes.
+  - `agent_gsc_ga4_analytics`: Monitors Google Search Console & GA4 telemetry across all 120 canonical Window AC routes.
   - `agent_schema_metadata_engine`: Validates JSON-LD rich snippets (`Product`, `HVACBusiness`, `LocalBusiness`, `FAQPage`, `AggregateRating` `4.9★` across `142` reviews) grounded in `Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`.
   - `agent_high_intent_planner`: Optimizes high-converting Window AC topical silos (including `/shop/ge-built-in-wall-ac-oahu`, `/clean-vs-replace-window-ac`, `/window-ac-installation`, `/ac-cleaning-oahu`) and cross-funnel bridges.
 
@@ -76,10 +76,10 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_intake_triage`: Analyzes Window AC symptom reports (musty odor, warm air, ice buildup, blinking filter light, 26" wall sleeve rust) to route between Waipahu Warehouse Direct Replacement and Window AC Cleaning/Installation dispatch.
 
 ### Sub-Master 6: Deployment & Quality Swarm (`submaster_deployment_quality`)
-- **Scope**: Pre-flight checks, 118-route build QA, 3-row fixed `NavbarV2` viewport clearance across all 84 `NavbarV2` `page.tsx` routes, solid dropdown & `/admin` UI armor, and 3D spatial caliper graphics.
+- **Scope**: Pre-flight checks, 120-route build QA, 3-row fixed `NavbarV2` viewport clearance across all 86 `NavbarV2` `page.tsx` routes, solid dropdown & `/admin` UI armor, and 3D spatial caliper graphics.
 - **Agents**:
   - `agent_deployment_guardian`: Coordinates zero-downtime Docker deployments and Nginx syntax checks on Hostinger VPS.
-  - `agent_build_qa`: Verifies zero-error TypeScript compilation, Next.js static/dynamic bundling across `118` canonical routes, and 3-row fixed `NavbarV2` top-padding clearance (`pt-[88px] md:pt-[176px]..[192px]`) across all 84 `NavbarV2` `page.tsx` files.
+  - `agent_build_qa`: Verifies zero-error TypeScript compilation, Next.js static/dynamic bundling across `120` canonical routes, and 3-row fixed `NavbarV2` top-padding clearance (`pt-[88px] md:pt-[176px]..[192px]`) across all 86 `NavbarV2` `page.tsx` files.
   - `agent_regression_sentinel`: Validates By-Appointment-First rules, floor drop-cloth clauses, solid `bg-[#060a12]` `z-[120]` `Shop Window AC` dropdown armor (zero `/98` opacity bleed-through), and isolated `/admin` Command Menu positioning (`sticky top-[72px] md:top-[168px]`).
   - `agent_spatial_visualizer`: Supervises Blender 4.1 headless raytracing, PIL caliper overlays, 16 isometric fit cutaways (`product_{id}_fit_cutaway.webp`), 16 factory PDF spec sheets, and 16 2x Retina WebP mobile spec sheet viewers.
 
@@ -87,7 +87,7 @@ This document defines the agent architecture, roles, execution protocols, and op
 - **Scope**: 100% Window AC & Window AC Cleaning search query intent harvesting, SERP snippet CTR optimization, and 16-model Google Merchant + 142-review Product Reviews XML feeds.
 - **Agents**:
   - `agent_serp_intent_harvester`: Analyzes high-intent Oahu Window AC, 26" wall sleeve, jalousie installation, and mold cleaning search queries across 22 city pages with zero legacy mini-split drift.
-  - `agent_ctr_title_craftsman`: Formulates front-loaded (<60 char) click-optimized Window AC title tags (`${city} Window ACs ($395+) • $0 Install, Clean & Repair`), price anchors, and `(808) 488-1111` phone hotlines across all 118 canonical routes.
+  - `agent_ctr_title_craftsman`: Formulates front-loaded (<60 char) click-optimized Window AC title tags (`${city} Window ACs ($395+) • $0 Install, Clean & Repair`), price anchors, and `(808) 488-1111` phone hotlines across all 120 canonical routes.
   - `agent_merchant_feed_sentinel`: Audits Google Merchant XML (`/api/google-feed`), Product Reviews XML (`/product-reviews-feed.xml`, `142` reviews), `<g:sale_price>`, 8-SKU `$45` rebate lock, and Product JSON-LD schema (`validFrom`, `priceValidUntil`, single `aggregateRating`) across all 16 LG & GE models (including `AJCQ12AXXWA`).
 
 ### Sub-Master 8: Frictionless Conversion Velocity (`submaster_conversion_velocity`)
@@ -96,7 +96,7 @@ This document defines the agent architecture, roles, execution protocols, and op
   - `agent_mobile_checkout_sentinel`: Validates 1-tap Apple Pay, Google Pay, and US Cards across storefront checkout and CRM multi-stage invoice sessions (`payment_method_types=['card']` enforced to block 5.99% Link/BNPL fee traps).
   - `agent_trust_authority_grounder`: Embeds `Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005`, 1-year manufacturer warranty, and floor drop-cloth reassurance across checkout and footers with zero legacy license strings.
   - `agent_zero_friction_navigator`: Ensures zero checkout dead-ends, strict anti-upsell compliance, solid `bg-[#060a12]` `z-[120]` `Shop Window AC` dropdown armor, `.scrollbar-none` / `.no-scrollbar` horizontal pill tracks, and 1-tap phone bridges.
-  - `agent_speed_core_vital_sentinel`: Enforces mobile sub-100ms response, zero CLS (`0.00`), universal zero-cache headers on dynamic routes, and 84/84 `page.tsx` fixed-header viewport clearance.
+  - `agent_speed_core_vital_sentinel`: Enforces mobile sub-100ms response, zero CLS (`0.00`), universal zero-cache headers on dynamic routes, and 86/86 `page.tsx` fixed-header viewport clearance.
 
 ### Sub-Master 9: Creative AI & Spatial Media Studio (`submaster_creative_studio`)
 - **Scope**: Local ComfyUI RTX 4090 orchestration, Oahu customer portrait matrices, 142-review Window AC purity, 3D review medallions, 3-column `ReviewsPavilion` desktop grid, and sub-80KB WebP optimization.
@@ -142,9 +142,9 @@ The local PowerShell CLI bridge (`.\scripts\dev-os.ps1`) allows immediate intera
 
 # Deployment Swarm, Live Google SEO Crawl, Gatekeepers & Security
 .\scripts\dev-os.ps1 verify-live                    # Execute 3-stage live deployment swarm check
-.\scripts\dev-os.ps1 live-crawl                     # Live 118-URL Google SEO, Merchant XML, FAQ DOM & anti-mailto audit
+.\scripts\dev-os.ps1 live-crawl                     # Live 120-URL Google SEO, Merchant XML, FAQ DOM & anti-mailto audit
 .\scripts\dev-os.ps1 grounding-audit                # Run Oahu service & legal grounding static check
-.\scripts\dev-os.ps1 indexnow                       # Push all 118 canonical sitemap URLs to IndexNow
+.\scripts\dev-os.ps1 indexnow                       # Push all 120 canonical sitemap URLs to IndexNow
 .\scripts\dev-os.ps1 gatekeepers                    # Run all 6 local pre-deploy gatekeepers (TS, Biome, Pytest, Grounding, Security)
 .\scripts\dev-os.ps1 scan-secrets                   # Run 6-stage local + submodule git secret scanner
 .\scripts\dev-os.ps1 security-sweep                 # Run full 6-stage secret scan + Python forensic email/codebase audit
@@ -155,9 +155,9 @@ The local PowerShell CLI bridge (`.\scripts\dev-os.ps1`) allows immediate intera
 ## 4. WORKSPACE SKILLS REGISTRY (`.agents/skills/`)
 
 All Antigravity sessions automatically discover and mount the following 5 workspace skills:
-- **`ahac-sovereign-swarm`** (`.agents/skills/ahac-sovereign-swarm/SKILL.md`): Full 10 Sub-Master / 40 Agent swarm orchestration (`60` synapses), 6-gatekeeper pre-deploy pipeline, and 3-stage live deployment verification.
+- **`ahac-sovereign-swarm`** (`.agents/skills/ahac-sovereign-swarm/SKILL.md`): Full 10 Sub-Master / 40 Agent swarm orchestration (`62` synapses), 6-gatekeeper pre-deploy pipeline, and 3-stage live deployment verification.
 - **`ahac-cybersecurity-and-email-shield`** (`.agents/skills/ahac-cybersecurity-and-email-shield/SKILL.md`): 6-layer Email Fortress (`safe_html`, CRLF stripping, PII log masking, `<ProtectedEmailLink />` anti-harvester DOM armor), CEO Email Shield routing (`is_explicit_test_submission`), zero hardcoded fallbacks, and `security-sweep` gatekeepers.
-- **`ahac-google-seo-merchant-and-cro`** (`.agents/skills/ahac-google-seo-merchant-and-cro/SKILL.md`): 118-route Google Search Essentials & Spam Policy rules, Merchant XML (`/merchant-feed.xml`) + 142-review Product Ratings XML (`/product-reviews-feed.xml`), 100% visible `FAQPage` DOM parity, 8-SKU `$45` Hawaii Energy Rebate lock, GA4 e-commerce attribution, and `live-crawl` verification.
+- **`ahac-google-seo-merchant-and-cro`** (`.agents/skills/ahac-google-seo-merchant-and-cro/SKILL.md`): 120-route Google Search Essentials & Spam Policy rules, Merchant XML (`/merchant-feed.xml`) + 142-review Product Ratings XML (`/product-reviews-feed.xml`), 100% visible `FAQPage` DOM parity, 8-SKU `$45` Hawaii Energy Rebate lock, GA4 e-commerce attribution, and `live-crawl` verification.
 - **`ahac-monthly-executive-billing-and-seo`** (`.agents/skills/ahac-monthly-executive-billing-and-seo/SKILL.md`): Plain-English CEO invoice line items, executive Gmail billing drafts, and 3rd-grade monthly SEO reports for CEO Brian Borges.
 - **`ahac-brand-creative-and-storyboard-studio`** (`.agents/skills/ahac-brand-creative-and-storyboard-studio/SKILL.md`): Official Affordable Home A/C branding, video/ad storyboard prompt engineering, and Oahu visual background guidelines.
 

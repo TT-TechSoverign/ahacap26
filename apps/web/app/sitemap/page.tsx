@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     title: {
         absolute: 'Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C'
     },
-    description: 'Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
+    description: 'Browse all 120 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
     alternates: {
         canonical: 'https://www.affordablehome-ac.com/sitemap',
     },
     openGraph: {
         title: 'Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C',
-        description: 'Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
+        description: 'Browse all 120 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
         url: 'https://www.affordablehome-ac.com/sitemap',
         siteName: 'Affordable Home A/C',
         locale: 'en_US',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     twitter: {
         card: 'summary_large_image',
         title: 'Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C',
-        description: 'Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
+        description: 'Browse all 120 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.',
         images: ['https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp'],
     },
 };
@@ -81,6 +81,8 @@ export default async function SitemapPage() {
     ];
 
     const windowAcShoppingGuides = [
+        { name: 'In-Stock LG Window ACs Oahu (All 12 Models)', path: '/shop/in-stock-lg-window-ac-oahu' },
+        { name: 'LG vs. GE Window & 26" Wall ACs Hawaii Guide', path: '/shop/lg-vs-ge-window-ac-hawaii' },
         { name: 'Oahu Window AC Warehouse Hub', path: '/shop/oahu-window-ac-warehouse' },
         { name: 'Complete LG Dual Inverter Buyer Guide', path: '/shop/lg-dual-inverter-guide' },
         { name: 'LG Dual Inverter 8,000 BTU Oahu Guide', path: '/shop/lg-dual-inverter-8000-btu-oahu' },
@@ -513,7 +515,7 @@ export default async function SitemapPage() {
                                     "@id": "https://www.affordablehome-ac.com/sitemap#collection",
                                     "name": "Oahu Window AC Sitemap & Directory ($395–$1,200) | Affordable Home A/C",
                                     "url": "https://www.affordablehome-ac.com/sitemap",
-                                    "description": "Browse all 118 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.",
+                                    "description": "Browse all 120 pages of Affordable Home A/C: 16 in-stock LG & GE Window ACs ($395–$1,200), 22 Oahu cities, $0 Estimate install & cleaning • (808) 488-1111.",
                                     "image": [
                                         "https://www.affordablehome-ac.com/assets/window-unit-images/lg-units/lg-dual-inverter-unit-photos-1600x1000/lg-dual-inverter-thinq-front-1600x1000.webp",
                                         "https://www.affordablehome-ac.com/assets/window-unit-images/ge-units/ge-performance-series-unit-photos-1600x1000/ge-AJCQ12AXXWA-115V-Front-1600x1000.webp",

@@ -83,6 +83,10 @@ export default function RootLayout({
     return (
         <html lang="en" className="dark">
             <head>
+                <link rel="alternate" type="text/plain" href="/llms.txt" title="Affordable Home A/C LLM Directory (llmstxt.org)" />
+                <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Affordable Home A/C Full Oahu LG & GE Window AC Knowledge Base" />
+                <link rel="alternate" type="application/json" href="/openai-product-feed.json" title="Affordable Home A/C Live Oahu Window AC Catalog Feed (JSON)" />
+                <link rel="alternate" type="application/rss+xml" href="/merchant-feed.xml" title="Affordable Home A/C Google Merchant Product Feed (XML)" />
                 {/* Global GA/GTM queueing stub & Google Consent Mode V2 */}
                 <script
                     dangerouslySetInnerHTML={{

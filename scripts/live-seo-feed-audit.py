@@ -100,6 +100,39 @@ def main() -> int:
     if len(rev_nodes) < 140:
         feed_issues.append(f"Expected >= 140 reviews in /product-reviews-feed.xml, got {len(rev_nodes)}")
 
+    # 1b. OpenAI ChatGPT Shopping JSON & JSONL + /llms.txt + /llms-full.txt
+    _, _, openai_raw = fetch(f"{base}/openai-product-feed.json")
+    openai_data = json.loads(openai_raw)
+    openai_items = {int(it["catalog_id"]): it for it in openai_data.get("items", [])}
+    print(f"[OPENAI FEED JSON] Items={len(openai_items)}")
+    if len(openai_items) != 16:
+        feed_issues.append(f"Expected 16 items in /openai-product-feed.json, got {len(openai_items)}")
+    for pid, p in api_products.items():
+        oit = openai_items.get(pid)
+        if not oit:
+            feed_issues.append(f"Missing ID {pid} in /openai-product-feed.json")
+            continue
+        exp_avail = "in_stock" if (p.get("stock") or 0) > 0 else "out_of_stock"
+        if oit.get("availability") != exp_avail or int(oit.get("inventory_quantity", -1)) != max(0, int(p.get("stock") or 0)):
+            feed_issues.append(f"OpenAI stock/availability mismatch ID {pid}: API={p.get('stock')} vs OpenAI={oit.get('inventory_quantity')}/{oit.get('availability')}")
+        exp_rebate = pid in QUALIFYING_REBATE_IDS
+        if bool(oit.get("hawaii_energy_rebate_eligible")) != exp_rebate:
+            feed_issues.append(f"OpenAI $45 rebate eligibility drift on ID {pid}")
+
+    _, _, openai_jsonl_raw = fetch(f"{base}/openai-product-feed.jsonl")
+    jsonl_lines = [ln for ln in openai_jsonl_raw.splitlines() if ln.strip()]
+    print(f"[OPENAI FEED JSONL] Lines={len(jsonl_lines)}")
+    if len(jsonl_lines) != 16:
+        feed_issues.append(f"Expected 16 lines in /openai-product-feed.jsonl, got {len(jsonl_lines)}")
+
+    _, _, llms_txt = fetch(f"{base}/llms.txt")
+    _, _, llms_full_txt = fetch(f"{base}/llms-full.txt")
+    print(f"[LLMS FEEDS] /llms.txt={len(llms_txt):,} chars | /llms-full.txt={len(llms_full_txt):,} chars")
+    if "/llms-full.txt" not in llms_txt or "/openai-product-feed.json" not in llms_txt:
+        feed_issues.append("/llms.txt missing links to /llms-full.txt or /openai-product-feed.json")
+    if "LW1222IVSM" not in llms_full_txt or "AJCQ12AXXWA" not in llms_full_txt:
+        feed_issues.append("/llms-full.txt missing core LG/GE MPN specifications")
+
     _, _, sm_xml = fetch(f"{base}/sitemap.xml")
     sm_root = ET.fromstring(sm_xml)
     ns_sm = {

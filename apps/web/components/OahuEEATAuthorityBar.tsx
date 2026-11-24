@@ -174,6 +174,8 @@ export function OahuEEATAuthorityBar({ topicTitle = 'Oahu Window AC & Cleaning T
                             Shop &amp; Buyer Guides ($395+)
                         </div>
                         <ul className="space-y-1.5 text-slate-300">
+                            <li><Link href="/shop/in-stock-lg-window-ac-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">In-Stock LG Window ACs Oahu (All 12)</Link></li>
+                            <li><Link href="/shop/lg-vs-ge-window-ac-hawaii" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">LG vs. GE Window &amp; Wall AC Guide</Link></li>
                             <li><Link href="/shop/oahu-window-ac-warehouse" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">Waipahu Window AC Warehouse</Link></li>
                             <li><Link href="/shop/lg-dual-inverter-guide" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">LG Dual Inverter Buyer Guide</Link></li>
                             <li><Link href="/shop/lg-dual-inverter-8000-btu-oahu" prefetch={false} className="inline-flex items-center min-h-[26px] py-1 leading-snug hover:text-cyan-300 transition-colors">8,000 BTU LG Dual Inverter Guide</Link></li>

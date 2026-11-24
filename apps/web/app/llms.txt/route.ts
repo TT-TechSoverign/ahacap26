@@ -58,26 +58,36 @@ export async function GET() {
         return `- [${p.name}](${baseUrl}/shop/${slug}): MPN ${mpn}${gtin ? `, UPC/GTIN ${gtin}` : ''} — $${p.price.toFixed(2)} | ${p.btu?.toLocaleString() || '26-Inch Sleeve'} BTU | ${p.voltage} | Coverage: ${p.coverage_aham || p.coverage} (${p.coverage_oahu || 'Oahu calibrated'}) | Noise: ${p.noise_level} | ${stockText}${rebateText}`;
     });
 
+    const inStockLgCount = products.filter((p) => p.id <= 12 && (p.stock || 0) > 0).length;
+    const totalLgUnits = products.filter((p) => p.id <= 12 && (p.stock || 0) > 0).reduce((s, p) => s + Number(p.stock || 0), 0);
+
     const content = `# Affordable Home A/C
 
-> Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005. Official Oahu distribution warehouse (94-150 Leoleo St. #203, Waipahu, HI 96797 • (808) 488-1111) for factory-sealed LG Dual Inverter, LG Cool+Heat, LG Standard, and GE 26-inch Built-In Thru-the-Wall air conditioners ($395 to $1,200), custom Hawaiian jalousie louver & condo wall-sleeve installation ($0 Free In-Home Estimate), and antimicrobial Window AC deep coil cleaning across all 22 Oahu neighborhoods (4.9★ across 142 verified Oahu reviews).
+> Waipahu Warehouse Direct • Insured Oahu Cooling Specialists • Est. 2005. Official Oahu distribution warehouse (94-150 Leoleo St. #203, Waipahu, HI 96797 • (808) 488-1111) with ${inStockLgCount} LG Window AC models (${totalLgUnits} physical LG units) plus GE 26-inch Built-In Thru-the-Wall air conditioners ($395 to $1,200) physically in stock on Oahu right now—ready for free Waipahu pickup by appointment, $50 Oahu delivery, custom Hawaiian jalousie louver & condo wall-sleeve installation ($0 Free In-Home Estimate), and antimicrobial Window AC deep coil cleaning across all 22 Oahu neighborhoods (4.9★ across 142 verified Oahu reviews).
 
-Affordable Home A/C provides same-day/next-day free Waipahu warehouse pickup by appointment, $50 flat-rate Oahu curbside delivery across primary residential municipalities, $45 Hawaii Energy cash rebates on 8 qualifying ENERGY STAR inverter models (saving up to $424.32/yr at HECO's ~44.2¢/kWh rate), 1-year manufacturer warranties, and zero-upfront-fee ($0) in-home installation, cleaning, and clean-vs-replace assessments with mandatory floor drop-cloth protection.
+Affordable Home A/C provides same-day/next-day free Waipahu warehouse pickup by appointment, $50 flat-rate Oahu curbside delivery across primary residential municipalities, $45 Hawaii Energy cash rebates on 8 qualifying ENERGY STAR inverter models (saving up to $424.32/yr at HECO's ~44.2¢/kWh rate), 1-year manufacturer warranties (2-year full / 5-year sealed system on GE AJCQ built-ins), and zero-upfront-fee ($0) in-home installation, cleaning, and clean-vs-replace assessments with mandatory floor drop-cloth protection.
 
 ## Core Storefront, Booking & Machine-Readable Feeds
 - [Oahu Window AC Storefront ($395–$1,200)](${baseUrl}/shop): Order 16 factory-sealed LG Dual Inverter & GE 26" Built-In Window ACs online for Waipahu Pickup or $50 Oahu Delivery
+- [In-Stock LG Window ACs on Oahu (All 12 Waipahu Models)](${baseUrl}/shop/in-stock-lg-window-ac-oahu): Live Oahu inventory of LG Dual Inverter, LG Cool+Heat & LG Standard units ($395–$1,200) with zero mainland freight wait
+- [LG vs. GE Window & 26" Wall ACs Hawaii Comparison](${baseUrl}/shop/lg-vs-ge-window-ac-hawaii): Engineering comparison of side-vented LG Dual Inverters vs solid-side rear-breathing GE 26" condo built-ins
 - [Window AC Deep Cleaning & Mold Sanitization](${baseUrl}/ac-cleaning-oahu): Book on-site Oahu evaporator/condenser coil cleaning, antimicrobial pan treatment & drain flushing ($0 Free Estimate)
 - [Window AC & Hawaiian Jalousie Installation](${baseUrl}/window-ac-installation): Request a $0 Free In-Home Estimate for standard windows, jalousie glass louver retrofits & 26" condo sleeves
 - [Clean vs Replace Window AC Assessment](${baseUrl}/clean-vs-replace-window-ac): Honest $0 on-site diagnostic comparing deep cleaning vs upgrading to an ENERGY STAR inverter unit
+- [Full-Context AI & LLM Knowledge Base (llms-full.txt)](${baseUrl}/llms-full.txt): Complete single-file specification matrix, live Waipahu LG/GE stock counts, sizing rules & Oahu Q&A
+- [OpenAI ChatGPT Shopping & Agentic Feed (JSON)](${baseUrl}/openai-product-feed.json): Live 16-SKU OpenAI Agentic Commerce JSON catalog with Waipahu inventory quantities & geo-coordinates
+- [OpenAI ChatGPT Shopping Feed (NDJSON / JSONL)](${baseUrl}/openai-product-feed.jsonl): Line-delimited JSONL product stream for AI shopping ingestion
 - [Google Merchant Center Product XML Feed](${baseUrl}/merchant-feed.xml): Live 16-SKU price, stock, GTIN/MPN & $45 rebate feed
 - [Google Product Ratings XML Feed](${baseUrl}/product-reviews-feed.xml): 142 verified 5-star Oahu homeowner Window AC & cleaning reviews
-- [Canonical XML & Image Sitemap](${baseUrl}/sitemap.xml): All 118 canonical Oahu Window AC routes
+- [Canonical XML & Image Sitemap](${baseUrl}/sitemap.xml): All 120 canonical Oahu Window AC routes
 
 ## Live Oahu Window AC Inventory (16 Models)
 ${productLines.join('\n')}
 
-## Complete E-Commerce & BTU Buying Guides (28 Guides)
+## Complete E-Commerce & BTU Buying Guides (30 Guides)
 - [Oahu Window AC Storefront ($395–$1,200)](${baseUrl}/shop): Full interactive catalog with Island Microclimate Calibration™ & 3D window fit calipers
+- [In-Stock LG Window ACs Oahu ($395–$1,200)](${baseUrl}/shop/in-stock-lg-window-ac-oahu): All 12 factory-sealed LG Dual Inverter, Cool+Heat & Standard models warehoused in Waipahu
+- [LG vs. GE Window & 26" Wall ACs Hawaii Guide](${baseUrl}/shop/lg-vs-ge-window-ac-hawaii): Window sash/jalousie vs concrete condo 26-inch wall sleeve selection matrix
 - [Oahu Window AC Warehouse Hub](${baseUrl}/shop/oahu-window-ac-warehouse): Central Waipahu distribution center overview & pickup logistics
 - [Complete LG Dual Inverter Buyer Guide](${baseUrl}/shop/lg-dual-inverter-guide): Whisper-quiet 44dB variable-speed LG Dual Inverter lineup (6k–23.5k BTU)
 - [LG Dual Inverter 8,000 BTU Bedroom Guide](${baseUrl}/shop/lg-dual-inverter-8000-btu-oahu): Oahu's #1 115V bedroom & studio inverter AC (LW8022IVSM)
@@ -163,14 +173,15 @@ ${productLines.join('\n')}
 - [All Oahu Service Areas Directory](${baseUrl}/service-areas): Island-wide Window AC delivery, installation & cleaning coverage
 - [Verified Oahu Customer Reviews (4.9★ across 142 reviews)](${baseUrl}/reviews): Authentic neighborhood reviews from Oahu homeowners
 - [Contact & $0 Free In-Home Estimate Booking](${baseUrl}/contact): By-Appointment-First scheduling & Waipahu pickup requests
-- [Complete HTML Sitemap](${baseUrl}/sitemap): Full directory of all 118 canonical routes
+- [Complete HTML Sitemap](${baseUrl}/sitemap): Full directory of all 120 canonical routes
 ${getCanonicalCities().map((c) => `- [${c.name} Window ACs, Installation & Cleaning](${baseUrl}/service-areas/${c.slug}): Local LG & GE Window AC inventory, jalousie installation & deep cleaning in ${c.name}, Oahu`).join('\n')}
 `;
 
     return new NextResponse(content, {
         headers: {
             'Content-Type': 'text/plain; charset=utf-8',
-            'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+            'Cache-Control': 'public, max-age=300, s-maxage=300, stale-while-revalidate=3600',
+            'Access-Control-Allow-Origin': '*',
         },
     });
 }

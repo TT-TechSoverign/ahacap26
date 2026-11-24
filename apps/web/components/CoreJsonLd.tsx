@@ -59,8 +59,10 @@ const GLOBAL_HVAC_BUSINESS_JSON = JSON.stringify({
     "currenciesAccepted": "USD",
     "priceRange": "$395 - $1,200",
     "knowsAbout": [
+        "In-Stock LG Window Air Conditioners on Oahu",
         "LG Dual Inverter Window Air Conditioners",
         "GE 26-Inch Built-In Thru-The-Wall Air Conditioners",
+        "Same-Day Waipahu Warehouse Window AC Pickup",
         "Window AC & Hawaiian Jalousie Louver Installation",
         "Window AC Deep Cleaning & Mold Sanitization",
         "Window AC Clean-vs-Replace Evaluations",
@@ -246,6 +248,14 @@ const HOME_GRAPH_JSON = JSON.stringify({
                     "acceptedAnswer": {
                         "@type": "Answer",
                         "text": "Yes! Qualifying ENERGY STAR® LG Dual Inverter and GE R-32 Inverter window air conditioners include our official Hawaii Energy $45 cash rebate form PDF and reduce HECO cooling electricity use by up to 40% (~$424/yr)."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Are your LG Dual Inverter window ACs physically on Oahu without waiting weeks for mainland freight?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. Unlike mainland online orders that require multi-week ocean freight to Hawaii, our LG Dual Inverter, LG Cool+Heat, LG Standard, and GE 26-inch Built-In units are physically warehoused on Oahu in Waipahu for immediate pickup by appointment or $50 island delivery."
                     }
                 }
             ]

@@ -11,7 +11,7 @@ import path from 'path';
 // Force dynamic rendering so this runs at request time (when API is up),
 // not at build time (when API is down).
 export const revalidate = 86400;
-const PASS17_LAST_MODIFIED = '2026-11-12';
+const PASS17_LAST_MODIFIED = '2026-11-23';
 const CORE_LAST_MODIFIED = '2026-11-11';
 const CITY_AND_GUIDE_LAST_MODIFIED = '2026-11-08';
 
@@ -73,6 +73,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/reviews',
         '/shop/oahu-window-ac-warehouse',
         '/shop/ge-built-in-wall-ac-oahu',
+        '/shop/in-stock-lg-window-ac-oahu',
+        '/shop/lg-vs-ge-window-ac-hawaii',
         '/shop/10000-12000-btu-window-ac-oahu',
         '/shop/26-inch-wall-sleeve-ac-dimensions-rab26a-oahu',
         '/window-ac-installation-cost-oahu',
@@ -103,6 +105,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/smart-wifi-window-ac-oahu',
         '/window-ac-for-studios-apartments-hawaii',
         '/shop/ge-built-in-wall-ac-oahu',
+        '/shop/in-stock-lg-window-ac-oahu',
+        '/shop/lg-vs-ge-window-ac-hawaii',
         '/shop/large-room-window-ac-oahu',
         '/shop/lg-dual-inverter-8000-btu-oahu',
         '/shop/lg-dual-inverter-guide',
@@ -121,6 +125,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ]);
 
     const highYieldRoutes = [
+        '/shop/in-stock-lg-window-ac-oahu',
+        '/shop/lg-vs-ge-window-ac-hawaii',
         '/clean-vs-replace-window-ac',
         '/window-ac-installation',
         '/window-ac-installation-cost-oahu',

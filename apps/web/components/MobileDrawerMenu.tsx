@@ -53,10 +53,12 @@ export default function MobileDrawerMenu({ isOpen, setIsOpen }: { isOpen: boolea
             title: 'In-Stock Window ACs (Waipahu)',
             links: [
                 { text: `Shop All ${inStockAcCount} In-Stock Window ACs`, href: '/shop', icon: Store, badge: `$${minPrice}–$${maxPrice.toLocaleString()}`, highlight: true },
+                { text: 'In-Stock LG Window ACs (All 12)', href: '/shop/in-stock-lg-window-ac-oahu', icon: Sparkles, badge: '$395–$1,200' },
                 { text: 'Bedroom 115V (6k–8k BTU)', href: '/small-room-window-ac-6000-8000-btu', icon: Sparkles, badge: 'From $395' },
                 { text: 'Master & Condo (10k–12k BTU)', href: '/shop/10000-12000-btu-window-ac-oahu', icon: Compass, badge: '115V Plug' },
                 { text: 'Large Room (14k–23.5k BTU)', href: '/shop/large-room-window-ac-oahu', icon: Compass, badge: '$785–$1,025' },
                 { text: '26" Thru-the-Wall Units (GE)', href: '/shop/ge-built-in-wall-ac-oahu', icon: Store, badge: '$1,000–$1,200' },
+                { text: 'LG vs. GE Oahu Buyer Guide', href: '/shop/lg-vs-ge-window-ac-hawaii', icon: Compass, badge: 'Compare' },
                 { text: 'LG Cool + Heat (7.6k–23k)', href: '/shop/lg-cool-and-heat-window-ac-hawaii', icon: Sparkles, badge: 'Cool+Heat' },
                 { text: 'Window AC Installation', href: '/window-ac-installation', icon: Wrench, badge: '$0 Estimate' },
             ]

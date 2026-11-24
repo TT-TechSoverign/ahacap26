@@ -382,6 +382,13 @@ export default async function ProductLayout({ params, children }: Props) {
                 "@type": "PropertyValue",
                 "name": "Manufacturer Warranty",
                 "value": product.warranty || '1-YR PARTS & LABOR'
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "On-Island Oahu Availability",
+                "value": product.stock > 0
+                    ? `Physically In Stock at Waipahu Warehouse (${product.stock} units at 94-150 Leoleo St #203, Waipahu, HI 96797) — Zero Mainland Freight Wait`
+                    : 'Awaiting Next Waipahu Warehouse Restock — In-Stock LG & GE Alternatives Ready'
             }
         ],
         "aggregateRating": {
@@ -429,6 +436,12 @@ export default async function ProductLayout({ params, children }: Props) {
             "validFrom": "2026-01-01", // Resolves GSC "Missing validFrom" warning
             "itemCondition": "https://schema.org/NewCondition",
             "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+            ...(product.stock > 0 ? {
+                "inventoryLevel": {
+                    "@type": "QuantitativeValue",
+                    "value": product.stock
+                }
+            } : {}),
             "seller": {
                 "@type": "Organization",
                 "@id": "https://www.affordablehome-ac.com/#hvacbusiness",
@@ -439,6 +452,7 @@ export default async function ProductLayout({ params, children }: Props) {
             "availableAtOrFrom": {
                 "@type": "Place",
                 "name": "Affordable Home A/C — Waipahu Warehouse",
+                "telephone": "+1-808-488-1111",
                 "address": {
                     "@type": "PostalAddress",
                     "streetAddress": "94-150 Leoleo St. #203",
@@ -446,6 +460,11 @@ export default async function ProductLayout({ params, children }: Props) {
                     "addressRegion": "HI",
                     "postalCode": "96797",
                     "addressCountry": "US"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 21.3868,
+                    "longitude": -158.0092
                 }
             },
             "potentialAction": {

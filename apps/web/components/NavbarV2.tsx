@@ -235,11 +235,12 @@ export default function NavbarV2() {
                                                     </div>
                                                     {[
                                                         { label: `All ${inStockAcCount} In-Stock Window ACs`, sub: 'Free Pickup or $50 Oahu Delivery', href: '/shop' },
+                                                        { label: 'In-Stock LG Window ACs Oahu', sub: 'All 12 Waipahu LG Models ($395–$1,200)', href: '/shop/in-stock-lg-window-ac-oahu' },
                                                         { label: 'Bedroom 115V (6k–8k BTU)', sub: 'From $395 • Standard 3-Prong Plug', href: '/small-room-window-ac-6000-8000-btu' },
                                                         { label: 'Master & Condo (10k–12k BTU)', sub: '$650–$1,200 • 115V Dual Inverters & GE', href: '/shop/10000-12000-btu-window-ac-oahu' },
                                                         { label: 'Large Room (14k–23.5k BTU)', sub: '$785–$1,025 • High-Velocity Cooling', href: '/shop/large-room-window-ac-oahu' },
                                                         { label: '26" Thru-the-Wall (GE)', sub: '$1,000–$1,200 • Fits RAB26A Sleeves', href: '/shop/ge-built-in-wall-ac-oahu' },
-                                                        { label: 'LG Cool + Heat (7.6k–23k)', sub: '$745–$1,025 • Upcountry & Universal Fit', href: '/shop/lg-cool-and-heat-window-ac-hawaii' },
+                                                        { label: 'LG vs. GE Oahu Buyer Guide', sub: 'Window Sash vs. 26" Condo Wall Sleeve', href: '/shop/lg-vs-ge-window-ac-hawaii' },
                                                         { label: '$45 Hawaii Energy Rebates', sub: 'Official Rebate Form & Qualifying Units', href: '/shop#rebate' },
                                                     ].map((item) => (
                                                         <Link

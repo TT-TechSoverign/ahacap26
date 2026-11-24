@@ -1,4 +1,48 @@
 import { PRODUCT_IDENTIFIERS } from './product-identifiers';
+import { safeStorage } from './safe-storage';
+
+const AI_SOURCE_STORAGE_KEY = 'ahac_ai_discovery_source';
+
+const AI_ENGINE_PATTERNS: Array<{ engine: string; match: RegExp }> = [
+    { engine: 'chatgpt', match: /(chatgpt\.com|chat\.openai\.com|openai\.com)/i },
+    { engine: 'perplexity', match: /perplexity\.ai/i },
+    { engine: 'claude', match: /(claude\.ai|anthropic\.com)/i },
+    { engine: 'gemini', match: /(gemini\.google\.com|bard\.google\.com)/i },
+    { engine: 'copilot', match: /(copilot\.microsoft\.com|edgeservices\.bing\.com)/i },
+    { engine: 'you_ai', match: /you\.com/i },
+    { engine: 'meta_ai', match: /meta\.ai/i },
+];
+
+export function detectAndPersistAiSearchSource(): { engine: string; isNewSessionAttribution: boolean } | null {
+    if (typeof window === 'undefined') return null;
+    try {
+        const existing = safeStorage.getItem(AI_SOURCE_STORAGE_KEY, 'session');
+        const params = new URLSearchParams(window.location.search || '');
+        const utmSource = params.get('utm_source') || params.get('ref') || '';
+        const referrer = typeof document !== 'undefined' ? document.referrer || '' : '';
+        const combined = `${utmSource} ${referrer}`.trim();
+
+        for (const { engine, match } of AI_ENGINE_PATTERNS) {
+            if (match.test(combined)) {
+                const isNew = existing !== engine;
+                safeStorage.setItem(AI_SOURCE_STORAGE_KEY, engine, 'session');
+                return { engine, isNewSessionAttribution: isNew };
+            }
+        }
+
+        if (existing) {
+            return { engine: existing, isNewSessionAttribution: false };
+        }
+    } catch {
+        // Ignore storage/URL parsing errors on strict browsers
+    }
+    return null;
+}
+
+export function getActiveAiSearchSource(): string | undefined {
+    const detected = detectAndPersistAiSearchSource();
+    return detected?.engine;
+}
 
 /**
  * Telemetry and Funnel Analytics tracking for AHAC.
@@ -133,8 +177,10 @@ export function trackEcommerceEvent(
     if (typeof window === 'undefined') return;
 
     try {
+        const aiSource = getActiveAiSearchSource();
         const normalizedPayload = {
             currency: 'USD',
+            ...(aiSource ? { ai_discovery_source: aiSource } : {}),
             ...ecommercePayload,
         };
 
@@ -208,7 +254,11 @@ export function trackFunnelEvent(eventName: string, params: FunnelEventParams = 
             lastClickToCallTs = timestamp;
         }
 
-        const safeParams = sanitizeAnalyticsParams(params);
+        const aiSource = getActiveAiSearchSource();
+        const safeParams = sanitizeAnalyticsParams({
+            ...(aiSource ? { ai_discovery_source: aiSource } : {}),
+            ...params,
+        });
         const payload = {
             event: eventName,
             ...safeParams,

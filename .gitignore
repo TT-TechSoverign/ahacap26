@@ -116,6 +116,8 @@ scripts/*
 *.txt
 !apps/web/app/llms.txt/
 !apps/web/app/llms.txt/**
+!apps/web/app/llms-full.txt/
+!apps/web/app/llms-full.txt/**
 !apps/web/public/*.txt
 *.py
 !apps/api/**/*.py

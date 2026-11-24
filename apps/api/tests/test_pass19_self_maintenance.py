@@ -23,9 +23,11 @@ CRM_BACKEND = REPO_ROOT / "ahac-crm" / "backend"
 def test_master_brain_v2_8_0_and_60_synapses():
     assert MASTER_BRAIN_STATE["brain_version"] == "2.8.0-SOVEREIGN"
     synapse_ids = {s["id"] for s in MASTER_BRAIN_STATE["synapses"]}
-    assert len(synapse_ids) == 60
+    assert len(synapse_ids) == 62
     assert "syn_live_seo_feed_crawler" in synapse_ids
     assert "syn_workspace_skills_hub" in synapse_ids
+    assert "syn_openai_agentic_feed" in synapse_ids
+    assert "syn_llms_full_knowledge_hub" in synapse_ids
 
     dev_os_src = (API_ROOT / "routers" / "dev_os.py").read_text(encoding="utf-8")
     assert "import aiohttp" in dev_os_src

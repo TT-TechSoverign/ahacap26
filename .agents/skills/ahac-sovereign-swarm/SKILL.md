@@ -11,7 +11,7 @@ description: >-
 
 ## 1. Mandatory Handshake & Identity Protocol (`TRACKER`)
 - Every new conversation or `"Convene all"` response **MUST** begin prominently with **`TRACKER`**.
-- Confirm connection to **Master Projects Brain v2.8.0-SOVEREIGN (`EPOCH 21` / `v2.8.0-NOV12-OMNISCIENT-SWARM`)** across all **10 Category Sub-Masters, 40 Specialized Agents, 50 SOP Dossiers (100% 1:1 API/UI parity), 60 Neural Synapses, and 5 Workspace Skills**.
+- Confirm connection to **Master Projects Brain v2.8.0-SOVEREIGN (`EPOCH 21` / `v2.8.0-NOV12-OMNISCIENT-SWARM`)** across all **10 Category Sub-Masters, 40 Specialized Agents, 50 SOP Dossiers (100% 1:1 API/UI parity), 62 Neural Synapses, and 5 Workspace Skills**.
 - Read [`project_state.md`](../../project_state.md), [`GEMINI.md`](../../GEMINI.md), and [`AGENTS.md`](../../AGENTS.md) before modifying code.
 
 ## 2. CLI Bridge Commands (`.\scripts\dev-os.ps1`)
@@ -26,7 +26,7 @@ powershell -File .\scripts\dev-os.ps1 run-agent <agent_id>
 powershell -File .\scripts\dev-os.ps1 run-submaster <submaster_id>
 powershell -File .\scripts\dev-os.ps1 run-fleet
 
-# Execute 3-Stage Live Deployment Verification + Live 118-URL Google SEO/Feed Crawl
+# Execute 3-Stage Live Deployment Verification + Live 120-URL Google SEO/Feed Crawl
 powershell -File .\scripts\dev-os.ps1 verify-live
 powershell -File .\scripts\dev-os.ps1 live-crawl
 powershell -File .\scripts\dev-os.ps1 grounding-audit
@@ -43,7 +43,7 @@ powershell -File .\scripts\dev-os.ps1 session-sync "<Session Summary>"
 
 ## 3. Local 6-Gatekeeper Pre-Deploy Verification (`.\scripts\dev-os.ps1 gatekeepers`)
 Always run all **6** checks locally (`powershell -ExecutionPolicy Bypass -File .\scripts\dev-os.ps1 gatekeepers`) before pushing or deploying:
-1. **Storefront TypeScript (`apps/web`, `118` canonical routes: `102` static/city + `16` product PDPs)**: `npx tsc --noEmit`
+1. **Storefront TypeScript (`apps/web`, `120` canonical routes: `104` static/city + `16` product PDPs)**: `npx tsc --noEmit`
 2. **Dev OS TypeScript (`apps/dev-os`, `50` 1:1 SOP dossiers)**: `npx tsc --noEmit`
 3. **CRM Frontend TypeScript + Biome (`ahac-crm/frontend`)**: `npx tsc --noEmit` + `npx biome check src/`
 4. **Backend Pytest Suite (`apps/api/tests`)**: `.\apps\api\.venv\Scripts\python.exe -m pytest apps/api/tests -q`

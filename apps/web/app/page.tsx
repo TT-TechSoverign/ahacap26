@@ -112,6 +112,15 @@ export default function Homepage() {
                                 Yes! Qualifying ENERGY STAR® LG Dual Inverter and GE R-32 Inverter window air conditioners include our official Hawaii Energy $45 cash rebate form PDF and reduce HECO cooling electricity use by up to 40% (~$424/yr).
                             </p>
                         </details>
+                        <details className="group rounded-2xl bg-slate-900/85 border border-slate-800/90 p-5 backdrop-blur-sm">
+                            <summary className="cursor-pointer list-none font-header font-bold text-sm sm:text-base text-white flex items-center justify-between gap-4">
+                                <span>Are your LG Dual Inverter window ACs physically on Oahu without waiting weeks for mainland freight?</span>
+                                <span className="text-cyan-400 text-xs font-mono group-open:rotate-180 transition-transform">▼</span>
+                            </summary>
+                            <p className="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Yes. Unlike mainland online orders that require multi-week ocean freight to Hawaii, our LG Dual Inverter, LG Cool+Heat, LG Standard, and GE 26-inch Built-In units are physically warehoused on Oahu in Waipahu for immediate pickup by appointment or $50 island delivery.
+                            </p>
+                        </details>
                     </div>
                 </section>
 
