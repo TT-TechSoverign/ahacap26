@@ -44,7 +44,7 @@ def test_openai_agentic_feed_and_llms_full_endpoints_exist_and_rewritten():
 
     next_cfg = (WEB_ROOT / "next.config.js").read_text(encoding="utf-8")
     assert "'/openai-product-feed.json'" in next_cfg
-    assert "'/openai-product-feed.jsonl'" in next_cfg
+    assert (WEB_APP / "openai-product-feed.jsonl" / "route.ts").exists()
     assert "'/ai-catalog.json'" in next_cfg
 
     llms_txt = llms_index_route.read_text(encoding="utf-8")

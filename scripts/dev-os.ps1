@@ -633,9 +633,9 @@ switch ($Command.ToLower()) {
     }
 
     "indexnow" {
-        Write-Host "[*] Broadcasting all canonical sitemap URLs to IndexNow via /api/indexnow..." -ForegroundColor Yellow
+        Write-Host "[*] Broadcasting all canonical sitemap URLs to IndexNow via Sovereign Dev OS Bridge..." -ForegroundColor Yellow
         try {
-            $resp = Invoke-RestMethod -Uri "https://www.affordablehome-ac.com/api/indexnow" -Method POST -Headers $headers -Body "{}"
+            $resp = Invoke-RestMethod -Uri "$ServerUrl/seo/indexnow" -Method POST -Headers $headers -Body "{}"
             Write-Host "[OK] IndexNow Broadcast Result:" -ForegroundColor Green
             $resp | ConvertTo-Json -Depth 4 | Write-Host -ForegroundColor White
         } catch {

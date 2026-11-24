@@ -120,10 +120,6 @@ const nextConfig = {
                     destination: '/api/openai-feed',
                 },
                 {
-                    source: '/openai-product-feed.jsonl',
-                    destination: '/api/openai-feed?format=jsonl',
-                },
-                {
                     source: '/ai-catalog.json',
                     destination: '/api/openai-feed',
                 },

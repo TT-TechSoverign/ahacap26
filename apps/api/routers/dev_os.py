@@ -3969,4 +3969,28 @@ async def download_monthly_report(month: str, year: str = "2026", file_type: str
     )
 
 
+@router.post("/seo/indexnow", dependencies=[Depends(verify_dev_os_session)])
+async def trigger_indexnow_broadcast():
+    """Forwards an authenticated IndexNow broadcast request internally to prod-web using REVALIDATE_SECRET."""
+    frontend_url = os.environ.get("FRONTEND_INTERNAL_URL", "http://prod-web:3000").rstrip("/")
+    rev_secret = (os.environ.get("REVALIDATE_SECRET") or "").strip()
+    if not rev_secret:
+        raise HTTPException(status_code=503, detail="REVALIDATE_SECRET is not configured on backend")
+    try:
+        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=15)) as session:
+            async with session.post(
+                f"{frontend_url}/api/indexnow",
+                headers={"x-indexnow-secret": rev_secret},
+            ) as resp:
+                data = await resp.json()
+                if resp.status >= 400 and not data.get("throttled"):
+                    raise HTTPException(status_code=resp.status, detail=data)
+                return data
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"IndexNow bridge failed: {exc}")
+
+
+
 
